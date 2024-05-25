@@ -83,8 +83,8 @@ export class WeatherLoop {
 			case NetworkConnectivity.PORTAL: {
 				const name =
 					NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
-					NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
-					: "PORTAL";
+					(NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+					: "PORTAL");
 
 				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
 				this.Resume();

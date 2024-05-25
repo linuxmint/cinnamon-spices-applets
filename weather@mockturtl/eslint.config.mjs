@@ -31,10 +31,10 @@ export default teslint.config(
             
             "unicorn/no-empty-file": "error",
             "unicorn/prefer-number-properties": "error",
+            "unicorn/no-array-for-each": "error",
             "unicorn/prefer-string-replace-all": "off",
+            "unicorn/no-nested-ternary": "error",
 
-            // "unicorn/no-array-for-each": "warn",
-            // "unicorn/no-nested-ternary": "warn",
             // "unicorn/no-unreadable-iife": "warn",
             // "unicorn/prefer-modern-math-apis": "warn",
             // "unicorn/prefer-array-index-of": "warn",

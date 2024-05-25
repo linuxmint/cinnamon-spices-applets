@@ -11893,7 +11893,7 @@ class MetNorway extends BaseProvider {
         let result = null;
         for (const key in conditions) {
             const conditionID = Number.parseInt(key);
-            const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
+            const resultStripped = result == null ? -1 : ((result > 100) ? result - 100 : result);
             const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
                 result = conditionID;
@@ -16595,7 +16595,7 @@ function OpenMeteoHourWeatherToData(data, timezone) {
             precipitation: data.precipitation[i] > 0 ? {
                 chance: data.precipitation_probability[i],
                 volume: data.precipitation[i],
-                type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : data.snowfall[i] > 0 ? "snow" : "none",
+                type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : (data.snowfall[i] > 0 ? "snow" : "none"),
             } : undefined
         });
     }
@@ -17338,8 +17338,8 @@ class WeatherLoop {
                 case NetworkConnectivity.LIMITED:
                 case NetworkConnectivity.PORTAL: {
                     const name = NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
-                        NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
-                            : "PORTAL";
+                        (NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+                            : "PORTAL");
                     logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
                     this.Resume();
                     break;

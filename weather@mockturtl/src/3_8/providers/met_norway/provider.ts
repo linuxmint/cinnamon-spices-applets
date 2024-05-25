@@ -280,7 +280,7 @@ export class MetNorway extends BaseProvider {
 		for (const key in conditions) {
 			const conditionID = Number.parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
-			const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
+			const resultStripped = result == null ? -1 : ((result > 100) ? result - 100 : result);
 			const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
 			// Make the comparison, keep the polar night condition id
 			if (conditionIDStripped > resultStripped) result = conditionID;
