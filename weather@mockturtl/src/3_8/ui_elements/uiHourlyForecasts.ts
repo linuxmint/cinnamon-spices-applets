@@ -32,7 +32,7 @@ export class UIHourlyForecasts {
 	private availableWidth: number | null = null;
 	private hourlyBoxHorizontalPadding: number = 10;
 
-	public get Toggled() {
+	public get Toggled(): boolean {
 		return this.hourlyToggled;
 	}
 
@@ -122,7 +122,7 @@ export class UIHourlyForecasts {
 		return null;
 	}
 
-	public ScrollTo(index: number, animate: boolean = true) {
+	public ScrollTo(index: number, animate: boolean = true): void {
 		const adjustment = this.actor.get_hscroll_bar().get_adjustment();
 		const [, lower, upper, , , page_size] = adjustment.get_values();
 		index = Math.max(Math.min(index, upper - page_size), lower);
@@ -187,7 +187,7 @@ export class UIHourlyForecasts {
 		return !(max <= 0);
 	}
 
-	public ResetScroll() {
+	public ResetScroll(): void {
 		const hscroll = this.actor.get_hscroll_bar();
 		hscroll.get_adjustment().set_value(0);
 	}
@@ -225,7 +225,6 @@ export class UIHourlyForecasts {
 					{
 						height: height,
 						time: 0.25,
-						onUpdate: () => { },
 						onComplete: () => {
 							this.actor.set_height(height);
 							resolve();
@@ -250,7 +249,6 @@ export class UIHourlyForecasts {
 					{
 						height: 0,
 						time: 0.25,
-						onUpdate: () => { },
 						onComplete: () => {
 							this.actor.set_height(-1);
 							// We must unset min-height style else
@@ -341,7 +339,7 @@ export class UIHourlyForecasts {
 			this.canvas?.disconnect(this.onPaintSignal);
 	}
 
-	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null) {
+	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null): void {
 		this.Destroy();
 		const hours = availableHours ?? this.app.GetMaxHourlyForecasts();
 		this.hourlyForecasts = [];

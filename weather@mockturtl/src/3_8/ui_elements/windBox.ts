@@ -65,7 +65,7 @@ export class WindBox {
 		return windBox;
     }
 
-    public Display(windSpeed: number | null, windDegree: number | null) {
+    public Display(windSpeed: number | null, windDegree: number | null): void {
 		if (windSpeed == null || windDegree == null) {
 			this._caption.hide();
 			this._label.hide();

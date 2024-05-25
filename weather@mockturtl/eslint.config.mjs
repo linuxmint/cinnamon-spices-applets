@@ -7,6 +7,10 @@ export default teslint.config(
     eslint.configs.recommended,
     ...teslint.configs.strict,
     {
+        languageOptions: {
+            parserOptions: {
+            }
+        },
         plugins: {
             unicorn
         },
@@ -23,12 +27,46 @@ export default teslint.config(
             "no-constant-condition": [
                 "error",
                 {
-                    // allow `while(true)` loops and the like
                     "checkLoops": false
                 }
             ],
             "@typescript-eslint/no-non-null-assertion": "warn",
-            
+            "@typescript-eslint/ban-ts-comment": [
+                "error",
+                {
+                    "ts-ignore": "allow-with-description"
+                }
+            ],
+            "@typescript-eslint/no-empty-interface": [
+                "error",
+                {
+                    allowSingleExtends: true
+                }
+            ],
+            "@typescript-eslint/no-empty-function": [
+                "error",
+                {
+                    allow: [
+                        "private-constructors",
+                        "protected-constructors",
+                        "decoratedFunctions",
+                        "overrideMethods",
+                    ]
+                }
+            ],
+            "@typescript-eslint/explicit-module-boundary-types": [
+                "error",
+                {
+                    allowHigherOrderFunctions: true,
+                }
+            ],
+            // "@typescript-eslint/no-misused-promises": [
+            //     "error",
+            //     {
+            //       "checksVoidReturn": false
+            //     }
+            // ],
+
             "unicorn/no-empty-file": "error",
             "unicorn/prefer-number-properties": "error",
             "unicorn/no-array-for-each": "error",
@@ -76,13 +114,12 @@ export default teslint.config(
             "unicorn/prefer-reflect-apply": "error",
             "unicorn/prefer-string-slice": "error",
             "unicorn/no-array-method-this-argument": "error",
-            
+
             "unicorn/prefer-at": "off",
             "unicorn/prefer-string-replace-all": "off",
             "unicorn/no-unreadable-array-destructuring": "off",
             "unicorn/consistent-function-scoping": "off",
             "unicorn/throw-new-error": "off",
-            // // TODO: These need to be errors, but there are too many to fix right now
         }
     }
 )

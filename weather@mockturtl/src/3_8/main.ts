@@ -43,7 +43,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private orientation: imports.gi.St.Side;
-	public get Orientation() {
+	public get Orientation(): imports.gi.St.Side {
 		return this.orientation;
 	}
 
@@ -217,7 +217,7 @@ export class WeatherApplet extends TextIconApplet {
 		return true;
 	}
 
-	public RefreshLabel = () => {
+	public RefreshLabel = (): void => {
 		if (this.currentWeatherInfo == null)
 			return;
 		this.DisplayWeatherOnLabel(this.currentWeatherInfo);
@@ -415,13 +415,13 @@ The contents of the file saved from the applet help page goes here
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 
-	public override on_orientation_changed(orientation: imports.gi.St.Side) {
+	public override on_orientation_changed(orientation: imports.gi.St.Side): void {
 		this.orientation = orientation;
 		if (this.currentWeatherInfo)
 			this.onSettingNeedsRebuild(this.config, null, this.currentWeatherInfo);
 	};
 
-	public override on_applet_removed_from_panel() {
+	public override on_applet_removed_from_panel(): void {
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 		this.config.Destroy();
@@ -433,11 +433,11 @@ The contents of the file saved from the applet help page goes here
 		return false;
 	}
 
-	public override on_applet_middle_clicked() {
+	public override on_applet_middle_clicked(): boolean {
 		return false;
 	}
 
-	public override on_panel_height_changed() {
+	public override on_panel_height_changed(): void {
 		// Implemented byApplets
 	}
 

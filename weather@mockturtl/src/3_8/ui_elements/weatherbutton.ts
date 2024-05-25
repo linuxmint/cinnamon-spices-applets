@@ -26,22 +26,22 @@ export class WeatherButton<T = never> {
 		this.actor.connect("leave-event", () => this.onHoverLeave());
 	}
 
-	handleEnter() {
+	handleEnter(): void {
 		if (!this.disabled) this.actor.add_style_pseudo_class('active');
 		//global.set_cursor(imports.gi.Cinnamon.Cursor.POINTING_HAND);
 	}
 
-	handleLeave() {
+	handleLeave(): void {
 		this.actor.remove_style_pseudo_class('active');
 		//global.unset_cursor()
 	}
 
-	disable() {
+	disable(): void {
 		this.disabled = true;
 		this.actor.reactive = false;
 	}
 
-	enable() {
+	enable(): void {
 		this.disabled = false;
 		this.actor.reactive = true;
 	}

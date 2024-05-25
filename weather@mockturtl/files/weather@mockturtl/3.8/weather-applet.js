@@ -9414,7 +9414,7 @@ function Guid() {
     });
 }
 const isFinalized = function (obj) {
-    return obj && utils_Object.prototype.toString.call(obj).includes('FINALIZED');
+    return !!obj && utils_Object.prototype.toString.call(obj).includes('FINALIZED');
 };
 function CompareVersion(v1, v2, options) {
     const zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
@@ -18462,7 +18462,6 @@ class UIHourlyForecasts {
                 addTween(this.actor, {
                     height: height,
                     time: 0.25,
-                    onUpdate: () => { },
                     onComplete: () => {
                         this.actor.set_height(height);
                         resolve();
@@ -18482,7 +18481,6 @@ class UIHourlyForecasts {
                 addTween(this.actor, {
                     height: 0,
                     time: 0.25,
-                    onUpdate: () => { },
                     onComplete: () => {
                         this.actor.set_height(-1);
                         this.actor.style = "";

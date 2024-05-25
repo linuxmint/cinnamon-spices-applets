@@ -91,7 +91,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 	return response as GenericResponse;
 }
 
-export function OpenUrl(element: WeatherButton) {
+export function OpenUrl(element: WeatherButton): void {
 	if (!element.url) return;
 	imports.gi.Gio.app_info_launch_default_for_uri(
 		element.url,

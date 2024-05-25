@@ -22,7 +22,7 @@ export function _(str: string, args?: Record<string, string>): string {
 	return result;
 }
 
-export function format(str: string, args: Record<string, string>) {
+export function format(str: string, args: Record<string, string>): string {
 	for (const key in args) {
 		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
@@ -37,7 +37,7 @@ export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string 
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */
-export function GenerateLocationText(weather: WeatherData, config: Config) {
+export function GenerateLocationText(weather: WeatherData, config: Config): string {
 	let location = "";
 	if (weather.location.city != null && weather.location.country != null) {
 		location = weather.location.city + ", " + weather.location.country;
@@ -214,7 +214,7 @@ export function ValidTimezone(tz: string): boolean {
 // To UserConfig converters
 
 /** Capitalizes first letter and translates if needed */
-export function ProcessCondition(condition: string, shouldTranslate: boolean) {
+export function ProcessCondition(condition: string, shouldTranslate: boolean): string {
 	condition = CapitalizeFirstLetter(condition);
 	if (shouldTranslate)
 		condition = _(condition);
@@ -664,15 +664,15 @@ export function GetFuncName(func: Function): string {
 	return func.name;
 }
 
-export function Guid() {
+export function Guid(): string {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 		const r = Math.trunc(Math.random() * 16), v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
 }
 
-export const isFinalized = function (obj: unknown) {
-	return obj && Object.prototype.toString.call(obj).includes('FINALIZED');
+export const isFinalized = function (obj: unknown): boolean {
+	return !!obj && Object.prototype.toString.call(obj).includes('FINALIZED');
 }
 
 interface CompareVersionOptions {
@@ -693,7 +693,7 @@ interface CompareVersionOptions {
  *   - a positive integer iff v1 > v2
  *   - NaN if either version string is in the wrong format
  */
-export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions) {
+export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions): number {
 	const zeroExtend = options && options.zeroExtend,
 		v1parts = v1.split('.'),
 		v2parts = v2.split('.');
@@ -738,7 +738,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 // Timeout polyfill
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function setTimeout(func: Function, ms: number) {
+export function setTimeout(func: Function, ms: number): number {
 	let args: unknown[] = [];
 	if (arguments.length > 2) {
 		// eslint-disable-next-line prefer-rest-params
@@ -762,12 +762,12 @@ export async function delay(ms: number): Promise<void> {
 	});
 }
 
-export function clearTimeout(id: number) {
+export function clearTimeout(id: number): void {
 	source_remove(id);
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function setInterval(func: Function, ms: number) {
+export function setInterval(func: Function, ms: number): number {
 	let args: unknown[] = [];
 	if (arguments.length > 2) {
 		// eslint-disable-next-line prefer-rest-params

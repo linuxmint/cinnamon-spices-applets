@@ -189,7 +189,7 @@ export class Config {
 	/**
 	 * Selected location's timezone
 	 */
-	public get Timezone() {
+	public get Timezone(): string | undefined {
 		return this.timezone;
 	}
 
@@ -231,15 +231,15 @@ export class Config {
 		return this.currentFontSize;
 	}
 
-	public get CurrentLocation() {
+	public get CurrentLocation(): LocationData | null {
 		return this.currentLocation;
 	}
 
-	public get ApiKey() {
+	public get ApiKey(): string {
 		return this._apiKey.replace(" ", "");
 	}
 
-	public get Language() {
+	public get Language(): string | null {
 		return this.GetLanguage(this.currentLocale);
 	}
 
@@ -488,7 +488,7 @@ export class Config {
 		this.settings.setValue(this.WEATHER_LOCATION, value);
 	}
 
-	public SetLocationList(list: LocationData[]) {
+	public SetLocationList(list: LocationData[]): void {
 		this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
 	}
 
@@ -594,7 +594,7 @@ export class Config {
 		return conf;
 	}
 
-	public Destroy() {
+	public Destroy(): void {
 		this.settings.finalize?.();
 	}
 }

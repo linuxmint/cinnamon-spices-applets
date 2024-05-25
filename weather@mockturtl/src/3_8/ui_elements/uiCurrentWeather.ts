@@ -109,7 +109,7 @@ export class CurrentWeather {
 		}
 	};
 
-	public UpdateIconType(iconType: imports.gi.St.IconType) {
+	public UpdateIconType(iconType: imports.gi.St.IconType): void {
 		this.weatherIcon.icon_type = iconType;
 	}
 

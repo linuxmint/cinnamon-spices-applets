@@ -30,7 +30,7 @@ export class LocationStore {
 		this.locations = config._locationList;
 	}
 
-	public OnLocationChanged(locs: LocationData[]) {
+	public OnLocationChanged(locs: LocationData[]): void {
 		// Ensure Entry text is not empty
 		for (let index = 0; index < locs.length; index++) {
 			const element = locs[index];
@@ -200,7 +200,7 @@ export class LocationStore {
 			return false;
 	}
 
-	public async SaveCurrentLocation(loc: LocationData | null) {
+	public async SaveCurrentLocation(loc: LocationData | null): Promise<void> {
 		// if (this.app.Locked()) {
 		// 	NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
 		// 	return;

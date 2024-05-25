@@ -21,7 +21,7 @@ interface AlertWindowAlert extends AlertData {
 /** Bottom bar with timestamp, button and credits */
 export class UIBar {
 	private actor: imports.gi.St.BoxLayout;
-	public get Actor() {
+	public get Actor(): imports.gi.St.BoxLayout {
 		return this.actor;
 	}
 
@@ -43,19 +43,19 @@ export class UIBar {
 		this.actor = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
 	}
 
-	public SwitchButtonToShow() {
+	public SwitchButtonToShow(): void {
 		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
 		if (this.hourlyButton?.actor.child)
 			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
-	public SwitchButtonToHide() {
+	public SwitchButtonToHide(): void {
 		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
 		if (this.hourlyButton?.actor.child)
 			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
-	public DisplayErrorMessage(msg: string) {
+	public DisplayErrorMessage(msg: string): void {
 		if (this._timestamp == null)
 			return;
 
@@ -118,7 +118,7 @@ export class UIBar {
 		this.timestampTooltip?.destroy();
 	}
 
-	public Rebuild(config: Config) {
+	public Rebuild(config: Config): void {
 		this.Destroy();
 		const leftBox = new BoxLayout({ vertical: false, y_align: Align.MIDDLE   });
 		this.warningButtonIcon = new Icon({

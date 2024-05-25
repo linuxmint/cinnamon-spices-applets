@@ -131,7 +131,7 @@ export class UI {
 		this.HourlyWeather.UpdateIconType(iconType);
 	}
 
-	public DisplayErrorMessage(msg: string) {
+	public DisplayErrorMessage(msg: string): void {
 		this.Bar.DisplayErrorMessage(msg);
 	}
 

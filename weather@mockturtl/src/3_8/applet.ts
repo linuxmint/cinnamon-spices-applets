@@ -9,7 +9,7 @@ import type { Metadata } from "./types";
 //
 //----------------------------------------------------------------------
 
-export function main(metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+export function main(metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number): WeatherApplet {
 	// importing custom translations
 	imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 	// Manually add the icons to the icon theme - only one icons folder

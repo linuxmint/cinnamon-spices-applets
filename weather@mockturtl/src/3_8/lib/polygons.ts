@@ -5,7 +5,7 @@
  * @param vs
  * @returns
  */
-export function PointInsidePolygon(point: [lon: number, lat: number], vs: [lon: number, lat: number][]) {
+export function PointInsidePolygon(point: [lon: number, lat: number], vs: [lon: number, lat: number][]): boolean {
     const maxX = Math.max(...vs.map(v => v[0]));
 	const minX = Math.min(...vs.map(v => v[0]));
 	const maxY = Math.max(...vs.map(v => v[1]));
