@@ -1,6 +1,6 @@
 import { REQUEST_TIMEOUT_SECONDS } from "../consts";
 import { setTimeout } from "../utils";
-import { HTTPHeaders, HTTPParams, Method } from "./httpLib";
+import type { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { Logger } from "./logger";
 const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;

@@ -13,6 +13,8 @@
         "noImplicitReturns": true,
 		"noImplicitAny": true,
         "experimentalDecorators": true,
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
 		"types": [
 			"@ci-types/cjs"
 		]
