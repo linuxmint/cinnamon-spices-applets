@@ -69,7 +69,7 @@ export class WeatherUnderground extends BaseProvider {
         const observation = await this.GetObservations(location, forecast, loc, cancellable);
 
         return {
-            date: observation.date!,
+            date: observation.date,
             temperature: observation.temperature ?? null,
             coord: {
                 lat: loc.lat,
@@ -105,11 +105,13 @@ export class WeatherUnderground extends BaseProvider {
         const result: ForecastData[] = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [ forecast.daypart[0].iconCode[index * 2],  forecast.daypart[0].iconCode[index * 2 + 1]];
+			const tempMax = forecast.temperatureMax[index];
+			const tempmin = forecast.temperatureMin[index];
             const data: ForecastData = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition(icons[0] ?? icons[1]!),
-                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]!),
-                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
             }
             if (!this.app.config._shortConditions)
                 data.condition.description = forecast.narrative[index];

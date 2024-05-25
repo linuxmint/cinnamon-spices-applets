@@ -265,7 +265,7 @@ export class MetNorway extends BaseProvider {
 		let result: number | null = null;
 		for (const key in count) {
 			if (result == null || count[result].count < count[key].count)
-				result = parseInt(key);
+				result = Number.parseInt(key);
 		}
 
 		if (result == null)
@@ -278,7 +278,7 @@ export class MetNorway extends BaseProvider {
 		// We want to know the worst condition
 		let result: number | null = null;
 		for (const key in conditions) {
-			const conditionID = parseInt(key);
+			const conditionID = Number.parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
 			const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
 			const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;

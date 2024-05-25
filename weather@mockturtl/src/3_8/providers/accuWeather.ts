@@ -105,13 +105,13 @@ export class AccuWeather extends BaseProvider {
             return null;
 
         this.remainingQuota = Math.min(
-            parseInt(current.ResponseHeaders["RateLimit-Remaining"]),
-            parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]),
-            parseInt(hourly.ResponseHeaders["RateLimit-Remaining"])
+            Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]),
+            Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]),
+            Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"])
         );
 
         // Base
-        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }
 

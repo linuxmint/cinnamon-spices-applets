@@ -9,7 +9,6 @@
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import type { WeatherApplet } from "../../main";
 import { getTimes } from "suncalc";
 import type { WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../../utils";
@@ -42,10 +41,6 @@ export class USWeather extends BaseProvider {
 	// First time called this is set
 	private currentLoc!: LocationData;
 	private currentLocID!: string;
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	//--------------------------------------------------------
 	//  Functions

@@ -9346,7 +9346,7 @@ function WeatherIconSafely(icons, icon_type) {
     return 'weather-severe-alert';
 }
 function ShadeHexColor(color, percent) {
-    const f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+    const f = Number.parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 function ConstructJsLocale(locales) {
@@ -9422,7 +9422,7 @@ function CompareVersion(v1, v2, options) {
         return (/^\d+$/).test(x);
     }
     if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
-        return NaN;
+        return Number.NaN;
     }
     if (zeroExtend) {
         while (v1parts.length < v2parts.length)
@@ -10362,8 +10362,8 @@ class GeoLocation {
             }
             logger_Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
             const result = {
-                lat: parseFloat(locationData[0].lat),
-                lon: parseFloat(locationData[0].lon),
+                lat: Number.parseFloat(locationData[0].lat),
+                lon: Number.parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
                 country: locationData[0].address.country,
                 timeZone: DateTime.now().zoneName,
@@ -10416,8 +10416,8 @@ class BaseProvider {
 
 
 class MetUk extends BaseProvider {
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Met Office UK");
         this.name = "Met Office UK";
         this.maxForecastSupport = 5;
@@ -10449,8 +10449,8 @@ class MetUk extends BaseProvider {
                     const night = element.Rep[1];
                     const forecast = {
                         date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
-                        temp_min: CelsiusToKelvin(parseFloat((_d = night.Nm) !== null && _d !== void 0 ? _d : "0")),
-                        temp_max: CelsiusToKelvin(parseFloat((_e = day.Dm) !== null && _e !== void 0 ? _e : "0")),
+                        temp_min: CelsiusToKelvin(Number.parseFloat((_d = night.Nm) !== null && _d !== void 0 ? _d : "0")),
+                        temp_max: CelsiusToKelvin(Number.parseFloat((_e = day.Dm) !== null && _e !== void 0 ? _e : "0")),
                         condition: this.ResolveCondition(day.W),
                     };
                     forecasts.push(forecast);
@@ -10473,17 +10473,17 @@ class MetUk extends BaseProvider {
                         continue;
                     for (const element of day.Rep) {
                         const hour = element;
-                        const timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
+                        const timestamp = date.plus({ hours: Number.parseInt(hour.$) / 60 });
                         const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
                         if (timestamp < threshold)
                             continue;
                         const forecast = {
                             date: timestamp,
-                            temp: CelsiusToKelvin(parseFloat(hour.T)),
+                            temp: CelsiusToKelvin(Number.parseFloat(hour.T)),
                             condition: this.ResolveCondition(hour.W),
                             precipitation: {
                                 type: "rain",
-                                chance: parseFloat(hour.Pp)
+                                chance: Number.parseFloat(hour.Pp)
                             }
                         };
                         forecasts.push(forecast);
@@ -10559,7 +10559,7 @@ class MetUk extends BaseProvider {
             return null;
         let observationSites = [];
         for (const element of observationSiteList.Locations.Location) {
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+            element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist > range)
                 continue;
             observationSites.push(element);
@@ -10616,12 +10616,12 @@ class MetUk extends BaseProvider {
             });
             return null;
         }
-        const times = (0,suncalc.getTimes)(new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation));
+        const times = (0,suncalc.getTimes)(new Date(), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation));
         try {
             const weather = {
                 coord: {
-                    lat: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
-                    lon: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
+                    lat: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+                    lon: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
                 },
                 location: {
                     city: undefined,
@@ -10632,8 +10632,8 @@ class MetUk extends BaseProvider {
                     distanceFrom: this.observationSites[dataIndex].dist,
                     name: this.observationSites[dataIndex].name,
                     area: this.observationSites[dataIndex].unitaryAuthArea,
-                    lat: parseFloat(this.observationSites[dataIndex].latitude),
-                    lon: parseFloat(this.observationSites[dataIndex].longitude),
+                    lat: Number.parseFloat(this.observationSites[dataIndex].latitude),
+                    lon: Number.parseFloat(this.observationSites[dataIndex].longitude),
                 },
                 date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
                 sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -10657,22 +10657,22 @@ class MetUk extends BaseProvider {
                 };
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.S) != null) {
-                weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
+                weather.wind.speed = MPHtoMPS(Number.parseFloat(observation.S));
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.D) != null) {
                 weather.wind.degree = CompassToDeg(observation.D);
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.T) != null) {
-                weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
+                weather.temperature = CelsiusToKelvin(Number.parseFloat(observation.T));
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.P) != null) {
-                weather.pressure = parseFloat(observation.P);
+                weather.pressure = Number.parseFloat(observation.P);
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.H) != null) {
-                weather.humidity = parseFloat(observation.H);
+                weather.humidity = Number.parseFloat(observation.H);
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.Dp) != null) {
-                weather.dewPoint = CelsiusToKelvin(parseFloat(observation.Dp));
+                weather.dewPoint = CelsiusToKelvin(Number.parseFloat(observation.Dp));
             }
             return weather;
         }
@@ -10685,7 +10685,7 @@ class MetUk extends BaseProvider {
     }
     ;
     VisibilityToText(dist) {
-        const distance = parseInt(dist);
+        const distance = Number.parseInt(dist);
         const unit = this.app.config.DistanceUnit;
         const stringFormat = {
             distanceUnit: this.DistanceUnitFor(unit)
@@ -10760,7 +10760,7 @@ class MetUk extends BaseProvider {
             const debugText = " Observation data missing, plugged in from ID " +
                 observation.SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
-                + Math.round(GetDistance(parseFloat(observation.SiteRep.DV.Location.lat), parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
+                + Math.round(GetDistance(Number.parseFloat(observation.SiteRep.DV.Location.lat), Number.parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
                 + " metres";
             if (result != null) {
                 if ((result === null || result === void 0 ? void 0 : result.V) == null) {
@@ -10819,9 +10819,9 @@ class MetUk extends BaseProvider {
     GetClosestSite(siteList, loc) {
         const sites = siteList.Locations.Location;
         let closest = sites[0];
-        closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
+        closest.dist = GetDistance(Number.parseFloat(closest.latitude), Number.parseFloat(closest.longitude), loc.lat, loc.lon);
         for (const element of sites) {
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+            element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist < closest.dist) {
                 closest = element;
             }
@@ -11367,8 +11367,8 @@ function OWMOneCallToWeatherData(json) {
 
 const IDCache = {};
 class OpenWeatherMapOneCall extends BaseProvider {
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("OpenWeatherMap");
         this.name = "OpenWeatherMap_OneCall";
         this.maxForecastSupport = 8;
@@ -11883,7 +11883,7 @@ class MetNorway extends BaseProvider {
         let result = null;
         for (const key in count) {
             if (result == null || count[result].count < count[key].count)
-                result = parseInt(key);
+                result = Number.parseInt(key);
         }
         if (result == null)
             return null;
@@ -11892,7 +11892,7 @@ class MetNorway extends BaseProvider {
     GetMostSevereCondition(conditions) {
         let result = null;
         for (const key in conditions) {
-            const conditionID = parseInt(key);
+            const conditionID = Number.parseInt(key);
             const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
             const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
@@ -12230,12 +12230,8 @@ class MetNorway extends BaseProvider {
 
 
 class Weatherbit extends BaseProvider {
-    get remainingCalls() {
-        return null;
-    }
-    ;
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("WeatherBit");
         this.name = "Weatherbit";
         this.maxForecastSupport = 16;
@@ -12393,6 +12389,10 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc, cancellable, config) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
         let hourlyPromise = null;
@@ -12447,8 +12447,8 @@ class Weatherbit extends BaseProvider {
     TimeToDate(time, hourDiff, tz) {
         const hoursMinutes = time.split(":");
         const date = DateTime.utc().set({
-            hour: parseInt(hoursMinutes[0]) - hourDiff,
-            minute: parseInt(hoursMinutes[1]),
+            hour: Number.parseInt(hoursMinutes[0]) - hourDiff,
+            minute: Number.parseInt(hoursMinutes[1]),
         }).setZone(tz);
         return date;
     }
@@ -12462,11 +12462,11 @@ class Weatherbit extends BaseProvider {
         if (split.length != 5)
             return null;
         return DateTime.fromObject({
-            year: parseInt(split[0]),
-            month: parseInt(split[1]),
-            day: parseInt(split[2]),
-            hour: parseInt(split[3]),
-            minute: parseInt(split[4])
+            year: Number.parseInt(split[0]),
+            month: Number.parseInt(split[1]),
+            day: Number.parseInt(split[2]),
+            hour: Number.parseInt(split[3]),
+            minute: Number.parseInt(split[4])
         }).setZone(tz);
     }
     ConvertToAPILocale(systemLocale) {
@@ -12698,8 +12698,8 @@ class Weatherbit extends BaseProvider {
 
 
 class ClimacellV4 extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.remainingCalls = null;
         this.needsApiKey = true;
         this.prettyName = _("Tomorrow.io");
@@ -13273,8 +13273,8 @@ function EventNameToIcon(event) {
 
 
 class USWeather extends BaseProvider {
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("US Weather");
         this.name = "US Weather";
         this.maxForecastSupport = 7;
@@ -13848,8 +13848,8 @@ class USWeather extends BaseProvider {
 
 
 class VisualCrossing extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Visual Crossing");
         this.name = "Visual Crossing";
         this.maxForecastSupport = 15;
@@ -14162,8 +14162,8 @@ class VisualCrossing extends BaseProvider {
 
 
 class DanishMI extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("DMI Denmark");
         this.name = "DanishMI";
@@ -14501,17 +14501,17 @@ class DanishMI extends BaseProvider {
     }
     DateStringToDate(str) {
         if (str.length == 14) {
-            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), parseInt(str.substring(8, 10)), parseInt(str.substring(10, 12)), parseInt(str.substring(12, 14))));
+            return new Date(Date.UTC(Number.parseInt(str.substring(0, 4)), Number.parseInt(str.substring(4, 6)) - 1, Number.parseInt(str.substring(6, 8)), Number.parseInt(str.substring(8, 10)), Number.parseInt(str.substring(10, 12)), Number.parseInt(str.substring(12, 14))));
         }
         else if (str.length == 8) {
-            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), 0, 0, 0, 0));
+            return new Date(Date.UTC(Number.parseInt(str.substring(0, 4)), Number.parseInt(str.substring(4, 6)) - 1, Number.parseInt(str.substring(6, 8)), 0, 0, 0, 0));
         }
         else {
             if (str.length == 3) {
                 str = ("0000" + str).substr(-4, 4);
             }
             const today = new Date();
-            today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
+            today.setUTCHours(Number.parseInt(str.substring(0, 2)), Number.parseInt(str.substring(2, 4)), 0, 0);
             return today;
         }
     }
@@ -14589,8 +14589,8 @@ class AccuWeather extends BaseProvider {
         ]);
         if (!current.Success || !forecast.Success || !hourly.Success)
             return null;
-        this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
-        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        this.remainingQuota = Math.min(Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
+        this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }
     constructor(app) {
@@ -15888,11 +15888,13 @@ class WeatherUnderground extends BaseProvider {
         const result = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [forecast.daypart[0].iconCode[index * 2], forecast.daypart[0].iconCode[index * 2 + 1]];
+            const tempMax = forecast.temperatureMax[index];
+            const tempmin = forecast.temperatureMin[index];
             const data = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition((_a = icons[0]) !== null && _a !== void 0 ? _a : icons[1]),
-                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]),
-                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
             };
             if (!this.app.config._shortConditions)
                 data.condition.description = forecast.narrative[index];
@@ -15910,12 +15912,8 @@ class WeatherUnderground extends BaseProvider {
 
 
 class PirateWeather extends BaseProvider {
-    get remainingCalls() {
-        return null;
-    }
-    ;
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Pirate Weather");
         this.name = "PirateWeather";
         this.maxForecastSupport = 7;
@@ -15950,6 +15948,10 @@ class PirateWeather extends BaseProvider {
             return true;
         };
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc, cancellable) {
         const unit = this.GetQueryUnit();
         const response = await HttpLib.Instance.LoadJsonAsync({
@@ -16621,12 +16623,8 @@ function OpenMeteoResponseToData(payload) {
 
 
 class OpenMeteo extends BaseProvider {
-    get remainingCalls() {
-        return null;
-    }
-    ;
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Open Meteo");
         this.name = "OpenMeteo";
         this.maxForecastSupport = 16;
@@ -16637,6 +16635,10 @@ class OpenMeteo extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.query = "https://api.open-meteo.com/v1/forecast";
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc, cancellable) {
         const result = await HttpLib.Instance.LoadJsonSimple({
             url: this.query,
@@ -17011,8 +17013,8 @@ class Config {
             loc = loc.replace(" ", "");
             const latLong = loc.split(",");
             const location = {
-                lat: parseFloat(latLong[0]),
-                lon: parseFloat(latLong[1]),
+                lat: Number.parseFloat(latLong[0]),
+                lon: Number.parseFloat(latLong[1]),
                 timeZone: DateTime.now().zoneName,
                 entryText: loc,
             };
@@ -17120,7 +17122,7 @@ class Config {
     GetCurrentFontSize() {
         const nameString = this.InterfaceSettings.get_string("font-name");
         const elements = nameString.split(" ");
-        const size = parseFloat(elements[elements.length - 1]);
+        const size = Number.parseFloat(elements[elements.length - 1]);
         logger_Logger.Debug("Font size changed to " + size.toString());
         return size;
     }

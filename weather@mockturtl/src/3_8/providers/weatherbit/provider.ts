@@ -10,7 +10,6 @@ import { DateTime } from "luxon";
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import type { WeatherApplet } from "../../main";
 import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData, AlertData, AlertLevel } from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
@@ -47,10 +46,6 @@ export class Weatherbit extends BaseProvider {
 	private alerts_url = "https://api.weatherbit.io/v2.0/alerts?";
 
 	private hourlyAccess = true;
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	//--------------------------------------------------------
 	//  Functions
@@ -277,8 +272,8 @@ export class Weatherbit extends BaseProvider {
 		const hoursMinutes = time.split(":");
 		const date = DateTime.utc().set(
 			{
-				hour: parseInt(hoursMinutes[0]) - hourDiff,
-				minute: parseInt(hoursMinutes[1]),
+				hour: Number.parseInt(hoursMinutes[0]) - hourDiff,
+				minute: Number.parseInt(hoursMinutes[1]),
 			}).setZone(tz);
 		return date;
 	}
@@ -304,11 +299,11 @@ export class Weatherbit extends BaseProvider {
 		const split = last_ob_time.split(/[T\-\s:]/);
 		if (split.length != 5) return null;
 		return DateTime.fromObject({
-			year: parseInt(split[0]),
-			month: parseInt(split[1]),
-			day: parseInt(split[2]),
-			hour: parseInt(split[3]),
-			minute: parseInt(split[4])
+			year: Number.parseInt(split[0]),
+			month: Number.parseInt(split[1]),
+			day: Number.parseInt(split[2]),
+			hour: Number.parseInt(split[3]),
+			minute: Number.parseInt(split[4])
 		}).setZone(tz)
 	}
 

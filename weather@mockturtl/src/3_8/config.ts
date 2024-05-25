@@ -367,8 +367,8 @@ export class Config {
 			loc = loc.replace(" ", "");
 			const latLong = loc.split(",");
 			const location: LocationData = {
-				lat: parseFloat(latLong[0]),
-				lon: parseFloat(latLong[1]),
+				lat: Number.parseFloat(latLong[0]),
+				lon: Number.parseFloat(latLong[1]),
 				timeZone: DateTime.now().zoneName,
 				entryText: loc,
 			}
@@ -545,7 +545,7 @@ export class Config {
 	private GetCurrentFontSize() {
 		const nameString = this.InterfaceSettings.get_string("font-name");
 		const elements = nameString.split(" ");
-		const size = parseFloat(elements[elements.length - 1]);
+		const size = Number.parseFloat(elements[elements.length - 1]);
 		Logger.Debug("Font size changed to " + size.toString());
 		return size;
 	}

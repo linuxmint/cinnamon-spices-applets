@@ -566,7 +566,7 @@ export function WeatherIconSafely(icons: BuiltinIcons[], icon_type: imports.gi.S
  * @param percent between -1.0 and 1.0
  */
 export function ShadeHexColor(color: string, percent: number): string {
-	const f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+	const f = Number.parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
 	return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 
@@ -703,7 +703,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 	}
 
 	if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
-		return NaN;
+		return Number.NaN;
 	}
 
 	if (zeroExtend) {

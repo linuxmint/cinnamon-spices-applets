@@ -1,7 +1,6 @@
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import type { WeatherApplet } from "../../main";
 import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation, AlertData, AlertLevel } from "../../types";
 import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
@@ -32,10 +31,6 @@ export class PirateWeather extends BaseProvider {
 	};
 
 	private query = "https://api.pirateweather.net/forecast/";
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	//--------------------------------------------------------
 	//  Functions

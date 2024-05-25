@@ -2,7 +2,6 @@ import { DateTime } from "luxon";
 import type { Config, Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { WeatherApplet } from "../../main";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../../types";
 import { CelsiusToKelvin, IsNight, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
@@ -27,10 +26,6 @@ export class ClimacellV4 extends BaseProvider {
 		timesteps: "current,1h,1d",
 		units: "metric",
 		fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
-	}
-
-	constructor(app: WeatherApplet) {
-		super(app);
 	}
 
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {

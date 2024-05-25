@@ -2,7 +2,6 @@ import { DateTime } from "luxon";
 import type { Services } from "../config";
 import type { HTTPParams} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
-import type { WeatherApplet } from "../main";
 import type { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../types";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
@@ -33,10 +32,6 @@ export class DanishMI extends BaseProvider {
 		west: null,
 		south: null,
 		north: null
-	}
-
-	constructor(app: WeatherApplet) {
-		super(app);
 	}
 
 	async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
@@ -396,19 +391,19 @@ export class DanishMI extends BaseProvider {
 	private DateStringToDate(str: string): Date {
 		if (str.length == 14) {
 			return new Date(Date.UTC(
-				parseInt(str.substring(0, 4)),
-				parseInt(str.substring(4, 6)) - 1,
-				parseInt(str.substring(6, 8)),
-				parseInt(str.substring(8, 10)),
-				parseInt(str.substring(10, 12)),
-				parseInt(str.substring(12, 14))
+				Number.parseInt(str.substring(0, 4)),
+				Number.parseInt(str.substring(4, 6)) - 1,
+				Number.parseInt(str.substring(6, 8)),
+				Number.parseInt(str.substring(8, 10)),
+				Number.parseInt(str.substring(10, 12)),
+				Number.parseInt(str.substring(12, 14))
 			));
 		}
 		else if (str.length == 8) {
 			return new Date(Date.UTC(
-				parseInt(str.substring(0, 4)),
-				parseInt(str.substring(4, 6)) - 1,
-				parseInt(str.substring(6, 8)),
+				Number.parseInt(str.substring(0, 4)),
+				Number.parseInt(str.substring(4, 6)) - 1,
+				Number.parseInt(str.substring(6, 8)),
 				0, 0, 0, 0
 			));
 		}
@@ -419,7 +414,7 @@ export class DanishMI extends BaseProvider {
 				str = ("0000" + str).substr(-4, 4);
 			}
 			const today = new Date();
-			today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
+			today.setUTCHours(Number.parseInt(str.substring(0, 2)), Number.parseInt(str.substring(2, 4)), 0, 0);
 			return today;
 		}
 	}

@@ -2,7 +2,6 @@ import { DateTime } from "luxon";
 import type { Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { WeatherApplet } from "../../main";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../../types";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
@@ -30,10 +29,6 @@ export class VisualCrossing extends BaseProvider {
 	}
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
-
-	constructor(app: WeatherApplet) {
-		super(app);
-	}
 
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null) return null;

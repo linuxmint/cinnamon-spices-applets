@@ -34,8 +34,8 @@ export class GeoJS implements GeoIP {
 
 	private ParseInformation(json: GeoJsPayload): LocationData | null {
 		try {
-			const lat = parseFloat(json.latitude);
-			const lon = parseFloat(json.longitude);
+			const lat = Number.parseFloat(json.latitude);
+			const lon = Number.parseFloat(json.longitude);
 			if (Number.isNaN(lat) || Number.isNaN(lon)) {
 				this.HandleErrorResponse(json);
 				return null;

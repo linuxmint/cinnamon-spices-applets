@@ -51,8 +51,8 @@ export class GeoLocation {
 			}
 			Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
 			const result: LocationData = {
-				lat: parseFloat(locationData[0].lat),
-				lon: parseFloat(locationData[0].lon),
+				lat: Number.parseFloat(locationData[0].lat),
+				lon: Number.parseFloat(locationData[0].lon),
 				city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
 				country: locationData[0].address.country,
 				timeZone: DateTime.now().zoneName,

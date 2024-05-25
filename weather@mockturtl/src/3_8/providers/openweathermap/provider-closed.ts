@@ -9,7 +9,6 @@
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import type { WeatherApplet } from "../../main";
 import type { WeatherData, AppletError, LocationData} from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
@@ -39,10 +38,6 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 
 	private base_url = "https://api.openweathermap.org/data/3.0/onecall" //lat=51.5085&lon=-0.1257&appid={YOUR API KEY}"
 	private id_irl  = "https://api.openweathermap.org/data/2.5/weather";
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	//--------------------------------------------------------
 	//  Functions
