@@ -211,7 +211,7 @@ export class UI {
 		let hexColor: string | null = null;
 		if (this.lightTheme) {
 			// Darken default foreground color, Get hex color without alpha, because it is not supported in css
-			hexColor = ShadeHexColor(this.ForegroundColor().to_string().substring(0, 7), -0.40);
+			hexColor = ShadeHexColor(this.ForegroundColor().to_string().slice(0, 7), -0.40);
 		}
 		return "color: " + hexColor;
 	}

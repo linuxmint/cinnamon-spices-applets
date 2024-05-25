@@ -9409,7 +9409,7 @@ function GetFuncName(func) {
 }
 function Guid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        const r = Math.trunc(Math.random() * 16), v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
@@ -14501,17 +14501,17 @@ class DanishMI extends BaseProvider {
     }
     DateStringToDate(str) {
         if (str.length == 14) {
-            return new Date(Date.UTC(Number.parseInt(str.substring(0, 4)), Number.parseInt(str.substring(4, 6)) - 1, Number.parseInt(str.substring(6, 8)), Number.parseInt(str.substring(8, 10)), Number.parseInt(str.substring(10, 12)), Number.parseInt(str.substring(12, 14))));
+            return new Date(Date.UTC(Number.parseInt(str.slice(0, 4)), Number.parseInt(str.slice(4, 6)) - 1, Number.parseInt(str.slice(6, 8)), Number.parseInt(str.slice(8, 10)), Number.parseInt(str.slice(10, 12)), Number.parseInt(str.slice(12, 14))));
         }
         else if (str.length == 8) {
-            return new Date(Date.UTC(Number.parseInt(str.substring(0, 4)), Number.parseInt(str.substring(4, 6)) - 1, Number.parseInt(str.substring(6, 8)), 0, 0, 0, 0));
+            return new Date(Date.UTC(Number.parseInt(str.slice(0, 4)), Number.parseInt(str.slice(4, 6)) - 1, Number.parseInt(str.slice(6, 8)), 0, 0, 0, 0));
         }
         else {
             if (str.length == 3) {
-                str = ("0000" + str).substr(-4, 4);
+                str = ("0000" + str).slice(-4, -4 + 4);
             }
             const today = new Date();
-            today.setUTCHours(Number.parseInt(str.substring(0, 2)), Number.parseInt(str.substring(2, 4)), 0, 0);
+            today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);
             return today;
         }
     }
@@ -18974,7 +18974,7 @@ class UI {
     GetTextColorStyle() {
         let hexColor = null;
         if (this.lightTheme) {
-            hexColor = ShadeHexColor(this.ForegroundColor().to_string().substring(0, 7), -0.40);
+            hexColor = ShadeHexColor(this.ForegroundColor().to_string().slice(0, 7), -0.40);
         }
         return "color: " + hexColor;
     }

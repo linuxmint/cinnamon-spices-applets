@@ -391,19 +391,19 @@ export class DanishMI extends BaseProvider {
 	private DateStringToDate(str: string): Date {
 		if (str.length == 14) {
 			return new Date(Date.UTC(
-				Number.parseInt(str.substring(0, 4)),
-				Number.parseInt(str.substring(4, 6)) - 1,
-				Number.parseInt(str.substring(6, 8)),
-				Number.parseInt(str.substring(8, 10)),
-				Number.parseInt(str.substring(10, 12)),
-				Number.parseInt(str.substring(12, 14))
+				Number.parseInt(str.slice(0, 4)),
+				Number.parseInt(str.slice(4, 6)) - 1,
+				Number.parseInt(str.slice(6, 8)),
+				Number.parseInt(str.slice(8, 10)),
+				Number.parseInt(str.slice(10, 12)),
+				Number.parseInt(str.slice(12, 14))
 			));
 		}
 		else if (str.length == 8) {
 			return new Date(Date.UTC(
-				Number.parseInt(str.substring(0, 4)),
-				Number.parseInt(str.substring(4, 6)) - 1,
-				Number.parseInt(str.substring(6, 8)),
+				Number.parseInt(str.slice(0, 4)),
+				Number.parseInt(str.slice(4, 6)) - 1,
+				Number.parseInt(str.slice(6, 8)),
 				0, 0, 0, 0
 			));
 		}
@@ -411,10 +411,10 @@ export class DanishMI extends BaseProvider {
 		else {
 			// Pad with 0s
 			if (str.length == 3) {
-				str = ("0000" + str).substr(-4, 4);
+				str = ("0000" + str).slice(-4, -4 + 4);
 			}
 			const today = new Date();
-			today.setUTCHours(Number.parseInt(str.substring(0, 2)), Number.parseInt(str.substring(2, 4)), 0, 0);
+			today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);
 			return today;
 		}
 	}
