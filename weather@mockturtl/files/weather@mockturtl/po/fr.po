@@ -7,11 +7,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.4.0\n"
+"Project-Id-Version: weather@mockturtl 3.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-24 21:21+0100\n"
-"PO-Revision-Date: 2024-01-31 12:12+0100\n"
+"PO-Revision-Date: 2024-05-25 09:32+0200\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1768,43 +1768,36 @@ msgstr ""
 "les journaux dans Looking Glass"
 
 #: 3.8/weather-applet.js:16350 3.8/weather-applet.js:16351
-#, fuzzy
 msgid "Mainly clear"
 msgstr "Principalement dégagé"
 
 #: 3.8/weather-applet.js:16471
-#, fuzzy
 msgid "Snow grains"
-msgstr "Neige mouillée"
+msgstr "Neige en grains"
 
 #: 3.8/weather-applet.js:16478
-#, fuzzy
 msgid "Light showers"
-msgstr "Faibles averses de neige"
+msgstr "Faibles averses"
 
 #: 3.8/weather-applet.js:16492
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Fortes averses de neige"
+msgstr "Fortes averses"
 
 #: 3.8/weather-applet.js:16520
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Orage avec pluie légère"
+msgstr "Orage avec grêle légère"
 
 #: 3.8/weather-applet.js:16527
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Orage avec pluie"
+msgstr "Orage avec grêle"
 
 #: 3.8/weather-applet.js:16554 3.8/weather-applet.js:16713
-#, fuzzy
 msgid "Feels like"
 msgstr "T° ressentie"
 
 #: 3.8/weather-applet.js:16626
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:16995
 msgid "Make sure you entered a location or use Automatic location instead."
@@ -1873,7 +1866,7 @@ msgstr "Région: {stationArea}"
 
 #: 3.8/weather-applet.js:18722
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} alerte(s) météo"
 
 #: 3.8/weather-applet.js:19085 3.8/weather-applet.js:19095
 #: 3.8/weather-applet.js:19102
@@ -1881,9 +1874,8 @@ msgid "Error Saving Debug Information"
 msgstr "Erreur lors de l'enregistrement des informations de débogage"
 
 #: 3.8/weather-applet.js:19102
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Impossible d'obtenir les informations"
+msgstr "Impossible d'ouvrir le fichier {filePath} en écriture"
 
 #: 3.8/weather-applet.js:19111
 msgid "Debug Information saved successfully"
@@ -1894,9 +1886,8 @@ msgid "Saved to {filePath}"
 msgstr "Enregistré dans {filePath}"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Applet Météo"
+msgstr "Applet Alertes Météo"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -1998,8 +1989,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : "
-"« 68.1932, 17.1426 » ou une adresse.\n"
+"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : « "
+"68.1932, 17.1426 » ou une adresse.\n"
 "Attendez 3 secondes après avoir arrêté de taper, puis actualisez la météo."
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -2393,7 +2384,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2408,9 +2399,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (États-Unis uniquement)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "WeatherBit (clé requise)"
+msgstr "OpenWeatherMap OneCall (clé requise)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2517,13 +2507,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Activer l'affichage des alertes météo"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Le bouton Alertes sera visible dans le menu contextuel s’il existe des "
+"alertes actives pour votre emplacement."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2687,12 +2679,12 @@ msgid ""
 "automatically for validating your choice."
 msgstr ""
 "Dans la plupart des cas, votre emplacement fonctionne automatiquement, mais "
-"vous pouvez l'entrer manuellement par les coordonnées « Latitude, "
-"Longitude » (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du "
-"pays » (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} "
-"{Rue} {Ville} {Code postal} {Pays} ». L'algorithme de recherche est très "
-"flexible avec le format. Au bout de 3 secondes sans saisie, l'adresse que "
-"vous avez entrée est automatiquement remplacée pour valider votre choix."
+"vous pouvez l'entrer manuellement par les coordonnées « Latitude, Longitude "
+"» (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du pays "
+"» (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} {Rue} "
+"{Ville} {Code postal} {Pays} ». L'algorithme de recherche est très flexible "
+"avec le format. Au bout de 3 secondes sans saisie, l'adresse que vous avez "
+"entrée est automatiquement remplacée pour valider votre choix."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
