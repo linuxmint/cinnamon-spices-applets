@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
-import { Services } from "../config";
-import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
+import type { Services } from "../config";
+import type { ErrorResponse} from "../lib/httpLib";
+import { HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
-import { Condition, ForecastData, LocationData, WeatherData } from "../types";
+import type { Condition, ForecastData, LocationData, WeatherData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 

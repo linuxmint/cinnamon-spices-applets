@@ -1,14 +1,16 @@
 import { Logger } from "../../lib/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation, AlertLevel } from "../../types";
+import type { WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation} from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { Conditions, conditionSeverity, TimeOfDay } from "./types/common";
-import { IsCovered, MetNorwayNowcastPayload } from "./types/nowcast";
-import { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
+import type { Conditions, TimeOfDay } from "./types/common";
+import { conditionSeverity } from "./types/common";
+import type { MetNorwayNowcastPayload } from "./types/nowcast";
+import { IsCovered } from "./types/nowcast";
+import type { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
 import { HttpLib } from "../../lib/httpLib";
-import { Config } from "../../config";
+import type { Config } from "../../config";
 import { GetMETNorwayAlerts } from "./alert";
 
 export class MetNorway extends BaseProvider {
@@ -157,7 +159,7 @@ export class MetNorway extends BaseProvider {
 		for (const element of json.properties.timeseries) {
 
 			// Hourly forecast
-			if (!!element.data.next_1_hours) {
+			if (element.data.next_1_hours) {
 				hourlyForecasts.push({
 					date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),

@@ -1,4 +1,4 @@
-import { WeatherData } from "../../../types";
+import type { WeatherData } from "../../../types";
 import { CelsiusToKelvin, _ } from "../../../utils";
 import { OpenMeteoWeatherCodeToCondition } from "./common";
 

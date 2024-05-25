@@ -1,10 +1,10 @@
 import { OpenUrl } from "../lib/commandRunner";
-import { Config } from "../config";
+import type { Config } from "../config";
 import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK, STYLE_HIDDEN } from "../consts";
-import { LocationStore } from "../location_services/locationstore";
+import type { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
-import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
+import type { WeatherApplet } from "../main";
+import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
 import { _, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { SunTimesUI } from "./uiSunTimes";

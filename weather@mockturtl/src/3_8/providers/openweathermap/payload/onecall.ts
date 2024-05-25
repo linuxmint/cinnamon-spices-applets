@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
-import { AlertData, ForecastData, HourlyForecastData, ImmediatePrecipitation, WeatherData } from "../../../types";
-import { OWMWeatherCondition } from "./common";
+import type { AlertData, ForecastData, HourlyForecastData, ImmediatePrecipitation, WeatherData } from "../../../types";
+import type { OWMWeatherCondition } from "./common";
 import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
 import { _ } from "../../../utils";
 

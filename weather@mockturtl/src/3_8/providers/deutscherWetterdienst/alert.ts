@@ -1,5 +1,5 @@
 import { HttpLib } from "../../lib/httpLib";
-import { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
+import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
 
 interface DeutscherWetterdienstAlert {
 	id: number;

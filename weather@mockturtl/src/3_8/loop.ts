@@ -1,6 +1,7 @@
 import { Logger } from "./lib/logger";
-import { WeatherApplet } from "./main";
-import { LocationData, RefreshState } from "./types";
+import type { WeatherApplet } from "./main";
+import type { LocationData} from "./types";
+import { RefreshState } from "./types";
 import { _, delay, Guid } from "./utils";
 const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 
@@ -8,7 +9,7 @@ const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
  * Checked to make sure that instance is
  * running for one applet ID
  */
-var weatherAppletGUIDs: GUIDStore = {};
+const weatherAppletGUIDs: GUIDStore = {};
 
 
 export interface RefreshOptions {

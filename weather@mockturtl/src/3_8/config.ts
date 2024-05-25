@@ -1,14 +1,15 @@
-import { WeatherApplet } from "./main";
-import { LocationData, WeatherProvider } from "./types";
+import type { WeatherApplet } from "./main";
+import type { LocationData} from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
-import { distanceUnitLocales, fahrenheitCountries, LogLevel, UUID, windSpeedUnitLocales } from "./consts";
+import type { LogLevel} from "./consts";
+import { distanceUnitLocales, fahrenheitCountries, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
 import { MetUk } from "./providers/met_uk";
-import { BaseProvider } from "./providers/BaseProvider";
+import type { BaseProvider } from "./providers/BaseProvider";
 import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit/provider";
@@ -20,7 +21,7 @@ import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst/provider";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
-import { GeoIP } from "./location_services/geoip_services/base";
+import type { GeoIP } from "./location_services/geoip_services/base";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 import { GeoClue } from "./location_services/geoip_services/geoclue";
 import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
@@ -380,7 +381,7 @@ export class Config {
 		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
-		if (!!locationData?.entryText) {
+		if (locationData?.entryText) {
 			Logger.Debug("Coordinates are found via Reverse address search");
 		}
 

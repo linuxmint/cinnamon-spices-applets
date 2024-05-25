@@ -6,18 +6,19 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { DateTime } from "luxon";
-import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../../lib/httpLib";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation, AlertData } from "../../types";
+import type { WeatherApplet } from "../../main";
+import type { WeatherData, AppletError, LocationData} from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
-import { ConvertLocaleToOWMLang, OpenWeatherMapError, OWM_SUPPORTED_LANGS, OWMWeatherCondition } from "./payload/common";
-import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./payload/condition";
-import { Config, Services } from "../../config";
-import { OWMOneCallPayload, OWMOneCallToWeatherData } from "./payload/onecall";
-import { OWMWeatherResponse } from "./payload/weather";
+import type { OpenWeatherMapError} from "./payload/common";
+import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
+import type { Config, Services } from "../../config";
+import type { OWMOneCallPayload} from "./payload/onecall";
+import { OWMOneCallToWeatherData } from "./payload/onecall";
+import type { OWMWeatherResponse } from "./payload/weather";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};

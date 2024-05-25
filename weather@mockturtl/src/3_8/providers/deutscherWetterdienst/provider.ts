@@ -1,8 +1,9 @@
 import { DateTime } from "luxon";
-import { getTimes, GetTimesResult } from "suncalc";
-import { Config, Services } from "../../config";
-import { ErrorResponse, HttpLib, HTTPParams } from "../../lib/httpLib";
-import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType, AlertData } from "../../types";
+import { getTimes } from "suncalc";
+import type { Config, Services } from "../../config";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import type { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType, AlertData } from "../../types";
 import { IsNight, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
 import { GetDeutscherWetterdienstAlerts } from "./alert";
@@ -95,7 +96,7 @@ export class DeutscherWetterdienst extends BaseProvider {
         for (const day of days) {
             let tempMax: number = -Infinity;
             let tempMin: number = Infinity;
-            let conditions: Icon[] = [];
+            const conditions: Icon[] = [];
             let time: DateTime | null = null;
 
             for (const hour of day) {

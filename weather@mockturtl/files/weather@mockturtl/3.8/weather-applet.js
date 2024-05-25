@@ -8928,7 +8928,7 @@ function _(str, args) {
     let result = imports.gettext.dgettext(UUID, str);
     if (result === str && result === "")
         result = imports.gettext.gettext(str);
-    if (!!args)
+    if (args)
         result = format(result, args);
     return result;
 }
@@ -9010,7 +9010,7 @@ function GetDayName(date, options = {}) {
     }
     let now = DateTime.utc();
     let tomorrow = DateTime.utc().plus({ days: 1 });
-    if (!!tz) {
+    if (tz) {
         now = now.setZone(tz);
         tomorrow = tomorrow.setZone(tz);
         date = date.setZone(tz);
@@ -9037,7 +9037,7 @@ function GetHoursMinutes(date, hours24Format, tz, onlyHours = false) {
     params.timeZone = NormalizeTimezone(tz);
     if (!onlyHours)
         params.minute = "2-digit";
-    if (!!tz)
+    if (tz)
         date = date.setZone(tz);
     return date.toLocaleString(params);
 }
@@ -9301,7 +9301,7 @@ function CompassDirectionText(deg) {
 function IsNight(sunTimes, date) {
     if (!sunTimes)
         return false;
-    const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+    const time = (date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
     const sunrise = MilitaryTime(sunTimes.sunrise);
     const sunset = MilitaryTime(sunTimes.sunset);
     if (time >= sunrise && time < sunset)
@@ -9329,7 +9329,7 @@ function HasIcon(icon, icon_type) {
 }
 function mode(arr) {
     return arr.reduce(function (current, item) {
-        var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+        const val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
         if (val > current.greatestFreq) {
             current.greatestFreq = val;
             current.mode = item;
@@ -9346,7 +9346,7 @@ function WeatherIconSafely(icons, icon_type) {
     return 'weather-severe-alert';
 }
 function ShadeHexColor(color, percent) {
-    var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+    const f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 function ConstructJsLocale(locales) {
@@ -9409,7 +9409,7 @@ function GetFuncName(func) {
 }
 function Guid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
@@ -9430,7 +9430,7 @@ function CompareVersion(v1, v2, options) {
         while (v2parts.length < v1parts.length)
             v2parts.push("0");
     }
-    for (var i = 0; i < v1parts.length; ++i) {
+    for (let i = 0; i < v1parts.length; ++i) {
         if (v2parts.length == i) {
             return 1;
         }
@@ -9546,7 +9546,7 @@ async function DeleteFile(file) {
             }
             catch (e) {
                 if (e instanceof Error) {
-                    let error = e;
+                    const error = e;
                     if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
                         resolve(true);
                         return true;
@@ -9853,12 +9853,12 @@ class LocationStore {
                 locs[index] = this.EnsureSearchEntry(element);
             }
         }
-        let currentIndex = this.FindIndex(this.config.CurrentLocation);
-        let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
+        const currentIndex = this.FindIndex(this.config.CurrentLocation);
+        const newIndex = this.FindIndex(this.config.CurrentLocation, locs);
         let currentlyDisplayedChanged = false;
         let currentlyDisplayedDeleted = false;
         if (newIndex == -1 && currentIndex == -1) {
-            let tmp = [];
+            const tmp = [];
             this.locations = locs.concat(tmp);
             this.InvokeStorageChanged();
             return;
@@ -9869,7 +9869,7 @@ class LocationStore {
             currentlyDisplayedDeleted = true;
         else if (newIndex != currentIndex)
             this.currentIndex = newIndex;
-        let tmp = [];
+        const tmp = [];
         this.locations = locs.concat(tmp);
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
@@ -10228,6 +10228,7 @@ var __rest = (undefined && undefined.__rest) || function (s, e) {
 
 
 
+
 class HttpLib {
     constructor() {
         this.UnhandledError = new Event();
@@ -10576,7 +10577,7 @@ class MetUk extends BaseProvider {
                 url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
                 cancellable
             });
-            if (!!payload)
+            if (payload)
                 observations.push(payload);
             else {
                 logger_Logger.Debug("Failed to get observations from " + element.id);
@@ -11532,7 +11533,7 @@ function PointInsidePolygon(point, vs) {
         return false;
     }
     let intersections = 0;
-    let padding = 0.1;
+    const padding = 0.1;
     const pv1 = [(minX - padding / point[0]), (minY - padding / point[1])];
     const pv2 = point;
     for (let i = 0; i < vs.length - 1; i++) {
@@ -11793,7 +11794,7 @@ class MetNorway extends BaseProvider {
         };
         const hourlyForecasts = [];
         for (const element of json.properties.timeseries) {
-            if (!!element.data.next_1_hours) {
+            if (element.data.next_1_hours) {
                 hourlyForecasts.push({
                     date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
                     temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
@@ -12395,7 +12396,7 @@ class Weatherbit extends BaseProvider {
     async GetWeather(loc, cancellable, config) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
         let hourlyPromise = null;
-        if (!!this.hourlyAccess)
+        if (this.hourlyAccess)
             hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
         const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable);
         if (!currentResult)
@@ -12435,7 +12436,7 @@ class Weatherbit extends BaseProvider {
             cancellable,
             HandleError: (e) => this.HandleHourlyError(e)
         });
-        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
+        if (json === null || json === void 0 ? void 0 : json.error) {
             return null;
         }
         if (json == null)
@@ -13046,23 +13047,34 @@ class ClimacellV4 extends BaseProvider {
     }
     PrecipTypeToAppletType(type) {
         switch (type) {
-            case 0:
+            case PrecipType.N_A:
                 return "none";
-            case 1:
+            case PrecipType.Rain:
                 return "rain";
-            case 2:
+            case PrecipType.Snow:
                 return "snow";
-            case 3:
+            case PrecipType.Freezing_Rain:
                 return "freezing rain";
-            case 4:
+            case PrecipType.Ice_Pellets:
                 return "ice pellets";
             default:
                 return "none";
         }
     }
 }
+var PrecipType;
+(function (PrecipType) {
+    PrecipType[PrecipType["N_A"] = 0] = "N_A";
+    PrecipType[PrecipType["Rain"] = 1] = "Rain";
+    PrecipType[PrecipType["Snow"] = 2] = "Snow";
+    PrecipType[PrecipType["Freezing_Rain"] = 3] = "Freezing_Rain";
+    PrecipType[PrecipType["Ice_Pellets"] = 4] = "Ice_Pellets";
+})(PrecipType || (PrecipType = {}));
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/alerts.ts
+
+
+
 
 async function GetUSWeatherAlerts(cancellable, lat, lon) {
     var _a, _b;
@@ -13928,7 +13940,7 @@ class VisualCrossing extends BaseProvider {
     }
     ParseForecasts(forecasts, translate, tz) {
         const result = [];
-        if (!!forecasts) {
+        if (forecasts) {
             for (const element of forecasts) {
                 result.push({
                     date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
@@ -13943,7 +13955,7 @@ class VisualCrossing extends BaseProvider {
     ParseHourlyForecasts(forecasts, translate, tz) {
         const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
         const result = [];
-        if (!!forecasts) {
+        if (forecasts) {
             for (const element of forecasts) {
                 if (!element.hours)
                     continue;
@@ -14125,7 +14137,7 @@ class VisualCrossing extends BaseProvider {
     }
     ResolveTypeIDs(condition) {
         let result = "";
-        let split = condition.split(", ");
+        const split = condition.split(", ");
         for (const [index, element] of split.entries()) {
             result += this.ResolveTypeID(element);
             if (index < split.length - 1)
@@ -14298,7 +14310,7 @@ class DanishMI extends BaseProvider {
         });
         const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol;
-        if (!!normalizedSymbols.find(x => x > 10 && x != 45))
+        if (normalizedSymbols.find(x => x > 10 && x != 45))
             resultSymbol = Math.max(...normalizedSymbols);
         else
             resultSymbol = mode(normalizedSymbols);
@@ -15065,7 +15077,7 @@ class DeutscherWetterdienst extends BaseProvider {
         for (const day of days) {
             let tempMax = -Infinity;
             let tempMin = Infinity;
-            let conditions = [];
+            const conditions = [];
             let time = null;
             for (const hour of day) {
                 if (time == null)
@@ -16173,6 +16185,7 @@ class PirateWeather extends BaseProvider {
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
 
+
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
 class GeoClue {
@@ -17020,7 +17033,7 @@ class Config {
         const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
         if (locationData == null)
             return null;
-        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
+        if (locationData === null || locationData === void 0 ? void 0 : locationData.entryText) {
             logger_Logger.Debug("Coordinates are found via Reverse address search");
         }
         location = this.LocStore.FindLocation(locationData.entryText);
@@ -17291,11 +17304,23 @@ const Keys = {
     },
 };
 
+;// CONCATENATED MODULE: ./src/3_8/types.ts
+var RefreshState;
+(function (RefreshState) {
+    RefreshState["Success"] = "success";
+    RefreshState["Error"] = "error";
+    RefreshState["NoLocation"] = "no location";
+    RefreshState["NoWeather"] = "no weather";
+    RefreshState["NoKey"] = "no key";
+    RefreshState["DisplayFailure"] = "display failure";
+})(RefreshState || (RefreshState = {}));
+
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
 
 
+
 const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
-var weatherAppletGUIDs = {};
+const weatherAppletGUIDs = {};
 class WeatherLoop {
     get Refreshing() {
         if (this.refreshing == null)
@@ -17371,18 +17396,18 @@ class WeatherLoop {
                     case null:
                         logger_Logger.Info("Refreshing timed out, skipping this cycle.");
                         break;
-                    case "error":
-                    case "display failure":
+                    case RefreshState.Error:
+                    case RefreshState.DisplayFailure:
                         this.IncrementErrorCount();
                         logger_Logger.Info("Critical Error while refreshing weather.");
                         break;
-                    case "success":
+                    case RefreshState.Success:
                         this.ResetErrorCount();
                         this.lastUpdated = new Date();
                         logger_Logger.Info("Weather Information refreshed");
                         break;
-                    case "no weather":
-                    case "no location":
+                    case RefreshState.NoWeather:
+                    case RefreshState.NoLocation:
                         this.IncrementErrorCount();
                         logger_Logger.Error("Could not refresh weather, data could not be obtained.");
                         this.app.ShowError({
@@ -17391,7 +17416,7 @@ class WeatherLoop {
                             message: "API did not return data"
                         });
                         break;
-                    case "no key":
+                    case RefreshState.NoKey:
                         logger_Logger.Error("No API Key given");
                         this.Pause();
                         this.app.ShowError({
@@ -17540,7 +17565,7 @@ async function SpawnProcess(command) {
     else {
         response = await new Promise((resolve, reject) => {
             spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-                let result = {
+                const result = {
                     Success: exitCode == 0,
                     ErrorData: undefined,
                     Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
@@ -18289,8 +18314,8 @@ class UIHourlyForecasts {
             const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
             const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
             const tempPadding = 6;
-            let points = [];
-            let precipitation = [];
+            const points = [];
+            const precipitation = [];
             for (let i = 0; i < this.hourlyContainers.length; i++) {
                 const data = this.hourlyForecastData[i];
                 const items = this.hourlyForecasts[i];
@@ -18671,13 +18696,13 @@ class UIBar {
     SwitchButtonToShow() {
         var _a;
         const icon = this.app.Orientation == uiBar_Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
-        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
+        if ((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child)
             this.hourlyButton.actor.child.icon_name = icon;
     }
     SwitchButtonToHide() {
         var _a;
         const icon = this.app.Orientation == uiBar_Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
-        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
+        if ((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child)
             this.hourlyButton.actor.child.icon_name = icon;
     }
     DisplayErrorMessage(msg) {
@@ -19035,6 +19060,7 @@ class UI {
 
 
 
+
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
@@ -19189,19 +19215,19 @@ class WeatherApplet extends TextIconApplet {
             if (!location) {
                 location = await this.config.EnsureLocation(cancellable);
                 if (!location) {
-                    return "no location";
+                    return RefreshState.NoLocation;
                 }
             }
             this.EnsureProvider();
             if (this.provider == null) {
-                return "error";
+                return RefreshState.Error;
             }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
-                return "no key";
+                return RefreshState.NoKey;
             }
             let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
             if (weatherInfo == null) {
-                return "no weather";
+                return RefreshState.NoWeather;
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
             this.config.Timezone = weatherInfo.location.timeZone;
@@ -19209,16 +19235,16 @@ class WeatherApplet extends TextIconApplet {
                 this.ui.Rebuild(this.config);
             if (!this.ui.Display(weatherInfo, this.config, this.provider) ||
                 !this.DisplayWeather(weatherInfo)) {
-                return "display failure";
+                return RefreshState.DisplayFailure;
             }
             this.currentWeatherInfo = weatherInfo;
-            return "success";
+            return RefreshState.Success;
         }
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-            return "error";
+            return RefreshState.Error;
         }
     }
     DisplayWeather(weather) {

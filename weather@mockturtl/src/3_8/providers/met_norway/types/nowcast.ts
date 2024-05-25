@@ -1,4 +1,4 @@
-import { Conditions } from "./common";
+import type { Conditions } from "./common";
 
 export function IsCovered(payload: MetNorwayNowcastNoCoveragePayload | MetNorwayNowcastCoveragePayload): payload is MetNorwayNowcastCoveragePayload {
 	return payload.properties.meta.radar_coverage == "ok";

@@ -1,9 +1,9 @@
-import { Config } from "../config";
+import type { Config } from "../config";
 import { Event } from "../lib/events";
 import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
+import type { WeatherApplet } from "../main";
 import { NotificationService } from "../lib/notification_service";
-import { LocationData } from "../types";
+import type { LocationData } from "../types";
 import { ValidTimezone, _ } from "../utils";
 import { DateTime } from "luxon";
 export class LocationStore {
@@ -39,13 +39,13 @@ export class LocationStore {
 			}
 		}
 
-		let currentIndex = this.FindIndex(this.config.CurrentLocation);
-		let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
+		const currentIndex = this.FindIndex(this.config.CurrentLocation);
+		const newIndex = this.FindIndex(this.config.CurrentLocation, locs);
 		let currentlyDisplayedChanged = false;
 		let currentlyDisplayedDeleted = false;
 		// no need to do anything, not using locationstore atm
 		if (newIndex == -1 && currentIndex == -1) {
-			let tmp: LocationData[] = [];
+			const tmp: LocationData[] = [];
 			this.locations = locs.concat(tmp);
 			this.InvokeStorageChanged();
 			return;
@@ -60,7 +60,7 @@ export class LocationStore {
 		else if (newIndex != currentIndex)
 			this.currentIndex = newIndex
 
-		let tmp: LocationData[] = [];
+		const tmp: LocationData[] = [];
 		this.locations = locs.concat(tmp);
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {

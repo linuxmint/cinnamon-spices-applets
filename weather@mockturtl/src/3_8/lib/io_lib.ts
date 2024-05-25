@@ -79,7 +79,7 @@ export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
 			}
 			catch (e) {
 				if (e instanceof Error) {
-					let error: GJSError = <GJSError>e;
+					const error: GJSError = <GJSError>e;
 					if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
 						resolve(true);
 						return true;

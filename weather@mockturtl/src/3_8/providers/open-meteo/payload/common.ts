@@ -1,4 +1,4 @@
-import { Condition } from "../../../types";
+import type { Condition } from "../../../types";
 import { _ } from "../../../utils";
 
 export function OpenMeteoWeatherCodeToCondition(code: number, isDay: boolean): Condition {

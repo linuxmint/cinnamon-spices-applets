@@ -1,7 +1,7 @@
-import { Config, WeatherWindSpeedUnits } from "../config";
+import type { Config, WeatherWindSpeedUnits } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
-import { type WeatherApplet } from "../main";
-import { WeatherData } from "../types";
+import type { WeatherApplet } from "../main";
+import type { WeatherData } from "../types";
 import { CompassDirection, CompassDirectionText, LocalizedColon, MPStoUserUnits, _ } from "../utils";
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;

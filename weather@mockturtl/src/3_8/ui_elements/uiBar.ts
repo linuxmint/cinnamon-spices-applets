@@ -1,8 +1,8 @@
 import { OpenUrl, SpawnProcess } from "../lib/commandRunner";
-import { Config, DistanceUnits } from "../config";
+import type { Config, DistanceUnits } from "../config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
 import { Event } from "../lib/events";
-import { WeatherApplet } from "../main";
+import type { WeatherApplet } from "../main";
 import type { CustomIcons, WeatherData, WeatherProvider, AlertData, BuiltinIcons, AlertLevel } from "../types";
 import { _, AwareDateString, GetAlertColor, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
@@ -45,13 +45,13 @@ export class UIBar {
 
 	public SwitchButtonToShow() {
 		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
-		if (!!this.hourlyButton?.actor.child)
+		if (this.hourlyButton?.actor.child)
 			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
 	public SwitchButtonToHide() {
 		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
-		if (!!this.hourlyButton?.actor.child)
+		if (this.hourlyButton?.actor.child)
 			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 

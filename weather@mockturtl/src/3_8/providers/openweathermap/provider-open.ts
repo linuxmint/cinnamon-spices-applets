@@ -1,11 +1,14 @@
-import { Services, Config } from "../../config";
-import { HTTPParams, HttpLib } from "../../lib/httpLib";
-import { LocationData, WeatherData } from "../../types";
+import type { Services, Config } from "../../config";
+import type { HTTPParams} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import type { LocationData, WeatherData } from "../../types";
 import { IsLangSupported, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
-import { OWMDailyForecastResponse, OWMDailyForecastsToData } from "./payload/forecast_daily";
-import { OWMWeatherResponse, OWMWeatherToWeatherData } from "./payload/weather";
+import type { OWMDailyForecastResponse} from "./payload/forecast_daily";
+import { OWMDailyForecastsToData } from "./payload/forecast_daily";
+import type { OWMWeatherResponse} from "./payload/weather";
+import { OWMWeatherToWeatherData } from "./payload/weather";
 
 export class OpenWeatherMapOpen extends BaseProvider {
 	public override needsApiKey = false;

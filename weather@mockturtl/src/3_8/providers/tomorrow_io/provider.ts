@@ -1,11 +1,12 @@
 import { DateTime } from "luxon";
-import { Config, Services } from "../../config";
-import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../../lib/httpLib";
-import { WeatherApplet } from "../../main";
-import { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../../types";
+import type { Config, Services } from "../../config";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import type { WeatherApplet } from "../../main";
+import type { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../../types";
 import { CelsiusToKelvin, IsNight, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
-import { TomorrowIoAlertsResponse } from "./alerts";
+import type { TomorrowIoAlertsResponse } from "./alerts";
 
 export class ClimacellV4 extends BaseProvider {
 	public readonly remainingCalls: number | null = null;

@@ -1,8 +1,8 @@
-import { DateTime } from "luxon";
-import { Config } from "../config";
+import type { DateTime } from "luxon";
+import type { Config } from "../config";
 import { BLANK, ELLIPSIS } from "../consts";
-import { type WeatherApplet } from "../main";
-import { WeatherData } from "../types";
+import type { WeatherApplet } from "../main";
+import type { WeatherData } from "../types";
 import { GetHoursMinutes } from "../utils";
 
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;

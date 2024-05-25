@@ -16,7 +16,7 @@ export function PointInsidePolygon(point: [lon: number, lat: number], vs: [lon: 
 	}
 
 	let intersections = 0;
-	let padding = 0.1;
+	const padding = 0.1;
 	const pv1 = [(minX - padding/point[0]), (minY - padding/point[1])];
 	const pv2 = point;
 	for (let i = 0; i < vs.length - 1; i++) {

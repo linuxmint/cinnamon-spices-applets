@@ -8,10 +8,10 @@
 
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import type { WeatherApplet } from "../../main";
+import type { LocationData } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 /**
  * @deprecated Blocks Hungary and probably some other countries.

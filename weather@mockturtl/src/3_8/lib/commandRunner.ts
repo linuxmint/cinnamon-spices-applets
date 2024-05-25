@@ -1,5 +1,5 @@
 import { Logger } from "./logger";
-import { WeatherButton } from "../ui_elements/weatherbutton";
+import type { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
 
@@ -69,7 +69,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 	else {
 		response = await new Promise((resolve, reject) => {
 			spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
-				let result: GenericResponse = {
+				const result: GenericResponse = {
 					Success: exitCode == 0,
 					ErrorData: undefined,
 					Data: aStdout ?? null

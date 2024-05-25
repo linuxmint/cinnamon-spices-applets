@@ -1,7 +1,7 @@
-import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
+import type { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
 import { Logger } from "./lib/logger";
-import { APIUniqueField, AlertData, AlertLevel, ArrowIcons, BuiltinIcons, CustomIcons, SunTime, WeatherData } from "./types";
+import type { APIUniqueField, AlertLevel, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -17,7 +17,7 @@ export function _(str: string, args?: KeysValuePairs): string {
 	if (result === str && result === "")
 		result = imports.gettext.gettext(str);
 
-	if (!!args)
+	if (args)
 		result = format(result, args);
 	return result;
 }
@@ -137,7 +137,7 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 	let now = DateTime.utc();
 	let tomorrow = DateTime.utc().plus({ days: 1 });
 
-	if (!!tz) {
+	if (tz) {
 		now = now.setZone(tz);
 		tomorrow = tomorrow.setZone(tz);
 		date = date.setZone(tz);
@@ -170,7 +170,7 @@ export function GetHoursMinutes(date: DateTime, hours24Format: boolean, tz?: str
 
 	if (!onlyHours)
 		params.minute = "2-digit";
-	if (!!tz)
+	if (tz)
 		date = date.setZone(tz);
 	return date.toLocaleString(params);
 }
@@ -506,7 +506,7 @@ export function CompassDirectionText(deg: number): string {
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+	const time = (date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
 	const sunrise = MilitaryTime(sunTimes.sunrise);
 	const sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;
@@ -541,7 +541,7 @@ function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 
 export function mode<T>(arr: T[]): T | null {
 	return arr.reduce(function (current, item) {
-		var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+		const val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
 		if (val > current.greatestFreq) {
 			current.greatestFreq = val;
 			current.mode = item;
@@ -565,7 +565,7 @@ export function WeatherIconSafely(icons: BuiltinIcons[], icon_type: imports.gi.S
  * @param percent between -1.0 and 1.0
  */
 export function ShadeHexColor(color: string, percent: number): string {
-	var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+	const f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
 	return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 
@@ -664,7 +664,7 @@ export function GetFuncName(func: Function): string {
 
 export function Guid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
 }
@@ -709,7 +709,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 		while (v2parts.length < v1parts.length) v2parts.push("0");
 	}
 
-	for (var i = 0; i < v1parts.length; ++i) {
+	for (let i = 0; i < v1parts.length; ++i) {
 		if (v2parts.length == i) {
 			return 1;
 		}

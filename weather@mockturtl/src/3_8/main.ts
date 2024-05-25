@@ -7,11 +7,14 @@
 
 import { DateTime } from "luxon";
 import { Config, ServiceClassMapping } from "./config";
-import { RefreshOptions, WeatherLoop } from "./loop";
-import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
+import type { RefreshOptions} from "./loop";
+import { WeatherLoop } from "./loop";
+import type { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, BuiltinIcons } from "./types";
+import { RefreshState } from "./types";
 import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
-import { HttpLib, HttpError } from "./lib/httpLib";
+import type { HttpError } from "./lib/httpLib";
+import { HttpLib } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";

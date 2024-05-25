@@ -1,12 +1,12 @@
-import { Config } from "../config";
+import type { Config } from "../config";
 import { APPLET_ICON } from "../consts";
 import { Event } from "../lib/events";
 import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
-import { WeatherData } from "../types";
+import type { WeatherApplet } from "../main";
+import type { WeatherData } from "../types";
 import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
-import { DateTime } from "luxon";
+import type { DateTime } from "luxon";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout, Orientation } = imports.gi.Clutter;

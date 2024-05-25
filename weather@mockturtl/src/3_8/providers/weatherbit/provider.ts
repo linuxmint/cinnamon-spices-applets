@@ -7,14 +7,15 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
+import type { ErrorResponse} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData, AlertData, AlertLevel } from "../../types";
+import type { WeatherApplet } from "../../main";
+import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData, AlertData, AlertLevel } from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
-import { Config } from "../../config";
-import { WeatherbitAlertsResponse } from "./alerts";
+import type { Config } from "../../config";
+import type { WeatherbitAlertsResponse } from "./alerts";
 
 export class Weatherbit extends BaseProvider {
 
@@ -57,7 +58,7 @@ export class Weatherbit extends BaseProvider {
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable) as Promise<ForecastData[]>;
 		let hourlyPromise = null;
-		if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
+		if (this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
 		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable) as WeatherData;
 		if (!currentResult) return null;
 
@@ -111,7 +112,7 @@ export class Weatherbit extends BaseProvider {
 			HandleError: (e) => this.HandleHourlyError(e)
 		});
 
-		if (!!json?.error) {
+		if (json?.error) {
 			return null;
 		}
 

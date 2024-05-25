@@ -159,7 +159,8 @@
       "streetsidesoftware.code-spell-checker",
       "gruntfuggly.todo-tree",
       "eg2.vscode-npm-script",
-      "wix.vscode-import-cost"
+      "wix.vscode-import-cost",
+      "dbaeumer.vscode-eslint"
     ]
   }
 }

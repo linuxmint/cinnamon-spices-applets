@@ -1,9 +1,10 @@
 import { HttpLib } from "../../lib/httpLib";
-import { WeatherApplet } from "../../main";
-import { LocationData, WeatherData } from "../../types";
+import type { WeatherApplet } from "../../main";
+import type { LocationData, WeatherData } from "../../types";
 import { _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
-import { OpenMeteoResponseToData, OpenMeteoWeatherResponse } from "./payload/response";
+import type { OpenMeteoWeatherResponse } from "./payload/response";
+import { OpenMeteoResponseToData } from "./payload/response";
 
 export class OpenMeteo extends BaseProvider {
 

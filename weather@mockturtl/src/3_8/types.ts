@@ -1,6 +1,6 @@
-import { DateTime } from "luxon";
-import { GetTimesResult } from "suncalc";
-import { Config, Services } from "./config";
+import type { DateTime } from "luxon";
+import type { GetTimesResult } from "suncalc";
+import type { Config, Services } from "./config";
 
 export type Tuple<T, N extends number> = N extends N ? number extends N ? T[] : _TupleOf<T, N, []> : never;
 type _TupleOf<T, N extends number, R extends unknown[]> = R['length'] extends N ? R : _TupleOf<T, N, [T, ...R]>;

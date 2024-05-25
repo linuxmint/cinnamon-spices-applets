@@ -6,15 +6,16 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
+import type { ErrorResponse} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
+import type { WeatherApplet } from "../../main";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../../types";
+import type { WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../../types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { Config } from "../../config";
+import type { Config } from "../../config";
 import { GetUSWeatherAlerts } from "./alerts";
 
 export class USWeather extends BaseProvider {

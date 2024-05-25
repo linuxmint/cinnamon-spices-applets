@@ -1,9 +1,9 @@
 import { DateTime } from "luxon";
 import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import type { WeatherApplet } from "../../main";
+import type { LocationData } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 let GeoClueLib: typeof imports.gi.Geoclue | undefined = undefined;
 let GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined = undefined;

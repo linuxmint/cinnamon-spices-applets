@@ -1,9 +1,9 @@
-import { DateTime } from "luxon";
-import { Config } from "../config";
+import type { DateTime } from "luxon";
+import type { Config } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
-import { HourlyForecastData, Precipitation, WeatherData } from "../types";
+import type { WeatherApplet } from "../main";
+import type { HourlyForecastData, Precipitation, WeatherData } from "../types";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
@@ -416,8 +416,8 @@ export class UIHourlyForecasts {
 		const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
 		const tempPadding = 6;
 
-		let points: Array<{x: number, y: number}> = [];
-		let precipitation: number[] = []
+		const points: Array<{x: number, y: number}> = [];
+		const precipitation: number[] = []
 		for (let i = 0; i < this.hourlyContainers.length; i++) {
 			const data = this.hourlyForecastData[i];
 			const items = this.hourlyForecasts[i];

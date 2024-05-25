@@ -1,7 +1,8 @@
 import { Logger } from "./logger";
-import { ErrorDetail } from "../types";
+import type { ErrorDetail } from "../types";
 import { _ } from "../utils";
-import { soupLib, SoupLibSendOptions, SoupResponse } from "./soupLib";
+import type { SoupLibSendOptions, SoupResponse } from "./soupLib";
+import { soupLib } from "./soupLib";
 import { Event } from "./events";
 
 export interface LoadAsyncOptions extends SoupLibSendOptions {

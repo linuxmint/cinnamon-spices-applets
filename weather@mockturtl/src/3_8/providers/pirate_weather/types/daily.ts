@@ -1,4 +1,4 @@
-import { PirateWeatherIcon } from "./common";
+import type { PirateWeatherIcon } from "./common";
 
 export interface PirateWeatherDailyPayload {
 	time: number;

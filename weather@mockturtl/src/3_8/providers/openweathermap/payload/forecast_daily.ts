@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
-import { ForecastData } from "../../../types";
-import { OWMWeatherCondition } from "./common";
+import type { ForecastData } from "../../../types";
+import type { OWMWeatherCondition } from "./common";
 import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
 
 export interface OWMDailyForecastResponse {

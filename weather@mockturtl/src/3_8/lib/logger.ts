@@ -1,4 +1,5 @@
-import { UUID, LogLevel } from "../consts";
+import type { LogLevel } from "../consts";
+import { UUID } from "../consts";
 import { CompareVersion, _ } from "../utils";
 import { FileExists, LoadContents } from "./io_lib";
 

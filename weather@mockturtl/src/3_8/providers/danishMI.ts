@@ -1,8 +1,9 @@
 import { DateTime } from "luxon";
-import { Services } from "../config";
-import { HTTPParams, HttpLib } from "../lib/httpLib";
-import { WeatherApplet } from "../main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import type { Services } from "../config";
+import type { HTTPParams} from "../lib/httpLib";
+import { HttpLib } from "../lib/httpLib";
+import type { WeatherApplet } from "../main";
+import type { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../types";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
@@ -182,7 +183,7 @@ export class DanishMI extends BaseProvider {
 		let resultSymbol: number;
 		// symbols include rain or other stuff, get most severe
 		// exclude foggy from priority symbols
-		if (!!normalizedSymbols.find(x => x > 10 && x != 45))
+		if (normalizedSymbols.find(x => x > 10 && x != 45))
 			resultSymbol = Math.max(...normalizedSymbols);
 		else // get most common if there is no precipitation
 			resultSymbol = <number>mode(normalizedSymbols);

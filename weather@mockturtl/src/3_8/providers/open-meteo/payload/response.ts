@@ -1,8 +1,11 @@
 import { DateTime } from "luxon";
-import { WeatherData } from "../../../types";
-import { OpenMeteoCurrentWeather, OpenMeteoCurrentWeatherToData } from "./current";
-import { OpenMeteoDailyWeather, OpenMeteoDailyWeatherToData } from "./daily";
-import { OpenMeteoHourWeather, OpenMeteoHourWeatherToData } from "./hour";
+import type { WeatherData } from "../../../types";
+import type { OpenMeteoCurrentWeather} from "./current";
+import { OpenMeteoCurrentWeatherToData } from "./current";
+import type { OpenMeteoDailyWeather} from "./daily";
+import { OpenMeteoDailyWeatherToData } from "./daily";
+import type { OpenMeteoHourWeather} from "./hour";
+import { OpenMeteoHourWeatherToData } from "./hour";
 
 export interface OpenMeteoWeatherResponse {
 	latitude: number;

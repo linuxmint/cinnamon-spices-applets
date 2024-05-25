@@ -6,11 +6,11 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { DistanceUnits } from "../config";
+import type { DistanceUnits } from "../config";
 import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
+import type { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
+import type { WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "./BaseProvider";
@@ -153,7 +153,7 @@ export class MetUk extends BaseProvider {
 				cancellable
 			});
 
-			if (!!payload)
+			if (payload)
 				observations.push(payload);
 			else {
 				Logger.Debug("Failed to get observations from " + element.id);

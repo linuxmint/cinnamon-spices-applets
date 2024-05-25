@@ -1,5 +1,5 @@
-import { type DistanceUnits, type WeatherWindSpeedUnits } from "./config";
-import { AlertLevel } from "./types";
+import type { DistanceUnits, WeatherWindSpeedUnits } from "./config";
+import type { AlertLevel } from "./types";
 
 export const UUID = "weather@mockturtl"
 

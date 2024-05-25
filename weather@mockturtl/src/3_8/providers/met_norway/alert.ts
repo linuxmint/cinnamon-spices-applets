@@ -1,7 +1,7 @@
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { PointInsidePolygon } from "../../lib/polygons";
-import { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
+import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
 
 export type METNorwayAlertEvent = "blowingSnow" | "forestFire" | "gale" | "ice" | "icing" | "lightning" | "polarLow" | "rain" | "rainFlood" | "snow" | "stormSurge" | "wind";
 

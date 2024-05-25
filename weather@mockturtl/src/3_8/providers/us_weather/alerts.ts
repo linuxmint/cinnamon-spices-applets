@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { PointInsidePolygon } from "../../lib/polygons";
-import { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
+import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
 
 interface USWeatherAlert {
 	geometry: {
