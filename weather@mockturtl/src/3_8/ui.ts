@@ -13,7 +13,6 @@ import type { DateTime } from "luxon";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { IconType, Label } = imports.gi.St;
-const Lang: typeof imports.lang = imports.lang;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
@@ -85,7 +84,7 @@ export class UI {
 				// Showing hourly weather height calculation only works when it's visible
 				// so we trigger it then, and we need it every time
 				// so element width is set properly based on displayed text
-				this.ShowHourlyWeather(false);
+				void this.ShowHourlyWeather(false);
 				this.menu.close(false);
 				// Open it properly here
 				this.menu.open(true);
@@ -95,13 +94,13 @@ export class UI {
 		else {
 			// Close hourly weather because it should always start closed.
 			if (this.HourlyWeather.Toggled && !this.menu.isOpen)
-				this.HideHourlyWeather(false);
+				void this.HideHourlyWeather(false);
 
 			this.menu.toggle();
 		}
 	}
 
-	public async ToggleHourlyWeather(): Promise<void> {
+	public ToggleHourlyWeather = async (): Promise<void> => {
 		if (this.HourlyWeather.Toggled) {
 			await this.HideHourlyWeather();
 		}
@@ -148,7 +147,7 @@ export class UI {
 		this.noHourlyWeather = !shouldShowToggle;
 		// Hourly weather is not shown, make sure it's closed
 		if (!shouldShowToggle)
-			this.ForceHideHourlyWeather();
+			void this.ForceHideHourlyWeather();
 
 		this.Bar.Display(weather, provider, config, shouldShowToggle);
 		return true;
@@ -163,21 +162,21 @@ export class UI {
 	 * when switching between light and dark themes
 	 * to recolor some of the text
 	 */
-	private OnThemeChanged(): void {
-		this.HideHourlyWeather();
+	private OnThemeChanged = (): void => {
+		void this.HideHourlyWeather();
 		const newThemeIsLight = this.IsLightTheme();
 		// Theme changed between light and dark theme
 		if (newThemeIsLight != this.lightTheme) {
 			this.lightTheme = newThemeIsLight;
 		}
-		this.App.Refresh({rebuild: true});
+		void this.App.Refresh({rebuild: true});
 	}
 
-	private async PopupMenuToggled(caller: unknown, data: boolean) {
+	private PopupMenuToggled = async (caller: unknown, data: boolean) => {
 		// data - true is opened, false is closed
 		if (data == false) {
 			await delay(100); // Closing after popup menu is closed
-			this.HideHourlyWeather();
+			void this.HideHourlyWeather();
 		}
 	}
 
@@ -224,7 +223,7 @@ export class UI {
 		this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
 
 		this.Bar = new UIBar(this.App);
-		this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
+		this.Bar.ToggleClicked.Subscribe(this.ToggleHourlyWeather);
 
 		this.ForecastSeparator = new UISeparator();
 		this.HourlySeparator = new UISeparator();

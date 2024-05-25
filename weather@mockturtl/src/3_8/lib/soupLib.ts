@@ -111,7 +111,8 @@ class Soup3 implements SoupLib {
 						})
 					}
 					catch(e) {
-						Logger.Error("Error reading http request's response: " + e);
+						if (e instanceof Error)
+							Logger.Error("Error reading http request's response: " + e.message, e);
 					}
 					finally {
 						resolve({
@@ -129,20 +130,28 @@ class Soup3 implements SoupLib {
     }
 }
 
+
+interface Soup2Session extends Omit<imports.gi.Soup.Session, "send_async"> {
+	use_thread_context: boolean;
+	send_async: (message: imports.gi.Soup.Message, cancellable: imports.gi.Gio.Cancellable | null, callback: (session: unknown, result: imports.gi.Gio.AsyncResult) => void) => void;
+}
+
 class Soup2 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private readonly _httpSession: any;
+	private readonly _httpSession: Soup2Session;
 
     constructor() {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
         const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 		this._httpSession = new SessionAsync();
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
 		this._httpSession.use_thread_context = true;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
 		this._httpSession.add_feature(new ProxyResolverDefault());
     }
 
@@ -188,7 +197,7 @@ class Soup2 implements SoupLib {
 				}
 
 				Logger.Debug("Sending http request to " + query);
-				this._httpSession.send_async(message, cancellable, async (session: unknown, result: imports.gi.Gio.AsyncResult) => {
+				this._httpSession.send_async(message, finalCancellable, async (session: unknown, result: imports.gi.Gio.AsyncResult) => {
 					if (timeout != null)
 						clearTimeout(timeout);
 
@@ -205,7 +214,8 @@ class Soup2 implements SoupLib {
 						})
 					}
 					catch(e) {
-						Logger.Error("Error reading http request's response: " + e);
+						if (e instanceof Error)
+							Logger.Error("Error reading http request's response: " + e.message, e);
 					}
 
 					resolve({
@@ -238,7 +248,8 @@ class Soup2 implements SoupLib {
 						resolve(stream.read_bytes_finish(read_result));
 					}
 					catch(e) {
-						Logger.Error("Error reading chunk from http request stream: " + e);
+						if (e instanceof Error)
+							Logger.Error("Error reading chunk from http request stream: " + e.message, e);
 						resolve(imports.gi.GLib.Bytes.new());
 					}
 				});
@@ -259,7 +270,7 @@ class Soup2 implements SoupLib {
 				res = chunkAsString;
 			}
 			else {
-				(res as string) += chunkAsString;
+				res += chunkAsString;
 			}
 
 			Logger.Verbose("Reading Next chunk from http request stream.")
@@ -273,5 +284,5 @@ class Soup2 implements SoupLib {
 }
 
 // SessionAsync is a Soup2 class
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
 export const soupLib: SoupLib = (imports.gi.Soup as any).SessionAsync != undefined ? new Soup2() : new Soup3();

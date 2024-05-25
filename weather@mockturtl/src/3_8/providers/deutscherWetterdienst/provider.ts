@@ -184,9 +184,9 @@ export class DeutscherWetterdienst extends BaseProvider {
 
         for (const condition of conditions) {
             if (regularConditions.has(condition))
-                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]!++;
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
             else
-                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]!++;
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
         }
 
         const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;

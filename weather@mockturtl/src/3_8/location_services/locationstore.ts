@@ -65,7 +65,7 @@ export class LocationStore {
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
-			this.app.Refresh();
+			void this.app.Refresh();
 		}
 		this.InvokeStorageChanged();
 	}
@@ -200,7 +200,7 @@ export class LocationStore {
 			return false;
 	}
 
-	public async SaveCurrentLocation(loc: LocationData | null): Promise<void> {
+	public SaveCurrentLocation(loc: LocationData | null): void {
 		// if (this.app.Locked()) {
 		// 	NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
 		// 	return;

@@ -83,7 +83,7 @@ export class WeatherApplet extends TextIconApplet {
 			// vertical panel not supported
 		}
 
-		this.loop.Start();
+		void this.loop.Start();
 		// We need a full rebuild and refresh for these
 		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
 
@@ -200,7 +200,7 @@ export class WeatherApplet extends TextIconApplet {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+				Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			return RefreshState.Error;
 		}
@@ -307,7 +307,7 @@ export class WeatherApplet extends TextIconApplet {
 	// ----------------------------------------------------------------------------
 	// Config Callbacks, do not delete
 
-	private async locationLookup(): Promise<void> {
+	private locationLookup(): void {
 		const command = "xdg-open ";
 		spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
 	}
@@ -346,8 +346,8 @@ The contents of the file saved from the applet help page goes here
 		spawnCommandLine(`${command} ${finalUrl}`);
 	}
 
-	private async saveCurrentLocation(): Promise<void> {
-		this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+	private saveCurrentLocation(): void {
+		void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
 	}
 
 	public saveLog = async(): Promise<void> => {
@@ -408,7 +408,7 @@ The contents of the file saved from the applet help page goes here
 			const weatherData = this.CurrentData;
 			if (weatherData == null)
 				return;
-			callback(owner, data, weatherData);
+			void callback(owner, data, weatherData);
 		}
 	}
 

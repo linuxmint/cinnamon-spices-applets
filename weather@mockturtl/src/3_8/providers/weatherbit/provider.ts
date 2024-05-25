@@ -15,6 +15,9 @@ import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { Config } from "../../config";
 import type { WeatherbitAlertsResponse } from "./alerts";
+import type { WeatherBitCurrentWeatherData } from "./current";
+import type { WeatherBitDailyWeatherDataResponse } from "./daily";
+import type { WeatherBitHourlyWeatherDataResponse } from "./hourly";
 
 export class Weatherbit extends BaseProvider {
 
@@ -51,10 +54,10 @@ export class Weatherbit extends BaseProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
-		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable) as Promise<ForecastData[]>;
+		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
 		let hourlyPromise = null;
 		if (this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
-		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable) as WeatherData;
+		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable);
 		if (!currentResult) return null;
 
 		const forecastResult = await forecastPromise;
@@ -101,20 +104,18 @@ export class Weatherbit extends BaseProvider {
 		if (query == null)
 			return null;
 
-		// TODO: Add type for json
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const json = await HttpLib.Instance.LoadJsonSimple<any>({
+		const json = await HttpLib.Instance.LoadJsonSimple<WeatherBitHourlyWeatherDataResponse | { error: string }>({
 			url: query,
 			cancellable,
 			HandleError: (e) => this.HandleHourlyError(e)
 		});
 
-		if (json?.error) {
-			return null;
-		}
-
 		if (json == null)
 			return null;
+
+		if ("error" in json) {
+			return null;
+		}
 
 		return this.ParseHourlyForecast(json);
 	};
@@ -148,10 +149,8 @@ export class Weatherbit extends BaseProvider {
 		return alerts;
 	}
 
-	// TODO: Add type for json
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private ParseCurrent = (json: any): WeatherData | null => {
-		json = json.data[0];
+	private ParseCurrent = (payload: WeatherBitCurrentWeatherData): WeatherData | null => {
+		const json = payload.data[0];
 		const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
 		if (hourDiff != 0) Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
 		try {
@@ -195,15 +194,13 @@ export class Weatherbit extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Weatherbit Weather Parsing error: " + e, e);
+				Logger.Error("Weatherbit Weather Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
 
-	// TODO: Add type for json
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private ParseForecast = (json: any): ForecastData[] | null => {
+	private ParseForecast = (json: WeatherBitDailyWeatherDataResponse): ForecastData[] | null => {
 		const forecasts: ForecastData[] = [];
 		try {
 			for (const day of json.data) {
@@ -224,18 +221,16 @@ export class Weatherbit extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+				Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
 
-	// TODO: Add type for json
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private ParseHourlyForecast = (json: any): HourlyForecastData[] | null => {
+	private ParseHourlyForecast = (json: WeatherBitHourlyWeatherDataResponse): HourlyForecastData[] | null => {
 		const forecasts: HourlyForecastData[] = [];
 		try {
-			for (const hour of json.data.length) {
+			for (const hour of json.data) {
 				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
 					temp: hour.temp,
@@ -261,7 +256,7 @@ export class Weatherbit extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+				Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}

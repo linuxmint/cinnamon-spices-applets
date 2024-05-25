@@ -198,7 +198,7 @@ export class WeatherLoop {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Error in Main loop: " + e, e);
+				Logger.Error("Error in Main loop: " + e.message, e);
 		}
 		finally {
 			this.refreshingResolver?.();
@@ -220,7 +220,7 @@ export class WeatherLoop {
 
 	public Resume(): void {
 		this.pauseRefresh = false;
-		this.DoCheck({immediate: true});
+		void this.DoCheck({immediate: true});
 	}
 
 	/**

@@ -18,7 +18,7 @@ export interface LoadAsyncOptions<T = unknown> extends SoupLibSendOptions {
 export class HttpLib {
 	private static instance: HttpLib;
 	/** Single instance of log */
-	public static get Instance() {
+	public static get Instance(): HttpLib {
 		if (this.instance == null)
 			this.instance = new HttpLib();
 		return this.instance;

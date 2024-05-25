@@ -259,7 +259,7 @@ export class WeatherUnderground extends BaseProvider {
         let observation: ObservationPayload | null = null;
         if (observationString != null) {
             try {
-                observation = JSON.parse(observationString);
+                observation = JSON.parse(observationString) as ObservationPayload;
             }
             catch {
                 Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
@@ -837,7 +837,7 @@ interface DayPartData {
      * - 8 to 10 = Very High,
      * - 11 to 16 = Extreme
  */
-    uvDescription: ("High" | "Low" | "Moderate" | "Not Available" | "Not Available" | "Very High" | "Extreme" | null)[];
+    uvDescription: ("High" | "Low" | "Moderate" | "Not Available" | "Very High" | "Extreme" | null)[];
     /** Maximum UV index for the 12 hour forecast period. */
     uvIndex: (number | null)[];
     /** Average wind direction in magnetic notation. */

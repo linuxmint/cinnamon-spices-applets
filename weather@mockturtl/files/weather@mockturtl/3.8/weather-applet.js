@@ -9873,7 +9873,7 @@ class LocationStore {
         this.locations = [...locs, ...tmp];
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
-            this.app.Refresh();
+            void this.app.Refresh();
         }
         this.InvokeStorageChanged();
     }
@@ -9975,7 +9975,7 @@ class LocationStore {
         else
             return false;
     }
-    async SaveCurrentLocation(loc) {
+    SaveCurrentLocation(loc) {
         if (loc == null) {
             NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
             return;
@@ -10092,7 +10092,8 @@ class Soup3 {
                         });
                     }
                     catch (e) {
-                        logger_Logger.Error("Error reading http request's response: " + e);
+                        if (e instanceof Error)
+                            logger_Logger.Error("Error reading http request's response: " + e.message, e);
                     }
                     finally {
                         resolve({
@@ -10139,7 +10140,7 @@ class Soup2 {
                     timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
                 }
                 logger_Logger.Debug("Sending http request to " + query);
-                this._httpSession.send_async(message, cancellable, async (session, result) => {
+                this._httpSession.send_async(message, finalCancellable, async (session, result) => {
                     if (timeout != null)
                         clearTimeout(timeout);
                     const headers = {};
@@ -10155,7 +10156,8 @@ class Soup2 {
                         });
                     }
                     catch (e) {
-                        logger_Logger.Error("Error reading http request's response: " + e);
+                        if (e instanceof Error)
+                            logger_Logger.Error("Error reading http request's response: " + e.message, e);
                     }
                     resolve({
                         reason_phrase: message.reason_phrase,
@@ -10182,7 +10184,8 @@ class Soup2 {
                         resolve(stream.read_bytes_finish(read_result));
                     }
                     catch (e) {
-                        logger_Logger.Error("Error reading chunk from http request stream: " + e);
+                        if (e instanceof Error)
+                            logger_Logger.Error("Error reading chunk from http request stream: " + e.message, e);
                         resolve(imports.gi.GLib.Bytes.new());
                     }
                 });
@@ -10459,7 +10462,7 @@ class MetUk extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -10493,7 +10496,7 @@ class MetUk extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -10678,7 +10681,7 @@ class MetUk extends BaseProvider {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("Met UK Weather Parsing error: " + e, e);
+                logger_Logger.Error("Met UK Weather Parsing error: " + e.message, e);
             this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
@@ -12279,8 +12282,8 @@ class Weatherbit extends BaseProvider {
             }
             return alerts;
         };
-        this.ParseCurrent = (json) => {
-            json = json.data[0];
+        this.ParseCurrent = (payload) => {
+            const json = payload.data[0];
             const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
             if (hourDiff != 0)
                 logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
@@ -12323,7 +12326,7 @@ class Weatherbit extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
+                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
                 return null;
             }
@@ -12349,7 +12352,7 @@ class Weatherbit extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -12357,7 +12360,7 @@ class Weatherbit extends BaseProvider {
         this.ParseHourlyForecast = (json) => {
             const forecasts = [];
             try {
-                for (const hour of json.data.length) {
+                for (const hour of json.data) {
                     const forecast = {
                         date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
                         temp: hour.temp,
@@ -12383,7 +12386,7 @@ class Weatherbit extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -12436,11 +12439,11 @@ class Weatherbit extends BaseProvider {
             cancellable,
             HandleError: (e) => this.HandleHourlyError(e)
         });
-        if (json === null || json === void 0 ? void 0 : json.error) {
-            return null;
-        }
         if (json == null)
             return null;
+        if ("error" in json) {
+            return null;
+        }
         return this.ParseHourlyForecast(json);
     }
     ;
@@ -13337,7 +13340,7 @@ class USWeather extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("US Weather Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -13358,7 +13361,7 @@ class USWeather extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
                 return null;
             }
@@ -13558,7 +13561,7 @@ class USWeather extends BaseProvider {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("US Weather Parsing error: " + e, e);
+                logger_Logger.Error("US Weather Parsing error: " + e.message, e);
             this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
@@ -16070,7 +16073,7 @@ class PirateWeather extends BaseProvider {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("Pirate Weather payload parsing error: " + e, e);
+                logger_Logger.Error("Pirate Weather payload parsing error: " + e.message, e);
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -16321,7 +16324,8 @@ class GeoIPFedora {
             return result;
         }
         catch (e) {
-            logger_Logger.Error("geoip.fedoraproject parsing error: " + e);
+            if (e instanceof Error)
+                logger_Logger.Error("geoip.fedoraproject parsing error: " + e.message, e);
             this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return null;
         }
@@ -16801,7 +16805,6 @@ class OpenWeatherMapOpen extends BaseProvider {
 const { get_home_dir: config_get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
@@ -16881,7 +16884,7 @@ class Config {
         this.timezone = undefined;
         this.OnKeySettingsUpdated = () => {
             if (this.keybinding != null) {
-                keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+                keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked());
             }
         };
         this.onLogLevelUpdated = () => {
@@ -16891,14 +16894,19 @@ class Config {
             logger_Logger.Debug("User changed location, waiting 3 seconds...");
             if (this.doneTypingLocation != null)
                 utils_clearTimeout(this.doneTypingLocation);
-            this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+            this.doneTypingLocation = utils_setTimeout(this.DoneTypingLocation, 3000);
         };
         this.OnLocationStoreChanged = () => {
             this.LocStore.OnLocationChanged(this._locationList);
         };
         this.OnFontChanged = () => {
             this.currentFontSize = this.GetCurrentFontSize();
-            this.app.Refresh({ rebuild: true });
+            void this.app.Refresh({ rebuild: true });
+        };
+        this.DoneTypingLocation = () => {
+            logger_Logger.Debug("User has finished typing, beginning refresh");
+            this.doneTypingLocation = null;
+            void this.app.Refresh();
         };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
@@ -17064,11 +17072,6 @@ class Config {
         this.currentLocation = loc;
         if (switchToManual == true)
             this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
-    }
-    DoneTypingLocation() {
-        logger_Logger.Debug("User has finished typing, beginning refresh");
-        this.doneTypingLocation = null;
-        this.app.Refresh();
     }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
@@ -17424,7 +17427,7 @@ class WeatherLoop {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Error in Main loop: " + e, e);
+                    logger_Logger.Error("Error in Main loop: " + e.message, e);
             }
             finally {
                 (_b = this.refreshingResolver) === null || _b === void 0 ? void 0 : _b.call(this);
@@ -17463,7 +17466,7 @@ class WeatherLoop {
     }
     Resume() {
         this.pauseRefresh = false;
-        this.DoCheck({ immediate: true });
+        void this.DoCheck({ immediate: true });
     }
     async Refresh(options) {
         this.pauseRefresh = false;
@@ -17647,7 +17650,7 @@ class SunTimesUI {
         return this.app.config;
     }
     constructor(app) {
-        this.OnConfigChanged = async (config, showSunrise, data) => {
+        this.OnConfigChanged = (config, showSunrise, data) => {
             this.Display(data.sunrise, data.sunset, data.location.timeZone);
         };
         this.app = app;
@@ -17779,7 +17782,6 @@ class WindBox {
 
 
 const { BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Label: uiCurrentWeather_Label, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
-const uiCurrentWeather_Lang = imports.lang;
 const { ActorAlign: uiCurrentWeather_ActorAlign } = imports.gi.Clutter;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
 const STYLE_SUMMARY = 'weather-current-summary';
@@ -17791,9 +17793,17 @@ const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 class CurrentWeather {
     constructor(app) {
-        this.OnLocationOverrideChanged = async (config, label, data) => {
+        this.OnLocationOverrideChanged = (config, label, data) => {
             const location = GenerateLocationText(data, config);
             this.SetLocation(location, data.location.url);
+        };
+        this.NextLocationClicked = () => {
+            const loc = this.app.config.SwitchToNextLocation();
+            void this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
+        };
+        this.PreviousLocationClicked = () => {
+            const loc = this.app.config.SwitchToPreviousLocation();
+            void this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
         };
         this.app = app;
         this.actor = new uiCurrentWeather_BoxLayout({
@@ -17832,7 +17842,7 @@ class CurrentWeather {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("DisplayWeatherError: " + e, e);
+                logger_Logger.Error("DisplayWeatherError: " + e.message, e);
             return false;
         }
     }
@@ -17908,7 +17918,7 @@ class CurrentWeather {
         this.location = this.locationButton.actor;
         this.location.connect(SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
-                this.app.Refresh({ rebuild: true });
+                void this.app.Refresh({ rebuild: true });
             else if (this.locationButton.url == null)
                 return;
             else
@@ -17924,7 +17934,7 @@ class CurrentWeather {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this.nextLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.NextLocationClicked));
+        this.nextLocationButton.actor.connect(SIGNAL_CLICKED, this.NextLocationClicked);
         this.previousLocationButton = new WeatherButton({
             reactive: true,
             can_focus: true,
@@ -17935,7 +17945,7 @@ class CurrentWeather {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this.previousLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.PreviousLocationClicked));
+        this.previousLocationButton.actor.connect(SIGNAL_CLICKED, this.PreviousLocationClicked);
         const box = new uiCurrentWeather_BoxLayout();
         box.add(this.previousLocationButton.actor, { x_fill: false, x_align: uiCurrentWeather_Align.START, y_align: uiCurrentWeather_Align.MIDDLE, expand: false });
         box.add(this.location, { x_fill: true, expand: true });
@@ -18047,14 +18057,6 @@ class CurrentWeather {
         else
             this.locationButton.url = url;
     }
-    NextLocationClicked() {
-        const loc = this.app.config.SwitchToNextLocation();
-        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
-    }
-    PreviousLocationClicked() {
-        const loc = this.app.config.SwitchToPreviousLocation();
-        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
-    }
     onLocationStorageChanged(sender, itemCount) {
         logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         if (this.app.config.LocStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
@@ -18094,10 +18096,10 @@ class UIForecasts {
     constructor(app) {
         this.DayClicked = new Event();
         this.DayHovered = new Event();
-        this.OnConfigChanged = async (config, showForecastDates, data) => {
+        this.OnConfigChanged = (config, showForecastDates, data) => {
             this.Display(data, config);
         };
-        this.OnForecastDaysChanged = async (config, forecastDays, data) => {
+        this.OnForecastDaysChanged = (config, forecastDays, data) => {
             if (config.textColorStyle == null)
                 return;
             this.Rebuild(config, config.textColorStyle);
@@ -18173,7 +18175,7 @@ class UIForecasts {
                 userError: false
             });
             if (e instanceof Error)
-                logger_Logger.Error("DisplayForecastError: " + e, e);
+                logger_Logger.Error("DisplayForecastError: " + e.message, e);
             return false;
         }
     }
@@ -18860,7 +18862,6 @@ class UISeparator {
 
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { IconType: ui_IconType, Label: ui_Label } = imports.gi.St;
-const ui_Lang = imports.lang;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
@@ -18876,6 +18877,28 @@ class UI {
             if (this.App.Provider == null)
                 return;
             this.Display(data, config, this.App.Provider);
+        };
+        this.ToggleHourlyWeather = async () => {
+            if (this.HourlyWeather.Toggled) {
+                await this.HideHourlyWeather();
+            }
+            else {
+                await this.ShowHourlyWeather();
+            }
+        };
+        this.OnThemeChanged = () => {
+            void this.HideHourlyWeather();
+            const newThemeIsLight = this.IsLightTheme();
+            if (newThemeIsLight != this.lightTheme) {
+                this.lightTheme = newThemeIsLight;
+            }
+            void this.App.Refresh({ rebuild: true });
+        };
+        this.PopupMenuToggled = async (caller, data) => {
+            if (data == false) {
+                await delay(100);
+                void this.HideHourlyWeather();
+            }
         };
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
@@ -18897,23 +18920,15 @@ class UI {
             }
             else {
                 this.menu.open(false);
-                this.ShowHourlyWeather(false);
+                void this.ShowHourlyWeather(false);
                 this.menu.close(false);
                 this.menu.open(true);
             }
         }
         else {
             if (this.HourlyWeather.Toggled && !this.menu.isOpen)
-                this.HideHourlyWeather(false);
+                void this.HideHourlyWeather(false);
             this.menu.toggle();
-        }
-    }
-    async ToggleHourlyWeather() {
-        if (this.HourlyWeather.Toggled) {
-            await this.HideHourlyWeather();
-        }
-        else {
-            await this.ShowHourlyWeather();
         }
     }
     Rebuild(config) {
@@ -18941,23 +18956,9 @@ class UI {
         const shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
         this.noHourlyWeather = !shouldShowToggle;
         if (!shouldShowToggle)
-            this.ForceHideHourlyWeather();
+            void this.ForceHideHourlyWeather();
         this.Bar.Display(weather, provider, config, shouldShowToggle);
         return true;
-    }
-    OnThemeChanged() {
-        this.HideHourlyWeather();
-        const newThemeIsLight = this.IsLightTheme();
-        if (newThemeIsLight != this.lightTheme) {
-            this.lightTheme = newThemeIsLight;
-        }
-        this.App.Refresh({ rebuild: true });
-    }
-    async PopupMenuToggled(caller, data) {
-        if (data == false) {
-            await delay(100);
-            this.HideHourlyWeather();
-        }
     }
     IsLightTheme() {
         const color = this.menu.actor.get_theme_node().get_color("color");
@@ -18982,7 +18983,7 @@ class UI {
         this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
         this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
         this.Bar = new UIBar(this.App);
-        this.Bar.ToggleClicked.Subscribe(ui_Lang.bind(this, this.ToggleHourlyWeather));
+        this.Bar.ToggleClicked.Subscribe(this.ToggleHourlyWeather);
         this.ForecastSeparator = new UISeparator();
         this.HourlySeparator = new UISeparator();
         this.BarSeparator = new UISeparator();
@@ -19132,7 +19133,7 @@ class WeatherApplet extends TextIconApplet {
                 const weatherData = this.CurrentData;
                 if (weatherData == null)
                     return;
-                callback(owner, data, weatherData);
+                void callback(owner, data, weatherData);
             };
         };
         this.errMsg = {
@@ -19172,7 +19173,7 @@ class WeatherApplet extends TextIconApplet {
         }
         catch (_a) {
         }
-        this.loop.Start();
+        void this.loop.Start();
         this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
         this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -19232,7 +19233,7 @@ class WeatherApplet extends TextIconApplet {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+                logger_Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             return RefreshState.Error;
         }
@@ -19308,7 +19309,7 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async locationLookup() {
+    locationLookup() {
         const command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
@@ -19340,8 +19341,8 @@ The contents of the file saved from the applet help page goes here
         const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[#()]/g, "");
         spawnCommandLine(`${command} ${finalUrl}`);
     }
-    async saveCurrentLocation() {
-        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+    saveCurrentLocation() {
+        void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;

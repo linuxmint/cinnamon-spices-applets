@@ -48,7 +48,8 @@ export class GeoIPFedora implements GeoIP {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("geoip.fedoraproject parsing error: " + e);
+			if (e instanceof Error)
+				Logger.Error("geoip.fedoraproject parsing error: " + e.message, e);
 			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
 			return null;
 		}

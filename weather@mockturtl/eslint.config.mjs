@@ -5,12 +5,17 @@ import unicorn from "eslint-plugin-unicorn";
 
 export default teslint.config(
     eslint.configs.recommended,
+    ...teslint.configs.recommendedTypeChecked,
     ...teslint.configs.strict,
     {
         languageOptions: {
             parserOptions: {
-            }
+                project: true,
+                tsconfigRootDir: import.meta.dirname,
+            },
         },
+    },
+    {
         plugins: {
             unicorn
         },
@@ -60,12 +65,12 @@ export default teslint.config(
                     allowHigherOrderFunctions: true,
                 }
             ],
-            // "@typescript-eslint/no-misused-promises": [
-            //     "error",
-            //     {
-            //       "checksVoidReturn": false
-            //     }
-            // ],
+            "@typescript-eslint/no-misused-promises": [
+                "error",
+                {
+                    "checksVoidReturn": false
+                }
+            ],
 
             "unicorn/no-empty-file": "error",
             "unicorn/prefer-number-properties": "error",

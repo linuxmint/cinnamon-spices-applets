@@ -11,7 +11,6 @@ import { SunTimesUI } from "./uiSunTimes";
 import { WindBox } from "./windBox";
 
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
-const Lang: typeof imports.lang = imports.lang;
 const { ActorAlign } = imports.gi.Clutter;
 
 // stylesheet.css
@@ -76,7 +75,7 @@ export class CurrentWeather {
 		this.app.config.PressureUnitChanged.Subscribe(this.app.AfterRefresh((config, pressure, data) => this.SetPressure(data.pressure)));
 	}
 
-	private OnLocationOverrideChanged = async (config: Config, label: string, data: WeatherData) => {
+	private OnLocationOverrideChanged = (config: Config, label: string, data: WeatherData) => {
 		const location = GenerateLocationText(data, config);
 		this.SetLocation(location, data.location.url);
 	}
@@ -104,7 +103,7 @@ export class CurrentWeather {
 			return true;
 		} catch (e) {
 			if (e instanceof Error)
-				Logger.Error("DisplayWeatherError: " + e, e);
+				Logger.Error("DisplayWeatherError: " + e.message, e);
 			return false;
 		}
 	};
@@ -200,7 +199,7 @@ export class CurrentWeather {
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
 			if (this.app.encounteredError)
-				this.app.Refresh({rebuild: true});
+				void this.app.Refresh({rebuild: true});
 			else if (this.locationButton.url == null)
 				return;
 			else
@@ -217,7 +216,7 @@ export class CurrentWeather {
 				style_class: STYLE_LOCATION_SELECTOR
 			}),
 		});
-		this.nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.NextLocationClicked));
+		this.nextLocationButton.actor.connect(SIGNAL_CLICKED, this.NextLocationClicked);
 
 		this.previousLocationButton = new WeatherButton({
 			reactive: true,
@@ -229,7 +228,7 @@ export class CurrentWeather {
 				style_class: STYLE_LOCATION_SELECTOR
 			}),
 		});
-		this.previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
+		this.previousLocationButton.actor.connect(SIGNAL_CLICKED, this.PreviousLocationClicked);
 
 		const box = new BoxLayout();
 		box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
@@ -362,14 +361,14 @@ export class CurrentWeather {
 
 	// Callbacks
 
-	private NextLocationClicked() {
+	private NextLocationClicked = () => {
 		const loc = this.app.config.SwitchToNextLocation();
-		this.app.Refresh({location: loc ?? undefined});
+		void this.app.Refresh({location: loc ?? undefined});
 	}
 
-	private PreviousLocationClicked() {
+	private PreviousLocationClicked = () => {
 		const loc = this.app.config.SwitchToPreviousLocation();
-		this.app.Refresh({location: loc ?? undefined});
+		void this.app.Refresh({location: loc ?? undefined});
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {

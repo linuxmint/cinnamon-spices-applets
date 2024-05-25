@@ -118,7 +118,7 @@ export class MetUk extends BaseProvider {
 
 	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
 		// TODO: Add type definition
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
 		const observationSiteList = await HttpLib.Instance.LoadJsonSimple<any>({
 			url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
 			cancellable
@@ -272,7 +272,7 @@ export class MetUk extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Met UK Weather Parsing error: " + e, e);
+				Logger.Error("Met UK Weather Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -301,7 +301,7 @@ export class MetUk extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("MET UK Forecast Parsing error: " + e, e);
+				Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -341,7 +341,7 @@ export class MetUk extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("MET UK Forecast Parsing error: " + e, e);
+				Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}

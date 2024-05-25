@@ -31,7 +31,6 @@ import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
@@ -452,7 +451,7 @@ export class Config {
 			keybindingManager.addHotKey(
 				UUID,
 				this.keybinding,
-				Lang.bind(this.app, this.app.on_applet_clicked)
+				() => this.app.on_applet_clicked()
 			);
 		}
 	}
@@ -465,7 +464,7 @@ export class Config {
 	private OnLocationChanged = () => {
 		Logger.Debug("User changed location, waiting 3 seconds...");
 		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
-		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+		this.doneTypingLocation = setTimeout(this.DoneTypingLocation, 3000);
 	}
 
 	private OnLocationStoreChanged = () => {
@@ -474,14 +473,14 @@ export class Config {
 
 	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.app.Refresh({ rebuild: true});
+		void this.app.Refresh({ rebuild: true});
 	}
 
 	/** Called when 3 seconds is up with no change in location */
-	private DoneTypingLocation() {
+	private DoneTypingLocation = () => {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.Refresh();
+		void this.app.Refresh();
 	}
 
 	private SetLocation(value: string) {
@@ -577,7 +576,7 @@ export class Config {
 			);
 		}
 
-		const conf = JSON.parse(confString);
+		const conf = JSON.parse(confString) as Record<string, any>;
 		if (conf?.apiKey?.value != null)
 			conf.apiKey.value = "REDACTED";
 

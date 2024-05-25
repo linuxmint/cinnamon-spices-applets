@@ -173,7 +173,7 @@ export class PirateWeather extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Pirate Weather payload parsing error: " + e, e)
+				Logger.Error("Pirate Weather payload parsing error: " + e.message, e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}

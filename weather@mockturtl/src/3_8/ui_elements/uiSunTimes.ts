@@ -30,7 +30,7 @@ export class SunTimesUI {
 	private sunriseLabel!: imports.gi.St.Label;
 	private sunsetLabel!: imports.gi.St.Label;
 
-    private OnConfigChanged = async (config: Config, showSunrise: boolean, data: WeatherData) => {
+    private OnConfigChanged = (config: Config, showSunrise: boolean, data: WeatherData) => {
         this.Display(data.sunrise, data.sunset, data.location.timeZone);
     }
 

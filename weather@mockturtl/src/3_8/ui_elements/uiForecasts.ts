@@ -47,11 +47,11 @@ export class UIForecasts {
 		this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
 	}
 
-	private OnConfigChanged = async (config: Config, showForecastDates: boolean, data: WeatherData) => {
+	private OnConfigChanged = (config: Config, showForecastDates: boolean, data: WeatherData) => {
 		this.Display(data, config);
 	}
 
-	private OnForecastDaysChanged = async (config: Config, forecastDays: number, data: WeatherData) => {
+	private OnForecastDaysChanged = (config: Config, forecastDays: number, data: WeatherData) => {
 		if (config.textColorStyle == null)
 			return;
 		this.Rebuild(config, config.textColorStyle);
@@ -137,7 +137,7 @@ export class UIForecasts {
 				userError: false
 			})
 			if (e instanceof Error)
-				Logger.Error("DisplayForecastError: " + e, e);
+				Logger.Error("DisplayForecastError: " + e.message, e);
 			return false;
 		}
 	};

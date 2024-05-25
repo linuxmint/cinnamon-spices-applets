@@ -126,7 +126,7 @@ function EventToIcon(event: METNorwayAlertEvent): BuiltinIcons | CustomIcons | u
 		case "wind":
 			return "strong-wind-symbolic";
 		default:
-			Logger.Info(`Unknown MET Norway event type: ${event}`);
+			Logger.Info(`Unknown MET Norway event type: ${event as string}`);
 			return undefined;
 	}
 }
