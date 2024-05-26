@@ -27,6 +27,7 @@ import { GeoClue } from "./location_services/geoip_services/geoclue";
 import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
 import { OpenMeteo } from "./providers/open-meteo/provider";
 import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
+import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -35,6 +36,14 @@ const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings } = imports.gi.Gio;
+
+type SettingsSchema = typeof settingsSchema;
+
+type SettingsSchemaWithValues = {
+	[key in keyof SettingsSchema]: SettingsSchema[key] & {
+		value: SettingsSchema[key] extends { columns: unknown[] } ? Record<string, unknown>[] : unknown;
+	}
+}
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
@@ -557,8 +566,8 @@ export class Config {
 		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
 		// Check if file exists
-		if (!await FileExists(configFile)) {
-			if (!await FileExists(oldConfigFile)) {
+		if (!FileExists(configFile)) {
+			if (!FileExists(oldConfigFile)) {
 				throw new Error(
 					_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` })
 				);
@@ -576,7 +585,7 @@ export class Config {
 			);
 		}
 
-		const conf = JSON.parse(confString) as Record<string, any>;
+		const conf = JSON.parse(confString) as SettingsSchemaWithValues;
 		if (conf?.apiKey?.value != null)
 			conf.apiKey.value = "REDACTED";
 

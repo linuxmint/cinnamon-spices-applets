@@ -13,7 +13,7 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 		return response as TypedFailResponse;
 
 	try {
-		response.Data = JSON.parse(response.Data);
+		response.Data = JSON.parse(response.Data) as never;
 		return response as TypedResponse<TData>;
 	}
 	catch (e) {

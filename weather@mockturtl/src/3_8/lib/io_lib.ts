@@ -27,7 +27,7 @@ export async function GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi
 	});
 }
 
-export async function FileExists(file: imports.gi.Gio.File): Promise<boolean> {
+export function FileExists(file: imports.gi.Gio.File): boolean {
 	try {
 		return file.query_exists(null);
 		/*// fileInfo doesn't work, don't use for now

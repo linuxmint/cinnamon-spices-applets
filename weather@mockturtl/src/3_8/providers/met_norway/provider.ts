@@ -617,7 +617,7 @@ export class MetNorway extends BaseProvider {
 					icons: ["weather-snow-scattered", "weather-snow"]
 				}
 			default:
-				Logger.Error("condition code not found: " + weather.condition);
+				Logger.Error("condition code not found: " + (weather.condition as string));
 				return {
 					customIcon: "cloud-refresh-symbolic",
 					main: _("Unknown"),

@@ -9505,7 +9505,7 @@ async function GetFileInfo(file) {
         });
     });
 }
-async function FileExists(file) {
+function FileExists(file) {
     try {
         return file.query_exists(null);
     }
@@ -9744,7 +9744,7 @@ class Log {
             }
         }
         const logFile = File.new_for_path(logFilePath);
-        if (!await FileExists(logFile)) {
+        if (!FileExists(logFile)) {
             throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
         }
         const logs = await LoadContents(logFile);
@@ -10247,25 +10247,35 @@ class HttpLib {
     async LoadJsonAsync(options) {
         const { HandleError } = options, rest = __rest(options, ["HandleError"]);
         const response = await this.LoadAsync(Object.assign(Object.assign({}, rest), { HandleError: () => false }));
+        const result = Object.assign(Object.assign({}, response), { Data: null });
         try {
             const payload = JSON.parse(response.Data);
-            response.Data = payload;
+            result.Data = payload;
+            return result;
         }
         catch (e) {
-            if (response.Success) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-                response.Success = false;
-                response.ErrorData = {
+            if (e instanceof Error)
+                logger_Logger.Error("Error: API response is not JSON. The response: " + result.Data, e);
+            if (!result.Success)
+                return result;
+            return {
+                Data: null,
+                ResponseHeaders: response.ResponseHeaders,
+                Success: false,
+                ErrorData: {
                     code: -1,
                     message: "bad api response - non json",
                     reason_phrase: "",
-                };
+                }
+            };
+        }
+        finally {
+            global.log("Called");
+            if (!result.Success && (!HandleError || HandleError(result))) {
+                global.log("Unhandlederror");
+                this.UnhandledError.Invoke(this, result.ErrorData);
             }
         }
-        if (!response.Success && (!HandleError || HandleError(response)))
-            this.UnhandledError.Invoke(this, response.ErrorData);
-        return response;
     }
     async LoadAsyncSimple(options) {
         const response = await this.LoadAsync(options);
@@ -10389,14 +10399,18 @@ class GeoLocation {
         if (locationData.address == null)
             return locationData.display_name;
         const entryText = [];
-        for (const key in locationData.address) {
+        let key;
+        for (key in locationData.address) {
             if (key == "state_district")
                 continue;
             if (key == "county")
                 continue;
             if (key == "country_code")
                 continue;
-            entryText.push(locationData.address[key]);
+            const value = locationData.address[key];
+            if (value == null)
+                continue;
+            entryText.push(value);
         }
         return entryText.join(", ");
     }
@@ -11383,17 +11397,42 @@ class OpenWeatherMapOneCall extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.base_url = "https://api.openweathermap.org/data/3.0/onecall";
         this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
-        this.HandleError = (error) => {
-            if (error.ErrorData.code == 404) {
-                this.app.ShowError({
-                    detail: "location not found",
-                    message: _("Location not found, make sure location is available or it is in the correct format"),
-                    userError: true,
-                    type: "hard"
-                });
-                return false;
+        this.HandleError = (response) => {
+            if (!this.HasReturnedError(response.Data))
+                return true;
+            const errorMsg = "OpenWeatherMap Response: ";
+            const error = {
+                service: "openweathermap",
+                type: "hard",
+            };
+            const errorPayload = response.Data;
+            switch (errorPayload.cod) {
+                case 400:
+                    error.detail = "bad location format";
+                    error.message = _("Please make sure Location is in the correct format in the Settings");
+                    break;
+                case 401:
+                    error.detail = "bad key";
+                    error.message = _("Make sure you entered the correct key in settings");
+                    break;
+                case 404:
+                    error.detail = "location not found";
+                    error.message = _("Location not found, make sure location is available or it is in the correct format");
+                    break;
+                case 429:
+                    error.detail = "key blocked";
+                    error.message = _("If this problem persists, please contact the Author of this applet");
+                    break;
+                default:
+                    error.detail = "unknown";
+                    error.message = _("Unknown Error, please see the logs in Looking Glass");
+                    break;
             }
-            return true;
+            ;
+            this.app.ShowError(error);
+            logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+            logger_Logger.Error(errorMsg + errorPayload.message);
+            return false;
         };
     }
     async GetWeather(loc, cancellable, config) {
@@ -11406,13 +11445,11 @@ class OpenWeatherMapOneCall extends BaseProvider {
                 params: params,
                 HandleError: this.HandleError
             }),
-            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params }) : Promise.resolve()
+            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params, HandleError: this.HandleError }) : Promise.resolve()
         ]);
         if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
             IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
         if (!json)
-            return null;
-        if (this.HadErrors(json))
             return null;
         json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
         return OWMOneCallToWeatherData(json);
@@ -11429,44 +11466,6 @@ class OpenWeatherMapOneCall extends BaseProvider {
             params.lang = locale;
         }
         return params;
-    }
-    ;
-    HadErrors(json) {
-        if (!this.HasReturnedError(json))
-            return false;
-        const errorMsg = "OpenWeatherMap Response: ";
-        const error = {
-            service: "openweathermap",
-            type: "hard",
-        };
-        const errorPayload = json;
-        switch (errorPayload.cod) {
-            case ("400"):
-                error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
-                break;
-            case ("401"):
-                error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
-                break;
-            case ("404"):
-                error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
-                break;
-            case ("429"):
-                error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
-                break;
-            default:
-                error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
-                break;
-        }
-        ;
-        this.app.ShowError(error);
-        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
-        logger_Logger.Error(errorMsg + errorPayload.message);
-        return true;
     }
     ;
     HasReturnedError(json) {
@@ -17136,8 +17135,8 @@ class Config {
         const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
         let configFile = config_File.new_for_path(configFilePath);
         const oldConfigFile = config_File.new_for_path(oldConfigFilePath);
-        if (!await FileExists(configFile)) {
-            if (!await FileExists(oldConfigFile)) {
+        if (!FileExists(configFile)) {
+            if (!FileExists(oldConfigFile)) {
                 throw new Error(_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` }));
             }
             configFile = oldConfigFile;

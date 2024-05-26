@@ -25,7 +25,7 @@ export class IpApi implements GeoIP {
 	}
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
-		const json = await HttpLib.Instance.LoadJsonSimple<IpApiPayload>({ url: this.query, cancellable });
+		const json = await HttpLib.Instance.LoadJsonSimple<IpApiPayload | IpApiFailurePayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;
@@ -54,22 +54,21 @@ export class IpApi implements GeoIP {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("ip-api parsing error: " + e);
+			if (e instanceof Error)
+				Logger.Error("ip-api parsing error: " + e.message, e);
 			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
 			return null;
 		}
 	};
 
-	// TODO: add type for json
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
-	HandleErrorResponse(json: any): void {
+	HandleErrorResponse(json: IpApiFailurePayload): void {
 		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-		Logger.Error("ip-api responds with Error: " + json.reason);
+		Logger.Error("ip-api responds with Error: " + (json.message ?? json.reason));
 	};
 }
 
 interface IpApiPayload {
-	status: ipapiStatus;
+	status: "success";
 	country: string;
 	countryCode: string;
 	region?: string;
@@ -84,9 +83,12 @@ interface IpApiPayload {
 	as?: string;
 	query?: string;
 	mobile: boolean;
-	/** exists on error */
-	message?: ipapiMessage;
 }
 
-type ipapiStatus = "success" | "fail";
+interface IpApiFailurePayload {
+	status: "fail";
+	message?: ipapiMessage;
+	reason: string;
+}
+
 type ipapiMessage = "private ranger" | "reserved range" | "invalid query";

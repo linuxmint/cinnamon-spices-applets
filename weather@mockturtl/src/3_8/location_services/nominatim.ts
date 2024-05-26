@@ -5,6 +5,35 @@ import type { LocationData } from "../types";
 import { _ } from "../utils";
 import { HttpLib } from "../lib/httpLib";
 
+interface NominatimLocationItem {
+	place_id: number;
+	licence: string;
+	osm_type: string;
+	osm_id: number;
+	lat: string;
+	lon: string;
+	class: string;
+	type: string;
+	place_rank: number;
+	importance: number;
+	addresstype: string;
+	name: string;
+	display_name: string;
+	address: {
+		city?: string;
+		town?: string;
+		village?: string;
+		state_district?: string;
+		state: string;
+		country: string;
+		county?: string;
+		country_code: string;
+	}
+	boundingbox: string[];
+}
+
+type NominatimResponse = NominatimLocationItem[];
+
 /**
  * Nominatim communication interface
  */
@@ -31,9 +60,7 @@ export class GeoLocation {
 				return cached;
 			}
 
-			// TODO: add type for locationData
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const locationData = await HttpLib.Instance.LoadJsonSimple<any>({
+			const locationData = await HttpLib.Instance.LoadJsonSimple<NominatimResponse>({
 				url: `${this.url}?q=${searchText}&${this.params}`,
 				cancellable
 			});
@@ -78,16 +105,22 @@ export class GeoLocation {
 	 * keys
 	 * @param locationData
 	 */
-	// TODO: Add type for locationData
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private BuildEntryText(locationData: any): string {
+	private BuildEntryText(locationData: NominatimLocationItem): string {
 		if (locationData.address == null) return locationData.display_name;
 		const entryText: string[] = [];
-		for (const key in locationData.address) {
-			if (key == "state_district") continue;
-			if (key == "county") continue;
-			if (key == "country_code") continue;
-			entryText.push(locationData.address[key]);
+		let key: keyof typeof locationData.address;
+		for (key in locationData.address) {
+			if (key == "state_district")
+				continue;
+			if (key == "county")
+				continue;
+			if (key == "country_code")
+				continue;
+			const value = locationData.address[key];
+			if (value == null)
+				continue;
+
+			entryText.push(value);
 		}
 		return entryText.join(", ");
 	}

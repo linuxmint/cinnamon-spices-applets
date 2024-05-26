@@ -1,7 +1,7 @@
 import { _ } from "../../../utils";
 
 export interface OpenWeatherMapError {
-	cod: string;
+	cod: number;
 	message: string;
 }
 

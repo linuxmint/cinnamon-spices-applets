@@ -105,7 +105,7 @@ export class MetUk extends BaseProvider {
 	};
 
 	private async GetClosestForecastSite(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite | null> {
-		const forecastSitelist = await HttpLib.Instance.LoadJsonSimple({
+		const forecastSitelist = await HttpLib.Instance.LoadJsonSimple<MetUKSiteListResponse>({
 			url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
 			cancellable
 		});
@@ -119,7 +119,7 @@ export class MetUk extends BaseProvider {
 	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
 		// TODO: Add type definition
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
-		const observationSiteList = await HttpLib.Instance.LoadJsonSimple<any>({
+		const observationSiteList = await HttpLib.Instance.LoadJsonSimple<MetUKSiteListResponse>({
 			url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
 			cancellable
 		});
@@ -510,10 +510,8 @@ export class MetUk extends BaseProvider {
 		return (date.replace("Z", "")) + "T00:00:00Z";
 	}
 
-	// TODO: Add type definition
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private GetClosestSite(siteList: any, loc: LocationData): WeatherSite {
-		const sites = siteList.Locations.Location as WeatherSite[];
+	private GetClosestSite(siteList: MetUKSiteListResponse, loc: LocationData): WeatherSite {
+		const sites = siteList.Locations.Location;
 		let closest = sites[0];
 		closest.dist = GetDistance(Number.parseFloat(closest.latitude), Number.parseFloat(closest.longitude), loc.lat, loc.lon);
 		for (const element of sites) {
@@ -761,6 +759,12 @@ export class MetUk extends BaseProvider {
 		}
 	};
 };
+
+interface MetUKSiteListResponse {
+	Locations: {
+		Location: WeatherSite[]
+	}
+}
 
 interface WeatherSite {
 	elevation: string;

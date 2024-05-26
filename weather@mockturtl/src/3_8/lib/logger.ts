@@ -153,7 +153,7 @@ class Log {
 		const logFile = File.new_for_path(logFilePath);
 
 		// Check if file exists
-		if (!await FileExists(logFile)) {
+		if (!FileExists(logFile)) {
 			throw new Error(
 				_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath })
 			);

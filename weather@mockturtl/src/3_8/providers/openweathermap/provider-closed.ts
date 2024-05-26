@@ -57,7 +57,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 				params: params,
 				HandleError: this.HandleError
 			}),
-			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({url: this.id_irl, cancellable, params}) : Promise.resolve()
+			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({url: this.id_irl, cancellable, params, HandleError: this.HandleError}) : Promise.resolve()
 		]);
 
 		// We store the newly gotten ID if we got it
@@ -65,9 +65,6 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 			IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
 
 		if (!json)
-			return null;
-
-		if (this.HadErrors(json))
 			return null;
 
 		// Put id to the parsable object, even if it ends up undefined
@@ -90,29 +87,38 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		return params;
 	};
 
-	private HadErrors(json: unknown): boolean {
-		if (!this.HasReturnedError(json))
+	private HasReturnedError(json: unknown): json is OpenWeatherMapError {
+		if (!json)
 			return false;
+
+		return (typeof json === "object" && "cod" in json && !!json.cod);
+	}
+
+	public HandleError = (response: ErrorResponse): boolean => {
+		if (!this.HasReturnedError(response.Data))
+			return true;
+
 		const errorMsg = "OpenWeatherMap Response: ";
 		const error = {
 			service: "openweathermap",
 			type: "hard",
 		} as AppletError;
-		const errorPayload = json;
+
+		const errorPayload = response.Data;
 		switch (errorPayload.cod) {
-			case ("400"):
+			case 400:
 				error.detail = "bad location format";
 				error.message = _("Please make sure Location is in the correct format in the Settings");
 				break;
-			case ("401"):
+			case 401:
 				error.detail = "bad key";
 				error.message = _("Make sure you entered the correct key in settings");
 				break;
-			case ("404"):
+			case 404:
 				error.detail = "location not found";
 				error.message = _("Location not found, make sure location is available or it is in the correct format");
 				break;
-			case ("429"):
+			case 429:
 				error.detail = "key blocked";
 				error.message = _("If this problem persists, please contact the Author of this applet");
 				break;
@@ -124,27 +130,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		this.app.ShowError(error);
 		Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
 		Logger.Error(errorMsg + errorPayload.message);
-		return true;
-	};
-
-	private HasReturnedError(json: unknown): json is OpenWeatherMapError {
-		if (!json)
-			return false;
-
-		return (typeof json === "object" && "cod" in json && !!json.cod);
-	}
-
-	public HandleError = (error: ErrorResponse): boolean => {
-		if (error.ErrorData.code == 404) {
-			this.app.ShowError({
-				detail: "location not found",
-				message: _("Location not found, make sure location is available or it is in the correct format"),
-				userError: true,
-				type: "hard"
-			})
-			return false;
-		}
-		return true;
+		return false;
 	}
 };
 

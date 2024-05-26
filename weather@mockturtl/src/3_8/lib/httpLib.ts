@@ -45,27 +45,42 @@ export class HttpLib {
 			HandleError: () => false
 		});
 
+		const result: Response<T, E> = {
+			...response,
+			Data: null as never
+		}
+
 		try {
-			const payload = JSON.parse(response.Data as never);
-			response.Data = payload;
+			const payload = JSON.parse(response.Data as unknown as string) as T | E;
+			result.Data = payload;
+			return result;
 		}
 		catch (e) { // Payload is not JSON
+			if (e instanceof Error)
+				Logger.Error("Error: API response is not JSON. The response: " + result.Data, e);
+
 			// Only care about JSON parse errors if the request was successful before
-			if (response.Success) {
-				if (e instanceof Error)
-				 	Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-				(<GenericResponse>response).Success = false;
-				(<GenericResponse>response).ErrorData = {
+			if (!result.Success)
+				return result;
+
+			return {
+				Data: null as never,
+				ResponseHeaders: response.ResponseHeaders,
+				Success: false,
+				ErrorData: {
 					code: -1,
 					message: "bad api response - non json",
 					reason_phrase: "",
 				}
+			};
+		}
+		finally {
+			global.log("Called")
+			if (!result.Success && (!HandleError || HandleError(result))) {
+				global.log("Unhandlederror")
+				this.UnhandledError.Invoke(this, result.ErrorData);
 			}
 		}
-
-		if (!response.Success && (!HandleError || HandleError(response as never)))
-			this.UnhandledError.Invoke(this, response.ErrorData);
-		return response as Response<T, E>;
 	}
 
 	public async LoadAsyncSimple(options: LoadAsyncOptions): Promise<string | null> {
@@ -172,7 +187,7 @@ interface GenericSuccessResponse extends BaseGenericResponse {
 }
 
 interface BaseGenericResponse {
-	Data: unknown | undefined;
+	Data: unknown;
 	ResponseHeaders: Record<string, string>;
 }
 
