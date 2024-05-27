@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-07 19:45-0100\n"
+"POT-Creation-Date: 2024-05-26 22:02-0100\n"
 "PO-Revision-Date: 2024-03-07 18:37-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,15 +19,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 4.2/applet.js:379 5.4/applet.js:374
+#: 4.2/applet.js:56 5.4/applet.js:55
+msgid ""
+"📢 The click effects will be removed from this applet on the version 6.2 of "
+"Cinnamon\n"
+"and moved to a new extension named mouse-click-effects which can already be "
+"installed\n"
+"on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
+msgstr ""
+
+#: 4.2/applet.js:387 5.4/applet.js:383
 msgid "click to deactivate the eye"
 msgstr "haga clic para desactivar el ojo"
 
-#: 4.2/applet.js:379 5.4/applet.js:374
+#: 4.2/applet.js:387 5.4/applet.js:383
 msgid "click to activate the eye"
 msgstr "haga clic para activar el ojo"
 
-#: 4.2/applet.js:380 5.4/applet.js:375
+#: 4.2/applet.js:388 5.4/applet.js:384
 msgid "TIP"
 msgstr "TIP"
 
@@ -36,9 +45,10 @@ msgid "Cinnamon Eyes"
 msgstr "Ojos de Cinnamon"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
-"cursor and displays click animations."
+"cursor."
 msgstr ""
 "Un applet para Cinnamon que añade un ojo en la barra de panel que sigue al "
 "cursor y muestra animaciones de clics."
@@ -57,6 +67,7 @@ msgstr "Efectos"
 #. 4.2->settings-schema.json->click-generic->title
 #. 5.4->settings-schema.json->eye-generic->title
 #. 5.4->settings-schema.json->click-generic->title
+#. 6.2->settings-schema.json->general->description
 msgid "General"
 msgstr "General"
 
@@ -64,6 +75,7 @@ msgstr "General"
 #. 4.2->settings-schema.json->click-colors->title
 #. 5.4->settings-schema.json->eye-colors->title
 #. 5.4->settings-schema.json->click-colors->title
+#. 6.2->settings-schema.json->colors->description
 msgid "Colors"
 msgstr "Colores"
 
@@ -74,21 +86,25 @@ msgstr "Eventos"
 
 #. 4.2->settings-schema.json->eye-mode->description
 #. 5.4->settings-schema.json->eye-mode->description
+#. 6.2->settings-schema.json->mode->description
 msgid "Mode"
 msgstr "Modo"
 
 #. 4.2->settings-schema.json->eye-mode->options
 #. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
 msgid "Lids"
 msgstr "Párpado"
 
 #. 4.2->settings-schema.json->eye-mode->options
 #. 5.4->settings-schema.json->eye-mode->options
+#. 6.2->settings-schema.json->mode->options
 msgid "Bulb"
 msgstr "Redondo"
 
 #. 4.2->settings-schema.json->eye-line-width->description
 #. 5.4->settings-schema.json->eye-line-width->description
+#. 6.2->settings-schema.json->line-width->description
 msgid "Line Width"
 msgstr "Anchura de línea"
 
@@ -100,16 +116,21 @@ msgstr "Anchura de línea"
 #. 5.4->settings-schema.json->eye-margin->units
 #. 5.4->settings-schema.json->eye-vertical-padding->units
 #. 5.4->settings-schema.json->mouse-click-image-size->units
+#. 6.2->settings-schema.json->line-width->units
+#. 6.2->settings-schema.json->margin->units
+#. 6.2->settings-schema.json->vertical-padding->units
 msgid "px"
 msgstr "px"
 
 #. 4.2->settings-schema.json->eye-margin->description
 #. 5.4->settings-schema.json->eye-margin->description
+#. 6.2->settings-schema.json->margin->description
 msgid "Margin"
 msgstr "Margen"
 
 #. 4.2->settings-schema.json->eye-vertical-padding->description
 #. 5.4->settings-schema.json->eye-vertical-padding->description
+#. 6.2->settings-schema.json->vertical-padding->description
 msgid "Padding"
 msgstr "Relleno"
 
@@ -117,16 +138,19 @@ msgstr "Relleno"
 #. 4.2->settings-schema.json->fade-timeout->units
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
+#. 6.2->settings-schema.json->repaint-interval->units
 msgid "ms"
 msgstr "ms"
 
 #. 4.2->settings-schema.json->eye-repaint-interval->description
 #. 5.4->settings-schema.json->eye-repaint-interval->description
+#. 6.2->settings-schema.json->repaint-interval->description
 msgid "Eye Update Interval"
 msgstr "Intervalo de actualización del ojo"
 
 #. 4.2->settings-schema.json->eye-repaint-interval->tooltip
 #. 5.4->settings-schema.json->eye-repaint-interval->tooltip
+#. 6.2->settings-schema.json->repaint-interval->tooltip
 msgid ""
 "This setting controls the time to redraw the eye again. Lower values "
 "(measured in miliseconds) result in smoother animation but require more "
@@ -138,16 +162,19 @@ msgstr ""
 
 #. 4.2->settings-schema.json->eye-repaint-angle->units
 #. 5.4->settings-schema.json->eye-repaint-angle->units
+#. 6.2->settings-schema.json->repaint-angle->units
 msgid "radians"
 msgstr "radianes"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->description
 #. 5.4->settings-schema.json->eye-repaint-angle->description
+#. 6.2->settings-schema.json->repaint-angle->description
 msgid "Eye Update Sensitivity"
 msgstr "Sensibilidad de actualización del ojo"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->tooltip
 #. 5.4->settings-schema.json->eye-repaint-angle->tooltip
+#. 6.2->settings-schema.json->repaint-angle->tooltip
 msgid ""
 "This setting controls the minimum angle change between mouse movements "
 "required to redraw the eye. Lower values (measured in radians) result in "
@@ -167,6 +194,7 @@ msgstr "Iniciar activado"
 #. 4.2->settings-schema.json->deactivate-effects-on-fullscreen->description
 #. 5.4->settings-schema.json->deactivate-on-fullscreen->description
 #. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 6.2->settings-schema.json->deactivate-on-fullscreen->description
 msgid "Deactivate On Fullscreen"
 msgstr "Desactivar en pantalla completa"
 
@@ -189,6 +217,8 @@ msgstr "Color de pupila activado"
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
 #. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
+#. 6.2->settings-schema.json->fill-lids-color-painting->description
+#. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr "Rellenar los colores del interior del ojo"
 
@@ -361,3 +391,32 @@ msgstr "Color del click derecho"
 #. 5.4->settings-schema.json->mouse-click-opacity->description
 msgid "General Opacity"
 msgstr "Opacidad general"
+
+#. 6.2->settings-schema.json->tooltip-message->description
+msgid "Tooltip Message on Hover"
+msgstr ""
+
+#. 6.2->settings-schema.json->use-alternative-colors->description
+msgid "Use Alternative Colors for the Eye"
+msgstr ""
+
+#. 6.2->settings-schema.json->use-alternative-colors->tooltip
+msgid ""
+"When disabled it will use the current system theme's default color for panel "
+"items."
+msgstr ""
+
+#. 6.2->settings-schema.json->base-color->description
+#, fuzzy
+msgid "Base Color"
+msgstr "Color base activado"
+
+#. 6.2->settings-schema.json->iris-color->description
+#, fuzzy
+msgid "Iris Color"
+msgstr "Color de iris activado"
+
+#. 6.2->settings-schema.json->pupil-color->description
+#, fuzzy
+msgid "Pupil Color"
+msgstr "Color de pupila activado"

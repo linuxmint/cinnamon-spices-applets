@@ -20,6 +20,10 @@
 const { Clutter } = imports.gi;
 
 class EyeMode {
+    constructor(mode) {
+        this.mode = mode;
+    }
+
     /**
      * Draws the eye on the panel
      * @param {St.DrawingArea} area The area on repaint
@@ -63,7 +67,7 @@ class EyelidMode extends EyeMode {
 
         // -- Drawing the base of the eye
 
-        Clutter.cairo_set_source_color(cr, options.eye_color);
+        Clutter.cairo_set_source_color(cr, options.base_color);
 
         cr.translate(area_width * 0.5, area_height * 0.5);
         cr.setLineWidth(options.line_width);
@@ -84,7 +88,7 @@ class EyelidMode extends EyeMode {
         cr.curveTo(x_def + iris_rad, y_def - amp,
             x_def - iris_rad, y_def - amp, -eye_rad, 0);
 
-        options.is_eye_active && options.lids_fill ? cr.fill() : cr.stroke();
+        options.lids_fill ? cr.fill() : cr.stroke();
 
         amp = eye_rad * top_lid;
         cr.moveTo(-eye_rad, 0);
@@ -107,7 +111,7 @@ class EyelidMode extends EyeMode {
         cr.scale(iris_rad * Math.cos(eye_ang), iris_rad);
         cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
 
-        options.is_eye_active && options.lids_fill ? cr.fill() : cr.stroke();
+        options.lids_fill ? cr.fill() : cr.stroke();
 
         cr.scale(1 / (iris_rad * Math.cos(eye_ang)), 1 / iris_rad);
         cr.translate(-iris_r * Math.sin(eye_ang), 0);
@@ -160,13 +164,13 @@ class BulbMode extends EyeMode {
 
         // -- Drawing the base of the eye
 
-        Clutter.cairo_set_source_color(cr, options.eye_color);
+        Clutter.cairo_set_source_color(cr, options.base_color);
 
         cr.translate(area_width * 0.5, area_height * 0.5);
         cr.setLineWidth(options.line_width);
         cr.arc(0, 0, eye_rad, 0, 2 * Math.PI);
 
-        options.is_eye_active && options.bulb_fill ? cr.fill() : cr.stroke();
+        options.bulb_fill ? cr.fill() : cr.stroke();
 
         // -- Drawing the iris of the eye
 
@@ -179,7 +183,7 @@ class BulbMode extends EyeMode {
         cr.scale(iris_rad * Math.cos(eye_ang), iris_rad);
         cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
 
-        options.is_eye_active && options.bulb_fill ? cr.fill() : cr.stroke();
+        options.bulb_fill ? cr.fill() : cr.stroke();
 
         cr.scale(1 / (iris_rad * Math.cos(eye_ang)), 1 / iris_rad);
         cr.translate(-iris_r * Math.sin(eye_ang), 0);
@@ -209,11 +213,11 @@ class EyeModeFactory {
     static createEyeMode(mode) {
         switch (mode) {
             case "bulb":
-                return new BulbMode();
+                return new BulbMode(mode);
 
             case "lids":
             default:
-                return new EyelidMode();
+                return new EyelidMode(mode);
         }
     }
 }
