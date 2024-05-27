@@ -17803,7 +17803,11 @@ class WindBox {
         this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     Rebuild(config, textColorStyle) {
-        this._caption = Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
+        this._caption = Label({
+            text: _('Wind') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
         this._label = this.BuildLabel(config);
         return [this._caption, this._label];
     }
@@ -17883,8 +17887,8 @@ class CurrentWeather {
             x_expand: true,
             y_expand: true,
             style_class: STYLE_ICONBOX,
-            x_align: uiCurrentWeather_ActorAlign.CENTER,
-            y_align: uiCurrentWeather_ActorAlign.FILL
+            x_align: uiCurrentWeather_ActorAlign.FILL,
+            y_align: uiCurrentWeather_ActorAlign.FILL,
         });
         this.sunTimesUI = new SunTimesUI(app);
         this.windBox = new WindBox(app);
@@ -17936,7 +17940,7 @@ class CurrentWeather {
         });
         this.actor.add_actor(this.weatherIcon);
         this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
-        this.actor.add_actor(this.BuildRightColumn(textColorStyle, config));
+        this.actor.add(this.BuildRightColumn(textColorStyle, config), { expand: true });
     }
     ;
     BuildMiddleColumn(config, textColorStyle) {
@@ -17954,21 +17958,44 @@ class CurrentWeather {
     }
     BuildRightColumn(textColorStyle, config) {
         const textOb = {
-            text: ELLIPSIS
+            text: ELLIPSIS,
         };
         this.temperatureLabel = Label(textOb);
         this.humidityLabel = Label(textOb);
         this.pressureLabel = Label(textOb);
         this.dewPointLabel = Label({ text: '' });
         this.apiUniqueLabel = Label({ text: '' });
-        this.temperatureCaption = Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.humidityCaption = Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.pressureCaption = Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.dewPointCaption = Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.apiUniqueCaption = Label({ text: '', style: textColorStyle });
+        this.temperatureCaption = Label({
+            text: _('Temperature') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.humidityCaption = Label({
+            text: _('Humidity') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.pressureCaption = Label({
+            text: _('Pressure') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.dewPointCaption = Label({
+            text: _("Dew Point") + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.apiUniqueCaption = Label({
+            text: '',
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
         const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
         const rb_captions = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        const rb_values = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES, x_expand: true, x_align: uiCurrentWeather_ActorAlign.FILL });
+        const rb_values = new uiCurrentWeather_BoxLayout({
+            vertical: true,
+            style_class: STYLE_DATABOX_VALUES,
+        });
         rb_captions.add_actor(this.temperatureCaption);
         rb_captions.add_actor(this.humidityCaption);
         rb_captions.add_actor(this.pressureCaption);
@@ -17981,9 +18008,9 @@ class CurrentWeather {
         rb_values.add_actor(windLabel);
         rb_values.add_actor(this.dewPointLabel);
         rb_values.add_actor(this.apiUniqueLabel);
-        const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX, x_align: uiCurrentWeather_ActorAlign.FILL, x_expand: true });
-        rightColumn.add_actor(rb_captions);
-        rightColumn.add_actor(rb_values);
+        const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX });
+        rightColumn.add(rb_captions, { expand: true });
+        rightColumn.add(rb_values, { expand: true });
         return rightColumn;
     }
     BuildLocationSection() {
@@ -18644,7 +18671,12 @@ class UIHourlyForecasts {
             const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
             this.hourlyContainers.push(box);
             this.hourlyForecasts.push({
-                Hour: Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
+                Hour: Label({
+                    text: "Hour",
+                    style_class: "hourly-time",
+                    style: textColorStyle,
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                }),
                 Icon: new uiHourlyForecasts_Icon({
                     icon_type: config.IconType,
                     icon_size: 24,
@@ -18652,9 +18684,24 @@ class UIHourlyForecasts {
                     style_class: "hourly-icon"
                 }),
                 Summary: Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-                PrecipPercent: Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-                PrecipVolume: Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
-                Temperature: Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px` })
+                PrecipPercent: Label({
+                    text: " ",
+                    style_class: "hourly-data",
+                    style: "padding-top: 5px;",
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                }),
+                PrecipVolume: Label({
+                    text: _(ELLIPSIS),
+                    style_class: "hourly-data",
+                    style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;`,
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                }),
+                Temperature: Label({
+                    text: _(ELLIPSIS),
+                    style_class: "hourly-data",
+                    style: `padding-top: ${this.tempGraphHeight}px`,
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                })
             });
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
             box.add_child(this.hourlyForecasts[index].Hour);
@@ -18749,6 +18796,7 @@ class UIBar {
         this.warningButtonIcon = null;
         this.warningButton = null;
         this.warningButtonTooltip = null;
+        this.refreshIcon = null;
         this.WarningClicked = async () => {
             var _a;
             if (((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.alerts) == null)
@@ -18874,6 +18922,11 @@ class UIBar {
         }
         this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
         this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
+        this.refreshIcon = new uiBar_Icon({
+            icon_name: "refresh-symbolic",
+            icon_type: uiBar_IconType.SYMBOLIC,
+            icon_size: 24,
+        });
         this.actor.add(this.providerCreditButton.actor, {
             x_fill: false,
             x_align: uiBar_Align.END,
@@ -18881,11 +18934,25 @@ class UIBar {
             y_fill: false,
             expand: true
         });
+        this.actor.add(this.refreshIcon, {
+            x_fill: false,
+            x_align: uiBar_Align.END,
+            y_align: uiBar_Align.MIDDLE,
+            y_fill: false,
+        });
     }
     BigDistanceUnitFor(unit) {
         if (unit == "imperial")
             return _("mi");
         return _("km");
+    }
+    ShowRefreshIcon() {
+        var _a;
+        (_a = this.refreshIcon) === null || _a === void 0 ? void 0 : _a.show();
+    }
+    HideRefreshIcon() {
+        var _a;
+        (_a = this.refreshIcon) === null || _a === void 0 ? void 0 : _a.hide();
     }
     HideHourlyToggle() {
         var _a;
@@ -19032,6 +19099,12 @@ class UI {
             void this.ForceHideHourlyWeather();
         this.Bar.Display(weather, provider, config, shouldShowToggle);
         return true;
+    }
+    ShowRefreshIcon() {
+        this.Bar.ShowRefreshIcon();
+    }
+    HideRefreshIcon() {
+        this.Bar.HideRefreshIcon();
     }
     IsLightTheme() {
         const color = this.menu.actor.get_theme_node().get_color("color");
@@ -19303,6 +19376,7 @@ class WeatherApplet extends TextIconApplet {
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 return RefreshState.NoKey;
             }
+            this.ui.ShowRefreshIcon();
             let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
             if (weatherInfo == null) {
                 return RefreshState.NoWeather;
@@ -19325,6 +19399,9 @@ class WeatherApplet extends TextIconApplet {
                 logger_Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             return RefreshState.Error;
+        }
+        finally {
+            this.ui.HideRefreshIcon();
         }
     }
     DisplayWeather(weather) {

@@ -154,6 +154,14 @@ export class UI {
 		return true;
 	}
 
+	public ShowRefreshIcon(): void {
+		this.Bar.ShowRefreshIcon();
+	}
+
+	public HideRefreshIcon(): void {
+		this.Bar.HideRefreshIcon();
+	}
+
 	// --------------------------------------------------------------------
 	// Callbacks
 

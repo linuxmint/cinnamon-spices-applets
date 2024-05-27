@@ -36,7 +36,11 @@ export class WindBox {
     }
 
     public Rebuild(config: Config, textColorStyle: string): [ caption: imports.gi.St.Label, label: imports.gi.St.BoxLayout ] {
-        this._caption = Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
+        this._caption = Label({
+			text: _('Wind') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
         this._label = this.BuildLabel(config);
 
         return [ this._caption, this._label ];

@@ -362,7 +362,12 @@ export class UIHourlyForecasts {
 
 			this.hourlyForecasts.push({
 				// Override color on light theme for grey text
-				Hour: Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
+				Hour: Label({ 
+					text: "Hour",
+					style_class: "hourly-time",
+					style: textColorStyle,
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				}),
 				Icon: new Icon({
 					icon_type: config.IconType,
 					icon_size: 24,
@@ -370,15 +375,29 @@ export class UIHourlyForecasts {
 					style_class: "hourly-icon"
 				}),
 				Summary: Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-				PrecipPercent: Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-				PrecipVolume: Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
-				Temperature: Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
+				PrecipPercent: Label({
+					text: " ",
+					style_class: "hourly-data",
+					style: "padding-top: 5px;",
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				}),
+				PrecipVolume: Label({ 
+					text: _(ELLIPSIS),
+					style_class: "hourly-data",
+					style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;`,
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				}),
+				Temperature: Label({ 
+					text: _(ELLIPSIS), 
+					style_class: "hourly-data",
+					style: `padding-top: ${this.tempGraphHeight}px`,
+					x_align: imports.gi.Clutter.ActorAlign.CENTER,
+				})
 			})
 
 			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
 			box.add_child(this.hourlyForecasts[index].Hour);
-			box.add_child(this.hourlyForecasts[index].Icon);
-			// box.add(this.hourlyForecasts[index].Summary, {expand: true, x_fill: true});
+			box.add_child(this.hourlyForecasts[index].Icon,);
 			box.add_child(this.hourlyForecasts[index].Temperature);
 			if (this.app.Provider?.supportHourlyPrecipChance)
 				box.add_child(this.hourlyForecasts[index].PrecipPercent);

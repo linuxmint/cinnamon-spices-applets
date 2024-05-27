@@ -3,7 +3,7 @@ import type { Config, DistanceUnits } from "../config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
 import { Event } from "../lib/events";
 import type { WeatherApplet } from "../main";
-import type { CustomIcons, WeatherData, AlertData, AlertLevel } from "../weather-data";
+import type { CustomIcons, WeatherData, AlertData, AlertLevel, BuiltinIcons } from "../weather-data";
 import type { WeatherProvider } from "../types";
 import { _, AwareDateString, GetAlertColor, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
@@ -36,6 +36,7 @@ export class UIBar {
 	private warningButtonIcon: imports.gi.St.Icon | null = null;
 	private warningButton: WeatherButton | null = null;
 	private warningButtonTooltip: imports.ui.tooltips.Tooltip<imports.gi.St.Button> | null = null;
+	private refreshIcon: imports.gi.St.Icon | null = null;
 
 	private app: WeatherApplet;
 
@@ -179,7 +180,12 @@ export class UIBar {
 
 		this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
 		this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton!));
-
+		this.refreshIcon = new Icon({
+			icon_name: "refresh-symbolic" as BuiltinIcons,
+			icon_type: IconType.SYMBOLIC,
+			icon_size: 24,
+		});
+		
 		this.actor.add(this.providerCreditButton.actor, {
 			x_fill: false,
 			x_align: Align.END,
@@ -187,6 +193,12 @@ export class UIBar {
 			y_fill: false,
 			expand: true
 		});
+		this.actor.add(this.refreshIcon, {
+			x_fill: false,
+			x_align: Align.END,
+			y_align: Align.MIDDLE,
+			y_fill: false,
+		})
 	}
 
 	/**
@@ -197,6 +209,14 @@ export class UIBar {
 	private BigDistanceUnitFor(unit: DistanceUnits) {
 		if (unit == "imperial") return _("mi");
 		return _("km");
+	}
+
+	public ShowRefreshIcon(): void {
+		this.refreshIcon?.show();
+	}
+
+	public HideRefreshIcon(): void {
+		this.refreshIcon?.hide();
 	}
 
 	private HideHourlyToggle() {

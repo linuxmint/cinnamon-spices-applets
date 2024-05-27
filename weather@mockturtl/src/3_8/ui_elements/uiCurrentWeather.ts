@@ -63,8 +63,8 @@ export class CurrentWeather {
 			x_expand: true,
 			y_expand: true,
 			style_class: STYLE_ICONBOX,
-			x_align: ActorAlign.CENTER,
-			y_align: ActorAlign.FILL
+			x_align: ActorAlign.FILL,
+			y_align: ActorAlign.FILL,
 		});
 
 		this.sunTimesUI = new SunTimesUI(app);
@@ -130,7 +130,7 @@ export class CurrentWeather {
 
 		this.actor.add_actor(this.weatherIcon)
 		this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
-		this.actor.add_actor(this.BuildRightColumn(textColorStyle, config))
+		this.actor.add(this.BuildRightColumn(textColorStyle, config), { expand: true })
 	};
 
 	// Build helpers
@@ -155,26 +155,49 @@ export class CurrentWeather {
 	/** Builds Weather Information on the right side */
 	private BuildRightColumn(textColorStyle: string, config: Config) {
 		const textOb = {
-			text: ELLIPSIS
+			text: ELLIPSIS,
 		}
 		// Current Weather Right Column
 		this.temperatureLabel = Label(textOb)
 		this.humidityLabel = Label(textOb)
 		this.pressureLabel = Label(textOb)
-		this.dewPointLabel = Label({ text: '' });
+		this.dewPointLabel = Label({ text: ''});
 
-		this.apiUniqueLabel = Label({ text: '' })
-		this.temperatureCaption = Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.humidityCaption = Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.pressureCaption = Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.dewPointCaption = Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.apiUniqueLabel = Label({ text: ''})
+		this.temperatureCaption = Label({
+			text: _('Temperature') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
+		this.humidityCaption = Label({
+			text: _('Humidity') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
+		this.pressureCaption = Label({
+			text: _('Pressure') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
+		this.dewPointCaption = Label({
+			text: _("Dew Point") + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
 		// APi Unique Caption
-		this.apiUniqueCaption = Label({ text: '', style: textColorStyle });
+		this.apiUniqueCaption = Label({
+			text: '',
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
 
 		const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
 
 		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES, x_expand: true, x_align: ActorAlign.FILL })
+		const rb_values = new BoxLayout({ 
+			vertical: true,
+			style_class: STYLE_DATABOX_VALUES,
+		})
 		rb_captions.add_actor(this.temperatureCaption);
 		rb_captions.add_actor(this.humidityCaption);
 		rb_captions.add_actor(this.pressureCaption);
@@ -188,9 +211,9 @@ export class CurrentWeather {
 		rb_values.add_actor(this.dewPointLabel);
 		rb_values.add_actor(this.apiUniqueLabel);
 
-		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX, x_align: ActorAlign.FILL, x_expand: true });
-		rightColumn.add_actor(rb_captions);
-		rightColumn.add_actor(rb_values);
+		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+		rightColumn.add(rb_captions, { expand: true });
+		rightColumn.add(rb_values, { expand: true });
 		return rightColumn;
 	}
 
