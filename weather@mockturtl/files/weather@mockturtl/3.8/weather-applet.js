@@ -19363,8 +19363,10 @@ class WeatherApplet extends TextIconApplet {
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
     async testRunScript() {
-        if (!this.config._runScript)
+        if (!this.config._runScript) {
+            NotificationService.Instance.Send(_("No Script Provided"), _("You need to add a script first."));
             return;
+        }
         if (!this.currentWeatherInfo) {
             NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
             return;

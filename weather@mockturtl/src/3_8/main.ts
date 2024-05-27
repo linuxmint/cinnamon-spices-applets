@@ -336,8 +336,10 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private async testRunScript(): Promise<void> {
-		if (!this.config._runScript)
+		if (!this.config._runScript) {
+			NotificationService.Instance.Send(_("No Script Provided"), _("You need to add a script first."));
 			return;
+		}
 
 		if (!this.currentWeatherInfo) {
 			NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
