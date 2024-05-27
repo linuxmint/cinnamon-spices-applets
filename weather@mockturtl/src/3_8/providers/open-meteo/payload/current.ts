@@ -1,5 +1,5 @@
 import type { WeatherData } from "../../../types";
-import { CelsiusToKelvin, _ } from "../../../utils";
+import { CelsiusToKelvin, KPHtoMPS, _ } from "../../../utils";
 import { OpenMeteoWeatherCodeToCondition } from "./common";
 
 export interface OpenMeteoCurrentWeather {
@@ -86,7 +86,7 @@ export function OpenMeteoCurrentWeatherToData(data: OpenMeteoCurrentWeather): Cu
 		pressure: data.surface_pressure,
 		humidity: data.relative_humidity_2m,
 		wind: {
-			speed: data.wind_speed_10m,
+			speed: KPHtoMPS(data.wind_speed_10m),
 			degree: data.wind_direction_10m,
 		},
 		dewPoint: null,
