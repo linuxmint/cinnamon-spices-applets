@@ -1,23 +1,25 @@
-This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features
-designed to give you more control over how your window-list operates.
+This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features designed to give you more control over how your window-list operates.
 
-Recent new features (Aug 2023 - Mar 2024):
+Recent new features (Aug 2023 - May 2024):
 
-1.  Added a configuration option to set the delay length before showing full size preview windows
-2.  Mouse action options for window tiling, untiling and moving window to current workspace
-3.  Hover peek: Option to show a full size preview when hovering buttons/thumbnails
-4.  No Click activate: Option to automatically switch focus to the button/Thumbnail last hovered
-5.  Adjustable spacing between window-list buttons
-6.  Ability to disable the new window animation
-7.  Ability to change the icon saturation from grayscale (0%) to vivid (200%)
-8.  Ability to show windows from other workspaces
-9.  Restores custom group/ungroup application setting after reboot/cinnamon-restart
-10.  Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
-11.  Hotkey hints using the (`) grave key with any registered hotkey modifiers
-12. Added a Left-Click option to start new application windows in Launcher mode
-13. Ability to show a common set of pinned buttons on all workspaces
-14. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
-15. A bunch of fixes
+* Added an option to configure the "number label" contents (added workspace and monitor number options)
+* Added an optional vertical ellipsis character to indicate a window-list button is grouped
+* Added 4 new mouse action options that will activate windows 1-4 of a grouped button
+* Added a configuration option to set the delay length before showing full size preview windows
+* Mouse action options for window tiling, untiling and moving window to current workspace
+* Hover peek: Option to show a full size preview when hovering buttons/thumbnails
+* No Click activate: Option to automatically switch focus to the button/Thumbnail last hovered
+* Adjustable spacing between window-list buttons
+* Ability to disable the new window animation
+* Ability to change the icon saturation from grayscale (0%) to vivid (200%)
+* Ability to show windows from other workspaces
+* Restores custom group/ungroup application setting after reboot/cinnamon-restart
+* Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
+* Hotkey hints using the (`) grave key with any registered hotkey modifiers
+* Added a Left-Click option to start new application windows in Launcher mode
+* Ability to show a common set of pinned buttons on all workspaces
+* Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
+* A bunch of fixes
 
 The design goals are to:
 
@@ -27,7 +29,7 @@ The design goals are to:
 4. A panel launcher that will activate existing windows rather then unconditionally launching new ones
 
 ## Requirements
-This applet requires at least Cinnamon 4.0
+This applet requires at least Cinnamon 4.0 but Cinnamon 6.0 is recommended
 
 ## Installation
 1. Right click on the cinnamon panel that you wish to add the CassiaWindowList to and click "Applets"
@@ -55,13 +57,11 @@ In addition to the features of the CobiWindowList...
  * Automatic configuration backup so you can restore your configuration after adding the applet to a panel again
  
 ## Feedback
-You can leave a comment here on cinnamon-spices.linuxmint.com or you can create an issue on my CassiaWindowList
-development GitHub repository:
+You can leave a comment here on cinnamon-spices.linuxmint.com or you can create an issue on my CassiaWindowList development GitHub repository:
 
 https://github.com/klangman/CassiaWindowList
 
 This is where I develop new features and test out any new ideas I have before pushing to cinnamon-spices.
 
-If you use this applet please let me know by liking it here and on my Github repository, that way I will be
-encouraged to continue working on the project.
+If you use this applet please let me know by liking it here and on my Github repository, that way I will be encouraged to continue working on the project.
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.0
+
+* Added an option to configure what the "number label" content represents (Window count, Workspace index or Monitor number).
+* Added an option to show a vertical ellipsis character on grouped buttons to indicate a button represents a group of windows. Useful for users that decide to use the number label for Workspace/Monitor number and needs a new way to mark grouped buttons.
+* Added 4 new mouse action options that will activate windows 1-4 of a grouped button
+* Change the "2 or more window" option in the "Display number" drop-down to "Smart" so that it can apply to other number label options.
+* Removed the "Display number" "Never" option as now the "Number Style" option can disable the number label
+* In Launcher mode the "Number Style" option now appears but it's effects do not apply. This is because the dependency setting in the json only allows a single variable dependency and it is now dependant on the "Number Style" option. You can't use "and/or" logical operators to have better control when the option appears.
+* Clarified the tooltip text for the "Hover time before showing a full size window preview" option. 
+
 ## 2.0.4
 
 * When in button pooling mode with a thumbnail menu open showing more then one window, highlight the thumbnail menu item matching the window of the windlow-list button that is currently being hovered by the mouse pointer.
