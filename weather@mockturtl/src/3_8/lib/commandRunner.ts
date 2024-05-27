@@ -30,14 +30,15 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 }
 
 
+export function Literal(command: string): string {
+	return ("'" + command.replace(/'/g, "'\"'\"'") + "' ");
+}
+
+
 /** Spawns a command and await for the output it gives */
 export async function SpawnProcess(command: string[]): Promise<GenericResponse> {
 	// prepare command
-	let cmd = "";
-	for (const element of command) {
-		// Amazing escaping...
-		cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
-	}
+	const cmd = command.join(" ");
 
 	Logger.Debug("Spawning command: " + cmd);
 

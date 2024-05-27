@@ -791,6 +791,85 @@ class Log {
 }
 const logger_Logger = new Log();
 
+;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
+
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
+async function SpawnProcessJson(command) {
+    const response = await SpawnProcess(command);
+    if (!response.Success)
+        return response;
+    try {
+        response.Data = JSON.parse(response.Data);
+        return response;
+    }
+    catch (e) {
+        if (e instanceof Error)
+            Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
+        response.Success = false;
+        response.ErrorData = {
+            Code: -1,
+            Message: "Failed to parse JSON",
+            Type: "jsonParse",
+        };
+        return response;
+    }
+}
+function Literal(command) {
+    return ("'" + command.replace(/'/g, "'\"'\"'") + "' ");
+}
+async function SpawnProcess(command) {
+    const cmd = command.join(" ");
+    logger_Logger.Debug("Spawning command: " + cmd);
+    let response;
+    if (spawnCommandLineAsyncIO === undefined) {
+        response = await new Promise((resolve) => {
+            spawnCommandLineAsync(cmd, () => {
+                resolve({
+                    Success: true,
+                    ErrorData: undefined,
+                    Data: ""
+                });
+            }, () => {
+                resolve({
+                    Success: false,
+                    ErrorData: {
+                        Code: -1,
+                        Message: "Command failed",
+                        Type: "unknown"
+                    },
+                    Data: ""
+                });
+            });
+        });
+    }
+    else {
+        response = await new Promise((resolve) => {
+            spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                const result = {
+                    Success: exitCode == 0,
+                    ErrorData: undefined,
+                    Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
+                };
+                if (exitCode != 0) {
+                    result.ErrorData = {
+                        Code: exitCode,
+                        Message: err !== null && err !== void 0 ? err : null,
+                        Type: "unknown"
+                    };
+                }
+                resolve(result);
+                return result;
+            });
+        });
+    }
+    return response;
+}
+function OpenUrl(element) {
+    if (!element.url)
+        return;
+    imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+}
+
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
 
@@ -9206,6 +9285,7 @@ const VERSION = "3.2.0";
 
 
 
+
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { EllipsizeMode } = imports.gi.Pango;
@@ -9246,24 +9326,57 @@ function GenerateLocationText(weather, config) {
     }
     return location;
 }
-function InjectValues(text, weather, config) {
+function InjectValues(text, weather, config, inCommand = false) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
-    return text.replace(/{t}/g, (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "")
-        .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
-        .replace(/{c}/g, weather.condition.main)
-        .replace(/{c_long}/g, weather.condition.description)
-        .replace(/{dew_point}/g, (_b = TempToUserConfig(weather.dewPoint, config, false)) !== null && _b !== void 0 ? _b : "")
-        .replace(/{humidity}/g, (_d = (_c = weather.humidity) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "")
-        .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
-        .replace(/{pressure_unit}/g, config._pressureUnit)
-        .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
-        .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-        .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
-        .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-        .replace(/{city}/g, (_e = weather.location.city) !== null && _e !== void 0 ? _e : "")
-        .replace(/{country}/g, (_f = weather.location.country) !== null && _f !== void 0 ? _f : "")
-        .replace(/{search_entry}/g, (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "")
+    const temp = (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "";
+    const tempUnit = UnitToUnicode(config.TemperatureUnit);
+    const condition = weather.condition.main;
+    const conditionLong = weather.condition.description;
+    const dewPoint = (_b = TempToUserConfig(weather.dewPoint, config, false)) !== null && _b !== void 0 ? _b : "";
+    const humidity = (_d = (_c = weather.humidity) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "";
+    const pressure = weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "";
+    const pressureUnit = config._pressureUnit;
+    const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
+    const extraName = weather.extra_field ? weather.extra_field.name : "";
+    const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
+    const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
+    const city = (_e = weather.location.city) !== null && _e !== void 0 ? _e : "";
+    const country = (_f = weather.location.country) !== null && _f !== void 0 ? _f : "";
+    const searchEntry = (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "";
+    if (inCommand) {
+        text = text.replace(/{{t}}/g, Literal(temp))
+            .replace(/{{u}}/g, Literal(tempUnit))
+            .replace(/{{c}}/g, Literal(condition))
+            .replace(/{{c_long}}/g, Literal(conditionLong))
+            .replace(/{{dew_point}}/g, Literal(dewPoint))
+            .replace(/{{humidity}}/g, Literal(humidity))
+            .replace(/{{pressure}}/g, Literal(pressure))
+            .replace(/{{pressure_unit}}/g, Literal(pressureUnit))
+            .replace(/{{extra_value}}/g, Literal(extraValue))
+            .replace(/{{extra_name}}/g, Literal(extraName))
+            .replace(/{{wind_speed}}/g, Literal(windSpeed))
+            .replace(/{{wind_dir}}/g, Literal(windDir))
+            .replace(/{{city}}/g, Literal(city))
+            .replace(/{{country}}/g, Literal(country))
+            .replace(/{{search_entry}}/g, Literal(searchEntry))
+            .replace(/{{last_updated}}/g, Literal(lastUpdatedTime));
+    }
+    return text.replace(/{t}/g, temp)
+        .replace(/{u}/g, tempUnit)
+        .replace(/{c}/g, condition)
+        .replace(/{c_long}/g, conditionLong)
+        .replace(/{dew_point}/g, dewPoint)
+        .replace(/{humidity}/g, humidity)
+        .replace(/{pressure}/g, pressure)
+        .replace(/{pressure_unit}/g, pressureUnit)
+        .replace(/{extra_value}/g, extraValue)
+        .replace(/{extra_name}/g, extraName)
+        .replace(/{wind_speed}/g, windSpeed)
+        .replace(/{wind_dir}/g, windDir)
+        .replace(/{city}/g, city)
+        .replace(/{country}/g, country)
+        .replace(/{search_entry}/g, searchEntry)
         .replace(/{last_updated}/g, lastUpdatedTime);
 }
 function CapitalizeFirstLetter(description) {
@@ -17546,85 +17659,6 @@ class WeatherLoop {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
-
-const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
-async function SpawnProcessJson(command) {
-    const response = await SpawnProcess(command);
-    if (!response.Success)
-        return response;
-    try {
-        response.Data = JSON.parse(response.Data);
-        return response;
-    }
-    catch (e) {
-        if (e instanceof Error)
-            Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
-        response.Success = false;
-        response.ErrorData = {
-            Code: -1,
-            Message: "Failed to parse JSON",
-            Type: "jsonParse",
-        };
-        return response;
-    }
-}
-async function SpawnProcess(command) {
-    let cmd = "";
-    for (const element of command) {
-        cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
-    }
-    logger_Logger.Debug("Spawning command: " + cmd);
-    let response;
-    if (spawnCommandLineAsyncIO === undefined) {
-        response = await new Promise((resolve) => {
-            spawnCommandLineAsync(cmd, () => {
-                resolve({
-                    Success: true,
-                    ErrorData: undefined,
-                    Data: ""
-                });
-            }, () => {
-                resolve({
-                    Success: false,
-                    ErrorData: {
-                        Code: -1,
-                        Message: "Command failed",
-                        Type: "unknown"
-                    },
-                    Data: ""
-                });
-            });
-        });
-    }
-    else {
-        response = await new Promise((resolve) => {
-            spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-                const result = {
-                    Success: exitCode == 0,
-                    ErrorData: undefined,
-                    Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
-                };
-                if (exitCode != 0) {
-                    result.ErrorData = {
-                        Code: exitCode,
-                        Message: err !== null && err !== void 0 ? err : null,
-                        Type: "unknown"
-                    };
-                }
-                resolve(result);
-                return result;
-            });
-        });
-    }
-    return response;
-}
-function OpenUrl(element) {
-    if (!element.url)
-        return;
-    imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/weatherbutton.ts
 
 const { Button } = imports.gi.St;
@@ -18864,7 +18898,7 @@ class UIBar {
     async PushAlertWindow(alerts) {
         const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
         logger_Logger.Info("Alerts Window opened.");
-        const result = await SpawnProcess([alertWindowPath, JSON.stringify(alerts)]);
+        const result = await SpawnProcess([alertWindowPath, Literal(JSON.stringify(alerts))]);
         logger_Logger.Info("Alerts Window closed.");
         if (!result.Success)
             logger_Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
@@ -19283,7 +19317,7 @@ class WeatherApplet extends TextIconApplet {
             }
             this.currentWeatherInfo = weatherInfo;
             if (this.config._runScript)
-                void SpawnProcess([this.config._runScript, JSON.stringify(weatherInfo)]);
+                void this.SendCommand();
             return RefreshState.Success;
         }
         catch (e) {
@@ -19377,7 +19411,10 @@ class WeatherApplet extends TextIconApplet {
             NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
             return;
         }
-        const result = await SpawnProcess([this.config._runScript, JSON.stringify(this.currentWeatherInfo)]);
+        const result = await this.SendCommand();
+        if (!result) {
+            return;
+        }
         if (result.Success)
             NotificationService.Instance.Send(_("Script Executed Successfully"), _("Your script has been executed successfully."));
         else {
@@ -19415,6 +19452,18 @@ The contents of the file saved from the applet help page goes here
     }
     saveCurrentLocation() {
         void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+    }
+    async SendCommand() {
+        if (!this.config._runScript) {
+            return null;
+        }
+        if (!this.currentWeatherInfo) {
+            return null;
+        }
+        let command = InjectValues(this.config._runScript, this.currentWeatherInfo, this.config, true);
+        command = command.replace(/{{full_data}}/g, Literal(JSON.stringify(this.currentWeatherInfo)));
+        command = command.replace(/{full_data}/g, JSON.stringify(this.currentWeatherInfo));
+        return SpawnProcess([command]);
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;

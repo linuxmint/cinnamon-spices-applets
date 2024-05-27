@@ -1,5 +1,6 @@
 import type { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
+import { Literal } from "./lib/commandRunner";
 import { Logger } from "./lib/services/logger";
 import type { ArrowIcons, SunTime } from "./types";
 import type { APIUniqueField, AlertLevel, BuiltinIcons, WeatherData } from "./weather-data";
@@ -62,24 +63,58 @@ export function GenerateLocationText(weather: WeatherData, config: Config): stri
 	return location;
 }
 
-export function InjectValues(text: string, weather: WeatherData, config: Config): string {
+export function InjectValues(text: string, weather: WeatherData, config: Config, inCommand: boolean = false): string {
 	const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
-	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
-			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
-			   .replace(/{c}/g, weather.condition.main)
-			   .replace(/{c_long}/g, weather.condition.description)
-			   .replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, config, false) ?? "")
-			   .replace(/{humidity}/g, weather.humidity?.toString() ?? "")
-			   .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
-			   .replace(/{pressure_unit}/g, config._pressureUnit)
-			   .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
-			   .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-			   .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
-			   .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-			   .replace(/{city}/g, weather.location.city ?? "")
-			   .replace(/{country}/g, weather.location.country ?? "")
-			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "")
-			   .replace(/{last_updated}/g, lastUpdatedTime);
+	const temp = TempToUserConfig(weather.temperature, config, false) ?? "";
+	const tempUnit = UnitToUnicode(config.TemperatureUnit);
+	const condition = weather.condition.main;
+	const conditionLong = weather.condition.description;
+	const dewPoint = TempToUserConfig(weather.dewPoint, config, false) ?? "";
+	const humidity = weather.humidity?.toString() ?? "";
+	const pressure = weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "";
+	const pressureUnit = config._pressureUnit;
+	const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
+	const extraName = weather.extra_field ? weather.extra_field.name : "";
+	const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
+	const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
+	const city = weather.location.city ?? "";
+	const country = weather.location.country ?? "";
+	const searchEntry = config.CurrentLocation?.entryText ?? "";
+	if (inCommand) {
+		text =  text.replace(/{{t}}/g, Literal(temp))
+					.replace(/{{u}}/g, Literal(tempUnit))
+					.replace(/{{c}}/g, Literal(condition))
+					.replace(/{{c_long}}/g, Literal(conditionLong))
+					.replace(/{{dew_point}}/g, Literal(dewPoint))
+					.replace(/{{humidity}}/g, Literal(humidity))
+					.replace(/{{pressure}}/g, Literal(pressure))
+					.replace(/{{pressure_unit}}/g, Literal(pressureUnit))
+					.replace(/{{extra_value}}/g, Literal(extraValue))
+					.replace(/{{extra_name}}/g, Literal(extraName))
+					.replace(/{{wind_speed}}/g, Literal(windSpeed))
+					.replace(/{{wind_dir}}/g, Literal(windDir))
+					.replace(/{{city}}/g, Literal(city))
+					.replace(/{{country}}/g, Literal(country))
+					.replace(/{{search_entry}}/g, Literal(searchEntry))
+					.replace(/{{last_updated}}/g, Literal(lastUpdatedTime));
+	}
+
+	return  text.replace(/{t}/g, temp)
+				.replace(/{u}/g, tempUnit)
+				.replace(/{c}/g, condition)
+				.replace(/{c_long}/g, conditionLong)
+				.replace(/{dew_point}/g, dewPoint)
+				.replace(/{humidity}/g, humidity)
+				.replace(/{pressure}/g, pressure)
+				.replace(/{pressure_unit}/g, pressureUnit)
+				.replace(/{extra_value}/g, extraValue)
+				.replace(/{extra_name}/g, extraName)
+				.replace(/{wind_speed}/g, windSpeed)
+				.replace(/{wind_dir}/g, windDir)
+				.replace(/{city}/g, city)
+				.replace(/{country}/g, country)
+				.replace(/{search_entry}/g, searchEntry)
+				.replace(/{last_updated}/g, lastUpdatedTime);
 }
 
 export function CapitalizeFirstLetter(description: string): string {

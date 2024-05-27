@@ -573,13 +573,12 @@
 	"runScript": {
 		"type": "entry",
 		"default": "",
-		"description": "Run a script when the weather info changes",
-		"tooltip": "The applet will run the script you provide every time the weather data is updated. The script should be executable and have the correct shebang line at the top. The script will be run with the current weather data as the first argument in the format of JSON as string. You can use this to integrate the weather data with other parts of your system. You can look up the weather data structure via the link in the README."
+		"description": "Run a command when the weather info changes",
+		"tooltip": "The applet will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get {full_data} which is the full current weather data. Interpolation with single brackets {xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in single quotes (') and all other single quotes are escaped inside. You can use this to integrate the weather data with other parts of your system. You can look up the full weather data structure via the link in the README.\n\nExample: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' will show a notification with the current weather condition and temperature.\n\nExample: 'echo {{full_data}} > /tmp/weather_data' will save the full weather data to a file in /tmp."
 	},
 	"testRunScript": {
 		"type": "button",
-		"description": "Test your script",
-		"callback": "testRunScript",
-		"tooltip": "Runs the script you provided with the current weather data as the first argument."
+		"description": "Test your command",
+		"callback": "testRunScript"
 	}
 }

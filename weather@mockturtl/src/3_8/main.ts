@@ -20,7 +20,7 @@ import { Logger } from "./lib/services/logger";
 import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
-import { SpawnProcess } from "./lib/commandRunner";
+import { Literal, SpawnProcess } from "./lib/commandRunner";
 import { Event } from "./lib/events";
 import { ErrorHandler } from "./lib/services/error_handler";
 
@@ -218,7 +218,7 @@ export class WeatherApplet extends TextIconApplet {
 
 			this.currentWeatherInfo = weatherInfo;
 			if (this.config._runScript)
-				void SpawnProcess([this.config._runScript, JSON.stringify(weatherInfo)]);
+				void this.SendCommand();
 			return RefreshState.Success;
 		}
 		catch (e) {
@@ -346,7 +346,12 @@ export class WeatherApplet extends TextIconApplet {
 			return;
 		}
 
-		const result = await SpawnProcess([this.config._runScript, JSON.stringify(this.currentWeatherInfo)]);
+		const result = await this.SendCommand();
+		// We already handled the this above
+		if (!result) {
+			return;
+		}
+
 		if (result.Success)
 			NotificationService.Instance.Send(_("Script Executed Successfully"), _("Your script has been executed successfully."));
 		else {
@@ -436,6 +441,22 @@ The contents of the file saved from the applet help page goes here
 
 		await CloseStream(stream.get_output_stream());
 		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
+	}
+
+	private async SendCommand() {
+		if (!this.config._runScript) {
+			return null;
+		}
+
+		if (!this.currentWeatherInfo) {
+			return null;
+		}
+
+		let command = InjectValues(this.config._runScript, this.currentWeatherInfo, this.config, true);
+		command = command.replace(/{{full_data}}/g, Literal(JSON.stringify(this.currentWeatherInfo)));
+		command = command.replace(/{full_data}/g, JSON.stringify(this.currentWeatherInfo));
+
+		return SpawnProcess([command]);
 	}
 
 

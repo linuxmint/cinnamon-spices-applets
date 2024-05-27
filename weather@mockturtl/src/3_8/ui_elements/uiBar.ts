@@ -1,4 +1,4 @@
-import { OpenUrl, SpawnProcess } from "../lib/commandRunner";
+import { Literal, OpenUrl, SpawnProcess } from "../lib/commandRunner";
 import type { Config, DistanceUnits } from "../config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
 import { Event } from "../lib/events";
@@ -221,7 +221,7 @@ export class UIBar {
 		const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
 
 		Logger.Info("Alerts Window opened.");
-		const result = await SpawnProcess([alertWindowPath, JSON.stringify(alerts)]);
+		const result = await SpawnProcess([alertWindowPath, Literal(JSON.stringify(alerts))]);
 		Logger.Info("Alerts Window closed.");
 		if (!result.Success)
 			Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
