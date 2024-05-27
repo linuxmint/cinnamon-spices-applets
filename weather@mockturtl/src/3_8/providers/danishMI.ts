@@ -2,9 +2,10 @@ import { DateTime } from "luxon";
 import type { Services } from "../config";
 import type { HTTPParams} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
-import type { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../types";
+import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../weather-data";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
+import type { LocationData } from "../types";
 
 export class DanishMI extends BaseProvider {
 	public readonly needsApiKey: boolean = false;

@@ -10,7 +10,7 @@ import { DateTime } from "luxon";
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData, AlertData, AlertLevel } from "../../types";
+import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, AlertData, AlertLevel } from "../../weather-data";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { Config } from "../../config";
@@ -18,6 +18,7 @@ import type { WeatherbitAlertsResponse } from "./alerts";
 import type { WeatherBitCurrentWeatherData } from "./current";
 import type { WeatherBitDailyWeatherDataResponse } from "./daily";
 import type { WeatherBitHourlyWeatherDataResponse } from "./hourly";
+import type { LocationData } from "../../types";
 
 export class Weatherbit extends BaseProvider {
 

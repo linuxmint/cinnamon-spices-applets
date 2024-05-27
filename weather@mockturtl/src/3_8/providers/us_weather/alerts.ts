@@ -1,5 +1,5 @@
 import { HttpLib } from "../../lib/httpLib";
-import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
+import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../weather-data";
 
 interface USWeatherAlert {
 	geometry: {

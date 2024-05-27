@@ -4,7 +4,7 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, STYLE_HIDDEN } from "../consts";
 import type { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/logger";
 import type { WeatherApplet } from "../main";
-import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
+import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../weather-data";
 import { _, TempToUserConfig, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { SunTimesUI } from "./uiSunTimes";

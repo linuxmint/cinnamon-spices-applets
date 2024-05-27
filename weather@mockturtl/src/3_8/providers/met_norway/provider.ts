@@ -1,6 +1,7 @@
 import { Logger } from "../../lib/logger";
 import { getTimes } from "suncalc";
-import type { WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation} from "../../types";
+import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation} from "../../weather-data";
+import type { LocationData, correctGetTimes, SunTime} from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";

@@ -3,7 +3,7 @@ import { APPLET_ICON } from "../consts";
 import { Event } from "../lib/events";
 import { Logger } from "../lib/logger";
 import type { WeatherApplet } from "../main";
-import type { WeatherData } from "../types";
+import type { WeatherData } from "../weather-data";
 import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import type { DateTime } from "luxon";

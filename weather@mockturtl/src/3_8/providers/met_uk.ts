@@ -9,7 +9,8 @@
 import type { DistanceUnits } from "../config";
 import { Logger } from "../lib/logger";
 import { getTimes } from "suncalc";
-import type { WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
+import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../weather-data";
+import type { LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "./BaseProvider";

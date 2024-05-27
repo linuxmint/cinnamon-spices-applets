@@ -2,7 +2,7 @@ import type { Config } from "./config";
 import { CurrentWeather as UICurrentWeather } from "./ui_elements/uiCurrentWeather";
 import { Logger } from "./lib/logger";
 import type { WeatherApplet } from "./main";
-import type { WeatherData, WeatherProvider } from "./types";
+import type { WeatherProvider } from "./types";
 import { ShadeHexColor, delay, _ } from "./utils";
 import { UIForecasts } from "./ui_elements/uiForecasts";
 import { UIHourlyForecasts } from "./ui_elements/uiHourlyForecasts";
@@ -10,6 +10,7 @@ import { UIBar } from "./ui_elements/uiBar";
 import { UISeparator } from "./ui_elements/uiSeparator";
 import type { WeatherButton } from "./ui_elements/weatherbutton";
 import type { DateTime } from "luxon";
+import type { WeatherData } from "./weather-data";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { IconType, Label } = imports.gi.St;

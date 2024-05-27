@@ -3,10 +3,11 @@ import { getTimes } from "suncalc";
 import type { Config, Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType, AlertData } from "../../types";
+import type { Condition, ForecastData, HourlyForecastData, WeatherData, PrecipitationType, AlertData } from "../../weather-data";
 import { _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
 import { GetDeutscherWetterdienstAlerts } from "./alert";
+import type { LocationData } from "../../types";
 
 
 export class DeutscherWetterdienst extends BaseProvider {

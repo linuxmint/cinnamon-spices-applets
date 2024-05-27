@@ -1,6 +1,7 @@
 import type { Config, Services } from "../config";
 import type { WeatherApplet } from "../main";
-import type { LocationData, WeatherData, WeatherProvider } from "../types";
+import type { LocationData, WeatherProvider } from "../types";
+import type { WeatherData } from "../weather-data";
 
 /** Base Class for providers, mostly to enforce constructor signature */
 export abstract class BaseProvider implements WeatherProvider {

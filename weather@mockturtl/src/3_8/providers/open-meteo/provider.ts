@@ -1,6 +1,7 @@
 import { HttpLib } from "../../lib/httpLib";
-import type { LocationData, WeatherData } from "../../types";
+import type { LocationData } from "../../types";
 import { _ } from "../../utils";
+import type { WeatherData } from "../../weather-data";
 import { BaseProvider } from "../BaseProvider";
 import type { OpenMeteoWeatherResponse } from "./payload/response";
 import { OpenMeteoResponseToData } from "./payload/response";

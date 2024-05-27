@@ -2,10 +2,11 @@ import { DateTime } from "luxon";
 import type { Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import type { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData} from "../../types";
+import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { VisualCrossingAlert } from "./alerts";
+import type { LocationData } from "../../types";
 
 
 export class VisualCrossing extends BaseProvider {

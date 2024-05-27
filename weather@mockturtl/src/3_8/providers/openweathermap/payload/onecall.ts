@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
-import type { AlertData, ForecastData, HourlyForecastData, ImmediatePrecipitation, WeatherData } from "../../../types";
 import type { OWMWeatherCondition } from "./common";
 import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
 import { _ } from "../../../utils";
+import type { AlertData, ForecastData, HourlyForecastData, ImmediatePrecipitation, WeatherData } from "../../../weather-data";
 
 export function OWMOneCallToWeatherData(json: OWMOneCallPayload): WeatherData {
 	const weather: WeatherData = {

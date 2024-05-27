@@ -9,7 +9,7 @@
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
-import type { WeatherData, AppletError, LocationData} from "../../types";
+import type { AppletError, LocationData} from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { OpenWeatherMapError} from "./payload/common";
@@ -18,6 +18,7 @@ import type { Config, Services } from "../../config";
 import type { OWMOneCallPayload} from "./payload/onecall";
 import { OWMOneCallToWeatherData } from "./payload/onecall";
 import type { OWMWeatherResponse } from "./payload/weather";
+import type { WeatherData } from "../../weather-data";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};

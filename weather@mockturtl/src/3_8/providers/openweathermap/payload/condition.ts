@@ -1,4 +1,4 @@
-import type { BuiltinIcons, CustomIcons } from "../../../types";
+import type { BuiltinIcons, CustomIcons } from "../../../weather-data"
 
 export function OWMIconToBuiltInIcons(icon: string): BuiltinIcons[] {
 	// https://openweathermap.org/weather-conditions

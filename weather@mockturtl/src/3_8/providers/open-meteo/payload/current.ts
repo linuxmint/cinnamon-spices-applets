@@ -1,5 +1,5 @@
-import type { WeatherData } from "../../../types";
 import { CelsiusToKelvin, KPHtoMPS, _ } from "../../../utils";
+import type { WeatherData } from "../../../weather-data";
 import { OpenMeteoWeatherCodeToCondition } from "./common";
 
 export interface OpenMeteoCurrentWeather {

@@ -3,9 +3,10 @@ import type { Services } from "../config";
 import type { ErrorResponse} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
 import type { WeatherApplet } from "../main";
-import type { Condition, ForecastData, HourlyForecastData, LocationData, Precipitation, WeatherData } from "../types";
+import type { Condition, ForecastData, HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
 import { CelsiusToKelvin, KPHtoMPS, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
+import type { LocationData } from "../types";
 
 export class AccuWeather extends BaseProvider {
     public readonly needsApiKey: boolean = true;

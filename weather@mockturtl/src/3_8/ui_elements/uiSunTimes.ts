@@ -2,7 +2,7 @@ import type { DateTime } from "luxon";
 import type { Config } from "../config";
 import { BLANK, ELLIPSIS } from "../consts";
 import type { WeatherApplet } from "../main";
-import type { WeatherData } from "../types";
+import type { WeatherData } from "../weather-data";
 import { GetHoursMinutes } from "../utils";
 
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;

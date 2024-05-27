@@ -1,7 +1,8 @@
 import type { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
 import { Logger } from "./lib/logger";
-import type { APIUniqueField, AlertLevel, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import type { ArrowIcons, SunTime } from "./types";
+import type { APIUniqueField, AlertLevel, BuiltinIcons, WeatherData } from "./weather-data";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;

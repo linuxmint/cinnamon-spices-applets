@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
-import type { HourlyForecastData, Tuple } from "../../../types";
+import type { Tuple } from "../../../types";
 import { OpenMeteoWeatherCodeToCondition } from "./common";
 import { CelsiusToKelvin } from "../../../utils";
+import type { HourlyForecastData } from "../../../weather-data";
 
 export interface OpenMeteoHourWeather {
 	/**

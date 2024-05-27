@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
-import type { ForecastData } from "../../../types";
 import type { OWMWeatherCondition } from "./common";
 import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
+import type { ForecastData } from "../../../weather-data";
 
 export interface OWMDailyForecastResponse {
 	city: {
