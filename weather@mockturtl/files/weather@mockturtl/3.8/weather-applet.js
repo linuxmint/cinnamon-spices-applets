@@ -16874,6 +16874,8 @@ class Config {
         this.AlwaysShowHourlyWeatherChanged = new Event();
         this.TooltipTextOverrideChanged = new Event();
         this.ShowAlertsChanged = new Event();
+        this.UserAgentStringOverrideChanged = new Event();
+        this.RunScriptChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
@@ -17294,6 +17296,14 @@ const Keys = {
     SHOW_ALERTS: {
         key: "showAlerts",
         prop: "ShowAlerts"
+    },
+    USER_AGENT_STRING_OVERRIDE: {
+        key: "userAgentStringOverride",
+        prop: "UserAgentStringOverride"
+    },
+    RUN_SCRIPT: {
+        key: "runScript",
+        prop: "RunScript"
     },
 };
 
@@ -19226,6 +19236,8 @@ class WeatherApplet extends TextIconApplet {
                 return RefreshState.DisplayFailure;
             }
             this.currentWeatherInfo = weatherInfo;
+            if (this.config._runScript)
+                void SpawnProcess([this.config._runScript, JSON.stringify(weatherInfo)]);
             return RefreshState.Success;
         }
         catch (e) {
@@ -19309,6 +19321,21 @@ class WeatherApplet extends TextIconApplet {
     locationLookup() {
         const command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+    }
+    async testRunScript() {
+        if (!this.config._runScript)
+            return;
+        if (!this.currentWeatherInfo) {
+            NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
+            return;
+        }
+        const result = await SpawnProcess([this.config._runScript, JSON.stringify(this.currentWeatherInfo)]);
+        if (result.Success)
+            NotificationService.Instance.Send(_("Script Executed Successfully"), _("Your script has been executed successfully."));
+        else {
+            logger_Logger.Error("Error running script: ", result.ErrorData);
+            NotificationService.Instance.Send(_("Error Running Script"), _("Script returned error, see logs for more information"));
+        }
     }
     async submitIssue() {
         var _a, _b, _c;

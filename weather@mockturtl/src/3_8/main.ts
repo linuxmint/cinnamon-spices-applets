@@ -197,6 +197,8 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.currentWeatherInfo = weatherInfo;
+			if (this.config._runScript)
+				void SpawnProcess([this.config._runScript, JSON.stringify(weatherInfo)]);
 			return RefreshState.Success;
 		}
 		catch (e) {
@@ -311,6 +313,24 @@ export class WeatherApplet extends TextIconApplet {
 	private locationLookup(): void {
 		const command = "xdg-open ";
 		spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+	}
+
+	private async testRunScript(): Promise<void> {
+		if (!this.config._runScript)
+			return;
+
+		if (!this.currentWeatherInfo) {
+			NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
+			return;
+		}
+
+		const result = await SpawnProcess([this.config._runScript, JSON.stringify(this.currentWeatherInfo)]);
+		if (result.Success)
+			NotificationService.Instance.Send(_("Script Executed Successfully"), _("Your script has been executed successfully."));
+		else {
+			Logger.Error("Error running script: ", result.ErrorData);
+			NotificationService.Instance.Send(_("Error Running Script"), _("Script returned error, see logs for more information"));
+		}
 	}
 
 	private async submitIssue(): Promise<void> {

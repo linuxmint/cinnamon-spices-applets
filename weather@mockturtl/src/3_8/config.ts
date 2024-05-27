@@ -135,6 +135,8 @@ export class Config {
 	public readonly _panelTextOverride!: string;
 	public readonly _tooltipTextOverride!: string;
 	public readonly _showAlerts!: boolean;
+	public readonly _userAgentStringOverride!: string;
+	public readonly _runScript!: string;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -172,6 +174,8 @@ export class Config {
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
 	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
 	public readonly ShowAlertsChanged = new Event<Config, string>();
+	public readonly UserAgentStringOverrideChanged = new Event<Config, string>();
+	public readonly RunScriptChanged = new Event<Config, boolean>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -742,6 +746,14 @@ export class Config {
 	SHOW_ALERTS: {
 		key: "showAlerts",
 		prop: "ShowAlerts"
+	},
+	USER_AGENT_STRING_OVERRIDE: {
+		key: "userAgentStringOverride",
+		prop: "UserAgentStringOverride"
+	},
+	RUN_SCRIPT: {
+		key: "runScript",
+		prop: "RunScript"
 	},
 } as const;
 

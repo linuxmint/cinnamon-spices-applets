@@ -185,6 +185,12 @@ The setting allows you to make the applet display basically anything in the form
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
 | `{last_updated}`  | Formatted last updated time                               |
 
+## Run script when the weather data changes
+
+"Run a script when the weather info changes" field will run the script you provide every time the weather data is updated. The script should be executable, have the correct shebang line at the top and it will be run with the current weather data as the first argument in the format of JSON as string. You can use this to integrate the weather data with other parts of your system.
+
+[Weather data structure you receive](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/src/3_8/weather-data.ts)
+
 ## Future Plans
 
 * Add special formatting options (like padded temperature) for values in panel in the "Override label on panel" setting 

@@ -48,7 +48,8 @@
 			"sections": [
 				"more-info",
 				"submit-issue",
-				"debug-options"
+				"debug-options",
+				"technical-automation"
 			]
 		},
 		"location-section": {
@@ -58,6 +59,15 @@
 				"manualLocation",
 				"location",
 				"locationDescription"
+			]
+		},
+		"technical-automation": {
+			"type": "section",
+			"title": "Technical and Automation",
+			"keys": [
+				"userAgentStringOverride",
+				"runScript",
+				"testRunScript"
 			]
 		},
 		"location-store": {
@@ -553,5 +563,23 @@
 		"default": "",
 		"description": "Selected path to save Logs",
 		"value": ""
-    }
+    },
+	"userAgentStringOverride": {
+		"type": "entry",
+		"default": "",
+		"description": "User Agent String Override",
+		"tooltip": "If you have issues with the applet not working properly and you know the User Agent string is the problem you can try to override it. Only change it if you know what you are doing. This is a string that is sent to the server when the applet tries to get the weather data."
+	},
+	"runScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Run a script when the weather info changes",
+		"tooltip": "The applet will run the script you provide every time the weather data is updated. The script should be executable and have the correct shebang line at the top. The script will be run with the current weather data as the first argument in the format of JSON as string. You can use this to integrate the weather data with other parts of your system. You can look up the weather data structure via the link in the README."
+	},
+	"testRunScript": {
+		"type": "button",
+		"description": "Test your script",
+		"callback": "testRunScript",
+		"tooltip": "Runs the script you provided with the current weather data as the first argument."
+	}
 }

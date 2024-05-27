@@ -21,9 +21,9 @@ export interface WeatherData {
 		lon?: number,
 		area?: string
 	} | undefined,
-	/** preferably in UTC */
+	/** in UTC with with tz info */
 	sunrise: DateTime | null,
-	/** preferably in UTC */
+	/** in UTC with with tz info  */
 	sunset: DateTime | null,
 	wind: {
 		/** Meter/sec */
@@ -75,7 +75,7 @@ interface StringAPIUniqueField extends BaseAPIUniqueField {
 
 
 export interface ForecastData {
-	/** Set to 12:00 if possible */
+	/** Set to 12:00 if possible, UTC with TZ info */
 	date: DateTime,
 	/** Kelvin */
 	temp_min: number | null,
@@ -123,6 +123,9 @@ export interface Condition {
 	 * needs multiple in case one/some of them are not available
 	 */
 	icons: BuiltinIcons[],
+	/**
+	 * Custom icons available from the applet's icons folder.
+	 */
 	customIcon: CustomIcons
 }
 
