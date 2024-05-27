@@ -58,7 +58,7 @@ class Soup3 implements SoupLib {
 	private readonly _httpSession = new Session();
 
     constructor() {
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0"; // ipapi blocks non-browsers agents, imitating browser
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
     }
@@ -146,7 +146,7 @@ class Soup2 implements SoupLib {
         const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 		this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0"; // ipapi blocks non-browsers agents, imitating browser
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
 		this._httpSession.use_thread_context = true;

@@ -10055,7 +10055,7 @@ function AddHeadersToMessage(message, headers) {
 class Soup3 {
     constructor() {
         this._httpSession = new Session();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
     }
@@ -10113,7 +10113,7 @@ class Soup2 {
     constructor() {
         const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
         this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
         this._httpSession.use_thread_context = true;
