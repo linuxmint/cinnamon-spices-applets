@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.6.0
+
+## 3.5.0
+
+* Resolve- [Feature Request: Weather applet should show weather alerts/warnings #5546](https://github.com/linuxmint/cinnamon-spices-applets/issues/5546)
+- OpenWeatherMap sunsets it's OneCall API 2.5 in **June 2024** and they don't seem to want to enable 3.0 for the opensource plan for 
+  me. So I switch to Open-Meteo as the default and break OWM provider 
+  into 2, one without key and one with key.
+- Fixed refreshing problem on Cinnamon 3.8 forever timing out.
+
 ## 3.4.3
 
 * Fix [#5107](https://github.com/linuxmint/cinnamon-spices-applets/issues/5107) - Do not display null if there is no temperature provided on the applet label. 
@@ -88,6 +98,7 @@ Fix nominatim not getting location data due to API changes. Related issues:
 * Fixes [#4505](https://github.com/linuxmint/cinnamon-spices-applets/issues/4505)
 
 ## 3.2.9
+
 * Add support for Soup v3
 
 ## 3.2.8

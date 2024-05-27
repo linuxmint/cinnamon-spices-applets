@@ -139,7 +139,6 @@ interface Soup2Session extends Omit<imports.gi.Soup.Session, "send_async"> {
 class Soup2 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private readonly _httpSession: Soup2Session;
 
     constructor() {

@@ -30,13 +30,13 @@ You can also save locations what you entered manually and switch between them in
 
 | Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts  | Other information             |
 | -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------- | ----------------------------- |
-| **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | Default provider              |
+| **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | --                            |
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
-| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | -                             |
+| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | Default provider              |
 | **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | -                             |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
