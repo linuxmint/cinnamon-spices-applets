@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-26 22:02-0100\n"
-"PO-Revision-Date: 2024-03-07 18:37-0300\n"
+"PO-Revision-Date: 2024-05-27 13:33-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: 4.2/applet.js:56 5.4/applet.js:55
 msgid ""
@@ -27,6 +27,12 @@ msgid ""
 "installed\n"
 "on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
 msgstr ""
+"📢 Los efectos de clic se eliminarán de este applet en la versión 6.2 de "
+"Cinnamon\n"
+"y se moverán a una nueva extensión llamada mouse-click-effects que ya puede "
+"ser instalada\n"
+"en el módulo de configuración de Extensiones de Cinnamon para versiones de "
+"Cinnamon >= 5.4"
 
 #: 4.2/applet.js:387 5.4/applet.js:383
 msgid "click to deactivate the eye"
@@ -45,13 +51,12 @@ msgid "Cinnamon Eyes"
 msgstr "Ojos de Cinnamon"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
 "cursor."
 msgstr ""
 "Un applet para Cinnamon que añade un ojo en la barra de panel que sigue al "
-"cursor y muestra animaciones de clics."
+"cursor."
 
 #. 4.2->settings-schema.json->eye->title
 #. 5.4->settings-schema.json->eye->title
@@ -394,29 +399,28 @@ msgstr "Opacidad general"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
-msgstr ""
+msgstr "Mensaje de información sobre herramientas al pasar el mouse por encima"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
-msgstr ""
+msgstr "Usar colores alternativos para el ojo"
 
 #. 6.2->settings-schema.json->use-alternative-colors->tooltip
 msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
 msgstr ""
+"Si se desactiva, utilizará el color predeterminado del tema del sistema "
+"actual para los elementos del panel."
 
 #. 6.2->settings-schema.json->base-color->description
-#, fuzzy
 msgid "Base Color"
-msgstr "Color base activado"
+msgstr "Color base"
 
 #. 6.2->settings-schema.json->iris-color->description
-#, fuzzy
 msgid "Iris Color"
-msgstr "Color de iris activado"
+msgstr "Color de iris"
 
 #. 6.2->settings-schema.json->pupil-color->description
-#, fuzzy
 msgid "Pupil Color"
-msgstr "Color de pupila activado"
+msgstr "Color de pupila"
