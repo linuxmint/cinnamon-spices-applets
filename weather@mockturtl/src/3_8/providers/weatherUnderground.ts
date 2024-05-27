@@ -3,7 +3,7 @@ import { getTimes } from "suncalc";
 import type { Services } from "../config";
 import type { ErrorResponse} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
-import { Logger } from "../lib/logger";
+import { Logger } from "../lib/services/logger";
 import type { Condition, ForecastData, WeatherData } from "../weather-data";
 import type { LocationData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";

@@ -9,7 +9,7 @@
 import { DateTime } from "luxon";
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import type { WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, AlertData, AlertLevel } from "../../weather-data";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";

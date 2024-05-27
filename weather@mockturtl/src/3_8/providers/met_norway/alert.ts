@@ -1,5 +1,5 @@
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import { PointInsidePolygon } from "../../lib/polygons";
 import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../weather-data";
 

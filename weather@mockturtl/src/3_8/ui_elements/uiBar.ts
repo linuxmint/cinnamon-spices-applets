@@ -8,7 +8,7 @@ import type { WeatherProvider } from "../types";
 import { _, AwareDateString, GetAlertColor, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
-import { Logger } from "../lib/logger";
+import { Logger } from "../lib/services/logger";
 
 const { BoxLayout, IconType, Bin, Icon, Align, Button, Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;

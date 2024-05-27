@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import type { WeatherApplet } from "../../main";
 import type { LocationData } from "../../types";
 import { _ } from "../../utils";

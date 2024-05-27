@@ -1,7 +1,7 @@
 import type { WeatherApplet } from "./main";
 import type { LocationData} from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
-import { Logger } from "./lib/logger";
+import { Logger } from "./lib/services/logger";
 import type { LogLevel} from "./consts";
 import { distanceUnitLocales, fahrenheitCountries, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
@@ -189,7 +189,6 @@ export class Config {
 	public readonly LocationChanged = new Event<Config, void>();
 
 	private settings: imports.ui.settings.AppletSettings;
-	private app: WeatherApplet;
 	private readonly instance_id: number;
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
@@ -230,8 +229,7 @@ export class Config {
 	private readonly InterfaceSettings: imports.gi.Gio.Settings;
 	private currentFontSize: number;
 
-	constructor(app: WeatherApplet, instanceID: number) {
-		this.app = app;
+	constructor(instanceID: number) {
 		this.instance_id = instanceID;
 		this.settings = new AppletSettings(this, UUID, instanceID);
 		// Bind as early as possible so that we can update the log level asap
@@ -239,13 +237,13 @@ export class Config {
 		this.onLogLevelUpdated();
 		this.currentLocale = ConstructJsLocale(get_language_names());
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new GeoIPFedora(app); // IP location lookup
-		this.geoClue = new GeoClue(app);
-		this.geoLocationService = new GeoLocation(app);
+		this.autoLocProvider = new GeoIPFedora(this); // IP location lookup
+		this.geoClue = new GeoClue();
+		this.geoLocationService = new GeoLocation();
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.LocStore = new LocationStore(this.app, this);
+		this.LocStore = new LocationStore(this);
 	}
 
 	public get CurrentFontSize(): number {

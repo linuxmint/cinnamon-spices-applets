@@ -1,5 +1,6 @@
+import { Config } from "./config";
 import { UUID } from "./consts";
-import { Logger } from "./lib/logger";
+import { Logger } from "./lib/services/logger";
 import { WeatherApplet } from "./main";
 import type { Metadata } from "./types";
 
@@ -18,5 +19,6 @@ export function main(metadata: Metadata, orientation: imports.gi.St.Side, panelH
 
 	Logger.UpdateInstanceID(instanceId);
 
-	return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
+	const config = new Config(instanceId);
+	return new WeatherApplet(config, metadata, orientation, panelHeight, instanceId);
 }

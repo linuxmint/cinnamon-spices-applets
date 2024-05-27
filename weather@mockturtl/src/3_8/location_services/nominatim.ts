@@ -1,9 +1,9 @@
 import { DateTime } from "luxon";
-import { Logger } from "../lib/logger";
-import type { WeatherApplet } from "../main";
+import { Logger } from "../lib/services/logger";
 import type { LocationData } from "../types";
 import { _ } from "../utils";
 import { HttpLib } from "../lib/httpLib";
+import { ErrorHandler } from "../lib/services/error_handler";
 
 interface NominatimLocationItem {
 	place_id: number;
@@ -40,12 +40,7 @@ type NominatimResponse = NominatimLocationItem[];
 export class GeoLocation {
 	private url = "https://nominatim.openstreetmap.org/search";
 	private params = "format=json&addressdetails=1&limit=1";
-	private App: WeatherApplet;
 	private cache: LocationCache = {};
-
-	constructor(app: WeatherApplet) {
-		this.App = app;
-	}
 
 	/**
 	 * Finds location and rebuilds entryText so it can be looked up again
@@ -69,7 +64,7 @@ export class GeoLocation {
 				return null;
 
 			if (locationData.length == 0) {
-				this.App.ShowError({
+				ErrorHandler.Instance.PostError({
 					type: "hard",
 					detail: "bad location format",
 					message: _("Could not find location based on address, please check if it's right")
@@ -90,7 +85,7 @@ export class GeoLocation {
 		}
 		catch (e) {
 			Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
-			this.App.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "soft",
 				detail: "bad api response",
 				message: _("Failed to call Geolocation API, see Looking Glass for errors.")

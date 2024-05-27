@@ -1,4 +1,4 @@
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
 import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation} from "../../weather-data";
 import type { LocationData, correctGetTimes, SunTime} from "../../types";

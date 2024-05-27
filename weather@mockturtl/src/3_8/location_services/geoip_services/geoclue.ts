@@ -1,6 +1,5 @@
 import { DateTime } from "luxon";
-import { Logger } from "../../lib/logger";
-import type { WeatherApplet } from "../../main";
+import { Logger } from "../../lib/services/logger";
 import type { LocationData } from "../../types";
 import type { GeoIP } from "./base";
 
@@ -13,10 +12,8 @@ interface ExtendedLocationData extends LocationData {
 }
 
 export class GeoClue implements GeoIP {
-	private app: WeatherApplet;
 
-	constructor(_app: WeatherApplet) {
-		this.app = _app;
+	constructor() {
 		try {
 			GeoClueLib = imports.gi.Geoclue;
 			GeocodeGlib = imports.gi.GeocodeGlib;

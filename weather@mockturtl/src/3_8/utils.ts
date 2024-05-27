@@ -1,6 +1,6 @@
 import type { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { Logger } from "./lib/logger";
+import { Logger } from "./lib/services/logger";
 import type { ArrowIcons, SunTime } from "./types";
 import type { APIUniqueField, AlertLevel, BuiltinIcons, WeatherData } from "./weather-data";
 import { DateTime } from "luxon";

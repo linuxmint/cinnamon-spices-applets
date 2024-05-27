@@ -1,6 +1,7 @@
+import type { Config } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
-import type { WeatherApplet } from "../../main";
+import { ErrorHandler } from "../../lib/services/error_handler";
+import { Logger } from "../../lib/services/logger";
 import type { LocationData } from "../../types";
 import { _ } from "../../utils";
 import type { GeoIP } from "./base";
@@ -12,10 +13,10 @@ import type { GeoIP } from "./base";
 export class GeoIPFedora implements GeoIP {
 	private readonly query = "https://geoip.fedoraproject.org/city";
 
-	private app: WeatherApplet;
+	private config: Config;
 
-	constructor(app: WeatherApplet) {
-		this.app = app;
+	constructor(config: Config) {
+		this.config = config;
 	}
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
@@ -31,7 +32,12 @@ export class GeoIPFedora implements GeoIP {
 
 	private ParseInformation(json: GeoIPFedoraPayload): LocationData | null {
 		if (json.latitude === null || json.longitude === null) {
-			this.HandleErrorResponse();
+			ErrorHandler.Instance.PostError({
+				type: "hard",
+				detail: "bad api response",
+				message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
+				service: "geoip.fedoreproject"
+			})
 			return null;
 		}
 
@@ -41,7 +47,7 @@ export class GeoIPFedora implements GeoIP {
 				lon: json.longitude,
 				city: json.city ?? undefined,
 				country: json.country_name ?? undefined,
-				timeZone: json.time_zone ?? this.app.config.UserTimezone,
+				timeZone: json.time_zone ?? this.config.UserTimezone,
 				entryText: json.latitude + "," + json.longitude,
 			}
 			Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
@@ -50,18 +56,9 @@ export class GeoIPFedora implements GeoIP {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("geoip.fedoraproject parsing error: " + e.message, e);
-			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+			ErrorHandler.Instance.PostError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
 			return null;
 		}
-	};
-
-	private HandleErrorResponse(): void {
-		this.app.ShowError({
-			type: "hard",
-			detail: "bad api response",
-			message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
-			service: "geoip.fedoreproject"
-		})
 	};
 }
 

@@ -8,7 +8,7 @@
 
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import type { AppletError, LocationData} from "../../types";
 import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";

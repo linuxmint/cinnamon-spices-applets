@@ -1,14 +1,12 @@
 import type { Config } from "../config";
 import { Event } from "../lib/events";
-import { Logger } from "../lib/logger";
-import type { WeatherApplet } from "../main";
+import { Logger } from "../lib/services/logger";
 import { NotificationService } from "../lib/notification_service";
 import type { LocationData } from "../types";
 import { ValidTimezone, _ } from "../utils";
 import { DateTime } from "luxon";
 export class LocationStore {
 	private locations: LocationData[] = [];
-	private app: WeatherApplet;
 	private config: Config;
 
 	/**
@@ -23,9 +21,10 @@ export class LocationStore {
 	 * event callback for applet when location storage is modified
 	 */
 	public readonly StoreChanged = new Event<LocationStore, number>();
+	public readonly CurrentLocationModified = new Event<LocationStore, void>();
 
-	constructor(app: WeatherApplet, config: Config) {
-		this.app = app;
+
+	constructor(config: Config) {
 		this.config = config;
 		this.locations = config._locationList;
 	}
@@ -65,7 +64,7 @@ export class LocationStore {
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
-			void this.app.Refresh();
+			this.CurrentLocationModified.Invoke(this);
 		}
 		this.InvokeStorageChanged();
 	}
@@ -214,8 +213,8 @@ export class LocationStore {
 			return;
 		}
 		// Save tz if it exists
-		if (this.app.config.Timezone)
-			loc.timeZone = this.app.config.Timezone;
+		if (this.config.Timezone)
+			loc.timeZone = this.config.Timezone;
 
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location

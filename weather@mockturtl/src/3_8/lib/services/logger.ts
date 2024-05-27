@@ -1,7 +1,7 @@
-import type { LogLevel } from "../consts";
-import { UUID } from "../consts";
-import { CompareVersion, _ } from "../utils";
-import { FileExists, LoadContents } from "./io_lib";
+import type { LogLevel } from "../../consts";
+import { UUID } from "../../consts";
+import { CompareVersion, _ } from "../../utils";
+import { FileExists, LoadContents } from "../io_lib";
 
 const { File } = imports.gi.Gio;
 const { get_home_dir, get_environ } = imports.gi.GLib;

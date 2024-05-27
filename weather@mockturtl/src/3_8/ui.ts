@@ -1,6 +1,6 @@
 import type { Config } from "./config";
 import { CurrentWeather as UICurrentWeather } from "./ui_elements/uiCurrentWeather";
-import { Logger } from "./lib/logger";
+import { Logger } from "./lib/services/logger";
 import type { WeatherApplet } from "./main";
 import type { WeatherProvider } from "./types";
 import { ShadeHexColor, delay, _ } from "./utils";

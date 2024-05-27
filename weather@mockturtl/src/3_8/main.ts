@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------
 
 import { DateTime } from "luxon";
-import { Config, ServiceClassMapping } from "./config";
+import { type Config, ServiceClassMapping } from "./config";
 import type { RefreshOptions} from "./loop";
 import { WeatherLoop } from "./loop";
 import type { WeatherData, CustomIcons, BuiltinIcons } from "./weather-data";
@@ -16,12 +16,13 @@ import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import type { HttpError } from "./lib/httpLib";
 import { HttpLib } from "./lib/httpLib";
-import { Logger } from "./lib/logger";
+import { Logger } from "./lib/services/logger";
 import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
 import { SpawnProcess } from "./lib/commandRunner";
 import { Event } from "./lib/events";
+import { ErrorHandler } from "./lib/services/error_handler";
 
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
@@ -61,9 +62,7 @@ export class WeatherApplet extends TextIconApplet {
 	 */
 	public encounteredError: boolean = false;
 
-	private online: boolean | null = null;
-
-	public constructor(metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+	public constructor(config: Config, metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 		this.metadata = metadata;
 		this.AppletDir = metadata.path;
@@ -72,13 +71,14 @@ export class WeatherApplet extends TextIconApplet {
 		Logger.Debug("AppletDir is: " + this.AppletDir);
 
 		this.SetAppletOnPanel();
-		this.config = new Config(this, instanceId);
+		this.config = config;
 		this.AddRefreshButton();
 		this.EnsureProvider();
 		this.ui = new UI(this, orientation);
 		this.ui.Rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
 		HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
+		ErrorHandler.Instance.OnError.Subscribe((sender, error) => this.ShowError(error));
 		try {
 			this.setAllowedLayout(AllowedLayout.BOTH);
 		} catch {
@@ -127,6 +127,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.FontChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
 		this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
 		this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
+		this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
 
 		keybindingManager.addHotKey(
 			UUID, this.config.keybinding, () => this.on_applet_clicked());

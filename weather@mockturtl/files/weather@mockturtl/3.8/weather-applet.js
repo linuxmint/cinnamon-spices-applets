@@ -505,6 +505,292 @@ const distanceUnitLocales = {
     ]
 };
 
+;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
+
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
+async function GetFileInfo(file) {
+    return new Promise((resolve) => {
+        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
+            try {
+                const result = file.query_info_finish(res);
+                resolve(result);
+                return result;
+            }
+            catch (e) {
+                Logger.Error("Error getting file info: ", e);
+                resolve(null);
+                return null;
+            }
+        });
+    });
+}
+function FileExists(file) {
+    try {
+        return file.query_exists(null);
+    }
+    catch (e) {
+        if (e instanceof Error)
+            logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+        return false;
+    }
+}
+async function LoadContents(file) {
+    return new Promise((resolve, reject) => {
+        file.load_contents_async(null, (obj, res) => {
+            let result, contents = null;
+            try {
+                [result, contents] = file.load_contents_finish(res);
+            }
+            catch (e) {
+                reject(e);
+                return e;
+            }
+            if (result != true) {
+                resolve(null);
+                return null;
+            }
+            if (contents instanceof Uint8Array)
+                contents = ByteArray.toString(contents);
+            resolve(contents.toString());
+            return contents.toString();
+        });
+    });
+}
+async function DeleteFile(file) {
+    const result = await new Promise((resolve) => {
+        file.delete_async(null, null, (obj, res) => {
+            let result = null;
+            try {
+                result = file.delete_finish(res);
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    const error = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
+                    Logger.Error("Can't delete file, reason: ", e);
+                }
+                resolve(false);
+                return false;
+            }
+            resolve(result);
+            return result;
+        });
+    });
+    return result;
+}
+async function OverwriteAndGetIOStream(file) {
+    const parent = file.get_parent();
+    if (parent != null && !FileExists(parent))
+        parent.make_directory_with_parents(null);
+    return new Promise((resolve) => {
+        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
+            try {
+                const ioStream = file.replace_readwrite_finish(result);
+                resolve(ioStream);
+                return ioStream;
+            }
+            catch (e) {
+                logger_Logger.Error("Error overwriting file: ", e);
+                resolve(null);
+                return null;
+            }
+        });
+    });
+}
+async function WriteAsync(outputStream, buffer) {
+    const text = ByteArray.fromString(buffer);
+    if (outputStream.is_closed())
+        return false;
+    return new Promise((resolve) => {
+        outputStream.write_bytes_async(text, null, null, (obj, res) => {
+            try {
+                outputStream.write_bytes_finish(res);
+                resolve(true);
+                return true;
+            }
+            catch (e) {
+                logger_Logger.Error("Error writing to stream: ", e);
+                resolve(false);
+                return false;
+            }
+        });
+    });
+}
+async function CloseStream(stream) {
+    return new Promise((resolve) => {
+        stream.close_async(null, null, (obj, res) => {
+            try {
+                const result = stream.close_finish(res);
+                resolve(result);
+                return result;
+            }
+            catch (e) {
+                logger_Logger.Error("Error closing stream: ", e);
+                resolve(false);
+                return false;
+            }
+        });
+    });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/services/logger.ts
+
+
+
+const { File } = imports.gi.Gio;
+const { get_home_dir, get_environ } = imports.gi.GLib;
+const LogLevelSeverity = {
+    always: 0,
+    critical: 1,
+    error: 5,
+    info: 10,
+    debug: 50,
+    verbose: 100
+};
+const IOErrorEnumNames = {
+    [imports.gi.Gio.IOErrorEnum.FAILED]: "FAILED",
+    [imports.gi.Gio.IOErrorEnum.NOT_FOUND]: "NOT_FOUND",
+    [imports.gi.Gio.IOErrorEnum.EXISTS]: "EXISTS",
+    [imports.gi.Gio.IOErrorEnum.IS_DIRECTORY]: "IS_DIRECTORY",
+    [imports.gi.Gio.IOErrorEnum.NOT_DIRECTORY]: "NOT_DIRECTORY",
+    [imports.gi.Gio.IOErrorEnum.NOT_EMPTY]: "NOT_EMPTY",
+    [imports.gi.Gio.IOErrorEnum.NOT_REGULAR_FILE]: "NOT_REGULAR_FILE",
+    [imports.gi.Gio.IOErrorEnum.NOT_SYMBOLIC_LINK]: "NOT_SYMBOLIC_LINK",
+    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTABLE_FILE]: "NOT_MOUNTABLE_FILE",
+    [imports.gi.Gio.IOErrorEnum.FILENAME_TOO_LONG]: "FILENAME_TOO_LONG",
+    [imports.gi.Gio.IOErrorEnum.INVALID_FILENAME]: "INVALID_FILENAME",
+    [imports.gi.Gio.IOErrorEnum.TOO_MANY_LINKS]: "TOO_MANY_LINKS",
+    [imports.gi.Gio.IOErrorEnum.NO_SPACE]: "NO_SPACE",
+    [imports.gi.Gio.IOErrorEnum.INVALID_ARGUMENT]: "INVALID_ARGUMENT",
+    [imports.gi.Gio.IOErrorEnum.PERMISSION_DENIED]: "PERMISSION_DENIED",
+    [imports.gi.Gio.IOErrorEnum.NOT_SUPPORTED]: "NOT_SUPPORTED",
+    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTED]: "NOT_MOUNTED",
+    [imports.gi.Gio.IOErrorEnum.ALREADY_MOUNTED]: "ALREADY_MOUNTED",
+    [imports.gi.Gio.IOErrorEnum.CLOSED]: "CLOSED",
+    [imports.gi.Gio.IOErrorEnum.CANCELLED]: "CANCELLED",
+    [imports.gi.Gio.IOErrorEnum.PENDING]: "PENDING",
+    [imports.gi.Gio.IOErrorEnum.READ_ONLY]: "READ_ONLY",
+    [imports.gi.Gio.IOErrorEnum.CANT_CREATE_BACKUP]: "CANT_CREATE_BACKUP",
+    [imports.gi.Gio.IOErrorEnum.WRONG_ETAG]: "WRONG_ETAG",
+    [imports.gi.Gio.IOErrorEnum.TIMED_OUT]: "TIMED_OUT",
+    [imports.gi.Gio.IOErrorEnum.WOULD_RECURSE]: "WOULD_RECURSE",
+    [imports.gi.Gio.IOErrorEnum.BUSY]: "BUSY",
+    [imports.gi.Gio.IOErrorEnum.WOULD_BLOCK]: "WOULD_BLOCK",
+    [imports.gi.Gio.IOErrorEnum.HOST_NOT_FOUND]: "HOST_NOT_FOUND",
+    [imports.gi.Gio.IOErrorEnum.WOULD_MERGE]: "WOULD_MERGE",
+    [imports.gi.Gio.IOErrorEnum.FAILED_HANDLED]: "FAILED_HANDLED",
+    [imports.gi.Gio.IOErrorEnum.TOO_MANY_OPEN_FILES]: "TOO_MANY_OPEN_FILES",
+    [imports.gi.Gio.IOErrorEnum.NOT_INITIALIZED]: "NOT_INITIALIZED",
+    [imports.gi.Gio.IOErrorEnum.ADDRESS_IN_USE]: "ADDRESS_IN_USE",
+    [imports.gi.Gio.IOErrorEnum.PARTIAL_INPUT]: "PARTIAL_INPUT",
+    [imports.gi.Gio.IOErrorEnum.INVALID_DATA]: "INVALID_DATA",
+    [imports.gi.Gio.IOErrorEnum.DBUS_ERROR]: "DBUS_ERROR",
+    [imports.gi.Gio.IOErrorEnum.HOST_UNREACHABLE]: "HOST_UNREACHABLE",
+    [imports.gi.Gio.IOErrorEnum.NETWORK_UNREACHABLE]: "NETWORK_UNREACHABLE",
+    [imports.gi.Gio.IOErrorEnum.CONNECTION_REFUSED]: "CONNECTION_REFUSED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_FAILED]: "PROXY_FAILED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_AUTH_FAILED]: "PROXY_AUTH_FAILED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_NEED_AUTH]: "PROXY_NEED_AUTH",
+    [imports.gi.Gio.IOErrorEnum.PROXY_NOT_ALLOWED]: "PROXY_NOT_ALLOWED",
+    [imports.gi.Gio.IOErrorEnum.CONNECTION_CLOSED]: "CONNECTION_CLOSED",
+    [imports.gi.Gio.IOErrorEnum.NOT_CONNECTED]: "NOT_CONNECTED",
+    [imports.gi.Gio.IOErrorEnum.MESSAGE_TOO_LARGE]: "MESSAGE_TOO_LARGE",
+    [imports.gi.Gio.IOErrorEnum.NO_SUCH_DEVICE]: "NO_SUCH_DEVICE",
+};
+class Log {
+    constructor(_instanceId) {
+        this.logLevel = "info";
+        this.ID = _instanceId;
+    }
+    ChangeLevel(level) {
+        this.logLevel = level;
+    }
+    CanLog(level) {
+        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+    }
+    Info(message, level = "Info") {
+        if (!this.CanLog("info"))
+            return;
+        const msg = `[${UUID}#${this.ID}:${level}]: ${message.toString()}`;
+        global.log(msg);
+    }
+    Error(error, e) {
+        var _a;
+        if (!this.CanLog("error"))
+            return;
+        global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
+        if (typeof e === "string") {
+            return;
+        }
+        if (!(e instanceof Error))
+            return;
+        const gjsE = e;
+        global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${(_a = IOErrorEnumNames[gjsE.code]) !== null && _a !== void 0 ? _a : gjsE.code}, message: ${gjsE.message}`);
+        if (gjsE.stack)
+            global.logError(gjsE.stack);
+    }
+    ;
+    Debug(message) {
+        if (!this.CanLog("debug"))
+            return;
+        this.Info(message, "Debug");
+    }
+    Verbose(message) {
+        if (!this.CanLog("verbose"))
+            return;
+        this.Info(message, "Verbose");
+    }
+    UpdateInstanceID(instanceID) {
+        this.ID = instanceID;
+    }
+    async GetAppletLogs() {
+        var _a, _b, _c;
+        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let logFilePath = `${home}/`;
+        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
+            logFilePath += ".cinnamon/glass.log";
+        }
+        else {
+            const errFileEnv = get_environ().find(x => x.includes("ERRFILE"));
+            if (!errFileEnv) {
+                logFilePath += ".xsession-errors";
+            }
+            else {
+                logFilePath = errFileEnv.replace("ERRFILE=", "");
+            }
+        }
+        const logFile = File.new_for_path(logFilePath);
+        if (!FileExists(logFile)) {
+            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logs = await LoadContents(logFile);
+        if (logs == null) {
+            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logLines = logs.split("\n");
+        const filteredLines = [];
+        let lastWasCinnamonLog = false;
+        for (const line of logLines) {
+            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
+                filteredLines.push(line);
+            }
+            else if (line.includes("LookingGlass") && line.includes(UUID)) {
+                filteredLines.push(line);
+                lastWasCinnamonLog = true;
+            }
+            else {
+                lastWasCinnamonLog = false;
+            }
+        }
+        return filteredLines;
+    }
+}
+const logger_Logger = new Log();
+
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
 
@@ -9485,292 +9771,6 @@ function utils_setInterval(func, ms) {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
-
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
-async function GetFileInfo(file) {
-    return new Promise((resolve) => {
-        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
-            try {
-                const result = file.query_info_finish(res);
-                resolve(result);
-                return result;
-            }
-            catch (e) {
-                Logger.Error("Error getting file info: ", e);
-                resolve(null);
-                return null;
-            }
-        });
-    });
-}
-function FileExists(file) {
-    try {
-        return file.query_exists(null);
-    }
-    catch (e) {
-        if (e instanceof Error)
-            logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
-        return false;
-    }
-}
-async function LoadContents(file) {
-    return new Promise((resolve, reject) => {
-        file.load_contents_async(null, (obj, res) => {
-            let result, contents = null;
-            try {
-                [result, contents] = file.load_contents_finish(res);
-            }
-            catch (e) {
-                reject(e);
-                return e;
-            }
-            if (result != true) {
-                resolve(null);
-                return null;
-            }
-            if (contents instanceof Uint8Array)
-                contents = ByteArray.toString(contents);
-            resolve(contents.toString());
-            return contents.toString();
-        });
-    });
-}
-async function DeleteFile(file) {
-    const result = await new Promise((resolve) => {
-        file.delete_async(null, null, (obj, res) => {
-            let result = null;
-            try {
-                result = file.delete_finish(res);
-            }
-            catch (e) {
-                if (e instanceof Error) {
-                    const error = e;
-                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                        resolve(true);
-                        return true;
-                    }
-                    Logger.Error("Can't delete file, reason: ", e);
-                }
-                resolve(false);
-                return false;
-            }
-            resolve(result);
-            return result;
-        });
-    });
-    return result;
-}
-async function OverwriteAndGetIOStream(file) {
-    const parent = file.get_parent();
-    if (parent != null && !FileExists(parent))
-        parent.make_directory_with_parents(null);
-    return new Promise((resolve) => {
-        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
-            try {
-                const ioStream = file.replace_readwrite_finish(result);
-                resolve(ioStream);
-                return ioStream;
-            }
-            catch (e) {
-                logger_Logger.Error("Error overwriting file: ", e);
-                resolve(null);
-                return null;
-            }
-        });
-    });
-}
-async function WriteAsync(outputStream, buffer) {
-    const text = ByteArray.fromString(buffer);
-    if (outputStream.is_closed())
-        return false;
-    return new Promise((resolve) => {
-        outputStream.write_bytes_async(text, null, null, (obj, res) => {
-            try {
-                outputStream.write_bytes_finish(res);
-                resolve(true);
-                return true;
-            }
-            catch (e) {
-                logger_Logger.Error("Error writing to stream: ", e);
-                resolve(false);
-                return false;
-            }
-        });
-    });
-}
-async function CloseStream(stream) {
-    return new Promise((resolve) => {
-        stream.close_async(null, null, (obj, res) => {
-            try {
-                const result = stream.close_finish(res);
-                resolve(result);
-                return result;
-            }
-            catch (e) {
-                logger_Logger.Error("Error closing stream: ", e);
-                resolve(false);
-                return false;
-            }
-        });
-    });
-}
-
-;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
-
-
-
-const { File } = imports.gi.Gio;
-const { get_home_dir, get_environ } = imports.gi.GLib;
-const LogLevelSeverity = {
-    always: 0,
-    critical: 1,
-    error: 5,
-    info: 10,
-    debug: 50,
-    verbose: 100
-};
-const IOErrorEnumNames = {
-    [imports.gi.Gio.IOErrorEnum.FAILED]: "FAILED",
-    [imports.gi.Gio.IOErrorEnum.NOT_FOUND]: "NOT_FOUND",
-    [imports.gi.Gio.IOErrorEnum.EXISTS]: "EXISTS",
-    [imports.gi.Gio.IOErrorEnum.IS_DIRECTORY]: "IS_DIRECTORY",
-    [imports.gi.Gio.IOErrorEnum.NOT_DIRECTORY]: "NOT_DIRECTORY",
-    [imports.gi.Gio.IOErrorEnum.NOT_EMPTY]: "NOT_EMPTY",
-    [imports.gi.Gio.IOErrorEnum.NOT_REGULAR_FILE]: "NOT_REGULAR_FILE",
-    [imports.gi.Gio.IOErrorEnum.NOT_SYMBOLIC_LINK]: "NOT_SYMBOLIC_LINK",
-    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTABLE_FILE]: "NOT_MOUNTABLE_FILE",
-    [imports.gi.Gio.IOErrorEnum.FILENAME_TOO_LONG]: "FILENAME_TOO_LONG",
-    [imports.gi.Gio.IOErrorEnum.INVALID_FILENAME]: "INVALID_FILENAME",
-    [imports.gi.Gio.IOErrorEnum.TOO_MANY_LINKS]: "TOO_MANY_LINKS",
-    [imports.gi.Gio.IOErrorEnum.NO_SPACE]: "NO_SPACE",
-    [imports.gi.Gio.IOErrorEnum.INVALID_ARGUMENT]: "INVALID_ARGUMENT",
-    [imports.gi.Gio.IOErrorEnum.PERMISSION_DENIED]: "PERMISSION_DENIED",
-    [imports.gi.Gio.IOErrorEnum.NOT_SUPPORTED]: "NOT_SUPPORTED",
-    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTED]: "NOT_MOUNTED",
-    [imports.gi.Gio.IOErrorEnum.ALREADY_MOUNTED]: "ALREADY_MOUNTED",
-    [imports.gi.Gio.IOErrorEnum.CLOSED]: "CLOSED",
-    [imports.gi.Gio.IOErrorEnum.CANCELLED]: "CANCELLED",
-    [imports.gi.Gio.IOErrorEnum.PENDING]: "PENDING",
-    [imports.gi.Gio.IOErrorEnum.READ_ONLY]: "READ_ONLY",
-    [imports.gi.Gio.IOErrorEnum.CANT_CREATE_BACKUP]: "CANT_CREATE_BACKUP",
-    [imports.gi.Gio.IOErrorEnum.WRONG_ETAG]: "WRONG_ETAG",
-    [imports.gi.Gio.IOErrorEnum.TIMED_OUT]: "TIMED_OUT",
-    [imports.gi.Gio.IOErrorEnum.WOULD_RECURSE]: "WOULD_RECURSE",
-    [imports.gi.Gio.IOErrorEnum.BUSY]: "BUSY",
-    [imports.gi.Gio.IOErrorEnum.WOULD_BLOCK]: "WOULD_BLOCK",
-    [imports.gi.Gio.IOErrorEnum.HOST_NOT_FOUND]: "HOST_NOT_FOUND",
-    [imports.gi.Gio.IOErrorEnum.WOULD_MERGE]: "WOULD_MERGE",
-    [imports.gi.Gio.IOErrorEnum.FAILED_HANDLED]: "FAILED_HANDLED",
-    [imports.gi.Gio.IOErrorEnum.TOO_MANY_OPEN_FILES]: "TOO_MANY_OPEN_FILES",
-    [imports.gi.Gio.IOErrorEnum.NOT_INITIALIZED]: "NOT_INITIALIZED",
-    [imports.gi.Gio.IOErrorEnum.ADDRESS_IN_USE]: "ADDRESS_IN_USE",
-    [imports.gi.Gio.IOErrorEnum.PARTIAL_INPUT]: "PARTIAL_INPUT",
-    [imports.gi.Gio.IOErrorEnum.INVALID_DATA]: "INVALID_DATA",
-    [imports.gi.Gio.IOErrorEnum.DBUS_ERROR]: "DBUS_ERROR",
-    [imports.gi.Gio.IOErrorEnum.HOST_UNREACHABLE]: "HOST_UNREACHABLE",
-    [imports.gi.Gio.IOErrorEnum.NETWORK_UNREACHABLE]: "NETWORK_UNREACHABLE",
-    [imports.gi.Gio.IOErrorEnum.CONNECTION_REFUSED]: "CONNECTION_REFUSED",
-    [imports.gi.Gio.IOErrorEnum.PROXY_FAILED]: "PROXY_FAILED",
-    [imports.gi.Gio.IOErrorEnum.PROXY_AUTH_FAILED]: "PROXY_AUTH_FAILED",
-    [imports.gi.Gio.IOErrorEnum.PROXY_NEED_AUTH]: "PROXY_NEED_AUTH",
-    [imports.gi.Gio.IOErrorEnum.PROXY_NOT_ALLOWED]: "PROXY_NOT_ALLOWED",
-    [imports.gi.Gio.IOErrorEnum.CONNECTION_CLOSED]: "CONNECTION_CLOSED",
-    [imports.gi.Gio.IOErrorEnum.NOT_CONNECTED]: "NOT_CONNECTED",
-    [imports.gi.Gio.IOErrorEnum.MESSAGE_TOO_LARGE]: "MESSAGE_TOO_LARGE",
-    [imports.gi.Gio.IOErrorEnum.NO_SUCH_DEVICE]: "NO_SUCH_DEVICE",
-};
-class Log {
-    constructor(_instanceId) {
-        this.logLevel = "info";
-        this.ID = _instanceId;
-    }
-    ChangeLevel(level) {
-        this.logLevel = level;
-    }
-    CanLog(level) {
-        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
-    }
-    Info(message, level = "Info") {
-        if (!this.CanLog("info"))
-            return;
-        const msg = `[${UUID}#${this.ID}:${level}]: ${message.toString()}`;
-        global.log(msg);
-    }
-    Error(error, e) {
-        var _a;
-        if (!this.CanLog("error"))
-            return;
-        global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
-        if (typeof e === "string") {
-            return;
-        }
-        if (!(e instanceof Error))
-            return;
-        const gjsE = e;
-        global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${(_a = IOErrorEnumNames[gjsE.code]) !== null && _a !== void 0 ? _a : gjsE.code}, message: ${gjsE.message}`);
-        if (gjsE.stack)
-            global.logError(gjsE.stack);
-    }
-    ;
-    Debug(message) {
-        if (!this.CanLog("debug"))
-            return;
-        this.Info(message, "Debug");
-    }
-    Verbose(message) {
-        if (!this.CanLog("verbose"))
-            return;
-        this.Info(message, "Verbose");
-    }
-    UpdateInstanceID(instanceID) {
-        this.ID = instanceID;
-    }
-    async GetAppletLogs() {
-        var _a, _b, _c;
-        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        let logFilePath = `${home}/`;
-        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
-            logFilePath += ".cinnamon/glass.log";
-        }
-        else {
-            const errFileEnv = get_environ().find(x => x.includes("ERRFILE"));
-            if (!errFileEnv) {
-                logFilePath += ".xsession-errors";
-            }
-            else {
-                logFilePath = errFileEnv.replace("ERRFILE=", "");
-            }
-        }
-        const logFile = File.new_for_path(logFilePath);
-        if (!FileExists(logFile)) {
-            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
-        }
-        const logs = await LoadContents(logFile);
-        if (logs == null) {
-            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
-        }
-        const logLines = logs.split("\n");
-        const filteredLines = [];
-        let lastWasCinnamonLog = false;
-        for (const line of logLines) {
-            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
-                filteredLines.push(line);
-            }
-            else if (line.includes("LookingGlass") && line.includes(UUID)) {
-                filteredLines.push(line);
-                lastWasCinnamonLog = true;
-            }
-            else {
-                lastWasCinnamonLog = false;
-            }
-        }
-        return filteredLines;
-    }
-}
-const logger_Logger = new Log();
-
 ;// CONCATENATED MODULE: ./src/3_8/lib/events.ts
 class Event {
     static DisconnectAll() {
@@ -9837,11 +9837,11 @@ class NotificationService {
 
 
 class LocationStore {
-    constructor(app, config) {
+    constructor(config) {
         this.locations = [];
         this.currentIndex = 0;
         this.StoreChanged = new Event();
-        this.app = app;
+        this.CurrentLocationModified = new Event();
         this.config = config;
         this.locations = config._locationList;
     }
@@ -9873,7 +9873,7 @@ class LocationStore {
         this.locations = [...locs, ...tmp];
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
-            void this.app.Refresh();
+            this.CurrentLocationModified.Invoke(this);
         }
         this.InvokeStorageChanged();
     }
@@ -9984,8 +9984,8 @@ class LocationStore {
             NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
             return;
         }
-        if (this.app.config.Timezone)
-            loc.timeZone = this.app.config.Timezone;
+        if (this.config.Timezone)
+            loc.timeZone = this.config.Timezone;
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
@@ -10336,17 +10336,33 @@ class HttpLib {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/lib/services/error_handler.ts
+
+class ErrorHandler {
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new ErrorHandler();
+        return this.instance;
+    }
+    constructor() {
+        this.OnError = new Event();
+    }
+    PostError(error) {
+        this.OnError.Invoke(this, error);
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/location_services/nominatim.ts
 
 
 
 
+
 class GeoLocation {
-    constructor(app) {
+    constructor() {
         this.url = "https://nominatim.openstreetmap.org/search";
         this.params = "format=json&addressdetails=1&limit=1";
         this.cache = {};
-        this.App = app;
     }
     async GetLocation(searchText, cancellable) {
         var _a;
@@ -10364,7 +10380,7 @@ class GeoLocation {
             if (locationData == null)
                 return null;
             if (locationData.length == 0) {
-                this.App.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "bad location format",
                     message: _("Could not find location based on address, please check if it's right")
@@ -10385,7 +10401,7 @@ class GeoLocation {
         }
         catch (e) {
             logger_Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
-            this.App.ShowError({
+            ErrorHandler.Instance.PostError({
                 type: "soft",
                 detail: "bad api response",
                 message: _("Failed to call Geolocation API, see Looking Glass for errors.")
@@ -16182,8 +16198,7 @@ class PirateWeather extends BaseProvider {
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
 class GeoClue {
-    constructor(_app) {
-        this.app = _app;
+    constructor() {
         try {
             GeoClueLib = imports.gi.Geoclue;
             GeocodeGlib = imports.gi.GeocodeGlib;
@@ -16289,10 +16304,11 @@ class GeoClue {
 
 
 
+
 class GeoIPFedora {
-    constructor(app) {
+    constructor(config) {
         this.query = "https://geoip.fedoraproject.org/city";
-        this.app = app;
+        this.config = config;
     }
     async GetLocation(cancellable) {
         const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
@@ -16305,7 +16321,12 @@ class GeoIPFedora {
     ParseInformation(json) {
         var _a, _b, _c;
         if (json.latitude === null || json.longitude === null) {
-            this.HandleErrorResponse();
+            ErrorHandler.Instance.PostError({
+                type: "hard",
+                detail: "bad api response",
+                message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
+                service: "geoip.fedoreproject"
+            });
             return null;
         }
         try {
@@ -16314,7 +16335,7 @@ class GeoIPFedora {
                 lon: json.longitude,
                 city: (_a = json.city) !== null && _a !== void 0 ? _a : undefined,
                 country: (_b = json.country_name) !== null && _b !== void 0 ? _b : undefined,
-                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : this.app.config.UserTimezone,
+                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : this.config.UserTimezone,
                 entryText: json.latitude + "," + json.longitude,
             };
             logger_Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
@@ -16323,18 +16344,9 @@ class GeoIPFedora {
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("geoip.fedoraproject parsing error: " + e.message, e);
-            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+            ErrorHandler.Instance.PostError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return null;
         }
-    }
-    ;
-    HandleErrorResponse() {
-        this.app.ShowError({
-            type: "hard",
-            detail: "bad api response",
-            message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
-            service: "geoip.fedoreproject"
-        });
     }
     ;
 }
@@ -16837,7 +16849,7 @@ class Config {
             value = undefined;
         this.timezone = value;
     }
-    constructor(app, instanceID) {
+    constructor(instanceID) {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_LOCATION_LIST = "locationList";
         this.DataServiceChanged = new Event();
@@ -16906,20 +16918,19 @@ class Config {
             this.doneTypingLocation = null;
             this.LocationChanged.Invoke(this);
         };
-        this.app = app;
         this.instance_id = instanceID;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
         this.onLogLevelUpdated();
         this.currentLocale = ConstructJsLocale(get_language_names());
         this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.autoLocProvider = new GeoIPFedora(app);
-        this.geoClue = new GeoClue(app);
-        this.geoLocationService = new GeoLocation(app);
+        this.autoLocProvider = new GeoIPFedora(this);
+        this.geoClue = new GeoClue();
+        this.geoLocationService = new GeoLocation();
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
         this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
         this.currentFontSize = this.GetCurrentFontSize();
-        this.LocStore = new LocationStore(this.app, this);
+        this.LocStore = new LocationStore(this);
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -19062,6 +19073,7 @@ class UI {
 
 
 
+
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
@@ -19077,11 +19089,10 @@ class WeatherApplet extends TextIconApplet {
     get Orientation() {
         return this.orientation;
     }
-    constructor(metadata, orientation, panelHeight, instanceId) {
+    constructor(config, metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.currentWeatherInfo = null;
         this.encounteredError = false;
-        this.online = null;
         this.OnKeySettingsUpdated = () => {
             if (this.config.keybinding != null) {
                 keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
@@ -19177,13 +19188,14 @@ class WeatherApplet extends TextIconApplet {
         logger_Logger.Debug("Applet created with instanceID " + instanceId);
         logger_Logger.Debug("AppletDir is: " + this.AppletDir);
         this.SetAppletOnPanel();
-        this.config = new Config(this, instanceId);
+        this.config = config;
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new UI(this, orientation);
         this.ui.Rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
         HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
+        ErrorHandler.Instance.OnError.Subscribe((sender, error) => this.ShowError(error));
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
         }
@@ -19217,6 +19229,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.FontChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
         this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
         this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
+        this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
         keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
     }
     async Refresh(options) {
@@ -19506,12 +19519,14 @@ The contents of the file saved from the applet help page goes here
 
 
 
+
 function main(metadata, orientation, panelHeight, instanceId) {
     imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
     imports.gi.Gtk.IconTheme.get_default().append_search_path(metadata.path + "/../icons");
     imports.gi.Gtk.IconTheme.get_default().append_search_path(metadata.path + "/../arrow-icons");
     logger_Logger.UpdateInstanceID(instanceId);
-    return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
+    const config = new Config(instanceId);
+    return new WeatherApplet(config, metadata, orientation, panelHeight, instanceId);
 }
 
 })();

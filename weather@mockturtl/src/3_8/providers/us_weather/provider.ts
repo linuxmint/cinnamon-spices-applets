@@ -8,7 +8,7 @@
 
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
 import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../../weather-data";
 import type { LocationData, correctGetTimes, SunTime } from "../../types";

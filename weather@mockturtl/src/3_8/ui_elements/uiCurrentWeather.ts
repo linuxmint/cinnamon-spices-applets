@@ -2,7 +2,7 @@ import { OpenUrl } from "../lib/commandRunner";
 import type { Config } from "../config";
 import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, STYLE_HIDDEN } from "../consts";
 import type { LocationStore } from "../location_services/locationstore";
-import { Logger } from "../lib/logger";
+import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../weather-data";
 import { _, TempToUserConfig, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale } from "../utils";

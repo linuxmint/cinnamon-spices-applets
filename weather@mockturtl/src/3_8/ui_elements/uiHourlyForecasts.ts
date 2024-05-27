@@ -1,7 +1,7 @@
 import type { DateTime } from "luxon";
 import type { Config } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
-import { Logger } from "../lib/logger";
+import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName } from "../utils";

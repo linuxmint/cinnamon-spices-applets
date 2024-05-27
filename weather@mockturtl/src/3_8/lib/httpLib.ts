@@ -1,4 +1,4 @@
-import { Logger } from "./logger";
+import { Logger } from "./services/logger";
 import type { ErrorDetail } from "../types";
 import type { SoupLibSendOptions, SoupResponse } from "./soupLib";
 import { soupLib } from "./soupLib";

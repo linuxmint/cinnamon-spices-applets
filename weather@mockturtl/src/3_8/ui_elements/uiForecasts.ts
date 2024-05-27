@@ -1,7 +1,7 @@
 import type { Config } from "../config";
 import { APPLET_ICON } from "../consts";
 import { Event } from "../lib/events";
-import { Logger } from "../lib/logger";
+import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { WeatherData } from "../weather-data";
 import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";

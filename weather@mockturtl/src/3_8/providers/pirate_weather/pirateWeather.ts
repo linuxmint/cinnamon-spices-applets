@@ -1,6 +1,6 @@
 import type { ErrorResponse} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, ImmediatePrecipitation, AlertData, AlertLevel } from "../../weather-data";
 import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";

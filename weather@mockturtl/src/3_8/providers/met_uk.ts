@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import type { DistanceUnits } from "../config";
-import { Logger } from "../lib/logger";
+import { Logger } from "../lib/services/logger";
 import { getTimes } from "suncalc";
 import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../weather-data";
 import type { LocationData, correctGetTimes } from "../types";
