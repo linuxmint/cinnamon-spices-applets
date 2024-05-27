@@ -28,6 +28,7 @@ import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
 import { OpenMeteo } from "./providers/open-meteo/provider";
 import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
+import { soupLib } from "./lib/soupLib";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -442,6 +443,9 @@ export class Config {
 
 		this.settings.bind("selectedLogPath",
 			"_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
+
+		soupLib.SetUserAgent(this._userAgentStringOverride);
+		this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
 	}
 
 	// UTILS

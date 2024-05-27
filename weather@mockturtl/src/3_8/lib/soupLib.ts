@@ -23,6 +23,8 @@ export interface SoupLib {
 		url: string,
 		options?: SoupLibSendOptions
 	) => Promise<SoupResponse | null>;
+
+	SetUserAgent: (userAgent: string | null) => void;
 }
 
 export interface SoupResponse {
@@ -52,16 +54,23 @@ function AddHeadersToMessage(message: imports.gi.Soup.Message, headers?: HTTPHea
     }
 }
 
+const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+
 class Soup3 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	private readonly _httpSession = new Session();
 
     constructor() {
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0"; // ipapi blocks non-browsers agents, imitating browser
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
     }
+
+	public SetUserAgent = (userAgent: string | null) =>  {
+		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+	};
 
     async Send(
 		url: string,
@@ -146,7 +155,7 @@ class Soup2 implements SoupLib {
         const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 		this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0"; // ipapi blocks non-browsers agents, imitating browser
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
 		this._httpSession.use_thread_context = true;
@@ -230,6 +239,11 @@ class Soup2 implements SoupLib {
 		});
 
 		return data;
+	}
+
+	public SetUserAgent = (userAgent: string | null) => {
+		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
 	}
 
 	private async read_all_bytes(stream: imports.gi.Gio.InputStream, cancellable: imports.gi.Gio.Cancellable): Promise<string | null> {

@@ -10052,10 +10052,15 @@ function AddHeadersToMessage(message, headers) {
         }
     }
 }
+const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
 class Soup3 {
     constructor() {
         this._httpSession = new Session();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+        this.SetUserAgent = (userAgent) => {
+            logger_Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+            this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+        };
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
     }
@@ -10111,9 +10116,13 @@ class Soup3 {
 }
 class Soup2 {
     constructor() {
+        this.SetUserAgent = (userAgent) => {
+            logger_Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+            this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+        };
         const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
         this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
         this._httpSession.use_thread_context = true;
@@ -16811,6 +16820,7 @@ class OpenWeatherMapOpen extends BaseProvider {
 
 
 
+
 const { get_home_dir: config_get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
@@ -17066,6 +17076,8 @@ class Config {
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", () => this.HotkeyChanged.Invoke(this), null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
         this.settings.bind("selectedLogPath", "_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
+        soupLib.SetUserAgent(this._userAgentStringOverride);
+        this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_Logger.Debug("Location setting is now: " + loc.entryText);
