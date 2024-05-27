@@ -17,7 +17,7 @@ import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectVal
 import type { HttpError } from "./lib/httpLib";
 import { HttpLib } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
-import { APPLET_ICON, REFRESH_ICON } from "./consts";
+import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
 import { SpawnProcess } from "./lib/commandRunner";
@@ -28,6 +28,7 @@ const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 const { File } = imports.gi.Gio;
+const keybindingManager = imports.ui.main.keybindingManager;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
@@ -104,6 +105,7 @@ export class WeatherApplet extends TextIconApplet {
 		// Some translations come from the API we need a refresh
 		this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh());
 		this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh());
+		this.config.LocationChanged.Subscribe(() => this.loop.Refresh());
 
 		// Misc Triggers
 		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({immediate: false}));
@@ -121,6 +123,23 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowAlertsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 
 		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
+		this.config.TempTextOverrideChanged.Subscribe(this.RefreshLabel);
+		this.config.FontChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
+		this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
+		this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
+
+		keybindingManager.addHotKey(
+			UUID, this.config.keybinding, () => this.on_applet_clicked());
+	}
+
+	private OnKeySettingsUpdated = (): void => {
+		if (this.config.keybinding != null) {
+			keybindingManager.addHotKey(
+				UUID,
+				this.config.keybinding,
+				() => this.on_applet_clicked()
+			);
+		}
 	}
 
 	private onSettingNeedsRebuild = (conf: Config, changedData: unknown, data: WeatherData) => {
@@ -256,8 +275,8 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		// Overriding temperature panel label
-		if (NotEmpty(this.config._panelTextOverride))
-			label = InjectValues(this.config._panelTextOverride, weather, this.config);
+		if (NotEmpty(this.config._tempTextOverride))
+			label = InjectValues(this.config._tempTextOverride, weather, this.config);
 
 		this.SetAppletLabel(label);
 	}

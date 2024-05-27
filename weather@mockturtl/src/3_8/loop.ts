@@ -173,9 +173,16 @@ export class WeatherLoop {
 					this.lastUpdated = new Date();
 					Logger.Info("Weather Information refreshed");
 					break;
-				case RefreshState.NoWeather:
 				case RefreshState.NoLocation:
 					this.IncrementErrorCount();
+					this.app.ShowError({
+						type: "hard",
+						detail: "no location",
+						userError: true,
+						message: _("Make sure you entered a location or use Automatic location instead.")
+					});
+					break;
+				case RefreshState.NoWeather:
 					Logger.Error("Could not refresh weather, data could not be obtained.");
 					this.app.ShowError({
 						type: "soft",

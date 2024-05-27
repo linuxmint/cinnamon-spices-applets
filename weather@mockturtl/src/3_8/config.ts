@@ -32,7 +32,6 @@ import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-sche
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings } = imports.gi.Gio;
@@ -99,8 +98,7 @@ export class Config {
 	private readonly _distanceUnit!: DistanceUnits;
 	private readonly _apiKey!: string;
 	private readonly _useSymbolicIcons!: boolean;
-	// No need to access this from the outside
-	private readonly keybinding!: string;
+	public readonly keybinding!: string;
 
 	// simple variables
 	public readonly _refreshInterval!: number;
@@ -132,7 +130,10 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
-	public readonly _panelTextOverride!: string;
+	/**
+	 * Panel text override
+	 */
+	public readonly _tempTextOverride!: string;
 	public readonly _tooltipTextOverride!: string;
 	public readonly _showAlerts!: boolean;
 	public readonly _userAgentStringOverride!: string;
@@ -176,13 +177,20 @@ export class Config {
 	public readonly ShowAlertsChanged = new Event<Config, string>();
 	public readonly UserAgentStringOverrideChanged = new Event<Config, string>();
 	public readonly RunScriptChanged = new Event<Config, boolean>();
+	public readonly TempTextOverrideChanged = new Event<Config, string>();
+
+	public readonly FontChanged = new Event<Config, void>();
+	public readonly HotkeyChanged = new Event<Config, void>();
+	public readonly SelectedLogPathChanged = new Event<Config, void>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
 	private currentLocation: LocationData | null = null;
+	public readonly LocationChanged = new Event<Config, void>();
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
+	private readonly instance_id: number;
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 	public ForegroundColor: imports.gi.Clutter.Color | null = null;
@@ -224,6 +232,7 @@ export class Config {
 
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
+		this.instance_id = instanceID;
 		this.settings = new AppletSettings(this, UUID, instanceID);
 		// Bind as early as possible so that we can update the log level asap
 		this.BindSettings();
@@ -356,12 +365,6 @@ export class Config {
 
 		let loc = this._location;
 		if (loc == undefined || loc.trim() == "") {  // No location
-			this.app.ShowError({
-				type: "hard",
-				detail: "no location",
-				userError: true,
-				message: _("Make sure you entered a location or use Automatic location instead.")
-			});
 			return null;
 		}
 
@@ -430,23 +433,17 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
 
-		this.settings.bind("tempTextOverride", "_" + "panelTextOverride",
-			this.app.RefreshLabel)
-
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
 
 		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", this.OnKeySettingsUpdated, null);
+			"keybinding", () => this.HotkeyChanged.Invoke(this), null);
 
 		this.settings.bindProperty(BindingDirection.IN, "logLevel",
 			"_logLevel", this.onLogLevelUpdated, null);
 
 		this.settings.bind("selectedLogPath",
-			"_selectedLogPath", this.app.saveLog);
-
-		keybindingManager.addHotKey(
-			UUID, this.keybinding, () => this.app.on_applet_clicked());
+			"_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
 	}
 
 	// UTILS
@@ -457,16 +454,6 @@ export class Config {
 		this.SetLocation(text);
 		this.currentLocation = loc;
 		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
-	}
-
-	private OnKeySettingsUpdated = (): void => {
-		if (this.keybinding != null) {
-			keybindingManager.addHotKey(
-				UUID,
-				this.keybinding,
-				() => this.app.on_applet_clicked()
-			);
-		}
 	}
 
 	private onLogLevelUpdated = () => {
@@ -486,14 +473,14 @@ export class Config {
 
 	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
-		void this.app.Refresh({ rebuild: true});
+		this.FontChanged.Invoke(this);
 	}
 
 	/** Called when 3 seconds is up with no change in location */
 	private DoneTypingLocation = () => {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		void this.app.Refresh();
+		this.LocationChanged.Invoke(this);
 	}
 
 	private SetLocation(value: string) {
@@ -564,8 +551,8 @@ export class Config {
 
 	public async GetAppletConfigJson(): Promise<Record<string, unknown>> {
 		const home = get_home_dir() ?? "~";
-		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
-		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.instance_id}.json`;
+		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.instance_id}.json`;
 		let configFile = File.new_for_path(configFilePath);
 		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
@@ -754,6 +741,10 @@ export class Config {
 	RUN_SCRIPT: {
 		key: "runScript",
 		prop: "RunScript"
+	},
+	TEMP_TEXT_OVERRIDE: {
+		key: "tempTextOverride",
+		prop: "TempTextOverride"
 	},
 } as const;
 

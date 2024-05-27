@@ -16802,7 +16802,6 @@ class OpenWeatherMapOpen extends BaseProvider {
 const { get_home_dir: config_get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
@@ -16876,16 +16875,16 @@ class Config {
         this.ShowAlertsChanged = new Event();
         this.UserAgentStringOverrideChanged = new Event();
         this.RunScriptChanged = new Event();
+        this.TempTextOverrideChanged = new Event();
+        this.FontChanged = new Event();
+        this.HotkeyChanged = new Event();
+        this.SelectedLogPathChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
+        this.LocationChanged = new Event();
         this.textColorStyle = null;
         this.ForegroundColor = null;
         this.timezone = undefined;
-        this.OnKeySettingsUpdated = () => {
-            if (this.keybinding != null) {
-                keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked());
-            }
-        };
         this.onLogLevelUpdated = () => {
             logger_Logger.ChangeLevel(this._logLevel);
         };
@@ -16900,14 +16899,15 @@ class Config {
         };
         this.OnFontChanged = () => {
             this.currentFontSize = this.GetCurrentFontSize();
-            void this.app.Refresh({ rebuild: true });
+            this.FontChanged.Invoke(this);
         };
         this.DoneTypingLocation = () => {
             logger_Logger.Debug("User has finished typing, beginning refresh");
             this.doneTypingLocation = null;
-            void this.app.Refresh();
+            this.LocationChanged.Invoke(this);
         };
         this.app = app;
+        this.instance_id = instanceID;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
         this.onLogLevelUpdated();
@@ -17001,12 +17001,6 @@ class Config {
         }
         let loc = this._location;
         if (loc == undefined || loc.trim() == "") {
-            this.app.ShowError({
-                type: "hard",
-                detail: "no location",
-                userError: true,
-                message: _("Make sure you entered a location or use Automatic location instead.")
-            });
             return null;
         }
         let location = this.LocStore.FindLocation(this._location);
@@ -17057,12 +17051,10 @@ class Config {
             }
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
-        this.settings.bind("tempTextOverride", "_" + "panelTextOverride", this.app.RefreshLabel);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", () => this.HotkeyChanged.Invoke(this), null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
-        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
-        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked());
+        this.settings.bind("selectedLogPath", "_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_Logger.Debug("Location setting is now: " + loc.entryText);
@@ -17131,8 +17123,8 @@ class Config {
     async GetAppletConfigJson() {
         var _a, _b, _c, _d, _e;
         const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
-        const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.instance_id}.json`;
+        const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.instance_id}.json`;
         let configFile = config_File.new_for_path(configFilePath);
         const oldConfigFile = config_File.new_for_path(oldConfigFilePath);
         if (!FileExists(configFile)) {
@@ -17305,6 +17297,10 @@ const Keys = {
         key: "runScript",
         prop: "RunScript"
     },
+    TEMP_TEXT_OVERRIDE: {
+        key: "tempTextOverride",
+        prop: "TempTextOverride"
+    },
 };
 
 ;// CONCATENATED MODULE: ./src/3_8/types.ts
@@ -17410,9 +17406,16 @@ class WeatherLoop {
                         this.lastUpdated = new Date();
                         logger_Logger.Info("Weather Information refreshed");
                         break;
-                    case RefreshState.NoWeather:
                     case RefreshState.NoLocation:
                         this.IncrementErrorCount();
+                        this.app.ShowError({
+                            type: "hard",
+                            detail: "no location",
+                            userError: true,
+                            message: _("Make sure you entered a location or use Automatic location instead.")
+                        });
+                        break;
+                    case RefreshState.NoWeather:
                         logger_Logger.Error("Could not refresh weather, data could not be obtained.");
                         this.app.ShowError({
                             type: "soft",
@@ -19063,6 +19066,7 @@ const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
 const { File: main_File } = imports.gi.Gio;
+const keybindingManager = imports.ui.main.keybindingManager;
 class WeatherApplet extends TextIconApplet {
     get CurrentData() {
         return this.currentWeatherInfo;
@@ -19078,6 +19082,11 @@ class WeatherApplet extends TextIconApplet {
         this.currentWeatherInfo = null;
         this.encounteredError = false;
         this.online = null;
+        this.OnKeySettingsUpdated = () => {
+            if (this.config.keybinding != null) {
+                keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
+            }
+        };
         this.onSettingNeedsRebuild = (conf, changedData, data) => {
             if (this.Provider == null)
                 return;
@@ -19193,6 +19202,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
         this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh());
         this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh());
+        this.config.LocationChanged.Subscribe(() => this.loop.Refresh());
         this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({ immediate: false }));
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
@@ -19203,6 +19213,11 @@ class WeatherApplet extends TextIconApplet {
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.ShowAlertsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
+        this.config.TempTextOverrideChanged.Subscribe(this.RefreshLabel);
+        this.config.FontChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
+        this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
+        this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
+        keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
     }
     async Refresh(options) {
         return this.loop.Refresh(options);
@@ -19277,8 +19292,8 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
         }
-        if (NotEmpty(this.config._panelTextOverride))
-            label = InjectValues(this.config._panelTextOverride, weather, this.config);
+        if (NotEmpty(this.config._tempTextOverride))
+            label = InjectValues(this.config._tempTextOverride, weather, this.config);
         this.SetAppletLabel(label);
     }
     SetAppletTooltip(weather, config, override) {
