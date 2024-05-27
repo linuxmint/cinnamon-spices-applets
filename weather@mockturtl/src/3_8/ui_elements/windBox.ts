@@ -2,8 +2,8 @@ import type { Config, WeatherWindSpeedUnits } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
 import type { WeatherApplet } from "../main";
 import type { WeatherData } from "../weather-data";
-import { CompassDirection, CompassDirectionText, LocalizedColon, MPStoUserUnits, _ } from "../utils";
-const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+import { CompassDirection, CompassDirectionText, Label, LocalizedColon, MPStoUserUnits, _ } from "../utils";
+const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 export class WindBox {
@@ -36,7 +36,7 @@ export class WindBox {
     }
 
     public Rebuild(config: Config, textColorStyle: string): [ caption: imports.gi.St.Label, label: imports.gi.St.BoxLayout ] {
-        this._caption = new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
+        this._caption = Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
         this._label = this.BuildLabel(config);
 
         return [ this._caption, this._label ];
@@ -51,7 +51,7 @@ export class WindBox {
 		const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
 		const iconSize = Math.round(config.CurrentFontSize * 0.8);
 
-		this.labelText = new Label({ text: ELLIPSIS, x_expand: true, x_align: ActorAlign.FILL });
+		this.labelText = Label({ text: ELLIPSIS, x_expand: true, x_align: ActorAlign.FILL });
 		this.windDirectionIcon = new Icon({
 			icon_type: IconType.SYMBOLIC,
 			icon_name: APPLET_ICON,

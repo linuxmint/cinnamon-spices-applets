@@ -3,7 +3,7 @@ import { CurrentWeather as UICurrentWeather } from "./ui_elements/uiCurrentWeath
 import { Logger } from "./lib/services/logger";
 import type { WeatherApplet } from "./main";
 import type { WeatherProvider } from "./types";
-import { ShadeHexColor, delay, _ } from "./utils";
+import { ShadeHexColor, delay, _, Label } from "./utils";
 import { UIForecasts } from "./ui_elements/uiForecasts";
 import { UIHourlyForecasts } from "./ui_elements/uiHourlyForecasts";
 import { UIBar } from "./ui_elements/uiBar";
@@ -13,7 +13,7 @@ import type { DateTime } from "luxon";
 import type { WeatherData } from "./weather-data";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
-const { IconType, Label } = imports.gi.St;
+const { IconType } = imports.gi.St;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
@@ -246,10 +246,10 @@ export class UI {
 		this.CurrentWeather.Destroy();
 		this.FutureWeather.Destroy();
 		this.Bar.Destroy()
-		this.CurrentWeather.actor.add_actor(new Label({
+		this.CurrentWeather.actor.add_actor(Label({
 			text: _('Loading current weather ...')
 		}))
-		this.FutureWeather.actor.set_child(new Label({
+		this.FutureWeather.actor.set_child(Label({
 			text: _('Loading future weather ...')
 		}))
 	}

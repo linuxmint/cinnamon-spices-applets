@@ -5,12 +5,12 @@ import type { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../weather-data";
-import { _, TempToUserConfig, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale } from "../utils";
+import { _, TempToUserConfig, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, Label } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { SunTimesUI } from "./uiSunTimes";
 import { WindBox } from "./windBox";
 
-const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 // stylesheet.css
@@ -136,13 +136,13 @@ export class CurrentWeather {
 	// Build helpers
 
 	private BuildMiddleColumn(config: Config, textColorStyle: string) {
-		this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
+		this.weatherSummary = Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
 		const middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
 		middleColumn.add(this.BuildLocationSection())
 		middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
 
-		this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
+		this.immediatePrecipitationLabel = Label({ style_class: "weather-immediate-precipitation" });
 		this.immediatePrecipitationBox = new BoxLayout({x_align: ActorAlign.CENTER});
 		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
 		this.immediatePrecipitationBox.hide();
@@ -158,18 +158,18 @@ export class CurrentWeather {
 			text: ELLIPSIS
 		}
 		// Current Weather Right Column
-		this.temperatureLabel = new Label(textOb)
-		this.humidityLabel = new Label(textOb)
-		this.pressureLabel = new Label(textOb)
-		this.dewPointLabel = new Label({ text: '' });
+		this.temperatureLabel = Label(textOb)
+		this.humidityLabel = Label(textOb)
+		this.pressureLabel = Label(textOb)
+		this.dewPointLabel = Label({ text: '' });
 
-		this.apiUniqueLabel = new Label({ text: '' })
-		this.temperatureCaption = new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.humidityCaption = new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.pressureCaption = new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.apiUniqueLabel = Label({ text: '' })
+		this.temperatureCaption = Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.humidityCaption = Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.pressureCaption = Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.dewPointCaption = Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
 		// APi Unique Caption
-		this.apiUniqueCaption = new Label({ text: '', style: textColorStyle });
+		this.apiUniqueCaption = Label({ text: '', style: textColorStyle });
 
 		const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
 

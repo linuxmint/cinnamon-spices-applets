@@ -3,9 +3,9 @@ import type { Config } from "../config";
 import { BLANK, ELLIPSIS } from "../consts";
 import type { WeatherApplet } from "../main";
 import type { WeatherData } from "../weather-data";
-import { GetHoursMinutes } from "../utils";
+import { GetHoursMinutes, Label } from "../utils";
 
-const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 const STYLE_ASTRONOMY = 'weather-current-astronomy'
@@ -35,8 +35,8 @@ export class SunTimesUI {
     }
 
     public Rebuild(config: Config, textColorStyle: string): imports.gi.St.BoxLayout {
-        this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
-        this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
+        this.sunriseLabel = Label({ text: ELLIPSIS, style: textColorStyle })
+        this.sunsetLabel = Label({ text: ELLIPSIS, style: textColorStyle })
 
         const sunriseBox = new BoxLayout();
         const sunsetBox = new BoxLayout();
@@ -68,7 +68,7 @@ export class SunTimesUI {
         sunriseBox.add(this.sunriseLabel, textOptions);
         sunsetBox.add(this.sunsetLabel, textOptions);
 
-        const spacer = new Label({ text: BLANK })
+        const spacer = Label({ text: BLANK })
 
         const sunBox = new BoxLayout({
 			style_class: STYLE_ASTRONOMY,

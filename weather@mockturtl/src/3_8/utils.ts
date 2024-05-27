@@ -6,8 +6,16 @@ import type { APIUniqueField, AlertLevel, BuiltinIcons, WeatherData } from "./we
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
+const { EllipsizeMode } = imports.gi.Pango;
 const { IconTheme } = imports.gi.Gtk;
 const { Object } = imports.gi.GObject;
+
+export function Label(options?: Partial<imports.gi.St.LabelInitOptions> | undefined): imports.gi.St.Label {
+	// eslint-disable-next-line no-restricted-syntax
+	const label = new imports.gi.St.Label(options);
+	label.clutter_text.ellipsize = EllipsizeMode.NONE;
+	return label;
+}
 
 // --------------------------------------------------------------
 // Text Generators

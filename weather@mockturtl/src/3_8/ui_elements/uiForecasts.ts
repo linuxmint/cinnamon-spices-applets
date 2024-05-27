@@ -4,11 +4,11 @@ import { Event } from "../lib/events";
 import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { WeatherData } from "../weather-data";
-import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";
+import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig, Label } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import type { DateTime } from "luxon";
 
-const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
+const { Bin, BoxLayout, Icon, Widget } = imports.gi.St;
 const { GridLayout, Orientation } = imports.gi.Clutter;
 
 // stylesheet.css
@@ -200,13 +200,13 @@ export class UIForecasts {
 
 			forecastWeather.Day.disable();
 
-			forecastWeather.Summary = new Label({
+			forecastWeather.Summary = Label({
 				/*text: Placeholders.LOADING,*/
 				style_class: STYLE_FORECAST_SUMMARY,
 				reactive: true
 			});
 
-			forecastWeather.Temperature = new Label({
+			forecastWeather.Temperature = Label({
 				/*text: Placeholders.LOADING,*/
 				style_class: STYLE_FORECAST_TEMPERATURE
 			});

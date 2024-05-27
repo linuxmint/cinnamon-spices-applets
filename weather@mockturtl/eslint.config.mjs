@@ -125,6 +125,19 @@ export default teslint.config(
             "unicorn/no-unreadable-array-destructuring": "off",
             "unicorn/consistent-function-scoping": "off",
             "unicorn/throw-new-error": "off",
+            "no-restricted-syntax": [
+                'error',
+                {
+                    // This is probably too restrictive, but whatever
+                    selector: 'NewExpression[callee.name="Label"]',
+                    message: 'Usage of imports.gi.St.Label is not allowed. Usage Label function from utils.',
+                },
+                {
+                    // prevent usage of imports.gi.St.Label
+                    selector: 'NewExpression[callee.property.name="Label"]',
+                    message: 'Usage of imports.gi.St.Label is not allowed. Usage Label function from utils.',
+                },
+            ]
         }
     }
 )

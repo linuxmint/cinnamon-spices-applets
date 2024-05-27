@@ -4,12 +4,12 @@ import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
-import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName } from "../utils";
+import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName, Label } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
-const { BoxLayout, Side, Label, ScrollView, Icon, Align } = imports.gi.St;
+const { BoxLayout, Side, ScrollView, Icon, Align } = imports.gi.St;
 
 export class UIHourlyForecasts {
 	private app: WeatherApplet;
@@ -362,17 +362,17 @@ export class UIHourlyForecasts {
 
 			this.hourlyForecasts.push({
 				// Override color on light theme for grey text
-				Hour: new Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
+				Hour: Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
 				Icon: new Icon({
 					icon_type: config.IconType,
 					icon_size: 24,
 					icon_name: APPLET_ICON,
 					style_class: "hourly-icon"
 				}),
-				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-				PrecipPercent: new Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
-				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
+				Summary: Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+				PrecipPercent: Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
+				PrecipVolume: Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
+				Temperature: Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
 			})
 
 			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
