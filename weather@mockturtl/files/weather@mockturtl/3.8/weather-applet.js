@@ -10270,9 +10270,7 @@ class HttpLib {
             };
         }
         finally {
-            global.log("Called");
             if (!result.Success && (!HandleError || HandleError(result))) {
-                global.log("Unhandlederror");
                 this.UnhandledError.Invoke(this, result.ErrorData);
             }
         }
