@@ -25,7 +25,7 @@
 	"margin": {
 		"type": "spinbutton",
 		"default": 8,
-		"min": -6,
+		"min": -10,
 		"max": 32,
 		"step": 2,
 		"units": "px",
