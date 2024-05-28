@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-27 19:07-0400\n"
-"PO-Revision-Date: 2024-03-27 20:14-0300\n"
+"PO-Revision-Date: 2024-05-27 22:20-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: 4.0/applet.js:547 6.0/applet.js:547
 msgid "all buttons"
@@ -263,9 +263,8 @@ msgstr "Configuración de la etiqueta del botón de la lista de ventanas"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
-#, fuzzy
 msgid "Number label settings"
-msgstr "Configuración de etiquetas numéricas del grupo de aplicaciones"
+msgstr "Configuración de la etiqueta numérica"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -455,7 +454,7 @@ msgstr ""
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->description
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->description
 msgid "Show a vertical ellipsis (...) for grouped buttons"
-msgstr ""
+msgstr "Mostrar una elipsis vertical (...) para los botones agrupados"
 
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
@@ -464,6 +463,9 @@ msgid ""
 "list buttons with more then one window. When on a vertical panel this option "
 "is not possible and the setting will be ignored."
 msgstr ""
+"Anteponer una carta unicode de elipsis vertical a las etiquetas de los "
+"botones de lista de ventanas agrupadas con más de una ventana. En un panel "
+"vertical, esta opción no es posible y la configuración se ignorará."
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -519,18 +521,17 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
-#, fuzzy
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
 "appear. It applies when hovering over either window-list buttons or "
 "thumbnail menu items (of course one of the full size window preview options "
 "must be enabled for this option to have any effect)"
 msgstr ""
-"Define el tiempo que pasa el ratón por encima antes de que aparezca una "
-"vista previa de la ventana a tamaño completo. Se aplica tanto a los botones "
-"de la lista de ventanas como a los elementos del menú de miniaturas (por "
-"supuesto, una de las opciones de vista previa de la ventana a tamaño "
-"completo debe estar activada para que esta opción tenga algún efecto)"
+"Esto define el tiempo que pasa el mouse antes de que aparezca una vista "
+"previa de la ventana en tamaño completo. Se aplica al pasar el cursor sobre "
+"los botones de la lista de ventanas o los elementos del menú en miniatura "
+"(por supuesto, una de las opciones de vista previa de la ventana de tamaño "
+"completo debe estar habilitada para que esta opción tenga algún efecto)"
 
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
@@ -563,38 +564,33 @@ msgstr "Duración de la animación de la etiqueta"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Nothing"
-msgstr "No hacer nada"
+msgstr "Nada"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Application group window count"
-msgstr "Ventanas de aplicaciones agrupadas"
+msgstr "Recuento de ventanas de grupos de aplicaciones"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Workspace number"
-msgstr "Mostrar número"
+msgstr "Número de espacio de trabajo"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Monitor number"
-msgstr "Monitor"
+msgstr "Número de monitor"
 
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
-#, fuzzy
 msgid "Number label contents"
-msgstr "Contenido de la etiqueta"
+msgstr "Contenido de la etiqueta numérica"
 
 #. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-number->options
 msgid "Smart"
-msgstr ""
+msgstr "Inteligente"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
@@ -609,6 +605,11 @@ msgid ""
 "above. i.e. When there is two or more windows in a group, or when the "
 "windows workspace or monitor does not match the current one."
 msgstr ""
+"Controla cuándo se utiliza la etiqueta numérica. Inteligente significa que "
+"la etiqueta sólo aparecerá cuando sea apropiado en función de la "
+"configuración del contenido de la etiqueta numérica anterior, es decir, "
+"cuando haya dos o más ventanas en un grupo, o cuando el espacio de trabajo o "
+"monitor de la ventana no coincida con el actual."
 
 #. 4.0->settings-schema.json->number-style->options
 #. 6.0->settings-schema.json->number-style->options
@@ -627,15 +628,14 @@ msgstr "Estilo de número"
 
 #. 4.0->settings-schema.json->number-style->tooltip
 #. 6.0->settings-schema.json->number-style->tooltip
-#, fuzzy
 msgid ""
 "Controls how the number label is presented. When on a vertical panel or when "
 "in launcher mode, the \"label prepend\" option is not possible so \"icon "
 "overlay\" will be used instead"
 msgstr ""
-"Controla cómo se presenta el número de ventanas en un botón agrupado. En un "
-"panel vertical, no es posible utilizar la opción \"añadir etiqueta\", por lo "
-"que en su lugar se utilizará \"superponer icono\""
+"Controla cómo se presenta la etiqueta numérica. En un panel vertical o en "
+"modo lanzador, no es posible utilizar la opción \"etiqueta previa\", por lo "
+"que se utilizará \"icono superpuesto\""
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -1557,7 +1557,7 @@ msgstr "Restaurar la ventana de la aplicación más reciente"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 1st window in grouped button"
-msgstr ""
+msgstr "Activar 1ª ventana en botón agrupado"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1566,7 +1566,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 2nd window in grouped button"
-msgstr ""
+msgstr "Activar 2ª ventana en botón agrupado"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1575,7 +1575,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 3rd window in grouped button"
-msgstr ""
+msgstr "Activar 3ª ventana en botón agrupado"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1584,7 +1584,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 4th window in grouped button"
-msgstr ""
+msgstr "Activar 4ª ventana en botón agrupado"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
