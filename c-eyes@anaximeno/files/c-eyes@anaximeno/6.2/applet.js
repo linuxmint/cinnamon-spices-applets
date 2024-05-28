@@ -89,12 +89,16 @@ class Eye extends Applet.Applet {
 			{
 				key: "line-width",
 				value: "line_width",
-				cb: d.debounce(this.on_property_updated, 300),
+				cb: d.debounce(
+					this.on_property_updated.bind(this),
+					300),
 			},
 			{
 				key: "margin",
 				value: "margin",
-				cb: d.debounce(this.on_property_updated, 300),
+				cb: d.debounce(
+					this.on_property_updated.bind(this),
+					300),
 			},
 			{
 				key: "base-color",
@@ -134,7 +138,9 @@ class Eye extends Applet.Applet {
 			{
 				key: "vertical-padding",
 				value: "vertical_padding",
-				cb: d.debounce(this.on_property_updated, 300),
+				cb: d.debounce(
+					this.on_property_updated.bind(this),
+					300),
 			},
 			{
 				key: "tooltip-message",
