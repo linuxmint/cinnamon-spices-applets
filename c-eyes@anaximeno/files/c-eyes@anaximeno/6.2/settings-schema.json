@@ -85,7 +85,7 @@
 
 	"base-color": {
 		"type": "colorchooser",
-		"default": "#EFEDEA",
+		"default": "#BBBBBB",
 		"description": "Base Color"
 	},
 	"iris-color": {

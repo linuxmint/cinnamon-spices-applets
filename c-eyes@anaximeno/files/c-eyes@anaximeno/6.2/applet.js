@@ -71,7 +71,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "repaint-interval",
 				value: "repaint_interval",
-				cb: d.debounce(e => this.set_active(true), 300),
+				cb: d.debounce(() => this.set_active(true), 300),
 			},
 			{
 				key: "repaint-angle",
@@ -81,17 +81,20 @@ class Eye extends Applet.Applet {
 			{
 				key: "mode",
 				value: "mode",
-				cb: this.on_property_updated,
+				cb: () => {
+					this.on_eye_mode_update();
+					this.on_property_updated();
+				},
 			},
 			{
 				key: "line-width",
 				value: "line_width",
-				cb: d.debounce(e => this.on_property_updated(e), 300),
+				cb: d.debounce(this.on_property_updated, 300),
 			},
 			{
 				key: "margin",
 				value: "margin",
-				cb: d.debounce(e => this.on_property_updated(e), 300),
+				cb: d.debounce(this.on_property_updated, 300),
 			},
 			{
 				key: "base-color",
@@ -131,12 +134,15 @@ class Eye extends Applet.Applet {
 			{
 				key: "vertical-padding",
 				value: "vertical_padding",
-				cb: d.debounce(e => this.on_property_updated(e), 300),
+				cb: d.debounce(this.on_property_updated, 300),
 			},
 			{
 				key: "tooltip-message",
 				value: "tooltip_message",
-				cb: d.debounce(e => this.update_tooltip(), 100),
+				cb: d.debounce(() => {
+					this.update_tooltip();
+					this.on_property_updated();
+				}, 100),
 			}
 		];
 
@@ -157,19 +163,11 @@ class Eye extends Applet.Applet {
 
 	on_applet_clicked(event) {
 		this.area.queue_repaint();
-		this.update_tooltip();
 	}
 
-	on_property_updated(event) {
-		this.update_tooltip();
-
+	on_property_updated() {
 		this.area.set_width((this.area_width + 2 * this.margin) * global.ui_scale);
 		this.area.set_height(this.area_height * global.ui_scale);
-
-		if (this.eye_painter.mode != this.mode) {
-			this.eye_painter = EyeModeFactory.createEyeMode(this.mode);
-		}
-
 		this.area.queue_repaint();
 	}
 
@@ -192,6 +190,12 @@ class Eye extends Applet.Applet {
 		if (this.should_redraw())
 			this.area.queue_repaint();
 		return true;
+	}
+
+	on_eye_mode_update() {
+		if (this.eye_painter && this.eye_painter.mode != this.mode) {
+			this.eye_painter = EyeModeFactory.createEyeMode(this.mode);
+		}
 	}
 
 	destroy() {
@@ -249,6 +253,7 @@ class Eye extends Applet.Applet {
 	}
 
 	paint_eye(area) {
+		this.on_eye_mode_update();
 		const theme_node = this.area.get_theme_node();
 		const [mouse_x, mouse_y, _] = global.get_pointer();
 		const [area_x, area_y] = this.get_area_position();
@@ -266,10 +271,6 @@ class Eye extends Applet.Applet {
 
 			[ok, color] = Clutter.Color.from_string(this.pupil_color);
 			pupil_color = ok ? color : pupil_color;
-		}
-
-		if (this.eye_painter.mode != this.mode) {
-			this.eye_painter = EyeModeFactory.createEyeMode(this.mode);
 		}
 
 		this.eye_painter.drawEye(area, {
