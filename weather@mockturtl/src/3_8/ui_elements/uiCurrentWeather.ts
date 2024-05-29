@@ -60,11 +60,9 @@ export class CurrentWeather {
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new BoxLayout({
-			x_expand: true,
-			y_expand: true,
 			style_class: STYLE_ICONBOX,
-			x_align: ActorAlign.FILL,
-			y_align: ActorAlign.FILL,
+			x_align: imports.gi.Clutter.ActorAlign.CENTER,
+			y_align: imports.gi.Clutter.ActorAlign.CENTER,
 		});
 
 		this.sunTimesUI = new SunTimesUI(app);
@@ -130,7 +128,7 @@ export class CurrentWeather {
 
 		this.actor.add_actor(this.weatherIcon)
 		this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
-		this.actor.add(this.BuildRightColumn(textColorStyle, config), { expand: true })
+		this.actor.add(this.BuildRightColumn(textColorStyle, config))
 	};
 
 	// Build helpers
@@ -154,16 +152,13 @@ export class CurrentWeather {
 
 	/** Builds Weather Information on the right side */
 	private BuildRightColumn(textColorStyle: string, config: Config) {
-		const textOb = {
-			text: ELLIPSIS,
-		}
 		// Current Weather Right Column
-		this.temperatureLabel = Label(textOb)
-		this.humidityLabel = Label(textOb)
-		this.pressureLabel = Label(textOb)
+		this.temperatureLabel = Label({text: ELLIPSIS})
+		this.humidityLabel = Label({text: ELLIPSIS,})
+		this.pressureLabel = Label({text: ELLIPSIS,})
 		this.dewPointLabel = Label({ text: ''});
 
-		this.apiUniqueLabel = Label({ text: ''})
+		this.apiUniqueLabel = Label({ text: '' })
 		this.temperatureCaption = Label({
 			text: _('Temperature') + LocalizedColon(config.currentLocale),
 			style: textColorStyle,
@@ -194,26 +189,28 @@ export class CurrentWeather {
 		const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
 
 		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-		const rb_values = new BoxLayout({ 
+		const rb_values = new BoxLayout({
 			vertical: true,
 			style_class: STYLE_DATABOX_VALUES,
 		})
-		rb_captions.add_actor(this.temperatureCaption);
-		rb_captions.add_actor(this.humidityCaption);
-		rb_captions.add_actor(this.pressureCaption);
-		rb_captions.add_actor(windCaption);
-		rb_captions.add_actor(this.dewPointCaption);
-		rb_captions.add_actor(this.apiUniqueCaption);
-		rb_values.add_actor(this.temperatureLabel);
-		rb_values.add_actor(this.humidityLabel);
-		rb_values.add_actor(this.pressureLabel);
-		rb_values.add_actor(windLabel);
-		rb_values.add_actor(this.dewPointLabel);
-		rb_values.add_actor(this.apiUniqueLabel);
+		rb_captions.add(this.temperatureCaption);
+		rb_captions.add(this.humidityCaption);
+		rb_captions.add(this.pressureCaption);
+		rb_captions.add(windCaption);
+		rb_captions.add(this.dewPointCaption);
+		rb_captions.add(this.apiUniqueCaption);
+		rb_values.add(this.temperatureLabel);
+		rb_values.add(this.humidityLabel);
+		rb_values.add(this.pressureLabel);
+		rb_values.add(windLabel);
+		rb_values.add(this.dewPointLabel);
+		rb_values.add(this.apiUniqueLabel);
 
-		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
-		rightColumn.add(rb_captions, { expand: true });
-		rightColumn.add(rb_values, { expand: true });
+		const rightColumn = new BoxLayout({
+			style_class: STYLE_DATABOX
+		});
+		rightColumn.add(rb_captions);
+		rightColumn.add(rb_values);
 		return rightColumn;
 	}
 

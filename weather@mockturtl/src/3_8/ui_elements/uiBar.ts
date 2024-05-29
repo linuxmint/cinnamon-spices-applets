@@ -185,7 +185,8 @@ export class UIBar {
 			icon_type: IconType.SYMBOLIC,
 			icon_size: 24,
 		});
-		
+		this.refreshIcon.hide();
+
 		this.actor.add(this.providerCreditButton.actor, {
 			x_fill: false,
 			x_align: Align.END,

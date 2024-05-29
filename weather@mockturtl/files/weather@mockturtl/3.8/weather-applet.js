@@ -17884,11 +17884,9 @@ class CurrentWeather {
         };
         this.app = app;
         this.actor = new uiCurrentWeather_BoxLayout({
-            x_expand: true,
-            y_expand: true,
             style_class: STYLE_ICONBOX,
-            x_align: uiCurrentWeather_ActorAlign.FILL,
-            y_align: uiCurrentWeather_ActorAlign.FILL,
+            x_align: imports.gi.Clutter.ActorAlign.CENTER,
+            y_align: imports.gi.Clutter.ActorAlign.CENTER,
         });
         this.sunTimesUI = new SunTimesUI(app);
         this.windBox = new WindBox(app);
@@ -17940,7 +17938,7 @@ class CurrentWeather {
         });
         this.actor.add_actor(this.weatherIcon);
         this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
-        this.actor.add(this.BuildRightColumn(textColorStyle, config), { expand: true });
+        this.actor.add(this.BuildRightColumn(textColorStyle, config));
     }
     ;
     BuildMiddleColumn(config, textColorStyle) {
@@ -17957,12 +17955,9 @@ class CurrentWeather {
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
-        const textOb = {
-            text: ELLIPSIS,
-        };
-        this.temperatureLabel = Label(textOb);
-        this.humidityLabel = Label(textOb);
-        this.pressureLabel = Label(textOb);
+        this.temperatureLabel = Label({ text: ELLIPSIS });
+        this.humidityLabel = Label({ text: ELLIPSIS, });
+        this.pressureLabel = Label({ text: ELLIPSIS, });
         this.dewPointLabel = Label({ text: '' });
         this.apiUniqueLabel = Label({ text: '' });
         this.temperatureCaption = Label({
@@ -17996,21 +17991,23 @@ class CurrentWeather {
             vertical: true,
             style_class: STYLE_DATABOX_VALUES,
         });
-        rb_captions.add_actor(this.temperatureCaption);
-        rb_captions.add_actor(this.humidityCaption);
-        rb_captions.add_actor(this.pressureCaption);
-        rb_captions.add_actor(windCaption);
-        rb_captions.add_actor(this.dewPointCaption);
-        rb_captions.add_actor(this.apiUniqueCaption);
-        rb_values.add_actor(this.temperatureLabel);
-        rb_values.add_actor(this.humidityLabel);
-        rb_values.add_actor(this.pressureLabel);
-        rb_values.add_actor(windLabel);
-        rb_values.add_actor(this.dewPointLabel);
-        rb_values.add_actor(this.apiUniqueLabel);
-        const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX });
-        rightColumn.add(rb_captions, { expand: true });
-        rightColumn.add(rb_values, { expand: true });
+        rb_captions.add(this.temperatureCaption);
+        rb_captions.add(this.humidityCaption);
+        rb_captions.add(this.pressureCaption);
+        rb_captions.add(windCaption);
+        rb_captions.add(this.dewPointCaption);
+        rb_captions.add(this.apiUniqueCaption);
+        rb_values.add(this.temperatureLabel);
+        rb_values.add(this.humidityLabel);
+        rb_values.add(this.pressureLabel);
+        rb_values.add(windLabel);
+        rb_values.add(this.dewPointLabel);
+        rb_values.add(this.apiUniqueLabel);
+        const rightColumn = new uiCurrentWeather_BoxLayout({
+            style_class: STYLE_DATABOX
+        });
+        rightColumn.add(rb_captions);
+        rightColumn.add(rb_values);
         return rightColumn;
     }
     BuildLocationSection() {
@@ -18927,6 +18924,7 @@ class UIBar {
             icon_type: uiBar_IconType.SYMBOLIC,
             icon_size: 24,
         });
+        this.refreshIcon.hide();
         this.actor.add(this.providerCreditButton.actor, {
             x_fill: false,
             x_align: uiBar_Align.END,
@@ -19134,13 +19132,13 @@ class UI {
         this.HourlySeparator = new UISeparator();
         this.BarSeparator = new UISeparator();
         this.HourlySeparator.Hide();
-        this.menu.addActor(this.CurrentWeather.actor);
-        this.menu.addActor(this.HourlySeparator.Actor);
-        this.menu.addActor(this.HourlyWeather.actor);
-        this.menu.addActor(this.ForecastSeparator.Actor);
-        this.menu.addActor(this.FutureWeather.actor);
-        this.menu.addActor(this.BarSeparator.Actor);
-        this.menu.addActor(this.Bar.Actor);
+        this.menu.box.add(this.CurrentWeather.actor);
+        this.menu.box.add(this.HourlySeparator.Actor);
+        this.menu.box.add(this.HourlyWeather.actor);
+        this.menu.box.add(this.ForecastSeparator.Actor);
+        this.menu.box.add(this.FutureWeather.actor);
+        this.menu.box.add(this.BarSeparator.Actor);
+        this.menu.box.add(this.Bar.Actor);
     }
     ShowLoadingUi() {
         this.CurrentWeather.Destroy();

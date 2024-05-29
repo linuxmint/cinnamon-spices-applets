@@ -240,13 +240,13 @@ export class UI {
 		this.HourlySeparator.Hide();
 
 		// Add everything to the PopupMenu
-		this.menu.addActor(this.CurrentWeather.actor)
-		this.menu.addActor(this.HourlySeparator.Actor);
-		this.menu.addActor(this.HourlyWeather.actor);
-		this.menu.addActor(this.ForecastSeparator.Actor);
-		this.menu.addActor(this.FutureWeather.actor);
-		this.menu.addActor(this.BarSeparator.Actor);
-		this.menu.addActor(this.Bar.Actor);
+		this.menu.box.add(this.CurrentWeather.actor);
+		this.menu.box.add(this.HourlySeparator.Actor);
+		this.menu.box.add(this.HourlyWeather.actor);
+		this.menu.box.add(this.ForecastSeparator.Actor);
+		this.menu.box.add(this.FutureWeather.actor);
+		this.menu.box.add(this.BarSeparator.Actor);
+		this.menu.box.add(this.Bar.Actor);
 	}
 
 	/** Destroys UI first then shows initial UI */
