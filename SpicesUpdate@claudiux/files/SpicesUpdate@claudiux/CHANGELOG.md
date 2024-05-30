@@ -1,3 +1,6 @@
+### v7.4.3~20240531
+  * Wait a few seconds before refreshing data after a change in network status.
+
 ### v7.4.2~20240805
   * Saves memory.
 
