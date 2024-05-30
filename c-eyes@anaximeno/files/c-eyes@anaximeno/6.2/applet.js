@@ -31,6 +31,7 @@ const { Debouncer } = require("./helpers.js");
 
 const UUID = "c-eyes@anaximeno";
 const LOC_DIR = GLib.get_home_dir() + "/.local/share/locale";
+const AREA_DEFAULT_WIDTH = 28;
 
 Gettext.bindtextdomain(UUID, LOC_DIR);
 
@@ -41,11 +42,11 @@ function _(text) {
 
 
 class Eye extends Applet.Applet {
-	constructor(metadata, orientation, panelHeight, instanceId, areaHeight, areaWidth) {
+	constructor(metadata, orientation, panelHeight, instanceId, areaWidth) {
 		super(orientation, panelHeight, instanceId);
 		this.settings = this._setup_settings(metadata.uuid, instanceId);
+		this.orientation  = orientation;
 		this.metadata = metadata;
-		this.area_height = areaHeight;
 		this.area_width = areaWidth;
 
 		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -57,6 +58,7 @@ class Eye extends Applet.Applet {
 
 		this.signals = new SignalManager.SignalManager(null);
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
+        this.signals.connect(Main.layoutManager, 'monitors-changed', this.on_property_updated, this);
 
 		this._last_mouse_x = undefined;
 		this._last_mouse_y = undefined;
@@ -71,7 +73,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "repaint-interval",
 				value: "repaint_interval",
-				cb: d.debounce(() => this.set_active(true), 300),
+				cb: d.debounce((value) => this.set_active(true), 300),
 			},
 			{
 				key: "repaint-angle",
@@ -81,9 +83,9 @@ class Eye extends Applet.Applet {
 			{
 				key: "mode",
 				value: "mode",
-				cb: () => {
+				cb: (value) => {
 					this.on_eye_mode_update();
-					this.on_property_updated();
+					this.on_property_updated(value);
 				},
 			},
 			{
@@ -136,8 +138,8 @@ class Eye extends Applet.Applet {
 				cb: this.on_property_updated,
 			},
 			{
-				key: "vertical-padding",
-				value: "vertical_padding",
+				key: "padding",
+				value: "padding",
 				cb: d.debounce(
 					this.on_property_updated.bind(this),
 					300),
@@ -145,9 +147,9 @@ class Eye extends Applet.Applet {
 			{
 				key: "tooltip-message",
 				value: "tooltip_message",
-				cb: d.debounce(() => {
+				cb: d.debounce((value) => {
 					this.update_tooltip();
-					this.on_property_updated();
+					this.on_property_updated(value);
 				}, 100),
 			}
 		];
@@ -163,6 +165,11 @@ class Eye extends Applet.Applet {
 		return settings;
 	}
 
+	on_orientation_changed(orientation) {
+		this.orientation = orientation;
+		this.update_sizes();
+    }
+
 	on_applet_removed_from_panel(deleteConfig) {
 		this.destroy();
 	}
@@ -171,9 +178,8 @@ class Eye extends Applet.Applet {
 		this.area.queue_repaint();
 	}
 
-	on_property_updated() {
-		this.area.set_width((this.area_width + 2 * this.margin) * global.ui_scale);
-		this.area.set_height(this.area_height * global.ui_scale);
+	on_property_updated(value = null) {
+		this.update_sizes();
 		this.area.queue_repaint();
 	}
 
@@ -209,6 +215,23 @@ class Eye extends Applet.Applet {
 		this.signals.disconnectAllSignals();
 		this.area.destroy();
 		this.settings.finalize();
+	}
+
+	update_sizes() {
+		let width = 1, height = 1;
+
+		if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
+			this.actor.set_style("padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;");
+			height = (this.area_width + 2 * this.margin) * global.ui_scale;
+			width = this.panel.height;
+		} else {
+			this.actor.set_style("padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px;");
+			width = (this.area_width + 2 * this.margin) * global.ui_scale;
+			height = this.panel.height;
+		}
+
+		this.area.set_width(width);
+		this.area.set_height(height);
 	}
 
 	set_active(enabled) {
@@ -288,7 +311,7 @@ class Eye extends Applet.Applet {
 			iris_color: iris_color,
 			pupil_color: pupil_color,
 			line_width: (this.line_width * global.ui_scale),
-			padding: (this.vertical_padding * global.ui_scale),
+			padding: (this.padding * global.ui_scale),
 			lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
 			bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
 		});
@@ -328,5 +351,5 @@ class Eye extends Applet.Applet {
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-	return new Eye(metadata, orientation, panelHeight, instanceId, 16, 28);
+	return new Eye(metadata, orientation, panelHeight, instanceId, AREA_DEFAULT_WIDTH);
 }
