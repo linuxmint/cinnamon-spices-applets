@@ -49,7 +49,7 @@ class EyelidMode extends EyeMode {
         const mouse_ang = Math.atan2(mouse_y, mouse_x);
         let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
 
-        const eye_rad = (area_height - options.padding) / 2;
+        const eye_rad = (Math.min(area_height, area_width) - options.padding) / 2;
         const iris_rad = eye_rad * 0.5;
         const pupil_rad = iris_rad * 0.4;
 
@@ -147,7 +147,7 @@ class BulbMode extends EyeMode {
         let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
         const mouse_ang = Math.atan2(mouse_y, mouse_x);
 
-        const eye_rad = (area_height - options.padding) / 2.3;
+        const eye_rad = (Math.min(area_height, area_width) - options.padding) / 2.3;
         const iris_rad = eye_rad * 0.6;
         const pupil_rad = iris_rad * 0.4;
 
