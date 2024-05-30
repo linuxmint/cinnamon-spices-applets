@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 2.4.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-27 15:16+0100\n"
+"POT-Creation-Date: 2024-05-30 09:33+0100\n"
 "PO-Revision-Date: 2023-03-23 12:17+0200\n"
 "Last-Translator: Angel Ivanov <angel.ivanov@outlook.com>\n"
 "Language-Team: български <>\n"
@@ -21,48 +21,48 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:19231
+#: 3.8/weather-applet.js:19289
 msgid "Error"
 msgstr "Грешка"
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:19232 3.8/weather-applet.js:19234
-#: 3.8/weather-applet.js:19236 3.8/weather-applet.js:19239
-#: 3.8/weather-applet.js:19242 3.8/weather-applet.js:19243
-#: 3.8/weather-applet.js:19244 3.8/weather-applet.js:19245
+#: 3.8/weather-applet.js:19290 3.8/weather-applet.js:19292
+#: 3.8/weather-applet.js:19294 3.8/weather-applet.js:19297
+#: 3.8/weather-applet.js:19300 3.8/weather-applet.js:19301
+#: 3.8/weather-applet.js:19302 3.8/weather-applet.js:19303
 msgid "Service Error"
 msgstr "Грешка в услугата"
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:19233
+#: 3.0/applet.js:168 3.8/weather-applet.js:19291
 msgid "Incorrect API Key"
 msgstr "Неправилен API ключ"
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:19235
+#: 3.0/applet.js:170 3.8/weather-applet.js:19293
 msgid "Incorrect Location Format"
 msgstr "Неправилен формат на местоположението"
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:19237
+#: 3.0/applet.js:172 3.8/weather-applet.js:19295
 msgid "Key Blocked"
 msgstr "Блокиран ключ"
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:19238
+#: 3.0/applet.js:173 3.8/weather-applet.js:19296
 msgid "Can't find location"
 msgstr "Местоположението не е открито"
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:19240
+#: 3.0/applet.js:175 3.8/weather-applet.js:19298
 msgid "No Api Key"
 msgstr "Не е въведен API ключ"
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:19241
+#: 3.0/applet.js:176 3.8/weather-applet.js:19299
 msgid "No Location"
 msgstr "Не е въведено местоположение"
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:19246
+#: 3.0/applet.js:181 3.8/weather-applet.js:19304
 msgid "Missing Packages"
 msgstr "Липсващи пакети"
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:19247
+#: 3.0/applet.js:182 3.8/weather-applet.js:19305
 msgid "Location not covered"
 msgstr "Местоположението не се поддържа от избрания доставчик на прогноза"
 
@@ -70,16 +70,16 @@ msgstr "Местоположението не се поддържа от изб�
 msgid "Weather Applet"
 msgstr "Аплет за Времето"
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:19503
+#: 3.0/applet.js:217 3.8/weather-applet.js:19565
 msgid "..."
 msgstr "..."
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:19504
+#: 3.0/applet.js:218 3.8/weather-applet.js:19566
 msgid "Click to open"
 msgstr "Натиснете за да се отвори"
 
-#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:17990
-#: 3.8/weather-applet.js:19507
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:18013
+#: 3.8/weather-applet.js:19569
 msgid "Refresh"
 msgstr "Обнови"
 
@@ -103,14 +103,14 @@ msgstr ""
 msgid "Could not get weather information"
 msgstr "Неуспешно зареждане на прогнозата"
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:19338
+#: 3.0/applet.js:624 3.8/weather-applet.js:19397
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Възникна неизвестна грешка при обновлението на аплета за Времето, \n"
 "моля проверете лога в Looking Glass"
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:19586
+#: 3.0/applet.js:670 3.8/weather-applet.js:19648
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -126,7 +126,7 @@ msgstr "Мрежова грешка, моля проверете логовет�
 msgid "As of"
 msgstr "Обновена в"
 
-#: 3.0/applet.js:1108 3.8/weather-applet.js:18783
+#: 3.0/applet.js:1108 3.8/weather-applet.js:18826
 msgid "Powered by"
 msgstr "Благодарение на"
 
@@ -134,33 +134,33 @@ msgstr "Благодарение на"
 msgid "from you"
 msgstr "от вас"
 
-#: 3.0/applet.js:1132 3.8/weather-applet.js:18683
+#: 3.0/applet.js:1132 3.8/weather-applet.js:18726
 msgid "mm"
 msgstr "мм"
 
-#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:18683
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:18726
 msgid "in"
 msgstr "инча"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10888
-#: 3.8/weather-applet.js:18899
+#: 3.8/weather-applet.js:18943
 msgid "mi"
 msgstr "мили"
 
 #: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10889
-#: 3.8/weather-applet.js:18900
+#: 3.8/weather-applet.js:18944
 msgid "km"
 msgstr "км"
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:19089
+#: 3.0/applet.js:1227 3.8/weather-applet.js:19147
 msgid "Loading current weather ..."
 msgstr "Зареждане на текущата прогноза ..."
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:19092
+#: 3.0/applet.js:1230 3.8/weather-applet.js:19150
 msgid "Loading future weather ..."
 msgstr "Зареждане на прогнозата за времето ..."
 
-#: 3.0/applet.js:1280 3.8/weather-applet.js:17943
+#: 3.0/applet.js:1280 3.8/weather-applet.js:17945
 msgid "Loading ..."
 msgstr "Зареждане ..."
 
@@ -168,18 +168,18 @@ msgstr "Зареждане ..."
 msgid "Temperature"
 msgstr "Температура"
 
-#: 3.0/applet.js:1330 3.8/weather-applet.js:17965
+#: 3.0/applet.js:1330 3.8/weather-applet.js:17969
 msgid "Humidity"
 msgstr "Влажност"
 
-#: 3.0/applet.js:1331 3.8/weather-applet.js:17966
+#: 3.0/applet.js:1331 3.8/weather-applet.js:17974
 msgid "Pressure"
 msgstr "Налягане"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:13057 3.8/weather-applet.js:13064
 #: 3.8/weather-applet.js:13065 3.8/weather-applet.js:13071
 #: 3.8/weather-applet.js:15411 3.8/weather-applet.js:15412
-#: 3.8/weather-applet.js:17806
+#: 3.8/weather-applet.js:17807
 msgid "Wind"
 msgstr "Вятър"
 
@@ -1833,96 +1833,96 @@ msgstr ""
 msgid "This provider requires an API key to operate"
 msgstr "Избраният доставчик на прогноза изисква API ключ за да работи"
 
-#: 3.8/weather-applet.js:17967
+#: 3.8/weather-applet.js:17979
 msgid "Dew Point"
 msgstr "Точка на оросяване"
 
-#: 3.8/weather-applet.js:18039
+#: 3.8/weather-applet.js:18062
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr "Валежът ще спре след {precipEnd} минути"
 
-#: 3.8/weather-applet.js:18041
+#: 3.8/weather-applet.js:18064
 msgid "Precipitation won't end in within an hour"
 msgstr "Валежът няма да спре до час"
 
-#: 3.8/weather-applet.js:18044
+#: 3.8/weather-applet.js:18067
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr "Валежът ще започне след {precipStart} минути"
 
-#: 3.8/weather-applet.js:18247
+#: 3.8/weather-applet.js:18270
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 "Обработката на данните за прогнозата беше неуспешна. Вижте лог файла за "
 "повече информация."
 
-#: 3.8/weather-applet.js:18790 3.8/weather-applet.js:19379
+#: 3.8/weather-applet.js:18833 3.8/weather-applet.js:19441
 msgid "As of {lastUpdatedTime}"
 msgstr "Обновена в {lastUpdatedTime}"
 
-#: 3.8/weather-applet.js:18796
+#: 3.8/weather-applet.js:18839
 msgid "{distance} {distanceUnit} from you"
 msgstr "{distance} {distanceUnit} от вас"
 
-#: 3.8/weather-applet.js:18800
+#: 3.8/weather-applet.js:18843
 msgid "Station Name: {stationName}"
 msgstr "Име на станцията: {stationName}"
 
-#: 3.8/weather-applet.js:18803
+#: 3.8/weather-applet.js:18846
 msgid "Area: {stationArea}"
 msgstr "Област: {stationArea}"
 
-#: 3.8/weather-applet.js:18813
+#: 3.8/weather-applet.js:18856
 msgid "{count} weather alert(s)"
 msgstr ""
 
-#: 3.8/weather-applet.js:19193 3.8/weather-applet.js:19203
-#: 3.8/weather-applet.js:19210
+#: 3.8/weather-applet.js:19251 3.8/weather-applet.js:19261
+#: 3.8/weather-applet.js:19268
 msgid "Error Saving Debug Information"
 msgstr "Грешка при запазването на дебъг информацията"
 
-#: 3.8/weather-applet.js:19210
+#: 3.8/weather-applet.js:19268
 #, fuzzy
 msgid "Could not open file {filePath} for writing"
 msgstr "Неуспешно зареждане на прогнозата"
 
-#: 3.8/weather-applet.js:19219
+#: 3.8/weather-applet.js:19277
 msgid "Debug Information saved successfully"
 msgstr "Дебъг информацията е запазена успешно"
 
-#: 3.8/weather-applet.js:19219
+#: 3.8/weather-applet.js:19277
 msgid "Saved to {filePath}"
 msgstr "Запазен в {filePath}"
 
-#: 3.8/weather-applet.js:19419
+#: 3.8/weather-applet.js:19481
 msgid "No Script Provided"
 msgstr ""
 
-#: 3.8/weather-applet.js:19419
+#: 3.8/weather-applet.js:19481
 msgid "You need to add a script first."
 msgstr ""
 
-#: 3.8/weather-applet.js:19423
+#: 3.8/weather-applet.js:19485
 #, fuzzy
 msgid "No Weather Data"
 msgstr "US Weather"
 
-#: 3.8/weather-applet.js:19423
+#: 3.8/weather-applet.js:19485
 msgid "No weather data to run script with"
 msgstr ""
 
-#: 3.8/weather-applet.js:19431
+#: 3.8/weather-applet.js:19493
 msgid "Script Executed Successfully"
 msgstr ""
 
-#: 3.8/weather-applet.js:19431
+#: 3.8/weather-applet.js:19493
 msgid "Your script has been executed successfully."
 msgstr ""
 
-#: 3.8/weather-applet.js:19434
+#: 3.8/weather-applet.js:19496
 msgid "Error Running Script"
 msgstr ""
 
-#: 3.8/weather-applet.js:19434
+#: 3.8/weather-applet.js:19496
 msgid "Script returned error, see logs for more information"
 msgstr ""
 

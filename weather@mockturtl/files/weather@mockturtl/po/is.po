@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-27 15:16+0100\n"
+"POT-Creation-Date: 2024-05-30 09:33+0100\n"
 "PO-Revision-Date: 2023-07-21 16:50+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -20,48 +20,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:19231
+#: 3.8/weather-applet.js:19289
 msgid "Error"
 msgstr "Villa"
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:19232 3.8/weather-applet.js:19234
-#: 3.8/weather-applet.js:19236 3.8/weather-applet.js:19239
-#: 3.8/weather-applet.js:19242 3.8/weather-applet.js:19243
-#: 3.8/weather-applet.js:19244 3.8/weather-applet.js:19245
+#: 3.8/weather-applet.js:19290 3.8/weather-applet.js:19292
+#: 3.8/weather-applet.js:19294 3.8/weather-applet.js:19297
+#: 3.8/weather-applet.js:19300 3.8/weather-applet.js:19301
+#: 3.8/weather-applet.js:19302 3.8/weather-applet.js:19303
 msgid "Service Error"
 msgstr "Villa í þjónustu"
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:19233
+#: 3.0/applet.js:168 3.8/weather-applet.js:19291
 msgid "Incorrect API Key"
 msgstr "Rangur API-lykill"
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:19235
+#: 3.0/applet.js:170 3.8/weather-applet.js:19293
 msgid "Incorrect Location Format"
 msgstr "Rangt snið á staðsetningu"
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:19237
+#: 3.0/applet.js:172 3.8/weather-applet.js:19295
 msgid "Key Blocked"
 msgstr "API-lykill útilokaður"
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:19238
+#: 3.0/applet.js:173 3.8/weather-applet.js:19296
 msgid "Can't find location"
 msgstr "Gat ekki fundið staðsetningu"
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:19240
+#: 3.0/applet.js:175 3.8/weather-applet.js:19298
 msgid "No Api Key"
 msgstr "Enginn API-lykill"
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:19241
+#: 3.0/applet.js:176 3.8/weather-applet.js:19299
 msgid "No Location"
 msgstr "Engin staðsetning"
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:19246
+#: 3.0/applet.js:181 3.8/weather-applet.js:19304
 msgid "Missing Packages"
 msgstr "Pakkar sem vantar"
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:19247
+#: 3.0/applet.js:182 3.8/weather-applet.js:19305
 msgid "Location not covered"
 msgstr "Staðsetning ekki með"
 
@@ -69,16 +69,16 @@ msgstr "Staðsetning ekki með"
 msgid "Weather Applet"
 msgstr "Veðursmáforrit"
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:19503
+#: 3.0/applet.js:217 3.8/weather-applet.js:19565
 msgid "..."
 msgstr "..."
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:19504
+#: 3.0/applet.js:218 3.8/weather-applet.js:19566
 msgid "Click to open"
 msgstr "Smelltu til að opna"
 
-#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:17990
-#: 3.8/weather-applet.js:19507
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:18013
+#: 3.8/weather-applet.js:19569
 msgid "Refresh"
 msgstr "Endurlesa"
 
@@ -101,14 +101,14 @@ msgstr "Því miður, ekki er hægt að vista staðsetningu sem fundin er sjálf
 msgid "Could not get weather information"
 msgstr "Gat ekki náð í veðurupplýsingar"
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:19338
+#: 3.0/applet.js:624 3.8/weather-applet.js:19397
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Óvænt villa kom upp við að uppfæra veðurupplýsingar, skoðaðu atvikaskrár í "
 "Looking Glass"
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:19586
+#: 3.0/applet.js:670 3.8/weather-applet.js:19648
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -124,7 +124,7 @@ msgstr "Villa í netkerfi, skoðaðu atvikaskrár í Looking Glass"
 msgid "As of"
 msgstr "Miðað við"
 
-#: 3.0/applet.js:1108 3.8/weather-applet.js:18783
+#: 3.0/applet.js:1108 3.8/weather-applet.js:18826
 msgid "Powered by"
 msgstr "Keyrt með"
 
@@ -132,33 +132,33 @@ msgstr "Keyrt með"
 msgid "from you"
 msgstr "frá þér"
 
-#: 3.0/applet.js:1132 3.8/weather-applet.js:18683
+#: 3.0/applet.js:1132 3.8/weather-applet.js:18726
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:18683
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:18726
 msgid "in"
 msgstr "í"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10888
-#: 3.8/weather-applet.js:18899
+#: 3.8/weather-applet.js:18943
 msgid "mi"
 msgstr "míl"
 
 #: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10889
-#: 3.8/weather-applet.js:18900
+#: 3.8/weather-applet.js:18944
 msgid "km"
 msgstr "km"
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:19089
+#: 3.0/applet.js:1227 3.8/weather-applet.js:19147
 msgid "Loading current weather ..."
 msgstr "Hleð inn veðurlýsingu ..."
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:19092
+#: 3.0/applet.js:1230 3.8/weather-applet.js:19150
 msgid "Loading future weather ..."
 msgstr "Hleð inn veðurspá ..."
 
-#: 3.0/applet.js:1280 3.8/weather-applet.js:17943
+#: 3.0/applet.js:1280 3.8/weather-applet.js:17945
 msgid "Loading ..."
 msgstr "Hleð inn ..."
 
@@ -166,18 +166,18 @@ msgstr "Hleð inn ..."
 msgid "Temperature"
 msgstr "Hitastig"
 
-#: 3.0/applet.js:1330 3.8/weather-applet.js:17965
+#: 3.0/applet.js:1330 3.8/weather-applet.js:17969
 msgid "Humidity"
 msgstr "Rakastig"
 
-#: 3.0/applet.js:1331 3.8/weather-applet.js:17966
+#: 3.0/applet.js:1331 3.8/weather-applet.js:17974
 msgid "Pressure"
 msgstr "Loftþrýstingur"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:13057 3.8/weather-applet.js:13064
 #: 3.8/weather-applet.js:13065 3.8/weather-applet.js:13071
 #: 3.8/weather-applet.js:15411 3.8/weather-applet.js:15412
-#: 3.8/weather-applet.js:17806
+#: 3.8/weather-applet.js:17807
 msgid "Wind"
 msgstr "Vindur"
 
@@ -1826,96 +1826,96 @@ msgid "This provider requires an API key to operate"
 msgstr ""
 "Þessi þjónustuveita krefst lykils að API-viðmóti til að hægt sé að nota hana"
 
-#: 3.8/weather-applet.js:17967
+#: 3.8/weather-applet.js:17979
 msgid "Dew Point"
 msgstr "Daggarmark"
 
-#: 3.8/weather-applet.js:18039
+#: 3.8/weather-applet.js:18062
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr "Úrkoma mun hætta eftir {precipStart} mínútur"
 
-#: 3.8/weather-applet.js:18041
+#: 3.8/weather-applet.js:18064
 msgid "Precipitation won't end in within an hour"
 msgstr "Úrkoma mun ekki hætta á næstu klukkustund"
 
-#: 3.8/weather-applet.js:18044
+#: 3.8/weather-applet.js:18067
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr "Úrkoma mun hefjast eftir {precipStart} mínútur"
 
-#: 3.8/weather-applet.js:18247
+#: 3.8/weather-applet.js:18270
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 "Túlkun veðurspár mistókst, skoðaðu atvikaskrár til að sjá frekari "
 "upplýsingar."
 
-#: 3.8/weather-applet.js:18790 3.8/weather-applet.js:19379
+#: 3.8/weather-applet.js:18833 3.8/weather-applet.js:19441
 msgid "As of {lastUpdatedTime}"
 msgstr "Miðað við {lastUpdatedTime}"
 
-#: 3.8/weather-applet.js:18796
+#: 3.8/weather-applet.js:18839
 msgid "{distance} {distanceUnit} from you"
 msgstr "{distance} {distanceUnit} frá þér"
 
-#: 3.8/weather-applet.js:18800
+#: 3.8/weather-applet.js:18843
 msgid "Station Name: {stationName}"
 msgstr "Heiti stöðvar: {stationName}"
 
-#: 3.8/weather-applet.js:18803
+#: 3.8/weather-applet.js:18846
 msgid "Area: {stationArea}"
 msgstr "Svæði: {stationArea}"
 
-#: 3.8/weather-applet.js:18813
+#: 3.8/weather-applet.js:18856
 msgid "{count} weather alert(s)"
 msgstr ""
 
-#: 3.8/weather-applet.js:19193 3.8/weather-applet.js:19203
-#: 3.8/weather-applet.js:19210
+#: 3.8/weather-applet.js:19251 3.8/weather-applet.js:19261
+#: 3.8/weather-applet.js:19268
 msgid "Error Saving Debug Information"
 msgstr "Villa við að vista villuleitarupplýsingar"
 
-#: 3.8/weather-applet.js:19210
+#: 3.8/weather-applet.js:19268
 #, fuzzy
 msgid "Could not open file {filePath} for writing"
 msgstr "Gat ekki náð í veðurupplýsingar"
 
-#: 3.8/weather-applet.js:19219
+#: 3.8/weather-applet.js:19277
 msgid "Debug Information saved successfully"
 msgstr "Tókst að vista villuleitarupplýsingar"
 
-#: 3.8/weather-applet.js:19219
+#: 3.8/weather-applet.js:19277
 msgid "Saved to {filePath}"
 msgstr "Vistað í {filePath}"
 
-#: 3.8/weather-applet.js:19419
+#: 3.8/weather-applet.js:19481
 msgid "No Script Provided"
 msgstr ""
 
-#: 3.8/weather-applet.js:19419
+#: 3.8/weather-applet.js:19481
 msgid "You need to add a script first."
 msgstr ""
 
-#: 3.8/weather-applet.js:19423
+#: 3.8/weather-applet.js:19485
 #, fuzzy
 msgid "No Weather Data"
 msgstr "US Weather"
 
-#: 3.8/weather-applet.js:19423
+#: 3.8/weather-applet.js:19485
 msgid "No weather data to run script with"
 msgstr ""
 
-#: 3.8/weather-applet.js:19431
+#: 3.8/weather-applet.js:19493
 msgid "Script Executed Successfully"
 msgstr ""
 
-#: 3.8/weather-applet.js:19431
+#: 3.8/weather-applet.js:19493
 msgid "Your script has been executed successfully."
 msgstr ""
 
-#: 3.8/weather-applet.js:19434
+#: 3.8/weather-applet.js:19496
 msgid "Error Running Script"
 msgstr ""
 
-#: 3.8/weather-applet.js:19434
+#: 3.8/weather-applet.js:19496
 msgid "Script returned error, see logs for more information"
 msgstr ""
 
