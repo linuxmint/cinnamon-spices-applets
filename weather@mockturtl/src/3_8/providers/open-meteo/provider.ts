@@ -1,9 +1,10 @@
 import { HttpLib } from "../../lib/httpLib";
-import { WeatherApplet } from "../../main";
-import { LocationData, WeatherData } from "../../types";
+import type { LocationData } from "../../types";
 import { _ } from "../../utils";
+import type { WeatherData } from "../../weather-data";
 import { BaseProvider } from "../BaseProvider";
-import { OpenMeteoResponseToData, OpenMeteoWeatherResponse } from "./payload/response";
+import type { OpenMeteoWeatherResponse } from "./payload/response";
+import { OpenMeteoResponseToData } from "./payload/response";
 
 export class OpenMeteo extends BaseProvider {
 
@@ -21,10 +22,6 @@ export class OpenMeteo extends BaseProvider {
 	};
 
 	private query = "https://api.open-meteo.com/v1/forecast";
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const result = await HttpLib.Instance.LoadJsonSimple<OpenMeteoWeatherResponse>({

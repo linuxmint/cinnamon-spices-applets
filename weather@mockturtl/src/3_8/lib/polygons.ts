@@ -5,7 +5,7 @@
  * @param vs
  * @returns
  */
-export function PointInsidePolygon(point: [lon: number, lat: number], vs: [lon: number, lat: number][]) {
+export function PointInsidePolygon(point: [lon: number, lat: number], vs: [lon: number, lat: number][]): boolean {
     const maxX = Math.max(...vs.map(v => v[0]));
 	const minX = Math.min(...vs.map(v => v[0]));
 	const maxY = Math.max(...vs.map(v => v[1]));
@@ -16,7 +16,7 @@ export function PointInsidePolygon(point: [lon: number, lat: number], vs: [lon: 
 	}
 
 	let intersections = 0;
-	let padding = 0.1;
+	const padding = 0.1;
 	const pv1 = [(minX - padding/point[0]), (minY - padding/point[1])];
 	const pv2 = point;
 	for (let i = 0; i < vs.length - 1; i++) {
@@ -41,14 +41,13 @@ function areIntersecting(
 		v2x1: number, v2y1: number, v2x2: number, v2y2: number
 	) {
 		let d1: number, d2: number;
-		let a1: number, a2: number, b1: number, b2: number, c1: number, c2: number;
 
 		// Convert vector 1 to a line (line 1) of infinite length.
 		// We want the line in linear equation standard form: A*x + B*y + C = 0
 		// See: http://en.wikipedia.org/wiki/Linear_equation
-		a1 = v1y2 - v1y1;
-		b1 = v1x1 - v1x2;
-		c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
+		const a1 = v1y2 - v1y1;
+		const b1 = v1x1 - v1x2;
+		const c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
 
 		// Every point (x,y), that solves the equation above, is on the line,
 		// every point that does not solve it, is not. The equation will have a
@@ -71,9 +70,9 @@ function areIntersecting(
 		// started or after it ended. To know for sure, we have to repeat the
 		// the same test the other way round. We start by calculating the
 		// infinite line 2 in linear equation standard form.
-		a2 = v2y2 - v2y1;
-		b2 = v2x1 - v2x2;
-		c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
+		const a2 = v2y2 - v2y1;
+		const b2 = v2x1 - v2x2;
+		const c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
 
 		// Calculate d1 and d2 again, this time using points of vector 1.
 		d1 = (a2 * v1x1) + (b2 * v1y1) + c2;

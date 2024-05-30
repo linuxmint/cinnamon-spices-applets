@@ -1,11 +1,12 @@
 import { DateTime } from "luxon";
-import { Services } from "../../config";
-import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../../lib/httpLib";
-import { WeatherApplet } from "../../main";
-import { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../../types";
+import type { Services } from "../../config";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
-import { VisualCrossingAlert } from "./alerts";
+import type { VisualCrossingAlert } from "./alerts";
+import type { LocationData } from "../../types";
 
 
 export class VisualCrossing extends BaseProvider {
@@ -29,10 +30,6 @@ export class VisualCrossing extends BaseProvider {
 	}
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
-
-	constructor(app: WeatherApplet) {
-		super(app);
-	}
 
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null) return null;
@@ -108,7 +105,7 @@ export class VisualCrossing extends BaseProvider {
 
 	private ParseForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): ForecastData[] {
 		const result: ForecastData[] = [];
-		if (!!forecasts) {
+		if (forecasts) {
 			for (const element of forecasts) {
 				result.push({
 					date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
@@ -126,7 +123,7 @@ export class VisualCrossing extends BaseProvider {
 		const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
 		const result: HourlyForecastData[] = [];
-		if (!!forecasts) {
+		if (forecasts) {
 			for (const element of forecasts) {
 				if (!element.hours)
 					continue;
@@ -321,7 +318,7 @@ export class VisualCrossing extends BaseProvider {
 
 	private ResolveTypeIDs(condition: string): string {
 		let result = "";
-		let split = condition.split(", ");
+		const split = condition.split(", ");
 		for (const [index, element] of split.entries()) {
 			result += this.ResolveTypeID(element);
 			// not the last

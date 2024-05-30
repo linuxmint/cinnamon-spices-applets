@@ -30,13 +30,13 @@ You can also save locations what you entered manually and switch between them in
 
 | Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts  | Other information             |
 | -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------- | ----------------------------- |
-| **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | Default provider              |
+| **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | --                            |
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
-| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | -                             |
+| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | Default provider              |
 | **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | -                             |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
@@ -185,6 +185,18 @@ The setting allows you to make the applet display basically anything in the form
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
 | `{last_updated}`  | Formatted last updated time                               |
 
+## Run script when the weather data changes
+
+"Run a script when the weather info changes" field will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get `{full_data}` which is the full current weather data. Interpolation with single brackets `{xxx}` will not be escaped, with double brackets `{{xxxx}}` they are wrapped in single quotes `'` and all other single quotes are escaped inside. You can use this to integrate the weather data with other parts of your system.
+
+### Examples
+
+* `notify-send "The weather is {c} and the temperature is {t}{u}\"` will show a notification with the current weather condition and temperature.
+
+* `echo {{full_data}} > /tmp/weather_data` will save the full weather data to a file in `/tmp`.
+
+[Weather data structure you receive](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/src/3_8/weather-data.ts)
+
 ## Future Plans
 
 * Add special formatting options (like padded temperature) for values in panel in the "Override label on panel" setting 
@@ -206,7 +218,9 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
 
-* On subsequent refreshes/relogins the popup menu's element's lose all padding.
+* On subsequent refreshes/relogins the popup menu's element's may lose all padding.
+
+* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed. 
 
 ### Report a new issue
 

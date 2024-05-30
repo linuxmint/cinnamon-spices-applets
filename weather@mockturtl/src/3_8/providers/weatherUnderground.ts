@@ -1,9 +1,11 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
-import { Services } from "../config";
-import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
-import { Logger } from "../lib/logger";
-import { Condition, ForecastData, LocationData, WeatherData } from "../types";
+import type { Services } from "../config";
+import type { ErrorResponse} from "../lib/httpLib";
+import { HttpLib } from "../lib/httpLib";
+import { Logger } from "../lib/services/logger";
+import type { Condition, ForecastData, WeatherData } from "../weather-data";
+import type { LocationData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
@@ -68,7 +70,7 @@ export class WeatherUnderground extends BaseProvider {
         const observation = await this.GetObservations(location, forecast, loc, cancellable);
 
         return {
-            date: observation.date!,
+            date: observation.date,
             temperature: observation.temperature ?? null,
             coord: {
                 lat: loc.lat,
@@ -104,11 +106,13 @@ export class WeatherUnderground extends BaseProvider {
         const result: ForecastData[] = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [ forecast.daypart[0].iconCode[index * 2],  forecast.daypart[0].iconCode[index * 2 + 1]];
+			const tempMax = forecast.temperatureMax[index];
+			const tempmin = forecast.temperatureMin[index];
             const data: ForecastData = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition(icons[0] ?? icons[1]!),
-                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]!),
-                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
             }
             if (!this.app.config._shortConditions)
                 data.condition.description = forecast.narrative[index];
@@ -169,7 +173,7 @@ export class WeatherUnderground extends BaseProvider {
             location: {},
             sunrise: null,
             sunset: null,
-            date: null as any,
+            date: null as never,
         };
 
         for (const observations of observationData) {
@@ -209,9 +213,6 @@ export class WeatherUnderground extends BaseProvider {
                     lon: station.longitude,
                     distanceFrom: station.distanceKm * 1000,
                 };
-            }
-            if (result.immediatePrecipitation == null) {
-
             }
         }
 
@@ -259,9 +260,9 @@ export class WeatherUnderground extends BaseProvider {
         let observation: ObservationPayload | null = null;
         if (observationString != null) {
             try {
-                observation = JSON.parse(observationString);
+                observation = JSON.parse(observationString) as ObservationPayload;
             }
-            catch(e) {
+            catch {
                 Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
             }
         }
@@ -645,51 +646,6 @@ export class WeatherUnderground extends BaseProvider {
     }
 }
 
-
-interface LocationPayload {
-    location: {
-        latitude: number;
-        longitude: number;
-        city: string;
-        locale: {
-            locale1: string | null;
-            locale2: string | null;
-            locale3: string | null;
-            locale4: string | null;
-        },
-        neighborhood: string | null,
-        adminDistrict: string | null,
-        adminDistrictCode: string | null,
-        postalCode: string | null,
-        postalKey: string | null,
-        country: string,
-        countryCode: string,
-        ianaTimeZone: string,
-        displayName: string,
-        /** ISO DateTime */
-        dstEnd: string | null,
-        /** ISO DateTime */
-        dstStart: string | null,
-        dmaCd: string | null,
-        placeId: string | null,
-        disputedArea: boolean,
-        disputedCountries: string[] | null,
-        disputedCountryCodes: string[] | null,
-        disputedCustomers: string[] | null,
-        disputedShowCountry: boolean[],
-        canonicalCityId: string,
-        countyId: string | null,
-        locId: string,
-        locationCategory: string | null,
-        pollenId: string | null,
-        pwsId: string | null,
-        regionalSatellite: string,
-        tideId: string | null,
-        type: string,
-        zoneId: string,
-    }
-}
-
 interface NearObservationPayload {
     location: {
         stationName: string[];
@@ -882,7 +838,7 @@ interface DayPartData {
      * - 8 to 10 = Very High,
      * - 11 to 16 = Extreme
  */
-    uvDescription: ("High" | "Low" | "Moderate" | "Not Available" | "Not Available" | "Very High" | "Extreme" | null)[];
+    uvDescription: ("High" | "Low" | "Moderate" | "Not Available" | "Very High" | "Extreme" | null)[];
     /** Maximum UV index for the 12 hour forecast period. */
     uvIndex: (number | null)[];
     /** Average wind direction in magnetic notation. */

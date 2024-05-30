@@ -1,11 +1,13 @@
 import { DateTime } from "luxon";
-import { getTimes, GetTimesResult } from "suncalc";
-import { Config, Services } from "../../config";
-import { ErrorResponse, HttpLib, HTTPParams } from "../../lib/httpLib";
-import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType, AlertData } from "../../types";
-import { IsNight, _ } from "../../utils";
+import { getTimes } from "suncalc";
+import type { Config, Services } from "../../config";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import type { Condition, ForecastData, HourlyForecastData, WeatherData, PrecipitationType, AlertData } from "../../weather-data";
+import { _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
 import { GetDeutscherWetterdienstAlerts } from "./alert";
+import type { LocationData } from "../../types";
 
 
 export class DeutscherWetterdienst extends BaseProvider {
@@ -95,7 +97,7 @@ export class DeutscherWetterdienst extends BaseProvider {
         for (const day of days) {
             let tempMax: number = -Infinity;
             let tempMin: number = Infinity;
-            let conditions: Icon[] = [];
+            const conditions: Icon[] = [];
             let time: DateTime | null = null;
 
             for (const hour of day) {
@@ -179,13 +181,13 @@ export class DeutscherWetterdienst extends BaseProvider {
 
         const severeWeathers: Partial<Record<Icon, number>> = {};
         const regularWeather: Partial<Record<Icon, number>> = {};
-        const regularConditions: Icon[] = [ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ]
+        const regularConditions: Set<Icon> = new Set([ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ])
 
         for (const condition of conditions) {
-            if (regularConditions.includes(condition))
-                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]!++;
+            if (regularConditions.has(condition))
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
             else
-                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]!++;
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
         }
 
         const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;
@@ -466,7 +468,7 @@ interface HourlyForecastInfo {
     /** Speed of maximum wind gust during previous hour, 10 m above the ground */
     wind_gust_speed: number | null;
     /** Object mapping meteorological parameters to the source IDs of alternative sources that were used to fill up missing values in the main source */
-    fallback_source_ids: any;
+    fallback_source_ids: unknown;
 }
 
 type DWDCondition = "dry" | "fog" | "rain" | "sleet" | "snow" | "hail" | "thunderstorm";

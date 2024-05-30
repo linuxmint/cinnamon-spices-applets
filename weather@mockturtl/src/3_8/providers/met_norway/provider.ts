@@ -1,14 +1,17 @@
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation, AlertLevel } from "../../types";
+import type { WeatherData, HourlyForecastData, ForecastData, Condition, ImmediatePrecipitation} from "../../weather-data";
+import type { LocationData, correctGetTimes, SunTime} from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { Conditions, conditionSeverity, TimeOfDay } from "./types/common";
-import { IsCovered, MetNorwayNowcastPayload } from "./types/nowcast";
-import { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
+import type { Conditions, TimeOfDay } from "./types/common";
+import { conditionSeverity } from "./types/common";
+import type { MetNorwayNowcastPayload } from "./types/nowcast";
+import { IsCovered } from "./types/nowcast";
+import type { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
 import { HttpLib } from "../../lib/httpLib";
-import { Config } from "../../config";
+import type { Config } from "../../config";
 import { GetMETNorwayAlerts } from "./alert";
 
 export class MetNorway extends BaseProvider {
@@ -157,7 +160,7 @@ export class MetNorway extends BaseProvider {
 		for (const element of json.properties.timeseries) {
 
 			// Hourly forecast
-			if (!!element.data.next_1_hours) {
+			if (element.data.next_1_hours) {
 				hourlyForecasts.push({
 					date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
@@ -186,7 +189,7 @@ export class MetNorway extends BaseProvider {
 					icons: [],
 					main: ""
 				},
-				date: <any>null, // we will build it below
+				date: null as never, // we will build it below
 				temp_max: Number.NEGATIVE_INFINITY,
 				temp_min: Number.POSITIVE_INFINITY
 			}
@@ -263,7 +266,7 @@ export class MetNorway extends BaseProvider {
 		let result: number | null = null;
 		for (const key in count) {
 			if (result == null || count[result].count < count[key].count)
-				result = parseInt(key);
+				result = Number.parseInt(key);
 		}
 
 		if (result == null)
@@ -276,9 +279,9 @@ export class MetNorway extends BaseProvider {
 		// We want to know the worst condition
 		let result: number | null = null;
 		for (const key in conditions) {
-			const conditionID = parseInt(key);
+			const conditionID = Number.parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
-			const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
+			const resultStripped = result == null ? -1 : ((result > 100) ? result - 100 : result);
 			const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
 			// Make the comparison, keep the polar night condition id
 			if (conditionIDStripped > resultStripped) result = conditionID;
@@ -615,7 +618,7 @@ export class MetNorway extends BaseProvider {
 					icons: ["weather-snow-scattered", "weather-snow"]
 				}
 			default:
-				Logger.Error("condition code not found: " + weather.condition);
+				Logger.Error("condition code not found: " + (weather.condition as string));
 				return {
 					customIcon: "cloud-refresh-symbolic",
 					main: _("Unknown"),

@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
-import { WeatherData } from "../../../types";
-import { OWMWeatherCondition } from "./common";
+import type { OWMWeatherCondition } from "./common";
 import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
 import { _ } from "../../../utils";
+import type { WeatherData } from "../../../weather-data";
 
 export interface OWMWeatherResponse {
 	/**

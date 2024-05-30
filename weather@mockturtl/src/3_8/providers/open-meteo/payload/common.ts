@@ -1,5 +1,5 @@
-import { Condition } from "../../../types";
 import { _ } from "../../../utils";
+import type { Condition } from "../../../weather-data";
 
 export function OpenMeteoWeatherCodeToCondition(code: number, isDay: boolean): Condition {
 	switch(code) {
@@ -32,8 +32,8 @@ export function OpenMeteoWeatherCodeToCondition(code: number, isDay: boolean): C
 				description: _("Overcast")
 			}
 		// Fog
-		case 45:
 		// Depositing rime fog
+		case 45:
 		case 48:
 			return {
 				icons: ["weather-fog"],

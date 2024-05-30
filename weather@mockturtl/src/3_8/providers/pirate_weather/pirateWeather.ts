@@ -1,12 +1,13 @@
-import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation, AlertData, AlertLevel } from "../../types";
-import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
+import type { ErrorResponse} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/services/logger";
+import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, ImmediatePrecipitation, AlertData, AlertLevel } from "../../weather-data";
+import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
+import type { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
 import { ALERT_LEVEL_ORDER } from "../../consts";
+import type { LocationData, SunTime } from "../../types";
 
 export class PirateWeather extends BaseProvider {
 
@@ -31,10 +32,6 @@ export class PirateWeather extends BaseProvider {
 	};
 
 	private query = "https://api.pirateweather.net/forecast/";
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	//--------------------------------------------------------
 	//  Functions
@@ -177,7 +174,7 @@ export class PirateWeather extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Pirate Weather payload parsing error: " + e, e)
+				Logger.Error("Pirate Weather payload parsing error: " + e.message, e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}

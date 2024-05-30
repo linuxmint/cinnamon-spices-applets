@@ -6,24 +6,30 @@
 //----------------------------------------------------------------------
 
 import { DateTime } from "luxon";
-import { Config, ServiceClassMapping } from "./config";
-import { RefreshOptions, WeatherLoop } from "./loop";
-import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
+import { type Config, ServiceClassMapping } from "./config";
+import type { RefreshOptions} from "./loop";
+import { WeatherLoop } from "./loop";
+import type { WeatherData, CustomIcons, BuiltinIcons } from "./weather-data";
+import type { AppletError, NiceErrorDetail, Metadata, WeatherProvider, LocationData } from "./types";
+import { RefreshState } from "./types";
 import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
-import { HttpLib, HttpError } from "./lib/httpLib";
-import { Logger } from "./lib/logger";
-import { APPLET_ICON, REFRESH_ICON } from "./consts";
+import type { HttpError } from "./lib/httpLib";
+import { HttpLib } from "./lib/httpLib";
+import { Logger } from "./lib/services/logger";
+import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
-import { SpawnProcess } from "./lib/commandRunner";
+import { Literal, SpawnProcess } from "./lib/commandRunner";
 import { Event } from "./lib/events";
+import { ErrorHandler } from "./lib/services/error_handler";
 
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 const { File } = imports.gi.Gio;
+const keybindingManager = imports.ui.main.keybindingManager;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
@@ -40,7 +46,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private orientation: imports.gi.St.Side;
-	public get Orientation() {
+	public get Orientation(): imports.gi.St.Side {
 		return this.orientation;
 	}
 
@@ -49,16 +55,14 @@ export class WeatherApplet extends TextIconApplet {
 	public readonly config: Config;
 	public readonly ui: UI;
 
-	private readonly metadata: any;
+	private readonly metadata: Metadata;
 
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
 	 */
 	public encounteredError: boolean = false;
 
-	private online: boolean | null = null;
-
-	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+	public constructor(config: Config, metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 		this.metadata = metadata;
 		this.AppletDir = metadata.path;
@@ -67,20 +71,21 @@ export class WeatherApplet extends TextIconApplet {
 		Logger.Debug("AppletDir is: " + this.AppletDir);
 
 		this.SetAppletOnPanel();
-		this.config = new Config(this, instanceId);
+		this.config = config;
 		this.AddRefreshButton();
 		this.EnsureProvider();
 		this.ui = new UI(this, orientation);
 		this.ui.Rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
 		HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
+		ErrorHandler.Instance.OnError.Subscribe((sender, error) => this.ShowError(error));
 		try {
 			this.setAllowedLayout(AllowedLayout.BOTH);
-		} catch (e) {
+		} catch {
 			// vertical panel not supported
 		}
 
-		this.loop.Start();
+		void this.loop.Start();
 		// We need a full rebuild and refresh for these
 		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
 
@@ -100,6 +105,7 @@ export class WeatherApplet extends TextIconApplet {
 		// Some translations come from the API we need a refresh
 		this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh());
 		this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh());
+		this.config.LocationChanged.Subscribe(() => this.loop.Refresh());
 
 		// Misc Triggers
 		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({immediate: false}));
@@ -117,9 +123,27 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowAlertsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 
 		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
+		this.config.TempTextOverrideChanged.Subscribe(this.RefreshLabel);
+		this.config.FontChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
+		this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
+		this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
+		this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
+
+		keybindingManager.addHotKey(
+			UUID, this.config.keybinding, () => this.on_applet_clicked());
 	}
 
-	private onSettingNeedsRebuild = (conf: Config, changedData: any, data: WeatherData) => {
+	private OnKeySettingsUpdated = (): void => {
+		if (this.config.keybinding != null) {
+			keybindingManager.addHotKey(
+				UUID,
+				this.config.keybinding,
+				() => this.on_applet_clicked()
+			);
+		}
+	}
+
+	private onSettingNeedsRebuild = (conf: Config, changedData: unknown, data: WeatherData) => {
 		if (this.Provider == null)
 			return;
 
@@ -128,7 +152,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.ui.Display(data, conf, this.Provider);
 	}
 
-	private OnSettingNeedRedisplay = (conf: Config, changedData: any, data: WeatherData) => {
+	private OnSettingNeedRedisplay = (conf: Config, changedData: unknown, data: WeatherData) => {
 		if (this.Provider == null)
 			return;
 
@@ -175,6 +199,7 @@ export class WeatherApplet extends TextIconApplet {
 				return RefreshState.NoKey;
 			}
 
+			this.ui.ShowRefreshIcon();
 			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
 
 			if (weatherInfo == null) {
@@ -193,13 +218,18 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.currentWeatherInfo = weatherInfo;
+			if (this.config._runScript)
+				void this.SendCommand();
 			return RefreshState.Success;
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+				Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			return RefreshState.Error;
+		}
+		finally {
+			this.ui.HideRefreshIcon();
 		}
 	}
 
@@ -214,7 +244,7 @@ export class WeatherApplet extends TextIconApplet {
 		return true;
 	}
 
-	public RefreshLabel = () => {
+	public RefreshLabel = (): void => {
 		if (this.currentWeatherInfo == null)
 			return;
 		this.DisplayWeatherOnLabel(this.currentWeatherInfo);
@@ -250,8 +280,8 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		// Overriding temperature panel label
-		if (NotEmpty(this.config._panelTextOverride))
-			label = InjectValues(this.config._panelTextOverride, weather, this.config);
+		if (NotEmpty(this.config._tempTextOverride))
+			label = InjectValues(this.config._tempTextOverride, weather, this.config);
 
 		this.SetAppletLabel(label);
 	}
@@ -304,9 +334,34 @@ export class WeatherApplet extends TextIconApplet {
 	// ----------------------------------------------------------------------------
 	// Config Callbacks, do not delete
 
-	private async locationLookup(): Promise<void> {
+	private locationLookup(): void {
 		const command = "xdg-open ";
 		spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+	}
+
+	private async testRunScript(): Promise<void> {
+		if (!this.config._runScript) {
+			NotificationService.Instance.Send(_("No Script Provided"), _("You need to add a script first."));
+			return;
+		}
+
+		if (!this.currentWeatherInfo) {
+			NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
+			return;
+		}
+
+		const result = await this.SendCommand();
+		// We already handled the this above
+		if (!result) {
+			return;
+		}
+
+		if (result.Success)
+			NotificationService.Instance.Send(_("Script Executed Successfully"), _("Your script has been executed successfully."));
+		else {
+			Logger.Error("Error running script: ", result.ErrorData);
+			NotificationService.Instance.Send(_("Error Running Script"), _("Script returned error, see logs for more information"));
+		}
 	}
 
 	private async submitIssue(): Promise<void> {
@@ -339,12 +394,12 @@ The contents of the file saved from the applet help page goes here
 
 </details>\n\n`;
 
-		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[#()]/g, "");
 		spawnCommandLine(`${command} ${finalUrl}`);
 	}
 
-	private async saveCurrentLocation(): Promise<void> {
-		this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+	private saveCurrentLocation(): void {
+		void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
 	}
 
 	public saveLog = async(): Promise<void> => {
@@ -363,7 +418,7 @@ The contents of the file saved from the applet help page goes here
 			return;
 		}
 
-		let settings: Record<string, any> | null = null;
+		let settings: Record<string, unknown> | null = null;
 		try {
 			settings = await this.config.GetAppletConfigJson();
 		}
@@ -392,6 +447,22 @@ The contents of the file saved from the applet help page goes here
 		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
 	}
 
+	private async SendCommand() {
+		if (!this.config._runScript) {
+			return null;
+		}
+
+		if (!this.currentWeatherInfo) {
+			return null;
+		}
+
+		let command = InjectValues(this.config._runScript, this.currentWeatherInfo, this.config, true);
+		command = command.replace(/{{full_data}}/g, Literal(JSON.stringify(this.currentWeatherInfo)));
+		command = command.replace(/{full_data}/g, JSON.stringify(this.currentWeatherInfo));
+
+		return SpawnProcess([command]);
+	}
+
 
 	/**
 	 * Callback wrapper for events, awaits until a refresh is done and ensures complete
@@ -405,36 +476,36 @@ The contents of the file saved from the applet help page goes here
 			const weatherData = this.CurrentData;
 			if (weatherData == null)
 				return;
-			callback(owner, data, weatherData);
+			void callback(owner, data, weatherData);
 		}
 	}
 
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 
-	public override on_orientation_changed(orientation: imports.gi.St.Side) {
+	public override on_orientation_changed(orientation: imports.gi.St.Side): void {
 		this.orientation = orientation;
 		if (this.currentWeatherInfo)
 			this.onSettingNeedsRebuild(this.config, null, this.currentWeatherInfo);
 	};
 
-	public override on_applet_removed_from_panel(deleteConfig: any) {
+	public override on_applet_removed_from_panel(): void {
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 		this.config.Destroy();
 		Event.DisconnectAll();
 	}
 
-	public override on_applet_clicked(event: any): boolean {
+	public override on_applet_clicked(): boolean {
 		this.ui.Toggle();
 		return false;
 	}
 
-	public override on_applet_middle_clicked(event: any) {
+	public override on_applet_middle_clicked(): boolean {
 		return false;
 	}
 
-	public override on_panel_height_changed() {
+	public override on_panel_height_changed(): void {
 		// Implemented byApplets
 	}
 
@@ -530,7 +601,7 @@ The contents of the file saved from the applet help page goes here
 		this.set_applet_label(title);
 		this.set_applet_tooltip("Click to open");
 		this.set_applet_icon_name("weather-severe-alert");
-		this.ui.DisplayErrorMessage(msg, "hard");
+		this.ui.DisplayErrorMessage(msg);
 	};
 
 	private errMsg: NiceErrorDetail = { // Error messages to use
@@ -564,7 +635,7 @@ The contents of the file saved from the applet help page goes here
 		if (error.type == "hard") {
 			Logger.Debug("Displaying hard error");
 			this.ui.Rebuild(this.config);
-			this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+			this.DisplayHardError(this.errMsg[error.detail], error.message ?? "");
 		}
 
 		if (error.type == "soft") {
@@ -573,7 +644,7 @@ The contents of the file saved from the applet help page goes here
 			if (this.loop.IsDataTooOld()) {
 				this.set_applet_tooltip("Click to open");
 				this.set_applet_icon_name("weather-severe-alert");
-				this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
+				this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
 			}
 		}
 

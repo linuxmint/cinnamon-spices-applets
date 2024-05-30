@@ -1,5 +1,5 @@
-import { Logger } from "./logger";
-import { WeatherButton } from "../ui_elements/weatherbutton";
+import { Logger } from "./services/logger";
+import type { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
 
@@ -9,10 +9,12 @@ const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
  */
 export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData> | TypedFailResponse> {
 	const response = await SpawnProcess(command);
-	if (!response.Success) return response as TypedFailResponse;
+	if (!response.Success)
+		return response as TypedFailResponse;
 
 	try {
-		response.Data = JSON.parse(response.Data);
+		response.Data = JSON.parse(response.Data) as never;
+		return response as TypedResponse<TData>;
 	}
 	catch (e) {
 		if (e instanceof Error)
@@ -23,27 +25,26 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 			Message: "Failed to parse JSON",
 			Type: "jsonParse",
 		}
-	}
-	finally {
 		return response as TypedFailResponse;
 	}
+}
+
+
+export function Literal(command: string): string {
+	return ("'" + command.replace(/'/g, "'\"'\"'") + "' ");
 }
 
 
 /** Spawns a command and await for the output it gives */
 export async function SpawnProcess(command: string[]): Promise<GenericResponse> {
 	// prepare command
-	let cmd = "";
-	for (const element of command) {
-		// Amazing escaping...
-		cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
-	}
+	const cmd = command.join(" ");
 
 	Logger.Debug("Spawning command: " + cmd);
 
 	let response;
 	if (spawnCommandLineAsyncIO === undefined) {
-		response = await new Promise((resolve, reject) => {
+		response = await new Promise((resolve) => {
 			spawnCommandLineAsync(cmd,
 				() => {
 					resolve({
@@ -67,9 +68,9 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 		});
 	}
 	else {
-		response = await new Promise((resolve, reject) => {
+		response = await new Promise((resolve) => {
 			spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
-				let result: GenericResponse = {
+				const result: GenericResponse = {
 					Success: exitCode == 0,
 					ErrorData: undefined,
 					Data: aStdout ?? null
@@ -91,7 +92,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 	return response as GenericResponse;
 }
 
-export function OpenUrl(element: WeatherButton) {
+export function OpenUrl(element: WeatherButton): void {
 	if (!element.url) return;
 	imports.gi.Gio.app_info_launch_default_for_uri(
 		element.url,
@@ -115,7 +116,7 @@ interface TypedFailResponse extends ProcessResponse {
 
 interface ProcessResponse {
 	Success: boolean;
-	Data: any;
+	Data: unknown;
 	ErrorData: ErrorData | undefined;
 }
 

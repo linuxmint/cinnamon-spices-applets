@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
-import { HourlyForecastData, Tuple } from "../../../types";
+import type { Tuple } from "../../../types";
 import { OpenMeteoWeatherCodeToCondition } from "./common";
 import { CelsiusToKelvin } from "../../../utils";
+import type { HourlyForecastData } from "../../../weather-data";
 
 export interface OpenMeteoHourWeather {
 	/**
@@ -59,7 +60,7 @@ export function OpenMeteoHourWeatherToData(data: OpenMeteoHourWeather, timezone:
 			precipitation: data.precipitation[i] > 0 ? {
 				chance: data.precipitation_probability[i],
 				volume: data.precipitation[i],
-				type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : data.snowfall[i] > 0 ? "snow" : "none",
+				type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : (data.snowfall[i] > 0 ? "snow" : "none"),
 			} : undefined
 		});
 	}

@@ -1,7 +1,7 @@
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
+import { Logger } from "../../lib/services/logger";
 import { PointInsidePolygon } from "../../lib/polygons";
-import { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
+import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../weather-data";
 
 export type METNorwayAlertEvent = "blowingSnow" | "forestFire" | "gale" | "ice" | "icing" | "lightning" | "polarLow" | "rain" | "rainFlood" | "snow" | "stormSurge" | "wind";
 
@@ -126,7 +126,7 @@ function EventToIcon(event: METNorwayAlertEvent): BuiltinIcons | CustomIcons | u
 		case "wind":
 			return "strong-wind-symbolic";
 		default:
-			Logger.Info(`Unknown MET Norway event type: ${event}`);
+			Logger.Info(`Unknown MET Norway event type: ${event as string}`);
 			return undefined;
 	}
 }
