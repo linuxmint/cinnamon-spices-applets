@@ -2,6 +2,19 @@
 
 ## 3.6.0
 
+- Add eslint and fix all eslint errors
+- Fix Weatherbit not processing hourly weather properly
+- Fix Soup2 lib not passing in it's `finalCancellable` only what was passed in from outside
+- Fix OpenWeatherMap error handling, was completely broken
+- Better error logging on exception handling in most places
+- Fix Accuweather having wrong weather condition info on "clear sky"
+- Add missing type information for weather/location providers
+- Fix incorrect wind speed reported with Open Meteo
+- Resolve [[weather@mockturtl] Feature Request: Save Weather Service JSON #5420](https://github.com/linuxmint/cinnamon-spices-applets/issues/5420)
+- Resolve [[weather@mockturtl] Feature Request: Configurable UserAgent String #5999](https://github.com/linuxmint/cinnamon-spices-applets/issues/5999)
+- Fix [weather@mockturtl: Incorrectly formatted text #6011](https://github.com/linuxmint/cinnamon-spices-applets/issues/6011) - mostly
+- Indicate on the popup menu when a refresh is in progress.
+
 ## 3.5.0
 
 * Resolve- [Feature Request: Weather applet should show weather alerts/warnings #5546](https://github.com/linuxmint/cinnamon-spices-applets/issues/5546)
