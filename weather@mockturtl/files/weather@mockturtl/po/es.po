@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-30 09:33+0100\n"
-"PO-Revision-Date: 2024-05-24 18:47-0400\n"
+"PO-Revision-Date: 2024-05-30 11:09-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1881,36 +1881,37 @@ msgstr "Guardado en {filePath}"
 
 #: 3.8/weather-applet.js:19481
 msgid "No Script Provided"
-msgstr ""
+msgstr "No se proporcionó ningún Script"
 
 #: 3.8/weather-applet.js:19481
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Primero debe agregar un script."
 
 #: 3.8/weather-applet.js:19485
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Sin datos meteorológicos"
 
 #: 3.8/weather-applet.js:19485
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "No hay datos meteorológicos para ejecutar el script"
 
 #: 3.8/weather-applet.js:19493
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "El script se ha ejecutado correctamente"
 
 #: 3.8/weather-applet.js:19493
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Su script se ha ejecutado correctamente."
 
 #: 3.8/weather-applet.js:19496
 msgid "Error Running Script"
-msgstr ""
+msgstr "Error al ejecutar el script"
 
 #: 3.8/weather-applet.js:19496
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"El script devuelve un error, consulte los registros para obtener más "
+"información"
 
 #: 3.8/AlertsWindow.py:119
 msgid "Weather Applet Alerts"
@@ -2354,7 +2355,7 @@ msgstr "Configuración de ubicación"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Técnica y Automatización"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2748,7 +2749,7 @@ msgstr "Ruta seleccionada para guardar los registros"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Sustitución de la cadena de agente de usuario"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2757,10 +2758,14 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Si tiene problemas con el applet y sabe que la cadena de Agente de Usuario "
+"es el problema, puede intentar cambiarla. Cámbiela sólo si sabe lo que está "
+"haciendo. Esta es una cadena que se envía al servidor cuando el applet "
+"intenta obtener los datos meteorológicos."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Ejecutar un comando cuando cambie la información meteorológica"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2780,7 +2785,22 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"El applet ejecutará el comando que le proporcione cada vez que se actualicen "
+"los datos meteorológicos. El comando será interpolado con los mismos valores "
+"con el mismo formato que puede obtener en cualquiera de las anulaciones, "
+"además obtendrá {full_data} que son los datos meteorológicos actuales "
+"completos. La interpolación con corchetes simples {xxx} no se escapará, con "
+"corchetes dobles {{xxxx}} se envuelven en comillas simples (') y todas las "
+"demás comillas simples se escapan dentro. Puede utilizar esto para integrar "
+"los datos meteorológicos con otras partes de su sistema. Puede consultar la "
+"estructura completa de los datos meteorológicos en el enlace del README.\n"
+"\n"
+"Ejemplo: 'notify-send «El tiempo es {c} y la temperatura es {t}{u}»' "
+"mostrará una notificación con el estado actual del tiempo y la temperatura.\n"
+"\n"
+"Ejemplo: 'echo {{full_data}} > /tmp/weather_data' guardará los datos "
+"meteorológicos completos en un archivo en /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Pruebe su comando"
