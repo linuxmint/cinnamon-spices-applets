@@ -17955,11 +17955,11 @@ class CurrentWeather {
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
-        this.temperatureLabel = Label({ text: ELLIPSIS });
-        this.humidityLabel = Label({ text: ELLIPSIS, });
-        this.pressureLabel = Label({ text: ELLIPSIS, });
-        this.dewPointLabel = Label({ text: '' });
-        this.apiUniqueLabel = Label({ text: '' });
+        this.temperatureLabel = Label();
+        this.humidityLabel = Label();
+        this.pressureLabel = Label();
+        this.dewPointLabel = Label();
+        this.apiUniqueLabel = Label();
         this.temperatureCaption = Label({
             text: _('Temperature') + LocalizedColon(config.currentLocale),
             style: textColorStyle,
@@ -17981,7 +17981,6 @@ class CurrentWeather {
             x_align: imports.gi.Clutter.ActorAlign.END,
         });
         this.apiUniqueCaption = Label({
-            text: '',
             style: textColorStyle,
             x_align: imports.gi.Clutter.ActorAlign.END,
         });

@@ -1,6 +1,6 @@
 import { OpenUrl } from "../lib/commandRunner";
 import type { Config } from "../config";
-import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, STYLE_HIDDEN } from "../consts";
+import { APPLET_ICON, SIGNAL_CLICKED, STYLE_HIDDEN } from "../consts";
 import type { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
@@ -153,12 +153,12 @@ export class CurrentWeather {
 	/** Builds Weather Information on the right side */
 	private BuildRightColumn(textColorStyle: string, config: Config) {
 		// Current Weather Right Column
-		this.temperatureLabel = Label({text: ELLIPSIS})
-		this.humidityLabel = Label({text: ELLIPSIS,})
-		this.pressureLabel = Label({text: ELLIPSIS,})
-		this.dewPointLabel = Label({ text: ''});
+		this.temperatureLabel = Label();
+		this.humidityLabel = Label();
+		this.pressureLabel = Label();
+		this.dewPointLabel = Label();
 
-		this.apiUniqueLabel = Label({ text: '' })
+		this.apiUniqueLabel = Label();
 		this.temperatureCaption = Label({
 			text: _('Temperature') + LocalizedColon(config.currentLocale),
 			style: textColorStyle,
@@ -181,7 +181,6 @@ export class CurrentWeather {
 		});
 		// APi Unique Caption
 		this.apiUniqueCaption = Label({
-			text: '',
 			style: textColorStyle,
 			x_align: imports.gi.Clutter.ActorAlign.END,
 		});

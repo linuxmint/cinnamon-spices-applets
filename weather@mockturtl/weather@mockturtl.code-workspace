@@ -132,7 +132,7 @@
     ],
     "typescript.tsdk": "${workspaceFolder:weather}/node_modules/typescript/lib",
     "eslint.experimental.useFlatConfig": true,
-    "eslint.execArgv": ["${workspaceFolder:weather}/src/3_8", "--config", "${workspaceFolder:weather}/eslint.config.mjs"],
+    "eslint.workingDirectories": ["${workspaceFolder:weather}"],
   },
   "tasks": {
     "version": "2.0.0",

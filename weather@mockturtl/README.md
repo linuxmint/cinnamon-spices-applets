@@ -220,6 +220,8 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * On subsequent refreshes/relogins the popup menu's element's may lose all padding.
 
+* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed. 
+
 ### Report a new issue
 
 You need a Github login to make a issue report. Please first check if the issue already is reported [here](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+is%3Aopen+weather). You will find more information about reporting in the Configuration under the Help Tab, accessible by right clicking on the applet. Here you can save logs to file with debug level that is much appreciated. By using the *Submit an Issue* Button under this Tab, useful system information will be generated for your report form in your default web browser at Github.com. 
