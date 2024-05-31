@@ -310,10 +310,14 @@ class Eye extends Applet.Applet {
 			base_color: base_color,
 			iris_color: iris_color,
 			pupil_color: pupil_color,
-			line_width: (this.line_width * global.ui_scale),
-			padding: (this.padding * global.ui_scale),
-			lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
-			bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
+			line_width: this.line_width * global.ui_scale,
+			padding: this.padding * global.ui_scale,
+			lids_fill: this.fill_lids_color_painting &&
+					   this.use_alternative_colors,
+			bulb_fill: this.fill_bulb_color_painting &&
+			           this.use_alternative_colors,
+			is_vertical: this.orientation == St.Side.LEFT ||
+							  this.orientation == St.Side.RIGHT,
 		});
 	}
 
