@@ -498,7 +498,8 @@
 	"translateCondition": {
 		"type": "checkbox",
 		"default": true,
-		"description": "Translate conditions"
+		"description": "Provider should translate conditions if available",
+		"tooltip": "Should your provider translate the conditions to your language if your locale is supported by the provider. Otherwise the applet will use it's own translation system."
 	},
 	"shortConditions": {
 		"type": "checkbox",

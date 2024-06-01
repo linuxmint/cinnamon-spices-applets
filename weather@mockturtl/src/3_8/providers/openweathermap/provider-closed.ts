@@ -70,7 +70,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 
 		// Put id to the parsable object, even if it ends up undefined
 		json.id = cachedID ?? idPayload?.id;
-		return OWMOneCallToWeatherData(json);
+		return OWMOneCallToWeatherData(json, !!params.lang);
 	};
 
 	private ConstructParams(loc: LocationData, key: string): HTTPParams {

@@ -105,6 +105,9 @@ export class Config {
 	public readonly _refreshInterval!: number;
 	public readonly _manualLocation!: boolean;
 	public readonly _dataService!: Services;
+	/**
+	 * Should the __API__ translate the condition
+	 */
 	public readonly _translateCondition!: boolean;
 	public readonly _pressureUnit!: WeatherPressureUnits;
 	public readonly _show24Hours!: boolean;
