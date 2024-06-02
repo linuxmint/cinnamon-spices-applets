@@ -16763,8 +16763,8 @@ function OpenMeteoWeatherCodeToCondition(code, isDay) {
             return {
                 icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
                 customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                main: _("Mainly clear"),
-                description: _("Mainly clear")
+                main: _("Few clouds"),
+                description: _("Few clouds")
             };
         case 2:
             return {
