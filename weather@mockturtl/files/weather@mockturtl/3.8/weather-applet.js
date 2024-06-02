@@ -12485,10 +12485,10 @@ class Weatherbit extends BaseProvider {
             'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
             'sv', 'tr', 'uk', 'zh', 'zh-tw'
         ];
-        this.current_url = "https://api.weatherbit.io/v2.0/current?";
-        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
-        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts?";
+        this.current_url = "https://api.weatherbit.io/v2.0/current";
+        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily";
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly";
+        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts";
         this.hourlyAccess = true;
         this.ParseAlerts = (json) => {
             const alerts = [];
@@ -12518,7 +12518,7 @@ class Weatherbit extends BaseProvider {
             }
             return alerts;
         };
-        this.ParseCurrent = (payload) => {
+        this.ParseCurrent = (payload, translated) => {
             const json = payload.data[0];
             const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
             if (hourDiff != 0)
@@ -12546,8 +12546,8 @@ class Weatherbit extends BaseProvider {
                     humidity: json.rh,
                     dewPoint: json.dewpt,
                     condition: {
-                        main: json.weather.description,
-                        description: json.weather.description,
+                        main: translated ? json.weather.description : this.CodeToMain(json.weather.code),
+                        description: translated ? json.weather.description : this.CodeToDescription(json.weather.code),
                         icons: this.ResolveIcon(json.weather.icon),
                         customIcon: this.ResolveCustomIcon(json.weather.icon)
                     },
@@ -12567,7 +12567,7 @@ class Weatherbit extends BaseProvider {
                 return null;
             }
         };
-        this.ParseForecast = (json) => {
+        this.ParseForecast = (json, translated) => {
             const forecasts = [];
             try {
                 for (const day of json.data) {
@@ -12576,8 +12576,8 @@ class Weatherbit extends BaseProvider {
                         temp_min: day.min_temp,
                         temp_max: day.max_temp,
                         condition: {
-                            main: day.weather.description,
-                            description: day.weather.description,
+                            main: translated ? day.weather.description : this.CodeToMain(day.weather.code),
+                            description: translated ? day.weather.description : this.CodeToDescription(day.weather.code),
                             icons: this.ResolveIcon(day.weather.icon),
                             customIcon: this.ResolveCustomIcon(day.weather.icon)
                         },
@@ -12593,7 +12593,7 @@ class Weatherbit extends BaseProvider {
                 return null;
             }
         };
-        this.ParseHourlyForecast = (json) => {
+        this.ParseHourlyForecast = (json, translated) => {
             const forecasts = [];
             try {
                 for (const hour of json.data) {
@@ -12601,8 +12601,8 @@ class Weatherbit extends BaseProvider {
                         date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
                         temp: hour.temp,
                         condition: {
-                            main: hour.weather.description,
-                            description: hour.weather.description,
+                            main: translated ? hour.weather.description : this.CodeToMain(hour.weather.code),
+                            description: translated ? hour.weather.description : this.CodeToDescription(hour.weather.code),
                             icons: this.ResolveIcon(hour.weather.icon),
                             customIcon: this.ResolveCustomIcon(hour.weather.icon)
                         },
@@ -12654,24 +12654,26 @@ class Weatherbit extends BaseProvider {
     }
     ;
     async GetData(baseUrl, loc, ParseFunction, cancellable) {
-        const query = this.ConstructQuery(baseUrl, loc);
+        const query = this.ConstructQuery(loc);
         if (query == null)
             return null;
         const json = await HttpLib.Instance.LoadJsonSimple({
-            url: query,
+            url: baseUrl,
+            params: query,
             cancellable,
             HandleError: (e) => this.HandleError(e)
         });
         if (json == null)
             return null;
-        return ParseFunction(json);
+        return ParseFunction(json, !!query.lang);
     }
     async GetHourlyData(baseUrl, loc, cancellable) {
-        const query = this.ConstructQuery(baseUrl, loc);
+        const query = this.ConstructQuery(loc);
         if (query == null)
             return null;
         const json = await HttpLib.Instance.LoadJsonSimple({
-            url: query,
+            url: baseUrl,
+            params: query,
             cancellable,
             HandleError: (e) => this.HandleHourlyError(e)
         });
@@ -12680,7 +12682,7 @@ class Weatherbit extends BaseProvider {
         if ("error" in json) {
             return null;
         }
-        return this.ParseHourlyForecast(json);
+        return this.ParseHourlyForecast(json, !!query.lang);
     }
     ;
     TimeToDate(time, hourDiff, tz) {
@@ -12720,13 +12722,18 @@ class Weatherbit extends BaseProvider {
         }
         return lang;
     }
-    ConstructQuery(query, loc) {
-        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+    ConstructQuery(loc) {
+        const result = {
+            key: this.app.config.ApiKey,
+            lat: loc.lat,
+            lon: loc.lon,
+            units: "S"
+        };
         const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-            query = query + "&lang=" + lang;
+            result.lang = lang;
         }
-        return query;
+        return result;
     }
     ;
     HandleError(message) {
@@ -12749,6 +12756,146 @@ class Weatherbit extends BaseProvider {
             return false;
         }
         return true;
+    }
+    CodeToMain(code) {
+        switch (code) {
+            case 200:
+            case 201:
+            case 202:
+            case 230:
+            case 231:
+            case 232:
+            case 233:
+                return _("Thunderstorm");
+            case 300:
+            case 301:
+            case 302:
+                return _("Drizzle");
+            case 500:
+            case 501:
+            case 502:
+            case 511:
+            case 520:
+            case 521:
+            case 522:
+                return _("Rain");
+            case 600:
+            case 601:
+            case 602:
+            case 610:
+            case 621:
+            case 622:
+            case 623:
+                return _("Snow");
+            case 611:
+            case 612:
+                return _("Sleet");
+            case 700:
+                return _("Mist");
+            case 711:
+                return _("Smoke");
+            case 721:
+                return _("Haze");
+            case 731:
+                return _("Dust");
+            case 741:
+            case 751:
+                return _("Fog");
+            case 800:
+                return _("Clear");
+            case 801:
+                return _("Few clouds");
+            case 802:
+                return _("Scattered clouds");
+            case 803:
+                return _("Broken clouds");
+            case 804:
+                return _("Overcast");
+            case 900:
+            default:
+                return _("Unknown");
+        }
+    }
+    CodeToDescription(code) {
+        switch (code) {
+            case 200:
+                return _("Thunderstorm with light rain");
+            case 201:
+                return _("Thunderstorm with rain");
+            case 202:
+                return _("Thunderstorm with heavy rain");
+            case 230:
+                return _("Thunderstorm with light drizzle");
+            case 231:
+                return _("Thunderstorm with drizzle");
+            case 232:
+                return _("Thunderstorm with heavy drizzle");
+            case 233:
+                return _("Thunderstorm");
+            case 300:
+                return _("Light drizzle");
+            case 301:
+                return _("Drizzle");
+            case 302:
+                return _("Heavy drizzle");
+            case 500:
+                return _("Light rain");
+            case 501:
+                return _("Moderate rain");
+            case 502:
+                return _("Heavy rain");
+            case 511:
+                return _("Freezing rain");
+            case 520:
+                return _("Light shower rain");
+            case 521:
+                return _("Shower rain");
+            case 522:
+                return _("Heavy shower rain");
+            case 600:
+                return _("Light snow");
+            case 601:
+                return _("Snow");
+            case 602:
+                return _("Heavy snow");
+            case 610:
+                return _("Mix snow/rain");
+            case 621:
+                return _("Snow shower");
+            case 622:
+                return _("Heavy snow shower");
+            case 623:
+                return _("Flurries");
+            case 611:
+                return _("Sleet");
+            case 612:
+                return _("Heavy sleet");
+            case 700:
+                return _("Mist");
+            case 711:
+                return _("Smoke");
+            case 721:
+                return _("Haze");
+            case 731:
+                return _("Dust");
+            case 741:
+                return _("Fog");
+            case 751:
+                return _("Freezing fog");
+            case 800:
+                return _("Clear");
+            case 801:
+                return _("Few clouds");
+            case 802:
+                return _("Scattered clouds");
+            case 803:
+                return _("Broken clouds");
+            case 804:
+                return _("Overcast");
+            case 900:
+            default:
+                return _("Unknown");
+        }
     }
     ResolveIcon(icon) {
         switch (icon) {
@@ -14789,8 +14936,7 @@ class AccuWeather extends BaseProvider {
     async GetWeather(loc, cancellable) {
         var _a, _b;
         const locationID = `${loc.lat},${loc.lon}`;
-        const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
-        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        const locale = this.app.config._translateCondition ? (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us" : "en-us";
         let location;
         if (this.locationCache[locationID] != null) {
             location = this.locationCache[locationID];
@@ -14799,7 +14945,7 @@ class AccuWeather extends BaseProvider {
             location = await HttpLib.Instance.LoadJsonSimple({
                 url: this.locSearchUrl,
                 cancellable,
-                params: { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey },
+                params: { q: locationID, details: true, language: locale, apikey: this.app.config.ApiKey },
                 HandleError: this.HandleErrors
             });
         }
