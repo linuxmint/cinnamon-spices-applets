@@ -17144,7 +17144,7 @@ class OpenWeatherMapOpen extends BaseProvider {
         super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap";
+        this.name = "OpenWeatherMap_Open";
         this.maxForecastSupport = 7;
         this.maxHourlyForecastSupport = 0;
         this.website = "https://openweathermap.org/";
@@ -17217,7 +17217,7 @@ const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
-    "OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+    "OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
     "OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
     "MetNorway": (app) => new MetNorway(app),
     "Weatherbit": (app) => new Weatherbit(app),

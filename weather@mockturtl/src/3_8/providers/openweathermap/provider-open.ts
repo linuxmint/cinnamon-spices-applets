@@ -14,7 +14,7 @@ import { OWMWeatherToWeatherData } from "./payload/weather";
 export class OpenWeatherMapOpen extends BaseProvider {
 	public override needsApiKey = false;
 	public override prettyName = _("OpenWeatherMap");
-	public override name: Services = "OpenWeatherMap";
+	public override name: Services = "OpenWeatherMap_Open";
 	public override maxForecastSupport = 7;
 	public override maxHourlyForecastSupport = 0;
 	public override website = "https://openweathermap.org/";
