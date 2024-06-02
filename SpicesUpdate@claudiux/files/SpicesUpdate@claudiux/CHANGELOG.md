@@ -1,3 +1,6 @@
+### v7.4.4~20240602
+  * Restarts httpLib when network interface status changes.
+
 ### v7.4.3~20240531
   * Wait a few seconds before refreshing data after a change in network status.
 
