@@ -17874,6 +17874,10 @@ class WeatherLoop {
     async Start() {
         logger_Logger.Info("Main Loop started.");
         while (true) {
+            if (this.IsStray()) {
+                logger_Logger.Info("Applet removed, stopping loop.");
+                return;
+            }
             await this.DoCheck({ immediate: false });
             await delay(this.LoopInterval());
         }
