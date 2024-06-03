@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-05-30 11:09-0400\n"
+"PO-Revision-Date: 2024-06-03 12:04-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1565,17 +1565,15 @@ msgstr "Muy bueno"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Ceniza"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Borrascas"
+msgstr "Borrasca"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Chubascos ligeros"
+msgstr "Ligero chubasco de aguanieve"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1599,24 +1597,20 @@ msgid "Heavy drizzle"
 msgstr "Llovizna"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Ligeros chubascos de nieve"
+msgstr "Lluvia ligera"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Fuertes chubascos de nieve"
+msgstr "Lluvia fuerte"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Lluvia helada"
+msgstr "Mezcla de nieve y lluvia"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
-msgstr "Chubasco de nieve"
+msgstr "Lluvia de nieve"
 
 #: 3.8/weather-applet.js:12884 3.8/weather-applet.js:14455
 msgid "Freezing fog"
@@ -1825,13 +1819,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
-"Asegúrese de que\n"
-"introdujo la clave de API que ha obtenido desde Climacell"
+"Por favor, asegúrese de que ha\n"
+"introducido la clave API que tiene de Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -2708,7 +2701,7 @@ msgstr "Como SE o N, en lugar de iconos de dirección."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "El proveedor debe traducir las condiciones si están disponibles"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2716,6 +2709,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Su proveedor debe traducir las condiciones a su idioma si su configuración "
+"regional es compatible con el proveedor. En caso contrario, el applet "
+"utilizará su propio sistema de traducción."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
