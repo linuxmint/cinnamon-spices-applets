@@ -2,7 +2,7 @@
 
 ## 3.6.1
 
-- Make translating conditions more consistent across all providers
+- Make translating conditions more consistent across all providers and clarify purpose of "Translate conditions" settings toggle
 - Stop applet loop when applet is removed
 - Add missing dewpoint from Open-Meteo
 - Fix
