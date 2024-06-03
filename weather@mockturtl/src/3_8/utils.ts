@@ -258,11 +258,8 @@ export function ValidTimezone(tz: string): boolean {
 // To UserConfig converters
 
 /** Capitalizes first letter and translates if needed */
-export function ProcessCondition(condition: string, shouldTranslate: boolean): string {
-	condition = CapitalizeFirstLetter(condition);
-	if (shouldTranslate)
-		condition = _(condition);
-	return condition;
+export function ProcessCondition(condition: string): string {
+	return CapitalizeFirstLetter(condition);
 }
 
 export function LocalizedColon(locale: string | null): string {

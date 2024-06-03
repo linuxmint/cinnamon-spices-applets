@@ -574,19 +574,19 @@ The contents of the file saved from the applet help page goes here
 		if (weatherInfo.hourlyForecasts == null) weatherInfo.hourlyForecasts = [];
 
 		// Translate conditions if set
-		weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
-		weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
+		weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main);
+		weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description);
 
 		for (const forecast of weatherInfo.forecasts) {
 			const condition = forecast.condition;
-			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+			condition.main = ProcessCondition(condition.main);
+			condition.description = ProcessCondition(condition.description);
 		}
 
 		for (const forecast of weatherInfo.hourlyForecasts) {
 			const condition = forecast.condition;
-			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+			condition.main = ProcessCondition(condition.main);
+			condition.description = ProcessCondition(condition.description);
 		}
 
 		return weatherInfo;

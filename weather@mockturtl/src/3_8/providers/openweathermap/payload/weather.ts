@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import type { OWMWeatherCondition } from "./common";
-import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
+import { OWMDescToTranslated, OWMIconToBuiltInIcons, OWMIconToCustomIcon, OWMMainToTranslated } from "./condition";
 import { _ } from "../../../utils";
 import type { WeatherData } from "../../../weather-data";
 
@@ -90,7 +90,7 @@ export interface OWMWeatherResponse {
 	}
 }
 
-export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, timezone: string | undefined = "local"): Omit<WeatherData, "forecasts" | "immediatePrecipitation" | "hourlyForecasts" | "alerts"> {
+export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, conditionsTranslated: boolean, timezone: string | undefined = "local"): Omit<WeatherData, "forecasts" | "immediatePrecipitation" | "hourlyForecasts" | "alerts"> {
 	return {
 		date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
 		sunrise: DateTime.fromSeconds(weather.sys.sunrise, {zone: timezone}),
@@ -102,8 +102,8 @@ export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, timezone: s
 			url: `https://openweathermap.org/city/${weather.id}`
 		},
 		condition: {
-			main: weather.weather?.[0].main,
-			description: weather.weather?.[0].description,
+			main: conditionsTranslated ? weather.weather?.[0].main : OWMMainToTranslated(weather.weather?.[0].main),
+			description: conditionsTranslated ? weather.weather?.[0].description : OWMDescToTranslated(weather.weather?.[0].description),
 			icons: OWMIconToBuiltInIcons(weather.weather?.[0].icon),
 			customIcon: OWMIconToCustomIcon(weather.weather?.[0].icon)
 		},

@@ -14,7 +14,7 @@ import { OWMWeatherToWeatherData } from "./payload/weather";
 export class OpenWeatherMapOpen extends BaseProvider {
 	public override needsApiKey = false;
 	public override prettyName = _("OpenWeatherMap");
-	public override name: Services = "OpenWeatherMap";
+	public override name: Services = "OpenWeatherMap_Open";
 	public override maxForecastSupport = 7;
 	public override maxHourlyForecastSupport = 0;
 	public override website = "https://openweathermap.org/";
@@ -24,15 +24,16 @@ export class OpenWeatherMapOpen extends BaseProvider {
 
 
 	public override async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+		const params: HTTPParams = this.ConstructParams(loc);
 		const current = await HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({
 			url: "https://api.openweathermap.org/data/2.5/weather",
 			cancellable,
-			params: this.ConstructParams(loc)
+			params: params
 		});
 		const daily = await HttpLib.Instance.LoadJsonSimple<OWMDailyForecastResponse>({
 			url: "https://api.openweathermap.org/data/2.5/forecast/daily",
 			cancellable,
-			params: this.ConstructParams(loc)
+			params: params
 		});
 
 		if (!current || !daily) {
@@ -40,8 +41,8 @@ export class OpenWeatherMapOpen extends BaseProvider {
 		}
 
 		return {
-			...OWMWeatherToWeatherData(current, config.Timezone),
-			forecasts: OWMDailyForecastsToData(daily.list, config.Timezone)
+			...OWMWeatherToWeatherData(current, !!params.lang, config.Timezone),
+			forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, config.Timezone)
 		};
 	}
 

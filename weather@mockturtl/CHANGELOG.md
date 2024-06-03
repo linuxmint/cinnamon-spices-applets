@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.6.1
+
+- Make translating conditions more consistent across all providers and clarify purpose of "Translate conditions" settings toggle
+- Stop applet loop when applet is removed
+- Add missing dewpoint from Open-Meteo
+- Fix
+  [[weather@mockturtl] Applet Bug #6048](https://github.com/linuxmint/cinnamon-spices-applets/issues/6048), Fix [weather@mockturtl: Hourly weather forecast is not displayed #6046](https://github.com/linuxmint/cinnamon-spices-applets/issues/6046) - Rename OpenWeatherMap name internally so people fall back to the default Open-Meteo so no user-action is needed.
+
 ## 3.6.0
 
 - Add eslint and fix all eslint errors

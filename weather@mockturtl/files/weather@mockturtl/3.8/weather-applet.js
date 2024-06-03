@@ -9473,11 +9473,8 @@ function OnSameDay(date1, date2) {
 function ValidTimezone(tz) {
     return DateTime.utc().setZone(tz).isValid;
 }
-function ProcessCondition(condition, shouldTranslate) {
-    condition = CapitalizeFirstLetter(condition);
-    if (shouldTranslate)
-        condition = _(condition);
-    return condition;
+function ProcessCondition(condition) {
+    return CapitalizeFirstLetter(condition);
 }
 function LocalizedColon(locale) {
     if (locale == null)
@@ -11227,8 +11224,8 @@ class MetUk extends BaseProvider {
 ;
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/common.ts
-
-const OWM_SUPPORTED_LANGS = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+const OWM_SUPPORTED_LANGS = [
+    "af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
     "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
     "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
 ];
@@ -11256,67 +11253,165 @@ function ConvertLocaleToOWMLang(systemLocale) {
     }
     return lang;
 }
-const openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Clouds"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
-];
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/condition.ts
+
+
+function OWMMainToTranslated(condition) {
+    switch (condition) {
+        case "Thunderstorm":
+            return _("Thunderstorm");
+        case "Drizzle":
+            return _("Drizzle");
+        case "Rain":
+            return _("Rain");
+        case "Snow":
+            return _("Snow");
+        case "Clear":
+            return _("Clear");
+        case "Clouds":
+            return _("Clouds");
+        case "Mist":
+            return _("Mist");
+        case "Smoke":
+            return _("Smoke");
+        case "Haze":
+            return _("Haze");
+        case "Dust":
+            return _("Dust");
+        case "Fog":
+            return _("Fog");
+        case "Sand":
+            return _("Sand");
+        case "Ash":
+            return _("Ash");
+        case "Squall":
+            return _("Squall");
+        case "Tornado":
+            return _("Tornado");
+        default:
+            logger_Logger.Error("Unknown weather condition main: " + condition);
+            return condition;
+    }
+}
+function OWMDescToTranslated(description) {
+    switch (description) {
+        case "thunderstorm with light rain":
+            return _("Thunderstorm with light rain");
+        case "thunderstorm with rain":
+            return _("Thunderstorm with rain");
+        case "thunderstorm with heavy rain":
+            return _("Thunderstorm with heavy rain");
+        case "light thunderstorm":
+            return _("Light thunderstorm");
+        case "thunderstorm":
+            return _("Thunderstorm");
+        case "heavy thunderstorm":
+            return _("Heavy thunderstorm");
+        case "ragged thunderstorm":
+            return _("Ragged thunderstorm");
+        case "thunderstorm with light drizzle":
+            return _("Thunderstorm with light drizzle");
+        case "thunderstorm with drizzle":
+            return _("Thunderstorm with drizzle");
+        case "thunderstorm with heavy drizzle":
+            return _("Thunderstorm with heavy drizzle");
+        case "light intensity drizzle":
+            return _("Light intensity drizzle");
+        case "drizzle":
+            return _("Drizzle");
+        case "heavy intensity drizzle":
+            return _("Heavy intensity drizzle");
+        case "light intensity drizzle rain":
+            return _("Light intensity drizzle rain");
+        case "drizzle rain":
+            return _("Drizzle rain");
+        case "heavy intensity drizzle rain":
+            return _("Heavy intensity drizzle rain");
+        case "shower rain and drizzle":
+            return _("Shower rain and drizzle");
+        case "heavy shower rain and drizzle":
+            return _("Heavy shower rain and drizzle");
+        case "shower drizzle":
+            return _("Shower drizzle");
+        case "light rain":
+            return _("Light rain");
+        case "moderate rain":
+            return _("Moderate rain");
+        case "heavy intensity rain":
+            return _("Heavy intensity rain");
+        case "very heavy rain":
+            return _("Very heavy rain");
+        case "extreme rain":
+            return _("Extreme rain");
+        case "freezing rain":
+            return _("Freezing rain");
+        case "light intensity shower rain":
+            return _("Light intensity shower rain");
+        case "shower rain":
+            return _("Shower rain");
+        case "heavy intensity shower rain":
+            return _("Heavy intensity shower rain");
+        case "ragged shower rain":
+            return _("Ragged shower rain");
+        case "light snow":
+            return _("Light snow");
+        case "snow":
+            return _("Snow");
+        case "heavy snow":
+            return _("Heavy snow");
+        case "sleet":
+            return _("Sleet");
+        case "light shower sleet":
+            return _("Light shower sleet");
+        case "shower sleet":
+            return _("Shower sleet");
+        case "light rain and snow":
+            return _("Light rain and snow");
+        case "rain and snow":
+            return _("Rain and snow");
+        case "light shower snow":
+            return _("Light shower snow");
+        case "shower snow":
+            return _("Shower snow");
+        case "heavy shower snow":
+            return _("Heavy shower snow");
+        case "mist":
+            return _("Mist");
+        case "smoke":
+            return _("Smoke");
+        case "haze":
+            return _("Haze");
+        case "sand/dust whirls":
+            return _("Sand, dust whirls");
+        case "fog":
+            return _("Fog");
+        case "sand":
+            return _("Sand");
+        case "dust":
+            return _("Dust");
+        case "volcanic ash":
+            return _("Volcanic ash");
+        case "squalls":
+            return _("Squalls");
+        case "tornado":
+            return _("Tornado");
+        case "clear sky":
+        case "sky is clear":
+            return _("Clear sky");
+        case "few clouds":
+            return _("Few clouds");
+        case "scattered clouds":
+            return _("Scattered clouds");
+        case "broken clouds":
+            return _("Broken clouds");
+        case "overcast clouds":
+            return _("Overcast clouds");
+        default:
+            logger_Logger.Error("Unknown weather condition description: " + description);
+            return description;
+    }
+}
 function OWMIconToBuiltInIcons(icon) {
     switch (icon) {
         case "10d":
@@ -11406,8 +11501,8 @@ function OWMIconToCustomIcon(icon) {
 
 
 
-function OWMOneCallToWeatherData(json) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+function OWMOneCallToWeatherData(json, conditionsTranslated) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
     const weather = {
         coord: {
             lat: json.lat,
@@ -11429,10 +11524,10 @@ function OWMOneCallToWeatherData(json) {
         humidity: json.current.humidity,
         dewPoint: json.current.dew_point,
         condition: {
-            main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
-            description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
-            icons: OWMIconToBuiltInIcons((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
-            customIcon: OWMIconToCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
+            main: conditionsTranslated ? (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main : OWMMainToTranslated((_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.main),
+            description: conditionsTranslated ? (_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.description : OWMDescToTranslated((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.description),
+            icons: OWMIconToBuiltInIcons((_q = (_p = (_o = json === null || json === void 0 ? void 0 : json.current) === null || _o === void 0 ? void 0 : _o.weather) === null || _p === void 0 ? void 0 : _p[0]) === null || _q === void 0 ? void 0 : _q.icon),
+            customIcon: OWMIconToCustomIcon((_t = (_s = (_r = json === null || json === void 0 ? void 0 : json.current) === null || _r === void 0 ? void 0 : _r.weather) === null || _s === void 0 ? void 0 : _s[0]) === null || _t === void 0 ? void 0 : _t.icon)
         },
         extra_field: {
             name: _("Feels Like"),
@@ -11466,8 +11561,8 @@ function OWMOneCallToWeatherData(json) {
             temp_min: day.temp.min,
             temp_max: day.temp.max,
             condition: {
-                main: day.weather[0].main,
-                description: day.weather[0].description,
+                main: conditionsTranslated ? day.weather[0].main : OWMMainToTranslated(day.weather[0].main),
+                description: conditionsTranslated ? day.weather[0].description : OWMDescToTranslated(day.weather[0].description),
                 icons: OWMIconToBuiltInIcons(day.weather[0].icon),
                 customIcon: OWMIconToCustomIcon(day.weather[0].icon)
             },
@@ -11481,8 +11576,8 @@ function OWMOneCallToWeatherData(json) {
             date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
             temp: hour.temp,
             condition: {
-                main: hour.weather[0].main,
-                description: hour.weather[0].description,
+                main: conditionsTranslated ? hour.weather[0].main : OWMMainToTranslated(hour.weather[0].main),
+                description: conditionsTranslated ? hour.weather[0].description : OWMDescToTranslated(hour.weather[0].description),
                 icons: OWMIconToBuiltInIcons(hour.weather[0].icon),
                 customIcon: OWMIconToCustomIcon(hour.weather[0].icon)
             },
@@ -11505,7 +11600,7 @@ function OWMOneCallToWeatherData(json) {
     }
     weather.hourlyForecasts = hourly;
     const alerts = [];
-    for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
+    for (const alert of (_u = json.alerts) !== null && _u !== void 0 ? _u : []) {
         alerts.push({
             sender_name: alert.sender_name,
             level: "unknown",
@@ -11594,7 +11689,7 @@ class OpenWeatherMapOneCall extends BaseProvider {
         if (!json)
             return null;
         json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
-        return OWMOneCallToWeatherData(json);
+        return OWMOneCallToWeatherData(json, !!params.lang);
     }
     ;
     ConstructParams(loc, key) {
@@ -12390,10 +12485,10 @@ class Weatherbit extends BaseProvider {
             'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
             'sv', 'tr', 'uk', 'zh', 'zh-tw'
         ];
-        this.current_url = "https://api.weatherbit.io/v2.0/current?";
-        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
-        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts?";
+        this.current_url = "https://api.weatherbit.io/v2.0/current";
+        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily";
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly";
+        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts";
         this.hourlyAccess = true;
         this.ParseAlerts = (json) => {
             const alerts = [];
@@ -12423,7 +12518,7 @@ class Weatherbit extends BaseProvider {
             }
             return alerts;
         };
-        this.ParseCurrent = (payload) => {
+        this.ParseCurrent = (payload, translated) => {
             const json = payload.data[0];
             const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
             if (hourDiff != 0)
@@ -12451,8 +12546,8 @@ class Weatherbit extends BaseProvider {
                     humidity: json.rh,
                     dewPoint: json.dewpt,
                     condition: {
-                        main: json.weather.description,
-                        description: json.weather.description,
+                        main: translated ? json.weather.description : this.CodeToMain(json.weather.code),
+                        description: translated ? json.weather.description : this.CodeToDescription(json.weather.code),
                         icons: this.ResolveIcon(json.weather.icon),
                         customIcon: this.ResolveCustomIcon(json.weather.icon)
                     },
@@ -12472,7 +12567,7 @@ class Weatherbit extends BaseProvider {
                 return null;
             }
         };
-        this.ParseForecast = (json) => {
+        this.ParseForecast = (json, translated) => {
             const forecasts = [];
             try {
                 for (const day of json.data) {
@@ -12481,8 +12576,8 @@ class Weatherbit extends BaseProvider {
                         temp_min: day.min_temp,
                         temp_max: day.max_temp,
                         condition: {
-                            main: day.weather.description,
-                            description: day.weather.description,
+                            main: translated ? day.weather.description : this.CodeToMain(day.weather.code),
+                            description: translated ? day.weather.description : this.CodeToDescription(day.weather.code),
                             icons: this.ResolveIcon(day.weather.icon),
                             customIcon: this.ResolveCustomIcon(day.weather.icon)
                         },
@@ -12498,7 +12593,7 @@ class Weatherbit extends BaseProvider {
                 return null;
             }
         };
-        this.ParseHourlyForecast = (json) => {
+        this.ParseHourlyForecast = (json, translated) => {
             const forecasts = [];
             try {
                 for (const hour of json.data) {
@@ -12506,8 +12601,8 @@ class Weatherbit extends BaseProvider {
                         date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
                         temp: hour.temp,
                         condition: {
-                            main: hour.weather.description,
-                            description: hour.weather.description,
+                            main: translated ? hour.weather.description : this.CodeToMain(hour.weather.code),
+                            description: translated ? hour.weather.description : this.CodeToDescription(hour.weather.code),
                             icons: this.ResolveIcon(hour.weather.icon),
                             customIcon: this.ResolveCustomIcon(hour.weather.icon)
                         },
@@ -12559,24 +12654,26 @@ class Weatherbit extends BaseProvider {
     }
     ;
     async GetData(baseUrl, loc, ParseFunction, cancellable) {
-        const query = this.ConstructQuery(baseUrl, loc);
+        const query = this.ConstructQuery(loc);
         if (query == null)
             return null;
         const json = await HttpLib.Instance.LoadJsonSimple({
-            url: query,
+            url: baseUrl,
+            params: query,
             cancellable,
             HandleError: (e) => this.HandleError(e)
         });
         if (json == null)
             return null;
-        return ParseFunction(json);
+        return ParseFunction(json, !!query.lang);
     }
     async GetHourlyData(baseUrl, loc, cancellable) {
-        const query = this.ConstructQuery(baseUrl, loc);
+        const query = this.ConstructQuery(loc);
         if (query == null)
             return null;
         const json = await HttpLib.Instance.LoadJsonSimple({
-            url: query,
+            url: baseUrl,
+            params: query,
             cancellable,
             HandleError: (e) => this.HandleHourlyError(e)
         });
@@ -12585,7 +12682,7 @@ class Weatherbit extends BaseProvider {
         if ("error" in json) {
             return null;
         }
-        return this.ParseHourlyForecast(json);
+        return this.ParseHourlyForecast(json, !!query.lang);
     }
     ;
     TimeToDate(time, hourDiff, tz) {
@@ -12625,13 +12722,18 @@ class Weatherbit extends BaseProvider {
         }
         return lang;
     }
-    ConstructQuery(query, loc) {
-        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+    ConstructQuery(loc) {
+        const result = {
+            key: this.app.config.ApiKey,
+            lat: loc.lat,
+            lon: loc.lon,
+            units: "S"
+        };
         const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-            query = query + "&lang=" + lang;
+            result.lang = lang;
         }
-        return query;
+        return result;
     }
     ;
     HandleError(message) {
@@ -12654,6 +12756,146 @@ class Weatherbit extends BaseProvider {
             return false;
         }
         return true;
+    }
+    CodeToMain(code) {
+        switch (code) {
+            case 200:
+            case 201:
+            case 202:
+            case 230:
+            case 231:
+            case 232:
+            case 233:
+                return _("Thunderstorm");
+            case 300:
+            case 301:
+            case 302:
+                return _("Drizzle");
+            case 500:
+            case 501:
+            case 502:
+            case 511:
+            case 520:
+            case 521:
+            case 522:
+                return _("Rain");
+            case 600:
+            case 601:
+            case 602:
+            case 610:
+            case 621:
+            case 622:
+            case 623:
+                return _("Snow");
+            case 611:
+            case 612:
+                return _("Sleet");
+            case 700:
+                return _("Mist");
+            case 711:
+                return _("Smoke");
+            case 721:
+                return _("Haze");
+            case 731:
+                return _("Dust");
+            case 741:
+            case 751:
+                return _("Fog");
+            case 800:
+                return _("Clear");
+            case 801:
+                return _("Few clouds");
+            case 802:
+                return _("Scattered clouds");
+            case 803:
+                return _("Broken clouds");
+            case 804:
+                return _("Overcast");
+            case 900:
+            default:
+                return _("Unknown");
+        }
+    }
+    CodeToDescription(code) {
+        switch (code) {
+            case 200:
+                return _("Thunderstorm with light rain");
+            case 201:
+                return _("Thunderstorm with rain");
+            case 202:
+                return _("Thunderstorm with heavy rain");
+            case 230:
+                return _("Thunderstorm with light drizzle");
+            case 231:
+                return _("Thunderstorm with drizzle");
+            case 232:
+                return _("Thunderstorm with heavy drizzle");
+            case 233:
+                return _("Thunderstorm");
+            case 300:
+                return _("Light drizzle");
+            case 301:
+                return _("Drizzle");
+            case 302:
+                return _("Heavy drizzle");
+            case 500:
+                return _("Light rain");
+            case 501:
+                return _("Moderate rain");
+            case 502:
+                return _("Heavy rain");
+            case 511:
+                return _("Freezing rain");
+            case 520:
+                return _("Light shower rain");
+            case 521:
+                return _("Shower rain");
+            case 522:
+                return _("Heavy shower rain");
+            case 600:
+                return _("Light snow");
+            case 601:
+                return _("Snow");
+            case 602:
+                return _("Heavy snow");
+            case 610:
+                return _("Mix snow/rain");
+            case 621:
+                return _("Snow shower");
+            case 622:
+                return _("Heavy snow shower");
+            case 623:
+                return _("Flurries");
+            case 611:
+                return _("Sleet");
+            case 612:
+                return _("Heavy sleet");
+            case 700:
+                return _("Mist");
+            case 711:
+                return _("Smoke");
+            case 721:
+                return _("Haze");
+            case 731:
+                return _("Dust");
+            case 741:
+                return _("Fog");
+            case 751:
+                return _("Freezing fog");
+            case 800:
+                return _("Clear");
+            case 801:
+                return _("Few clouds");
+            case 802:
+                return _("Scattered clouds");
+            case 803:
+                return _("Broken clouds");
+            case 804:
+                return _("Overcast");
+            case 900:
+            default:
+                return _("Unknown");
+        }
     }
     ResolveIcon(icon) {
         switch (icon) {
@@ -14694,8 +14936,7 @@ class AccuWeather extends BaseProvider {
     async GetWeather(loc, cancellable) {
         var _a, _b;
         const locationID = `${loc.lat},${loc.lon}`;
-        const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
-        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        const locale = this.app.config._translateCondition ? (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us" : "en-us";
         let location;
         if (this.locationCache[locationID] != null) {
             location = this.locationCache[locationID];
@@ -14704,7 +14945,7 @@ class AccuWeather extends BaseProvider {
             location = await HttpLib.Instance.LoadJsonSimple({
                 url: this.locSearchUrl,
                 cancellable,
-                params: { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey },
+                params: { q: locationID, details: true, language: locale, apikey: this.app.config.ApiKey },
                 HandleError: this.HandleErrors
             });
         }
@@ -16048,7 +16289,35 @@ class WeatherUnderground extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/types/common.ts
+
+
+function PirateWeatherSummaryToTranslated(summary) {
+    switch (summary) {
+        case "Clear":
+            return _("Clear");
+        case "Partly Cloudy":
+            return _("Partly Cloudy");
+        case "Rain":
+            return _("Rain");
+        case "Cloudy":
+            return _("Cloudy");
+        case "Snow":
+            return _("Snow");
+        case "Wind":
+            return _("Wind");
+        case "Fog":
+            return _("Fog");
+        case "Sleet":
+            return _("Sleet");
+        default:
+            logger_Logger.Error(`Unknown PirateWeatherSummary: ${summary}`);
+            return summary;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
+
 
 
 
@@ -16085,7 +16354,7 @@ class PirateWeather extends BaseProvider {
                     userError: true,
                     detail: "no key",
                     service: "pirate_weather",
-                    message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+                    message: _("Please Make sure you\nentered the API key that you have from Pirate Weather")
                 });
                 return false;
             }
@@ -16134,8 +16403,8 @@ class PirateWeather extends BaseProvider {
                 humidity: json.currently.humidity * 100,
                 dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
                 condition: {
-                    main: json.currently.summary,
-                    description: json.currently.summary,
+                    main: PirateWeatherSummaryToTranslated(json.currently.summary),
+                    description: PirateWeatherSummaryToTranslated(json.currently.summary),
                     icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
@@ -16153,8 +16422,8 @@ class PirateWeather extends BaseProvider {
                     temp_min: this.ToKelvin(day.temperatureLow, unit),
                     temp_max: this.ToKelvin(day.temperatureHigh, unit),
                     condition: {
-                        main: day.summary,
-                        description: day.summary,
+                        main: PirateWeatherSummaryToTranslated(day.summary),
+                        description: PirateWeatherSummaryToTranslated(day.summary),
                         icons: this.ResolveIcon(day.icon),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
@@ -16167,8 +16436,8 @@ class PirateWeather extends BaseProvider {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature, unit),
                     condition: {
-                        main: hour.summary,
-                        description: hour.summary,
+                        main: PirateWeatherSummaryToTranslated(hour.summary),
+                        description: PirateWeatherSummaryToTranslated(hour.summary),
                         icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
@@ -16494,8 +16763,8 @@ function OpenMeteoWeatherCodeToCondition(code, isDay) {
             return {
                 icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
                 customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                main: _("Mainly clear"),
-                description: _("Mainly clear")
+                main: _("Few clouds"),
+                description: _("Few clouds")
             };
         case 2:
             return {
@@ -16696,7 +16965,7 @@ function OpenMeteoCurrentWeatherToData(data) {
             speed: KPHtoMPS(data.wind_speed_10m),
             degree: data.wind_direction_10m,
         },
-        dewPoint: null,
+        dewPoint: CelsiusToKelvin(data.dewpoint_2m),
         extra_field: {
             name: _("Feels like"),
             value: CelsiusToKelvin(data.apparent_temperature),
@@ -16788,7 +17057,7 @@ class OpenMeteo extends BaseProvider {
             params: {
                 latitude: loc.lat,
                 longitude: loc.lon,
-                current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
+                current: "temperature_2m,dewpoint_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
                 hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_10m,wind_direction_10m,is_day",
                 daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset",
                 timezone: "auto",
@@ -16805,8 +17074,8 @@ class OpenMeteo extends BaseProvider {
 ;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/forecast_daily.ts
 
 
-function OWMDailyForecastsToData(forecast, timezone = "local") {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
+function OWMDailyForecastsToData(forecast, conditionsTranslated, timezone = "local") {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
     const result = [];
     for (const day of forecast) {
         const data = {
@@ -16814,10 +17083,10 @@ function OWMDailyForecastsToData(forecast, timezone = "local") {
             temp_max: day.temp.max,
             temp_min: day.temp.min,
             condition: {
-                main: (_b = (_a = day.weather) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.main,
-                description: (_d = (_c = day.weather) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.description,
-                icons: OWMIconToBuiltInIcons((_f = (_e = day.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.icon),
-                customIcon: OWMIconToCustomIcon((_h = (_g = day.weather) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.icon)
+                main: conditionsTranslated ? (_b = (_a = day.weather) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.main : OWMMainToTranslated((_d = (_c = day.weather) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.main),
+                description: conditionsTranslated ? (_f = (_e = day.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description : OWMDescToTranslated((_h = (_g = day.weather) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.description),
+                icons: OWMIconToBuiltInIcons((_k = (_j = day.weather) === null || _j === void 0 ? void 0 : _j[0]) === null || _k === void 0 ? void 0 : _k.icon),
+                customIcon: OWMIconToCustomIcon((_m = (_l = day.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
             }
         };
         result.push(data);
@@ -16829,8 +17098,8 @@ function OWMDailyForecastsToData(forecast, timezone = "local") {
 
 
 
-function OWMWeatherToWeatherData(weather, timezone = "local") {
-    var _a, _b, _c, _d;
+function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone = "local") {
+    var _a, _b, _c, _d, _e, _f;
     return {
         date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
         sunrise: DateTime.fromSeconds(weather.sys.sunrise, { zone: timezone }),
@@ -16842,10 +17111,10 @@ function OWMWeatherToWeatherData(weather, timezone = "local") {
             url: `https://openweathermap.org/city/${weather.id}`
         },
         condition: {
-            main: (_a = weather.weather) === null || _a === void 0 ? void 0 : _a[0].main,
-            description: (_b = weather.weather) === null || _b === void 0 ? void 0 : _b[0].description,
-            icons: OWMIconToBuiltInIcons((_c = weather.weather) === null || _c === void 0 ? void 0 : _c[0].icon),
-            customIcon: OWMIconToCustomIcon((_d = weather.weather) === null || _d === void 0 ? void 0 : _d[0].icon)
+            main: conditionsTranslated ? (_a = weather.weather) === null || _a === void 0 ? void 0 : _a[0].main : OWMMainToTranslated((_b = weather.weather) === null || _b === void 0 ? void 0 : _b[0].main),
+            description: conditionsTranslated ? (_c = weather.weather) === null || _c === void 0 ? void 0 : _c[0].description : OWMDescToTranslated((_d = weather.weather) === null || _d === void 0 ? void 0 : _d[0].description),
+            icons: OWMIconToBuiltInIcons((_e = weather.weather) === null || _e === void 0 ? void 0 : _e[0].icon),
+            customIcon: OWMIconToCustomIcon((_f = weather.weather) === null || _f === void 0 ? void 0 : _f[0].icon)
         },
         wind: {
             speed: weather.wind.speed,
@@ -16875,7 +17144,7 @@ class OpenWeatherMapOpen extends BaseProvider {
         super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap";
+        this.name = "OpenWeatherMap_Open";
         this.maxForecastSupport = 7;
         this.maxHourlyForecastSupport = 0;
         this.website = "https://openweathermap.org/";
@@ -16884,20 +17153,21 @@ class OpenWeatherMapOpen extends BaseProvider {
         this.supportHourlyPrecipVolume = false;
     }
     async GetWeather(loc, cancellable, config) {
+        const params = this.ConstructParams(loc);
         const current = await HttpLib.Instance.LoadJsonSimple({
             url: "https://api.openweathermap.org/data/2.5/weather",
             cancellable,
-            params: this.ConstructParams(loc)
+            params: params
         });
         const daily = await HttpLib.Instance.LoadJsonSimple({
             url: "https://api.openweathermap.org/data/2.5/forecast/daily",
             cancellable,
-            params: this.ConstructParams(loc)
+            params: params
         });
         if (!current || !daily) {
             return null;
         }
-        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, config.Timezone)), { forecasts: OWMDailyForecastsToData(daily.list, config.Timezone) });
+        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, !!params.lang, config.Timezone)), { forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, config.Timezone) });
     }
     ConstructParams(loc) {
         const params = {
@@ -16947,7 +17217,7 @@ const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
-    "OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+    "OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
     "OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
     "MetNorway": (app) => new MetNorway(app),
     "Weatherbit": (app) => new Weatherbit(app),
@@ -17604,6 +17874,10 @@ class WeatherLoop {
     async Start() {
         logger_Logger.Info("Main Loop started.");
         while (true) {
+            if (this.IsStray()) {
+                logger_Logger.Info("Applet removed, stopping loop.");
+                return;
+            }
             await this.DoCheck({ immediate: false });
             await delay(this.LoopInterval());
         }
@@ -19607,17 +19881,17 @@ The contents of the file saved from the applet help page goes here
             weatherInfo.coord.lon = locationData.lon;
         if (weatherInfo.hourlyForecasts == null)
             weatherInfo.hourlyForecasts = [];
-        weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
-        weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
+        weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main);
+        weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description);
         for (const forecast of weatherInfo.forecasts) {
             const condition = forecast.condition;
-            condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-            condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+            condition.main = ProcessCondition(condition.main);
+            condition.description = ProcessCondition(condition.description);
         }
         for (const forecast of weatherInfo.hourlyForecasts) {
             const condition = forecast.condition;
-            condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-            condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+            condition.main = ProcessCondition(condition.main);
+            condition.description = ProcessCondition(condition.description);
         }
         return weatherInfo;
     }

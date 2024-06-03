@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 import type { OWMWeatherCondition } from "./common";
-import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
+import { OWMDescToTranslated, OWMIconToBuiltInIcons, OWMIconToCustomIcon, OWMMainToTranslated } from "./condition";
 import { _ } from "../../../utils";
 import type { AlertData, ForecastData, HourlyForecastData, ImmediatePrecipitation, WeatherData } from "../../../weather-data";
 
-export function OWMOneCallToWeatherData(json: OWMOneCallPayload): WeatherData {
+export function OWMOneCallToWeatherData(json: OWMOneCallPayload, conditionsTranslated: boolean): WeatherData {
 	const weather: WeatherData = {
 		coord: {
 			lat: json.lat,
@@ -26,8 +26,8 @@ export function OWMOneCallToWeatherData(json: OWMOneCallPayload): WeatherData {
 		humidity: json.current.humidity,
 		dewPoint: json.current.dew_point,
 		condition: {
-			main: json?.current?.weather?.[0]?.main,
-			description: json?.current?.weather?.[0]?.description,
+			main: conditionsTranslated ? json?.current?.weather?.[0]?.main : OWMMainToTranslated(json?.current?.weather?.[0]?.main),
+			description: conditionsTranslated ? json?.current?.weather?.[0]?.description : OWMDescToTranslated(json?.current?.weather?.[0]?.description),
 			icons: OWMIconToBuiltInIcons(json?.current?.weather?.[0]?.icon),
 			customIcon: OWMIconToCustomIcon(json?.current?.weather?.[0]?.icon)
 		},
@@ -66,8 +66,8 @@ export function OWMOneCallToWeatherData(json: OWMOneCallPayload): WeatherData {
 			temp_min: day.temp.min,
 			temp_max: day.temp.max,
 			condition: {
-				main: day.weather[0].main,
-				description: day.weather[0].description,
+				main: conditionsTranslated ? day.weather[0].main : OWMMainToTranslated(day.weather[0].main),
+				description: conditionsTranslated ? day.weather[0].description : OWMDescToTranslated(day.weather[0].description),
 				icons: OWMIconToBuiltInIcons(day.weather[0].icon),
 				customIcon: OWMIconToCustomIcon(day.weather[0].icon)
 			},
@@ -82,8 +82,8 @@ export function OWMOneCallToWeatherData(json: OWMOneCallPayload): WeatherData {
 			date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
 			temp: hour.temp,
 			condition: {
-				main: hour.weather[0].main,
-				description: hour.weather[0].description,
+				main: conditionsTranslated ? hour.weather[0].main : OWMMainToTranslated(hour.weather[0].main),
+				description: conditionsTranslated ? hour.weather[0].description : OWMDescToTranslated(hour.weather[0].description),
 				icons: OWMIconToBuiltInIcons(hour.weather[0].icon),
 				customIcon: OWMIconToCustomIcon(hour.weather[0].icon)
 			},
