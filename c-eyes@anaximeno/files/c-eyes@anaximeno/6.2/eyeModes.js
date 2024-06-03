@@ -32,6 +32,20 @@ class EyeMode {
     drawEye(area, options) {
         // Implemented by sub-classes
     };
+
+    topAndLatSizes(area_width, area_height, options) {
+        let top_size, lat_size;
+
+        if(options.is_vertical) {
+            top_size = area_width;
+            lat_size = area_height;
+        } else {
+            top_size = area_height;
+            lat_size = area_width;
+        }
+
+        return [top_size, lat_size];
+    }
 }
 
 class EyelidMode extends EyeMode {
@@ -49,7 +63,10 @@ class EyelidMode extends EyeMode {
         const mouse_ang = Math.atan2(mouse_y, mouse_x);
         let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
 
-        const eye_rad = (Math.min(area_height, area_width) - options.padding) / 2;
+        let [top_size, lat_size] = this.topAndLatSizes(area_width, area_height, options);
+        let eye_rad = (top_size - options.padding) / 2;
+        if (2 * eye_rad > lat_size) eye_rad = lat_size / 2;
+
         const iris_rad = eye_rad * 0.5;
         const pupil_rad = iris_rad * 0.4;
 
@@ -147,7 +164,10 @@ class BulbMode extends EyeMode {
         let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
         const mouse_ang = Math.atan2(mouse_y, mouse_x);
 
-        const eye_rad = (Math.min(area_height, area_width) - options.padding) / 2.3;
+        let [top_size, lat_size] = this.topAndLatSizes(area_width, area_height, options);
+        let eye_rad = (top_size - options.padding) / 2.3;
+        if (2 * eye_rad > lat_size) eye_rad = lat_size / 2;
+
         const iris_rad = eye_rad * 0.6;
         const pupil_rad = iris_rad * 0.4;
 

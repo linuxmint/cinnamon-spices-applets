@@ -612,10 +612,11 @@ class SpicesUpdate extends IconApplet {
             //~ logDebug("this.netMonitors.length: "+this.netMonitors.length);
             this.applet_running = true;
             let id = setTimeout(() => {
-                this._on_refresh_pressed();
+                this.http = new HttpLib();
+                //~ this._on_refresh_pressed();
                 clearTimeout(id);
                 id = null
-            }, 10000);
+            }, 30000);
         } else {
             //~ logDebug("The network connectivity has been LOST.");
             //~ logDebug("this.netMonitors.length: "+this.netMonitors.length);

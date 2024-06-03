@@ -12,14 +12,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-30 09:33+0100\n"
-"PO-Revision-Date: 2023-03-18 21:50+0100\n"
+"PO-Revision-Date: 2024-06-02 12:02+0200\n"
 "Last-Translator: bigjr slade <bigjrslade@gmail.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:19289
@@ -294,7 +294,7 @@ msgid ""
 "entered the API key that you have from Climacell"
 msgstr ""
 "Bitte stellen Sie sicher, dass Sie den API-Schlüssel\n"
-"den Sie von Climacell haben eingeben."
+"den Sie von Climacell haben eingeben"
 
 #: 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
 #: 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
@@ -1098,11 +1098,11 @@ msgstr "Aufgelockert bewölkt"
 
 #: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:11316
 msgid "Overcast clouds"
-msgstr "Wolenverhangen"
+msgstr "Wolkenverhangen"
 
 #: 3.0/us_weather.js:120
 msgid "Could not get forecast for your area"
-msgstr "Konnte keine Vorhersage für ihre Gegen abrufen"
+msgstr "Konnte keine Vorhersage für ihre Gegend abrufen"
 
 #: 3.0/us_weather.js:231 3.8/weather-applet.js:13442
 msgid "Location is outside US, please use a different provider."
@@ -1220,23 +1220,23 @@ msgstr "Leichter Wind"
 
 #: 3.0/utils.js:307 3.8/weather-applet.js:9526
 msgid "Light breeze"
-msgstr "Leichte Brise"
+msgstr "Leichte Briese"
 
 #: 3.0/utils.js:310 3.8/weather-applet.js:9529
 msgid "Gentle breeze"
-msgstr "Sanfte Brise"
+msgstr "Sanfte Briese"
 
 #: 3.0/utils.js:313 3.8/weather-applet.js:9532
 msgid "Moderate breeze"
-msgstr "Mäßige Brise"
+msgstr "Mäßige Briese"
 
 #: 3.0/utils.js:316 3.8/weather-applet.js:9535
 msgid "Fresh breeze"
-msgstr "Frische Brise"
+msgstr "Frische Briese"
 
 #: 3.0/utils.js:319 3.8/weather-applet.js:9538
 msgid "Strong breeze"
-msgstr "Starke Brise"
+msgstr "Starke Briese"
 
 #: 3.0/utils.js:322 3.8/weather-applet.js:9541
 msgid "Near gale"
@@ -1360,7 +1360,7 @@ msgstr "Gemischter Schnee und Schneeregen"
 
 #: 3.0/yahoo.js:444 3.8/weather-applet.js:15733 3.8/weather-applet.js:15734
 msgid "Freezing Drizzle"
-msgstr "Frostnieselregen"
+msgstr "Gefrierender Regen"
 
 #: 3.0/yahoo.js:446 3.8/weather-applet.js:15747 3.8/weather-applet.js:15748
 msgid "Freezing Rain"
@@ -1460,12 +1460,16 @@ msgid ""
 "Could not retrieve logs, log file was not found under path\n"
 " {logFilePath}"
 msgstr ""
+"Logs oder Log-Datei wurde nicht gefunden unter Pfad \n"
+" {logFilePath}"
 
 #: 3.8/weather-applet.js:772
 msgid ""
 "Could not get contents of log file under path\n"
 " {logFilePath}"
 msgstr ""
+"Inhalt der Protokolldatei unter dem Pfad\n"
+" {logFilePath} nicht gefunden."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10580
@@ -1477,6 +1481,8 @@ msgid ""
 "MET Office UK only covers the UK, please make sure your location is in the "
 "country"
 msgstr ""
+"MET Office UK deckt nur das Vereinigte Königreich ab, bitte stellen Sie "
+"sicher, dass Ihr Standort in diesem Land liegt."
 
 #: 3.8/weather-applet.js:10773
 msgid "Data was not found for location"
@@ -1536,13 +1542,13 @@ msgstr "MET Norway"
 # is a weather plattform
 #: 3.8/weather-applet.js:12379
 msgid "WeatherBit"
-msgstr "weatherbit.io"
+msgstr "WeatherBit"
 
 # https://www.tomorrow.io/
 # is a weather plattform
 #: 3.8/weather-applet.js:12849
 msgid "Tomorrow.io"
-msgstr "tomorrow.io"
+msgstr "Tomorrow.io"
 
 #: 3.8/weather-applet.js:13058
 msgid "Light wind"
@@ -1559,7 +1565,7 @@ msgstr "US National Weather (nur US)"
 # https://www.visualcrossing.com/
 #: 3.8/weather-applet.js:13997
 msgid "Visual Crossing"
-msgstr "visualcrossing.com"
+msgstr "Visual Crossing"
 
 #: 3.8/weather-applet.js:14191
 msgid "Blowing or drifting snow"
@@ -1702,11 +1708,11 @@ msgstr "AccuWeather"
 
 #: 3.8/weather-applet.js:15129
 msgid "Deutscher Wetterdienst"
-msgstr ""
+msgstr "Deutscher Wetterdienst"
 
 #: 3.8/weather-applet.js:15142
 msgid "Please select a different provider or location"
-msgstr ""
+msgstr "Bitte wählen Sie einen anderen Anbieter oder Standort"
 
 # https://www.wunderground.com/
 # is a weatherplattform
@@ -1716,11 +1722,11 @@ msgstr "Weather Underground"
 
 #: 3.8/weather-applet.js:15661
 msgid "The API key you provided is invalid."
-msgstr ""
+msgstr "Der von Ihnen angegebene API-Schlüssel ist ungültig."
 
 #: 3.8/weather-applet.js:15668
 msgid "The location you provided was not found."
-msgstr "Keine Daten für dein Standort"
+msgstr "Keine Daten für dein Standort."
 
 #: 3.8/weather-applet.js:15704 3.8/weather-applet.js:15705
 msgid "Strong Storm"
@@ -1740,86 +1746,76 @@ msgstr "Schneeschauer"
 
 #: 3.8/weather-applet.js:15838 3.8/weather-applet.js:15839
 msgid "Breezy"
-msgstr ""
+msgstr "Windig"
 
 #: 3.8/weather-applet.js:15852 3.8/weather-applet.js:15853
 msgid "Frigid"
-msgstr ""
+msgstr "Kühl"
 
 #: 3.8/weather-applet.js:15908 3.8/weather-applet.js:15909
 msgid "Mostly Clear"
 msgstr "Überwegend klar"
 
 #: 3.8/weather-applet.js:16061
-#, fuzzy
 msgid "Pirate Weather"
 msgstr "US National Weather (nur US)"
 
 #: 3.8/weather-applet.js:16455
-#, fuzzy
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
 msgstr ""
-"Location Service antwortede mit Fehler, bitte sehen Sie in Looking Glass Logs"
+"Location Service antwort mit Fehler, bitte sehen Sie in Looking Glass Logs"
 
 #: 3.8/weather-applet.js:16497 3.8/weather-applet.js:16498
-#, fuzzy
 msgid "Mainly clear"
 msgstr "Weitgehend klar"
 
 #: 3.8/weather-applet.js:16618
-#, fuzzy
 msgid "Snow grains"
-msgstr "Schneeregen"
+msgstr "Schneegriesel"
 
 #: 3.8/weather-applet.js:16625
-#, fuzzy
 msgid "Light showers"
-msgstr "Leichter Schneeschauer"
+msgstr "Leichte Schauer"
 
 #: 3.8/weather-applet.js:16639
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Starker Schneeschauer"
+msgstr "Starker Schauer"
 
 #: 3.8/weather-applet.js:16667
-#, fuzzy
 msgid "Thunderstorm with slight hail"
 msgstr "Gewitter mit leichtem Regen"
 
 #: 3.8/weather-applet.js:16674
-#, fuzzy
 msgid "Thunderstorm with hail"
 msgstr "Gewitter mit Regen"
 
 #: 3.8/weather-applet.js:16701 3.8/weather-applet.js:16860
-#, fuzzy
 msgid "Feels like"
 msgstr "Fühlt sich an wie"
 
 #: 3.8/weather-applet.js:16769
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17274
 msgid ""
 "Could not retrieve config, file was not found under paths\n"
 " {configFilePath}"
-msgstr ""
+msgstr "Konnte Konfiguration nicht abrufen, Datei  nicht im Pfad gefunden"
 
 #: 3.8/weather-applet.js:17281
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
-msgstr ""
+msgstr "Konnte den Inhalt der Konfigurationsdatei im Pfad nicht abrufen"
 
 #: 3.8/weather-applet.js:17557
-#, fuzzy
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
 "Stellen sie sicher, dass ein Ort eingegeben wurde oder verwenden sie die "
-"Ortserkennung"
+"Ortserkennung."
 
 #: 3.8/weather-applet.js:17575
 msgid "This provider requires an API key to operate"
@@ -1843,7 +1839,7 @@ msgstr "Niederschlag wird innerhalb von {precipStart} Minuten beginnen"
 
 #: 3.8/weather-applet.js:18270
 msgid "Forecast parsing failed, see logs for more details."
-msgstr ""
+msgstr "Parsen der Vorhersage ist fehlgeschlagen."
 
 #: 3.8/weather-applet.js:18833 3.8/weather-applet.js:19441
 msgid "As of {lastUpdatedTime}"
@@ -1855,79 +1851,78 @@ msgstr "{distance}{distanceUnit} von Ihnen"
 
 #: 3.8/weather-applet.js:18843
 msgid "Station Name: {stationName}"
-msgstr ""
+msgstr "Station Name: {stationName}"
 
 #: 3.8/weather-applet.js:18846
 msgid "Area: {stationArea}"
-msgstr ""
+msgstr "Gebiet: {stationArea}"
 
 #: 3.8/weather-applet.js:18856
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} Wetter Alarme"
 
 #: 3.8/weather-applet.js:19251 3.8/weather-applet.js:19261
 #: 3.8/weather-applet.js:19268
 msgid "Error Saving Debug Information"
-msgstr ""
+msgstr "Fehler beim Speichern der Debug-Informationen"
 
 #: 3.8/weather-applet.js:19268
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
 msgstr "Konnte keine Wetterinformationen abrufen"
 
 #: 3.8/weather-applet.js:19277
 msgid "Debug Information saved successfully"
-msgstr ""
+msgstr "Debug-Informationen erfolgreich gespeichert"
 
 #: 3.8/weather-applet.js:19277
 msgid "Saved to {filePath}"
-msgstr ""
+msgstr "Gespeichert in {filePath}"
 
 #: 3.8/weather-applet.js:19481
 msgid "No Script Provided"
-msgstr ""
+msgstr "Kein Skript zur Verfügung gestellt"
 
 #: 3.8/weather-applet.js:19481
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Sie müssen zuerst ein Skript hinzufügen."
 
 #: 3.8/weather-applet.js:19485
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US National Weather (nur US)"
+msgstr "Keine Wetterdaten"
 
 #: 3.8/weather-applet.js:19485
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Keine Wetterdaten zur Ausführung des Skripts"
 
 #: 3.8/weather-applet.js:19493
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Skript erfolgreich ausgeführt"
 
 #: 3.8/weather-applet.js:19493
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Ihr Skript wurde erfolgreich ausgeführt."
 
 #: 3.8/weather-applet.js:19496
 msgid "Error Running Script"
-msgstr ""
+msgstr "Fehler beim Ausführen des Skripts"
 
 #: 3.8/weather-applet.js:19496
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"Das Skript meldet einen Fehler, weitere Informationen finden Sie in den "
+"Protokollen"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Wetter-Applet"
+msgstr "Wetter-Applet Alarme"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
-msgstr ""
+msgstr "In Datei speichern"
 
 #: 3.8/LogSaver.py:29
 msgid "Select a destination"
-msgstr ""
+msgstr "Ziel auswählen"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -1945,7 +1940,7 @@ msgstr "Einstellungen für weather@mockturtl 3.0+"
 #. 3.0->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr "Tastenzuordnung für den Menüaufruf festlegen"
+msgstr "Tastenzuordnung für den Menüaufruf"
 
 #. 3.0->settings-schema.json->descriptions->description
 msgid "Weather service information"
@@ -2316,7 +2311,7 @@ msgstr "Wetterbedingungen"
 #. 3.0->settings-schema.json->translateCondition->description
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Translate conditions"
-msgstr "Wetterbedingunen übersetzen"
+msgstr "Wetterbedingungen übersetzen"
 
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
@@ -2356,7 +2351,7 @@ msgstr "Standort-Einstellungen"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Technik und Automatisierung"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2393,7 +2388,7 @@ msgstr "Einen Fehler melden"
 #. 3.8->settings-schema.json->debug-options->title
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Debug"
-msgstr ""
+msgstr "Debug"
 
 #. 3.8->settings-schema.json->dataService->tooltip
 msgid ""
@@ -2413,7 +2408,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2428,12 +2423,10 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (nur US)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
 msgstr "Weatherbit (Schlüssel erforderlich)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Pirate Weather (key needed)"
 msgstr "Weatherbit (Schlüssel erforderlich)"
 
@@ -2473,6 +2466,8 @@ msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Stimmt der gesuchte \"Ort\" mit einem gespeicherten \"Ort\" überein wird der "
+"gespeicherte Ort verwendet."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2523,7 +2518,6 @@ msgid "Enable minutely precipitation forecast"
 msgstr "Detaillierte Niederschlagsvorhersage aktivieren"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
-#, fuzzy
 msgid ""
 "If you'd like to use this make sure you use your exact coordinates/address "
 "as location to help its accuracy. See Feature map on website on support for "
@@ -2531,21 +2525,23 @@ msgid ""
 msgstr ""
 "Wenn Sie dies verwenden möchten, stellen Sie sicher, dass Sie Ihre genaue\n"
 " Koordinaten / Adresse als Standort verwenden, um die Genauigkeit zu "
-"erhöhen. Derzeit wird nur mit OpenWeatherMap unterstützt.."
+"erhöhen. Derzeit wird nur mit OpenWeatherMap unterstützt"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Wetter Alarme anzeigen"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Die Schaltfläche Alarme wird im Popup-Menü angezeigt, wenn es für Ihren "
+"Standort aktive Alarme gibt."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
-msgstr "Zeige beiden Temperaturen Einheiten an."
+msgstr "Zeige beiden Temperaturen Einheiten an"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
 msgid ""
@@ -2567,16 +2563,20 @@ msgstr "Hinweise im Panel überschreiben"
 msgid ""
 "Has the same behavior and available values as 'Override label on panel'."
 msgstr ""
+"Hat das gleiche Verhalten und Werte wie 'Beschriftung auf dem Panel "
+"überschreiben'."
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr ""
+msgstr "Immer stündliches Wetter anzeigen"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
 "Hide/Show button will be hidden and Hourly weather will be permanently "
 "visible."
 msgstr ""
+"Die Schaltfläche ( Pfeil ) Vorschau Aus-, Einblenden wird ausgeblendet und "
+"das stündliche Wetter permanent angezeigt."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -2621,11 +2621,12 @@ msgstr "Sucheingabe"
 
 #. 3.8->settings-schema.json->displayWindAsText->description
 msgid "Display wind direction as text"
-msgstr ""
+msgstr "Windrichtung als Text anzeigen"
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
 msgstr ""
+"Text N, O, S, W - NO, NW, SO, SW  anstelle der Richtungssymbole anzeigen."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2705,7 +2706,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
-msgstr ""
+msgstr "Log Level"
 
 #. 3.8->settings-schema.json->logLevel->tooltip
 msgid ""
@@ -2713,28 +2714,35 @@ msgid ""
 "request payloads. Changing this will only be effective on future logs. Only "
 "change it you are instructed or you know what you are doing."
 msgstr ""
+"Info ist die normale Protokollierung, Debug ist die Fehlersuche und Verbose "
+"protokolliert auch die Nutzdaten von Netzwerkanfragen. Eine Änderung dieser "
+"Einstellung wirkt sich nur auf zukünftige Protokolle aus. Ändern Sie diese "
+"Einstellung nur, wenn Sie dazu aufgefordert werden oder wenn Sie wissen, was "
+"Sie tun."
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
-msgstr ""
+msgstr "Verbose / Ausführlich"
 
 #. 3.8->settings-schema.json->fileSelect->description
 msgid "Click Save to save debug information to a file"
-msgstr ""
+msgstr "Debug-Informationen in einer Datei zu speichern"
 
 #. 3.8->settings-schema.json->fileSelect->tooltip
 msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
+"Dazu gehören Protokolle für das Applet und die aktuellen Einstellungen, "
+"wobei Ihr API-Schlüssel unkenntlich gemacht wurde."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
-msgstr ""
+msgstr "Ausgewählter Pfad zum Speichern von Protokollen"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Nutzer Name überschreiben"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2743,10 +2751,15 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Wenn das Applet nicht richtig funktioniert und Sie wissen, dass die "
+"Zeichenfolge „User Agent“ das Problem ist, können Sie versuchen, sie zu "
+"überschreiben. Ändern Sie sie nur, wenn Sie wissen, was Sie tun. Dies ist "
+"eine Zeichenfolge, die an den Server gesendet wird, wenn das Applet "
+"versucht, die Wetterdaten abzurufen."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Einen Befehl ausführen, wenn sich die Wetterdaten ändern"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2766,7 +2779,26 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Das Applet wird den von Ihnen angegebenen Befehl jedes Mal ausführen, wenn "
+"die Wetterdaten aktualisiert werden. Der Befehl wird mit den gleichen Werten "
+"im gleichen Format interpoliert, die Sie in den Überschreibungen erhalten "
+"können, zusätzlich erhalten Sie {full_data}, was die vollständigen aktuellen "
+"Wetterdaten sind. Die Interpolation mit einfachen Klammern {xxx} wird nicht "
+"escaped, mit doppelten Klammern {{xxxx}} werden sie in einfache "
+"Anführungszeichen (') eingeschlossen und alle anderen einfachen "
+"Anführungszeichen werden darin escaped. Sie können dies nutzen, um die "
+"Wetterdaten in andere Teile Ihres Systems zu integrieren. Sie können die "
+"vollständige Struktur der Wetterdaten über den Link in der README "
+"nachschlagen.\n"
+"\n"
+"Beispiel: 'notify-send „Das Wetter ist {c} und die Temperatur ist {t}{u}“' "
+"zeigt eine Benachrichtigung mit den aktuellen Wetterbedingungen und der "
+"Temperatur an.\n"
+"\n"
+"Beispiel: 'echo {{full_data}} > /tmp/weather_data' speichert die "
+"vollständigen Wetterdaten in einer Datei in /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
+#, fuzzy
 msgid "Test your command"
-msgstr ""
+msgstr "Testen Sie ihren Befehl"
