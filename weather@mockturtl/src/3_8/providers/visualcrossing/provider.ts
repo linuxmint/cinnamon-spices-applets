@@ -143,9 +143,6 @@ export class VisualCrossing extends BaseProvider {
 							chance: hour.precipprob,
 							volume: hour.precip
 						}
-
-						/*if (item.precipitation.type == "snow")
-						item.precipitation.volume = hour.snow;*/
 					}
 
 					result.push(item);

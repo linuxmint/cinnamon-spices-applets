@@ -18,6 +18,10 @@ export interface OpenMeteoCurrentWeather {
 	 */
 	temperature_2m: number;
 	/**
+	 * °C
+	 */
+	dewpoint_2m: number;
+	/**
 	 * %
 	 */
 	relative_humidity_2m: number;
@@ -89,7 +93,7 @@ export function OpenMeteoCurrentWeatherToData(data: OpenMeteoCurrentWeather): Cu
 			speed: KPHtoMPS(data.wind_speed_10m),
 			degree: data.wind_direction_10m,
 		},
-		dewPoint: null,
+		dewPoint: CelsiusToKelvin(data.dewpoint_2m),
 		extra_field: {
 			name: _("Feels like"),
 			value: CelsiusToKelvin(data.apparent_temperature),

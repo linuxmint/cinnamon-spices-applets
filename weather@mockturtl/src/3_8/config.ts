@@ -56,7 +56,7 @@ export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 
 /** Change settings-schema if you change this */
 export type Services =
-	"OpenWeatherMap" |
+	"OpenWeatherMap_Open" |
 	"MetNorway" |
 	"Weatherbit" |
 	"Tomorrow.io" |
@@ -72,7 +72,7 @@ export type Services =
 	"OpenWeatherMap_OneCall";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+	"OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
 	"OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
 	"MetNorway": (app) => new MetNorway(app),
 	"Weatherbit": (app) => new Weatherbit(app),
@@ -105,6 +105,9 @@ export class Config {
 	public readonly _refreshInterval!: number;
 	public readonly _manualLocation!: boolean;
 	public readonly _dataService!: Services;
+	/**
+	 * Should the __API__ translate the condition
+	 */
 	public readonly _translateCondition!: boolean;
 	public readonly _pressureUnit!: WeatherPressureUnits;
 	public readonly _show24Hours!: boolean;

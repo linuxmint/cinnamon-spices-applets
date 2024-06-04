@@ -115,9 +115,9 @@ export interface Precipitation {
 }
 
 export interface Condition {
-	/** Short description */
+	/** Short description, must already be translated. */
 	main: string,
-	/** Long Description */
+	/** Long Description, must already be translated. */
 	description: string,
 	/** GTK icon name, descending from most fit to least fit.
 	 * needs multiple in case one/some of them are not available

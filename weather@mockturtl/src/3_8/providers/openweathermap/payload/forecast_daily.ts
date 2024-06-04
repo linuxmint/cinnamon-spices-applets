@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import type { OWMWeatherCondition } from "./common";
-import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./condition";
+import { OWMDescToTranslated, OWMIconToBuiltInIcons, OWMIconToCustomIcon, OWMMainToTranslated } from "./condition";
 import type { ForecastData } from "../../../weather-data";
 
 export interface OWMDailyForecastResponse {
@@ -87,7 +87,7 @@ export interface OWMDailyForecast {
 	snow?: number;
 }
 
-export function OWMDailyForecastsToData(forecast: OWMDailyForecast[], timezone: string | undefined = "local"): ForecastData[] {
+export function OWMDailyForecastsToData(forecast: OWMDailyForecast[], conditionsTranslated: boolean, timezone: string | undefined = "local"): ForecastData[] {
 	const result: ForecastData[] = [];
 	for (const day of forecast) {
 		const data: ForecastData = {
@@ -95,8 +95,8 @@ export function OWMDailyForecastsToData(forecast: OWMDailyForecast[], timezone: 
 			temp_max: day.temp.max,
 			temp_min: day.temp.min,
 			condition: {
-				main: day.weather?.[0]?.main,
-				description: day.weather?.[0]?.description,
+				main: conditionsTranslated ? day.weather?.[0]?.main : OWMMainToTranslated(day.weather?.[0]?.main),
+				description: conditionsTranslated ? day.weather?.[0]?.description : OWMDescToTranslated(day.weather?.[0]?.description),
 				icons: OWMIconToBuiltInIcons(day.weather?.[0]?.icon),
 				customIcon: OWMIconToCustomIcon(day.weather?.[0]?.icon)
 			}

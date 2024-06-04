@@ -100,6 +100,10 @@ export class WeatherLoop {
 	public async Start(): Promise<void> {
 		Logger.Info("Main Loop started.")
 		while (true) {
+			if (this.IsStray()) {
+				Logger.Info("Applet removed, stopping loop.")
+				return;
+			}
 			await this.DoCheck({immediate: false});
 			await delay(this.LoopInterval());
 		}

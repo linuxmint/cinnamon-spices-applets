@@ -60,8 +60,7 @@ export class AccuWeather extends BaseProvider {
 
     public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
         const locationID = `${loc.lat},${loc.lon}`;
-        const userLocale = this.app.config.currentLocale?.toLowerCase() ?? "en-us";
-        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        const locale = this.app.config._translateCondition ? this.app.config.currentLocale?.toLowerCase() ?? "en-us" : "en-us";
 
         let location: LocationPayload | null;
         if (this.locationCache[locationID] != null) {
@@ -71,7 +70,7 @@ export class AccuWeather extends BaseProvider {
             location = await HttpLib.Instance.LoadJsonSimple<LocationPayload>({
 				url: this.locSearchUrl,
 				cancellable,
-				params: { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey },
+				params: { q: locationID, details: true, language: locale, apikey: this.app.config.ApiKey },
 				HandleError: this.HandleErrors
 			});
 		}
@@ -159,6 +158,8 @@ export class AccuWeather extends BaseProvider {
             },
             condition: {
                 ...this.ResolveIcons(current.WeatherIcon, current.IsDayTime),
+				// TODO: decide if the text is not translated we should use the icon phrase or keep it as is.
+				// The weathertext unique and useful.
                 main: current.WeatherText,
                 description: current.WeatherText
             },
