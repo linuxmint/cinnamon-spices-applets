@@ -150,11 +150,18 @@ const DisplayCaption = {
   One: 3            // Only one window (the last one in the window list) will have a caption (only really makes sense when also using GroupType.Pooled/Auto)
 }
 
-// The possible user Settings for how window list window counts should be displayed
+// The possible user Settings for how the number label should be displayed
 const DisplayNumber = {
-  No: 0,            // The number of windows attached to a window list button is never displayed
+  No: 0,            // The number label for a  window list button is never displayed
   All: 1,           // ... always displayed
   Smart: 2          // ... only displayed when 2 of more windows exist
+}
+
+const NumberType = {
+  Nothing:      0,  // Don't show any Number labels
+  GroupWindows: 1,  // Application Group Window Count
+  WorkspaceNum: 2,  // Workspace Number
+  MonitorNum:   3   // Monitor Number
 }
 
 // Possible values for the WindowListButton._grouped variable which determines how each individual windowlist button is currently grouped
@@ -204,7 +211,11 @@ const MouseAction = {
   TileBottom: 31,
   TileBottomLeft: 32,
   Untile: 33,            // Untile the window
-  MoveThisWorkspace: 34  // Move window to the current workspace
+  MoveThisWorkspace: 34, // Move window to the current workspace
+  GroupedWindow1: 35,    // Activate the 1st...4th window in a grouped button
+  GroupedWindow2: 36,
+  GroupedWindow3: 37,
+  GroupedWindow4: 38
 }
 
 // Possible settings for the left mouse action for grouped buttons (or Laucher with running windows)
@@ -1275,11 +1286,13 @@ class WindowListButton {
     this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::hide-caption-for-minimized", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-caption-for", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::show-ellipsis-for-groups", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-number", this._updateNumber, this);
     this._signalManager.connect(this._settings, "changed::menu-show-on-hover", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::grouped-mouse-action-btn1", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::show-tooltips", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::number-style", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
+    this._signalManager.connect(this._settings, "changed::number-type", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
     this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::button-spacing", this._updateSpacing, this);
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
@@ -1730,6 +1743,7 @@ class WindowListButton {
   }
 
   _updateNumber() {
+    let numberType = this._settings.getValue("number-type");
     let setting = this._settings.getValue("display-number");
     let style = this._settings.getValue("number-style");
     let groupType = this._settings.getValue("group-windows");
@@ -1739,14 +1753,22 @@ class WindowListButton {
     if (this._grouped === GroupingType.Auto && number < 2) {
        this._grouped = GroupingType.NotGrouped;
     }
-    if ( (setting == DisplayNumber.All && number >= 1)    ||
-         ((setting == DisplayNumber.Smart && number >= 2) &&
-         (groupType == GroupType.Grouped || groupType == GroupType.Launcher || this._grouped > GroupingType.NotGrouped))) {
-      text += number;
-    }
 
     if (style == 1 && (groupType == GroupType.Launcher || (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT)))
        style = 0;  // No space for a label based window group counter, so force the icon overlay option if it's not disabled!
+
+    if (style === 0 && numberType !== NumberType.Nothing) {
+       if (numberType === NumberType.GroupWindows && ( (setting == DisplayNumber.All && number >= 1) ||
+          ((setting == DisplayNumber.Smart && number >= 2) &&
+          (groupType == GroupType.Grouped || groupType == GroupType.Launcher || this._grouped > GroupingType.NotGrouped))))
+       {
+          text += number;
+       } else if (numberType === NumberType.WorkspaceNum && this._currentWindow && (setting === DisplayNumber.All || this.isOnOtherWorkspace())) {
+          text += this._currentWindow.get_workspace().index()+1;
+       } else if (numberType === NumberType.MonitorNum && this._currentWindow && (setting === DisplayNumber.All || this.isOnOtherMonitor())) {
+          text += this._currentWindow.get_monitor()+1;
+       }
+    }
 
     if (text == "" || style == 1) {
       this._labelNumberBox.hide();
@@ -1788,7 +1810,9 @@ class WindowListButton {
     let pinnedSetting = this._settings.getValue("display-caption-for-pined");
     let minimizedSetting = this._settings.getValue("hide-caption-for-minimized");
     let style = this._settings.getValue("number-style");
+    let numberType = this._settings.getValue("number-type");
     let preferredWidth = this._settings.getValue("label-width");
+    let ellipsis = this._settings.getValue("show-ellipsis-for-groups");
     let number = this._windows.length;
     let text = "";
     let width = preferredWidth;
@@ -1868,15 +1892,25 @@ class WindowListButton {
        this._shrukenLabel = true;
     }
 
-    // Do we need a window number char
-    if (style === 1 && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) &&
-       (groupSetting === 0 || this._grouped > GroupingType.NotGrouped))))
-    {
-      if (number > 20) {
-        text = "\u{24A8} " + text; // The Unicode character "(m)"
-      } else {
-        text = String.fromCharCode(9331+number) + " " + text; // Bracketed number
-      }
+    // Do we need a number label char
+    if (numberType !== NumberType.Nothing && style === 1) {
+       let labelNum = 0;
+       if (numberType === NumberType.GroupWindows && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) &&
+          (groupSetting === 0 || this._grouped > GroupingType.NotGrouped))))
+       {
+          labelNum = number;
+       } else if (numberType === NumberType.WorkspaceNum && this._currentWindow && (numSetting === DisplayNumber.All || this.isOnOtherWorkspace())) {
+         labelNum =  this._currentWindow.get_workspace().index()+1;
+       } else if (numberType === NumberType.MonitorNum && this._currentWindow && (numSetting === DisplayNumber.All || this.isOnOtherMonitor())) {
+         labelNum = this._currentWindow.get_monitor()+1;
+       }
+       if (labelNum > 0) {
+         if (labelNum > 20) {
+           text = "\u{24A8} " + text; // The Unicode character "(m)"
+         } else {
+           text = String.fromCharCode(9331+labelNum) + " " + text; // Bracketed number
+         }
+       }
     }
     // Do we need a minimized char
     if (this._currentWindow && this._currentWindow.minimized && (this._applet.indicators&IndicatorType.Minimized) && this._workspace.autoIndicatorsOff==false) {
@@ -1885,6 +1919,11 @@ class WindowListButton {
     // Do we need a pinned char
     if (this._pinned && (this._applet.indicators&IndicatorType.Pinned) && this._workspace.autoIndicatorsOff==false) {
         text = "\u{1F4CC}" + text; // Unicode for the "push pin" character
+    }
+    // Do we need a group ellipsis char
+    if (ellipsis === true && number >= 2)
+    {
+       text = "\u{22EE}" + text;  // The Unicode character "Vertical Ellipsis"
     }
 
     // If we don't have a minimum label size, calculate it now!
@@ -2481,6 +2520,26 @@ class WindowListButton {
               window.change_workspace_by_index(curWorkspace, false);
            }
            break;
+        case MouseAction.GroupedWindow1:
+           if (this._windows.length > 0){
+              Main.activateWindow(this._windows[0]);
+           }
+           break;
+        case MouseAction.GroupedWindow2:
+           if (this._windows.length > 1){
+              Main.activateWindow(this._windows[1]);
+           }
+           break;
+        case MouseAction.GroupedWindow3:
+           if (this._windows.length > 2){
+              Main.activateWindow(this._windows[2]);
+           }
+           break;
+        case MouseAction.GroupedWindow4:
+           if (this._windows.length > 3){
+              Main.activateWindow(this._windows[3]);
+           }
+           break;
       }
   }
 
@@ -2549,12 +2608,14 @@ class WindowListButton {
     // If a thumbnail menu is open, then make sure it contains this buttons current window. Not open, then open one after a delay if needed
     let curMenu = this._workspace.currentMenu;
     if (curMenu && curMenu.isOpen) {
-       if (curMenu._findMenuItemForWindow(this._currentWindow)==null) {
+       let menuItem = curMenu._findMenuItemForWindow(this._currentWindow);
+       if (menuItem==null) {
           let holdPopup = this._workspace.holdPopup;
           this.closeThumbnailMenu();
           this.openThumbnailMenu();
           this._workspace.holdPopup = holdPopup;
        } else {
+          menuItem.actor.add_style_pseudo_class("active");
           this.removeThumbnailMenuDelay();
        }
     } else if (this._windows.length > 0 && this._settings.getValue("menu-show-on-hover")) {
@@ -2600,6 +2661,10 @@ class WindowListButton {
 
     let curMenu = this._workspace.currentMenu;
     if (curMenu) {
+       let menuItem = curMenu._findMenuItemForWindow(this._currentWindow);
+       if (menuItem) {
+          menuItem.actor.remove_style_pseudo_class("active");
+       }
        this.closeThumbnailMenuDelayed();
     } else {
        this.removeThumbnailMenuDelay();
@@ -3126,6 +3191,13 @@ class WindowListButton {
         this.menu.openMenu();
         this._workspace.currentMenu = this.menu;
         this.actor.set_hover(true);
+        let curMenu = this._workspace.currentMenu;
+        if (curMenu && curMenu.numMenuItems > 1) {
+           let menuItem = this._workspace.currentMenu._findMenuItemForWindow(this._currentWindow);
+           if (menuItem && this._grouped <= GroupingType.NotGrouped) {
+              menuItem.actor.add_style_pseudo_class("active");
+           }
+        }
      }
   }
 
@@ -5046,6 +5118,11 @@ class WindowList extends Applet.Applet {
               } else {
                 workspace._windowRemoved(window);
               }
+           } else if (this._settings.getValue("number-type")===NumberType.WorkspaceNum){
+             let btn = workspace._lookupAppButtonForWindow(window);
+             if (btn) {
+               btn._updateNumber(); // In case the number is showing the workspace index
+             }
            }
          }
        }
@@ -5055,11 +5132,12 @@ class WindowList extends Applet.Applet {
   windowMonitorChanged(screen, window, monitor) {
     if (!this._settings.getValue("show-windows-for-current-monitor")) {
       let ws = this.getCurrentWorkSpace();
-      if (ws.saturationType == SaturationType.OtherMonitors && ws.iconSaturation!=100) {
-        let btn = ws._lookupAppButtonForWindow(window);
-        if (btn) {
-          btn.updateIconSelection();
-        }
+      let btn = ws._lookupAppButtonForWindow(window);
+      if (btn) {
+         btn._updateNumber(); // In case the number is showing the monitor index
+         if (ws.saturationType == SaturationType.OtherMonitors && ws.iconSaturation!=100) {
+            btn.updateIconSelection();
+         }
       }
       return;
     }

@@ -1,6 +1,7 @@
-import { UUID, LogLevel } from "../consts";
-import { CompareVersion, _ } from "../utils";
-import { FileExists, LoadContents } from "./io_lib";
+import type { LogLevel } from "../../consts";
+import { UUID } from "../../consts";
+import { CompareVersion, _ } from "../../utils";
+import { FileExists, LoadContents } from "../io_lib";
 
 const { File } = imports.gi.Gio;
 const { get_home_dir, get_environ } = imports.gi.GLib;
@@ -152,7 +153,7 @@ class Log {
 		const logFile = File.new_for_path(logFilePath);
 
 		// Check if file exists
-		if (!await FileExists(logFile)) {
+		if (!FileExists(logFile)) {
 			throw new Error(
 				_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath })
 			);

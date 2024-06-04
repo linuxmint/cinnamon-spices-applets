@@ -1,6 +1,7 @@
-import { PirateWeatherDailyPayload } from "./daily";
-import { PirateWeatherHourlyPayload } from "./hourly";
-import { PirateWeatherMinutelyPayload } from "./minutely";
+import type { PirateWeatherAlert } from "./alerts";
+import type { PirateWeatherDailyPayload } from "./daily";
+import type { PirateWeatherHourlyPayload } from "./hourly";
+import type { PirateWeatherMinutelyPayload } from "./minutely";
 
 /**
  * - 'si' returns meter/sec and Celsius
@@ -53,6 +54,7 @@ export interface PirateWeatherPayload {
 		icon: PirateWeatherIcon;
 		data: PirateWeatherDailyPayload[]
 	}
+	alerts?: PirateWeatherAlert[];
 }
 
 export type PirateWeatherIcon =

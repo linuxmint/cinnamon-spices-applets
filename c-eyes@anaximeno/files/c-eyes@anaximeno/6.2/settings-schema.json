@@ -1,0 +1,113 @@
+{
+	"general": {
+		"type": "section",
+		"description": "General"
+	},
+
+	"mode": {
+		"type": "combobox",
+		"default": "lids",
+		"description": "Mode",
+		"options": {
+			"Lids": "lids",
+			"Bulb": "bulb"
+		}
+	},
+	"line-width": {
+		"type": "spinbutton",
+		"description": "Line Width",
+		"default": 2.5,
+		"min": 1,
+		"max": 5,
+		"step": 0.5,
+		"units": "px"
+	},
+	"margin": {
+		"type": "spinbutton",
+		"default": 8.0,
+		"min": -16.0,
+		"max": 32.0,
+		"step": 0.5,
+		"units": "px",
+		"description": "Margin"
+	},
+	"padding": {
+		"type": "spinbutton",
+		"default": 4.0,
+		"min": 0.0,
+		"max": 32.0,
+		"step": 0.5,
+		"units": "px",
+		"description": "Padding"
+	},
+	"repaint-interval": {
+		"type": "spinbutton",
+		"default": 55,
+		"min": 5,
+		"max": 200,
+		"step": 5,
+		"units": "ms",
+		"description": "Eye Update Interval",
+		"tooltip": "This setting controls the time to redraw the eye again. Lower values (measured in miliseconds) result in smoother animation but require more processing power."
+	},
+	"repaint-angle": {
+		"type": "spinbutton",
+		"default": 0.05,
+		"min": 0,
+		"max": 1,
+		"step": 0.05,
+		"units": "radians",
+		"description": "Eye Update Sensitivity",
+		"tooltip": "This setting controls the minimum angle change between mouse movements required to redraw the eye. Lower values (measured in radians) result in smoother animation but require more processing power."
+	},
+	"tooltip-message": {
+		"type": "entry",
+		"default": "Hey, I saw that!",
+		"description": "Tooltip Message on Hover"
+	},
+	"deactivate-on-fullscreen": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Deactivate On Fullscreen"
+	},
+	"use-alternative-colors": {
+		"type": "switch",
+		"default": true,
+		"description": "Use Alternative Colors for the Eye",
+		"tooltip": "When disabled it will use the current system theme's default color for panel items."
+	},
+
+	"colors": {
+		"type": "section",
+		"description": "Colors",
+		"dependency": "use-alternative-colors=true"
+	},
+
+	"base-color": {
+		"type": "colorchooser",
+		"default": "#BBBBBB",
+		"description": "Base Color"
+	},
+	"iris-color": {
+		"type": "colorchooser",
+		"default": "#634E34",
+		"description": "Iris Color"
+	},
+	"pupil-color": {
+		"type": "colorchooser",
+		"default": "#130F0A",
+		"description": "Pupil Color"
+	},
+	"fill-lids-color-painting": {
+		"dependency": "mode=lids",
+		"type": "checkbox",
+		"default": true,
+		"description": "Fill the Colors Inside the Eye"
+	},
+	"fill-bulb-color-painting": {
+		"dependency": "mode=bulb",
+		"type": "checkbox",
+		"default": true,
+		"description": "Fill the Colors Inside the Eye"
+	}
+}

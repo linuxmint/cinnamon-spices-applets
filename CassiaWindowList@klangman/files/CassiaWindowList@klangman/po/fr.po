@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-01 10:01-0400\n"
+"POT-Creation-Date: 2024-05-27 19:07-0400\n"
 "PO-Revision-Date: 2024-04-03 14:46+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,32 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:536 6.0/applet.js:536
+#: 4.0/applet.js:547 6.0/applet.js:547
 msgid "all buttons"
 msgstr "tous les boutons"
 
-#: 4.0/applet.js:2640 6.0/applet.js:2640
+#: 4.0/applet.js:2705 6.0/applet.js:2705
 msgid "Applet Preferences"
 msgstr "Préférences"
 
-#: 4.0/applet.js:2644 6.0/applet.js:2644
+#: 4.0/applet.js:2709 6.0/applet.js:2709
 msgid "About..."
 msgstr "À propos..."
 
-#: 4.0/applet.js:2648 6.0/applet.js:2648
+#: 4.0/applet.js:2713 6.0/applet.js:2713
 msgid "Configure..."
 msgstr "Configurer..."
 
-#: 4.0/applet.js:2652 6.0/applet.js:2652
+#: 4.0/applet.js:2717 6.0/applet.js:2717
 msgid "Website"
 msgstr "Site web"
 
-#: 4.0/applet.js:2656 6.0/applet.js:2656
+#: 4.0/applet.js:2721 6.0/applet.js:2721
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Supprimer '%s'"
 
-#: 4.0/applet.js:2658 6.0/applet.js:2658
+#: 4.0/applet.js:2723 6.0/applet.js:2723
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
 
@@ -60,111 +60,111 @@ msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2667 6.0/applet.js:2667
+#: 4.0/applet.js:2732 6.0/applet.js:2732
 msgid "Open new window"
 msgstr "Ouvrir une nouvelle fenêtre"
 
-#: 4.0/applet.js:2675 6.0/applet.js:2675
+#: 4.0/applet.js:2740 6.0/applet.js:2740
 msgid "Remove from panel"
 msgstr "Retirer du panneau"
 
-#: 4.0/applet.js:2677 6.0/applet.js:2677
+#: 4.0/applet.js:2742 6.0/applet.js:2742
 msgid "Remove from this workspace"
 msgstr "Retirer de cet espace de travail"
 
-#: 4.0/applet.js:2683 6.0/applet.js:2683
+#: 4.0/applet.js:2748 6.0/applet.js:2748
 msgid "Pin to panel"
 msgstr "Épingler au panneau"
 
-#: 4.0/applet.js:2685 6.0/applet.js:2685
+#: 4.0/applet.js:2750 6.0/applet.js:2750
 msgid "Pin to this workspace"
 msgstr "Épingler à cet espace de travail"
 
-#: 4.0/applet.js:2726 6.0/applet.js:2726
+#: 4.0/applet.js:2791 6.0/applet.js:2791
 msgid "Pin to other workspaces"
 msgstr "Épingler aux autres espaces de travail"
 
-#: 4.0/applet.js:2747 6.0/applet.js:2747
+#: 4.0/applet.js:2812 6.0/applet.js:2812
 msgid "Pin to all workspaces"
 msgstr "Épingler à tous les espaces de travail"
 
-#: 4.0/applet.js:2765 6.0/applet.js:2765
+#: 4.0/applet.js:2830 6.0/applet.js:2830
 msgid "Pin to launcher"
 msgstr "Épingler au lanceur"
 
-#: 4.0/applet.js:2783 4.0/applet.js:2966 6.0/applet.js:2783 6.0/applet.js:2966
+#: 4.0/applet.js:2848 4.0/applet.js:3031 6.0/applet.js:2848 6.0/applet.js:3031
 msgid "Add new Hotkey for"
 msgstr "Ajouter un nouveau raccourci clavier pour"
 
-#: 4.0/applet.js:2797 6.0/applet.js:2797
+#: 4.0/applet.js:2862 6.0/applet.js:2862
 msgid "Recent files"
 msgstr "Fichiers récents"
 
-#: 4.0/applet.js:2821 6.0/applet.js:2821
+#: 4.0/applet.js:2886 6.0/applet.js:2886
 msgid "Places"
 msgstr "Emplacements"
 
-#: 4.0/applet.js:2863 6.0/applet.js:2863
+#: 4.0/applet.js:2928 6.0/applet.js:2928
 msgid "Only on this workspace"
 msgstr "Seulement sur cet espace de travail"
 
-#: 4.0/applet.js:2865 6.0/applet.js:2865
+#: 4.0/applet.js:2930 6.0/applet.js:2930
 msgid "Visible on all workspaces"
 msgstr "Visible sur tous les espaces de travail"
 
-#: 4.0/applet.js:2866 6.0/applet.js:2866
+#: 4.0/applet.js:2931 6.0/applet.js:2931
 msgid "Move to another workspace"
 msgstr "Déplacer vers un autre espace de travail"
 
-#: 4.0/applet.js:2875 6.0/applet.js:2875
+#: 4.0/applet.js:2940 6.0/applet.js:2940
 msgid " (this workspace)"
 msgstr " (cet espace de travail)"
 
-#: 4.0/applet.js:2888 6.0/applet.js:2888
+#: 4.0/applet.js:2953 6.0/applet.js:2953
 msgid "Move to another monitor"
 msgstr "Déplacer vers un autre moniteur"
 
-#: 4.0/applet.js:2896 6.0/applet.js:2896
+#: 4.0/applet.js:2961 6.0/applet.js:2961
 msgid "Monitor"
 msgstr "Moniteur"
 
-#: 4.0/applet.js:2921 6.0/applet.js:2921
+#: 4.0/applet.js:2986 6.0/applet.js:2986
 msgid "unassigned"
 msgstr "non attribué"
 
-#: 4.0/applet.js:2932 4.0/applet.js:2963 6.0/applet.js:2932 6.0/applet.js:2963
+#: 4.0/applet.js:2997 4.0/applet.js:3028 6.0/applet.js:2997 6.0/applet.js:3028
 msgid "Assign window to a hotkey"
 msgstr "Attribuer une fenêtre à un raccourci clavier"
 
-#: 4.0/applet.js:2986 6.0/applet.js:2986
+#: 4.0/applet.js:3051 6.0/applet.js:3051
 msgid "Change application label contents"
 msgstr "Modifier le libellé de l'étiquette de l'application"
 
-#: 4.0/applet.js:2989 6.0/applet.js:2989
+#: 4.0/applet.js:3054 6.0/applet.js:3054
 msgid "Remove custom setting"
 msgstr "Supprimer le paramètre personnalisé"
 
-#: 4.0/applet.js:2996 6.0/applet.js:2996
+#: 4.0/applet.js:3061 6.0/applet.js:3061
 msgid "Use window title"
 msgstr "Utiliser le titre de fenêtre"
 
-#: 4.0/applet.js:3003 6.0/applet.js:3003
+#: 4.0/applet.js:3068 6.0/applet.js:3068
 msgid "Use application name"
 msgstr "Utiliser le nom de l'application"
 
-#: 4.0/applet.js:3010 6.0/applet.js:3010
+#: 4.0/applet.js:3075 6.0/applet.js:3075
 msgid "No label"
 msgstr "Sans étiquette"
 
-#: 4.0/applet.js:3021 6.0/applet.js:3021
+#: 4.0/applet.js:3086 6.0/applet.js:3086
 msgid "Ungroup application windows"
 msgstr "Dégrouper les fenêtres de l'application"
 
-#: 4.0/applet.js:3030 6.0/applet.js:3030
+#: 4.0/applet.js:3095 6.0/applet.js:3095
 msgid "Group application windows"
 msgstr "Grouper les fenêtres par application"
 
-#: 4.0/applet.js:3043 6.0/applet.js:3043
+#: 4.0/applet.js:3108 6.0/applet.js:3108
 msgid "Automatic grouping/ungrouping"
 msgstr "Regrouper/dégrouper automatiquement"
 
@@ -180,31 +180,31 @@ msgstr "Regrouper/dégrouper automatiquement"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3073 6.0/applet.js:3073
+#: 4.0/applet.js:3138 6.0/applet.js:3138
 msgid "Move titlebar on to screen"
 msgstr "Déplacer la barre de titre sur l'écran"
 
-#: 4.0/applet.js:3078 6.0/applet.js:3078
+#: 4.0/applet.js:3143 6.0/applet.js:3143
 msgid "Restore"
 msgstr "Restaurer"
 
-#: 4.0/applet.js:3082 6.0/applet.js:3082
+#: 4.0/applet.js:3147 6.0/applet.js:3147
 msgid "Minimize"
 msgstr "Minimiser"
 
-#: 4.0/applet.js:3088 6.0/applet.js:3088
+#: 4.0/applet.js:3153 6.0/applet.js:3153
 msgid "Unmaximize"
 msgstr "Démaximiser"
 
-#: 4.0/applet.js:3095 6.0/applet.js:3095
+#: 4.0/applet.js:3160 6.0/applet.js:3160
 msgid "Close others"
 msgstr "Fermer les autres"
 
-#: 4.0/applet.js:3106 6.0/applet.js:3106
+#: 4.0/applet.js:3171 6.0/applet.js:3171
 msgid "Close all"
 msgstr "Tout fermer"
 
-#: 4.0/applet.js:3115 6.0/applet.js:3115
+#: 4.0/applet.js:3180 6.0/applet.js:3180
 msgid "Close"
 msgstr "Fermer"
 
@@ -264,7 +264,8 @@ msgstr "Paramètres des étiquettes de bouton de la liste des fenêtres"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
-msgid "Application groups number label settings"
+#, fuzzy
+msgid "Number label settings"
 msgstr "Paramètres des étiquettes de numéros des groupes d'application"
 
 #. 4.0->settings-schema.json->general-settings->title
@@ -321,10 +322,8 @@ msgstr "Contenu de l'étiquette"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
-#. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
-#. 6.0->settings-schema.json->display-number->options
 msgid "Never"
 msgstr "Jamais"
 
@@ -455,6 +454,19 @@ msgstr ""
 "Automatique : Les indicateurs de minimisation et d'épinglage ne s'affichent "
 "que lorsque l'espace n'est pas limité."
 
+#. 4.0->settings-schema.json->show-ellipsis-for-groups->description
+#. 6.0->settings-schema.json->show-ellipsis-for-groups->description
+msgid "Show a vertical ellipsis (...) for grouped buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+msgid ""
+"Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
+"list buttons with more then one window. When on a vertical panel this option "
+"is not possible and the setting will be ignored."
+msgstr ""
+
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
 msgid "Add new window buttons ahead of trailing pinned buttons"
@@ -510,11 +522,12 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
+#, fuzzy
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
-"appear. It applies to both window-list buttons and thumbnail menu items (of "
-"course one of the full size window preview options must be enabled for this "
-"option to have any effect)"
+"appear. It applies when hovering over either window-list buttons or "
+"thumbnail menu items (of course one of the full size window preview options "
+"must be enabled for this option to have any effect)"
 msgstr ""
 "Cette option définit le temps de survol de la souris avant qu'un aperçu de "
 "la fenêtre en taille réelle n'apparaisse. Elle s'applique aux boutons de la "
@@ -550,15 +563,54 @@ msgstr "Étiquette animée"
 msgid "Label animation duration"
 msgstr "Durée d'animation des étiquettes"
 
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Nothing"
+msgstr "Ne rien faire"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Application group window count"
+msgstr "Grouper les fenêtres par application"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Workspace number"
+msgstr "Afficher le nombre"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Monitor number"
+msgstr "Moniteur"
+
+#. 4.0->settings-schema.json->number-type->description
+#. 6.0->settings-schema.json->number-type->description
+#, fuzzy
+msgid "Number label contents"
+msgstr "Contenu de l'étiquette"
+
 #. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-number->options
-msgid "2 or more windows"
-msgstr "2 fenêtres ou davantage"
+msgid "Smart"
+msgstr ""
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
 msgid "Display number"
 msgstr "Afficher le nombre"
+
+#. 4.0->settings-schema.json->display-number->tooltip
+#. 6.0->settings-schema.json->display-number->tooltip
+msgid ""
+"Controls when the number label is used. Smart means the the label will only "
+"appear when it is appropriate depending on the number label contents setting "
+"above. i.e. When there is two or more windows in a group, or when the "
+"windows workspace or monitor does not match the current one."
+msgstr ""
 
 #. 4.0->settings-schema.json->number-style->options
 #. 6.0->settings-schema.json->number-style->options
@@ -577,9 +629,10 @@ msgstr "Style de numérotation"
 
 #. 4.0->settings-schema.json->number-style->tooltip
 #. 6.0->settings-schema.json->number-style->tooltip
+#, fuzzy
 msgid ""
-"Controls how the number of windows in a grouped button is presented. When on "
-"a vertical panel, the \"label prepend\" option is not possible so \"icon "
+"Controls how the number label is presented. When on a vertical panel or when "
+"in launcher mode, the \"label prepend\" option is not possible so \"icon "
 "overlay\" will be used instead"
 msgstr ""
 "Contrôle la manière dont le nombre de fenêtres d'un bouton groupé est "
@@ -1508,6 +1561,42 @@ msgstr "Maintien du menu miniature"
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Restore most recent application window"
 msgstr "Rétablir la fenêtre de l'application la plus récente"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 1st window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 2nd window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 3rd window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 4th window in grouped button"
+msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description

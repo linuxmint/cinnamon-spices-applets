@@ -47,7 +47,9 @@
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
-        "keepChoosePlayerOpen"
+        "keepChoosePlayerOpen",
+        "avoidTwice",
+        "seekerTooltipDelay"
       ]
     },
     "sectionBehavior2": {
@@ -81,6 +83,7 @@
         "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
+        "showMicUnmutedOnIcon",
         "adaptColor",
         "color101_115",
         "color116_130",
@@ -128,6 +131,7 @@
       "title": "Shortcuts",
       "keys": [
         "keyOpen",
+        "keySwitchPlayer",
         "redefine-volume-keybindings",
         "audio-stop",
         "pause-on-off",
@@ -161,11 +165,31 @@
     "default": false,
     "description": "Keep the player controller selector open"
   },
+  "avoidTwice": {
+    "type": "switch",
+    "default": false,
+    "description": "Avoid displaying controllers twice"
+  },
+  "seekerTooltipDelay": {
+    "type": "spinbutton",
+    "default": 400,
+    "units": "ms",
+    "min": 50,
+    "max": 1500,
+    "step": 50,
+    "description": "Seeker tooltip: time to disappear"
+  },
   "keyOpen": {
     "type": "keybinding",
     "description": "Show menu",
     "default": "<Shift><Super>s",
     "tooltip": "Set keybinding(s) to show the sound applet menu."
+  },
+  "keySwitchPlayer": {
+    "type": "keybinding",
+    "description": "Switch to next player",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to switch to the next player if it exists."
   },
   "_knownPlayers": {
     "type": "generic",
@@ -260,6 +284,11 @@
     "type": "switch",
     "default": true,
     "description": "Display icon indicating that the microphone is muted, if applicable"
+  },
+  "showMicUnmutedOnIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display icon indicating that the microphone is activated, if applicable"
   },
   "setAmplification": {
     "type": "button",

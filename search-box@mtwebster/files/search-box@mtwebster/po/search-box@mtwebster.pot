@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: search-box@mtwebster 1.0\n"
+"Project-Id-Version: search-box@mtwebster 2.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 23:40+0200\n"
+"POT-Creation-Date: 2024-05-20 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,17 +137,21 @@ msgid "Providers"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Name"
+msgid "Show"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Query URL"
+msgid "Name"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid ""
 "Short name\n"
 "(3 lower-case letters)"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->tooltip

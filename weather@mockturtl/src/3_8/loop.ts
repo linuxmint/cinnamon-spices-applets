@@ -1,6 +1,7 @@
-import { Logger } from "./lib/logger";
-import { WeatherApplet } from "./main";
-import { LocationData, RefreshState } from "./types";
+import { Logger } from "./lib/services/logger";
+import type { WeatherApplet } from "./main";
+import type { LocationData} from "./types";
+import { RefreshState } from "./types";
 import { _, delay, Guid } from "./utils";
 const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 
@@ -8,7 +9,7 @@ const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
  * Checked to make sure that instance is
  * running for one applet ID
  */
-var weatherAppletGUIDs: GUIDStore = {};
+const weatherAppletGUIDs: GUIDStore = {};
 
 
 export interface RefreshOptions {
@@ -79,15 +80,16 @@ export class WeatherLoop {
 		switch (NetworkMonitor.get_default().connectivity) {
 			case NetworkConnectivity.FULL:
 			case NetworkConnectivity.LIMITED:
-			case NetworkConnectivity.PORTAL:
+			case NetworkConnectivity.PORTAL: {
 				const name =
 					NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
-					NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
-					: "PORTAL";
+					(NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+					: "PORTAL");
 
 				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
 				this.Resume();
 				break;
+			}
 			case NetworkConnectivity.LOCAL:
 				Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}".`);
 				break;
@@ -171,9 +173,16 @@ export class WeatherLoop {
 					this.lastUpdated = new Date();
 					Logger.Info("Weather Information refreshed");
 					break;
-				case RefreshState.NoWeather:
 				case RefreshState.NoLocation:
 					this.IncrementErrorCount();
+					this.app.ShowError({
+						type: "hard",
+						detail: "no location",
+						userError: true,
+						message: _("Make sure you entered a location or use Automatic location instead.")
+					});
+					break;
+				case RefreshState.NoWeather:
 					Logger.Error("Could not refresh weather, data could not be obtained.");
 					this.app.ShowError({
 						type: "soft",
@@ -196,7 +205,7 @@ export class WeatherLoop {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Error in Main loop: " + e, e);
+				Logger.Error("Error in Main loop: " + e.message, e);
 		}
 		finally {
 			this.refreshingResolver?.();
@@ -218,7 +227,7 @@ export class WeatherLoop {
 
 	public Resume(): void {
 		this.pauseRefresh = false;
-		this.DoCheck({immediate: true});
+		void this.DoCheck({immediate: true});
 	}
 
 	/**

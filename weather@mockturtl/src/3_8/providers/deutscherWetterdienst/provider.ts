@@ -1,10 +1,13 @@
 import { DateTime } from "luxon";
-import { getTimes, GetTimesResult } from "suncalc";
-import { Services } from "../config";
-import { ErrorResponse, HttpLib, HTTPParams } from "../lib/httpLib";
-import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType } from "../types";
-import { IsNight, _ } from "../utils";
-import { BaseProvider } from "./BaseProvider"
+import { getTimes } from "suncalc";
+import type { Config, Services } from "../../config";
+import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import type { Condition, ForecastData, HourlyForecastData, WeatherData, PrecipitationType, AlertData } from "../../weather-data";
+import { _ } from "../../utils";
+import { BaseProvider } from "../BaseProvider"
+import { GetDeutscherWetterdienstAlerts } from "./alert";
+import type { LocationData } from "../../types";
 
 
 export class DeutscherWetterdienst extends BaseProvider {
@@ -13,14 +16,14 @@ export class DeutscherWetterdienst extends BaseProvider {
     public name: Services = "DeutscherWetterdienst";
     public maxForecastSupport: number = 10;
     public maxHourlyForecastSupport: number = 240;
-    public website: string = "https://www.dwd.de/DE/Home/home_node.html";
+    public website: string = "https://brightsky.dev/";
     public remainingCalls: number | null = null;
     public readonly supportHourlyPrecipChance = false;
 	public readonly supportHourlyPrecipVolume = true;
 
     private readonly baseUrl: string = "https://api.brightsky.dev/";
 
-    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
         const [current, hourly] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple<CurrentWeatherPayload>({
 				url: `${this.baseUrl}current_weather`,
@@ -42,6 +45,15 @@ export class DeutscherWetterdienst extends BaseProvider {
         const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
         const sunTimes = getTimes(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = current.sources.find(source => source.id == current.weather.source_id) ?? current.sources[0];
+
+		let alerts: AlertData[] | undefined = undefined;
+		if (config._showAlerts) {
+			const result = await GetDeutscherWetterdienstAlerts(cancellable, loc.lat, loc.lon);
+			if (result == null)
+				return null;
+
+			alerts = result;
+		}
 
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
@@ -72,7 +84,8 @@ export class DeutscherWetterdienst extends BaseProvider {
                 name: mainSource.station_name ?? undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
+			alerts: alerts
         };
     }
 
@@ -84,7 +97,7 @@ export class DeutscherWetterdienst extends BaseProvider {
         for (const day of days) {
             let tempMax: number = -Infinity;
             let tempMin: number = Infinity;
-            let conditions: Icon[] = [];
+            const conditions: Icon[] = [];
             let time: DateTime | null = null;
 
             for (const hour of day) {
@@ -168,13 +181,13 @@ export class DeutscherWetterdienst extends BaseProvider {
 
         const severeWeathers: Partial<Record<Icon, number>> = {};
         const regularWeather: Partial<Record<Icon, number>> = {};
-        const regularConditions: Icon[] = [ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ]
+        const regularConditions: Set<Icon> = new Set([ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ])
 
         for (const condition of conditions) {
-            if (regularConditions.includes(condition))
-                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]!++;
+            if (regularConditions.has(condition))
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
             else
-                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]!++;
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
         }
 
         const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;
@@ -455,7 +468,7 @@ interface HourlyForecastInfo {
     /** Speed of maximum wind gust during previous hour, 10 m above the ground */
     wind_gust_speed: number | null;
     /** Object mapping meteorological parameters to the source IDs of alternative sources that were used to fill up missing values in the main source */
-    fallback_source_ids: any;
+    fallback_source_ids: unknown;
 }
 
 type DWDCondition = "dry" | "fog" | "rain" | "sleet" | "snow" | "hail" | "thunderstorm";

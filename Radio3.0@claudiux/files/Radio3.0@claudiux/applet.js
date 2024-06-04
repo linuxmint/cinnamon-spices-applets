@@ -2614,6 +2614,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               }
 
               this.stop_mpv_radio(false);
+              this.which_category_for_id(id);
               this.start_mpv_radio(id);
 
               this.menu.close();
@@ -2799,6 +2800,23 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       this.oldRadios = JSON.stringify(this.radios);
     }
+  }
+
+  which_category_for_id(id) {
+    // this.last_category
+    let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
+    let _cats = Object.keys(cws);
+    for (let c of _cats) {
+      if (c == "All Categories") continue;
+      let _keys = Object.keys(cws[c]);
+      for (let s of _keys) {
+        if (id == cws[c][s]) {
+          this.last_category = c;
+          return;
+        }
+      }
+    }
+    this.last_category = "All Categories"
   }
 
   number_of_files(dir_path, reg) {

@@ -17,7 +17,9 @@ This sound150@claudiux applet is an enhanced sound applet.
 
 **The song's cover art** can be displayed when it is embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
 
-**You can control the volume up to 150% of its nominal value.**
+**You can control the sound volume up to 150% of its nominal value.**
+
+**You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control microphone volume.**
 
 **The icon can be colored according to the volume when it exceeds 100%.**
 

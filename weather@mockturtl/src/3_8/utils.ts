@@ -1,32 +1,38 @@
-import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
+import type { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { Logger } from "./lib/logger";
-import { APIUniqueField, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { Literal } from "./lib/commandRunner";
+import { Logger } from "./lib/services/logger";
+import type { ArrowIcons, SunTime } from "./types";
+import type { APIUniqueField, AlertLevel, BuiltinIcons, WeatherData } from "./weather-data";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
+const { EllipsizeMode } = imports.gi.Pango;
 const { IconTheme } = imports.gi.Gtk;
 const { Object } = imports.gi.GObject;
+
+export function Label(options?: Partial<imports.gi.St.LabelInitOptions> | undefined): imports.gi.St.Label {
+	// eslint-disable-next-line no-restricted-syntax
+	const label = new imports.gi.St.Label(options);
+	label.clutter_text.ellipsize = EllipsizeMode.NONE;
+	return label;
+}
 
 // --------------------------------------------------------------
 // Text Generators
 
-export function _(str: string, args?: KeysValuePairs): string {
+export function _(str: string, args?: Record<string, string>): string {
 	let result = imports.gettext.dgettext(UUID, str);
 
 	if (result === str && result === "")
 		result = imports.gettext.gettext(str);
 
-	if (!!args)
+	if (args)
 		result = format(result, args);
 	return result;
 }
 
-interface KeysValuePairs {
-	[key: string]: any
-}
-
-export function format(str: string, args: KeysValuePairs) {
+export function format(str: string, args: Record<string, string>): string {
 	for (const key in args) {
 		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
@@ -41,7 +47,7 @@ export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string 
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */
-export function GenerateLocationText(weather: WeatherData, config: Config) {
+export function GenerateLocationText(weather: WeatherData, config: Config): string {
 	let location = "";
 	if (weather.location.city != null && weather.location.country != null) {
 		location = weather.location.city + ", " + weather.location.country;
@@ -57,24 +63,58 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 	return location;
 }
 
-export function InjectValues(text: string, weather: WeatherData, config: Config): string {
+export function InjectValues(text: string, weather: WeatherData, config: Config, inCommand: boolean = false): string {
 	const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
-	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
-			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
-			   .replace(/{c}/g, weather.condition.main)
-			   .replace(/{c_long}/g, weather.condition.description)
-			   .replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, config, false) ?? "")
-			   .replace(/{humidity}/g, weather.humidity?.toString() ?? "")
-			   .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
-			   .replace(/{pressure_unit}/g, config._pressureUnit)
-			   .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
-			   .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-			   .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
-			   .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-			   .replace(/{city}/g, weather.location.city ?? "")
-			   .replace(/{country}/g, weather.location.country ?? "")
-			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "")
-			   .replace(/{last_updated}/g, lastUpdatedTime);
+	const temp = TempToUserConfig(weather.temperature, config, false) ?? "";
+	const tempUnit = UnitToUnicode(config.TemperatureUnit);
+	const condition = weather.condition.main;
+	const conditionLong = weather.condition.description;
+	const dewPoint = TempToUserConfig(weather.dewPoint, config, false) ?? "";
+	const humidity = weather.humidity?.toString() ?? "";
+	const pressure = weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "";
+	const pressureUnit = config._pressureUnit;
+	const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
+	const extraName = weather.extra_field ? weather.extra_field.name : "";
+	const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
+	const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
+	const city = weather.location.city ?? "";
+	const country = weather.location.country ?? "";
+	const searchEntry = config.CurrentLocation?.entryText ?? "";
+	if (inCommand) {
+		text =  text.replace(/{{t}}/g, Literal(temp))
+					.replace(/{{u}}/g, Literal(tempUnit))
+					.replace(/{{c}}/g, Literal(condition))
+					.replace(/{{c_long}}/g, Literal(conditionLong))
+					.replace(/{{dew_point}}/g, Literal(dewPoint))
+					.replace(/{{humidity}}/g, Literal(humidity))
+					.replace(/{{pressure}}/g, Literal(pressure))
+					.replace(/{{pressure_unit}}/g, Literal(pressureUnit))
+					.replace(/{{extra_value}}/g, Literal(extraValue))
+					.replace(/{{extra_name}}/g, Literal(extraName))
+					.replace(/{{wind_speed}}/g, Literal(windSpeed))
+					.replace(/{{wind_dir}}/g, Literal(windDir))
+					.replace(/{{city}}/g, Literal(city))
+					.replace(/{{country}}/g, Literal(country))
+					.replace(/{{search_entry}}/g, Literal(searchEntry))
+					.replace(/{{last_updated}}/g, Literal(lastUpdatedTime));
+	}
+
+	return  text.replace(/{t}/g, temp)
+				.replace(/{u}/g, tempUnit)
+				.replace(/{c}/g, condition)
+				.replace(/{c_long}/g, conditionLong)
+				.replace(/{dew_point}/g, dewPoint)
+				.replace(/{humidity}/g, humidity)
+				.replace(/{pressure}/g, pressure)
+				.replace(/{pressure_unit}/g, pressureUnit)
+				.replace(/{extra_value}/g, extraValue)
+				.replace(/{extra_name}/g, extraName)
+				.replace(/{wind_speed}/g, windSpeed)
+				.replace(/{wind_dir}/g, windDir)
+				.replace(/{city}/g, city)
+				.replace(/{country}/g, country)
+				.replace(/{search_entry}/g, searchEntry)
+				.replace(/{last_updated}/g, lastUpdatedTime);
 }
 
 export function CapitalizeFirstLetter(description: string): string {
@@ -137,7 +177,7 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 	let now = DateTime.utc();
 	let tomorrow = DateTime.utc().plus({ days: 1 });
 
-	if (!!tz) {
+	if (tz) {
 		now = now.setZone(tz);
 		tomorrow = tomorrow.setZone(tz);
 		date = date.setZone(tz);
@@ -170,7 +210,7 @@ export function GetHoursMinutes(date: DateTime, hours24Format: boolean, tz?: str
 
 	if (!onlyHours)
 		params.minute = "2-digit";
-	if (!!tz)
+	if (tz)
 		date = date.setZone(tz);
 	return date.toLocaleString(params);
 }
@@ -218,7 +258,7 @@ export function ValidTimezone(tz: string): boolean {
 // To UserConfig converters
 
 /** Capitalizes first letter and translates if needed */
-export function ProcessCondition(condition: string, shouldTranslate: boolean) {
+export function ProcessCondition(condition: string, shouldTranslate: boolean): string {
 	condition = CapitalizeFirstLetter(condition);
 	if (shouldTranslate)
 		condition = _(condition);
@@ -506,7 +546,7 @@ export function CompassDirectionText(deg: number): string {
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+	const time = (date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
 	const sunrise = MilitaryTime(sunTimes.sunrise);
 	const sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;
@@ -539,15 +579,20 @@ function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 // --------------------------------------------------------
 // ETC
 
-export function mode<T>(arr: T[]): T | null {
+/**
+ * Must be used with at leas 1 element array
+ * @param arr
+ * @returns
+ */
+export function mode<T extends number>(arr: T[]): T {
 	return arr.reduce(function (current, item) {
-		var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+		const val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
 		if (val > current.greatestFreq) {
 			current.greatestFreq = val;
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any } as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
+	}, { mode: 0, greatestFreq: -Infinity, numMapping: {} } as { mode: T, greatestFreq: number, numMapping: Record<T, number> }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
@@ -565,7 +610,7 @@ export function WeatherIconSafely(icons: BuiltinIcons[], icon_type: imports.gi.S
  * @param percent between -1.0 and 1.0
  */
 export function ShadeHexColor(color: string, percent: number): string {
-	var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+	const f = Number.parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
 	return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 
@@ -576,7 +621,7 @@ export function ShadeHexColor(color: string, percent: number): string {
 export function ConstructJsLocale(locales: string[]): string | null {
 	for (const locale of locales) {
 		// we only need lan_country section of locale, if we have space, @ or . we need to remove everything after
-		const jsLocale: string = locale.split(/[.\s@]/)[0].trim();
+		const jsLocale: string = locale.split(/[\s.@]/)[0].trim();
 		const tmp: string[] = jsLocale.split("_");
 
 		let result: string = "";
@@ -608,6 +653,33 @@ export function ConstructJsLocale(locales: string[]): string | null {
 	return null;
 }
 
+const lightAlertColors: Record<AlertLevel, string> = {
+	// Darker shade of darkAlertColors
+	"minor": "#7FCC00",
+	"moderate": "#FFC400",
+	"severe": "#FF6A00",
+	"extreme": "#FF0000",
+	"unknown": "#000000"
+
+}
+
+const darkAlertColors: Record<AlertLevel, string> = {
+	"minor": "#AAFF00",
+	"moderate": "#FFD700",
+	"severe": "#FFA500",
+	"extreme": "#FF0000",
+	"unknown": "#FFFFFF"
+}
+
+/**
+ * Returns hex string
+ * @param level
+ * @param lightTheme
+ */
+export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
+	return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
+}
+
 /**
  * https://www.movable-type.co.uk/scripts/latlong.html
  * @param lat1
@@ -631,19 +703,20 @@ export function GetDistance(lat1: number, lon1: number, lat2: number, lon2: numb
 	return R * c; // in metres
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function GetFuncName(func: Function): string {
 	return func.name;
 }
 
-export function Guid() {
+export function Guid(): string {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		const r = Math.trunc(Math.random() * 16), v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
 }
 
-export const isFinalized = function (obj: any) {
-	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+export const isFinalized = function (obj: unknown): boolean {
+	return !!obj && Object.prototype.toString.call(obj).includes('FINALIZED');
 }
 
 interface CompareVersionOptions {
@@ -664,7 +737,7 @@ interface CompareVersionOptions {
  *   - a positive integer iff v1 > v2
  *   - NaN if either version string is in the wrong format
  */
-export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions) {
+export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions): number {
 	const zeroExtend = options && options.zeroExtend,
 		v1parts = v1.split('.'),
 		v2parts = v2.split('.');
@@ -674,7 +747,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 	}
 
 	if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
-		return NaN;
+		return Number.NaN;
 	}
 
 	if (zeroExtend) {
@@ -682,7 +755,7 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 		while (v2parts.length < v1parts.length) v2parts.push("0");
 	}
 
-	for (var i = 0; i < v1parts.length; ++i) {
+	for (let i = 0; i < v1parts.length; ++i) {
 		if (v2parts.length == i) {
 			return 1;
 		}
@@ -708,13 +781,16 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 // -----------------------------------------------------------
 // Timeout polyfill
 
-export function setTimeout(func: Function, ms: number) {
-	let args: any[] = [];
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function setTimeout(func: Function, ms: number): number {
+	let args: unknown[] = [];
 	if (arguments.length > 2) {
+		// eslint-disable-next-line prefer-rest-params
 		args = args.slice.call(arguments, 2);
 	}
 
 	const id = timeout_add(ms, () => {
+		// eslint-disable-next-line prefer-spread
 		func.apply(null, args);
 		return false; // Stop repeating
 	});
@@ -723,24 +799,27 @@ export function setTimeout(func: Function, ms: number) {
 };
 
 export async function delay(ms: number): Promise<void> {
-	return await new Promise((resolve, reject) => {
+	return await new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
 		}, ms);
 	});
 }
 
-export function clearTimeout(id: number) {
+export function clearTimeout(id: number): void {
 	source_remove(id);
 };
 
-export function setInterval(func: Function, ms: number) {
-	let args: any[] = [];
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function setInterval(func: Function, ms: number): number {
+	let args: unknown[] = [];
 	if (arguments.length > 2) {
+		// eslint-disable-next-line prefer-rest-params
 		args = args.slice.call(arguments, 2);
 	}
 
 	const id = timeout_add(ms, () => {
+		// eslint-disable-next-line prefer-spread
 		func.apply(null, args);
 		return true; // Repeat
 	});

@@ -6,14 +6,17 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
+import type { ErrorResponse} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/services/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
-import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../utils";
+import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../../weather-data";
+import type { LocationData, correctGetTimes, SunTime } from "../../types";
+import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, OnSameDay } from "../../utils";
 import { DateTime } from "luxon";
-import { BaseProvider } from "./BaseProvider";
+import { BaseProvider } from "../BaseProvider";
+import type { Config } from "../../config";
+import { GetUSWeatherAlerts } from "./alerts";
 
 export class USWeather extends BaseProvider {
 
@@ -40,14 +43,10 @@ export class USWeather extends BaseProvider {
 	private currentLoc!: LocationData;
 	private currentLocID!: string;
 
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
-
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		// getting grid and station data first time or location changed
 		const locID = loc.lat.toString() + "," + loc.lon.toString();
 		if (!this.grid || !this.observationStations || this.currentLocID != locID) {
@@ -89,13 +88,22 @@ export class USWeather extends BaseProvider {
 			Logger.Error("Failed to obtain forecast Data");
 			return null;
 		}
-
 		// Parsing data
-		const weather = this.ParseCurrent(observations, hourly, loc);
-		if (!!weather) {
-			weather.forecasts = this.ParseForecast(forecast) ?? [];
-			weather.hourlyForecasts = this.ParseHourlyForecast(hourly) ?? undefined;
+		const weather = this.ParseCurrent(observations, hourly);
+		if (!weather)
+			return null;
+
+		weather.forecasts = this.ParseForecast(forecast) ?? [];
+		weather.hourlyForecasts = this.ParseHourlyForecast(hourly) ?? undefined;
+
+		if (config._showAlerts) {
+			const alerts = await GetUSWeatherAlerts(cancellable, loc.lat, loc.lon);
+			if (!alerts)
+				return null;
+
+			weather.alerts = alerts;
 		}
+
 
 		return weather;
 	};
@@ -106,7 +114,7 @@ export class USWeather extends BaseProvider {
 	 */
 	private async GetGridData(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
-		const siteData = await HttpLib.Instance.LoadJsonSimple<GridPayload>({
+		const siteData = await HttpLib.Instance.LoadJsonSimple<GridPayload, { title: string }>({
 			url: this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(),
 			cancellable,
 			HandleError: this.OnObtainingGridData
@@ -140,7 +148,7 @@ export class USWeather extends BaseProvider {
 			const observation = await HttpLib.Instance.LoadJsonSimple<ObservationPayload>({
 				url: element.id + "/observations/latest",
 				cancellable,
-				HandleError: (msg) => false
+				HandleError: () => false
 			});
 
 			if (observation == null) {
@@ -242,7 +250,7 @@ export class USWeather extends BaseProvider {
 	 * @param json
 	 * @param hourly can be null
 	 */
-	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData | null {
+	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload): WeatherData | null {
 		const observation = this.MeshObservationData(json);
 		if (observation == null || !this.observationStations[0]) {
 			Logger.Error("No observation stations/data are available");
@@ -300,7 +308,7 @@ export class USWeather extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("US Weather Parsing error: " + e, e);
+				Logger.Error("US Weather Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -386,7 +394,7 @@ export class USWeather extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("US Weather Forecast Parsing error: " + e, e);
+				Logger.Error("US Weather Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -410,7 +418,7 @@ export class USWeather extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+				Logger.Error("US Weather service Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}
@@ -429,7 +437,7 @@ export class USWeather extends BaseProvider {
 				customIcon: "cloud-refresh-symbolic",
 				icons: ["weather-severe-alert"]
 			};
-		const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/); // Clear cruft from icon url, leave only code
+		const code = icon.match(/(?!\/)[_a-z]+(?=([,?]))/); // Clear cruft from icon url, leave only code
 		switch (code?.[0]) {
 			case "skc": // Fair/clear
 				return {
@@ -663,7 +671,7 @@ export class USWeather extends BaseProvider {
 };
 
 interface GridPayload {
-	"@context": any,
+	"@context": unknown,
 	id: string;
 	type: string;
 	geometry: {
@@ -744,12 +752,12 @@ interface StationPayload {
 }
 
 interface StationsPayload {
-	"@context": any;
+	"@context": unknown;
 	features: StationPayload[]
 }
 
 interface ObservationPayload {
-	"@context": any;
+	"@context": unknown;
 	/** https://api.weather.gov/stations/WTHC1/observations/2020-06-25T12:57:00+00:00 */
 	id: string;
 	type: string;
@@ -772,7 +780,7 @@ interface ObservationPayload {
 		rawMessage: string;
 		textDescription: string;
 		icon: string;
-		presentWeather: any[],
+		presentWeather: unknown[],
 		temperature: {
 			value: number;
 			unitCode: string,
@@ -868,7 +876,7 @@ interface ForecastPayload {
 	/** Usually in F */
 	temperature: number;
 	temperatureUnit: string;
-	temperatureTrend: any;
+	temperatureTrend: unknown;
 	/** Like "5 mph" ?? */
 	windSpeed: string;
 	/** Like "SSW" */

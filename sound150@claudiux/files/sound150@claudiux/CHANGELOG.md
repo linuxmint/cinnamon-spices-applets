@@ -1,3 +1,21 @@
+### v6.15.0~20240523
+  * From now on, use Ctrl+wheel or Shift+wheel to control microphone volume.
+  * New option: "Display icon indicating that the microphone is activated, if applicable".
+  * New icons, with green microphone.
+  * Fixes FR #6026.
+  * Allows user to set the time to disappear for the seeker tooltip.
+
+### v6.14.0~20240520
+  * Displays above the seeker the time it will take to be in the track if clicked.
+
+### v6.13.0~20240514
+  * Fixes #6008: Added the option to avoid displaying controllers twice.
+
+### v6.12.0~20240512
+  * Adds a keyboard shortcut to switch between players.
+  * Fixes #5989.
+  * Minor bugfixes and improvements.
+
 ### v6.11.0~20240506
   * Created Sounds section in Sound tab of settings.
   * Improved keyboard shortcuts management.

@@ -37,12 +37,12 @@
       "type" : "section",
       "title" : "Window list button label settings",
       "dependency" : "group-windows<4",
-      "keys" : ["caption-type", "display-caption-for", "display-caption-for-pined", "hide-caption-for-minimized", "display-indicators", "label-width", "label-animation", "label-animation-time"]
+      "keys" : ["caption-type", "display-caption-for", "display-caption-for-pined", "hide-caption-for-minimized", "display-indicators", "show-ellipsis-for-groups", "label-width", "label-animation", "label-animation-time"]
     },
     "caption-number-settings" : {
       "type" : "section",
-      "title" : "Application groups number label settings",
-      "keys" : ["display-number", "number-style"]
+      "title" : "Number label settings",
+      "keys" : ["number-type", "display-number", "number-style"]
     },
     "general-settings" : {
       "type" : "section",
@@ -133,6 +133,13 @@
     "description": "Display status indicators",
     "tooltip": "Choose if the minimized and the pinned indicator characters will be prepended to button label text. Buttons without a text label will not reserve as much space.\nAutomatic: The minimized and pinned indicators will only show when space is not constrained."
   },
+  "show-ellipsis-for-groups": {
+    "type": "switch",
+    "default": 0,
+    "dependency" : "group-windows<4",
+    "description": "Show a vertical ellipsis (...) for grouped buttons",
+    "tooltip": "Prepend a vertical ellipsis unicode charter to the labels for grouped window-list buttons with more then one window. When on a vertical panel this option is not possible and the setting will be ignored."
+  },
   "trailing-pinned-behaviour": {
     "type": "switch",
     "default": false,
@@ -158,7 +165,7 @@
     "units": "milliseconds",
     "step": 20,
     "description": "Hover time before showing a full size window preview",
-    "tooltip": "This defines the mouse hover time before a full size window preview will appear. It applies to both window-list buttons and thumbnail menu items (of course one of the full size window preview options must be enabled for this option to have any effect)"
+    "tooltip": "This defines the mouse hover time before a full size window preview will appear. It applies when hovering over either window-list buttons or thumbnail menu items (of course one of the full size window preview options must be enabled for this option to have any effect)"
   },
   "label-width": {
     "type": "spinbutton",
@@ -185,15 +192,27 @@
     "dependency": "label-animation",
     "description": "Label animation duration"
   },
+  "number-type": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Nothing": 0,
+      "Application group window count": 1,
+      "Workspace number": 2,
+      "Monitor number": 3
+    },
+    "description": "Number label contents"
+  },
   "display-number": {
     "type": "combobox",
     "default": 2,
     "options": {
-      "Never": 0,
       "Always": 1,
-      "2 or more windows": 2
+      "Smart": 2
     },
-    "description": "Display number"
+    "dependency" : "number-type>0",
+    "description": "Display number",
+    "tooltip": "Controls when the number label is used. Smart means the the label will only appear when it is appropriate depending on the number label contents setting above. i.e. When there is two or more windows in a group, or when the windows workspace or monitor does not match the current one."
   },
   "number-style": {
     "type": "combobox",
@@ -202,9 +221,9 @@
       "Icon overlay": 0,
       "Label prepend": 1
     },
-    "dependency" : "group-windows<4",
+    "dependency" : "number-type>0",
     "description": "Number style",
-    "tooltip": "Controls how the number of windows in a grouped button is presented. When on a vertical panel, the \"label prepend\" option is not possible so \"icon overlay\" will be used instead"
+    "tooltip": "Controls how the number label is presented. When on a vertical panel or when in launcher mode, the \"label prepend\" option is not possible so \"icon overlay\" will be used instead"
   },
 
 
@@ -523,6 +542,10 @@
       "Minimize/Restore": 3,
       "Maximize/Restore": 4,
       "Restore most recent application window": 13,
+      "Activate 1st window in grouped button": 35,
+      "Activate 2nd window in grouped button": 36,
+      "Activate 3rd window in grouped button": 37,
+      "Activate 4th window in grouped button": 38,
       "Group/Ungroup windows": 5,
       "Open new window": 6,
       "Move to workspace 1": 7,
@@ -566,6 +589,10 @@
       "Minimize/Restore": 3,
       "Maximize/Restore": 4,
       "Restore most recent application window": 13,
+      "Activate 1st window in grouped button": 35,
+      "Activate 2nd window in grouped button": 36,
+      "Activate 3rd window in grouped button": 37,
+      "Activate 4th window in grouped button": 38,
       "Group/Ungroup windows": 5,
       "Open new window": 6,
       "Move to workspace 1": 7,
@@ -609,6 +636,10 @@
       "Minimize/Restore": 3,
       "Maximize/Restore": 4,
       "Restore most recent application window": 13,
+      "Activate 1st window in grouped button": 35,
+      "Activate 2nd window in grouped button": 36,
+      "Activate 3rd window in grouped button": 37,
+      "Activate 4th window in grouped button": 38,
       "Group/Ungroup windows": 5,
       "Open new window": 6,
       "Move to workspace 1": 7,
@@ -742,6 +773,10 @@
            "Minimize/Restore": 3,
            "Maximize/Restore": 4,
            "Restore most recent application window": 13,
+           "Activate 1st window in grouped button": 35,
+           "Activate 2nd window in grouped button": 36,
+           "Activate 3rd window in grouped button": 37,
+           "Activate 4th window in grouped button": 38,
            "Group/Ungroup windows": 5,
            "Open new window": 6,
            "Move to workspace 1": 7,

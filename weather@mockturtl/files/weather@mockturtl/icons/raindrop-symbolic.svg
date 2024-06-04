@@ -1,9 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
-<path d="M9.81,15.25c0,0.92,0.23,1.78,0.7,2.57s1.1,1.43,1.9,1.9c0.8,0.47,1.66,0.71,2.59,0.71c0.93,0,1.8-0.24,2.61-0.71
-	c0.81-0.47,1.45-1.11,1.92-1.9c0.47-0.8,0.71-1.65,0.71-2.57c0-0.6-0.17-1.31-0.52-2.14c-0.35-0.83-0.77-1.6-1.26-2.3
-	c-0.44-0.57-0.96-1.2-1.56-1.88c-0.6-0.68-1.65-1.73-1.89-1.97l-1.28,1.29c-0.62,0.6-1.22,1.29-1.79,2.08
-	c-0.57,0.79-1.07,1.64-1.49,2.55C10.01,13.79,9.81,14.58,9.81,15.25z"/>
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 30 30"
+   style="enable-background:new 0 0 30 30;"
+   xml:space="preserve"
+   sodipodi:docname="raindrop-symbolic.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs1" /><sodipodi:namedview
+   id="namedview1"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="14.6"
+   inkscape:cx="15"
+   inkscape:cy="14.965753"
+   inkscape:window-width="1080"
+   inkscape:window-height="1884"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="m 4.4226291,18.153943 c 0,1.865999 0.4664996,3.610301 1.4197813,5.212625 0.9532818,1.602325 2.231085,2.900411 3.8536922,3.853693 1.6226074,0.953281 3.3669104,1.440063 5.2531914,1.440063 1.886281,0 3.650866,-0.486782 5.293756,-1.440063 1.64289,-0.953282 2.940975,-2.251368 3.894257,-3.853693 0.953282,-1.622607 1.440064,-3.346626 1.440064,-5.212625 0,-1.216956 -0.344804,-2.657019 -1.054695,-4.340474 C 23.812785,12.130014 22.960917,10.568255 21.96707,9.1484732 21.074636,7.9923655 20.019941,6.7145623 18.802986,5.3353461 17.58603,3.95613 15.456358,1.826458 14.969576,1.3396758 L 12.373405,3.95613 C 11.115884,5.1730854 9.8989286,6.5725842 8.7428209,8.1749088 7.5867132,9.7772335 6.5725837,11.501254 5.7207149,13.34697 4.8282809,15.192685 4.4226291,16.795009 4.4226291,18.153943 Z"
+   id="path1"
+   style="stroke-width:2.02826" />
 </svg>

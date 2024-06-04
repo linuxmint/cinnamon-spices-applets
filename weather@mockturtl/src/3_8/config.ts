@@ -1,38 +1,49 @@
-import { WeatherApplet } from "./main";
-import { LocationData, WeatherProvider } from "./types";
+import type { WeatherApplet } from "./main";
+import type { LocationData} from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
-import { Logger } from "./lib/logger";
-import { distanceUnitLocales, fahrenheitCountries, LogLevel, UUID, windSpeedUnitLocales } from "./consts";
+import { Logger } from "./lib/services/logger";
+import type { LogLevel} from "./consts";
+import { distanceUnitLocales, fahrenheitCountries, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
 import { MetUk } from "./providers/met_uk";
-import { BaseProvider } from "./providers/BaseProvider";
-import { OpenWeatherMap } from "./providers/openWeatherMap";
+import type { BaseProvider } from "./providers/BaseProvider";
+import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
-import { Weatherbit } from "./providers/weatherbit";
-import { ClimacellV4 } from "./providers/climacellV4";
-import { USWeather } from "./providers/us_weather";
-import { VisualCrossing } from "./providers/visualcrossing";
+import { Weatherbit } from "./providers/weatherbit/provider";
+import { ClimacellV4 } from "./providers/tomorrow_io/provider";
+import { USWeather } from "./providers/us_weather/provider";
+import { VisualCrossing } from "./providers/visualcrossing/provider";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
-import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst/provider";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
-import { GeoIP } from "./location_services/geoip_services/base";
+import type { GeoIP } from "./location_services/geoip_services/base";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 import { GeoClue } from "./location_services/geoip_services/geoclue";
 import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
+import { OpenMeteo } from "./providers/open-meteo/provider";
+import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
+import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
+import { soupLib } from "./lib/soupLib";
 
-const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
-const { File, Cancellable } = imports.gi.Gio;
+const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
+const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang: typeof imports.lang = imports.lang;
-const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings } = imports.gi.Gio;
+
+type SettingsSchema = typeof settingsSchema;
+
+type SettingsSchemaWithValues = {
+	[key in keyof SettingsSchema]: SettingsSchema[key] & {
+		value: SettingsSchema[key] extends { columns: unknown[] } ? Record<string, unknown>[] : unknown;
+	}
+}
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
@@ -56,10 +67,13 @@ export type Services =
 	"AccuWeather" |
 	"DeutscherWetterdienst" |
 	"WeatherUnderground" |
-	"PirateWeather";
+	"PirateWeather" |
+	"OpenMeteo" |
+	"OpenWeatherMap_OneCall";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
+	"OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+	"OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
 	"MetNorway": (app) => new MetNorway(app),
 	"Weatherbit": (app) => new Weatherbit(app),
 	"Tomorrow.io": (app) => new ClimacellV4(app),
@@ -70,7 +84,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"AccuWeather": (app) => new AccuWeather(app),
 	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
 	"WeatherUnderground": (app) => new WeatherUnderground(app),
-	"PirateWeather": (app) => new PirateWeather(app)
+	"PirateWeather": (app) => new PirateWeather(app),
+	"OpenMeteo": (app) => new OpenMeteo(app),
 }
 
 export class Config {
@@ -84,8 +99,7 @@ export class Config {
 	private readonly _distanceUnit!: DistanceUnits;
 	private readonly _apiKey!: string;
 	private readonly _useSymbolicIcons!: boolean;
-	// No need to access this from the outside
-	private readonly keybinding!: string;
+	public readonly keybinding!: string;
 
 	// simple variables
 	public readonly _refreshInterval!: number;
@@ -117,8 +131,14 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
-	public readonly _panelTextOverride!: string;
+	/**
+	 * Panel text override
+	 */
+	public readonly _tempTextOverride!: string;
 	public readonly _tooltipTextOverride!: string;
+	public readonly _showAlerts!: boolean;
+	public readonly _userAgentStringOverride!: string;
+	public readonly _runScript!: string;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -155,13 +175,22 @@ export class Config {
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
 	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
+	public readonly ShowAlertsChanged = new Event<Config, string>();
+	public readonly UserAgentStringOverrideChanged = new Event<Config, string>();
+	public readonly RunScriptChanged = new Event<Config, boolean>();
+	public readonly TempTextOverrideChanged = new Event<Config, string>();
+
+	public readonly FontChanged = new Event<Config, void>();
+	public readonly HotkeyChanged = new Event<Config, void>();
+	public readonly SelectedLogPathChanged = new Event<Config, void>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
 	private currentLocation: LocationData | null = null;
+	public readonly LocationChanged = new Event<Config, void>();
 
 	private settings: imports.ui.settings.AppletSettings;
-	private app: WeatherApplet;
+	private readonly instance_id: number;
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 	public ForegroundColor: imports.gi.Clutter.Color | null = null;
@@ -180,7 +209,7 @@ export class Config {
 	/**
 	 * Selected location's timezone
 	 */
-	public get Timezone() {
+	public get Timezone(): string | undefined {
 		return this.timezone;
 	}
 
@@ -201,36 +230,36 @@ export class Config {
 	private readonly InterfaceSettings: imports.gi.Gio.Settings;
 	private currentFontSize: number;
 
-	constructor(app: WeatherApplet, instanceID: number) {
-		this.app = app;
+	constructor(instanceID: number) {
+		this.instance_id = instanceID;
 		this.settings = new AppletSettings(this, UUID, instanceID);
 		// Bind as early as possible so that we can update the log level asap
 		this.BindSettings();
 		this.onLogLevelUpdated();
 		this.currentLocale = ConstructJsLocale(get_language_names());
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new GeoIPFedora(app); // IP location lookup
-		this.geoClue = new GeoClue(app);
-		this.geoLocationService = new GeoLocation(app);
+		this.autoLocProvider = new GeoIPFedora(this); // IP location lookup
+		this.geoClue = new GeoClue();
+		this.geoLocationService = new GeoLocation();
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.LocStore = new LocationStore(this.app, this);
+		this.LocStore = new LocationStore(this);
 	}
 
 	public get CurrentFontSize(): number {
 		return this.currentFontSize;
 	}
 
-	public get CurrentLocation() {
+	public get CurrentLocation(): LocationData | null {
 		return this.currentLocation;
 	}
 
-	public get ApiKey() {
+	public get ApiKey(): string {
 		return this._apiKey.replace(" ", "");
 	}
 
-	public get Language() {
+	public get Language(): string | null {
 		return this.GetLanguage(this.currentLocale);
 	}
 
@@ -335,12 +364,6 @@ export class Config {
 
 		let loc = this._location;
 		if (loc == undefined || loc.trim() == "") {  // No location
-			this.app.ShowError({
-				type: "hard",
-				detail: "no location",
-				userError: true,
-				message: _("Make sure you entered a location or use Automatic location instead.")
-			});
 			return null;
 		}
 
@@ -358,8 +381,8 @@ export class Config {
 			loc = loc.replace(" ", "");
 			const latLong = loc.split(",");
 			const location: LocationData = {
-				lat: parseFloat(latLong[0]),
-				lon: parseFloat(latLong[1]),
+				lat: Number.parseFloat(latLong[0]),
+				lon: Number.parseFloat(latLong[1]),
 				timeZone: DateTime.now().zoneName,
 				entryText: loc,
 			}
@@ -372,7 +395,7 @@ export class Config {
 		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
-		if (!!locationData?.entryText) {
+		if (locationData?.entryText) {
 			Logger.Debug("Coordinates are found via Reverse address search");
 		}
 
@@ -409,23 +432,20 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
 
-		this.settings.bind("tempTextOverride", "_" + "panelTextOverride",
-			this.app.RefreshLabel)
-
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
 
 		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", this.OnKeySettingsUpdated, null);
+			"keybinding", () => this.HotkeyChanged.Invoke(this), null);
 
 		this.settings.bindProperty(BindingDirection.IN, "logLevel",
 			"_logLevel", this.onLogLevelUpdated, null);
 
 		this.settings.bind("selectedLogPath",
-			"_selectedLogPath", this.app.saveLog);
+			"_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
 
-		keybindingManager.addHotKey(
-			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+		soupLib.SetUserAgent(this._userAgentStringOverride);
+		this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
 	}
 
 	// UTILS
@@ -438,16 +458,6 @@ export class Config {
 		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 	}
 
-	private OnKeySettingsUpdated = (): void => {
-		if (this.keybinding != null) {
-			keybindingManager.addHotKey(
-				UUID,
-				this.keybinding,
-				Lang.bind(this.app, this.app.on_applet_clicked)
-			);
-		}
-	}
-
 	private onLogLevelUpdated = () => {
 		Logger.ChangeLevel(this._logLevel);
 	}
@@ -456,7 +466,7 @@ export class Config {
 	private OnLocationChanged = () => {
 		Logger.Debug("User changed location, waiting 3 seconds...");
 		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
-		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+		this.doneTypingLocation = setTimeout(this.DoneTypingLocation, 3000);
 	}
 
 	private OnLocationStoreChanged = () => {
@@ -465,21 +475,21 @@ export class Config {
 
 	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.app.Refresh({ rebuild: true});
+		this.FontChanged.Invoke(this);
 	}
 
 	/** Called when 3 seconds is up with no change in location */
-	private DoneTypingLocation() {
+	private DoneTypingLocation = () => {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.Refresh();
+		this.LocationChanged.Invoke(this);
 	}
 
 	private SetLocation(value: string) {
 		this.settings.setValue(this.WEATHER_LOCATION, value);
 	}
 
-	public SetLocationList(list: LocationData[]) {
+	public SetLocationList(list: LocationData[]): void {
 		this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
 	}
 
@@ -536,21 +546,21 @@ export class Config {
 	private GetCurrentFontSize() {
 		const nameString = this.InterfaceSettings.get_string("font-name");
 		const elements = nameString.split(" ");
-		const size = parseFloat(elements[elements.length - 1]);
+		const size = Number.parseFloat(elements[elements.length - 1]);
 		Logger.Debug("Font size changed to " + size.toString());
 		return size;
 	}
 
-	public async GetAppletConfigJson(): Promise<Record<string, any>> {
+	public async GetAppletConfigJson(): Promise<Record<string, unknown>> {
 		const home = get_home_dir() ?? "~";
-		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
-		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.instance_id}.json`;
+		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.instance_id}.json`;
 		let configFile = File.new_for_path(configFilePath);
 		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
 		// Check if file exists
-		if (!await FileExists(configFile)) {
-			if (!await FileExists(oldConfigFile)) {
+		if (!FileExists(configFile)) {
+			if (!FileExists(oldConfigFile)) {
 				throw new Error(
 					_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` })
 				);
@@ -568,7 +578,7 @@ export class Config {
 			);
 		}
 
-		const conf = JSON.parse(confString);
+		const conf = JSON.parse(confString) as SettingsSchemaWithValues;
 		if (conf?.apiKey?.value != null)
 			conf.apiKey.value = "REDACTED";
 
@@ -585,7 +595,7 @@ export class Config {
 		return conf;
 	}
 
-	public Destroy() {
+	public Destroy(): void {
 		this.settings.finalize?.();
 	}
 }
@@ -721,7 +731,23 @@ export class Config {
 	TOOLTIP_TEXT_OVERRIDE: {
 		key: "tooltipTextOverride",
 		prop: "TooltipTextOverride"
-	}
+	},
+	SHOW_ALERTS: {
+		key: "showAlerts",
+		prop: "ShowAlerts"
+	},
+	USER_AGENT_STRING_OVERRIDE: {
+		key: "userAgentStringOverride",
+		prop: "UserAgentStringOverride"
+	},
+	RUN_SCRIPT: {
+		key: "runScript",
+		prop: "RunScript"
+	},
+	TEMP_TEXT_OVERRIDE: {
+		key: "tempTextOverride",
+		prop: "TempTextOverride"
+	},
 } as const;
 
 type ServiceClassMappingType = {

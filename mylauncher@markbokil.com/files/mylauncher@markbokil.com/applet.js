@@ -25,6 +25,7 @@ const AppletMeta = imports.ui.appletManager.applets['mylauncher@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta['mylauncher@markbokil.com'].path;
 
 // When no configuration exists
+const LegacyPropertiesFile = GLib.get_home_dir() + '/.cinnamon/configs/' + UUID;
 const DefaultPropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/mylauncher.properties']);
 // Save all changes to this location, load this if the file exists
 const ConfigFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
@@ -74,25 +75,21 @@ MyApplet.prototype = {
             let configFile = Gio.file_new_for_path(ConfigFilePath);
             if (!configFile.query_exists(null)) {
                 // Make the directory
-                Util.spawnCommandLine('mkdir ' + ConfigFilePath);
-                // Give it enough time and continue with init
-                Mainloop.timeout_add(2000, () => this.__init(orientation));
-            } else {
-                this.__init(orientation);
+                configFile.make_directory_with_parents(null);
             }
-        } catch (e) {
-            global.logError(e);
-        }
-    },
-
-    __init: function(orientation) {
-        try {
             // Does the configuration file exist in the user applet config directory?
             let file = Gio.file_new_for_path(PropertiesFile);
             if (!file.query_exists(null)) {
-                // If not, duplicate the default file and monitor it for changes
-                let defaultFile = Gio.file_new_for_path(DefaultPropertiesFile);
-                defaultFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+                // Is there a legacy configuration file?
+                let legacyFile = Gio.file_new_for_path(LegacyPropertiesFile);
+                if (legacyFile.query_exists(null)) {
+                    // Use the legacy configuration file to the new location
+                    legacyFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+                } else {
+                    // If not, duplicate the default file and monitor it for changes
+                    let defaultFile = Gio.file_new_for_path(DefaultPropertiesFile);
+                    defaultFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+                }
             }
 
             // watch props file for changes
@@ -114,12 +111,11 @@ MyApplet.prototype = {
             this._createContextMenu();
 
             this._setUIStates();
-        }
-        catch (e) {
+        } catch (e) {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
         this.menu.toggle();        
     },

@@ -1,10 +1,11 @@
 import { DateTime } from "luxon";
-import { Services } from "../config";
-import { HTTPParams, HttpLib } from "../lib/httpLib";
-import { WeatherApplet } from "../main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import type { Services } from "../config";
+import type { HTTPParams} from "../lib/httpLib";
+import { HttpLib } from "../lib/httpLib";
+import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../weather-data";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
+import type { LocationData } from "../types";
 
 export class DanishMI extends BaseProvider {
 	public readonly needsApiKey: boolean = false;
@@ -32,10 +33,6 @@ export class DanishMI extends BaseProvider {
 		west: null,
 		south: null,
 		north: null
-	}
-
-	constructor(app: WeatherApplet) {
-		super(app);
 	}
 
 	async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
@@ -176,16 +173,19 @@ export class DanishMI extends BaseProvider {
 			return false;
 		});
 
+		if (relevantHours.length == 0)
+			return this.ResolveCondition(undefined);
+
 		// convert night symbols to day symbols for daily
 		const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
 
 		let resultSymbol: number;
 		// symbols include rain or other stuff, get most severe
 		// exclude foggy from priority symbols
-		if (!!normalizedSymbols.find(x => x > 10 && x != 45))
+		if (normalizedSymbols.some(x => x > 10 && x != 45))
 			resultSymbol = Math.max(...normalizedSymbols);
 		else // get most common if there is no precipitation
-			resultSymbol = <number>mode(normalizedSymbols);
+			resultSymbol = mode(normalizedSymbols);
 
 		return this.ResolveCondition(resultSymbol);
 	}
@@ -392,19 +392,19 @@ export class DanishMI extends BaseProvider {
 	private DateStringToDate(str: string): Date {
 		if (str.length == 14) {
 			return new Date(Date.UTC(
-				parseInt(str.substring(0, 4)),
-				parseInt(str.substring(4, 6)) - 1,
-				parseInt(str.substring(6, 8)),
-				parseInt(str.substring(8, 10)),
-				parseInt(str.substring(10, 12)),
-				parseInt(str.substring(12, 14))
+				Number.parseInt(str.slice(0, 4)),
+				Number.parseInt(str.slice(4, 6)) - 1,
+				Number.parseInt(str.slice(6, 8)),
+				Number.parseInt(str.slice(8, 10)),
+				Number.parseInt(str.slice(10, 12)),
+				Number.parseInt(str.slice(12, 14))
 			));
 		}
 		else if (str.length == 8) {
 			return new Date(Date.UTC(
-				parseInt(str.substring(0, 4)),
-				parseInt(str.substring(4, 6)) - 1,
-				parseInt(str.substring(6, 8)),
+				Number.parseInt(str.slice(0, 4)),
+				Number.parseInt(str.slice(4, 6)) - 1,
+				Number.parseInt(str.slice(6, 8)),
 				0, 0, 0, 0
 			));
 		}
@@ -412,10 +412,10 @@ export class DanishMI extends BaseProvider {
 		else {
 			// Pad with 0s
 			if (str.length == 3) {
-				str = ("0000" + str).substr(-4, 4);
+				str = ("0000" + str).slice(-4, -4 + 4);
 			}
 			const today = new Date();
-			today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
+			today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);
 			return today;
 		}
 	}
