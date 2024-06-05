@@ -7,7 +7,7 @@ import subprocess
 import sys
 from concurrent.futures import ProcessPoolExecutor
 from glob import glob
-from typing import List, Literal, Optional, Tuple
+from typing import Any, List, Literal, Optional, Tuple
 import selectors
 from pathlib import Path
 
@@ -35,14 +35,19 @@ def parse_args():
     if args.uuid and args.uuid.endswith('/'):
         args.uuid = args.uuid.replace('/', '')
     if args.all and not args.uuid:
-        for file_path in os.listdir("."):
-            if os.path.isdir(file_path) and not file_path.startswith("."):
-                if args.install:
-                    install_po(file_path, True)
-                elif args.remove:
-                    remove_po(file_path, True)
-                else:
-                    make_pot(file_path)
+        folders = [file_path for file_path in os.listdir(".") if os.path.isdir(file_path) and not file_path.startswith(".")]
+        
+        if args.install:
+            for folder in folders:
+                install_po(folder, True)
+        elif args.remove:
+            for folder in folders:
+                remove_po(folder, True)
+        else:
+            with ProcessPoolExecutor() as executor:
+                for _ in executor.map(make_pot, folders):
+                    pass
+
     elif args.install and args.remove:
         print('Only -i/--install OR -r/--remove may be specified. Not both.')
         sys.exit(1)
@@ -150,7 +155,6 @@ def make_pot(uuid: str):
     # Extract translatable strings from glade
     glade_list = glob(f'{output_dir}/**/*.glade', recursive=True)
     glade_list += glob(f'{output_dir}/**/*.ui', recursive=True)
-    print(glade_list)
     for glade_file in glade_list:
         subprocess.run(["xgettext", "-jL", "Glade", "-o", pot_file_path,
                        glade_file], check=True, cwd=output_dir)
@@ -165,7 +169,7 @@ def make_pot(uuid: str):
     metadata_file = f'{uuid}/files/{uuid}/metadata.json'
     try:
         with open(metadata_file, encoding='utf-8') as meta:
-            metadata = json.load(meta)
+            metadata: dict[str, Any] = json.load(meta)
         version = str(metadata['version'])
     except (FileNotFoundError, KeyError):
         print(f"{uuid}: metadata.json or version not found")
