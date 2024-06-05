@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-05 23:35+0200\n"
-"PO-Revision-Date: 2024-05-23 11:47-0400\n"
+"PO-Revision-Date: 2024-06-05 19:14-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -740,7 +740,7 @@ msgstr "Redefinir los atajos de teclado multimedia"
 
 #. 5.4->settings-schema.json->button-set-to-default-keybindings->description
 msgid "Use the same shortcuts as those defined by Cinnamon"
-msgstr ""
+msgstr "Utilice los mismos atajos que los definidos por Cinnamon"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
