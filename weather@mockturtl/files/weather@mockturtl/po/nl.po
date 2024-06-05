@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-06-05 17:39+0200\n"
+"PO-Revision-Date: 2024-06-06 00:15+0200\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -1857,7 +1857,7 @@ msgstr "Voelt aan als"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
-msgstr "Meteo openen"
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17544
 msgid ""
@@ -2816,7 +2816,7 @@ msgstr "Gekozen bestandpad voor het opslaan van logboekbestanden"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Vervangen van User Agent Tekenreeks"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2825,6 +2825,11 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Als u problemen ondervindt met een niet-correct functionerend werkbalkhulpje "
+"en als u weet dat de User Agent tekenreeks het probleem is, dan kunt u "
+"trachten om die te vervangen. Verander dit alleen als u precies weet wat u "
+"doet. Dit is een tekenreeks die verstuurd wordt naar de server wanneer het "
+"werkbalkhulpje probeert om de weergegevens te verkrijgen."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
@@ -2848,6 +2853,22 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Het werkbalkhulpje zal de opdracht die u invoert telkens uitvoeren wanneer "
+"de weergegevens worden bijgewerkt. De opdracht zal worden geïnterpoleerd met "
+"dezelfde waarden met dezelfde opmaak die u kunt verkrijgen in enige "
+"vervanging; als extra krijgt u {full_data} wat de volledige weergegevens "
+"zijn. Interpolatie met enkele accolades {xxx} zal niet als zodanig worden "
+"behandeld, met dubbele accolades {{xxxx}} worden ze vervat in enkele "
+"aanhalingstekens (') en alle andere enkele aanhalingstekens worden "
+"daarbinnen als zodanig behandeld. U kunt dit gebruiken om de weergegevens te "
+"integreren met andere delen van uw systeem. U kunt de volledige structuur "
+"van de weergegevens nakijken via de koppeling in de LEESMIJ (README).\n"
+"\n"
+"Voorbeeld: 'notify-send \"Het weer is {c} en de temperatuur is {t}{u}\"' zal "
+"een melding tonen met de huidige weersomstandigheden en temperatuur.\n"
+"\n"
+"Voorbeeld: 'echo {{full_data}} > /tmp/weather_data' zal de volledige "
+"weergegevens opslaan in een bestand in /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
