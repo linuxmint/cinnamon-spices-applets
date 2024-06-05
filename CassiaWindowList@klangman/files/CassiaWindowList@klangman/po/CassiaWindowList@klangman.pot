@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: CassiaWindowList@klangman 2.1.0\n"
+"Project-Id-Version: CassiaWindowList@klangman 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-27 19:07-0400\n"
+"POT-Creation-Date: 2024-06-04 23:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:547 6.0/applet.js:547
+#: 4.0/applet.js:550 6.0/applet.js:550
 msgid "all buttons"
 msgstr ""
 
-#: 4.0/applet.js:2705 6.0/applet.js:2705
+#: 4.0/applet.js:2767 6.0/applet.js:2767
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:2709 6.0/applet.js:2709
+#: 4.0/applet.js:2771 6.0/applet.js:2771
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2713 6.0/applet.js:2713
+#: 4.0/applet.js:2775 6.0/applet.js:2775
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2717 6.0/applet.js:2717
+#: 4.0/applet.js:2779 6.0/applet.js:2779
 msgid "Website"
 msgstr ""
 
-#: 4.0/applet.js:2721 6.0/applet.js:2721
+#: 4.0/applet.js:2783 6.0/applet.js:2783
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2723 6.0/applet.js:2723
+#: 4.0/applet.js:2785 6.0/applet.js:2785
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -58,111 +58,127 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2732 6.0/applet.js:2732
+#: 4.0/applet.js:2794 6.0/applet.js:2794
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2740 6.0/applet.js:2740
+#: 4.0/applet.js:2802 6.0/applet.js:2802
 msgid "Remove from panel"
 msgstr ""
 
-#: 4.0/applet.js:2742 6.0/applet.js:2742
+#: 4.0/applet.js:2804 6.0/applet.js:2804
 msgid "Remove from this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2748 6.0/applet.js:2748
+#: 4.0/applet.js:2810 6.0/applet.js:2810
 msgid "Pin to panel"
 msgstr ""
 
-#: 4.0/applet.js:2750 6.0/applet.js:2750
+#: 4.0/applet.js:2812 6.0/applet.js:2812
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2791 6.0/applet.js:2791
+#: 4.0/applet.js:2853 6.0/applet.js:2853
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2812 6.0/applet.js:2812
+#: 4.0/applet.js:2874 6.0/applet.js:2874
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2830 6.0/applet.js:2830
+#: 4.0/applet.js:2892 6.0/applet.js:2892
 msgid "Pin to launcher"
 msgstr ""
 
-#: 4.0/applet.js:2848 4.0/applet.js:3031 6.0/applet.js:2848 6.0/applet.js:3031
+#: 4.0/applet.js:2910 4.0/applet.js:3102 6.0/applet.js:2910 6.0/applet.js:3102
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2862 6.0/applet.js:2862
+#: 4.0/applet.js:2924 6.0/applet.js:2924
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2886 6.0/applet.js:2886
+#: 4.0/applet.js:2948 6.0/applet.js:2948
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2928 6.0/applet.js:2928
+#: 4.0/applet.js:2990 6.0/applet.js:2990
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2930 6.0/applet.js:2930
+#: 4.0/applet.js:2992 6.0/applet.js:2992
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2931 6.0/applet.js:2931
+#: 4.0/applet.js:2993 6.0/applet.js:2993
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2940 6.0/applet.js:2940
+#: 4.0/applet.js:3002 6.0/applet.js:3002
 msgid " (this workspace)"
 msgstr ""
 
-#: 4.0/applet.js:2953 6.0/applet.js:2953
+#: 4.0/applet.js:3015 6.0/applet.js:3015
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2961 6.0/applet.js:2961
+#: 4.0/applet.js:3023 6.0/applet.js:3023
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2986 6.0/applet.js:2986
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:3040 6.0/applet.js:3040
+msgid "Move window here"
+msgstr ""
+
+#: 4.0/applet.js:3057 6.0/applet.js:3057
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2997 4.0/applet.js:3028 6.0/applet.js:2997 6.0/applet.js:3028
+#: 4.0/applet.js:3068 4.0/applet.js:3099 6.0/applet.js:3068 6.0/applet.js:3099
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:3051 6.0/applet.js:3051
+#: 4.0/applet.js:3122 6.0/applet.js:3122
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:3054 6.0/applet.js:3054
+#: 4.0/applet.js:3125 6.0/applet.js:3125
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:3061 6.0/applet.js:3061
+#: 4.0/applet.js:3132 6.0/applet.js:3132
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:3068 6.0/applet.js:3068
+#: 4.0/applet.js:3139 6.0/applet.js:3139
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:3075 6.0/applet.js:3075
+#: 4.0/applet.js:3146 6.0/applet.js:3146
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:3086 6.0/applet.js:3086
+#: 4.0/applet.js:3157 6.0/applet.js:3157
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:3095 6.0/applet.js:3095
+#: 4.0/applet.js:3166 6.0/applet.js:3166
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:3108 6.0/applet.js:3108
+#: 4.0/applet.js:3179 6.0/applet.js:3179
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
@@ -178,31 +194,31 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3138 6.0/applet.js:3138
+#: 4.0/applet.js:3209 6.0/applet.js:3209
 msgid "Move titlebar on to screen"
 msgstr ""
 
-#: 4.0/applet.js:3143 6.0/applet.js:3143
+#: 4.0/applet.js:3214 6.0/applet.js:3214
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:3147 6.0/applet.js:3147
+#: 4.0/applet.js:3218 6.0/applet.js:3218
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:3153 6.0/applet.js:3153
+#: 4.0/applet.js:3224 6.0/applet.js:3224
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:3160 6.0/applet.js:3160
+#: 4.0/applet.js:3231 6.0/applet.js:3231
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:3171 6.0/applet.js:3171
+#: 4.0/applet.js:3242 6.0/applet.js:3242
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:3180 6.0/applet.js:3180
+#: 4.0/applet.js:3251 6.0/applet.js:3251
 msgid "Close"
 msgstr ""
 
