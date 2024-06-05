@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-02-23 23:47+0100\n"
+"PO-Revision-Date: 2024-06-05 17:39+0200\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -1562,15 +1562,13 @@ msgstr "Zeer goed"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "As"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Windstoten"
+msgstr "Windstoot"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
 msgstr "Lichte sneeuwbuien"
 
@@ -1596,24 +1594,20 @@ msgid "Heavy drizzle"
 msgstr "Zware motregen"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Lichte sneeuwbuien"
+msgstr "Lichte regenbuien"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Zware sneeuwbuien"
+msgstr "Zware regenbuien"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
 msgstr "Natte sneeuw"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
-msgstr "Sneeuwbuien"
+msgstr "Sneeuwbui"
 
 #: 3.8/weather-applet.js:12884 3.8/weather-applet.js:14455
 msgid "Freezing fog"
@@ -1822,13 +1816,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Zorg er a.u.b. voor dat u\n"
-"de API-sleutel van Climacell hebt ingevoerd"
+"de API-sleutel van Pirate Weather hebt ingevoerd"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1839,38 +1832,32 @@ msgstr ""
 "Glass"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr "Natte sneeuw"
+msgstr "Motsneeuw"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Lichte sneeuwbuien"
+msgstr "Lichte buien"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Zware sneeuwbuien"
+msgstr "Zware buien"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Onweersbui met lichte regen"
+msgstr "Onweersbui met lichte hagel"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Onweersbui met regen"
+msgstr "Onweersbui met hagel"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
-msgstr "Voelt als"
+msgstr "Voelt aan als"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
-msgstr ""
+msgstr "Meteo openen"
 
 #: 3.8/weather-applet.js:17544
 msgid ""
@@ -1937,7 +1924,7 @@ msgstr "Gebied: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} weerwaarschuwing(en)"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1945,9 +1932,8 @@ msgid "Error Saving Debug Information"
 msgstr "Fout bij opslaan van foutopsporingsinformatie"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Kon geen weersinformatie verkrijgen voor uw gebied"
+msgstr "Kon bestand {filePath} niet openen om in te schrijven"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1959,41 +1945,39 @@ msgstr "Opgeslagen naar {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Geen script aanwezig"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "U dient eerst een script toe te voegen."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Geen weergegevens"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Geen weergegevens om een script mee te draaien"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Script met succes uitgevoerd"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Uw script is met succes uitgevoerd."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Fout bij het draaien van een script"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Script meldde een fout, zie logboeken voor meer informatie"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Werkbalkhulpje voor weer"
+msgstr "Waarschuwingen van werkbalkhulpje"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2430,7 +2414,7 @@ msgstr "Locatie-instellingen"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Technisch en automatisering"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2486,7 +2470,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2501,9 +2485,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (alleen voor de VS)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (sleutel nodig)"
+msgstr "OpenWeatherMap OneCall (sleutel nodig)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2606,13 +2589,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Tonen van weerwaarschuwingen inschakelen"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Waarschuwingenknop zal zichtbaar zijn in het opduikmenu indien er actieve "
+"waarschuwingen zijn voor uw locatie."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2704,7 +2689,7 @@ msgstr "Als ZO, N in plaats van richtingpictogrammen."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Weeraanbieder moet weeromstandigheden vertalen indien mogelijk"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2712,6 +2697,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Of uw weeraanbieder de weersomstandigheden moet vertalen in uw taal indien "
+"uw taal door de weeraanbieder wordt ondersteund. Zo niet, dan zal het "
+"werkbalkhulpje zijn eigen vertaalsysteem gebruiken."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2840,7 +2828,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Voer een opdracht uit wanneer de weerinformatie verandert"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2863,4 +2851,4 @@ msgstr ""
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Uw opdracht uitproberen"
