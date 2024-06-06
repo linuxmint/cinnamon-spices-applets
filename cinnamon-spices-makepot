@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 import argparse
+from io import BytesIO
 import json
 import os
 import subprocess
 import sys
 from concurrent.futures import ProcessPoolExecutor
 from glob import glob
-from typing import Any, List, Literal, Optional, Sequence, Tuple, Union
+from typing import Any, List, Literal, Optional, Sequence, Tuple, Union, cast
 import selectors
 from pathlib import Path
 
@@ -62,13 +63,30 @@ def parse_args():
     else:
         parser.print_help()
         
+def print_output(output: CapturedOutput):
+    ''' Replay the output of a command, preserving stdout/stderr order and distinction '''
+    # Flush is needed or we won't print in the right order
+    for line in output:
+        if line[0] == "stdout":
+            print(line[1], end="", file=sys.stderr, flush=True)
+        elif line[0] == "stderr":
+            print(line[1], end="", file=sys.stdout, flush=True)
+        
 def get_command_output(
     cmd: Sequence[Union[str, Path]],
     cwd: Optional[Union[str, Path]] = None, 
     check: bool = True,
     noStderr: bool = False
 ) -> List[Tuple[Literal["stdout", "stderr"], str]]:
-    '''Gather command output in order and preserve stdout/stderr distinction'''
+    ''' Gather command output while preserving stdout/stderr order and distinction
+    
+        Based on https://stackoverflow.com/a/56918582/14100077
+        
+        @param cmd: The command to run
+        @param cwd: The working directory to run the command in
+        @param check: If True, raise a subprocess.CalledProcessError if the command fails
+        @param noStderr: If True, don't capture stderr
+    '''
     out = subprocess.Popen(
         cmd,
         stderr=subprocess.PIPE,
@@ -77,14 +95,18 @@ def get_command_output(
     )
     text: List[Tuple[Literal["stdout", "stderr"], str]] = []
     sel = selectors.DefaultSelector()
-    if not noStderr:
+    if not noStderr and out.stderr:
+        sel.register(out.stderr, selectors.EVENT_READ)
+        
+    if out.stdout:
         sel.register(out.stdout, selectors.EVENT_READ)
-    sel.register(out.stderr, selectors.EVENT_READ)
     
     done = False
     while not done:
         for key, _ in sel.select():
-            data = key.fileobj.read1().decode()
+            # In this case it's always a BytesIO like object
+            fileObj: BytesIO = cast(BytesIO, key.fileobj)
+            data = fileObj.read1().decode()
             if not data:
                 done = True
                 break
@@ -94,6 +116,7 @@ def get_command_output(
                 text.append(("stderr", data))
     
     exit_code = out.wait()
+    # Reimplementing subprocess.run's check logic
     if (check and exit_code != 0):
         stdout = map(lambda x: x[1], filter(lambda line: line[0] == "stdout", text))
         stderr = map(lambda x: x[1], filter(lambda line: line[0] == "stderr", text))
@@ -139,14 +162,6 @@ def remove_po(uuid: str, _all: bool = False):
             sys.exit(1)
     for uuid_mo_file in uuid_mo_list:
         os.remove(uuid_mo_file)
-        
-def print_output(output: CapturedOutput):
-    # Flush is needed or we won't print in the right order
-    for line in output:
-        if line[0] == "stdout":
-            print(line[1], end="", file=sys.stderr, flush=True)
-        elif line[0] == "stderr":
-            print(line[1], end="", file=sys.stdout, flush=True)
 
 
 def process_po(po_file: str, uuid: str) -> CapturedOutput:
