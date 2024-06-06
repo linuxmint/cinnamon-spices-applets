@@ -1,3 +1,6 @@
+### v6.16.0~20240605
+  * Shortcuts tab of this applet settings: Added a button to define multimedia shortcuts identical to those in Cinnamon.
+
 ### v6.15.0~20240523
   * From now on, use Ctrl+wheel or Shift+wheel to control microphone volume.
   * New option: "Display icon indicating that the microphone is activated, if applicable".

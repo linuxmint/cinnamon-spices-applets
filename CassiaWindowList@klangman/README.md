@@ -1,7 +1,10 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features designed to give you more control over how your window-list operates.
 
-Recent new features (Aug 2023 - May 2024):
+Recent new features (Aug 2023 - June 2024):
 
+* Support "drag-&-drop to desktop" which will move a window to the workspace & monitor it's dropped on
+* "Move window here" context menu/mouse action options to move a window to the current monitor/workspace
+* Thumbnail menu items will now show the windows workspace/monitor number(s) when appropriate
 * Added an option to configure the "number label" contents (added workspace and monitor number options)
 * Added an optional vertical ellipsis character to indicate a window-list button is grouped
 * Added 4 new mouse action options that will activate windows 1-4 of a grouped button

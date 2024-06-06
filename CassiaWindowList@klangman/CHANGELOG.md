@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0
+
+* Added support for drag-and-drop of window-list buttons to the desktop. This will move the window to the desktop that the drop occurred on. If you drop on a monitor where the window does not current reside, it will be moved to that monitor. If the window exists on a different workspace, it will be moved to the current workspace. If the window does not have the focus it will be activated and given the focus. Requires Cinnamon 5.4 (Mint 21.x)
+* Added a "Move window here" context menu item and mouse action options. Using this feature will move the window to the current monitor (the monitor of the window-list) and to the current workspace, then the window will be given the focus.
+* When appropriate, the Thumbnail menu items will now show the windows workspace and monitor number to the right of the window title. This will only appear when one of the window-list options are enabled that shows windows from other monitors/workspaces and only when there are more then one monitor/workspace available. The number(s) will appear in the order "(workspace#/Monitor#)" when both numbers are needed.
+* When the "number label" is set to show workspace numbers and button is grouped, I fixed the "number label" so that it is updated when the focus changes causing the current window for the grouped button to change. This is needed in case the workspace for the newly focused window is on a different workspace than the previous most recently focused window of the group.
+* Fixed the number of arguments passed to the API call for moving windows to other workspaces on older OS's (pre Cinnamon 5.4).
+
+
 ## 2.1.0
 
 * Added an option to configure what the "number label" content represents (Window count, Workspace index or Monitor number).

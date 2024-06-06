@@ -146,7 +146,7 @@ To ensure that these tables are always up-to-date, they are automatically regene
 ## (incomplete)
 To determine the backward compatibility of a javascript feature, look at it's page on [mdm web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) to see in which version of Firefox it was introduced. Then compare with the table below.
 
-<table><tr><th colspan="1">Mint Version</th><th colspan="1">Codename</th><th colspan="1">Release Date</th><th colspan="1">Cinnamon<br/>Version</th><th colspan="2">Firefox version<br/>(CJS JS engine)</th></tr>
+<table><tr><th colspan="1">Mint<br/>Version</th><th colspan="1">Codename</th><th colspan="1">Release Date</th><th colspan="1">Cinnamon<br/>Version</th><th colspan="2">Firefox version<br/>(CJS JS engine)</th></tr>
 <tr><td colspan="1">17</td><td colspan="1">Qiana</td><td colspan="1">31 May 14</td><td colspan="1">2.2.14</td><td colspan="1"></td></tr>
 <tr><td colspan="1">17.1</td><td colspan="1">Rebecca</td><td colspan="1">29 Nov 14</td><td colspan="1">2.4.6</td><td colspan="1"></td></tr>
 <tr><td colspan="1">17.2</td><td colspan="1">Rafaela</td><td colspan="1">30 Jun 15</td><td colspan="1">2.6.13</td><td colspan="1"></td></tr>
@@ -159,12 +159,15 @@ To determine the backward compatibility of a javascript feature, look at it's pa
 <tr><td colspan="1">19.1</td><td colspan="1">Tessa</td><td colspan="1">19 Dec 18</td><td colspan="1">4.0.9</td></tr>
 <tr><td colspan="1">19.2</td><td colspan="1">Tina</td><td colspan="1">2 Aug 19</td><td colspan="1">4.2.3</td></tr>
 <tr><td colspan="1">19.3</td><td colspan="1">Tricia</td><td colspan="1">18 Dec 19</td><td colspan="1">4.4.8</td></tr>
-<tr><td colspan="1">20</td><td colspan="1">Ulyana</td><td colspan="1">27 Jun 20</td><td colspan="1">4.6.7</td></tr>
+<tr><td colspan="1">20*</td><td colspan="1">Ulyana</td><td colspan="1">27 Jun 20</td><td colspan="1">4.6.7</td></tr>
 <tr><td colspan="1">20.1</td><td colspan="1">Ulyssa</td><td colspan="1">8 Jan 21</td><td colspan="1">4.8.6</td><td colspan="1" rowspan="5">78</td></tr>
 <tr><td colspan="1">20.2</td><td colspan="1">Uma</td><td colspan="1">8 Jul 21</td><td colspan="1">5.0.5</td></tr>
 <tr><td colspan="1">20.3</td><td colspan="1">Una</td><td colspan="1">7 Jan 22</td><td colspan="1">5.2.7</td></tr>
-<tr><td colspan="1">21</td><td colspan="1">Vanessa</td><td colspan="1">31 Jul 22</td><td colspan="1">5.4.12</td></tr>
+<tr><td colspan="1">21*</td><td colspan="1">Vanessa</td><td colspan="1">31 Jul 22</td><td colspan="1">5.4.12</td></tr>
 <tr><td colspan="1">21.1</td><td colspan="1">Vera</td><td colspan="1">20 Dec 22</td><td colspan="1">5.6.8</td></tr>
 <tr><td colspan="1">21.2</td><td colspan="1">Victoria</td><td colspan="1">16 Jul 23</td><td colspan="1">5.8.4</td><td colspan="1" rowspan="2">102</td></tr>
 <tr><td colspan="1">21.3</td><td colspan="1">Virginia</td><td colspan="1">12 Jan 24</td><td colspan="1">6.0.4</td></tr>
+<tr><td colspan="1">22</td><td colspan="1">Wilma</td><td colspan="1"></td><td colspan="1">6.2.x</td><td colspan="1" rowspan="1">115</td></tr>
 </table>
+
+*Mint 20 series is officially supported until Apr 2025, 21 series until Apr 2027. Earlier versions official support has ended.

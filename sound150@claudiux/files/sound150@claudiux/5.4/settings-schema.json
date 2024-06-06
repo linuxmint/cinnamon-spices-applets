@@ -133,6 +133,7 @@
         "keyOpen",
         "keySwitchPlayer",
         "redefine-volume-keybindings",
+        "button-set-to-default-keybindings",
         "audio-stop",
         "pause-on-off",
         "volume-mute",
@@ -390,6 +391,12 @@
     "type": "switch",
     "description": "Redefine Multimedia Keyboard Shortcuts",
     "default": false
+  },
+  "button-set-to-default-keybindings": {
+    "type": "button",
+    "dependency": "redefine-volume-keybindings",
+    "description": "Use the same shortcuts as those defined by Cinnamon",
+    "callback": "_set_shortcuts_as_default"
   },
   "pause-on-off": {
     "type": "keybinding",
