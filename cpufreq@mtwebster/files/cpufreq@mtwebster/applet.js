@@ -66,6 +66,8 @@ const cpu_dir = Gio.file_new_for_path(cpu_path);
 let height = 22;
 const DEC_WHITE = 16777215;
 
+const formatNum = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format;
+
 // Translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
@@ -92,13 +94,20 @@ function rd_nums_frm_file(file) {
 }
 function num_to_freq_panel(num) {
     num = Math.round(num);
-    if (num < 1000)
-        return num + ' kHz';
-    if (num < 1000000)
-        return Math.round(num / 10) / 100 + ' MHz';
-    if (num < 1000000000)
-        return Math.round(num / 10000) / 100 + ' GHz';
-    return Math.round(num / 10000000) / 100 + ' THz';
+    let units;
+    if (num < 1000) {
+        units = 'kHz';
+    } else if (num < 1000000) {
+        num = Math.round(num / 10) / 100;
+        units = 'MHz';
+    } else if (num < 1000000000) {
+        num = Math.round(num / 10000) / 100;
+        units = 'GHz';
+    } else {
+        num = Math.round(num / 10000000) / 100;
+        units = 'THz';
+    }
+    return formatNum(num) + ' ' + units;
 }
 function num_to_freq(num) {
     num = Math.round(num);
