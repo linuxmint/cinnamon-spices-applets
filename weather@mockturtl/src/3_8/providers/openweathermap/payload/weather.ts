@@ -90,7 +90,7 @@ export interface OWMWeatherResponse {
 	}
 }
 
-export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, conditionsTranslated: boolean, timezone: string | undefined = "local"): Omit<WeatherData, "forecasts" | "immediatePrecipitation" | "hourlyForecasts" | "alerts"> {
+export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, conditionsTranslated: boolean, timezone: string): Omit<WeatherData, "forecasts" | "immediatePrecipitation" | "hourlyForecasts" | "alerts"> {
 	return {
 		date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
 		sunrise: DateTime.fromSeconds(weather.sys.sunrise, {zone: timezone}),
@@ -99,7 +99,8 @@ export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, conditionsT
 		location: {
 			city: weather.name,
 			country: weather.sys.country,
-			url: `https://openweathermap.org/city/${weather.id}`
+			url: `https://openweathermap.org/city/${weather.id}`,
+			timeZone: timezone
 		},
 		condition: {
 			main: conditionsTranslated ? weather.weather?.[0].main : OWMMainToTranslated(weather.weather?.[0].main),

@@ -134,7 +134,8 @@ export class ClimacellV4 extends BaseProvider {
 			sunrise,
 			sunset,
 			location: {
-				url: "https://www.tomorrow.io/weather"
+				url: "https://www.tomorrow.io/weather",
+				timeZone: loc.timeZone,
 			},
 			extra_field: {
 				name: _("Feels Like"),

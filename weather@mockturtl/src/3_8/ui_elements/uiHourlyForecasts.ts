@@ -91,7 +91,7 @@ export class UIHourlyForecasts {
 	}
 
 	private OnShortHourlyTimeChanged = (config: Config, shortTime: boolean, data: WeatherData) => {
-		this.Display(data.hourlyForecasts, config, config.Timezone);
+		this.Display(data.hourlyForecasts, config, data.location.timeZone);
 	}
 
 	/**
@@ -362,7 +362,7 @@ export class UIHourlyForecasts {
 
 			this.hourlyForecasts.push({
 				// Override color on light theme for grey text
-				Hour: Label({ 
+				Hour: Label({
 					text: "Hour",
 					style_class: "hourly-time",
 					style: textColorStyle,
@@ -381,14 +381,14 @@ export class UIHourlyForecasts {
 					style: "padding-top: 5px;",
 					x_align: imports.gi.Clutter.ActorAlign.CENTER,
 				}),
-				PrecipVolume: Label({ 
+				PrecipVolume: Label({
 					text: _(ELLIPSIS),
 					style_class: "hourly-data",
 					style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;`,
 					x_align: imports.gi.Clutter.ActorAlign.CENTER,
 				}),
-				Temperature: Label({ 
-					text: _(ELLIPSIS), 
+				Temperature: Label({
+					text: _(ELLIPSIS),
 					style_class: "hourly-data",
 					style: `padding-top: ${this.tempGraphHeight}px`,
 					x_align: imports.gi.Clutter.ActorAlign.CENTER,

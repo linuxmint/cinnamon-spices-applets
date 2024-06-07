@@ -1,9 +1,9 @@
-import { DateTime } from "luxon";
 import { Logger } from "../lib/services/logger";
 import type { LocationData } from "../types";
 import { _ } from "../utils";
 import { HttpLib } from "../lib/httpLib";
 import { ErrorHandler } from "../lib/services/error_handler";
+import type { Config } from "../config";
 
 interface NominatimLocationItem {
 	place_id: number;
@@ -46,7 +46,7 @@ export class GeoLocation {
 	 * Finds location and rebuilds entryText so it can be looked up again
 	 * @param searchText
 	 */
-	public async GetLocation(searchText: string, cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(searchText: string, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<LocationData | null> {
 		try {
 			searchText = searchText.trim();
 			const cached = this.cache?.searchText;
@@ -77,7 +77,7 @@ export class GeoLocation {
 				lon: Number.parseFloat(locationData[0].lon),
 				city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
 				country: locationData[0].address.country,
-				timeZone: DateTime.now().zoneName,
+				timeZone: config.UserTimezone,
 				entryText: this.BuildEntryText(locationData[0]),
 			}
 			this.cache[searchText] = result;
