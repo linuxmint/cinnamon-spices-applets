@@ -79,7 +79,8 @@ export class WeatherUnderground extends BaseProvider {
             location: {
                 city: loc.city ?? observation.location.city,
                 country: loc.country ?? observation.location.country,
-                url: observation.location.url
+                url: observation.location.url,
+				timeZone: loc.timeZone,
             },
             condition: observation.condition ?? {
                 description: "unknown",
@@ -170,7 +171,9 @@ export class WeatherUnderground extends BaseProvider {
                 speed: null,
                 degree: null,
             },
-            location: {},
+            location: {
+				timeZone: tz,
+			},
             sunrise: null,
             sunset: null,
             date: null as never,

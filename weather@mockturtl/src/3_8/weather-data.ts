@@ -9,7 +9,7 @@ export interface WeatherData {
 	location: {
 		city?: string | undefined,
 		country?: string | undefined,
-		timeZone?: string | undefined,
+		timeZone: string,
 		url?: string | undefined,
 		tzOffset?: number | undefined
 	},

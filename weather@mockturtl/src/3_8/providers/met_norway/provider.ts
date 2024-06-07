@@ -152,7 +152,9 @@ export class MetNorway extends BaseProvider {
 				degree: current.data.instant.details.wind_from_direction,
 				speed: current.data.instant.details.wind_speed
 			},
-			location: {	},
+			location: {
+				timeZone: loc.timeZone
+			},
 			forecasts: []
 		};
 

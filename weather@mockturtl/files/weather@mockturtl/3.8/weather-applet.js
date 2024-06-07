@@ -10100,8 +10100,6 @@ class LocationStore {
             NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
             return;
         }
-        if (this.config.Timezone)
-            loc.timeZone = this.config.Timezone;
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
@@ -10782,7 +10780,7 @@ class MetUk extends BaseProvider {
                 location: {
                     city: undefined,
                     country: undefined,
-                    timeZone: undefined,
+                    timeZone: loc.timeZone,
                 },
                 stationInfo: {
                     distanceFrom: this.observationSites[dataIndex].dist,
@@ -12028,7 +12026,9 @@ class MetNorway extends BaseProvider {
                 degree: current.data.instant.details.wind_from_direction,
                 speed: current.data.instant.details.wind_speed
             },
-            location: {},
+            location: {
+                timeZone: loc.timeZone
+            },
             forecasts: []
         };
         const hourlyForecasts = [];
@@ -13194,7 +13194,8 @@ class ClimacellV4 extends BaseProvider {
             sunrise,
             sunset,
             location: {
-                url: "https://www.tomorrow.io/weather"
+                url: "https://www.tomorrow.io/weather",
+                timeZone: loc.timeZone,
             },
             extra_field: {
                 name: _("Feels Like"),
@@ -14611,7 +14612,7 @@ class DanishMI extends BaseProvider {
         result.location = {
             city: forecasts.city,
             country: forecasts.country,
-            timeZone: undefined,
+            timeZone: loc.timeZone,
             url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}/${forecasts.city}`
         };
         result.coord = {
@@ -15738,7 +15739,8 @@ class WeatherUnderground extends BaseProvider {
                 location: {
                     city: (_d = loc.city) !== null && _d !== void 0 ? _d : observation.location.city,
                     country: (_e = loc.country) !== null && _e !== void 0 ? _e : observation.location.country,
-                    url: observation.location.url
+                    url: observation.location.url,
+                    timeZone: loc.timeZone,
                 },
                 condition: (_f = observation.condition) !== null && _f !== void 0 ? _f : {
                     description: "unknown",
@@ -15802,7 +15804,9 @@ class WeatherUnderground extends BaseProvider {
                     speed: null,
                     degree: null,
                 },
-                location: {},
+                location: {
+                    timeZone: tz,
+                },
                 sunrise: null,
                 sunset: null,
                 date: null,
@@ -16604,7 +16608,7 @@ class GeoClue {
             logger_Logger.Info("GeoClue2 not available, disabling it's use.");
         }
     }
-    async GetLocation(cancellable) {
+    async GetLocation(cancellable, config) {
         if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
@@ -16640,7 +16644,7 @@ class GeoClue {
                     lon: loc.longitude,
                     city: undefined,
                     country: undefined,
-                    timeZone: "",
+                    timeZone: config.UserTimezone,
                     entryText: loc.latitude + "," + loc.longitude,
                     altitude: loc.altitude,
                     accuracy: loc.accuracy,
@@ -16707,15 +16711,15 @@ class GeoIPFedora {
         this.query = "https://geoip.fedoraproject.org/city";
         this.config = config;
     }
-    async GetLocation(cancellable) {
+    async GetLocation(cancellable, config) {
         const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
         if (!json) {
             logger_Logger.Info("geoip.fedoraproject didn't return any data");
             return null;
         }
-        return this.ParseInformation(json);
+        return this.ParseInformation(json, config);
     }
-    ParseInformation(json) {
+    ParseInformation(json, config) {
         var _a, _b, _c;
         if (json.latitude === null || json.longitude === null) {
             ErrorHandler.Instance.PostError({
@@ -16732,7 +16736,7 @@ class GeoIPFedora {
                 lon: json.longitude,
                 city: (_a = json.city) !== null && _a !== void 0 ? _a : undefined,
                 country: (_b = json.country_name) !== null && _b !== void 0 ? _b : undefined,
-                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : this.config.UserTimezone,
+                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : config.UserTimezone,
                 entryText: json.latitude + "," + json.longitude,
             };
             logger_Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
@@ -17098,7 +17102,7 @@ function OWMDailyForecastsToData(forecast, conditionsTranslated, timezone = "loc
 
 
 
-function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone = "local") {
+function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone) {
     var _a, _b, _c, _d, _e, _f;
     return {
         date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
@@ -17108,7 +17112,8 @@ function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone = "loca
         location: {
             city: weather.name,
             country: weather.sys.country,
-            url: `https://openweathermap.org/city/${weather.id}`
+            url: `https://openweathermap.org/city/${weather.id}`,
+            timeZone: timezone
         },
         condition: {
             main: conditionsTranslated ? (_a = weather.weather) === null || _a === void 0 ? void 0 : _a[0].main : OWMMainToTranslated((_b = weather.weather) === null || _b === void 0 ? void 0 : _b[0].main),
@@ -17152,7 +17157,7 @@ class OpenWeatherMapOpen extends BaseProvider {
         this.supportHourlyPrecipChance = false;
         this.supportHourlyPrecipVolume = false;
     }
-    async GetWeather(loc, cancellable, config) {
+    async GetWeather(loc, cancellable) {
         const params = this.ConstructParams(loc);
         const current = await HttpLib.Instance.LoadJsonSimple({
             url: "https://api.openweathermap.org/data/2.5/weather",
@@ -17167,7 +17172,7 @@ class OpenWeatherMapOpen extends BaseProvider {
         if (!current || !daily) {
             return null;
         }
-        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, !!params.lang, config.Timezone)), { forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, config.Timezone) });
+        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, !!params.lang, loc.timeZone)), { forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, loc.timeZone) });
     }
     ConstructParams(loc) {
         const params = {
@@ -17240,14 +17245,6 @@ class Config {
         else
             return TimeZone.new_local().get_identifier();
     }
-    get Timezone() {
-        return this.timezone;
-    }
-    set Timezone(value) {
-        if (!value || value == "")
-            value = undefined;
-        this.timezone = value;
-    }
     constructor(instanceID) {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_LOCATION_LIST = "locationList";
@@ -17295,7 +17292,6 @@ class Config {
         this.LocationChanged = new Event();
         this.textColorStyle = null;
         this.ForegroundColor = null;
-        this.timezone = undefined;
         this.onLogLevelUpdated = () => {
             logger_Logger.ChangeLevel(this._logLevel);
         };
@@ -17396,13 +17392,13 @@ class Config {
     async EnsureLocation(cancellable) {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            const geoClue = await this.geoClue.GetLocation(cancellable);
+            const geoClue = await this.geoClue.GetLocation(cancellable, this);
             if (geoClue != null) {
                 logger_Logger.Debug("Auto location obtained via GeoClue2.");
                 this.InjectLocationToConfig(geoClue);
                 return geoClue;
             }
-            const location = await this.autoLocProvider.GetLocation(cancellable);
+            const location = await this.autoLocProvider.GetLocation(cancellable, this);
             if (!location)
                 return null;
             logger_Logger.Debug("Auto location obtained via IP lookup.");
@@ -17426,7 +17422,7 @@ class Config {
             const location = {
                 lat: Number.parseFloat(latLong[0]),
                 lon: Number.parseFloat(latLong[1]),
-                timeZone: DateTime.now().zoneName,
+                timeZone: this.UserTimezone,
                 entryText: loc,
             };
             logger_Logger.Debug("Manual Location is a coordinate, using it directly.");
@@ -18665,7 +18661,7 @@ class UIHourlyForecasts {
         this.onPaintSignal = null;
         this.canvas = null;
         this.OnShortHourlyTimeChanged = (config, shortTime, data) => {
-            this.Display(data.hourlyForecasts, config, config.Timezone);
+            this.Display(data.hourlyForecasts, config, data.location.timeZone);
         };
         this.OnPaint = (owner) => {
             var _a, _b;
@@ -19653,7 +19649,6 @@ class WeatherApplet extends TextIconApplet {
                 return RefreshState.NoWeather;
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
-            this.config.Timezone = weatherInfo.location.timeZone;
             if (rebuild)
                 this.ui.Rebuild(this.config);
             if (!this.ui.Display(weatherInfo, this.config, this.provider) ||

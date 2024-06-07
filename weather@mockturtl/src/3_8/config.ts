@@ -207,21 +207,6 @@ export class Config {
 			return TimeZone.new_local().get_identifier();
 	}
 
-	private timezone: string | undefined = undefined;
-
-	/**
-	 * Selected location's timezone
-	 */
-	public get Timezone(): string | undefined {
-		return this.timezone;
-	}
-
-	public set Timezone(value: string | undefined) {
-		if (!value || value == "")
-			value = undefined;
-		this.timezone = value;
-	}
-
 	private readonly autoLocProvider: GeoIP;
 	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
@@ -346,14 +331,14 @@ export class Config {
 
 		// Automatic location
 		if (!this._manualLocation) {
-			const geoClue = await this.geoClue.GetLocation(cancellable);
+			const geoClue = await this.geoClue.GetLocation(cancellable, this);
 			if (geoClue != null) {
 				Logger.Debug("Auto location obtained via GeoClue2.");
 				this.InjectLocationToConfig(geoClue);
 				return geoClue;
 			}
 
-			const location = await this.autoLocProvider.GetLocation(cancellable);
+			const location = await this.autoLocProvider.GetLocation(cancellable, this);
 			// User facing errors handled by provider
 			if (!location)
 				return null;
@@ -386,7 +371,7 @@ export class Config {
 			const location: LocationData = {
 				lat: Number.parseFloat(latLong[0]),
 				lon: Number.parseFloat(latLong[1]),
-				timeZone: DateTime.now().zoneName,
+				timeZone: this.UserTimezone,
 				entryText: loc,
 			}
 			Logger.Debug("Manual Location is a coordinate, using it directly.");

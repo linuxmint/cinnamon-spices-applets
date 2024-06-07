@@ -207,7 +207,6 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
-			this.config.Timezone = weatherInfo.location.timeZone;
 
 			if (rebuild)
 				this.ui.Rebuild(this.config);

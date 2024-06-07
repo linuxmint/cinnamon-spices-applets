@@ -19,7 +19,7 @@ export class GeoIPFedora implements GeoIP {
 		this.config = config;
 	}
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<LocationData | null> {
 		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPFedoraPayload>({ url: this.query, cancellable });
 
 		if (!json) {
@@ -27,10 +27,10 @@ export class GeoIPFedora implements GeoIP {
 			return null;
 		}
 
-		return this.ParseInformation(json);
+		return this.ParseInformation(json, config);
 	}
 
-	private ParseInformation(json: GeoIPFedoraPayload): LocationData | null {
+	private ParseInformation(json: GeoIPFedoraPayload, config: Config): LocationData | null {
 		if (json.latitude === null || json.longitude === null) {
 			ErrorHandler.Instance.PostError({
 				type: "hard",
@@ -47,7 +47,7 @@ export class GeoIPFedora implements GeoIP {
 				lon: json.longitude,
 				city: json.city ?? undefined,
 				country: json.country_name ?? undefined,
-				timeZone: json.time_zone ?? this.config.UserTimezone,
+				timeZone: json.time_zone ?? config.UserTimezone,
 				entryText: json.latitude + "," + json.longitude,
 			}
 			Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
