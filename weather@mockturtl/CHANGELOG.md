@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.2
+
+- Fix applet output breaking with various weather providers if Automatic location is used.
+- Fix
+  [weather@mockturtl - Sunrise Invalid Date Time when using weather provider DMI Denmark #6058](https://github.com/linuxmint/cinnamon-spices-applets/issues/6058)
+
 ## 3.6.1
 
 - Make translating conditions more consistent across all providers and clarify purpose of "Translate conditions" settings toggle
