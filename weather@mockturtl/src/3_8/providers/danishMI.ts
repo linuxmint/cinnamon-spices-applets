@@ -75,6 +75,8 @@ export class DanishMI extends BaseProvider {
 			dewPoint: null,
 		} as WeatherData;
 
+		global.log("Timezone", loc.timeZone)
+
 		result.location = {
 			city: forecasts.city,
 			country: forecasts.country,
@@ -410,9 +412,9 @@ export class DanishMI extends BaseProvider {
 		}
 		//else if (str.length == 4 || str.length == 3)
 		else {
-			// Pad with 0s
+			// Pad with 0s, str goes to the end
 			if (str.length == 3) {
-				str = ("0000" + str).slice(-4, -4 + 4);
+				str = "0" + str;
 			}
 			const today = new Date();
 			today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);

@@ -10480,14 +10480,13 @@ class ErrorHandler {
 
 
 
-
 class GeoLocation {
     constructor() {
         this.url = "https://nominatim.openstreetmap.org/search";
         this.params = "format=json&addressdetails=1&limit=1";
         this.cache = {};
     }
-    async GetLocation(searchText, cancellable) {
+    async GetLocation(searchText, cancellable, config) {
         var _a;
         try {
             searchText = searchText.trim();
@@ -10516,7 +10515,7 @@ class GeoLocation {
                 lon: Number.parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
                 country: locationData[0].address.country,
-                timeZone: DateTime.now().zoneName,
+                timeZone: config.UserTimezone,
                 entryText: this.BuildEntryText(locationData[0]),
             };
             this.cache[searchText] = result;
@@ -14609,6 +14608,7 @@ class DanishMI extends BaseProvider {
             },
             dewPoint: null,
         };
+        global.log("Timezone", loc.timeZone);
         result.location = {
             city: forecasts.city,
             country: forecasts.country,
@@ -14895,7 +14895,7 @@ class DanishMI extends BaseProvider {
         }
         else {
             if (str.length == 3) {
-                str = ("0000" + str).slice(-4, -4 + 4);
+                str = "0" + str;
             }
             const today = new Date();
             today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);
@@ -17430,7 +17430,7 @@ class Config {
             return location;
         }
         logger_Logger.Debug("Location is text, geo locating...");
-        const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
+        const locationData = await this.geoLocationService.GetLocation(loc, cancellable, this);
         if (locationData == null)
             return null;
         if (locationData === null || locationData === void 0 ? void 0 : locationData.entryText) {

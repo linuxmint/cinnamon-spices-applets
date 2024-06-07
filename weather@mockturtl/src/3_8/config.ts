@@ -380,7 +380,7 @@ export class Config {
 		}
 
 		Logger.Debug("Location is text, geo locating...")
-		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
+		const locationData = await this.geoLocationService.GetLocation(loc, cancellable, this);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (locationData?.entryText) {
