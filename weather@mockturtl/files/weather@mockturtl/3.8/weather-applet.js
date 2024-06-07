@@ -14608,7 +14608,6 @@ class DanishMI extends BaseProvider {
             },
             dewPoint: null,
         };
-        global.log("Timezone", loc.timeZone);
         result.location = {
             city: forecasts.city,
             country: forecasts.country,

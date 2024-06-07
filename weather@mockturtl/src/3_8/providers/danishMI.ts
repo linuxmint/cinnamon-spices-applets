@@ -75,8 +75,6 @@ export class DanishMI extends BaseProvider {
 			dewPoint: null,
 		} as WeatherData;
 
-		global.log("Timezone", loc.timeZone)
-
 		result.location = {
 			city: forecasts.city,
 			country: forecasts.country,
