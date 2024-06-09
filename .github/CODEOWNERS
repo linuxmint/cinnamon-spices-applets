@@ -54,6 +54,7 @@ color-picker@fmete/**                              @icarter09
 commandLauncher@scollins/**                        @collinss
 computer@brownsr/**                                @brownsr
 cpu-monitor-text@gnemonix/**                       @gnemonix
+cpufreq@mtwebster/**                               @yrtimiD
 cryptocoin@guantanamoe/**                          @imDeprecated
 darkMode@linuxedo.com/**                           @slgobinath
 ddcci-monitor-control@andr35/**                    @andr35
@@ -119,6 +120,7 @@ rswitcher@nixdev.com/**                            @mindbeat
 rust-menu@jerrywham/**                             @jerrywham
 screen-inhibit@mtwebster/**                        @claudiux
 sct@skulptist.de/**                                @Matthias-Hermsdorf
+search-box@mtwebster/**                            @claudiux
 serviceLauncher@hulygun/**                         @hulygun
 sessionManager@scollins/**                         @collinss
 shadowsocks-switch@Klavionik/**                    @Klavionik
@@ -178,7 +180,6 @@ xsession@claudiux/**                               @claudiux
 # bettersettings@bownz
 # binaryclock@entelechy
 # cinnamon-multi-line-taskbar-applet
-# cpufreq@mtwebster
 # ctrl4docker@hoffis-eck.de
 # devutils@fogl
 # diaspora-notif@douze12
@@ -198,7 +199,6 @@ xsession@claudiux/**                               @claudiux
 # radio@driglu4it
 # rwall@typicalfoobar
 # scripts@paucapo.com
-# search-box@mtwebster
 # separator2@zyzz
 # shutdown-timer@webum.by
 # softyubikey@yubiserver.include.gr
