@@ -82,7 +82,7 @@ body:
     - CommandRunner@appdevsw
     - computer@brownsr @brownsr
     - cpu-monitor-text@gnemonix @gnemonix
-    - cpufreq@mtwebster
+    - cpufreq@mtwebster @yrtimiD
     - cryptocoin@guantanamoe @imDeprecated
     - ctrl4docker@hoffis-eck.de
     - CustomApplicationsMenu@LLOBERA @Nicolas01
@@ -182,7 +182,7 @@ body:
     - ScreenShot@tech71
     - scripts@paucapo.com
     - sct@skulptist.de @Matthias-Hermsdorf
-    - search-box@mtwebster
+    - search-box@mtwebster @claudiux
     - Sensors@claudiux @claudiux
     - separator2@zyzz
     - serviceLauncher@hulygun @hulygun
