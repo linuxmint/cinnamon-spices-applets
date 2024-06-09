@@ -1,3 +1,6 @@
+### v6.17.1~20240609
+  * Prevents Cvc.MixerControl from being executed more than once.
+
 ### v6.17.0~20240608
   * Regression fixed: track info can be displayed on the panel again.
 
