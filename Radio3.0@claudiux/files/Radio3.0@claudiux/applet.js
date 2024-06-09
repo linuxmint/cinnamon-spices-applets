@@ -3904,6 +3904,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     keybindingManager.removeHotKey("shortcutNext");
     keybindingManager.removeHotKey("shortcutPrevious");
 
+    // Close Cvc.MixerControl:
+    if (this._control)
+      this._control.close();
+
     // Finalize settings:
     this.settings.finalize();
   }
