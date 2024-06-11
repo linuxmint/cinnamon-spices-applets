@@ -48,6 +48,7 @@ class Eye extends Applet.Applet {
 		this.orientation  = orientation;
 		this.metadata = metadata;
 		this.area_width = areaWidth;
+		this.instance_id = instanceId;
 
 		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -130,7 +131,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "deactivate-on-fullscreen",
 				value: "deactivate_on_fullscreen",
-				cb: null,
+				cb: this.on_fullscreen_changed,
 			},
 			{
 				key: "use-alternative-colors",
@@ -193,8 +194,10 @@ class Eye extends Applet.Applet {
 			panelIsInCurrentMonitor = panelsInMonitor.includes(this.panel);
 		}
 
-		if (this.deactivate_on_fullscreen) {
-			this.set_active(!monitorIsInFullscreen && panelIsInCurrentMonitor);
+		if (this.deactivate_on_fullscreen && panelIsInCurrentMonitor) {
+			this.set_active(!monitorIsInFullscreen);
+		} else {
+			this.set_active(true);
 		}
 	}
 
@@ -205,7 +208,7 @@ class Eye extends Applet.Applet {
 	}
 
 	on_eye_mode_update() {
-		if (this.eye_painter && this.eye_painter.mode != this.mode) {
+		if (!this.eye_painter || this.eye_painter.mode != this.mode) {
 			this.eye_painter = EyeModeFactory.createEyeMode(this.mode);
 		}
 	}
@@ -253,6 +256,9 @@ class Eye extends Applet.Applet {
 
 			this.area.queue_repaint();
 		}
+
+		let status = enabled ? "enabled" : "disabled";
+		global.log(UUID, `Eye/${this.instance_id} was ${status}!`);
 	}
 
 	update_tooltip() {

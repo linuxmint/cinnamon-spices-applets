@@ -165,7 +165,7 @@ class BulbMode extends EyeMode {
         const mouse_ang = Math.atan2(mouse_y, mouse_x);
 
         let [top_size, lat_size] = this.topAndLatSizes(area_width, area_height, options);
-        let eye_rad = (top_size - options.padding) / 2.3;
+        let eye_rad = (top_size - options.padding) / 2;
         if (2 * eye_rad > lat_size) eye_rad = lat_size / 2;
 
         const iris_rad = eye_rad * 0.6;
