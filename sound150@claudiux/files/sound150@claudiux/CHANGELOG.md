@@ -1,3 +1,9 @@
+### v6.17.1~20240609
+  * Prevents Cvc.MixerControl from being executed more than once.
+
+### v6.17.0~20240608
+  * Regression fixed: track info can be displayed on the panel again.
+
 ### v6.16.0~20240605
   * Shortcuts tab of this applet settings: Added a button to define multimedia shortcuts identical to those in Cinnamon.
 

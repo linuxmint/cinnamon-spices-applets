@@ -1,4 +1,4 @@
-import type { Services, Config } from "../../config";
+import type { Services } from "../../config";
 import type { HTTPParams} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { LocationData } from "../../types";
@@ -23,7 +23,7 @@ export class OpenWeatherMapOpen extends BaseProvider {
 	public override supportHourlyPrecipVolume = false;
 
 
-	public override async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+	public override async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const params: HTTPParams = this.ConstructParams(loc);
 		const current = await HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({
 			url: "https://api.openweathermap.org/data/2.5/weather",
@@ -41,8 +41,8 @@ export class OpenWeatherMapOpen extends BaseProvider {
 		}
 
 		return {
-			...OWMWeatherToWeatherData(current, !!params.lang, config.Timezone),
-			forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, config.Timezone)
+			...OWMWeatherToWeatherData(current, !!params.lang, loc.timeZone),
+			forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, loc.timeZone)
 		};
 	}
 

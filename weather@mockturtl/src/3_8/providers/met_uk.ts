@@ -218,7 +218,7 @@ export class MetUk extends BaseProvider {
 				location: {
 					city: undefined,
 					country: undefined,
-					timeZone: undefined,
+					timeZone: loc.timeZone,
 				},
 				stationInfo: {
 					distanceFrom: this.observationSites[dataIndex].dist,

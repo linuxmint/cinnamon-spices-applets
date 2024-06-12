@@ -78,7 +78,7 @@ export class DanishMI extends BaseProvider {
 		result.location = {
 			city: forecasts.city,
 			country: forecasts.country,
-			timeZone: undefined, // because we ask in UTC, we get UTC as the timezone, so we just drop it
+			timeZone: loc.timeZone,
 			url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}/${forecasts.city}`
 		};
 		result.coord = {
@@ -410,9 +410,9 @@ export class DanishMI extends BaseProvider {
 		}
 		//else if (str.length == 4 || str.length == 3)
 		else {
-			// Pad with 0s
+			// Pad with 0s, str goes to the end
 			if (str.length == 3) {
-				str = ("0000" + str).slice(-4, -4 + 4);
+				str = "0" + str;
 			}
 			const today = new Date();
 			today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);

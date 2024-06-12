@@ -6,18 +6,18 @@
 # Åke Engelbrektson <eson@svenskasprakfiler.se> - 2017, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.4.0\n"
+"Project-Id-Version: weather@mockturtl 3.6.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-02-01 22:38+0100\n"
+"PO-Revision-Date: 2024-06-03 22:37+0200\n"
 "Last-Translator: jorgenqv <jorgenqv@yahoo.com>\n"
 "Language-Team: \n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:19563
@@ -1554,17 +1554,15 @@ msgstr "Mycket god"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Aska"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Vindbyar"
+msgstr "Kastvind"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Lätta snöbyar"
+msgstr "Lätta underkylt regn"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1588,22 +1586,18 @@ msgid "Heavy drizzle"
 msgstr "Kraftigt smådugg"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Lätta snöbyar"
+msgstr "Lätta regnskurar"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Kraftiga snöbyar"
+msgstr "Kraftiga regnskurar"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Snöigt regn"
+msgstr "Snöblandat regn"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
 msgstr "Snöbyar"
 
@@ -1814,13 +1808,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Vänligen var säker på att du\n"
-"angett den API-nyckeln du har hos Climacell"
+"angett den API-nyckeln du har hos Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1830,38 +1823,32 @@ msgstr ""
 "Plats-tjänsten kunde inte hitta din plats, vänligen se logg i Looking Glass"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr "Snöigt regn"
+msgstr "Pudersnö"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Lätta snöbyar"
+msgstr "Lätta skurar"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Kraftiga snöbyar"
+msgstr "Kraftiga skurar"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Åska med lättare regn"
+msgstr "Åska med lättare hagel"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Åska med regn"
+msgstr "Åska med hagel"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
 msgstr "Känns som"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17544
 msgid ""
@@ -1926,7 +1913,7 @@ msgstr "Område: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} vädervarning(ar)"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1934,9 +1921,8 @@ msgid "Error Saving Debug Information"
 msgstr "Fel vid sparande av felsökningsinformation"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Kunde inte hämta väderinformation"
+msgstr "Kunde inte öppna filen {filePath} för skrivning"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1948,41 +1934,39 @@ msgstr "Sparad i {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Inget skript erbjudet"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Du behöver lägga till ett skript först."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Ingen väderdata"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Ingen väderdata att köra skript med"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Skriptet exekverat framgångsrikt"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Ditt skript har exekverats framgångsrikt."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Fel vid körning av skript"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Skriptet returnerade fel, se loggar för mer information"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Väder-panelprogram"
+msgstr "Väderapplet varningar"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2417,7 +2401,7 @@ msgstr "Inställningar plats"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Teknik och automation"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2473,7 +2457,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2488,9 +2472,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (enbart USA)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (nyckel behövs)"
+msgstr "OpenWeatherMap OneCall (nyckel behövs)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2532,7 +2515,7 @@ msgid ""
 "saved location will be used instead."
 msgstr ""
 "Om plats fältet matchar en sparad plats 'Sökt post' så kommer den sparade "
-"platsen användas i stället. "
+"platsen användas i stället."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2588,17 +2571,19 @@ msgid ""
 msgstr ""
 "Om du vill använda det här så se till att du använder exakta koordinater/"
 "adress som plats för att förbättra dess noggrannhet. Se Feature map på "
-"webbplatsen för din vädertjänst."
+"webbplatsen för din vädertjänst"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Aktivera visning av vädervarningar"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Varningar-knapp visas i popup-menyn om det finns några aktiva varningar för "
+"din plats."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2689,7 +2674,7 @@ msgstr "Såsom SO, N istället för riktnings-ikon."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Väderlekstjänsten bör översätta villkoren om de finns tillgängliga"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2697,6 +2682,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Ifall din väderlekstjänst ska översätta villkoren till ditt språk om din "
+"språkinställning stöds av leverantören. Annars kommer appleten att använda "
+"sitt eget översättningssystem."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2812,7 +2800,7 @@ msgstr "Vald sökväg för att spara loggar"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Åsidosätt sträng för User Agent"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2821,10 +2809,14 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Om du har problem med att appleten inte fungerar som den ska och du vet att "
+"User Agent-strängen är problemet kan du försöka åsidosätta den. Ändra den "
+"bara om du vet vad du gör. Det här är en sträng som skickas till servern när "
+"appleten försöker hämta väderdata."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Kör ett kommando när väderinformationen ändras"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2844,7 +2836,21 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Appleten kommer att köra det kommando du anger varje gång väderdata "
+"uppdateras. Kommandot interpoleras med samma värden med samma format som du "
+"kan få i någon av åsidosättningarna, dessutom får du {full_data} som är "
+"fullständiga aktuella väderdata. Interpolering med enkla parenteser {xxx} "
+"kommer inte att escapas, med dubbla parenteser {{xxxx}} är de inslagna i "
+"enkla citattecken (') och alla andra enkla citattecken escapas inuti. Du kan "
+"använda detta för att integrera väderdata med andra delar av ditt system. Du "
+"kan se den fullständiga väderdatastrukturen via länken i README.\n"
+"\n"
+"Exempel: 'notify-send ”Vädret är {c} och temperaturen är {t}{u}”' kommer att "
+"visa ett meddelande med aktuellt väder och temperatur.\n"
+"\n"
+"Exempel: ”echo {{full_data}} > /tmp/weather_data' sparar fullständiga "
+"väderdata i en fil i /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Testa ditt kommando"

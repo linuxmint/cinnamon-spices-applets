@@ -1743,11 +1743,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
         Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/rm_tmp_files.sh'");
 
+        this.orientation = orientation;
+        this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.metadata = metadata;
 
         this.oldPlayerIcon0 = null;
+
+        this.title_text = "";
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
@@ -2164,6 +2168,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._outputVolumeSection._update();
     }
 
+    on_orientation_changed() {
+        this.orientation = orientation;
+        this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    }
+
     on_settings_changed() {
         if (this.playerControl && this._activePlayer)
             this.setAppletTextIcon(this._players[this._activePlayer], true);
@@ -2233,6 +2242,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         for (let i in this._players)
             if (this._players[i])
                 this._players[i].destroy();
+
+        if (this._control)
+            this._control.close();
     }
 
     on_applet_clicked(event) {
@@ -2606,21 +2618,21 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     setAppletText(player) {
-        let title_text = "";
-        if (this.showtrack && player && player._playerStatus == "Playing") {
+        this.title_text = "";
+        if (this.isHorizontal && this.showtrack && player && player._playerStatus == "Playing") {
             if (player._artist == _("Unknown Artist")) { // should it be translated?
-                title_text = player._title;
+                this.title_text = player._title;
             }
             else {
-                title_text = player._title + ' - ' + player._artist;
+                this.title_text = player._title + ' - ' + player._artist;
             }
-            const glyphs = Util.splitByGlyph(title_text);
+            const glyphs = Util.splitByGlyph(this.title_text);
             if (glyphs.length > this.truncatetext) {
-                title_text = glyphs.slice(0, this.truncatetext - 3).join("") + "...";
+                this.title_text = glyphs.slice(0, this.truncatetext - 3).join("") + "...";
             }
         }
-        this.set_applet_label(title_text);
-        //~ log("setAppletText: title_text:\n"+title_text, true)
+        //this.set_applet_label(this.title_text);
+        //~ log("setAppletText: this.title_text:\n"+this.title_text, true)
     }
 
     setAppletTextIcon(player, icon) {
@@ -3156,13 +3168,20 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     volume_near_icon() {
+        let label = "";
         if (this.showVolumeLevelNearIcon) {
-            this._applet_label.set_text(""+this.volume);
-            this.hide_applet_label(false);
+            //~ this._applet_label.set_text(""+this.volume+ (this.title_text.length>0) ? " - "+this.title_text : "");
+            label = ""+this.volume;
+            if (this.title_text.length>0)
+                label += " - "+this.title_text;
+            this.set_applet_label(label);
         } else {
-            this._applet_label.set_text("");
-            this.hide_applet_label(true);
+            //~ this._applet_label.set_text((this.title_text.length>0) ? ""+this.title_text : "");
+            if (this.title_text.length>0)
+                label = ""+this.title_text;
+            this.set_applet_label(label);
         }
+        this.hide_applet_label(label.length === 0);
     }
 
     _reset_colors() {

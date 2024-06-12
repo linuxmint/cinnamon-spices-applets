@@ -40,3 +40,8 @@ If you want free memory to be transparent, make the fourth entry all ```0``` val
 If you have more CPUs than colors defined in the config file, then the colors will repeat over the remaining CPU cores. This behavior happens with the memory colors as well. Add more arrays if you want to specify them.
 
 [View the original author's changelog](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/multicore-sys-monitor%40ccadeptic23/CHANGELOG_OLD.md).
+
+## Translations
+
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/multicore-sys-monitor%40ccadeptic23.md#)
+

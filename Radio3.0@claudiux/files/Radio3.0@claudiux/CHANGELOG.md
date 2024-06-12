@@ -1,3 +1,6 @@
+### v2.1.1~20240609
+  * Prevents Cvc.MixerControl from being executed more than once.
+
 ### v2.1.0~20240519
   * Improves the installation of dependencies.
 

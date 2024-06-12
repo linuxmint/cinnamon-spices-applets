@@ -200,10 +200,6 @@ export class LocationStore {
 	}
 
 	public SaveCurrentLocation(loc: LocationData | null): void {
-		// if (this.app.Locked()) {
-		// 	NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
-		// 	return;
-		// }
 		if (loc == null) {
 			NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
 			return;
@@ -212,9 +208,6 @@ export class LocationStore {
 			NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
 			return;
 		}
-		// Save tz if it exists
-		if (this.config.Timezone)
-			loc.timeZone = this.config.Timezone;
 
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location
