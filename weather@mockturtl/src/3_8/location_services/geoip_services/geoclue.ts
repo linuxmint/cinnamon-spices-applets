@@ -1,13 +1,12 @@
 import { DateTime } from "luxon";
 import { Logger } from "../../lib/services/logger";
-import type { LocationData } from "../../types";
+import type { LocationData, LocationServiceResult } from "../../types";
 import type { GeoIP } from "./base";
-import type { Config } from "../../config";
 
 let GeoClueLib: typeof imports.gi.Geoclue | undefined = undefined;
 let GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined = undefined;
 
-interface ExtendedLocationData extends LocationData {
+interface ExtendedLocationData extends LocationServiceResult {
 	accuracy: imports.gi.Geoclue.AccuracyLevel;
 	altitude: number;
 }
@@ -24,7 +23,7 @@ export class GeoClue implements GeoIP {
 		}
 	}
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		if (GeoClueLib == null || GeocodeGlib == null) {
 			return null;
 		}
@@ -63,7 +62,6 @@ export class GeoClue implements GeoIP {
 					lon: loc.longitude,
 					city: undefined,
 					country: undefined,
-					timeZone: config.UserTimezone,
 					entryText: loc.latitude + "," + loc.longitude,
 					altitude: loc.altitude,
 					accuracy: loc.accuracy,

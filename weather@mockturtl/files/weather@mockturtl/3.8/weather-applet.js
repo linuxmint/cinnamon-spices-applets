@@ -10486,7 +10486,7 @@ class GeoLocation {
         this.params = "format=json&addressdetails=1&limit=1";
         this.cache = {};
     }
-    async GetLocation(searchText, cancellable, config) {
+    async GetLocation(searchText, cancellable) {
         var _a;
         try {
             searchText = searchText.trim();
@@ -10515,7 +10515,6 @@ class GeoLocation {
                 lon: Number.parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
                 country: locationData[0].address.country,
-                timeZone: config.UserTimezone,
                 entryText: this.BuildEntryText(locationData[0]),
             };
             this.cache[searchText] = result;
@@ -16607,7 +16606,7 @@ class GeoClue {
             logger_Logger.Info("GeoClue2 not available, disabling it's use.");
         }
     }
-    async GetLocation(cancellable, config) {
+    async GetLocation(cancellable) {
         if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
@@ -16643,7 +16642,6 @@ class GeoClue {
                     lon: loc.longitude,
                     city: undefined,
                     country: undefined,
-                    timeZone: config.UserTimezone,
                     entryText: loc.latitude + "," + loc.longitude,
                     altitude: loc.altitude,
                     accuracy: loc.accuracy,
@@ -16706,19 +16704,18 @@ class GeoClue {
 
 
 class GeoIPFedora {
-    constructor(config) {
+    constructor() {
         this.query = "https://geoip.fedoraproject.org/city";
-        this.config = config;
     }
-    async GetLocation(cancellable, config) {
+    async GetLocation(cancellable) {
         const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
         if (!json) {
             logger_Logger.Info("geoip.fedoraproject didn't return any data");
             return null;
         }
-        return this.ParseInformation(json, config);
+        return this.ParseInformation(json);
     }
-    ParseInformation(json, config) {
+    ParseInformation(json) {
         var _a, _b, _c;
         if (json.latitude === null || json.longitude === null) {
             ErrorHandler.Instance.PostError({
@@ -16735,7 +16732,7 @@ class GeoIPFedora {
                 lon: json.longitude,
                 city: (_a = json.city) !== null && _a !== void 0 ? _a : undefined,
                 country: (_b = json.country_name) !== null && _b !== void 0 ? _b : undefined,
-                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : config.UserTimezone,
+                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : undefined,
                 entryText: json.latitude + "," + json.longitude,
             };
             logger_Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
@@ -17188,7 +17185,43 @@ class OpenWeatherMapOpen extends BaseProvider {
     ;
 }
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/tz_lookup.ts
+
+class GeoTimezone {
+    constructor() {
+        this.maxCacheAge = 1000 * 60 * 60 * 24;
+        this.cache = {};
+    }
+    async GetTimezone(lat, lon, cancellable) {
+        const key = `${lat},${lon}`;
+        const cached = this.cache[key];
+        if (cached && this.IsCacheValid(cached)) {
+            return cached.tz;
+        }
+        const result = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.geotimezone.com/public/timezone",
+            cancellable,
+            params: {
+                latitude: lat,
+                longitude: lon,
+            }
+        });
+        if (!result) {
+            return null;
+        }
+        this.cache[key] = {
+            tz: result.iana_timezone,
+            retrieved: new Date(),
+        };
+        return result.iana_timezone;
+    }
+    IsCacheValid(cache) {
+        return Date.now() - cache.retrieved.getTime() < this.maxCacheAge;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -17291,6 +17324,7 @@ class Config {
         this.LocationChanged = new Event();
         this.textColorStyle = null;
         this.ForegroundColor = null;
+        this.tzService = new GeoTimezone();
         this.onLogLevelUpdated = () => {
             logger_Logger.ChangeLevel(this._logLevel);
         };
@@ -17318,7 +17352,7 @@ class Config {
         this.onLogLevelUpdated();
         this.currentLocale = ConstructJsLocale(get_language_names());
         this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.autoLocProvider = new GeoIPFedora(this);
+        this.autoLocProvider = new GeoIPFedora();
         this.geoClue = new GeoClue();
         this.geoLocationService = new GeoLocation();
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
@@ -17388,20 +17422,32 @@ class Config {
         return (!key || key == "");
     }
     ;
+    async GetLocation(cancellable) {
+        var _a;
+        this.currentLocation = null;
+        const loc = await this.EnsureLocation(cancellable);
+        if (loc == null) {
+            return null;
+        }
+        const tz = (_a = loc.timeZone) !== null && _a !== void 0 ? _a : await this.tzService.GetTimezone(loc.lat, loc.lon, cancellable);
+        if (tz == null)
+            return null;
+        const result = Object.assign(Object.assign({}, loc), { timeZone: tz });
+        this.InjectLocationToConfig(result);
+        return result;
+    }
     async EnsureLocation(cancellable) {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            const geoClue = await this.geoClue.GetLocation(cancellable, this);
+            const geoClue = await this.geoClue.GetLocation(cancellable);
             if (geoClue != null) {
                 logger_Logger.Debug("Auto location obtained via GeoClue2.");
-                this.InjectLocationToConfig(geoClue);
                 return geoClue;
             }
             const location = await this.autoLocProvider.GetLocation(cancellable, this);
             if (!location)
                 return null;
             logger_Logger.Debug("Auto location obtained via IP lookup.");
-            this.InjectLocationToConfig(location);
             return location;
         }
         let loc = this._location;
@@ -17412,7 +17458,7 @@ class Config {
         if (location != null) {
             logger_Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
             this.LocStore.SwitchToLocation(location);
-            this.InjectLocationToConfig(location, true);
+            this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
             return location;
         }
         else if (IsCoordinate(loc)) {
@@ -17421,15 +17467,13 @@ class Config {
             const location = {
                 lat: Number.parseFloat(latLong[0]),
                 lon: Number.parseFloat(latLong[1]),
-                timeZone: this.UserTimezone,
                 entryText: loc,
             };
             logger_Logger.Debug("Manual Location is a coordinate, using it directly.");
-            this.InjectLocationToConfig(location);
             return location;
         }
         logger_Logger.Debug("Location is text, geo locating...");
-        const locationData = await this.geoLocationService.GetLocation(loc, cancellable, this);
+        const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
         if (locationData == null)
             return null;
         if (locationData === null || locationData === void 0 ? void 0 : locationData.entryText) {
@@ -17438,12 +17482,10 @@ class Config {
         location = this.LocStore.FindLocation(locationData.entryText);
         if (location != null) {
             logger_Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
-            this.InjectLocationToConfig(location);
             this.LocStore.SwitchToLocation(location);
             return location;
         }
         else {
-            this.InjectLocationToConfig(locationData);
             return locationData;
         }
     }
@@ -19630,7 +19672,7 @@ class WeatherApplet extends TextIconApplet {
         try {
             this.encounteredError = false;
             if (!location) {
-                location = await this.config.EnsureLocation(cancellable);
+                location = await this.config.GetLocation(cancellable);
                 if (!location) {
                     return RefreshState.NoLocation;
                 }
