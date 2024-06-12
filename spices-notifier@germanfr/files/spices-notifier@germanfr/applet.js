@@ -13,7 +13,7 @@ const http = new HttpLib();
 
 const UUID = 'spices-notifier@germanfr';
 
-const _TYPES = ['themes', 'applets', 'desklets', 'extensions'];
+const _TYPES = ['applets', 'desklets', 'extensions', 'themes'];
 const SPICES_URL = 'https://cinnamon-spices.linuxmint.com';
 const HTML_COUNT_ID = 'count';
 const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
@@ -115,8 +115,11 @@ class SpicesNotifier extends Applet.TextIconApplet {
     read_all.connect('activate', this.mark_all_as_read.bind(this));
     this._applet_context_menu.addMenuItem(read_all);
 
-    this.updateId = 0;
+    this.updateId = null;
     this.iteration = 0;
+    this.waiting = {};
+    let cache = this.settings.getValue('xlets-cache');
+    for (let _type of _TYPES) this.waiting[_type] = (cache[_type].length + 3)*1000;
 
     let reload_all = new PopupMenu.PopupIconMenuItem(_("Refresh"), 'reload', St.IconType.SYMBOLIC);
     reload_all.connect('activate', this.reload.bind(this));
@@ -149,8 +152,10 @@ class SpicesNotifier extends Applet.TextIconApplet {
   }
 
   on_applet_removed_from_panel() {
-    if(this.updateId > 0)
+    if(this.updateId) {
       Mainloop.source_remove(this.updateId);
+      this.updateId = null;
+    }
   }
 
   update_applet() {
@@ -171,18 +176,24 @@ class SpicesNotifier extends Applet.TextIconApplet {
     this.my_xlets = [];
     this.unread = 0;
     this.update_applet();
-    if(this.updateId > 0)
+    if(this.updateId) {
       Mainloop.source_remove(this.updateId);
+      this.updateId = null;
+    }
 
     this.iteration++;
     // We need this to avoid duplicates on consecutive loads, because it's async
 
-    for (let _type of _TYPES) {
-      let toId = setTimeout(Lang.bind(this, () => {
-        this.get_xlets(_type);
-        return false
-      }), 1000); // 1 second
-    }
+    var numType = 0;
+    var _type = _TYPES[numType];
+    let id = setInterval( () => {
+      _type = _TYPES[numType];
+      //~ global.log("_type: "+_type);
+      this.get_xlets(_type);
+      numType++;
+      if (numType >= _TYPES.length)
+        clearInterval(id);
+    }, this.waiting[_type]);
 
     let ms = this.update_interval * 60 * 1000;
     this.updateId = Mainloop.timeout_add(ms, this.reload.bind(this));
@@ -219,6 +230,7 @@ class SpicesNotifier extends Applet.TextIconApplet {
     cache[type] = xlets;
     cache.timestamp = Date.now();
     this.settings.setValue('xlets-cache', cache);
+    this.waiting[type] = (xlets.length + 3)*1000;
   }
 
   get_xlet_cache(type) {
@@ -305,14 +317,25 @@ class SpicesNotifier extends Applet.TextIconApplet {
         this.menu.addMenuItem(item);
 
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+      this.fetch_comments(menuItems);
     }
 
-    this.fetch_comments(menuItems);
+    //~ this.fetch_comments(menuItems);
   }
 
   fetch_comments(menuItems) {
-    for(let item of menuItems)
+    if (!menuItems || menuItems.length === 0)
+      return;
+
+    var numItem = 0;
+    let id = setInterval( () => {
+      //~ global.log("numItem: "+numItem);
+      let item = menuItems[numItem];
       this.get_comment_count(item.xlet, item);
+      numItem += 1;
+      if (numItem >= menuItems.length)
+        clearInterval(id);
+    }, 1000);
   }
 
   add_unread(count) {

@@ -1,6 +1,6 @@
 {
   "uuid": "spices-notifier@germanfr",
-  "version": "4.2~20230712",
+  "version": "4.3~20240401",
   "name": "Spices notifier",
   "description": "Notifies of comments on the Cinnamon Spices website",
   "url": "https://github.com/germanfr/spices-notifier",
