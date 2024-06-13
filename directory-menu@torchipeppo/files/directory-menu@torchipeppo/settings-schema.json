@@ -1,0 +1,50 @@
+{
+    "starting-uri": {
+        "type": "filechooser",
+        "default": "~",
+        "description": "Base Directory",
+        "select-dir": true
+    },
+    "icon-name": {
+        "type": "iconfilechooser",
+        "default": "folder-symbolic",
+        "description": "Icon (hover here for info!)",
+        "tooltip": "Must be an icon name (no path), and should be symbolic."
+    },
+    "tooltip": {
+        "type": "entry",
+        "default": "Directory Menu",
+        "description": "Tooltip Text"
+    },
+    "label": {
+        "type": "entry",
+        "default": "",
+        "description": "Panel Text"
+    },
+    "show-menu": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu."
+    },
+    "limit-characters": {
+        "type": "switch",
+        "default": false,
+        "description": "Limit the Maximum Number of Characters on the Submenus"
+    },
+    "character-limit": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 1000,
+        "step": 5,
+        "description": "Character Limit",
+        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
+        "dependency": "limit-characters"
+    },
+    "show-hidden": {
+        "type": "switch",
+        "default": false,
+        "description": "Include hidden files"
+    }
+}

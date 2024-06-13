@@ -9,25 +9,39 @@
       "type": "page",
       "title": "Settings",
       "sections": [
-        "section-panel",
-        "section-menu"
+        "section-general",
+        "section-geolocation",
+        "section-update"
       ]
     },
 
-    "section-panel": {
+    "section-geolocation": {
+      "type": "section",
+      "title": "Geolocation Settings",
+      "keys": [
+        "enableGeolocation",
+        "latitude",
+        "longitude",
+        "enablePopup",
+        "showCurrentPhaseInfo",
+        "showRiseSet"
+      ]
+    },
+
+    "section-general": {
       "type": "section",
       "title": "General Settings",
       "keys": [
         "useAltIcons",
         "showTooltip",
-        "showNameTooltip",
+        "showPhaseTooltip",
         "showPercentageTooltip",
         "showPhaseLabel",
         "showNameLabel",
         "showPercentageLabel"
       ]
     },
-    "section-menu": {
+    "section-update": {
       "type": "section",
       "title": "Update Settings",
       "keys": [
@@ -36,10 +50,45 @@
     }
   },
 
+  "enableGeolocation": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable geolocation features"
+  },
+  "latitude": {
+    "type": "entry",
+    "default": "40.730610",
+    "description": "Latitude",
+    "dependency": "enableGeolocation"
+  },
+  "longitude": {
+    "type": "entry",
+    "default": "-73.935242",
+    "description": "Longitude",
+    "dependency": "enableGeolocation"
+  },
+  "enablePopup": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable popup menu",
+    "dependency": "enableGeolocation"
+  },
+  "showCurrentPhaseInfo": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the current phase information",
+    "dependency": "enablePopup"
+  },
+  "showRiseSet": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the moon rise, transit, and set times",
+    "dependency": "enablePopup"
+  },
   "showPhaseLabel": {
     "type": "checkbox",
     "default": false,
-    "description": "Display the moon phase as a string"
+    "description": "Display the applet label"
   },
   "showNameLabel": {
     "type": "checkbox",
@@ -58,7 +107,7 @@
     "default": true,
     "description": "Display a tooltip on hover"
   },
-  "showNameTooltip": {
+  "showPhaseTooltip": {
     "type": "checkbox",
     "default": true,
     "description": "Display the name of the moon phase in the tooltip",

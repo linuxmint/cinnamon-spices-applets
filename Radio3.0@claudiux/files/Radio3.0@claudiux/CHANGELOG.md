@@ -1,3 +1,88 @@
+### v2.1.1~20240609
+  * Prevents Cvc.MixerControl from being executed more than once.
+
+### v2.1.0~20240519
+  * Improves the installation of dependencies.
+
+### v2.0.4~20240517
+  * Downloaded covers are now of high quality.
+
+### v2.0.3~20240512
+  * Correctly determines the category of a recently listened-to radio station.
+
+### v2.0.2~20240503
+  * Stores and displays the Category of the last radio station listened to in the new menu.
+
+### v2.0.1~20240502
+  * In the menu, each category indicates the number of stations it contains.
+
+### v2.0.0~20240501
+  * Added an option to display the category list alongside the radio station list in the menu.
+  * New screenshot.
+  * New .pot file.
+  * Updated fr.po file.
+
+### v1.19.0~20240402
+  * Adds two options:
+    - Whether or not to show the sound volume OSD when changing radio station.
+    - Whether or not to magnetize all multiples of 25% of the sound volume.
+
+### v1.18.0~20240328
+  * Radio3.0@claudiux can now receive commands from the sound150@claudiux applet.
+
+
+### v1.17.8~20240313
+  * BugFixes about ZettaLite data.
+
+### v1.17.7~20240311
+  * Take into account XML data from ZettaLite to get Artist and Title.
+
+### v1.17.6~20240310
+  * Fixes #5571.
+  * OSD now shows the real volume level at startup.
+
+### v1.17.5~20240306
+  * Modifies the Recordings tab in settings, adding a button to open the Recordings folder.
+
+### v1.17.4~20240306
+  * Prevents multiple identical entries in recently listened-to stations.
+
+### v1.17.3~20240305
+  * Remove error messages about St.Button.
+
+### v1.17.2~20240304
+  * Now compatible with the Horizontal OSD extension.
+
+### v1.17.1~20240304
+  * Better manage song art.
+
+### v1.17.0~20240225
+  * Create the cover of the song broadcast by Radio3.0@claudiux as soon as possible, so that it can be displayed by the [sound150@claudiux applet](https://cinnamon-spices.linuxmint.com/applets/view/306).
+
+### v1.16.1~20240214
+  * Slight improvements in settings and context menu.
+
+### v1.16.0~20240214
+  * Bugfixes.
+
+### v1.15.3~20240211
+  * Minor changes in settings (Network tab).
+
+### v1.15.2~20240210
+  * Added the ability to choose a favorite database to search for radio stations.
+
+### v1.15.1~20240201
+  * Reverses certain modifications because of the risk of data loss.
+  * Code cleanup.
+
+### v1.15.0~20240130
+  * Try to minimize disk writes.
+  * Uses class instead of prototype.
+
+### v1.14.0~20240120
+  * Improves sub-processes.
+  * Adds a button "Open the recordings folder" in YT tab (in this applet settings).
+
 ### v1.13.0~20231224
   * Fixes #5246. Display of volume level near icon and fixes scrolling problems with Cinnamon prior to 5.1.
 

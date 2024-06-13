@@ -1,21 +1,20 @@
-# Power Profiles
-# Copyright (C) 2023
-# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2023
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:16-0400\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en\n"
+"Project-Id-Version: power-profiles@rcalixte 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 15:52-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #: 5.4/applet.js:24
 msgid "Power Saver"
@@ -83,8 +82,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be "
-"'Performance' (or 'Balanced' on some systems).\n"
+"If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be 'Performance' (or 'Balanced' on some systems).\n"
 "\n"
 "If disabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the profile would not change."
 msgstr ""

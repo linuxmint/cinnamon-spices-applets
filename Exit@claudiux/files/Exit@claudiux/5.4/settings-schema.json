@@ -1,0 +1,96 @@
+{
+  "sectionOSD": {
+    "type": "section",
+    "dependency": "displayRestartCinnamonSetting",
+    "description": "Cinnamon restart"
+  },
+  "showOSD": {
+    "type": "switch",
+    "default": true,
+    "description": "Show OSD while restarting Cinnamon",
+    "tooltip": "OSD: On Screen Display"
+  },
+  "sectionMenu": {
+    "type": "section",
+    "description": "Menu options"
+  },
+  "showRestartCinnamon": {
+    "type": "switch",
+    "dependency": "displayRestartCinnamonSetting",
+    "default": true,
+    "description": "Show the Restart Cinnamon option"
+  },
+  "showSuspend": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Suspend option"
+  },
+  "showHibernate": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Hibernate option"
+  },
+  "showRestart": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Restart option"
+  },
+  "showPowerOff": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Power Off option"
+  },
+  "labelOthers": {
+    "type": "label",
+    "description": "All the menu options below may be managed by the system.\nIf they are, you can't see them."
+  },
+  "showLockscreen": {
+    "type": "switch",
+    "dependency": "displayLockScreenSetting",
+    "default": true,
+    "description": "Show the Lock Screen option",
+    "tooltip": "Managed by system"
+  },
+  "showSwitchUser": {
+    "type": "switch",
+    "dependency": "displaySwitchUserSetting",
+    "default": true,
+    "description": "Show the Switch User option",
+    "tooltip": "Managed by system"
+  },
+  "showLogout": {
+    "type": "switch",
+    "dependency": "displayLogoutSetting",
+    "default": true,
+    "description": "Show the Log Out option",
+    "tooltip": "Managed by system"
+  },
+  "logoutMode": {
+    "type": "combobox",
+    "dependency": "displayLogoutSetting",
+    "default": "--no-prompt",
+    "description": "Log Out Mode",
+    "options": {
+      "With confirmation": "",
+      "Without confirmation": "--no-prompt",
+      "Force": "--force"
+    },
+    "tooltip": "The 'Force' option lets you log out while ignoring inhibitors. Useful when several sessions are open."
+  },
+  "displayLockScreenSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "displaySwitchUserSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "displayLogoutSetting": {
+    "type": "generic",
+    "default": true
+  },
+  "displayRestartCinnamonSetting": {
+    "type": "generic",
+    "default": true
+  }
+}

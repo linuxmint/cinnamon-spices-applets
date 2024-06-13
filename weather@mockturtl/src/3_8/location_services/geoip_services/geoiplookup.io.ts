@@ -1,8 +1,9 @@
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import { HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/services/logger";
+import type { WeatherApplet } from "../../main";
+import type { LocationData } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 /**
  * https://geoiplookup.io/api
@@ -16,8 +17,8 @@ export class GeoIPLookupIO implements GeoIP {
 		this.app = app;
 	}
 
-	public async GetLocation(): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoIPLookupPayload>(this.query);
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPLookupPayload | GeoIPLookupFailurePayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;
@@ -45,15 +46,16 @@ export class GeoIPLookupIO implements GeoIP {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("ip-api parsing error: " + e);
+			if (e instanceof Error)
+				Logger.Error("geoiplookup.io parsing error: " + e.message, e);
 			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
 			return null;
 		}
 	};
 
-	HandleErrorResponse(json: any): void {
+	HandleErrorResponse(json: GeoIPLookupFailurePayload): void {
 		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-		Logger.Error("ip-api responds with Error: " + json.reason);
+		Logger.Error("geoiplookup.io responded with data: " + JSON.stringify(json));
 	};
 }
 
@@ -79,6 +81,10 @@ interface GeoIPLookupPayload {
     asn: string;
     currency_code: string;
     currency_name: string;
-    success: boolean;
+    success: true;
     premium: boolean;
+}
+
+interface GeoIPLookupFailurePayload {
+	success: false;
 }

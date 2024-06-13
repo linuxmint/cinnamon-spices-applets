@@ -2,7 +2,7 @@
   "layout": {
     "type": "layout",
     "pages": ["panel-options", "panel-location", "panel-shortcuts"],
-    
+
     "panel-options": {
       "type": "page",
       "title": "Settings",
@@ -27,9 +27,9 @@
         "info-section"
       ]
     },
-    
-    
-    
+
+
+
     "info-section": {
       "type": "section",
       "title": "Tips",
@@ -39,12 +39,13 @@
         "textInfo"
       ]
     },
-    
+
     "opt-section": {
       "type": "section",
       "title": "Options",
       "keys": [
         "enabled",
+        "enableAtStartup",
         "autoUpdate",
         "autoUpdateInterval",
         "adjustmentMethod",
@@ -53,7 +54,7 @@
         "symbolicIcon"
       ]
     },
-    
+
     "day-section": {
       "type": "section",
       "title": "Day Settings",
@@ -63,7 +64,7 @@
         "gammaMix"
       ]
     },
-    
+
     "night-section": {
       "type": "section",
       "title": "Night Settings",
@@ -78,7 +79,7 @@
         "nightBrightness"
       ]
     },
-    
+
     "keybind-section": {
       "type": "section",
       "title": "Key Bindings",
@@ -92,7 +93,7 @@
         "keyGammaDown"
       ]
     },
-    
+
     "location-section": {
       "type": "section",
       "title": "Location Settings",
@@ -101,11 +102,18 @@
       ]
     }
   },
-  
+
   "enabled": {
     "type": "checkbox",
     "default": false,
-    "description": "Enabled"
+    "description": "Enabled",
+    "tooltip": "Automatically disabled under Wayland due to redshift not being yet supported by Wayland"
+  },
+  "enableAtStartup": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Reactivate QRedshift as soon as Cinnamon starts up",
+    "tooltip": "Won't work under Wayland due to redshift not being yet supported by Wayland"
   },
   "autoUpdate": {
     "type": "checkbox",
@@ -158,19 +166,19 @@
     "default": false,
     "description": "Use symbolic icon"
   },
-  
+
   "keyToggle": {
     "type": "keybinding",
     "description": "On/Off",
     "default": ""
   },
-  
+
   "keyBrightnessUp": {
     "type": "keybinding",
     "description": "Increase brightness level",
     "default": ""
   },
-  
+
   "keyBrightnessDown": {
     "type": "keybinding",
     "description": "Decrease brightness level",
@@ -182,19 +190,19 @@
     "description": "Increase temperature level",
     "default": ""
   },
-  
+
   "keyTempDown": {
     "type": "keybinding",
     "description": "Decrease temperature level",
     "default": ""
   },
-  
+
   "keyGammaUp": {
     "type": "keybinding",
     "description": "Increase gamma level",
     "default": ""
   },
-  
+
   "keyGammaDown": {
     "type": "keybinding",
     "description": "Decrease gamma level",
@@ -228,7 +236,7 @@
     "step": 0.01,
     "description": "Gamma"
   },
-  
+
   "enabledNight": {
     "type": "checkbox",
     "default": false,
@@ -296,7 +304,7 @@
     "step": 1,
     "description": "Brightness"
   },
-  
+
   "locationRemote": {
     "type": "checkbox",
     "default": true,

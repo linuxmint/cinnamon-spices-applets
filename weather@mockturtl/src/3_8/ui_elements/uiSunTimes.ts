@@ -1,11 +1,11 @@
-import { DateTime } from "luxon";
-import { Config } from "../config";
+import type { DateTime } from "luxon";
+import type { Config } from "../config";
 import { BLANK, ELLIPSIS } from "../consts";
-import { type WeatherApplet } from "../main";
-import { WeatherData } from "../types";
-import { GetHoursMinutes } from "../utils";
+import type { WeatherApplet } from "../main";
+import type { WeatherData } from "../weather-data";
+import { GetHoursMinutes, Label } from "../utils";
 
-const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 const STYLE_ASTRONOMY = 'weather-current-astronomy'
@@ -30,13 +30,13 @@ export class SunTimesUI {
 	private sunriseLabel!: imports.gi.St.Label;
 	private sunsetLabel!: imports.gi.St.Label;
 
-    private OnConfigChanged = async (config: Config, showSunrise: boolean, data: WeatherData) => {
+    private OnConfigChanged = (config: Config, showSunrise: boolean, data: WeatherData) => {
         this.Display(data.sunrise, data.sunset, data.location.timeZone);
     }
 
     public Rebuild(config: Config, textColorStyle: string): imports.gi.St.BoxLayout {
-        this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
-        this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
+        this.sunriseLabel = Label({ text: ELLIPSIS, style: textColorStyle })
+        this.sunsetLabel = Label({ text: ELLIPSIS, style: textColorStyle })
 
         const sunriseBox = new BoxLayout();
         const sunsetBox = new BoxLayout();
@@ -68,7 +68,7 @@ export class SunTimesUI {
         sunriseBox.add(this.sunriseLabel, textOptions);
         sunsetBox.add(this.sunsetLabel, textOptions);
 
-        const spacer = new Label({ text: BLANK })
+        const spacer = Label({ text: BLANK })
 
         const sunBox = new BoxLayout({
 			style_class: STYLE_ASTRONOMY,
@@ -91,8 +91,8 @@ export class SunTimesUI {
 			return;
 		}
 
-		this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-		this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+		this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config._show24Hours, tz));
+		this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config._show24Hours, tz));
         this.actor.show();
     }
 }

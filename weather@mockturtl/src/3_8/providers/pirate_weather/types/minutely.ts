@@ -1,9 +1,9 @@
-import { PirateWeatherIcon } from "./common";
+import type { PirateWeatherIcon, PirateWeatherSummary } from "./common";
 
 export interface PirateWeatherMinutelyPayload {
 	time: number;
 	icon: PirateWeatherIcon;
-	summary: string;
+	summary: PirateWeatherSummary;
 	precipIntensity: number;
 	precipProbability: number;
 	precipIntensityError: number;

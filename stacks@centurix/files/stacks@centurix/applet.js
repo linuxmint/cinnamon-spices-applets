@@ -9,14 +9,13 @@ const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
-let Util, DockerCompose;
+const Util = imports.misc.util;
+let DockerCompose;
 if (typeof require !== 'undefined') {
 	DockerCompose = require('./dockercompose');
-	Util = require('./util');
 } else {
 	const AppletDir = imports.ui.appletManager.applets['stacks@centurix'];
 	DockerCompose = AppletDir.docker_compose;
-	Util = AppletDir.util;
 }
 
 const UUID = "stacks@centurix";
@@ -248,7 +247,7 @@ Stacks.prototype = {
 	},
 
 	openDockerComposeInstructions: function() {
-		Main.Util.spawnCommandLine("xdg-open https://docs.docker.com/compose/install/");
+		Util.spawnCommandLine("xdg-open https://docs.docker.com/compose/install/");
 	},
 
 	dockerComposeToggle: function(event) {
@@ -273,7 +272,7 @@ Stacks.prototype = {
 	dockerComposeEdit: function(event) {
 		try {
 			this.notification(_("Editing docker-compose.yml"));
-			Main.Util.spawnCommandLine(this.editor + " " + event.docker_compose_file);
+			Util.spawnCommandLine(this.editor + " " + event.docker_compose_file);
 		} catch (e) {
 			global.log(UUID + '::dockerComposeLogs: ' + e);
 		}
@@ -294,7 +293,7 @@ Stacks.prototype = {
 				writeFile.write(logs, null);
 				writeFile.close(null);
 
-				Main.Util.spawnCommandLine(this.editor + " /tmp/tmplog.txt");
+				Util.spawnCommandLine(this.editor + " /tmp/tmplog.txt");
 			});
 		} catch (e) {
 			global.log(UUID + '::dockerComposeLogs: ' + e);

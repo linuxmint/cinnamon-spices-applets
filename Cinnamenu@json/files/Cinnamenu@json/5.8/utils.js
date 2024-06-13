@@ -7,7 +7,6 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
-const {escapeRegExp} = imports.misc.util;
 const {addTween} = imports.ui.tweener;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
@@ -25,6 +24,11 @@ const graphemeBaseChars = s =>
 //decompose and remove discritics (blocks: Combining Diacritical Marks,
 //Combining Diacritical Marks Extended and Combining Diacritical Marks Supplement)
             s.normalize('NFKD').replace(/[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]/g, "");
+
+function escapeRegExp(str) {
+    // from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+    return str.replace(/[-\/.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
 
 //===========================================================
 
@@ -105,21 +109,25 @@ class NewTooltip {
         this.tooltip = new St.Label({
             name: 'Tooltip'
         });
-        this.tooltip.show_on_set_parent = false;
+        this.tooltip.show_on_set_parent = true;
         Main.uiGroup.add_actor(this.tooltip);
         this.tooltip.get_clutter_text().set_markup(this.text);
         this.tooltip.set_style('text-align: left;');
 
         let tooltipWidth = this.tooltip.get_allocation_box().x2 - this.tooltip.get_allocation_box().x1;
+        let tooltipHeight = this.tooltip.get_allocation_box().y2 - this.tooltip.get_allocation_box().y1;
         let monitor = Main.layoutManager.findMonitorForActor(this.actor);
         let tooltipLeft = this.xpos;
+        let tooltipTop = this.ypos;
         if (this.center_x) {
             tooltipLeft -= Math.floor(tooltipWidth / 3);
         }
         tooltipLeft = Math.max(tooltipLeft, monitor.x);
         tooltipLeft = Math.min(tooltipLeft, monitor.x + monitor.width - tooltipWidth);
+        tooltipTop = Math.max(tooltipTop, monitor.y);
+        tooltipTop = Math.min(tooltipTop, monitor.y + monitor.height - tooltipHeight);
 
-        this.tooltip.set_position(tooltipLeft, this.ypos);
+        this.tooltip.set_position(tooltipLeft, tooltipTop);
         this.tooltip.raise_top();
         this.tooltip.show();
     }
@@ -159,7 +167,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
         foundLength = q.length;
     } else if (!noFuzzySearch){ //else fuzzy match
         //find longest substring of str2 made up of letters from q
-        const found = str2.match(new RegExp('[' + q + ']+','g'));
+        const found = str2.match(new RegExp('[' + escapeRegExp(q) + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -191,6 +199,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
             score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
+    
     //reduce score if q is short
     //if (q.length === 1) score *= 0.5;
     //if (q.length === 2) score *= 0.75;

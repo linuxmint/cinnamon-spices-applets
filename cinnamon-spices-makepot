@@ -1,142 +1,163 @@
-#!/bin/bash
+#!/usr/bin/python3
 
-function usage {
-    echo "Usage:"
-    echo ""
-    echo "./cinnamon-spices-makepot ARGUMENT [-i | -r]"
-    echo ""
-    echo "Examples:"
-    echo ""
-    echo "./cinnamon-spices-makepot force-quit@cinnamon.org"
-    echo "./cinnamon-spcies-makepot force-quit@cinnamon.org -i"
-    echo ""
-    echo "Options:"
-    echo ""
-    echo "-i, --install - Compiles and installs any .po files contained in a spices po folder."
-    echo "                Use this option to test your translations locally before uploading"
-    echo "                to Spices."
-    echo ""
-    echo "-r, --remove - The opposite of install, removes translations from the store."
-    echo ""
-    echo "-h, --help - Shows the usage of this script."
-    echo ""
-    echo "ARGUMENT required:"
-    echo ""
-    echo "  UUID - The spices UUID."
-    echo "         What it does: Updates the .pot file of UUID."
-    echo "                       If .pot file does not exist, it will be created."
-    echo "                       Updating a .pot file is done:"
-    echo "                         * by running a custom makepot script in UUID/files/UUID/po"
-    echo "                         * or else with the command: cinnamon-json-makepot --js"
-    echo ""
-    echo "  spices-without-pot - Lists all spices, which do not have a .pot file"
-}
+import argparse
+import json
+import os
+import subprocess
+import sys
 
-function makePotFile {
-    # change directory to UUID/files/UUID
-    cd $1/files/$1
-
-    # check if xlet has a makepot file
-    if [ -f "po/makepot" ]; then
-        if [ $2 !=  "doNotUpdatePotFiles" ]; then
-            cd po
-            echo "------------------------------------------------------------------------------------------------------"
-            echo "$1: po/makepot"
-            echo "------------------------------------------------------------------------------------------------------"
-            ./makepot
-            echo ""
-            cd ..
-        fi
-    # generate .pot with default parameters
-    else
-        if [ -d po ]; then
-            potName=$(ls po | grep .pot) # get name of .pot file
-        else
-            potName=""
-        fi
-        if [ -f "po/$potName" ]; then
-            if [ $2 !=  "doNotUpdatePotFiles" ]; then
-                echo "------------------------------------------------------------------------------------------------------"
-                echo "$1: cinnamon-json-makepot --js po/$potName (update)"
-                echo "------------------------------------------------------------------------------------------------------"
-                cinnamon-json-makepot --js po/$potName
-                echo ""
-            fi
-        else
-            if [ $2 == "createNewPotFile" ]; then
-                if [ ! -d po ]; then
-                    mkdir po
-                fi
-                echo "------------------------------------------------------------------------------------------------------"
-                echo "$1: cinnamon-json-makepot --js po/$1.pot (new file)"
-                echo "------------------------------------------------------------------------------------------------------"
-                cinnamon-json-makepot --js po/$1.pot
-                echo ""
-            elif [ $2 == "doNotUpdatePotFiles" ]; then
-                echo "$1: has no .pot file"
-            fi
-        fi
-    fi
-
-    # change directory back
-    cd ../../..
-}
+from glob import glob
 
 
+def parse_args():
+    """
+    Get command line arguments and process translation actions
+    """
+    parser = argparse.ArgumentParser()
+    parser.description = 'Arguments for cinnamon-spices-makepot'
+    parser.add_argument('-i', '--install', action='store_true',
+                        help='Compiles and installs any .po files contained in'
+                             ' a spices po folder.'
+                             'Use this option to test your translations'
+                             ' locally before uploading to Spices.')
+    parser.add_argument('-r', '--remove', action='store_true',
+                        help='The opposite of install, removes local '
+                             'translations.')
+    parser.add_argument('-a', '--all', action='store_true',
+                        help='Create or update translation templates for all '
+                             'Spices')
+    parser.add_argument('uuid', type=str, metavar='UUID', nargs='?',
+                        help='the UUID of the Spice')
+    args = parser.parse_args()
+    if args.uuid and args.uuid.endswith('/'):
+        args.uuid = args.uuid.replace('/', '')
+    if args.all and not args.uuid:
+        for file_path in os.listdir("."):
+            if os.path.isdir(file_path) and not file_path.startswith("."):
+                if args.install:
+                    install_po(file_path, True)
+                elif args.remove:
+                    remove_po(file_path, True)
+                else:
+                    make_pot(file_path, True)
+    elif args.install and args.remove:
+        print('Only -i/--install OR -r/--remove may be specified. Not both.')
+        sys.exit(1)
+    elif args.install and args.uuid:
+        install_po(args.uuid)
+    elif args.remove and args.uuid:
+        remove_po(args.uuid)
+    elif args.uuid:
+        make_pot(args.uuid)
+    else:
+        parser.print_help()
 
-if [ $# -eq 1 ]; then
-    # print help
-    if [ $1 == "-h" ] || [  $1 == "--help" ]; then
-        usage
-        exit 1
-    fi
-    # if given parameter is 'cinnamon-spices', update .pot files for all xlets
-    if [ $1 == "cinnamon-spices" ]; then
-        for uuid in *; do
-            if [ -d $uuid ]; then
-                makePotFile $uuid doNotCreateNewPotFiles
-            fi
-        done
-        exit 1
-    # if given parameter is 'spices-without-pot', print spices, which have no .pot file
-    elif [ $1 == "spices-without-pot" ]; then
-        for uuid in *; do
-            if [ -d $uuid ]; then
-                makePotFile $uuid doNotUpdatePotFiles
-            fi
-        done
-        exit 1
-    fi
-fi
 
-# install/remove .po files
-if [ $# -eq 2 ]; then
-    if [ -d $1 ]; then
-        if [ $2 == "-i" ] || [ $2 == "--install" ] || [ $2 == "-r" ] || [ $2 == "--remove" ]; then
-            # change directory to UUID/files/UUID
-            cd $1/files/$1
-            cinnamon-json-makepot $2
-            exit 1
-        else
-            echo "Available options: --install | -i, --remove | -r"
-            echo "More infos:"
-            echo ""
-            echo "./cinnamon-spices-makepot --help"
-            exit 1
-        fi
-    else
-        echo "UUID $1 does not exist!"
-    fi
-fi
+def install_po(uuid: str, _all: bool = False):
+    """
+    Install translation files locally from the po directory of the UUID
+    """
+    uuid_path = f'{uuid}/files/{uuid}'
+    try:
+        contents = os.listdir(uuid_path)
+    except FileNotFoundError:
+        print(f'Translations not found for: {uuid}')
+        if not _all:
+            sys.exit(1)
+    home = os.path.expanduser("~")
+    locale_inst = f'{home}/.local/share/locale'
+    if 'po' in contents:
+        po_dir = f'{uuid_path}/po'
+        for file in os.listdir(po_dir):
+            if file.endswith('.po'):
+                lang = file.split(".")[0]
+                locale_dir = os.path.join(locale_inst, lang, 'LC_MESSAGES')
+                os.makedirs(locale_dir, mode=0o755, exist_ok=True)
+                subprocess.run(['msgfmt', '-c', os.path.join(po_dir, file),
+                               '-o', os.path.join(locale_dir, f'{uuid}.mo')],
+                               check=True)
 
-# update .pot file of given xlet UUID
-if [ $# -eq 1 ]; then
-    if [ -d $1 ]; then
-        makePotFile $1 createNewPotFile
-    else
-        echo "Spice with UUID »$1« does not exist!"
-    fi
-    exit 1
-else
-    usage
-fi
+
+def remove_po(uuid: str, _all: bool = False):
+    """
+    Remove local translation files for the UUID
+    """
+    home = os.path.expanduser("~")
+    locale_inst = f'{home}/.local/share/locale'
+    uuid_mo_list = glob(f'{locale_inst}/**/{uuid}.mo', recursive=True)
+    if not uuid_mo_list:
+        print(f'No translation files found for: {uuid}')
+        if not _all:
+            sys.exit(1)
+    for uuid_mo_file in uuid_mo_list:
+        os.remove(uuid_mo_file)
+
+
+def make_pot(uuid: str, _all: bool = False):
+    """
+    Make the translation template file for the UUID
+    """
+    _pwd = sys.argv[1] if not _all else f'{os.getcwd()}/{uuid}'
+    _return_pwd = '../../..'
+    po_dir = f'{_pwd}/files/{uuid}/po'
+    uuid_dir = f'{_pwd}/files/{uuid}'
+    pot_file = uuid + '.pot'
+    outfile = os.path.join(po_dir, pot_file)
+    if os.path.exists(outfile):
+        os.remove(outfile)
+    elif not os.path.exists(po_dir):
+        os.mkdir(po_dir)
+    subprocess.run(["cinnamon-xlet-makepot", "-o", outfile, _pwd],
+                   check=True)
+    os.chdir(uuid_dir)
+    pot_path = f'po/{pot_file}'
+    os.chmod(pot_path, 0o0644)
+    glade_list = glob('**/*.glade', recursive=True)
+    glade_list += glob('**/*.ui', recursive=True)
+    for glade_file in glade_list:
+        subprocess.run(["xgettext", "-jL", "Glade", "-o", pot_path,
+                       glade_file], check=True)
+    shell_list = glob('**/*.sh', recursive=True)
+    for shell_file in shell_list:
+        subprocess.run(["xgettext", "-jL", "Shell", "-o", pot_path,
+                       shell_file], stderr=subprocess.DEVNULL, check=True)
+    if not _all:
+        os.chdir(f'{_return_pwd}')
+    metadata_file = 'metadata.json' if _all else f'{uuid}/files/{uuid}/metadata.json'
+    try:
+        with open(metadata_file, encoding='utf-8') as meta:
+            metadata = json.load(meta)
+        version = str(metadata['version'])
+    except (FileNotFoundError, KeyError):
+        print(f"{uuid}: metadata.json or version not found")
+        version = "1.0"
+    address = 'https://github.com/linuxmint/cinnamon-spices-applets/issues'
+    subprocess.run(["xgettext", "-w", "79", "--package-name", uuid,
+                    "--foreign-user", "--msgid-bugs-address", address,
+                    "--package-version", version, "-o", outfile, outfile],
+                   check=True)
+    glob_path = 'po/*.po' if _all else f'{uuid}/**/*.po'
+    po_list = glob(glob_path, recursive=True)
+    for po_file in po_list:
+        os.chmod(po_file, 0o0644)
+
+    for po_file in po_list:
+        *po_dir_list, po_ext = po_file.split('/')
+        po_dir_str = '/'.join(po_dir_list)
+        if not os.getcwd().endswith(po_dir_str):
+            os.chdir(po_dir_str)
+        po_lang = po_ext.split('.')[0]
+        subprocess.run(["msguniq", "-o", po_ext, po_ext], check=True)
+        subprocess.run(["intltool-update", "-g", uuid, "-d", po_lang],
+                       check=True)
+        subprocess.run(["msgattrib", "--no-obsolete", "-w", "79", "-o",
+                        po_ext, po_ext],
+                       check=True)
+    if po_list:
+        _return_pwd += '/..'
+    if _all:
+        os.chdir(_return_pwd)
+
+
+if __name__ == "__main__":
+    parse_args()

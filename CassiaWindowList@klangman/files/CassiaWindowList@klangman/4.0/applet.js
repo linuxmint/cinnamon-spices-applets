@@ -1,6 +1,6 @@
 /*
  * applet.js
- * Copyright (C) 2022 Kevin Langman <klangman@gmail.com>
+ * Copyright (C) 2022-2024 Kevin Langman <klangman@gmail.com>
  * Copyright (C) 2013 Lars Mueller <cobinja@yahoo.de>
  *
  * CassiaWindowList is a fork of CobiWindowList which is found here:
@@ -150,11 +150,18 @@ const DisplayCaption = {
   One: 3            // Only one window (the last one in the window list) will have a caption (only really makes sense when also using GroupType.Pooled/Auto)
 }
 
-// The possible user Settings for how window list window counts should be displayed
+// The possible user Settings for how the number label should be displayed
 const DisplayNumber = {
-  No: 0,            // The number of windows attached to a window list button is never displayed
+  No: 0,            // The number label for a  window list button is never displayed
   All: 1,           // ... always displayed
   Smart: 2          // ... only displayed when 2 of more windows exist
+}
+
+const NumberType = {
+  Nothing:      0,  // Don't show any Number labels
+  GroupWindows: 1,  // Application Group Window Count
+  WorkspaceNum: 2,  // Workspace Number
+  MonitorNum:   3   // Monitor Number
 }
 
 // Possible values for the WindowListButton._grouped variable which determines how each individual windowlist button is currently grouped
@@ -194,7 +201,22 @@ const MouseAction = {
   MoveNextWorkspace: 21, // Move window to the workspace +1 from it's current workspace
   MovePrevMonitor: 22,   // Move window to the monitor -1 from it's current monitor
   MoveNextMonitor: 23,   // Move window to the monitor +1 from it's current monitor
-  PinToPanel: 24         // Pin the appButton to the panel
+  PinToPanel: 24,        // Pin the appButton to the panel
+  TileLeft: 25,          // Tile window...
+  TileTopLeft: 26,
+  TileTop: 27,
+  TileTopRight: 28,
+  TileRight: 29,
+  TileBottomRight: 30,
+  TileBottom: 31,
+  TileBottomLeft: 32,
+  Untile: 33,            // Untile the window
+  MoveThisWorkspace: 34, // Move window to the current workspace
+  GroupedWindow1: 35,    // Activate the 1st...4th window in a grouped button
+  GroupedWindow2: 36,
+  GroupedWindow3: 37,
+  GroupedWindow4: 38,
+  MoveHere: 39           // Change the windows monitor and workspace to be the current monitor and workspace
 }
 
 // Possible settings for the left mouse action for grouped buttons (or Laucher with running windows)
@@ -266,6 +288,11 @@ const SaturationType = {
    OtherMonitors: 4,
    Focused: 5
 }
+
+var hasSetMarkup = undefined;
+var hasGetFrameRect = undefined;
+var hasGetCurrentMonitor = undefined;
+var useOldMoveToWorkspace = undefined;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -352,15 +379,19 @@ function animatedRemoveAppButton(workspace, time, button) {
     }
   }
   */
-  Tweener.addTween(button._labelBox, {
-    natural_width: 0,
-    time: time * 0.001,
-    transition: "easeInOutQuad",
-    onComplete() {
-       this._removeAppButton(button);
-    },
-    onCompleteScope: workspace
-  });
+  if (button._labelWidth != 0 && button._shrukenLabel != true){
+     Tweener.addTween(button._labelBox, {
+       natural_width: 0,
+       time: time * 0.001,
+       transition: "easeInOutQuad",
+       onComplete() {
+          this._removeAppButton(button);
+       },
+       onCompleteScope: workspace
+     });
+  } else {
+     workspace._removeAppButton(button);
+  }
 }
 
 function getOverheadSize(actor) {
@@ -424,8 +455,8 @@ function getKeyAndButtonMouseAction(mouseActionList, modifier, context, mouseBtn
 }
 
 function moveTitleBarToScreen(window) {
-   if (majorVersion < 5) {
-      return; // Cinnamon 4 does not support get_frame_rect()
+   if (!hasGetFrameRect) {
+      return true; // This system does not support get_frame_rect()
    }
    let rec = window.get_frame_rect();
    let topOffset = 0;
@@ -449,8 +480,15 @@ function moveTitleBarToScreen(window) {
 }
 
 function isTitleBarOnScreen(window) {
-   if (majorVersion < 5) {
-      return true; // Cinnamon 4 does not support get_frame_rect()
+   if (hasGetFrameRect===undefined) {
+      if (typeof window.get_frame_rect === "function") {
+         hasGetFrameRect = true;
+      } else {
+         hasGetFrameRect = false;
+      }
+   }
+   if (!hasGetFrameRect) {
+      return true; // This system does not support get_frame_rect()
    }
    let rec = window.get_frame_rect();
    let topOffset = 0;
@@ -514,6 +552,171 @@ function isAllButtons(hotkey) {
    return false;
 }
 
+function createHoverPeekClone(metaWindow, time) {
+   if (metaWindow && global.display.get_focus_window() != metaWindow) {
+      // Show a hover peek window clone, easing in over a short period
+      let metaWindowActor = metaWindow.get_compositor_private();
+      let hoverClone = WindowUtils.getCloneOrContent(metaWindowActor);
+      let [x, y] = metaWindowActor.get_position();
+      let [width, height] = metaWindowActor.get_size();
+      hoverClone.set_position(x, y);
+      hoverClone.set_size(width, height);
+      global.overlay_group.add_child(hoverClone);
+      global.overlay_group.set_child_above_sibling(hoverClone, null);
+      if (time) {
+         hoverClone.opacity = 0;
+         Tweener.addTween(hoverClone, {time: time, transition: 'easeInQuad', opacity: 255});
+      }
+      return hoverClone;
+   }
+   return null;
+}
+
+function destroyHoverPeekClone(hoverClone, delayId, time, instant=false) {
+   if (delayId) {
+      let doIt = GLib.MainContext.default().find_source_by_id(delayId);
+      if (doIt) {
+         Mainloop.source_remove(delayId);
+      }
+   }
+   if (hoverClone) {
+      if (!instant && time) {
+         Tweener.addTween(hoverClone, {time: time, transition: 'easeOutQuad', opacity: 0, onComplete: () => {global.overlay_group.remove_child(hoverClone); hoverClone.destroy();}});
+      } else {
+         global.overlay_group.remove_child(hoverClone);
+         hoverClone.destroy();
+      }
+   }
+   return null;
+}
+
+function isCtrlOrShiftHeld() {
+   let [px,py,mods] = global.get_pointer();
+   if ((mods & (Clutter.ModifierType.SHIFT_MASK | Clutter.ModifierType.CONTROL_MASK)) != 0) {
+      return true;
+   }
+   return false;
+}
+
+function isPointerOffActor(actor, orientation) {
+   let [px,py,mods] = global.get_pointer();
+   let [x, y] = actor.get_transformed_position();
+   if (orientation == St.Side.LEFT) {
+      let [w, h] = actor.get_size();
+      if ( px > x + w ) {
+         return true;
+      }
+   } else if (orientation == St.Side.RIGHT) {
+      if ( px < x ) {
+         return true;
+      }
+   } else if (orientation == St.Side.TOP) {
+      let [w, h] = actor.get_size();
+      if ( py > y + h ) {
+         return true;
+      }
+   } else if (orientation == St.Side.BOTTOM) {
+      if ( py < y ) {
+         return true;
+      }
+   }
+   return false;
+}
+
+// Move the window according to the newTileMode parm
+function reTile(window, newTileMode) {
+   if (typeof Meta.WindowTileType !== 'undefined') {
+      window.tile(newTileMode, true);
+      return;
+   }
+   let mode = window.tile_mode;
+   if( newTileMode != mode) {
+      let newLeft = (newTileMode === Meta.TileMode.LEFT || newTileMode === Meta.TileMode.ULC || newTileMode === Meta.TileMode.LLC);
+      let newRight = !newLeft && (newTileMode === Meta.TileMode.RIGHT || newTileMode === Meta.TileMode.URC || newTileMode === Meta.TileMode.LRC);
+      let newTop = (newTileMode === Meta.TileMode.TOP || newTileMode === Meta.TileMode.ULC || newTileMode === Meta.TileMode.URC);
+      let newBottom = !newTop && (newTileMode === Meta.TileMode.BOTTOM || newTileMode === Meta.TileMode.LLC || newTileMode === Meta.TileMode.LRC);
+      let newH = (newRight*2) +(!newLeft&&!newRight);
+      let newV = (newBottom*2)+(!newTop&&!newBottom);
+
+      let curLeft = (mode === Meta.TileMode.LEFT || mode === Meta.TileMode.ULC || mode === Meta.TileMode.LLC);
+      let curRight = !curLeft && (mode === Meta.TileMode.RIGHT || mode === Meta.TileMode.URC || mode === Meta.TileMode.LRC);
+      let curTop = (mode === Meta.TileMode.TOP || mode === Meta.TileMode.ULC || mode === Meta.TileMode.URC);
+      let curBottom = !curTop && (mode === Meta.TileMode.BOTTOM || mode === Meta.TileMode.LLC || mode === Meta.TileMode.LRC);
+      let curH = (curRight*2) +(!curLeft&&!curRight);
+      let curV = (curBottom*2)+(!curTop&&!curBottom);
+
+      while (curH != newH) {
+         if (curH > newH) {
+            global.display.push_tile(window, Meta.MotionDirection.LEFT);
+            curH--;
+         } else {
+            global.display.push_tile(window, Meta.MotionDirection.RIGHT);
+            curH++;
+         }
+      }
+      while (curV != newV) {
+         if (curV > newV) {
+            global.display.push_tile(window, Meta.MotionDirection.UP);
+            curV--;
+         } else {
+            global.display.push_tile(window, Meta.MotionDirection.DOWN);
+            curV++;
+         }
+      }
+   }
+}
+
+// Converts the "<modifier><...>key::" to "Modifier+...+Key" format for hotkeys
+// 'Separator' is added between the hotkeys if two are specified
+function getHotkeyPrettyString(keyString, separator) {
+   let text = "";
+   keyString = keyString.replace( /</g, "");
+   keyString = keyString.replace( />/g, "+");
+   if (keyString.endsWith("::")) {
+      keyString = keyString.slice(0,-2);
+   }else{
+      let first = keyString.slice(0, keyString.lastIndexOf("::"));
+      let end = first.slice(first.lastIndexOf("+"))
+      text = first.slice(0,first.lastIndexOf("+")) + end.toUpperCase() + separator;
+      keyString = keyString.slice(keyString.indexOf("::")+2);
+   }
+   let end = keyString.slice(keyString.lastIndexOf("+"))
+   text = text + keyString.slice(0,keyString.lastIndexOf("+")) + end.toUpperCase();
+   return text;
+}
+
+// Move 'window' to the 'curWs' workspace and the 'curMonitor' monitor, then give 'window' the focus
+// It's assumed that curWs and curMonitor is the current workspace and the monitor the panel is on
+function moveWindowHere(window, curWs, curMonitor) {
+   if (window.get_monitor() != curMonitor) {
+      window.move_to_monitor(curMonitor);
+   }
+   if (curWs != window.get_workspace().index()) {
+      moveToWorkspace(window, curWs);
+   }
+   Main.activateWindow(window);
+}
+
+// Since the number of arguments to change_workspace_by_index() changed, here we try the new number of arguments
+// and if that causes an exception we use the old number of arguments from then on, else we use the new style.
+function moveToWorkspace(window, idx) {
+   if (useOldMoveToWorkspace === undefined) {
+      try {
+         window.change_workspace_by_index(idx, false);
+         useOldMoveToWorkspace = false;
+      } catch (e) {
+         useOldMoveToWorkspace = true;
+         window.change_workspace_by_index(idx, false, 0);
+      }
+   } else {
+      if (useOldMoveToWorkspace) {
+         window.change_workspace_by_index(idx, false, 0);
+      } else {
+         window.change_workspace_by_index(idx, false);
+      }
+   }
+}
+
 // Represents an item in the Thumbnail popup menu
 class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
 
@@ -571,12 +774,27 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
     this._spacer = new St.Widget();
     this._descBox.add(this._spacer, {expand: true});
 
+    // Add Monitor and Workspace label
+    let showMon = Main.layoutManager.monitors.length > 1 && !this._settings.getValue("show-windows-for-current-monitor");
+    let showWS = global.screen.get_n_workspaces() > 1 && this._settings.getValue("show-windows-for-all-workspaces");
+    if (showMon || showWS) {
+       this._infoLabel = new St.Label();
+       if (showMon && showWS) {
+          this._infoLabel.set_text(` (${metaWindow.get_workspace().index()+1}/${metaWindow.get_monitor()+1}) `);
+       } else if (showMon) {
+          this._infoLabel.set_text(` (${metaWindow.get_monitor()+1}) `);
+       } else if (showWS) {
+          this._infoLabel.set_text(` (${metaWindow.get_workspace().index()+1}) `);
+       }
+       this._descBox.add_actor(this._infoLabel);
+    }
+
     this._closeBin = new St.Bin({min_width: 0, min_height: 0, natural_width: this.descSize, natural_height: this.descSize, reactive: true});
     this._closeIcon = new St.Bin({style_class: "window-close", natural_width: this._iconSize, height: this._iconSize});
     this._descBox.add_actor(this._closeBin);
     this._closeBin.set_child(this._closeIcon);
     this._closeIcon.hide();
-
+    this.hoverClone = null;
     if (this._appButton._windows.length > 1 && this._appButton._currentWindow === metaWindow) {
       this._box.add_style_pseudo_class('outlined');
     } else if (this._appButton.appLastFocus &&
@@ -651,15 +869,29 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
       this._closeIcon = icon;
       this._closeIcon.set_reactive(true);
       this._closeBin.set_child(this._closeIcon);
-      this._signalManager.connect(this._closeIcon, "button-release-event", this._onClose, this);
+      this._signalManager.connect(this._closeIcon, "button-release-event", this._onCloseButtonRelease, this);
       this._signalManager.connect(this._closeBin, "enter-event", this._onCloseIconEnterEvent, this);
       this._signalManager.connect(this._closeBin, "leave-event", this._onCloseIconLeaveEvent, this);
     }
     this._closeIcon.show();
+
+    if (this._settings.getValue("hover-peek-thumbnail")) {
+       // After a short delay to avoid needless hover peeks, ease in the hover peek window
+       if(!this._menu.hoverPeekDelay) {
+          this._menu.hoverPeekDelay = this._settings.getValue("hover-peek-delay")
+       }
+       this._menu._hovePeekDelayId = Mainloop.timeout_add(this._menu.hoverPeekDelay, Lang.bind(this, () => {
+         this._menu._hovePeekDelayId = destroyHoverPeekClone(this.hoverClone, this._menu._hovePeekDelayId, this._settings.getValue("fade-animation-time")*0.001); // Close if one happens to exist
+         this.hoverClone = createHoverPeekClone(this._metaWindow, this._settings.getValue("fade-animation-time")*0.001);
+         this._menu.hoverPeekDelay = 60;
+         } ));
+    }
   }
 
   _onLeaveEvent() {
     this._closeIcon.hide();
+    this._menu._hovePeekDelayId = this.hoverClone = destroyHoverPeekClone(this.hoverClone, this._menu._hovePeekDelayId, this._settings.getValue("fade-animation-time")*0.001);
+    this._menu.recentHoverWindow = this._metaWindow;
   }
 
   _onCloseIconEnterEvent() {
@@ -692,6 +924,7 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
       this._appButton._performMouseAction(action, this._metaWindow);
       return true;
     } else if (mouseBtn == 3) { // Right button
+      this._menu._hovePeekDelayId = this.hoverClone = destroyHoverPeekClone(this.hoverClone, this._menu._hovePeekDelayId, this._settings.getValue("fade-animation-time")*0.001);
       this._appButton._populateContextMenu(this._metaWindow);
       this._appButton._contextMenu.open();
       this._appButton._updateFocus();
@@ -709,7 +942,7 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
     return true;
   }
 
-  _onClose() {
+  _onCloseButtonRelease() {
     this._inClosing = true;
     this._metaWindow.delete(global.get_current_time());
     this._inClosing = false;
@@ -759,6 +992,7 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
   }
 
   destroy() {
+    this._menu._hovePeekDelayId = this.hoverClone = destroyHoverPeekClone(this.hoverClone, this._menu._hovePeekDelayId, this._settings.getValue("fade-animation-time")*0.001);
     this._signalManager.disconnectAllSignals();
     super.destroy();
   }
@@ -778,6 +1012,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     global.focus_manager.add_group(this.actor);
     this.actor.reactive = true;
     Main.layoutManager.addChrome(this.actor);
+    this.hoverPeekDelay = null;
     this.actor.hide();
 
     this._updateOrientation();
@@ -805,6 +1040,9 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
   }
 
   _onLeaveEvent() {
+    if (this.recentHoverWindow && this._settings.getValue("no-click-activate-thumbnail") && !isCtrlOrShiftHeld() && isPointerOffActor(this.actor, this._appButton._applet.orientation)) {
+       Main.activateWindow(this.recentHoverWindow)
+    }
     this._appButton.closeThumbnailMenuDelayed();
     return false;
   }
@@ -815,11 +1053,10 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
 
   _findMenuItemForWindow(metaWindow) {
     let items = this._getMenuItems();
-    items = items.filter(function(item) {
-      return item._metaWindow == metaWindow;
-    });
-    if (items.length > 0) {
-      return items[0];
+    for( let i=0 ; i < items.length ; i++ ) {
+       if (items[i]._metaWindow === metaWindow) {
+          return items[i];
+       }
     }
     return null;
   }
@@ -855,21 +1092,34 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     this.updateUrgentState();
     this.recalcItemSizes();
 
+    // Fade-in effect
+    let time = this._settings.getValue("fade-animation-time")*0.001;
+    if (time) {
+       this.actor.set_opacity(0);
+       Tweener.addTween(this.actor, {time: time, transition: 'easeInQuad', opacity: 255});
+    }
     super.open(false);
   }
 
   closeMenu() {
     this._appButton._workspace.holdPopup = undefined;
+    this.recentHoverWindow = undefined;
     if (this._inHiding && this.numMenuItems > 1) {
       return;
     }
     //log( "menu close called!" );
     //var err = new Error();
     //log( "Stack:\n"+err.stack );
-    super.close(false);
-    this.removeAll();
+    let time = this._settings.getValue("fade-animation-time")*0.001;
+    if (time) {
+       Tweener.addTween(this.actor, {time: time, transition: 'easeOutQuad', opacity: 0, onComplete: () => {super.close(false); this.removeAll();}});
+    } else {
+       super.close(false);
+       this.removeAll();
+    }
     if (this._settings.getValue("wheel-adjusts-preview-size")<ScrollWheelAction.OnGlobal) // Off or On
        this.numThumbs = this._settings.getValue("number-of-unshrunk-previews"); // reset the preview window size in case scroll-wheel zooming occurred.
+    this.hoverPeekDelay = null;
   }
 
   addWindow(window) {
@@ -953,7 +1203,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
 class ThumbnailMenuManager extends PopupMenu.PopupMenuManager {
 
   constructor(owner) {
-    super(owner);
+    super(owner, false);
     this.dragMotion = this.dragMotionHandler.bind(this);
     this._signals.connect(Main.xdndHandler, "drag-end", this.onDragEnd, this);
     this._signals.connect(Main.xdndHandler, "drag-begin", this.onDragBegin, this);
@@ -1040,6 +1290,13 @@ class WindowListButton {
     this._labelBox.add_actor(this._label);
 
     this._tooltip = new Tooltips.PanelItemTooltip(this, this._app.get_name(), this._applet.orientation);
+    if (hasSetMarkup===undefined){
+       if (typeof this._tooltip.set_markup === "function") {
+          hasSetMarkup = true;
+       } else {
+          hasSetMarkup = false;
+       }
+    }
 
     this._iconBox = new St.Group({style: 'border:0px;padding:0px;margin:0px'});
     this.actor.add_actor(this._iconBox);
@@ -1063,6 +1320,7 @@ class WindowListButton {
     this._nextWindow = null;                  // When cycling windows, keep track of the next window to cycle to
     this._grouped = GroupingType.NotGrouped;  // If button is a group of windows and why it was grouped
     this._currentWindow = null;
+    this.hoverClone = null;
 
     this._updateOrientation();
 
@@ -1078,12 +1336,15 @@ class WindowListButton {
     this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::hide-caption-for-minimized", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-caption-for", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::show-ellipsis-for-groups", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-number", this._updateNumber, this);
     this._signalManager.connect(this._settings, "changed::menu-show-on-hover", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::grouped-mouse-action-btn1", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::show-tooltips", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::number-style", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
+    this._signalManager.connect(this._settings, "changed::number-type", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
     this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::button-spacing", this._updateSpacing, this);
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
     this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
@@ -1103,6 +1364,19 @@ class WindowListButton {
 
     this.isDraggableApp = true;
     this._updateNumber();
+    this._updateSpacing();
+  }
+
+  _updateSpacing() {
+     let spacing = this._settings.getValue("button-spacing");
+     let left = Math.floor(spacing/2);
+     let right = left + (spacing%2);
+     if (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT) {
+        this._iconBox.set_style("margin-top:"+right+"px;margin-bottom:"+left+"px;");
+     } else {
+        this._labelBox.set_style("margin-right:"+right+"px;");
+        this._iconBox.set_style("margin-left:"+left+"px;");
+     }
   }
 
   isMinimizedAll() {
@@ -1113,6 +1387,15 @@ class WindowListButton {
      }
      if (minimized > 0 && minimized === this._windows.length )
         return true;
+     return false;
+  }
+
+  isOnOtherWorkspace() {
+     if (this._currentWindow) {
+        let ws = this._currentWindow.get_workspace();
+        if (ws && ws.index() != this._workspace._wsNum)
+           return true;
+     }
      return false;
   }
 
@@ -1128,7 +1411,16 @@ class WindowListButton {
      return false;
   }
 
-  isOnOtherMonitorsAll() {
+  isOnOtherMonitor() {
+     if (this._currentWindow) {
+        let monitor = this._currentWindow.get_monitor();
+        if (monitor != -1 && monitor != this._applet.panel.monitorIndex)
+           return true;
+     }
+     return false;
+  }
+
+  isOnOtherMonitorAll() {
      let other=0;
      for (let idx=0 ; idx < this._windows.length ; idx++ ) {
         let monitor = this._windows[idx].get_monitor();
@@ -1189,7 +1481,13 @@ class WindowListButton {
     this.closeThumbnailMenu();
   }
 
-  _onDragEnd() {
+  _onDragEnd(event, time, accepted) {
+    // If the drop was not accepted by the drop target and the monitor|workspace where the drop occurred is not that same as the currentWindow's monitor|workspace,
+    // then move the currentWindow to the monitor|workspace where the drop occurred and activate it. The user wants to use DND to move a window to a new monitor|workspace.
+    if (hasGetCurrentMonitor && !accepted && this._currentWindow) {
+       moveWindowHere(this._currentWindow, global.screen.get_active_workspace_index(), global.display.get_current_monitor());
+    }
+
     this._workspace._clearDragPlaceholder();
     this._updateVisibility();
     this._updateTooltip();
@@ -1245,6 +1543,7 @@ class WindowListButton {
     this._signalManager.connect(metaWindow, "notify::demands-attention", this._updateUrgentState, this);
     this._signalManager.connect(metaWindow, "notify::gtk-application-id", this._onGtkApplicationChanged, this);
     this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
+    this._signalManager.connect(metaWindow, 'notify::icon', this.updateIcon, this);
     //this._signalManager.connect(metaWindow, "notify::progress", this._onProgressChange, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
 
@@ -1253,11 +1552,7 @@ class WindowListButton {
     if (this.menu && this._windows.length == 1) {
       this._workspace.menuManager.addMenu(this.menu);
     }
-    if (this._workspace.iconSaturation!=100 &&
-       (this._pinned && this._windows.length===1 && this._workspace.saturationType == SaturationType.Idle) ||
-       (this._workspace.saturationType == SaturationType.OtherMonitors && this.isOnOtherMonitorsAll()) ) {
-       this.updateIconSelection();
-    }
+    this.updateIconSelection();
   }
 
   removeWindow(metaWindow) {
@@ -1273,9 +1568,9 @@ class WindowListButton {
     if (arIndex >= 0) {
       this._windows.splice(arIndex, 1);
       this._updateCurrentWindow();
-      if (this.menu && this.menu.isOpen) {
-        this.menu.removeWindow(metaWindow);
-      }
+    }
+    if (this.menu && this.menu.isOpen) {
+      this.menu.removeWindow(metaWindow);
     }
     this._updateUrgentState()
     if (this._pinned) {
@@ -1316,9 +1611,7 @@ class WindowListButton {
     // Without slice, this will reorder to windows in the this._windows array
     let windows = this._windows.slice();
     if (windows.length > 1) {
-      windows = windows.sort(function(a, b) {
-        return b.user_time - a.user_time;
-      });
+      windows = windows.sort(function(a, b) {return b.user_time - a.user_time;});
       this.sortedWindows = windows;
     } else {
        this.sortedWindows = this._windows;
@@ -1379,20 +1672,8 @@ class WindowListButton {
                    text = text + "\n" + secondCombo.slice(0,secondCombo.lastIndexOf("+")) + end.toUpperCase();
                 }
              } else {
-                // i.e.  "<Alt><Super><e>::" -> "Alt+Super+E"
-                let keyString = hotKeys[i].keyCombo.toString();
-                keyString = keyString.replace( /</g, "");
-                keyString = keyString.replace( />/g, "+");
-                if (keyString.endsWith("::")) {
-                   keyString = keyString.slice(0,-2);
-                }else{
-                   let first = keyString.slice(0, keyString.lastIndexOf("::"));
-                   let end = first.slice(first.lastIndexOf("+"))
-                   text = text + "\n" + first.slice(0,first.lastIndexOf("+")) + end.toUpperCase();
-                   keyString = keyString.slice(keyString.indexOf("::")+2);
-                }
-                let end = keyString.slice(keyString.lastIndexOf("+"))
-                text = text + "\n" + keyString.slice(0,keyString.lastIndexOf("+")) + end.toUpperCase();
+                // i.e.  "<Alt><Super>e::" -> "Alt+Super+E"
+                text = text + "\n" + getHotkeyPrettyString(hotKeys[i].keyCombo, "\n");
              }
           } else if (isAllButtons(hotKeys[i])) {
              let childern = this._workspace.actor.get_children();
@@ -1412,14 +1693,11 @@ class WindowListButton {
     } else {
        title = this._currentWindow.get_title();
     }
-    if (majorVersion < 5) {
+    if (text.length == 0 || !hasSetMarkup) {
        this._tooltip.set_text(title + text);
     } else {
-       if (text.length > 0 ) {
-          text = "<b>"+title+"</b>"+"<small>"+text+"</small>";
-       }else{
-          text = title;
-       }
+       title = GLib.markup_escape_text(title, -1);
+       text = "<b>"+title+"</b>"+"<small>"+text+"</small>";
        this._tooltip.set_markup( text );
     }
     this._tooltip.preventShow = false;
@@ -1429,10 +1707,10 @@ class WindowListButton {
      if (this._workspace.iconSaturation != 100 && this._modifiedIcon) {
         let satType = this._workspace.saturationType;
         if (satType == SaturationType.All ||
-           (satType == SaturationType.Minimized && this.isMinimizedAll()) ||
+           (satType == SaturationType.Minimized && this._currentWindow && this._currentWindow.minimized) ||
            (satType == SaturationType.Idle && this._pinned && this._windows.length==0) ||
-           (satType == SaturationType.OtherWorkspaces && this.isOnOtherWorkspaceAll()) ||
-           (satType == SaturationType.OtherMonitors && this.isOnOtherMonitorsAll()) ||
+           (satType == SaturationType.OtherWorkspaces && this.isOnOtherWorkspace()) ||
+           (satType == SaturationType.OtherMonitors && this.isOnOtherMonitor()) ||
            (satType == SaturationType.Focused && !this._hasFocus()) )
         {
            this._iconBin.set_child(this._modifiedIcon);
@@ -1472,9 +1750,13 @@ class WindowListButton {
            if (pixBuf) {
               let image = new Clutter.Image();
               pixBuf.saturate_and_pixelate(pixBuf, saturation/100, false);
-              image.set_data(pixBuf.get_pixels(), pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-                 this.iconSize, this.iconSize, pixBuf.get_rowstride() );
-              this._modifiedIcon = new Clutter.Actor({width: this.iconSize, height: this.iconSize, content: image});
+              try {
+                 image.set_data(pixBuf.get_pixels(), pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+                    this.iconSize, this.iconSize, pixBuf.get_rowstride() );
+                 this._modifiedIcon = new Clutter.Actor({width: this.iconSize, height: this.iconSize, content: image});
+              } catch(e) {
+                 // Can't set the image data, so just use the default!
+              }
            } else {
               //log( `Can't find icon for ${infoIcon.to_string()}` );
            }
@@ -1517,6 +1799,7 @@ class WindowListButton {
   }
 
   _updateNumber() {
+    let numberType = this._settings.getValue("number-type");
     let setting = this._settings.getValue("display-number");
     let style = this._settings.getValue("number-style");
     let groupType = this._settings.getValue("group-windows");
@@ -1526,14 +1809,22 @@ class WindowListButton {
     if (this._grouped === GroupingType.Auto && number < 2) {
        this._grouped = GroupingType.NotGrouped;
     }
-    if ( (setting == DisplayNumber.All && number >= 1)    ||
-         ((setting == DisplayNumber.Smart && number >= 2) &&
-         (groupType == GroupType.Grouped || groupType == GroupType.Launcher || this._grouped > GroupingType.NotGrouped))) {
-      text += number;
-    }
 
     if (style == 1 && (groupType == GroupType.Launcher || (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT)))
        style = 0;  // No space for a label based window group counter, so force the icon overlay option if it's not disabled!
+
+    if (style === 0 && numberType !== NumberType.Nothing) {
+       if (numberType === NumberType.GroupWindows && ( (setting == DisplayNumber.All && number >= 1) ||
+          ((setting == DisplayNumber.Smart && number >= 2) &&
+          (groupType == GroupType.Grouped || groupType == GroupType.Launcher || this._grouped > GroupingType.NotGrouped))))
+       {
+          text += number;
+       } else if (numberType === NumberType.WorkspaceNum && this._currentWindow && (setting === DisplayNumber.All || this.isOnOtherWorkspace())) {
+          text += this._currentWindow.get_workspace().index()+1;
+       } else if (numberType === NumberType.MonitorNum && this._currentWindow && (setting === DisplayNumber.All || this.isOnOtherMonitor())) {
+          text += this._currentWindow.get_monitor()+1;
+       }
+    }
 
     if (text == "" || style == 1) {
       this._labelNumberBox.hide();
@@ -1575,7 +1866,9 @@ class WindowListButton {
     let pinnedSetting = this._settings.getValue("display-caption-for-pined");
     let minimizedSetting = this._settings.getValue("hide-caption-for-minimized");
     let style = this._settings.getValue("number-style");
+    let numberType = this._settings.getValue("number-type");
     let preferredWidth = this._settings.getValue("label-width");
+    let ellipsis = this._settings.getValue("show-ellipsis-for-groups");
     let number = this._windows.length;
     let text = "";
     let width = preferredWidth;
@@ -1655,15 +1948,25 @@ class WindowListButton {
        this._shrukenLabel = true;
     }
 
-    // Do we need a window number char
-    if (style === 1 && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) &&
-       (groupSetting === 0 || this._grouped > GroupingType.NotGrouped))))
-    {
-      if (number > 20) {
-        text = "\u{24A8} " + text; // The Unicode character "(m)"
-      } else {
-        text = String.fromCharCode(9331+number) + " " + text; // Bracketed number
-      }
+    // Do we need a number label char
+    if (numberType !== NumberType.Nothing && style === 1) {
+       let labelNum = 0;
+       if (numberType === NumberType.GroupWindows && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) &&
+          (groupSetting === 0 || this._grouped > GroupingType.NotGrouped))))
+       {
+          labelNum = number;
+       } else if (numberType === NumberType.WorkspaceNum && this._currentWindow && (numSetting === DisplayNumber.All || this.isOnOtherWorkspace())) {
+         labelNum =  this._currentWindow.get_workspace().index()+1;
+       } else if (numberType === NumberType.MonitorNum && this._currentWindow && (numSetting === DisplayNumber.All || this.isOnOtherMonitor())) {
+         labelNum = this._currentWindow.get_monitor()+1;
+       }
+       if (labelNum > 0) {
+         if (labelNum > 20) {
+           text = "\u{24A8} " + text; // The Unicode character "(m)"
+         } else {
+           text = String.fromCharCode(9331+labelNum) + " " + text; // Bracketed number
+         }
+       }
     }
     // Do we need a minimized char
     if (this._currentWindow && this._currentWindow.minimized && (this._applet.indicators&IndicatorType.Minimized) && this._workspace.autoIndicatorsOff==false) {
@@ -1672,6 +1975,11 @@ class WindowListButton {
     // Do we need a pinned char
     if (this._pinned && (this._applet.indicators&IndicatorType.Pinned) && this._workspace.autoIndicatorsOff==false) {
         text = "\u{1F4CC}" + text; // Unicode for the "push pin" character
+    }
+    // Do we need a group ellipsis char
+    if (ellipsis === true && number >= 2)
+    {
+       text = "\u{22EE}" + text;  // The Unicode character "Vertical Ellipsis"
     }
 
     // If we don't have a minimum label size, calculate it now!
@@ -1743,6 +2051,7 @@ class WindowListButton {
     }
     this.closeThumbnailMenu();
     this._updateLabel()
+    this._updateSpacing();
   }
 
   _flashButton() {
@@ -1813,18 +2122,19 @@ class WindowListButton {
         if (metaWindow.urgent || metaWindow.demands_attention) {
           this._unflashButton();
         }
-        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.Focused) {
+        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType != SaturationType.All) {
            this.updateIconSelection();
         }
         break;
       } else {
         this.actor.remove_style_pseudo_class("focus");
         this._updateLabel();
-        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.Focused) {
+        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType != SaturationType.All) {
            this.updateIconSelection();
         }
       }
     }
+    this._updateNumber();
   }
 
   _updateVisibility() {
@@ -2085,24 +2395,24 @@ class WindowListButton {
         case MouseAction.MoveWorkspace1:
            if (window) {
               if (this.menu != undefined) this.menu.removeWindow(window);
-              window.change_workspace_by_index(0, false);
+              moveToWorkspace(window, 0);
            }
            break;
         case MouseAction.MoveWorkspace2:
            if (window && this._applet._workspaces.length <= 2) {
               if (this.menu != undefined) this.menu.removeWindow(window);
-              window.change_workspace_by_index(1, false);
+              moveToWorkspace(window, 1);
            }
            break;
         case MouseAction.MoveWorkspace3:
            if (window && this._applet._workspaces.length <= 3)
               if (this.menu != undefined) this.menu.removeWindow(window);
-              window.change_workspace_by_index(2, false);
+              moveToWorkspace(window, 2);
            break;
         case MouseAction.MoveWorkspace4:
            if (window && this._applet._workspaces.length <= 4)
               if (this.menu != undefined) this.menu.removeWindow(window);
-              window.change_workspace_by_index(3, false);
+              moveToWorkspace(window, 3);
            break;
         case MouseAction.WS_Visibility:
            if (window.is_on_all_workspaces()) {
@@ -2179,7 +2489,7 @@ class WindowListButton {
               let curWorkspace = this._applet.getCurrentWorkSpace()._wsNum;
               if (curWorkspace==0)
                  curWorkspace=nWorkspace;
-              window.change_workspace_by_index(curWorkspace-1, false);
+              moveToWorkspace(window, curWorkspace-1);
            }
            }
            break;
@@ -2190,7 +2500,7 @@ class WindowListButton {
               let curWorkspace = this._applet.getCurrentWorkSpace()._wsNum;
               if (curWorkspace==nWorkspace-1)
                  curWorkspace=-1;
-              window.change_workspace_by_index(curWorkspace+1, false);
+              moveToWorkspace(window, curWorkspace+1);
            }
            }
            break;
@@ -2231,6 +2541,65 @@ class WindowListButton {
               this._workspace.pinAppButton(this);
            } else {
               this._workspace.unpinAppButton(this);
+           }
+           break;
+        case MouseAction.TileLeft:
+           reTile(window, Meta.TileMode.LEFT);
+           break;
+        case MouseAction.TileTopLeft:
+           reTile(window, Meta.TileMode.ULC);
+           break;
+        case MouseAction.TileTop:
+           reTile(window, Meta.TileMode.TOP);
+           break;
+        case MouseAction.TileTopRight:
+           reTile(window, Meta.TileMode.URC);
+           break;
+        case MouseAction.TileRight:
+           reTile(window, Meta.TileMode.RIGHT);
+           break;
+        case MouseAction.TileBottomRight:
+           reTile(window, Meta.TileMode.LRC);
+           break;
+        case MouseAction.TileBottom:
+           reTile(window, Meta.TileMode.BOTTOM);
+           break;
+        case MouseAction.TileBottomLeft:
+           reTile(window, Meta.TileMode.LLC);
+           break;
+        case MouseAction.Untile:
+           reTile(window, Meta.TileMode.NONE);
+           break;
+        case MouseAction.MoveThisWorkspace:
+           let nWorkspace = this._applet._workspaces.length;
+           if (window && nWorkspace > 1) {
+              let curWorkspace = this._applet.getCurrentWorkSpace()._wsNum;
+              moveToWorkspace(window, curWorkspace);
+           }
+           break;
+        case MouseAction.GroupedWindow1:
+           if (this._windows.length > 0){
+              Main.activateWindow(this._windows[0]);
+           }
+           break;
+        case MouseAction.GroupedWindow2:
+           if (this._windows.length > 1){
+              Main.activateWindow(this._windows[1]);
+           }
+           break;
+        case MouseAction.GroupedWindow3:
+           if (this._windows.length > 2){
+              Main.activateWindow(this._windows[2]);
+           }
+           break;
+        case MouseAction.GroupedWindow4:
+           if (this._windows.length > 3){
+              Main.activateWindow(this._windows[3]);
+           }
+           break;
+        case MouseAction.MoveHere:
+           if (window) {
+              moveWindowHere(window, global.screen.get_active_workspace_index(), this._applet.panel.monitorIndex);
            }
            break;
       }
@@ -2282,8 +2651,8 @@ class WindowListButton {
     this._app.open_new_window(-1);
     //let animationTime = this._settings.getValue("animation-time") / 1000;
     //this._animateIcon(animationTime);
-    if (this._windows.length===0 || this._grouped === GroupingType.ForcedOn || this._grouped === GroupingType.Auto ||
-        this._settings.getValue("group-windows")===GroupType.Launcher)
+    if (this._settings.getValue("animate-icon") && (this._windows.length===0 || this._grouped === GroupingType.ForcedOn || this._grouped === GroupingType.Auto ||
+        this._settings.getValue("group-windows")===GroupType.Launcher))
     {
        this._animateIcon(0);
     }
@@ -2298,22 +2667,19 @@ class WindowListButton {
     } else {
       this.actor.set_hover(true);
     }
+    // If a thumbnail menu is open, then make sure it contains this buttons current window. Not open, then open one after a delay if needed
     let curMenu = this._workspace.currentMenu;
-    /*
-    if (curMenu && curMenu != this.menu && curMenu.isOpen) {
-       let groupSetting = this._settings.getValue("group-windows");
-       if (groupSetting===GroupType.Pooled || groupedSetting===GroupType.Auto && curMenu._appButton._app === this._app) {
-          // Just keep the same menu since it's for the same pool and the current thumbnail menu is still appropriate
+    if (curMenu && curMenu.isOpen) {
+       let menuItem = curMenu._findMenuItemForWindow(this._currentWindow);
+       if (menuItem==null) {
+          let holdPopup = this._workspace.holdPopup;
+          this.closeThumbnailMenu();
+          this.openThumbnailMenu();
+          this._workspace.holdPopup = holdPopup;
+       } else {
+          menuItem.actor.add_style_pseudo_class("active");
           this.removeThumbnailMenuDelay();
-          return;
        }
-    }
-    */
-    if (curMenu && curMenu != this.menu && curMenu.isOpen) {
-       let holdPopup = this._workspace.holdPopup;
-       this.closeThumbnailMenu();
-       this.openThumbnailMenu();
-       this._workspace.holdPopup = holdPopup;
     } else if (this._windows.length > 0 && this._settings.getValue("menu-show-on-hover")) {
       this.openThumbnailMenuDelayed();
     }
@@ -2325,11 +2691,42 @@ class WindowListButton {
        this._updateTooltip()
        this._buttonIdx = idx;
     }
+    if (this._settings.getValue("hover-peek-windowlist")) {
+       // After a delay to avoid needless hover peeks, ease in the hover peek window
+       if (!this._workspace._hoverPeekDelay) {
+          this._workspace._hoverPeekDelay = this._settings.getValue("hover-peek-delay")
+       }
+       this._workspace._hoverPeekDelayId = Mainloop.timeout_add(this._workspace._hoverPeekDelay, () => {
+         this._workspace._hoverPeekDelayId = destroyHoverPeekClone(this.hoverClone, this._workspace._hoverPeekDelayId, this._settings.getValue("fade-animation-time")*0.001);  // Close if one happens to exist
+         if (!this._contextMenu.isOpen && !this.menu.isOpen) {
+            this.hoverClone = createHoverPeekClone(this._currentWindow, this._settings.getValue("fade-animation-time")*0.001);
+            this._workspace._hoverPeekDelay = 60;
+         }
+         } );
+    }
   }
 
   _onLeaveEvent() {
+    let pointerIsOffActor = isPointerOffActor(this.actor, this._applet.orientation);
+    if (pointerIsOffActor) {
+       this._workspace._hoverPeekDelay = null;
+    }
+    // If we have left the panel, we might need to remove the hover peek clone and we might need to activate the window
+    if (this._settings.getValue("no-click-activate") && !isCtrlOrShiftHeld() && pointerIsOffActor) {
+       if (!this._contextMenu.isOpen && !this.menu.isOpen) {
+          Main.activateWindow(this._currentWindow);
+       }
+       this._workspace._hoverPeekDelayId = this.hoverClone = destroyHoverPeekClone(this.hoverClone, this._workspace._hoverPeekDelayId, this._settings.getValue("fade-animation-time")*0.001, true);
+    } else {
+       this._workspace._hoverPeekDelayId = this.hoverClone = destroyHoverPeekClone(this.hoverClone, this._workspace._hoverPeekDelayId, this._settings.getValue("fade-animation-time")*0.001);
+    }
+
     let curMenu = this._workspace.currentMenu;
     if (curMenu) {
+       let menuItem = curMenu._findMenuItemForWindow(this._currentWindow);
+       if (menuItem) {
+          menuItem.actor.remove_style_pseudo_class("active");
+       }
        this.closeThumbnailMenuDelayed();
     } else {
        this.removeThumbnailMenuDelay();
@@ -2377,6 +2774,10 @@ class WindowListButton {
 
     item = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
     item.connect("activate", Lang.bind(this._applet, this._applet.configureApplet));
+    subMenu.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Website"), "help-about", St.IconType.SYMBOLIC);
+    item.connect("activate", Lang.bind(this._applet, () => {Util.spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/372");}));
     subMenu.menu.addMenuItem(item);
 
     item = new PopupMenu.PopupIconMenuItem(_("Remove '%s'").format(_(this._applet._meta.name)), "edit-delete", St.IconType.SYMBOLIC);
@@ -2602,7 +3003,7 @@ class WindowListButton {
             }
             let ws = new PopupMenu.PopupMenuItem(name);
             ws.connect("activate", Lang.bind(this, function() {
-                metaWindow.change_workspace_by_index(j, false);
+                moveToWorkspace(metaWindow, j);
             }));
             item.menu.addMenuItem(ws);
           }
@@ -2632,6 +3033,15 @@ class WindowListButton {
         }
       }
 
+      // Add a "Move window here" menu item if the window is not on this monitor or it's not on this workspace
+      let currentWs = global.screen.get_active_workspace_index();
+      let monitor = this._applet.panel.monitorIndex;
+      if (monitor!== metaWindow.get_monitor() || currentWs !== metaWindow.get_workspace().index()) {
+         item = new PopupMenu.PopupMenuItem(_("Move window here"));
+         item.connect("activate", Lang.bind(this, function() { moveWindowHere(this._currentWindow, currentWs, monitor); }));
+         this._contextMenu.addMenuItem(item);
+      }
+
       // Menu options to attach a hotkey to a window
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       let appHasExistingHotkey = false;
@@ -2642,10 +3052,7 @@ class WindowListButton {
             let idx = i;
             let keyString;
             if (hotKeys[i].keyCombo!==null) {
-               keyString = hotKeys[i].keyCombo.toString();
-               if (keyString.endsWith("::")) {
-                  keyString = keyString.slice(0,-2);
-               }
+               keyString = getHotkeyPrettyString(hotKeys[i].keyCombo, " | ");
             } else {
                keyString = _("unassigned");
             }
@@ -2855,6 +3262,13 @@ class WindowListButton {
         this.menu.openMenu();
         this._workspace.currentMenu = this.menu;
         this.actor.set_hover(true);
+        let curMenu = this._workspace.currentMenu;
+        if (curMenu && curMenu.numMenuItems > 1) {
+           let menuItem = this._workspace.currentMenu._findMenuItemForWindow(this._currentWindow);
+           if (menuItem && this._grouped <= GroupingType.NotGrouped) {
+              menuItem.actor.add_style_pseudo_class("active");
+           }
+        }
      }
   }
 
@@ -3036,7 +3450,10 @@ class Workspace {
     this._appButtons = [];
     this._settings = this._applet._settings;
     this._currentFocus = null;  // The WindowListButton that handles the window with the focus
-
+    this.iconSaturation = 100;
+    this.saturationType = SaturationType.All
+    this._hoverPeekDelayId = null;
+    this._hoverPeekDelay = null;
     this._keyBindingsWindows = [];
 
     // Expand the pinned-apps array if required
@@ -3638,6 +4055,7 @@ class Workspace {
                 btns[i].appLastFocus = false;
              }
              newFocus.appLastFocus = true;
+             this._currentFocus._updateNumber();
           }
           newFocus._updateFocus();
           this._currentFocus = newFocus;
@@ -3765,25 +4183,6 @@ class Workspace {
               }
            }
         }
-        /*
-        // If "smart numeric hotkeys" are enabled then we might need to update all the tooltips for this application
-        if (this._settings.getValue("hotkey-sequence")) {
-           let hotKeys = this._applet._keyBindings;
-           let hotKeyWindows = source._workspace._keyBindingsWindows;
-           for (let i=0 ; i < hotKeys.length ; i++) {
-              if (hotKeys[i].enabled===true && hotKeys[i].keyCombo!==null && hotKeyWindows[i] && source._workspace.getAppForWindow(hotKeyWindows[i]) === source._app) {
-                 let [seqCombo, secondCombo] = getSmartNumericHotkey(hotKeys[i].keyCombo);
-                 if (seqCombo) {
-                    let btns = source._workspace._lookupAllAppButtonsForApp(source._app);
-                    for( let idx=0 ; idx < btns.length ; idx++) {
-                       btns[idx]._updateTooltip()
-                    }
-                    break;
-                 }
-              }
-           }
-        }
-        */
         if (this._settings.getValue("display-caption-for") === DisplayCaption.One) {
            source._updateLabel(); // The moved button might need it's label restored
            if (groupingType != GroupType.Pooled && groupingType != GroupType.Auto) {
@@ -3961,6 +4360,7 @@ class Workspace {
     let x = btns[btns.length-1]._windows.shift();
     btns[btns.length-1]._windows.push(x);
     this._updateFocus();
+    btns[btns.length-1].updateIconSelection();
     //btns[btns.length-1]._updateTooltip();
     return btns[btns.length-1];
   }
@@ -3983,6 +4383,7 @@ class Workspace {
      let lastFocusBtn = button._workspace._lookupAppButtonForWindow(appLastFocus);
      lastFocusBtn.appLastFocus = true;
      button._updateLabel();
+     button.updateIconSelection();
      this._updateFocus();
   }
 
@@ -4514,6 +4915,7 @@ class WindowList extends Applet.Applet {
     this._signalManager.connect(global.screen, "window-monitor-changed", this.windowMonitorChanged, this);
     this._signalManager.connect(global.display, "notify::focus-window", this._onFocusChanged, this);
     this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor, this);
+    // This is not ideal, "changed::hotkey-bindings" seems to fire on any setting change and for each workspace! :-(
     this._signalManager.connect(this._settings, "changed::hotkey-bindings", this._updateKeybinding, this);
     this._signalManager.connect(this._settings, "changed::hotkey-sequence", this._updateKeybinding, this);
     this._signalManager.connect(this._settings, "changed::hotkey-grave-help", this._updateKeybinding, this);
@@ -4569,8 +4971,9 @@ class WindowList extends Applet.Applet {
      this._onDisplayPinnedChanged()
   }
 
+  // Connecting to "changed::pinned-apps" seems to fire for any config change
+  // So instead we check here to see if there are any changes and update only once
   _onSettingsChanged() {
-     // Check if there are new pinned apps, this is done because connecting to "changed::pinned-apps" seems to fire for any config change
      let newPinnedApps;
      if (this._settings.getValue("display-pinned") == DisplayPinned.Synchronized) {
         newPinnedApps =  this._settings.getValue("commoned-pinned-apps");
@@ -4723,6 +5126,7 @@ class WindowList extends Applet.Applet {
     for (let i = 0; i < this._workspaces.length; i++) {
       let ws = this._workspaces[i];
       if (ws._wsNum == currentWs) {
+        this._workspaces[currentWs].closeThumbnailMenu();
         ws.actor.show();
         ws._updateAppButtonVisibility();
         ws._updateFocus();
@@ -4767,6 +5171,11 @@ class WindowList extends Applet.Applet {
               } else {
                 workspace._windowRemoved(window);
               }
+           } else if (this._settings.getValue("number-type")===NumberType.WorkspaceNum){
+             let btn = workspace._lookupAppButtonForWindow(window);
+             if (btn) {
+               btn._updateNumber(); // In case the number is showing the workspace index
+             }
            }
          }
        }
@@ -4776,11 +5185,12 @@ class WindowList extends Applet.Applet {
   windowMonitorChanged(screen, window, monitor) {
     if (!this._settings.getValue("show-windows-for-current-monitor")) {
       let ws = this.getCurrentWorkSpace();
-      if (ws.saturationType == SaturationType.OtherMonitors && ws.iconSaturation!=100) {
-        let btn = ws._lookupAppButtonForWindow(window);
-        if (btn) {
-          btn.updateIconSelection();
-        }
+      let btn = ws._lookupAppButtonForWindow(window);
+      if (btn) {
+         btn._updateNumber(); // In case the number is showing the monitor index
+         if (ws.saturationType == SaturationType.OtherMonitors && ws.iconSaturation!=100) {
+            btn.updateIconSelection();
+         }
       }
       return;
     }
@@ -4825,7 +5235,6 @@ class WindowList extends Applet.Applet {
   // Check other instances of the CassiaWindowList applet and populate the list of hidden applications
   // based on which applications other instances have pinned.
   checkForLauncherApplications() {
-     let wsIdx = global.screen.get_active_workspace_index();
      let applets = AppletManager.getRunningInstancesForUuid("CassiaWindowList@klangman");
      //log( `Found ${applets.length} cassia window list applets!` );
      for (let i=0 ; i < applets.length ; i++) {
@@ -4898,5 +5307,12 @@ class WindowList extends Applet.Applet {
 
 // Called by cinnamon when starting this applet
 function main(metadata, orientation, panelHeight, instanceId) {
+  if (hasGetCurrentMonitor===undefined){
+    if (typeof global.display.get_current_monitor === "function") {
+      hasGetCurrentMonitor = true;
+    } else {
+      hasGetCurrentMonitor = false;
+    }
+  }
   return new WindowList(orientation, panelHeight, instanceId);
 }

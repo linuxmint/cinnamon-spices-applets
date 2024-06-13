@@ -4,14 +4,13 @@ const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
 const ModalDialog = imports.ui.modalDialog;
-let Util, OctoPrint;
+const Util = imports.misc.util;
+let OctoPrint;
 if (typeof require !== 'undefined') {
 	OctoPrint = require('./octoprint');
-	Util = require('./util');
 } else {
 	const AppletDir = imports.ui.appletManager.applets['octopussy@centurix'];
 	OctoPrint = AppletDir.octoprint;
-	Util = AppletDir.util;
 }
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
@@ -445,15 +444,15 @@ OctoPussy.prototype = {
   },
 
 	openCamera: function() {
-		Main.Util.spawnCommandLine(this.video_cmd.replace("%s", this.octoprint_url + "webcam/?action=stream"));
+		Util.spawnCommandLine(this.video_cmd.replace("%s", this.octoprint_url + "webcam/?action=stream"));
 	},
 
 	openOctoPrint: function() {
-		Main.Util.spawnCommandLine("xdg-open " + this.octoprint_url);
+		Util.spawnCommandLine("xdg-open " + this.octoprint_url);
 	},
 
 	openConfiguration: function() {
-		Main.Util.spawnCommandLine(CMD_SETTINGS);
+		Util.spawnCommandLine(CMD_SETTINGS);
 	}
 }
 

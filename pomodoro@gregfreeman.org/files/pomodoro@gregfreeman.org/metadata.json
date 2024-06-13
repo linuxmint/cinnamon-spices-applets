@@ -1,5 +1,6 @@
 {
-"uuid": "pomodoro@gregfreeman.org",
-"name": "Pomodoro Timer",
-"description": "Great tool for boosted productivity!"
+    "uuid": "pomodoro@gregfreeman.org",
+    "name": "Pomodoro Timer",
+    "description": "Great tool for boosted productivity!",
+    "version": "1.0.2"
 }

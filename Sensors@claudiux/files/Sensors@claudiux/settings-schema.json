@@ -13,6 +13,7 @@
       "title": "⚙ General",
       "sections": [
         "section_Display",
+        "section_Tooltip",
         "section_Report",
         "section_remove_incompatible_xlets"
       ]
@@ -55,6 +56,15 @@
         "section_intrusionSensors"
       ]
     },
+    "page_Custom": {
+      "type": "page",
+      "title": "⛓ Custom",
+      "sections": [
+        "section_customDisclaimer",
+        "section_customDisplay",
+        "section_customSensors"
+      ]
+    },
     "section_Display": {
       "type": "section",
       "title": "Options",
@@ -62,13 +72,22 @@
         "interval",
         "keep_size",
         "char_size",
+        "char_color_customized",
         "char_color",
         "separator",
         "remove_border",
         "remove_icons",
+        "restart_in_menu",
+        "show_tooltip"
+      ]
+    },
+    "section_Tooltip": {
+      "type": "section",
+      "dependency": "show_tooltip",
+      "title": "Tooltip",
+      "keys": [
         "bold_values",
-        "bold_italics_main_sensors",
-        "restart_in_menu"
+        "bold_italics_main_sensors"
       ]
     },
     "section_Report": {
@@ -112,7 +131,8 @@
         "only_integer_part",
         "show_unit",
         "show_unit_letter",
-        "always_show_unit_in_line"
+        "always_show_unit_in_line",
+        "journalize_temp"
       ]
     },
     "section_tempSensors": {
@@ -148,7 +168,8 @@
       "keys": [
         "strictly_positive_fan",
         "show_fan_unit",
-        "fan_unit"
+        "fan_unit",
+        "journalize_fan"
       ]
     },
     "section_fanSensors": {
@@ -174,7 +195,8 @@
       "keys": [
         "strictly_positive_volt",
         "show_volt_unit",
-        "volt_unit"
+        "volt_unit",
+        "journalize_volt"
       ]
     },
     "section_voltSensors": {
@@ -198,7 +220,8 @@
       "type": "section",
       "title": "Options",
       "keys": [
-        "strictly_positive_intrusion"
+        "strictly_positive_intrusion",
+        "journalize_intrusion"
       ]
     },
     "section_intrusionSensors": {
@@ -207,6 +230,30 @@
       "keys": [
         "btn_renew_intrusion_sensors_list",
         "intrusion_sensors",
+        "update_display"
+      ]
+    },
+    "section_customDisclaimer": {
+      "type": "section",
+      "title": "Disclaimer",
+      "keys": [
+        "custom_disclaimer",
+        "custom_openREADME"
+      ]
+    },
+    "section_customDisplay": {
+      "type": "section",
+      "title": "Display",
+      "keys": [
+        "show_custom",
+        "show_custom_name"
+      ]
+    },
+    "section_customSensors": {
+      "type": "section",
+      "title": "Custom sensors",
+      "keys": [
+        "custom_sensors",
         "update_display"
       ]
     }
@@ -233,7 +280,15 @@
       "15": 15,
       "20": 20,
       "30": 30,
-      "60": 60
+      "1 minute": 60,
+      "2 minutes": 120,
+      "3 minutes": 180,
+      "4 minutes": 240,
+      "5 minutes": 300,
+      "10 minutes": 600,
+      "15 minutes": 900,
+      "30 minutes": 1800,
+      "1 hour": 3600
     },
     "description": "Refresh interval (seconds)"
   },
@@ -251,16 +306,15 @@
     "step": 1,
     "description": "Character size (% of standard size)"
   },
+  "char_color_customized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize Text Color"
+  },
   "char_color": {
-    "type": "combobox",
-    "default": "default",
-    "options": {
-      "Default": "default",
-      "White": "white",
-      "Black": "black",
-      "Grey": "grey",
-      "Light Grey": "lightgrey"
-    },
+    "type": "colorchooser",
+    "default": "#CFD8DC",
+    "dependency": "char_color_customized",
     "description": "Text Color"
   },
   "separator": {
@@ -281,17 +335,22 @@
     "description": "Remove icons",
     "tooltip": "Whether or not to remove icons in panel."
   },
+  "show_tooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Display a tooltip on mouseover"
+  },
   "bold_values": {
     "type": "switch",
-    "default": false,
     "dependency": "has_set_markup",
+    "default": false,
     "description": "Show values in bold in the tooltip",
     "tooltip": "Whether or not to show values in bold in the tooltip."
   },
   "bold_italics_main_sensors": {
     "type": "switch",
-    "default": false,
     "dependency": "has_set_markup",
+    "default": false,
     "description": "Show main sensors in bold italics in the tooltip",
     "tooltip": "Whether or not to display the names of the main sensors (those displayed in the panel) in bold italics in the tooltip."
   },
@@ -355,6 +414,12 @@
     "tooltip": "Whether or not to show, in a vertical panel, °C or °F on the same line as the temperature value.",
     "dependency": "show_unit_letter"
   },
+  "journalize_temp": {
+    "type": "switch",
+    "default": false,
+    "description": "Log high and critical temperatures",
+    "tooltip": "When this option is checked, temperatures exceeding the high or critical limit are recorded in the system journal."
+  },
   "btn_renew_temp_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
@@ -367,7 +432,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -425,7 +491,8 @@
         "id": "disk",
         "title": "Disk name",
         "type": "string",
-        "default": ""
+        "default": "",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -510,6 +577,12 @@
     "default": "rpm",
     "description": "Abbreviation of \"Rotations per minute\""
   },
+  "journalize_fan": {
+    "type": "switch",
+    "default": false,
+    "description": "Log critical fan speeds",
+    "tooltip": "When this option is checked, fan speeds below the critical limit are recorded in the system log."
+  },
   "btn_renew_fan_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
@@ -522,7 +595,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -600,6 +674,12 @@
       "mV only": "mV"
     }
   },
+  "journalize_volt": {
+    "type": "switch",
+    "default": false,
+    "description": "Log critical voltages",
+    "tooltip": "When this option is checked, voltages below the minimum limit or above the maximum limit are recorded in the system log."
+  },
   "btn_renew_volt_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
@@ -612,7 +692,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -679,6 +760,12 @@
     "default": false,
     "description": "Show in the panel only when an intrusion was detected"
   },
+  "journalize_intrusion": {
+    "type": "switch",
+    "default": false,
+    "description": "Log intrusions",
+    "tooltip": "When this option is checked, intrusions are recorded in the system log."
+  },
   "btn_renew_intrusion_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
@@ -691,7 +778,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -720,6 +808,92 @@
   "numberOfIntrusionSensors": {
     "type": "generic",
     "default": 0
+  },
+  "custom_disclaimer": {
+    "type": "label",
+    "description": "These settings are for advanced users only!\nPlease refer to the README file."
+  },
+  "custom_openREADME": {
+    "type": "button",
+    "description": "Open the README file",
+    "callback": "_on_open_README"
+  },
+  "show_custom": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the values of these selected sensors",
+    "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_custom_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_custom"
+  },
+  "custom_sensors": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "sensor_type",
+        "title": "Type",
+        "type": "string",
+        "options": {
+          "Temperature": "temperature",
+          "Fan": "fan",
+          "Voltage": "voltage",
+          "Intrusion": "intrusion"
+        }
+      },
+      {
+        "id": "shown_name",
+        "title": "Name",
+        "type": "string",
+        "expand-width": true
+      },
+      {
+        "id": "show_in_panel",
+        "title": "Show\nin panel",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "show_in_tooltip",
+        "title": "Show\nin tooltip",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "sysfile",
+        "title": "File to\nmonitor",
+        "type": "string",
+        "expand-width": true
+      },
+      {
+        "id": "high_by_user",
+        "title": "High\nvalue",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "crit_by_user",
+        "title": "Critical\nvalue",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+
+    ],
+    "tooltip": "Add a line by custom sensor to set the type, the name and the path of the file to monitor (/sys/class/...).",
+    "show-buttons": true
   },
   "report": {
     "type": "button",

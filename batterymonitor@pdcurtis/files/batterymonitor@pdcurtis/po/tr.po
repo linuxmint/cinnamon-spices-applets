@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.2.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 22:50-0400\n"
-"PO-Revision-Date: 2023-07-10 22:52-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2024-01-21 17:50-0500\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -16,37 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4\n"
 
-#: 5.4/applet.js:290 3.2/applet.js:135
+#: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:291 3.2/applet.js:136
+#: 5.4/applet.js:301 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Bekleniyor"
 
-#: 5.4/applet.js:317 3.2/applet.js:165
-msgid "Some Dependencies not Installed"
+#: 5.4/applet.js:327
+#, fuzzy
+msgid "Some dependencies not installed."
 msgstr "Bazı Bağımlılıklar Yüklenmedi"
 
-#: 5.4/applet.js:317
+#: 5.4/applet.js:327
+#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts .\n"
+"functionality including notifications and audible alerts.\n"
 "\n"
-"Please view the README for help on installing them."
+"Please view the README for help on installing them.\n"
 msgstr ""
 "Bu uygulamanın bildirimler ve sesli uyarılar dahil tüm olanaklarına sahip "
 "olması için hem 'sox' hem de 'zenity' gereklidir.\n"
 "\n"
 "Lütfen bunların nasıl kurulacağına ilişkin yardım dosyasını okuyun."
 
-#: 5.4/applet.js:327 3.2/applet.js:198
+#: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Pil İzleme Uygulaması"
 
-#: 5.4/applet.js:327
+#: 5.4/applet.js:337
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -59,89 +62,96 @@ msgstr ""
 "emin olun\n"
 "özellikle uzun yüksek sesli bir dosya belirtilmişse\n"
 
-#: 5.4/applet.js:388 3.2/applet.js:297
+#: 5.4/applet.js:399 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Güç İstatistiklerini Aç"
 
-#: 5.4/applet.js:394 3.2/applet.js:303
+#: 5.4/applet.js:405 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Sistem Gözlemcisini Aç"
 
-#: 5.4/applet.js:403
+#: 5.4/applet.js:414
 msgid "Housekeeping and System Submenu"
 msgstr "Düzenleme ve Sistem Alt Menüsü"
 
-#: 5.4/applet.js:406 3.2/applet.js:315
+#: 5.4/applet.js:417 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Değişim Günlüğünü İncele"
 
-#: 5.4/applet.js:412
+#: 5.4/applet.js:423
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:428 3.2/applet.js:348
+#: 5.4/applet.js:439 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Pil bilgileri bekleniyor"
 
-#: 5.4/applet.js:534
+#: 5.4/applet.js:444
+#, fuzzy
+msgid "Alert/Suspend:"
+msgstr "Askı:"
+
+#: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
 
-#: 5.4/applet.js:540 3.2/applet.js:433
+#: 5.4/applet.js:555
+#, fuzzy
 msgid ""
-"The Battery Level has fallen to your alert level\n"
+"The battery level has fallen to your alert level.\n"
 "\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
 msgstr ""
 "Pil Düzeyi, uyarı düzeyinize düştü\n"
 "\n"
-"  ya bir güç kaynağına yeniden bağlanın,\n"
+"ya bir güç kaynağına yeniden bağlanın,\n"
 "\n"
 "işinizi kapatın ve makineyi askıya alın veya kapatın\n"
 "\n"
 
-#: 5.4/applet.js:555
+#: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
 
-#: 5.4/applet.js:574
+#: 5.4/applet.js:589
 msgid "Time to Empty:"
 msgstr ""
 
-#: 5.4/applet.js:575
+#: 5.4/applet.js:590
 msgid "Time to Full:"
 msgstr ""
 
-#: 5.4/applet.js:578 5.4/applet.js:625
+#: 5.4/applet.js:593 5.4/applet.js:640
 #, fuzzy
-#| msgid "Percentage Charge:"
 msgid "Current Charge:"
 msgstr "Şarj Oranı:"
 
-#: 5.4/applet.js:578 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Uyarı:"
 
-#: 5.4/applet.js:578 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Askı:"
 
-#: 5.4/applet.js:625 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Uyarı durumu:"
 
-#: 5.4/applet.js:625 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Askı durumu:"
 
-#: 5.4/applet.js:631
+#: 5.4/applet.js:646
 msgid "The battery level has been recharged to"
 msgstr ""
 
-#: 3.2/applet.js:165
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Bazı Bağımlılıklar Yüklenmedi"
+
+#: 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'zenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -153,7 +163,7 @@ msgstr ""
 "\n"
 "Lütfen bunların nasıl kurulacağına ilişkin yardım dosyasını okuyun."
 
-#: 3.2/applet.js:198
+#: 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -166,32 +176,32 @@ msgstr ""
 "emin olun\n"
 "özellikle uzun yüksek sesli bir dosya belirtilmişse\n"
 
-#: 3.2/applet.js:312
+#: 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Düzenleme ve Sistem Alt Menüsü"
 
-#: 3.2/applet.js:321
+#: 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Yardım dosyasını aç"
 
-#: 3.2/applet.js:327
+#: 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Stylesheet.css aç (Gelişmiş İşlev)"
 
 #. metadata.json->name
-#: 3.2/applet.js:343
+#: 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Pil İzleme ve Kapatma Uygulamacığı (BAMS)"
 
-#: 3.2/applet.js:423
+#: 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Pil İzleme Uygulaması Uyarısı"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -207,20 +217,37 @@ msgstr ""
 "işinizi kapatın ve makineyi askıya alın veya kapatın\n"
 "\n"
 
-#: 3.2/applet.js:449
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Pil Düzeyi, uyarı düzeyinize düştü\n"
+"\n"
+"  ya bir güç kaynağına yeniden bağlanın,\n"
+"\n"
+"işinizi kapatın ve makineyi askıya alın veya kapatın\n"
+"\n"
+
+#: 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
 
-#: 3.2/applet.js:464
+#: 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Şarj:"
 
-#: 3.2/applet.js:512
+#: 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Şarj Oranı:"
 
 #. metadata.json->description
-msgid "Displays Charge as Percentage and allows Alerts and Actions"
+#, fuzzy
+msgid "Displays charge as percentage and allows alerts and actions"
 msgstr "Şarj Yüzdesini Gösterir, Uyarı ve Eylemlere Olanak Sağlar"
 
 #. 5.4->settings-schema.json->General->title
@@ -237,7 +264,6 @@ msgstr ""
 
 #. 5.4->settings-schema.json->display_mode->title
 #, fuzzy
-#| msgid "Display Mode"
 msgid "Display Options"
 msgstr "Görünüm Kipi"
 
@@ -331,6 +357,8 @@ msgid "Percentage threshold for visible recharged alert"
 msgstr ""
 
 #. 5.4->settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
 msgid "Classic"
 msgstr "Klasik"
 
@@ -365,6 +393,21 @@ msgid ""
 "  Icon Only: The battery icon on a colored background indicating the current "
 "status"
 msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Simge Teması"
 
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
@@ -629,3 +672,24 @@ msgid ""
 msgstr ""
 "1.4'ten önceki sürümler, ana dizinde geçici dosyalar kullanıyordu. Bunlara "
 "artık ihtiyaç yoktur ve silinebilir."
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr ""
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr ""
+
+#: 5.4/suspendScript.sh:25
+#, fuzzy
+msgid "Suspend Immediately"
+msgstr "Askı durumu:"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr ""

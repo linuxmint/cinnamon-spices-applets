@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 23:23+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
 "PO-Revision-Date: 2021-03-05 23:29+0300\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -18,98 +19,132 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: 3.2/applet.js:175 2.6/applet.js:176
-msgid "Please enter your password to uninstall this application"
-msgstr "Bu uygulamayı kaldırmak için lütfen parola giriniz"
-
-#: 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258 4.2/applet.js:460
-msgid "Add to panel"
-msgstr "Panele ekle"
-
-#: 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261 4.2/applet.js:464
-msgid "Add to desktop"
-msgstr "Masaüstüne ekle"
-
-#: 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265 4.2/applet.js:469
-msgid "Remove from favorites"
-msgstr "Sık kullanılanlardan sil"
-
-#: 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268 4.2/applet.js:472
-msgid "Add to favorites"
-msgstr "Sık kullanılanlara ekle"
-
-#: 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272 4.2/applet.js:477
-msgid "Uninstall"
-msgstr "Kaldır"
-
-#: 3.2/applet.js:276 2.6/applet.js:277 3.4/applet.js:276 4.2/applet.js:453
-#: 4.2/applet.js:456
-msgid "Run with NVIDIA GPU"
-msgstr "NVIDIA GPU ile çalıştır"
-
-#: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
-#: 3.4/applet.js:436 3.4/applet.js:470 4.2/applet.js:289 4.2/applet.js:569
+#: 4.2/applet.js:289 4.2/applet.js:570 3.2/applet.js:439 3.2/applet.js:473
+#: 2.6/applet.js:426 2.6/applet.js:460 3.4/applet.js:436 3.4/applet.js:470
 msgid "No description available"
 msgstr "Açıklama mevcut değil"
 
-#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737 4.2/applet.js:827
+#: 4.2/applet.js:454 4.2/applet.js:457 3.2/applet.js:276 2.6/applet.js:277
+#: 3.4/applet.js:276
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU ile çalıştır"
+
+#: 4.2/applet.js:461 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258
+msgid "Add to panel"
+msgstr "Panele ekle"
+
+#: 4.2/applet.js:465 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261
+msgid "Add to desktop"
+msgstr "Masaüstüne ekle"
+
+#: 4.2/applet.js:470 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265
+msgid "Remove from favorites"
+msgstr "Sık kullanılanlardan sil"
+
+#: 4.2/applet.js:473 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268
+msgid "Add to favorites"
+msgstr "Sık kullanılanlara ekle"
+
+#: 4.2/applet.js:478 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: 4.2/applet.js:636
+msgid "Search for results on the web"
+msgstr "Sonuçları internette ara"
+
+#: 4.2/applet.js:828 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737
 msgid "This file is no longer available"
 msgstr "Bu dosya artık mevcut değil"
 
-#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787 4.2/applet.js:841
+#: 4.2/applet.js:842 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787
 msgid "Open with"
 msgstr "Birlikte aç"
 
-#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833 4.2/applet.js:887
+#: 4.2/applet.js:888 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833
 msgid "Other application..."
 msgstr "Diğer uygulamalar..."
 
-#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908 4.2/applet.js:3279
-msgid "Clear list"
-msgstr "Listeyi temizle"
-
-#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954 4.2/applet.js:902
+#: 4.2/applet.js:903 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954
 msgid "All Applications"
 msgstr "Tüm Uygulamalar"
 
-#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983 4.2/applet.js:3226
-msgid "Places"
-msgstr "Konumlar"
-
-#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007 4.2/applet.js:3264
-msgid "Recent Files"
-msgstr "Son Dosyalar"
-
-#: 3.2/applet.js:1637 3.2/applet.js:1831 2.6/applet.js:1611 2.6/applet.js:1798
-#: 3.4/applet.js:1580 3.4/applet.js:1765 4.2/applet.js:1453 4.2/applet.js:1633
+#: 4.2/applet.js:1458 4.2/applet.js:1638 3.2/applet.js:1637 3.2/applet.js:1831
+#: 2.6/applet.js:1611 2.6/applet.js:1798 3.4/applet.js:1580 3.4/applet.js:1765
 msgid "Logout"
 msgstr "Oturum Kapat"
 
-#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1582 4.2/applet.js:1455
+#: 4.2/applet.js:1460 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1582
 msgid "Lock Screen"
 msgstr "Ekranı Kilitle"
 
-#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1758 4.2/applet.js:1626
+#: 4.2/applet.js:1631 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1758
 msgid "Shutdown the computer"
 msgstr "Bilgisayarı Kapat"
 
-#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1759 4.2/applet.js:1627
+#: 4.2/applet.js:1632 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1759
 msgid "Leave the session"
 msgstr "Oturumdan ayrıl"
 
-#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1760 4.2/applet.js:1628
+#: 4.2/applet.js:1633 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1760
 msgid "Lock the screen"
 msgstr "Ekranı kilitle"
 
-#: 3.2/applet.js:1828 3.2/applet.js:1829 2.6/applet.js:1795 2.6/applet.js:1796
-#: 3.4/applet.js:1762 3.4/applet.js:1763 4.2/applet.js:1630 4.2/applet.js:1631
+#: 4.2/applet.js:1635 4.2/applet.js:1636 3.2/applet.js:1828 3.2/applet.js:1829
+#: 2.6/applet.js:1795 2.6/applet.js:1796 3.4/applet.js:1762 3.4/applet.js:1763
 msgid "Quit"
 msgstr "Çıkış"
 
-#: 3.2/applet.js:1840 3.2/applet.js:1844 2.6/applet.js:1807 2.6/applet.js:1811
-#: 3.4/applet.js:1774 3.4/applet.js:1778 4.2/applet.js:1642 4.2/applet.js:1646
+#: 4.2/applet.js:1647 4.2/applet.js:1651 3.2/applet.js:1840 3.2/applet.js:1844
+#: 2.6/applet.js:1807 2.6/applet.js:1811 3.4/applet.js:1774 3.4/applet.js:1778
 msgid "Lock screen"
 msgstr "Ekran kilidi"
+
+#. 4.2->settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu->title
+#. 3.4->settings-schema.json->menu->title
+#: 4.2/applet.js:1877 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:1998
+msgid "Menu"
+msgstr "Menü"
+
+#: 4.2/applet.js:3152 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983
+msgid "Places"
+msgstr "Konumlar"
+
+#: 4.2/applet.js:3190 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007
+msgid "Recent Files"
+msgstr "Son Dosyalar"
+
+#: 4.2/applet.js:3205 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908
+msgid "Clear list"
+msgstr "Listeyi temizle"
+
+#: 4.2/applet.js:3206
+msgid "Clear all recent documents"
+msgstr "Son kullanılan belgeleri temizle"
+
+#: 4.2/applet.js:3225 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3469
+msgid "No recent documents"
+msgstr "Son belge yok"
+
+#: 4.2/applet.js:3352 3.2/applet.js:3899 2.6/applet.js:3670 3.4/applet.js:3849
+msgid "Type to search..."
+msgstr "Arama için girdi yazın..."
+
+#: 4.2/applet.js:3890 3.2/applet.js:4427 2.6/applet.js:4172 3.4/applet.js:4376
+msgid "No results found"
+msgstr "Sonuç bulunmadı"
+
+#: 4.2/applet.js:3892 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4378
+#, javascript-format
+msgid "%d result found"
+msgid_plural "%d results found"
+msgstr[0] "%d sonuç bulundu"
+msgstr[1] "%d sonuç bulundu"
+
+#: 3.2/applet.js:175 2.6/applet.js:176
+msgid "Please enter your password to uninstall this application"
+msgstr "Bu uygulamayı kaldırmak için lütfen parola giriniz"
 
 #: 3.2/applet.js:2051
 msgid "All Programs"
@@ -159,40 +194,6 @@ msgstr "İndirilenler"
 msgid "nemo Downloads"
 msgstr "nemo İndirilenler"
 
-#. 3.2->settings-schema.json->menu->title
-#. 3.4->settings-schema.json->menu->title
-#. 4.2->settings-schema.json->menu->title
-#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:1998 4.2/applet.js:1871
-msgid "Menu"
-msgstr "Menü"
-
-#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3469
-msgid "No recent documents"
-msgstr "Son belge yok"
-
-#: 3.2/applet.js:3899 2.6/applet.js:3670 3.4/applet.js:3849
-msgid "Type to search..."
-msgstr "Arama için girdi yazın..."
-
-#: 3.2/applet.js:4427 2.6/applet.js:4172 3.4/applet.js:4376
-msgid "No results found"
-msgstr "Sonuç bulunmadı"
-
-#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4378
-#, javascript-format
-msgid "%d result found"
-msgid_plural "%d results found"
-msgstr[0] "%d sonuç bulundu"
-msgstr[1] "%d sonuç bulundu"
-
-#: 4.2/applet.js:635
-msgid "Search for results on the web"
-msgstr "Sonuçları internette ara"
-
-#: 4.2/applet.js:3280
-msgid "Clear all recent documents"
-msgstr "Son kullanılan belgeleri temizle"
-
 #. metadata.json->name
 msgid "CinnVIIStarkMenu"
 msgstr "CinnVIIStarkMenu"
@@ -203,107 +204,614 @@ msgid ""
 msgstr ""
 "Windows 7 Başlat Menüsü veya MATE Menüsü görünümünde bir Cinnamon menüsü"
 
+#. 4.2->settings-schema.json->panel->title
 #. 3.2->settings-schema.json->panel->title
 #. 3.4->settings-schema.json->panel->title
-#. 4.2->settings-schema.json->panel->title
 msgid "Panel"
 msgstr "Panel"
 
+#. 4.2->settings-schema.json->sidebar->title
 #. 3.2->settings-schema.json->sidebar->title
 #. 3.4->settings-schema.json->sidebar->title
-#. 4.2->settings-schema.json->sidebar->title
 msgid "Sidebar"
 msgstr "Kenar çubuğu"
 
+#. 4.2->settings-schema.json->quicklauncher->title
 #. 3.2->settings-schema.json->quicklauncher->title
 #. 3.4->settings-schema.json->quicklauncher->title
-#. 4.2->settings-schema.json->quicklauncher->title
 msgid "Quicklauncher"
 msgstr "Hızlı başlatıcı"
 
+#. 4.2->settings-schema.json->websearch->title
+msgid "Web Search"
+msgstr "Web Araması"
+
+#. 4.2->settings-schema.json->panel-appear->title
 #. 3.2->settings-schema.json->panel-appear->title
 #. 3.4->settings-schema.json->panel-appear->title
-#. 4.2->settings-schema.json->panel-appear->title
 msgid "Appearance"
 msgstr "Görünüm"
 
+#. 4.2->settings-schema.json->panel-behave->title
+#. 4.2->settings-schema.json->menu-behave->title
 #. 3.2->settings-schema.json->panel-behave->title
 #. 3.2->settings-schema.json->menu-behave->title
 #. 3.4->settings-schema.json->panel-behave->title
 #. 3.4->settings-schema.json->menu-behave->title
-#. 4.2->settings-schema.json->panel-behave->title
-#. 4.2->settings-schema.json->menu-behave->title
 msgid "Behavior"
 msgstr "Davranış"
 
+#. 4.2->settings-schema.json->menu-appear->title
 #. 3.2->settings-schema.json->menu-appear->title
 #. 3.4->settings-schema.json->menu-appear->title
-#. 4.2->settings-schema.json->menu-appear->title
 msgid "Layout and content"
 msgstr "Düzen ve içerik"
 
+#. 4.2->settings-schema.json->menu-icons->title
+#. 4.2->settings-schema.json->quicklauncher-layout->options
 #. 3.2->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
 #. 3.4->settings-schema.json->menu-icons->title
 #. 3.4->settings-schema.json->quicklauncher-layout->options
-#. 4.2->settings-schema.json->menu-icons->title
-#. 4.2->settings-schema.json->quicklauncher-layout->options
 msgid "Icons and Labels"
 msgstr "Simgeler ve Etiketler"
 
+#. 4.2->settings-schema.json->sidebar-layout->title
 #. 3.2->settings-schema.json->sidebar-layout->title
 #. 2.6->settings-schema.json->head-sidebar-layout->description
 #. 3.4->settings-schema.json->sidebar-layout->title
-#. 4.2->settings-schema.json->sidebar-layout->title
 msgid "Sidebar Layout"
 msgstr "Kenar Çubuğu Düzeni"
 
+#. 4.2->settings-schema.json->quitmenu-layout->title
 #. 3.2->settings-schema.json->quitmenu-layout->title
 #. 3.4->settings-schema.json->quitmenu-layout->title
-#. 4.2->settings-schema.json->quitmenu-layout->title
 msgid "Quit Menu Layout"
 msgstr "Çıkış Menüsü Düzeni"
+
+#. 4.2->settings-schema.json->quicklauncher-separator-layout->title
+#. 3.4->settings-schema.json->quicklauncher-separator-layout->title
+msgid "Quicklauncher Separators"
+msgstr "Hızlı Başlatıcı Ayraçları"
+
+#. 4.2->settings-schema.json->custom-quicklauncher-places->title
+#. 3.4->settings-schema.json->custom-quicklauncher-places->title
+msgid "Quicklauncher Places"
+msgstr "Hızlı Başlatıcı Konumlar"
+
+#. 4.2->settings-schema.json->custom-quicklauncher-apps->title
+#. 3.4->settings-schema.json->custom-quicklauncher-apps->title
+msgid "Quicklauncher Applications"
+msgstr "Hızlı Başlatıcı Uygulamaları"
+
+#. 4.2->settings-schema.json->web-search-engine->title
+#. 4.2->settings-schema.json->web-search->description
+msgid "Web Search Engine"
+msgstr "Web Arama Motoru"
+
+#. 4.2->settings-schema.json->menu-layout->options
+#. 3.2->settings-schema.json->menu-layout->options
+#. 2.6->settings-schema.json->menu-layout->options
+#. 3.4->settings-schema.json->menu-layout->options
+msgid "Stark-Menu"
+msgstr "Stark-Menü"
+
+#. 4.2->settings-schema.json->menu-layout->options
+#. 3.2->settings-schema.json->menu-layout->options
+#. 2.6->settings-schema.json->menu-layout->options
+#. 3.4->settings-schema.json->menu-layout->options
+msgid "MATE-Menu"
+msgstr "MATE-Menü"
+
+#. 4.2->settings-schema.json->menu-layout->description
+#. 3.2->settings-schema.json->menu-layout->description
+#. 2.6->settings-schema.json->menu-layout->description
+#. 3.4->settings-schema.json->menu-layout->description
+msgid "Menu layout"
+msgstr "Menü düzeni"
+
+#. 4.2->settings-schema.json->menu-layout->tooltip
+#. 3.2->settings-schema.json->menu-layout->tooltip
+#. 2.6->settings-schema.json->menu-layout->tooltip
+#. 3.4->settings-schema.json->menu-layout->tooltip
+msgid "Choose between Stark-Menu and MATE-Menu layout"
+msgstr "Stark-Menü ve MATE-Menü düzeni arasında seçim yapın"
+
+#. 4.2->settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 2.6->settings-schema.json->overlay-key->description
+#. 3.4->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Menüyü açmak ve kapatmak için klavye kısayolu"
+
+#. 4.2->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr "Özel bir simge ve etiket kullan"
+
+#. 4.2->settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr "Özel bir simge ve etiket belirlemek için bunu işaretleyin"
+
+#. 4.2->settings-schema.json->menu-icon->description
+#. 4.2->settings-schema.json->web-search->columns->title
+#. 3.2->settings-schema.json->menu-icon->description
+#. 2.6->settings-schema.json->menu-icon->description
+#. 3.4->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Simge"
+
+#. 4.2->settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 2.6->settings-schema.json->menu-icon->tooltip
+#. 3.4->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Panelde gösterilecek bir simge seçin."
+
+#. 4.2->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Metin"
+
+#. 4.2->settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 2.6->settings-schema.json->menu-label->tooltip
+#. 3.4->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Panelde gösterilecek özel metni girin."
+
+#. 4.2->settings-schema.json->all-programs-label->description
+#. 3.2->settings-schema.json->all-programs-label->description
+#. 2.6->settings-schema.json->all-programs-label->description
+#. 3.4->settings-schema.json->all-programs-label->description
+msgid "'All Programs'-Button label"
+msgstr "'Tüm Uygulamalar'-Düğme etiketi"
+
+#. 4.2->settings-schema.json->all-programs-label->tooltip
+#. 3.2->settings-schema.json->all-programs-label->tooltip
+#. 2.6->settings-schema.json->all-programs-label->tooltip
+#. 3.4->settings-schema.json->all-programs-label->tooltip
+msgid "Enter custom text for the 'All Programs' button."
+msgstr "'Tüm Uygulamalar' düğmesi için özel metin girin."
+
+#. 4.2->settings-schema.json->favorites-label->description
+#. 3.2->settings-schema.json->favorites-label->description
+#. 2.6->settings-schema.json->favorites-label->description
+#. 3.4->settings-schema.json->favorites-label->description
+msgid "'Favorites'-Button label"
+msgstr "'Sık Kullanılanlar'-Düğme etiketi"
+
+#. 4.2->settings-schema.json->favorites-label->tooltip
+#. 3.2->settings-schema.json->favorites-label->tooltip
+#. 2.6->settings-schema.json->favorites-label->tooltip
+#. 3.4->settings-schema.json->favorites-label->tooltip
+msgid "Enter custom text for the 'Favorites' button."
+msgstr "'Sık Kullanılanlar' düğmesi için özel bir metin girin."
+
+#. 4.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 2.6->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.4->settings-schema.json->show-apps-description-on-buttons->description
+msgid "Show application's description under their titles"
+msgstr "Uygulamanın açıklamasını başlıklarının altında göster"
+
+#. 4.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr ""
+"Uygulama açıklamalarının uygulama düğmelerinde gösterilip gösterilmeyeceğini "
+"seçin."
+
+#. 4.2->settings-schema.json->show-places->description
+#. 3.2->settings-schema.json->show-places->description
+#. 2.6->settings-schema.json->show-places->description
+#. 3.4->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Sık kullanılanlar ve konumları göster"
+
+#. 4.2->settings-schema.json->show-places->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 2.6->settings-schema.json->show-places->tooltip
+#. 3.4->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+"Menüde sık kullanılanların ve konumların gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 2.6->settings-schema.json->enable-autoscroll->description
+#. 3.4->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
+
+#. 4.2->settings-schema.json->enable-autoscroll->tooltip
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+#. 2.6->settings-schema.json->enable-autoscroll->tooltip
+#. 3.4->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Uygulama listesinde yumuşak otomatik kaydırmanın etkinleştirilip "
+"etkinleştirilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->search-filesystem->description
+#. 3.2->settings-schema.json->search-filesystem->description
+#. 2.6->settings-schema.json->search-filesystem->description
+#. 3.4->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Arama kutusunsa dosya sistemi yolu girişini etkinleştir"
+
+#. 4.2->settings-schema.json->search-filesystem->tooltip
+#. 3.2->settings-schema.json->search-filesystem->tooltip
+#. 2.6->settings-schema.json->search-filesystem->tooltip
+#. 3.4->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Menü arama kutusunda dosya yolu girişine izin verir."
+
+#. 4.2->settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 2.6->settings-schema.json->activate-on-hover->description
+#. 3.4->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Fare üstüne geldiğinde menüyü aç"
+
+#. 4.2->settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 2.6->settings-schema.json->activate-on-hover->tooltip
+#. 3.4->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Fare uygulamacığa tıkladığında menüyü açılmasını etkinleştir"
+
+#. 4.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 2.6->settings-schema.json->hover-delay->units
+#. 3.4->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "milisaniye"
+
+#. 4.2->settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 3.4->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Menü bekleme gecikmesi"
+
+#. 4.2->settings-schema.json->hover-delay->tooltip
+#. 3.2->settings-schema.json->hover-delay->tooltip
+#. 3.4->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr "Menünün üstüne gelindiğinde açılma gecikmesi sağlar"
+
+#. 4.2->settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 2.6->settings-schema.json->enable-animation->description
+#. 3.4->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menü animasyonlarını kullan"
+
+#. 4.2->settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 2.6->settings-schema.json->enable-animation->tooltip
+#. 3.4->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Menünün açılış ve kapanışında animasyon gerçekleştirmesine izin ver"
+
+#. 4.2->settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 2.6->settings-schema.json->menu-editor-button->description
+#. 3.4->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Menü düzenleyiciyi aç"
+
+#. 4.2->settings-schema.json->menu-editor-button->tooltip
+#. 3.2->settings-schema.json->menu-editor-button->tooltip
+#. 2.6->settings-schema.json->menu-editor-button->tooltip
+#. 3.4->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Menü girdilerinizi özelleştirmek için bu düğmeye basın."
+
+#. 4.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 2.6->settings-schema.json->show-category-icons->description
+#. 3.4->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Kategori simgelerini göster"
+
+#. 4.2->settings-schema.json->show-category-icons->tooltip
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+#. 2.6->settings-schema.json->show-category-icons->tooltip
+#. 3.4->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 2.6->settings-schema.json->show-application-icons->description
+#. 3.4->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Uygulama simgelerini göster"
+
+#. 4.2->settings-schema.json->show-application-icons->tooltip
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+#. 2.6->settings-schema.json->show-application-icons->tooltip
+#. 3.4->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Uygulamalarda simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->show-favorite-icons->description
+#. 3.2->settings-schema.json->show-favorite-icons->description
+#. 2.6->settings-schema.json->show-favorite-icons->description
+#. 3.4->settings-schema.json->show-favorite-icons->description
+msgid "Show favorite icons"
+msgstr "Sık kullanılanlar simgelerini göster"
+
+#. 4.2->settings-schema.json->show-favorite-icons->tooltip
+#. 3.2->settings-schema.json->show-favorite-icons->tooltip
+#. 2.6->settings-schema.json->show-favorite-icons->tooltip
+#. 3.4->settings-schema.json->show-favorite-icons->tooltip
+msgid "Choose whether or not to show icons on favorites."
+msgstr "Sık kullanılanlarda simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->favorite-button-size->units
+#. 3.2->settings-schema.json->favorite-button-size->units
+#. 2.6->settings-schema.json->favorite-button-size->units
+#. 3.4->settings-schema.json->favorite-button-size->units
+msgid "pixels"
+msgstr "piksel"
+
+#. 4.2->settings-schema.json->favorite-button-size->description
+#. 3.2->settings-schema.json->favorite-button-size->description
+#. 2.6->settings-schema.json->favorite-button-size->description
+#. 3.4->settings-schema.json->favorite-button-size->description
+msgid "Size of the favorite buttons"
+msgstr "Sık kullanılan düğmesi simge boyutu"
+
+#. 4.2->settings-schema.json->favorite-button-size->tooltip
+#. 3.2->settings-schema.json->favorite-button-size->tooltip
+#. 2.6->settings-schema.json->favorite-button-size->tooltip
+#. 3.4->settings-schema.json->favorite-button-size->tooltip
+msgid "Change the size of the favorite buttons"
+msgstr "Sık kullanılanlardaki düğmelerinin boyutunu değiştirin"
+
+#. 4.2->settings-schema.json->show-sidebar->description
+#. 3.2->settings-schema.json->show-sidebar->description
+#. 2.6->settings-schema.json->show-sidebar->description
+#. 3.4->settings-schema.json->show-sidebar->description
+msgid "Show sidebar on menu"
+msgstr "Menüde kenar çubuğunu göster"
+
+#. 4.2->settings-schema.json->show-sidebar->tooltip
+#. 3.2->settings-schema.json->show-sidebar->tooltip
+#. 2.6->settings-schema.json->show-sidebar->tooltip
+#. 3.4->settings-schema.json->show-sidebar->tooltip
+msgid "Choose whether or not to show the sidebar."
+msgstr "Kenar çubuğunun gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->user-box-layout->options
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
+msgid "User picture and user name"
+msgstr "Kullanıcı resmi ve kullanıcı adı"
+
+#. 4.2->settings-schema.json->user-box-layout->options
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
+msgid "User picture only"
+msgstr "Sadece kullanıcı resmi"
+
+#. 4.2->settings-schema.json->user-box-layout->options
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
+msgid "Hide"
+msgstr "Gizle"
+
+#. 4.2->settings-schema.json->user-box-layout->description
+#. 3.2->settings-schema.json->user-box-layout->description
+#. 2.6->settings-schema.json->user-box-layout->description
+#. 3.4->settings-schema.json->user-box-layout->description
+msgid "User account info box style"
+msgstr "Kullanıcı hesabı bilgi kutusu tipi"
+
+#. 4.2->settings-schema.json->user-box-layout->tooltip
+#. 3.2->settings-schema.json->user-box-layout->tooltip
+#. 2.6->settings-schema.json->user-box-layout->tooltip
+#. 3.4->settings-schema.json->user-box-layout->tooltip
+msgid "Choose whether to show the user name and/or user picture."
+msgstr ""
+"Kullanıcı adı ve/veya kullanıcı resmi gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->quicklauncher-layout->options
+#. 3.2->settings-schema.json->quicklauncher-layout->options
+#. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
+msgid "Icons only"
+msgstr "Sadece simge"
+
+#. 4.2->settings-schema.json->quicklauncher-layout->options
+#. 3.2->settings-schema.json->quicklauncher-layout->options
+#. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
+msgid "Labels only"
+msgstr "Sadece etiket"
+
+#. 4.2->settings-schema.json->quicklauncher-layout->description
+#. 3.2->settings-schema.json->quicklauncher-layout->description
+#. 2.6->settings-schema.json->quicklauncher-layout->description
+#. 3.4->settings-schema.json->quicklauncher-layout->description
+msgid "Quicklauncher button style"
+msgstr "Hızlı başlatıcı düğme tipi"
+
+#. 4.2->settings-schema.json->quicklauncher-layout->tooltip
+#. 3.2->settings-schema.json->quicklauncher-layout->tooltip
+#. 2.6->settings-schema.json->quicklauncher-layout->tooltip
+#. 3.4->settings-schema.json->quicklauncher-layout->tooltip
+msgid ""
+"Choose whether to show icons and/or labels on the quicklauncher buttons."
+msgstr ""
+"Hızlı başlatıcı düğmelerinde simgeler ve/veya etiketlerin gösterilip "
+"gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->show-shutdown-menu->description
+#. 3.2->settings-schema.json->show-shutdown-menu->description
+#. 2.6->settings-schema.json->show-shutdown-menu->description
+#. 3.4->settings-schema.json->show-shutdown-menu->description
+msgid "Show quit buttons"
+msgstr "Çıkış düğmesini göster"
+
+#. 4.2->settings-schema.json->show-shutdown-menu->tooltip
+#. 3.2->settings-schema.json->show-shutdown-menu->tooltip
+#. 2.6->settings-schema.json->show-shutdown-menu->tooltip
+#. 3.4->settings-schema.json->show-shutdown-menu->tooltip
+msgid "Choose whether or not to show the quit buttons."
+msgstr "Çıkış düğmelerinin gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->shutdown-menu-reverse-order->description
+msgid "Reverse quit button order"
+msgstr "Çıkış düğmelerini tersine sırala"
+
+#. 4.2->settings-schema.json->shutdown-menu-reverse-order->tooltip
+msgid ""
+"Choose whether to display the 'Quit' button first or last. (Has no effect on "
+"'DropDown' layout.)"
+msgstr ""
+"\"Kapat\" düğmesinin ilk ya da son sırada gösterileceğini belirler. ('Aşağı "
+"açılır' düzende etkili değildir.)"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->options
+#. 3.2->settings-schema.json->shutdown-menu-layout->options
+#. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
+msgid "DropDown"
+msgstr "Aşağı açılır"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->options
+#. 3.2->settings-schema.json->shutdown-menu-layout->options
+#. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
+msgid "Vertical"
+msgstr "Dikey"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->options
+#. 3.2->settings-schema.json->shutdown-menu-layout->options
+#. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
+msgid "Horizontal"
+msgstr "Yatay"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->description
+#. 3.2->settings-schema.json->shutdown-menu-layout->description
+#. 2.6->settings-schema.json->shutdown-menu-layout->description
+#. 3.4->settings-schema.json->shutdown-menu-layout->description
+msgid "Quit buttons layout"
+msgstr "Çıkış düğmeleri düzeni"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->tooltip
+#. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
+#. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
+#. 3.4->settings-schema.json->shutdown-menu-layout->tooltip
+msgid "Choose the layout of the quit options."
+msgstr "Çıkış seçenekleri için düzen seçin."
+
+#. 4.2->settings-schema.json->shutdown-label->description
+#. 3.2->settings-schema.json->shutdown-label->description
+#. 2.6->settings-schema.json->shutdown-label->description
+#. 3.4->settings-schema.json->shutdown-label->description
+msgid "'Quit'-Button label"
+msgstr "'Çıkış'-Düğme etiketi"
+
+#. 4.2->settings-schema.json->shutdown-label->tooltip
+#. 3.2->settings-schema.json->shutdown-label->tooltip
+#. 2.6->settings-schema.json->shutdown-label->tooltip
+#. 3.4->settings-schema.json->shutdown-label->tooltip
+msgid "Enter custom text for the 'Quit' button."
+msgstr "'Çıkış' düğmesi için özel metin girin."
+
+#. 4.2->settings-schema.json->quicklauncher-separator1->description
+#. 3.4->settings-schema.json->quicklauncher-separator1->description
+msgid "Separator below user account info box"
+msgstr "Kullanıcı hesabı bilgi kutusunun altına ayraç ekle"
+
+#. 4.2->settings-schema.json->quicklauncher-separator1->tooltip
+#. 4.2->settings-schema.json->quicklauncher-separator2->tooltip
+#. 4.2->settings-schema.json->quicklauncher-separator3->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
+msgid "Choose whether or not to show this separator."
+msgstr "Bu ayracın gösterilip gösterilmeyeceğini seçin."
+
+#. 4.2->settings-schema.json->quicklauncher-places->description
+#. 3.4->settings-schema.json->quicklauncher-places->description
+msgid "Custom Quicklauncher Places"
+msgstr "Özel Hızlı Başlatıcı Konumları"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Visible"
+msgstr "Görünür"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Directory"
+msgstr "Dizin"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Custom Label"
+msgstr "Özel Etiket"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Custom Icon"
+msgstr "Özel Simge"
+
+#. 4.2->settings-schema.json->quicklauncher-separator2->description
+#. 3.4->settings-schema.json->quicklauncher-separator2->description
+msgid "Separator below quicklauncher places"
+msgstr "Hızlı başlatıcı konumlarının altına ayraç ekle"
+
+#. 4.2->settings-schema.json->quicklauncher-apps->description
+#. 3.4->settings-schema.json->quicklauncher-apps->description
+msgid "Custom Quicklauncher Applications"
+msgstr "Özel Hızlı Başlatıcı Uygulamaları"
+
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Command"
+msgstr "Komut"
+
+#. 4.2->settings-schema.json->quicklauncher-separator3->description
+#. 3.4->settings-schema.json->quicklauncher-separator3->description
+msgid "Separator above quit buttons"
+msgstr "Çıkış düğmesinin üstüne ayraç ekle"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Use"
+msgstr "Kullan"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Name"
+msgstr "İsim"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "URL"
+msgstr "Adres"
 
 #. 3.2->settings-schema.json->custom-quicklauncher->title
 #. 2.6->settings-schema.json->head-custom-quicklauncher->description
 msgid "Custom Quicklauncher"
 msgstr "Özel Hızlı Başlatıcı"
-
-#. 3.2->settings-schema.json->menu-layout->options
-#. 2.6->settings-schema.json->menu-layout->options
-#. 3.4->settings-schema.json->menu-layout->options
-#. 4.2->settings-schema.json->menu-layout->options
-msgid "Stark-Menu"
-msgstr "Stark-Menü"
-
-#. 3.2->settings-schema.json->menu-layout->options
-#. 2.6->settings-schema.json->menu-layout->options
-#. 3.4->settings-schema.json->menu-layout->options
-#. 4.2->settings-schema.json->menu-layout->options
-msgid "MATE-Menu"
-msgstr "MATE-Menü"
-
-#. 3.2->settings-schema.json->menu-layout->description
-#. 2.6->settings-schema.json->menu-layout->description
-#. 3.4->settings-schema.json->menu-layout->description
-#. 4.2->settings-schema.json->menu-layout->description
-msgid "Menu layout"
-msgstr "Menü düzeni"
-
-#. 3.2->settings-schema.json->menu-layout->tooltip
-#. 2.6->settings-schema.json->menu-layout->tooltip
-#. 3.4->settings-schema.json->menu-layout->tooltip
-#. 4.2->settings-schema.json->menu-layout->tooltip
-msgid "Choose between Stark-Menu and MATE-Menu layout"
-msgstr "Stark-Menü ve MATE-Menü düzeni arasında seçim yapın"
-
-#. 3.2->settings-schema.json->overlay-key->description
-#. 2.6->settings-schema.json->overlay-key->description
-#. 3.4->settings-schema.json->overlay-key->description
-#. 4.2->settings-schema.json->overlay-key->description
-msgid "Keyboard shortcut to open and close the menu"
-msgstr "Menüyü açmak ve kapatmak için klavye kısayolu"
 
 #. 3.2->settings-schema.json->menu-icon-custom->description
 #. 2.6->settings-schema.json->menu-icon-custom->description
@@ -318,214 +826,11 @@ msgid "Unchecking this allows the theme to set the icon"
 msgstr ""
 "Bu seçeneğin işaretini kaldırmak, simgeyi temanın ayarlamasına olanak tanır"
 
-#. 3.2->settings-schema.json->menu-icon->description
-#. 2.6->settings-schema.json->menu-icon->description
-#. 3.4->settings-schema.json->menu-icon->description
-#. 4.2->settings-schema.json->menu-icon->description
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "Icon"
-msgstr "Simge"
-
-#. 3.2->settings-schema.json->menu-icon->tooltip
-#. 2.6->settings-schema.json->menu-icon->tooltip
-#. 3.4->settings-schema.json->menu-icon->tooltip
-#. 4.2->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Panelde gösterilecek bir simge seçin."
-
 #. 3.2->settings-schema.json->menu-label->description
 #. 2.6->settings-schema.json->menu-label->description
 #. 3.4->settings-schema.json->menu-label->description
 msgid "'Menu'-Button label"
 msgstr "'Menü'-Düğme etiketi"
-
-#. 3.2->settings-schema.json->menu-label->tooltip
-#. 2.6->settings-schema.json->menu-label->tooltip
-#. 3.4->settings-schema.json->menu-label->tooltip
-#. 4.2->settings-schema.json->menu-label->tooltip
-msgid "Enter custom text to show in the panel."
-msgstr "Panelde gösterilecek özel metni girin."
-
-#. 3.2->settings-schema.json->all-programs-label->description
-#. 2.6->settings-schema.json->all-programs-label->description
-#. 3.4->settings-schema.json->all-programs-label->description
-#. 4.2->settings-schema.json->all-programs-label->description
-msgid "'All Programs'-Button label"
-msgstr "'Tüm Uygulamalar'-Düğme etiketi"
-
-#. 3.2->settings-schema.json->all-programs-label->tooltip
-#. 2.6->settings-schema.json->all-programs-label->tooltip
-#. 3.4->settings-schema.json->all-programs-label->tooltip
-#. 4.2->settings-schema.json->all-programs-label->tooltip
-msgid "Enter custom text for the 'All Programs' button."
-msgstr "'Tüm Uygulamalar' düğmesi için özel metin girin."
-
-#. 3.2->settings-schema.json->favorites-label->description
-#. 2.6->settings-schema.json->favorites-label->description
-#. 3.4->settings-schema.json->favorites-label->description
-#. 4.2->settings-schema.json->favorites-label->description
-msgid "'Favorites'-Button label"
-msgstr "'Sık Kullanılanlar'-Düğme etiketi"
-
-#. 3.2->settings-schema.json->favorites-label->tooltip
-#. 2.6->settings-schema.json->favorites-label->tooltip
-#. 3.4->settings-schema.json->favorites-label->tooltip
-#. 4.2->settings-schema.json->favorites-label->tooltip
-msgid "Enter custom text for the 'Favorites' button."
-msgstr "'Sık Kullanılanlar' düğmesi için özel bir metin girin."
-
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
-#. 2.6->settings-schema.json->show-apps-description-on-buttons->description
-#. 3.4->settings-schema.json->show-apps-description-on-buttons->description
-#. 4.2->settings-schema.json->show-apps-description-on-buttons->description
-msgid "Show application's description under their titles"
-msgstr "Uygulamanın açıklamasını başlıklarının altında göster"
-
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-#. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
-#. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
-#. 4.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Uygulama açıklamalarının uygulama düğmelerinde gösterilip gösterilmeyeceğini "
-"seçin."
-
-#. 3.2->settings-schema.json->show-places->description
-#. 2.6->settings-schema.json->show-places->description
-#. 3.4->settings-schema.json->show-places->description
-#. 4.2->settings-schema.json->show-places->description
-msgid "Show bookmarks and places"
-msgstr "Sık kullanılanlar ve konumları göster"
-
-#. 3.2->settings-schema.json->show-places->tooltip
-#. 2.6->settings-schema.json->show-places->tooltip
-#. 3.4->settings-schema.json->show-places->tooltip
-#. 4.2->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr ""
-"Menüde sık kullanılanların ve konumların gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->enable-autoscroll->description
-#. 2.6->settings-schema.json->enable-autoscroll->description
-#. 3.4->settings-schema.json->enable-autoscroll->description
-#. 4.2->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
-msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
-
-#. 3.2->settings-schema.json->enable-autoscroll->tooltip
-#. 2.6->settings-schema.json->enable-autoscroll->tooltip
-#. 3.4->settings-schema.json->enable-autoscroll->tooltip
-#. 4.2->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Uygulama listesinde yumuşak otomatik kaydırmanın etkinleştirilip "
-"etkinleştirilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->search-filesystem->description
-#. 2.6->settings-schema.json->search-filesystem->description
-#. 3.4->settings-schema.json->search-filesystem->description
-#. 4.2->settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr "Arama kutusunsa dosya sistemi yolu girişini etkinleştir"
-
-#. 3.2->settings-schema.json->search-filesystem->tooltip
-#. 2.6->settings-schema.json->search-filesystem->tooltip
-#. 3.4->settings-schema.json->search-filesystem->tooltip
-#. 4.2->settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Menü arama kutusunda dosya yolu girişine izin verir."
-
-#. 3.2->settings-schema.json->activate-on-hover->description
-#. 2.6->settings-schema.json->activate-on-hover->description
-#. 3.4->settings-schema.json->activate-on-hover->description
-#. 4.2->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Fare üstüne geldiğinde menüyü aç"
-
-#. 3.2->settings-schema.json->activate-on-hover->tooltip
-#. 2.6->settings-schema.json->activate-on-hover->tooltip
-#. 3.4->settings-schema.json->activate-on-hover->tooltip
-#. 4.2->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Fare uygulamacığa tıkladığında menüyü açılmasını etkinleştir"
-
-#. 3.2->settings-schema.json->hover-delay->units
-#. 2.6->settings-schema.json->hover-delay->units
-#. 3.4->settings-schema.json->hover-delay->units
-#. 4.2->settings-schema.json->hover-delay->units
-msgid "milliseconds"
-msgstr "milisaniye"
-
-#. 3.2->settings-schema.json->hover-delay->description
-#. 3.4->settings-schema.json->hover-delay->description
-#. 4.2->settings-schema.json->hover-delay->description
-msgid "Menu hover delay"
-msgstr "Menü bekleme gecikmesi"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 3.4->settings-schema.json->hover-delay->tooltip
-#. 4.2->settings-schema.json->hover-delay->tooltip
-msgid "Delay before the menu opens when hovered"
-msgstr "Menünün üstüne gelindiğinde açılma gecikmesi sağlar"
-
-#. 3.2->settings-schema.json->enable-animation->description
-#. 2.6->settings-schema.json->enable-animation->description
-#. 3.4->settings-schema.json->enable-animation->description
-#. 4.2->settings-schema.json->enable-animation->description
-msgid "Use menu animations"
-msgstr "Menü animasyonlarını kullan"
-
-#. 3.2->settings-schema.json->enable-animation->tooltip
-#. 2.6->settings-schema.json->enable-animation->tooltip
-#. 3.4->settings-schema.json->enable-animation->tooltip
-#. 4.2->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
-msgstr "Menünün açılış ve kapanışında animasyon gerçekleştirmesine izin ver"
-
-#. 3.2->settings-schema.json->menu-editor-button->description
-#. 2.6->settings-schema.json->menu-editor-button->description
-#. 3.4->settings-schema.json->menu-editor-button->description
-#. 4.2->settings-schema.json->menu-editor-button->description
-msgid "Open the menu editor"
-msgstr "Menü düzenleyiciyi aç"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 2.6->settings-schema.json->menu-editor-button->tooltip
-#. 3.4->settings-schema.json->menu-editor-button->tooltip
-#. 4.2->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Menü girdilerinizi özelleştirmek için bu düğmeye basın."
-
-#. 3.2->settings-schema.json->show-category-icons->description
-#. 2.6->settings-schema.json->show-category-icons->description
-#. 3.4->settings-schema.json->show-category-icons->description
-#. 4.2->settings-schema.json->show-category-icons->description
-msgid "Show category icons"
-msgstr "Kategori simgelerini göster"
-
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 2.6->settings-schema.json->show-category-icons->tooltip
-#. 3.4->settings-schema.json->show-category-icons->tooltip
-#. 4.2->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->show-application-icons->description
-#. 2.6->settings-schema.json->show-application-icons->description
-#. 3.4->settings-schema.json->show-application-icons->description
-#. 4.2->settings-schema.json->show-application-icons->description
-msgid "Show application icons"
-msgstr "Uygulama simgelerini göster"
-
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 2.6->settings-schema.json->show-application-icons->tooltip
-#. 3.4->settings-schema.json->show-application-icons->tooltip
-#. 4.2->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Uygulamalarda simgelerin gösterilip gösterilmeyeceğini seçin."
 
 #. 3.2->settings-schema.json->show-context-menu-icons->description
 #. 2.6->settings-schema.json->show-context-menu-icons->description
@@ -539,185 +844,6 @@ msgstr "İçerik menüsü düğmelerini göster"
 msgid "Choose whether or not to show icons on context menus."
 msgstr ""
 "İçerik menüleri üzerinde simgelerin gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->show-favorite-icons->description
-#. 2.6->settings-schema.json->show-favorite-icons->description
-#. 3.4->settings-schema.json->show-favorite-icons->description
-#. 4.2->settings-schema.json->show-favorite-icons->description
-msgid "Show favorite icons"
-msgstr "Sık kullanılanlar simgelerini göster"
-
-#. 3.2->settings-schema.json->show-favorite-icons->tooltip
-#. 2.6->settings-schema.json->show-favorite-icons->tooltip
-#. 3.4->settings-schema.json->show-favorite-icons->tooltip
-#. 4.2->settings-schema.json->show-favorite-icons->tooltip
-msgid "Choose whether or not to show icons on favorites."
-msgstr "Sık kullanılanlarda simgelerin gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->favorite-button-size->units
-#. 2.6->settings-schema.json->favorite-button-size->units
-#. 3.4->settings-schema.json->favorite-button-size->units
-#. 4.2->settings-schema.json->favorite-button-size->units
-msgid "pixels"
-msgstr "piksel"
-
-#. 3.2->settings-schema.json->favorite-button-size->description
-#. 2.6->settings-schema.json->favorite-button-size->description
-#. 3.4->settings-schema.json->favorite-button-size->description
-#. 4.2->settings-schema.json->favorite-button-size->description
-msgid "Size of the favorite buttons"
-msgstr "Sık kullanılan düğmesi simge boyutu"
-
-#. 3.2->settings-schema.json->favorite-button-size->tooltip
-#. 2.6->settings-schema.json->favorite-button-size->tooltip
-#. 3.4->settings-schema.json->favorite-button-size->tooltip
-#. 4.2->settings-schema.json->favorite-button-size->tooltip
-msgid "Change the size of the favorite buttons"
-msgstr "Sık kullanılanlardaki düğmelerinin boyutunu değiştirin"
-
-#. 3.2->settings-schema.json->show-sidebar->description
-#. 2.6->settings-schema.json->show-sidebar->description
-#. 3.4->settings-schema.json->show-sidebar->description
-#. 4.2->settings-schema.json->show-sidebar->description
-msgid "Show sidebar on menu"
-msgstr "Menüde kenar çubuğunu göster"
-
-#. 3.2->settings-schema.json->show-sidebar->tooltip
-#. 2.6->settings-schema.json->show-sidebar->tooltip
-#. 3.4->settings-schema.json->show-sidebar->tooltip
-#. 4.2->settings-schema.json->show-sidebar->tooltip
-msgid "Choose whether or not to show the sidebar."
-msgstr "Kenar çubuğunun gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->user-box-layout->options
-#. 2.6->settings-schema.json->user-box-layout->options
-#. 3.4->settings-schema.json->user-box-layout->options
-#. 4.2->settings-schema.json->user-box-layout->options
-msgid "User picture and user name"
-msgstr "Kullanıcı resmi ve kullanıcı adı"
-
-#. 3.2->settings-schema.json->user-box-layout->options
-#. 2.6->settings-schema.json->user-box-layout->options
-#. 3.4->settings-schema.json->user-box-layout->options
-#. 4.2->settings-schema.json->user-box-layout->options
-msgid "User picture only"
-msgstr "Sadece kullanıcı resmi"
-
-#. 3.2->settings-schema.json->user-box-layout->options
-#. 2.6->settings-schema.json->user-box-layout->options
-#. 3.4->settings-schema.json->user-box-layout->options
-#. 4.2->settings-schema.json->user-box-layout->options
-msgid "Hide"
-msgstr "Gizle"
-
-#. 3.2->settings-schema.json->user-box-layout->description
-#. 2.6->settings-schema.json->user-box-layout->description
-#. 3.4->settings-schema.json->user-box-layout->description
-#. 4.2->settings-schema.json->user-box-layout->description
-msgid "User account info box style"
-msgstr "Kullanıcı hesabı bilgi kutusu tipi"
-
-#. 3.2->settings-schema.json->user-box-layout->tooltip
-#. 2.6->settings-schema.json->user-box-layout->tooltip
-#. 3.4->settings-schema.json->user-box-layout->tooltip
-#. 4.2->settings-schema.json->user-box-layout->tooltip
-msgid "Choose whether to show the user name and/or user picture."
-msgstr ""
-"Kullanıcı adı ve/veya kullanıcı resmi gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->quicklauncher-layout->options
-#. 2.6->settings-schema.json->quicklauncher-layout->options
-#. 3.4->settings-schema.json->quicklauncher-layout->options
-#. 4.2->settings-schema.json->quicklauncher-layout->options
-msgid "Icons only"
-msgstr "Sadece simge"
-
-#. 3.2->settings-schema.json->quicklauncher-layout->options
-#. 2.6->settings-schema.json->quicklauncher-layout->options
-#. 3.4->settings-schema.json->quicklauncher-layout->options
-#. 4.2->settings-schema.json->quicklauncher-layout->options
-msgid "Labels only"
-msgstr "Sadece etiket"
-
-#. 3.2->settings-schema.json->quicklauncher-layout->description
-#. 2.6->settings-schema.json->quicklauncher-layout->description
-#. 3.4->settings-schema.json->quicklauncher-layout->description
-#. 4.2->settings-schema.json->quicklauncher-layout->description
-msgid "Quicklauncher button style"
-msgstr "Hızlı başlatıcı düğme tipi"
-
-#. 3.2->settings-schema.json->quicklauncher-layout->tooltip
-#. 2.6->settings-schema.json->quicklauncher-layout->tooltip
-#. 3.4->settings-schema.json->quicklauncher-layout->tooltip
-#. 4.2->settings-schema.json->quicklauncher-layout->tooltip
-msgid ""
-"Choose whether to show icons and/or labels on the quicklauncher buttons."
-msgstr ""
-"Hızlı başlatıcı düğmelerinde simgeler ve/veya etiketlerin gösterilip "
-"gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->show-shutdown-menu->description
-#. 2.6->settings-schema.json->show-shutdown-menu->description
-#. 3.4->settings-schema.json->show-shutdown-menu->description
-#. 4.2->settings-schema.json->show-shutdown-menu->description
-msgid "Show quit buttons"
-msgstr "Çıkış düğmesini göster"
-
-#. 3.2->settings-schema.json->show-shutdown-menu->tooltip
-#. 2.6->settings-schema.json->show-shutdown-menu->tooltip
-#. 3.4->settings-schema.json->show-shutdown-menu->tooltip
-#. 4.2->settings-schema.json->show-shutdown-menu->tooltip
-msgid "Choose whether or not to show the quit buttons."
-msgstr "Çıkış düğmelerinin gösterilip gösterilmeyeceğini seçin."
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->options
-#. 2.6->settings-schema.json->shutdown-menu-layout->options
-#. 3.4->settings-schema.json->shutdown-menu-layout->options
-#. 4.2->settings-schema.json->shutdown-menu-layout->options
-msgid "DropDown"
-msgstr "Aşağı açılır"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->options
-#. 2.6->settings-schema.json->shutdown-menu-layout->options
-#. 3.4->settings-schema.json->shutdown-menu-layout->options
-#. 4.2->settings-schema.json->shutdown-menu-layout->options
-msgid "Vertical"
-msgstr "Dikey"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->options
-#. 2.6->settings-schema.json->shutdown-menu-layout->options
-#. 3.4->settings-schema.json->shutdown-menu-layout->options
-#. 4.2->settings-schema.json->shutdown-menu-layout->options
-msgid "Horizontal"
-msgstr "Yatay"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->description
-#. 2.6->settings-schema.json->shutdown-menu-layout->description
-#. 3.4->settings-schema.json->shutdown-menu-layout->description
-#. 4.2->settings-schema.json->shutdown-menu-layout->description
-msgid "Quit buttons layout"
-msgstr "Çıkış düğmeleri düzeni"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
-#. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
-#. 3.4->settings-schema.json->shutdown-menu-layout->tooltip
-#. 4.2->settings-schema.json->shutdown-menu-layout->tooltip
-msgid "Choose the layout of the quit options."
-msgstr "Çıkış seçenekleri için düzen seçin."
-
-#. 3.2->settings-schema.json->shutdown-label->description
-#. 2.6->settings-schema.json->shutdown-label->description
-#. 3.4->settings-schema.json->shutdown-label->description
-#. 4.2->settings-schema.json->shutdown-label->description
-msgid "'Quit'-Button label"
-msgstr "'Çıkış'-Düğme etiketi"
-
-#. 3.2->settings-schema.json->shutdown-label->tooltip
-#. 2.6->settings-schema.json->shutdown-label->tooltip
-#. 3.4->settings-schema.json->shutdown-label->tooltip
-#. 4.2->settings-schema.json->shutdown-label->tooltip
-msgid "Enter custom text for the 'Quit' button."
-msgstr "'Çıkış' düğmesi için özel metin girin."
 
 #. 3.2->settings-schema.json->quicklauncher-0-checkbox->description
 #. 3.2->settings-schema.json->quicklauncher-1-checkbox->description
@@ -1090,131 +1216,3 @@ msgstr "Kategori geçişleri arasındaki gecikme"
 #. 2.6->settings-schema.json->head-button-show-hide-icons->description
 msgid "Icons"
 msgstr "Simgeler"
-
-#. 3.4->settings-schema.json->quicklauncher-separator-layout->title
-#. 4.2->settings-schema.json->quicklauncher-separator-layout->title
-msgid "Quicklauncher Separators"
-msgstr "Hızlı Başlatıcı Ayraçları"
-
-#. 3.4->settings-schema.json->custom-quicklauncher-places->title
-#. 4.2->settings-schema.json->custom-quicklauncher-places->title
-msgid "Quicklauncher Places"
-msgstr "Hızlı Başlatıcı Konumlar"
-
-#. 3.4->settings-schema.json->custom-quicklauncher-apps->title
-#. 4.2->settings-schema.json->custom-quicklauncher-apps->title
-msgid "Quicklauncher Applications"
-msgstr "Hızlı Başlatıcı Uygulamaları"
-
-#. 3.4->settings-schema.json->quicklauncher-separator1->description
-#. 4.2->settings-schema.json->quicklauncher-separator1->description
-msgid "Separator below user account info box"
-msgstr "Kullanıcı hesabı bilgi kutusunun altına ayraç ekle"
-
-#. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
-#. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
-#. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
-#. 4.2->settings-schema.json->quicklauncher-separator1->tooltip
-#. 4.2->settings-schema.json->quicklauncher-separator2->tooltip
-#. 4.2->settings-schema.json->quicklauncher-separator3->tooltip
-msgid "Choose whether or not to show this separator."
-msgstr "Bu ayracın gösterilip gösterilmeyeceğini seçin."
-
-#. 3.4->settings-schema.json->quicklauncher-places->description
-#. 4.2->settings-schema.json->quicklauncher-places->description
-msgid "Custom Quicklauncher Places"
-msgstr "Özel Hızlı Başlatıcı Konumları"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Visible"
-msgstr "Görünür"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-msgid "Directory"
-msgstr "Dizin"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Custom Label"
-msgstr "Özel Etiket"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Custom Icon"
-msgstr "Özel Simge"
-
-#. 3.4->settings-schema.json->quicklauncher-separator2->description
-#. 4.2->settings-schema.json->quicklauncher-separator2->description
-msgid "Separator below quicklauncher places"
-msgstr "Hızlı başlatıcı konumlarının altına ayraç ekle"
-
-#. 3.4->settings-schema.json->quicklauncher-apps->description
-#. 4.2->settings-schema.json->quicklauncher-apps->description
-msgid "Custom Quicklauncher Applications"
-msgstr "Özel Hızlı Başlatıcı Uygulamaları"
-
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Command"
-msgstr "Komut"
-
-#. 3.4->settings-schema.json->quicklauncher-separator3->description
-#. 4.2->settings-schema.json->quicklauncher-separator3->description
-msgid "Separator above quit buttons"
-msgstr "Çıkış düğmesinin üstüne ayraç ekle"
-
-#. 4.2->settings-schema.json->websearch->title
-msgid "Web Search"
-msgstr "Web Araması"
-
-#. 4.2->settings-schema.json->web-search-engine->title
-#. 4.2->settings-schema.json->web-search->description
-msgid "Web Search Engine"
-msgstr "Web Arama Motoru"
-
-#. 4.2->settings-schema.json->menu-custom->description
-msgid "Use a custom icon and label"
-msgstr "Özel bir simge ve etiket kullan"
-
-#. 4.2->settings-schema.json->menu-custom->tooltip
-msgid "Check this to specify a custom icon and label"
-msgstr "Özel bir simge ve etiket belirlemek için bunu işaretleyin"
-
-#. 4.2->settings-schema.json->menu-label->description
-msgid "Text"
-msgstr "Metin"
-
-#. 4.2->settings-schema.json->shutdown-menu-reverse-order->description
-msgid "Reverse quit button order"
-msgstr "Çıkış düğmelerini tersine sırala"
-
-#. 4.2->settings-schema.json->shutdown-menu-reverse-order->tooltip
-msgid ""
-"Choose whether to display the 'Quit' button first or last. (Has no effect on "
-"'DropDown' layout.)"
-msgstr ""
-"\"Kapat\" düğmesinin ilk ya da son sırada gösterileceğini belirler. ('Aşağı "
-"açılır' düzende etkili değildir.)"
-
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "Use"
-msgstr "Kullan"
-
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "Name"
-msgstr "İsim"
-
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "URL"
-msgstr "Adres"
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi kullanınız"

@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
 "PO-Revision-Date: 2021-09-26 07:40+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,47 +19,51 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:148
+#: applet.js:150
 msgid "(Right click to open folder)"
 msgstr "(Jobb egérgomb a mappa megnyitásához)"
 
-#: applet.js:170
+#: applet.js:172
 msgid "Places"
 msgstr "Helyek"
 
-#: applet.js:284
+#: applet.js:287
 msgid "Search Home Folder"
 msgstr "Saját mappában keresés"
 
-#: applet.js:307
+#: applet.js:310
 msgid "SYSTEM"
 msgstr "RENDSZER"
 
-#: applet.js:316
+#: applet.js:319
 msgid "Search File System"
 msgstr "Fájlrendszerben keresés"
 
-#: applet.js:341
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "MOSTANÁBAN MEGNYITOTT DOKUMENTUMOK"
 
-#: applet.js:355
+#: applet.js:358
 msgid "Clear"
 msgstr "Törlés"
 
-#: applet.js:398
+#: applet.js:364
+msgid "Recent"
+msgstr ""
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Számítógép"
 
-#: applet.js:404
+#: applet.js:413
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#: applet.js:420
+#: applet.js:429
 msgid "Network"
 msgstr "Hálózat"
 
-#: applet.js:560
+#: applet.js:569
 msgid "Trash"
 msgstr "Kuka"
 
@@ -131,7 +136,6 @@ msgid "Skipping"
 msgstr "Átugrás"
 
 #: search.py:259
-#| msgid " - direcotry already searched"
 msgid " - directory already searched"
 msgstr " - a mappa már része volt a keresésnek"
 
@@ -163,6 +167,10 @@ msgstr "Stephen Collins - Szerző"
 msgid "kehugter - Added configurability to middle click"
 msgstr ""
 "kehugter - Konfigurálási lehetőségeket adott hozzá a görgő kattintáshoz"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr ""
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -323,6 +331,10 @@ msgstr "Minden mostanában megnyitott dokumentum"
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Megjelenítendő darabszám"
+
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

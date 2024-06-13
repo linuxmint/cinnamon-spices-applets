@@ -71,6 +71,12 @@ MyApplet.prototype = {
                 null);
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
+                "iconTheme",
+                "iconTheme",
+                this.setupIconPaths,
+                null)
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
                 "useBatteryLowSound",
                 "useBatteryLowSound",
                 this.on_settings_changed,
@@ -112,18 +118,7 @@ MyApplet.prototype = {
             this.helpfile = metadata.path + "/../README.md";
             this.wait4cmd = false;
             this.batteryPath = "";
-            this.battery100 = metadata.path + "/icons/battery-100.png";
-            this.battery080 = metadata.path + "/icons/battery-080.png";
-            this.battery060 = metadata.path + "/icons/battery-060.png";
-            this.battery040 = metadata.path + "/icons/battery-040.png";
-            this.batteryCaution = metadata.path + "/icons/battery-caution.png";
-            this.batteryLow = metadata.path + "/icons/battery-low.png";
-            this.batteryCharging100 = metadata.path + "/icons/battery-charging.png";
-            this.batteryCharging080 = metadata.path + "/icons/battery-charging-080.png";
-            this.batteryCharging060 = metadata.path + "/icons/battery-charging-060.png";
-            this.batteryCharging040 = metadata.path + "/icons/battery-charging-040.png";
-            this.batteryChargingCaution = metadata.path + "/icons/battery-charging-caution.png";
-            this.batteryChargingLow = metadata.path + "/icons/battery-charging-low.png";
+
 
             // Set initial value
             this.set_applet_icon_path(this.batteryCharging100);
@@ -227,6 +222,21 @@ MyApplet.prototype = {
         } catch (e) {
             global.logError(e);
         }
+    },
+
+    setup_icon_paths: function () {
+        this.battery100 = metadata.path + `/icons/${this.iconTheme}/battery-100.png`;
+        this.battery080 = metadata.path + `/icons/${this.iconTheme}/battery-080.png`;
+        this.battery060 = metadata.path + `/icons/${this.iconTheme}/battery-060.png`;
+        this.battery040 = metadata.path + `/icons/${this.iconTheme}/battery-040.png`;
+        this.batteryCaution = metadata.path + `/icons/${this.iconTheme}/battery-caution.png`;
+        this.batteryLow = metadata.path + `/icons/${this.iconTheme}/battery-low.png`;
+        this.batteryCharging100 = metadata.path + `/icons/${this.iconTheme}/battery-charging.png`;
+        this.batteryCharging080 = metadata.path + `/icons/${this.iconTheme}/battery-charging-080.png`;
+        this.batteryCharging060 = metadata.path + `/icons/${this.iconTheme}/battery-charging-060.png`;
+        this.batteryCharging040 = metadata.path + `/icons/${this.iconTheme}/battery-charging-040.png`;
+        this.batteryChargingCaution = metadata.path + `/icons/${this.iconTheme}/battery-charging-caution.png`;
+        this.batteryChargingLow = metadata.path + `/icons/${this.iconTheme}/battery-charging-low.png`;
     },
 
 

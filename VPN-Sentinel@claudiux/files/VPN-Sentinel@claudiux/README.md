@@ -115,30 +115,23 @@ Put all these `.conf` files into `~/WIREGUARD/wireguard-configs`. No file name s
 
 In the directory `~/WIREGUARD/`, create a bash script `modify-conf.sh` like this:
 
-```#!/bin/sh
 
-PUBLICKEY="here your public key"
 
-PRIVATEKEY="here your private key"
 
-IPADDRESS="here the IP of the Wireguard server"
+    #!/bin/sh
+    PUBLICKEY="here your public key"
+    PRIVATEKEY="here your private key"
+    IPADDRESS="here the IP of the Wireguard server"
+    for f in $(ls -1A wireguard-configs/*.conf); do {
+        echo "\n\n\tProcessing $f"
+        chmod 600 $f
+        sed "s/YOUR_PRIVATE_KEY/${PRIVATEKEY}/" $f > $f.temp
+        sed "s/YOUR_IP_ADDRESS/${IPADDRESS}/" $f.temp > $f.temp2
+        sed "/PresharedKey.*/d" $f.temp2 > $f
+        rm -f $f.temp*
+    }; done
 
-for f in $(ls -1A wireguard-configs/*.conf); do {
 
-  echo "\n\n\tProcessing $f"
-
-  chmod 600 $f
-
-  sed "s/YOUR_PRIVATE_KEY/${PRIVATEKEY}/" $f > $f.temp
-
-  sed "s/YOUR_IP_ADDRESS/${IPADDRESS}/" $f.temp > $f.temp2
-
-  sed "/PresharedKey.*/d" $f.temp2 > $f
-
-  rm -f $f.temp*
-
-}; done
-```
 
 Make this script executable: `chmod +x modify-conf.sh`
 
@@ -154,27 +147,30 @@ N.B.
 
 Create in the ~/WIREGUARD/ directory this executable script named _installall_ containing:
 
-```#!/bin/bash
-configs="AuSydney.conf|Au-Sydney(W) BrRiodeJaneiro.conf|Br-RiodeJan(W) CaEast.conf|Ca-East(W)"
+    #!/bin/bash
+    configs="AuSydney.conf|Au-Sydney(W) BrRiodeJaneiro.conf|Br-RiodeJan(W) CaEast.conf|Ca-East(W)"
+    
+    wgpath="$HOME/WIREGUARD/wireguard-configs"
+    
+    for c in $configs
+    do
+        IFS='|'
+        set -- $c
+        echo "Importing ${wgpath}/$1 ... "
+        sudo nmcli connection import type wireguard file "${wgpath}/$1"
+        echo "Renaming ${1%%.conf} as $2 ..."
+        nmcli connection modify "${1%%.conf}" connection.id "$2"
+        nmcli connection modify "$2" connection.autoconnect no
+        nmcli connection modify "$2" connection.interface-name "$2"
+        nmcli connection down "$2"
+    done
 
-_wgpath="$HOME/WIREGUARD/wireguard-configs"
-
-for c in $configs
-do
-  IFS='|'
-  set -- $c
-  echo "Importing ${wgpath}/$1 ... "
-  sudo nmcli connection import type wireguard file "${wgpath}/$1"
-  echo "Renaming ${1%%.conf} as $2 ..."
-  nmcli connection modify "${1%%.conf}" connection.id "$2"
-  nmcli connection modify "$2" connection.autoconnect no
-  nmcli connection modify "$2" connection.interface-name "$2"
-  nmcli connection down "$2"
-done
-```
 
 The _configs_ and _wgpath_ lines must be adapted to your own configuration.
 
 _configs_ is a string where each space separates 2 connections. Each connection is defined by a .conf file and a name separated by the pipe character (|). Do not use spaces in names!
 
 Once it is ready, execute this script.
+
+## Translations
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/VPN-Sentinel%40claudiux.md)

@@ -7,8 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 17:17+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
 "PO-Revision-Date: 2023-12-23 16:27+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -20,95 +21,104 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:101
 msgid "Sensors Monitor"
 msgstr "Sensorovervågning"
 
-#: applet.js:403 applet.js:455
+#: applet.js:268
+msgid "Suspended"
+msgstr ""
+
+#: applet.js:484 applet.js:526
 msgid "high:"
 msgstr "høj:"
 
-#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
 msgid "n/a"
 msgstr "—"
 
-#: applet.js:405 applet.js:457
+#: applet.js:486 applet.js:528
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:495 applet.js:538
+#: applet.js:569 applet.js:612
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:540
+#: applet.js:614
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:568
+#: applet.js:642
 msgid "No intrusion detected"
 msgstr "Ingen indtrængen detekteret"
 
-#: applet.js:568
+#: applet.js:642
 msgid "INTRUSION DETECTED!"
 msgstr "INDTRÆNGEN DETEKTERET!"
 
-#: applet.js:588
+#: applet.js:662
 msgid "Must be configured!"
 msgstr "Skal konfigureres!"
 
-#: applet.js:863
+#: applet.js:925
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: applet.js:863
+#: applet.js:925
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:870
+#: applet.js:932
 msgid "⚙ General"
 msgstr "⚙ Generelt"
 
-#: applet.js:880
+#: applet.js:942
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Temperatursensorer"
 
-#: applet.js:890
+#: applet.js:952
 msgid "🤂 Fan sensors"
 msgstr "🤂 Ventilatorsensorer"
 
-#: applet.js:900
+#: applet.js:962
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Spændingssensorer"
 
-#: applet.js:910
+#: applet.js:972
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Indtrængningssensorer"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:921
+#: applet.js:983
 msgid "Run xsensors"
 msgstr "Kør xsensors"
 
-#: applet.js:932
+#: applet.js:992
+#, fuzzy
+msgid "Suspend Sensors"
+msgstr "Kør xsensors"
+
+#: applet.js:1003
 msgid "Reload this applet"
 msgstr "Genindlæs panelprogrammet"
 
-#: applet.js:1224
+#: applet.js:1295
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Er du sikker på at du vil fjerne “%s”?"
 
-#: lib/checkDependencies.js:303
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Panelprogrammet %s er fuldt fungerende."
 
-#: lib/checkDependencies.js:304
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Alle afhængigheder er installeret"
 
-#: lib/checkDependencies.js:332
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -116,15 +126,15 @@ msgstr ""
 "Det lader til, nogle programmer mangler for at give panelprogrammet alle "
 "dets funktioner."
 
-#: lib/checkDependencies.js:333
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Udfør følgende kommandoer i terminalen, som lige åbnede:"
 
-#: lib/checkDependencies.js:334
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Nogle afhængigheder er ikke installeret!"
 
-#: lib/util.js:243
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Kørsel af “%s” mislykkedes:"
@@ -208,6 +218,10 @@ msgstr "⮿ Indtrængen"
 #. settings-schema.json->section_intrusionOptions->title
 msgid "Options"
 msgstr "Valgmuligheder"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr ""
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -305,8 +319,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr ""
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -330,25 +376,10 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Tegnstørrelse (% af standardstørrelse)"
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr "Standard"
-
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr "Hvid"
-
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr "Sort"
-
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr "Grå"
-
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
-msgstr "Lysegrå"
+#. settings-schema.json->char_color_customized->description
+#, fuzzy
+msgid "Customize Text Color"
+msgstr "Tekstfarve"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
@@ -380,6 +411,10 @@ msgstr "Fjern ikoner"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Om ikoner i panelet skal fjernes."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr ""
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -718,6 +753,7 @@ msgstr ""
 "Nulstil det viste navn ved at kopiere og indsætte sensornavnet."
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Eksempel på sensorværdier fra denne computer"
 

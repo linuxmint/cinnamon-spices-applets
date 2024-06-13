@@ -39,6 +39,15 @@
       "description": "Decimal places",
       "tooltip": "Number of decimal places to show"
    },
+   "select-gpu": {
+      "type": "combobox",
+      "default": "",
+      "description": "Select GPU (bus no.)",
+      "options": {
+         "Loading...": ""
+      },
+      "tooltip": "Use 'lshw -C display' for more info"
+   },
    "font-size": {
       "type": "spinbutton",
       "default": 100,

@@ -1,17 +1,16 @@
 import { OpenUrl } from "../lib/commandRunner";
-import { Config } from "../config";
-import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK, STYLE_HIDDEN } from "../consts";
-import { LocationStore } from "../location_services/locationstore";
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
-import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
-import { _, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
+import type { Config } from "../config";
+import { APPLET_ICON, SIGNAL_CLICKED, STYLE_HIDDEN } from "../consts";
+import type { LocationStore } from "../location_services/locationstore";
+import { Logger } from "../lib/services/logger";
+import type { WeatherApplet } from "../main";
+import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../weather-data";
+import { _, TempToUserConfig, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, Label } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { SunTimesUI } from "./uiSunTimes";
 import { WindBox } from "./windBox";
 
-const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
-const Lang: typeof imports.lang = imports.lang;
+const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 // stylesheet.css
@@ -22,7 +21,6 @@ const STYLE_ICON = 'weather-current-icon'
 const STYLE_ICONBOX = 'weather-current-iconbox'
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions'
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values'
-const STYLE_CURRENT = 'current'
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 
 export class CurrentWeather {
@@ -62,11 +60,9 @@ export class CurrentWeather {
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new BoxLayout({
-			x_expand: true,
-			y_expand: true,
 			style_class: STYLE_ICONBOX,
-			x_align: ActorAlign.CENTER,
-			y_align: ActorAlign.FILL
+			x_align: imports.gi.Clutter.ActorAlign.CENTER,
+			y_align: imports.gi.Clutter.ActorAlign.CENTER,
 		});
 
 		this.sunTimesUI = new SunTimesUI(app);
@@ -77,7 +73,7 @@ export class CurrentWeather {
 		this.app.config.PressureUnitChanged.Subscribe(this.app.AfterRefresh((config, pressure, data) => this.SetPressure(data.pressure)));
 	}
 
-	private OnLocationOverrideChanged = async (config: Config, label: string, data: WeatherData) => {
+	private OnLocationOverrideChanged = (config: Config, label: string, data: WeatherData) => {
 		const location = GenerateLocationText(data, config);
 		this.SetLocation(location, data.location.url);
 	}
@@ -105,12 +101,12 @@ export class CurrentWeather {
 			return true;
 		} catch (e) {
 			if (e instanceof Error)
-				Logger.Error("DisplayWeatherError: " + e, e);
+				Logger.Error("DisplayWeatherError: " + e.message, e);
 			return false;
 		}
 	};
 
-	public UpdateIconType(iconType: imports.gi.St.IconType) {
+	public UpdateIconType(iconType: imports.gi.St.IconType): void {
 		this.weatherIcon.icon_type = iconType;
 	}
 
@@ -132,19 +128,19 @@ export class CurrentWeather {
 
 		this.actor.add_actor(this.weatherIcon)
 		this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
-		this.actor.add_actor(this.BuildRightColumn(textColorStyle, config))
+		this.actor.add(this.BuildRightColumn(textColorStyle, config))
 	};
 
 	// Build helpers
 
 	private BuildMiddleColumn(config: Config, textColorStyle: string) {
-		this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
+		this.weatherSummary = Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
 		const middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
 		middleColumn.add(this.BuildLocationSection())
 		middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
 
-		this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
+		this.immediatePrecipitationLabel = Label({ style_class: "weather-immediate-precipitation" });
 		this.immediatePrecipitationBox = new BoxLayout({x_align: ActorAlign.CENTER});
 		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
 		this.immediatePrecipitationBox.hide();
@@ -156,43 +152,64 @@ export class CurrentWeather {
 
 	/** Builds Weather Information on the right side */
 	private BuildRightColumn(textColorStyle: string, config: Config) {
-		const textOb = {
-			text: ELLIPSIS
-		}
 		// Current Weather Right Column
-		this.temperatureLabel = new Label(textOb)
-		this.humidityLabel = new Label(textOb)
-		this.pressureLabel = new Label(textOb)
-		this.dewPointLabel = new Label({ text: '' });
+		this.temperatureLabel = Label();
+		this.humidityLabel = Label();
+		this.pressureLabel = Label();
+		this.dewPointLabel = Label();
 
-		this.apiUniqueLabel = new Label({ text: '' })
-		this.temperatureCaption = new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.humidityCaption = new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.pressureCaption = new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.apiUniqueLabel = Label();
+		this.temperatureCaption = Label({
+			text: _('Temperature') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
+		this.humidityCaption = Label({
+			text: _('Humidity') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
+		this.pressureCaption = Label({
+			text: _('Pressure') + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
+		this.dewPointCaption = Label({
+			text: _("Dew Point") + LocalizedColon(config.currentLocale),
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
 		// APi Unique Caption
-		this.apiUniqueCaption = new Label({ text: '', style: textColorStyle });
+		this.apiUniqueCaption = Label({
+			style: textColorStyle,
+			x_align: imports.gi.Clutter.ActorAlign.END,
+		});
 
 		const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
 
 		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES, x_expand: true, x_align: ActorAlign.FILL })
-		rb_captions.add_actor(this.temperatureCaption);
-		rb_captions.add_actor(this.humidityCaption);
-		rb_captions.add_actor(this.pressureCaption);
-		rb_captions.add_actor(windCaption);
-		rb_captions.add_actor(this.dewPointCaption);
-		rb_captions.add_actor(this.apiUniqueCaption);
-		rb_values.add_actor(this.temperatureLabel);
-		rb_values.add_actor(this.humidityLabel);
-		rb_values.add_actor(this.pressureLabel);
-		rb_values.add_actor(windLabel);
-		rb_values.add_actor(this.dewPointLabel);
-		rb_values.add_actor(this.apiUniqueLabel);
+		const rb_values = new BoxLayout({
+			vertical: true,
+			style_class: STYLE_DATABOX_VALUES,
+		})
+		rb_captions.add(this.temperatureCaption);
+		rb_captions.add(this.humidityCaption);
+		rb_captions.add(this.pressureCaption);
+		rb_captions.add(windCaption);
+		rb_captions.add(this.dewPointCaption);
+		rb_captions.add(this.apiUniqueCaption);
+		rb_values.add(this.temperatureLabel);
+		rb_values.add(this.humidityLabel);
+		rb_values.add(this.pressureLabel);
+		rb_values.add(windLabel);
+		rb_values.add(this.dewPointLabel);
+		rb_values.add(this.apiUniqueLabel);
 
-		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX, x_align: ActorAlign.FILL, x_expand: true });
-		rightColumn.add_actor(rb_captions);
-		rightColumn.add_actor(rb_values);
+		const rightColumn = new BoxLayout({
+			style_class: STYLE_DATABOX
+		});
+		rightColumn.add(rb_captions);
+		rightColumn.add(rb_values);
 		return rightColumn;
 	}
 
@@ -200,9 +217,12 @@ export class CurrentWeather {
 		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), x_expand: true, x_align: Align.MIDDLE });
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
-			if (this.app.encounteredError) this.app.RefreshWeather(true);
-			else if (this.locationButton.url == null) return;
-			else OpenUrl(this.locationButton);
+			if (this.app.encounteredError)
+				void this.app.Refresh({rebuild: true});
+			else if (this.locationButton.url == null)
+				return;
+			else
+				OpenUrl(this.locationButton);
 		});
 
 		this.nextLocationButton = new WeatherButton({
@@ -215,7 +235,7 @@ export class CurrentWeather {
 				style_class: STYLE_LOCATION_SELECTOR
 			}),
 		});
-		this.nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.NextLocationClicked));
+		this.nextLocationButton.actor.connect(SIGNAL_CLICKED, this.NextLocationClicked);
 
 		this.previousLocationButton = new WeatherButton({
 			reactive: true,
@@ -227,7 +247,7 @@ export class CurrentWeather {
 				style_class: STYLE_LOCATION_SELECTOR
 			}),
 		});
-		this.previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
+		this.previousLocationButton.actor.connect(SIGNAL_CLICKED, this.PreviousLocationClicked);
 
 		const box = new BoxLayout();
 		box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
@@ -250,12 +270,12 @@ export class CurrentWeather {
 		}
 		else if (precip.start == 0) {
 			if (precip.end != -1)
-				this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+				this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end.toString() });
 			else
 				this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
 		}
 		else {
-			this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+			this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start.toString() });
 		}
 	}
 
@@ -270,7 +290,7 @@ export class CurrentWeather {
 		let value: string | null = null;
 		switch (extra_field.type) {
 			case "percent":
-				value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
+				value = PercentToLocale(extra_field.value);
 				break;
 			case "temperature":
 				value = TempToUserConfig(extra_field.value, this.app.config);
@@ -333,7 +353,7 @@ export class CurrentWeather {
 			return;
 		}
 
-		this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+		this.humidityLabel.text = PercentToLocale(humidity);
 		this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
 		this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
@@ -360,14 +380,14 @@ export class CurrentWeather {
 
 	// Callbacks
 
-	private NextLocationClicked() {
+	private NextLocationClicked = () => {
 		const loc = this.app.config.SwitchToNextLocation();
-		this.app.Refresh(loc);
+		void this.app.Refresh({location: loc ?? undefined});
 	}
 
-	private PreviousLocationClicked() {
+	private PreviousLocationClicked = () => {
 		const loc = this.app.config.SwitchToPreviousLocation();
-		this.app.Refresh(loc);
+		void this.app.Refresh({location: loc ?? undefined});
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {

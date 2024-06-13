@@ -4,6 +4,7 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;  // Needed for settings API
 const Soup = imports.gi.Soup;
 const PopupMenu = imports.ui.popupMenu;
+const ByteArray = imports.byteArray;
 
 // eslint-disable-next-line no-unused-vars
 function ConfirmDialog() {
@@ -167,22 +168,38 @@ MyApplet.prototype = {
     },
     loadWorkflowAsync(callback) {
         if (!this.httpSession) {
-            this.httpSession = new Soup.SessionAsync();
-            Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
+            if (Soup.MAJOR_VERSION === 2) {
+                this.httpSession = new Soup.SessionAsync();
+                Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());    
+            } else {
+                this.httpSession = new Soup.Session();
+            }
         }
 
         let message = Soup.Message.new('GET', this.url);
-        this.httpSession.queue_message(message, function soupQueue(_, msg) {
-            if (msg && msg.response_body.data) {
-                try {
-                    callback.call(this, JSON.parse(msg.response_body.data));
-                } catch (err) {
+
+        if (Soup.MAJOR_VERSION === 2) {
+            this.httpSession.queue_message(message, function soupQueue(_, msg) {
+                if (msg && msg.response_body.data) {
+                    try {
+                        callback.call(this, JSON.parse(msg.response_body.data));
+                    } catch (err) {
+                        this.set_applet_label('!');
+                    }
+                } else if ((msg && msg.status_code !== 503) || !msg) {
                     this.set_applet_label('!');
                 }
-            } else if ((msg && msg.status_code !== 503) || !msg) {
-                this.set_applet_label('!');
-            }
-        }.bind(this));
+            }.bind(this));
+        } else {
+            this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, result) => {
+                try {
+                    const bytes = this.httpSession.send_and_read_finish(result);
+                    callback.call(this, JSON.parse(ByteArray.toString(bytes.get_data())));
+                } catch (err) {
+                    this.set_applet_label("!");
+                }
+            });
+        }
     },
 };
 

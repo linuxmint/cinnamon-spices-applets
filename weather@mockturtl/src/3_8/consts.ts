@@ -1,4 +1,5 @@
-import { type DistanceUnits, type WeatherWindSpeedUnits } from "./config";
+import type { DistanceUnits, WeatherWindSpeedUnits } from "./config";
+import type { AlertLevel } from "./weather-data";
 
 export const UUID = "weather@mockturtl"
 
@@ -26,6 +27,10 @@ export const FORWARD_SLASH = '\u002F';
 export const STYLE_HIDDEN = "weather-hidden";
 
 export type LogLevel = "info" | "debug" | "verbose" | "critical" | "error" | "always";
+
+export const REQUEST_TIMEOUT_SECONDS = 30;
+
+export const ALERT_LEVEL_ORDER: AlertLevel[] = ["extreme", "severe", "moderate", "minor", "unknown"];
 
 const US_TIMEZONES: string[] = [
     "America/Adak",

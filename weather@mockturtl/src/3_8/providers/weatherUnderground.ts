@@ -1,9 +1,11 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
-import { Services } from "../config";
-import { ErrorResponse, HttpError } from "../lib/httpLib";
-import { Logger } from "../lib/logger";
-import { Condition, ForecastData, LocationData, WeatherData } from "../types";
+import type { Services } from "../config";
+import type { ErrorResponse} from "../lib/httpLib";
+import { HttpLib } from "../lib/httpLib";
+import { Logger } from "../lib/services/logger";
+import type { Condition, ForecastData, WeatherData } from "../weather-data";
+import type { LocationData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
@@ -41,30 +43,34 @@ export class WeatherUnderground extends BaseProvider {
             return unitTypeMap[this.app.config.countryCode.toLowerCase()] ?? "m";
     }
 
-    public GetWeather = async (loc: LocationData): Promise<WeatherData | null> => {
+    public GetWeather = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> => {
         const locString = `${loc.lat},${loc.lon}`;
-        const location = this.locationCache[locString] ?? (await this.GetNearbyStations(loc));
+        const location = this.locationCache[locString] ?? (await this.GetNearbyStations(loc, cancellable));
         if (location == null) {
             // TODO: handle error
             return null;
         }
         this.locationCache[locString] = location;
 
-        const forecast = await this.app.LoadJsonAsync<ForecastPayload>(`${this.baseURl}v3/wx/forecast/daily/5day`, {
-            geocode: locString,
-            language: this.app.config.currentLocale ?? "en-US",
-            format: "json",
-            apiKey: this.app.config.ApiKey,
-            units: this.currentUnit,
-        });
+        const forecast = await HttpLib.Instance.LoadJsonSimple<ForecastPayload>({
+			url: `${this.baseURl}v3/wx/forecast/daily/5day`,
+			cancellable,
+			params: {
+				geocode: locString,
+				language: this.app.config.currentLocale ?? "en-US",
+				format: "json",
+				apiKey: this.app.config.ApiKey,
+				units: this.currentUnit,
+			}
+		});
 
         if (forecast == null)
             return null;
 
-        const observation = await this.GetObservations(location, forecast, loc);
+        const observation = await this.GetObservations(location, forecast, loc, cancellable);
 
         return {
-            date: observation.date!,
+            date: observation.date,
             temperature: observation.temperature ?? null,
             coord: {
                 lat: loc.lat,
@@ -73,7 +79,8 @@ export class WeatherUnderground extends BaseProvider {
             location: {
                 city: loc.city ?? observation.location.city,
                 country: loc.country ?? observation.location.country,
-                url: observation.location.url
+                url: observation.location.url,
+				timeZone: loc.timeZone,
             },
             condition: observation.condition ?? {
                 description: "unknown",
@@ -100,11 +107,13 @@ export class WeatherUnderground extends BaseProvider {
         const result: ForecastData[] = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [ forecast.daypart[0].iconCode[index * 2],  forecast.daypart[0].iconCode[index * 2 + 1]];
+			const tempMax = forecast.temperatureMax[index];
+			const tempmin = forecast.temperatureMin[index];
             const data: ForecastData = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition(icons[0] ?? icons[1]!),
-                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]!),
-                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
             }
             if (!this.app.config._shortConditions)
                 data.condition.description = forecast.narrative[index];
@@ -113,14 +122,19 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetNearbyStations = async (loc: LocationData): Promise<NearbyStation[] | null> => {
+    private GetNearbyStations = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<NearbyStation[] | null> => {
         const result: NearbyStation[] = [];
-        const payload = await this.app.LoadJsonAsync<NearObservationPayload>(`${this.baseURl}v3/location/near`, {
-            geocode: `${loc.lat},${loc.lon}`,
-            format: "json",
-            apiKey: this.app.config.ApiKey,
-            product: "pws"
-        }, this.HandleErrors);
+        const payload = await HttpLib.Instance.LoadJsonSimple<NearObservationPayload>({
+			url: `${this.baseURl}v3/location/near`,
+			cancellable,
+			params: {
+				geocode: `${loc.lat},${loc.lon}`,
+				format: "json",
+				apiKey: this.app.config.ApiKey,
+				product: "pws"
+			},
+			HandleError: this.HandleErrors
+		});
 
         if (payload == null)
             return null;
@@ -142,11 +156,14 @@ export class WeatherUnderground extends BaseProvider {
         if (result.length == 0)
             return null;
 
+		// sort ascending by distanceKm
+		result.sort((a, b) => a.distanceKm - b.distanceKm);
+
         return result;
     }
 
-    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData): Promise<ObservationInternalData> => {
-        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationData[];
+    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationInternalData> => {
+        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable)))).filter(v => v != null) as ObservationData[];
         const tz = loc.timeZone;
 
         const result: ObservationInternalData = {
@@ -154,10 +171,12 @@ export class WeatherUnderground extends BaseProvider {
                 speed: null,
                 degree: null,
             },
-            location: {},
+            location: {
+				timeZone: tz,
+			},
             sunrise: null,
             sunset: null,
-            date: null as any,
+            date: null as never,
         };
 
         for (const observations of observationData) {
@@ -198,9 +217,6 @@ export class WeatherUnderground extends BaseProvider {
                     distanceFrom: station.distanceKm * 1000,
                 };
             }
-            if (result.immediatePrecipitation == null) {
-
-            }
         }
 
         // Need to find the first non-null foreacast to substitute
@@ -230,21 +246,26 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservation = async (stationID: string): Promise<ObservationData | null> => {
-        const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
-            format: "json",
-            stationId: stationID,
-            apiKey: this.app.config.ApiKey,
-            units: "s",
-            numericPrecision: "decimal",
-        }, this.HandleErrors);
+    private GetObservation = async (stationID: string, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationData | null> => {
+        const observationString = await HttpLib.Instance.LoadAsyncSimple({
+			url: `${this.baseURl}v2/pws/observations/current`,
+			cancellable,
+			params: {
+				format: "json",
+				stationId: stationID,
+				apiKey: this.app.config.ApiKey,
+				units: "s",
+				numericPrecision: "decimal",
+			},
+			HandleError: this.HandleErrors
+		});
 
         let observation: ObservationPayload | null = null;
         if (observationString != null) {
             try {
-                observation = JSON.parse(observationString);
+                observation = JSON.parse(observationString) as ObservationPayload;
             }
-            catch(e) {
+            catch {
                 Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
             }
         }
@@ -628,51 +649,6 @@ export class WeatherUnderground extends BaseProvider {
     }
 }
 
-
-interface LocationPayload {
-    location: {
-        latitude: number;
-        longitude: number;
-        city: string;
-        locale: {
-            locale1: string | null;
-            locale2: string | null;
-            locale3: string | null;
-            locale4: string | null;
-        },
-        neighborhood: string | null,
-        adminDistrict: string | null,
-        adminDistrictCode: string | null,
-        postalCode: string | null,
-        postalKey: string | null,
-        country: string,
-        countryCode: string,
-        ianaTimeZone: string,
-        displayName: string,
-        /** ISO DateTime */
-        dstEnd: string | null,
-        /** ISO DateTime */
-        dstStart: string | null,
-        dmaCd: string | null,
-        placeId: string | null,
-        disputedArea: boolean,
-        disputedCountries: string[] | null,
-        disputedCountryCodes: string[] | null,
-        disputedCustomers: string[] | null,
-        disputedShowCountry: boolean[],
-        canonicalCityId: string,
-        countyId: string | null,
-        locId: string,
-        locationCategory: string | null,
-        pollenId: string | null,
-        pwsId: string | null,
-        regionalSatellite: string,
-        tideId: string | null,
-        type: string,
-        zoneId: string,
-    }
-}
-
 interface NearObservationPayload {
     location: {
         stationName: string[];
@@ -865,7 +841,7 @@ interface DayPartData {
      * - 8 to 10 = Very High,
      * - 11 to 16 = Extreme
  */
-    uvDescription: ("High" | "Low" | "Moderate" | "Not Available" | "Not Available" | "Very High" | "Extreme" | null)[];
+    uvDescription: ("High" | "Low" | "Moderate" | "Not Available" | "Very High" | "Extreme" | null)[];
     /** Maximum UV index for the 12 hour forecast period. */
     uvIndex: (number | null)[];
     /** Average wind direction in magnetic notation. */

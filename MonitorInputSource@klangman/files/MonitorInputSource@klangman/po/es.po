@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 18:39-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
 "PO-Revision-Date: 2023-12-17 21:15-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,11 +46,11 @@ msgstr "Clic hacia atrás"
 msgid "Forward Click"
 msgstr "Clic hacia adelante"
 
-#: applet.js:158 applet.js:373 applet.js:375
+#: applet.js:158 applet.js:390 applet.js:392
 msgid "Monitor input sources"
 msgstr "Fuentes de entrada del monitor"
 
-#: applet.js:170 applet.js:464
+#: applet.js:170 applet.js:217 applet.js:480
 msgid "Detecting monitors..."
 msgstr "Detectando monitores..."
 
@@ -69,23 +70,23 @@ msgstr "Borrar acciones rápidas"
 msgid "Help"
 msgstr "Ayuda"
 
-#: applet.js:321
+#: applet.js:339
 msgid "Required \"ddcutil\" not found"
 msgstr "Se requiere \"ddcutil\", no está instalado"
 
-#: applet.js:325
+#: applet.js:343
 msgid "Error, \"ddcutil\" exit code "
 msgstr "Error, código de salida de \"ddcutil\" "
 
-#: applet.js:329
+#: applet.js:347
 msgid "No capable monitors detected"
 msgstr "No se detectaron monitores compatibles"
 
-#: applet.js:369
+#: applet.js:386
 msgid "for"
 msgstr "para"
 
-#: applet.js:456
+#: applet.js:473
 msgid "Refresh"
 msgstr "Actualizar"
 

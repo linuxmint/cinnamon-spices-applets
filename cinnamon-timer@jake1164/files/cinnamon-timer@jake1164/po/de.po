@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-24 11:51+0100\n"
-"PO-Revision-Date: 2023-12-24 11:54+0100\n"
+"PO-Revision-Date: 2024-04-01 09:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -102,7 +102,7 @@ msgstr ""
 #. 2.6->settings-schema.json->confirm-prompt-enable->tooltip
 msgid "Check this to place a prompt on the window when time has elapsed"
 msgstr ""
-"Ein Fenster mit Eingabeaufforderung anzuzeigen, wenn die Zeit abgelaufen ist"
+"Ein Fenster mit Eingabeaufforderung anzeigen, wenn die Zeit abgelaufen ist"
 
 #. 3.4->settings-schema.json->message-prompt-enable->description
 #. 3.4->settings-schema.json->message-prompt-enable->tooltip
@@ -118,7 +118,7 @@ msgid ""
 "time."
 msgstr ""
 "Globale Nachricht, die im Benachrichtigungsfenster angezeigt wird, sofern "
-"nicht bei der Vorgabezeit definiert."
+"nicht bei einer Zeitvorgabe definiert."
 
 #. 3.4->settings-schema.json->sound-prompt-enable->description
 #. 3.4->settings-schema.json->sound-prompt-enable->tooltip
@@ -140,7 +140,7 @@ msgstr "Sox muss installiert sein. Die meisten Soundformate werden unterstützt"
 #. 3.4->settings-schema.json->sound-volume->description
 #. 3.4->settings-schema.json->sound-volume->tooltip
 msgid "Specify the playback volume"
-msgstr "Legen Sie die Wiedergabelautstärke fest"
+msgstr "Wiedergabelautstärke festlegen"
 
 #. 3.4->settings-schema.json->display-menu-enable->description
 #. 3.4->settings-schema.json->display-menu-enable->tooltip
@@ -159,11 +159,11 @@ msgstr "Verbleibende Zeit im Panel anzeigen"
 #. 3.4->settings-schema.json->alarmtime-display-enable->description
 #. 3.4->settings-schema.json->alarmtime-display-enable->tooltip
 msgid "Display alarm time in panel"
-msgstr "Alarm im Zeitpanel anzeigen"
+msgstr "Alarmzeit im Panel anzeigen"
 
 #. 3.4->settings-schema.json->alarmtime-format-small->description
 msgid "Format used to display alarm time in the near future"
-msgstr "Format zur Anzeige der Alarmzeit in naher Zukunft"
+msgstr "Zeitformat bei bevorstehendem Alarm"
 
 #. 3.4->settings-schema.json->alarmtime-format-small->tooltip
 msgid ""
@@ -172,16 +172,15 @@ msgid ""
 "(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
 "format)"
 msgstr ""
-"Wenn die verbleibende Alarmzeit weniger als die unten angegebenen Minuten "
-"beträgt,\n"
+"Wenn die Zeit bis zum Alarm unter dem untenstehenden Schwellenwert in "
+"Minuten liegt,\n"
 "kann die Alarmzeit mit mehr Details angezeigt werden\n"
 "(Siehe https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
 "time-format)"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 msgid "Format used to display alarm time in the not so near future"
-msgstr ""
-"Format für die Format zur Anzeige der Alarmzeit in nicht so naher Zukunft"
+msgstr "Zeitformat bei weiter entferntem Alarm"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->tooltip
 msgid ""
@@ -190,8 +189,8 @@ msgid ""
 "(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
 "format)"
 msgstr ""
-"Wenn die verbleibende Alarmzeit mehr als die unten angegebenen Minuten "
-"beträgt,\n"
+"Wenn die Zeit bis zum Alarm über dem untenstehenden Schwellenwert in Minuten "
+"liegt,\n"
 "kann die Alarmzeit mit weniger Details angezeigt werden\n"
 "(Siehe https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
 "time-format)"
@@ -204,11 +203,13 @@ msgstr "Minuten"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->description
 msgid "Time when switching from small to large time format"
-msgstr "Zeit, wenn von kurzem auf langes Format umgeschaltet wird"
+msgstr "Schwellenwert für die Umschaltung von kurzem auf langes Zeitformat"
 
 #. 3.4->settings-schema.json->alarmtime-format-switchover->tooltip
 msgid "Switch over time between the two formats specified above"
-msgstr "Umschaltzeitpunkt zwischen den beiden oben spezifizierten Formaten"
+msgstr ""
+"Zeitpunkt in Minuten an dem zwischen den beiden oben angegebenen "
+"Zeitformaten umgeschaltet wird"
 
 #. 3.4->settings-schema.json->auto-loop-enable->description
 #. 3.4->settings-schema.json->auto-loop-enable->tooltip

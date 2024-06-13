@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 19:02-0300\n"
-"PO-Revision-Date: 2021-12-26 19:19-0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-20 18:33+0200\n"
+"PO-Revision-Date: 2024-05-20 12:48-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,47 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
-#: 3.2/applet.js:73 applet.js:73
+#: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
 msgid "Type to search..."
 msgstr "Escriba para buscar..."
 
-#: applet.js:84
+#: applet.js:90
 msgid "Change default programs..."
 msgstr "Cambiar programas predeterminados ..."
 
-#: applet.js:86
+#: applet.js:92
 msgid "Edit providers"
 msgstr "Editar motor de búsqueda"
 
-#. 3.2->settings-schema.json->custom-provider-label->description
-msgid "Name of custom provider"
-msgstr "Nombre del motor de búsqueda personalizado"
+#: 5.4/applet.js:61
+msgid "Right-click to select or add your search engine"
+msgstr ""
+"Haga clic con el botón derecho para seleccionar o añadir su motor de búsqueda"
 
-#. 3.2->settings-schema.json->custom-provider-label->tooltip
-msgid "Enter label of the custom provider to show in the panel."
-msgstr "Introduzca la etiqueta del motor de búsqueda personalizado que se mostrará en el panel."
+#: 5.4/applet.js:104
+msgid "Select your Search Engine:"
+msgstr "Seleccione su motor de búsqueda:"
+
+#. metadata.json->name
+msgid "Internet Search Box"
+msgstr "Cuadro de búsqueda en Internet"
+
+#. metadata.json->description
+msgid "Perform an Internet search, using your favorite engine"
+msgstr "Realice una búsqueda en Internet, utilizando su motor favorito"
+
+#. 3.2->settings-schema.json->header-provider->description
+#. 5.4->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Configuración del motor de búsqueda"
+
+#. 3.2->settings-schema.json->show-provider->description
+#. 5.4->settings-schema.json->show-provider->description
+msgid "Show provider"
+msgstr "Mostrar el motor de búsqueda"
+
+#. 3.2->settings-schema.json->show-provider->tooltip
+#. 5.4->settings-schema.json->show-provider->tooltip
+msgid "Show selected provider in the panel"
+msgstr "Mostrar el motor de búsqueda seleccionado en el panel"
 
 #. 3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"
 msgstr "Seleccione el motor de búsqueda"
-
-#. 3.2->settings-schema.json->selected-provider->tooltip
-msgid "Select a search provider"
-msgstr "Seleccione un motor de búsqueda"
-
-#. 3.2->settings-schema.json->selected-provider->options
-msgid "Bing"
-msgstr "Bing"
 
 #. 3.2->settings-schema.json->selected-provider->options
 msgid "Google"
 msgstr "Google"
 
 #. 3.2->settings-schema.json->selected-provider->options
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
+msgid "Bing"
+msgstr "Bing"
 
 #. 3.2->settings-schema.json->selected-provider->options
 msgid "Yahoo"
@@ -66,21 +83,13 @@ msgstr "Yahoo"
 msgid "Ask "
 msgstr "Ask "
 
-#. 3.2->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Configuración del motor de búsqueda"
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
 
-#. 3.2->settings-schema.json->custom-keybinding->description
-msgid "Keybinding, which opens the search box"
-msgstr "Combinación de teclas que abre el cuadro de búsqueda"
-
-#. 3.2->settings-schema.json->custom-provider-url->description
-msgid "URL of custom provider"
-msgstr "URL del motor de búsqueda personalizado"
-
-#. 3.2->settings-schema.json->custom-provider-url->tooltip
-msgid "Enter the URL of the custom search provider"
-msgstr "Introduzca la URL del motor de búsqueda personalizado"
+#. 3.2->settings-schema.json->selected-provider->tooltip
+msgid "Select a search provider"
+msgstr "Seleccione un motor de búsqueda"
 
 #. 3.2->settings-schema.json->use-custom-provider->description
 msgid "Use custom provider"
@@ -90,22 +99,76 @@ msgstr "Utilizar un motor de búsqueda personalizado"
 msgid "Use your own search provider"
 msgstr "Utilice su propio motor de búsqueda"
 
+#. 3.2->settings-schema.json->custom-provider-label->description
+msgid "Name of custom provider"
+msgstr "Nombre del motor de búsqueda personalizado"
+
+#. 3.2->settings-schema.json->custom-provider-label->tooltip
+msgid "Enter label of the custom provider to show in the panel."
+msgstr ""
+"Introduzca la etiqueta del motor de búsqueda personalizado que se mostrará "
+"en el panel."
+
+#. 3.2->settings-schema.json->custom-provider-url->description
+msgid "URL of custom provider"
+msgstr "URL del motor de búsqueda personalizado"
+
+#. 3.2->settings-schema.json->custom-provider-url->tooltip
+msgid "Enter the URL of the custom search provider"
+msgstr "Introduzca la URL del motor de búsqueda personalizado"
+
 #. 3.2->settings-schema.json->header-keybinding->description
+#. 5.4->settings-schema.json->header-keybinding->description
 msgid "Keybinding"
 msgstr "Combinación de teclas"
 
-#. 3.2->settings-schema.json->show-provider->description
-msgid "Show provider"
-msgstr "Mostrar el motor de búsqueda"
+#. 3.2->settings-schema.json->custom-keybinding->description
+#. 5.4->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Combinación de teclas que abre el cuadro de búsqueda"
 
-#. 3.2->settings-schema.json->show-provider->tooltip
-msgid "Show selected provider in the panel"
-msgstr "Mostrar el motor de búsqueda seleccionado en el panel"
+#. 5.4->settings-schema.json->reset-after-search->description
+msgid "Reset query after search"
+msgstr "Restablecer la consulta tras la búsqueda"
 
-#. search-box@mtwebster->metadata.json->description
-msgid "Perform an Internet search, using your favorite engine"
-msgstr "Realice una búsqueda en Internet, utilizando su motor favorito"
+#. 5.4->settings-schema.json->reset-after-search->tooltip
+msgid ""
+"Reset query after search? This may not be useful if you want to be able to "
+"perform the same query on other search engines afterwards."
+msgstr ""
+"¿Restablecer la consulta después de la búsqueda?. Esto puede no ser útil si "
+"desea poder realizar la misma consulta en otros motores de búsqueda después."
 
-#. search-box@mtwebster->metadata.json->name
-msgid "Internet Search Box"
-msgstr "Cuadro de búsqueda en Internet"
+#. 5.4->settings-schema.json->providers->description
+msgid "Providers"
+msgstr "Proveedores"
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Show"
+msgstr "Mostrar"
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Name"
+msgstr "Nombre"
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid ""
+"Short name\n"
+"(3 lower-case letters)"
+msgstr ""
+"Nombre corto\n"
+"(3 letras minúsculas)"
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr "URL de consulta"
+
+#. 5.4->settings-schema.json->providers->tooltip
+msgid ""
+"If your query begins with the 3 letters of the short name, it will be "
+"processed by the relevant search engine.\n"
+"Example: ddg linux mint iso"
+msgstr ""
+"Si su consulta comienza con las 3 letras del nombre abreviado, será "
+"procesada por el motor de búsqueda correspondiente.\n"
+"Ejemplo: ddg linux mint iso"

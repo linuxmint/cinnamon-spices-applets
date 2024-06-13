@@ -28,20 +28,22 @@ You can also save locations what you entered manually and switch between them in
 
 ### Weather providers to choose from
 
-| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Other information             |
-| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ----------------------------- |
-| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Default provider              |
-| **MET Norway**             | No            | 10                    | 48                     | Depends            | --                            |
-| **DMI Denmark**            | No            | 10                    | 48                     | No                 | --                            |
-| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | --                            |
-| **Met Office UK**          | No            | 5                     | 36                     | No                 | --                            |
-| **US National Weather**    | No            | 7                     | 156                    | No                 | --                            |
-| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | --                            |
-| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | --                            |
-| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Previously known as Climacell |
-| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | Limited free calls            |
-| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | --                            |
-| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                |                               |
+| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts  | Other information             |
+| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------- | ----------------------------- |
+| **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | --                            |
+| **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
+| **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
+| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
+| **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
+| **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
+| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | Default provider              |
+| **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | -                             |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
+| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
+| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Depends | Previously known as Climacell |
+| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No*     | Limited free calls            |
+| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
+| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
 
 ### OpenWeatherMap
 
@@ -56,6 +58,8 @@ Free meteorological data and forecasts from the Norwegian Meteorological Institu
 * Nowcast (Immediate precipitation and granular observations) is not available outside Norway. In that case, observations are shown for the next hour.
 
 * Daily forecasts are generated from 6 hour forecasts (for every hour), so there is a possibility that they are inaccurate sometimes.
+
+* Alerts are only available in Norway
 
 ### DMI Denmark
 
@@ -89,15 +93,27 @@ The National Weather Service in the USA is a federal government agency formed in
 
 * Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
 
+### Open-Meteo
+
+[Open-Meteo](https://open-meteo.com/) is an open-source weather API and offers free access for non-commercial use. No API key required.
+
+### OpenWeatherMap OneCall
+
+Version of OpenWeatherMap that supports more features (as before), but needs an API key. You can register for an API key [here](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base). After that change your Call limit from 2000 to 1000 to make sure you are not charged.
+
+* Provides 1000 Free calls a day
+
 ### Weatherbit.io
 
 Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Weatherbit.io Website](https://www.weatherbit.io). Read more about the service [here](https://www.weatherbit.io/about).
 
 * To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
-* At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota, the Free API subscription is limited to 500 calls per day.
+* At least 1 hour refresh rate is recommended, otherwise you might exceed you daily quota. The Free API subscription is limited to 50 calls per day.
 
 * **Hourly Weather forecast requires a non-free account
+
+* *Using alerts will increase call usage by 33%.
 
 ### Visual Crossing
 
@@ -115,6 +131,8 @@ Meteorological data from American weather technology company with headquarters i
 
 * API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
 
+* Alerts are available in the US and Canada. Seems to have repeated alerts.
+
 ### AccuWeather
 
 Online Service from company AccuWeather Inc, founded in 1962 with headquarters in the US, provides a global weather source. [AccuWeather Website](https://www.accuweather.com/). Read more about the company [here](https://en.wikipedia.org/wiki/AccuWeather)
@@ -124,6 +142,8 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 * ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
 
 * API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
+
+* *Alerts are not provided in the Free or Standard plan as of May 2024 so it's not worth supporting in the applet.
 
 ### Weather Underground
 
@@ -139,6 +159,8 @@ Weather Underground is a privately owned, web-based weather information company.
 Direct replacement to DarkSky. Run by one guy, it's also open source. If you like the accuracy of the data or you want to keep the project going, subscribe to a paid plan. 10000 calls free. You can get an API key [here](https://pirate-weather.apiable.io/products/weather-data).
 
 You can read about the project [here](http://pirateweather.net/en/latest/).
+
+Alerts are an US only feature as of May 2024.
 
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 
@@ -163,6 +185,18 @@ The setting allows you to make the applet display basically anything in the form
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
 | `{last_updated}`  | Formatted last updated time                               |
 
+## Run script when the weather data changes
+
+"Run a script when the weather info changes" field will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get `{full_data}` which is the full current weather data. Interpolation with single brackets `{xxx}` will not be escaped, with double brackets `{{xxxx}}` they are wrapped in single quotes `'` and all other single quotes are escaped inside. You can use this to integrate the weather data with other parts of your system.
+
+### Examples
+
+* `notify-send "The weather is {c} and the temperature is {t}{u}\"` will show a notification with the current weather condition and temperature.
+
+* `echo {{full_data}} > /tmp/weather_data` will save the full weather data to a file in `/tmp`.
+
+[Weather data structure you receive](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/src/3_8/weather-data.ts)
+
 ## Future Plans
 
 * Add special formatting options (like padded temperature) for values in panel in the "Override label on panel" setting 
@@ -184,7 +218,9 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
 
-* DarkSky verbose conditions are only in cm/Celsius or in/Fahrenheit
+* On subsequent refreshes/relogins the popup menu's element's may lose all padding.
+
+* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed. 
 
 ### Report a new issue
 

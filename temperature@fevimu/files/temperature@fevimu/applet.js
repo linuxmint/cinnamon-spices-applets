@@ -58,6 +58,7 @@ CPUTemperatureApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
     this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, "keep_size", "keep_size", null, null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -178,6 +179,10 @@ CPUTemperatureApplet.prototype = {
     if (!this.isLooping) {
       return false;
     }
+
+    let _monospace = (this.keep_size) ? "temp-monospace" : "applet-box";
+    this.actor.set_style_class_name("%s".format(_monospace));
+
 
     if (this.sensorsPath && !this.waitForCmd) {
       this.waitForCmd = true;

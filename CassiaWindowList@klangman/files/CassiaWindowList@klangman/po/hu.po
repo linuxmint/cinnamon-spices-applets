@@ -6,59 +6,45 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Project-Id-Version: \n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"Report-Msgid-Bugs-To: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-18 22:14-0400\n"
-"POT-Creation-Date: 2023-12-03 13:17-0500\n"
-"POT-Creation-Date: 2023-12-12 10:09-0500\n"
-"PO-Revision-Date: 2023-12-16 16:29+0100\n"
-"PO-Revision-Date: 2023-12-14 09:20+0100\n"
-"PO-Revision-Date: 2023-12-16 16:26+0100\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Last-Translator: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language-Team: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-04 23:25-0400\n"
+"PO-Revision-Date: 2024-02-08 15:00+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
-"Language: hu\n"
-"Language: hu\n"
-"MIME-Version: 1.0\n"
-"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
-"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:2192
+#: 4.0/applet.js:550 6.0/applet.js:550
+msgid "all buttons"
+msgstr "minden gomb"
+
+#: 4.0/applet.js:2767 6.0/applet.js:2767
 msgid "Applet Preferences"
 msgstr "Kisalkalmazás beállítások"
 
-#: 4.0/applet.js:2196
+#: 4.0/applet.js:2771 6.0/applet.js:2771
 msgid "About..."
 msgstr "Névjegy…"
 
-#: 4.0/applet.js:2200
+#: 4.0/applet.js:2775 6.0/applet.js:2775
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: 4.0/applet.js:2204
+#: 4.0/applet.js:2779 6.0/applet.js:2779
+msgid "Website"
+msgstr "Weboldal"
+
+#: 4.0/applet.js:2783 6.0/applet.js:2783
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#: 4.0/applet.js:2206
+#: 4.0/applet.js:2785 6.0/applet.js:2785
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
 
@@ -68,107 +54,134 @@ msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példány
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2215
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:2794 6.0/applet.js:2794
 msgid "Open new window"
 msgstr "Új ablak megnyitása"
 
-#: 4.0/applet.js:2223
+#: 4.0/applet.js:2802 6.0/applet.js:2802
 msgid "Remove from panel"
 msgstr "Eltávolítás a panelról"
 
-#: 4.0/applet.js:2225
+#: 4.0/applet.js:2804 6.0/applet.js:2804
 msgid "Remove from this workspace"
 msgstr "Eltávolítás erről a munkaterületről"
 
-#: 4.0/applet.js:2231
+#: 4.0/applet.js:2810 6.0/applet.js:2810
 msgid "Pin to panel"
 msgstr "Panelhez rögzítés"
 
-#: 4.0/applet.js:2233
+#: 4.0/applet.js:2812 6.0/applet.js:2812
 msgid "Pin to this workspace"
 msgstr "Erre a munkaterületre rögzítés"
 
-#: 4.0/applet.js:2274
+#: 4.0/applet.js:2853 6.0/applet.js:2853
 msgid "Pin to other workspaces"
 msgstr "Más munkaterületre rögzítés"
 
-#: 4.0/applet.js:2295
+#: 4.0/applet.js:2874 6.0/applet.js:2874
 msgid "Pin to all workspaces"
 msgstr "Az összes munkaterületre rögzítés"
 
-#: 4.0/applet.js:2313
+#: 4.0/applet.js:2892 6.0/applet.js:2892
 msgid "Pin to launcher"
 msgstr "Alkalmazásindítóhoz rögzítés"
 
-#: 4.0/applet.js:2331 4.0/applet.js:2514
+#: 4.0/applet.js:2910 4.0/applet.js:3102 6.0/applet.js:2910 6.0/applet.js:3102
 msgid "Add new Hotkey for"
 msgstr "Új gyorsbillentyű hozzáadása ehhez"
 
-#: 4.0/applet.js:2345
+#: 4.0/applet.js:2924 6.0/applet.js:2924
 msgid "Recent files"
 msgstr "Nemrég használt fájlok"
 
-#: 4.0/applet.js:2369
+#: 4.0/applet.js:2948 6.0/applet.js:2948
 msgid "Places"
 msgstr "Helyek"
 
-#: 4.0/applet.js:2411
+#: 4.0/applet.js:2990 6.0/applet.js:2990
 msgid "Only on this workspace"
 msgstr "Csak ezen a munkaterületen"
 
-#: 4.0/applet.js:2413
+#: 4.0/applet.js:2992 6.0/applet.js:2992
 msgid "Visible on all workspaces"
 msgstr "Minden munkaterületen látható"
 
-#: 4.0/applet.js:2414
+#: 4.0/applet.js:2993 6.0/applet.js:2993
 msgid "Move to another workspace"
 msgstr "Áthelyezés másik munkaterületre"
 
-#: 4.0/applet.js:2433
+#: 4.0/applet.js:3002 6.0/applet.js:3002
+msgid " (this workspace)"
+msgstr "(ez a munkaterület)"
+
+#: 4.0/applet.js:3015 6.0/applet.js:3015
 msgid "Move to another monitor"
 msgstr "Áthelyezés a másik kijelzőre"
 
-#: 4.0/applet.js:2441
+#: 4.0/applet.js:3023 6.0/applet.js:3023
 msgid "Monitor"
 msgstr "Kijelző"
 
-#: 4.0/applet.js:2469
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:3040 6.0/applet.js:3040
+#, fuzzy
+msgid "Move window here"
+msgstr "Ablak bezárása"
+
+#: 4.0/applet.js:3057 6.0/applet.js:3057
 msgid "unassigned"
 msgstr "nincs társítva"
 
-#: 4.0/applet.js:2480 4.0/applet.js:2511
+#: 4.0/applet.js:3068 4.0/applet.js:3099 6.0/applet.js:3068 6.0/applet.js:3099
 msgid "Assign window to a hotkey"
 msgstr "Az ablak hozzárendelése egy gyorsbillentyűhöz"
 
-#: 4.0/applet.js:2534
+#: 4.0/applet.js:3122 6.0/applet.js:3122
 msgid "Change application label contents"
 msgstr "Az alkalmazáscímke tartalmának módosítása"
 
-#: 4.0/applet.js:2537
+#: 4.0/applet.js:3125 6.0/applet.js:3125
 msgid "Remove custom setting"
 msgstr "Egyéni beállítás eltávolítása"
 
-#: 4.0/applet.js:2544
+#: 4.0/applet.js:3132 6.0/applet.js:3132
 msgid "Use window title"
 msgstr "Ablakcím használata"
 
-#: 4.0/applet.js:2551
+#: 4.0/applet.js:3139 6.0/applet.js:3139
 msgid "Use application name"
 msgstr "Alkalmazásnév használata"
 
-#: 4.0/applet.js:2558
+#: 4.0/applet.js:3146 6.0/applet.js:3146
 msgid "No label"
 msgstr "Nincs címke"
 
-#: 4.0/applet.js:2569
+#: 4.0/applet.js:3157 6.0/applet.js:3157
 msgid "Ungroup application windows"
 msgstr "Ablakokat ne csoportosítsa alkalmazás szerint"
 
-#: 4.0/applet.js:2580
+#: 4.0/applet.js:3166 6.0/applet.js:3166
 msgid "Group application windows"
 msgstr "Alkalmazás ablakok csoportosítása"
 
-#: 4.0/applet.js:2590
+#: 4.0/applet.js:3179 6.0/applet.js:3179
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 
@@ -178,43 +191,49 @@ msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2619
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:3209 6.0/applet.js:3209
 msgid "Move titlebar on to screen"
 msgstr "Címsor mozgatása a kijelzőre"
 
-#: 4.0/applet.js:2624
+#: 4.0/applet.js:3214 6.0/applet.js:3214
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#: 4.0/applet.js:2628
+#: 4.0/applet.js:3218 6.0/applet.js:3218
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#: 4.0/applet.js:2634
+#: 4.0/applet.js:3224 6.0/applet.js:3224
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#: 4.0/applet.js:2641
+#: 4.0/applet.js:3231 6.0/applet.js:3231
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#: 4.0/applet.js:2652
+#: 4.0/applet.js:3242 6.0/applet.js:3242
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#: 4.0/applet.js:2661
+#: 4.0/applet.js:3251 6.0/applet.js:3251
 msgid "Close"
 msgstr "Bezárás"
 
-#: SetupWizard.py:162
+#: SetupWizard.py:188
 msgid "Exit"
 msgstr "Kilépés"
 
-#: SetupWizard.py:184
+#: SetupWizard.py:210
 msgid "Next"
 msgstr "Következő"
 
-#: SetupWizard.py:243
+#: SetupWizard.py:283
 msgid "Backup file already exist. Do you want to overwrite it?"
 msgstr "A biztonsági másolat már létezik. Felül akarod írni?"
 
@@ -230,100 +249,128 @@ msgstr ""
 "A CobiWindowList alapú ablaklista/panelindítók néhány további funkcióval"
 
 #. 4.0->settings-schema.json->caption-page->title
+#. 6.0->settings-schema.json->caption-page->title
 msgid "Labels"
 msgstr "Címkék"
 
 #. 4.0->settings-schema.json->general-page->title
+#. 6.0->settings-schema.json->general-page->title
 msgid "General"
 msgstr "Általános"
 
 #. 4.0->settings-schema.json->preview-page->title
+#. 6.0->settings-schema.json->preview-page->title
 msgid "Thumbnails"
 msgstr "Előnézetek"
 
 #. 4.0->settings-schema.json->hotkey-page->title
+#. 6.0->settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
 msgstr "Gyorsbillentyűk"
 
 #. 4.0->settings-schema.json->advanced-page->title
+#. 6.0->settings-schema.json->advanced-page->title
 msgid "Advanced"
 msgstr "Speciális"
 
 #. 4.0->settings-schema.json->caption-settings->title
+#. 6.0->settings-schema.json->caption-settings->title
 msgid "Window list button label settings"
 msgstr "Ablaklista gomb címke beállításai"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
-msgid "Application groups number label settings"
+#. 6.0->settings-schema.json->caption-number-settings->title
+#, fuzzy
+msgid "Number label settings"
 msgstr "Alkalmazáscsoportok számcímke beállításai"
 
 #. 4.0->settings-schema.json->general-settings->title
+#. 6.0->settings-schema.json->general-settings->title
 msgid "General window list settings"
 msgstr "Általános ablaklista beállítások"
 
 #. 4.0->settings-schema.json->general-mouse->title
+#. 6.0->settings-schema.json->general-mouse->title
 msgid "Window list mouse settings"
 msgstr "Ablaklista egérbeállítások"
 
 #. 4.0->settings-schema.json->preview-settings->title
+#. 6.0->settings-schema.json->preview-settings->title
 msgid "Thumbnails menu settings"
 msgstr "Miniatűrök menü beállításai"
 
 #. 4.0->settings-schema.json->preview-mouse-section->title
+#. 6.0->settings-schema.json->preview-mouse-section->title
 msgid "Thumbnails menu mouse settings"
 msgstr "Miniatűrök menü egér beállításai"
 
 #. 4.0->settings-schema.json->hotkey-settings->title
+#. 6.0->settings-schema.json->hotkey-settings->title
 msgid "Hotkey settings"
 msgstr "Gyorsbillentyűk beállításai"
 
 #. 4.0->settings-schema.json->adv-mouse-settings->title
 #. 4.0->settings-schema.json->adv-mouse-list->description
+#. 6.0->settings-schema.json->adv-mouse-settings->title
+#. 6.0->settings-schema.json->adv-mouse-list->description
 msgid "Ctrl/Shift + mouse button actions"
 msgstr "Ctrl/Shift + egérgomb műveletek"
 
 #. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
 msgid "Application name"
 msgstr "Alkalmazásnév"
 
 #. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
 msgid "Window title"
 msgstr "Ablakcím"
 
 #. 4.0->settings-schema.json->caption-type->description
+#. 6.0->settings-schema.json->caption-type->description
 msgid "Label contents"
 msgstr "Címke tartalma"
 
 #. 4.0->settings-schema.json->caption-type->tooltip
+#. 6.0->settings-schema.json->caption-type->tooltip
 msgid "What the content of the label will be"
 msgstr "Mi lesz a címke tartalma"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
-#. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
 msgid "Never"
 msgstr "Soha"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-number->options
 msgid "Always"
 msgstr "Mindig"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
 msgid "Focused"
 msgstr "Előtérben"
 
 #. 4.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for->options
 msgid "One per application pool"
 msgstr "Alkalmazáskészletenként egy"
 
 #. 4.0->settings-schema.json->display-caption-for->description
+#. 6.0->settings-schema.json->display-caption-for->description
 msgid "Display labels for generic window list buttons"
 msgstr "Címkék megjelenítése az általános ablaklista gombokhoz"
 
 #. 4.0->settings-schema.json->display-caption-for->tooltip
+#. 6.0->settings-schema.json->display-caption-for->tooltip
 msgid ""
 "Never: No windows get labels\n"
 "Always: All windows get labels\n"
@@ -337,14 +384,17 @@ msgstr ""
 "Alkalmazáskészletenként egy: Csak egy címke a szomszédos alkalmazásablakokhoz"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
 msgid "Running"
 msgstr "Folyamatban"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->description
+#. 6.0->settings-schema.json->display-caption-for-pined->description
 msgid "Display labels for pinned buttons"
 msgstr "Címkék megjelenítése a rögzített gombokhoz"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->tooltip
+#. 6.0->settings-schema.json->display-caption-for-pined->tooltip
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
@@ -357,10 +407,12 @@ msgstr ""
 "Fókuszált: Csak a fókuszált rögzített ablakon lesz címke"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
+#. 6.0->settings-schema.json->hide-caption-for-minimized->description
 msgid "Hide labels for minimized buttons"
 msgstr "A minimalizált gombok címkéinek elrejtése"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
+#. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
 msgid ""
 "For groups/pools the label will still show unless all application windows "
 "are minimized"
@@ -369,31 +421,39 @@ msgstr ""
 "összes alkalmazásablak minimalizálva"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "None"
 msgstr "Nincs"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "Minimized windows"
 msgstr "Minimalizált ablakok"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "Pinned applications"
 msgstr "Rögzített alkalmazások"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "Minimized and pinned"
 msgstr "Minimalizált és rögzített"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Automatic"
 msgstr "Automatikus"
 
 #. 4.0->settings-schema.json->display-indicators->description
+#. 6.0->settings-schema.json->display-indicators->description
 msgid "Display status indicators"
 msgstr "Állapotjelzők megjelenítése"
 
 #. 4.0->settings-schema.json->display-indicators->tooltip
+#. 6.0->settings-schema.json->display-indicators->tooltip
 msgid ""
 "Choose if the minimized and the pinned indicator characters will be "
 "prepended to button label text. Buttons without a text label will not "
@@ -407,11 +467,26 @@ msgstr ""
 "Automatikus: A kicsinyített és rögzített jelzők csak akkor jelennek meg, ha "
 "nincs szűk hely."
 
+#. 4.0->settings-schema.json->show-ellipsis-for-groups->description
+#. 6.0->settings-schema.json->show-ellipsis-for-groups->description
+msgid "Show a vertical ellipsis (...) for grouped buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+msgid ""
+"Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
+"list buttons with more then one window. When on a vertical panel this option "
+"is not possible and the setting will be ignored."
+msgstr ""
+
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->description
 msgid "Add new window buttons ahead of trailing pinned buttons"
 msgstr "Adjon hozzá új ablakgombokat a záró rögzített gombok elé"
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->tooltip
 msgid ""
 "When enabled, new windows will be added to the left of any pinned buttons "
 "currently placed on the right of the window list, effectively this allows "
@@ -421,56 +496,145 @@ msgstr ""
 "gombok bal oldalán jelennek meg, ami gyakorlatilag lehetővé teszi, hogy a "
 "rögzített gombok az ablaklista végén maradjanak"
 
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->hover-peek-delay->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.0->settings-schema.json->fade-animation-time->units
+#. 6.0->settings-schema.json->hover-peek-delay->units
+#. 6.0->settings-schema.json->label-animation-time->units
+#. 6.0->settings-schema.json->preview-timeout-show->units
+#. 6.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "ezredmásodperc"
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+#. 6.0->settings-schema.json->fade-animation-time->description
+msgid "Fade animation effect duration"
+msgstr "Halványulási animációs hatás időtartama"
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+#. 6.0->settings-schema.json->fade-animation-time->tooltip
+msgid ""
+"This defines the duration of the fade-in/out animation effect. It applies to "
+"the Thumbnail menus and the full size window previews"
+msgstr ""
+"Ez határozza meg a be/ki-úszás animációs effektus időtartamát. A bélyegkép "
+"menükre és a teljes méretű ablak előnézetére vonatkozik"
+
+#. 4.0->settings-schema.json->hover-peek-delay->description
+#. 6.0->settings-schema.json->hover-peek-delay->description
+#, fuzzy
+msgid "Hover time before showing a full size window preview"
+msgstr "Lebegtetési idő a menü megjelenítése előtt"
+
+#. 4.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.0->settings-schema.json->hover-peek-delay->tooltip
+msgid ""
+"This defines the mouse hover time before a full size window preview will "
+"appear. It applies when hovering over either window-list buttons or "
+"thumbnail menu items (of course one of the full size window preview options "
+"must be enabled for this option to have any effect)"
+msgstr ""
+
 #. 4.0->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->button-spacing->units
+#. 6.0->settings-schema.json->label-width->units
+#. 6.0->settings-schema.json->button-spacing->units
 msgid "pixels"
 msgstr "képpont"
 
 #. 4.0->settings-schema.json->label-width->description
+#. 6.0->settings-schema.json->label-width->description
 msgid "Label width"
 msgstr "Címke szélessége"
 
 #. 4.0->settings-schema.json->label-width->tooltip
+#. 6.0->settings-schema.json->label-width->tooltip
 msgid "This defines the width of the label section of a window list button"
 msgstr "Ez határozza meg az ablaklista gomb címkeszakaszának szélességét"
 
 #. 4.0->settings-schema.json->label-animation->description
+#. 6.0->settings-schema.json->label-animation->description
 msgid "Animate label"
 msgstr "Címke animálása"
 
-#. 4.0->settings-schema.json->label-animation-time->units
-#. 4.0->settings-schema.json->preview-timeout-show->units
-#. 4.0->settings-schema.json->preview-timeout-hide->units
-msgid "milliseconds"
-msgstr "ezredmásodperc"
-
 #. 4.0->settings-schema.json->label-animation-time->description
-msgid "Label animation time"
+#. 6.0->settings-schema.json->label-animation-time->description
+msgid "Label animation duration"
 msgstr "A címke animációs ideje"
 
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Nothing"
+msgstr "Ne tegyen semmit"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Application group window count"
+msgstr "Alkalmazás ablakok csoportosítása"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Workspace number"
+msgstr "Kijelző sorszáma"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Monitor number"
+msgstr "Kijelző"
+
+#. 4.0->settings-schema.json->number-type->description
+#. 6.0->settings-schema.json->number-type->description
+#, fuzzy
+msgid "Number label contents"
+msgstr "Címke tartalma"
+
 #. 4.0->settings-schema.json->display-number->options
-msgid "2 or more windows"
-msgstr "Kettő vagy több ablak"
+#. 6.0->settings-schema.json->display-number->options
+msgid "Smart"
+msgstr ""
 
 #. 4.0->settings-schema.json->display-number->description
+#. 6.0->settings-schema.json->display-number->description
 msgid "Display number"
 msgstr "Kijelző sorszáma"
 
+#. 4.0->settings-schema.json->display-number->tooltip
+#. 6.0->settings-schema.json->display-number->tooltip
+msgid ""
+"Controls when the number label is used. Smart means the the label will only "
+"appear when it is appropriate depending on the number label contents setting "
+"above. i.e. When there is two or more windows in a group, or when the "
+"windows workspace or monitor does not match the current one."
+msgstr ""
+
 #. 4.0->settings-schema.json->number-style->options
+#. 6.0->settings-schema.json->number-style->options
 msgid "Icon overlay"
 msgstr "Ikon átfedés"
 
 #. 4.0->settings-schema.json->number-style->options
+#. 6.0->settings-schema.json->number-style->options
 msgid "Label prepend"
 msgstr "Címke elé"
 
 #. 4.0->settings-schema.json->number-style->description
+#. 6.0->settings-schema.json->number-style->description
 msgid "Number style"
 msgstr "Számstílus"
 
 #. 4.0->settings-schema.json->number-style->tooltip
+#. 6.0->settings-schema.json->number-style->tooltip
+#, fuzzy
 msgid ""
-"Controls how the number of windows in a grouped button is presented. When on "
-"a vertical panel, the \"label prepend\" option is not possible so \"icon "
+"Controls how the number label is presented. When on a vertical panel or when "
+"in launcher mode, the \"label prepend\" option is not possible so \"icon "
 "overlay\" will be used instead"
 msgstr ""
 "Szabályozza, hogyan jelenjen meg a csoportosított gomb ablakainak száma. "
@@ -478,26 +642,32 @@ msgstr ""
 "átfedés\" lesz helyette"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Grouped"
 msgstr "Csoportosított"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Pooled"
 msgstr "Összevonva"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "One to one"
 msgstr "Egy - egy"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Launcher"
 msgstr "Alkalmazásindító"
 
 #. 4.0->settings-schema.json->group-windows->description
+#. 6.0->settings-schema.json->group-windows->description
 msgid "Window list behavior style"
 msgstr "Az ablaklista viselkedési stílusa"
 
 #. 4.0->settings-schema.json->group-windows->tooltip
+#. 6.0->settings-schema.json->group-windows->tooltip
 msgid ""
 "Grouped: All windows for an application are managed by one button,\n"
 "Pooled: All window list buttons for an application are pooled side by side,\n"
@@ -514,22 +684,27 @@ msgstr ""
 "Indító: Csak a rögzített gombok jelennek meg, panelindítóként viselkedik."
 
 #. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
 msgid "Disabled"
 msgstr "Letiltva"
 
 #. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
 msgid "Unique for each workspace"
 msgstr "Egyedi minden munkaterületen"
 
 #. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
 msgid "Common across workspaces"
 msgstr "Mindegyik munkaterületen"
 
 #. 4.0->settings-schema.json->display-pinned->description
+#. 6.0->settings-schema.json->display-pinned->description
 msgid "Pinning of window list buttons"
 msgstr "Az ablaklista gombjainak rögzítése"
 
 #. 4.0->settings-schema.json->display-pinned->tooltip
+#. 6.0->settings-schema.json->display-pinned->tooltip
 msgid ""
 "Controls whether window list buttons can be pinned, and whether each "
 "workspace has a unique set of pinned buttons or one common set shared across "
@@ -543,10 +718,12 @@ msgstr ""
 "megmarad."
 
 #. 4.0->settings-schema.json->synchronize-pinned->description
+#. 6.0->settings-schema.json->synchronize-pinned->description
 msgid "Synchronize launcher buttons across all workspaces"
 msgstr "Szinkronizálja az indítógombokat az összes munkaterületen"
 
 #. 4.0->settings-schema.json->synchronize-pinned->tooltip
+#. 6.0->settings-schema.json->synchronize-pinned->tooltip
 msgid ""
 "If enabled, the number and order of launcher buttons on the panel will be "
 "synchronize across all workspaces."
@@ -555,10 +732,12 @@ msgstr ""
 "szinkronizálva lesz az összes munkaterületen."
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->description
 msgid "Only show windows on the same monitor"
 msgstr "Csak a jelenlegi kijelző ablakainak megjelenítése"
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->tooltip
 msgid ""
 "If enabled, this applet instance only manages windows\n"
 "that are displayed on the same monitor"
@@ -566,11 +745,18 @@ msgstr ""
 "Bekapcsolva, a kisalkalmazás kizárólag azokat az ablakokat irányítja,\n"
 "amelyek ugyanazon a kijelzőn lettek megjelenítve"
 
+#. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
+#. 6.0->settings-schema.json->show-windows-for-all-workspaces->description
+msgid "Include windows from all workspaces"
+msgstr "Tartalmazzon ablakokat minden munkaterületről"
+
 #. 4.0->settings-schema.json->show-tooltips->description
+#. 6.0->settings-schema.json->show-tooltips->description
 msgid "Show tooltips for window list buttons"
 msgstr "Eszköztippek megjelenítése az ablaklista gombjaihoz"
 
 #. 4.0->settings-schema.json->show-tooltips->tooltip
+#. 6.0->settings-schema.json->show-tooltips->tooltip
 msgid ""
 "Enable to show tooltips using window title or application name when hovering "
 "over window list buttons"
@@ -579,12 +765,14 @@ msgstr ""
 "neve alapján, amikor az ablaklista gombjai fölé viszi az egérmutatót"
 
 #. 4.0->settings-schema.json->hide-panel-apps->description
+#. 6.0->settings-schema.json->hide-panel-apps->description
 msgid ""
 "Hide window buttons of pinned buttons on other CassiaWindowList instances"
 msgstr ""
 "A rögzített gombok ablakgombjainak elrejtése más CassiaWindowList példányokon"
 
 #. 4.0->settings-schema.json->hide-panel-apps->tooltip
+#. 6.0->settings-schema.json->hide-panel-apps->tooltip
 msgid ""
 "When enabled, windows for applications with pinned buttons on other "
 "instances of the CassiaWindowList applet will not show up in this window list"
@@ -593,11 +781,67 @@ msgstr ""
 "rögzített gombokkal rendelkező alkalmazások ablakai nem jelennek meg ebben "
 "az ablaklistában"
 
+#. 4.0->settings-schema.json->button-spacing->description
+#. 6.0->settings-schema.json->button-spacing->description
+msgid "Spacing between buttons"
+msgstr "Gombok közötti távolság"
+
+#. 4.0->settings-schema.json->button-spacing->tooltip
+#. 6.0->settings-schema.json->button-spacing->tooltip
+msgid ""
+"This defines the spacing between the buttons, the value will be divided in "
+"half and added to the left of the icon and to the right of the label on "
+"horizontal panels or to the top and button of the icon on vertical panels"
+msgstr ""
+"Ez határozza meg a gombok közötti távolságot, az értéket ketté kell osztani "
+"és hozzáadni az ikon bal oldalán és a címke jobb oldalán vízszintes "
+"paneleknél, illetve függőleges paneleknél az ikon tetején és gombjánál."
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+#. 6.0->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr ""
+"Teljes méretű ablak előnézetének megjelenítése, amikor az egérmutatót egy "
+"gomb fölé viszi"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
+#, fuzzy
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
+msgstr ""
+"Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
+"az egérmutatót az ablaklista gombja fölé viszi."
+
+#. 4.0->settings-schema.json->no-click-activate->description
+#. 6.0->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr "Automatikus fókuszváltás a panel elhagyásakor"
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+#. 6.0->settings-schema.json->no-click-activate->tooltip
+msgid ""
+"If enabled, the current window for a window-list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"or Shift held or while remaining on the panel will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
+"Ha engedélyezve van, az ablaklista gomb aktuális ablaka kerül fókuszba, "
+"amikor az egérmutató elhagyja a panelt. Ha kilép az ablaklistából a Ctrl "
+"vagy a Shift nyomva tartása mellett, vagy miközben a panelen marad, a fókusz "
+"változatlan marad. Ezt a beállítást általában a fenti előnézeti lebegtetési "
+"lehetőséggel együtt használják."
+
 #. 4.0->settings-schema.json->menu-show-on-hover->description
+#. 6.0->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
 msgstr "Megjelenítés rámutatásra"
 
 #. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.0->settings-schema.json->menu-show-on-hover->tooltip
 msgid ""
 "If enabled, a popup menu with a list of current windows will show when "
 "hovering"
@@ -605,10 +849,12 @@ msgstr ""
 "Rámutatásnál egy felugró menüt jelenít meg az aktuális ablakok listájával"
 
 #. 4.0->settings-schema.json->show-previews->description
+#. 6.0->settings-schema.json->show-previews->description
 msgid "Show window thumbnails in the popup window list menu"
 msgstr "Az ablak bélyegképeinek megjelenítése a felugró ablak lista menüjében"
 
 #. 4.0->settings-schema.json->show-previews->tooltip
+#. 6.0->settings-schema.json->show-previews->tooltip
 msgid ""
 "If enabled, the popup menu will show window thumbnails,\n"
 "otherwise the menu will only show window titles\n"
@@ -619,36 +865,46 @@ msgstr ""
 "(Mindig le van tiltva, ha a Cinnamon szoftveres megjelenítési módban fut)"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra large"
 msgstr "Nagyon nagy"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Large"
 msgstr "Nagy"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Medium"
 msgstr "Közepes"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Small"
 msgstr "Kicsi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra small"
 msgstr "Nagyon kicsi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->description
 msgid "Default thumbnail window size"
 msgstr "Alapértelmezett miniatűr ablakméret"
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->description
 msgid "Show thumbnails for all windows of an application pool"
 msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához"
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
 msgid ""
 "If enabled, a popup menu will contain all the application windows in the "
 "application pool rather then just the selected window within the application "
@@ -659,10 +915,12 @@ msgstr ""
 "kiválasztott ablakot"
 
 #. 4.0->settings-schema.json->preview-timeout-show->description
+#. 6.0->settings-schema.json->preview-timeout-show->description
 msgid "Hover time before showing menu"
 msgstr "Lebegtetési idő a menü megjelenítése előtt"
 
 #. 4.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.0->settings-schema.json->preview-timeout-show->tooltip
 msgid ""
 "The waiting time before the thumbnail menu appears when hovering over a "
 "button\n"
@@ -673,10 +931,12 @@ msgstr ""
 "(Nem használatos, ha közvetlenül egy másik gombra lép a listában)"
 
 #. 4.0->settings-schema.json->preview-timeout-hide->description
+#. 6.0->settings-schema.json->preview-timeout-hide->description
 msgid "Time before closing after pointer leaves the menu"
 msgstr "A bezárás előtti idő, miután a mutató elhagyja a menüt"
 
 #. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.0->settings-schema.json->preview-timeout-hide->tooltip
 msgid ""
 "The waiting time for the thumbnail menu to close when leaving a button\n"
 "(Not used when moving directly to a different button in the list)"
@@ -687,6 +947,9 @@ msgstr ""
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
 #. 4.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
 msgid "Close thumbnail menu"
 msgstr "Zárja be a miniatűr menüt"
 
@@ -696,6 +959,12 @@ msgstr "Zárja be a miniatűr menüt"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Close window"
 msgstr "Ablak bezárása"
 
@@ -705,6 +974,12 @@ msgstr "Ablak bezárása"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Minimize/Restore"
 msgstr "Minimalizálás/Visszaállítás"
 
@@ -714,6 +989,12 @@ msgstr "Minimalizálás/Visszaállítás"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Maximize/Restore"
 msgstr "Maximalizálás/Visszaállítás"
 
@@ -723,6 +1004,12 @@ msgstr "Maximalizálás/Visszaállítás"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Group/Ungroup windows"
 msgstr "Az ablakok csoportosítása/csoportosítás megszűntetése"
 
@@ -732,6 +1019,12 @@ msgstr "Az ablakok csoportosítása/csoportosítás megszűntetése"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 1"
 msgstr "Ugrás az 1. munkaterületre"
 
@@ -741,6 +1034,12 @@ msgstr "Ugrás az 1. munkaterületre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 2"
 msgstr "Ugrás az 2. munkaterületre"
 
@@ -750,6 +1049,12 @@ msgstr "Ugrás az 2. munkaterületre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 3"
 msgstr "Ugrás az 3. munkaterületre"
 
@@ -759,6 +1064,12 @@ msgstr "Ugrás az 3. munkaterületre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 4"
 msgstr "Ugrás az 4. munkaterületre"
 
@@ -768,6 +1079,12 @@ msgstr "Ugrás az 4. munkaterületre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to previous workspace"
 msgstr "Áthelyezés az előző munkaterületre"
 
@@ -777,6 +1094,12 @@ msgstr "Áthelyezés az előző munkaterületre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to next workspace"
 msgstr "Áthelyezés a következő munkaterületre"
 
@@ -786,6 +1109,28 @@ msgstr "Áthelyezés a következő munkaterületre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#, fuzzy
+msgid "Move to this workspace"
+msgstr "Áthelyezés a következő munkaterületre"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Ezen/minden munkaterületen látható"
 
@@ -795,6 +1140,12 @@ msgstr "Ezen/minden munkaterületen látható"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 1"
 msgstr "Áthelyezés az első kijelzőre"
 
@@ -804,6 +1155,12 @@ msgstr "Áthelyezés az első kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 2"
 msgstr "Áthelyezés a második kijelzőre"
 
@@ -813,6 +1170,12 @@ msgstr "Áthelyezés a második kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 3"
 msgstr "Áthelyezés a harmadik kijelzőre"
 
@@ -822,6 +1185,12 @@ msgstr "Áthelyezés a harmadik kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 4"
 msgstr "Áthelyezés a negyedik kijelzőre"
 
@@ -831,6 +1200,12 @@ msgstr "Áthelyezés a negyedik kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to previous monitor"
 msgstr "Áthelyezés az előző kijelzőre"
 
@@ -840,6 +1215,12 @@ msgstr "Áthelyezés az előző kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to next monitor"
 msgstr "Áthelyezés a következő kijelzőre"
 
@@ -849,6 +1230,12 @@ msgstr "Áthelyezés a következő kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to current/next monitor"
 msgstr "Ugrás az aktuális/következő monitorra"
 
@@ -858,6 +1245,12 @@ msgstr "Ugrás az aktuális/következő monitorra"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Pin to panel toggle"
 msgstr "Rögzítés a panelhez kapcsoló"
 
@@ -867,42 +1260,239 @@ msgstr "Rögzítés a panelhez kapcsoló"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#, fuzzy
+msgid "Untile window"
+msgstr "Ablak bezárása"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Do nothing"
 msgstr "Ne tegyen semmit"
 
 #. 4.0->settings-schema.json->preview-middle-click->description
+#. 6.0->settings-schema.json->preview-middle-click->description
 msgid "Thumbnail window middle button action"
 msgstr "Miniatűr ablak középső gomb művelete"
 
 #. 4.0->settings-schema.json->preview-back-click->description
+#. 6.0->settings-schema.json->preview-back-click->description
 msgid "Thumbnail window back button action"
 msgstr "Miniatűr ablak vissza gomb művelete"
 
 #. 4.0->settings-schema.json->preview-forward-click->description
+#. 6.0->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
 msgstr "Bélyegkép ablak előre gomb művelete"
 
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+#. 6.0->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr ""
+"Teljes méretű ablak előnézetének megjelenítése, ha az egérmutatót egy "
+"indexkép fölé viszi"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#, fuzzy
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
+msgstr ""
+"Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
+"az egérmutatót a miniatűr menüelem fölé viszi"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr "Automatikus fókuszváltás az Indexkép menü elhagyásakor"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid ""
+"If enabled, the window associated with the Thumbnail menu item will get the "
+"focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
+"Shift held or leaving from either end of the menu will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
+"Ha engedélyezve van, a Miniatűr menüelemhez tartozó ablak kerül fókuszba, "
+"amikor az egérmutató elhagyja a menüt. Ha a menüt a Ctrl vagy a Shift "
+"lenyomva tartásával hagyja el, vagy a menü bármelyik végéről kilép, a fókusz "
+"változatlan marad. Ezt a beállítást általában a fenti előnézeti lebegtetési "
+"lehetőséggel együtt használják."
+
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize most recent window"
 msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore then cycle windows"
 msgstr "Állítsa vissza, majd kapcsolja be az ablakokat"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Show thumbnail menu"
 msgstr "Miniatűr menü megjelenítése"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore or hold for thumbnail menu"
 msgstr "Állítsa vissza vagy tartsa lenyomva a miniatűr menü megjelenítéséhez"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->description
 msgid "Left button action for grouped buttons"
 msgstr "Bal gombművelet csoportosított gombokhoz"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
 msgid ""
 "Action taken when using the left mouse button on a window list entry for a "
 "group of windows"
@@ -910,72 +1500,148 @@ msgstr ""
 "A bal egérgombbal végrehajtott művelet egy ablaklista-bejegyzésen egy "
 "ablakcsoporthoz"
 
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "New window or hold for thumbnail menu"
+msgstr "Új ablak, vagy tartsa lenyomva a miniatűr menü megjelenítéséhez"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->description
+msgid "Left button action (with running windows)"
+msgstr "Bal gomb művelet (futó ablakoknál)"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+msgid ""
+"Action taken when using the left mouse button on a launcher button with one "
+"or more running windows"
+msgstr ""
+"A bal egérgombbal egy vagy több futó ablakkal rendelkező indítógombon "
+"végrehajtott művelet"
+
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Thumbnail menu toggle"
 msgstr "Miniatűr menü kapcsoló"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Thumbnail menu hold"
 msgstr "Miniatűr menü tartása"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Restore most recent application window"
 msgstr "A legutóbbi alkalmazásablak visszaállítása"
 
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 1st window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 2nd window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 3rd window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 4th window in grouped button"
+msgstr ""
+
 #. 4.0->settings-schema.json->mouse-action-btn2->description
+#. 6.0->settings-schema.json->mouse-action-btn2->description
 msgid "Middle button action"
 msgstr "Középső gomb művelet"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn2->tooltip
 msgid "Action taken when using the middle mouse button on window list entries"
 msgstr ""
 "Művelet, amikor a középső egérgombot használja ablaklista bejegyzéseknél"
 
 #. 4.0->settings-schema.json->mouse-action-btn8->description
+#. 6.0->settings-schema.json->mouse-action-btn8->description
 msgid "Back button action"
 msgstr "Vissza gomb művelet"
 
 #. 4.0->settings-schema.json->mouse-action-btn8->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn8->tooltip
 msgid "Action taken when using the back mouse button on window list entries"
 msgstr ""
 "Az ablaklista bejegyzéseinél végrehajtott műveletek az egér vissza gombjával"
 
 #. 4.0->settings-schema.json->mouse-action-btn9->description
+#. 6.0->settings-schema.json->mouse-action-btn9->description
 msgid "Forward button action"
 msgstr "Előre gomb művelet"
 
 #. 4.0->settings-schema.json->mouse-action-btn9->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn9->tooltip
 msgid "Action taken when using the forward mouse button on window list entries"
 msgstr ""
 "Az ablaklista-bejegyzéseknél az előremutató egérgombbal végzett műveletek"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "Off"
 msgstr "Ki"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (temporary)"
 msgstr "Be (átmenetileg)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (global default)"
 msgstr "Be (globális alapértelmezett)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (application default)"
 msgstr "Be (alkalmazás alapértelmezett)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->description
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->description
 msgid "Adjust the thumbnail window sizes using the scroll-wheel"
 msgstr "Állítsa be a miniatűr ablakok méretét a görgő segítségével"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
 msgid ""
 "If enabled, the size of thumbnail windows will respond to the mouse scroll-"
 "wheel. The new size can have a temporary effect or persist on a global or "
@@ -986,27 +1652,34 @@ msgstr ""
 "fennmaradhat"
 
 #. 4.0->settings-schema.json->hotkey-bindings->description
+#. 6.0->settings-schema.json->hotkey-bindings->description
 msgid "Hotkey binding available for assignment to a window"
 msgstr "Gyorsbillentyűk összerendelése elérhető ablakhoz rendeléshez"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Enabled"
 msgstr "Engedélyezve"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Cycle application windows"
 msgstr "Alkalmazási ablakok ciklusa"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Key sequence"
 msgstr "Kulcssor"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Description"
 msgstr "Leírás"
 
 #. 4.0->settings-schema.json->hotkey-bindings->tooltip
+#. 6.0->settings-schema.json->hotkey-bindings->tooltip
 msgid ""
 "Define a list of hotkeys used to bring to the foreground specific windows."
 msgstr ""
@@ -1014,11 +1687,13 @@ msgstr ""
 "listáját."
 
 #. 4.0->settings-schema.json->hotkey-minimize->description
+#. 6.0->settings-schema.json->hotkey-minimize->description
 msgid "Minimize window when hotkey target is already in focus"
 msgstr ""
 "Az ablak minimalizálása, ha a gyorsbillentyű célpontja már fókuszban van"
 
 #. 4.0->settings-schema.json->hotkey-minimize->tooltip
+#. 6.0->settings-schema.json->hotkey-minimize->tooltip
 msgid ""
 "If enabled and application cycling is not enabled or there is only one "
 "window for the application, windows will be minimized if the window is "
@@ -1029,10 +1704,12 @@ msgstr ""
 "ablak már fókuszban van"
 
 #. 4.0->settings-schema.json->hotkey-new->description
+#. 6.0->settings-schema.json->hotkey-new->description
 msgid "Open a new window when the application is not running"
 msgstr "Nyisson meg egy új ablakot, amikor az alkalmazás nem fut"
 
 #. 4.0->settings-schema.json->hotkey-new->tooltip
+#. 6.0->settings-schema.json->hotkey-new->tooltip
 msgid ""
 "Start a new window if no window is attached to a hotkey and the hotkey "
 "description is an exact match for the application name of a pinned button or "
@@ -1043,12 +1720,14 @@ msgstr ""
 "alkalmazásnevével vagy egy asztali fájlnévvel"
 
 #. 4.0->settings-schema.json->hotkey-sequence->description
+#. 6.0->settings-schema.json->hotkey-sequence->description
 msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
 msgstr ""
 "Intelligens numerikus gyorsbillentyűk (az „1” használata automatikusan 1-től "
 "9-ig terjed)"
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
+#. 6.0->settings-schema.json->hotkey-sequence->tooltip
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
@@ -1060,12 +1739,32 @@ msgstr ""
 "gyorsbillentyűket. A hozzárendelt alkalmazás első 9 ablakát az ablaklistában "
 "sorrendben a 9 gyorsbillentyű aktiválja."
 
+#. 4.0->settings-schema.json->hotkey-grave-help->description
+#. 6.0->settings-schema.json->hotkey-grave-help->description
+msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
+msgstr ""
+"Használja a módosító(ka)t + ` gyorsbillentyűket a gyorsbillentyű-tipp "
+"buborékok megjelenítéséhez"
+
+#. 4.0->settings-schema.json->hotkey-grave-help->tooltip
+#. 6.0->settings-schema.json->hotkey-grave-help->tooltip
+msgid ""
+"If enabled, The hotkey modifier(s) + ` will be registered for each unique "
+"modifier set defined in the hotkey list. Using these hotkeys will temporally "
+"show a hotkey hint bubble over the button icons."
+msgstr ""
+"Ha engedélyezve van, a gyorsbillentyű-módosító(k) + ` minden egyes, a "
+"gyorsbillentyű-listában meghatározott egyedi módosítókészlethez regisztrálva "
+"lesz. Ezeknek a gyorsbillentyűknek a használatakor ideiglenesen egy "
+"gyorsbillentyű-tipp buborék jelenik meg a gombikonok felett."
+
 #. 4.0->settings-schema.json->hotkey-help->description
+#. 6.0->settings-schema.json->hotkey-help->description
 msgid ""
 "Hotkeys can be assigned to a window in two ways:\n"
 "1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
 "2) Automatic:  Enter a \"Description\" matching an application name or "
-"desktop file. i.e: \"Google Chrome\" or \"firefox.desktop\"\n"
+"desktop file.\n"
 "Note: 1) Hotkey not working? it's possible the key combination is already "
 "assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey "
 "assignments might need to be reassigned. 3) Hotkeys associated with desktop "
@@ -1075,8 +1774,7 @@ msgstr ""
 "1) Kézi: Használja az \"Ablak hozzárendelése gyorsbillentyűhöz\" lehetőséget "
 "a gomb helyi menüjében.\n"
 "2) Automatikus: Adjon meg egy „Leírást”, amely megfelel az alkalmazás "
-"nevének vagy az asztali fájlnak. azaz: \"Google Chrome\" vagy \"firefox."
-"desktop\"\n"
+"nevének vagy az asztali fájlnak.\n"
 "Megjegyzés: 1) Nem működik a gyorsbillentyű? lehetséges, hogy a "
 "billentyűkombináció már máshol van hozzárendelve. 2) Ha eltávolítja vagy "
 "átrendezi a gyorsbillentyűket, előfordulhat, hogy a kézi gyorsbillentyű-"
@@ -1084,18 +1782,22 @@ msgstr ""
 "gyorsbillentyűket nem lehet manuálisan hozzárendelni."
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Key and mouse button"
 msgstr "Billentyű és egérgomb"
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Mouse click context"
 msgstr "Egérkattintás kontextus"
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Action to perform"
 msgstr "Végrehajtandó művelet"
 
 #. 4.0->settings-schema.json->adv-mouse-list->tooltip
+#. 6.0->settings-schema.json->adv-mouse-list->tooltip
 msgid ""
 "Define a set of mouse button actions when the Ctrl or Shift keys are pressed."
 msgstr ""
@@ -1104,21 +1806,38 @@ msgstr ""
 
 #. 4.0->settings-schema.json->adv-mouse-help->description
 msgid ""
-"Note: The above list contents are frequently incorrectly displayed due to "
-"what I suspect is a Cinnamon bug. The values displayed in the edit dialog "
-"box are the correct values and the ones that will take effect. I will be "
-"looking into the cause of this issue at some point."
+"Note: The above list contents will be incorrectly displayed without this "
+"fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will "
+"take effect."
 msgstr ""
-"Megjegyzés: A fenti lista tartalma gyakran helytelenül jelenik meg, mivel "
-"azt gyanítom, hogy egy Cinnamon hiba. A szerkesztési párbeszédpanelen "
-"megjelenő értékek a helyes értékek, és azok, amelyek életbe lépnek. "
-"Valamikor megvizsgálom a probléma okát."
+"Megjegyzés: A fenti lista tartalma hibásan jelenik meg a javítás nélkül:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"A szerkesztés párbeszédpanel értékei a megfelelő értékek, és azok, amelyek "
+"életbe lépnek."
+
+#. 4.0->settings-schema.json->animate-icon->description
+#. 6.0->settings-schema.json->animate-icon->description
+msgid "Icon animation when launching new windows"
+msgstr "Ikon animáció új ablakok indításakor"
+
+#. 4.0->settings-schema.json->animate-icon->tooltip
+#. 6.0->settings-schema.json->animate-icon->tooltip
+msgid ""
+"When enabled, the icon will animate when launching new windows for an "
+"application"
+msgstr ""
+"Ha engedélyezve van, az ikon animálódik az alkalmazás új ablakainak "
+"indításakor"
 
 #. 4.0->settings-schema.json->backup-file-name->description
+#. 6.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
 msgstr "Beállítások biztonsági mentés neve"
 
 #. 4.0->settings-schema.json->backup-file-name->tooltip
+#. 6.0->settings-schema.json->backup-file-name->tooltip
 msgid ""
 "If a name is entered here, the configuration of this applet instance will be "
 "backed up under that name. Backups will be listed in the Setup Wizard "
@@ -1128,6 +1847,73 @@ msgstr ""
 "néven kerül mentésre. A biztonsági másolatok megjelennek a Telepítővarázsló "
 "visszaállítási oldalán, amikor új CassiaWindowList példányt ad hozzá egy "
 "panelhez."
+
+#. 4.0->settings-schema.json->icon-saturation->units
+#. 6.0->settings-schema.json->icon-saturation->units
+msgid "percent"
+msgstr "százalék"
+
+#. 4.0->settings-schema.json->icon-saturation->description
+#. 6.0->settings-schema.json->icon-saturation->description
+msgid "Icon color saturation"
+msgstr "Ikon színtelítettsége"
+
+#. 4.0->settings-schema.json->icon-saturation->tooltip
+#. 6.0->settings-schema.json->icon-saturation->tooltip
+msgid ""
+"Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
+"100%\n"
+"This option is experimental, some icons are not currently effected by this "
+"setting"
+msgstr ""
+"Az ikonok színtelítettségét 0%-ról (szürkeárnyalatos) 200%-ra állítja, "
+"alapértelmezés szerint 100%\n"
+"Ez a lehetőség kísérleti jellegű, néhány ikonra jelenleg nincs hatással ez a "
+"beállítás"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "All Buttons"
+msgstr "Minden gomb"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Minimized buttons"
+msgstr "Minimalizált gombok"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Idle pinned buttons"
+msgstr "Üresjáratban rögzített gombok"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other workspaces"
+msgstr "Gombok más munkaterületeken lévő ablakokhoz"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other monitors"
+msgstr "Gombok más monitorokon lévő ablakokhoz"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "All buttons excepted focused window"
+msgstr "Minden gomb, kivéve a fókuszált ablakot"
+
+#. 4.0->settings-schema.json->saturation-application->description
+#. 6.0->settings-schema.json->saturation-application->description
+msgid "Where to apply the icon color saturation"
+msgstr "Hol kell alkalmazni az ikon színtelítettségét"
+
+#. 4.0->settings-schema.json->saturation-application->tooltip
+#. 6.0->settings-schema.json->saturation-application->tooltip
+msgid ""
+"Which buttons will have the custom icon color saturation applied\n"
+"This option is only available when the saturation is not set to 100%"
+msgstr ""
+"Mely gombokra lesz alkalmazva az egyéni ikon színtelítettsége\n"
+"Ez az opció csak akkor érhető el, ha a telítettség nincs 100%-ra állítva"
 
 #: SetupWizard.ui:7
 msgid "CassiaWindowList Basic Setup Wizard"
@@ -1224,253 +2010,6 @@ msgid "No Thumbnail window menu on mouse hover"
 msgstr "Nincs miniatűr ablak menü az egérmutatón"
 
 #: SetupWizard.ui:354
-msgid "Notes about the Panel Launcher behaviour"
-msgstr "Megjegyzések a Panel Launcher viselkedésével kapcsolatban"
-
-#: SetupWizard.ui:370
-msgid ""
-"Unlike most Panel Launcher applets, this launcher\n"
-"keeps tack of running windows and will activate\n"
-"existing windows rather then launching new ones.\n"
-"\n"
-"You can launch additional windows by clicking the\n"
-"'Back' mouse button or Ctrl+Left mouse button \n"
-"(by default).\n"
-"\n"
-"It also uses Thumbnail menus to show a list of all\n"
-"open windows. In general it works like \"pinned\"\n"
-"buttons on a window list rather then a basic\n"
-"launcher"
-msgstr ""
-"A legtöbb Panel Launcher kisalkalmazással ellentétben ez az indító\n"
-"követi a futó ablakokat, és aktiválódik\n"
-"a meglévő ablakokat, ahelyett, hogy újakat indítana el.\n"
-"\n"
-"További ablakokat indíthat el a gombra kattintva\n"
-"'Vissza' egérgomb vagy Ctrl+bal egérgomb\n"
-"(alapértelmezés szerint).\n"
-"\n"
-"A Miniatűr menük segítségével megjeleníti az összes listát\n"
-"nyitott ablakok. Általában úgy működik, mint \"rögzített\"\n"
-"gombok egy ablaklistán, nem pedig egy alap\n"
-"indító"
-
-#: SetupWizard.ui:408
-msgid "All done!"
-msgstr "Minden készen van!"
-
-#: SetupWizard.ui:424
-msgid ""
-"There are many more options and features to explorer\n"
-"in the applet configurator and the window list button\n"
-"context menu, for example:\n"
-"\n"
-" • Hot-keys to launch / activate a specific window.\n"
-" • Customizable mouse button actions.\n"
-" • Customizable Ctrl/Shift + mouse button actions.\n"
-" • Application specific grouping and label settings.\n"
-" • Thumbnail window zooming using the scroll-wheel.\n"
-" • Automatic application grouping when space is limited.\n"
-" • And much more."
-msgstr ""
-"Az Explorernek még sok más lehetősége és funkciója van\n"
-"a kisalkalmazáskonfigurátorban és az ablaklista gombra\n"
-"helyi menü, például:\n"
-"\n"
-"  • Gyorsbillentyűk egy adott ablak elindításához/aktiválásához.\n"
-"  • Testreszabható egérgomb műveletek.\n"
-"  • Testreszabható Ctrl/Shift + egérgomb műveletek.\n"
-"  • Alkalmazásspecifikus csoportosítás és címkebeállítások.\n"
-"  • Miniatűr ablak nagyítása a görgő segítségével.\n"
-"  • Automatikus alkalmazások csoportosítása korlátozott hely esetén.\n"
-"  • És még sok más."
-
-#: SetupWizard.ui:445
-msgid "Exit and launch the applet configurator now"
-msgstr "Lépjen ki, és indítsa el most az kisalkalmazáskonfigurátort"
-
-#: SetupWizard.ui:474
-msgid "Select a backup configuration to restore?"
-msgstr "Válassza ki a visszaállítandó biztonsági mentési konfigurációt?"
-
-#: SetupWizard.ui:517
-msgid "Configuration Backup?"
-msgstr "Konfiguráció biztonsági mentése?"
-
-#: SetupWizard.ui:533
-msgid ""
-"If you would like to maintain an automatic backup\n"
-"of this applet configuration then select or enter a\n"
-"backup file description below. All current and future\n"
-"configuration changes will be saved to this backup:"
-msgstr ""
-"Ha szeretne automatikus biztonsági másolatot készíteni\n"
-"ennek a kisalkalmazáskonfigurációnak, majd válassza ki vagy írja be a a\n"
-"biztonsági másolat fájl leírása alább. Minden jelenlegi és jövőbeli\n"
-"a konfigurációs módosítások ebbe a biztonsági másolatba kerülnek:"
-
-#: SetupWizard.ui:553
-msgid "MainWindowList"
-msgstr "FőablAklista"
-
-#: SetupWizard.ui:554
-msgid "MainPanelLauncher"
-msgstr "FőPanelIndító"
-
-#: SetupWizard.ui:555
-msgid "Monitor1WindowList"
-msgstr "Monitor1Ablaklista"
-
-#: SetupWizard.ui:556
-msgid "Monitor2WindowList"
-msgstr "Monitor2Ablaklista"
-
-#: SetupWizard.ui:557
-msgid "Monitor1PanelLauncher"
-msgstr "Monitor1PanelIndító"
-
-#: SetupWizard.ui:558
-msgid "Monitor2PanelLauncher"
-msgstr "Monitor2PanelIndító"
-
-#: 4.0/applet.js:1326 4.0/applet.js:2518 4.0/applet.js:4013 4.0/applet.js:4081
-#: 4.0/applet.js:4104 4.0/applet.js:4193
-msgid "all buttons"
-msgstr "minden gomb"
-
-#. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
-msgid "Include windows from all workspaces"
-msgstr "Tartalmazzon ablakokat minden munkaterületről"
-
-#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
-msgid "New window or hold for thumbnail menu"
-msgstr "Új ablak, vagy tartsa lenyomva a miniatűr menü megjelenítéséhez"
-
-#. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
-msgid "Left button action (with running windows)"
-msgstr "Bal gomb művelet (futó ablakoknál)"
-
-#. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
-msgid ""
-"Action taken when using the left mouse button on a launcher button with one "
-"or more running windows"
-msgstr ""
-"A bal egérgombbal egy vagy több futó ablakkal rendelkező indítógombon "
-"végrehajtott művelet"
-
-#. 4.0->settings-schema.json->hotkey-grave-help->description
-msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
-msgstr ""
-"Használja a módosító(ka)t + ` gyorsbillentyűket a gyorsbillentyű-tipp "
-"buborékok megjelenítéséhez"
-
-#. 4.0->settings-schema.json->hotkey-grave-help->tooltip
-msgid ""
-"If enabled, The hotkey modifier(s) + ` will be registered for each unique "
-"modifier set defined in the hotkey list. Using these hotkeys will temporally "
-"show a hotkey hint bubble over the button icons."
-msgstr ""
-"Ha engedélyezve van, a gyorsbillentyű-módosító(k) + ` minden egyes, a "
-"gyorsbillentyű-listában meghatározott egyedi módosítókészlethez regisztrálva "
-"lesz. Ezeknek a gyorsbillentyűknek a használatakor ideiglenesen egy "
-"gyorsbillentyű-tipp buborék jelenik meg a gombikonok felett."
-
-#. 4.0->settings-schema.json->hotkey-help->description
-msgid ""
-"Hotkeys can be assigned to a window in two ways:\n"
-"1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
-"2) Automatic:  Enter a \"Description\" matching an application name or "
-"desktop file.\n"
-"Note: 1) Hotkey not working? it's possible the key combination is already "
-"assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey "
-"assignments might need to be reassigned. 3) Hotkeys associated with desktop "
-"files can not be manually assigned."
-msgstr ""
-"A gyorsbillentyűket kétféleképpen lehet hozzárendelni egy ablakhoz:\n"
-"1) Kézi: Használja az \"Ablak hozzárendelése gyorsbillentyűhöz\" lehetőséget "
-"a gomb helyi menüjében.\n"
-"2) Automatikus: Adjon meg egy „Leírást”, amely megfelel az alkalmazás "
-"nevének vagy az asztali fájlnak.\n"
-"Megjegyzés: 1) Nem működik a gyorsbillentyű? lehetséges, hogy a "
-"billentyűkombináció már máshol van hozzárendelve. 2) Ha eltávolítja vagy "
-"átrendezi a gyorsbillentyűket, előfordulhat, hogy a kézi gyorsbillentyű-"
-"hozzárendeléseket újra kell rendelni. 3) Az asztali fájlokhoz tartozó "
-"gyorsbillentyűket nem lehet manuálisan hozzárendelni."
-
-#. 4.0->settings-schema.json->adv-mouse-help->description
-msgid ""
-"Note: The above list contents will be incorrectly displayed without this "
-"fix:\n"
-"https://github.com/linuxmint/cinnamon/pull/11908\n"
-"The edit dialog box values are the correct values and the ones that will "
-"take effect."
-msgstr ""
-"Megjegyzés: A fenti lista tartalma hibásan jelenik meg a javítás nélkül:\n"
-"https://github.com/linuxmint/cinnamon/pull/11908\n"
-"A szerkesztés párbeszédpanel értékei a megfelelő értékek, és azok, amelyek "
-"életbe lépnek."
-
-#: 4.0/applet.js:2590
-msgid " (this workspace)"
-msgstr "(ez a munkaterület)"
-
-#. 4.0->settings-schema.json->icon-saturation->units
-msgid "percent"
-msgstr "százalék"
-
-#. 4.0->settings-schema.json->icon-saturation->description
-msgid "Icon color saturation"
-msgstr "Ikon színtelítettsége"
-
-#. 4.0->settings-schema.json->icon-saturation->tooltip
-msgid ""
-"Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
-"100%\n"
-"This option is experimental, some icons are not currently effected by this "
-"setting"
-msgstr ""
-"Az ikonok színtelítettségét 0%-ról (szürkeárnyalatos) 200%-ra állítja, "
-"alapértelmezés szerint 100%\n"
-"Ez a lehetőség kísérleti jellegű, néhány ikonra jelenleg nincs hatással ez a "
-"beállítás"
-
-#. 4.0->settings-schema.json->saturation-application->options
-msgid "All Buttons"
-msgstr "Minden gomb"
-
-#. 4.0->settings-schema.json->saturation-application->options
-msgid "Minimized buttons"
-msgstr "Minimalizált gombok"
-
-#. 4.0->settings-schema.json->saturation-application->options
-msgid "Idle pinned buttons"
-msgstr "Üresjáratban rögzített gombok"
-
-#. 4.0->settings-schema.json->saturation-application->options
-msgid "Buttons for windows on other workspaces"
-msgstr "Gombok más munkaterületeken lévő ablakokhoz"
-
-#. 4.0->settings-schema.json->saturation-application->options
-msgid "Buttons for windows on other monitors"
-msgstr "Gombok más monitorokon lévő ablakokhoz"
-
-#. 4.0->settings-schema.json->saturation-application->options
-msgid "All buttons excepted focused window"
-msgstr "Minden gomb, kivéve a fókuszált ablakot"
-
-#. 4.0->settings-schema.json->saturation-application->description
-msgid "Where to apply the icon color saturation"
-msgstr "Hol kell alkalmazni az ikon színtelítettségét"
-
-#. 4.0->settings-schema.json->saturation-application->tooltip
-msgid ""
-"Which buttons will have the custom icon color saturation applied\n"
-"This option is only available when the saturation is not set to 100%"
-msgstr ""
-"Mely gombokra lesz alkalmazva az egyéni ikon színtelítettsége\n"
-"Ez az opció csak akkor érhető el, ha a telítettség nincs 100%-ra állítva"
-
-#: SetupWizard.ui:354
 msgid "Panel Launcher Setup"
 msgstr "Panelindító beállítása"
 
@@ -1511,6 +2050,10 @@ msgstr "Nyissa meg a Miniatűr menüt"
 msgid "Thumbnail window menu on mouse hover"
 msgstr "Bélyegkép ablak menüje az egérmutatóval"
 
+#: SetupWizard.ui:492
+msgid "All done!"
+msgstr "Minden készen van!"
+
 #: SetupWizard.ui:508
 msgid ""
 "There are many more options and features to explorer in the\n"
@@ -1538,3 +2081,51 @@ msgstr ""
 "  • Miniatűr ablak nagyítása a görgő segítségével.\n"
 "  • Automatikus alkalmazások csoportosítása korlátozott hely esetén.\n"
 "  • És még sok más."
+
+#: SetupWizard.ui:530
+msgid "Exit and launch the applet configurator now"
+msgstr "Lépjen ki, és indítsa el most az kisalkalmazáskonfigurátort"
+
+#: SetupWizard.ui:559
+msgid "Select a backup configuration to restore?"
+msgstr "Válassza ki a visszaállítandó biztonsági mentési konfigurációt?"
+
+#: SetupWizard.ui:602
+msgid "Configuration Backup?"
+msgstr "Konfiguráció biztonsági mentése?"
+
+#: SetupWizard.ui:618
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+"Ha szeretne automatikus biztonsági másolatot készíteni\n"
+"ennek a kisalkalmazáskonfigurációnak, majd válassza ki vagy írja be a a\n"
+"biztonsági másolat fájl leírása alább. Minden jelenlegi és jövőbeli\n"
+"a konfigurációs módosítások ebbe a biztonsági másolatba kerülnek:"
+
+#: SetupWizard.ui:638
+msgid "MainWindowList"
+msgstr "FőablAklista"
+
+#: SetupWizard.ui:639
+msgid "MainPanelLauncher"
+msgstr "FőPanelIndító"
+
+#: SetupWizard.ui:640
+msgid "Monitor1WindowList"
+msgstr "Monitor1Ablaklista"
+
+#: SetupWizard.ui:641
+msgid "Monitor2WindowList"
+msgstr "Monitor2Ablaklista"
+
+#: SetupWizard.ui:642
+msgid "Monitor1PanelLauncher"
+msgstr "Monitor1PanelIndító"
+
+#: SetupWizard.ui:643
+msgid "Monitor2PanelLauncher"
+msgstr "Monitor2PanelIndító"

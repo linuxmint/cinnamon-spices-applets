@@ -1,3 +1,159 @@
+### v6.17.1~20240609
+  * Prevents Cvc.MixerControl from being executed more than once.
+
+### v6.17.0~20240608
+  * Regression fixed: track info can be displayed on the panel again.
+
+### v6.16.0~20240605
+  * Shortcuts tab of this applet settings: Added a button to define multimedia shortcuts identical to those in Cinnamon.
+
+### v6.15.0~20240523
+  * From now on, use Ctrl+wheel or Shift+wheel to control microphone volume.
+  * New option: "Display icon indicating that the microphone is activated, if applicable".
+  * New icons, with green microphone.
+  * Fixes FR #6026.
+  * Allows user to set the time to disappear for the seeker tooltip.
+
+### v6.14.0~20240520
+  * Displays above the seeker the time it will take to be in the track if clicked.
+
+### v6.13.0~20240514
+  * Fixes #6008: Added the option to avoid displaying controllers twice.
+
+### v6.12.0~20240512
+  * Adds a keyboard shortcut to switch between players.
+  * Fixes #5989.
+  * Minor bugfixes and improvements.
+
+### v6.11.0~20240506
+  * Created Sounds section in Sound tab of settings.
+  * Improved keyboard shortcuts management.
+  * Fixes #5967.
+
+### v6.10.0~20240424
+  * Created OSD section in Sound tab of settings.
+  * Adds option: Whether the media keys osd is disabled or its relative display size.
+
+### v6.9.1~20240420
+  * Fixes #5767.
+
+### v6.9.0~20240417
+  * Better management of art-covers.
+
+### v6.8.0~20240416
+  * Fixes #5721: Adds Previous and Next track shortcuts.
+
+### v6.7.3~20240410
+  * Fixes #5678: Adds an option to keep open the player list in menu.
+
+### v6.7.2~20240402
+  * New option: whether show OSD on startup.
+
+### v6.7.1~20240401
+  * Improves 'audio-volume-muted' icons.
+
+### v6.7.0~20240329
+  * New icons.
+
+### v6.6.0~20240328
+  * Greater interaction with Radio3.0@claudiux: The Previous, Next, Stop and Close buttons act on this applet.
+
+### v6.5.7~20240328
+  * Finalizing bug fixes.
+
+
+### v6.5.6~20240327
+  * Some bugfixes.
+
+### v6.5.5~20240322
+  * Fixes #5622 (icon when a browser is the source).
+
+### v6.5.4~20240322
+  * Improves playerctld management.
+
+### v6.5.3~20240321
+  * Runs playerctld, if exists.
+  * Minor bugfixes.
+  * Ready for LM 22.
+  * Fixes #5616.
+
+### v6.5.2~20240320
+  * Fixes  #5604
+
+### v6.5.1~20240320
+  * Improved seeker for Spotify.
+
+### v6.5.0~20240319
+  * Improved seeker. Elapsed time and duration are now displayed on either side of the seeker in the menu.
+
+### v6.4.3~20240317
+  * Removes CR errors (A wrong style had been applied; style=null should be used instead of style="").
+
+### v6.4.2~20240315
+  * Allows the user to remove the sound@cinnamon.org applet from the panel, as it is incompatible with sound150@claudiux.
+  * Fixed bugs concerning icon adaptation to volume or microphone level.
+
+### v6.4.1~20240313
+  * Bugfixes about ZettaLite data.
+
+### v6.4.0~20240312
+  * Adds keyboard shortcut Pause/Play.
+
+### v6.3.5~20240311
+  * Take into account XML data from ZettaLite to get artist and title.
+
+### v6.3.4~20240310
+  * Redefining volume keyboard shortcuts becomes optional.
+
+
+### v6.3.3~20240310
+  * Fixes definitively #5576.
+
+### v6.3.2~20240309
+  * Fixes  #5579.
+
+### v6.3.1~20240308
+  * Fixes #5576.
+
+### v6.3.0~20240308
+  * Allows to display icon indicating that the microphone is muted, if applicable.
+  * Sound volume: Now can magnetize all multiples of 25%.
+
+### v6.2.2~20240304
+  * Removes error messages about length which wasn't an valid value.
+
+### v6.2.1~20240226
+  * Helps the user to install playerctl.
+  * icon.png replaced.
+
+
+### v6.2.0~20240225
+  * Displays the cover of the song broadcast by the Radio3.0@claudiux applet, when available.
+
+### v6.1.0~20240224
+  * Fixes song art display for vlc when changing song.
+  * Adds the easyeffects option to the context menu when installed, to launch it.
+
+### v6.0.0~20240221
+  * The art album icon is now correctly removed when changing streams.
+  * Shows album art (or song art) even if mpris:artUrl is not in the metadata!
+
+### v5.1.1~20240118
+  * Use Ctrl-Middle-Click or Shift-Middle-Click to toggle mute as defined in settings.
+  * Takes into account an undefined input.
+  * Updates French translation.
+
+### v5.1.0~20240109
+  * Updates README.md
+  * Adds two options to the Icon tab settings that are already in the Behavior tab, but which also concern the icon.
+
+### v5.0.0~20240109
+  * Modifies the presentation of settings, with tabs.
+  * Allows the user to change the icon colors.
+
+### v4.7.0~20240106
+  * Adds the ability to redefine multimedia shortcuts.
+
 ### v4.6.0~20231216
   * Adds the ability to display the volume level near the icon.
 

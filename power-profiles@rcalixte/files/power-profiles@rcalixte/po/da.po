@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:16-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 15:52-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -30,12 +30,8 @@ msgid "Performance"
 msgstr "Ydeevne"
 
 #: 5.4/applet.js:58 5.4/applet.js:64
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-"Sørg for, at pakken power-profiles-daemon er installeret, og at tjenesten "
-"kører."
+msgid "Please make sure the power-profiles-daemon package is installed and the service is running."
+msgstr "Sørg for, at pakken power-profiles-daemon er installeret, og at tjenesten kører."
 
 #: 5.4/applet.js:59
 msgid "exception:"
@@ -54,11 +50,8 @@ msgid "Active Profile Holds:"
 msgstr "Aktiv profil holder:"
 
 #. metadata.json->description
-msgid ""
-"An applet to modify the current system power profile as determined by power-"
-"profiles-daemon"
-msgstr ""
-"Ændr systemets aktuelle strømprofil som bestemt af power-profiles-daemon."
+msgid "An applet to modify the current system power profile as determined by power-profiles-daemon"
+msgstr "Ændr systemets aktuelle strømprofil som bestemt af power-profiles-daemon."
 
 #. metadata.json->name
 msgid "Power Profiles"
@@ -90,25 +83,18 @@ msgstr "Bladr gennem profiler med brug af tastaturgenveje"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be "
-"'Performance' (or 'Balanced' on some systems).\n"
+"If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be 'Performance' (or 'Balanced' on some systems).\n"
 "\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
+"If disabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the profile would not change."
 msgstr ""
-"Hvis den er aktiveret, vil den næste profil være “Ydelse” (eller "
-"“Balanceret” på nogle systemer), hvis den aktuelle profil er "
-"“Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges.\n"
+"Hvis den er aktiveret, vil den næste profil være “Ydelse” (eller “Balanceret” på nogle systemer), hvis den aktuelle profil er “Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges.\n"
 "\n"
-"Hvis den er deaktiveret, vil profilen ikke blive ændret, hvis den aktuelle "
-"profil er “Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges."
+"Hvis den er deaktiveret, vil profilen ikke blive ændret, hvis den aktuelle profil er “Strømsparetilstand”, og tastaturgenvejen “Forrige profil” bruges."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"
 msgstr "Visning ved brug af tastaturgenvej"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
-msgid ""
-"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgid "Show on-screen display of the new profile when using the keyboard shortcuts"
 msgstr "Den nye profil vises på skærmen, når tastaturgenvejene anvendes."

@@ -6,14 +6,15 @@
  *   - displays the VPN link status,
  *   - allows to connect at start-up to the last VPN used,
  *   - allows to reconnect the VPN link if it incidentally drops,
- *   - can launch or quit Internet apps according to the state of the VPN.
+ *   - can launch or quit Internet apps according to the state of the VPN,
+ *   - can display the flag of the VPN server country.
  */
 
 
 /** Imports
  */
 const Applet = imports.ui.applet;
-const {AppletSettings} = imports.ui.settings;
+const { AppletSettings } = imports.ui.settings;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
@@ -24,19 +25,17 @@ const Extension = imports.ui.extension;
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
-//const {SignalManager} = imports.misc.signalManager;
-const Util = imports.misc.util;
+const Util = require("./lib/util");
 const CMenu = imports.gi.CMenu;
 const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 
-const {to_string} = require("./lib/to-string");
+const { to_string } = require("./lib/to-string");
 
 /** Constants
  */
-const {
-  NAME,
+const { NAME,
   UUID,
   HOME_DIR,
   APPLET_DIR,
@@ -65,9 +64,7 @@ if (!exists(DOMAINS_DIR)) GLib.spawn_command_line_async("bash -c 'mkdir -p "+DOM
 const DOMAINS_FILE = DOMAINS_DIR + "/domains2bypass.txt";
 if (exists(OLD_DOMAINS_FILE) && exists(DOMAINS_DIR)) GLib.spawn_command_line_async("bash -c 'mv -u "+OLD_DOMAINS_FILE+ " " + DOMAINS_FILE +"'");
 
-const {
-  IpGateway
-} = require("./lib/ipgateway");
+const { IpGateway } = require("./lib/ipgateway");
 
 /** dummy variable for translations
  */
@@ -855,7 +852,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     let flagList = this.s.getValue("flagList");
     this.showLabel();
 
-    if (this.vpnStatus === "off") {
+    if (this.vpnStatus === "transient" || this.vpnStatus === "off") {
       switch(this.labelWhenVPNisOff) {
         case "NoLabel":
           this.hideLabel();

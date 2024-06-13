@@ -6,139 +6,158 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-25 22:26+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
 "PO-Revision-Date: 2022-11-28 19:38+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
-"Language: fi\n"
 
-#: applet.js:394
-msgid "Pomodoro started"
-msgstr "Pomodoro alkaa"
+#: applet.js:278
+msgid "Short break running"
+msgstr "Lyhyt tauko meneillään"
 
-#: applet.js:437 applet.js:737
-msgid "Waiting to start"
-msgstr "Odotetaan käynnistämistä"
+#: applet.js:281
+msgid "Long break running"
+msgstr "Pitkä tauko meneillään"
 
-#: applet.js:455
+#: applet.js:284
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodori %d, erä %d käynnissä"
 
-#: applet.js:462
+#: applet.js:289
+msgid "Waiting to start"
+msgstr "Odotetaan käynnistämistä"
+
+#: applet.js:342
+msgid "Pomodoro started"
+msgstr "Pomodoro alkaa"
+
+#: applet.js:407
 msgid "Let's go to work!"
 msgstr "Mennään töihin!"
 
-#: applet.js:477
+#: applet.js:425
 msgid "Take a short break"
 msgstr "Pidä lyhyt tauko"
 
-#: applet.js:478
-msgid "Short break running"
-msgstr "Lyhyt tauko meneillään"
-
-#: applet.js:497
+#: applet.js:448
 msgid "Take a long break"
 msgstr "Pidä pitkä tauko"
 
-#: applet.js:499
-msgid "Long break running"
-msgstr "Pitkä tauko meneillään"
-
-#: applet.js:533
+#: applet.js:484
 msgid "Pomodoro ended"
 msgstr "Pomodoro päättyi"
 
-#: applet.js:665
+#: applet.js:607
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 
 #. metadata.json->name
-#: applet.js:837
+#: applet.js:753
 msgid "Pomodoro Timer"
 msgstr "Pomodoro Timer"
 
-#: applet.js:848
+#: applet.js:762
 msgid "Completed"
 msgstr "Valmis"
 
-#: applet.js:861
+#: applet.js:770
 msgid "Reset Timer"
 msgstr "Nollaa ajastin"
 
-#: applet.js:873
+#: applet.js:778
 msgid "Reset Counts and Timer"
 msgstr "Nollaa laskurit ja ajastin"
 
-#: applet.js:886
+#: applet.js:787
+msgid "Skip To Next Timer"
+msgstr ""
+
+#: applet.js:794
 msgid "What is this?"
 msgstr "Mikä tämä on?"
 
-#: applet.js:943
+#: applet.js:834
 msgid "None"
 msgstr "Ei mitään"
 
-#: applet.js:973
+#: applet.js:851
 msgid "Switch Off Pomodoro"
 msgstr "Kytke Pomodoro päältä"
 
-#: applet.js:979
+#: applet.js:857
 msgid "Start a new Pomodoro"
 msgstr "Aloita uusi Pomodoro"
 
-#: applet.js:985
+#: applet.js:863
 msgid "Hide"
 msgstr "Piilota"
 
-#: applet.js:997
+#: applet.js:875
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro valmis, ansaitset tauon!"
 
-#: applet.js:1005
+#: applet.js:884
 msgid "Your break is over, start another pomodoro!"
 msgstr "Taukosi on ohi, aloita uusi pomodoro!"
 
-#: applet.js:1010
+#: applet.js:890
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Uusi pomodoro alkaa %s."
 
-#: applet.js:1021
+#: applet.js:902
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuutti"
 msgstr[1] "%d minuuttia"
 
-#: applet.js:1022
+#: applet.js:903
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d sekunti"
 msgstr[1] "%d sekuntia"
 
-#: applet.js:1024
+#: applet.js:905
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s ja %s"
 
-#: applet.js:1048
+#: applet.js:920
 msgid "Continue Current Pomodoro"
 msgstr "Jatka nykyistä Pomodoroa"
 
-#: applet.js:1054
+#: applet.js:926 applet.js:959
 msgid "Pause Pomodoro"
 msgstr "Pysäytä Pomodoro"
 
-#: applet.js:1065
+#: applet.js:937
 msgid "Short break finished, ready to continue?"
 msgstr "Lyhyt tauko päättynyt, oletko valmis jatkamaan?"
+
+#: applet.js:953
+#, fuzzy
+msgid "Start break"
+msgstr "Pidä lyhyt tauko"
+
+#: applet.js:970
+#, fuzzy
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro valmis, ansaitset tauon!"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "Loistava työkalu tuottavuuden parantamiseen!"
 
 #. settings-schema.json->head_durations->description
 msgid "Durations (minutes)"
@@ -164,9 +183,19 @@ msgstr "Määrä ennen pomodorin pitkää taukoa:"
 msgid "Options"
 msgstr "Valinnat"
 
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Näytä pomodoro ajastin paneelissa"
+
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr "Näytä viestit ikkunassa"
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+#, fuzzy
+msgid "Auto start after a pomodoro ends"
+msgstr "Alkaa automaattisesti kun lyhyt tauko päättyy"
 
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
@@ -187,6 +216,10 @@ msgstr "Käytä symbolista kuvaketta paneelissa"
 #. settings-schema.json->show_timer->description
 msgid "Show the pomodoro timer in the applet panel"
 msgstr "Näytä pomodoro ajastin paneelissa"
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr ""
 
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
@@ -239,6 +272,18 @@ msgstr "Toista aloituksen ääni"
 msgid "Start Sound File"
 msgstr "Aloituksen äänitiedosto"
 
-#. metadata.json->description
-msgid "Great tool for boosted productivity!"
-msgstr "Loistava työkalu tuottavuuden parantamiseen!"
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr ""
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr ""
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr ""
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr ""

@@ -6,13 +6,19 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const Gettext = imports.gettext;
+const ByteArray = imports.byteArray;
 const GLib = imports.gi.GLib;
 const UUID = "location-detection@heimdall";
 
 const REFRESH_INTERVAL = 30
 
-const _httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+var _httpSession;
+if (Soup.MAJOR_VERSION === 2) {
+  _httpSession = new Soup.SessionAsync();
+  Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+} else {
+  _httpSession = new Soup.Session();
+}
 
 // Translation support
 // ----------
@@ -64,17 +70,34 @@ MyApplet.prototype = {
         let context = this;
         let message = Soup.Message.new('GET', url);
 
-        _httpSession.queue_message(message, function soupQueue(session, message) {
-            if (message.status_code === 200) {
-                let jp = new Json.Parser();
-                jp.load_from_data(message.response_body.data, -1);
-                callback.call(context, jp.get_root().get_object());
-            }
-            else {
-                // connection to IPInfoDB failed
-                callback.call(context, null);
-            }
-        });
+        if (Soup.MAJOR_VERSION === 2) {
+            _httpSession.queue_message(message, function soupQueue(session, message) {
+                if (message.status_code === 200) {
+                    let jp = new Json.Parser();
+                    jp.load_from_data(message.response_body.data, -1);
+                    callback.call(context, jp.get_root().get_object());
+                }
+                else {
+                    // connection to IPInfoDB failed
+                    callback.call(context, null);
+                }
+            });
+        } else {
+            _httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, result) => {
+                if (message.get_status() === 200) {
+                    try {
+                        const bytes = _httpSession.send_and_read_finish(result);
+                        let jp = new Json.Parser();
+                        jp.load_from_data(ByteArray.toString(bytes.get_data()), -1);
+                        callback.call(context, jp.get_root().get_object());
+                    } catch (error) {
+                        global.log(error);
+                    }
+                } else {
+                    callback.call(context, null);
+                }
+            });
+        }
     },
 
     _updateAPIkey: function() {

@@ -7,15 +7,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-30 00:45-0300\n"
-"PO-Revision-Date: 2022-08-30 18:18+0200\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"PO-Revision-Date: 2024-04-21 14:54+0200\n"
+"Last-Translator: qadzek\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
 
 #: applet.js:232
 msgid "Reload Applet"
@@ -346,6 +345,33 @@ msgstr ""
 "Als u dit werkbalkhulpje graag gebruikt, dan zou ik het zeer op prijs "
 "stellen als u de pagina op Cinnamon Spices wilt openen en een ster wilt "
 "uitdelen. U heeft hiervoor alléén een GitHub-account nodig."
+
+#: applet.js:305
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr "Vereist Redshift: yay -S redshift-minimal"
+
+#: applet.js:482
+msgid "should be replaced by redshift-minimal"
+msgstr "moet worden vervangen door redshift-minimal"
+
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+"Automatisch uitgeschakeld onder Wayland omdat redshift nog niet wordt "
+"ondersteund door Wayland"
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr "QRedshift opnieuw activeren zodra Cinnamon is opgestart"
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""
+"Werkt niet onder Wayland omdat redshift nog niet ondersteund wordt door "
+"Wayland"
 
 #~ msgid ""
 #~ "Sets brightness, gamma levels and color temperature with Redshift. This "

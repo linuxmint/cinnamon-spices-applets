@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-24 10:45+0100\n"
+"Project-Id-Version: Sensors@claudiux 3.6.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,81 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:99
+#: applet.js:101
 msgid "Sensors Monitor"
 msgstr ""
 
-#: applet.js:463 applet.js:505
+#: applet.js:268
+msgid "Suspended"
+msgstr ""
+
+#: applet.js:484 applet.js:526
 msgid "high:"
 msgstr ""
 
-#: applet.js:463 applet.js:465 applet.js:505 applet.js:507 applet.js:548
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
 msgid "n/a"
 msgstr ""
 
-#: applet.js:465 applet.js:507
+#: applet.js:486 applet.js:528
 msgid "crit:"
 msgstr ""
 
-#: applet.js:548 applet.js:591
+#: applet.js:569 applet.js:612
 msgid "min:"
 msgstr ""
 
-#: applet.js:593
+#: applet.js:614
 msgid "max:"
 msgstr ""
 
-#: applet.js:621
+#: applet.js:642
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:621
+#: applet.js:642
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:641
+#: applet.js:662
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:896
+#: applet.js:925
 msgid "Settings"
 msgstr ""
 
-#: applet.js:896
+#: applet.js:925
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:903
+#: applet.js:932
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:913
+#: applet.js:942
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:923
+#: applet.js:952
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:933
+#: applet.js:962
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:943
+#: applet.js:972
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:954
+#: applet.js:983
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:965
+#: applet.js:992
+msgid "Suspend Sensors"
+msgstr ""
+
+#: applet.js:1003
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1256
+#: applet.js:1295
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
@@ -120,7 +128,7 @@ msgstr ""
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: lib/util.js:243
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr ""
@@ -200,6 +208,10 @@ msgstr ""
 #. settings-schema.json->section_voltOptions->title
 #. settings-schema.json->section_intrusionOptions->title
 msgid "Options"
+msgstr ""
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
 msgstr ""
 
 #. settings-schema.json->section_Report->title
@@ -298,7 +310,39 @@ msgid "30"
 msgstr ""
 
 #. settings-schema.json->interval->options
-msgid "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
 msgstr ""
 
 #. settings-schema.json->interval->description
@@ -311,7 +355,8 @@ msgstr ""
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
-"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
 
@@ -319,24 +364,8 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr ""
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr ""
-
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr ""
-
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr ""
-
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr ""
-
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
 msgstr ""
 
 #. settings-schema.json->char_color->description
@@ -349,8 +378,7 @@ msgstr ""
 
 #. settings-schema.json->separator->tooltip
 msgid ""
-"The string used to separate values in horizontal orientation. Default is "
-"'│'."
+"The string used to separate values in horizontal orientation. Default is '│'."
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -367,6 +395,10 @@ msgstr ""
 
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
+msgstr ""
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
 msgstr ""
 
 #. settings-schema.json->bold_values->description
@@ -542,7 +574,8 @@ msgstr ""
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
-"Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\n"
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
 "To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
 "'High' and 'Critical' (optional) must be valid numbers.\n"
 "'Formula' (optional):\n"
@@ -569,7 +602,8 @@ msgstr ""
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
-"Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\n"
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
@@ -650,6 +684,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr ""
 

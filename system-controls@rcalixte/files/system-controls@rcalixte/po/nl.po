@@ -5,22 +5,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.2.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-27 14:01-0500\n"
-"PO-Revision-Date: 2023-12-27 14:03-0500\n"
-"Last-Translator: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-07 16:57-0500\n"
+"PO-Revision-Date: 2024-04-21 20:50+0200\n"
+"Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
 
 #. metadata.json->name
 #: 5.4/applet.js:29
 msgid "System Controls"
-msgstr "Knoppen voor de Systeem"
+msgstr "Systeemknoppen"
 
 #: 5.4/applet.js:64
 msgid "Restart Cinnamon"
@@ -40,15 +40,15 @@ msgstr "Afmelden"
 
 #: 5.4/applet.js:129
 msgid "Suspend"
-msgstr "Pauzestand"
+msgstr "Slaapstand"
 
 #: 5.4/applet.js:135
 msgid "Hibernate"
-msgstr "Slaapstand"
+msgstr "Slaapstand naar schijf"
 
 #: 5.4/applet.js:143
 msgid "Restart"
-msgstr "Herstart"
+msgstr "Opnieuw opstarten"
 
 #: 5.4/applet.js:149
 msgid "Power Off"
@@ -59,3 +59,7 @@ msgid ""
 "A simple system controls applet to restart Cinnamon, lock the screen, switch "
 "users, log off, suspend, hibernate, reboot, or power off the computer"
 msgstr ""
+"Een eenvoudig systeembedieningsapplet om Cinnamon te herstarten, het scherm "
+"te vergrendelen, van gebruiker te wisselen, uit te loggen, de computer in "
+"slaapstand te zetten (al dan niet slaapstand naar schijf), opnieuw op te "
+"starten of uit te schakelen."

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:46-0500\n"
 "PO-Revision-Date: 2023-11-20 18:04-0300\n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
@@ -18,106 +18,106 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4\n"
 
-#: applet.js:102
+#: applet.js:108
 msgid "Edit Applications"
 msgstr "Editar aplicaciones"
 
-#: applet.js:694 applet.js:948
+#: applet.js:737 applet.js:1031
 msgid "Delete"
 msgstr "Borrar"
 
-#: applet.js:695 applet.js:949
+#: applet.js:738 applet.js:1032
 msgid "Edit"
 msgstr "Editar"
 
-#: applet.js:696 applet.js:950
+#: applet.js:739 applet.js:1033
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:35 widgets.py:35
+#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
 msgid "Name"
 msgstr "Nombre"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:41
+#: dialogs.py:51 dialogs.glade:104
 msgid "Group"
 msgstr "Grupo"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:42 widgets.py:42
+#: dialogs.py:52 widgets.py:43 dialogs.glade:115
 msgid "Command"
 msgstr "Comando"
 
-#: dialogs.py:178
+#: dialogs.py:203
 msgid "The name cannot be empty"
 msgstr "El nombre no puede estar vacío"
 
-#: dialogs.py:183
+#: dialogs.py:208
 msgid "The name is already used"
 msgstr "El nombre ya está siendo utilizado"
 
-#: dialogs.py:190
+#: dialogs.py:215
 msgid "Valid name"
 msgstr "Nombre válido"
 
-#: dialogs.py:196
+#: dialogs.py:221
 msgid "Valid command"
 msgstr "Comando válido"
 
-#: dialogs.py:199
+#: dialogs.py:224
 msgid "The command is not valid"
 msgstr "El comando no es válido"
 
-#: dialogs.py:211
+#: dialogs.py:236
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "¿Qué datos deben reemplazarse del archivo * .desktop?"
 
-#: dialogs.py:256
+#: dialogs.py:281 dialogs.glade:561
 msgid "really delete?"
 msgstr "¿realmente lo desea borrar?"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:28
+#: widgets.py:29
 msgid "Icon"
 msgstr "Icono"
 
-#: widgets.py:116
+#: widgets.py:125
 msgid "Add application"
 msgstr "Añadir aplicación"
 
-#: widgets.py:117
+#: widgets.py:126
 msgid "Add new entry"
 msgstr "Añadir una nueva entrada"
 
-#: widgets.py:121
+#: widgets.py:130
 msgid "Add separator"
 msgstr "Añadir un separador"
 
-#: widgets.py:129
+#: widgets.py:138
 msgid "Remove selected entry"
 msgstr "Eliminar la entrada seleccionada"
 
-#: widgets.py:135
+#: widgets.py:144
 msgid "Edit selected entry"
 msgstr "Editar la entrada seleccionada"
 
-#: widgets.py:141
+#: widgets.py:150
 msgid "Duplicate selected entry"
 msgstr "Duplicar entrada seleccionada"
 
-#: widgets.py:147
+#: widgets.py:156
 msgid "Move selected entry up"
 msgstr "Mover la entrada seleccionada hacia arriba"
 
-#: widgets.py:153
+#: widgets.py:162
 msgid "Move selected entry down"
 msgstr "Mover la entrada seleccionada hacia abajo"
 
-#: widgets.py:316
+#: widgets.py:323
 msgid "Separator"
 msgstr "Separador"
 
@@ -188,9 +188,7 @@ msgstr "Ancho fijo del menú"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr ""
-"Basado en el elemento más grande del submenú, para evitar que el ancho del "
-"menú parpadee"
+msgstr "Basado en el elemento más grande del submenú, para evitar que el ancho del menú parpadee"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

@@ -52,7 +52,7 @@ body:
     - batterymonitor@pdcurtis @pdcurtis
     - batterypower@joka42 @joka42
     - better-backgrounds@simonmicro @simonmicro
-    - betterlock
+    - betterlock @Centurix
     - bettersettings@bownz
     - BgRadio@spacy01 @spacy01
     - bible@nodeengineer.com @nodeengineer
@@ -76,12 +76,13 @@ body:
     - clipboard-eraser@Techcrafter @Techcrafter
     - clipboard-qr@wrouesnel @wrouesnel
     - collapsible-systray@feuerfuchs.eu @feuerfuchs
+    - color-blind-filters@rcalixte @rcalixte
     - color-picker@fmete @icarter09
     - commandLauncher@scollins @collinss
     - CommandRunner@appdevsw
     - computer@brownsr @brownsr
     - cpu-monitor-text@gnemonix @gnemonix
-    - cpufreq@mtwebster
+    - cpufreq@mtwebster @yrtimiD
     - cryptocoin@guantanamoe @imDeprecated
     - ctrl4docker@hoffis-eck.de
     - CustomApplicationsMenu@LLOBERA @Nicolas01
@@ -94,9 +95,11 @@ body:
     - devutils@fogl
     - dgs-bpivaty@gmail.com @bpivaty
     - diaspora-notif@douze12
+    - directory-menu@torchipeppo @torchipeppo
     - disk-read-and-write-speed@cardsurf @cardsurf
     - download-and-upload-speed@cardsurf @cardsurf
     - duolingo-helper@nodeengineer.com @nodeengineer
+    - Exit@claudiux @claudiux
     - expressvpn@Hukuta @Hukuta
     - feeds@jonbrettdev.wordpress.com @jake1164
     - force-quit@cinnamon.org
@@ -137,12 +140,13 @@ body:
     - moonphase@techi-freki @Techi-Freki
     - multicore-sys-monitor@ccadeptic23 @claudiux
     - MuteToggler@jebeaudet.com @jebeaudet
-    - mybookmarks@markbokil.com
-    - mylauncher@markbokil.com
+    - mybookmarks@markbokil.com @Centurix
+    - mylauncher@markbokil.com @Centurix
     - netusagemonitor@pdcurtis @pdcurtis
     - network@brownsr @brownsr
     - networkmonitor@axel358 @axel358
     - nextslide@yaya-cout @yaya-cout
+    - nightlight@Severga @Severga
     - nightscout@ranneft @ImmRanneft
     - nordvpn-indicator@nickdurante @nickdurante
     - notification-mute@jgillula @jgillula
@@ -151,6 +155,8 @@ body:
     - officeCenter@scollins @collinss
     - pa-equalizer@jschug.com
     - paneldo@beatlink
+    - PanelTranslator@klangman @klangman
+    - password-generator@spencerlommel.com @SpencerLommel
     - PDFManager@cinnamon.org
     - places-bookmarks@dmo60.de
     - places-with-terminal@mtwebster
@@ -170,12 +176,13 @@ body:
     - rswitcher@nixdev.com @mindbeat
     - rust-menu@jerrywham @jerrywham
     - rwall@typicalfoobar
-    - screen-inhibit@mtwebster
+    - screen-inhibit@mtwebster @claudiux
     - ScreenLocker@tuuxx @tuuxx
     - ScreenShot+RecordDesktop@tech71 @icarter09
     - ScreenShot@tech71
     - scripts@paucapo.com
-    - search-box@mtwebster
+    - sct@skulptist.de @Matthias-Hermsdorf
+    - search-box@mtwebster @claudiux
     - Sensors@claudiux @claudiux
     - separator2@zyzz
     - serviceLauncher@hulygun @hulygun
@@ -202,7 +209,7 @@ body:
     - stevedore@centurix @centurix
     - sticky@scollins @collinss
     - stopwatch@pdcurtis @pdcurtis
-    - suspend@janax
+    - suspend@janax @klangman
     - SW++@mohammad-sn @mohammad-sn
     - sync@szlldm @szlldm
     - sysmonitor@orcus @orcuscz

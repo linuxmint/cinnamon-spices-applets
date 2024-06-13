@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: search-box@mtwebster 2.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-20 18:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
+msgid "Type to search..."
+msgstr ""
+
+#: applet.js:90
+msgid "Change default programs..."
+msgstr ""
+
+#: applet.js:92
+msgid "Edit providers"
+msgstr ""
+
+#: 5.4/applet.js:61
+msgid "Right-click to select or add your search engine"
+msgstr ""
+
+#: 5.4/applet.js:104
+msgid "Select your Search Engine:"
+msgstr ""
+
+#. metadata.json->name
+msgid "Internet Search Box"
+msgstr ""
+
+#. metadata.json->description
+msgid "Perform an Internet search, using your favorite engine"
+msgstr ""
+
+#. 3.2->settings-schema.json->header-provider->description
+#. 5.4->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr ""
+
+#. 3.2->settings-schema.json->show-provider->description
+#. 5.4->settings-schema.json->show-provider->description
+msgid "Show provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->show-provider->tooltip
+#. 5.4->settings-schema.json->show-provider->tooltip
+msgid "Show selected provider in the panel"
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->description
+msgid "Select provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Google"
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Bing"
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Yahoo"
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Ask "
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 3.2->settings-schema.json->selected-provider->tooltip
+msgid "Select a search provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->use-custom-provider->description
+msgid "Use custom provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->use-custom-provider->tooltip
+msgid "Use your own search provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->custom-provider-label->description
+msgid "Name of custom provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->custom-provider-label->tooltip
+msgid "Enter label of the custom provider to show in the panel."
+msgstr ""
+
+#. 3.2->settings-schema.json->custom-provider-url->description
+msgid "URL of custom provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->custom-provider-url->tooltip
+msgid "Enter the URL of the custom search provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->header-keybinding->description
+#. 5.4->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr ""
+
+#. 3.2->settings-schema.json->custom-keybinding->description
+#. 5.4->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr ""
+
+#. 5.4->settings-schema.json->reset-after-search->description
+msgid "Reset query after search"
+msgstr ""
+
+#. 5.4->settings-schema.json->reset-after-search->tooltip
+msgid ""
+"Reset query after search? This may not be useful if you want to be able to "
+"perform the same query on other search engines afterwards."
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->description
+msgid "Providers"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Show"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Name"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid ""
+"Short name\n"
+"(3 lower-case letters)"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->tooltip
+msgid ""
+"If your query begins with the 3 letters of the short name, it will be "
+"processed by the relevant search engine.\n"
+"Example: ddg linux mint iso"
+msgstr ""

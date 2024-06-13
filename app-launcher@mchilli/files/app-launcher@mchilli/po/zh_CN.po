@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:46-0500\n"
 "PO-Revision-Date: 2023-02-09 21:56+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -18,106 +18,106 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: applet.js:102
+#: applet.js:108
 msgid "Edit Applications"
 msgstr "编辑应用程序"
 
-#: applet.js:694 applet.js:948
+#: applet.js:737 applet.js:1031
 msgid "Delete"
 msgstr "删除"
 
-#: applet.js:695 applet.js:949
+#: applet.js:738 applet.js:1032
 msgid "Edit"
 msgstr "编辑"
 
-#: applet.js:696 applet.js:950
+#: applet.js:739 applet.js:1033
 msgid "Cancel"
 msgstr "取消"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:35 widgets.py:35
+#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
 msgid "Name"
 msgstr "名称"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:41
+#: dialogs.py:51 dialogs.glade:104
 msgid "Group"
 msgstr "组"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:42 widgets.py:42
+#: dialogs.py:52 widgets.py:43 dialogs.glade:115
 msgid "Command"
 msgstr "命令"
 
-#: dialogs.py:178
+#: dialogs.py:203
 msgid "The name cannot be empty"
 msgstr "名称不能为空"
 
-#: dialogs.py:183
+#: dialogs.py:208
 msgid "The name is already used"
 msgstr "名称已被使用"
 
-#: dialogs.py:190
+#: dialogs.py:215
 msgid "Valid name"
 msgstr "有效名称"
 
-#: dialogs.py:196
+#: dialogs.py:221
 msgid "Valid command"
 msgstr "有效命令"
 
-#: dialogs.py:199
+#: dialogs.py:224
 msgid "The command is not valid"
 msgstr "命令无效"
 
-#: dialogs.py:211
+#: dialogs.py:236
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "您想要替换 *.desktop 文件中的哪些信息？"
 
-#: dialogs.py:256
+#: dialogs.py:281 dialogs.glade:561
 msgid "really delete?"
 msgstr "确认删除？"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:28
+#: widgets.py:29
 msgid "Icon"
 msgstr "图标"
 
-#: widgets.py:116
+#: widgets.py:125
 msgid "Add application"
 msgstr "添加应用程序"
 
-#: widgets.py:117
+#: widgets.py:126
 msgid "Add new entry"
 msgstr "添加新条目"
 
-#: widgets.py:121
+#: widgets.py:130
 msgid "Add separator"
 msgstr "添加分隔符"
 
-#: widgets.py:129
+#: widgets.py:138
 msgid "Remove selected entry"
 msgstr "移除所选条目"
 
-#: widgets.py:135
+#: widgets.py:144
 msgid "Edit selected entry"
 msgstr "编辑所选条目"
 
-#: widgets.py:141
+#: widgets.py:150
 msgid "Duplicate selected entry"
 msgstr "重复选定的条目"
 
-#: widgets.py:147
+#: widgets.py:156
 msgid "Move selected entry up"
 msgstr "上移所选条目"
 
-#: widgets.py:153
+#: widgets.py:162
 msgid "Move selected entry down"
 msgstr "下移所选条目"
 
-#: widgets.py:316
+#: widgets.py:323
 msgid "Separator"
 msgstr "分隔符"
 
