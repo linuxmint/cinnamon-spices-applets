@@ -4,6 +4,7 @@
 # Timon <timosha@gmail.com>, 2014.
 # zluka <osam@tut.by>, 2015.
 # Dmitriy <dmitriy.pom0@gmail.com>, 2019, 2021.
+# Eugene <schtaufenberg@yandex.ru>, 2024.
 #
 msgid ""
 msgstr ""
@@ -11,16 +12,16 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2021-07-20 14:32+0600\n"
+"PO-Revision-Date: 2024-06-13 19:53+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:19563
@@ -1491,12 +1492,16 @@ msgid ""
 "Could not retrieve logs, log file was not found under path\n"
 " {logFilePath}"
 msgstr ""
+"Не удалось получить журналы, файл журнала не найден по пути\n"
+" {logFilePath}"
 
 #: 3.8/weather-applet.js:772
 msgid ""
 "Could not get contents of log file under path\n"
 " {logFilePath}"
 msgstr ""
+"Не удалось получить содержимое файла журнала по пути\n"
+" {logFilePath}"
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10577
@@ -1508,6 +1513,8 @@ msgid ""
 "MET Office UK only covers the UK, please make sure your location is in the "
 "country"
 msgstr ""
+"MET Office UK охватывает только Великобританию, пожалуйста, убедитесь, что "
+"ваше местоположение находится в этой стране"
 
 #: 3.8/weather-applet.js:10770
 msgid "Data was not found for location"
@@ -1553,17 +1560,15 @@ msgstr "Очень хорошая"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Дымка"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Шквал"
+msgstr "Шквальный ветер"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Лёгкий снег"
+msgstr "Лёгкий дождь со снегом"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1611,9 +1616,8 @@ msgid "Freezing fog"
 msgstr "Морозный туман"
 
 #: 3.8/weather-applet.js:13091
-#, fuzzy
 msgid "Tomorrow.io"
-msgstr "Завтра"
+msgstr ""
 
 #: 3.8/weather-applet.js:13300
 msgid "Light wind"
@@ -1759,9 +1763,8 @@ msgid "Heavy mixed rain and snow"
 msgstr "Сильный дождь со снегом"
 
 #: 3.8/weather-applet.js:14984
-#, fuzzy
 msgid "AccuWeather"
-msgstr "Погода"
+msgstr ""
 
 #: 3.8/weather-applet.js:15370
 msgid "Deutscher Wetterdienst"
@@ -1770,19 +1773,20 @@ msgstr ""
 #: 3.8/weather-applet.js:15383
 msgid "Please select a different provider or location"
 msgstr ""
+"Пожалуйста, выберите другого поставщика погодных данных или другое "
+"местоположение"
 
 #: 3.8/weather-applet.js:15699
-#, fuzzy
 msgid "Weather Underground"
-msgstr "Погодные условия"
+msgstr ""
 
 #: 3.8/weather-applet.js:15902
 msgid "The API key you provided is invalid."
-msgstr ""
+msgstr "Указанный вами ключ API недействителен."
 
 #: 3.8/weather-applet.js:15909
 msgid "The location you provided was not found."
-msgstr ""
+msgstr "Указанное вами местоположение не найдено."
 
 #: 3.8/weather-applet.js:15945 3.8/weather-applet.js:15946
 #, fuzzy
@@ -1806,11 +1810,11 @@ msgstr "Снег"
 
 #: 3.8/weather-applet.js:16079 3.8/weather-applet.js:16080
 msgid "Breezy"
-msgstr ""
+msgstr "Лёгкий бриз"
 
 #: 3.8/weather-applet.js:16093 3.8/weather-applet.js:16094
 msgid "Frigid"
-msgstr ""
+msgstr "Холодно"
 
 #: 3.8/weather-applet.js:16149 3.8/weather-applet.js:16150
 #, fuzzy
@@ -1823,13 +1827,12 @@ msgid "Pirate Weather"
 msgstr "US Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Пожалуйста убедитесь, что\n"
-"введённый ключ API совпадает с ключем от Climacell"
+"введённый ключ API совпадает с ключем от Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 #, fuzzy
@@ -1877,12 +1880,16 @@ msgid ""
 "Could not retrieve config, file was not found under paths\n"
 " {configFilePath}"
 msgstr ""
+"Не удалось получить конфигурацию, файл не найден по пути\n"
+" {configFilePath}"
 
 #: 3.8/weather-applet.js:17551
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
 msgstr ""
+"Не удалось получить содержимое файла конфигурации по пути\n"
+" {configFilePath}"
 
 #: 3.8/weather-applet.js:17827
 #, fuzzy
@@ -1897,7 +1904,7 @@ msgstr "Этот сервис требует ключ API для работы"
 
 #: 3.8/weather-applet.js:18253
 msgid "Dew Point"
-msgstr ""
+msgstr "Точка росы"
 
 #: 3.8/weather-applet.js:18336
 msgid "Precipitation will end in {precipEnd} minutes"
@@ -1913,7 +1920,7 @@ msgstr "Осадки начнутся в течение {precipStart} минут
 
 #: 3.8/weather-applet.js:18544
 msgid "Forecast parsing failed, see logs for more details."
-msgstr ""
+msgstr "Разбор прогноза не удался, смотрите подробности в журналах."
 
 #: 3.8/weather-applet.js:19107 3.8/weather-applet.js:19715
 msgid "As of {lastUpdatedTime}"
@@ -1926,79 +1933,78 @@ msgstr "{distance}{distanceUnit} от вас"
 
 #: 3.8/weather-applet.js:19117
 msgid "Station Name: {stationName}"
-msgstr ""
+msgstr "Название станции: {stationName}"
 
 #: 3.8/weather-applet.js:19120
 msgid "Area: {stationArea}"
-msgstr ""
+msgstr "Область: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "предупреждений о погоде - {count}"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
 msgid "Error Saving Debug Information"
-msgstr ""
+msgstr "Ошибка при сохранении отладочной информации"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Невозможно получить информацию о погоде"
+msgstr "Не удалось открыть файл {filePath} для записи"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
-msgstr ""
+msgstr "Отладочная информация успешно сохранена"
 
 #: 3.8/weather-applet.js:19551
 msgid "Saved to {filePath}"
-msgstr ""
+msgstr "Сохранено в {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Сценарий не предоставлен"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Сначала нужно добавить скрипт."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Нет данных о погоде"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Нет данных о погоде для запуска скрипта"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Сценарий выполнен успешно"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Ваш сценарий успешно выполнен."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Ошибка при выполнении скрипта"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"Скрипт вернул ошибку, смотрите журналы для получения дополнительной "
+"информации"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Погода"
+msgstr "Оповещения о погоде"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
-msgstr ""
+msgstr "Сохранить в файл"
 
 #: 3.8/LogSaver.py:29
 msgid "Select a destination"
-msgstr ""
+msgstr "Выберите пункт назначения"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -2209,7 +2215,7 @@ msgstr "гПа"
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "in Hg"
-msgstr "дюймов рт.ст."
+msgstr "дюймов рт. ст."
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -2423,7 +2429,7 @@ msgstr "Настройки местоположения"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Техника и автоматизация"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2460,7 +2466,7 @@ msgstr "Сообщить о проблеме"
 #. 3.8->settings-schema.json->debug-options->title
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Debug"
-msgstr ""
+msgstr "Отладка"
 
 #. 3.8->settings-schema.json->dataService->tooltip
 msgid ""
@@ -2493,33 +2499,28 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (только США)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (требуется ключ)"
+msgstr "OpenWeatherMap OneCall (требуется ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Pirate Weather (key needed)"
-msgstr "Weatherbit (требуется ключ)"
+msgstr "Pirate Weather (требуется ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
 msgstr "Visual Crossing (требуется ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Tomorrow.io (key needed)"
-msgstr "Weatherbit (требуется ключ)"
+msgstr "Tomorrow.io (требуется ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "AccuWeather (key needed)"
-msgstr "Weatherbit (требуется ключ)"
+msgstr "AccuWeather (требуется ключ)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Weather Underground (key needed)"
-msgstr "Weatherbit (требуется ключ)"
+msgstr "Weather Underground (требуется ключ)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2540,6 +2541,8 @@ msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Если поле местоположения совпадает с полем 'Search Entry' сохраненного "
+"местоположения, вместо него будет использовано сохраненное местоположение."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2567,55 +2570,54 @@ msgstr ""
 "которым у вас не закончится квота."
 
 #. 3.8->settings-schema.json->forecastDays->tooltip
-#, fuzzy
 msgid ""
 "Maximum number of days that can be displayed, available number of data, "
 "maximum rows and columns setting in the Presentation tab will affect the "
 "final number."
 msgstr ""
-"Наибольшее число дней для отображения, настройка наибольшего числа строк и "
-"колонок во вкладке Представление повлияет на конечный результат."
+"Максимальное количество дней, которые могут быть отображены, доступное "
+"количество данных, настройки максимального количества строк и столбцов на "
+"вкладке \"Представление\" влияют на итоговое число."
 
 #. 3.8->settings-schema.json->forecastHours->tooltip
-#, fuzzy
 msgid ""
 "Maximum number of hours that can be displayed, available numbers of data "
 "will affect the final number."
 msgstr ""
-"Наибольшее число дней для отображения, настройка наибольшего числа строк и "
-"колонок во вкладке Представление повлияет на конечный результат."
+"Максимальное количество часов, которое может быть отображено, доступное "
+"количество данных влияет на итоговое число."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
 msgstr "Включить поминутный прогноз осадков"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
-#, fuzzy
 msgid ""
 "If you'd like to use this make sure you use your exact coordinates/address "
 "as location to help its accuracy. See Feature map on website on support for "
 "your provider"
 msgstr ""
-"Если вы хотите это использовать, убедитесь, что вы используете точные "
-"координаты/адрес как местоположение, чтобы увеличить точность. Реализовано "
-"только для OpenWeatherMap."
+"Если вы хотите использовать эту функцию, убедитесь, что вы используете свои "
+"точные координаты/адрес в качестве местоположения для повышения точности. "
+"См. карту характеристик на веб-сайте поддержки вашего провайдера"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Включение отображения предупреждений о погоде"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Кнопка \"Оповещения\" появится во всплывающем меню, если для вашего "
+"местоположения есть активные оповещения."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
 msgstr "Отображать обе единицы измерения температуры"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
-#, fuzzy
 msgid ""
 "Some of the available values are: {c} is condition, {t} is temperature and "
 "{u} is unit.\n"
@@ -2623,7 +2625,7 @@ msgid ""
 "things."
 msgstr ""
 "Доступные значения: {c} условия, {t} температура и {u} единицы измерения.\n"
-"Может быть использовано если метка не входит в вертикальную панель с учётом "
+"Может быть использовано, если метка не входит в вертикальную панель с учётом "
 "других мелких деталей."
 
 #. 3.8->settings-schema.json->tooltipTextOverride->description
@@ -2635,20 +2637,24 @@ msgstr "Переопределить метку на панели"
 msgid ""
 "Has the same behavior and available values as 'Override label on panel'."
 msgstr ""
+"Имеет то же поведение и доступные значения, что и 'Переопределить метку на "
+"панели'."
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr ""
+msgstr "Всегда показывать почасовую погоду"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
 "Hide/Show button will be hidden and Hourly weather will be permanently "
 "visible."
 msgstr ""
+"Кнопка \"Скрыть/Показать\" будет скрыта, а \"Почасовая погода\" будет "
+"постоянно отображаться."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
-msgstr "Отображать прогноз сверху вниз вместо слева направо"
+msgstr "Отображать прогноз сверху вниз вместо слева направо."
 
 #. 3.8->settings-schema.json->locationList->description
 msgid "Your saved locations"
@@ -2692,11 +2698,11 @@ msgstr "Отображать направление ветра как текст
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
-msgstr "Например ЮВ, С вместо иконок направления"
+msgstr "Например ЮВ, С вместо иконок направления."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Провайдер должен перевести условия, если это возможно"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2704,6 +2710,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Должен ли ваш провайдер перевести условия на ваш язык, если ваша локаль "
+"поддерживается провайдером. В противном случае апплет будет использовать "
+"свою собственную систему перевода."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2746,7 +2755,6 @@ msgid "Current maintainer: Gr3q"
 msgstr "Текущий разработчик: Gr3q"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
-#, fuzzy
 msgid ""
 "If you find an issue with this applet please make a report by clicking on "
 "the button below and login in with your Github account.\n"
@@ -2758,12 +2766,14 @@ msgid ""
 "the issue is about. Logs with Debug level (which can be saved to a file "
 "below) are also appreciated."
 msgstr ""
-"Если вы нашли проблему с апплетом, пожалуйста сообщите о ней, нажав на "
-"кнопку ниже и войдя под вашим аккаунтом GitHub. До того как вы начнёте "
-"писать, убедитесь, что о проблеме уже не сообщалось в разделе \"issues\". Не "
-"забудьте написать weather@mockturtl в заголовке поля, чтобы всем было проще "
-"понять, что проблема касается погодного апплета (форма используется для всех "
-"апплетов Cinnamon)."
+"Если вы обнаружили проблему с этим апплетом, пожалуйста, создайте отчет, "
+"нажав на кнопку ниже и войдя под своим аккаунтом на Github.\n"
+"\n"
+"Прежде чем начать писать, пожалуйста, убедитесь, что проблема еще не "
+"отправлена в раздел проблем, и просмотрите заполненные данные в описании "
+"проблемы. Не забудьте добавить краткое описание в верхнее поле Title рядом с "
+"названием апплета, чтобы всем было проще понять, о чем идет речь. Также "
+"приветствуются логи с уровнем Debug (которые можно сохранить в файл ниже)."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
@@ -2783,7 +2793,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
-msgstr ""
+msgstr "Уровень журнала"
 
 #. 3.8->settings-schema.json->logLevel->tooltip
 msgid ""
@@ -2791,6 +2801,10 @@ msgid ""
 "request payloads. Changing this will only be effective on future logs. Only "
 "change it you are instructed or you know what you are doing."
 msgstr ""
+"Info - обычный журнал, Debug - отладочный, а Verbose также регистрирует "
+"полезную нагрузку сетевых запросов. Изменение этого параметра будет "
+"действовать только на будущие журналы. Вносите изменения только по "
+"инструкции или если вы знаете, что делаете."
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
@@ -2798,21 +2812,23 @@ msgstr ""
 
 #. 3.8->settings-schema.json->fileSelect->description
 msgid "Click Save to save debug information to a file"
-msgstr ""
+msgstr "Нажмите кнопку Сохранить, чтобы сохранить отладочную информацию в файл"
 
 #. 3.8->settings-schema.json->fileSelect->tooltip
 msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
+"Сюда входят журналы апплета и текущие настройки с отредактированным ключом "
+"API."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
-msgstr ""
+msgstr "Выбранный путь для сохранения журналов"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Переопределение строки агента пользователя"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2821,10 +2837,15 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Если у вас возникли проблемы с неправильной работой апплета и вы знаете, что "
+"проблема заключается в строке User Agent, вы можете попробовать "
+"переопределить ее. Изменяйте ее только в том случае, если вы знаете, что "
+"делаете. Это строка, которая отправляется на сервер, когда апплет пытается "
+"получить данные о погоде."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Выполните команду при изменении информации о погоде"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2844,7 +2865,23 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Апплет будет выполнять указанную вами команду каждый раз, когда данные о "
+"погоде будут обновляться. Команда будет интерполирована с теми же значениями "
+"с тем же форматом, которые вы можете получить в любом из переопределений, "
+"кроме того, вы получите {full_data}, которая является полными текущими "
+"данными о погоде. Интерполяция с одинарными скобками {xxx} не будет "
+"экранирована, с двойными скобками {{xxxx}} они будут обернуты в одинарные "
+"кавычки ('), а все остальные одинарные кавычки будут экранированы внутри. Вы "
+"можете использовать это для интеграции данных о погоде с другими частями "
+"вашей системы. Вы можете посмотреть полную структуру данных о погоде по "
+"ссылке в README.\n"
+"\n"
+"Пример: 'notify-send \"The weather is {c} and the temperature is {t}{u}'' "
+"покажет уведомление с текущим состоянием погоды и температурой.\n"
+"\n"
+"Пример: 'echo {{full_data}} > /tmp/weather_data' сохранит полные данные о "
+"погоде в файл в /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Проверьте свою команду"
