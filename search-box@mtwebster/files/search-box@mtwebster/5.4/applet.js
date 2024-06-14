@@ -53,6 +53,8 @@ SearchBoxApplet.prototype = {
             this.settings.bind("custom-provider-label", "custom_provider_label");
             this.settings.bind("custom-provider-url", "custom_provider_url");
             this.settings.bind("custom-keybinding", "custom_keybinding", this.on_keybinding_changed);
+            this.settings.bind("background-color", "bgd_color", this._set_searchEntry_style);
+            this.settings.bind("text-color", "txt_color", this._set_searchEntry_style);
 
             this.set_applet_icon_symbolic_name("edit-find-symbolic");
             this._orientation = orientation;
@@ -79,7 +81,9 @@ SearchBoxApplet.prototype = {
             this.searchEntry = new St.Entry({ name: "menu-search-entry",
                                      hint_text: _("Type to search..."),
                                      track_hover: true,
-                                     can_focus: true });
+                                     can_focus: true,
+                                     style: "background: %s; color: %s;".format(this.bgd_color, this.txt_color)
+                                    });
             this.searchEntry.set_secondary_icon(this._searchInactiveIcon);
             this.searchBox.add_actor(this.searchEntry);
             this.searchActive = false;
@@ -95,6 +99,10 @@ SearchBoxApplet.prototype = {
         catch (e) {
             global.logError(e);
         }
+    },
+
+    _set_searchEntry_style: function() {
+        this.searchEntry.style = "background: %s; color: %s;".format(this.bgd_color, this.txt_color);
     },
 
     populate_search_engines_menu: function() {
