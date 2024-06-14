@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.4.0\n"
+"Project-Id-Version: 3.6.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-02-04 19:07+0100\n"
+"PO-Revision-Date: 2024-06-14 18:56+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -126,7 +126,7 @@ msgstr "Naposledy v"
 
 #: 3.0/applet.js:1108 3.8/weather-applet.js:19100
 msgid "Powered by"
-msgstr "Zdoj předpovědi"
+msgstr "Předpověď od"
 
 #: 3.0/applet.js:1113
 msgid "from you"
@@ -1559,17 +1559,15 @@ msgstr "Velmi dobrá"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Popílek"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Nárazy větru"
+msgstr "Húlava"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Lehké sněhové přeháňky"
+msgstr "Lehká přeháňka sněhových krupek"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1593,24 +1591,20 @@ msgid "Heavy drizzle"
 msgstr "Silné mžení"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Lehké sněhové přeháňky"
+msgstr "Lehká sněhová přeháňka"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Silné sněhové přeháňky"
+msgstr "Silná sněhová přeháňka"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
 msgstr "Déšť se sněhem"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
-msgstr "Sněhové přeháňky"
+msgstr "Sněhová přeháňka"
 
 #: 3.8/weather-applet.js:12884 3.8/weather-applet.js:14455
 msgid "Freezing fog"
@@ -1821,13 +1815,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Ujistěte se, že je vložen klíč API\n"
-"který jste získal od Climacell"
+"získaný u Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1838,32 +1831,26 @@ msgstr ""
 "Looking Glass"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr "Déšť se sněhem"
+msgstr "Sněhové krupky"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Lehké sněhové přeháňky"
+msgstr "Lehké přeháňky"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Silné sněhové přeháňky"
+msgstr "Silné přeháňky"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Bouřka se slabým deštěm"
+msgstr "Bouřka s mírnými kroupami"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Bouřka s deštěm"
+msgstr "Bouřka s kroupami"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
 msgstr "Pocitově"
 
@@ -1935,7 +1922,7 @@ msgstr "Oblast: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "Počet výstrah: {count}"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1943,9 +1930,8 @@ msgid "Error Saving Debug Information"
 msgstr "Nepodařilo se uložit debug informace"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Nelze zjistit informace o počasí"
+msgstr "Nelze otevřít soubor {filePath} pro zápis"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1957,41 +1943,39 @@ msgstr "Uloženo do {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Žádný skript nebyl poskytnut"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Jako první se musí zadat skript."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Žádná data o počasí"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Nedostupná data o počasí, se kterými by skript mohl pracovat"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Skrip úspěšně spuštěn"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Skript úspěšně proveden."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Chyba při pokusu o vykonání skriptu"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Skript vrátil chybu, více informací je v logu"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Applet Počasí"
+msgstr "Výstrahy appletu Počasí"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2423,7 +2407,7 @@ msgstr "Nastavení lokality"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Automatizace a technické záležitosti"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2494,9 +2478,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (pouze USA)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (vyžaduje klíč)"
+msgstr "OpenWeatherMap OneCall (vyžaduje klíč)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2538,6 +2521,8 @@ msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Pokud se položka lokalita shoduje s uloženým stavem v kolonce vyhledávání, "
+"přednostně bude použita uložená lokalita."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2597,13 +2582,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Povolit zobrazování meteorologických výstrah"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Pokud je pro vaši lokalitu vydána meteorologická výstraha, zobrazí se jako "
+"tlačítko s upozorněním ve vyskakovací nabídce."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2692,6 +2679,8 @@ msgstr "Například JV či S namísto ikonek s šipkou."
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
 msgstr ""
+"Poskytovatel předpovědi by měl poskytnou lokalizovanou verzi "
+"meteorologických podmínek"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2699,6 +2688,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Přepíná mezi tím, kdo poskytuje překlad termínů v předpovědi počasí. Jestli "
+"je vaše jazyková verze zajištěna přímo poskytovatelem předpovědi a nebo "
+"přeložena v rámci tohoto appletu."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2812,7 +2804,7 @@ msgstr "Cesta pro ukládání záznamů"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Přepsat řetězec User Agent"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2821,10 +2813,15 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"V případě potíží s tímto appletem a je zřejmé, že potíže způsobuje řetězec "
+"User Agent, je možnost tuto hodnotu změnit v rámci pokusu o obejití "
+"problému. Změna není doporučena, kromě případů, kdy opravdu víte, co děláte. "
+"Tento řetězec je odesílán na příslušný server ve chvíli, kdy se snaží "
+"aktualizovat data s předpovědí počasí."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Spustit příkaz po změně informace o počasí"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2844,7 +2841,22 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Applet spustí zadaný příkaz pokaždé, kdy dojde ke změně dat o počasí. Příkaz "
+"bude doplněn stejnými hodnotami a ve stejném formátu, které je možno "
+"nastavit v některém z přepisů, navíc lze získat {full_data}, což jsou úplná "
+"aktuální data o počasí. Parametry s jednoduchými složenými závorkami {xxx} "
+"nebudou escapovány, s dvojitými složenými závorkami {{xxxx}} budou zabaleny "
+"do jednoduchých uvozovek (') a všechny ostatní jednoduché uvozovky "
+"escapovány uvnitř. Využít to lze pro integraci dat o počasí s jinými částmi "
+"systému. Kompletní strukturu dat s předpovědí lze prostudovat pod odkazem v "
+"souboru README.\n"
+"\n"
+"Příklad: 'notify-send \"Aktuální počasí je {c} a teplota dosahuje {t}{u}\"' "
+"zobrazí notifikaci s aktuálním stavem počasí a teplotou.\n"
+"\n"
+"Příklad: 'echo {{full_data}} > /tmp/weather_data' uloží plná data s "
+"předpovědí do složky /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Vyzkoušet příkaz"
