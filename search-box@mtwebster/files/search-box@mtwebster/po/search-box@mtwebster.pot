@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: search-box@mtwebster 2.0.1\n"
+"Project-Id-Version: search-box@mtwebster 2.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-20 18:33+0200\n"
+"POT-Creation-Date: 2024-06-14 19:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
+#: applet.js:79 3.2/applet.js:73 5.4/applet.js:82
 msgid "Type to search..."
 msgstr ""
 
@@ -29,11 +29,11 @@ msgstr ""
 msgid "Edit providers"
 msgstr ""
 
-#: 5.4/applet.js:61
+#: 5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 
-#: 5.4/applet.js:104
+#: 5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr ""
 
@@ -159,4 +159,16 @@ msgid ""
 "If your query begins with the 3 letters of the short name, it will be "
 "processed by the relevant search engine.\n"
 "Example: ddg linux mint iso"
+msgstr ""
+
+#. 5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr ""
+
+#. 5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr ""
+
+#. 5.4->settings-schema.json->text-color->description
+msgid "Text color"
 msgstr ""

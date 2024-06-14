@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Internet Search Box\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-20 18:33+0200\n"
+"POT-Creation-Date: 2024-06-14 19:28+0200\n"
 "PO-Revision-Date: 2017-02-26 21:20+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
+#: applet.js:79 3.2/applet.js:73 5.4/applet.js:82
 msgid "Type to search..."
 msgstr "Upišite za pretragu..."
 
@@ -32,11 +32,11 @@ msgstr "Promijeni zadanu aplikaciju..."
 msgid "Edit providers"
 msgstr "Uredi pružatelje usluga"
 
-#: 5.4/applet.js:61
+#: 5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 
-#: 5.4/applet.js:104
+#: 5.4/applet.js:112
 #, fuzzy
 msgid "Select your Search Engine:"
 msgstr "Odaberi pružatelja usluge pretrage"
@@ -164,4 +164,16 @@ msgid ""
 "If your query begins with the 3 letters of the short name, it will be "
 "processed by the relevant search engine.\n"
 "Example: ddg linux mint iso"
+msgstr ""
+
+#. 5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr ""
+
+#. 5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr ""
+
+#. 5.4->settings-schema.json->text-color->description
+msgid "Text color"
 msgstr ""

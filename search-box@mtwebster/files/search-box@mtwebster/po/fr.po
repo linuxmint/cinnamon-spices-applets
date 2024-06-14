@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-20 18:33+0200\n"
-"PO-Revision-Date: 2024-05-20 18:35+0200\n"
+"POT-Creation-Date: 2024-06-14 19:28+0200\n"
+"PO-Revision-Date: 2024-06-14 19:29+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
+#: applet.js:79 3.2/applet.js:73 5.4/applet.js:82
 msgid "Type to search..."
 msgstr "Tapez pour rechercher..."
 
@@ -31,11 +31,11 @@ msgstr "Modifier les programmes par défaut..."
 msgid "Edit providers"
 msgstr "Modifier les moteurs de recherche"
 
-#: 5.4/applet.js:61
+#: 5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr "Clic droit pour sélectionner ou ajouter votre moteur de recherche"
 
-#: 5.4/applet.js:104
+#: 5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Choisir un moteur de recherche :"
 
@@ -174,3 +174,15 @@ msgstr ""
 "Si votre requête commence par les 3 lettres du nom abrégé, elle sera traitée "
 "par le moteur de recherche approprié.\n"
 "Exemple : ddg linux mint iso"
+
+#. 5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr "Couleurs de la boîte de recherche"
+
+#. 5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr "Couleur de l’arrière-plan"
+
+#. 5.4->settings-schema.json->text-color->description
+msgid "Text color"
+msgstr "Couleur du texte"
