@@ -1,3 +1,6 @@
+### v2.1.0~20240614
+  * You can now select the background color and text color of the search box.
+
 ### v2.0.1~20240520
   * From now on, you can select the search engines you want to show in the context menu.
   * The current search engine is preceded by a dot in the context menu.
