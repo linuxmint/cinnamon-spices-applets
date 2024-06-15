@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-15 16:50-0100\n"
-"PO-Revision-Date: 2024-05-27 13:33-0400\n"
+"PO-Revision-Date: 2024-06-15 16:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -48,7 +48,7 @@ msgstr "TIP"
 
 #: 6.2/applet.js:46
 msgid "Hey, I saw that!"
-msgstr ""
+msgstr "¡Oye, vi eso!"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
@@ -404,17 +404,20 @@ msgstr "Opacidad general"
 #. 5.4->settings-schema.json->click-info->title
 #. 6.2->settings-schema.json->info->description
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
 #. 6.2->settings-schema.json->click-effects-moved-info->description
-#, fuzzy
 msgid ""
 "In Cinnamon versions 6.2 and later, the click effects have been removed from "
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
 "which can be installed through the Cinnamon Extensions settings module."
 msgstr ""
+"En las versiones 6.2 y posteriores de Cinnamon, los efectos de clic se "
+"eliminaron de este applet y se reubicaron en una nueva extensión llamada "
+"'efectos de clic del mouse', que se puede instalar a través del módulo de "
+"configuración de Extensiones de Cinnamon."
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
