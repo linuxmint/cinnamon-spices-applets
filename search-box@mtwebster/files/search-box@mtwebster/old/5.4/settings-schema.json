@@ -15,12 +15,13 @@
     "description": "Reset query after search",
     "tooltip": "Reset query after search? This may not be useful if you want to be able to perform the same query on other search engines afterwards."
   },
+  "header-providers": {
+    "type": "header",
+    "description": "Search Engines"
+  },
   "providers": {
     "type": "list",
     "description": "Providers",
-    "height": 300,
-    "show-buttons": true,
-    "reorderable": true,
     "columns": [
       {
         "id": "show",
