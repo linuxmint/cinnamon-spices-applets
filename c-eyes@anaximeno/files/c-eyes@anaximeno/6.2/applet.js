@@ -41,6 +41,11 @@ function _(text) {
 }
 
 
+// Mark this for translation since it won't be
+// marked by the translation tool
+const _DEFAULT_TOOLTIP = _("Hey, I saw that!");
+
+
 class Eye extends Applet.Applet {
 	constructor(metadata, orientation, panelHeight, instanceId, areaWidth) {
 		super(orientation, panelHeight, instanceId);

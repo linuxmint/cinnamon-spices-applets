@@ -204,7 +204,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "deactivate-on-fullscreen",
 				value: "deactivate_on_fullscreen",
-				cb: null,
+				cb: this.on_fullscreen_changed.bind(this),
 			},
 			{
 				key: "eye-vertical-padding",
@@ -216,7 +216,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "deactivate-effects-on-fullscreen",
 				value: "deactivate_effects_on_fullscreen",
-				cb: null,
+				cb: this.on_fullscreen_changed.bind(this),
 			}
 		];
 
@@ -312,14 +312,16 @@ class Eye extends Applet.Applet {
 			panelIsInCurrentMonitor = panelsInMonitor.includes(this.panel);
 		}
 
-		const shouldHideEye = monitorIsInFullscreen && panelIsInCurrentMonitor;
-
-		if (this.deactivate_on_fullscreen) {
-			this.set_active(!shouldHideEye);
+		if (this.deactivate_on_fullscreen && panelIsInCurrentMonitor) {
+			this.set_active(!monitorIsInFullscreen);
+		} else {
+			this.set_active(true);
 		}
 
 		if (this.deactivate_effects_on_fullscreen) {
-			this.set_mouse_circle_active(!shouldHideEye && this.mouse_click_show);
+			this.set_mouse_circle_active(!monitorIsInFullscreen && this.mouse_click_show);
+		} else {
+			this.set_mouse_circle_active(this.mouse_click_show);
 		}
 	}
 
