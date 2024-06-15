@@ -1,8 +1,7 @@
 {
-    "multiversion": true,
     "uuid": "search-box@mtwebster",
     "name": "Internet Search Box",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "description": "Perform an Internet search, using your favorite engine",
     "author": "claudiux"
 }

@@ -1,3 +1,8 @@
+### v2.2.0~20240615
+  * New settings layout.
+  * Fixed a bug that prevented you from modifying the list of search engines.
+  * Removed deprecated versions.
+
 ### v2.1.0~20240614
   * You can now select the background color and text color of the search box.
 
