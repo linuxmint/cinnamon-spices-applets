@@ -1,4 +1,14 @@
 {
+	"info": {
+		"type": "section",
+		"description": "Info"
+	},
+
+	"click-effects-moved-info": {
+		"type": "label",
+		"description": "In Cinnamon versions 6.2 and later, the click effects have been removed from this applet and relocated to a new extension called 'mouse-click-effects,' which can be installed through the Cinnamon Extensions settings module."
+	},
+
 	"general": {
 		"type": "section",
 		"description": "General"

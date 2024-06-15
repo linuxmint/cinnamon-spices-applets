@@ -17,6 +17,7 @@
 			"type": "page",
 			"title": "Effects",
 			"sections": [
+				"click-info",
 				"click-generic",
 				"click-events",
 				"click-colors"
@@ -46,6 +47,11 @@
 				"iris-clicked-color",
 				"pupil-clicked-color"
 			]
+		},
+		"click-info": {
+			"type": "section",
+			"title": "Info",
+			"keys": ["click-effects-moved-on-cinnamon-6.2-info"]
 		},
 		"click-generic": {
 			"type": "section",
@@ -173,6 +179,10 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Fill the Colors Inside the Eye"
+	},
+	"click-effects-moved-on-cinnamon-6.2-info": {
+		"type": "label",
+		"description": "In Cinnamon versions 6.2 and later, the click effects have been removed from this applet and relocated to a new extension called 'mouse-click-effects,' which can be installed through the Cinnamon Extensions settings module."
 	},
 	"mouse-click-enable": {
 		"type": "checkbox",
