@@ -14274,7 +14274,7 @@ class VisualCrossing extends BaseProvider {
         return this.ParseWeather(json, translate);
     }
     ParseWeather(weather, translate) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
         const result = {
             date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
@@ -14292,16 +14292,16 @@ class VisualCrossing extends BaseProvider {
             dewPoint: CelsiusToKelvin((_c = weather.currentConditions.dew) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.dew),
             wind: {
                 degree: (_d = weather.currentConditions.winddir) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
-                speed: (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
+                speed: KPHtoMPS((_f = (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed) !== null && _f !== void 0 ? _f : null),
             },
-            temperature: CelsiusToKelvin((_f = weather.currentConditions.temp) !== null && _f !== void 0 ? _f : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
+            temperature: CelsiusToKelvin((_g = weather.currentConditions.temp) !== null && _g !== void 0 ? _g : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
             sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
             sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
             condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
             extra_field: {
                 name: _("Feels Like"),
                 type: "temperature",
-                value: CelsiusToKelvin((_g = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _g !== void 0 ? _g : weather.currentConditions.feelslike)
+                value: CelsiusToKelvin((_h = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _h !== void 0 ? _h : weather.currentConditions.feelslike)
             },
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
