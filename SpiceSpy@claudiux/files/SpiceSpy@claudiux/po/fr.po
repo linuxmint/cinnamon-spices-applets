@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-17 11:35+0200\n"
-"PO-Revision-Date: 2024-06-17 11:47+0200\n"
+"POT-Creation-Date: 2024-06-18 01:15+0200\n"
+"PO-Revision-Date: 2024-06-18 01:17+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:367
+#: applet.js:386
 msgid "Mark all as read"
 msgstr "Tout marquer comme lu"
 
-#: applet.js:371
+#: applet.js:390
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: applet.js:375
+#: applet.js:394
 msgid "Spices"
 msgstr "Spices"
 
-#: applet.js:437
+#: applet.js:456
 msgid "Configure..."
 msgstr "Configurer..."
 
@@ -42,8 +42,8 @@ msgstr "SpiceSpy (Spices Espion)"
 msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
 msgstr ""
-"Vous avertit lorsqu'une modification est apportée à vos Spices préférées "
-"sur le site web."
+"Vous avertit lorsqu'une modification est apportée à vos Spices préférées sur "
+"le site web."
 
 #. settings-schema.json->section1->description
 msgid "Options"
@@ -64,6 +64,22 @@ msgstr "Opacité en absence de changement"
 #. settings-schema.json->color-on-change->description
 msgid "Color on change"
 msgstr "Couleur en cas de changement"
+
+#. settings-schema.json->show-icon-in-menu->description
+msgid "Show each Spice icon in the menu"
+msgstr "Afficher l'icône de chaque Spice dans le menu"
+
+#. settings-schema.json->show-icon-in-menu->tooltip
+msgid "This can affect menu display speed."
+msgstr "Cela peut affecter la vitesse d'affichage du menu."
+
+#. settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Taille de l'icône"
+
+#. settings-schema.json->icon-size->units
+msgid "pixels"
+msgstr "pixels"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"

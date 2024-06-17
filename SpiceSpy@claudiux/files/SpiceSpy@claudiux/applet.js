@@ -59,7 +59,24 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     let label = new St.Label({ text: label_text });
     this.addActor(label);
 
-    let stars_box = new St.BoxLayout({ style: "spacing: .25em" });
+    if (this.parent.show_icon_in_menu) {
+      let icon_box = new St.BoxLayout({ style: "spacing: .25em;" });
+      let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
+      let icon_file = Gio.file_new_for_path(icon_path);
+      let icon;
+      if (icon_file.query_exists(null)) {
+        let gicon = Gio.icon_new_for_string(icon_path);
+        icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
+      } else {
+        let icon_name = "spices-"+spice.type;
+        //~ icon_file = Gio.file_new_for_path(icon_path);
+        icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+      }
+      icon_box.add_actor(icon);
+      this.addActor(icon_box);
+    }
+
+    let stars_box = new St.BoxLayout({ style: "spacing: .25em;" });
     let star_icon = new St.Icon({ icon_name: "starred", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
     let star_count = new St.Label({ text: spice.score.toString() });
     stars_box.add_actor(star_icon);
@@ -69,7 +86,7 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     if (this.new_stars) stars_box.set_style("color: %s;".format(this.parent.color_on_change));
 
 
-    this.comments_box = new St.BoxLayout({ style: "spacing: .25em" });
+    this.comments_box = new St.BoxLayout({ style: "spacing: .25em;" });
     let comments_icon = new St.Icon({ icon_name: "user-available", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
     this.comments_label = new St.Label({ text:  spice.comments.toString()});
     this.comments_box.add_actor(comments_icon);
@@ -145,6 +162,8 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("update-interval", "update_interval");
     this.settings.bind("standard-opacity", "standard_opacity", this.make_menu);
     this.settings.bind("color-on-change", "color_on_change", this.make_menu);
+    this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
+    this.settings.bind("icon-size", "icon_size");
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
