@@ -2,7 +2,7 @@
   "uuid": "SpiceSpy@claudiux",
   "name": "SpiceSpy",
   "description": "Notifies you when there's a change to your favorite Spices on the website.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "max-instances": 1,
   "author": "claudiux"
 }
