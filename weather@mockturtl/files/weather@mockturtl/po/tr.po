@@ -8,7 +8,7 @@
 # Simon Claessens <gagalago@gmail.com>, 2011.
 # ecyrbe <ecyrbe@gmail.com>, 2011.
 # Serdar Sağlam <teknomobil@yandex.com>, 2018.
-# Serkan ÖNDER <serkanonder@outlook.com>, 2021,2022,2023.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021,2022,2023.2024.
 #
 msgid ""
 msgstr ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2023-02-03 09:59+0300\n"
+"PO-Revision-Date: 2024-06-18 14:02+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -1561,17 +1561,15 @@ msgstr "Çok iyi"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Kül"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Bağrışma"
+msgstr "Fırtına"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Hafif şiddetli kar yağışı"
+msgstr "Hafif sağanak yağış"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1595,22 +1593,18 @@ msgid "Heavy drizzle"
 msgstr "Yoğun çiseleme"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Hafif şiddetli kar yağışı"
+msgstr "Hafif yağmur"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Ağır şiddetli kar"
+msgstr "Sağanak yağmur"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Karlı yağmur"
+msgstr "Kar/yağmur karışımı"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
 msgstr "Sağanak kar"
 
@@ -1817,59 +1811,51 @@ msgid "Mostly Clear"
 msgstr "Çoğunlukla Açık"
 
 #: 3.8/weather-applet.js:16330
-#, fuzzy
 msgid "Pirate Weather"
-msgstr "ABD Hava Durumu"
+msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
-"Lütfen emin ol\n"
-"Climacell'den sahip olduğunuz API anahtarını girdiniz"
+"Lütfen emin olun\n"
+"Pirate Weather'dan aldığınız API anahtarını girdinizden"
 
 #: 3.8/weather-applet.js:16724
-#, fuzzy
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
-msgstr "Konum Hizmeti hatalarla yanıt verdi, lütfen hata günlüklerine bakın"
+msgstr ""
+"Konum Hizmeti konumunuzu bulamadı, lütfen Looking Glass'taki günlüklere bakın"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr "Karlı yağmur"
+msgstr "Kar taneleri"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Hafif şiddetli kar yağışı"
+msgstr "Hafif yağış"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Ağır şiddetli kar"
+msgstr "Şiddetli yağış"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Hafif yağmur ve gök gürültülü sağanak yağış"
+msgstr "Hafif dolu ve gök gürültülü sağanak yağış"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Fırtına ve yağmur"
+msgstr "Doluyla birlikte fırtına"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
 msgstr "Hissedilen"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17544
 msgid ""
@@ -1888,10 +1874,10 @@ msgstr ""
 " {configFilePath}"
 
 #: 3.8/weather-applet.js:17827
-#, fuzzy
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
-"Bir konum girdiğinizden emin olun veya bunun yerine Otomatik konum kullanın"
+"Bir konum girdiğinizden emin olun veya bunun yerine Otomatik konum "
+"seçeneğini kullanın."
 
 #: 3.8/weather-applet.js:17845
 msgid "This provider requires an API key to operate"
@@ -1936,7 +1922,7 @@ msgstr "Alan: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} hava durumu uyarısı"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1944,9 +1930,8 @@ msgid "Error Saving Debug Information"
 msgstr "Hata Ayıklama Bilgileri Kaydedilirken Hata"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Hava durumu bilgisi alınamadı"
+msgstr "{filePath} dosyası yazmak için açılamadı"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1958,41 +1943,39 @@ msgstr "{filePath} klasörüne kaydedildi"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Komut Dosyası Sağlanmadı"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Önce bir komut dosyası eklemeniz gerekir."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "ABD Hava Durumu"
+msgstr "Hava Durumu Verisi Yok"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Komut dosyasını çalıştıracak hava durumu verisi yok"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Komut Dosyası Başarıyla Yürütüldü"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Komut dosyanız başarıyla yürütüldü."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Komut Dosyasını Çalıştırma Hatası"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Komut dosyası hata döndürdü; daha fazla bilgi için günlüklere bakın"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Hava Durumu Uygulaması"
+msgstr "Hava Durumu Uygulaması Uyarıları"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2425,7 +2408,7 @@ msgstr "Konum ayarları"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Teknik ve Otomasyon"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2481,7 +2464,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2496,14 +2479,12 @@ msgid "US National Weather (US only)"
 msgstr "ABD Ulusal Hava Durumu (yalnızca ABD)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (anahtar gerekli)"
+msgstr "OpenWeatherMap OneCall (anahtar gerekli)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "Pirate Weather (key needed)"
-msgstr "Weatherbit (anahtar gerekli)"
+msgstr "Pirate Weather (anahtar gerekli)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
@@ -2540,6 +2521,8 @@ msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Konum alanı kayıtlı bir konumun 'Arama Girişi' alanıyla eşleşiyorsa bunun "
+"yerine kayıtlı konum kullanılacaktır."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2587,25 +2570,26 @@ msgid "Enable minutely precipitation forecast"
 msgstr "Dakikalık yağış tahminini etkinleştirin"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
-#, fuzzy
 msgid ""
 "If you'd like to use this make sure you use your exact coordinates/address "
 "as location to help its accuracy. See Feature map on website on support for "
 "your provider"
 msgstr ""
-"Bunu kullanmak isterseniz, doğruluğuna yardımcı olmak için konum olarak tam "
-"koordinatlarınızı/adresinizi kullandığınızdan emin olun. Şu anda yalnızca "
-"OpenWeatherMap ve MET Norveç ile uygulanmaktadır."
+"Bunu kullanmak istiyorsanız doğruluğuna yardımcı olmak için konum olarak tam "
+"koordinatlarınızı/adresinizi kullandığınızdan emin olun. Sağlayıcınıza "
+"yönelik destek konusunda web sitesindeki Özellik haritasına bakın"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Hava durumu uyarılarının görüntülenmesini etkinleştir"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Konumunuz için herhangi bir aktif uyarı varsa, açılır menüde Uyarılar "
+"düğmesi görünecektir."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2694,7 +2678,7 @@ msgstr "Yön simgeleri yerine GD, K gibi."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Sağlayıcı varsa koşulları tercüme etmelidir"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2702,6 +2686,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Yerel ayarınız sağlayıcı tarafından destekleniyorsa, sağlayıcınız koşulları "
+"kendi dilinize tercüme etmelidir. Aksi halde uygulama kendi çeviri sistemini "
+"kullanacaktır."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2817,7 +2804,7 @@ msgstr "Günlükleri kaydetmek için seçilen yol"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Kullanıcı Aracısı Dizesini Geçersiz Kılma"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2826,10 +2813,15 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Uygulamanın düzgün çalışmamasıyla ilgili sorunlarınız varsa ve sorunun "
+"Kullanıcı Aracısı dizesi olduğunu biliyorsanız, onu geçersiz kılmayı "
+"deneyebilirsiniz. Yalnızca ne yaptığınızı biliyorsanız değiştirin. Bu, "
+"uygulama hava durumu verilerini almaya çalıştığında sunucuya gönderilen bir "
+"dizedir."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Hava durumu bilgisi değiştiğinde bir komut çalıştırın"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2849,7 +2841,22 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Uygulama, hava durumu verileri her güncellendiğinde sağladığınız komutu "
+"çalıştıracaktır. Komut, geçersiz kılmaların herhangi birinde alabileceğiniz "
+"aynı formatta aynı değerlerle enterpolasyona tabi tutulacaktır; ayrıca tam "
+"güncel hava durumu verileri olan {full_data} elde edersiniz. Tek parantezli "
+"{xxx} enterpolasyondan kaçılmaz, çift parantezli {{xxxx}} tek tırnak (') "
+"içine alınır ve diğer tüm tek tırnak işaretleri içeriden çıkarılır. Bunu, "
+"hava durumu verilerini sisteminizin diğer bölümleriyle entegre etmek için "
+"kullanabilirsiniz. BENİ OKU'daki bağlantı aracılığıyla hava durumu veri "
+"yapısının tamamına bakabilirsiniz.\n"
+"\n"
+"Örnek: 'bildir-gönder \"Hava durumu {c} ve sıcaklık {t}{u}\"', mevcut hava "
+"durumu ve sıcaklığı içeren bir bildirim gösterecektir.\n"
+"\n"
+"Örnek: 'echo {{full_data}} > /tmp/weather_data' tüm hava durumu verilerini /"
+"tmp içindeki bir dosyaya kaydedecektir."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Komutunuzu test edin"

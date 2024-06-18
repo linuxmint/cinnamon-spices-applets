@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0 v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-26 18:02+0200\n"
-"PO-Revision-Date: 2023-06-08 13:33+0300\n"
+"POT-Creation-Date: 2023-12-16 12:42+0100\n"
+"PO-Revision-Date: 2023-12-17 14:38+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:425
+#: applet.js:426
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Bu, kendi Kategoriler ve Radyo İstasyonları listenizdir."
 
-#: applet.js:426
+#: applet.js:427
 msgid "You can add more using the [+] button."
 msgstr "[+] düğmesini kullanarak daha fazlasını ekleyebilirsiniz."
 
-#: applet.js:427
+#: applet.js:428
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr "Bir kategori için yalnızca adını girin; diğer alanları boş bırakın."
 
-#: applet.js:428
+#: applet.js:429
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Bir radyo istasyonu için yalnızca adını ve akış URL'sini girin."
 
-#: applet.js:429
+#: applet.js:430
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -42,7 +42,7 @@ msgstr ""
 "Satırları sürükleyip bırakarak veya listenin altındaki butonları ve araçları "
 "kullanarak sıralayabilirsiniz."
 
-#: applet.js:430
+#: applet.js:431
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -50,7 +50,7 @@ msgstr ""
 "Listenin sağ altında bulunan düğmeler, sayfa sayfa veya kategori kategori "
 "gezinmenizi sağlar."
 
-#: applet.js:431
+#: applet.js:432
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -58,7 +58,7 @@ msgstr ""
 "İstasyonlarınızdan birini aramak için listeye tıklayın ve adını yazmaya "
 "başlayın."
 
-#: applet.js:432
+#: applet.js:433
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -66,13 +66,13 @@ msgstr ""
 "İstasyonları listenize kolayca eklemek için şu 2 sekmeyi kullanın: Ara ve "
 "İçe Aktar."
 
-#: applet.js:433
+#: applet.js:434
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Menüde bir istasyonu veya kategoriyi görüntülemek için 'Menü' kutusunu "
 "işaretleyin."
 
-#: applet.js:434
+#: applet.js:435
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -80,12 +80,12 @@ msgstr ""
 "İstasyonu dinlemek veya listenin altındaki araçları kullanarak başka bir "
 "kategoriye taşımak için '♪/➟' kutusunu işaretleyin."
 
-#: applet.js:436
+#: applet.js:437
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 "İstasyon listenizi internet veri tabanlarından kontrol ettirebilirsiniz."
 
-#: applet.js:437
+#: applet.js:438
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -94,7 +94,7 @@ msgstr ""
 "veritabanı tarafından sağlanan bir Evrensel Benzersiz Tanımlayıcı (UUID) "
 "alacaktır."
 
-#: applet.js:438
+#: applet.js:439
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -102,7 +102,7 @@ msgstr ""
 "Dolayısıyla, bir akış URL'si değiştirilmişse, bir sonraki kontrol URL'yi "
 "günceller ve etkilenen istasyonu dinlemeye devam edebilirsiniz."
 
-#: applet.js:440
+#: applet.js:441
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -110,7 +110,7 @@ msgstr ""
 "Burada, İnternet üzerinden erişilebilen ücretsiz bir radyo veri tabanındaki "
 "diğer istasyonları arayabilirsiniz."
 
-#: applet.js:441
+#: applet.js:442
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -118,7 +118,7 @@ msgstr ""
 "Aşağıdaki formun en az birkaç alanını doldurun ve ardından 'Ara ...' "
 "düğmesine tıklayın."
 
-#: applet.js:442
+#: applet.js:443
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -128,7 +128,7 @@ msgstr ""
 "istasyonları test edebileceğiniz ve menüye ekleyebileceğiniz yeni bir sonuç "
 "sayfası görüntülenir."
 
-#: applet.js:443
+#: applet.js:444
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -136,7 +136,7 @@ msgstr ""
 "Zaten menünüzde bulunan bir istasyon, yalnızca akış URL'si değiştiyse arama "
 "sonuçlarında görünecektir."
 
-#: applet.js:444
+#: applet.js:445
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -144,7 +144,7 @@ msgstr ""
 "Yeni bir sayfanın görünmemesi, arama kriterlerinize uyan tüm sonuçların "
 "görüntülendiği anlamına gelir."
 
-#: applet.js:446
+#: applet.js:447
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -152,7 +152,7 @@ msgstr ""
 "En az bir radyo istasyonunun adını ve akış URL'sini içeren bir dosyayı içe "
 "aktarabilirsiniz."
 
-#: applet.js:447
+#: applet.js:448
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -160,29 +160,29 @@ msgstr ""
 "Bu radyo istasyonları aşağıdaki listede gösterilmektedir. ♪ kutularını "
 "işaretleyerek onları test edebilirsiniz."
 
-#: applet.js:448
+#: applet.js:449
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Ardından bu sekmenin altında bulunan butonlar ile bu listeyi yönetin."
 
-#: applet.js:450
+#: applet.js:451
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
 msgstr ""
 "Shoutcast dizininde, istasyon adının solundaki indirme düğmesine tıklayın."
 
-#: applet.js:451
+#: applet.js:452
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
 msgstr ""
 "Açık biçimi (.XSPF) seçin ve dosyayı istasyonla aynı adı vererek kaydedin."
 
-#: applet.js:452
+#: applet.js:453
 msgid "This file can then be imported here."
 msgstr "Bu dosya daha sonra buraya aktarılabilir."
 
-#: applet.js:454
+#: applet.js:455
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bayt = %s GB = %s GiB"
@@ -193,308 +193,321 @@ msgstr "%s bayt = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:615 applet.js:629 applet.js:4562 applet.js:4574
+#: applet.js:616 applet.js:630 applet.js:4758 applet.js:4770
 msgid "(Undefined)"
 msgstr "(Tanımsız)"
 
-#: applet.js:1021 applet.js:1694 applet.js:2094
+#: applet.js:818
+msgid "Radio3.0 web page..."
+msgstr "Radyo3.0 web sayfası..."
+
+#: applet.js:1048 applet.js:1787 applet.js:2210
 msgid "Stop"
 msgstr "Durdur"
 
-#: applet.js:1686
+#: applet.js:1779
 msgid "Start"
 msgstr "Başlat"
 
-#: applet.js:1932 applet.js:1962 applet.js:2008
+#: applet.js:2025 applet.js:2067 applet.js:2124
 msgid "Middle-Click: Stop Recording"
 msgstr "Orta Tıklama: Kaydı Durdur"
 
-#: applet.js:1958 applet.js:2004
+#: applet.js:2063 applet.js:2120
 msgid "Volume: %s%"
 msgstr "Ses düzeyi: %s%"
 
-#: applet.js:1964 applet.js:2010
+#: applet.js:2069 applet.js:2126
 msgid "Middle-click: ON/OFF"
 msgstr "Orta tıklama: AÇIK/KAPALI"
 
-#: applet.js:1966 applet.js:2012
+#: applet.js:2071 applet.js:2128
 msgid "Click: Select another station"
 msgstr "Tıklayın: Başka bir istasyon seçin"
 
-#: applet.js:1979
+#: applet.js:2085
 msgid "Click to select a station"
 msgstr "Bir istasyon seçmek için tıklayın"
 
-#: applet.js:2014
+#: applet.js:2130
 msgid "Scroll wheel: volume change"
 msgstr "Kaydırma tekerleği: ses değişikliği"
 
-#: applet.js:2070 applet.js:2429 applet.js:4220
+#: applet.js:2186 applet.js:2545 applet.js:4387
 msgid "Configure..."
 msgstr "Yapılandır..."
 
-#: applet.js:2074 applet.js:2421
+#: applet.js:2190 applet.js:2537
 msgid "Search for new stations..."
 msgstr "Yeni istasyonlar arayın..."
 
-#: applet.js:2080 applet.js:2433 applet.js:4257
+#: applet.js:2196 applet.js:2549 applet.js:4424
 msgid "Sound Settings"
 msgstr "Ses Ayarları"
 
-#: applet.js:2143 applet.js:2190
+#: applet.js:2259 applet.js:2306
 msgid "Watch on YT"
 msgstr "YT'de izle"
 
-#: applet.js:2150
+#: applet.js:2266
 msgid "Try to download it from YT (unsafe)"
 msgstr "YT'den indirmeyi deneyin (güvenli değil)"
 
-#: applet.js:2181
+#: applet.js:2297
 #, javascript-format
 msgid "Infos on: %s"
 msgstr "Bilgiler: %s"
 
-#: applet.js:2211
+#: applet.js:2327
 msgid "Recently Played Stations:"
 msgstr "Son Oynatılan İstasyonlar:"
 
-#: applet.js:2247
+#: applet.js:2363
 msgid "Visit the home page of this station"
 msgstr "Bu istasyonun ana sayfasını ziyaret edin"
 
-#: applet.js:2288
+#: applet.js:2404
 msgid "My Categories"
 msgstr "Kategorilerim"
 
-#: applet.js:2357
+#: applet.js:2473
 msgid "My Radio Stations"
 msgstr "Radyo İstasyonlarım"
 
-#: applet.js:2541
+#: applet.js:2657
 msgid "Downloading..."
 msgstr "İndiriliyor..."
 
-#: applet.js:2543
+#: applet.js:2659
 msgid "Stop downloading"
 msgstr "İndirmeyi durdur"
 
-#: applet.js:2651
+#: applet.js:2767
 msgid "Download complete"
 msgstr "İndirme tamamlandı"
 
-#: applet.js:2653 applet.js:2662 applet.js:4033 applet.js:4042 applet.js:4051
-#: applet.js:4324
+#: applet.js:2769 applet.js:2778 applet.js:4188 applet.js:4197 applet.js:4206
+#: applet.js:4505
 msgid "Open the recordings folder"
 msgstr "Kayıtlar klasörünü aç"
 
-#: applet.js:2660 applet.js:4030 applet.js:4040 applet.js:4049
+#: applet.js:2776 applet.js:4185 applet.js:4195 applet.js:4204
 msgid "An error seems to have occurred during recording!"
 msgstr "Kayıt sırasında bir hata oluşmuş gibi görünüyor!"
 
-#: applet.js:2661 applet.js:4032 applet.js:4041 applet.js:4050
+#: applet.js:2777 applet.js:4187 applet.js:4196 applet.js:4205
 msgid "Please check this record."
 msgstr "Lütfen bu kaydı kontrol edin."
 
-#: applet.js:2762 applet.js:2796
+#: applet.js:2884 applet.js:2918
 msgid "Record from now"
 msgstr "Şu andan itibaren kaydet"
 
-#: applet.js:2780 applet.js:4468
+#: applet.js:2902 applet.js:4664
 msgid "Stop Current Recording"
 msgstr "Geçerli Kaydı Durdur"
 
-#: applet.js:2892
+#: applet.js:3014
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "%s%s oynatılıyor"
 
-#: applet.js:2941
+#: applet.js:3063
 msgid "Radio OFF"
 msgstr "Radyo KAPALI"
 
-#: applet.js:3069
+#: applet.js:3191
 msgid "Unable to record anything!"
 msgstr "Hiçbir şey kaydedilemiyor!"
 
-#: applet.js:3069 applet.js:4344
+#: applet.js:3191 applet.js:4525
 msgid "Insufficient space"
 msgstr "Yetersiz alan"
 
-#: applet.js:3069
+#: applet.js:3191
 msgid "The limit you set has been reached."
 msgstr "Belirlediğiniz sınıra ulaşıldı."
 
-#: applet.js:3435
+#: applet.js:3583
 msgid "Please Log Out then Log In"
 msgstr "Lütfen Oturumu Kapatın ve Yeniden Oturum Açın"
 
-#: applet.js:3435
+#: applet.js:3583
 msgid "to finalize yt-dlp update"
 msgstr "yt-dlp güncellemesini sonlandırmak için"
 
-#: applet.js:3521
+#: applet.js:3676
 msgid "Nothing to save."
 msgstr "Kaydedilecek bir şey yok."
 
-#: applet.js:3534
+#: applet.js:3689
 msgid "List of saved radio stations"
 msgstr "Kayıtlı radyo istasyonlarının listesi"
 
-#: applet.js:3552
+#: applet.js:3707
 msgid "This will replace all current radio stations."
 msgstr "Bu, mevcut tüm radyo istasyonlarının yerini alacaktır."
 
-#: applet.js:3553
+#: applet.js:3708
 msgid "Are you sure you want to continue?"
 msgstr "Devam etmek istediğine emin misin?"
 
-#: applet.js:3613 applet.js:3706
+#: applet.js:3768 applet.js:3861
 msgid "Update in progress"
 msgstr "Güncelleme devam ediyor"
 
-#: applet.js:3613 applet.js:3706
+#: applet.js:3768 applet.js:3861
 msgid "It may take a while ... Please wait."
 msgstr "Biraz zaman alabilir... Lütfen bekleyin."
 
-#: applet.js:3701 applet.js:3783
+#: applet.js:3856 applet.js:3938
 msgid "Update completed successfully"
 msgstr "Güncelleme başarıyla tamamlandı"
 
-#: applet.js:3911 applet.js:3967
+#: applet.js:4066 applet.js:4122
 msgid "ERROR: Invalid YT video URL!"
 msgstr "HATA: Geçersiz YT video URL'si!"
 
-#: applet.js:3936
+#: applet.js:4091
 msgid "Unable to extract a single soundtrack"
 msgstr "Tek bir film müziği çıkarılamıyor"
 
-#: applet.js:3936
+#: applet.js:4091
 msgid "Maybe it's a playlist?"
 msgstr "Belki bir çalma listesidir?"
 
-#: applet.js:3969
+#: applet.js:4124
 msgid "Close"
 msgstr "Kapat"
 
-#: applet.js:4190
+#: applet.js:4345
 msgid "About..."
 msgstr "Hakkında..."
 
-#: applet.js:4201
+#: applet.js:4368
 msgid "Manual..."
 msgstr "Klavuz..."
 
-#: applet.js:4233
+#: applet.js:4400
 msgid "Schedule a background record..."
 msgstr "Bir arka plan kaydı planlayın..."
 
-#: applet.js:4245
+#: applet.js:4412
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Film müziğini YouTube videosundan çıkarın..."
 
-#: applet.js:4266
+#: applet.js:4433
 msgid "Pulse Effects"
 msgstr "Nabız Efektleri"
 
-#: applet.js:4275
+#: applet.js:4442
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "'%s'yi kaldır"
 
-#: applet.js:4288
+#: applet.js:4455
 msgid "Radio ON at startup"
 msgstr "Başlangıçta radyo AÇIK"
 
-#: applet.js:4302
+#: applet.js:4469
 msgid "Display Station Logo"
 msgstr "İstasyon Logosunu Göster"
 
-#: applet.js:4341
+#. settings-schema.json->dont-check-dependencies->description
+#: applet.js:4483
+msgid "Do not check about dependencies"
+msgstr "Bağımlılıkları kontrol etme"
+
+#: applet.js:4522
 msgid "(auto)"
 msgstr "(otomatik)"
 
-#: applet.js:4341
+#: applet.js:4522
 msgid "(manual)"
 msgstr "(elle)"
 
-#: applet.js:4344 applet.js:4517
+#: applet.js:4525 applet.js:4713
 msgid "Stop Recording"
 msgstr "Kaydı Durdur"
 
-#: applet.js:4344
+#: applet.js:4525
 msgid "Start Recording"
 msgstr "Kayda Başla"
 
-#: applet.js:4365
+#: applet.js:4546
 msgid "Reload this applet"
 msgstr "Bu uygulamayı yeniden yükle"
 
-#: applet.js:4384
+#: applet.js:4562
+msgid "Display volume level near icon"
+msgstr "Simgenin yanında ses seviyesini göster"
+
+#: applet.js:4580
 msgid "Cancel downloads from YT"
 msgstr "YOUTUBE'dan indirmeleri iptal et"
 
-#: applet.js:4518
+#: applet.js:4714
 msgid "Close without stopping recording"
 msgstr "Kaydı durdurmadan kapatın"
 
-#: applet.js:4728
+#: applet.js:4924
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "%s:%s'den %s:%s'ye kayıt başlatılıyor"
 
-#: applet.js:4740
+#: applet.js:4936
 msgid "Recording completed"
 msgstr "Kayıt tamamlandı"
 
-#: applet.js:4834
+#: applet.js:5030
 msgid "This will import a new file containing radio stations."
 msgstr "Bu, radyo istasyonlarını içeren yeni bir dosyayı içe aktaracaktır."
 
-#: applet.js:4835
+#: applet.js:5031
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musun?"
 
-#: applet.js:4906
+#: applet.js:5102
 msgid "No new radio in your list."
 msgstr "Listenizde yeni radyo yok."
 
-#: applet.js:4908
+#: applet.js:5104
 msgid "One more radio in your list."
 msgstr "Listenize bir radyo daha eklendi."
 
-#: applet.js:4910
+#: applet.js:5106
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "Listenizde %s tane daha radyo var."
 
-#: applet.js:5117
+#: applet.js:5313
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Radio3.0 uygulama menüsüne eklenecek yeni istasyon yok"
 
-#: applet.js:5119
+#: applet.js:5315
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Radio3.0 uygulama menüsüne yeni bir istasyon eklendi"
 
-#: applet.js:5121
+#: applet.js:5317
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "Radio3.0 uygulama menüsüne %s yeni istasyon eklendi"
 
-#: applet.js:5322
+#: applet.js:5518
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#: lib/checkDependencies.js:345
+#: lib/checkDependencies.js:384
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "%s uygulaması tamamen işlevsel."
 
-#: lib/checkDependencies.js:346
+#: lib/checkDependencies.js:385
 msgid "All dependencies are installed"
 msgstr "Tüm bağımlılıklar kurulmuş"
 
-#: lib/checkDependencies.js:374
+#: lib/checkDependencies.js:413
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -502,11 +515,11 @@ msgstr ""
 "Bu uygulamanın tüm özelliklerine sahip olması için gereken bazı programların "
 "eksik olduğu görülüyor."
 
-#: lib/checkDependencies.js:375
+#: lib/checkDependencies.js:414
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Lütfen yeni açılan terminalde şu komutları uygulayın:"
 
-#: lib/checkDependencies.js:376
+#: lib/checkDependencies.js:415
 msgid "Some dependencies are not installed!"
 msgstr "Bazı bağımlılıklar kurulu değil!"
 
@@ -614,7 +627,7 @@ msgstr "Girdiyi düzenle"
 
 #. metadata.json->description
 msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
-msgstr "Cinnamon için Nihai İnternet Radyo Alıcısı ve Kaydedici"
+msgstr "Cinnamon için Üstün İnternet Radyo Alıcısı ve Kaydedici"
 
 #. metadata.json->name
 msgid "Radio3.0"
@@ -849,6 +862,10 @@ msgstr "Etiketler"
 #. settings-schema.json->search-list->columns->title
 msgid "Favicon"
 msgstr "Favori simge"
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "Sanatçı/Başlık değişimi"
 
 #. settings-schema.json->stations-list-play-button->description
 #. settings-schema.json->import-list-play-button->description
@@ -1095,10 +1112,6 @@ msgstr ""
 "\n"
 "Bu uygulama simgesinde kaydırarak veya içerik menüsündeki kaydırıcıyı "
 "kullanarak ses seviyesini değiştirebileceğinizi lütfen unutmayın."
-
-#. settings-schema.json->dont-check-dependencies->description
-msgid "Do not check about dependencies"
-msgstr "Bağımlılıkları kontrol etme"
 
 #. settings-schema.json->volume-step->description
 msgid "Volume step scrolling on icon"
