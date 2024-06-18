@@ -48,6 +48,10 @@ function SessionManager(initCallback, cancellable) {
     return new SessionManagerProxy(Gio.DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager', initCallback, cancellable);
 }
 
+const POWER_SCHEMA = "org.cinnamon.settings-daemon.plugins.power";
+const SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
+const SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
+
 class ScreenSaverInhibitor extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -55,6 +59,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
         this.icon_path_on = false;
         this.icon_path_off = false;
+
+        this.power_settings = new Gio.Settings({ schema_id: POWER_SCHEMA });
 
         try {
             this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
@@ -70,6 +76,10 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.settings.bind( "inhibit-at-startup",
                                 "inhibit_at_startup",
                                 this.on_inhibit_at_startup_changed);
+            this.settings.bind( "old-sleep-display-ac",
+                                "old_sleep_display_ac");
+            this.settings.bind( "old-sleep-inactive-ac-timeout",
+                                "old_sleep_inactive_ac_timeout");
         } catch (e) {
             this.settings = null;
             this.off_icon = "screen-inhibit-symbolic"; // "video-display-symbolic";
@@ -77,6 +87,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.keybinding = null;
             this.icon_path_on = false;
             this.icon_path_off = false;
+            this.old_sleep_display_ac = 0;
+            this.old_sleep_inactive_ac_timeout = 0;
         }
 
         try {
@@ -141,6 +153,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this._inhibit = undefined;
             this.set_applet_tooltip(ALLOW_TT);
             this.inhibited = false;
+            this.sleep_display_ac = this.old_sleep_display_ac;
+            this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
         } else {
             try {
                 this._sessionProxy.InhibitRemote("inhibitor-screen-inhibit@mtwebster",
@@ -150,6 +164,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
                                                  Lang.bind(this, this._onInhibit));
                 this.set_applet_tooltip(INHIBIT_TT);
                 this.inhibited = true;
+                this.sleep_display_ac = 0;
+                this.sleep_inactive_ac_timeout = 0;
             } catch(e) {
                 global.log("Unable to inhibit screensaver: "+e);
             }
@@ -191,11 +207,19 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         );
 
         this.inhibited = true;
+        this.sleep_display_ac = 0;
+        this.sleep_inactive_ac_timeout = 0;
 
         this.update_icon();
     }
 
     on_applet_added_to_panel() {
+        if (this.sleep_display_ac != 0 && this.sleep_display_ac != this.old_sleep_display_ac)
+            this.old_sleep_display_ac = this.sleep_display_ac;
+
+        if (this.sleep_inactive_ac_timeout != 0 && this.sleep_inactive_ac_timeout != this.old_sleep_inactive_ac_timeout)
+            this.old_sleep_inactive_ac_timeout = this.sleep_inactive_ac_timeout;
+
         if (this.inhibit_at_startup && !this.inhibited) {
             let id = setInterval ( () => {
                 if (this._sessionProxy) { // Ensures that this._sessionProxy is defined.
@@ -206,10 +230,31 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         }
     }
 
+    on_applet_removed_from_panel() {
+        this.sleep_display_ac = this.old_sleep_display_ac;
+        this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
+    }
+
     reset_to_default_icons() {
         this.off_icon = HOME_DIR + "/.local/share/cinnamon/applets/screen-inhibit@mtwebster/icons/screen-inhibit-symbolic.svg";
         this.on_icon = HOME_DIR + "/.local/share/cinnamon/applets/screen-inhibit@mtwebster/icons/screen-inhibit-active-symbolic.svg";
         this.on_settings_changed();
+    }
+
+    get sleep_display_ac() {
+        return this.power_settings.get_int(SLEEP_DISPLAY_AC_KEY);
+    }
+
+    set sleep_display_ac(value) {
+        this.power_settings.set_int(SLEEP_DISPLAY_AC_KEY, value);
+    }
+
+    get sleep_inactive_ac_timeout() {
+        return this.power_settings.get_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY);
+    }
+
+    set sleep_inactive_ac_timeout(value) {
+        this.power_settings.set_int(SLEEP_INACTIVE_AC_TIMEOUT_KEY, value);
     }
 };
 

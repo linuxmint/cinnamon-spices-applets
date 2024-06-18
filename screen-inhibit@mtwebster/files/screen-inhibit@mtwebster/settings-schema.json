@@ -41,5 +41,13 @@
     "default" : false,
     "description" : "Inhibit screensaver at startup",
     "indent": true
+ },
+ "old-sleep-display-ac" : {
+     "type" : "generic",
+     "default": 0
+ },
+ "old-sleep-inactive-ac-timeout" : {
+     "type" : "generic",
+     "default": 0
  }
 }
