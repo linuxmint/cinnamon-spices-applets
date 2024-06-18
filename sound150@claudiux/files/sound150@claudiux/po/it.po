@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-05 23:35+0200\n"
-"PO-Revision-Date: 2023-12-11 18:10+0100\n"
+"PO-Revision-Date: 2024-06-18 15:56+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -177,40 +177,40 @@ msgstr "Impostazioni del Suono"
 
 #: 5.4/applet.js:260
 msgid "Mute"
-msgstr ""
+msgstr "Muta"
 
 #: 5.4/applet.js:1092
 msgid "View cover"
-msgstr ""
+msgstr "Visualizza la copertina"
 
 #: 5.4/applet.js:1957
 msgid "Easy Effects"
-msgstr ""
+msgstr "Effetti semplici"
 
 #: 5.4/applet.js:2001
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr ""
+msgstr "Rimuovere '%s'?"
 
 #: 5.4/applet.js:2654
 msgid "The 'playerctl' package is required!"
-msgstr ""
+msgstr "È richiesto il pacchetto 'playerctl'!"
 
 #: 5.4/applet.js:2655
 msgid "Please select 'Install playerctl' in this menu"
-msgstr ""
+msgstr "Seleziona \"Installa playerctl\" in questo menù"
 
 #: 5.4/applet.js:2810
 msgid "Reload this applet"
-msgstr ""
+msgstr "Ricarica questa applet"
 
 #: 5.4/applet.js:2816
 msgid "Remove sound applet"
-msgstr ""
+msgstr "Rimuovi l'applet audio"
 
 #: 5.4/applet.js:2825
 msgid "Install playerctl"
-msgstr ""
+msgstr "Installa playerctl"
 
 #. metadata.json->name
 msgid "Sound 150%"
@@ -218,7 +218,7 @@ msgstr "Suono 150%"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
-msgstr ""
+msgstr "Applet audio migliorata"
 
 #. 4.6->settings-schema.json->section1->description
 #. 3.4->settings-schema.json->section1->description
@@ -576,22 +576,21 @@ msgstr "7%"
 
 #. 5.4->settings-schema.json->page_behavior->title
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #. 5.4->settings-schema.json->page_icon->title
 #. 5.4->settings-schema.json->sectionIcon1->title
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. 5.4->settings-schema.json->page_sound->title
-#, fuzzy
 msgid "Sound"
-msgstr "Suono 150%"
+msgstr "Suono"
 
 #. 5.4->settings-schema.json->page_shortcuts->title
 #. 5.4->settings-schema.json->sectionShortcuts1->title
 msgid "Shortcuts"
-msgstr ""
+msgstr "Scorciatoie"
 
 #. 5.4->settings-schema.json->sectionBehavior3->title
 msgid "Tooltip"
@@ -599,46 +598,45 @@ msgstr "Tooltip"
 
 #. 5.4->settings-schema.json->sectionSound2->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. 5.4->settings-schema.json->sectionSound3->title
-#, fuzzy
 msgid "Sounds"
-msgstr "Suono 150%"
+msgstr "Suoni"
 
 #. 5.4->settings-schema.json->sectionSound4->title
 msgid "Remove incompatible applets"
-msgstr ""
+msgstr "Rimuovi le applet incompatibili"
 
 #. 5.4->settings-schema.json->keepPlayerListOpen->description
 msgid "Keep the player list open"
-msgstr ""
+msgstr "Mantieni aperta la lista dei riproduttori"
 
 #. 5.4->settings-schema.json->keepChoosePlayerOpen->description
 msgid "Keep the player controller selector open"
-msgstr ""
+msgstr "Tieni aperto il selettore del controller del lettore"
 
 #. 5.4->settings-schema.json->avoidTwice->description
 msgid "Avoid displaying controllers twice"
-msgstr ""
+msgstr "Evita di visualizzare i controller due volte"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
 msgid "Seeker tooltip: time to disappear"
-msgstr ""
+msgstr "Seeker tooltip: tempo alla scomparsa"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
-msgstr ""
+msgstr "Passa al prossimo riproduttore"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to switch to the next player if it exists."
 msgstr ""
-"Imposta tasto(i) di scelta rapida per mostrare il menù dell'applet audio."
+"Imposta le combinazioni di tasti per passare al giocatore successivo, se "
+"esiste."
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
@@ -658,35 +656,37 @@ msgstr "Mostra artista e titolo del brano nel tooltip"
 
 #. 5.4->settings-schema.json->showVolumeLevelNearIcon->description
 msgid "Display volume level near icon"
-msgstr ""
+msgstr "Visualizza il livello del volume vicino all'icona"
 
 #. 5.4->settings-schema.json->showMicMutedOnIcon->description
 msgid "Display icon indicating that the microphone is muted, if applicable"
 msgstr ""
+"Visualizza l'icona che indica che il microfono è disattivato, se applicabile"
 
 #. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
 msgid "Display icon indicating that the microphone is activated, if applicable"
 msgstr ""
+"Visualizza l'icona che indica che il microfono è attivato, se applicabile"
 
 #. 5.4->settings-schema.json->magnetic25On->description
 msgid "Magnetize all multiples of 25%"
-msgstr ""
+msgstr "Magnetizza tutti i multipli del 25%"
 
 #. 5.4->settings-schema.json->color101_115->description
 msgid "Icon color: 101%-115%"
-msgstr ""
+msgstr "Colore icona: 101%-115%"
 
 #. 5.4->settings-schema.json->color116_130->description
 msgid "Icon color: 116%-130%"
-msgstr ""
+msgstr "Colore icona: 116%-130%"
 
 #. 5.4->settings-schema.json->color131_150->description
 msgid "Icon color: 131%-150%"
-msgstr ""
+msgstr "Colore icona: 131%-150%"
 
 #. 5.4->settings-schema.json->resetColorsButton->description
 msgid "Set colors to default values (yellow, orange, red)"
-msgstr ""
+msgstr "Imposta i colori sui valori predefiniti (giallo, arancione, rosso)"
 
 #. 5.4->settings-schema.json->alwaysCanChangeMic->description
 msgid "Always allow microphone to be reactivated"
@@ -698,73 +698,70 @@ msgstr "Mostra sempre l'interruttore \"Muta ingresso\" nel menù contestuale."
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr ""
+msgstr "disabilitato"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr ""
+msgstr "piccola"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr ""
+msgstr "media"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr ""
+msgstr "grande"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether the media keys osd is disabled or its relative display size"
 msgstr ""
+"Se l'OSD dei tasti multimediali è disabilitato o la relativa dimensione di "
+"visualizzazione"
 
 #. 5.4->settings-schema.json->showOSDonStartup->description
-#, fuzzy
 msgid "Show volume level in OSD on startup"
-msgstr "Mostra il volume nel tooltip"
+msgstr "Mostra il livello del volume nell'OSD all'avvio"
 
 #. 5.4->settings-schema.json->volumeSoundFile->description
 msgid "Which sound to play when the volume is changed"
-msgstr ""
+msgstr "Quale suono riprodurre quando si cambia il volume"
 
 #. 5.4->settings-schema.json->volumeSoundEnabled->description
 msgid "Whether to play a sound when the volume is changed"
-msgstr ""
+msgstr "Se riprodurre un suono quando si cambia il volume"
 
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
 msgid "Redefine Multimedia Keyboard Shortcuts"
-msgstr ""
+msgstr "Ridefinisci le scorciatoie da tastiera multimediali"
 
 #. 5.4->settings-schema.json->button-set-to-default-keybindings->description
 msgid "Use the same shortcuts as those defined by Cinnamon"
-msgstr ""
+msgstr "Utilizza le stesse scorciatoie definite da Cinnamon"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
-msgstr ""
+msgstr "Commuta Pausa/Riproduci"
 
 #. 5.4->settings-schema.json->volume-mute->description
-#, fuzzy
 msgid "Volume Mute"
-msgstr "Disattiva Muto"
+msgstr "Disattiva volume"
 
 #. 5.4->settings-schema.json->volume-up->description
-#, fuzzy
 msgid "Volume Up"
-msgstr "Volume"
+msgstr "Aumenta volume"
 
 #. 5.4->settings-schema.json->volume-down->description
-#, fuzzy
 msgid "Volume Down"
-msgstr "Volume"
+msgstr "Abbassa volume"
 
 #. 5.4->settings-schema.json->audio-next->description
 msgid "Next Track"
-msgstr ""
+msgstr "Prossima traccia"
 
 #. 5.4->settings-schema.json->audio-prev->description
-#, fuzzy
 msgid "Previous Track"
-msgstr "Precedente"
+msgstr "Traccia precedente"
 
 #. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 msgid "Remove from panel the sound@cinnamon.org applet"
-msgstr ""
+msgstr "Rimuovere dal pannello l'applet sound@cinnamon.org"

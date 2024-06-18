@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-31 10:36+0200\n"
-"PO-Revision-Date: 2023-10-29 16:41+0100\n"
+"PO-Revision-Date: 2024-06-18 14:58+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -26,7 +26,7 @@ msgstr "Monitoraggio Sensori"
 
 #: applet.js:268
 msgid "Suspended"
-msgstr ""
+msgstr "Sospeso"
 
 #: applet.js:484 applet.js:526
 msgid "high:"
@@ -95,9 +95,8 @@ msgid "Run xsensors"
 msgstr "Esegui xsensors"
 
 #: applet.js:992
-#, fuzzy
 msgid "Suspend Sensors"
-msgstr "Esegui xsensors"
+msgstr "Sospendi i sensori"
 
 #: applet.js:1003
 msgid "Reload this applet"
@@ -220,7 +219,7 @@ msgstr "Opzioni"
 
 #. settings-schema.json->section_Tooltip->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Tooltip"
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -319,39 +318,39 @@ msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuto"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 minuti"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 minuti"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 minuti"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minuti"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minuti"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuti"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuti"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 ora"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -377,9 +376,8 @@ msgid "Character size (% of standard size)"
 msgstr "Dimensione carattere (% della dimensione standard)"
 
 #. settings-schema.json->char_color_customized->description
-#, fuzzy
 msgid "Customize Text Color"
-msgstr "Colore del testo"
+msgstr "Personalizza il colore del testo"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
@@ -414,7 +412,7 @@ msgstr "Se rimuovere o meno le icone dal pannello."
 
 #. settings-schema.json->show_tooltip->description
 msgid "Display a tooltip on mouseover"
-msgstr ""
+msgstr "Visualizza un suggerimento al passaggio del mouse"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"

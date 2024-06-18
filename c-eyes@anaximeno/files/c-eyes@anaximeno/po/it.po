@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-15 16:50-0100\n"
-"PO-Revision-Date: 2023-10-30 13:13+0100\n"
+"PO-Revision-Date: 2024-06-18 15:18+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -27,6 +27,12 @@ msgid ""
 "installed\n"
 "on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
 msgstr ""
+"📢 Gli effetti clic verranno rimossi da questa applet nella versione 6.2 di "
+"Cinnamon\n"
+"e spostato in una nuova estensione denominata effetti clic del mouse che può "
+"già essere installata\n"
+"nel modulo delle impostazioni delle estensioni di Cinnamon per le versioni "
+"di Cinnamon >= 5.4"
 
 #: 4.2/applet.js:389 5.4/applet.js:385
 msgid "click to deactivate the eye"
@@ -42,20 +48,19 @@ msgstr "SUGGERIMENTO"
 
 #: 6.2/applet.js:46
 msgid "Hey, I saw that!"
-msgstr ""
+msgstr "Ehi, l'ho visto!"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
 msgstr "Occhi di Cinnamon"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
 "cursor."
 msgstr ""
 "Un'applet per Cinnamon che aggiunge un occhio alla barra del pannello che "
-"segue il cursore e visualizza le animazioni al clic."
+"segue il tuo cursore."
 
 #. 4.2->settings-schema.json->eye->title
 #. 5.4->settings-schema.json->eye->title
@@ -149,9 +154,8 @@ msgstr "ms"
 #. 4.2->settings-schema.json->eye-repaint-interval->description
 #. 5.4->settings-schema.json->eye-repaint-interval->description
 #. 6.2->settings-schema.json->repaint-interval->description
-#, fuzzy
 msgid "Eye Update Interval"
-msgstr "Intervallo di ridisegnamento"
+msgstr "Intervallo di aggiornamento dell'occhio"
 
 #. 4.2->settings-schema.json->eye-repaint-interval->tooltip
 #. 5.4->settings-schema.json->eye-repaint-interval->tooltip
@@ -161,18 +165,21 @@ msgid ""
 "(measured in miliseconds) result in smoother animation but require more "
 "processing power."
 msgstr ""
+"Questa impostazione controlla il tempo necessario per ridisegnare nuovamente "
+"l'occhio. Valori più bassi (misurati in millisecondi) producono "
+"un'animazione più fluida ma richiedono una maggiore potenza di elaborazione."
 
 #. 4.2->settings-schema.json->eye-repaint-angle->units
 #. 5.4->settings-schema.json->eye-repaint-angle->units
 #. 6.2->settings-schema.json->repaint-angle->units
 msgid "radians"
-msgstr ""
+msgstr "radianti"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->description
 #. 5.4->settings-schema.json->eye-repaint-angle->description
 #. 6.2->settings-schema.json->repaint-angle->description
 msgid "Eye Update Sensitivity"
-msgstr ""
+msgstr "Sensibilità all'aggiornamento dell'occhio"
 
 #. 4.2->settings-schema.json->eye-repaint-angle->tooltip
 #. 5.4->settings-schema.json->eye-repaint-angle->tooltip
@@ -182,6 +189,10 @@ msgid ""
 "required to redraw the eye. Lower values (measured in radians) result in "
 "smoother animation but require more processing power."
 msgstr ""
+"Questa impostazione controlla la variazione minima dell'angolo tra i "
+"movimenti del mouse necessaria per ridisegnare l'occhio. Valori più bassi "
+"(misurati in radianti) producono un'animazione più fluida ma richiedono una "
+"maggiore potenza di elaborazione."
 
 #. 4.2->settings-schema.json->eye-activate-by-default->description
 #. 5.4->settings-schema.json->eye-activate-by-default->description
@@ -218,7 +229,7 @@ msgstr "Colore Pupilla attivato"
 #. 6.2->settings-schema.json->fill-lids-color-painting->description
 #. 6.2->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
-msgstr ""
+msgstr "Riempi i colori all'interno dell'occhio"
 
 #. 4.2->settings-schema.json->mouse-click-enable->description
 #. 5.4->settings-schema.json->mouse-click-enable->description
@@ -393,7 +404,7 @@ msgstr "Opacità Generale"
 #. 5.4->settings-schema.json->click-info->title
 #. 6.2->settings-schema.json->info->description
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
@@ -403,32 +414,35 @@ msgid ""
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
 "which can be installed through the Cinnamon Extensions settings module."
 msgstr ""
+"Nelle versioni Cinnamon 6.2 e successive, gli effetti clic sono stati "
+"rimossi da questa applet e spostati in una nuova estensione chiamata "
+"\"effetti clic del mouse\", che può essere installata tramite il modulo "
+"delle impostazioni delle estensioni Cinnamon."
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
-msgstr ""
+msgstr "Messaggio di descrizione comando al passaggio del mouse"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
-msgstr ""
+msgstr "Usa colori alternativi per l'occhio"
 
 #. 6.2->settings-schema.json->use-alternative-colors->tooltip
 msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
 msgstr ""
+"Quando disabilitato utilizzerà il colore predefinito del tema del sistema "
+"corrente per gli elementi del pannello."
 
 #. 6.2->settings-schema.json->base-color->description
-#, fuzzy
 msgid "Base Color"
-msgstr "Colore Base attivato"
+msgstr "Colore base"
 
 #. 6.2->settings-schema.json->iris-color->description
-#, fuzzy
 msgid "Iris Color"
-msgstr "Colore Iride attivato"
+msgstr "Colore iride"
 
 #. 6.2->settings-schema.json->pupil-color->description
-#, fuzzy
 msgid "Pupil Color"
-msgstr "Colore Pupilla attivato"
+msgstr "Colore pupilla"
