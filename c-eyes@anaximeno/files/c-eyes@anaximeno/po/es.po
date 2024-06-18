@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-26 22:02-0100\n"
-"PO-Revision-Date: 2024-05-27 13:33-0400\n"
+"POT-Creation-Date: 2024-06-15 16:50-0100\n"
+"PO-Revision-Date: 2024-06-15 16:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -34,17 +34,21 @@ msgstr ""
 "en el módulo de configuración de Extensiones de Cinnamon para versiones de "
 "Cinnamon >= 5.4"
 
-#: 4.2/applet.js:387 5.4/applet.js:383
+#: 4.2/applet.js:389 5.4/applet.js:385
 msgid "click to deactivate the eye"
 msgstr "haga clic para desactivar el ojo"
 
-#: 4.2/applet.js:387 5.4/applet.js:383
+#: 4.2/applet.js:389 5.4/applet.js:385
 msgid "click to activate the eye"
 msgstr "haga clic para activar el ojo"
 
-#: 4.2/applet.js:388 5.4/applet.js:384
+#: 4.2/applet.js:390 5.4/applet.js:386
 msgid "TIP"
 msgstr "TIP"
+
+#: 6.2/applet.js:46
+msgid "Hey, I saw that!"
+msgstr "¡Oye, vi eso!"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
@@ -123,7 +127,7 @@ msgstr "Anchura de línea"
 #. 5.4->settings-schema.json->mouse-click-image-size->units
 #. 6.2->settings-schema.json->line-width->units
 #. 6.2->settings-schema.json->margin->units
-#. 6.2->settings-schema.json->vertical-padding->units
+#. 6.2->settings-schema.json->padding->units
 msgid "px"
 msgstr "px"
 
@@ -135,7 +139,7 @@ msgstr "Margen"
 
 #. 4.2->settings-schema.json->eye-vertical-padding->description
 #. 5.4->settings-schema.json->eye-vertical-padding->description
-#. 6.2->settings-schema.json->vertical-padding->description
+#. 6.2->settings-schema.json->padding->description
 msgid "Padding"
 msgstr "Relleno"
 
@@ -396,6 +400,24 @@ msgstr "Color del click derecho"
 #. 5.4->settings-schema.json->mouse-click-opacity->description
 msgid "General Opacity"
 msgstr "Opacidad general"
+
+#. 5.4->settings-schema.json->click-info->title
+#. 6.2->settings-schema.json->info->description
+msgid "Info"
+msgstr "Información"
+
+#. 5.4->settings-schema.json->click-effects-moved-on-
+#. cinnamon-6.2-info->description
+#. 6.2->settings-schema.json->click-effects-moved-info->description
+msgid ""
+"In Cinnamon versions 6.2 and later, the click effects have been removed from "
+"this applet and relocated to a new extension called 'mouse-click-effects,' "
+"which can be installed through the Cinnamon Extensions settings module."
+msgstr ""
+"En las versiones 6.2 y posteriores de Cinnamon, los efectos de clic se "
+"eliminaron de este applet y se reubicaron en una nueva extensión llamada "
+"'efectos de clic del mouse', que se puede instalar a través del módulo de "
+"configuración de Extensiones de Cinnamon."
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"

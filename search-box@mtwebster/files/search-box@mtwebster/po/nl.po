@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: search-box@mtwebster 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-20 18:33+0200\n"
+"POT-Creation-Date: 2024-06-14 19:28+0200\n"
 "PO-Revision-Date: 2024-04-21 18:06+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
+#: applet.js:79 3.2/applet.js:73 5.4/applet.js:82
 msgid "Type to search..."
 msgstr "Typ om te zoeken..."
 
@@ -28,12 +28,12 @@ msgstr "Verander standaardprogramma's..."
 msgid "Edit providers"
 msgstr "Bewerk providers"
 
-#: 5.4/applet.js:61
+#: 5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 "Klik met de rechtermuisknop om uw zoekmachine te selecteren of toe te voegen"
 
-#: 5.4/applet.js:104
+#: 5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Selecteer uw zoekmachine:"
 
@@ -169,3 +169,15 @@ msgstr ""
 "Als uw zoekopdracht begint met de 3 letters van de korte naam, wordt deze "
 "verwerkt door de relevante zoekmachine.\n"
 "Voorbeeld: ddg linux mint iso"
+
+#. 5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr ""
+
+#. 5.4->settings-schema.json->background-color->description
+msgid "Background color"
+msgstr ""
+
+#. 5.4->settings-schema.json->text-color->description
+msgid "Text color"
+msgstr ""
