@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-05 14:36-0500\n"
-"PO-Revision-Date: 2024-01-21 17:50-0500\n"
+"PO-Revision-Date: 2024-06-18 15:13+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
@@ -28,22 +28,20 @@ msgid "Waiting"
 msgstr "In attesa"
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid "Some dependencies not installed."
-msgstr "Alcune Dipendenze non sono Installate"
+msgstr "Alcune dipendenze non sono installate."
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
-"Sia 'sox' che 'zenity' sono richiesti da questa applet per avere tutte le "
-"sue funzionalità comprese le notifiche e gli avvisi acustici.\n"
+"Sia 'sox' che 'zenity' sono necessari affinché questa applet abbia tutte le "
+"sue funzionalità, comprese notifiche e avvisi acustici.\n"
 "\n"
-"Leggi il file di aiuto per scoprire come installarli."
+"Si prega di visualizzare il file README per assistenza sull'installazione.\n"
 
 #: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
@@ -88,28 +86,24 @@ msgid "Waiting for battery information"
 msgstr "In attesa di informazioni sulla batteria"
 
 #: 5.4/applet.js:444
-#, fuzzy
 msgid "Alert/Suspend:"
-msgstr "Sospensione:"
+msgstr "Avviso/Sospensione:"
 
 #: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batteria Scarica - spegnere o collegare alla rete elettrica"
 
 #: 5.4/applet.js:555
-#, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
 "Either connect to a power source or save or close down\n"
 "your work and suspend or shutdown the machine.\n"
 msgstr ""
-"Il livello della batteria è sceso al livello di avviso\n"
+"Il livello della batteria è sceso al livello di allerta.\n"
 "\n"
-"riconnettersi a una fonte di alimentazione\n"
-"\n"
-"o termina il tuo lavoro e sospendi o spegni la macchina\n"
-"\n"
+"Collegati a una fonte di alimentazione oppure salva o chiudi\n"
+"il proprio lavoro e sospendere o spegnere la macchina.\n"
 
 #: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
@@ -249,11 +243,10 @@ msgid "Percentage Charge:"
 msgstr "Livello Carica:"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Displays charge as percentage and allows alerts and actions"
 msgstr ""
-"Visualizza la Carica come Percentuale e consente di utilizzare Avvisi e "
-"Azioni"
+"Visualizza la carica come percentuale e consente di utilizzare avvisi e "
+"azioni"
 
 #. 5.4->settings-schema.json->General->title
 msgid "General"
@@ -413,12 +406,12 @@ msgstr ""
 #. 5.4->settings-schema.json->iconTheme->options
 #. 3.2->settings-schema.json->iconTheme->options
 msgid "Yaru Light"
-msgstr ""
+msgstr "Yaru Chiaro"
 
 #. 5.4->settings-schema.json->iconTheme->options
 #. 3.2->settings-schema.json->iconTheme->options
 msgid "Yaru Dark"
-msgstr ""
+msgstr "Yaru Scuro"
 
 #. 5.4->settings-schema.json->iconTheme->description
 #. 5.4->settings-schema.json->iconTheme->tooltip
@@ -714,21 +707,22 @@ msgstr ""
 
 #: 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
-msgstr ""
+msgstr "ATTENZIONE: SOSPENSIONE A BREVE"
 
 #: 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
+"Il livello della batteria è critico. La macchina verrà sospesa a breve."
 
 #: 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
-msgstr ""
+msgstr "Interrompi la sospensione"
 
 #: 5.4/suspendScript.sh:25
-#, fuzzy
 msgid "Suspend Immediately"
-msgstr "Sospendi al:"
+msgstr "Sospendi immediatamente"
 
 #: 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr ""
+"La macchina è stata sospesa perché il livello della batteria era critico."

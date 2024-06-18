@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-23 04:17+0200\n"
-"PO-Revision-Date: 2023-10-29 17:07+0100\n"
+"PO-Revision-Date: 2024-06-18 15:37+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -161,11 +161,11 @@ msgstr "Ricarica grafici"
 
 #: 6.0/applet.js:301
 msgid "Without any graphics"
-msgstr ""
+msgstr "Senza alcuna grafica"
 
 #: 6.0/applet.js:307
 msgid "With graphics"
-msgstr ""
+msgstr "Con grafica"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "00-20"
@@ -224,7 +224,7 @@ msgstr "Scrittura"
 #: 6.0/util.js:244 5.6/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr ""
+msgstr "Esecuzione di '%s' fallita:"
 
 #: 3.4/applet.js:62
 msgid ""
@@ -272,15 +272,16 @@ msgid "Error while saving file:"
 msgstr "Errore durante il salvataggio del file:"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Multi-Core System Monitor"
-msgstr "Errore del monitor di sistema multi-core."
+msgstr "Monitor di Sistema Multi-Core"
 
 #. metadata.json->description
 msgid ""
 "Displays in realtime the cpu usage for each core/cpu and overall memory "
 "usage."
 msgstr ""
+"Visualizza in tempo reale l'utilizzo della CPU per ciascun core/cpu e "
+"l'utilizzo complessivo della memoria."
 
 #: 6.0/prefsui.glade:56 3.4/prefsui.glade:49 4.0/prefsui.glade:56
 #: 3.2/prefsui.glade:49 3.0/prefsui.glade:49 5.6/prefsui.glade:56

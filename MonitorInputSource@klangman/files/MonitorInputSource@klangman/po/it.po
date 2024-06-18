@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-12 22:04-0400\n"
-"PO-Revision-Date: 2023-12-11 17:33+0100\n"
+"PO-Revision-Date: 2024-06-18 14:40+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -21,36 +21,35 @@ msgstr ""
 
 #: applet.js:51
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: applet.js:54
 msgid "Shift+"
-msgstr ""
+msgstr "Maiusc+"
 
 #: applet.js:58
 msgid "Left Click"
-msgstr ""
+msgstr "Clic sinistro"
 
 #: applet.js:60
 msgid "Middle Click"
-msgstr ""
+msgstr "Clic centrale"
 
 #: applet.js:62
 msgid "Right Click"
-msgstr ""
+msgstr "Clic destro"
 
 #: applet.js:64
 msgid "Back Click"
-msgstr ""
+msgstr "Clic indietro"
 
 #: applet.js:66
 msgid "Forward Click"
-msgstr ""
+msgstr "Clic avanti"
 
 #: applet.js:158 applet.js:390 applet.js:392
-#, fuzzy
 msgid "Monitor input sources"
-msgstr "Sorgente di Ingresso Monitor"
+msgstr "Monitorare le sorgenti di input"
 
 #: applet.js:170 applet.js:217 applet.js:480
 msgid "Detecting monitors..."
@@ -86,7 +85,7 @@ msgstr "Nessun monitor compatibile rilevato"
 
 #: applet.js:386
 msgid "for"
-msgstr ""
+msgstr "per"
 
 #: applet.js:473
 msgid "Refresh"

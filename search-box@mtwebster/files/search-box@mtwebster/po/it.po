@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-14 19:28+0200\n"
-"PO-Revision-Date: 2022-06-03 18:19+0200\n"
+"PO-Revision-Date: 2024-06-18 15:46+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:79 3.2/applet.js:73 5.4/applet.js:82
 msgid "Type to search..."
@@ -33,11 +33,12 @@ msgstr "Modifica provider"
 #: 5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
+"Fai clic con il pulsante destro del mouse per selezionare o aggiungere il "
+"tuo motore di ricerca"
 
 #: 5.4/applet.js:112
-#, fuzzy
 msgid "Select your Search Engine:"
-msgstr "Seleziona un provider di ricerca"
+msgstr "Seleziona il tuo motore di ricerca:"
 
 #. metadata.json->name
 msgid "Internet Search Box"
@@ -128,36 +129,40 @@ msgstr "Associazione dei tasti, che apre la casella di ricerca"
 
 #. 5.4->settings-schema.json->reset-after-search->description
 msgid "Reset query after search"
-msgstr ""
+msgstr "Reimposta la query dopo la ricerca"
 
 #. 5.4->settings-schema.json->reset-after-search->tooltip
 msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
 msgstr ""
+"Reimpostare la query dopo la ricerca? Ciò potrebbe non essere utile se "
+"desideri essere in grado di eseguire successivamente la stessa query su "
+"altri motori di ricerca."
 
 #. 5.4->settings-schema.json->providers->description
-#, fuzzy
 msgid "Providers"
-msgstr "Modifica provider"
+msgstr "Provider"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid "Show"
-msgstr ""
+msgstr "Mostra"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid ""
 "Short name\n"
 "(3 lower-case letters)"
 msgstr ""
+"Nome corto\n"
+"(3 lettere minuscole)"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid "Query URL"
-msgstr ""
+msgstr "URL della query"
 
 #. 5.4->settings-schema.json->providers->tooltip
 msgid ""
@@ -165,15 +170,18 @@ msgid ""
 "processed by the relevant search engine.\n"
 "Example: ddg linux mint iso"
 msgstr ""
+"Se la tua richiesta inizia con le 3 lettere del nome breve, verrà elaborata "
+"dal relativo motore di ricerca.\n"
+"Esempio: ddg linux mint iso"
 
 #. 5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
-msgstr ""
+msgstr "Colori della casella di ricerca"
 
 #. 5.4->settings-schema.json->background-color->description
 msgid "Background color"
-msgstr ""
+msgstr "Colore di sfondo"
 
 #. 5.4->settings-schema.json->text-color->description
 msgid "Text color"
-msgstr ""
+msgstr "Colore del testo"
