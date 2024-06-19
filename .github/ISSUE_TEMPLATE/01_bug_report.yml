@@ -201,6 +201,7 @@ body:
     - softyubikey@yubiserver.include.gr
     - sound150@claudiux @claudiux
     - spices-notifier@germanfr @germanfr
+    - SpiceSpy@claudiux @claudiux
     - SpicesUpdate@claudiux @claudiux
     - sshconnect@foobar-beer @foobar-beer
     - sshlauncher@sumo @sumo
