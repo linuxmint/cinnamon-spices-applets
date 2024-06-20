@@ -9360,7 +9360,8 @@ function InjectValues(text, weather, config, inCommand = false) {
             .replace(/{{city}}/g, Literal(city))
             .replace(/{{country}}/g, Literal(country))
             .replace(/{{search_entry}}/g, Literal(searchEntry))
-            .replace(/{{last_updated}}/g, Literal(lastUpdatedTime));
+            .replace(/{{last_updated}}/g, Literal(lastUpdatedTime))
+            .replace(/{{br}}/g, Literal("\n"));
     }
     return text.replace(/{t}/g, temp)
         .replace(/{u}/g, tempUnit)
@@ -9377,7 +9378,8 @@ function InjectValues(text, weather, config, inCommand = false) {
         .replace(/{city}/g, city)
         .replace(/{country}/g, country)
         .replace(/{search_entry}/g, searchEntry)
-        .replace(/{last_updated}/g, lastUpdatedTime);
+        .replace(/{last_updated}/g, lastUpdatedTime)
+        .replace(/{br}/g, "\n");
 }
 function CapitalizeFirstLetter(description) {
     if ((description == undefined || description == null)) {
