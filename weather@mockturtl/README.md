@@ -184,6 +184,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{country}`       | Country name shown in the popup                           |
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
 | `{last_updated}`  | Formatted last updated time                               |
+| `{br}`            | Line Break		                                            |
 
 ## Run script when the weather data changes
 
