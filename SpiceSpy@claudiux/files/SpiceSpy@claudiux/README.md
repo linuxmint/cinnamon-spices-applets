@@ -17,6 +17,30 @@ Open the menu of this applet and select *Configure...*
 
 Some options are available. But the most important are the list of authors and the list of specific Spices you are interested in.
 
+## Icon and label
+
+When the score or number of comments changes, the differences are indicated in the label and the icon changes color; you can choose this color.
+
+## Menu
+
+The menu of the SpiceSpy applet contains:
+
+* A button "Mark all as read".
+* A button "Refresh"
+* The list of Spices with, for each Spice:
+    * its name or UUID, depending on your choice.
+    * its icon (optional)
+    * its score
+    * its number of comments
+    * its number of available translations (optional).
+* A button "Configure..."
+
+Clicking on a Spice opens its web page.
+
+## Translations
+
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/SpiceSpy%40claudiux.md){:target="_blank"}
+
 ## FAQ
 
 ### No instant display

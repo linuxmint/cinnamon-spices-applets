@@ -94,7 +94,15 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     this.addActor(this.comments_box);
     this.comments_box.opacity = (this.new_comments) ? 255 : this.parent.standard_opacity;
     if (this.new_comments) this.comments_box.set_style("color: %s;".format(this.parent.color_on_change));
-    //~ this.update_comment_count(spice.comments);
+
+    if (this.parent.show_translations) {
+      let translations_box = new St.BoxLayout({ style: "spacing: .25em;" });
+      let translations_icon = new St.Icon({ icon_name: "nb-translations", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
+      let translations_count = new St.Label({ text: spice.translations.toString() });
+      translations_box.add_actor(translations_icon);
+      translations_box.add_actor(translations_count);
+      this.addActor(translations_box);
+    }
   }
 
   activate() {
@@ -164,6 +172,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("color-on-change", "color_on_change", this.make_menu);
     this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
     this.settings.bind("icon-size", "icon_size");
+    this.settings.bind("show-translations", "show_translations");
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
@@ -313,12 +322,16 @@ class SpiceSpy extends Applet.TextIconApplet {
           //~ global.log("spices:\n"+JSON.stringify(spices, null, 4));
           for (let spice of Object.keys(spices)) {
             let _uuid = (type!="themes") ? ""+spices[spice].uuid : ""+spices[spice].name;
+
             if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice].author_user) > -1) {
+              let _nb_translations_keys = Object.keys(spices[spice]["translations"]);
+              let _nb_translations = Math.round(_nb_translations_keys.length / 2);
               _spices_to_spy[type][_uuid] = {
                 "type": type,
                 "uuid": _uuid,
                 "name": spices[spice].name,
                 "score": spices[spice].score,
+                "translations": _nb_translations,
                 "url": "https://cinnamon-spices.linuxmint.com/"+type+"/view/"+spices[spice]["spices-id"],
                 "comments": ( this.spices_to_spy[type] &&
                               this.spices_to_spy[type][""+spices[spice].uuid] &&
