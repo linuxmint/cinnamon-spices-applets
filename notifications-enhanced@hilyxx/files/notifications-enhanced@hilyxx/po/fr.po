@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-21 15:31-0400\n"
-"PO-Revision-Date: 2024-06-21 19:55+0100\n"
+"PO-Revision-Date: 2024-06-21 15:35-0400\n"
 "Last-Translator: Hilyxx <w.lebb@outlook.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -47,9 +47,8 @@ msgstr[0] "%d notification"
 msgstr[1] "%d notifications"
 
 #: applet.js:254
-#, fuzzy
 msgid "Notifications"
-msgstr "Aucune notification"
+msgstr "Notifications"
 
 #: applet.js:269
 msgid "Notifications disabled"
