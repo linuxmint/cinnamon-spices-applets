@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-21 19:19+0100\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-21 15:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: applet.js:94
 msgid "Do not disturb"
@@ -25,6 +26,7 @@ msgstr ""
 msgid "No notifications"
 msgstr ""
 
+#. settings-schema.json->keyClear->description
 #: applet.js:106
 msgid "Clear notifications"
 msgstr ""
@@ -38,37 +40,44 @@ msgid "Notification Settings"
 msgstr ""
 
 #: applet.js:224 applet.js:406
+#, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
-msgstr[0] "%d notification"
-msgstr[1] "%d notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:254
+msgid "Notifications"
+msgstr ""
 
 #: applet.js:269
 msgid "Notifications disabled"
 msgstr ""
 
-#: applet.js:418
+#: applet.js:422
 msgid "just now"
 msgstr ""
 
-#: applet.js:421
+#: applet.js:425
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
-msgstr[0] "%d second ago"
-msgstr[1] "%d seconds ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: applet.js:425
+#: applet.js:429
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] "%d minute ago"
-msgstr[1] "%d minutes ago"
-
-#. metadata.json->description
-msgid "A notification applet but with more options"
-msgstr ""
+msgstr[0] ""
+msgstr[1] ""
 
 #. metadata.json->name
 msgid "Notifications Enhanced"
+msgstr ""
+
+#. metadata.json->description
+msgid "A notification applet but with more options"
 msgstr ""
 
 #. settings-schema.json->section1->description
@@ -104,7 +113,9 @@ msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
 msgstr ""
 
 #. settings-schema.json->showDisturbIcon->tooltip
-msgid "Check this to show 'Do not disturb' icon on panel even when show empty tray option is disabled."
+msgid ""
+"Check this to show 'Do not disturb' icon on panel even when show empty tray "
+"option is disabled."
 msgstr ""
 
 #. settings-schema.json->showNotificationSettings->description
@@ -121,10 +132,6 @@ msgstr ""
 
 #. settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the notification popup menu."
-msgstr ""
-
-#. settings-schema.json->keyClear->description
-msgid "Clear notifications"
 msgstr ""
 
 #. settings-schema.json->keyClear->tooltip
