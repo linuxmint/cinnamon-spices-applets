@@ -54,7 +54,8 @@ msgstr ""
 #: applet.js:421
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
-msgstr ""
+msgstr[0] "%d second ago"
+msgstr[1] "%d seconds ago"
 
 #: applet.js:425
 msgid "%d minute ago"
