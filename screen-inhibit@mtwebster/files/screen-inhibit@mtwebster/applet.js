@@ -52,6 +52,8 @@ const POWER_SCHEMA = "org.cinnamon.settings-daemon.plugins.power";
 const SLEEP_DISPLAY_AC_KEY = "sleep-display-ac";
 const SLEEP_INACTIVE_AC_TIMEOUT_KEY = "sleep-inactive-ac-timeout";
 
+const SCREENSAVER_COMMAND = GLib.find_program_in_path("cinnamon-screensaver-command");
+
 class ScreenSaverInhibitor extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -149,23 +151,29 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
     on_applet_clicked(event) {
         if (this._inhibit) {
+            this.sleep_display_ac = this.old_sleep_display_ac;
+            this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
             this._sessionProxy.UninhibitRemote(this._inhibit);
+            if (SCREENSAVER_COMMAND)
+                Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -a; "+SCREENSAVER_COMMAND+" -d");
             this._inhibit = undefined;
             this.set_applet_tooltip(ALLOW_TT);
             this.inhibited = false;
-            this.sleep_display_ac = this.old_sleep_display_ac;
-            this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
         } else {
+            this.sleep_display_ac = 0;
+            this.sleep_inactive_ac_timeout = 0;
             try {
-                this._sessionProxy.InhibitRemote("inhibitor-screen-inhibit@mtwebster",
-                                                 0,
-                                                 "inhibit mode",
-                                                 9,
-                                                 Lang.bind(this, this._onInhibit));
+                this._sessionProxy.InhibitRemote(
+                    "inhibitor-screen-inhibit@mtwebster",
+                    0,
+                    "inhibit mode",
+                    9,
+                    Lang.bind(this, this._onInhibit)
+                );
+                if (SCREENSAVER_COMMAND)
+                    Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
                 this.set_applet_tooltip(INHIBIT_TT);
                 this.inhibited = true;
-                this.sleep_display_ac = 0;
-                this.sleep_inactive_ac_timeout = 0;
             } catch(e) {
                 global.log("Unable to inhibit screensaver: "+e);
             }
@@ -205,6 +213,9 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
           9,
           Lang.bind(this, this._onInhibit)
         );
+
+        if (SCREENSAVER_COMMAND)
+            Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
 
         this.inhibited = true;
         this.sleep_display_ac = 0;
