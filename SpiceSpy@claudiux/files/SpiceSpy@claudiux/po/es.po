@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-18 01:15+0200\n"
+"POT-Creation-Date: 2024-06-21 18:00+0200\n"
 "PO-Revision-Date: 2024-06-18 12:38-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: applet.js:386
+#: applet.js:399
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
-#: applet.js:390
+#: applet.js:403
 msgid "Refresh"
 msgstr "Actualizar"
 
-#: applet.js:394
+#: applet.js:407
 msgid "Spices"
 msgstr "Especias"
 
-#: applet.js:456
+#: applet.js:469
 msgid "Configure..."
 msgstr "Configurar..."
 
@@ -67,10 +67,6 @@ msgstr "Color al cambiar"
 msgid "Show each Spice icon in the menu"
 msgstr "Mostrar el icono de cada Especia en el menú"
 
-#. settings-schema.json->show-icon-in-menu->tooltip
-msgid "This can affect menu display speed."
-msgstr "Esto puede afectar a la velocidad de visualización del menú."
-
 #. settings-schema.json->icon-size->description
 msgid "Icon size"
 msgstr "Tamaño del icono"
@@ -78,6 +74,11 @@ msgstr "Tamaño del icono"
 #. settings-schema.json->icon-size->units
 msgid "pixels"
 msgstr "pixeles"
+
+#. settings-schema.json->show-translations->description
+#, fuzzy
+msgid "Show number of translations in the menu"
+msgstr "Mostrar el icono de cada Especia en el menú"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"

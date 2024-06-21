@@ -28,8 +28,7 @@
   "show-icon-in-menu": {
     "type": "switch",
     "description": "Show each Spice icon in the menu",
-    "default": false,
-    "tooltip": "This can affect menu display speed."
+    "default": false
   },
   "icon-size": {
     "type": "spinbutton",
@@ -40,6 +39,11 @@
     "min": 16,
     "max": 64,
     "step": 2
+  },
+  "show-translations": {
+    "type": "switch",
+    "description": "Show number of translations in the menu",
+    "default": false
   },
   "sort-by": {
     "type": "combobox",
