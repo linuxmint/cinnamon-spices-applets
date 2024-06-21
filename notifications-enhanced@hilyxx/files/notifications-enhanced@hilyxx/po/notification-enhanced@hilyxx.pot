@@ -60,7 +60,8 @@ msgstr[1] "%d seconds ago"
 #: applet.js:425
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr ""
+msgstr[0] "%d minute ago"
+msgstr[1] "%d minutes ago"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
