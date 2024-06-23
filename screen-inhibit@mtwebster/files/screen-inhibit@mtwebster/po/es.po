@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-01 20:42+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-24 00:19+0200\n"
 "PO-Revision-Date: 2024-02-01 17:54-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,20 +19,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:20
+#: applet.js:21
 msgid "Currently preventing screensaver"
 msgstr "Actualmente impidiendo el protector de pantalla"
 
-#: applet.js:21
+#: applet.js:22
 msgid "Currently allowing screensaver"
 msgstr "Actualmente permite el protector de pantalla"
 
-#: applet.js:100
+#: applet.js:123
 msgid "Screensaver settings"
 msgstr "Configuración del protector de pantalla"
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:104
+#: applet.js:127
 msgid "Inhibit screensaver at startup"
 msgstr "Inhibir el protector de pantalla al arrancar"
 
@@ -82,9 +83,34 @@ msgstr ""
 msgid "Startup"
 msgstr "Inicio"
 
-#~ msgid ""
-#~ "(More precisely, 10 seconds after startup, to ensure that the session is "
-#~ "correctly launched)."
-#~ msgstr ""
-#~ "(Más concretamente, 10 segundos después del inicio, para garantizar que "
-#~ "la sesión se inicia correctamente)."
+#. settings-schema.json->head3->description
+msgid "Way to block the screensaver"
+msgstr ""
+
+#. settings-schema.json->locklabel->description
+msgid "(Avoid using aggressive ways, if possible.)"
+msgstr ""
+
+#. settings-schema.json->locktype->description
+msgid "Blocking mode"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Normal"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Aggressive"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Super aggressive"
+msgstr ""
+
+#. settings-schema.json->lockinterval->description
+msgid "Blocking interval"
+msgstr ""
+
+#. settings-schema.json->lockinterval->units
+msgid "minutes"
+msgstr ""
