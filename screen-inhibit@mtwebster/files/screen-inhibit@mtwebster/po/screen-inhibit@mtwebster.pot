@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-01 20:42+0100\n"
+"Project-Id-Version: screen-inhibit@mtwebster 2.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-24 00:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:20
+#: applet.js:21
 msgid "Currently preventing screensaver"
 msgstr ""
 
-#: applet.js:21
+#: applet.js:22
 msgid "Currently allowing screensaver"
 msgstr ""
 
-#: applet.js:100
+#: applet.js:123
 msgid "Screensaver settings"
 msgstr ""
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:104
+#: applet.js:127
 msgid "Inhibit screensaver at startup"
 msgstr ""
 
@@ -73,4 +73,36 @@ msgstr ""
 
 #. settings-schema.json->head2->description
 msgid "Startup"
+msgstr ""
+
+#. settings-schema.json->head3->description
+msgid "Way to block the screensaver"
+msgstr ""
+
+#. settings-schema.json->locklabel->description
+msgid "(Avoid using aggressive ways, if possible.)"
+msgstr ""
+
+#. settings-schema.json->locktype->description
+msgid "Blocking mode"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Normal"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Aggressive"
+msgstr ""
+
+#. settings-schema.json->locktype->options
+msgid "Super aggressive"
+msgstr ""
+
+#. settings-schema.json->lockinterval->description
+msgid "Blocking interval"
+msgstr ""
+
+#. settings-schema.json->lockinterval->units
+msgid "minutes"
 msgstr ""

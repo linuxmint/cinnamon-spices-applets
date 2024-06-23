@@ -1,3 +1,6 @@
+### v2.1.2~20240624
+  * Fixes #6079. Definitely, I hope.
+
 ### v2.1.1~20240621
   * Fixes #6079. Definitely, I hope.
 

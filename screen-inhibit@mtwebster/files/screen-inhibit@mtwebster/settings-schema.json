@@ -42,6 +42,34 @@
     "description" : "Inhibit screensaver at startup",
     "indent": true
  },
+ "head3" : {
+    "type" : "header",
+    "description" : "Way to block the screensaver"
+ },
+ "locklabel": {
+     "type" : "label",
+     "description" : "(Avoid using aggressive ways, if possible.)"
+ },
+ "locktype": {
+     "type" : "combobox",
+     "default": "normal",
+     "description" : "Blocking mode",
+     "options": {
+         "Normal": "normal",
+         "Aggressive": "aggressive1",
+         "Super aggressive": "aggressive2"
+     }
+ },
+ "lockinterval": {
+     "type" : "spinbutton",
+     "dependency": "locktype!=normal",
+     "default": 5,
+     "description": "Blocking interval",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "units": "minutes"
+ },
  "old-sleep-display-ac" : {
      "type" : "generic",
      "default": 0

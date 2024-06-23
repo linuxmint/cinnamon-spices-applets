@@ -6,6 +6,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const { PopupSwitchMenuItem, PopupSeparatorMenuItem } = imports.ui.popupMenu;
+const Mainloop = imports.mainloop;
 
 const UUID = 'screen-inhibit@mtwebster';
 const Gettext = imports.gettext;
@@ -78,6 +79,12 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.settings.bind( "inhibit-at-startup",
                                 "inhibit_at_startup",
                                 this.on_inhibit_at_startup_changed);
+            this.settings.bind( "locktype",
+                                "locktype",
+                                this.loop);
+            this.settings.bind( "lockinterval",
+                                "lockinterval",
+                                this.loop);
             this.settings.bind( "old-sleep-display-ac",
                                 "old_sleep_display_ac");
             this.settings.bind( "old-sleep-inactive-ac-timeout",
@@ -89,6 +96,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.keybinding = null;
             this.icon_path_on = false;
             this.icon_path_off = false;
+            this.locktype = "normal";
+            this.lockinterval = 5;
             this.old_sleep_display_ac = 0;
             this.old_sleep_inactive_ac_timeout = 0;
         }
@@ -126,6 +135,32 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         if (this.settings) {
             this.on_settings_changed();
         }
+
+        this.loopId = null;
+        this.loop();
+    }
+
+    loop() {
+        if (this.loopId) {
+            Mainloop.source_remove(this.loopId);
+            this.loopId = null;
+        }
+
+        if (this.inhibited) {
+            switch (this.locktype) {
+                case "normal":
+                    break;
+                case "aggressive1":
+                    if (SCREENSAVER_COMMAND)
+                        Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -d");
+                    break;
+                case "aggressive2":
+                    if (SCREENSAVER_COMMAND)
+                        Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
+            }
+        }
+
+        this.loopId = Mainloop.timeout_add(this.lockinterval * 60000, this.loop.bind(this));
     }
 
     on_inhibit_at_startup_changed() {
@@ -244,6 +279,10 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
     on_applet_removed_from_panel() {
         this.sleep_display_ac = this.old_sleep_display_ac;
         this.sleep_inactive_ac_timeout = this.old_sleep_inactive_ac_timeout;
+        if (this.loopId) {
+            Mainloop.source_remove(this.loopId);
+            this.loopId = null;
+        }
     }
 
     reset_to_default_icons() {
