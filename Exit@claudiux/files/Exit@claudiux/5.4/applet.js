@@ -13,10 +13,23 @@ const Mainloop = imports.mainloop;
 
 // l10n/translation support
 const UUID = "Exit@claudiux";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+//~ Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
-    return Gettext.dgettext(UUID, str);
+    Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+    let _str = Gettext.dgettext(UUID, str);
+    if (_str != str)
+        return _str;
+    Gettext.bindtextdomain("lightdm", "/usr/share/locale");
+    _str = Gettext.dgettext("lightdm", str);
+    if (_str != str)
+        return _str;
+    Gettext.bindtextdomain("gnome-panel", "/usr/share/locale");
+    _str = Gettext.dgettext("gnome-panel", str);
+    if (_str != str)
+        return _str;
+    // If the text was not found locally then try with system-wide translations:
+    return Gettext.gettext(str);
 }
 
 class ExitApplet extends Applet.IconApplet {

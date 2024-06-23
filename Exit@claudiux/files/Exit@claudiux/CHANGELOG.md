@@ -1,3 +1,7 @@
+### v1.1.2~20240623
+
+* Improves translations.
+
 ### v1.1.1~20240126
 
 * Updated README.md and screenshot.
