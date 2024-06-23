@@ -35,7 +35,11 @@ The menu of the SpiceSpy applet contains:
     * its number of available translations (optional).
 * A button "Configure..."
 
-Clicking on a Spice opens its web page.
+Please note:
+
+* clicking on the Spice *name* (or *UUID*) or on its *icon* or on its *score* opens its web page, at the *top* of this page.
+* clicking on the Spice *comments* opens its web page, at the *comments section*.
+* clicking on the Spice *translations* opens the web page showing the *status of translations*.
 
 ## Translations
 
