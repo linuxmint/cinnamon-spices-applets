@@ -46,6 +46,7 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     this.spice = spice;
     this.new_stars = new_stars; // boolean
     this.new_comments = new_comments; // boolean
+    this.url = this.spice.url;
 
     let label_text;
     if (parent.show_uuid) {
@@ -56,11 +57,12 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       else
         label_text = spice.name;
     }
-    let label = new St.Label({ text: label_text });
+    let label = new St.Label({ text: label_text, reactive: true, track_hover: true });
+    label.connect("enter-event", () => { this.url = this.spice.url });
     this.addActor(label);
 
     if (this.parent.show_icon_in_menu) {
-      let icon_box = new St.BoxLayout({ style: "spacing: .25em;" });
+      let icon_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
       let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
       let icon_file = Gio.file_new_for_path(icon_path);
       let icon;
@@ -73,40 +75,45 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
         icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
       }
       icon_box.add_actor(icon);
+      icon_box.connect("enter-event", () => { this.url = this.spice.url });
       this.addActor(icon_box);
     }
 
-    let stars_box = new St.BoxLayout({ style: "spacing: .25em;" });
+    let stars_box = new St.BoxLayout({ style: "spacing: .25em;" , reactive: true, track_hover: true });
     let star_icon = new St.Icon({ icon_name: "starred", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
     let star_count = new St.Label({ text: spice.score.toString() });
     stars_box.add_actor(star_icon);
     stars_box.add_actor(star_count);
+    stars_box.connect("enter-event", () => { this.url = this.spice.url });
     this.addActor(stars_box);
     stars_box.opacity = (this.new_stars) ? 255 : this.parent.standard_opacity;
     if (this.new_stars) stars_box.set_style("color: %s;".format(this.parent.color_on_change));
 
 
-    this.comments_box = new St.BoxLayout({ style: "spacing: .25em;" });
+    this.comments_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
     let comments_icon = new St.Icon({ icon_name: "user-available", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
     this.comments_label = new St.Label({ text:  spice.comments.toString()});
     this.comments_box.add_actor(comments_icon);
     this.comments_box.add_actor(this.comments_label);
+    //~ this.comments_box.track_hover = true;
+    this.comments_box.connect("enter-event", () => { this.url = this.spice.url+"#count" });
     this.addActor(this.comments_box);
     this.comments_box.opacity = (this.new_comments) ? 255 : this.parent.standard_opacity;
     if (this.new_comments) this.comments_box.set_style("color: %s;".format(this.parent.color_on_change));
 
-    if (this.parent.show_translations) {
-      let translations_box = new St.BoxLayout({ style: "spacing: .25em;" });
+    if (this.parent.show_translations && this.spice.type != "themes") {
+      let translations_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
       let translations_icon = new St.Icon({ icon_name: "nb-translations", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
       let translations_count = new St.Label({ text: spice.translations.toString() });
       translations_box.add_actor(translations_icon);
       translations_box.add_actor(translations_count);
+      translations_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-%s/blob/translation-status-tables/.translation-tables/tables/%s.md".format(this.spice.type, this.spice.uuid) });
       this.addActor(translations_box);
     }
   }
 
   activate() {
-    Util.spawn(["xdg-open", this.spice.url]);
+    Util.spawn(["xdg-open", this.url]);
     this.update_comment_count(0);
     super.activate();
   }
@@ -227,7 +234,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   }
 
   loop() {
-    global.log("Begin looping");
+    //~ global.log("Begin looping");
     if (this.loopId) {
       Mainloop.source_remove(this.loopId);
       this.loopId = null;
@@ -254,7 +261,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.set_applet_tooltip(this.metadata.name);
 
 
-    global.log("End looping");
+    //~ global.log("End looping");
     let ms = this.update_interval * 60000;
     this.loopId = Mainloop.timeout_add(ms, this.loop.bind(this));
   } // End of loop
@@ -324,8 +331,11 @@ class SpiceSpy extends Applet.TextIconApplet {
             let _uuid = (type!="themes") ? ""+spices[spice].uuid : ""+spices[spice].name;
 
             if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice].author_user) > -1) {
-              let _nb_translations_keys = Object.keys(spices[spice]["translations"]);
-              let _nb_translations = Math.round(_nb_translations_keys.length / 2);
+              let _nb_translations = 0;
+              if (type!="themes") { // No translations for themes.
+                let _nb_translations_keys = Object.keys(spices[spice]["translations"]);
+                _nb_translations = Math.round(_nb_translations_keys.length / 2);
+              }
               _spices_to_spy[type][_uuid] = {
                 "type": type,
                 "uuid": _uuid,
@@ -422,6 +432,10 @@ class SpiceSpy extends Applet.TextIconApplet {
             let diff_stars = 0;
             if (this.old_spices_to_spy[type][uuid]) {
               diff_comments = this.spices_to_spy[type][uuid]["comments"] - this.old_spices_to_spy[type][uuid]["comments"];
+              if (diff_comments < 0) {
+                diff_comments = 0;
+                this.spices_to_spy[type][uuid]["comments"] = this.old_spices_to_spy[type][uuid]["comments"];
+              }
               diff_stars = this.spices_to_spy[type][uuid]["score"] - this.old_spices_to_spy[type][uuid]["score"];
             }
             else {
@@ -474,7 +488,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of make_menu
 
   mark_all_as_read() {
-    global.log("mark_all_as_read");
+    //~ global.log("mark_all_as_read");
     this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
     this.make_menu();
   }

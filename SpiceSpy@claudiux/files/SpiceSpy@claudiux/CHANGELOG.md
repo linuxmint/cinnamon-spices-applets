@@ -1,3 +1,11 @@
+### v2.0.0~20240623
+
+* From now on, for each Spice row:
+    * clicking on the Spice name (or UUID) or on its icon or on its score opens its web page, at the top of this page.
+    * clicking on the Spice comments opens its web page, at the comments section.
+    * clicking on the Spice translations opens the web page showing the status of translations.
+* Several bugfixes.
+
 ### v1.2.0~20240621
 
 * Added the ability to display the number of available translations for each spice in the menu.
