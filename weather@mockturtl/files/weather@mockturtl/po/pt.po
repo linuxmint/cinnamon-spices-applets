@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-02-01 16:18-0100\n"
+"PO-Revision-Date: 2024-06-23 03:27-0100\n"
 "Last-Translator: \n"
 "Language-Team: Português ; Daniel Miranda <dmiranda@gmail.com>, Luiz Rodrigo "
 "<contact@lurodrigo.com>, Zé Bento <bento2000@gmail.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:19563
@@ -137,21 +137,21 @@ msgstr "de ti"
 
 #: 3.0/applet.js:1132 3.8/weather-applet.js:19000
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:19000
 msgid "in"
-msgstr ""
+msgstr "pol"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10885
 #: 3.8/weather-applet.js:19217
 msgid "mi"
-msgstr ""
+msgstr "mi"
 
 #: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10886
 #: 3.8/weather-applet.js:19218
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #: 3.0/applet.js:1227 3.8/weather-applet.js:19421
 msgid "Loading current weather ..."
@@ -364,22 +364,20 @@ msgstr "Chuva congelante"
 #: 3.0/climacell.js:294 3.8/weather-applet.js:13391 3.8/weather-applet.js:14459
 #: 3.8/weather-applet.js:16852
 msgid "Light freezing rain"
-msgstr "Chuva congelante"
+msgstr "Chuva leve congelante"
 
 #: 3.0/climacell.js:301 3.8/weather-applet.js:16817
-#, fuzzy
 msgid "Light freezing drizzle"
-msgstr "Geada"
+msgstr "Geada leve congelante"
 
 #: 3.0/climacell.js:302 3.8/weather-applet.js:13377 3.8/weather-applet.js:16824
 msgid "Freezing drizzle"
-msgstr "Geada"
+msgstr "Geada congelante"
 
 #: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:12836
 #: 3.8/weather-applet.js:14439 3.8/weather-applet.js:16796
-#, fuzzy
 msgid "Light drizzle"
-msgstr "Geada"
+msgstr "Geada leve"
 
 #: 3.0/climacell.js:315 3.8/weather-applet.js:13412
 msgid "Heavy ice pellets"
@@ -1061,7 +1059,7 @@ msgstr "Neve"
 
 #: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:11378
 msgid "Heavy shower snow"
-msgstr "Forte nevada"
+msgstr "Nevada forte"
 
 #: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
 #: 3.8/weather-applet.js:11277 3.8/weather-applet.js:11382
@@ -1298,35 +1296,35 @@ msgstr "Tempestade violenta"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "SW"
-msgstr ""
+msgstr "SO"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "W"
-msgstr ""
+msgstr "O"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:9700
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 #: 3.0/weatherbit.js:312
 msgid ""
@@ -1452,62 +1450,51 @@ msgstr "Muito nublado"
 #: 3.8/weather-applet.js:16121 3.8/weather-applet.js:16122
 #: 3.8/weather-applet.js:16128 3.8/weather-applet.js:16129
 #: 3.8/weather-applet.js:16300
-#, fuzzy
 msgid "Partly Cloudy"
 msgstr "Parcialmente nublado"
 
 #: 3.0/yahoo.js:467 3.8/weather-applet.js:16156 3.8/weather-applet.js:16157
-#, fuzzy
 msgid "Mostly Sunny"
-msgstr "Muito nublado"
+msgstr "Muito ensolarado"
 
 #: 3.0/yahoo.js:469 3.8/weather-applet.js:16163 3.8/weather-applet.js:16164
-#, fuzzy
 msgid "Mixed Rain and Hail"
 msgstr "Chuva e granizo"
 
 #: 3.0/yahoo.js:471 3.8/weather-applet.js:16177 3.8/weather-applet.js:16178
-#, fuzzy
 msgid "Isolated Thunderstorms"
 msgstr "Tempestades isoladas"
 
 #: 3.0/yahoo.js:472 3.8/weather-applet.js:16184 3.8/weather-applet.js:16185
 #: 3.8/weather-applet.js:16240 3.8/weather-applet.js:16241
-#, fuzzy
 msgid "Scattered Thunderstorms"
-msgstr "Tempestades isoladas"
+msgstr "Tempestades dispersas"
 
 #: 3.0/yahoo.js:473 3.8/weather-applet.js:16191 3.8/weather-applet.js:16192
 #: 3.8/weather-applet.js:16226 3.8/weather-applet.js:16227
-#, fuzzy
 msgid "Scattered Showers"
-msgstr "Chuvas Isoladas"
+msgstr "Chuvas dispersas"
 
 #: 3.0/yahoo.js:474 3.8/weather-applet.js:16198 3.8/weather-applet.js:16199
-#, fuzzy
 msgid "Heavy Rain"
-msgstr "Forte nevada"
+msgstr "Chuva forte"
 
 #: 3.0/yahoo.js:475 3.8/weather-applet.js:16205 3.8/weather-applet.js:16206
 #: 3.8/weather-applet.js:16233 3.8/weather-applet.js:16234
-#, fuzzy
 msgid "Scattered Snow Showers"
-msgstr "Nevadas isoladas"
+msgstr "Nevadas dispersas"
 
 #: 3.0/yahoo.js:476 3.8/weather-applet.js:16212 3.8/weather-applet.js:16213
-#, fuzzy
 msgid "Heavy Snow"
 msgstr "Forte nevada"
 
 #: 3.0/yahoo.js:478
-#, fuzzy
 msgid "Not Available"
 msgstr "Não disponível"
 
 #: 3.0/yahoo.js:479
-#, fuzzy
 msgid "Scattered Thundershowers"
-msgstr "Tempestades isoladas"
+msgstr "Tempestades dispersas"
 
 #: 3.8/weather-applet.js:768
 msgid ""
@@ -1581,15 +1568,13 @@ msgstr "Muito bom"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Cinzas"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
 msgstr "Rajadas"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
 msgstr "Neve fraca"
 
@@ -1615,22 +1600,18 @@ msgid "Heavy drizzle"
 msgstr "Geada pesada"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Neve fraca"
+msgstr "Chuva fraca"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Forte nevada"
+msgstr "Chuva forte"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Flocos de neve"
+msgstr "Chuva e neves"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
 msgstr "Pancadas de neve"
 
@@ -1765,9 +1746,8 @@ msgid "Blowing snow"
 msgstr "Nevasca"
 
 #: 3.8/weather-applet.js:14781 3.8/weather-applet.js:14782
-#, fuzzy
 msgid "Slight snow"
-msgstr "Nevasca"
+msgstr "Nevasca leve"
 
 #: 3.8/weather-applet.js:14788 3.8/weather-applet.js:14789
 msgid "Moderate snow"
@@ -1842,13 +1822,12 @@ msgid "Pirate Weather"
 msgstr ""
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Por favor confirme que\n"
-"já introduziste a chave da API que tens do Climacell"
+"já introduziste a chave da API que tens do Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1859,32 +1838,26 @@ msgstr ""
 "os registros no Looking Glass"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
 msgstr "Flocos de neve"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Neve fraca"
+msgstr "Chuva leve"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Forte nevada"
+msgstr "Chuva pesada"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Trovoada com chuva fraca"
+msgstr "Trovoada com chuva com alguns granizos"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Tempestade com chuva"
+msgstr "Tempestade com granizos"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
 msgstr "Sensação térmica"
 
@@ -1956,7 +1929,7 @@ msgstr "Área: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} alerta(s) do clima "
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1964,9 +1937,8 @@ msgid "Error Saving Debug Information"
 msgstr "Erro ao salvar informações de depuração"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Não foi possível obter informação do clima"
+msgstr "Não foi possível abrir o ficheiro {filePath} para a escrita"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1985,9 +1957,8 @@ msgid "You need to add a script first."
 msgstr ""
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "Clima"
+msgstr "Sem Informação Climática"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
@@ -2010,9 +1981,8 @@ msgid "Script returned error, see logs for more information"
 msgstr ""
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Applet de Clima"
+msgstr "Alertas do Applet de Clima"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2066,12 +2036,12 @@ msgstr "Serviço de fornecimento de dados"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "DarkSky (key needed)"
-msgstr ""
+msgstr "DarkSky (precisa de chave)"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "Weatherbit (key needed)"
-msgstr ""
+msgstr "Weatherbit (precisa de chave)"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Yahoo"
@@ -2079,12 +2049,12 @@ msgstr ""
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Climacell (key needed)"
-msgstr ""
+msgstr "Climacell (precisa de chave)"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key"
-msgstr ""
+msgstr "Chave da API"
 
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
@@ -2170,12 +2140,12 @@ msgstr "Automático"
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
 msgid "Celsius"
-msgstr ""
+msgstr "Celsius"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Celsius"
 
 #. 3.0->settings-schema.json->temperatureUnit->tooltip
 #. 3.0->settings-schema.json->distanceUnit->tooltip
@@ -2201,22 +2171,22 @@ msgstr "km/h"
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "mph"
-msgstr ""
+msgstr "mi/h"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "m/s"
-msgstr ""
+msgstr "m/s"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "knots"
-msgstr ""
+msgstr "nós"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "Beaufort"
-msgstr ""
+msgstr "Beaufort"
 
 #. 3.0->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
@@ -2226,17 +2196,17 @@ msgstr "Unidade de pressão atmosférica"
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "in Hg"
-msgstr ""
+msgstr "pol Hg"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "mm Hg"
-msgstr ""
+msgstr "mm Hg"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -2447,7 +2417,7 @@ msgstr "Configurações de localização"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Automação e Técnico"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2622,13 +2592,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Ativar mostrar alertas de clima"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Botões de alertas vão ficar visíveis no menu pop up caso existir algum "
+"alerta ativo para a sua localização."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2722,7 +2694,7 @@ msgstr "Como SE, N em vez de ícones de direção."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "O provedor deve traduzir as condições caso disponível"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2730,6 +2702,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"O seu provedor deve traduzir as condições para o seu idioma caso sua "
+"localidade for suportada pelo provedor. Caso contrário, o applet usará seu "
+"próprio sistema de tradução."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2847,7 +2822,7 @@ msgstr "Caminho selecionado para salvar os registos"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Sobreposição do String do Agente de Utilizador"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2856,10 +2831,14 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Caso tiver problemas com o applet não estar funcionando corretamente e "
+"souber que a string do agente do utilizador é o problema, tente substituí-"
+"la. Só mude caso souber o que está fazendo. Esta é uma string que é enviada "
+"ao servidor quando o applet tenta obter os dados meteorológicos."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Executar um comando quando informações do clima mudem"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2879,7 +2858,22 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"O applet executará o comando fornecido sempre que os dados meteorológicos "
+"forem atualizados. O comando será interpolado com os mesmos valores com o "
+"mesmo formato que você pode obter em qualquer uma das sobreposições, além de "
+"obter {full_data} que são os dados meteorológicos atuais completos. A "
+"interpolação com colchetes simples {xxx} não terá escape, com colchetes "
+"duplos {{xxxx}} eles são colocados entre aspas simples (') e todas as outras "
+"aspas simples têm escape dentro. Você pode usar isso para integrar os dados "
+"meteorológicos com outras partes do seu sistema. Você pode consultar a "
+"estrutura completa dos dados meteorológicos por meio do link no README.\n"
+"\n"
+"Exemplo: 'notify-send \"O tempo é {c} e a temperatura é {t}{u}\"' mostrará "
+"uma notificação com a condição climática e temperatura atual.\n"
+"\n"
+"Exemplo: 'echo {{full_data}} > /tmp/weather_data' salvará os dados "
+"meteorológicos completos em um arquivo em /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Teste o seu comando"
