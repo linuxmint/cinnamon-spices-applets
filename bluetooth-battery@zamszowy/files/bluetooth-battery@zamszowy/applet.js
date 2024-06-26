@@ -456,7 +456,7 @@ BtBattery.prototype = {
     },
 
     perc_round_to_10: function(perc) {
-        return Math.round(perc / 10) * 10;
+        return Math.floor(perc / 10) * 10;
     },
 
     perc_to_3_digit_str: function(perc) {
