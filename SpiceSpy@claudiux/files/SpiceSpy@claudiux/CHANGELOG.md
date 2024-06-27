@@ -1,3 +1,8 @@
+### v2.1.0~20240628
+
+* Adds new translations count in label.
+* Adds an option to show only non-zero values in label.
+
 ### v2.0.0~20240623
 
 * From now on, for each Spice row:

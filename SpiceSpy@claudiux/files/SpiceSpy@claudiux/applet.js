@@ -40,12 +40,13 @@ function _(str, uuid=UUID) {
 }
 
 class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
-  constructor(parent, spice, new_stars, new_comments, params) {
+  constructor(parent, spice, new_stars, new_comments, new_translations, params) {
     super(params);
     this.parent = parent;
     this.spice = spice;
     this.new_stars = new_stars; // boolean
     this.new_comments = new_comments; // boolean
+    this.new_translations = new_translations; // boolean
     this.url = this.spice.url;
 
     let label_text;
@@ -109,6 +110,8 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       translations_box.add_actor(translations_count);
       translations_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-%s/blob/translation-status-tables/.translation-tables/tables/%s.md".format(this.spice.type, this.spice.uuid) });
       this.addActor(translations_box);
+      translations_box.opacity = (this.new_translations) ? 255 : this.parent.standard_opacity;
+      if (this.new_translations) translations_box.set_style("color: %s;".format(this.parent.color_on_change));
     }
   }
 
@@ -153,6 +156,7 @@ class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
 
 const STAR_CHAR = "★";
 const MESSAGE_CHAR = "✉";
+const FLAG_CHAR = "⚑";
 
 class SpiceSpy extends Applet.TextIconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -184,6 +188,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
     this.settings.bind("display-on-panel", "display_on_panel", this.make_menu);
+    this.settings.bind("useful-only", "useful_only", this.make_menu);
     this.settings.bind("author-list", "author_list", this.update_authors.bind(this));
     this.settings.bind("uuid-list", "uuid_list", this.update_uuids.bind(this));
     this.settings.bind("spices_to_spy", "spices_to_spy");
@@ -209,12 +214,20 @@ class SpiceSpy extends Applet.TextIconApplet {
     return (keys_spices_to_spy.length < 5);
   }
 
-  updateUI(score=0, comments=0) {
-    this.set_applet_label("%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString()));
-    if (score==0 && comments==0) {
+  updateUI(score=0, comments=0, translations=0) {
+    let _label;
+    if (this.show_translations)
+      _label = "%s %s\n%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString(), FLAG_CHAR, translations.toString());
+    else
+      _label = "%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString());
+    this.set_applet_label(_label);
+    if (score==0 && comments==0 && translations==0) {
       if (this.display_on_panel === "normal") {
         this.actor.show();
-        this.showLabel();
+        if (!this.useful_only)
+          this.showLabel();
+        else
+          this.hideLabel();
       } else if (this.display_on_panel === "icon") {
         this.actor.show();
         this.hideLabel();
@@ -225,6 +238,14 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.actor.set_style(null);
       this._applet_label.set_style(null);
     } else {
+      if (this.useful_only) {
+        let _labels = [];
+        if (score!=0) _labels.push("%s %s".format(STAR_CHAR, score.toString()));
+        if (comments!=0) _labels.push("%s %s".format(MESSAGE_CHAR, comments.toString()));
+        if (this.show_translations && translations!=0) _labels.push("%s %s".format(FLAG_CHAR, translations.toString()));
+        _label = ""+_labels.join("\n");
+        this.set_applet_label(_label);
+      }
       this.actor.show();
       this.showLabel();
       this.actor.set_style("color: %s;".format(this.color_on_change));
@@ -394,6 +415,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   make_menu() {
     var total_diff_score = 0;
     var total_diff_comments = 0;
+    var total_diff_translations = 0;
 
     //~ if (this.nothing_to_spy())
       //~ this.set_applet_tooltip(_("No Spice to spy.\nPlease configure me!"));
@@ -430,6 +452,7 @@ class SpiceSpy extends Applet.TextIconApplet {
             let spice = this.spices_to_spy[type][uuid];
             let diff_comments = 0;
             let diff_stars = 0;
+            let diff_translations = 0;
             if (this.old_spices_to_spy[type][uuid]) {
               diff_comments = this.spices_to_spy[type][uuid]["comments"] - this.old_spices_to_spy[type][uuid]["comments"];
               if (diff_comments < 0) {
@@ -437,15 +460,18 @@ class SpiceSpy extends Applet.TextIconApplet {
                 this.spices_to_spy[type][uuid]["comments"] = this.old_spices_to_spy[type][uuid]["comments"];
               }
               diff_stars = this.spices_to_spy[type][uuid]["score"] - this.old_spices_to_spy[type][uuid]["score"];
+              diff_translations = this.spices_to_spy[type][uuid]["translations"] - this.old_spices_to_spy[type][uuid]["translations"];
             }
             else {
               diff_comments = this.spices_to_spy[type][uuid]["comments"];
               diff_stars = this.spices_to_spy[type][uuid]["score"];
+              diff_translations = this.spices_to_spy[type][uuid]["translations"];
             }
             total_diff_score += diff_stars;
             total_diff_comments += diff_comments;
+            total_diff_translations += diff_translations;
             //~ spice.comments = diff_comments;
-            let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0);
+            let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0, diff_translations != 0);
             menuItems.push(menuItem);
           }
           if (menuItems.length > 0) {
@@ -484,7 +510,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     config_button.connect('activate', Lang.bind(this, this.configureApplet));
     this.menu.addMenuItem(config_button);
 
-    this.updateUI(total_diff_score, total_diff_comments);
+    this.updateUI(total_diff_score, total_diff_comments, total_diff_translations);
   } // End of make_menu
 
   mark_all_as_read() {
