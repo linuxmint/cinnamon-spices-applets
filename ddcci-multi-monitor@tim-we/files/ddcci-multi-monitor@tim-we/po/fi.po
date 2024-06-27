@@ -1,0 +1,27 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-27 18:16+0300\n"
+"PO-Revision-Date: 2024-06-27 18:21+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#. metadata.json->name
+msgid "DDC/CI Multi-Monitor"
+msgstr "Näyttöjen kirkkaus DDC/CI"
+
+#. metadata.json->description
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Säädä näytöjen kirkkautta DDC/CI:n avulla"
