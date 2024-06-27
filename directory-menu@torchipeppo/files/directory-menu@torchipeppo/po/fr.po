@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-12 13:55-0400\n"
-"PO-Revision-Date: 2024-02-11 17:20+0100\n"
+"PO-Revision-Date: 2024-06-27 17:08+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -57,19 +57,19 @@ msgstr "Texte de l'info-bulle"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
-msgstr ""
+msgstr "Texte sur le panneau"
 
 #. settings-schema.json->show-menu->description
 msgid "Show menu"
-msgstr ""
+msgstr "Afficher le menu"
 
 #. settings-schema.json->show-menu->tooltip
 msgid "Set keybinding(s) to show the menu."
-msgstr ""
+msgstr "Définir le(s) raccourcis-clavier pour ouvrir le menu de cette applet."
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
-msgstr ""
+msgstr "Limiter le nombre maximum de caractères dans les sous-menus"
 
 #. settings-schema.json->character-limit->description
 msgid "Character Limit"
