@@ -1,8 +1,8 @@
 {
   "layout": {
     "type": "layout",
-    "pages": ["panel-options", "panel-location", "panel-shortcuts"],
-
+    "pages": ["panel-options", "panel-shortcuts"],
+    
     "panel-options": {
       "type": "page",
       "title": "Settings",
@@ -12,34 +12,18 @@
         "night-section"
       ]
     },
-    "panel-location": {
-      "type": "page",
-      "title": "Location",
-      "sections": [
-        "location-section"
-      ]
-    },
     "panel-shortcuts": {
       "type": "page",
       "title": "Shortcuts",
       "sections": [
         "keybind-section",
+        "step-section",
         "info-section"
       ]
     },
-
-
-
-    "info-section": {
-      "type": "section",
-      "title": "Tips",
-      "keys": [
-        "textTips",
-        "textHelp",
-        "textInfo"
-      ]
-    },
-
+    
+    
+    
     "opt-section": {
       "type": "section",
       "title": "Options",
@@ -48,13 +32,12 @@
         "enableAtStartup",
         "autoUpdate",
         "autoUpdateInterval",
-        "adjustmentMethod",
         "labelScrollAction",
         "iconLabel",
         "symbolicIcon"
       ]
     },
-
+    
     "day-section": {
       "type": "section",
       "title": "Day Settings",
@@ -64,13 +47,12 @@
         "gammaMix"
       ]
     },
-
+    
     "night-section": {
       "type": "section",
       "title": "Night Settings",
       "keys": [
         "enabledNight",
-        "manualNightTime",
         "smoothTransition",
         "transitionDuration",
         "nightTimeStart",
@@ -79,35 +61,44 @@
         "nightBrightness"
       ]
     },
-
+    
     "keybind-section": {
       "type": "section",
       "title": "Key Bindings",
       "keys": [
         "keyToggle",
-        "keyBrightnessUp",
-        "keyBrightnessDown",
         "keyTempUp",
         "keyTempDown",
+        "keyBrightnessUp",
+        "keyBrightnessDown",
         "keyGammaUp",
         "keyGammaDown"
       ]
     },
-
-    "location-section": {
+    "step-section": {
       "type": "section",
-      "title": "Location Settings",
+      "title": "Step",
       "keys": [
-        "locationRemote", "locationUpdate", "locationLatitude", "locationLongitude", "aboutLocation"
+        "stepTemp",
+        "stepBright",
+        "stepGamma"
+      ]
+    },
+    "info-section": {
+      "type": "section",
+      "title": "Tips",
+      "keys": [
+        "textTips",
+        "textHelp",
+        "textInfo"
       ]
     }
   },
-
+  
   "enabled": {
     "type": "checkbox",
     "default": false,
-    "description": "Enabled",
-    "tooltip": "Automatically disabled under Wayland due to redshift not being yet supported by Wayland"
+    "description": "Enabled"
   },
   "enableAtStartup": {
     "type": "checkbox",
@@ -132,17 +123,6 @@
     "step": 1,
     "description": "Update interval"
   },
-  "adjustmentMethod": {
-    "type": "combobox",
-    "default": "randr",
-    "description": "Adjustment Method",
-    "options": {
-      "needload": "randr2",
-      "randr": "randr",
-      "vidmode": "vidmode"
-    },
-    "tooltip": "Method to use to set color temperature"
-  },
   "labelScrollAction": {
     "type": "combobox",
     "default": "disabled",
@@ -166,49 +146,7 @@
     "default": false,
     "description": "Use symbolic icon"
   },
-
-  "keyToggle": {
-    "type": "keybinding",
-    "description": "On/Off",
-    "default": ""
-  },
-
-  "keyBrightnessUp": {
-    "type": "keybinding",
-    "description": "Increase brightness level",
-    "default": ""
-  },
-
-  "keyBrightnessDown": {
-    "type": "keybinding",
-    "description": "Decrease brightness level",
-    "default": ""
-  },
-
-  "keyTempUp": {
-    "type": "keybinding",
-    "description": "Increase temperature level",
-    "default": ""
-  },
-
-  "keyTempDown": {
-    "type": "keybinding",
-    "description": "Decrease temperature level",
-    "default": ""
-  },
-
-  "keyGammaUp": {
-    "type": "keybinding",
-    "description": "Increase gamma level",
-    "default": ""
-  },
-
-  "keyGammaDown": {
-    "type": "keybinding",
-    "description": "Decrease gamma level",
-    "default": ""
-  },
-
+  
   "dayTemp": {
     "type": "spinbutton",
     "default": 5900,
@@ -236,7 +174,7 @@
     "step": 0.01,
     "description": "Gamma"
   },
-
+  
   "enabledNight": {
     "type": "checkbox",
     "default": false,
@@ -258,30 +196,24 @@
     "step": 1,
     "description": "Transition Duration"
   },
-  "manualNightTime": {
-    "type": "checkbox",
+  "nightTimeStart": {
+    "type": "timechooser",
     "dependency": "enabledNight=true",
-    "default": true,
-    "description": "Use Manual Night Time"
-  },
-  "nightTimeStart" : {
-    "type" : "timechooser",
-    "dependency": "manualNightTime=true",
-    "description" : "Choose Start Time",
-    "default" : {
-      "h" : 20,
-      "m" : 0,
-      "s" : 0
+    "description": "Choose Start Time",
+    "default": {
+      "h": 20,
+      "m": 0,
+      "s": 0
     }
   },
-  "nightTimeEnd" : {
-    "type" : "timechooser",
-    "dependency": "manualNightTime=true",
-    "description" : "Choose End Time",
-    "default" : {
-      "h" : 6,
-      "m" : 0,
-      "s" : 0
+  "nightTimeEnd": {
+    "type": "timechooser",
+    "dependency": "enabledNight=true",
+    "description": "Choose End Time",
+    "default": {
+      "h": 6,
+      "m": 0,
+      "s": 0
     }
   },
   "nightTemp": {
@@ -304,41 +236,84 @@
     "step": 1,
     "description": "Brightness"
   },
-
-  "locationRemote": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Remote Location",
-    "tooltip": "Native geoclue on redshift can make the experience slow."
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "On/Off",
+    "default": ""
   },
-  "locationUpdate": {
-    "type": "button",
-    "description": "Update Location",
-    "dependency": "locationRemote=true",
-    "callback": "setLocation",
-    "tooltip": "Native geoclue on redshift can make the experience slow."
+  
+  
+  "keyBrightnessUp": {
+    "type": "keybinding",
+    "description": "Increase brightness level",
+    "default": ""
   },
-  "locationLatitude": {
-    "type": "entry",
-    "default": "0",
-    "description": "Latitude"
+  
+  "keyBrightnessDown": {
+    "type": "keybinding",
+    "description": "Decrease brightness level",
+    "default": ""
   },
-  "locationLongitude": {
-    "type": "entry",
-    "default": "0",
-    "description": "Longitude"
+  
+  "keyTempUp": {
+    "type": "keybinding",
+    "description": "Increase temperature level",
+    "default": ""
   },
-  "aboutLocation": {
-    "type": "label",
-    "description": "Native geoclue on redshift can make the experience slow.\nUsing: https://geolocation-db.com/"
+  
+  "keyTempDown": {
+    "type": "keybinding",
+    "description": "Decrease temperature level",
+    "default": ""
   },
+  
+  "keyGammaUp": {
+    "type": "keybinding",
+    "description": "Increase gamma level",
+    "default": ""
+  },
+  
+  "keyGammaDown": {
+    "type": "keybinding",
+    "description": "Decrease gamma level",
+    "default": ""
+  },
+  
+  "stepBright": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "description": "Brightness",
+    "tooltip": "Step when changing by shortcuts"
+  },
+  "stepTemp": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 1,
+    "max": 1000,
+    "step": 1,
+    "description": "Temperature",
+    "tooltip": "Step when changing value by shortcuts"
+  },
+  "stepGamma": {
+    "type": "spinbutton",
+    "default": 0.01,
+    "min": 0.01,
+    "max": 1,
+    "step": 0.01,
+    "description": "Gamma",
+    "tooltip": "Step when changing by shortcuts"
+  },
+  
   "textTips": {
     "type": "label",
     "description": "* Right-click the sliders to reset the default (neutral) value."
   },
   "textHelp": {
     "type": "label",
-    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\nYou will lost all your configs."
+    "description": "When updating to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\nYou will lost all your configs."
   },
   "textInfo": {
     "type": "label",

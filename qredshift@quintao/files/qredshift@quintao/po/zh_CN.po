@@ -323,7 +323,7 @@ msgstr "* 右键单击滑块以重置默认 (中性) 值。"
 
 #. settings-schema.json->textHelp->description
 msgid ""
-"When update to a new version make sure you reset the configs to default by "
+"When updating to a new version make sure you reset the configs to default by "
 "deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
 "You will lost all your configs."
 msgstr ""
