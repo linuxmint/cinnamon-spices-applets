@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"POT-Creation-Date: 2024-06-28 02:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,111 +17,127 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:239
+#: applet.js:259
 msgid "Reload Applet"
 msgstr ""
 
-#: applet.js:250
+#: applet.js:265
+msgid "Generate .POT file"
+msgstr ""
+
+#: applet.js:270
 msgid "Recompile Translations"
 msgstr ""
 
-#: applet.js:302
-msgid "REDSHIFT NOT INSTALLED!"
+#: applet.js:332 applet.js:663
+msgid "Not supported on wayland!"
 msgstr ""
 
-#: applet.js:305
-msgid "Requires Redshift: yay -S redshift-minimal"
+#: applet.js:341 applet.js:342
+msgid "Something went wrong!"
 msgstr ""
 
-#: applet.js:308
-msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr ""
-
-#: applet.js:460 applet.js:489
+#: applet.js:463 applet.js:492
 msgid "should be removed."
 msgstr ""
 
-#: applet.js:482
+#: applet.js:485
 msgid "should be replaced by redshift-minimal"
 msgstr ""
 
+#: applet.js:517
+msgid "package can be removed."
+msgstr ""
+
+#: applet.js:520
+msgid "Old Redshift package is no longer required and can be safely removed."
+msgstr ""
+
+#: applet.js:667
+msgid ""
+"Automatically disabled under Wayland due to cinnamon compositor not yet "
+"support gamma ramps change."
+msgstr ""
+
 #. settings-schema.json->enabled->description
-#: applet.js:652
+#: applet.js:677
 msgid "Enabled"
 msgstr ""
 
-#: applet.js:660 applet.js:705
+#: applet.js:685 applet.js:730
 msgid "Temp:"
 msgstr ""
 
-#: applet.js:671 applet.js:716
+#: applet.js:696 applet.js:741
 msgid "Bright:"
 msgstr ""
 
-#: applet.js:682 applet.js:1018
+#: applet.js:707 applet.js:1009
 msgid "Gamma:"
 msgstr ""
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:697
+#: applet.js:722
 msgid "Night Enabled"
 msgstr ""
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:759
+#: applet.js:786
 msgid "Show Label"
 msgstr ""
 
-#: applet.js:976 applet.js:1001
+#: applet.js:959 applet.js:985
 msgid "Transition to day"
 msgstr ""
 
-#: applet.js:977 applet.js:1002
+#: applet.js:960 applet.js:986
 msgid "Transition to night"
 msgstr ""
 
-#: applet.js:978 applet.js:1003
+#: applet.js:961 applet.js:987
 msgid "Night"
 msgstr ""
 
-#: applet.js:979 applet.js:1004
+#: applet.js:962 applet.js:988
 msgid "Day"
 msgstr ""
 
-#: applet.js:993
+#: applet.js:978
 msgid "On"
 msgstr ""
 
-#: applet.js:993 applet.js:995
+#: applet.js:978 applet.js:979
 msgid "Off"
 msgstr ""
 
-#: applet.js:1009
+#: applet.js:1000
 msgid "Day Temperature"
 msgstr ""
 
-#: applet.js:1010
+#: applet.js:1001
 msgid "Day Brightness"
 msgstr ""
 
-#: applet.js:1012
+#: applet.js:1003
 msgid "Night Temperature"
 msgstr ""
 
-#: applet.js:1013
+#: applet.js:1004
 msgid "Night Brightness"
 msgstr ""
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:1015
+#. settings-schema.json->stepTemp->description
+#: applet.js:1006
 msgid "Temperature"
 msgstr ""
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:1016
+#. settings-schema.json->stepBright->description
+#: applet.js:1007
 msgid "Brightness"
 msgstr ""
 
@@ -139,16 +155,8 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. settings-schema.json->panel-location->title
-msgid "Location"
-msgstr ""
-
 #. settings-schema.json->panel-shortcuts->title
 msgid "Shortcuts"
-msgstr ""
-
-#. settings-schema.json->info-section->title
-msgid "Tips"
 msgstr ""
 
 #. settings-schema.json->opt-section->title
@@ -167,14 +175,12 @@ msgstr ""
 msgid "Key Bindings"
 msgstr ""
 
-#. settings-schema.json->location-section->title
-msgid "Location Settings"
+#. settings-schema.json->step-section->title
+msgid "Step"
 msgstr ""
 
-#. settings-schema.json->enabled->tooltip
-msgid ""
-"Automatically disabled under Wayland due to redshift not being yet supported"
-" by Wayland"
+#. settings-schema.json->info-section->title
+msgid "Tips"
 msgstr ""
 
 #. settings-schema.json->enableAtStartup->description
@@ -202,26 +208,6 @@ msgstr ""
 msgid "Update interval"
 msgstr ""
 
-#. settings-schema.json->adjustmentMethod->description
-msgid "Adjustment Method"
-msgstr ""
-
-#. settings-schema.json->adjustmentMethod->options
-msgid "needload"
-msgstr ""
-
-#. settings-schema.json->adjustmentMethod->options
-msgid "randr"
-msgstr ""
-
-#. settings-schema.json->adjustmentMethod->options
-msgid "vidmode"
-msgstr ""
-
-#. settings-schema.json->adjustmentMethod->tooltip
-msgid "Method to use to set color temperature"
-msgstr ""
-
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
 msgstr ""
@@ -241,6 +227,7 @@ msgstr ""
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->gammaMix->description
+#. settings-schema.json->stepGamma->description
 msgid "Gamma"
 msgstr ""
 
@@ -250,6 +237,36 @@ msgstr ""
 
 #. settings-schema.json->symbolicIcon->description
 msgid "Use symbolic icon"
+msgstr ""
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr ""
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr ""
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr ""
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr ""
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr ""
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
 msgstr ""
 
 #. settings-schema.json->keyBrightnessUp->description
@@ -276,65 +293,13 @@ msgstr ""
 msgid "Decrease gamma level"
 msgstr ""
 
-#. settings-schema.json->dayTemp->units
-#. settings-schema.json->nightTemp->units
-msgid "K"
+#. settings-schema.json->stepBright->tooltip
+#. settings-schema.json->stepGamma->tooltip
+msgid "Step when changing by shortcuts"
 msgstr ""
 
-#. settings-schema.json->dayBrightness->units
-#. settings-schema.json->nightBrightness->units
-msgid "%"
-msgstr ""
-
-#. settings-schema.json->smoothTransition->description
-msgid "Smooth transition between day and night"
-msgstr ""
-
-#. settings-schema.json->transitionDuration->units
-msgid "Minutes"
-msgstr ""
-
-#. settings-schema.json->transitionDuration->description
-msgid "Transition Duration"
-msgstr ""
-
-#. settings-schema.json->manualNightTime->description
-msgid "Use Manual Night Time"
-msgstr ""
-
-#. settings-schema.json->nightTimeStart->description
-msgid "Choose Start Time"
-msgstr ""
-
-#. settings-schema.json->nightTimeEnd->description
-msgid "Choose End Time"
-msgstr ""
-
-#. settings-schema.json->locationRemote->description
-msgid "Remote Location"
-msgstr ""
-
-#. settings-schema.json->locationRemote->tooltip
-#. settings-schema.json->locationUpdate->tooltip
-msgid "Native geoclue on redshift can make the experience slow."
-msgstr ""
-
-#. settings-schema.json->locationUpdate->description
-msgid "Update Location"
-msgstr ""
-
-#. settings-schema.json->locationLatitude->description
-msgid "Latitude"
-msgstr ""
-
-#. settings-schema.json->locationLongitude->description
-msgid "Longitude"
-msgstr ""
-
-#. settings-schema.json->aboutLocation->description
-msgid ""
-"Native geoclue on redshift can make the experience slow.\n"
-"Using: https://geolocation-db.com/"
+#. settings-schema.json->stepTemp->tooltip
+msgid "Step when changing value by shortcuts"
 msgstr ""
 
 #. settings-schema.json->textTips->description
@@ -343,7 +308,7 @@ msgstr ""
 
 #. settings-schema.json->textHelp->description
 msgid ""
-"When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"When updating to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
 "You will lost all your configs."
 msgstr ""
 

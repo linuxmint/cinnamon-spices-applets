@@ -1,28 +1,45 @@
 const Cairo = imports.cairo;
 const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
-const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
+// const Gtk = imports.gi.Gtk;
+// const Lang = imports.lang;
 const Cinnamon = imports.gi.Cinnamon;
 const Signals = imports.signals;
 const St = imports.gi.St;
 const Atk = imports.gi.Atk;
 const Gio = imports.gi.Gio;
 
-const BoxPointer = imports.ui.boxpointer;
-const DND = imports.ui.dnd;
-const Main = imports.ui.main;
-const SignalManager = imports.misc.signalManager;
-const Tweener = imports.ui.tweener;
-const CheckBox = imports.ui.checkBox;
-const RadioButton = imports.ui.radioButton;
+// const BoxPointer = imports.ui.boxpointer;
+// const DND = imports.ui.dnd;
+// const Main = imports.ui.main;
+// const SignalManager = imports.misc.signalManager;
+// const Tweener = imports.ui.tweener;
+// const CheckBox = imports.ui.checkBox;
+// const RadioButton = imports.ui.radioButton;
 
 const ByteArray = imports.byteArray;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
 
+const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
 
+const MessageTray = imports.ui.main.messageTray;
+const Tray = imports.ui.messageTray;
+
+
+/** @exports QUtils.is_wayland */
+function is_wayland() {
+    if (spawn_command_line_sync_string_response("echo $XDG_SESSION_TYPE")?.stdout.toLowerCase() == 'wayland') return true;
+    return false;
+}
+
+/** @exports QUtils.is_arch_linux */
+function is_arch_linux() {
+    // All Arch-based distributions have the /etc/arch-release file,
+    // even if it's empty.
+    return Gio.file_new_for_path("/etc/arch-release").query_exists(null);
+}
 
 /** @exports QUtils.lerp */
 function lerp(if_t_zero, if_t_one, t) {
@@ -47,50 +64,92 @@ function byte_array_to_string(data) {
  * @exports QUtils.spawn_command_line_sync_string_response
  */
 function spawn_command_line_sync_string_response(command) {
-    let [success, standard_output, standard_error, exit_status] = GLib.spawn_command_line_sync(command);
-    
-    return {
-        success: success,
-        stdout: byte_array_to_string(standard_output),
-        stderr: byte_array_to_string(standard_error),
-        exit_status: exit_status
-    };
+    try {
+        let [success, standard_output, standard_error, exit_status, wait_status] = GLib.spawn_command_line_sync(command);
+        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, wait_status, function (pid, status) {
+            GLib.spawn_close_pid(pid);
+        });
+        
+        return {
+            success: success,
+            stdout: byte_array_to_string(standard_output),
+            stderr: byte_array_to_string(standard_error),
+            exit_status: exit_status
+        };
+        
+    } catch (e) {
+        return {
+            success: false,
+            stdout: '',
+            stderr: e,
+            exit_status: 1
+        };
+    }
 }
 
 /**
- * @callback async_callback
- * @param {string} out - An integer.
+ * @return {Promise<string>}
+ * @exports QUtils.spawn_command_line_async_promise
  */
-/**
- * @param {string} command
- * @param {async_callback} callback
- * @return {{success: boolean, stdout: string, stderr: string, exit_status: number}}
- * @exports QUtils.spawn_command_line_async_string_response
- */
-function spawn_command_line_async_string_response(command, callback) {
-    let parsed = GLib.shell_parse_argv(command)[1];
+function spawn_command_line_async_promise(command, work_dir = null) {
+    function _parse(fd) {
+        let output = '';
+        let output_stream_out = new Gio.DataInputStream({base_stream: new Gio.UnixInputStream({fd: fd, close_fd: true})});
+        
+        let [line, size] = output_stream_out.read_line(null);
+        while (line !== null) {
+            output += line + '\n';
+            [line, size] = output_stream_out.read_line(null);
+        }
+        
+        return output;
+    }
     
-    Util.spawn_async(parsed, (out) => {
-        callback(out);
+    return new Promise((resolve, reject) => {
+        try {
+            let [success, argv] = GLib.shell_parse_argv(command);
+            if (!success) {
+                reject("Failed to parse command");
+            }
+            
+            let spawn_flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
+            
+            let [result, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(work_dir, argv, null, spawn_flags, null);
+            
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, function (pid, status) {
+                GLib.spawn_close_pid(pid);
+            });
+            
+            let output = _parse(stdout);
+            let output_err = _parse(stderr);
+            
+            // if (output_err) reject(output_err);
+            // else resolve(output);
+            if (output) resolve(output);
+            else reject(output_err);
+            
+        } catch (e) {
+            reject('command not found');
+        }
+        
     });
 }
+
 
 /**
  * @exports QUtils.show_notification
  */
 function show_notification(title, message, icon_name) {
-    if (!global.gio_application) {
-        global.gio_application = new Gio.Application({application_id: "qredshift@quintao"});
-        global.gio_application.register(null);
-    }
+    const icon = new St.Icon({
+        icon_type: St.IconType.SYMBOLIC,
+        icon_name: icon_name,
+        icon_size: 25
+    });
     
-    var not = new Gio.Notification();
-    not.set_title(title);
-    not.set_body(message);
-    var Icon = new Gio.ThemedIcon({name: icon_name});
-    not.set_icon(Icon);
-    
-    global.gio_application.send_notification(null, not);
+    const source = new Tray.SystemNotificationSource('qredshift@quintao');
+    MessageTray.add(source);
+    const notification = new Tray.Notification(source, title, message, {icon: icon});
+    source.notify(notification);
 }
 
 /**
@@ -130,11 +189,11 @@ function qLOG(msg, ...data) {
         str += tmp.join(', ');
         // str += formatLogArgument(data);
     } else {
-        str = JSON.stringify(msg, null, 4);
+        // str = JSON.stringify(`${msg}`, null, 4);
+        str = `\n${msg}`;
     }
     
-    // global.logWarning(str);
-    
+    // global.log(str);
     global.logWarning(str);
     
     
@@ -334,10 +393,11 @@ class QPopupHeader extends QPopupItem {
         label: "",
         sub_label: "",
         status: "",
+        tooltip: ""
     };
     
-    constructor({label = '', sub_label = '', status = '', iconPath, iconName = 'quintao', iconSize = 32}) {
-        super({reactive: false});
+    constructor({reactive = false, label = '', sub_label = '', status = '', iconPath, iconName = 'quintao', iconSize = 32, tooltip = ''}) {
+        super({reactive: reactive});
         
         if (iconPath) {
             this._icon = new QIcon({icon_size: iconSize, icon_path: iconPath});
@@ -347,6 +407,7 @@ class QPopupHeader extends QPopupItem {
         this.texts.label = label;
         this.texts.sub_label = sub_label;
         this.texts.status = status;
+        this.texts.tooltip = tooltip;
         
         this._label = new St.Label({text: label});
         this._label.add_style_class_name('q-text-bigger');
@@ -358,6 +419,9 @@ class QPopupHeader extends QPopupItem {
         this._status_text = new St.Label({text: status});
         this._status_text.add_style_class_name('q-text-smaller');
         this._status_text.add_style_class_name('q-header-status');
+        
+        this._tooltip = new Tooltips.Tooltip(this.actor, tooltip);
+        
         
         this.base_style = this.actor.style_class;
         
@@ -391,6 +455,10 @@ class QPopupHeader extends QPopupItem {
     
     setIconSize(size) {
         this._icon.iconSize = size;
+    }
+    
+    setTooltip(text = '') {
+        this._tooltip.set_text(text);
     }
     
     destroy() {
@@ -490,6 +558,10 @@ class QPopupSlider extends QPopupItem {
         this._value = Math.max(Math.min(value, this.MAX), this.MIN);
         this.infoText.set_text(this._value + this.unit);
         this.slider.queue_repaint();
+    }
+    
+    setStep(value) {
+        this.STEP = value;
     }
     
     _setValueEmit(value) {
