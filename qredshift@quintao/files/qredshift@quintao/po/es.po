@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-28 02:32-0300\n"
-"PO-Revision-Date: 2024-06-28 13:42-0400\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2024-06-28 19:26-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,131 +18,111 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: applet.js:259
+#: applet.js:239
 msgid "Reload Applet"
 msgstr "Recargar Applet"
 
-#: applet.js:265
-msgid "Generate .POT file"
-msgstr "Generar archivo .POT"
-
-#: applet.js:270
+#: applet.js:250
 msgid "Recompile Translations"
 msgstr "Recompilar traducciones"
 
-#: applet.js:332 applet.js:663
-msgid "Not supported on wayland!"
-msgstr "¡No compatible con wayland!"
+#: applet.js:302
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "¡REDHISFT NO ESTÁ INSTALADO!"
 
-#: applet.js:341 applet.js:342
-msgid "Something went wrong!"
-msgstr "¡Algo salió mal!"
+#: applet.js:305
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr "Requiere Redshift: yay -S redshift-minimal"
 
-#: applet.js:463 applet.js:492
+#: applet.js:308
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Requiere Redshift: sudo apt-get install redshift"
+
+#: applet.js:460 applet.js:489
 msgid "should be removed."
 msgstr "debe ser eliminado."
 
-#: applet.js:485
+#: applet.js:482
 msgid "should be replaced by redshift-minimal"
 msgstr "debe sustituirse por redshift-minimal"
 
-#: applet.js:517
-msgid "package can be removed."
-msgstr "el paquete se puede eliminar."
-
-#: applet.js:520
-msgid "Old Redshift package is no longer required and can be safely removed."
-msgstr ""
-"El paquete antiguo Redshift ya no es necesario y se puede eliminar de forma "
-"segura."
-
-#: applet.js:667
-msgid ""
-"Automatically disabled under Wayland due to cinnamon compositor not yet "
-"support gamma ramps change."
-msgstr ""
-"Desactivado automáticamente en Wayland debido a que el compositor cinnamon "
-"aún no soporta el cambio de rampas gamma."
-
 #. settings-schema.json->enabled->description
-#: applet.js:677
+#: applet.js:652
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: applet.js:685 applet.js:730
+#: applet.js:660 applet.js:705
 msgid "Temp:"
 msgstr "Temperatura:"
 
-#: applet.js:696 applet.js:741
+#: applet.js:671 applet.js:716
 msgid "Bright:"
 msgstr "Brillo:"
 
-#: applet.js:707 applet.js:1009
+#: applet.js:682 applet.js:1018
 msgid "Gamma:"
 msgstr "Gamma:"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:722
+#: applet.js:697
 msgid "Night Enabled"
 msgstr "Modo nocturno habilitado"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:786
+#: applet.js:759
 msgid "Show Label"
 msgstr "Mostrar etiqueta"
 
-#: applet.js:959 applet.js:985
+#: applet.js:976 applet.js:1001
 msgid "Transition to day"
 msgstr "Transición al día"
 
-#: applet.js:960 applet.js:986
+#: applet.js:977 applet.js:1002
 msgid "Transition to night"
 msgstr "Transición a la noche"
 
-#: applet.js:961 applet.js:987
+#: applet.js:978 applet.js:1003
 msgid "Night"
 msgstr "Noche"
 
-#: applet.js:962 applet.js:988
+#: applet.js:979 applet.js:1004
 msgid "Day"
 msgstr "Día"
 
-#: applet.js:978
+#: applet.js:993
 msgid "On"
 msgstr "Ecendido"
 
-#: applet.js:978 applet.js:979
+#: applet.js:993 applet.js:995
 msgid "Off"
 msgstr "Apagado"
 
-#: applet.js:1000
+#: applet.js:1009
 msgid "Day Temperature"
 msgstr "Temperatura diurna"
 
-#: applet.js:1001
+#: applet.js:1010
 msgid "Day Brightness"
 msgstr "Brillo diurno"
 
-#: applet.js:1003
+#: applet.js:1012
 msgid "Night Temperature"
 msgstr "Temperatura nocturna"
 
-#: applet.js:1004
+#: applet.js:1013
 msgid "Night Brightness"
 msgstr "Brillo nocturno"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#. settings-schema.json->stepTemp->description
-#: applet.js:1006
+#: applet.js:1015
 msgid "Temperature"
 msgstr "Temperatura"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#. settings-schema.json->stepBright->description
-#: applet.js:1007
+#: applet.js:1016
 msgid "Brightness"
 msgstr "Brillo"
 
@@ -162,9 +142,17 @@ msgstr ""
 msgid "Settings"
 msgstr "Configuración"
 
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "Ubicación"
+
 #. settings-schema.json->panel-shortcuts->title
 msgid "Shortcuts"
 msgstr "Atajos"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Consejos"
 
 #. settings-schema.json->opt-section->title
 msgid "Options"
@@ -182,13 +170,17 @@ msgstr "Configuración nocturna"
 msgid "Key Bindings"
 msgstr "Atajos del teclado"
 
-#. settings-schema.json->step-section->title
-msgid "Step"
-msgstr "Avance"
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "Configuración de ubicación"
 
-#. settings-schema.json->info-section->title
-msgid "Tips"
-msgstr "Consejos"
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+"Desactivado automáticamente en Wayland debido a que redshift aún no está "
+"soportado por Wayland"
 
 #. settings-schema.json->enableAtStartup->description
 msgid "Reactivate QRedshift as soon as Cinnamon starts up"
@@ -217,6 +209,26 @@ msgstr "Segundos"
 msgid "Update interval"
 msgstr "Intervalo de actualización"
 
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "Método de Ajuste"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vimode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "Método para ajustar la temperatura del color"
+
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
 msgstr "Acción del icono de desplazamiento"
@@ -236,7 +248,6 @@ msgstr "Brillo"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->gammaMix->description
-#. settings-schema.json->stepGamma->description
 msgid "Gamma"
 msgstr "Gamma"
 
@@ -247,36 +258,6 @@ msgstr "Acción al desplazarse sobre el icono del applet."
 #. settings-schema.json->symbolicIcon->description
 msgid "Use symbolic icon"
 msgstr "Usar iconos simbólicos"
-
-#. settings-schema.json->dayTemp->units
-#. settings-schema.json->nightTemp->units
-msgid "K"
-msgstr "K"
-
-#. settings-schema.json->dayBrightness->units
-#. settings-schema.json->nightBrightness->units
-msgid "%"
-msgstr "%"
-
-#. settings-schema.json->smoothTransition->description
-msgid "Smooth transition between day and night"
-msgstr "Transición suave entre el día y la noche"
-
-#. settings-schema.json->transitionDuration->units
-msgid "Minutes"
-msgstr "Minutos"
-
-#. settings-schema.json->transitionDuration->description
-msgid "Transition Duration"
-msgstr "Duración de la transición"
-
-#. settings-schema.json->nightTimeStart->description
-msgid "Choose Start Time"
-msgstr "Seleccione hora de inicio"
-
-#. settings-schema.json->nightTimeEnd->description
-msgid "Choose End Time"
-msgstr "Seleccione hora de término"
 
 #. settings-schema.json->keyBrightnessUp->description
 msgid "Increase brightness level"
@@ -302,14 +283,68 @@ msgstr "Aumentar el nivel de gamma"
 msgid "Decrease gamma level"
 msgstr "Disminuir el nivel de gamma"
 
-#. settings-schema.json->stepBright->tooltip
-#. settings-schema.json->stepGamma->tooltip
-msgid "Step when changing by shortcuts"
-msgstr "Avance al cambiar por atajos"
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
 
-#. settings-schema.json->stepTemp->tooltip
-msgid "Step when changing value by shortcuts"
-msgstr "Avance al cambiar el valor mediante accesos directos"
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Transición suave entre el día y la noche"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "Minutos"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Duración de la transición"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "Usar horario nocturno manual"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "Seleccione hora de inicio"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "Seleccione hora de término"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "Ubicación remota"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr "Geoclue nativo en redshift puede hacer lenta su experiencia."
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "Actualizar la ubicación"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "Longitud"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+"Geoclue nativo en redshift puede hacer su experiencia lenta. \n"
+"Utilizando: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
@@ -337,60 +372,39 @@ msgstr ""
 "Cinnamon Spices y dale una estrella. Sólo necesitas una cuenta de github "
 "para hacerlo."
 
-#~ msgid "REDSHIFT NOT INSTALLED!"
-#~ msgstr "¡REDHISFT NO ESTÁ INSTALADO!"
+#~ msgid "Generate .POT file"
+#~ msgstr "Generar archivo .POT"
 
-#~ msgid "Requires Redshift: yay -S redshift-minimal"
-#~ msgstr "Requiere Redshift: yay -S redshift-minimal"
+#~ msgid "Not supported on wayland!"
+#~ msgstr "¡No compatible con wayland!"
 
-#~ msgid "Requires Redshift: sudo apt-get install redshift"
-#~ msgstr "Requiere Redshift: sudo apt-get install redshift"
+#~ msgid "Something went wrong!"
+#~ msgstr "¡Algo salió mal!"
 
-#~ msgid "Location"
-#~ msgstr "Ubicación"
-
-#~ msgid "Location Settings"
-#~ msgstr "Configuración de ubicación"
-
-#~ msgid "Adjustment Method"
-#~ msgstr "Método de Ajuste"
-
-#~ msgid "needload"
-#~ msgstr "needload"
-
-#~ msgid "randr"
-#~ msgstr "randr"
-
-#~ msgid "vidmode"
-#~ msgstr "vimode"
-
-#~ msgid "Method to use to set color temperature"
-#~ msgstr "Método para ajustar la temperatura del color"
-
-#~ msgid "Use Manual Night Time"
-#~ msgstr "Usar horario nocturno manual"
-
-#~ msgid "Remote Location"
-#~ msgstr "Ubicación remota"
-
-#~ msgid "Native geoclue on redshift can make the experience slow."
-#~ msgstr "Geoclue nativo en redshift puede hacer lenta su experiencia."
-
-#~ msgid "Update Location"
-#~ msgstr "Actualizar la ubicación"
-
-#~ msgid "Latitude"
-#~ msgstr "Latitud"
-
-#~ msgid "Longitude"
-#~ msgstr "Longitud"
+#~ msgid "package can be removed."
+#~ msgstr "el paquete se puede eliminar."
 
 #~ msgid ""
-#~ "Native geoclue on redshift can make the experience slow.\n"
-#~ "Using: https://geolocation-db.com/"
+#~ "Old Redshift package is no longer required and can be safely removed."
 #~ msgstr ""
-#~ "Geoclue nativo en redshift puede hacer su experiencia lenta. \n"
-#~ "Utilizando: https://geolocation-db.com/"
+#~ "El paquete antiguo Redshift ya no es necesario y se puede eliminar de "
+#~ "forma segura."
+
+#~ msgid ""
+#~ "Automatically disabled under Wayland due to cinnamon compositor not yet "
+#~ "support gamma ramps change."
+#~ msgstr ""
+#~ "Desactivado automáticamente en Wayland debido a que el compositor "
+#~ "cinnamon aún no soporta el cambio de rampas gamma."
+
+#~ msgid "Step"
+#~ msgstr "Avance"
+
+#~ msgid "Step when changing by shortcuts"
+#~ msgstr "Avance al cambiar por atajos"
+
+#~ msgid "Step when changing value by shortcuts"
+#~ msgstr "Avance al cambiar el valor mediante accesos directos"
 
 #~ msgid "(even if it has previously been deactivated)"
 #~ msgstr "(aunque se haya desactivado previamente)"
