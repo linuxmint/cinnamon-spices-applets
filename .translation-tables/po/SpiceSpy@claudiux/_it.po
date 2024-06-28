@@ -20,8 +20,8 @@ msgstr ""
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
-msgstr ""
+msgstr "Mostrare il numero di traduzioni nel menu"
 
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
-msgstr ""
+msgstr "Mostrare solo i valori non nulli nel pannello"
