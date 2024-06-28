@@ -38,9 +38,10 @@ If you want to submit some translations please make it on the original repositor
 * 2.0.0
     * Original repository renamed to [QRedshiftCinnamon](https://github.com/raphaelquintao/QRedshiftCinnamon).
     * Completely disabled on Wayland (wayland cinnamon compositor don't support gamma ramps yet).
-    * Removed remote location option (I don't think anyone uses it. Can be implemented in the future if got enough requests).
+    * Removed remote location option (I don't think anyone uses it. Can be implemented in the future if there are enough requests).
     * Removed dependency of redshift package.
     * Extension now uses its own backend application: [QRedshift Terminal Application](https://github.com/raphaelquintao/QRedshift).
+    * Added an option to configure step for shortcuts.
 
 <details closed>
 <summary>More</summary>
