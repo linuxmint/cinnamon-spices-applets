@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-21 18:00+0200\n"
+"POT-Creation-Date: 2024-06-28 01:44+0200\n"
 "PO-Revision-Date: 2024-06-18 15:02+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:399
+#: applet.js:427
 msgid "Mark all as read"
 msgstr "Segna tutto come già letto"
 
-#: applet.js:403
+#: applet.js:431
 msgid "Refresh"
 msgstr "Aggiorna"
 
-#: applet.js:407
+#: applet.js:435
 msgid "Spices"
 msgstr "Spice"
 
-#: applet.js:469
+#: applet.js:505
 msgid "Configure..."
 msgstr "Configura..."
 
@@ -136,6 +136,10 @@ msgstr "Mostra solo l'icona"
 #. settings-schema.json->display-on-panel->options
 msgid "Do not show anything"
 msgstr "Non mostrare nulla"
+
+#. settings-schema.json->useful-only->description
+msgid "Show only non-zero values in panel"
+msgstr ""
 
 #. settings-schema.json->section2->description
 msgid "List of authors of the Spices you are interested in"

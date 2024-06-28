@@ -80,6 +80,11 @@
       "Do not show anything": "mask"
     }
   },
+  "useful-only": {
+    "type": "switch",
+    "description": "Show only non-zero values in panel",
+    "default": false
+  },
   "section2": {
     "type": "section",
     "description": "List of authors of the Spices you are interested in"
