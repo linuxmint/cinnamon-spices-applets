@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-28 01:44+0200\n"
-"PO-Revision-Date: 2024-06-21 13:14-0400\n"
+"PO-Revision-Date: 2024-06-27 22:43-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -138,7 +138,7 @@ msgstr "No mostrar nada"
 
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
-msgstr ""
+msgstr "Mostrar sólo valores distintos de cero en el panel"
 
 #. settings-schema.json->section2->description
 msgid "List of authors of the Spices you are interested in"
