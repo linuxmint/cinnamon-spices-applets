@@ -1,0 +1,1041 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2023-06-01 15:37+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.1\n"
+
+msgid "Initializing"
+msgstr "正在初始化"
+
+msgid "Find files..."
+msgstr "查找文件..."
+
+msgid "Please wait..."
+msgstr "请稍等..."
+
+msgid "Applications"
+msgstr "应用程序"
+
+msgid "Documents"
+msgstr "文件"
+
+msgid "Videos"
+msgstr "视频"
+
+msgid "Images"
+msgstr "图片"
+
+msgid "Music"
+msgstr "音乐"
+
+msgid "No recent Items"
+msgstr "没有最近的项目"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "单击复制"
+
+msgid "Applications and files"
+msgstr "应用程序和文件"
+
+msgid "Other search results"
+msgstr "其他搜索结果"
+
+msgid "Browser bookmarks"
+msgstr "浏览器书签"
+
+msgid "Browser history"
+msgstr "浏览器历史"
+
+msgid "Emoji"
+msgstr "表情符号"
+
+msgid "Clear List"
+msgstr "清除列表"
+
+msgid "Trash"
+msgstr "回收站"
+
+msgid "Computer"
+msgstr "计算机"
+
+msgid "Error while opening file:"
+msgstr "打开文件时出错："
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "条目过多 - 仅显示前 1000 个条目"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "所有应用程序"
+
+msgid "Favorites"
+msgstr "收藏夹"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "位置"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "最近的"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "收藏夹应用程序"
+
+msgid "light skin tone"
+msgstr "浅肤色"
+
+msgid "medium-light skin tone"
+msgstr "较浅肤色"
+
+msgid "medium skin tone"
+msgstr "中等肤色"
+
+msgid "medium-dark skin tone"
+msgstr "较深肤色"
+
+msgid "dark skin tone"
+msgstr "深肤色"
+
+msgid "Remove category"
+msgstr "删除类别"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "重置类别顺序"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "显示隐藏文件"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "显示隐藏文件"
+
+msgid "Run with NVIDIA GPU"
+msgstr "使用 NVIDIA GPU 运行"
+
+msgid "Add to panel"
+msgstr "添加到面板"
+
+msgid "Add to desktop"
+msgstr "添加到桌面"
+
+msgid "Remove from favorites"
+msgstr "从收藏夹中删除"
+
+msgid "Add to favorites"
+msgstr "添加到收藏夹"
+
+msgid "Uninstall"
+msgstr "卸载"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "此文件不再可用"
+
+msgid "Open with"
+msgstr "打开方式"
+
+msgid "Other application..."
+msgstr "其他应用程序..."
+
+msgid "Add folder as category"
+msgstr "添加文件夹为类别"
+
+msgid "Open containing folder"
+msgstr "打开文件位置"
+
+msgid "Move to trash"
+msgstr "移到回收站"
+
+msgid "Error while moving file to trash:"
+msgstr "将文件移动到回收站时出错："
+
+msgid "Smileys & Emotion"
+msgstr "笑脸 & 表情"
+
+msgid "People & Body"
+msgstr "人 & 身体"
+
+msgid "Animals & Nature"
+msgstr "动物 & 自然"
+
+msgid "Food & Drink"
+msgstr "食物 & 饮料"
+
+msgid "Travel & Places"
+msgstr "旅游 & 场所"
+
+msgid "Activities"
+msgstr "活动"
+
+msgid "Objects"
+msgstr "物体"
+
+msgid "Symbols"
+msgstr "符号"
+
+msgid "Flags"
+msgstr "旗帜"
+
+msgid "Quit"
+msgstr "退出"
+
+msgid "Shutdown the computer"
+msgstr "关闭计算机"
+
+msgid "Logout"
+msgstr "注销"
+
+msgid "Leave the session"
+msgstr "离开会话"
+
+msgid "Lock screen"
+msgstr "锁定屏幕"
+
+msgid "Lock the screen"
+msgstr "锁定屏幕"
+
+msgid "Type to search..."
+msgstr "键入以搜索..."
+
+msgid "No description available"
+msgstr "没有可用的描述"
+
+msgid "Recent files"
+msgstr "最近的文件"
+
+msgid "Bookmarks"
+msgstr "书签"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox 和 Midori 书签所需的 gir1.2-gda-5.0 包。"
+
+msgid "No recent files"
+msgstr "没有最近的文件"
+
+msgid "Account details"
+msgstr "帐户详细资料"
+
+msgid "Grid View"
+msgstr "网格视图"
+
+msgid "List View"
+msgstr "列表视图"
+
+msgid "Switch to grid view"
+msgstr "切换到网格视图"
+
+msgid "Switch to list view"
+msgstr "切换到列表视图"
+
+msgid "Home"
+msgstr "主目录"
+
+msgid "Browse network"
+msgstr "浏览网络"
+
+msgid "Open"
+msgstr "打开"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "搜索"
+
+msgid "Start in"
+msgstr "开始于"
+
+msgid "Select a folder"
+msgstr "选择文件夹"
+
+msgid "Follow symlinks"
+msgstr "沿符号链接"
+
+msgid "Search hidden"
+msgstr "搜索隐藏文件"
+
+msgid "Use regular expressions"
+msgstr "使用正则表达式"
+
+msgid "Stop"
+msgstr "停止"
+
+msgid "File"
+msgstr "文件"
+
+msgid "Path"
+msgstr "路径"
+
+msgid "Searching..."
+msgstr "正在搜索..."
+
+msgid "Search Stopped"
+msgstr "搜索停止"
+
+msgid "Searching: "
+msgstr "正在搜索："
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "错误：没有足够的权限读取文件夹 "
+
+msgid "Search Completed"
+msgstr "搜索完成"
+
+msgid "Skipping"
+msgstr "跳过"
+
+msgid " - directory already searched"
+msgstr " - 已搜索目录"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr "此菜单项不与任何软件包关联。是否要将其从菜单中删除？"
+
+msgid "The following packages will be removed:"
+msgstr "以下软件包将被删除："
+
+msgid "Packages to be removed"
+msgstr "要删除的软件包"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "无法删除包 %s，因为其他包需要它。"
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "包 %s 是以下包的依赖项："
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr "一个具有网格或列表布局选项、文件浏览器以及表情符号搜索的灵活菜单。"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "布局"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "行为"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "外观"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr "提示"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "内容"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "面板"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "菜单"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "应用程序视图模式"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "列表"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "网格"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "以列表或网格查看应用程序"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "在侧边栏显示收藏夹"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "在菜单中显示类别：主目录"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "侧边栏位置"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "顶部"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "底部"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "左侧"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "右侧"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "选择显示侧边栏的位置"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "在侧边栏显示收藏夹"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "无"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr "仅应用程序"
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr "仅文件"
+
+#. 5.8
+#. 4.0
+msgid "Apps and files"
+msgstr "应用程序与文件"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "在侧边栏显示你喜欢的应用程序和文件图标"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "应用程序描述位置"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "提示框"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "标题下方"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "选择显示应用程序描述的位置"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "显示类别图标"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "显示应用程序图标"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "显示书签和位置"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "在类别列表中显示书签和位置"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "显示最近的项目"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "在菜单中显示类别：最近的项目"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "显示收藏夹应用程序"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "在菜单中显示类别：收藏的应用程序"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "显示主目录"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "在菜单中显示类别：主目录"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category"
+msgstr "显示表情符号"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category in the menu"
+msgstr "在菜单中显示类别：表情符号"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "打开菜单编辑器"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "悬停时打开菜单"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "当我移动鼠标到菜单上时打开菜单"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "菜单悬停延迟"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "使用菜单动画"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "允许打开和关闭菜单的动画"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "单击激活类别"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "单击而不是悬停时激活类别"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "打开类别菜单："
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "打开菜单时始终选择此类别"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "上次使用的类别"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "启用自动滚动"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "鼠标悬停时自动滚动应用程序列表"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "在文件夹视图中显示隐藏文件"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "表情符号搜索"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "在搜索结果中显示表情符号"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "网络搜索选项"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "在搜索结果中显示互联网搜索选项"
+
+#. 5.8
+#. 4.0
+msgid "Web search suggestions"
+msgstr "网络搜索建议"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"显示带有网络搜索建议的选项（Note: Search suggestions are provided by "
+"DuckDuckGo）"
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "搜索主目录"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "搜索时，还要在我的主目录中搜索文件"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "网络历史搜索"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"搜索时，还要搜索我的浏览器历史记录（Google Chrome、Chromium、Opera、Vivaldi、"
+"Brave）\n"
+"注意：目前不支持 Firefox 历史记录。"
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "网络书签搜索"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"搜索时，还要搜索我的浏览器书签（Google Chrome、Firefox、Chromium、Opera、"
+"Vivaldi、Brave）\n"
+"注意：要搜索 Firefox 书签，需要安装软件包 gir1.2-gda-5.0（基于 Debian 的发行"
+"版，例如 Ubuntu 和 Linux Mint）或 libgda（基于 Arch 的发行版）并重新启动计算"
+"机。"
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "维基百科搜索"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "显示一些维基百科结果"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "维基百科语言"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"注意：即使没有在这里启用某些搜索选项，也可以通过给搜索词添加前缀来使用它"
+"们。\n"
+"例如：要搜索表情符号，输入“e heart”可以找到心形表情符号。同样，使用前缀“f ”进"
+"行文件搜索，“h ”进行网络历史搜索，“b ”进行网络书签搜索。\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "使用自定义图标"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "在面板中使用自定义图标"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "面板图标"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "使用自定义图标大小"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "为面板图标使用自定义大小"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "面板图标大小（像素）"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "为面板图标选择自定义大小"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "面板文字"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "在面板图标旁边显示的文本"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "类别图标大小（像素）"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "应用程序列表图标大小（像素）"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "应用程序网格图标大小（像素）"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "侧边栏图标大小（像素）"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "使用侧边栏边框样式"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "为侧边栏添加一个边框"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "使用平铺样式"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr "为应用程序按钮使用平铺样式（注意：可能不适用于某些主题）"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• 拖动菜单边缘以更改菜单大小。"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• 拖放菜单类别以改变其顺序。"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "搜索提供者"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "未找到搜索提供程序扩展"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "最近文件设置"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "在应用程序列表中启用自动滚动"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "显示网络书签"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"在菜单中显示浏览器的网络书签。\n"
+"注意：安装软件包 gir1.2-gda-5.0 以读取 Firefox 书签。"
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "启用搜索打开的窗口"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "启用搜索提供者"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "在搜索中包含提供者搜索结果"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "搜索提供者示例"
+
+#. 3.2
+msgid "columns"
+msgstr "列"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "应用程序网格中列的数量"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "显示应用程序图标"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "显示类别图标"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "在标题下方显示应用程序描述"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "显示提示框"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "提示框延迟"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "使用自定义菜单高度"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "自定义菜单高度（像素）"
+
+#~ msgid ""
+#~ "\n"
+#~ "• Right click on any folder to add it as a menu category.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "• 在任何文件夹上单击右键，将其作为一个菜单类别添加。\n"
+
+#~ msgid "Home folder"
+#~ msgstr "主目录"
+
+#~ msgid "Layout and Content"
+#~ msgstr "布局和内容"

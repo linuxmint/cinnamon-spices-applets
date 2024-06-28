@@ -1,0 +1,1048 @@
+# Dutch translation for Cinnamenu
+# Copyright (C) 2019
+# This file is distributed under the same license as the Cinnamenu package.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2024-04-22 10:55+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Initializing"
+msgstr "Bezig met opstarten"
+
+msgid "Find files..."
+msgstr "Bestanden zoeken..."
+
+msgid "Please wait..."
+msgstr "Even geduld a.u.b..."
+
+msgid "Applications"
+msgstr "Toepassingen"
+
+msgid "Documents"
+msgstr "Documenten"
+
+msgid "Videos"
+msgstr "Video's"
+
+msgid "Images"
+msgstr "Afbeeldingen"
+
+msgid "Music"
+msgstr "Muziek"
+
+msgid "No recent Items"
+msgstr "Geen recente elementen"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Click to copy"
+msgstr "Klik om te kopiëren"
+
+msgid "Applications and files"
+msgstr "Toepassingen en bestanden"
+
+msgid "Other search results"
+msgstr "Andere zoekresultaten"
+
+msgid "Browser bookmarks"
+msgstr "Browserbladwijzers"
+
+msgid "Browser history"
+msgstr "Browsergeschiedenis"
+
+msgid "Emoji"
+msgstr "Emotiepictogram"
+
+msgid "Clear List"
+msgstr "Lijst wissen"
+
+msgid "Trash"
+msgstr "Prullenbak"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Error while opening file:"
+msgstr "Fout bij openen bestand:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Te veel elementen - toont alleen de eerste 1000 elementen"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Alle toepassingen"
+
+msgid "Favorites"
+msgstr "Favorieten"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Locaties"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Recent"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Favoriete toepassingen"
+
+msgid "light skin tone"
+msgstr "lichte huidskleur"
+
+msgid "medium-light skin tone"
+msgstr "lichtgetinte huidskleur"
+
+msgid "medium skin tone"
+msgstr "getinte huidskleur"
+
+msgid "medium-dark skin tone"
+msgstr "donkergetinte huidskleur"
+
+msgid "dark skin tone"
+msgstr "donkere huidskleur"
+
+msgid "Remove category"
+msgstr "Categorie verwijderen"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Categorievolgorde terugzetten op standaard"
+
+msgid "List settings apps separately"
+msgstr "Instellingen-apps apart weergeven"
+
+msgid "Single list style"
+msgstr "Enkelvoudige lijst stijl"
+
+msgid "Hide hidden files"
+msgstr "Verborgen bestanden verbergen"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Toon verborgen bestanden"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Draaien met NVIDIA-GPU"
+
+msgid "Add to panel"
+msgstr "Toevoegen aan werkbalk"
+
+msgid "Add to desktop"
+msgstr "Toevoegen aan bureaublad"
+
+msgid "Remove from favorites"
+msgstr "Verwijderen uit favorieten"
+
+msgid "Add to favorites"
+msgstr "Toevoegen aan favorieten"
+
+msgid "Uninstall"
+msgstr "Deïnstalleren"
+
+msgid "App Info"
+msgstr "App-informatie"
+
+msgid "This file is no longer available"
+msgstr "Dit bestand is niet langer beschikbaar"
+
+msgid "Open with"
+msgstr "Openen met"
+
+msgid "Other application..."
+msgstr "Andere toepassing..."
+
+msgid "Add folder as category"
+msgstr "Map toevoegen als categorie"
+
+msgid "Open containing folder"
+msgstr "Map die het bevat openen"
+
+msgid "Move to trash"
+msgstr "Verplaatsen naar prullenbak"
+
+msgid "Error while moving file to trash:"
+msgstr "Fout bij het verplaatsen van het bestand naar de prullenbak:"
+
+msgid "Smileys & Emotion"
+msgstr "Lachebekjes en emoties"
+
+msgid "People & Body"
+msgstr "Mensen en lichaam"
+
+msgid "Animals & Nature"
+msgstr "Dieren en natuur"
+
+msgid "Food & Drink"
+msgstr "Eten en drinken"
+
+msgid "Travel & Places"
+msgstr "Reizen en mooie plekken"
+
+msgid "Activities"
+msgstr "Activiteiten"
+
+msgid "Objects"
+msgstr "Dingen"
+
+msgid "Symbols"
+msgstr "Symbolen"
+
+msgid "Flags"
+msgstr "Vlaggen"
+
+msgid "Quit"
+msgstr "Afsluiten"
+
+msgid "Shutdown the computer"
+msgstr "De computer afsluiten"
+
+msgid "Logout"
+msgstr "Afmelden"
+
+msgid "Leave the session"
+msgstr "Sessie verlaten"
+
+msgid "Lock screen"
+msgstr "Scherm vergrendelen"
+
+msgid "Lock the screen"
+msgstr "Vergrendel het scherm"
+
+msgid "Type to search..."
+msgstr "Tik in om te zoeken..."
+
+msgid "No description available"
+msgstr "Geen beschrijving beschikbaar"
+
+msgid "Recent files"
+msgstr "Recente bestanden"
+
+msgid "Bookmarks"
+msgstr "Bladwijzers"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist."
+
+msgid "No recent files"
+msgstr "Geen recente bestanden"
+
+msgid "Account details"
+msgstr "Bijzonderheden van account"
+
+msgid "Grid View"
+msgstr "Rasterweergave"
+
+msgid "List View"
+msgstr "Lijstweergave"
+
+msgid "Switch to grid view"
+msgstr "Omschakelen naar rasterweergave"
+
+msgid "Switch to list view"
+msgstr "Omschakelen naar lijstweergave"
+
+msgid "Home"
+msgstr "Persoonlijke map"
+
+msgid "Browse network"
+msgstr "Netwerk verkennen"
+
+msgid "Open"
+msgstr "Open"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Zoeken"
+
+msgid "Start in"
+msgstr "Begin in"
+
+msgid "Select a folder"
+msgstr "Kies een map"
+
+msgid "Follow symlinks"
+msgstr "Symlinks volgen"
+
+msgid "Search hidden"
+msgstr "Zoek verborgen"
+
+msgid "Use regular expressions"
+msgstr "Gebruik reguliere uitdrukkingen"
+
+msgid "Stop"
+msgstr "Houd op"
+
+msgid "File"
+msgstr "Bestand"
+
+msgid "Path"
+msgstr "Pad"
+
+msgid "Searching..."
+msgstr "Zoeken..."
+
+msgid "Search Stopped"
+msgstr "Zoeken gestopt"
+
+msgid "Searching: "
+msgstr "Zoeken: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Fout: onvoldoende rechten om map te lezen "
+
+msgid "Search Completed"
+msgstr "Zoeken voltooid"
+
+msgid "Skipping"
+msgstr "Overslaan"
+
+msgid " - directory already searched"
+msgstr " - map al doorzocht"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Dit menu-element is niet gekoppeld aan een pakket. Wilt u het toch uit het "
+"menu verwijderen?"
+
+msgid "The following packages will be removed:"
+msgstr "De volgende pakketten worden verwijderd:"
+
+msgid "Packages to be removed"
+msgstr "Pakketten die moeten worden verwijderd"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+"Kan pakket %s niet verwijderen omdat dit nodig is voor andere pakketten."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakket %s is een afhankelijkheid van de volgende pakketten:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Een flexibel menu met opties voor raster- of lijstvormgeving, "
+"bestandbeheerder en zoeken naar emotiepictogrammen."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Vormgeving"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr "Tips"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Inhoud"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Werkbalk"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Menu"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Toepassingsweergavemodus"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Lijst"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Raster"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Bekijk applicaties als lijst of raster"
+
+#. 5.8
+#. 4.0
+msgid "Show sidebar"
+msgstr "Zijbalk tonen"
+
+#. 5.8
+#. 4.0
+msgid "Show the sidebar in the menu"
+msgstr "De zijbalk weergeven in het menu"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Locatie zijbalk"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Bovenaan"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Onderaan"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Links"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "Rechts"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Kies waar u de zijbalk wilt weergeven"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Favorieten weergeven in zijbalk"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Geen"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr "Alleen toepassingen"
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr "Alleen bestanden"
+
+#. 5.8
+#. 4.0
+msgid "Apps and files"
+msgstr "Toepassingen en bestanden"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Toon uw favoriete toepassings- en bestandspictogrammen in de zijbalk"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Plaatsing van toepassingsbeschrijving"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Zweeftips"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Onder titels"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Kies waar toepassingsbeschrijvingen moeten worden weergegeven"
+
+#. 5.8
+#. 4.0
+msgid "Show categories"
+msgstr "Categorieën tonen"
+
+#. 5.8
+#. 4.0
+msgid "Show list of application categories"
+msgstr "Lijst van applicatie-categorieën tonen"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Bladwijzers en locaties tonen"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Toon categorie voor bladwijzers en plaatsen in het menu"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Toon recente elementen"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Toon de categorie recente elementen in het menu"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Toon de categorie favoriete toepassingen"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Toon uw favoriete toepassingencategorie in het menu"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Thuismap tonen"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Toon thuismapcategorie in het menu"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category"
+msgstr "Toon emotiepictogramcategorie"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category in the menu"
+msgstr "Toon emotiepictogramcategorie in het menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Open de menubewerker"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Sneltoets voor openen en sluiten van het menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Menu openen bij zweven"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Zweefvertraging voor menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Menu-animaties gebruiken"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Menu-animaties inschakelen voor openen en sluiten"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Categorieën activeren bij klikken"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Categorieën activeren bij klikken in plaats van bij zweven"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Open menu op categorie:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Open altijd het menu met deze categorie geselecteerd"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Laatst gebruikte categorie"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Schakel automatisch schuiven in"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+"Automatisch schuiven door de toepassingenlijst bij erboven zweven met de muis"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Verborgen bestanden weergeven in mapweergave"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Emotiepictogrammen doorzoeken"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Emotiepictogrammen weergeven in zoekresultaten"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Optie voor zoeken op internet"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Toon een webzoekoptie in zoekresultaten"
+
+#. 5.8
+#. 4.0
+msgid "Web search suggestions"
+msgstr "Webzoeksuggesties"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Met webzoekoptie, toont ook zoeksuggesties (let op: dit gebruikt de zoek-API "
+"van DuckDuckGo)."
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Zoeken in thuismap"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Zoek bij het zoeken ook in mijn thuismap naar bestanden"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Zoeken in webgeschiedenis"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Zoek bij het zoeken ook in de geschiedenis van mijn browser (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Opmerking: Firefox-geschiedenis wordt momenteel niet ondersteund."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Zoeken naar webbladwijzers"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Zoek bij het zoeken ook in de webbladwijzers van mijn browser (Google "
+"Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Opmerking: om Firefox-bladwijzers te zoeken, moet u het pakket gir1.2-"
+"gda-5.0 installeren (Debian-gebaseerde distributies incl. Ubuntu en Linux "
+"Mint) of het paskket libgda (Arch-gebaseerde distributies) en uw computer "
+"herstarten."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Wikipedia doorzoeken"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Enkele Wikipedia-resultaten weergeven"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Wikipedia-taal"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Opmerking: sommige zoekopties kunnen nog steeds worden gebruikt, zelfs als u "
+"hen hier niet hebt ingeschakeld door uw zoekterm voor te voegen.\n"
+"Bijvoorbeeld: om naar een emotiepictogram te zoeken, tikt u 'e heart' om "
+"hartemotiepictogrammen te vinden. Gebruik op dezelfde manier de voorvoegsels "
+"'f' voor het zoeken naar bestanden, 'h' voor webgeschiedenis en 'b' voor het "
+"zoeken naar webbladwijzers.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Een aangepast pictogram gebruiken in de werkbalk"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Werkbalkpictogram"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Gebruik een aangepaste pictogramgrootte"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Gebruik een aangepaste grootte voor het werkbalkpictogram"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Grootte werkbalkpictogram (beeldpunten)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Kies een aangepaste grootte voor het werkbalkpictogram"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Werkbalktekst"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Tekst die naast het werkbalkpictogram moet worden weergegeven"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Grootte categoriepictogram (beeldpunten)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Pictogramgrootte van de lijst met toepassingen (beeldpunten)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Pictogramgrootte van het toepassingenraster (beeldpunten)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Grootte van zijbalkpictogram (beeldpunten)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Zijbalkstijl gebruiken"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Een zijbalkstijl gebruiken"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Tegelstijl gebruiken"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Gebruik een tegelstijl voor de toepassingsknoppen (Opmerking: werkt mogelijk "
+"niet bij sommige thema's)"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Sleep op de menurand om de menugrootte te wijzigen."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Menucategorieën slepen en neerzetten om hun volgorde te wijzigen."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Mappen kunnen worden ingesteld en verwijderd als menucategorieën door er "
+"met de rechtermuisknop op te klikken."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Extra toetsenopties:\n"
+"ctrl-p — Open dialoogvenster in verband met start-eigenschappen van "
+"momenteel gemarkeerde applicatie.\n"
+"ctrl-d — Open .desktop bestand van de momenteel gemarkeerde app in de "
+"standaardtekstverwerker.\n"
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Zoekdienstaanbieders"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Geen extensies aangetroffen voor zoekdiensten"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Instellingen voor recente bestanden"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Webbladwijzers tonen"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Toon de webbladwijzers van uw browser in het menu.\n"
+"Opmerking: Installeer pakket gir1.2-gda-5.0 om Firefox-bladwijzers te lezen."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Opzoeken van open vensters inschakelen"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Zoekdiensten inschakelen"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "Zoekresultaten van zoekdiensten opnemen in zoekopdrachten"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Voorbeeld van zoekdiensten"
+
+#. 3.2
+msgid "columns"
+msgstr "rijen"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Aantal rijen in toepassingenraster"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Toepassingspictogrammen tonen"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Categoriepictogrammen tonen"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Beschrijvingen van toepassingen tonen onder titels"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Zweeftips tonen"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Vertraging voor zweeftip"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Een aangepaste menuhoogte gebruiken"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Aangepaste menuhoogte (beeldpunten)"
+
+#~ msgid "Home folder"
+#~ msgstr "Thuismap"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Vormgeving en inhoud"

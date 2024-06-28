@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-05 18:11-0400\n"
+"PO-Revision-Date: 2023-12-27 16:48+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: js/compass.js:14
+msgid "North"
+msgstr ""
+
+#: js/compass.js:15
+msgid "North East"
+msgstr ""
+
+#: js/compass.js:16
+msgid "East"
+msgstr ""
+
+#: js/compass.js:17
+msgid "South East"
+msgstr ""
+
+#: js/compass.js:18
+msgid "South"
+msgstr ""
+
+#: js/compass.js:19
+msgid "South West"
+msgstr ""
+
+#: js/compass.js:20
+msgid "West"
+msgstr ""
+
+#: js/compass.js:21
+msgid "North West"
+msgstr ""
+
+#: js/ui/currentPhaseUi.js:32
+msgid "illumination"
+msgstr ""
+
+#: js/ui/riseSetUi.js:55
+msgid "The moon is always down and will not rise today"
+msgstr ""
+
+#: js/ui/riseSetUi.js:65
+msgid "The moon is always up and will not set today"
+msgstr ""
+
+#: js/ui/riseSetUi.js:76
+msgid "Moonrise"
+msgstr ""
+
+#: js/ui/riseSetUi.js:83
+msgid "Lunar Noon"
+msgstr ""
+
+#: js/ui/riseSetUi.js:90
+msgid "Moonset"
+msgstr ""
+
+#: js/ui/elements/noRiseSetElement.js:54
+msgid "Next Moonrise"
+msgstr ""
+
+#: js/ui/elements/noRiseSetElement.js:66
+msgid "Next Moonset"
+msgstr ""
+
+#. metadata.json->description
+msgid "A Cinnamon applet that displays up-to-date moon related information."
+msgstr ""
+
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr ""
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr ""
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr ""
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr ""
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr ""
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr ""
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr ""
+
+#. settings-schema.json->showPhaseLabel->description
+msgid "Display the applet label"
+msgstr ""

@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2023-06-01 15:37+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.1\n"
+
+msgid "Settings"
+msgstr ""
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+msgid "Hide hidden files"
+msgstr ""
+
+msgid "App Info"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Show sidebar"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Show the sidebar in the menu"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Show categories"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Show list of application categories"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""

@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-23 04:17+0200\n"
+"PO-Revision-Date: 2019-08-22 01:09+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 6.0/applet.js:72 4.0/applet.js:66 5.6/applet.js:72
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+
+#: 6.0/applet.js:297 4.0/applet.js:277 5.6/applet.js:285
+msgid "Refresh graphs"
+msgstr ""
+
+#: 6.0/applet.js:301
+msgid "Without any graphics"
+msgstr ""
+
+#: 6.0/applet.js:307
+msgid "With graphics"
+msgstr ""
+
+#: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#: 6.0/util.js:244 5.6/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#: 3.2/applet.js:339 3.0/applet.js:328
+msgid "Reload this applet"
+msgstr ""
+
+#. metadata.json->name
+msgid "Multi-Core System Monitor"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Displays in realtime the cpu usage for each core/cpu and overall memory "
+"usage."
+msgstr ""
+
+#: 6.0/prefsui.glade:168 4.0/prefsui.glade:168 5.6/prefsui.glade:168
+msgid "Curves thickness"
+msgstr ""
+
+#: 6.0/prefsui.glade:433 4.0/prefsui.glade:433 5.6/prefsui.glade:433
+msgid "Color by activity level"
+msgstr ""
+
+#: 6.0/prefsui.glade:460 4.0/prefsui.glade:460 5.6/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr ""
+
+#: 6.0/prefsui.glade:508 4.0/prefsui.glade:508 5.6/prefsui.glade:508
+msgid "by CPU:"
+msgstr ""
+
+#: 6.0/prefsui.glade:538 4.0/prefsui.glade:538 5.6/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr ""
+
+#: 6.0/prefsui.glade:1740 4.0/prefsui.glade:1740 5.6/prefsui.glade:1740
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""

@@ -1,0 +1,26 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:825
+msgid "b"
+msgstr ""
+
+#. settings-schema.json->decimal_places->options
+msgid "0 "
+msgstr ""
+
+#. settings-schema.json->decimal_places->options
+msgid "1 "
+msgstr ""
+
+#. settings-schema.json->decimal_places->options
+msgid "2 "
+msgstr ""
+
+#. settings-schema.json->decimal_places->options
+msgid "3 "
+msgstr ""

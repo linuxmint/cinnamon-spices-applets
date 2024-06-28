@@ -1,0 +1,1047 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# MohammadSaleh Kamyab <mskf1383@protonmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2022-05-02 12:23+0430\n"
+"Last-Translator: MohammadSaleh Kamyab <mskf1383@protonmail.com>\n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+
+msgid "Initializing"
+msgstr "آماده‌سازی"
+
+msgid "Find files..."
+msgstr "یافتن پرونده‌های…"
+
+msgid "Please wait..."
+msgstr "لطفاً صبر کنید…"
+
+msgid "Applications"
+msgstr "برنامه‌ها"
+
+msgid "Documents"
+msgstr "اسناد"
+
+msgid "Videos"
+msgstr "ویدیوها"
+
+msgid "Images"
+msgstr "تصاویر"
+
+msgid "Music"
+msgstr "آهنگ‌ها"
+
+msgid "No recent Items"
+msgstr "مورد اخیری نیست"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "کلیک برای رونوشت"
+
+msgid "Applications and files"
+msgstr "برنامه‌ها و پرونده‌ها"
+
+msgid "Other search results"
+msgstr "نتایج دیگر جست‌وجو"
+
+msgid "Browser bookmarks"
+msgstr "نشانک‌های مرورگر"
+
+msgid "Browser history"
+msgstr "تاریخچهٔ مرورگر"
+
+msgid "Emoji"
+msgstr "ایموجی"
+
+msgid "Clear List"
+msgstr "پاک کردن سیاهه"
+
+msgid "Trash"
+msgstr "زباله‌دان"
+
+msgid "Computer"
+msgstr "رایانه"
+
+msgid "Error while opening file:"
+msgstr "خطا هنگام گشودن پرونده:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "ورودی‌های بیش از حد - فقط نمایش ۱۰۰۰ ورودی نخست"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "تمام برنامه‌ها"
+
+msgid "Favorites"
+msgstr "مورد علاقه‌ها"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "مکان‌ها"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "اخیر"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "برنامه‌های مورد علاقه"
+
+msgid "light skin tone"
+msgstr "پوستهٔ روشن"
+
+msgid "medium-light skin tone"
+msgstr "پوستهٔ روشن ملایم"
+
+msgid "medium skin tone"
+msgstr "پوستهٔ ملایم"
+
+msgid "medium-dark skin tone"
+msgstr "پوستهٔ تاریک ملایم"
+
+msgid "dark skin tone"
+msgstr "پوستهٔ تاریک"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "بازنشانی ترتیب دسته‌بندی"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "بازنشانی ترتیب دسته‌بندی"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "نمایش پرونده‌های نهفته"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "نمایش پرونده‌های نهفته"
+
+msgid "Run with NVIDIA GPU"
+msgstr "اجرای NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "افزودن به تابلو"
+
+msgid "Add to desktop"
+msgstr "افزودن به میزکار"
+
+msgid "Remove from favorites"
+msgstr "برداشتن از مورد علاقه‌ها"
+
+msgid "Add to favorites"
+msgstr "افزودن به مورد علاقه‌ها"
+
+msgid "Uninstall"
+msgstr "حذف نصب"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "این پرونده دیگر موجود نیست"
+
+msgid "Open with"
+msgstr "گشودن با"
+
+msgid "Other application..."
+msgstr "برنامهٔ دیگر…"
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه"
+
+msgid "Open containing folder"
+msgstr "گشودن پوشهٔ محتوی"
+
+msgid "Move to trash"
+msgstr "انتقال به زباله‌دان"
+
+msgid "Error while moving file to trash:"
+msgstr "خطا هنگام انتقال پرونده به زباله‌دان:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "ترک"
+
+msgid "Shutdown the computer"
+msgstr "خاموش کردن رایانه"
+
+msgid "Logout"
+msgstr "خروج"
+
+msgid "Leave the session"
+msgstr "ترک نشست"
+
+msgid "Lock screen"
+msgstr "قفل صفحه‌نمایش"
+
+msgid "Lock the screen"
+msgstr "قفل کردن صفحه‌نمایش"
+
+msgid "Type to search..."
+msgstr "نوشتن برای جست‌وجو…"
+
+msgid "No description available"
+msgstr "توضیحی موجود نیست"
+
+msgid "Recent files"
+msgstr "پرونده‌های اخیر"
+
+msgid "Bookmarks"
+msgstr "نشانک‌ها"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "بستهٔ gir1.2-gda-5.0 برای نشانک‌های میدوری و فایرفاکس مورد نیاز است."
+
+msgid "No recent files"
+msgstr "پروندهٔ اخیری نیست"
+
+msgid "Account details"
+msgstr "جزئیات حساب"
+
+msgid "Grid View"
+msgstr "نمای شبکه‌ای"
+
+msgid "List View"
+msgstr "نمای فهرستی"
+
+msgid "Switch to grid view"
+msgstr "تعویض به نمای شبکه‌ای"
+
+msgid "Switch to list view"
+msgstr "تعویض به نمای فهرستی"
+
+msgid "Home"
+msgstr "خانه"
+
+msgid "Browse network"
+msgstr "مرور شبکه"
+
+msgid "Open"
+msgstr "گشودن"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "جست‌وجو"
+
+msgid "Start in"
+msgstr "شروع در"
+
+msgid "Select a folder"
+msgstr "گزینش یک پوشه"
+
+msgid "Follow symlinks"
+msgstr "دنبال کردن symlinks"
+
+msgid "Search hidden"
+msgstr "جست‌وجوی نهفته‌ها"
+
+msgid "Use regular expressions"
+msgstr "استفاده از عبارت بامعنی"
+
+msgid "Stop"
+msgstr "توقف"
+
+msgid "File"
+msgstr "پرونده"
+
+msgid "Path"
+msgstr "مسیر"
+
+msgid "Searching..."
+msgstr "جست‌وجو…"
+
+msgid "Search Stopped"
+msgstr "جست‌وجو متوقف شد"
+
+msgid "Searching: "
+msgstr "جست‌وجو: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "خطا: مجوزهای ناکافی برای خواندن پوشه "
+
+msgid "Search Completed"
+msgstr "جست‌وجو تمام شد"
+
+msgid "Skipping"
+msgstr "پریدن"
+
+msgid " - directory already searched"
+msgstr " - شاخه تاکنون جست‌وجو شده‌اند"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"این مورد فهرست به هیچ‌کدام از بسته‌ها نسبت داده نشده است. آیا می‌خواهید در هر "
+"صورت از فهرست برش دارید؟"
+
+msgid "The following packages will be removed:"
+msgstr "بسته‌های زیر برداشته خواهند شد:"
+
+msgid "Packages to be removed"
+msgstr "بسته‌های برای برداشتن"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "نمی‌توان بستهٔ %s را برداشت. چرا که توسط بسته‌های دیگر مورد نیاز است."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "بستهٔ %s وابستگی بسته‌های زیر است:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "سینامنو"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"فهرستی منعطف با گزینه‌های چیدمان شبکه‌ای یا فهرستی، مروگر پرونده و جست‌وجوی "
+"ایموجی."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "چیدمان"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "رفتار"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "ظاهر"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "محتویات"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "تابلو"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "فهرست"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "حالت نمایش برنامه‌ها"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "سیاهه"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "شبکه"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "نمایش برنامه‌ها به عنوان فهرست یا شبکه"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "نمایش مورد علاقه‌ها در نوار کناری"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "نمایش دسته‌بندی پوشهٔ خانه در فهرست"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "مکان نوار کناری"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "بالا"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "پایین"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "راست"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "چپ"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "مکان نمایش نوار کناری را انتخاب کنید"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "نمایش مورد علاقه‌ها در نوار کناری"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "هیچ‌کدام"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Apps and files"
+msgstr "برنامه‌ها و پرونده‌ها"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "نمایش نقشک کاره‌ها و پرونده‌های مورد علاقه‌تان در نوار کناری"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "قرارگیری توضیح برنامه"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "راهنماهای ابزار"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "زیر کاشی‌ها"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "مکان نمایش توضیح برنامه‌ها را انتخاب کنید"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "نمایش نقشک دسته‌بندی‌ها"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "نمایش نقشک برنامه‌ها"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "نمایش نشانک‌ها و مکان‌ها"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "نمایش نشانک‌ها و مکان‌ها در فهرست دسته‌بندی‌ها"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "نمایش پرونده‌های اخیر"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "نمایش دسته‌بندی موارد اخیر در فهرست"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه‌تان در فهرست"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "نمایش پوشهٔ خانه"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "نمایش دسته‌بندی پوشهٔ خانه در فهرست"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "نمایش دسته‌بندی پوشهٔ خانه در فهرست"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "گشودن ویرایشگر فهرست"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "میان‌بر صفحه‌کلید برای گشودن و بستن فهرست"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "گشودن فهرست هنگام ایستادن"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "گشودن فهرست هنگامی که موشی را روی نقشک تابلو جابه‌جا کردید"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "میلی‌ثانیه"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "تأخیر ایستادن فهرست"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "استفاده از پویانمایی‌های فهرست"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "پویا نمایی فهرست هنگام گشودن و بستن"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "فعال‌سازی دسته‌بندی‌ها هنگام کلیک"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "فعال‌سازی دسته‌بندی‌ها هنگام کلیک کردن، به جای ایستادن"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "گشودن فهرست در دسته‌بندی:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "فهرست همیشه با این دسته‌بندی گزیده گشوده شود"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "آخرین دسته‌بندی استفاده شده"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "به کار انداخت پیمایش خودکار"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "پیمایش خودکار سیاههٔ برنامه‌ها هنگام ایستادن موشی"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "نمایش پرونده‌های نهفته در نمای پوشه"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "جست‌وجوی ایموجی"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "نمایش ایموجی‌ها در نتایج جست‌وجو"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "گزینهٔ جست‌وجوی وب"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "نمایش یک گزینهٔ جست‌وجوی اینترنت در نتایج جست‌وجو"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "گزینهٔ جست‌وجوی وب"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "جست‌وجوی پوشهٔ خانه"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "هنگام جست‌وجو، پوشه‌ها و پرونده‌های خانهٔ من را نیز بگرد"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "جست‌وجوی تاریخچهٔ وب"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"هنگام جست‌وجو، تاریخچهٔ مرورگرم را نیز بگرد (کرومیوم، گوگل کروم، اپرا، "
+"ویوالدی، بریو)\n"
+"توجه: تاریخچهٔ فایرفاکس هم‌اکنون پشتیبانی نمی‌شود."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "جست‌وجوی نشانک‌های وب"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"هنگام جست‌وجو، نشانک‌ها وب مرورگرم را نیز بگرد (فایرفاکس، کرومیوم، گوگل کروم، "
+"اپرا، ویوالدی، بریو)\n"
+"توجه: برای جست‌وجوی نشانک‌های فایرفاکس، باید بستهٔ gir1.2-gda-5.0 (توزیع‌های "
+"دبیان‌پایه. اوبونتو و لینوکس مینت) یا بستهٔ libgda (توزیع‌های آرچ‌پایه) را نصب "
+"کنید و سپس رایانه‌تان را دوباره راه‌اندازی کنید."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "جست‌وجوی ویکی‌پدیا"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "نمایش چند نتیجه از ویکی‌پدیا"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "زبان ویکی‌پدیا"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"توجه: بعضی از گزینه‌های جست‌وجو می‌توانند حتی زمانی که این‌جا به کار "
+"نینداخته‌ایدشان، همچنان به وسیلهٔ پیشوندها استفاده شوند.\n"
+"مثلاً: برای جست‌وجوی ایموجی، بنویسید «e heart» تا ایموجی‌های قلب را پیدا کنید. "
+"به همین ترتیب، از پیشوندهای «f ‎» برای جست‌وجوی پرونده، «h ‎» برای تاریخچهٔ وب، "
+"و «b ‎» برای جست‌وجوی نشانک‌ها استفاده کنید.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "استفاده از یک نقشک سفارشی"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "استفاده از یک نقشک سفارشی در تابلو"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "نقشک تابلو"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "استفاده از یک اندازهٔ نقشک سفارشی"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "استفاده از یک اندازهٔ سفارشی برای نقشک تابلو"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "اندازهٔ نقشک تابلو (پیکسل)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "یک اندازهٔ سفارشی برای نقشک تابلو انتخاب کنید"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "متن تابلو"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "متن برای نمایش در کنار نقشک تابلو"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "اندازهٔ نقشک دسته‌بندی (پیکسل)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "اندازهٔ نقشک سیاههٔ برنامه‌ها (پیکسل)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "اندازهٔ نقشک شبکهٔ برنامه‌ها"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "اندازهٔ نقشک نوار کناری (پیکسل)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "استفاده از سبک جعبه برای نوار کناری"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "استفاده از یک سبک جعبه برای نوار کناری"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "استفاده از سبک کاشی"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"استفاده از یک سبک کاشی برای دکمهٔ برنامه‌ها (توجه: با بعضی از پوسته‌ها کار "
+"نمی‌کند)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"راهنما: لبه‌های فهرست را بکشید تا اندازه‌اش را تغییر دهید.\n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"راهنما: لبه‌های فهرست را بکشید تا اندازه‌اش را تغییر دهید.\n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "ارائه‌دهندگان جست‌وجو"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "افزونهٔ ارائه‌دهندهٔ جست‌وجویی یافت نشد"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "تنظیمات اخیر پرونده‌ها"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "به کار انداختن پیمایش خودکار در سیاههٔ برنامه‌ها"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "نمایش نشانک‌های وب"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"نمایش نشانک‌های وب مرورگرتان در فهرست.\n"
+"توجه: برای خواندن نشانک‌ها فایرفاکس، بستهٔ gir1.2-gda-5.0 را نصب کنید."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "به کار انداختن جست‌وجوی پنجره‌های گشوده"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "به کار انداختن ارائه‌دهندگان جست‌وجو"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "پیوست نتایج ارائه‌دهندگان جست‌وجو در جست‌وجوها"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "ارائه‌دهندگان جست‌وجوی نمونه"
+
+#. 3.2
+msgid "columns"
+msgstr "ستون‌ها"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "تعداد ستون‌ها در شبکهٔ برنامه‌ها"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "نمایش نقشک برنامه‌ها"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "نمایش نقشک دسته‌بندی‌ها"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "نمایش توضیحات برنامه‌ها زیر عنوان‌شان"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "نمایش راهنماهای ابزار"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "تأخیر راهنمای ابزار"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "استفاده از یک ارتفاع سفارشی برای فهرست"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "ارتفاع سفارشی فهرست (پیکسل)"
+
+#~ msgid "Home folder"
+#~ msgstr "پوشهٔ خانه"
+
+#~ msgid "Layout and Content"
+#~ msgstr "چیدمان و محتویات"

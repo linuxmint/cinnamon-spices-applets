@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: power-profiles@rcalixte 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-05 15:52-0500\n"
+"PO-Revision-Date: 2024-04-21 14:43+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 5.4/applet.js:24
+msgid "Power Saver"
+msgstr "Energiebesparing"
+
+#: 5.4/applet.js:25
+msgid "Balanced"
+msgstr "Evenwichtig"
+
+#: 5.4/applet.js:26
+msgid "Performance"
+msgstr "Prestatie"
+
+#: 5.4/applet.js:58 5.4/applet.js:64
+msgid ""
+"Please make sure the power-profiles-daemon package is installed and the "
+"service is running."
+msgstr ""
+"Zorg ervoor dat het power-profiles-daemon-pakket is geïnstalleerd en de "
+"service wordt uitgevoerd."
+
+#: 5.4/applet.js:59
+msgid "exception:"
+msgstr "uitzondering:"
+
+#: 5.4/applet.js:110
+msgid "Current Profile:"
+msgstr "Huidig profiel:"
+
+#: 5.4/applet.js:115
+msgid "Performance Degraded:"
+msgstr "Prestatie aangetast:"
+
+#: 5.4/applet.js:126
+msgid "Active Profile Holds:"
+msgstr "Actief profiel bevat:"
+
+#. metadata.json->description
+msgid ""
+"An applet to modify the current system power profile as determined by power-"
+"profiles-daemon"
+msgstr ""
+"Een applet om het huidige systeemenergieprofiel te wijzigen zoals bepaald "
+"door power-profiles-daemon"
+
+#. metadata.json->name
+msgid "Power Profiles"
+msgstr "Energieprofielen"
+
+#. 5.4->settings-schema.json->section1->description
+msgid "Keyboard Shortcuts"
+msgstr "Toetsenbordsnelkoppelingen"
+
+#. 5.4->settings-schema.json->previousProfileKey->description
+msgid "Previous profile"
+msgstr "Vorig profiel"
+
+#. 5.4->settings-schema.json->previousProfileKey->tooltip
+msgid "Set keybinding(s) to switch to previous power profile."
+msgstr "Stel sneltoets(en) in om naar het vorige energieprofiel te schakelen."
+
+#. 5.4->settings-schema.json->nextProfileKey->description
+msgid "Next profile"
+msgstr "Volgend profiel"
+
+#. 5.4->settings-schema.json->nextProfileKey->tooltip
+msgid "Set keybinding(s) to switch to next power profile."
+msgstr ""
+"Stel sneltoets(en) in om naar het volgende energieprofiel te schakelen."
+
+#. 5.4->settings-schema.json->cycleProfiles->description
+msgid "Cycle through profiles when using keyboard shortcuts"
+msgstr "Van profielen wisselen bij gebruik van toetsenbordsnelkoppelingen"
+
+#. 5.4->settings-schema.json->cycleProfiles->tooltip
+msgid ""
+"If enabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
+"\n"
+"If disabled, if the current profile is 'Power Saver' and the 'Previous "
+"profile' keyboard shortcut is used, the profile would not change."
+msgstr ""
+"Indien ingeschakeld, als het huidige profiel 'Energiebesparing' is en de "
+"sneltoets 'Vorig profiel' wordt gebruikt, wordt het volgende profiel "
+"'Prestatie' (of 'Evenwichtig' op sommige systemen).\n"
+"\n"
+"Indien uitgeschakeld, als het huidige profiel 'Energiebesparing' is en de "
+"sneltoets 'Vorig profiel' wordt gebruikt, verandert het profiel niet."
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "On-screen display for keyboard shortcuts"
+msgstr "Weergave op het scherm voor toetsenbordsnelkoppelingen"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid ""
+"Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr ""
+"Toon weergave op het scherm van het nieuwe profiel bij gebruik van de "
+"toetsenbordsnelkoppelingen"

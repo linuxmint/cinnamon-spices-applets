@@ -1,0 +1,142 @@
+# Russian translation for cinnamon-weather
+# Copyright (C) 2015
+# Gankov Andrey <gav@qsolution.ru>, 2011.
+# Timon <timosha@gmail.com>, 2014.
+# zluka <osam@tut.by>, 2015.
+# Dmitriy <dmitriy.pom0@gmail.com>, 2019, 2021.
+# Eugene <schtaufenberg@yandex.ru>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-03 08:04+0100\n"
+"PO-Revision-Date: 2024-06-13 19:53+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 3.8/weather-applet.js:12850
+msgid "Light shower rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12854
+msgid "Heavy shower rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12862
+msgid "Mix snow/rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12864
+msgid "Snow shower"
+msgstr ""
+
+#: 3.8/weather-applet.js:13091
+msgid "Tomorrow.io"
+msgstr ""
+
+#: 3.8/weather-applet.js:14445
+msgid "Dust Storm"
+msgstr ""
+
+#: 3.8/weather-applet.js:14984
+msgid "AccuWeather"
+msgstr ""
+
+#: 3.8/weather-applet.js:15370
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#: 3.8/weather-applet.js:15699
+msgid "Weather Underground"
+msgstr ""
+
+#: 3.8/weather-applet.js:15945 3.8/weather-applet.js:15946
+msgid "Strong Storm"
+msgstr ""
+
+#: 3.8/weather-applet.js:15960 3.8/weather-applet.js:15961
+msgid "Rain and Snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:15967 3.8/weather-applet.js:15968
+msgid "Rain and Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:16016 3.8/weather-applet.js:16017
+msgid "Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:16149 3.8/weather-applet.js:16150
+msgid "Mostly Clear"
+msgstr ""
+
+#: 3.8/weather-applet.js:16330
+msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:16724
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:16887
+msgid "Snow grains"
+msgstr ""
+
+#: 3.8/weather-applet.js:16894
+msgid "Light showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:16908
+msgid "Heavy showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:16936
+msgid "Thunderstorm with slight hail"
+msgstr ""
+
+#: 3.8/weather-applet.js:16943
+msgid "Thunderstorm with hail"
+msgstr ""
+
+#: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
+msgid "Feels like"
+msgstr ""
+
+#: 3.8/weather-applet.js:17038
+msgid "Open Meteo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17827
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+
+#: 3.8/weather-applet.js:19113
+msgid "{distance} {distanceUnit} from you"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Open-Meteo"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->tooltipTextOverride->description
+msgid "Override tooltip on panel"
+msgstr ""
+
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Verbose"
+msgstr ""

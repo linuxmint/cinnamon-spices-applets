@@ -1,0 +1,1047 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2022-05-31 17:12+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: ur\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "شروع کر رہا ہے۔"
+
+msgid "Find files..."
+msgstr "فائلیں تلاش کریں..."
+
+msgid "Please wait..."
+msgstr "برائے مہربانی انتظار کریں..."
+
+msgid "Applications"
+msgstr "ایپلی کیشنز"
+
+msgid "Documents"
+msgstr "دستاویزات"
+
+msgid "Videos"
+msgstr "ویڈیوز"
+
+msgid "Images"
+msgstr "امیجز"
+
+msgid "Music"
+msgstr "موسیقی"
+
+msgid "No recent Items"
+msgstr "کوئی حالیہ آئٹمز نہیں۔"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "کاپی کرنے کے لیے کلک کریں۔"
+
+msgid "Applications and files"
+msgstr "درخواستیں اور فائلیں۔"
+
+msgid "Other search results"
+msgstr "دیگر تلاش کے نتائج"
+
+msgid "Browser bookmarks"
+msgstr "براؤزر بک مارکس"
+
+msgid "Browser history"
+msgstr "براؤزر کی تاریخ"
+
+msgid "Emoji"
+msgstr "ایموجی"
+
+msgid "Clear List"
+msgstr "فہرست صاف کریں۔"
+
+msgid "Trash"
+msgstr "ردی کی ٹوکری"
+
+msgid "Computer"
+msgstr "کمپیوٹر"
+
+msgid "Error while opening file:"
+msgstr "فائل کھولتے وقت خرابی:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "بہت زیادہ اندراجات - صرف پہلی 1000 اندراجات دکھا رہے ہیں۔"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "تمام ایپلی کیشنز"
+
+msgid "Favorites"
+msgstr "پسندیدہ"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "مقامات"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "حالیہ"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "پسندیدہ ایپس"
+
+msgid "light skin tone"
+msgstr "جلد کا ہلکا رنگ"
+
+msgid "medium-light skin tone"
+msgstr "درمیانی ہلکی جلد کا رنگ"
+
+msgid "medium skin tone"
+msgstr "جلد کا درمیانی رنگ"
+
+msgid "medium-dark skin tone"
+msgstr "درمیانی سیاہ جلد کا رنگ"
+
+msgid "dark skin tone"
+msgstr "جلد کا سیاہ رنگ"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "زمرہ آرڈر کو دوبارہ ترتیب دیں۔"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "زمرہ آرڈر کو دوبارہ ترتیب دیں۔"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "چھپی ہوئی فائلیں دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "چھپی ہوئی فائلیں دکھائیں۔"
+
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU کے ساتھ چلائیں۔"
+
+msgid "Add to panel"
+msgstr "پینل میں شامل کریں۔"
+
+msgid "Add to desktop"
+msgstr "ڈیسک ٹاپ میں شامل کریں۔"
+
+msgid "Remove from favorites"
+msgstr "پسندیدہ سے ہٹا دیں۔"
+
+msgid "Add to favorites"
+msgstr "پسندیدہ میں شامل کریں۔"
+
+msgid "Uninstall"
+msgstr "ان انسٹال کریں۔"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "یہ فائل اب دستیاب نہیں ہے۔"
+
+msgid "Open with"
+msgstr "کے ساتھ کھولیں۔"
+
+msgid "Other application..."
+msgstr "دوسری درخواست..."
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "پسندیدہ ایپس کیٹیگری دکھائیں۔"
+
+msgid "Open containing folder"
+msgstr "پر مشتمل فولڈر کھولیں۔"
+
+msgid "Move to trash"
+msgstr "ردی میں ڈالیں"
+
+msgid "Error while moving file to trash:"
+msgstr "فائل کو کوڑے دان میں منتقل کرتے وقت خرابی:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "چھوڑو"
+
+msgid "Shutdown the computer"
+msgstr "کمپیوٹر بند کریں۔"
+
+msgid "Logout"
+msgstr "لاگ آوٹ"
+
+msgid "Leave the session"
+msgstr "سیشن چھوڑ دو"
+
+msgid "Lock screen"
+msgstr "اسکرین کو لاک کرنا"
+
+msgid "Lock the screen"
+msgstr "اسکرین کو لاک کریں۔"
+
+msgid "Type to search..."
+msgstr "تلاش کرنے کے لیے ٹائپ کریں..."
+
+msgid "No description available"
+msgstr "کوئی تفصیل موجود نہیں ہے"
+
+msgid "Recent files"
+msgstr "حالیہ فائلیں۔"
+
+msgid "Bookmarks"
+msgstr "بک مارکس"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0 پیکیج Firefox اور Midori بک مارکس کے لیے درکار ہے۔"
+
+msgid "No recent files"
+msgstr "کوئی حالیہ فائلز نہیں ہیں۔"
+
+msgid "Account details"
+msgstr "اکاؤنٹ کی تفصیلات"
+
+msgid "Grid View"
+msgstr "جالی دار نظارہ"
+
+msgid "List View"
+msgstr "فہرست دیکھیں"
+
+msgid "Switch to grid view"
+msgstr "گرڈ ویو پر سوئچ کریں۔"
+
+msgid "Switch to list view"
+msgstr "فہرست منظر پر سوئچ کریں۔"
+
+msgid "Home"
+msgstr "گھر"
+
+msgid "Browse network"
+msgstr "نیٹ ورک کو براؤز کریں۔"
+
+msgid "Open"
+msgstr "کھولیں۔"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "تلاش کریں۔"
+
+msgid "Start in"
+msgstr "میں شروع کریں۔"
+
+msgid "Select a folder"
+msgstr "ایک فولڈر منتخب کریں۔"
+
+msgid "Follow symlinks"
+msgstr "سملنک پر عمل کریں۔"
+
+msgid "Search hidden"
+msgstr "چھپی ہوئی تلاش"
+
+msgid "Use regular expressions"
+msgstr "ریگولر ایکسپریشنز استعمال کریں۔"
+
+msgid "Stop"
+msgstr "رک جاؤ"
+
+msgid "File"
+msgstr "فائل"
+
+msgid "Path"
+msgstr "راستہ"
+
+msgid "Searching..."
+msgstr "تلاش کر رہا ہے..."
+
+msgid "Search Stopped"
+msgstr "تلاش روک دی گئی۔"
+
+msgid "Searching: "
+msgstr "تلاش کرنا: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "خرابی: فولڈر کو پڑھنے کے لیے ناکافی اجازتیں۔ "
+
+msgid "Search Completed"
+msgstr "تلاش مکمل ہو گئی۔"
+
+msgid "Skipping"
+msgstr "اچھالنا"
+
+msgid " - directory already searched"
+msgstr " - ڈائریکٹری پہلے ہی تلاش کی گئی ہے۔"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"یہ مینو آئٹم کسی پیکج سے وابستہ نہیں ہے۔ کیا آپ اسے ویسے بھی مینو سے ہٹانا "
+"چاہتے ہیں؟"
+
+msgid "The following packages will be removed:"
+msgstr "درج ذیل پیکیجز کو ہٹا دیا جائے گا:"
+
+msgid "Packages to be removed"
+msgstr "ہٹائے جانے والے پیکجز"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "پیکج %s کو ہٹایا نہیں جا سکتا کیونکہ یہ دوسرے پیکجوں کے لیے درکار ہے۔"
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "پیکیج %s درج ذیل پیکجوں کا انحصار ہے۔"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"گرڈ یا فہرست لے آؤٹ کے اختیارات، فائل براؤزر اور ایموجی تلاش کے ساتھ ایک "
+"لچکدار مینو۔"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "ترتیب"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "رویہ"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "ظہور"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "مواد"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "پینل"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "مینو"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "ایپلیکیشنز ویو موڈ"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "فہرست"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "گرڈ"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "ایپلیکیشنز کو فہرست یا گرڈ کے بطور دیکھیں"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "سائڈبار پر پسندیدہ دکھائیں۔"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "مینو میں ہوم فولڈر کا زمرہ دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "سائڈبار کا مقام"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "اوپر"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "نیچے"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "بائیں"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "صحیح"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "منتخب کریں کہ سائڈبار کہاں دکھانا ہے۔"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "سائڈبار پر پسندیدہ دکھائیں۔"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "کوئی نہیں"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Apps and files"
+msgstr "درخواستیں اور فائلیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "سائڈبار پر اپنی پسندیدہ ایپ اور فائل آئیکنز دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "درخواست کی تفصیل کی جگہ کا تعین"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "ٹول ٹپس"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "عنوانات کے تحت"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "منتخب کریں کہ درخواست کی تفصیل کہاں دکھائی جائے۔"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "زمرہ کی شبیہیں دکھائیں۔"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "ایپلیکیشن آئیکنز دکھائیں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "بُک مارکس اور مقامات دکھائیں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "مینو میں بُک مارکس اور مقامات کا زمرہ دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "حالیہ آئٹمز دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "مینو میں حالیہ آئٹمز کا زمرہ دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "پسندیدہ ایپس کیٹیگری دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "مینو میں اپنی پسندیدہ ایپس کیٹیگری دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "ہوم فولڈر دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "مینو میں ہوم فولڈر کا زمرہ دکھائیں۔"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "پسندیدہ ایپس کیٹیگری دکھائیں۔"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "مینو میں ہوم فولڈر کا زمرہ دکھائیں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "مینو ایڈیٹر کھولیں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "مینو کو کھولنے اور بند کرنے کے لیے کی بورڈ شارٹ کٹ"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "ہور پر مینو کھولیں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "جب میں اپنے ماؤس کو پینل آئیکن پر منتقل کروں تو مینو کھولیں۔"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "ملی سیکنڈ"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "مینو ہوور میں تاخیر"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "مینو اینیمیشن استعمال کریں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "کھلے اور بند پر مینو کو متحرک کریں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "کلک پر زمرہ جات کو چالو کریں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "ہوور پر کی بجائے کلک پر زمرہ جات کو فعال کریں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "زمرہ پر مینو کھولیں:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "اس زمرے کے منتخب کردہ مینو کو ہمیشہ کھولیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "آخری استعمال شدہ زمرہ"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "آٹو سکرولنگ کو فعال کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "ماؤس ہور پر ایپلیکیشن لسٹ کو آٹو سکرول کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "پوشیدہ فائلوں کو فولڈر ویو میں دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "ایموجی کی تلاش"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "تلاش کے نتائج میں ایموجیز دکھائیں۔"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "ویب سرچ آپشن"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "تلاش کے نتائج میں انٹرنیٹ تلاش کا اختیار دکھائیں۔"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "ویب سرچ آپشن"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "ہوم فولڈر تلاش کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "تلاش کرتے وقت، فائلوں کے لیے میرا ہوم فولڈر بھی تلاش کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "ویب ہسٹری کی تلاش"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"تلاش کرتے وقت، میرے براؤزر کی سرگزشت بھی تلاش کریں (گوگل کروم، کرومیم، "
+"اوپیرا، ویوالڈی، بہادر)\n"
+"نوٹ: فائر فاکس کی تاریخ فی الحال تعاون یافتہ نہیں ہے۔"
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "ویب بُک مارکس کی تلاش"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"تلاش کرتے وقت، میرے براؤزر کے ویب بُک مارکس بھی تلاش کریں (گوگل کروم، فائر "
+"فاکس، کرومیم، اوپیرا، ویوالڈی، بہادر)\n"
+"نوٹ: فائر فاکس بک مارکس کو تلاش کرنے کے لیے آپ کو پیکیج gir1.2-gda-5.0 "
+"(Debian based distributions inc. Ubuntu) انسٹال کرنا ہوگا۔ اور لینکس منٹ) یا "
+"پیکیج libgda (آرچ پر مبنی تقسیم) اور اپنے کمپیوٹر کو دوبارہ شروع کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "ویکیپیڈیا کی تلاش"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "ویکیپیڈیا کے کچھ نتائج دکھائیں۔"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "ویکیپیڈیا کی زبان"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"نوٹ: کچھ تلاش کے اختیارات اب بھی استعمال کیے جاسکتے ہیں یہاں تک کہ اگر آپ نے "
+"اپنی تلاش کی اصطلاح کا سابقہ ​​لگا کر انہیں یہاں فعال نہیں کیا ہے۔\n"
+"مثال کے طور پر: ایموجی تلاش کرنے کے لیے، ہارٹ ایموجیز تلاش کرنے کے لیے 'ای "
+"ہارٹ' ٹائپ کریں۔ اسی طرح، فائل کی تلاش کے لیے 'f'، ویب ہسٹری کے لیے 'h' اور "
+"ویب بُک مارکس کی تلاش کے لیے 'b' کا سابقہ ​​استعمال کریں۔\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "ایک کسٹم آئکن استعمال کریں"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "پینل میں حسب ضرورت آئیکن استعمال کریں۔"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "پینل کا آئیکن"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "اپنی مرضی کے مطابق آئیکن کا سائز استعمال کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "پینل آئیکن کے لیے حسب ضرورت سائز استعمال کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "پینل آئیکن سائز (پکسل)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "پینل آئیکن کے لیے حسب ضرورت سائز کا انتخاب کریں۔"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "پینل کا متن"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "پینل آئیکن کے ساتھ دکھانے کے لیے متن"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "زمرہ آئیکن سائز (پکسل)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "ایپلیکیشنز لسٹ آئیکن سائز (پکسل)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "ایپلیکیشنز گرڈ آئیکن سائز (پکسل)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "سائڈبار آئیکن سائز (پکسل)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "سائڈبار باکس اسٹائل استعمال کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "سائڈبار باکس اسٹائل کا استعمال کریں۔"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "ٹائل کا انداز استعمال کریں۔"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"ایپلیکیشن بٹنوں کے لیے ٹائل اسٹائل کا استعمال کریں (نوٹ: ہو سکتا ہے کچھ "
+"تھیمز پر کام نہ کریں)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"معلومات/ٹپ: مینو کا سائز تبدیل کرنے کے لیے مینو کے کنارے پر گھسیٹیں۔\n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"معلومات/ٹپ: مینو کا سائز تبدیل کرنے کے لیے مینو کے کنارے پر گھسیٹیں۔\n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "فراہم کنندگان کو تلاش کریں۔"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "تلاش فراہم کرنے والے کی کوئی توسیع نہیں ملی"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "حالیہ فائلوں کی ترتیبات"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "درخواست کی فہرست میں آٹو سکرولنگ کو فعال کریں۔"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "ویب بُک مارکس دکھائیں۔"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"مینو میں اپنے براؤزر کے ویب بُک مارکس دکھائیں۔\n"
+"نوٹ: فائر فاکس بُک مارکس پڑھنے کے لیے پیکیج gir1.2-gda-5.0 انسٹال کریں۔"
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "کھلی کھڑکیوں کی تلاش کو فعال کریں۔"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "تلاش فراہم کنندگان کو فعال کریں۔"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "تلاش میں تلاش فراہم کنندہ کے نتائج شامل کریں۔"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "مثال تلاش فراہم کنندگان"
+
+#. 3.2
+msgid "columns"
+msgstr "کالم"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "ایپس گرڈ میں کالموں کی تعداد"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "ایپلیکیشن آئیکنز دکھائیں۔"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "زمرہ کی شبیہیں دکھائیں۔"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "عنوانات کے تحت درخواست کی تفصیل دکھائیں۔"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "ٹول ٹپس دکھائیں۔"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "ٹول ٹِپ میں تاخیر"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "اپنی مرضی کے مینو کی اونچائی کا استعمال کریں۔"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "حسب ضرورت مینو اونچائی (پکسل)"
+
+#~ msgid "Home folder"
+#~ msgstr "ہوم فولڈر"
+
+#~ msgid "Layout and Content"
+#~ msgstr "لے آؤٹ اور مشمولات"

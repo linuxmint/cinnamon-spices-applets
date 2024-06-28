@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-15 21:34+0200\n"
+"PO-Revision-Date: 2020-01-25 22:15+0100\n"
+"Last-Translator: Anonymous <ano@nymo.us>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Scr Lock"
+msgstr "Verrouillage Scr"
+
+msgid "Num Lock"
+msgstr "Verrouillage numérique"
+
+msgid "Caps Lock"
+msgstr "Verrouillage des majuscules"
+
+msgid "Lock Keys"
+msgstr "Touches verrouillées"
+
+msgid "Scr lock on"
+msgstr "Verrouillage Scr activé"
+
+msgid "Scr lock off"
+msgstr "Verrouillage du Scr désactivé"
+
+msgid "Num lock on"
+msgstr "Verrouillage numérique activé"
+
+msgid "Num lock off"
+msgstr "Verrouillage numérique désactivé"
+
+msgid "Caps lock on"
+msgstr "Verrouillage des majuscules activé"
+
+msgid "Caps lock off"
+msgstr "Verrouillage des majuscules désactivé"
+
+msgid "Show notifications"
+msgstr "Afficher les notifications"
+
+msgid "Show caps lock indicator"
+msgstr "Afficher l'indicateur de verrouillage des majuscules"
+
+msgid "Show num lock indicator"
+msgstr "Afficher l'indicateur de verrouillage numérique"
+
+msgid "Show scr lock indicator"
+msgstr "Afficher l'indicateur de verrouillage du scr"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
+"these change."
+msgstr ""
+"Indique si le verrouillage des majuscules / le verrouillage numérique / le "
+"verrouillage des scr est activé et affiche une notification lorsque ceux-ci changent."
+
+msgid "Lock keys indicator with notifications"
+msgstr "Indicateur de touches de verrouillage avec notifications"

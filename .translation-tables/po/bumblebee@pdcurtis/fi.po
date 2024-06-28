@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-20 23:55+0200\n"
+"PO-Revision-Date: 2024-06-27 12:57+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Bumblebee ei ole asennettuna"
+
+#: applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Sinulta puuttuu joitain vaadituista ohjelmista, jotta \"bumblebee\" voisi "
+"vaihtaa näytönohjainta NVIDIA Optimuksen avulla."
+
+#: applet.js:152
+msgid "Please read the help file."
+msgstr "Lue ohjetiedosto."
+
+#: applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "Odotetaan… Bumblebee"
+
+#: applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "Avaa nVidia-asetusohjelma"
+
+#: applet.js:238
+msgid "Open Power Statistics"
+msgstr "Avaa virtatilastot"
+
+#: applet.js:244
+msgid "Open System Monitor"
+msgstr "Avaa järjestelmän valvonta"
+
+#: applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "Siivous ja järjestelmä-alivalikko"
+
+#: applet.js:256
+msgid "View the Changelog"
+msgstr "Näytä muutosloki"
+
+#: applet.js:262
+msgid "Open the Help file"
+msgstr "Avaa ohjetiedosto"
+
+#: applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "Käynnistä ohjelmia nVidia GPU:lla"
+
+#: applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "NVidia GPU on pois päältä"
+
+#: applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "NVidia GPU on päällä ja lämpötila on"
+
+#: applet.js:392
+msgid "Err"
+msgstr "Virhe"
+
+#: applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebeeä ei ole asetettu oikein - onko bbswitch-, bumblebee- ja nvidia-"
+"ohjaimet asennettu?"
+
+#. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Näytä GPU:n lämpötila sekä kuvake"
+
+#. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr "Saatavana vaaka- ja pystypaneeli. Näytetään celsiusasteina."
+
+#. bumblebee@pdcurtis->settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Ohjelman asetukset Optimukselle"
+
+#. bumblebee@pdcurtis->settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "Ohjelman 2 komento"
+
+#. bumblebee@pdcurtis->settings-schema.json->commandString2->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->commandString3->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->commandString1->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->commandString4->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+
+#. bumblebee@pdcurtis->settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "Ohjelman 3 komento"
+
+#. bumblebee@pdcurtis->settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "Ohjelman 1 komento"
+
+#. bumblebee@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "Asetukset nVidia Monitoring sovelmalle"
+
+#. bumblebee@pdcurtis->settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "Ohjelman 4 komento"
+
+#. bumblebee@pdcurtis->settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "Ohjelman 5 komento"
+
+#. bumblebee@pdcurtis->settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "Optimus-tekniikalla ajettavan ohjelman 4 nimi"
+
+#. bumblebee@pdcurtis->settings-schema.json->description4->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->description5->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->description2->tooltip
+#. bumblebee@pdcurtis->settings-schema.json->description3->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr "Anna ohjelman nimi tai ei mitään, jos et halua sitä näkyvän"
+
+#. bumblebee@pdcurtis->settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "Optimus-tekniikalla ajettavan ohjelman 5 nimi"
+
+#. bumblebee@pdcurtis->settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "Optimus-tekniikalla ajettavan ohjelman 2 nimi"
+
+#. bumblebee@pdcurtis->settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "Optimus-tekniikalla ajettavan ohjelman 3 nimi"
+
+#. bumblebee@pdcurtis->settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "Optimus-tekniikalla ajettavan ohjelman 1 nimi"
+
+#. bumblebee@pdcurtis->settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr "Anna ohjelman nimi tai null, jos et halua sitä näkyvän"
+
+#. bumblebee@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Näytön virkistystaajuus:"
+
+#. bumblebee@pdcurtis->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Suurenna tai pienennä spinner-arvoa muuttaaksesi virkistystaajuutta. Käytä "
+"hidasta virkistystä, jos sinulla on hidas kone"
+
+#. bumblebee@pdcurtis->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. bumblebee@pdcurtis->metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"Näyttää Bumblebee ja nVidia GPU:n lämpötila ja niihin liittyvät "
+"tukitoiminnot, mukaan lukien ohjelmien käynnistäminen optirun:lla tai "
+"primusrun:lla"
+
+#. bumblebee@pdcurtis->metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Bumblebee tilanäyttö NVidia-lämpötilalla"

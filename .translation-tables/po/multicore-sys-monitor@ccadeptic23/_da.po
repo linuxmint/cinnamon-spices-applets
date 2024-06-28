@@ -1,0 +1,220 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-23 04:17+0200\n"
+"PO-Revision-Date: 2023-12-25 10:39+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: po\n"
+
+#: 6.0/applet.js:301
+msgid "Without any graphics"
+msgstr ""
+
+#: 6.0/applet.js:307
+msgid "With graphics"
+msgstr ""
+
+#: 6.0/util.js:244 5.6/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#: 6.0/prefsui.glade:56 3.4/prefsui.glade:49 4.0/prefsui.glade:56
+#: 3.2/prefsui.glade:49 3.0/prefsui.glade:49 5.6/prefsui.glade:56
+msgid "Multi-Core System Monitor Preferences"
+msgstr ""
+
+#: 6.0/prefsui.glade:90 3.4/prefsui.glade:83 4.0/prefsui.glade:90
+#: 3.2/prefsui.glade:81 3.0/prefsui.glade:81 5.6/prefsui.glade:90
+msgid "Labels"
+msgstr ""
+
+#: 6.0/prefsui.glade:140 3.4/prefsui.glade:133 4.0/prefsui.glade:140
+#: 3.2/prefsui.glade:132 3.0/prefsui.glade:132 5.6/prefsui.glade:140
+msgid "Refresh Rate (ms)"
+msgstr ""
+
+#: 6.0/prefsui.glade:168 4.0/prefsui.glade:168 5.6/prefsui.glade:168
+msgid "Curves thickness"
+msgstr ""
+
+#: 6.0/prefsui.glade:212 3.4/prefsui.glade:177 4.0/prefsui.glade:212
+#: 3.2/prefsui.glade:245 5.6/prefsui.glade:212
+msgid "Label Color"
+msgstr ""
+
+#: 6.0/prefsui.glade:263 3.4/prefsui.glade:228 4.0/prefsui.glade:263
+#: 3.2/prefsui.glade:297 3.0/prefsui.glade:245 5.6/prefsui.glade:263
+msgid "Background Color"
+msgstr ""
+
+#: 6.0/prefsui.glade:299 3.4/prefsui.glade:264 4.0/prefsui.glade:299
+#: 3.2/prefsui.glade:333 3.0/prefsui.glade:281 5.6/prefsui.glade:299
+msgid "General"
+msgstr ""
+
+#: 6.0/prefsui.glade:376 6.0/prefsui.glade:659 6.0/prefsui.glade:1032
+#: 6.0/prefsui.glade:1378 3.4/prefsui.glade:341 3.4/prefsui.glade:513
+#: 3.4/prefsui.glade:886 3.4/prefsui.glade:1232 4.0/prefsui.glade:376
+#: 4.0/prefsui.glade:659 4.0/prefsui.glade:1032 4.0/prefsui.glade:1378
+#: 3.2/prefsui.glade:412 3.2/prefsui.glade:585 3.2/prefsui.glade:964
+#: 3.2/prefsui.glade:1297 3.0/prefsui.glade:360 3.0/prefsui.glade:533
+#: 3.0/prefsui.glade:912 3.0/prefsui.glade:1245 5.6/prefsui.glade:376
+#: 5.6/prefsui.glade:659 5.6/prefsui.glade:1032 5.6/prefsui.glade:1378
+msgid "Width"
+msgstr ""
+
+#: 6.0/prefsui.glade:433 4.0/prefsui.glade:433 5.6/prefsui.glade:433
+msgid "Color by activity level"
+msgstr ""
+
+#: 6.0/prefsui.glade:460 4.0/prefsui.glade:460 5.6/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr ""
+
+#: 6.0/prefsui.glade:494 6.0/prefsui.glade:710 3.4/prefsui.glade:392
+#: 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
+#: 3.2/prefsui.glade:463 3.2/prefsui.glade:636 3.0/prefsui.glade:411
+#: 3.0/prefsui.glade:584 5.6/prefsui.glade:494 5.6/prefsui.glade:710
+msgid "Colors"
+msgstr ""
+
+#: 6.0/prefsui.glade:508 4.0/prefsui.glade:508 5.6/prefsui.glade:508
+msgid "by CPU:"
+msgstr ""
+
+#: 6.0/prefsui.glade:538 4.0/prefsui.glade:538 5.6/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr ""
+
+#: 6.0/prefsui.glade:733 3.4/prefsui.glade:587 4.0/prefsui.glade:733
+#: 3.2/prefsui.glade:658 3.0/prefsui.glade:606 5.6/prefsui.glade:733
+msgid "Usedup"
+msgstr ""
+
+#: 6.0/prefsui.glade:771 3.4/prefsui.glade:625 4.0/prefsui.glade:771
+#: 3.2/prefsui.glade:697 3.0/prefsui.glade:645 5.6/prefsui.glade:771
+msgid "Cached"
+msgstr ""
+
+#: 6.0/prefsui.glade:809 3.4/prefsui.glade:663 4.0/prefsui.glade:809
+#: 3.2/prefsui.glade:736 3.0/prefsui.glade:684 5.6/prefsui.glade:809
+msgid "Buffer"
+msgstr ""
+
+#: 6.0/prefsui.glade:847 3.4/prefsui.glade:701 4.0/prefsui.glade:847
+#: 3.2/prefsui.glade:775 3.0/prefsui.glade:723 5.6/prefsui.glade:847
+msgid "Free"
+msgstr ""
+
+#: 6.0/prefsui.glade:954 3.4/prefsui.glade:808 4.0/prefsui.glade:954
+#: 3.2/prefsui.glade:884 3.0/prefsui.glade:832 5.6/prefsui.glade:954
+msgid "Memory"
+msgstr ""
+
+#: 6.0/prefsui.glade:1093 6.0/prefsui.glade:1439 3.4/prefsui.glade:947
+#: 3.4/prefsui.glade:1293 4.0/prefsui.glade:1093 4.0/prefsui.glade:1439
+#: 3.2/prefsui.glade:1024 3.2/prefsui.glade:1357 3.0/prefsui.glade:972
+#: 3.0/prefsui.glade:1305 5.6/prefsui.glade:1093 5.6/prefsui.glade:1439
+msgid "Scaling"
+msgstr ""
+
+#: 6.0/prefsui.glade:1139 6.0/prefsui.glade:1485 3.4/prefsui.glade:993
+#: 3.4/prefsui.glade:1339 4.0/prefsui.glade:1139 4.0/prefsui.glade:1485
+#: 3.2/prefsui.glade:1071 3.2/prefsui.glade:1404 3.0/prefsui.glade:1019
+#: 3.0/prefsui.glade:1352 5.6/prefsui.glade:1139 5.6/prefsui.glade:1485
+msgid "Auto Scale"
+msgstr ""
+
+#: 6.0/prefsui.glade:1177 6.0/prefsui.glade:1523 3.4/prefsui.glade:1031
+#: 3.4/prefsui.glade:1377 4.0/prefsui.glade:1177 4.0/prefsui.glade:1523
+#: 3.2/prefsui.glade:1110 3.2/prefsui.glade:1443 3.0/prefsui.glade:1058
+#: 3.0/prefsui.glade:1391 5.6/prefsui.glade:1177 5.6/prefsui.glade:1523
+msgid "Logarithmic"
+msgstr ""
+
+#: 6.0/prefsui.glade:1228 6.0/prefsui.glade:1574 3.4/prefsui.glade:1082
+#: 3.4/prefsui.glade:1428 4.0/prefsui.glade:1228 4.0/prefsui.glade:1574
+#: 3.2/prefsui.glade:1162 3.2/prefsui.glade:1495 3.0/prefsui.glade:1110
+#: 3.0/prefsui.glade:1443 5.6/prefsui.glade:1228 5.6/prefsui.glade:1574
+msgid "Devices"
+msgstr ""
+
+#: 6.0/prefsui.glade:1289 3.4/prefsui.glade:1143 4.0/prefsui.glade:1289
+#: 3.2/prefsui.glade:1206 3.0/prefsui.glade:1154 5.6/prefsui.glade:1289
+msgid "Network"
+msgstr ""
+
+#: 6.0/prefsui.glade:1635 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
+#: 3.2/prefsui.glade:1540 3.0/prefsui.glade:1488 5.6/prefsui.glade:1635
+msgid "Disk IO"
+msgstr ""
+
+#: 6.0/prefsui.glade:1695 3.4/prefsui.glade:1549 4.0/prefsui.glade:1695
+#: 3.2/prefsui.glade:1602 3.0/prefsui.glade:1550 5.6/prefsui.glade:1695
+msgid "Scaling Description"
+msgstr ""
+
+#: 6.0/prefsui.glade:1710 3.4/prefsui.glade:1564 4.0/prefsui.glade:1710
+#: 3.2/prefsui.glade:1614 3.0/prefsui.glade:1562 5.6/prefsui.glade:1710
+msgid "Close"
+msgstr ""
+
+#: 6.0/prefsui.glade:1740 4.0/prefsui.glade:1740 5.6/prefsui.glade:1740
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+
+#: 3.4/prefsui.glade:1594 3.2/prefsui.glade:1644 3.0/prefsui.glade:1592
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+
+#: 3.2/prefsui.glade:189 3.0/prefsui.glade:189
+msgid "Height"
+msgstr ""

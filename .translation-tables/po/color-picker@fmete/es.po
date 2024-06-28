@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-15 14:50+0100\n"
+"PO-Revision-Date: 2021-12-09 22:49-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:80
+msgid "Click here to pick a color"
+msgstr "Haga clic aquí para elegir un color"
+
+#: applet.js:136
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Por favor, instale el paquete '%s'."
+
+#: applet.js:158
+#, javascript-format
+msgid "Color code '%s' copied to clipboard."
+msgstr "Código de color '%s' copiado en el portapapeles."
+
+#. color-picker@fmete->settings-schema.json->pick-notification->description
+msgid "Show picked color code in a popup notification"
+msgstr "Mostrar el código de color elegido en una notificación emergente"
+
+#. color-picker@fmete->settings-schema.json->pick-notification->tooltip
+msgid ""
+"Show the picked color code, which has been copied to the clipboard, in a "
+"popup notification."
+msgstr ""
+"Muestre el código de color seleccionado que se ha copiado en el "
+"portapapeles, en una notificación emergente."
+
+#. color-picker@fmete->settings-schema.json->head->description
+msgid "Color Pick Settings"
+msgstr "Configuración del selector de color"
+
+#. color-picker@fmete->settings-schema.json->head1->description
+msgid "Applet Settings"
+msgstr "Configuración del applet"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->description
+msgid "Color code format"
+msgstr "Formato del código de color"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->tooltip
+msgid ""
+"Select the format of the color code, which will be copied to the clipboard "
+"by the color picker."
+msgstr ""
+"Seleccione el formato del código de color, que el selector de color copiará "
+"al portapapeles."
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "HEX-Color: #XXXXXX"
+msgstr "HEX-Color: #XXXXXX"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "RGB-Color: 250,250,250"
+msgstr "RGB-Color: 250,250,250"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "HEX-Color: #xxxxxx"
+msgstr "HEX-Color: #xxxxxx"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "RGB-Color: (250,250,250)"
+msgstr "RGB-Color: (250,250,250)"
+
+#. color-picker@fmete->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel"
+msgstr "Ícono a usar en en el panel"
+
+#. color-picker@fmete->settings-schema.json->icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr ""
+"Seleccione un archivo de icono, o escriba el nombre de ícono en el cuadro de "
+"entrada"
+
+#. color-picker@fmete->settings-schema.json->keybinding-test->description
+msgid "Keybinding, which activates the color picker"
+msgstr "Combinación de teclas que activa el selector de color"
+
+#. color-picker@fmete->metadata.json->description
+msgid ""
+"Use the color picker to select a color on the screen. The color value (HEX "
+"or RGB) will be copied to the clipboard."
+msgstr ""
+"Utilice el selector de color para seleccionar un color en la pantalla. El "
+"valor del color (HEX o RGB) se copiará en el portapapeles."
+
+#. color-picker@fmete->metadata.json->name
+msgid "Color Picker"
+msgstr "Selector de color"

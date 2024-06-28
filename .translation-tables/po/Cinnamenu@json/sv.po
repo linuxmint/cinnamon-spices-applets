@@ -1,0 +1,1106 @@
+# Swedish translation for Cinnamenu@json.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu@json\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2023-09-05 09:46+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.1\n"
+
+msgid "Initializing"
+msgstr "Startar"
+
+msgid "Find files..."
+msgstr "Hitta filer..."
+
+msgid "Please wait..."
+msgstr "Vänta..."
+
+msgid "Applications"
+msgstr "Program"
+
+msgid "Documents"
+msgstr "Dokument"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Music"
+msgstr "Musik"
+
+msgid "No recent Items"
+msgstr "Inga nya artiklar"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Click to copy"
+msgstr "Klicka för att kopiera"
+
+msgid "Applications and files"
+msgstr "Program och filer"
+
+msgid "Other search results"
+msgstr "Andra sökresultat"
+
+msgid "Browser bookmarks"
+msgstr "Webbläsarbokmärken"
+
+msgid "Browser history"
+msgstr "Webbläsarhistorik"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Clear List"
+msgstr "Rensa listan"
+
+msgid "Trash"
+msgstr "Skräp"
+
+msgid "Computer"
+msgstr "Dator"
+
+msgid "Error while opening file:"
+msgstr "Ett fel inträffade vid öppning av filen:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "För många poster - Visar endast de 1000 första posterna"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Alla program"
+
+msgid "Favorites"
+msgstr "Favoriter"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Platser"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Senaste"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Favoritprogram"
+
+msgid "light skin tone"
+msgstr "ljus toning"
+
+msgid "medium-light skin tone"
+msgstr "medelljus toning"
+
+msgid "medium skin tone"
+msgstr "medium toning"
+
+msgid "medium-dark skin tone"
+msgstr "medelmörk toning"
+
+msgid "dark skin tone"
+msgstr "mörk toning"
+
+msgid "Remove category"
+msgstr "Ta bort kategori"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Återställ kategoriordningen"
+
+msgid "List settings apps separately"
+msgstr "Lista inställningsappar separat"
+
+msgid "Single list style"
+msgstr "Enkelliststil"
+
+msgid "Hide hidden files"
+msgstr "Visa dolda filer"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Visa dolda filer"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Kör med NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Lägg till i panelen"
+
+msgid "Add to desktop"
+msgstr "Lägg till på skrivbordet"
+
+msgid "Remove from favorites"
+msgstr "Ta bort från Favoriter"
+
+msgid "Add to favorites"
+msgstr "Lägg till i Favoriter"
+
+msgid "Uninstall"
+msgstr "Avinstallera"
+
+msgid "App Info"
+msgstr "Programinfo"
+
+msgid "This file is no longer available"
+msgstr "Filen är inte längre tillgänglig"
+
+msgid "Open with"
+msgstr "Öppna med"
+
+msgid "Other application..."
+msgstr "Annat program..."
+
+msgid "Add folder as category"
+msgstr "Lägg till mapp som kategori"
+
+msgid "Open containing folder"
+msgstr "Öppna innehållande mapp"
+
+msgid "Move to trash"
+msgstr "Flytta till papperskorgen"
+
+msgid "Error while moving file to trash:"
+msgstr "Kunde inte flytta filen till papperskorgen:"
+
+msgid "Smileys & Emotion"
+msgstr "Smileys & känslor"
+
+msgid "People & Body"
+msgstr "Folk & kropp"
+
+msgid "Animals & Nature"
+msgstr "Djur & natur"
+
+msgid "Food & Drink"
+msgstr "Mat & dryck"
+
+msgid "Travel & Places"
+msgstr "Resor & platser"
+
+msgid "Activities"
+msgstr "Aktiviteter"
+
+msgid "Objects"
+msgstr "Objekt"
+
+msgid "Symbols"
+msgstr "Symboler"
+
+msgid "Flags"
+msgstr "Flaggor"
+
+msgid "Quit"
+msgstr "Stäng av"
+
+msgid "Shutdown the computer"
+msgstr "Stäng av datorn"
+
+msgid "Logout"
+msgstr "Logga ut"
+
+msgid "Leave the session"
+msgstr "Avsluta sessionen"
+
+msgid "Lock screen"
+msgstr "Lås skärmen"
+
+msgid "Lock the screen"
+msgstr "Lås skärmen"
+
+msgid "Type to search..."
+msgstr "Skriv för att söka..."
+
+msgid "No description available"
+msgstr "Ingen beskrivning tillgänglig"
+
+msgid "Recent files"
+msgstr "Tidigare filer"
+
+msgid "Bookmarks"
+msgstr "Bokmärken"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Paketet gir1.2-gda-5.0 krävs för Firefox- och Midori-bokmärken."
+
+msgid "No recent files"
+msgstr "Inga tidigare filer"
+
+msgid "Account details"
+msgstr "Kontodetaljer"
+
+msgid "Grid View"
+msgstr "Ikonvy"
+
+msgid "List View"
+msgstr "Listvy"
+
+msgid "Switch to grid view"
+msgstr "Växla till ikonvy"
+
+msgid "Switch to list view"
+msgstr "Växla till listvy"
+
+msgid "Home"
+msgstr "Hem"
+
+msgid "Browse network"
+msgstr "Navigera nätverket"
+
+msgid "Open"
+msgstr "Öppen"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Sök"
+
+msgid "Start in"
+msgstr "Starta i"
+
+msgid "Select a folder"
+msgstr "Välj en mapp"
+
+msgid "Follow symlinks"
+msgstr "Följ symboliska länkar"
+
+msgid "Search hidden"
+msgstr "Sök dold"
+
+msgid "Use regular expressions"
+msgstr "Använd Regular Expression"
+
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Path"
+msgstr "Sökväg"
+
+msgid "Searching..."
+msgstr "Forskande..."
+
+msgid "Search Stopped"
+msgstr "Sökning stoppad"
+
+msgid "Searching: "
+msgstr "Forskande: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Fel: Otillräckliga rättigheter för att läsa mappen "
+
+msgid "Search Completed"
+msgstr "Sökning slutförd"
+
+msgid "Skipping"
+msgstr "Hoppar över"
+
+msgid " - directory already searched"
+msgstr " - mappen redan genomsökt"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Det här menyalternativet är inte kopplat till något paket. Vill du ta bort "
+"det från menyn ändå?"
+
+msgid "The following packages will be removed:"
+msgstr "Följande paket kommer att tas bort:"
+
+msgid "Packages to be removed"
+msgstr "Paket att ta bort"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Kan inte ta bort paketet %s, eftersom andra paket är beroende av det."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Följande paket är beroende av paketet %s:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"En flexibel meny med ikon- eller listlayoutalternativ, filhanterare och "
+"emoji-sökning."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Layout"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Beteende"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Utseende"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr "Tips"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Innehåll"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Panel"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Meny"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Programmens visningsläge"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Listvy"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Ikonvy"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Visa programmen i list eller ikonvy"
+
+#. 5.8
+#. 4.0
+msgid "Show sidebar"
+msgstr "Visa sidofält"
+
+#. 5.8
+#. 4.0
+msgid "Show the sidebar in the menu"
+msgstr "Visa sidofältet i menyn"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Sidofältets plats"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Överkant"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Underkant"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Vänster"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "Höger"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Välj var sidofältet skall visas"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Visa favoriter i sidofältet"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Ingen"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr "Endast program"
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr "Endast filer"
+
+#. 5.8
+#. 4.0
+msgid "Apps and files"
+msgstr "Program och filer"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Visa favoritprogram och filikoner i sidofältet"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Programbeskrivningens placering"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Knappbeskrivning"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Under titeln"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Välj var programbeskrivningarna skall visas"
+
+#. 5.8
+#. 4.0
+msgid "Show categories"
+msgstr "Visa kategorier"
+
+#. 5.8
+#. 4.0
+msgid "Show list of application categories"
+msgstr "Visa lista över programketegorier"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Visa bokmärken och platser"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Visa kategori för bokmärken och platser i menyn"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Visa tidigare objekt"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Visa kategori för tidigare objekt i menyn"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Visa favoritkategori"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Visa kategori för favoritprogram i menyn"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Visa hemmappen"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Visa kategori för hemmappen i menyn"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category"
+msgstr "Visa emoji-kategori"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category in the menu"
+msgstr "Visa emoji-kategori i menyn"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Öppna menyredigeraren"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Öppna menyn vid hovring"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Öppna menyn när jag för muspekaren över panelikonen"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Menyfördröjning vid hovring"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Använd menyanimering"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Animera menyn vid öppning och stängning"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Aktivera kategorier vid klick"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivera kategorier vid klick istället för hovring"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Öppna menyn på kategori:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Öppna alltid meny med denna kategori vald"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Senast använda kategori"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Aktivera automatisk skrollning"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Skrolla programlistan automatiskt vid mus över"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Visa dolda filer i mappvyn"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Emoji-sök"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Visa emojis i sökresultat"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Webbsökalternativ"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Visa ett internetsökalternativ i sökresultat"
+
+#. 5.8
+#. 4.0
+msgid "Web search suggestions"
+msgstr "Webbsökförslag"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Med webbsökalternativet kan du också visa sökförslag. (OBS! Sökförslag "
+"tillhandahålls av DuckDuckGo)"
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Sök i hemmappen"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Vid sökning, sök även i min hemkatalog efter filer"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Webbhistoriksök"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Vid sökning, sök också i min webbläsares historik (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Notera att Firefox-historiken inte stöds för närvarande."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Webbokmärkessök"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Genomsök också min webbläsares bokmärken vid sökning (Google Chrome, "
+"Chromium, Opera, Brave, Vivaldi & Firefox).\n"
+"OBS! För att söka i Firefox bokmärken, måste du installera paketet, gir1.2-"
+"gda-5.0 (Debian-baserade distributioner inkl. Ubuntu & Linux Mint) eller "
+"paketet libgda (Arch-baserade distributioner) och starta om din dator."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Wikipedia-sök"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Visa några Wikipedia-resultat"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Wikipedia-språk"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Notis: Vissa sökalternativ kan fortfarande användas genom att prefixa "
+"söktermen, även om du inte har aktiverat dem här.\n"
+"Exempel: för att söka efter en emoji, skriv 'e heart' för att hitta "
+"hjärtemojis. Använd också prefixen 'f' för filsökning, 'h' för webbhistorik "
+"och 'b' för sökning efter webbbokmärken.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Använd en anpassad ikon"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Använd en anpassad ikon i panelen"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Panelikon"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Använd en anpassad ikonstorlek"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Använd en anpassad storlek för panelikonen"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Panelikonstorlek (pixlar)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Välj en anpassad storlek för panelikonen"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Paneltext"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Text att visa vid panelikonen"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Storlek på kategoriikoner (pixlar)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Listvyns ikonstorlek (pixlar)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Ikonvyns ikonstorlek (pixlar)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Sidofältets ikonstorlek (pixlar)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Använd boxstil för sidofält"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Använd en boxstil för sidofält"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Använd panelstil"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Använd ett panelformat för programknapparna (OBS! Kanske inte fungerar på "
+"vissa teman)"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Dra i menykanten för att ändra menystorlek."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Dra och släpp menykategorier för att ändra ordningen."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Mappar kan läggas till och tas bort som menykategorier genom att "
+"högerklicka på dem."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Ytterligare snabbtangentalternativ:\n"
+"ctrl-p — Öppna dialogrutan för startegenskaper för det markerade "
+"programmet.\n"
+"ctrl-d — Öppna .desktop-filen för det markerade programmet i "
+"textredigeraren.\n"
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Sökmotorer"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Inga sökmotortillägg hittades"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Inställningar för tidigare filer"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Aktivera automatisk skrollning i programlistan"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Visa webbokmärken"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Visa webbläsarens bokmärken i menyn.\n"
+"Notis: Installera paketet gir1.2-gda-5.0 för att läsa Firefox bokmärken."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Aktivera sökning i öppna fönster"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Aktivera sökmotorer"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "Inkludera sökmotorresultat i sökningar"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Exempel på sökmotorer"
+
+#. 3.2
+msgid "columns"
+msgstr "kolumner"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Antal kolumner i programfältet"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Visa programikoner"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Visa kategoriikoner"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Visa programbeskrivningar under titlar"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Visa knappbeskrivningar"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Fördröjning för knappbeskrivningar"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Använd anpassad menyhöjd"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Anpassad menyhöjd (pixlar)"
+
+#~ msgid "Home folder"
+#~ msgstr "Hemmapp"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Layout och innehåll"
+
+#~ msgid "Google"
+#~ msgstr "Google"
+
+#~ msgid "Bing"
+#~ msgstr "Bing"
+
+#~ msgid "Baidu"
+#~ msgstr "Baidu"
+
+#~ msgid "Yahoo"
+#~ msgstr "Yahoo"
+
+#~ msgid "Yandex"
+#~ msgstr "Yandex"
+
+#~ msgid "DuckDuckGo"
+#~ msgstr "DuckDuckGo"
+
+#~ msgid "Ask"
+#~ msgstr "Fråga"
+
+#~ msgid "Ecosia"
+#~ msgstr "Ekosien"
+
+#~ msgid "AOL"
+#~ msgstr "AOL"
+
+#~ msgid "Startpage"
+#~ msgstr "Startpage"
+
+#~ msgid "pixels"
+#~ msgstr "pixlar"
+
+#~ msgid "Solution:"
+#~ msgstr "Lösning:"
+
+#~ msgid "Search web for"
+#~ msgstr "SökmotorerSök på nätet efter"
+
+#~ msgid ""
+#~ "A flexible menu providing formatting options, web bookmarks, search "
+#~ "provider support and fuzzy searching."
+#~ msgstr ""
+#~ "En flexibel meny som tillhandahåller formateringsalternativ, "
+#~ "webbokmärken, sökmotorstöd och luddig sökning."
+
+#~ msgid "Session buttons location"
+#~ msgstr "Placering av sessionsknappar"
+
+#~ msgid "Choose where to show the session buttons (quit, logout, etc.)"
+#~ msgstr "Välj var sessionsknapparna skall visas (Avsluta, Logga ut, etc.)"
+
+#~ msgid "Add favorites to session buttons"
+#~ msgstr "Lägg till favoriter till sessionsknapparna"
+
+#~ msgid "Show your favorite app icons next to the session buttons"
+#~ msgstr "Visa dina favoritprogramikoner tillsammans med sessionsknapparna"
+
+#~ msgid "Session buttons icon size"
+#~ msgstr "Sessionsknappars ikonstorlek"

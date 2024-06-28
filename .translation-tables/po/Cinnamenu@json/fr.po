@@ -1,0 +1,1070 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2023-10-29 16:33+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "Initialisation"
+
+msgid "Find files..."
+msgstr "Trouver des fichiers..."
+
+msgid "Please wait..."
+msgstr "Veuillez patienter..."
+
+msgid "Applications"
+msgstr "Applications"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Videos"
+msgstr "Vidéos"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Music"
+msgstr "Musique"
+
+msgid "No recent Items"
+msgstr "Aucun document récent"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Click to copy"
+msgstr "Cliquer pour copier"
+
+msgid "Applications and files"
+msgstr "Applications et fichiers"
+
+msgid "Other search results"
+msgstr "Autres résultats de recherche"
+
+msgid "Browser bookmarks"
+msgstr "Signets du navigateur"
+
+msgid "Browser history"
+msgstr "Historique du navigateur"
+
+msgid "Emoji"
+msgstr "Émoji"
+
+msgid "Clear List"
+msgstr "Vider la liste"
+
+msgid "Trash"
+msgstr "Corbeille"
+
+msgid "Computer"
+msgstr "Ordinateur"
+
+msgid "Error while opening file:"
+msgstr "Erreur lors de l'ouverture du fichier :"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Trop d'entrées - affichage des 1000 premières entrées seulement"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Toutes les applications"
+
+msgid "Favorites"
+msgstr "Favoris"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Emplacements"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Récents"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Applis favorites"
+
+msgid "light skin tone"
+msgstr "thème clair"
+
+msgid "medium-light skin tone"
+msgstr "thème moyen-clair"
+
+msgid "medium skin tone"
+msgstr "thème moyen"
+
+msgid "medium-dark skin tone"
+msgstr "thème moyen-foncé"
+
+msgid "dark skin tone"
+msgstr "teint foncé"
+
+msgid "Remove category"
+msgstr "Supprimer cette catégorie"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Restaurer l'ordre initial des catégories"
+
+msgid "List settings apps separately"
+msgstr "Lister à part les applications de paramétrage"
+
+msgid "Single list style"
+msgstr "Style de liste unique"
+
+msgid "Hide hidden files"
+msgstr "Ne pas montrer les fichiers cachés"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Montrer les fichiers cachés"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Démarrer avec le GPU NVIDIA"
+
+msgid "Add to panel"
+msgstr "Ajouter au tableau de bord"
+
+msgid "Add to desktop"
+msgstr "Ajouter au Bureau"
+
+msgid "Remove from favorites"
+msgstr "Supprimer des Favoris"
+
+msgid "Add to favorites"
+msgstr "Ajouter aux Favoris"
+
+msgid "Uninstall"
+msgstr "Désinstaller"
+
+msgid "App Info"
+msgstr "Info App"
+
+msgid "This file is no longer available"
+msgstr "Ce fichier n'est plus disponible"
+
+msgid "Open with"
+msgstr "Ouvrir avec"
+
+msgid "Other application..."
+msgstr "Autre application..."
+
+msgid "Add folder as category"
+msgstr "Ajouter ce dossier comme catégorie"
+
+msgid "Open containing folder"
+msgstr "Ouvrir le dossier conteneur"
+
+msgid "Move to trash"
+msgstr "Mettre à la corbeille"
+
+msgid "Error while moving file to trash:"
+msgstr "Erreur lors du déplacement du fichier vers la corbeille :"
+
+msgid "Smileys & Emotion"
+msgstr "Smileys & Émotions"
+
+msgid "People & Body"
+msgstr "Personnes & Corps"
+
+msgid "Animals & Nature"
+msgstr "Animaux & Nature"
+
+msgid "Food & Drink"
+msgstr "Nourriture & Boissons"
+
+msgid "Travel & Places"
+msgstr "Voyages & Lieux"
+
+msgid "Activities"
+msgstr "Activités"
+
+msgid "Objects"
+msgstr "Objets"
+
+msgid "Symbols"
+msgstr "Symboles"
+
+msgid "Flags"
+msgstr "Drapeaux"
+
+msgid "Quit"
+msgstr "Quitter"
+
+msgid "Shutdown the computer"
+msgstr "Éteindre l'ordinateur"
+
+msgid "Logout"
+msgstr "Se déconnecter"
+
+msgid "Leave the session"
+msgstr "Clôt votre session"
+
+msgid "Lock screen"
+msgstr "Verrouiller l'écran"
+
+msgid "Lock the screen"
+msgstr "Verrouille l'écran"
+
+msgid "Type to search..."
+msgstr "Tapez pour rechercher..."
+
+msgid "No description available"
+msgstr "Aucune description connue"
+
+msgid "Recent files"
+msgstr "Documents récents"
+
+msgid "Bookmarks"
+msgstr "Signets web"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Le paquet gir1.2-gda-5.0 est requis pour pouvoir afficher les signets web de "
+"Firefox et de Midori."
+
+msgid "No recent files"
+msgstr "Aucun document récent"
+
+msgid "Account details"
+msgstr "Votre compte"
+
+msgid "Grid View"
+msgstr "Vue en grille"
+
+msgid "List View"
+msgstr "Vue en liste"
+
+msgid "Switch to grid view"
+msgstr "Passer à une vue en grille"
+
+msgid "Switch to list view"
+msgstr "Passer à une vue en liste"
+
+msgid "Home"
+msgstr "Dossier personnel"
+
+msgid "Browse network"
+msgstr "Parcourir le réseau"
+
+msgid "Open"
+msgstr "Ouvrir"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Start in"
+msgstr "Commencez dans"
+
+msgid "Select a folder"
+msgstr "Choisir un dossier"
+
+msgid "Follow symlinks"
+msgstr "Suivre les liens symboliques"
+
+msgid "Search hidden"
+msgstr "Recherche masquée"
+
+msgid "Use regular expressions"
+msgstr "Utiliser des expressions régulières"
+
+msgid "Stop"
+msgstr "Arrêter"
+
+msgid "File"
+msgstr "Fichier"
+
+msgid "Path"
+msgstr "Chemin"
+
+msgid "Searching..."
+msgstr "Recherche en cours..."
+
+msgid "Search Stopped"
+msgstr "Recherche interrompue"
+
+msgid "Searching: "
+msgstr "Recherche : "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Erreur : permissions insuffisantes pour lire le dossier "
+
+msgid "Search Completed"
+msgstr "Recherche terminée"
+
+msgid "Skipping"
+msgstr "Ignoré"
+
+msgid " - directory already searched"
+msgstr " - dossier déjà parcouru"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Cet élément de menu n'est associé à aucun package. Voulez-vous le supprimer "
+"du menu ?"
+
+msgid "The following packages will be removed:"
+msgstr "Les packages suivants seront supprimés :"
+
+msgid "Packages to be removed"
+msgstr "Paquets à supprimer"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+"Impossible de supprimer le package %s car il est requis par d'autres "
+"packages."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Le package %s est une dépendance des packages suivants:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Un menu flexible avec des options de disposition de grille ou de liste, un "
+"navigateur de fichiers et une recherche d'emojis."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Mise en page"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Comportement"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Apparence"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr "Astuces"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Contenu"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Panneau"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Menu"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Mode d'affichage des applications"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Liste"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Grille"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr ""
+"Vous permet de faire afficher les applications sous forme de liste (une "
+"seule colonne) ou de grille (lignes et colonnes)"
+
+#. 5.8
+#. 4.0
+msgid "Show sidebar"
+msgstr "Afficher la barre latérale"
+
+#. 5.8
+#. 4.0
+msgid "Show the sidebar in the menu"
+msgstr "Afficher la barre latérale dans le menu"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Emplacement de la barre latérale"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Haut"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Bas"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Gauche"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "Droite"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Choisissez où afficher la barre latérale"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Afficher les favoris dans la barre latérale"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Aucun"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr "Applications seulement"
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr "Fichiers seulement"
+
+#. 5.8
+#. 4.0
+msgid "Apps and files"
+msgstr "Applications et fichiers"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+"Affichez vos applications et vos icônes de fichiers préférées sur la barre "
+"latérale"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Emplacement de la description d'une application"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Info-bulles"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Sous les titres"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Vous permet de choisir l'emplacement des descriptions des applications"
+
+#. 5.8
+#. 4.0
+msgid "Show categories"
+msgstr "Afficher les catégories"
+
+#. 5.8
+#. 4.0
+msgid "Show list of application categories"
+msgstr "Afficher les catégories d'applications"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Afficher les signets et les emplacements"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Afficher dans le menu vos signets et vos emplacements"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Afficher les éléments récents"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Afficher la catégorie des éléments récents dans le menu"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Afficher la catégorie des Applications préférées"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Affichez votre catégorie d'applications préférées dans le menu"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Afficher le dossier de départ"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Afficher la catégorie de dossier de départ dans le menu"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category"
+msgstr "Afficher la catégorie Emoji"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category in the menu"
+msgstr "Afficher la catégorie Emoji dans le menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Ouvrir l'éditeur de menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Raccourci-clavier pour ouvrir et fermer le menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Ouvrir le menu lors du survol"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Ouvrir le menu au passage de la souris sur l'icône de Cinnamenu"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "millisecondes"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Délai du survol avant ouverture du menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Animer l'ouverture et la fermeture du menu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Animer le menu lors de son ouverture ou sa fermeture"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Ouvrir les catégories en cliquant"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+"Ouvre les catégories avec un clic, au lieu du simple survol par la souris"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Ouvrir le menu sur la catégorie:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Toujours ouvrir le menu avec cette catégorie sélectionnée"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Dernière catégorie utilisée"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Activer le défilement automatique"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Active le défilement automatique dans la liste des applications"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Afficher les fichiers cachés dans la vue des dossiers"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Recherche d'emojis"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Afficher les emojis dans les résultats de recherche"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Option de recherche sur le Web"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr ""
+"Afficher une option de recherche Internet dans les résultats de recherche"
+
+#. 5.8
+#. 4.0
+msgid "Web search suggestions"
+msgstr "Suggestions de recherche sur le Web"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Avec l'option de recherche sur le Web, affichez également les suggestions de "
+"recherche. (Remarque : les suggestions de recherche sont fournies par "
+"DuckDuckGo)"
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Rechercher dans le dossier de départ"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr ""
+"Lors de la recherche, recherchez également les fichiers dans le dossier de "
+"départ"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Recherche dans l'historique Web"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Lors de la recherche, rechercher également l'historique de mon navigateur "
+"(Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Remarque : l'historique de Firefox n'est actuellement pas pris en charge."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Recherche de signets Web"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Lors de la recherche, rechercher également les signets Web de mon navigateur "
+"(Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Remarque : Pour rechercher des signets Firefox, vous devrez installer le "
+"package gir1.2-gda-5.0 (distributions basées sur Debian, y compris Ubuntu et "
+"Linux Mint) ou le package libgda (distributions basées sur Arch) et "
+"redémarrer votre ordinateur."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Recherche dans Wikipédia"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Afficher quelques résultats Wikipédia"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Langue Wikipédia"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Remarque : Certaines options de recherche peuvent toujours être utilisées "
+"même si vous ne les avez pas activées ici en préfixant votre terme de "
+"recherche.\n"
+"Par exemple : pour rechercher un émoji, tapez « e coeur » pour trouver des "
+"émojis de cœur. De même, utilisez les préfixes \"f\" pour la recherche de "
+"fichiers, \"h\" pour l'historique Web et \"b\" pour la recherche dans vos "
+"signets Web.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Personnaliser l'icône"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Personnaliser l'icône de cette applet affichée dans le panneau"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Icône affichée sur le panneau"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Utiliser une taille d'icône personnalisée"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Utilisez une taille personnalisée pour l'icône du panneau"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Taille de l'icône du panneau (pixels)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Choisissez une taille personnalisée pour l'icône du panneau"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Texte affiché sur le panneau"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Texte à afficher à côté de l'icône du panneau"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Taille des icônes des catégories du menu (pixels)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Taille des icônes pour la vue en liste (pixels)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Taille des icônes pour la vue en grille (pixels)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Taille de l'icône de la barre latérale (pixels)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Utiliser le style de boîte de la barre latérale"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Utiliser un style de boîte de barre latérale"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Utiliser le style de mosaïque"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Utilisez un style de mosaïque pour les boutons de l'application (Remarque : "
+"peut ne pas fonctionner sur certains thèmes)"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Faites glisser le bord du menu pour modifier la taille du menu."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Faites glisser les catégories pour modifier leur ordre."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Les dossiers peuvent être configurés et supprimés en tant que catégories "
+"de menu en cliquant dessus avec le bouton droit de la souris."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Raccourcis supplémentaires :\n"
+"Ctrl-P - Ouvrir la boîte de dialogue des propriétés du lanceur de "
+"l'application sélectionnée.\n"
+"Ctrl-D - Ouvrir le fichier .desktop de l'application sélectionnée dans "
+"l'éditeur de texte par défaut.\n"
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Moteurs de Recherche"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Aucune extension pour moteur de recherche n'a été installée"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Paramètres des Documents récents"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Active le défilement automatique dans la liste des applications"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Afficher les signets Web"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Affichez les signets Web de votre navigateur dans le menu.\n"
+"Remarque : Installez le package gir1.2-gda-5.0 pour lire les signets Firefox."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Activer la recherche des fenêtres ouvertes"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Activer les moteurs de recherche"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr ""
+"Ajouter également les résultats des moteurs de recherche à ceux de vos "
+"recherches dans le menu"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Exemples de moteurs de recherche"
+
+#. 3.2
+msgid "columns"
+msgstr "colonnes"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Nombre de colonnes de la grille des applications"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Afficher les icônes des applications"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Afficher les icônes des catégories"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Afficher la description des applications sous leur titre"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Afficher les infobulles"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Délai avant l'affichage de l'infobulle"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Utiliser une hauteur de menu personnalisée"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Hauteur de menu personnalisée (pixels)"
+
+#~ msgid ""
+#~ "\n"
+#~ "• Right click on any folder to add it as a menu category.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Clic-droit sur un dossier pour en faire une catégorie du menu.\n"
+
+#~ msgid "Home folder"
+#~ msgstr "Dossier d'accueil"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Mise en page et contenu"

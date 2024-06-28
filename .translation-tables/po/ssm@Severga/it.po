@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2023-12-11 18:11+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:32 applet.js:58
+msgid "Required GTop package missing!"
+msgstr "Il pacchetto richiesto GTop è assente!"
+
+#: applet.js:56
+msgid "Error!"
+msgstr "Errore!"
+
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Ripristina la temperatura di picco"
+
+#: applet.js:64
+msgid "Clear Cache"
+msgstr "Svuota Cache"
+
+#: applet.js:161
+msgid "CPUs"
+msgstr "CPU"
+
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C max; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C di picco"
+
+#: applet.js:164
+msgid "Memory"
+msgstr "Memoria"
+
+#: applet.js:164
+msgid "GB"
+msgstr "GB"
+
+#: applet.js:164
+msgid "GB swap"
+msgstr "GB swap"
+
+#: applet.js:167
+msgid "Network"
+msgstr "Rete"
+
+#: applet.js:321
+msgid "Core "
+msgstr "Core "
+
+#: applet.js:366
+msgid "Used:   "
+msgstr "Usati:  "
+
+#: applet.js:367
+msgid "Cache:  "
+msgstr "Cache:  "
+
+#: applet.js:368
+msgid "Buffer: "
+msgstr "Buffer: "
+
+#: applet.js:372
+msgid "Swap:   "
+msgstr "Swap:   "
+
+#: applet.js:442
+msgid "Up:      "
+msgstr "Up:      "
+
+#: applet.js:442 applet.js:443
+msgid "B/s"
+msgstr "B/s"
+
+#: applet.js:443
+msgid "Down:    "
+msgstr "Down:    "
+
+#: applet.js:444
+msgid "Data:    "
+msgstr "Dati:    "
+
+#: applet.js:444
+msgid "B"
+msgstr "B"
+
+#: applet.js:448
+msgid "no interfaces to show"
+msgstr "nessuna interfaccia da mostrare"
+
+#: applet.js:453
+msgid "k"
+msgstr "k"
+
+#: applet.js:453
+msgid "M"
+msgstr "M"
+
+#: applet.js:453
+msgid "G"
+msgstr "G"
+
+#: applet.js:453
+msgid "T"
+msgstr "T"
+
+#. metadata.json->name
+msgid "Simplified System Monitor"
+msgstr "Monitor di Sistema Semplificato"
+
+#. metadata.json->description
+msgid "Applet to show system load and state"
+msgstr "Applet per mostrare lo stato e il carico del sistema"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "Comune"
+
+#. settings-schema.json->refresh->description
+msgid "Sections info refresh rate (seconds)"
+msgstr "Frequenza di aggiornamento delle informazioni sulle sezioni (secondi)"
+
+#. settings-schema.json->refresh->tooltip
+msgid "CPUs, memory, network info refresh rate"
+msgstr "Frequenza di aggiornamento delle info su CPU, memoria e rete"
+
+#. settings-schema.json->cpu_label->description
+msgid "CPUs and memory sections"
+msgstr "Sezioni CPU e memoria"
+
+#. settings-schema.json->size->description
+msgid "CPUs and memory panel sections widths (px)"
+msgstr "Larghezza sezioni del pannello CPU e memoria (px)"
+
+#. settings-schema.json->size->tooltip
+msgid "CPUs and memory panel sections widths"
+msgstr "Larghezza sezioni del pannello CPU e memoria"
+
+#. settings-schema.json->temp_refresh->description
+msgid "CPUs temperature refresh rate (seconds)"
+msgstr "Frequenza di aggiornamento temperatura CPU (secondi)"
+
+#. settings-schema.json->temp_refresh->tooltip
+msgid "CPUs temperature refresh rate"
+msgstr "Frequenza di aggiornamento temperatura CPU"
+
+#. settings-schema.json->cold_temp->description
+msgid "CPU cold temperature (°C)"
+msgstr "Temperatura CPU fredda (°C)"
+
+#. settings-schema.json->cold_temp->tooltip
+msgid ""
+"CPUs' temperature below which they are regarded as cold (for color "
+"representation in the panel)"
+msgstr ""
+"Temperatura della CPU al di sotto della quale è considerata fredda (per la "
+"rappresentazione dei colori nel pannello)"
+
+#. settings-schema.json->color_cold->description
+msgid "Color for CPU cold temperature"
+msgstr "Colore per la temperatura CPU fredda"
+
+#. settings-schema.json->hot_temp->description
+msgid "CPU hot temperature (°C)"
+msgstr "Temperatura CPU calda (°C)"
+
+#. settings-schema.json->hot_temp->tooltip
+msgid ""
+"CPUs' temperature above which they are regarded as hot (for color "
+"representation in the panel)"
+msgstr ""
+"Temperatura della CPU al di sopra della quale è considerata calda (per la "
+"rappresentazione dei colori nel pannello)"
+
+#. settings-schema.json->color_hot->description
+msgid "Color for CPU hot temperature"
+msgstr "Colore per la temperatura CPU calda"
+
+#. settings-schema.json->sensors_cmd->description
+msgid "Command to start 'sensors'"
+msgstr "Comando per avviare 'sensors'"
+
+#. settings-schema.json->sensors_cmd->tooltip
+msgid ""
+"Command to start 'sensors'. Use 'which sensors' command to find it. Install "
+"'lmsensors' package, if not found"
+msgstr ""
+"Comando per avviare 'sensors'. Utilizza il comando 'which sensors' per "
+"trovarlo. Installa il pacchetto 'lmsensors', se non trovato."
+
+#. settings-schema.json->net_label->description
+msgid "Network section"
+msgstr "Sezione rete"
+
+#. settings-schema.json->net_size->description
+msgid "Network panel section width (px)"
+msgstr "Dimensione pannello sezione rete (px)"
+
+#. settings-schema.json->net_size->tooltip
+msgid "Network panel section width"
+msgstr "Dimensione pannello sezione rete"
+
+#. settings-schema.json->net_style->description
+msgid "Network panel section style"
+msgstr "Stile pannello sezione rete"
+
+#. settings-schema.json->net_style->tooltip
+msgid ""
+"Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+msgstr ""
+"Stile HTML della sezione del pannello di rete (ad es.: text-align: left; "
+"margin-left: 5px; font-size: 8pt;)"
+
+#. settings-schema.json->net_black_list->description
+msgid "Network interfaces blacklist"
+msgstr "Lista nera delle interfacce di rete"
+
+#. settings-schema.json->net_black_list->tooltip
+msgid ""
+"Semicolon-separated network interfaces list not to consider for counting "
+"traffic"
+msgstr ""
+"Elenco di interfacce di rete separate da punto e virgola da non considerare "
+"per il conteggio del traffico"

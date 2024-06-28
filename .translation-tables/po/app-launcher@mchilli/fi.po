@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:46-0500\n"
+"PO-Revision-Date: 2022-11-30 13:20+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:108
+msgid "Edit Applications"
+msgstr "Muokkaa sovelluksia"
+
+#: applet.js:737 applet.js:1031
+msgid "Delete"
+msgstr "Poista"
+
+#: applet.js:738 applet.js:1032
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: applet.js:739 applet.js:1033
+msgid "Cancel"
+msgstr "Peru"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
+msgid "Name"
+msgstr "Nimi"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:51 dialogs.glade:104
+msgid "Group"
+msgstr "Ryhmä"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:52 widgets.py:43 dialogs.glade:115
+msgid "Command"
+msgstr "Komento"
+
+#: dialogs.py:203
+msgid "The name cannot be empty"
+msgstr "Nimi ei voi olla tyhjä"
+
+#: dialogs.py:208
+msgid "The name is already used"
+msgstr "Nimi on jo käytössä"
+
+#: dialogs.py:215
+msgid "Valid name"
+msgstr "Kelvollinen nimi"
+
+#: dialogs.py:221
+msgid "Valid command"
+msgstr "Kelvollinen komento"
+
+#: dialogs.py:224
+msgid "The command is not valid"
+msgstr "Komento ei kelpaa"
+
+#: dialogs.py:236
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "Mitä tietoja tiedostosta *.desktop tulisi korvata?"
+
+#: dialogs.py:281 dialogs.glade:561
+msgid "really delete?"
+msgstr "Poistatko oikeasti?"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:29
+msgid "Icon"
+msgstr "Kuvake"
+
+#: widgets.py:125
+msgid "Add application"
+msgstr "Lisää sovellus"
+
+#: widgets.py:126
+msgid "Add new entry"
+msgstr "Lisää uusi kohde"
+
+#: widgets.py:130
+msgid "Add separator"
+msgstr "Lisää erotin"
+
+#: widgets.py:138
+msgid "Remove selected entry"
+msgstr "Poista valittu merkintä"
+
+#: widgets.py:144
+msgid "Edit selected entry"
+msgstr "Muokkaa valittua merkintää"
+
+#: widgets.py:150
+msgid "Duplicate selected entry"
+msgstr "Monista valittu merkintä"
+
+#: widgets.py:156
+msgid "Move selected entry up"
+msgstr "Siirrä merkintää ylöspäin"
+
+#: widgets.py:162
+msgid "Move selected entry down"
+msgstr "Siirrä merkintää alaspäin"
+
+#: widgets.py:323
+msgid "Separator"
+msgstr "Erotin"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "App Launcher"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Helppo sovellusten käynnistysohjelma"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Sovellukset"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Yleiset asetukset"
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Sovelluksen asetukset"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Näytä nimi"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Nimi"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Mukautettu kuvake"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Näytä ilmoitukset"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Näytä ilmoitus sovelluksen käynnistyessä"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Ilmoitusteksti"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s on sovelluksesi nimi"
+
+#. settings-schema.json->hotkey-binding->description
+msgid "Show menu"
+msgstr "Näytä valikko"
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "Aseta pikanäppäin näyttämään valikko"
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "Kiinteä valikon leveys"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr "Perustuu suurimpaan alivalikon leveyteen välkkymisen estämiseksi"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Näytä sovellusten kuvakkeet"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Näytä sovellusten kuvakkeet ponnahdusvalikossa"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Käytä symbolisia sovellusten kuvakkeita"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Käytä symbolisia kuvakkeita, jos mahdollista"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Sovelluksen kuvakkeen koko"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Aseta kuvakkeen koko"

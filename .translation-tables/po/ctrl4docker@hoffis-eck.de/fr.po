@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2023-05-06 14:46+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:93
+msgid "Checking status"
+msgstr "Vérification de l'état"
+
+#. metadata.json->name
+msgid "Docker Control"
+msgstr "Contrôle Docker"
+
+#. metadata.json->description
+msgid "Activates/Deactivates Docker Container"
+msgstr "Active/désactive le conteneur Docker"
+
+#. settings-schema.json->image->description
+msgid "docker image"
+msgstr "image docker"
+
+#. settings-schema.json->container->description
+msgid "container name"
+msgstr "nom du conteneur"
+
+#. settings-schema.json->parameter->description
+msgid "parameter for the container"
+msgstr "paramètre pour le conteneur"
+
+#~ msgid "Container does not exist"
+#~ msgstr "Le conteneur n'existe pas"
+
+#~ msgid "Containername is in use"
+#~ msgstr "Containername est en cours d'utilisation"
+
+#~ msgid "Container is running"
+#~ msgstr "Le conteneur est en cours d'exécution"
+
+#~ msgid "Container is paused"
+#~ msgstr "Le conteneur est en pause"
+
+#~ msgid "Container has an error"
+#~ msgstr "Le conteneur a une erreur"
+
+#~ msgid "Container is not running"
+#~ msgstr "Le conteneur ne fonctionne pas"
+
+#~ msgid "Error, trying to set unknown status!"
+#~ msgstr "Erreur, tentative de définition d'un statut inconnu !"
+
+#~ msgid "Error, don't know what to do on unknown status!"
+#~ msgstr "Erreur, je ne sais pas quoi faire en cas d'état inconnu !"

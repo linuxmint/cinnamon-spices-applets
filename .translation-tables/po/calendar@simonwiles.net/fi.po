@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-26 22:50+0200\n"
+"PO-Revision-Date: 2024-06-27 13:24+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:35
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: applet.js:143
+msgid "%A %B %e, %Y"
+msgstr "%A %B %e, %Y"
+
+#: applet.js:333
+msgid "Edit World Clocks"
+msgstr "Muokkaa maailmankellot"
+
+#: applet.js:335
+msgid "Date and Time Settings"
+msgstr "Päivä ja aika asetukset"
+
+#: world_clock_calendar_settings.py:78
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#: world_clock_calendar_settings.py:90
+msgid "Timezone"
+msgstr "Aikavyöhyke"
+
+#: world_clock_calendar_settings.py:128
+msgid "Time format for World Clocks"
+msgstr "Maailmankellojen aikaformaatit"
+
+#: world_clock_calendar_settings.py:137
+msgid "Browse valid timezone values by country (online)"
+msgstr "Selaa aikavyöhykeiden arvoja maittain (verkossa)"
+
+#: world_clock_calendar_settings.py:216
+msgid "Coordinated Universal Time"
+msgstr "Koordinoitu maailmanaika"
+
+#. metadata.json->name
+msgid "World Clock Calendar"
+msgstr "World Clock Calendar"
+
+#. metadata.json->description
+msgid ""
+"Fork of the Cinnamon calendar applet with support for displaying multiple "
+"timezones"
+msgstr ""
+"Tehty Cinnamon kalenteri sovelmasta, joka tukee useiden aikavyöhykkeiden "
+"näyttämistä"
+
+#. settings-schema.json->show-week-numbers->description
+msgid "Show week numbers in calendar"
+msgstr "Näytä kalenterissa viikkonumerot"
+
+#. settings-schema.json->show-week-numbers->tooltip
+msgid "Check this to show week numbers in the calendar."
+msgstr "Näytä kalenterissa viikkonumerot valitsemalla tämä."
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr "Käytä mukautettua päiväystä"
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr "Mukauta kalenterinsovelman päiväystä ja aikaa valitsemalla tämä."
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr "Päiväyksen muoto:"
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr "Määritä sinun valinnat tähän."
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr "Tietoa päiväyksen ja ajan syntaksista"
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr "Napsauta tätä saadaksesi lisätietoa päiväysmuotojen syntaksista."
+
+#. settings-schema.json->keybindings->description
+msgid "Keybindings"
+msgstr "Pikanäppäimet"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Aseta pikanäppäin"
+
+#. settings-schema.json->header->description
+msgid "World-Clock Settings"
+msgstr "World-Clock asetukset"
+
+#. settings-schema.json->worldclock-setup-button->description
+msgid "Configure World-clocks"
+msgstr "Määritä maailmankellot"
+
+#. settings-schema.json->worldclock-setup-button->tooltip
+msgid "Add, remove and configure additional clocks and format."
+msgstr "Lisää, poista ja määritä muita kelloja ja muotoja."

@@ -1,0 +1,1052 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2022-05-31 17:33+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "Инициализира се"
+
+msgid "Find files..."
+msgstr "Намерете файлове..."
+
+msgid "Please wait..."
+msgstr "Моля Изчакай..."
+
+msgid "Applications"
+msgstr "Приложения"
+
+msgid "Documents"
+msgstr "Документи"
+
+msgid "Videos"
+msgstr "видеоклипове"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "Music"
+msgstr "Музика"
+
+msgid "No recent Items"
+msgstr "Няма скорошни артикули"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "Кликнете, за да копирате"
+
+msgid "Applications and files"
+msgstr "Приложения и файлове"
+
+msgid "Other search results"
+msgstr "Други резултати от търсенето"
+
+msgid "Browser bookmarks"
+msgstr "Отметки на браузъра"
+
+msgid "Browser history"
+msgstr "История на браузъра"
+
+msgid "Emoji"
+msgstr "Емоджи"
+
+msgid "Clear List"
+msgstr "Празен списък"
+
+msgid "Trash"
+msgstr "Кошче"
+
+msgid "Computer"
+msgstr "Компютър"
+
+msgid "Error while opening file:"
+msgstr "Грешка при отваряне на файл:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Твърде много записи - показва само първите 1000 записа"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Всички приложения"
+
+msgid "Favorites"
+msgstr "Любими"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "места"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Последни"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Любими приложения"
+
+msgid "light skin tone"
+msgstr "светъл тон на кожата"
+
+msgid "medium-light skin tone"
+msgstr "средно светъл тон на кожата"
+
+msgid "medium skin tone"
+msgstr "среден тон на кожата"
+
+msgid "medium-dark skin tone"
+msgstr "средно тъмен тон на кожата"
+
+msgid "dark skin tone"
+msgstr "тъмен тон на кожата"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "Нулиране на реда на категориите"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Нулиране на реда на категориите"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "Показване на скрити файлове"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Показване на скрити файлове"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Работете с NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Добавяне към панела"
+
+msgid "Add to desktop"
+msgstr "Добавяне към работния плот"
+
+msgid "Remove from favorites"
+msgstr "Премахване от любимите"
+
+msgid "Add to favorites"
+msgstr "Добави към любими"
+
+msgid "Uninstall"
+msgstr "Деинсталиране"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "Този файл вече не е наличен"
+
+msgid "Open with"
+msgstr "Отворен с"
+
+msgid "Other application..."
+msgstr "Друго приложение..."
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "Показване на категорията на любимите приложения"
+
+msgid "Open containing folder"
+msgstr "Отвори съдържащата папка"
+
+msgid "Move to trash"
+msgstr "Преместете в кошчето"
+
+msgid "Error while moving file to trash:"
+msgstr "Грешка при преместване на файла в кошчето:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "Откажи се"
+
+msgid "Shutdown the computer"
+msgstr "Изключете компютъра"
+
+msgid "Logout"
+msgstr "Излез от профила си"
+
+msgid "Leave the session"
+msgstr "Напуснете сесията"
+
+msgid "Lock screen"
+msgstr "Заключен екран"
+
+msgid "Lock the screen"
+msgstr "Заключване на екрана"
+
+msgid "Type to search..."
+msgstr "Въведете за търсене..."
+
+msgid "No description available"
+msgstr "Няма налично описание"
+
+msgid "Recent files"
+msgstr "Последни файлове"
+
+msgid "Bookmarks"
+msgstr "Отметки"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Необходим е пакет gir1.2-gda-5.0 за отметки на Firefox и Midori."
+
+msgid "No recent files"
+msgstr "Няма скорошни файлове"
+
+msgid "Account details"
+msgstr "Детайли за акаунта"
+
+msgid "Grid View"
+msgstr "Изглед на мрежа"
+
+msgid "List View"
+msgstr "Изглед на списък"
+
+msgid "Switch to grid view"
+msgstr "Превключете към изглед на мрежа"
+
+msgid "Switch to list view"
+msgstr "Превключете към изглед на списък"
+
+msgid "Home"
+msgstr "У дома"
+
+msgid "Browse network"
+msgstr "Преглед на мрежата"
+
+msgid "Open"
+msgstr "Отвори"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Търсене"
+
+msgid "Start in"
+msgstr "Започва в"
+
+msgid "Select a folder"
+msgstr "Изберете папка"
+
+msgid "Follow symlinks"
+msgstr "Следвайте символичните връзки"
+
+msgid "Search hidden"
+msgstr "Търсене е скрито"
+
+msgid "Use regular expressions"
+msgstr "Използвайте регулярни изрази"
+
+msgid "Stop"
+msgstr "Спри се"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Path"
+msgstr "пътека"
+
+msgid "Searching..."
+msgstr "Търси се..."
+
+msgid "Search Stopped"
+msgstr "Търсенето спря"
+
+msgid "Searching: "
+msgstr "Търся: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Грешка: недостатъчни разрешения за четене на папка "
+
+msgid "Search Completed"
+msgstr "Търсенето е завършено"
+
+msgid "Skipping"
+msgstr "Прескачане"
+
+msgid " - directory already searched"
+msgstr " - вече търсена директория"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Този елемент от менюто не е свързан с нито един пакет. Искате ли все пак да "
+"го премахнете от менюто?"
+
+msgid "The following packages will be removed:"
+msgstr "Следните пакети ще бъдат премахнати:"
+
+msgid "Packages to be removed"
+msgstr "Пакетите за премахване"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Не може да се премахне пакет %s, тъй като се изисква от други пакети."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Пакетът %s е зависимост от следните пакети:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Гъвкаво меню с опции за оформление на мрежа или списък, файлов браузър и "
+"търсене на емоджи."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Оформление"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Поведение"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Външен вид"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Съдържание"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Панел"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Меню"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Режим на преглед на приложения"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Списък"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Решетка"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Преглеждайте приложенията като списък или мрежа"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "Показване на любими в страничната лента"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "Показване на категорията на началната папка в менюто"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Местоположение на страничната лента"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Горна част"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "дъно"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Наляво"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "надясно"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Изберете къде да се показва страничната лента"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Показване на любими в страничната лента"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Нито един"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Apps and files"
+msgstr "Приложения и файлове"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Покажете любимите си икони на приложения и файлове в страничната лента"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Поставяне на описание на приложението"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Подсказки"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Под заглавия"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Изберете къде да се показват описания на приложения"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "Показване на икони на категории"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "Показване на икони на приложения"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Показване на отметки и места"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Показване на категория отметки и места в менюто"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Показване на скорошни елементи"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Показване на категорията на последните артикули в менюто"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Показване на категорията на любимите приложения"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Покажете любимата си категория приложения в менюто"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Показване на началната папка"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Показване на категорията на началната папка в менюто"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "Показване на категорията на любимите приложения"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "Показване на категорията на началната папка в менюто"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Отворете редактора на менюто"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Клавишна комбинация за отваряне и затваряне на менюто"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Отваряне на менюто при задържане"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Отворете менюто, когато преместя мишката върху иконата на панела"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "милисекунди"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Забавяне на курсора на мишката"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Използвайте анимации от менюто"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Анимирайте менюто при отваряне и затваряне"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Активирайте категории при щракване"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Активирайте категории при щракване вместо при задържане на курсора"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Отворете менюто за категория:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Винаги отваряйте менюто с избрана тази категория"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Последна използвана категория"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Активирайте автоматично превъртане"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+"Автоматично превъртане на списъка с приложения при задържане на мишката"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Показване на скритите файлове в изглед на папки"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Търсене на емоджи"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Показване на емоджита в резултатите от търсенето"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Опция за търсене в мрежата"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Показване на опция за търсене в интернет в резултатите от търсенето"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "Опция за търсене в мрежата"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Търсене в началната папка"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Когато търсите, потърсете и моята домашна папка за файлове"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Търсене в уеб историята"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Когато търсите, потърсете и в историята на браузъра ми (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Забележка: Историята на Firefox в момента не се поддържа."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Търсене на уеб отметки"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Когато търсите, потърсете и уеб отметките на моя браузър (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Забележка: За да търсите в отметките на Firefox, ще трябва да инсталирате "
+"пакет gir1.2-gda-5.0 (дистрибуции, базирани на Debian, включително Ubuntu & "
+"Linux Mint) или пакет libgda (архив базирани дистрибуции) и рестартирайте "
+"компютъра си."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Търсене в Уикипедия"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Покажете някои резултати от Wikipedia"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Език на Уикипедия"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Забележка: Някои опции за търсене все още могат да се използват, дори ако не "
+"сте ги активирали тук, като поставите префикс на думата си за търсене.\n"
+"Например: за да търсите емоджи, въведете „e heart“, за да намерите емоджи на "
+"сърце. По същия начин използвайте префикси 'f' за търсене на файлове, 'h' за "
+"уеб история и 'b' за търсене на уеб отметки.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Използвайте персонализирана икона"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Използвайте персонализирана икона в панела"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Икона на панел"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Използвайте персонализиран размер на икона"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Използвайте персонализиран размер за иконата на панела"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Размер на иконата на панела (пиксели)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Изберете персонализиран размер за иконата на панела"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Текст на панела"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Текст за показване до иконата на панела"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Размер на иконата на категория (пиксели)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Размер на иконата на списъка с приложения (пиксели)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Размер на иконата на мрежата на приложенията (пиксели)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Размер на иконата на страничната лента (пиксели)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Използвайте стила на кутията на страничната лента"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Използвайте стил на кутия за странична лента"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Използвайте стил на плочки"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Използвайте стил на плочки за бутоните на приложението (Забележка: може да "
+"не работи за някои теми)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"Информация/съвет: Плъзнете по края на менюто, за да промените размера на "
+"менюто.\n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"Информация/съвет: Плъзнете по края на менюто, за да промените размера на "
+"менюто.\n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Доставчици на търсене"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Няма намерени разширения на доставчика на търсене"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Настройки за последните файлове"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Активирайте автоматичното превъртане в списъка с приложения"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Показване на уеб отметки"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Покажете уеб отметките на вашия браузър в менюто.\n"
+"Забележка: Инсталирайте пакет gir1.2-gda-5.0, за да четете отметки на "
+"firefox."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Активирайте търсенето на отворени прозорци"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Активиране на доставчиците на търсене"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "Включете резултатите от доставчика на търсене в търсенията"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Примерни доставчици на търсене"
+
+#. 3.2
+msgid "columns"
+msgstr "колони"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Брой колони в мрежата на приложенията"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Показване на икони на приложения"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Показване на икони на категории"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Показване на описания на приложения под заглавия"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Показване на подсказки"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Забавяне на подсказката"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Използвайте персонализирана височина на менюто"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Персонализирана височина на менюто (пиксели)"
+
+#~ msgid "Home folder"
+#~ msgstr "Домашна папка"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Оформление и съдържание"
