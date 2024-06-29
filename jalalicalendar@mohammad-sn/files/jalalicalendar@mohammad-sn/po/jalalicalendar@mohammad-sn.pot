@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: jalalicalendar@mohammad-sn 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:90
+msgid "Date and Time Settings"
+msgstr ""
+
+#: applet.js:103
+msgid "%B %e, %Y"
+msgstr ""
+
+#: jalalicalendar.js:507
+msgid "calendar:MY"
+msgstr ""
+
+#. metadata.json->description
+msgid "The Cinnamon Jalali (Iranian) calendar applet"
+msgstr ""
+
+#. metadata.json->name
+msgid "Taghvim"
+msgstr ""
+
+#. settings-schema.json->use-custom-format->description
+msgid "Use a custom date format"
+msgstr ""
+
+#. settings-schema.json->use-custom-format->tooltip
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr ""
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr ""
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr ""
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""

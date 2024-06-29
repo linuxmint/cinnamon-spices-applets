@@ -1,0 +1,8 @@
+{
+    "uuid": "directory-menu@torchipeppo",
+    "name": "Directory Menu",
+    "description": "Quickly navigate through directories on your system using a dropdown menu.",
+    "version": "0.7.0",
+    "author": "torchipeppo",
+    "max-instances": "-1"
+}

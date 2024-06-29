@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16"
+   height="16"
+   id="svg2"
+   version="1.0"
+   style="display:inline"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient5606">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5608" />
+    </linearGradient>
+    <filter
+       id="filter7554"
+       color-interpolation-filters="sRGB">
+      <feBlend
+         mode="darken"
+         in2="BackgroundImage"
+         id="feBlend7556" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     style="display:inline"
+     id="layer1">
+    <path
+       style="display:inline;fill:#7f7f7f;fill-opacity:1;stroke:none;stroke-width:0.751959"
+       d="m 4.2875,2.55 c -0.411345,0 -0.7425,0.339646 -0.7425,0.7615385 -0.411345,0 -0.7425,0.3396462 -0.7425,0.7615384 h 0.7425 9.6525 c 0,-0.4218922 -0.331155,-0.7615384 -0.7425,-0.7615384 H 7.2575 C 7.2575,2.889646 6.926345,2.55 6.515,2.55 Z"
+       id="path3028" />
+    <path
+       style="display:inline;fill:#7f7f7f;fill-opacity:1;stroke:none;stroke-width:0.751959"
+       d="M 3.17375,4.8346153 C 2.5567325,4.8346153 2.06,5.3063462 2.06,5.8923078 V 11.392308 C 2.06,11.97827 2.5567325,12.45 3.17375,12.45 h 9.6525 c 0.617019,0 1.11375,-0.47173 1.11375,-1.057692 V 5.8923078 c 0,-0.5859616 -0.496731,-1.0576925 -1.11375,-1.0576925 z"
+       id="path3040" />
+    <g
+       id="layer9"
+       style="display:inline"
+       transform="translate(-840.0002,470.00693)" />
+    <g
+       id="layer10"
+       style="display:inline;filter:url(#filter7554)"
+       transform="translate(-840.0002,470.00693)" />
+    <g
+       id="layer14"
+       style="display:inline"
+       transform="translate(-840.0002,470.00693)" />
+    <g
+       id="layer15"
+       style="display:inline"
+       transform="translate(-840.0002,470.00693)" />
+    <g
+       id="g71291"
+       style="display:inline"
+       transform="translate(-840.0002,470.00693)" />
+    <g
+       id="layer2"
+       style="display:inline"
+       transform="translate(-599,3.006937)" />
+    <g
+       id="g6058"
+       style="display:inline"
+       transform="translate(-599,3.006937)" />
+    <g
+       id="layer12"
+       style="display:inline"
+       transform="translate(-840.0002,470.00693)" />
+  </g>
+</svg>

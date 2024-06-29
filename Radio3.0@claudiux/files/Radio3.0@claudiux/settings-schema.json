@@ -198,8 +198,7 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup",
-        "dont-check-dependencies"
+        "volume-at-startup"
       ]
     },
     "sectionBehaviorVolumeStep": {
@@ -207,7 +206,9 @@
       "title": "Volume step",
       "keys": [
         "volume-step",
-        "volume-show-osd"
+        "volume-magnetic-on",
+        "volume-show-osd",
+        "volume-show-osd-starting-radio"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -274,12 +275,13 @@
     },
     "sectionBehaviorSymbolicIconColor": {
       "type": "section",
-      "title": "Symbolic Icon Color",
+      "title": "Icon",
       "keys": [
         "color-on",
         "color-off",
         "color-recording",
-        "show-favicon"
+        "show-favicon",
+        "show-volume-level-near-icon"
       ]
     },
     "sectionNetworkQuality": {
@@ -308,7 +310,25 @@
       "type": "section",
       "title": "Database Info",
       "keys": [
+        "database-favorite",
         "database-url"
+      ]
+    },
+    "sectionExperimental": {
+      "type": "section",
+      "title": "EXPERIMENTAL",
+      "keys": []
+    },
+    "sectionRecordingCache": {
+      "type": "section",
+      "title": "Cache",
+      "keys": [
+        "cache-no-cache",
+        "cache-mins",
+        "cache-on-disk",
+        "cache-dir",
+        "cache-dir-open",
+        "cache-stream-size"
       ]
     },
     "sectionRecordingRecordings": {
@@ -316,6 +336,7 @@
       "title": "Recordings",
       "keys": [
         "recording-path",
+        "button-open-rec-folder",
         "button-rec-path-to-default",
         "recording-format",
         "recording-ends-auto"
@@ -363,7 +384,8 @@
         "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
-        "recordings-extract-update"
+        "recordings-extract-update",
+        "recordings-open-folder"
       ]
     },
     "sectionRecordingScheduleARecording": {
@@ -432,6 +454,7 @@
         "id": "name",
         "title": "Station or Category",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -452,31 +475,43 @@
         "id": "url",
         "title": "Streaming URL (empty for a category)",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "uuid",
         "title": "Unique identifier",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "homepage",
         "title": "Home page",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "tags",
         "title": "Tags",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "favicon",
         "title": "Favicon",
         "type": "string",
+        "expand-width": true,
         "default": ""
+      },
+      {
+        "id": "author_title_swap",
+        "title": "Artist/Title swap",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
       }
     ],
     "default": [
@@ -604,7 +639,8 @@
       {
         "id": "name",
         "title": "Title",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "bitrate",
@@ -623,7 +659,8 @@
       {
         "id": "url",
         "title": "Streaming URL",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       }
     ],
     "default": [
@@ -683,6 +720,7 @@
         "id": "name",
         "title": "Station",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -708,32 +746,38 @@
       {
         "id": "tags",
         "title": "Tags",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "url",
         "title": "Streaming URL",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "country",
         "title": "Country",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "uuid",
         "title": "Unique identifier",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "homepage",
         "title": "Home page",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "favicon",
         "title": "Favicon",
         "type": "string",
+        "expand-width": true,
         "default": ""
       }
     ],
@@ -809,7 +853,7 @@
     "tooltip": "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\nDefault is (Undefined): The volume level remains unchanged.\n\nPlease note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
   },
   "dont-check-dependencies": {
-    "type": "switch",
+    "type": "generic",
     "description": "Do not check about dependencies",
     "default": false
   },
@@ -827,11 +871,22 @@
     },
     "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
   },
+  "volume-magnetic-on": {
+    "type": "switch",
+    "default": false,
+    "description": "Magnetize all multiples of 25%"
+  },
   "volume-show-osd": {
     "type": "switch",
     "default": true,
     "description": "Show OSD while changing volume",
     "tooltip": "Should OSD (On-Screen Display) be displayed when changing volume?"
+  },
+  "volume-show-osd-starting-radio": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": true,
+    "description": "Show volume OSD when changing radio station"
   },
   "show-title-and-version": {
     "type": "switch",
@@ -868,8 +923,10 @@
     "callback": "empty_recents"
   },
   "show-by-category": {
-    "type": "generic",
-    "default": false
+    "type": "switch",
+    "default": false,
+    "description": "Display the Station list beside the Category list",
+    "tooltip": "Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\nUnchecked: Single list containing each category followed by its stations."
   },
   "show-system-items": {
     "type": "switch",
@@ -1009,17 +1066,87 @@
     "callback": "set_MPV_ALIAS",
     "description": "Apply HTTP Proxy"
   },
+  "database-favorite": {
+    "type": "combobox",
+    "default": "random",
+    "description": "Your favorite database:",
+    "options": {
+      "Random": "random"
+    }
+  },
   "database-url": {
     "type": "textview",
+    "dependency": "database-favorite=random",
     "description": "Database URL",
     "default": "",
     "height": 25
+  },
+  "cache-no-cache": {
+    "type": "switch",
+    "default": false,
+    "description": "No cache",
+    "tooltip": "Checking this option limits memory usage, but no longer allows the user to rewind the cache (using the sound150@claudiux applet)."
+  },
+  "cache-mins": {
+    "type": "scale",
+    "default": 0.0,
+    "dependency": "!cache-no-cache",
+    "description": "Minutes to cache\n0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes.",
+    "min": 0.0,
+    "max": 1440.0,
+    "step": 5.0,
+    "show-value": true
+  },
+  "cache-on-disk": {
+    "type": "switch",
+    "dependency": "!cache-no-cache",
+    "default": false,
+    "description": "Cache on disk\n(Write packet data to a temporary file, instead of keeping them in memory.)"
+  },
+  "cache-dir": {
+    "type": "filechooser",
+    "select-dir": true,
+    "dependency": "cache-on-disk",
+    "default": "file:///tmp",
+    "description": "Directory used for data caching\n(Use with caution on SSD disks. Prefer a directory stored in RAM, with sufficient free space.)"
+  },
+  "cache-dir-open": {
+    "type": "button",
+    "dependency": "cache-on-disk",
+    "description": "Open cache directory",
+    "callback": "_on_open_cache_dir"
+  },
+  "cache-stream-size": {
+    "type": "combobox",
+    "default": "1MiB",
+    "dependency": "!cache-no-cache",
+    "description": "Stream cache size",
+    "tooltip": "The amount of stream cache. Default: 1 MiB.\nBeware, setting this to a large value can reduce performance.",
+    "options": {
+      "No limit": "0",
+      "64 KiB": "64KiB",
+      "128 KiB": "128KiB",
+      "256 KiB": "256KiB",
+      "512 KiB": "512KiB",
+      "1 MiB": "1MiB",
+      "2 Mib": "2MiB",
+      "3 MiB": "3MiB",
+      "4 MiB": "4MiB",
+      "5 MiB": "5MiB",
+      "10 MiB": "10MiB",
+      "20 MiB": "20MiB"
+    }
   },
   "recording-path": {
     "type": "filechooser",
     "description": "Path to the folder that will contain your future recordings",
     "select-dir": true,
     "default": ""
+  },
+  "button-open-rec-folder": {
+    "type": "button",
+    "description": "Open the recordings folder",
+    "callback": "open_rec_folder"
   },
   "button-rec-path-to-default": {
     "type": "button",
@@ -1036,7 +1163,8 @@
       "OGG": "ogg",
       "RAW": "raw",
       "WAV": "wav"
-    }
+    },
+    "tooltip": "Please note that this choice will have no effect on any current recording, but on subsequent ones."
   },
   "recording-ends-auto": {
     "type": "combobox",
@@ -1175,6 +1303,11 @@
     "description": "%",
     "dependency": "show-recordings-extract-update"
   },
+  "recordings-open-folder": {
+    "type": "button",
+    "description": "Open the recordings folder",
+    "callback": "on_button_YT_open_dir"
+  },
   "show-recordings-extract-update": {
     "type": "generic",
     "default": false
@@ -1261,12 +1394,14 @@
       {
         "id": "station",
         "title": "Station",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "uuid",
         "title": "Identifier",
         "type": "string",
+        "expand-width": true,
         "default": ""
       }
     ],
@@ -1663,6 +1798,10 @@
     "type": "generic",
     "default": ""
   },
+  "last-category": {
+    "type": "generic",
+    "default": ""
+  },
   "storedRadios": {
     "type": "generic",
     "default": [
@@ -1695,6 +1834,15 @@
   },
   "scheduling-allowed": {
     "type": "generic",
+    "default": true
+  },
+  "score": {
+    "type": "generic",
+    "default": 0
+  },
+  "show-volume-level-near-icon": {
+    "type": "switch",
+    "description": "Display volume level near icon",
     "default": true
   }
 }

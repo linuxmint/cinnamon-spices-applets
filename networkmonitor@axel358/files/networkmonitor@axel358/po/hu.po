@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-05 13:20-0400\n"
+"PO-Revision-Date: 2023-12-14 08:35+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:32
+msgid "Open System Monitor"
+msgstr "Rendszer Figyelő megnyitása"
+
+#. metadata.json->name
+msgid "Network Monitor"
+msgstr "Hálózatfigyelő"
+
+#. metadata.json->description
+msgid "Monitor network traffic"
+msgstr "Hálózathasználat figyelő"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->display-style->description
+msgid "Speed display style"
+msgstr "Sebesség megjelenítési stílus"
+
+#. settings-schema.json->display-style->options
+msgid "Combined"
+msgstr "Kombinált"
+
+#. settings-schema.json->display-style->options
+msgid "Column"
+msgstr "Oszlop"
+
+#. settings-schema.json->display-style->options
+msgid "Side by side"
+msgstr "Egymás mellett"
+
+#. settings-schema.json->display-style->options
+msgid "Download only"
+msgstr "Csak letöltés"
+
+#. settings-schema.json->display-style->options
+msgid "Upload only"
+msgstr "Csak feltöltés"
+
+#. settings-schema.json->display-style->tooltip
+msgid "Whether to show download and upload speeds separately or combined"
+msgstr ""
+"A letöltési és feltöltési sebességek külön-külön vagy kombinálva jelennek-"
+"e meg"
+
+#. settings-schema.json->refresh-interval->units
+msgid "milliseconds"
+msgstr "ezredmásodperc"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "Frissítési gyakoriság"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "Time between data refeshes"
+msgstr "Az adatfrissítések közötti idő"
+
+#. settings-schema.json->decimal-places->description
+msgid "Decimal places"
+msgstr "Tizedes jel"
+
+#. settings-schema.json->decimal-places->tooltip
+msgid "Number of decimal places to show"
+msgstr "A megjelenítendő tizedesjegyek száma"
+
+#. settings-schema.json->hide-umbral->units
+msgid "bytes per second"
+msgstr "bájt másodpercenként"
+
+#. settings-schema.json->hide-umbral->description
+msgid "Hide speed if network traffic is less than"
+msgstr "Sebesség elrejtése, ha a hálózati forgalom kisebb, mint"
+
+#. settings-schema.json->hide-umbral->tooltip
+msgid ""
+"Use a compact display style if network traffic is less than the specified "
+"amount"
+msgstr ""
+"Használjon kompakt megjelenítési stílust, ha a hálózati forgalom kisebb, "
+"mint a megadott mennyiség"

@@ -1,11 +1,13 @@
-import { ErrorResponse, HttpError } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation } from "../../types";
-import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
+import type { ErrorResponse} from "../../lib/httpLib";
+import { HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/services/logger";
+import type { WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, ImmediatePrecipitation, AlertData, AlertLevel } from "../../weather-data";
+import { _, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
-import { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
+import { PirateWeatherSummaryToTranslated, type PirateWeatherIcon, type PirateWeatherPayload, type PirateWeatherQueryUnits } from "./types/common";
+import { ALERT_LEVEL_ORDER } from "../../consts";
+import type { LocationData, SunTime } from "../../types";
 
 export class PirateWeather extends BaseProvider {
 
@@ -30,25 +32,19 @@ export class PirateWeather extends BaseProvider {
 	};
 
 	private query = "https://api.pirateweather.net/forecast/";
-	private unit: PirateWeatherQueryUnits = "si";
-
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
 
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const unit = this.GetQueryUnit();
 
-		const response = await this.app.LoadJsonAsyncWithDetails<PirateWeatherPayload>(
-			`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
-			{
-				units: this.GetQueryUnit()
-			},
-			this.HandleError
-		);
+		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
+			url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+			cancellable,
+			params: { units: this.GetQueryUnit()},
+			HandleError: this.HandleError
+		});
 
 		if (!response.Success)
 			return null;
@@ -83,8 +79,8 @@ export class PirateWeather extends BaseProvider {
 				humidity: json.currently.humidity * 100,
 				dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
 				condition: {
-					main: json.currently.summary,
-					description: json.currently.summary,
+					main: PirateWeatherSummaryToTranslated(json.currently.summary),
+					description: PirateWeatherSummaryToTranslated(json.currently.summary),
 					icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
 					customIcon: this.ResolveCustomIcon(json.currently.icon)
 				},
@@ -104,8 +100,8 @@ export class PirateWeather extends BaseProvider {
 					temp_min: this.ToKelvin(day.temperatureLow, unit),
 					temp_max: this.ToKelvin(day.temperatureHigh, unit),
 					condition: {
-						main: day.summary,
-						description: day.summary,
+						main: PirateWeatherSummaryToTranslated(day.summary),
+						description: PirateWeatherSummaryToTranslated(day.summary),
 						icons: this.ResolveIcon(day.icon),
 						customIcon: this.ResolveCustomIcon(day.icon)
 					},
@@ -124,8 +120,8 @@ export class PirateWeather extends BaseProvider {
 					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature, unit),
 					condition: {
-						main: hour.summary,
-						description: hour.summary,
+						main: PirateWeatherSummaryToTranslated(hour.summary),
+						description: PirateWeatherSummaryToTranslated(hour.summary),
 						icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
 						customIcon: this.ResolveCustomIcon(hour.icon)
 					},
@@ -160,15 +156,44 @@ export class PirateWeather extends BaseProvider {
 				result.immediatePrecipitation = immediate;
 			}
 
+			if (json.alerts != null) {
+				const alerts: AlertData[] = [];
+				for (const alert of json.alerts) {
+					alerts.push({
+						title: alert.title,
+						description: alert.description,
+						level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
+						sender_name: alert.uri,
+					});
+				};
+
+				result.alerts = alerts.sort((a, b) => ALERT_LEVEL_ORDER.indexOf(a.level) - ALERT_LEVEL_ORDER.indexOf(b.level));
+			}
+
 			return result;
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Pirate Weather payload parsing error: " + e, e)
+				Logger.Error("Pirate Weather payload parsing error: " + e.message, e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}
 	};
+
+	private PirateWeatherAlertSeverityToAlertLevel(severity: 'Extreme' | 'Severe' | 'Moderate' | 'Minor' | "Unknown"): AlertLevel {
+		switch (severity) {
+			case "Extreme":
+				return "extreme";
+			case "Severe":
+				return "severe";
+			case "Moderate":
+				return "moderate";
+			case "Minor":
+				return "minor";
+			default:
+				return "unknown";
+		}
+	}
 
 	/**
 	 *
@@ -192,7 +217,7 @@ export class PirateWeather extends BaseProvider {
 				userError: true,
 				detail: "no key",
 				service: "pirate_weather",
-				message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+				message: _("Please Make sure you\nentered the API key that you have from Pirate Weather")
 			});
 			return false;
 		}
@@ -259,7 +284,7 @@ export class PirateWeather extends BaseProvider {
 				return 'si';
 			}
 			else {
-				return 'uk2';
+				return 'uk';
 			}
 		}
 		else {

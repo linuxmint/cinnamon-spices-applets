@@ -9,8 +9,8 @@ const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
-const AppletManager = imports.ui.appletManager; //
-//const {SessionManager} = imports.misc.gnomeSession;
+const GnomeSession = imports.misc.gnomeSession;
+const AppletManager = imports.ui.appletManager;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupIconMenuItem} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
@@ -22,7 +22,7 @@ const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
 const {_, graphemeBaseChars, searchStr} = require('./utils');
 const {Display} = require('./display');
-const {BookmarksManager} = require('./browserBookmarks');
+const {getWebBookmarksAsync} = require('./browserBookmarks');
 const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const {searchBrowserHistory} = require('./browserHistory');
 const {EMOJI, EMOJI_CATEGORIES} = require('./emoji');
@@ -130,6 +130,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.apps = new Apps(this.appSystem);
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
+        this.sessionManager = new GnomeSession.SessionManager();
 
         const updateKeybinding = () => {
             Main.keybindingManager.addHotKey(
@@ -176,7 +177,7 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         this.settings = {};
-        this.settingsObj = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
+        this.appletSettings = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
         [
         { key: 'categories',                value: 'categories',            cb: null },
         { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
@@ -230,7 +231,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'sidebar-icon-size',         value: 'sidebarIconSize',       cb: refreshDisplay },
         { key: 'use-box-style',             value: 'useBoxStyle',           cb: refreshDisplay },
         { key: 'use-tile-style',            value: 'useTileStyle',          cb: refreshDisplay }
-        ].forEach(setting => this.settingsObj.bind(
+        ].forEach(setting => this.appletSettings.bind(
                           setting.key,
                           setting.value,
                           setting.cb ? (...args) => setting.cb.call(this, ...args) : null ) );
@@ -239,7 +240,7 @@ class CinnamenuApplet extends TextIconApplet {
             //This is a hidden config option.
             this.settings.searchStartFolder = GLib.get_home_dir();
         }
-        this.bookmarksManager = new BookmarksManager();
+        getWebBookmarksAsync();
         this.recentApps = new RecentApps(this);
         this._onEnableRecentsChange();
         updateActivateOnHover();
@@ -266,10 +267,10 @@ class CinnamenuApplet extends TextIconApplet {
     on_applet_removed_from_panel() {
         this.willUnmount = true;
         Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
-        if (!this.settingsObj) {
+        if (!this.appletSettings) {
             return;
         }
-        this.settingsObj.finalize();
+        this.appletSettings.finalize();
         this.signals.disconnectAllSignals();
         this.display.destroy();
         this.menu.destroy();
@@ -407,7 +408,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     addFolderCategory(path) {
-        this.settings.folderCategories.push(path);
+        const folderCategories = this.settings.folderCategories.slice();
+        folderCategories.push(path);
+        this.settings.folderCategories = folderCategories;
     }
 
     removeFolderCategory(path) {
@@ -1011,7 +1014,8 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase();
+        const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase().trim();
+        
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern_raw === this.previousSearchPattern) {
@@ -1019,18 +1023,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.previousSearchPattern = pattern_raw;
 
-        //======Begin search===========
-
-        let primaryResults = this.apps.searchApplications(pattern)
-                        .concat(this.searchFavoriteFiles(pattern))
-                        .concat(this.recentsEnabled ? this.searchRecent(pattern) : [])
-                        .concat(this.settings.showPlaces ? this.searchPlaces(pattern) : []);
-        let otherResults = [];
-        const emojiResults = [];
-        const webBookmarksResults = [];
-        let webHistoryResults = [];
-
-        //-----
         let BOOKMARKS_PREFIX = false;
         let HISTORY_PREFIX = false;
         let EMOJI_PREFIX = false;
@@ -1049,125 +1041,24 @@ class CinnamenuApplet extends TextIconApplet {
                 FILE_PREFIX = true;
             }
         }
+        const PREFIX_USED = BOOKMARKS_PREFIX || HISTORY_PREFIX || EMOJI_PREFIX || FILE_PREFIX;
 
-        //=======search providers==========
-        //---calculator---
-        let calculatorResult = null;
-        const replacefn = (match) => {//Replace eg. "sqrt" with "Math.sqrt"
-            if (['E','LN10','LN2','LOG10E','LOG2E','PI','SQRT1_2','SQRT2','PI','abs',
-                'acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','clz32','cos',
-                'cosh','exp','expm1','floor','fround','hypot','imul','log','log10','log1p',
-                'log2','max','min','pow','random','round','sign','sin','sinh','sqrt',
-                'tan','tanh','trunc'].includes(match)) {
-                return 'Math.' + match;
-            } else {
-                return match;
-            }
-        };
-        let ans = null;
-        const exp = pattern_raw.replace(/([a-zA-Z0-9_]+)/g, replacefn);
+        //======Begin search===========
+        let primaryResults = [];
+        if (!PREFIX_USED) {
+            primaryResults = this.apps.searchApplications(pattern)
+                        .concat(this.searchFavoriteFiles(pattern))
+                        .concat(this.recentsEnabled ? this.searchRecent(pattern) : [])
+                        .concat(this.settings.showPlaces ? this.searchPlaces(pattern) : []);
+        }
         
-        try {
-            ans = eval(exp);
-        } catch(e) {
-            const r = /[\(\)\+=/\*\.;,]/
-            const probablyMath = r.test(exp);
-            if (probablyMath) {
-                calculatorResult = e.message;
-            }
-        }
+        let otherResults = [];
+        const emojiResults = [];
+        const webBookmarksResults = [];
+        let webHistoryResults = [];
 
-        if ((typeof ans === 'number' || typeof ans === 'boolean' || typeof ans === 'bigint')
-                                                                    && ans != pattern_raw ) {
-            if (!this.calcGIcon) {
-                this.calcGIcon = new Gio.FileIcon(
-                        { file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png')});
-            }
-            otherResults.push({
-                            isSearchResult: true,
-                            name: ans.toString(),//('Solution:') + ' ' + ans,
-                            description: _('Click to copy'),
-                            deleteAfterUse: true,
-                            icon: new St.Icon({ gicon: this.calcGIcon,
-                                                icon_size: this.getAppIconSize() }),
-                            activate: () => {
-                                    const clipboard = St.Clipboard.get_default();
-                                    clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
-                         });
-            calculatorResult = pattern_raw + " = " + ans;
-        }
-
-        //---web search option and search suggestions---
-        if (this.settings.webSearchOption != 0) {//0==none
-            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
-                            'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
-                            'startpage.png', 'brave.png', 'qwant.png'][this.settings.webSearchOption - 1];
-            const url = [   'https://google.com/search?q=',
-                            'https://www.bing.com/search?q=',
-                            'https://www.baidu.com/s?wd=',
-                            'https://search.yahoo.com/search?p=',
-                            'https://yandex.com/search/?text=',
-                            'https://duckduckgo.com/?q=',
-                            'https://www.ask.com/web?q=',
-                            'https://www.ecosia.org/search?q=',
-                            'https://search.aol.co.uk/aol/search?q=',
-                            'https://www.startpage.com/search/?q=',
-                            'https://search.brave.com/search?q=',
-                            'https://www.qwant.com/?q='][this.settings.webSearchOption - 1];
-            const gicon = new Gio.FileIcon(
-                                {file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
-
-            otherResults.push({
-                        isSearchResult: true,
-                        name: pattern_raw,
-                        description: '',
-                        deleteAfterUse: true,
-                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
-                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
-            if (this.settings.webSuggestionsOption) {
-                searchSuggestions(pattern_raw, (results) => {
-                    if (results.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
-                        results.forEach( suggestion => {
-                            otherResults.push({
-                                isSearchResult: true,
-                                name: suggestion,
-                                description: '',
-                                deleteAfterUse: true,
-                                icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
-                                activate: () =>
-                                        Util.spawn(['xdg-open', url + encodeURIComponent(suggestion)])
-                            });
-                        });
-                        showResults();
-                    }
-                });
-            }
-        }
-
-        //---web bookmarks search-----
-        if (this.settings.enableWebBookmarksSearch && pattern.length > 1 ||
-                                                BOOKMARKS_PREFIX && pattern.length > 3) {
-            let bpattern = pattern;
-            if (BOOKMARKS_PREFIX) {
-                bpattern = pattern.substring(2);
-            }
-            const bookmarks = this.bookmarksManager.bookmarks;
-
-            bookmarks.forEach(bookmark => {
-                        if (bookmark.name) {
-                            const match = searchStr(bpattern, bookmark.name);
-                            if (match.score > SEARCH_THRESHOLD) {
-                                bookmark.score = match.score;
-                                bookmark.nameWithSearchMarkup = match.result;
-                                webBookmarksResults.push(bookmark);
-                            }
-                        } });
-
-            webBookmarksResults.sort((a, b) =>  a.score < b.score);
-            webBookmarksResults.length = Math.min(webBookmarksResults.length, this.getNumberOfItemsToFitColumns(10));
-        }
-
-        //---------------------------
+        //-----
+        
         const showResults = () => {//sort and display all search results
             if (!this.searchActive || thisSearchId != this.currentSearchId){
                 return; //Search mode has ended or search string has changed
@@ -1221,9 +1112,145 @@ class CinnamenuApplet extends TextIconApplet {
             Meta.later_add(Meta.LaterType.IDLE, () => this.display.appsView.focusFirstItem());
         };
 
+        //=======search providers==========
+        //---calculator---
+        let calculatorResult = null;
+        const replacefn = (match) => {//Replace eg. "sqrt" with "Math.sqrt"
+            if (['E','LN10','LN2','LOG10E','LOG2E','PI','SQRT1_2','SQRT2','PI','abs',
+                'acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','clz32','cos',
+                'cosh','exp','expm1','floor','fround','hypot','imul','log','log10','log1p',
+                'log2','max','min','pow','random','round','sign','sin','sinh','sqrt',
+                'tan','tanh','trunc'].includes(match)) {
+                return 'Math.' + match;
+            } else {
+                return match;
+            }
+        };
+        let ans = null;
+        const exp = pattern_raw.replace(/([a-zA-Z0-9_]+)/g, replacefn);
+        
+        try {
+            ans = eval(exp);
+        } catch(e) {
+            const r = /[\(\)\+=/\*\.;,]/
+            const probablyMath = r.test(exp);
+            if (probablyMath) {
+                calculatorResult = e.message;
+            }
+        }
+
+        if ((typeof ans === 'number' || typeof ans === 'boolean' || typeof ans === 'bigint')
+                                                                    && ans != pattern_raw ) {
+            
+            let ans_str = ans.toString();
+            //remove rounding error
+            if (typeof ans === 'number') {
+                if (ans > Number.MAX_SAFE_INTEGER || ans < Number.MIN_SAFE_INTEGER) {
+                    // JS will show up to 21 digits of an integer (inaccurately) even though
+                    // only 16 are significant, so show in exponential form instead.
+                    ans_str = Number(ans.toPrecision(16)).toExponential();
+                } else {
+                    ans_str = Number(ans.toPrecision(16)).toString();
+                }
+            }
+            
+            if (!this.calcGIcon) {
+                this.calcGIcon = new Gio.FileIcon(
+                        { file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png')});
+            }
+            otherResults.push({
+                            isSearchResult: true,
+                            name: ans_str,//('Solution:') + ' ' + ans,
+                            description: _('Click to copy'),
+                            deleteAfterUse: true,
+                            icon: new St.Icon({ gicon: this.calcGIcon,
+                                                icon_size: this.getAppIconSize() }),
+                            activate: () => {
+                                    const clipboard = St.Clipboard.get_default();
+                                    clipboard.set_text(St.ClipboardType.CLIPBOARD, ans_str);}
+                         });
+            calculatorResult = pattern_raw + " = " + ans_str;
+        }
+
+        //---web search option and search suggestions---
+        if (this.settings.webSearchOption != 0 && !PREFIX_USED) {//0==none
+            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
+                            'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
+                            'startpage.png', 'brave.png', 'qwant.png'][this.settings.webSearchOption - 1];
+            const url = [   'https://google.com/search?q=',
+                            'https://www.bing.com/search?q=',
+                            'https://www.baidu.com/s?wd=',
+                            'https://search.yahoo.com/search?p=',
+                            'https://yandex.com/search/?text=',
+                            'https://duckduckgo.com/?q=',
+                            'https://www.ask.com/web?q=',
+                            'https://www.ecosia.org/search?q=',
+                            'https://search.aol.co.uk/aol/search?q=',
+                            'https://www.startpage.com/sp/search?query=',
+                            'https://search.brave.com/search?q=',
+                            'https://www.qwant.com/?q='][this.settings.webSearchOption - 1];
+            const gicon = new Gio.FileIcon(
+                                {file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
+
+            otherResults.push({
+                        isSearchResult: true,
+                        name: pattern_raw,
+                        description: '',
+                        deleteAfterUse: true,
+                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
+            if (this.settings.webSuggestionsOption) {
+                searchSuggestions(pattern_raw, (results) => {
+                    if (results.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
+                        results.forEach( suggestion => {
+                            otherResults.push({
+                                isSearchResult: true,
+                                name: suggestion,
+                                description: '',
+                                deleteAfterUse: true,
+                                icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                                activate: () =>
+                                        Util.spawn(['xdg-open', url + encodeURIComponent(suggestion)])
+                            });
+                        });
+                        showResults();
+                    }
+                });
+            }
+        }
+
+        //---web bookmarks search-----
+        if (this.settings.enableWebBookmarksSearch && pattern.length > 1 && !PREFIX_USED ||
+                                                BOOKMARKS_PREFIX && pattern.length >= 3) {
+            let bpattern = pattern;
+            if (BOOKMARKS_PREFIX) {
+                bpattern = pattern.substring(2);
+            }
+
+            getWebBookmarksAsync().then( bookmarks => {
+                if (!this.searchActive || thisSearchId !== this.currentSearchId) {
+                    return;
+                }
+                bookmarks.forEach(bookmark => {
+                    if (bookmark.name) {
+                        const match = searchStr(bpattern, bookmark.name);
+                        if (match.score > SEARCH_THRESHOLD) {
+                            bookmark.score = match.score;
+                            bookmark.nameWithSearchMarkup = match.result;
+                            webBookmarksResults.push(bookmark);
+                        }
+                    }
+                });
+                webBookmarksResults.sort((a, b) =>  a.score < b.score);
+                webBookmarksResults.length = Math.min(webBookmarksResults.length,
+                                                this.getNumberOfItemsToFitColumns(10));
+                showResults();
+            });
+        }
+        
         //---web history search---
-        if (this.settings.enableWebHistorySearch && pattern.length > 1 ||
-                                                        HISTORY_PREFIX && pattern.length > 3) {
+        if (this.settings.enableWebHistorySearch && pattern.length > 1 && !PREFIX_USED ||
+                                                        HISTORY_PREFIX && pattern.length >= 3) {
             let hpattern = pattern;
             if (HISTORY_PREFIX) {
                 hpattern = pattern.substring(2);
@@ -1244,7 +1271,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //---Wikipedia search----
-        if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
+        if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 && !PREFIX_USED) {
             wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
                 if (this.searchActive && thisSearchId === this.currentSearchId && wikiResults.length > 0) {
                     otherResults = otherResults.concat(wikiResults);
@@ -1253,7 +1280,8 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //---emoji search------
-        if (pattern.length > 2 && this.settings.enableEmojiSearch || EMOJI_PREFIX && pattern.length > 4) {
+        if (pattern.length > 2 && this.settings.enableEmojiSearch && !PREFIX_USED ||
+                                                    EMOJI_PREFIX && pattern.length >= 4) {
             let epattern = pattern;
             if (EMOJI_PREFIX) {
                 epattern = pattern.substring(2);
@@ -1288,8 +1316,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         //----home folder search--------
         Meta.later_add(Meta.LaterType.IDLE, () => {
-            if (!(pattern.length > 1 && this.settings.searchHomeFolder ||
-                                                FILE_PREFIX && pattern.length > 3)) {
+            if (!(pattern.length > 1 && this.settings.searchHomeFolder && !PREFIX_USED ||
+                                                FILE_PREFIX && pattern.length >= 3)) {
                 return;
             }
             if (!this.searchActive || thisSearchId !== this.currentSearchId) {

@@ -1,6 +1,5 @@
 //ScreenShot+Record Applet By Infektedpc
 const Applet = imports.ui.applet;
-const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
@@ -26,17 +25,17 @@ MyApplet.prototype = {
     defineScreenShotDefault: function () {
         //Advanced Screenshot - opens gnome-screenshot
         this.menu.addAction(_("ScreenShot"), function(event) {
-            Main.Util.spawnCommandLine("gnome-screenshot --interactive");
+            Util.spawnCommandLine("gnome-screenshot --interactive");
         });         
 
         //Current Window
         this.menu.addAction(_("Current Window"), function(event) {
-            Main.Util.spawnCommandLine("gnome-screenshot -w --delay=1");
+            Util.spawnCommandLine("gnome-screenshot -w --delay=1");
         }); 
 
         //Selected Area
         this.menu.addAction(_("Selected Area"), function(event) {
-            Main.Util.spawnCommandLine("gnome-screenshot -a");
+            Util.spawnCommandLine("gnome-screenshot -a");
         });
     },
     defineScreenShotMenuItem: function () {
@@ -44,15 +43,15 @@ MyApplet.prototype = {
 		this.screenshotItem = new PopupMenu.PopupSubMenuMenuItem(_("Whole Screen")); 
 		//1 Sec Delay
 		this.screenshotItem.menu.addAction(_("1 Second Delay"), function(actor, event) {
-		    Main.Util.spawnCommandLine("gnome-screenshot --delay=1");
+		    Util.spawnCommandLine("gnome-screenshot --delay=1");
 		});
 		//3 Sec Delay
 		this.screenshotItem.menu.addAction(_("3 Second Delay"), function(actor, event) {
-		    Main.Util.spawnCommandLine("gnome-screenshot --delay=3");
+		    Util.spawnCommandLine("gnome-screenshot --delay=3");
 		}); 
 		//5 Sec Delay
 		this.screenshotItem.menu.addAction(_("5 Second Delay"), function(actor, event) {
-	          Main.Util.spawnCommandLine("gnome-screenshot --delay=5");
+	          Util.spawnCommandLine("gnome-screenshot --delay=5");
         });
         
         this.menu.addMenuItem(this.screenshotItem); 
@@ -64,37 +63,37 @@ MyApplet.prototype = {
         //Start Recording With Audio
         this.recordItem.menu.addAction(_("Record Desktop With Audio"), function(actor, event) {
             self.set_applet_icon_symbolic_name("media-record");
-            Main.Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturesound.sh");
-            Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("With-Audio") + "'");
+            Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturesound.sh");
+            Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("With-Audio") + "'");
         });
         //Start Recording No Audio
         this.recordItem.menu.addAction(_("Record Desktop Without Audio"), function(actor, event) {
             self.set_applet_icon_symbolic_name("media-record");
-            Main.Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapture.sh");
-            Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("No-Audio") + "'");
+            Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapture.sh");
+            Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("No-Audio") + "'");
         });
         
         //Start Recording With Audio
         this.recordItem.menu.addAction(_("Record Current Window With Audio"), function(actor, event) {
             self.set_applet_icon_symbolic_name("media-record");
-            Main.Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturesoundwindow.sh");
-            Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("With-Audio") + "'");
+            Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturesoundwindow.sh");
+            Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("With-Audio") + "'");
         });
         //Start Recording No Audio
         this.recordItem.menu.addAction(_("Record Current Window Without Audio"), function(actor, event) {
             self.set_applet_icon_symbolic_name("media-record");
-            Main.Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturewindow.sh");
-            Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("No-Audio") + "'");
+            Util.spawnCommandLine("bash " + GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturewindow.sh");
+            Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("No-Audio") + "'");
         });
         
         //Stop Recording
         this.recordItem.menu.addAction(_("Stop Recording"), function(actor, event) {
             self.set_applet_icon_symbolic_name("camera-photo-symbolic");
-            Main.Util.spawnCommandLine("killall -SIGTERM screencapture.sh");
-            Main.Util.spawnCommandLine("killall -SIGTERM screencapturesound.sh");
-            Main.Util.spawnCommandLine("killall -SIGTERM ffmpeg");
-            Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording-Stopped") + "'");
-            Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording-Finished") + "'");
+            Util.spawnCommandLine("killall -SIGTERM screencapture.sh");
+            Util.spawnCommandLine("killall -SIGTERM screencapturesound.sh");
+            Util.spawnCommandLine("killall -SIGTERM ffmpeg");
+            Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording-Stopped") + "'");
+            Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording-Finished") + "'");
         });
         
         this.menu.addMenuItem(this.recordItem);
@@ -123,13 +122,13 @@ MyApplet.prototype = {
         	//Open Screenshot Pictures Folder
         	this.menu.addAction(_("Pictures Folder"), function(actor, event) {
         	// For the Pictures user folder
-        	Main.Util.spawn_async(["xdg-open", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)], null);
+        	Util.spawn_async(["xdg-open", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)], null);
         	});  
 
         	//Open Recorded Video Folder
         	this.menu.addAction(_("Videos Folder"), function(actor, event) {
         	// For the Videos user folder
-        	Main.Util.spawn_async(["xdg-open", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)], null);
+        	Util.spawn_async(["xdg-open", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)], null);
         	});   
                         
         }

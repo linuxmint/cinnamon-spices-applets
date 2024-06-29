@@ -48,7 +48,8 @@
 			"sections": [
 				"more-info",
 				"submit-issue",
-				"debug-options"
+				"debug-options",
+				"technical-automation"
 			]
 		},
 		"location-section": {
@@ -56,7 +57,17 @@
 			"title": "Location settings",
 			"keys": [
 				"manualLocation",
-				"location"
+				"location",
+				"locationDescription"
+			]
+		},
+		"technical-automation": {
+			"type": "section",
+			"title": "Technical and Automation",
+			"keys": [
+				"userAgentStringOverride",
+				"runScript",
+				"testRunScript"
 			]
 		},
 		"location-store": {
@@ -76,7 +87,8 @@
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours",
-				"immediatePrecip"
+				"immediatePrecip",
+				"showAlerts"
 			]
 		},
 		"weather-conditions": {
@@ -181,16 +193,18 @@
 	},
 	"dataService": {
 		"type": "radiogroup",
-		"default": "OpenWeatherMap",
+		"default": "OpenMeteo",
 		"description": "Data service",
 		"tooltip": "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab.",
 		"options": {
-			"OpenWeatherMap": "OpenWeatherMap",
+			"Open-Meteo": "OpenMeteo",
+			"OpenWeatherMap": "OpenWeatherMap_Open",
 			"MET Norway": "MetNorway",
 			"DMI Denmark": "DanishMI",
 			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather",
+			"OpenWeatherMap OneCall (key needed)": "OpenWeatherMap_OneCall",
 			"Pirate Weather (key needed)": "PirateWeather",
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
@@ -217,6 +231,11 @@
 		"dependency": "manualLocation",
 		"description": "Location",
 		"tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
+	},
+	"locationDescription": {
+		"type": "label",
+		"dependency": "manualLocation",
+		"description": "If the location field matches a saved location's 'Search Entry' field, the saved location will be used instead."
 	},
 	"saveLocation": {
 		"type": "button",
@@ -264,9 +283,15 @@
 	},
 	"immediatePrecip": {
 		"type": "checkbox",
-		"default": false,
+		"default": true,
 		"description": "Enable minutely precipitation forecast",
 		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. See Feature map on website on support for your provider"
+	},
+	"showAlerts": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable displaying weather alerts",
+		"tooltip": "Alerts button will be visible in the popup menu if there are any active alerts for your location."
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",
@@ -473,7 +498,8 @@
 	"translateCondition": {
 		"type": "checkbox",
 		"default": true,
-		"description": "Translate conditions"
+		"description": "Provider should translate conditions if available",
+		"tooltip": "Should your provider translate the conditions to your language if your locale is supported by the provider. Otherwise the applet will use it's own translation system."
 	},
 	"shortConditions": {
 		"type": "checkbox",
@@ -538,5 +564,22 @@
 		"default": "",
 		"description": "Selected path to save Logs",
 		"value": ""
-    }
+    },
+	"userAgentStringOverride": {
+		"type": "entry",
+		"default": "",
+		"description": "User Agent String Override",
+		"tooltip": "If you have issues with the applet not working properly and you know the User Agent string is the problem you can try to override it. Only change it if you know what you are doing. This is a string that is sent to the server when the applet tries to get the weather data."
+	},
+	"runScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Run a command when the weather info changes",
+		"tooltip": "The applet will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get {full_data} which is the full current weather data. Interpolation with single brackets {xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in single quotes (') and all other single quotes are escaped inside. You can use this to integrate the weather data with other parts of your system. You can look up the full weather data structure via the link in the README.\n\nExample: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' will show a notification with the current weather condition and temperature.\n\nExample: 'echo {{full_data}} > /tmp/weather_data' will save the full weather data to a file in /tmp."
+	},
+	"testRunScript": {
+		"type": "button",
+		"description": "Test your command",
+		"callback": "testRunScript"
+	}
 }

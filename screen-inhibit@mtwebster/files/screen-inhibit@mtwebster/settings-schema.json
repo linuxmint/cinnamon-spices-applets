@@ -5,17 +5,22 @@
  },
  "off-icon": {
     "type": "iconfilechooser",
-    "default" : "video-display-symbolic",
+    "default" : "screen-inhibit-symbolic",
     "description" : "Power management allowed icon:",
     "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
     "indent" : true
  },
  "on-icon": {
     "type": "iconfilechooser",
-    "default" : "dialog-error-symbolic",
+    "default" : "screen-inhibit-active-symbolic",
     "description" : "Power management prevented icon:",
     "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
     "indent" : true
+ },
+ "reset-icons": {
+     "type": "button",
+     "description" : "Reset to default icons",
+     "callback": "reset_to_default_icons"
  },
  "head1" : {
     "type" : "header",
@@ -26,5 +31,51 @@
     "description" : "Set the keybinding for screensaver inhibit",
     "default" : "<Control>i",
     "indent": true
+ },
+ "head2" : {
+    "type" : "header",
+    "description" : "Startup"
+ },
+ "inhibit-at-startup" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Inhibit screensaver at startup",
+    "indent": true
+ },
+ "head3" : {
+    "type" : "header",
+    "description" : "Way to block the screensaver"
+ },
+ "locklabel": {
+     "type" : "label",
+     "description" : "(Avoid using aggressive ways, if possible.)"
+ },
+ "locktype": {
+     "type" : "combobox",
+     "default": "normal",
+     "description" : "Blocking mode",
+     "options": {
+         "Normal": "normal",
+         "Aggressive": "aggressive1",
+         "Super aggressive": "aggressive2"
+     }
+ },
+ "lockinterval": {
+     "type" : "spinbutton",
+     "dependency": "locktype!=normal",
+     "default": 5,
+     "description": "Blocking interval",
+     "min": 1,
+     "max": 60,
+     "step": 1,
+     "units": "minutes"
+ },
+ "old-sleep-display-ac" : {
+     "type" : "generic",
+     "default": 0
+ },
+ "old-sleep-inactive-ac-timeout" : {
+     "type" : "generic",
+     "default": 0
  }
 }

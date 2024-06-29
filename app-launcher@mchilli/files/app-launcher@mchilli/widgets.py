@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
-import gi
-gi.require_version("Gtk", "3.0")
-gi.require_version('XApp', '1.0')
-
 import os
 import sys
 import time
 import math
 import gettext
+import gi
+gi.require_version("Gtk", "3.0")
+gi.require_version('XApp', '1.0')
+
 from gi.repository import GLib, Gio, Gtk, Gdk
 from JsonSettingsWidgets import *
 
@@ -18,6 +18,7 @@ from dialogs import EditDialog, ConfirmDialog
 UUID = 'app-launcher@mchilli'
 APP_NAME = "App Launcher"
 APPLET_DIR = os.path.join(os.path.dirname(__file__))
+HOME = os.path.expanduser("~")
 ALIGNMENT_MAP = {
     "left":     0,
     "center":   0.5,
@@ -50,13 +51,21 @@ HEADER_COLUMS = [
 ]
 
 # i18n
+gettext.bindtextdomain(UUID, os.path.join(HOME, ".local/share/locale"))
+gettext.textdomain(UUID)
 gettext.install(UUID, GLib.get_home_dir() + '/.local/share/locale')
+
+
+def _(message: str) -> str:
+    return gettext.gettext(message)
+
 
 def log(msg):
     ''' global log function for debugging
     '''
     with open(APPLET_DIR + '/debug.log', 'a') as f:
         f.write("[%s] %s\n" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), str(msg)))
+
 
 class CustomAppList(SettingsWidget):
     def __init__(self, info, key, settings):

@@ -58,6 +58,26 @@
         "tooltip": "Move the slider to adjust how often the applet updates.  Note: this can have a large impact on system performance if you set it too low",
         "indent": true
     },
+    "lower-border": {
+        "type": "scale",
+        "default": 20,
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "description": "Lower border:",
+        "tooltip": "Percentage of CPU to define low usage",
+        "indent": true
+    },
+    "upper-border": {
+        "type": "scale",
+        "default": 80,
+        "min": 51,
+        "max": 99,
+        "step": 1,
+        "description": "Upper border:",
+        "tooltip": "Percentage of CPU to define high usage",
+        "indent": true
+    },
     "div": {
         "type": "separator"
     },

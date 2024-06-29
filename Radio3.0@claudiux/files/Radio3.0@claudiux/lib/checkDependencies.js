@@ -40,7 +40,7 @@ const NEEDS_FONTS_SYMBOLA = false;
  *
  * Example: To install the executable 'sox' and the library 'libsox-fmt-mp3.so', we need to install two packages in
  * Debian and derivatives distros (default) and only one package (named sox) in Arch and Fedora distros.
-const DEPENDENCIES = {
+var DEPENDENCIES = {
   "default": [
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
@@ -65,9 +65,7 @@ const DEPENDENCIES = {
 var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
@@ -82,7 +80,6 @@ var DEPENDENCIES = {
   ],
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
@@ -95,12 +92,10 @@ var DEPENDENCIES = {
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
-    ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
+    //~ ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
     ["at", "/usr/bin/at", "at"],
@@ -108,13 +103,12 @@ var DEPENDENCIES = {
     ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
     ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
-    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"]
+    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
+    ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
   ],
   "fedora": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],
     ["notify-send", "/usr/bin/notify-send", "libnotify"],
@@ -126,7 +120,6 @@ var DEPENDENCIES = {
   ],
   "openSUSE": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["sox", "/usr/bin/sox",  "sox"],
     ["at", "/usr/bin/at", "at"],
@@ -139,6 +132,30 @@ var DEPENDENCIES = {
   ]
 }
 
+// mpv-mpris is only available from Ubuntu 22.04 (LM 21 LTS, Cinnamon 5.4)
+if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.4") >= 0) {
+  DEPENDENCIES["default"].push(["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["arch"].push(["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["debian"].push(["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["fedora"].push(["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["openSUSE"].push(["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"]);
+}
+
+// Soup-3 is used instead of Soup-2.4 from LM 21.2, Cinnamon 5.8.
+// Also pipewire from Fedora 39, Cinnamon 5.8.
+if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
+  DEPENDENCIES["default"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
+  DEPENDENCIES["debian"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
+  DEPENDENCIES["arch"].push(["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]);
+  DEPENDENCIES["fedora"].push(["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]);
+  DEPENDENCIES["fedora"].push(["pipewire", "/usr/bin/pipewire", "pipewire"]);
+  DEPENDENCIES["fedora"].push(["pw-cat", "/usr/bin/pw-cat", "pipewire-utils"]);
+  DEPENDENCIES["fedora"].push(["pipewire-pulse", "/usr/bin/pipewire-pulseaudio", "pipewire-pulseaudio"]);
+  DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
+} else {
+  DEPENDENCIES["debian"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
+  DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
+}
 
 // --- Do not modify from here --- //
 if (NEEDS_FONTS_SYMBOLA) {
@@ -146,6 +163,23 @@ if (NEEDS_FONTS_SYMBOLA) {
   DEPENDENCIES["debian"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/fonts/gdouros-symbola/Symbola.ttf", "gdouros-symbola-fonts"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"]);
+}
+
+function versionCompare(left, right) {
+  if (typeof left + typeof right != 'stringstring')
+    return false;
+  var a = left.split('.'),
+      b = right.split('.'),
+      i = 0,
+      len = Math.max(a.length, b.length);
+  for (; i < len; i++) {
+    if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+      return 1;
+    } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+      return -1;
+    }
+  }
+  return 0;
 }
 
 const _ = function(str) {
@@ -255,6 +289,14 @@ function is_apturl_present() {
   return GLib.find_program_in_path("apturl")
 } // End of is_apturl_present
 
+function is_pkcon_present() {
+  return GLib.find_program_in_path("pkcon")
+}
+
+function is_pkexec_present() {
+  return GLib.find_program_in_path("pkexec")
+}
+
 function get_distro() {
   let distro = DISTRO();
   switch (distro) {
@@ -361,6 +403,8 @@ Dependencies.prototype = {
       let terminal = get_default_terminal();
       // apturl is it present?
       let _is_apturl_present = is_apturl_present();
+      let _is_pkcon_present = is_pkcon_present();
+      let _is_pkexec_present = is_pkexec_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
@@ -380,13 +424,19 @@ Dependencies.prototype = {
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
+      if (_is_pkcon_present && _is_pkexec_present) {
+        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        this.depAreMet = false;
+        return
+      }
+
       if (!_is_apturl_present) {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           } else {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Radio3.0 message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           }
         }
       } else {

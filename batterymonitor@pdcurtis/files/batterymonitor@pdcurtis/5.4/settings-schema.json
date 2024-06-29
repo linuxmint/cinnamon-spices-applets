@@ -42,6 +42,7 @@
             "title": "Display Options",
             "keys": [
                 "displayType",
+                "iconTheme",
                 "time_remaining_display",
                 "time_remaining_toolbar",
                 "time_remaining_tooltip"
@@ -168,6 +169,17 @@
         },
         "description": "Toolbar Display Type",
         "tooltip": "The following display options are available (including Compact, Compact Plus, and Icon Only for vertical panels):\n  Classic: Battery percentage with extended messages for horizontal panel\n  Classic Plus: Classic with the addition of a battery icon\n  Compact: Battery percentage without extended messages\n  Compact Plus: Compact with the addition of a battery icon\n  Icon Only: The battery icon on a colored background indicating the current status"
+    },
+    "iconTheme": {
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic": "classic",
+            "Yaru Light": "yaru-light",
+            "Yaru Dark": "yaru-dark"
+        },
+        "description": "Icon Theme",
+        "tooltip": "Icon Theme"
     },
     "time_remaining_display": {
         "type": "checkbox",

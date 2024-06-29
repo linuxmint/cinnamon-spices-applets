@@ -29,7 +29,7 @@ msgstr "KDE Connect ist nicht verfügbar"
 #: applet.js:1068
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
-"KDE Connect ist nicht verfügbar, stelle sicher, das es installiert ist und "
+"KDE Connect ist nicht verfügbar, stelle sicher, dass es installiert ist und "
 "ausgeführt wird"
 
 #: applet.js:1072 applet.js:1085 applet.js:1270

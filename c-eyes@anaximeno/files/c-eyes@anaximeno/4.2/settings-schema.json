@@ -31,6 +31,7 @@
 				"eye-margin",
 				"eye-vertical-padding",
 				"eye-repaint-interval",
+				"eye-repaint-angle",
 				"deactivate-on-fullscreen",
 				"eye-activate-by-default"
 			]
@@ -39,6 +40,8 @@
 			"type": "section",
 			"title": "Colors",
 			"keys": [
+				"fill-bulb-color-painting",
+				"fill-lids-color-painting",
 				"eye-clicked-color",
 				"iris-clicked-color",
 				"pupil-clicked-color"
@@ -84,9 +87,7 @@
 		"description": "Mode",
 		"options": {
 			"Lids": "lids",
-			"Lids Filled": "lids-fill",
-			"Bulb": "bulb",
-			"Bulb Filled": "bulb-fill"
+			"Bulb": "bulb"
 		}
 	},
 	"eye-line-width": {
@@ -100,19 +101,19 @@
 	},
 	"eye-margin": {
 		"type": "spinbutton",
-		"default": 6,
-		"min": 1,
-		"max": 10,
-		"step": 1,
+		"default": 8,
+		"min": -6,
+		"max": 32,
+		"step": 2,
 		"units": "px",
 		"description": "Margin"
 	},
 	"eye-vertical-padding": {
 		"type": "spinbutton",
 		"default": 2,
-		"min": 1,
-		"max": 10,
-		"step": 1,
+		"min": 0,
+		"max": 20,
+		"step": 2,
 		"units": "px",
 		"description": "Padding"
 	},
@@ -123,7 +124,18 @@
 		"max": 200,
 		"step": 5,
 		"units": "ms",
-		"description": "Repaint Interval"
+		"description": "Eye Update Interval",
+		"tooltip": "This setting controls the time to redraw the eye again. Lower values (measured in miliseconds) result in smoother animation but require more processing power."
+	},
+	"eye-repaint-angle": {
+		"type": "spinbutton",
+		"default": 0.05,
+		"min": 0,
+		"max": 1,
+		"step": 0.05,
+		"units": "radians",
+		"description": "Eye Update Sensitivity",
+		"tooltip": "This setting controls the minimum angle change between mouse movements required to redraw the eye. Lower values (measured in radians) result in smoother animation but require more processing power."
 	},
 	"eye-activate-by-default": {
 		"type": "checkbox",
@@ -149,6 +161,18 @@
 		"type": "colorchooser",
 		"default": "#40BEBF",
 		"description": "Activated Pupil Color"
+	},
+	"fill-lids-color-painting": {
+		"dependency": "eye-mode=lids",
+		"type": "checkbox",
+		"default": false,
+		"description": "Fill the Colors Inside the Eye"
+	},
+	"fill-bulb-color-painting": {
+		"dependency": "eye-mode=bulb",
+		"type": "checkbox",
+		"default": false,
+		"description": "Fill the Colors Inside the Eye"
 	},
 	"mouse-click-enable": {
 		"type": "checkbox",

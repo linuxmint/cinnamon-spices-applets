@@ -70,56 +70,30 @@ function logError(error) {
     global.logError("[" + UUID + "]: " + error)
 }
 
-class LGS extends Applet.TextIconApplet {
+class LGS extends Applet.IconApplet {
     constructor (metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
         this.instanceId = instance_id;
         this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
-        this.appletPath = metadata.path;
-        this.set_applet_icon_path(this.appletPath + "/icons/face-glasses-symbolic.svg");
+        this.set_applet_icon_symbolic_path(metadata.path + "/icons/face-glasses-symbolic.svg");
         this.name = metadata.name
         this.set_applet_tooltip(_(this.name));
         this.version = metadata.version;
-        this.use_symbolic_icons = true;
 
         // ++ Set up left click menu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        // Applet icon on panel
-        this.set_icons();
-        // Applet label on panel
-        this.set_label();
-
         let _tooltip = _("Middle-click: \n") + _("Show .xsession-errors");
         this.set_applet_tooltip(_tooltip);
-
-        this.applet_running = true;
     }; // End of constructor
-
-    set_icons() {
-        Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
-        if (this.use_symbolic_icons) {
-            this.set_applet_icon_symbolic_name("face-glasses");
-            return
-        }
-        this.set_applet_icon_name("face-glasses");
-    }; // End of set_icons
-
-    set_label() {
-        this.set_applet_label("");
-    }; // End of set_label
-
-    on_orientation_changed (orientation) {
-        this.orientation = orientation;
-        this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
-    }; // End of on_orientation_changed
 
     //++ Handler for when the applet is clicked.
     on_applet_clicked(event) {
-        this.makeMenu();
-        if (!this.menu.isOpen) this.menu.toggle();
+        if (!this.menu.isOpen)
+            this.makeMenu();
+        this.menu.toggle();
     }; // End of on_applet_clicked
 
     get_active_spices(type) {
@@ -291,12 +265,6 @@ class LGS extends Applet.TextIconApplet {
         }
 
     }; // End of makeMenu
-
-    // ++ This finalizes the settings when the applet is removed from the panel
-    on_applet_removed_from_panel() {
-        // inhibit the update timer when applet removed from panel
-        this.applet_running = false;
-    };
 
     on_applet_middle_clicked(event) {
         Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'")

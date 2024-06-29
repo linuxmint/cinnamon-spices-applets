@@ -7,7 +7,6 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
-const {escapeRegExp} = imports.misc.util;
 const {addTween} = imports.ui.tweener;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
@@ -25,6 +24,11 @@ const graphemeBaseChars = s =>
 //decompose and remove discritics (blocks: Combining Diacritical Marks,
 //Combining Diacritical Marks Extended and Combining Diacritical Marks Supplement)
             s.normalize('NFKD').replace(/[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]/g, "");
+
+function escapeRegExp(str) {
+    // from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+    return str.replace(/[-\/.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
 
 //===========================================================
 
@@ -137,9 +141,8 @@ class NewTooltip {
 }
 
 //===================================================
-
-const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
-    if (!str) {
+const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
+    if (!str || !q) {
         return { score: 0, result: str };
     }
 
@@ -147,7 +150,7 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     let foundPosition = 0;
     let foundLength = 0;
     const str2 = graphemeBaseChars(str).toLocaleUpperCase();
-    //q is already graphemeBaseChars() in _doSearch()
+    //q is already graphemeBaseChars().toLocaleUpperCase() in _doSearch()
     let score = 0, bigrams_score = 0;
 
     if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
@@ -160,7 +163,7 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
         foundLength = q.length;
     } else if (!noFuzzySearch){ //else fuzzy match
         //find longest substring of str2 made up of letters from q
-        const found = str2.match(new RegExp('[' + q + ']+','g'));
+        const found = str2.match(new RegExp('[' + escapeRegExp(q) + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -192,7 +195,12 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
             score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
+    
+    //reduce score if q is short
+    //if (q.length === 1) score *= 0.5;
+    //if (q.length === 2) score *= 0.75;
     //return result of match
+    
     if (HIGHTLIGHT_MATCH && score > 0) {
         let markup = str.slice(0, foundPosition) + '<b>' +
                                     str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
@@ -201,6 +209,21 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     } else {
         return {score: score, result: str};
     }
+};
+
+const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
+    const separatorIndex = q.indexOf(" ");
+    if (separatorIndex < 1) {
+        return searchStrPart(q, str, noFuzzySearch, noSubStringSearch);
+    }
+
+    //There are two search terms separated by a space.
+    const part1 = searchStrPart(q.slice(0, separatorIndex), str, noFuzzySearch, noSubStringSearch);
+    const part2 = searchStrPart(q.slice(separatorIndex + 1), str, noFuzzySearch, noSubStringSearch);
+    const avgScore = (part1.score + part2.score) / 2.0;
+    const markup = (part1.score >= part2.score) ? part1.result : part2.result;
+    
+    return {score: avgScore, result: markup};
 };
 
 var chromiumProfileDirs = null;

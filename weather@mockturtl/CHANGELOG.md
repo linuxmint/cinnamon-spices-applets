@@ -1,5 +1,83 @@
 # Changelog
 
+## 3.6.2
+
+- Fix applet output breaking with various weather providers if Automatic location is used.
+- Fix
+  [weather@mockturtl - Sunrise Invalid Date Time when using weather provider DMI Denmark #6058](https://github.com/linuxmint/cinnamon-spices-applets/issues/6058)
+
+## 3.6.1
+
+- Make translating conditions more consistent across all providers and clarify purpose of "Translate conditions" settings toggle
+- Stop applet loop when applet is removed
+- Add missing dewpoint from Open-Meteo
+- Fix
+  [[weather@mockturtl] Applet Bug #6048](https://github.com/linuxmint/cinnamon-spices-applets/issues/6048), Fix [weather@mockturtl: Hourly weather forecast is not displayed #6046](https://github.com/linuxmint/cinnamon-spices-applets/issues/6046) - Rename OpenWeatherMap name internally so people fall back to the default Open-Meteo so no user-action is needed.
+
+## 3.6.0
+
+- Add eslint and fix all eslint errors
+- Fix Weatherbit not processing hourly weather properly
+- Fix Soup2 lib not passing in it's `finalCancellable` only what was passed in from outside
+- Fix OpenWeatherMap error handling, was completely broken
+- Better error logging on exception handling in most places
+- Fix Accuweather having wrong weather condition info on "clear sky"
+- Add missing type information for weather/location providers
+- Fix incorrect wind speed reported with Open Meteo
+- Resolve [[weather@mockturtl] Feature Request: Save Weather Service JSON #5420](https://github.com/linuxmint/cinnamon-spices-applets/issues/5420)
+- Resolve [[weather@mockturtl] Feature Request: Configurable UserAgent String #5999](https://github.com/linuxmint/cinnamon-spices-applets/issues/5999)
+- Fix [weather@mockturtl: Incorrectly formatted text #6011](https://github.com/linuxmint/cinnamon-spices-applets/issues/6011) - mostly
+- Indicate on the popup menu when a refresh is in progress.
+
+## 3.5.0
+
+* Resolve- [Feature Request: Weather applet should show weather alerts/warnings #5546](https://github.com/linuxmint/cinnamon-spices-applets/issues/5546)
+- OpenWeatherMap sunsets it's OneCall API 2.5 in **June 2024** and they don't seem to want to enable 3.0 for the opensource plan for 
+  me. So I switch to Open-Meteo as the default and break OWM provider 
+  into 2, one without key and one with key.
+- Fixed refreshing problem on Cinnamon 3.8 forever timing out.
+
+## 3.4.3
+
+* Fix [#5107](https://github.com/linuxmint/cinnamon-spices-applets/issues/5107) - Do not display null if there is no temperature provided on the applet label. 
+* Fix [#5972](https://github.com/linuxmint/cinnamon-spices-applets/issues/5972) - Do not use locale explicitly when displaying dates, just use the system one and be more flexible about selecting locale.
+* Fix [#5990](https://github.com/linuxmint/cinnamon-spices-applets/issues/5990) - error logging crashes if error is not specified.
+* Add Known Issue to README
+* Fix issue when running a command - `'` characters were not escaped inside commands
+* Make sure Weather Underground stations are always sorted by distance (smallest first).
+
+## 3.4.2
+
+* Fix [#5419](https://github.com/linuxmint/cinnamon-spices-applets/issues/5419)
+* Fix [#5680](https://github.com/linuxmint/cinnamon-spices-applets/issues/5680)
+
+## 3.4.1
+
+Changes:
+
+* Fix [#5414](https://github.com/linuxmint/cinnamon-spices-applets/issues/5414) - Wrong Celsius temperature from Pirate Weather
+
+Fix incorrect soup version detection
+
+* Fix [#5152](https://github.com/linuxmint/cinnamon-spices-applets/issues/5152)
+* Fix [#5430](https://github.com/linuxmint/cinnamon-spices-applets/issues/5430#issuecomment-1920767915)
+
+Fix Applet not loading weather when soup throw error on reading message response - plus check network status before starting the refresh loop instead of after
+
+* Fix [#5425](https://github.com/linuxmint/cinnamon-spices-applets/issues/5425)
+* Fix [#5426](https://github.com/linuxmint/cinnamon-spices-applets/issues/5426)
+* Fix [#5457](https://github.com/linuxmint/cinnamon-spices-applets/issues/5457)
+
+## 3.4.0
+
+* Fix [#5212](https://github.com/linuxmint/cinnamon-spices-applets/issues/5212)
+* Fix [#5392](https://github.com/linuxmint/cinnamon-spices-applets/issues/5392)
+* Fix [#5355](https://github.com/linuxmint/cinnamon-spices-applets/issues/5355)
+* Add description to Manual location entry
+* Fix Saving Logs button not included the redacted config
+* Update library typings for applet
+* Use fedora geoip project for autolocation via the internet
+
 ## 3.3.1
 
 Fix nominatim not getting location data due to API changes. Related issues:
@@ -47,6 +125,7 @@ Fix nominatim not getting location data due to API changes. Related issues:
 * Fixes [#4505](https://github.com/linuxmint/cinnamon-spices-applets/issues/4505)
 
 ## 3.2.9
+
 * Add support for Soup v3
 
 ## 3.2.8

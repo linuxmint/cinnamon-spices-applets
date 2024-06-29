@@ -1,10 +1,11 @@
 import { DateTime } from "luxon";
-import { Services } from "../config";
-import { HTTPParams } from "../lib/httpLib";
-import { WeatherApplet } from "../main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import type { Services } from "../config";
+import type { HTTPParams} from "../lib/httpLib";
+import { HttpLib } from "../lib/httpLib";
+import type { Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../weather-data";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
+import type { LocationData } from "../types";
 
 export class DanishMI extends BaseProvider {
 	public readonly needsApiKey: boolean = false;
@@ -34,21 +35,26 @@ export class DanishMI extends BaseProvider {
 		north: null
 	}
 
-	constructor(app: WeatherApplet) {
-		super(app);
-	}
-
-	async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
 		this.GetLocationBoundingBox(loc);
-		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, this.observationParams), loc);
+		const observations = this.OrderObservations(await HttpLib.Instance.LoadJsonSimple<DanishObservationPayloads>({
+			url: this.url,
+			cancellable,
+			params: this.observationParams
+		}), loc);
 
 		this.forecastParams.lat = loc.lat;
 		this.forecastParams.lon = loc.lon;
 
-		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
+		const forecasts = await HttpLib.Instance.LoadJsonSimple<DanishMIPayload>({
+			url: this.url,
+			cancellable,
+			params: this.forecastParams
+		});
+
 		if (forecasts == null)
 			return null;
 
@@ -72,7 +78,7 @@ export class DanishMI extends BaseProvider {
 		result.location = {
 			city: forecasts.city,
 			country: forecasts.country,
-			timeZone: undefined, // because we ask in UTC, we get UTC as the timezone, so we just drop it
+			timeZone: loc.timeZone,
 			url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}/${forecasts.city}`
 		};
 		result.coord = {
@@ -167,16 +173,19 @@ export class DanishMI extends BaseProvider {
 			return false;
 		});
 
+		if (relevantHours.length == 0)
+			return this.ResolveCondition(undefined);
+
 		// convert night symbols to day symbols for daily
 		const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
 
 		let resultSymbol: number;
 		// symbols include rain or other stuff, get most severe
 		// exclude foggy from priority symbols
-		if (!!normalizedSymbols.find(x => x > 10 && x != 45))
+		if (normalizedSymbols.some(x => x > 10 && x != 45))
 			resultSymbol = Math.max(...normalizedSymbols);
 		else // get most common if there is no precipitation
-			resultSymbol = <number>mode(normalizedSymbols);
+			resultSymbol = mode(normalizedSymbols);
 
 		return this.ResolveCondition(resultSymbol);
 	}
@@ -383,30 +392,30 @@ export class DanishMI extends BaseProvider {
 	private DateStringToDate(str: string): Date {
 		if (str.length == 14) {
 			return new Date(Date.UTC(
-				parseInt(str.substring(0, 4)),
-				parseInt(str.substring(4, 6)) - 1,
-				parseInt(str.substring(6, 8)),
-				parseInt(str.substring(8, 10)),
-				parseInt(str.substring(10, 12)),
-				parseInt(str.substring(12, 14))
+				Number.parseInt(str.slice(0, 4)),
+				Number.parseInt(str.slice(4, 6)) - 1,
+				Number.parseInt(str.slice(6, 8)),
+				Number.parseInt(str.slice(8, 10)),
+				Number.parseInt(str.slice(10, 12)),
+				Number.parseInt(str.slice(12, 14))
 			));
 		}
 		else if (str.length == 8) {
 			return new Date(Date.UTC(
-				parseInt(str.substring(0, 4)),
-				parseInt(str.substring(4, 6)) - 1,
-				parseInt(str.substring(6, 8)),
+				Number.parseInt(str.slice(0, 4)),
+				Number.parseInt(str.slice(4, 6)) - 1,
+				Number.parseInt(str.slice(6, 8)),
 				0, 0, 0, 0
 			));
 		}
 		//else if (str.length == 4 || str.length == 3)
 		else {
-			// Pad with 0s
+			// Pad with 0s, str goes to the end
 			if (str.length == 3) {
-				str = ("0000" + str).substr(-4, 4);
+				str = "0" + str;
 			}
 			const today = new Date();
-			today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
+			today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);
 			return today;
 		}
 	}

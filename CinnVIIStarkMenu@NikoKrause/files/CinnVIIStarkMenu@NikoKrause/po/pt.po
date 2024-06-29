@@ -8,8 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cinnviistarkmenu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-08 23:23+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
 "PO-Revision-Date: 2021-10-24 14:40+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -20,98 +21,132 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.0\n"
 
-#: 3.2/applet.js:175 2.6/applet.js:176
-msgid "Please enter your password to uninstall this application"
-msgstr "Introduza a sua palavra passe para desinstalar esta aplicação"
-
-#: 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258 4.2/applet.js:460
-msgid "Add to panel"
-msgstr "Adicionar ao painel"
-
-#: 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261 4.2/applet.js:464
-msgid "Add to desktop"
-msgstr "Adicionar ao ambiente de trabalho"
-
-#: 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265 4.2/applet.js:469
-msgid "Remove from favorites"
-msgstr "Remover dos favoritos"
-
-#: 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268 4.2/applet.js:472
-msgid "Add to favorites"
-msgstr "Adicionar aos favoritos"
-
-#: 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272 4.2/applet.js:477
-msgid "Uninstall"
-msgstr "Desinstalar"
-
-#: 3.2/applet.js:276 2.6/applet.js:277 3.4/applet.js:276 4.2/applet.js:453
-#: 4.2/applet.js:456
-msgid "Run with NVIDIA GPU"
-msgstr "Executar com o GPU NVidia"
-
-#: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
-#: 3.4/applet.js:436 3.4/applet.js:470 4.2/applet.js:289 4.2/applet.js:569
+#: 4.2/applet.js:289 4.2/applet.js:570 3.2/applet.js:439 3.2/applet.js:473
+#: 2.6/applet.js:426 2.6/applet.js:460 3.4/applet.js:436 3.4/applet.js:470
 msgid "No description available"
 msgstr "Nenhuma descrição disponível"
 
-#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737 4.2/applet.js:827
+#: 4.2/applet.js:454 4.2/applet.js:457 3.2/applet.js:276 2.6/applet.js:277
+#: 3.4/applet.js:276
+msgid "Run with NVIDIA GPU"
+msgstr "Executar com o GPU NVidia"
+
+#: 4.2/applet.js:461 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258
+msgid "Add to panel"
+msgstr "Adicionar ao painel"
+
+#: 4.2/applet.js:465 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261
+msgid "Add to desktop"
+msgstr "Adicionar ao ambiente de trabalho"
+
+#: 4.2/applet.js:470 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265
+msgid "Remove from favorites"
+msgstr "Remover dos favoritos"
+
+#: 4.2/applet.js:473 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268
+msgid "Add to favorites"
+msgstr "Adicionar aos favoritos"
+
+#: 4.2/applet.js:478 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: 4.2/applet.js:636
+msgid "Search for results on the web"
+msgstr "Pesquisa de resultados na web"
+
+#: 4.2/applet.js:828 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737
 msgid "This file is no longer available"
 msgstr "Este ficheiro já não está disponível"
 
-#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787 4.2/applet.js:841
+#: 4.2/applet.js:842 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787
 msgid "Open with"
 msgstr "Abrir com"
 
-#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833 4.2/applet.js:887
+#: 4.2/applet.js:888 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833
 msgid "Other application..."
 msgstr "Outra aplicação..."
 
-#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908 4.2/applet.js:3279
-msgid "Clear list"
-msgstr "Limpar lista"
-
-#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954 4.2/applet.js:902
+#: 4.2/applet.js:903 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954
 msgid "All Applications"
 msgstr "Todas as aplicações"
 
-#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983 4.2/applet.js:3226
-msgid "Places"
-msgstr "Locais"
-
-#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007 4.2/applet.js:3264
-msgid "Recent Files"
-msgstr "Ficheiros recentes"
-
-#: 3.2/applet.js:1637 3.2/applet.js:1831 2.6/applet.js:1611 2.6/applet.js:1798
-#: 3.4/applet.js:1580 3.4/applet.js:1765 4.2/applet.js:1453 4.2/applet.js:1633
+#: 4.2/applet.js:1458 4.2/applet.js:1638 3.2/applet.js:1637 3.2/applet.js:1831
+#: 2.6/applet.js:1611 2.6/applet.js:1798 3.4/applet.js:1580 3.4/applet.js:1765
 msgid "Logout"
 msgstr "Terminar sessão"
 
-#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1582 4.2/applet.js:1455
+#: 4.2/applet.js:1460 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1582
 msgid "Lock Screen"
 msgstr "Bloquear ecrã"
 
-#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1758 4.2/applet.js:1626
+#: 4.2/applet.js:1631 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1758
 msgid "Shutdown the computer"
 msgstr "Desligar o computador"
 
-#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1759 4.2/applet.js:1627
+#: 4.2/applet.js:1632 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1759
 msgid "Leave the session"
 msgstr "Terminar a sessão"
 
-#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1760 4.2/applet.js:1628
+#: 4.2/applet.js:1633 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1760
 msgid "Lock the screen"
 msgstr "Bloquear o ecrã"
 
-#: 3.2/applet.js:1828 3.2/applet.js:1829 2.6/applet.js:1795 2.6/applet.js:1796
-#: 3.4/applet.js:1762 3.4/applet.js:1763 4.2/applet.js:1630 4.2/applet.js:1631
+#: 4.2/applet.js:1635 4.2/applet.js:1636 3.2/applet.js:1828 3.2/applet.js:1829
+#: 2.6/applet.js:1795 2.6/applet.js:1796 3.4/applet.js:1762 3.4/applet.js:1763
 msgid "Quit"
 msgstr "Sair"
 
-#: 3.2/applet.js:1840 3.2/applet.js:1844 2.6/applet.js:1807 2.6/applet.js:1811
-#: 3.4/applet.js:1774 3.4/applet.js:1778 4.2/applet.js:1642 4.2/applet.js:1646
+#: 4.2/applet.js:1647 4.2/applet.js:1651 3.2/applet.js:1840 3.2/applet.js:1844
+#: 2.6/applet.js:1807 2.6/applet.js:1811 3.4/applet.js:1774 3.4/applet.js:1778
 msgid "Lock screen"
 msgstr "Bloquear o ecrã"
+
+#. 4.2->settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu->title
+#. 3.4->settings-schema.json->menu->title
+#: 4.2/applet.js:1877 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:1998
+msgid "Menu"
+msgstr "Menu"
+
+#: 4.2/applet.js:3152 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983
+msgid "Places"
+msgstr "Locais"
+
+#: 4.2/applet.js:3190 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007
+msgid "Recent Files"
+msgstr "Ficheiros recentes"
+
+#: 4.2/applet.js:3205 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908
+msgid "Clear list"
+msgstr "Limpar lista"
+
+#: 4.2/applet.js:3206
+msgid "Clear all recent documents"
+msgstr "Limpar todos os documentos recentes"
+
+#: 4.2/applet.js:3225 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3469
+msgid "No recent documents"
+msgstr "Sem documentos recentes"
+
+#: 4.2/applet.js:3352 3.2/applet.js:3899 2.6/applet.js:3670 3.4/applet.js:3849
+msgid "Type to search..."
+msgstr "Escreva para pesquisar..."
+
+#: 4.2/applet.js:3890 3.2/applet.js:4427 2.6/applet.js:4172 3.4/applet.js:4376
+msgid "No results found"
+msgstr "Nenhum resultado encontrado"
+
+#: 4.2/applet.js:3892 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4378
+#, javascript-format
+msgid "%d result found"
+msgid_plural "%d results found"
+msgstr[0] "%d resultado encontrado"
+msgstr[1] "%d resultados encontrados"
+
+#: 3.2/applet.js:175 2.6/applet.js:176
+msgid "Please enter your password to uninstall this application"
+msgstr "Introduza a sua palavra passe para desinstalar esta aplicação"
 
 #: 3.2/applet.js:2051
 msgid "All Programs"
@@ -161,40 +196,6 @@ msgstr "Transferências"
 msgid "nemo Downloads"
 msgstr "nemo Transferências"
 
-#. 3.2->settings-schema.json->menu->title
-#. 3.4->settings-schema.json->menu->title
-#. 4.2->settings-schema.json->menu->title
-#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:1998 4.2/applet.js:1871
-msgid "Menu"
-msgstr "Menu"
-
-#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3469
-msgid "No recent documents"
-msgstr "Sem documentos recentes"
-
-#: 3.2/applet.js:3899 2.6/applet.js:3670 3.4/applet.js:3849
-msgid "Type to search..."
-msgstr "Escreva para pesquisar..."
-
-#: 3.2/applet.js:4427 2.6/applet.js:4172 3.4/applet.js:4376
-msgid "No results found"
-msgstr "Nenhum resultado encontrado"
-
-#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4378
-#, javascript-format
-msgid "%d result found"
-msgid_plural "%d results found"
-msgstr[0] "%d resultado encontrado"
-msgstr[1] "%d resultados encontrados"
-
-#: 4.2/applet.js:635
-msgid "Search for results on the web"
-msgstr "Pesquisa de resultados na web"
-
-#: 4.2/applet.js:3280
-msgid "Clear all recent documents"
-msgstr "Limpar todos os documentos recentes"
-
 #. metadata.json->name
 msgid "CinnVIIStarkMenu"
 msgstr "CinnVIIStarkMenu"
@@ -205,107 +206,616 @@ msgid ""
 msgstr ""
 "Menu do Cinnamon com a aparência do Menu Iniciar do Windows 7 ou do Menu MATE"
 
+#. 4.2->settings-schema.json->panel->title
 #. 3.2->settings-schema.json->panel->title
 #. 3.4->settings-schema.json->panel->title
-#. 4.2->settings-schema.json->panel->title
 msgid "Panel"
 msgstr "Painel"
 
+#. 4.2->settings-schema.json->sidebar->title
 #. 3.2->settings-schema.json->sidebar->title
 #. 3.4->settings-schema.json->sidebar->title
-#. 4.2->settings-schema.json->sidebar->title
 msgid "Sidebar"
 msgstr "Barra lateral"
 
+#. 4.2->settings-schema.json->quicklauncher->title
 #. 3.2->settings-schema.json->quicklauncher->title
 #. 3.4->settings-schema.json->quicklauncher->title
-#. 4.2->settings-schema.json->quicklauncher->title
 msgid "Quicklauncher"
 msgstr "Iniciador rápido"
 
+#. 4.2->settings-schema.json->websearch->title
+msgid "Web Search"
+msgstr "Motor de pesquisa"
+
+#. 4.2->settings-schema.json->panel-appear->title
 #. 3.2->settings-schema.json->panel-appear->title
 #. 3.4->settings-schema.json->panel-appear->title
-#. 4.2->settings-schema.json->panel-appear->title
 msgid "Appearance"
 msgstr "Aparência"
 
+#. 4.2->settings-schema.json->panel-behave->title
+#. 4.2->settings-schema.json->menu-behave->title
 #. 3.2->settings-schema.json->panel-behave->title
 #. 3.2->settings-schema.json->menu-behave->title
 #. 3.4->settings-schema.json->panel-behave->title
 #. 3.4->settings-schema.json->menu-behave->title
-#. 4.2->settings-schema.json->panel-behave->title
-#. 4.2->settings-schema.json->menu-behave->title
 msgid "Behavior"
 msgstr "Comportamento"
 
+#. 4.2->settings-schema.json->menu-appear->title
 #. 3.2->settings-schema.json->menu-appear->title
 #. 3.4->settings-schema.json->menu-appear->title
-#. 4.2->settings-schema.json->menu-appear->title
 msgid "Layout and content"
 msgstr "Disposição e conteúdo"
 
+#. 4.2->settings-schema.json->menu-icons->title
+#. 4.2->settings-schema.json->quicklauncher-layout->options
 #. 3.2->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
 #. 3.4->settings-schema.json->menu-icons->title
 #. 3.4->settings-schema.json->quicklauncher-layout->options
-#. 4.2->settings-schema.json->menu-icons->title
-#. 4.2->settings-schema.json->quicklauncher-layout->options
 msgid "Icons and Labels"
 msgstr "Ícones e Textos"
 
+#. 4.2->settings-schema.json->sidebar-layout->title
 #. 3.2->settings-schema.json->sidebar-layout->title
 #. 2.6->settings-schema.json->head-sidebar-layout->description
 #. 3.4->settings-schema.json->sidebar-layout->title
-#. 4.2->settings-schema.json->sidebar-layout->title
 msgid "Sidebar Layout"
 msgstr "Disposição da barra lateral"
 
+#. 4.2->settings-schema.json->quitmenu-layout->title
 #. 3.2->settings-schema.json->quitmenu-layout->title
 #. 3.4->settings-schema.json->quitmenu-layout->title
-#. 4.2->settings-schema.json->quitmenu-layout->title
 msgid "Quit Menu Layout"
 msgstr "Disposição do menu de saída"
+
+#. 4.2->settings-schema.json->quicklauncher-separator-layout->title
+#. 3.4->settings-schema.json->quicklauncher-separator-layout->title
+msgid "Quicklauncher Separators"
+msgstr "Separadores do iniciador rápido"
+
+#. 4.2->settings-schema.json->custom-quicklauncher-places->title
+#. 3.4->settings-schema.json->custom-quicklauncher-places->title
+msgid "Quicklauncher Places"
+msgstr "Locais do iniciador rápido"
+
+#. 4.2->settings-schema.json->custom-quicklauncher-apps->title
+#. 3.4->settings-schema.json->custom-quicklauncher-apps->title
+msgid "Quicklauncher Applications"
+msgstr "Aplicações do iniciador rápido"
+
+#. 4.2->settings-schema.json->web-search-engine->title
+#. 4.2->settings-schema.json->web-search->description
+msgid "Web Search Engine"
+msgstr "Motor de pesquisa Web"
+
+#. 4.2->settings-schema.json->menu-layout->options
+#. 3.2->settings-schema.json->menu-layout->options
+#. 2.6->settings-schema.json->menu-layout->options
+#. 3.4->settings-schema.json->menu-layout->options
+msgid "Stark-Menu"
+msgstr "Menu Stark"
+
+#. 4.2->settings-schema.json->menu-layout->options
+#. 3.2->settings-schema.json->menu-layout->options
+#. 2.6->settings-schema.json->menu-layout->options
+#. 3.4->settings-schema.json->menu-layout->options
+msgid "MATE-Menu"
+msgstr "Menu MATE"
+
+#. 4.2->settings-schema.json->menu-layout->description
+#. 3.2->settings-schema.json->menu-layout->description
+#. 2.6->settings-schema.json->menu-layout->description
+#. 3.4->settings-schema.json->menu-layout->description
+msgid "Menu layout"
+msgstr "Disposição do menu"
+
+#. 4.2->settings-schema.json->menu-layout->tooltip
+#. 3.2->settings-schema.json->menu-layout->tooltip
+#. 2.6->settings-schema.json->menu-layout->tooltip
+#. 3.4->settings-schema.json->menu-layout->tooltip
+msgid "Choose between Stark-Menu and MATE-Menu layout"
+msgstr "Escolher entre a disposição Menu Stark ou Menu MATE"
+
+#. 4.2->settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 2.6->settings-schema.json->overlay-key->description
+#. 3.4->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tecla de atalho para abrir e fechar o menu"
+
+#. 4.2->settings-schema.json->menu-custom->description
+msgid "Use a custom icon and label"
+msgstr "Usar um ícone e rótulo personalizados"
+
+#. 4.2->settings-schema.json->menu-custom->tooltip
+msgid "Check this to specify a custom icon and label"
+msgstr "Marcar para especificar um ícone e rótulo personalizados"
+
+#. 4.2->settings-schema.json->menu-icon->description
+#. 4.2->settings-schema.json->web-search->columns->title
+#. 3.2->settings-schema.json->menu-icon->description
+#. 2.6->settings-schema.json->menu-icon->description
+#. 3.4->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Ícone"
+
+#. 4.2->settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 2.6->settings-schema.json->menu-icon->tooltip
+#. 3.4->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Escolha um ícone para mostrar no painel."
+
+#. 4.2->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Texto"
+
+#. 4.2->settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 2.6->settings-schema.json->menu-label->tooltip
+#. 3.4->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Introduza um texto personalizado para mostrar no painel."
+
+#. 4.2->settings-schema.json->all-programs-label->description
+#. 3.2->settings-schema.json->all-programs-label->description
+#. 2.6->settings-schema.json->all-programs-label->description
+#. 3.4->settings-schema.json->all-programs-label->description
+msgid "'All Programs'-Button label"
+msgstr "'Todos os programas'-Texto do botão"
+
+#. 4.2->settings-schema.json->all-programs-label->tooltip
+#. 3.2->settings-schema.json->all-programs-label->tooltip
+#. 2.6->settings-schema.json->all-programs-label->tooltip
+#. 3.4->settings-schema.json->all-programs-label->tooltip
+msgid "Enter custom text for the 'All Programs' button."
+msgstr "Introduza um texto personalizado para o botão 'Todos os programas'."
+
+#. 4.2->settings-schema.json->favorites-label->description
+#. 3.2->settings-schema.json->favorites-label->description
+#. 2.6->settings-schema.json->favorites-label->description
+#. 3.4->settings-schema.json->favorites-label->description
+msgid "'Favorites'-Button label"
+msgstr "'Favoritos'-Texto do botão"
+
+#. 4.2->settings-schema.json->favorites-label->tooltip
+#. 3.2->settings-schema.json->favorites-label->tooltip
+#. 2.6->settings-schema.json->favorites-label->tooltip
+#. 3.4->settings-schema.json->favorites-label->tooltip
+msgid "Enter custom text for the 'Favorites' button."
+msgstr "Introduza um texto personalizado para o botão 'Favoritos'."
+
+#. 4.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 2.6->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.4->settings-schema.json->show-apps-description-on-buttons->description
+msgid "Show application's description under their titles"
+msgstr "Mostrar a descrição das aplicações por baixo dos seus títulos"
+
+#. 4.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr ""
+"Escolha se deseja ou não mostrar a descrição das aplicações por baixo dos "
+"seus títulos."
+
+#. 4.2->settings-schema.json->show-places->description
+#. 3.2->settings-schema.json->show-places->description
+#. 2.6->settings-schema.json->show-places->description
+#. 3.4->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Mostrar marcadores e locais"
+
+#. 4.2->settings-schema.json->show-places->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 2.6->settings-schema.json->show-places->tooltip
+#. 3.4->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Escolha se deseja ou não mostrar marcadores e locais no menu."
+
+#. 4.2->settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 2.6->settings-schema.json->enable-autoscroll->description
+#. 3.4->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Permitir deslocamento automático na lista de aplicações"
+
+#. 4.2->settings-schema.json->enable-autoscroll->tooltip
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+#. 2.6->settings-schema.json->enable-autoscroll->tooltip
+#. 3.4->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Escolha se deseja ou não ativar deslocamento automático suave na lista de "
+"aplicações."
+
+#. 4.2->settings-schema.json->search-filesystem->description
+#. 3.2->settings-schema.json->search-filesystem->description
+#. 2.6->settings-schema.json->search-filesystem->description
+#. 3.4->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+"Permitir a introdução de um caminho do sistema de ficheiros na caixa de "
+"pesquisa"
+
+#. 4.2->settings-schema.json->search-filesystem->tooltip
+#. 3.2->settings-schema.json->search-filesystem->tooltip
+#. 2.6->settings-schema.json->search-filesystem->tooltip
+#. 3.4->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Permitir a introdução de um caminho na caixa de pesquisa do menu."
+
+#. 4.2->settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 2.6->settings-schema.json->activate-on-hover->description
+#. 3.4->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Abrir o menu quando mover o rato sobre ele"
+
+#. 4.2->settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 2.6->settings-schema.json->activate-on-hover->tooltip
+#. 3.4->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Permitar a abertura do menu quando o rato entrar no applet"
+
+#. 4.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 2.6->settings-schema.json->hover-delay->units
+#. 3.4->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "milissegundos"
+
+#. 4.2->settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 3.4->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Atraso ao passar o rato sobre o menu"
+
+#. 4.2->settings-schema.json->hover-delay->tooltip
+#. 3.2->settings-schema.json->hover-delay->tooltip
+#. 3.4->settings-schema.json->hover-delay->tooltip
+msgid "Delay before the menu opens when hovered"
+msgstr "Atraso até que o menu seja aberto quando o rato passa sobre ele"
+
+#. 4.2->settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 2.6->settings-schema.json->enable-animation->description
+#. 3.4->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Usar animações do menu"
+
+#. 4.2->settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 2.6->settings-schema.json->enable-animation->tooltip
+#. 3.4->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Permitir animação do menu ao abrir e ao fechar"
+
+#. 4.2->settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 2.6->settings-schema.json->menu-editor-button->description
+#. 3.4->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Abrir o editor de menus"
+
+#. 4.2->settings-schema.json->menu-editor-button->tooltip
+#. 3.2->settings-schema.json->menu-editor-button->tooltip
+#. 2.6->settings-schema.json->menu-editor-button->tooltip
+#. 3.4->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Clique neste botão para personalizar as suas entradas de menus."
+
+#. 4.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 2.6->settings-schema.json->show-category-icons->description
+#. 3.4->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Mostrar ícones de categorias"
+
+#. 4.2->settings-schema.json->show-category-icons->tooltip
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+#. 2.6->settings-schema.json->show-category-icons->tooltip
+#. 3.4->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Escolha se deseja ou não mostrar ícones nas categorias."
+
+#. 4.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 2.6->settings-schema.json->show-application-icons->description
+#. 3.4->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Mostrar ícones das aplicações"
+
+#. 4.2->settings-schema.json->show-application-icons->tooltip
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+#. 2.6->settings-schema.json->show-application-icons->tooltip
+#. 3.4->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Escolha se deseja ou não mostrar ícones nas aplicações."
+
+#. 4.2->settings-schema.json->show-favorite-icons->description
+#. 3.2->settings-schema.json->show-favorite-icons->description
+#. 2.6->settings-schema.json->show-favorite-icons->description
+#. 3.4->settings-schema.json->show-favorite-icons->description
+msgid "Show favorite icons"
+msgstr "Mostrar ícones nos favoritos"
+
+#. 4.2->settings-schema.json->show-favorite-icons->tooltip
+#. 3.2->settings-schema.json->show-favorite-icons->tooltip
+#. 2.6->settings-schema.json->show-favorite-icons->tooltip
+#. 3.4->settings-schema.json->show-favorite-icons->tooltip
+msgid "Choose whether or not to show icons on favorites."
+msgstr "Escolha se deseja ou não mostrar ícones nos favoritos."
+
+#. 4.2->settings-schema.json->favorite-button-size->units
+#. 3.2->settings-schema.json->favorite-button-size->units
+#. 2.6->settings-schema.json->favorite-button-size->units
+#. 3.4->settings-schema.json->favorite-button-size->units
+msgid "pixels"
+msgstr "pixéis"
+
+#. 4.2->settings-schema.json->favorite-button-size->description
+#. 3.2->settings-schema.json->favorite-button-size->description
+#. 2.6->settings-schema.json->favorite-button-size->description
+#. 3.4->settings-schema.json->favorite-button-size->description
+msgid "Size of the favorite buttons"
+msgstr "Tamanho dos botões de favoritos"
+
+#. 4.2->settings-schema.json->favorite-button-size->tooltip
+#. 3.2->settings-schema.json->favorite-button-size->tooltip
+#. 2.6->settings-schema.json->favorite-button-size->tooltip
+#. 3.4->settings-schema.json->favorite-button-size->tooltip
+msgid "Change the size of the favorite buttons"
+msgstr "Mudar o tamanho dos botões de favoritos"
+
+#. 4.2->settings-schema.json->show-sidebar->description
+#. 3.2->settings-schema.json->show-sidebar->description
+#. 2.6->settings-schema.json->show-sidebar->description
+#. 3.4->settings-schema.json->show-sidebar->description
+msgid "Show sidebar on menu"
+msgstr "Mostrar barra lateral no menu"
+
+#. 4.2->settings-schema.json->show-sidebar->tooltip
+#. 3.2->settings-schema.json->show-sidebar->tooltip
+#. 2.6->settings-schema.json->show-sidebar->tooltip
+#. 3.4->settings-schema.json->show-sidebar->tooltip
+msgid "Choose whether or not to show the sidebar."
+msgstr "Escolha se deseja ou não mostrar a barra lateral."
+
+#. 4.2->settings-schema.json->user-box-layout->options
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
+msgid "User picture and user name"
+msgstr "Imagem do utilizador e nome do utilizador"
+
+#. 4.2->settings-schema.json->user-box-layout->options
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
+msgid "User picture only"
+msgstr "Apenas imagem do utilizador"
+
+#. 4.2->settings-schema.json->user-box-layout->options
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
+msgid "Hide"
+msgstr "Esconder"
+
+#. 4.2->settings-schema.json->user-box-layout->description
+#. 3.2->settings-schema.json->user-box-layout->description
+#. 2.6->settings-schema.json->user-box-layout->description
+#. 3.4->settings-schema.json->user-box-layout->description
+msgid "User account info box style"
+msgstr "Estilo da caixa de informação da conta do utilizador"
+
+#. 4.2->settings-schema.json->user-box-layout->tooltip
+#. 3.2->settings-schema.json->user-box-layout->tooltip
+#. 2.6->settings-schema.json->user-box-layout->tooltip
+#. 3.4->settings-schema.json->user-box-layout->tooltip
+msgid "Choose whether to show the user name and/or user picture."
+msgstr ""
+"Escolha se deseja mostrar ou não o nome do utilizador e/ou a sua imagem de "
+"utilizador."
+
+#. 4.2->settings-schema.json->quicklauncher-layout->options
+#. 3.2->settings-schema.json->quicklauncher-layout->options
+#. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
+msgid "Icons only"
+msgstr "Apenas ícones"
+
+#. 4.2->settings-schema.json->quicklauncher-layout->options
+#. 3.2->settings-schema.json->quicklauncher-layout->options
+#. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
+msgid "Labels only"
+msgstr "Apenas textos"
+
+#. 4.2->settings-schema.json->quicklauncher-layout->description
+#. 3.2->settings-schema.json->quicklauncher-layout->description
+#. 2.6->settings-schema.json->quicklauncher-layout->description
+#. 3.4->settings-schema.json->quicklauncher-layout->description
+msgid "Quicklauncher button style"
+msgstr "Estilo dos botões do iniciador rápido"
+
+#. 4.2->settings-schema.json->quicklauncher-layout->tooltip
+#. 3.2->settings-schema.json->quicklauncher-layout->tooltip
+#. 2.6->settings-schema.json->quicklauncher-layout->tooltip
+#. 3.4->settings-schema.json->quicklauncher-layout->tooltip
+msgid ""
+"Choose whether to show icons and/or labels on the quicklauncher buttons."
+msgstr ""
+"Escolha se deseja ou não mostrar ícones e/ou texto nos botões do iniciador "
+"rápido."
+
+#. 4.2->settings-schema.json->show-shutdown-menu->description
+#. 3.2->settings-schema.json->show-shutdown-menu->description
+#. 2.6->settings-schema.json->show-shutdown-menu->description
+#. 3.4->settings-schema.json->show-shutdown-menu->description
+msgid "Show quit buttons"
+msgstr "Mostrar botões de saída"
+
+#. 4.2->settings-schema.json->show-shutdown-menu->tooltip
+#. 3.2->settings-schema.json->show-shutdown-menu->tooltip
+#. 2.6->settings-schema.json->show-shutdown-menu->tooltip
+#. 3.4->settings-schema.json->show-shutdown-menu->tooltip
+msgid "Choose whether or not to show the quit buttons."
+msgstr "Escolha se deseja mostrar ou não os botões de saída."
+
+#. 4.2->settings-schema.json->shutdown-menu-reverse-order->description
+msgid "Reverse quit button order"
+msgstr "Ordem inversa do botão de sair"
+
+#. 4.2->settings-schema.json->shutdown-menu-reverse-order->tooltip
+msgid ""
+"Choose whether to display the 'Quit' button first or last. (Has no effect on "
+"'DropDown' layout.)"
+msgstr ""
+"Escolha se deseja ou não mostrar o botão 'Sair' no início ou no fim. (Não "
+"tem efeito sobre a disposição 'Suspensa')."
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->options
+#. 3.2->settings-schema.json->shutdown-menu-layout->options
+#. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
+msgid "DropDown"
+msgstr "Menu pendente"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->options
+#. 3.2->settings-schema.json->shutdown-menu-layout->options
+#. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
+msgid "Vertical"
+msgstr "Vertical"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->options
+#. 3.2->settings-schema.json->shutdown-menu-layout->options
+#. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->description
+#. 3.2->settings-schema.json->shutdown-menu-layout->description
+#. 2.6->settings-schema.json->shutdown-menu-layout->description
+#. 3.4->settings-schema.json->shutdown-menu-layout->description
+msgid "Quit buttons layout"
+msgstr "Disposição dos botões de saída"
+
+#. 4.2->settings-schema.json->shutdown-menu-layout->tooltip
+#. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
+#. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
+#. 3.4->settings-schema.json->shutdown-menu-layout->tooltip
+msgid "Choose the layout of the quit options."
+msgstr "Escolher a disposição das opções de sair."
+
+#. 4.2->settings-schema.json->shutdown-label->description
+#. 3.2->settings-schema.json->shutdown-label->description
+#. 2.6->settings-schema.json->shutdown-label->description
+#. 3.4->settings-schema.json->shutdown-label->description
+msgid "'Quit'-Button label"
+msgstr "'Sair'-Texto do botão"
+
+#. 4.2->settings-schema.json->shutdown-label->tooltip
+#. 3.2->settings-schema.json->shutdown-label->tooltip
+#. 2.6->settings-schema.json->shutdown-label->tooltip
+#. 3.4->settings-schema.json->shutdown-label->tooltip
+msgid "Enter custom text for the 'Quit' button."
+msgstr "Introduza um texto personalizado para o botão 'Sair'."
+
+#. 4.2->settings-schema.json->quicklauncher-separator1->description
+#. 3.4->settings-schema.json->quicklauncher-separator1->description
+msgid "Separator below user account info box"
+msgstr "Separador abaixo da caixa de informação da conta do utilizador"
+
+#. 4.2->settings-schema.json->quicklauncher-separator1->tooltip
+#. 4.2->settings-schema.json->quicklauncher-separator2->tooltip
+#. 4.2->settings-schema.json->quicklauncher-separator3->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
+msgid "Choose whether or not to show this separator."
+msgstr "Escolha se deseja ou não mostrar este separador."
+
+#. 4.2->settings-schema.json->quicklauncher-places->description
+#. 3.4->settings-schema.json->quicklauncher-places->description
+msgid "Custom Quicklauncher Places"
+msgstr "Locais personalizados do iniciador rápido"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Visible"
+msgstr "Visível"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Directory"
+msgstr "Diretório"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Custom Label"
+msgstr "Texto personalizado"
+
+#. 4.2->settings-schema.json->quicklauncher-places->columns->title
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Custom Icon"
+msgstr "Ícone personalizado"
+
+#. 4.2->settings-schema.json->quicklauncher-separator2->description
+#. 3.4->settings-schema.json->quicklauncher-separator2->description
+msgid "Separator below quicklauncher places"
+msgstr "Separador abaixo dos locais do iniciador rápido"
+
+#. 4.2->settings-schema.json->quicklauncher-apps->description
+#. 3.4->settings-schema.json->quicklauncher-apps->description
+msgid "Custom Quicklauncher Applications"
+msgstr "Aplicações personalizadas do iniciador rápido"
+
+#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Command"
+msgstr "Comando"
+
+#. 4.2->settings-schema.json->quicklauncher-separator3->description
+#. 3.4->settings-schema.json->quicklauncher-separator3->description
+msgid "Separator above quit buttons"
+msgstr "Separador acima dos botões de saída"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Use"
+msgstr "Usar"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Name"
+msgstr "Nome"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "URL"
+msgstr "URL"
 
 #. 3.2->settings-schema.json->custom-quicklauncher->title
 #. 2.6->settings-schema.json->head-custom-quicklauncher->description
 msgid "Custom Quicklauncher"
 msgstr "Iniciador rápido personalizado"
-
-#. 3.2->settings-schema.json->menu-layout->options
-#. 2.6->settings-schema.json->menu-layout->options
-#. 3.4->settings-schema.json->menu-layout->options
-#. 4.2->settings-schema.json->menu-layout->options
-msgid "Stark-Menu"
-msgstr "Menu Stark"
-
-#. 3.2->settings-schema.json->menu-layout->options
-#. 2.6->settings-schema.json->menu-layout->options
-#. 3.4->settings-schema.json->menu-layout->options
-#. 4.2->settings-schema.json->menu-layout->options
-msgid "MATE-Menu"
-msgstr "Menu MATE"
-
-#. 3.2->settings-schema.json->menu-layout->description
-#. 2.6->settings-schema.json->menu-layout->description
-#. 3.4->settings-schema.json->menu-layout->description
-#. 4.2->settings-schema.json->menu-layout->description
-msgid "Menu layout"
-msgstr "Disposição do menu"
-
-#. 3.2->settings-schema.json->menu-layout->tooltip
-#. 2.6->settings-schema.json->menu-layout->tooltip
-#. 3.4->settings-schema.json->menu-layout->tooltip
-#. 4.2->settings-schema.json->menu-layout->tooltip
-msgid "Choose between Stark-Menu and MATE-Menu layout"
-msgstr "Escolher entre a disposição Menu Stark ou Menu MATE"
-
-#. 3.2->settings-schema.json->overlay-key->description
-#. 2.6->settings-schema.json->overlay-key->description
-#. 3.4->settings-schema.json->overlay-key->description
-#. 4.2->settings-schema.json->overlay-key->description
-msgid "Keyboard shortcut to open and close the menu"
-msgstr "Tecla de atalho para abrir e fechar o menu"
 
 #. 3.2->settings-schema.json->menu-icon-custom->description
 #. 2.6->settings-schema.json->menu-icon-custom->description
@@ -319,215 +829,11 @@ msgstr "Usar um ícone personalizado"
 msgid "Unchecking this allows the theme to set the icon"
 msgstr "Deixe desmarcado para permitir usar o ícone do seu tema"
 
-#. 3.2->settings-schema.json->menu-icon->description
-#. 2.6->settings-schema.json->menu-icon->description
-#. 3.4->settings-schema.json->menu-icon->description
-#. 4.2->settings-schema.json->menu-icon->description
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "Icon"
-msgstr "Ícone"
-
-#. 3.2->settings-schema.json->menu-icon->tooltip
-#. 2.6->settings-schema.json->menu-icon->tooltip
-#. 3.4->settings-schema.json->menu-icon->tooltip
-#. 4.2->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Escolha um ícone para mostrar no painel."
-
 #. 3.2->settings-schema.json->menu-label->description
 #. 2.6->settings-schema.json->menu-label->description
 #. 3.4->settings-schema.json->menu-label->description
 msgid "'Menu'-Button label"
 msgstr "'Menu'-Texto do botão"
-
-#. 3.2->settings-schema.json->menu-label->tooltip
-#. 2.6->settings-schema.json->menu-label->tooltip
-#. 3.4->settings-schema.json->menu-label->tooltip
-#. 4.2->settings-schema.json->menu-label->tooltip
-msgid "Enter custom text to show in the panel."
-msgstr "Introduza um texto personalizado para mostrar no painel."
-
-#. 3.2->settings-schema.json->all-programs-label->description
-#. 2.6->settings-schema.json->all-programs-label->description
-#. 3.4->settings-schema.json->all-programs-label->description
-#. 4.2->settings-schema.json->all-programs-label->description
-msgid "'All Programs'-Button label"
-msgstr "'Todos os programas'-Texto do botão"
-
-#. 3.2->settings-schema.json->all-programs-label->tooltip
-#. 2.6->settings-schema.json->all-programs-label->tooltip
-#. 3.4->settings-schema.json->all-programs-label->tooltip
-#. 4.2->settings-schema.json->all-programs-label->tooltip
-msgid "Enter custom text for the 'All Programs' button."
-msgstr "Introduza um texto personalizado para o botão 'Todos os programas'."
-
-#. 3.2->settings-schema.json->favorites-label->description
-#. 2.6->settings-schema.json->favorites-label->description
-#. 3.4->settings-schema.json->favorites-label->description
-#. 4.2->settings-schema.json->favorites-label->description
-msgid "'Favorites'-Button label"
-msgstr "'Favoritos'-Texto do botão"
-
-#. 3.2->settings-schema.json->favorites-label->tooltip
-#. 2.6->settings-schema.json->favorites-label->tooltip
-#. 3.4->settings-schema.json->favorites-label->tooltip
-#. 4.2->settings-schema.json->favorites-label->tooltip
-msgid "Enter custom text for the 'Favorites' button."
-msgstr "Introduza um texto personalizado para o botão 'Favoritos'."
-
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
-#. 2.6->settings-schema.json->show-apps-description-on-buttons->description
-#. 3.4->settings-schema.json->show-apps-description-on-buttons->description
-#. 4.2->settings-schema.json->show-apps-description-on-buttons->description
-msgid "Show application's description under their titles"
-msgstr "Mostrar a descrição das aplicações por baixo dos seus títulos"
-
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-#. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
-#. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
-#. 4.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Escolha se deseja ou não mostrar a descrição das aplicações por baixo dos "
-"seus títulos."
-
-#. 3.2->settings-schema.json->show-places->description
-#. 2.6->settings-schema.json->show-places->description
-#. 3.4->settings-schema.json->show-places->description
-#. 4.2->settings-schema.json->show-places->description
-msgid "Show bookmarks and places"
-msgstr "Mostrar marcadores e locais"
-
-#. 3.2->settings-schema.json->show-places->tooltip
-#. 2.6->settings-schema.json->show-places->tooltip
-#. 3.4->settings-schema.json->show-places->tooltip
-#. 4.2->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Escolha se deseja ou não mostrar marcadores e locais no menu."
-
-#. 3.2->settings-schema.json->enable-autoscroll->description
-#. 2.6->settings-schema.json->enable-autoscroll->description
-#. 3.4->settings-schema.json->enable-autoscroll->description
-#. 4.2->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
-msgstr "Permitir deslocamento automático na lista de aplicações"
-
-#. 3.2->settings-schema.json->enable-autoscroll->tooltip
-#. 2.6->settings-schema.json->enable-autoscroll->tooltip
-#. 3.4->settings-schema.json->enable-autoscroll->tooltip
-#. 4.2->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Escolha se deseja ou não ativar deslocamento automático suave na lista de "
-"aplicações."
-
-#. 3.2->settings-schema.json->search-filesystem->description
-#. 2.6->settings-schema.json->search-filesystem->description
-#. 3.4->settings-schema.json->search-filesystem->description
-#. 4.2->settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr ""
-"Permitir a introdução de um caminho do sistema de ficheiros na caixa de "
-"pesquisa"
-
-#. 3.2->settings-schema.json->search-filesystem->tooltip
-#. 2.6->settings-schema.json->search-filesystem->tooltip
-#. 3.4->settings-schema.json->search-filesystem->tooltip
-#. 4.2->settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Permitir a introdução de um caminho na caixa de pesquisa do menu."
-
-#. 3.2->settings-schema.json->activate-on-hover->description
-#. 2.6->settings-schema.json->activate-on-hover->description
-#. 3.4->settings-schema.json->activate-on-hover->description
-#. 4.2->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Abrir o menu quando mover o rato sobre ele"
-
-#. 3.2->settings-schema.json->activate-on-hover->tooltip
-#. 2.6->settings-schema.json->activate-on-hover->tooltip
-#. 3.4->settings-schema.json->activate-on-hover->tooltip
-#. 4.2->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Permitar a abertura do menu quando o rato entrar no applet"
-
-#. 3.2->settings-schema.json->hover-delay->units
-#. 2.6->settings-schema.json->hover-delay->units
-#. 3.4->settings-schema.json->hover-delay->units
-#. 4.2->settings-schema.json->hover-delay->units
-msgid "milliseconds"
-msgstr "milissegundos"
-
-#. 3.2->settings-schema.json->hover-delay->description
-#. 3.4->settings-schema.json->hover-delay->description
-#. 4.2->settings-schema.json->hover-delay->description
-msgid "Menu hover delay"
-msgstr "Atraso ao passar o rato sobre o menu"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 3.4->settings-schema.json->hover-delay->tooltip
-#. 4.2->settings-schema.json->hover-delay->tooltip
-msgid "Delay before the menu opens when hovered"
-msgstr "Atraso até que o menu seja aberto quando o rato passa sobre ele"
-
-#. 3.2->settings-schema.json->enable-animation->description
-#. 2.6->settings-schema.json->enable-animation->description
-#. 3.4->settings-schema.json->enable-animation->description
-#. 4.2->settings-schema.json->enable-animation->description
-msgid "Use menu animations"
-msgstr "Usar animações do menu"
-
-#. 3.2->settings-schema.json->enable-animation->tooltip
-#. 2.6->settings-schema.json->enable-animation->tooltip
-#. 3.4->settings-schema.json->enable-animation->tooltip
-#. 4.2->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
-msgstr "Permitir animação do menu ao abrir e ao fechar"
-
-#. 3.2->settings-schema.json->menu-editor-button->description
-#. 2.6->settings-schema.json->menu-editor-button->description
-#. 3.4->settings-schema.json->menu-editor-button->description
-#. 4.2->settings-schema.json->menu-editor-button->description
-msgid "Open the menu editor"
-msgstr "Abrir o editor de menus"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 2.6->settings-schema.json->menu-editor-button->tooltip
-#. 3.4->settings-schema.json->menu-editor-button->tooltip
-#. 4.2->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Clique neste botão para personalizar as suas entradas de menus."
-
-#. 3.2->settings-schema.json->show-category-icons->description
-#. 2.6->settings-schema.json->show-category-icons->description
-#. 3.4->settings-schema.json->show-category-icons->description
-#. 4.2->settings-schema.json->show-category-icons->description
-msgid "Show category icons"
-msgstr "Mostrar ícones de categorias"
-
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 2.6->settings-schema.json->show-category-icons->tooltip
-#. 3.4->settings-schema.json->show-category-icons->tooltip
-#. 4.2->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Escolha se deseja ou não mostrar ícones nas categorias."
-
-#. 3.2->settings-schema.json->show-application-icons->description
-#. 2.6->settings-schema.json->show-application-icons->description
-#. 3.4->settings-schema.json->show-application-icons->description
-#. 4.2->settings-schema.json->show-application-icons->description
-msgid "Show application icons"
-msgstr "Mostrar ícones das aplicações"
-
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 2.6->settings-schema.json->show-application-icons->tooltip
-#. 3.4->settings-schema.json->show-application-icons->tooltip
-#. 4.2->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Escolha se deseja ou não mostrar ícones nas aplicações."
 
 #. 3.2->settings-schema.json->show-context-menu-icons->description
 #. 2.6->settings-schema.json->show-context-menu-icons->description
@@ -540,186 +846,6 @@ msgstr "Mostrar ícones nos menus de contexto"
 #. 3.4->settings-schema.json->show-context-menu-icons->tooltip
 msgid "Choose whether or not to show icons on context menus."
 msgstr "Escolha se deseja ou não mostrar ícones nos menus de contexto."
-
-#. 3.2->settings-schema.json->show-favorite-icons->description
-#. 2.6->settings-schema.json->show-favorite-icons->description
-#. 3.4->settings-schema.json->show-favorite-icons->description
-#. 4.2->settings-schema.json->show-favorite-icons->description
-msgid "Show favorite icons"
-msgstr "Mostrar ícones nos favoritos"
-
-#. 3.2->settings-schema.json->show-favorite-icons->tooltip
-#. 2.6->settings-schema.json->show-favorite-icons->tooltip
-#. 3.4->settings-schema.json->show-favorite-icons->tooltip
-#. 4.2->settings-schema.json->show-favorite-icons->tooltip
-msgid "Choose whether or not to show icons on favorites."
-msgstr "Escolha se deseja ou não mostrar ícones nos favoritos."
-
-#. 3.2->settings-schema.json->favorite-button-size->units
-#. 2.6->settings-schema.json->favorite-button-size->units
-#. 3.4->settings-schema.json->favorite-button-size->units
-#. 4.2->settings-schema.json->favorite-button-size->units
-msgid "pixels"
-msgstr "pixéis"
-
-#. 3.2->settings-schema.json->favorite-button-size->description
-#. 2.6->settings-schema.json->favorite-button-size->description
-#. 3.4->settings-schema.json->favorite-button-size->description
-#. 4.2->settings-schema.json->favorite-button-size->description
-msgid "Size of the favorite buttons"
-msgstr "Tamanho dos botões de favoritos"
-
-#. 3.2->settings-schema.json->favorite-button-size->tooltip
-#. 2.6->settings-schema.json->favorite-button-size->tooltip
-#. 3.4->settings-schema.json->favorite-button-size->tooltip
-#. 4.2->settings-schema.json->favorite-button-size->tooltip
-msgid "Change the size of the favorite buttons"
-msgstr "Mudar o tamanho dos botões de favoritos"
-
-#. 3.2->settings-schema.json->show-sidebar->description
-#. 2.6->settings-schema.json->show-sidebar->description
-#. 3.4->settings-schema.json->show-sidebar->description
-#. 4.2->settings-schema.json->show-sidebar->description
-msgid "Show sidebar on menu"
-msgstr "Mostrar barra lateral no menu"
-
-#. 3.2->settings-schema.json->show-sidebar->tooltip
-#. 2.6->settings-schema.json->show-sidebar->tooltip
-#. 3.4->settings-schema.json->show-sidebar->tooltip
-#. 4.2->settings-schema.json->show-sidebar->tooltip
-msgid "Choose whether or not to show the sidebar."
-msgstr "Escolha se deseja ou não mostrar a barra lateral."
-
-#. 3.2->settings-schema.json->user-box-layout->options
-#. 2.6->settings-schema.json->user-box-layout->options
-#. 3.4->settings-schema.json->user-box-layout->options
-#. 4.2->settings-schema.json->user-box-layout->options
-msgid "User picture and user name"
-msgstr "Imagem do utilizador e nome do utilizador"
-
-#. 3.2->settings-schema.json->user-box-layout->options
-#. 2.6->settings-schema.json->user-box-layout->options
-#. 3.4->settings-schema.json->user-box-layout->options
-#. 4.2->settings-schema.json->user-box-layout->options
-msgid "User picture only"
-msgstr "Apenas imagem do utilizador"
-
-#. 3.2->settings-schema.json->user-box-layout->options
-#. 2.6->settings-schema.json->user-box-layout->options
-#. 3.4->settings-schema.json->user-box-layout->options
-#. 4.2->settings-schema.json->user-box-layout->options
-msgid "Hide"
-msgstr "Esconder"
-
-#. 3.2->settings-schema.json->user-box-layout->description
-#. 2.6->settings-schema.json->user-box-layout->description
-#. 3.4->settings-schema.json->user-box-layout->description
-#. 4.2->settings-schema.json->user-box-layout->description
-msgid "User account info box style"
-msgstr "Estilo da caixa de informação da conta do utilizador"
-
-#. 3.2->settings-schema.json->user-box-layout->tooltip
-#. 2.6->settings-schema.json->user-box-layout->tooltip
-#. 3.4->settings-schema.json->user-box-layout->tooltip
-#. 4.2->settings-schema.json->user-box-layout->tooltip
-msgid "Choose whether to show the user name and/or user picture."
-msgstr ""
-"Escolha se deseja mostrar ou não o nome do utilizador e/ou a sua imagem de "
-"utilizador."
-
-#. 3.2->settings-schema.json->quicklauncher-layout->options
-#. 2.6->settings-schema.json->quicklauncher-layout->options
-#. 3.4->settings-schema.json->quicklauncher-layout->options
-#. 4.2->settings-schema.json->quicklauncher-layout->options
-msgid "Icons only"
-msgstr "Apenas ícones"
-
-#. 3.2->settings-schema.json->quicklauncher-layout->options
-#. 2.6->settings-schema.json->quicklauncher-layout->options
-#. 3.4->settings-schema.json->quicklauncher-layout->options
-#. 4.2->settings-schema.json->quicklauncher-layout->options
-msgid "Labels only"
-msgstr "Apenas textos"
-
-#. 3.2->settings-schema.json->quicklauncher-layout->description
-#. 2.6->settings-schema.json->quicklauncher-layout->description
-#. 3.4->settings-schema.json->quicklauncher-layout->description
-#. 4.2->settings-schema.json->quicklauncher-layout->description
-msgid "Quicklauncher button style"
-msgstr "Estilo dos botões do iniciador rápido"
-
-#. 3.2->settings-schema.json->quicklauncher-layout->tooltip
-#. 2.6->settings-schema.json->quicklauncher-layout->tooltip
-#. 3.4->settings-schema.json->quicklauncher-layout->tooltip
-#. 4.2->settings-schema.json->quicklauncher-layout->tooltip
-msgid ""
-"Choose whether to show icons and/or labels on the quicklauncher buttons."
-msgstr ""
-"Escolha se deseja ou não mostrar ícones e/ou texto nos botões do iniciador "
-"rápido."
-
-#. 3.2->settings-schema.json->show-shutdown-menu->description
-#. 2.6->settings-schema.json->show-shutdown-menu->description
-#. 3.4->settings-schema.json->show-shutdown-menu->description
-#. 4.2->settings-schema.json->show-shutdown-menu->description
-msgid "Show quit buttons"
-msgstr "Mostrar botões de saída"
-
-#. 3.2->settings-schema.json->show-shutdown-menu->tooltip
-#. 2.6->settings-schema.json->show-shutdown-menu->tooltip
-#. 3.4->settings-schema.json->show-shutdown-menu->tooltip
-#. 4.2->settings-schema.json->show-shutdown-menu->tooltip
-msgid "Choose whether or not to show the quit buttons."
-msgstr "Escolha se deseja mostrar ou não os botões de saída."
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->options
-#. 2.6->settings-schema.json->shutdown-menu-layout->options
-#. 3.4->settings-schema.json->shutdown-menu-layout->options
-#. 4.2->settings-schema.json->shutdown-menu-layout->options
-msgid "DropDown"
-msgstr "Menu pendente"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->options
-#. 2.6->settings-schema.json->shutdown-menu-layout->options
-#. 3.4->settings-schema.json->shutdown-menu-layout->options
-#. 4.2->settings-schema.json->shutdown-menu-layout->options
-msgid "Vertical"
-msgstr "Vertical"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->options
-#. 2.6->settings-schema.json->shutdown-menu-layout->options
-#. 3.4->settings-schema.json->shutdown-menu-layout->options
-#. 4.2->settings-schema.json->shutdown-menu-layout->options
-msgid "Horizontal"
-msgstr "Horizontal"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->description
-#. 2.6->settings-schema.json->shutdown-menu-layout->description
-#. 3.4->settings-schema.json->shutdown-menu-layout->description
-#. 4.2->settings-schema.json->shutdown-menu-layout->description
-msgid "Quit buttons layout"
-msgstr "Disposição dos botões de saída"
-
-#. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
-#. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
-#. 3.4->settings-schema.json->shutdown-menu-layout->tooltip
-#. 4.2->settings-schema.json->shutdown-menu-layout->tooltip
-msgid "Choose the layout of the quit options."
-msgstr "Escolher a disposição das opções de sair."
-
-#. 3.2->settings-schema.json->shutdown-label->description
-#. 2.6->settings-schema.json->shutdown-label->description
-#. 3.4->settings-schema.json->shutdown-label->description
-#. 4.2->settings-schema.json->shutdown-label->description
-msgid "'Quit'-Button label"
-msgstr "'Sair'-Texto do botão"
-
-#. 3.2->settings-schema.json->shutdown-label->tooltip
-#. 2.6->settings-schema.json->shutdown-label->tooltip
-#. 3.4->settings-schema.json->shutdown-label->tooltip
-#. 4.2->settings-schema.json->shutdown-label->tooltip
-msgid "Enter custom text for the 'Quit' button."
-msgstr "Introduza um texto personalizado para o botão 'Sair'."
 
 #. 3.2->settings-schema.json->quicklauncher-0-checkbox->description
 #. 3.2->settings-schema.json->quicklauncher-1-checkbox->description
@@ -1092,131 +1218,3 @@ msgstr "Atraso entre a mudança de categorias"
 #. 2.6->settings-schema.json->head-button-show-hide-icons->description
 msgid "Icons"
 msgstr "Ícones"
-
-#. 3.4->settings-schema.json->quicklauncher-separator-layout->title
-#. 4.2->settings-schema.json->quicklauncher-separator-layout->title
-msgid "Quicklauncher Separators"
-msgstr "Separadores do iniciador rápido"
-
-#. 3.4->settings-schema.json->custom-quicklauncher-places->title
-#. 4.2->settings-schema.json->custom-quicklauncher-places->title
-msgid "Quicklauncher Places"
-msgstr "Locais do iniciador rápido"
-
-#. 3.4->settings-schema.json->custom-quicklauncher-apps->title
-#. 4.2->settings-schema.json->custom-quicklauncher-apps->title
-msgid "Quicklauncher Applications"
-msgstr "Aplicações do iniciador rápido"
-
-#. 3.4->settings-schema.json->quicklauncher-separator1->description
-#. 4.2->settings-schema.json->quicklauncher-separator1->description
-msgid "Separator below user account info box"
-msgstr "Separador abaixo da caixa de informação da conta do utilizador"
-
-#. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
-#. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
-#. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
-#. 4.2->settings-schema.json->quicklauncher-separator1->tooltip
-#. 4.2->settings-schema.json->quicklauncher-separator2->tooltip
-#. 4.2->settings-schema.json->quicklauncher-separator3->tooltip
-msgid "Choose whether or not to show this separator."
-msgstr "Escolha se deseja ou não mostrar este separador."
-
-#. 3.4->settings-schema.json->quicklauncher-places->description
-#. 4.2->settings-schema.json->quicklauncher-places->description
-msgid "Custom Quicklauncher Places"
-msgstr "Locais personalizados do iniciador rápido"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Visible"
-msgstr "Visível"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-msgid "Directory"
-msgstr "Diretório"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Custom Label"
-msgstr "Texto personalizado"
-
-#. 3.4->settings-schema.json->quicklauncher-places->columns->title
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-places->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Custom Icon"
-msgstr "Ícone personalizado"
-
-#. 3.4->settings-schema.json->quicklauncher-separator2->description
-#. 4.2->settings-schema.json->quicklauncher-separator2->description
-msgid "Separator below quicklauncher places"
-msgstr "Separador abaixo dos locais do iniciador rápido"
-
-#. 3.4->settings-schema.json->quicklauncher-apps->description
-#. 4.2->settings-schema.json->quicklauncher-apps->description
-msgid "Custom Quicklauncher Applications"
-msgstr "Aplicações personalizadas do iniciador rápido"
-
-#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
-#. 4.2->settings-schema.json->quicklauncher-apps->columns->title
-msgid "Command"
-msgstr "Comando"
-
-#. 3.4->settings-schema.json->quicklauncher-separator3->description
-#. 4.2->settings-schema.json->quicklauncher-separator3->description
-msgid "Separator above quit buttons"
-msgstr "Separador acima dos botões de saída"
-
-#. 4.2->settings-schema.json->websearch->title
-msgid "Web Search"
-msgstr "Motor de pesquisa"
-
-#. 4.2->settings-schema.json->web-search-engine->title
-#. 4.2->settings-schema.json->web-search->description
-msgid "Web Search Engine"
-msgstr "Motor de pesquisa Web"
-
-#. 4.2->settings-schema.json->menu-custom->description
-msgid "Use a custom icon and label"
-msgstr "Usar um ícone e rótulo personalizados"
-
-#. 4.2->settings-schema.json->menu-custom->tooltip
-msgid "Check this to specify a custom icon and label"
-msgstr "Marcar para especificar um ícone e rótulo personalizados"
-
-#. 4.2->settings-schema.json->menu-label->description
-msgid "Text"
-msgstr "Texto"
-
-#. 4.2->settings-schema.json->shutdown-menu-reverse-order->description
-msgid "Reverse quit button order"
-msgstr "Ordem inversa do botão de sair"
-
-#. 4.2->settings-schema.json->shutdown-menu-reverse-order->tooltip
-msgid ""
-"Choose whether to display the 'Quit' button first or last. (Has no effect on "
-"'DropDown' layout.)"
-msgstr ""
-"Escolha se deseja ou não mostrar o botão 'Sair' no início ou no fim. (Não "
-"tem efeito sobre a disposição 'Suspensa')."
-
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "Use"
-msgstr "Usar"
-
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "Name"
-msgstr "Nome"
-
-#. 4.2->settings-schema.json->web-search->columns->title
-msgid "URL"
-msgstr "URL"
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Por favor introduza a sua senha para desinstalar esta aplicação"

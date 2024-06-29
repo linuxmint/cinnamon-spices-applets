@@ -15,15 +15,18 @@ function _(str) {
 }
 
 //applet command constants
-var CommandConstants = new function() {
-    this.COMMAND_START_LINUX_MANAGER = "./.local/share/cinnamon/applets/xampp-panel@backids99/xamp_manager_wrap.sh";
-	this.COMMAND_START_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp start";
-	this.COMMAND_STOP_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp stop";
-	this.COMMAND_RESTART_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restart";
-	this.COMMAND_PHP_CONFIG_EDIT = "xed admin:///opt/lampp/etc/php.ini";
-	this.COMMAND_LAUNCH_PHPMYADMIN = "xdg-open http://localhost/phpmyadmin/";
-	this.COMMAND_LAUNCH_WEBDIR = "xdg-open http://localhost/";
-	this.COMMAND_OPEN_WEBDIR = "nemo /opt/lampp/htdocs/";
+var CommandConstants = {
+    COMMAND_START_LINUX_MANAGER: "./.local/share/cinnamon/applets/xampp-panel@backids99/xamp_manager_wrap.sh",
+	COMMAND_START_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp start",
+	COMMAND_STOP_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp stop",
+	COMMAND_RESTART_XAMPP: "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restart",
+	COMMAND_PHP_CONFIG_EDIT: "xed admin:///opt/lampp/etc/php.ini",
+	COMMAND_HOSTS_EDIT: "xed admin:///etc/hosts",
+	COMMAND_HTTPD_VHOSTS_CONF_EDIT: "xed admin:///opt/lampp/etc/extra.httpd-vhosts.conf",
+	COMMAND_HTTPD_CONF_EDIT: "xed admin:///opt/lampp/etc/httpd.conf",
+	COMMAND_LAUNCH_PHPMYADMIN: "xdg-open http://localhost/phpmyadmin/",
+	COMMAND_LAUNCH_WEBDIR: "xdg-open http://localhost/",
+	COMMAND_OPEN_WEBDIR: "nemo /opt/lampp/htdocs/",
 }
 
 
@@ -75,10 +78,23 @@ MyApplet.prototype = {
 						Util.spawnCommandLine(CommandConstants.COMMAND_LAUNCH_PHPMYADMIN);
 		});
 
+		this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
 		this.menu.addAction(_("Edit default php.ini"), function(event) {
 						Util.spawnCommandLine(CommandConstants.COMMAND_PHP_CONFIG_EDIT);
 		});
 
+		this.menu.addAction(_("Edit etc/hosts"), function(event) {
+						Util.spawnCommandLine(CommandConstants.COMMAND_HOSTS_EDIT);
+		});
+
+		this.menu.addAction(_("Edit extra.httpd-vhosts.conf"), function(event) {
+						Util.spawnCommandLine(CommandConstants.COMMAND_HTTPD_VHOSTS_CONF_EDIT);
+		});
+
+		this.menu.addAction(_("Edit httpd.conf"), function(event) {
+						Util.spawnCommandLine(CommandConstants.COMMAND_HTTPD_CONF_EDIT);
+		});
     },
 
 	on_applet_clicked: function(){

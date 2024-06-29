@@ -1,0 +1,57 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Configure"
+    },
+    "resource": {
+        "type": "radiogroup",
+        "default": "https://www.loliapi.com/acg/pc/",
+        "description": "Wallpaper api resource",
+        "options": {
+            "loliapi.com": "https://www.loliapi.com/acg/pc/",
+            "zichen.zone": "https://app.zichen.zone/api/acg.php",
+            "moe.jitsu.top":"https://moe.jitsu.top/img/?sort=pc",
+            "paugram.com": "https://api.paugram.com/wallpaper/",
+            "t.mwm.moe": "https://t.mwm.moe/pc",
+            "dmoe.cc": "https://www.dmoe.cc/random.php",
+            "api.vvhan.com": "https://api.vvhan.com/api/acgimg",
+            "paulzzh.com": "https://img.paulzzh.com/touhou/random"
+        },
+        "tooltip": "Select a wallpaper resource"
+    },
+    "saveImage": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Automatically save background images",
+        "tooltip": "Automatically save background images"
+    },
+    "saveImagePath": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Save background images to",
+        "tooltip": "Automatically save background images to this directory"
+    },
+    "slideshow": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Play backgrounds as a slideshow",
+        "tooltip": "Play backgrounds as a slideshow"
+    },
+    "delay": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Delay",
+        "tooltip": "Delay"
+    },
+    "click": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enable click to switch images",
+        "tooltip": "Enable click to switch images"
+    }
+}

@@ -1,11 +1,30 @@
-import { HTTPHeaders, HTTPParams, Method } from "./httpLib";
-import { Logger } from "./logger";
-const { Message, Session, SessionAsync } = imports.gi.Soup;
+import { REQUEST_TIMEOUT_SECONDS } from "../consts";
+import { setTimeout } from "../utils";
+import type { HTTPHeaders, HTTPParams, Method } from "./httpLib";
+import { Logger } from "./services/logger";
+const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;
+const { Cancellable } = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
+export interface SoupLibSendOptions {
+	params?: HTTPParams | null,
+	headers?: HTTPHeaders,
+	method?: Method,
+	/**
+	 * If not provided, a timeout is set to REQUEST_TIMEOUT_SECONDS automatically.
+	 */
+	cancellable?: imports.gi.Gio.Cancellable,
+	/** Do not encode the url.  */
+	noEncode?: boolean
+}
 export interface SoupLib {
-    Send: (url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method?: Method) => Promise<SoupResponse | null>;
+    Send: (
+		url: string,
+		options?: SoupLibSendOptions
+	) => Promise<SoupResponse | null>;
+
+	SetUserAgent: (userAgent: string | null) => void;
 }
 
 export interface SoupResponse {
@@ -35,43 +54,83 @@ function AddHeadersToMessage(message: imports.gi.Soup.Message, headers?: HTTPHea
     }
 }
 
+const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+
 class Soup3 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	private readonly _httpSession = new Session();
 
     constructor() {
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
     }
 
-    async Send(url: string, params?: HTTPParams | null | undefined, headers?: HTTPHeaders | undefined, method: Method = "GET"): Promise<SoupResponse | null> {
+	public SetUserAgent = (userAgent: string | null) =>  {
+		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+	};
+
+    async Send(
+		url: string,
+		options: SoupLibSendOptions = {}
+	): Promise<SoupResponse | null> {
+		const {
+			params,
+			headers,
+			method = "GET",
+			cancellable,
+			noEncode = false
+		} = options;
+
+		if (cancellable?.is_cancelled()) {
+			return null;
+		}
+
         // Add params to url
         url = AddParamsToURI(url, params);
 
-        const query = encodeURI(url);
+		const query = noEncode ? url : encodeURI(url);
         Logger.Debug("URL called: " + query);
-        const data: SoupResponse | null = await new Promise((resolve, reject) => {
+        const data: SoupResponse | null = await new Promise((resolve) => {
             const message = Message.new(method, query);
             if (message == null) {
                 resolve(null);
             }
             else {
                 AddHeadersToMessage(message, headers);
-                (this._httpSession as any).send_and_read_async(message, PRIORITY_DEFAULT, null, (session: any, result: any) => {
-                    const res: imports.gi.GLib.Bytes | null = (this._httpSession as any).send_and_read_finish(result);
-                    const headers: Record<string, string> = {};
-                    (message as any).get_response_headers().foreach((name: string, value: string) => {
-                        headers[name] = value;
-                    })
+				const finalCancellable = cancellable ?? Cancellable.new();
 
-                    resolve({
-                        reason_phrase: (message as any).get_reason_phrase() ?? "",
-                        status_code: (message as any).get_status(),
-                        response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
-                        response_headers: headers
-                    });
+				let timeout: number | null = null;
+				// If cancellable is not provided, we create a timeout to cancel the request after REQUEST_TIMEOUT_SECONDS
+				if (cancellable == null) {
+					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+				}
+
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
+					const headers: Record<string, string> = {};
+					let res: imports.gi.GLib.Bytes | null = null;
+					if (timeout != null)
+						clearTimeout(timeout);
+					try {
+						res = this._httpSession.send_and_read_finish(result);
+						message.get_response_headers().foreach((name: string, value: string) => {
+							headers[name] = value;
+						})
+					}
+					catch(e) {
+						if (e instanceof Error)
+							Logger.Error("Error reading http request's response: " + e.message, e);
+					}
+					finally {
+						resolve({
+							reason_phrase: message.get_reason_phrase() ?? "",
+							status_code: message.get_status(),
+							response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
+							response_headers: headers
+						});
+					}
                 });
             }
         });
@@ -80,16 +139,27 @@ class Soup3 implements SoupLib {
     }
 }
 
+
+interface Soup2Session extends Omit<imports.gi.Soup.Session, "send_async"> {
+	use_thread_context: boolean;
+	send_async: (message: imports.gi.Soup.Message, cancellable: imports.gi.Gio.Cancellable | null, callback: (session: unknown, result: imports.gi.Gio.AsyncResult) => void) => void;
+}
+
 class Soup2 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
-	private readonly _httpSession = new SessionAsync();
+	private readonly _httpSession: Soup2Session;
 
     constructor() {
-        const {ProxyResolverDefault}  = imports.gi.Soup;
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+        const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+		this._httpSession = new SessionAsync();
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
+		this._httpSession.use_thread_context = true;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
 		this._httpSession.add_feature(new ProxyResolverDefault());
     }
 
@@ -99,38 +169,133 @@ class Soup2 implements SoupLib {
 	 * @param params
 	 * @param method
 	 */
-	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<SoupResponse | null> {
+	public async Send(
+		url: string,
+		options: SoupLibSendOptions = {}
+	): Promise<SoupResponse | null> {
+		const {
+			params,
+			headers,
+			method = "GET",
+			cancellable
+		} = options;
+
+		if (cancellable?.is_cancelled()) {
+			return null;
+		}
+
 		// Add params to url
 		url = AddParamsToURI(url, params);
 
 		const query = encodeURI(url);
 		Logger.Debug("URL called: " + query);
-		const data: SoupResponse | null = await new Promise((resolve, reject) => {
+		const data: SoupResponse | null = await new Promise((resolve) => {
 			const message = Message.new(method, query);
 			if (message == null) {
 				resolve(null);
 			}
 			else {
 				AddHeadersToMessage(message, headers);
-				this._httpSession.queue_message(message, (session, message) => {
+				const finalCancellable = cancellable ?? Cancellable.new();
+
+				let timeout: number | null = null;
+				// If cancellable is not provided, we create a timeout to cancel the request after REQUEST_TIMEOUT_SECONDS
+				if (cancellable == null) {
+					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+				}
+
+				Logger.Debug("Sending http request to " + query);
+				this._httpSession.send_async(message, finalCancellable, async (session: unknown, result: imports.gi.Gio.AsyncResult) => {
+					if (timeout != null)
+						clearTimeout(timeout);
+
 					const headers: Record<string, string> = {};
-					message.response_headers.foreach((name, value) => {
-						headers[name] = value;
-					})
+					let res: string | null = null;
+					try {
+						Logger.Debug("Reading reply from " + query);
+						const stream: imports.gi.Gio.InputStream = this._httpSession.send_finish(result);
+						Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
+						res = await this.read_all_bytes(stream, finalCancellable);
+						stream.close(null);
+						message.response_headers.foreach((name: string, value: string) => {
+							headers[name] = value;
+						})
+					}
+					catch(e) {
+						if (e instanceof Error)
+							Logger.Error("Error reading http request's response: " + e.message, e);
+					}
 
 					resolve({
 						reason_phrase: message.reason_phrase,
 						status_code: message.status_code,
-						response_body: message.response_body?.data ?? null,
+						response_body: res,
 						response_headers: headers
 					});
+
+					return;
 				});
 			}
 		});
 
 		return data;
 	}
+
+	public SetUserAgent = (userAgent: string | null) => {
+		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+	}
+
+	private async read_all_bytes(stream: imports.gi.Gio.InputStream, cancellable: imports.gi.Gio.Cancellable): Promise<string | null> {
+		if (cancellable.is_cancelled())
+			return null;
+
+		Logger.Debug("Reading all bytes from http request stream.");
+
+		const read_chunk_async = () => {
+			Logger.Verbose("Reading chunk from http request stream.");
+			return new Promise<imports.gi.GLib.Bytes>((resolve) => {
+				stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
+					try {
+						Logger.Verbose("Reading chunk from http request stream finished.");
+						resolve(stream.read_bytes_finish(read_result));
+					}
+					catch(e) {
+						if (e instanceof Error)
+							Logger.Error("Error reading chunk from http request stream: " + e.message, e);
+						resolve(imports.gi.GLib.Bytes.new());
+					}
+				});
+			})
+		}
+
+		let res: string | null = null;
+		let chunk: imports.gi.GLib.Bytes;
+		Logger.Verbose("Reading First chunk from http request stream.")
+		chunk = await read_chunk_async();
+		Logger.Verbose("Reading First chunk from http request stream finished.")
+		while (chunk.get_size() > 0) {
+			if (cancellable.is_cancelled())
+				return res;
+
+			const chunkAsString = ByteArray.fromGBytes(chunk).toString();
+			if (res === null) {
+				res = chunkAsString;
+			}
+			else {
+				res += chunkAsString;
+			}
+
+			Logger.Verbose("Reading Next chunk from http request stream.")
+			chunk = await read_chunk_async();
+			Logger.Verbose("Reading Next chunk from http request stream finished.")
+		}
+
+		Logger.Verbose("Reading all bytes from http request stream finished.");
+		return res;
+	}
 }
 
-
-export const soupLib: SoupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+// SessionAsync is a Soup2 class
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+export const soupLib: SoupLib = (imports.gi.Soup as any).SessionAsync != undefined ? new Soup2() : new Soup3();

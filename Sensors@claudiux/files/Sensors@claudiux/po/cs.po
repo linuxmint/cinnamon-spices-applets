@@ -1,9 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux.pot Czech 3.1.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 17:17+0200\n"
-"PO-Revision-Date: 2023-07-16 17:06+0200\n"
+"Project-Id-Version: Sensors@claudiux Czech 3.5.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"PO-Revision-Date: 2024-02-04 19:20+0100\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -15,110 +16,118 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:101
 msgid "Sensors Monitor"
 msgstr "Sledování senzorů"
 
-#: applet.js:403 applet.js:455
+#: applet.js:268
+msgid "Suspended"
+msgstr "Zastaveno"
+
+#: applet.js:484 applet.js:526
 msgid "high:"
 msgstr "vysoká:"
 
-#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:405 applet.js:457
+#: applet.js:486 applet.js:528
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:495 applet.js:538
+#: applet.js:569 applet.js:612
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:540
+#: applet.js:614
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:568
+#: applet.js:642
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#: applet.js:568
+#: applet.js:642
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#: applet.js:588
+#: applet.js:662
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#: applet.js:863
+#: applet.js:925
 msgid "Settings"
 msgstr "Předvolby"
 
-#: applet.js:863
+#: applet.js:925
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:870
+#: applet.js:932
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#: applet.js:880
+#: applet.js:942
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Teplotní senzory"
 
-#: applet.js:890
+#: applet.js:952
 msgid "🤂 Fan sensors"
 msgstr "🤂 Senzory větráků"
 
-#: applet.js:900
+#: applet.js:962
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Senzory napětí"
 
-#: applet.js:910
+#: applet.js:972
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:921
+#: applet.js:983
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#: applet.js:932
+#: applet.js:992
+msgid "Suspend Sensors"
+msgstr "Pozastavit Sledování senzorů"
+
+#: applet.js:1003
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#: applet.js:1224
+#: applet.js:1295
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
 
-#: lib/checkDependencies.js:303
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s je plně funkční."
 
-#: lib/checkDependencies.js:304
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Všechny závislosti jsou nainstalované"
 
-#: lib/checkDependencies.js:332
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Zdá se, že chybí některé z programů vyžadovaných pro plnou funkčnost appletu."
 
-#: lib/checkDependencies.js:333
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "V právě otevřeném okně terminálu prosím proveďte následující příkazy:"
 
-#: lib/checkDependencies.js:334
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Některé závislosti nejsou nainstalované!"
 
-#: lib/util.js:243
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Spuštění '%s' selhalo:"
@@ -176,9 +185,9 @@ msgid ""
 "color changes when a value reaches or exceeds its limit."
 msgstr ""
 "Zobrazuje hodnoty různých senzorů počítače jako jsou teplotní čidla (CPU - "
-"GPU - zdroj), rychlosti větráků, hodnoty napětí a detekce narušení (otevření "
-"krytu). Upozorní barevnými změnami pokud hodnoty dosáhnout nebo přesáhnou "
-"limity."
+"GPU - napájecí zdroj), rychlosti větráků, hodnoty napětí a také detekce "
+"narušení (otevření krytu). Upozorní barevnými změnami, pokud hodnoty "
+"dosáhnout nebo přesáhnou limity."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "🌡 Temperature"
@@ -203,6 +212,10 @@ msgstr "⮿ Narušení"
 #. settings-schema.json->section_intrusionOptions->title
 msgid "Options"
 msgstr "Možnosti"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Bublina"
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -300,8 +313,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr ""
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -325,25 +370,10 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Velikost písma (% standardní velikosti)"
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr "Výchozí"
-
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr "Bílé"
-
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr "Černé"
-
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr "Šedé"
-
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
-msgstr "Světle šedé"
+#. settings-schema.json->char_color_customized->description
+#, fuzzy
+msgid "Customize Text Color"
+msgstr "Barva textu"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
@@ -374,6 +404,10 @@ msgstr "Odstranit ikony"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Zapne či vypne zobrazení ikon."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Zobrazovat bublinu při najetí myší"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -716,6 +750,7 @@ msgstr ""
 "K obnovení původního názvu jej zkopírujte z položky Název senzoru."
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Ukázka hodnot senzorů dostupných na tomto počítači"
 
@@ -730,12 +765,3 @@ msgstr "Obnovit výstup"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Odstranit z panelu applet temperature@fevimu"
-
-#~ msgid "hddtemp is for now only usable by root"
-#~ msgstr "hddtemp je aktuálně použitelný jen rootem"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Teplotní skripty"
-
-#~ msgid "Make hddtemp usable by user"
-#~ msgstr "Udělat hddtemp použitelný uživatelem"

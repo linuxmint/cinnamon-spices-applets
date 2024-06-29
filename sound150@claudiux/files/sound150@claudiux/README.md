@@ -2,87 +2,62 @@
 
 ## Summary
 
-This sound150@claudiux applet is an improvement of the sound@cinnamon.org applet.
+This sound150@claudiux applet is an enhanced sound applet.
 
-An option allows you to control the volume up to 150% of its nominal value.
+**This applet works with Pulseaudio or Pipewire.**
 
-The icon and the slider are coloured according to the volume when it is greater than 100%.
+**It can display icons indicating that the microphone is muted, if applicable.**
 
-A mark on sliders signals the '100%' position of volume.
+**Sound volume:**
 
-From 0 to 100%: standard icons.
+  * **The volume step can be redefined** (from 1% to 10%).
+  * **All multiples of 25% (or only 100%) can be magnetized.**
+  * The **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
+  * **A mark on slider signals the '100%' position of volume.**
 
-![sound_150_079](https://github.com/claudiux/docs/raw/master/sound150/images/sound_079.png) ![sound_150_100](https://github.com/claudiux/docs/raw/master/sound150/images/sound_100.png)
+**The song's cover art** can be displayed when it is embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
 
-From 101 to 115%: yellow icon.
+**You can control the sound volume up to 150% of its nominal value.**
 
-![sound_150_115](https://github.com/claudiux/docs/raw/master/sound150/images/sound_115.png)
+**You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control microphone volume.**
 
-From 116 to 130%: orange icon.
+**The icon can be colored according to the volume when it exceeds 100%.**
 
-![sound_150_130](https://github.com/claudiux/docs/raw/master/sound150/images/sound_130.png)
+From 0% to 100%: standard icon color.
 
-From 131 to 150%: red icon.
+From 101 to 115%: yellow icon (by default).
 
-![sound_150_150](https://github.com/claudiux/docs/raw/master/sound150/images/sound_150.png)
+From 116 to 130%: orange icon (by default).
 
-Note that the icons are those of the system.
+From 131 to 150%: red icon (by default).
 
-An option in settings allows you to don't display colors.
+*You can select other colors or choose not to display colors.*
 
-## Usage
+**You can redefine multimedia key bindings.**
 
- * In the settings (accessed by right-clicking on the icon), the ***Maximum volume control*** option sets the percentage of
-nominal volume you want to limit the maximum volume. Possible values are between 30% and 150%. From Cinnamon 4.4, Cinnamon Settings are used to set this value.
+Successfully tested on Cinnamon versions 2.8 to 6.0 (Linux Mint 17.3 to 21.3). Does not work on Cinnamon prior to version 2.8 (Linux Mint prior to 17.3).
 
-![sound_150-settings](https://github.com/claudiux/docs/raw/master/sound150/images/sound-settings.png)
+## Dependencies
 
-Use with caution. Above 120%, saturation can make the sound very unpleasant, even agressive.
+This applet requires *playerctl*. If this package is not installed, the user can install it using the 'Install playerctl' option in the menu. If this option is absent from the menu, this means that *playerctrl* is already installed.
 
-In a meeting room or classroom, it is often useful to be able to increase the volume beyond 100%.
+## Settings
 
-On the computer of a child, reduce the maximum volume possible to take care of his hearing... and yours!
+ * Settings can be accessed by right-clicking on this applet icon (Configure... option of the context menu).
 
-
- * You can also choose the value of incrementation/decrementation (+/-) of the volume (in % of nominal volume).
-
- * If you don't want colors, an option allows you to keep the standard color.
-
-## Cinnamon versions
-
-Tested successfully on Cinnamon v2.8 to v4.6 (Linux Mint 17.3 to 20).
-
-Does not work on Cinnamon prior to v2.8 (Linux Mint prior to 17.3).
-
-## Themes
-
-Tested on themes :
-
- * Cinnamon
- * Carta
- * CBlack
- * Graphite-Zero
- * Linux Mint
- * Mint-X (all themes)
- * Mint-Y and Mint-Y-Dark
- * Modern-Mint-2017
- * New-Minty
- * Numix-Cinnamon and Numix-Cinnamon-Transparent
- * Spider-Void
- * Void
- * Zukitwo-Cinnamon
+ * Since version 5.0.0, settings have been presented in a new way, with 4 tabs: *Behavior*, *Sound*, *Icon*, *Shortcuts*, making this applet highly configurable.
 
 ## Translations
 
-The **Sound 150%** applet is designed to allow translations of some messages (initially in English). A .pot template file is available, you can use it with software such as poedit to translate these messages.
+The **Sound 150%** applet is designed to allow translation. A .pot template file is available, which you can use with software such as *poedit* to translate into your own language. You can then submit your translation on github, by forking [this repo](https://github.com/linuxmint/cinnamon-spices-applets) and making a pull request containing your changes.
 
-The installation of the available languages is done automatically.
+Available translations are installed automatically when an update is performed.
 
-[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/sound150%40claudiux.md#)
+**[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/sound150%40claudiux.md#)**
 
 Many thanks to all of the translators!
 
-Any new translation is welcome.
+We welcome any new translations or updates.
 
 ## Contributors
 

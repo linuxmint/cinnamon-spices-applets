@@ -5,8 +5,11 @@ const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const ModalDialog = imports.ui.modalDialog;
+const Clutter = imports.gi.Clutter;
 
 const UUID = "ddcci-multi-monitor@tim-we";
+const DEFAULT_TOOLTIP = "Adjust monitor brightness via DDC/CI";
+const BRIGHTNESS_ADJUSTMENT_STEP = 5; /* Brightness adjustment step in % */
 
 function log(message, type = "debug") {
     const finalLogMessage = `[${UUID}] ${message}`;
@@ -21,6 +24,7 @@ function log(message, type = "debug") {
 }
 
 class Monitor {
+    #promises;
     constructor(index, name, bus) {
         this.index = index;
         this.name = name;
@@ -28,6 +32,7 @@ class Monitor {
         this.bus = bus;
         this.menuLabel = null;
         this.menuSlider = null;
+        this.#promises = Promise.resolve();
     }
 
     updateBrightness() {
@@ -68,14 +73,15 @@ class Monitor {
 
     setBrightness(value) {
         this.brightness = Math.round(value);
-        this.updateLabel();
-
-        return new Promise((resolve, reject) => {
-            Util.spawnCommandLineAsync(
-                `ddcutil --bus=${this.bus} setvcp 10 ${this.brightness}`,
-                resolve,
-                reject
-            );
+        this.updateMenu();
+        this.#promises = this.#promises.then(() => {
+            return new Promise((resolve, reject) => {
+                Util.spawnCommandLineAsync(
+                    `ddcutil --bus=${this.bus} setvcp 10 ${this.brightness}`,
+                    resolve,
+                    reject
+                );
+            });
         });
     }
 
@@ -111,7 +117,9 @@ class DDCMultiMonitor extends Applet.IconApplet {
         super(orientation, panelHeight, instance_id);
         this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
-        this.set_applet_tooltip("Adjust monitor brightness via DDC/CI");
+        this.set_applet_tooltip(DEFAULT_TOOLTIP);
+        this.actor.connect('scroll-event', (...args) => this._onScrollEvent(...args));
+        this.lastTooltipTimeoutID = null;
 
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -121,6 +129,9 @@ class DDCMultiMonitor extends Applet.IconApplet {
     }
 
     on_applet_clicked() {
+        this.monitors.forEach((monitor) => {
+            monitor.updateBrightness(); // Makes sure the brightness shown is the real brightness
+        });
         this.menu.toggle();
     }
 
@@ -187,6 +198,46 @@ class DDCMultiMonitor extends Applet.IconApplet {
         if (!init) {
             this.updateMenu();
         }
+    }
+
+    // Change the brightness when scrolling on the icon
+    _onScrollEvent(actor, event) {
+        let direction = event.get_scroll_direction();
+        if (direction == Clutter.ScrollDirection.SMOOTH) { // Prevents being triggered twice
+            return
+        }
+
+        if (direction == Clutter.ScrollDirection.DOWN) {
+            clearTimeout(this.lastTooltipTimeoutID);
+            let tooltipMessage = this.monitors.map(monitor => {
+                monitor.brightness = Math.max(0, monitor.brightness - BRIGHTNESS_ADJUSTMENT_STEP);
+                monitor.setBrightness(monitor.brightness);
+                return `${monitor.name}: ${monitor.brightness}%`;
+            }).join("\n");
+
+            this.set_applet_tooltip(tooltipMessage);
+            this._applet_tooltip.show();
+            this.lastTooltipTimeoutID = setTimeout(() => {
+                this._applet_tooltip.hide();
+                this.set_applet_tooltip(DEFAULT_TOOLTIP);
+            }, 2500);
+            
+        }
+        else if (direction == Clutter.ScrollDirection.UP) {
+            clearTimeout(this.lastTooltipTimeoutID);
+            let tooltipMessage = this.monitors.map(monitor => {
+                monitor.brightness = Math.min(100, monitor.brightness + BRIGHTNESS_ADJUSTMENT_STEP);
+                monitor.setBrightness(monitor.brightness);
+                return `${monitor.name}: ${monitor.brightness}%`;
+            }).join("\n");
+
+            this.set_applet_tooltip(tooltipMessage);
+            this._applet_tooltip.show();
+            this.lastTooltipTimeoutID = setTimeout(() => {
+                this._applet_tooltip.hide();
+                this.set_applet_tooltip(DEFAULT_TOOLTIP);
+            }, 2500);
+        } 
     }
 }
 

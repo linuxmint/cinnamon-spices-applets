@@ -1,0 +1,134 @@
+{
+    "engine-header": {
+        "type": "header",
+        "description": "Translation Engine"
+    },
+    "translate-engine" : {
+        "type" : "combobox",
+        "default": 2,
+        "options": {
+            "Apertium": 0,
+            "Aspell": 1,
+            "Auto": 2,
+            "Bing": 3,
+            "Google": 4,
+            "Hunspell": 5,
+            "Spell": 6,
+            "Yandex": 7
+        },
+        "description": "Engine (Auto/Google recommended!)",
+        "tooltip": "Most engines don't support play back and some don't even translate, others just report HTTP errors. So it's best to use \"Auto\" and let translate-shell decide what translator to use."
+    },
+
+    "auto-header": {
+        "type": "header",
+        "description": "Panel Button Actions"
+    },
+    "left-auto-paste" : {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Disabled": 0,
+            "Selection": 1,
+            "Clipboard": 2
+        },
+        "description": "Automatically paste and translate on left click",
+        "tooltip": "Automatically paste the current selection/clipboard content and translate it when opening the popup window using a left click on the translator panel button"
+    },
+    "left-auto-play": {
+        "type": "switch",
+        "default": 0,
+        "description": "Automatically play the translation on left click",
+        "dependency" : "left-auto-paste>0"
+    },
+    "middle-button-action" : {
+        "type" : "combobox",
+        "default": 1,
+        "options": {
+            "Do nothing": 0,
+            "Show popup dialog and translate Selection": 1,
+            "Show popup dialog and translate Clipboard": 2,
+            "Show popup dialog, translate Selection and play": 3,
+            "Show popup dialog, translate Clipboard and play": 4,
+            "Play translation of Selection": 5,
+            "Play translation of Clipboard": 6,
+            "Translate Selection and copy the translation": 7,
+            "Translate Clipboard and copy the translation": 8
+        },
+        "description": "Middle button action",
+        "tooltip": "Select the action to take when using the middle mouse button to click on the translator panel button"
+    },
+    "ctrl-middle-button-action" : {
+        "type" : "combobox",
+        "default": 5,
+        "options": {
+            "Do nothing": 0,
+            "Show popup dialog and translate Selection": 1,
+            "Show popup dialog and translate Clipboard": 2,
+            "Show popup dialog, translate Selection and play": 3,
+            "Show popup dialog, translate Clipboard and play": 4,
+            "Play translation of Selection": 5,
+            "Play translation of Clipboard": 6,
+            "Translate Selection and copy the translation": 7,
+            "Translate Clipboard and copy the translation": 8
+        },
+        "description": "Ctrl + Middle button action",
+        "tooltip": "Select the action to take when holding the Ctrl key and using the middle mouse button to click on the translator panel button"
+    },
+
+    "hotkeys-header": {
+        "type": "header",
+        "description": "Hotkeys"
+    },
+    "hotkey1-action" : {
+        "type" : "combobox",
+        "default": 1,
+        "options": {
+            "Show popup dialog and translate Selection": 1,
+            "Show popup dialog and translate Clipboard": 2,
+            "Show popup dialog, translate Selection and play": 3,
+            "Show popup dialog, translate Clipboard and play": 4,
+            "Play translation of Selection": 5,
+            "Play translation of Clipboard": 6,
+            "Translate Selection and copy the translation": 7,
+            "Translate Clipboard and copy the translation": 8
+        },
+        "description": "Hotkey #1",
+        "tooltip": "Select the action to take when the #1 hotkey is pressed"
+    },
+    "hotkey-1": {
+        "type": "keybinding",
+         "description": "",
+         "default": ""
+    },
+    "hotkey2-action" : {
+        "type" : "combobox",
+        "default": 5,
+        "options": {
+            "Show popup dialog and translate Selection": 1,
+            "Show popup dialog and translate Clipboard": 2,
+            "Show popup dialog, translate Selection and play": 3,
+            "Show popup dialog, translate Clipboard and play": 4,
+            "Play translation of Selection": 5,
+            "Play translation of Clipboard": 6,
+            "Translate Selection and copy the translation": 7,
+            "Translate Clipboard and copy the translation": 8
+        },
+        "description": "Hotkey #2",
+        "tooltip": "Select the action to take when the #2 hotkey is pressed"
+    },
+    "hotkey-2": {
+        "type": "keybinding",
+         "description": "",
+         "default": ""
+    },
+
+    "default-from-language": {
+        "type" : "generic",
+        "default": "English"
+    },
+    "default-to-language": {
+        "type" : "generic",
+        "default": "French"
+    }
+}

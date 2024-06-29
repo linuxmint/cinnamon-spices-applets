@@ -7,24 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-10 14:25+0200\n"
-"PO-Revision-Date: 2018-11-20 17:00+0100\n"
+"POT-Creation-Date: 2023-05-20 13:52+0200\n"
+"PO-Revision-Date: 2023-12-25 11:39+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:92
+#: applet.js:112
 msgid "Mark all as read"
 msgstr "Markér alle som læst"
 
-#: applet.js:104
+#: applet.js:135
 msgid "No xlets found, click to reload"
 msgstr "Ingen \"spices\" fundet. Klik for at genindlæse"
+
+#. metadata.json->name
+msgid "Spices notifier"
+msgstr "Spices-kommentarer"
+
+#. metadata.json->description
+msgid "Notifies of comments on the Cinnamon Spices website"
+msgstr "Giver besked om kommentarer på Cinnamon Spices-websitet"
 
 #. settings-schema.json->username->description
 msgid "GitHub user name"
@@ -42,10 +50,18 @@ msgstr "minutter"
 msgid "Hide panel icon when there are no unread comments"
 msgstr "Skjul panelikonet, når der ikke er nogen ulæste kommentarer"
 
-#. metadata.json->name
-msgid "Spices notifier"
-msgstr "Spices-kommentarer"
+#. settings-schema.json->label-uuids->description
+msgid "Additional uuid:s:"
+msgstr "Yderligere UUID'er:"
 
-#. metadata.json->description
-msgid "Notifies of comments on the Cinnamon Spices website"
-msgstr "Giver besked om kommentarer på Cinnamon Spices-websitet"
+#. settings-schema.json->uuids->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->uuids->tooltip
+msgid ""
+"Additional uuid:s for applets, desklets, extensions and themes you want to "
+"follow (add a row for each of them)."
+msgstr ""
+"Yderligere UUID'er til panelprogrammer, skrivebordsprogrammer, udvidelser "
+"og temaer, som du vil følge (tilføj en række for hver af dem)."

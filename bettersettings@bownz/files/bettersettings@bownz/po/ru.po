@@ -1,0 +1,94 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 11:04+0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#: applet.js:32
+msgid ""
+"Are you sure you want to restore all settings to default?\n"
+"\n"
+msgstr ""
+"Вы уверены что хотите сбросить все настройки?\n"
+"\n"
+
+#: applet.js:37
+msgid "Yes"
+msgstr "Да"
+
+#: applet.js:44
+msgid "No"
+msgstr "Нет"
+
+#: applet.js:65
+msgid "Settings"
+msgstr "Настройки"
+
+#: applet.js:74
+msgid "Troubleshoot"
+msgstr "Устранение неполадок"
+
+#: applet.js:75
+msgid "Restart Cinnamon"
+msgstr "Перезапустить Cinnamon"
+
+#: applet.js:80
+msgid "Reload Theme"
+msgstr "Перезагрузить тему оформления"
+
+#: applet.js:85
+msgid "Looking Glass"
+msgstr "Открыть Looking Glass"
+
+#: applet.js:89
+msgid "Restore all settings to Default"
+msgstr "Сбросить все настройки"
+
+#: applet.js:94
+msgid "Force Quit Application"
+msgstr "Принудительное завершение приложения"
+
+#: applet.js:101
+msgid "Screenshot"
+msgstr "Снимок экрана"
+
+#: applet.js:105
+msgid "Terminal"
+msgstr "Терминал"
+
+#: applet.js:113
+msgid "Panel Edit Mode"
+msgstr "Редактировать панель"
+
+#: applet.js:122
+msgid "Add/Remove Applets"
+msgstr "Добавить/Удалить Апплеты"
+
+#: applet.js:126
+msgid "Start up Applications"
+msgstr "Автостарт приложений"
+
+#: applet.js:130
+msgid "Cinnamon Settings"
+msgstr "Открыть настройки Cinnamon"
+
+#: applet.js:134
+msgid "System Settings"
+msgstr "Системные настройки"
+
+#. bettersettings@bownz->metadata.json->description
+msgid "A Better Cinnamon Settings"
+msgstr "Лучшие инструменты Cinnamon"
+
+#. bettersettings@bownz->metadata.json->name
+msgid "Better Cinnamon Settings"
+msgstr "Лучшие инструменты Cinnamon (A Better Cinnamon Settings)"

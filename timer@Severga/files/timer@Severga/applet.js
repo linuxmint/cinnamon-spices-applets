@@ -91,6 +91,7 @@ TimerApplet.prototype = {
     this.menu.addMenuItem(this.timeMenuItem);
     this.turnOffSwitchMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Turn off computer on timer"));
     this.turnOffSwitchMenuItem.actor.set_style("background: #6B8355");
+    this.turnOffSwitchMenuItem.connect("toggled", Lang.bind(this, this._turn_off_toggled));
     this.menu.addMenuItem(this.turnOffSwitchMenuItem);
     this.menu.addMenuItem(new PopupMenu.PopupMenuItem("", {reactive: false}));
     this.quickMenuItem = new PopupMenu.PopupSubMenuMenuItem(_("Quick setup"));
@@ -216,12 +217,14 @@ TimerApplet.prototype = {
       this.endTime = new Date(); this.endTime.setHours(this.hSpin.value); this.endTime.setMinutes(this.mSpin.value); this.endTime.setSeconds(this.sSpin.value);
       this.period = Math.floor((this.endTime.getTime() - Date.now()) / 1000);
       if (this.period > 0) {
+        this.saved_endTime = this.endTime.getTime();
         this.periodH = Math.floor(this.period / 3600);
         this.periodM = Math.floor(this.period % 3600 / 60);
         this.periodS = this.period % 60;
         this._tick();
       }
       else {
+        this.saved_endTime = 0;
         this.period = 0;
         this.periodH = 0;
         this.periodM = 0;
@@ -241,12 +244,14 @@ TimerApplet.prototype = {
       this.endTime = new Date(); this.endTime.setHours(this.hSpin.value + 24); this.endTime.setMinutes(this.mSpin.value); this.endTime.setSeconds(this.sSpin.value);
       this.period = Math.floor((this.endTime.getTime() - Date.now()) / 1000);
       if (this.period > 0) {
+        this.saved_endTime = this.endTime.getTime();
         this.periodH = Math.floor(this.period / 3600);
         this.periodM = Math.floor(this.period % 3600 / 60);
         this.periodS = this.period % 60;
         this._tick();
       }
       else {
+        this.saved_endTime = 0;
         this.period = 0;
         this.periodH = 0;
         this.periodM = 0;
@@ -268,8 +273,13 @@ TimerApplet.prototype = {
       this.periodS = this.sSpin.value;
       this.period = this.periodH * 3600 + this.periodM * 60 + this.periodS;
       this.endTime = new Date(Date.now() + this.period * 1000);
-      if (this.period) this._tick();
-      else this.timeMenuItem.setLabel(_("At:  --:--:--"));
+      if (this.period) {
+        this.saved_endTime = this.endTime.getTime();
+        this._tick();
+      } else {
+        this.saved_endTime = 0;
+        this.timeMenuItem.setLabel(_("At:  --:--:--"));
+      }
     }.bind(this));
     this.preciseMenuItem.menu.addAction(_("Add preset"), function () {
       let p = this.applet.hSpin.value * 3600 + this.applet.mSpin.value * 60 + this.applet.sSpin.value;
@@ -291,6 +301,12 @@ TimerApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN,      "showNotifications",  "showNotifications",  null, null);
     this.settings.bindProperty(Settings.BindingDirection.IN,      "openSubmenu",      "openSubmenu",      null, null);
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "preset",       "preset",       null, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "saved_endTime",  "saved_endTime",  null, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "turn_off",       "turn_off",       null, null);
+  },
+
+  _turn_off_toggled: function() {
+    this.turn_off = this.turnOffSwitchMenuItem.state
   },
 
   _createPresetsMenuItem: function () {
@@ -318,8 +334,13 @@ TimerApplet.prototype = {
         this.applet.periodM = Math.floor(this.preset % 3600 / 60);
         this.applet.periodS = this.preset % 60;
         this.applet.endTime = new Date(Date.now() + this.preset * 1000);
-        if (this.preset) this.applet._tick();
-        else this.applet.timeMenuItem.setLabel(_("At:  --:--:--"));
+        if (this.preset) {
+          this.applet.saved_endTime = this.applet.endTime.getTime();
+          this.applet._tick();
+        } else {
+          this.applet.saved_endTime = 0;
+          this.applet.timeMenuItem.setLabel(_("At:  --:--:--"));
+        }
       }.bind({applet: this, preset: this.preset[i]}));
       // Preset item delete button
       let del=new St.Button({label: _("[ × ]")});
@@ -376,6 +397,15 @@ TimerApplet.prototype = {
     else if (this.openSubmenu == "Precise setup") this.preciseMenuItem.menu.open();
     else this.presetsMenuItem.menu.open();
     this.menu.toggle();
+  },
+
+  on_applet_added_to_panel: function() {
+    if (this.turn_off)
+      this.turnOffSwitchMenuItem.setToggleState(this.turn_off);
+    if (this.saved_endTime > Date.now()) {
+      this.endTime.setTime(this.saved_endTime);
+      this._tick()
+    }
   },
 
   on_applet_removed_from_panel: function(event) {
@@ -449,8 +479,10 @@ TimerApplet.prototype = {
       this.periodM = Math.floor(this.period % 3600 / 60);
       this.periodS = this.period % 60;
       this.endTime = new Date(Date.now() + this.period * 1000);
+      this.saved_endTime = this.endTime.getTime();
     }
     else {
+      this.saved_endTime = 0;
       this.period = 0;
       this.periodH = 0;
       this.periodM = 0;

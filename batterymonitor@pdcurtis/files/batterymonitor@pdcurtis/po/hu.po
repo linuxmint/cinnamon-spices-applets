@@ -6,35 +6,39 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 22:50-0400\n"
-"PO-Revision-Date: 2023-07-10 22:52-0400\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2024-02-03 07:11+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: 5.4/applet.js:290 3.2/applet.js:135
+#: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:291 3.2/applet.js:136
+#: 5.4/applet.js:301 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Várakozik"
 
-#: 5.4/applet.js:317 3.2/applet.js:165
-msgid "Some Dependencies not Installed"
+#: 5.4/applet.js:327
+#, fuzzy
+msgid "Some dependencies not installed."
 msgstr "Néhány függőség nincs telepítve"
 
-#: 5.4/applet.js:317
+#: 5.4/applet.js:327
+#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts .\n"
+"functionality including notifications and audible alerts.\n"
 "\n"
-"Please view the README for help on installing them."
+"Please view the README for help on installing them.\n"
 msgstr ""
 "Mind a „sox”, mind a „zenity” szükséges ahhoz, hogy a kisalkalmazás minden "
 "szolgáltatása rendelkezésre álljon, beleértve az értesítéseket és a hangos "
@@ -42,11 +46,11 @@ msgstr ""
 "\n"
 "Kérjük, olvassa el a súgófájlt a telepítésükhöz."
 
-#: 5.4/applet.js:327 3.2/applet.js:198
+#: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Akkumulátor Figyelő Kisalkalmazás"
 
-#: 5.4/applet.js:327
+#: 5.4/applet.js:337
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -60,93 +64,100 @@ msgstr ""
 "be\n"
 "különösen, ha hosszú hangos fájlt választott ki\n"
 
-#: 5.4/applet.js:388 3.2/applet.js:297
+#: 5.4/applet.js:399 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Energiastatisztika megjelenítése"
 
-#: 5.4/applet.js:394 3.2/applet.js:303
+#: 5.4/applet.js:405 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Rendszer Figyelő megjelenítése"
 
-#: 5.4/applet.js:403
+#: 5.4/applet.js:414
 msgid "Housekeeping and System Submenu"
 msgstr "Karbantartás és Rendszer Almenü"
 
-#: 5.4/applet.js:406 3.2/applet.js:315
+#: 5.4/applet.js:417 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Változásnapló megtekintése"
 
-#: 5.4/applet.js:412
+#: 5.4/applet.js:423
 msgid "Open the README"
 msgstr "README fájl megnyitása"
 
-#: 5.4/applet.js:428 3.2/applet.js:348
+#: 5.4/applet.js:439 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Várakozás az akkumulátor információra"
 
-#: 5.4/applet.js:534
+#: 5.4/applet.js:444
+#, fuzzy
+msgid "Alert/Suspend:"
+msgstr "Felfüggesztés:"
+
+#: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr ""
 "Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
 "elektromos hálózathoz"
 
-#: 5.4/applet.js:540 3.2/applet.js:433
+#: 5.4/applet.js:555
+#, fuzzy
 msgid ""
-"The Battery Level has fallen to your alert level\n"
+"The battery level has fallen to your alert level.\n"
 "\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
 msgstr ""
 "Az akkumulátor töltöttségi szintje a riasztási szintjére csökkent\n"
 "\n"
-" vagy csatlakozzon újra egy áramforráshoz,\n"
+"vagy csatlakozzon újra egy áramforráshoz,\n"
 "\n"
 "fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
 "\n"
+"\n"
 
-#: 5.4/applet.js:555
+#: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
 "csatlakozik az elektromos hálózathoz"
 
-#: 5.4/applet.js:574
+#: 5.4/applet.js:589
 msgid "Time to Empty:"
-msgstr ""
+msgstr "Idő a lemerülésig:"
 
-#: 5.4/applet.js:575
+#: 5.4/applet.js:590
 msgid "Time to Full:"
-msgstr ""
+msgstr "Idő a feltöltésig:"
 
-#: 5.4/applet.js:578 5.4/applet.js:625
-#, fuzzy
-#| msgid "Percentage Charge:"
+#: 5.4/applet.js:593 5.4/applet.js:640
 msgid "Current Charge:"
-msgstr "Százalékos töltöttség:"
+msgstr "Aktuális töltöttség:"
 
-#: 5.4/applet.js:578 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Riasztás:"
 
-#: 5.4/applet.js:578 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Felfüggesztés:"
 
-#: 5.4/applet.js:625 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Riasztás ekkor:"
 
-#: 5.4/applet.js:625 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Felfüggesztés ekkor:"
 
-#: 5.4/applet.js:631
+#: 5.4/applet.js:646
 msgid "The battery level has been recharged to"
-msgstr ""
+msgstr "Az akkumulátor töltöttségi szintje a következőre lett feltöltve"
 
-#: 3.2/applet.js:165
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Néhány függőség nincs telepítve"
+
+#: 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'zenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -159,7 +170,7 @@ msgstr ""
 "\n"
 "Kérjük, olvassa el a súgófájlt a telepítésükhöz."
 
-#: 3.2/applet.js:198
+#: 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -173,34 +184,34 @@ msgstr ""
 "be\n"
 "különösen, ha hosszú hangos fájlt választott ki\n"
 
-#: 3.2/applet.js:312
+#: 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Karbantartás és Rendszer Almenü"
 
-#: 3.2/applet.js:321
+#: 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Sugó megnyitása"
 
-#: 3.2/applet.js:327
+#: 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Stylesheet.css fájl megnyitása (haladó funkció)"
 
 #. metadata.json->name
-#: 3.2/applet.js:343
+#: 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Akkumulátor Kisalkalmazás figyelés és kikapcsolás funkcióval (BAMS)"
 
-#: 3.2/applet.js:423
+#: 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr ""
 "Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
 "elektromos hálózathoz"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Akkumulátorfigyelő kisalkalmazás riasztás"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -217,45 +228,58 @@ msgstr ""
 "\n"
 "\n"
 
-#: 3.2/applet.js:449
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Az akkumulátor töltöttségi szintje a riasztási szintjére csökkent\n"
+"\n"
+" vagy csatlakozzon újra egy áramforráshoz,\n"
+"\n"
+"fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
+"\n"
+
+#: 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
 "csatlakozik az elektromos hálózathoz"
 
-#: 3.2/applet.js:464
+#: 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Töltés:"
 
-#: 3.2/applet.js:512
+#: 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Százalékos töltöttség:"
 
 #. metadata.json->description
-msgid "Displays Charge as Percentage and allows Alerts and Actions"
+#, fuzzy
+msgid "Displays charge as percentage and allows alerts and actions"
 msgstr ""
 "Megjeleníti a töltést százalékban, és lehetővé teszi a riasztásokat és "
 "műveleteket"
 
 #. 5.4->settings-schema.json->General->title
-#, fuzzy
-#| msgid "General Settings"
 msgid "General"
-msgstr "Általános beállítások"
+msgstr "Általános"
 
 #. 5.4->settings-schema.json->Style->title
 msgid "Style"
-msgstr ""
+msgstr "Stílus"
 
 #. 5.4->settings-schema.json->general->title
 msgid "General Settings"
 msgstr "Általános beállítások"
 
 #. 5.4->settings-schema.json->display_mode->title
-#, fuzzy
-#| msgid "Display Mode"
 msgid "Display Options"
-msgstr "Megjelenés mód"
+msgstr "Megjelenítési beállítások"
 
 #. 5.4->settings-schema.json->low_alert->title
 #. 3.2->settings-schema.json->head2->description
@@ -268,11 +292,11 @@ msgstr "Speciális"
 
 #. 5.4->settings-schema.json->bam_normal->title
 msgid "Normal"
-msgstr ""
+msgstr "Normál"
 
 #. 5.4->settings-schema.json->bam_discharging->title
 msgid "Discharging"
-msgstr ""
+msgstr "Kisülés"
 
 #. 5.4->settings-schema.json->bam_alert->title
 msgid "Alert"
@@ -280,15 +304,15 @@ msgstr "Riasztás"
 
 #. 5.4->settings-schema.json->bam_alert_discharging->title
 msgid "Alert Discharging"
-msgstr ""
+msgstr "Figyelmeztetés Kisülés"
 
 #. 5.4->settings-schema.json->bam_limit_exceeded->title
 msgid "Limit Exceeded"
-msgstr ""
+msgstr "Keret túllépve"
 
 #. 5.4->settings-schema.json->bam_limit_exceeded2->title
 msgid "Limit Exceeded - Critical"
-msgstr ""
+msgstr "Határérték túllépve – kritikus"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -318,7 +342,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_font_size->units
 #. 5.4->settings-schema.json->limit_exceeded2_font_size->units
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
@@ -337,17 +361,21 @@ msgstr ""
 
 #. 5.4->settings-schema.json->recharged_alert->description
 msgid "Visible Alert when Recharging"
-msgstr ""
+msgstr "Látható figyelmeztetés töltéskor"
 
 #. 5.4->settings-schema.json->recharged_alert->tooltip
 msgid "Provide visible alert when battery is recharged to a certain threshold"
 msgstr ""
+"Látható riasztást ad, ha az akkumulátor egy bizonyos küszöbértékig fel van "
+"töltve"
 
 #. 5.4->settings-schema.json->recharged_alert_percentage->description
 msgid "Percentage threshold for visible recharged alert"
-msgstr ""
+msgstr "A látható újratöltési figyelmeztetés százalékos küszöbértéke"
 
 #. 5.4->settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
 msgid "Classic"
 msgstr "Klasszikus"
 
@@ -382,36 +410,68 @@ msgid ""
 "  Icon Only: The battery icon on a colored background indicating the current "
 "status"
 msgstr ""
+"A következő megjelenítési lehetőségek állnak rendelkezésre (beleértve a "
+"Compact, Compact Plus és az Icon Only a függőleges panelekhez):\n"
+"   Klasszikus: Az akkumulátor töltöttségi szintje kiterjesztett üzenetekkel "
+"a vízszintes panelhez\n"
+"   Classic Plus: Klasszikus elem ikon hozzáadásával\n"
+"   Kompakt: Az akkumulátor töltöttségi szintje kiterjesztett üzenetek "
+"nélkül\n"
+"   Compact Plus: Kompakt az akkumulátor ikon hozzáadásával\n"
+"   Csak ikon: Az akkumulátor ikon színes háttérrel, amely jelzi az aktuális "
+"állapotot"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr "Yaru Világos"
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr "Yaru Sötét"
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Ikon téma"
 
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
 msgstr ""
+"A becsült hátralévő idő hozzáfűzése a kiválasztott megjelenítési típushoz"
 
 #. 5.4->settings-schema.json->time_remaining_display->tooltip
 msgid ""
 "This will append an estimate to the above option for time remaining based on "
 "the amount of remaining battery power"
 msgstr ""
+"Ez becslést ad a fenti opcióhoz a hátralévő időre vonatkozóan, az "
+"akkumulátor töltöttsége alapján"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->description
 msgid "Append estimated time remaining to toolbar menu"
-msgstr ""
+msgstr "A becsült hátralévő idő hozzáfűzése az eszköztár menüjéhez"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
 msgid ""
 "This will append an estimate to the toolbar menu for time remaining based on "
 "the amount of remaining battery power"
 msgstr ""
+"Ez hozzáfűzi az eszköztár menüjéhez a hátralévő időre vonatkozó becslést a "
+"maradék akkumulátor töltöttségi szintje alapján"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->description
 msgid "Append estimated time remaining to tooltip"
-msgstr ""
+msgstr "A becsült hátralévő idő hozzáfűzése az eszköztipphez"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
 msgid ""
 "This will append an estimate to the tooltip for time remaining based on the "
 "amount of remaining battery power"
 msgstr ""
+"Ez becslést ad az eszköztipphez a hátralévő időre vonatkozóan, az "
+"akkumulátor töltöttsége alapján"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
@@ -509,7 +569,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_background_color->description
 #. 5.4->settings-schema.json->limit_exceeded2_background_color->description
 msgid "Background Color"
-msgstr ""
+msgstr "Háttérszín"
 
 #. 5.4->settings-schema.json->normal_background_color->tooltip
 #. 5.4->settings-schema.json->normal_border_color->tooltip
@@ -524,7 +584,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
 #. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
 msgid "RGB or RGBA"
-msgstr ""
+msgstr "RGB vagy RGBA"
 
 #. 5.4->settings-schema.json->normal_border_color->description
 #. 5.4->settings-schema.json->discharging_border_color->description
@@ -533,7 +593,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_border_color->description
 #. 5.4->settings-schema.json->limit_exceeded2_border_color->description
 msgid "Border Color"
-msgstr ""
+msgstr "Szegély színe"
 
 #. 5.4->settings-schema.json->normal_font_size->description
 #. 5.4->settings-schema.json->discharging_font_size->description
@@ -542,7 +602,7 @@ msgstr ""
 #. 5.4->settings-schema.json->limit_exceeded_font_size->description
 #. 5.4->settings-schema.json->limit_exceeded2_font_size->description
 msgid "Font Size"
-msgstr ""
+msgstr "Betűméret"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
@@ -663,3 +723,25 @@ msgid ""
 msgstr ""
 "Az 1.4 előtti verziók ideiglenes fájlokat használtak a saját könyvtárban. "
 "Ezekre már nincs szükség, és törölhetők."
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr "FIGYELMEZTETÉS: HAMAROSAN FEL LESZ FÜGGESZTVE"
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
+"Az akkumulátor töltöttségi szintje kritikus. A gépet hamarosan felfüggesztik."
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr "Felfüggesztés megszakítása"
+
+#: 5.4/suspendScript.sh:25
+msgid "Suspend Immediately"
+msgstr "Azonnali Felfüggesztés"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr ""
+"A gépet felfüggesztették, mivel az akkumulátor töltöttsége kritikus volt."

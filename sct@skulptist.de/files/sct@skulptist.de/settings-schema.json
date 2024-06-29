@@ -1,0 +1,79 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Color Temperatur Steps"
+    },
+    "currentStep": {
+        "type": "generic",
+        "default": 0
+    },
+    "maxSteps": {
+        "type": "generic",
+        "default": 7
+    },
+    "colorStep1": {
+        "type": "entry",
+        "default": "3000",
+        "description": "Color temperature at step 1",
+        "tooltip": "Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and 10000 is blue."
+
+    },
+    "colorStep2": {
+        "type": "entry",
+        "default": "5500",
+        "description": "Color temperature at step 2",
+        "tooltip": "Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and 10000 is blue."
+    },
+    "colorStep3": {
+        "type": "entry",
+        "default": "6500",
+        "description": "Color temperature at step 3",
+        "tooltip": "Optional. Add another value between 1000 and 10000, or leave empty."
+    },
+    "colorStep4": {
+        "type": "entry",
+        "default": "",
+        "description": "Color temperature at step 4",
+        "tooltip": "Optional. Add another value between 1000 and 10000, or leave empty."
+    },
+    "colorStep5": {
+        "type": "entry",
+        "default": "",
+        "description": "Color temperature at step 5",
+        "tooltip": "Optional. Add another value between 1000 and 10000, or leave empty."
+    },
+    "colorStep6": {
+        "type": "entry",
+        "default": "",
+        "description": "Color temperature at step 6",
+        "tooltip": "Optional. Add another value between 1000 and 10000, or leave empty."
+    },
+    "colorStep7": {
+        "type": "entry",
+        "default": "",
+        "description": "Color temperature at step 7",
+        "tooltip": "Optional. Add another value between 1000 and 10000, or leave empty."
+    },
+    "seperator1": {
+        "type": "separator"
+    },
+    "head2": {
+        "type": "header",
+        "description": "Applet Icon"
+    },
+    "iconChanged": {
+        "type": "generic",
+        "default": "false"
+    },
+    "iconName": {
+        "type": "iconfilechooser",
+        "default": "night-light-symbolic",
+        "description": "The icon to use in the panel",
+        "tooltip": "Select an icon file, or you can type an icon name into the entry box."
+    },
+    "resetIconName": {
+        "type": "button",
+        "description": "Reset icon name",
+        "callback": "handleResetIconName"
+    }
+}

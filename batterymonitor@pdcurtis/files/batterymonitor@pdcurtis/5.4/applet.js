@@ -49,6 +49,21 @@ MyApplet.prototype = {
         this.setupUI();
     },
 
+    setupIconPaths: function () {
+        this.battery100 = this.metadata.path + `/icons/${this.iconTheme}/battery-100.png`;
+        this.battery080 = this.metadata.path + `/icons/${this.iconTheme}/battery-080.png`;
+        this.battery060 = this.metadata.path + `/icons/${this.iconTheme}/battery-060.png`;
+        this.battery040 = this.metadata.path + `/icons/${this.iconTheme}/battery-040.png`;
+        this.batteryCaution = this.metadata.path + `/icons/${this.iconTheme}/battery-caution.png`;
+        this.batteryLow = this.metadata.path + `/icons/${this.iconTheme}/battery-low.png`;
+        this.batteryCharging100 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging.png`;
+        this.batteryCharging080 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-080.png`;
+        this.batteryCharging060 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-060.png`;
+        this.batteryCharging040 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-040.png`;
+        this.batteryChargingCaution = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-caution.png`;
+        this.batteryChargingLow = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-low.png`;
+    },
+
     setupUI: function () {
         try {
             // Picks up UUID from metadata for Settings
@@ -83,6 +98,12 @@ MyApplet.prototype = {
                 "displayType",
                 this.on_settings_changed,
                 null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "iconTheme",
+                "iconTheme",
+                this.on_settings_changed,
+                null)
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "time_remaining_display",
@@ -257,18 +278,7 @@ MyApplet.prototype = {
             this.appletPath = this.metadata.path;
             this.changelog = this.metadata.path + "/../CHANGELOG.md";
             this.helpfile = this.metadata.path + "/../README.md";
-            this.battery100 = this.metadata.path + "/icons/battery-100.png";
-            this.battery080 = this.metadata.path + "/icons/battery-080.png";
-            this.battery060 = this.metadata.path + "/icons/battery-060.png";
-            this.battery040 = this.metadata.path + "/icons/battery-040.png";
-            this.batteryCaution = this.metadata.path + "/icons/battery-caution.png";
-            this.batteryLow = this.metadata.path + "/icons/battery-low.png";
-            this.batteryCharging100 = this.metadata.path + "/icons/battery-charging.png";
-            this.batteryCharging080 = this.metadata.path + "/icons/battery-charging-080.png";
-            this.batteryCharging060 = this.metadata.path + "/icons/battery-charging-060.png";
-            this.batteryCharging040 = this.metadata.path + "/icons/battery-charging-040.png";
-            this.batteryChargingCaution = this.metadata.path + "/icons/battery-charging-caution.png";
-            this.batteryChargingLow = this.metadata.path + "/icons/battery-charging-low.png";
+            this.setupIconPaths();
 
             // Determine best default battery path if possible
             let batteryBasePath = "/sys/class/power_supply";
@@ -303,7 +313,7 @@ MyApplet.prototype = {
             this.applet_running = true; // Allow applet to be fully stopped when removed from panel
 
             // Set text editor
-            this.textEd = "xdg-open";
+            this.textEd = '/usr/bin/open';
 
             // Check that all Dependencies Met by presence of sox and zenity
             if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity")) {
@@ -314,7 +324,7 @@ MyApplet.prototype = {
                     icon_type: St.IconType.FULLCOLOR,
                     icon_size: 36
                 });
-                Main.criticalNotify(_("Some Dependencies not Installed"), _("Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts .\n\nPlease view the README for help on installing them."), icon);
+                Main.criticalNotify(_("Some dependencies not installed."), _("Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n\nPlease view the README for help on installing them.\n"), icon);
                 this.dependenciesMet = false;
             }
 
@@ -370,12 +380,13 @@ MyApplet.prototype = {
             this.batteryLowSound = this.batteryLowSound1;
             this.batteryShutdownSound = this.batteryShutdownSound1
         }
+        this.setupIconPaths();
         this.updateLoop();
     },
 
     on_slider_changed: function (slider, value) {
-        this.alertPercentage = (value * 30) + 10; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
-
+        this.alertPercentage = Math.round((value * 30) + 10); // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
+        this.updateUI();
     },
 
     // Build the Right Click Context Menu
@@ -387,13 +398,13 @@ MyApplet.prototype = {
 
             let menuitem2 = new PopupMenu.PopupMenuItem(_("Open Power Statistics"));
             menuitem2.connect('activate', Lang.bind(this, function (event) {
-                this.launcher.spawnv(['gnome-power-statistics']);
+                this.launcher.spawnv(['/usr/bin/gnome-power-statistics']);
             }));
             this._applet_context_menu.addMenuItem(menuitem2);
 
             this.menuitem3 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
             this.menuitem3.connect('activate', Lang.bind(this, function (event) {
-                this.launcher.spawnv(['gnome-system-monitor']);
+                this.launcher.spawnv(['/usr/bin/gnome-system-monitor']);
             }));
             this._applet_context_menu.addMenuItem(this.menuitem3);
 
@@ -430,8 +441,12 @@ MyApplet.prototype = {
             });
             this.menu.addMenuItem(this.menuitemInfo1);
 
+            this.sliderLabel = new PopupMenu.PopupMenuItem(_('Alert/Suspend:'), {
+                reactive: false
+            });
             this.slider = new PopupMenu.PopupSliderMenuItem(0);
             this.slider.connect("value-changed", Lang.bind(this, this.on_slider_changed));
+            this.menu.addMenuItem(this.sliderLabel);
             this.menu.addMenuItem(this.slider);
         } catch (e) {
             global.logError(e);
@@ -536,8 +551,8 @@ MyApplet.prototype = {
                         this.alertFlag = true; // Reset above when out of warning range
                         // Audible alert - type set earlier
                         if (this.useBatteryLowSound)
-                            this.launcher.spawnv(['play', this.batteryLowSound]);
-                        new ModalDialog.NotifyDialog(_("The Battery Level has fallen to your alert level\n\n either reconnect to a power source,\n\nclose down your work and suspend or shutdown the machine\n\n")).open();
+                            this.launcher.spawnv(['/usr/bin/play', this.batteryLowSound]);
+                        new ModalDialog.NotifyDialog(_("The battery level has fallen to your alert level.\n\nEither connect to a power source or save or close down\nyour work and suspend or shutdown the machine.\n")).open();
                     }
                 }
             }
@@ -556,8 +571,8 @@ MyApplet.prototype = {
                     if (this.batteryPercentage < this.lastBatteryPercentage) {
                         // Audible alert moved from suspendScript in v32_1.0.0
                         if (this.useBatteryLowSound)
-                            this.launcher.spawnv(['play', this.batteryShutdownSound]);
-                        this.launcher.spawnv(['sh', `${this.appletPath}/suspendScript`]);
+                            this.launcher.spawnv(['/usr/bin/play', this.batteryShutdownSound]);
+                        this.launcher.spawnv(['/usr/bin/bash', `${this.appletPath}/suspendScript.sh`]);
                     }
                 }
             }
@@ -569,7 +584,7 @@ MyApplet.prototype = {
             */
             // set Tooltip
 
-            this.time_string = this.time_remaining_display || this.time_remaining_tooltip || this.time_remaining_toolbar ?
+            this.time_string = (this.time_remaining_display || this.time_remaining_tooltip || this.time_remaining_toolbar) && this.batteryPercentage != 100 ?
                 (is_discharging ?
                     (this._timeToEmpty != 0 ? "\n" + _("Time to Empty:") + " (" + this.timeToString(this._timeToEmpty) + ")" : "") :
                     (this._timeToFull != 0 ? "\n" + _("Time to Full:") + " (" + this.timeToString(this._timeToFull) + ")" : "")) :
@@ -600,7 +615,7 @@ MyApplet.prototype = {
             if (!(this.displayType == "classic" || this.displayType == "classicPlus") || !this.isHorizontal)
                 this.batteryMessage = "";
 
-            this.time_display = this.time_remaining_display ?
+            this.time_display = this.time_remaining_display && this.batteryPercentage != 100 ?
                 (is_discharging ?
                     (this._timeToEmpty != 0 ? ` (${this.timeToString(this._timeToEmpty)})` : "") :
                     (this._timeToFull != 0 ? ` (${this.timeToString(this._timeToFull)})` : "")) :

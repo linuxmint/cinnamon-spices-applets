@@ -1,8 +1,9 @@
-import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
-import { LocationData } from "../../types";
+import { HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/services/logger";
+import type { WeatherApplet } from "../../main";
+import type { LocationData } from "../../types";
 import { _ } from "../../utils";
-import { GeoIP } from "./base";
+import type { GeoIP } from "./base";
 
 /**
  * https://www.geojs.io/docs/v1/endpoints/geo/
@@ -15,8 +16,8 @@ export class GeoJS implements GeoIP {
 		this.app = _app;
 	}
 
-	public async GetLocation(): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoJsPayload>(this.query);
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+		const json = await HttpLib.Instance.LoadJsonSimple<GeoJsPayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;
@@ -33,8 +34,8 @@ export class GeoJS implements GeoIP {
 
 	private ParseInformation(json: GeoJsPayload): LocationData | null {
 		try {
-			const lat = parseFloat(json.latitude);
-			const lon = parseFloat(json.longitude);
+			const lat = Number.parseFloat(json.latitude);
+			const lon = Number.parseFloat(json.longitude);
 			if (Number.isNaN(lat) || Number.isNaN(lon)) {
 				this.HandleErrorResponse(json);
 				return null;
@@ -52,15 +53,16 @@ export class GeoJS implements GeoIP {
 			return result;
 		}
 		catch (e) {
-			Logger.Error("ip-api parsing error: " + e);
+			if (e instanceof Error)
+				Logger.Error("ip-api parsing error: " + e.message, e);
 			this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
 			return null;
 		}
 	};
 
-	HandleErrorResponse(json: any): void {
+	HandleErrorResponse(json: unknown): void {
 		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-		Logger.Error("ip-api responds with Error: " + json.reason);
+		Logger.Error("geojs.io responded with data: " + JSON.stringify(json));
 	};
 }
 

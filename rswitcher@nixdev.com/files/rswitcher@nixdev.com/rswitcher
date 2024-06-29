@@ -24,15 +24,19 @@ check_args()
 
 create_resolution()
 {
+# Using Luxodius python script for scaling 
+# https://bbs.archlinux.org/viewtopic.php?id=278808
+  
+    ~/.local/share/cinnamon/applets/rswitcher@nixdev.com/scale.py $SCALINGFACTOR
+    sleep 0.5
 
-gsettings set org.cinnamon.desktop.interface scaling-factor $SCALINGFACTOR
-
-xrandr \
+    xrandr \
     --output $PRIMARY_DEV \
     --mode "$RESOLUTION" \
     --fb "$SCALED_X"x"$SCALED_Y"  \
     --scale "$XRANDR_SCALER"x"$XRANDR_SCALER" \
     --panning "$SCALED_X"x"$SCALED_Y"+0+0
+
 }
 
 if [ -z "$2" ] || [ -z "$1" ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
@@ -126,5 +130,5 @@ fi
 # Run the xrandr function to create the new settings.
 create_resolution
 
-# Reload cinnamon. Else Startmenu won't resize. 
-dbus-send --type=method_call --dest=org.Cinnamon /org/Cinnamon org.Cinnamon.Eval string:'global.reexec_self()'
+# Reload start menu to get correct dimentions
+dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'menu@cinnamon.org' string:'APPLET'

@@ -1,0 +1,2151 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CassiaWindowList@klangman 2.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-04 23:25-0400\n"
+"PO-Revision-Date: 2024-04-20 10:46+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 4.0/applet.js:550 6.0/applet.js:550
+msgid "all buttons"
+msgstr "alle knoppen"
+
+#: 4.0/applet.js:2767 6.0/applet.js:2767
+msgid "Applet Preferences"
+msgstr "Applet Voorkeuren"
+
+#: 4.0/applet.js:2771 6.0/applet.js:2771
+msgid "About..."
+msgstr "Over..."
+
+#: 4.0/applet.js:2775 6.0/applet.js:2775
+msgid "Configure..."
+msgstr "Configureren..."
+
+#: 4.0/applet.js:2779 6.0/applet.js:2779
+msgid "Website"
+msgstr "Website"
+
+#: 4.0/applet.js:2783 6.0/applet.js:2783
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Verwijder '%s'"
+
+#: 4.0/applet.js:2785 6.0/applet.js:2785
+msgid "Do you really want to remove this instance of CassiaWindowList?"
+msgstr ""
+"Weet u zeker dat u deze instantie van CassiaWindowList wilt verwijderen?"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:2794 6.0/applet.js:2794
+msgid "Open new window"
+msgstr "Open een nieuw venster"
+
+#: 4.0/applet.js:2802 6.0/applet.js:2802
+msgid "Remove from panel"
+msgstr "Verwijderen van paneel"
+
+#: 4.0/applet.js:2804 6.0/applet.js:2804
+msgid "Remove from this workspace"
+msgstr "Verwijderen van deze werkruimte"
+
+#: 4.0/applet.js:2810 6.0/applet.js:2810
+msgid "Pin to panel"
+msgstr "Vastmaken aan paneel"
+
+#: 4.0/applet.js:2812 6.0/applet.js:2812
+msgid "Pin to this workspace"
+msgstr "Vastmaken aan deze werkruimte"
+
+#: 4.0/applet.js:2853 6.0/applet.js:2853
+msgid "Pin to other workspaces"
+msgstr "Vastmaken aan andere werkruimtes"
+
+#: 4.0/applet.js:2874 6.0/applet.js:2874
+msgid "Pin to all workspaces"
+msgstr "Vastmaken aan alle werkruimtes"
+
+#: 4.0/applet.js:2892 6.0/applet.js:2892
+msgid "Pin to launcher"
+msgstr "Vastmaken aan launcher"
+
+#: 4.0/applet.js:2910 4.0/applet.js:3102 6.0/applet.js:2910 6.0/applet.js:3102
+msgid "Add new Hotkey for"
+msgstr "Voeg nieuwe sneltoets toe voor"
+
+#: 4.0/applet.js:2924 6.0/applet.js:2924
+msgid "Recent files"
+msgstr "Recente bestanden"
+
+#: 4.0/applet.js:2948 6.0/applet.js:2948
+msgid "Places"
+msgstr "Locaties"
+
+#: 4.0/applet.js:2990 6.0/applet.js:2990
+msgid "Only on this workspace"
+msgstr "Alleen op deze werkruimte"
+
+#: 4.0/applet.js:2992 6.0/applet.js:2992
+msgid "Visible on all workspaces"
+msgstr "Zichtbaar op alle werkruimtes"
+
+#: 4.0/applet.js:2993 6.0/applet.js:2993
+msgid "Move to another workspace"
+msgstr "Verplaatsen naar een andere werkruimte"
+
+#: 4.0/applet.js:3002 6.0/applet.js:3002
+msgid " (this workspace)"
+msgstr " (deze werkruimte)"
+
+#: 4.0/applet.js:3015 6.0/applet.js:3015
+msgid "Move to another monitor"
+msgstr "Verplaatsen naar een ander beeldscherm"
+
+#: 4.0/applet.js:3023 6.0/applet.js:3023
+msgid "Monitor"
+msgstr "Beeldscherm"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:3040 6.0/applet.js:3040
+#, fuzzy
+msgid "Move window here"
+msgstr "Sluit venster"
+
+#: 4.0/applet.js:3057 6.0/applet.js:3057
+msgid "unassigned"
+msgstr "niet toegewezen"
+
+#: 4.0/applet.js:3068 4.0/applet.js:3099 6.0/applet.js:3068 6.0/applet.js:3099
+msgid "Assign window to a hotkey"
+msgstr "Wijs venster toe aan een sneltoets"
+
+#: 4.0/applet.js:3122 6.0/applet.js:3122
+msgid "Change application label contents"
+msgstr "Wijzig inhoud van applicatielabel"
+
+#: 4.0/applet.js:3125 6.0/applet.js:3125
+msgid "Remove custom setting"
+msgstr "Verwijder aangepaste instelling"
+
+#: 4.0/applet.js:3132 6.0/applet.js:3132
+msgid "Use window title"
+msgstr "Gebruik venstertitel"
+
+#: 4.0/applet.js:3139 6.0/applet.js:3139
+msgid "Use application name"
+msgstr "Gebruik applicatienaam"
+
+#: 4.0/applet.js:3146 6.0/applet.js:3146
+msgid "No label"
+msgstr "Geen label"
+
+#: 4.0/applet.js:3157 6.0/applet.js:3157
+msgid "Ungroup application windows"
+msgstr "Applicatie-vensters niet groeperen"
+
+#: 4.0/applet.js:3166 6.0/applet.js:3166
+msgid "Group application windows"
+msgstr "Applicatie-vensters groeperen"
+
+#: 4.0/applet.js:3179 6.0/applet.js:3179
+msgid "Automatic grouping/ungrouping"
+msgstr "Automatisch groeperen/ongroeperen"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:3209 6.0/applet.js:3209
+msgid "Move titlebar on to screen"
+msgstr "Verplaats titelbalk naar het scherm"
+
+#: 4.0/applet.js:3214 6.0/applet.js:3214
+msgid "Restore"
+msgstr "Herstellen"
+
+#: 4.0/applet.js:3218 6.0/applet.js:3218
+msgid "Minimize"
+msgstr "Minimaliseren"
+
+#: 4.0/applet.js:3224 6.0/applet.js:3224
+msgid "Unmaximize"
+msgstr "Ontmaximaliseren"
+
+#: 4.0/applet.js:3231 6.0/applet.js:3231
+msgid "Close others"
+msgstr "Sluit anderen"
+
+#: 4.0/applet.js:3242 6.0/applet.js:3242
+msgid "Close all"
+msgstr "Sluit alle"
+
+#: 4.0/applet.js:3251 6.0/applet.js:3251
+msgid "Close"
+msgstr "Sluiten"
+
+#: SetupWizard.py:188
+msgid "Exit"
+msgstr "Afsluiten"
+
+#: SetupWizard.py:210
+msgid "Next"
+msgstr "Volgende"
+
+#: SetupWizard.py:283
+msgid "Backup file already exist. Do you want to overwrite it?"
+msgstr "Back-upbestand bestaat al. Wilt u het overschrijven?"
+
+#. metadata.json->name
+msgid "Cassia Window List"
+msgstr "Cassia Window List"
+
+#. metadata.json->description
+msgid ""
+"A window list/panel launchers based on CobiWindowList with some additional "
+"features"
+msgstr ""
+"Een vensterlijst/paneellaunchers gebaseerd op CobiWindowList met enkele "
+"extra functies"
+
+#. 4.0->settings-schema.json->caption-page->title
+#. 6.0->settings-schema.json->caption-page->title
+msgid "Labels"
+msgstr "Labels"
+
+#. 4.0->settings-schema.json->general-page->title
+#. 6.0->settings-schema.json->general-page->title
+msgid "General"
+msgstr "Algemeen"
+
+#. 4.0->settings-schema.json->preview-page->title
+#. 6.0->settings-schema.json->preview-page->title
+msgid "Thumbnails"
+msgstr "Miniaturen"
+
+#. 4.0->settings-schema.json->hotkey-page->title
+#. 6.0->settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "Sneltoetsen"
+
+#. 4.0->settings-schema.json->advanced-page->title
+#. 6.0->settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+#. 4.0->settings-schema.json->caption-settings->title
+#. 6.0->settings-schema.json->caption-settings->title
+msgid "Window list button label settings"
+msgstr "Instellingen voor labels van knoppen van vensterlijsten"
+
+#. 4.0->settings-schema.json->caption-number-settings->title
+#. 6.0->settings-schema.json->caption-number-settings->title
+#, fuzzy
+msgid "Number label settings"
+msgstr "Instellingen voor labelnummers van applicatiegroepen"
+
+#. 4.0->settings-schema.json->general-settings->title
+#. 6.0->settings-schema.json->general-settings->title
+msgid "General window list settings"
+msgstr "Algemene instellingen vensterlijst"
+
+#. 4.0->settings-schema.json->general-mouse->title
+#. 6.0->settings-schema.json->general-mouse->title
+msgid "Window list mouse settings"
+msgstr "Muisinstellingen vensterlijst"
+
+#. 4.0->settings-schema.json->preview-settings->title
+#. 6.0->settings-schema.json->preview-settings->title
+msgid "Thumbnails menu settings"
+msgstr "Instellingen menu miniaturen"
+
+#. 4.0->settings-schema.json->preview-mouse-section->title
+#. 6.0->settings-schema.json->preview-mouse-section->title
+msgid "Thumbnails menu mouse settings"
+msgstr "Muisinstellingen menu miniaturen"
+
+#. 4.0->settings-schema.json->hotkey-settings->title
+#. 6.0->settings-schema.json->hotkey-settings->title
+msgid "Hotkey settings"
+msgstr "Instellingen sneltoetsen"
+
+#. 4.0->settings-schema.json->adv-mouse-settings->title
+#. 4.0->settings-schema.json->adv-mouse-list->description
+#. 6.0->settings-schema.json->adv-mouse-settings->title
+#. 6.0->settings-schema.json->adv-mouse-list->description
+msgid "Ctrl/Shift + mouse button actions"
+msgstr "Ctrl/Shift + muisknopacties"
+
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
+msgid "Application name"
+msgstr "Applicatienaam"
+
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
+msgid "Window title"
+msgstr "Venstertitel"
+
+#. 4.0->settings-schema.json->caption-type->description
+#. 6.0->settings-schema.json->caption-type->description
+msgid "Label contents"
+msgstr "Labelinhoud"
+
+#. 4.0->settings-schema.json->caption-type->tooltip
+#. 6.0->settings-schema.json->caption-type->tooltip
+msgid "What the content of the label will be"
+msgstr "Wat de inhoud van het label zal zijn"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+msgid "Never"
+msgstr "Nooit"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-number->options
+msgid "Always"
+msgstr "Altijd"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+msgid "Focused"
+msgstr "Gefocust"
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for->options
+msgid "One per application pool"
+msgstr "Eén per applicatiegroep"
+
+#. 4.0->settings-schema.json->display-caption-for->description
+#. 6.0->settings-schema.json->display-caption-for->description
+msgid "Display labels for generic window list buttons"
+msgstr "Labels weergeven voor algemene vensterlijstknoppen"
+
+#. 4.0->settings-schema.json->display-caption-for->tooltip
+#. 6.0->settings-schema.json->display-caption-for->tooltip
+msgid ""
+"Never: No windows get labels\n"
+"Always: All windows get labels\n"
+"Focused: The window with focus will have a label\n"
+"One per application pool: Only one label for a set of adjacent application "
+"windows"
+msgstr ""
+"Nooit: Geen vensters krijgt labels\n"
+"Altijd: Alle vensters krijgen labels\n"
+"Gefocust: Het venster met focus krijgt een label\n"
+"Eén per applicatiegroep: Slechts één label voor een set aangrenzende vensters"
+
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+msgid "Running"
+msgstr "Bezig"
+
+#. 4.0->settings-schema.json->display-caption-for-pined->description
+#. 6.0->settings-schema.json->display-caption-for-pined->description
+msgid "Display labels for pinned buttons"
+msgstr "Labels weergeven voor vastgemaakte knoppen"
+
+#. 4.0->settings-schema.json->display-caption-for-pined->tooltip
+#. 6.0->settings-schema.json->display-caption-for-pined->tooltip
+msgid ""
+"Never: No pinned windows will have a label\n"
+"Always: All pinned windows will have labels\n"
+"Running: Only pinned window that are running will have a label\n"
+"Focused: Only the pinned window with focus will have a label"
+msgstr ""
+"Nooit: Geen vastgemaakte vensters krijgt labels\n"
+"Altijd: Alle vastgemaakte vensters krijgen labels\n"
+"Bezig: Alleen vastgemaakte vensters die bezig zijn, krijgen een label\n"
+"Gefocust: Alleen het vastgemaakte venster met focus krijgt een label"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->description
+#. 6.0->settings-schema.json->hide-caption-for-minimized->description
+msgid "Hide labels for minimized buttons"
+msgstr "Labels verbergen voor geminimaliseerde knoppen"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
+#. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
+msgid ""
+"For groups/pools the label will still show unless all application windows "
+"are minimized"
+msgstr ""
+"Voor groepen/pools wordt het label nog steeds weergegeven tenzij alle "
+"applicatievensters zijn geminimaliseerd"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+msgid "None"
+msgstr "Geen"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+msgid "Minimized windows"
+msgstr "Geminimaliseerde vensters"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+msgid "Pinned applications"
+msgstr "Vastgemaakte applicaties"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+msgid "Minimized and pinned"
+msgstr "Geminimaliseerd en vastgemaakt"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->group-windows->options
+msgid "Automatic"
+msgstr "Automatisch"
+
+#. 4.0->settings-schema.json->display-indicators->description
+#. 6.0->settings-schema.json->display-indicators->description
+msgid "Display status indicators"
+msgstr "Statusindicatoren weergeven"
+
+#. 4.0->settings-schema.json->display-indicators->tooltip
+#. 6.0->settings-schema.json->display-indicators->tooltip
+msgid ""
+"Choose if the minimized and the pinned indicator characters will be "
+"prepended to button label text. Buttons without a text label will not "
+"reserve as much space.\n"
+"Automatic: The minimized and pinned indicators will only show when space is "
+"not constrained."
+msgstr ""
+"Kies of de indicatiekarakters voor geminimaliseerd en vastgemaakt de tekst "
+"van het knoplabel voorafgaan. Knoppen zonder tekstlabel zullen niet zoveel "
+"ruimte reserveren.\n"
+"Automatisch: De indicatoren voor geminimaliseerd en vastgemaakt worden "
+"alleen weergegeven wanneer er geen beperkte ruimte is."
+
+#. 4.0->settings-schema.json->show-ellipsis-for-groups->description
+#. 6.0->settings-schema.json->show-ellipsis-for-groups->description
+msgid "Show a vertical ellipsis (...) for grouped buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+msgid ""
+"Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
+"list buttons with more then one window. When on a vertical panel this option "
+"is not possible and the setting will be ignored."
+msgstr ""
+
+#. 4.0->settings-schema.json->trailing-pinned-behaviour->description
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->description
+msgid "Add new window buttons ahead of trailing pinned buttons"
+msgstr ""
+"Nieuwe vensterknoppen toevoegen vóór vastgemaakte knoppen aan het einde"
+
+#. 4.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+msgid ""
+"When enabled, new windows will be added to the left of any pinned buttons "
+"currently placed on the right of the window list, effectively this allows "
+"you to keep pinned buttons at the end of the window list"
+msgstr ""
+"Indien ingeschakeld, worden nieuwe vensters toegevoegd aan de linkerzijde "
+"van vastgemaakte knoppen die momenteel aan de rechterkant van de "
+"vensterlijst zijn geplaatst, hierdoor kunt u vastgemaakte knoppen aan het "
+"einde van de vensterlijst houden"
+
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->hover-peek-delay->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.0->settings-schema.json->fade-animation-time->units
+#. 6.0->settings-schema.json->hover-peek-delay->units
+#. 6.0->settings-schema.json->label-animation-time->units
+#. 6.0->settings-schema.json->preview-timeout-show->units
+#. 6.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+#. 6.0->settings-schema.json->fade-animation-time->description
+msgid "Fade animation effect duration"
+msgstr "Duur van het vervagingsanimatie-effect"
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+#. 6.0->settings-schema.json->fade-animation-time->tooltip
+msgid ""
+"This defines the duration of the fade-in/out animation effect. It applies to "
+"the Thumbnail menus and the full size window previews"
+msgstr ""
+"Dit definieert de duur van het fade-in/out animatie-effect. Het is van "
+"toepassing op de miniaturenmenu's en de volledige grootte voorbeeldvensters"
+
+#. 4.0->settings-schema.json->hover-peek-delay->description
+#. 6.0->settings-schema.json->hover-peek-delay->description
+msgid "Hover time before showing a full size window preview"
+msgstr ""
+"Muiszweeftijd voordat een volledige groote voorbeeldvenster wordt weergegeven"
+
+#. 4.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.0->settings-schema.json->hover-peek-delay->tooltip
+#, fuzzy
+msgid ""
+"This defines the mouse hover time before a full size window preview will "
+"appear. It applies when hovering over either window-list buttons or "
+"thumbnail menu items (of course one of the full size window preview options "
+"must be enabled for this option to have any effect)"
+msgstr ""
+"Dit definieert de muiszweeftijd voordat een volledige grootte "
+"voorbeeldvenster wordt weergegeven. Het is van toepassing op zowel de "
+"vensterlijstknoppen als de miniaturen menu-items (uiteraard moet één van de "
+"opties voor volledige grootte voorbeeldvensters zijn ingeschakeld voor deze "
+"optie effect kan hebben)"
+
+#. 4.0->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->button-spacing->units
+#. 6.0->settings-schema.json->label-width->units
+#. 6.0->settings-schema.json->button-spacing->units
+msgid "pixels"
+msgstr "pixels"
+
+#. 4.0->settings-schema.json->label-width->description
+#. 6.0->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "Breedte label"
+
+#. 4.0->settings-schema.json->label-width->tooltip
+#. 6.0->settings-schema.json->label-width->tooltip
+msgid "This defines the width of the label section of a window list button"
+msgstr ""
+"Dit definieert de breedte van het labelgedeelte van een vensterlijstknop"
+
+#. 4.0->settings-schema.json->label-animation->description
+#. 6.0->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "Label animeren"
+
+#. 4.0->settings-schema.json->label-animation-time->description
+#. 6.0->settings-schema.json->label-animation-time->description
+msgid "Label animation duration"
+msgstr "Duur van de labelanimatie"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Nothing"
+msgstr "Doe niets"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Application group window count"
+msgstr "Applicatie-vensters groeperen"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Workspace number"
+msgstr "Weergavenummer"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Monitor number"
+msgstr "Beeldscherm"
+
+#. 4.0->settings-schema.json->number-type->description
+#. 6.0->settings-schema.json->number-type->description
+#, fuzzy
+msgid "Number label contents"
+msgstr "Labelinhoud"
+
+#. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-number->options
+msgid "Smart"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-number->description
+#. 6.0->settings-schema.json->display-number->description
+msgid "Display number"
+msgstr "Weergavenummer"
+
+#. 4.0->settings-schema.json->display-number->tooltip
+#. 6.0->settings-schema.json->display-number->tooltip
+msgid ""
+"Controls when the number label is used. Smart means the the label will only "
+"appear when it is appropriate depending on the number label contents setting "
+"above. i.e. When there is two or more windows in a group, or when the "
+"windows workspace or monitor does not match the current one."
+msgstr ""
+
+#. 4.0->settings-schema.json->number-style->options
+#. 6.0->settings-schema.json->number-style->options
+msgid "Icon overlay"
+msgstr "Pictogramoverlay"
+
+#. 4.0->settings-schema.json->number-style->options
+#. 6.0->settings-schema.json->number-style->options
+msgid "Label prepend"
+msgstr "Label laten voorgaan"
+
+#. 4.0->settings-schema.json->number-style->description
+#. 6.0->settings-schema.json->number-style->description
+msgid "Number style"
+msgstr "Nummerstijl"
+
+#. 4.0->settings-schema.json->number-style->tooltip
+#. 6.0->settings-schema.json->number-style->tooltip
+#, fuzzy
+msgid ""
+"Controls how the number label is presented. When on a vertical panel or when "
+"in launcher mode, the \"label prepend\" option is not possible so \"icon "
+"overlay\" will be used instead"
+msgstr ""
+"Bepaalt hoe het aantal vensters in een gegroepeerde knop wordt "
+"gepresenteerd. Bij een verticaal paneel is de 'label laten voorafgaan' optie "
+"niet mogelijk, dus 'pictogramoverlay' zal in plaats daarvan worden gebruikt"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+msgid "Grouped"
+msgstr "Gegroepeerd"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+msgid "Pooled"
+msgstr "Gepoold"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+msgid "One to one"
+msgstr "Eén op één"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+msgid "Launcher"
+msgstr "Launcher"
+
+#. 4.0->settings-schema.json->group-windows->description
+#. 6.0->settings-schema.json->group-windows->description
+msgid "Window list behavior style"
+msgstr "Stijl voor vensterlijstgedrag"
+
+#. 4.0->settings-schema.json->group-windows->tooltip
+#. 6.0->settings-schema.json->group-windows->tooltip
+msgid ""
+"Grouped: All windows for an application are managed by one button,\n"
+"Pooled: All window list buttons for an application are pooled side by side,\n"
+"Automatic: Windows are pooled, and then grouped when space is limited,\n"
+"One to one: Each window gets their own button with no forced ordering,\n"
+"Launcher: Only pinned button are shown, behaves like a panel launcher."
+msgstr ""
+"Gegroepeerd: Alle vensters voor één applicatie worden beheerd door één "
+"knop,\n"
+"Gepoold: Alle vensterlijstknoppen voor één applicatie worden naast elkaar "
+"gepoold,\n"
+"Automatisch: Vensters worden gepoold en vervolgens gegroepeerd wanneer de "
+"ruimte beperkt is,\n"
+"Eén op één: Elk venster krijgt zijn eigen knop zonder verplichte volgorde,\n"
+"Launcher: Alleen vastgemaakte knoppen worden weergegeven, gedraagt zich als "
+"een paneellauncher."
+
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
+msgid "Unique for each workspace"
+msgstr "Uniek voor elke werkruimte"
+
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
+msgid "Common across workspaces"
+msgstr "Gemeenschappelijk over werkruimtes"
+
+#. 4.0->settings-schema.json->display-pinned->description
+#. 6.0->settings-schema.json->display-pinned->description
+msgid "Pinning of window list buttons"
+msgstr "Vastmaken van vensterlijstknoppen"
+
+#. 4.0->settings-schema.json->display-pinned->tooltip
+#. 6.0->settings-schema.json->display-pinned->tooltip
+msgid ""
+"Controls whether window list buttons can be pinned, and whether each "
+"workspace has a unique set of pinned buttons or one common set shared across "
+"all workspaces. When in \"Common across workspaces\" mode the order of the "
+"pinned buttons is also maintained across workspaces."
+msgstr ""
+"Beheert of vensterlijstknoppen kunnen worden vastgemaakt, en of elke "
+"werkruimte een unieke set vastgemaakte knoppen heeft of één "
+"gemeenschappelijke set wordt gedeeld over alle werkruimtes. Wanneer in de "
+"'Gemeenschappelijk over werkruimtes' modus, wordt de volgorde van de "
+"vastgemaakte knoppen ook behouden over werkruimtes heen."
+
+#. 4.0->settings-schema.json->synchronize-pinned->description
+#. 6.0->settings-schema.json->synchronize-pinned->description
+msgid "Synchronize launcher buttons across all workspaces"
+msgstr "Synchroniseer launcherknoppen over alle werkruimtes heen"
+
+#. 4.0->settings-schema.json->synchronize-pinned->tooltip
+#. 6.0->settings-schema.json->synchronize-pinned->tooltip
+msgid ""
+"If enabled, the number and order of launcher buttons on the panel will be "
+"synchronize across all workspaces."
+msgstr ""
+"Indien ingeschakeld, wordt het aantal en de volgorde van launcherknoppen op "
+"het paneel gesynchroniseerd over alle werkruimtes heen."
+
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr "Alleen vensters weergeven op hetzelfde beeldscherm"
+
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Indien ingeschakeld, beheert deze appletinstantie alleen vensters die worden "
+"weergegeven op hetzelfde beeldscherm"
+
+#. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
+#. 6.0->settings-schema.json->show-windows-for-all-workspaces->description
+msgid "Include windows from all workspaces"
+msgstr "Vensters van alle werkruimtes opnemen"
+
+#. 4.0->settings-schema.json->show-tooltips->description
+#. 6.0->settings-schema.json->show-tooltips->description
+msgid "Show tooltips for window list buttons"
+msgstr "Tooltips weergeven voor vensterlijstknoppen"
+
+#. 4.0->settings-schema.json->show-tooltips->tooltip
+#. 6.0->settings-schema.json->show-tooltips->tooltip
+msgid ""
+"Enable to show tooltips using window title or application name when hovering "
+"over window list buttons"
+msgstr ""
+"Inschakelen om tooltips weer te geven met venstertitel of applicatienaam "
+"wanneer u met de muis over vensterlijstknoppen zweeft"
+
+#. 4.0->settings-schema.json->hide-panel-apps->description
+#. 6.0->settings-schema.json->hide-panel-apps->description
+msgid ""
+"Hide window buttons of pinned buttons on other CassiaWindowList instances"
+msgstr ""
+"Verberg vensterknoppen van vastgemaakte knoppen op andere instanties van "
+"CassiaWindowList"
+
+#. 4.0->settings-schema.json->hide-panel-apps->tooltip
+#. 6.0->settings-schema.json->hide-panel-apps->tooltip
+msgid ""
+"When enabled, windows for applications with pinned buttons on other "
+"instances of the CassiaWindowList applet will not show up in this window list"
+msgstr ""
+"Indien ingeschakeld, worden vensters voor applicaties met vastgemaakte "
+"knoppen op andere instanties van de CassiaWindowList applet niet weergegeven "
+"in deze vensterlijst"
+
+#. 4.0->settings-schema.json->button-spacing->description
+#. 6.0->settings-schema.json->button-spacing->description
+msgid "Spacing between buttons"
+msgstr "Ruimte tussen knoppen"
+
+#. 4.0->settings-schema.json->button-spacing->tooltip
+#. 6.0->settings-schema.json->button-spacing->tooltip
+msgid ""
+"This defines the spacing between the buttons, the value will be divided in "
+"half and added to the left of the icon and to the right of the label on "
+"horizontal panels or to the top and button of the icon on vertical panels"
+msgstr ""
+"Dit definieert de ruimte tussen de knoppen, de waarde wordt gehalveerd en "
+"toegevoegd aan de linkerkant van het pictogram en aan de rechterkant van het "
+"label op horizontale panelen of aan de boven- en onderkant van het pictogram "
+"op verticale panelen"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+#. 6.0->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr ""
+"Volledige grootte voorbeeldvenster weergeven bij zweven met de muis over een "
+"knop"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
+msgstr ""
+"Indien ingeschakeld, verschijnt een volledige grootte voorbeeldvenster "
+"wanneer de muisaanwijzer zweeft over een vensterlijstknop. De vertraging "
+"voordat het voorbeeld verschijnt, wordt gecontroleerd door een optie onder "
+"het tabblad Geavanceerd"
+
+#. 4.0->settings-schema.json->no-click-activate->description
+#. 6.0->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr "Automatische focuswijziging bij het verlaten van het paneel"
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+#. 6.0->settings-schema.json->no-click-activate->tooltip
+msgid ""
+"If enabled, the current window for a window-list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"or Shift held or while remaining on the panel will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
+"Indien ingeschakeld, dan krijgt het huidige venster voor een "
+"vensterlijstknop de focus wanneer de muisaanwijzer het paneel verlaat. Het "
+"verlaten van de vensterlijst met Ctrl of Shift ingedrukt of terwijl u op het "
+"paneel blijft, laat de focus ongewijzigd. Deze optie wordt meestal gebruikt "
+"in combinatie met de optie hierboven voor het tonen van een voorbeeld bij "
+"zweven met de muis."
+
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+#. 6.0->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Weergeven bij zweven met de muis"
+
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.0->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+"Indien ingeschakeld, wordt een popupmenu met een lijst met huidige vensters "
+"weergegeven wanneer er met de muis wordt gezweefd"
+
+#. 4.0->settings-schema.json->show-previews->description
+#. 6.0->settings-schema.json->show-previews->description
+msgid "Show window thumbnails in the popup window list menu"
+msgstr "Miniaturen van venters weergeven in het popup vensterlijstmneu"
+
+#. 4.0->settings-schema.json->show-previews->tooltip
+#. 6.0->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window thumbnails,\n"
+"otherwise the menu will only show window titles\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Indien ingeschakeld, zal het popupmenu miniaturen van vensters tonen,\n"
+" indien niet dan zal het menu alleen venstertitels tonen\n"
+" (Altijd uitgeschakeld wanneer Cinnamon wordt uitgevoerd in Software-"
+"renderingmodus)"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra large"
+msgstr "Extra groot"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Large"
+msgstr "Groot"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Medium"
+msgstr "Medium"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Small"
+msgstr "Klein"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra small"
+msgstr "Extra klein"
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Default thumbnail window size"
+msgstr "Standaardgrootte van het miniaturenvenster"
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->description
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->description
+msgid "Show thumbnails for all windows of an application pool"
+msgstr "Miniaturen weergeven voor alle vensters van een applicatiepool"
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+msgid ""
+"If enabled, a popup menu will contain all the application windows in the "
+"application pool rather then just the selected window within the application "
+"pool"
+msgstr ""
+"Indien ingeschakeld, zal een popupmenu alle vensters van de applicatiepool "
+"bevatten in plaats van alleen het geselecteerde venster binnen de "
+"applicatiepool"
+
+#. 4.0->settings-schema.json->preview-timeout-show->description
+#. 6.0->settings-schema.json->preview-timeout-show->description
+msgid "Hover time before showing menu"
+msgstr "Tijd voor zweven van de muis voordat het menu wordt weergegeven"
+
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.0->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time before the thumbnail menu appears when hovering over a "
+"button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"De wachttijd voordat het miniaturenmenu wordt weergegeven wanneer er over "
+"een knop wordt gezweefd met de muis\n"
+"(Niet gebruikt bij rechtstreeks verplaatsen naar een andere knop in de lijst)"
+
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+#. 6.0->settings-schema.json->preview-timeout-hide->description
+msgid "Time before closing after pointer leaves the menu"
+msgstr ""
+"Tijd voordat het menu wordt gesloten nadat de muisaanwijzer het menu heeft "
+"verlaten"
+
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.0->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the thumbnail menu to close when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"De wachttijd voor het miniaturenmenu om te sluiten wanneer de muisaanwijzer "
+"een knop verlaat\n"
+"(Niet gebruikt bij rechtstreeks verplaatsen naar een andere knop in de lijst)"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+msgid "Close thumbnail menu"
+msgstr "Sluit miniaturenmenu"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Close window"
+msgstr "Sluit venster"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Minimize/Restore"
+msgstr "Minimaliseer/Herstel"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Maximize/Restore"
+msgstr "Maximaliseer/Herstel"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Group/Ungroup windows"
+msgstr "Groep/Ongroep vensters"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 1"
+msgstr "Verplaats naar werkruimte 1"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 2"
+msgstr "Verplaats naar werkruimte 2"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 3"
+msgstr "Verplaats naar werkruimte 3"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 4"
+msgstr "Verplaats naar werkruimte 4"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous workspace"
+msgstr "Verplaats naar vorige werkruimte"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next workspace"
+msgstr "Verplaats naar volgende werkruimte"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to this workspace"
+msgstr "Verplaats naar deze werkruimte"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Visible on this/all workspaces"
+msgstr "Zichtbaar op deze/alle werkruimtes"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 1"
+msgstr "Verplaats naar beeldscherm 1"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 2"
+msgstr "Verplaats naar beeldscherm 2"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 3"
+msgstr "Verplaats naar beeldscherm 3"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 4"
+msgstr "Verplaats naar beeldscherm 4"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous monitor"
+msgstr "Verplaats naar vorig beeldscherm"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next monitor"
+msgstr "Verplaats naar volgend beeldscherm"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to current/next monitor"
+msgstr "Verplaats naar huidig/volgend beeldscherm"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Pin to panel toggle"
+msgstr "Vastmaken aan paneel in- of uitschakelen"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr "Tegel links"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr "Tegel linksboven"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr "Tegel boven"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr "Tegel rechtsboven"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr "Tegel rechts"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr "Tegel rechtsonder"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr "Tegel onder"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr "Tegel linksonder"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Untile window"
+msgstr "Venster onttegelen"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Do nothing"
+msgstr "Doe niets"
+
+#. 4.0->settings-schema.json->preview-middle-click->description
+#. 6.0->settings-schema.json->preview-middle-click->description
+msgid "Thumbnail window middle button action"
+msgstr "Actie van de middelste knop van het miniaturenvenster"
+
+#. 4.0->settings-schema.json->preview-back-click->description
+#. 6.0->settings-schema.json->preview-back-click->description
+msgid "Thumbnail window back button action"
+msgstr "Actie van de achteruitknop van het miniaturenvenster"
+
+#. 4.0->settings-schema.json->preview-forward-click->description
+#. 6.0->settings-schema.json->preview-forward-click->description
+msgid "Thumbnail window forward button action"
+msgstr "Actie van de vooruitknop van het miniaturenvenster"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+#. 6.0->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr ""
+"Toon een volledige grootte voorbeeldvenster bij zweven met de muis over een "
+"miniatuur"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
+msgstr ""
+"Indien ingeschakeld, verschijnt een volledige grootte voorbeeldvenster "
+"wanneer de muisaanwijzer zweeft over een item in het miniaturenmenu. De "
+"vertraging voordat het voorbeeld verschijnt, wordt gecontroleerd door een "
+"optie onder het tabblad Geavanceerd"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr "Automatische focuswijziging bij het verlaten van het miniaturenmenu"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid ""
+"If enabled, the window associated with the Thumbnail menu item will get the "
+"focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
+"Shift held or leaving from either end of the menu will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
+"Indien ingeschakeld, krijgt het venster dat is gekoppeld aan het item in het "
+"miniaturenmenu de focus wanneer de muisaanwijzer het menu verlaat. Het "
+"verlaten van het menu met Ctrl of Shift ingedrukt of het verlaten vanaf het "
+"begin of einde van het menu laat de focus ongewijzigd. Deze optie wordt "
+"meestal gebruikt in combinatie met de optie hierboven voor het tonen van een "
+"voorbeeld bij zweven met de muis."
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore/Minimize most recent window"
+msgstr "Meest recente venster herstellen/minimaliseren"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore then cycle windows"
+msgstr "Herstellen dan bladeren door de vensters"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Show thumbnail menu"
+msgstr "Miniaturenmenu weergeven"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "Restore or hold for thumbnail menu"
+msgstr "Herstellen of ingedrukt houden voor het miniaturenmenu"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->description
+msgid "Left button action for grouped buttons"
+msgstr "Actie bij linkse knop voor gegroepeerde knoppen"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+msgid ""
+"Action taken when using the left mouse button on a window list entry for a "
+"group of windows"
+msgstr ""
+"Actie die ondernomen wordt wanneer de linkermuisknop wordt gebruikt bij een "
+"vensterlijst-item voor een groep van vensters"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "New window or hold for thumbnail menu"
+msgstr "Nieuw venster of ingedrukt houden voor miniaturenmenu"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->description
+msgid "Left button action (with running windows)"
+msgstr "Actie bij linkse knop (met vensters die bezig zijn)"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+msgid ""
+"Action taken when using the left mouse button on a launcher button with one "
+"or more running windows"
+msgstr ""
+"Actie die ondernomen wordt wanneer de linkermuisknop gebruikt wordt op een "
+"launcherknop met één of meer vensters die bezig zijn"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Thumbnail menu toggle"
+msgstr "Miniaturenmenu in- en uitschakelen"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Thumbnail menu hold"
+msgstr "Miniaturenmenu ingedrukt houden"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Restore most recent application window"
+msgstr "Meest recente applicatievenster herstellen"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 1st window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 2nd window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 3rd window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Activate 4th window in grouped button"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->description
+#. 6.0->settings-schema.json->mouse-action-btn2->description
+msgid "Middle button action"
+msgstr "Middelste knopactie"
+
+#. 4.0->settings-schema.json->mouse-action-btn2->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn2->tooltip
+msgid "Action taken when using the middle mouse button on window list entries"
+msgstr ""
+"Actie die wordt uitgevoerd bij het gebruik van de middelste muisknop op "
+"vensterlijstvermeldingen"
+
+#. 4.0->settings-schema.json->mouse-action-btn8->description
+#. 6.0->settings-schema.json->mouse-action-btn8->description
+msgid "Back button action"
+msgstr "Achteruitknopactie"
+
+#. 4.0->settings-schema.json->mouse-action-btn8->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn8->tooltip
+msgid "Action taken when using the back mouse button on window list entries"
+msgstr ""
+"Actie die wordt uitgevoerd bij het gebruik van de achteruitknop van de muis "
+"op vensterlijstvermeldingen"
+
+#. 4.0->settings-schema.json->mouse-action-btn9->description
+#. 6.0->settings-schema.json->mouse-action-btn9->description
+msgid "Forward button action"
+msgstr "Vooruitknopactie"
+
+#. 4.0->settings-schema.json->mouse-action-btn9->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn9->tooltip
+msgid "Action taken when using the forward mouse button on window list entries"
+msgstr ""
+"Actie die wordt uitgevoerd bij het gebruik van de vooruitknop van de muis op "
+"vensterlijstvermeldingen"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "Off"
+msgstr "Uit"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (temporary)"
+msgstr "Aan (tijdelijk)"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (global default)"
+msgstr "Aan (globale standaard)"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (application default)"
+msgstr "Aan (applicatiestandaard)"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->description
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->description
+msgid "Adjust the thumbnail window sizes using the scroll-wheel"
+msgstr "Pas de grootte van de miniaturenvensters aan met het scrollwiel"
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+msgid ""
+"If enabled, the size of thumbnail windows will respond to the mouse scroll-"
+"wheel. The new size can have a temporary effect or persist on a global or "
+"per application basis"
+msgstr ""
+"Indien ingeschakeld, reageren de miniaturenvensters op muiswielscroll. De "
+"nieuwe grootte kan een tijdelijk effect hebben of permanent worden toegepast "
+"op basis van een globale of per applicatie basis"
+
+#. 4.0->settings-schema.json->hotkey-bindings->description
+#. 6.0->settings-schema.json->hotkey-bindings->description
+msgid "Hotkey binding available for assignment to a window"
+msgstr "Sneltoetsbinding beschikbaar voor toewijzing aan een venster"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+msgid "Cycle application windows"
+msgstr "Vensters van applicaties wisselen"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+msgid "Key sequence"
+msgstr "Toetsenreeks"
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+msgid "Description"
+msgstr "Beschrijving"
+
+#. 4.0->settings-schema.json->hotkey-bindings->tooltip
+#. 6.0->settings-schema.json->hotkey-bindings->tooltip
+msgid ""
+"Define a list of hotkeys used to bring to the foreground specific windows."
+msgstr ""
+"Definieer een lijst met sneltoetsen die worden gebruikt om specifieke "
+"vensters naar voren te brengen."
+
+#. 4.0->settings-schema.json->hotkey-minimize->description
+#. 6.0->settings-schema.json->hotkey-minimize->description
+msgid "Minimize window when hotkey target is already in focus"
+msgstr "Minimaliseer venster wanneer het doel van de sneltoets al in focus is"
+
+#. 4.0->settings-schema.json->hotkey-minimize->tooltip
+#. 6.0->settings-schema.json->hotkey-minimize->tooltip
+msgid ""
+"If enabled and application cycling is not enabled or there is only one "
+"window for the application, windows will be minimized if the window is "
+"already in focus"
+msgstr ""
+"Indien ingeschakeld en applicatiewisselen niet is ingeschakeld of er is "
+"slechts één venster voor de applicatie, dan worden vensters geminimaliseerd "
+"als het venster al in focus is"
+
+#. 4.0->settings-schema.json->hotkey-new->description
+#. 6.0->settings-schema.json->hotkey-new->description
+msgid "Open a new window when the application is not running"
+msgstr "Open een nieuw venster wanneer de applicatie niet wordt uitgevoerd"
+
+#. 4.0->settings-schema.json->hotkey-new->tooltip
+#. 6.0->settings-schema.json->hotkey-new->tooltip
+msgid ""
+"Start a new window if no window is attached to a hotkey and the hotkey "
+"description is an exact match for the application name of a pinned button or "
+"a desktop file name"
+msgstr ""
+"Start een nieuw venster als er geen venster is gekoppeld aan een sneltoets "
+"en de sneltoetsomschrijving exact overeenkomt met de applicatienaam van een "
+"vastgemaakte knop of een bureaubladbestandsnaam"
+
+#. 4.0->settings-schema.json->hotkey-sequence->description
+#. 6.0->settings-schema.json->hotkey-sequence->description
+msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
+msgstr ""
+"Slimme numerieke sneltoetsen (gebruik van '1' wordt automatisch uitgebreid "
+"tot 1-9)"
+
+#. 4.0->settings-schema.json->hotkey-sequence->tooltip
+#. 6.0->settings-schema.json->hotkey-sequence->tooltip
+msgid ""
+"If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
+"automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
+"first 9 windows of the assigned application, as ordered on the window-list, "
+"will be activated by the 9 hotkeys."
+msgstr ""
+"Indien ingeschakeld, dan doen sneltoetsen eindigend met de '1' toets (bijv. "
+"Alt+1) automatisch sneltoetsen 1 tot 9 creëren (bijv. Alt+1 tot Alt+9). De "
+"eerste 9 vensters van de toegewezen applicatie, zoals geordend op de "
+"vensterlijst, worden geactiveerd door de 9 sneltoetsen."
+
+#. 4.0->settings-schema.json->hotkey-grave-help->description
+#. 6.0->settings-schema.json->hotkey-grave-help->description
+msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
+msgstr ""
+"Gebruik modifier(s) + ` sneltoets om sneltoetsaanwijzingen weer te geven"
+
+#. 4.0->settings-schema.json->hotkey-grave-help->tooltip
+#. 6.0->settings-schema.json->hotkey-grave-help->tooltip
+msgid ""
+"If enabled, The hotkey modifier(s) + ` will be registered for each unique "
+"modifier set defined in the hotkey list. Using these hotkeys will temporally "
+"show a hotkey hint bubble over the button icons."
+msgstr ""
+"Indien ingeschakeld, wordt de sneltoets modifier(s) + ` geregistreerd voor "
+"elke unieke modifierset gedefinieerd in de sneltoetsenlijst. Met behulp van "
+"deze sneltoetsen wordt tijdelijk een sneltoetsaanwijzing weergegeven boven "
+"de knoppictogrammen."
+
+#. 4.0->settings-schema.json->hotkey-help->description
+#. 6.0->settings-schema.json->hotkey-help->description
+msgid ""
+"Hotkeys can be assigned to a window in two ways:\n"
+"1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
+"2) Automatic:  Enter a \"Description\" matching an application name or "
+"desktop file.\n"
+"Note: 1) Hotkey not working? it's possible the key combination is already "
+"assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey "
+"assignments might need to be reassigned. 3) Hotkeys associated with desktop "
+"files can not be manually assigned."
+msgstr ""
+"Sneltoetsen kunnen op twee manieren aan een venster worden toegewezen:\n"
+" !1) Manueel: Gebruik 'Venster toekennen aan een sneltoets' in het "
+"contextmenu van de knop.\n"
+"2) Automatisch: Voer een 'Beschrijving' overeenkomend met een applicatienaam "
+"of bureaubladbestand in.\n"
+"Opmerking: 1) Sneltoets werkt niet? Het is mogelijk dat de toetscombinatie "
+"elders al is toegewezen. 2) Als u sneltoetsen verwijdert of herschikt, "
+"moeten handmatige sneltoetsaanwijzigingen mogelijk opnieuw worden "
+"toegewezen. 3) Sneltoetsen die zijn gekoppeld aan bureaubladbestanden kunnen "
+"niet handmatig worden toegewezen."
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Key and mouse button"
+msgstr "Toets en muisknop"
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Mouse click context"
+msgstr "Muisklikcontext"
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Action to perform"
+msgstr "Uit te voeren actie"
+
+#. 4.0->settings-schema.json->adv-mouse-list->tooltip
+#. 6.0->settings-schema.json->adv-mouse-list->tooltip
+msgid ""
+"Define a set of mouse button actions when the Ctrl or Shift keys are pressed."
+msgstr ""
+"Definieer een set muisknopacties wanneer de Ctrl- of Shift-toetsen worden "
+"ingedrukt."
+
+#. 4.0->settings-schema.json->adv-mouse-help->description
+msgid ""
+"Note: The above list contents will be incorrectly displayed without this "
+"fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will "
+"take effect."
+msgstr ""
+"Opmerking: De inhoud van de bovenstaande lijst wordt incorrect weergegeven "
+"zonder deze fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"De waarden van het bewerkingsvenster zijn de juiste waarden en degene die "
+"van kracht zullen zijn."
+
+#. 4.0->settings-schema.json->animate-icon->description
+#. 6.0->settings-schema.json->animate-icon->description
+msgid "Icon animation when launching new windows"
+msgstr "Pictogramanimatie bij het starten van nieuwe vensters"
+
+#. 4.0->settings-schema.json->animate-icon->tooltip
+#. 6.0->settings-schema.json->animate-icon->tooltip
+msgid ""
+"When enabled, the icon will animate when launching new windows for an "
+"application"
+msgstr ""
+"Indien ingeschakeld, wordt het pictogram geanimeerd bij het starten van "
+"nieuwe vensters voor een applicatie"
+
+#. 4.0->settings-schema.json->backup-file-name->description
+#. 6.0->settings-schema.json->backup-file-name->description
+msgid "Settings backup name"
+msgstr "Naam instellingen back-up"
+
+#. 4.0->settings-schema.json->backup-file-name->tooltip
+#. 6.0->settings-schema.json->backup-file-name->tooltip
+msgid ""
+"If a name is entered here, the configuration of this applet instance will be "
+"backed up under that name. Backups will be listed in the Setup Wizard "
+"restore page when adding a new instance of CassiaWindowList to a panel."
+msgstr ""
+"Indien hier een naam wordt ingevoerd, wordt de configuratie van deze "
+"appletinstantie onder die naam opgeslagen. Back-ups worden vermeld op de "
+"herstelpagina Setup Wizard wanneer u een nieuwe instantie van "
+"CassiaWindowList aan een paneel toevoegt."
+
+#. 4.0->settings-schema.json->icon-saturation->units
+#. 6.0->settings-schema.json->icon-saturation->units
+msgid "percent"
+msgstr "procent"
+
+#. 4.0->settings-schema.json->icon-saturation->description
+#. 6.0->settings-schema.json->icon-saturation->description
+msgid "Icon color saturation"
+msgstr "Pictogramkleursaturatie"
+
+#. 4.0->settings-schema.json->icon-saturation->tooltip
+#. 6.0->settings-schema.json->icon-saturation->tooltip
+msgid ""
+"Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
+"100%\n"
+"This option is experimental, some icons are not currently effected by this "
+"setting"
+msgstr ""
+"Stelt de kleursaturatie in voor pictogrammen van 0% (grijstinten) tot 200%, "
+"standaard is 100%\n"
+"Deze optie is experimenteel, sommige pictogrammen worden momenteel niet "
+"beïnvloed door deze instelling"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "All Buttons"
+msgstr "Alle knoppen"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Minimized buttons"
+msgstr "Geminimaliseerde knoppen"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Idle pinned buttons"
+msgstr "Inactieve vastgemaakte knoppen"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other workspaces"
+msgstr "Knoppen voor vensters op andere werkruimtes"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other monitors"
+msgstr "Knoppen voor vensters op andere beeldschermen"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
+msgid "All buttons excepted focused window"
+msgstr "Alle knoppen behalve gefocust venster"
+
+#. 4.0->settings-schema.json->saturation-application->description
+#. 6.0->settings-schema.json->saturation-application->description
+msgid "Where to apply the icon color saturation"
+msgstr "Waar de pictogramkleursaturatie wordt toegepast"
+
+#. 4.0->settings-schema.json->saturation-application->tooltip
+#. 6.0->settings-schema.json->saturation-application->tooltip
+msgid ""
+"Which buttons will have the custom icon color saturation applied\n"
+"This option is only available when the saturation is not set to 100%"
+msgstr ""
+"Welke knoppen zullen de aangepaste pictogramkleursaturatie hebben\n"
+"Deze optie is alleen beschikbaar wanneer de saturatie niet is ingesteld op "
+"100%"
+
+#: SetupWizard.ui:7
+msgid "CassiaWindowList Basic Setup Wizard"
+msgstr "CassiaWindowList Basis Setup Wizard"
+
+#: SetupWizard.ui:78
+msgid "Welcome to CassiaWindowList"
+msgstr "Welkom bij CassiaWindowList"
+
+#: SetupWizard.ui:95
+msgid "How would you like this applet instance to behave?"
+msgstr "Hoe wilt u dat deze appletinstantie zich gedraagt?"
+
+#: SetupWizard.ui:105
+msgid ""
+"Window List (Task bar)\n"
+"Panel buttons for all running windows."
+msgstr ""
+"Vensterlijst (Taakbalk)\n"
+"Paneelknoppen voor alle uitgevoerde vensters."
+
+#: SetupWizard.ui:125
+msgid ""
+"Panel Launcher (Quick launcher)\n"
+"Panel button only appear when you add items\n"
+"to the panel, no labels are shown, only icons."
+msgstr ""
+"Paneellauncher (Snelle launcher)\n"
+"Paneelknoppen verschijnen alleen wanneer u items toevoegt aan het paneel, er "
+"worden geen labels weergegeven, alleen pictogrammen."
+
+#: SetupWizard.ui:146
+msgid ""
+"Restore configuration from an automatic\n"
+"backup"
+msgstr "Configuratie herstellen van een automatische back-up"
+
+#: SetupWizard.ui:178
+msgid "How do you want your Window List to operate?"
+msgstr "Hoe wilt u dat uw vensterlijst werkt?"
+
+#: SetupWizard.ui:192
+msgid ""
+"Basic  -  Quick window access\n"
+"Every window gets it's own window list button.\n"
+"Button labels are window titles."
+msgstr ""
+"Basis  -  Snelle toegang tot vensters\n"
+"Elk venster krijgt zijn eigen vensterlijstknop.\n"
+"Knoplabels zijn venstertitels."
+
+#: SetupWizard.ui:213
+msgid ""
+"Grouping  -  Very compact\n"
+"One window list button per application.\n"
+"Thumbnail menus to select specific window.\n"
+"Button labels are window titles."
+msgstr ""
+"Groeperen  -  Zeer compact\n"
+"Eén vensterlijstknop per applicatie\n"
+"Miniatuurmenu's om een specifiek venster te selecteren.\n"
+"Knoplabels zijn venstertitels."
+
+#: SetupWizard.ui:236
+msgid ""
+"Pooling  -  Quick access & compact\n"
+"Every window gets it's own window list button.\n"
+"Application buttons are pooled togeather.\n"
+"One button label per application pool.\n"
+"Button labels are application names."
+msgstr ""
+"Pooling -  Snelle toegang en compact\n"
+"Elk venster krijgt zijn eigen vensterlijstknop.\n"
+"Applicatieknoppen worden gegroepeerd.\n"
+"Één knoplabel per applicatiepool.\n"
+"Knoplabels zijn applicatienamen."
+
+#: SetupWizard.ui:273
+msgid "Just a few more options to consider"
+msgstr "Nog enkele extra opties om te overwegen"
+
+#: SetupWizard.ui:287
+msgid "No Labels (icons only)"
+msgstr "Geen labels (alleen pictogrammen)"
+
+#: SetupWizard.ui:305
+msgid "No minimized window indicator character"
+msgstr "Geen indicatiekarakter voor geminimaliseerd venster"
+
+#: SetupWizard.ui:323
+msgid "No Thumbnail window menu on mouse hover"
+msgstr "Geen miniaturenvenstermenu bij zweven met de muis"
+
+#: SetupWizard.ui:354
+msgid "Panel Launcher Setup"
+msgstr "Paneellauncher Instellen"
+
+#: SetupWizard.ui:370
+msgid ""
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
+"\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
+"\n"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
+msgstr ""
+"In tegenstelling tot de meeste paneellauncher-applets houdt deze launcher "
+"bij welke \n"
+"vensters worden uitgevoerd en gebruikt het miniatuurmenu's van vensters.\n"
+"\n"
+"U kunt extra vensters starten door op de 'Terug' muisknop te klikken \n"
+"of de linkermuisknop te gebruiken terwijl u de Ctrl-toets ingedrukt houdt.\n"
+"\n"
+" Hoe wilt u dat de linkermuisknop zich gedraagt wanneer er al vensters zijn "
+"voor een launcherknop?"
+
+#: SetupWizard.ui:388
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Open een nieuw venster / Ingedrukt houden voor miniaturenmenu"
+
+#: SetupWizard.ui:407
+msgid "Restore most recent window / Cycle windows"
+msgstr "Herstel meest recente venster / Vensters wisselen"
+
+#: SetupWizard.ui:427
+msgid "Open the Thumbnail menu"
+msgstr "Open het miniaturenmenu"
+
+#: SetupWizard.ui:461
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Miniatuurvenstermenu bij zweven met de muis"
+
+#: SetupWizard.ui:492
+msgid "All done!"
+msgstr "Alles klaar!"
+
+#: SetupWizard.ui:508
+msgid ""
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+"Er zijn nog veel meer opties en functies om te verkennen in de\n"
+"applet-configurator en het contextmenu van de vensterlijstknop,\n"
+"bijvoorbeeld:\n"
+"\n"
+"• Sneltoetsen om een specifiek venster te starten / activeren.\n"
+"• Aanpasbare muisknopacties.\n"
+"• Aanpasbare pictogramkleursaturatie (grijstinten / levendig).\n"
+"• Aanpasbare Ctrl/Shift + muisknopacties.\n"
+"• Applicatiespecifieke groeperings- en labelinstellingen.\n"
+"• Inzoomen op miniaturenvensters met het scrollwiel.\n"
+"• Automatische applicatiegroepering bij beperkte ruimte.\n"
+"• En nog veel meer."
+
+#: SetupWizard.ui:530
+msgid "Exit and launch the applet configurator now"
+msgstr "Afsluiten en de appletconfigurator nu starten"
+
+#: SetupWizard.ui:559
+msgid "Select a backup configuration to restore?"
+msgstr "Selecteer een back-upconfiguratie om te herstellen?"
+
+#: SetupWizard.ui:602
+msgid "Configuration Backup?"
+msgstr "Configuratieback-up? "
+
+#: SetupWizard.ui:618
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+"Als u automatisch een back-up van deze appletconfiguratie wilt behouden, "
+"selecteert of voert u hieronder een back-upbestandsbeschrijving in. Alle "
+"huidige en toekomstige configuratiewijzigingen worden naar deze back-up "
+"opgeslagen:"
+
+#: SetupWizard.ui:638
+msgid "MainWindowList"
+msgstr "MainWindowList"
+
+#: SetupWizard.ui:639
+msgid "MainPanelLauncher"
+msgstr "MainPanelLauncher"
+
+#: SetupWizard.ui:640
+msgid "Monitor1WindowList"
+msgstr "Monitor1WindowList"
+
+#: SetupWizard.ui:641
+msgid "Monitor2WindowList"
+msgstr "Monitor2WindowList"
+
+#: SetupWizard.ui:642
+msgid "Monitor1PanelLauncher"
+msgstr "Monitor1PanelLauncher"
+
+#: SetupWizard.ui:643
+msgid "Monitor2PanelLauncher"
+msgstr "Monitor2PanelLauncher"

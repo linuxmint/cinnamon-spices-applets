@@ -6,14 +6,15 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { DistanceUnits } from "../config";
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
+import type { DistanceUnits } from "../config";
+import { Logger } from "../lib/services/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData, correctGetTimes } from "../types";
+import type { WeatherData, ForecastData, HourlyForecastData, Condition } from "../weather-data";
+import type { LocationData, correctGetTimes } from "../types";
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "./BaseProvider";
+import { HttpLib } from "../lib/httpLib";
 
 export class MetUk extends BaseProvider {
 
@@ -48,14 +49,10 @@ export class MetUk extends BaseProvider {
 	/** In metres */
 	private readonly MAX_STATION_DIST = 50000;
 
-	constructor(_app: WeatherApplet) {
-		super(_app);
-	}
-
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(newLoc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(newLoc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 
 		const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
 		// Get closest sites
@@ -64,10 +61,10 @@ export class MetUk extends BaseProvider {
 			this.currentLoc = newLoc;
 			this.currentLocID = loc;
 
-			const forecastSite = await this.GetClosestForecastSite(newLoc);
+			const forecastSite = await this.GetClosestForecastSite(newLoc, cancellable);
 			if (forecastSite == null) return null;
 
-			const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
+			const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST, cancellable);
 			if (observationSites == null) return null;
 
 			this.forecastSite = forecastSite;
@@ -92,39 +89,49 @@ export class MetUk extends BaseProvider {
 		}
 
 		// Start getting forecast data
-		const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc) as Promise<ForecastData[]>;
-		const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc) as Promise<HourlyForecastData[]>;
+		const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable);
+		const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable);
 
 		// Get and Parse Observation data
-		const observations = await this.GetObservationData(this.observationSites);
+		const observations = await this.GetObservationData(this.observationSites, cancellable);
 		const currentResult = this.ParseCurrent(observations, newLoc);
 		if (!currentResult) return null;
 
 		// await for forecasts if not finished
 		const forecastResult = await forecastPromise;
-		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+		currentResult.forecasts = forecastResult ?? [];
 		const threeHourlyForecast = await hourlyPayload;
-		currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast as HourlyForecastData[];
+		currentResult.hourlyForecasts = threeHourlyForecast ?? [];
 		return currentResult;
 	};
 
-	private async GetClosestForecastSite(loc: LocationData): Promise<WeatherSite | null> {
-		const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+	private async GetClosestForecastSite(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite | null> {
+		const forecastSitelist = await HttpLib.Instance.LoadJsonSimple<MetUKSiteListResponse>({
+			url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
+			cancellable
+		});
+
 		if (forecastSitelist == null)
 			return null;
 
 		return this.GetClosestSite(forecastSitelist, loc);
 	}
 
-	private async GetObservationSitesInRange(loc: LocationData, range: number): Promise<WeatherSite[] | null> {
-		const observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
+		// TODO: Add type definition
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+		const observationSiteList = await HttpLib.Instance.LoadJsonSimple<MetUKSiteListResponse>({
+			url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
+			cancellable
+		});
+
 		if (observationSiteList == null)
 			return null;
 
 		// Sort out close observation sites
 		let observationSites: WeatherSite[] = [];
 		for (const element of observationSiteList.Locations.Location) {
-			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+			element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
 			if (element.dist > range) continue; // do not include stations outside area
 			observationSites.push(element);
 		}
@@ -135,12 +142,16 @@ export class MetUk extends BaseProvider {
 		return observationSites;
 	}
 
-	private async GetObservationData(observationSites: WeatherSite[]) {
+	private async GetObservationData(observationSites: WeatherSite[], cancellable: imports.gi.Gio.Cancellable) {
 		const observations: METPayload<true>[] = [];
 		for (const element of observationSites) {
 			Logger.Debug("Getting observation data from station: " + element.id);
-			const payload = await this.app.LoadJsonAsync<METPayload<true>>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
-			if (!!payload)
+			const payload = await HttpLib.Instance.LoadJsonSimple<METPayload<true>>({
+				url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
+				cancellable
+			});
+
+			if (payload)
 				observations.push(payload);
 			else {
 				Logger.Debug("Failed to get observations from " + element.id);
@@ -156,17 +167,17 @@ export class MetUk extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(query: string, ParseFunction: (json: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[] | null, loc: LocationData) {
+	private async GetData<T, R extends WeatherData | ForecastData[] | HourlyForecastData[]>(query: string, ParseFunction: (json: T, loc: LocationData) => R | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
 		if (query == null)
 			return null;
 
 		Logger.Debug("Query: " + query);
-		const json = await this.app.LoadJsonAsync(query);
+		const json = await HttpLib.Instance.LoadJsonSimple({ url: query, cancellable });
 
 		if (json == null)
 			return null;
 
-		return ParseFunction(json, loc);
+		return ParseFunction(json as T, loc);
 	};
 
 	private ParseCurrent(json: METPayload<true>[], loc: LocationData): WeatherData | null {
@@ -181,7 +192,7 @@ export class MetUk extends BaseProvider {
 			dataIndex = index;
 			break;
 		}
-		const filteredJson = json as any as METPayload<false>[];
+		const filteredJson = json as unknown as METPayload<false>[];
 
 		if (dataIndex == -1) {
 			this.app.ShowError({
@@ -194,27 +205,27 @@ export class MetUk extends BaseProvider {
 		}
 
 		const times = (getTimes as correctGetTimes)(
-			new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
-			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon),
-			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation)
+			new Date(), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+			Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon),
+			Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation)
 		);
 		try {
 			const weather: WeatherData = {
 				coord: {
-					lat: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
-					lon: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
+					lat: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+					lon: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
 				},
 				location: {
 					city: undefined,
 					country: undefined,
-					timeZone: undefined,
+					timeZone: loc.timeZone,
 				},
 				stationInfo: {
 					distanceFrom: this.observationSites[dataIndex].dist,
 					name:  this.observationSites[dataIndex].name,
 					area: this.observationSites[dataIndex].unitaryAuthArea,
-					lat: parseFloat(this.observationSites[dataIndex].latitude),
-					lon: parseFloat(this.observationSites[dataIndex].longitude),
+					lat: Number.parseFloat(this.observationSites[dataIndex].latitude),
+					lon: Number.parseFloat(this.observationSites[dataIndex].longitude),
 				},
 				date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
 				sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -240,29 +251,29 @@ export class MetUk extends BaseProvider {
 			}
 
 			if (observation?.S != null) {
-				weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
+				weather.wind.speed = MPHtoMPS(Number.parseFloat(observation.S));
 			}
 			if (observation?.D != null) {
 				weather.wind.degree = CompassToDeg(observation.D);
 			}
 			if (observation?.T != null) {
-				weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
+				weather.temperature = CelsiusToKelvin(Number.parseFloat(observation.T));
 			}
 			if (observation?.P != null) {
-				weather.pressure = parseFloat(observation.P);
+				weather.pressure = Number.parseFloat(observation.P);
 			}
 			if (observation?.H != null) {
-				weather.humidity = parseFloat(observation.H);
+				weather.humidity = Number.parseFloat(observation.H);
 			}
 			if (observation?.Dp != null) {
-				weather.dewPoint = CelsiusToKelvin(parseFloat(observation.Dp));
+				weather.dewPoint = CelsiusToKelvin(Number.parseFloat(observation.Dp));
 			}
 
 			return weather;
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("Met UK Weather Parsing error: " + e, e);
+				Logger.Error("Met UK Weather Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
@@ -281,8 +292,8 @@ export class MetUk extends BaseProvider {
 
 				const forecast: ForecastData = {
 					date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
-					temp_min: CelsiusToKelvin(parseFloat(night.Nm ?? "0")),
-					temp_max: CelsiusToKelvin(parseFloat(day.Dm ?? "0")),
+					temp_min: CelsiusToKelvin(Number.parseFloat(night.Nm ?? "0")),
+					temp_max: CelsiusToKelvin(Number.parseFloat(day.Dm ?? "0")),
 					condition: this.ResolveCondition(day.W),
 				};
 				forecasts.push(forecast);
@@ -291,7 +302,7 @@ export class MetUk extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("MET UK Forecast Parsing error: " + e, e);
+				Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -307,7 +318,7 @@ export class MetUk extends BaseProvider {
 
 				for (const element of day.Rep) {
 					const hour = element as ThreeHourPayload;
-					const timestamp = date.plus({ hours: parseInt(hour.$) / 60 })
+					const timestamp = date.plus({ hours: Number.parseInt(hour.$) / 60 })
 
 					// Show the previous 3-hour forecast until it reaches the next one
 					const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
@@ -316,12 +327,12 @@ export class MetUk extends BaseProvider {
 
 					const forecast: HourlyForecastData = {
 						date: timestamp,
-						temp: CelsiusToKelvin(parseFloat(hour.T)),
+						temp: CelsiusToKelvin(Number.parseFloat(hour.T)),
 						condition: this.ResolveCondition(hour.W),
 						precipitation: {
 							type: "rain",
 							//volume: undefined,
-							chance: parseFloat(hour.Pp)
+							chance: Number.parseFloat(hour.Pp)
 						}
 					};
 					forecasts.push(forecast);
@@ -331,7 +342,7 @@ export class MetUk extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("MET UK Forecast Parsing error: " + e, e);
+				Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
 			this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
@@ -339,9 +350,9 @@ export class MetUk extends BaseProvider {
 
 	/** https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
 	private VisibilityToText(dist: string): string {
-		const distance = parseInt(dist);
+		const distance = Number.parseInt(dist);
 		const unit = this.app.config.DistanceUnit;
-		const stringFormat: any = {
+		const stringFormat: Record<string, string> = {
 			distanceUnit: this.DistanceUnitFor(unit)
 		};
 
@@ -428,8 +439,8 @@ export class MetUk extends BaseProvider {
 				observation.SiteRep.DV.Location.i + ", index " + index +
 				", distance "
 				+ Math.round(GetDistance(
-					parseFloat(observation.SiteRep.DV.Location.lat),
-					parseFloat(observation.SiteRep.DV.Location.lon),
+					Number.parseFloat(observation.SiteRep.DV.Location.lat),
+					Number.parseFloat(observation.SiteRep.DV.Location.lon),
 					this.currentLoc.lat,
 					this.currentLoc.lon
 				))
@@ -500,12 +511,12 @@ export class MetUk extends BaseProvider {
 		return (date.replace("Z", "")) + "T00:00:00Z";
 	}
 
-	private GetClosestSite(siteList: any, loc: LocationData): WeatherSite {
-		const sites = siteList.Locations.Location as WeatherSite[];
+	private GetClosestSite(siteList: MetUKSiteListResponse, loc: LocationData): WeatherSite {
+		const sites = siteList.Locations.Location;
 		let closest = sites[0];
-		closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
+		closest.dist = GetDistance(Number.parseFloat(closest.latitude), Number.parseFloat(closest.longitude), loc.lat, loc.lon);
 		for (const element of sites) {
-			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+			element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
 			if (element.dist < closest.dist) {
 				closest = element;
 			}
@@ -750,6 +761,12 @@ export class MetUk extends BaseProvider {
 	};
 };
 
+interface MetUKSiteListResponse {
+	Locations: {
+		Location: WeatherSite[]
+	}
+}
+
 interface WeatherSite {
 	elevation: string;
 	id: string;
@@ -770,7 +787,7 @@ interface WeatherSite {
 interface METPayload<T extends boolean = false> {
 	SiteRep: {
 		Wx: {
-			Param: any[];
+			Param: unknown[];
 		},
 		DV: {
 			dataDate: string;

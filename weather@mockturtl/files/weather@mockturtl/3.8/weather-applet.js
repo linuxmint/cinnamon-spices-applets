@@ -10,163 +10,165 @@ var weatherApplet;
  SunCalc is a JavaScript library for calculating sun/moon position and light phases.
  https://github.com/mourner/suncalc
 */
-
 (function () {
-  'use strict';
+  'use strict'; // shortcuts for easier to read formulas
 
-  // shortcuts for easier to read formulas
   var PI = Math.PI,
-    sin = Math.sin,
-    cos = Math.cos,
-    tan = Math.tan,
-    asin = Math.asin,
-    atan = Math.atan2,
-    acos = Math.acos,
-    rad = PI / 180;
-
-  // sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
-
+      sin = Math.sin,
+      cos = Math.cos,
+      tan = Math.tan,
+      asin = Math.asin,
+      atan = Math.atan2,
+      acos = Math.acos,
+      rad = PI / 180; // sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
   // date/time constants and conversions
 
   var dayMs = 1000 * 60 * 60 * 24,
-    J1970 = 2440588,
-    J2000 = 2451545;
+      J1970 = 2440588,
+      J2000 = 2451545;
+
   function toJulian(date) {
     return date.valueOf() / dayMs - 0.5 + J1970;
   }
+
   function fromJulian(j) {
     return new Date((j + 0.5 - J1970) * dayMs);
   }
+
   function toDays(date) {
     return toJulian(date) - J2000;
-  }
+  } // general calculations for position
 
-  // general calculations for position
 
   var e = rad * 23.4397; // obliquity of the Earth
 
   function rightAscension(l, b) {
     return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l));
   }
+
   function declination(l, b) {
     return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l));
   }
+
   function azimuth(H, phi, dec) {
     return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi));
   }
+
   function altitude(H, phi, dec) {
     return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H));
   }
+
   function siderealTime(d, lw) {
     return rad * (280.16 + 360.9856235 * d) - lw;
   }
-  function astroRefraction(h) {
-    if (h < 0)
-      // the following formula works for positive altitudes only.
-      h = 0; // if h = -0.08901179 a div/0 would occur.
 
+  function astroRefraction(h) {
+    if (h < 0) // the following formula works for positive altitudes only.
+      h = 0; // if h = -0.08901179 a div/0 would occur.
     // formula 16.4 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
     // 1.02 / tan(h + 10.26 / (h + 5.10)) h in degrees, result in arc minutes -> converted to rad:
-    return 0.0002967 / Math.tan(h + 0.00312536 / (h + 0.08901179));
-  }
 
-  // general sun calculations
+    return 0.0002967 / Math.tan(h + 0.00312536 / (h + 0.08901179));
+  } // general sun calculations
+
 
   function solarMeanAnomaly(d) {
     return rad * (357.5291 + 0.98560028 * d);
   }
+
   function eclipticLongitude(M) {
     var C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)),
-      // equation of center
-      P = rad * 102.9372; // perihelion of the Earth
+        // equation of center
+    P = rad * 102.9372; // perihelion of the Earth
 
     return M + C + P + PI;
   }
+
   function sunCoords(d) {
     var M = solarMeanAnomaly(d),
-      L = eclipticLongitude(M);
+        L = eclipticLongitude(M);
     return {
       dec: declination(L, 0),
       ra: rightAscension(L, 0)
     };
   }
-  var SunCalc = {};
 
-  // calculates sun position for a given date and latitude/longitude
+  var SunCalc = {}; // calculates sun position for a given date and latitude/longitude
 
   SunCalc.getPosition = function (date, lat, lng) {
     var lw = rad * -lng,
-      phi = rad * lat,
-      d = toDays(date),
-      c = sunCoords(d),
-      H = siderealTime(d, lw) - c.ra;
+        phi = rad * lat,
+        d = toDays(date),
+        c = sunCoords(d),
+        H = siderealTime(d, lw) - c.ra;
     return {
       azimuth: azimuth(H, phi, c.dec),
       altitude: altitude(H, phi, c.dec)
     };
-  };
+  }; // sun times configuration (angle, morning name, evening name)
 
-  // sun times configuration (angle, morning name, evening name)
 
-  var times = SunCalc.times = [[-0.833, 'sunrise', 'sunset'], [-0.3, 'sunriseEnd', 'sunsetStart'], [-6, 'dawn', 'dusk'], [-12, 'nauticalDawn', 'nauticalDusk'], [-18, 'nightEnd', 'night'], [6, 'goldenHourEnd', 'goldenHour']];
-
-  // adds a custom time to the times config
+  var times = SunCalc.times = [[-0.833, 'sunrise', 'sunset'], [-0.3, 'sunriseEnd', 'sunsetStart'], [-6, 'dawn', 'dusk'], [-12, 'nauticalDawn', 'nauticalDusk'], [-18, 'nightEnd', 'night'], [6, 'goldenHourEnd', 'goldenHour']]; // adds a custom time to the times config
 
   SunCalc.addTime = function (angle, riseName, setName) {
     times.push([angle, riseName, setName]);
-  };
+  }; // calculations for sun times
 
-  // calculations for sun times
 
   var J0 = 0.0009;
+
   function julianCycle(d, lw) {
     return Math.round(d - J0 - lw / (2 * PI));
   }
+
   function approxTransit(Ht, lw, n) {
     return J0 + (Ht + lw) / (2 * PI) + n;
   }
+
   function solarTransitJ(ds, M, L) {
     return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
   }
+
   function hourAngle(h, phi, d) {
     return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
   }
+
   function observerAngle(height) {
     return -2.076 * Math.sqrt(height) / 60;
-  }
+  } // returns set time for the given sun altitude
 
-  // returns set time for the given sun altitude
+
   function getSetJ(h, lw, phi, dec, n, M, L) {
     var w = hourAngle(h, phi, dec),
-      a = approxTransit(w, lw, n);
+        a = approxTransit(w, lw, n);
     return solarTransitJ(a, M, L);
-  }
-
-  // calculates sun times for a given date, latitude/longitude, and, optionally,
+  } // calculates sun times for a given date, latitude/longitude, and, optionally,
   // the observer height (in meters) relative to the horizon
+
 
   SunCalc.getTimes = function (date, lat, lng, height) {
     height = height || 0;
     var lw = rad * -lng,
-      phi = rad * lat,
-      dh = observerAngle(height),
-      d = toDays(date),
-      n = julianCycle(d, lw),
-      ds = approxTransit(0, lw, n),
-      M = solarMeanAnomaly(ds),
-      L = eclipticLongitude(M),
-      dec = declination(L, 0),
-      Jnoon = solarTransitJ(ds, M, L),
-      i,
-      len,
-      time,
-      h0,
-      Jset,
-      Jrise;
+        phi = rad * lat,
+        dh = observerAngle(height),
+        d = toDays(date),
+        n = julianCycle(d, lw),
+        ds = approxTransit(0, lw, n),
+        M = solarMeanAnomaly(ds),
+        L = eclipticLongitude(M),
+        dec = declination(L, 0),
+        Jnoon = solarTransitJ(ds, M, L),
+        i,
+        len,
+        time,
+        h0,
+        Jset,
+        Jrise;
     var result = {
       solarNoon: fromJulian(Jnoon),
       nadir: fromJulian(Jnoon - 0.5)
     };
+
     for (i = 0, len = times.length; i < len; i += 1) {
       time = times[i];
       h0 = (time[0] + dh) * rad;
@@ -175,26 +177,24 @@ var weatherApplet;
       result[time[1]] = fromJulian(Jrise);
       result[time[2]] = fromJulian(Jset);
     }
-    return result;
-  };
 
-  // moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+    return result;
+  }; // moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+
 
   function moonCoords(d) {
     // geocentric ecliptic coordinates of the moon
-
     var L = rad * (218.316 + 13.176396 * d),
-      // ecliptic longitude
-      M = rad * (134.963 + 13.064993 * d),
-      // mean anomaly
-      F = rad * (93.272 + 13.229350 * d),
-      // mean distance
-
-      l = L + rad * 6.289 * sin(M),
-      // longitude
-      b = rad * 5.128 * sin(F),
-      // latitude
-      dt = 385001 - 20905 * cos(M); // distance to the moon in km
+        // ecliptic longitude
+    M = rad * (134.963 + 13.064993 * d),
+        // mean anomaly
+    F = rad * (93.272 + 13.229350 * d),
+        // mean distance
+    l = L + rad * 6.289 * sin(M),
+        // longitude
+    b = rad * 5.128 * sin(F),
+        // latitude
+    dt = 385001 - 20905 * cos(M); // distance to the moon in km
 
     return {
       ra: rightAscension(l, b),
@@ -202,15 +202,16 @@ var weatherApplet;
       dist: dt
     };
   }
+
   SunCalc.getMoonPosition = function (date, lat, lng) {
     var lw = rad * -lng,
-      phi = rad * lat,
-      d = toDays(date),
-      c = moonCoords(d),
-      H = siderealTime(d, lw) - c.ra,
-      h = altitude(H, phi, c.dec),
-      // formula 14.1 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
-      pa = atan(sin(H), tan(phi) * cos(c.dec) - sin(c.dec) * cos(H));
+        phi = rad * lat,
+        d = toDays(date),
+        c = moonCoords(d),
+        H = siderealTime(d, lw) - c.ra,
+        h = altitude(H, phi, c.dec),
+        // formula 14.1 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+    pa = atan(sin(H), tan(phi) * cos(c.dec) - sin(c.dec) * cos(H));
     h = h + astroRefraction(h); // altitude correction for refraction
 
     return {
@@ -219,54 +220,51 @@ var weatherApplet;
       distance: c.dist,
       parallacticAngle: pa
     };
-  };
-
-  // calculations for illumination parameters of the moon,
+  }; // calculations for illumination parameters of the moon,
   // based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
   // Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
 
+
   SunCalc.getMoonIllumination = function (date) {
     var d = toDays(date || new Date()),
-      s = sunCoords(d),
-      m = moonCoords(d),
-      sdist = 149598000,
-      // distance from Earth to Sun in km
-
-      phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
-      inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
-      angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) - cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
+        s = sunCoords(d),
+        m = moonCoords(d),
+        sdist = 149598000,
+        // distance from Earth to Sun in km
+    phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
+        inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
+        angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) - cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
     return {
       fraction: (1 + cos(inc)) / 2,
       phase: 0.5 + 0.5 * inc * (angle < 0 ? -1 : 1) / Math.PI,
       angle: angle
     };
   };
+
   function hoursLater(date, h) {
     return new Date(date.valueOf() + h * dayMs / 24);
-  }
+  } // calculations for moon rise/set times are based on http://www.stargazing.net/kepler/moonrise.html article
 
-  // calculations for moon rise/set times are based on http://www.stargazing.net/kepler/moonrise.html article
 
   SunCalc.getMoonTimes = function (date, lat, lng, inUTC) {
     var t = new Date(date);
     if (inUTC) t.setUTCHours(0, 0, 0, 0);else t.setHours(0, 0, 0, 0);
     var hc = 0.133 * rad,
-      h0 = SunCalc.getMoonPosition(t, lat, lng).altitude - hc,
-      h1,
-      h2,
-      rise,
-      set,
-      a,
-      b,
-      xe,
-      ye,
-      d,
-      roots,
-      x1,
-      x2,
-      dx;
+        h0 = SunCalc.getMoonPosition(t, lat, lng).altitude - hc,
+        h1,
+        h2,
+        rise,
+        set,
+        a,
+        b,
+        xe,
+        ye,
+        d,
+        roots,
+        x1,
+        x2,
+        dx; // go in 2-hour chunks, each time seeing if a 3-point quadratic curve crosses zero (which means rise or set)
 
-    // go in 2-hour chunks, each time seeing if a 3-point quadratic curve crosses zero (which means rise or set)
     for (var i = 1; i <= 24; i += 2) {
       h1 = SunCalc.getMoonPosition(hoursLater(t, i), lat, lng).altitude - hc;
       h2 = SunCalc.getMoonPosition(hoursLater(t, i + 1), lat, lng).altitude - hc;
@@ -276,6 +274,7 @@ var weatherApplet;
       ye = (a * xe + b) * xe + h1;
       d = b * b - 4 * a * h1;
       roots = 0;
+
       if (d >= 0) {
         dx = Math.sqrt(d) / (Math.abs(a) * 2);
         x1 = xe - dx;
@@ -284,23 +283,26 @@ var weatherApplet;
         if (Math.abs(x2) <= 1) roots++;
         if (x1 < -1) x1 = x2;
       }
+
       if (roots === 1) {
         if (h0 < 0) rise = i + x1;else set = i + x1;
       } else if (roots === 2) {
         rise = i + (ye < 0 ? x2 : x1);
         set = i + (ye < 0 ? x1 : x2);
       }
+
       if (rise && set) break;
       h0 = h2;
     }
+
     var result = {};
     if (rise) result.rise = hoursLater(t, rise);
     if (set) result.set = hoursLater(t, set);
     if (!rise && !set) result[ye > 0 ? 'alwaysUp' : 'alwaysDown'] = true;
     return result;
-  };
+  }; // export as Node module / AMD module / browser variable
 
-  // export as Node module / AMD module / browser variable
+
   if (true) module.exports = SunCalc;else {}
 })();
 
@@ -386,6 +388,8 @@ const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 const STYLE_HIDDEN = "weather-hidden";
+const REQUEST_TIMEOUT_SECONDS = 30;
+const ALERT_LEVEL_ORDER = ["extreme", "severe", "moderate", "minor", "unknown"];
 const US_TIMEZONES = [
     "America/Adak",
     "America/Anchorage",
@@ -501,6 +505,371 @@ const distanceUnitLocales = {
     ]
 };
 
+;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
+
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
+async function GetFileInfo(file) {
+    return new Promise((resolve) => {
+        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
+            try {
+                const result = file.query_info_finish(res);
+                resolve(result);
+                return result;
+            }
+            catch (e) {
+                Logger.Error("Error getting file info: ", e);
+                resolve(null);
+                return null;
+            }
+        });
+    });
+}
+function FileExists(file) {
+    try {
+        return file.query_exists(null);
+    }
+    catch (e) {
+        if (e instanceof Error)
+            logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+        return false;
+    }
+}
+async function LoadContents(file) {
+    return new Promise((resolve, reject) => {
+        file.load_contents_async(null, (obj, res) => {
+            let result, contents = null;
+            try {
+                [result, contents] = file.load_contents_finish(res);
+            }
+            catch (e) {
+                reject(e);
+                return e;
+            }
+            if (result != true) {
+                resolve(null);
+                return null;
+            }
+            if (contents instanceof Uint8Array)
+                contents = ByteArray.toString(contents);
+            resolve(contents.toString());
+            return contents.toString();
+        });
+    });
+}
+async function DeleteFile(file) {
+    const result = await new Promise((resolve) => {
+        file.delete_async(null, null, (obj, res) => {
+            let result = null;
+            try {
+                result = file.delete_finish(res);
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    const error = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
+                    Logger.Error("Can't delete file, reason: ", e);
+                }
+                resolve(false);
+                return false;
+            }
+            resolve(result);
+            return result;
+        });
+    });
+    return result;
+}
+async function OverwriteAndGetIOStream(file) {
+    const parent = file.get_parent();
+    if (parent != null && !FileExists(parent))
+        parent.make_directory_with_parents(null);
+    return new Promise((resolve) => {
+        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
+            try {
+                const ioStream = file.replace_readwrite_finish(result);
+                resolve(ioStream);
+                return ioStream;
+            }
+            catch (e) {
+                logger_Logger.Error("Error overwriting file: ", e);
+                resolve(null);
+                return null;
+            }
+        });
+    });
+}
+async function WriteAsync(outputStream, buffer) {
+    const text = ByteArray.fromString(buffer);
+    if (outputStream.is_closed())
+        return false;
+    return new Promise((resolve) => {
+        outputStream.write_bytes_async(text, null, null, (obj, res) => {
+            try {
+                outputStream.write_bytes_finish(res);
+                resolve(true);
+                return true;
+            }
+            catch (e) {
+                logger_Logger.Error("Error writing to stream: ", e);
+                resolve(false);
+                return false;
+            }
+        });
+    });
+}
+async function CloseStream(stream) {
+    return new Promise((resolve) => {
+        stream.close_async(null, null, (obj, res) => {
+            try {
+                const result = stream.close_finish(res);
+                resolve(result);
+                return result;
+            }
+            catch (e) {
+                logger_Logger.Error("Error closing stream: ", e);
+                resolve(false);
+                return false;
+            }
+        });
+    });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/services/logger.ts
+
+
+
+const { File } = imports.gi.Gio;
+const { get_home_dir, get_environ } = imports.gi.GLib;
+const LogLevelSeverity = {
+    always: 0,
+    critical: 1,
+    error: 5,
+    info: 10,
+    debug: 50,
+    verbose: 100
+};
+const IOErrorEnumNames = {
+    [imports.gi.Gio.IOErrorEnum.FAILED]: "FAILED",
+    [imports.gi.Gio.IOErrorEnum.NOT_FOUND]: "NOT_FOUND",
+    [imports.gi.Gio.IOErrorEnum.EXISTS]: "EXISTS",
+    [imports.gi.Gio.IOErrorEnum.IS_DIRECTORY]: "IS_DIRECTORY",
+    [imports.gi.Gio.IOErrorEnum.NOT_DIRECTORY]: "NOT_DIRECTORY",
+    [imports.gi.Gio.IOErrorEnum.NOT_EMPTY]: "NOT_EMPTY",
+    [imports.gi.Gio.IOErrorEnum.NOT_REGULAR_FILE]: "NOT_REGULAR_FILE",
+    [imports.gi.Gio.IOErrorEnum.NOT_SYMBOLIC_LINK]: "NOT_SYMBOLIC_LINK",
+    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTABLE_FILE]: "NOT_MOUNTABLE_FILE",
+    [imports.gi.Gio.IOErrorEnum.FILENAME_TOO_LONG]: "FILENAME_TOO_LONG",
+    [imports.gi.Gio.IOErrorEnum.INVALID_FILENAME]: "INVALID_FILENAME",
+    [imports.gi.Gio.IOErrorEnum.TOO_MANY_LINKS]: "TOO_MANY_LINKS",
+    [imports.gi.Gio.IOErrorEnum.NO_SPACE]: "NO_SPACE",
+    [imports.gi.Gio.IOErrorEnum.INVALID_ARGUMENT]: "INVALID_ARGUMENT",
+    [imports.gi.Gio.IOErrorEnum.PERMISSION_DENIED]: "PERMISSION_DENIED",
+    [imports.gi.Gio.IOErrorEnum.NOT_SUPPORTED]: "NOT_SUPPORTED",
+    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTED]: "NOT_MOUNTED",
+    [imports.gi.Gio.IOErrorEnum.ALREADY_MOUNTED]: "ALREADY_MOUNTED",
+    [imports.gi.Gio.IOErrorEnum.CLOSED]: "CLOSED",
+    [imports.gi.Gio.IOErrorEnum.CANCELLED]: "CANCELLED",
+    [imports.gi.Gio.IOErrorEnum.PENDING]: "PENDING",
+    [imports.gi.Gio.IOErrorEnum.READ_ONLY]: "READ_ONLY",
+    [imports.gi.Gio.IOErrorEnum.CANT_CREATE_BACKUP]: "CANT_CREATE_BACKUP",
+    [imports.gi.Gio.IOErrorEnum.WRONG_ETAG]: "WRONG_ETAG",
+    [imports.gi.Gio.IOErrorEnum.TIMED_OUT]: "TIMED_OUT",
+    [imports.gi.Gio.IOErrorEnum.WOULD_RECURSE]: "WOULD_RECURSE",
+    [imports.gi.Gio.IOErrorEnum.BUSY]: "BUSY",
+    [imports.gi.Gio.IOErrorEnum.WOULD_BLOCK]: "WOULD_BLOCK",
+    [imports.gi.Gio.IOErrorEnum.HOST_NOT_FOUND]: "HOST_NOT_FOUND",
+    [imports.gi.Gio.IOErrorEnum.WOULD_MERGE]: "WOULD_MERGE",
+    [imports.gi.Gio.IOErrorEnum.FAILED_HANDLED]: "FAILED_HANDLED",
+    [imports.gi.Gio.IOErrorEnum.TOO_MANY_OPEN_FILES]: "TOO_MANY_OPEN_FILES",
+    [imports.gi.Gio.IOErrorEnum.NOT_INITIALIZED]: "NOT_INITIALIZED",
+    [imports.gi.Gio.IOErrorEnum.ADDRESS_IN_USE]: "ADDRESS_IN_USE",
+    [imports.gi.Gio.IOErrorEnum.PARTIAL_INPUT]: "PARTIAL_INPUT",
+    [imports.gi.Gio.IOErrorEnum.INVALID_DATA]: "INVALID_DATA",
+    [imports.gi.Gio.IOErrorEnum.DBUS_ERROR]: "DBUS_ERROR",
+    [imports.gi.Gio.IOErrorEnum.HOST_UNREACHABLE]: "HOST_UNREACHABLE",
+    [imports.gi.Gio.IOErrorEnum.NETWORK_UNREACHABLE]: "NETWORK_UNREACHABLE",
+    [imports.gi.Gio.IOErrorEnum.CONNECTION_REFUSED]: "CONNECTION_REFUSED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_FAILED]: "PROXY_FAILED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_AUTH_FAILED]: "PROXY_AUTH_FAILED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_NEED_AUTH]: "PROXY_NEED_AUTH",
+    [imports.gi.Gio.IOErrorEnum.PROXY_NOT_ALLOWED]: "PROXY_NOT_ALLOWED",
+    [imports.gi.Gio.IOErrorEnum.CONNECTION_CLOSED]: "CONNECTION_CLOSED",
+    [imports.gi.Gio.IOErrorEnum.NOT_CONNECTED]: "NOT_CONNECTED",
+    [imports.gi.Gio.IOErrorEnum.MESSAGE_TOO_LARGE]: "MESSAGE_TOO_LARGE",
+    [imports.gi.Gio.IOErrorEnum.NO_SUCH_DEVICE]: "NO_SUCH_DEVICE",
+};
+class Log {
+    constructor(_instanceId) {
+        this.logLevel = "info";
+        this.ID = _instanceId;
+    }
+    ChangeLevel(level) {
+        this.logLevel = level;
+    }
+    CanLog(level) {
+        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+    }
+    Info(message, level = "Info") {
+        if (!this.CanLog("info"))
+            return;
+        const msg = `[${UUID}#${this.ID}:${level}]: ${message.toString()}`;
+        global.log(msg);
+    }
+    Error(error, e) {
+        var _a;
+        if (!this.CanLog("error"))
+            return;
+        global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
+        if (typeof e === "string") {
+            return;
+        }
+        if (!(e instanceof Error))
+            return;
+        const gjsE = e;
+        global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${(_a = IOErrorEnumNames[gjsE.code]) !== null && _a !== void 0 ? _a : gjsE.code}, message: ${gjsE.message}`);
+        if (gjsE.stack)
+            global.logError(gjsE.stack);
+    }
+    ;
+    Debug(message) {
+        if (!this.CanLog("debug"))
+            return;
+        this.Info(message, "Debug");
+    }
+    Verbose(message) {
+        if (!this.CanLog("verbose"))
+            return;
+        this.Info(message, "Verbose");
+    }
+    UpdateInstanceID(instanceID) {
+        this.ID = instanceID;
+    }
+    async GetAppletLogs() {
+        var _a, _b, _c;
+        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let logFilePath = `${home}/`;
+        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
+            logFilePath += ".cinnamon/glass.log";
+        }
+        else {
+            const errFileEnv = get_environ().find(x => x.includes("ERRFILE"));
+            if (!errFileEnv) {
+                logFilePath += ".xsession-errors";
+            }
+            else {
+                logFilePath = errFileEnv.replace("ERRFILE=", "");
+            }
+        }
+        const logFile = File.new_for_path(logFilePath);
+        if (!FileExists(logFile)) {
+            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logs = await LoadContents(logFile);
+        if (logs == null) {
+            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logLines = logs.split("\n");
+        const filteredLines = [];
+        let lastWasCinnamonLog = false;
+        for (const line of logLines) {
+            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
+                filteredLines.push(line);
+            }
+            else if (line.includes("LookingGlass") && line.includes(UUID)) {
+                filteredLines.push(line);
+                lastWasCinnamonLog = true;
+            }
+            else {
+                lastWasCinnamonLog = false;
+            }
+        }
+        return filteredLines;
+    }
+}
+const logger_Logger = new Log();
+
+;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
+
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
+async function SpawnProcessJson(command) {
+    const response = await SpawnProcess(command);
+    if (!response.Success)
+        return response;
+    try {
+        response.Data = JSON.parse(response.Data);
+        return response;
+    }
+    catch (e) {
+        if (e instanceof Error)
+            Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
+        response.Success = false;
+        response.ErrorData = {
+            Code: -1,
+            Message: "Failed to parse JSON",
+            Type: "jsonParse",
+        };
+        return response;
+    }
+}
+function Literal(command) {
+    return ("'" + command.replace(/'/g, "'\"'\"'") + "' ");
+}
+async function SpawnProcess(command) {
+    const cmd = command.join(" ");
+    logger_Logger.Debug("Spawning command: " + cmd);
+    let response;
+    if (spawnCommandLineAsyncIO === undefined) {
+        response = await new Promise((resolve) => {
+            spawnCommandLineAsync(cmd, () => {
+                resolve({
+                    Success: true,
+                    ErrorData: undefined,
+                    Data: ""
+                });
+            }, () => {
+                resolve({
+                    Success: false,
+                    ErrorData: {
+                        Code: -1,
+                        Message: "Command failed",
+                        Type: "unknown"
+                    },
+                    Data: ""
+                });
+            });
+        });
+    }
+    else {
+        response = await new Promise((resolve) => {
+            spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                const result = {
+                    Success: exitCode == 0,
+                    ErrorData: undefined,
+                    Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
+                };
+                if (exitCode != 0) {
+                    result.ErrorData = {
+                        Code: exitCode,
+                        Message: err !== null && err !== void 0 ? err : null,
+                        Type: "unknown"
+                    };
+                }
+                resolve(result);
+                return result;
+            });
+        });
+    }
+    return response;
+}
+function OpenUrl(element) {
+    if (!element.url)
+        return;
+    imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+}
+
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
 
@@ -508,69 +877,74 @@ const distanceUnitLocales = {
  * @private
  */
 class LuxonError extends Error {}
-
 /**
  * @private
  */
+
+
 class InvalidDateTimeError extends LuxonError {
   constructor(reason) {
     super(`Invalid DateTime: ${reason.toMessage()}`);
   }
-}
 
+}
 /**
  * @private
  */
+
 class InvalidIntervalError extends LuxonError {
   constructor(reason) {
     super(`Invalid Interval: ${reason.toMessage()}`);
   }
-}
 
+}
 /**
  * @private
  */
+
 class InvalidDurationError extends LuxonError {
   constructor(reason) {
     super(`Invalid Duration: ${reason.toMessage()}`);
   }
+
 }
-
 /**
  * @private
  */
+
 class ConflictingSpecificationError extends LuxonError {}
-
 /**
  * @private
  */
+
 class InvalidUnitError extends LuxonError {
   constructor(unit) {
     super(`Invalid unit ${unit}`);
   }
+
 }
-
 /**
  * @private
  */
+
 class InvalidArgumentError extends LuxonError {}
-
 /**
  * @private
  */
+
 class ZoneIsAbstractError extends LuxonError {
   constructor() {
     super("Zone is an abstract class");
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/formats.js
 /**
  * @private
  */
-
 const n = "numeric",
-  s = "short",
-  l = "long";
+      s = "short",
+      l = "long";
 const DATE_SHORT = {
   year: n,
   month: n,
@@ -720,10 +1094,10 @@ const DATETIME_HUGE_WITH_SECONDS = {
 };
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/zone.js
 
-
 /**
  * @interface
  */
+
 class Zone {
   /**
    * The type of zone
@@ -733,28 +1107,30 @@ class Zone {
   get type() {
     throw new ZoneIsAbstractError();
   }
-
   /**
    * The name of this zone.
    * @abstract
    * @type {string}
    */
+
+
   get name() {
     throw new ZoneIsAbstractError();
   }
+
   get ianaName() {
     return this.name;
   }
-
   /**
    * Returns whether the offset is known to be fixed for the whole year.
    * @abstract
    * @type {boolean}
    */
+
+
   get isUniversal() {
     throw new ZoneIsAbstractError();
   }
-
   /**
    * Returns the offset's common name (such as EST) at the specified timestamp
    * @abstract
@@ -764,10 +1140,11 @@ class Zone {
    * @param {string} opts.locale - What locale to return the offset name in.
    * @return {string}
    */
+
+
   offsetName(ts, opts) {
     throw new ZoneIsAbstractError();
   }
-
   /**
    * Returns the offset's value as a string
    * @abstract
@@ -776,48 +1153,54 @@ class Zone {
    *                          Accepts 'narrow', 'short', or 'techie'. Returning '+6', '+06:00', or '+0600' respectively
    * @return {string}
    */
+
+
   formatOffset(ts, format) {
     throw new ZoneIsAbstractError();
   }
-
   /**
    * Return the offset in minutes for this zone at the specified timestamp.
    * @abstract
    * @param {number} ts - Epoch milliseconds for which to compute the offset
    * @return {number}
    */
+
+
   offset(ts) {
     throw new ZoneIsAbstractError();
   }
-
   /**
    * Return whether this Zone is equal to another zone
    * @abstract
    * @param {Zone} otherZone - the zone to compare
    * @return {boolean}
    */
+
+
   equals(otherZone) {
     throw new ZoneIsAbstractError();
   }
-
   /**
    * Return whether this Zone is valid.
    * @abstract
    * @type {boolean}
    */
+
+
   get isValid() {
     throw new ZoneIsAbstractError();
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/zones/systemZone.js
 
 
 let singleton = null;
-
 /**
  * Represents the local zone for this JavaScript environment.
  * @implements {Zone}
  */
+
 class SystemZone extends Zone {
   /**
    * Get a singleton instance of the local zone
@@ -827,61 +1210,78 @@ class SystemZone extends Zone {
     if (singleton === null) {
       singleton = new SystemZone();
     }
+
     return singleton;
   }
-
   /** @override **/
+
+
   get type() {
     return "system";
   }
-
   /** @override **/
+
+
   get name() {
     return new Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
-
   /** @override **/
+
+
   get isUniversal() {
     return false;
   }
-
   /** @override **/
+
+
   offsetName(ts, _ref) {
     let format = _ref.format,
-      locale = _ref.locale;
+        locale = _ref.locale;
     return parseZoneInfo(ts, format, locale);
   }
-
   /** @override **/
+
+
   formatOffset(ts, format) {
     return formatOffset(this.offset(ts), format);
   }
-
   /** @override **/
+
+
   offset(ts) {
     return -new Date(ts).getTimezoneOffset();
   }
-
   /** @override **/
+
+
   equals(otherZone) {
     return otherZone.type === "system";
   }
-
   /** @override **/
+
+
   get isValid() {
     return true;
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/zones/IANAZone.js
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
 let dtfCache = {};
+
 function makeDTF(zone) {
   if (!dtfCache[zone]) {
     dtfCache[zone] = new Intl.DateTimeFormat("en-US", {
@@ -896,8 +1296,10 @@ function makeDTF(zone) {
       era: "short"
     });
   }
+
   return dtfCache[zone];
 }
+
 const typeToPos = {
   year: 0,
   month: 1,
@@ -907,40 +1309,48 @@ const typeToPos = {
   minute: 5,
   second: 6
 };
+
 function hackyOffset(dtf, date) {
   const formatted = dtf.format(date).replace(/\u200E/g, ""),
-    parsed = /(\d+)\/(\d+)\/(\d+) (AD|BC),? (\d+):(\d+):(\d+)/.exec(formatted),
-    _parsed = _slicedToArray(parsed, 8),
-    fMonth = _parsed[1],
-    fDay = _parsed[2],
-    fYear = _parsed[3],
-    fadOrBc = _parsed[4],
-    fHour = _parsed[5],
-    fMinute = _parsed[6],
-    fSecond = _parsed[7];
+        parsed = /(\d+)\/(\d+)\/(\d+) (AD|BC),? (\d+):(\d+):(\d+)/.exec(formatted),
+        _parsed = _slicedToArray(parsed, 8),
+        fMonth = _parsed[1],
+        fDay = _parsed[2],
+        fYear = _parsed[3],
+        fadOrBc = _parsed[4],
+        fHour = _parsed[5],
+        fMinute = _parsed[6],
+        fSecond = _parsed[7];
+
   return [fYear, fMonth, fDay, fadOrBc, fHour, fMinute, fSecond];
 }
+
 function partsOffset(dtf, date) {
   const formatted = dtf.formatToParts(date);
   const filled = [];
+
   for (let i = 0; i < formatted.length; i++) {
     const _formatted$i = formatted[i],
-      type = _formatted$i.type,
-      value = _formatted$i.value;
+          type = _formatted$i.type,
+          value = _formatted$i.value;
     const pos = typeToPos[type];
+
     if (type === "era") {
       filled[pos] = value;
     } else if (!isUndefined(pos)) {
       filled[pos] = parseInt(value, 10);
     }
   }
+
   return filled;
 }
+
 let ianaZoneCache = {};
 /**
  * A zone identified by an IANA identifier, like America/New_York
  * @implements {Zone}
  */
+
 class IANAZone extends Zone {
   /**
    * @param {string} name - Zone name
@@ -950,18 +1360,19 @@ class IANAZone extends Zone {
     if (!ianaZoneCache[name]) {
       ianaZoneCache[name] = new IANAZone(name);
     }
+
     return ianaZoneCache[name];
   }
-
   /**
    * Reset local caches. Should only be necessary in testing scenarios.
    * @return {void}
    */
+
+
   static resetCache() {
     ianaZoneCache = {};
     dtfCache = {};
   }
-
   /**
    * Returns whether the provided string is a valid specifier. This only checks the string's format, not that the specifier identifies a known zone; see isValidZone for that.
    * @param {string} s - The string to check validity on
@@ -970,10 +1381,11 @@ class IANAZone extends Zone {
    * @deprecated This method returns false for some valid IANA names. Use isValidZone instead.
    * @return {boolean}
    */
+
+
   static isValidSpecifier(s) {
     return this.isValidZone(s);
   }
-
   /**
    * Returns whether the provided string identifies a real zone
    * @param {string} zone - The string to check
@@ -982,10 +1394,13 @@ class IANAZone extends Zone {
    * @example IANAZone.isValidZone("Sport~~blorp") //=> false
    * @return {boolean}
    */
+
+
   static isValidZone(zone) {
     if (!zone) {
       return false;
     }
+
     try {
       new Intl.DateTimeFormat("en-US", {
         timeZone: zone
@@ -995,60 +1410,71 @@ class IANAZone extends Zone {
       return false;
     }
   }
+
   constructor(name) {
     super();
     /** @private **/
+
     this.zoneName = name;
     /** @private **/
+
     this.valid = IANAZone.isValidZone(name);
   }
-
   /** @override **/
+
+
   get type() {
     return "iana";
   }
-
   /** @override **/
+
+
   get name() {
     return this.zoneName;
   }
-
   /** @override **/
+
+
   get isUniversal() {
     return false;
   }
-
   /** @override **/
+
+
   offsetName(ts, _ref) {
     let format = _ref.format,
-      locale = _ref.locale;
+        locale = _ref.locale;
     return parseZoneInfo(ts, format, locale, this.name);
   }
-
   /** @override **/
+
+
   formatOffset(ts, format) {
     return formatOffset(this.offset(ts), format);
   }
-
   /** @override **/
+
+
   offset(ts) {
     const date = new Date(ts);
     if (isNaN(date)) return NaN;
     const dtf = makeDTF(this.name);
+
     let _ref2 = dtf.formatToParts ? partsOffset(dtf, date) : hackyOffset(dtf, date),
-      _ref3 = _slicedToArray(_ref2, 7),
-      year = _ref3[0],
-      month = _ref3[1],
-      day = _ref3[2],
-      adOrBc = _ref3[3],
-      hour = _ref3[4],
-      minute = _ref3[5],
-      second = _ref3[6];
+        _ref3 = _slicedToArray(_ref2, 7),
+        year = _ref3[0],
+        month = _ref3[1],
+        day = _ref3[2],
+        adOrBc = _ref3[3],
+        hour = _ref3[4],
+        minute = _ref3[5],
+        second = _ref3[6];
+
     if (adOrBc === "BC") {
       year = -Math.abs(year) + 1;
-    }
+    } // because we're using hour12 and https://bugs.chromium.org/p/chromium/issues/detail?id=1025564&can=2&q=%2224%3A00%22%20datetimeformat
 
-    // because we're using hour12 and https://bugs.chromium.org/p/chromium/issues/detail?id=1025564&can=2&q=%2224%3A00%22%20datetimeformat
+
     const adjustedHour = hour === 24 ? 0 : hour;
     const asUTC = objToLocalTS({
       year,
@@ -1064,88 +1490,119 @@ class IANAZone extends Zone {
     asTS -= over >= 0 ? over : 1000 + over;
     return (asUTC - asTS) / (60 * 1000);
   }
-
   /** @override **/
+
+
   equals(otherZone) {
     return otherZone.type === "iana" && otherZone.name === this.name;
   }
-
   /** @override **/
+
+
   get isValid() {
     return this.valid;
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/locale.js
 const _excluded = ["base"],
-  _excluded2 = ["padTo", "floor"];
+      _excluded2 = ["padTo", "floor"];
+
 function locale_slicedToArray(arr, i) { return locale_arrayWithHoles(arr) || locale_iterableToArrayLimit(arr, i) || locale_unsupportedIterableToArray(arr, i) || locale_nonIterableRest(); }
+
 function locale_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function locale_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return locale_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return locale_arrayLikeToArray(o, minLen); }
+
 function locale_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function locale_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function locale_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function locale_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
 
 
-
-// todo - remap caching
+ // todo - remap caching
 
 let intlLFCache = {};
+
 function getCachedLF(locString) {
   let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   const key = JSON.stringify([locString, opts]);
   let dtf = intlLFCache[key];
+
   if (!dtf) {
     dtf = new Intl.ListFormat(locString, opts);
     intlLFCache[key] = dtf;
   }
+
   return dtf;
 }
+
 let intlDTCache = {};
+
 function getCachedDTF(locString) {
   let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   const key = JSON.stringify([locString, opts]);
   let dtf = intlDTCache[key];
+
   if (!dtf) {
     dtf = new Intl.DateTimeFormat(locString, opts);
     intlDTCache[key] = dtf;
   }
+
   return dtf;
 }
+
 let intlNumCache = {};
+
 function getCachedINF(locString) {
   let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   const key = JSON.stringify([locString, opts]);
   let inf = intlNumCache[key];
+
   if (!inf) {
     inf = new Intl.NumberFormat(locString, opts);
     intlNumCache[key] = inf;
   }
+
   return inf;
 }
+
 let intlRelCache = {};
+
 function getCachedRTF(locString) {
   let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
   const base = opts.base,
-    cacheKeyOpts = _objectWithoutProperties(opts, _excluded); // exclude `base` from the options
+        cacheKeyOpts = _objectWithoutProperties(opts, _excluded); // exclude `base` from the options
+
+
   const key = JSON.stringify([locString, cacheKeyOpts]);
   let inf = intlRelCache[key];
+
   if (!inf) {
     inf = new Intl.RelativeTimeFormat(locString, opts);
     intlRelCache[key] = inf;
   }
+
   return inf;
 }
+
 let sysLocaleCache = null;
+
 function systemLocale() {
   if (sysLocaleCache) {
     return sysLocaleCache;
@@ -1154,65 +1611,79 @@ function systemLocale() {
     return sysLocaleCache;
   }
 }
+
 function parseLocaleString(localeStr) {
   // I really want to avoid writing a BCP 47 parser
   // see, e.g. https://github.com/wooorm/bcp-47
   // Instead, we'll do this:
-
   // a) if the string has no -u extensions, just leave it alone
   // b) if it does, use Intl to resolve everything
   // c) if Intl fails, try again without the -u
-
   const uIndex = localeStr.indexOf("-u-");
+
   if (uIndex === -1) {
     return [localeStr];
   } else {
     let options;
     const smaller = localeStr.substring(0, uIndex);
+
     try {
       options = getCachedDTF(localeStr).resolvedOptions();
     } catch (e) {
       options = getCachedDTF(smaller).resolvedOptions();
     }
+
     const _options = options,
-      numberingSystem = _options.numberingSystem,
-      calendar = _options.calendar;
-    // return the smaller one so that we can append the calendar and numbering overrides to it
+          numberingSystem = _options.numberingSystem,
+          calendar = _options.calendar; // return the smaller one so that we can append the calendar and numbering overrides to it
+
     return [smaller, numberingSystem, calendar];
   }
 }
+
 function intlConfigString(localeStr, numberingSystem, outputCalendar) {
   if (outputCalendar || numberingSystem) {
     localeStr += "-u";
+
     if (outputCalendar) {
       localeStr += `-ca-${outputCalendar}`;
     }
+
     if (numberingSystem) {
       localeStr += `-nu-${numberingSystem}`;
     }
+
     return localeStr;
   } else {
     return localeStr;
   }
 }
+
 function mapMonths(f) {
   const ms = [];
+
   for (let i = 1; i <= 12; i++) {
     const dt = DateTime.utc(2016, i, 1);
     ms.push(f(dt));
   }
+
   return ms;
 }
+
 function mapWeekdays(f) {
   const ms = [];
+
   for (let i = 1; i <= 7; i++) {
     const dt = DateTime.utc(2016, 11, 13 + i);
     ms.push(f(dt));
   }
+
   return ms;
 }
+
 function listStuff(loc, length, defaultOK, englishFn, intlFn) {
   const mode = loc.listingMode(defaultOK);
+
   if (mode === "error") {
     return null;
   } else if (mode === "en") {
@@ -1221,6 +1692,7 @@ function listStuff(loc, length, defaultOK, englishFn, intlFn) {
     return intlFn(length);
   }
 }
+
 function supportsFastNumbers(loc) {
   if (loc.numberingSystem && loc.numberingSystem !== "latn") {
     return false;
@@ -1228,26 +1700,30 @@ function supportsFastNumbers(loc) {
     return loc.numberingSystem === "latn" || !loc.locale || loc.locale.startsWith("en") || new Intl.DateTimeFormat(loc.intl).resolvedOptions().numberingSystem === "latn";
   }
 }
-
 /**
  * @private
  */
+
 
 class PolyNumberFormatter {
   constructor(intl, forceSimple, opts) {
     this.padTo = opts.padTo || 0;
     this.floor = opts.floor || false;
+
     const padTo = opts.padTo,
-      floor = opts.floor,
-      otherOpts = _objectWithoutProperties(opts, _excluded2);
+          floor = opts.floor,
+          otherOpts = _objectWithoutProperties(opts, _excluded2);
+
     if (!forceSimple || Object.keys(otherOpts).length > 0) {
       const intlOpts = _objectSpread({
         useGrouping: false
       }, opts);
+
       if (opts.padTo > 0) intlOpts.minimumIntegerDigits = opts.padTo;
       this.inf = getCachedINF(intl, intlOpts);
     }
   }
+
   format(i) {
     if (this.inf) {
       const fixed = this.floor ? Math.floor(i) : i;
@@ -1258,16 +1734,18 @@ class PolyNumberFormatter {
       return padStart(fixed, this.padTo);
     }
   }
-}
 
+}
 /**
  * @private
  */
+
 
 class PolyDateFormatter {
   constructor(dt, intl, opts) {
     this.opts = opts;
     let z = undefined;
+
     if (dt.zone.isUniversal) {
       // UTC-8 or Etc/UTC-8 are not part of tzdata, only Etc/GMT+8 and the like.
       // That is why fixed-offset TZ is set to that unless it is:
@@ -1277,6 +1755,7 @@ class PolyDateFormatter {
       //    - < Etc/GMT-14, > Etc/GMT+12, and 30-minute or 45-minute offsets are not part of tzdata
       const gmtOffset = -1 * (dt.offset / 60);
       const offsetZ = gmtOffset >= 0 ? `Etc/GMT+${gmtOffset}` : `Etc/GMT${gmtOffset}`;
+
       if (dt.offset !== 0 && IANAZone.create(offsetZ).valid) {
         z = offsetZ;
         this.dt = dt;
@@ -1289,6 +1768,7 @@ class PolyDateFormatter {
         // the time and tell the formatter to show it to us in UTC, so that the time is right
         // and the bad zone doesn't show up.
         z = "UTC";
+
         if (opts.timeZoneName) {
           this.dt = dt;
         } else {
@@ -1301,33 +1781,42 @@ class PolyDateFormatter {
       this.dt = dt;
       z = dt.zone.name;
     }
+
     const intlOpts = _objectSpread({}, this.opts);
+
     intlOpts.timeZone = intlOpts.timeZone || z;
     this.dtf = getCachedDTF(intl, intlOpts);
   }
+
   format() {
     return this.dtf.format(this.dt.toJSDate());
   }
+
   formatToParts() {
     return this.dtf.formatToParts(this.dt.toJSDate());
   }
+
   resolvedOptions() {
     return this.dtf.resolvedOptions();
   }
-}
 
+}
 /**
  * @private
  */
+
+
 class PolyRelFormatter {
   constructor(intl, isEnglish, opts) {
     this.opts = _objectSpread({
       style: "long"
     }, opts);
+
     if (!isEnglish && hasRelative()) {
       this.rtf = getCachedRTF(intl, opts);
     }
   }
+
   format(count, unit) {
     if (this.rtf) {
       return this.rtf.format(count, unit);
@@ -1335,6 +1824,7 @@ class PolyRelFormatter {
       return formatRelativeTime(unit, count, this.opts.numeric, this.opts.style !== "long");
     }
   }
+
   formatToParts(count, unit) {
     if (this.rtf) {
       return this.rtf.formatToParts(count, unit);
@@ -1342,44 +1832,51 @@ class PolyRelFormatter {
       return [];
     }
   }
-}
 
+}
 /**
  * @private
  */
+
 
 class Locale {
   static fromOpts(opts) {
     return Locale.create(opts.locale, opts.numberingSystem, opts.outputCalendar, opts.defaultToEN);
   }
+
   static create(locale, numberingSystem, outputCalendar) {
     let defaultToEN = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-    const specifiedLocale = locale || Settings.defaultLocale;
-    // the system locale is useful for human readable strings but annoying for parsing/formatting known formats
+    const specifiedLocale = locale || Settings.defaultLocale; // the system locale is useful for human readable strings but annoying for parsing/formatting known formats
+
     const localeR = specifiedLocale || (defaultToEN ? "en-US" : systemLocale());
     const numberingSystemR = numberingSystem || Settings.defaultNumberingSystem;
     const outputCalendarR = outputCalendar || Settings.defaultOutputCalendar;
     return new Locale(localeR, numberingSystemR, outputCalendarR, specifiedLocale);
   }
+
   static resetCache() {
     sysLocaleCache = null;
     intlDTCache = {};
     intlNumCache = {};
     intlRelCache = {};
   }
+
   static fromObject() {
     let _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      locale = _ref.locale,
-      numberingSystem = _ref.numberingSystem,
-      outputCalendar = _ref.outputCalendar;
+        locale = _ref.locale,
+        numberingSystem = _ref.numberingSystem,
+        outputCalendar = _ref.outputCalendar;
+
     return Locale.create(locale, numberingSystem, outputCalendar);
   }
+
   constructor(locale, numbering, outputCalendar, specifiedLocale) {
     const _parseLocaleString = parseLocaleString(locale),
-      _parseLocaleString2 = locale_slicedToArray(_parseLocaleString, 3),
-      parsedLocale = _parseLocaleString2[0],
-      parsedNumberingSystem = _parseLocaleString2[1],
-      parsedOutputCalendar = _parseLocaleString2[2];
+          _parseLocaleString2 = locale_slicedToArray(_parseLocaleString, 3),
+          parsedLocale = _parseLocaleString2[0],
+          parsedNumberingSystem = _parseLocaleString2[1],
+          parsedOutputCalendar = _parseLocaleString2[2];
+
     this.locale = parsedLocale;
     this.numberingSystem = numbering || parsedNumberingSystem || null;
     this.outputCalendar = outputCalendar || parsedOutputCalendar || null;
@@ -1397,17 +1894,21 @@ class Locale {
     this.specifiedLocale = specifiedLocale;
     this.fastNumbersCached = null;
   }
+
   get fastNumbers() {
     if (this.fastNumbersCached == null) {
       this.fastNumbersCached = supportsFastNumbers(this);
     }
+
     return this.fastNumbersCached;
   }
+
   listingMode() {
     const isActuallyEn = this.isEnglish();
     const hasNoWeirdness = (this.numberingSystem === null || this.numberingSystem === "latn") && (this.outputCalendar === null || this.outputCalendar === "gregory");
     return isActuallyEn && hasNoWeirdness ? "en" : "intl";
   }
+
   clone(alts) {
     if (!alts || Object.getOwnPropertyNames(alts).length === 0) {
       return this;
@@ -1415,54 +1916,63 @@ class Locale {
       return Locale.create(alts.locale || this.specifiedLocale, alts.numberingSystem || this.numberingSystem, alts.outputCalendar || this.outputCalendar, alts.defaultToEN || false);
     }
   }
+
   redefaultToEN() {
     let alts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return this.clone(_objectSpread(_objectSpread({}, alts), {}, {
       defaultToEN: true
     }));
   }
+
   redefaultToSystem() {
     let alts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return this.clone(_objectSpread(_objectSpread({}, alts), {}, {
       defaultToEN: false
     }));
   }
+
   months(length) {
     let format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     let defaultOK = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
     return listStuff(this, length, defaultOK, months, () => {
       const intl = format ? {
-          month: length,
-          day: "numeric"
-        } : {
-          month: length
-        },
-        formatStr = format ? "format" : "standalone";
+        month: length,
+        day: "numeric"
+      } : {
+        month: length
+      },
+            formatStr = format ? "format" : "standalone";
+
       if (!this.monthsCache[formatStr][length]) {
         this.monthsCache[formatStr][length] = mapMonths(dt => this.extract(dt, intl, "month"));
       }
+
       return this.monthsCache[formatStr][length];
     });
   }
+
   weekdays(length) {
     let format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     let defaultOK = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
     return listStuff(this, length, defaultOK, weekdays, () => {
       const intl = format ? {
-          weekday: length,
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        } : {
-          weekday: length
-        },
-        formatStr = format ? "format" : "standalone";
+        weekday: length,
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      } : {
+        weekday: length
+      },
+            formatStr = format ? "format" : "standalone";
+
       if (!this.weekdaysCache[formatStr][length]) {
         this.weekdaysCache[formatStr][length] = mapWeekdays(dt => this.extract(dt, intl, "weekday"));
       }
+
       return this.weekdaysCache[formatStr][length];
     });
   }
+
   meridiems() {
     let defaultOK = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
     return listStuff(this, undefined, defaultOK, () => meridiems, () => {
@@ -1475,64 +1985,74 @@ class Locale {
         };
         this.meridiemCache = [DateTime.utc(2016, 11, 13, 9), DateTime.utc(2016, 11, 13, 19)].map(dt => this.extract(dt, intl, "dayperiod"));
       }
+
       return this.meridiemCache;
     });
   }
+
   eras(length) {
     let defaultOK = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     return listStuff(this, length, defaultOK, eras, () => {
       const intl = {
         era: length
-      };
-
-      // This is problematic. Different calendars are going to define eras totally differently. What I need is the minimum set of dates
+      }; // This is problematic. Different calendars are going to define eras totally differently. What I need is the minimum set of dates
       // to definitely enumerate them.
+
       if (!this.eraCache[length]) {
         this.eraCache[length] = [DateTime.utc(-40, 1, 1), DateTime.utc(2017, 1, 1)].map(dt => this.extract(dt, intl, "era"));
       }
+
       return this.eraCache[length];
     });
   }
+
   extract(dt, intlOpts, field) {
     const df = this.dtFormatter(dt, intlOpts),
-      results = df.formatToParts(),
-      matching = results.find(m => m.type.toLowerCase() === field);
+          results = df.formatToParts(),
+          matching = results.find(m => m.type.toLowerCase() === field);
     return matching ? matching.value : null;
   }
+
   numberFormatter() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     // this forcesimple option is never used (the only caller short-circuits on it, but it seems safer to leave)
     // (in contrast, the rest of the condition is used heavily)
     return new PolyNumberFormatter(this.intl, opts.forceSimple || this.fastNumbers, opts);
   }
+
   dtFormatter(dt) {
     let intlOpts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return new PolyDateFormatter(dt, this.intl, intlOpts);
   }
+
   relFormatter() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return new PolyRelFormatter(this.intl, this.isEnglish(), opts);
   }
+
   listFormatter() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return getCachedLF(this.intl, opts);
   }
+
   isEnglish() {
     return this.locale === "en" || this.locale.toLowerCase() === "en-us" || new Intl.DateTimeFormat(this.intl).resolvedOptions().locale.startsWith("en-us");
   }
+
   equals(other) {
     return this.locale === other.locale && this.numberingSystem === other.numberingSystem && this.outputCalendar === other.outputCalendar;
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/zones/fixedOffsetZone.js
 
 
 let fixedOffsetZone_singleton = null;
-
 /**
  * A zone with a fixed offset (meaning no DST)
  * @implements {Zone}
  */
+
 class FixedOffsetZone extends Zone {
   /**
    * Get a singleton instance of UTC
@@ -1542,18 +2062,19 @@ class FixedOffsetZone extends Zone {
     if (fixedOffsetZone_singleton === null) {
       fixedOffsetZone_singleton = new FixedOffsetZone(0);
     }
+
     return fixedOffsetZone_singleton;
   }
-
   /**
    * Get an instance with a specified offset
    * @param {number} offset - The offset in minutes
    * @return {FixedOffsetZone}
    */
+
+
   static instance(offset) {
     return offset === 0 ? FixedOffsetZone.utcInstance : new FixedOffsetZone(offset);
   }
-
   /**
    * Get an instance of FixedOffsetZone from a UTC offset string, like "UTC+6"
    * @param {string} s - The offset string to parse
@@ -1562,30 +2083,39 @@ class FixedOffsetZone extends Zone {
    * @example FixedOffsetZone.parseSpecifier("UTC-6:00")
    * @return {FixedOffsetZone}
    */
+
+
   static parseSpecifier(s) {
     if (s) {
       const r = s.match(/^utc(?:([+-]\d{1,2})(?::(\d{2}))?)?$/i);
+
       if (r) {
         return new FixedOffsetZone(signedOffset(r[1], r[2]));
       }
     }
+
     return null;
   }
+
   constructor(offset) {
     super();
     /** @private **/
+
     this.fixed = offset;
   }
-
   /** @override **/
+
+
   get type() {
     return "fixed";
   }
-
   /** @override **/
+
+
   get name() {
     return this.fixed === 0 ? "UTC" : `UTC${formatOffset(this.fixed, "narrow")}`;
   }
+
   get ianaName() {
     if (this.fixed === 0) {
       return "Etc/UTC";
@@ -1593,90 +2123,107 @@ class FixedOffsetZone extends Zone {
       return `Etc/GMT${formatOffset(-this.fixed, "narrow")}`;
     }
   }
-
   /** @override **/
+
+
   offsetName() {
     return this.name;
   }
-
   /** @override **/
+
+
   formatOffset(ts, format) {
     return formatOffset(this.fixed, format);
   }
-
   /** @override **/
+
+
   get isUniversal() {
     return true;
   }
-
   /** @override **/
+
+
   offset() {
     return this.fixed;
   }
-
   /** @override **/
+
+
   equals(otherZone) {
     return otherZone.type === "fixed" && otherZone.fixed === this.fixed;
   }
-
   /** @override **/
+
+
   get isValid() {
     return true;
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/zones/invalidZone.js
-
 
 /**
  * A zone that failed to parse. You should never need to instantiate this.
  * @implements {Zone}
  */
+
 class InvalidZone extends Zone {
   constructor(zoneName) {
     super();
     /**  @private */
+
     this.zoneName = zoneName;
   }
-
   /** @override **/
+
+
   get type() {
     return "invalid";
   }
-
   /** @override **/
+
+
   get name() {
     return this.zoneName;
   }
-
   /** @override **/
+
+
   get isUniversal() {
     return false;
   }
-
   /** @override **/
+
+
   offsetName() {
     return null;
   }
-
   /** @override **/
+
+
   formatOffset() {
     return "";
   }
-
   /** @override **/
+
+
   offset() {
     return NaN;
   }
-
   /** @override **/
+
+
   equals() {
     return false;
   }
-
   /** @override **/
+
+
   get isValid() {
     return false;
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/zoneUtil.js
 /**
@@ -1688,9 +2235,9 @@ class InvalidZone extends Zone {
 
 
 
-
 function normalizeZone(input, defaultZone) {
   let offset;
+
   if (isUndefined(input) || input === null) {
     return defaultZone;
   } else if (input instanceof Zone) {
@@ -1713,17 +2260,19 @@ function normalizeZone(input, defaultZone) {
 
 
 
-let now = () => Date.now(),
-  defaultZone = "system",
-  defaultLocale = null,
-  defaultNumberingSystem = null,
-  defaultOutputCalendar = null,
-  twoDigitCutoffYear = 60,
-  throwOnInvalid;
 
+let now = () => Date.now(),
+    defaultZone = "system",
+    defaultLocale = null,
+    defaultNumberingSystem = null,
+    defaultOutputCalendar = null,
+    twoDigitCutoffYear = 60,
+    throwOnInvalid;
 /**
  * Settings contains static getters and setters that control Luxon's overall behavior. Luxon is a simple library with few options, but the ones it does have live here.
  */
+
+
 class Settings {
   /**
    * Get the callback for returning the current timestamp.
@@ -1732,7 +2281,6 @@ class Settings {
   static get now() {
     return now;
   }
-
   /**
    * Set the callback for returning the current timestamp.
    * The function should return a number, which will be interpreted as an Epoch millisecond count
@@ -1740,84 +2288,94 @@ class Settings {
    * @example Settings.now = () => Date.now() + 3000 // pretend it is 3 seconds in the future
    * @example Settings.now = () => 0 // always pretend it's Jan 1, 1970 at midnight in UTC time
    */
+
+
   static set now(n) {
     now = n;
   }
-
   /**
    * Set the default time zone to create DateTimes in. Does not affect existing instances.
    * Use the value "system" to reset this value to the system's time zone.
    * @type {string}
    */
+
+
   static set defaultZone(zone) {
     defaultZone = zone;
   }
-
   /**
    * Get the default time zone object currently used to create DateTimes. Does not affect existing instances.
    * The default value is the system's time zone (the one set on the machine that runs this code).
    * @type {Zone}
    */
+
+
   static get defaultZone() {
     return normalizeZone(defaultZone, SystemZone.instance);
   }
-
   /**
    * Get the default locale to create DateTimes with. Does not affect existing instances.
    * @type {string}
    */
+
+
   static get defaultLocale() {
     return defaultLocale;
   }
-
   /**
    * Set the default locale to create DateTimes with. Does not affect existing instances.
    * @type {string}
    */
+
+
   static set defaultLocale(locale) {
     defaultLocale = locale;
   }
-
   /**
    * Get the default numbering system to create DateTimes with. Does not affect existing instances.
    * @type {string}
    */
+
+
   static get defaultNumberingSystem() {
     return defaultNumberingSystem;
   }
-
   /**
    * Set the default numbering system to create DateTimes with. Does not affect existing instances.
    * @type {string}
    */
+
+
   static set defaultNumberingSystem(numberingSystem) {
     defaultNumberingSystem = numberingSystem;
   }
-
   /**
    * Get the default output calendar to create DateTimes with. Does not affect existing instances.
    * @type {string}
    */
+
+
   static get defaultOutputCalendar() {
     return defaultOutputCalendar;
   }
-
   /**
    * Set the default output calendar to create DateTimes with. Does not affect existing instances.
    * @type {string}
    */
+
+
   static set defaultOutputCalendar(outputCalendar) {
     defaultOutputCalendar = outputCalendar;
   }
-
   /**
    * Get the cutoff year after which a string encoding a year as two digits is interpreted to occur in the current century.
    * @type {number}
    */
+
+
   static get twoDigitCutoffYear() {
     return twoDigitCutoffYear;
   }
-
   /**
    * Set the cutoff year after which a string encoding a year as two digits is interpreted to occur in the current century.
    * @type {number}
@@ -1826,41 +2384,48 @@ class Settings {
    * @example Settings.twoDigitCutoffYear = 1950 // interpretted as 50
    * @example Settings.twoDigitCutoffYear = 2050 // ALSO interpretted as 50
    */
+
+
   static set twoDigitCutoffYear(cutoffYear) {
     twoDigitCutoffYear = cutoffYear % 100;
   }
-
   /**
    * Get whether Luxon will throw when it encounters invalid DateTimes, Durations, or Intervals
    * @type {boolean}
    */
+
+
   static get throwOnInvalid() {
     return throwOnInvalid;
   }
-
   /**
    * Set whether Luxon will throw when it encounters invalid DateTimes, Durations, or Intervals
    * @type {boolean}
    */
+
+
   static set throwOnInvalid(t) {
     throwOnInvalid = t;
   }
-
   /**
    * Reset Luxon's global caches. Should only be necessary in testing scenarios.
    * @return {void}
    */
+
+
   static resetCaches() {
     Locale.resetCache();
     IANAZone.resetCache();
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/util.js
 function util_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function util_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? util_ownKeys(Object(source), !0).forEach(function (key) { util_defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : util_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function util_defineProperty(obj, key, value) { key = util_toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function util_toPropertyKey(arg) { var key = util_toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function util_toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function util_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /*
   This is just a junk drawer, containing anything used across multiple classes.
   Because Luxon is small(ish), this should stay small and we won't worry about splitting
@@ -1868,12 +2433,9 @@ function util_toPrimitive(input, hint) { if (typeof input !== "object" || input 
 */
 
 
-
-
 /**
  * @private
  */
-
 // TYPES
 
 function isUndefined(o) {
@@ -1890,9 +2452,7 @@ function isString(o) {
 }
 function isDate(o) {
   return Object.prototype.toString.call(o) === "[object Date]";
-}
-
-// CAPABILITIES
+} // CAPABILITIES
 
 function hasRelative() {
   try {
@@ -1900,9 +2460,7 @@ function hasRelative() {
   } catch (e) {
     return false;
   }
-}
-
-// OBJECTS AND ARRAYS
+} // OBJECTS AND ARRAYS
 
 function maybeArray(thing) {
   return Array.isArray(thing) ? thing : [thing];
@@ -1911,8 +2469,10 @@ function bestBy(arr, by, compare) {
   if (arr.length === 0) {
     return undefined;
   }
+
   return arr.reduce((best, next) => {
     const pair = [by(next), next];
+
     if (!best) {
       return pair;
     } else if (compare(best[0], pair[0]) === best[0]) {
@@ -1930,15 +2490,12 @@ function util_pick(obj, keys) {
 }
 function util_hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-// NUMBERS AND STRINGS
+} // NUMBERS AND STRINGS
 
 function integerBetween(thing, bottom, top) {
   return isInteger(thing) && thing >= bottom && thing <= top;
-}
+} // x % n but takes the sign of n instead of x
 
-// x % n but takes the sign of n instead of x
 function floorMod(x, n) {
   return x - n * Math.floor(x / n);
 }
@@ -1946,11 +2503,13 @@ function padStart(input) {
   let n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
   const isNeg = input < 0;
   let padded;
+
   if (isNeg) {
     padded = "-" + ("" + -input).padStart(n, "0");
   } else {
     padded = ("" + input).padStart(n, "0");
   }
+
   return padded;
 }
 function parseInteger(string) {
@@ -1979,11 +2538,9 @@ function parseMillis(fraction) {
 function roundTo(number, digits) {
   let towardZero = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   const factor = 10 ** digits,
-    rounder = towardZero ? Math.trunc : Math.round;
+        rounder = towardZero ? Math.trunc : Math.round;
   return rounder(number * factor) / factor;
-}
-
-// DATE BASICS
+} // DATE BASICS
 
 function isLeapYear(year) {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
@@ -1993,74 +2550,72 @@ function daysInYear(year) {
 }
 function daysInMonth(year, month) {
   const modMonth = floorMod(month - 1, 12) + 1,
-    modYear = year + (month - modMonth) / 12;
+        modYear = year + (month - modMonth) / 12;
+
   if (modMonth === 2) {
     return isLeapYear(modYear) ? 29 : 28;
   } else {
     return [31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][modMonth - 1];
   }
-}
+} // covert a calendar object to a local timestamp (epoch, but with the offset baked in)
 
-// covert a calendar object to a local timestamp (epoch, but with the offset baked in)
 function objToLocalTS(obj) {
-  let d = Date.UTC(obj.year, obj.month - 1, obj.day, obj.hour, obj.minute, obj.second, obj.millisecond);
+  let d = Date.UTC(obj.year, obj.month - 1, obj.day, obj.hour, obj.minute, obj.second, obj.millisecond); // for legacy reasons, years between 0 and 99 are interpreted as 19XX; revert that
 
-  // for legacy reasons, years between 0 and 99 are interpreted as 19XX; revert that
   if (obj.year < 100 && obj.year >= 0) {
     d = new Date(d);
     d.setUTCFullYear(d.getUTCFullYear() - 1900);
   }
+
   return +d;
 }
 function weeksInWeekYear(weekYear) {
   const p1 = (weekYear + Math.floor(weekYear / 4) - Math.floor(weekYear / 100) + Math.floor(weekYear / 400)) % 7,
-    last = weekYear - 1,
-    p2 = (last + Math.floor(last / 4) - Math.floor(last / 100) + Math.floor(last / 400)) % 7;
+        last = weekYear - 1,
+        p2 = (last + Math.floor(last / 4) - Math.floor(last / 100) + Math.floor(last / 400)) % 7;
   return p1 === 4 || p2 === 3 ? 53 : 52;
 }
 function untruncateYear(year) {
   if (year > 99) {
     return year;
   } else return year > Settings.twoDigitCutoffYear ? 1900 + year : 2000 + year;
-}
-
-// PARSING
+} // PARSING
 
 function parseZoneInfo(ts, offsetFormat, locale) {
   let timeZone = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   const date = new Date(ts),
-    intlOpts = {
-      hourCycle: "h23",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit"
-    };
+        intlOpts = {
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  };
+
   if (timeZone) {
     intlOpts.timeZone = timeZone;
   }
+
   const modified = util_objectSpread({
     timeZoneName: offsetFormat
   }, intlOpts);
+
   const parsed = new Intl.DateTimeFormat(locale, modified).formatToParts(date).find(m => m.type.toLowerCase() === "timezonename");
   return parsed ? parsed.value : null;
-}
+} // signedOffset('-5', '30') -> -330
 
-// signedOffset('-5', '30') -> -330
 function signedOffset(offHourStr, offMinuteStr) {
-  let offHour = parseInt(offHourStr, 10);
+  let offHour = parseInt(offHourStr, 10); // don't || this because we want to preserve -0
 
-  // don't || this because we want to preserve -0
   if (Number.isNaN(offHour)) {
     offHour = 0;
   }
-  const offMin = parseInt(offMinuteStr, 10) || 0,
-    offMinSigned = offHour < 0 || Object.is(offHour, -0) ? -offMin : offMin;
-  return offHour * 60 + offMinSigned;
-}
 
-// COERCION
+  const offMin = parseInt(offMinuteStr, 10) || 0,
+        offMinSigned = offHour < 0 || Object.is(offHour, -0) ? -offMin : offMin;
+  return offHour * 60 + offMinSigned;
+} // COERCION
 
 function asNumber(value) {
   const numericValue = Number(value);
@@ -2069,6 +2624,7 @@ function asNumber(value) {
 }
 function normalizeObject(obj, normalizer) {
   const normalized = {};
+
   for (const u in obj) {
     if (util_hasOwnProperty(obj, u)) {
       const v = obj[u];
@@ -2076,19 +2632,24 @@ function normalizeObject(obj, normalizer) {
       normalized[normalizer(u)] = asNumber(v);
     }
   }
+
   return normalized;
 }
 function formatOffset(offset, format) {
   const hours = Math.trunc(Math.abs(offset / 60)),
-    minutes = Math.trunc(Math.abs(offset % 60)),
-    sign = offset >= 0 ? "+" : "-";
+        minutes = Math.trunc(Math.abs(offset % 60)),
+        sign = offset >= 0 ? "+" : "-";
+
   switch (format) {
     case "short":
       return `${sign}${padStart(hours, 2)}:${padStart(minutes, 2)}`;
+
     case "narrow":
       return `${sign}${hours}${minutes > 0 ? `:${minutes}` : ""}`;
+
     case "techie":
       return `${sign}${padStart(hours, 2)}${padStart(minutes, 2)}`;
+
     default:
       throw new RangeError(`Value format ${format} is out of range for property format`);
   }
@@ -2099,13 +2660,14 @@ function timeObject(obj) {
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/english.js
 
 
+
 function stringify(obj) {
   return JSON.stringify(obj, Object.keys(obj).sort());
 }
-
 /**
  * @private
  */
+
 
 const monthsLong = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -2114,14 +2676,19 @@ function months(length) {
   switch (length) {
     case "narrow":
       return [...monthsNarrow];
+
     case "short":
       return [...monthsShort];
+
     case "long":
       return [...monthsLong];
+
     case "numeric":
       return ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+
     case "2-digit":
       return ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+
     default:
       return null;
   }
@@ -2133,12 +2700,16 @@ function weekdays(length) {
   switch (length) {
     case "narrow":
       return [...weekdaysNarrow];
+
     case "short":
       return [...weekdaysShort];
+
     case "long":
       return [...weekdaysLong];
+
     case "numeric":
       return ["1", "2", "3", "4", "5", "6", "7"];
+
     default:
       return null;
   }
@@ -2151,10 +2722,13 @@ function eras(length) {
   switch (length) {
     case "narrow":
       return [...erasNarrow];
+
     case "short":
       return [...erasShort];
+
     case "long":
       return [...erasLong];
+
     default:
       return null;
   }
@@ -2185,100 +2759,137 @@ function formatRelativeTime(unit, count) {
     seconds: ["second", "sec."]
   };
   const lastable = ["hours", "minutes", "seconds"].indexOf(unit) === -1;
+
   if (numeric === "auto" && lastable) {
     const isDay = unit === "days";
+
     switch (count) {
       case 1:
         return isDay ? "tomorrow" : `next ${units[unit][0]}`;
+
       case -1:
         return isDay ? "yesterday" : `last ${units[unit][0]}`;
+
       case 0:
         return isDay ? "today" : `this ${units[unit][0]}`;
+
       default: // fall through
+
     }
   }
 
   const isInPast = Object.is(count, -0) || count < 0,
-    fmtValue = Math.abs(count),
-    singular = fmtValue === 1,
-    lilUnits = units[unit],
-    fmtUnit = narrow ? singular ? lilUnits[1] : lilUnits[2] || lilUnits[1] : singular ? units[unit][0] : unit;
+        fmtValue = Math.abs(count),
+        singular = fmtValue === 1,
+        lilUnits = units[unit],
+        fmtUnit = narrow ? singular ? lilUnits[1] : lilUnits[2] || lilUnits[1] : singular ? units[unit][0] : unit;
   return isInPast ? `${fmtValue} ${fmtUnit} ago` : `in ${fmtValue} ${fmtUnit}`;
 }
 function formatString(knownFormat) {
   // these all have the offsets removed because we don't have access to them
   // without all the intl stuff this is backfilling
   const filtered = pick(knownFormat, ["weekday", "era", "year", "month", "day", "hour", "minute", "second", "timeZoneName", "hourCycle"]),
-    key = stringify(filtered),
-    dateTimeHuge = "EEEE, LLLL d, yyyy, h:mm a";
+        key = stringify(filtered),
+        dateTimeHuge = "EEEE, LLLL d, yyyy, h:mm a";
+
   switch (key) {
     case stringify(Formats.DATE_SHORT):
       return "M/d/yyyy";
+
     case stringify(Formats.DATE_MED):
       return "LLL d, yyyy";
+
     case stringify(Formats.DATE_MED_WITH_WEEKDAY):
       return "EEE, LLL d, yyyy";
+
     case stringify(Formats.DATE_FULL):
       return "LLLL d, yyyy";
+
     case stringify(Formats.DATE_HUGE):
       return "EEEE, LLLL d, yyyy";
+
     case stringify(Formats.TIME_SIMPLE):
       return "h:mm a";
+
     case stringify(Formats.TIME_WITH_SECONDS):
       return "h:mm:ss a";
+
     case stringify(Formats.TIME_WITH_SHORT_OFFSET):
       return "h:mm a";
+
     case stringify(Formats.TIME_WITH_LONG_OFFSET):
       return "h:mm a";
+
     case stringify(Formats.TIME_24_SIMPLE):
       return "HH:mm";
+
     case stringify(Formats.TIME_24_WITH_SECONDS):
       return "HH:mm:ss";
+
     case stringify(Formats.TIME_24_WITH_SHORT_OFFSET):
       return "HH:mm";
+
     case stringify(Formats.TIME_24_WITH_LONG_OFFSET):
       return "HH:mm";
+
     case stringify(Formats.DATETIME_SHORT):
       return "M/d/yyyy, h:mm a";
+
     case stringify(Formats.DATETIME_MED):
       return "LLL d, yyyy, h:mm a";
+
     case stringify(Formats.DATETIME_FULL):
       return "LLLL d, yyyy, h:mm a";
+
     case stringify(Formats.DATETIME_HUGE):
       return dateTimeHuge;
+
     case stringify(Formats.DATETIME_SHORT_WITH_SECONDS):
       return "M/d/yyyy, h:mm:ss a";
+
     case stringify(Formats.DATETIME_MED_WITH_SECONDS):
       return "LLL d, yyyy, h:mm:ss a";
+
     case stringify(Formats.DATETIME_MED_WITH_WEEKDAY):
       return "EEE, d LLL yyyy, h:mm a";
+
     case stringify(Formats.DATETIME_FULL_WITH_SECONDS):
       return "LLLL d, yyyy, h:mm:ss a";
+
     case stringify(Formats.DATETIME_HUGE_WITH_SECONDS):
       return "EEEE, LLLL d, yyyy, h:mm:ss a";
+
     default:
       return dateTimeHuge;
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/formatter.js
 function formatter_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function formatter_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? formatter_ownKeys(Object(source), !0).forEach(function (key) { formatter_defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : formatter_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function formatter_defineProperty(obj, key, value) { key = formatter_toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function formatter_toPropertyKey(arg) { var key = formatter_toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function formatter_toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function formatter_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = formatter_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function formatter_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return formatter_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return formatter_arrayLikeToArray(o, minLen); }
+
 function formatter_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+
 
 
 
 function stringifyTokens(splits, tokenToString) {
   let s = "";
+
   var _iterator = _createForOfIteratorHelper(splits),
-    _step;
+      _step;
+
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       const token = _step.value;
+
       if (token.literal) {
         s += token.val;
       } else {
@@ -2290,8 +2901,10 @@ function stringifyTokens(splits, tokenToString) {
   } finally {
     _iterator.f();
   }
+
   return s;
 }
+
 const macroTokenToFormatOpts = {
   D: DATE_SHORT,
   DD: DATE_MED,
@@ -2314,7 +2927,6 @@ const macroTokenToFormatOpts = {
   FFF: DATETIME_FULL_WITH_SECONDS,
   FFFF: DATETIME_HUGE_WITH_SECONDS
 };
-
 /**
  * @private
  */
@@ -2324,13 +2936,16 @@ class Formatter {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return new Formatter(locale, opts);
   }
+
   static parseFormat(fmt) {
     let current = null,
-      currentFull = "",
-      bracketed = false;
+        currentFull = "",
+        bracketed = false;
     const splits = [];
+
     for (let i = 0; i < fmt.length; i++) {
       const c = fmt.charAt(i);
+
       if (c === "'") {
         if (currentFull.length > 0) {
           splits.push({
@@ -2338,6 +2953,7 @@ class Formatter {
             val: currentFull
           });
         }
+
         current = null;
         currentFull = "";
         bracketed = !bracketed;
@@ -2352,350 +2968,438 @@ class Formatter {
             val: currentFull
           });
         }
+
         currentFull = c;
         current = c;
       }
     }
+
     if (currentFull.length > 0) {
       splits.push({
         literal: bracketed,
         val: currentFull
       });
     }
+
     return splits;
   }
+
   static macroTokenToFormatOpts(token) {
     return macroTokenToFormatOpts[token];
   }
+
   constructor(locale, formatOpts) {
     this.opts = formatOpts;
     this.loc = locale;
     this.systemLoc = null;
   }
+
   formatWithSystemDefault(dt, opts) {
     if (this.systemLoc === null) {
       this.systemLoc = this.loc.redefaultToSystem();
     }
+
     const df = this.systemLoc.dtFormatter(dt, formatter_objectSpread(formatter_objectSpread({}, this.opts), opts));
     return df.format();
   }
+
   formatDateTime(dt) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const df = this.loc.dtFormatter(dt, formatter_objectSpread(formatter_objectSpread({}, this.opts), opts));
     return df.format();
   }
+
   formatDateTimeParts(dt) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const df = this.loc.dtFormatter(dt, formatter_objectSpread(formatter_objectSpread({}, this.opts), opts));
     return df.formatToParts();
   }
+
   formatInterval(interval) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const df = this.loc.dtFormatter(interval.start, formatter_objectSpread(formatter_objectSpread({}, this.opts), opts));
     return df.dtf.formatRange(interval.start.toJSDate(), interval.end.toJSDate());
   }
+
   resolvedOptions(dt) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const df = this.loc.dtFormatter(dt, formatter_objectSpread(formatter_objectSpread({}, this.opts), opts));
     return df.resolvedOptions();
   }
+
   num(n) {
     let p = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
     // we get some perf out of doing this here, annoyingly
     if (this.opts.forceSimple) {
       return padStart(n, p);
     }
+
     const opts = formatter_objectSpread({}, this.opts);
+
     if (p > 0) {
       opts.padTo = p;
     }
+
     return this.loc.numberFormatter(opts).format(n);
   }
+
   formatDateTimeFromString(dt, fmt) {
     const knownEnglish = this.loc.listingMode() === "en",
-      useDateTimeFormatter = this.loc.outputCalendar && this.loc.outputCalendar !== "gregory",
-      string = (opts, extract) => this.loc.extract(dt, opts, extract),
-      formatOffset = opts => {
-        if (dt.isOffsetFixed && dt.offset === 0 && opts.allowZ) {
-          return "Z";
-        }
-        return dt.isValid ? dt.zone.formatOffset(dt.ts, opts.format) : "";
-      },
-      meridiem = () => knownEnglish ? meridiemForDateTime(dt) : string({
-        hour: "numeric",
-        hourCycle: "h12"
-      }, "dayperiod"),
-      month = (length, standalone) => knownEnglish ? monthForDateTime(dt, length) : string(standalone ? {
-        month: length
-      } : {
-        month: length,
-        day: "numeric"
-      }, "month"),
-      weekday = (length, standalone) => knownEnglish ? weekdayForDateTime(dt, length) : string(standalone ? {
-        weekday: length
-      } : {
-        weekday: length,
-        month: "long",
-        day: "numeric"
-      }, "weekday"),
-      maybeMacro = token => {
-        const formatOpts = Formatter.macroTokenToFormatOpts(token);
-        if (formatOpts) {
-          return this.formatWithSystemDefault(dt, formatOpts);
-        } else {
-          return token;
-        }
-      },
-      era = length => knownEnglish ? eraForDateTime(dt, length) : string({
-        era: length
-      }, "era"),
-      tokenToString = token => {
-        // Where possible: http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles
-        switch (token) {
-          // ms
-          case "S":
-            return this.num(dt.millisecond);
-          case "u":
-          // falls through
-          case "SSS":
-            return this.num(dt.millisecond, 3);
-          // seconds
-          case "s":
-            return this.num(dt.second);
-          case "ss":
-            return this.num(dt.second, 2);
-          // fractional seconds
-          case "uu":
-            return this.num(Math.floor(dt.millisecond / 10), 2);
-          case "uuu":
-            return this.num(Math.floor(dt.millisecond / 100));
-          // minutes
-          case "m":
-            return this.num(dt.minute);
-          case "mm":
-            return this.num(dt.minute, 2);
-          // hours
-          case "h":
-            return this.num(dt.hour % 12 === 0 ? 12 : dt.hour % 12);
-          case "hh":
-            return this.num(dt.hour % 12 === 0 ? 12 : dt.hour % 12, 2);
-          case "H":
-            return this.num(dt.hour);
-          case "HH":
-            return this.num(dt.hour, 2);
-          // offset
-          case "Z":
-            // like +6
-            return formatOffset({
-              format: "narrow",
-              allowZ: this.opts.allowZ
-            });
-          case "ZZ":
-            // like +06:00
-            return formatOffset({
-              format: "short",
-              allowZ: this.opts.allowZ
-            });
-          case "ZZZ":
-            // like +0600
-            return formatOffset({
-              format: "techie",
-              allowZ: this.opts.allowZ
-            });
-          case "ZZZZ":
-            // like EST
-            return dt.zone.offsetName(dt.ts, {
-              format: "short",
-              locale: this.loc.locale
-            });
-          case "ZZZZZ":
-            // like Eastern Standard Time
-            return dt.zone.offsetName(dt.ts, {
-              format: "long",
-              locale: this.loc.locale
-            });
-          // zone
-          case "z":
-            // like America/New_York
-            return dt.zoneName;
-          // meridiems
-          case "a":
-            return meridiem();
-          // dates
-          case "d":
-            return useDateTimeFormatter ? string({
-              day: "numeric"
-            }, "day") : this.num(dt.day);
-          case "dd":
-            return useDateTimeFormatter ? string({
-              day: "2-digit"
-            }, "day") : this.num(dt.day, 2);
-          // weekdays - standalone
-          case "c":
-            // like 1
-            return this.num(dt.weekday);
-          case "ccc":
-            // like 'Tues'
-            return weekday("short", true);
-          case "cccc":
-            // like 'Tuesday'
-            return weekday("long", true);
-          case "ccccc":
-            // like 'T'
-            return weekday("narrow", true);
-          // weekdays - format
-          case "E":
-            // like 1
-            return this.num(dt.weekday);
-          case "EEE":
-            // like 'Tues'
-            return weekday("short", false);
-          case "EEEE":
-            // like 'Tuesday'
-            return weekday("long", false);
-          case "EEEEE":
-            // like 'T'
-            return weekday("narrow", false);
-          // months - standalone
-          case "L":
-            // like 1
-            return useDateTimeFormatter ? string({
-              month: "numeric",
-              day: "numeric"
-            }, "month") : this.num(dt.month);
-          case "LL":
-            // like 01, doesn't seem to work
-            return useDateTimeFormatter ? string({
-              month: "2-digit",
-              day: "numeric"
-            }, "month") : this.num(dt.month, 2);
-          case "LLL":
-            // like Jan
-            return month("short", true);
-          case "LLLL":
-            // like January
-            return month("long", true);
-          case "LLLLL":
-            // like J
-            return month("narrow", true);
-          // months - format
-          case "M":
-            // like 1
-            return useDateTimeFormatter ? string({
-              month: "numeric"
-            }, "month") : this.num(dt.month);
-          case "MM":
-            // like 01
-            return useDateTimeFormatter ? string({
-              month: "2-digit"
-            }, "month") : this.num(dt.month, 2);
-          case "MMM":
-            // like Jan
-            return month("short", false);
-          case "MMMM":
-            // like January
-            return month("long", false);
-          case "MMMMM":
-            // like J
-            return month("narrow", false);
-          // years
-          case "y":
-            // like 2014
-            return useDateTimeFormatter ? string({
-              year: "numeric"
-            }, "year") : this.num(dt.year);
-          case "yy":
-            // like 14
-            return useDateTimeFormatter ? string({
-              year: "2-digit"
-            }, "year") : this.num(dt.year.toString().slice(-2), 2);
-          case "yyyy":
-            // like 0012
-            return useDateTimeFormatter ? string({
-              year: "numeric"
-            }, "year") : this.num(dt.year, 4);
-          case "yyyyyy":
-            // like 000012
-            return useDateTimeFormatter ? string({
-              year: "numeric"
-            }, "year") : this.num(dt.year, 6);
-          // eras
-          case "G":
-            // like AD
-            return era("short");
-          case "GG":
-            // like Anno Domini
-            return era("long");
-          case "GGGGG":
-            return era("narrow");
-          case "kk":
-            return this.num(dt.weekYear.toString().slice(-2), 2);
-          case "kkkk":
-            return this.num(dt.weekYear, 4);
-          case "W":
-            return this.num(dt.weekNumber);
-          case "WW":
-            return this.num(dt.weekNumber, 2);
-          case "o":
-            return this.num(dt.ordinal);
-          case "ooo":
-            return this.num(dt.ordinal, 3);
-          case "q":
-            // like 1
-            return this.num(dt.quarter);
-          case "qq":
-            // like 01
-            return this.num(dt.quarter, 2);
-          case "X":
-            return this.num(Math.floor(dt.ts / 1000));
-          case "x":
-            return this.num(dt.ts);
-          default:
-            return maybeMacro(token);
-        }
-      };
+          useDateTimeFormatter = this.loc.outputCalendar && this.loc.outputCalendar !== "gregory",
+          string = (opts, extract) => this.loc.extract(dt, opts, extract),
+          formatOffset = opts => {
+      if (dt.isOffsetFixed && dt.offset === 0 && opts.allowZ) {
+        return "Z";
+      }
+
+      return dt.isValid ? dt.zone.formatOffset(dt.ts, opts.format) : "";
+    },
+          meridiem = () => knownEnglish ? meridiemForDateTime(dt) : string({
+      hour: "numeric",
+      hourCycle: "h12"
+    }, "dayperiod"),
+          month = (length, standalone) => knownEnglish ? monthForDateTime(dt, length) : string(standalone ? {
+      month: length
+    } : {
+      month: length,
+      day: "numeric"
+    }, "month"),
+          weekday = (length, standalone) => knownEnglish ? weekdayForDateTime(dt, length) : string(standalone ? {
+      weekday: length
+    } : {
+      weekday: length,
+      month: "long",
+      day: "numeric"
+    }, "weekday"),
+          maybeMacro = token => {
+      const formatOpts = Formatter.macroTokenToFormatOpts(token);
+
+      if (formatOpts) {
+        return this.formatWithSystemDefault(dt, formatOpts);
+      } else {
+        return token;
+      }
+    },
+          era = length => knownEnglish ? eraForDateTime(dt, length) : string({
+      era: length
+    }, "era"),
+          tokenToString = token => {
+      // Where possible: http://cldr.unicode.org/translation/date-time-1/date-time#TOC-Standalone-vs.-Format-Styles
+      switch (token) {
+        // ms
+        case "S":
+          return this.num(dt.millisecond);
+
+        case "u": // falls through
+
+        case "SSS":
+          return this.num(dt.millisecond, 3);
+        // seconds
+
+        case "s":
+          return this.num(dt.second);
+
+        case "ss":
+          return this.num(dt.second, 2);
+        // fractional seconds
+
+        case "uu":
+          return this.num(Math.floor(dt.millisecond / 10), 2);
+
+        case "uuu":
+          return this.num(Math.floor(dt.millisecond / 100));
+        // minutes
+
+        case "m":
+          return this.num(dt.minute);
+
+        case "mm":
+          return this.num(dt.minute, 2);
+        // hours
+
+        case "h":
+          return this.num(dt.hour % 12 === 0 ? 12 : dt.hour % 12);
+
+        case "hh":
+          return this.num(dt.hour % 12 === 0 ? 12 : dt.hour % 12, 2);
+
+        case "H":
+          return this.num(dt.hour);
+
+        case "HH":
+          return this.num(dt.hour, 2);
+        // offset
+
+        case "Z":
+          // like +6
+          return formatOffset({
+            format: "narrow",
+            allowZ: this.opts.allowZ
+          });
+
+        case "ZZ":
+          // like +06:00
+          return formatOffset({
+            format: "short",
+            allowZ: this.opts.allowZ
+          });
+
+        case "ZZZ":
+          // like +0600
+          return formatOffset({
+            format: "techie",
+            allowZ: this.opts.allowZ
+          });
+
+        case "ZZZZ":
+          // like EST
+          return dt.zone.offsetName(dt.ts, {
+            format: "short",
+            locale: this.loc.locale
+          });
+
+        case "ZZZZZ":
+          // like Eastern Standard Time
+          return dt.zone.offsetName(dt.ts, {
+            format: "long",
+            locale: this.loc.locale
+          });
+        // zone
+
+        case "z":
+          // like America/New_York
+          return dt.zoneName;
+        // meridiems
+
+        case "a":
+          return meridiem();
+        // dates
+
+        case "d":
+          return useDateTimeFormatter ? string({
+            day: "numeric"
+          }, "day") : this.num(dt.day);
+
+        case "dd":
+          return useDateTimeFormatter ? string({
+            day: "2-digit"
+          }, "day") : this.num(dt.day, 2);
+        // weekdays - standalone
+
+        case "c":
+          // like 1
+          return this.num(dt.weekday);
+
+        case "ccc":
+          // like 'Tues'
+          return weekday("short", true);
+
+        case "cccc":
+          // like 'Tuesday'
+          return weekday("long", true);
+
+        case "ccccc":
+          // like 'T'
+          return weekday("narrow", true);
+        // weekdays - format
+
+        case "E":
+          // like 1
+          return this.num(dt.weekday);
+
+        case "EEE":
+          // like 'Tues'
+          return weekday("short", false);
+
+        case "EEEE":
+          // like 'Tuesday'
+          return weekday("long", false);
+
+        case "EEEEE":
+          // like 'T'
+          return weekday("narrow", false);
+        // months - standalone
+
+        case "L":
+          // like 1
+          return useDateTimeFormatter ? string({
+            month: "numeric",
+            day: "numeric"
+          }, "month") : this.num(dt.month);
+
+        case "LL":
+          // like 01, doesn't seem to work
+          return useDateTimeFormatter ? string({
+            month: "2-digit",
+            day: "numeric"
+          }, "month") : this.num(dt.month, 2);
+
+        case "LLL":
+          // like Jan
+          return month("short", true);
+
+        case "LLLL":
+          // like January
+          return month("long", true);
+
+        case "LLLLL":
+          // like J
+          return month("narrow", true);
+        // months - format
+
+        case "M":
+          // like 1
+          return useDateTimeFormatter ? string({
+            month: "numeric"
+          }, "month") : this.num(dt.month);
+
+        case "MM":
+          // like 01
+          return useDateTimeFormatter ? string({
+            month: "2-digit"
+          }, "month") : this.num(dt.month, 2);
+
+        case "MMM":
+          // like Jan
+          return month("short", false);
+
+        case "MMMM":
+          // like January
+          return month("long", false);
+
+        case "MMMMM":
+          // like J
+          return month("narrow", false);
+        // years
+
+        case "y":
+          // like 2014
+          return useDateTimeFormatter ? string({
+            year: "numeric"
+          }, "year") : this.num(dt.year);
+
+        case "yy":
+          // like 14
+          return useDateTimeFormatter ? string({
+            year: "2-digit"
+          }, "year") : this.num(dt.year.toString().slice(-2), 2);
+
+        case "yyyy":
+          // like 0012
+          return useDateTimeFormatter ? string({
+            year: "numeric"
+          }, "year") : this.num(dt.year, 4);
+
+        case "yyyyyy":
+          // like 000012
+          return useDateTimeFormatter ? string({
+            year: "numeric"
+          }, "year") : this.num(dt.year, 6);
+        // eras
+
+        case "G":
+          // like AD
+          return era("short");
+
+        case "GG":
+          // like Anno Domini
+          return era("long");
+
+        case "GGGGG":
+          return era("narrow");
+
+        case "kk":
+          return this.num(dt.weekYear.toString().slice(-2), 2);
+
+        case "kkkk":
+          return this.num(dt.weekYear, 4);
+
+        case "W":
+          return this.num(dt.weekNumber);
+
+        case "WW":
+          return this.num(dt.weekNumber, 2);
+
+        case "o":
+          return this.num(dt.ordinal);
+
+        case "ooo":
+          return this.num(dt.ordinal, 3);
+
+        case "q":
+          // like 1
+          return this.num(dt.quarter);
+
+        case "qq":
+          // like 01
+          return this.num(dt.quarter, 2);
+
+        case "X":
+          return this.num(Math.floor(dt.ts / 1000));
+
+        case "x":
+          return this.num(dt.ts);
+
+        default:
+          return maybeMacro(token);
+      }
+    };
+
     return stringifyTokens(Formatter.parseFormat(fmt), tokenToString);
   }
+
   formatDurationFromString(dur, fmt) {
     const tokenToField = token => {
-        switch (token[0]) {
-          case "S":
-            return "millisecond";
-          case "s":
-            return "second";
-          case "m":
-            return "minute";
-          case "h":
-            return "hour";
-          case "d":
-            return "day";
-          case "w":
-            return "week";
-          case "M":
-            return "month";
-          case "y":
-            return "year";
-          default:
-            return null;
-        }
-      },
-      tokenToString = lildur => token => {
-        const mapped = tokenToField(token);
-        if (mapped) {
-          return this.num(lildur.get(mapped), token.length);
-        } else {
-          return token;
-        }
-      },
-      tokens = Formatter.parseFormat(fmt),
-      realTokens = tokens.reduce((found, _ref) => {
-        let literal = _ref.literal,
+      switch (token[0]) {
+        case "S":
+          return "millisecond";
+
+        case "s":
+          return "second";
+
+        case "m":
+          return "minute";
+
+        case "h":
+          return "hour";
+
+        case "d":
+          return "day";
+
+        case "w":
+          return "week";
+
+        case "M":
+          return "month";
+
+        case "y":
+          return "year";
+
+        default:
+          return null;
+      }
+    },
+          tokenToString = lildur => token => {
+      const mapped = tokenToField(token);
+
+      if (mapped) {
+        return this.num(lildur.get(mapped), token.length);
+      } else {
+        return token;
+      }
+    },
+          tokens = Formatter.parseFormat(fmt),
+          realTokens = tokens.reduce((found, _ref) => {
+      let literal = _ref.literal,
           val = _ref.val;
-        return literal ? found : found.concat(val);
-      }, []),
-      collapsed = dur.shiftTo(...realTokens.map(tokenToField).filter(t => t));
+      return literal ? found : found.concat(val);
+    }, []),
+          collapsed = dur.shiftTo(...realTokens.map(tokenToField).filter(t => t));
+
     return stringifyTokens(tokens, tokenToString(collapsed));
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/invalid.js
 class Invalid {
@@ -2703,6 +3407,7 @@ class Invalid {
     this.reason = reason;
     this.explanation = explanation;
   }
+
   toMessage() {
     if (this.explanation) {
       return `${this.reason}: ${this.explanation}`;
@@ -2710,18 +3415,25 @@ class Invalid {
       return this.reason;
     }
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/regexParser.js
 function regexParser_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function regexParser_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? regexParser_ownKeys(Object(source), !0).forEach(function (key) { regexParser_defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : regexParser_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function regexParser_defineProperty(obj, key, value) { key = regexParser_toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function regexParser_toPropertyKey(arg) { var key = regexParser_toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function regexParser_toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function regexParser_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function regexParser_slicedToArray(arr, i) { return regexParser_arrayWithHoles(arr) || regexParser_iterableToArrayLimit(arr, i) || regexParser_unsupportedIterableToArray(arr, i) || regexParser_nonIterableRest(); }
+
 function regexParser_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function regexParser_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return regexParser_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return regexParser_arrayLikeToArray(o, minLen); }
+
 function regexParser_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function regexParser_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function regexParser_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function regexParser_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
@@ -2739,63 +3451,79 @@ function regexParser_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  */
 
 const ianaRegex = /[A-Za-z_+-]{1,256}(?::?\/[A-Za-z0-9_+-]{1,256}(?:\/[A-Za-z0-9_+-]{1,256})?)?/;
+
 function combineRegexes() {
   for (var _len = arguments.length, regexes = new Array(_len), _key = 0; _key < _len; _key++) {
     regexes[_key] = arguments[_key];
   }
+
   const full = regexes.reduce((f, r) => f + r.source, "");
   return RegExp(`^${full}$`);
 }
+
 function combineExtractors() {
   for (var _len2 = arguments.length, extractors = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
     extractors[_key2] = arguments[_key2];
   }
+
   return m => extractors.reduce((_ref, ex) => {
     let _ref2 = regexParser_slicedToArray(_ref, 3),
-      mergedVals = _ref2[0],
-      mergedZone = _ref2[1],
-      cursor = _ref2[2];
+        mergedVals = _ref2[0],
+        mergedZone = _ref2[1],
+        cursor = _ref2[2];
+
     const _ex = ex(m, cursor),
-      _ex2 = regexParser_slicedToArray(_ex, 3),
-      val = _ex2[0],
-      zone = _ex2[1],
-      next = _ex2[2];
+          _ex2 = regexParser_slicedToArray(_ex, 3),
+          val = _ex2[0],
+          zone = _ex2[1],
+          next = _ex2[2];
+
     return [regexParser_objectSpread(regexParser_objectSpread({}, mergedVals), val), zone || mergedZone, next];
   }, [{}, null, 1]).slice(0, 2);
 }
+
 function parse(s) {
   if (s == null) {
     return [null, null];
   }
+
   for (var _len3 = arguments.length, patterns = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
     patterns[_key3 - 1] = arguments[_key3];
   }
+
   for (var _i2 = 0, _patterns = patterns; _i2 < _patterns.length; _i2++) {
     const _patterns$_i = regexParser_slicedToArray(_patterns[_i2], 2),
-      regex = _patterns$_i[0],
-      extractor = _patterns$_i[1];
+          regex = _patterns$_i[0],
+          extractor = _patterns$_i[1];
+
     const m = regex.exec(s);
+
     if (m) {
       return extractor(m);
     }
   }
+
   return [null, null];
 }
+
 function simpleParse() {
   for (var _len4 = arguments.length, keys = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
     keys[_key4] = arguments[_key4];
   }
+
   return (match, cursor) => {
     const ret = {};
     let i;
+
     for (i = 0; i < keys.length; i++) {
       ret[keys[i]] = parseInteger(match[cursor + i]);
     }
+
     return [ret, null, cursor + i];
   };
-}
+} // ISO and SQL parsing
 
-// ISO and SQL parsing
+
 const offsetRegex = /(?:(Z)|([+-]\d\d)(?::?(\d\d))?)/;
 const isoExtendedZone = `(?:${offsetRegex.source}?(?:\\[(${ianaRegex.source})\\])?)?`;
 const isoTimeBaseRegex = /(\d\d)(?::?(\d\d)(?::?(\d\d)(?:[.,](\d{1,30}))?)?)?/;
@@ -2807,12 +3535,15 @@ const isoOrdinalRegex = /(\d{4})-?(\d{3})/;
 const extractISOWeekData = simpleParse("weekYear", "weekNumber", "weekDay");
 const extractISOOrdinalData = simpleParse("year", "ordinal");
 const sqlYmdRegex = /(\d{4})-(\d\d)-(\d\d)/; // dumbed-down version of the ISO one
+
 const sqlTimeRegex = RegExp(`${isoTimeBaseRegex.source} ?(?:${offsetRegex.source}|(${ianaRegex.source}))?`);
 const sqlTimeExtensionRegex = RegExp(`(?: ${sqlTimeRegex.source})?`);
+
 function regexParser_int(match, pos, fallback) {
   const m = match[pos];
   return isUndefined(m) ? fallback : parseInteger(m);
 }
+
 function extractISOYmd(match, cursor) {
   const item = {
     year: regexParser_int(match, cursor),
@@ -2821,6 +3552,7 @@ function extractISOYmd(match, cursor) {
   };
   return [item, null, cursor + 3];
 }
+
 function extractISOTime(match, cursor) {
   const item = {
     hours: regexParser_int(match, cursor, 0),
@@ -2830,41 +3562,44 @@ function extractISOTime(match, cursor) {
   };
   return [item, null, cursor + 4];
 }
+
 function extractISOOffset(match, cursor) {
   const local = !match[cursor] && !match[cursor + 1],
-    fullOffset = signedOffset(match[cursor + 1], match[cursor + 2]),
-    zone = local ? null : FixedOffsetZone.instance(fullOffset);
+        fullOffset = signedOffset(match[cursor + 1], match[cursor + 2]),
+        zone = local ? null : FixedOffsetZone.instance(fullOffset);
   return [{}, zone, cursor + 3];
 }
+
 function extractIANAZone(match, cursor) {
   const zone = match[cursor] ? IANAZone.create(match[cursor]) : null;
   return [{}, zone, cursor + 1];
-}
+} // ISO time parsing
 
-// ISO time parsing
 
-const isoTimeOnly = RegExp(`^T?${isoTimeBaseRegex.source}$`);
-
-// ISO duration parsing
+const isoTimeOnly = RegExp(`^T?${isoTimeBaseRegex.source}$`); // ISO duration parsing
 
 const isoDuration = /^-?P(?:(?:(-?\d{1,20}(?:\.\d{1,20})?)Y)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20}(?:\.\d{1,20})?)W)?(?:(-?\d{1,20}(?:\.\d{1,20})?)D)?(?:T(?:(-?\d{1,20}(?:\.\d{1,20})?)H)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20})(?:[.,](-?\d{1,20}))?S)?)?)$/;
+
 function extractISODuration(match) {
   const _match = regexParser_slicedToArray(match, 9),
-    s = _match[0],
-    yearStr = _match[1],
-    monthStr = _match[2],
-    weekStr = _match[3],
-    dayStr = _match[4],
-    hourStr = _match[5],
-    minuteStr = _match[6],
-    secondStr = _match[7],
-    millisecondsStr = _match[8];
+        s = _match[0],
+        yearStr = _match[1],
+        monthStr = _match[2],
+        weekStr = _match[3],
+        dayStr = _match[4],
+        hourStr = _match[5],
+        minuteStr = _match[6],
+        secondStr = _match[7],
+        millisecondsStr = _match[8];
+
   const hasNegativePrefix = s[0] === "-";
   const negativeSeconds = secondStr && secondStr[0] === "-";
+
   const maybeNegate = function maybeNegate(num) {
     let force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     return num !== undefined && (force || num && hasNegativePrefix) ? -num : num;
   };
+
   return [{
     years: maybeNegate(parseFloating(yearStr)),
     months: maybeNegate(parseFloating(monthStr)),
@@ -2875,11 +3610,11 @@ function extractISODuration(match) {
     seconds: maybeNegate(parseFloating(secondStr), secondStr === "-0"),
     milliseconds: maybeNegate(parseMillis(millisecondsStr), negativeSeconds)
   }];
-}
-
-// These are a little braindead. EDT *should* tell us that we're in, say, America/New_York
+} // These are a little braindead. EDT *should* tell us that we're in, say, America/New_York
 // and not just that we're in -240 *right now*. But since I don't think these are used that often
 // I'm just going to ignore that
+
+
 const obsOffsets = {
   GMT: 0,
   EDT: -4 * 60,
@@ -2891,6 +3626,7 @@ const obsOffsets = {
   PDT: -7 * 60,
   PST: -8 * 60
 };
+
 function fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
   const result = {
     year: yearStr.length === 2 ? untruncateYear(parseInteger(yearStr)) : parseInteger(yearStr),
@@ -2900,29 +3636,34 @@ function fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, 
     minute: parseInteger(minuteStr)
   };
   if (secondStr) result.second = parseInteger(secondStr);
+
   if (weekdayStr) {
     result.weekday = weekdayStr.length > 3 ? weekdaysLong.indexOf(weekdayStr) + 1 : weekdaysShort.indexOf(weekdayStr) + 1;
   }
-  return result;
-}
 
-// RFC 2822/5322
+  return result;
+} // RFC 2822/5322
+
+
 const rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|(?:([+-]\d\d)(\d\d)))$/;
+
 function extractRFC2822(match) {
   const _match2 = regexParser_slicedToArray(match, 12),
-    weekdayStr = _match2[1],
-    dayStr = _match2[2],
-    monthStr = _match2[3],
-    yearStr = _match2[4],
-    hourStr = _match2[5],
-    minuteStr = _match2[6],
-    secondStr = _match2[7],
-    obsOffset = _match2[8],
-    milOffset = _match2[9],
-    offHourStr = _match2[10],
-    offMinuteStr = _match2[11],
-    result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+        weekdayStr = _match2[1],
+        dayStr = _match2[2],
+        monthStr = _match2[3],
+        yearStr = _match2[4],
+        hourStr = _match2[5],
+        minuteStr = _match2[6],
+        secondStr = _match2[7],
+        obsOffset = _match2[8],
+        milOffset = _match2[9],
+        offHourStr = _match2[10],
+        offMinuteStr = _match2[11],
+        result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+
   let offset;
+
   if (obsOffset) {
     offset = obsOffsets[obsOffset];
   } else if (milOffset) {
@@ -2930,42 +3671,48 @@ function extractRFC2822(match) {
   } else {
     offset = signedOffset(offHourStr, offMinuteStr);
   }
+
   return [result, new FixedOffsetZone(offset)];
 }
+
 function preprocessRFC2822(s) {
   // Remove comments and folding whitespace and replace multiple-spaces with a single space
   return s.replace(/\([^)]*\)|[\n\t]/g, " ").replace(/(\s\s+)/g, " ").trim();
-}
+} // http date
 
-// http date
 
 const rfc1123 = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/,
-  rfc850 = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d\d)-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d\d) (\d\d):(\d\d):(\d\d) GMT$/,
-  ascii = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( \d|\d\d) (\d\d):(\d\d):(\d\d) (\d{4})$/;
+      rfc850 = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d\d)-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d\d) (\d\d):(\d\d):(\d\d) GMT$/,
+      ascii = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( \d|\d\d) (\d\d):(\d\d):(\d\d) (\d{4})$/;
+
 function extractRFC1123Or850(match) {
   const _match3 = regexParser_slicedToArray(match, 8),
-    weekdayStr = _match3[1],
-    dayStr = _match3[2],
-    monthStr = _match3[3],
-    yearStr = _match3[4],
-    hourStr = _match3[5],
-    minuteStr = _match3[6],
-    secondStr = _match3[7],
-    result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+        weekdayStr = _match3[1],
+        dayStr = _match3[2],
+        monthStr = _match3[3],
+        yearStr = _match3[4],
+        hourStr = _match3[5],
+        minuteStr = _match3[6],
+        secondStr = _match3[7],
+        result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+
   return [result, FixedOffsetZone.utcInstance];
 }
+
 function extractASCII(match) {
   const _match4 = regexParser_slicedToArray(match, 8),
-    weekdayStr = _match4[1],
-    monthStr = _match4[2],
-    dayStr = _match4[3],
-    hourStr = _match4[4],
-    minuteStr = _match4[5],
-    secondStr = _match4[6],
-    yearStr = _match4[7],
-    result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+        weekdayStr = _match4[1],
+        monthStr = _match4[2],
+        dayStr = _match4[3],
+        hourStr = _match4[4],
+        minuteStr = _match4[5],
+        secondStr = _match4[6],
+        yearStr = _match4[7],
+        result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+
   return [result, FixedOffsetZone.utcInstance];
 }
+
 const isoYmdWithTimeExtensionRegex = combineRegexes(isoYmdRegex, isoTimeExtensionRegex);
 const isoWeekWithTimeExtensionRegex = combineRegexes(isoWeekRegex, isoTimeExtensionRegex);
 const isoOrdinalWithTimeExtensionRegex = combineRegexes(isoOrdinalRegex, isoTimeExtensionRegex);
@@ -2974,7 +3721,6 @@ const extractISOYmdTimeAndOffset = combineExtractors(extractISOYmd, extractISOTi
 const extractISOWeekTimeAndOffset = combineExtractors(extractISOWeekData, extractISOTime, extractISOOffset, extractIANAZone);
 const extractISOOrdinalDateAndTime = combineExtractors(extractISOOrdinalData, extractISOTime, extractISOOffset, extractIANAZone);
 const extractISOTimeAndOffset = combineExtractors(extractISOTime, extractISOOffset, extractIANAZone);
-
 /*
  * @private
  */
@@ -3002,17 +3748,25 @@ function parseSQL(s) {
   return parse(s, [sqlYmdWithTimeExtensionRegex, extractISOYmdTimeAndOffset], [sqlTimeCombinedRegex, extractISOTimeOffsetAndIANAZone]);
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/duration.js
+function duration_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = duration_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function duration_slicedToArray(arr, i) { return duration_arrayWithHoles(arr) || duration_iterableToArrayLimit(arr, i) || duration_unsupportedIterableToArray(arr, i) || duration_nonIterableRest(); }
+
 function duration_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function duration_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return duration_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return duration_arrayLikeToArray(o, minLen); }
+
 function duration_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function duration_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function duration_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function duration_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function duration_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function duration_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? duration_ownKeys(Object(source), !0).forEach(function (key) { duration_defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : duration_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function duration_defineProperty(obj, key, value) { key = duration_toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function duration_toPropertyKey(arg) { var key = duration_toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function duration_toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function duration_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -3020,102 +3774,100 @@ function duration_toPrimitive(input, hint) { if (typeof input !== "object" || in
 
 
 
-const INVALID = "Invalid Duration";
 
-// unit conversion constants
+const INVALID = "Invalid Duration"; // unit conversion constants
+
 const lowOrderMatrix = {
-    weeks: {
-      days: 7,
-      hours: 7 * 24,
-      minutes: 7 * 24 * 60,
-      seconds: 7 * 24 * 60 * 60,
-      milliseconds: 7 * 24 * 60 * 60 * 1000
-    },
-    days: {
-      hours: 24,
-      minutes: 24 * 60,
-      seconds: 24 * 60 * 60,
-      milliseconds: 24 * 60 * 60 * 1000
-    },
-    hours: {
-      minutes: 60,
-      seconds: 60 * 60,
-      milliseconds: 60 * 60 * 1000
-    },
-    minutes: {
-      seconds: 60,
-      milliseconds: 60 * 1000
-    },
-    seconds: {
-      milliseconds: 1000
-    }
+  weeks: {
+    days: 7,
+    hours: 7 * 24,
+    minutes: 7 * 24 * 60,
+    seconds: 7 * 24 * 60 * 60,
+    milliseconds: 7 * 24 * 60 * 60 * 1000
   },
-  casualMatrix = duration_objectSpread({
-    years: {
-      quarters: 4,
-      months: 12,
-      weeks: 52,
-      days: 365,
-      hours: 365 * 24,
-      minutes: 365 * 24 * 60,
-      seconds: 365 * 24 * 60 * 60,
-      milliseconds: 365 * 24 * 60 * 60 * 1000
-    },
-    quarters: {
-      months: 3,
-      weeks: 13,
-      days: 91,
-      hours: 91 * 24,
-      minutes: 91 * 24 * 60,
-      seconds: 91 * 24 * 60 * 60,
-      milliseconds: 91 * 24 * 60 * 60 * 1000
-    },
-    months: {
-      weeks: 4,
-      days: 30,
-      hours: 30 * 24,
-      minutes: 30 * 24 * 60,
-      seconds: 30 * 24 * 60 * 60,
-      milliseconds: 30 * 24 * 60 * 60 * 1000
-    }
-  }, lowOrderMatrix),
-  daysInYearAccurate = 146097.0 / 400,
-  daysInMonthAccurate = 146097.0 / 4800,
-  accurateMatrix = duration_objectSpread({
-    years: {
-      quarters: 4,
-      months: 12,
-      weeks: daysInYearAccurate / 7,
-      days: daysInYearAccurate,
-      hours: daysInYearAccurate * 24,
-      minutes: daysInYearAccurate * 24 * 60,
-      seconds: daysInYearAccurate * 24 * 60 * 60,
-      milliseconds: daysInYearAccurate * 24 * 60 * 60 * 1000
-    },
-    quarters: {
-      months: 3,
-      weeks: daysInYearAccurate / 28,
-      days: daysInYearAccurate / 4,
-      hours: daysInYearAccurate * 24 / 4,
-      minutes: daysInYearAccurate * 24 * 60 / 4,
-      seconds: daysInYearAccurate * 24 * 60 * 60 / 4,
-      milliseconds: daysInYearAccurate * 24 * 60 * 60 * 1000 / 4
-    },
-    months: {
-      weeks: daysInMonthAccurate / 7,
-      days: daysInMonthAccurate,
-      hours: daysInMonthAccurate * 24,
-      minutes: daysInMonthAccurate * 24 * 60,
-      seconds: daysInMonthAccurate * 24 * 60 * 60,
-      milliseconds: daysInMonthAccurate * 24 * 60 * 60 * 1000
-    }
-  }, lowOrderMatrix);
+  days: {
+    hours: 24,
+    minutes: 24 * 60,
+    seconds: 24 * 60 * 60,
+    milliseconds: 24 * 60 * 60 * 1000
+  },
+  hours: {
+    minutes: 60,
+    seconds: 60 * 60,
+    milliseconds: 60 * 60 * 1000
+  },
+  minutes: {
+    seconds: 60,
+    milliseconds: 60 * 1000
+  },
+  seconds: {
+    milliseconds: 1000
+  }
+},
+      casualMatrix = duration_objectSpread({
+  years: {
+    quarters: 4,
+    months: 12,
+    weeks: 52,
+    days: 365,
+    hours: 365 * 24,
+    minutes: 365 * 24 * 60,
+    seconds: 365 * 24 * 60 * 60,
+    milliseconds: 365 * 24 * 60 * 60 * 1000
+  },
+  quarters: {
+    months: 3,
+    weeks: 13,
+    days: 91,
+    hours: 91 * 24,
+    minutes: 91 * 24 * 60,
+    seconds: 91 * 24 * 60 * 60,
+    milliseconds: 91 * 24 * 60 * 60 * 1000
+  },
+  months: {
+    weeks: 4,
+    days: 30,
+    hours: 30 * 24,
+    minutes: 30 * 24 * 60,
+    seconds: 30 * 24 * 60 * 60,
+    milliseconds: 30 * 24 * 60 * 60 * 1000
+  }
+}, lowOrderMatrix),
+      daysInYearAccurate = 146097.0 / 400,
+      daysInMonthAccurate = 146097.0 / 4800,
+      accurateMatrix = duration_objectSpread({
+  years: {
+    quarters: 4,
+    months: 12,
+    weeks: daysInYearAccurate / 7,
+    days: daysInYearAccurate,
+    hours: daysInYearAccurate * 24,
+    minutes: daysInYearAccurate * 24 * 60,
+    seconds: daysInYearAccurate * 24 * 60 * 60,
+    milliseconds: daysInYearAccurate * 24 * 60 * 60 * 1000
+  },
+  quarters: {
+    months: 3,
+    weeks: daysInYearAccurate / 28,
+    days: daysInYearAccurate / 4,
+    hours: daysInYearAccurate * 24 / 4,
+    minutes: daysInYearAccurate * 24 * 60 / 4,
+    seconds: daysInYearAccurate * 24 * 60 * 60 / 4,
+    milliseconds: daysInYearAccurate * 24 * 60 * 60 * 1000 / 4
+  },
+  months: {
+    weeks: daysInMonthAccurate / 7,
+    days: daysInMonthAccurate,
+    hours: daysInMonthAccurate * 24,
+    minutes: daysInMonthAccurate * 24 * 60,
+    seconds: daysInMonthAccurate * 24 * 60 * 60,
+    milliseconds: daysInMonthAccurate * 24 * 60 * 60 * 1000
+  }
+}, lowOrderMatrix); // units ordered by size
 
-// units ordered by size
 const orderedUnits = ["years", "quarters", "months", "weeks", "days", "hours", "minutes", "seconds", "milliseconds"];
-const reverseUnits = orderedUnits.slice(0).reverse();
+const reverseUnits = orderedUnits.slice(0).reverse(); // clone really means "create another instance just like this one, but with these changes"
 
-// clone really means "create another instance just like this one, but with these changes"
 function clone(dur, alts) {
   let clear = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   // deep merge for vals
@@ -3127,49 +3879,53 @@ function clone(dur, alts) {
   };
   return new Duration(conf);
 }
+
 function antiTrunc(n) {
   return n < 0 ? Math.floor(n) : Math.ceil(n);
-}
+} // NB: mutates parameters
 
-// NB: mutates parameters
+
 function convert(matrix, fromMap, fromUnit, toMap, toUnit) {
   const conv = matrix[toUnit][fromUnit],
-    raw = fromMap[fromUnit] / conv,
-    sameSign = Math.sign(raw) === Math.sign(toMap[toUnit]),
-    // ok, so this is wild, but see the matrix in the tests
-    added = !sameSign && toMap[toUnit] !== 0 && Math.abs(raw) <= 1 ? antiTrunc(raw) : Math.trunc(raw);
+        raw = fromMap[fromUnit] / conv,
+        sameSign = Math.sign(raw) === Math.sign(toMap[toUnit]),
+        // ok, so this is wild, but see the matrix in the tests
+  added = !sameSign && toMap[toUnit] !== 0 && Math.abs(raw) <= 1 ? antiTrunc(raw) : Math.trunc(raw);
   toMap[toUnit] += added;
   fromMap[fromUnit] -= added * conv;
-}
+} // NB: mutates parameters
 
-// NB: mutates parameters
+
 function normalizeValues(matrix, vals) {
   reverseUnits.reduce((previous, current) => {
     if (!isUndefined(vals[current])) {
       if (previous) {
         convert(matrix, vals, previous, vals, current);
       }
+
       return current;
     } else {
       return previous;
     }
   }, null);
-}
+} // Remove all properties with a value of 0 from an object
 
-// Remove all properties with a value of 0 from an object
+
 function removeZeroes(vals) {
   const newVals = {};
+
   for (var _i = 0, _Object$entries = Object.entries(vals); _i < _Object$entries.length; _i++) {
     const _Object$entries$_i = duration_slicedToArray(_Object$entries[_i], 2),
-      key = _Object$entries$_i[0],
-      value = _Object$entries$_i[1];
+          key = _Object$entries$_i[0],
+          value = _Object$entries$_i[1];
+
     if (value !== 0) {
       newVals[key] = value;
     }
   }
+
   return newVals;
 }
-
 /**
  * A Duration object represents a period of time, like "2 months" or "1 day, 1 hour". Conceptually, it's just a map of units to their quantities, accompanied by some additional configuration and methods for creating, parsing, interrogating, transforming, and formatting them. They can be used on their own or in conjunction with other Luxon types; for example, you can use {@link DateTime#plus} to add a Duration object to a DateTime, producing another DateTime.
  *
@@ -3183,6 +3939,8 @@ function removeZeroes(vals) {
  *
  * There's are more methods documented below. In addition, for more information on subtler topics like internationalization and validity, see the external documentation.
  */
+
+
 class Duration {
   /**
    * @private
@@ -3190,36 +3948,42 @@ class Duration {
   constructor(config) {
     const accurate = config.conversionAccuracy === "longterm" || false;
     let matrix = accurate ? accurateMatrix : casualMatrix;
+
     if (config.matrix) {
       matrix = config.matrix;
     }
-
     /**
      * @access private
      */
+
+
     this.values = config.values;
     /**
      * @access private
      */
+
     this.loc = config.loc || Locale.create();
     /**
      * @access private
      */
+
     this.conversionAccuracy = accurate ? "longterm" : "casual";
     /**
      * @access private
      */
+
     this.invalid = config.invalid || null;
     /**
      * @access private
      */
+
     this.matrix = matrix;
     /**
      * @access private
      */
+
     this.isLuxonDuration = true;
   }
-
   /**
    * Create Duration from a number of milliseconds.
    * @param {number} count of milliseconds
@@ -3229,12 +3993,13 @@ class Duration {
    * @param {string} [opts.conversionAccuracy='casual'] - the conversion system to use
    * @return {Duration}
    */
+
+
   static fromMillis(count, opts) {
     return Duration.fromObject({
       milliseconds: count
     }, opts);
   }
-
   /**
    * Create a Duration from a JavaScript object with keys like 'years' and 'hours'.
    * If this object is empty then a zero milliseconds duration is returned.
@@ -3255,11 +4020,15 @@ class Duration {
    * @param {string} [opts.matrix=Object] - the custom conversion system to use
    * @return {Duration}
    */
+
+
   static fromObject(obj) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     if (obj == null || typeof obj !== "object") {
       throw new InvalidArgumentError(`Duration.fromObject: argument expected to be an object, got ${obj === null ? "null" : typeof obj}`);
     }
+
     return new Duration({
       values: normalizeObject(obj, Duration.normalizeUnit),
       loc: Locale.fromObject(opts),
@@ -3267,7 +4036,6 @@ class Duration {
       matrix: opts.matrix
     });
   }
-
   /**
    * Create a Duration from DurationLike.
    *
@@ -3278,6 +4046,8 @@ class Duration {
    * - Duration instance
    * @return {Duration}
    */
+
+
   static fromDurationLike(durationLike) {
     if (isNumber(durationLike)) {
       return Duration.fromMillis(durationLike);
@@ -3289,7 +4059,6 @@ class Duration {
       throw new InvalidArgumentError(`Unknown duration argument ${durationLike} of type ${typeof durationLike}`);
     }
   }
-
   /**
    * Create a Duration from an ISO 8601 duration string.
    * @param {string} text - text to parse
@@ -3304,17 +4073,19 @@ class Duration {
    * @example Duration.fromISO('P5Y3M').toObject() //=> { years: 5, months: 3 }
    * @return {Duration}
    */
+
+
   static fromISO(text, opts) {
     const _parseISODuration = parseISODuration(text),
-      _parseISODuration2 = duration_slicedToArray(_parseISODuration, 1),
-      parsed = _parseISODuration2[0];
+          _parseISODuration2 = duration_slicedToArray(_parseISODuration, 1),
+          parsed = _parseISODuration2[0];
+
     if (parsed) {
       return Duration.fromObject(parsed, opts);
     } else {
       return Duration.invalid("unparsable", `the input "${text}" can't be parsed as ISO 8601`);
     }
   }
-
   /**
    * Create a Duration from an ISO 8601 time string.
    * @param {string} text - text to parse
@@ -3331,29 +4102,36 @@ class Duration {
    * @example Duration.fromISOTime('T1100').toObject() //=> { hours: 11, minutes: 0, seconds: 0 }
    * @return {Duration}
    */
+
+
   static fromISOTime(text, opts) {
     const _parseISOTimeOnly = parseISOTimeOnly(text),
-      _parseISOTimeOnly2 = duration_slicedToArray(_parseISOTimeOnly, 1),
-      parsed = _parseISOTimeOnly2[0];
+          _parseISOTimeOnly2 = duration_slicedToArray(_parseISOTimeOnly, 1),
+          parsed = _parseISOTimeOnly2[0];
+
     if (parsed) {
       return Duration.fromObject(parsed, opts);
     } else {
       return Duration.invalid("unparsable", `the input "${text}" can't be parsed as ISO 8601`);
     }
   }
-
   /**
    * Create an invalid Duration.
    * @param {string} reason - simple string of why this datetime is invalid. Should not contain parameters or anything else data-dependent
    * @param {string} [explanation=null] - longer explanation, may include parameters and other useful debugging information
    * @return {Duration}
    */
+
+
   static invalid(reason) {
     let explanation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
     if (!reason) {
       throw new InvalidArgumentError("need to specify a reason the Duration is invalid");
     }
+
     const invalid = reason instanceof Invalid ? reason : new Invalid(reason, explanation);
+
     if (Settings.throwOnInvalid) {
       throw new InvalidDurationError(invalid);
     } else {
@@ -3362,10 +4140,11 @@ class Duration {
       });
     }
   }
-
   /**
    * @private
    */
+
+
   static normalizeUnit(unit) {
     const normalized = {
       year: "years",
@@ -3390,33 +4169,35 @@ class Duration {
     if (!normalized) throw new InvalidUnitError(unit);
     return normalized;
   }
-
   /**
    * Check if an object is a Duration. Works across context boundaries
    * @param {object} o
    * @return {boolean}
    */
+
+
   static isDuration(o) {
     return o && o.isLuxonDuration || false;
   }
-
   /**
    * Get  the locale of a Duration, such 'en-GB'
    * @type {string}
    */
+
+
   get locale() {
     return this.isValid ? this.loc.locale : null;
   }
-
   /**
    * Get the numbering system of a Duration, such 'beng'. The numbering system is used when formatting the Duration
    *
    * @type {string}
    */
+
+
   get numberingSystem() {
     return this.isValid ? this.loc.numberingSystem : null;
   }
-
   /**
    * Returns a string representation of this Duration formatted according to the specified format string. You may use these tokens:
    * * `S` for milliseconds
@@ -3439,15 +4220,18 @@ class Duration {
    * @example Duration.fromObject({ years: 1, days: 6, seconds: 2 }).toFormat("M S") //=> "12 518402000"
    * @return {string}
    */
+
+
   toFormat(fmt) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     // reverse-compat since 1.2; we always round down now, never up, and we do it by default
     const fmtOpts = duration_objectSpread(duration_objectSpread({}, opts), {}, {
       floor: opts.round !== false && opts.floor !== false
     });
+
     return this.isValid ? Formatter.create(this.loc, fmtOpts).formatDurationFromString(this, fmt) : INVALID;
   }
-
   /**
    * Returns a string representation of a Duration with all units included.
    * To modify its behavior use the `listStyle` and any Intl.NumberFormat option, though `unitDisplay` is especially relevant.
@@ -3461,13 +4245,17 @@ class Duration {
    * dur.toHuman({ unitDisplay: "short" }) //=> '1 day, 5 hr, 6 min'
    * ```
    */
+
+
   toHuman() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     const l = orderedUnits.map(unit => {
       const val = this.values[unit];
+
       if (isUndefined(val)) {
         return null;
       }
+
       return this.loc.numberFormatter(duration_objectSpread(duration_objectSpread({
         style: "unit",
         unitDisplay: "long"
@@ -3480,17 +4268,17 @@ class Duration {
       style: opts.listStyle || "narrow"
     }, opts)).format(l);
   }
-
   /**
    * Returns a JavaScript object with this Duration's values.
    * @example Duration.fromObject({ years: 1, days: 6, seconds: 2 }).toObject() //=> { years: 1, days: 6, seconds: 2 }
    * @return {Object}
    */
+
+
   toObject() {
     if (!this.isValid) return {};
     return duration_objectSpread({}, this.values);
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this Duration.
    * @see https://en.wikipedia.org/wiki/ISO_8601#Durations
@@ -3501,6 +4289,8 @@ class Duration {
    * @example Duration.fromObject({ milliseconds: 6 }).toISO() //=> 'PT0.006S'
    * @return {string}
    */
+
+
   toISO() {
     // we could use the formatter, but this is an easier way to get the minimum string
     if (!this.isValid) return null;
@@ -3512,14 +4302,12 @@ class Duration {
     if (this.hours !== 0 || this.minutes !== 0 || this.seconds !== 0 || this.milliseconds !== 0) s += "T";
     if (this.hours !== 0) s += this.hours + "H";
     if (this.minutes !== 0) s += this.minutes + "M";
-    if (this.seconds !== 0 || this.milliseconds !== 0)
-      // this will handle "floating point madness" by removing extra decimal places
+    if (this.seconds !== 0 || this.milliseconds !== 0) // this will handle "floating point madness" by removing extra decimal places
       // https://stackoverflow.com/questions/588004/is-floating-point-math-broken
       s += roundTo(this.seconds + this.milliseconds / 1000, 3) + "S";
     if (s === "P") s += "T0S";
     return s;
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this Duration, formatted as a time of day.
    * Note that this will return null if the duration is invalid, negative, or equal to or greater than 24 hours.
@@ -3536,6 +4324,8 @@ class Duration {
    * @example Duration.fromObject({ hours: 11 }).toISOTime({ format: 'basic' }) //=> '110000.000'
    * @return {string}
    */
+
+
   toISOTime() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     if (!this.isValid) return null;
@@ -3549,82 +4339,104 @@ class Duration {
     }, opts);
     const value = this.shiftTo("hours", "minutes", "seconds", "milliseconds");
     let fmt = opts.format === "basic" ? "hhmm" : "hh:mm";
+
     if (!opts.suppressSeconds || value.seconds !== 0 || value.milliseconds !== 0) {
       fmt += opts.format === "basic" ? "ss" : ":ss";
+
       if (!opts.suppressMilliseconds || value.milliseconds !== 0) {
         fmt += ".SSS";
       }
     }
+
     let str = value.toFormat(fmt);
+
     if (opts.includePrefix) {
       str = "T" + str;
     }
+
     return str;
   }
-
   /**
    * Returns an ISO 8601 representation of this Duration appropriate for use in JSON.
    * @return {string}
    */
+
+
   toJSON() {
     return this.toISO();
   }
-
   /**
    * Returns an ISO 8601 representation of this Duration appropriate for use in debugging.
    * @return {string}
    */
+
+
   toString() {
     return this.toISO();
   }
-
   /**
    * Returns an milliseconds value of this Duration.
    * @return {number}
    */
+
+
   toMillis() {
     return this.as("milliseconds");
   }
-
   /**
    * Returns an milliseconds value of this Duration. Alias of {@link toMillis}
    * @return {number}
    */
+
+
   valueOf() {
     return this.toMillis();
   }
-
   /**
    * Make this Duration longer by the specified amount. Return a newly-constructed Duration.
    * @param {Duration|Object|number} duration - The amount to add. Either a Luxon Duration, a number of milliseconds, the object argument to Duration.fromObject()
    * @return {Duration}
    */
+
+
   plus(duration) {
     if (!this.isValid) return this;
     const dur = Duration.fromDurationLike(duration),
-      result = {};
-    for (var _i2 = 0, _orderedUnits = orderedUnits; _i2 < _orderedUnits.length; _i2++) {
-      const k = _orderedUnits[_i2];
-      if (util_hasOwnProperty(dur.values, k) || util_hasOwnProperty(this.values, k)) {
-        result[k] = dur.get(k) + this.get(k);
+          result = {};
+
+    var _iterator = duration_createForOfIteratorHelper(orderedUnits),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        const k = _step.value;
+
+        if (util_hasOwnProperty(dur.values, k) || util_hasOwnProperty(this.values, k)) {
+          result[k] = dur.get(k) + this.get(k);
+        }
       }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
     }
+
     return clone(this, {
       values: result
     }, true);
   }
-
   /**
    * Make this Duration shorter by the specified amount. Return a newly-constructed Duration.
    * @param {Duration|Object|number} duration - The amount to subtract. Either a Luxon Duration, a number of milliseconds, the object argument to Duration.fromObject()
    * @return {Duration}
    */
+
+
   minus(duration) {
     if (!this.isValid) return this;
     const dur = Duration.fromDurationLike(duration);
     return this.plus(dur.negate());
   }
-
   /**
    * Scale this Duration by the specified amount. Return a newly-constructed Duration.
    * @param {function} fn - The function to apply to each unit. Arity is 1 or 2: the value of the unit and, optionally, the unit name. Must return a number.
@@ -3632,18 +4444,21 @@ class Duration {
    * @example Duration.fromObject({ hours: 1, minutes: 30 }).mapUnits((x, u) => u === "hours" ? x * 2 : x) //=> { hours: 2, minutes: 30 }
    * @return {Duration}
    */
+
+
   mapUnits(fn) {
     if (!this.isValid) return this;
     const result = {};
-    for (var _i3 = 0, _Object$keys = Object.keys(this.values); _i3 < _Object$keys.length; _i3++) {
-      const k = _Object$keys[_i3];
+
+    for (var _i2 = 0, _Object$keys = Object.keys(this.values); _i2 < _Object$keys.length; _i2++) {
+      const k = _Object$keys[_i2];
       result[k] = asNumber(fn(this.values[k], k));
     }
+
     return clone(this, {
       values: result
     }, true);
   }
-
   /**
    * Get the value of unit.
    * @param {string} unit - a unit such as 'minute' or 'day'
@@ -3652,10 +4467,11 @@ class Duration {
    * @example Duration.fromObject({years: 2, days: 3}).get('days') //=> 3
    * @return {number}
    */
+
+
   get(unit) {
     return this[Duration.normalizeUnit(unit)];
   }
-
   /**
    * "Set" the values of specified units. Return a newly-constructed Duration.
    * @param {Object} values - a mapping of units to numbers
@@ -3663,25 +4479,31 @@ class Duration {
    * @example dur.set({ hours: 8, minutes: 30 })
    * @return {Duration}
    */
+
+
   set(values) {
     if (!this.isValid) return this;
+
     const mixed = duration_objectSpread(duration_objectSpread({}, this.values), normalizeObject(values, Duration.normalizeUnit));
+
     return clone(this, {
       values: mixed
     });
   }
-
   /**
    * "Set" the locale and/or numberingSystem.  Returns a newly-constructed Duration.
    * @example dur.reconfigure({ locale: 'en-GB' })
    * @return {Duration}
    */
+
+
   reconfigure() {
     let _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      locale = _ref.locale,
-      numberingSystem = _ref.numberingSystem,
-      conversionAccuracy = _ref.conversionAccuracy,
-      matrix = _ref.matrix;
+        locale = _ref.locale,
+        numberingSystem = _ref.numberingSystem,
+        conversionAccuracy = _ref.conversionAccuracy,
+        matrix = _ref.matrix;
+
     const loc = this.loc.clone({
       locale,
       numberingSystem
@@ -3693,7 +4515,6 @@ class Duration {
     };
     return clone(this, opts);
   }
-
   /**
    * Return the length of the duration in the specified unit.
    * @param {string} unit - a unit such as 'minutes' or 'days'
@@ -3702,16 +4523,19 @@ class Duration {
    * @example Duration.fromObject({hours: 60}).as('days') //=> 2.5
    * @return {number}
    */
+
+
   as(unit) {
     return this.isValid ? this.shiftTo(unit).get(unit) : NaN;
   }
-
   /**
    * Reduce this Duration to its canonical representation in its current units.
    * @example Duration.fromObject({ years: 2, days: 5000 }).normalize().toObject() //=> { years: 15, days: 255 }
    * @example Duration.fromObject({ hours: 12, minutes: -45 }).normalize().toObject() //=> { hours: 11, minutes: 15 }
    * @return {Duration}
    */
+
+
   normalize() {
     if (!this.isValid) return this;
     const vals = this.toObject();
@@ -3720,12 +4544,13 @@ class Duration {
       values: vals
     }, true);
   }
-
   /**
    * Rescale units to its largest representation
    * @example Duration.fromObject({ milliseconds: 90000 }).rescale().toObject() //=> { minutes: 1, seconds: 30 }
    * @return {Duration}
    */
+
+
   rescale() {
     if (!this.isValid) return this;
     const vals = removeZeroes(this.normalize().shiftToAll().toObject());
@@ -3733,227 +4558,280 @@ class Duration {
       values: vals
     }, true);
   }
-
   /**
    * Convert this Duration into its representation in a different set of units.
    * @example Duration.fromObject({ hours: 1, seconds: 30 }).shiftTo('minutes', 'milliseconds').toObject() //=> { minutes: 60, milliseconds: 30000 }
    * @return {Duration}
    */
+
+
   shiftTo() {
     for (var _len = arguments.length, units = new Array(_len), _key = 0; _key < _len; _key++) {
       units[_key] = arguments[_key];
     }
+
     if (!this.isValid) return this;
+
     if (units.length === 0) {
       return this;
     }
+
     units = units.map(u => Duration.normalizeUnit(u));
     const built = {},
-      accumulated = {},
-      vals = this.toObject();
+          accumulated = {},
+          vals = this.toObject();
     let lastUnit;
-    for (var _i4 = 0, _orderedUnits2 = orderedUnits; _i4 < _orderedUnits2.length; _i4++) {
-      const k = _orderedUnits2[_i4];
-      if (units.indexOf(k) >= 0) {
-        lastUnit = k;
-        let own = 0;
 
-        // anything we haven't boiled down yet should get boiled to this unit
-        for (const ak in accumulated) {
-          own += this.matrix[ak][k] * accumulated[ak];
-          accumulated[ak] = 0;
-        }
+    var _iterator2 = duration_createForOfIteratorHelper(orderedUnits),
+        _step2;
 
-        // plus anything that's already in this unit
-        if (isNumber(vals[k])) {
-          own += vals[k];
-        }
-        const i = Math.trunc(own);
-        built[k] = i;
-        accumulated[k] = (own * 1000 - i * 1000) / 1000;
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        const k = _step2.value;
 
-        // plus anything further down the chain that should be rolled up in to this
-        for (const down in vals) {
-          if (orderedUnits.indexOf(down) > orderedUnits.indexOf(k)) {
-            convert(this.matrix, vals, down, built, k);
+        if (units.indexOf(k) >= 0) {
+          lastUnit = k;
+          let own = 0; // anything we haven't boiled down yet should get boiled to this unit
+
+          for (const ak in accumulated) {
+            own += this.matrix[ak][k] * accumulated[ak];
+            accumulated[ak] = 0;
+          } // plus anything that's already in this unit
+
+
+          if (isNumber(vals[k])) {
+            own += vals[k];
           }
+
+          const i = Math.trunc(own);
+          built[k] = i;
+          accumulated[k] = (own * 1000 - i * 1000) / 1000; // plus anything further down the chain that should be rolled up in to this
+
+          for (const down in vals) {
+            if (orderedUnits.indexOf(down) > orderedUnits.indexOf(k)) {
+              convert(this.matrix, vals, down, built, k);
+            }
+          } // otherwise, keep it in the wings to boil it later
+
+        } else if (isNumber(vals[k])) {
+          accumulated[k] = vals[k];
         }
-        // otherwise, keep it in the wings to boil it later
-      } else if (isNumber(vals[k])) {
-        accumulated[k] = vals[k];
-      }
+      } // anything leftover becomes the decimal for the last unit
+      // lastUnit must be defined since units is not empty
+
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
     }
 
-    // anything leftover becomes the decimal for the last unit
-    // lastUnit must be defined since units is not empty
     for (const key in accumulated) {
       if (accumulated[key] !== 0) {
         built[lastUnit] += key === lastUnit ? accumulated[key] : accumulated[key] / this.matrix[lastUnit][key];
       }
     }
+
     return clone(this, {
       values: built
     }, true).normalize();
   }
-
   /**
    * Shift this Duration to all available units.
    * Same as shiftTo("years", "months", "weeks", "days", "hours", "minutes", "seconds", "milliseconds")
    * @return {Duration}
    */
+
+
   shiftToAll() {
     if (!this.isValid) return this;
     return this.shiftTo("years", "months", "weeks", "days", "hours", "minutes", "seconds", "milliseconds");
   }
-
   /**
    * Return the negative of this Duration.
    * @example Duration.fromObject({ hours: 1, seconds: 30 }).negate().toObject() //=> { hours: -1, seconds: -30 }
    * @return {Duration}
    */
+
+
   negate() {
     if (!this.isValid) return this;
     const negated = {};
-    for (var _i5 = 0, _Object$keys2 = Object.keys(this.values); _i5 < _Object$keys2.length; _i5++) {
-      const k = _Object$keys2[_i5];
+
+    for (var _i3 = 0, _Object$keys2 = Object.keys(this.values); _i3 < _Object$keys2.length; _i3++) {
+      const k = _Object$keys2[_i3];
       negated[k] = this.values[k] === 0 ? 0 : -this.values[k];
     }
+
     return clone(this, {
       values: negated
     }, true);
   }
-
   /**
    * Get the years.
    * @type {number}
    */
+
+
   get years() {
     return this.isValid ? this.values.years || 0 : NaN;
   }
-
   /**
    * Get the quarters.
    * @type {number}
    */
+
+
   get quarters() {
     return this.isValid ? this.values.quarters || 0 : NaN;
   }
-
   /**
    * Get the months.
    * @type {number}
    */
+
+
   get months() {
     return this.isValid ? this.values.months || 0 : NaN;
   }
-
   /**
    * Get the weeks
    * @type {number}
    */
+
+
   get weeks() {
     return this.isValid ? this.values.weeks || 0 : NaN;
   }
-
   /**
    * Get the days.
    * @type {number}
    */
+
+
   get days() {
     return this.isValid ? this.values.days || 0 : NaN;
   }
-
   /**
    * Get the hours.
    * @type {number}
    */
+
+
   get hours() {
     return this.isValid ? this.values.hours || 0 : NaN;
   }
-
   /**
    * Get the minutes.
    * @type {number}
    */
+
+
   get minutes() {
     return this.isValid ? this.values.minutes || 0 : NaN;
   }
-
   /**
    * Get the seconds.
    * @return {number}
    */
+
+
   get seconds() {
     return this.isValid ? this.values.seconds || 0 : NaN;
   }
-
   /**
    * Get the milliseconds.
    * @return {number}
    */
+
+
   get milliseconds() {
     return this.isValid ? this.values.milliseconds || 0 : NaN;
   }
-
   /**
    * Returns whether the Duration is invalid. Invalid durations are returned by diff operations
    * on invalid DateTimes or Intervals.
    * @return {boolean}
    */
+
+
   get isValid() {
     return this.invalid === null;
   }
-
   /**
    * Returns an error code if this Duration became invalid, or null if the Duration is valid
    * @return {string}
    */
+
+
   get invalidReason() {
     return this.invalid ? this.invalid.reason : null;
   }
-
   /**
    * Returns an explanation of why this Duration became invalid, or null if the Duration is valid
    * @type {string}
    */
+
+
   get invalidExplanation() {
     return this.invalid ? this.invalid.explanation : null;
   }
-
   /**
    * Equality check
    * Two Durations are equal iff they have the same units and the same values for each unit.
    * @param {Duration} other
    * @return {boolean}
    */
+
+
   equals(other) {
     if (!this.isValid || !other.isValid) {
       return false;
     }
+
     if (!this.loc.equals(other.loc)) {
       return false;
     }
+
     function eq(v1, v2) {
       // Consider 0 and undefined as equal
       if (v1 === undefined || v1 === 0) return v2 === undefined || v2 === 0;
       return v1 === v2;
     }
-    for (var _i6 = 0, _orderedUnits3 = orderedUnits; _i6 < _orderedUnits3.length; _i6++) {
-      const u = _orderedUnits3[_i6];
-      if (!eq(this.values[u], other.values[u])) {
-        return false;
+
+    var _iterator3 = duration_createForOfIteratorHelper(orderedUnits),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        const u = _step3.value;
+
+        if (!eq(this.values[u], other.values[u])) {
+          return false;
+        }
       }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
     }
+
     return true;
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/interval.js
 function interval_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = interval_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function interval_slicedToArray(arr, i) { return interval_arrayWithHoles(arr) || interval_iterableToArrayLimit(arr, i) || interval_unsupportedIterableToArray(arr, i) || interval_nonIterableRest(); }
+
 function interval_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function interval_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return interval_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return interval_arrayLikeToArray(o, minLen); }
+
 function interval_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function interval_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function interval_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function interval_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
@@ -3962,9 +4840,9 @@ function interval_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-const interval_INVALID = "Invalid Interval";
 
-// checks if the start is equal to or before the end
+const interval_INVALID = "Invalid Interval"; // checks if the start is equal to or before the end
+
 function validateStartEnd(start, end) {
   if (!start || !start.isValid) {
     return Interval.invalid("missing or invalid start");
@@ -3976,7 +4854,6 @@ function validateStartEnd(start, end) {
     return null;
   }
 }
-
 /**
  * An Interval object represents a half-open interval of time, where each endpoint is a {@link DateTime}. Conceptually, it's a container for those two endpoints, accompanied by methods for creating, parsing, interrogating, comparing, transforming, and formatting them.
  *
@@ -3989,6 +4866,8 @@ function validateStartEnd(start, end) {
  * * **Comparison** To compare this Interval to another one, use {@link Interval#equals}, {@link Interval#overlaps}, {@link Interval#abutsStart}, {@link Interval#abutsEnd}, {@link Interval#engulfs}
  * * **Output** To convert the Interval into other representations, see {@link Interval#toString}, {@link Interval#toLocaleString}, {@link Interval#toISO}, {@link Interval#toISODate}, {@link Interval#toISOTime}, {@link Interval#toFormat}, and {@link Interval#toDuration}.
  */
+
+
 class Interval {
   /**
    * @private
@@ -4001,29 +4880,36 @@ class Interval {
     /**
      * @access private
      */
+
     this.e = config.end;
     /**
      * @access private
      */
+
     this.invalid = config.invalid || null;
     /**
      * @access private
      */
+
     this.isLuxonInterval = true;
   }
-
   /**
    * Create an invalid Interval.
    * @param {string} reason - simple string of why this Interval is invalid. Should not contain parameters or anything else data-dependent
    * @param {string} [explanation=null] - longer explanation, may include parameters and other useful debugging information
    * @return {Interval}
    */
+
+
   static invalid(reason) {
     let explanation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
     if (!reason) {
       throw new InvalidArgumentError("need to specify a reason the Interval is invalid");
     }
+
     const invalid = reason instanceof Invalid ? reason : new Invalid(reason, explanation);
+
     if (Settings.throwOnInvalid) {
       throw new InvalidIntervalError(invalid);
     } else {
@@ -4032,17 +4918,19 @@ class Interval {
       });
     }
   }
-
   /**
    * Create an Interval from a start DateTime and an end DateTime. Inclusive of the start but not the end.
    * @param {DateTime|Date|Object} start
    * @param {DateTime|Date|Object} end
    * @return {Interval}
    */
+
+
   static fromDateTimes(start, end) {
     const builtStart = friendlyDateTime(start),
-      builtEnd = friendlyDateTime(end);
+          builtEnd = friendlyDateTime(end);
     const validateError = validateStartEnd(builtStart, builtEnd);
+
     if (validateError == null) {
       return new Interval({
         start: builtStart,
@@ -4052,31 +4940,32 @@ class Interval {
       return validateError;
     }
   }
-
   /**
    * Create an Interval from a start DateTime and a Duration to extend to.
    * @param {DateTime|Date|Object} start
    * @param {Duration|Object|number} duration - the length of the Interval.
    * @return {Interval}
    */
+
+
   static after(start, duration) {
     const dur = Duration.fromDurationLike(duration),
-      dt = friendlyDateTime(start);
+          dt = friendlyDateTime(start);
     return Interval.fromDateTimes(dt, dt.plus(dur));
   }
-
   /**
    * Create an Interval from an end DateTime and a Duration to extend backwards to.
    * @param {DateTime|Date|Object} end
    * @param {Duration|Object|number} duration - the length of the Interval.
    * @return {Interval}
    */
+
+
   static before(end, duration) {
     const dur = Duration.fromDurationLike(duration),
-      dt = friendlyDateTime(end);
+          dt = friendlyDateTime(end);
     return Interval.fromDateTimes(dt.minus(dur), dt);
   }
-
   /**
    * Create an Interval from an ISO 8601 string.
    * Accepts `<start>/<end>`, `<start>/<duration>`, and `<duration>/<end>` formats.
@@ -4085,103 +4974,120 @@ class Interval {
    * @see https://en.wikipedia.org/wiki/ISO_8601#Time_intervals
    * @return {Interval}
    */
+
+
   static fromISO(text, opts) {
     const _split = (text || "").split("/", 2),
-      _split2 = interval_slicedToArray(_split, 2),
-      s = _split2[0],
-      e = _split2[1];
+          _split2 = interval_slicedToArray(_split, 2),
+          s = _split2[0],
+          e = _split2[1];
+
     if (s && e) {
       let start, startIsValid;
+
       try {
         start = DateTime.fromISO(s, opts);
         startIsValid = start.isValid;
       } catch (e) {
         startIsValid = false;
       }
+
       let end, endIsValid;
+
       try {
         end = DateTime.fromISO(e, opts);
         endIsValid = end.isValid;
       } catch (e) {
         endIsValid = false;
       }
+
       if (startIsValid && endIsValid) {
         return Interval.fromDateTimes(start, end);
       }
+
       if (startIsValid) {
         const dur = Duration.fromISO(e, opts);
+
         if (dur.isValid) {
           return Interval.after(start, dur);
         }
       } else if (endIsValid) {
         const dur = Duration.fromISO(s, opts);
+
         if (dur.isValid) {
           return Interval.before(end, dur);
         }
       }
     }
+
     return Interval.invalid("unparsable", `the input "${text}" can't be parsed as ISO 8601`);
   }
-
   /**
    * Check if an object is an Interval. Works across context boundaries
    * @param {object} o
    * @return {boolean}
    */
+
+
   static isInterval(o) {
     return o && o.isLuxonInterval || false;
   }
-
   /**
    * Returns the start of the Interval
    * @type {DateTime}
    */
+
+
   get start() {
     return this.isValid ? this.s : null;
   }
-
   /**
    * Returns the end of the Interval
    * @type {DateTime}
    */
+
+
   get end() {
     return this.isValid ? this.e : null;
   }
-
   /**
    * Returns whether this Interval's end is at least its start, meaning that the Interval isn't 'backwards'.
    * @type {boolean}
    */
+
+
   get isValid() {
     return this.invalidReason === null;
   }
-
   /**
    * Returns an error code if this Interval is invalid, or null if the Interval is valid
    * @type {string}
    */
+
+
   get invalidReason() {
     return this.invalid ? this.invalid.reason : null;
   }
-
   /**
    * Returns an explanation of why this Interval became invalid, or null if the Interval is valid
    * @type {string}
    */
+
+
   get invalidExplanation() {
     return this.invalid ? this.invalid.explanation : null;
   }
-
   /**
    * Returns the length of the Interval in the specified unit.
    * @param {string} unit - the unit (such as 'hours' or 'days') to return the length in.
    * @return {number}
    */
+
+
   length() {
     let unit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "milliseconds";
     return this.isValid ? this.toDuration(...[unit]).get(unit) : NaN;
   }
-
   /**
    * Returns the count of minutes, hours, days, months, or years included in the Interval, even in part.
    * Unlike {@link Interval#length} this counts sections of the calendar, not periods of time, e.g. specifying 'day'
@@ -4189,61 +5095,67 @@ class Interval {
    * @param {string} [unit='milliseconds'] - the unit of time to count.
    * @return {number}
    */
+
+
   count() {
     let unit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "milliseconds";
     if (!this.isValid) return NaN;
     const start = this.start.startOf(unit),
-      end = this.end.startOf(unit);
+          end = this.end.startOf(unit);
     return Math.floor(end.diff(start, unit).get(unit)) + 1;
   }
-
   /**
    * Returns whether this Interval's start and end are both in the same unit of time
    * @param {string} unit - the unit of time to check sameness on
    * @return {boolean}
    */
+
+
   hasSame(unit) {
     return this.isValid ? this.isEmpty() || this.e.minus(1).hasSame(this.s, unit) : false;
   }
-
   /**
    * Return whether this Interval has the same start and end DateTimes.
    * @return {boolean}
    */
+
+
   isEmpty() {
     return this.s.valueOf() === this.e.valueOf();
   }
-
   /**
    * Return whether this Interval's start is after the specified DateTime.
    * @param {DateTime} dateTime
    * @return {boolean}
    */
+
+
   isAfter(dateTime) {
     if (!this.isValid) return false;
     return this.s > dateTime;
   }
-
   /**
    * Return whether this Interval's end is before the specified DateTime.
    * @param {DateTime} dateTime
    * @return {boolean}
    */
+
+
   isBefore(dateTime) {
     if (!this.isValid) return false;
     return this.e <= dateTime;
   }
-
   /**
    * Return whether this Interval contains the specified DateTime.
    * @param {DateTime} dateTime
    * @return {boolean}
    */
+
+
   contains(dateTime) {
     if (!this.isValid) return false;
     return this.s <= dateTime && this.e > dateTime;
   }
-
   /**
    * "Sets" the start and/or end dates. Returns a newly-constructed Interval.
    * @param {Object} values - the values to set
@@ -4251,53 +5163,65 @@ class Interval {
    * @param {DateTime} values.end - the ending DateTime
    * @return {Interval}
    */
+
+
   set() {
     let _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      start = _ref.start,
-      end = _ref.end;
+        start = _ref.start,
+        end = _ref.end;
+
     if (!this.isValid) return this;
     return Interval.fromDateTimes(start || this.s, end || this.e);
   }
-
   /**
    * Split this Interval at each of the specified DateTimes
    * @param {...DateTime} dateTimes - the unit of time to count.
    * @return {Array}
    */
+
+
   splitAt() {
     if (!this.isValid) return [];
+
     for (var _len = arguments.length, dateTimes = new Array(_len), _key = 0; _key < _len; _key++) {
       dateTimes[_key] = arguments[_key];
     }
+
     const sorted = dateTimes.map(friendlyDateTime).filter(d => this.contains(d)).sort(),
-      results = [];
+          results = [];
     let s = this.s,
-      i = 0;
+        i = 0;
+
     while (s < this.e) {
       const added = sorted[i] || this.e,
-        next = +added > +this.e ? this.e : added;
+            next = +added > +this.e ? this.e : added;
       results.push(Interval.fromDateTimes(s, next));
       s = next;
       i += 1;
     }
+
     return results;
   }
-
   /**
    * Split this Interval into smaller Intervals, each of the specified length.
    * Left over time is grouped into a smaller interval
    * @param {Duration|Object|number} duration - The length of each resulting interval.
    * @return {Array}
    */
+
+
   splitBy(duration) {
     const dur = Duration.fromDurationLike(duration);
+
     if (!this.isValid || !dur.isValid || dur.as("milliseconds") === 0) {
       return [];
     }
+
     let s = this.s,
-      idx = 1,
-      next;
+        idx = 1,
+        next;
     const results = [];
+
     while (s < this.e) {
       const added = this.start.plus(dur.mapUnits(x => x * idx));
       next = +added > +this.e ? this.e : added;
@@ -4305,70 +5229,77 @@ class Interval {
       s = next;
       idx += 1;
     }
+
     return results;
   }
-
   /**
    * Split this Interval into the specified number of smaller intervals.
    * @param {number} numberOfParts - The number of Intervals to divide the Interval into.
    * @return {Array}
    */
+
+
   divideEqually(numberOfParts) {
     if (!this.isValid) return [];
     return this.splitBy(this.length() / numberOfParts).slice(0, numberOfParts);
   }
-
   /**
    * Return whether this Interval overlaps with the specified Interval
    * @param {Interval} other
    * @return {boolean}
    */
+
+
   overlaps(other) {
     return this.e > other.s && this.s < other.e;
   }
-
   /**
    * Return whether this Interval's end is adjacent to the specified Interval's start.
    * @param {Interval} other
    * @return {boolean}
    */
+
+
   abutsStart(other) {
     if (!this.isValid) return false;
     return +this.e === +other.s;
   }
-
   /**
    * Return whether this Interval's start is adjacent to the specified Interval's end.
    * @param {Interval} other
    * @return {boolean}
    */
+
+
   abutsEnd(other) {
     if (!this.isValid) return false;
     return +other.e === +this.s;
   }
-
   /**
    * Return whether this Interval engulfs the start and end of the specified Interval.
    * @param {Interval} other
    * @return {boolean}
    */
+
+
   engulfs(other) {
     if (!this.isValid) return false;
     return this.s <= other.s && this.e >= other.e;
   }
-
   /**
    * Return whether this Interval has the same start and end as the specified Interval.
    * @param {Interval} other
    * @return {boolean}
    */
+
+
   equals(other) {
     if (!this.isValid || !other.isValid) {
       return false;
     }
+
     return this.s.equals(other.s) && this.e.equals(other.e);
   }
-
   /**
    * Return an Interval representing the intersection of this Interval and the specified Interval.
    * Specifically, the resulting Interval has the maximum start time and the minimum end time of the two Intervals.
@@ -4376,88 +5307,101 @@ class Interval {
    * @param {Interval} other
    * @return {Interval}
    */
+
+
   intersection(other) {
     if (!this.isValid) return this;
     const s = this.s > other.s ? this.s : other.s,
-      e = this.e < other.e ? this.e : other.e;
+          e = this.e < other.e ? this.e : other.e;
+
     if (s >= e) {
       return null;
     } else {
       return Interval.fromDateTimes(s, e);
     }
   }
-
   /**
    * Return an Interval representing the union of this Interval and the specified Interval.
    * Specifically, the resulting Interval has the minimum start time and the maximum end time of the two Intervals.
    * @param {Interval} other
    * @return {Interval}
    */
+
+
   union(other) {
     if (!this.isValid) return this;
     const s = this.s < other.s ? this.s : other.s,
-      e = this.e > other.e ? this.e : other.e;
+          e = this.e > other.e ? this.e : other.e;
     return Interval.fromDateTimes(s, e);
   }
-
   /**
    * Merge an array of Intervals into a equivalent minimal set of Intervals.
    * Combines overlapping and adjacent Intervals.
    * @param {Array} intervals
    * @return {Array}
    */
+
+
   static merge(intervals) {
     const _intervals$sort$reduc = intervals.sort((a, b) => a.s - b.s).reduce((_ref2, item) => {
-        let _ref3 = interval_slicedToArray(_ref2, 2),
+      let _ref3 = interval_slicedToArray(_ref2, 2),
           sofar = _ref3[0],
           current = _ref3[1];
-        if (!current) {
-          return [sofar, item];
-        } else if (current.overlaps(item) || current.abutsStart(item)) {
-          return [sofar, current.union(item)];
-        } else {
-          return [sofar.concat([current]), item];
-        }
-      }, [[], null]),
-      _intervals$sort$reduc2 = interval_slicedToArray(_intervals$sort$reduc, 2),
-      found = _intervals$sort$reduc2[0],
-      final = _intervals$sort$reduc2[1];
+
+      if (!current) {
+        return [sofar, item];
+      } else if (current.overlaps(item) || current.abutsStart(item)) {
+        return [sofar, current.union(item)];
+      } else {
+        return [sofar.concat([current]), item];
+      }
+    }, [[], null]),
+          _intervals$sort$reduc2 = interval_slicedToArray(_intervals$sort$reduc, 2),
+          found = _intervals$sort$reduc2[0],
+          final = _intervals$sort$reduc2[1];
+
     if (final) {
       found.push(final);
     }
+
     return found;
   }
-
   /**
    * Return an array of Intervals representing the spans of time that only appear in one of the specified Intervals.
    * @param {Array} intervals
    * @return {Array}
    */
+
+
   static xor(intervals) {
     let start = null,
-      currentCount = 0;
+        currentCount = 0;
     const results = [],
-      ends = intervals.map(i => [{
-        time: i.s,
-        type: "s"
-      }, {
-        time: i.e,
-        type: "e"
-      }]),
-      flattened = Array.prototype.concat(...ends),
-      arr = flattened.sort((a, b) => a.time - b.time);
+          ends = intervals.map(i => [{
+      time: i.s,
+      type: "s"
+    }, {
+      time: i.e,
+      type: "e"
+    }]),
+          flattened = Array.prototype.concat(...ends),
+          arr = flattened.sort((a, b) => a.time - b.time);
+
     var _iterator = interval_createForOfIteratorHelper(arr),
-      _step;
+        _step;
+
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         const i = _step.value;
         currentCount += i.type === "s" ? 1 : -1;
+
         if (currentCount === 1) {
           start = i.time;
         } else {
           if (start && +start !== +i.time) {
             results.push(Interval.fromDateTimes(start, i.time));
           }
+
           start = null;
         }
       }
@@ -4466,30 +5410,33 @@ class Interval {
     } finally {
       _iterator.f();
     }
+
     return Interval.merge(results);
   }
-
   /**
    * Return an Interval representing the span of time in this Interval that doesn't overlap with any of the specified Intervals.
    * @param {...Interval} intervals
    * @return {Array}
    */
+
+
   difference() {
     for (var _len2 = arguments.length, intervals = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       intervals[_key2] = arguments[_key2];
     }
+
     return Interval.xor([this].concat(intervals)).map(i => this.intersection(i)).filter(i => i && !i.isEmpty());
   }
-
   /**
    * Returns a string representation of this Interval appropriate for debugging.
    * @return {string}
    */
+
+
   toString() {
     if (!this.isValid) return interval_INVALID;
     return `[${this.s.toISO()} – ${this.e.toISO()})`;
   }
-
   /**
    * Returns a localized string representing this Interval. Accepts the same options as the
    * Intl.DateTimeFormat constructor and any presets defined by Luxon, such as
@@ -4508,34 +5455,37 @@ class Interval {
    * @example Interval.fromISO('2022-11-07T17:00Z/2022-11-07T19:00Z').toLocaleString({ weekday: 'short', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' }); //=> Mon, Nov 07, 6:00 – 8:00 p
    * @return {string}
    */
+
+
   toLocaleString() {
     let formatOpts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DATE_SHORT;
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return this.isValid ? Formatter.create(this.s.loc.clone(opts), formatOpts).formatInterval(this) : interval_INVALID;
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this Interval.
    * @see https://en.wikipedia.org/wiki/ISO_8601#Time_intervals
    * @param {Object} opts - The same options as {@link DateTime#toISO}
    * @return {string}
    */
+
+
   toISO(opts) {
     if (!this.isValid) return interval_INVALID;
     return `${this.s.toISO(opts)}/${this.e.toISO(opts)}`;
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of date of this Interval.
    * The time components are ignored.
    * @see https://en.wikipedia.org/wiki/ISO_8601#Time_intervals
    * @return {string}
    */
+
+
   toISODate() {
     if (!this.isValid) return interval_INVALID;
     return `${this.s.toISODate()}/${this.e.toISODate()}`;
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of time of this Interval.
    * The date components are ignored.
@@ -4543,11 +5493,12 @@ class Interval {
    * @param {Object} opts - The same options as {@link DateTime#toISO}
    * @return {string}
    */
+
+
   toISOTime(opts) {
     if (!this.isValid) return interval_INVALID;
     return `${this.s.toISOTime(opts)}/${this.e.toISOTime(opts)}`;
   }
-
   /**
    * Returns a string representation of this Interval formatted according to the specified format
    * string. **You may not want this.** See {@link Interval#toLocaleString} for a more flexible
@@ -4559,14 +5510,16 @@ class Interval {
    * representations.
    * @return {string}
    */
+
+
   toFormat(dateFormat) {
     let _ref4 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref4$separator = _ref4.separator,
-      separator = _ref4$separator === void 0 ? " – " : _ref4$separator;
+        _ref4$separator = _ref4.separator,
+        separator = _ref4$separator === void 0 ? " – " : _ref4$separator;
+
     if (!this.isValid) return interval_INVALID;
     return `${this.s.toFormat(dateFormat)}${separator}${this.e.toFormat(dateFormat)}`;
   }
-
   /**
    * Return a Duration representing the time spanned by this interval.
    * @param {string|string[]} [unit=['milliseconds']] - the unit or units (such as 'hours' or 'days') to include in the duration.
@@ -4579,13 +5532,15 @@ class Interval {
    * @example Interval.fromDateTimes(dt1, dt2).toDuration('seconds').toObject() //=> { seconds: 88489.257 }
    * @return {Duration}
    */
+
+
   toDuration(unit, opts) {
     if (!this.isValid) {
       return Duration.invalid(this.invalidReason);
     }
+
     return this.e.diff(this.s, unit, opts);
   }
-
   /**
    * Run mapFn on the interval start and end, returning a new Interval from the resulting DateTimes
    * @param {function} mapFn
@@ -4593,12 +5548,14 @@ class Interval {
    * @example Interval.fromDateTimes(dt1, dt2).mapEndpoints(endpoint => endpoint.toUTC())
    * @example Interval.fromDateTimes(dt1, dt2).mapEndpoints(endpoint => endpoint.plus({ hours: 2 }))
    */
+
+
   mapEndpoints(mapFn) {
     return Interval.fromDateTimes(mapFn(this.s), mapFn(this.e));
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/info.js
-
 
 
 
@@ -4608,6 +5565,7 @@ class Interval {
 /**
  * The Info class contains static methods for retrieving general time and date related data. For example, it has methods for finding out if a time zone has a DST, for listing the months in any supported locale, and for discovering which of Luxon features are available in the current environment.
  */
+
 class Info {
   /**
    * Return whether the specified zone contains a DST.
@@ -4623,16 +5581,16 @@ class Info {
       month: 6
     }).offset;
   }
-
   /**
    * Return whether the specified zone is a valid IANA specifier.
    * @param {string} zone - Zone to check
    * @return {boolean}
    */
+
+
   static isValidIANAZone(zone) {
     return IANAZone.isValidZone(zone);
   }
-
   /**
    * Converts the input into a {@link Zone} instance.
    *
@@ -4647,10 +5605,11 @@ class Info {
    * @param {string|Zone|number} [input] - the value to be converted
    * @return {Zone}
    */
+
+
   static normalizeZone(input) {
     return normalizeZone(input, Settings.defaultZone);
   }
-
   /**
    * Return an array of standalone month names.
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
@@ -4668,20 +5627,23 @@ class Info {
    * @example Info.months('long', { outputCalendar: 'islamic' })[0] //=> 'Rabiʻ I'
    * @return {Array}
    */
+
+
   static months() {
     let length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "long";
+
     let _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$locale = _ref.locale,
-      locale = _ref$locale === void 0 ? null : _ref$locale,
-      _ref$numberingSystem = _ref.numberingSystem,
-      numberingSystem = _ref$numberingSystem === void 0 ? null : _ref$numberingSystem,
-      _ref$locObj = _ref.locObj,
-      locObj = _ref$locObj === void 0 ? null : _ref$locObj,
-      _ref$outputCalendar = _ref.outputCalendar,
-      outputCalendar = _ref$outputCalendar === void 0 ? "gregory" : _ref$outputCalendar;
+        _ref$locale = _ref.locale,
+        locale = _ref$locale === void 0 ? null : _ref$locale,
+        _ref$numberingSystem = _ref.numberingSystem,
+        numberingSystem = _ref$numberingSystem === void 0 ? null : _ref$numberingSystem,
+        _ref$locObj = _ref.locObj,
+        locObj = _ref$locObj === void 0 ? null : _ref$locObj,
+        _ref$outputCalendar = _ref.outputCalendar,
+        outputCalendar = _ref$outputCalendar === void 0 ? "gregory" : _ref$outputCalendar;
+
     return (locObj || Locale.create(locale, numberingSystem, outputCalendar)).months(length);
   }
-
   /**
    * Return an array of format month names.
    * Format months differ from standalone months in that they're meant to appear next to the day of the month. In some languages, that
@@ -4695,20 +5657,23 @@ class Info {
    * @param {string} [opts.outputCalendar='gregory'] - the calendar
    * @return {Array}
    */
+
+
   static monthsFormat() {
     let length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "long";
+
     let _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref2$locale = _ref2.locale,
-      locale = _ref2$locale === void 0 ? null : _ref2$locale,
-      _ref2$numberingSystem = _ref2.numberingSystem,
-      numberingSystem = _ref2$numberingSystem === void 0 ? null : _ref2$numberingSystem,
-      _ref2$locObj = _ref2.locObj,
-      locObj = _ref2$locObj === void 0 ? null : _ref2$locObj,
-      _ref2$outputCalendar = _ref2.outputCalendar,
-      outputCalendar = _ref2$outputCalendar === void 0 ? "gregory" : _ref2$outputCalendar;
+        _ref2$locale = _ref2.locale,
+        locale = _ref2$locale === void 0 ? null : _ref2$locale,
+        _ref2$numberingSystem = _ref2.numberingSystem,
+        numberingSystem = _ref2$numberingSystem === void 0 ? null : _ref2$numberingSystem,
+        _ref2$locObj = _ref2.locObj,
+        locObj = _ref2$locObj === void 0 ? null : _ref2$locObj,
+        _ref2$outputCalendar = _ref2.outputCalendar,
+        outputCalendar = _ref2$outputCalendar === void 0 ? "gregory" : _ref2$outputCalendar;
+
     return (locObj || Locale.create(locale, numberingSystem, outputCalendar)).months(length, true);
   }
-
   /**
    * Return an array of standalone week names.
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
@@ -4723,18 +5688,21 @@ class Info {
    * @example Info.weekdays('short', { locale: 'ar' })[0] //=> 'الاثنين'
    * @return {Array}
    */
+
+
   static weekdays() {
     let length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "long";
+
     let _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref3$locale = _ref3.locale,
-      locale = _ref3$locale === void 0 ? null : _ref3$locale,
-      _ref3$numberingSystem = _ref3.numberingSystem,
-      numberingSystem = _ref3$numberingSystem === void 0 ? null : _ref3$numberingSystem,
-      _ref3$locObj = _ref3.locObj,
-      locObj = _ref3$locObj === void 0 ? null : _ref3$locObj;
+        _ref3$locale = _ref3.locale,
+        locale = _ref3$locale === void 0 ? null : _ref3$locale,
+        _ref3$numberingSystem = _ref3.numberingSystem,
+        numberingSystem = _ref3$numberingSystem === void 0 ? null : _ref3$numberingSystem,
+        _ref3$locObj = _ref3.locObj,
+        locObj = _ref3$locObj === void 0 ? null : _ref3$locObj;
+
     return (locObj || Locale.create(locale, numberingSystem, null)).weekdays(length);
   }
-
   /**
    * Return an array of format week names.
    * Format weekdays differ from standalone weekdays in that they're meant to appear next to more date information. In some languages, that
@@ -4747,18 +5715,21 @@ class Info {
    * @param {string} [opts.locObj=null] - an existing locale object to use
    * @return {Array}
    */
+
+
   static weekdaysFormat() {
     let length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "long";
+
     let _ref4 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref4$locale = _ref4.locale,
-      locale = _ref4$locale === void 0 ? null : _ref4$locale,
-      _ref4$numberingSystem = _ref4.numberingSystem,
-      numberingSystem = _ref4$numberingSystem === void 0 ? null : _ref4$numberingSystem,
-      _ref4$locObj = _ref4.locObj,
-      locObj = _ref4$locObj === void 0 ? null : _ref4$locObj;
+        _ref4$locale = _ref4.locale,
+        locale = _ref4$locale === void 0 ? null : _ref4$locale,
+        _ref4$numberingSystem = _ref4.numberingSystem,
+        numberingSystem = _ref4$numberingSystem === void 0 ? null : _ref4$numberingSystem,
+        _ref4$locObj = _ref4.locObj,
+        locObj = _ref4$locObj === void 0 ? null : _ref4$locObj;
+
     return (locObj || Locale.create(locale, numberingSystem, null)).weekdays(length, true);
   }
-
   /**
    * Return an array of meridiems.
    * @param {Object} opts - options
@@ -4767,13 +5738,15 @@ class Info {
    * @example Info.meridiems({ locale: 'my' }) //=> [ 'နံနက်', 'ညနေ' ]
    * @return {Array}
    */
+
+
   static meridiems() {
     let _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref5$locale = _ref5.locale,
-      locale = _ref5$locale === void 0 ? null : _ref5$locale;
+        _ref5$locale = _ref5.locale,
+        locale = _ref5$locale === void 0 ? null : _ref5$locale;
+
     return Locale.create(locale).meridiems();
   }
-
   /**
    * Return an array of eras, such as ['BC', 'AD']. The locale can be specified, but the calendar system is always Gregorian.
    * @param {string} [length='short'] - the length of the era representation, such as "short" or "long".
@@ -4784,14 +5757,17 @@ class Info {
    * @example Info.eras('long', { locale: 'fr' }) //=> [ 'avant Jésus-Christ', 'après Jésus-Christ' ]
    * @return {Array}
    */
+
+
   static eras() {
     let length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "short";
+
     let _ref6 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref6$locale = _ref6.locale,
-      locale = _ref6$locale === void 0 ? null : _ref6$locale;
+        _ref6$locale = _ref6.locale,
+        locale = _ref6$locale === void 0 ? null : _ref6$locale;
+
     return Locale.create(locale, null, "gregory").eras(length);
   }
-
   /**
    * Return the set of available features in this environment.
    * Some features of Luxon are not available in all environments. For example, on older browsers, relative time formatting support is not available. Use this function to figure out if that's the case.
@@ -4800,27 +5776,39 @@ class Info {
    * @example Info.features() //=> { relative: false }
    * @return {Object}
    */
+
+
   static features() {
     return {
       relative: hasRelative()
     };
   }
+
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/diff.js
 function diff_slicedToArray(arr, i) { return diff_arrayWithHoles(arr) || diff_iterableToArrayLimit(arr, i) || diff_unsupportedIterableToArray(arr, i) || diff_nonIterableRest(); }
+
 function diff_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function diff_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return diff_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return diff_arrayLikeToArray(o, minLen); }
+
 function diff_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function diff_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function diff_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function diff_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 function dayDiff(earlier, later) {
   const utcDayStart = dt => dt.toUTC(0, {
-      keepLocalTime: true
-    }).startOf("day").valueOf(),
-    ms = utcDayStart(later) - utcDayStart(earlier);
+    keepLocalTime: true
+  }).startOf("day").valueOf(),
+        ms = utcDayStart(later) - utcDayStart(earlier);
+
   return Math.floor(Duration.fromMillis(ms).as("days"));
 }
+
 function highOrderDiffs(cursor, later, units) {
   const differs = [["years", (a, b) => b.year - a.year], ["quarters", (a, b) => b.quarter - a.quarter + (b.year - a.year) * 4], ["months", (a, b) => b.month - a.month + (b.year - a.year) * 12], ["weeks", (a, b) => {
     const days = dayDiff(a, b);
@@ -4829,14 +5817,17 @@ function highOrderDiffs(cursor, later, units) {
   const results = {};
   const earlier = cursor;
   let lowestOrder, highWater;
+
   for (var _i = 0, _differs = differs; _i < _differs.length; _i++) {
     const _differs$_i = diff_slicedToArray(_differs[_i], 2),
-      unit = _differs$_i[0],
-      differ = _differs$_i[1];
+          unit = _differs$_i[0],
+          differ = _differs$_i[1];
+
     if (units.indexOf(unit) >= 0) {
       lowestOrder = unit;
       results[unit] = differ(cursor, later);
       highWater = earlier.plus(results);
+
       if (highWater > later) {
         results[unit]--;
         cursor = earlier.plus(results);
@@ -4845,28 +5836,35 @@ function highOrderDiffs(cursor, later, units) {
       }
     }
   }
+
   return [cursor, results, highWater, lowestOrder];
 }
+
 /* harmony default export */ function diff(earlier, later, units, opts) {
   let _highOrderDiffs = highOrderDiffs(earlier, later, units),
-    _highOrderDiffs2 = diff_slicedToArray(_highOrderDiffs, 4),
-    cursor = _highOrderDiffs2[0],
-    results = _highOrderDiffs2[1],
-    highWater = _highOrderDiffs2[2],
-    lowestOrder = _highOrderDiffs2[3];
+      _highOrderDiffs2 = diff_slicedToArray(_highOrderDiffs, 4),
+      cursor = _highOrderDiffs2[0],
+      results = _highOrderDiffs2[1],
+      highWater = _highOrderDiffs2[2],
+      lowestOrder = _highOrderDiffs2[3];
+
   const remainingMillis = later - cursor;
   const lowerOrderUnits = units.filter(u => ["hours", "minutes", "seconds", "milliseconds"].indexOf(u) >= 0);
+
   if (lowerOrderUnits.length === 0) {
     if (highWater < later) {
       highWater = cursor.plus({
         [lowestOrder]: 1
       });
     }
+
     if (highWater !== cursor) {
       results[lowestOrder] = (results[lowestOrder] || 0) + remainingMillis / (highWater - cursor);
     }
   }
+
   const duration = Duration.fromObject(results, opts);
+
   if (lowerOrderUnits.length > 0) {
     return Duration.fromMillis(remainingMillis, opts).shiftTo(...lowerOrderUnits).plus(duration);
   } else {
@@ -4875,11 +5873,17 @@ function highOrderDiffs(cursor, later, units) {
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/digits.js
 function digits_slicedToArray(arr, i) { return digits_arrayWithHoles(arr) || digits_iterableToArrayLimit(arr, i) || digits_unsupportedIterableToArray(arr, i) || digits_nonIterableRest(); }
+
 function digits_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function digits_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return digits_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return digits_arrayLikeToArray(o, minLen); }
+
 function digits_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function digits_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function digits_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function digits_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 const numberingSystems = {
   arab: "[\u0660-\u0669]",
   arabext: "[\u06F0-\u06F9]",
@@ -4927,23 +5931,28 @@ const numberingSystemsUTF16 = {
 const hanidecChars = numberingSystems.hanidec.replace(/[\[|\]]/g, "").split("");
 function parseDigits(str) {
   let value = parseInt(str, 10);
+
   if (isNaN(value)) {
     value = "";
+
     for (let i = 0; i < str.length; i++) {
       const code = str.charCodeAt(i);
+
       if (str[i].search(numberingSystems.hanidec) !== -1) {
         value += hanidecChars.indexOf(str[i]);
       } else {
         for (const key in numberingSystemsUTF16) {
           const _numberingSystemsUTF = digits_slicedToArray(numberingSystemsUTF16[key], 2),
-            min = _numberingSystemsUTF[0],
-            max = _numberingSystemsUTF[1];
+                min = _numberingSystemsUTF[0],
+                max = _numberingSystemsUTF[1];
+
           if (code >= min && code <= max) {
             value += code - min;
           }
         }
       }
     }
+
     return parseInt(value, 10);
   } else {
     return value;
@@ -4956,10 +5965,15 @@ function digitRegex(_ref) {
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/tokenParser.js
 function tokenParser_slicedToArray(arr, i) { return tokenParser_arrayWithHoles(arr) || tokenParser_iterableToArrayLimit(arr, i) || tokenParser_unsupportedIterableToArray(arr, i) || tokenParser_nonIterableRest(); }
+
 function tokenParser_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function tokenParser_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return tokenParser_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return tokenParser_arrayLikeToArray(o, minLen); }
+
 function tokenParser_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function tokenParser_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function tokenParser_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function tokenParser_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
@@ -4968,31 +5982,38 @@ function tokenParser_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 const MISSING_FTP = "missing Intl.DateTimeFormat.formatToParts support";
+
 function intUnit(regex) {
   let post = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : i => i;
   return {
     regex,
     deser: _ref => {
       let _ref2 = tokenParser_slicedToArray(_ref, 1),
-        s = _ref2[0];
+          s = _ref2[0];
+
       return post(parseDigits(s));
     }
   };
 }
+
 const NBSP = String.fromCharCode(160);
 const spaceOrNBSP = `[ ${NBSP}]`;
 const spaceOrNBSPRegExp = new RegExp(spaceOrNBSP, "g");
+
 function fixListRegex(s) {
   // make dots optional and also make them literal
   // make space and non breakable space characters interchangeable
   return s.replace(/\./g, "\\.?").replace(spaceOrNBSPRegExp, spaceOrNBSP);
 }
+
 function stripInsensitivities(s) {
   return s.replace(/\./g, "") // ignore dots that were made optional
   .replace(spaceOrNBSPRegExp, " ") // interchange space and nbsp
   .toLowerCase();
 }
+
 function oneOf(strings, startIndex) {
   if (strings === null) {
     return null;
@@ -5001,182 +6022,240 @@ function oneOf(strings, startIndex) {
       regex: RegExp(strings.map(fixListRegex).join("|")),
       deser: _ref3 => {
         let _ref4 = tokenParser_slicedToArray(_ref3, 1),
-          s = _ref4[0];
+            s = _ref4[0];
+
         return strings.findIndex(i => stripInsensitivities(s) === stripInsensitivities(i)) + startIndex;
       }
     };
   }
 }
+
 function offset(regex, groups) {
   return {
     regex,
     deser: _ref5 => {
       let _ref6 = tokenParser_slicedToArray(_ref5, 3),
-        h = _ref6[1],
-        m = _ref6[2];
+          h = _ref6[1],
+          m = _ref6[2];
+
       return signedOffset(h, m);
     },
     groups
   };
 }
+
 function simple(regex) {
   return {
     regex,
     deser: _ref7 => {
       let _ref8 = tokenParser_slicedToArray(_ref7, 1),
-        s = _ref8[0];
+          s = _ref8[0];
+
       return s;
     }
   };
 }
+
 function escapeToken(value) {
   return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 }
+
 function unitForToken(token, loc) {
   const one = digitRegex(loc),
-    two = digitRegex(loc, "{2}"),
-    three = digitRegex(loc, "{3}"),
-    four = digitRegex(loc, "{4}"),
-    six = digitRegex(loc, "{6}"),
-    oneOrTwo = digitRegex(loc, "{1,2}"),
-    oneToThree = digitRegex(loc, "{1,3}"),
-    oneToSix = digitRegex(loc, "{1,6}"),
-    oneToNine = digitRegex(loc, "{1,9}"),
-    twoToFour = digitRegex(loc, "{2,4}"),
-    fourToSix = digitRegex(loc, "{4,6}"),
-    literal = t => ({
-      regex: RegExp(escapeToken(t.val)),
-      deser: _ref9 => {
-        let _ref10 = tokenParser_slicedToArray(_ref9, 1),
+        two = digitRegex(loc, "{2}"),
+        three = digitRegex(loc, "{3}"),
+        four = digitRegex(loc, "{4}"),
+        six = digitRegex(loc, "{6}"),
+        oneOrTwo = digitRegex(loc, "{1,2}"),
+        oneToThree = digitRegex(loc, "{1,3}"),
+        oneToSix = digitRegex(loc, "{1,6}"),
+        oneToNine = digitRegex(loc, "{1,9}"),
+        twoToFour = digitRegex(loc, "{2,4}"),
+        fourToSix = digitRegex(loc, "{4,6}"),
+        literal = t => ({
+    regex: RegExp(escapeToken(t.val)),
+    deser: _ref9 => {
+      let _ref10 = tokenParser_slicedToArray(_ref9, 1),
           s = _ref10[0];
-        return s;
-      },
-      literal: true
-    }),
-    unitate = t => {
-      if (token.literal) {
+
+      return s;
+    },
+    literal: true
+  }),
+        unitate = t => {
+    if (token.literal) {
+      return literal(t);
+    }
+
+    switch (t.val) {
+      // era
+      case "G":
+        return oneOf(loc.eras("short", false), 0);
+
+      case "GG":
+        return oneOf(loc.eras("long", false), 0);
+      // years
+
+      case "y":
+        return intUnit(oneToSix);
+
+      case "yy":
+        return intUnit(twoToFour, untruncateYear);
+
+      case "yyyy":
+        return intUnit(four);
+
+      case "yyyyy":
+        return intUnit(fourToSix);
+
+      case "yyyyyy":
+        return intUnit(six);
+      // months
+
+      case "M":
+        return intUnit(oneOrTwo);
+
+      case "MM":
+        return intUnit(two);
+
+      case "MMM":
+        return oneOf(loc.months("short", true, false), 1);
+
+      case "MMMM":
+        return oneOf(loc.months("long", true, false), 1);
+
+      case "L":
+        return intUnit(oneOrTwo);
+
+      case "LL":
+        return intUnit(two);
+
+      case "LLL":
+        return oneOf(loc.months("short", false, false), 1);
+
+      case "LLLL":
+        return oneOf(loc.months("long", false, false), 1);
+      // dates
+
+      case "d":
+        return intUnit(oneOrTwo);
+
+      case "dd":
+        return intUnit(two);
+      // ordinals
+
+      case "o":
+        return intUnit(oneToThree);
+
+      case "ooo":
+        return intUnit(three);
+      // time
+
+      case "HH":
+        return intUnit(two);
+
+      case "H":
+        return intUnit(oneOrTwo);
+
+      case "hh":
+        return intUnit(two);
+
+      case "h":
+        return intUnit(oneOrTwo);
+
+      case "mm":
+        return intUnit(two);
+
+      case "m":
+        return intUnit(oneOrTwo);
+
+      case "q":
+        return intUnit(oneOrTwo);
+
+      case "qq":
+        return intUnit(two);
+
+      case "s":
+        return intUnit(oneOrTwo);
+
+      case "ss":
+        return intUnit(two);
+
+      case "S":
+        return intUnit(oneToThree);
+
+      case "SSS":
+        return intUnit(three);
+
+      case "u":
+        return simple(oneToNine);
+
+      case "uu":
+        return simple(oneOrTwo);
+
+      case "uuu":
+        return intUnit(one);
+      // meridiem
+
+      case "a":
+        return oneOf(loc.meridiems(), 0);
+      // weekYear (k)
+
+      case "kkkk":
+        return intUnit(four);
+
+      case "kk":
+        return intUnit(twoToFour, untruncateYear);
+      // weekNumber (W)
+
+      case "W":
+        return intUnit(oneOrTwo);
+
+      case "WW":
+        return intUnit(two);
+      // weekdays
+
+      case "E":
+      case "c":
+        return intUnit(one);
+
+      case "EEE":
+        return oneOf(loc.weekdays("short", false, false), 1);
+
+      case "EEEE":
+        return oneOf(loc.weekdays("long", false, false), 1);
+
+      case "ccc":
+        return oneOf(loc.weekdays("short", true, false), 1);
+
+      case "cccc":
+        return oneOf(loc.weekdays("long", true, false), 1);
+      // offset/zone
+
+      case "Z":
+      case "ZZ":
+        return offset(new RegExp(`([+-]${oneOrTwo.source})(?::(${two.source}))?`), 2);
+
+      case "ZZZ":
+        return offset(new RegExp(`([+-]${oneOrTwo.source})(${two.source})?`), 2);
+      // we don't support ZZZZ (PST) or ZZZZZ (Pacific Standard Time) in parsing
+      // because we don't have any way to figure out what they are
+
+      case "z":
+        return simple(/[a-z_+-/]{1,256}?/i);
+
+      default:
         return literal(t);
-      }
-      switch (t.val) {
-        // era
-        case "G":
-          return oneOf(loc.eras("short", false), 0);
-        case "GG":
-          return oneOf(loc.eras("long", false), 0);
-        // years
-        case "y":
-          return intUnit(oneToSix);
-        case "yy":
-          return intUnit(twoToFour, untruncateYear);
-        case "yyyy":
-          return intUnit(four);
-        case "yyyyy":
-          return intUnit(fourToSix);
-        case "yyyyyy":
-          return intUnit(six);
-        // months
-        case "M":
-          return intUnit(oneOrTwo);
-        case "MM":
-          return intUnit(two);
-        case "MMM":
-          return oneOf(loc.months("short", true, false), 1);
-        case "MMMM":
-          return oneOf(loc.months("long", true, false), 1);
-        case "L":
-          return intUnit(oneOrTwo);
-        case "LL":
-          return intUnit(two);
-        case "LLL":
-          return oneOf(loc.months("short", false, false), 1);
-        case "LLLL":
-          return oneOf(loc.months("long", false, false), 1);
-        // dates
-        case "d":
-          return intUnit(oneOrTwo);
-        case "dd":
-          return intUnit(two);
-        // ordinals
-        case "o":
-          return intUnit(oneToThree);
-        case "ooo":
-          return intUnit(three);
-        // time
-        case "HH":
-          return intUnit(two);
-        case "H":
-          return intUnit(oneOrTwo);
-        case "hh":
-          return intUnit(two);
-        case "h":
-          return intUnit(oneOrTwo);
-        case "mm":
-          return intUnit(two);
-        case "m":
-          return intUnit(oneOrTwo);
-        case "q":
-          return intUnit(oneOrTwo);
-        case "qq":
-          return intUnit(two);
-        case "s":
-          return intUnit(oneOrTwo);
-        case "ss":
-          return intUnit(two);
-        case "S":
-          return intUnit(oneToThree);
-        case "SSS":
-          return intUnit(three);
-        case "u":
-          return simple(oneToNine);
-        case "uu":
-          return simple(oneOrTwo);
-        case "uuu":
-          return intUnit(one);
-        // meridiem
-        case "a":
-          return oneOf(loc.meridiems(), 0);
-        // weekYear (k)
-        case "kkkk":
-          return intUnit(four);
-        case "kk":
-          return intUnit(twoToFour, untruncateYear);
-        // weekNumber (W)
-        case "W":
-          return intUnit(oneOrTwo);
-        case "WW":
-          return intUnit(two);
-        // weekdays
-        case "E":
-        case "c":
-          return intUnit(one);
-        case "EEE":
-          return oneOf(loc.weekdays("short", false, false), 1);
-        case "EEEE":
-          return oneOf(loc.weekdays("long", false, false), 1);
-        case "ccc":
-          return oneOf(loc.weekdays("short", true, false), 1);
-        case "cccc":
-          return oneOf(loc.weekdays("long", true, false), 1);
-        // offset/zone
-        case "Z":
-        case "ZZ":
-          return offset(new RegExp(`([+-]${oneOrTwo.source})(?::(${two.source}))?`), 2);
-        case "ZZZ":
-          return offset(new RegExp(`([+-]${oneOrTwo.source})(${two.source})?`), 2);
-        // we don't support ZZZZ (PST) or ZZZZZ (Pacific Standard Time) in parsing
-        // because we don't have any way to figure out what they are
-        case "z":
-          return simple(/[a-z_+-/]{1,256}?/i);
-        default:
-          return literal(t);
-      }
-    };
+    }
+  };
+
   const unit = unitate(token) || {
     invalidReason: MISSING_FTP
   };
   unit.token = token;
   return unit;
 }
+
 const partTypeStyleToTokenVal = {
   year: {
     "2-digit": "yy",
@@ -5215,100 +6294,132 @@ const partTypeStyleToTokenVal = {
     short: "ZZZ"
   }
 };
+
 function tokenForPart(part, formatOpts) {
   const type = part.type,
-    value = part.value;
+        value = part.value;
+
   if (type === "literal") {
     return {
       literal: true,
       val: value
     };
   }
+
   const style = formatOpts[type];
   let val = partTypeStyleToTokenVal[type];
+
   if (typeof val === "object") {
     val = val[style];
   }
+
   if (val) {
     return {
       literal: false,
       val
     };
   }
+
   return undefined;
 }
+
 function buildRegex(units) {
   const re = units.map(u => u.regex).reduce((f, r) => `${f}(${r.source})`, "");
   return [`^${re}$`, units];
 }
+
 function match(input, regex, handlers) {
   const matches = input.match(regex);
+
   if (matches) {
     const all = {};
     let matchIndex = 1;
+
     for (const i in handlers) {
       if (util_hasOwnProperty(handlers, i)) {
         const h = handlers[i],
-          groups = h.groups ? h.groups + 1 : 1;
+              groups = h.groups ? h.groups + 1 : 1;
+
         if (!h.literal && h.token) {
           all[h.token.val[0]] = h.deser(matches.slice(matchIndex, matchIndex + groups));
         }
+
         matchIndex += groups;
       }
     }
+
     return [matches, all];
   } else {
     return [matches, {}];
   }
 }
+
 function dateTimeFromMatches(matches) {
   const toField = token => {
     switch (token) {
       case "S":
         return "millisecond";
+
       case "s":
         return "second";
+
       case "m":
         return "minute";
+
       case "h":
       case "H":
         return "hour";
+
       case "d":
         return "day";
+
       case "o":
         return "ordinal";
+
       case "L":
       case "M":
         return "month";
+
       case "y":
         return "year";
+
       case "E":
       case "c":
         return "weekday";
+
       case "W":
         return "weekNumber";
+
       case "k":
         return "weekYear";
+
       case "q":
         return "quarter";
+
       default:
         return null;
     }
   };
+
   let zone = null;
   let specificOffset;
+
   if (!isUndefined(matches.z)) {
     zone = IANAZone.create(matches.z);
   }
+
   if (!isUndefined(matches.Z)) {
     if (!zone) {
       zone = new FixedOffsetZone(matches.Z);
     }
+
     specificOffset = matches.Z;
   }
+
   if (!isUndefined(matches.q)) {
     matches.M = (matches.q - 1) * 3 + 1;
   }
+
   if (!isUndefined(matches.h)) {
     if (matches.h < 12 && matches.a === 1) {
       matches.h += 12;
@@ -5316,51 +6427,64 @@ function dateTimeFromMatches(matches) {
       matches.h = 0;
     }
   }
+
   if (matches.G === 0 && matches.y) {
     matches.y = -matches.y;
   }
+
   if (!isUndefined(matches.u)) {
     matches.S = parseMillis(matches.u);
   }
+
   const vals = Object.keys(matches).reduce((r, k) => {
     const f = toField(k);
+
     if (f) {
       r[f] = matches[k];
     }
+
     return r;
   }, {});
   return [vals, zone, specificOffset];
 }
+
 let dummyDateTimeCache = null;
+
 function getDummyDateTime() {
   if (!dummyDateTimeCache) {
     dummyDateTimeCache = DateTime.fromMillis(1555555555555);
   }
+
   return dummyDateTimeCache;
 }
+
 function maybeExpandMacroToken(token, locale) {
   if (token.literal) {
     return token;
   }
+
   const formatOpts = Formatter.macroTokenToFormatOpts(token.val);
   const tokens = formatOptsToTokens(formatOpts, locale);
+
   if (tokens == null || tokens.includes(undefined)) {
     return token;
   }
+
   return tokens;
 }
+
 function expandMacroTokens(tokens, locale) {
   return Array.prototype.concat(...tokens.map(t => maybeExpandMacroToken(t, locale)));
 }
-
 /**
  * @private
  */
 
 function explainFromTokens(locale, input, format) {
   const tokens = expandMacroTokens(Formatter.parseFormat(format), locale),
-    units = tokens.map(t => unitForToken(t, locale)),
-    disqualifyingUnit = units.find(t => t.invalidReason);
+        units = tokens.map(t => unitForToken(t, locale)),
+        disqualifyingUnit = units.find(t => t.invalidReason);
+
   if (disqualifyingUnit) {
     return {
       input,
@@ -5369,22 +6493,24 @@ function explainFromTokens(locale, input, format) {
     };
   } else {
     const _buildRegex = buildRegex(units),
-      _buildRegex2 = tokenParser_slicedToArray(_buildRegex, 2),
-      regexString = _buildRegex2[0],
-      handlers = _buildRegex2[1],
-      regex = RegExp(regexString, "i"),
-      _match = match(input, regex, handlers),
-      _match2 = tokenParser_slicedToArray(_match, 2),
-      rawMatches = _match2[0],
-      matches = _match2[1],
-      _ref11 = matches ? dateTimeFromMatches(matches) : [null, null, undefined],
-      _ref12 = tokenParser_slicedToArray(_ref11, 3),
-      result = _ref12[0],
-      zone = _ref12[1],
-      specificOffset = _ref12[2];
+          _buildRegex2 = tokenParser_slicedToArray(_buildRegex, 2),
+          regexString = _buildRegex2[0],
+          handlers = _buildRegex2[1],
+          regex = RegExp(regexString, "i"),
+          _match = match(input, regex, handlers),
+          _match2 = tokenParser_slicedToArray(_match, 2),
+          rawMatches = _match2[0],
+          matches = _match2[1],
+          _ref11 = matches ? dateTimeFromMatches(matches) : [null, null, undefined],
+          _ref12 = tokenParser_slicedToArray(_ref11, 3),
+          result = _ref12[0],
+          zone = _ref12[1],
+          specificOffset = _ref12[2];
+
     if (util_hasOwnProperty(matches, "a") && util_hasOwnProperty(matches, "H")) {
       throw new ConflictingSpecificationError("Can't include meridiem when specifying 24-hour format");
     }
+
     return {
       input,
       tokens,
@@ -5399,66 +6525,76 @@ function explainFromTokens(locale, input, format) {
 }
 function parseFromTokens(locale, input, format) {
   const _explainFromTokens = explainFromTokens(locale, input, format),
-    result = _explainFromTokens.result,
-    zone = _explainFromTokens.zone,
-    specificOffset = _explainFromTokens.specificOffset,
-    invalidReason = _explainFromTokens.invalidReason;
+        result = _explainFromTokens.result,
+        zone = _explainFromTokens.zone,
+        specificOffset = _explainFromTokens.specificOffset,
+        invalidReason = _explainFromTokens.invalidReason;
+
   return [result, zone, specificOffset, invalidReason];
 }
 function formatOptsToTokens(formatOpts, locale) {
   if (!formatOpts) {
     return null;
   }
+
   const formatter = Formatter.create(locale, formatOpts);
   const parts = formatter.formatDateTimeParts(getDummyDateTime());
   return parts.map(p => tokenForPart(p, formatOpts));
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/impl/conversions.js
 function conversions_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function conversions_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? conversions_ownKeys(Object(source), !0).forEach(function (key) { conversions_defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : conversions_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function conversions_defineProperty(obj, key, value) { key = conversions_toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function conversions_toPropertyKey(arg) { var key = conversions_toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function conversions_toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function conversions_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 const nonLeapLadder = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334],
-  leapLadder = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+      leapLadder = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+
 function unitOutOfRange(unit, value) {
   return new Invalid("unit out of range", `you specified ${value} (of type ${typeof value}) as a ${unit}, which is invalid`);
 }
+
 function dayOfWeek(year, month, day) {
   const d = new Date(Date.UTC(year, month - 1, day));
+
   if (year < 100 && year >= 0) {
     d.setUTCFullYear(d.getUTCFullYear() - 1900);
   }
+
   const js = d.getUTCDay();
   return js === 0 ? 7 : js;
 }
+
 function computeOrdinal(year, month, day) {
   return day + (isLeapYear(year) ? leapLadder : nonLeapLadder)[month - 1];
 }
+
 function uncomputeOrdinal(year, ordinal) {
   const table = isLeapYear(year) ? leapLadder : nonLeapLadder,
-    month0 = table.findIndex(i => i < ordinal),
-    day = ordinal - table[month0];
+        month0 = table.findIndex(i => i < ordinal),
+        day = ordinal - table[month0];
   return {
     month: month0 + 1,
     day
   };
 }
-
 /**
  * @private
  */
 
+
 function gregorianToWeek(gregObj) {
   const year = gregObj.year,
-    month = gregObj.month,
-    day = gregObj.day,
-    ordinal = computeOrdinal(year, month, day),
-    weekday = dayOfWeek(year, month, day);
+        month = gregObj.month,
+        day = gregObj.day,
+        ordinal = computeOrdinal(year, month, day),
+        weekday = dayOfWeek(year, month, day);
   let weekNumber = Math.floor((ordinal - weekday + 10) / 7),
-    weekYear;
+      weekYear;
+
   if (weekNumber < 1) {
     weekYear = year - 1;
     weekNumber = weeksInWeekYear(weekYear);
@@ -5468,6 +6604,7 @@ function gregorianToWeek(gregObj) {
   } else {
     weekYear = year;
   }
+
   return conversions_objectSpread({
     weekYear,
     weekNumber,
@@ -5476,12 +6613,13 @@ function gregorianToWeek(gregObj) {
 }
 function weekToGregorian(weekData) {
   const weekYear = weekData.weekYear,
-    weekNumber = weekData.weekNumber,
-    weekday = weekData.weekday,
-    weekdayOfJan4 = dayOfWeek(weekYear, 1, 4),
-    yearInDays = daysInYear(weekYear);
+        weekNumber = weekData.weekNumber,
+        weekday = weekData.weekday,
+        weekdayOfJan4 = dayOfWeek(weekYear, 1, 4),
+        yearInDays = daysInYear(weekYear);
   let ordinal = weekNumber * 7 + weekday - weekdayOfJan4 - 3,
-    year;
+      year;
+
   if (ordinal < 1) {
     year = weekYear - 1;
     ordinal += daysInYear(year);
@@ -5491,9 +6629,11 @@ function weekToGregorian(weekData) {
   } else {
     year = weekYear;
   }
+
   const _uncomputeOrdinal = uncomputeOrdinal(year, ordinal),
-    month = _uncomputeOrdinal.month,
-    day = _uncomputeOrdinal.day;
+        month = _uncomputeOrdinal.month,
+        day = _uncomputeOrdinal.day;
+
   return conversions_objectSpread({
     year,
     month,
@@ -5502,8 +6642,8 @@ function weekToGregorian(weekData) {
 }
 function gregorianToOrdinal(gregData) {
   const year = gregData.year,
-    month = gregData.month,
-    day = gregData.day;
+        month = gregData.month,
+        day = gregData.day;
   const ordinal = computeOrdinal(year, month, day);
   return conversions_objectSpread({
     year,
@@ -5512,10 +6652,12 @@ function gregorianToOrdinal(gregData) {
 }
 function ordinalToGregorian(ordinalData) {
   const year = ordinalData.year,
-    ordinal = ordinalData.ordinal;
+        ordinal = ordinalData.ordinal;
+
   const _uncomputeOrdinal2 = uncomputeOrdinal(year, ordinal),
-    month = _uncomputeOrdinal2.month,
-    day = _uncomputeOrdinal2.day;
+        month = _uncomputeOrdinal2.month,
+        day = _uncomputeOrdinal2.day;
+
   return conversions_objectSpread({
     year,
     month,
@@ -5524,8 +6666,9 @@ function ordinalToGregorian(ordinalData) {
 }
 function hasInvalidWeekData(obj) {
   const validYear = isInteger(obj.weekYear),
-    validWeek = integerBetween(obj.weekNumber, 1, weeksInWeekYear(obj.weekYear)),
-    validWeekday = integerBetween(obj.weekday, 1, 7);
+        validWeek = integerBetween(obj.weekNumber, 1, weeksInWeekYear(obj.weekYear)),
+        validWeekday = integerBetween(obj.weekday, 1, 7);
+
   if (!validYear) {
     return unitOutOfRange("weekYear", obj.weekYear);
   } else if (!validWeek) {
@@ -5536,7 +6679,8 @@ function hasInvalidWeekData(obj) {
 }
 function hasInvalidOrdinalData(obj) {
   const validYear = isInteger(obj.year),
-    validOrdinal = integerBetween(obj.ordinal, 1, daysInYear(obj.year));
+        validOrdinal = integerBetween(obj.ordinal, 1, daysInYear(obj.year));
+
   if (!validYear) {
     return unitOutOfRange("year", obj.year);
   } else if (!validOrdinal) {
@@ -5545,8 +6689,9 @@ function hasInvalidOrdinalData(obj) {
 }
 function hasInvalidGregorianData(obj) {
   const validYear = isInteger(obj.year),
-    validMonth = integerBetween(obj.month, 1, 12),
-    validDay = integerBetween(obj.day, 1, daysInMonth(obj.year, obj.month));
+        validMonth = integerBetween(obj.month, 1, 12),
+        validDay = integerBetween(obj.day, 1, daysInMonth(obj.year, obj.month));
+
   if (!validYear) {
     return unitOutOfRange("year", obj.year);
   } else if (!validMonth) {
@@ -5557,13 +6702,14 @@ function hasInvalidGregorianData(obj) {
 }
 function hasInvalidTimeData(obj) {
   const hour = obj.hour,
-    minute = obj.minute,
-    second = obj.second,
-    millisecond = obj.millisecond;
+        minute = obj.minute,
+        second = obj.second,
+        millisecond = obj.millisecond;
   const validHour = integerBetween(hour, 0, 23) || hour === 24 && minute === 0 && second === 0 && millisecond === 0,
-    validMinute = integerBetween(minute, 0, 59),
-    validSecond = integerBetween(second, 0, 59),
-    validMillisecond = integerBetween(millisecond, 0, 999);
+        validMinute = integerBetween(minute, 0, 59),
+        validSecond = integerBetween(second, 0, 59),
+        validMillisecond = integerBetween(millisecond, 0, 999);
+
   if (!validHour) {
     return unitOutOfRange("hour", hour);
   } else if (!validMinute) {
@@ -5576,17 +6722,25 @@ function hasInvalidTimeData(obj) {
 }
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/datetime.js
 function datetime_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = datetime_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function datetime_slicedToArray(arr, i) { return datetime_arrayWithHoles(arr) || datetime_iterableToArrayLimit(arr, i) || datetime_unsupportedIterableToArray(arr, i) || datetime_nonIterableRest(); }
+
 function datetime_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function datetime_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return datetime_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return datetime_arrayLikeToArray(o, minLen); }
+
 function datetime_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function datetime_iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+
+function datetime_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function datetime_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function datetime_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function datetime_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? datetime_ownKeys(Object(source), !0).forEach(function (key) { datetime_defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : datetime_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function datetime_defineProperty(obj, key, value) { key = datetime_toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function datetime_toPropertyKey(arg) { var key = datetime_toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function datetime_toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+function datetime_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -5605,20 +6759,22 @@ function datetime_toPrimitive(input, hint) { if (typeof input !== "object" || in
 
 const datetime_INVALID = "Invalid DateTime";
 const MAX_DATE = 8.64e15;
+
 function unsupportedZone(zone) {
   return new Invalid("unsupported zone", `the zone "${zone.name}" is not supported`);
-}
+} // we cache week data on the DT object and this intermediates the cache
 
-// we cache week data on the DT object and this intermediates the cache
+
 function possiblyCachedWeekData(dt) {
   if (dt.weekData === null) {
     dt.weekData = gregorianToWeek(dt.c);
   }
-  return dt.weekData;
-}
 
-// clone really means, "make a new object with these modifications". all "setters" really use this
+  return dt.weekData;
+} // clone really means, "make a new object with these modifications". all "setters" really use this
 // to create a new object while only changing some of the properties
+
+
 function datetime_clone(inst, alts) {
   const current = {
     ts: inst.ts,
@@ -5631,36 +6787,34 @@ function datetime_clone(inst, alts) {
   return new DateTime(datetime_objectSpread(datetime_objectSpread(datetime_objectSpread({}, current), alts), {}, {
     old: current
   }));
-}
-
-// find the right offset a given local time. The o input is our guess, which determines which
+} // find the right offset a given local time. The o input is our guess, which determines which
 // offset we'll pick in ambiguous cases (e.g. there are two 3 AMs b/c Fallback DST)
+
+
 function fixOffset(localTS, o, tz) {
   // Our UTC time is just a guess because our offset is just a guess
-  let utcGuess = localTS - o * 60 * 1000;
+  let utcGuess = localTS - o * 60 * 1000; // Test whether the zone matches the offset for this ts
 
-  // Test whether the zone matches the offset for this ts
-  const o2 = tz.offset(utcGuess);
+  const o2 = tz.offset(utcGuess); // If so, offset didn't change and we're done
 
-  // If so, offset didn't change and we're done
   if (o === o2) {
     return [utcGuess, o];
-  }
+  } // If not, change the ts by the difference in the offset
 
-  // If not, change the ts by the difference in the offset
-  utcGuess -= (o2 - o) * 60 * 1000;
 
-  // If that gives us the local time we want, we're done
+  utcGuess -= (o2 - o) * 60 * 1000; // If that gives us the local time we want, we're done
+
   const o3 = tz.offset(utcGuess);
+
   if (o2 === o3) {
     return [utcGuess, o2];
-  }
+  } // If it's different, we're in a hole time. The offset has changed, but the we don't adjust the time
 
-  // If it's different, we're in a hole time. The offset has changed, but the we don't adjust the time
+
   return [localTS - Math.min(o2, o3) * 60 * 1000, Math.max(o2, o3)];
-}
+} // convert an epoch timestamp into a calendar object with the given offset
 
-// convert an epoch timestamp into a calendar object with the given offset
+
 function tsToObj(ts, offset) {
   ts += offset * 60 * 1000;
   const d = new Date(ts);
@@ -5673,69 +6827,73 @@ function tsToObj(ts, offset) {
     second: d.getUTCSeconds(),
     millisecond: d.getUTCMilliseconds()
   };
-}
+} // convert a calendar object to a epoch timestamp
 
-// convert a calendar object to a epoch timestamp
+
 function objToTS(obj, offset, zone) {
   return fixOffset(objToLocalTS(obj), offset, zone);
-}
+} // create a new DT instance by adding a duration, adjusting for DSTs
 
-// create a new DT instance by adding a duration, adjusting for DSTs
+
 function adjustTime(inst, dur) {
   const oPre = inst.o,
-    year = inst.c.year + Math.trunc(dur.years),
-    month = inst.c.month + Math.trunc(dur.months) + Math.trunc(dur.quarters) * 3,
-    c = datetime_objectSpread(datetime_objectSpread({}, inst.c), {}, {
-      year,
-      month,
-      day: Math.min(inst.c.day, daysInMonth(year, month)) + Math.trunc(dur.days) + Math.trunc(dur.weeks) * 7
-    }),
-    millisToAdd = Duration.fromObject({
-      years: dur.years - Math.trunc(dur.years),
-      quarters: dur.quarters - Math.trunc(dur.quarters),
-      months: dur.months - Math.trunc(dur.months),
-      weeks: dur.weeks - Math.trunc(dur.weeks),
-      days: dur.days - Math.trunc(dur.days),
-      hours: dur.hours,
-      minutes: dur.minutes,
-      seconds: dur.seconds,
-      milliseconds: dur.milliseconds
-    }).as("milliseconds"),
-    localTS = objToLocalTS(c);
+        year = inst.c.year + Math.trunc(dur.years),
+        month = inst.c.month + Math.trunc(dur.months) + Math.trunc(dur.quarters) * 3,
+        c = datetime_objectSpread(datetime_objectSpread({}, inst.c), {}, {
+    year,
+    month,
+    day: Math.min(inst.c.day, daysInMonth(year, month)) + Math.trunc(dur.days) + Math.trunc(dur.weeks) * 7
+  }),
+        millisToAdd = Duration.fromObject({
+    years: dur.years - Math.trunc(dur.years),
+    quarters: dur.quarters - Math.trunc(dur.quarters),
+    months: dur.months - Math.trunc(dur.months),
+    weeks: dur.weeks - Math.trunc(dur.weeks),
+    days: dur.days - Math.trunc(dur.days),
+    hours: dur.hours,
+    minutes: dur.minutes,
+    seconds: dur.seconds,
+    milliseconds: dur.milliseconds
+  }).as("milliseconds"),
+        localTS = objToLocalTS(c);
+
   let _fixOffset = fixOffset(localTS, oPre, inst.zone),
-    _fixOffset2 = datetime_slicedToArray(_fixOffset, 2),
-    ts = _fixOffset2[0],
-    o = _fixOffset2[1];
+      _fixOffset2 = datetime_slicedToArray(_fixOffset, 2),
+      ts = _fixOffset2[0],
+      o = _fixOffset2[1];
+
   if (millisToAdd !== 0) {
-    ts += millisToAdd;
-    // that could have changed the offset by going over a DST, but we want to keep the ts the same
+    ts += millisToAdd; // that could have changed the offset by going over a DST, but we want to keep the ts the same
+
     o = inst.zone.offset(ts);
   }
+
   return {
     ts,
     o
   };
-}
-
-// helper useful in turning the results of parsing into real dates
+} // helper useful in turning the results of parsing into real dates
 // by handling the zone options
+
+
 function parseDataToDateTime(parsed, parsedZone, opts, format, text, specificOffset) {
   const setZone = opts.setZone,
-    zone = opts.zone;
+        zone = opts.zone;
+
   if (parsed && Object.keys(parsed).length !== 0) {
     const interpretationZone = parsedZone || zone,
-      inst = DateTime.fromObject(parsed, datetime_objectSpread(datetime_objectSpread({}, opts), {}, {
-        zone: interpretationZone,
-        specificOffset
-      }));
+          inst = DateTime.fromObject(parsed, datetime_objectSpread(datetime_objectSpread({}, opts), {}, {
+      zone: interpretationZone,
+      specificOffset
+    }));
     return setZone ? inst : inst.setZone(zone);
   } else {
     return DateTime.invalid(new Invalid("unparsable", `the input "${text}" can't be parsed as ${format}`));
   }
-}
-
-// if you want to output a technical format (e.g. RFC 2822), this helper
+} // if you want to output a technical format (e.g. RFC 2822), this helper
 // helps handle the details
+
+
 function toTechFormat(dt, format) {
   let allowZ = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   return dt.isValid ? Formatter.create(Locale.create("en-US"), {
@@ -5743,11 +6901,13 @@ function toTechFormat(dt, format) {
     forceSimple: true
   }).formatDateTimeFromString(dt, format) : null;
 }
+
 function toISODate(o, extended) {
   const longFormat = o.c.year > 9999 || o.c.year < 0;
   let c = "";
   if (longFormat && o.c.year >= 0) c += "+";
   c += padStart(o.c.year, longFormat ? 6 : 4);
+
   if (extended) {
     c += "-";
     c += padStart(o.c.month);
@@ -5757,26 +6917,33 @@ function toISODate(o, extended) {
     c += padStart(o.c.month);
     c += padStart(o.c.day);
   }
+
   return c;
 }
+
 function toISOTime(o, extended, suppressSeconds, suppressMilliseconds, includeOffset, extendedZone) {
   let c = padStart(o.c.hour);
+
   if (extended) {
     c += ":";
     c += padStart(o.c.minute);
+
     if (o.c.second !== 0 || !suppressSeconds) {
       c += ":";
     }
   } else {
     c += padStart(o.c.minute);
   }
+
   if (o.c.second !== 0 || !suppressSeconds) {
     c += padStart(o.c.second);
+
     if (o.c.millisecond !== 0 || !suppressMilliseconds) {
       c += ".";
       c += padStart(o.c.millisecond, 3);
     }
   }
+
   if (includeOffset) {
     if (o.isOffsetFixed && o.offset === 0 && !extendedZone) {
       c += "Z";
@@ -5792,43 +6959,43 @@ function toISOTime(o, extended, suppressSeconds, suppressMilliseconds, includeOf
       c += padStart(Math.trunc(o.o % 60));
     }
   }
+
   if (extendedZone) {
     c += "[" + o.zone.ianaName + "]";
   }
+
   return c;
-}
+} // defaults for unspecified units in the supported calendars
 
-// defaults for unspecified units in the supported calendars
+
 const defaultUnitValues = {
-    month: 1,
-    day: 1,
-    hour: 0,
-    minute: 0,
-    second: 0,
-    millisecond: 0
-  },
-  defaultWeekUnitValues = {
-    weekNumber: 1,
-    weekday: 1,
-    hour: 0,
-    minute: 0,
-    second: 0,
-    millisecond: 0
-  },
-  defaultOrdinalUnitValues = {
-    ordinal: 1,
-    hour: 0,
-    minute: 0,
-    second: 0,
-    millisecond: 0
-  };
+  month: 1,
+  day: 1,
+  hour: 0,
+  minute: 0,
+  second: 0,
+  millisecond: 0
+},
+      defaultWeekUnitValues = {
+  weekNumber: 1,
+  weekday: 1,
+  hour: 0,
+  minute: 0,
+  second: 0,
+  millisecond: 0
+},
+      defaultOrdinalUnitValues = {
+  ordinal: 1,
+  hour: 0,
+  minute: 0,
+  second: 0,
+  millisecond: 0
+}; // Units in the supported calendars, sorted by bigness
 
-// Units in the supported calendars, sorted by bigness
 const datetime_orderedUnits = ["year", "month", "day", "hour", "minute", "second", "millisecond"],
-  orderedWeekUnits = ["weekYear", "weekNumber", "weekday", "hour", "minute", "second", "millisecond"],
-  orderedOrdinalUnits = ["year", "ordinal", "hour", "minute", "second", "millisecond"];
+      orderedWeekUnits = ["weekYear", "weekNumber", "weekday", "hour", "minute", "second", "millisecond"],
+      orderedOrdinalUnits = ["year", "ordinal", "hour", "minute", "second", "millisecond"]; // standardize case and plurality in units
 
-// standardize case and plurality in units
 function normalizeUnit(unit) {
   const normalized = {
     year: "year",
@@ -5858,37 +7025,53 @@ function normalizeUnit(unit) {
   }[unit.toLowerCase()];
   if (!normalized) throw new InvalidUnitError(unit);
   return normalized;
-}
-
-// this is a dumbed down version of fromObject() that runs about 60% faster
+} // this is a dumbed down version of fromObject() that runs about 60% faster
 // but doesn't do any validation, makes a bunch of assumptions about what units
 // are present, and so on.
+
+
 function quickDT(obj, opts) {
   const zone = normalizeZone(opts.zone, Settings.defaultZone),
-    loc = Locale.fromObject(opts),
-    tsNow = Settings.now();
-  let ts, o;
+        loc = Locale.fromObject(opts),
+        tsNow = Settings.now();
+  let ts, o; // assume we have the higher-order units
 
-  // assume we have the higher-order units
   if (!isUndefined(obj.year)) {
-    for (var _i2 = 0, _orderedUnits = datetime_orderedUnits; _i2 < _orderedUnits.length; _i2++) {
-      const u = _orderedUnits[_i2];
-      if (isUndefined(obj[u])) {
-        obj[u] = defaultUnitValues[u];
+    var _iterator = datetime_createForOfIteratorHelper(datetime_orderedUnits),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        const u = _step.value;
+
+        if (isUndefined(obj[u])) {
+          obj[u] = defaultUnitValues[u];
+        }
       }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
     }
+
     const invalid = hasInvalidGregorianData(obj) || hasInvalidTimeData(obj);
+
     if (invalid) {
       return DateTime.invalid(invalid);
     }
+
     const offsetProvis = zone.offset(tsNow);
+
     var _objToTS = objToTS(obj, offsetProvis, zone);
+
     var _objToTS2 = datetime_slicedToArray(_objToTS, 2);
+
     ts = _objToTS2[0];
     o = _objToTS2[1];
   } else {
     ts = tsNow;
   }
+
   return new DateTime({
     ts,
     zone,
@@ -5896,54 +7079,62 @@ function quickDT(obj, opts) {
     o
   });
 }
+
 function diffRelative(start, end, opts) {
   const round = isUndefined(opts.round) ? true : opts.round,
-    format = (c, unit) => {
-      c = roundTo(c, round || opts.calendary ? 0 : 2, true);
-      const formatter = end.loc.clone(opts).relFormatter(opts);
-      return formatter.format(c, unit);
-    },
-    differ = unit => {
-      if (opts.calendary) {
-        if (!end.hasSame(start, unit)) {
-          return end.startOf(unit).diff(start.startOf(unit), unit).get(unit);
-        } else return 0;
-      } else {
-        return end.diff(start, unit).get(unit);
-      }
-    };
+        format = (c, unit) => {
+    c = roundTo(c, round || opts.calendary ? 0 : 2, true);
+    const formatter = end.loc.clone(opts).relFormatter(opts);
+    return formatter.format(c, unit);
+  },
+        differ = unit => {
+    if (opts.calendary) {
+      if (!end.hasSame(start, unit)) {
+        return end.startOf(unit).diff(start.startOf(unit), unit).get(unit);
+      } else return 0;
+    } else {
+      return end.diff(start, unit).get(unit);
+    }
+  };
+
   if (opts.unit) {
     return format(differ(opts.unit), opts.unit);
   }
-  var _iterator = datetime_createForOfIteratorHelper(opts.units),
-    _step;
+
+  var _iterator2 = datetime_createForOfIteratorHelper(opts.units),
+      _step2;
+
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      const unit = _step.value;
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      const unit = _step2.value;
       const count = differ(unit);
+
       if (Math.abs(count) >= 1) {
         return format(count, unit);
       }
     }
   } catch (err) {
-    _iterator.e(err);
+    _iterator2.e(err);
   } finally {
-    _iterator.f();
+    _iterator2.f();
   }
+
   return format(start > end ? -0 : 0, opts.units[opts.units.length - 1]);
 }
+
 function lastOpts(argList) {
   let opts = {},
-    args;
+      args;
+
   if (argList.length > 0 && typeof argList[argList.length - 1] === "object") {
     opts = argList[argList.length - 1];
     args = Array.from(argList).slice(0, argList.length - 1);
   } else {
     args = Array.from(argList);
   }
+
   return [opts, args];
 }
-
 /**
  * A DateTime is an immutable data structure representing a specific date and time and accompanying methods. It contains class and instance methods for creating, parsing, interrogating, transforming, and formatting them.
  *
@@ -5964,6 +7155,8 @@ function lastOpts(argList) {
  *
  * There's plenty others documented below. In addition, for more information on subtler topics like internationalization, time zones, alternative calendars, validity, and so on, see the external documentation.
  */
+
+
 class DateTime {
   /**
    * @access private
@@ -5974,11 +7167,14 @@ class DateTime {
     /**
      * @access private
      */
+
     this.ts = isUndefined(config.ts) ? Settings.now() : config.ts;
     let c = null,
-      o = null;
+        o = null;
+
     if (!invalid) {
       const unchanged = config.old && config.old.ts === this.ts && config.old.zone.equals(zone);
+
       if (unchanged) {
         var _ref = [config.old.c, config.old.o];
         c = _ref[0];
@@ -5991,38 +7187,43 @@ class DateTime {
         o = invalid ? null : ot;
       }
     }
-
     /**
      * @access private
      */
+
+
     this._zone = zone;
     /**
      * @access private
      */
+
     this.loc = config.loc || Locale.create();
     /**
      * @access private
      */
+
     this.invalid = invalid;
     /**
      * @access private
      */
+
     this.weekData = null;
     /**
      * @access private
      */
+
     this.c = c;
     /**
      * @access private
      */
+
     this.o = o;
     /**
      * @access private
      */
-    this.isLuxonDateTime = true;
-  }
 
-  // CONSTRUCT
+    this.isLuxonDateTime = true;
+  } // CONSTRUCT
 
   /**
    * Create a DateTime for the current instant, in the system's time zone.
@@ -6031,10 +7232,11 @@ class DateTime {
    * @example DateTime.now().toISO() //~> now in the ISO format
    * @return {DateTime}
    */
+
+
   static now() {
     return new DateTime({});
   }
-
   /**
    * Create a local DateTime
    * @param {number} [year] - The calendar year. If omitted (as in, call `local()` with no arguments), the current time will be used
@@ -6056,19 +7258,22 @@ class DateTime {
    * @example DateTime.local(2017, 3, 12, 5, 45, 10, 765)       //~> 2017-03-12T05:45:10.765
    * @return {DateTime}
    */
+
+
   static local() {
     const _lastOpts = lastOpts(arguments),
-      _lastOpts2 = datetime_slicedToArray(_lastOpts, 2),
-      opts = _lastOpts2[0],
-      args = _lastOpts2[1],
-      _args = datetime_slicedToArray(args, 7),
-      year = _args[0],
-      month = _args[1],
-      day = _args[2],
-      hour = _args[3],
-      minute = _args[4],
-      second = _args[5],
-      millisecond = _args[6];
+          _lastOpts2 = datetime_slicedToArray(_lastOpts, 2),
+          opts = _lastOpts2[0],
+          args = _lastOpts2[1],
+          _args = datetime_slicedToArray(args, 7),
+          year = _args[0],
+          month = _args[1],
+          day = _args[2],
+          hour = _args[3],
+          minute = _args[4],
+          second = _args[5],
+          millisecond = _args[6];
+
     return quickDT({
       year,
       month,
@@ -6079,7 +7284,6 @@ class DateTime {
       millisecond
     }, opts);
   }
-
   /**
    * Create a DateTime in UTC
    * @param {number} [year] - The calendar year. If omitted (as in, call `utc()` with no arguments), the current time will be used
@@ -6104,19 +7308,22 @@ class DateTime {
    * @example DateTime.utc(2017, 3, 12, 5, 45, 10, 765, { locale: "fr" }) //~> 2017-03-12T05:45:10.765Z with a French locale
    * @return {DateTime}
    */
+
+
   static utc() {
     const _lastOpts3 = lastOpts(arguments),
-      _lastOpts4 = datetime_slicedToArray(_lastOpts3, 2),
-      opts = _lastOpts4[0],
-      args = _lastOpts4[1],
-      _args2 = datetime_slicedToArray(args, 7),
-      year = _args2[0],
-      month = _args2[1],
-      day = _args2[2],
-      hour = _args2[3],
-      minute = _args2[4],
-      second = _args2[5],
-      millisecond = _args2[6];
+          _lastOpts4 = datetime_slicedToArray(_lastOpts3, 2),
+          opts = _lastOpts4[0],
+          args = _lastOpts4[1],
+          _args2 = datetime_slicedToArray(args, 7),
+          year = _args2[0],
+          month = _args2[1],
+          day = _args2[2],
+          hour = _args2[3],
+          minute = _args2[4],
+          second = _args2[5],
+          millisecond = _args2[6];
+
     opts.zone = FixedOffsetZone.utcInstance;
     return quickDT({
       year,
@@ -6128,7 +7335,6 @@ class DateTime {
       millisecond
     }, opts);
   }
-
   /**
    * Create a DateTime from a JavaScript Date object. Uses the default zone.
    * @param {Date} date - a JavaScript Date object
@@ -6136,23 +7342,28 @@ class DateTime {
    * @param {string|Zone} [options.zone='local'] - the zone to place the DateTime into
    * @return {DateTime}
    */
+
+
   static fromJSDate(date) {
     let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const ts = isDate(date) ? date.valueOf() : NaN;
+
     if (Number.isNaN(ts)) {
       return DateTime.invalid("invalid input");
     }
+
     const zoneToUse = normalizeZone(options.zone, Settings.defaultZone);
+
     if (!zoneToUse.isValid) {
       return DateTime.invalid(unsupportedZone(zoneToUse));
     }
+
     return new DateTime({
       ts: ts,
       zone: zoneToUse,
       loc: Locale.fromObject(options)
     });
   }
-
   /**
    * Create a DateTime from a number of milliseconds since the epoch (meaning since 1 January 1970 00:00:00 UTC). Uses the default zone.
    * @param {number} milliseconds - a number of milliseconds since 1970 UTC
@@ -6163,8 +7374,11 @@ class DateTime {
    * @param {string} options.numberingSystem - the numbering system to set on the resulting DateTime instance
    * @return {DateTime}
    */
+
+
   static fromMillis(milliseconds) {
     let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     if (!isNumber(milliseconds)) {
       throw new InvalidArgumentError(`fromMillis requires a numerical input, but received a ${typeof milliseconds} with value ${milliseconds}`);
     } else if (milliseconds < -MAX_DATE || milliseconds > MAX_DATE) {
@@ -6178,7 +7392,6 @@ class DateTime {
       });
     }
   }
-
   /**
    * Create a DateTime from a number of seconds since the epoch (meaning since 1 January 1970 00:00:00 UTC). Uses the default zone.
    * @param {number} seconds - a number of seconds since 1970 UTC
@@ -6189,8 +7402,11 @@ class DateTime {
    * @param {string} options.numberingSystem - the numbering system to set on the resulting DateTime instance
    * @return {DateTime}
    */
+
+
   static fromSeconds(seconds) {
     let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     if (!isNumber(seconds)) {
       throw new InvalidArgumentError("fromSeconds requires a numerical input");
     } else {
@@ -6201,7 +7417,6 @@ class DateTime {
       });
     }
   }
-
   /**
    * Create a DateTime from a JavaScript object with keys like 'year' and 'hour' with reasonable defaults.
    * @param {Object} obj - the object to create the DateTime from
@@ -6230,24 +7445,26 @@ class DateTime {
    * @example DateTime.fromObject({ weekYear: 2016, weekNumber: 2, weekday: 3 }).toISODate() //=> '2016-01-13'
    * @return {DateTime}
    */
+
+
   static fromObject(obj) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     obj = obj || {};
     const zoneToUse = normalizeZone(opts.zone, Settings.defaultZone);
+
     if (!zoneToUse.isValid) {
       return DateTime.invalid(unsupportedZone(zoneToUse));
     }
-    const tsNow = Settings.now(),
-      offsetProvis = !isUndefined(opts.specificOffset) ? opts.specificOffset : zoneToUse.offset(tsNow),
-      normalized = normalizeObject(obj, normalizeUnit),
-      containsOrdinal = !isUndefined(normalized.ordinal),
-      containsGregorYear = !isUndefined(normalized.year),
-      containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day),
-      containsGregor = containsGregorYear || containsGregorMD,
-      definiteWeekDef = normalized.weekYear || normalized.weekNumber,
-      loc = Locale.fromObject(opts);
 
-    // cases:
+    const tsNow = Settings.now(),
+          offsetProvis = !isUndefined(opts.specificOffset) ? opts.specificOffset : zoneToUse.offset(tsNow),
+          normalized = normalizeObject(obj, normalizeUnit),
+          containsOrdinal = !isUndefined(normalized.ordinal),
+          containsGregorYear = !isUndefined(normalized.year),
+          containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day),
+          containsGregor = containsGregorYear || containsGregorMD,
+          definiteWeekDef = normalized.weekYear || normalized.weekNumber,
+          loc = Locale.fromObject(opts); // cases:
     // just a weekday -> this week's instance of that weekday, no worries
     // (gregorian data or ordinal) + (weekYear or weekNumber) -> error
     // (gregorian month or day) + ordinal -> error
@@ -6256,15 +7473,17 @@ class DateTime {
     if ((containsGregor || containsOrdinal) && definiteWeekDef) {
       throw new ConflictingSpecificationError("Can't mix weekYear/weekNumber units with year/month/day or ordinals");
     }
+
     if (containsGregorMD && containsOrdinal) {
       throw new ConflictingSpecificationError("Can't mix ordinal dates with month/day");
     }
-    const useWeekData = definiteWeekDef || normalized.weekday && !containsGregor;
 
-    // configure ourselves to deal with gregorian dates or week stuff
+    const useWeekData = definiteWeekDef || normalized.weekday && !containsGregor; // configure ourselves to deal with gregorian dates or week stuff
+
     let units,
-      defaultValues,
-      objNow = tsToObj(tsNow, offsetProvis);
+        defaultValues,
+        objNow = tsToObj(tsNow, offsetProvis);
+
     if (useWeekData) {
       units = orderedWeekUnits;
       defaultValues = defaultWeekUnitValues;
@@ -6276,16 +7495,19 @@ class DateTime {
     } else {
       units = datetime_orderedUnits;
       defaultValues = defaultUnitValues;
-    }
+    } // set default values for missing stuff
 
-    // set default values for missing stuff
+
     let foundFirst = false;
-    var _iterator2 = datetime_createForOfIteratorHelper(units),
-      _step2;
+
+    var _iterator3 = datetime_createForOfIteratorHelper(units),
+        _step3;
+
     try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        const u = _step2.value;
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        const u = _step3.value;
         const v = normalized[u];
+
         if (!isUndefined(v)) {
           foundFirst = true;
         } else if (foundFirst) {
@@ -6293,40 +7515,41 @@ class DateTime {
         } else {
           normalized[u] = objNow[u];
         }
-      }
+      } // make sure the values we have are in range
 
-      // make sure the values we have are in range
     } catch (err) {
-      _iterator2.e(err);
+      _iterator3.e(err);
     } finally {
-      _iterator2.f();
+      _iterator3.f();
     }
+
     const higherOrderInvalid = useWeekData ? hasInvalidWeekData(normalized) : containsOrdinal ? hasInvalidOrdinalData(normalized) : hasInvalidGregorianData(normalized),
-      invalid = higherOrderInvalid || hasInvalidTimeData(normalized);
+          invalid = higherOrderInvalid || hasInvalidTimeData(normalized);
+
     if (invalid) {
       return DateTime.invalid(invalid);
-    }
+    } // compute the actual time
 
-    // compute the actual time
+
     const gregorian = useWeekData ? weekToGregorian(normalized) : containsOrdinal ? ordinalToGregorian(normalized) : normalized,
-      _objToTS3 = objToTS(gregorian, offsetProvis, zoneToUse),
-      _objToTS4 = datetime_slicedToArray(_objToTS3, 2),
-      tsFinal = _objToTS4[0],
-      offsetFinal = _objToTS4[1],
-      inst = new DateTime({
-        ts: tsFinal,
-        zone: zoneToUse,
-        o: offsetFinal,
-        loc
-      });
+          _objToTS3 = objToTS(gregorian, offsetProvis, zoneToUse),
+          _objToTS4 = datetime_slicedToArray(_objToTS3, 2),
+          tsFinal = _objToTS4[0],
+          offsetFinal = _objToTS4[1],
+          inst = new DateTime({
+      ts: tsFinal,
+      zone: zoneToUse,
+      o: offsetFinal,
+      loc
+    }); // gregorian data + weekday serves only to validate
 
-    // gregorian data + weekday serves only to validate
+
     if (normalized.weekday && containsGregor && obj.weekday !== inst.weekday) {
       return DateTime.invalid("mismatched weekday", `you can't specify both a weekday of ${normalized.weekday} and a date of ${inst.toISO()}`);
     }
+
     return inst;
   }
-
   /**
    * Create a DateTime from an ISO 8601 string
    * @param {string} text - the ISO string
@@ -6343,15 +7566,18 @@ class DateTime {
    * @example DateTime.fromISO('2016-W05-4')
    * @return {DateTime}
    */
+
+
   static fromISO(text) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     const _parseISODate = parseISODate(text),
-      _parseISODate2 = datetime_slicedToArray(_parseISODate, 2),
-      vals = _parseISODate2[0],
-      parsedZone = _parseISODate2[1];
+          _parseISODate2 = datetime_slicedToArray(_parseISODate, 2),
+          vals = _parseISODate2[0],
+          parsedZone = _parseISODate2[1];
+
     return parseDataToDateTime(vals, parsedZone, opts, "ISO 8601", text);
   }
-
   /**
    * Create a DateTime from an RFC 2822 string
    * @param {string} text - the RFC 2822 string
@@ -6366,15 +7592,18 @@ class DateTime {
    * @example DateTime.fromRFC2822('25 Nov 2016 13:23 Z')
    * @return {DateTime}
    */
+
+
   static fromRFC2822(text) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     const _parseRFC2822Date = parseRFC2822Date(text),
-      _parseRFC2822Date2 = datetime_slicedToArray(_parseRFC2822Date, 2),
-      vals = _parseRFC2822Date2[0],
-      parsedZone = _parseRFC2822Date2[1];
+          _parseRFC2822Date2 = datetime_slicedToArray(_parseRFC2822Date, 2),
+          vals = _parseRFC2822Date2[0],
+          parsedZone = _parseRFC2822Date2[1];
+
     return parseDataToDateTime(vals, parsedZone, opts, "RFC 2822", text);
   }
-
   /**
    * Create a DateTime from an HTTP header date
    * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1
@@ -6390,15 +7619,18 @@ class DateTime {
    * @example DateTime.fromHTTP('Sun Nov  6 08:49:37 1994')
    * @return {DateTime}
    */
+
+
   static fromHTTP(text) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     const _parseHTTPDate = parseHTTPDate(text),
-      _parseHTTPDate2 = datetime_slicedToArray(_parseHTTPDate, 2),
-      vals = _parseHTTPDate2[0],
-      parsedZone = _parseHTTPDate2[1];
+          _parseHTTPDate2 = datetime_slicedToArray(_parseHTTPDate, 2),
+          vals = _parseHTTPDate2[0],
+          parsedZone = _parseHTTPDate2[1];
+
     return parseDataToDateTime(vals, parsedZone, opts, "HTTP", opts);
   }
-
   /**
    * Create a DateTime from an input string and format string.
    * Defaults to en-US if no locale has been specified, regardless of the system's locale. For a table of tokens and their interpretations, see [here](https://moment.github.io/luxon/#/parsing?id=table-of-tokens).
@@ -6412,41 +7644,46 @@ class DateTime {
    * @param {string} opts.outputCalendar - the output calendar to set on the resulting DateTime instance
    * @return {DateTime}
    */
+
+
   static fromFormat(text, fmt) {
     let opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
     if (isUndefined(text) || isUndefined(fmt)) {
       throw new InvalidArgumentError("fromFormat requires an input string and a format");
     }
+
     const _opts$locale = opts.locale,
-      locale = _opts$locale === void 0 ? null : _opts$locale,
-      _opts$numberingSystem = opts.numberingSystem,
-      numberingSystem = _opts$numberingSystem === void 0 ? null : _opts$numberingSystem,
-      localeToUse = Locale.fromOpts({
-        locale,
-        numberingSystem,
-        defaultToEN: true
-      }),
-      _parseFromTokens = parseFromTokens(localeToUse, text, fmt),
-      _parseFromTokens2 = datetime_slicedToArray(_parseFromTokens, 4),
-      vals = _parseFromTokens2[0],
-      parsedZone = _parseFromTokens2[1],
-      specificOffset = _parseFromTokens2[2],
-      invalid = _parseFromTokens2[3];
+          locale = _opts$locale === void 0 ? null : _opts$locale,
+          _opts$numberingSystem = opts.numberingSystem,
+          numberingSystem = _opts$numberingSystem === void 0 ? null : _opts$numberingSystem,
+          localeToUse = Locale.fromOpts({
+      locale,
+      numberingSystem,
+      defaultToEN: true
+    }),
+          _parseFromTokens = parseFromTokens(localeToUse, text, fmt),
+          _parseFromTokens2 = datetime_slicedToArray(_parseFromTokens, 4),
+          vals = _parseFromTokens2[0],
+          parsedZone = _parseFromTokens2[1],
+          specificOffset = _parseFromTokens2[2],
+          invalid = _parseFromTokens2[3];
+
     if (invalid) {
       return DateTime.invalid(invalid);
     } else {
       return parseDataToDateTime(vals, parsedZone, opts, `format ${fmt}`, text, specificOffset);
     }
   }
-
   /**
    * @deprecated use fromFormat instead
    */
+
+
   static fromString(text, fmt) {
     let opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return DateTime.fromFormat(text, fmt, opts);
   }
-
   /**
    * Create a DateTime from a SQL date, time, or datetime
    * Defaults to en-US if no locale has been specified, regardless of the system's locale
@@ -6467,27 +7704,35 @@ class DateTime {
    * @example DateTime.fromSQL('09:12:34.342')
    * @return {DateTime}
    */
+
+
   static fromSQL(text) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     const _parseSQL = parseSQL(text),
-      _parseSQL2 = datetime_slicedToArray(_parseSQL, 2),
-      vals = _parseSQL2[0],
-      parsedZone = _parseSQL2[1];
+          _parseSQL2 = datetime_slicedToArray(_parseSQL, 2),
+          vals = _parseSQL2[0],
+          parsedZone = _parseSQL2[1];
+
     return parseDataToDateTime(vals, parsedZone, opts, "SQL", text);
   }
-
   /**
    * Create an invalid DateTime.
    * @param {DateTime} reason - simple string of why this DateTime is invalid. Should not contain parameters or anything else data-dependent
    * @param {string} [explanation=null] - longer explanation, may include parameters and other useful debugging information
    * @return {DateTime}
    */
+
+
   static invalid(reason) {
     let explanation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
     if (!reason) {
       throw new InvalidArgumentError("need to specify a reason the DateTime is invalid");
     }
+
     const invalid = reason instanceof Invalid ? reason : new Invalid(reason, explanation);
+
     if (Settings.throwOnInvalid) {
       throw new InvalidDateTimeError(invalid);
     } else {
@@ -6496,28 +7741,29 @@ class DateTime {
       });
     }
   }
-
   /**
    * Check if an object is an instance of DateTime. Works across context boundaries
    * @param {object} o
    * @return {boolean}
    */
+
+
   static isDateTime(o) {
     return o && o.isLuxonDateTime || false;
   }
-
   /**
    * Produce the format string for a set of options
    * @param formatOpts
    * @param localeOpts
    * @returns {string}
    */
+
+
   static parseFormatForOpts(formatOpts) {
     let localeOpts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const tokenList = formatOptsToTokens(formatOpts, Locale.fromObject(localeOpts));
     return !tokenList ? null : tokenList.map(t => t ? t.val : null).join("");
   }
-
   /**
    * Produce the the fully expanded format token for the locale
    * Does NOT quote characters, so quoted tokens will not round trip correctly
@@ -6525,13 +7771,13 @@ class DateTime {
    * @param localeOpts
    * @returns {string}
    */
+
+
   static expandFormat(fmt) {
     let localeOpts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     const expanded = expandMacroTokens(Formatter.parseFormat(fmt), Locale.fromObject(localeOpts));
     return expanded.map(t => t.val).join("");
-  }
-
-  // INFO
+  } // INFO
 
   /**
    * Get the value of unit.
@@ -6540,171 +7786,190 @@ class DateTime {
    * @example DateTime.local(2017, 7, 4).get('day'); //=> 4
    * @return {number}
    */
+
+
   get(unit) {
     return this[unit];
   }
-
   /**
    * Returns whether the DateTime is valid. Invalid DateTimes occur when:
    * * The DateTime was created from invalid calendar information, such as the 13th month or February 30
    * * The DateTime was created by an operation on another invalid date
    * @type {boolean}
    */
+
+
   get isValid() {
     return this.invalid === null;
   }
-
   /**
    * Returns an error code if this DateTime is invalid, or null if the DateTime is valid
    * @type {string}
    */
+
+
   get invalidReason() {
     return this.invalid ? this.invalid.reason : null;
   }
-
   /**
    * Returns an explanation of why this DateTime became invalid, or null if the DateTime is valid
    * @type {string}
    */
+
+
   get invalidExplanation() {
     return this.invalid ? this.invalid.explanation : null;
   }
-
   /**
    * Get the locale of a DateTime, such 'en-GB'. The locale is used when formatting the DateTime
    *
    * @type {string}
    */
+
+
   get locale() {
     return this.isValid ? this.loc.locale : null;
   }
-
   /**
    * Get the numbering system of a DateTime, such 'beng'. The numbering system is used when formatting the DateTime
    *
    * @type {string}
    */
+
+
   get numberingSystem() {
     return this.isValid ? this.loc.numberingSystem : null;
   }
-
   /**
    * Get the output calendar of a DateTime, such 'islamic'. The output calendar is used when formatting the DateTime
    *
    * @type {string}
    */
+
+
   get outputCalendar() {
     return this.isValid ? this.loc.outputCalendar : null;
   }
-
   /**
    * Get the time zone associated with this DateTime.
    * @type {Zone}
    */
+
+
   get zone() {
     return this._zone;
   }
-
   /**
    * Get the name of the time zone.
    * @type {string}
    */
+
+
   get zoneName() {
     return this.isValid ? this.zone.name : null;
   }
-
   /**
    * Get the year
    * @example DateTime.local(2017, 5, 25).year //=> 2017
    * @type {number}
    */
+
+
   get year() {
     return this.isValid ? this.c.year : NaN;
   }
-
   /**
    * Get the quarter
    * @example DateTime.local(2017, 5, 25).quarter //=> 2
    * @type {number}
    */
+
+
   get quarter() {
     return this.isValid ? Math.ceil(this.c.month / 3) : NaN;
   }
-
   /**
    * Get the month (1-12).
    * @example DateTime.local(2017, 5, 25).month //=> 5
    * @type {number}
    */
+
+
   get month() {
     return this.isValid ? this.c.month : NaN;
   }
-
   /**
    * Get the day of the month (1-30ish).
    * @example DateTime.local(2017, 5, 25).day //=> 25
    * @type {number}
    */
+
+
   get day() {
     return this.isValid ? this.c.day : NaN;
   }
-
   /**
    * Get the hour of the day (0-23).
    * @example DateTime.local(2017, 5, 25, 9).hour //=> 9
    * @type {number}
    */
+
+
   get hour() {
     return this.isValid ? this.c.hour : NaN;
   }
-
   /**
    * Get the minute of the hour (0-59).
    * @example DateTime.local(2017, 5, 25, 9, 30).minute //=> 30
    * @type {number}
    */
+
+
   get minute() {
     return this.isValid ? this.c.minute : NaN;
   }
-
   /**
    * Get the second of the minute (0-59).
    * @example DateTime.local(2017, 5, 25, 9, 30, 52).second //=> 52
    * @type {number}
    */
+
+
   get second() {
     return this.isValid ? this.c.second : NaN;
   }
-
   /**
    * Get the millisecond of the second (0-999).
    * @example DateTime.local(2017, 5, 25, 9, 30, 52, 654).millisecond //=> 654
    * @type {number}
    */
+
+
   get millisecond() {
     return this.isValid ? this.c.millisecond : NaN;
   }
-
   /**
    * Get the week year
    * @see https://en.wikipedia.org/wiki/ISO_week_date
    * @example DateTime.local(2014, 12, 31).weekYear //=> 2015
    * @type {number}
    */
+
+
   get weekYear() {
     return this.isValid ? possiblyCachedWeekData(this).weekYear : NaN;
   }
-
   /**
    * Get the week number of the week year (1-52ish).
    * @see https://en.wikipedia.org/wiki/ISO_week_date
    * @example DateTime.local(2017, 5, 25).weekNumber //=> 21
    * @type {number}
    */
+
+
   get weekNumber() {
     return this.isValid ? possiblyCachedWeekData(this).weekNumber : NaN;
   }
-
   /**
    * Get the day of the week.
    * 1 is Monday and 7 is Sunday
@@ -6712,82 +7977,91 @@ class DateTime {
    * @example DateTime.local(2014, 11, 31).weekday //=> 4
    * @type {number}
    */
+
+
   get weekday() {
     return this.isValid ? possiblyCachedWeekData(this).weekday : NaN;
   }
-
   /**
    * Get the ordinal (meaning the day of the year)
    * @example DateTime.local(2017, 5, 25).ordinal //=> 145
    * @type {number|DateTime}
    */
+
+
   get ordinal() {
     return this.isValid ? gregorianToOrdinal(this.c).ordinal : NaN;
   }
-
   /**
    * Get the human readable short month name, such as 'Oct'.
    * Defaults to the system's locale if no locale has been specified
    * @example DateTime.local(2017, 10, 30).monthShort //=> Oct
    * @type {string}
    */
+
+
   get monthShort() {
     return this.isValid ? Info.months("short", {
       locObj: this.loc
     })[this.month - 1] : null;
   }
-
   /**
    * Get the human readable long month name, such as 'October'.
    * Defaults to the system's locale if no locale has been specified
    * @example DateTime.local(2017, 10, 30).monthLong //=> October
    * @type {string}
    */
+
+
   get monthLong() {
     return this.isValid ? Info.months("long", {
       locObj: this.loc
     })[this.month - 1] : null;
   }
-
   /**
    * Get the human readable short weekday, such as 'Mon'.
    * Defaults to the system's locale if no locale has been specified
    * @example DateTime.local(2017, 10, 30).weekdayShort //=> Mon
    * @type {string}
    */
+
+
   get weekdayShort() {
     return this.isValid ? Info.weekdays("short", {
       locObj: this.loc
     })[this.weekday - 1] : null;
   }
-
   /**
    * Get the human readable long weekday, such as 'Monday'.
    * Defaults to the system's locale if no locale has been specified
    * @example DateTime.local(2017, 10, 30).weekdayLong //=> Monday
    * @type {string}
    */
+
+
   get weekdayLong() {
     return this.isValid ? Info.weekdays("long", {
       locObj: this.loc
     })[this.weekday - 1] : null;
   }
-
   /**
    * Get the UTC offset of this DateTime in minutes
    * @example DateTime.now().offset //=> -240
    * @example DateTime.utc().offset //=> 0
    * @type {number}
    */
+
+
   get offset() {
     return this.isValid ? +this.o : NaN;
   }
-
   /**
    * Get the short human name for the zone's current offset, for example "EST" or "EDT".
    * Defaults to the system's locale if no locale has been specified
    * @type {string}
    */
+
+
   get offsetNameShort() {
     if (this.isValid) {
       return this.zone.offsetName(this.ts, {
@@ -6798,12 +8072,13 @@ class DateTime {
       return null;
     }
   }
-
   /**
    * Get the long human name for the zone's current offset, for example "Eastern Standard Time" or "Eastern Daylight Time".
    * Defaults to the system's locale if no locale has been specified
    * @type {string}
    */
+
+
   get offsetNameLong() {
     if (this.isValid) {
       return this.zone.offsetName(this.ts, {
@@ -6814,19 +8089,21 @@ class DateTime {
       return null;
     }
   }
-
   /**
    * Get whether this zone's offset ever changes, as in a DST.
    * @type {boolean}
    */
+
+
   get isOffsetFixed() {
     return this.isValid ? this.zone.isUniversal : null;
   }
-
   /**
    * Get whether the DateTime is in a DST.
    * @type {boolean}
    */
+
+
   get isInDST() {
     if (this.isOffsetFixed) {
       return false;
@@ -6839,37 +8116,39 @@ class DateTime {
       }).offset;
     }
   }
-
   /**
    * Returns true if this DateTime is in a leap year, false otherwise
    * @example DateTime.local(2016).isInLeapYear //=> true
    * @example DateTime.local(2013).isInLeapYear //=> false
    * @type {boolean}
    */
+
+
   get isInLeapYear() {
     return isLeapYear(this.year);
   }
-
   /**
    * Returns the number of days in this DateTime's month
    * @example DateTime.local(2016, 2).daysInMonth //=> 29
    * @example DateTime.local(2016, 3).daysInMonth //=> 31
    * @type {number}
    */
+
+
   get daysInMonth() {
     return daysInMonth(this.year, this.month);
   }
-
   /**
    * Returns the number of days in this DateTime's year
    * @example DateTime.local(2016).daysInYear //=> 366
    * @example DateTime.local(2013).daysInYear //=> 365
    * @type {number}
    */
+
+
   get daysInYear() {
     return this.isValid ? daysInYear(this.year) : NaN;
   }
-
   /**
    * Returns the number of weeks in this DateTime's year
    * @see https://en.wikipedia.org/wiki/ISO_week_date
@@ -6877,30 +8156,33 @@ class DateTime {
    * @example DateTime.local(2013).weeksInWeekYear //=> 52
    * @type {number}
    */
+
+
   get weeksInWeekYear() {
     return this.isValid ? weeksInWeekYear(this.weekYear) : NaN;
   }
-
   /**
    * Returns the resolved Intl options for this DateTime.
    * This is useful in understanding the behavior of formatting methods
    * @param {Object} opts - the same options as toLocaleString
    * @return {Object}
    */
+
+
   resolvedLocaleOptions() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
     const _Formatter$create$res = Formatter.create(this.loc.clone(opts), opts).resolvedOptions(this),
-      locale = _Formatter$create$res.locale,
-      numberingSystem = _Formatter$create$res.numberingSystem,
-      calendar = _Formatter$create$res.calendar;
+          locale = _Formatter$create$res.locale,
+          numberingSystem = _Formatter$create$res.numberingSystem,
+          calendar = _Formatter$create$res.calendar;
+
     return {
       locale,
       numberingSystem,
       outputCalendar: calendar
     };
-  }
-
-  // TRANSFORM
+  } // TRANSFORM
 
   /**
    * "Set" the DateTime's zone to UTC. Returns a newly-constructed DateTime.
@@ -6910,22 +8192,24 @@ class DateTime {
    * @param {Object} [opts={}] - options to pass to `setZone()`
    * @return {DateTime}
    */
+
+
   toUTC() {
     let offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return this.setZone(FixedOffsetZone.instance(offset), opts);
   }
-
   /**
    * "Set" the DateTime's zone to the host's local zone. Returns a newly-constructed DateTime.
    *
    * Equivalent to `setZone('local')`
    * @return {DateTime}
    */
+
+
   toLocal() {
     return this.setZone(Settings.defaultZone);
   }
-
   /**
    * "Set" the DateTime's zone to specified zone. Returns a newly-constructed DateTime.
    *
@@ -6935,44 +8219,55 @@ class DateTime {
    * @param {boolean} [opts.keepLocalTime=false] - If true, adjust the underlying time so that the local time stays the same, but in the target zone. You should rarely need this.
    * @return {DateTime}
    */
+
+
   setZone(zone) {
     let _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref2$keepLocalTime = _ref2.keepLocalTime,
-      keepLocalTime = _ref2$keepLocalTime === void 0 ? false : _ref2$keepLocalTime,
-      _ref2$keepCalendarTim = _ref2.keepCalendarTime,
-      keepCalendarTime = _ref2$keepCalendarTim === void 0 ? false : _ref2$keepCalendarTim;
+        _ref2$keepLocalTime = _ref2.keepLocalTime,
+        keepLocalTime = _ref2$keepLocalTime === void 0 ? false : _ref2$keepLocalTime,
+        _ref2$keepCalendarTim = _ref2.keepCalendarTime,
+        keepCalendarTime = _ref2$keepCalendarTim === void 0 ? false : _ref2$keepCalendarTim;
+
     zone = normalizeZone(zone, Settings.defaultZone);
+
     if (zone.equals(this.zone)) {
       return this;
     } else if (!zone.isValid) {
       return DateTime.invalid(unsupportedZone(zone));
     } else {
       let newTS = this.ts;
+
       if (keepLocalTime || keepCalendarTime) {
         const offsetGuess = zone.offset(this.ts);
         const asObj = this.toObject();
+
         var _objToTS5 = objToTS(asObj, offsetGuess, zone);
+
         var _objToTS6 = datetime_slicedToArray(_objToTS5, 1);
+
         newTS = _objToTS6[0];
       }
+
       return datetime_clone(this, {
         ts: newTS,
         zone
       });
     }
   }
-
   /**
    * "Set" the locale, numberingSystem, or outputCalendar. Returns a newly-constructed DateTime.
    * @param {Object} properties - the properties to set
    * @example DateTime.local(2017, 5, 25).reconfigure({ locale: 'en-GB' })
    * @return {DateTime}
    */
+
+
   reconfigure() {
     let _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      locale = _ref3.locale,
-      numberingSystem = _ref3.numberingSystem,
-      outputCalendar = _ref3.outputCalendar;
+        locale = _ref3.locale,
+        numberingSystem = _ref3.numberingSystem,
+        outputCalendar = _ref3.outputCalendar;
+
     const loc = this.loc.clone({
       locale,
       numberingSystem,
@@ -6982,19 +8277,19 @@ class DateTime {
       loc
     });
   }
-
   /**
    * "Set" the locale. Returns a newly-constructed DateTime.
    * Just a convenient alias for reconfigure({ locale })
    * @example DateTime.local(2017, 5, 25).setLocale('en-GB')
    * @return {DateTime}
    */
+
+
   setLocale(locale) {
     return this.reconfigure({
       locale
     });
   }
-
   /**
    * "Set" the values of specified units. Returns a newly-constructed DateTime.
    * You can only set units with this method; for "setting" metadata, see {@link DateTime#reconfigure} and {@link DateTime#setZone}.
@@ -7005,45 +8300,51 @@ class DateTime {
    * @example dt.set({ year: 2005, ordinal: 234 })
    * @return {DateTime}
    */
+
+
   set(values) {
     if (!this.isValid) return this;
     const normalized = normalizeObject(values, normalizeUnit),
-      settingWeekStuff = !isUndefined(normalized.weekYear) || !isUndefined(normalized.weekNumber) || !isUndefined(normalized.weekday),
-      containsOrdinal = !isUndefined(normalized.ordinal),
-      containsGregorYear = !isUndefined(normalized.year),
-      containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day),
-      containsGregor = containsGregorYear || containsGregorMD,
-      definiteWeekDef = normalized.weekYear || normalized.weekNumber;
+          settingWeekStuff = !isUndefined(normalized.weekYear) || !isUndefined(normalized.weekNumber) || !isUndefined(normalized.weekday),
+          containsOrdinal = !isUndefined(normalized.ordinal),
+          containsGregorYear = !isUndefined(normalized.year),
+          containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day),
+          containsGregor = containsGregorYear || containsGregorMD,
+          definiteWeekDef = normalized.weekYear || normalized.weekNumber;
+
     if ((containsGregor || containsOrdinal) && definiteWeekDef) {
       throw new ConflictingSpecificationError("Can't mix weekYear/weekNumber units with year/month/day or ordinals");
     }
+
     if (containsGregorMD && containsOrdinal) {
       throw new ConflictingSpecificationError("Can't mix ordinal dates with month/day");
     }
+
     let mixed;
+
     if (settingWeekStuff) {
       mixed = weekToGregorian(datetime_objectSpread(datetime_objectSpread({}, gregorianToWeek(this.c)), normalized));
     } else if (!isUndefined(normalized.ordinal)) {
       mixed = ordinalToGregorian(datetime_objectSpread(datetime_objectSpread({}, gregorianToOrdinal(this.c)), normalized));
     } else {
-      mixed = datetime_objectSpread(datetime_objectSpread({}, this.toObject()), normalized);
-
-      // if we didn't set the day but we ended up on an overflow date,
+      mixed = datetime_objectSpread(datetime_objectSpread({}, this.toObject()), normalized); // if we didn't set the day but we ended up on an overflow date,
       // use the last day of the right month
+
       if (isUndefined(normalized.day)) {
         mixed.day = Math.min(daysInMonth(mixed.year, mixed.month), mixed.day);
       }
     }
+
     const _objToTS7 = objToTS(mixed, this.o, this.zone),
-      _objToTS8 = datetime_slicedToArray(_objToTS7, 2),
-      ts = _objToTS8[0],
-      o = _objToTS8[1];
+          _objToTS8 = datetime_slicedToArray(_objToTS7, 2),
+          ts = _objToTS8[0],
+          o = _objToTS8[1];
+
     return datetime_clone(this, {
       ts,
       o
     });
   }
-
   /**
    * Add a period of time to this DateTime and return the resulting DateTime
    *
@@ -7057,24 +8358,26 @@ class DateTime {
    * @example DateTime.now().plus(Duration.fromObject({ hours: 3, minutes: 13 })) //~> in 3 hr, 13 min
    * @return {DateTime}
    */
+
+
   plus(duration) {
     if (!this.isValid) return this;
     const dur = Duration.fromDurationLike(duration);
     return datetime_clone(this, adjustTime(this, dur));
   }
-
   /**
    * Subtract a period of time to this DateTime and return the resulting DateTime
    * See {@link DateTime#plus}
    * @param {Duration|Object|number} duration - The amount to subtract. Either a Luxon Duration, a number of milliseconds, the object argument to Duration.fromObject()
    @return {DateTime}
    */
+
+
   minus(duration) {
     if (!this.isValid) return this;
     const dur = Duration.fromDurationLike(duration).negate();
     return datetime_clone(this, adjustTime(this, dur));
   }
-
   /**
    * "Set" this DateTime to the beginning of a unit of time.
    * @param {string} unit - The unit to go to the beginning of. Can be 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', or 'millisecond'.
@@ -7085,31 +8388,40 @@ class DateTime {
    * @example DateTime.local(2014, 3, 3, 5, 30).startOf('hour').toISOTime(); //=> '05:00:00.000-05:00'
    * @return {DateTime}
    */
+
+
   startOf(unit) {
     if (!this.isValid) return this;
     const o = {},
-      normalizedUnit = Duration.normalizeUnit(unit);
+          normalizedUnit = Duration.normalizeUnit(unit);
+
     switch (normalizedUnit) {
       case "years":
         o.month = 1;
       // falls through
+
       case "quarters":
       case "months":
         o.day = 1;
       // falls through
+
       case "weeks":
       case "days":
         o.hour = 0;
       // falls through
+
       case "hours":
         o.minute = 0;
       // falls through
+
       case "minutes":
         o.second = 0;
       // falls through
+
       case "seconds":
         o.millisecond = 0;
         break;
+
       case "milliseconds":
         break;
       // no default, invalid units throw in normalizeUnit()
@@ -7118,13 +8430,14 @@ class DateTime {
     if (normalizedUnit === "weeks") {
       o.weekday = 1;
     }
+
     if (normalizedUnit === "quarters") {
       const q = Math.ceil(this.month / 3);
       o.month = (q - 1) * 3 + 1;
     }
+
     return this.set(o);
   }
-
   /**
    * "Set" this DateTime to the end (meaning the last millisecond) of a unit of time
    * @param {string} unit - The unit to go to the end of. Can be 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', or 'millisecond'.
@@ -7135,13 +8448,13 @@ class DateTime {
    * @example DateTime.local(2014, 3, 3, 5, 30).endOf('hour').toISO(); //=> '2014-03-03T05:59:59.999-05:00'
    * @return {DateTime}
    */
+
+
   endOf(unit) {
     return this.isValid ? this.plus({
       [unit]: 1
     }).startOf(unit).minus(1) : this;
-  }
-
-  // OUTPUT
+  } // OUTPUT
 
   /**
    * Returns a string representation of this DateTime formatted according to the specified format string.
@@ -7155,11 +8468,12 @@ class DateTime {
    * @example DateTime.now().toFormat("HH 'hours and' mm 'minutes'") //=> '20 hours and 55 minutes'
    * @return {string}
    */
+
+
   toFormat(fmt) {
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return this.isValid ? Formatter.create(this.loc.redefaultToEN(opts)).formatDateTimeFromString(this, fmt) : datetime_INVALID;
   }
-
   /**
    * Returns a localized string representing this date. Accepts the same options as the Intl.DateTimeFormat constructor and any presets defined by Luxon, such as `DateTime.DATE_FULL` or `DateTime.TIME_SIMPLE`.
    * The exact behavior of this method is browser-specific, but in general it will return an appropriate representation
@@ -7179,12 +8493,13 @@ class DateTime {
    * @example DateTime.now().toLocaleString({ hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }); //=> '11:32'
    * @return {string}
    */
+
+
   toLocaleString() {
     let formatOpts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DATE_SHORT;
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return this.isValid ? Formatter.create(this.loc.clone(opts), formatOpts).formatDateTime(this) : datetime_INVALID;
   }
-
   /**
    * Returns an array of format "parts", meaning individual tokens along with metadata. This is allows callers to post-process individual sections of the formatted output.
    * Defaults to the system's locale if no locale has been specified
@@ -7198,11 +8513,12 @@ class DateTime {
    *                                   //=>   { type: 'year', value: '1982' }
    *                                   //=> ]
    */
+
+
   toLocaleParts() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return this.isValid ? Formatter.create(this.loc.clone(opts), opts).formatDateTimeParts(this) : [];
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this DateTime
    * @param {Object} opts - options
@@ -7217,28 +8533,31 @@ class DateTime {
    * @example DateTime.now().toISO({ format: 'basic' }) //=> '20170422T204705.335-0400'
    * @return {string}
    */
+
+
   toISO() {
     let _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref4$format = _ref4.format,
-      format = _ref4$format === void 0 ? "extended" : _ref4$format,
-      _ref4$suppressSeconds = _ref4.suppressSeconds,
-      suppressSeconds = _ref4$suppressSeconds === void 0 ? false : _ref4$suppressSeconds,
-      _ref4$suppressMillise = _ref4.suppressMilliseconds,
-      suppressMilliseconds = _ref4$suppressMillise === void 0 ? false : _ref4$suppressMillise,
-      _ref4$includeOffset = _ref4.includeOffset,
-      includeOffset = _ref4$includeOffset === void 0 ? true : _ref4$includeOffset,
-      _ref4$extendedZone = _ref4.extendedZone,
-      extendedZone = _ref4$extendedZone === void 0 ? false : _ref4$extendedZone;
+        _ref4$format = _ref4.format,
+        format = _ref4$format === void 0 ? "extended" : _ref4$format,
+        _ref4$suppressSeconds = _ref4.suppressSeconds,
+        suppressSeconds = _ref4$suppressSeconds === void 0 ? false : _ref4$suppressSeconds,
+        _ref4$suppressMillise = _ref4.suppressMilliseconds,
+        suppressMilliseconds = _ref4$suppressMillise === void 0 ? false : _ref4$suppressMillise,
+        _ref4$includeOffset = _ref4.includeOffset,
+        includeOffset = _ref4$includeOffset === void 0 ? true : _ref4$includeOffset,
+        _ref4$extendedZone = _ref4.extendedZone,
+        extendedZone = _ref4$extendedZone === void 0 ? false : _ref4$extendedZone;
+
     if (!this.isValid) {
       return null;
     }
+
     const ext = format === "extended";
     let c = toISODate(this, ext);
     c += "T";
     c += toISOTime(this, ext, suppressSeconds, suppressMilliseconds, includeOffset, extendedZone);
     return c;
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this DateTime's date component
    * @param {Object} opts - options
@@ -7247,25 +8566,29 @@ class DateTime {
    * @example DateTime.utc(1982, 5, 25).toISODate({ format: 'basic' }) //=> '19820525'
    * @return {string}
    */
+
+
   toISODate() {
     let _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref5$format = _ref5.format,
-      format = _ref5$format === void 0 ? "extended" : _ref5$format;
+        _ref5$format = _ref5.format,
+        format = _ref5$format === void 0 ? "extended" : _ref5$format;
+
     if (!this.isValid) {
       return null;
     }
+
     return toISODate(this, format === "extended");
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this DateTime's week date
    * @example DateTime.utc(1982, 5, 25).toISOWeekDate() //=> '1982-W21-2'
    * @return {string}
    */
+
+
   toISOWeekDate() {
     return toTechFormat(this, "kkkk-'W'WW-c");
   }
-
   /**
    * Returns an ISO 8601-compliant string representation of this DateTime's time component
    * @param {Object} opts - options
@@ -7281,37 +8604,41 @@ class DateTime {
    * @example DateTime.utc().set({ hour: 7, minute: 34 }).toISOTime({ includePrefix: true }) //=> 'T07:34:19.361Z'
    * @return {string}
    */
+
+
   toISOTime() {
     let _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref6$suppressMillise = _ref6.suppressMilliseconds,
-      suppressMilliseconds = _ref6$suppressMillise === void 0 ? false : _ref6$suppressMillise,
-      _ref6$suppressSeconds = _ref6.suppressSeconds,
-      suppressSeconds = _ref6$suppressSeconds === void 0 ? false : _ref6$suppressSeconds,
-      _ref6$includeOffset = _ref6.includeOffset,
-      includeOffset = _ref6$includeOffset === void 0 ? true : _ref6$includeOffset,
-      _ref6$includePrefix = _ref6.includePrefix,
-      includePrefix = _ref6$includePrefix === void 0 ? false : _ref6$includePrefix,
-      _ref6$extendedZone = _ref6.extendedZone,
-      extendedZone = _ref6$extendedZone === void 0 ? false : _ref6$extendedZone,
-      _ref6$format = _ref6.format,
-      format = _ref6$format === void 0 ? "extended" : _ref6$format;
+        _ref6$suppressMillise = _ref6.suppressMilliseconds,
+        suppressMilliseconds = _ref6$suppressMillise === void 0 ? false : _ref6$suppressMillise,
+        _ref6$suppressSeconds = _ref6.suppressSeconds,
+        suppressSeconds = _ref6$suppressSeconds === void 0 ? false : _ref6$suppressSeconds,
+        _ref6$includeOffset = _ref6.includeOffset,
+        includeOffset = _ref6$includeOffset === void 0 ? true : _ref6$includeOffset,
+        _ref6$includePrefix = _ref6.includePrefix,
+        includePrefix = _ref6$includePrefix === void 0 ? false : _ref6$includePrefix,
+        _ref6$extendedZone = _ref6.extendedZone,
+        extendedZone = _ref6$extendedZone === void 0 ? false : _ref6$extendedZone,
+        _ref6$format = _ref6.format,
+        format = _ref6$format === void 0 ? "extended" : _ref6$format;
+
     if (!this.isValid) {
       return null;
     }
+
     let c = includePrefix ? "T" : "";
     return c + toISOTime(this, format === "extended", suppressSeconds, suppressMilliseconds, includeOffset, extendedZone);
   }
-
   /**
    * Returns an RFC 2822-compatible string representation of this DateTime
    * @example DateTime.utc(2014, 7, 13).toRFC2822() //=> 'Sun, 13 Jul 2014 00:00:00 +0000'
    * @example DateTime.local(2014, 7, 13).toRFC2822() //=> 'Sun, 13 Jul 2014 00:00:00 -0400'
    * @return {string}
    */
+
+
   toRFC2822() {
     return toTechFormat(this, "EEE, dd LLL yyyy HH:mm:ss ZZZ", false);
   }
-
   /**
    * Returns a string representation of this DateTime appropriate for use in HTTP headers. The output is always expressed in GMT.
    * Specifically, the string conforms to RFC 1123.
@@ -7320,22 +8647,25 @@ class DateTime {
    * @example DateTime.utc(2014, 7, 13, 19).toHTTP() //=> 'Sun, 13 Jul 2014 19:00:00 GMT'
    * @return {string}
    */
+
+
   toHTTP() {
     return toTechFormat(this.toUTC(), "EEE, dd LLL yyyy HH:mm:ss 'GMT'");
   }
-
   /**
    * Returns a string representation of this DateTime appropriate for use in SQL Date
    * @example DateTime.utc(2014, 7, 13).toSQLDate() //=> '2014-07-13'
    * @return {string}
    */
+
+
   toSQLDate() {
     if (!this.isValid) {
       return null;
     }
+
     return toISODate(this, true);
   }
-
   /**
    * Returns a string representation of this DateTime appropriate for use in SQL Time
    * @param {Object} opts - options
@@ -7348,28 +8678,33 @@ class DateTime {
    * @example DateTime.now().toSQL({ includeZone: false }) //=> '05:15:16.345 America/New_York'
    * @return {string}
    */
+
+
   toSQLTime() {
     let _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref7$includeOffset = _ref7.includeOffset,
-      includeOffset = _ref7$includeOffset === void 0 ? true : _ref7$includeOffset,
-      _ref7$includeZone = _ref7.includeZone,
-      includeZone = _ref7$includeZone === void 0 ? false : _ref7$includeZone,
-      _ref7$includeOffsetSp = _ref7.includeOffsetSpace,
-      includeOffsetSpace = _ref7$includeOffsetSp === void 0 ? true : _ref7$includeOffsetSp;
+        _ref7$includeOffset = _ref7.includeOffset,
+        includeOffset = _ref7$includeOffset === void 0 ? true : _ref7$includeOffset,
+        _ref7$includeZone = _ref7.includeZone,
+        includeZone = _ref7$includeZone === void 0 ? false : _ref7$includeZone,
+        _ref7$includeOffsetSp = _ref7.includeOffsetSpace,
+        includeOffsetSpace = _ref7$includeOffsetSp === void 0 ? true : _ref7$includeOffsetSp;
+
     let fmt = "HH:mm:ss.SSS";
+
     if (includeZone || includeOffset) {
       if (includeOffsetSpace) {
         fmt += " ";
       }
+
       if (includeZone) {
         fmt += "z";
       } else if (includeOffset) {
         fmt += "ZZ";
       }
     }
+
     return toTechFormat(this, fmt, true);
   }
-
   /**
    * Returns a string representation of this DateTime appropriate for use in SQL DateTime
    * @param {Object} opts - options
@@ -7382,70 +8717,80 @@ class DateTime {
    * @example DateTime.local(2014, 7, 13).toSQL({ includeZone: true }) //=> '2014-07-13 00:00:00.000 America/New_York'
    * @return {string}
    */
+
+
   toSQL() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
     if (!this.isValid) {
       return null;
     }
+
     return `${this.toSQLDate()} ${this.toSQLTime(opts)}`;
   }
-
   /**
    * Returns a string representation of this DateTime appropriate for debugging
    * @return {string}
    */
+
+
   toString() {
     return this.isValid ? this.toISO() : datetime_INVALID;
   }
-
   /**
    * Returns the epoch milliseconds of this DateTime. Alias of {@link DateTime#toMillis}
    * @return {number}
    */
+
+
   valueOf() {
     return this.toMillis();
   }
-
   /**
    * Returns the epoch milliseconds of this DateTime.
    * @return {number}
    */
+
+
   toMillis() {
     return this.isValid ? this.ts : NaN;
   }
-
   /**
    * Returns the epoch seconds of this DateTime.
    * @return {number}
    */
+
+
   toSeconds() {
     return this.isValid ? this.ts / 1000 : NaN;
   }
-
   /**
    * Returns the epoch seconds (as a whole number) of this DateTime.
    * @return {number}
    */
+
+
   toUnixInteger() {
     return this.isValid ? Math.floor(this.ts / 1000) : NaN;
   }
-
   /**
    * Returns an ISO 8601 representation of this DateTime appropriate for use in JSON.
    * @return {string}
    */
+
+
   toJSON() {
     return this.toISO();
   }
-
   /**
    * Returns a BSON serializable equivalent to this DateTime.
    * @return {Date}
    */
+
+
   toBSON() {
     return this.toJSDate();
   }
-
   /**
    * Returns a JavaScript object with this DateTime's year, month, day, and so on.
    * @param opts - options for generating the object
@@ -7453,27 +8798,31 @@ class DateTime {
    * @example DateTime.now().toObject() //=> { year: 2017, month: 4, day: 22, hour: 20, minute: 49, second: 42, millisecond: 268 }
    * @return {Object}
    */
+
+
   toObject() {
     let opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     if (!this.isValid) return {};
+
     const base = datetime_objectSpread({}, this.c);
+
     if (opts.includeConfig) {
       base.outputCalendar = this.outputCalendar;
       base.numberingSystem = this.loc.numberingSystem;
       base.locale = this.loc.locale;
     }
+
     return base;
   }
-
   /**
    * Returns a JavaScript Date equivalent to this DateTime.
    * @return {Date}
    */
+
+
   toJSDate() {
     return new Date(this.isValid ? this.ts : NaN);
-  }
-
-  // COMPARE
+  } // COMPARE
 
   /**
    * Return the difference between two DateTimes as a Duration.
@@ -7490,24 +8839,28 @@ class DateTime {
    * i2.diff(i1, ['months', 'days', 'hours']).toObject() //=> { months: 16, days: 19, hours: 0.75 }
    * @return {Duration}
    */
+
+
   diff(otherDateTime) {
     let unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "milliseconds";
     let opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
     if (!this.isValid || !otherDateTime.isValid) {
       return Duration.invalid("created by diffing an invalid DateTime");
     }
+
     const durOpts = datetime_objectSpread({
       locale: this.locale,
       numberingSystem: this.numberingSystem
     }, opts);
+
     const units = maybeArray(unit).map(Duration.normalizeUnit),
-      otherIsLater = otherDateTime.valueOf() > this.valueOf(),
-      earlier = otherIsLater ? this : otherDateTime,
-      later = otherIsLater ? otherDateTime : this,
-      diffed = diff(earlier, later, units, durOpts);
+          otherIsLater = otherDateTime.valueOf() > this.valueOf(),
+          earlier = otherIsLater ? this : otherDateTime,
+          later = otherIsLater ? otherDateTime : this,
+          diffed = diff(earlier, later, units, durOpts);
     return otherIsLater ? diffed.negate() : diffed;
   }
-
   /**
    * Return the difference between this DateTime and right now.
    * See {@link DateTime#diff}
@@ -7516,21 +8869,23 @@ class DateTime {
    * @param {string} [opts.conversionAccuracy='casual'] - the conversion system to use
    * @return {Duration}
    */
+
+
   diffNow() {
     let unit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "milliseconds";
     let opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return this.diff(DateTime.now(), unit, opts);
   }
-
   /**
    * Return an Interval spanning between this DateTime and another DateTime
    * @param {DateTime} otherDateTime - the other end point of the Interval
    * @return {Interval}
    */
+
+
   until(otherDateTime) {
     return this.isValid ? Interval.fromDateTimes(this, otherDateTime) : this;
   }
-
   /**
    * Return whether this DateTime is in the same unit of time as another DateTime.
    * Higher-order units must also be identical for this function to return `true`.
@@ -7540,6 +8895,8 @@ class DateTime {
    * @example DateTime.now().hasSame(otherDT, 'day'); //~> true if otherDT is in the same current calendar day
    * @return {boolean}
    */
+
+
   hasSame(otherDateTime, unit) {
     if (!this.isValid) return false;
     const inputMs = otherDateTime.valueOf();
@@ -7548,7 +8905,6 @@ class DateTime {
     });
     return adjustedToZone.startOf(unit) <= inputMs && inputMs <= adjustedToZone.endOf(unit);
   }
-
   /**
    * Equality check
    * Two DateTimes are equal if and only if they represent the same millisecond, have the same zone and location, and are both valid.
@@ -7556,10 +8912,11 @@ class DateTime {
    * @param {DateTime} other - the other DateTime
    * @return {boolean}
    */
+
+
   equals(other) {
     return this.isValid && other.isValid && this.valueOf() === other.valueOf() && this.zone.equals(other.zone) && this.loc.equals(other.loc);
   }
-
   /**
    * Returns a string representation of a this time relative to now, such as "in two days". Can only internationalize if your
    * platform supports Intl.RelativeTimeFormat. Rounds down by default.
@@ -7578,26 +8935,29 @@ class DateTime {
    * @example DateTime.now().minus({ days: 2 }).toRelative({ unit: "hours" }) //=> "48 hours ago"
    * @example DateTime.now().minus({ hours: 36 }).toRelative({ round: false }) //=> "1.5 days ago"
    */
+
+
   toRelative() {
     let options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     if (!this.isValid) return null;
     const base = options.base || DateTime.fromObject({}, {
-        zone: this.zone
-      }),
-      padding = options.padding ? this < base ? -options.padding : options.padding : 0;
+      zone: this.zone
+    }),
+          padding = options.padding ? this < base ? -options.padding : options.padding : 0;
     let units = ["years", "months", "days", "hours", "minutes", "seconds"];
     let unit = options.unit;
+
     if (Array.isArray(options.unit)) {
       units = options.unit;
       unit = undefined;
     }
+
     return diffRelative(base, this.plus(padding), datetime_objectSpread(datetime_objectSpread({}, options), {}, {
       numeric: "always",
       units,
       unit
     }));
   }
-
   /**
    * Returns a string representation of this date relative to today, such as "yesterday" or "next month".
    * Only internationalizes on platforms that supports Intl.RelativeTimeFormat.
@@ -7611,6 +8971,8 @@ class DateTime {
    * @example DateTime.now().plus({ days: 1 }).toRelativeCalendar({ locale: "fr" }) //=> "demain"
    * @example DateTime.now().minus({ days: 2 }).toRelativeCalendar() //=> "2 days ago"
    */
+
+
   toRelativeCalendar() {
     let options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     if (!this.isValid) return null;
@@ -7622,38 +8984,42 @@ class DateTime {
       calendary: true
     }));
   }
-
   /**
    * Return the min of several date times
    * @param {...DateTime} dateTimes - the DateTimes from which to choose the minimum
    * @return {DateTime} the min DateTime, or undefined if called with no argument
    */
+
+
   static min() {
     for (var _len = arguments.length, dateTimes = new Array(_len), _key = 0; _key < _len; _key++) {
       dateTimes[_key] = arguments[_key];
     }
+
     if (!dateTimes.every(DateTime.isDateTime)) {
       throw new InvalidArgumentError("min requires all arguments be DateTimes");
     }
+
     return bestBy(dateTimes, i => i.valueOf(), Math.min);
   }
-
   /**
    * Return the max of several date times
    * @param {...DateTime} dateTimes - the DateTimes from which to choose the maximum
    * @return {DateTime} the max DateTime, or undefined if called with no argument
    */
+
+
   static max() {
     for (var _len2 = arguments.length, dateTimes = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       dateTimes[_key2] = arguments[_key2];
     }
+
     if (!dateTimes.every(DateTime.isDateTime)) {
       throw new InvalidArgumentError("max requires all arguments be DateTimes");
     }
-    return bestBy(dateTimes, i => i.valueOf(), Math.max);
-  }
 
-  // MISC
+    return bestBy(dateTimes, i => i.valueOf(), Math.max);
+  } // MISC
 
   /**
    * Explain how a string would be parsed by fromFormat()
@@ -7662,210 +9028,235 @@ class DateTime {
    * @param {Object} options - options taken by fromFormat()
    * @return {Object}
    */
+
+
   static fromFormatExplain(text, fmt) {
     let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     const _options$locale = options.locale,
-      locale = _options$locale === void 0 ? null : _options$locale,
-      _options$numberingSys = options.numberingSystem,
-      numberingSystem = _options$numberingSys === void 0 ? null : _options$numberingSys,
-      localeToUse = Locale.fromOpts({
-        locale,
-        numberingSystem,
-        defaultToEN: true
-      });
+          locale = _options$locale === void 0 ? null : _options$locale,
+          _options$numberingSys = options.numberingSystem,
+          numberingSystem = _options$numberingSys === void 0 ? null : _options$numberingSys,
+          localeToUse = Locale.fromOpts({
+      locale,
+      numberingSystem,
+      defaultToEN: true
+    });
     return explainFromTokens(localeToUse, text, fmt);
   }
-
   /**
    * @deprecated use fromFormatExplain instead
    */
+
+
   static fromStringExplain(text, fmt) {
     let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     return DateTime.fromFormatExplain(text, fmt, options);
-  }
-
-  // FORMAT PRESETS
+  } // FORMAT PRESETS
 
   /**
    * {@link DateTime#toLocaleString} format like 10/14/1983
    * @type {Object}
    */
+
+
   static get DATE_SHORT() {
     return DATE_SHORT;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Oct 14, 1983'
    * @type {Object}
    */
+
+
   static get DATE_MED() {
     return DATE_MED;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Fri, Oct 14, 1983'
    * @type {Object}
    */
+
+
   static get DATE_MED_WITH_WEEKDAY() {
     return DATE_MED_WITH_WEEKDAY;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'October 14, 1983'
    * @type {Object}
    */
+
+
   static get DATE_FULL() {
     return DATE_FULL;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Tuesday, October 14, 1983'
    * @type {Object}
    */
+
+
   static get DATE_HUGE() {
     return DATE_HUGE;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get TIME_SIMPLE() {
     return TIME_SIMPLE;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30:23 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get TIME_WITH_SECONDS() {
     return TIME_WITH_SECONDS;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30:23 AM EDT'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get TIME_WITH_SHORT_OFFSET() {
     return TIME_WITH_SHORT_OFFSET;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30:23 AM Eastern Daylight Time'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get TIME_WITH_LONG_OFFSET() {
     return TIME_WITH_LONG_OFFSET;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30', always 24-hour.
    * @type {Object}
    */
+
+
   static get TIME_24_SIMPLE() {
     return TIME_24_SIMPLE;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30:23', always 24-hour.
    * @type {Object}
    */
+
+
   static get TIME_24_WITH_SECONDS() {
     return TIME_24_WITH_SECONDS;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30:23 EDT', always 24-hour.
    * @type {Object}
    */
+
+
   static get TIME_24_WITH_SHORT_OFFSET() {
     return TIME_24_WITH_SHORT_OFFSET;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '09:30:23 Eastern Daylight Time', always 24-hour.
    * @type {Object}
    */
+
+
   static get TIME_24_WITH_LONG_OFFSET() {
     return TIME_24_WITH_LONG_OFFSET;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '10/14/1983, 9:30 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_SHORT() {
     return DATETIME_SHORT;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like '10/14/1983, 9:30:33 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_SHORT_WITH_SECONDS() {
     return DATETIME_SHORT_WITH_SECONDS;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Oct 14, 1983, 9:30 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_MED() {
     return DATETIME_MED;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Oct 14, 1983, 9:30:33 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_MED_WITH_SECONDS() {
     return DATETIME_MED_WITH_SECONDS;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Fri, 14 Oct 1983, 9:30 AM'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_MED_WITH_WEEKDAY() {
     return DATETIME_MED_WITH_WEEKDAY;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'October 14, 1983, 9:30 AM EDT'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_FULL() {
     return DATETIME_FULL;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'October 14, 1983, 9:30:33 AM EDT'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_FULL_WITH_SECONDS() {
     return DATETIME_FULL_WITH_SECONDS;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Friday, October 14, 1983, 9:30 AM Eastern Daylight Time'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_HUGE() {
     return DATETIME_HUGE;
   }
-
   /**
    * {@link DateTime#toLocaleString} format like 'Friday, October 14, 1983, 9:30:33 AM Eastern Daylight Time'. Only 12-hour if the locale is.
    * @type {Object}
    */
+
+
   static get DATETIME_HUGE_WITH_SECONDS() {
     return DATETIME_HUGE_WITH_SECONDS;
   }
-}
 
+}
 /**
  * @private
  */
+
 function friendlyDateTime(dateTimeish) {
   if (DateTime.isDateTime(dateTimeish)) {
     return dateTimeish;
@@ -7893,15 +9284,23 @@ const VERSION = "3.2.0";
 ;// CONCATENATED MODULE: ./src/3_8/utils.ts
 
 
+
+
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
+const { EllipsizeMode } = imports.gi.Pango;
 const { IconTheme } = imports.gi.Gtk;
 const { Object: utils_Object } = imports.gi.GObject;
+function Label(options) {
+    const label = new imports.gi.St.Label(options);
+    label.clutter_text.ellipsize = EllipsizeMode.NONE;
+    return label;
+}
 function _(str, args) {
     let result = imports.gettext.dgettext(UUID, str);
     if (result === str && result === "")
         result = imports.gettext.gettext(str);
-    if (!!args)
+    if (args)
         result = format(result, args);
     return result;
 }
@@ -7927,25 +9326,60 @@ function GenerateLocationText(weather, config) {
     }
     return location;
 }
-function InjectValues(text, weather, config) {
+function InjectValues(text, weather, config, inCommand = false) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
-    const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
-    return text.replace(/{t}/g, (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "")
-        .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
-        .replace(/{c}/g, weather.condition.main)
-        .replace(/{c_long}/g, weather.condition.description)
-        .replace(/{dew_point}/g, (_b = TempToUserConfig(weather.dewPoint, config, false)) !== null && _b !== void 0 ? _b : "")
-        .replace(/{humidity}/g, (_d = (_c = weather.humidity) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "")
-        .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
-        .replace(/{pressure_unit}/g, config._pressureUnit)
-        .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
-        .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-        .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
-        .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-        .replace(/{city}/g, (_e = weather.location.city) !== null && _e !== void 0 ? _e : "")
-        .replace(/{country}/g, (_f = weather.location.country) !== null && _f !== void 0 ? _f : "")
-        .replace(/{search_entry}/g, (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "")
-        .replace(/{last_updated}/g, lastUpdatedTime);
+    const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
+    const temp = (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "";
+    const tempUnit = UnitToUnicode(config.TemperatureUnit);
+    const condition = weather.condition.main;
+    const conditionLong = weather.condition.description;
+    const dewPoint = (_b = TempToUserConfig(weather.dewPoint, config, false)) !== null && _b !== void 0 ? _b : "";
+    const humidity = (_d = (_c = weather.humidity) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "";
+    const pressure = weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "";
+    const pressureUnit = config._pressureUnit;
+    const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
+    const extraName = weather.extra_field ? weather.extra_field.name : "";
+    const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
+    const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
+    const city = (_e = weather.location.city) !== null && _e !== void 0 ? _e : "";
+    const country = (_f = weather.location.country) !== null && _f !== void 0 ? _f : "";
+    const searchEntry = (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "";
+    if (inCommand) {
+        text = text.replace(/{{t}}/g, Literal(temp))
+            .replace(/{{u}}/g, Literal(tempUnit))
+            .replace(/{{c}}/g, Literal(condition))
+            .replace(/{{c_long}}/g, Literal(conditionLong))
+            .replace(/{{dew_point}}/g, Literal(dewPoint))
+            .replace(/{{humidity}}/g, Literal(humidity))
+            .replace(/{{pressure}}/g, Literal(pressure))
+            .replace(/{{pressure_unit}}/g, Literal(pressureUnit))
+            .replace(/{{extra_value}}/g, Literal(extraValue))
+            .replace(/{{extra_name}}/g, Literal(extraName))
+            .replace(/{{wind_speed}}/g, Literal(windSpeed))
+            .replace(/{{wind_dir}}/g, Literal(windDir))
+            .replace(/{{city}}/g, Literal(city))
+            .replace(/{{country}}/g, Literal(country))
+            .replace(/{{search_entry}}/g, Literal(searchEntry))
+            .replace(/{{last_updated}}/g, Literal(lastUpdatedTime))
+            .replace(/{{br}}/g, Literal("\n"));
+    }
+    return text.replace(/{t}/g, temp)
+        .replace(/{u}/g, tempUnit)
+        .replace(/{c}/g, condition)
+        .replace(/{c_long}/g, conditionLong)
+        .replace(/{dew_point}/g, dewPoint)
+        .replace(/{humidity}/g, humidity)
+        .replace(/{pressure}/g, pressure)
+        .replace(/{pressure_unit}/g, pressureUnit)
+        .replace(/{extra_value}/g, extraValue)
+        .replace(/{extra_name}/g, extraName)
+        .replace(/{wind_speed}/g, windSpeed)
+        .replace(/{wind_dir}/g, windDir)
+        .replace(/{city}/g, city)
+        .replace(/{country}/g, country)
+        .replace(/{search_entry}/g, searchEntry)
+        .replace(/{last_updated}/g, lastUpdatedTime)
+        .replace(/{br}/g, "\n");
 }
 function CapitalizeFirstLetter(description) {
     if ((description == undefined || description == null)) {
@@ -7973,7 +9407,7 @@ function NormalizeTimezone(tz) {
     return tz;
 }
 function GetDayName(date, options = {}) {
-    const { locale = null, showDate = false, tz = undefined, short = false, useTodayTomorrow = true } = options;
+    const { showDate = false, tz = undefined, short = false, useTodayTomorrow = true } = options;
     const params = {
         weekday: short ? "short" : "long",
     };
@@ -7983,7 +9417,7 @@ function GetDayName(date, options = {}) {
     }
     let now = DateTime.utc();
     let tomorrow = DateTime.utc().plus({ days: 1 });
-    if (!!tz) {
+    if (tz) {
         now = now.setZone(tz);
         tomorrow = tomorrow.setZone(tz);
         date = date.setZone(tz);
@@ -7992,8 +9426,6 @@ function GetDayName(date, options = {}) {
         if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
             delete params.weekday;
     }
-    if (!!locale)
-        date = date.setLocale(locale);
     let dateString = date.toLocaleString(params);
     dateString = CapitalizeFirstLetter(dateString);
     if (useTodayTomorrow) {
@@ -8004,7 +9436,7 @@ function GetDayName(date, options = {}) {
     }
     return dateString;
 }
-function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
+function GetHoursMinutes(date, hours24Format, tz, onlyHours = false) {
     const params = {
         hour: "numeric",
         hour12: !hours24Format,
@@ -8012,13 +9444,11 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
     params.timeZone = NormalizeTimezone(tz);
     if (!onlyHours)
         params.minute = "2-digit";
-    if (!!tz)
+    if (tz)
         date = date.setZone(tz);
-    if (!!locale)
-        date = date.setLocale(locale);
     return date.toLocaleString(params);
 }
-function AwareDateString(date, locale, hours24Format, tz) {
+function AwareDateString(date, hours24Format, tz) {
     const now = DateTime.utc().setZone(tz);
     date = date.setZone(tz);
     const params = {
@@ -8034,8 +9464,6 @@ function AwareDateString(date, locale, hours24Format, tz) {
         params.year = "numeric";
     }
     params.timeZone = NormalizeTimezone(tz);
-    if (!!locale)
-        date = date.setLocale(locale);
     return date.toLocaleString(params);
 }
 function MilitaryTime(date) {
@@ -8047,11 +9475,8 @@ function OnSameDay(date1, date2) {
 function ValidTimezone(tz) {
     return DateTime.utc().setZone(tz).isValid;
 }
-function ProcessCondition(condition, shouldTranslate) {
-    condition = CapitalizeFirstLetter(condition);
-    if (shouldTranslate)
-        condition = _(condition);
-    return condition;
+function ProcessCondition(condition) {
+    return CapitalizeFirstLetter(condition);
 }
 function LocalizedColon(locale) {
     if (locale == null)
@@ -8060,9 +9485,9 @@ function LocalizedColon(locale) {
         return " :";
     return ":";
 }
-function PercentToLocale(humidity, locale, withUnit = true) {
+function PercentToLocale(humidity, withUnit = true) {
     if (withUnit)
-        return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+        return (humidity / 100).toLocaleString(undefined, { style: "percent" });
     else
         return Math.round(humidity).toString();
 }
@@ -8072,7 +9497,7 @@ const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
 function ExtraFieldToUserUnits(extra_field, config, withUnit = false) {
     switch (extra_field.type) {
         case "percent":
-            return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+            return PercentToLocale(extra_field.value, withUnit);
         case "temperature":
             return TempToUserConfig(extra_field.value, config, withUnit);
         default:
@@ -8280,7 +9705,7 @@ function CompassDirectionText(deg) {
 function IsNight(sunTimes, date) {
     if (!sunTimes)
         return false;
-    const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+    const time = (date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
     const sunrise = MilitaryTime(sunTimes.sunrise);
     const sunset = MilitaryTime(sunTimes.sunset);
     if (time >= sunrise && time < sunset)
@@ -8308,13 +9733,13 @@ function HasIcon(icon, icon_type) {
 }
 function mode(arr) {
     return arr.reduce(function (current, item) {
-        var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+        const val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
         if (val > current.greatestFreq) {
             current.greatestFreq = val;
             current.mode = item;
         }
         return current;
-    }, { mode: null, greatestFreq: -Infinity, numMapping: {} }).mode;
+    }, { mode: 0, greatestFreq: -Infinity, numMapping: {} }).mode;
 }
 ;
 function WeatherIconSafely(icons, icon_type) {
@@ -8325,23 +9750,51 @@ function WeatherIconSafely(icons, icon_type) {
     return 'weather-severe-alert';
 }
 function ShadeHexColor(color, percent) {
-    var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+    const f = Number.parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
-function ConstructJsLocale(locale) {
-    if (locale == null)
-        return null;
-    const jsLocale = locale.split(/[.\s@]/)[0].trim();
-    const tmp = jsLocale.split("_");
-    let result = "";
-    for (const [i, item] of tmp.entries()) {
-        if (i != 0)
-            result += "-";
-        result += item.toLowerCase();
+function ConstructJsLocale(locales) {
+    var _a;
+    for (const locale of locales) {
+        const jsLocale = locale.split(/[\s.@]/)[0].trim();
+        const tmp = jsLocale.split("_");
+        let result = "";
+        for (const [i, item] of tmp.entries()) {
+            if (i != 0)
+                result += "-";
+            result += item.toLowerCase();
+        }
+        try {
+            new Date().toLocaleString(result);
+        }
+        catch (e) {
+            logger_Logger.Info(`Invalid locale: ${result}, not supported by JS, ignoring.`);
+            logger_Logger.Debug((_a = e === null || e === void 0 ? void 0 : e.toString()) !== null && _a !== void 0 ? _a : "");
+            continue;
+        }
+        if (result == "c")
+            continue;
+        logger_Logger.Debug(`System locale is ${result}, original is ${locale}`);
+        return result;
     }
-    if (result == "c")
-        return null;
-    return result;
+    return null;
+}
+const lightAlertColors = {
+    "minor": "#7FCC00",
+    "moderate": "#FFC400",
+    "severe": "#FF6A00",
+    "extreme": "#FF0000",
+    "unknown": "#000000"
+};
+const darkAlertColors = {
+    "minor": "#AAFF00",
+    "moderate": "#FFD700",
+    "severe": "#FFA500",
+    "extreme": "#FF0000",
+    "unknown": "#FFFFFF"
+};
+function GetAlertColor(level, lightTheme) {
+    return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
@@ -8360,12 +9813,12 @@ function GetFuncName(func) {
 }
 function Guid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        const r = Math.trunc(Math.random() * 16), v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
 const isFinalized = function (obj) {
-    return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+    return !!obj && utils_Object.prototype.toString.call(obj).includes('FINALIZED');
 };
 function CompareVersion(v1, v2, options) {
     const zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
@@ -8373,7 +9826,7 @@ function CompareVersion(v1, v2, options) {
         return (/^\d+$/).test(x);
     }
     if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
-        return NaN;
+        return Number.NaN;
     }
     if (zeroExtend) {
         while (v1parts.length < v2parts.length)
@@ -8381,7 +9834,7 @@ function CompareVersion(v1, v2, options) {
         while (v2parts.length < v1parts.length)
             v2parts.push("0");
     }
-    for (var i = 0; i < v1parts.length; ++i) {
+    for (let i = 0; i < v1parts.length; ++i) {
         if (v2parts.length == i) {
             return 1;
         }
@@ -8413,7 +9866,7 @@ function utils_setTimeout(func, ms) {
 }
 ;
 async function delay(ms) {
-    return await new Promise((resolve, reject) => {
+    return await new Promise((resolve) => {
         utils_setTimeout(() => {
             resolve();
         }, ms);
@@ -8435,206 +9888,6 @@ function utils_setInterval(func, ms) {
     return id;
 }
 ;
-
-;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
-
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
-async function GetFileInfo(file) {
-    return new Promise((resolve, reject) => {
-        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
-            const result = file.query_info_finish(res);
-            resolve(result);
-            return result;
-        });
-    });
-}
-async function FileExists(file, dictionary = false) {
-    try {
-        return file.query_exists(null);
-    }
-    catch (e) {
-        if (e instanceof Error)
-            logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
-        return false;
-    }
-}
-async function LoadContents(file) {
-    return new Promise((resolve, reject) => {
-        file.load_contents_async(null, (obj, res) => {
-            let result, contents = null;
-            try {
-                [result, contents] = file.load_contents_finish(res);
-            }
-            catch (e) {
-                reject(e);
-                return e;
-            }
-            if (result != true) {
-                resolve(null);
-                return null;
-            }
-            if (contents instanceof Uint8Array)
-                contents = ByteArray.toString(contents);
-            resolve(contents.toString());
-            return contents.toString();
-        });
-    });
-}
-async function DeleteFile(file) {
-    const result = await new Promise((resolve, reject) => {
-        file.delete_async(null, null, (obj, res) => {
-            let result = null;
-            try {
-                result = file.delete_finish(res);
-            }
-            catch (e) {
-                if (e instanceof Error) {
-                    let error = e;
-                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                        resolve(true);
-                        return true;
-                    }
-                    Logger.Error("Can't delete file, reason: ", e);
-                }
-                resolve(false);
-                return false;
-            }
-            resolve(result);
-            return result;
-        });
-    });
-    return result;
-}
-async function OverwriteAndGetIOStream(file) {
-    const parent = file.get_parent();
-    if (parent != null && !FileExists(parent))
-        parent.make_directory_with_parents(null);
-    return new Promise((resolve, reject) => {
-        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
-            const ioStream = file.replace_readwrite_finish(result);
-            resolve(ioStream);
-            return ioStream;
-        });
-    });
-}
-async function WriteAsync(outputStream, buffer) {
-    const text = ByteArray.fromString(buffer);
-    if (outputStream.is_closed())
-        return false;
-    return new Promise((resolve, reject) => {
-        outputStream.write_bytes_async(text, null, null, (obj, res) => {
-            const ioStream = outputStream.write_bytes_finish(res);
-            resolve(true);
-            return true;
-        });
-    });
-}
-async function CloseStream(stream) {
-    return new Promise((resolve, reject) => {
-        stream.close_async(null, null, (obj, res) => {
-            const result = stream.close_finish(res);
-            resolve(result);
-            return result;
-        });
-    });
-}
-
-;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
-
-
-
-const { File } = imports.gi.Gio;
-const { get_home_dir, get_environ } = imports.gi.GLib;
-const LogLevelSeverity = {
-    always: 0,
-    critical: 1,
-    error: 5,
-    info: 10,
-    debug: 50,
-    verbose: 100
-};
-class Log {
-    constructor(_instanceId) {
-        this.logLevel = "info";
-        this.ID = _instanceId;
-    }
-    ChangeLevel(level) {
-        this.logLevel = level;
-    }
-    CanLog(level) {
-        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
-    }
-    Info(message) {
-        if (!this.CanLog("info"))
-            return;
-        const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
-        global.log(msg);
-    }
-    Error(error, e) {
-        if (!this.CanLog("error"))
-            return;
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
-        if (!!(e === null || e === void 0 ? void 0 : e.stack))
-            global.logError(e.stack);
-    }
-    ;
-    Debug(message) {
-        if (!this.CanLog("debug"))
-            return;
-        this.Info(message);
-    }
-    Verbose(message) {
-        if (!this.CanLog("verbose"))
-            return;
-        this.Info(message);
-    }
-    UpdateInstanceID(instanceID) {
-        this.ID = instanceID;
-    }
-    async GetAppletLogs() {
-        var _a, _b, _c;
-        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        let logFilePath = `${home}/`;
-        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
-            logFilePath += ".cinnamon/glass.log";
-        }
-        else {
-            const errFileEnv = get_environ().find(x => x.includes("ERRFILE"));
-            if (!errFileEnv) {
-                logFilePath += ".xsession-errors";
-            }
-            else {
-                logFilePath = errFileEnv.replace("ERRFILE=", "");
-            }
-        }
-        const logFile = File.new_for_path(logFilePath);
-        if (!await FileExists(logFile)) {
-            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
-        }
-        const logs = await LoadContents(logFile);
-        if (logs == null) {
-            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
-        }
-        const logLines = logs.split("\n");
-        const filteredLines = [];
-        let lastWasCinnamonLog = false;
-        for (const line of logLines) {
-            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
-                filteredLines.push(line);
-            }
-            else if (line.includes("LookingGlass") && line.includes(UUID)) {
-                filteredLines.push(line);
-                lastWasCinnamonLog = true;
-            }
-            else {
-                lastWasCinnamonLog = false;
-            }
-        }
-        return filteredLines;
-    }
-}
-const logger_Logger = new Log();
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/events.ts
 class Event {
@@ -8672,7 +9925,6 @@ class Event {
 }
 Event.eventStore = [];
 
-
 ;// CONCATENATED MODULE: ./src/3_8/lib/notification_service.ts
 
 const { messageTray } = imports.ui.main;
@@ -8703,31 +9955,29 @@ class NotificationService {
 
 
 class LocationStore {
-    constructor(app, config) {
+    constructor(config) {
         this.locations = [];
         this.currentIndex = 0;
         this.StoreChanged = new Event();
-        this.app = app;
+        this.CurrentLocationModified = new Event();
         this.config = config;
         this.locations = config._locationList;
     }
     OnLocationChanged(locs) {
         var _a;
-        if (this.app.Locked())
-            return;
         for (let index = 0; index < locs.length; index++) {
             const element = locs[index];
             if (!element.entryText) {
                 locs[index] = this.EnsureSearchEntry(element);
             }
         }
-        let currentIndex = this.FindIndex(this.config.CurrentLocation);
-        let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
+        const currentIndex = this.FindIndex(this.config.CurrentLocation);
+        const newIndex = this.FindIndex(this.config.CurrentLocation, locs);
         let currentlyDisplayedChanged = false;
         let currentlyDisplayedDeleted = false;
         if (newIndex == -1 && currentIndex == -1) {
-            let tmp = [];
-            this.locations = locs.concat(tmp);
+            const tmp = [];
+            this.locations = [...locs, ...tmp];
             this.InvokeStorageChanged();
             return;
         }
@@ -8737,11 +9987,11 @@ class LocationStore {
             currentlyDisplayedDeleted = true;
         else if (newIndex != currentIndex)
             this.currentIndex = newIndex;
-        let tmp = [];
-        this.locations = locs.concat(tmp);
+        const tmp = [];
+        this.locations = [...locs, ...tmp];
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
-            this.app.Refresh();
+            this.CurrentLocationModified.Invoke(this);
         }
         this.InvokeStorageChanged();
     }
@@ -8843,11 +10093,7 @@ class LocationStore {
         else
             return false;
     }
-    async SaveCurrentLocation(loc) {
-        if (this.app.Locked()) {
-            NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
-            return;
-        }
+    SaveCurrentLocation(loc) {
         if (loc == null) {
             NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
             return;
@@ -8856,8 +10102,6 @@ class LocationStore {
             NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
             return;
         }
-        if (this.app.config.Timezone)
-            loc.timeZone = this.app.config.Timezone;
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
@@ -8898,18 +10142,353 @@ class LocationStore {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
+
+
+
+const { Message, Session } = imports.gi.Soup;
+const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const { Cancellable } = imports.gi.Gio;
+const soupLib_ByteArray = imports.byteArray;
+function AddParamsToURI(url, params) {
+    let result = url;
+    if (params != null) {
+        const items = Object.keys(params);
+        for (const [index, item] of items.entries()) {
+            result += (index == 0) ? "?" : "&";
+            result += (item) + "=" + params[item];
+        }
+    }
+    return result;
+}
+function AddHeadersToMessage(message, headers) {
+    if (headers != null) {
+        for (const key in headers) {
+            message.request_headers.append(key, headers[key]);
+        }
+    }
+}
+const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+class Soup3 {
+    constructor() {
+        this._httpSession = new Session();
+        this.SetUserAgent = (userAgent) => {
+            logger_Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+            this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+        };
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+    }
+    async Send(url, options = {}) {
+        const { params, headers, method = "GET", cancellable, noEncode = false } = options;
+        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
+            return null;
+        }
+        url = AddParamsToURI(url, params);
+        const query = noEncode ? url : encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : Cancellable.new();
+                let timeout = null;
+                if (cancellable == null) {
+                    timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                }
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
+                    var _a;
+                    const headers = {};
+                    let res = null;
+                    if (timeout != null)
+                        clearTimeout(timeout);
+                    try {
+                        res = this._httpSession.send_and_read_finish(result);
+                        message.get_response_headers().foreach((name, value) => {
+                            headers[name] = value;
+                        });
+                    }
+                    catch (e) {
+                        if (e instanceof Error)
+                            logger_Logger.Error("Error reading http request's response: " + e.message, e);
+                    }
+                    finally {
+                        resolve({
+                            reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
+                            status_code: message.get_status(),
+                            response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                            response_headers: headers
+                        });
+                    }
+                });
+            }
+        });
+        return data;
+    }
+}
+class Soup2 {
+    constructor() {
+        this.SetUserAgent = (userAgent) => {
+            logger_Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+            this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+        };
+        const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
+        this._httpSession = new SessionAsync();
+        this._httpSession.user_agent = DEFAULT_USER_AGENT;
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+        this._httpSession.use_thread_context = true;
+        this._httpSession.add_feature(new ProxyResolverDefault());
+    }
+    async Send(url, options = {}) {
+        const { params, headers, method = "GET", cancellable } = options;
+        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
+            return null;
+        }
+        url = AddParamsToURI(url, params);
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : Cancellable.new();
+                let timeout = null;
+                if (cancellable == null) {
+                    timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                }
+                logger_Logger.Debug("Sending http request to " + query);
+                this._httpSession.send_async(message, finalCancellable, async (session, result) => {
+                    if (timeout != null)
+                        clearTimeout(timeout);
+                    const headers = {};
+                    let res = null;
+                    try {
+                        logger_Logger.Debug("Reading reply from " + query);
+                        const stream = this._httpSession.send_finish(result);
+                        logger_Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
+                        res = await this.read_all_bytes(stream, finalCancellable);
+                        stream.close(null);
+                        message.response_headers.foreach((name, value) => {
+                            headers[name] = value;
+                        });
+                    }
+                    catch (e) {
+                        if (e instanceof Error)
+                            logger_Logger.Error("Error reading http request's response: " + e.message, e);
+                    }
+                    resolve({
+                        reason_phrase: message.reason_phrase,
+                        status_code: message.status_code,
+                        response_body: res,
+                        response_headers: headers
+                    });
+                    return;
+                });
+            }
+        });
+        return data;
+    }
+    async read_all_bytes(stream, cancellable) {
+        if (cancellable.is_cancelled())
+            return null;
+        logger_Logger.Debug("Reading all bytes from http request stream.");
+        const read_chunk_async = () => {
+            logger_Logger.Verbose("Reading chunk from http request stream.");
+            return new Promise((resolve) => {
+                stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
+                    try {
+                        logger_Logger.Verbose("Reading chunk from http request stream finished.");
+                        resolve(stream.read_bytes_finish(read_result));
+                    }
+                    catch (e) {
+                        if (e instanceof Error)
+                            logger_Logger.Error("Error reading chunk from http request stream: " + e.message, e);
+                        resolve(imports.gi.GLib.Bytes.new());
+                    }
+                });
+            });
+        };
+        let res = null;
+        let chunk;
+        logger_Logger.Verbose("Reading First chunk from http request stream.");
+        chunk = await read_chunk_async();
+        logger_Logger.Verbose("Reading First chunk from http request stream finished.");
+        while (chunk.get_size() > 0) {
+            if (cancellable.is_cancelled())
+                return res;
+            const chunkAsString = soupLib_ByteArray.fromGBytes(chunk).toString();
+            if (res === null) {
+                res = chunkAsString;
+            }
+            else {
+                res += chunkAsString;
+            }
+            logger_Logger.Verbose("Reading Next chunk from http request stream.");
+            chunk = await read_chunk_async();
+            logger_Logger.Verbose("Reading Next chunk from http request stream finished.");
+        }
+        logger_Logger.Verbose("Reading all bytes from http request stream finished.");
+        return res;
+    }
+}
+const soupLib = imports.gi.Soup.SessionAsync != undefined ? new Soup2() : new Soup3();
+
+;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+
+class HttpLib {
+    constructor() {
+        this.UnhandledError = new Event();
+    }
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new HttpLib();
+        return this.instance;
+    }
+    async LoadJsonSimple(options) {
+        const response = await this.LoadJsonAsync(options);
+        return response.Success ? response.Data : null;
+    }
+    async LoadJsonAsync(options) {
+        const { HandleError } = options, rest = __rest(options, ["HandleError"]);
+        const response = await this.LoadAsync(Object.assign(Object.assign({}, rest), { HandleError: () => false }));
+        const result = Object.assign(Object.assign({}, response), { Data: null });
+        try {
+            const payload = JSON.parse(response.Data);
+            result.Data = payload;
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("Error: API response is not JSON. The response: " + result.Data, e);
+            if (!result.Success)
+                return result;
+            return {
+                Data: null,
+                ResponseHeaders: response.ResponseHeaders,
+                Success: false,
+                ErrorData: {
+                    code: -1,
+                    message: "bad api response - non json",
+                    reason_phrase: "",
+                }
+            };
+        }
+        finally {
+            if (!result.Success && (!HandleError || HandleError(result))) {
+                this.UnhandledError.Invoke(this, result.ErrorData);
+            }
+        }
+    }
+    async LoadAsyncSimple(options) {
+        const response = await this.LoadAsync(options);
+        return response.Success ? response.Data : null;
+    }
+    async LoadAsync(options) {
+        var _a, _b, _c, _d, _e, _f;
+        const { url, HandleError } = options, rest = __rest(options, ["url", "HandleError"]);
+        const message = await soupLib.Send(url, rest);
+        let error = undefined;
+        if (!message) {
+            error = {
+                code: 0,
+                message: "no network response",
+                reason_phrase: "no network response",
+                response: undefined
+            };
+        }
+        else if (message.status_code < 100 && message.status_code >= 0) {
+            error = {
+                code: message.status_code,
+                message: "no network response",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (message.status_code > 300 || message.status_code < 200) {
+            error = {
+                code: message.status_code,
+                message: "bad status code",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (!message.response_body) {
+            error = {
+                code: message.status_code,
+                message: "no response data",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
+            logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
+        }
+        logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
+        const result = {
+            Success: (error == null),
+            Data: ((_d = message === null || message === void 0 ? void 0 : message.response_body) !== null && _d !== void 0 ? _d : null),
+            ResponseHeaders: message === null || message === void 0 ? void 0 : message.response_headers,
+            ErrorData: error,
+            Response: message
+        };
+        if (error != null) {
+            logger_Logger.Info(`Error calling URL: ${error.code}, ${error.reason_phrase}, ${(_f = (_e = error === null || error === void 0 ? void 0 : error.response) === null || _e === void 0 ? void 0 : _e.response_body) !== null && _f !== void 0 ? _f : "None"}`);
+        }
+        if (!result.Success && (!HandleError || HandleError(result)))
+            this.UnhandledError.Invoke(this, result.ErrorData);
+        return result;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/services/error_handler.ts
+
+class ErrorHandler {
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new ErrorHandler();
+        return this.instance;
+    }
+    constructor() {
+        this.OnError = new Event();
+    }
+    PostError(error) {
+        this.OnError.Invoke(this, error);
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/location_services/nominatim.ts
 
 
 
+
 class GeoLocation {
-    constructor(app) {
+    constructor() {
         this.url = "https://nominatim.openstreetmap.org/search";
         this.params = "format=json&addressdetails=1&limit=1";
         this.cache = {};
-        this.App = app;
     }
-    async GetLocation(searchText) {
+    async GetLocation(searchText, cancellable, config) {
         var _a;
         try {
             searchText = searchText.trim();
@@ -8918,11 +10497,14 @@ class GeoLocation {
                 logger_Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
-            const locationData = await this.App.LoadJsonAsync(`${this.url}?q=${searchText}&${this.params}`);
+            const locationData = await HttpLib.Instance.LoadJsonSimple({
+                url: `${this.url}?q=${searchText}&${this.params}`,
+                cancellable
+            });
             if (locationData == null)
                 return null;
             if (locationData.length == 0) {
-                this.App.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "bad location format",
                     message: _("Could not find location based on address, please check if it's right")
@@ -8931,11 +10513,11 @@ class GeoLocation {
             }
             logger_Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
             const result = {
-                lat: parseFloat(locationData[0].lat),
-                lon: parseFloat(locationData[0].lon),
+                lat: Number.parseFloat(locationData[0].lat),
+                lon: Number.parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
                 country: locationData[0].address.country,
-                timeZone: DateTime.now().zoneName,
+                timeZone: config.UserTimezone,
                 entryText: this.BuildEntryText(locationData[0]),
             };
             this.cache[searchText] = result;
@@ -8943,7 +10525,7 @@ class GeoLocation {
         }
         catch (e) {
             logger_Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
-            this.App.ShowError({
+            ErrorHandler.Instance.PostError({
                 type: "soft",
                 detail: "bad api response",
                 message: _("Failed to call Geolocation API, see Looking Glass for errors.")
@@ -8955,14 +10537,18 @@ class GeoLocation {
         if (locationData.address == null)
             return locationData.display_name;
         const entryText = [];
-        for (const key in locationData.address) {
+        let key;
+        for (key in locationData.address) {
             if (key == "state_district")
                 continue;
             if (key == "county")
                 continue;
             if (key == "country_code")
                 continue;
-            entryText.push(locationData.address[key]);
+            const value = locationData.address[key];
+            if (value == null)
+                continue;
+            entryText.push(value);
         }
         return entryText.join(", ");
     }
@@ -8983,9 +10569,10 @@ class BaseProvider {
 
 
 
+
 class MetUk extends BaseProvider {
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Met Office UK");
         this.name = "Met Office UK";
         this.maxForecastSupport = 5;
@@ -9017,8 +10604,8 @@ class MetUk extends BaseProvider {
                     const night = element.Rep[1];
                     const forecast = {
                         date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
-                        temp_min: CelsiusToKelvin(parseFloat((_d = night.Nm) !== null && _d !== void 0 ? _d : "0")),
-                        temp_max: CelsiusToKelvin(parseFloat((_e = day.Dm) !== null && _e !== void 0 ? _e : "0")),
+                        temp_min: CelsiusToKelvin(Number.parseFloat((_d = night.Nm) !== null && _d !== void 0 ? _d : "0")),
+                        temp_max: CelsiusToKelvin(Number.parseFloat((_e = day.Dm) !== null && _e !== void 0 ? _e : "0")),
                         condition: this.ResolveCondition(day.W),
                     };
                     forecasts.push(forecast);
@@ -9027,7 +10614,7 @@ class MetUk extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -9041,17 +10628,17 @@ class MetUk extends BaseProvider {
                         continue;
                     for (const element of day.Rep) {
                         const hour = element;
-                        const timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
+                        const timestamp = date.plus({ hours: Number.parseInt(hour.$) / 60 });
                         const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
                         if (timestamp < threshold)
                             continue;
                         const forecast = {
                             date: timestamp,
-                            temp: CelsiusToKelvin(parseFloat(hour.T)),
+                            temp: CelsiusToKelvin(Number.parseFloat(hour.T)),
                             condition: this.ResolveCondition(hour.W),
                             precipitation: {
                                 type: "rain",
-                                chance: parseFloat(hour.Pp)
+                                chance: Number.parseFloat(hour.Pp)
                             }
                         };
                         forecasts.push(forecast);
@@ -9061,22 +10648,22 @@ class MetUk extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
     }
-    async GetWeather(newLoc) {
+    async GetWeather(newLoc, cancellable) {
         const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = newLoc;
             this.currentLocID = loc;
-            const forecastSite = await this.GetClosestForecastSite(newLoc);
+            const forecastSite = await this.GetClosestForecastSite(newLoc, cancellable);
             if (forecastSite == null)
                 return null;
-            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
+            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST, cancellable);
             if (observationSites == null)
                 return null;
             this.forecastSite = forecastSite;
@@ -9096,32 +10683,38 @@ class MetUk extends BaseProvider {
             });
             return null;
         }
-        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc);
-        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc);
-        const observations = await this.GetObservationData(this.observationSites);
+        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable);
+        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable);
+        const observations = await this.GetObservationData(this.observationSites, cancellable);
         const currentResult = this.ParseCurrent(observations, newLoc);
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
-        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+        currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
         const threeHourlyForecast = await hourlyPayload;
-        currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
+        currentResult.hourlyForecasts = threeHourlyForecast !== null && threeHourlyForecast !== void 0 ? threeHourlyForecast : [];
         return currentResult;
     }
     ;
-    async GetClosestForecastSite(loc) {
-        const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+    async GetClosestForecastSite(loc, cancellable) {
+        const forecastSitelist = await HttpLib.Instance.LoadJsonSimple({
+            url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
+            cancellable
+        });
         if (forecastSitelist == null)
             return null;
         return this.GetClosestSite(forecastSitelist, loc);
     }
-    async GetObservationSitesInRange(loc, range) {
-        const observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+    async GetObservationSitesInRange(loc, range, cancellable) {
+        const observationSiteList = await HttpLib.Instance.LoadJsonSimple({
+            url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
+            cancellable
+        });
         if (observationSiteList == null)
             return null;
         let observationSites = [];
         for (const element of observationSiteList.Locations.Location) {
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+            element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist > range)
                 continue;
             observationSites.push(element);
@@ -9130,12 +10723,15 @@ class MetUk extends BaseProvider {
         logger_Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
         return observationSites;
     }
-    async GetObservationData(observationSites) {
+    async GetObservationData(observationSites, cancellable) {
         const observations = [];
         for (const element of observationSites) {
             logger_Logger.Debug("Getting observation data from station: " + element.id);
-            const payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
-            if (!!payload)
+            const payload = await HttpLib.Instance.LoadJsonSimple({
+                url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
+                cancellable
+            });
+            if (payload)
                 observations.push(payload);
             else {
                 logger_Logger.Debug("Failed to get observations from " + element.id);
@@ -9143,11 +10739,11 @@ class MetUk extends BaseProvider {
         }
         return observations;
     }
-    async GetData(query, ParseFunction, loc) {
+    async GetData(query, ParseFunction, loc, cancellable) {
         if (query == null)
             return null;
         logger_Logger.Debug("Query: " + query);
-        const json = await this.app.LoadJsonAsync(query);
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: query, cancellable });
         if (json == null)
             return null;
         return ParseFunction(json, loc);
@@ -9175,24 +10771,24 @@ class MetUk extends BaseProvider {
             });
             return null;
         }
-        const times = (0,suncalc.getTimes)(new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation));
+        const times = (0,suncalc.getTimes)(new Date(), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation));
         try {
             const weather = {
                 coord: {
-                    lat: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
-                    lon: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
+                    lat: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+                    lon: Number.parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
                 },
                 location: {
                     city: undefined,
                     country: undefined,
-                    timeZone: undefined,
+                    timeZone: loc.timeZone,
                 },
                 stationInfo: {
                     distanceFrom: this.observationSites[dataIndex].dist,
                     name: this.observationSites[dataIndex].name,
                     area: this.observationSites[dataIndex].unitaryAuthArea,
-                    lat: parseFloat(this.observationSites[dataIndex].latitude),
-                    lon: parseFloat(this.observationSites[dataIndex].longitude),
+                    lat: Number.parseFloat(this.observationSites[dataIndex].latitude),
+                    lon: Number.parseFloat(this.observationSites[dataIndex].longitude),
                 },
                 date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
                 sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -9216,35 +10812,35 @@ class MetUk extends BaseProvider {
                 };
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.S) != null) {
-                weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
+                weather.wind.speed = MPHtoMPS(Number.parseFloat(observation.S));
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.D) != null) {
                 weather.wind.degree = CompassToDeg(observation.D);
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.T) != null) {
-                weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
+                weather.temperature = CelsiusToKelvin(Number.parseFloat(observation.T));
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.P) != null) {
-                weather.pressure = parseFloat(observation.P);
+                weather.pressure = Number.parseFloat(observation.P);
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.H) != null) {
-                weather.humidity = parseFloat(observation.H);
+                weather.humidity = Number.parseFloat(observation.H);
             }
             if ((observation === null || observation === void 0 ? void 0 : observation.Dp) != null) {
-                weather.dewPoint = CelsiusToKelvin(parseFloat(observation.Dp));
+                weather.dewPoint = CelsiusToKelvin(Number.parseFloat(observation.Dp));
             }
             return weather;
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("Met UK Weather Parsing error: " + e, e);
+                logger_Logger.Error("Met UK Weather Parsing error: " + e.message, e);
             this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
     ;
     VisibilityToText(dist) {
-        const distance = parseInt(dist);
+        const distance = Number.parseInt(dist);
         const unit = this.app.config.DistanceUnit;
         const stringFormat = {
             distanceUnit: this.DistanceUnitFor(unit)
@@ -9319,7 +10915,7 @@ class MetUk extends BaseProvider {
             const debugText = " Observation data missing, plugged in from ID " +
                 observation.SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
-                + Math.round(GetDistance(parseFloat(observation.SiteRep.DV.Location.lat), parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
+                + Math.round(GetDistance(Number.parseFloat(observation.SiteRep.DV.Location.lat), Number.parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
                 + " metres";
             if (result != null) {
                 if ((result === null || result === void 0 ? void 0 : result.V) == null) {
@@ -9378,9 +10974,9 @@ class MetUk extends BaseProvider {
     GetClosestSite(siteList, loc) {
         const sites = siteList.Locations.Location;
         let closest = sites[0];
-        closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
+        closest.dist = GetDistance(Number.parseFloat(closest.latitude), Number.parseFloat(closest.longitude), loc.lat, loc.lon);
         for (const element of sites) {
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+            element.dist = GetDistance(Number.parseFloat(element.latitude), Number.parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist < closest.dist) {
                 closest = element;
             }
@@ -9626,401 +11222,495 @@ class MetUk extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/openWeatherMap.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/common.ts
+const OWM_SUPPORTED_LANGS = [
+    "af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+    "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
+    "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+];
+function ConvertLocaleToOWMLang(systemLocale) {
+    if (systemLocale == null)
+        return "en";
+    if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
+        return systemLocale;
+    }
+    const lang = systemLocale.split("-")[0];
+    if (lang == "sv") {
+        return "se";
+    }
+    else if (lang == "cs") {
+        return "cz";
+    }
+    else if (lang == "ko") {
+        return "kr";
+    }
+    else if (lang == "lv") {
+        return "la";
+    }
+    else if (lang == "nn" || lang == "nb") {
+        return "no";
+    }
+    return lang;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/condition.ts
+
+
+function OWMMainToTranslated(condition) {
+    switch (condition) {
+        case "Thunderstorm":
+            return _("Thunderstorm");
+        case "Drizzle":
+            return _("Drizzle");
+        case "Rain":
+            return _("Rain");
+        case "Snow":
+            return _("Snow");
+        case "Clear":
+            return _("Clear");
+        case "Clouds":
+            return _("Clouds");
+        case "Mist":
+            return _("Mist");
+        case "Smoke":
+            return _("Smoke");
+        case "Haze":
+            return _("Haze");
+        case "Dust":
+            return _("Dust");
+        case "Fog":
+            return _("Fog");
+        case "Sand":
+            return _("Sand");
+        case "Ash":
+            return _("Ash");
+        case "Squall":
+            return _("Squall");
+        case "Tornado":
+            return _("Tornado");
+        default:
+            logger_Logger.Error("Unknown weather condition main: " + condition);
+            return condition;
+    }
+}
+function OWMDescToTranslated(description) {
+    switch (description) {
+        case "thunderstorm with light rain":
+            return _("Thunderstorm with light rain");
+        case "thunderstorm with rain":
+            return _("Thunderstorm with rain");
+        case "thunderstorm with heavy rain":
+            return _("Thunderstorm with heavy rain");
+        case "light thunderstorm":
+            return _("Light thunderstorm");
+        case "thunderstorm":
+            return _("Thunderstorm");
+        case "heavy thunderstorm":
+            return _("Heavy thunderstorm");
+        case "ragged thunderstorm":
+            return _("Ragged thunderstorm");
+        case "thunderstorm with light drizzle":
+            return _("Thunderstorm with light drizzle");
+        case "thunderstorm with drizzle":
+            return _("Thunderstorm with drizzle");
+        case "thunderstorm with heavy drizzle":
+            return _("Thunderstorm with heavy drizzle");
+        case "light intensity drizzle":
+            return _("Light intensity drizzle");
+        case "drizzle":
+            return _("Drizzle");
+        case "heavy intensity drizzle":
+            return _("Heavy intensity drizzle");
+        case "light intensity drizzle rain":
+            return _("Light intensity drizzle rain");
+        case "drizzle rain":
+            return _("Drizzle rain");
+        case "heavy intensity drizzle rain":
+            return _("Heavy intensity drizzle rain");
+        case "shower rain and drizzle":
+            return _("Shower rain and drizzle");
+        case "heavy shower rain and drizzle":
+            return _("Heavy shower rain and drizzle");
+        case "shower drizzle":
+            return _("Shower drizzle");
+        case "light rain":
+            return _("Light rain");
+        case "moderate rain":
+            return _("Moderate rain");
+        case "heavy intensity rain":
+            return _("Heavy intensity rain");
+        case "very heavy rain":
+            return _("Very heavy rain");
+        case "extreme rain":
+            return _("Extreme rain");
+        case "freezing rain":
+            return _("Freezing rain");
+        case "light intensity shower rain":
+            return _("Light intensity shower rain");
+        case "shower rain":
+            return _("Shower rain");
+        case "heavy intensity shower rain":
+            return _("Heavy intensity shower rain");
+        case "ragged shower rain":
+            return _("Ragged shower rain");
+        case "light snow":
+            return _("Light snow");
+        case "snow":
+            return _("Snow");
+        case "heavy snow":
+            return _("Heavy snow");
+        case "sleet":
+            return _("Sleet");
+        case "light shower sleet":
+            return _("Light shower sleet");
+        case "shower sleet":
+            return _("Shower sleet");
+        case "light rain and snow":
+            return _("Light rain and snow");
+        case "rain and snow":
+            return _("Rain and snow");
+        case "light shower snow":
+            return _("Light shower snow");
+        case "shower snow":
+            return _("Shower snow");
+        case "heavy shower snow":
+            return _("Heavy shower snow");
+        case "mist":
+            return _("Mist");
+        case "smoke":
+            return _("Smoke");
+        case "haze":
+            return _("Haze");
+        case "sand/dust whirls":
+            return _("Sand, dust whirls");
+        case "fog":
+            return _("Fog");
+        case "sand":
+            return _("Sand");
+        case "dust":
+            return _("Dust");
+        case "volcanic ash":
+            return _("Volcanic ash");
+        case "squalls":
+            return _("Squalls");
+        case "tornado":
+            return _("Tornado");
+        case "clear sky":
+        case "sky is clear":
+            return _("Clear sky");
+        case "few clouds":
+            return _("Few clouds");
+        case "scattered clouds":
+            return _("Scattered clouds");
+        case "broken clouds":
+            return _("Broken clouds");
+        case "overcast clouds":
+            return _("Overcast clouds");
+        default:
+            logger_Logger.Error("Unknown weather condition description: " + description);
+            return description;
+    }
+}
+function OWMIconToBuiltInIcons(icon) {
+    switch (icon) {
+        case "10d":
+            return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+        case "10n":
+            return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+        case "09n":
+            return ["weather-showers"];
+        case "09d":
+            return ["weather-showers"];
+        case "13d":
+            return ["weather-snow"];
+        case "13n":
+            return ["weather-snow"];
+        case "50d":
+            return ["weather-fog"];
+        case "50n":
+            return ["weather-fog"];
+        case "04d":
+            return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+        case "04n":
+            return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
+        case "03n":
+            return ['weather-clouds-night', "weather-few-clouds-night"];
+        case "03d":
+            return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
+        case "02n":
+            return ["weather-few-clouds-night"];
+        case "02d":
+            return ["weather-few-clouds"];
+        case "01n":
+            return ["weather-clear-night"];
+        case "01d":
+            return ["weather-clear"];
+        case "11d":
+            return ["weather-storm"];
+        case "11n":
+            return ["weather-storm"];
+        default:
+            return ["weather-severe-alert"];
+    }
+}
+function OWMIconToCustomIcon(icon) {
+    switch (icon) {
+        case "10d":
+            return "day-rain-symbolic";
+        case "10n":
+            return "night-rain-symbolic";
+        case "09n":
+            return "night-showers-symbolic";
+        case "09d":
+            return "day-showers-symbolic";
+        case "13d":
+            return "day-snow-symbolic";
+        case "13n":
+            return "night-alt-snow-symbolic";
+        case "50d":
+            return "day-fog-symbolic";
+        case "50n":
+            return "night-fog-symbolic";
+        case "04d":
+            return "day-cloudy-symbolic";
+        case "04n":
+            return "night-alt-cloudy-symbolic";
+        case "03n":
+            return "night-alt-cloudy-symbolic";
+        case "03d":
+            return "day-cloudy-symbolic";
+        case "02n":
+            return "night-alt-cloudy-symbolic";
+        case "02d":
+            return "day-cloudy-symbolic";
+        case "01n":
+            return "night-clear-symbolic";
+        case "01d":
+            return "day-sunny-symbolic";
+        case "11d":
+            return "day-thunderstorm-symbolic";
+        case "11n":
+            return "night-alt-thunderstorm-symbolic";
+        default:
+            return "cloud-refresh-symbolic";
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/onecall.ts
+
+
+
+function OWMOneCallToWeatherData(json, conditionsTranslated) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+    const weather = {
+        coord: {
+            lat: json.lat,
+            lon: json.lon
+        },
+        location: {
+            url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
+            timeZone: json.timezone
+        },
+        date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
+        sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
+        sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
+        wind: {
+            speed: json.current.wind_speed,
+            degree: json.current.wind_deg
+        },
+        temperature: json.current.temp,
+        pressure: json.current.pressure,
+        humidity: json.current.humidity,
+        dewPoint: json.current.dew_point,
+        condition: {
+            main: conditionsTranslated ? (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main : OWMMainToTranslated((_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.main),
+            description: conditionsTranslated ? (_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.description : OWMDescToTranslated((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.description),
+            icons: OWMIconToBuiltInIcons((_q = (_p = (_o = json === null || json === void 0 ? void 0 : json.current) === null || _o === void 0 ? void 0 : _o.weather) === null || _p === void 0 ? void 0 : _p[0]) === null || _q === void 0 ? void 0 : _q.icon),
+            customIcon: OWMIconToCustomIcon((_t = (_s = (_r = json === null || json === void 0 ? void 0 : json.current) === null || _r === void 0 ? void 0 : _r.weather) === null || _s === void 0 ? void 0 : _s[0]) === null || _t === void 0 ? void 0 : _t.icon)
+        },
+        extra_field: {
+            name: _("Feels Like"),
+            value: json.current.feels_like,
+            type: "temperature"
+        },
+        forecasts: [],
+        alerts: [],
+    };
+    if (json.minutely != null) {
+        const immediate = {
+            start: -1,
+            end: -1
+        };
+        for (const [index, element] of json.minutely.entries()) {
+            if (element.precipitation > 0 && immediate.start == -1) {
+                immediate.start = index;
+                continue;
+            }
+            else if (element.precipitation == 0 && immediate.start != -1) {
+                immediate.end = index;
+                break;
+            }
+        }
+        weather.immediatePrecipitation = immediate;
+    }
+    const forecasts = [];
+    for (const day of json.daily) {
+        const forecast = {
+            date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
+            temp_min: day.temp.min,
+            temp_max: day.temp.max,
+            condition: {
+                main: conditionsTranslated ? day.weather[0].main : OWMMainToTranslated(day.weather[0].main),
+                description: conditionsTranslated ? day.weather[0].description : OWMDescToTranslated(day.weather[0].description),
+                icons: OWMIconToBuiltInIcons(day.weather[0].icon),
+                customIcon: OWMIconToCustomIcon(day.weather[0].icon)
+            },
+        };
+        forecasts.push(forecast);
+    }
+    weather.forecasts = forecasts;
+    const hourly = [];
+    for (const hour of json.hourly) {
+        const forecast = {
+            date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
+            temp: hour.temp,
+            condition: {
+                main: conditionsTranslated ? hour.weather[0].main : OWMMainToTranslated(hour.weather[0].main),
+                description: conditionsTranslated ? hour.weather[0].description : OWMDescToTranslated(hour.weather[0].description),
+                icons: OWMIconToBuiltInIcons(hour.weather[0].icon),
+                customIcon: OWMIconToCustomIcon(hour.weather[0].icon)
+            },
+        };
+        if (hour.pop >= 0.1) {
+            forecast.precipitation = {
+                chance: hour.pop * 100,
+                type: "none",
+            };
+        }
+        if (!!hour.rain && forecast.precipitation != null) {
+            forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
+            forecast.precipitation.type = "rain";
+        }
+        if (!!hour.snow && forecast.precipitation != null) {
+            forecast.precipitation.volume = hour.snow["1h"];
+            forecast.precipitation.type = "snow";
+        }
+        hourly.push(forecast);
+    }
+    weather.hourlyForecasts = hourly;
+    const alerts = [];
+    for (const alert of (_u = json.alerts) !== null && _u !== void 0 ? _u : []) {
+        alerts.push({
+            sender_name: alert.sender_name,
+            level: "unknown",
+            title: alert.event,
+            description: alert.description,
+        });
+    }
+    weather.alerts = alerts;
+    return weather;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-closed.ts
+
+
 
 
 
 
 const IDCache = {};
-class OpenWeatherMap extends BaseProvider {
-    constructor(_app) {
-        super(_app);
+class OpenWeatherMapOneCall extends BaseProvider {
+    constructor() {
+        super(...arguments);
         this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap";
+        this.name = "OpenWeatherMap_OneCall";
         this.maxForecastSupport = 8;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = false;
+        this.needsApiKey = true;
         this.remainingCalls = null;
         this.supportHourlyPrecipChance = true;
         this.supportHourlyPrecipVolume = true;
-        this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
-            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
-        ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
+        this.base_url = "https://api.openweathermap.org/data/3.0/onecall";
         this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
-        this.HandleError = (error) => {
-            if (error.ErrorData.code == 404) {
-                this.app.ShowError({
-                    detail: "location not found",
-                    message: _("Location not found, make sure location is available or it is in the correct format"),
-                    userError: true,
-                    type: "hard"
-                });
-                return false;
+        this.HandleError = (response) => {
+            if (!this.HasReturnedError(response.Data))
+                return true;
+            const errorMsg = "OpenWeatherMap Response: ";
+            const error = {
+                service: "openweathermap",
+                type: "hard",
+            };
+            const errorPayload = response.Data;
+            switch (errorPayload.cod) {
+                case 400:
+                    error.detail = "bad location format";
+                    error.message = _("Please make sure Location is in the correct format in the Settings");
+                    break;
+                case 401:
+                    error.detail = "bad key";
+                    error.message = _("Make sure you entered the correct key in settings");
+                    break;
+                case 404:
+                    error.detail = "location not found";
+                    error.message = _("Location not found, make sure location is available or it is in the correct format");
+                    break;
+                case 429:
+                    error.detail = "key blocked";
+                    error.message = _("If this problem persists, please contact the Author of this applet");
+                    break;
+                default:
+                    error.detail = "unknown";
+                    error.message = _("Unknown Error, please see the logs in Looking Glass");
+                    break;
             }
-            return true;
+            ;
+            this.app.ShowError(error);
+            logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+            logger_Logger.Error(errorMsg + errorPayload.message);
+            return false;
         };
     }
-    async GetWeather(loc) {
-        const params = this.ConstructParams(loc);
+    async GetWeather(loc, cancellable, config) {
+        const params = this.ConstructParams(loc, config.ApiKey);
         const cachedID = IDCache[`${loc.lat},${loc.lon}`];
         const [json, idPayload] = await Promise.all([
-            this.app.LoadJsonAsync(this.base_url, params, this.HandleError),
-            (cachedID == null) ? this.app.LoadJsonAsync(this.id_irl, params) : Promise.resolve()
+            HttpLib.Instance.LoadJsonSimple({
+                url: this.base_url,
+                cancellable,
+                params: params,
+                HandleError: this.HandleError
+            }),
+            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params, HandleError: this.HandleError }) : Promise.resolve()
         ]);
         if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
             IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
         if (!json)
             return null;
-        if (this.HadErrors(json))
-            return null;
         json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
-        return this.ParseWeather(json, loc);
+        return OWMOneCallToWeatherData(json, !!params.lang);
     }
     ;
-    RanOutOfQuota(loc) {
-        return null;
-    }
-    ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-        try {
-            const weather = {
-                coord: {
-                    lat: json.lat,
-                    lon: json.lon
-                },
-                location: {
-                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
-                    timeZone: json.timezone
-                },
-                date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
-                sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
-                sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
-                wind: {
-                    speed: json.current.wind_speed,
-                    degree: json.current.wind_deg
-                },
-                temperature: json.current.temp,
-                pressure: json.current.pressure,
-                humidity: json.current.humidity,
-                dewPoint: json.current.dew_point,
-                condition: {
-                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
-                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
-                    icons: this.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
-                    customIcon: this.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
-                },
-                extra_field: {
-                    name: _("Feels Like"),
-                    value: json.current.feels_like,
-                    type: "temperature"
-                },
-                forecasts: []
-            };
-            if (json.minutely != null) {
-                const immediate = {
-                    start: -1,
-                    end: -1
-                };
-                for (const [index, element] of json.minutely.entries()) {
-                    if (element.precipitation > 0 && immediate.start == -1) {
-                        immediate.start = index;
-                        continue;
-                    }
-                    else if (element.precipitation == 0 && immediate.start != -1) {
-                        immediate.end = index;
-                        break;
-                    }
-                }
-                weather.immediatePrecipitation = immediate;
-            }
-            const forecasts = [];
-            for (const day of json.daily) {
-                const forecast = {
-                    date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
-                    temp_min: day.temp.min,
-                    temp_max: day.temp.max,
-                    condition: {
-                        main: day.weather[0].main,
-                        description: day.weather[0].description,
-                        icons: this.ResolveIcon(day.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(day.weather[0].icon)
-                    },
-                };
-                forecasts.push(forecast);
-            }
-            weather.forecasts = forecasts;
-            const hourly = [];
-            for (const hour of json.hourly) {
-                const forecast = {
-                    date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
-                    temp: hour.temp,
-                    condition: {
-                        main: hour.weather[0].main,
-                        description: hour.weather[0].description,
-                        icons: this.ResolveIcon(hour.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
-                    },
-                };
-                if (hour.pop >= 0.1) {
-                    forecast.precipitation = {
-                        chance: hour.pop * 100,
-                        type: "none",
-                    };
-                }
-                if (!!hour.rain && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
-                    forecast.precipitation.type = "rain";
-                }
-                if (!!hour.snow && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.snow["1h"];
-                    forecast.precipitation.type = "snow";
-                }
-                hourly.push(forecast);
-            }
-            weather.hourlyForecasts = hourly;
-            return weather;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
-            this.app.ShowError({
-                type: "soft",
-                service: "openweathermap",
-                detail: "unusual payload",
-                message: _("Failed to Process Current Weather Info")
-            });
-            return null;
-        }
-    }
-    ;
-    ConstructParams(loc) {
+    ConstructParams(loc, key) {
         const params = {
             lat: loc.lat,
             lon: loc.lon,
-            appid: "1c73f8259a86c6fd43c7163b543c8640"
+            appid: key
         };
-        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
+        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
             params.lang = locale;
         }
         return params;
     }
     ;
-    ConvertToAPILocale(systemLocale) {
-        if (systemLocale == null)
-            return "en";
-        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
-            return systemLocale;
-        }
-        const lang = systemLocale.split("-")[0];
-        if (lang == "sv") {
-            return "se";
-        }
-        else if (lang == "cs") {
-            return "cz";
-        }
-        else if (lang == "ko") {
-            return "kr";
-        }
-        else if (lang == "lv") {
-            return "la";
-        }
-        else if (lang == "nn" || lang == "nb") {
-            return "no";
-        }
-        return lang;
-    }
-    HadErrors(json) {
-        if (!this.HasReturnedError(json))
-            return false;
-        const errorMsg = "OpenWeatherMap Response: ";
-        const error = {
-            service: "openweathermap",
-            type: "hard",
-        };
-        const errorPayload = json;
-        switch (errorPayload.cod) {
-            case ("400"):
-                error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
-                break;
-            case ("401"):
-                error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
-                break;
-            case ("404"):
-                error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
-                break;
-            case ("429"):
-                error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
-                break;
-            default:
-                error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
-                break;
-        }
-        ;
-        this.app.ShowError(error);
-        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
-        logger_Logger.Error(errorMsg + errorPayload.message);
-        return true;
-    }
-    ;
     HasReturnedError(json) {
-        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+        if (!json)
+            return false;
+        return (typeof json === "object" && "cod" in json && !!json.cod);
     }
-    ResolveIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "10n":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "09n":
-                return ["weather-showers"];
-            case "09d":
-                return ["weather-showers"];
-            case "13d":
-                return ["weather-snow"];
-            case "13n":
-                return ["weather-snow"];
-            case "50d":
-                return ["weather-fog"];
-            case "50n":
-                return ["weather-fog"];
-            case "04d":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "04n":
-                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
-            case "03n":
-                return ['weather-clouds-night', "weather-few-clouds-night"];
-            case "03d":
-                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
-            case "02n":
-                return ["weather-few-clouds-night"];
-            case "02d":
-                return ["weather-few-clouds"];
-            case "01n":
-                return ["weather-clear-night"];
-            case "01d":
-                return ["weather-clear"];
-            case "11d":
-                return ["weather-storm"];
-            case "11n":
-                return ["weather-storm"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return "day-rain-symbolic";
-            case "10n":
-                return "night-rain-symbolic";
-            case "09n":
-                return "night-showers-symbolic";
-            case "09d":
-                return "day-showers-symbolic";
-            case "13d":
-                return "day-snow-symbolic";
-            case "13n":
-                return "night-alt-snow-symbolic";
-            case "50d":
-                return "day-fog-symbolic";
-            case "50n":
-                return "night-fog-symbolic";
-            case "04d":
-                return "day-cloudy-symbolic";
-            case "04n":
-                return "night-alt-cloudy-symbolic";
-            case "03n":
-                return "night-alt-cloudy-symbolic";
-            case "03d":
-                return "day-cloudy-symbolic";
-            case "02n":
-                return "night-alt-cloudy-symbolic";
-            case "02d":
-                return "day-cloudy-symbolic";
-            case "01n":
-                return "night-clear-symbolic";
-            case "01d":
-                return "day-sunny-symbolic";
-            case "11d":
-                return "day-thunderstorm-symbolic";
-            case "11n":
-                return "night-alt-thunderstorm-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-    ;
 }
 ;
-const openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Clouds"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
-];
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/common.ts
 const conditionSeverity = {
@@ -10072,7 +11762,142 @@ function IsCovered(payload) {
     return payload.properties.meta.radar_coverage == "ok";
 }
 
+;// CONCATENATED MODULE: ./src/3_8/lib/polygons.ts
+function PointInsidePolygon(point, vs) {
+    const maxX = Math.max(...vs.map(v => v[0]));
+    const minX = Math.min(...vs.map(v => v[0]));
+    const maxY = Math.max(...vs.map(v => v[1]));
+    const minY = Math.min(...vs.map(v => v[1]));
+    if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
+        return false;
+    }
+    let intersections = 0;
+    const padding = 0.1;
+    const pv1 = [(minX - padding / point[0]), (minY - padding / point[1])];
+    const pv2 = point;
+    for (let i = 0; i < vs.length - 1; i++) {
+        const v1 = vs[i];
+        const v2 = vs[i + 1];
+        if (areIntersecting(v1[0], v1[1], v2[0], v2[1], pv1[0], pv1[1], pv2[0], pv2[1]))
+            intersections++;
+    }
+    if ((intersections & 1) == 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
+    let d1, d2;
+    const a1 = v1y2 - v1y1;
+    const b1 = v1x1 - v1x2;
+    const c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
+    d1 = (a1 * v2x1) + (b1 * v2y1) + c1;
+    d2 = (a1 * v2x2) + (b1 * v2y2) + c1;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    const a2 = v2y2 - v2y1;
+    const b2 = v2x1 - v2x2;
+    const c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
+    d1 = (a2 * v1x1) + (b2 * v1y1) + c2;
+    d2 = (a2 * v1x2) + (b2 * v1y2) + c2;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    if ((a1 * b2) - (a2 * b1) == 0.0)
+        return false;
+    return true;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/alert.ts
+
+
+
+async function GetMETNorwayAlerts(cancellable, lat, lon) {
+    const response = await HttpLib.Instance.LoadJsonSimple({
+        url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
+        cancellable: cancellable,
+    });
+    if (response === null) {
+        return null;
+    }
+    const result = [];
+    for (const feature of response.features) {
+        let isInside = false;
+        for (const geometry of feature.geometry.coordinates) {
+            if (PointInsidePolygon([lon, lat], geometry)) {
+                isInside = true;
+                break;
+            }
+        }
+        if (!isInside) {
+            logger_Logger.Debug(`Skipping alert '${feature.properties.event}' in area '${feature.properties.area}', current location is not inside area.`);
+            continue;
+        }
+        logger_Logger.Debug(`Adding alert '${feature.properties.event}' in area '${feature.properties.area}'!`);
+        result.push(feature.properties);
+    }
+    return result.map(alert => ({
+        title: alert.title,
+        level: SeverityToLevel(alert.severity),
+        description: alert.description,
+        sender_name: "MET Norway",
+        icon: EventToIcon(alert.event),
+    }));
+}
+function SeverityToLevel(severity) {
+    switch (severity) {
+        case "Extreme":
+            return "extreme";
+        case "Severe":
+            return "severe";
+        case "Moderate":
+            return "moderate";
+        case "Minor":
+            return "minor";
+        default:
+            return "unknown";
+    }
+}
+function EventToIcon(event) {
+    switch (event) {
+        case "blowingSnow":
+            return "snow-wind-symbolic";
+        case "forestFire":
+            return "fire-symbolic";
+        case "gale":
+            return "gale-warning-symbolic";
+        case "ice":
+            return "snowflake-cold-symbolic";
+        case "icing":
+            return "snowflake-cold-symbolic";
+        case "lightning":
+            return "lightning-symbolic";
+        case "polarLow":
+            return "hurricane-symbolic";
+        case "rain":
+            return "raindrop-symbolic";
+        case "rainFlood":
+            return "flood-symbolic";
+        case "snow":
+            return "snowflake-cold-symbolic";
+        case "stormSurge":
+            return "lightning-symbolic";
+        case "wind":
+            return "strong-wind-symbolic";
+        default:
+            logger_Logger.Info(`Unknown MET Norway event type: ${event}`);
+            return undefined;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/provider.ts
+
+
 
 
 
@@ -10094,10 +11919,19 @@ class MetNorway extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://api.met.no/weatherapi";
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable, config) {
         const [forecast, nowcast] = await Promise.all([
-            this.app.LoadJsonAsync(`${this.baseUrl}/locationforecast/2.0/complete`, { lat: loc.lat, lon: loc.lon }),
-            this.app.LoadJsonAsync(`${this.baseUrl}/nowcast/2.0/complete`, { lat: loc.lat, lon: loc.lon }, (e) => e.ErrorData.code != 422),
+            HttpLib.Instance.LoadJsonSimple({
+                url: `${this.baseUrl}/locationforecast/2.0/complete`,
+                cancellable,
+                params: { lat: loc.lat, lon: loc.lon }
+            }),
+            HttpLib.Instance.LoadJsonSimple({
+                url: `${this.baseUrl}/nowcast/2.0/complete`,
+                cancellable,
+                params: { lat: loc.lat, lon: loc.lon },
+                HandleError: (e) => e.ErrorData.code != 422
+            }),
         ]);
         if (!forecast) {
             logger_Logger.Error("MET Norway: Empty response from API");
@@ -10134,6 +11968,13 @@ class MetNorway extends BaseProvider {
                     result.immediatePrecipitation = immediate;
                 }
             }
+        }
+        if (config._showAlerts) {
+            const alerts = await GetMETNorwayAlerts(cancellable, loc.lat, loc.lon);
+            if (alerts == null) {
+                return null;
+            }
+            result.alerts = alerts;
         }
         return result;
     }
@@ -10186,12 +12027,14 @@ class MetNorway extends BaseProvider {
                 degree: current.data.instant.details.wind_from_direction,
                 speed: current.data.instant.details.wind_speed
             },
-            location: {},
+            location: {
+                timeZone: loc.timeZone
+            },
             forecasts: []
         };
         const hourlyForecasts = [];
         for (const element of json.properties.timeseries) {
-            if (!!element.data.next_1_hours) {
+            if (element.data.next_1_hours) {
                 hourlyForecasts.push({
                     date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
                     temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
@@ -10280,7 +12123,7 @@ class MetNorway extends BaseProvider {
         let result = null;
         for (const key in count) {
             if (result == null || count[result].count < count[key].count)
-                result = parseInt(key);
+                result = Number.parseInt(key);
         }
         if (result == null)
             return null;
@@ -10289,8 +12132,8 @@ class MetNorway extends BaseProvider {
     GetMostSevereCondition(conditions) {
         let result = null;
         for (const key in conditions) {
-            const conditionID = parseInt(key);
-            const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
+            const conditionID = Number.parseInt(key);
+            const resultStripped = result == null ? -1 : ((result > 100) ? result - 100 : result);
             const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
                 result = conditionID;
@@ -10620,18 +12463,15 @@ class MetNorway extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit/provider.ts
+
 
 
 
 
 class Weatherbit extends BaseProvider {
-    get remainingCalls() {
-        return null;
-    }
-    ;
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("WeatherBit");
         this.name = "Weatherbit";
         this.maxForecastSupport = 16;
@@ -10646,12 +12486,41 @@ class Weatherbit extends BaseProvider {
             'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
             'sv', 'tr', 'uk', 'zh', 'zh-tw'
         ];
-        this.current_url = "https://api.weatherbit.io/v2.0/current?";
-        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.current_url = "https://api.weatherbit.io/v2.0/current";
+        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily";
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly";
+        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts";
         this.hourlyAccess = true;
-        this.ParseCurrent = (json) => {
-            json = json.data[0];
+        this.ParseAlerts = (json) => {
+            const alerts = [];
+            for (const alert of json.alerts) {
+                let level;
+                switch (alert.severity) {
+                    case "Advisory":
+                        level = "minor";
+                        break;
+                    case "Watch":
+                        level = "moderate";
+                        break;
+                    case "Warning":
+                        level = "severe";
+                        break;
+                    default:
+                        level = "unknown";
+                        break;
+                }
+                const alertData = {
+                    title: alert.title,
+                    description: alert.description,
+                    level,
+                    sender_name: alert.uri,
+                };
+                alerts.push(alertData);
+            }
+            return alerts;
+        };
+        this.ParseCurrent = (payload, translated) => {
+            const json = payload.data[0];
             const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
             if (hourDiff != 0)
                 logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
@@ -10678,8 +12547,8 @@ class Weatherbit extends BaseProvider {
                     humidity: json.rh,
                     dewPoint: json.dewpt,
                     condition: {
-                        main: json.weather.description,
-                        description: json.weather.description,
+                        main: translated ? json.weather.description : this.CodeToMain(json.weather.code),
+                        description: translated ? json.weather.description : this.CodeToDescription(json.weather.code),
                         icons: this.ResolveIcon(json.weather.icon),
                         customIcon: this.ResolveCustomIcon(json.weather.icon)
                     },
@@ -10694,12 +12563,12 @@ class Weatherbit extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
+                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
                 return null;
             }
         };
-        this.ParseForecast = (json) => {
+        this.ParseForecast = (json, translated) => {
             const forecasts = [];
             try {
                 for (const day of json.data) {
@@ -10708,8 +12577,8 @@ class Weatherbit extends BaseProvider {
                         temp_min: day.min_temp,
                         temp_max: day.max_temp,
                         condition: {
-                            main: day.weather.description,
-                            description: day.weather.description,
+                            main: translated ? day.weather.description : this.CodeToMain(day.weather.code),
+                            description: translated ? day.weather.description : this.CodeToDescription(day.weather.code),
                             icons: this.ResolveIcon(day.weather.icon),
                             customIcon: this.ResolveCustomIcon(day.weather.icon)
                         },
@@ -10720,21 +12589,21 @@ class Weatherbit extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
-        this.ParseHourlyForecast = (json) => {
+        this.ParseHourlyForecast = (json, translated) => {
             const forecasts = [];
             try {
-                for (const hour of json.data.length) {
+                for (const hour of json.data) {
                     const forecast = {
                         date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
                         temp: hour.temp,
                         condition: {
-                            main: hour.weather.description,
-                            description: hour.weather.description,
+                            main: translated ? hour.weather.description : this.CodeToMain(hour.weather.code),
+                            description: translated ? hour.weather.description : this.CodeToDescription(hour.weather.code),
                             icons: this.ResolveIcon(hour.weather.icon),
                             customIcon: this.ResolveCustomIcon(hour.weather.icon)
                         },
@@ -10754,54 +12623,74 @@ class Weatherbit extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
     }
-    async GetWeather(loc) {
-        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
+    get remainingCalls() {
+        return null;
+    }
+    ;
+    async GetWeather(loc, cancellable, config) {
+        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
         let hourlyPromise = null;
-        if (!!this.hourlyAccess)
-            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
+        if (this.hourlyAccess)
+            hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
+        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable);
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
-        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+        currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
         const hourlyResult = await hourlyPromise;
-        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+        currentResult.hourlyForecasts = hourlyResult !== null && hourlyResult !== void 0 ? hourlyResult : [];
+        if (config._showAlerts) {
+            const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
+            if (alertResult == null)
+                return null;
+            currentResult.alerts = alertResult;
+        }
         return currentResult;
     }
     ;
-    async GetData(baseUrl, loc, ParseFunction) {
-        const query = this.ConstructQuery(baseUrl, loc);
+    async GetData(baseUrl, loc, ParseFunction, cancellable) {
+        const query = this.ConstructQuery(loc);
         if (query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
+        const json = await HttpLib.Instance.LoadJsonSimple({
+            url: baseUrl,
+            params: query,
+            cancellable,
+            HandleError: (e) => this.HandleError(e)
+        });
         if (json == null)
             return null;
-        return ParseFunction(json);
+        return ParseFunction(json, !!query.lang);
     }
-    async GetHourlyData(baseUrl, loc) {
-        const query = this.ConstructQuery(baseUrl, loc);
+    async GetHourlyData(baseUrl, loc, cancellable) {
+        const query = this.ConstructQuery(loc);
         if (query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
-        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
+        const json = await HttpLib.Instance.LoadJsonSimple({
+            url: baseUrl,
+            params: query,
+            cancellable,
+            HandleError: (e) => this.HandleHourlyError(e)
+        });
+        if (json == null)
+            return null;
+        if ("error" in json) {
             return null;
         }
-        if (json == null)
-            return null;
-        return this.ParseHourlyForecast(json);
+        return this.ParseHourlyForecast(json, !!query.lang);
     }
     ;
     TimeToDate(time, hourDiff, tz) {
         const hoursMinutes = time.split(":");
         const date = DateTime.utc().set({
-            hour: parseInt(hoursMinutes[0]) - hourDiff,
-            minute: parseInt(hoursMinutes[1]),
+            hour: Number.parseInt(hoursMinutes[0]) - hourDiff,
+            minute: Number.parseInt(hoursMinutes[1]),
         }).setZone(tz);
         return date;
     }
@@ -10811,15 +12700,15 @@ class Weatherbit extends BaseProvider {
         return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
     }
     ParseStringTime(last_ob_time, tz) {
-        const split = last_ob_time.split(/[T\-\s:]/);
+        const split = last_ob_time.split(/[\s:T-]/);
         if (split.length != 5)
             return null;
         return DateTime.fromObject({
-            year: parseInt(split[0]),
-            month: parseInt(split[1]),
-            day: parseInt(split[2]),
-            hour: parseInt(split[3]),
-            minute: parseInt(split[4])
+            year: Number.parseInt(split[0]),
+            month: Number.parseInt(split[1]),
+            day: Number.parseInt(split[2]),
+            hour: Number.parseInt(split[3]),
+            minute: Number.parseInt(split[4])
         }).setZone(tz);
     }
     ConvertToAPILocale(systemLocale) {
@@ -10834,13 +12723,18 @@ class Weatherbit extends BaseProvider {
         }
         return lang;
     }
-    ConstructQuery(query, loc) {
-        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+    ConstructQuery(loc) {
+        const result = {
+            key: this.app.config.ApiKey,
+            lat: loc.lat,
+            lon: loc.lon,
+            units: "S"
+        };
         const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-            query = query + "&lang=" + lang;
+            result.lang = lang;
         }
-        return query;
+        return result;
     }
     ;
     HandleError(message) {
@@ -10852,6 +12746,7 @@ class Weatherbit extends BaseProvider {
                 service: "weatherbit",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             });
+            return false;
         }
         return true;
     }
@@ -10862,6 +12757,146 @@ class Weatherbit extends BaseProvider {
             return false;
         }
         return true;
+    }
+    CodeToMain(code) {
+        switch (code) {
+            case 200:
+            case 201:
+            case 202:
+            case 230:
+            case 231:
+            case 232:
+            case 233:
+                return _("Thunderstorm");
+            case 300:
+            case 301:
+            case 302:
+                return _("Drizzle");
+            case 500:
+            case 501:
+            case 502:
+            case 511:
+            case 520:
+            case 521:
+            case 522:
+                return _("Rain");
+            case 600:
+            case 601:
+            case 602:
+            case 610:
+            case 621:
+            case 622:
+            case 623:
+                return _("Snow");
+            case 611:
+            case 612:
+                return _("Sleet");
+            case 700:
+                return _("Mist");
+            case 711:
+                return _("Smoke");
+            case 721:
+                return _("Haze");
+            case 731:
+                return _("Dust");
+            case 741:
+            case 751:
+                return _("Fog");
+            case 800:
+                return _("Clear");
+            case 801:
+                return _("Few clouds");
+            case 802:
+                return _("Scattered clouds");
+            case 803:
+                return _("Broken clouds");
+            case 804:
+                return _("Overcast");
+            case 900:
+            default:
+                return _("Unknown");
+        }
+    }
+    CodeToDescription(code) {
+        switch (code) {
+            case 200:
+                return _("Thunderstorm with light rain");
+            case 201:
+                return _("Thunderstorm with rain");
+            case 202:
+                return _("Thunderstorm with heavy rain");
+            case 230:
+                return _("Thunderstorm with light drizzle");
+            case 231:
+                return _("Thunderstorm with drizzle");
+            case 232:
+                return _("Thunderstorm with heavy drizzle");
+            case 233:
+                return _("Thunderstorm");
+            case 300:
+                return _("Light drizzle");
+            case 301:
+                return _("Drizzle");
+            case 302:
+                return _("Heavy drizzle");
+            case 500:
+                return _("Light rain");
+            case 501:
+                return _("Moderate rain");
+            case 502:
+                return _("Heavy rain");
+            case 511:
+                return _("Freezing rain");
+            case 520:
+                return _("Light shower rain");
+            case 521:
+                return _("Shower rain");
+            case 522:
+                return _("Heavy shower rain");
+            case 600:
+                return _("Light snow");
+            case 601:
+                return _("Snow");
+            case 602:
+                return _("Heavy snow");
+            case 610:
+                return _("Mix snow/rain");
+            case 621:
+                return _("Snow shower");
+            case 622:
+                return _("Heavy snow shower");
+            case 623:
+                return _("Flurries");
+            case 611:
+                return _("Sleet");
+            case 612:
+                return _("Heavy sleet");
+            case 700:
+                return _("Mist");
+            case 711:
+                return _("Smoke");
+            case 721:
+                return _("Haze");
+            case 731:
+                return _("Dust");
+            case 741:
+                return _("Fog");
+            case 751:
+                return _("Freezing fog");
+            case 800:
+                return _("Clear");
+            case 801:
+                return _("Few clouds");
+            case 802:
+                return _("Scattered clouds");
+            case 803:
+                return _("Broken clouds");
+            case 804:
+                return _("Overcast");
+            case 900:
+            default:
+                return _("Unknown");
+        }
     }
     ResolveIcon(icon) {
         switch (icon) {
@@ -11044,13 +13079,14 @@ class Weatherbit extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/climacellV4.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/tomorrow_io/provider.ts
+
 
 
 
 class ClimacellV4 extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.remainingCalls = null;
         this.needsApiKey = true;
         this.prettyName = _("Tomorrow.io");
@@ -11069,15 +13105,54 @@ class ClimacellV4 extends BaseProvider {
             fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable, config) {
         if (loc == null)
             return null;
         this.params.apikey = this.app.config.ApiKey;
         this.params.location = loc.lat + "," + loc.lon;
-        const response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: this.url,
+            cancellable,
+            params: this.params,
+            HandleError: (m) => this.HandleHTTPError(m)
+        });
         if (response == null)
             return null;
-        return this.ParseWeather(loc, response);
+        const weather = this.ParseWeather(loc, response);
+        if (weather == null)
+            return null;
+        if (config._showAlerts) {
+            const alerts = await this.GetAlerts(loc, cancellable);
+            if (alerts != null)
+                weather.alerts = alerts;
+        }
+        return weather;
+    }
+    async GetAlerts(loc, cancellable) {
+        var _a, _b, _c, _d;
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.tomorrow.io/v4/events",
+            cancellable,
+            params: {
+                apikey: this.app.config.ApiKey,
+                location: loc.lat + "," + loc.lon,
+                buffer: "1",
+                insights: "air&insights=fires&insights=wind&insights=winter&insights=thunderstorms&insights=floods&insights=temperature&insights=tropical&insights=marine&insights=fog&insights=tornado"
+            },
+            HandleError: (m) => this.HandleHTTPError(m)
+        });
+        if (response == null)
+            return null;
+        const alerts = [];
+        for (const alert of response.data.events) {
+            alerts.push({
+                title: (_a = alert.eventValues.headline) !== null && _a !== void 0 ? _a : alert.eventValues.title,
+                description: `${alert.eventValues.description}\n\n${(_d = (_c = (_b = alert.eventValues.response) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.instruction) !== null && _d !== void 0 ? _d : ""}`,
+                level: alert.severity,
+                sender_name: alert.eventValues.origin,
+            });
+        }
+        return alerts;
     }
     HandleHTTPError(message) {
         if (message.ErrorData.code == 401) {
@@ -11120,7 +13195,8 @@ class ClimacellV4 extends BaseProvider {
             sunrise,
             sunset,
             location: {
-                url: "https://www.tomorrow.io/weather"
+                url: "https://www.tomorrow.io/weather",
+                timeZone: loc.timeZone,
             },
             extra_field: {
                 name: _("Feels Like"),
@@ -11359,31 +13435,234 @@ class ClimacellV4 extends BaseProvider {
     }
     PrecipTypeToAppletType(type) {
         switch (type) {
-            case 0:
+            case PrecipType.N_A:
                 return "none";
-            case 1:
+            case PrecipType.Rain:
                 return "rain";
-            case 2:
+            case PrecipType.Snow:
                 return "snow";
-            case 3:
+            case PrecipType.Freezing_Rain:
                 return "freezing rain";
-            case 4:
+            case PrecipType.Ice_Pellets:
                 return "ice pellets";
             default:
                 return "none";
         }
     }
 }
+var PrecipType;
+(function (PrecipType) {
+    PrecipType[PrecipType["N_A"] = 0] = "N_A";
+    PrecipType[PrecipType["Rain"] = 1] = "Rain";
+    PrecipType[PrecipType["Snow"] = 2] = "Snow";
+    PrecipType[PrecipType["Freezing_Rain"] = 3] = "Freezing_Rain";
+    PrecipType[PrecipType["Ice_Pellets"] = 4] = "Ice_Pellets";
+})(PrecipType || (PrecipType = {}));
 
-;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/alerts.ts
+
+async function GetUSWeatherAlerts(cancellable, lat, lon) {
+    var _a, _b;
+    const alerts = [];
+    let next = "https://api.weather.gov/alerts/active";
+    while (next) {
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: next,
+            cancellable: cancellable,
+            params: {
+                point: `${lat},${lon}`
+            }
+        });
+        if (response === null) {
+            return null;
+        }
+        for (const alert of response.features) {
+            alerts.push({
+                title: alert.properties.headline,
+                description: `${alert.properties.description}\n\n${(_a = alert.properties.instruction) !== null && _a !== void 0 ? _a : ""}`,
+                level: SeverityToAlertLevel(alert.properties.severity),
+                sender_name: alert.properties.senderName,
+                icon: EventNameToIcon(alert.properties.event)
+            });
+        }
+        next = (_b = response.pagination) === null || _b === void 0 ? void 0 : _b.next;
+    }
+    return alerts;
+}
+function SeverityToAlertLevel(level) {
+    switch (level) {
+        case "Extreme":
+            return "extreme";
+        case "Severe":
+            return "severe";
+        case "Moderate":
+            return "moderate";
+        case "Minor":
+            return "minor";
+        default:
+            return "unknown";
+    }
+}
+function EventNameToIcon(event) {
+    switch (event) {
+        case "Extreme Fire Danger":
+        case "Fire Warning":
+        case "Fire Weather Watch":
+            return "fire-symbolic";
+        case "Flash Flood Statement":
+        case "Flash Flood Warning":
+        case "Flash Flood Watch":
+        case "Flood Advisory":
+        case "Flood Statement":
+        case "Flood Warning":
+        case "Flood Watch":
+        case "Coastal Flood Advisory":
+        case "Coastal Flood Statement":
+        case "Coastal Flood Warning":
+        case "Coastal Flood Watch":
+        case "Lakeshore Flood Advisory":
+        case "Lakeshore Flood Statement":
+        case "Lakeshore Flood Warning":
+        case "Lakeshore Flood Watch":
+        case "Arroyo And Small Stream Flood Advisory":
+        case "Small Stream Flood Advisory":
+        case "Urban And Small Stream Flood Advisory":
+            return "flood-symbolic";
+        case "Ashfall Advisory":
+        case "Ashfall Warning":
+        case "Blowing Dust Advisory":
+        case "Blowing Dust Warning":
+        case "Dust Storm Warning":
+        case "Dust Advisory":
+            return "dust-symbolic";
+        case "Blizzard Warning":
+        case "Blizzard Watch":
+        case "Extreme Cold Warning":
+        case "Extreme Cold Watch":
+        case "Freeze Warning":
+        case "Freeze Watch":
+        case "Freezing Fog Advisory":
+        case "Freezing Rain Advisory":
+        case "Freezing Spray Advisory":
+        case "Frost Advisory":
+        case "Hard Freeze Warning":
+        case "Hard Freeze Watch":
+        case "Winter Storm Warning":
+        case "Winter Storm Watch":
+        case "Winter Weather Advisory":
+        case "Heavy Freezing Spray Warning":
+        case "Heavy Freezing Spray Watch":
+        case "Lake Effect Snow Advisory":
+        case "Lake Effect Snow Warning":
+        case "Lake Effect Snow Watch":
+        case "Snow Squall Warning":
+            return "snowflake-cold-symbolic";
+        case "Dense Fog Advisory":
+            return "fog-symbolic";
+        case "Dense Smoke Advisory":
+            return "smoke-symbolic";
+        case "Brisk Wind Advisory":
+        case "Extreme Wind Warning":
+        case "High Wind Warning":
+        case "High Wind Watch":
+        case "Ice Storm Warning":
+        case "Lake Wind Advisory":
+        case "Wind Advisory":
+        case "Wind Chill Advisory":
+        case "Wind Chill Warning":
+        case "Wind Chill Watch":
+            return "strong-wind-symbolic";
+        case "Excessive Heat Warning":
+        case "Excessive Heat Watch":
+        case "Heat Advisory":
+            return "hot-symbolic";
+        case "Gale Warning":
+        case "Gale Watch":
+            return "gale-warning-symbolic";
+        case "Hurricane Force Wind Warning":
+        case "Hurricane Force Wind Watch":
+        case "Hurricane Local Statement":
+        case "Hurricane Warning":
+        case "Hurricane Watch":
+        case "Typhoon Local Statement":
+        case "Typhoon Warning":
+        case "Typhoon Watch":
+        case "Tropical Depression Local Statement":
+        case "Tropical Storm Local Statement":
+        case "Tropical Storm Warning":
+        case "Tropical Storm Watch":
+            return "hurricane-symbolic";
+        case "Severe Thunderstorm Warning":
+        case "Severe Thunderstorm Watch":
+        case "Severe Weather Statement":
+        case "Storm Surge Warning":
+        case "Storm Surge Watch":
+        case "Storm Warning":
+        case "Storm Watch":
+            return "lightning-symbolic";
+        case "Tornado Warning":
+        case "Tornado Watch":
+            return "tornado-symbolic";
+        case "Tsunami Advisory":
+        case "Tsunami Warning":
+        case "Tsunami Watch":
+            return "tsunami-symbolic";
+        case "Volcano Warning":
+            return "volcano-symbolic";
+        case "Earthquake Warning":
+        case "Special Marine Warning":
+        case "Special Weather Statement":
+        case "Law Enforcement Warning":
+        case "Local Area Emergency":
+        case "Low Water Advisory":
+        case "Marine Weather Statement":
+        case "Nuclear Power Plant Warning":
+        case "Radiological Hazard Warning":
+        case "Hazardous Weather Outlook":
+        case "Hazardous Seas Warning":
+        case "Hazardous Seas Watch":
+        case "Shelter In Place Warning":
+        case "Short Term Forecast":
+        case "Red Flag Warning":
+        case "Rip Current Statement":
+        case "Small Craft Advisory":
+        case "Small Craft Advisory For Hazardous Seas":
+        case "Small Craft Advisory For Rough Bar":
+        case "Small Craft Advisory For Winds":
+        case "High Surf Advisory":
+        case "High Surf Warning":
+        case "Hydrologic Advisory":
+        case "Hydrologic Outlook":
+        case "Hazardous Materials Warning":
+        case "Evacuation - Immediate":
+        case "Avalanche Advisory":
+        case "Avalanche Warning":
+        case "Avalanche Watch":
+        case "Child Abduction Emergency":
+        case "Civil Danger Warning":
+        case "Civil Emergency Message":
+        case "Beach Hazards Statement":
+        case "911 Telephone Outage Emergency":
+        case "Administrative Message":
+        case "Air Quality Alert":
+        case "Air Stagnation Advisory":
+        case "Test":
+        default:
+            return undefined;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/provider.ts
+
+
 
 
 
 
 
 class USWeather extends BaseProvider {
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("US Weather");
         this.name = "US Weather";
         this.maxForecastSupport = 7;
@@ -11446,7 +13725,7 @@ class USWeather extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("US Weather Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
@@ -11467,24 +13746,24 @@ class USWeather extends BaseProvider {
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e.message, e);
                 this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
                 return null;
             }
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b;
         const locID = loc.lat.toString() + "," + loc.lon.toString();
         if (!this.grid || !this.observationStations || this.currentLocID != locID) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = loc;
             this.currentLocID = locID;
-            const grid = await this.GetGridData(loc);
+            const grid = await this.GetGridData(loc, cancellable);
             if (grid == null)
                 return null;
             logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
-            const observationStations = await this.GetStationData(grid.properties.observationStations);
+            const observationStations = await this.GetStationData(grid.properties.observationStations, cancellable);
             if (observationStations == null)
                 return null;
             this.grid = grid;
@@ -11493,38 +13772,61 @@ class USWeather extends BaseProvider {
         else {
             logger_Logger.Debug("Site data downloading skipped");
         }
-        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
-        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
-        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations, cancellable);
+        const hourlyForecastPromise = HttpLib.Instance.LoadJsonSimple({
+            url: this.grid.properties.forecastHourly + "?units=si",
+            cancellable
+        });
+        const forecastPromise = HttpLib.Instance.LoadJsonSimple({
+            url: this.grid.properties.forecast,
+            cancellable
+        });
         const hourly = await hourlyForecastPromise;
         const forecast = await forecastPromise;
         if (!hourly || !forecast) {
             logger_Logger.Error("Failed to obtain forecast Data");
             return null;
         }
-        const weather = this.ParseCurrent(observations, hourly, loc);
-        if (!!weather) {
-            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
-            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        const weather = this.ParseCurrent(observations, hourly);
+        if (!weather)
+            return null;
+        weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
+        weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        if (config._showAlerts) {
+            const alerts = await GetUSWeatherAlerts(cancellable, loc.lat, loc.lon);
+            if (!alerts)
+                return null;
+            weather.alerts = alerts;
         }
         return weather;
     }
     ;
-    async GetGridData(loc) {
-        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
+    async GetGridData(loc, cancellable) {
+        const siteData = await HttpLib.Instance.LoadJsonSimple({
+            url: this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(),
+            cancellable,
+            HandleError: this.OnObtainingGridData
+        });
         return siteData;
     }
-    async GetStationData(stationListUrl) {
-        const stations = await this.app.LoadJsonAsync(stationListUrl);
+    async GetStationData(stationListUrl, cancellable) {
+        const stations = await HttpLib.Instance.LoadJsonSimple({
+            url: stationListUrl,
+            cancellable
+        });
         return stations === null || stations === void 0 ? void 0 : stations.features;
     }
-    async GetObservationsInRange(range, loc, stations) {
+    async GetObservationsInRange(range, loc, stations, cancellable) {
         const observations = [];
         for (const element of stations) {
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range)
                 break;
-            const observation = await this.app.LoadJsonAsync(element.id + "/observations/latest", {}, (msg) => false);
+            const observation = await HttpLib.Instance.LoadJsonSimple({
+                url: element.id + "/observations/latest",
+                cancellable,
+                HandleError: () => false
+            });
             if (observation == null) {
                 logger_Logger.Debug("Failed to get observations from " + element.id);
             }
@@ -11587,7 +13889,7 @@ class USWeather extends BaseProvider {
         }
         return result;
     }
-    ParseCurrent(json, hourly, loc) {
+    ParseCurrent(json, hourly) {
         var _a, _b;
         const observation = this.MeshObservationData(json);
         if (observation == null || !this.observationStations[0]) {
@@ -11644,7 +13946,7 @@ class USWeather extends BaseProvider {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("US Weather Parsing error: " + e, e);
+                logger_Logger.Error("US Weather Parsing error: " + e.message, e);
             this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
@@ -11693,7 +13995,7 @@ class USWeather extends BaseProvider {
                 customIcon: "cloud-refresh-symbolic",
                 icons: ["weather-severe-alert"]
             };
-        const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
+        const code = icon.match(/(?!\/)[_a-z]+(?=([,?]))/);
         switch (code === null || code === void 0 ? void 0 : code[0]) {
             case "skc":
                 return {
@@ -11928,13 +14230,14 @@ class USWeather extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing/provider.ts
+
 
 
 
 class VisualCrossing extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Visual Crossing");
         this.name = "Visual Crossing";
         this.maxForecastSupport = 15;
@@ -11948,12 +14251,12 @@ class VisualCrossing extends BaseProvider {
         this.params = {
             unitGroup: "metric",
             key: null,
-            include: "fcst,hours,current",
+            include: "fcst,hours,current,alerts",
             lang: "id"
         };
         this.supportedLangs = ["en", "de", "fr", "es"];
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         if (loc == null)
             return null;
         this.params['key'] = this.app.config.ApiKey;
@@ -11963,7 +14266,12 @@ class VisualCrossing extends BaseProvider {
             translate = false;
         }
         const url = this.url + loc.lat + "," + loc.lon;
-        const json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
+        const json = await HttpLib.Instance.LoadJsonSimple({
+            url,
+            cancellable,
+            params: this.params,
+            HandleError: (e) => this.HandleHttpError(e)
+        });
         if (!json)
             return null;
         return this.ParseWeather(json, translate);
@@ -12001,11 +14309,23 @@ class VisualCrossing extends BaseProvider {
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
         };
+        if (weather.alerts) {
+            const alerts = [];
+            for (const alert of weather.alerts) {
+                alerts.push({
+                    title: alert.headline,
+                    description: alert.description,
+                    level: "unknown",
+                    sender_name: alert.link
+                });
+            }
+            result.alerts = alerts;
+        }
         return result;
     }
     ParseForecasts(forecasts, translate, tz) {
         const result = [];
-        if (!!forecasts) {
+        if (forecasts) {
             for (const element of forecasts) {
                 result.push({
                     date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
@@ -12020,7 +14340,7 @@ class VisualCrossing extends BaseProvider {
     ParseHourlyForecasts(forecasts, translate, tz) {
         const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
         const result = [];
-        if (!!forecasts) {
+        if (forecasts) {
             for (const element of forecasts) {
                 if (!element.hours)
                     continue;
@@ -12202,7 +14522,7 @@ class VisualCrossing extends BaseProvider {
     }
     ResolveTypeIDs(condition) {
         let result = "";
-        let split = condition.split(", ");
+        const split = condition.split(", ");
         for (const [index, element] of split.entries()) {
             result += this.ResolveTypeID(element);
             if (index < split.length - 1)
@@ -12228,9 +14548,10 @@ class VisualCrossing extends BaseProvider {
 
 
 
+
 class DanishMI extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("DMI Denmark");
         this.name = "DanishMI";
@@ -12255,14 +14576,22 @@ class DanishMI extends BaseProvider {
             north: null
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         if (loc == null)
             return null;
         this.GetLocationBoundingBox(loc);
-        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
+        const observations = this.OrderObservations(await HttpLib.Instance.LoadJsonSimple({
+            url: this.url,
+            cancellable,
+            params: this.observationParams
+        }), loc);
         this.forecastParams.lat = loc.lat;
         this.forecastParams.lon = loc.lon;
-        const forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
+        const forecasts = await HttpLib.Instance.LoadJsonSimple({
+            url: this.url,
+            cancellable,
+            params: this.forecastParams
+        });
         if (forecasts == null)
             return null;
         return this.ParseWeather(observations, forecasts, loc);
@@ -12284,7 +14613,7 @@ class DanishMI extends BaseProvider {
         result.location = {
             city: forecasts.city,
             country: forecasts.country,
-            timeZone: undefined,
+            timeZone: loc.timeZone,
             url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}/${forecasts.city}`
         };
         result.coord = {
@@ -12364,9 +14693,11 @@ class DanishMI extends BaseProvider {
                 return true;
             return false;
         });
+        if (relevantHours.length == 0)
+            return this.ResolveCondition(undefined);
         const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol;
-        if (!!normalizedSymbols.find(x => x > 10 && x != 45))
+        if (normalizedSymbols.some(x => x > 10 && x != 45))
             resultSymbol = Math.max(...normalizedSymbols);
         else
             resultSymbol = mode(normalizedSymbols);
@@ -12558,23 +14889,24 @@ class DanishMI extends BaseProvider {
     }
     DateStringToDate(str) {
         if (str.length == 14) {
-            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), parseInt(str.substring(8, 10)), parseInt(str.substring(10, 12)), parseInt(str.substring(12, 14))));
+            return new Date(Date.UTC(Number.parseInt(str.slice(0, 4)), Number.parseInt(str.slice(4, 6)) - 1, Number.parseInt(str.slice(6, 8)), Number.parseInt(str.slice(8, 10)), Number.parseInt(str.slice(10, 12)), Number.parseInt(str.slice(12, 14))));
         }
         else if (str.length == 8) {
-            return new Date(Date.UTC(parseInt(str.substring(0, 4)), parseInt(str.substring(4, 6)) - 1, parseInt(str.substring(6, 8)), 0, 0, 0, 0));
+            return new Date(Date.UTC(Number.parseInt(str.slice(0, 4)), Number.parseInt(str.slice(4, 6)) - 1, Number.parseInt(str.slice(6, 8)), 0, 0, 0, 0));
         }
         else {
             if (str.length == 3) {
-                str = ("0000" + str).substr(-4, 4);
+                str = "0" + str;
             }
             const today = new Date();
-            today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
+            today.setUTCHours(Number.parseInt(str.slice(0, 2)), Number.parseInt(str.slice(2, 4)), 0, 0);
             return today;
         }
     }
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/accuWeather.ts
+
 
 
 
@@ -12603,28 +14935,49 @@ class AccuWeather extends BaseProvider {
             url += "120hour";
         return url;
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         var _a, _b;
         const locationID = `${loc.lat},${loc.lon}`;
-        const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
-        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        const locale = this.app.config._translateCondition ? (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us" : "en-us";
         let location;
-        if (this.locationCache[locationID] != null)
+        if (this.locationCache[locationID] != null) {
             location = this.locationCache[locationID];
-        else
-            location = await this.app.LoadJsonAsync(this.locSearchUrl, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
+        }
+        else {
+            location = await HttpLib.Instance.LoadJsonSimple({
+                url: this.locSearchUrl,
+                cancellable,
+                params: { q: locationID, details: true, language: locale, apikey: this.app.config.ApiKey },
+                HandleError: this.HandleErrors
+            });
+        }
         if (location == null) {
             return null;
         }
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsyncWithDetails(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsyncWithDetails(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsyncWithDetails(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+            HttpLib.Instance.LoadJsonAsync({
+                url: this.currentConditionUrl + location.Key,
+                cancellable,
+                params: { apikey: this.app.config.ApiKey, details: true, language: locale, },
+                HandleError: this.HandleErrors
+            }),
+            HttpLib.Instance.LoadJsonAsync({
+                url: this.dailyForecastUrl + location.Key,
+                cancellable,
+                params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
+                HandleError: this.HandleErrors
+            }),
+            HttpLib.Instance.LoadJsonAsync({
+                url: this.hourlyForecastUrl + location.Key,
+                cancellable,
+                params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
+                HandleError: this.HandleErrors
+            })
         ]);
         if (!current.Success || !forecast.Success || !hourly.Success)
             return null;
-        this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
-        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        this.remainingQuota = Math.min(Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
+        this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }
     constructor(app) {
@@ -12759,11 +15112,6 @@ class AccuWeather extends BaseProvider {
     }
     ResolveIcons(icon, day) {
         switch (icon) {
-            case 1:
-                return {
-                    customIcon: "alien-symbolic",
-                    icons: []
-                };
             case 1:
                 return {
                     customIcon: day ? "day-sunny-symbolic" : "night-clear-symbolic",
@@ -12917,7 +15265,102 @@ class AccuWeather extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/alert.ts
+
+async function GetDeutscherWetterdienstAlerts(cancellable, lat, lon) {
+    var _a;
+    const response = await HttpLib.Instance.LoadJsonSimple({
+        url: "https://api.brightsky.dev/alerts",
+        cancellable: cancellable,
+        params: {
+            lat: lat,
+            lon: lon,
+        }
+    });
+    if (response === null) {
+        return null;
+    }
+    const result = [];
+    for (const alert of response.alerts) {
+        result.push({
+            title: alert.headline_de,
+            description: `${alert.status == "test" ? "{TEST} " : ""}${alert.description_de}\n\n${(_a = alert.instruction_de) !== null && _a !== void 0 ? _a : ""}`,
+            level: LevelToAlertLevel(alert.severity),
+            sender_name: "Deutscher Wetterdienst",
+            icon: EventCodeToIcon(alert.event_code),
+        });
+    }
+    return result;
+}
+function LevelToAlertLevel(level) {
+    if (level == null)
+        return "unknown";
+    return level;
+}
+function EventCodeToIcon(code) {
+    switch (code) {
+        case 22:
+            return "snowflake-cold-symbolic";
+        case 31:
+        case 33:
+        case 34:
+        case 36:
+        case 38:
+        case 40:
+        case 41:
+        case 42:
+        case 44:
+        case 45:
+        case 46:
+        case 48:
+        case 49:
+        case 95:
+        case 96:
+            return "lightning-symbolic";
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 55:
+        case 56:
+            return "strong-wind-symbolic";
+        case 59:
+            return undefined;
+        case 61:
+        case 62:
+        case 63:
+        case 64:
+        case 65:
+        case 66:
+            return "raindrops-symbolic";
+        case 70:
+        case 71:
+        case 72:
+        case 73:
+        case 74:
+        case 75:
+        case 76:
+            return "snowflake-cold-symbolic";
+        case 82:
+        case 84:
+        case 85:
+        case 86:
+            return "snowflake-cold-symbolic";
+        case 87:
+        case 88:
+        case 89:
+            return undefined;
+        case 98:
+        case 99:
+            return undefined;
+        default:
+            return undefined;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/provider.ts
+
+
 
 
 
@@ -12930,7 +15373,7 @@ class DeutscherWetterdienst extends BaseProvider {
         this.name = "DeutscherWetterdienst";
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 240;
-        this.website = "https://www.dwd.de/DE/Home/home_node.html";
+        this.website = "https://brightsky.dev/";
         this.remainingCalls = null;
         this.supportHourlyPrecipChance = false;
         this.supportHourlyPrecipVolume = true;
@@ -12948,17 +15391,34 @@ class DeutscherWetterdienst extends BaseProvider {
             return false;
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
-            this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
+            HttpLib.Instance.LoadJsonSimple({
+                url: `${this.baseUrl}current_weather`,
+                cancellable,
+                params: this.GetDefaultParams(loc),
+                HandleError: this.HandleErrors
+            }),
+            HttpLib.Instance.LoadJsonSimple({
+                url: `${this.baseUrl}weather`,
+                cancellable,
+                params: this.GetHourlyParams(loc),
+                HandleError: this.HandleErrors,
+            })
         ]);
         if (current == null || hourly == null)
             return null;
         const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
         const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        let alerts = undefined;
+        if (config._showAlerts) {
+            const result = await GetDeutscherWetterdienstAlerts(cancellable, loc.lat, loc.lon);
+            if (result == null)
+                return null;
+            alerts = result;
+        }
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
             location: {
@@ -12988,7 +15448,8 @@ class DeutscherWetterdienst extends BaseProvider {
                 name: (_d = mainSource.station_name) !== null && _d !== void 0 ? _d : undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
+            alerts: alerts
         };
     }
     ParseForecast(current, forecast, loc) {
@@ -12997,7 +15458,7 @@ class DeutscherWetterdienst extends BaseProvider {
         for (const day of days) {
             let tempMax = -Infinity;
             let tempMin = Infinity;
-            let conditions = [];
+            const conditions = [];
             let time = null;
             for (const hour of day) {
                 if (time == null)
@@ -13060,9 +15521,9 @@ class DeutscherWetterdienst extends BaseProvider {
         }
         const severeWeathers = {};
         const regularWeather = {};
-        const regularConditions = ["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"];
+        const regularConditions = new Set(["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"]);
         for (const condition of conditions) {
-            if (regularConditions.includes(condition))
+            if (regularConditions.has(condition))
                 regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
             else
                 severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
@@ -13226,6 +15687,7 @@ class DeutscherWetterdienst extends BaseProvider {
 
 
 
+
 const unitTypeMap = {
     "us": "e",
     "lr": "e",
@@ -13246,24 +15708,28 @@ class WeatherUnderground extends BaseProvider {
         this.supportHourlyPrecipVolume = false;
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
-        this.GetWeather = async (loc) => {
+        this.GetWeather = async (loc, cancellable) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
             const locString = `${loc.lat},${loc.lon}`;
-            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc));
+            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc, cancellable));
             if (location == null) {
                 return null;
             }
             this.locationCache[locString] = location;
-            const forecast = await this.app.LoadJsonAsync(`${this.baseURl}v3/wx/forecast/daily/5day`, {
-                geocode: locString,
-                language: (_b = this.app.config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
-                format: "json",
-                apiKey: this.app.config.ApiKey,
-                units: this.currentUnit,
+            const forecast = await HttpLib.Instance.LoadJsonSimple({
+                url: `${this.baseURl}v3/wx/forecast/daily/5day`,
+                cancellable,
+                params: {
+                    geocode: locString,
+                    language: (_b = this.app.config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
+                    format: "json",
+                    apiKey: this.app.config.ApiKey,
+                    units: this.currentUnit,
+                }
             });
             if (forecast == null)
                 return null;
-            const observation = await this.GetObservations(location, forecast, loc);
+            const observation = await this.GetObservations(location, forecast, loc, cancellable);
             return {
                 date: observation.date,
                 temperature: (_c = observation.temperature) !== null && _c !== void 0 ? _c : null,
@@ -13274,7 +15740,8 @@ class WeatherUnderground extends BaseProvider {
                 location: {
                     city: (_d = loc.city) !== null && _d !== void 0 ? _d : observation.location.city,
                     country: (_e = loc.country) !== null && _e !== void 0 ? _e : observation.location.country,
-                    url: observation.location.url
+                    url: observation.location.url,
+                    timeZone: loc.timeZone,
                 },
                 condition: (_f = observation.condition) !== null && _f !== void 0 ? _f : {
                     description: "unknown",
@@ -13296,15 +15763,20 @@ class WeatherUnderground extends BaseProvider {
                 forecasts: this.ParseForecasts(loc, forecast),
             };
         };
-        this.GetNearbyStations = async (loc) => {
+        this.GetNearbyStations = async (loc, cancellable) => {
             var _a;
             const result = [];
-            const payload = await this.app.LoadJsonAsync(`${this.baseURl}v3/location/near`, {
-                geocode: `${loc.lat},${loc.lon}`,
-                format: "json",
-                apiKey: this.app.config.ApiKey,
-                product: "pws"
-            }, this.HandleErrors);
+            const payload = await HttpLib.Instance.LoadJsonSimple({
+                url: `${this.baseURl}v3/location/near`,
+                cancellable,
+                params: {
+                    geocode: `${loc.lat},${loc.lon}`,
+                    format: "json",
+                    apiKey: this.app.config.ApiKey,
+                    product: "pws"
+                },
+                HandleError: this.HandleErrors
+            });
             if (payload == null)
                 return null;
             for (let i = 0; i < payload.location.stationId.length; i++) {
@@ -13321,18 +15793,21 @@ class WeatherUnderground extends BaseProvider {
             }
             if (result.length == 0)
                 return null;
+            result.sort((a, b) => a.distanceKm - b.distanceKm);
             return result;
         };
-        this.GetObservations = async (stations, forecast, loc) => {
+        this.GetObservations = async (stations, forecast, loc, cancellable) => {
             var _a;
-            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null);
+            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable)))).filter(v => v != null);
             const tz = loc.timeZone;
             const result = {
                 wind: {
                     speed: null,
                     degree: null,
                 },
-                location: {},
+                location: {
+                    timeZone: tz,
+                },
                 sunrise: null,
                 sunset: null,
                 date: null,
@@ -13374,8 +15849,6 @@ class WeatherUnderground extends BaseProvider {
                         distanceFrom: station.distanceKm * 1000,
                     };
                 }
-                if (result.immediatePrecipitation == null) {
-                }
             }
             const dayPartIndex = forecast.daypart[0].daypartName.findIndex(v => v != null);
             if (result.date == null)
@@ -13398,21 +15871,26 @@ class WeatherUnderground extends BaseProvider {
             result.sunset = DateTime.fromJSDate(times.sunset).setZone(tz);
             return result;
         };
-        this.GetObservation = async (stationID) => {
+        this.GetObservation = async (stationID, cancellable) => {
             var _a;
-            const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
-                format: "json",
-                stationId: stationID,
-                apiKey: this.app.config.ApiKey,
-                units: "s",
-                numericPrecision: "decimal",
-            }, this.HandleErrors);
+            const observationString = await HttpLib.Instance.LoadAsyncSimple({
+                url: `${this.baseURl}v2/pws/observations/current`,
+                cancellable,
+                params: {
+                    format: "json",
+                    stationId: stationID,
+                    apiKey: this.app.config.ApiKey,
+                    units: "s",
+                    numericPrecision: "decimal",
+                },
+                HandleError: this.HandleErrors
+            });
             let observation = null;
             if (observationString != null) {
                 try {
                     observation = JSON.parse(observationString);
                 }
-                catch (e) {
+                catch (_b) {
                     logger_Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
                 }
             }
@@ -13800,11 +16278,13 @@ class WeatherUnderground extends BaseProvider {
         const result = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [forecast.daypart[0].iconCode[index * 2], forecast.daypart[0].iconCode[index * 2 + 1]];
+            const tempMax = forecast.temperatureMax[index];
+            const tempmin = forecast.temperatureMin[index];
             const data = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition((_a = icons[0]) !== null && _a !== void 0 ? _a : icons[1]),
-                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]),
-                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
             };
             if (!this.app.config._shortConditions)
                 data.condition.description = forecast.narrative[index];
@@ -13814,53 +16294,31 @@ class WeatherUnderground extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geojs.io.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/types/common.ts
 
 
-class GeoJS {
-    constructor(_app) {
-        this.query = "https://get.geojs.io/v1/ip/geo.json";
-        this.app = _app;
+function PirateWeatherSummaryToTranslated(summary) {
+    switch (summary) {
+        case "Clear":
+            return _("Clear");
+        case "Partly Cloudy":
+            return _("Partly Cloudy");
+        case "Rain":
+            return _("Rain");
+        case "Cloudy":
+            return _("Cloudy");
+        case "Snow":
+            return _("Snow");
+        case "Wind":
+            return _("Wind");
+        case "Fog":
+            return _("Fog");
+        case "Sleet":
+            return _("Sleet");
+        default:
+            logger_Logger.Error(`Unknown PirateWeatherSummary: ${summary}`);
+            return summary;
     }
-    async GetLocation() {
-        const json = await this.app.LoadJsonAsync(this.query);
-        if (!json) {
-            return null;
-        }
-        return this.ParseInformation(json);
-    }
-    ;
-    ParseInformation(json) {
-        try {
-            const lat = parseFloat(json.latitude);
-            const lon = parseFloat(json.longitude);
-            if (Number.isNaN(lat) || Number.isNaN(lon)) {
-                this.HandleErrorResponse(json);
-                return null;
-            }
-            const result = {
-                lat: lat,
-                lon: lon,
-                city: json.city,
-                country: json.country,
-                timeZone: json.timezone,
-                entryText: lat + "," + lon,
-            };
-            logger_Logger.Debug("Location obtained:" + lat + "," + lon);
-            return result;
-        }
-        catch (e) {
-            logger_Logger.Error("ip-api parsing error: " + e);
-            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
-            return null;
-        }
-    }
-    ;
-    HandleErrorResponse(json) {
-        this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        logger_Logger.Error("ip-api responds with Error: " + json.reason);
-    }
-    ;
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
@@ -13868,13 +16326,12 @@ class GeoJS {
 
 
 
+
+
+
 class PirateWeather extends BaseProvider {
-    get remainingCalls() {
-        return null;
-    }
-    ;
-    constructor(_app) {
-        super(_app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("Pirate Weather");
         this.name = "PirateWeather";
         this.maxForecastSupport = 7;
@@ -13885,7 +16342,6 @@ class PirateWeather extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.remainingQuota = null;
         this.query = "https://api.pirateweather.net/forecast/";
-        this.unit = "si";
         this.HandleError = (message) => {
             if (message.ErrorData.code == 403) {
                 this.app.ShowError({
@@ -13903,18 +16359,25 @@ class PirateWeather extends BaseProvider {
                     userError: true,
                     detail: "no key",
                     service: "pirate_weather",
-                    message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+                    message: _("Please Make sure you\nentered the API key that you have from Pirate Weather")
                 });
                 return false;
             }
             return true;
         };
     }
-    async GetWeather(loc) {
+    get remainingCalls() {
+        return null;
+    }
+    ;
+    async GetWeather(loc, cancellable) {
         const unit = this.GetQueryUnit();
-        const response = await this.app.LoadJsonAsyncWithDetails(`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`, {
-            units: this.GetQueryUnit()
-        }, this.HandleError);
+        const response = await HttpLib.Instance.LoadJsonAsync({
+            url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+            cancellable,
+            params: { units: this.GetQueryUnit() },
+            HandleError: this.HandleError
+        });
         if (!response.Success)
             return null;
         return this.ParseWeather(response.Data, unit);
@@ -13945,8 +16408,8 @@ class PirateWeather extends BaseProvider {
                 humidity: json.currently.humidity * 100,
                 dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
                 condition: {
-                    main: json.currently.summary,
-                    description: json.currently.summary,
+                    main: PirateWeatherSummaryToTranslated(json.currently.summary),
+                    description: PirateWeatherSummaryToTranslated(json.currently.summary),
                     icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
@@ -13964,8 +16427,8 @@ class PirateWeather extends BaseProvider {
                     temp_min: this.ToKelvin(day.temperatureLow, unit),
                     temp_max: this.ToKelvin(day.temperatureHigh, unit),
                     condition: {
-                        main: day.summary,
-                        description: day.summary,
+                        main: PirateWeatherSummaryToTranslated(day.summary),
+                        description: PirateWeatherSummaryToTranslated(day.summary),
                         icons: this.ResolveIcon(day.icon),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
@@ -13978,8 +16441,8 @@ class PirateWeather extends BaseProvider {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature, unit),
                     condition: {
-                        main: hour.summary,
-                        description: hour.summary,
+                        main: PirateWeatherSummaryToTranslated(hour.summary),
+                        description: PirateWeatherSummaryToTranslated(hour.summary),
                         icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
@@ -14008,16 +16471,43 @@ class PirateWeather extends BaseProvider {
                 }
                 result.immediatePrecipitation = immediate;
             }
+            if (json.alerts != null) {
+                const alerts = [];
+                for (const alert of json.alerts) {
+                    alerts.push({
+                        title: alert.title,
+                        description: alert.description,
+                        level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
+                        sender_name: alert.uri,
+                    });
+                }
+                ;
+                result.alerts = alerts.sort((a, b) => ALERT_LEVEL_ORDER.indexOf(a.level) - ALERT_LEVEL_ORDER.indexOf(b.level));
+            }
             return result;
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("Pirate Weather payload parsing error: " + e, e);
+                logger_Logger.Error("Pirate Weather payload parsing error: " + e.message, e);
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
             return null;
         }
     }
     ;
+    PirateWeatherAlertSeverityToAlertLevel(severity) {
+        switch (severity) {
+            case "Extreme":
+                return "extreme";
+            case "Severe":
+                return "severe";
+            case "Moderate":
+                return "moderate";
+            case "Minor":
+                return "minor";
+            default:
+                return "unknown";
+        }
+    }
     ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
@@ -14075,7 +16565,7 @@ class PirateWeather extends BaseProvider {
                 return 'si';
             }
             else {
-                return 'uk2';
+                return 'uk';
             }
         }
         else {
@@ -14104,6 +16594,602 @@ class PirateWeather extends BaseProvider {
 }
 ;
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
+
+
+let GeoClueLib = undefined;
+let GeocodeGlib = undefined;
+class GeoClue {
+    constructor() {
+        try {
+            GeoClueLib = imports.gi.Geoclue;
+            GeocodeGlib = imports.gi.GeocodeGlib;
+        }
+        catch (_a) {
+            logger_Logger.Info("GeoClue2 not available, disabling it's use.");
+        }
+    }
+    async GetLocation(cancellable, config) {
+        if (GeoClueLib == null || GeocodeGlib == null) {
+            return null;
+        }
+        const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
+        const res = await new Promise((resolve) => {
+            logger_Logger.Debug("Requesting coordinates from GeoClue");
+            const start = DateTime.now();
+            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable, (client, res) => {
+                logger_Logger.Debug(`Getting GeoClue coordinates finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+                let simple = null;
+                try {
+                    simple = GeoClue.new_finish(res);
+                    const clientObj = simple.get_client();
+                    if (clientObj == null || !clientObj.active) {
+                        logger_Logger.Debug("GeoGlue Geolocation disabled, skipping");
+                        resolve(null);
+                        return;
+                    }
+                }
+                catch (e) {
+                    logger_Logger.Error("Error while fetching GeoClue coordinates: ", e);
+                    resolve(null);
+                    return;
+                }
+                const loc = simple.get_location();
+                if (loc == null) {
+                    logger_Logger.Debug("GeoGlue coordinates is not known.");
+                    resolve(null);
+                    return;
+                }
+                const result = {
+                    lat: loc.latitude,
+                    lon: loc.longitude,
+                    city: undefined,
+                    country: undefined,
+                    timeZone: config.UserTimezone,
+                    entryText: loc.latitude + "," + loc.longitude,
+                    altitude: loc.altitude,
+                    accuracy: loc.accuracy,
+                };
+                logger_Logger.Debug(`GeoClue coordinates received ${JSON.stringify(result)}`);
+                resolve(result);
+                return;
+            });
+        });
+        if (res == null) {
+            return null;
+        }
+        const geoCodeRes = await this.GetGeoCodeData(cancellable, res.lat, res.lon, res.accuracy);
+        if (geoCodeRes == null) {
+            return res;
+        }
+        return Object.assign(Object.assign({}, res), geoCodeRes);
+    }
+    ;
+    async GetGeoCodeData(cancellable, lat, lon, accuracy) {
+        if (GeocodeGlib == null) {
+            return null;
+        }
+        const geoCodeLoc = GeocodeGlib.Location.new(lat, lon, accuracy);
+        const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
+        geoCodeRes.set_backend(GeocodeGlib.Nominatim.new("https://nominatim.openstreetmap.org", "weatherapplet@gmail.com"));
+        return new Promise((resolve) => {
+            logger_Logger.Debug("Requesting location data from GeoCode");
+            const start = DateTime.now();
+            geoCodeRes.resolve_async(cancellable, (obj, res) => {
+                logger_Logger.Debug(`Getting GeoCode location data finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+                let result = null;
+                try {
+                    result = geoCodeRes.resolve_finish(res);
+                }
+                catch (e) {
+                    logger_Logger.Error("Error while fetching GeoCode data: ", e);
+                    resolve(null);
+                    return;
+                }
+                if (result == null) {
+                    logger_Logger.Debug("GeoCode location data not available.");
+                    resolve(null);
+                    return;
+                }
+                logger_Logger.Debug(`GeoCode location data received ${result.town}, ${result.country}`);
+                resolve({
+                    city: result.town,
+                    country: result.country,
+                });
+                return;
+            });
+        });
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoip.fedora.ts
+
+
+
+
+class GeoIPFedora {
+    constructor(config) {
+        this.query = "https://geoip.fedoraproject.org/city";
+        this.config = config;
+    }
+    async GetLocation(cancellable, config) {
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
+        if (!json) {
+            logger_Logger.Info("geoip.fedoraproject didn't return any data");
+            return null;
+        }
+        return this.ParseInformation(json, config);
+    }
+    ParseInformation(json, config) {
+        var _a, _b, _c;
+        if (json.latitude === null || json.longitude === null) {
+            ErrorHandler.Instance.PostError({
+                type: "hard",
+                detail: "bad api response",
+                message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
+                service: "geoip.fedoreproject"
+            });
+            return null;
+        }
+        try {
+            const result = {
+                lat: json.latitude,
+                lon: json.longitude,
+                city: (_a = json.city) !== null && _a !== void 0 ? _a : undefined,
+                country: (_b = json.country_name) !== null && _b !== void 0 ? _b : undefined,
+                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : config.UserTimezone,
+                entryText: json.latitude + "," + json.longitude,
+            };
+            logger_Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("geoip.fedoraproject parsing error: " + e.message, e);
+            ErrorHandler.Instance.PostError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+            return null;
+        }
+    }
+    ;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/common.ts
+
+function OpenMeteoWeatherCodeToCondition(code, isDay) {
+    switch (code) {
+        case 0:
+            return {
+                icons: !isDay ? ["weather-clear-night"] : ["weather-clear"],
+                customIcon: !isDay ? "night-clear-symbolic" : "day-sunny-symbolic",
+                main: _("Clear"),
+                description: _("Clear sky")
+            };
+        case 1:
+            return {
+                icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
+                customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                main: _("Few clouds"),
+                description: _("Few clouds")
+            };
+        case 2:
+            return {
+                icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
+                customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                main: _("Partly cloudy"),
+                description: _("Partly cloudy")
+            };
+        case 3:
+            return {
+                icons: !isDay ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"],
+                customIcon: "cloudy-symbolic",
+                main: _("Overcast"),
+                description: _("Overcast")
+            };
+        case 45:
+        case 48:
+            return {
+                icons: ["weather-fog"],
+                customIcon: "fog-symbolic",
+                main: _("Fog"),
+                description: _("Fog")
+            };
+        case 51:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Light drizzle")
+            };
+        case 53:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Drizzle")
+            };
+        case 55:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Heavy drizzle")
+            };
+        case 56:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-freezing-rain", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-sleet-symbolic" : "night-alt-sleet-symbolic",
+                main: _("Drizzle"),
+                description: _("Light freezing drizzle")
+            };
+        case 57:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-freezing-rain", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-sleet-symbolic" : "night-alt-sleet-symbolic",
+                main: _("Drizzle"),
+                description: _("Freezing drizzle")
+            };
+        case 61:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Light rain")
+            };
+        case 63:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Rain")
+            };
+        case 65:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Heavy rain")
+            };
+        case 66:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-freezing-rain", "weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "hail-symbolic",
+                main: _("Rain"),
+                description: _("Light freezing rain")
+            };
+        case 67:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-freezing-rain", "weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "hail-symbolic",
+                main: _("Rain"),
+                description: _("Freezing rain")
+            };
+        case 71:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Light snow")
+            };
+        case 73:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Snow")
+            };
+        case 75:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Heavy snow")
+            };
+        case 77:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Snow grains")
+            };
+        case 80:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: isDay ? "day-showers-symbolic" : "night-alt-showers-symbolic",
+                main: _("Showers"),
+                description: _("Light showers")
+            };
+        case 81:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: "showers-symbolic",
+                main: _("Showers"),
+                description: _("Showers")
+            };
+        case 82:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: "showers-symbolic",
+                main: _("Showers"),
+                description: _("Heavy showers")
+            };
+        case 85:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow showers"),
+                description: _("Light snow showers")
+            };
+        case 86:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow showers"),
+                description: _("Snow showers")
+            };
+        case 95:
+            return {
+                icons: ["weather-storm"],
+                customIcon: "thunderstorm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm")
+            };
+        case 96:
+            return {
+                icons: ["weather-storm", "weather-hail"],
+                customIcon: "sleet-storm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm with slight hail")
+            };
+        case 99:
+            return {
+                icons: ["weather-storm", "weather-hail"],
+                customIcon: "sleet-storm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm with hail")
+            };
+        default:
+            return {
+                icons: ["weather-severe-alert"],
+                customIcon: "refresh-symbolic",
+                main: _("Unknown"),
+                description: _("Unknown")
+            };
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/current.ts
+
+
+function OpenMeteoCurrentWeatherToData(data) {
+    return {
+        condition: OpenMeteoWeatherCodeToCondition(data.weather_code, data.is_day === 1),
+        temperature: CelsiusToKelvin(data.temperature_2m),
+        pressure: data.surface_pressure,
+        humidity: data.relative_humidity_2m,
+        wind: {
+            speed: KPHtoMPS(data.wind_speed_10m),
+            degree: data.wind_direction_10m,
+        },
+        dewPoint: CelsiusToKelvin(data.dewpoint_2m),
+        extra_field: {
+            name: _("Feels like"),
+            value: CelsiusToKelvin(data.apparent_temperature),
+            type: "temperature"
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/daily.ts
+
+
+
+function OpenMeteoDailyWeatherToData(data, timezone) {
+    const result = [];
+    for (let i = 0; i < data.time.length; i++) {
+        result.push({
+            date: DateTime.fromISO(data.time[i], { zone: timezone }),
+            temp_min: CelsiusToKelvin(data.temperature_2m_min[i]),
+            temp_max: CelsiusToKelvin(data.temperature_2m_max[i]),
+            condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], true),
+        });
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/hour.ts
+
+
+
+function OpenMeteoHourWeatherToData(data, timezone) {
+    const result = [];
+    for (let i = 0; i < data.time.length; i++) {
+        result.push({
+            date: DateTime.fromISO(data.time[i], { zone: timezone }),
+            condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], data.is_day[i] === 1),
+            temp: CelsiusToKelvin(data.temperature_2m[i]),
+            precipitation: data.precipitation[i] > 0 ? {
+                chance: data.precipitation_probability[i],
+                volume: data.precipitation[i],
+                type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : (data.snowfall[i] > 0 ? "snow" : "none"),
+            } : undefined
+        });
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/response.ts
+
+
+
+
+function OpenMeteoResponseToData(payload) {
+    return Object.assign(Object.assign({ date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }), sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }), sunset: DateTime.fromISO(payload.daily.sunset[0], { zone: payload.timezone }), coord: {
+            lat: payload.latitude,
+            lon: payload.longitude,
+        }, location: {
+            timeZone: payload.timezone,
+            tzOffset: payload.utc_offset_seconds,
+        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone) });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/provider.ts
+
+
+
+
+class OpenMeteo extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.prettyName = _("Open Meteo");
+        this.name = "OpenMeteo";
+        this.maxForecastSupport = 16;
+        this.website = "https://open-meteo.com/";
+        this.maxHourlyForecastSupport = 24;
+        this.needsApiKey = false;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.query = "https://api.open-meteo.com/v1/forecast";
+    }
+    get remainingCalls() {
+        return null;
+    }
+    ;
+    async GetWeather(loc, cancellable) {
+        const result = await HttpLib.Instance.LoadJsonSimple({
+            url: this.query,
+            cancellable: cancellable,
+            noEncode: true,
+            params: {
+                latitude: loc.lat,
+                longitude: loc.lon,
+                current: "temperature_2m,dewpoint_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
+                hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_10m,wind_direction_10m,is_day",
+                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset",
+                timezone: "auto",
+                forecast_days: "16",
+                forecast_hours: "24"
+            }
+        });
+        if (!result)
+            return null;
+        return OpenMeteoResponseToData(result);
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/forecast_daily.ts
+
+
+function OWMDailyForecastsToData(forecast, conditionsTranslated, timezone = "local") {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+    const result = [];
+    for (const day of forecast) {
+        const data = {
+            date: DateTime.fromSeconds(day.dt, { zone: timezone }),
+            temp_max: day.temp.max,
+            temp_min: day.temp.min,
+            condition: {
+                main: conditionsTranslated ? (_b = (_a = day.weather) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.main : OWMMainToTranslated((_d = (_c = day.weather) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.main),
+                description: conditionsTranslated ? (_f = (_e = day.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description : OWMDescToTranslated((_h = (_g = day.weather) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.description),
+                icons: OWMIconToBuiltInIcons((_k = (_j = day.weather) === null || _j === void 0 ? void 0 : _j[0]) === null || _k === void 0 ? void 0 : _k.icon),
+                customIcon: OWMIconToCustomIcon((_m = (_l = day.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
+            }
+        };
+        result.push(data);
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/weather.ts
+
+
+
+function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone) {
+    var _a, _b, _c, _d, _e, _f;
+    return {
+        date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
+        sunrise: DateTime.fromSeconds(weather.sys.sunrise, { zone: timezone }),
+        sunset: DateTime.fromSeconds(weather.sys.sunset, { zone: timezone }),
+        coord: weather.coord,
+        location: {
+            city: weather.name,
+            country: weather.sys.country,
+            url: `https://openweathermap.org/city/${weather.id}`,
+            timeZone: timezone
+        },
+        condition: {
+            main: conditionsTranslated ? (_a = weather.weather) === null || _a === void 0 ? void 0 : _a[0].main : OWMMainToTranslated((_b = weather.weather) === null || _b === void 0 ? void 0 : _b[0].main),
+            description: conditionsTranslated ? (_c = weather.weather) === null || _c === void 0 ? void 0 : _c[0].description : OWMDescToTranslated((_d = weather.weather) === null || _d === void 0 ? void 0 : _d[0].description),
+            icons: OWMIconToBuiltInIcons((_e = weather.weather) === null || _e === void 0 ? void 0 : _e[0].icon),
+            customIcon: OWMIconToCustomIcon((_f = weather.weather) === null || _f === void 0 ? void 0 : _f[0].icon)
+        },
+        wind: {
+            speed: weather.wind.speed,
+            degree: weather.wind.deg,
+        },
+        temperature: weather.main.temp,
+        pressure: weather.main.pressure,
+        humidity: weather.main.humidity,
+        dewPoint: null,
+        extra_field: {
+            type: "temperature",
+            name: _("Feels like"),
+            value: weather.main.feels_like
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-open.ts
+
+
+
+
+
+
+class OpenWeatherMapOpen extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("OpenWeatherMap");
+        this.name = "OpenWeatherMap_Open";
+        this.maxForecastSupport = 7;
+        this.maxHourlyForecastSupport = 0;
+        this.website = "https://openweathermap.org/";
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = false;
+    }
+    async GetWeather(loc, cancellable) {
+        const params = this.ConstructParams(loc);
+        const current = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.openweathermap.org/data/2.5/weather",
+            cancellable,
+            params: params
+        });
+        const daily = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.openweathermap.org/data/2.5/forecast/daily",
+            cancellable,
+            params: params
+        });
+        if (!current || !daily) {
+            return null;
+        }
+        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, !!params.lang, loc.timeZone)), { forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, loc.timeZone) });
+    }
+    ConstructParams(loc) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: "1c73f8259a86c6fd43c7163b543c8640"
+        };
+        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+            params.lang = locale;
+        }
+        return params;
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
 
 
@@ -14126,16 +17212,19 @@ class PirateWeather extends BaseProvider {
 
 
 
-const { get_home_dir: config_get_home_dir, get_user_data_dir } = imports.gi.GLib;
+
+
+
+
+const { get_home_dir: config_get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang = imports.lang;
-const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
-    "OpenWeatherMap": (app) => new OpenWeatherMap(app),
+    "OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
+    "OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
     "MetNorway": (app) => new MetNorway(app),
     "Weatherbit": (app) => new Weatherbit(app),
     "Tomorrow.io": (app) => new ClimacellV4(app),
@@ -14146,7 +17235,8 @@ const ServiceClassMapping = {
     "AccuWeather": (app) => new AccuWeather(app),
     "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
     "WeatherUnderground": (app) => new WeatherUnderground(app),
-    "PirateWeather": (app) => new PirateWeather(app)
+    "PirateWeather": (app) => new PirateWeather(app),
+    "OpenMeteo": (app) => new OpenMeteo(app),
 };
 class Config {
     get UserTimezone() {
@@ -14156,15 +17246,7 @@ class Config {
         else
             return TimeZone.new_local().get_identifier();
     }
-    get Timezone() {
-        return this.timezone;
-    }
-    set Timezone(value) {
-        if (!value || value == "")
-            value = undefined;
-        this.timezone = value;
-    }
-    constructor(app, instanceID) {
+    constructor(instanceID) {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_LOCATION_LIST = "locationList";
         this.DataServiceChanged = new Event();
@@ -14199,16 +17281,18 @@ class Config {
         this.DisplayWindAsTextChanged = new Event();
         this.AlwaysShowHourlyWeatherChanged = new Event();
         this.TooltipTextOverrideChanged = new Event();
+        this.ShowAlertsChanged = new Event();
+        this.UserAgentStringOverrideChanged = new Event();
+        this.RunScriptChanged = new Event();
+        this.TempTextOverrideChanged = new Event();
+        this.FontChanged = new Event();
+        this.HotkeyChanged = new Event();
+        this.SelectedLogPathChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
+        this.LocationChanged = new Event();
         this.textColorStyle = null;
         this.ForegroundColor = null;
-        this.timezone = undefined;
-        this.OnKeySettingsUpdated = () => {
-            if (this.keybinding != null) {
-                keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-            }
-        };
         this.onLogLevelUpdated = () => {
             logger_Logger.ChangeLevel(this._logLevel);
         };
@@ -14216,28 +17300,33 @@ class Config {
             logger_Logger.Debug("User changed location, waiting 3 seconds...");
             if (this.doneTypingLocation != null)
                 utils_clearTimeout(this.doneTypingLocation);
-            this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+            this.doneTypingLocation = utils_setTimeout(this.DoneTypingLocation, 3000);
         };
         this.OnLocationStoreChanged = () => {
             this.LocStore.OnLocationChanged(this._locationList);
         };
         this.OnFontChanged = () => {
             this.currentFontSize = this.GetCurrentFontSize();
-            this.app.RefreshAndRebuild();
+            this.FontChanged.Invoke(this);
         };
-        this.app = app;
+        this.DoneTypingLocation = () => {
+            logger_Logger.Debug("User has finished typing, beginning refresh");
+            this.doneTypingLocation = null;
+            this.LocationChanged.Invoke(this);
+        };
+        this.instance_id = instanceID;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
         this.onLogLevelUpdated();
-        this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-        logger_Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+        this.currentLocale = ConstructJsLocale(get_language_names());
         this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.autoLocProvider = new GeoJS(app);
-        this.geoLocationService = new GeoLocation(app);
+        this.autoLocProvider = new GeoIPFedora(this);
+        this.geoClue = new GeoClue();
+        this.geoLocationService = new GeoLocation();
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
         this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
         this.currentFontSize = this.GetCurrentFontSize();
-        this.LocStore = new LocationStore(this.app, this);
+        this.LocStore = new LocationStore(this);
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -14301,28 +17390,29 @@ class Config {
         return (!key || key == "");
     }
     ;
-    async EnsureLocation() {
+    async EnsureLocation(cancellable) {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            const location = await this.autoLocProvider.GetLocation();
+            const geoClue = await this.geoClue.GetLocation(cancellable, this);
+            if (geoClue != null) {
+                logger_Logger.Debug("Auto location obtained via GeoClue2.");
+                this.InjectLocationToConfig(geoClue);
+                return geoClue;
+            }
+            const location = await this.autoLocProvider.GetLocation(cancellable, this);
             if (!location)
                 return null;
+            logger_Logger.Debug("Auto location obtained via IP lookup.");
             this.InjectLocationToConfig(location);
             return location;
         }
         let loc = this._location;
         if (loc == undefined || loc.trim() == "") {
-            this.app.ShowError({
-                type: "hard",
-                detail: "no location",
-                userError: true,
-                message: _("Make sure you entered a location or use Automatic location instead")
-            });
             return null;
         }
         let location = this.LocStore.FindLocation(this._location);
         if (location != null) {
-            logger_Logger.Debug("location exist in locationstore, retrieve");
+            logger_Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
             this.LocStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
@@ -14331,24 +17421,25 @@ class Config {
             loc = loc.replace(" ", "");
             const latLong = loc.split(",");
             const location = {
-                lat: parseFloat(latLong[0]),
-                lon: parseFloat(latLong[1]),
-                timeZone: DateTime.now().zoneName,
+                lat: Number.parseFloat(latLong[0]),
+                lon: Number.parseFloat(latLong[1]),
+                timeZone: this.UserTimezone,
                 entryText: loc,
             };
+            logger_Logger.Debug("Manual Location is a coordinate, using it directly.");
             this.InjectLocationToConfig(location);
             return location;
         }
         logger_Logger.Debug("Location is text, geo locating...");
-        const locationData = await this.geoLocationService.GetLocation(loc);
+        const locationData = await this.geoLocationService.GetLocation(loc, cancellable, this);
         if (locationData == null)
             return null;
-        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
-            logger_Logger.Debug("Address found via address search");
+        if (locationData === null || locationData === void 0 ? void 0 : locationData.entryText) {
+            logger_Logger.Debug("Coordinates are found via Reverse address search");
         }
         location = this.LocStore.FindLocation(locationData.entryText);
         if (location != null) {
-            logger_Logger.Debug("Found location was found in locationStore, return that instead");
+            logger_Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
             this.InjectLocationToConfig(location);
             this.LocStore.SwitchToLocation(location);
             return location;
@@ -14367,12 +17458,12 @@ class Config {
             }
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
-        this.settings.bind("tempTextOverride", "_" + "panelTextOverride", this.app.RefreshLabel);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", () => this.HotkeyChanged.Invoke(this), null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
-        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
-        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+        this.settings.bind("selectedLogPath", "_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
+        soupLib.SetUserAgent(this._userAgentStringOverride);
+        this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_Logger.Debug("Location setting is now: " + loc.entryText);
@@ -14381,11 +17472,6 @@ class Config {
         this.currentLocation = loc;
         if (switchToManual == true)
             this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
-    }
-    DoneTypingLocation() {
-        logger_Logger.Debug("User has finished typing, beginning refresh");
-        this.doneTypingLocation = null;
-        this.app.Refresh();
     }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
@@ -14439,23 +17525,23 @@ class Config {
     GetCurrentFontSize() {
         const nameString = this.InterfaceSettings.get_string("font-name");
         const elements = nameString.split(" ");
-        const size = parseFloat(elements[elements.length - 1]);
+        const size = Number.parseFloat(elements[elements.length - 1]);
         logger_Logger.Debug("Font size changed to " + size.toString());
         return size;
     }
     async GetAppletConfigJson() {
         var _a, _b, _c, _d, _e;
         const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        let configFilePath = `${get_user_data_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
-        const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.instance_id}.json`;
+        const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.instance_id}.json`;
         let configFile = config_File.new_for_path(configFilePath);
         const oldConfigFile = config_File.new_for_path(oldConfigFilePath);
-        if (!await FileExists(configFile)) {
-            configFile = oldConfigFile;
-            configFilePath = oldConfigFilePath;
-            if (!await FileExists(configFile)) {
+        if (!FileExists(configFile)) {
+            if (!FileExists(oldConfigFile)) {
                 throw new Error(_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` }));
             }
+            configFile = oldConfigFile;
+            configFilePath = oldConfigFilePath;
         }
         const confString = await LoadContents(configFile);
         if (confString == null) {
@@ -14607,60 +17693,173 @@ const Keys = {
     TOOLTIP_TEXT_OVERRIDE: {
         key: "tooltipTextOverride",
         prop: "TooltipTextOverride"
-    }
+    },
+    SHOW_ALERTS: {
+        key: "showAlerts",
+        prop: "ShowAlerts"
+    },
+    USER_AGENT_STRING_OVERRIDE: {
+        key: "userAgentStringOverride",
+        prop: "UserAgentStringOverride"
+    },
+    RUN_SCRIPT: {
+        key: "runScript",
+        prop: "RunScript"
+    },
+    TEMP_TEXT_OVERRIDE: {
+        key: "tempTextOverride",
+        prop: "TempTextOverride"
+    },
 };
+
+;// CONCATENATED MODULE: ./src/3_8/types.ts
+var RefreshState;
+(function (RefreshState) {
+    RefreshState["Success"] = "success";
+    RefreshState["Error"] = "error";
+    RefreshState["NoLocation"] = "no location";
+    RefreshState["NoWeather"] = "no weather";
+    RefreshState["NoKey"] = "no key";
+    RefreshState["DisplayFailure"] = "display failure";
+})(RefreshState || (RefreshState = {}));
 
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
 
 
-var weatherAppletGUIDs = {};
+
+const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
+const weatherAppletGUIDs = {};
 class WeatherLoop {
+    get Refreshing() {
+        if (this.refreshing == null)
+            return Promise.resolve();
+        return this.refreshing;
+    }
+    get Online() {
+        return NetworkMonitor.get_default().connectivity != NetworkConnectivity.LOCAL;
+    }
     constructor(app, instanceID) {
         this.lastUpdated = new Date(0);
         this.pauseRefresh = false;
         this.LOOP_INTERVAL = 15;
         this.appletRemoved = false;
-        this.updating = false;
         this.errorCount = 0;
-        this.DoCheck = async () => {
-            if (this.updating)
+        this.runningRefresh = null;
+        this.refreshingResolver = null;
+        this.refreshing = null;
+        this.OnNetworkConnectivityChanged = () => {
+            switch (NetworkMonitor.get_default().connectivity) {
+                case NetworkConnectivity.FULL:
+                case NetworkConnectivity.LIMITED:
+                case NetworkConnectivity.PORTAL: {
+                    const name = NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
+                        (NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+                            : "PORTAL");
+                    logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
+                    this.Resume();
+                    break;
+                }
+                case NetworkConnectivity.LOCAL:
+                    logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}".`);
+                    break;
+            }
+        };
+        this.DoCheck = async (options = {}) => {
+            var _a, _b, _c;
+            logger_Logger.Debug("Main loop check started.");
+            if (this.IsStray())
                 return;
+            const { rebuild = false, location = null, immediate = true } = options;
+            if (!this.Online) {
+                logger_Logger.Info("No network connection, skipping this cycle.");
+                return;
+            }
+            if (this.runningRefresh && !immediate) {
+                logger_Logger.Debug("Refresh in progress and this request is not forced, skipping cycle.");
+                return;
+            }
             try {
-                this.updating = true;
-                if (this.app.encounteredError == true)
-                    this.IncrementErrorCount();
+                (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
+                this.runningRefresh = new imports.gi.Gio.Cancellable();
+                this.refreshing = new Promise((resolve) => {
+                    this.refreshingResolver = resolve;
+                });
                 this.ValidateLastUpdateTime();
                 if (this.pauseRefresh) {
                     logger_Logger.Debug("Configuration or network error, updating paused");
                     return;
                 }
-                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-                    logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
-                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
-                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-                    const state = await this.app.RefreshWeather(false, null, false);
-                    if (state == "error")
-                        logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
-                    if (state == "success" || "locked")
-                        this.lastUpdated = new Date();
+                const needToUpdate = this.errorCount > 0 || this.NextUpdate() < new Date();
+                if (!needToUpdate && !immediate) {
+                    logger_Logger.Debug("No need to update yet, skipping.");
+                    return;
                 }
-                else {
-                    logger_Logger.Debug("No need to update yet, skipping");
+                logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + this.lastUpdated.toLocaleString()
+                    + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+                    + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+                const state = await Promise.race([
+                    this.app["RefreshWeather"](rebuild, location, this.runningRefresh),
+                    delay(30000).then(() => null)
+                ]);
+                switch (state) {
+                    case null:
+                        logger_Logger.Info("Refreshing timed out, skipping this cycle.");
+                        break;
+                    case RefreshState.Error:
+                    case RefreshState.DisplayFailure:
+                        this.IncrementErrorCount();
+                        logger_Logger.Info("Critical Error while refreshing weather.");
+                        break;
+                    case RefreshState.Success:
+                        this.ResetErrorCount();
+                        this.lastUpdated = new Date();
+                        logger_Logger.Info("Weather Information refreshed");
+                        break;
+                    case RefreshState.NoLocation:
+                        this.IncrementErrorCount();
+                        this.app.ShowError({
+                            type: "hard",
+                            detail: "no location",
+                            userError: true,
+                            message: _("Make sure you entered a location or use Automatic location instead.")
+                        });
+                        break;
+                    case RefreshState.NoWeather:
+                        logger_Logger.Error("Could not refresh weather, data could not be obtained.");
+                        this.app.ShowError({
+                            type: "soft",
+                            detail: "no api response",
+                            message: "API did not return data"
+                        });
+                        break;
+                    case RefreshState.NoKey:
+                        logger_Logger.Error("No API Key given");
+                        this.Pause();
+                        this.app.ShowError({
+                            type: "hard",
+                            userError: true,
+                            detail: "no key",
+                            message: _("This provider requires an API key to operate")
+                        });
+                        break;
                 }
             }
             catch (e) {
                 if (e instanceof Error)
-                    logger_Logger.Error("Error in Main loop: " + e, e);
-                this.app.encounteredError = true;
+                    logger_Logger.Error("Error in Main loop: " + e.message, e);
             }
             finally {
-                this.updating = false;
+                (_b = this.refreshingResolver) === null || _b === void 0 ? void 0 : _b.call(this);
+                this.refreshingResolver = null;
+                (_c = this.runningRefresh) === null || _c === void 0 ? void 0 : _c.cancel();
+                this.runningRefresh = null;
             }
         };
         this.app = app;
         this.instanceID = instanceID;
         this.GUID = Guid();
         weatherAppletGUIDs[instanceID] = this.GUID;
+        NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
     }
     IsDataTooOld() {
         if (!this.lastUpdated)
@@ -14670,12 +17869,16 @@ class WeatherLoop {
         return (this.lastUpdated > oldDate);
     }
     async Start() {
+        logger_Logger.Info("Main Loop started.");
         while (true) {
-            if (this.IsStray())
+            if (this.IsStray()) {
+                logger_Logger.Info("Applet removed, stopping loop.");
                 return;
-            await this.DoCheck();
+            }
+            await this.DoCheck({ immediate: false });
             await delay(this.LoopInterval());
         }
+        logger_Logger.Error("Main Loop stopped.");
     }
     ;
     Stop() {
@@ -14684,9 +17887,13 @@ class WeatherLoop {
     Pause() {
         this.pauseRefresh = true;
     }
-    async Resume() {
+    Resume() {
         this.pauseRefresh = false;
-        await this.DoCheck();
+        void this.DoCheck({ immediate: true });
+    }
+    async Refresh(options) {
+        this.pauseRefresh = false;
+        await this.DoCheck(options);
     }
     ResetErrorCount() {
         this.errorCount = 0;
@@ -14706,7 +17913,6 @@ class WeatherLoop {
         return false;
     }
     IncrementErrorCount() {
-        this.app.encounteredError = false;
         this.errorCount++;
         logger_Logger.Debug("Encountered error in previous loop");
         if (this.errorCount > 60)
@@ -14724,71 +17930,15 @@ class WeatherLoop {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
-
-const { spawnCommandLineAsyncIO } = imports.misc.util;
-async function SpawnProcessJson(command) {
-    const response = await SpawnProcess(command);
-    if (!response.Success)
-        return response;
-    try {
-        response.Data = JSON.parse(response.Data);
-    }
-    catch (e) {
-        if (e instanceof Error)
-            Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
-        response.Success = false;
-        response.ErrorData = {
-            Code: -1,
-            Message: "Failed to parse JSON",
-            Type: "jsonParse",
-        };
-    }
-    finally {
-        return response;
-    }
-}
-async function SpawnProcess(command) {
-    let cmd = "";
-    for (const element of command) {
-        cmd += "'" + element + "' ";
-    }
-    const response = await new Promise((resolve, reject) => {
-        spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-            let result = {
-                Success: exitCode == 0,
-                ErrorData: undefined,
-                Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
-            };
-            if (exitCode != 0) {
-                result.ErrorData = {
-                    Code: exitCode,
-                    Message: err !== null && err !== void 0 ? err : null,
-                    Type: "unknown"
-                };
-            }
-            resolve(result);
-            return result;
-        });
-    });
-    return response;
-}
-function OpenUrl(element) {
-    if (!element.url)
-        return;
-    imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/weatherbutton.ts
 
 const { Button } = imports.gi.St;
-const { SignalManager } = imports.misc.signalManager;
 class WeatherButton {
     constructor(options, doNotAddPadding = false) {
         this.disabled = false;
         this.Hovered = new Event();
         this.Clicked = new Event();
-        this.onHoverLeave = (event) => {
+        this.onHoverLeave = () => {
             this.handleLeave();
             return false;
         };
@@ -14800,9 +17950,9 @@ class WeatherButton {
             this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
         this.actor.connect("clicked", () => this.clicked());
         this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
-        this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
+        this.actor.connect("leave-event", () => this.onHoverLeave());
     }
-    handleEnter(actor) {
+    handleEnter() {
         if (!this.disabled)
             this.actor.add_style_pseudo_class('active');
     }
@@ -14833,7 +17983,7 @@ class WeatherButton {
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSunTimes.ts
 
 
-const { BoxLayout, IconType: uiSunTimes_IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType: uiSunTimes_IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const STYLE_ASTRONOMY = 'weather-current-astronomy';
 class SunTimesUI {
@@ -14844,15 +17994,15 @@ class SunTimesUI {
         return this.app.config;
     }
     constructor(app) {
-        this.OnConfigChanged = async (config, showSunrise, data) => {
+        this.OnConfigChanged = (config, showSunrise, data) => {
             this.Display(data.sunrise, data.sunset, data.location.timeZone);
         };
         this.app = app;
         this.config.ShowSunriseChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     Rebuild(config, textColorStyle) {
-        this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
-        this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
+        this.sunriseLabel = Label({ text: ELLIPSIS, style: textColorStyle });
+        this.sunsetLabel = Label({ text: ELLIPSIS, style: textColorStyle });
         const sunriseBox = new BoxLayout();
         const sunsetBox = new BoxLayout();
         const sunsetIcon = new Icon({
@@ -14878,7 +18028,7 @@ class SunTimesUI {
         };
         sunriseBox.add(this.sunriseLabel, textOptions);
         sunsetBox.add(this.sunsetLabel, textOptions);
-        const spacer = new Label({ text: BLANK });
+        const spacer = Label({ text: BLANK });
         const sunBox = new BoxLayout({
             style_class: STYLE_ASTRONOMY,
             x_align: ActorAlign.CENTER,
@@ -14896,8 +18046,8 @@ class SunTimesUI {
             this.actor.hide();
             return;
         }
-        this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-        this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+        this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config._show24Hours, tz));
+        this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config._show24Hours, tz));
         this.actor.show();
     }
 }
@@ -14905,7 +18055,7 @@ class SunTimesUI {
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/windBox.ts
 
 
-const { BoxLayout: windBox_BoxLayout, IconType: windBox_IconType, Label: windBox_Label, Icon: windBox_Icon, Align: windBox_Align } = imports.gi.St;
+const { BoxLayout: windBox_BoxLayout, IconType: windBox_IconType, Icon: windBox_Icon, Align: windBox_Align } = imports.gi.St;
 const { ActorAlign: windBox_ActorAlign } = imports.gi.Clutter;
 class WindBox {
     constructor(app) {
@@ -14924,7 +18074,11 @@ class WindBox {
         this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     Rebuild(config, textColorStyle) {
-        this._caption = new windBox_Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
+        this._caption = Label({
+            text: _('Wind') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
         this._label = this.BuildLabel(config);
         return [this._caption, this._label];
     }
@@ -14933,7 +18087,7 @@ class WindBox {
         const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
         const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
         const iconSize = Math.round(config.CurrentFontSize * 0.8);
-        this.labelText = new windBox_Label({ text: ELLIPSIS, x_expand: true, x_align: windBox_ActorAlign.FILL });
+        this.labelText = Label({ text: ELLIPSIS, x_expand: true, x_align: windBox_ActorAlign.FILL });
         this.windDirectionIcon = new windBox_Icon({
             icon_type: windBox_IconType.SYMBOLIC,
             icon_name: APPLET_ICON,
@@ -14975,8 +18129,7 @@ class WindBox {
 
 
 
-const { Bin, BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Label: uiCurrentWeather_Label, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
-const uiCurrentWeather_Lang = imports.lang;
+const { BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
 const { ActorAlign: uiCurrentWeather_ActorAlign } = imports.gi.Clutter;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
 const STYLE_SUMMARY = 'weather-current-summary';
@@ -14985,21 +18138,26 @@ const STYLE_ICON = 'weather-current-icon';
 const STYLE_ICONBOX = 'weather-current-iconbox';
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
-const STYLE_CURRENT = 'current';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 class CurrentWeather {
     constructor(app) {
-        this.OnLocationOverrideChanged = async (config, label, data) => {
+        this.OnLocationOverrideChanged = (config, label, data) => {
             const location = GenerateLocationText(data, config);
             this.SetLocation(location, data.location.url);
         };
+        this.NextLocationClicked = () => {
+            const loc = this.app.config.SwitchToNextLocation();
+            void this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
+        };
+        this.PreviousLocationClicked = () => {
+            const loc = this.app.config.SwitchToPreviousLocation();
+            void this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
+        };
         this.app = app;
         this.actor = new uiCurrentWeather_BoxLayout({
-            x_expand: true,
-            y_expand: true,
             style_class: STYLE_ICONBOX,
-            x_align: uiCurrentWeather_ActorAlign.CENTER,
-            y_align: uiCurrentWeather_ActorAlign.FILL
+            x_align: imports.gi.Clutter.ActorAlign.CENTER,
+            y_align: imports.gi.Clutter.ActorAlign.CENTER,
         });
         this.sunTimesUI = new SunTimesUI(app);
         this.windBox = new WindBox(app);
@@ -15030,7 +18188,7 @@ class CurrentWeather {
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("DisplayWeatherError: " + e, e);
+                logger_Logger.Error("DisplayWeatherError: " + e.message, e);
             return false;
         }
     }
@@ -15051,15 +18209,15 @@ class CurrentWeather {
         });
         this.actor.add_actor(this.weatherIcon);
         this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
-        this.actor.add_actor(this.BuildRightColumn(textColorStyle, config));
+        this.actor.add(this.BuildRightColumn(textColorStyle, config));
     }
     ;
     BuildMiddleColumn(config, textColorStyle) {
-        this.weatherSummary = new uiCurrentWeather_Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
+        this.weatherSummary = Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
         const middleColumn = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add(this.BuildLocationSection());
         middleColumn.add(this.weatherSummary, { expand: true, x_align: uiCurrentWeather_Align.MIDDLE, y_align: uiCurrentWeather_Align.MIDDLE, x_fill: false, y_fill: false });
-        this.immediatePrecipitationLabel = new uiCurrentWeather_Label({ style_class: "weather-immediate-precipitation" });
+        this.immediatePrecipitationLabel = Label({ style_class: "weather-immediate-precipitation" });
         this.immediatePrecipitationBox = new uiCurrentWeather_BoxLayout({ x_align: uiCurrentWeather_ActorAlign.CENTER });
         this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
         this.immediatePrecipitationBox.hide();
@@ -15068,37 +18226,58 @@ class CurrentWeather {
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
-        const textOb = {
-            text: ELLIPSIS
-        };
-        this.temperatureLabel = new uiCurrentWeather_Label(textOb);
-        this.humidityLabel = new uiCurrentWeather_Label(textOb);
-        this.pressureLabel = new uiCurrentWeather_Label(textOb);
-        this.dewPointLabel = new uiCurrentWeather_Label({ text: '' });
-        this.apiUniqueLabel = new uiCurrentWeather_Label({ text: '' });
-        this.temperatureCaption = new uiCurrentWeather_Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.humidityCaption = new uiCurrentWeather_Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.pressureCaption = new uiCurrentWeather_Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.dewPointCaption = new uiCurrentWeather_Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.apiUniqueCaption = new uiCurrentWeather_Label({ text: '', style: textColorStyle });
+        this.temperatureLabel = Label();
+        this.humidityLabel = Label();
+        this.pressureLabel = Label();
+        this.dewPointLabel = Label();
+        this.apiUniqueLabel = Label();
+        this.temperatureCaption = Label({
+            text: _('Temperature') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.humidityCaption = Label({
+            text: _('Humidity') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.pressureCaption = Label({
+            text: _('Pressure') + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.dewPointCaption = Label({
+            text: _("Dew Point") + LocalizedColon(config.currentLocale),
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
+        this.apiUniqueCaption = Label({
+            style: textColorStyle,
+            x_align: imports.gi.Clutter.ActorAlign.END,
+        });
         const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
         const rb_captions = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        const rb_values = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES, x_expand: true, x_align: uiCurrentWeather_ActorAlign.FILL });
-        rb_captions.add_actor(this.temperatureCaption);
-        rb_captions.add_actor(this.humidityCaption);
-        rb_captions.add_actor(this.pressureCaption);
-        rb_captions.add_actor(windCaption);
-        rb_captions.add_actor(this.dewPointCaption);
-        rb_captions.add_actor(this.apiUniqueCaption);
-        rb_values.add_actor(this.temperatureLabel);
-        rb_values.add_actor(this.humidityLabel);
-        rb_values.add_actor(this.pressureLabel);
-        rb_values.add_actor(windLabel);
-        rb_values.add_actor(this.dewPointLabel);
-        rb_values.add_actor(this.apiUniqueLabel);
-        const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX, x_align: uiCurrentWeather_ActorAlign.FILL, x_expand: true });
-        rightColumn.add_actor(rb_captions);
-        rightColumn.add_actor(rb_values);
+        const rb_values = new uiCurrentWeather_BoxLayout({
+            vertical: true,
+            style_class: STYLE_DATABOX_VALUES,
+        });
+        rb_captions.add(this.temperatureCaption);
+        rb_captions.add(this.humidityCaption);
+        rb_captions.add(this.pressureCaption);
+        rb_captions.add(windCaption);
+        rb_captions.add(this.dewPointCaption);
+        rb_captions.add(this.apiUniqueCaption);
+        rb_values.add(this.temperatureLabel);
+        rb_values.add(this.humidityLabel);
+        rb_values.add(this.pressureLabel);
+        rb_values.add(windLabel);
+        rb_values.add(this.dewPointLabel);
+        rb_values.add(this.apiUniqueLabel);
+        const rightColumn = new uiCurrentWeather_BoxLayout({
+            style_class: STYLE_DATABOX
+        });
+        rightColumn.add(rb_captions);
+        rightColumn.add(rb_values);
         return rightColumn;
     }
     BuildLocationSection() {
@@ -15106,7 +18285,7 @@ class CurrentWeather {
         this.location = this.locationButton.actor;
         this.location.connect(SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
-                this.app.RefreshWeather(true);
+                void this.app.Refresh({ rebuild: true });
             else if (this.locationButton.url == null)
                 return;
             else
@@ -15122,7 +18301,7 @@ class CurrentWeather {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this.nextLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.NextLocationClicked));
+        this.nextLocationButton.actor.connect(SIGNAL_CLICKED, this.NextLocationClicked);
         this.previousLocationButton = new WeatherButton({
             reactive: true,
             can_focus: true,
@@ -15133,7 +18312,7 @@ class CurrentWeather {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this.previousLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.PreviousLocationClicked));
+        this.previousLocationButton.actor.connect(SIGNAL_CLICKED, this.PreviousLocationClicked);
         const box = new uiCurrentWeather_BoxLayout();
         box.add(this.previousLocationButton.actor, { x_fill: false, x_align: uiCurrentWeather_Align.START, y_align: uiCurrentWeather_Align.MIDDLE, expand: false });
         box.add(this.location, { x_fill: true, expand: true });
@@ -15151,12 +18330,12 @@ class CurrentWeather {
         }
         else if (precip.start == 0) {
             if (precip.end != -1)
-                this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+                this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end.toString() });
             else
                 this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
         }
         else {
-            this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+            this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start.toString() });
         }
     }
     SetAPIUniqueField(extra_field) {
@@ -15169,7 +18348,7 @@ class CurrentWeather {
         let value = null;
         switch (extra_field.type) {
             case "percent":
-                value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
+                value = PercentToLocale(extra_field.value);
                 break;
             case "temperature":
                 value = TempToUserConfig(extra_field.value, this.app.config);
@@ -15224,7 +18403,7 @@ class CurrentWeather {
             this.humidityLabel.set_style_class_name(STYLE_HIDDEN);
             return;
         }
-        this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+        this.humidityLabel.text = PercentToLocale(humidity);
         this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
         this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
     }
@@ -15244,14 +18423,6 @@ class CurrentWeather {
             this.locationButton.disable();
         else
             this.locationButton.url = url;
-    }
-    NextLocationClicked() {
-        const loc = this.app.config.SwitchToNextLocation();
-        this.app.Refresh(loc);
-    }
-    PreviousLocationClicked() {
-        const loc = this.app.config.SwitchToPreviousLocation();
-        this.app.Refresh(loc);
     }
     onLocationStorageChanged(sender, itemCount) {
         logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
@@ -15278,7 +18449,7 @@ class CurrentWeather {
 
 
 
-const { Bin: uiForecasts_Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
+const { Bin, BoxLayout: uiForecasts_BoxLayout, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
 const { GridLayout, Orientation } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
 const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
@@ -15292,19 +18463,19 @@ class UIForecasts {
     constructor(app) {
         this.DayClicked = new Event();
         this.DayHovered = new Event();
-        this.OnConfigChanged = async (config, showForecastDates, data) => {
+        this.OnConfigChanged = (config, showForecastDates, data) => {
             this.Display(data, config);
         };
-        this.OnForecastDaysChanged = async (config, forecastDays, data) => {
+        this.OnForecastDaysChanged = (config, forecastDays, data) => {
             if (config.textColorStyle == null)
                 return;
             this.Rebuild(config, config.textColorStyle);
             this.Display(data, config);
         };
         this.app = app;
-        this.actor = new uiForecasts_Bin({ style_class: STYLE_FORECAST });
-        this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
-        this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
+        this.actor = new Bin({ style_class: STYLE_FORECAST });
+        this.DayClickedCallback = (s) => this.OnDayClicked(s);
+        this.DayHoveredCallback = (s) => this.OnDayHovered(s);
         this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
         this.app.config.TemperatureHighFirstChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
         this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
@@ -15330,7 +18501,6 @@ class UIForecasts {
                 const forecastUi = this.forecasts[i];
                 const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
                 const dayName = GetDayName(forecastData.date, {
-                    locale: config.currentLocale,
                     showDate: config._showForecastDates,
                     tz: weather.location.timeZone
                 });
@@ -15372,7 +18542,7 @@ class UIForecasts {
                 userError: false
             });
             if (e instanceof Error)
-                logger_Logger.Error("DisplayForecastError: " + e, e);
+                logger_Logger.Error("DisplayForecastError: " + e.message, e);
             return false;
         }
     }
@@ -15418,11 +18588,11 @@ class UIForecasts {
                 label: ""
             }, true);
             forecastWeather.Day.disable();
-            forecastWeather.Summary = new uiForecasts_Label({
+            forecastWeather.Summary = Label({
                 style_class: STYLE_FORECAST_SUMMARY,
                 reactive: true
             });
-            forecastWeather.Temperature = new uiForecasts_Label({
+            forecastWeather.Temperature = Label({
                 style_class: STYLE_FORECAST_TEMPERATURE
             });
             const by = new uiForecasts_BoxLayout({
@@ -15451,11 +18621,15 @@ class UIForecasts {
         if (this.actor.get_child() != null)
             this.actor.get_child().destroy();
     }
-    OnDayHovered(sender, event) {
+    OnDayHovered(sender) {
+        if (sender.ID == null)
+            return;
         logger_Logger.Debug("Day Hovered: " + sender.ID.toJSDate().toDateString());
         this.DayHovered.Invoke(sender, sender.ID);
     }
-    OnDayClicked(sender, event) {
+    OnDayClicked(sender) {
+        if (sender.ID == null)
+            return;
         logger_Logger.Debug("Day Clicked: " + sender.ID.toJSDate().toDateString());
         this.DayClicked.Invoke(sender, sender.ID);
     }
@@ -15468,7 +18642,7 @@ class UIForecasts {
 const { PolicyType } = imports.gi.Gtk;
 const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
-const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
+const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
 class UIHourlyForecasts {
     get Toggled() {
         return this.hourlyToggled;
@@ -15488,7 +18662,7 @@ class UIHourlyForecasts {
         this.onPaintSignal = null;
         this.canvas = null;
         this.OnShortHourlyTimeChanged = (config, shortTime, data) => {
-            this.Display(data.hourlyForecasts, config, config.Timezone);
+            this.Display(data.hourlyForecasts, config, data.location.timeZone);
         };
         this.OnPaint = (owner) => {
             var _a, _b;
@@ -15500,21 +18674,18 @@ class UIHourlyForecasts {
             const maxPrecipVolume = this.hourlyForecastData.map(x => { var _a; return (_a = x.precipitation) === null || _a === void 0 ? void 0 : _a.volume; }).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
             const totalHeight = this.hourlyContainers[0].height;
             const itemWidth = this.hourlyContainers[0].width;
-            const totalWidth = this.hourlyContainers.length * itemWidth;
             const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
             const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
             const tempPadding = 6;
-            let points = [];
-            let precipitation = [];
+            const points = [];
+            const precipitation = [];
             for (let i = 0; i < this.hourlyContainers.length; i++) {
                 const data = this.hourlyForecastData[i];
-                const items = this.hourlyForecasts[i];
                 if (data.temp == null)
                     continue;
                 const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
                 const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
                 const midX = itemWidth * i + (itemWidth / 2);
-                const midY = (totalHeight / 2);
                 points.push({ x: midX, y: height });
                 precipitation.push(((_b = (_a = data.precipitation) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : 0));
             }
@@ -15622,16 +18793,15 @@ class UIHourlyForecasts {
             const temp = TempToUserConfig(hour.temp, config, false);
             if (hour.date.hour == 0)
                 ui.Hour.text = GetDayName(hour.date, {
-                    locale: config.currentLocale,
                     tz: tz,
                     useTodayTomorrow: false,
                     short: true
                 });
             else
-                ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
+                ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-            ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
+            ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
         this.AdjustHourlyBoxItemWidth();
@@ -15645,14 +18815,14 @@ class UIHourlyForecasts {
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth(width);
-        const [minHeight, naturalHeight] = this.actor.get_preferred_height(width);
+        const [, naturalHeight] = this.actor.get_preferred_height(width);
         if (naturalHeight == null)
             return;
         logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (naturalHeight == null)
                 return;
             const height = naturalHeight;
@@ -15661,7 +18831,6 @@ class UIHourlyForecasts {
                 addTween(this.actor, {
                     height: height,
                     time: 0.25,
-                    onUpdate: () => { },
                     onComplete: () => {
                         this.actor.set_height(height);
                         resolve();
@@ -15676,12 +18845,11 @@ class UIHourlyForecasts {
     }
     async Hide(animate = true) {
         this.hourlyToggled = false;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 addTween(this.actor, {
                     height: 0,
                     time: 0.25,
-                    onUpdate: () => { },
                     onComplete: () => {
                         this.actor.set_height(-1);
                         this.actor.style = "";
@@ -15770,17 +18938,37 @@ class UIHourlyForecasts {
             const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
             this.hourlyContainers.push(box);
             this.hourlyForecasts.push({
-                Hour: new uiHourlyForecasts_Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
+                Hour: Label({
+                    text: "Hour",
+                    style_class: "hourly-time",
+                    style: textColorStyle,
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                }),
                 Icon: new uiHourlyForecasts_Icon({
                     icon_type: config.IconType,
                     icon_size: 24,
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
-                Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-                PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-                PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
-                Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px` })
+                Summary: Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+                PrecipPercent: Label({
+                    text: " ",
+                    style_class: "hourly-data",
+                    style: "padding-top: 5px;",
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                }),
+                PrecipVolume: Label({
+                    text: _(ELLIPSIS),
+                    style_class: "hourly-data",
+                    style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;`,
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                }),
+                Temperature: Label({
+                    text: _(ELLIPSIS),
+                    style_class: "hourly-data",
+                    style: `padding-top: ${this.tempGraphHeight}px`,
+                    x_align: imports.gi.Clutter.ActorAlign.CENTER,
+                })
             });
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
             box.add_child(this.hourlyForecasts[index].Hour);
@@ -15810,13 +18998,15 @@ class UIHourlyForecasts {
         }
         return precipitationText;
     }
-    GeneratePrecipitationChance(precip, config) {
+    GeneratePrecipitationChance(precip) {
+        var _a;
         if (!precip)
             return "";
         let precipitationText = "";
-        if (!!precip.chance) {
+        const chance = (Math.round(((_a = precip.chance) !== null && _a !== void 0 ? _a : 0) / 10) * 10);
+        if (chance) {
             precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
-            precipitationText += ((Math.round(precip.chance / 10) * 10).toString() + "%");
+            precipitationText += (chance.toString() + "%");
         }
         return precipitationText;
     }
@@ -15856,7 +19046,8 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
+
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
@@ -15869,19 +19060,29 @@ class UIBar {
         this.hourlyButton = null;
         this._timestamp = null;
         this.timestampTooltip = null;
+        this.warningButtonIcon = null;
+        this.warningButton = null;
+        this.warningButtonTooltip = null;
+        this.refreshIcon = null;
+        this.WarningClicked = async () => {
+            var _a;
+            if (((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.alerts) == null)
+                return;
+            await this.PushAlertWindow(this.app.CurrentData.alerts.map(alert => (Object.assign(Object.assign({}, alert), { color: GetAlertColor(alert.level, this.app.ui.LightTheme) }))));
+        };
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
     SwitchButtonToShow() {
         var _a;
         const icon = this.app.Orientation == uiBar_Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
-        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
+        if ((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child)
             this.hourlyButton.actor.child.icon_name = icon;
     }
     SwitchButtonToHide() {
         var _a;
         const icon = this.app.Orientation == uiBar_Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
-        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
+        if ((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child)
             this.hourlyButton.actor.child.icon_name = icon;
     }
     DisplayErrorMessage(msg) {
@@ -15890,7 +19091,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -15899,7 +19100,7 @@ class UIBar {
         }
         this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
-        const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+        const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
         if (((_d = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _d === void 0 ? void 0 : _d.distanceFrom) != null) {
             const stringFormat = {
@@ -15920,6 +19121,16 @@ class UIBar {
             this.HideHourlyToggle();
         else
             this.ShowHourlyToggle();
+        const levelOrder = ["unknown", "minor", "moderate", "severe", "extreme"];
+        if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
+            const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
+            (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length.toString() }));
+            (_j = this.warningButtonIcon) === null || _j === void 0 ? void 0 : _j.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
+            (_k = this.warningButton) === null || _k === void 0 ? void 0 : _k.actor.show();
+        }
+        else {
+            (_l = this.warningButton) === null || _l === void 0 ? void 0 : _l.actor.hide();
+        }
         return true;
     }
     Destroy() {
@@ -15929,9 +19140,26 @@ class UIBar {
     }
     Rebuild(config) {
         this.Destroy();
+        const leftBox = new uiBar_BoxLayout({ vertical: false, y_align: uiBar_Align.MIDDLE });
+        this.warningButtonIcon = new uiBar_Icon({
+            icon_type: uiBar_IconType.SYMBOLIC,
+            icon_size: config.CurrentFontSize + 3,
+            icon_name: "dialog-warning-symbolic",
+        });
+        this.warningButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: this.warningButtonIcon
+        });
+        this.warningButtonTooltip = new Tooltip(this.warningButton.actor, "");
+        this.warningButton.actor.hide();
+        this.warningButton.actor.connect(SIGNAL_CLICKED, this.WarningClicked);
+        leftBox.add_actor(this.warningButton.actor);
+        leftBox.add_actor(new uiBar_Bin({ width: 5 }));
         this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        leftBox.add_actor(this._timestamp);
         this.timestampTooltip = new Tooltip(this._timestamp, "");
-        this.actor.add(this._timestamp, {
+        this.actor.add(leftBox, {
             x_fill: false,
             x_align: uiBar_Align.START,
             y_align: uiBar_Align.MIDDLE,
@@ -15961,6 +19189,12 @@ class UIBar {
         }
         this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
         this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
+        this.refreshIcon = new uiBar_Icon({
+            icon_name: "refresh-symbolic",
+            icon_type: uiBar_IconType.SYMBOLIC,
+            icon_size: 24,
+        });
+        this.refreshIcon.hide();
         this.actor.add(this.providerCreditButton.actor, {
             x_fill: false,
             x_align: uiBar_Align.END,
@@ -15968,11 +19202,25 @@ class UIBar {
             y_fill: false,
             expand: true
         });
+        this.actor.add(this.refreshIcon, {
+            x_fill: false,
+            x_align: uiBar_Align.END,
+            y_align: uiBar_Align.MIDDLE,
+            y_fill: false,
+        });
     }
     BigDistanceUnitFor(unit) {
         if (unit == "imperial")
             return _("mi");
         return _("km");
+    }
+    ShowRefreshIcon() {
+        var _a;
+        (_a = this.refreshIcon) === null || _a === void 0 ? void 0 : _a.show();
+    }
+    HideRefreshIcon() {
+        var _a;
+        (_a = this.refreshIcon) === null || _a === void 0 ? void 0 : _a.hide();
     }
     HideHourlyToggle() {
         var _a;
@@ -15981,6 +19229,16 @@ class UIBar {
     ShowHourlyToggle() {
         var _a;
         (_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.show();
+    }
+    async PushAlertWindow(alerts) {
+        const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
+        logger_Logger.Info("Alerts Window opened.");
+        const result = await SpawnProcess([alertWindowPath, Literal(JSON.stringify(alerts))]);
+        logger_Logger.Info("Alerts Window closed.");
+        if (!result.Success)
+            logger_Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
+        else
+            logger_Logger.Debug(`Alerts Window output: ${JSON.stringify(result.Data)}`);
     }
 }
 
@@ -16011,13 +19269,15 @@ class UISeparator {
 
 
 const { PopupMenuManager } = imports.ui.popupMenu;
-const { BoxLayout: ui_BoxLayout, IconType: ui_IconType, Label: ui_Label } = imports.gi.St;
-const ui_Lang = imports.lang;
+const { IconType: ui_IconType } = imports.gi.St;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
-const { SignalManager: ui_SignalManager } = imports.misc.signalManager;
+const { SignalManager } = imports.misc.signalManager;
 const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
+    get LightTheme() {
+        return this.lightTheme;
+    }
     constructor(app, orientation) {
         this.lightTheme = false;
         this.noHourlyWeather = false;
@@ -16026,6 +19286,28 @@ class UI {
                 return;
             this.Display(data, config, this.App.Provider);
         };
+        this.ToggleHourlyWeather = async () => {
+            if (this.HourlyWeather.Toggled) {
+                await this.HideHourlyWeather();
+            }
+            else {
+                await this.ShowHourlyWeather();
+            }
+        };
+        this.OnThemeChanged = () => {
+            void this.HideHourlyWeather();
+            const newThemeIsLight = this.IsLightTheme();
+            if (newThemeIsLight != this.lightTheme) {
+                this.lightTheme = newThemeIsLight;
+            }
+            void this.App.Refresh({ rebuild: true });
+        };
+        this.PopupMenuToggled = async (caller, data) => {
+            if (data == false) {
+                await delay(100);
+                void this.HideHourlyWeather();
+            }
+        };
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
         this.menu = new AppletPopupMenu(this.App, orientation);
@@ -16033,7 +19315,7 @@ class UI {
         logger_Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
-        this.signals = new ui_SignalManager();
+        this.signals = new SignalManager();
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
@@ -16046,23 +19328,15 @@ class UI {
             }
             else {
                 this.menu.open(false);
-                this.ShowHourlyWeather(false);
+                void this.ShowHourlyWeather(false);
                 this.menu.close(false);
                 this.menu.open(true);
             }
         }
         else {
             if (this.HourlyWeather.Toggled && !this.menu.isOpen)
-                this.HideHourlyWeather(false);
+                void this.HideHourlyWeather(false);
             this.menu.toggle();
-        }
-    }
-    async ToggleHourlyWeather() {
-        if (this.HourlyWeather.Toggled) {
-            await this.HideHourlyWeather();
-        }
-        else {
-            await this.ShowHourlyWeather();
         }
     }
     Rebuild(config) {
@@ -16081,7 +19355,7 @@ class UI {
         this.FutureWeather.UpdateIconType(iconType);
         this.HourlyWeather.UpdateIconType(iconType);
     }
-    DisplayErrorMessage(msg, errorType) {
+    DisplayErrorMessage(msg) {
         this.Bar.DisplayErrorMessage(msg);
     }
     Display(weather, config, provider) {
@@ -16090,23 +19364,15 @@ class UI {
         const shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
         this.noHourlyWeather = !shouldShowToggle;
         if (!shouldShowToggle)
-            this.ForceHideHourlyWeather();
+            void this.ForceHideHourlyWeather();
         this.Bar.Display(weather, provider, config, shouldShowToggle);
         return true;
     }
-    OnThemeChanged() {
-        this.HideHourlyWeather();
-        const newThemeIsLight = this.IsLightTheme();
-        if (newThemeIsLight != this.lightTheme) {
-            this.lightTheme = newThemeIsLight;
-        }
-        this.App.RefreshAndRebuild();
+    ShowRefreshIcon() {
+        this.Bar.ShowRefreshIcon();
     }
-    async PopupMenuToggled(caller, data) {
-        if (data == false) {
-            await delay(100);
-            this.HideHourlyWeather();
-        }
+    HideRefreshIcon() {
+        this.Bar.HideRefreshIcon();
     }
     IsLightTheme() {
         const color = this.menu.actor.get_theme_node().get_color("color");
@@ -16121,7 +19387,7 @@ class UI {
     GetTextColorStyle() {
         let hexColor = null;
         if (this.lightTheme) {
-            hexColor = ShadeHexColor(this.ForegroundColor().to_string().substring(0, 7), -0.40);
+            hexColor = ShadeHexColor(this.ForegroundColor().to_string().slice(0, 7), -0.40);
         }
         return "color: " + hexColor;
     }
@@ -16131,27 +19397,27 @@ class UI {
         this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
         this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
         this.Bar = new UIBar(this.App);
-        this.Bar.ToggleClicked.Subscribe(ui_Lang.bind(this, this.ToggleHourlyWeather));
+        this.Bar.ToggleClicked.Subscribe(this.ToggleHourlyWeather);
         this.ForecastSeparator = new UISeparator();
         this.HourlySeparator = new UISeparator();
         this.BarSeparator = new UISeparator();
         this.HourlySeparator.Hide();
-        this.menu.addActor(this.CurrentWeather.actor);
-        this.menu.addActor(this.HourlySeparator.Actor);
-        this.menu.addActor(this.HourlyWeather.actor);
-        this.menu.addActor(this.ForecastSeparator.Actor);
-        this.menu.addActor(this.FutureWeather.actor);
-        this.menu.addActor(this.BarSeparator.Actor);
-        this.menu.addActor(this.Bar.Actor);
+        this.menu.box.add(this.CurrentWeather.actor);
+        this.menu.box.add(this.HourlySeparator.Actor);
+        this.menu.box.add(this.HourlyWeather.actor);
+        this.menu.box.add(this.ForecastSeparator.Actor);
+        this.menu.box.add(this.FutureWeather.actor);
+        this.menu.box.add(this.BarSeparator.Actor);
+        this.menu.box.add(this.Bar.Actor);
     }
     ShowLoadingUi() {
         this.CurrentWeather.Destroy();
         this.FutureWeather.Destroy();
         this.Bar.Destroy();
-        this.CurrentWeather.actor.add_actor(new ui_Label({
+        this.CurrentWeather.actor.add_actor(Label({
             text: _('Loading current weather ...')
         }));
-        this.FutureWeather.actor.set_child(new ui_Label({
+        this.FutureWeather.actor.set_child(Label({
             text: _('Loading future weather ...')
         }));
     }
@@ -16186,190 +19452,9 @@ class UI {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
-
-const { Message, Session, SessionAsync } = imports.gi.Soup;
-const { PRIORITY_DEFAULT } = imports.gi.GLib;
-const soupLib_ByteArray = imports.byteArray;
-function AddParamsToURI(url, params) {
-    let result = url;
-    if (params != null) {
-        const items = Object.keys(params);
-        for (const [index, item] of items.entries()) {
-            result += (index == 0) ? "?" : "&";
-            result += (item) + "=" + params[item];
-        }
-    }
-    return result;
-}
-function AddHeadersToMessage(message, headers) {
-    if (headers != null) {
-        for (const key in headers) {
-            message.request_headers.append(key, headers[key]);
-        }
-    }
-}
-class Soup3 {
-    constructor() {
-        this._httpSession = new Session();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        this._httpSession.timeout = 10;
-        this._httpSession.idle_timeout = 10;
-    }
-    async Send(url, params, headers, method = "GET") {
-        url = AddParamsToURI(url, params);
-        const query = encodeURI(url);
-        logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
-            const message = Message.new(method, query);
-            if (message == null) {
-                resolve(null);
-            }
-            else {
-                AddHeadersToMessage(message, headers);
-                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
-                    var _a;
-                    const res = this._httpSession.send_and_read_finish(result);
-                    const headers = {};
-                    message.get_response_headers().foreach((name, value) => {
-                        headers[name] = value;
-                    });
-                    resolve({
-                        reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
-                        status_code: message.get_status(),
-                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
-                        response_headers: headers
-                    });
-                });
-            }
-        });
-        return data;
-    }
-}
-class Soup2 {
-    constructor() {
-        this._httpSession = new SessionAsync();
-        const { ProxyResolverDefault } = imports.gi.Soup;
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        this._httpSession.timeout = 10;
-        this._httpSession.idle_timeout = 10;
-        this._httpSession.add_feature(new ProxyResolverDefault());
-    }
-    async Send(url, params, headers, method = "GET") {
-        url = AddParamsToURI(url, params);
-        const query = encodeURI(url);
-        logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
-            const message = Message.new(method, query);
-            if (message == null) {
-                resolve(null);
-            }
-            else {
-                AddHeadersToMessage(message, headers);
-                this._httpSession.queue_message(message, (session, message) => {
-                    var _a, _b;
-                    const headers = {};
-                    message.response_headers.foreach((name, value) => {
-                        headers[name] = value;
-                    });
-                    resolve({
-                        reason_phrase: message.reason_phrase,
-                        status_code: message.status_code,
-                        response_body: (_b = (_a = message.response_body) === null || _a === void 0 ? void 0 : _a.data) !== null && _b !== void 0 ? _b : null,
-                        response_headers: headers
-                    });
-                });
-            }
-        });
-        return data;
-    }
-}
-const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
-
-;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
-
-
-class HttpLib {
-    static get Instance() {
-        if (this.instance == null)
-            this.instance = new HttpLib();
-        return this.instance;
-    }
-    async LoadJsonAsync(url, params, headers, method = "GET") {
-        const response = await this.LoadAsync(url, params, headers, method);
-        try {
-            const payload = JSON.parse(response.Data);
-            response.Data = payload;
-        }
-        catch (e) {
-            if (response.Success) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-                response.Success = false;
-                response.ErrorData = {
-                    code: -1,
-                    message: "bad api response - non json",
-                    reason_phrase: "",
-                };
-            }
-        }
-        finally {
-            return response;
-        }
-    }
-    async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e;
-        const message = await soupLib.Send(url, params, headers, method);
-        let error = undefined;
-        if (!message) {
-            error = {
-                code: 0,
-                message: "no network response",
-                reason_phrase: "no network response",
-                response: undefined
-            };
-        }
-        else if (message.status_code < 100 && message.status_code >= 0) {
-            error = {
-                code: message.status_code,
-                message: "no network response",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (message.status_code > 300 || message.status_code < 200) {
-            error = {
-                code: message.status_code,
-                message: "bad status code",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (!message.response_body) {
-            error = {
-                code: message.status_code,
-                message: "no response data",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
-            logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
-        }
-        logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
-        if (error != null)
-            logger_Logger.Info("Error calling URL: " + error.reason_phrase + ", " + ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body));
-        return {
-            Success: (error == null),
-            Data: ((_e = message === null || message === void 0 ? void 0 : message.response_body) !== null && _e !== void 0 ? _e : null),
-            ResponseHeaders: message === null || message === void 0 ? void 0 : message.response_headers,
-            ErrorData: error,
-            Response: message
-        };
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/main.ts
+
+
 
 
 
@@ -16385,16 +19470,11 @@ class HttpLib {
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
-const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
-const { TimeZone: main_TimeZone } = imports.gi.GLib;
+const { File: main_File } = imports.gi.Gio;
+const keybindingManager = imports.ui.main.keybindingManager;
 class WeatherApplet extends TextIconApplet {
     get CurrentData() {
         return this.currentWeatherInfo;
-    }
-    get Refreshing() {
-        if (this.refreshing == null)
-            return Promise.resolve();
-        return this.refreshing;
     }
     get Provider() {
         return this.provider;
@@ -16402,32 +19482,13 @@ class WeatherApplet extends TextIconApplet {
     get Orientation() {
         return this.orientation;
     }
-    constructor(metadata, orientation, panelHeight, instanceId) {
+    constructor(config, metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.refreshing = null;
-        this.unlockFunc = null;
-        this.manualRefreshTriggeredWhileLocked = false;
         this.currentWeatherInfo = null;
         this.encounteredError = false;
-        this.online = null;
-        this.OnNetworkConnectivityChanged = () => {
-            switch (NetworkMonitor.get_default().connectivity) {
-                case NetworkConnectivity.FULL:
-                case NetworkConnectivity.LIMITED:
-                case NetworkConnectivity.PORTAL:
-                    if (this.online === true)
-                        break;
-                    logger_Logger.Info("Internet access now available, resuming operations.");
-                    this.loop.Resume();
-                    this.online = true;
-                    break;
-                case NetworkConnectivity.LOCAL:
-                    if (this.online === false)
-                        break;
-                    logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);
-                    this.loop.Pause();
-                    this.online = false;
-                    break;
+        this.OnKeySettingsUpdated = () => {
+            if (this.config.keybinding != null) {
+                keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
             }
         };
         this.onSettingNeedsRebuild = (conf, changedData, data) => {
@@ -16474,6 +19535,10 @@ class WeatherApplet extends TextIconApplet {
             }
             const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
             const stream = await OverwriteAndGetIOStream(appletLogFile);
+            if (stream == null) {
+                NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", { filePath: this.config._selectedLogPath }));
+                return;
+            }
             await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
             if (settings != null) {
                 await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");
@@ -16484,11 +19549,11 @@ class WeatherApplet extends TextIconApplet {
         };
         this.AfterRefresh = (callback) => {
             return async (owner, data) => {
-                await this.Refreshing;
+                await this.loop.Refreshing;
                 const weatherData = this.CurrentData;
                 if (weatherData == null)
                     return;
-                callback(owner, data, weatherData);
+                void callback(owner, data, weatherData);
             };
         };
         this.errMsg = {
@@ -16516,21 +19581,21 @@ class WeatherApplet extends TextIconApplet {
         logger_Logger.Debug("Applet created with instanceID " + instanceId);
         logger_Logger.Debug("AppletDir is: " + this.AppletDir);
         this.SetAppletOnPanel();
-        this.config = new Config(this, instanceId);
+        this.config = config;
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new UI(this, orientation);
         this.ui.Rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
+        HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
+        ErrorHandler.Instance.OnError.Subscribe((sender, error) => this.ShowError(error));
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
         }
-        catch (e) {
+        catch (_a) {
         }
-        this.loop.Start();
-        this.OnNetworkConnectivityChanged();
-        NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
-        this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
+        void this.loop.Start();
+        this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
         this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastRowsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -16538,11 +19603,12 @@ class WeatherApplet extends TextIconApplet {
         this.config.UseCustomMenuIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.UseSymbolicIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
-        this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
-        this.config.ShortConditionsChanged.Subscribe(() => this.Refresh());
-        this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
-        this.config.ManualLocationChanged.Subscribe(() => this.Refresh());
-        this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Resume());
+        this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh());
+        this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
+        this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh());
+        this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh());
+        this.config.LocationChanged.Subscribe(() => this.loop.Refresh());
+        this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({ immediate: false }));
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
@@ -16550,104 +19616,59 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.ShowAlertsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
+        this.config.TempTextOverrideChanged.Subscribe(this.RefreshLabel);
+        this.config.FontChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
+        this.config.HotkeyChanged.Subscribe(this.OnKeySettingsUpdated);
+        this.config.SelectedLogPathChanged.Subscribe(this.saveLog);
+        this.config.LocStore.CurrentLocationModified.Subscribe(() => this.loop.Refresh());
+        keybindingManager.addHotKey(UUID, this.config.keybinding, () => this.on_applet_clicked());
     }
-    Locked() {
-        return this.refreshing != null;
+    async Refresh(options) {
+        return this.loop.Refresh(options);
     }
-    async Lock() {
-        if (this.refreshing != null)
-            await this.refreshing;
-        this.refreshing = new Promise((resolve, reject) => {
-            this.unlockFunc = resolve;
-        });
-    }
-    Unlock() {
-        var _a;
-        (_a = this.unlockFunc) === null || _a === void 0 ? void 0 : _a.call(this);
-        this.unlockFunc = null;
-        this.refreshing = null;
-        if (this.manualRefreshTriggeredWhileLocked) {
-            logger_Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
-            this.manualRefreshTriggeredWhileLocked = false;
-            this.RefreshAndRebuild();
-        }
-    }
-    RefreshAndRebuild(loc) {
-        this.RefreshWeather(true, loc);
-    }
-    ;
-    Refresh(loc = null, rebuild = false) {
-        this.RefreshWeather(rebuild, loc);
-    }
-    async RefreshWeather(rebuild, location = null, manual = true) {
+    async RefreshWeather(rebuild, location = null, cancellable) {
         try {
-            if (this.Locked()) {
-                logger_Logger.Info("Refreshing in progress, refresh skipped.");
-                if (manual) {
-                    this.manualRefreshTriggeredWhileLocked = true;
-                    this.loop.Resume();
-                }
-                return "locked";
-            }
-            await this.Lock();
             this.encounteredError = false;
-            this.loop.Resume();
             if (!location) {
-                location = await this.config.EnsureLocation();
+                location = await this.config.EnsureLocation(cancellable);
                 if (!location) {
-                    this.Unlock();
-                    return "error";
+                    return RefreshState.NoLocation;
                 }
             }
             this.EnsureProvider();
             if (this.provider == null) {
-                this.Unlock();
-                return "fail";
+                return RefreshState.Error;
             }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
-                logger_Logger.Error("No API Key given");
-                this.ShowError({
-                    type: "hard",
-                    userError: true,
-                    detail: "no key",
-                    message: _("This provider requires an API key to operate")
-                });
-                this.Unlock();
-                return "fail";
+                return RefreshState.NoKey;
             }
-            let weatherInfo = await this.provider.GetWeather(location);
+            this.ui.ShowRefreshIcon();
+            let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
             if (weatherInfo == null) {
-                logger_Logger.Error("Could not refresh weather, data could not be obtained.");
-                this.ShowError({
-                    type: "hard",
-                    detail: "no api response",
-                    message: "API did not return data"
-                });
-                this.Unlock();
-                return "fail";
+                return RefreshState.NoWeather;
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
-            this.config.Timezone = weatherInfo.location.timeZone;
             if (rebuild)
                 this.ui.Rebuild(this.config);
             if (!this.ui.Display(weatherInfo, this.config, this.provider) ||
                 !this.DisplayWeather(weatherInfo)) {
-                this.Unlock();
-                return "fail";
+                return RefreshState.DisplayFailure;
             }
             this.currentWeatherInfo = weatherInfo;
-            logger_Logger.Info("Weather Information refreshed");
-            this.loop.ResetErrorCount();
-            this.Unlock();
-            return "success";
+            if (this.config._runScript)
+                void this.SendCommand();
+            return RefreshState.Success;
         }
         catch (e) {
             if (e instanceof Error)
-                logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+                logger_Logger.Error("Generic Error while refreshing Weather info: " + e.message + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-            this.Unlock();
-            return "fail";
+            return RefreshState.Error;
+        }
+        finally {
+            this.ui.HideRefreshIcon();
         }
     }
     DisplayWeather(weather) {
@@ -16657,7 +19678,7 @@ class WeatherApplet extends TextIconApplet {
         return true;
     }
     DisplayWeatherOnLabel(weather) {
-        var _a;
+        var _a, _b;
         const temperature = weather.temperature;
         const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
@@ -16669,24 +19690,24 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += TempToUserConfig(temperature, this.config);
+                label += ((_a = TempToUserConfig(temperature, this.config)) !== null && _a !== void 0 ? _a : "");
             }
         }
         else {
             if (this.config._showTextInPanel) {
-                label = (_a = TempToUserConfig(temperature, this.config, false)) !== null && _a !== void 0 ? _a : "";
-                if (this.GetPanelHeight() >= 35) {
+                label = (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "";
+                if (this.GetPanelHeight() >= 35 && label) {
                     label += UnitToUnicode(this.config.TemperatureUnit);
                 }
             }
         }
-        if (NotEmpty(this.config._panelTextOverride))
-            label = InjectValues(this.config._panelTextOverride, weather, this.config);
+        if (NotEmpty(this.config._tempTextOverride))
+            label = InjectValues(this.config._tempTextOverride, weather, this.config);
         this.SetAppletLabel(label);
     }
     SetAppletTooltip(weather, config, override) {
         const location = GenerateLocationText(weather, this.config);
-        const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+        const lastUpdatedTime = AwareDateString(weather.date, this.config._show24Hours, DateTime.local().zoneName);
         let msg = `${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`;
         if (NotEmpty(override)) {
             msg = InjectValues(override, weather, config);
@@ -16721,37 +19742,29 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async LoadJsonAsyncWithDetails(url, params, HandleError, headers, method = "GET") {
-        const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
-        if (!response.Success) {
-            if (!!HandleError && !HandleError(response))
-                return response;
-            else {
-                this.HandleHTTPError(response.ErrorData);
-                return response;
-            }
-        }
-        return response;
-    }
-    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
-        const response = await this.LoadJsonAsyncWithDetails(url, params, HandleError, headers, method);
-        return (response.Success) ? response.Data : null;
-    }
-    async LoadAsync(url, params, HandleError, headers, method = "GET") {
-        const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
-        if (!response.Success) {
-            if (!!HandleError && !HandleError(response))
-                return null;
-            else {
-                this.HandleHTTPError(response.ErrorData);
-                return null;
-            }
-        }
-        return response.Data;
-    }
-    async locationLookup() {
+    locationLookup() {
         const command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+    }
+    async testRunScript() {
+        if (!this.config._runScript) {
+            NotificationService.Instance.Send(_("No Script Provided"), _("You need to add a script first."));
+            return;
+        }
+        if (!this.currentWeatherInfo) {
+            NotificationService.Instance.Send(_("No Weather Data"), _("No weather data to run script with"));
+            return;
+        }
+        const result = await this.SendCommand();
+        if (!result) {
+            return;
+        }
+        if (result.Success)
+            NotificationService.Instance.Send(_("Script Executed Successfully"), _("Your script has been executed successfully."));
+        else {
+            logger_Logger.Error("Error running script: ", result.ErrorData);
+            NotificationService.Instance.Send(_("Error Running Script"), _("Script returned error, see logs for more information"));
+        }
     }
     async submitIssue() {
         var _a, _b, _c;
@@ -16778,28 +19791,41 @@ The contents of the file saved from the applet help page goes here
 \`\`\`
 
 </details>\n\n`;
-        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[#()]/g, "");
         spawnCommandLine(`${command} ${finalUrl}`);
     }
-    async saveCurrentLocation() {
-        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+    saveCurrentLocation() {
+        void this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+    }
+    async SendCommand() {
+        if (!this.config._runScript) {
+            return null;
+        }
+        if (!this.currentWeatherInfo) {
+            return null;
+        }
+        let command = InjectValues(this.config._runScript, this.currentWeatherInfo, this.config, true);
+        command = command.replace(/{{full_data}}/g, Literal(JSON.stringify(this.currentWeatherInfo)));
+        command = command.replace(/{full_data}/g, JSON.stringify(this.currentWeatherInfo));
+        return SpawnProcess([command]);
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
-        this.RefreshWeather(true);
+        if (this.currentWeatherInfo)
+            this.onSettingNeedsRebuild(this.config, null, this.currentWeatherInfo);
     }
     ;
-    on_applet_removed_from_panel(deleteConfig) {
+    on_applet_removed_from_panel() {
         logger_Logger.Info("Removing applet instance...");
         this.loop.Stop();
         this.config.Destroy();
         Event.DisconnectAll();
     }
-    on_applet_clicked(event) {
+    on_applet_clicked() {
         this.ui.Toggle();
         return false;
     }
-    on_applet_middle_clicked(event) {
+    on_applet_middle_clicked() {
         return false;
     }
     on_panel_height_changed() {
@@ -16811,7 +19837,7 @@ The contents of the file saved from the applet help page goes here
     }
     AddRefreshButton() {
         const itemLabel = _("Refresh");
-        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
+        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({ rebuild: true }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
     HandleHTTPError(error) {
@@ -16851,17 +19877,17 @@ The contents of the file saved from the applet help page goes here
             weatherInfo.coord.lon = locationData.lon;
         if (weatherInfo.hourlyForecasts == null)
             weatherInfo.hourlyForecasts = [];
-        weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
-        weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
+        weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main);
+        weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description);
         for (const forecast of weatherInfo.forecasts) {
             const condition = forecast.condition;
-            condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-            condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+            condition.main = ProcessCondition(condition.main);
+            condition.description = ProcessCondition(condition.description);
         }
         for (const forecast of weatherInfo.hourlyForecasts) {
             const condition = forecast.condition;
-            condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-            condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+            condition.main = ProcessCondition(condition.main);
+            condition.description = ProcessCondition(condition.description);
         }
         return weatherInfo;
     }
@@ -16869,10 +19895,11 @@ The contents of the file saved from the applet help page goes here
         this.set_applet_label(title);
         this.set_applet_tooltip("Click to open");
         this.set_applet_icon_name("weather-severe-alert");
-        this.ui.DisplayErrorMessage(msg, "hard");
+        this.ui.DisplayErrorMessage(msg);
     }
     ;
     ShowError(error) {
+        var _a;
         if (error == null)
             return;
         if (this.encounteredError == true)
@@ -16882,13 +19909,13 @@ The contents of the file saved from the applet help page goes here
         if (error.type == "hard") {
             logger_Logger.Debug("Displaying hard error");
             this.ui.Rebuild(this.config);
-            this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+            this.DisplayHardError(this.errMsg[error.detail], (_a = error.message) !== null && _a !== void 0 ? _a : "");
         }
         if (error.type == "soft") {
             if (this.loop.IsDataTooOld()) {
                 this.set_applet_tooltip("Click to open");
                 this.set_applet_icon_name("weather-severe-alert");
-                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
+                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
             }
         }
         if (error.userError) {
@@ -16905,12 +19932,14 @@ The contents of the file saved from the applet help page goes here
 
 
 
+
 function main(metadata, orientation, panelHeight, instanceId) {
     imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
     imports.gi.Gtk.IconTheme.get_default().append_search_path(metadata.path + "/../icons");
     imports.gi.Gtk.IconTheme.get_default().append_search_path(metadata.path + "/../arrow-icons");
     logger_Logger.UpdateInstanceID(instanceId);
-    return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
+    const config = new Config(instanceId);
+    return new WeatherApplet(config, metadata, orientation, panelHeight, instanceId);
 }
 
 })();

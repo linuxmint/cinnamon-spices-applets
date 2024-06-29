@@ -351,7 +351,7 @@ Button labels are application names.</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Notes about the Panel Launcher behaviour</property>
+                    <property name="label" translatable="yes">Panel Launcher Setup</property>
                     <attributes>
                       <attribute name="font-desc" value="Sans 12"/>
                     </attributes>
@@ -359,7 +359,7 @@ Button labels are application names.</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">15</property>
+                    <property name="padding">9</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -367,28 +367,112 @@ Button labels are application names.</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Unlike most Panel Launcher applets, this launcher
-keeps tack of running windows and will activate
-existing windows rather then launching new ones.
+                    <property name="label" translatable="yes">Unlike most Panel Launcher applets, this launcher keeps tack of 
+running windows and uses window Thumbnail menus.
 
-You can launch additional windows by clicking the
-'Back' mouse button or Ctrl+Left mouse button 
-(by default).
+You can launch additional windows by clicking the 'Back' mouse 
+button or using the Left mouse button while holding the Ctrl key.
 
-It also uses Thumbnail menus to show a list of all
-open windows. In general it works like "pinned"
-buttons on a window list rather then a basic
-launcher</property>
+How would you like the Left mouse button to behave when 
+windows already exist for a launcher button?</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">15</property>
+                    <property name="padding">9</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkRadioButton" id="lc_new_window_radio">
+                    <property name="label" translatable="yes">Open new window / Hold for Thumbnail menu</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="lc_restore_radio">
+                    <property name="label" translatable="yes">Restore most recent window / Cycle windows</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">lc_new_window_radio</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="lc_thumbnail_radio">
+                    <property name="label" translatable="yes">Open the Thumbnail menu</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">5</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">lc_new_window_radio</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="mouse_hover_chkbox">
+                    <property name="label" translatable="yes">Thumbnail window menu on mouse hover</property>
+                    <property name="name">pl_no_hover_chkbox</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-top">5</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">6</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -413,7 +497,7 @@ launcher</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">15</property>
+                    <property name="padding">10</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -421,12 +505,13 @@ launcher</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">There are many more options and features to explorer
-in the applet configurator and the window list button
-context menu, for example:
+                    <property name="label" translatable="yes">There are many more options and features to explorer in the
+applet configurator and the window list button context menu,
+for example:
 
  • Hot-keys to launch / activate a specific window.
  • Customizable mouse button actions.
+ • Customizable icon saturation (grayscale / vivid).
  • Customizable Ctrl/Shift + mouse button actions.
  • Application specific grouping and label settings.
  • Thumbnail window zooming using the scroll-wheel.
@@ -436,7 +521,7 @@ context menu, for example:
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">10</property>
+                    <property name="padding">5</property>
                     <property name="position">1</property>
                   </packing>
                 </child>

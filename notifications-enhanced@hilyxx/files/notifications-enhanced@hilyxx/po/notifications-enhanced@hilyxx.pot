@@ -1,0 +1,143 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-21 15:31-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: applet.js:94
+msgid "Do not disturb"
+msgstr ""
+
+#: applet.js:99
+msgid "No notifications"
+msgstr ""
+
+#. settings-schema.json->keyClear->description
+#: applet.js:106
+msgid "Clear notifications"
+msgstr ""
+
+#: applet.js:130
+msgid "Enable notifications"
+msgstr ""
+
+#: applet.js:142
+msgid "Notification Settings"
+msgstr ""
+
+#: applet.js:224 applet.js:406
+#, javascript-format
+msgid "%d notification"
+msgid_plural "%d notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:254
+msgid "Notifications"
+msgstr ""
+
+#: applet.js:269
+msgid "Notifications disabled"
+msgstr ""
+
+#: applet.js:422
+msgid "just now"
+msgstr ""
+
+#: applet.js:425
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:429
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. metadata.json->name
+msgid "Notifications Enhanced"
+msgstr ""
+
+#. metadata.json->description
+msgid "A notification applet but with more options"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->ignoreTransientNotifications->description
+msgid "Ignore transient notifications"
+msgstr ""
+
+#. settings-schema.json->ignoreTransientNotifications->tooltip
+msgid "Check this to ignore transient notifications."
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr ""
+
+#. settings-schema.json->showNotificationCount->description
+msgid "Show the number of notifications"
+msgstr ""
+
+#. settings-schema.json->showEmptyTray->description
+msgid "Show empty tray"
+msgstr ""
+
+#. settings-schema.json->showEmptyTray->tooltip
+msgid "Check this to show the tray even when there are no new notifications."
+msgstr ""
+
+#. settings-schema.json->showDisturbIcon->description
+msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
+msgstr ""
+
+#. settings-schema.json->showDisturbIcon->tooltip
+msgid ""
+"Check this to show 'Do not disturb' icon on panel even when show empty tray "
+"option is disabled."
+msgstr ""
+
+#. settings-schema.json->showNotificationSettings->description
+msgid "Show notification settings in the menu"
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#. settings-schema.json->keyOpen->description
+msgid "Show notifications"
+msgstr ""
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the notification popup menu."
+msgstr ""
+
+#. settings-schema.json->keyClear->tooltip
+msgid "Set keybinding(s) to clear all notifications."
+msgstr ""
+
+#. settings-schema.json->btnSystemSettings->description
+msgid "Open notification settings"
+msgstr ""

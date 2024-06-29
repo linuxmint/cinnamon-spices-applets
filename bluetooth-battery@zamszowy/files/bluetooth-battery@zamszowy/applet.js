@@ -288,6 +288,7 @@ BtBattery.prototype = {
                 && dev.kind != UPower.DeviceKind.GAMING_INPUT
                 && dev.kind != UPower.DeviceKind.PHONE
                 && dev.kind != UPower.DeviceKind.HEADPHONES
+                && dev.kind != UPower.DeviceKind.HEADSET
                 && dev.kind != UPower.DeviceKind.MEDIA_PLAYER) {
 
                 // blacklist by default non mouse/kb/phone/gaming input/mediaplayer/headphones devices
@@ -348,8 +349,8 @@ BtBattery.prototype = {
 
             if ((type == UPower.DeviceKind.KEYBOARD && !this.enable_keyboards)
                 || (type == UPower.DeviceKind.MOUSE && !this.enable_mice)
-                || (type == UPower.DeviceKind.HEADPHONES && !this.enable_headphones)
-                || (type != UPower.DeviceKind.KEYBOARD && type != UPower.DeviceKind.MOUSE && type != UPower.DeviceKind.HEADPHONES && !this.enable_others))
+                || ((type == UPower.DeviceKind.HEADPHONES || type == UPower.DeviceKind.HEADSET) && !this.enable_headphones)
+                || (type != UPower.DeviceKind.KEYBOARD && type != UPower.DeviceKind.MOUSE && type != UPower.DeviceKind.HEADPHONES && type != UPower.DeviceKind.HEADSET && !this.enable_others))
             {
                 continue;
             }
@@ -428,7 +429,7 @@ BtBattery.prototype = {
             return "keyboard-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
         } else if (type == UPower.DeviceKind.MOUSE) {
             return "mouse-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
-        } else if (type == UPower.DeviceKind.HEADPHONES) {
+        } else if (type == UPower.DeviceKind.HEADPHONES || type == UPower.DeviceKind.HEADSET) {
             return "headphones-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
         } else {
             return "battery-" + this.perc_to_3_digit_str(this.perc_round_to_10(batt));
@@ -456,7 +457,7 @@ BtBattery.prototype = {
     },
 
     perc_round_to_10: function(perc) {
-        return Math.round(perc / 10) * 10;
+        return Math.floor(perc / 10) * 10;
     },
 
     perc_to_3_digit_str: function(perc) {

@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 00:45-0300\n"
-"PO-Revision-Date: 2022-09-28 14:32+0200\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2024-02-03 07:21+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:232
@@ -177,7 +178,7 @@ msgstr "Képernyő színhőmérsékletének folyamatos beállítása"
 
 #. settings-schema.json->autoUpdateInterval->units
 msgid "Seconds"
-msgstr "másodperc"
+msgstr "Másodperc"
 
 #. settings-schema.json->autoUpdateInterval->description
 msgid "Update interval"
@@ -273,7 +274,7 @@ msgstr "Finom átmenet a nappali és éjszakai beállítás között"
 
 #. settings-schema.json->transitionDuration->units
 msgid "Minutes"
-msgstr "perc"
+msgstr "Perc"
 
 #. settings-schema.json->transitionDuration->description
 msgid "Transition Duration"
@@ -318,7 +319,7 @@ msgid ""
 "Using: https://geolocation-db.com/"
 msgstr ""
 "A natív geoclue használata a redshift alkalmazást lelassíthatja.\n"
-"A https://geolocation-db.com/ webhely használatával."
+"A https://geolocation-db.com/ webhely használatával"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
@@ -347,6 +348,41 @@ msgstr ""
 "tehet fel a kisalkalmazással kapcsolatban a közösségnek a Github fiókjával "
 "bejelentkezve. A webhelyen az ismert hibákról, hibaelhárításról, változási "
 "megjegyzésekről és egyebekről is olvashat."
+
+#: applet.js:302
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr "Redshift szükséges: yay -S redshift-minimal"
+
+#: applet.js:479
+msgid "should be replaced by redshift-minimal"
+msgstr "redshift-minimálra kell cserélni"
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Activate QRedshift as soon as Cinnamon starts up"
+msgstr "Aktiválja a QRedshiftet, amint a Cinnamon elindul"
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid "(even if it has previously been deactivated)"
+msgstr "(még akkor is, ha korábban deaktiválták)"
+
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+"Automatikusan letiltva Wayland alatt, mivel a redshift még nem támogatott a "
+"Wayland által"
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr "A QRedshift újraaktiválása, amint a Cinnamon elindul"
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""
+"Nem fog működni Wayland alatt, mivel a redshift még nem támogatott a Wayland "
+"által"
 
 #~ msgid "may conflict with this applet, it is highly recommended removing it."
 #~ msgstr ""

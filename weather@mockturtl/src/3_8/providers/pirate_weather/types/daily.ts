@@ -1,8 +1,8 @@
-import { PirateWeatherIcon } from "./common";
+import type { PirateWeatherIcon, PirateWeatherSummary } from "./common";
 
 export interface PirateWeatherDailyPayload {
 	time: number;
-	summary: string;
+	summary: PirateWeatherSummary;
 	icon: PirateWeatherIcon;
 	sunriseTime: number;
 	sunsetTime: number;

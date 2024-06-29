@@ -11,6 +11,7 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const Signals = imports.signals;
+const Meta = imports.gi.Meta;
 
 const Gettext = imports.gettext;
 const UUID = "qredshift@quintao";
@@ -80,6 +81,7 @@ class QRedshift extends Applet.TextIconApplet {
         this.opt = {
             redshift_version: 0,
             enabled: true,
+            enableAtStartup: false,
             autoUpdate: false,
             autoUpdateInterval: 20,
             smoothTransition: true,
@@ -140,6 +142,7 @@ class QRedshift extends Applet.TextIconApplet {
         };
         
         this.settings.bind('enabled', 'enabled', this.onSettChange.bind(this));
+        this.settings.bind("enableAtStartup", "enableAtStartup");
         this.settings.bind('autoUpdate', 'autoUpdate', this.onSettChange.bind(this));
         this.settings.bind('autoUpdateInterval', 'autoUpdateInterval', this.onSettChange.bind(this));
         this.settings.bind('adjustmentMethod', 'adjustmentMethod', this.onSettChange.bind(this));
@@ -823,6 +826,10 @@ class QRedshift extends Applet.TextIconApplet {
     
     on_applet_added_to_panel() {
         qLOG('QRedshift', 'ADDED TO PANEL');
+        if (Meta.is_wayland_compositor())
+            this.opt.enabled = false;
+        else if (this.opt.enableAtStartup === true)
+            this.opt.enabled = true;
     }
     
     

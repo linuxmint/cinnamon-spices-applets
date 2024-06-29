@@ -4,6 +4,11 @@
         "default": false,
         "description" : "Show notifications"
     },
+    "show-silent-notifications": {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Silence system notificaiton sound"
+    },
     "show-caps-lock-indicator": {
         "type": "switch",
         "default": false,

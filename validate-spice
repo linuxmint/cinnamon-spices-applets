@@ -19,6 +19,7 @@ class CheckError(Exception):
 # function with checks for an xlet
 def validate_xlet(uuid):
     valid = False
+    uuid = uuid.rstrip('/')
     os.chdir(uuid)
 
     try:
@@ -29,6 +30,8 @@ def validate_xlet(uuid):
 
         found = False
         for root, dirs, files in os.walk("files/%s" % uuid):
+            if any(ext.endswith(".po") for ext in files) and not any(ext.endswith(".pot") for ext in files):
+                raise CheckError("[%s] Invalid location for translation files!" % (uuid))
             for file in files:
                 if file == "%s.js" % SPICE_TYPE:
                     found = True
@@ -58,7 +61,7 @@ def validate_xlet(uuid):
 
             # check mandatory fields
             for field in ['author']:
-                if field not in info.keys():
+                if field not in info:
                     raise CheckError("[%s] Missing field '%s' in info.json" % (uuid, field))
 
         # check metadata.json
@@ -70,12 +73,12 @@ def validate_xlet(uuid):
 
             # check forbidden fields
             for field in ['icon', 'dangerous', 'last-edited']:
-                if field in metadata.keys():
+                if field in metadata:
                     raise CheckError("[%s] Forbidden field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
 
             # check mandatory fields
             for field in ['uuid', 'name', 'description']:
-                if field not in metadata.keys():
+                if field not in metadata:
                     raise CheckError("[%s] Missing field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
 
             # check uuid value
@@ -83,7 +86,7 @@ def validate_xlet(uuid):
                 raise CheckError("[%s] Wrong uuid in %s" % (uuid, "files/%s/metadata.json" % uuid))
 
             # check for unicode characters in metadata
-            for field in metadata.keys():
+            for field in metadata:
                 strvalue = str(metadata[field])
                 if len(strvalue.encode()) != len(strvalue):
                     raise CheckError("[%s] Forbidden unicode characters in field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))

@@ -1,0 +1,151 @@
+# System Controls Applet
+# Copyright (C) 2022
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"PO-Revision-Date: 2024-01-25 23:22+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 5.4/applet.js:96
+msgid "Restart Cinnamon"
+msgstr "Redémarrer Cinnamon"
+
+#: 5.4/applet.js:108
+msgid "Lock Screen"
+msgstr "Verrouiller l'écran"
+
+#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+msgid "Switch User"
+msgstr "Changer d'utilisateur"
+
+#: 5.4/applet.js:166
+msgid "Log Out"
+msgstr "Se déconnecter"
+
+#: 5.4/applet.js:178
+msgid "Suspend"
+msgstr "Mettre en veille"
+
+#: 5.4/applet.js:187
+msgid "Hibernate"
+msgstr "Hiberner"
+
+#: 5.4/applet.js:199
+msgid "Restart"
+msgstr "Redémarrer l'ordinateur"
+
+#: 5.4/applet.js:208
+msgid "Power Off"
+msgstr "Arrêter l'ordinateur"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
+"hibernate, reboot or shut down the computer"
+msgstr ""
+"Redémarrer Cinnamon, verrouiller l'écran, changer d'utilisateur, se "
+"déconnecter, mettre en veille, hiberner, redémarrer ou arrêter l'ordinateur"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Sortie"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+msgid "Cinnamon restart"
+msgstr "Redémarrage de Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "Afficher un OSD pendant le redémarrage de Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD: On Screen Display (Affichage à l'écran)"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+msgid "Menu options"
+msgstr "Options du menu"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Afficher l'option Redémarrer Cinnamon"
+
+#. 5.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Afficher l'option Mettre en veille"
+
+#. 5.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Afficher l'option Hibernation"
+
+#. 5.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Afficher l'option Redémarrer"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Afficher l'option Arrêter"
+
+#. 5.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Toutes les options de menu ci-dessous peuvent être gérées par le système.\n"
+"Si c'est le cas, vous ne pouvez pas les voir."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Afficher l'option Verrouiller l'écran"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Géré par le système"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Afficher l'option Changer d'utilisateur"
+
+#. 5.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Afficher l'option Se déconnecter"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Mode de déconnexion"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Avec demande de confirmation"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Sans confirmation"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Forcer"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"L'option \"Forcer\" vous permet de vous déconnecter tout en ignorant les "
+"inhibiteurs. Utile lorsque plusieurs sessions sont ouvertes."
+
+#~ msgid "System Controls"
+#~ msgstr "Les contrôles du système"

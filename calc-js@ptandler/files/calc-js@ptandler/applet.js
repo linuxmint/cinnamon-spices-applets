@@ -335,7 +335,8 @@ class MiniCalc extends Applet.IconApplet {
         const keySymbol = event.get_key_symbol();
         // logInfo("keySymbol = ", keySymbol, " control = ", event.has_control_modifier());
         switch (keySymbol) {
-            case Clutter.Return:
+            case Clutter.KEY_KP_Enter:
+            case Clutter.KEY_Return:
             case Clutter.KP_Enter:
                 this.pushToHistory(input, result);
                 this.updateExpression(result);

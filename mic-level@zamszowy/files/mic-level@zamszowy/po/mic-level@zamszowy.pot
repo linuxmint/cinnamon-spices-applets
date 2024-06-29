@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mic-level@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-28 14:43-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Microphone level monitor"
+msgstr ""
+
+#. metadata.json->description
+msgid "Monitors microphone level"
+msgstr ""
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr ""
+
+#. settings-schema.json->section0->title
+msgid "Timings (seconds)"
+msgstr ""
+
+#. settings-schema.json->section1->title
+msgid "Bluetooth devices"
+msgstr ""
+
+#. settings-schema.json->section2->title
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->measure-time->description
+msgid "For how long to record a sample and report result"
+msgstr ""
+
+#. settings-schema.json->sleep-time->description
+msgid "How long to wait before recoring another sample"
+msgstr ""
+
+#. settings-schema.json->enable-bt-only->description
+msgid "Show applet only when BT device is active and has HFP profile enabled"
+msgstr ""
+
+#. settings-schema.json->enable-bt-only->tooltip
+msgid ""
+"This option disables keybinding, since it would interfere with the automatic "
+"detection of HFP profile"
+msgstr ""
+
+#. settings-schema.json->enable-click-to-switch-bt-profile->description
+msgid "Enable click on applet to switch between HFP and A2DP profiles"
+msgstr ""
+
+#. settings-schema.json->enable-keybind->description
+msgid "Enable keybind to enable/disable the applet"
+msgstr ""
+
+#. settings-schema.json->enable-keybind->tooltip
+#. settings-schema.json->keybind-toggle->tooltip
+msgid ""
+"This option will not work if optoon to show applet only when BT device is on "
+"as it would interfere with the automatic detection of HFP profile"
+msgstr ""
+
+#. settings-schema.json->keybind-toggle->description
+msgid "Set key for toggling enable state of the applet"
+msgstr ""

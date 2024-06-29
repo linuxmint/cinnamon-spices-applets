@@ -23,7 +23,6 @@ const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
-const Soup = imports.gi.Soup;
 const Util = imports.misc.util;
 
 const Signals = imports.signals;
@@ -106,19 +105,6 @@ FeedReader.prototype = {
         this.items = new Array();
 
         this.image = {}
-
-        /* Init HTTP session */
-        try {
-            this.session = new Soup.SessionAsync();
-            Soup.Session.prototype.add_feature.call(this.session,
-                    new Soup.ProxyResolverDefault());
-        } catch (e) {
-            if(this.logger != undefined){
-                this.logger.error(e);
-            }
-            global.logError(e);            
-            throw "Failed to create HTTP session: " + e;
-        }
 
         let path = DataPath + '/' + this.id;
         // Let the python script grab the items and load them using an async method
