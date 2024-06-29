@@ -16601,9 +16601,14 @@ class GeoClue {
         try {
             GeoClueLib = imports.gi.Geoclue;
             GeocodeGlib = imports.gi.GeocodeGlib;
+            if (GeoClueLib.Simple.new_with_thresholds == null || GeocodeGlib.Reverse.new_for_location == null) {
+                throw new Error("GeoClue2 required functions are not available");
+            }
         }
         catch (_a) {
             logger_Logger.Info("GeoClue2 not available, disabling it's use.");
+            GeoClueLib = undefined;
+            GeocodeGlib = undefined;
         }
     }
     async GetLocation(cancellable) {

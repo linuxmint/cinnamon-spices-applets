@@ -17,9 +17,16 @@ export class GeoClue implements GeoIP {
 		try {
 			GeoClueLib = imports.gi.Geoclue;
 			GeocodeGlib = imports.gi.GeocodeGlib;
+			// It seems `new_with_thresholds` is not available in some versions of GeoClue2, so we need to check for it.
+			// https://github.com/linuxmint/cinnamon-spices-applets/issues/6137
+			if (GeoClueLib.Simple.new_with_thresholds == null || GeocodeGlib.Reverse.new_for_location == null) {
+				throw new Error("GeoClue2 required functions are not available");
+			}
 		}
 		catch {
 			Logger.Info("GeoClue2 not available, disabling it's use.");
+			GeoClueLib = undefined;
+			GeocodeGlib = undefined;
 		}
 	}
 
