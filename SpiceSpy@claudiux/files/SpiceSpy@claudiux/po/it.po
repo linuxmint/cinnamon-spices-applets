@@ -77,7 +77,7 @@ msgstr "pixels"
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
-msgstr "Mostrare il numero di traduzioni nel menu"
+msgstr "Mostra il numero di traduzioni nel menu"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"
@@ -138,7 +138,7 @@ msgstr "Non mostrare nulla"
 
 #. settings-schema.json->useful-only->description
 msgid "Show only non-zero values in panel"
-msgstr "Mostrare solo i valori non nulli nel pannello"
+msgstr "Mostra solo i valori non nulli nel pannello"
 
 #. settings-schema.json->section2->description
 msgid "List of authors of the Spices you are interested in"
