@@ -1,8 +1,7 @@
-import type { Config } from "../../config";
 import { HttpLib } from "../../lib/httpLib";
 import { ErrorHandler } from "../../lib/services/error_handler";
 import { Logger } from "../../lib/services/logger";
-import type { LocationData } from "../../types";
+import type { LocationServiceResult } from "../../types";
 import { _ } from "../../utils";
 import type { GeoIP } from "./base";
 
@@ -13,13 +12,7 @@ import type { GeoIP } from "./base";
 export class GeoIPFedora implements GeoIP {
 	private readonly query = "https://geoip.fedoraproject.org/city";
 
-	private config: Config;
-
-	constructor(config: Config) {
-		this.config = config;
-	}
-
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPFedoraPayload>({ url: this.query, cancellable });
 
 		if (!json) {
@@ -27,10 +20,10 @@ export class GeoIPFedora implements GeoIP {
 			return null;
 		}
 
-		return this.ParseInformation(json, config);
+		return this.ParseInformation(json);
 	}
 
-	private ParseInformation(json: GeoIPFedoraPayload, config: Config): LocationData | null {
+	private ParseInformation(json: GeoIPFedoraPayload): LocationServiceResult | null {
 		if (json.latitude === null || json.longitude === null) {
 			ErrorHandler.Instance.PostError({
 				type: "hard",
@@ -42,12 +35,12 @@ export class GeoIPFedora implements GeoIP {
 		}
 
 		try {
-			const result: LocationData = {
+			const result: LocationServiceResult = {
 				lat: json.latitude,
 				lon: json.longitude,
 				city: json.city ?? undefined,
 				country: json.country_name ?? undefined,
-				timeZone: json.time_zone ?? config.UserTimezone,
+				timeZone: json.time_zone ?? undefined,
 				entryText: json.latitude + "," + json.longitude,
 			}
 			Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);

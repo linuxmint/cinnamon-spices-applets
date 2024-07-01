@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.3
+
+- Always get correct timezones even if provider/location lookup doesn't provide one
+- Fix [[weather@mockturtl] Visual Crossing wind speed #6086](https://github.com/linuxmint/cinnamon-spices-applets/issues/6086)
+- Fix [Weather applet not working #6137](https://github.com/linuxmint/cinnamon-spices-applets/issues/6137)
+
 ## 3.6.2
 
 - Fix applet output breaking with various weather providers if Automatic location is used.

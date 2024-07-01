@@ -183,7 +183,7 @@ export class WeatherApplet extends TextIconApplet {
 			this.encounteredError = false;
 
 			if (!location) {
-				location = await this.config.EnsureLocation(cancellable);
+				location = await this.config.GetLocation(cancellable);
 				if (!location) {
 					return RefreshState.NoLocation;
 				}

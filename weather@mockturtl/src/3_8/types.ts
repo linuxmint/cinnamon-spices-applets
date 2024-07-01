@@ -49,13 +49,21 @@ export const enum RefreshState {
 	DisplayFailure = "display failure",
 }
 
-
-export interface LocationData {
+export interface LocationServiceResult {
 	lat: number;
 	lon: number;
 	city?: string | undefined;
 	country?: string | undefined;
-	/** Always set, if not available system tz is provided */
+	timeZone?: string | undefined;
+	entryText: string;
+}
+
+export interface LocationData extends LocationServiceResult {
+	lat: number;
+	lon: number;
+	city?: string | undefined;
+	country?: string | undefined;
+	/** Always set and always correct for the location. */
 	timeZone: string;
 	entryText: string;
 }

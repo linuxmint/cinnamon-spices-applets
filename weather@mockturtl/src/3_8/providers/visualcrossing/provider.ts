@@ -3,7 +3,7 @@ import type { Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
-import { CelsiusToKelvin, IsLangSupported, _ } from "../../utils";
+import { CelsiusToKelvin, IsLangSupported, KPHtoMPS, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { VisualCrossingAlert } from "./alerts";
 import type { LocationData } from "../../types";
@@ -71,7 +71,7 @@ export class VisualCrossing extends BaseProvider {
 			dewPoint: CelsiusToKelvin(weather.currentConditions.dew ?? currentHour?.dew),
 			wind: {
 				degree: weather.currentConditions.winddir ?? currentHour?.winddir,
-				speed: weather.currentConditions.windspeed ?? currentHour?.windspeed,
+				speed: KPHtoMPS(weather.currentConditions.windspeed ?? currentHour?.windspeed ?? null),
 			},
 			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour?.temp),
 			sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
