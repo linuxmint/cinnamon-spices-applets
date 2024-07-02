@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-15 21:34+0200\n"
+"PO-Revision-Date: 2017-09-15 21:37+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Scr Lock"
+msgstr "Scr-Lock-Taste"
+
+msgid "Num Lock"
+msgstr "Num-Lock-Taste"
+
+msgid "Caps Lock"
+msgstr "Feststelltaste"
+
+msgid "Lock Keys"
+msgstr "Lock-Tasten"
+
+msgid "Scr lock on"
+msgstr "Scr-Lock-Taste ein"
+
+msgid "Scr lock off"
+msgstr "Scr-Lock-Taste aus"
+
+msgid "Num lock on"
+msgstr "Num-Lock-Taste ein"
+
+msgid "Num lock off"
+msgstr "Num-Lock-Taste aus"
+
+msgid "Caps lock on"
+msgstr "Feststelltaste ein"
+
+msgid "Caps lock off"
+msgstr "Feststelltaste aus"
+
+msgid "Show notifications"
+msgstr "Benachrichtigungen anzeigen"
+
+msgid "Show caps lock indicator"
+msgstr "Zeigt die Feststelltaste an"
+
+msgid "Show num lock indicator"
+msgstr "Num-Lock-Indikator anzeigen"
+
+msgid "Show scr lock indicator"
+msgstr "Scr-Lock-Indikator anzeigen"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
+"these change."
+msgstr ""
+"Zeigt an, ob die Feststelltaste/Num-Taste/Scr-Taste aktiviert ist, und zeigt eine "
+"Benachrichtigung an, wenn sich diese ändern."
+
+msgid "Lock keys indicator with notifications"
+msgstr "Sperrtastenanzeige mit Benachrichtigungen"

@@ -1,0 +1,785 @@
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
+# Sensors@claudiux
+# Copyright (C) 2020 claudiux aka Claude Clerc
+# This file is distributed under the same license as the Sensors@claudiux package.
+# claudiux <claude.clerc@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"PO-Revision-Date: 2024-02-24 17:02+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:101
+msgid "Sensors Monitor"
+msgstr "Szenzor Figyelő"
+
+#: applet.js:268
+msgid "Suspended"
+msgstr "Felfüggesztve"
+
+#: applet.js:484 applet.js:526
+msgid "high:"
+msgstr "magas:"
+
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
+msgid "n/a"
+msgstr "n/a"
+
+#: applet.js:486 applet.js:528
+msgid "crit:"
+msgstr "krit:"
+
+#: applet.js:569 applet.js:612
+msgid "min:"
+msgstr "min:"
+
+#: applet.js:614
+msgid "max:"
+msgstr "max:"
+
+#: applet.js:642
+msgid "No intrusion detected"
+msgstr "Nem észleltünk behatolást"
+
+#: applet.js:642
+msgid "INTRUSION DETECTED!"
+msgstr "BEHATOLÁST ÉSZLELTÜNK!"
+
+#: applet.js:662
+msgid "Must be configured!"
+msgstr "Be kell állítani!"
+
+#: applet.js:925
+msgid "Settings"
+msgstr "Beállítások"
+
+#: applet.js:925
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->page_General->title
+#: applet.js:932
+msgid "⚙ General"
+msgstr "⚙ Általános"
+
+#: applet.js:942
+msgid "🌡 Temperature sensors"
+msgstr "🌡 Hőmérséklet szenzorok"
+
+#: applet.js:952
+msgid "🤂 Fan sensors"
+msgstr "🤂 Ventilátor szenzorok"
+
+#: applet.js:962
+msgid "🗲 Voltage sensors"
+msgstr "🗲 Feszültség szenzorok"
+
+#: applet.js:972
+msgid "⮿ Intrusion sensors"
+msgstr "⮿ Behatolás szenzorok"
+
+#. settings-schema.json->xsensors->description
+#: applet.js:983
+msgid "Run xsensors"
+msgstr "Xsensors futtatása"
+
+#: applet.js:992
+msgid "Suspend Sensors"
+msgstr "Felfüggesztett Szenzorok"
+
+#: applet.js:1003
+msgid "Reload this applet"
+msgstr "Kisalkalmazás újratöltése"
+
+#: applet.js:1295
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
+
+#: lib/checkDependencies.js:317
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "A kisalkalmazás %s teljesen működőképes."
+
+#: lib/checkDependencies.js:318
+msgid "All dependencies are installed"
+msgstr "Minden függőség telepítve van"
+
+#: lib/checkDependencies.js:346
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
+"kisalkalmazás minden funkcióval rendelkezzen."
+
+#: lib/checkDependencies.js:347
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr ""
+"Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
+
+#: lib/checkDependencies.js:348
+msgid "Some dependencies are not installed!"
+msgstr "Néhány függőség nincs telepítve!"
+
+#: lib/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "A(z) „%s” végrehajtása nem sikerült:"
+
+#: scripts/xs.py:206
+msgid "Previous instance"
+msgstr "Előző példány"
+
+#: scripts/xs.py:210
+msgid "Next instance"
+msgstr "Következő példány"
+
+#: scripts/xs.py:219
+msgid "More options"
+msgstr "További beállítások"
+
+#: scripts/xs.py:225
+msgid "Import from a file"
+msgstr "Importálás fájlból"
+
+#: scripts/xs.py:230
+msgid "Export to a file"
+msgstr "Exportálás fájlba"
+
+#: scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr "Alapértelmezések visszaállítása"
+
+#: scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr "Újratöltés: %s"
+
+#: scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr "Beállítások ehhez: %s"
+
+#: scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr "Válassza ki vagy írja be az exportálni kívánt fájl nevét"
+
+#: scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr "JSON-fájlok"
+
+#: scripts/xs.py:539
+msgid "Select a JSON file to import"
+msgstr "Válassza ki az importálni kívánt JSON-fájlt"
+
+#. metadata.json->description
+msgid ""
+"Displays the values of many computer sensors concerning Temperatures (CPU - "
+"GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
+"color changes when a value reaches or exceeds its limit."
+msgstr ""
+"A számítógép számos érzékelőjének értékeit jeleníti meg a hőmérsékletek (CPU "
+"- GPU - tápegység), a ventilátor sebessége, a feszültségek és a behatolások "
+"tekintetében. Színváltozásokkal értesít, ha egy érték eléri vagy túllépi a "
+"határértéket."
+
+#. settings-schema.json->page_Temperatures->title
+msgid "🌡 Temperature"
+msgstr "🌡 Hőmérséklet"
+
+#. settings-schema.json->page_Fans->title
+msgid "🤂 Fan"
+msgstr "🤂 Ventilátor"
+
+#. settings-schema.json->page_Voltages->title
+msgid "🗲 Voltage"
+msgstr "🗲 Feszültség"
+
+#. settings-schema.json->page_Intrusion->title
+msgid "⮿ Intrusion"
+msgstr "⮿ Behatolás"
+
+#. settings-schema.json->section_Display->title
+#. settings-schema.json->section_tempOptions->title
+#. settings-schema.json->section_fanOptions->title
+#. settings-schema.json->section_voltOptions->title
+#. settings-schema.json->section_intrusionOptions->title
+msgid "Options"
+msgstr "Beállítások"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Eszköztipp"
+
+#. settings-schema.json->section_Report->title
+msgid "Sensors values"
+msgstr "Szenzorok értékei"
+
+#. settings-schema.json->section_remove_incompatible_xlets->title
+msgid "Remove from panels certain applets that also use sensors"
+msgstr ""
+"Távolítson el a panelről bizonyos kisalkalmazásokat, amelyek szintén "
+"érzékelőket használnak"
+
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr ""
+"Jelenleg csak root jogosultsággal lehet leolvasni a lemez hőmérsékletét."
+
+#. settings-schema.json->section_tempDisplay->title
+#. settings-schema.json->section_fanDisplay->title
+#. settings-schema.json->section_voltDisplay->title
+#. settings-schema.json->section_intrusionDisplay->title
+msgid "Display"
+msgstr "Megjelenítés"
+
+#. settings-schema.json->section_tempSensors->title
+msgid "Temperature sensors"
+msgstr "Hőmérséklet szenzorok"
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Disk temperature sensors"
+msgstr "Lemez hőmérséklet szenzorok"
+
+#. settings-schema.json->section_fanSensors->title
+msgid "Fan sensors"
+msgstr "Ventilátor szenzorok"
+
+#. settings-schema.json->section_voltSensors->title
+msgid "Voltage sensors"
+msgstr "Feszültség szenzorok"
+
+#. settings-schema.json->section_intrusionSensors->title
+msgid "Intrusion sensors"
+msgstr "Behatolás szenzorok"
+
+#. settings-schema.json->interval->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->interval->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->interval->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->interval->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->interval->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->interval->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->interval->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->interval->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->interval->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->interval->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->interval->options
+msgid "12"
+msgstr "12"
+
+#. settings-schema.json->interval->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->interval->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->interval->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->interval->options
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr ""
+
+#. settings-schema.json->interval->description
+msgid "Refresh interval (seconds)"
+msgstr "Frissítési gyakoriság (másodperc)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "Méret változásainak elkerülése"
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
+"Bejelölve: A kisalkalmazás mérete állandó marad, ha az összes beállítást "
+"megadta.\n"
+"Nincs bejelölve: A kisalkalmazás mérete optimalizált, de változhat."
+
+#. settings-schema.json->char_size->description
+msgid "Character size (% of standard size)"
+msgstr "Karakter méret (az alapértelmezett %-a)"
+
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "Szövegszín testreszabása"
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr "Szövegszín"
+
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr "Elválasztó"
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
+"A vízszintes elrendezésben használt értékek elválasztására szolgáló "
+"karakterlánc. Az alapértelmezett érték: „│”."
+
+#. settings-schema.json->remove_border->description
+msgid "Remove border line"
+msgstr "Szegély eltávolítása"
+
+#. settings-schema.json->remove_border->tooltip
+msgid "Whether or not to remove the border line around this applet."
+msgstr "El kell-e távolítani a szegélyt a kisalkalmazás körül vagy sem."
+
+#. settings-schema.json->remove_icons->description
+msgid "Remove icons"
+msgstr "Ikonok eltávolítása"
+
+#. settings-schema.json->remove_icons->tooltip
+msgid "Whether or not to remove icons in panel."
+msgstr "El kell-e távolítani az ikonokat a panelről vagy sem."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Eszköztipp megjelenítése az egérmutatóval"
+
+#. settings-schema.json->bold_values->description
+msgid "Show values in bold in the tooltip"
+msgstr "Az értékeket félkövéren jelenítse meg az eszköztippben"
+
+#. settings-schema.json->bold_values->tooltip
+msgid "Whether or not to show values in bold in the tooltip."
+msgstr "Félkövérrel jelenítse-e meg az értékeket az eszköztippben vagy sem."
+
+#. settings-schema.json->bold_italics_main_sensors->description
+msgid "Show main sensors in bold italics in the tooltip"
+msgstr "A fő érzékelőket félkövér dőlt betűvel jelenítse meg az eszköztippben"
+
+#. settings-schema.json->bold_italics_main_sensors->tooltip
+msgid ""
+"Whether or not to display the names of the main sensors (those displayed in "
+"the panel) in bold italics in the tooltip."
+msgstr ""
+"A fő érzékelők (a panelen látható) neve félkövér dőlt betűvel jelenik-e meg "
+"vagy sem."
+
+#. settings-schema.json->restart_in_menu->description
+msgid "Show in menu the action: Restart this applet"
+msgstr ""
+"A következő műveletet megjelenítése a menüben: Indítsa újra a kisalkalmazást"
+
+#. settings-schema.json->restart_in_menu->tooltip
+msgid "Whether or not to display in menu the action: Restart this applet."
+msgstr ""
+"Megjeleníti-e a menüben ezt a műveletet vagy sem: Indítsa újra a "
+"kisalkalmazást."
+
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "A lemez hőmérséklet-szenzorok felhasználó számára olvashatóvá tétele"
+
+#. settings-schema.json->show_temp->description
+#. settings-schema.json->show_fan->description
+#. settings-schema.json->show_volt->description
+#. settings-schema.json->show_intrusion->description
+msgid "Display the values of these selected sensors"
+msgstr "Ezen kiválasztott szenzorok értékeinek megjelenítése"
+
+#. settings-schema.json->show_temp->tooltip
+#. settings-schema.json->show_fan->tooltip
+#. settings-schema.json->show_volt->tooltip
+#. settings-schema.json->show_intrusion->tooltip
+msgid ""
+"Whether or not to display the values of the sensors selected in the list "
+"below."
+msgstr ""
+"Megjeleníti-e az alábbi listában kiválasztott érzékelők értékeit vagy sem."
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr "A „Megjelenített név” elem megjelenítése a kiválasztott szenzorokhoz"
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid ""
+"Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+"Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
+"név” elemet vagy sem. Nincs hatással a függőleges panelekre."
+
+#. settings-schema.json->strictly_positive_temp->description
+#. settings-schema.json->strictly_positive_fan->description
+#. settings-schema.json->strictly_positive_volt->description
+msgid "Show only strictly positive values"
+msgstr "Csak szigorúan pozitív értékeket mutasson"
+
+#. settings-schema.json->use_fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Mutasd a hőmérsékletet Fahrenheit-ben"
+
+#. settings-schema.json->only_integer_part->description
+msgid "Display integer values"
+msgstr "Egész számok megjelenítése"
+
+#. settings-schema.json->only_integer_part->tooltip
+msgid "Whether or not to round the values."
+msgstr "Kerekítse-e az értékeket vagy sem."
+
+#. settings-schema.json->show_unit->description
+#. settings-schema.json->show_fan_unit->description
+#. settings-schema.json->show_volt_unit->description
+msgid "Show unit"
+msgstr "Mértékegység mutatása"
+
+#. settings-schema.json->show_unit->tooltip
+#. settings-schema.json->show_fan_unit->tooltip
+#. settings-schema.json->show_volt_unit->tooltip
+msgid "Whether or not to show the unit after the value."
+msgstr "Jelenítse-e meg a mértékegységeket az értékek után vagy sem."
+
+#. settings-schema.json->show_unit_letter->description
+msgid "Show unit character"
+msgstr "Mértékegység karakterének megjelenítése"
+
+#. settings-schema.json->show_unit_letter->tooltip
+msgid "Whether or not to show the unit character (C or F)."
+msgstr "Megjelenítse-e a mértékegység karakterét (C vagy F) vagy sem."
+
+#. settings-schema.json->always_show_unit_in_line->description
+msgid "Vertical panel: Temperature value and °C / °F on one line"
+msgstr "Függőleges panel: Hőmérséklet értéke és °C / °F egy vonalon"
+
+#. settings-schema.json->always_show_unit_in_line->tooltip
+msgid ""
+"Whether or not to show, in a vertical panel, °C or °F on the same line as "
+"the temperature value."
+msgstr ""
+"Jelenítse-e meg egy függőleges panelen a °C vagy °F-t ugyanazon a vonalon "
+"mint a hőmérséklet értékét vagy sem."
+
+#. settings-schema.json->btn_renew_temp_sensors_list->description
+#. settings-schema.json->btn_renew_fan_sensors_list->description
+#. settings-schema.json->btn_renew_volt_sensors_list->description
+#. settings-schema.json->btn_renew_intrusion_sensors_list->description
+msgid "Renew the list of sensors"
+msgstr "Szenzorok listájának frissítése"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Sensor name\n"
+"(Do not modify!)"
+msgstr ""
+"Érzékelő neve\n"
+"(Ezt ne változtassa meg!)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Show\n"
+"in panel"
+msgstr ""
+"Megjelenítés\n"
+"a panelen"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Show\n"
+"in tooltip"
+msgstr ""
+"Megjelenítés\n"
+"az eszköztippekben"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Shown name"
+msgstr "Megjelenített név"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"High\n"
+"(°C)"
+msgstr ""
+"Magas\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
+msgstr ""
+"Kritikus\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+msgid "Formula"
+msgstr "Képlet"
+
+#. settings-schema.json->temp_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Kattints duplán egy sorra a „Megjelenített név”, a „Magas”, a „Kritikus” "
+"vagy a „Képlet” módosításához.\n"
+"A „Megjelenített név” alaphelyzetbe állításához másolja és illessze be az "
+"„Érzékelő neve” értékét.\n"
+"A „Magas” és a „Kritikus” értékeknek megadása nem kötelező, amennyiben "
+"megadja, akkor érvényes számoknak kell lenniük.\n"
+"„Képelt” megadása (nem kötelező):\n"
+" Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
+" Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
+" Példa: $*1.1+0.5"
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr "Lemezek listájának frissítése"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr "Lemeznév"
+
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr "Név megjelenítése"
+
+#. settings-schema.json->temp_disks->tooltip
+msgid ""
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
+"High and Critical values: Cf. technical manual of your disk."
+msgstr ""
+"Lemeznév: Az „lsblk” alkalmazás által jelzett lemezmeghajtó név. További "
+"információért tekintse meg a súgót.\n"
+"Magas vagy Kritikus értékek: További információért tekintse meg a lemezhez "
+"tartozó felhasználói dokumentációt."
+
+#. settings-schema.json->fan_unit->description
+msgid "Abbreviation of \"Rotations per minute\""
+msgstr "\"Fordulat per perc\" rövidítése"
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Alacsony\n"
+"(rpm)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Kattints duplán egy sorra a „Megjelenített név”, a „Alacsony” vagy a "
+"„Képlet” módosításához.\n"
+"A „Megjelenített név\" alaphelyzetbe állításához másolja és illessze be az "
+"„Érzékelő neve” értékét.\n"
+"Az „Alacsony” érték megadása nem kötelező, amennyiben megadja, akkor "
+"érvényes számoknak kell lenniük.\n"
+"„Képelt” megadása (nem kötelező):\n"
+" Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
+" Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
+" Példa: $*1.1+0.5"
+
+#. settings-schema.json->volt_unit->description
+msgid "Voltage unit"
+msgstr "Feszültség mértékegysége"
+
+#. settings-schema.json->volt_unit->options
+msgid "Most appropriate (V or mV)"
+msgstr "Legmegfelelőbb (V vagy mV)"
+
+#. settings-schema.json->volt_unit->options
+msgid "V only"
+msgstr "Csak V"
+
+#. settings-schema.json->volt_unit->options
+msgid "mV only"
+msgstr "Csak mV"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Alacsony\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Magas\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Kattints duplán egy sorra a „Megjelenített név”, a „Alacsony”, a „Magas” "
+"vagy a „Képlet” módosításához.\n"
+"A „Megjelenített név” alaphelyzetbe állításához másolja és illessze be az "
+"„Érzékelő neve” értékét.\n"
+"Az „Alacsony” és a „Magas” értékeknek megadása nem kötelező, amennyiben "
+"megadja, akkor érvényes számoknak kell lenniük.\n"
+"„Képelt” megadása (nem kötelező):\n"
+" Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
+" Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
+" Példa: $*1.1+0.5"
+
+#. settings-schema.json->show_intrusion_name->tooltip
+msgid ""
+" Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+" Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
+"név” elemet vagy sem. Nincs hatással a függőleges panelekre."
+
+#. settings-schema.json->strictly_positive_intrusion->description
+msgid "Show in the panel only when an intrusion was detected"
+msgstr "Csak akkor jelenjen meg a panelen, ha behatolást észleltek"
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Kattintson duplán egy sorra a „Megjelenített név” módosításához.\n"
+"A megjelenített név visszaállításához másolja és illessze be az „Érzékelő "
+"neve” értékét."
+
+#. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
+msgid "Example of sensor values from this computer"
+msgstr "Példa az érzékelő értékére erről a számítógépről"
+
+#. settings-schema.json->report->tooltip
+msgid "Useful for reporting an issue."
+msgstr "Hasznos egy probléma jelentéséhez."
+
+#. settings-schema.json->update_display->description
+msgid "Update display"
+msgstr "Megjelenítés frissítése"
+
+#. settings-schema.json->remove_temperatureATfevimu->description
+msgid "Remove from panel the temperature@fevimu applet"
+msgstr "Távolítsa el a panelről a temperature@fevimu kisalkalmazást"

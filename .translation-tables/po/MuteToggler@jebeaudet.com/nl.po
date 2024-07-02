@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-16 18:41+0100\n"
+"PO-Revision-Date: 2024-04-20 11:22+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:55
+msgid "Click to mute/unmute microphone"
+msgstr "Klik om microfoon te dempen/dempen op te heffen"
+
+#. metadata.json->name
+msgid "Mic mute toggler"
+msgstr "Microfoon demper schakelaar"
+
+#. metadata.json->description
+msgid "Quickly toggle global microphone mute on and off."
+msgstr "Schakel snel de globale demping van de microfoon in en uit."
+
+#. settings-schema.json->section_keybinding->description
+msgid "Keyboard shortcuts"
+msgstr "Toetsenbordsnelkoppelingen"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling microphone mute"
+msgstr "Stel de snelkoppeling in voor het dempen van de microfoon"
+
+#. settings-schema.json->section_icons->description
+msgid "Icons"
+msgstr "Pictogrammen"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use symbolic icons"
+msgstr "Gebruik symbolische pictogrammen"
+
+#. settings-schema.json->tint_symbolic_icon->description
+msgid "Tint symbolic icons"
+msgstr "Tint symbolische pictogrammen"
+
+#. settings-schema.json->muted_color->description
+msgid "Icon color when microphone is muted"
+msgstr "Pictogramkleur wanneer de microfoon gedempt is"
+
+#. settings-schema.json->unmuted_color->description
+msgid "Icon color when microphone is unmuted"
+msgstr "Pictogramkleur wanneer de microfoon niet gedempt is"
+
+#. settings-schema.json->section_debug_messages->description
+msgid "Debug messages"
+msgstr "Debugberichten"
+
+#. settings-schema.json->verbose->description
+msgid "Make it verbose in ~/.xsession-errors"
+msgstr "Maak het uitgebreid in ~/.xsession-errors"

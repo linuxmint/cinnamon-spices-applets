@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan Gökkaya <gokhanlnx@gmail.com>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-15 21:34+0200\n"
+"PO-Revision-Date: 2019-12-22 00:09+0300\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
+msgid "Num Lock"
+msgstr "Num Lock"
+
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+msgid "Lock Keys"
+msgstr "Tuşları Kilitle"
+
+msgid "Scr lock on"
+msgstr "Scr kilidi açık"
+
+msgid "Scr lock off"
+msgstr "Scr kilidi kapalı"
+
+msgid "Num lock on"
+msgstr "Sayı kilidi açık"
+
+msgid "Num lock off"
+msgstr "Sayı kilidi kapalı"
+
+msgid "Caps lock on"
+msgstr "Başlık kilidi açık"
+
+msgid "Caps lock off"
+msgstr "Başlık kilidi kapalı"
+
+msgid "Show notifications"
+msgstr "Bildirim göster"
+
+msgid "Show caps lock indicator"
+msgstr "Büyük harf kilidi göstergesini göster"
+
+msgid "Show num lock indicator"
+msgstr "Num Lock göstergesini göster"
+
+msgid "Show scr lock indicator"
+msgstr "Scr Lock göstergesini göster"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Caps lock/num lock/scr lock'un açık olup olmadığını gösterir ve bunlar "
+"değiştiğinde bir bildirim görüntüler."
+
+msgid "Lock keys indicator with notifications"
+msgstr "Bildirimlerle kilit tuşları göstergesi"

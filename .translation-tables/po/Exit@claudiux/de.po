@@ -1,0 +1,149 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"PO-Revision-Date: 2024-02-14 22:09+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 5.4/applet.js:96
+msgid "Restart Cinnamon"
+msgstr "Starte Cinnamon neu"
+
+#: 5.4/applet.js:108
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+msgid "Switch User"
+msgstr "Benutzer wechseln"
+
+#: 5.4/applet.js:166
+msgid "Log Out"
+msgstr "Abmelden"
+
+#: 5.4/applet.js:178
+msgid "Suspend"
+msgstr "Bereitschaft"
+
+#: 5.4/applet.js:187
+msgid "Hibernate"
+msgstr "Ruhezustand"
+
+#: 5.4/applet.js:199
+msgid "Restart"
+msgstr "Neustart"
+
+#: 5.4/applet.js:208
+msgid "Power Off"
+msgstr "Ausschalten"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
+"hibernate, reboot or shut down the computer"
+msgstr ""
+"Cinnamon neu starten, Bildschirm sperren, Benutzer wechseln, Abmelden, "
+"Bereitschaft, Ruhezustand, den Computer neu starten oder herunterfahren"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Beenden"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+msgid "Cinnamon restart"
+msgstr "Cinnamon neustarten"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "OSD beim Neustart von Cinnamon anzeigen"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD: Bildschirmanzeige (On Screen Display)"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+msgid "Menu options"
+msgstr "Menüpunkte"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Die Option \"Cinnamon neu starten\" anzeigen"
+
+#. 5.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Die Option \"Bereitschaft\" anzeigen"
+
+#. 5.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Die Option \"Ruhezustand\" anzeigen"
+
+#. 5.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Die Option \"Neustart\" anzeigen"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Die Option \"Ausschalten\" anzeigen"
+
+#. 5.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Alle nachstehenden Menüoptionen werden möglicherweise vom System verwaltet.\n"
+"Wenn dies der Fall ist, können Sie sie nicht sehen."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Die Option \"Bildschirm sperren\" anzeigen"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Vom System verwaltet"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Die Option \"Benutzer wechseln\" anzeigen"
+
+#. 5.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Die Option \"Abmelden\" anzeigen"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Abmeldemodus"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Mit Bestätigung"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Ohne Bestätigung"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Erzwingen"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"Mit der Option \"Erzwingen\" können Sie sich ohne Einschränkungen abmelden. "
+"Nützlich, wenn mehrere Sitzungen geöffnet sind."

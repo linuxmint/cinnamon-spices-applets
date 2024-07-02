@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-13 23:47+0100\n"
+"PO-Revision-Date: 2024-04-21 18:18+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:159
+msgid "Session"
+msgstr "Sessie"
+
+#: applet.js:226
+msgid "Lock Screen"
+msgstr "Scherm vergrendelen"
+
+#: applet.js:230
+msgid "Switch User"
+msgstr "Gebruiker wisselen"
+
+#: applet.js:235
+msgid "Guest Session"
+msgstr "Gastsessie"
+
+#: applet.js:240
+msgid "Log Off"
+msgstr "Afmelden"
+
+#: applet.js:246
+msgid "Suspend"
+msgstr "Sluimerstand"
+
+#: applet.js:251
+msgid "Sleep"
+msgstr "Slaapstand"
+
+#: applet.js:256
+msgid "Hibernate"
+msgstr "Slaapstand naar schijf"
+
+#: applet.js:262
+msgid "Restart"
+msgstr "Herstarten"
+
+#: applet.js:266
+msgid "Shut Down"
+msgstr "Afsluiten"
+
+#. sessionManager@scollins->settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Paneelpictogram"
+
+#. sessionManager@scollins->settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Pictogramgrootte"
+
+#. sessionManager@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. sessionManager@scollins->settings-
+#. schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Symbolische pictogrammen in menu"
+
+#. sessionManager@scollins->settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Paneeltekst"
+
+#. sessionManager@scollins->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#. sessionManager@scollins->metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Biedt eenvoudige toegang tot afsluiten, herstarten, enz."
+
+#. sessionManager@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. sessionManager@scollins->metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Sessiebeheerder is een applet die eenvoudige toegang biedt tot "
+"sessiebesturingen zoals afsluiten, herstarten, afmelden, van gebruiker "
+"wisselen, enz. Het is getest in Arch, Fedora en Linux Mint, en ondersteunt "
+"een breed scala aan softwareconfiguraties. Als uw specifieke configuratie "
+"niet wordt ondersteund, dien dan alstublieft een functieverzoek in op "
+"GitHub, en ik zal het zo snel mogelijk toevoegen."
+
+#. sessionManager@scollins->metadata.json->name
+msgid "Session Manager"
+msgstr "Sessiebeheerder"

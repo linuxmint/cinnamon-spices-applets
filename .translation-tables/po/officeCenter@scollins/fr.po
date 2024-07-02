@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-02 12:45+0100\n"
+"PO-Revision-Date: 2023-05-10 19:05+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:165
+msgid "Clear"
+msgstr "Effacer"
+
+#: applet.js:221
+msgid "Office"
+msgstr "Office"
+
+#: applet.js:301
+msgid "LAUNCHERS"
+msgstr "LANCEURS"
+
+#: applet.js:317
+msgid "DOCUMENTS"
+msgstr "DOCUMENTS"
+
+#: applet.js:328
+msgid "Open folder"
+msgstr "Ouvrir le dossier"
+
+#: applet.js:354
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RÉCENTS"
+
+#. officeCenter@scollins->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Icône affichée sur le panneau"
+
+#. officeCenter@scollins->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Accepte le nom d'une icône ou le chemin complet vers celle-ci (l'icône peut "
+"être symbolique)"
+
+#. officeCenter@scollins->settings-schema.json->documents->description
+msgid "Documents"
+msgstr "Documents"
+
+#. officeCenter@scollins->settings-schema.json->docMax->description
+msgid "Limit number of documents shown to"
+msgstr "Limiter le nombre de documents affichés à"
+
+#. officeCenter@scollins->settings-schema.json->keyOpen->description
+msgid "Menu shorcut key"
+msgstr "Raccourci-clavier pour afficher le menu"
+
+#. officeCenter@scollins->settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Taille de l'icône"
+
+#. officeCenter@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. officeCenter@scollins->settings-schema.json->recurseDocuments->description
+msgid "Include subfolders"
+msgstr "Inclure les sous-dossiers"
+
+#. officeCenter@scollins->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Nombre à afficher"
+
+#. officeCenter@scollins->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+#. officeCenter@scollins->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Texte affiché sur le panneau"
+
+#. officeCenter@scollins->settings-schema.json->altDir->description
+msgid "Use alternate directory"
+msgstr "Utiliser un autre répertoire"
+
+#. officeCenter@scollins->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Montrer les Documents Récents"
+
+#. officeCenter@scollins->settings-schema.json->showDocuments->description
+msgid "Show contents of documents folder"
+msgstr "Afficher le contenu de votre dossier de documents"
+
+#. officeCenter@scollins->settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Documents récents"
+
+#. officeCenter@scollins->metadata.json->description
+msgid "Provides an easy and fast resource for all your office needs"
+msgstr ""
+"Fournit une ressource simple et rapide pour tous vos besoins en bureautique"
+
+#. officeCenter@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. officeCenter@scollins->metadata.json->comments
+msgid ""
+"Office Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy aceess to all of your office programs and documents. Feel free "
+"to contribute by submitting pull requests, bug reports and feature requests "
+"to my github repo."
+msgstr ""
+"Office Center est une applet Cinnamon multiplateforme riche en "
+"fonctionnalités qui permet d'accéder facilement à tous vos programmes et "
+"documents bureautiques. N'hésitez pas à contribuer en soumettant des "
+"demandes d'extraction (pull requests), des rapports de bogues (issues) et "
+"des demandes de fonctionnalités (feature requests) sur mon dépôt github."
+
+#. officeCenter@scollins->metadata.json->name
+msgid "Office Center"
+msgstr "Centre Office (Office Center)"

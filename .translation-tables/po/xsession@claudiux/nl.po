@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-04 19:37+0100\n"
+"PO-Revision-Date: 2024-04-22 10:46+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr "Applet"
+
+#: applet.js:44
+msgid "Desklet"
+msgstr "Desklet"
+
+#: applet.js:45
+msgid "Extension"
+msgstr "Extensie"
+
+#: applet.js:48
+msgid "Applets"
+msgstr "Applets"
+
+#: applet.js:49
+msgid "Desklets"
+msgstr "Desklets"
+
+#: applet.js:50
+msgid "Extensions"
+msgstr "Extensies"
+
+#: applet.js:93
+msgid "Middle-click: \n"
+msgstr "Middelklik: \n"
+
+#: applet.js:93 applet.js:165
+msgid "Show .xsession-errors"
+msgstr "Toon .xsession-errors"
+
+#: applet.js:176
+msgid "Restart Cinnamon"
+msgstr "Herstart Cinnamon"
+
+#: applet.js:187
+msgid "--- Reload Spices ---"
+msgstr "--- Herlaad Spices ---"
+
+#: applet.js:193
+msgid "Reload Applet:"
+msgstr "Herlaad Applet:"
+
+#: applet.js:207
+msgid "Reload Desklet:"
+msgstr "Herlaad Desklet:"
+
+#: applet.js:221
+msgid "Reload Extension:"
+msgstr "Herlaad Extensie:"
+
+#: applet.js:235
+msgid "--- View Code ---"
+msgstr "--- Bekijk Code ---"
+
+#: applet.js:241
+msgid "View Applet Code for:"
+msgstr "Bekijk Applet-code voor:"
+
+#: applet.js:255
+msgid "View Desklet Code for:"
+msgstr "Bekijk Desklet-code voor:"
+
+#: applet.js:269
+msgid "View Extension Code for:"
+msgstr "Bekijk Extensie-code voor:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors file "
+"and restart Cinnamon."
+msgstr ""
+"Hiermee kun je Spices (applets, desklets, extensies) herstarten of de "
+"broncode openen, in realtime de inhoud van je .xsession-errors bestand "
+"bekijken en Cinnamon herstarten."

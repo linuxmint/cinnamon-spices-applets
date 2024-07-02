@@ -1,0 +1,56 @@
+# German translation originally for gnome-shell-extension-weather, now weather@mockturtl
+# Copyright (C) 2011 to 2019, Evilandi666 and Kghbln
+# This file is distributed under the same license as weather@mockturtl.
+# Evilandi666 <Evilandi.AUR@googlemail.com>, 2011.
+# Kghbln <kgh@kgh.info>, 2015, 2017, 2019.
+# michi <michi.schweitzer@gmail.com>, 2020.
+# Kim <kipuka@eclipso.eu>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 2.6.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-03 08:04+0100\n"
+"PO-Revision-Date: 2024-06-03 20:11+0200\n"
+"Last-Translator: bigjr slade <bigjrslade@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 3.8/weather-applet.js:11287
+msgid "Ash"
+msgstr ""
+
+#: 3.8/weather-applet.js:11289
+msgid "Squall"
+msgstr ""
+
+#: 3.8/weather-applet.js:11366
+msgid "Light shower sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:12850
+msgid "Light shower rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12854
+msgid "Heavy shower rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12862
+msgid "Mix snow/rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12864
+msgid "Snow shower"
+msgstr ""
+
+#: 3.8/weather-applet.js:16357
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Pirate Weather"
+msgstr ""

@@ -1,0 +1,105 @@
+# Icelandic translation of SpicesUpdate@claudiux package
+# Copyright (C) 2021 Free Software Foundation
+# This file is distributed under the same license as the Cinnamon package.
+#
+# Sveinn í Felli <sv1@fellsnet.is>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-23 19:23+0200\n"
+"PO-Revision-Date: 2024-04-15 12:03+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 4.6/SU_messageTray.js:1282 6.0/SU_messageTray.js:1284
+#: 5.6/SU_messageTray.js:1282 4.2/SU_messageTray.js:1282
+#: 4.8/SU_messageTray.js:1282
+msgid "Open"
+msgstr ""
+
+#: 4.6/SU_messageTray.js:1289 6.0/SU_messageTray.js:1291
+#: 5.6/SU_messageTray.js:1289 4.2/SU_messageTray.js:1289
+#: 4.8/SU_messageTray.js:1289
+msgid "Remove"
+msgstr ""
+
+#: 4.6/SU_messageTray.js:1913 6.0/SU_messageTray.js:1915
+#: 5.6/SU_messageTray.js:1913 4.2/SU_messageTray.js:1913
+#: 4.8/SU_messageTray.js:1913
+msgid "System Information"
+msgstr ""
+
+#. 6.0->settings-schema.json->Actions->title
+#: 6.0/applet.js:1896 6.0/constants.js:145
+msgid "Actions"
+msgstr ""
+
+#: 6.0/constants.js:150
+msgid "One action needs update:"
+msgstr ""
+
+#: 6.0/constants.js:155
+msgid "Some actions need update:"
+msgstr ""
+
+#: 6.0/constants.js:160
+msgid "New action available:"
+msgstr ""
+
+#: 6.0/constants.js:165
+msgid "New actions available:"
+msgstr ""
+
+#: 6.0/constants.js:173
+msgid "If you do not want a nemo action to be checked, uncheck its first box."
+msgstr ""
+
+#: 6.0/constants.js:181
+msgid ""
+"If you want to get the latest version of a nemo action now, check both boxes."
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Warns you when installed Spices (actions, applets, desklets, extensions, "
+"themes) require an update or new Spices are available."
+msgstr ""
+
+#. 6.0->settings-schema.json->check_actions->description
+msgid "Check regularly whether your nemo actions are up to date"
+msgstr ""
+
+#. 6.0->settings-schema.json->check_actions->tooltip
+msgid "If nemo actions updates do not concern you, uncheck this box."
+msgstr ""
+
+#. 6.0->settings-schema.json->check_new_actions->description
+msgid "Check regularly whether new nemo actions are available"
+msgstr ""
+
+#. 6.0->settings-schema.json->check_new_actions->tooltip
+msgid "If new nemo actions do not concern you, uncheck this box."
+msgstr ""
+
+#. 6.0->settings-schema.json->unprotected_actions->description
+msgid "Update these nemo actions:"
+msgstr ""
+
+#. 6.0->settings-schema.json->unprotected_actions->columns->title
+msgid "Your nemo actions"
+msgstr ""
+
+#. 6.0->settings-schema.json->btn_cs_actions->description
+msgid "Open Cinnamon Settings to manage all the nemo actions"
+msgstr ""
+
+#. 6.0->settings-schema.json->processing_color->description
+msgid "The icon color while SpicesUpdate is processing"
+msgstr ""

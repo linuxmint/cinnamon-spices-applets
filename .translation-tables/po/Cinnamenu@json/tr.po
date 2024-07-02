@@ -1,0 +1,1046 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu 3.2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Language-Team: tr\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Initializing"
+msgstr "Başlatılıyor"
+
+msgid "Find files..."
+msgstr "Dosyaları bul..."
+
+msgid "Please wait..."
+msgstr "Lütfen bekleyin..."
+
+msgid "Applications"
+msgstr "Uygulamalar"
+
+msgid "Documents"
+msgstr "Belgeler"
+
+msgid "Videos"
+msgstr "Videolar"
+
+msgid "Images"
+msgstr "Resimler"
+
+msgid "Music"
+msgstr "Müzik"
+
+msgid "No recent Items"
+msgstr "Son dosya yok"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "Kopyalamak için tıkla"
+
+msgid "Applications and files"
+msgstr "Uygulamalar ve dosyalar"
+
+msgid "Other search results"
+msgstr "Diğer arama sonuçları"
+
+msgid "Browser bookmarks"
+msgstr "Tarayıcı yer imleri"
+
+msgid "Browser history"
+msgstr "Tarayıcı geçmişi"
+
+msgid "Emoji"
+msgstr "İmoji"
+
+msgid "Clear List"
+msgstr "Listeyi Temizle"
+
+msgid "Trash"
+msgstr "Çöp"
+
+msgid "Computer"
+msgstr "Bilgisayar"
+
+msgid "Error while opening file:"
+msgstr "Dosya açılırken hata:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Tüm uygulamalar"
+
+msgid "Favorites"
+msgstr "Favoriler"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Yerler"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Son dosyalar"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Favori uygulamalar"
+
+msgid "light skin tone"
+msgstr "açık ten tonu"
+
+msgid "medium-light skin tone"
+msgstr "orta-açık ten tonu"
+
+msgid "medium skin tone"
+msgstr "orta ten tonu"
+
+msgid "medium-dark skin tone"
+msgstr "orta-koyu ten tonu"
+
+msgid "dark skin tone"
+msgstr "koyu ten tonu"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "Kategori sırasını sıfırla"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Kategori sırasını sıfırla"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "Gizli dosyaları göster"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Gizli dosyaları göster"
+
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU ile çalıştır"
+
+msgid "Add to panel"
+msgstr "Panele ekle"
+
+msgid "Add to desktop"
+msgstr "Masaüstüne ekle"
+
+msgid "Remove from favorites"
+msgstr "Favorilerden kaldır"
+
+msgid "Add to favorites"
+msgstr "Favorilere ekle"
+
+msgid "Uninstall"
+msgstr "Kaldır"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "Bu dosya artık mevcut değil"
+
+msgid "Open with"
+msgstr "Birlikte aç"
+
+msgid "Other application..."
+msgstr "Diğer uygulamalar..."
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "Favori uygulamalar kategorisini göster"
+
+msgid "Open containing folder"
+msgstr "İçeren dizini aç"
+
+msgid "Move to trash"
+msgstr "Çöpe taşı"
+
+msgid "Error while moving file to trash:"
+msgstr "Dosya çöpe taşınırken hata:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "Çık"
+
+msgid "Shutdown the computer"
+msgstr "Bilgisayarı kapat"
+
+msgid "Logout"
+msgstr "Çıkış Yap"
+
+msgid "Leave the session"
+msgstr "Oturumu açık tut"
+
+msgid "Lock screen"
+msgstr "Ekranı kilitle"
+
+msgid "Lock the screen"
+msgstr "Ekranı kilitle"
+
+msgid "Type to search..."
+msgstr "Aramak için yaz..."
+
+msgid "No description available"
+msgstr "Açıklama mevcut değil"
+
+msgid "Recent files"
+msgstr "Son dosyalar"
+
+msgid "Bookmarks"
+msgstr "Yer İmleri"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox ve Midori yer imleri için gir1.2-gda-5.0 paketi gerek."
+
+msgid "No recent files"
+msgstr "Son kullanılan dosya yok"
+
+msgid "Account details"
+msgstr "Hesap ayrıntıları"
+
+msgid "Grid View"
+msgstr "Izgara Görünümü"
+
+msgid "List View"
+msgstr "Liste Görünümü"
+
+msgid "Switch to grid view"
+msgstr "Izgara görünümüne geç"
+
+msgid "Switch to list view"
+msgstr "Liste görünümüne geç"
+
+msgid "Home"
+msgstr "Ev Dizini"
+
+msgid "Browse network"
+msgstr "Ağa göz at"
+
+msgid "Open"
+msgstr "Aç"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Ara"
+
+msgid "Start in"
+msgstr "Şurada ara"
+
+msgid "Select a folder"
+msgstr "Bir dizin seç"
+
+msgid "Follow symlinks"
+msgstr "Sembolik bağlantıları takip et"
+
+msgid "Search hidden"
+msgstr "Gizlileri ara"
+
+msgid "Use regular expressions"
+msgstr "Düzenli ifadeler kullan"
+
+msgid "Stop"
+msgstr "Durdur"
+
+msgid "File"
+msgstr "Dosya"
+
+msgid "Path"
+msgstr "Yol"
+
+msgid "Searching..."
+msgstr "Aranıyor..."
+
+msgid "Search Stopped"
+msgstr "Arama Durduruldu"
+
+msgid "Searching: "
+msgstr "Aranıyor: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Hata: Yetersiz dizin okuma izni "
+
+msgid "Search Completed"
+msgstr "Arama Tamamlandı"
+
+msgid "Skipping"
+msgstr "Atlanıyor"
+
+msgid " - directory already searched"
+msgstr " - dizini zaten arandı"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Bu menü ögesi herhangi bir paketle ilişkili değildir. Yine de menüden "
+"kaldırmak ister misiniz? "
+
+msgid "The following packages will be removed:"
+msgstr "Aşağıdaki paketler kaldırılacak:"
+
+msgid "Packages to be removed"
+msgstr "Kaldırılacak paketler"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "%s paketi diğer paketler tarafından gerekli olduğu için kaldırılamaz. "
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "%s paketi, aşağıdaki paketlerin bir bağımlılığıdır: "
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenü"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Izgara veya liste düzeni seçenekleri, dosya tarayıcısı ve imoji araması "
+"içeren esnek bir menü."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Düzen"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Davranış"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Görünüm"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "İçerik"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Panel"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Menü"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Uygulama görüntüleme modu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Liste"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Izgara"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Uygulamaları liste veya ızgara olarak görüntüleme"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "Kenar çubuğunda sık kullanılanları göster"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "Ev dizini kategorisini menüde gösterir"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Kenar çubuğu konumu"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Üstte"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Altta"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Solda"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "Sağda"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Kenar çubuğunun nerede gösterileceğini seçin"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Kenar çubuğunda sık kullanılanları göster"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Yok"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Apps and files"
+msgstr "Uygulamalar ve dosyalar"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+"Kenar çubuğunda sık kullanılan uygulamaları ve dosya simgelerini gösterir"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Uygulama açıklaması yerleşimi"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Araç ipuçları"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Başlıkların altında"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Uygulama açıklamalarının nerede gösterileceğini seçin"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "Kategori simgelerini göster"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "Uygulama simgelerini göster"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Yer imlerini ve yerleri göster"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Yer imlerini ve yerleri göster"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Son kullanılan ögeleri göster"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Menüde son kullanılan ögeler kategorisini gösterir"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Favori uygulamalar kategorisini göster"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Favori uygulamalar kategorisini menüde gösterir"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Ev dizinini göster"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Ev dizini kategorisini menüde gösterir"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "Favori uygulamalar kategorisini göster"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "Ev dizini kategorisini menüde gösterir"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Menü düzenleyiciyi aç"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Menüyü açıp kapatmak için klavye kısayolu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Fareyle üzerine gelindiğinde menüyü aç"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Fareyi üstüne getirdiğimde menüyü aç"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "milisaniye"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Menü bekleme gecikmesi"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Menü animasyonları kullan"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Kategorileri tıklayarak açın"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Kategorileri tıklayarak açın"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Menünün üstünde açılacağı kategori:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Menü daima bu seçilen kategori ile açılır"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Son kullanılan kategori"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Uygulama listesi üstünde fare ile otomatik kaydır"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Gizli dosyaları dizin görünümünde göster"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "İmoji araması"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Arama sonuçlarında imojileri gösterir"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Web arama seçenekleri"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Arama sonuçlarında bir internet arama seçeneği gösterir"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "Web arama seçenekleri"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Ev dizininde ara"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Arama yaparken, ev dizininde de dosya araması yapar"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Web geçmişinde ara"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Arama yaparken, tarayıcının geçmişinde de ara (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Not: Firefox geçmişi şu anda desteklenmemektedir."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Web sık kullanılanlarında ara"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Arama yaparken tarayıcının web yer imlerinde de arama yapar (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Not: Firefox yer imlerinde arama yapmak için (Ubuntu ve Linux Mint dahil "
+"Debian tabanlı dağıtımlarda) gir1.2-gda-5.0 paketini ya da (Arch tabanlı "
+"dağıtımlarda) libgda paketini yüklemeniz ve bilgisayarınızı yeniden "
+"başlatmanız gerekir."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Wikipedia araması"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Bazı Wikipedia sonuçlarını gösterir"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Wikipedia dili"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Not: Bazı arama seçeneklerini arama teriminizin önüne ekleyerek; bunlar için "
+"arama pasif olsa bile arama yapabilirsiniz.\n"
+"Örneğin: Bir emojiyi aramak için, kalp emojilerini bulmak amacıyla 'e heart' "
+"yazın. Benzer şekilde, dosya araması için 'f', tarayıcı geçmişinde arama "
+"için 'h' ve tarayıcı yer imlerinde arama için 'b' öneklerini "
+"kullanabilirsiniz.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Özel bir simge kullan"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Özel bir simge kullan"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Panel simgesi"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Özel simge boyutu kullan"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Panel simgesi için özel boyut kullan"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Panel simge boyutu (piksel)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Panel simgesi için özel boyut seçin"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Panel metni"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Panel simgesinin yanında gösterilecek metin"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Kategori simge boyutu (piksel)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Uygulama listesi simge boyutu (piksel)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Uygulama listesi ızgara simge boyutu (piksel)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Kenar çubuğu simge boyutu (piksel)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Kenar çubuğu kutusu stilini kullan"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Kenar çubuğunda bir kutu stili gösterir"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Döşeme stilini kullan"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Uygulama düğmelerinde bir kutu stili gösterir (Not: bazı temalarda "
+"çalışmayabilir)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"Bilgi/ipucu: Menü boyutunu köşeden tutarak değiştirebilirsiniz.\n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"Bilgi/ipucu: Menü boyutunu köşeden tutarak değiştirebilirsiniz.\n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Arama Sağlayıcıları"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Hiçbir arama sağlayıcı eklentisi bulunamadı"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Son dosya ayarları"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Tarayıcı yer imlerini göster"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Tarayıcının sık kullanılanlarını menüde göster.\n"
+"Not: Firefox sık kullanılanlarını okumak için gir1.2-gda-5.0 paketini kurun."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Açık pencerelerde aramayı etkinleştir"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Arama sağlayıcılarını etkinleştir"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr ""
+"Arama sağlayıcısı sonuçlarının menü aramalarına dahil edilip edilmeyeceğini "
+"seçin"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Arama Sağlayıcıları Eklentileri"
+
+#. 3.2
+msgid "columns"
+msgstr "sütun"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Uygulama kılavuzundaki sütun sayısı"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Uygulama simgelerini göster"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Kategori simgelerini göster"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Uygulama açıklamalarını listede göster"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Araç ipuçlarını göster"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Araç ipucu gecikmesi"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Özel bir menü yüksekliği kullanın"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Özel menü yüksekliği (piksel)"
+
+#~ msgid "Home folder"
+#~ msgstr "Ev dizini"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Yerleşim ve İçerik"

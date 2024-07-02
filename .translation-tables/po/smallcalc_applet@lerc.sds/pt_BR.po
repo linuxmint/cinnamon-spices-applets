@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Marcelo Aof, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-22 19:52+0200\n"
+"PO-Revision-Date: 2021-10-03 14:01-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:37 applet.js:98
+msgid "Show calculator"
+msgstr "Abrir a calculadora"
+
+#: applet.js:101
+msgid "Hide calculator"
+msgstr "Minimizar a calculadora"
+
+#. metadata.json->name
+msgid "SmallCalc"
+msgstr "Calculadora de bolso"
+
+#. metadata.json->description
+msgid "A nice compact popup calculator"
+msgstr "Uma calculadora de bolso bonita e compacta"
+
+#. settings-schema.json->definitionsheader->description
+msgid "Initial definitions"
+msgstr "Configuração das definições da calculadora"
+
+#. settings-schema.json->definitions->description
+msgid "Define constants and functions to use in calculator"
+msgstr "Defina constantes numéricas e funções para usar na calculadora"
+
+#. settings-schema.json->precisionheader->description
+msgid "Precision"
+msgstr ""
+
+#. settings-schema.json->precision->description
+msgid "Number of significant digits:"
+msgstr ""
