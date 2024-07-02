@@ -2781,6 +2781,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     // will be called by an instance of #Player
     passDesktopEntry(entry) {
+        if (entry == null) return;
         // do we know already this player?
         for (let i = 0, l = this._knownPlayers.length; i < l; ++i) {
             if (this._knownPlayers[i] === entry)
