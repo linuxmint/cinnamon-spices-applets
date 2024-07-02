@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-04-07 18:55+0300\n"
+"PO-Revision-Date: 2024-07-02 14:18+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: suomi <>\n"
 "Language: fi\n"
@@ -1555,17 +1555,15 @@ msgstr "Todella hyvä"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Tuhkaa"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr "Tuulenpuuskia"
+msgstr "Puuskia"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Kevyt lumisade"
+msgstr "Kevyitä räntäkuuroja"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1589,22 +1587,18 @@ msgid "Heavy drizzle"
 msgstr "Voimakasta tihkusadetta"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Kevyt lumisade"
+msgstr "Kevyitä sadekuuroja"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Voimakasta lumisadetta"
+msgstr "Voimakasta sadetta"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Lumisadetta"
+msgstr "Sadetta ja lunta"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
 msgstr "Lumikuuroja"
 
@@ -1815,13 +1809,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Varmista, että antamasi\n"
-"API-avain on peräisin yritykseltä Climacell"
+"API-avain on peräisin yritykseltä Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1830,38 +1823,32 @@ msgid ""
 msgstr "Sijaintipalvelu ei löytänyt sinun sijaintia, katso Looking Glass loki"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr "Lumisadetta"
+msgstr "Lumisia rakeita"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Kevyt lumisade"
+msgstr "Kevyitä sadekuuroja"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Voimakasta lumisadetta"
+msgstr "Voimakkaita sadekuuroja"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Ukkosta ja heikkoa vesisadetta"
+msgstr "Ukkosta ja vähäistä rakeita"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Ukkosta ja sadekuuroja"
+msgstr "Ukkosta ja rakeita"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
 msgstr "Tuntuu kuin"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17544
 msgid ""
@@ -1925,7 +1912,7 @@ msgstr "Alue: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} säävaroitukset"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1933,9 +1920,8 @@ msgid "Error Saving Debug Information"
 msgstr "Virhe debug-tietojen tallentamisessa"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Säätietoja ei voitu saada"
+msgstr "Tiedostoa {filePath} ei voitu kirjoittaa"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1947,41 +1933,39 @@ msgstr "Tallennettu {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Ei komentosarjaa"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Sinun pitää antaa komentosarja ensin."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Ei säätietoja"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Ei säätietoja komentosarjan suorittamiseen"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Komentosarja suoritettu onnistuneesti"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Sinun komentosarja suoritettiin onnistuneesti."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Virhe suoritettaessa komentosarjaa"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "Komentosarja palautti virheen, katso lisätietoja lokeista"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Sää"
+msgstr "Sääsovelman varoitukset"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2336,7 +2320,7 @@ msgstr "Näytä aika 24 tunnin muodossa"
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr "Näytä vain ennusteen täydet tunnit"
+msgstr "Näytä ennusteen täydet tunnit"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
@@ -2394,7 +2378,7 @@ msgstr "Käytä symbolisia kuvakkeita"
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
 msgid "Use custom icons in the popup menu"
-msgstr "Mukautetut kuvakkeet ponnahdusvalikossa"
+msgstr "Mukautetut kuvakkeet valikossa"
 
 #. 3.8->settings-schema.json->locations-page->title
 #. 3.8->settings-schema.json->location->description
@@ -2403,7 +2387,7 @@ msgstr "Sijainti"
 
 #. 3.8->settings-schema.json->units-page->title
 msgid "Other options"
-msgstr "Muut vaihtoehdot"
+msgstr "Vaihtoehdot"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
@@ -2415,7 +2399,7 @@ msgstr "Sijainti"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Tekninen ja automaatio"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2469,7 +2453,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2484,9 +2468,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (vain US)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (avain tarvitaan)"
+msgstr "OpenWeatherMap OneCall (avain tarvitaan)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2574,7 +2557,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr "Ota hetkellinen sade-ennuste käyttöön"
+msgstr "Sääennuste näytetään tästä hetkestä eteenpäin, ei vrk alusta"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -2582,19 +2565,20 @@ msgid ""
 "as location to help its accuracy. See Feature map on website on support for "
 "your provider"
 msgstr ""
-"Varmista, että käytät tarkkoja koordinaatteja/osoitettasi sijainnin "
-"tarkkuuden parantamiseksi. Katso ominaisuuskartta verkosta palveluntarjoajan "
-"tuesta"
+"Varmista, että käytät tarkkoja koordinaatteja/osoitettasi tarkkuuden "
+"parantamiseksi. Katso ominaisuuskartta verkosta palveluntarjoajan tuesta"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Säävaroitukset näytetään"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Varoitukset-painike näytetään valikossa, jos sijaintiisi on aktiivisia "
+"varoituksia."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2681,7 +2665,7 @@ msgstr "Kuten Kaakko tai Pohjoinen suuntanuolien sijaan."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Palveluntarjoaja toimittaa säätiedot kielellesi, jos saatavilla"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2689,6 +2673,8 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Palveluntarjoaja kääntää säätiedot kielellesi, jos tukevat aluettasi. Muuten "
+"käytetään sovelman omaa kielipakettia."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2801,7 +2787,7 @@ msgstr "Polku lokin tallentamiseen"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Ohjelman merkkijonon ohitus"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2810,10 +2796,14 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Jos sinulla on ongelmia sovelman toimivuudessa ja tiedät, että User Agent "
+"merkkijono on ongelmana, voit ohittaa sen. Muuta sitä, jos tiedät mitä teet. "
+"Tämä on merkkijono, joka lähetetään palvelimelle kun sovelma kysyy "
+"säätietoja."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Suorita komento, kun säätiedot muuttuu"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2836,4 +2826,4 @@ msgstr ""
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Testaa komentoa"
