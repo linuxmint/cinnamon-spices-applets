@@ -2045,6 +2045,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                         let nextTypeDir;
                         while ((nextTypeDir = dirIter.next()) !== CMenu.TreeItemType.INVALID) {
                             const entry = dirIter.get_entry();
+                            if (entry == null) continue;
                             const appInfo = entry.get_app_info();
                             if (appInfo && !appInfo.get_nodisplay()) {
                                 const id = entry.get_desktop_file_id();
