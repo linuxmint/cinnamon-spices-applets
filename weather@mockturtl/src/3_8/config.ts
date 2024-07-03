@@ -329,14 +329,15 @@ export class Config {
 			return null;
 		}
 
-		const tz = loc.timeZone ?? await this.tzService.GetTimezone(loc.lat, loc.lon, cancellable);
+		// Disable Getting timezone for now, it has serious latency issues sometimes.
+		// const tz = loc.timeZone ?? await this.tzService.GetTimezone(loc.lat, loc.lon, cancellable);
 
-		if (tz == null)
-			return null;
+		// if (tz == null)
+		// 	return null;
 
 		const result = {
 			...loc,
-			timeZone: tz,
+			timeZone: loc.timeZone ?? this.UserTimezone,
 		}
 
 		this.InjectLocationToConfig(result);

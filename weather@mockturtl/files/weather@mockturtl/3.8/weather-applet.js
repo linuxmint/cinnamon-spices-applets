@@ -17434,10 +17434,7 @@ class Config {
         if (loc == null) {
             return null;
         }
-        const tz = (_a = loc.timeZone) !== null && _a !== void 0 ? _a : await this.tzService.GetTimezone(loc.lat, loc.lon, cancellable);
-        if (tz == null)
-            return null;
-        const result = Object.assign(Object.assign({}, loc), { timeZone: tz });
+        const result = Object.assign(Object.assign({}, loc), { timeZone: (_a = loc.timeZone) !== null && _a !== void 0 ? _a : this.UserTimezone });
         this.InjectLocationToConfig(result);
         return result;
     }
