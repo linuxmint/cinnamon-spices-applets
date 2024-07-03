@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Temperature Cinnamon applet\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-15 23:44+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2021-10-25 14:02+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: \n"
@@ -18,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: applet.js:80 applet.js:159
+#: applet.js:81 applet.js:160
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: applet.js:148
+#: applet.js:149
 msgid "Error"
 msgstr "Erro"
 
-#: applet.js:149
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -34,11 +35,11 @@ msgstr ""
 "Execute o comando sensors-detect como root. Se não ajudar, clique aqui para "
 "reportar indicando o resultado do comando sensors!"
 
-#: applet.js:151
+#: applet.js:152
 msgid "Warning"
 msgstr "Aviso"
 
-#: applet.js:152
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -46,31 +47,31 @@ msgstr ""
 "Instale o lm_sensors. Se não ajudar, clique aqui para reportar indicando o "
 "resultado do comando sensors!"
 
-#: applet.js:224
+#: applet.js:229
 msgid "Thresholds Info"
 msgstr "Valores Limite"
 
-#: applet.js:225
+#: applet.js:230
 msgid "High Temp"
 msgstr "Temp. Alta"
 
-#: applet.js:226
+#: applet.js:231
 msgid "Crit. Temp"
 msgstr "Temp. Crítica"
 
-#: applet.js:237
+#: applet.js:242
 msgid "Critical"
 msgstr "Crítica"
 
-#: applet.js:240
+#: applet.js:245
 msgid "High"
 msgstr "Alta"
 
-#: applet.js:253
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Temperatura Atual"
 
-#: applet.js:255
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Temperatura Crítica"
 
@@ -155,3 +156,14 @@ msgid ""
 msgstr ""
 "Selecione esta opção para não mostrar alertas em painéis horizontais.\n"
 "(Alertas de texto não são mostrados em painéis verticais.)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr ""
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""

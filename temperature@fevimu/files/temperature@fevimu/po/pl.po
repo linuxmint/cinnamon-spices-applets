@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-07 03:30-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2018-10-07 03:30-0500\n"
 "Last-Translator: Marcin Golesz <marcingolesz@gmail.com>\n"
 "Language-Team: \n"
@@ -17,47 +18,61 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:55
+#: applet.js:81 applet.js:160
+msgid "Temperature"
+msgstr "Temperatura"
+
+#: applet.js:149
 msgid "Error"
 msgstr "Błąd"
 
-#: applet.js:56
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
-"Uruchom sensors-detect jako root. Jeśli to nie pomaga, kliknij tutaj, aby zgłosić "
-"nieprawidłowe działanie komendy sensors!"
+"Uruchom sensors-detect jako root. Jeśli to nie pomaga, kliknij tutaj, aby "
+"zgłosić nieprawidłowe działanie komendy sensors!"
 
-#: applet.js:58
+#: applet.js:152
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
-#: applet.js:59
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
-"Proszę zainstalować lm_sensors. Jeśli to nie pomaga, kliknij tutaj, aby zgłosić "
-"nieprawidłowe działanie komendy sensors!"
+"Proszę zainstalować lm_sensors. Jeśli to nie pomaga, kliknij tutaj, aby "
+"zgłosić nieprawidłowe działanie komendy sensors!"
 
-#: applet.js:62 applet.js:89
-msgid "Temperature"
-msgstr "Temperatura"
+#: applet.js:229
+msgid "Thresholds Info"
+msgstr ""
 
-#: applet.js:144
+#: applet.js:230
+#, fuzzy
+msgid "High Temp"
+msgstr "Wysoka"
+
+#: applet.js:231
+#, fuzzy
+msgid "Crit. Temp"
+msgstr "Krytyczna temperatura"
+
+#: applet.js:242
 msgid "Critical"
 msgstr "Krytyczna"
 
-#: applet.js:146
+#: applet.js:245
 msgid "High"
 msgstr "Wysoka"
 
-#: applet.js:156
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Aktualna temperatura"
 
-#: applet.js:158
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Krytyczna temperatura"
 
@@ -77,6 +92,38 @@ msgstr "Pokaż temperaturę w stopniach Fahrenheita"
 msgid "Use integer values for temperature"
 msgstr "Pokaż temperaturę w wartościach całkowitych"
 
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr ""
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr ""
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr ""
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr ""
+
+#. settings-schema.json->show-label-prefix->description
+msgid "Show label prefix"
+msgstr ""
+
+#. settings-schema.json->show-label-prefix->tooltip
+msgid "Whether or not to add a label before the temperature value."
+msgstr ""
+
+#. settings-schema.json->label-prefix->description
+msgid "Label prefix"
+msgstr ""
+
+#. settings-schema.json->label-prefix->tooltip
+msgid "The label to be shown before the temperature value."
+msgstr ""
+
 #. settings-schema.json->interval->units
 msgid "ms"
 msgstr "ms"
@@ -84,3 +131,35 @@ msgstr "ms"
 #. settings-schema.json->interval->description
 msgid "Update interval"
 msgstr "Interwał odświeżania"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr ""
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
+msgstr ""
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr ""
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr ""
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
