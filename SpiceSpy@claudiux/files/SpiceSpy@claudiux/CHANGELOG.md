@@ -1,3 +1,8 @@
+### v2.2.0~20240703
+
+* Improved translation counting.
+
+
 ### v2.1.0~20240628
 
 * Adds new translations count in label.

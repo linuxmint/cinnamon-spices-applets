@@ -354,8 +354,15 @@ class SpiceSpy extends Applet.TextIconApplet {
             if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice].author_user) > -1) {
               let _nb_translations = 0;
               if (type!="themes") { // No translations for themes.
+                var list_translations = [];
                 let _nb_translations_keys = Object.keys(spices[spice]["translations"]);
-                _nb_translations = Math.round(_nb_translations_keys.length / 2);
+                for (let tKey of _nb_translations_keys) {
+                  let t = tKey.slice(tKey.indexOf("_")+1);
+                  if (list_translations.indexOf(t) < 0)
+                    list_translations.push(t);
+                }
+                _nb_translations = list_translations.length;
+                //~ global.log(""+type+"|"+_uuid+": "+list_translations);
               }
               _spices_to_spy[type][_uuid] = {
                 "type": type,
