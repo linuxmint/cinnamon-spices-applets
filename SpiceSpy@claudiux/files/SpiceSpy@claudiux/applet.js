@@ -468,6 +468,8 @@ class SpiceSpy extends Applet.TextIconApplet {
               }
               diff_stars = this.spices_to_spy[type][uuid]["score"] - this.old_spices_to_spy[type][uuid]["score"];
               diff_translations = this.spices_to_spy[type][uuid]["translations"] - this.old_spices_to_spy[type][uuid]["translations"];
+              if (isNaN(diff_translations))
+                diff_translations = this.spices_to_spy[type][uuid]["translations"];
             }
             else {
               diff_comments = this.spices_to_spy[type][uuid]["comments"];

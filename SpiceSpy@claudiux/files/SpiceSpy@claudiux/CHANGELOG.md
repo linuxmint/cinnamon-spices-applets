@@ -1,3 +1,7 @@
+### v2.2.1~20240703
+
+* Improved translation counting. Minor bugfix.
+
 ### v2.2.0~20240703
 
 * Improved translation counting.
