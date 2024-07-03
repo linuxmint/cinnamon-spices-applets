@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-10 16:10+0100\n"
-"PO-Revision-Date: 2024-06-30 06:04+0200\n"
+"PO-Revision-Date: 2024-07-03 04:49+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -590,7 +590,7 @@ msgstr "Mostra la categoria d'emojis al menú"
 #. 3.2
 #. 4.0
 msgid "Open the menu editor"
-msgstr "Obra l'editor del menú"
+msgstr "Obre l'editor del menú"
 
 #. 5.8
 #. 3.2
@@ -896,7 +896,7 @@ msgstr "Utilitza una barra lateral amb estil de caixa"
 #. 5.8
 #. 4.0
 msgid "Use tile style"
-msgstr "Utilitzar estil cascada"
+msgstr "Utilitza l'estil mosaic"
 
 #. 5.8
 #. 4.0
@@ -904,8 +904,8 @@ msgid ""
 "Use a tile style for the application buttons (Note: may not work on some "
 "themes)"
 msgstr ""
-"Utilitza un estil de cascada pels botons de les aplicacions (Nota: pot ser "
-"que no funcioni en determinats temes)"
+"Mostra els botons de les aplicacions en format mosaic (Nota: pot ser que no "
+"funcioni en determinats temes)"
 
 #. 5.8
 #. 4.0
