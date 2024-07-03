@@ -1,5 +1,5 @@
 import type { WeatherApplet } from "./main";
-import type { LocationData} from "./types";
+import type { LocationData, LocationServiceResult} from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/services/logger";
 import type { LogLevel} from "./consts";
@@ -29,6 +29,7 @@ import { OpenMeteo } from "./providers/open-meteo/provider";
 import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
 import { soupLib } from "./lib/soupLib";
+import { GeoTimezone } from "./location_services/tz_lookup";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -210,6 +211,7 @@ export class Config {
 	private readonly autoLocProvider: GeoIP;
 	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
+	private readonly tzService = new GeoTimezone();
 
 	/** Stores and retrieves manual locations */
 	public readonly LocStore: LocationStore;
@@ -226,7 +228,7 @@ export class Config {
 		this.onLogLevelUpdated();
 		this.currentLocale = ConstructJsLocale(get_language_names());
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new GeoIPFedora(this); // IP location lookup
+		this.autoLocProvider = new GeoIPFedora(); // IP location lookup
 		this.geoClue = new GeoClue();
 		this.geoLocationService = new GeoLocation();
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
@@ -320,21 +322,42 @@ export class Config {
 		return (!key || key == "");
 	};
 
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+		this.currentLocation = null;
+		const loc = await this.EnsureLocation(cancellable);
+		if (loc == null) {
+			return null;
+		}
+
+		// Disable Getting timezone for now, it has serious latency issues sometimes.
+		// const tz = loc.timeZone ?? await this.tzService.GetTimezone(loc.lat, loc.lon, cancellable);
+
+		// if (tz == null)
+		// 	return null;
+
+		const result = {
+			...loc,
+			timeZone: loc.timeZone ?? this.UserTimezone,
+		}
+
+		this.InjectLocationToConfig(result);
+		return result;
+	}
+
 	/**
 	 * @returns LocationData null if failed to obtain
 	 * coordinates. Automatic mode looks up data through ip-api,
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
-	public async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		this.currentLocation = null;
 
 		// Automatic location
 		if (!this._manualLocation) {
-			const geoClue = await this.geoClue.GetLocation(cancellable, this);
+			const geoClue = await this.geoClue.GetLocation(cancellable);
 			if (geoClue != null) {
 				Logger.Debug("Auto location obtained via GeoClue2.");
-				this.InjectLocationToConfig(geoClue);
 				return geoClue;
 			}
 
@@ -344,7 +367,6 @@ export class Config {
 				return null;
 
 			Logger.Debug("Auto location obtained via IP lookup.");
-			this.InjectLocationToConfig(location);
 			return location;
 		}
 
@@ -360,7 +382,7 @@ export class Config {
 		if (location != null) {
 			Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
 			this.LocStore.SwitchToLocation(location);
-			this.InjectLocationToConfig(location, true);
+			this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 			return location;
 		}
 		// location not in storage
@@ -368,19 +390,17 @@ export class Config {
 			// Get Location
 			loc = loc.replace(" ", "");
 			const latLong = loc.split(",");
-			const location: LocationData = {
+			const location: LocationServiceResult = {
 				lat: Number.parseFloat(latLong[0]),
 				lon: Number.parseFloat(latLong[1]),
-				timeZone: this.UserTimezone,
 				entryText: loc,
 			}
 			Logger.Debug("Manual Location is a coordinate, using it directly.");
-			this.InjectLocationToConfig(location);
 			return location;
 		}
 
 		Logger.Debug("Location is text, geo locating...")
-		const locationData = await this.geoLocationService.GetLocation(loc, cancellable, this);
+		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (locationData?.entryText) {
@@ -391,12 +411,10 @@ export class Config {
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
 			Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
-			this.InjectLocationToConfig(location);
 			this.LocStore.SwitchToLocation(location);
 			return location;
 		}
 		else {
-			this.InjectLocationToConfig(locationData);
 			return locationData;
 		}
 	}

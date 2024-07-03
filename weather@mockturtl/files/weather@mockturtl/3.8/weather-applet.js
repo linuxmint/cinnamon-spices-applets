@@ -10488,7 +10488,7 @@ class GeoLocation {
         this.params = "format=json&addressdetails=1&limit=1";
         this.cache = {};
     }
-    async GetLocation(searchText, cancellable, config) {
+    async GetLocation(searchText, cancellable) {
         var _a;
         try {
             searchText = searchText.trim();
@@ -10517,7 +10517,6 @@ class GeoLocation {
                 lon: Number.parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
                 country: locationData[0].address.country,
-                timeZone: config.UserTimezone,
                 entryText: this.BuildEntryText(locationData[0]),
             };
             this.cache[searchText] = result;
@@ -14277,7 +14276,7 @@ class VisualCrossing extends BaseProvider {
         return this.ParseWeather(json, translate);
     }
     ParseWeather(weather, translate) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
         const result = {
             date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
@@ -14295,16 +14294,16 @@ class VisualCrossing extends BaseProvider {
             dewPoint: CelsiusToKelvin((_c = weather.currentConditions.dew) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.dew),
             wind: {
                 degree: (_d = weather.currentConditions.winddir) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
-                speed: (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
+                speed: KPHtoMPS((_f = (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed) !== null && _f !== void 0 ? _f : null),
             },
-            temperature: CelsiusToKelvin((_f = weather.currentConditions.temp) !== null && _f !== void 0 ? _f : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
+            temperature: CelsiusToKelvin((_g = weather.currentConditions.temp) !== null && _g !== void 0 ? _g : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
             sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
             sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
             condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
             extra_field: {
                 name: _("Feels Like"),
                 type: "temperature",
-                value: CelsiusToKelvin((_g = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _g !== void 0 ? _g : weather.currentConditions.feelslike)
+                value: CelsiusToKelvin((_h = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _h !== void 0 ? _h : weather.currentConditions.feelslike)
             },
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
@@ -16604,12 +16603,17 @@ class GeoClue {
         try {
             GeoClueLib = imports.gi.Geoclue;
             GeocodeGlib = imports.gi.GeocodeGlib;
+            if (GeoClueLib.Simple.new_with_thresholds == null || GeocodeGlib.Reverse.new_for_location == null) {
+                throw new Error("GeoClue2 required functions are not available");
+            }
         }
         catch (_a) {
             logger_Logger.Info("GeoClue2 not available, disabling it's use.");
+            GeoClueLib = undefined;
+            GeocodeGlib = undefined;
         }
     }
-    async GetLocation(cancellable, config) {
+    async GetLocation(cancellable) {
         if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
@@ -16645,7 +16649,6 @@ class GeoClue {
                     lon: loc.longitude,
                     city: undefined,
                     country: undefined,
-                    timeZone: config.UserTimezone,
                     entryText: loc.latitude + "," + loc.longitude,
                     altitude: loc.altitude,
                     accuracy: loc.accuracy,
@@ -16708,19 +16711,18 @@ class GeoClue {
 
 
 class GeoIPFedora {
-    constructor(config) {
+    constructor() {
         this.query = "https://geoip.fedoraproject.org/city";
-        this.config = config;
     }
-    async GetLocation(cancellable, config) {
+    async GetLocation(cancellable) {
         const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
         if (!json) {
             logger_Logger.Info("geoip.fedoraproject didn't return any data");
             return null;
         }
-        return this.ParseInformation(json, config);
+        return this.ParseInformation(json);
     }
-    ParseInformation(json, config) {
+    ParseInformation(json) {
         var _a, _b, _c;
         if (json.latitude === null || json.longitude === null) {
             ErrorHandler.Instance.PostError({
@@ -16737,7 +16739,7 @@ class GeoIPFedora {
                 lon: json.longitude,
                 city: (_a = json.city) !== null && _a !== void 0 ? _a : undefined,
                 country: (_b = json.country_name) !== null && _b !== void 0 ? _b : undefined,
-                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : config.UserTimezone,
+                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : undefined,
                 entryText: json.latitude + "," + json.longitude,
             };
             logger_Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
@@ -17190,7 +17192,43 @@ class OpenWeatherMapOpen extends BaseProvider {
     ;
 }
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/tz_lookup.ts
+
+class GeoTimezone {
+    constructor() {
+        this.maxCacheAge = 1000 * 60 * 60 * 24;
+        this.cache = {};
+    }
+    async GetTimezone(lat, lon, cancellable) {
+        const key = `${lat},${lon}`;
+        const cached = this.cache[key];
+        if (cached && this.IsCacheValid(cached)) {
+            return cached.tz;
+        }
+        const result = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.geotimezone.com/public/timezone",
+            cancellable,
+            params: {
+                latitude: lat,
+                longitude: lon,
+            }
+        });
+        if (!result) {
+            return null;
+        }
+        this.cache[key] = {
+            tz: result.iana_timezone,
+            retrieved: new Date(),
+        };
+        return result.iana_timezone;
+    }
+    IsCacheValid(cache) {
+        return Date.now() - cache.retrieved.getTime() < this.maxCacheAge;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -17293,6 +17331,7 @@ class Config {
         this.LocationChanged = new Event();
         this.textColorStyle = null;
         this.ForegroundColor = null;
+        this.tzService = new GeoTimezone();
         this.onLogLevelUpdated = () => {
             logger_Logger.ChangeLevel(this._logLevel);
         };
@@ -17320,7 +17359,7 @@ class Config {
         this.onLogLevelUpdated();
         this.currentLocale = ConstructJsLocale(get_language_names());
         this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.autoLocProvider = new GeoIPFedora(this);
+        this.autoLocProvider = new GeoIPFedora();
         this.geoClue = new GeoClue();
         this.geoLocationService = new GeoLocation();
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
@@ -17390,20 +17429,29 @@ class Config {
         return (!key || key == "");
     }
     ;
+    async GetLocation(cancellable) {
+        var _a;
+        this.currentLocation = null;
+        const loc = await this.EnsureLocation(cancellable);
+        if (loc == null) {
+            return null;
+        }
+        const result = Object.assign(Object.assign({}, loc), { timeZone: (_a = loc.timeZone) !== null && _a !== void 0 ? _a : this.UserTimezone });
+        this.InjectLocationToConfig(result);
+        return result;
+    }
     async EnsureLocation(cancellable) {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            const geoClue = await this.geoClue.GetLocation(cancellable, this);
+            const geoClue = await this.geoClue.GetLocation(cancellable);
             if (geoClue != null) {
                 logger_Logger.Debug("Auto location obtained via GeoClue2.");
-                this.InjectLocationToConfig(geoClue);
                 return geoClue;
             }
             const location = await this.autoLocProvider.GetLocation(cancellable, this);
             if (!location)
                 return null;
             logger_Logger.Debug("Auto location obtained via IP lookup.");
-            this.InjectLocationToConfig(location);
             return location;
         }
         let loc = this._location;
@@ -17414,7 +17462,7 @@ class Config {
         if (location != null) {
             logger_Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
             this.LocStore.SwitchToLocation(location);
-            this.InjectLocationToConfig(location, true);
+            this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
             return location;
         }
         else if (IsCoordinate(loc)) {
@@ -17423,15 +17471,13 @@ class Config {
             const location = {
                 lat: Number.parseFloat(latLong[0]),
                 lon: Number.parseFloat(latLong[1]),
-                timeZone: this.UserTimezone,
                 entryText: loc,
             };
             logger_Logger.Debug("Manual Location is a coordinate, using it directly.");
-            this.InjectLocationToConfig(location);
             return location;
         }
         logger_Logger.Debug("Location is text, geo locating...");
-        const locationData = await this.geoLocationService.GetLocation(loc, cancellable, this);
+        const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
         if (locationData == null)
             return null;
         if (locationData === null || locationData === void 0 ? void 0 : locationData.entryText) {
@@ -17440,12 +17486,10 @@ class Config {
         location = this.LocStore.FindLocation(locationData.entryText);
         if (location != null) {
             logger_Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
-            this.InjectLocationToConfig(location);
             this.LocStore.SwitchToLocation(location);
             return location;
         }
         else {
-            this.InjectLocationToConfig(locationData);
             return locationData;
         }
     }
@@ -19632,7 +19676,7 @@ class WeatherApplet extends TextIconApplet {
         try {
             this.encounteredError = false;
             if (!location) {
-                location = await this.config.EnsureLocation(cancellable);
+                location = await this.config.GetLocation(cancellable);
                 if (!location) {
                     return RefreshState.NoLocation;
                 }
