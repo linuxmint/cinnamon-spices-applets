@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-15 23:44+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2022-06-03 20:15+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,15 +19,15 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:80 applet.js:159
+#: applet.js:81 applet.js:160
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: applet.js:148
+#: applet.js:149
 msgid "Error"
 msgstr "Errore"
 
-#: applet.js:149
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -34,11 +35,11 @@ msgstr ""
 "Esegui sensors-detect come root. Se ciò non aiuta, clicca qui per segnalare "
 "con l'output dei tuoi sensori!"
 
-#: applet.js:151
+#: applet.js:152
 msgid "Warning"
 msgstr "Attenzione"
 
-#: applet.js:152
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -46,31 +47,31 @@ msgstr ""
 "Installa lm_sensors. Se ciò non aiuta, clicca qui per segnalare l'output dei "
 "tuoi sensori!"
 
-#: applet.js:224
+#: applet.js:229
 msgid "Thresholds Info"
 msgstr "Info Soglie"
 
-#: applet.js:225
+#: applet.js:230
 msgid "High Temp"
 msgstr "Temp Elevata"
 
-#: applet.js:226
+#: applet.js:231
 msgid "Crit. Temp"
 msgstr "Temp Crit."
 
-#: applet.js:237
+#: applet.js:242
 msgid "Critical"
 msgstr "Critica"
 
-#: applet.js:240
+#: applet.js:245
 msgid "High"
 msgstr "Elevata"
 
-#: applet.js:253
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Temperatura Attuale"
 
-#: applet.js:255
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Temperatura Critica"
 
@@ -165,8 +166,11 @@ msgstr "Evita variazioni di dimensione"
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
-"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
-"Spuntato: Le dimensioni di questo applet rimangono costanti, una volta definite tutte le tue preferenze.\n"
-"Non spuntato: Le dimensioni di questo applet sono ottimizzate, ma possono variare."
+"Spuntato: Le dimensioni di questo applet rimangono costanti, una volta "
+"definite tutte le tue preferenze.\n"
+"Non spuntato: Le dimensioni di questo applet sono ottimizzate, ma possono "
+"variare."

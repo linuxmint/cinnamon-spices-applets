@@ -6,27 +6,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-15 23:44+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2022-11-22 15:56+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
-#: applet.js:80 applet.js:159
+#: applet.js:81 applet.js:160
 msgid "Temperature"
 msgstr "Lämpötila"
 
-#: applet.js:148
+#: applet.js:149
 msgid "Error"
 msgstr "Virhe"
 
-#: applet.js:149
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -34,11 +35,11 @@ msgstr ""
 "Suorita pääkäyttäjänä sensors-detect ja jos se ei auta, paina tästä "
 "saadaksesi antureidesi tuloksia!"
 
-#: applet.js:151
+#: applet.js:152
 msgid "Warning"
 msgstr "Varoitus"
 
-#: applet.js:152
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -46,31 +47,31 @@ msgstr ""
 "Asenna lm_sensors ja jos se ei auta, paina tästä saadaksesi antureidesi "
 "tuloksia!"
 
-#: applet.js:224
+#: applet.js:229
 msgid "Thresholds Info"
 msgstr "Kynnysarvot"
 
-#: applet.js:225
+#: applet.js:230
 msgid "High Temp"
 msgstr "Korkea lämpö"
 
-#: applet.js:226
+#: applet.js:231
 msgid "Crit. Temp"
 msgstr "Kriittinen lämpö"
 
-#: applet.js:237
+#: applet.js:242
 msgid "Critical"
 msgstr "Kriittinen"
 
-#: applet.js:240
+#: applet.js:245
 msgid "High"
 msgstr "Korkea"
 
-#: applet.js:253
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Lämpötila nyt"
 
-#: applet.js:255
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Kriittinen lämpötila"
 
@@ -155,3 +156,14 @@ msgid ""
 msgstr ""
 "Valitse vaihtoehto, jos et halua näyttää tekstihälytyksiä paneeleissa.\n"
 "(tekstihälytystä ei koskaan näytetä pystypaneelissa)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr ""
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""

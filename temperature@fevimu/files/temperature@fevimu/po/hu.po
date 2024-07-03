@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 02:53+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-03 19:49+0200\n"
 "PO-Revision-Date: 2024-02-03 08:33+0100\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
@@ -18,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:80 applet.js:159
+#: applet.js:81 applet.js:160
 msgid "Temperature"
 msgstr "Hőmérséklet"
 
-#: applet.js:148
+#: applet.js:149
 msgid "Error"
 msgstr "Hiba"
 
-#: applet.js:149
+#: applet.js:150
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -34,11 +35,11 @@ msgstr ""
 "Futtassa a sensors-detect-et root jogosultsággal. Ha ez nem segít kattintson "
 "ide, hogy jelentse a szenzorértékeit!"
 
-#: applet.js:151
+#: applet.js:152
 msgid "Warning"
 msgstr "Figyelmeztetés"
 
-#: applet.js:152
+#: applet.js:153
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -46,31 +47,31 @@ msgstr ""
 "Kérem telepítse a következőt: lm_sensors. Ha ez nem segít kattintson ide, "
 "hogy jelentse a szenzorértékeit!"
 
-#: applet.js:224
+#: applet.js:229
 msgid "Thresholds Info"
 msgstr "Küszöbértékek Info"
 
-#: applet.js:225
+#: applet.js:230
 msgid "High Temp"
 msgstr "Magas Hő"
 
-#: applet.js:226
+#: applet.js:231
 msgid "Crit. Temp"
 msgstr "Krit. Hő"
 
-#: applet.js:237
+#: applet.js:242
 msgid "Critical"
 msgstr "Kritikus"
 
-#: applet.js:240
+#: applet.js:245
 msgid "High"
 msgstr "Magas"
 
-#: applet.js:253
+#: applet.js:258
 msgid "Current Temperature"
 msgstr "Jelenlegi Hőmérséklet"
 
-#: applet.js:255
+#: applet.js:260
 msgid "Critical Temperature"
 msgstr "Kritikus Hőmérséklet"
 
