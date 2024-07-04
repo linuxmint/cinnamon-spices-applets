@@ -11,6 +11,11 @@ const Gio = imports.gi.Gio;
 
 const Lang = imports.lang;
 
+const {
+  reloadExtension,
+  Type
+} = imports.ui.extension; //Extension
+
 const { HttpLib } = require("./lib/httpLib");
 const { to_string } = require("./lib/to-string");
 
@@ -26,6 +31,14 @@ const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
 const HTML_COUNT_ID = "count";
 const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
+
+const DIR_MAP = {
+  "applets": HOME_DIR + "/.local/share/cinnamon/applets",
+  "themes": HOME_DIR + "/.themes",
+  "desklets": HOME_DIR + "/.local/share/cinnamon/desklets",
+  "extensions": HOME_DIR + "/.local/share/cinnamon/extensions",
+  "actions": HOME_DIR + "/.local/share/nemo/actions"
+}
 
 const Gettext = imports.gettext;
 //~ Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
@@ -205,14 +218,90 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.loopId = Mainloop.timeout_add(60000, this.loop.bind(this));
   } // End of constructor
 
+  _add_user_Spices() {
+    //~ global.log("_add_user_Spices");
+    var userSpices = [];
+    let gsettings;
+    let children, info, file_type;
+    var name;
+
+    for (let type of TYPES) {
+      let index = (type == "applets") ? 3 : 0;
+      let dir = Gio.file_new_for_path(DIR_MAP[type]);
+      if (!dir.query_exists(null)) continue;
+      switch (type) {
+        case "actions":
+          //~ global.log("type: "+type);
+          let disabled_actions = [];
+          gsettings = Gio.Settings.new("org.nemo.plugins");
+          disabled_actions = gsettings.get_strv("disabled-actions");
+          //~ global.log("disabled_actions: "+disabled_actions);
+          let enabled_actions = [];
+          children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+
+          while ((info = children.next_file(null)) != null) {
+            file_type = info.get_file_type();
+            if (file_type !== Gio.FileType.DIRECTORY) {
+              name = info.get_name();
+              if (userSpices.indexOf(name) < 0 && disabled_actions.indexOf(name) < 0) {
+                userSpices.push(name.slice(0, - ".nemo_action".length));
+              }
+            }
+          }
+          break;
+        case "applets":
+        case "desklets":
+        case "extensions":
+          //~ global.log("type: "+type);
+          let enabled = [];
+          gsettings = Gio.Settings.new("org.cinnamon");
+          enabled = gsettings.get_strv("enabled-%s".format(type));
+          for (let e of enabled) {
+            let _name = e.split(":")[index];
+            if (_name && !_name.endsWith("@cinnamon.org")) {
+              userSpices.push(_name);
+            }
+          }
+          break;
+        case "themes":
+          //~ global.log("type: "+type);
+          gsettings = Gio.Settings.new("org.cinnamon.theme");
+          let theme_name = gsettings.get_string("name");
+          children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+          while ((info = children.next_file(null)) != null) {
+            file_type = info.get_file_type();
+            if (file_type === Gio.FileType.DIRECTORY) {
+              name = info.get_name();
+              if (name === theme_name) {
+                userSpices.push(name);
+              }
+            }
+          }
+      }
+    }
+    //~ global.log("userSpices: "+userSpices);
+    if (userSpices.length > 0) {
+      var _uuid_list = this.uuid_list;
+      for (let s of userSpices) {
+        //~ global.log("Spice: "+s);
+        if (this.uuids.indexOf(s) < 0) {
+          //~ global.log("Added!");
+          _uuid_list.push({ 'uuid': s });
+        }
+      }
+      this.settings.setValue("uuid-list", _uuid_list);
+      this.loop();
+    }
+  } // End of _add_user_Spices
+
   nothing_to_spy() {
     return (this.authors.length === 0 && this.uuids.length === 0);
-  }
+  } // End of nothing_to_spy
 
   is_empty() {
     const keys_spices_to_spy = Object.keys(this.spices_to_spy);
     return (keys_spices_to_spy.length < 5);
-  }
+  } // End of is_empty
 
   updateUI(score=0, comments=0, translations=0) {
     let _label;
@@ -252,7 +341,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       this._applet_label.set_style("color: %s;".format(this.color_on_change));
     }
 
-  }
+  } // End of updateUI
 
   loop() {
     //~ global.log("Begin looping");
@@ -526,14 +615,14 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ global.log("mark_all_as_read");
     this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
     this.make_menu();
-  }
+  } // End of mark_all_as_read
 
   mark_as_read(spice) {
     if (!spice) return;
     this.old_spices_to_spy[spice.type][spice.uuid] = this.spices_to_spy[spice.type][spice.uuid];
     this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
     this.make_menu();
-  }
+  } // End of mark_as_read
 
   on_applet_clicked() {
     this.settings.setValue("spices_to_spy", this.spices_to_spy);
@@ -548,6 +637,10 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.loopId = null;
     }
   } // End of on_applet_removed_from_panel
+
+  _reload_this_applet() {
+    reloadExtension(UUID, Type.APPLET)
+  } // End of _reload_this_applet
 }
 
 function main(metadata, orientation, panel_height, instance_id) {

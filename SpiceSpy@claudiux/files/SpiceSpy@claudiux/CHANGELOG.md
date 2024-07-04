@@ -1,3 +1,10 @@
+### v3.0.0~20240704
+
+* Settings:
+    * Divided into two pages: General (list of Authors and list of UUIDs) and Options.
+    * Added the ability to add the UUIDs of all Spices used in the session.
+    * Added a button to restart the applet.
+
 ### v2.2.1~20240703
 
 * Improved translation counting. Minor bugfix.
