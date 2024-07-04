@@ -7,11 +7,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.5.0\n"
+"Project-Id-Version: weather@mockturtl 3.6.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-05-25 09:32+0200\n"
+"PO-Revision-Date: 2024-07-04 09:47+0200\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1572,17 +1572,15 @@ msgstr "Très bonne"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Cendre"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
 msgstr "Bourrasques"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Faibles averses"
+msgstr "Faibles averses de grésil"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1606,22 +1604,18 @@ msgid "Heavy drizzle"
 msgstr "Bruine abondante"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Faibles averses de neige"
+msgstr "Faibles averses de pluie"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Fortes averses de neige"
+msgstr "Fortes averses de pluie"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
 msgstr "Neige mouillée"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
 msgstr "Averses de neige"
 
@@ -1832,13 +1826,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Veuillez vous assurer que vous avez\n"
-"saisi correctement la clé API récupérée sur Climacell"
+"saisi correctement la clé API récupérée sur Pirate Weather"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1964,36 +1957,37 @@ msgstr "Enregistré dans {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Aucun script fourni"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Vous devez d'abord ajouter un script."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr "Météo aux États-Unis"
+msgstr "Aucune donnée météo"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Aucune donnée météo avec laquelle exécuter le script"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Script exécuté avec succès"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Votre script a été exécuté avec succès."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Erreur lors de l'exécution du script"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"Le script a renvoyé une erreur. Consultez les journaux pour plus "
+"d'informations."
 
 #: 3.8/AlertsWindow.py:119
 msgid "Weather Applet Alerts"
@@ -2099,8 +2093,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : "
-"« 68.1932, 17.1426 » ou une adresse.\n"
+"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : « "
+"68.1932, 17.1426 » ou une adresse.\n"
 "Attendez 3 secondes après avoir arrêté de taper, puis actualisez la météo."
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -2440,7 +2434,7 @@ msgstr "Paramètres de l'emplacement"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Technique et Automatisation"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2719,7 +2713,7 @@ msgstr "Comme « SE, N » au lieu d'icônes de direction."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Le fournisseur doit traduire les conditions si disponibles"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2727,6 +2721,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Votre fournisseur doit-il traduire les conditions dans votre langue si vos "
+"paramètres régionaux sont pris en charge par le fournisseur. Sinon, l'applet "
+"utilisera son propre système de traduction."
 
 # Toutes les aides qui apparaissent sur fond jaune lors du survol de la souris se terminent par un point dans la traduction française. Un point a donc été ajouté ici par cohérence.
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
@@ -2803,12 +2800,12 @@ msgid ""
 "automatically for validating your choice."
 msgstr ""
 "Dans la plupart des cas, votre emplacement fonctionne automatiquement, mais "
-"vous pouvez l'entrer manuellement par les coordonnées « Latitude, "
-"Longitude » (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du "
-"pays » (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} "
-"{Rue} {Ville} {Code postal} {Pays} ». L'algorithme de recherche est très "
-"flexible avec le format. Au bout de 3 secondes sans saisie, l'adresse que "
-"vous avez entrée est automatiquement remplacée pour valider votre choix."
+"vous pouvez l'entrer manuellement par les coordonnées « Latitude, Longitude "
+"» (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du pays "
+"» (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} {Rue} "
+"{Ville} {Code postal} {Pays} ». L'algorithme de recherche est très flexible "
+"avec le format. Au bout de 3 secondes sans saisie, l'adresse que vous avez "
+"entrée est automatiquement remplacée pour valider votre choix."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
@@ -2850,7 +2847,7 @@ msgstr "Chemin sélectionné pour enregistrer les journaux"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Substitution de la chaîne de l'Agent Utilisateur"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2859,10 +2856,16 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Si vous rencontrez des problèmes avec l'applet qui ne fonctionne pas "
+"correctement et que vous savez que la chaîne de l'Agent Utilisateur est à "
+"l'origine du problème, vous pouvez essayer de la substituer. Ne la changez "
+"que si vous savez ce que vous faites. Il s'agit d'une chaîne de caractères "
+"envoyée au serveur lorsque l'applet tente d'obtenir les données "
+"météorologiques."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Exécuter une commande lorsque les informations météo changent"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2882,7 +2885,25 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"L'applet exécutera la commande que vous fournissez à chaque fois que les "
+"données météorologiques seront mises à jour. La commande sera interpolée "
+"avec les mêmes valeurs avec le même format que vous pouvez obtenir dans "
+"n'importe lequel des agents utilisateurs substitués, vous obtenez en plus "
+"{full_data} qui sont les données météorologiques actuelles complètes. "
+"L'interpolation avec des crochets simples {xxx} ne sera pas échappée, avec "
+"des crochets doubles {{xxxx}}, ils sont entourés de guillemets simples (') "
+"et tous les autres guillemets simples sont échappés à l'intérieur. Vous "
+"pouvez l'utiliser pour intégrer les données météorologiques avec d'autres "
+"parties de votre système. Vous pouvez consulter la structure complète des "
+"données météorologiques via le lien dans le README.\n"
+"\n"
+"Exemple : 'notify-send \"Le temps est {c} et la température est {t}{u}\"' "
+"affichera une notification avec les conditions météorologiques et la "
+"température actuelles.\n"
+"\n"
+"Exemple : 'echo {{full_data}} > /tmp/weather_data' enregistrera les données "
+"météorologiques complètes dans un fichier dans /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Testez votre commande"
