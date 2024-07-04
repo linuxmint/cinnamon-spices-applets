@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-28 01:44+0200\n"
+"POT-Creation-Date: 2024-07-04 17:36+0200\n"
 "PO-Revision-Date: 2024-06-28 08:55-0400\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:427
+#: applet.js:527
 msgid "Mark all as read"
 msgstr "Segna tutto come già letto"
 
-#: applet.js:431
+#: applet.js:531
 msgid "Refresh"
 msgstr "Aggiorna"
 
-#: applet.js:435
+#: applet.js:535
 msgid "Spices"
 msgstr "Spice"
 
-#: applet.js:505
+#: applet.js:607
 msgid "Configure..."
 msgstr "Configura..."
 
@@ -43,9 +43,22 @@ msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
 msgstr "Ti avvisa quando c'è una modifica alle tue Spice preferite sul sito."
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
 msgid "Options"
 msgstr "Opzioni"
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr "Elenco degli autori delle Spice che ti interessano"
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
+msgstr "Elenco di Spice specifiche che ti interessano"
 
 #. settings-schema.json->update-interval->description
 msgid "Update interval"
@@ -140,14 +153,23 @@ msgstr "Non mostrare nulla"
 msgid "Show only non-zero values in panel"
 msgstr "Mostra solo i valori non nulli nel pannello"
 
-#. settings-schema.json->section2->description
-msgid "List of authors of the Spices you are interested in"
-msgstr "Elenco degli autori delle Spice che ti interessano"
-
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
 msgstr "Nome utente GitHub"
 
-#. settings-schema.json->section3->description
-msgid "List of specific Spices you are interested in"
-msgstr "Elenco di Spice specifiche che ti interessano"
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr ""
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
+msgstr ""

@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: SpiceSpy@claudiux 2.1.0\n"
+"Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-28 01:44+0200\n"
+"POT-Creation-Date: 2024-07-04 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:427
+#: applet.js:527
 msgid "Mark all as read"
 msgstr ""
 
-#: applet.js:431
+#: applet.js:531
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:435
+#: applet.js:535
 msgid "Spices"
 msgstr ""
 
-#: applet.js:505
+#: applet.js:607
 msgid "Configure..."
 msgstr ""
 
@@ -42,8 +42,21 @@ msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
 msgstr ""
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
 msgid "Options"
+msgstr ""
+
+#. settings-schema.json->section2->title
+msgid "List of authors of the Spices you are interested in"
+msgstr ""
+
+#. settings-schema.json->section3->title
+msgid "List of specific Spices you are interested in"
 msgstr ""
 
 #. settings-schema.json->update-interval->description
@@ -139,14 +152,23 @@ msgstr ""
 msgid "Show only non-zero values in panel"
 msgstr ""
 
-#. settings-schema.json->section2->description
-msgid "List of authors of the Spices you are interested in"
-msgstr ""
-
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
 msgstr ""
 
-#. settings-schema.json->section3->description
-msgid "List of specific Spices you are interested in"
+#. settings-schema.json->button-my-spices->description
+msgid "Add all the Spices I use"
+msgstr ""
+
+#. settings-schema.json->label-reload->description
+msgid ""
+"There's no need to include Spices maintained by members of the Authors list "
+"in the UUID list.\n"
+"Once your lists are correct, you can reload this applet to speed up the "
+"process.\n"
+"Just don't do it too often."
+msgstr ""
+
+#. settings-schema.json->button-reload->description
+msgid "Reload this applet"
 msgstr ""
