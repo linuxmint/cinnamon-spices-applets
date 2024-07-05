@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-06-30 18:23+0200\n"
+"PO-Revision-Date: 2024-07-05 05:12+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -162,27 +162,23 @@ msgid "Loading ..."
 msgstr "S'està carregant..."
 
 #: 3.0/applet.js:1329 3.8/weather-applet.js:18238
-#, fuzzy
 msgid "Temperature"
-msgstr "Temperatura:"
+msgstr "Temperatura"
 
 #: 3.0/applet.js:1330 3.8/weather-applet.js:18243
-#, fuzzy
 msgid "Humidity"
-msgstr "Humitat:"
+msgstr "Humitat"
 
 #: 3.0/applet.js:1331 3.8/weather-applet.js:18248
-#, fuzzy
 msgid "Pressure"
-msgstr "Pressió:"
+msgstr "Pressió"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:13299 3.8/weather-applet.js:13306
 #: 3.8/weather-applet.js:13307 3.8/weather-applet.js:13313
 #: 3.8/weather-applet.js:15652 3.8/weather-applet.js:15653
 #: 3.8/weather-applet.js:16308 3.8/weather-applet.js:18081
-#, fuzzy
 msgid "Wind"
-msgstr "Vent:"
+msgstr "Vent"
 
 #: 3.0/applet.js:1639
 msgid "Make sure you entered a location or use Automatic location instead"
@@ -341,14 +337,12 @@ msgstr "Pluja"
 #: 3.8/weather-applet.js:12302 3.8/weather-applet.js:12842
 #: 3.8/weather-applet.js:13335 3.8/weather-applet.js:14483
 #: 3.8/weather-applet.js:16831
-#, fuzzy
 msgid "Light rain"
-msgstr "Pluja glaçada"
+msgstr "Pluja lleugera"
 
 #: 3.0/climacell.js:280 3.8/weather-applet.js:13398 3.8/weather-applet.js:14457
-#, fuzzy
 msgid "Heavy freezing rain"
-msgstr "Pluja glaçada"
+msgstr "Pluja gèlida intensa"
 
 #: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
 #: 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
@@ -359,28 +353,25 @@ msgstr "Pluja glaçada"
 #: 3.8/weather-applet.js:14105 3.8/weather-applet.js:14106
 #: 3.8/weather-applet.js:14112 3.8/weather-applet.js:16859
 msgid "Freezing rain"
-msgstr "Pluja glaçada"
+msgstr "Pluja gèlida"
 
 #: 3.0/climacell.js:294 3.8/weather-applet.js:13391 3.8/weather-applet.js:14459
 #: 3.8/weather-applet.js:16852
-#, fuzzy
 msgid "Light freezing rain"
-msgstr "Pluja glaçada"
+msgstr "Pluja gèlida lleugera"
 
 #: 3.0/climacell.js:301 3.8/weather-applet.js:16817
-#, fuzzy
 msgid "Light freezing drizzle"
-msgstr "Plugims gelats"
+msgstr "Plugim gèlid"
 
 #: 3.0/climacell.js:302 3.8/weather-applet.js:13377 3.8/weather-applet.js:16824
 msgid "Freezing drizzle"
-msgstr "Plugims gelats"
+msgstr "Plugim gèlid"
 
 #: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:12836
 #: 3.8/weather-applet.js:14439 3.8/weather-applet.js:16796
-#, fuzzy
 msgid "Light drizzle"
-msgstr "Plugims gelats"
+msgstr "Plugim gèlid lleuger"
 
 #: 3.0/climacell.js:315 3.8/weather-applet.js:13412
 msgid "Heavy ice pellets"
@@ -440,14 +431,12 @@ msgstr "Neu"
 #: 3.8/weather-applet.js:12358 3.8/weather-applet.js:12856
 #: 3.8/weather-applet.js:13363 3.8/weather-applet.js:14501
 #: 3.8/weather-applet.js:16866
-#, fuzzy
 msgid "Light snow"
 msgstr "Precipitacions lleugeres de neu"
 
 #: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12868
 #: 3.8/weather-applet.js:13355 3.8/weather-applet.js:13356
 #: 3.8/weather-applet.js:16009 3.8/weather-applet.js:16010
-#, fuzzy
 msgid "Flurries"
 msgstr "Ràfegues de neu"
 
@@ -461,9 +450,8 @@ msgstr "Ràfegues de neu"
 #: 3.8/weather-applet.js:15645 3.8/weather-applet.js:15646
 #: 3.8/weather-applet.js:16928 3.8/weather-applet.js:16929
 #: 3.8/weather-applet.js:16935 3.8/weather-applet.js:16942
-#, fuzzy
 msgid "Thunderstorm"
-msgstr "Tempestes"
+msgstr "Tronada"
 
 #: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:13293
 msgid "Light fog"
@@ -483,9 +471,8 @@ msgstr "Lleugerament boirós"
 #: 3.8/weather-applet.js:16058 3.8/weather-applet.js:16059
 #: 3.8/weather-applet.js:16310 3.8/weather-applet.js:16788
 #: 3.8/weather-applet.js:16789
-#, fuzzy
 msgid "Fog"
-msgstr "Boirós"
+msgstr "Emboirat"
 
 #: 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
 #: 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
@@ -522,9 +509,8 @@ msgstr "Parcialment ennuvolat"
 
 #: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:13264
 #: 3.8/weather-applet.js:13265
-#, fuzzy
 msgid "Mostly clear"
-msgstr "Majoritàriament ennuvolat"
+msgstr "Majoritàriament asolellat"
 
 #: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
 #: 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
@@ -609,16 +595,14 @@ msgid ""
 msgstr "El servei d'ubicació ha retornat un error, si us plau reviseu els logs"
 
 #: 3.0/met_norway.js:131 3.8/weather-applet.js:12021
-#, fuzzy
 msgid "Cloudiness"
 msgstr "Ennuvolat"
 
 #: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
 #: 3.8/weather-applet.js:11401 3.8/weather-applet.js:12169
 #: 3.8/weather-applet.js:12170 3.8/weather-applet.js:16760
-#, fuzzy
 msgid "Clear sky"
-msgstr "Clar"
+msgstr "Assolellat"
 
 #: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
 #: 3.8/weather-applet.js:12183 3.8/weather-applet.js:12184
@@ -751,18 +735,16 @@ msgid "Sleet"
 msgstr "Aiguaneu"
 
 #: 3.0/met_norway.js:519 3.8/weather-applet.js:12408
-#, fuzzy
 msgid "Sleet and thunder"
-msgstr "Tempestes elèctriques aïllades"
+msgstr "Aiguaneu i trons"
 
 #: 3.0/met_norway.js:526 3.8/weather-applet.js:12415
-#, fuzzy
 msgid "Sleet showers"
-msgstr "Pluges aïllades"
+msgstr "Ruixats d'aiguaneu"
 
 #: 3.0/met_norway.js:533 3.8/weather-applet.js:12422
 msgid "Sleet showers and thunder"
-msgstr "Tempestes elèctriques intenses"
+msgstr "Ruixats d'aiguaneu i trons"
 
 #: 3.0/met_norway.js:547 3.8/weather-applet.js:12436
 msgid "Snow and thunder"
@@ -774,12 +756,11 @@ msgstr "Neu i tempesta"
 #: 3.8/weather-applet.js:14824 3.8/weather-applet.js:16914
 #: 3.8/weather-applet.js:16921 3.8/weather-applet.js:16922
 msgid "Snow showers"
-msgstr "Cobert"
+msgstr "Ruixats de neu"
 
 #: 3.0/met_norway.js:561 3.8/weather-applet.js:12450
-#, fuzzy
 msgid "Snow showers and thunder"
-msgstr "Cobert"
+msgstr "Ruixats de neu i trons"
 
 #: 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
 #: 3.0/us_weather.js:179
@@ -847,9 +828,8 @@ msgstr "Ennuvolat"
 
 #: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:11062
 #: 3.8/weather-applet.js:11069
-#, fuzzy
 msgid "Light rain shower"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Cortina de pluja lleugera"
 
 #: 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
 #: 3.0/yahoo.js:445 3.8/weather-applet.js:11075 3.8/weather-applet.js:11076
@@ -866,15 +846,13 @@ msgstr "Plugim"
 
 #: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:11090
 #: 3.8/weather-applet.js:11097
-#, fuzzy
 msgid "Heavy rain shower"
-msgstr "Nevada forta"
+msgstr "Cortina de pluja intensa"
 
 #: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:11111
 #: 3.8/weather-applet.js:11118
-#, fuzzy
 msgid "Sleet shower"
-msgstr "Pluges aïllades"
+msgstr "Ruixat d'aiguaneu"
 
 #: 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
 #: 3.0/yahoo.js:453 3.8/weather-applet.js:11131 3.8/weather-applet.js:11138
@@ -887,34 +865,29 @@ msgstr "Calamarsa"
 
 #: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:11132
 #: 3.8/weather-applet.js:11139
-#, fuzzy
 msgid "Hail shower"
-msgstr "Cobert"
+msgstr "Ruixat de calamarsa"
 
 #: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:11153
 #: 3.8/weather-applet.js:11160
-#, fuzzy
 msgid "Light snow shower"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Precipitació lleugera de neu"
 
 #: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:11174
 #: 3.8/weather-applet.js:11181 3.8/weather-applet.js:12866
-#, fuzzy
 msgid "Heavy snow shower"
-msgstr "Nevada forta"
+msgstr "Ruixat de neu intens"
 
 #: 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
 #: 3.8/weather-applet.js:11194 3.8/weather-applet.js:11201
 #: 3.8/weather-applet.js:11208 3.8/weather-applet.js:11209
-#, fuzzy
 msgid "Thunder"
-msgstr "Tempestes"
+msgstr "Trons"
 
 #: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:11195
 #: 3.8/weather-applet.js:11202
-#, fuzzy
 msgid "Thunder shower"
-msgstr "Tempestes"
+msgstr "Tempesta de trons"
 
 #: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:11649
 msgid "Please make sure Location is in the correct format in the Settings"
@@ -959,19 +932,16 @@ msgid "Thunderstorm with heavy rain"
 msgstr "Tempesta amb ruixats intensos"
 
 #: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:11306
-#, fuzzy
 msgid "Light thunderstorm"
-msgstr "Tempestes"
+msgstr "Tempesta lleugera"
 
 #: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:11310
-#, fuzzy
 msgid "Heavy thunderstorm"
-msgstr "Tempestes elèctriques severes"
+msgstr "Tempesta forta"
 
 #: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:11312
-#, fuzzy
 msgid "Ragged thunderstorm"
-msgstr "Tempestes aïllades"
+msgstr "Tempesta torrencial"
 
 #: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:11314
 #: 3.8/weather-applet.js:12828
@@ -980,14 +950,13 @@ msgstr "Tempesta amb plugim lleuger"
 
 #: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:11316
 #: 3.8/weather-applet.js:12830
-#, fuzzy
 msgid "Thunderstorm with drizzle"
-msgstr "Tempestes"
+msgstr "Tempesta amb plugim intens"
 
 #: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:11318
 #: 3.8/weather-applet.js:12832
 msgid "Thunderstorm with heavy drizzle"
-msgstr "Tempesta amb plugim intens"
+msgstr "Tempesta amb plugim fort"
 
 #: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:11320
 msgid "Light intensity drizzle"
@@ -1002,7 +971,6 @@ msgid "Light intensity drizzle rain"
 msgstr "Plugim de baixa intensitat"
 
 #: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:11328
-#, fuzzy
 msgid "Drizzle rain"
 msgstr "Plugim"
 
@@ -1011,18 +979,16 @@ msgid "Heavy intensity drizzle rain"
 msgstr "Plugim d'alta intensitat"
 
 #: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:11332
-#, fuzzy
 msgid "Shower rain and drizzle"
-msgstr "Barreja de pluja i calamarsa"
+msgstr "Ruixat de pluja i calamarsa"
 
 #: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:11334
 msgid "Heavy shower rain and drizzle"
 msgstr "Barreja forta de pluja i calamarsa"
 
 #: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:11336
-#, fuzzy
 msgid "Shower drizzle"
-msgstr "Plugims gelats"
+msgstr "Ruixat de plugim gèlid"
 
 #: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:11340
 #: 3.8/weather-applet.js:12844 3.8/weather-applet.js:14760
@@ -1039,20 +1005,17 @@ msgid "Very heavy rain"
 msgstr "Pluja molt intensa"
 
 #: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:11346
-#, fuzzy
 msgid "Extreme rain"
-msgstr "Pluja glaçada"
+msgstr "Pluja extrema"
 
 #: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:11350
-#, fuzzy
 msgid "Light intensity shower rain"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Precipitació lleguera de pluja"
 
 #: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:11352
 #: 3.8/weather-applet.js:12852
-#, fuzzy
 msgid "Shower rain"
-msgstr "Ruixats"
+msgstr "Ruixat d'aigua"
 
 #: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:11354
 msgid "Heavy intensity shower rain"
@@ -1063,46 +1026,39 @@ msgid "Ragged shower rain"
 msgstr "Pluja irregular"
 
 #: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:11368
-#, fuzzy
 msgid "Shower sleet"
-msgstr "Ruixats"
+msgstr "Ruixat d'aiguaneu"
 
 #: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:11370
-#, fuzzy
 msgid "Light rain and snow"
-msgstr "Barreja de pluja i neu"
+msgstr "Pluja lleugera i neu"
 
 #: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:11372
 #: 3.8/weather-applet.js:14767 3.8/weather-applet.js:14768
 #: 3.8/weather-applet.js:14774 3.8/weather-applet.js:14809
 #: 3.8/weather-applet.js:14816
-#, fuzzy
 msgid "Rain and snow"
 msgstr "Barreja de pluja i neu"
 
 #: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:11374
-#, fuzzy
 msgid "Light shower snow"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Ruixat lleuger de neu"
 
 #: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:11376
-#, fuzzy
 msgid "Shower snow"
-msgstr "Ruixats"
+msgstr "Nevada"
 
 #: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:11378
-#, fuzzy
 msgid "Heavy shower snow"
-msgstr "Nevada forta"
+msgstr "Nevada intensa"
 
 #: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
 #: 3.8/weather-applet.js:11277 3.8/weather-applet.js:11382
 #: 3.8/weather-applet.js:12796 3.8/weather-applet.js:12876
 #: 3.8/weather-applet.js:14178 3.8/weather-applet.js:14179
 #: 3.8/weather-applet.js:16072 3.8/weather-applet.js:16073
-#, fuzzy
 msgid "Smoke"
-msgstr "Fumat"
+msgstr "Fum"
 
 #: 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
 #: 3.0/yahoo.js:457 3.8/weather-applet.js:11279 3.8/weather-applet.js:11384
@@ -1150,9 +1106,8 @@ msgid "Sky is clear"
 msgstr "El cel és net"
 
 #: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:11273
-#, fuzzy
 msgid "Clouds"
-msgstr "Ennuvolat"
+msgstr "Núvols"
 
 #: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
 #: 3.0/us_weather.js:449 3.8/weather-applet.js:11403
@@ -1165,9 +1120,8 @@ msgstr "Pocs núvols"
 
 #: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:11405
 #: 3.8/weather-applet.js:12809 3.8/weather-applet.js:12890
-#, fuzzy
 msgid "Scattered clouds"
-msgstr "Pluges aïllades"
+msgstr "Núvols aïllats"
 
 #: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:11407
 #: 3.8/weather-applet.js:12811 3.8/weather-applet.js:12892
@@ -1200,28 +1154,24 @@ msgid "Few clouds and windy"
 msgstr "Una mica ennuvolat i ventós"
 
 #: 3.0/us_weather.js:457 3.8/weather-applet.js:14050
-#, fuzzy
 msgid "Partly cloudy and windy"
-msgstr "Parcialment ennuvolat"
+msgstr "Parcialment ennuvolat i ventós"
 
 #: 3.0/us_weather.js:464 3.8/weather-applet.js:14057
-#, fuzzy
 msgid "Mostly cloudy and windy"
-msgstr "Majoritàriament ennuvolat"
+msgstr "Majoritàriament ennuvolat i ventós"
 
 #: 3.0/us_weather.js:471 3.8/weather-applet.js:14064
 msgid "Overcast and windy"
 msgstr "Ennuvolat i ventós"
 
 #: 3.0/us_weather.js:485 3.8/weather-applet.js:14078
-#, fuzzy
 msgid "Snowy rain"
-msgstr "Ràfegues de neu"
+msgstr "Pluja d'aiguaneu"
 
 #: 3.0/us_weather.js:520 3.8/weather-applet.js:14113
-#, fuzzy
 msgid "Freezing rain and snow"
-msgstr "Pluja glaçada"
+msgstr "Pluja gèlida i neu"
 
 #: 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
 #: 3.0/yahoo.js:438 3.8/weather-applet.js:9552 3.8/weather-applet.js:14157
@@ -1306,7 +1256,7 @@ msgstr "Brisa lleugera"
 
 #: 3.0/utils.js:310 3.8/weather-applet.js:9526
 msgid "Gentle breeze"
-msgstr "Brisa comfortable"
+msgstr "Brisa agradable"
 
 #: 3.0/utils.js:313 3.8/weather-applet.js:9529
 msgid "Moderate breeze"
@@ -1417,12 +1367,10 @@ msgstr ""
 "informació"
 
 #: 3.0/yahoo.js:437 3.8/weather-applet.js:15931 3.8/weather-applet.js:15932
-#, fuzzy
 msgid "Tropical Storm"
 msgstr "Tempesta tropical"
 
 #: 3.0/yahoo.js:439
-#, fuzzy
 msgid "Severe Thunderstorms"
 msgstr "Tempestes elèctriques severes"
 
@@ -1431,29 +1379,24 @@ msgid "Thunderstorms"
 msgstr "Tempestes"
 
 #: 3.0/yahoo.js:441
-#, fuzzy
 msgid "Mixed Rain and Snow"
 msgstr "Barreja de pluja i neu"
 
 #: 3.0/yahoo.js:442
-#, fuzzy
 msgid "Mixed Rain and Sleet"
-msgstr "Barreja de pluja i calamarsa"
+msgstr "Barreja de pluja i aiguaneu"
 
 #: 3.0/yahoo.js:443
-#, fuzzy
 msgid "Mixed Snow and Sleet"
-msgstr "Barreja de neu i calamarsa"
+msgstr "Barreja de neu i aiguaneu"
 
 #: 3.0/yahoo.js:444 3.8/weather-applet.js:15974 3.8/weather-applet.js:15975
-#, fuzzy
 msgid "Freezing Drizzle"
-msgstr "Plugims gelats"
+msgstr "Plugim gèlid"
 
 #: 3.0/yahoo.js:446 3.8/weather-applet.js:15988 3.8/weather-applet.js:15989
-#, fuzzy
 msgid "Freezing Rain"
-msgstr "Pluja glaçada"
+msgstr "Pluja gèlida"
 
 #: 3.0/yahoo.js:447 3.8/weather-applet.js:15995 3.8/weather-applet.js:15996
 #: 3.8/weather-applet.js:16893 3.8/weather-applet.js:16900
@@ -1462,17 +1405,14 @@ msgid "Showers"
 msgstr "Ruixats"
 
 #: 3.0/yahoo.js:449
-#, fuzzy
 msgid "Snow Flurries"
 msgstr "Ràfegues de neu"
 
 #: 3.0/yahoo.js:450
-#, fuzzy
 msgid "Light Snow Showers"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Ruixats lleugers de neu"
 
 #: 3.0/yahoo.js:451 3.8/weather-applet.js:16023 3.8/weather-applet.js:16024
-#, fuzzy
 msgid "Blowing Snow"
 msgstr "Neu aixecada pel vent"
 
@@ -1494,7 +1434,6 @@ msgstr "Ventades"
 
 #: 3.0/yahoo.js:463 3.8/weather-applet.js:16107 3.8/weather-applet.js:16108
 #: 3.8/weather-applet.js:16114 3.8/weather-applet.js:16115
-#, fuzzy
 msgid "Mostly Cloudy"
 msgstr "Majoritàriament ennuvolat"
 
@@ -1503,62 +1442,51 @@ msgstr "Majoritàriament ennuvolat"
 #: 3.8/weather-applet.js:16121 3.8/weather-applet.js:16122
 #: 3.8/weather-applet.js:16128 3.8/weather-applet.js:16129
 #: 3.8/weather-applet.js:16300
-#, fuzzy
 msgid "Partly Cloudy"
 msgstr "Parcialment ennuvolat"
 
 #: 3.0/yahoo.js:467 3.8/weather-applet.js:16156 3.8/weather-applet.js:16157
-#, fuzzy
 msgid "Mostly Sunny"
-msgstr "Majoritàriament ennuvolat"
+msgstr "Majoritàriament assolellat"
 
 #: 3.0/yahoo.js:469 3.8/weather-applet.js:16163 3.8/weather-applet.js:16164
-#, fuzzy
 msgid "Mixed Rain and Hail"
 msgstr "Barreja de pluja i calamarsa"
 
 #: 3.0/yahoo.js:471 3.8/weather-applet.js:16177 3.8/weather-applet.js:16178
-#, fuzzy
 msgid "Isolated Thunderstorms"
 msgstr "Tempestes aïllades"
 
 #: 3.0/yahoo.js:472 3.8/weather-applet.js:16184 3.8/weather-applet.js:16185
 #: 3.8/weather-applet.js:16240 3.8/weather-applet.js:16241
-#, fuzzy
 msgid "Scattered Thunderstorms"
-msgstr "Tempestes elèctriques aïllades"
+msgstr "Tempestes elèctriques disperses"
 
 #: 3.0/yahoo.js:473 3.8/weather-applet.js:16191 3.8/weather-applet.js:16192
 #: 3.8/weather-applet.js:16226 3.8/weather-applet.js:16227
-#, fuzzy
 msgid "Scattered Showers"
-msgstr "Pluges aïllades"
+msgstr "Pluges disperses"
 
 #: 3.0/yahoo.js:474 3.8/weather-applet.js:16198 3.8/weather-applet.js:16199
-#, fuzzy
 msgid "Heavy Rain"
-msgstr "Nevada forta"
+msgstr "Pluja intensa"
 
 #: 3.0/yahoo.js:475 3.8/weather-applet.js:16205 3.8/weather-applet.js:16206
 #: 3.8/weather-applet.js:16233 3.8/weather-applet.js:16234
-#, fuzzy
 msgid "Scattered Snow Showers"
 msgstr "Xàfecs de neu dispersos"
 
 #: 3.0/yahoo.js:476 3.8/weather-applet.js:16212 3.8/weather-applet.js:16213
-#, fuzzy
 msgid "Heavy Snow"
 msgstr "Nevada forta"
 
 #: 3.0/yahoo.js:478
-#, fuzzy
 msgid "Not Available"
 msgstr "No disponible"
 
 #: 3.0/yahoo.js:479
-#, fuzzy
 msgid "Scattered Thundershowers"
-msgstr "Tempestes elèctriques aïllades"
+msgstr "Tempestes elèctriques disperses amb pluja"
 
 #: 3.8/weather-applet.js:768
 msgid ""
@@ -1640,9 +1568,8 @@ msgid "Squall"
 msgstr "Borrasca"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Precipitacions lleugeres d'aiguaneu"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1662,39 +1589,32 @@ msgstr "WeatherBit"
 
 #: 3.8/weather-applet.js:12840 3.8/weather-applet.js:14437
 #: 3.8/weather-applet.js:16810
-#, fuzzy
 msgid "Heavy drizzle"
-msgstr "Plugims gelats"
+msgstr "Plugim gèlid"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Precipitacions lleugeres de pluja"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Nevada forta"
+msgstr "Ruixat intens de pluja"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Ràfegues de neu"
+msgstr "Barreja de pluja i neu"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
-msgstr "Cobert"
+msgstr "Xàfec de neu"
 
 #: 3.8/weather-applet.js:12884 3.8/weather-applet.js:14455
-#, fuzzy
 msgid "Freezing fog"
-msgstr "Pluja glaçada"
+msgstr "Boira gebradora"
 
 #: 3.8/weather-applet.js:13091
-#, fuzzy
 msgid "Tomorrow.io"
-msgstr "Demà"
+msgstr "Tomorrow.io"
 
 #: 3.8/weather-applet.js:13300
 msgid "Light wind"
@@ -1713,26 +1633,24 @@ msgid "Visual Crossing"
 msgstr "Visual Crossing"
 
 #: 3.8/weather-applet.js:14433
-#, fuzzy
 msgid "Blowing or drifting snow"
 msgstr "Neu aixecada pel vent"
 
 #: 3.8/weather-applet.js:14441
 msgid "Heavy drizzle/rain"
-msgstr "Neu molt aixecada pel vent"
+msgstr "Plugim/Pluja intensa"
 
 #: 3.8/weather-applet.js:14443
 msgid "Light drizzle/rain"
-msgstr "Neu lleugerament aixecada pel vent"
+msgstr "Plugim/Pluja lleugera"
 
 #: 3.8/weather-applet.js:14445
 msgid "Dust Storm"
 msgstr "Tempesta de pols"
 
 #: 3.8/weather-applet.js:14449
-#, fuzzy
 msgid "Freezing drizzle/freezing rain"
-msgstr "Plugims gelats"
+msgstr "Plugim/Pluja gèlida"
 
 #: 3.8/weather-applet.js:14451
 msgid "Heavy freezing drizzle/freezing rain"
@@ -1747,9 +1665,8 @@ msgid "Funnel cloud/tornado"
 msgstr "Núvols d'embut/tornados"
 
 #: 3.8/weather-applet.js:14463
-#, fuzzy
 msgid "Hail showers"
-msgstr "Cobert"
+msgstr "Ruixat de calamarsa"
 
 #: 3.8/weather-applet.js:14465
 msgid "Ice"
@@ -1764,14 +1681,12 @@ msgid "Precipitation in vicinity"
 msgstr "Precipitació als voltants"
 
 #: 3.8/weather-applet.js:14475 3.8/weather-applet.js:14775
-#, fuzzy
 msgid "Heavy rain and snow"
-msgstr "Barreja de pluja i neu"
+msgstr "Pluja i neu intenses"
 
 #: 3.8/weather-applet.js:14477
-#, fuzzy
 msgid "Light rain And snow"
-msgstr "Barreja de pluja i neu"
+msgstr "Pluja i neu lleugeres"
 
 #: 3.8/weather-applet.js:14485
 msgid "Sky coverage decreasing"
@@ -1802,7 +1717,6 @@ msgid "Diamond dust"
 msgstr "Prismes de gel"
 
 #: 3.8/weather-applet.js:14515
-#, fuzzy
 msgid "Partially cloudy"
 msgstr "Parcialment ennuvolat"
 
@@ -1825,28 +1739,24 @@ msgid "Blowing snow"
 msgstr "Neu aixecada pel vent"
 
 #: 3.8/weather-applet.js:14781 3.8/weather-applet.js:14782
-#, fuzzy
 msgid "Slight snow"
-msgstr "Neu aixecada pel vent"
+msgstr "Nevada lleugera"
 
 #: 3.8/weather-applet.js:14788 3.8/weather-applet.js:14789
-#, fuzzy
 msgid "Moderate snow"
-msgstr "Nevada forta"
+msgstr "Nevada moderada"
 
 #: 3.8/weather-applet.js:14803
-#, fuzzy
 msgid "Moderate rain showers"
-msgstr "Pluges aïllades"
+msgstr "Ruixats de pluja moderats"
 
 #: 3.8/weather-applet.js:14810
 msgid "Mixed rain and snow"
 msgstr "Barreja de pluja i neu"
 
 #: 3.8/weather-applet.js:14817
-#, fuzzy
 msgid "Heavy mixed rain and snow"
-msgstr "Barreja de pluja i neu"
+msgstr "Barreja de pluja i neu forta"
 
 #: 3.8/weather-applet.js:14984
 msgid "AccuWeather"
@@ -1877,19 +1787,16 @@ msgid "Strong Storm"
 msgstr "Tempesta forta"
 
 #: 3.8/weather-applet.js:15960 3.8/weather-applet.js:15961
-#, fuzzy
 msgid "Rain and Snow"
-msgstr "Barreja de pluja i neu"
+msgstr "Pluja i neu"
 
 #: 3.8/weather-applet.js:15967 3.8/weather-applet.js:15968
-#, fuzzy
 msgid "Rain and Sleet"
-msgstr "Barreja de pluja i calamarsa"
+msgstr "Neu i aiguaneu"
 
 #: 3.8/weather-applet.js:16016 3.8/weather-applet.js:16017
-#, fuzzy
 msgid "Snow Showers"
-msgstr "Cobert"
+msgstr "Ruixats de neu"
 
 #: 3.8/weather-applet.js:16079 3.8/weather-applet.js:16080
 msgid "Breezy"
@@ -1900,9 +1807,8 @@ msgid "Frigid"
 msgstr "Gèlid"
 
 #: 3.8/weather-applet.js:16149 3.8/weather-applet.js:16150
-#, fuzzy
 msgid "Mostly Clear"
-msgstr "Majoritàriament ennuvolat"
+msgstr "Majoritàriament assolellat"
 
 #: 3.8/weather-applet.js:16330
 msgid "Pirate Weather"
@@ -1925,29 +1831,24 @@ msgstr ""
 "reviseu els logs"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr "Ràfegues de neu"
+msgstr "Grans de neu"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr "Precipitacions lleugeres de neu"
+msgstr "Precipitacions lleugeres"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Nevada forta"
+msgstr "Precipitacions fortes"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Tempestes"
+msgstr "Tempesta amb calamarsa lleugera"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Tempestes"
+msgstr "Tempesta amb calamarsa"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
 msgid "Feels like"
@@ -2220,9 +2121,8 @@ msgstr "Unitats"
 
 #. 3.0->settings-schema.json->temperatureUnit->description
 #. 3.8->settings-schema.json->temperatureUnit->description
-#, fuzzy
 msgid "Temperature unit"
-msgstr "Temperatura:"
+msgstr "Unitat de temperatura"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.0->settings-schema.json->windSpeedUnit->options
@@ -2457,9 +2357,8 @@ msgstr "Mostra la temperatura màxima primer"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
-#, fuzzy
 msgid "Show temperature Russian style"
-msgstr "Temperatura:"
+msgstr "Mostrar la temperatura en estil Rus"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
@@ -2532,9 +2431,8 @@ msgid "Other Units"
 msgstr "Altres unitats"
 
 #. 3.8->settings-schema.json->temp-unit-section->title
-#, fuzzy
 msgid "Temperature Unit"
-msgstr "Temperatura:"
+msgstr "Unitat de temperatura"
 
 #. 3.8->settings-schema.json->keybindings->title
 msgid "Keybindings"
@@ -2964,4 +2862,4 @@ msgstr ""
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Proveu la vostra ordre"
