@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-05 20:02+0200\n"
-"PO-Revision-Date: 2024-06-15 15:59-0400\n"
+"PO-Revision-Date: 2024-07-05 16:13-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -58,7 +58,7 @@ msgstr "Proveedores"
 #. settings-schema.json->page-options->title
 #. settings-schema.json->section-options->title
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 #. settings-schema.json->section-colors->title
 #. settings-schema.json->header-colors->description
@@ -100,9 +100,8 @@ msgstr ""
 
 #. settings-schema.json->header-providers->description
 #. old->5.4->settings-schema.json->header-providers->description
-#, fuzzy
 msgid "Search Engines"
-msgstr "Seleccione su motor de búsqueda:"
+msgstr "Motores de búsqueda:"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -147,6 +146,12 @@ msgid ""
 "provider.\n"
 "If no provider is selected, the default provider is Google."
 msgstr ""
+"Sólo los proveedores seleccionados aparecerán en el menú contextual, para "
+"que pueda seleccionar su proveedor predeterminado.\n"
+"Si anula la selección del proveedor predeterminado, el primero seleccionado "
+"se convierte en el proveedor predeterminado.\n"
+"Si no se selecciona ningún proveedor, el proveedor predeterminado será "
+"Google."
 
 #. settings-schema.json->header-keybinding->description
 #. old->3.2->settings-schema.json->header-keybinding->description
