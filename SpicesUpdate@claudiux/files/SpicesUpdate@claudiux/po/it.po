@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-03 19:54+0200\n"
-"PO-Revision-Date: 2024-06-18 15:10+0200\n"
+"PO-Revision-Date: 2024-07-05 10:46+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -620,100 +620,99 @@ msgstr "Riavvia Cinnamon"
 #: cs/4.4/cinnamon-settings.py:50 cs/4.4/cinnamon-settings.py:380
 #: cs/4.4/cinnamon-settings.py:718 cs/4.2/cinnamon-settings.py:50
 #: cs/4.2/cinnamon-settings.py:379 cs/4.2/cinnamon-settings.py:717
-#, fuzzy
 msgid "System Settings"
-msgstr "Impostazioni di Spices Update"
+msgstr "Impostazioni di sistema"
 
 #: cs/4.6/cinnamon-settings.py:51 cs/4.0/cinnamon-settings.py:49
 #: cs/6.0_FUTURE/cinnamon-settings.py:42
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:58 cs/3.8/cinnamon-settings.py:49
 #: cs/4.4/cinnamon-settings.py:51 cs/4.2/cinnamon-settings.py:51
 msgid "Control Center"
-msgstr ""
+msgstr "Centro di Controllo"
 
 #: cs/4.6/cinnamon-settings.py:66 cs/4.0/cinnamon-settings.py:64
 #: cs/6.0_FUTURE/cinnamon-settings.py:64
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:80 cs/3.8/cinnamon-settings.py:64
 #: cs/4.4/cinnamon-settings.py:66 cs/4.2/cinnamon-settings.py:66
 msgid "Appearance"
-msgstr ""
+msgstr "Aspetto"
 
 #: cs/4.6/cinnamon-settings.py:67 cs/4.0/cinnamon-settings.py:65
 #: cs/6.0_FUTURE/cinnamon-settings.py:65
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:81 cs/3.8/cinnamon-settings.py:65
 #: cs/4.4/cinnamon-settings.py:67 cs/4.2/cinnamon-settings.py:67
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: cs/4.6/cinnamon-settings.py:68 cs/4.0/cinnamon-settings.py:66
 #: cs/6.0_FUTURE/cinnamon-settings.py:66
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:82 cs/3.8/cinnamon-settings.py:66
 #: cs/4.4/cinnamon-settings.py:68 cs/4.2/cinnamon-settings.py:68
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: cs/4.6/cinnamon-settings.py:69 cs/4.0/cinnamon-settings.py:67
 #: cs/6.0_FUTURE/cinnamon-settings.py:67
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:83 cs/3.8/cinnamon-settings.py:67
 #: cs/4.4/cinnamon-settings.py:69 cs/4.2/cinnamon-settings.py:69
 msgid "Administration"
-msgstr ""
+msgstr "Amministrazione"
 
 #: cs/4.6/cinnamon-settings.py:74 cs/4.0/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/3.8/cinnamon-settings.py:72
 #: cs/4.4/cinnamon-settings.py:74 cs/4.2/cinnamon-settings.py:74
 msgid "Network"
-msgstr ""
+msgstr "Rete"
 
 #: cs/4.6/cinnamon-settings.py:74 cs/4.0/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/3.8/cinnamon-settings.py:72
 #: cs/4.4/cinnamon-settings.py:74 cs/4.2/cinnamon-settings.py:74
 msgid "network, wireless, wifi, ethernet, broadband, internet"
-msgstr ""
+msgstr "rete, wireless, wifi, ethernet, broadband, internet"
 
 #: cs/4.6/cinnamon-settings.py:75 cs/4.0/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings.py:73
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/3.8/cinnamon-settings.py:74
 #: cs/4.4/cinnamon-settings.py:75 cs/4.2/cinnamon-settings.py:76
 msgid "Color"
-msgstr ""
+msgstr "Colore"
 
 #: cs/4.6/cinnamon-settings.py:75 cs/4.0/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings.py:73
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/3.8/cinnamon-settings.py:74
 #: cs/4.4/cinnamon-settings.py:75 cs/4.2/cinnamon-settings.py:76
 msgid "color, profile, display, printer, output"
-msgstr ""
+msgstr "colore, profilo, display, stampante, output"
 
 #: cs/4.6/cinnamon-settings.py:76 cs/4.0/cinnamon-settings.py:75
 #: cs/6.0_FUTURE/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/3.8/cinnamon-settings.py:75
 #: cs/4.4/cinnamon-settings.py:76 cs/4.2/cinnamon-settings.py:77
 msgid "Graphics Tablet"
-msgstr ""
+msgstr "Tavoletta Grafica"
 
 #: cs/4.6/cinnamon-settings.py:76 cs/4.0/cinnamon-settings.py:75
 #: cs/6.0_FUTURE/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/3.8/cinnamon-settings.py:75
 #: cs/4.4/cinnamon-settings.py:76 cs/4.2/cinnamon-settings.py:77
 msgid "wacom, digitize, tablet, graphics, calibrate, stylus"
-msgstr ""
+msgstr "wacom, digitalizzazione, tavoletta, grafica, calibrazione, stilo"
 
 #: cs/4.6/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:80
 #: cs/6.0_FUTURE/cinnamon-settings.py:79
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/3.8/cinnamon-settings.py:80
 #: cs/4.4/cinnamon-settings.py:81 cs/4.2/cinnamon-settings.py:82
 msgid "Printers"
-msgstr ""
+msgstr "Stampanti"
 
 #: cs/4.6/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:80
 #: cs/6.0_FUTURE/cinnamon-settings.py:79
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/3.8/cinnamon-settings.py:80
 #: cs/4.4/cinnamon-settings.py:81 cs/4.2/cinnamon-settings.py:82
 msgid "printers, laser, inkjet"
-msgstr ""
+msgstr "stampanti, laser, inchiostro"
 
 #: cs/4.6/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:83
 #: cs/4.0/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:82
@@ -724,7 +723,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:83 cs/4.2/cinnamon-settings.py:83
 #: cs/4.2/cinnamon-settings.py:84
 msgid "Firewall"
-msgstr ""
+msgstr "Firewall"
 
 #: cs/4.6/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:83
 #: cs/4.0/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:82
@@ -735,28 +734,28 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:83 cs/4.2/cinnamon-settings.py:83
 #: cs/4.2/cinnamon-settings.py:84
 msgid "firewall, block, filter, programs"
-msgstr ""
+msgstr "firewall, blocco, filtro, programmi"
 
 #: cs/4.6/cinnamon-settings.py:84 cs/4.0/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings.py:82
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/3.8/cinnamon-settings.py:83
 #: cs/4.4/cinnamon-settings.py:84 cs/4.2/cinnamon-settings.py:85
 msgid "Languages"
-msgstr ""
+msgstr "Lingue"
 
 #: cs/4.6/cinnamon-settings.py:84 cs/4.0/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings.py:82
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/3.8/cinnamon-settings.py:83
 #: cs/4.4/cinnamon-settings.py:84 cs/4.2/cinnamon-settings.py:85
 msgid "language, install, foreign"
-msgstr ""
+msgstr "lingua, installazione, straniera"
 
 #: cs/4.6/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/3.8/cinnamon-settings.py:84
 #: cs/4.4/cinnamon-settings.py:85 cs/4.2/cinnamon-settings.py:86
 msgid "Input Method"
-msgstr ""
+msgstr "Metodo di input"
 
 #: cs/4.6/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings.py:83
@@ -765,6 +764,8 @@ msgstr ""
 msgid ""
 "language, install, foreign, input, method, chinese, korean, japanese, typing"
 msgstr ""
+"lingua, installazione, straniera, input, metodo, cinese, coreano, "
+"giapponese, digitazione"
 
 #: cs/4.6/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:87
 #: cs/4.0/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:86
@@ -775,28 +776,28 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:87 cs/4.2/cinnamon-settings.py:87
 #: cs/4.2/cinnamon-settings.py:88
 msgid "Login Window"
-msgstr ""
+msgstr "Schermata di accesso"
 
 #: cs/4.6/cinnamon-settings.py:86 cs/4.0/cinnamon-settings.py:85
 #: cs/6.0_FUTURE/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:100 cs/3.8/cinnamon-settings.py:85
 #: cs/4.4/cinnamon-settings.py:86 cs/4.2/cinnamon-settings.py:87
 msgid "login, lightdm, mdm, gdm, manager, user, password, startup, switch"
-msgstr ""
+msgstr "login, lightdm, mdm, gdm, manager, utente, password, avvio, cambio"
 
 #: cs/4.6/cinnamon-settings.py:87 cs/4.0/cinnamon-settings.py:86
 #: cs/6.0_FUTURE/cinnamon-settings.py:85
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/3.8/cinnamon-settings.py:86
 #: cs/4.4/cinnamon-settings.py:87 cs/4.2/cinnamon-settings.py:88
 msgid "login, lightdm, manager, settings, editor"
-msgstr ""
+msgstr "login, lightdm, manager, impostazioni, editor"
 
 #: cs/4.6/cinnamon-settings.py:88 cs/4.0/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings.py:86
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/3.8/cinnamon-settings.py:87
 #: cs/4.4/cinnamon-settings.py:88 cs/4.2/cinnamon-settings.py:89
 msgid "Driver Manager"
-msgstr ""
+msgstr "Gestore driver"
 
 #: cs/4.6/cinnamon-settings.py:88 cs/4.0/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings.py:86
@@ -806,35 +807,36 @@ msgid ""
 "video, driver, wifi, card, hardware, proprietary, nvidia, radeon, nouveau, "
 "fglrx"
 msgstr ""
+"video, driver, wifi, scheda, hardware, proprietario, nvidia, radeon, "
+"nouveau, fglrx"
 
 #: cs/4.6/cinnamon-settings.py:89 cs/4.0/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/3.8/cinnamon-settings.py:88
 #: cs/4.4/cinnamon-settings.py:89 cs/4.2/cinnamon-settings.py:90
-#, fuzzy
 msgid "Nvidia Settings"
-msgstr "Impostazioni di Spices Update"
+msgstr "Impostazioni Nvidia"
 
 #: cs/4.6/cinnamon-settings.py:89 cs/4.0/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/3.8/cinnamon-settings.py:88
 #: cs/4.4/cinnamon-settings.py:89 cs/4.2/cinnamon-settings.py:90
 msgid "video, driver, proprietary, nvidia, settings"
-msgstr ""
+msgstr "video, driver, proprietario, nvidia, impostazioni"
 
 #: cs/4.6/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:89
 #: cs/6.0_FUTURE/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/3.8/cinnamon-settings.py:89
 #: cs/4.4/cinnamon-settings.py:90 cs/4.2/cinnamon-settings.py:91
 msgid "Software Sources"
-msgstr ""
+msgstr "Sorgenti software"
 
 #: cs/4.6/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:89
 #: cs/6.0_FUTURE/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/3.8/cinnamon-settings.py:89
 #: cs/4.4/cinnamon-settings.py:90 cs/4.2/cinnamon-settings.py:91
 msgid "ppa, repository, package, source, download"
-msgstr ""
+msgstr "ppa, repository, pacchetto, sorgente, download"
 
 #: cs/4.6/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:92
 #: cs/4.0/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:91
@@ -845,7 +847,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:92 cs/4.2/cinnamon-settings.py:92
 #: cs/4.2/cinnamon-settings.py:93
 msgid "Package Management"
-msgstr ""
+msgstr "Gestore pacchetti"
 
 #: cs/4.6/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:92
 #: cs/4.0/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:91
@@ -857,20 +859,21 @@ msgstr ""
 #: cs/4.2/cinnamon-settings.py:93
 msgid "update, install, repository, package, source, download"
 msgstr ""
+"aggiornamento, installazione, repository, pacchetto, sorgente, download"
 
 #: cs/4.6/cinnamon-settings.py:93 cs/4.0/cinnamon-settings.py:92
 #: cs/6.0_FUTURE/cinnamon-settings.py:91
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/3.8/cinnamon-settings.py:92
 #: cs/4.4/cinnamon-settings.py:93 cs/4.2/cinnamon-settings.py:94
 msgid "Users and Groups"
-msgstr ""
+msgstr "Utenti e gruppi"
 
 #: cs/4.6/cinnamon-settings.py:93 cs/4.0/cinnamon-settings.py:92
 #: cs/6.0_FUTURE/cinnamon-settings.py:91
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/3.8/cinnamon-settings.py:92
 #: cs/4.4/cinnamon-settings.py:93 cs/4.2/cinnamon-settings.py:94
 msgid "user, users, account, accounts, group, groups, password"
-msgstr ""
+msgstr "utente, utenti, account, account, gruppo, gruppi, password"
 
 #: cs/4.6/cinnamon-settings.py:94 cs/4.0/cinnamon-settings.py:93
 #: cs/6.0_FUTURE/cinnamon-settings.py:92 cs/6.0_FUTURE/cinnamon-settings.py:93
@@ -878,7 +881,7 @@ msgstr ""
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/3.8/cinnamon-settings.py:93
 #: cs/4.4/cinnamon-settings.py:94 cs/4.2/cinnamon-settings.py:95
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: cs/4.6/cinnamon-settings.py:94 cs/4.0/cinnamon-settings.py:93
 #: cs/6.0_FUTURE/cinnamon-settings.py:92 cs/6.0_FUTURE/cinnamon-settings.py:93
@@ -886,26 +889,26 @@ msgstr ""
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/3.8/cinnamon-settings.py:93
 #: cs/4.4/cinnamon-settings.py:94 cs/4.2/cinnamon-settings.py:95
 msgid "bluetooth, dongle, transfer, mobile"
-msgstr ""
+msgstr "bluetooth, dongle, trasferimento, cellulare"
 
 #: cs/4.6/cinnamon-settings.py:95 cs/4.0/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/3.8/cinnamon-settings.py:94
 #: cs/4.4/cinnamon-settings.py:95 cs/4.2/cinnamon-settings.py:96
 msgid "Manage Services and Units"
-msgstr ""
+msgstr "Gestore servizi e unità"
 
 #: cs/4.6/cinnamon-settings.py:95 cs/4.0/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/3.8/cinnamon-settings.py:94
 #: cs/4.4/cinnamon-settings.py:95 cs/4.2/cinnamon-settings.py:96
 msgid "systemd, units, services, systemctl, init"
-msgstr ""
+msgstr "systemd, unità, servizi, systemctl, init"
 
 #: cs/4.6/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.4/cinnamon-settings.py:96
 msgid "Disks"
-msgstr ""
+msgstr "Dischi"
 
 #: cs/4.6/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.4/cinnamon-settings.py:96
@@ -913,13 +916,15 @@ msgid ""
 "disks, manage, hardware, management, hard, hdd, pendrive, format, erase, "
 "test, create, iso, ISO, disk, image"
 msgstr ""
+"dischi, gestire, hardware, gestione, fisso, hdd, pendrive, formattare, "
+"cancellare, testare, creare, iso, ISO, disco, immagine"
 
 #: cs/4.6/cinnamon-settings.py:290 cs/4.0/cinnamon-settings.py:223
 #: cs/6.0_FUTURE/cinnamon-settings.py:295
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:311 cs/3.8/cinnamon-settings.py:215
 #: cs/4.4/cinnamon-settings.py:290 cs/4.2/cinnamon-settings.py:289
 msgid "Back to all settings"
-msgstr ""
+msgstr "Torna a tutte le impostazioni"
 
 #: cs/4.6/cinnamon-settings.py:297 cs/4.0/cinnamon-settings.py:233
 #: cs/6.0_FUTURE/cinnamon-settings.py:302
@@ -927,14 +932,13 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:297 cs/4.2/cinnamon-settings.py:296
 #: cs/4.2/bin/SUExtensionCore.py:370 cs/4.2/bin/SUExtensionCore.py:730
 msgid "Search"
-msgstr ""
+msgstr "Ricerca"
 
 #: cs/4.6/modules/cs_applets.py:14 cs/4.0/modules/cs_applets.py:13
 #: cs/6.0_FUTURE/modules/cs_applets.py:14 cs/3.8/modules/cs_applets.py:13
 #: cs/4.4/modules/cs_applets.py:14 cs/4.2/modules/cs_applets.py:13
-#, fuzzy
 msgid "Manage Cinnamon applets"
-msgstr "Apri utili Impostazioni di Cinnamon"
+msgstr "Gestisci applet di Cinnamon"
 
 #: cs/4.6/modules/cs_applets.py:33 cs/4.0/modules/cs_applets.py:32
 #: cs/6.0_FUTURE/modules/cs_applets.py:33 cs/3.8/modules/cs_applets.py:32
@@ -942,13 +946,14 @@ msgstr "Apri utili Impostazioni di Cinnamon"
 msgid ""
 "You can remove specific instances in panel edit mode via the context menu."
 msgstr ""
+"È possibile rimuovere istanze specifiche in modalità di modifica del "
+"pannello tramite il menù contestuale."
 
 #: cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
 #: cs/6.0_FUTURE/modules/cs_applets.py:35 cs/3.8/modules/cs_applets.py:34
 #: cs/4.4/modules/cs_applets.py:35 cs/4.2/modules/cs_applets.py:34
-#, fuzzy
 msgid "applet"
-msgstr "Applet"
+msgstr "applet"
 
 #: cs/4.6/modules/cs_applets.py:47 cs/4.6/modules/cs_desklets.py:45
 #: cs/4.6/modules/cs_extensions.py:45 cs/4.0/modules/cs_applets.py:46
@@ -962,7 +967,7 @@ msgstr "Applet"
 #: cs/4.4/modules/cs_extensions.py:45 cs/4.2/modules/cs_applets.py:46
 #: cs/4.2/modules/cs_desklets.py:44 cs/4.2/modules/cs_extensions.py:44
 msgid "Manage"
-msgstr ""
+msgstr "Gestisci"
 
 #: cs/4.6/modules/cs_applets.py:50 cs/4.6/modules/cs_desklets.py:48
 #: cs/4.6/modules/cs_extensions.py:48 cs/4.0/modules/cs_applets.py:49
@@ -976,14 +981,13 @@ msgstr ""
 #: cs/4.4/modules/cs_extensions.py:48 cs/4.2/modules/cs_applets.py:49
 #: cs/4.2/modules/cs_desklets.py:47 cs/4.2/modules/cs_extensions.py:47
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
 #: cs/4.6/modules/cs_applets.py:55 cs/4.0/modules/cs_applets.py:54
 #: cs/6.0_FUTURE/modules/cs_applets.py:55 cs/3.8/modules/cs_applets.py:54
 #: cs/4.4/modules/cs_applets.py:55 cs/4.2/modules/cs_applets.py:54
-#, fuzzy
 msgid "Installed applets"
-msgstr "Estensioni"
+msgstr "Applet installate"
 
 #: cs/4.6/modules/cs_applets.py:56 cs/4.6/modules/cs_desklets.py:76
 #: cs/4.0/modules/cs_applets.py:55 cs/4.0/modules/cs_desklets.py:75
@@ -993,7 +997,7 @@ msgstr "Estensioni"
 #: cs/4.4/modules/cs_desklets.py:76 cs/4.2/modules/cs_applets.py:55
 #: cs/4.2/modules/cs_desklets.py:75
 msgid "Add"
-msgstr ""
+msgstr "Aggiungi"
 
 #: cs/4.6/modules/cs_applets.py:58 cs/4.6/modules/cs_desklets.py:78
 #: cs/4.6/modules/cs_extensions.py:56 cs/4.0/modules/cs_applets.py:57
@@ -1008,32 +1012,31 @@ msgstr ""
 #: cs/4.2/modules/cs_desklets.py:77 cs/4.2/modules/cs_extensions.py:55
 #: cs/4.2/bin/SUExtensionCore.py:782
 msgid "Uninstall"
-msgstr ""
+msgstr "Disinstalla"
 
 #: cs/4.6/modules/cs_applets.py:59 cs/4.0/modules/cs_applets.py:58
 #: cs/6.0_FUTURE/modules/cs_applets.py:59 cs/3.8/modules/cs_applets.py:58
 #: cs/4.4/modules/cs_applets.py:59 cs/4.2/modules/cs_applets.py:58
 msgid "Reset all"
-msgstr ""
+msgstr "Resetta tutto"
 
 #: cs/4.6/modules/cs_applets.py:74 cs/4.0/modules/cs_applets.py:73
 #: cs/6.0_FUTURE/modules/cs_applets.py:74 cs/3.8/modules/cs_applets.py:73
 #: cs/4.4/modules/cs_applets.py:74 cs/4.2/modules/cs_applets.py:73
 msgid "Previous Panel"
-msgstr ""
+msgstr "Pannello precedente"
 
 #: cs/4.6/modules/cs_applets.py:78 cs/4.0/modules/cs_applets.py:77
 #: cs/6.0_FUTURE/modules/cs_applets.py:78 cs/3.8/modules/cs_applets.py:77
 #: cs/4.4/modules/cs_applets.py:78 cs/4.2/modules/cs_applets.py:77
 msgid "Next Panel"
-msgstr ""
+msgstr "Pannello successivo"
 
 #: cs/4.6/modules/cs_desklets.py:10 cs/4.0/modules/cs_desklets.py:9
 #: cs/6.0_FUTURE/modules/cs_desklets.py:10 cs/3.8/modules/cs_desklets.py:9
 #: cs/4.4/modules/cs_desklets.py:10 cs/4.2/modules/cs_desklets.py:9
-#, fuzzy
 msgid "Manage your Cinnamon desklets"
-msgstr "Apri utili Impostazioni di Cinnamon"
+msgstr "Gestisci i tuoi desklet di Cinnamon"
 
 #: cs/4.6/modules/cs_desklets.py:30 cs/4.0/modules/cs_desklets.py:29
 #: cs/6.0_FUTURE/modules/cs_desklets.py:30 cs/3.8/modules/cs_desklets.py:29
@@ -1042,233 +1045,223 @@ msgid ""
 "You can remove specific instances from the desktop via that desklet's "
 "context menu"
 msgstr ""
+"Puoi rimuovere istanze specifiche dal desktop tramite il menù contestuale di "
+"quel desklet"
 
 #: cs/4.6/modules/cs_desklets.py:31 cs/4.0/modules/cs_desklets.py:30
 #: cs/6.0_FUTURE/modules/cs_desklets.py:31 cs/3.8/modules/cs_desklets.py:30
 #: cs/4.4/modules/cs_desklets.py:31 cs/4.2/modules/cs_desklets.py:30
 msgid "desklet, desktop, slideshow"
-msgstr ""
+msgstr "desklet, desktop, slideshow"
 
 #: cs/4.6/modules/cs_desklets.py:51 cs/4.0/modules/cs_desklets.py:50
 #: cs/6.0_FUTURE/modules/cs_desklets.py:51 cs/3.8/modules/cs_desklets.py:50
 #: cs/4.4/modules/cs_desklets.py:51 cs/4.2/modules/cs_desklets.py:50
-#, fuzzy
 msgid "General Settings"
-msgstr "Generali"
+msgstr "Impostazioni Generali"
 
 #: cs/4.6/modules/cs_desklets.py:53 cs/4.0/modules/cs_desklets.py:52
 #: cs/6.0_FUTURE/modules/cs_desklets.py:53 cs/3.8/modules/cs_desklets.py:52
 #: cs/4.4/modules/cs_desklets.py:53 cs/4.2/modules/cs_desklets.py:52
-#, fuzzy
 msgid "General Desklets Settings"
-msgstr "Generali"
+msgstr "Impostazioni generali dei desklet"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
-#, fuzzy
 msgid "No decoration"
-msgstr "Notifiche"
+msgstr "Nessuna decorazione"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
 msgid "Border only"
-msgstr ""
+msgstr "Solo bordo"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
 msgid "Border and header"
-msgstr ""
+msgstr "Bordo e intestazione"
 
 #: cs/4.6/modules/cs_desklets.py:57 cs/4.0/modules/cs_desklets.py:56
 #: cs/6.0_FUTURE/modules/cs_desklets.py:57 cs/3.8/modules/cs_desklets.py:56
 #: cs/4.4/modules/cs_desklets.py:57 cs/4.2/modules/cs_desklets.py:56
 msgid "Decoration of desklets"
-msgstr ""
+msgstr "Decorazione dei desklet"
 
 #: cs/4.6/modules/cs_desklets.py:60 cs/4.0/modules/cs_desklets.py:59
 #: cs/6.0_FUTURE/modules/cs_desklets.py:60 cs/3.8/modules/cs_desklets.py:59
 #: cs/4.4/modules/cs_desklets.py:60 cs/4.2/modules/cs_desklets.py:59
 msgid "Note: Some desklets require the border/header to be always present"
 msgstr ""
+"Nota: alcuni desklet richiedono che il bordo/intestazione sia sempre presente"
 
 #: cs/4.6/modules/cs_desklets.py:64 cs/4.0/modules/cs_desklets.py:63
 #: cs/6.0_FUTURE/modules/cs_desklets.py:64 cs/3.8/modules/cs_desklets.py:63
 #: cs/4.4/modules/cs_desklets.py:64 cs/4.2/modules/cs_desklets.py:63
 msgid "Such requirements override the settings selected here"
-msgstr ""
+msgstr "Tali requisiti sovrascrivono le impostazioni selezionate qui"
 
 #: cs/4.6/modules/cs_desklets.py:69 cs/4.0/modules/cs_desklets.py:68
 #: cs/6.0_FUTURE/modules/cs_desklets.py:69 cs/3.8/modules/cs_desklets.py:68
 #: cs/4.4/modules/cs_desklets.py:69 cs/4.2/modules/cs_desklets.py:68
 msgid "Snap desklets to grid"
-msgstr ""
+msgstr "Aggancia i desklet alla griglia"
 
 #: cs/4.6/modules/cs_desklets.py:70 cs/4.0/modules/cs_desklets.py:69
 #: cs/6.0_FUTURE/modules/cs_desklets.py:70 cs/3.8/modules/cs_desklets.py:69
 #: cs/4.4/modules/cs_desklets.py:70 cs/4.2/modules/cs_desklets.py:69
 msgid "Width of desklet snap grid"
-msgstr ""
+msgstr "Larghezza della griglia di aggancio dei desklet"
 
 #: cs/4.6/modules/cs_desklets.py:75 cs/4.0/modules/cs_desklets.py:74
 #: cs/6.0_FUTURE/modules/cs_desklets.py:75 cs/3.8/modules/cs_desklets.py:74
 #: cs/4.4/modules/cs_desklets.py:75 cs/4.2/modules/cs_desklets.py:74
-#, fuzzy
 msgid "Installed desklets"
-msgstr "Estensioni"
+msgstr "Desklet installati"
 
 #: cs/4.6/modules/cs_desklets.py:79 cs/4.0/modules/cs_desklets.py:78
 #: cs/6.0_FUTURE/modules/cs_actions.py:61
 #: cs/6.0_FUTURE/modules/cs_desklets.py:79 cs/3.8/modules/cs_desklets.py:78
 #: cs/4.4/modules/cs_desklets.py:79 cs/4.2/modules/cs_desklets.py:78
-#, fuzzy
 msgid "Remove all"
-msgstr "Rimuovi"
+msgstr "Rimuovi tutti"
 
 #: cs/4.6/modules/cs_extensions.py:12 cs/4.0/modules/cs_extensions.py:11
 #: cs/6.0_FUTURE/modules/cs_extensions.py:12 cs/3.8/modules/cs_extensions.py:11
 #: cs/4.4/modules/cs_extensions.py:12 cs/4.2/modules/cs_extensions.py:11
-#, fuzzy
 msgid "Manage your Cinnamon extensions"
-msgstr "Apri utili Impostazioni di Cinnamon"
+msgstr "Gestisci le tue estensioni di Cinnamon"
 
 #: cs/4.6/modules/cs_extensions.py:31 cs/4.0/modules/cs_extensions.py:30
 #: cs/6.0_FUTURE/modules/cs_extensions.py:31 cs/3.8/modules/cs_extensions.py:30
 #: cs/4.4/modules/cs_extensions.py:31 cs/4.2/modules/cs_extensions.py:30
-#, fuzzy
 msgid "extension, addon"
-msgstr "Estensione"
+msgstr "estensione, addon"
 
 #: cs/4.6/modules/cs_extensions.py:53 cs/4.0/modules/cs_extensions.py:52
 #: cs/6.0_FUTURE/modules/cs_extensions.py:53 cs/3.8/modules/cs_extensions.py:52
 #: cs/4.4/modules/cs_extensions.py:53 cs/4.2/modules/cs_extensions.py:52
-#, fuzzy
 msgid "Installed extensions"
-msgstr "Estensioni"
+msgstr "Estensioni installate"
 
 #: cs/4.6/modules/cs_extensions.py:54 cs/4.0/modules/cs_extensions.py:53
 #: cs/6.0_FUTURE/modules/cs_actions.py:57
 #: cs/6.0_FUTURE/modules/cs_extensions.py:54 cs/3.8/modules/cs_extensions.py:53
 #: cs/4.4/modules/cs_extensions.py:54 cs/4.2/modules/cs_extensions.py:53
 msgid "Enable"
-msgstr ""
+msgstr "Abilita"
 
 #: cs/4.6/modules/cs_extensions.py:55 cs/4.0/modules/cs_extensions.py:54
 #: cs/6.0_FUTURE/modules/cs_actions.py:58
 #: cs/6.0_FUTURE/modules/cs_extensions.py:55 cs/3.8/modules/cs_extensions.py:54
 #: cs/4.4/modules/cs_extensions.py:55 cs/4.2/modules/cs_extensions.py:54
 msgid "Disable"
-msgstr ""
+msgstr "Disabilita"
 
 #: cs/4.6/modules/cs_extensions.py:57 cs/4.0/modules/cs_extensions.py:56
 #: cs/6.0_FUTURE/modules/cs_extensions.py:57 cs/3.8/modules/cs_extensions.py:56
 #: cs/4.4/modules/cs_extensions.py:57 cs/4.2/modules/cs_extensions.py:56
 msgid "Disable all"
-msgstr ""
+msgstr "Disabilita tutto"
 
 #: cs/4.6/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:28
 #: cs/6.0_FUTURE/modules/cs_themes.py:36 cs/3.8/modules/cs_themes.py:15
 #: cs/4.4/modules/cs_themes.py:34 cs/4.2/modules/cs_themes.py:30
 msgid "Manage themes to change how your desktop looks"
-msgstr ""
+msgstr "Gestisci i temi per cambiare l'aspetto del tuo desktop"
 
 #: cs/4.6/modules/cs_themes.py:41 cs/4.0/modules/cs_themes.py:33
 #: cs/6.0_FUTURE/modules/cs_themes.py:41 cs/3.8/modules/cs_themes.py:20
 #: cs/4.4/modules/cs_themes.py:39 cs/4.2/modules/cs_themes.py:35
 msgid "themes, style"
-msgstr ""
+msgstr "temi, stile"
 
 #: cs/4.6/modules/cs_themes.py:79 cs/4.0/modules/cs_themes.py:63
 #: cs/6.0_FUTURE/modules/cs_themes.py:79 cs/3.8/modules/cs_themes.py:50
 #: cs/4.4/modules/cs_themes.py:76 cs/4.2/modules/cs_themes.py:65
 msgid "Window borders"
-msgstr ""
+msgstr "Bordi finestre"
 
 #: cs/4.6/modules/cs_themes.py:82 cs/4.0/modules/cs_themes.py:66
 #: cs/6.0_FUTURE/modules/cs_themes.py:82 cs/3.8/modules/cs_themes.py:53
 #: cs/4.4/modules/cs_themes.py:79 cs/4.2/modules/cs_themes.py:68
 msgid "Icons"
-msgstr ""
+msgstr "Icone"
 
 #: cs/4.6/modules/cs_themes.py:85 cs/4.0/modules/cs_themes.py:69
 #: cs/6.0_FUTURE/modules/cs_themes.py:85 cs/3.8/modules/cs_themes.py:56
 #: cs/4.4/modules/cs_themes.py:82 cs/4.2/modules/cs_themes.py:71
 msgid "Controls"
-msgstr ""
+msgstr "Controlli"
 
 #: cs/4.6/modules/cs_themes.py:88 cs/4.0/modules/cs_themes.py:72
 #: cs/6.0_FUTURE/modules/cs_themes.py:88 cs/3.8/modules/cs_themes.py:59
 #: cs/4.4/modules/cs_themes.py:85 cs/4.2/modules/cs_themes.py:74
 msgid "Mouse Pointer"
-msgstr ""
+msgstr "Puntatore del mouse"
 
 #: cs/4.6/modules/cs_themes.py:91 cs/4.0/modules/cs_themes.py:75
 #: cs/6.0_FUTURE/modules/cs_themes.py:91 cs/3.8/modules/cs_themes.py:62
 #: cs/4.4/modules/cs_themes.py:88 cs/4.2/modules/cs_themes.py:77
-#, fuzzy
 msgid "Desktop"
-msgstr "Desklet"
+msgstr "Scrivania"
 
 #: cs/4.6/modules/cs_themes.py:95 cs/4.0/modules/cs_themes.py:79
 #: cs/6.0_FUTURE/modules/cs_themes.py:95 cs/3.8/modules/cs_themes.py:66
 #: cs/4.4/modules/cs_themes.py:92 cs/4.2/modules/cs_themes.py:81
-#, fuzzy
 msgid "Add/Remove"
-msgstr "Rimuovi"
+msgstr "Aggiungi/Rimuovi"
 
 #: cs/4.6/modules/cs_themes.py:98 cs/4.0/modules/cs_themes.py:82
 #: cs/6.0_FUTURE/modules/cs_themes.py:98 cs/3.8/modules/cs_themes.py:69
 #: cs/4.4/modules/cs_themes.py:95 cs/4.2/modules/cs_themes.py:84
-#, fuzzy
 msgid "Settings"
-msgstr "Impostazioni di Spices Update"
+msgstr "Impostazioni"
 
 #: cs/4.6/modules/cs_themes.py:100 cs/4.0/modules/cs_themes.py:84
 #: cs/6.0_FUTURE/modules/cs_themes.py:100 cs/3.8/modules/cs_themes.py:71
 #: cs/4.4/modules/cs_themes.py:97 cs/4.2/modules/cs_themes.py:86
 msgid "Miscellaneous options"
-msgstr ""
+msgstr "Opzioni varie"
 
 #: cs/4.6/modules/cs_themes.py:102 cs/4.0/modules/cs_themes.py:86
 #: cs/6.0_FUTURE/modules/cs_themes.py:102 cs/3.8/modules/cs_themes.py:73
 #: cs/4.4/modules/cs_themes.py:99 cs/4.2/modules/cs_themes.py:88
-#, fuzzy
 msgid "Show icons in menus"
-msgstr "Con pulsanti di azione"
+msgstr "Mostra le icone nei menù"
 
 #: cs/4.6/modules/cs_themes.py:105 cs/4.0/modules/cs_themes.py:89
 #: cs/6.0_FUTURE/modules/cs_themes.py:105 cs/3.8/modules/cs_themes.py:76
 #: cs/4.4/modules/cs_themes.py:102 cs/4.2/modules/cs_themes.py:91
-#, fuzzy
 msgid "Show icons on buttons"
-msgstr "Con pulsanti di azione"
+msgstr "Mostra le icone sui pulsanti"
 
 #: cs/4.6/modules/cs_themes.py:114 cs/6.0_FUTURE/modules/cs_themes.py:114
 #: cs/4.4/modules/cs_themes.py:105 cs/4.2/modules/cs_themes.py:94
 msgid "Scrollbar behavior"
-msgstr ""
+msgstr "Comportamento barra laterale"
 
 #: cs/4.6/modules/cs_themes.py:119 cs/6.0_FUTURE/modules/cs_themes.py:119
 #: cs/4.4/modules/cs_themes.py:110 cs/4.2/modules/cs_themes.py:99
 msgid "Jump to position when clicking in a trough"
-msgstr ""
+msgstr "Salta alla posizione quando si fa clic su un avvallamento"
 
 #: cs/4.6/modules/cs_themes.py:122 cs/6.0_FUTURE/modules/cs_themes.py:122
 #: cs/4.4/modules/cs_themes.py:113 cs/4.2/modules/cs_themes.py:102
 msgid "Use overlay scroll bars"
-msgstr ""
+msgstr "Utilizza le barre di scorrimento sovrapposte"
 
 #: cs/4.6/modules/cs_themes.py:127 cs/6.0_FUTURE/modules/cs_themes.py:127
 #: cs/4.4/modules/cs_themes.py:118 cs/4.2/modules/cs_themes.py:107
 msgid "Override the current theme's scrollbar width"
-msgstr ""
+msgstr "Sostituisci la larghezza della barra di scorrimento del tema corrente"
 
 #: cs/4.6/modules/cs_themes.py:131 cs/6.0_FUTURE/modules/cs_themes.py:131
 #: cs/4.4/modules/cs_themes.py:122 cs/4.2/modules/cs_themes.py:111
 msgid "Scrollbar width"
-msgstr ""
+msgstr "Larghezza barra di scorrimento"
 
 #: cs/4.6/modules/cs_themes.py:146 cs/6.0_FUTURE/modules/cs_themes.py:146
 #: cs/4.4/modules/cs_themes.py:137 cs/4.2/modules/cs_themes.py:126
@@ -1276,6 +1269,8 @@ msgid ""
 "Changes will take effect the next time you log in and may not affect all "
 "applications."
 msgstr ""
+"Le modifiche avranno effetto al successivo accesso e potrebbero non influire "
+"su tutte le applicazioni."
 
 #: cs/4.6/bin/SUSpices.py:136 cs/4.0/bin/SUSpices.py:132
 #: cs/6.0_FUTURE/bin/SUSpices.py:136 cs/6.0_FUTURE/bin/Spices.py:705
@@ -1286,6 +1281,8 @@ msgid ""
 "An error occurred during the installation of %s. Please report this incident "
 "to its developer."
 msgstr ""
+"Si è verificato un errore durante l'installazione di %s. Si prega di "
+"segnalare questo incidente al suo sviluppatore."
 
 #. 4.8->settings-schema.json->section_general4->title
 #. 4.6->settings-schema.json->section_general4->title
@@ -1299,79 +1296,79 @@ msgstr "Visualizzazione"
 #: cs/4.0/cinnamon-settings.py:73 cs/3.8/cinnamon-settings.py:73
 #: cs/4.2/cinnamon-settings.py:75
 msgid "display, screen, monitor, layout, resolution, dual, lcd"
-msgstr ""
+msgstr "display, schermo, monitor, disposizione, risoluzione, doppio, lcd"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:11
-#, fuzzy
 msgid "Manage your actions"
-msgstr "Apri utili Impostazioni di Cinnamon"
+msgstr "Gestisci le tue azioni"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:33
-#, fuzzy
 msgid "action"
-msgstr "Azioni"
+msgstr "azione"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:59
-#, fuzzy
 msgid "Installed actions"
-msgstr "Estensioni"
+msgstr "Azioni installate"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:174
 msgid "Checking dependencies"
-msgstr ""
+msgstr "Controllo delle dipendenze"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:175
 #, python-format
 msgid "Please install: %s"
-msgstr ""
+msgstr "Per favore installa: %s"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:374
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annulla"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:375
-#, fuzzy
 msgid "_Open"
-msgstr "Apri"
+msgstr "_Apri"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:388
 msgid "Sound files"
-msgstr ""
+msgstr "File audio"
 
 #: cs/6.0_FUTURE/bin/Spices.py:328
 msgid "Downloading images:"
-msgstr ""
+msgstr "Download delle immagini:"
 
 #: cs/6.0_FUTURE/bin/Spices.py:402
 msgid ""
 "An error occurred while trying to access the server. Please try again in a "
 "little while."
 msgstr ""
+"Si è verificato un errore durante il tentativo di accesso al server. Per "
+"favore riprova tra poco."
 
 #: cs/6.0_FUTURE/bin/Spices.py:586
 msgid ""
 "Something went wrong with the spices download. Please try refreshing the "
 "list again."
 msgstr ""
+"Qualcosa è andato storto con il download delle spezie. Prova ad aggiornare "
+"nuovamente l'elenco."
 
 #: cs/6.0_FUTURE/bin/Spices.py:601
 msgid "Refreshing the cache"
-msgstr ""
+msgstr "Aggiornamento della cache"
 
 #: cs/6.0_FUTURE/bin/Spices.py:681
-#, fuzzy, python-format
+#, python-format
 msgid "Installing %s"
-msgstr "Estensioni"
+msgstr "Installazione di %s"
 
 #: cs/6.0_FUTURE/bin/Spices.py:786
 #, python-format
 msgid "Uninstalling %s"
-msgstr ""
+msgstr "Disinstallazione di %s"
 
 #: cs/6.0_FUTURE/bin/Spices.py:820
 #, python-format
 msgid "A problem occurred while removing %s."
-msgstr ""
+msgstr "Si è verificato un problema durante la rimozione di %s."
 
 #: cs/6.0_FUTURE/bin/Spices.py:842
 #, python-format
@@ -1380,30 +1377,33 @@ msgid ""
 "\n"
 "Details:  %s"
 msgstr ""
+"\n"
+"\n"
+"Dettagli:  %s"
 
 #: cs/4.2/bin/SUExtensionCore.py:247
 msgid "This is a system applet. It cannot be removed."
-msgstr ""
+msgstr "Questa è un'applet di sistema. Non può essere rimossa."
 
 #: cs/4.2/bin/SUExtensionCore.py:249
 msgid "This is a system desklet. It cannot be removed."
-msgstr ""
+msgstr "Questo è un desklet di sistema. Non può essere rimosso."
 
 #: cs/4.2/bin/SUExtensionCore.py:251
 msgid "This is a system extension. It cannot be removed."
-msgstr ""
+msgstr "Questa è un'estensione del sistema. Non può essere rimossa."
 
 #: cs/4.2/bin/SUExtensionCore.py:302
 msgid "This applet is currently enabled"
-msgstr ""
+msgstr "Questa applet è attualmente abilitata"
 
 #: cs/4.2/bin/SUExtensionCore.py:304
 msgid "This desklet is currently enabled"
-msgstr ""
+msgstr "Questo desktop è attualmente abilitato"
 
 #: cs/4.2/bin/SUExtensionCore.py:306
 msgid "This extension is currently enabled"
-msgstr ""
+msgstr "Questa estensione è attualmente abilitata"
 
 #: cs/4.2/bin/SUExtensionCore.py:345
 msgid ""
@@ -1411,6 +1411,9 @@ msgid ""
 "crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Questa applet contiene chiamate di funzione che potrebbero potenzialmente "
+"causare l'arresto anomalo o il blocco di Cinnamon. Se riscontri arresti "
+"anomali o blocchi, prova a rimuoverlo."
 
 #: cs/4.2/bin/SUExtensionCore.py:347
 msgid ""
@@ -1418,6 +1421,9 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Questo desklet contiene chiamate di funzioni che potrebbero potenzialmente "
+"causare l'arresto anomalo o il blocco di Cinnamon. Se riscontri arresti "
+"anomali o blocchi, prova a rimuoverlo."
 
 #: cs/4.2/bin/SUExtensionCore.py:349
 msgid ""
@@ -1425,10 +1431,13 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Questa estensione contiene chiamate di funzione che potrebbero "
+"potenzialmente causare l'arresto anomalo o il blocco di Cinnamon. Se "
+"riscontri arresti anomali o blocchi, prova a rimuoverlo."
 
 #: cs/4.2/bin/SUExtensionCore.py:458
 msgid "About"
-msgstr ""
+msgstr "Informazioni"
 
 #: cs/4.2/bin/SUExtensionCore.py:514
 #, python-format
@@ -1436,34 +1445,43 @@ msgid ""
 "Extension %s is not compatible with current version of cinnamon. Using it "
 "may break your system. Load anyway?"
 msgstr ""
+"L'estensione %s non è compatibile con la versione attuale di cannella. Il "
+"suo utilizzo potrebbe danneggiare il sistema. Caricare comunque?"
 
 #: cs/4.2/bin/SUExtensionCore.py:528
 msgid ""
 "There are multiple instances enabled. Are you sure you want to remove all of "
 "them?"
 msgstr ""
+"Sono presenti più istanze abilitate. Sei sicuro di volerli rimuovere tutti?"
 
 #: cs/4.2/bin/SUExtensionCore.py:536 cs/4.2/bin/SUExtensionCore.py:885
 #, python-format
 msgid "Are you sure you want to completely remove %s?"
-msgstr ""
+msgstr "Vuoi davvero procedere alla rimozione completa di %s?"
 
 #: cs/4.2/bin/SUExtensionCore.py:544
 msgid ""
 "This will restore the default set of enabled applets. Are you sure you want "
 "to do this?"
 msgstr ""
+"Ciò ripristinerà il set predefinito di applet abilitate. Vuoi davvero "
+"procedere?"
 
 #: cs/4.2/bin/SUExtensionCore.py:546
 msgid ""
 "This will restore the default set of enabled desklets. Are you sure you want "
 "to do this?"
 msgstr ""
+"Ciò ripristinerà il set predefinito di desklet abilitati. Vuoi davvero "
+"procedere?"
 
 #: cs/4.2/bin/SUExtensionCore.py:548
 msgid ""
 "This will disable all active extensions. Are you sure you want to do this?"
 msgstr ""
+"Ciò ripristinerà il set predefinito di estensioni abilitate. Vuoi davvero "
+"procedere?"
 
 #: cs/4.2/bin/SUExtensionCore.py:581
 #, python-format
@@ -1471,36 +1489,37 @@ msgid ""
 "Something went wrong while loading %s. Please make sure you are using the "
 "latest version, and then report the issue to its developer."
 msgstr ""
+"Qualcosa è andato storto durante il caricamento di %s. Assicurati di "
+"utilizzare la versione più recente, quindi segnala il problema allo "
+"sviluppatore."
 
 #: cs/4.2/bin/SUExtensionCore.py:656
 msgid "Install"
-msgstr ""
+msgstr "Installa"
 
 #: cs/4.2/bin/SUExtensionCore.py:662
-#, fuzzy
 msgid "Update"
-msgstr "Spices Update"
+msgstr "Aggiorna"
 
 #: cs/4.2/bin/SUExtensionCore.py:665 cs/4.2/bin/SUExtensionCore.py:722
-#, fuzzy
 msgid "Installed"
-msgstr "Estensioni"
+msgstr "Installate"
 
 #: cs/4.2/bin/SUExtensionCore.py:709
 msgid "Sort by"
-msgstr ""
+msgstr "Ordina per"
 
 #: cs/4.2/bin/SUExtensionCore.py:719
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: cs/4.2/bin/SUExtensionCore.py:720
 msgid "Popularity"
-msgstr ""
+msgstr "Popolarità"
 
 #: cs/4.2/bin/SUExtensionCore.py:721
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: cs/4.2/bin/SUExtensionCore.py:723
 msgid "Upgradable"
@@ -1508,28 +1527,26 @@ msgstr "Aggiornabile"
 
 #: cs/4.2/bin/SUExtensionCore.py:775
 msgid "More info"
-msgstr ""
+msgstr "Maggiori info"
 
 #: cs/4.2/bin/SUExtensionCore.py:915
-#, fuzzy
 msgid "Update all"
-msgstr "Aggiorna Tutto Ora!"
+msgstr "Aggiorna tutto"
 
 #: cs/4.2/bin/SUExtensionCore.py:915
-#, fuzzy, python-format
+#, python-format
 msgid "%d update available"
 msgid_plural "%d updates available"
-msgstr[0] "Nuovo tema disponibile:"
-msgstr[1] "Nuovo tema disponibile:"
+msgstr[0] "%d aggiornamento disponibile"
+msgstr[1] "%d aggiornamenti disponibili"
 
 #: cs/4.2/bin/SUExtensionCore.py:917
-#, fuzzy
 msgid "No updates available"
-msgstr "Nuovi temi disponibili:"
+msgstr "Nessun aggiornamento disponibile"
 
 #: cs/4.2/bin/SUExtensionCore.py:934
 msgid "Your cache is out of date. Would you like to update it now?"
-msgstr ""
+msgstr "La tua cache non è aggiornata. Vuoi aggiornarla adesso?"
 
 #. metadata.json->description
 msgid ""
