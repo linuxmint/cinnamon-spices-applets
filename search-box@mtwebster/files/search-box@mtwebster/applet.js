@@ -150,12 +150,25 @@ SearchBoxApplet.prototype = {
         prov_label = this.selected_provider;
         prov_url = "";
         for (let p of this.providers) {
-            if (p["name"] == prov_label) {
+            if (p["show"] == true && p["name"] == prov_label) {
                 prov_url = p["url"];
                 break
             }
         }
+
         if (prov_url.length === 0) {
+            // Select the first checked provider:
+            for (let p of this.providers) {
+                if (p["show"] == true) {
+                    prov_label = p["name"];
+                    prov_url = p["url"];
+                    break
+                }
+            }
+        }
+
+        if (prov_url.length === 0) { // There is no provider checked.
+            // Use the default provider:
             prov_label = "Google";
             prov_url = "https://google.com/search?q=";
         }

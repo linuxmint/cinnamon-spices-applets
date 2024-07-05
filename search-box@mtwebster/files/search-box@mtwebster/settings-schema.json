@@ -15,7 +15,7 @@
     "section-providers": {
       "type": "section",
       "title": "Providers",
-      "keys": ["providers"]
+      "keys": ["providers", "providers-help"]
     },
     "section-options": {
       "type": "section",
@@ -160,6 +160,10 @@
       }
     ],
     "tooltip": "If your query begins with the 3 letters of the short name, it will be processed by the relevant search engine.\nExample: ddg linux mint iso"
+  },
+  "providers-help": {
+    "type": "label",
+    "description": "Only selected providers will be displayed in the context menu, so you can select your default provider.\nIf you deselect the default provider, the first selected becomes the default provider.\nIf no provider is selected, the default provider is Google."
   },
   "selected-provider": {
     "type": "generic",
