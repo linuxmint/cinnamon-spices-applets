@@ -75,6 +75,9 @@ def print_output(output: CapturedOutput):
         file = sys.stdout if stream == 'stdout' else sys.stderr
         print(content, end='', file=file, flush=True)
 
+    # Add a newline to the end of the output
+    print()
+
 
 def get_command_output(cmd: List[str], cwd: Optional[str] = None, check: bool = True, stderr: Optional[int] = None) -> CapturedOutput:
     """
