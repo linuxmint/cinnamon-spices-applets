@@ -6,16 +6,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-11 14:41+0100\n"
-"PO-Revision-Date: 2024-02-13 18:09+0100\n"
+"POT-Creation-Date: 2024-07-03 08:58+0200\n"
+"PO-Revision-Date: 2024-07-03 09:03+0200\n"
+"PO-Revision-Date: 2024-07-03 08:58+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:429
@@ -2939,6 +2951,162 @@ msgstr "Keresés…"
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
 msgstr "Kiválasztott elemek eltávolítása"
+
+#: applet.js:2668
+msgid "Categories"
+msgstr "Kategóriák"
+
+#: applet.js:2670
+msgid "Radio Stations"
+msgstr "Rádióállomások"
+
+#: applet.js:2679
+msgid "All Categories"
+msgstr "Összes kategória"
+
+#: scripts/popup_menu.py:71
+msgid "Open Folder"
+msgstr "Mappa megnyitása"
+
+#: scripts/popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Megnyitás terminálban"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "KÍSÉRLETI"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Gyorsítótár"
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr "Mágnesezze az összes 25%-os szorzatot"
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr "Hangerő OSD megjelenítése rádióállomás váltásakor"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Az állomáslista megjelenítése a kategória lista mellett"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Ellenőrizve: A kategória fölé mozgatva (kattintás nélkül) jelenítse meg az "
+"állomások listáját, majd válassza ki az állomást.\n"
+"Nem bejelölt: Egyetlen lista, amely tartalmazza az egyes kategóriákat, majd "
+"az állomásokat."
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Nincs gyorsítótár"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Ennek az opciónak a bejelölése korlátozza a memóriahasználatot, de már nem "
+"teszi lehetővé a felhasználó számára a gyorsítótár visszatekerését (a "
+"sound150@claudiux kisalkalmazás használatával)."
+
+#. settings-schema.json->cache-mins->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Perc(ek) a gyorsítótárazáshoz\n"
+"A 0 azt jelenti, hogy nincs korlátozás (alapértelmezett). 1 óra = 60 perc. "
+"24 óra = 1440 perc."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Gyorsítótár a lemezen\n"
+"(A csomagadatokat egy ideiglenes fájlba írja, ahelyett, hogy a memóriában "
+"tartaná őket.)"
+
+#. settings-schema.json->cache-dir->description
+msgid ""
+"Directory used for data caching\n"
+"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
+"sufficient free space.)"
+msgstr ""
+"Adatok gyorsítótárazására használt könyvtár\n"
+"(SSD-lemezeken óvatosan használd. Inkább RAM-ban tárolt könyvtárat "
+"válasszon, elegendő szabad hellyel)."
+
+#. settings-schema.json->cache-dir-open->description
+msgid "Open cache directory"
+msgstr "Gyorsítótár könyvtárat megnyitása"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Stream gyorsítótár mérete"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 1 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"A stream gyorsítótár mennyisége. Alapértelmezett: 1 MiB.\n"
+"Vigyázat, ha ezt nagy értékre állítjuk, az csökkentheti a teljesítményt."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Korlátlan"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 Mib"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
 
 #~ msgid "Symbolic Icon Color"
 #~ msgstr "Szimbolikus ikon szín"
