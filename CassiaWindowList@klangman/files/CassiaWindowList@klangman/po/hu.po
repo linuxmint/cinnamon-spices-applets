@@ -1,16 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: CassiaWindowList@klangman 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-04 23:25-0400\n"
-"PO-Revision-Date: 2024-02-08 15:00+0100\n"
-"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"POT-Creation-Date: 2024-07-10 01:48-0400\n"
+"PO-Revision-Date: 2024-07-10 01:53-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +117,7 @@ msgstr "Áthelyezés másik munkaterületre"
 
 #: 4.0/applet.js:3002 6.0/applet.js:3002
 msgid " (this workspace)"
-msgstr "(ez a munkaterület)"
+msgstr " (ez a munkaterület)"
 
 #: 4.0/applet.js:3015 6.0/applet.js:3015
 msgid "Move to another monitor"
@@ -141,9 +140,8 @@ msgstr "Kijelző"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 #: 4.0/applet.js:3040 6.0/applet.js:3040
-#, fuzzy
 msgid "Move window here"
-msgstr "Ablak bezárása"
+msgstr "Ablak mozdítása ide"
 
 #: 4.0/applet.js:3057 6.0/applet.js:3057
 msgid "unassigned"
@@ -280,9 +278,8 @@ msgstr "Ablaklista gomb címke beállításai"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
-#, fuzzy
 msgid "Number label settings"
-msgstr "Alkalmazáscsoportok számcímke beállításai"
+msgstr "Számcímke beállítások"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -470,7 +467,7 @@ msgstr ""
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->description
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->description
 msgid "Show a vertical ellipsis (...) for grouped buttons"
-msgstr ""
+msgstr "Függőleges ellipszis megjelenítése (...) csoportosított gombok esetén"
 
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
@@ -479,6 +476,9 @@ msgid ""
 "list buttons with more then one window. When on a vertical panel this option "
 "is not possible and the setting will be ignored."
 msgstr ""
+"A több ablakot tartalmazó, csoportosított ablaklistás gombok címkéi elé egy "
+"függőleges ellipszis unicode chartert illeszt. Függőleges panelen ez az "
+"opció nem lehetséges, és a beállítás figyelmen kívül marad."
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -525,9 +525,8 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->description
 #. 6.0->settings-schema.json->hover-peek-delay->description
-#, fuzzy
 msgid "Hover time before showing a full size window preview"
-msgstr "Lebegtetési idő a menü megjelenítése előtt"
+msgstr "Lebegtetési idő a teljes méretű ablak előnézetének megjelenítése előtt"
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
@@ -537,6 +536,11 @@ msgid ""
 "thumbnail menu items (of course one of the full size window preview options "
 "must be enabled for this option to have any effect)"
 msgstr ""
+"Ez határozza meg, hogy az egér lebegtetése után mennyi idő múlva jelenik meg "
+"a teljes méretű ablak előnézete. Ez akkor érvényes, ha az egérrel az "
+"ablaklista gombjai vagy a miniatűr menüpontok fölé mozdul (természetesen a "
+"teljes méretű ablak előnézet egyik opciójának engedélyezve kell lennie "
+"ahhoz, hogy ez az opció bármilyen hatással legyen)."
 
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
@@ -567,38 +571,33 @@ msgstr "A címke animációs ideje"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Nothing"
-msgstr "Ne tegyen semmit"
+msgstr "Semmi"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Application group window count"
-msgstr "Alkalmazás ablakok csoportosítása"
+msgstr "Alkalmazáscsoport ablakok száma"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Workspace number"
-msgstr "Kijelző sorszáma"
+msgstr "Munkaterület száma"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Monitor number"
-msgstr "Kijelző"
+msgstr "Kijelzők száma"
 
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
-#, fuzzy
 msgid "Number label contents"
-msgstr "Címke tartalma"
+msgstr "Számcímke tartalma"
 
 #. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-number->options
 msgid "Smart"
-msgstr ""
+msgstr "Inteligens"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
@@ -613,6 +612,11 @@ msgid ""
 "above. i.e. When there is two or more windows in a group, or when the "
 "windows workspace or monitor does not match the current one."
 msgstr ""
+"Szabályozza a számcímke használatának időpontját. Az intelligens azt "
+"jelenti, hogy a címke csak akkor jelenik meg, ha a fenti számcímke tartalma "
+"beállításától függően megfelelő, azaz ha két vagy több ablak van egy "
+"csoportban, vagy ha az ablakok munkaterülete vagy monitora nem egyezik meg "
+"az aktuális ablakéval."
 
 #. 4.0->settings-schema.json->number-style->options
 #. 6.0->settings-schema.json->number-style->options
@@ -631,15 +635,14 @@ msgstr "Számstílus"
 
 #. 4.0->settings-schema.json->number-style->tooltip
 #. 6.0->settings-schema.json->number-style->tooltip
-#, fuzzy
 msgid ""
 "Controls how the number label is presented. When on a vertical panel or when "
 "in launcher mode, the \"label prepend\" option is not possible so \"icon "
 "overlay\" will be used instead"
 msgstr ""
-"Szabályozza, hogyan jelenjen meg a csoportosított gomb ablakainak száma. "
-"Függőleges panelen a \"címke elé\" opció nem lehetséges, ezért az \"ikon "
-"átfedés\" lesz helyette"
+"A számcímke megjelenítésének módját szabályozza. Függőleges panelen vagy "
+"indító módban a \"Címke elé\" opció nem lehetséges, így helyette az \"Ikon "
+"átfedés\" opciót használja"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -795,7 +798,7 @@ msgid ""
 msgstr ""
 "Ez határozza meg a gombok közötti távolságot, az értéket ketté kell osztani "
 "és hozzáadni az ikon bal oldalán és a címke jobb oldalán vízszintes "
-"paneleknél, illetve függőleges paneleknél az ikon tetején és gombjánál."
+"paneleknél, illetve függőleges paneleknél az ikon tetején és gombjánál"
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->description
 #. 6.0->settings-schema.json->hover-peek-windowlist->description
@@ -806,14 +809,14 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
-#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a window-list button. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
 "Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
-"az egérmutatót az ablaklista gombja fölé viszi."
+"az egérmutató az ablaklista gombja fölé kerül. Az előnézet megjelenése "
+"előtti késleltetés a Speciális lapon található beállítással szabályozható"
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
@@ -1115,9 +1118,8 @@ msgstr "Áthelyezés a következő munkaterületre"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Move to this workspace"
-msgstr "Áthelyezés a következő munkaterületre"
+msgstr "Áthelyezés erre a munkaterületre"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1267,7 +1269,7 @@ msgstr "Rögzítés a panelhez kapcsoló"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile left"
-msgstr ""
+msgstr "Csempe balra"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1282,7 +1284,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top left"
-msgstr ""
+msgstr "Csempe balra fent"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1297,7 +1299,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top"
-msgstr ""
+msgstr "Csempe fent"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1312,7 +1314,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top right"
-msgstr ""
+msgstr "Csempe jobbra fent"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1327,7 +1329,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile right"
-msgstr ""
+msgstr "Csempe jobbra"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1342,7 +1344,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom right"
-msgstr ""
+msgstr "Csempe jobbra lent"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1357,7 +1359,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom"
-msgstr ""
+msgstr "Csempe lent"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1372,7 +1374,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom left"
-msgstr ""
+msgstr "Csempe balra lent"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1386,9 +1388,8 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Untile window"
-msgstr "Ablak bezárása"
+msgstr "Csempézetlen ablak"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1429,14 +1430,15 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
 #. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
-#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a Thumbnail menu item. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
-"Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
-"az egérmutatót a miniatűr menüelem fölé viszi"
+"Ha engedélyezve van, akkor egy teljes méretű előnézeti ablak jelenik meg, "
+"amikor az egérmutatót a Thumbnail menüpont fölé helyezi. Az előnézet "
+"megjelenése előtti késleltetés a Speciális lapon található beállítással "
+"szabályozható"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->description
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->description
@@ -1553,7 +1555,7 @@ msgstr "A legutóbbi alkalmazásablak visszaállítása"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 1st window in grouped button"
-msgstr ""
+msgstr "Csoportosított gomb 1. ablakának aktiválása"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1562,7 +1564,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 2nd window in grouped button"
-msgstr ""
+msgstr "Csoportosított gomb 2. ablakának aktiválása"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1571,7 +1573,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 3rd window in grouped button"
-msgstr ""
+msgstr "Csoportosított gomb 3. ablakának aktiválása"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1580,7 +1582,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Activate 4th window in grouped button"
-msgstr ""
+msgstr "Csoportosított gomb 4. ablakának aktiválása"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
