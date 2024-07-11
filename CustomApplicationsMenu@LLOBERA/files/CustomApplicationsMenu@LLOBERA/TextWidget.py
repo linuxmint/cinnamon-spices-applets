@@ -2,6 +2,9 @@
 
 import random
 from JsonSettingsWidgets import *
+
+import gi
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gio, Gtk
 
 
