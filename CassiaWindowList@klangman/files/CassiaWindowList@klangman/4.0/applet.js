@@ -219,13 +219,23 @@ const MouseAction = {
   MoveHere: 39           // Change the windows monitor and workspace to be the current monitor and workspace
 }
 
-// Possible settings for the left mouse action for grouped buttons (or Laucher with running windows)
+// Possible value for the Mouse scroll wheel action setting
+const MouseScrollAction = {
+   None: 0,
+   ChangeState: 1,      // Minimize/Restore/Maximize the window
+   ChangeWorkspace: 2,  // Next/Previous workspace
+   ChangeMonitor: 3,    // Next/Previous monitor
+   ChangeTiling: 4      // Change tiling in a counter/clockwise direction
+}
+
+// Possible settings for the left mouse action for grouped buttons (or Launcher with running windows)
 const LeftClickGrouped = {
    Toggle: 0,         // Restore most resent window or minimize if already in focus
    Cycle: 1,          // Restore most recent window or cycle windows if any window is already in focus
    Thumbnail: 2,      // Show the Thumbnail menu of windows
    ToggleAndHold: 3,  // Restore or Minimize on click, "hold" style thumbnail menu on hold
-   NewAndHold: 4      // Open a new window on click, "hold" style thumbnail menu on hold **Only possible in Launcher mode!**
+   NewAndHold: 4,     // Open a new window on click, "hold" style thumbnail menu on hold **Only possible in Launcher mode!**
+   ToggleFirst: 5     // Restore the 1st window in the group
 }
 
 // Possible values for the Pinned label setting
@@ -287,6 +297,13 @@ const SaturationType = {
    OtherWorkspaces: 3,
    OtherMonitors: 4,
    Focused: 5
+}
+
+const HideLabels = {
+   None: 0,
+   Minimized: 1,
+   OtherWorkspaces: 2,
+   OtherMonitors: 3
 }
 
 var hasSetMarkup = undefined;
@@ -814,12 +831,34 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
     this._signalManager.connect(this, "activate", this._onActivate, this);
+
+    this._draggable = DND.makeDraggable(this.actor);
+    this._draggable.connect("drag-begin", Lang.bind(this, this._onDragBegin));
+    this._draggable.connect("drag-end", Lang.bind(this, this._onDragEnd));
   }
 
-  handleDragOver(source, actor, x, y, time) {
-    this.actor.hover = true;
-    Main.activateWindow(this._metaWindow);
-    return DND.DragMotionResult.COPY_DROP;
+  getDragActor() {
+    let clone = new Clutter.Clone({ source: this._cloneBin });
+    clone.width = this._cloneBin.width;
+    clone.height = this._cloneBin.height;
+    let [x,y] = this._cloneBin.get_transformed_position()
+    clone.x = x;
+    clone.y = y;
+    return clone;
+  }
+
+  _onDragBegin() {
+  }
+
+  _onDragEnd(event, time, accepted) {
+    this.actor.show();
+    // If the drop was not accepted by the drop target and the monitor|workspace where the drop occurred is not that same as the currentWindow's monitor|workspace,
+    // then move the currentWindow to the monitor|workspace where the drop occurred and activate it. The user wants to use DND to move a window to a new monitor|workspace.
+    if (hasGetCurrentMonitor && !accepted && this._metaWindow) {
+       moveWindowHere(this._metaWindow, global.screen.get_active_workspace_index(), global.display.get_current_monitor());
+       this._appButton._workspace.closeThumbnailMenu();
+       this._menu._clearDragPlaceholder();
+    }
   }
 
   doSize(availWidth, availHeight) {
@@ -869,7 +908,6 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
       this._closeIcon = icon;
       this._closeIcon.set_reactive(true);
       this._closeBin.set_child(this._closeIcon);
-      this._signalManager.connect(this._closeIcon, "button-release-event", this._onCloseButtonRelease, this);
       this._signalManager.connect(this._closeBin, "enter-event", this._onCloseIconEnterEvent, this);
       this._signalManager.connect(this._closeBin, "leave-event", this._onCloseIconLeaveEvent, this);
     }
@@ -919,7 +957,14 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
           return true;
        }
     }
-    if (mouseBtn == 2) {  // Middle button
+    if (mouseBtn == 1) {  // Left button
+       if (event.get_source() === this._closeIcon) {
+          this._inClosing = true;
+          this._metaWindow.delete(global.get_current_time());
+          this._inClosing = false;
+          return true;
+       }
+    } else if (mouseBtn == 2) {  // Middle button
       let action = this._settings.getValue("preview-middle-click");
       this._appButton._performMouseAction(action, this._metaWindow);
       return true;
@@ -939,13 +984,6 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
       return true;
     }
     super._onButtonReleaseEvent(actor, event);
-    return true;
-  }
-
-  _onCloseButtonRelease() {
-    this._inClosing = true;
-    this._metaWindow.delete(global.get_current_time());
-    this._inClosing = false;
     return true;
   }
 
@@ -1061,9 +1099,115 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     return null;
   }
 
+  handleDragOver(source, actor, x, y, time) {
+    //if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))) {
+    //  return DND.DragMotionResult.CONTINUE;
+    //}
+    let children = this.box.get_children();
+    let pos = children.length;
+
+    if (this._appButton._applet.orientation == St.Side.TOP || this._appButton._applet.orientation == St.Side.BOTTOM) {
+      while (--pos && (x < children[pos].get_allocation_box().x1 || children[pos].is_visible() == false));
+    } else {
+      while (--pos && (y < children[pos].get_allocation_box().y1 || children[pos].is_visible() == false));
+    }
+    let dragPlaceholderPos = this._dragPlaceholderPos
+    let autoSort = this._settings.getValue("menu-sort-groups") && this._appButton._windows.length > 1;
+    // If the pointer is over the placeholder then we don't need to move anything
+    if (pos != dragPlaceholderPos) {
+      if (this._dragPlaceholder == undefined) {
+        this._dragPlaceholder = new DND.GenericDragPlaceholderItem();
+        this._dragPlaceholder.child.set_width(source.actor.width);
+        this._dragPlaceholder.child.set_height(source.actor.height);
+        this.box.insert_child_at_index(this._dragPlaceholder.actor, pos);
+        source.actor.hide();
+        this._dragOriginalPos = pos;
+      } else {
+        if (autoSort==false) {
+          this.box.set_child_at_index(this._dragPlaceholder.actor, pos);
+        }
+      }
+      this._dragPlaceholderPos = pos;
+    }
+    if (source instanceof ThumbnailMenuItem) {
+       if (autoSort) {
+         return DND.DragMotionResult.NO_DROP;
+       } else {
+         return DND.DragMotionResult.MOVE_DROP;
+       }
+    } else {
+       return DND.DragMotionResult.COPY_DROP;
+    }
+  }
+
+  handleDragOut() {
+    let children = this.box.get_children();
+    if (children.length > 2) { // If all we have is the hidden single item and a placeholder, then don't remove the placeholder!
+       this._clearDragPlaceholder();
+    }
+  }
+
+  acceptDrop(source, actor, x, y, time) {
+    if (this._dragPlaceholder == undefined) {
+      return false;
+    }
+    if (source instanceof ThumbnailMenuItem && (this._appButton._windows.length <= 1 || this._settings.getValue("menu-sort-groups")==false)) {
+      let newPos = (this._dragOriginalPos<this._dragPlaceholderPos) ? this._dragPlaceholderPos-1 : this._dragPlaceholderPos;
+      let oldPos = this._dragOriginalPos;
+      if (this._dragOriginalPos !== newPos) {
+        this.box.set_child_at_index(source.actor, this._dragPlaceholderPos);
+        if (this._appButton._grouped > GroupingType.NotGrouped) {
+           // We need to reorder the _windows array in this grouped button
+           let newWindows = [];
+           let oldWindows = this._appButton._windows;
+           for (let i=0 ; i < oldWindows.length ; i++ ){
+              if (i==newPos) {
+                 newWindows.push(oldWindows[oldPos]);
+              } else if (i>=oldPos && i<newPos) {
+                 newWindows.push(oldWindows[i+1]);
+              } else if (i>newPos && i<=oldPos) {
+                 newWindows.push(oldWindows[i-1]);
+              } else {
+                 newWindows.push(oldWindows[i]);
+              }
+           }
+           this._appButton._windows = newWindows;
+        } else {
+           // We need to reorder pooled buttons on the window-list, since we have a menu with more then one item, it must be a pool!
+           let workspace = this._appButton._workspace;
+           let btns = workspace._lookupAllAppButtonsForApp(this._appButton._app);
+           let children = workspace.actor.get_children();
+           let offset = children.indexOf(btns[0].actor)
+           workspace.actor.set_child_at_index(btns[oldPos].actor, newPos+offset);
+           if (oldPos === btns.length-1) {
+              btns[btns.length-2]._updateLabel();
+              btns[oldPos]._updateLabel();
+           } else if (newPos == btns.length-1) {
+              btns[btns.length-1]._updateLabel();
+              btns[oldPos]._updateLabel();
+           }
+        }
+      }
+    }
+    this._clearDragPlaceholder();
+    return true;
+  }
+
+  _clearDragPlaceholder() {
+    if (this._dragPlaceholder) {
+      this._dragPlaceholder.actor.destroy();
+      this._dragPlaceholder = undefined;
+      this._dragPlaceholderPos = undefined;
+    }
+  }
+
   openMenu() {
     if (this.isOpen || this._appButton._windows.length==0 || global.settings.get_boolean("panel-edit-mode") === true) {
       return;
+    }
+    // Make 100% sure there are no existing items in the menu
+    if (this.numMenuItems != 0) {
+       this.removeAll();
     }
     this._updateOrientation();
     let groupingType = this._settings.getValue("group-windows");
@@ -1073,11 +1217,11 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     } else if (groupingType === GroupType.Auto){
        allWindowsForPool = this._settings.getValue("menu-all-windows-of-auto");
     }
-    let btns = this._appButton._workspace._lookupAllAppButtonsForApp(this._appButton._app);
     let windows = [];
-    if (this._appButton._windows.length>1 || btns.length == 1 || allWindowsForPool == false){
+    if (this._appButton._windows.length>1 || allWindowsForPool === false){
       windows = this._appButton._windows;
     } else {
+       let btns = this._appButton._workspace._lookupAllAppButtonsForApp(this._appButton._app);
        for( let i=0 ; i< btns.length ; i++ ) {
           windows.push(btns[i]._windows[0]);
        }
@@ -1345,6 +1489,7 @@ class WindowListButton {
     this._signalManager.connect(this._settings, "changed::number-type", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
     this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::button-spacing", this._updateSpacing, this);
+    this._signalManager.connect(this._settings, "changed::menu-sort-groups", Lang.bind(this, function() { if (this._settings.getValue("menu-sort-groups")) this._sortWindows(); }), this);
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
     this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
@@ -1365,6 +1510,31 @@ class WindowListButton {
     this.isDraggableApp = true;
     this._updateNumber();
     this._updateSpacing();
+  }
+
+  // Sort this._windows by workspace and monitor
+  _sortWindows() {
+     if (this._windows.length > 1) {
+        this._windows.sort(
+           function(a, b) {
+              let wsA = a.get_workspace();
+              let wsB = b.get_workspace();
+              if (wsA && wsB) {
+                 let wsDiff = wsA.index() - wsB.index();
+                 if (wsDiff === 0) {
+                    return(a.get_monitor() - b.get_monitor());
+                 }
+                 return wsDiff;
+              } else {
+                 if (wsA) {
+                    return -1;
+                 } else if (wsB) {
+                    return 1;
+                 }
+              }
+              return 0;
+           });
+     }
   }
 
   _updateSpacing() {
@@ -1553,6 +1723,9 @@ class WindowListButton {
       this._workspace.menuManager.addMenu(this.menu);
     }
     this.updateIconSelection();
+    if (this._settings.getValue("menu-sort-groups")) {
+       this._sortWindows();
+    }
   }
 
   removeWindow(metaWindow) {
@@ -1687,11 +1860,17 @@ class WindowListButton {
           }
        }
     }
-    let title;
-    if (this._windows.length == 0 || this._currentWindow.get_title()==null || (this._windows.length > 1 && this.getButton1Action()===LeftClickGrouped.Thumbnail)) {
+    let title = null;
+    let leftClickAction = this.getButton1Action();
+    if (this._windows.length > 0 && (this._windows.length === 1 || leftClickAction!==LeftClickGrouped.Thumbnail)) {
+       if (leftClickAction === LeftClickGrouped.ToggleFirst) {
+          title = this._windows[0].get_title();
+       } else {
+          title = this._currentWindow.get_title();
+       }
+    }
+    if (title===null) {
        title = this._app.get_name();
-    } else {
-       title = this._currentWindow.get_title();
     }
     if (text.length == 0 || !hasSetMarkup) {
        this._tooltip.set_text(title + text);
@@ -1864,7 +2043,7 @@ class WindowListButton {
     let capSetting = this._settings.getValue("display-caption-for");
     let numSetting = this._settings.getValue("display-number");
     let pinnedSetting = this._settings.getValue("display-caption-for-pined");
-    let minimizedSetting = this._settings.getValue("hide-caption-for-minimized");
+    let hideSetting = this._settings.getValue("hide-caption-for-minimized"); // For compatibility, the option name "hide-caption-for-minimized" was maintained, but now it has more then one possible value not only for minimized windows
     let style = this._settings.getValue("number-style");
     let numberType = this._settings.getValue("number-type");
     let preferredWidth = this._settings.getValue("label-width");
@@ -1873,64 +2052,76 @@ class WindowListButton {
     let text = "";
     let width = preferredWidth;
     let needsCaption = false;
-    let oneCaption = false;
-    let lastButton = null;
+    let oneCaption = false;   // Will be true if this is the last button in a pool and only one label option is enabled
+    let lastButton = null;    // Will be non-null if this is a pool and only one label option is enabled
+    let poolButtons = [];
 
     if (capSetting === DisplayCaption.One) {
-       // Check if the next button is for the same application
-       let children = this._workspace.actor.get_children();
-       let idx = children.indexOf(this.actor);
-       if (idx == children.length-1 || children[idx+1]._delegate._app != this._app) {
+       if (this._grouped > GroupingType.NotGrouped) {
           oneCaption = true;
        } else {
-          // Find the button that requires a label for this window pool
-          idx++;
-          while ( idx < children.length-1 && children[idx]._delegate._app === this._app ) {
-             idx++;
+          // Check if the next button is for the same application
+          let children = this._workspace.actor.get_children();
+          let idx = children.indexOf(this.actor);
+          if (idx >= 0) {
+             if (idx === children.length-1 || children[idx+1]._delegate._app != this._app) {
+                oneCaption = true;
+             }
+             // Find the first button in this window pool
+             while ( idx-1 >= 0 && children[idx-1]._delegate._app === this._app ) {
+                idx--;
+             }
+             // Populate the  poolButtons array
+             while ( idx < children.length && children[idx]._delegate._app === this._app ) {
+                lastButton = children[idx]._delegate;
+                poolButtons.push(lastButton);
+                idx++;
+             }
           }
-          if (children[idx]._delegate._app === this._app )
-             lastButton = children[idx]._delegate;
-          else
-             lastButton = children[idx-1]._delegate;
        }
     }
 
-    if (this._pinned){
+    if (this._pinned) {
        if (pinnedSetting === PinnedLabel.Always || (pinnedSetting === PinnedLabel.Focused && this._hasFocus()) || pinnedSetting === PinnedLabel.Running && number>0) {
           needsCaption = true;
        }
     } else {
-       if (capSetting === DisplayCaption.All || (capSetting === DisplayCaption.Focused && this._hasFocus()) || oneCaption === true)
-       {
+       if (capSetting === DisplayCaption.All || (capSetting === DisplayCaption.Focused && this._hasFocus()) || oneCaption === true) {
           needsCaption = true;
        }
     }
-    if (minimizedSetting === true && lastButton && lastButton._currentWindow && lastButton._currentWindow.minimized) {
+    if (oneCaption === false && hideSetting != HideLabels.None && lastButton && lastButton!=this && lastButton._currentWindow) {
        lastButton._updateLabel(); // The button with the label in this pool might need to add/remove its label
     }
-    if (needsCaption === true && minimizedSetting === true && this._currentWindow && this._currentWindow.minimized) {
-       if (this._windows.length > 1) {
-          needsCaption = !this.isMinimizedAll();
-       } else if (oneCaption === true) {
-          let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
-          let minimized = 0;
-          for (let idx=0 ; idx < btns.length ; idx++ ) {
-             if (btns[idx]._windows.length === 0 || btns[idx]._windows[0].minimized)
-                minimized++;
+    if (needsCaption === true && this._currentWindow) {
+       if (oneCaption === true && this._windows.length === 1 && poolButtons.length > 1) {
+          let count = 0;
+          for (let idx=0 ; idx < poolButtons.length ; idx++ ) {
+             if (poolButtons[idx]._windows.length === 0 ||
+                (hideSetting === HideLabels.Minimized && (!poolButtons[idx]._currentWindow || poolButtons[idx]._currentWindow.minimized)) ||
+                (hideSetting === HideLabels.OtherWorkspaces && poolButtons[idx].isOnOtherWorkspace()) ||
+                (hideSetting === HideLabels.OtherMonitors && poolButtons[idx].isOnOtherMonitor()))
+             {
+                count++;
+             }
           }
-          if (minimized === btns.length)
+          if (count === poolButtons.length) {
              needsCaption = false;
-       } else {
+          }
+       } else if ((hideSetting === HideLabels.Minimized && this._currentWindow.minimized) ||
+                  (hideSetting === HideLabels.OtherWorkspaces && this.isOnOtherWorkspace()) ||
+                  (hideSetting === HideLabels.OtherMonitors && this.isOnOtherMonitor()))
+       {
           needsCaption = false;
        }
     }
     if (pinnedSetting === PinnedLabel.Focused) {
        let window = global.display.get_focus_window();
        let focus = this._workspace._lookupAppButtonForWindow(window);
-       if (lastButton && lastButton._pinned && focus && focus._app === this._app) {
+       if (lastButton && lastButton!=this && lastButton._pinned && focus && poolButtons.indexOf(focus)!=-1) {
           // 'this' is a button in a pinned button pool. We have to allow the last button in the pool to show its label
           lastButton._updateLabel();
-       } else if (this._pinned && oneCaption && focus && focus._app == this._app) {
+       } else if (this._pinned && oneCaption && focus && poolButtons.indexOf(focus)!=-1) {
           // 'this' is the last button in a pinned button pool when focus is with some other button in the pool
           needsCaption = true;
        }
@@ -2266,6 +2457,13 @@ class WindowListButton {
           } else {
             this.openThumbnailMenu();
           }
+        } else if (leftGroupedAction == LeftClickGrouped.ToggleFirst) {
+          if (hasFocus(this._windows[0], false) && !this._windows[0].minimized) {
+            this._windows[0].minimize();
+          } else {
+            this.closeThumbnailMenu();
+            Main.activateWindow(this._windows[0]);
+          }
         } else { // leftGroupedAction == LeftClickGrouped.Cycle
             if (hasFocus(this._currentWindow)) {
                if (this._nextWindow===null || this._nextWindow===this._currentWindow) {
@@ -2310,10 +2508,116 @@ class WindowListButton {
     }
   }
 
-  // zoom in and out the preview menu based on the movement of the mouse scroll wheel
+  // zoom in and out the preview menu based on the movement of the mouse scroll wheel if the thumbnail menu is open.
+  // Perform the defined scroll wheel action if the Thumbnail menu is closed
   _onScrollEvent(actor, event) {
      let wheelSetting = this._settings.getValue("wheel-adjusts-preview-size");
      if (wheelSetting===ScrollWheelAction.Off || !this.menu || !this.menu.isOpen) {
+        // The Thumbnail menu is closed, so do the defined scroll wheel action
+        wheelSetting = this._settings.getValue("mouse-action-scroll");
+        if (wheelSetting !== MouseScrollAction.None && !this._scrollIgnore && this._currentWindow && (!this.menu || !this.menu.isOpen)) {
+           let window = this._currentWindow;
+           let direction = event.get_scroll_direction();
+           if (wheelSetting === MouseScrollAction.ChangeState) {
+              if (direction === Clutter.ScrollDirection.UP) {
+                 if (window.minimized || !hasFocus(window)) {
+                    Main.activateWindow(window);
+                 } else if (!window.get_maximized()){
+                    window.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+                 }
+              } else if (direction === Clutter.ScrollDirection.DOWN && !window.minimized) {
+                 if(window.get_maximized() || !hasFocus(window)) {
+                    Main.activateWindow(window);
+                    window.unmaximize(Meta.MaximizeFlags.VERTICAL | Meta.MaximizeFlags.HORIZONTAL);
+                 } else {
+                    window.minimize();
+                 }
+              }
+           } else if (wheelSetting === MouseScrollAction.ChangeWorkspace && !window.is_on_all_workspaces()) {
+              let wsIdx = window.get_workspace().index();
+              let nWorkspaces = global.screen.get_n_workspaces();
+              if (direction === Clutter.ScrollDirection.UP) {
+                 wsIdx++;
+              } else if (direction === Clutter.ScrollDirection.DOWN) {
+                 wsIdx--;
+              }
+              if (wsIdx >= nWorkspaces) {
+                 wsIdx = 0;
+              } else if (wsIdx < 0) {
+                 wsIdx = nWorkspaces-1;
+              }
+              moveToWorkspace(window, wsIdx);
+           } else if (wheelSetting === MouseScrollAction.ChangeMonitor) {
+              let nMonitors = Main.layoutManager.monitors.length;
+              if (nMonitors > 1) {
+                 let monIdx = window.get_monitor()
+                 if (direction === Clutter.ScrollDirection.UP) {
+                    monIdx++;
+                 } else if (direction === Clutter.ScrollDirection.DOWN) {
+                    monIdx--;
+                 }
+                 if (monIdx >= nMonitors) {
+                    monIdx = 0;
+                 } else if (monIdx < 0) {
+                    monIdx = nMonitors-1;
+                 }
+                 window.move_to_monitor(monIdx);
+              }
+           } else if (wheelSetting === MouseScrollAction.ChangeTiling && typeof Meta.WindowTileType === 'undefined') { // Only if correct API exists
+              let tilePrev;
+              let tileNext;
+              switch (window.tile_mode) {
+                 case Meta.TileMode.NONE:
+                    tilePrev = Meta.TileMode.BOTTOM;
+                    tileNext = Meta.TileMode.TOP;
+                    break;
+                 case Meta.TileMode.LEFT:
+                    tilePrev = Meta.TileMode.LLC;
+                    tileNext = Meta.TileMode.ULC;
+                    break;
+                 case Meta.TileMode.RIGHT:
+                    tilePrev = Meta.TileMode.URC;
+                    tileNext = Meta.TileMode.LRC;
+                    break;
+                 case Meta.TileMode.ULC:
+                    tilePrev = Meta.TileMode.LEFT;
+                    tileNext = Meta.TileMode.TOP;
+                    break;
+                 case Meta.TileMode.LLC:
+                    tilePrev = Meta.TileMode.BOTTOM;
+                    tileNext = Meta.TileMode.LEFT;
+                    break;
+                 case Meta.TileMode.URC:
+                    tilePrev = Meta.TileMode.TOP;
+                    tileNext = Meta.TileMode.RIGHT;
+                    break;
+                 case Meta.TileMode.LRC:
+                    tilePrev = Meta.TileMode.RIGHT;
+                    tileNext = Meta.TileMode.BOTTOM;
+                    break;
+                 case Meta.TileMode.TOP:
+                    tilePrev = Meta.TileMode.ULC;
+                    tileNext = Meta.TileMode.URC;
+                    break;
+                 case Meta.TileMode.BOTTOM:
+                    tilePrev = Meta.TileMode.LRC;
+                    tileNext = Meta.TileMode.LLC;
+                    break;
+                 case Meta.TileMode.MAXIMIZED:
+                    tilePrev = Meta.TileMode.BOTTOM;
+                    tileNext = Meta.TileMode.TOP;
+                    break;
+              }
+              if (!hasFocus(window)) {
+                 Main.activateWindow(window);
+              }
+              if (direction === Clutter.ScrollDirection.UP) {
+                 reTile(window, tileNext);
+              } else if (direction === Clutter.ScrollDirection.DOWN) {
+                 reTile(window, tilePrev);
+              }
+           }
+        }
         return;
      }
      let numThumbs = this.menu.numThumbs;
@@ -2579,22 +2883,38 @@ class WindowListButton {
            break;
         case MouseAction.GroupedWindow1:
            if (this._windows.length > 0){
-              Main.activateWindow(this._windows[0]);
+              if (hasFocus(this._windows[0], false) && !this._windows[0].minimized) {
+                 this._windows[0].minimize();
+              } else {
+                 Main.activateWindow(this._windows[0]);
+              }
            }
            break;
         case MouseAction.GroupedWindow2:
            if (this._windows.length > 1){
-              Main.activateWindow(this._windows[1]);
+              if (hasFocus(this._windows[1], false) && !this._windows[1].minimized) {
+                 this._windows[1].minimize();
+              } else {
+                 Main.activateWindow(this._windows[1]);
+              }
            }
            break;
         case MouseAction.GroupedWindow3:
            if (this._windows.length > 2){
-              Main.activateWindow(this._windows[2]);
+              if (hasFocus(this._windows[2], false) && !this._windows[2].minimized) {
+                 this._windows[2].minimize();
+              } else {
+                 Main.activateWindow(this._windows[2]);
+              }
            }
            break;
         case MouseAction.GroupedWindow4:
            if (this._windows.length > 3){
-              Main.activateWindow(this._windows[3]);
+              if (hasFocus(this._windows[3], false) && !this._windows[3].minimized) {
+                 this._windows[3].minimize();
+              } else {
+                 Main.activateWindow(this._windows[3]);
+              }
            }
            break;
         case MouseAction.MoveHere:
@@ -3671,8 +3991,8 @@ class Workspace {
 
   _windowRemoved(metaWindow, removeBindings=true) {
      let appButton = this._lookupAppButtonForWindow(metaWindow);
-     let btnToUpdateLabel = null;
      if (appButton) {
+        let btnToUpdateLabel = null;
         if (this._settings.getValue("display-caption-for") === DisplayCaption.One) {
            let children = this.actor.get_children();
            let idx = children.indexOf(appButton.actor);
@@ -5171,10 +5491,18 @@ class WindowList extends Applet.Applet {
               } else {
                 workspace._windowRemoved(window);
               }
-           } else if (this._settings.getValue("number-type")===NumberType.WorkspaceNum){
+           } else {
              let btn = workspace._lookupAppButtonForWindow(window);
              if (btn) {
-               btn._updateNumber(); // In case the number is showing the workspace index
+               if (this._settings.getValue("number-type")===NumberType.WorkspaceNum) {
+                 btn._updateNumber(); // In case the number is showing the workspace index
+               }
+               if (this._settings.getValue("hide-caption-for-minimized") === HideLabels.OtherWorkspaces) {
+                 btn._updateLabel();
+               }
+               if (this._settings.getValue("menu-sort-groups")) {
+                  btn._sortWindows();
+               }
              }
            }
          }
@@ -5191,13 +5519,19 @@ class WindowList extends Applet.Applet {
          if (ws.saturationType == SaturationType.OtherMonitors && ws.iconSaturation!=100) {
             btn.updateIconSelection();
          }
+         if (this._settings.getValue("hide-caption-for-minimized") === HideLabels.OtherMonitors) {
+            btn._updateLabel()
+         }
+         if (this._settings.getValue("menu-sort-groups")) {
+            btn._sortWindows();
+         }
       }
-      return;
-    }
-    if (monitor == this.panel.monitorIndex) {
-      this._windowAdded(screen, window, monitor);
     } else {
-      this._windowRemoved(screen, window, monitor);
+      if (monitor == this.panel.monitorIndex) {
+        this._windowAdded(screen, window, monitor);
+      } else {
+        this._windowRemoved(screen, window, monitor);
+      }
     }
   }
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.3.0
+
+* Allow rearranging Thumbnail menu items using drag-and-drop
+* Allow drag-and-drop of Thumbnail menu items to the desktop, matching the behaviour of window-list button drag-and-drop
+* Add options for hiding button labels when the windows workspace/monitor is not the current workspace/monitor
+* Fixed how labels are hidden for grouped buttons so that it's solely based on the current windows state
+* Added an option to sort the Thumbnail menu for grouped buttons based on the Workspace & Monitor index (pools will not be sorted!)
+* Fix a cases where Thumbnail menus can contain stale window titles or even contain windows that have been closed
+* Fix to show labels for application pools where some, but not all, windows in the pool don't qualify to have a label
+* Added 4 scroll-wheel actions options which applies when the scroll-wheel is used on a window-list button
+* Renamed "Activate # window in grouped button" mouse actions to "Restore/minimize # window in group"
+* Changed "Restore/minimize # window in group" so it will minimize the window if the window already has the focus
+* Added a "Restore/Minimize 1st window in group" option to the "Left button action for grouped buttons" list of options
+
 ## 2.2.0
 
 * Added support for drag-and-drop of window-list buttons to the desktop. This will move the window to the desktop that the drop occurred on. If you drop on a monitor where the window does not current reside, it will be moved to that monitor. If the window exists on a different workspace, it will be moved to the current workspace. If the window does not have the focus it will be activated and given the focus. Requires Cinnamon 5.4 (Mint 21.x)
