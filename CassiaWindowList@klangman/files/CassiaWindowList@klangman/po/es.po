@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-15 22:10-0400\n"
-"PO-Revision-Date: 2024-06-05 11:48-0400\n"
+"PO-Revision-Date: 2024-07-16 13:55-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -422,21 +422,18 @@ msgstr "Ventanas minimizadas"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other workspaces"
-msgstr "Anclar a otros espacios de trabajo"
+msgstr "Ventanas en otros espacios de trabajo"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other monitors"
-msgstr "Botones para ventanas en otros monitores"
+msgstr "Ventanas en otros monitores"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
-#, fuzzy
 msgid "Hide labels for"
-msgstr "Ocultar las etiquetas de los botones minimizados"
+msgstr "Ocultar etiquetas para"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
@@ -445,6 +442,10 @@ msgid ""
 "be hidden. For application pools, the label will still show unless all "
 "application windows have the selected property"
 msgstr ""
+"Seleccione el tipo de estado de ventana para el que deben ocultarse las "
+"etiquetas de los botones de lista de ventanas. En el caso de los grupos de "
+"aplicaciones, la etiqueta seguirá mostrándose a menos que todas las ventanas "
+"de la aplicación tengan la propiedad seleccionada"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -932,9 +933,8 @@ msgstr "Tamaño predeterminado de la ventana de miniaturas"
 
 #. 4.0->settings-schema.json->menu-sort-groups->description
 #. 6.0->settings-schema.json->menu-sort-groups->description
-#, fuzzy
 msgid "Sort grouped button thumbnail menu items"
-msgstr "Restablecer o mantener presionado para ver el menú de miniaturas"
+msgstr "Ordenar los elementos del menú de miniaturas de botones agrupados"
 
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
@@ -945,6 +945,12 @@ msgid ""
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
+"Si se activa, el menú de miniaturas se ordenará primero por espacio de "
+"trabajo y después por número de monitor para los botones agrupados. Las "
+"ventanas agrupadas no se pueden ordenar, ya que el orden es el mismo que el "
+"del panel de la lista de ventanas. Con esta opción activada, la función de "
+"reordenación mediante arrastrar y soltar del menú de miniaturas estará "
+"desactivada para los menús de miniaturas de botones agrupados."
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
@@ -1523,9 +1529,8 @@ msgstr "Restaurar/Minimizar la ventana más reciente"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
-#, fuzzy
 msgid "Restore/Minimize 1st window in group"
-msgstr "Restaurar/Minimizar la ventana más reciente"
+msgstr "Restaurar/Minimizar 1ª ventana del grupo"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1614,9 +1619,8 @@ msgstr "Restaurar la ventana de la aplicación más reciente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 1st window in group"
-msgstr "Restaurar/Minimizar la ventana más reciente"
+msgstr "Restaurar/Minimizar la 1ª ventana del grupo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1624,9 +1628,8 @@ msgstr "Restaurar/Minimizar la ventana más reciente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 2nd window in group"
-msgstr "Restaurar/Minimizar la ventana más reciente"
+msgstr "Restaurar/Minimizar la 2ª ventana del grupo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1634,9 +1637,8 @@ msgstr "Restaurar/Minimizar la ventana más reciente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 3rd window in group"
-msgstr "Restaurar/Minimizar la ventana más reciente"
+msgstr "Restaurar/Minimizar la 3ª ventana del grupo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1644,9 +1646,8 @@ msgstr "Restaurar/Minimizar la ventana más reciente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 4th window in group"
-msgstr "Restaurar/Minimizar la ventana más reciente"
+msgstr "Restaurar/Minimizar la 4ª ventana del grupo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
@@ -1686,31 +1687,28 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Minimize/Restore/Maximize window"
-msgstr "Minimizar/Restaurar"
+msgstr "Minimizar/Restaurar/Maximizar ventana"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change windows workspace"
-msgstr "Incluir ventanas de todos los espacios de trabajo"
+msgstr "Cambiar el espacio de trabajo de las ventanas"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows monitor"
-msgstr ""
+msgstr "Cambiar monitor de ventanas"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change window tiling"
-msgstr "Utilizar título de ventana"
+msgstr "Cambiar mosaico de ventana"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
 msgid "Scroll wheel action"
-msgstr ""
+msgstr "Acción de la rueda de desplazamiento"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->tooltip
 #. 6.0->settings-schema.json->mouse-action-scroll->tooltip
@@ -1718,6 +1716,9 @@ msgid ""
 "Action taken when using the mouse scroll wheel on a window list button. This "
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
 msgstr ""
+"Acción realizada al utilizar la rueda de desplazamiento del mouse en un "
+"botón de lista de ventanas. Esta acción de la rueda de desplazamiento se "
+"desactivará si el menú Miniatura está actualmente abierto"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
