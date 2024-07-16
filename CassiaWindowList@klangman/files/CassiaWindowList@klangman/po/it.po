@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-04 23:25-0400\n"
+"POT-Creation-Date: 2024-07-15 22:10-0400\n"
 "PO-Revision-Date: 2024-06-18 14:30+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,32 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:550 6.0/applet.js:550
+#: 4.0/applet.js:567 6.0/applet.js:567
 msgid "all buttons"
 msgstr "tutti i pulsanti"
 
-#: 4.0/applet.js:2767 6.0/applet.js:2767
+#: 4.0/applet.js:3087 6.0/applet.js:3087
 msgid "Applet Preferences"
 msgstr "Preferenze Applet"
 
-#: 4.0/applet.js:2771 6.0/applet.js:2771
+#: 4.0/applet.js:3091 6.0/applet.js:3091
 msgid "About..."
 msgstr "Informazioni su..."
 
-#: 4.0/applet.js:2775 6.0/applet.js:2775
+#: 4.0/applet.js:3095 6.0/applet.js:3095
 msgid "Configure..."
 msgstr "Configura..."
 
-#: 4.0/applet.js:2779 6.0/applet.js:2779
+#: 4.0/applet.js:3099 6.0/applet.js:3099
 msgid "Website"
 msgstr "Sito web"
 
-#: 4.0/applet.js:2783 6.0/applet.js:2783
+#: 4.0/applet.js:3103 6.0/applet.js:3103
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Rimuovi '%s'"
 
-#: 4.0/applet.js:2785 6.0/applet.js:2785
+#: 4.0/applet.js:3105 6.0/applet.js:3105
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Vuoi davvero rimuovere questa istanza di CassiaWindowList?"
 
@@ -60,71 +60,71 @@ msgstr "Vuoi davvero rimuovere questa istanza di CassiaWindowList?"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2794 6.0/applet.js:2794
+#: 4.0/applet.js:3114 6.0/applet.js:3114
 msgid "Open new window"
 msgstr "Apri una nuova finestra"
 
-#: 4.0/applet.js:2802 6.0/applet.js:2802
+#: 4.0/applet.js:3122 6.0/applet.js:3122
 msgid "Remove from panel"
 msgstr "Rimuovi dal pannello"
 
-#: 4.0/applet.js:2804 6.0/applet.js:2804
+#: 4.0/applet.js:3124 6.0/applet.js:3124
 msgid "Remove from this workspace"
 msgstr "Rimuovi da questa area di lavoro"
 
-#: 4.0/applet.js:2810 6.0/applet.js:2810
+#: 4.0/applet.js:3130 6.0/applet.js:3130
 msgid "Pin to panel"
 msgstr "Appunta al pannello"
 
-#: 4.0/applet.js:2812 6.0/applet.js:2812
+#: 4.0/applet.js:3132 6.0/applet.js:3132
 msgid "Pin to this workspace"
 msgstr "Appunta a questo spazio di lavoro"
 
-#: 4.0/applet.js:2853 6.0/applet.js:2853
+#: 4.0/applet.js:3173 6.0/applet.js:3173
 msgid "Pin to other workspaces"
 msgstr "Appunta ad altre aree di lavoro"
 
-#: 4.0/applet.js:2874 6.0/applet.js:2874
+#: 4.0/applet.js:3194 6.0/applet.js:3194
 msgid "Pin to all workspaces"
 msgstr "Appunta in tutte le aree di lavoro"
 
-#: 4.0/applet.js:2892 6.0/applet.js:2892
+#: 4.0/applet.js:3212 6.0/applet.js:3212
 msgid "Pin to launcher"
 msgstr "Appunta al launcher"
 
-#: 4.0/applet.js:2910 4.0/applet.js:3102 6.0/applet.js:2910 6.0/applet.js:3102
+#: 4.0/applet.js:3230 4.0/applet.js:3422 6.0/applet.js:3230 6.0/applet.js:3422
 msgid "Add new Hotkey for"
 msgstr "Aggiungi un nuovo tasto di scelta rapida per"
 
-#: 4.0/applet.js:2924 6.0/applet.js:2924
+#: 4.0/applet.js:3244 6.0/applet.js:3244
 msgid "Recent files"
 msgstr "Recenti"
 
-#: 4.0/applet.js:2948 6.0/applet.js:2948
+#: 4.0/applet.js:3268 6.0/applet.js:3268
 msgid "Places"
 msgstr "Posizioni"
 
-#: 4.0/applet.js:2990 6.0/applet.js:2990
+#: 4.0/applet.js:3310 6.0/applet.js:3310
 msgid "Only on this workspace"
 msgstr "Solo su questo spazio di lavoro"
 
-#: 4.0/applet.js:2992 6.0/applet.js:2992
+#: 4.0/applet.js:3312 6.0/applet.js:3312
 msgid "Visible on all workspaces"
 msgstr "Visibile su tutte le aree di lavoro"
 
-#: 4.0/applet.js:2993 6.0/applet.js:2993
+#: 4.0/applet.js:3313 6.0/applet.js:3313
 msgid "Move to another workspace"
 msgstr "Sposta su un'altra area di lavoro"
 
-#: 4.0/applet.js:3002 6.0/applet.js:3002
+#: 4.0/applet.js:3322 6.0/applet.js:3322
 msgid " (this workspace)"
 msgstr " (questa area di lavoro)"
 
-#: 4.0/applet.js:3015 6.0/applet.js:3015
+#: 4.0/applet.js:3335 6.0/applet.js:3335
 msgid "Move to another monitor"
 msgstr "Sposta su un altro schermo"
 
-#: 4.0/applet.js:3023 6.0/applet.js:3023
+#: 4.0/applet.js:3343 6.0/applet.js:3343
 msgid "Monitor"
 msgstr "Monitor"
 
@@ -140,47 +140,47 @@ msgstr "Monitor"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3040 6.0/applet.js:3040
+#: 4.0/applet.js:3360 6.0/applet.js:3360
 msgid "Move window here"
 msgstr "Sposta la finestra qui"
 
-#: 4.0/applet.js:3057 6.0/applet.js:3057
+#: 4.0/applet.js:3377 6.0/applet.js:3377
 msgid "unassigned"
 msgstr "non assegnato"
 
-#: 4.0/applet.js:3068 4.0/applet.js:3099 6.0/applet.js:3068 6.0/applet.js:3099
+#: 4.0/applet.js:3388 4.0/applet.js:3419 6.0/applet.js:3388 6.0/applet.js:3419
 msgid "Assign window to a hotkey"
 msgstr "Assegna finestra ad un tasto di scelta rapida"
 
-#: 4.0/applet.js:3122 6.0/applet.js:3122
+#: 4.0/applet.js:3442 6.0/applet.js:3442
 msgid "Change application label contents"
 msgstr "Cambia il contenuto dell'etichetta dell'applicazione"
 
-#: 4.0/applet.js:3125 6.0/applet.js:3125
+#: 4.0/applet.js:3445 6.0/applet.js:3445
 msgid "Remove custom setting"
 msgstr "Rimuovi impostazioni personalizzate"
 
-#: 4.0/applet.js:3132 6.0/applet.js:3132
+#: 4.0/applet.js:3452 6.0/applet.js:3452
 msgid "Use window title"
 msgstr "Usa il titolo della finestra"
 
-#: 4.0/applet.js:3139 6.0/applet.js:3139
+#: 4.0/applet.js:3459 6.0/applet.js:3459
 msgid "Use application name"
 msgstr "Usa il nome dell'applicazione"
 
-#: 4.0/applet.js:3146 6.0/applet.js:3146
+#: 4.0/applet.js:3466 6.0/applet.js:3466
 msgid "No label"
 msgstr "Nessuna etichetta"
 
-#: 4.0/applet.js:3157 6.0/applet.js:3157
+#: 4.0/applet.js:3477 6.0/applet.js:3477
 msgid "Ungroup application windows"
 msgstr "Separa le finestre dell'applicazione"
 
-#: 4.0/applet.js:3166 6.0/applet.js:3166
+#: 4.0/applet.js:3486 6.0/applet.js:3486
 msgid "Group application windows"
 msgstr "Raggruppa le finestre dell'applicazione"
 
-#: 4.0/applet.js:3179 6.0/applet.js:3179
+#: 4.0/applet.js:3499 6.0/applet.js:3499
 msgid "Automatic grouping/ungrouping"
 msgstr "Raggruppamento/separazione automatica"
 
@@ -196,31 +196,31 @@ msgstr "Raggruppamento/separazione automatica"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3209 6.0/applet.js:3209
+#: 4.0/applet.js:3529 6.0/applet.js:3529
 msgid "Move titlebar on to screen"
 msgstr "Sposta la barra del titolo sullo schermo"
 
-#: 4.0/applet.js:3214 6.0/applet.js:3214
+#: 4.0/applet.js:3534 6.0/applet.js:3534
 msgid "Restore"
 msgstr "Ripristina"
 
-#: 4.0/applet.js:3218 6.0/applet.js:3218
+#: 4.0/applet.js:3538 6.0/applet.js:3538
 msgid "Minimize"
 msgstr "Minimizza"
 
-#: 4.0/applet.js:3224 6.0/applet.js:3224
+#: 4.0/applet.js:3544 6.0/applet.js:3544
 msgid "Unmaximize"
 msgstr "De-massimizza"
 
-#: 4.0/applet.js:3231 6.0/applet.js:3231
+#: 4.0/applet.js:3551 6.0/applet.js:3551
 msgid "Close others"
 msgstr "Chiudi altri"
 
-#: 4.0/applet.js:3242 6.0/applet.js:3242
+#: 4.0/applet.js:3562 6.0/applet.js:3562
 msgid "Close all"
 msgstr "Chiudi tutto"
 
-#: 4.0/applet.js:3251 6.0/applet.js:3251
+#: 4.0/applet.js:3571 6.0/applet.js:3571
 msgid "Close"
 msgstr "Chiudi"
 
@@ -407,29 +407,45 @@ msgstr ""
 "In esecuzione: solo le finestre aggiunte in esecuzione avranno un'etichetta\n"
 "Focalizzata: solo la finestra bloccata con focus avrà un'etichetta"
 
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->display-indicators->options
+msgid "None"
+msgstr "Nessuna"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->display-indicators->options
+msgid "Minimized windows"
+msgstr "Finestre ridotte a icona"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#, fuzzy
+msgid "Windows on other workspaces"
+msgstr "Appunta ad altre aree di lavoro"
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#, fuzzy
+msgid "Windows on other monitors"
+msgstr "Pulsanti per finestre su altri monitor"
+
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
-msgid "Hide labels for minimized buttons"
+#, fuzzy
+msgid "Hide labels for"
 msgstr "Nascondi le etichette per i pulsanti ridotti a icona"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
 msgid ""
-"For groups/pools the label will still show unless all application windows "
-"are minimized"
+"Select the type of window state for which window list button labels should "
+"be hidden. For application pools, the label will still show unless all "
+"application windows have the selected property"
 msgstr ""
-"Per i gruppi/pool l'etichetta verrà comunque visualizzata a meno che tutte "
-"le finestre dell'applicazione non siano ridotte a icona"
-
-#. 4.0->settings-schema.json->display-indicators->options
-#. 6.0->settings-schema.json->display-indicators->options
-msgid "None"
-msgstr "Nessuna"
-
-#. 4.0->settings-schema.json->display-indicators->options
-#. 6.0->settings-schema.json->display-indicators->options
-msgid "Minimized windows"
-msgstr "Finestre ridotte a icona"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -918,6 +934,22 @@ msgstr "Extra piccola"
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->description
 msgid "Default thumbnail window size"
 msgstr "Dimensione predefinita della finestra delle miniature"
+
+#. 4.0->settings-schema.json->menu-sort-groups->description
+#. 6.0->settings-schema.json->menu-sort-groups->description
+#, fuzzy
+msgid "Sort grouped button thumbnail menu items"
+msgstr "Ripristina o tieni premuto per il menù delle miniature"
+
+#. 4.0->settings-schema.json->menu-sort-groups->tooltip
+#. 6.0->settings-schema.json->menu-sort-groups->tooltip
+msgid ""
+"If enabled, the thumbnail menu will be sorted first by workspace and the by "
+"monitor number for grouped buttons. Pooled windows can not be sorted since "
+"the order is the same as the order on the window-list panel. With this "
+"option enabled, the thumbnail menu drag-and-drop reordering feature will be "
+"disabled for grouped button thumbnail menus."
+msgstr ""
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
@@ -1422,12 +1454,14 @@ msgstr "De-piastrella finestra"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->preview-middle-click->options
 #. 6.0->settings-schema.json->preview-back-click->options
 #. 6.0->settings-schema.json->preview-forward-click->options
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Do nothing"
 msgstr "Non fare niente"
 
@@ -1491,6 +1525,14 @@ msgstr ""
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize most recent window"
+msgstr "Ripristina/Riduci a icona la finestra più recente"
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#, fuzzy
+msgid "Restore/Minimize 1st window in group"
 msgstr "Ripristina/Riduci a icona la finestra più recente"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
@@ -1580,8 +1622,9 @@ msgstr "Ripristina la finestra dell'applicazione più recente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-msgid "Activate 1st window in grouped button"
-msgstr "Attiva la prima finestra nel pulsante raggruppato"
+#, fuzzy
+msgid "Restore/minimize 1st window in group"
+msgstr "Ripristina/Riduci a icona la finestra più recente"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1589,8 +1632,9 @@ msgstr "Attiva la prima finestra nel pulsante raggruppato"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-msgid "Activate 2nd window in grouped button"
-msgstr "Attiva la seconda finestra nel pulsante raggruppato"
+#, fuzzy
+msgid "Restore/minimize 2nd window in group"
+msgstr "Ripristina/Riduci a icona la finestra più recente"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1598,8 +1642,9 @@ msgstr "Attiva la seconda finestra nel pulsante raggruppato"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-msgid "Activate 3rd window in grouped button"
-msgstr "Attiva la terza finestra nel pulsante raggruppato"
+#, fuzzy
+msgid "Restore/minimize 3rd window in group"
+msgstr "Ripristina/Riduci a icona la finestra più recente"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1607,8 +1652,9 @@ msgstr "Attiva la terza finestra nel pulsante raggruppato"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-msgid "Activate 4th window in grouped button"
-msgstr "Attiva la quarta finestra nel pulsante raggruppato"
+#, fuzzy
+msgid "Restore/minimize 4th window in group"
+msgstr "Ripristina/Riduci a icona la finestra più recente"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
@@ -1645,6 +1691,41 @@ msgid "Action taken when using the forward mouse button on window list entries"
 msgstr ""
 "Azione eseguita quando si utilizza il pulsante avanti del mouse sulle voci "
 "dell'elenco delle finestre"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#, fuzzy
+msgid "Minimize/Restore/Maximize window"
+msgstr "Minimizza/Ripristina"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#, fuzzy
+msgid "Change windows workspace"
+msgstr "Includi finestre da tutte le aree di lavoro"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+msgid "Change windows monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#, fuzzy
+msgid "Change window tiling"
+msgstr "Usa il titolo della finestra"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->description
+#. 6.0->settings-schema.json->mouse-action-scroll->description
+msgid "Scroll wheel action"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-scroll->tooltip
+#. 6.0->settings-schema.json->mouse-action-scroll->tooltip
+msgid ""
+"Action taken when using the mouse scroll wheel on a window list button. This "
+"scroll wheel action will be disabled if the Thumbnail menu is currently open"
+msgstr ""
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
