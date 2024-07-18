@@ -52,12 +52,12 @@
     "general-mouse" : {
       "type" : "section",
       "title" : "Window list mouse settings",
-    "keys" : ["grouped-mouse-action-btn1", "launcher-mouse-action-btn1", "mouse-action-btn2", "mouse-action-btn8", "mouse-action-btn9"]
+    "keys" : ["grouped-mouse-action-btn1", "launcher-mouse-action-btn1", "mouse-action-btn2", "mouse-action-btn8", "mouse-action-btn9", "mouse-action-scroll"]
     },
     "preview-settings" : {
       "type" : "section",
       "title" : "Thumbnails menu settings",
-      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-all-windows-of-pool", "menu-all-windows-of-auto", "hover-peek-thumbnail", "no-click-activate-thumbnail"]
+      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-sort-groups", "menu-all-windows-of-pool", "menu-all-windows-of-auto", "hover-peek-thumbnail", "no-click-activate-thumbnail"]
     },
     "preview-mouse-section" : {
       "type" : "section",
@@ -115,10 +115,16 @@
     "tooltip": "Never: No pinned windows will have a label\nAlways: All pinned windows will have labels\nRunning: Only pinned window that are running will have a label\nFocused: Only the pinned window with focus will have a label"
   },
   "hide-caption-for-minimized": {
-    "type": "switch",
+    "type": "combobox",
     "default": 0,
-    "description": "Hide labels for minimized buttons",
-    "tooltip": "For groups/pools the label will still show unless all application windows are minimized"
+    "options": {
+      "None": 0,
+      "Minimized windows": 1,
+      "Windows on other workspaces": 2,
+      "Windows on other monitors": 3
+    },
+    "description": "Hide labels for",
+    "tooltip": "Select the type of window state for which window list button labels should be hidden. For application pools, the label will still show unless all application windows have the selected property"
   },
   "display-indicators": {
     "type": "combobox",
@@ -333,6 +339,13 @@
     "dependency": "show-previews",
     "description": "Default thumbnail window size"
   },
+  "menu-sort-groups": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows!=3",
+    "description": "Sort grouped button thumbnail menu items",
+    "tooltip": "If enabled, the thumbnail menu will be sorted first by workspace and the by monitor number for grouped buttons. Pooled windows can not be sorted since the order is the same as the order on the window-list panel. With this option enabled, the thumbnail menu drag-and-drop reordering feature will be disabled for grouped button thumbnail menus."
+  },
   "menu-all-windows-of-pool": {
     "type": "switch",
     "default": true,
@@ -511,6 +524,7 @@
     "default": 2,
     "options": {
       "Restore/Minimize most recent window": 0,
+      "Restore/Minimize 1st window in group": 5,
       "Restore then cycle windows": 1,
       "Show thumbnail menu": 2,
       "Restore or hold for thumbnail menu": 3
@@ -525,6 +539,7 @@
     "default": 4,
     "options": {
       "Restore/Minimize most recent window": 0,
+      "Restore/Minimize 1st window in group": 5,
       "Restore then cycle windows": 1,
       "Show thumbnail menu": 2,
       "Restore or hold for thumbnail menu": 3,
@@ -545,10 +560,10 @@
       "Minimize/Restore": 3,
       "Maximize/Restore": 4,
       "Restore most recent application window": 13,
-      "Activate 1st window in grouped button": 35,
-      "Activate 2nd window in grouped button": 36,
-      "Activate 3rd window in grouped button": 37,
-      "Activate 4th window in grouped button": 38,
+      "Restore/minimize 1st window in group": 35,
+      "Restore/minimize 2nd window in group": 36,
+      "Restore/minimize 3rd window in group": 37,
+      "Restore/minimize 4th window in group": 38,
       "Group/Ungroup windows": 5,
       "Open new window": 6,
       "Move to workspace 1": 7,
@@ -593,10 +608,10 @@
       "Minimize/Restore": 3,
       "Maximize/Restore": 4,
       "Restore most recent application window": 13,
-      "Activate 1st window in grouped button": 35,
-      "Activate 2nd window in grouped button": 36,
-      "Activate 3rd window in grouped button": 37,
-      "Activate 4th window in grouped button": 38,
+      "Restore/minimize 1st window in group": 35,
+      "Restore/minimize 2nd window in group": 36,
+      "Restore/minimize 3rd window in group": 37,
+      "Restore/minimize 4th window in group": 38,
       "Group/Ungroup windows": 5,
       "Open new window": 6,
       "Move to workspace 1": 7,
@@ -641,10 +656,10 @@
       "Minimize/Restore": 3,
       "Maximize/Restore": 4,
       "Restore most recent application window": 13,
-      "Activate 1st window in grouped button": 35,
-      "Activate 2nd window in grouped button": 36,
-      "Activate 3rd window in grouped button": 37,
-      "Activate 4th window in grouped button": 38,
+      "Restore/minimize 1st window in group": 35,
+      "Restore/minimize 2nd window in group": 36,
+      "Restore/minimize 3rd window in group": 37,
+      "Restore/minimize 4th window in group": 38,
       "Group/Ungroup windows": 5,
       "Open new window": 6,
       "Move to workspace 1": 7,
@@ -678,6 +693,20 @@
     },
     "description": "Forward button action",
     "tooltip": "Action taken when using the forward mouse button on window list entries"
+  },
+
+  "mouse-action-scroll": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Minimize/Restore/Maximize window": 1,
+      "Change windows workspace": 2,
+      "Change windows monitor": 3,
+      "Change window tiling": 4,
+      "Do nothing": 0
+    },
+    "description": "Scroll wheel action",
+    "tooltip": "Action taken when using the mouse scroll wheel on a window list button. This scroll wheel action will be disabled if the Thumbnail menu is currently open"
   },
 
   "wheel-adjusts-preview-size": {
@@ -779,10 +808,10 @@
            "Minimize/Restore": 3,
            "Maximize/Restore": 4,
            "Restore most recent application window": 13,
-           "Activate 1st window in grouped button": 35,
-           "Activate 2nd window in grouped button": 36,
-           "Activate 3rd window in grouped button": 37,
-           "Activate 4th window in grouped button": 38,
+           "Restore/minimize 1st window in group": 35,
+           "Restore/minimize 2nd window in group": 36,
+           "Restore/minimize 3rd window in group": 37,
+           "Restore/minimize 4th window in group": 38,
            "Group/Ungroup windows": 5,
            "Open new window": 6,
            "Move to workspace 1": 7,
