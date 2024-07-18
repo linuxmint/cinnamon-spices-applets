@@ -1,7 +1,52 @@
 {
-  "section1": {
-    "type": "section",
-    "description": "Options"
+  "SpiceSpyLayout": {
+    "type": "layout",
+    "pages": [
+      "pageGeneral",
+      "pageOptions"
+    ],
+    "pageGeneral": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "section2",
+        "section3"
+      ]
+    },
+    "pageOptions": {
+      "type": "page",
+      "title": "Options",
+      "sections": [
+        "section1"
+      ]
+    },
+    "section1": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "update-interval",
+        "standard-opacity",
+        "color-on-change",
+        "show-icon-in-menu",
+        "icon-size",
+        "show-translations",
+        "sort-by",
+        "show-uuid",
+        "translate-name",
+        "display-on-panel",
+        "useful-only"
+      ]
+    },
+    "section2": {
+      "type": "section",
+      "title": "List of authors of the Spices you are interested in",
+      "keys": ["author-list"]
+    },
+    "section3": {
+      "type": "section",
+      "title": "List of specific Spices you are interested in",
+      "keys": ["uuid-list", "button-my-spices", "label-reload", "button-reload"]
+    }
   },
   "update-interval": {
     "type": "spinbutton",
@@ -85,10 +130,6 @@
     "description": "Show only non-zero values in panel",
     "default": false
   },
-  "section2": {
-    "type": "section",
-    "description": "List of authors of the Spices you are interested in"
-  },
   "author-list": {
     "type": "list",
     "columns": [
@@ -102,10 +143,6 @@
     "default": [
 
     ]
-  },
-  "section3": {
-    "type": "section",
-    "description": "List of specific Spices you are interested in"
   },
   "uuid-list": {
     "type": "list",
@@ -121,12 +158,30 @@
 
     ]
   },
+  "button-my-spices": {
+    "type": "button",
+    "description": "Add all the Spices I use",
+    "callback": "_add_user_Spices"
+  },
+  "label-reload": {
+    "type": "label",
+    "description": "There's no need to include Spices maintained by members of the Authors list in the UUID list.\nOnce your lists are correct, you can reload this applet to speed up the process.\nJust don't do it too often."
+  },
+  "button-reload": {
+    "type": "button",
+    "description": "Reload this applet",
+    "callback": "_reload_this_applet"
+  },
   "spices_to_spy": {
     "type": "generic",
-    "default": {}
+    "default": {
+
+    }
   },
   "old_spices_to_spy": {
     "type": "generic",
-    "default": {}
+    "default": {
+
+    }
   }
 }

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-03 19:28+0200\n"
-"PO-Revision-Date: 2024-06-18 14:58+0200\n"
+"PO-Revision-Date: 2024-07-05 10:25+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -211,7 +211,7 @@ msgstr "⮿ Intrusione"
 
 #. settings-schema.json->page_Custom->title
 msgid "⛓ Custom"
-msgstr ""
+msgstr "⛓ Personalizzato"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -267,12 +267,11 @@ msgstr "Sensori di intrusione"
 
 #. settings-schema.json->section_customDisclaimer->title
 msgid "Disclaimer"
-msgstr ""
+msgstr "Disclaimer"
 
 #. settings-schema.json->section_customSensors->title
-#, fuzzy
 msgid "Custom sensors"
-msgstr "Sensori di intrusione"
+msgstr "Sensori personalizzati"
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -552,13 +551,15 @@ msgstr ""
 
 #. settings-schema.json->journalize_temp->description
 msgid "Log high and critical temperatures"
-msgstr ""
+msgstr "Registra temperature elevate e critiche"
 
 #. settings-schema.json->journalize_temp->tooltip
 msgid ""
 "When this option is checked, temperatures exceeding the high or critical "
 "limit are recorded in the system journal."
 msgstr ""
+"Quando questa opzione è selezionata, le temperature che superano il limite "
+"massimo o critico vengono registrate nel giornale di sistema."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -690,13 +691,15 @@ msgstr "Abbreviazione di \"Rotazioni al minuto\""
 
 #. settings-schema.json->journalize_fan->description
 msgid "Log critical fan speeds"
-msgstr ""
+msgstr "Registra le velocità critiche della ventola"
 
 #. settings-schema.json->journalize_fan->tooltip
 msgid ""
 "When this option is checked, fan speeds below the critical limit are "
 "recorded in the system log."
 msgstr ""
+"Quando questa opzione è selezionata, le velocità della ventola inferiori al "
+"limite critico vengono registrate nel registro di sistema."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -744,13 +747,15 @@ msgstr "solo mV"
 
 #. settings-schema.json->journalize_volt->description
 msgid "Log critical voltages"
-msgstr ""
+msgstr "Registra le tensioni critiche"
 
 #. settings-schema.json->journalize_volt->tooltip
 msgid ""
 "When this option is checked, voltages below the minimum limit or above the "
 "maximum limit are recorded in the system log."
 msgstr ""
+"Quando questa opzione è selezionata, le tensioni inferiori al limite minimo "
+"o superiori al limite massimo vengono registrate nel registro di sistema."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -803,13 +808,14 @@ msgid "Show in the panel only when an intrusion was detected"
 msgstr "Mostra nel pannello solo quando è stata rilevata un'intrusione"
 
 #. settings-schema.json->journalize_intrusion->description
-#, fuzzy
 msgid "Log intrusions"
-msgstr "⮿ Intrusione"
+msgstr "Registro Intrusioni"
 
 #. settings-schema.json->journalize_intrusion->tooltip
 msgid "When this option is checked, intrusions are recorded in the system log."
 msgstr ""
+"Quando questa opzione è selezionata, le intrusioni vengono registrate nel "
+"registro di sistema."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -824,45 +830,52 @@ msgid ""
 "These settings are for advanced users only!\n"
 "Please refer to the README file."
 msgstr ""
+"Queste impostazioni sono solo per utenti esperti!\n"
+"Fare riferimento al file README."
 
 #. settings-schema.json->custom_openREADME->description
 msgid "Open the README file"
-msgstr ""
+msgstr "Apri il file README"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "File to\n"
 "monitor"
 msgstr ""
+"File da\n"
+"monitorare"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "High\n"
 "value"
 msgstr ""
+"Valore\n"
+"elevato"
 
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Critical\n"
 "value"
 msgstr ""
-"Critica\n"
-"(°C)"
+"Valore\n"
+"critico"
 
 #. settings-schema.json->custom_sensors->tooltip
 msgid ""
 "Add a line by custom sensor to set the type, the name and the path of the "
 "file to monitor (/sys/class/...)."
 msgstr ""
+"Aggiungi una riga accanto al sensore personalizzato per impostarne il tipo, "
+"il nome e il percorso del file da monitorare (/sys/class/...)."
 
 #. settings-schema.json->report->description
 #: scripts/show_sensor_values.sh:5

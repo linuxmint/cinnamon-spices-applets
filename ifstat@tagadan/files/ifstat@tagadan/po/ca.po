@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ifstat@tagadan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-05 01:03+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:23
+msgid ""
+"Device\n"
+"KB/s in: --\n"
+"KB/s out: --"
+msgstr ""
+"Dispositiu\n"
+"KB/s entrants: --\n"
+"KB/s sortints: --"
+
+#: applet.js:36
+msgid "please install ifstat and/or glib libraries"
+msgstr "si us plau, instal·leu ifstat i/o les llibreries glib"
+
+#: applet.js:60
+msgid ""
+"\n"
+"KB/s in: "
+msgstr ""
+"\n"
+"KB/s entrants: "
+
+#. metadata.json->description
+msgid "Show your internet usage in a smartphone style"
+msgstr "Mostra el vostre ús d'internet en estil de telèfon intel·ligent"
+
+#. metadata.json->name
+msgid "Tight Network Usage Indicator"
+msgstr "Indicador d'us de xarxa estret"

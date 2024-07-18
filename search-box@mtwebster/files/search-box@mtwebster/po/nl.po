@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: search-box@mtwebster 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-14 19:28+0200\n"
+"POT-Creation-Date: 2024-07-05 20:02+0200\n"
 "PO-Revision-Date: 2024-04-21 18:06+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,26 +16,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:79 3.2/applet.js:73 5.4/applet.js:82
-msgid "Type to search..."
-msgstr "Typ om te zoeken..."
-
-#: applet.js:90
-msgid "Change default programs..."
-msgstr "Verander standaardprogramma's..."
-
-#: applet.js:92
-msgid "Edit providers"
-msgstr "Bewerk providers"
-
-#: 5.4/applet.js:63
+#: applet.js:68 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 "Klik met de rechtermuisknop om uw zoekmachine te selecteren of toe te voegen"
 
-#: 5.4/applet.js:112
+#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+msgid "Type to search..."
+msgstr "Typ om te zoeken..."
+
+#: applet.js:117 old/5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Selecteer uw zoekmachine:"
+
+#: old/applet.js:90
+msgid "Change default programs..."
+msgstr "Verander standaardprogramma's..."
+
+#: old/applet.js:92
+msgid "Edit providers"
+msgstr "Bewerk providers"
 
 #. metadata.json->name
 msgid "Internet Search Box"
@@ -45,90 +45,49 @@ msgstr "Internet zoekvak"
 msgid "Perform an Internet search, using your favorite engine"
 msgstr "Voer een internetzoekopdracht uit met uw favoriete zoekmachine"
 
-#. 3.2->settings-schema.json->header-provider->description
-#. 5.4->settings-schema.json->header-provider->description
+#. settings-schema.json->page-providers->title
+#. settings-schema.json->section-providers->title
+#. settings-schema.json->providers->description
+#. old->5.4->settings-schema.json->providers->description
+msgid "Providers"
+msgstr "Aanbieders"
+
+#. settings-schema.json->page-options->title
+#. settings-schema.json->section-options->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->section-colors->title
+#. settings-schema.json->header-colors->description
+#. old->5.4->settings-schema.json->header-colors->description
+msgid "Search-box colors"
+msgstr ""
+
+#. settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+#. old->5.4->settings-schema.json->header-provider->description
 msgid "Search Provider Settings"
 msgstr "Instellingen voor zoekaanbieders"
 
-#. 3.2->settings-schema.json->show-provider->description
-#. 5.4->settings-schema.json->show-provider->description
+#. settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
+#. old->5.4->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Toon aanbieder"
 
-#. 3.2->settings-schema.json->show-provider->tooltip
-#. 5.4->settings-schema.json->show-provider->tooltip
+#. settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
+#. old->5.4->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Toon geselecteerde aanbieder in het paneel"
 
-#. 3.2->settings-schema.json->selected-provider->description
-msgid "Select provider"
-msgstr "Selecteer aanbieder"
-
-#. 3.2->settings-schema.json->selected-provider->options
-msgid "Google"
-msgstr "Google"
-
-#. 3.2->settings-schema.json->selected-provider->options
-msgid "Bing"
-msgstr "Bing"
-
-#. 3.2->settings-schema.json->selected-provider->options
-msgid "Yahoo"
-msgstr "Yahoo"
-
-#. 3.2->settings-schema.json->selected-provider->options
-msgid "Ask "
-msgstr "Ask"
-
-#. 3.2->settings-schema.json->selected-provider->options
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-#. 3.2->settings-schema.json->selected-provider->tooltip
-msgid "Select a search provider"
-msgstr "Selecteer een zoekaanbieder"
-
-#. 3.2->settings-schema.json->use-custom-provider->description
-msgid "Use custom provider"
-msgstr "Gebruik aangepaste aanbieder"
-
-#. 3.2->settings-schema.json->use-custom-provider->tooltip
-msgid "Use your own search provider"
-msgstr "Gebruik uw eigen zoekaanbieder"
-
-#. 3.2->settings-schema.json->custom-provider-label->description
-msgid "Name of custom provider"
-msgstr "Naam van aangepaste aanbieder"
-
-#. 3.2->settings-schema.json->custom-provider-label->tooltip
-msgid "Enter label of the custom provider to show in the panel."
-msgstr ""
-"Voer het label van de aangepaste aanbieder in dat moet worden weergegeven in "
-"het paneel."
-
-#. 3.2->settings-schema.json->custom-provider-url->description
-msgid "URL of custom provider"
-msgstr "URL van aangepaste aanbieder"
-
-#. 3.2->settings-schema.json->custom-provider-url->tooltip
-msgid "Enter the URL of the custom search provider"
-msgstr "Voer de URL van de aangepaste zoekaanbieder in"
-
-#. 3.2->settings-schema.json->header-keybinding->description
-#. 5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Sneltoets"
-
-#. 3.2->settings-schema.json->custom-keybinding->description
-#. 5.4->settings-schema.json->custom-keybinding->description
-msgid "Keybinding, which opens the search box"
-msgstr "Sneltoets die het zoekvak opent"
-
-#. 5.4->settings-schema.json->reset-after-search->description
+#. settings-schema.json->reset-after-search->description
+#. old->5.4->settings-schema.json->reset-after-search->description
 msgid "Reset query after search"
 msgstr "Zoekopdracht resetten na zoeken"
 
-#. 5.4->settings-schema.json->reset-after-search->tooltip
+#. settings-schema.json->reset-after-search->tooltip
+#. old->5.4->settings-schema.json->reset-after-search->tooltip
 msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
@@ -136,19 +95,24 @@ msgstr ""
 "Zoekopdracht resetten na zoeken? Dit is misschien niet nuttig als u dezelfde "
 "zoekopdracht bij andere zoekmachines nadien wilt uitvoeren."
 
-#. 5.4->settings-schema.json->providers->description
-msgid "Providers"
-msgstr "Aanbieders"
+#. settings-schema.json->header-providers->description
+#. old->5.4->settings-schema.json->header-providers->description
+#, fuzzy
+msgid "Search Engines"
+msgstr "Selecteer uw zoekmachine:"
 
-#. 5.4->settings-schema.json->providers->columns->title
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
 msgid "Show"
 msgstr ""
 
-#. 5.4->settings-schema.json->providers->columns->title
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
 msgid "Name"
 msgstr "Naam"
 
-#. 5.4->settings-schema.json->providers->columns->title
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
 msgid ""
 "Short name\n"
 "(3 lower-case letters)"
@@ -156,11 +120,13 @@ msgstr ""
 "Korte naam\n"
 "(3 kleine letters)"
 
-#. 5.4->settings-schema.json->providers->columns->title
+#. settings-schema.json->providers->columns->title
+#. old->5.4->settings-schema.json->providers->columns->title
 msgid "Query URL"
 msgstr "Zoekopdracht-URL"
 
-#. 5.4->settings-schema.json->providers->tooltip
+#. settings-schema.json->providers->tooltip
+#. old->5.4->settings-schema.json->providers->tooltip
 msgid ""
 "If your query begins with the 3 letters of the short name, it will be "
 "processed by the relevant search engine.\n"
@@ -170,14 +136,87 @@ msgstr ""
 "verwerkt door de relevante zoekmachine.\n"
 "Voorbeeld: ddg linux mint iso"
 
-#. 5.4->settings-schema.json->header-colors->description
-msgid "Search-box colors"
+#. settings-schema.json->providers-help->description
+msgid ""
+"Only selected providers will be displayed in the context menu, so you can "
+"select your default provider.\n"
+"If you deselect the default provider, the first selected becomes the default "
+"provider.\n"
+"If no provider is selected, the default provider is Google."
 msgstr ""
 
-#. 5.4->settings-schema.json->background-color->description
+#. settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+#. old->5.4->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Sneltoets"
+
+#. settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
+#. old->5.4->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Sneltoets die het zoekvak opent"
+
+#. settings-schema.json->background-color->description
+#. old->5.4->settings-schema.json->background-color->description
 msgid "Background color"
 msgstr ""
 
-#. 5.4->settings-schema.json->text-color->description
+#. settings-schema.json->text-color->description
+#. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr ""
+
+#. old->3.2->settings-schema.json->selected-provider->description
+msgid "Select provider"
+msgstr "Selecteer aanbieder"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Google"
+msgstr "Google"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Bing"
+msgstr "Bing"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "Ask "
+msgstr "Ask"
+
+#. old->3.2->settings-schema.json->selected-provider->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. old->3.2->settings-schema.json->selected-provider->tooltip
+msgid "Select a search provider"
+msgstr "Selecteer een zoekaanbieder"
+
+#. old->3.2->settings-schema.json->use-custom-provider->description
+msgid "Use custom provider"
+msgstr "Gebruik aangepaste aanbieder"
+
+#. old->3.2->settings-schema.json->use-custom-provider->tooltip
+msgid "Use your own search provider"
+msgstr "Gebruik uw eigen zoekaanbieder"
+
+#. old->3.2->settings-schema.json->custom-provider-label->description
+msgid "Name of custom provider"
+msgstr "Naam van aangepaste aanbieder"
+
+#. old->3.2->settings-schema.json->custom-provider-label->tooltip
+msgid "Enter label of the custom provider to show in the panel."
+msgstr ""
+"Voer het label van de aangepaste aanbieder in dat moet worden weergegeven in "
+"het paneel."
+
+#. old->3.2->settings-schema.json->custom-provider-url->description
+msgid "URL of custom provider"
+msgstr "URL van aangepaste aanbieder"
+
+#. old->3.2->settings-schema.json->custom-provider-url->tooltip
+msgid "Enter the URL of the custom search provider"
+msgstr "Voer de URL van de aangepaste zoekaanbieder in"

@@ -1,7 +1,12 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features designed to give you more control over how your window-list operates.
 
-Recent new features (Aug 2023 - June 2024):
+Recent new features (Aug 2023 - July 2024):
 
+* Allow rearranging Thumbnail menu items using drag-and-drop, also allow dropping on the desktop
+* Add options for hiding button labels when the windows workspace/monitor is not the current workspace/monitor
+* Added an option to sort the Thumbnail menu for grouped buttons based on the Workspace & Monitor index
+* Added 4 scroll-wheel actions options which applies when the scroll-wheel is used on a window-list button
+* Added "Restore/Minimize 1st window in group" option to the "Left button action for grouped buttons" option list
 * Support "drag-&-drop to desktop" which will move a window to the workspace & monitor it's dropped on
 * "Move window here" context menu/mouse action options to move a window to the current monitor/workspace
 * Thumbnail menu items will now show the windows workspace/monitor number(s) when appropriate

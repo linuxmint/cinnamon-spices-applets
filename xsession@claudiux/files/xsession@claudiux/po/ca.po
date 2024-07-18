@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-04 19:37+0100\n"
+"PO-Revision-Date: 2024-07-06 03:34+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr "Miniaplicació"
+
+#: applet.js:44
+msgid "Desklet"
+msgstr "Miniaplicació d'escriptori"
+
+#: applet.js:45
+msgid "Extension"
+msgstr "Extensió"
+
+#: applet.js:48
+msgid "Applets"
+msgstr "Miniaplicacions"
+
+#: applet.js:49
+msgid "Desklets"
+msgstr "Miniaplicacions d'escriptori"
+
+#: applet.js:50
+msgid "Extensions"
+msgstr "Extensions"
+
+#: applet.js:93
+msgid "Middle-click: \n"
+msgstr "Clic del mig:\n"
+
+#: applet.js:93 applet.js:165
+msgid "Show .xsession-errors"
+msgstr "Mostrar .xsession-errors"
+
+#: applet.js:176
+msgid "Restart Cinnamon"
+msgstr "Reiniciar Cinnamon"
+
+#: applet.js:187
+msgid "--- Reload Spices ---"
+msgstr "--- Recarregar Espècies ---"
+
+#: applet.js:193
+msgid "Reload Applet:"
+msgstr "Recarregar la miniaplicació:"
+
+#: applet.js:207
+msgid "Reload Desklet:"
+msgstr "Recarregar la miniaplicació d'escriptori:"
+
+#: applet.js:221
+msgid "Reload Extension:"
+msgstr "Recarregar l'extensió:"
+
+#: applet.js:235
+msgid "--- View Code ---"
+msgstr "--- Veure el codi ---"
+
+#: applet.js:241
+msgid "View Applet Code for:"
+msgstr "Veure el codi de la miniaplicació:"
+
+#: applet.js:255
+msgid "View Desklet Code for:"
+msgstr "Veure el codi de la miniaplicació d'escriptori:"
+
+#: applet.js:269
+msgid "View Extension Code for:"
+msgstr "Veure el codi de l'extensió:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors file "
+"and restart Cinnamon."
+msgstr ""
+"Ús permet reiniciar o obrir el codi font d'espècies (miniaplicacions, "
+"miniaplicacions d'escriptori, extensions), mostrar el contingut del fitxer ."
+"xsession-errors en temps real i reiniciar Cinnamon."

@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-01 20:00+0100\n"
+"PO-Revision-Date: 2024-07-08 23:29+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:45
+msgid "Turn off monitor"
+msgstr "Apagar el monitor"
+
+#. metadata.json->name
+msgid "Turn Off Monitor"
+msgstr "Apagar el monitor"
+
+#. metadata.json->description
+msgid "Click on the applet to turn off monitor"
+msgstr "Cliqueu a la miniaplicació per apagar el monitor"
+
+#. settings-schema.json->General->title
+msgid "General"
+msgstr "General"
+
+#. settings-schema.json->section-mouse->title
+msgid "Mouse"
+msgstr "Ratolí"
+
+#. settings-schema.json->section-keybinding->title
+msgid "Shortcuts"
+msgstr "Dreceres"
+
+#. settings-schema.json->section-icon->title
+msgid "Icon"
+msgstr "Icona"
+
+#. settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr "segons"
+
+#. settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Duració de la desactivació del ratolí"
+
+#. settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Per a prevenir el monitor encenent-se massa aviat després d'apagar-lo, es "
+"desactivarà el ratolí durant el número de segons assignat aquí."
+
+#. settings-schema.json->keybinding->description
+msgid "Keyboard shortcut to turn off your monitor"
+msgstr "Drecera del teclat per apagar el vostre monitor"
+
+#. settings-schema.json->use-symbolic-icon->description
+msgid "Use a symbolic icon"
+msgstr "Utilitzar una icona simbòlica"
+
+#. settings-schema.json->icon-color->description
+msgid "Color of the symbolic icon"
+msgstr "Color de la icona simbòlica"

@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: softyubikey@yubiserver.include.gr 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-21 14:16-0400\n"
+"PO-Revision-Date: 2024-07-05 02:13+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:61
+msgid "Click here to create a OTP"
+msgstr "Clique aquí per crear un OTP"
+
+#: applet.js:63
+msgid "Configure your SoftYubikey"
+msgstr "Configureu el vostre SoftYubikey"
+
+#. metadata.json->name
+msgid "SoftYubikey"
+msgstr "SoftYubikey"
+
+#. metadata.json->description
+msgid "Click on the applet to create a OTP"
+msgstr "Cliqueu a la miniaplicació per crear un OTP"
+
+#: ui/softyubikey.ui:27
+msgid "Public ID"
+msgstr "ID Pública"
+
+#: ui/softyubikey.ui:40
+msgid "Private ID"
+msgstr "ID Privada"
+
+#: ui/softyubikey.ui:53
+msgid "AES key"
+msgstr "Clau AES"
+
+#: ui/softyubikey.ui:117
+msgid "Apply"
+msgstr "Aplicar"
+
+#: ui/softyubikey.ui:133
+msgid "Cancel"
+msgstr "Cancel·lar"
