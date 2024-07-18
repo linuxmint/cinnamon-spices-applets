@@ -70,23 +70,24 @@ export type Services =
 	"WeatherUnderground" |
 	"PirateWeather" |
 	"OpenMeteo" |
-	"OpenWeatherMap_OneCall";
+	"OpenWeatherMap_OneCall"
+	;
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
-	"OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
-	"MetNorway": (app) => new MetNorway(app),
-	"Weatherbit": (app) => new Weatherbit(app),
-	"Tomorrow.io": (app) => new ClimacellV4(app),
-	"Met Office UK": (app) => new MetUk(app),
-	"US Weather": (app) => new USWeather(app),
-	"Visual Crossing": (app) => new VisualCrossing(app),
-	"DanishMI": (app) => new DanishMI(app),
-	"AccuWeather": (app) => new AccuWeather(app),
-	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-	"WeatherUnderground": (app) => new WeatherUnderground(app),
-	"PirateWeather": (app) => new PirateWeather(app),
-	"OpenMeteo": (app) => new OpenMeteo(app),
+	"OpenWeatherMap_Open": () => new OpenWeatherMapOpen(),
+	"OpenWeatherMap_OneCall": () => new OpenWeatherMapOneCall(),
+	"MetNorway": () => new MetNorway(),
+	"Weatherbit": () => new Weatherbit(),
+	"Tomorrow.io": () => new ClimacellV4(),
+	"Met Office UK": () => new MetUk(),
+	"US Weather": () => new USWeather(),
+	"Visual Crossing": () => new VisualCrossing(),
+	"DanishMI": () => new DanishMI(),
+	"AccuWeather": () => new AccuWeather(),
+	"DeutscherWetterdienst": () => new DeutscherWetterdienst(),
+	"WeatherUnderground": () => new WeatherUnderground(),
+	"PirateWeather": () => new PirateWeather(),
+	"OpenMeteo": () => new OpenMeteo(),
 }
 
 export class Config {

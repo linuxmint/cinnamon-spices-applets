@@ -17,6 +17,7 @@ import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
 import type { Config } from "../../config";
 import { GetUSWeatherAlerts } from "./alerts";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class USWeather extends BaseProvider {
 
@@ -168,7 +169,7 @@ export class USWeather extends BaseProvider {
 	private OnObtainingGridData = (message: ErrorResponse<{title: string}>): boolean => {
 		if (message.ErrorData.code == 404 && message?.Data != null) {
 			if (message.Data.title == "Data Unavailable For Requested Point") {
-				this.app.ShowError({
+				ErrorHandler.Instance.PostError({
 					type: "hard",
 					userError: true,
 					detail: "location not covered",
@@ -309,7 +310,7 @@ export class USWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("US Weather Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
@@ -395,7 +396,7 @@ export class USWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("US Weather Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
@@ -419,7 +420,7 @@ export class USWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("US Weather service Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
 			return null;
 		}
 	}

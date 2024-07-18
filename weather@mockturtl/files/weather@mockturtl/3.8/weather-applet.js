@@ -10557,12 +10557,10 @@ class GeoLocation {
 var suncalc = __webpack_require__(969);
 ;// CONCATENATED MODULE: ./src/3_8/providers/BaseProvider.ts
 class BaseProvider {
-    constructor(app) {
-        this.app = app;
-    }
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_uk.ts
+
 
 
 
@@ -10614,7 +10612,7 @@ class MetUk extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
@@ -10648,12 +10646,12 @@ class MetUk extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("MET UK Forecast Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
     }
-    async GetWeather(newLoc, cancellable) {
+    async GetWeather(newLoc, cancellable, config) {
         const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
@@ -10673,7 +10671,7 @@ class MetUk extends BaseProvider {
         }
         if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
             logger_Logger.Error("User is probably not in UK, aborting");
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 type: "hard",
                 userError: true,
                 detail: "location not covered",
@@ -10685,7 +10683,7 @@ class MetUk extends BaseProvider {
         const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable);
         const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable);
         const observations = await this.GetObservationData(this.observationSites, cancellable);
-        const currentResult = this.ParseCurrent(observations, newLoc);
+        const currentResult = this.ParseCurrent(observations, newLoc, config);
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
@@ -10748,7 +10746,7 @@ class MetUk extends BaseProvider {
         return ParseFunction(json, loc);
     }
     ;
-    ParseCurrent(json, loc) {
+    ParseCurrent(json, loc, config) {
         const observation = this.MeshObservations(json, loc);
         if (!observation) {
             return null;
@@ -10762,7 +10760,7 @@ class MetUk extends BaseProvider {
         }
         const filteredJson = json;
         if (dataIndex == -1) {
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 detail: "no api response",
                 type: "hard",
                 message: _("Data was not found for location"),
@@ -10806,7 +10804,7 @@ class MetUk extends BaseProvider {
             if ((observation === null || observation === void 0 ? void 0 : observation.V) != null) {
                 weather.extra_field = {
                     name: _("Visibility"),
-                    value: this.VisibilityToText(observation.V),
+                    value: this.VisibilityToText(observation.V, config),
                     type: "string"
                 };
             }
@@ -10833,14 +10831,14 @@ class MetUk extends BaseProvider {
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("Met UK Weather Parsing error: " + e.message, e);
-            this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            ErrorHandler.Instance.PostError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
     ;
-    VisibilityToText(dist) {
+    VisibilityToText(dist, config) {
         const distance = Number.parseInt(dist);
-        const unit = this.app.config.DistanceUnit;
+        const unit = config.DistanceUnit;
         const stringFormat = {
             distanceUnit: this.DistanceUnitFor(unit)
         };
@@ -11617,6 +11615,7 @@ function OWMOneCallToWeatherData(json, conditionsTranslated) {
 
 
 
+
 const IDCache = {};
 class OpenWeatherMapOneCall extends BaseProvider {
     constructor() {
@@ -11664,14 +11663,14 @@ class OpenWeatherMapOneCall extends BaseProvider {
                     break;
             }
             ;
-            this.app.ShowError(error);
+            ErrorHandler.Instance.PostError(error);
             logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
             logger_Logger.Error(errorMsg + errorPayload.message);
             return false;
         };
     }
     async GetWeather(loc, cancellable, config) {
-        const params = this.ConstructParams(loc, config.ApiKey);
+        const params = this.ConstructParams(loc, config.ApiKey, config);
         const cachedID = IDCache[`${loc.lat},${loc.lon}`];
         const [json, idPayload] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple({
@@ -11690,14 +11689,14 @@ class OpenWeatherMapOneCall extends BaseProvider {
         return OWMOneCallToWeatherData(json, !!params.lang);
     }
     ;
-    ConstructParams(loc, key) {
+    ConstructParams(loc, key, config) {
         const params = {
             lat: loc.lat,
             lon: loc.lon,
             appid: key
         };
-        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+        const locale = ConvertLocaleToOWMLang(config.currentLocale);
+        if (config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
             params.lang = locale;
         }
         return params;
@@ -12468,6 +12467,7 @@ class MetNorway extends BaseProvider {
 
 
 
+
 class Weatherbit extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -12563,7 +12563,7 @@ class Weatherbit extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("Weatherbit Weather Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
                 return null;
             }
         };
@@ -12589,7 +12589,7 @@ class Weatherbit extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
@@ -12623,7 +12623,7 @@ class Weatherbit extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
@@ -12633,11 +12633,11 @@ class Weatherbit extends BaseProvider {
     }
     ;
     async GetWeather(loc, cancellable, config) {
-        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
+        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable, config);
         let hourlyPromise = null;
         if (this.hourlyAccess)
-            hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
-        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable);
+            hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable, config);
+        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable, config);
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
@@ -12645,7 +12645,7 @@ class Weatherbit extends BaseProvider {
         const hourlyResult = await hourlyPromise;
         currentResult.hourlyForecasts = hourlyResult !== null && hourlyResult !== void 0 ? hourlyResult : [];
         if (config._showAlerts) {
-            const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
+            const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable, config);
             if (alertResult == null)
                 return null;
             currentResult.alerts = alertResult;
@@ -12653,8 +12653,8 @@ class Weatherbit extends BaseProvider {
         return currentResult;
     }
     ;
-    async GetData(baseUrl, loc, ParseFunction, cancellable) {
-        const query = this.ConstructQuery(loc);
+    async GetData(baseUrl, loc, ParseFunction, cancellable, config) {
+        const query = this.ConstructQuery(loc, config);
         if (query == null)
             return null;
         const json = await HttpLib.Instance.LoadJsonSimple({
@@ -12667,8 +12667,8 @@ class Weatherbit extends BaseProvider {
             return null;
         return ParseFunction(json, !!query.lang);
     }
-    async GetHourlyData(baseUrl, loc, cancellable) {
-        const query = this.ConstructQuery(loc);
+    async GetHourlyData(baseUrl, loc, cancellable, config) {
+        const query = this.ConstructQuery(loc, config);
         if (query == null)
             return null;
         const json = await HttpLib.Instance.LoadJsonSimple({
@@ -12722,15 +12722,15 @@ class Weatherbit extends BaseProvider {
         }
         return lang;
     }
-    ConstructQuery(loc) {
+    ConstructQuery(loc, config) {
         const result = {
-            key: this.app.config.ApiKey,
+            key: config.ApiKey,
             lat: loc.lat,
             lon: loc.lon,
             units: "S"
         };
-        const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+        const lang = this.ConvertToAPILocale(config.currentLocale);
+        if (IsLangSupported(lang, this.supportedLanguages) && config._translateCondition) {
             result.lang = lang;
         }
         return result;
@@ -12738,7 +12738,7 @@ class Weatherbit extends BaseProvider {
     ;
     HandleError(message) {
         if (message.ErrorData.code == 403) {
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
@@ -13083,6 +13083,7 @@ class Weatherbit extends BaseProvider {
 
 
 
+
 class ClimacellV4 extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -13107,7 +13108,7 @@ class ClimacellV4 extends BaseProvider {
     async GetWeather(loc, cancellable, config) {
         if (loc == null)
             return null;
-        this.params.apikey = this.app.config.ApiKey;
+        this.params.apikey = config.ApiKey;
         this.params.location = loc.lat + "," + loc.lon;
         const response = await HttpLib.Instance.LoadJsonSimple({
             url: this.url,
@@ -13121,19 +13122,19 @@ class ClimacellV4 extends BaseProvider {
         if (weather == null)
             return null;
         if (config._showAlerts) {
-            const alerts = await this.GetAlerts(loc, cancellable);
+            const alerts = await this.GetAlerts(loc, cancellable, config);
             if (alerts != null)
                 weather.alerts = alerts;
         }
         return weather;
     }
-    async GetAlerts(loc, cancellable) {
+    async GetAlerts(loc, cancellable, config) {
         var _a, _b, _c, _d;
         const response = await HttpLib.Instance.LoadJsonSimple({
             url: "https://api.tomorrow.io/v4/events",
             cancellable,
             params: {
-                apikey: this.app.config.ApiKey,
+                apikey: config.ApiKey,
                 location: loc.lat + "," + loc.lon,
                 buffer: "1",
                 insights: "air&insights=fires&insights=wind&insights=winter&insights=thunderstorms&insights=floods&insights=temperature&insights=tropical&insights=marine&insights=fog&insights=tornado"
@@ -13155,7 +13156,7 @@ class ClimacellV4 extends BaseProvider {
     }
     HandleHTTPError(message) {
         if (message.ErrorData.code == 401) {
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 type: "hard",
                 userError: true,
                 detail: "no key",
@@ -13659,6 +13660,7 @@ function EventNameToIcon(event) {
 
 
 
+
 class USWeather extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -13677,7 +13679,7 @@ class USWeather extends BaseProvider {
         this.OnObtainingGridData = (message) => {
             if (message.ErrorData.code == 404 && (message === null || message === void 0 ? void 0 : message.Data) != null) {
                 if (message.Data.title == "Data Unavailable For Requested Point") {
-                    this.app.ShowError({
+                    ErrorHandler.Instance.PostError({
                         type: "hard",
                         userError: true,
                         detail: "location not covered",
@@ -13725,7 +13727,7 @@ class USWeather extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("US Weather Forecast Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
@@ -13746,7 +13748,7 @@ class USWeather extends BaseProvider {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("US Weather service Forecast Parsing error: " + e.message, e);
-                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
+                ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
                 return null;
             }
         };
@@ -13946,7 +13948,7 @@ class USWeather extends BaseProvider {
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("US Weather Parsing error: " + e.message, e);
-            this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            ErrorHandler.Instance.PostError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -14234,6 +14236,7 @@ class USWeather extends BaseProvider {
 
 
 
+
 class VisualCrossing extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -14255,13 +14258,13 @@ class VisualCrossing extends BaseProvider {
         };
         this.supportedLangs = ["en", "de", "fr", "es"];
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         if (loc == null)
             return null;
-        this.params['key'] = this.app.config.ApiKey;
+        this.params['key'] = config.ApiKey;
         let translate = true;
-        if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
-            this.params['lang'] = this.app.config.Language;
+        if (IsLangSupported(config.Language, this.supportedLangs)) {
+            this.params['lang'] = config.Language;
             translate = false;
         }
         const url = this.url + loc.lat + "," + loc.lon;
@@ -14531,7 +14534,7 @@ class VisualCrossing extends BaseProvider {
     }
     HandleHttpError(error) {
         if ((error === null || error === void 0 ? void 0 : error.ErrorData.code) == 401) {
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
@@ -14909,7 +14912,48 @@ class DanishMI extends BaseProvider {
 
 
 
+
 class AccuWeather extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = true;
+        this.prettyName = _("AccuWeather");
+        this.name = "AccuWeather";
+        this.maxForecastSupport = 12;
+        this.maxHourlyForecastSupport = 120;
+        this.website = "https://www.accuweather.com/";
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.remainingQuota = null;
+        this.tier = "free";
+        this.baseUrl = "http://dataservice.accuweather.com/";
+        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
+        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
+        this.locationCache = {};
+        this.HandleErrors = (e) => {
+            switch (e.ErrorData.code) {
+                case 400:
+                    ErrorHandler.Instance.PostError({
+                        type: "hard",
+                        detail: "bad api response"
+                    });
+                    return true;
+                case 401:
+                    ErrorHandler.Instance.PostError({
+                        type: "hard",
+                        detail: "bad key",
+                    });
+                    return true;
+                case 403:
+                    ErrorHandler.Instance.PostError({
+                        type: "hard",
+                        detail: "key blocked",
+                    });
+                    return true;
+            }
+            return false;
+        };
+    }
     get remainingCalls() {
         return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
     }
@@ -14934,10 +14978,10 @@ class AccuWeather extends BaseProvider {
             url += "120hour";
         return url;
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b;
         const locationID = `${loc.lat},${loc.lon}`;
-        const locale = this.app.config._translateCondition ? (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us" : "en-us";
+        const locale = config._translateCondition ? (_b = (_a = config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us" : "en-us";
         let location;
         if (this.locationCache[locationID] != null) {
             location = this.locationCache[locationID];
@@ -14946,7 +14990,7 @@ class AccuWeather extends BaseProvider {
             location = await HttpLib.Instance.LoadJsonSimple({
                 url: this.locSearchUrl,
                 cancellable,
-                params: { q: locationID, details: true, language: locale, apikey: this.app.config.ApiKey },
+                params: { q: locationID, details: true, language: locale, apikey: config.ApiKey },
                 HandleError: this.HandleErrors
             });
         }
@@ -14957,19 +15001,19 @@ class AccuWeather extends BaseProvider {
             HttpLib.Instance.LoadJsonAsync({
                 url: this.currentConditionUrl + location.Key,
                 cancellable,
-                params: { apikey: this.app.config.ApiKey, details: true, language: locale, },
+                params: { apikey: config.ApiKey, details: true, language: locale, },
                 HandleError: this.HandleErrors
             }),
             HttpLib.Instance.LoadJsonAsync({
                 url: this.dailyForecastUrl + location.Key,
                 cancellable,
-                params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
+                params: { apikey: config.ApiKey, details: true, metric: true, language: locale, },
                 HandleError: this.HandleErrors
             }),
             HttpLib.Instance.LoadJsonAsync({
                 url: this.hourlyForecastUrl + location.Key,
                 cancellable,
-                params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
+                params: { apikey: config.ApiKey, details: true, metric: true, language: locale, },
                 HandleError: this.HandleErrors
             })
         ]);
@@ -14978,46 +15022,6 @@ class AccuWeather extends BaseProvider {
         this.remainingQuota = Math.min(Number.parseInt(current.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), Number.parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
         this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
-    }
-    constructor(app) {
-        super(app);
-        this.needsApiKey = true;
-        this.prettyName = _("AccuWeather");
-        this.name = "AccuWeather";
-        this.maxForecastSupport = 12;
-        this.maxHourlyForecastSupport = 120;
-        this.website = "https://www.accuweather.com/";
-        this.supportHourlyPrecipChance = true;
-        this.supportHourlyPrecipVolume = true;
-        this.remainingQuota = null;
-        this.tier = "free";
-        this.baseUrl = "http://dataservice.accuweather.com/";
-        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
-        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
-        this.locationCache = {};
-        this.HandleErrors = (e) => {
-            switch (e.ErrorData.code) {
-                case 400:
-                    this.app.ShowError({
-                        type: "hard",
-                        detail: "bad api response"
-                    });
-                    return true;
-                case 401:
-                    this.app.ShowError({
-                        type: "hard",
-                        detail: "bad key",
-                    });
-                    return true;
-                case 403:
-                    this.app.ShowError({
-                        type: "hard",
-                        detail: "key blocked",
-                    });
-                    return true;
-            }
-            return false;
-        };
     }
     SetTier(limit) {
         if (limit > 1800000)
@@ -15364,6 +15368,7 @@ function EventCodeToIcon(code) {
 
 
 
+
 class DeutscherWetterdienst extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -15379,7 +15384,7 @@ class DeutscherWetterdienst extends BaseProvider {
         this.baseUrl = "https://api.brightsky.dev/";
         this.HandleErrors = (message) => {
             if (message.ErrorData.code == 404) {
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     detail: "location not covered",
                     message: _("Please select a different provider or location"),
                     userError: true,
@@ -15687,6 +15692,7 @@ class DeutscherWetterdienst extends BaseProvider {
 
 
 
+
 const unitTypeMap = {
     "us": "e",
     "lr": "e",
@@ -15707,10 +15713,10 @@ class WeatherUnderground extends BaseProvider {
         this.supportHourlyPrecipVolume = false;
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
-        this.GetWeather = async (loc, cancellable) => {
+        this.GetWeather = async (loc, cancellable, config) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
             const locString = `${loc.lat},${loc.lon}`;
-            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc, cancellable));
+            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc, cancellable, config));
             if (location == null) {
                 return null;
             }
@@ -15720,15 +15726,15 @@ class WeatherUnderground extends BaseProvider {
                 cancellable,
                 params: {
                     geocode: locString,
-                    language: (_b = this.app.config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
+                    language: (_b = config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
                     format: "json",
-                    apiKey: this.app.config.ApiKey,
-                    units: this.currentUnit,
+                    apiKey: config.ApiKey,
+                    units: this.currentUnit(config),
                 }
             });
             if (forecast == null)
                 return null;
-            const observation = await this.GetObservations(location, forecast, loc, cancellable);
+            const observation = await this.GetObservations(location, forecast, loc, cancellable, config);
             return {
                 date: observation.date,
                 temperature: (_c = observation.temperature) !== null && _c !== void 0 ? _c : null,
@@ -15759,10 +15765,10 @@ class WeatherUnderground extends BaseProvider {
                 sunset: observation.sunset,
                 stationInfo: observation.stationInfo,
                 extra_field: observation.extra_field,
-                forecasts: this.ParseForecasts(loc, forecast),
+                forecasts: this.ParseForecasts(loc, forecast, config),
             };
         };
-        this.GetNearbyStations = async (loc, cancellable) => {
+        this.GetNearbyStations = async (loc, cancellable, config) => {
             var _a;
             const result = [];
             const payload = await HttpLib.Instance.LoadJsonSimple({
@@ -15771,7 +15777,7 @@ class WeatherUnderground extends BaseProvider {
                 params: {
                     geocode: `${loc.lat},${loc.lon}`,
                     format: "json",
-                    apiKey: this.app.config.ApiKey,
+                    apiKey: config.ApiKey,
                     product: "pws"
                 },
                 HandleError: this.HandleErrors
@@ -15795,9 +15801,9 @@ class WeatherUnderground extends BaseProvider {
             result.sort((a, b) => a.distanceKm - b.distanceKm);
             return result;
         };
-        this.GetObservations = async (stations, forecast, loc, cancellable) => {
+        this.GetObservations = async (stations, forecast, loc, cancellable, config) => {
             var _a;
-            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable)))).filter(v => v != null);
+            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable, config)))).filter(v => v != null);
             const tz = loc.timeZone;
             const result = {
                 wind: {
@@ -15853,7 +15859,7 @@ class WeatherUnderground extends BaseProvider {
             if (result.date == null)
                 result.date = DateTime.now().setZone(tz);
             if (result.temperature == null)
-                result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex]);
+                result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex], config);
             if (result.humidity == null)
                 result.humidity = forecast.daypart[0].relativeHumidity[dayPartIndex];
             if (result.wind.speed == null)
@@ -15870,7 +15876,7 @@ class WeatherUnderground extends BaseProvider {
             result.sunset = DateTime.fromJSDate(times.sunset).setZone(tz);
             return result;
         };
-        this.GetObservation = async (stationID, cancellable) => {
+        this.GetObservation = async (stationID, cancellable, config) => {
             var _a;
             const observationString = await HttpLib.Instance.LoadAsyncSimple({
                 url: `${this.baseURl}v2/pws/observations/current`,
@@ -15878,7 +15884,7 @@ class WeatherUnderground extends BaseProvider {
                 params: {
                     format: "json",
                     stationId: stationID,
-                    apiKey: this.app.config.ApiKey,
+                    apiKey: config.ApiKey,
                     units: "s",
                     numericPrecision: "decimal",
                 },
@@ -15900,14 +15906,14 @@ class WeatherUnderground extends BaseProvider {
                 case 7:
                     return false;
                 case 401:
-                    this.app.ShowError({
+                    ErrorHandler.Instance.PostError({
                         type: "hard",
                         detail: "bad key",
                         message: _("The API key you provided is invalid.")
                     });
                     return false;
                 case 404:
-                    this.app.ShowError({
+                    ErrorHandler.Instance.PostError({
                         type: "hard",
                         detail: "location not found",
                         message: _("The location you provided was not found.")
@@ -16253,8 +16259,8 @@ class WeatherUnderground extends BaseProvider {
                     };
             }
         };
-        this.ToKelvin = (c) => {
-            switch (this.currentUnit) {
+        this.ToKelvin = (c, config) => {
+            switch (this.currentUnit(config)) {
                 case "e":
                     return FahrenheitToKelvin(c);
                 case "m":
@@ -16263,16 +16269,16 @@ class WeatherUnderground extends BaseProvider {
             }
         };
     }
-    get currentUnit() {
+    currentUnit(config) {
         var _a;
-        if (this.app.config.TemperatureUnit == "fahrenheit")
+        if (config.TemperatureUnit == "fahrenheit")
             return "e";
-        if (this.app.config.countryCode == null)
+        if (config.countryCode == null)
             return "m";
         else
-            return (_a = unitTypeMap[this.app.config.countryCode.toLowerCase()]) !== null && _a !== void 0 ? _a : "m";
+            return (_a = unitTypeMap[config.countryCode.toLowerCase()]) !== null && _a !== void 0 ? _a : "m";
     }
-    ParseForecasts(loc, forecast) {
+    ParseForecasts(loc, forecast, config) {
         var _a;
         const result = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
@@ -16282,10 +16288,10 @@ class WeatherUnderground extends BaseProvider {
             const data = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition((_a = icons[0]) !== null && _a !== void 0 ? _a : icons[1]),
-                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
-                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax, config),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin, config),
             };
-            if (!this.app.config._shortConditions)
+            if (!config._shortConditions)
                 data.condition.description = forecast.narrative[index];
             result.push(data);
         }
@@ -16328,6 +16334,7 @@ function PirateWeatherSummaryToTranslated(summary) {
 
 
 
+
 class PirateWeather extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -16343,7 +16350,7 @@ class PirateWeather extends BaseProvider {
         this.query = "https://api.pirateweather.net/forecast/";
         this.HandleError = (message) => {
             if (message.ErrorData.code == 403) {
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     userError: true,
                     detail: "bad key",
@@ -16353,7 +16360,7 @@ class PirateWeather extends BaseProvider {
                 return false;
             }
             else if (message.ErrorData.code == 401) {
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     userError: true,
                     detail: "no key",
@@ -16369,12 +16376,12 @@ class PirateWeather extends BaseProvider {
         return null;
     }
     ;
-    async GetWeather(loc, cancellable) {
-        const unit = this.GetQueryUnit();
+    async GetWeather(loc, cancellable, config) {
+        const unit = this.GetQueryUnit(config);
         const response = await HttpLib.Instance.LoadJsonAsync({
-            url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+            url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
             cancellable,
-            params: { units: this.GetQueryUnit() },
+            params: { units: this.GetQueryUnit(config) },
             HandleError: this.HandleError
         });
         if (!response.Success)
@@ -16488,7 +16495,7 @@ class PirateWeather extends BaseProvider {
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("Pirate Weather payload parsing error: " + e.message, e);
-            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
+            ErrorHandler.Instance.PostError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -16558,9 +16565,9 @@ class PirateWeather extends BaseProvider {
                 return "cloud-refresh-symbolic";
         }
     }
-    GetQueryUnit() {
-        if (this.app.config.TemperatureUnit == "celsius") {
-            if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
+    GetQueryUnit(config) {
+        if (config.TemperatureUnit == "celsius") {
+            if (config.WindSpeedUnit == "kph" || config.WindSpeedUnit == "m/s") {
                 return 'si';
             }
             else {
@@ -17160,8 +17167,8 @@ class OpenWeatherMapOpen extends BaseProvider {
         this.supportHourlyPrecipChance = false;
         this.supportHourlyPrecipVolume = false;
     }
-    async GetWeather(loc, cancellable) {
-        const params = this.ConstructParams(loc);
+    async GetWeather(loc, cancellable, config) {
+        const params = this.ConstructParams(loc, config);
         const current = await HttpLib.Instance.LoadJsonSimple({
             url: "https://api.openweathermap.org/data/2.5/weather",
             cancellable,
@@ -17177,14 +17184,14 @@ class OpenWeatherMapOpen extends BaseProvider {
         }
         return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, !!params.lang, loc.timeZone)), { forecasts: OWMDailyForecastsToData(daily.list, !!params.lang, loc.timeZone) });
     }
-    ConstructParams(loc) {
+    ConstructParams(loc, config) {
         const params = {
             lat: loc.lat,
             lon: loc.lon,
             appid: "1c73f8259a86c6fd43c7163b543c8640"
         };
-        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+        const locale = ConvertLocaleToOWMLang(config.currentLocale);
+        if (config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
             params.lang = locale;
         }
         return params;
@@ -17261,20 +17268,20 @@ const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
-    "OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
-    "OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
-    "MetNorway": (app) => new MetNorway(app),
-    "Weatherbit": (app) => new Weatherbit(app),
-    "Tomorrow.io": (app) => new ClimacellV4(app),
-    "Met Office UK": (app) => new MetUk(app),
-    "US Weather": (app) => new USWeather(app),
-    "Visual Crossing": (app) => new VisualCrossing(app),
-    "DanishMI": (app) => new DanishMI(app),
-    "AccuWeather": (app) => new AccuWeather(app),
-    "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-    "WeatherUnderground": (app) => new WeatherUnderground(app),
-    "PirateWeather": (app) => new PirateWeather(app),
-    "OpenMeteo": (app) => new OpenMeteo(app),
+    "OpenWeatherMap_Open": () => new OpenWeatherMapOpen(),
+    "OpenWeatherMap_OneCall": () => new OpenWeatherMapOneCall(),
+    "MetNorway": () => new MetNorway(),
+    "Weatherbit": () => new Weatherbit(),
+    "Tomorrow.io": () => new ClimacellV4(),
+    "Met Office UK": () => new MetUk(),
+    "US Weather": () => new USWeather(),
+    "Visual Crossing": () => new VisualCrossing(),
+    "DanishMI": () => new DanishMI(),
+    "AccuWeather": () => new AccuWeather(),
+    "DeutscherWetterdienst": () => new DeutscherWetterdienst(),
+    "WeatherUnderground": () => new WeatherUnderground(),
+    "PirateWeather": () => new PirateWeather(),
+    "OpenMeteo": () => new OpenMeteo(),
 };
 class Config {
     get UserTimezone() {
