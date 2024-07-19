@@ -2,6 +2,7 @@ This is a Cinnamon window list and panel launcher applet based on CobiWindowList
 
 Recent new features (Aug 2023 - July 2024):
 
+* Add "Always on top" item to the button context menu as well as "Always on top" mouse actions (Cinnamon 5.4+)
 * Allow rearranging Thumbnail menu items using drag-and-drop, also allow dropping on the desktop
 * Add options for hiding button labels when the windows workspace/monitor is not the current workspace/monitor
 * Added an option to sort the Thumbnail menu for grouped buttons based on the Workspace & Monitor index
