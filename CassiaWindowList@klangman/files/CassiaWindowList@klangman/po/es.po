@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-18 18:47-0400\n"
-"PO-Revision-Date: 2024-07-16 13:55-0400\n"
+"PO-Revision-Date: 2024-07-18 23:50-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -104,9 +104,8 @@ msgid "Places"
 msgstr "Lugares"
 
 #: 4.0/applet.js:3319 6.0/applet.js:3319
-#, fuzzy
 msgid "Always on top"
-msgstr "Siempre"
+msgstr "Siempre arriba"
 
 #: 4.0/applet.js:3331 6.0/applet.js:3331
 msgid "Only on this workspace"
@@ -1210,7 +1209,7 @@ msgstr "Visible en este/todos los espacios de trabajo"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Toggle always on top"
-msgstr ""
+msgstr "Activar/Desactivar siempre arriba"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
