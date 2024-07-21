@@ -7,6 +7,7 @@ const St = imports.gi.St;
 const ModalDialog = imports.ui.modalDialog;
 const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
 
 // l10n/translation support
 const UUID = "ddcci-multi-monitor@tim-we";
