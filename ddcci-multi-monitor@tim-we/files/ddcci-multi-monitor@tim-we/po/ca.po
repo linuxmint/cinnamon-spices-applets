@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-20 15:38-0400\n"
-"PO-Revision-Date: 2024-07-05 00:38+0200\n"
+"PO-Revision-Date: 2024-07-21 03:21+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -25,23 +25,24 @@ msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
 
 #: applet.js:162
 msgid "Detect displays"
-msgstr ""
+msgstr "Detectar monitors"
 
 #: applet.js:174
 msgid "Detecting displays..."
-msgstr ""
+msgstr "Detectant monitors..."
 
 #: applet.js:263
 msgid "Failed to detect displays."
-msgstr ""
+msgstr "No s'han pogut detectar monitors."
 
 #: applet.js:264
 msgid "Make sure you have ddcutil installed and the correct permissions."
 msgstr ""
+"Assegureu-vos que teniu 'ddcutil' instal·lat i els permisos correctes."
 
 #: applet.js:265
 msgid "Error:"
-msgstr ""
+msgstr "Error:"
 
 #. metadata.json->name
 msgid "DDC/CI Multi-Monitor"
