@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-18 18:47-0400\n"
-"PO-Revision-Date: 2024-04-20 10:46+0200\n"
+"PO-Revision-Date: 2024-07-24 00:36+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -103,9 +103,8 @@ msgid "Places"
 msgstr "Locaties"
 
 #: 4.0/applet.js:3319 6.0/applet.js:3319
-#, fuzzy
 msgid "Always on top"
-msgstr "Altijd"
+msgstr "Altijd bovenop"
 
 #: 4.0/applet.js:3331 6.0/applet.js:3331
 msgid "Only on this workspace"
@@ -144,9 +143,8 @@ msgstr "Beeldscherm"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 #: 4.0/applet.js:3381 6.0/applet.js:3381
-#, fuzzy
 msgid "Move window here"
-msgstr "Sluit venster"
+msgstr "Verplaats venster hierheen"
 
 #: 4.0/applet.js:3398 6.0/applet.js:3398
 msgid "unassigned"
@@ -284,9 +282,8 @@ msgstr "Instellingen voor labels van knoppen van vensterlijsten"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
-#, fuzzy
 msgid "Number label settings"
-msgstr "Instellingen voor labelnummers van applicatiegroepen"
+msgstr "Instellingen voor nummerlabels"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -426,21 +423,18 @@ msgstr "Geminimaliseerde vensters"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other workspaces"
-msgstr "Vastmaken aan andere werkruimtes"
+msgstr "Vensters in andere werkruimtes"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other monitors"
-msgstr "Knoppen voor vensters op andere beeldschermen"
+msgstr "Vensters op andere monitoren"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
-#, fuzzy
 msgid "Hide labels for"
-msgstr "Labels verbergen voor geminimaliseerde knoppen"
+msgstr "Verberg labels voor"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
@@ -449,6 +443,10 @@ msgid ""
 "be hidden. For application pools, the label will still show unless all "
 "application windows have the selected property"
 msgstr ""
+"Selecteer het type vensterstatus waarvoor de labels van vensterlijstknoppen "
+"verborgen moeten worden. Voor applicatiegroepen zal het label nog steeds "
+"worden weergegeven, tenzij alle applicatievensters de geselecteerde "
+"eigenschap hebben."
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -490,7 +488,7 @@ msgstr ""
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->description
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->description
 msgid "Show a vertical ellipsis (...) for grouped buttons"
-msgstr ""
+msgstr "Toon een verticale ellipsis (...) voor gegroepeerde knoppen"
 
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
@@ -499,6 +497,9 @@ msgid ""
 "list buttons with more then one window. When on a vertical panel this option "
 "is not possible and the setting will be ignored."
 msgstr ""
+"Voeg een verticaal ellipsis Unicode-teken toe aan de labels voor "
+"gegroepeerde vensterlijstknoppen met meer dan één venster. Bij een verticaal "
+"paneel is deze optie niet mogelijk en wordt de instelling genegeerd."
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -553,7 +554,6 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
-#, fuzzy
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
 "appear. It applies when hovering over either window-list buttons or "
@@ -561,10 +561,10 @@ msgid ""
 "must be enabled for this option to have any effect)"
 msgstr ""
 "Dit definieert de muiszweeftijd voordat een volledige grootte "
-"voorbeeldvenster wordt weergegeven. Het is van toepassing op zowel de "
-"vensterlijstknoppen als de miniaturen menu-items (uiteraard moet één van de "
-"opties voor volledige grootte voorbeeldvensters zijn ingeschakeld voor deze "
-"optie effect kan hebben)"
+"voorbeeldvenster wordt weergegeven. Het is van toepassing bij zweven over "
+"zowel de vensterlijstknoppen als de miniaturen menu-items (uiteraard moet "
+"één van de opties voor volledige grootte voorbeeldvensters zijn ingeschakeld "
+"voor deze optie effect kan hebben)"
 
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
@@ -596,43 +596,38 @@ msgstr "Duur van de labelanimatie"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Nothing"
-msgstr "Doe niets"
+msgstr "Niets"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Application group window count"
-msgstr "Applicatie-vensters groeperen"
+msgstr "Aantal vensters in applicatiegroep"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Workspace number"
-msgstr "Weergavenummer"
+msgstr "Werkruimte nummer"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
-#, fuzzy
 msgid "Monitor number"
-msgstr "Beeldscherm"
+msgstr "Monitor nummer"
 
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
-#, fuzzy
 msgid "Number label contents"
-msgstr "Labelinhoud"
+msgstr "Nummeren van labelinhoud"
 
 #. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-number->options
 msgid "Smart"
-msgstr ""
+msgstr "Slim"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
 msgid "Display number"
-msgstr "Weergavenummer"
+msgstr "Toon nummber"
 
 #. 4.0->settings-schema.json->display-number->tooltip
 #. 6.0->settings-schema.json->display-number->tooltip
@@ -642,6 +637,11 @@ msgid ""
 "above. i.e. When there is two or more windows in a group, or when the "
 "windows workspace or monitor does not match the current one."
 msgstr ""
+"Bepaalt wanneer het nummerlabel wordt gebruikt. Slim betekent dat het label "
+"alleen verschijnt wanneer het gepast is, afhankelijk van de instelling voor "
+"nummeren van labelinhoud hierboven. Dit is wanneer er twee of meer vensters "
+"in een groep zijn, of wanneer de werkruimte of monitor van de vensters niet "
+"overeenkomt met de huidige."
 
 #. 4.0->settings-schema.json->number-style->options
 #. 6.0->settings-schema.json->number-style->options
@@ -660,15 +660,14 @@ msgstr "Nummerstijl"
 
 #. 4.0->settings-schema.json->number-style->tooltip
 #. 6.0->settings-schema.json->number-style->tooltip
-#, fuzzy
 msgid ""
 "Controls how the number label is presented. When on a vertical panel or when "
 "in launcher mode, the \"label prepend\" option is not possible so \"icon "
 "overlay\" will be used instead"
 msgstr ""
-"Bepaalt hoe het aantal vensters in een gegroepeerde knop wordt "
-"gepresenteerd. Bij een verticaal paneel is de 'label laten voorafgaan' optie "
-"niet mogelijk, dus 'pictogramoverlay' zal in plaats daarvan worden gebruikt"
+"Bepaalt hoe het nummer label wordt gepresenteerd. Bij een verticaal paneel "
+"of in launcher modus is de 'label laten voorafgaan' optie niet mogelijk, dus "
+"'pictogramoverlay' zal in plaats daarvan worden gebruikt"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -933,9 +932,8 @@ msgstr "Standaardgrootte van het miniaturenvenster"
 
 #. 4.0->settings-schema.json->menu-sort-groups->description
 #. 6.0->settings-schema.json->menu-sort-groups->description
-#, fuzzy
 msgid "Sort grouped button thumbnail menu items"
-msgstr "Herstellen of ingedrukt houden voor het miniaturenmenu"
+msgstr "Sorteer gegroepeerde knop-miniatuurmenu-items"
 
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
@@ -946,6 +944,12 @@ msgid ""
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
+"Indien ingeschakeld, wordt het miniatuurmenu eerst gesorteerd op werkruimte "
+"en daarna op monitor nummer voor gegroepeerde knoppen. Gegroepeerde vensters "
+"kunnen niet worden gesorteerd omdat de volgorde dezelfde is als de volgorde "
+"op het vensterlijstpaneel. Met deze optie ingeschakeld, wordt de "
+"miniatuurmenu slepen-en-neerzetten-herordening functie uitgeschakeld voor "
+"gegroepeerde knop-miniatuurmenu's."
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
@@ -1202,7 +1206,7 @@ msgstr "Zichtbaar op deze/alle werkruimtes"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Toggle always on top"
-msgstr ""
+msgstr "In- en uitschakelen van altijd bovenop"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1542,9 +1546,8 @@ msgstr "Meest recente venster herstellen/minimaliseren"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
-#, fuzzy
 msgid "Restore/Minimize 1st window in group"
-msgstr "Meest recente venster herstellen/minimaliseren"
+msgstr "Herstel/Minimaliseer 1e venster in groep"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1633,9 +1636,8 @@ msgstr "Meest recente applicatievenster herstellen"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 1st window in group"
-msgstr "Meest recente venster herstellen/minimaliseren"
+msgstr "Herstel/minimaliseer 1e venster in groep"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1643,9 +1645,8 @@ msgstr "Meest recente venster herstellen/minimaliseren"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 2nd window in group"
-msgstr "Meest recente venster herstellen/minimaliseren"
+msgstr "Herstel/minimaliseer 2e venster in groep"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1653,9 +1654,8 @@ msgstr "Meest recente venster herstellen/minimaliseren"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 3rd window in group"
-msgstr "Meest recente venster herstellen/minimaliseren"
+msgstr "Herstel/minimaliseer 3e venster in groep"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1663,9 +1663,8 @@ msgstr "Meest recente venster herstellen/minimaliseren"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 4th window in group"
-msgstr "Meest recente venster herstellen/minimaliseren"
+msgstr "Herstel/minimaliseer 4e venster in groep"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
@@ -1705,31 +1704,28 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Minimize/Restore/Maximize window"
-msgstr "Minimaliseer/Herstel"
+msgstr "Minimaliseer/Herstel/Maximaliseer venster"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change windows workspace"
-msgstr "Vensters van alle werkruimtes opnemen"
+msgstr "Verander werkruimte van vensters"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows monitor"
-msgstr ""
+msgstr "Verander monitor van vensters"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change window tiling"
-msgstr "Gebruik venstertitel"
+msgstr "Verander venstertegelen"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
 msgid "Scroll wheel action"
-msgstr ""
+msgstr "Actie scrollwiel"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->tooltip
 #. 6.0->settings-schema.json->mouse-action-scroll->tooltip
@@ -1737,6 +1733,9 @@ msgid ""
 "Action taken when using the mouse scroll wheel on a window list button. This "
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
 msgstr ""
+"Actie die wordt uitgevoerd bij het gebruik van het muis-scrollwiel op een "
+"vensterlijstknop. Deze scrollwielactie wordt uitgeschakeld als het "
+"miniatuurmenu momenteel open is."
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
