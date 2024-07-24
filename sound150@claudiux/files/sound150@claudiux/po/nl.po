@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-05 23:35+0200\n"
-"PO-Revision-Date: 2024-04-22 21:12+0200\n"
+"PO-Revision-Date: 2024-07-24 10:24+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -178,7 +178,7 @@ msgstr "Dempen"
 
 #: 5.4/applet.js:1092
 msgid "View cover"
-msgstr ""
+msgstr "Omslag bekijken"
 
 #: 5.4/applet.js:1957
 msgid "Easy Effects"
@@ -214,9 +214,8 @@ msgid "Sound 150%"
 msgstr "Geluid 150%"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Enhanced sound applet"
-msgstr "Verwijder geluidsapplet"
+msgstr "Verbeterde geluidsapplet"
 
 #. 4.6->settings-schema.json->section1->description
 #. 3.4->settings-schema.json->section1->description
@@ -593,12 +592,11 @@ msgstr "Tooltip"
 
 #. 5.4->settings-schema.json->sectionSound2->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. 5.4->settings-schema.json->sectionSound3->title
-#, fuzzy
 msgid "Sounds"
-msgstr "Geluid"
+msgstr "Geluiden"
 
 #. 5.4->settings-schema.json->sectionSound4->title
 msgid "Remove incompatible applets"
@@ -614,24 +612,25 @@ msgstr "Hou de kiezer van de bedieningsknoppen open"
 
 #. 5.4->settings-schema.json->avoidTwice->description
 msgid "Avoid displaying controllers twice"
-msgstr ""
+msgstr "Voorkom dubbele weergave van controllers"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
 msgid "Seeker tooltip: time to disappear"
-msgstr ""
+msgstr "Seeker tooltip: tijd vooraleer te verdwijnen"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
-msgstr ""
+msgstr "Schakel naar volgende speler"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to switch to the next player if it exists."
-msgstr "Stel sneltoets(en) in om het geluidsappletmenu weer te geven."
+msgstr ""
+"Stel sneltoets(en) in om naar de volgende speler over te schakelen als die "
+"bestaat."
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
@@ -660,10 +659,9 @@ msgstr ""
 "toepassing"
 
 #. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
-#, fuzzy
 msgid "Display icon indicating that the microphone is activated, if applicable"
 msgstr ""
-"Toon pictogram dat aangeeft dat de microfoon is gedempt, indien van "
+"Toon pictogram dat aangeeft dat de microfoon is geactiveerd, indien van "
 "toepassing"
 
 #. 5.4->settings-schema.json->magnetic25On->description
@@ -696,23 +694,24 @@ msgstr "Toon altijd de schakelaar 'Invoer Dempen' in het contextmenu."
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr ""
+msgstr "uitgeschakeld"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr ""
+msgstr "klein"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr ""
+msgstr "medium"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr ""
+msgstr "groot"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether the media keys osd is disabled or its relative display size"
 msgstr ""
+"Of de mediatoetsen-OSD is uitgeschakeld of haar relatieve weergavegrootte"
 
 #. 5.4->settings-schema.json->showOSDonStartup->description
 msgid "Show volume level in OSD on startup"
@@ -720,20 +719,20 @@ msgstr "Toon volumeniveau in OSD bij opstarten"
 
 #. 5.4->settings-schema.json->volumeSoundFile->description
 msgid "Which sound to play when the volume is changed"
-msgstr ""
+msgstr "Welke geluid afspelen bij het wijzigen van het volume"
 
 #. 5.4->settings-schema.json->volumeSoundEnabled->description
 msgid "Whether to play a sound when the volume is changed"
 msgstr ""
+"Of er een geluid moet worden afgespeeld bij het wijzigen van het volume"
 
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
-#, fuzzy
 msgid "Redefine Multimedia Keyboard Shortcuts"
-msgstr "Herdefinieer volume snelkoppelingen op toetsenbord"
+msgstr "Multimedia sneltoetsen opnieuw definiëren"
 
 #. 5.4->settings-schema.json->button-set-to-default-keybindings->description
 msgid "Use the same shortcuts as those defined by Cinnamon"
-msgstr ""
+msgstr "Gebruik dezelfde sneltoetsen als gedefinieerd door Cinnamon"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
