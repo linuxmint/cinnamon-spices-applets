@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-24 00:19+0200\n"
-"PO-Revision-Date: 2024-04-21 17:52+0200\n"
+"PO-Revision-Date: 2024-07-24 10:16+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -80,32 +80,32 @@ msgstr "Opstarten"
 
 #. settings-schema.json->head3->description
 msgid "Way to block the screensaver"
-msgstr ""
+msgstr "Manier om de schermbeveiliging te blokkeren"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"
-msgstr ""
+msgstr "(Vermijd indien mogelijk agressieve methoden.)"
 
 #. settings-schema.json->locktype->description
 msgid "Blocking mode"
-msgstr ""
+msgstr "Blokkeringsmodus"
 
 #. settings-schema.json->locktype->options
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #. settings-schema.json->locktype->options
 msgid "Aggressive"
-msgstr ""
+msgstr "Agressief"
 
 #. settings-schema.json->locktype->options
 msgid "Super aggressive"
-msgstr ""
+msgstr "Super agressief"
 
 #. settings-schema.json->lockinterval->description
 msgid "Blocking interval"
-msgstr ""
+msgstr "Blokkeringsinterval"
 
 #. settings-schema.json->lockinterval->units
 msgid "minutes"
-msgstr ""
+msgstr "minuten"
