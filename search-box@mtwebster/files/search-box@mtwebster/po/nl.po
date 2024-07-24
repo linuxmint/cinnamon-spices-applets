@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-05 20:02+0200\n"
-"PO-Revision-Date: 2024-04-21 18:06+0200\n"
+"PO-Revision-Date: 2024-07-24 10:19+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -55,13 +55,13 @@ msgstr "Aanbieders"
 #. settings-schema.json->page-options->title
 #. settings-schema.json->section-options->title
 msgid "Options"
-msgstr ""
+msgstr "Opties"
 
 #. settings-schema.json->section-colors->title
 #. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
-msgstr ""
+msgstr "Kleuren zoekvak"
 
 #. settings-schema.json->header-provider->description
 #. old->3.2->settings-schema.json->header-provider->description
@@ -97,14 +97,13 @@ msgstr ""
 
 #. settings-schema.json->header-providers->description
 #. old->5.4->settings-schema.json->header-providers->description
-#, fuzzy
 msgid "Search Engines"
-msgstr "Selecteer uw zoekmachine:"
+msgstr "Zoekmachines"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
 msgid "Show"
-msgstr ""
+msgstr "Weergeven"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -144,6 +143,11 @@ msgid ""
 "provider.\n"
 "If no provider is selected, the default provider is Google."
 msgstr ""
+"Alleen geselecteerde aanbieders worden weergegeven in het contextmenu, zodat "
+"je je standaardaanbieder kunt selecteren.\n"
+"Als je de standaardaanbieder deselecteert, wordt de eerste geselecteerde de "
+"standaardaanbieder.\n"
+"Als er geen aanbieder is geselecteerd, is de standaardaanbieder Google."
 
 #. settings-schema.json->header-keybinding->description
 #. old->3.2->settings-schema.json->header-keybinding->description
@@ -160,12 +164,12 @@ msgstr "Sneltoets die het zoekvak opent"
 #. settings-schema.json->background-color->description
 #. old->5.4->settings-schema.json->background-color->description
 msgid "Background color"
-msgstr ""
+msgstr "Achtergrondkleur"
 
 #. settings-schema.json->text-color->description
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
-msgstr ""
+msgstr "Tekstkleur"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"
