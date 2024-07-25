@@ -17,6 +17,8 @@ export interface Metadata {
 	version: string;
 }
 
+export type LocationType = "coordinates" | "postcode";
+
 /**
  * A WeatherProvider must implement this interface.
  */
@@ -30,6 +32,7 @@ export interface WeatherProvider {
 	readonly remainingCalls: number | null;
 	readonly supportHourlyPrecipChance: boolean;
     readonly supportHourlyPrecipVolume: boolean;
+	readonly locationType: LocationType;
 
 	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null>;
 }

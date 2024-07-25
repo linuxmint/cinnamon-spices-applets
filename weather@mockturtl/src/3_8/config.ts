@@ -1,5 +1,5 @@
 import type { WeatherApplet } from "./main";
-import type { LocationData, LocationServiceResult} from "./types";
+import type { LocationData, LocationServiceResult, WeatherProvider} from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/services/logger";
 import type { LogLevel} from "./consts";
@@ -30,6 +30,7 @@ import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
 import { soupLib } from "./lib/soupLib";
 import { GeoTimezone } from "./location_services/tz_lookup";
+import { SwissMeteo } from "./providers/swiss-meteo/provider";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -70,7 +71,8 @@ export type Services =
 	"WeatherUnderground" |
 	"PirateWeather" |
 	"OpenMeteo" |
-	"OpenWeatherMap_OneCall"
+	"OpenWeatherMap_OneCall" |
+	"Swiss Meteo"
 	;
 
 export const ServiceClassMapping: ServiceClassMappingType = {
@@ -88,6 +90,7 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"WeatherUnderground": () => new WeatherUnderground(),
 	"PirateWeather": () => new PirateWeather(),
 	"OpenMeteo": () => new OpenMeteo(),
+	"Swiss Meteo": () => new SwissMeteo(),
 }
 
 export class Config {
@@ -323,9 +326,25 @@ export class Config {
 		return (!key || key == "");
 	};
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, provider: WeatherProvider): Promise<LocationData | null> {
 		this.currentLocation = null;
-		const loc = await this.EnsureLocation(cancellable);
+
+		let loc: LocationServiceResult | null = null;
+		switch (provider.locationType) {
+			case "postcode": {
+				loc = {
+					entryText: this._location,
+					lat: -1,
+					lon: -1,
+				}
+				break;
+			}
+			case "coordinates": {
+				loc = await this.EnsureLocation(cancellable);
+				break;
+			}
+		}
+
 		if (loc == null) {
 			return null;
 		}
@@ -351,8 +370,7 @@ export class Config {
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
-	public async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
-		this.currentLocation = null;
+	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 
 		// Automatic location
 		if (!this._manualLocation) {

@@ -182,17 +182,18 @@ export class WeatherApplet extends TextIconApplet {
 		try {
 			this.encounteredError = false;
 
+			this.EnsureProvider();
+			if (this.provider == null) {
+				return RefreshState.Error;
+			}
+
 			if (!location) {
-				location = await this.config.GetLocation(cancellable);
+				location = await this.config.GetLocation(cancellable, this.provider);
 				if (!location) {
 					return RefreshState.NoLocation;
 				}
 			}
 
-			this.EnsureProvider();
-			if (this.provider == null) {
-				return RefreshState.Error;
-			}
 
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {

@@ -10557,6 +10557,9 @@ class GeoLocation {
 var suncalc = __webpack_require__(969);
 ;// CONCATENATED MODULE: ./src/3_8/providers/BaseProvider.ts
 class BaseProvider {
+    constructor() {
+        this.locationType = "coordinates";
+    }
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_uk.ts
@@ -17234,7 +17237,36 @@ class GeoTimezone {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/provider.ts
+
+
+
+class SwissMeteo extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("Swiss Météo");
+        this.name = "Swiss Meteo";
+        this.maxForecastSupport = 0;
+        this.maxHourlyForecastSupport = 0;
+        this.website = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.locationType = "postcode";
+        this.baseUrl = "https://app-prod-ws.meteoswiss-app.ch/v2/plzDetail";
+    }
+    async GetWeather(loc, cancellable) {
+        const result = await HttpLib.Instance.LoadJsonSimple({ url: this.baseUrl, cancellable, params: { plz: `${loc.entryText}00` } });
+        if (!result) {
+            return null;
+        }
+        throw new Error("Method not implemented.");
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -17282,6 +17314,7 @@ const ServiceClassMapping = {
     "WeatherUnderground": () => new WeatherUnderground(),
     "PirateWeather": () => new PirateWeather(),
     "OpenMeteo": () => new OpenMeteo(),
+    "Swiss Meteo": () => new SwissMeteo(),
 };
 class Config {
     get UserTimezone() {
@@ -17436,10 +17469,24 @@ class Config {
         return (!key || key == "");
     }
     ;
-    async GetLocation(cancellable) {
+    async GetLocation(cancellable, provider) {
         var _a;
         this.currentLocation = null;
-        const loc = await this.EnsureLocation(cancellable);
+        let loc = null;
+        switch (provider.locationType) {
+            case "postcode": {
+                loc = {
+                    entryText: this._location,
+                    lat: -1,
+                    lon: -1,
+                };
+                break;
+            }
+            case "coordinates": {
+                loc = await this.EnsureLocation(cancellable);
+                break;
+            }
+        }
         if (loc == null) {
             return null;
         }
@@ -17448,7 +17495,6 @@ class Config {
         return result;
     }
     async EnsureLocation(cancellable) {
-        this.currentLocation = null;
         if (!this._manualLocation) {
             const geoClue = await this.geoClue.GetLocation(cancellable);
             if (geoClue != null) {
@@ -19682,15 +19728,15 @@ class WeatherApplet extends TextIconApplet {
     async RefreshWeather(rebuild, location = null, cancellable) {
         try {
             this.encounteredError = false;
-            if (!location) {
-                location = await this.config.GetLocation(cancellable);
-                if (!location) {
-                    return RefreshState.NoLocation;
-                }
-            }
             this.EnsureProvider();
             if (this.provider == null) {
                 return RefreshState.Error;
+            }
+            if (!location) {
+                location = await this.config.GetLocation(cancellable, this.provider);
+                if (!location) {
+                    return RefreshState.NoLocation;
+                }
             }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 return RefreshState.NoKey;
