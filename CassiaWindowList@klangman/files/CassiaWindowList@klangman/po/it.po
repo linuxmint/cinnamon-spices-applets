@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-18 18:47-0400\n"
-"PO-Revision-Date: 2024-06-18 14:30+0200\n"
+"PO-Revision-Date: 2024-07-25 10:03+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -105,9 +105,8 @@ msgid "Places"
 msgstr "Posizioni"
 
 #: 4.0/applet.js:3319 6.0/applet.js:3319
-#, fuzzy
 msgid "Always on top"
-msgstr "Sempre"
+msgstr "Sempre in primo piano"
 
 #: 4.0/applet.js:3331 6.0/applet.js:3331
 msgid "Only on this workspace"
@@ -428,21 +427,18 @@ msgstr "Finestre ridotte a icona"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other workspaces"
-msgstr "Appunta ad altre aree di lavoro"
+msgstr "Finestre su altri spazi di lavoro"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other monitors"
-msgstr "Pulsanti per finestre su altri monitor"
+msgstr "Finestre su altri monitor"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
-#, fuzzy
 msgid "Hide labels for"
-msgstr "Nascondi le etichette per i pulsanti ridotti a icona"
+msgstr "Nascondi le etichette per"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
@@ -451,6 +447,10 @@ msgid ""
 "be hidden. For application pools, the label will still show unless all "
 "application windows have the selected property"
 msgstr ""
+"Seleziona il tipo di stato della finestra per il quale le etichette dei "
+"pulsanti dell'elenco delle finestre devono essere nascoste. Per i pool di "
+"applicazioni, l'etichetta verrà comunque visualizzata a meno che tutte le "
+"finestre dell'applicazione non abbiano la proprietà selezionata"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -942,9 +942,8 @@ msgstr "Dimensione predefinita della finestra delle miniature"
 
 #. 4.0->settings-schema.json->menu-sort-groups->description
 #. 6.0->settings-schema.json->menu-sort-groups->description
-#, fuzzy
 msgid "Sort grouped button thumbnail menu items"
-msgstr "Ripristina o tieni premuto per il menù delle miniature"
+msgstr "Ordina le voci del menù di anteprima raggruppate"
 
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
@@ -955,6 +954,13 @@ msgid ""
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
+"Se abilitato, il menù delle miniature verrà ordinato prima per area di "
+"lavoro e poi per numero di monitor per i pulsanti raggruppati. Le finestre "
+"raggruppate non possono essere ordinate poiché l'ordine è lo stesso "
+"dell'ordine nel pannello dell'elenco delle finestre. Con questa opzione "
+"abilitata, la funzione di riordino del trascinamento del menu delle "
+"miniature sarà disabilitata per i menu delle miniature dei pulsanti "
+"raggruppati."
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
@@ -1211,7 +1217,7 @@ msgstr "Visibile su questa/tutte le aree di lavoro"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Toggle always on top"
-msgstr ""
+msgstr "Attiva/disattiva sempre in primo piano"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1551,9 +1557,8 @@ msgstr "Ripristina/Riduci a icona la finestra più recente"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
-#, fuzzy
 msgid "Restore/Minimize 1st window in group"
-msgstr "Ripristina/Riduci a icona la finestra più recente"
+msgstr "Ripristina/Minimizza la prima finestra del gruppo"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1642,9 +1647,8 @@ msgstr "Ripristina la finestra dell'applicazione più recente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 1st window in group"
-msgstr "Ripristina/Riduci a icona la finestra più recente"
+msgstr "Ripristina/minimizza la prima finestra del gruppo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1652,9 +1656,8 @@ msgstr "Ripristina/Riduci a icona la finestra più recente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 2nd window in group"
-msgstr "Ripristina/Riduci a icona la finestra più recente"
+msgstr "Ripristina/minimizza la seconda finestra del gruppo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1662,9 +1665,8 @@ msgstr "Ripristina/Riduci a icona la finestra più recente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 3rd window in group"
-msgstr "Ripristina/Riduci a icona la finestra più recente"
+msgstr "Ripristina/minimizza la terza finestra del gruppo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1672,9 +1674,8 @@ msgstr "Ripristina/Riduci a icona la finestra più recente"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 4th window in group"
-msgstr "Ripristina/Riduci a icona la finestra più recente"
+msgstr "Ripristina/minimizza la quarta finestra del gruppo"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
@@ -1714,31 +1715,28 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Minimize/Restore/Maximize window"
-msgstr "Minimizza/Ripristina"
+msgstr "Minimizza/Ripristina/Massimizza finestra"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change windows workspace"
-msgstr "Includi finestre da tutte le aree di lavoro"
+msgstr "Cambia area di lavoro delle finestre"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows monitor"
-msgstr ""
+msgstr "Cambia il monitor delle finestre"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change window tiling"
-msgstr "Usa il titolo della finestra"
+msgstr "Cambia la piastrellatura delle finestre"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
 msgid "Scroll wheel action"
-msgstr ""
+msgstr "Azione della rotella di scorrimento"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->tooltip
 #. 6.0->settings-schema.json->mouse-action-scroll->tooltip
@@ -1746,6 +1744,9 @@ msgid ""
 "Action taken when using the mouse scroll wheel on a window list button. This "
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
 msgstr ""
+"Azione eseguita quando si utilizza la rotellina del mouse su un pulsante "
+"dell'elenco delle finestre. Questa azione della rotella di scorrimento sarà "
+"disabilitata se il menù Anteprima è attualmente aperto"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
