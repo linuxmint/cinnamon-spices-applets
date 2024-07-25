@@ -8,6 +8,7 @@ import { _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
 import { GetDeutscherWetterdienstAlerts } from "./alert";
 import type { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 
 export class DeutscherWetterdienst extends BaseProvider {
@@ -338,7 +339,7 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     private HandleErrors = (message: ErrorResponse): boolean => {
         if (message.ErrorData.code == 404) {
-            this.app.ShowError({
+            ErrorHandler.Instance.PostError({
                 detail: "location not covered",
                 message: _("Please select a different provider or location"),
                 userError: true,

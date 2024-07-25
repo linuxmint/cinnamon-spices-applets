@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
+import type { Config} from "../config";
 import type { Services } from "../config";
 import type { ErrorResponse} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
@@ -8,6 +9,7 @@ import type { Condition, ForecastData, WeatherData } from "../weather-data";
 import type { LocationData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
+import { ErrorHandler } from "../lib/services/error_handler";
 
 type UnitType = "e" | "m" | "h";
 
@@ -34,18 +36,18 @@ export class WeatherUnderground extends BaseProvider {
 
     private readonly locationCache: Record<string, NearbyStation[]> = {};
 
-    private get currentUnit(): UnitType {
-        if (this.app.config.TemperatureUnit == "fahrenheit")
+    private currentUnit(config: Config): UnitType {
+        if (config.TemperatureUnit == "fahrenheit")
             return "e";
-        if (this.app.config.countryCode == null)
+        if (config.countryCode == null)
             return "m";
         else
-            return unitTypeMap[this.app.config.countryCode.toLowerCase()] ?? "m";
+            return unitTypeMap[config.countryCode.toLowerCase()] ?? "m";
     }
 
-    public GetWeather = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> => {
+    public GetWeather = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> => {
         const locString = `${loc.lat},${loc.lon}`;
-        const location = this.locationCache[locString] ?? (await this.GetNearbyStations(loc, cancellable));
+        const location = this.locationCache[locString] ?? (await this.GetNearbyStations(loc, cancellable, config));
         if (location == null) {
             // TODO: handle error
             return null;
@@ -57,17 +59,17 @@ export class WeatherUnderground extends BaseProvider {
 			cancellable,
 			params: {
 				geocode: locString,
-				language: this.app.config.currentLocale ?? "en-US",
+				language: config.currentLocale ?? "en-US",
 				format: "json",
-				apiKey: this.app.config.ApiKey,
-				units: this.currentUnit,
+				apiKey: config.ApiKey,
+				units: this.currentUnit(config),
 			}
 		});
 
         if (forecast == null)
             return null;
 
-        const observation = await this.GetObservations(location, forecast, loc, cancellable);
+        const observation = await this.GetObservations(location, forecast, loc, cancellable, config);
 
         return {
             date: observation.date,
@@ -99,11 +101,11 @@ export class WeatherUnderground extends BaseProvider {
             sunset: observation.sunset,
             stationInfo: observation.stationInfo,
             extra_field: observation.extra_field,
-            forecasts: this.ParseForecasts(loc, forecast),
+            forecasts: this.ParseForecasts(loc, forecast, config),
         };
     }
 
-    private ParseForecasts(loc: LocationData, forecast: ForecastPayload): ForecastData[] {
+    private ParseForecasts(loc: LocationData, forecast: ForecastPayload, config: Config): ForecastData[] {
         const result: ForecastData[] = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [ forecast.daypart[0].iconCode[index * 2],  forecast.daypart[0].iconCode[index * 2 + 1]];
@@ -112,17 +114,17 @@ export class WeatherUnderground extends BaseProvider {
             const data: ForecastData = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition(icons[0] ?? icons[1]!),
-                temp_max: tempMax == null ? null : this.ToKelvin(tempMax),
-                temp_min: tempmin == null ? null : this.ToKelvin(tempmin),
+                temp_max: tempMax == null ? null : this.ToKelvin(tempMax, config),
+                temp_min: tempmin == null ? null : this.ToKelvin(tempmin, config),
             }
-            if (!this.app.config._shortConditions)
+            if (!config._shortConditions)
                 data.condition.description = forecast.narrative[index];
             result.push(data);
         }
         return result;
     }
 
-    private GetNearbyStations = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<NearbyStation[] | null> => {
+    private GetNearbyStations = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<NearbyStation[] | null> => {
         const result: NearbyStation[] = [];
         const payload = await HttpLib.Instance.LoadJsonSimple<NearObservationPayload>({
 			url: `${this.baseURl}v3/location/near`,
@@ -130,7 +132,7 @@ export class WeatherUnderground extends BaseProvider {
 			params: {
 				geocode: `${loc.lat},${loc.lon}`,
 				format: "json",
-				apiKey: this.app.config.ApiKey,
+				apiKey: config.ApiKey,
 				product: "pws"
 			},
 			HandleError: this.HandleErrors
@@ -162,8 +164,8 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationInternalData> => {
-        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable)))).filter(v => v != null) as ObservationData[];
+    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<ObservationInternalData> => {
+        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable, config)))).filter(v => v != null) as ObservationData[];
         const tz = loc.timeZone;
 
         const result: ObservationInternalData = {
@@ -226,7 +228,7 @@ export class WeatherUnderground extends BaseProvider {
             // TODO use real timestamp from somewhere....
             result.date = DateTime.now().setZone(tz);
         if (result.temperature == null)
-            result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex]);
+            result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex], config);
         if (result.humidity == null)
             result.humidity = forecast.daypart[0].relativeHumidity[dayPartIndex];
         if (result.wind.speed == null)
@@ -246,14 +248,14 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservation = async (stationID: string, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationData | null> => {
+    private GetObservation = async (stationID: string, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<ObservationData | null> => {
         const observationString = await HttpLib.Instance.LoadAsyncSimple({
 			url: `${this.baseURl}v2/pws/observations/current`,
 			cancellable,
 			params: {
 				format: "json",
 				stationId: stationID,
-				apiKey: this.app.config.ApiKey,
+				apiKey: config.ApiKey,
 				units: "s",
 				numericPrecision: "decimal",
 			},
@@ -278,14 +280,14 @@ export class WeatherUnderground extends BaseProvider {
             case 7:
                 return false;
             case 401:
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "bad key" ,
                     message: _("The API key you provided is invalid.")
                 });
                 return false;
             case 404:
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "location not found",
                     message: _("The location you provided was not found.")
@@ -638,8 +640,8 @@ export class WeatherUnderground extends BaseProvider {
         }
     }
 
-    private ToKelvin = (c: number): number => {
-        switch(this.currentUnit) {
+    private ToKelvin = (c: number, config: Config): number => {
+        switch(this.currentUnit(config)) {
             case "e":
                 return FahrenheitToKelvin(c);
             case "m":
