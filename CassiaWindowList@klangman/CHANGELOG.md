@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.1
+
+* Added a window-list button context menu item to toggle the "Always on top" window state
+* Added a "Always on top" mouse action option so you can configure a mouse button to toggle the window state
+
 ## 2.3.0
 
 * Allow rearranging Thumbnail menu items using drag-and-drop

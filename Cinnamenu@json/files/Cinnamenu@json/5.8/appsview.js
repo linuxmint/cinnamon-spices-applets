@@ -417,6 +417,7 @@ class AppsView {
                                                 () => { this.appThis.menu.passEvents = false; });
         this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
         this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this.applicationsScrollBox.set_clip_to_allocation(true);
         this.applicationsScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.applicationsScrollBox.set_mouse_scrolling(true);
         this.appsViewSignals.connect(this.applicationsScrollBox, 'button-release-event',

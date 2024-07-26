@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-10 16:10+0100\n"
-"PO-Revision-Date: 2024-07-03 04:49+0200\n"
+"PO-Revision-Date: 2024-07-23 15:37+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -375,7 +375,7 @@ msgstr "Comportament"
 #. 3.2
 #. 4.0
 msgid "Appearance"
-msgstr "Apariència"
+msgstr "Aparença"
 
 #. 5.8
 #. 5.8

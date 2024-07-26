@@ -1,0 +1,146 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-06-21 15:31-0400\n"
+"PO-Revision-Date: 2024-07-24 00:12+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:94
+msgid "Do not disturb"
+msgstr "Niet storen"
+
+#: applet.js:99
+msgid "No notifications"
+msgstr "Geen meldingen"
+
+#. settings-schema.json->keyClear->description
+#: applet.js:106
+msgid "Clear notifications"
+msgstr "Wis meldingen"
+
+#: applet.js:130
+msgid "Enable notifications"
+msgstr "Schakel meldingen in"
+
+#: applet.js:142
+msgid "Notification Settings"
+msgstr "Melding Instellingen"
+
+#: applet.js:224 applet.js:406
+#, javascript-format
+msgid "%d notification"
+msgid_plural "%d notifications"
+msgstr[0] "%d melding"
+msgstr[1] "%d meldingen"
+
+#: applet.js:254
+msgid "Notifications"
+msgstr "Meldingen"
+
+#: applet.js:269
+msgid "Notifications disabled"
+msgstr "Meldingen uitgeschakeld"
+
+#: applet.js:422
+msgid "just now"
+msgstr "zojuist"
+
+#: applet.js:425
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d seconde geleden"
+msgstr[1] "%d seconden geleden"
+
+#: applet.js:429
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d minuut geleden"
+msgstr[1] "%d minuten geleden"
+
+#. metadata.json->name
+msgid "Notifications Enhanced"
+msgstr "Verbeterde meldingen"
+
+#. metadata.json->description
+msgid "A notification applet but with more options"
+msgstr "Een meldingen applet met meer opties"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. settings-schema.json->ignoreTransientNotifications->description
+msgid "Ignore transient notifications"
+msgstr "Negeer tijdelijke meldingen"
+
+#. settings-schema.json->ignoreTransientNotifications->tooltip
+msgid "Check this to ignore transient notifications."
+msgstr "Vink dit aan om tijdelijke meldingen te negeren."
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Weergave"
+
+#. settings-schema.json->showNotificationCount->description
+msgid "Show the number of notifications"
+msgstr "Toon het aantal meldingen"
+
+#. settings-schema.json->showEmptyTray->description
+msgid "Show empty tray"
+msgstr "Toon lege tray"
+
+#. settings-schema.json->showEmptyTray->tooltip
+msgid "Check this to show the tray even when there are no new notifications."
+msgstr ""
+"Vink dit aan om de tray te tonen, zelfs als er geen nieuwe meldingen zijn."
+
+#. settings-schema.json->showDisturbIcon->description
+msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
+msgstr ""
+"Toon 'Niet storen' icoon zelfs als de optie lege tray tonen is uitgeschakeld"
+
+#. settings-schema.json->showDisturbIcon->tooltip
+msgid ""
+"Check this to show 'Do not disturb' icon on panel even when show empty tray "
+"option is disabled."
+msgstr ""
+"Vink dit aan om het 'Niet storen' icoon op het paneel te tonen, zelfs als de "
+"optie lege tray tonen is uitgeschakeld."
+
+#. settings-schema.json->showNotificationSettings->description
+msgid "Show notification settings in the menu"
+msgstr "Toon meldinginstellingen in het menu"
+
+#. settings-schema.json->section3->description
+msgid "Keyboard shortcuts"
+msgstr "Toetscombinaties"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show notifications"
+msgstr "Toon meldingen"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the notification popup menu."
+msgstr "Stel toetscombinatie(s) in om het meldingspopup-menu te tonen."
+
+#. settings-schema.json->keyClear->tooltip
+msgid "Set keybinding(s) to clear all notifications."
+msgstr "Stel toetscombinatie(s) in om alle meldingen te wissen."
+
+#. settings-schema.json->btnSystemSettings->description
+msgid "Open notification settings"
+msgstr "Open meldinginstellingen"

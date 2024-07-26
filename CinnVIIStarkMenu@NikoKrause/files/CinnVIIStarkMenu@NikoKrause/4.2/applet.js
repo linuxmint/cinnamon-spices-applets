@@ -3409,7 +3409,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.applicationsScrollBox.add_actor(this.applicationsBox);
         this.categoriesScrollBox.add_actor(this.categoriesBox);
         this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this.applicationsScrollBox.set_clip_to_allocation(true);
         this.categoriesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this.categoriesScrollBox.set_clip_to_allocation(true);
         this.categoriesApplicationsBox.actor.add_actor(this.categoriesOverlayBox);
         this.categoriesApplicationsBox.actor.add_actor(this.applicationsScrollBox);
 

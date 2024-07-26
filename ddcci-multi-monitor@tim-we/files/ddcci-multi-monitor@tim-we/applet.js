@@ -6,9 +6,18 @@ const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const ModalDialog = imports.ui.modalDialog;
 const Clutter = imports.gi.Clutter;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
 
+// l10n/translation support
 const UUID = "ddcci-multi-monitor@tim-we";
-const DEFAULT_TOOLTIP = "Adjust monitor brightness via DDC/CI";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
+const DEFAULT_TOOLTIP = _("Adjust monitor brightness via DDC/CI");
 const BRIGHTNESS_ADJUSTMENT_STEP = 5; /* Brightness adjustment step in % */
 
 function log(message, type = "debug") {
@@ -151,7 +160,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         let reload = new PopupMenu.PopupImageMenuItem(
-            "Detect displays",
+            _("Detect displays"),
             "emblem-synchronizing-symbolic",
             St.IconType.SYMBOLIC,
             {
@@ -163,7 +172,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
 
         reload.connect("activate", () => {
             if (!this.detecting) {
-                const infoOSD = new ModalDialog.InfoOSD("Detecting displays...");
+                const infoOSD = new ModalDialog.InfoOSD(_("Detecting displays..."));
                 infoOSD.show();
                 reload.destroy();
                 this.updateMonitors().then(
@@ -252,9 +261,9 @@ async function getDisplays() {
                 } else {
                     log("Failed to detect displays: " + stderr, "error");
                     const dialog = new ModalDialog.NotifyDialog([
-                        "Failed to detect displays.",
-                        "Make sure you have ddcutil installed and the correct permissions.",
-                        "Error: " + stderr
+                        _("Failed to detect displays."),
+                        _("Make sure you have ddcutil installed and the correct permissions."),
+                        _("Error:") + ` ${stderr}`
                     ].join("\n"));
                     dialog.open();
                     reject(stderr);
