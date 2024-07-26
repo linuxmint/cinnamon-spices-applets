@@ -40,9 +40,9 @@ record_window() {
 
 record_audio() {
   parameters+=(
-    -f alsa
+    -f pulse
     -ac 2
-    -i pulse
+    -i default
   )
 }
 
