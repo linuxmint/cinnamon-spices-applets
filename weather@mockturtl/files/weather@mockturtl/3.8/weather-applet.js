@@ -17237,7 +17237,132 @@ class GeoTimezone {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/payload/common.ts
+
+
+function SwissMeteoIconToCondition(icon) {
+    switch (icon) {
+        case 1:
+            return {
+                customIcon: "day-sunny-symbolic",
+                main: _("Clear"),
+                description: _("Clear sky"),
+                icons: ["weather-clear"]
+            };
+        case 101:
+            return {
+                customIcon: "night-clear-symbolic",
+                main: _("Clear"),
+                description: _("Clear sky"),
+                icons: ["weather-clear-night", "weather-clear"]
+            };
+        case 2:
+            return {
+                customIcon: "day-cloudy-symbolic",
+                main: _("Partly Cloudy"),
+                description: _("Partly Cloudy"),
+                icons: ["weather-few-clouds"]
+            };
+        case 102:
+            return {
+                customIcon: "night-cloudy-symbolic",
+                main: _("Partly Cloudy"),
+                description: _("Partly Cloudy"),
+                icons: ["weather-few-clouds-night", "weather-few-clouds"]
+            };
+        case 3:
+            return {
+                customIcon: "day-cloudy-symbolic",
+                main: _("Mostly Cloudy"),
+                description: _("Mostly Cloudy"),
+                icons: ["weather-clouds", "weather-few-clouds"]
+            };
+        case 103:
+            return {
+                customIcon: "night-cloudy-symbolic",
+                main: _("Mostly Cloudy"),
+                description: _("Mostly Cloudy"),
+                icons: ["weather-clouds-night", "weather-few-clouds-night"]
+            };
+        case 4:
+            return {
+                customIcon: "day-cloudy-symbolic",
+                main: _("Overcast"),
+                description: _("Overcast"),
+                icons: ["weather-overcast", "weather-clouds"]
+            };
+        case 104:
+            return {
+                customIcon: "night-cloudy-symbolic",
+                main: _("Overcast"),
+                description: _("Overcast"),
+                icons: ["weather-overcast", "weather-clouds-night", "weather-clouds"]
+            };
+        case 5:
+        case 105:
+            return {
+                customIcon: "day-cloudy-symbolic",
+                main: _("Cloudy"),
+                description: _("Cloudy"),
+                icons: ["weather-clouds"]
+            };
+        case 6:
+            return {
+                customIcon: "day-showers-symbolic",
+                main: _("Scattered Showers"),
+                description: _("Scattered Showers"),
+                icons: ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers"]
+            };
+        case 106:
+            return {
+                customIcon: "night-alt-showers-symbolic",
+                main: _("Scattered Showers"),
+                description: _("Scattered Showers"),
+                icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers"]
+            };
+        case 7:
+            return {
+                customIcon: "day-sleet-symbolic",
+                main: _("Scattered Sleet"),
+                description: _("Scattered Sleet"),
+                icons: ["weather-freezing-rain"]
+            };
+        case 107:
+            return {
+                customIcon: "night-sleet-symbolic",
+                main: _("Scattered Sleet"),
+                description: _("Scattered Sleet"),
+                icons: ["weather-freezing-rain"]
+            };
+        default:
+            logger_Logger.Error(`SwissMeteo Unknown icon: ${icon}`);
+            return {
+                customIcon: "refresh-symbolic",
+                main: _("Unknown"),
+                description: _("Unknown"),
+                icons: ["weather-severe-alert"]
+            };
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/payload/days.ts
+
+
+
+function SwissMeteoDayToForecastData(day) {
+    return {
+        date: DateTime.fromISO(day.dayDate),
+        condition: SwissMeteoIconToCondition(day.iconDayV2),
+        temp_max: CelsiusToKelvin(day.temperatureMax),
+        temp_min: CelsiusToKelvin(day.temperatureMin),
+    };
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/provider.ts
+
+
+
+
 
 
 
@@ -17247,21 +17372,62 @@ class SwissMeteo extends BaseProvider {
         this.needsApiKey = false;
         this.prettyName = _("Swiss Météo");
         this.name = "Swiss Meteo";
-        this.maxForecastSupport = 0;
-        this.maxHourlyForecastSupport = 0;
+        this.maxForecastSupport = 8;
+        this.maxHourlyForecastSupport = 192;
         this.website = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
         this.remainingCalls = null;
         this.supportHourlyPrecipChance = true;
         this.supportHourlyPrecipVolume = true;
         this.locationType = "postcode";
         this.baseUrl = "https://app-prod-ws.meteoswiss-app.ch/v2/plzDetail";
+        this.timezone = "Europe/Zurich";
+        this.HandleError = (error) => {
+            if (error.ErrorData.code == 500) {
+                if (error.Data != null && typeof error.Data === "object" && "statusCode" in error.Data && "msg" in error.Data) {
+                    ErrorHandler.Instance.PostError({
+                        type: "hard",
+                        detail: "bad location format",
+                        message: _("For this provider, you need to use a postcode.")
+                    });
+                }
+            }
+            return true;
+        };
     }
     async GetWeather(loc, cancellable) {
-        const result = await HttpLib.Instance.LoadJsonSimple({ url: this.baseUrl, cancellable, params: { plz: `${loc.entryText}00` } });
+        const result = await HttpLib.Instance.LoadJsonSimple({
+            url: this.baseUrl,
+            cancellable,
+            params: { plz: `${loc.entryText}00` },
+            HandleError: this.HandleError
+        });
         if (!result) {
             return null;
         }
-        throw new Error("Method not implemented.");
+        return {
+            date: DateTime.fromMillis(result.currentWeather.time),
+            coord: {
+                lat: -1,
+                lon: -1,
+            },
+            location: {
+                timeZone: this.timezone,
+                city: loc.entryText,
+                country: _("Switzerland"),
+            },
+            condition: SwissMeteoIconToCondition(result.currentWeather.iconV2),
+            temperature: CelsiusToKelvin(result.currentWeather.temperature),
+            dewPoint: null,
+            humidity: null,
+            pressure: null,
+            sunrise: DateTime.fromMillis(result.graph.sunrise[0]),
+            sunset: DateTime.fromMillis(result.graph.sunset[0]),
+            wind: {
+                speed: KPHtoMPS(result.graph.windSpeed3h[0]),
+                degree: result.graph.windDirection3h[0],
+            },
+            forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day))
+        };
     }
 }
 
