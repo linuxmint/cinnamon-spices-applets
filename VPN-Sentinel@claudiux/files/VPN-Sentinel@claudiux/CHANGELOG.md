@@ -1,3 +1,6 @@
+### v2.2.3~20240726
+  * Solves dependency problem.
+
 ### v2.2.1~20240202
   * Changes icon.png and icon.svg.
   * Updates README.md
