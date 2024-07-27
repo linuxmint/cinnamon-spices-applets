@@ -119,12 +119,25 @@ export function OWMOneCallToWeatherData(json: OWMOneCallPayload, conditionsTrans
 			sender_name: alert.sender_name,
 			level: "unknown",
 			title: alert.event,
-			description: alert.description,
+			description: SanitizeAlertDescription(alert.description)
 		})
 	}
 	weather.alerts = alerts;
 
 	return weather;
+}
+
+function SanitizeAlertDescription(text: string): string {
+	const splitText = text.split("\n")
+	//Replace empty lines with double newline
+	for (let i = 0; i < splitText.length; i++) {
+		const line = splitText[i];
+		if (line == "") {
+			splitText[i] = "\n\n"
+		}
+	}
+
+	return splitText.join();
 }
 
 export interface OWMOneCallPayload {

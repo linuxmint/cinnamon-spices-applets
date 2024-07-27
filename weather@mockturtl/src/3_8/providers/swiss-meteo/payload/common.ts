@@ -3,6 +3,7 @@ import type { SwissMeteoCurrentWeather } from "./current";
 import { _ } from "../../../utils";
 import type { Condition } from "../../../weather-data";
 import { Logger } from "../../../lib/services/logger";
+import type { SwissMeteoWarning } from "./alerts";
 
 export interface SwissMeteoError {
 	statusCode: number | null;
@@ -15,7 +16,7 @@ export interface SwissMeteoPayload {
 	 * 8 items
 	 */
 	forecast: SwissMeteoDay[];
-	warnings: unknown[];
+	warnings: SwissMeteoWarning[];
 	warningsOverview: unknown[];
 	graph: {
 		/**
@@ -473,7 +474,7 @@ export function SwissMeteoIconToCondition(icon: number): Condition {
 				customIcon: "day-showers-symbolic",
 				main: _("Showers"),
 				description: _("Showers"),
-				icons: ["weather-showers-day", "weather-showers"]
+				icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered"]
 			}
 		case 132:
 			return {

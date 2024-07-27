@@ -8,6 +8,7 @@ import type { WeatherData } from "../../weather-data";
 import { BaseProvider } from "../BaseProvider";
 import { SwissMeteoIconToCondition, type SwissMeteoPayload } from "./payload/common";
 import { SwissMeteoDayToForecastData } from "./payload/days";
+import { SwissMeteoWarningToAlertData } from "./payload/alerts";
 
 export class SwissMeteo extends BaseProvider {
 	public override needsApiKey: boolean = false;
@@ -72,7 +73,8 @@ export class SwissMeteo extends BaseProvider {
 				speed: KPHtoMPS(result.graph.windSpeed3h[0]),
 				degree: result.graph.windDirection3h[0],
 			},
-			forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day))
+			forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
+			alerts: result.warnings.map(warning => SwissMeteoWarningToAlertData(warning)),
 		};
 	}
 

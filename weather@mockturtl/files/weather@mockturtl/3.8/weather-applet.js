@@ -11604,11 +11604,21 @@ function OWMOneCallToWeatherData(json, conditionsTranslated) {
             sender_name: alert.sender_name,
             level: "unknown",
             title: alert.event,
-            description: alert.description,
+            description: SanitizeAlertDescription(alert.description)
         });
     }
     weather.alerts = alerts;
     return weather;
+}
+function SanitizeAlertDescription(text) {
+    const splitText = text.split("\n");
+    for (let i = 0; i < splitText.length; i++) {
+        const line = splitText[i];
+        if (line == "") {
+            splitText[i] = "\n\n";
+        }
+    }
+    return splitText.join();
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-closed.ts
@@ -17590,7 +17600,7 @@ function SwissMeteoIconToCondition(icon) {
                 customIcon: "day-showers-symbolic",
                 main: _("Showers"),
                 description: _("Showers"),
-                icons: ["weather-showers-day", "weather-showers"]
+                icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered"]
             };
         case 132:
             return {
@@ -17739,7 +17749,65 @@ function SwissMeteoDayToForecastData(day) {
     };
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/payload/alerts.ts
+function SwissMeteoWarningToAlertData(warning) {
+    return {
+        level: SwissMeteoWarningLevelToAlertLevel(warning.warnLevel),
+        title: "",
+        description: warning.text,
+        icon: SwissMeteoWarningTypeToIcon(warning.warnType),
+        sender_name: "Swiss Meteo",
+    };
+}
+function SwissMeteoWarningLevelToAlertLevel(level) {
+    switch (level) {
+        case 1:
+            return "unknown";
+        case 2:
+            return "minor";
+        case 3:
+            return "moderate";
+        case 4:
+            return "severe";
+        case 5:
+            return "extreme";
+        default:
+            return "unknown";
+    }
+}
+function SwissMeteoWarningTypeToIcon(type) {
+    switch (type) {
+        case 0:
+            return "strong-wind-symbolic";
+        case 1:
+            return "lightning-symbolic";
+        case 2:
+            return "raindrops-symbolic";
+        case 3:
+            return "snowflake-cold-symbolic";
+        case 4:
+            return undefined;
+        case 5:
+            return "snowflake-cold-symbolic";
+        case 6:
+            return undefined;
+        case 7:
+            return "hot-symbolic";
+        case 8:
+            return undefined;
+        case 9:
+            return "earthquake-symbolic";
+        case 10:
+            return "fire-symbolic";
+        case 11:
+            return "flood-symbolic";
+        default:
+            return undefined;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/provider.ts
+
 
 
 
@@ -17817,7 +17885,8 @@ class SwissMeteo extends BaseProvider {
                 speed: KPHtoMPS(result.graph.windSpeed3h[0]),
                 degree: result.graph.windDirection3h[0],
             },
-            forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day))
+            forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
+            alerts: result.warnings.map(warning => SwissMeteoWarningToAlertData(warning)),
         };
     }
     ValidPostcode(postcode) {

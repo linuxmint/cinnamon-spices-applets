@@ -157,7 +157,7 @@ class AlertsWindow(Gtk.Window):
 			valign=Gtk.Align.START
 		)
 		description = NotStupidLabel(
-	  		label=self.sanitize_text(alert['description']),
+	  		label=alert['description'],
 		)
 		description.set_size_request(400, -1)
 
@@ -182,13 +182,6 @@ class AlertsWindow(Gtk.Window):
 		image.modify_fg(Gtk.StateType.NORMAL, Gdk.Color.parse(alert["color"])[1])
 
 		return image
-
-	def sanitize_text(self, text: str) -> str:
-		split_text = text.split("\n")
-		# Replace empty lines with double newline
-		split_text = [line if line else "\n\n" for line in split_text]
-		return "".join(split_text)
-
 
 def main():
 	parser = argparse.ArgumentParser(description='Weather Applet Alerts Dialog')
