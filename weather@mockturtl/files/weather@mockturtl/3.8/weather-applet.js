@@ -17762,6 +17762,8 @@ class SwissMeteo extends BaseProvider {
         this.locationType = "postcode";
         this.baseUrl = "https://app-prod-ws.meteoswiss-app.ch/v2/plzDetail";
         this.timezone = "Europe/Zurich";
+        this.VALID_MIN_PLZ = 1000;
+        this.VALID_MAX_PLZ = 9999;
         this.HandleError = (error) => {
             if (error.ErrorData.code == 500) {
                 if (error.Data != null && typeof error.Data === "object" && "statusCode" in error.Data && "msg" in error.Data) {
@@ -17776,6 +17778,14 @@ class SwissMeteo extends BaseProvider {
         };
     }
     async GetWeather(loc, cancellable) {
+        if (!this.ValidPostcode(loc.entryText)) {
+            ErrorHandler.Instance.PostError({
+                type: "hard",
+                detail: "bad location format",
+                message: _("For this provider, you need to use a Swiss postcode, from 1000-9999.")
+            });
+            return null;
+        }
         const result = await HttpLib.Instance.LoadJsonSimple({
             url: this.baseUrl,
             cancellable,
@@ -17809,6 +17819,13 @@ class SwissMeteo extends BaseProvider {
             },
             forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day))
         };
+    }
+    ValidPostcode(postcode) {
+        const postcodeNum = Number.parseInt(postcode);
+        if (Number.isNaN(postcodeNum)) {
+            return false;
+        }
+        return postcodeNum >= this.VALID_MIN_PLZ && postcodeNum <= this.VALID_MAX_PLZ;
     }
 }
 

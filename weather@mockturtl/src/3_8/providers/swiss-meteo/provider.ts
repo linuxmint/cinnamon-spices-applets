@@ -24,8 +24,21 @@ export class SwissMeteo extends BaseProvider {
 	private readonly baseUrl = "https://app-prod-ws.meteoswiss-app.ch/v2/plzDetail";
 	private readonly timezone = "Europe/Zurich";
 
+	private readonly VALID_MIN_PLZ = 1000;
+	private readonly VALID_MAX_PLZ = 9999;
+
 
 	public override async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+		if (!this.ValidPostcode(loc.entryText)) {
+			ErrorHandler.Instance.PostError({
+				type: "hard",
+				detail: "bad location format",
+				message: _("For this provider, you need to use a Swiss postcode, from 1000-9999.")
+			});
+
+			return null;
+		}
+
 		const result = await HttpLib.Instance.LoadJsonSimple<SwissMeteoPayload>({
 			url: this.baseUrl,
 			cancellable,
@@ -75,5 +88,14 @@ export class SwissMeteo extends BaseProvider {
 		}
 
 		return true;
+	}
+
+	private ValidPostcode(postcode: string): boolean {
+		const postcodeNum = Number.parseInt(postcode);
+		if (Number.isNaN(postcodeNum)) {
+			return false;
+		}
+
+		return postcodeNum >= this.VALID_MIN_PLZ && postcodeNum <= this.VALID_MAX_PLZ;
 	}
 }
