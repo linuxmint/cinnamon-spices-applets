@@ -4,7 +4,7 @@ import { HttpLib, type ErrorResponse } from "../../lib/httpLib";
 import { ErrorHandler } from "../../lib/services/error_handler";
 import type { LocationData, LocationType } from "../../types";
 import { _, CelsiusToKelvin, KPHtoMPS } from "../../utils";
-import type { WeatherData } from "../../weather-data";
+import type { HourlyForecastData, WeatherData } from "../../weather-data";
 import { BaseProvider } from "../BaseProvider";
 import { SwissMeteoIconToCondition, type SwissMeteoPayload } from "./payload/common";
 import { SwissMeteoDayToForecastData } from "./payload/days";
@@ -18,7 +18,7 @@ export class SwissMeteo extends BaseProvider {
 	public override maxHourlyForecastSupport: number = 192;
 	public override website: string = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
 	public override remainingCalls: number | null = null;
-	public override supportHourlyPrecipChance: boolean = true;
+	public override supportHourlyPrecipChance: boolean = false;
 	public override supportHourlyPrecipVolume: boolean = true;
 	public override locationType: LocationType = "postcode";
 
@@ -51,7 +51,7 @@ export class SwissMeteo extends BaseProvider {
 			return null;
 		}
 
-		return {
+		const weather: WeatherData = {
 			date: DateTime.fromMillis(result.currentWeather.time),
 			coord: {
 				lat: -1,
@@ -76,6 +76,34 @@ export class SwissMeteo extends BaseProvider {
 			forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
 			alerts: result.warnings.map(warning => SwissMeteoWarningToAlertData(warning)),
 		};
+
+		const hourlyForecasts: HourlyForecastData[] = [];
+		const startTime = DateTime.fromMillis(result.graph.start);
+		const now = DateTime.now();
+		for (let i = 0; i < result.graph.temperatureMean1h.length; i++) {
+			const currentItemTime = startTime.plus({ hours: i });
+			const nextItemTime = startTime.plus({ hours: i + 1 });
+			// We are in the past, skip
+			if (currentItemTime < now && nextItemTime < now) {
+				continue;
+			}
+
+			const hourTemp = result.graph.temperatureMean1h[i];
+			const hourPrecip = result.graph.precipitation1h[i];
+			const hourCondition = SwissMeteoIconToCondition(result.graph.weatherIcon3hV2[Math.floor(i / 3)]);
+			hourlyForecasts.push({
+				date: currentItemTime,
+				condition: hourCondition,
+				temp: CelsiusToKelvin(hourTemp),
+				precipitation: hourPrecip == 0 ? undefined : {
+					type: "none",
+					volume: hourPrecip,
+				},
+			});
+		}
+
+		weather.hourlyForecasts = hourlyForecasts;
+		return weather;
 	}
 
 	private HandleError = (error: ErrorResponse<unknown>): boolean => {

@@ -9729,7 +9729,9 @@ function IsLangSupported(lang, languages) {
 }
 ;
 function HasIcon(icon, icon_type) {
-    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
+    const result = IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
+    global.log(`Checking for icon ${icon} ${icon_type == IconType.SYMBOLIC ? '-symbolic' : ''} result: ${result}`);
+    return result;
 }
 function mode(arr) {
     return arr.reduce(function (current, item) {
@@ -17825,7 +17827,7 @@ class SwissMeteo extends BaseProvider {
         this.maxHourlyForecastSupport = 192;
         this.website = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
         this.remainingCalls = null;
-        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipChance = false;
         this.supportHourlyPrecipVolume = true;
         this.locationType = "postcode";
         this.baseUrl = "https://app-prod-ws.meteoswiss-app.ch/v2/plzDetail";
@@ -17863,7 +17865,7 @@ class SwissMeteo extends BaseProvider {
         if (!result) {
             return null;
         }
-        return {
+        const weather = {
             date: DateTime.fromMillis(result.currentWeather.time),
             coord: {
                 lat: -1,
@@ -17888,6 +17890,30 @@ class SwissMeteo extends BaseProvider {
             forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
             alerts: result.warnings.map(warning => SwissMeteoWarningToAlertData(warning)),
         };
+        const hourlyForecasts = [];
+        const startTime = DateTime.fromMillis(result.graph.start);
+        const now = DateTime.now();
+        for (let i = 0; i < result.graph.temperatureMean1h.length; i++) {
+            const currentItemTime = startTime.plus({ hours: i });
+            const nextItemTime = startTime.plus({ hours: i + 1 });
+            if (currentItemTime < now && nextItemTime < now) {
+                continue;
+            }
+            const hourTemp = result.graph.temperatureMean1h[i];
+            const hourPrecip = result.graph.precipitation1h[i];
+            const hourCondition = SwissMeteoIconToCondition(result.graph.weatherIcon3hV2[Math.floor(i / 3)]);
+            hourlyForecasts.push({
+                date: currentItemTime,
+                condition: hourCondition,
+                temp: CelsiusToKelvin(hourTemp),
+                precipitation: hourPrecip == 0 ? undefined : {
+                    type: "none",
+                    volume: hourPrecip,
+                },
+            });
+        }
+        weather.hourlyForecasts = hourlyForecasts;
+        return weather;
     }
     ValidPostcode(postcode) {
         const postcodeNum = Number.parseInt(postcode);
