@@ -1,22 +1,41 @@
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# #-#-#-#-#  hu_uj.po (screen-inhibit@mtwebster 2.1.2)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: screen-inhibit@mtwebster 2.1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-24 00:19+0200\n"
-"PO-Revision-Date: 2024-02-03 08:11+0100\n"
+"POT-Creation-Date: 2024-06-24 00:19+0200\n"
+"PO-Revision-Date: 2024-07-28 09:16+0200\n"
+"PO-Revision-Date: 2024-07-28 09:15+0200\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:21
@@ -81,32 +100,32 @@ msgstr "Indítás"
 
 #. settings-schema.json->head3->description
 msgid "Way to block the screensaver"
-msgstr ""
+msgstr "A képernyővédő blokkolásának módja"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"
-msgstr ""
+msgstr "(Ha lehetséges, kerülje az agresszív módszerek használatát.)"
 
 #. settings-schema.json->locktype->description
 msgid "Blocking mode"
-msgstr ""
+msgstr "Blokkoló mód"
 
 #. settings-schema.json->locktype->options
 msgid "Normal"
-msgstr ""
+msgstr "Normál"
 
 #. settings-schema.json->locktype->options
 msgid "Aggressive"
-msgstr ""
+msgstr "Agresszív"
 
 #. settings-schema.json->locktype->options
 msgid "Super aggressive"
-msgstr ""
+msgstr "Szuper agresszív"
 
 #. settings-schema.json->lockinterval->description
 msgid "Blocking interval"
-msgstr ""
+msgstr "Blokkolási intervallum"
 
 #. settings-schema.json->lockinterval->units
 msgid "minutes"
-msgstr ""
+msgstr "perc"

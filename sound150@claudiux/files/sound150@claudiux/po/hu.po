@@ -1,22 +1,41 @@
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# #-#-#-#-#  hu_uj.po (sound150@claudiux 6.16.0)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: sound150@claudiux 6.16.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-05 23:35+0200\n"
-"PO-Revision-Date: 2024-02-27 18:48+0100\n"
+"POT-Creation-Date: 2024-06-05 23:35+0200\n"
+"PO-Revision-Date: 2024-07-28 09:27+0200\n"
+"PO-Revision-Date: 2024-07-28 09:23+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: 4.6/applet.js:73 3.4/applet.js:65 4.4/applet.js:72 2.8/applet.js:65
@@ -177,11 +196,11 @@ msgstr "Hangbeállítások"
 
 #: 5.4/applet.js:260
 msgid "Mute"
-msgstr ""
+msgstr "Némítás"
 
 #: 5.4/applet.js:1092
 msgid "View cover"
-msgstr ""
+msgstr "Borító megtekintése"
 
 #: 5.4/applet.js:1957
 msgid "Easy Effects"
@@ -190,7 +209,7 @@ msgstr "Könnyű Effektusok"
 #: 5.4/applet.js:2001
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr ""
+msgstr "Biztosan eltávolítja a következőt: '%s'?"
 
 #: 5.4/applet.js:2654
 msgid "The 'playerctl' package is required!"
@@ -205,9 +224,8 @@ msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
 #: 5.4/applet.js:2816
-#, fuzzy
 msgid "Remove sound applet"
-msgstr "Kisalkalmazás újratöltése"
+msgstr "Távolítsa el a hangkisalkalmazást"
 
 #: 5.4/applet.js:2825
 msgid "Install playerctl"
@@ -218,9 +236,8 @@ msgid "Sound 150%"
 msgstr "Hang 150%"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Enhanced sound applet"
-msgstr "Kisalkalmazás újratöltése"
+msgstr "Továbbfejlesztett hangkisalkalmazás"
 
 #. 4.6->settings-schema.json->section1->description
 #. 3.4->settings-schema.json->section1->description
@@ -598,45 +615,45 @@ msgstr "Buboréksúgó"
 
 #. 5.4->settings-schema.json->sectionSound2->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. 5.4->settings-schema.json->sectionSound3->title
-#, fuzzy
 msgid "Sounds"
-msgstr "Hang"
+msgstr "Hangok"
 
 #. 5.4->settings-schema.json->sectionSound4->title
 msgid "Remove incompatible applets"
-msgstr ""
+msgstr "Távolítsa el az inkompatibilis kisalkalmazásokat"
 
 #. 5.4->settings-schema.json->keepPlayerListOpen->description
 msgid "Keep the player list open"
-msgstr ""
+msgstr "Tartsa nyitva a játékoslistát"
 
 #. 5.4->settings-schema.json->keepChoosePlayerOpen->description
 msgid "Keep the player controller selector open"
-msgstr ""
+msgstr "Tartsa nyitva a lejátszóvezérlő választógombját"
 
 #. 5.4->settings-schema.json->avoidTwice->description
 msgid "Avoid displaying controllers twice"
-msgstr ""
+msgstr "Kerülje a vezérlők kétszeri megjelenítését"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr ""
+msgstr "mp"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
 msgid "Seeker tooltip: time to disappear"
-msgstr ""
+msgstr "Kereső eszköztipp: ideje eltűnni"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
-msgstr ""
+msgstr "Váltás a következő játékosra"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to switch to the next player if it exists."
-msgstr "Hang beállításokat megjelenítő billentyűkombináció beállítása."
+msgstr ""
+"Állítsa be a billentyűkombináció(ka)t, hogy a következő lejátszóra váltson, "
+"ha létezik."
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
@@ -661,14 +678,15 @@ msgstr "Hangerőszint megjelenítése az ikon közelében"
 #. 5.4->settings-schema.json->showMicMutedOnIcon->description
 msgid "Display icon indicating that the microphone is muted, if applicable"
 msgstr ""
+"Ikon megjelenítése, amely jelzi, hogy a mikrofon el van némítva, ha van"
 
 #. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
 msgid "Display icon indicating that the microphone is activated, if applicable"
-msgstr ""
+msgstr "Kijelző ikon, amely jelzi, hogy a mikrofon aktiválva van, ha van"
 
 #. 5.4->settings-schema.json->magnetic25On->description
 msgid "Magnetize all multiples of 25%"
-msgstr ""
+msgstr "A 25% összes többszörösét felmágnesezni"
 
 #. 5.4->settings-schema.json->color101_115->description
 msgid "Icon color: 101%-115%"
@@ -697,48 +715,48 @@ msgstr "Mindig jelenítse meg a „Bemenet némítása” kapcsolót a helyi men
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr ""
+msgstr "Letiltva"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr ""
+msgstr "Kicsi"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr ""
+msgstr "Közepes"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr ""
+msgstr "Nagy"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether the media keys osd is disabled or its relative display size"
 msgstr ""
+"A médiabillentyűk osd le van-e tiltva, vagy a relatív megjelenítési mérete"
 
 #. 5.4->settings-schema.json->showOSDonStartup->description
-#, fuzzy
 msgid "Show volume level in OSD on startup"
-msgstr "Hangerő megjelenítése a buboréksúgóban"
+msgstr "A hangerőszint megjelenítése az OSD-ben indításkor"
 
 #. 5.4->settings-schema.json->volumeSoundFile->description
 msgid "Which sound to play when the volume is changed"
-msgstr ""
+msgstr "Melyik hangot kell lejátszani a hangerő módosításakor"
 
 #. 5.4->settings-schema.json->volumeSoundEnabled->description
 msgid "Whether to play a sound when the volume is changed"
-msgstr ""
+msgstr "Lejátssza-e a hangot a hangerő módosításakor"
 
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
 msgid "Redefine Multimedia Keyboard Shortcuts"
-msgstr ""
+msgstr "A multimédiás billentyűparancsok újradefiniálása"
 
 #. 5.4->settings-schema.json->button-set-to-default-keybindings->description
 msgid "Use the same shortcuts as those defined by Cinnamon"
-msgstr ""
+msgstr "Használja a Cinnamon által meghatározott billentyűparancsokat"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
-msgstr ""
+msgstr "Szünet/Lejátszás kapcsoló"
 
 #. 5.4->settings-schema.json->volume-mute->description
 msgid "Volume Mute"
@@ -754,13 +772,12 @@ msgstr "Hangerő le"
 
 #. 5.4->settings-schema.json->audio-next->description
 msgid "Next Track"
-msgstr ""
+msgstr "Következő szám"
 
 #. 5.4->settings-schema.json->audio-prev->description
-#, fuzzy
 msgid "Previous Track"
-msgstr "Előző"
+msgstr "Előző szám"
 
 #. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 msgid "Remove from panel the sound@cinnamon.org applet"
-msgstr ""
+msgstr "Távolítsa el a panelről a sound@cinnamon.org kisalkalmazást"

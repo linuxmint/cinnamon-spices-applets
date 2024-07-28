@@ -1,29 +1,48 @@
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# #-#-#-#-#  hu_uj.po (SpicesUpdate@claudiux 7.4.4)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: SpicesUpdate@claudiux 7.4.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-03 19:54+0200\n"
-"PO-Revision-Date: 2024-04-15 12:03+0200\n"
+"POT-Creation-Date: 2024-07-03 19:54+0200\n"
+"PO-Revision-Date: 2024-07-27 15:31+0200\n"
+"PO-Revision-Date: 2024-07-27 14:59+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: 4.8/SU_messageTray.js:1282 4.6/SU_messageTray.js:1282
 #: 6.0/SU_messageTray.js:1284 5.6/SU_messageTray.js:1282
 #: 4.2/SU_messageTray.js:1282
 msgid "Open"
-msgstr ""
+msgstr "Megnyitás"
 
 #: 4.8/SU_messageTray.js:1289 4.6/SU_messageTray.js:1289
 #: 6.0/SU_messageTray.js:1291 5.6/SU_messageTray.js:1289
@@ -35,14 +54,13 @@ msgstr ""
 #: cs/4.4/modules/cs_desklets.py:77 cs/4.2/modules/cs_applets.py:56
 #: cs/4.2/modules/cs_desklets.py:76
 msgid "Remove"
-msgstr ""
+msgstr "Eltávolítás"
 
 #: 4.8/SU_messageTray.js:1913 4.6/SU_messageTray.js:1913
 #: 6.0/SU_messageTray.js:1915 5.6/SU_messageTray.js:1913
 #: 4.2/SU_messageTray.js:1913
-#, fuzzy
 msgid "System Information"
-msgstr "Spices Frissítések beállításai"
+msgstr "Rendszerinformáció"
 
 #. metadata.json->name
 #: 4.8/applet.js:213 4.8/applet.js:717 4.8/applet.js:736 4.8/applet.js:1233
@@ -511,43 +529,36 @@ msgstr "Ha minden változtatást végrehajtott, kattintson a Frissítés gombra.
 #. 6.0->settings-schema.json->Actions->title
 #: 6.0/applet.js:1902 6.0/constants.js:145
 #: cs/6.0_FUTURE/modules/cs_actions.py:35
-#, fuzzy
 msgid "Actions"
-msgstr "Értesítések"
+msgstr "Műveletek"
 
 #: 6.0/constants.js:150
-#, fuzzy
 msgid "One action needs update:"
-msgstr "Egy kisalkalmazás frissítése szükséges:"
+msgstr "Egy művelet frissítése szükséges:"
 
 #: 6.0/constants.js:155
-#, fuzzy
 msgid "Some actions need update:"
-msgstr "Néhány bővítmény frissítése szükséges:"
+msgstr "Néhány művelet frissítése szükséges:"
 
 #: 6.0/constants.js:160
-#, fuzzy
 msgid "New action available:"
-msgstr "Új bővítmény érhető el:"
+msgstr "Új művelet érhető el:"
 
 #: 6.0/constants.js:165
-#, fuzzy
 msgid "New actions available:"
-msgstr "Új bővítmények érhetőek el:"
+msgstr "Új műveletek érhetőek el:"
 
 #: 6.0/constants.js:173
-#, fuzzy
 msgid "If you do not want a nemo action to be checked, uncheck its first box."
 msgstr ""
-"Ha nem szeretné, hogy egy bővítmény ellenőrizve legyen, akkor ne jelölje be "
-"az első négyzetet."
+"Ha nem szeretné, hogy egy nemo művelet be legyen jelölve, vegye ki a "
+"jelölést az első négyzetből."
 
 #: 6.0/constants.js:181
-#, fuzzy
 msgid ""
 "If you want to get the latest version of a nemo action now, check both boxes."
 msgstr ""
-"Ha most szeretné letölteni egy bővítmény legújabb verzióját, jelölje be "
+"Ha egy nemo művelet legfrissebb verzióját szeretné most megkapni, jelölje be "
 "mindkét négyzetet."
 
 #: 3.8/applet.js:80
@@ -635,51 +646,50 @@ msgstr "Cinnamon környezet újraindítása"
 #: cs/4.4/cinnamon-settings.py:50 cs/4.4/cinnamon-settings.py:380
 #: cs/4.4/cinnamon-settings.py:718 cs/4.2/cinnamon-settings.py:50
 #: cs/4.2/cinnamon-settings.py:379 cs/4.2/cinnamon-settings.py:717
-#, fuzzy
 msgid "System Settings"
-msgstr "Spices Frissítések beállításai"
+msgstr "Rendszerbeállítások"
 
 #: cs/4.6/cinnamon-settings.py:51 cs/4.0/cinnamon-settings.py:49
 #: cs/6.0_FUTURE/cinnamon-settings.py:42
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:58 cs/3.8/cinnamon-settings.py:49
 #: cs/4.4/cinnamon-settings.py:51 cs/4.2/cinnamon-settings.py:51
 msgid "Control Center"
-msgstr ""
+msgstr "Vezérlőközpont"
 
 #: cs/4.6/cinnamon-settings.py:66 cs/4.0/cinnamon-settings.py:64
 #: cs/6.0_FUTURE/cinnamon-settings.py:64
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:80 cs/3.8/cinnamon-settings.py:64
 #: cs/4.4/cinnamon-settings.py:66 cs/4.2/cinnamon-settings.py:66
 msgid "Appearance"
-msgstr ""
+msgstr "Megjelenés"
 
 #: cs/4.6/cinnamon-settings.py:67 cs/4.0/cinnamon-settings.py:65
 #: cs/6.0_FUTURE/cinnamon-settings.py:65
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:81 cs/3.8/cinnamon-settings.py:65
 #: cs/4.4/cinnamon-settings.py:67 cs/4.2/cinnamon-settings.py:67
 msgid "Preferences"
-msgstr ""
+msgstr "Beállítások"
 
 #: cs/4.6/cinnamon-settings.py:68 cs/4.0/cinnamon-settings.py:66
 #: cs/6.0_FUTURE/cinnamon-settings.py:66
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:82 cs/3.8/cinnamon-settings.py:66
 #: cs/4.4/cinnamon-settings.py:68 cs/4.2/cinnamon-settings.py:68
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: cs/4.6/cinnamon-settings.py:69 cs/4.0/cinnamon-settings.py:67
 #: cs/6.0_FUTURE/cinnamon-settings.py:67
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:83 cs/3.8/cinnamon-settings.py:67
 #: cs/4.4/cinnamon-settings.py:69 cs/4.2/cinnamon-settings.py:69
 msgid "Administration"
-msgstr ""
+msgstr "Adminisztráció"
 
 #: cs/4.6/cinnamon-settings.py:74 cs/4.0/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/3.8/cinnamon-settings.py:72
 #: cs/4.4/cinnamon-settings.py:74 cs/4.2/cinnamon-settings.py:74
 msgid "Network"
-msgstr ""
+msgstr "Hálózat"
 
 #: cs/4.6/cinnamon-settings.py:74 cs/4.0/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings.py:72
@@ -687,48 +697,49 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:74 cs/4.2/cinnamon-settings.py:74
 msgid "network, wireless, wifi, ethernet, broadband, internet"
 msgstr ""
+"hálózat, vezeték nélküli, wifi, ethernet, szélessávú, internet, internet"
 
 #: cs/4.6/cinnamon-settings.py:75 cs/4.0/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings.py:73
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/3.8/cinnamon-settings.py:74
 #: cs/4.4/cinnamon-settings.py:75 cs/4.2/cinnamon-settings.py:76
 msgid "Color"
-msgstr ""
+msgstr "Szín"
 
 #: cs/4.6/cinnamon-settings.py:75 cs/4.0/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings.py:73
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/3.8/cinnamon-settings.py:74
 #: cs/4.4/cinnamon-settings.py:75 cs/4.2/cinnamon-settings.py:76
 msgid "color, profile, display, printer, output"
-msgstr ""
+msgstr "szín, profil, kijelző, nyomtató, kimenet"
 
 #: cs/4.6/cinnamon-settings.py:76 cs/4.0/cinnamon-settings.py:75
 #: cs/6.0_FUTURE/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/3.8/cinnamon-settings.py:75
 #: cs/4.4/cinnamon-settings.py:76 cs/4.2/cinnamon-settings.py:77
 msgid "Graphics Tablet"
-msgstr ""
+msgstr "Grafikus tábla"
 
 #: cs/4.6/cinnamon-settings.py:76 cs/4.0/cinnamon-settings.py:75
 #: cs/6.0_FUTURE/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/3.8/cinnamon-settings.py:75
 #: cs/4.4/cinnamon-settings.py:76 cs/4.2/cinnamon-settings.py:77
 msgid "wacom, digitize, tablet, graphics, calibrate, stylus"
-msgstr ""
+msgstr "wacom, digitalizálás, tábla, grafika, kalibrálás, stylus"
 
 #: cs/4.6/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:80
 #: cs/6.0_FUTURE/cinnamon-settings.py:79
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/3.8/cinnamon-settings.py:80
 #: cs/4.4/cinnamon-settings.py:81 cs/4.2/cinnamon-settings.py:82
 msgid "Printers"
-msgstr ""
+msgstr "Nyomtatók"
 
 #: cs/4.6/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:80
 #: cs/6.0_FUTURE/cinnamon-settings.py:79
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/3.8/cinnamon-settings.py:80
 #: cs/4.4/cinnamon-settings.py:81 cs/4.2/cinnamon-settings.py:82
 msgid "printers, laser, inkjet"
-msgstr ""
+msgstr "nyomtatók, lézer, tintasugaras"
 
 #: cs/4.6/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:83
 #: cs/4.0/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:82
@@ -739,7 +750,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:83 cs/4.2/cinnamon-settings.py:83
 #: cs/4.2/cinnamon-settings.py:84
 msgid "Firewall"
-msgstr ""
+msgstr "Tűzfal"
 
 #: cs/4.6/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:83
 #: cs/4.0/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:82
@@ -750,28 +761,28 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:83 cs/4.2/cinnamon-settings.py:83
 #: cs/4.2/cinnamon-settings.py:84
 msgid "firewall, block, filter, programs"
-msgstr ""
+msgstr "tűzfal, blokkolás, szűrés, programok"
 
 #: cs/4.6/cinnamon-settings.py:84 cs/4.0/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings.py:82
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/3.8/cinnamon-settings.py:83
 #: cs/4.4/cinnamon-settings.py:84 cs/4.2/cinnamon-settings.py:85
 msgid "Languages"
-msgstr ""
+msgstr "Nyelvek"
 
 #: cs/4.6/cinnamon-settings.py:84 cs/4.0/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings.py:82
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/3.8/cinnamon-settings.py:83
 #: cs/4.4/cinnamon-settings.py:84 cs/4.2/cinnamon-settings.py:85
 msgid "language, install, foreign"
-msgstr ""
+msgstr "nyelv, telepítés, idegen"
 
 #: cs/4.6/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/3.8/cinnamon-settings.py:84
 #: cs/4.4/cinnamon-settings.py:85 cs/4.2/cinnamon-settings.py:86
 msgid "Input Method"
-msgstr ""
+msgstr "Beviteli mód"
 
 #: cs/4.6/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings.py:83
@@ -780,6 +791,7 @@ msgstr ""
 msgid ""
 "language, install, foreign, input, method, chinese, korean, japanese, typing"
 msgstr ""
+"nyelv, telepítés, idegen, bemenet, módszer, kínai, koreai, japán, gépelés"
 
 #: cs/4.6/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:87
 #: cs/4.0/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:86
@@ -790,7 +802,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:87 cs/4.2/cinnamon-settings.py:87
 #: cs/4.2/cinnamon-settings.py:88
 msgid "Login Window"
-msgstr ""
+msgstr "Bejelentkezési ablak"
 
 #: cs/4.6/cinnamon-settings.py:86 cs/4.0/cinnamon-settings.py:85
 #: cs/6.0_FUTURE/cinnamon-settings.py:84
@@ -798,20 +810,22 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:86 cs/4.2/cinnamon-settings.py:87
 msgid "login, lightdm, mdm, gdm, manager, user, password, startup, switch"
 msgstr ""
+"bejelentkezés, lightdm, mdm, gdm, manager, felhasználó, jelszó, indítás, "
+"kapcsoló, switch"
 
 #: cs/4.6/cinnamon-settings.py:87 cs/4.0/cinnamon-settings.py:86
 #: cs/6.0_FUTURE/cinnamon-settings.py:85
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/3.8/cinnamon-settings.py:86
 #: cs/4.4/cinnamon-settings.py:87 cs/4.2/cinnamon-settings.py:88
 msgid "login, lightdm, manager, settings, editor"
-msgstr ""
+msgstr "bejelentkezés, lightdm, menedzser, beállítások, szerkesztő"
 
 #: cs/4.6/cinnamon-settings.py:88 cs/4.0/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings.py:86
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/3.8/cinnamon-settings.py:87
 #: cs/4.4/cinnamon-settings.py:88 cs/4.2/cinnamon-settings.py:89
 msgid "Driver Manager"
-msgstr ""
+msgstr "Illesztőprogram-kezelő"
 
 #: cs/4.6/cinnamon-settings.py:88 cs/4.0/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings.py:86
@@ -821,35 +835,36 @@ msgid ""
 "video, driver, wifi, card, hardware, proprietary, nvidia, radeon, nouveau, "
 "fglrx"
 msgstr ""
+"videó, illesztőprogram, wifi, kártya, hardver, szabadalmaztatott, nvidia, "
+"radeon, nouveau, fglrx"
 
 #: cs/4.6/cinnamon-settings.py:89 cs/4.0/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/3.8/cinnamon-settings.py:88
 #: cs/4.4/cinnamon-settings.py:89 cs/4.2/cinnamon-settings.py:90
-#, fuzzy
 msgid "Nvidia Settings"
-msgstr "Spices Frissítések beállításai"
+msgstr "Nvidia beállítások"
 
 #: cs/4.6/cinnamon-settings.py:89 cs/4.0/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/3.8/cinnamon-settings.py:88
 #: cs/4.4/cinnamon-settings.py:89 cs/4.2/cinnamon-settings.py:90
 msgid "video, driver, proprietary, nvidia, settings"
-msgstr ""
+msgstr "videó, illesztőprogram, saját, nvidia, beállítások"
 
 #: cs/4.6/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:89
 #: cs/6.0_FUTURE/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/3.8/cinnamon-settings.py:89
 #: cs/4.4/cinnamon-settings.py:90 cs/4.2/cinnamon-settings.py:91
 msgid "Software Sources"
-msgstr ""
+msgstr "Szoftverforrások"
 
 #: cs/4.6/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:89
 #: cs/6.0_FUTURE/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/3.8/cinnamon-settings.py:89
 #: cs/4.4/cinnamon-settings.py:90 cs/4.2/cinnamon-settings.py:91
 msgid "ppa, repository, package, source, download"
-msgstr ""
+msgstr "ppa, tároló, csomag, forrás, letöltés"
 
 #: cs/4.6/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:92
 #: cs/4.0/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:91
@@ -860,7 +875,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:92 cs/4.2/cinnamon-settings.py:92
 #: cs/4.2/cinnamon-settings.py:93
 msgid "Package Management"
-msgstr ""
+msgstr "Csomagkezelés"
 
 #: cs/4.6/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:92
 #: cs/4.0/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:91
@@ -871,21 +886,21 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:92 cs/4.2/cinnamon-settings.py:92
 #: cs/4.2/cinnamon-settings.py:93
 msgid "update, install, repository, package, source, download"
-msgstr ""
+msgstr "frissítés, telepítés, tároló, csomag, forrás, letöltés"
 
 #: cs/4.6/cinnamon-settings.py:93 cs/4.0/cinnamon-settings.py:92
 #: cs/6.0_FUTURE/cinnamon-settings.py:91
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/3.8/cinnamon-settings.py:92
 #: cs/4.4/cinnamon-settings.py:93 cs/4.2/cinnamon-settings.py:94
 msgid "Users and Groups"
-msgstr ""
+msgstr "Felhasználók és csoportok"
 
 #: cs/4.6/cinnamon-settings.py:93 cs/4.0/cinnamon-settings.py:92
 #: cs/6.0_FUTURE/cinnamon-settings.py:91
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/3.8/cinnamon-settings.py:92
 #: cs/4.4/cinnamon-settings.py:93 cs/4.2/cinnamon-settings.py:94
 msgid "user, users, account, accounts, group, groups, password"
-msgstr ""
+msgstr "felhasználó, felhasználók, fiók, fiókok, csoport, csoportok, jelszó"
 
 #: cs/4.6/cinnamon-settings.py:94 cs/4.0/cinnamon-settings.py:93
 #: cs/6.0_FUTURE/cinnamon-settings.py:92 cs/6.0_FUTURE/cinnamon-settings.py:93
@@ -893,7 +908,7 @@ msgstr ""
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/3.8/cinnamon-settings.py:93
 #: cs/4.4/cinnamon-settings.py:94 cs/4.2/cinnamon-settings.py:95
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: cs/4.6/cinnamon-settings.py:94 cs/4.0/cinnamon-settings.py:93
 #: cs/6.0_FUTURE/cinnamon-settings.py:92 cs/6.0_FUTURE/cinnamon-settings.py:93
@@ -901,26 +916,26 @@ msgstr ""
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/3.8/cinnamon-settings.py:93
 #: cs/4.4/cinnamon-settings.py:94 cs/4.2/cinnamon-settings.py:95
 msgid "bluetooth, dongle, transfer, mobile"
-msgstr ""
+msgstr "bluetooth, dongle, átvitel, mobil"
 
 #: cs/4.6/cinnamon-settings.py:95 cs/4.0/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/3.8/cinnamon-settings.py:94
 #: cs/4.4/cinnamon-settings.py:95 cs/4.2/cinnamon-settings.py:96
 msgid "Manage Services and Units"
-msgstr ""
+msgstr "Szolgáltatások és egységek kezelése"
 
 #: cs/4.6/cinnamon-settings.py:95 cs/4.0/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/3.8/cinnamon-settings.py:94
 #: cs/4.4/cinnamon-settings.py:95 cs/4.2/cinnamon-settings.py:96
 msgid "systemd, units, services, systemctl, init"
-msgstr ""
+msgstr "systemd, units, services, systemctl, init"
 
 #: cs/4.6/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.4/cinnamon-settings.py:96
 msgid "Disks"
-msgstr ""
+msgstr "Lemezek"
 
 #: cs/4.6/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.4/cinnamon-settings.py:96
@@ -928,13 +943,15 @@ msgid ""
 "disks, manage, hardware, management, hard, hdd, pendrive, format, erase, "
 "test, create, iso, ISO, disk, image"
 msgstr ""
+"lemezek, kezel, hardver, kezelés, kemény, hdd, pendrive, formázás, törlés, "
+"tesztelés, létrehozás, iso, ISO, lemez, kép"
 
 #: cs/4.6/cinnamon-settings.py:290 cs/4.0/cinnamon-settings.py:223
 #: cs/6.0_FUTURE/cinnamon-settings.py:295
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:311 cs/3.8/cinnamon-settings.py:215
 #: cs/4.4/cinnamon-settings.py:290 cs/4.2/cinnamon-settings.py:289
 msgid "Back to all settings"
-msgstr ""
+msgstr "Vissza az összes beállításhoz"
 
 #: cs/4.6/cinnamon-settings.py:297 cs/4.0/cinnamon-settings.py:233
 #: cs/6.0_FUTURE/cinnamon-settings.py:302
@@ -942,14 +959,13 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:297 cs/4.2/cinnamon-settings.py:296
 #: cs/4.2/bin/SUExtensionCore.py:370 cs/4.2/bin/SUExtensionCore.py:730
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: cs/4.6/modules/cs_applets.py:14 cs/4.0/modules/cs_applets.py:13
 #: cs/6.0_FUTURE/modules/cs_applets.py:14 cs/3.8/modules/cs_applets.py:13
 #: cs/4.4/modules/cs_applets.py:14 cs/4.2/modules/cs_applets.py:13
-#, fuzzy
 msgid "Manage Cinnamon applets"
-msgstr "Hasznos Cinnamon beállítások megnyitása"
+msgstr "Cinnamon kisalkalmazások kezelése"
 
 #: cs/4.6/modules/cs_applets.py:33 cs/4.0/modules/cs_applets.py:32
 #: cs/6.0_FUTURE/modules/cs_applets.py:33 cs/3.8/modules/cs_applets.py:32
@@ -957,13 +973,13 @@ msgstr "Hasznos Cinnamon beállítások megnyitása"
 msgid ""
 "You can remove specific instances in panel edit mode via the context menu."
 msgstr ""
+"Eltávolíthat adott példányokat panel szerkesztési módban a helyi menüből."
 
 #: cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
 #: cs/6.0_FUTURE/modules/cs_applets.py:35 cs/3.8/modules/cs_applets.py:34
 #: cs/4.4/modules/cs_applets.py:35 cs/4.2/modules/cs_applets.py:34
-#, fuzzy
 msgid "applet"
-msgstr "Kisalkalmazás"
+msgstr "kisalkalmazás"
 
 #: cs/4.6/modules/cs_applets.py:47 cs/4.6/modules/cs_desklets.py:45
 #: cs/4.6/modules/cs_extensions.py:45 cs/4.0/modules/cs_applets.py:46
@@ -977,7 +993,7 @@ msgstr "Kisalkalmazás"
 #: cs/4.4/modules/cs_extensions.py:45 cs/4.2/modules/cs_applets.py:46
 #: cs/4.2/modules/cs_desklets.py:44 cs/4.2/modules/cs_extensions.py:44
 msgid "Manage"
-msgstr ""
+msgstr "Kezelés"
 
 #: cs/4.6/modules/cs_applets.py:50 cs/4.6/modules/cs_desklets.py:48
 #: cs/4.6/modules/cs_extensions.py:48 cs/4.0/modules/cs_applets.py:49
@@ -991,14 +1007,13 @@ msgstr ""
 #: cs/4.4/modules/cs_extensions.py:48 cs/4.2/modules/cs_applets.py:49
 #: cs/4.2/modules/cs_desklets.py:47 cs/4.2/modules/cs_extensions.py:47
 msgid "Download"
-msgstr ""
+msgstr "Letöltés"
 
 #: cs/4.6/modules/cs_applets.py:55 cs/4.0/modules/cs_applets.py:54
 #: cs/6.0_FUTURE/modules/cs_applets.py:55 cs/3.8/modules/cs_applets.py:54
 #: cs/4.4/modules/cs_applets.py:55 cs/4.2/modules/cs_applets.py:54
-#, fuzzy
 msgid "Installed applets"
-msgstr "Bővítmények"
+msgstr "Telepített kisalkalmazások"
 
 #: cs/4.6/modules/cs_applets.py:56 cs/4.6/modules/cs_desklets.py:76
 #: cs/4.0/modules/cs_applets.py:55 cs/4.0/modules/cs_desklets.py:75
@@ -1008,7 +1023,7 @@ msgstr "Bővítmények"
 #: cs/4.4/modules/cs_desklets.py:76 cs/4.2/modules/cs_applets.py:55
 #: cs/4.2/modules/cs_desklets.py:75
 msgid "Add"
-msgstr ""
+msgstr "Hozzáadás"
 
 #: cs/4.6/modules/cs_applets.py:58 cs/4.6/modules/cs_desklets.py:78
 #: cs/4.6/modules/cs_extensions.py:56 cs/4.0/modules/cs_applets.py:57
@@ -1023,32 +1038,31 @@ msgstr ""
 #: cs/4.2/modules/cs_desklets.py:77 cs/4.2/modules/cs_extensions.py:55
 #: cs/4.2/bin/SUExtensionCore.py:782
 msgid "Uninstall"
-msgstr ""
+msgstr "Eltávolítás"
 
 #: cs/4.6/modules/cs_applets.py:59 cs/4.0/modules/cs_applets.py:58
 #: cs/6.0_FUTURE/modules/cs_applets.py:59 cs/3.8/modules/cs_applets.py:58
 #: cs/4.4/modules/cs_applets.py:59 cs/4.2/modules/cs_applets.py:58
 msgid "Reset all"
-msgstr ""
+msgstr "Összes visszaállítása"
 
 #: cs/4.6/modules/cs_applets.py:74 cs/4.0/modules/cs_applets.py:73
 #: cs/6.0_FUTURE/modules/cs_applets.py:74 cs/3.8/modules/cs_applets.py:73
 #: cs/4.4/modules/cs_applets.py:74 cs/4.2/modules/cs_applets.py:73
 msgid "Previous Panel"
-msgstr ""
+msgstr "Előző panel"
 
 #: cs/4.6/modules/cs_applets.py:78 cs/4.0/modules/cs_applets.py:77
 #: cs/6.0_FUTURE/modules/cs_applets.py:78 cs/3.8/modules/cs_applets.py:77
 #: cs/4.4/modules/cs_applets.py:78 cs/4.2/modules/cs_applets.py:77
 msgid "Next Panel"
-msgstr ""
+msgstr "Következő panel"
 
 #: cs/4.6/modules/cs_desklets.py:10 cs/4.0/modules/cs_desklets.py:9
 #: cs/6.0_FUTURE/modules/cs_desklets.py:10 cs/3.8/modules/cs_desklets.py:9
 #: cs/4.4/modules/cs_desklets.py:10 cs/4.2/modules/cs_desklets.py:9
-#, fuzzy
 msgid "Manage your Cinnamon desklets"
-msgstr "Hasznos Cinnamon beállítások megnyitása"
+msgstr "Kezelje Cinnamon asztalkalmazásait"
 
 #: cs/4.6/modules/cs_desklets.py:30 cs/4.0/modules/cs_desklets.py:29
 #: cs/6.0_FUTURE/modules/cs_desklets.py:30 cs/3.8/modules/cs_desklets.py:29
@@ -1057,231 +1071,224 @@ msgid ""
 "You can remove specific instances from the desktop via that desklet's "
 "context menu"
 msgstr ""
+"Eltávolíthat bizonyos példányokat az asztalról az adott asztalkalmazás helyi "
+"menüjében"
 
 #: cs/4.6/modules/cs_desklets.py:31 cs/4.0/modules/cs_desklets.py:30
 #: cs/6.0_FUTURE/modules/cs_desklets.py:31 cs/3.8/modules/cs_desklets.py:30
 #: cs/4.4/modules/cs_desklets.py:31 cs/4.2/modules/cs_desklets.py:30
 msgid "desklet, desktop, slideshow"
-msgstr ""
+msgstr "asztalkalmazás, asztal, diavetítés"
 
 #: cs/4.6/modules/cs_desklets.py:51 cs/4.0/modules/cs_desklets.py:50
 #: cs/6.0_FUTURE/modules/cs_desklets.py:51 cs/3.8/modules/cs_desklets.py:50
 #: cs/4.4/modules/cs_desklets.py:51 cs/4.2/modules/cs_desklets.py:50
-#, fuzzy
 msgid "General Settings"
-msgstr "Általános"
+msgstr "Általános beállítások"
 
 #: cs/4.6/modules/cs_desklets.py:53 cs/4.0/modules/cs_desklets.py:52
 #: cs/6.0_FUTURE/modules/cs_desklets.py:53 cs/3.8/modules/cs_desklets.py:52
 #: cs/4.4/modules/cs_desklets.py:53 cs/4.2/modules/cs_desklets.py:52
-#, fuzzy
 msgid "General Desklets Settings"
-msgstr "Általános"
+msgstr "Általános asztalkalmazás beállítások"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
-#, fuzzy
 msgid "No decoration"
-msgstr "Értesítések"
+msgstr "Nincs dekoráció"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
 msgid "Border only"
-msgstr ""
+msgstr "Csak szegély"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
 msgid "Border and header"
-msgstr ""
+msgstr "Szegély és fejléc"
 
 #: cs/4.6/modules/cs_desklets.py:57 cs/4.0/modules/cs_desklets.py:56
 #: cs/6.0_FUTURE/modules/cs_desklets.py:57 cs/3.8/modules/cs_desklets.py:56
 #: cs/4.4/modules/cs_desklets.py:57 cs/4.2/modules/cs_desklets.py:56
 msgid "Decoration of desklets"
-msgstr ""
+msgstr "Asztalkalmazások dekorációja"
 
 #: cs/4.6/modules/cs_desklets.py:60 cs/4.0/modules/cs_desklets.py:59
 #: cs/6.0_FUTURE/modules/cs_desklets.py:60 cs/3.8/modules/cs_desklets.py:59
 #: cs/4.4/modules/cs_desklets.py:60 cs/4.2/modules/cs_desklets.py:59
 msgid "Note: Some desklets require the border/header to be always present"
 msgstr ""
+"Megjegyzés: Egyes asztalkalmazások megkövetelik, hogy a szegély/fejléc "
+"mindig jelen legyen"
 
 #: cs/4.6/modules/cs_desklets.py:64 cs/4.0/modules/cs_desklets.py:63
 #: cs/6.0_FUTURE/modules/cs_desklets.py:64 cs/3.8/modules/cs_desklets.py:63
 #: cs/4.4/modules/cs_desklets.py:64 cs/4.2/modules/cs_desklets.py:63
 msgid "Such requirements override the settings selected here"
-msgstr ""
+msgstr "Az ilyen követelmények felülírják az itt kiválasztott beállításokat"
 
 #: cs/4.6/modules/cs_desklets.py:69 cs/4.0/modules/cs_desklets.py:68
 #: cs/6.0_FUTURE/modules/cs_desklets.py:69 cs/3.8/modules/cs_desklets.py:68
 #: cs/4.4/modules/cs_desklets.py:69 cs/4.2/modules/cs_desklets.py:68
 msgid "Snap desklets to grid"
-msgstr ""
+msgstr "Illessze az asztalkalmazásokat a rácsra"
 
 #: cs/4.6/modules/cs_desklets.py:70 cs/4.0/modules/cs_desklets.py:69
 #: cs/6.0_FUTURE/modules/cs_desklets.py:70 cs/3.8/modules/cs_desklets.py:69
 #: cs/4.4/modules/cs_desklets.py:70 cs/4.2/modules/cs_desklets.py:69
 msgid "Width of desklet snap grid"
-msgstr ""
+msgstr "Az asztalkalmazás rögzítő rács szélessége"
 
 #: cs/4.6/modules/cs_desklets.py:75 cs/4.0/modules/cs_desklets.py:74
 #: cs/6.0_FUTURE/modules/cs_desklets.py:75 cs/3.8/modules/cs_desklets.py:74
 #: cs/4.4/modules/cs_desklets.py:75 cs/4.2/modules/cs_desklets.py:74
-#, fuzzy
 msgid "Installed desklets"
-msgstr "Bővítmények"
+msgstr "Telepített asztalkalmazások"
 
 #: cs/4.6/modules/cs_desklets.py:79 cs/4.0/modules/cs_desklets.py:78
 #: cs/6.0_FUTURE/modules/cs_actions.py:61
 #: cs/6.0_FUTURE/modules/cs_desklets.py:79 cs/3.8/modules/cs_desklets.py:78
 #: cs/4.4/modules/cs_desklets.py:79 cs/4.2/modules/cs_desklets.py:78
 msgid "Remove all"
-msgstr ""
+msgstr "Összes eltávolítása"
 
 #: cs/4.6/modules/cs_extensions.py:12 cs/4.0/modules/cs_extensions.py:11
 #: cs/6.0_FUTURE/modules/cs_extensions.py:12 cs/3.8/modules/cs_extensions.py:11
 #: cs/4.4/modules/cs_extensions.py:12 cs/4.2/modules/cs_extensions.py:11
-#, fuzzy
 msgid "Manage your Cinnamon extensions"
-msgstr "Hasznos Cinnamon beállítások megnyitása"
+msgstr "Kezelje a Cinnamon bővítményeket"
 
 #: cs/4.6/modules/cs_extensions.py:31 cs/4.0/modules/cs_extensions.py:30
 #: cs/6.0_FUTURE/modules/cs_extensions.py:31 cs/3.8/modules/cs_extensions.py:30
 #: cs/4.4/modules/cs_extensions.py:31 cs/4.2/modules/cs_extensions.py:30
-#, fuzzy
 msgid "extension, addon"
-msgstr "Kiterjesztés"
+msgstr "kiterjesztés, kiegészítés"
 
 #: cs/4.6/modules/cs_extensions.py:53 cs/4.0/modules/cs_extensions.py:52
 #: cs/6.0_FUTURE/modules/cs_extensions.py:53 cs/3.8/modules/cs_extensions.py:52
 #: cs/4.4/modules/cs_extensions.py:53 cs/4.2/modules/cs_extensions.py:52
-#, fuzzy
 msgid "Installed extensions"
-msgstr "Bővítmények"
+msgstr "Telepített bővítmények"
 
 #: cs/4.6/modules/cs_extensions.py:54 cs/4.0/modules/cs_extensions.py:53
 #: cs/6.0_FUTURE/modules/cs_actions.py:57
 #: cs/6.0_FUTURE/modules/cs_extensions.py:54 cs/3.8/modules/cs_extensions.py:53
 #: cs/4.4/modules/cs_extensions.py:54 cs/4.2/modules/cs_extensions.py:53
 msgid "Enable"
-msgstr ""
+msgstr "Engedélyezés"
 
 #: cs/4.6/modules/cs_extensions.py:55 cs/4.0/modules/cs_extensions.py:54
 #: cs/6.0_FUTURE/modules/cs_actions.py:58
 #: cs/6.0_FUTURE/modules/cs_extensions.py:55 cs/3.8/modules/cs_extensions.py:54
 #: cs/4.4/modules/cs_extensions.py:55 cs/4.2/modules/cs_extensions.py:54
 msgid "Disable"
-msgstr ""
+msgstr "Letiltás"
 
 #: cs/4.6/modules/cs_extensions.py:57 cs/4.0/modules/cs_extensions.py:56
 #: cs/6.0_FUTURE/modules/cs_extensions.py:57 cs/3.8/modules/cs_extensions.py:56
 #: cs/4.4/modules/cs_extensions.py:57 cs/4.2/modules/cs_extensions.py:56
 msgid "Disable all"
-msgstr ""
+msgstr "Összes letiltása"
 
 #: cs/4.6/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:28
 #: cs/6.0_FUTURE/modules/cs_themes.py:36 cs/3.8/modules/cs_themes.py:15
 #: cs/4.4/modules/cs_themes.py:34 cs/4.2/modules/cs_themes.py:30
 msgid "Manage themes to change how your desktop looks"
-msgstr ""
+msgstr "Témák kezelésével módosíthatja az asztal megjelenését"
 
 #: cs/4.6/modules/cs_themes.py:41 cs/4.0/modules/cs_themes.py:33
 #: cs/6.0_FUTURE/modules/cs_themes.py:41 cs/3.8/modules/cs_themes.py:20
 #: cs/4.4/modules/cs_themes.py:39 cs/4.2/modules/cs_themes.py:35
 msgid "themes, style"
-msgstr ""
+msgstr "témák, stílus"
 
 #: cs/4.6/modules/cs_themes.py:79 cs/4.0/modules/cs_themes.py:63
 #: cs/6.0_FUTURE/modules/cs_themes.py:79 cs/3.8/modules/cs_themes.py:50
 #: cs/4.4/modules/cs_themes.py:76 cs/4.2/modules/cs_themes.py:65
 msgid "Window borders"
-msgstr ""
+msgstr "Ablak szegély"
 
 #: cs/4.6/modules/cs_themes.py:82 cs/4.0/modules/cs_themes.py:66
 #: cs/6.0_FUTURE/modules/cs_themes.py:82 cs/3.8/modules/cs_themes.py:53
 #: cs/4.4/modules/cs_themes.py:79 cs/4.2/modules/cs_themes.py:68
 msgid "Icons"
-msgstr ""
+msgstr "Ikonok"
 
 #: cs/4.6/modules/cs_themes.py:85 cs/4.0/modules/cs_themes.py:69
 #: cs/6.0_FUTURE/modules/cs_themes.py:85 cs/3.8/modules/cs_themes.py:56
 #: cs/4.4/modules/cs_themes.py:82 cs/4.2/modules/cs_themes.py:71
 msgid "Controls"
-msgstr ""
+msgstr "Vezérlők"
 
 #: cs/4.6/modules/cs_themes.py:88 cs/4.0/modules/cs_themes.py:72
 #: cs/6.0_FUTURE/modules/cs_themes.py:88 cs/3.8/modules/cs_themes.py:59
 #: cs/4.4/modules/cs_themes.py:85 cs/4.2/modules/cs_themes.py:74
 msgid "Mouse Pointer"
-msgstr ""
+msgstr "Egér mutató"
 
 #: cs/4.6/modules/cs_themes.py:91 cs/4.0/modules/cs_themes.py:75
 #: cs/6.0_FUTURE/modules/cs_themes.py:91 cs/3.8/modules/cs_themes.py:62
 #: cs/4.4/modules/cs_themes.py:88 cs/4.2/modules/cs_themes.py:77
-#, fuzzy
 msgid "Desktop"
-msgstr "Asztalkalmazás"
+msgstr "Asztal"
 
 #: cs/4.6/modules/cs_themes.py:95 cs/4.0/modules/cs_themes.py:79
 #: cs/6.0_FUTURE/modules/cs_themes.py:95 cs/3.8/modules/cs_themes.py:66
 #: cs/4.4/modules/cs_themes.py:92 cs/4.2/modules/cs_themes.py:81
 msgid "Add/Remove"
-msgstr ""
+msgstr "Hozzáadás/eltávolítás"
 
 #: cs/4.6/modules/cs_themes.py:98 cs/4.0/modules/cs_themes.py:82
 #: cs/6.0_FUTURE/modules/cs_themes.py:98 cs/3.8/modules/cs_themes.py:69
 #: cs/4.4/modules/cs_themes.py:95 cs/4.2/modules/cs_themes.py:84
-#, fuzzy
 msgid "Settings"
-msgstr "Spices Frissítések beállításai"
+msgstr "Beállítások"
 
 #: cs/4.6/modules/cs_themes.py:100 cs/4.0/modules/cs_themes.py:84
 #: cs/6.0_FUTURE/modules/cs_themes.py:100 cs/3.8/modules/cs_themes.py:71
 #: cs/4.4/modules/cs_themes.py:97 cs/4.2/modules/cs_themes.py:86
 msgid "Miscellaneous options"
-msgstr ""
+msgstr "További beállítások"
 
 #: cs/4.6/modules/cs_themes.py:102 cs/4.0/modules/cs_themes.py:86
 #: cs/6.0_FUTURE/modules/cs_themes.py:102 cs/3.8/modules/cs_themes.py:73
 #: cs/4.4/modules/cs_themes.py:99 cs/4.2/modules/cs_themes.py:88
-#, fuzzy
 msgid "Show icons in menus"
-msgstr "Műveleti gombokkal"
+msgstr "Ikonok megjelenítése a menükben"
 
 #: cs/4.6/modules/cs_themes.py:105 cs/4.0/modules/cs_themes.py:89
 #: cs/6.0_FUTURE/modules/cs_themes.py:105 cs/3.8/modules/cs_themes.py:76
 #: cs/4.4/modules/cs_themes.py:102 cs/4.2/modules/cs_themes.py:91
-#, fuzzy
 msgid "Show icons on buttons"
-msgstr "Műveleti gombokkal"
+msgstr "Ikonok megjelenítése a gombokon"
 
 #: cs/4.6/modules/cs_themes.py:114 cs/6.0_FUTURE/modules/cs_themes.py:114
 #: cs/4.4/modules/cs_themes.py:105 cs/4.2/modules/cs_themes.py:94
 msgid "Scrollbar behavior"
-msgstr ""
+msgstr "Görgetősáv viselkedése"
 
 #: cs/4.6/modules/cs_themes.py:119 cs/6.0_FUTURE/modules/cs_themes.py:119
 #: cs/4.4/modules/cs_themes.py:110 cs/4.2/modules/cs_themes.py:99
 msgid "Jump to position when clicking in a trough"
-msgstr ""
+msgstr "Ugrás a pozícióba, amikor egy vályúban kattint"
 
 #: cs/4.6/modules/cs_themes.py:122 cs/6.0_FUTURE/modules/cs_themes.py:122
 #: cs/4.4/modules/cs_themes.py:113 cs/4.2/modules/cs_themes.py:102
 msgid "Use overlay scroll bars"
-msgstr ""
+msgstr "Használjon átfedő görgetősávokat"
 
 #: cs/4.6/modules/cs_themes.py:127 cs/6.0_FUTURE/modules/cs_themes.py:127
 #: cs/4.4/modules/cs_themes.py:118 cs/4.2/modules/cs_themes.py:107
 msgid "Override the current theme's scrollbar width"
-msgstr ""
+msgstr "Az aktuális téma görgetősávszélességének felülbírálása"
 
 #: cs/4.6/modules/cs_themes.py:131 cs/6.0_FUTURE/modules/cs_themes.py:131
 #: cs/4.4/modules/cs_themes.py:122 cs/4.2/modules/cs_themes.py:111
 msgid "Scrollbar width"
-msgstr ""
+msgstr "Görgetősáv szélessége"
 
 #: cs/4.6/modules/cs_themes.py:146 cs/6.0_FUTURE/modules/cs_themes.py:146
 #: cs/4.4/modules/cs_themes.py:137 cs/4.2/modules/cs_themes.py:126
@@ -1289,6 +1296,8 @@ msgid ""
 "Changes will take effect the next time you log in and may not affect all "
 "applications."
 msgstr ""
+"A változtatások a következő bejelentkezéskor lépnek életbe, és nem "
+"feltétlenül érintik az összes alkalmazást."
 
 #: cs/4.6/bin/SUSpices.py:136 cs/4.0/bin/SUSpices.py:132
 #: cs/6.0_FUTURE/bin/SUSpices.py:136 cs/6.0_FUTURE/bin/Spices.py:705
@@ -1299,6 +1308,8 @@ msgid ""
 "An error occurred during the installation of %s. Please report this incident "
 "to its developer."
 msgstr ""
+"Hiba történt a %s telepítése során. Kérjük, jelentse ezt az esetet a "
+"fejlesztőjének."
 
 #. 4.8->settings-schema.json->section_general4->title
 #. 4.6->settings-schema.json->section_general4->title
@@ -1312,78 +1323,79 @@ msgstr "Megjelenítés"
 #: cs/4.0/cinnamon-settings.py:73 cs/3.8/cinnamon-settings.py:73
 #: cs/4.2/cinnamon-settings.py:75
 msgid "display, screen, monitor, layout, resolution, dual, lcd"
-msgstr ""
+msgstr "kijelző, képernyő, monitor, elrendezés, felbontás, kettős, lcd"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:11
-#, fuzzy
 msgid "Manage your actions"
-msgstr "Hasznos Cinnamon beállítások megnyitása"
+msgstr "Saját műveletek kezelése"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:33
-#, fuzzy
 msgid "action"
-msgstr "Értesítések"
+msgstr "Művelet"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:59
-#, fuzzy
 msgid "Installed actions"
-msgstr "Bővítmények"
+msgstr "Telepített műveletek"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:174
 msgid "Checking dependencies"
-msgstr ""
+msgstr "Függőségek ellenőrzése"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:175
 #, python-format
 msgid "Please install: %s"
-msgstr ""
+msgstr "Kérjük, telepítse: %s"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:374
 msgid "_Cancel"
-msgstr ""
+msgstr "_Megszünteti"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:375
 msgid "_Open"
-msgstr ""
+msgstr "_Megnyitás"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:388
 msgid "Sound files"
-msgstr ""
+msgstr "Hangfájlok"
 
 #: cs/6.0_FUTURE/bin/Spices.py:328
 msgid "Downloading images:"
-msgstr ""
+msgstr "Képek letöltése:"
 
 #: cs/6.0_FUTURE/bin/Spices.py:402
 msgid ""
 "An error occurred while trying to access the server. Please try again in a "
 "little while."
 msgstr ""
+"Hiba történt a szerver elérése közben. Kérjük, próbálja újra egy kis idő "
+"múlva."
 
 #: cs/6.0_FUTURE/bin/Spices.py:586
 msgid ""
 "Something went wrong with the spices download. Please try refreshing the "
 "list again."
 msgstr ""
+"Hiba történt a fűszerek letöltésével. Kérjük, próbálja meg újra frissíteni a "
+"listát."
 
 #: cs/6.0_FUTURE/bin/Spices.py:601
 msgid "Refreshing the cache"
-msgstr ""
+msgstr "A gyorsítótár frissítése"
 
 #: cs/6.0_FUTURE/bin/Spices.py:681
-#, fuzzy, python-format
+#, python-format
 msgid "Installing %s"
-msgstr "Bővítmények"
+msgstr "%s telepítése"
 
 #: cs/6.0_FUTURE/bin/Spices.py:786
 #, python-format
 msgid "Uninstalling %s"
-msgstr ""
+msgstr "%s eltávolítás"
 
 #: cs/6.0_FUTURE/bin/Spices.py:820
 #, python-format
 msgid "A problem occurred while removing %s."
-msgstr ""
+msgstr "Hiba történt a(z) %s eltávolítása közben."
 
 #: cs/6.0_FUTURE/bin/Spices.py:842
 #, python-format
@@ -1392,30 +1404,33 @@ msgid ""
 "\n"
 "Details:  %s"
 msgstr ""
+"\n"
+"\n"
+"Részletek: %s"
 
 #: cs/4.2/bin/SUExtensionCore.py:247
 msgid "This is a system applet. It cannot be removed."
-msgstr ""
+msgstr "Ez egy rendszerkisalkalmazás. Nem távolítható el."
 
 #: cs/4.2/bin/SUExtensionCore.py:249
 msgid "This is a system desklet. It cannot be removed."
-msgstr ""
+msgstr "Ez egy rendszerkasztalkalmazás. Nem távolítható el."
 
 #: cs/4.2/bin/SUExtensionCore.py:251
 msgid "This is a system extension. It cannot be removed."
-msgstr ""
+msgstr "Ez egy rendszerbővítmény. Nem távolítható el."
 
 #: cs/4.2/bin/SUExtensionCore.py:302
 msgid "This applet is currently enabled"
-msgstr ""
+msgstr "Ez a kisalkalmazás jelenleg engedélyezve van"
 
 #: cs/4.2/bin/SUExtensionCore.py:304
 msgid "This desklet is currently enabled"
-msgstr ""
+msgstr "Ez a asztalkalmazás jelenleg engedélyezve van"
 
 #: cs/4.2/bin/SUExtensionCore.py:306
 msgid "This extension is currently enabled"
-msgstr ""
+msgstr "Ez a bővítmény jelenleg engedélyezve van"
 
 #: cs/4.2/bin/SUExtensionCore.py:345
 msgid ""
@@ -1423,6 +1438,9 @@ msgid ""
 "crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Ez a kisalkalmazás olyan függvényhívásokat tartalmaz, amelyek a Cinnamon "
+"összeomlását vagy lefagyását okozhatják. Ha összeomlik vagy lefagy, próbálja "
+"meg eltávolítani."
 
 #: cs/4.2/bin/SUExtensionCore.py:347
 msgid ""
@@ -1430,6 +1448,9 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Ez az asztalkalmazás olyan függvényhívásokat tartalmaz, amelyek a Cinnamon "
+"összeomlását vagy lefagyását okozhatják. Ha összeomlik vagy lefagy, próbálja "
+"meg eltávolítani."
 
 #: cs/4.2/bin/SUExtensionCore.py:349
 msgid ""
@@ -1437,10 +1458,13 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Ez a bővítmény olyan függvényhívásokat tartalmaz, amelyek a Cinnamon "
+"összeomlását vagy lefagyását okozhatják. Ha összeomlik vagy lefagy, próbálja "
+"meg eltávolítani."
 
 #: cs/4.2/bin/SUExtensionCore.py:458
 msgid "About"
-msgstr ""
+msgstr "Névjegy"
 
 #: cs/4.2/bin/SUExtensionCore.py:514
 #, python-format
@@ -1448,34 +1472,43 @@ msgid ""
 "Extension %s is not compatible with current version of cinnamon. Using it "
 "may break your system. Load anyway?"
 msgstr ""
+"A %s kiterjesztés nem kompatibilis a cinnamon jelenlegi verziójával. "
+"Használata tönkreteheti a rendszert. Amúgy betölteni?"
 
 #: cs/4.2/bin/SUExtensionCore.py:528
 msgid ""
 "There are multiple instances enabled. Are you sure you want to remove all of "
 "them?"
 msgstr ""
+"Több példány is engedélyezve van. Biztosan el szeretné távolítani "
+"mindegyiket?"
 
 #: cs/4.2/bin/SUExtensionCore.py:536 cs/4.2/bin/SUExtensionCore.py:885
 #, python-format
 msgid "Are you sure you want to completely remove %s?"
-msgstr ""
+msgstr "Biztos benne, hogy teljesen eltávolítja a következőt: %s?"
 
 #: cs/4.2/bin/SUExtensionCore.py:544
 msgid ""
 "This will restore the default set of enabled applets. Are you sure you want "
 "to do this?"
 msgstr ""
+"Ezzel visszaállítja az engedélyezett kisalkalmazások alapértelmezett "
+"készletét. Biztosan ezt akarod csinálni?"
 
 #: cs/4.2/bin/SUExtensionCore.py:546
 msgid ""
 "This will restore the default set of enabled desklets. Are you sure you want "
 "to do this?"
 msgstr ""
+"Ezzel visszaállítja az engedélyezett asztalkalmazások alapértelmezett "
+"készletét. Biztosan ezt akarod csinálni?"
 
 #: cs/4.2/bin/SUExtensionCore.py:548
 msgid ""
 "This will disable all active extensions. Are you sure you want to do this?"
 msgstr ""
+"Ezzel letiltja az összes aktív bővítményt. Biztosan ezt akarod csinálni?"
 
 #: cs/4.2/bin/SUExtensionCore.py:581
 #, python-format
@@ -1483,74 +1516,71 @@ msgid ""
 "Something went wrong while loading %s. Please make sure you are using the "
 "latest version, and then report the issue to its developer."
 msgstr ""
+"Hiba történt %s betöltése közben. Kérjük, győződjön meg arról, hogy a "
+"legújabb verziót használja, majd jelentse a problémát a fejlesztőjének."
 
 #: cs/4.2/bin/SUExtensionCore.py:656
 msgid "Install"
-msgstr ""
+msgstr "Telepítés"
 
 #: cs/4.2/bin/SUExtensionCore.py:662
-#, fuzzy
 msgid "Update"
-msgstr "Spices frissítések"
+msgstr "Frissítés"
 
 #: cs/4.2/bin/SUExtensionCore.py:665 cs/4.2/bin/SUExtensionCore.py:722
-#, fuzzy
 msgid "Installed"
-msgstr "Bővítmények"
+msgstr "Telepített"
 
 #: cs/4.2/bin/SUExtensionCore.py:709
 msgid "Sort by"
-msgstr ""
+msgstr "Rendezés a következő szerint:"
 
 #: cs/4.2/bin/SUExtensionCore.py:719
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #: cs/4.2/bin/SUExtensionCore.py:720
 msgid "Popularity"
-msgstr ""
+msgstr "Népszerűség"
 
 #: cs/4.2/bin/SUExtensionCore.py:721
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
 #: cs/4.2/bin/SUExtensionCore.py:723
 msgid "Upgradable"
-msgstr ""
+msgstr "Frissíthető"
 
 #: cs/4.2/bin/SUExtensionCore.py:775
 msgid "More info"
-msgstr ""
+msgstr "Több információ"
 
 #: cs/4.2/bin/SUExtensionCore.py:915
-#, fuzzy
 msgid "Update all"
-msgstr "Az összes azonnali frissítése!"
+msgstr "Az összes frissítése"
 
 #: cs/4.2/bin/SUExtensionCore.py:915
-#, fuzzy, python-format
+#, python-format
 msgid "%d update available"
 msgid_plural "%d updates available"
-msgstr[0] "Új téma érhető el:"
-msgstr[1] "Új téma érhető el:"
+msgstr[0] "%d frissítés elérhető"
+msgstr[1] "%d frissítések elérhetőek"
 
 #: cs/4.2/bin/SUExtensionCore.py:917
-#, fuzzy
 msgid "No updates available"
-msgstr "Új témák érhetőek el:"
+msgstr "Nincsenek frissítések"
 
 #: cs/4.2/bin/SUExtensionCore.py:934
 msgid "Your cache is out of date. Would you like to update it now?"
-msgstr ""
+msgstr "A gyorsítótár elavult. Szeretné most frissíteni?"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Warns you when installed Spices (actions, applets, desklets, extensions, "
 "themes) require an update or new Spices are available."
 msgstr ""
-"Értesít ha a telepített Spice-ok (kisalkalmazások, asztalalkalmazások, "
-"bővítmények, témák) frissítésre szorulnak, vagy ha új Spice-ok érhetőek el."
+"Figyelmeztet, ha a telepített Spices (műveletek, kisalkalmazások, asztali "
+"programok, bővítmények, témák) frissítést igényel, vagy új Spices érhető el."
 
 #. 4.8->settings-schema.json->section_applets1->title
 #. 4.8->settings-schema.json->section_desklets1->title
@@ -2265,45 +2295,39 @@ msgstr ""
 "A képernyő szélességének mekkora százalékát foglalhatja el az eszköztippek?"
 
 #. 6.0->settings-schema.json->check_actions->description
-#, fuzzy
 msgid "Check regularly whether your nemo actions are up to date"
-msgstr "A bővítmények frissítéseinek rendszeres ellenőrzése"
+msgstr "Ellenőrizze rendszeresen, hogy a nemo műveletek naprakészek-e"
 
 #. 6.0->settings-schema.json->check_actions->tooltip
-#, fuzzy
 msgid "If nemo actions updates do not concern you, uncheck this box."
 msgstr ""
-"Ha a bővítmények frissítései nem érdeklik önt, ne jelölje be ezt a négyzetet."
+"Ha a nemo műveletek frissítései nem érintik Önt, törölje a jelölőnégyzet "
+"bejelölését."
 
 #. 6.0->settings-schema.json->check_new_actions->description
-#, fuzzy
 msgid "Check regularly whether new nemo actions are available"
-msgstr "Új bővítmények rendszeres keresése"
+msgstr "Rendszeresen ellenőrizze, hogy elérhetőek-e új nemo műveletek"
 
 #. 6.0->settings-schema.json->check_new_actions->tooltip
-#, fuzzy
 msgid "If new nemo actions do not concern you, uncheck this box."
-msgstr "Ha az új bővítmények nem érdeklik önt, ne jelölje be ezt a négyzetet."
+msgstr ""
+"Ha az új nemo műveletek nem érintik Önt, törölje a jelölőnégyzet bejelölését."
 
 #. 6.0->settings-schema.json->unprotected_actions->description
-#, fuzzy
 msgid "Update these nemo actions:"
-msgstr "Következő bővítmények frissítése:"
+msgstr "Frissítse ezeket a nemo műveleteket:"
 
 #. 6.0->settings-schema.json->unprotected_actions->columns->title
-#, fuzzy
 msgid "Your nemo actions"
-msgstr "Telepített bővítmények"
+msgstr "Az ön nemo műveletei"
 
 #. 6.0->settings-schema.json->btn_cs_actions->description
-#, fuzzy
 msgid "Open Cinnamon Settings to manage all the nemo actions"
-msgstr "Cinnamon beállítások megnyitása a bővítmények kezeléséhez"
+msgstr "Nyissa meg a Cinnamon beállításokat az összes nemo művelet kezeléséhez"
 
 #. 6.0->settings-schema.json->processing_color->description
-#, fuzzy
 msgid "The icon color while SpicesUpdate is processing"
-msgstr "Az ikon színe, ha a Spices frissítést igényel"
+msgstr "Az ikon színe a SpicesUpdate feldolgozása közben"
 
 #. 3.8->settings-schema.json->section_general3->title
 #. 4.2->settings-schema.json->section_general4->title

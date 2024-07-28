@@ -5,17 +5,30 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 2.1.0\n"
+"Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-10 01:49-0400\n"
-"PO-Revision-Date: 2024-07-10 07:32+0200\n"
+"POT-Creation-Date: 2024-07-04 17:36+0200\n"
+"PO-Revision-Date: 2024-07-27 14:59+0200\n"
+"PO-Revision-Date: 2024-07-27 14:54+0200\n"
+"Last-Translator: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language-Team: \n"
+"Language: hu\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:527
@@ -46,7 +59,7 @@ msgstr ""
 
 #. settings-schema.json->pageGeneral->title
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #. settings-schema.json->pageOptions->title
 #. settings-schema.json->section1->title
@@ -160,7 +173,7 @@ msgstr "GitHub felhasználónév"
 
 #. settings-schema.json->button-my-spices->description
 msgid "Add all the Spices I use"
-msgstr ""
+msgstr "Adja hozzá az Spice-t amit használok"
 
 #. settings-schema.json->label-reload->description
 msgid ""
@@ -170,7 +183,12 @@ msgid ""
 "process.\n"
 "Just don't do it too often."
 msgstr ""
+"Nem szükséges felvenni azokat a Spice-okat, melyeket UUID-lista szerzőinek "
+"tagjai tartanak fennt.\n"
+"Ha a listák helyesek, a folyamat felgyorsítása érdekében újratöltheti ezt a "
+"kisalkalmazást.\n"
+"Csak ne csináld túl gyakran."
 
 #. settings-schema.json->button-reload->description
 msgid "Reload this applet"
-msgstr ""
+msgstr "Kisalkalmazás újratöltése"
