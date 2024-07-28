@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-07-28 08:02-0400\n"
+"PO-Revision-Date: 2024-07-28 15:39-0400\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -1570,23 +1570,15 @@ msgstr "Nagyon jó"
 
 #: 3.8/weather-applet.js:11287
 msgid "Ash"
-msgstr ""
+msgstr "Hamu"
 
 #: 3.8/weather-applet.js:11289
-#, fuzzy
 msgid "Squall"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Széllökések\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Széllökések"
 
 #: 3.8/weather-applet.js:11366
-#, fuzzy
 msgid "Light shower sleet"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Enyhe hózápor\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Enyhe havas eső"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1610,36 +1602,20 @@ msgid "Heavy drizzle"
 msgstr "Erősen szitáló eső"
 
 #: 3.8/weather-applet.js:12850
-#, fuzzy
 msgid "Light shower rain"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Enyhe hózápor\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Enyhe záporeső"
 
 #: 3.8/weather-applet.js:12854
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Erős hózápor\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Erős záporeső"
 
 #: 3.8/weather-applet.js:12862
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Havaseső\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Keverten hó/eső"
 
 #: 3.8/weather-applet.js:12864
-#, fuzzy
 msgid "Snow shower"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Hózápor\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Hózápor"
 
 #: 3.8/weather-applet.js:12884 3.8/weather-applet.js:14455
 msgid "Freezing fog"
@@ -1849,15 +1825,12 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16357
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Ellenőrizze, hogy a Climacell szolgáltatótól származó\n"
-"API kulcsot helyesen adta meg\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+"Kérjük, győződjön meg róla\n"
+"beírta a Pirate Weather által birtokolt API-kulcsot"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1868,56 +1841,32 @@ msgstr ""
 "Looking Glass naplóban"
 
 #: 3.8/weather-applet.js:16887
-#, fuzzy
 msgid "Snow grains"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Havaseső\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Hódara"
 
 #: 3.8/weather-applet.js:16894
-#, fuzzy
 msgid "Light showers"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Enyhe hózápor\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Enyhe záporok"
 
 #: 3.8/weather-applet.js:16908
-#, fuzzy
 msgid "Heavy showers"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Erős hózápor\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Erős záporok"
 
 #: 3.8/weather-applet.js:16936
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Vihar enyhe esővel\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Zivatar enyhe jégesővel"
 
 #: 3.8/weather-applet.js:16943
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Vihar\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Zivatar jégesővel"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
-#, fuzzy
 msgid "Feels like"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Hőérzet\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Hőérzet"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17544
 msgid ""
@@ -1987,7 +1936,7 @@ msgstr "Térség: {stationArea}"
 
 #: 3.8/weather-applet.js:19130
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} időjárási riasztás(ok)"
 
 #: 3.8/weather-applet.js:19525 3.8/weather-applet.js:19535
 #: 3.8/weather-applet.js:19542
@@ -1995,12 +1944,8 @@ msgid "Error Saving Debug Information"
 msgstr "Hiba lépett fel a hibakeresési információk elmentése közben"
 
 #: 3.8/weather-applet.js:19542
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Az időjárás információk nem kérhetők le\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Nem sikerült megnyitni a(z) {filePath} fájlt írásra"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -2012,47 +1957,40 @@ msgstr "Elmentve ide: {filePath}"
 
 #: 3.8/weather-applet.js:19755
 msgid "No Script Provided"
-msgstr ""
+msgstr "Nincs szkript"
 
 #: 3.8/weather-applet.js:19755
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Először hozzá kell adnia egy szkriptet."
 
 #: 3.8/weather-applet.js:19759
-#, fuzzy
 msgid "No Weather Data"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"US Weather\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Nincsenek időjárási adatok"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Nincsenek időjárási adatok a szkript futtatásához"
 
 #: 3.8/weather-applet.js:19767
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "A szkript sikeresen végrehajtva"
 
 #: 3.8/weather-applet.js:19767
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "A szkript sikeresen végrehajtva."
 
 #: 3.8/weather-applet.js:19770
 msgid "Error Running Script"
-msgstr ""
+msgstr "Hiba a szkript futtatásakor"
 
 #: 3.8/weather-applet.js:19770
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"A szkript hibát adott vissza, további információért tekintse meg a naplókat"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Időjárás kisalkalmazás\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "Időjárás kisalkalmazás figyelmeztetések"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2491,7 +2429,7 @@ msgstr "Földrajzi helyzet beállítások"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Műszaki és Automatizálási"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2548,7 +2486,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2563,12 +2501,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (csak az Egyesült Államok területéről)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr ""
-"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
-"Weatherbit (kulcs szükséges)\n"
-"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
+msgstr "OpenWeatherMap OneCall (kulcs szükséges)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2672,13 +2606,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Engedélyezze az időjárási riasztások megjelenítését"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"A Figyelmeztetések gomb látható lesz a felugró menüben, ha vannak aktív "
+"riasztások az Ön tartózkodási helyéhez."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
