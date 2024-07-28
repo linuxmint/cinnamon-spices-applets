@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: stopwatch@pdcurtis 2.3.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "POT-Creation-Date: 2017-02-02 16:14+0100\n"
-"PO-Revision-Date: 2021-04-04 13:34+0200\n"
+"PO-Revision-Date: 2024-07-28 08:01-0400\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:133
 msgid "Start"
@@ -113,10 +114,10 @@ msgid ""
 "'start -> pause -> continue -> pause -> continue etc'. In this mode one has "
 "to use the Right Click (Context) Menu to reset the counter"
 msgstr ""
-"A kattintás normál sorrendje „start -> szünet -> visszaállítás”, ez "
-"változik a következőre: „start -> szünet -> folytatás -> szünet -> "
-"folytatás stb.”. Ebben a módban a jobb egérgombbal (Helyi) menüt kell "
-"használni a számláló visszaállításához"
+"A kattintás normál sorrendje „start -> szünet -> visszaállítás”, ez változik "
+"a következőre: „start -> szünet -> folytatás -> szünet -> folytatás stb.”. "
+"Ebben a módban a jobb egérgombbal (Helyi) menüt kell használni a számláló "
+"visszaállításához"
 
 #. stopwatch@pdcurtis->settings-schema.json->pausedAt->description
 #. stopwatch@pdcurtis->settings-schema.json->startTime->description
@@ -129,8 +130,8 @@ msgstr "Adjon értelmes címet a számlálónak"
 
 #. stopwatch@pdcurtis->settings-schema.json->counterTitle->tooltip
 msgid ""
-"This forms the first part of the tooltip and is useful for identification "
-"if you have multiple instances of counters - default is Stopwatch"
+"This forms the first part of the tooltip and is useful for identification if "
+"you have multiple instances of counters - default is Stopwatch"
 msgstr ""
 "Ez képezi az eszköztipp első részét, és hasznos az azonosításhoz, ha több "
 "számlálója is van - az alapértelmezett a Stopperóra"
@@ -142,9 +143,8 @@ msgstr "A megjelenítés frissítési gyakorisága:"
 
 #. stopwatch@pdcurtis->settings-schema.json->refreshInterval-spinner->tooltip
 msgid ""
-"Increase or decrease this spinner value to change the refresh interval - "
-"use a slow refresh if you have multiple active counters and/or a slow "
-"machine"
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have multiple active counters and/or a slow machine"
 msgstr ""
 "Növelje vagy csökkentse ezt a tárcsaértéket a frissítési intervallum "
 "módosításához - használjon lassú frissítést, ha több aktív számlálóval "
@@ -165,3 +165,51 @@ msgstr ""
 #. stopwatch@pdcurtis->metadata.json->name
 msgid "Stopwatch for Cinnamon 1.8+"
 msgstr "Stopperóra Cinnamon-hoz 1.8+"
+
+#: 3.8/applet.js:205
+msgid "Name"
+msgstr "Név"
+
+#: 3.8/applet.js:225
+msgid "Start   "
+msgstr "Kezdés   "
+
+#: 3.8/applet.js:233
+msgid "Pause   "
+msgstr "Szünet   "
+
+#: 3.8/applet.js:241
+msgid "Reset   "
+msgstr "Visszaállítás   "
+
+#: 3.8/applet.js:249
+msgid "Continue  "
+msgstr "Folytatás  "
+
+#: 3.8/applet.js:261
+msgid "Continue from Start"
+msgstr "Folytassa a Kezdéstől"
+
+#. metadata.json->name
+msgid "Stopwatch for Cinnamon"
+msgstr "Stopper a Cinnamonhoz"
+
+#. 3.8->settings-schema.json->displayFullPanel->description
+msgid "Check box to Display Title in Panel"
+msgstr "Jelölje be a Cím megjelenítése a panelen jelölőnégyzetet"
+
+#. 3.8->settings-schema.json->displayFullPanel->tooltip
+msgid ""
+"This provides a more comprehensive panel display but may use more panel space"
+msgstr ""
+"Ez átfogóbb panelmegjelenítést biztosít, de több panelterületet igényelhet"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->description
+msgid "Check box to enable some extra functions - Needs Cinnamon Restart"
+msgstr ""
+"Jelölje be a jelölőnégyzetet néhány extra funkció engedélyezéséhez - "
+"Cinnamon újraindítás szükséges"
+
+#. 3.8->settings-schema.json->enableExperimentalFunctions->tooltip
+msgid "Provides extra functions requested by users"
+msgstr "A felhasználók által kért extra funkciókat biztosítja"

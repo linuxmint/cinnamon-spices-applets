@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: screen-inhibit@mtwebster 2.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-24 00:19+0200\n"
-"PO-Revision-Date: 2024-02-03 08:11+0100\n"
+"PO-Revision-Date: 2024-07-28 07:59-0400\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -81,32 +80,32 @@ msgstr "Indítás"
 
 #. settings-schema.json->head3->description
 msgid "Way to block the screensaver"
-msgstr ""
+msgstr "A képernyővédő blokkolásának módja"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"
-msgstr ""
+msgstr "(Ha lehetséges, kerülje az agresszív módszerek használatát.)"
 
 #. settings-schema.json->locktype->description
 msgid "Blocking mode"
-msgstr ""
+msgstr "Blokkoló mód"
 
 #. settings-schema.json->locktype->options
 msgid "Normal"
-msgstr ""
+msgstr "Normál"
 
 #. settings-schema.json->locktype->options
 msgid "Aggressive"
-msgstr ""
+msgstr "Agresszív"
 
 #. settings-schema.json->locktype->options
 msgid "Super aggressive"
-msgstr ""
+msgstr "Szuper agresszív"
 
 #. settings-schema.json->lockinterval->description
 msgid "Blocking interval"
-msgstr ""
+msgstr "Blokkolási intervallum"
 
 #. settings-schema.json->lockinterval->units
 msgid "minutes"
-msgstr ""
+msgstr "perc"

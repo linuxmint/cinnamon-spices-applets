@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-05 14:36-0500\n"
-"PO-Revision-Date: 2024-02-03 07:11+0100\n"
+"PO-Revision-Date: 2024-07-28 07:50-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -28,23 +27,21 @@ msgid "Waiting"
 msgstr "Várakozik"
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid "Some dependencies not installed."
-msgstr "Néhány függőség nincs telepítve"
+msgstr "Néhány függőség nincs telepítve."
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
-"Mind a „sox”, mind a „zenity” szükséges ahhoz, hogy a kisalkalmazás minden "
-"szolgáltatása rendelkezésre álljon, beleértve az értesítéseket és a hangos "
-"figyelmeztetéseket.\n"
+"A „sox” és a „zenity” egyaránt szükséges ahhoz, hogy ez a kisalkalmazás "
+"minden funkcióval rendelkezzen, beleértve az értesítéseket és a "
+"hangjelzéseket.\n"
 "\n"
-"Kérjük, olvassa el a súgófájlt a telepítésükhöz."
+"Kérjük, tekintse meg a README-t a telepítésükhöz.\n"
 
 #: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
@@ -89,9 +86,8 @@ msgid "Waiting for battery information"
 msgstr "Várakozás az akkumulátor információra"
 
 #: 5.4/applet.js:444
-#, fuzzy
 msgid "Alert/Suspend:"
-msgstr "Felfüggesztés:"
+msgstr "Figyelmeztetés/Felfüggesztés:"
 
 #: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
@@ -100,20 +96,16 @@ msgstr ""
 "elektromos hálózathoz"
 
 #: 5.4/applet.js:555
-#, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
 "Either connect to a power source or save or close down\n"
 "your work and suspend or shutdown the machine.\n"
 msgstr ""
-"Az akkumulátor töltöttségi szintje a riasztási szintjére csökkent\n"
+"Az akkumulátor töltöttségi szintje a riasztási szintre esett.\n"
 "\n"
-"vagy csatlakozzon újra egy áramforráshoz,\n"
-"\n"
-"fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
-"\n"
-"\n"
+"Csatlakoztassa az áramforráshoz, mentse el, vagy zárja be\n"
+"munkáját, és felfüggeszti vagy leállítja a gépet.\n"
 
 #: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
@@ -259,10 +251,9 @@ msgid "Percentage Charge:"
 msgstr "Százalékos töltöttség:"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Displays charge as percentage and allows alerts and actions"
 msgstr ""
-"Megjeleníti a töltést százalékban, és lehetővé teszi a riasztásokat és "
+"A töltést százalékban jeleníti meg, és engedélyezi a figyelmeztetéseket és a "
 "műveleteket"
 
 #. 5.4->settings-schema.json->General->title

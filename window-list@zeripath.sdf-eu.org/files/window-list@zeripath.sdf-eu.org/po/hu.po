@@ -4,12 +4,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: window-list@sangorys 1.0\n"
+"Project-Id-Version: window-list@zeripath.sdf-eu.org 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2024-07-28 08:02-0400\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"PO-Revision-Date: 2024-07-28 09:56+0200\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -18,93 +18,82 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:1273
-msgid "Window information"
-msgstr "Ablak információk"
-
-#: applet.js:1309
+#: applet.js:826
 msgid "Move to the other monitor"
 msgstr "Áthelyezés a másik monitorra"
 
-#: applet.js:1319
+#: applet.js:836
 #, javascript-format
 msgid "Move to monitor %d"
 msgstr "Áthelyezés a %d monitorra"
 
-#: applet.js:1330
+#: applet.js:847
 msgid "Only on this workspace"
 msgstr "Csak ezen a munkaterületen"
 
-#: applet.js:1336
+#: applet.js:853
 msgid "Visible on all workspaces"
 msgstr "Minden munkaterületen látható"
 
-#: applet.js:1342
+#: applet.js:859
 msgid "Move to another workspace"
 msgstr "Áthelyezés másik munkaterületre"
 
-#: applet.js:1365
+#: applet.js:882
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: applet.js:1368
+#: applet.js:885
 msgid "About..."
 msgstr "Névjegy…"
 
-#: applet.js:1372
+#: applet.js:889
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: applet.js:1376
+#: applet.js:893
 msgid "Remove 'Window list'"
 msgstr "\"Ablaklista\" eltávolítása"
 
-#: applet.js:1383
+#: applet.js:902
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#: applet.js:1392
+#: applet.js:911
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#: applet.js:1406
+#: applet.js:925
 msgid "Restore to full opacity"
 msgstr "Állítsa vissza a teljes átlátszatlanságot"
 
-#: applet.js:1414
+#: applet.js:933
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#: applet.js:1419
+#: applet.js:938
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#: applet.js:1427
+#: applet.js:946
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#: applet.js:1432
+#: applet.js:951
 msgid "Maximize"
 msgstr "Maximalizálás"
 
-#: applet.js:1440
+#: applet.js:958
 msgid "Close"
 msgstr "Bezárás"
 
 #. metadata.json->name
-msgid "My perfect window-list applet"
-msgstr "Az én tökéletes ablaklista-kisalkalmazásom"
+msgid "Zeripaths Window list"
+msgstr "Zeripaths ablaklista"
 
 #. metadata.json->description
-msgid ""
-"Based on the original Cinnamon window list, the window order is memorized "
-"and restored. The next huge feature is to also group window like Google "
-"Chrome groups tab. This is my definition of a perfect window list applet"
-msgstr ""
-"Az eredeti Cinnamon ablaklista alapján az ablakok sorrendje memorizálódik "
-"és visszaáll. A következő hatalmas funkció az ablak csoportosítása, "
-"például a Google Chrome csoportok lapja. Ez az én definícióm a tökéletes "
-"ablaklista kisalkalmazásról"
+msgid "Zeripaths variant of Cinnamon window list"
+msgstr "A Cinnamon ablaklista Zeripaths változata"
 
 #. settings-schema.json->section1->description
 msgid "Behavior"
@@ -130,10 +119,6 @@ msgstr "Engedélyezze az egérgörgetést az ablaklistában"
 msgid "Reverse the direction of mouse-wheel scrolling in the window list"
 msgstr "Fordítsa meg az egér görgőjének görgetési irányát az ablaklistában"
 
-#. settings-schema.json->left-click-minimize->description
-msgid "Left click to minimize window"
-msgstr "Kattintson a bal egérgombbal az ablak kicsinyítéséhez"
-
 #. settings-schema.json->middle-click-close->description
 msgid "Middle click to close window"
 msgstr "Az ablak bezárásához kattintson a középső gombra"
@@ -141,18 +126,6 @@ msgstr "Az ablak bezárásához kattintson a középső gombra"
 #. settings-schema.json->section2->description
 msgid "Display"
 msgstr "Megjelenítés"
-
-#. settings-schema.json->panel-show-label->description
-msgid "Show window names in the panel"
-msgstr "Az ablaknevek megjelenítése a panelen"
-
-#. settings-schema.json->button-width->units
-msgid "pixels"
-msgstr "képpont"
-
-#. settings-schema.json->button-width->description
-msgid "Window button width in the panel"
-msgstr "Az ablakgomb szélessége a panelen"
 
 #. settings-schema.json->buttons-use-entire-space->description
 msgid ""

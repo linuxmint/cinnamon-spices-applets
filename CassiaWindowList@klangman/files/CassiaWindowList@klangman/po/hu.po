@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: CassiaWindowList@klangman 2.2.0\n"
+"Project-Id-Version: CassiaWindowList@klangman 2.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-18 18:47-0400\n"
-"PO-Revision-Date: 2024-07-10 01:53-0400\n"
+"PO-Revision-Date: 2024-07-28 07:47-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -104,9 +104,8 @@ msgid "Places"
 msgstr "Helyek"
 
 #: 4.0/applet.js:3319 6.0/applet.js:3319
-#, fuzzy
 msgid "Always on top"
-msgstr "Mindig"
+msgstr "Mindig felül"
 
 #: 4.0/applet.js:3331 6.0/applet.js:3331
 msgid "Only on this workspace"
@@ -424,21 +423,18 @@ msgstr "Minimalizált ablakok"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other workspaces"
-msgstr "Más munkaterületre rögzítés"
+msgstr "Ablakok más munkaterületeken"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other monitors"
-msgstr "Gombok más monitorokon lévő ablakokhoz"
+msgstr "Ablakok más monitorokon"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
-#, fuzzy
 msgid "Hide labels for"
-msgstr "A minimalizált gombok címkéinek elrejtése"
+msgstr "Címkék elrejtése a következőnél:"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
@@ -447,6 +443,10 @@ msgid ""
 "be hidden. For application pools, the label will still show unless all "
 "application windows have the selected property"
 msgstr ""
+"Válassza ki az ablak állapotának típusát, amelynél az ablaklista gombjainak "
+"címkéit el kell rejteni. Alkalmazáskészletek esetén a címke továbbra is "
+"megjelenik, kivéve, ha az összes alkalmazásablak rendelkezik a kiválasztott "
+"tulajdonsággal."
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -920,9 +920,8 @@ msgstr "Alapértelmezett miniatűr ablakméret"
 
 #. 4.0->settings-schema.json->menu-sort-groups->description
 #. 6.0->settings-schema.json->menu-sort-groups->description
-#, fuzzy
 msgid "Sort grouped button thumbnail menu items"
-msgstr "Állítsa vissza vagy tartsa lenyomva a miniatűr menü megjelenítéséhez"
+msgstr "Csoportosított gombok miniatűr menüelemek rendezése"
 
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
@@ -933,6 +932,12 @@ msgid ""
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
+"Ha engedélyezve van, a miniatűr menü először a munkaterület, majd a "
+"csoportosított gombok esetében a monitor száma szerint lesz rendezve. Az "
+"összevont ablakok nem rendezhetők, mivel a sorrend megegyezik az ablaklista "
+"panel sorrendjével. Ha ez a beállítás engedélyezve van, a csoportosított "
+"gombok miniatűr menüinek miniatűr menüje esetében a miniatűr menü "
+"átrendezése a húzással és a levonással nem lesz elérhető."
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
@@ -1186,7 +1191,7 @@ msgstr "Ezen/minden munkaterületen látható"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Toggle always on top"
-msgstr ""
+msgstr "Mindig felül bekapcsolása"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1525,9 +1530,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
-#, fuzzy
 msgid "Restore/Minimize 1st window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 1. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1616,9 +1620,8 @@ msgstr "A legutóbbi alkalmazásablak visszaállítása"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 1st window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 1. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1626,9 +1629,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 2nd window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 2. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1636,9 +1638,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 3rd window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 3. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1646,9 +1647,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 4th window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 4. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
@@ -1685,31 +1685,28 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Minimize/Restore/Maximize window"
-msgstr "Minimalizálás/Visszaállítás"
+msgstr "Ablak minimalizálása/visszaállítása/maximalizálása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change windows workspace"
-msgstr "Tartalmazzon ablakokat minden munkaterületről"
+msgstr "Az ablakok munkaterületének módosítása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows monitor"
-msgstr ""
+msgstr "Ablakok monitor megváltoztatása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change window tiling"
-msgstr "Ablakcím használata"
+msgstr "Ablak csempézés módosítása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
 msgid "Scroll wheel action"
-msgstr ""
+msgstr "Görgető művelet"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->tooltip
 #. 6.0->settings-schema.json->mouse-action-scroll->tooltip
@@ -1717,6 +1714,9 @@ msgid ""
 "Action taken when using the mouse scroll wheel on a window list button. This "
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
 msgstr ""
+"Az egér görgetőkerékének használata esetén végrehajtott művelet egy "
+"ablaklistagombon. Ez a görgetés le lesz tiltva, ha a bélyegkép menü éppen "
+"nyitva van"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options

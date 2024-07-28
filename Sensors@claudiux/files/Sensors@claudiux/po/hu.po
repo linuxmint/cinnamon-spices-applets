@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 3.6.1\n"
+"Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-10 01:49-0400\n"
-"PO-Revision-Date: 2024-07-10 01:48-0400\n"
+"PO-Revision-Date: 2024-07-28 07:48-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,8 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
@@ -214,7 +212,7 @@ msgstr "⮿ Behatolás"
 
 #. settings-schema.json->page_Custom->title
 msgid "⛓ Custom"
-msgstr ""
+msgstr "⛓ Egyéni"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -273,12 +271,11 @@ msgstr "Behatolás szenzorok"
 
 #. settings-schema.json->section_customDisclaimer->title
 msgid "Disclaimer"
-msgstr ""
+msgstr "Jogi nyilatkozat"
 
 #. settings-schema.json->section_customSensors->title
-#, fuzzy
 msgid "Custom sensors"
-msgstr "Behatolás szenzorok"
+msgstr "Egyéni szenzorok"
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -557,13 +554,15 @@ msgstr ""
 
 #. settings-schema.json->journalize_temp->description
 msgid "Log high and critical temperatures"
-msgstr ""
+msgstr "Magas és kritikus hőmérsékletek naplózása"
 
 #. settings-schema.json->journalize_temp->tooltip
 msgid ""
 "When this option is checked, temperatures exceeding the high or critical "
 "limit are recorded in the system journal."
 msgstr ""
+"Ha ez az opció be van jelölve, a rendszernaplóban rögzítésre kerülnek a "
+"felső vagy kritikus határértéket meghaladó hőmérsékletek."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -695,13 +694,15 @@ msgstr "\"Fordulat per perc\" rövidítése"
 
 #. settings-schema.json->journalize_fan->description
 msgid "Log critical fan speeds"
-msgstr ""
+msgstr "Naplózza a kritikus ventilátorsebességeket"
 
 #. settings-schema.json->journalize_fan->tooltip
 msgid ""
 "When this option is checked, fan speeds below the critical limit are "
 "recorded in the system log."
 msgstr ""
+"Ha ez az opció be van jelölve, a rendszernaplóban rögzítésre kerül a "
+"kritikus határ alatti ventilátorsebesség."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -750,13 +751,16 @@ msgstr "Csak mV"
 
 #. settings-schema.json->journalize_volt->description
 msgid "Log critical voltages"
-msgstr ""
+msgstr "Kritikus feszültségek naplózása"
 
 #. settings-schema.json->journalize_volt->tooltip
 msgid ""
 "When this option is checked, voltages below the minimum limit or above the "
 "maximum limit are recorded in the system log."
 msgstr ""
+"Ha ez az opció be van jelölve, a minimális határérték alatti vagy a "
+"maximális határérték feletti feszültségek rögzítésre kerülnek a "
+"rendszernaplóban."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -809,13 +813,12 @@ msgid "Show in the panel only when an intrusion was detected"
 msgstr "Csak akkor jelenjen meg a panelen, ha behatolást észleltek"
 
 #. settings-schema.json->journalize_intrusion->description
-#, fuzzy
 msgid "Log intrusions"
-msgstr "⮿ Behatolás"
+msgstr "Naplózási behatolások"
 
 #. settings-schema.json->journalize_intrusion->tooltip
 msgid "When this option is checked, intrusions are recorded in the system log."
-msgstr ""
+msgstr "Ha ez a beállítás be van jelölve, a behatolásokat a rendszer naplózza."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -831,45 +834,52 @@ msgid ""
 "These settings are for advanced users only!\n"
 "Please refer to the README file."
 msgstr ""
+"Ezek a beállítások csak haladó felhasználóknak szólnak!\n"
+"Kérjük, olvassa el a README fájlt."
 
 #. settings-schema.json->custom_openREADME->description
 msgid "Open the README file"
-msgstr ""
+msgstr "Open the README file"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "File to\n"
 "monitor"
 msgstr ""
+"Fájl a\n"
+"monitor"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "High\n"
 "value"
 msgstr ""
+"Magas\n"
+"érték"
 
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Critical\n"
 "value"
 msgstr ""
 "Kritikus\n"
-"(°C)"
+"érték"
 
 #. settings-schema.json->custom_sensors->tooltip
 msgid ""
 "Add a line by custom sensor to set the type, the name and the path of the "
 "file to monitor (/sys/class/...)."
 msgstr ""
+"Adjunk hozzá egy soros egyéni érzékelőt a monitorozandó fájl típusának, "
+"nevének és elérési útvonalának beállításához (/sys/class/...)."
 
 #. settings-schema.json->report->description
 #: scripts/show_sensor_values.sh:5

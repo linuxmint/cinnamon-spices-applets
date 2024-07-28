@@ -1,35 +1,35 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: search-box@mtwebster 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-05 20:02+0200\n"
-"PO-Revision-Date: 2018-12-02 03:09+0100\n"
+"PO-Revision-Date: 2024-07-28 07:59-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:68 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
+"Kattintson a jobb gombbal a keresőmotor kiválasztásához vagy hozzáadásához"
 
 #: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
 msgid "Type to search..."
 msgstr "Gépeljen a kereséshez…"
 
 #: applet.js:117 old/5.4/applet.js:112
-#, fuzzy
 msgid "Select your Search Engine:"
-msgstr "Válasszon egy keresőszolgáltatást"
+msgstr "Válassza ki keresőmotorját:"
 
 #: old/applet.js:90
 msgid "Change default programs..."
@@ -51,20 +51,19 @@ msgstr "Internetes keresést hajt végre az Ön kedvenc keresőszolgáltatásáv
 #. settings-schema.json->section-providers->title
 #. settings-schema.json->providers->description
 #. old->5.4->settings-schema.json->providers->description
-#, fuzzy
 msgid "Providers"
-msgstr "Keresőszolgáltatás szerkesztése"
+msgstr "Szolgáltatók"
 
 #. settings-schema.json->page-options->title
 #. settings-schema.json->section-options->title
 msgid "Options"
-msgstr ""
+msgstr "Beállítások"
 
 #. settings-schema.json->section-colors->title
 #. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
-msgstr ""
+msgstr "A keresőmező színei"
 
 #. settings-schema.json->header-provider->description
 #. old->3.2->settings-schema.json->header-provider->description
@@ -87,7 +86,7 @@ msgstr "Kiválasztott keresőszolgáltatás megjelenítése a Panelon"
 #. settings-schema.json->reset-after-search->description
 #. old->5.4->settings-schema.json->reset-after-search->description
 msgid "Reset query after search"
-msgstr ""
+msgstr "Lekérdezés visszaállítása keresés után"
 
 #. settings-schema.json->reset-after-search->tooltip
 #. old->5.4->settings-schema.json->reset-after-search->tooltip
@@ -95,22 +94,24 @@ msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
 msgstr ""
+"Visszaállítja a lekérdezést a keresés után? Ez nem biztos, hogy hasznos, ha "
+"azt szeretné, hogy utána ugyanazt a lekérdezést más keresőmotorokon is "
+"végrehajthassa."
 
 #. settings-schema.json->header-providers->description
 #. old->5.4->settings-schema.json->header-providers->description
-#, fuzzy
 msgid "Search Engines"
-msgstr "Válasszon egy keresőszolgáltatást"
+msgstr "Kereső motorok"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
 msgid "Show"
-msgstr ""
+msgstr "Megjelenítés"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -118,11 +119,13 @@ msgid ""
 "Short name\n"
 "(3 lower-case letters)"
 msgstr ""
+"Rövid név\n"
+"(3 kisbetű)"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
 msgid "Query URL"
-msgstr ""
+msgstr "URL lekérdezése"
 
 #. settings-schema.json->providers->tooltip
 #. old->5.4->settings-schema.json->providers->tooltip
@@ -131,6 +134,9 @@ msgid ""
 "processed by the relevant search engine.\n"
 "Example: ddg linux mint iso"
 msgstr ""
+"Ha a lekérdezés a rövid név 3 betűjével kezdődik, akkor azt a megfelelő "
+"keresőmotor dolgozza fel.\n"
+"Példa: ddg linux mint iso"
 
 #. settings-schema.json->providers-help->description
 msgid ""
@@ -140,6 +146,11 @@ msgid ""
 "provider.\n"
 "If no provider is selected, the default provider is Google."
 msgstr ""
+"Csak a kiválasztott szolgáltatók jelennek meg a helyi menüben, így "
+"kiválaszthatja az alapértelmezett szolgáltatót.\n"
+"Ha törli az alapértelmezett szolgáltató kijelölését, az elsőként "
+"kiválasztott lesz az alapértelmezett szolgáltató.\n"
+"Ha nincs kiválasztva szolgáltató, az alapértelmezett szolgáltató a Google."
 
 #. settings-schema.json->header-keybinding->description
 #. old->3.2->settings-schema.json->header-keybinding->description
@@ -156,12 +167,12 @@ msgstr "Billentyűtársítás, amely megnyitja a keresési mezőt"
 #. settings-schema.json->background-color->description
 #. old->5.4->settings-schema.json->background-color->description
 msgid "Background color"
-msgstr ""
+msgstr "Háttér színe"
 
 #. settings-schema.json->text-color->description
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
-msgstr ""
+msgstr "Szövegszín"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"

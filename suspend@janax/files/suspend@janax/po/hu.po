@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: suspend@janax 2.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-07 23:19-0500\n"
-"PO-Revision-Date: 2024-02-13 18:20+0100\n"
+"PO-Revision-Date: 2024-07-28 08:01-0400\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -71,6 +70,8 @@ msgstr "Visszaszámlálás ideje"
 #. settings-schema.json->ctrl-override-countdown->description
 msgid "Ctrl+Click to override the count down and suspend immediately"
 msgstr ""
+"Ctrl+kattintás a visszaszámlálás felülbírálásához és azonnali "
+"felfüggesztéséhez"
 
 #. settings-schema.json->ctrl-override-countdown->tooltip
 msgid ""
@@ -78,19 +79,21 @@ msgid ""
 "without starting a count down or waiting for an existing count down to "
 "finish."
 msgstr ""
+"Ha engedélyezve van, a Ctrl+kattintás azonnal felfüggeszti a számítógépet "
+"anélkül, hogy elindítaná a visszaszámlálást vagy megvárná, amíg egy meglévő "
+"visszaszámlálás befejeződik."
 
 #. settings-schema.json->fullcolor-icon->description
 msgid "Use a full color icon"
 msgstr "Színes ikon használata"
 
 #. settings-schema.json->fullcolor-icon->tooltip
-#, fuzzy
 msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbolic "
 "icon will be used."
 msgstr ""
-"Amikor engedélyezve van, színes ikon jelenik meg, egyéb esetben egy "
-"szimbolikus ikon lesz használva."
+"Ha engedélyezve van, a rendszer egy színes panel ikont használ, ellenkező "
+"esetben szimbolikus ikont használ."
 
 #. settings-schema.json->system-suspend-header->description
 msgid "System suspend settings"

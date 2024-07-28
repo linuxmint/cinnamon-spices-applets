@@ -1,18 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the oversteer package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: oversteer\n"
+"Project-Id-Version: weather@mockturtl 3.6.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-03 08:04+0100\n"
-"PO-Revision-Date: 2024-02-09 19:05+0100\n"
+"PO-Revision-Date: 2024-07-28 08:02-0400\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
-"Language: hu_HU\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1576,12 +1575,18 @@ msgstr ""
 #: 3.8/weather-applet.js:11289
 #, fuzzy
 msgid "Squall"
-msgstr "Széllökések"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Széllökések\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:11366
 #, fuzzy
 msgid "Light shower sleet"
-msgstr "Enyhe hózápor"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Enyhe hózápor\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1607,22 +1612,34 @@ msgstr "Erősen szitáló eső"
 #: 3.8/weather-applet.js:12850
 #, fuzzy
 msgid "Light shower rain"
-msgstr "Enyhe hózápor"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Enyhe hózápor\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:12854
 #, fuzzy
 msgid "Heavy shower rain"
-msgstr "Erős hózápor"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Erős hózápor\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:12862
 #, fuzzy
 msgid "Mix snow/rain"
-msgstr "Havaseső"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Havaseső\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:12864
 #, fuzzy
 msgid "Snow shower"
-msgstr "Hózápor"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Hózápor\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:12884 3.8/weather-applet.js:14455
 msgid "Freezing fog"
@@ -1837,8 +1854,10 @@ msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
 "Ellenőrizze, hogy a Climacell szolgáltatótól származó\n"
-"API kulcsot helyesen adta meg"
+"API kulcsot helyesen adta meg\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:16724
 msgid ""
@@ -1851,32 +1870,50 @@ msgstr ""
 #: 3.8/weather-applet.js:16887
 #, fuzzy
 msgid "Snow grains"
-msgstr "Havaseső"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Havaseső\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:16894
 #, fuzzy
 msgid "Light showers"
-msgstr "Enyhe hózápor"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Enyhe hózápor\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:16908
 #, fuzzy
 msgid "Heavy showers"
-msgstr "Erős hózápor"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Erős hózápor\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:16936
 #, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Vihar enyhe esővel"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Vihar enyhe esővel\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:16943
 #, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Vihar"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Vihar\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:16970 3.8/weather-applet.js:17129
 #, fuzzy
 msgid "Feels like"
-msgstr "Hőérzet"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Hőérzet\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:17038
 msgid "Open Meteo"
@@ -1960,7 +1997,10 @@ msgstr "Hiba lépett fel a hibakeresési információk elmentése közben"
 #: 3.8/weather-applet.js:19542
 #, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Az időjárás információk nem kérhetők le"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Az időjárás információk nem kérhetők le\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:19551
 msgid "Debug Information saved successfully"
@@ -1981,7 +2021,10 @@ msgstr ""
 #: 3.8/weather-applet.js:19759
 #, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"US Weather\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/weather-applet.js:19759
 msgid "No weather data to run script with"
@@ -2006,7 +2049,10 @@ msgstr ""
 #: 3.8/AlertsWindow.py:119
 #, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Időjárás kisalkalmazás"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Időjárás kisalkalmazás\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2519,7 +2565,10 @@ msgstr "US National Weather (csak az Egyesült Államok területéről)"
 #. 3.8->settings-schema.json->dataService->options
 #, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (kulcs szükséges)"
+msgstr ""
+"#-#-#-#-#  hu_regi.po (oversteer)  #-#-#-#-#\n"
+"Weatherbit (kulcs szükséges)\n"
+"#-#-#-#-#  hu_uj.po (weather@mockturtl 3.6.1)  #-#-#-#-#\n"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2724,6 +2773,7 @@ msgstr ""
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
 msgstr ""
+"A szolgáltatónak le kell fordítania a feltételeket, ha rendelkezésre állnak"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2731,6 +2781,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"A szolgáltatónak le kell-e fordítania a feltételeket az Ön nyelvére, ha a "
+"szolgáltató támogatja az Ön nyelvi területét. Ellenkező esetben az applet a "
+"saját fordítórendszerét fogja használni."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2857,7 +2910,7 @@ msgstr "Naplófájlok mentése a következő útvonalra"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Felhasználói ügynök karakterlánc felülbírálása"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2866,10 +2919,15 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Ha problémái vannak azzal, hogy az applet nem működik megfelelően, és tudja, "
+"hogy a User Agent karakterlánc okozza a problémát, megpróbálhatja "
+"felülbírálni. Csak akkor változtasson rajta, ha tudja, mit csinál. Ez egy "
+"karakterlánc, amely akkor kerül elküldésre a szervernek, amikor az applet "
+"megpróbálja lekérni az időjárási adatokat."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Futtasson parancsot, amikor az időjárási adatok megváltoznak"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -2889,7 +2947,22 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Az applet minden időjárási adatfrissítéskor az Ön által megadott parancsot "
+"fogja futtatni. A parancs ugyanazokkal az értékekkel lesz interpolálva, "
+"ugyanazzal a formátummal, amelyet bármelyik felülbírálásnál megkaphat, "
+"emellett megkapja a {full_data} értéket, amely a teljes aktuális időjárási "
+"adat. Az egyszeres zárójeles {xxx} interpoláció nem kerül megjelölésre, a "
+"kettős zárójelekkel {{xxxx}} egyszeres idézőjelekbe (') kerül sor, és az "
+"összes többi szimpla zárójelet meg kell szüntetni. Ezzel integrálhatja az "
+"időjárási adatokat a rendszer más részeivel. A teljes időjárási "
+"adatszerkezetet a README linkjén tekintheti meg.\n"
+"\n"
+"Példa: \"notify-send \"Az időjárás {c}, a hőmérséklet {t}{u}\"\" értesítést "
+"jelenít meg az aktuális időjárási állapotról és hőmérsékletről.\n"
+"\n"
+"Példa: 'echo {{full_data}} > /tmp/weather_data' a teljes időjárási adatokat "
+"egy fájlba menti a /tmp mappában."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Tesztelje a parancsát"
