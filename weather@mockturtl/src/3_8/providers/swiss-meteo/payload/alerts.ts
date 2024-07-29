@@ -1,3 +1,5 @@
+import { Logger } from "../../../lib/services/logger";
+import { _ } from "../../../utils";
 import type { AlertData, AlertLevel, CustomIcons } from "../../../weather-data";
 
 export interface SwissMeteoWarningLink {
@@ -33,7 +35,7 @@ export interface SwissMeteoWarning {
 export function SwissMeteoWarningToAlertData(warning: SwissMeteoWarning): AlertData {
 	return {
 		level: SwissMeteoWarningLevelToAlertLevel(warning.warnLevel),
-		title: "",
+		title: SwissMeteoWarningTypeToTitle(warning.warnType),
 		description: warning.text,
 		icon: SwissMeteoWarningTypeToIcon(warning.warnType),
 		sender_name: "Swiss Meteo",
@@ -97,5 +99,49 @@ export function SwissMeteoWarningTypeToIcon(type: number): CustomIcons | undefin
 			return "flood-symbolic";
 		default:
 			return undefined;
+	}
+}
+
+export function SwissMeteoWarningTypeToTitle(type: number): string {
+	switch (type) {
+		// Wind
+		case 0:
+			return _("Wind Warning");
+		// Thunderstorms
+		case 1:
+			return _("Thunderstorm Warning");
+		// Rain
+		case 2:
+			return _("Rain Warning");
+		// Snow
+		case 3:
+			return _("Snow Warning");
+		// Slippery roads
+		case 4:
+			return _("Slippery Roads Warning");
+		// Frost
+		case 5:
+			return _("Frost Warning");
+		// Mass movements
+		case 6:
+			return _("Mass Movements Warning");
+		// Heat
+		case 7:
+			return _("Heat Warning");
+		// Avalanches
+		case 8:
+			return _("Avalanche Warning");
+		// Earthquakes
+		case 9:
+			return _("Earthquake Warning");
+		// ForestFire
+		case 10:
+			return _("Forest Fire Warning");
+		// Floods
+		case 11:
+			return _("Flood Warning");
+		default:
+			Logger.Error("Unknown warning type", type);
+			return "";
 	}
 }

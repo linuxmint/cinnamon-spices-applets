@@ -74,8 +74,12 @@ export class SwissMeteo extends BaseProvider {
 				degree: result.graph.windDirection3h[0],
 			},
 			forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
-			alerts: result.warnings.map(warning => SwissMeteoWarningToAlertData(warning)),
+			alerts: result.warnings.filter(x => {
+				return DateTime.fromMillis(x.validFrom) < DateTime.now() && DateTime.fromMillis(x.validTo) > DateTime.now();
+			}).map(warning => SwissMeteoWarningToAlertData(warning)),
 		};
+
+
 
 		const hourlyForecasts: HourlyForecastData[] = [];
 		const startTime = DateTime.fromMillis(result.graph.start);

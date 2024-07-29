@@ -17752,10 +17752,12 @@ function SwissMeteoDayToForecastData(day) {
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/swiss-meteo/payload/alerts.ts
+
+
 function SwissMeteoWarningToAlertData(warning) {
     return {
         level: SwissMeteoWarningLevelToAlertLevel(warning.warnLevel),
-        title: "",
+        title: SwissMeteoWarningTypeToTitle(warning.warnType),
         description: warning.text,
         icon: SwissMeteoWarningTypeToIcon(warning.warnType),
         sender_name: "Swiss Meteo",
@@ -17805,6 +17807,37 @@ function SwissMeteoWarningTypeToIcon(type) {
             return "flood-symbolic";
         default:
             return undefined;
+    }
+}
+function SwissMeteoWarningTypeToTitle(type) {
+    switch (type) {
+        case 0:
+            return _("Wind Warning");
+        case 1:
+            return _("Thunderstorm Warning");
+        case 2:
+            return _("Rain Warning");
+        case 3:
+            return _("Snow Warning");
+        case 4:
+            return _("Slippery Roads Warning");
+        case 5:
+            return _("Frost Warning");
+        case 6:
+            return _("Mass Movements Warning");
+        case 7:
+            return _("Heat Warning");
+        case 8:
+            return _("Avalanche Warning");
+        case 9:
+            return _("Earthquake Warning");
+        case 10:
+            return _("Forest Fire Warning");
+        case 11:
+            return _("Flood Warning");
+        default:
+            logger_Logger.Error("Unknown warning type", type);
+            return "";
     }
 }
 
@@ -17888,7 +17921,9 @@ class SwissMeteo extends BaseProvider {
                 degree: result.graph.windDirection3h[0],
             },
             forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
-            alerts: result.warnings.map(warning => SwissMeteoWarningToAlertData(warning)),
+            alerts: result.warnings.filter(x => {
+                return DateTime.fromMillis(x.validFrom) < DateTime.now() && DateTime.fromMillis(x.validTo) > DateTime.now();
+            }).map(warning => SwissMeteoWarningToAlertData(warning)),
         };
         const hourlyForecasts = [];
         const startTime = DateTime.fromMillis(result.graph.start);
