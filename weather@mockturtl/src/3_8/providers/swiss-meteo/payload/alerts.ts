@@ -25,7 +25,7 @@ export interface SwissMeteoWarning {
 	/**
 	 * Unix timestamp in milliseconds
 	 */
-	validTo: number;
+	validTo?: number;
 	ordering: string;
 	htmlText: string;
 	outlook: boolean;
