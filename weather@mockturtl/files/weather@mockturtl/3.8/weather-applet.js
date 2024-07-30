@@ -17935,7 +17935,7 @@ class SwissMeteo extends BaseProvider {
                 continue;
             }
             const hourTemp = result.graph.temperatureMean1h[i];
-            const hourPrecip = result.graph.precipitation1h[i];
+            const hourPrecip = result.graph.precipitationMax1h[i];
             const hourCondition = SwissMeteoIconToCondition(result.graph.weatherIcon3hV2[Math.floor(i / 3)]);
             hourlyForecasts.push({
                 date: currentItemTime,
