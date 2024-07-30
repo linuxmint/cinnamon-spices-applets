@@ -18169,11 +18169,20 @@ class Config {
         let loc = null;
         switch (provider.locationType) {
             case "postcode": {
-                loc = {
-                    entryText: this._location,
-                    lat: -1,
-                    lon: -1,
-                };
+                const foundLoc = this.LocStore.FindLocation(this._location);
+                if (foundLoc != null) {
+                    logger_Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
+                    this.LocStore.SwitchToLocation(foundLoc);
+                    this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
+                    loc = foundLoc;
+                }
+                else {
+                    loc = {
+                        entryText: this._location,
+                        lat: -1,
+                        lon: -1,
+                    };
+                }
                 break;
             }
             case "coordinates": {
