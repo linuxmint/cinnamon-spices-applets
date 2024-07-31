@@ -1088,14 +1088,15 @@ class Player extends PopupMenu.PopupMenuSection {
         this._cover_load_handle = 0;
         this._cover_path = null;
 
-        this.display_cover_button = new ControlButton("x-shape-image",
-            _("View cover"),
-            () => {
-                Util.spawnCommandLineAsync("xdg-open "+this._cover_path)
-            }
-        );
+        //~ this.display_cover_button = new ControlButton("image-x-generic",
+            //~ _("View cover"),
+            //~ () => {
+                //~ Util.spawnCommandLineAsync("xdg-open "+this._cover_path)
+            //~ },
+            //~ true
+        //~ );
         //~ this.coverBox.add_actor(this.display_cover_button.getActor());
-        //~ this.display_cover_button.hide();
+        //~ this.display_cover_button.getActor().show();
 
         // Track info (artist + title)
         this._artist = _("Unknown Artist");
@@ -1955,12 +1956,19 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let easy_effects = this.get_easy_effects();
+        let easy_effects = this.get_effects("Easy Effects");
         //~ log("easy_effects: "+easy_effects, true);
         if (easy_effects) {
             this.context_menu_item_easyEffects = new PopupMenu.PopupIconMenuItem(_("Easy Effects"), "easyeffects", St.IconType.SYMBOLIC);
             this.context_menu_item_easyEffects.connect("activate", async () => { Util.spawnCommandLine("%s".format(easy_effects)) });
             this._applet_context_menu.addMenuItem(this.context_menu_item_easyEffects);
+        }
+
+        let pulse_effects = this.get_effects("PulseEffects");
+        if (pulse_effects) {
+            this.context_menu_item_pulseEffects = new PopupMenu.PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", St.IconType.SYMBOLIC);
+            this.context_menu_item_pulseEffects.connect("activate", async () => { Util.spawnCommandLine("%s".format(pulse_effects)) });
+            this._applet_context_menu.addMenuItem(this.context_menu_item_pulseEffects);
         }
 
         this.mute_out_switch.connect("toggled", () => this._toggle_out_mute());
@@ -2023,7 +2031,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         dialog.open();
     }
 
-    get_easy_effects() {
+    get_effects(name) {
         var commandline = null;
         let appsys = Cinnamon.AppSystem.get_default();
         const dirs = [];
@@ -2051,7 +2059,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                                 const id = entry.get_desktop_file_id();
                                 const app = appsys.lookup_app(id);
                                 //~ log("APP NAME: "+app.get_name(), true);
-                                if (app.get_name() == "Easy Effects") {
+                                if (app.get_name() == name) {
                                     commandline = appInfo.get_commandline();
                                     break;
                                 }
