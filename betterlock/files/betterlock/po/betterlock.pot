@@ -50,6 +50,9 @@ msgstr ""
 msgid "Show notifications"
 msgstr ""
 
+msgid "Silence system notification sound"
+msgstr ""
+
 msgid "Show caps lock indicator"
 msgstr ""
 
