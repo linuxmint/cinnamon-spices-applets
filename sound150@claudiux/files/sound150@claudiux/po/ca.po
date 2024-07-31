@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-31 15:38+0200\n"
-"PO-Revision-Date: 2024-07-03 23:20+0200\n"
+"PO-Revision-Date: 2024-07-31 18:45+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -180,12 +180,11 @@ msgstr "Silenciar"
 
 #: 5.4/applet.js:1962
 msgid "Easy Effects"
-msgstr "Efectes senzills"
+msgstr "Easy Effects"
 
 #: 5.4/applet.js:1969
-#, fuzzy
 msgid "Pulse Effects"
-msgstr "Efectes senzills"
+msgstr "Pulse Effects"
 
 #: 5.4/applet.js:2013
 #, javascript-format
@@ -213,7 +212,6 @@ msgid "Install playerctl"
 msgstr "Instal·la playerctl"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Enhanced Sound applet"
 msgstr "Miniaplicació de so millorat"
 
