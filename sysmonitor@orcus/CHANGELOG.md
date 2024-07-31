@@ -1,3 +1,6 @@
+### 1.6.6
+* New default look
+
 ### 1.6.5
 * Fixed crash in network provider when glibtop failed to retrieve network interface list and a fallback method was used
 
