@@ -7,7 +7,7 @@
     "show-silent-notifications": {
         "type" : "switch",
         "default" : false,
-        "description" : "Silence system notificaiton sound"
+        "description" : "Silence system notification sound"
     },
     "show-caps-lock-indicator": {
         "type": "switch",
