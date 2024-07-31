@@ -1,11 +1,11 @@
 {
   "multiversion": true,
   "uuid": "sound150@claudiux",
-  "name": "Sound 150%",
+  "name": "Enhanced Sound applet",
   "max-instances": "1",
   "description": "Enhanced sound applet",
   "hide-configuration": false,
-  "version": "6.17.3",
+  "version": "6.18.0",
   "cinnamon-version": [
     "2.8",
     "3.0",
@@ -23,7 +23,8 @@
     "5.4",
     "5.6",
     "5.8",
-    "6.0"
+    "6.0",
+    "6.2"
   ],
   "author": "claudiux"
 }
