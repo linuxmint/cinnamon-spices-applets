@@ -110,6 +110,16 @@ FeedApplet.prototype = {
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
 
+            const menuSection = new PopupMenu.PopupMenuSection();
+            const scrollView = new St.ScrollView({
+                vscrollbar_policy: St.PolicyType.AUTOMATIC,
+                hscrollbar_policy: St.PolicyType.NEVER
+            });
+            scrollView.add_actor(menuSection.actor, { expand: true });
+            
+            this.menu.box.add_child(scrollView);
+            this.menuSection = menuSection;
+
             this.feed_file_error = false;
             this._read_json_config();
         } catch (e) {
@@ -269,7 +279,7 @@ FeedApplet.prototype = {
     _load_feeds: function(url_json) {
         this.logger.debug("FeedApplet._load_feeds");        
         this.feeds = new Array();
-        this.menu.removeAll();
+        this.menuSection.removeAll();
         let data = JSON.parse(url_json);
         let i = 0;
 
@@ -294,7 +304,7 @@ FeedApplet.prototype = {
                                     notify: data['instances'][key]['feeds'][fkey]['notify'],
                                     interval: data['instances'][key]['feeds'][fkey]['interval'] // Not currently used
                                 });
-                            this.menu.addMenuItem(this.feeds[i]);
+                            this.menuSection.addMenuItem(this.feeds[i]);
                             i++;
                         }
                     } catch (e) {
@@ -634,8 +644,8 @@ FeedDisplayMenuItem.prototype = {
                 {
                     'onUpdate' : Lang.bind(this, this.update),
                     'onError' : Lang.bind(this, this.error),
+                    'onItemRead' : Lang.bind(this, this.itemRead),
                     'onNewItem' : Lang.bind(this.owner, this.owner.new_item_notification),
-                    'onItemRead' : Lang.bind(this.owner, this.owner.item_read_notification),
                     'onDownloaded' : Lang.bind(this.owner, this.owner.process_next_feed),
                 }
             );
@@ -728,6 +738,13 @@ FeedDisplayMenuItem.prototype = {
 
         this.owner.update_title();
     },
+    
+    itemRead: function (feed) {
+        this.owner.item_read_notification(feed);
+        this.resetMenuHeight();
+        this.update();
+        this.updateMenuHeight();
+    },
 
     on_settings_changed: function(params) {
         this.max_items = params.max_items;
@@ -756,6 +773,8 @@ FeedDisplayMenuItem.prototype = {
         this.logger.debug("FeedDisplayMenuItem.open_menu id:" + this.feed_id);
 
         this.actor.add_style_class_name('feedreader-feed-selected');
+        this.updateMenuHeight();
+        
         this.menu.open(true);
         this.owner.open_menu = this;
     },
@@ -764,6 +783,17 @@ FeedDisplayMenuItem.prototype = {
         this.logger.debug("FeedDisplayMenuItem.close_menu id:" + this.feed_id);
         this.actor.remove_style_class_name('feedreader-feed-selected');
         this.menu.close(true);
+        this.resetMenuHeight();
+    },
+
+    updateMenuHeight: function () {
+        const menuActorHeight = this.menu.actor.get_height();
+        this.logger.debug("FeedApplet.updateMenuHeight: "+menuActorHeight);
+        this.menu.actor.style = "height: "+menuActorHeight+"px";
+    },
+    resetMenuHeight: function () {
+        this.logger.debug("FeedApplet.resetMenuHeight");
+        this.menu.actor.style = null;
     },
 
     _add_submenu: function(){
