@@ -622,6 +622,7 @@ The contents of the file saved from the applet help page goes here
 		"unusual payload": _("Service Error"),
 		"import error": _("Missing Packages"),
 		"location not covered": _("Location not covered"),
+		"location service blocked": _("Location Service Blocked")
 	}
 
 	public ShowError(error: AppletError): void {

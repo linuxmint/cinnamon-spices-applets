@@ -10489,6 +10489,19 @@ class GeoLocation {
         this.url = "https://nominatim.openstreetmap.org/search";
         this.params = "format=json&addressdetails=1&limit=1";
         this.cache = {};
+        this.HandleError = (error) => {
+            switch (error.ErrorData.code) {
+                case 403:
+                    ErrorHandler.Instance.PostError({
+                        type: "hard",
+                        detail: "location service blocked",
+                        message: _("Address to location lookup service is blocked. You can try to change your User-Agent in help to see if it resolves the issue.")
+                    });
+                    return false;
+                default:
+                    return true;
+            }
+        };
     }
     async GetLocation(searchText, cancellable) {
         var _a;
@@ -10501,7 +10514,8 @@ class GeoLocation {
             }
             const locationData = await HttpLib.Instance.LoadJsonSimple({
                 url: `${this.url}?q=${searchText}&${this.params}`,
-                cancellable
+                cancellable,
+                HandleError: this.HandleError
             });
             if (locationData == null)
                 return null;
@@ -20374,6 +20388,7 @@ class WeatherApplet extends TextIconApplet {
             "unusual payload": _("Service Error"),
             "import error": _("Missing Packages"),
             "location not covered": _("Location not covered"),
+            "location service blocked": _("Location Service Blocked")
         };
         this.metadata = metadata;
         this.AppletDir = metadata.path;

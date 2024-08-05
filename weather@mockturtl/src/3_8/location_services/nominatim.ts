@@ -1,7 +1,7 @@
 import { Logger } from "../lib/services/logger";
 import type { LocationServiceResult } from "../types";
 import { _ } from "../utils";
-import { HttpLib } from "../lib/httpLib";
+import { HttpLib, type ErrorResponse } from "../lib/httpLib";
 import { ErrorHandler } from "../lib/services/error_handler";
 
 interface NominatimLocationItem {
@@ -56,7 +56,8 @@ export class GeoLocation {
 
 			const locationData = await HttpLib.Instance.LoadJsonSimple<NominatimResponse>({
 				url: `${this.url}?q=${searchText}&${this.params}`,
-				cancellable
+				cancellable,
+				HandleError: this.HandleError
 			});
 
 			if (locationData == null)
@@ -89,6 +90,20 @@ export class GeoLocation {
 				message: _("Failed to call Geolocation API, see Looking Glass for errors.")
 			})
 			return null;
+		}
+	}
+
+	private HandleError = (error: ErrorResponse<unknown>): boolean => {
+		switch (error.ErrorData.code) {
+			case 403:
+				ErrorHandler.Instance.PostError({
+					type: "hard",
+					detail: "location service blocked",
+					message: _("Address to location lookup service is blocked. You can try to change your User-Agent in help to see if it resolves the issue.")
+				})
+				return false;
+			default:
+				return true;
 		}
 	}
 

@@ -90,7 +90,7 @@ export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
 	"location not found" | "no network response" | "no api response" | "location not covered" |
 	"bad api response - non json" | "bad api response" | "no response body" |
-	"no response data" | "unusual payload" | "key blocked" | "unknown" | "bad status code" | "import error";
+	"no response data" | "unusual payload" | "key blocked" | "unknown" | "bad status code" | "import error" | "location service blocked";
 export type NiceErrorDetail = {
 	[key in ErrorDetail]: string;
 }
