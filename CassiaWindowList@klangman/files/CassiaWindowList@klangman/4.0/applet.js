@@ -1477,6 +1477,7 @@ class WindowListButton {
     this._signalManager.connect(this.actor, "button-press-event", this._onButtonPress, this);
     this._signalManager.connect(this.actor, "button-release-event", this._onButtonRelease, this);
     this._signalManager.connect(this.actor, "scroll-event", this._onScrollEvent, this);
+    this._signalManager.connect(this.actor, "notify::allocation", this._allocationChanged, this);
     this._signalManager.connect(this._settings, "changed::caption-type", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::hide-caption-for-minimized", this._updateLabel, this);
@@ -1511,6 +1512,16 @@ class WindowListButton {
     this.isDraggableApp = true;
     this._updateNumber();
     this._updateSpacing();
+  }
+
+  _allocationChanged(box) {
+     // Update the icon location so Cinnamon's minimize/restore animation can work correctly
+     if (this._currentWindow && this._settings.getValue("group-windows")!==GroupType.Launcher) {
+        const rect = new Meta.Rectangle();
+        [rect.x, rect.y] = this._icon.get_transformed_position();
+        [rect.width, rect.height] = this._icon.get_transformed_size();
+        this._currentWindow.set_icon_geometry(rect);
+     }
   }
 
   // Sort this._windows by workspace and monitor
@@ -1903,7 +1914,7 @@ class WindowListButton {
   updateIcon() {
     let panelHeight = this._applet._panelHeight;
 
-    this.iconSize = this._applet.getPanelIconSize(St.IconType.FULLCOLOR) -2;
+    this.iconSize = this._applet.getPanelIconSize(St.IconType.FULLCOLOR);
 
     let icon = null;
 
@@ -3799,9 +3810,9 @@ class Workspace {
 
     // Expand the pinned-apps array if required
     let pinSetting = this._settings.getValue("pinned-apps");
-    if (pinSetting.length < wsNum) {
+    while (pinSetting.length <= wsNum) {
+      pinSetting.push([]);
       let newSetting = pinSetting.slice();
-      newSetting.push([]);
       this._settings.setValue("pinned-apps", newSetting);
     }
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.2
+
+* Enable Cinnamon restore/minimize animation by setting window icon geometry
+* Fix (hopefully) an exception seen opening a context menu under Mint 22
+* Fix blurry icons caused by not respecting the panel setting colored icon size
+
 ## 2.3.1
 
 * Added a window-list button context menu item to toggle the "Always on top" window state
