@@ -13239,7 +13239,7 @@ class ClimacellV4 extends BaseProvider {
         for (const element of daily) {
             const date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
             days.push({
-                condition: this.ResolveCondition(element.values.weatherCode, IsNight({ sunrise, sunset }, date)),
+                condition: this.ResolveCondition(element.values.weatherCode, false),
                 date,
                 temp_max: CelsiusToKelvin(element.values.temperatureMax),
                 temp_min: CelsiusToKelvin(element.values.temperatureMin)
