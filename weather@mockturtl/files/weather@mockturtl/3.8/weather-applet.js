@@ -13113,6 +13113,7 @@ class Weatherbit extends BaseProvider {
 
 
 
+
 class ClimacellV4 extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -13174,6 +13175,8 @@ class ClimacellV4 extends BaseProvider {
             return null;
         const alerts = [];
         for (const alert of response.data.events) {
+            if (!PointInsidePolygon([loc.lon, loc.lat], alert.eventValues.location.coordinates[0]))
+                continue;
             alerts.push({
                 title: (_a = alert.eventValues.headline) !== null && _a !== void 0 ? _a : alert.eventValues.title,
                 description: `${alert.eventValues.description}\n\n${(_d = (_c = (_b = alert.eventValues.response) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.instruction) !== null && _d !== void 0 ? _d : ""}`,

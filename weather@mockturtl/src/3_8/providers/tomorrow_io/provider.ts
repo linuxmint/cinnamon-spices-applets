@@ -8,6 +8,7 @@ import { BaseProvider } from "../BaseProvider";
 import type { TomorrowIoAlertsResponse } from "./alerts";
 import type { LocationData } from "../../types";
 import { ErrorHandler } from "../../lib/services/error_handler";
+import { PointInsidePolygon } from "../../lib/polygons";
 
 export class ClimacellV4 extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
@@ -79,6 +80,9 @@ export class ClimacellV4 extends BaseProvider {
 
 		const alerts: AlertData[] = [];
 		for (const alert of response.data.events) {
+			if (!PointInsidePolygon([loc.lon, loc.lat], alert.eventValues.location.coordinates[0]))
+				continue;
+
 			alerts.push({
 				title: alert.eventValues.headline ?? alert.eventValues.title,
 				description: `${alert.eventValues.description}\n\n${alert.eventValues.response?.[0]?.instruction ?? ""}`,
