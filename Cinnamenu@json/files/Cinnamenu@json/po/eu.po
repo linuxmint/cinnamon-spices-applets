@@ -1,0 +1,1043 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2024-08-06 19:06-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+msgid "Initializing"
+msgstr "Hasieratzen"
+
+msgid "Find files..."
+msgstr "Bilatu fitxategiak..."
+
+msgid "Please wait..."
+msgstr "Itxaron..."
+
+msgid "Applications"
+msgstr "Aplikazioak"
+
+msgid "Documents"
+msgstr "Dokumentuak"
+
+msgid "Videos"
+msgstr "Bideoak"
+
+msgid "Images"
+msgstr "Irudiak"
+
+msgid "Music"
+msgstr "Musika"
+
+msgid "No recent Items"
+msgstr "Ez dago duela gutxiko elementurik"
+
+msgid "Settings"
+msgstr "Ezarpenak"
+
+msgid "Click to copy"
+msgstr "Egin klik kopiatzeko"
+
+msgid "Applications and files"
+msgstr "Aplikazioak eta fitxategiak"
+
+msgid "Other search results"
+msgstr "Bilaketaren beste emaitzak"
+
+msgid "Browser bookmarks"
+msgstr "Nabigatzailearen laster-markak"
+
+msgid "Browser history"
+msgstr "Nabigatzailearen historia"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Clear List"
+msgstr "Garbitu zerrenda"
+
+msgid "Trash"
+msgstr "Paperontzia"
+
+msgid "Computer"
+msgstr "Ordenagailua"
+
+msgid "Error while opening file:"
+msgstr "Errorea fitxategia irekitzean:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Sarrera gehiegi: bakarrik erakusten dira aurreneko 1.000 sarrera"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Aplikazio guztiak"
+
+msgid "Favorites"
+msgstr "Gogokoak"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Lekuak"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Azkenak"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Gogoko aplikazioak"
+
+msgid "light skin tone"
+msgstr "azal kolore argia"
+
+msgid "medium-light skin tone"
+msgstr "azal kolore argi-tartekoa"
+
+msgid "medium skin tone"
+msgstr "azal kolore tartekoa"
+
+msgid "medium-dark skin tone"
+msgstr "azal kolore ilun-tartekoa"
+
+msgid "dark skin tone"
+msgstr "azal kolore iluna"
+
+msgid "Remove category"
+msgstr "Kendu kategoria"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Berrezarri kategorien ordena"
+
+msgid "List settings apps separately"
+msgstr "Zerrendatu ezarpen-aplikazioak bereizita"
+
+msgid "Single list style"
+msgstr "Zerrenda bakarreko estiloa"
+
+msgid "Hide hidden files"
+msgstr "Ezkutatu ezkutuko fitxategiak"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Erakutsi ezkutuko fitxategiak"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Exekutatu NVIDIAren GPUz"
+
+msgid "Add to panel"
+msgstr "Gehitu panelera"
+
+msgid "Add to desktop"
+msgstr "Gehitu mahaigainera"
+
+msgid "Remove from favorites"
+msgstr "Kendu gogokoetatik"
+
+msgid "Add to favorites"
+msgstr "Gehitu gogokoetara"
+
+msgid "Uninstall"
+msgstr "Desinstalatu"
+
+msgid "App Info"
+msgstr "Aplikazioaren informazioa"
+
+msgid "This file is no longer available"
+msgstr "Fitxategi hau jada ez dago erabilgarri"
+
+msgid "Open with"
+msgstr "Ireki honekin"
+
+msgid "Other application..."
+msgstr "Beste aplikazioa..."
+
+msgid "Add folder as category"
+msgstr "Gehitu karpeta kategoria gisa"
+
+msgid "Open containing folder"
+msgstr "Ireki dagoen karpeta"
+
+msgid "Move to trash"
+msgstr "Mugitu paperontzira"
+
+msgid "Error while moving file to trash:"
+msgstr "Errorea paperontzira mugitzean:"
+
+msgid "Smileys & Emotion"
+msgstr "Irriñoak eta emojiak"
+
+msgid "People & Body"
+msgstr "Jendea eta gorputza"
+
+msgid "Animals & Nature"
+msgstr "Animaliak eta natura"
+
+msgid "Food & Drink"
+msgstr "Janariak eta edariak"
+
+msgid "Travel & Places"
+msgstr "Bidaiak eta lekuak"
+
+msgid "Activities"
+msgstr "Ekintzak"
+
+msgid "Objects"
+msgstr "Objektuak"
+
+msgid "Symbols"
+msgstr "Ikurrak"
+
+msgid "Flags"
+msgstr "Banderak"
+
+msgid "Quit"
+msgstr "Irten"
+
+msgid "Shutdown the computer"
+msgstr "Itzali ordenagailua"
+
+msgid "Logout"
+msgstr "Itxi saioa"
+
+msgid "Leave the session"
+msgstr "Utzi saioa"
+
+msgid "Lock screen"
+msgstr "Blokeatu pantaila"
+
+msgid "Lock the screen"
+msgstr "Blokeatu pantaila"
+
+msgid "Type to search..."
+msgstr "Idatzi bilatzeko..."
+
+msgid "No description available"
+msgstr "Deskribapenik ez"
+
+msgid "Recent files"
+msgstr "Azken fitxategiak"
+
+msgid "Bookmarks"
+msgstr "Laster-markak"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"gir1.2-gda-5.0 paketea beharrezkoa da Firefox eta Midoriren laster-"
+"marketarako."
+
+msgid "No recent files"
+msgstr "Ez dago duela gutxiko fitxategirik"
+
+msgid "Account details"
+msgstr "Kontuaren xehetasunak"
+
+msgid "Grid View"
+msgstr "Sareta ikuspegia"
+
+msgid "List View"
+msgstr "Zerrenda ikuspegia"
+
+msgid "Switch to grid view"
+msgstr "Aldatu sareta ikuspegira"
+
+msgid "Switch to list view"
+msgstr "Aldatu zerrenda ikuspegira"
+
+msgid "Home"
+msgstr "Karpeta nagusia"
+
+msgid "Browse network"
+msgstr "Bilatu sarean"
+
+msgid "Open"
+msgstr "Ireki"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Bilatu"
+
+msgid "Start in"
+msgstr "Hasi hemen"
+
+msgid "Select a folder"
+msgstr "Hautatu karpeta bat"
+
+msgid "Follow symlinks"
+msgstr "Jarraitu esteka sinbolikoak"
+
+msgid "Search hidden"
+msgstr "Bilatu ezkutuko fitxategiak"
+
+msgid "Use regular expressions"
+msgstr "Erabili adierazpen erregularrak"
+
+msgid "Stop"
+msgstr "Gelditu"
+
+msgid "File"
+msgstr "Fitxategia"
+
+msgid "Path"
+msgstr "Bidea"
+
+msgid "Searching..."
+msgstr "Bilatzen..."
+
+msgid "Search Stopped"
+msgstr "Bilaketa geldituta"
+
+msgid "Searching: "
+msgstr "Bilatzen: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Errorea: baimen nahikorik ez karpeta irakurtzeko "
+
+msgid "Search Completed"
+msgstr "Burutu da bilaketa"
+
+msgid "Skipping"
+msgstr "Salto egin"
+
+msgid " - directory already searched"
+msgstr " - directorioa jadanik bilatu da"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Menuko elementu hau ez dago inolako paketerekin asoziatuta. Nahi duzu "
+"menutik kentzea hala ere?"
+
+msgid "The following packages will be removed:"
+msgstr "Hurrengo paketeak kenduko dira:"
+
+msgid "Packages to be removed"
+msgstr "Kendu beharreko paketeak"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Ezin da %s paketea kendu beste pakete batek behar duelako."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "%s pakete hau hurrengo paketeek behar dute:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Menu malgu bat sareta edo zerrenda aukeran dituena, fitxategien arakatzailea "
+"eta emojien bilaketa duena."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Diseinua"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Portaera"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Itxura"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr "Aholikuak"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Edukia"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Panela"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Menua"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Aaplikazioak begi bistan modua"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Zerrenda"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Sareta"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Aplikazioak zerrenda edo sareta gisa ikusi"
+
+#. 5.8
+#. 4.0
+msgid "Show sidebar"
+msgstr "Erakutsi alboko panela"
+
+#. 5.8
+#. 4.0
+msgid "Show the sidebar in the menu"
+msgstr "Erakutsi alboko barra menuan"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Alboko panelaren kokapena"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Goian"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Behean"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Ezkerrean"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "Eskuinean"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Aukeratu non ikusi alboko panela"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Erakutsi gogokoak alboko panelean"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Bat ere ez"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr "Aplikazioak bakarrik"
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr "Fitxategiak bakarrik"
+
+#. 5.8
+#. 4.0
+msgid "Apps and files"
+msgstr "Aplikazioak eta fitxategiak"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+"Erakutsi zure gogoko aplikazioen eta fitxategien ikonoak alboko panelean"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Aplikazioaren deskribapenaren kokapena"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Sagua gainean jartzean"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Izenaren azpian"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Aukeratu non erakutsi aplikazioen deskribapena"
+
+#. 5.8
+#. 4.0
+msgid "Show categories"
+msgstr "Erakutsi kategoriak"
+
+#. 5.8
+#. 4.0
+msgid "Show list of application categories"
+msgstr "Erakutsi aplikazioen kategorien zerrenda"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Erakutsi Lekuak eta Laster-markak"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Erakutsi Laster-markak eta lekuen kategoria menuan"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Erakutsi duela gutxiko elementuak"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Erakutsi duela gutxiko elementuen kategoria menuan"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Erakutsi gogoko aplikazioen kategoria"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Erakutsi gogoko aplikazioen kategoria menuan"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Erakutsi karpeta nagusia"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Erakutsi karpeta nagusiaren kategoria menuan"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category"
+msgstr "Erakutsi Emoji kategoria"
+
+#. 5.8
+#. 4.0
+msgid "Show emoji category in the menu"
+msgstr "Erakutsi Emoji kategoria menuan"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Ireki menuaren editorea"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Menua ireki eta ixteko laster-tekla"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Ireki menua sagua gainetik pasatzean"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Ireki menua sagua paneleko ikonoaren gainetik pasatzean"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "milisegundo"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Atzerapen denbora"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Erabili animazioak menuan"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Animatu menua ireki eta ixtean"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Aktibatu kategoriak klik egitean"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktibatu kategorak klik egitean sagua gainetik pasatzearen ordez"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Ireki menua kategoria honetan:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Ireki beti menua hautatutako kategoria honekin"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Erabilitako azken kategoria"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Gaitu korritze automatikoa"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+"Aktibatzen du aplikazioen zerrendaren korritzea sagua gainetik pasatzean"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Erakutsi ezkutuko fitxategiak karpeta ikuspegian"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Emojien bilaketa"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Erakutsi emojiak bileketaren emaitzetan"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Webean bilatzeko aukera"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Erakutsi Interneten bilatzeko aukera emaitzetan"
+
+#. 5.8
+#. 4.0
+msgid "Web search suggestions"
+msgstr "Interneteko bilaketaren iradokizunak"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Interneteko bilaketaren aukerarekin, bilaketa iradokizunak ere erakusten "
+"dira. (Oharra:  DuckDuckGo-ren bilaketarako APIa erabiltzen du)"
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Bilatu karpeta nagusian"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Bilatzean, bilatu ere karpeta nagusiko fitxategietan"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Interneteko bilaketaren historia"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Bilatzean, bilatu ere nagigatzailearen historian (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Oharra:  Firefoxen historia oraindik ez da onartzen."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Web laster-marken bilaketa"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Bilatzerakoan, bilatu nire nabigatzailearen web-marketan ere (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\\n\n"
+"Oharra: Firefox laster-markak bilatzeko gir1.2-gda-5.0 paketea (Debian "
+"oinarritutako banaketak barne Ubuntu eta Linux Mint) edo libgda paketea "
+"(Arch oinarritutako banaketak) instalatu eta ordenagailua berrabiarazi "
+"beharko duzu."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Wikipediako bilaketa"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Erakutsi Wikipediako emaitzak"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Wikipediaren hizkuntza"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Oharra: bilaketa-aukera batzuk erabil daitezke, nahiz eta hemen gaitu ez "
+"dituzun zure bilaketa-terminoaren aurrizkia jarriz.\\n\n"
+"Adibidez: emoji bat bilatzeko, idatzi 'e heart' bihotz-emojiak aurkitzeko. "
+"Era berean, erabili 'f ' aurrizkiak fitxategiak bilatzeko, 'h' web-"
+"historiarako eta 'b' web-marken bilaketarako.\\n\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Erabili ikono pertsonalizatua"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Erabili ikono pertsonalizatua panelean"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Paneleko ikonoa"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Erabili ikono tamaina pertsonalizatua"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Erabii tamaina pertsonalizatua paneleko ikonoarentzat"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Paneleko ikonoaren tamaina (pixel)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Aukeratu tamaina pertsonalizatua paneleko ikonoarentzat"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Paneleko testua"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Panelean ikonoaren ondoan erakutsi beharreko testua"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Kategorien ikonoen tamaina (pixel)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Zerrendako aplikazioen ikonoen tamaina (pixel)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Saretako aplikazioen ikonoen tamaina (pixel)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Alboko panelaren ikonoen tamaina (pixel)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Erabili alboko panelaren kutxa estiloa"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Erabili alboko panelaren kutxa estiloa"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Erabili fitxa estiloa"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Erabili fitxa-estiloa aplikazioaren botoietarako (Oharra: baliteke gai "
+"batzuetan ez funtzionatzea)"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Arrastatu menuaren ertzean menuaren tamaina aldatzeko."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Arrastatu eta jaregin menu kategoriak haien ordena aldatzeko."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Karpetak menu-kategoria gisa konfiguratu eta kendu daitezke eskuineko "
+"botoiarekin klik eginez."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Gako-aukera gehigarriak:\\n\n"
+"ctrl-p — Ireki unean nabarmendutako aplikazioaren abiarazlearen propietateen "
+"elkarrizketa.\\n\n"
+"ctrl-d — Ireki unean nabarmendutako aplikazioaren .desktop fitxategia testu-"
+"editore lehenetsian.\\n\n"
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Bilaketa-motoreak"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Ez da aurkitu bilaketa-motorearen luzapenik"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Azken fitxategien ezarpenak"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Gaitu korritze automatikoa aplikazioen zerrendan"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Erakutsi web laster-markak"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Erakutsi zure nagigatzailearen web-markak menuan.\\n\n"
+"Oharra: instalatu gir1.2-gda-5.0 paketea firefox laster-markak irakurtzeko."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Aktibatu irekitako leihoen bilaketa"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Aktibatu bilaketaren motoreak"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "Sartu bilaketa-motoreen emaitzak bilaketetan"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Bilaketa motoreen adibidea"
+
+#. 3.2
+msgid "columns"
+msgstr "zutabeak"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Zutabe kopurua aplikazioen saretan"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Erakutsi aplikazioen ikonoak"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Erakutsi kategorien ikonoak"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Erakutsi aplikazioen deskribapenak izenburuen azpian"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Erakutsi aholkuak"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Aholkuen atzerapen denbora"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Erabili menuaren altuera pertsonalizatua"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Menuaren altuera pertsonalizatua (pixel)"
