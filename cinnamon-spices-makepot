@@ -148,11 +148,12 @@ def remove_po(uuid: str, _all: bool = False):
         os.remove(uuid_mo_file)
 
 
-def process_po(path_to_po: str, uuid: str) -> CapturedOutput:
+def process_po(path_to_po: str, po_info: list, uuid: str) -> CapturedOutput:
     """
     Process existing .po files and return the output
 
     @param path_to_po: The path to the .po file to process
+    @param po_info: The metadata to use for the .po file
     @param uuid: The UUID of the applet
 
     @return: A list of tuples, where the first element is the stream
@@ -162,6 +163,7 @@ def process_po(path_to_po: str, uuid: str) -> CapturedOutput:
     po_dir = str(po_path.parent)
     po_file = po_path.name
     po_lang = po_path.stem
+    name, po_author, year = po_info
 
     commands = [
         ['msguniq', '-o', po_file, po_file],
@@ -172,6 +174,14 @@ def process_po(path_to_po: str, uuid: str) -> CapturedOutput:
     output: CapturedOutput = [('stdout', f'{po_lang} ')]
     for cmd in commands:
         output.extend(get_command_output(cmd, cwd=po_dir))
+
+    with open(path_to_po, 'r+', encoding='utf-8') as po:
+        content = po.read()
+        content = content.replace('SOME DESCRIPTIVE TITLE.', name)
+        content = content.replace('FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.', f'{po_author}, {year}')
+        po.seek(0)
+        po.write(content)
+        po.truncate()
 
     return output
 
@@ -222,14 +232,24 @@ def make_pot(uuid: str) -> CapturedOutput:
 
     # Get the metadata file
     metadata_file = f'{uuid}/files/{uuid}/metadata.json'
+    metadata_found = False
+    name = ''
+    version = ''
     try:
         with open(metadata_file, encoding='utf-8') as meta:
             metadata: dict[str, Any] = json.load(meta)
-        version = str(metadata['version'])
-    except (FileNotFoundError, KeyError):
+        name = str(metadata.get('name', uuid)).upper()
+        version = str(metadata.get('version', '1.0'))
+        metadata_found = True
+    except FileNotFoundError:
+        output.append(('stdout', f'{uuid}: metadata.json not found\n'))
+
+    if metadata_found and 'name' not in metadata:
+        output.append(('stdout', f'{uuid}: name not found in metadata.json\n'))
+
+    if metadata_found and 'version' not in metadata:
         output.append(
-            ('stdout', f'{uuid}: metadata.json or version not found\n'))
-        version = '1.0'
+            ('stdout', f'{uuid}: version not found in metadata.json\n'))
 
     # Update the pot file with the metadata
     address = 'https://github.com/linuxmint/cinnamon-spices-applets/issues'
@@ -240,14 +260,53 @@ def make_pot(uuid: str) -> CapturedOutput:
                                       '-o', pot_file_path, pot_file_path],
                                      check=True))
 
+    # Update the pot file header with the additional metadata
+    info_file = f'{uuid}/info.json'
+    original_author = ''
+    author = ''
+    git_author = ''
+    year = 2016
+    try:
+        with open(info_file, encoding='utf-8') as info:
+            info: dict[str, Any] = json.load(info)
+        original_author = str(info.get('original_author', ''))
+        author = str(info.get('author', ''))
+    except FileNotFoundError:
+        pass
+
+    try:
+        result = subprocess.run(['git', 'log', '--follow', '--format=%an|%ad',
+                                '--date=format:%Y', '--reverse', '--no-merges',
+                                 str(folder)], capture_output=True, check=True,
+                                text=True)
+        git_author, year = result.stdout.strip().splitlines()[0].split('|')
+    except subprocess.CalledProcessError:
+        pass
+
+    for po_author in [original_author, author, git_author]:
+        if po_author and po_author != 'none':
+            break
+
+    with open(pot_file_path, 'r+', encoding='utf-8') as po:
+        content = po.read()
+        content = content.replace('SOME DESCRIPTIVE TITLE.', name)
+        content = content.replace('FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.', f'{po_author}, {year}')
+        content = content.replace('YEAR-MO-DA HO:MI+ZONE', '')
+        content = content.replace('FULL NAME <EMAIL@ADDRESS>', '')
+        content = content.replace('LANGUAGE <LL@li.org>', '')
+        po.seek(0)
+        po.write(content)
+        po.truncate()
+
     # Process the po files
     glob_path = f'{output_dir}/**/*.po'
     po_list = glob(glob_path, recursive=True)
+    po_info = [name, po_author, year]
     for po_file in po_list:
         os.chmod(po_file, 0o0644)
 
     with ProcessPoolExecutor() as executor:
-        for lines in executor.map(process_po, po_list, [uuid] * len(po_list)):
+        for lines in executor.map(process_po, po_list, [po_info] * len(po_list), [uuid] * len(po_list)):
             output += lines
 
     return output
