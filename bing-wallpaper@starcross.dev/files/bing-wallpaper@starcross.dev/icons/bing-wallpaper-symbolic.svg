@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -7,53 +9,73 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="24"
-   height="24"
-   viewBox="0 0 24 24"
+   width="128"
+   height="128"
+   id="svg2"
    version="1.1"
-   id="svg65"
-   sodipodi:docname="bing-wallpaper-symbolic.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="bing.svg"
+   inkscape:export-filename="/home/giulio/Scaricati/bing.svg.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.28574218"
+     inkscape:cx="360.85355"
+     inkscape:cy="487.41923"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-left="0"
+     fit-margin-bottom="0"
+     fit-margin-top="0"
+     fit-margin-right="0"
+     inkscape:window-width="1307"
+     inkscape:window-height="704"
+     inkscape:window-x="59"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2996"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="226.45871"
+       originy="5.9950575"
+       spacingx="1.0666667"
+       spacingy="1.0666667" />
+  </sodipodi:namedview>
   <metadata
-     id="metadata71">
+     id="metadata7">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs69" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1600"
-     inkscape:window-height="842"
-     id="namedview67"
-     showgrid="false"
-     inkscape:zoom="19.666667"
-     inkscape:cx="14.14577"
-     inkscape:cy="11.897278"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg65"
-     inkscape:document-rotation="0"
-     inkscape:pagecheckerboard="true"
-     inkscape:snap-bbox="true"
-     inkscape:snap-page="true" />
-  <path
-     style="fill:#cccccc;fill-opacity:1;stroke-width:0.11094"
-     d="M 14.181818,5.4545456 10.090909,10.90909 13.2,15.054545 11.454545,16.363636 C 9.6109091,13.90909 6.5454545,9.8181818 6.5454545,9.8181818 L 0,18.545454 h 24 z"
-     id="path63" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(226.45871,-1000.5147)">
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.06666672"
+       d="m -207.22508,1000.5147 25.56889,8.995 0,90.0025 36.01496,-20.7906 -17.65737,-8.2848 -11.13975,-27.7264 56.74602,19.9359 0,28.9836 -63.94928,36.8848 -25.58347,-14.2309 z"
+       id="path2998"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccc" />
+  </g>
 </svg>
