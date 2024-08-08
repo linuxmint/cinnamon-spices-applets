@@ -1,51 +1,78 @@
 {
-    "layout" : {
-        "type" : "layout",
-        "pages" : ["panel"],
-        "panel" : {
-            "type" : "page",
-            "title" : "Cinnamon Vantage settings",
-            "sections" : ["fnLock-section","winkey-section","touchpad-section","conservationMode-section","rapidCharge-section","usbCharging-section","overdrive-section","gsync-section"]
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "panel"
+        ],
+        "panel": {
+            "type": "page",
+            "title": "Cinnamon Vantage settings",
+            "sections": [
+                "fnLock-section",
+                "winkey-section",
+                "touchpad-section",
+                "conservationMode-section",
+                "rapidCharge-section",
+                "usbCharging-section",
+                "overdrive-section",
+                "gsync-section"
+            ]
         },
         "fnLock-section": {
             "type": "section",
-            "title" : "Fn Lock",
-            "keys": ["fnLock"]
+            "title": "Fn Lock",
+            "keys": [
+                "fnLock"
+            ]
         },
         "winkey-section": {
             "type": "section",
-            "title" : "Super key",
-            "keys": ["winkey"]
+            "title": "Super key",
+            "keys": [
+                "winkey"
+            ]
         },
         "touchpad-section": {
             "type": "section",
-            "title" : "Touchpad",
-            "keys": ["touchpad"]
+            "title": "Touchpad",
+            "keys": [
+                "touchpad"
+            ]
         },
         "conservationMode-section": {
             "type": "section",
-            "title" : "Battery conservation mode",
-            "keys": ["conservationMode"]
+            "title": "Battery conservation mode",
+            "keys": [
+                "conservationMode"
+            ]
         },
         "rapidCharge-section": {
             "type": "section",
-            "title" : "Battery fast charge mode",
-            "keys": ["rapidCharge"]
+            "title": "Battery fast charge mode",
+            "keys": [
+                "rapidCharge"
+            ]
         },
         "usbCharging-section": {
             "type": "section",
-            "title" : "Alway On USB",
-            "keys": ["usbCharging"]
+            "title": "Alway On USB",
+            "keys": [
+                "usbCharging"
+            ]
         },
         "overdrive-section": {
             "type": "section",
-            "title" : "Display Overdrive",
-            "keys": ["overdrive"]
+            "title": "Display Overdrive",
+            "keys": [
+                "overdrive"
+            ]
         },
         "gsync-section": {
             "type": "section",
-            "title" : "Hybrid graphics mode",
-            "keys": ["gsync"]
+            "title": "Hybrid graphics mode",
+            "keys": [
+                "gsync"
+            ]
         }
     },
     "fnLock": {
