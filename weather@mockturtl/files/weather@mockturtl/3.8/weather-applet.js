@@ -19481,6 +19481,7 @@ class UIHourlyForecasts {
         this.OnShortHourlyTimeChanged = (config, shortTime, data) => {
             this.Display(data.hourlyForecasts, config, data.location.timeZone);
         };
+        this.originalStyle = undefined;
         this.OnPaint = (owner) => {
             var _a, _b;
             if (this.availableWidth == null)
@@ -19629,6 +19630,7 @@ class UIHourlyForecasts {
         hscroll.get_adjustment().set_value(0);
     }
     async Show(width, animate = true) {
+        var _a;
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth(width);
@@ -19636,8 +19638,10 @@ class UIHourlyForecasts {
         if (naturalHeight == null)
             return;
         logger_Logger.Debug(`hourlyScrollView requested height and is set to: ${naturalHeight}. Original style is ${this.actor.style}`);
+        if (this.originalStyle === undefined)
+            this.originalStyle = this.actor.style;
         this.actor.show();
-        this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
+        this.actor.style = ((_a = this.originalStyle) !== null && _a !== void 0 ? _a : "") + "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
         return new Promise((resolve) => {
             if (naturalHeight == null)
@@ -19669,7 +19673,11 @@ class UIHourlyForecasts {
                     time: 0.25,
                     onComplete: () => {
                         this.actor.set_height(-1);
-                        this.actor.style = "";
+                        if (this.originalStyle !== undefined) {
+                            this.actor.style = this.originalStyle;
+                            this.originalStyle = undefined;
+                            logger_Logger.Debug("Hourly box original style is restored to: " + this.actor.style);
+                        }
                         this.actor.hide();
                         this.ResetScroll();
                         resolve();
@@ -19677,8 +19685,12 @@ class UIHourlyForecasts {
                 });
             }
             else {
-                this.actor.style = "";
                 this.actor.set_height(-1);
+                if (this.originalStyle !== undefined) {
+                    this.actor.style = this.originalStyle;
+                    this.originalStyle = undefined;
+                    logger_Logger.Debug("Hourly box original style is restored to: " + this.actor.style);
+                }
                 this.ResetScroll();
                 this.actor.hide();
                 resolve();

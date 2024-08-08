@@ -192,6 +192,7 @@ export class UIHourlyForecasts {
 		hscroll.get_adjustment().set_value(0);
 	}
 
+	private originalStyle: string | null | undefined = undefined;
 	public async Show(width: number, animate: boolean = true): Promise<void> {
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
@@ -206,19 +207,23 @@ export class UIHourlyForecasts {
 			return;
 
 		Logger.Debug(`hourlyScrollView requested height and is set to: ${naturalHeight}. Original style is ${this.actor.style}`);
+		if (this.originalStyle === undefined)
+			this.originalStyle = this.actor.style;
+
 		this.actor.show();
 		// When the scrollView is shown without animation and there is not enough vertical space
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
 		// each other.
 		// setting the min-height forces to draw with the view's requested height without
 		// interfering with animations.
-		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
+		this.actor.style = (this.originalStyle ?? "") + "min-height: " + naturalHeight.toString() + "px;";
 		this.hourlyToggled = true;
 		return new Promise((resolve) => {
 			if (naturalHeight == null)
 				return;
 
 			const height = naturalHeight;
+			// TODO: This should respect the global setting of effects too
 			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				this.actor.height = 0;
 				addTween(this.actor,
@@ -243,6 +248,7 @@ export class UIHourlyForecasts {
 	public async Hide(animate: boolean = true): Promise<void> {
 		this.hourlyToggled = false;
 		return new Promise((resolve) => {
+			// TODO: This should respect the global setting of effects too
 			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				// TODO: eliminate Clutter Warnings on collapse in logs
 				addTween(this.actor,
@@ -255,7 +261,11 @@ export class UIHourlyForecasts {
 							// we get issues with integer scaling
 							// when we request preferred height again
 							// See Issue : https://github.com/linuxmint/cinnamon-spices-applets/issues/3787
-							this.actor.style = "";
+							if (this.originalStyle !== undefined) {
+								this.actor.style = this.originalStyle as string;
+								this.originalStyle = undefined;
+								Logger.Debug("Hourly box original style is restored to: " + this.actor.style);
+							}
 							this.actor.hide();
 							// Scroll back to the start
 							this.ResetScroll();
@@ -265,8 +275,12 @@ export class UIHourlyForecasts {
 				);
 			}
 			else {
-				this.actor.style = "";
 				this.actor.set_height(-1);
+				if (this.originalStyle !== undefined) {
+					this.actor.style = this.originalStyle as string;
+					this.originalStyle = undefined;
+					Logger.Debug("Hourly box original style is restored to: " + this.actor.style);
+				}
 				this.ResetScroll();
 				this.actor.hide();
 				resolve();
