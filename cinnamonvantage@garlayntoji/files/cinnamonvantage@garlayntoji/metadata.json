@@ -2,6 +2,5 @@
     "uuid": "cinnamonvantage@garlayntoji",
     "name": "Cinnamon Vantage",
     "description": "Displays information and togglables about Lenovo Legion hardware",
-    "icon": "cinnamon",
     "max-instances": "-1"
 }

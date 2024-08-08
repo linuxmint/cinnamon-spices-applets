@@ -15,11 +15,9 @@ const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
+const MessageTray = imports.ui.messageTray;
 
 const UUID = "cinnamonvantage@garlayntoji";
-
-// Icon location
-const ICON_PATH = GLib.get_home_dir() + '/.local/share/cinnamon/applets/cinnamonvantage@garlayntoji/icon.png';
 
 // Schema keys
 const FN_LOCK = 'fnLock';
@@ -43,6 +41,13 @@ const FILE_PATHS = {
     [GSYNC]: "/sys/bus/platform/drivers/legion/PNP0C09:00/gsync"
 };
 
+const Gettext = imports.gettext;
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+  }
+
 // Define Applet and Applet settings
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this.settings = new Settings.AppletSettings(this, UUID, instanceId);
@@ -57,7 +62,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         try {
-            this.set_applet_icon_symbolic_path(ICON_PATH);
+            this.set_applet_icon_symbolic_name("legion-white");
             this.set_applet_tooltip(_("Cinnamon Vantage"));
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -238,9 +243,20 @@ MyApplet.prototype = {
     },
 
     _showRestartNotification: function() {
-        let command = `notify-send "CinnamonVantage: system reboot required" "A system reboot is required for this change to take effect."`
-        Util.spawnCommandLineAsync(command)
+        try {
+            let notification = new MessageTray.Notification(
+                new MessageTray.Source(_("CinnamonVantage"), "legion-white"),
+                _("System reboot required"),
+                _("A system reboot is required for this change to take effect.")
+            );
+            notification.setTransient(true);  // This makes the notification auto-dismiss after a short time
+            Main.messageTray.add(notification);
+            notification.show();
+        } catch (e) {
+            globalThis.logError(`Error showing restart notification: ${e}`);
+        }
     }
+    
 };
 
 // Initialize applet
