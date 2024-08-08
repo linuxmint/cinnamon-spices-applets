@@ -19635,7 +19635,7 @@ class UIHourlyForecasts {
         const [, naturalHeight] = this.actor.get_preferred_height(width);
         if (naturalHeight == null)
             return;
-        logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+        logger_Logger.Debug(`hourlyScrollView requested height and is set to: ${naturalHeight}. Original style is ${this.actor.style}`);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;

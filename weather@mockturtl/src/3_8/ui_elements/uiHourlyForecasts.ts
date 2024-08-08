@@ -205,7 +205,7 @@ export class UIHourlyForecasts {
 		if (naturalHeight == null)
 			return;
 
-		Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+		Logger.Debug(`hourlyScrollView requested height and is set to: ${naturalHeight}. Original style is ${this.actor.style}`);
 		this.actor.show();
 		// When the scrollView is shown without animation and there is not enough vertical space
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
