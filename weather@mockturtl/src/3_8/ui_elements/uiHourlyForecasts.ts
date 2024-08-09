@@ -287,7 +287,7 @@ export class UIHourlyForecasts {
 	}
 
 	private get AnimateEnabled(): boolean {
-		if (CompareVersion(global.settings.get_string("cinnamon-version"), "5.4.0") < 0)
+		if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "5.4.0") < 0)
 			return global.settings.get_boolean("desktop-effects-on-menus")
 		else
 			return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
