@@ -19698,7 +19698,10 @@ class UIHourlyForecasts {
         });
     }
     get AnimateEnabled() {
-        return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
+        if (CompareVersion(global.settings.get_string("cinnamon-version"), "5.4.0") < 0)
+            return global.settings.get_boolean("desktop-effects-on-menus");
+        else
+            return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
     }
     AdjustHourlyBoxItemWidth(availableWidth) {
         var _a;

@@ -4,7 +4,7 @@ import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { Logger } from "../lib/services/logger";
 import type { WeatherApplet } from "../main";
 import type { HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
-import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName, Label } from "../utils";
+import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay, GetDayName, Label, CompareVersion } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { ScrollDirection } = imports.gi.Clutter;
@@ -287,7 +287,10 @@ export class UIHourlyForecasts {
 	}
 
 	private get AnimateEnabled(): boolean {
-		return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
+		if (CompareVersion(global.settings.get_string("cinnamon-version"), "5.4.0") < 0)
+			return global.settings.get_boolean("desktop-effects-on-menus")
+		else
+			return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
 	}
 
 	/** Sets the correct width for the hourly boxes, make
