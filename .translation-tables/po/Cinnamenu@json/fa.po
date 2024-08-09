@@ -1,0 +1,1566 @@
+# CINNAMENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# MohammadSaleh Kamyab <mskf1383@protonmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2022-05-02 12:23+0430\n"
+"Last-Translator: MohammadSaleh Kamyab <mskf1383@protonmail.com>\n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+
+#: 5.8/applet.js:59 3.2/applet.js:157 4.0/applet.js:60
+msgid "Initializing"
+msgstr "آماده‌سازی"
+
+#: 5.8/applet.js:75 4.0/applet.js:78
+msgid "Find files..."
+msgstr "یافتن پرونده‌های…"
+
+#: 5.8/applet.js:283 4.0/applet.js:281
+msgid "Please wait..."
+msgstr "لطفاً صبر کنید…"
+
+#: 5.8/applet.js:909 5.8/applet.js:1124 4.0/applet.js:884
+msgid "Applications"
+msgstr "برنامه‌ها"
+
+#: 5.8/applet.js:913 4.0/applet.js:888
+msgid "Documents"
+msgstr "اسناد"
+
+#: 5.8/applet.js:917 4.0/applet.js:892
+msgid "Videos"
+msgstr "ویدیوها"
+
+#: 5.8/applet.js:921 4.0/applet.js:896
+msgid "Images"
+msgstr "تصاویر"
+
+#: 5.8/applet.js:925 4.0/applet.js:900
+msgid "Music"
+msgstr "آهنگ‌ها"
+
+#: 5.8/applet.js:934 4.0/applet.js:909
+msgid "No recent Items"
+msgstr "مورد اخیری نیست"
+
+#: 5.8/applet.js:981 4.0/applet.js:956
+msgid "Settings"
+msgstr ""
+
+#: 5.8/applet.js:1127
+msgid "files"
+msgstr ""
+
+#: 5.8/applet.js:1130 4.0/applet.js:1097
+msgid "Other search results"
+msgstr "نتایج دیگر جست‌وجو"
+
+#: 5.8/applet.js:1133 4.0/applet.js:1100
+msgid "Browser bookmarks"
+msgstr "نشانک‌های مرورگر"
+
+#: 5.8/applet.js:1136 4.0/applet.js:1103
+msgid "Browser history"
+msgstr "تاریخچهٔ مرورگر"
+
+#: 5.8/applet.js:1139 5.8/categoriesview.js:306 4.0/applet.js:1106
+#: 4.0/categoriesview.js:305
+msgid "Emoji"
+msgstr "ایموجی"
+
+#: 5.8/applet.js:1197 5.8/applet.js:1333 5.8/applet.js:1817 4.0/applet.js:1164
+#: 4.0/applet.js:1299 4.0/applet.js:1786
+msgid "Click to copy"
+msgstr "کلیک برای رونوشت"
+
+#: 5.8/applet.js:1634 3.2/applet.js:1416 4.0/applet.js:1600
+msgid "Clear List"
+msgstr "پاک کردن سیاهه"
+
+#: 5.8/applet.js:1668 5.8/applet.js:1669 4.0/applet.js:1634 4.0/applet.js:1635
+msgid "Trash"
+msgstr "زباله‌دان"
+
+#: 5.8/applet.js:1678 5.8/applet.js:1679 3.2/placeDisplay.js:220
+#: 4.0/applet.js:1644 4.0/applet.js:1645
+msgid "Computer"
+msgstr "رایانه"
+
+#: 5.8/appsview.js:295 5.8/sidebar.js:111 4.0/appsview.js:295
+#: 4.0/sidebar.js:111
+msgid "Error while opening file:"
+msgstr "خطا هنگام گشودن پرونده:"
+
+#: 5.8/appsview.js:441 4.0/appsview.js:440
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "ورودی‌های بیش از حد - فقط نمایش ۱۰۰۰ ورودی نخست"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:284 3.2/applet.js:978 4.0/categoriesview.js:283
+msgid "All applications"
+msgstr "تمام برنامه‌ها"
+
+#: 5.8/categoriesview.js:302 4.0/categoriesview.js:301
+msgid "Favorites"
+msgstr "مورد علاقه‌ها"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:303 3.2/applet.js:1016 4.0/categoriesview.js:302
+msgid "Places"
+msgstr "مکان‌ها"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:304 4.0/categoriesview.js:303
+msgid "Recent"
+msgstr "اخیر"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:305 3.2/applet.js:1019 4.0/categoriesview.js:304
+msgid "Favorite apps"
+msgstr "برنامه‌های مورد علاقه"
+
+#: 5.8/contextmenu.js:111 4.0/contextmenu.js:111
+msgid "light skin tone"
+msgstr "پوستهٔ روشن"
+
+#: 5.8/contextmenu.js:112 4.0/contextmenu.js:112
+msgid "medium-light skin tone"
+msgstr "پوستهٔ روشن ملایم"
+
+#: 5.8/contextmenu.js:113 4.0/contextmenu.js:113
+msgid "medium skin tone"
+msgstr "پوستهٔ ملایم"
+
+#: 5.8/contextmenu.js:114 4.0/contextmenu.js:114
+msgid "medium-dark skin tone"
+msgstr "پوستهٔ تاریک ملایم"
+
+#: 5.8/contextmenu.js:115 4.0/contextmenu.js:115
+msgid "dark skin tone"
+msgstr "پوستهٔ تاریک"
+
+#: 5.8/contextmenu.js:134 4.0/contextmenu.js:134
+#, fuzzy
+msgid "Remove category"
+msgstr "بازنشانی ترتیب دسته‌بندی"
+
+#. 3.2->settings-schema.json->resetCategoryOrder-button->description
+#: 5.8/contextmenu.js:147 4.0/contextmenu.js:147
+msgid "Reset category order"
+msgstr "بازنشانی ترتیب دسته‌بندی"
+
+#: 5.8/contextmenu.js:167 4.0/contextmenu.js:167
+msgid "List settings apps separately"
+msgstr ""
+
+#: 5.8/contextmenu.js:174 4.0/contextmenu.js:174
+msgid "Single list style"
+msgstr ""
+
+#: 5.8/contextmenu.js:183 4.0/contextmenu.js:183
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "نمایش پرونده‌های نهفته"
+
+#. 5.8->settings-schema.json->show-hidden-files->description
+#. 4.0->settings-schema.json->show-hidden-files->description
+#: 5.8/contextmenu.js:190 4.0/contextmenu.js:190
+msgid "Show hidden files"
+msgstr "نمایش پرونده‌های نهفته"
+
+#: 5.8/contextmenu.js:246 3.2/buttons.js:1045 3.2/buttons.js:1047
+#: 4.0/contextmenu.js:246 4.0/contextmenu.js:254
+msgid "Run with NVIDIA GPU"
+msgstr "اجرای NVIDIA GPU"
+
+#: 5.8/contextmenu.js:256 3.2/buttons.js:1049 4.0/contextmenu.js:260
+msgid "Add to panel"
+msgstr "افزودن به تابلو"
+
+#: 5.8/contextmenu.js:275 3.2/buttons.js:1051 4.0/contextmenu.js:279
+msgid "Add to desktop"
+msgstr "افزودن به میزکار"
+
+#: 5.8/contextmenu.js:289 5.8/contextmenu.js:364 3.2/buttons.js:1054
+#: 4.0/contextmenu.js:293 4.0/contextmenu.js:369
+msgid "Remove from favorites"
+msgstr "برداشتن از مورد علاقه‌ها"
+
+#: 5.8/contextmenu.js:293 5.8/contextmenu.js:369 3.2/buttons.js:1056
+#: 4.0/contextmenu.js:297 4.0/contextmenu.js:374
+msgid "Add to favorites"
+msgstr "افزودن به مورد علاقه‌ها"
+
+#: 5.8/contextmenu.js:300 3.2/buttons.js:1059 4.0/contextmenu.js:304
+msgid "Uninstall"
+msgstr "حذف نصب"
+
+#: 5.8/contextmenu.js:308 4.0/contextmenu.js:312
+msgid "App Info"
+msgstr ""
+
+#: 5.8/contextmenu.js:324 4.0/contextmenu.js:328
+msgid "This file is no longer available"
+msgstr "این پرونده دیگر موجود نیست"
+
+#: 5.8/contextmenu.js:332 4.0/contextmenu.js:336
+msgid "Open with"
+msgstr "گشودن با"
+
+#: 5.8/contextmenu.js:347 4.0/contextmenu.js:351
+msgid "Other application..."
+msgstr "برنامهٔ دیگر…"
+
+#: 5.8/contextmenu.js:384 4.0/contextmenu.js:390
+#, fuzzy
+msgid "Add folder as category"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه"
+
+#: 5.8/contextmenu.js:400 4.0/contextmenu.js:406 5.8/search.py:48
+#: 4.0/search.py:48
+msgid "Open containing folder"
+msgstr "گشودن پوشهٔ محتوی"
+
+#: 5.8/contextmenu.js:415 5.8/contextmenu.js:427 4.0/contextmenu.js:421
+#: 4.0/contextmenu.js:433
+msgid "Move to trash"
+msgstr "انتقال به زباله‌دان"
+
+#: 5.8/contextmenu.js:421 4.0/contextmenu.js:427
+msgid "Error while moving file to trash:"
+msgstr "خطا هنگام انتقال پرونده به زباله‌دان:"
+
+#: 5.8/emoji.js:8 4.0/emoji.js:7739
+msgid "Smileys & Emotion"
+msgstr ""
+
+#: 5.8/emoji.js:685 4.0/emoji.js:7740
+msgid "People & Body"
+msgstr ""
+
+#: 5.8/emoji.js:2245 4.0/emoji.js:7741
+msgid "Animals & Nature"
+msgstr ""
+
+#: 5.8/emoji.js:2861 4.0/emoji.js:7742
+msgid "Food & Drink"
+msgstr ""
+
+#: 5.8/emoji.js:3405 4.0/emoji.js:7743
+msgid "Travel & Places"
+msgstr ""
+
+#: 5.8/emoji.js:4281 4.0/emoji.js:7744
+msgid "Activities"
+msgstr ""
+
+#: 5.8/emoji.js:4625 4.0/emoji.js:7745
+msgid "Objects"
+msgstr ""
+
+#: 5.8/emoji.js:5677 4.0/emoji.js:7746
+msgid "Symbols"
+msgstr ""
+
+#: 5.8/emoji.js:6573 4.0/emoji.js:7747
+msgid "Flags"
+msgstr ""
+
+#: 5.8/sidebar.js:252 3.2/applet.js:2323 4.0/sidebar.js:251
+msgid "Quit"
+msgstr "ترک"
+
+#: 5.8/sidebar.js:253 3.2/applet.js:2324 4.0/sidebar.js:252
+msgid "Shutdown the computer"
+msgstr "خاموش کردن رایانه"
+
+#: 5.8/sidebar.js:261 3.2/applet.js:2315 4.0/sidebar.js:260
+msgid "Logout"
+msgstr "خروج"
+
+#: 5.8/sidebar.js:262 3.2/applet.js:2316 4.0/sidebar.js:261
+msgid "Leave the session"
+msgstr "ترک نشست"
+
+#: 5.8/sidebar.js:270 3.2/applet.js:2293 4.0/sidebar.js:269
+msgid "Lock screen"
+msgstr "قفل صفحه‌نمایش"
+
+#: 5.8/sidebar.js:271 3.2/applet.js:2294 4.0/sidebar.js:270
+msgid "Lock the screen"
+msgstr "قفل کردن صفحه‌نمایش"
+
+#: 3.2/applet.js:92
+msgid "Type to search..."
+msgstr "نوشتن برای جست‌وجو…"
+
+#: 3.2/applet.js:284
+msgid "No description available"
+msgstr "توضیحی موجود نیست"
+
+#: 3.2/applet.js:1017
+msgid "Recent files"
+msgstr "پرونده‌های اخیر"
+
+#: 3.2/applet.js:1018
+msgid "Bookmarks"
+msgstr "نشانک‌ها"
+
+#: 3.2/applet.js:1352
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "بستهٔ gir1.2-gda-5.0 برای نشانک‌های میدوری و فایرفاکس مورد نیاز است."
+
+#: 3.2/applet.js:1427
+msgid "No recent files"
+msgstr "پروندهٔ اخیری نیست"
+
+#: 3.2/applet.js:2279
+msgid "Account details"
+msgstr "جزئیات حساب"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1260
+msgid "Grid View"
+msgstr "نمای شبکه‌ای"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1254
+msgid "List View"
+msgstr "نمای فهرستی"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1261
+msgid "Switch to grid view"
+msgstr "تعویض به نمای شبکه‌ای"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1255
+msgid "Switch to list view"
+msgstr "تعویض به نمای فهرستی"
+
+#: 3.2/placeDisplay.js:146
+msgid "Home"
+msgstr "خانه"
+
+#: 3.2/placeDisplay.js:224
+msgid "Browse network"
+msgstr "مرور شبکه"
+
+#: 4.0/applet.js:1094
+msgid "Applications and files"
+msgstr "برنامه‌ها و پرونده‌ها"
+
+#: 5.8/search.py:43 4.0/search.py:43
+msgid "Open"
+msgstr "گشودن"
+
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#: 5.8/search.py:85 4.0/search.py:85
+msgid "Search"
+msgstr "جست‌وجو"
+
+#: 5.8/search.py:106 4.0/search.py:106
+msgid "Start in"
+msgstr "شروع در"
+
+#: 5.8/search.py:107 4.0/search.py:107
+msgid "Select a folder"
+msgstr "گزینش یک پوشه"
+
+#: 5.8/search.py:113 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr "دنبال کردن symlinks"
+
+#: 5.8/search.py:117 4.0/search.py:117
+msgid "Search hidden"
+msgstr "جست‌وجوی نهفته‌ها"
+
+#: 5.8/search.py:121 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr "استفاده از عبارت بامعنی"
+
+#: 5.8/search.py:125 4.0/search.py:125
+msgid "Stop"
+msgstr "توقف"
+
+#: 5.8/search.py:140 4.0/search.py:140
+msgid "File"
+msgstr "پرونده"
+
+#: 5.8/search.py:156 4.0/search.py:156
+msgid "Path"
+msgstr "مسیر"
+
+#: 5.8/search.py:184 4.0/search.py:184
+msgid "Searching..."
+msgstr "جست‌وجو…"
+
+#: 5.8/search.py:198 5.8/search.py:199 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr "جست‌وجو متوقف شد"
+
+#: 5.8/search.py:215 4.0/search.py:215
+msgid "Searching: "
+msgstr "جست‌وجو: "
+
+#: 5.8/search.py:220 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "خطا: مجوزهای ناکافی برای خواندن پوشه "
+
+#: 5.8/search.py:252 4.0/search.py:252
+msgid "Search Completed"
+msgstr "جست‌وجو تمام شد"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid "Skipping"
+msgstr "پریدن"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid " - directory already searched"
+msgstr " - شاخه تاکنون جست‌وجو شده‌اند"
+
+#: 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"این مورد فهرست به هیچ‌کدام از بسته‌ها نسبت داده نشده است. آیا می‌خواهید در هر "
+"صورت از فهرست برش دارید؟"
+
+#: 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr "بسته‌های زیر برداشته خواهند شد:"
+
+#: 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr "بسته‌های برای برداشتن"
+
+#: 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "نمی‌توان بستهٔ %s را برداشت. چرا که توسط بسته‌های دیگر مورد نیاز است."
+
+#: 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "بستهٔ %s وابستگی بسته‌های زیر است:"
+
+#. metadata.json->name
+#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "سینامنو"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"فهرستی منعطف با گزینه‌های چیدمان شبکه‌ای یا فهرستی، مروگر پرونده و جست‌وجوی "
+"ایموجی."
+
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+#. 3.2->settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu-layout->title
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "چیدمان"
+
+#. 5.8->settings-schema.json->behaviour->title
+#. 3.2->settings-schema.json->panel->title
+#. 4.0->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr "رفتار"
+
+#. 5.8->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "ظاهر"
+
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr ""
+
+#. 5.8->settings-schema.json->menu-content->title
+#. 3.2->settings-schema.json->menu-content->title
+#. 4.0->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "محتویات"
+
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr "تابلو"
+
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+#. 3.2->settings-schema.json->menu-behave->title
+#. 3.2->settings-schema.json->menu-icons->title
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "فهرست"
+
+#. 5.8->settings-schema.json->applications-view-mode->description
+#. 4.0->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "حالت نمایش برنامه‌ها"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr "سیاهه"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr "شبکه"
+
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "نمایش برنامه‌ها به عنوان فهرست یا شبکه"
+
+#. 5.8->settings-schema.json->show-sidebar->description
+#. 4.0->settings-schema.json->show-sidebar->description
+#, fuzzy
+msgid "Show sidebar"
+msgstr "نمایش مورد علاقه‌ها در نوار کناری"
+
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "نمایش دسته‌بندی پوشهٔ خانه در فهرست"
+
+#. 5.8->settings-schema.json->sidebar-placement->description
+#. 4.0->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr "مکان نوار کناری"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr "بالا"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr "پایین"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr "راست"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr "چپ"
+
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr "مکان نمایش نوار کناری را انتخاب کنید"
+
+#. 5.8->settings-schema.json->sidebar-favorites->description
+#. 4.0->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr "نمایش مورد علاقه‌ها در نوار کناری"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr "هیچ‌کدام"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr ""
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr ""
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#, fuzzy
+msgid "Apps and files"
+msgstr "برنامه‌ها و پرونده‌ها"
+
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "نمایش نقشک کاره‌ها و پرونده‌های مورد علاقه‌تان در نوار کناری"
+
+#. 5.8->settings-schema.json->description-placement->description
+#. 4.0->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "قرارگیری توضیح برنامه"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "راهنماهای ابزار"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "زیر کاشی‌ها"
+
+#. 5.8->settings-schema.json->description-placement->tooltip
+#. 4.0->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "مکان نمایش توضیح برنامه‌ها را انتخاب کنید"
+
+#. 5.8->settings-schema.json->show-categories->description
+#. 4.0->settings-schema.json->show-categories->description
+#, fuzzy
+msgid "Show categories"
+msgstr "نمایش نقشک دسته‌بندی‌ها"
+
+#. 5.8->settings-schema.json->show-categories->tooltip
+#. 4.0->settings-schema.json->show-categories->tooltip
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "نمایش نقشک برنامه‌ها"
+
+#. 5.8->settings-schema.json->show-places-category->description
+#. 3.2->settings-schema.json->show-places->description
+#. 4.0->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "نمایش نشانک‌ها و مکان‌ها"
+
+#. 5.8->settings-schema.json->show-places-category->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 4.0->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "نمایش نشانک‌ها و مکان‌ها در فهرست دسته‌بندی‌ها"
+
+#. 5.8->settings-schema.json->show-recents-category->description
+#. 4.0->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr "نمایش پرونده‌های اخیر"
+
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr "نمایش دسته‌بندی موارد اخیر در فهرست"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه‌تان در فهرست"
+
+#. 5.8->settings-schema.json->show-home-folder-category->description
+#. 4.0->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "نمایش پوشهٔ خانه"
+
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "نمایش دسته‌بندی پوشهٔ خانه در فهرست"
+
+#. 5.8->settings-schema.json->show-emoji-category->description
+#. 4.0->settings-schema.json->show-emoji-category->description
+#, fuzzy
+msgid "Show emoji category"
+msgstr "نمایش دسته‌بندی کاره‌های مورد علاقه"
+
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "نمایش دسته‌بندی پوشهٔ خانه در فهرست"
+
+#. 5.8->settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 4.0->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "گشودن ویرایشگر فهرست"
+
+#. 5.8->settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 4.0->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "میان‌بر صفحه‌کلید برای گشودن و بستن فهرست"
+
+#. 5.8->settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 4.0->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "گشودن فهرست هنگام ایستادن"
+
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "گشودن فهرست هنگامی که موشی را روی نقشک تابلو جابه‌جا کردید"
+
+#. 5.8->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->tooltip-delay->units
+#. 4.0->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "میلی‌ثانیه"
+
+#. 5.8->settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 4.0->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "تأخیر ایستادن فهرست"
+
+#. 5.8->settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 4.0->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "استفاده از پویانمایی‌های فهرست"
+
+#. 5.8->settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 4.0->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "پویا نمایی فهرست هنگام گشودن و بستن"
+
+#. 5.8->settings-schema.json->category-click->description
+#. 3.2->settings-schema.json->category-click->description
+#. 4.0->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "فعال‌سازی دسته‌بندی‌ها هنگام کلیک"
+
+#. 5.8->settings-schema.json->category-click->tooltip
+#. 3.2->settings-schema.json->category-click->tooltip
+#. 4.0->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "فعال‌سازی دسته‌بندی‌ها هنگام کلیک کردن، به جای ایستادن"
+
+#. 5.8->settings-schema.json->open-on-category->description
+#. 3.2->settings-schema.json->startup-view-mode->description
+#. 4.0->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr "گشودن فهرست در دسته‌بندی:"
+
+#. 5.8->settings-schema.json->open-on-category->tooltip
+#. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 4.0->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "فهرست همیشه با این دسته‌بندی گزیده گشوده شود"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr "آخرین دسته‌بندی استفاده شده"
+
+#. 5.8->settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 4.0->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "به کار انداخت پیمایش خودکار"
+
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "پیمایش خودکار سیاههٔ برنامه‌ها هنگام ایستادن موشی"
+
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "نمایش پرونده‌های نهفته در نمای پوشه"
+
+#. 5.8->settings-schema.json->enable-emoji-search->description
+#. 4.0->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr "جست‌وجوی ایموجی"
+
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr "نمایش ایموجی‌ها در نتایج جست‌وجو"
+
+#. 5.8->settings-schema.json->web-search-option->description
+#. 4.0->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr "گزینهٔ جست‌وجوی وب"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->tooltip
+#. 4.0->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "نمایش یک گزینهٔ جست‌وجوی اینترنت در نتایج جست‌وجو"
+
+#. 5.8->settings-schema.json->web-suggestions->description
+#. 4.0->settings-schema.json->web-suggestions->description
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "گزینهٔ جست‌وجوی وب"
+
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr "جست‌وجوی پوشهٔ خانه"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr "هنگام جست‌وجو، پوشه‌ها و پرونده‌های خانهٔ من را نیز بگرد"
+
+#. 5.8->settings-schema.json->enable-web-history-search->description
+#. 4.0->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr "جست‌وجوی تاریخچهٔ وب"
+
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"هنگام جست‌وجو، تاریخچهٔ مرورگرم را نیز بگرد (کرومیوم، گوگل کروم، اپرا، "
+"ویوالدی، بریو)\n"
+"توجه: تاریخچهٔ فایرفاکس هم‌اکنون پشتیبانی نمی‌شود."
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr "جست‌وجوی نشانک‌های وب"
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"هنگام جست‌وجو، نشانک‌ها وب مرورگرم را نیز بگرد (فایرفاکس، کرومیوم، گوگل کروم، "
+"اپرا، ویوالدی، بریو)\n"
+"توجه: برای جست‌وجوی نشانک‌های فایرفاکس، باید بستهٔ gir1.2-gda-5.0 (توزیع‌های "
+"دبیان‌پایه. اوبونتو و لینوکس مینت) یا بستهٔ libgda (توزیع‌های آرچ‌پایه) را نصب "
+"کنید و سپس رایانه‌تان را دوباره راه‌اندازی کنید."
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->description
+#. 4.0->settings-schema.json->enable-wikipedia-search->description
+msgid "Wikipedia search"
+msgstr "جست‌وجوی ویکی‌پدیا"
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->tooltip
+#. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
+msgid "Show some Wikipedia results"
+msgstr "نمایش چند نتیجه از ویکی‌پدیا"
+
+#. 5.8->settings-schema.json->wikipedia-language->description
+#. 5.8->settings-schema.json->wikipedia-language->tooltip
+#. 4.0->settings-schema.json->wikipedia-language->description
+#. 4.0->settings-schema.json->wikipedia-language->tooltip
+msgid "Wikipedia language"
+msgstr "زبان ویکی‌پدیا"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "English"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Sinugboanong Binisaya"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Svenska"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Deutsch"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Français"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nederlands"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Русский"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Italiano"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Español"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Polski"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "مصرى (Maṣri)"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "日本語"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tiếng Việt"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Winaray"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "中文"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "العربية"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Українська"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Português"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "فارسی"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Català"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Српски / Srpski"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Indonesia"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Norsk (Bokmål)"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "한국어"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Suomi"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Magyar"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Čeština"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Srpskohrvatski / Српскохрватски"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bân-lâm-gú"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Türkçe"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Română"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Нохчийн"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Euskara"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Melayu"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tatarça / Татарча"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Esperanto"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "עברית"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Հայերեն"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Български"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Dansk"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "تۆرکجه"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenčina"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Қазақша"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Minangkabau"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Eesti"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Hrvatski"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Беларуская"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Lietuvių"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Ελληνικά"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Simple English"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Azərbaycanca"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Galego"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenščina"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "اردو"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nynorsk"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ქართული"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "हिन्दी"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "தமிழ்"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ไทย"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "O‘zbek"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latina"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Cymraeg"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Asturianu"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Volapük"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "粵語"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Македонски"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "বাংলা"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latviešu"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Тоҷикӣ"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "မြန်မာဘာသာ"
+msgstr ""
+
+#. 5.8->settings-schema.json->search-help->description
+#. 4.0->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"توجه: بعضی از گزینه‌های جست‌وجو می‌توانند حتی زمانی که این‌جا به کار "
+"نینداخته‌ایدشان، همچنان به وسیلهٔ پیشوندها استفاده شوند.\n"
+"مثلاً: برای جست‌وجوی ایموجی، بنویسید «e heart» تا ایموجی‌های قلب را پیدا کنید. "
+"به همین ترتیب، از پیشوندهای «f ‎» برای جست‌وجوی پرونده، «h ‎» برای تاریخچهٔ وب، "
+"و «b ‎» برای جست‌وجوی نشانک‌ها استفاده کنید.\n"
+
+#. 5.8->settings-schema.json->menu-icon-custom->description
+#. 3.2->settings-schema.json->menu-icon-custom->description
+#. 4.0->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "استفاده از یک نقشک سفارشی"
+
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+#. 3.2->settings-schema.json->menu-icon-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "استفاده از یک نقشک سفارشی در تابلو"
+
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->description
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "نقشک تابلو"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "استفاده از یک اندازهٔ نقشک سفارشی"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "استفاده از یک اندازهٔ سفارشی برای نقشک تابلو"
+
+#. 5.8->settings-schema.json->menu-icon-size->description
+#. 4.0->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr "اندازهٔ نقشک تابلو (پیکسل)"
+
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "یک اندازهٔ سفارشی برای نقشک تابلو انتخاب کنید"
+
+#. 5.8->settings-schema.json->menu-label->description
+#. 3.2->settings-schema.json->menu-label->description
+#. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "متن تابلو"
+
+#. 5.8->settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 4.0->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "متن برای نمایش در کنار نقشک تابلو"
+
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+#. 3.2->settings-schema.json->category-icon-size->description
+#. 3.2->settings-schema.json->category-icon-size->tooltip
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr "اندازهٔ نقشک دسته‌بندی (پیکسل)"
+
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-list-icon-size->description
+#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr "اندازهٔ نقشک سیاههٔ برنامه‌ها (پیکسل)"
+
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-grid-icon-size->description
+#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr "اندازهٔ نقشک شبکهٔ برنامه‌ها"
+
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr "اندازهٔ نقشک نوار کناری (پیکسل)"
+
+#. 5.8->settings-schema.json->use-box-style->description
+#. 4.0->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr "استفاده از سبک جعبه برای نوار کناری"
+
+#. 5.8->settings-schema.json->use-box-style->tooltip
+#. 4.0->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr "استفاده از یک سبک جعبه برای نوار کناری"
+
+#. 5.8->settings-schema.json->use-tile-style->description
+#. 4.0->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr "استفاده از سبک کاشی"
+
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"استفاده از یک سبک کاشی برای دکمهٔ برنامه‌ها (توجه: با بعضی از پوسته‌ها کار "
+"نمی‌کند)"
+
+#. 5.8->settings-schema.json->info1->description
+#. 4.0->settings-schema.json->info1->description
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"راهنما: لبه‌های فهرست را بکشید تا اندازه‌اش را تغییر دهید.\n"
+
+#. 5.8->settings-schema.json->info2->description
+#. 4.0->settings-schema.json->info2->description
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"راهنما: لبه‌های فهرست را بکشید تا اندازه‌اش را تغییر دهید.\n"
+
+#. 5.8->settings-schema.json->info3->description
+#. 4.0->settings-schema.json->info3->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8->settings-schema.json->info4->description
+#. 4.0->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2->settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "ارائه‌دهندگان جست‌وجو"
+
+#. 3.2->settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "افزونهٔ ارائه‌دهندهٔ جست‌وجویی یافت نشد"
+
+#. 3.2->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "تنظیمات اخیر پرونده‌ها"
+
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "به کار انداختن پیمایش خودکار در سیاههٔ برنامه‌ها"
+
+#. 3.2->settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "نمایش نشانک‌های وب"
+
+#. 3.2->settings-schema.json->enable-bookmarks->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"نمایش نشانک‌های وب مرورگرتان در فهرست.\n"
+"توجه: برای خواندن نشانک‌ها فایرفاکس، بستهٔ gir1.2-gda-5.0 را نصب کنید."
+
+#. 3.2->settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "به کار انداختن جست‌وجوی پنجره‌های گشوده"
+
+#. 3.2->settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "به کار انداختن ارائه‌دهندگان جست‌وجو"
+
+#. 3.2->settings-schema.json->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "پیوست نتایج ارائه‌دهندگان جست‌وجو در جست‌وجوها"
+
+#. 3.2->settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "ارائه‌دهندگان جست‌وجوی نمونه"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "ستون‌ها"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->description
+#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "تعداد ستون‌ها در شبکهٔ برنامه‌ها"
+
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "نمایش نقشک برنامه‌ها"
+
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "نمایش نقشک دسته‌بندی‌ها"
+
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "نمایش توضیحات برنامه‌ها زیر عنوان‌شان"
+
+#. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "نمایش راهنماهای ابزار"
+
+#. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "تأخیر راهنمای ابزار"
+
+#. 3.2->settings-schema.json->enable-custom-menu-height->description
+#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "استفاده از یک ارتفاع سفارشی برای فهرست"
+
+#. 3.2->settings-schema.json->custom-menu-height->description
+#. 3.2->settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height (pixels)"
+msgstr "ارتفاع سفارشی فهرست (پیکسل)"

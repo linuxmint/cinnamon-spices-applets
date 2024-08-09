@@ -1,0 +1,214 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-31 15:38+0200\n"
+"PO-Revision-Date: 2023-12-25 11:24+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 5.4/applet.js:260
+msgid "Mute"
+msgstr ""
+
+#: 5.4/applet.js:1962
+msgid "Easy Effects"
+msgstr ""
+
+#: 5.4/applet.js:1969
+msgid "Pulse Effects"
+msgstr ""
+
+#: 5.4/applet.js:2013
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr ""
+
+#: 5.4/applet.js:2675
+msgid "The 'playerctl' package is required!"
+msgstr ""
+
+#: 5.4/applet.js:2676
+msgid "Please select 'Install playerctl' in this menu"
+msgstr ""
+
+#: 5.4/applet.js:2832
+msgid "Reload this applet"
+msgstr ""
+
+#: 5.4/applet.js:2838
+msgid "Remove sound applet"
+msgstr ""
+
+#: 5.4/applet.js:2847
+msgid "Install playerctl"
+msgstr ""
+
+#. metadata.json->name
+msgid "Enhanced Sound applet"
+msgstr ""
+
+#. metadata.json->description
+msgid "Enhanced sound applet"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_behavior->title
+msgid "Behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_sound->title
+msgid "Sound"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_shortcuts->title
+#. 5.4->settings-schema.json->sectionShortcuts1->title
+msgid "Shortcuts"
+msgstr ""
+
+#. 5.4->settings-schema.json->sectionSound2->title
+msgid "OSD"
+msgstr ""
+
+#. 5.4->settings-schema.json->sectionSound3->title
+msgid "Sounds"
+msgstr ""
+
+#. 5.4->settings-schema.json->sectionSound4->title
+msgid "Remove incompatible applets"
+msgstr ""
+
+#. 5.4->settings-schema.json->keepPlayerListOpen->description
+msgid "Keep the player list open"
+msgstr ""
+
+#. 5.4->settings-schema.json->keepChoosePlayerOpen->description
+msgid "Keep the player controller selector open"
+msgstr ""
+
+#. 5.4->settings-schema.json->avoidTwice->description
+msgid "Avoid displaying controllers twice"
+msgstr ""
+
+#. 5.4->settings-schema.json->seekerTooltipDelay->units
+msgid "ms"
+msgstr ""
+
+#. 5.4->settings-schema.json->seekerTooltipDelay->description
+msgid "Seeker tooltip: time to disappear"
+msgstr ""
+
+#. 5.4->settings-schema.json->keySwitchPlayer->description
+msgid "Switch to next player"
+msgstr ""
+
+#. 5.4->settings-schema.json->keySwitchPlayer->tooltip
+msgid "Set keybinding(s) to switch to the next player if it exists."
+msgstr ""
+
+#. 5.4->settings-schema.json->showMicMutedOnIcon->description
+msgid "Display icon indicating that the microphone is muted, if applicable"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
+msgid "Display icon indicating that the microphone is activated, if applicable"
+msgstr ""
+
+#. 5.4->settings-schema.json->magnetic25On->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. 5.4->settings-schema.json->color101_115->description
+msgid "Icon color: 101%-115%"
+msgstr ""
+
+#. 5.4->settings-schema.json->color116_130->description
+msgid "Icon color: 116%-130%"
+msgstr ""
+
+#. 5.4->settings-schema.json->color131_150->description
+msgid "Icon color: 131%-150%"
+msgstr ""
+
+#. 5.4->settings-schema.json->resetColorsButton->description
+msgid "Set colors to default values (yellow, orange, red)"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "disabled"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "small"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "medium"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMediaKeysOSD->options
+msgid "large"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMediaKeysOSD->description
+msgid "Whether the media keys osd is disabled or its relative display size"
+msgstr ""
+
+#. 5.4->settings-schema.json->showOSDonStartup->description
+msgid "Show volume level in OSD on startup"
+msgstr ""
+
+#. 5.4->settings-schema.json->volumeSoundFile->description
+msgid "Which sound to play when the volume is changed"
+msgstr ""
+
+#. 5.4->settings-schema.json->volumeSoundEnabled->description
+msgid "Whether to play a sound when the volume is changed"
+msgstr ""
+
+#. 5.4->settings-schema.json->redefine-volume-keybindings->description
+msgid "Redefine Multimedia Keyboard Shortcuts"
+msgstr ""
+
+#. 5.4->settings-schema.json->button-set-to-default-keybindings->description
+msgid "Use the same shortcuts as those defined by Cinnamon"
+msgstr ""
+
+#. 5.4->settings-schema.json->pause-on-off->description
+msgid "Pause/Play toggle"
+msgstr ""
+
+#. 5.4->settings-schema.json->volume-mute->description
+msgid "Volume Mute"
+msgstr ""
+
+#. 5.4->settings-schema.json->volume-up->description
+msgid "Volume Up"
+msgstr ""
+
+#. 5.4->settings-schema.json->volume-down->description
+msgid "Volume Down"
+msgstr ""
+
+#. 5.4->settings-schema.json->audio-next->description
+msgid "Next Track"
+msgstr ""
+
+#. 5.4->settings-schema.json->audio-prev->description
+msgid "Previous Track"
+msgstr ""
+
+#. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
+msgid "Remove from panel the sound@cinnamon.org applet"
+msgstr ""

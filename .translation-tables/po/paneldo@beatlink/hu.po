@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: paneldo@beatlink 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-28 09:03+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->description
+msgid "Panel based quick todo applet for Cinnamon"
+msgstr "Panel alapú gyors teendőkisalkalmazás a Cinnamonhoz"
+
+#. metadata.json->name
+msgid "PanelDo"
+msgstr "PanelDo"
+
+#. settings-schema.json->list_editor->description
+msgid "The text editor used for opening the text file"
+msgstr "A szövegfájl megnyitásához használt szövegszerkesztő"
+
+#. settings-schema.json->path_to_file->description
+msgid "The path to the text file. It must already exist."
+msgstr "A szövegfájl elérési útja. Már léteznie kell."
+
+#. settings-schema.json->empty_file_message->description
+msgid "The message shown when the text file is empty"
+msgstr "Az üzenet akkor jelenik meg, ha a szövegfájl üres"
+
+#. settings-schema.json->prefix_string->description
+msgid "The text added to the beginning of every panel message"
+msgstr "Minden panelüzenet elejéhez hozzáadott szöveg"
+
+#. settings-schema.json->suffix_string->description
+msgid "The text added to the end of every panel message"
+msgstr "Minden panelüzenet végéhez hozzáadott szöveg"
+
+#. settings-schema.json->text_width->description
+msgid "The width of the panel text in characters"
+msgstr "A panel szövegének szélessége karakterekben"
+
+#. settings-schema.json->reminder_delay->description
+msgid ""
+"How often (in seconds) to flash the applet periodically for reminders. Set "
+"to 0 to disable"
+msgstr ""
+"Milyen gyakran (másodpercekben) kell felvillantani az appletet az "
+"emlékeztetőkért. A letiltáshoz állítsa 0-ra"
+
+#. settings-schema.json->reminder_time->description
+msgid ""
+"How long (in milliseconds) should the applet reminder color stay set. Set to "
+"0 for infinity"
+msgstr ""
+"Mennyi ideig (ezredmásodpercben) kell a kisalkalmazás emlékeztető színét "
+"beállítani. Állítsa 0-ra a végtelenséghez"
+
+#. settings-schema.json->reminder_color->description
+msgid "The color used when reminding"
+msgstr "Az emlékeztetéskor használt szín"

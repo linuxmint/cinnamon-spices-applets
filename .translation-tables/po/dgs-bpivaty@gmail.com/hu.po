@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dgs-bpivaty@gmail.com 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-28 07:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:37
+msgid "Diplays DGS user games status"
+msgstr "Megjeleníti a DGS felhasználói játékok állapotát"
+
+#. metadata.json->description
+msgid "Manage your DGS games"
+msgstr "Kezelje DGS-játékait"
+
+#. metadata.json->name
+msgid "DGS Applet"
+msgstr "DGS Kisalkalmazás"
+
+#. settings-schema.json->head->description
+msgid "Settings DGS applet"
+msgstr "DGS kisalkalmazás beállításai"
+
+#. settings-schema.json->user-cred-n->description
+msgid "DGS user id"
+msgstr "DGS felhasználói azonosító"
+
+#. settings-schema.json->user-cred-n->tooltip
+msgid "Press 'Login to DGS' button to set up."
+msgstr "Nyomja meg a „Bejelentkezés DGS-be” gombot a beállításhoz."
+
+#. settings-schema.json->login-button->description
+msgid "Login to DGS"
+msgstr "Bejelentkezés DGS-be"
+
+#. settings-schema.json->login-button->tooltip
+msgid "Press this button to identify the DGS user."
+msgstr "Nyomja meg ezt a gombot a DGS felhasználó azonosításához."
+
+#. settings-schema.json->check-every->options
+msgid "2 minutes"
+msgstr "2 perc"
+
+#. settings-schema.json->check-every->options
+msgid "5 minutes"
+msgstr "5 perc"
+
+#. settings-schema.json->check-every->options
+msgid "10 minutes"
+msgstr "10 perc"
+
+#. settings-schema.json->check-every->options
+msgid "15 minutes"
+msgstr "15 perc"
+
+#. settings-schema.json->check-every->description
+msgid "Check games status every"
+msgstr "Ellenőrizze a játékok állapotát minden alkalommal"
+
+#. settings-schema.json->beep-when-notify->options
+msgid "Yes"
+msgstr "Igen"
+
+#. settings-schema.json->beep-when-notify->options
+msgid "No"
+msgstr "Nem"
+
+#. settings-schema.json->beep-when-notify->description
+msgid "Beep on notification"
+msgstr "Hangjelzés értesítéskor"

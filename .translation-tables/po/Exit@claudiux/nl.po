@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"PO-Revision-Date: 2024-04-20 11:02+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 5.4/applet.js:96
+msgid "Restart Cinnamon"
+msgstr "Herstart Cinnamon"
+
+#: 5.4/applet.js:108
+msgid "Lock Screen"
+msgstr "Vergrendel scherm"
+
+#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+msgid "Switch User"
+msgstr "Gebruiker wisselen"
+
+#: 5.4/applet.js:166
+msgid "Log Out"
+msgstr "Afmelden"
+
+#: 5.4/applet.js:178
+msgid "Suspend"
+msgstr "Slaapstand"
+
+#: 5.4/applet.js:187
+msgid "Hibernate"
+msgstr "Slaapstand naar schijf"
+
+#: 5.4/applet.js:199
+msgid "Restart"
+msgstr "Herstart"
+
+#: 5.4/applet.js:208
+msgid "Power Off"
+msgstr "Uitschakelen"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
+"hibernate, reboot or shut down the computer"
+msgstr ""
+"Herstart Cinnamon, vergrendel het scherm, wissel van gebruiker, meld je af, "
+"zet de computer in slaapstand (al dan niet naar schijf), herstart of schakel "
+"de computer uit"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Afsluiten"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+msgid "Cinnamon restart"
+msgstr "Herstart Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "Toon OSD tijdens het herstarten van Cinnamon"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD: On Screen Display"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+msgid "Menu options"
+msgstr "Menu opties"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Toon de optie Herstart Cinnamon"
+
+#. 5.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Toon de optie Slaapstand"
+
+#. 5.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Toon de optie Slaapstand naar schijf"
+
+#. 5.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Toon de optie Herstart"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Toon de optie Uitschakelen"
+
+#. 5.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Alle onderstaande menuopties kunnen worden beheerd door het systeem.\n"
+" Als dat het geval is, dan kun je ze niet zien."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Toon de optie Scherm vergrendelen"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Beheerd door systeem"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Toon de optie Gebruiker wisselen"
+
+#. 5.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Toon de optie Afmelden"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Afmeldmodus"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Met bevestiging"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Zonder bevestiging"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Forceer"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"De 'Forceer' optie stelt je in staat om af te melden terwijl inhibiteurs "
+"worden genegeerd. Handig wanneer meerdere sessies zijn geopend."

@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-31 02:53+0200\n"
+"PO-Revision-Date: 2023-12-13 15:20+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:2669
+msgid "Categories"
+msgstr ""
+
+#: applet.js:2671
+msgid "Radio Stations"
+msgstr ""
+
+#: applet.js:2681
+msgid "All Categories"
+msgstr ""
+
+#: applet.js:4718
+msgid "Easy Effects"
+msgstr ""
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#: applet.js:4847
+msgid "Display volume level near icon"
+msgstr ""
+
+#: lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr ""
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr ""
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr ""
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr ""
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr ""
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+
+#. settings-schema.json->cache-mins->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+
+#. settings-schema.json->cache-dir->description
+msgid ""
+"Directory used for data caching\n"
+"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
+"sufficient free space.)"
+msgstr ""
+
+#. settings-schema.json->cache-dir-open->description
+msgid "Open cache directory"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 1 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr ""

@@ -1,0 +1,434 @@
+# CINNAMENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# jaszhix, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2023-12-23 15:52+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 5.8/applet.js:1127
+msgid "files"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "English"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Sinugboanong Binisaya"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Svenska"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Deutsch"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Français"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nederlands"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Русский"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Italiano"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Español"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Polski"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "مصرى (Maṣri)"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "日本語"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tiếng Việt"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Winaray"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "中文"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "العربية"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Українська"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Português"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "فارسی"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Català"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Српски / Srpski"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Indonesia"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Norsk (Bokmål)"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "한국어"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Suomi"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Magyar"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Čeština"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Srpskohrvatski / Српскохрватски"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bân-lâm-gú"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Türkçe"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Română"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Нохчийн"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Euskara"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Melayu"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tatarça / Татарча"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Esperanto"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "עברית"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Հայերեն"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Български"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Dansk"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "تۆرکجه"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenčina"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Қазақша"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Minangkabau"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Eesti"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Hrvatski"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Беларуская"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Lietuvių"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Ελληνικά"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Simple English"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Azərbaycanca"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Galego"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenščina"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "اردو"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nynorsk"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ქართული"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "हिन्दी"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "தமிழ்"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ไทย"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "O‘zbek"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latina"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Cymraeg"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Asturianu"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Volapük"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "粵語"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Македонски"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "বাংলা"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latviešu"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Тоҷикӣ"
+msgstr ""
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "မြန်မာဘာသာ"
+msgstr ""

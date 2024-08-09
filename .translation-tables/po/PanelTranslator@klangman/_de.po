@@ -1,0 +1,13 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically paste the current selection/clipboard content and translate it "
+"when opening the popup window using a left click on the translator panel "
+"button"
+msgstr ""

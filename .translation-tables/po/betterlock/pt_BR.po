@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Cássio Louzada Rizzi <clrizzi@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"PO-Revision-Date: 2023-03-12 16:11+0200\n"
+"Last-Translator: Cássio Louzada Rizzi <clrizzi@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:105
+msgid "Scr Lock"
+msgstr "Scrool Lock"
+
+#: applet.js:109
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: applet.js:113
+msgid "Caps Lock"
+msgstr "CAPS Lock"
+
+#: applet.js:148
+msgid "Lock Keys"
+msgstr "Teclas de bloqueio"
+
+#: applet.js:208
+msgid "Scr lock on"
+msgstr "Scrool Lock ativado"
+
+#: applet.js:211
+msgid "Scr lock off"
+msgstr "Scrool Lock desativado"
+
+#: applet.js:220
+msgid "Num lock on"
+msgstr "Num Lock ativado"
+
+#: applet.js:223
+msgid "Num lock off"
+msgstr "Num Lock desativado"
+
+#: applet.js:232
+msgid "Caps lock on"
+msgstr "CAPS Lock ativado"
+
+#: applet.js:235
+msgid "Caps lock off"
+msgstr "CAPS Lock desativado"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Mostra se CAPS Lock / Num Lock / Scrool Lock está ligado, e exibe uma "
+"notificação quando houver alteração"
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "Indicador de teclas de bloqueio com notificações"
+
+#. settings-schema.json->show-notifications->description
+msgid "Show notifications"
+msgstr "Exibir notificações"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr ""
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Exibir indicador de CAPS Lock"
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "Exibir indicador de Num Lock"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "Exibir indicador de Scrool Lock"

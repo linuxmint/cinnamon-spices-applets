@@ -1,0 +1,280 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 11:39-0400\n"
+"PO-Revision-Date: 2024-07-13 02:48+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:97 applet.js:332 applet.js:334
+msgid "Translator"
+msgstr "Traductor"
+
+#: applet.js:260
+msgid "Unable to query available languages from translate-shell"
+msgstr ""
+"No ha estat possible sol·licitar els idiomes disponibles de translate-shell"
+
+#: applet.js:271
+msgid "Required \"trans\" command not found, please install translate-shell"
+msgstr ""
+"No s'ha trobat l'ordre requerida \"trans\". Si us plau, instal·leu translate-"
+"shell"
+
+#: applet.js:275
+msgid "Error, the \"trans\" command returned an exit code of "
+msgstr "Error. L'ordre \"trans\" ha retornat el codi de sortida "
+
+#: applet.js:355
+msgid "Swap Languages"
+msgstr "Intercanviar idiomes"
+
+#: applet.js:393
+msgid "{Text to translate}"
+msgstr "{Text a traduir}"
+
+#: applet.js:404
+msgid "{Translated text}"
+msgstr "{Text traduït}"
+
+#: applet.js:418
+msgid "Configure"
+msgstr "Configura"
+
+#: applet.js:419
+msgid "Help"
+msgstr "Ajuda"
+
+#: applet.js:423
+msgid "Play"
+msgstr "Reproduir"
+
+#: applet.js:427
+msgid "Paste"
+msgstr "Enganxar"
+
+#: applet.js:431
+msgid "Clear"
+msgstr "Netejar"
+
+#: applet.js:435
+msgid "Translate"
+msgstr "Traduir"
+
+#: applet.js:440
+msgid "Copy"
+msgstr "Copiar"
+
+#: applet.js:446
+msgid "Play Translation"
+msgstr "Reproduir traducció"
+
+#. metadata.json->name
+msgid "Panel Translator"
+msgstr "Tauler Traductor"
+
+#. metadata.json->description
+msgid ""
+"Translate text to other languages from the Cinnamon panel using Google, Bing "
+"and other translators"
+msgstr ""
+"Tradueix el text a altres idiomes des del tauler de Cinnamon. Utilitza "
+"Google, Bing i altres serveis de traducció"
+
+#. settings-schema.json->engine-header->description
+msgid "Translation Engine"
+msgstr "Motor de traduccions"
+
+#. settings-schema.json->translate-engine->options
+msgid "Apertium"
+msgstr "Apertium"
+
+#. settings-schema.json->translate-engine->options
+msgid "Aspell"
+msgstr "Aspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->translate-engine->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->translate-engine->options
+msgid "Google"
+msgstr "Google"
+
+#. settings-schema.json->translate-engine->options
+msgid "Hunspell"
+msgstr "Hunspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Spell"
+msgstr "Spell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. settings-schema.json->translate-engine->description
+msgid "Engine (Auto/Google recommended!)"
+msgstr "Motor (Es recomana Auto/Google!)"
+
+#. settings-schema.json->translate-engine->tooltip
+msgid ""
+"Most engines don't support play back and some don't even translate, others "
+"just report HTTP errors. So it's best to use \"Auto\" and let translate-"
+"shell decide what translator to use."
+msgstr ""
+"La majoria de motors de traducció no suporten reproducció i alguns ni tan "
+"sols tradueixen o reporten errors HTTP. És millor utilitzar \"Auto\" i "
+"deixar que translate-shell esculli quin traductor utilitzar."
+
+#. settings-schema.json->auto-header->description
+msgid "Panel Button Actions"
+msgstr "Accions dels botons del tauler"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Disabled"
+msgstr "Desactivat"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Selection"
+msgstr "Selecció"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Clipboard"
+msgstr "Porta-papers"
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically paste and translate on left click"
+msgstr "Enganxar i traduir automàticament en fer clic"
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically paste the current selection/clipboard content and translate it "
+"when opening the popup window using a left click on the translator panel "
+"button"
+msgstr ""
+"Enganxa la selecció / el contingut del porta-papers i el tradueix a la "
+"finestra emergent quan es clica sobre el botó del traductor al tauler"
+
+#. settings-schema.json->left-auto-play->description
+msgid "Automatically play the translation on left click"
+msgstr "Reprodueix la traducció automàticament en fer clic"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Do nothing"
+msgstr "No fer res"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Show popup dialog and translate Selection"
+msgstr "Mostrar una finestra emergent i traduir la selecció"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Show popup dialog and translate Clipboard"
+msgstr "Mostrar una finestra emergent i traduir el contingut del porta-papers"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Show popup dialog, translate Selection and play"
+msgstr "Mostrar una finestra emergent, traduir la selecció i reproduir-lo"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Show popup dialog, translate Clipboard and play"
+msgstr ""
+"Mostrar una finestra emergent, traduir el contingut del porta-papers i "
+"reproduir-lo"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Play translation of Selection"
+msgstr "Reproduir la traducció de la selecció"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Play translation of Clipboard"
+msgstr "Reproduir la traducció del porta-papers"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Translate Selection and copy the translation"
+msgstr "Traduir la selecció i copiar la traducció"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
+msgid "Translate Clipboard and copy the translation"
+msgstr "Traduir el contingut del porta-papers i copiar la traducció"
+
+#. settings-schema.json->middle-button-action->description
+msgid "Middle button action"
+msgstr "Acció en fer clic amb el botó del mig"
+
+#. settings-schema.json->middle-button-action->tooltip
+msgid ""
+"Select the action to take when using the middle mouse button to click on the "
+"translator panel button"
+msgstr "Seleccioneu l'acció a dur a terme en fer clic amb la roda del ratolí"
+
+#. settings-schema.json->ctrl-middle-button-action->description
+msgid "Ctrl + Middle button action"
+msgstr "Acció assignada a Ctrl + clic del mig"
+
+#. settings-schema.json->ctrl-middle-button-action->tooltip
+msgid ""
+"Select the action to take when holding the Ctrl key and using the middle "
+"mouse button to click on the translator panel button"
+msgstr "Seleccioneu l'acció a dur a terme mitjançant Ctrl + clic del mig"
+
+#. settings-schema.json->hotkeys-header->description
+msgid "Hotkeys"
+msgstr "Dreceres"
+
+#. settings-schema.json->hotkey1-action->description
+msgid "Hotkey #1"
+msgstr "Drecera #1"
+
+#. settings-schema.json->hotkey1-action->tooltip
+msgid "Select the action to take when the #1 hotkey is pressed"
+msgstr "Seleccioneu l'acció a dur a terme en prémer la drecera #1"
+
+#. settings-schema.json->hotkey2-action->description
+msgid "Hotkey #2"
+msgstr "Drecera #2"
+
+#. settings-schema.json->hotkey2-action->tooltip
+msgid "Select the action to take when the #2 hotkey is pressed"
+msgstr "Seleccioneu l'acció a dur a terme en prémer la drecera #2"
