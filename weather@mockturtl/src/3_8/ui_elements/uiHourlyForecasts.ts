@@ -223,8 +223,7 @@ export class UIHourlyForecasts {
 				return;
 
 			const height = naturalHeight;
-			// TODO: This should respect the global setting of effects too
-			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+			if (this.AnimateEnabled && animate) {
 				this.actor.height = 0;
 				addTween(this.actor,
 					{
@@ -248,8 +247,7 @@ export class UIHourlyForecasts {
 	public async Hide(animate: boolean = true): Promise<void> {
 		this.hourlyToggled = false;
 		return new Promise((resolve) => {
-			// TODO: This should respect the global setting of effects too
-			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+			if (this.AnimateEnabled && animate) {
 				// TODO: eliminate Clutter Warnings on collapse in logs
 				addTween(this.actor,
 					{
@@ -286,6 +284,10 @@ export class UIHourlyForecasts {
 				resolve();
 			}
 		});
+	}
+
+	private get AnimateEnabled(): boolean {
+		return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
 	}
 
 	/** Sets the correct width for the hourly boxes, make

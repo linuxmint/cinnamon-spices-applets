@@ -19647,7 +19647,7 @@ class UIHourlyForecasts {
             if (naturalHeight == null)
                 return;
             const height = naturalHeight;
-            if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+            if (this.AnimateEnabled && animate) {
                 this.actor.height = 0;
                 addTween(this.actor, {
                     height: height,
@@ -19667,7 +19667,7 @@ class UIHourlyForecasts {
     async Hide(animate = true) {
         this.hourlyToggled = false;
         return new Promise((resolve) => {
-            if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+            if (this.AnimateEnabled && animate) {
                 addTween(this.actor, {
                     height: 0,
                     time: 0.25,
@@ -19696,6 +19696,9 @@ class UIHourlyForecasts {
                 resolve();
             }
         });
+    }
+    get AnimateEnabled() {
+        return global.settings.get_boolean("desktop-effects-on-menus") && global.settings.get_boolean("desktop-effects-workspace");
     }
     AdjustHourlyBoxItemWidth(availableWidth) {
         var _a;
