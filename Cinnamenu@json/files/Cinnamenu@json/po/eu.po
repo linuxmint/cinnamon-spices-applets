@@ -48,7 +48,7 @@ msgstr "Ez dago duela gutxiko elementurik"
 msgid "Settings"
 msgstr "Ezarpenak"
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

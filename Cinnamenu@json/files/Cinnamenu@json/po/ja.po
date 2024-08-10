@@ -44,7 +44,7 @@ msgstr "最近のアイテムはありません"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

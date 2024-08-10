@@ -59,7 +59,7 @@ msgid "Settings"
 msgstr "Configuración"
 
 #: 5.8/applet.js:1127
-msgid "files"
+msgid "Files"
 msgstr "archivos"
 
 #: 5.8/applet.js:1130 4.0/applet.js:1097

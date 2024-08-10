@@ -50,7 +50,7 @@ msgstr "Нет последних сообщений"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

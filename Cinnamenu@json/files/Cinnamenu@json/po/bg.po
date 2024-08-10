@@ -49,7 +49,7 @@ msgstr "Няма скорошни артикули"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

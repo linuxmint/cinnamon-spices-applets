@@ -43,7 +43,7 @@ msgstr "Brak ostatnich przedmiotów"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

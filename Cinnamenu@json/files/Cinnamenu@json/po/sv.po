@@ -49,7 +49,7 @@ msgstr "Inga nya artiklar"
 msgid "Settings"
 msgstr "Inställningar"
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

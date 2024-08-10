@@ -49,7 +49,7 @@ msgstr "没有最近的项目"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

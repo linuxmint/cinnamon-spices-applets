@@ -47,7 +47,7 @@ msgstr "Geen recente elementen"
 msgid "Settings"
 msgstr "Instellingen"
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

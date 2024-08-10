@@ -49,7 +49,7 @@ msgstr "Aucun document récent"
 msgid "Settings"
 msgstr "Paramètres"
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

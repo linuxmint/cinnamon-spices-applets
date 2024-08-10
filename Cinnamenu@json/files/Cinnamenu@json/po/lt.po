@@ -43,7 +43,7 @@ msgstr "Nėra naujausių elementų"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

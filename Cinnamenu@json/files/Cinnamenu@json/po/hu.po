@@ -48,7 +48,7 @@ msgstr "Nincsenek legutóbbi elemek"
 msgid "Settings"
 msgstr "Beállítások"
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

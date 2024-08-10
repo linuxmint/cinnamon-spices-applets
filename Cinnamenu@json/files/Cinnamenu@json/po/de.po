@@ -48,7 +48,7 @@ msgstr "Keine kürzlich verwendeten Dateien oder Apps"
 msgid "Settings"
 msgstr "Einstellungen"
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"

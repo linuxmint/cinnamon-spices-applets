@@ -49,7 +49,7 @@ msgstr "Hiljutisi üksusi pole"
 msgid "Settings"
 msgstr ""
 
-msgid "files"
+msgid "Files"
 msgstr ""
 
 msgid "Other search results"
