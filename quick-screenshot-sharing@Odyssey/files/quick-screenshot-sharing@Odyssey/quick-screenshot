@@ -21,7 +21,7 @@ fi
 # In this case, the screenshot only gets saved locally
 if [ "$1" == "-noupload" ]; then
     # Notify the user
-    notify-send "quick-screenshot-sharing@Odyssey" "Folder: $IMGDIR\nFile: $FILENAME\nUnable to upload. The file has only been stored locally."
+    notify-send "quick-screenshot-sharing@Odyssey" "Folder: $IMGDIR\nFile: $FILENAME"
 
     # Save information in the applet history file
     echo -e "Folder: $IMGDIR\nFile: $FILENAME\nLink: N/A\n\n" >> ~/.quick-screenshot-sharing.history
