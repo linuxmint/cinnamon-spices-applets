@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Define the folder and filename
+IMGDIR=$(xdg-user-dir PICTURES)/Screenshots/$(date +%Y-%m)
+DATE=$(date +%Y-%m-%d_%H-%M-%S)
+FILENAME="SCR_$DATE.png"
+FILEPATH="$IMGDIR/$FILENAME"
+
+# Create subfolder for current year-month if it does not exist
+mkdir -p $IMGDIR
+
+# Capture the screenshot
+gnome-screenshot -a -f $FILEPATH
+
+# End the script here if the file does not exist (capture was cancelled/escaped out)
+if ! [ -f $FILEPATH ]; then
+    exit 0
+fi
+
+# The applet might have detected the host service is not available
+# In this case, the screenshot only gets saved locally
+if [ "$1" == "-noupload" ]; then
+    # Notify the user
+    notify-send "quick-screenshot-sharing@Odyssey" "Folder: $IMGDIR\nFile: $FILENAME\nUnable to upload. The file has only been stored locally."
+
+    # Save information in the applet history file
+    echo -e "Folder: $IMGDIR\nFile: $FILENAME\nLink: N/A\n\n" >> ~/.quick-screenshot-sharing.history
+else
+    # Upload the file using curl
+    RESPONSE=$(curl -s -F "file=@$FILEPATH" "https://kappa.lol/api/upload")
+
+    # Extract the links from the response
+    LINK=$(echo "$RESPONSE" | jq -r '.link')
+    DELLINK=$(echo "$RESPONSE" | jq -r '.delete')
+
+    # Copy the full link to the clipboard
+    echo $LINK | xclip -selection clipboard
+
+    # Notify successful upload to the user
+    notify-send "quick-screenshot-sharing@Odyssey" "Folder: $IMGDIR\nFile: $FILENAME\nUploaded to: $LINK\nDeletion: $DELLINK"
+
+    # Save successful upload information in the applet history file
+    echo -e "Folder: $IMGDIR\nFile: $FILENAME\nLink: $LINK\nDeletionLink: $DELLINK\n\n" >> ~/.quick-screenshot-sharing.history
+fi
+

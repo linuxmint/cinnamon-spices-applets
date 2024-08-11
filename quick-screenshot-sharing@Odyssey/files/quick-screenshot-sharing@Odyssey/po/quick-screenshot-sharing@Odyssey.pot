@@ -1,0 +1,60 @@
+# TRANSLATION FILE FOR quick-screenshot-sharing@Odyssey.
+# Copyright (C) 2024 Odyssey
+# This file is distributed under the same license as the quick-screenshot-sharing@Odyssey package.
+# Odyssey <odysseyhyd@gmail.com>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-11 06:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:8
+msgid "Click on the applet to make a screenshot and upload it"
+msgstr ""
+
+#: applet.js:9
+msgid ""
+"You are missing some of the required packages.\n"
+"Please, run the command below on a terminal:\n"
+"sudo apt install xdg-user-dirs gnome-screenshot curl xclip jq"
+msgstr ""
+
+#: applet.js:10
+msgid ""
+"is missing required package(s). Please run: sudo apt install xdg-user-dirs "
+"gnome-screenshot curl xclip jq"
+msgstr ""
+
+#: applet.js:11
+msgid ""
+"The remote host seems to be unavailable.\n"
+"The screenshot will still be saved locally.\n"
+"If you do not have internet issues and the problem persists over time, you may consider opening an issue at https://github.com/linuxmint/cinnamon-spices-applets/issues and tagging @Odyssey"
+msgstr ""
+
+#: applet.js:12
+msgid ""
+"Could not establish connection with the remote file hosting service. The "
+"screenshot will not be uploaded."
+msgstr ""
+
+#. metadata.json->name
+msgid "Quick screenshot sharing"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Make a screenshot, upload it and share the link from your clipboard.\n"
+"The packages 'xdg-user-dirs', 'gnome-screenshot', 'curl', 'jq' and 'xclip' must be installed.\n"
+"The screenshots will also be saved in ~/Pictures/Screenshots/year-month.\n"
+"Your upload history is saved in ~/.quick-screenshot-sharing.history"
+msgstr ""
