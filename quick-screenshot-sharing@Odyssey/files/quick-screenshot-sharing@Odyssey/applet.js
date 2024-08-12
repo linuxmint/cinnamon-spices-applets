@@ -77,7 +77,8 @@ function passesPackageCheck(distro)
 {
     let cmd;
 
-    let packages = ["xdg-user-dirs", "gnome-screenshot", "curl", "xclip", "jq"];
+    let packages = ["xdg-user-dir", "gnome-screenshot", "curl", "xclip", "jq"];
+    // note: the binary is xdg-user-dir, but the install name is xdg-user-dirs
     for (let pkg of packages)
     {
         // Check if the package is installed
