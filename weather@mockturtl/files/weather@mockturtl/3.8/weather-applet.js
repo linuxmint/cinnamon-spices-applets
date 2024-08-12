@@ -10210,10 +10210,10 @@ class Soup3 {
     }
     async Send(url, options = {}) {
         const { params, headers, method = "GET", cancellable, noEncode = false } = options;
+        await this.defaultUserAgentReady;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
             return null;
         }
-        await this.defaultUserAgentReady;
         url = AddParamsToURI(url, params);
         const query = noEncode ? url : encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
@@ -10287,10 +10287,10 @@ class Soup2 {
     }
     async Send(url, options = {}) {
         const { params, headers, method = "GET", cancellable } = options;
+        await this.defaultUserAgentReady;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
             return null;
         }
-        await this.defaultUserAgentReady;
         url = AddParamsToURI(url, params);
         const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);

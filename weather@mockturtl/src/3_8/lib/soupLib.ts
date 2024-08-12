@@ -127,11 +127,11 @@ class Soup3 implements SoupLib {
 			noEncode = false
 		} = options;
 
+		await this.defaultUserAgentReady;
+
 		if (cancellable?.is_cancelled()) {
 			return null;
 		}
-
-		await this.defaultUserAgentReady;
 
         // Add params to url
         url = AddParamsToURI(url, params);
@@ -245,11 +245,11 @@ class Soup2 implements SoupLib {
 			cancellable
 		} = options;
 
+		await this.defaultUserAgentReady;
+
 		if (cancellable?.is_cancelled()) {
 			return null;
 		}
-
-		await this.defaultUserAgentReady;
 
 		// Add params to url
 		url = AddParamsToURI(url, params);
