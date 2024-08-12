@@ -10148,9 +10148,10 @@ class LocationStore {
 
 
 
+
 const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT } = imports.gi.GLib;
-const { Cancellable } = imports.gi.Gio;
+const { Cancellable, File: soupLib_File } = imports.gi.Gio;
 const soupLib_ByteArray = imports.byteArray;
 function AddParamsToURI(url, params) {
     let result = url;
@@ -10170,23 +10171,49 @@ function AddHeadersToMessage(message, headers) {
         }
     }
 }
-const DEFAULT_USER_AGENT = `Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0 ${imports.misc.config.PACKAGE_NAME}/${imports.misc.config.PACKAGE_VERSION} `;
+async function GetDefaultUserAgent() {
+    var _a;
+    const machineIDFile = soupLib_File.new_for_path("/etc/machine-id");
+    let machineID = null;
+    try {
+        machineID = await LoadContents(machineIDFile);
+    }
+    catch (e) {
+        if (e instanceof Error)
+            logger_Logger.Error("Error reading machine-id file: ", e);
+    }
+    machineID = (_a = machineID === null || machineID === void 0 ? void 0 : machineID.trim()) !== null && _a !== void 0 ? _a : null;
+    return `Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0 ${imports.misc.config.PACKAGE_NAME}/${imports.misc.config.PACKAGE_VERSION} ${machineID !== null && machineID !== void 0 ? machineID : "none"} `;
+}
 class Soup3 {
+    async EnsureUserAgent() {
+        if (this.defaultUserAgent == null)
+            this.defaultUserAgent = await GetDefaultUserAgent();
+        return this.defaultUserAgent;
+    }
     constructor() {
         this._httpSession = new Session();
-        this.SetUserAgent = (userAgent) => {
+        this.defaultUserAgent = null;
+        this.defaultUserAgentResolver = null;
+        this.SetUserAgent = async (userAgent) => {
+            var _a;
+            const DEFAULT_USER_AGENT = await this.EnsureUserAgent();
             logger_Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
             this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+            (_a = this.defaultUserAgentResolver) === null || _a === void 0 ? void 0 : _a.call(this);
         };
-        this._httpSession.user_agent = DEFAULT_USER_AGENT;
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
+        this.defaultUserAgentReady = new Promise((resolve) => {
+            this.defaultUserAgentResolver = resolve;
+        });
     }
     async Send(url, options = {}) {
         const { params, headers, method = "GET", cancellable, noEncode = false } = options;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
             return null;
         }
+        await this.defaultUserAgentReady;
         url = AddParamsToURI(url, params);
         const query = noEncode ? url : encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
@@ -10233,24 +10260,37 @@ class Soup3 {
     }
 }
 class Soup2 {
+    async EnsureUserAgent() {
+        if (this.defaultUserAgent == null)
+            this.defaultUserAgent = await GetDefaultUserAgent();
+        return this.defaultUserAgent;
+    }
     constructor() {
-        this.SetUserAgent = (userAgent) => {
+        this.defaultUserAgent = null;
+        this.defaultUserAgentResolver = null;
+        this.SetUserAgent = async (userAgent) => {
+            var _a;
+            const DEFAULT_USER_AGENT = await this.EnsureUserAgent();
             logger_Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
             this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+            (_a = this.defaultUserAgentResolver) === null || _a === void 0 ? void 0 : _a.call(this);
         };
         const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
         this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = DEFAULT_USER_AGENT;
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
         this._httpSession.use_thread_context = true;
         this._httpSession.add_feature(new ProxyResolverDefault());
+        this.defaultUserAgentReady = new Promise((resolve) => {
+            this.defaultUserAgentResolver = resolve;
+        });
     }
     async Send(url, options = {}) {
         const { params, headers, method = "GET", cancellable } = options;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
             return null;
         }
+        await this.defaultUserAgentReady;
         url = AddParamsToURI(url, params);
         const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
@@ -18278,7 +18318,7 @@ class Config {
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", () => this.HotkeyChanged.Invoke(this), null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
         this.settings.bind("selectedLogPath", "_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
-        soupLib.SetUserAgent(this._userAgentStringOverride);
+        void soupLib.SetUserAgent(this._userAgentStringOverride);
         this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
     }
     InjectLocationToConfig(loc, switchToManual = false) {

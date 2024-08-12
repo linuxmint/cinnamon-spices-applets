@@ -477,7 +477,7 @@ export class Config {
 		this.settings.bind("selectedLogPath",
 			"_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
 
-		soupLib.SetUserAgent(this._userAgentStringOverride);
+		void soupLib.SetUserAgent(this._userAgentStringOverride);
 		this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
 	}
 
