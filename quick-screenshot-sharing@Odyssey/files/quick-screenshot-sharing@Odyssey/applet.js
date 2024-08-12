@@ -80,24 +80,10 @@ function passesPackageCheck(distro)
     let packages = ["xdg-user-dirs", "gnome-screenshot", "curl", "xclip", "jq"];
     for (let pkg of packages)
     {
-        // Prepare command based on distro
-        if (distro === "debian")
-            cmd = `dpkg -l | grep -w ${pkg}`;
-        else if (distro === "arch")
-            cmd = `pacman -Q | grep ${pkg}`;
-        else if (distro === "fedora")
-            cmd = `rpm -qa | grep ${pkg}`;
-        else if (distro === "suse")
-            cmd = `zypper search -i ${pkg}`;
-        else if (distro === "gentoo")
-            cmd = `equery list ${pkg}`;
-        else if (distro === "unknown")
-            cmd = `which ${pkg}`;
-
-        // Check if the package is installed for the right distro
+        // Check if the package is installed
         let [success, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
             null,
-            ['sh', '-c', `${cmd}`],
+            ['sh', '-c', `which ${pkg}`],
             null,
             GLib.SpawnFlags.SEARCH_PATH,
             null
@@ -116,11 +102,10 @@ function passesPackageCheck(distro)
         }
         else
         {
-            // Unexpected command failure, handle it
-            let errorCheckingNotif = _("Unexpected error while checking for the installation of required packages. Check Melange logs for more details.");
-            let errorCheckingLog = _("There has been an unexpected error while executing a command to check if required packages are installed. If you are on a not so popular linux distribution, install the package 'which' and try again. If the problem persists or you are on a widely known linux distribution, you may consider opening an issue at https://github.com/linuxmint/cinnamon-spices-applets/issues and tagging @Odyssey");
-            GLib.spawn_command_line_async(`notify-send "${UUID}" "${errorCheckingNotif}"`);
-            global.logError(`${UUID}: ${errorCheckingLog}`);
+            // checking for binaries failed
+            let errorCheckingPkg = _("Error while checking for required applet packages.\nThe package 'which' is widely available and used for this check.\nAre you perhaps missing it?\n\nIf the problem persists, consider opening an issue at https://github.com/linuxmint/cinnamon-spices-applets/issues and tagging @Odyssey");
+            GLib.spawn_command_line_async(`notify-send "${UUID}" "${errorCheckingPkg}"`);
+            global.logError(`${UUID}: ${errorCheckingPkg}`);
             return false;
         }
     }
@@ -177,14 +162,10 @@ function checkDistro(tryOlderFile)
         return "debian";
     else if (output.includes("arch") || output.includes("manjaro"))
         return "arch";
-    else if (output.includes("rhel") || output.includes("fedora"))
+    else if (output.includes("fedora"))
         return "fedora";
-    else if (output.includes("suse"))
-        return "suse";
-    else if (output.includes("gentoo"))
-        return "gentoo";
 
-    return "unknown";
+    return "other";
 }
 
 // Checks if the remote upload host is alive
@@ -230,13 +211,8 @@ function getMissingPackageMsgFor(distro)
         case "arch":
             msg += _("\n\nFor Arch based systems, run:\n\nsudo pacman -S xdg-user-dirs gnome-screenshot curl jq xclip");
             break;
-        case "suse":
-            msg += _("\n\nFor SUSE based systems, run:\n\nsudo zypper install xdg-user-dirs gnome-screenshot curl jq xclip");
-            break;
-        case "gentoo":
-            msg += _("\n\nFor Gentoo based systems, run:\n\nsudo emerge x11-misc/xdg-user-dirs gnome-extra/gnome-screenshot net-misc/curl app-misc/jq x11-misc/xclip");
         default:
-            msg += _("\n\nInstall the following packages:\n\nxdg-user-dirs gnome-screenshot curl jq xclip");
+            msg += _("\n\nInstall the following packages, using your distribution's package manager:\n\nxdg-user-dirs gnome-screenshot curl jq xclip");
             break;
     }
     return msg;

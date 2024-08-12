@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-12 06:40+0200\n"
+"POT-Creation-Date: 2024-08-13 00:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,36 +25,29 @@ msgid ""
 "A log of your screenshots is kept at ~/quick-screenshot-sharing.history"
 msgstr ""
 
-#: applet.js:112
+#: applet.js:98
 msgid ""
 "is missing required package(s). Please ensure the following packages are "
 "installed by using your distribution's 'package manager: xdg-user-dirs "
 "gnome-screenshot curl xclip jq"
 msgstr ""
 
-#: applet.js:120
+#: applet.js:106
 msgid ""
-"Unexpected error while checking for the installation of required packages. "
-"Check Melange logs for more details."
+"Error while checking for required applet packages.\n"
+"The package 'which' is widely available and used for this check.\n"
+"Are you perhaps missing it?\n"
+"\n"
+"If the problem persists, consider opening an issue at https://github.com/linuxmint/cinnamon-spices-applets/issues and tagging @Odyssey"
 msgstr ""
 
-#: applet.js:121
-msgid ""
-"There has been an unexpected error while executing a command to check if "
-"required packages are installed. If you are on a not so popular linux "
-"distribution, install the package 'which' and try again. If the problem "
-"persists or you are on a widely known linux distribution, you may consider "
-"opening an issue at https://github.com/linuxmint/cinnamon-spices-"
-"applets/issues and tagging @Odyssey"
-msgstr ""
-
-#: applet.js:211
+#: applet.js:192
 msgid ""
 "The remote hosting service is not responding, so the screenshot will not be "
 "uploaded. Check Melange logs for more details."
 msgstr ""
 
-#: applet.js:212
+#: applet.js:193
 msgid ""
 "The remote hosting server did not return code 200. If you do not have "
 "internet issues and the problem persists over time, you may consider opening"
@@ -62,13 +55,13 @@ msgid ""
 " tagging @Odyssey"
 msgstr ""
 
-#: applet.js:221
+#: applet.js:202
 msgid ""
 "You are missing some of the required packages for this applet to work.\n"
 "Please open a terminal and follow the instructions:"
 msgstr ""
 
-#: applet.js:226
+#: applet.js:206
 msgid ""
 "\n"
 "\n"
@@ -77,7 +70,7 @@ msgid ""
 "sudo apt install xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
 
-#: applet.js:229
+#: applet.js:209
 msgid ""
 "\n"
 "\n"
@@ -86,7 +79,7 @@ msgid ""
 "sudo dnf install xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
 
-#: applet.js:232
+#: applet.js:212
 msgid ""
 "\n"
 "\n"
@@ -95,29 +88,11 @@ msgid ""
 "sudo pacman -S xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
 
-#: applet.js:235
+#: applet.js:215
 msgid ""
 "\n"
 "\n"
-"For SUSE based systems, run:\n"
-"\n"
-"sudo zypper install xdg-user-dirs gnome-screenshot curl jq xclip"
-msgstr ""
-
-#: applet.js:238
-msgid ""
-"\n"
-"\n"
-"For Gentoo based systems, run:\n"
-"\n"
-"sudo emerge x11-misc/xdg-user-dirs gnome-extra/gnome-screenshot net-misc/curl app-misc/jq x11-misc/xclip"
-msgstr ""
-
-#: applet.js:240
-msgid ""
-"\n"
-"\n"
-"Install the following packages:\n"
+"Install the following packages, using your distribution's package manager:\n"
 "\n"
 "xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
