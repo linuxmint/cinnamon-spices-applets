@@ -81,11 +81,11 @@ function passesPackageCheck(distro)
     for (let pkg of packages)
     {
         // Prepare command based on distro
-        if (distro === "ubuntu" || distro === "debian")
+        if (distro === "debian")
             cmd = `dpkg -l | grep -w ${pkg}`;
         else if (distro === "arch")
             cmd = `pacman -Q | grep ${pkg}`;
-        else if (distro === "rhel" || distro === "fedora")
+        else if (distro === "fedora")
             cmd = `rpm -qa | grep ${pkg}`;
         else if (distro === "suse")
             cmd = `zypper search -i ${pkg}`;
@@ -221,7 +221,6 @@ function getMissingPackageMsgFor(distro)
     let msg = _("You are missing some of the required packages for this applet to work.\nPlease open a terminal and follow the instructions:");
     switch (distro)
     {
-        case "ubuntu":
         case "debian":
             msg += _("\n\nFor Debian/Ubuntu based systems, run:\n\nsudo apt install xdg-user-dirs gnome-screenshot curl jq xclip");
             break;
