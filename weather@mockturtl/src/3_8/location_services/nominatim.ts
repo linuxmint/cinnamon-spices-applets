@@ -48,7 +48,7 @@ export class GeoLocation {
 	public async GetLocation(searchText: string, cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		try {
 			searchText = searchText.trim();
-			const cached = this.cache?.searchText;
+			const cached = this.cache[searchText];
 			if (cached != null) {
 				Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
 				return cached;

@@ -54,7 +54,8 @@ function AddHeadersToMessage(message: imports.gi.Soup.Message, headers?: HTTPHea
     }
 }
 
-const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+// Trailing space is important because Soup will append it's own version to the user agent. We need to make this as unique as possible.
+const DEFAULT_USER_AGENT = `Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0 ${imports.misc.config.PACKAGE_NAME}/${imports.misc.config.PACKAGE_VERSION} `;
 
 class Soup3 implements SoupLib {
 

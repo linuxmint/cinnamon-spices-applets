@@ -10170,7 +10170,7 @@ function AddHeadersToMessage(message, headers) {
         }
     }
 }
-const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+const DEFAULT_USER_AGENT = `Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0 ${imports.misc.config.PACKAGE_NAME}/${imports.misc.config.PACKAGE_VERSION} `;
 class Soup3 {
     constructor() {
         this._httpSession = new Session();
@@ -10504,10 +10504,9 @@ class GeoLocation {
         };
     }
     async GetLocation(searchText, cancellable) {
-        var _a;
         try {
             searchText = searchText.trim();
-            const cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
+            const cached = this.cache[searchText];
             if (cached != null) {
                 logger_Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
