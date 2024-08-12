@@ -572,9 +572,9 @@ export function IsLangSupported(lang: string | null, languages: Array<string>): 
 };
 
 function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
-	// TODO: this doesn't work anymore
-	const result = IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
-	global.log(`Checking for icon ${icon} ${icon_type == IconType.SYMBOLIC ? '-symbolic' : ''} result: ${result}`);
+	const iconName = icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : '');
+	const result = IconTheme.get_default().has_icon(iconName);
+	Logger.Debug(`Checking for icon ${iconName} result: ${result}`);
 	return result;
 }
 

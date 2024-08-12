@@ -9729,8 +9729,9 @@ function IsLangSupported(lang, languages) {
 }
 ;
 function HasIcon(icon, icon_type) {
-    const result = IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
-    global.log(`Checking for icon ${icon} ${icon_type == IconType.SYMBOLIC ? '-symbolic' : ''} result: ${result}`);
+    const iconName = icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : '');
+    const result = IconTheme.get_default().has_icon(iconName);
+    logger_Logger.Debug(`Checking for icon ${iconName} result: ${result}`);
     return result;
 }
 function mode(arr) {
