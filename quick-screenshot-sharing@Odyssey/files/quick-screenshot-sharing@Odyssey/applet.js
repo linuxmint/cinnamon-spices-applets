@@ -142,7 +142,7 @@ function checkDistro(tryOlderFile)
 
     let [success, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
         null,
-        ['sh', '-c', `${cmd} | grep ID_LIKE`],
+        ['sh', '-c', `${cmd} | grep ID`],
         null,
         GLib.SpawnFlags.SEARCH_PATH,
         null
@@ -173,9 +173,9 @@ function checkDistro(tryOlderFile)
     // check which distro the output mentioned
     output = output.toLowerCase();
 
-    if (output.includes("ubuntu") || output.includes("debian"))
+    if (output.includes("ubuntu") || output.includes("debian") || output.includes("mint"))
         return "debian";
-    else if (output.includes("arch"))
+    else if (output.includes("arch") || output.includes("manjaro"))
         return "arch";
     else if (output.includes("rhel") || output.includes("fedora"))
         return "fedora";
