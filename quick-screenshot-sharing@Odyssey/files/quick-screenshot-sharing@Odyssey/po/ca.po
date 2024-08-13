@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 00:33+0200\n"
-"PO-Revision-Date: 2024-08-13 00:33+0200\n"
+"POT-Creation-Date: 2024-08-13 05:22+0200\n"
+"PO-Revision-Date: 2024-08-13 05:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -23,14 +23,14 @@ msgid ""
 "Make a screenshot, save it and upload it.\n"
 "Screenshots are saved in ~/Pictures/Screenshots/year-month\n"
 "When uploaded, the link gets copied to your clipboard.\n"
-"A log of your screenshots is kept at ~/quick-screenshot-sharing.history"
+"A log of your screenshots is kept at ~/.quick-screenshot-sharing.history"
 msgstr ""
 "Feu un captura de pantalla, guardeu-la i pugeu-la.\n"
 "Les captures es guarden a ~/Imatges/Screenshots/any-mes\n"
 "En ser pujades, l'enllaç és copiat al vostre porta-papers.\n"
-"S'escriu un registre de les captures a ~/quick-screenshot-sharing.history"
+"S'escriu un registre de les captures a ~/.quick-screenshot-sharing.history"
 
-#: applet.js:98
+#: applet.js:99
 msgid ""
 "is missing required package(s). Please ensure the following packages are "
 "installed by using your distribution's 'package manager: xdg-user-dirs gnome-"
@@ -40,7 +40,7 @@ msgstr ""
 "paquets següents estiguin instal·lats mitjançant el vostre gestor de "
 "paquets: xgd-user-dirs gnome-screenshot curl xclip jq"
 
-#: applet.js:106
+#: applet.js:107
 msgid ""
 "Error while checking for required applet packages.\n"
 "The package 'which' is widely available and used for this check.\n"
@@ -56,7 +56,7 @@ msgstr ""
 "Si el problema persisteix, considereu obrir una incidència a https://github."
 "com/linuxmint/cinnamon-spices-applets/issues i mencionar a @Odyssey"
 
-#: applet.js:192
+#: applet.js:193
 msgid ""
 "The remote hosting service is not responding, so the screenshot will not be "
 "uploaded. Check Melange logs for more details."
@@ -64,7 +64,7 @@ msgstr ""
 "El servidor d'allotjament remot no està responent, de manera que la captura "
 "no es pujarà. Reviseu el registre de Melange per més detalls."
 
-#: applet.js:193
+#: applet.js:194
 msgid ""
 "The remote hosting server did not return code 200. If you do not have "
 "internet issues and the problem persists over time, you may consider opening "
@@ -76,7 +76,7 @@ msgstr ""
 "considerar obrir una incidència a ttps://github.com/linuxmint/cinnamon-"
 "spices-applets/issues i mencionar a @Odyssey"
 
-#: applet.js:202
+#: applet.js:203
 msgid ""
 "You are missing some of the required packages for this applet to work.\n"
 "Please open a terminal and follow the instructions:"
@@ -85,7 +85,7 @@ msgstr ""
 "miniaplicació.\n"
 "Si us plau, obriu un terminal i seguiu les instruccions:"
 
-#: applet.js:206
+#: applet.js:207
 msgid ""
 "\n"
 "\n"
@@ -99,7 +99,7 @@ msgstr ""
 "\n"
 "sudo apt install xdg-user-dirs gnome-screenshot curl jq xclip"
 
-#: applet.js:209
+#: applet.js:210
 msgid ""
 "\n"
 "\n"
@@ -113,7 +113,7 @@ msgstr ""
 "\n"
 "sudo dnf install xdg-user-dirs gnome-screenshot curl jq xclip"
 
-#: applet.js:212
+#: applet.js:213
 msgid ""
 "\n"
 "\n"
@@ -127,7 +127,7 @@ msgstr ""
 "\n"
 "sudo pacman -S xdg-user-dirs gnome-screenshot curl jq xclip"
 
-#: applet.js:215
+#: applet.js:216
 msgid ""
 "\n"
 "\n"
@@ -156,4 +156,3 @@ msgstr ""
 "porta-papers.\n"
 "Els paquets 'xdg-user-dirs', 'gnome-screenshot', 'curl', 'jq' i 'xclip' han "
 "d'estar instal·lats."
-

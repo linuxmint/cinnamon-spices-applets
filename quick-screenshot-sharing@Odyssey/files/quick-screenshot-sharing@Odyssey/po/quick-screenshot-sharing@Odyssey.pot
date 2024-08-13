@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 00:33+0200\n"
+"POT-Creation-Date: 2024-08-13 05:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,17 +22,17 @@ msgid ""
 "Make a screenshot, save it and upload it.\n"
 "Screenshots are saved in ~/Pictures/Screenshots/year-month\n"
 "When uploaded, the link gets copied to your clipboard.\n"
-"A log of your screenshots is kept at ~/quick-screenshot-sharing.history"
+"A log of your screenshots is kept at ~/.quick-screenshot-sharing.history"
 msgstr ""
 
-#: applet.js:98
+#: applet.js:99
 msgid ""
 "is missing required package(s). Please ensure the following packages are "
 "installed by using your distribution's 'package manager: xdg-user-dirs "
 "gnome-screenshot curl xclip jq"
 msgstr ""
 
-#: applet.js:106
+#: applet.js:107
 msgid ""
 "Error while checking for required applet packages.\n"
 "The package 'which' is widely available and used for this check.\n"
@@ -41,13 +41,13 @@ msgid ""
 "If the problem persists, consider opening an issue at https://github.com/linuxmint/cinnamon-spices-applets/issues and tagging @Odyssey"
 msgstr ""
 
-#: applet.js:192
+#: applet.js:193
 msgid ""
 "The remote hosting service is not responding, so the screenshot will not be "
 "uploaded. Check Melange logs for more details."
 msgstr ""
 
-#: applet.js:193
+#: applet.js:194
 msgid ""
 "The remote hosting server did not return code 200. If you do not have "
 "internet issues and the problem persists over time, you may consider opening"
@@ -55,13 +55,13 @@ msgid ""
 " tagging @Odyssey"
 msgstr ""
 
-#: applet.js:202
+#: applet.js:203
 msgid ""
 "You are missing some of the required packages for this applet to work.\n"
 "Please open a terminal and follow the instructions:"
 msgstr ""
 
-#: applet.js:206
+#: applet.js:207
 msgid ""
 "\n"
 "\n"
@@ -70,7 +70,7 @@ msgid ""
 "sudo apt install xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
 
-#: applet.js:209
+#: applet.js:210
 msgid ""
 "\n"
 "\n"
@@ -79,7 +79,7 @@ msgid ""
 "sudo dnf install xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
 
-#: applet.js:212
+#: applet.js:213
 msgid ""
 "\n"
 "\n"
@@ -88,7 +88,7 @@ msgid ""
 "sudo pacman -S xdg-user-dirs gnome-screenshot curl jq xclip"
 msgstr ""
 
-#: applet.js:215
+#: applet.js:216
 msgid ""
 "\n"
 "\n"

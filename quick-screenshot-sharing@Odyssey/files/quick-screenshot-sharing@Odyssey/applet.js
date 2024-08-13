@@ -22,7 +22,7 @@ MyApplet.prototype = {
 
         try {
             this.set_applet_icon_symbolic_name("camera-photo");
-            this.set_applet_tooltip(_("Make a screenshot, save it and upload it.\nScreenshots are saved in ~/Pictures/Screenshots/year-month\nWhen uploaded, the link gets copied to your clipboard.\nA log of your screenshots is kept at ~/quick-screenshot-sharing.history"));
+            this.set_applet_tooltip(_("Make a screenshot, save it and upload it.\nScreenshots are saved in ~/Pictures/Screenshots/year-month\nWhen uploaded, the link gets copied to your clipboard.\nA log of your screenshots is kept at ~/.quick-screenshot-sharing.history"));
             this.actor.connect('button-release-event', Lang.bind(this, this._onIconClickEvent));
             
         }
