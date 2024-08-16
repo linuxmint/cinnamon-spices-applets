@@ -573,8 +573,16 @@ export function IsLangSupported(lang: string | null, languages: Array<string>): 
 
 function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 	const iconName = icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : '');
+
 	const result = IconTheme.get_default().has_icon(iconName);
-	Logger.Debug(`Checking for icon ${iconName} result: ${result}`);
+
+	if (!result) {
+		Logger.Debug(`${iconName} not found`);
+	}
+	else {
+		const iconInfo = IconTheme.get_default().lookup_icon(iconName, 16, icon_type == IconType.SYMBOLIC ? imports.gi.Gtk.IconLookupFlags.FORCE_SYMBOLIC : imports.gi.Gtk.IconLookupFlags.FORCE_REGULAR);
+		Logger.Debug(`${iconName} found at ${iconInfo?.get_filename()} and is ${iconInfo?.is_symbolic() ? "symbolic" : "regular"}`);
+	}
 	return result;
 }
 

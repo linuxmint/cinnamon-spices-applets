@@ -9731,7 +9731,13 @@ function IsLangSupported(lang, languages) {
 function HasIcon(icon, icon_type) {
     const iconName = icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : '');
     const result = IconTheme.get_default().has_icon(iconName);
-    logger_Logger.Debug(`Checking for icon ${iconName} result: ${result}`);
+    if (!result) {
+        logger_Logger.Debug(`${iconName} not found`);
+    }
+    else {
+        const iconInfo = IconTheme.get_default().lookup_icon(iconName, 16, icon_type == IconType.SYMBOLIC ? imports.gi.Gtk.IconLookupFlags.FORCE_SYMBOLIC : imports.gi.Gtk.IconLookupFlags.FORCE_REGULAR);
+        logger_Logger.Debug(`${iconName} found at ${iconInfo === null || iconInfo === void 0 ? void 0 : iconInfo.get_filename()} and is ${(iconInfo === null || iconInfo === void 0 ? void 0 : iconInfo.is_symbolic()) ? "symbolic" : "regular"}`);
+    }
     return result;
 }
 function mode(arr) {
