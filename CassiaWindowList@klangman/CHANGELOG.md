@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.3
+
+* Improve the window icon geometry update logic for more accurate minimize/unminimize animations. It's still not perfect, but this fixes most of the issues.
+
 ## 2.3.2
 
 * Enable Cinnamon restore/minimize animation by setting window icon geometry
