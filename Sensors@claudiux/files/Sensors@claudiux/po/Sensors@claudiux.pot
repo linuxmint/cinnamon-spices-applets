@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# This file is put in the public domain.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 3.7.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-07-03 19:28+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-18 20:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "high:"
 msgstr ""
 
-#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:697
+#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:698
 msgid "n/a"
 msgstr ""
 
@@ -38,69 +38,69 @@ msgstr ""
 msgid "crit:"
 msgstr ""
 
-#: applet.js:697 applet.js:740
+#: applet.js:698 applet.js:742
 msgid "min:"
 msgstr ""
 
-#: applet.js:742
+#: applet.js:744
 msgid "max:"
 msgstr ""
 
-#: applet.js:770
+#: applet.js:773
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:770
+#: applet.js:773
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:790
+#: applet.js:793
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:1125
+#: applet.js:1175
 msgid "Settings"
 msgstr ""
 
-#: applet.js:1125
+#: applet.js:1175
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:1132
+#: applet.js:1182
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:1142
+#: applet.js:1192
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:1152
+#: applet.js:1202
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:1162
+#: applet.js:1212
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:1172
+#: applet.js:1222
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:1193
+#: applet.js:1243
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:1202
+#: applet.js:1252
 msgid "Suspend Sensors"
 msgstr ""
 
-#: applet.js:1213
+#: applet.js:1263
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1514
+#: applet.js:1564
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
@@ -368,8 +368,7 @@ msgstr ""
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
-"Checked: The size of this applet remains constant, once all your preferences "
-"have been defined.\n"
+"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
 
@@ -391,7 +390,8 @@ msgstr ""
 
 #. settings-schema.json->separator->tooltip
 msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
+"The string used to separate values in horizontal orientation. Default is "
+"'│'."
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -603,8 +603,7 @@ msgstr ""
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
-"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
-"'Formula'.\n"
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\n"
 "To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
 "'High' and 'Critical' (optional) must be valid numbers.\n"
 "'Formula' (optional):\n"
@@ -631,8 +630,7 @@ msgstr ""
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
-"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
-"see help.\n"
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\n"
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
@@ -732,7 +730,8 @@ msgid "Log intrusions"
 msgstr ""
 
 #. settings-schema.json->journalize_intrusion->tooltip
-msgid "When this option is checked, intrusions are recorded in the system log."
+msgid ""
+"When this option is checked, intrusions are recorded in the system log."
 msgstr ""
 
 #. settings-schema.json->intrusion_sensors->tooltip
@@ -784,7 +783,6 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr ""
 

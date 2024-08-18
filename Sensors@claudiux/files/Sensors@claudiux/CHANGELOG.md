@@ -1,3 +1,6 @@
+### v3.8.0~20240818
+  * Fixes #6300. Better display on a vertical panel.
+
 ### v3.7.0~20240425
   * Added option to record values exceeding limits.
   * Fixes  #5606.
