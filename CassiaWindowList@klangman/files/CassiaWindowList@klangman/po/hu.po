@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# CASSIA WINDOW LIST
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# klangman, 2023
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: CassiaWindowList@klangman 2.2.0\n"
+"Project-Id-Version: CassiaWindowList@klangman 2.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-15 22:10-0400\n"
-"PO-Revision-Date: 2024-07-10 01:53-0400\n"
+"POT-Creation-Date: 2024-08-17 11:44-0400\n"
+"PO-Revision-Date: 2024-07-28 07:47-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:567 6.0/applet.js:567
+#: 4.0/applet.js:568 6.0/applet.js:568
 msgid "all buttons"
 msgstr "minden gomb"
 
-#: 4.0/applet.js:3087 6.0/applet.js:3087
+#: 4.0/applet.js:3128 6.0/applet.js:3128
 msgid "Applet Preferences"
 msgstr "Kisalkalmazás beállítások"
 
-#: 4.0/applet.js:3091 6.0/applet.js:3091
+#: 4.0/applet.js:3132 6.0/applet.js:3132
 msgid "About..."
 msgstr "Névjegy…"
 
-#: 4.0/applet.js:3095 6.0/applet.js:3095
+#: 4.0/applet.js:3136 6.0/applet.js:3136
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: 4.0/applet.js:3099 6.0/applet.js:3099
+#: 4.0/applet.js:3140 6.0/applet.js:3140
 msgid "Website"
 msgstr "Weboldal"
 
-#: 4.0/applet.js:3103 6.0/applet.js:3103
+#: 4.0/applet.js:3144 6.0/applet.js:3144
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#: 4.0/applet.js:3105 6.0/applet.js:3105
+#: 4.0/applet.js:3146 6.0/applet.js:3146
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
 
@@ -59,71 +59,75 @@ msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példány
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3114 6.0/applet.js:3114
+#: 4.0/applet.js:3155 6.0/applet.js:3155
 msgid "Open new window"
 msgstr "Új ablak megnyitása"
 
-#: 4.0/applet.js:3122 6.0/applet.js:3122
+#: 4.0/applet.js:3163 6.0/applet.js:3163
 msgid "Remove from panel"
 msgstr "Eltávolítás a panelról"
 
-#: 4.0/applet.js:3124 6.0/applet.js:3124
+#: 4.0/applet.js:3165 6.0/applet.js:3165
 msgid "Remove from this workspace"
 msgstr "Eltávolítás erről a munkaterületről"
 
-#: 4.0/applet.js:3130 6.0/applet.js:3130
+#: 4.0/applet.js:3171 6.0/applet.js:3171
 msgid "Pin to panel"
 msgstr "Panelhez rögzítés"
 
-#: 4.0/applet.js:3132 6.0/applet.js:3132
+#: 4.0/applet.js:3173 6.0/applet.js:3173
 msgid "Pin to this workspace"
 msgstr "Erre a munkaterületre rögzítés"
 
-#: 4.0/applet.js:3173 6.0/applet.js:3173
+#: 4.0/applet.js:3214 6.0/applet.js:3214
 msgid "Pin to other workspaces"
 msgstr "Más munkaterületre rögzítés"
 
-#: 4.0/applet.js:3194 6.0/applet.js:3194
+#: 4.0/applet.js:3235 6.0/applet.js:3235
 msgid "Pin to all workspaces"
 msgstr "Az összes munkaterületre rögzítés"
 
-#: 4.0/applet.js:3212 6.0/applet.js:3212
+#: 4.0/applet.js:3253 6.0/applet.js:3253
 msgid "Pin to launcher"
 msgstr "Alkalmazásindítóhoz rögzítés"
 
-#: 4.0/applet.js:3230 4.0/applet.js:3422 6.0/applet.js:3230 6.0/applet.js:3422
+#: 4.0/applet.js:3271 4.0/applet.js:3474 6.0/applet.js:3271 6.0/applet.js:3474
 msgid "Add new Hotkey for"
 msgstr "Új gyorsbillentyű hozzáadása ehhez"
 
-#: 4.0/applet.js:3244 6.0/applet.js:3244
+#: 4.0/applet.js:3285 6.0/applet.js:3285
 msgid "Recent files"
 msgstr "Nemrég használt fájlok"
 
-#: 4.0/applet.js:3268 6.0/applet.js:3268
+#: 4.0/applet.js:3309 6.0/applet.js:3309
 msgid "Places"
 msgstr "Helyek"
 
-#: 4.0/applet.js:3310 6.0/applet.js:3310
+#: 4.0/applet.js:3350 6.0/applet.js:3350
+msgid "Always on top"
+msgstr "Mindig felül"
+
+#: 4.0/applet.js:3362 6.0/applet.js:3362
 msgid "Only on this workspace"
 msgstr "Csak ezen a munkaterületen"
 
-#: 4.0/applet.js:3312 6.0/applet.js:3312
+#: 4.0/applet.js:3364 6.0/applet.js:3364
 msgid "Visible on all workspaces"
 msgstr "Minden munkaterületen látható"
 
-#: 4.0/applet.js:3313 6.0/applet.js:3313
+#: 4.0/applet.js:3365 6.0/applet.js:3365
 msgid "Move to another workspace"
 msgstr "Áthelyezés másik munkaterületre"
 
-#: 4.0/applet.js:3322 6.0/applet.js:3322
+#: 4.0/applet.js:3374 6.0/applet.js:3374
 msgid " (this workspace)"
 msgstr " (ez a munkaterület)"
 
-#: 4.0/applet.js:3335 6.0/applet.js:3335
+#: 4.0/applet.js:3387 6.0/applet.js:3387
 msgid "Move to another monitor"
 msgstr "Áthelyezés a másik kijelzőre"
 
-#: 4.0/applet.js:3343 6.0/applet.js:3343
+#: 4.0/applet.js:3395 6.0/applet.js:3395
 msgid "Monitor"
 msgstr "Kijelző"
 
@@ -139,47 +143,47 @@ msgstr "Kijelző"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3360 6.0/applet.js:3360
+#: 4.0/applet.js:3412 6.0/applet.js:3412
 msgid "Move window here"
 msgstr "Ablak mozdítása ide"
 
-#: 4.0/applet.js:3377 6.0/applet.js:3377
+#: 4.0/applet.js:3429 6.0/applet.js:3429
 msgid "unassigned"
 msgstr "nincs társítva"
 
-#: 4.0/applet.js:3388 4.0/applet.js:3419 6.0/applet.js:3388 6.0/applet.js:3419
+#: 4.0/applet.js:3440 4.0/applet.js:3471 6.0/applet.js:3440 6.0/applet.js:3471
 msgid "Assign window to a hotkey"
 msgstr "Az ablak hozzárendelése egy gyorsbillentyűhöz"
 
-#: 4.0/applet.js:3442 6.0/applet.js:3442
+#: 4.0/applet.js:3494 6.0/applet.js:3494
 msgid "Change application label contents"
 msgstr "Az alkalmazáscímke tartalmának módosítása"
 
-#: 4.0/applet.js:3445 6.0/applet.js:3445
+#: 4.0/applet.js:3497 6.0/applet.js:3497
 msgid "Remove custom setting"
 msgstr "Egyéni beállítás eltávolítása"
 
-#: 4.0/applet.js:3452 6.0/applet.js:3452
+#: 4.0/applet.js:3504 6.0/applet.js:3504
 msgid "Use window title"
 msgstr "Ablakcím használata"
 
-#: 4.0/applet.js:3459 6.0/applet.js:3459
+#: 4.0/applet.js:3511 6.0/applet.js:3511
 msgid "Use application name"
 msgstr "Alkalmazásnév használata"
 
-#: 4.0/applet.js:3466 6.0/applet.js:3466
+#: 4.0/applet.js:3518 6.0/applet.js:3518
 msgid "No label"
 msgstr "Nincs címke"
 
-#: 4.0/applet.js:3477 6.0/applet.js:3477
+#: 4.0/applet.js:3529 6.0/applet.js:3529
 msgid "Ungroup application windows"
 msgstr "Ablakokat ne csoportosítsa alkalmazás szerint"
 
-#: 4.0/applet.js:3486 6.0/applet.js:3486
+#: 4.0/applet.js:3538 6.0/applet.js:3538
 msgid "Group application windows"
 msgstr "Alkalmazás ablakok csoportosítása"
 
-#: 4.0/applet.js:3499 6.0/applet.js:3499
+#: 4.0/applet.js:3551 6.0/applet.js:3551
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 
@@ -195,31 +199,31 @@ msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3529 6.0/applet.js:3529
+#: 4.0/applet.js:3581 6.0/applet.js:3581
 msgid "Move titlebar on to screen"
 msgstr "Címsor mozgatása a kijelzőre"
 
-#: 4.0/applet.js:3534 6.0/applet.js:3534
+#: 4.0/applet.js:3586 6.0/applet.js:3586
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#: 4.0/applet.js:3538 6.0/applet.js:3538
+#: 4.0/applet.js:3590 6.0/applet.js:3590
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#: 4.0/applet.js:3544 6.0/applet.js:3544
+#: 4.0/applet.js:3596 6.0/applet.js:3596
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#: 4.0/applet.js:3551 6.0/applet.js:3551
+#: 4.0/applet.js:3603 6.0/applet.js:3603
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#: 4.0/applet.js:3562 6.0/applet.js:3562
+#: 4.0/applet.js:3614 6.0/applet.js:3614
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#: 4.0/applet.js:3571 6.0/applet.js:3571
+#: 4.0/applet.js:3623 6.0/applet.js:3623
 msgid "Close"
 msgstr "Bezárás"
 
@@ -419,21 +423,18 @@ msgstr "Minimalizált ablakok"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other workspaces"
-msgstr "Más munkaterületre rögzítés"
+msgstr "Ablakok más munkaterületeken"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
-#, fuzzy
 msgid "Windows on other monitors"
-msgstr "Gombok más monitorokon lévő ablakokhoz"
+msgstr "Ablakok más monitorokon"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
-#, fuzzy
 msgid "Hide labels for"
-msgstr "A minimalizált gombok címkéinek elrejtése"
+msgstr "Címkék elrejtése a következőnél:"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
@@ -442,6 +443,10 @@ msgid ""
 "be hidden. For application pools, the label will still show unless all "
 "application windows have the selected property"
 msgstr ""
+"Válassza ki az ablak állapotának típusát, amelynél az ablaklista gombjainak "
+"címkéit el kell rejteni. Alkalmazáskészletek esetén a címke továbbra is "
+"megjelenik, kivéve, ha az összes alkalmazásablak rendelkezik a kiválasztott "
+"tulajdonsággal."
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
@@ -915,9 +920,8 @@ msgstr "Alapértelmezett miniatűr ablakméret"
 
 #. 4.0->settings-schema.json->menu-sort-groups->description
 #. 6.0->settings-schema.json->menu-sort-groups->description
-#, fuzzy
 msgid "Sort grouped button thumbnail menu items"
-msgstr "Állítsa vissza vagy tartsa lenyomva a miniatűr menü megjelenítéséhez"
+msgstr "Csoportosított gombok miniatűr menüelemek rendezése"
 
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
@@ -928,6 +932,12 @@ msgid ""
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
+"Ha engedélyezve van, a miniatűr menü először a munkaterület, majd a "
+"csoportosított gombok esetében a monitor száma szerint lesz rendezve. Az "
+"összevont ablakok nem rendezhetők, mivel a sorrend megegyezik az ablaklista "
+"panel sorrendjével. Ha ez a beállítás engedélyezve van, a csoportosított "
+"gombok miniatűr menüinek miniatűr menüje esetében a miniatűr menü "
+"átrendezése a húzással és a levonással nem lesz elérhető."
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
@@ -1167,6 +1177,21 @@ msgstr "Áthelyezés erre a munkaterületre"
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Ezen/minden munkaterületen látható"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Toggle always on top"
+msgstr "Mindig felül bekapcsolása"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1505,9 +1530,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
-#, fuzzy
 msgid "Restore/Minimize 1st window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 1. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1596,9 +1620,8 @@ msgstr "A legutóbbi alkalmazásablak visszaállítása"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 1st window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 1. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1606,9 +1629,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 2nd window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 2. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1616,9 +1638,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 3rd window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 3. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
@@ -1626,9 +1647,8 @@ msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Restore/minimize 4th window in group"
-msgstr "A legutóbbi ablak visszaállítása/kicsinyítése"
+msgstr "A csoport 4. ablakának visszaállítása/kicsinyítése"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
@@ -1665,31 +1685,28 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Minimize/Restore/Maximize window"
-msgstr "Minimalizálás/Visszaállítás"
+msgstr "Ablak minimalizálása/visszaállítása/maximalizálása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change windows workspace"
-msgstr "Tartalmazzon ablakokat minden munkaterületről"
+msgstr "Az ablakok munkaterületének módosítása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows monitor"
-msgstr ""
+msgstr "Ablakok monitor megváltoztatása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Change window tiling"
-msgstr "Ablakcím használata"
+msgstr "Ablak csempézés módosítása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
 msgid "Scroll wheel action"
-msgstr ""
+msgstr "Görgető művelet"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->tooltip
 #. 6.0->settings-schema.json->mouse-action-scroll->tooltip
@@ -1697,6 +1714,9 @@ msgid ""
 "Action taken when using the mouse scroll wheel on a window list button. This "
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
 msgstr ""
+"Az egér görgetőkerékének használata esetén végrehajtott művelet egy "
+"ablaklistagombon. Ez a görgetés le lesz tiltva, ha a bélyegkép menü éppen "
+"nyitva van"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options

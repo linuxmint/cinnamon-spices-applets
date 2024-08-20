@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: moonphase@techi-freki 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-05 18:11-0400\n"
-"PO-Revision-Date: 2023-12-14 08:13+0100\n"
+"PO-Revision-Date: 2024-07-28 07:56-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -21,35 +20,35 @@ msgstr ""
 
 #: js/compass.js:14
 msgid "North"
-msgstr ""
+msgstr "Észak"
 
 #: js/compass.js:15
 msgid "North East"
-msgstr ""
+msgstr "Észak-kelet"
 
 #: js/compass.js:16
 msgid "East"
-msgstr ""
+msgstr "Kelet"
 
 #: js/compass.js:17
 msgid "South East"
-msgstr ""
+msgstr "Dél-kelet"
 
 #: js/compass.js:18
 msgid "South"
-msgstr ""
+msgstr "Dél"
 
 #: js/compass.js:19
 msgid "South West"
-msgstr ""
+msgstr "Dél-nyugat"
 
 #: js/compass.js:20
 msgid "West"
-msgstr ""
+msgstr "Nyugat"
 
 #: js/compass.js:21
 msgid "North West"
-msgstr ""
+msgstr "Észak-nyugat"
 
 #: js/moon.js:32 js/moon.js:40
 msgid "New Moon"
@@ -85,57 +84,53 @@ msgstr "Csökkenő holdsarló"
 
 #: js/ui/currentPhaseUi.js:32
 msgid "illumination"
-msgstr ""
+msgstr "megvilágítás"
 
 #: js/ui/riseSetUi.js:55
 msgid "The moon is always down and will not rise today"
-msgstr ""
+msgstr "A Hold mindig lent van, és ma nem kel fel"
 
 #: js/ui/riseSetUi.js:65
 msgid "The moon is always up and will not set today"
-msgstr ""
+msgstr "A Hold mindig fent van, és ma sem fog lenyugodni"
 
 #: js/ui/riseSetUi.js:76
-#, fuzzy
 msgid "Moonrise"
-msgstr "Holdfázis"
+msgstr "Holdkelte"
 
 #: js/ui/riseSetUi.js:83
 msgid "Lunar Noon"
-msgstr ""
+msgstr "Holddél"
 
 #: js/ui/riseSetUi.js:90
-#, fuzzy
 msgid "Moonset"
-msgstr "Holdfázis"
+msgstr "Holdnyugta"
 
 #: js/ui/elements/noRiseSetElement.js:54
-#, fuzzy
 msgid "Next Moonrise"
-msgstr "Újhold"
+msgstr "Következő Holdkelte"
 
 #: js/ui/elements/noRiseSetElement.js:66
-#, fuzzy
 msgid "Next Moonset"
-msgstr "Újhold"
+msgstr "Következő Holdnyugta"
 
 #. metadata.json->name
 msgid "Moon Phase"
 msgstr "Holdfázis"
 
 #. metadata.json->description
-#, fuzzy
 msgid "A Cinnamon applet that displays up-to-date moon related information."
-msgstr "Cinnamon kisalkalmazás, amely megjeleníti az aktuális holdfázist."
+msgstr ""
+"Egy Cinnamon kisalkalmazás, amely naprakész információkat jelenít meg a "
+"Holddal kapcsolatban."
 
 #. settings-schema.json->page-settings->title
 msgid "Settings"
 msgstr "Beállítások"
 
 #. settings-schema.json->section-geolocation->title
-#, fuzzy
 msgid "Geolocation Settings"
-msgstr "Általános beállítások"
+msgstr "Geolokációs beállítások"
 
 #. settings-schema.json->section-general->title
 msgid "General Settings"
@@ -147,34 +142,32 @@ msgstr "Frissítési beállítások"
 
 #. settings-schema.json->enableGeolocation->description
 msgid "Enable geolocation features"
-msgstr ""
+msgstr "Goelokációs funkciók engedélyezése"
 
 #. settings-schema.json->latitude->description
 msgid "Latitude"
-msgstr ""
+msgstr "Szélesség"
 
 #. settings-schema.json->longitude->description
 msgid "Longitude"
-msgstr ""
+msgstr "Hosszúság"
 
 #. settings-schema.json->enablePopup->description
 msgid "Enable popup menu"
-msgstr ""
+msgstr "Előugró menü engedélyezése"
 
 #. settings-schema.json->showCurrentPhaseInfo->description
-#, fuzzy
 msgid "Display the current phase information"
-msgstr "Jelenítse meg a holdfázist karakterláncként"
+msgstr "Az aktuális fázis információ megjelenítése"
 
 #. settings-schema.json->showRiseSet->description
-#, fuzzy
 msgid "Display the moon rise, transit, and set times"
-msgstr "Jelenítse meg a holdfázist karakterláncként"
+msgstr ""
+"Megjeleníti a holdfelkeltét, a szállítást és a beállított időpontokat"
 
 #. settings-schema.json->showPhaseLabel->description
-#, fuzzy
 msgid "Display the applet label"
-msgstr "Jelenítse meg a holdfázis nevét a címkén"
+msgstr "Jelenítse meg a kisalkalmazás címkéjét"
 
 #. settings-schema.json->showNameLabel->description
 msgid "Display the name of the moon phase in the label"

@@ -325,7 +325,22 @@ mcsm.prototype = {
   },
 
   _runSysMon: function() {
+    let systemMonitoringCenter = appSystem.lookup_flatpak_app_id('io.github.hakandundar34coding.system-monitoring-center');
+    if (systemMonitoringCenter) {
+        systemMonitoringCenter.activate();
+        return
+    }
+    systemMonitoringCenter = appSystem.lookup_app('io.github.hakandundar34coding.system-monitoring-center.desktop');
+    if (systemMonitoringCenter) {
+        systemMonitoringCenter.activate();
+        return
+    }
     let gnomeSystemMonitor = appSystem.lookup_app('gnome-system-monitor.desktop');
+    if (gnomeSystemMonitor) {
+      gnomeSystemMonitor.activate();
+      return
+    }
+    gnomeSystemMonitor = appSystem.lookup_app('org.gnome.SystemMonitor.desktop');
     if (gnomeSystemMonitor) {
       gnomeSystemMonitor.activate();
     }

@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-07-03 19:28+0200\n"
-"PO-Revision-Date: 2024-03-31 10:38+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-18 20:29+0200\n"
+"PO-Revision-Date: 2024-08-18 20:39+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #: applet.js:214
@@ -32,7 +31,7 @@ msgstr "Désactivé"
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:697
+#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:698
 msgid "n/a"
 msgstr "n/a"
 
@@ -40,69 +39,69 @@ msgstr "n/a"
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:697 applet.js:740
+#: applet.js:698 applet.js:742
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:742
+#: applet.js:744
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:770
+#: applet.js:773
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:770
+#: applet.js:773
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:790
+#: applet.js:793
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:1125
+#: applet.js:1175
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:1125
+#: applet.js:1175
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:1132
+#: applet.js:1182
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:1142
+#: applet.js:1192
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:1152
+#: applet.js:1202
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:1162
+#: applet.js:1212
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:1172
+#: applet.js:1222
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:1193
+#: applet.js:1243
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:1202
+#: applet.js:1252
 msgid "Suspend Sensors"
 msgstr "Désactiver Sensors"
 
-#: applet.js:1213
+#: applet.js:1263
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1514
+#: applet.js:1564
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
@@ -212,7 +211,7 @@ msgstr "⮿ Intrusion"
 
 #. settings-schema.json->page_Custom->title
 msgid "⛓ Custom"
-msgstr ""
+msgstr "⛓ Personnel"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -270,12 +269,11 @@ msgstr "Capteurs d'intrusion"
 
 #. settings-schema.json->section_customDisclaimer->title
 msgid "Disclaimer"
-msgstr ""
+msgstr "Avertissement"
 
 #. settings-schema.json->section_customSensors->title
-#, fuzzy
 msgid "Custom sensors"
-msgstr "Capteurs d'intrusion"
+msgstr "Capteurs personnels"
 
 #. settings-schema.json->interval->options
 msgid "1"
@@ -554,13 +552,15 @@ msgstr ""
 
 #. settings-schema.json->journalize_temp->description
 msgid "Log high and critical temperatures"
-msgstr ""
+msgstr "Enregistrer les températures élevées et critiques"
 
 #. settings-schema.json->journalize_temp->tooltip
 msgid ""
 "When this option is checked, temperatures exceeding the high or critical "
 "limit are recorded in the system journal."
 msgstr ""
+"Lorsque cette option est cochée, les températures dépassant la limite haute "
+"ou critique sont enregistrées dans le journal du système."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -694,13 +694,15 @@ msgstr "Abréviation de \"Rotations par minute\""
 
 #. settings-schema.json->journalize_fan->description
 msgid "Log critical fan speeds"
-msgstr ""
+msgstr "Enregistrer les vitesses critiques des ventilateurs"
 
 #. settings-schema.json->journalize_fan->tooltip
 msgid ""
 "When this option is checked, fan speeds below the critical limit are "
 "recorded in the system log."
 msgstr ""
+"Lorsque cette option est cochée, les vitesses de ventilateur inférieures à "
+"la limite critique sont enregistrées dans le journal du système."
 
 #. settings-schema.json->fan_sensors->columns->title
 msgid ""
@@ -747,13 +749,16 @@ msgstr "mV seulement"
 
 #. settings-schema.json->journalize_volt->description
 msgid "Log critical voltages"
-msgstr ""
+msgstr "Enregistrer les tensions critiques"
 
 #. settings-schema.json->journalize_volt->tooltip
 msgid ""
 "When this option is checked, voltages below the minimum limit or above the "
 "maximum limit are recorded in the system log."
 msgstr ""
+"Lorsque cette option est cochée, les tensions inférieures à la limite "
+"minimale ou supérieures à la limite maximale sont enregistrées dans le "
+"journal du système."
 
 #. settings-schema.json->volt_sensors->columns->title
 msgid ""
@@ -806,13 +811,14 @@ msgstr ""
 "Afficher dans le panneau uniquement lorsqu'une intrusion a été détectée"
 
 #. settings-schema.json->journalize_intrusion->description
-#, fuzzy
 msgid "Log intrusions"
-msgstr "⮿ Intrusion"
+msgstr "Enregistrer les intrusions"
 
 #. settings-schema.json->journalize_intrusion->tooltip
 msgid "When this option is checked, intrusions are recorded in the system log."
 msgstr ""
+"Lorsque cette option est cochée, les intrusions sont enregistrées dans le "
+"journal du système."
 
 #. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
@@ -827,48 +833,54 @@ msgid ""
 "These settings are for advanced users only!\n"
 "Please refer to the README file."
 msgstr ""
+"Ces paramètres sont réservés aux utilisateurs avancés !\n"
+"Veuillez vous référer au fichier README."
 
 #. settings-schema.json->custom_openREADME->description
 msgid "Open the README file"
-msgstr ""
+msgstr "Ouvrir le fichier README"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "File to\n"
 "monitor"
 msgstr ""
+"Fichier à\n"
+"surveiller"
 
 #. settings-schema.json->custom_sensors->columns->title
 msgid ""
 "High\n"
 "value"
 msgstr ""
+"Valeur\n"
+"élevée"
 
 #. settings-schema.json->custom_sensors->columns->title
-#, fuzzy
 msgid ""
 "Critical\n"
 "value"
 msgstr ""
-"Critique\n"
-"(°C)"
+"Valeur\n"
+"critique"
 
 #. settings-schema.json->custom_sensors->tooltip
 msgid ""
 "Add a line by custom sensor to set the type, the name and the path of the "
 "file to monitor (/sys/class/...)."
 msgstr ""
+"Ajoutez une ligne par capteur personnalisé pour définir le type, le nom et "
+"le chemin du fichier à surveiller (/sys/class/...)."
 
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Exemple de valeurs des capteurs de cet ordinateur"
 

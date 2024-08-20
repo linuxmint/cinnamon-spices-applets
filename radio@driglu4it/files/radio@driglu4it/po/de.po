@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2021-02-08 17:29+0100\n"
+"PO-Revision-Date: 2024-07-27 00:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -111,6 +111,14 @@ msgstr "Radio++ anhalten"
 msgid "Please install the '%s' package."
 msgstr "Bitte das Paket »%s« installieren."
 
+#: 4.6/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr "Radiostationen finden"
+
+#: 4.6/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr "zu meinem Sendern hinzufügen"
+
 #: 4.6/download-dialog-mpris.py:36 4.6/download-dialog-youtube-dl.py:36
 msgid "Download Confirmation Dialog"
 msgstr "Download-Bestätigungsdialog"
@@ -168,15 +176,15 @@ msgid "A simple radio applet for Cinnamon"
 msgstr "Ein einfaches Radio-Applet für Cinnamon"
 
 #. 4.6->settings-schema.json->radio-stations-page->title
-msgid "Radio Stations"
-msgstr "Radiostationen"
+msgid "My Stations"
+msgstr "Meine Radiostationen"
 
 #. 4.6->settings-schema.json->preferences-page->title
 msgid "Preferences"
 msgstr "Einstellungen"
 
 #. 4.6->settings-schema.json->find-station-section->title
-msgid "Find station"
+msgid "Find Station"
 msgstr "Radiostation finden"
 
 #. 4.6->settings-schema.json->appearance-section->title
@@ -244,7 +252,11 @@ msgstr "Zweifarbig"
 
 #. 4.6->settings-schema.json->color-on->description
 msgid "Color of symbolic icon when playing a radio station"
-msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
+msgstr "Farbe des Icons, wenn das Radio läuft"
+
+#. 4.6->settings-schema.json->color-paused->description
+msgid "Color of symbolic icon while a radio station is paused"
+msgstr "Farbe des Icons, wenn das Radio pausiert ist"
 
 #. 4.6->settings-schema.json->channel-on-panel->description
 msgid "Show current radio station on the panel"
@@ -307,10 +319,6 @@ msgstr "Farbiges Icon"
 #. 3.0->settings-schema.json->icon-type->options
 msgid "Bicolor Icon"
 msgstr "Zweifarbiges Icon"
-
-#. 3.0->settings-schema.json->color-on->description
-msgid "Color of Symbolic Icon when playing a radio"
-msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
 
 #~ msgid ""
 #~ "Can't increase Volume. Volume already at maximum. Change the Maximum "

@@ -1,3 +1,7 @@
+### v6.18.0~20240731
+  * Improves certain icons.
+  * Improved support for Pulse Effects and Easy Effects.
+
 ### v6.17.3~20240702
   * Fixes #6143.
 

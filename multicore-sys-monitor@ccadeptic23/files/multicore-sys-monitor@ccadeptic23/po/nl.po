@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-23 04:17+0200\n"
-"PO-Revision-Date: 2024-04-22 13:35+0200\n"
+"PO-Revision-Date: 2024-07-24 10:09+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -158,11 +158,11 @@ msgstr "Vernieuw grafieken"
 
 #: 6.0/applet.js:301
 msgid "Without any graphics"
-msgstr ""
+msgstr "Zonder enige grafieken"
 
 #: 6.0/applet.js:307
 msgid "With graphics"
-msgstr ""
+msgstr "Met grafieken"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "00-20"
@@ -221,7 +221,7 @@ msgstr "Schrijven"
 #: 6.0/util.js:244 5.6/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr ""
+msgstr "Uitvoering van '%s' is mislukt:"
 
 #: 3.4/applet.js:62
 msgid ""

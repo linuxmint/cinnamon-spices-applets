@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-01 23:31+0200\n"
-"PO-Revision-Date: 2024-07-05 07:04+0200\n"
+"POT-Creation-Date: 2024-07-31 02:53+0200\n"
+"PO-Revision-Date: 2024-07-31 18:42+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -200,7 +200,7 @@ msgstr "%s bytes = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:520 applet.js:534 applet.js:5010 applet.js:5022
+#: applet.js:520 applet.js:534 applet.js:5047 applet.js:5059
 msgid "(Undefined)"
 msgstr "(Sense definir)"
 
@@ -212,7 +212,7 @@ msgstr "Lloc web de Radio3.0..."
 msgid "Start"
 msgstr "Iniciar"
 
-#: applet.js:2064 applet.js:2759
+#: applet.js:2064 applet.js:2768
 msgid "Stop"
 msgstr "Aturar"
 
@@ -240,15 +240,15 @@ msgstr "Clic per a seleccionar una emissora"
 msgid "Scroll wheel: volume change"
 msgstr "Roda del ratolí: canvi de volum"
 
-#: applet.js:2438 applet.js:2777 applet.js:4635
+#: applet.js:2438 applet.js:2786 applet.js:4663
 msgid "Configure..."
 msgstr "Configurar..."
 
-#: applet.js:2442 applet.js:2769
+#: applet.js:2442 applet.js:2778
 msgid "Search for new stations..."
 msgstr "Buscar noves emissores..."
 
-#: applet.js:2448 applet.js:2781 applet.js:4672
+#: applet.js:2448 applet.js:2790 applet.js:4700
 msgid "Sound Settings"
 msgstr "Configuració de So"
 
@@ -264,266 +264,270 @@ msgstr "Intentar descarregar-ho de Youtube (no és segur)"
 msgid "Recently Played Stations:"
 msgstr "Emissores escoltades recentment:"
 
-#: applet.js:2629
+#: applet.js:2630
 msgid "Visit the home page of this station"
 msgstr "Visiteu el lloc web d'aquesta emissora"
 
-#: applet.js:2668
+#: applet.js:2669
 msgid "Categories"
 msgstr "Categories"
 
-#: applet.js:2670
+#: applet.js:2671
 msgid "Radio Stations"
 msgstr "Emissores de Ràdio"
 
-#: applet.js:2679
+#: applet.js:2681
 msgid "All Categories"
 msgstr "Totes les categories"
 
-#: applet.js:2702
+#: applet.js:2711
 msgid "My Radio Stations"
 msgstr "Les meves emissores"
 
-#: applet.js:2884
+#: applet.js:2910
 msgid "Downloading..."
 msgstr "Descarregant..."
 
-#: applet.js:2886
+#: applet.js:2912
 msgid "Stop downloading"
 msgstr "Atura la descàrrega"
 
-#: applet.js:2990
+#: applet.js:3016
 msgid "Download complete"
 msgstr "Descàrrega completa"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#: applet.js:2992 applet.js:3001 applet.js:4434 applet.js:4443 applet.js:4452
-#: applet.js:4753
+#: applet.js:3018 applet.js:3027 applet.js:4462 applet.js:4471 applet.js:4480
+#: applet.js:4790
 msgid "Open the recordings folder"
 msgstr "Obre la carpeta de les gravacions"
 
-#: applet.js:2999 applet.js:4431 applet.js:4441 applet.js:4450
+#: applet.js:3025 applet.js:4459 applet.js:4469 applet.js:4478
 msgid "An error seems to have occurred during recording!"
 msgstr "Sembla que hi ha hagut un error mentre es gravava!"
 
-#: applet.js:3000 applet.js:4433 applet.js:4442 applet.js:4451
+#: applet.js:3026 applet.js:4461 applet.js:4470 applet.js:4479
 msgid "Please check this record."
 msgstr "Si us plau, reviseu aquesta gravació."
 
-#: applet.js:3107 applet.js:3141
+#: applet.js:3133 applet.js:3167
 msgid "Record from now"
 msgstr "Gravar des d'ara"
 
-#: applet.js:3125 applet.js:4916
+#: applet.js:3151 applet.js:4953
 msgid "Stop Current Recording"
 msgstr "Aturar la gravació actual"
 
-#: applet.js:3253
+#: applet.js:3279
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Reproduint %s%s"
 
-#: applet.js:3306
+#: applet.js:3332
 msgid "Radio OFF"
 msgstr "Ràdio Apagada"
 
-#: applet.js:3434
+#: applet.js:3460
 msgid "Unable to record anything!"
 msgstr "No s'ha pogut gravar res!"
 
-#: applet.js:3434 applet.js:4773
+#: applet.js:3460 applet.js:4810
 msgid "Insufficient space"
 msgstr "Espai insuficient"
 
-#: applet.js:3434
+#: applet.js:3460
 msgid "The limit you set has been reached."
 msgstr "S'ha arribat al límit que heu establert."
 
-#: applet.js:3822
+#: applet.js:3846
 msgid "Please Log Out then Log In"
 msgstr "Si us plau tanqueu la sessió i inicieu-la de nou"
 
-#: applet.js:3822
+#: applet.js:3846
 msgid "to finalize yt-dlp update"
 msgstr "per acabar l'actualització de yt-dlp"
 
-#: applet.js:3923
+#: applet.js:3951
 msgid "Nothing to save."
 msgstr "No hi ha res a guardar."
 
-#: applet.js:3936
+#: applet.js:3964
 msgid "List of saved radio stations"
 msgstr "Llista d'emissores de ràdio guardades"
 
-#: applet.js:3954
+#: applet.js:3982
 msgid "This will replace all current radio stations."
 msgstr "Això substituirà totes les emissores de ràdio actuals."
 
-#: applet.js:3955
+#: applet.js:3983
 msgid "Are you sure you want to continue?"
 msgstr "Segur que voleu continuar?"
 
-#: applet.js:4015
+#: applet.js:4043
 msgid "Update in progress"
 msgstr "Actualització en procés"
 
-#: applet.js:4015
+#: applet.js:4043
 msgid "It may take a while ... Please wait."
 msgstr "Pot ser que tardi una mica... si us plau, espereu."
 
-#: applet.js:4105
+#: applet.js:4133
 msgid "Update completed successfully"
 msgstr "S'ha completat l'actualització amb èxit"
 
-#: applet.js:4315 applet.js:4371
+#: applet.js:4343 applet.js:4399
 msgid "ERROR: Invalid YT video URL!"
 msgstr "ERROR: URL de vídeo de Youtube invàlida!"
 
-#: applet.js:4340
+#: applet.js:4368
 msgid "Unable to extract a single soundtrack"
 msgstr "No s'ha pogut extreure cap pista de so"
 
-#: applet.js:4340
+#: applet.js:4368
 msgid "Maybe it's a playlist?"
 msgstr "Potser és una llista de reproducció?"
 
-#: applet.js:4373
+#: applet.js:4401
 msgid "Close"
 msgstr "Tancar"
 
-#: applet.js:4593
+#: applet.js:4621
 msgid "About..."
 msgstr "Quant a..."
 
-#: applet.js:4616
+#: applet.js:4644
 msgid "Manual..."
 msgstr "Manual..."
 
-#: applet.js:4648
+#: applet.js:4676
 msgid "Schedule a background record..."
 msgstr "Programar una gravació desatesa..."
 
-#: applet.js:4660
+#: applet.js:4688
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Extreure pista d'àudio d'un vídeo de Youtube..."
 
-#: applet.js:4681
+#: applet.js:4709
 msgid "Pulse Effects"
 msgstr "Pulse Effects"
 
-#: applet.js:4690
+#: applet.js:4718
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+#: applet.js:4727
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#: applet.js:4703
+#: applet.js:4740
 msgid "Radio ON at startup"
 msgstr "Ràdio engegada a l'inici"
 
-#: applet.js:4717
+#: applet.js:4754
 msgid "Display Station Logo"
 msgstr "Mostrar el logo de l'emissora"
 
 #. settings-schema.json->dont-check-dependencies->description
-#: applet.js:4731
+#: applet.js:4768
 msgid "Do not check about dependencies"
 msgstr "No facis comprovacions de dependències"
 
-#: applet.js:4770
+#: applet.js:4807
 msgid "(auto)"
 msgstr "(auto)"
 
-#: applet.js:4770
+#: applet.js:4807
 msgid "(manual)"
 msgstr "(manual)"
 
-#: applet.js:4773 applet.js:4965
+#: applet.js:4810 applet.js:5002
 msgid "Stop Recording"
 msgstr "Para de gravar"
 
-#: applet.js:4773
+#: applet.js:4810
 msgid "Start Recording"
 msgstr "Inicia la gravació"
 
-#: applet.js:4794
+#: applet.js:4831
 msgid "Reload this applet"
 msgstr "Recarrega aquesta miniaplicació"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#: applet.js:4810
+#: applet.js:4847
 msgid "Display volume level near icon"
 msgstr "Mostra el nivell de volum al costat de la icona"
 
-#: applet.js:4828
+#: applet.js:4865
 msgid "Cancel downloads from YT"
 msgstr "Cancel·la descàrregues de Youtube"
 
-#: applet.js:4966
+#: applet.js:5003
 msgid "Close without stopping recording"
 msgstr "Tanca sense aturar la gravació"
 
-#: applet.js:5176
+#: applet.js:5213
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Comença la gravació des de %s:%s fins a %s:%s"
 
-#: applet.js:5188
+#: applet.js:5225
 msgid "Recording completed"
 msgstr "Gravació completada"
 
-#: applet.js:5283
+#: applet.js:5320
 msgid "This will import a new file containing radio stations."
 msgstr "Això importarà un fitxer nou contenint emissores de ràdio."
 
-#: applet.js:5284
+#: applet.js:5321
 msgid "Do you want to continue?"
 msgstr "Voleu continuar?"
 
-#: applet.js:5355
+#: applet.js:5392
 msgid "No new radio in your list."
 msgstr "No hi ha cap ràdio nova a la vostra llista."
 
-#: applet.js:5357
+#: applet.js:5394
 msgid "One more radio in your list."
 msgstr "Una nova ràdio a la vostra llista."
 
-#: applet.js:5359
+#: applet.js:5396
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s ràdios noves a la vostra llista."
 
-#: applet.js:5566
+#: applet.js:5603
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 "No hi ha noves emissores per afegir al menú de la miniaplicació Radio3.0"
 
-#: applet.js:5568
+#: applet.js:5605
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr ""
 "Una nova emissora de ràdio s'ha afegit al menú de la miniaplicació Radio3.0"
 
-#: applet.js:5570
+#: applet.js:5607
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr ""
 "%s noves emissores de ràdio s'han afegir al menú de la miniaplicació Radio3.0"
 
-#: applet.js:5771
+#: applet.js:5808
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#: lib/checkDependencies.js:384
+#: lib/checkDependencies.js:392
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "La miniaplicació %s funciona correctament."
 
-#: lib/checkDependencies.js:385
+#: lib/checkDependencies.js:393
 msgid "All dependencies are installed"
 msgstr "Totes les dependències estan instal·lades"
 
-#: lib/checkDependencies.js:413
+#: lib/checkDependencies.js:423
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -531,12 +535,12 @@ msgstr ""
 "Sembla que us falta instal·lar alguns programes necessaris per al correcte "
 "funcionament aquesta miniaplicació."
 
-#: lib/checkDependencies.js:414
+#: lib/checkDependencies.js:424
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Si us plau, executeu les següents ordres al terminal que acaba d'obrir-se:"
 
-#: lib/checkDependencies.js:415
+#: lib/checkDependencies.js:425
 msgid "Some dependencies are not installed!"
 msgstr "Algunes dependències no estan instal·lades!"
 
@@ -549,14 +553,6 @@ msgstr ""
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "L'execució de '%s' ha fallat:"
-
-#: scripts/popup_menu.py:71
-msgid "Open Folder"
-msgstr "Obrir carpeta"
-
-#: scripts/popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Obrir al terminal"
 
 #: xs/xlet-settings.py:214
 msgid "Previous instance"
@@ -1915,11 +1911,11 @@ msgstr "(El meu país)"
 
 #. settings-schema.json->search-country->options
 msgid "Afghanistan - AF"
-msgstr "Afghanistan - AF"
+msgstr "Afganistan - AF"
 
 #. settings-schema.json->search-country->options
 msgid "Åland Islands - AX"
-msgstr "Åland Islands - AX"
+msgstr "Illes Åland - AX"
 
 #. settings-schema.json->search-country->options
 msgid "Albania - AL"
@@ -1931,7 +1927,7 @@ msgstr "Algèria - DZ"
 
 #. settings-schema.json->search-country->options
 msgid "American Samoa - AS"
-msgstr "American Samoa - AS"
+msgstr "Samoa americana - AS"
 
 #. settings-schema.json->search-country->options
 msgid "Andorra - AD"
@@ -1947,11 +1943,11 @@ msgstr "Anguilla - AI"
 
 #. settings-schema.json->search-country->options
 msgid "Antarctica - AQ"
-msgstr "Antarctica - AQ"
+msgstr "Antàrtica - AQ"
 
 #. settings-schema.json->search-country->options
 msgid "Antigua And Barbuda - AG"
-msgstr "Antigua And Barbuda - AG"
+msgstr "Antiga i Barbuda - AG"
 
 #. settings-schema.json->search-country->options
 msgid "Argentina - AR"
@@ -1959,7 +1955,7 @@ msgstr "Argentina - AR"
 
 #. settings-schema.json->search-country->options
 msgid "Armenia - AM"
-msgstr "Armenia - AM"
+msgstr "Armènia - AM"
 
 #. settings-schema.json->search-country->options
 msgid "Aruba - AW"
@@ -1967,19 +1963,19 @@ msgstr "Aruba - AW"
 
 #. settings-schema.json->search-country->options
 msgid "Australia - AU"
-msgstr "Australia - AU"
+msgstr "Austràlia - AU"
 
 #. settings-schema.json->search-country->options
 msgid "Austria - AT"
-msgstr "Austria - AT"
+msgstr "Àustria - AT"
 
 #. settings-schema.json->search-country->options
 msgid "Azerbaijan - AZ"
-msgstr "Azerbaijan - AZ"
+msgstr "Azerbaidjan - AZ"
 
 #. settings-schema.json->search-country->options
 msgid "Bahamas - BS"
-msgstr "Bahamas - BS"
+msgstr "Bahames - BS"
 
 #. settings-schema.json->search-country->options
 msgid "Bahrain - BH"
@@ -1995,11 +1991,11 @@ msgstr "Barbados - BB"
 
 #. settings-schema.json->search-country->options
 msgid "Belarus - BY"
-msgstr "Belarus - BY"
+msgstr "Bielorússia - BY"
 
 #. settings-schema.json->search-country->options
 msgid "Belgium - BE"
-msgstr "Belgium - BE"
+msgstr "Bèlgica - BE"
 
 #. settings-schema.json->search-country->options
 msgid "Belize - BZ"
@@ -2007,7 +2003,7 @@ msgstr "Belize - BZ"
 
 #. settings-schema.json->search-country->options
 msgid "Benin - BJ"
-msgstr "Benin - BJ"
+msgstr "Benín - BJ"
 
 #. settings-schema.json->search-country->options
 msgid "Bermuda - BM"
@@ -2019,15 +2015,15 @@ msgstr "Bhutan - BT"
 
 #. settings-schema.json->search-country->options
 msgid "Bolivia (Plurinational State Of) - BO"
-msgstr "Bolivia (Plurinational State Of) - BO"
+msgstr "Bolívia (Estat plurinacional de) - BO"
 
 #. settings-schema.json->search-country->options
 msgid "Bonaire (Sint Eustatius And Saba) - BQ"
-msgstr "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr "Bonaire (Sant Eustaqui i Saba) - BQ"
 
 #. settings-schema.json->search-country->options
 msgid "Bosnia And Herzegovina - BA"
-msgstr "Bosnia And Herzegovina - BA"
+msgstr "Bòsnia i Hercegovina - BA"
 
 #. settings-schema.json->search-country->options
 msgid "Botswana - BW"
@@ -2035,15 +2031,15 @@ msgstr "Botswana - BW"
 
 #. settings-schema.json->search-country->options
 msgid "Bouvet Island - BV"
-msgstr "Bouvet Island - BV"
+msgstr "Illa de Bouvet - BV"
 
 #. settings-schema.json->search-country->options
 msgid "Brazil - BR"
-msgstr "Brazil - BR"
+msgstr "Brasil - BR"
 
 #. settings-schema.json->search-country->options
 msgid "British Indian Ocean Territory - IO"
-msgstr "British Indian Ocean Territory - IO"
+msgstr "Territori anglès de l'oceà índic - IO"
 
 #. settings-schema.json->search-country->options
 msgid "Brunei Darussalam - BN"
@@ -2051,7 +2047,7 @@ msgstr "Brunei Darussalam - BN"
 
 #. settings-schema.json->search-country->options
 msgid "Bulgaria - BG"
-msgstr "Bulgaria - BG"
+msgstr "Bulgària - BG"
 
 #. settings-schema.json->search-country->options
 msgid "Burkina Faso - BF"
@@ -2063,51 +2059,51 @@ msgstr "Burundi - BI"
 
 #. settings-schema.json->search-country->options
 msgid "Cambodia - KH"
-msgstr "Cambodia - KH"
+msgstr "Cambodja - KH"
 
 #. settings-schema.json->search-country->options
 msgid "Cameroon - CM"
-msgstr "Cameroon - CM"
+msgstr "Camerun - CM"
 
 #. settings-schema.json->search-country->options
 msgid "Canada - CA"
-msgstr "Canada - CA"
+msgstr "Canadà - CA"
 
 #. settings-schema.json->search-country->options
 msgid "Cape Verde - CV"
-msgstr "Cape Verde - CV"
+msgstr "Cap Verd - CV"
 
 #. settings-schema.json->search-country->options
 msgid "Cayman Islands - KY"
-msgstr "Cayman Islands - KY"
+msgstr "Illes Caiman - KY"
 
 #. settings-schema.json->search-country->options
 msgid "Central African Republic - CF"
-msgstr "Central African Republic - CF"
+msgstr "República Central Africana - CF"
 
 #. settings-schema.json->search-country->options
 msgid "Chad - TD"
-msgstr "Chad - TD"
+msgstr "Txad - TD"
 
 #. settings-schema.json->search-country->options
 msgid "Chile - CL"
-msgstr "Chile - CL"
+msgstr "Xile - CL"
 
 #. settings-schema.json->search-country->options
 msgid "China - CN"
-msgstr "China - CN"
+msgstr "Xina - CN"
 
 #. settings-schema.json->search-country->options
 msgid "Christmas Island - CX"
-msgstr "Christmas Island - CX"
+msgstr "Illa de Nadal - CX"
 
 #. settings-schema.json->search-country->options
 msgid "Cocos (Keeling) Islands - CC"
-msgstr "Cocos (Keeling) Islands - CC"
+msgstr "Illes Cocos - CC"
 
 #. settings-schema.json->search-country->options
 msgid "Colombia - CO"
-msgstr "Colombia - CO"
+msgstr "Colòmbia - CO"
 
 #. settings-schema.json->search-country->options
 msgid "Comoros - KM"
@@ -2119,11 +2115,11 @@ msgstr "Congo - CG"
 
 #. settings-schema.json->search-country->options
 msgid "Congo (The Democratic Republic Of The) - CD"
-msgstr "Congo (The Democratic Republic Of The) - CD"
+msgstr "Congo (República democràtica del) - CD"
 
 #. settings-schema.json->search-country->options
 msgid "Cook Islands - CK"
-msgstr "Cook Islands - CK"
+msgstr "Illes Cook - CK"
 
 #. settings-schema.json->search-country->options
 msgid "Costa Rica - CR"
@@ -2131,11 +2127,11 @@ msgstr "Costa Rica - CR"
 
 #. settings-schema.json->search-country->options
 msgid "Côte D'Ivoire - CI"
-msgstr "Côte D'Ivoire - CI"
+msgstr "Costa d'Ivori - CI"
 
 #. settings-schema.json->search-country->options
 msgid "Croatia - HR"
-msgstr "Croatia - HR"
+msgstr "Croàcia - HR"
 
 #. settings-schema.json->search-country->options
 msgid "Cuba - CU"
@@ -2147,15 +2143,15 @@ msgstr "Curaçao - CW"
 
 #. settings-schema.json->search-country->options
 msgid "Cyprus - CY"
-msgstr "Cyprus - CY"
+msgstr "Xipre - CY"
 
 #. settings-schema.json->search-country->options
 msgid "Czech Republic - CZ"
-msgstr "Czech Republic - CZ"
+msgstr "Txèquia - CZ"
 
 #. settings-schema.json->search-country->options
 msgid "Denmark - DK"
-msgstr "Denmark - DK"
+msgstr "Dinamarca - DK"
 
 #. settings-schema.json->search-country->options
 msgid "Djibouti - DJ"
@@ -2167,15 +2163,15 @@ msgstr "Dominica - DM"
 
 #. settings-schema.json->search-country->options
 msgid "Dominican Republic - DO"
-msgstr "Dominican Republic - DO"
+msgstr "República Dominicana - DO"
 
 #. settings-schema.json->search-country->options
 msgid "Ecuador - EC"
-msgstr "Ecuador - EC"
+msgstr "Equador - EC"
 
 #. settings-schema.json->search-country->options
 msgid "Egypt - EG"
-msgstr "Egypt - EG"
+msgstr "Egipte - EG"
 
 #. settings-schema.json->search-country->options
 msgid "El Salvador - SV"
@@ -2183,7 +2179,7 @@ msgstr "El Salvador - SV"
 
 #. settings-schema.json->search-country->options
 msgid "Equatorial Guinea - GQ"
-msgstr "Equatorial Guinea - GQ"
+msgstr "Guinea Equatorial - GQ"
 
 #. settings-schema.json->search-country->options
 msgid "Eritrea - ER"
@@ -2191,19 +2187,19 @@ msgstr "Eritrea - ER"
 
 #. settings-schema.json->search-country->options
 msgid "Estonia - EE"
-msgstr "Estonia - EE"
+msgstr "Estònia - EE"
 
 #. settings-schema.json->search-country->options
 msgid "Ethiopia - ET"
-msgstr "Ethiopia - ET"
+msgstr "Etiòpia - ET"
 
 #. settings-schema.json->search-country->options
 msgid "Falkland Islands (Malvinas) - FK"
-msgstr "Falkland Islands (Malvinas) - FK"
+msgstr "Illes Falkland (Malvines) - FK"
 
 #. settings-schema.json->search-country->options
 msgid "Faroe Islands - FO"
-msgstr "Faroe Islands - FO"
+msgstr "Illes Fèroe - FO"
 
 #. settings-schema.json->search-country->options
 msgid "Fiji - FJ"
@@ -2211,23 +2207,23 @@ msgstr "Fiji - FJ"
 
 #. settings-schema.json->search-country->options
 msgid "Finland - FI"
-msgstr "Finland - FI"
+msgstr "Finlàndia - FI"
 
 #. settings-schema.json->search-country->options
 msgid "France - FR"
-msgstr "France - FR"
+msgstr "França - FR"
 
 #. settings-schema.json->search-country->options
 msgid "French Guiana - GF"
-msgstr "French Guiana - GF"
+msgstr "Guaiana Francesa - GF"
 
 #. settings-schema.json->search-country->options
 msgid "French Polynesia - PF"
-msgstr "French Polynesia - PF"
+msgstr "Polinèsia Francesa - PF"
 
 #. settings-schema.json->search-country->options
 msgid "French Southern Territories - TF"
-msgstr "French Southern Territories - TF"
+msgstr "Territoris Francesos del Sud - TF"
 
 #. settings-schema.json->search-country->options
 msgid "Gabon - GA"
@@ -2235,15 +2231,15 @@ msgstr "Gabon - GA"
 
 #. settings-schema.json->search-country->options
 msgid "Gambia - GM"
-msgstr "Gambia - GM"
+msgstr "Gàmbia - GM"
 
 #. settings-schema.json->search-country->options
 msgid "Georgia - GE"
-msgstr "Georgia - GE"
+msgstr "Geòrgia - GE"
 
 #. settings-schema.json->search-country->options
 msgid "Germany - DE"
-msgstr "Germany - DE"
+msgstr "Alemanya - DE"
 
 #. settings-schema.json->search-country->options
 msgid "Ghana - GH"
@@ -2255,11 +2251,11 @@ msgstr "Gibraltar - GI"
 
 #. settings-schema.json->search-country->options
 msgid "Greece - GR"
-msgstr "Greece - GR"
+msgstr "Grècia - GR"
 
 #. settings-schema.json->search-country->options
 msgid "Greenland - GL"
-msgstr "Greenland - GL"
+msgstr "Groenlàndia - GL"
 
 #. settings-schema.json->search-country->options
 msgid "Grenada - GD"
@@ -2267,7 +2263,7 @@ msgstr "Grenada - GD"
 
 #. settings-schema.json->search-country->options
 msgid "Guadeloupe - GP"
-msgstr "Guadeloupe - GP"
+msgstr "Guadalupe - GP"
 
 #. settings-schema.json->search-country->options
 msgid "Guam - GU"
@@ -2295,19 +2291,19 @@ msgstr "Guyana - GY"
 
 #. settings-schema.json->search-country->options
 msgid "Haiti - HT"
-msgstr "Haiti - HT"
+msgstr "Haití - HT"
 
 #. settings-schema.json->search-country->options
 msgid "Heard Island And Mcdonald Islands - HM"
-msgstr "Heard Island And Mcdonald Islands - HM"
+msgstr "Illes de Heard i McDonald - HM"
 
 #. settings-schema.json->search-country->options
 msgid "Holy See (Vatican City State) - VA"
-msgstr "Holy See (Vatican City State) - VA"
+msgstr "Holy See (Ciutat-Estat del Vaticà) - VA"
 
 #. settings-schema.json->search-country->options
 msgid "Honduras - HN"
-msgstr "Honduras - HN"
+msgstr "Hondures - HN"
 
 #. settings-schema.json->search-country->options
 msgid "Hong Kong - HK"
@@ -2315,23 +2311,23 @@ msgstr "Hong Kong - HK"
 
 #. settings-schema.json->search-country->options
 msgid "Hungary - HU"
-msgstr "Hungary - HU"
+msgstr "Hongria - HU"
 
 #. settings-schema.json->search-country->options
 msgid "Iceland - IS"
-msgstr "Iceland - IS"
+msgstr "Islàndia - IS"
 
 #. settings-schema.json->search-country->options
 msgid "India - IN"
-msgstr "India - IN"
+msgstr "Índia - IN"
 
 #. settings-schema.json->search-country->options
 msgid "Indonesia - ID"
-msgstr "Indonesia - ID"
+msgstr "Indonèsia - ID"
 
 #. settings-schema.json->search-country->options
 msgid "Iran (Islamic Republic Of) - IR"
-msgstr "Iran (Islamic Republic Of) - IR"
+msgstr "Iran (República Islàmica d') - IR"
 
 #. settings-schema.json->search-country->options
 msgid "Iraq - IQ"
@@ -2339,11 +2335,11 @@ msgstr "Iraq - IQ"
 
 #. settings-schema.json->search-country->options
 msgid "Ireland - IE"
-msgstr "Ireland - IE"
+msgstr "Irlanda - IE"
 
 #. settings-schema.json->search-country->options
 msgid "Isle Of Man - IM"
-msgstr "Isle Of Man - IM"
+msgstr "Illa de Man - IM"
 
 #. settings-schema.json->search-country->options
 msgid "Israel - IL"
@@ -2351,7 +2347,7 @@ msgstr "Israel - IL"
 
 #. settings-schema.json->search-country->options
 msgid "Italy - IT"
-msgstr "Italy - IT"
+msgstr "Itàlia - IT"
 
 #. settings-schema.json->search-country->options
 msgid "Jamaica - JM"
@@ -2359,7 +2355,7 @@ msgstr "Jamaica - JM"
 
 #. settings-schema.json->search-country->options
 msgid "Japan - JP"
-msgstr "Japan - JP"
+msgstr "Japó - JP"
 
 #. settings-schema.json->search-country->options
 msgid "Jersey - JE"
@@ -2367,7 +2363,7 @@ msgstr "Jersey - JE"
 
 #. settings-schema.json->search-country->options
 msgid "Jordan - JO"
-msgstr "Jordan - JO"
+msgstr "Jordània - JO"
 
 #. settings-schema.json->search-country->options
 msgid "Kazakhstan - KZ"
@@ -2375,7 +2371,7 @@ msgstr "Kazakhstan - KZ"
 
 #. settings-schema.json->search-country->options
 msgid "Kenya - KE"
-msgstr "Kenya - KE"
+msgstr "Kènia - KE"
 
 #. settings-schema.json->search-country->options
 msgid "Kiribati - KI"
@@ -2383,11 +2379,11 @@ msgstr "Kiribati - KI"
 
 #. settings-schema.json->search-country->options
 msgid "Korea (Democratic People'S Republic Of) - KP"
-msgstr "Korea (Democratic People'S Republic Of) - KP"
+msgstr "Corea del Nord - KP"
 
 #. settings-schema.json->search-country->options
 msgid "Korea (Republic Of) - KR"
-msgstr "Korea (Republic Of) - KR"
+msgstr "Corea del Sud - KR"
 
 #. settings-schema.json->search-country->options
 msgid "Kuwait - KW"
@@ -2395,19 +2391,19 @@ msgstr "Kuwait - KW"
 
 #. settings-schema.json->search-country->options
 msgid "Kyrgyzstan - KG"
-msgstr "Kyrgyzstan - KG"
+msgstr "Kirguizstan - KG"
 
 #. settings-schema.json->search-country->options
 msgid "Lao People'S Democratic Republic - LA"
-msgstr "Lao People'S Democratic Republic - LA"
+msgstr "Lao (República Democràtica Popular) - LA"
 
 #. settings-schema.json->search-country->options
 msgid "Latvia - LV"
-msgstr "Latvia - LV"
+msgstr "Letònia - LV"
 
 #. settings-schema.json->search-country->options
 msgid "Lebanon - LB"
-msgstr "Lebanon - LB"
+msgstr "Líban - LB"
 
 #. settings-schema.json->search-country->options
 msgid "Lesotho - LS"
@@ -2415,11 +2411,11 @@ msgstr "Lesotho - LS"
 
 #. settings-schema.json->search-country->options
 msgid "Liberia - LR"
-msgstr "Liberia - LR"
+msgstr "Libèria - LR"
 
 #. settings-schema.json->search-country->options
 msgid "Libya - LY"
-msgstr "Libya - LY"
+msgstr "Líbia - LY"
 
 #. settings-schema.json->search-country->options
 msgid "Liechtenstein - LI"
@@ -2427,19 +2423,19 @@ msgstr "Liechtenstein - LI"
 
 #. settings-schema.json->search-country->options
 msgid "Lithuania - LT"
-msgstr "Lithuania - LT"
+msgstr "Lituània - LT"
 
 #. settings-schema.json->search-country->options
 msgid "Luxembourg - LU"
-msgstr "Luxembourg - LU"
+msgstr "Luxemburg - LU"
 
 #. settings-schema.json->search-country->options
 msgid "Macao - MO"
-msgstr "Macao - MO"
+msgstr "Macau - MO"
 
 #. settings-schema.json->search-country->options
 msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
-msgstr "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr "Macedònia (Antiga República Iugoslàvica De) - MK"
 
 #. settings-schema.json->search-country->options
 msgid "Madagascar - MG"
@@ -2451,7 +2447,7 @@ msgstr "Malawi - MW"
 
 #. settings-schema.json->search-country->options
 msgid "Malaysia - MY"
-msgstr "Malaysia - MY"
+msgstr "Malàisia - MY"
 
 #. settings-schema.json->search-country->options
 msgid "Maldives - MV"
@@ -2467,19 +2463,19 @@ msgstr "Malta - MT"
 
 #. settings-schema.json->search-country->options
 msgid "Marshall Islands - MH"
-msgstr "Marshall Islands - MH"
+msgstr "Illes Marshall - MH"
 
 #. settings-schema.json->search-country->options
 msgid "Martinique - MQ"
-msgstr "Martinique - MQ"
+msgstr "Martinica - MQ"
 
 #. settings-schema.json->search-country->options
 msgid "Mauritania - MR"
-msgstr "Mauritania - MR"
+msgstr "Mauritània - MR"
 
 #. settings-schema.json->search-country->options
 msgid "Mauritius - MU"
-msgstr "Mauritius - MU"
+msgstr "Maurici - MU"
 
 #. settings-schema.json->search-country->options
 msgid "Mayotte - YT"
@@ -2487,23 +2483,23 @@ msgstr "Mayotte - YT"
 
 #. settings-schema.json->search-country->options
 msgid "Mexico - MX"
-msgstr "Mexico - MX"
+msgstr "Mèxic  - MX"
 
 #. settings-schema.json->search-country->options
 msgid "Micronesia (Federated States Of) - FM"
-msgstr "Micronesia (Federated States Of) - FM"
+msgstr "Micronèsia (Estats Federats de la) - FM"
 
 #. settings-schema.json->search-country->options
 msgid "Moldova (Republic Of) - MD"
-msgstr "Moldova (Republic Of) - MD"
+msgstr "Moldàvia (República De) - MD"
 
 #. settings-schema.json->search-country->options
 msgid "Monaco - MC"
-msgstr "Monaco - MC"
+msgstr "Mònaco - MC"
 
 #. settings-schema.json->search-country->options
 msgid "Mongolia - MN"
-msgstr "Mongolia - MN"
+msgstr "Mongòlia - MN"
 
 #. settings-schema.json->search-country->options
 msgid "Montenegro - ME"
@@ -2515,11 +2511,11 @@ msgstr "Montserrat - MS"
 
 #. settings-schema.json->search-country->options
 msgid "Morocco - MA"
-msgstr "Morocco - MA"
+msgstr "Marroc - MA"
 
 #. settings-schema.json->search-country->options
 msgid "Mozambique - MZ"
-msgstr "Mozambique - MZ"
+msgstr "Moçambic - MZ"
 
 #. settings-schema.json->search-country->options
 msgid "Myanmar - MM"
@@ -2527,7 +2523,7 @@ msgstr "Myanmar - MM"
 
 #. settings-schema.json->search-country->options
 msgid "Namibia - NA"
-msgstr "Namibia - NA"
+msgstr "Namíbia - NA"
 
 #. settings-schema.json->search-country->options
 msgid "Nauru - NR"
@@ -2539,15 +2535,15 @@ msgstr "Nepal - NP"
 
 #. settings-schema.json->search-country->options
 msgid "Netherlands - NL"
-msgstr "Netherlands - NL"
+msgstr "Països Baixos - NL"
 
 #. settings-schema.json->search-country->options
 msgid "New Caledonia - NC"
-msgstr "New Caledonia - NC"
+msgstr "Nova Caledònia - NC"
 
 #. settings-schema.json->search-country->options
 msgid "New Zealand - NZ"
-msgstr "New Zealand - NZ"
+msgstr "Nova Zelanda - NZ"
 
 #. settings-schema.json->search-country->options
 msgid "Nicaragua - NI"
@@ -2555,11 +2551,11 @@ msgstr "Nicaragua - NI"
 
 #. settings-schema.json->search-country->options
 msgid "Niger - NE"
-msgstr "Niger - NE"
+msgstr "Níger - NE"
 
 #. settings-schema.json->search-country->options
 msgid "Nigeria - NG"
-msgstr "Nigeria - NG"
+msgstr "Nigèria - NG"
 
 #. settings-schema.json->search-country->options
 msgid "Niue - NU"
@@ -2567,15 +2563,15 @@ msgstr "Niue - NU"
 
 #. settings-schema.json->search-country->options
 msgid "Norfolk Island - NF"
-msgstr "Norfolk Island - NF"
+msgstr "Illa de Norfolk - NF"
 
 #. settings-schema.json->search-country->options
 msgid "Northern Mariana Islands - MP"
-msgstr "Northern Mariana Islands - MP"
+msgstr "Illes Mariana del Nord - MP"
 
 #. settings-schema.json->search-country->options
 msgid "Norway - NO"
-msgstr "Norway - NO"
+msgstr "Noruega - NO"
 
 #. settings-schema.json->search-country->options
 msgid "Oman - OM"
@@ -2591,27 +2587,27 @@ msgstr "Palau - PW"
 
 #. settings-schema.json->search-country->options
 msgid "Palestine (State Of) - PS"
-msgstr "Palestine (State Of) - PS"
+msgstr "Palestina (Estat de) - PS"
 
 #. settings-schema.json->search-country->options
 msgid "Panama - PA"
-msgstr "Panama - PA"
+msgstr "Panamà - PA"
 
 #. settings-schema.json->search-country->options
 msgid "Papua New Guinea - PG"
-msgstr "Papua New Guinea - PG"
+msgstr "Papua Nova Guinea - PG"
 
 #. settings-schema.json->search-country->options
 msgid "Paraguay - PY"
-msgstr "Paraguay - PY"
+msgstr "Paraguai - PY"
 
 #. settings-schema.json->search-country->options
 msgid "Peru - PE"
-msgstr "Peru - PE"
+msgstr "Perú - PE"
 
 #. settings-schema.json->search-country->options
 msgid "Philippines - PH"
-msgstr "Philippines - PH"
+msgstr "Filipines - PH"
 
 #. settings-schema.json->search-country->options
 msgid "Pitcairn - PN"
@@ -2619,7 +2615,7 @@ msgstr "Pitcairn - PN"
 
 #. settings-schema.json->search-country->options
 msgid "Poland - PL"
-msgstr "Poland - PL"
+msgstr "Polònia - PL"
 
 #. settings-schema.json->search-country->options
 msgid "Portugal - PT"
@@ -2635,7 +2631,7 @@ msgstr "Qatar - QA"
 
 #. settings-schema.json->search-country->options
 msgid "Réunion - RE"
-msgstr "Réunion - RE"
+msgstr "Reunió - RE"
 
 #. settings-schema.json->search-country->options
 msgid "Romania - RO"
@@ -2643,39 +2639,39 @@ msgstr "Romania - RO"
 
 #. settings-schema.json->search-country->options
 msgid "Russian Federation - RU"
-msgstr "Russian Federation - RU"
+msgstr "Rússia - RU"
 
 #. settings-schema.json->search-country->options
 msgid "Rwanda - RW"
-msgstr "Rwanda - RW"
+msgstr "Ruanda - RW"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Barthélemy - BL"
-msgstr "Saint Barthélemy - BL"
+msgstr "Sant Bartomeu - BL"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
-msgstr "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr "Santa Helena (Ascensió i Tristan Da Cunha) - SH"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Kitts And Nevis - KN"
-msgstr "Saint Kitts And Nevis - KN"
+msgstr "Sant Kitts i Nevis - KN"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Lucia - LC"
-msgstr "Saint Lucia - LC"
+msgstr "Santa Llúcia - LC"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Martin (French Part) - MF"
-msgstr "Saint Martin (French Part) - MF"
+msgstr "Sant Martí (Part Francesa) - MF"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Pierre And Miquelon - PM"
-msgstr "Saint Pierre And Miquelon - PM"
+msgstr "Saint-Pierre i Miquelon - PM"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Vincent And The Grenadines - VC"
-msgstr "Saint Vincent And The Grenadines - VC"
+msgstr "Saint Vincent i Les Grenadines - VC"
 
 #. settings-schema.json->search-country->options
 msgid "Samoa - WS"
@@ -2687,11 +2683,11 @@ msgstr "San Marino - SM"
 
 #. settings-schema.json->search-country->options
 msgid "Sao Tome And Principe - ST"
-msgstr "Sao Tome And Principe - ST"
+msgstr "São Tomé i Príncipe - ST"
 
 #. settings-schema.json->search-country->options
 msgid "Saudi Arabia - SA"
-msgstr "Saudi Arabia - SA"
+msgstr "Aràbia Saudita - SA"
 
 #. settings-schema.json->search-country->options
 msgid "Senegal - SN"
@@ -2699,7 +2695,7 @@ msgstr "Senegal - SN"
 
 #. settings-schema.json->search-country->options
 msgid "Serbia - RS"
-msgstr "Serbia - RS"
+msgstr "Sèrbia - RS"
 
 #. settings-schema.json->search-country->options
 msgid "Seychelles - SC"
@@ -2711,43 +2707,43 @@ msgstr "Sierra Leone - SL"
 
 #. settings-schema.json->search-country->options
 msgid "Singapore - SG"
-msgstr "Singapore - SG"
+msgstr "Singapur - SG"
 
 #. settings-schema.json->search-country->options
 msgid "Sint Maarten (Dutch Part) - SX"
-msgstr "Sint Maarten (Dutch Part) - SX"
+msgstr "Sant Martí (Part Holandesa) - SX"
 
 #. settings-schema.json->search-country->options
 msgid "Slovakia - SK"
-msgstr "Slovakia - SK"
+msgstr "Eslovàquia - SK"
 
 #. settings-schema.json->search-country->options
 msgid "Slovenia - SI"
-msgstr "Slovenia - SI"
+msgstr "Eslovènia - SI"
 
 #. settings-schema.json->search-country->options
 msgid "Solomon Islands - SB"
-msgstr "Solomon Islands - SB"
+msgstr "Illes Solomon - SB"
 
 #. settings-schema.json->search-country->options
 msgid "Somalia - SO"
-msgstr "Somalia - SO"
+msgstr "Somàlia - SO"
 
 #. settings-schema.json->search-country->options
 msgid "South Africa - ZA"
-msgstr "South Africa - ZA"
+msgstr "Sud-Àfrica - ZA"
 
 #. settings-schema.json->search-country->options
 msgid "South Georgia And The South Sandwich Islands - GS"
-msgstr "South Georgia And The South Sandwich Islands - GS"
+msgstr "Geòrgia del Sud i les Illes Sandwich del Sud - GS"
 
 #. settings-schema.json->search-country->options
 msgid "South Sudan - SS"
-msgstr "South Sudan - SS"
+msgstr "Sudan del Sud - SS"
 
 #. settings-schema.json->search-country->options
 msgid "Spain - ES"
-msgstr "Spain - ES"
+msgstr "Espanya - ES"
 
 #. settings-schema.json->search-country->options
 msgid "Sri Lanka - LK"
@@ -2759,43 +2755,43 @@ msgstr "Sudan - SD"
 
 #. settings-schema.json->search-country->options
 msgid "Suriname - SR"
-msgstr "Suriname - SR"
+msgstr "Surinam - SR"
 
 #. settings-schema.json->search-country->options
 msgid "Svalbard And Jan Mayen - SJ"
-msgstr "Svalbard And Jan Mayen - SJ"
+msgstr "Svalbard i Jan Mayen - SJ"
 
 #. settings-schema.json->search-country->options
 msgid "Swaziland - SZ"
-msgstr "Swaziland - SZ"
+msgstr "Eswatini - SZ"
 
 #. settings-schema.json->search-country->options
 msgid "Sweden - SE"
-msgstr "Sweden - SE"
+msgstr "Suècia - SE"
 
 #. settings-schema.json->search-country->options
 msgid "Switzerland - CH"
-msgstr "Switzerland - CH"
+msgstr "Suïssa - CH"
 
 #. settings-schema.json->search-country->options
 msgid "Syrian Arab Republic - SY"
-msgstr "Syrian Arab Republic - SY"
+msgstr "Síria (República Aràbiga) - SY"
 
 #. settings-schema.json->search-country->options
 msgid "Taiwan (Province Of China) - TW"
-msgstr "Taiwan (Province Of China) - TW"
+msgstr "Taiwan (Província de Xina) - TW"
 
 #. settings-schema.json->search-country->options
 msgid "Tajikistan - TJ"
-msgstr "Tajikistan - TJ"
+msgstr "Tadjikistan - TJ"
 
 #. settings-schema.json->search-country->options
 msgid "Tanzania (United Republic Of) - TZ"
-msgstr "Tanzania (United Republic Of) - TZ"
+msgstr "Tanzània (República Unida de) - TZ"
 
 #. settings-schema.json->search-country->options
 msgid "Thailand - TH"
-msgstr "Thailand - TH"
+msgstr "Tailàndia - TH"
 
 #. settings-schema.json->search-country->options
 msgid "Timor-Leste - TL"
@@ -2815,15 +2811,15 @@ msgstr "Tonga - TO"
 
 #. settings-schema.json->search-country->options
 msgid "Trinidad And Tobago - TT"
-msgstr "Trinidad And Tobago - TT"
+msgstr "Trinitat i Tobago - TT"
 
 #. settings-schema.json->search-country->options
 msgid "Tunisia - TN"
-msgstr "Tunisia - TN"
+msgstr "Tunísia - TN"
 
 #. settings-schema.json->search-country->options
 msgid "Turkey - TR"
-msgstr "Turkey - TR"
+msgstr "Turquia - TR"
 
 #. settings-schema.json->search-country->options
 msgid "Turkmenistan - TM"
@@ -2831,7 +2827,7 @@ msgstr "Turkmenistan - TM"
 
 #. settings-schema.json->search-country->options
 msgid "Turks And Caicos Islands - TC"
-msgstr "Turks And Caicos Islands - TC"
+msgstr "Turks i Illes Caicos - TC"
 
 #. settings-schema.json->search-country->options
 msgid "Tuvalu - TV"
@@ -2843,27 +2839,27 @@ msgstr "Uganda - UG"
 
 #. settings-schema.json->search-country->options
 msgid "Ukraine - UA"
-msgstr "Ukraine - UA"
+msgstr "Ucraïna - UA"
 
 #. settings-schema.json->search-country->options
 msgid "United Arab Emirates - AE"
-msgstr "United Arab Emirates - AE"
+msgstr "Emirats Units Àrabs - AE"
 
 #. settings-schema.json->search-country->options
 msgid "United Kingdom - GB"
-msgstr "United Kingdom - GB"
+msgstr "Regne Unit - GB"
 
 #. settings-schema.json->search-country->options
 msgid "United States - US"
-msgstr "United States - US"
+msgstr "Estats Units - US"
 
 #. settings-schema.json->search-country->options
 msgid "United States Minor Outlying Islands - UM"
-msgstr "United States Minor Outlying Islands - UM"
+msgstr "Illes Ultramarines Menors dels Estats Units - UM"
 
 #. settings-schema.json->search-country->options
 msgid "Uruguay - UY"
-msgstr "Uruguay - UY"
+msgstr "Uruguai - UY"
 
 #. settings-schema.json->search-country->options
 msgid "Uzbekistan - UZ"
@@ -2875,39 +2871,39 @@ msgstr "Vanuatu - VU"
 
 #. settings-schema.json->search-country->options
 msgid "Venezuela (Bolivarian Republic Of) - VE"
-msgstr "Venezuela (Bolivarian Republic Of) - VE"
+msgstr "Veneçuela (República Bolivariana de) - VE"
 
 #. settings-schema.json->search-country->options
 msgid "Viet Nam - VN"
-msgstr "Viet Nam - VN"
+msgstr "Vietnam - VN"
 
 #. settings-schema.json->search-country->options
 msgid "Virgin Islands (British) - VG"
-msgstr "Virgin Islands (British) - VG"
+msgstr "Illes Verge (Angleses) - VG"
 
 #. settings-schema.json->search-country->options
 msgid "Virgin Islands (U.S.) - VI"
-msgstr "Virgin Islands (U.S.) - VI"
+msgstr "Illes Verge (Estats Units) - VI"
 
 #. settings-schema.json->search-country->options
 msgid "Wallis And Futuna - WF"
-msgstr "Wallis And Futuna - WF"
+msgstr "Wallis i Futuna - WF"
 
 #. settings-schema.json->search-country->options
 msgid "Western Sahara - EH"
-msgstr "Western Sahara - EH"
+msgstr "Sàhara Occidental - EH"
 
 #. settings-schema.json->search-country->options
 msgid "Yemen - YE"
-msgstr "Yemen - YE"
+msgstr "Iemen - YE"
 
 #. settings-schema.json->search-country->options
 msgid "Zambia - ZM"
-msgstr "Zambia - ZM"
+msgstr "Zàmbia - ZM"
 
 #. settings-schema.json->search-country->options
 msgid "Zimbabwe - ZW"
-msgstr "Zimbabwe - ZW"
+msgstr "Zimbàbue - ZW"
 
 #. settings-schema.json->search-country->tooltip
 msgid "OPTIONAL. Choose a country."
@@ -3096,3 +3092,9 @@ msgstr "Buscar..."
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
 msgstr "Eliminar els elements seleccionats"
+
+#~ msgid "Open Folder"
+#~ msgstr "Obrir carpeta"
+
+#~ msgid "Open in Terminal"
+#~ msgstr "Obrir al terminal"

@@ -265,6 +265,7 @@ class CategoriesView {
                                 new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
+        this.groupCategoriesWorkspacesScrollBox.set_clip_to_allocation(true);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
         if (!this.appThis.settings.showCategories) {

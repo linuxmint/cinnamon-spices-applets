@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-15 22:10-0400\n"
+"POT-Creation-Date: 2024-08-17 11:44-0400\n"
 "PO-Revision-Date: 2024-01-01 10:11+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -14,32 +14,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:567 6.0/applet.js:567
+#: 4.0/applet.js:568 6.0/applet.js:568
 msgid "all buttons"
 msgstr "alle knapper"
 
-#: 4.0/applet.js:3087 6.0/applet.js:3087
+#: 4.0/applet.js:3128 6.0/applet.js:3128
 msgid "Applet Preferences"
 msgstr "Indstillinger"
 
-#: 4.0/applet.js:3091 6.0/applet.js:3091
+#: 4.0/applet.js:3132 6.0/applet.js:3132
 msgid "About..."
 msgstr "Om …"
 
-#: 4.0/applet.js:3095 6.0/applet.js:3095
+#: 4.0/applet.js:3136 6.0/applet.js:3136
 msgid "Configure..."
 msgstr "Konfigurér …"
 
-#: 4.0/applet.js:3099 6.0/applet.js:3099
+#: 4.0/applet.js:3140 6.0/applet.js:3140
 msgid "Website"
 msgstr ""
 
-#: 4.0/applet.js:3103 6.0/applet.js:3103
+#: 4.0/applet.js:3144 6.0/applet.js:3144
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Fjern “%s”"
 
-#: 4.0/applet.js:3105 6.0/applet.js:3105
+#: 4.0/applet.js:3146 6.0/applet.js:3146
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Vil du virkelig fjerne denne forekomst af CassiaVinduesliste?"
 
@@ -55,71 +55,76 @@ msgstr "Vil du virkelig fjerne denne forekomst af CassiaVinduesliste?"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3114 6.0/applet.js:3114
+#: 4.0/applet.js:3155 6.0/applet.js:3155
 msgid "Open new window"
 msgstr "Åbn nyt vindue"
 
-#: 4.0/applet.js:3122 6.0/applet.js:3122
+#: 4.0/applet.js:3163 6.0/applet.js:3163
 msgid "Remove from panel"
 msgstr "Fjern fra panel"
 
-#: 4.0/applet.js:3124 6.0/applet.js:3124
+#: 4.0/applet.js:3165 6.0/applet.js:3165
 msgid "Remove from this workspace"
 msgstr "Fjern fra dette arbejdsområde"
 
-#: 4.0/applet.js:3130 6.0/applet.js:3130
+#: 4.0/applet.js:3171 6.0/applet.js:3171
 msgid "Pin to panel"
 msgstr "Fastgør til panel"
 
-#: 4.0/applet.js:3132 6.0/applet.js:3132
+#: 4.0/applet.js:3173 6.0/applet.js:3173
 msgid "Pin to this workspace"
 msgstr "Fastgør til dette arbejdsområde"
 
-#: 4.0/applet.js:3173 6.0/applet.js:3173
+#: 4.0/applet.js:3214 6.0/applet.js:3214
 msgid "Pin to other workspaces"
 msgstr "Fastgør til andre arbejdsområder"
 
-#: 4.0/applet.js:3194 6.0/applet.js:3194
+#: 4.0/applet.js:3235 6.0/applet.js:3235
 msgid "Pin to all workspaces"
 msgstr "Fastgør til alle arbejdsområder"
 
-#: 4.0/applet.js:3212 6.0/applet.js:3212
+#: 4.0/applet.js:3253 6.0/applet.js:3253
 msgid "Pin to launcher"
 msgstr "Fastgør til programstarter"
 
-#: 4.0/applet.js:3230 4.0/applet.js:3422 6.0/applet.js:3230 6.0/applet.js:3422
+#: 4.0/applet.js:3271 4.0/applet.js:3474 6.0/applet.js:3271 6.0/applet.js:3474
 msgid "Add new Hotkey for"
 msgstr "Tilføj ny genvejstast til"
 
-#: 4.0/applet.js:3244 6.0/applet.js:3244
+#: 4.0/applet.js:3285 6.0/applet.js:3285
 msgid "Recent files"
 msgstr "Seneste filer"
 
-#: 4.0/applet.js:3268 6.0/applet.js:3268
+#: 4.0/applet.js:3309 6.0/applet.js:3309
 msgid "Places"
 msgstr "Steder"
 
-#: 4.0/applet.js:3310 6.0/applet.js:3310
+#: 4.0/applet.js:3350 6.0/applet.js:3350
+#, fuzzy
+msgid "Always on top"
+msgstr "Altid"
+
+#: 4.0/applet.js:3362 6.0/applet.js:3362
 msgid "Only on this workspace"
 msgstr "Kun på dette arbejdsområde"
 
-#: 4.0/applet.js:3312 6.0/applet.js:3312
+#: 4.0/applet.js:3364 6.0/applet.js:3364
 msgid "Visible on all workspaces"
 msgstr "Synlig på alle arbejdsområder"
 
-#: 4.0/applet.js:3313 6.0/applet.js:3313
+#: 4.0/applet.js:3365 6.0/applet.js:3365
 msgid "Move to another workspace"
 msgstr "Flyt til et andet arbejdsområde"
 
-#: 4.0/applet.js:3322 6.0/applet.js:3322
+#: 4.0/applet.js:3374 6.0/applet.js:3374
 msgid " (this workspace)"
 msgstr " (dette arbejdsområde)"
 
-#: 4.0/applet.js:3335 6.0/applet.js:3335
+#: 4.0/applet.js:3387 6.0/applet.js:3387
 msgid "Move to another monitor"
 msgstr "Flyt til en anden skærm"
 
-#: 4.0/applet.js:3343 6.0/applet.js:3343
+#: 4.0/applet.js:3395 6.0/applet.js:3395
 msgid "Monitor"
 msgstr "Skærm"
 
@@ -135,48 +140,48 @@ msgstr "Skærm"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3360 6.0/applet.js:3360
+#: 4.0/applet.js:3412 6.0/applet.js:3412
 #, fuzzy
 msgid "Move window here"
 msgstr "Luk vindue"
 
-#: 4.0/applet.js:3377 6.0/applet.js:3377
+#: 4.0/applet.js:3429 6.0/applet.js:3429
 msgid "unassigned"
 msgstr "ikke tildelt"
 
-#: 4.0/applet.js:3388 4.0/applet.js:3419 6.0/applet.js:3388 6.0/applet.js:3419
+#: 4.0/applet.js:3440 4.0/applet.js:3471 6.0/applet.js:3440 6.0/applet.js:3471
 msgid "Assign window to a hotkey"
 msgstr "Tildel en genvejstast til vindue"
 
-#: 4.0/applet.js:3442 6.0/applet.js:3442
+#: 4.0/applet.js:3494 6.0/applet.js:3494
 msgid "Change application label contents"
 msgstr "Ændr indholdet af programetiket"
 
-#: 4.0/applet.js:3445 6.0/applet.js:3445
+#: 4.0/applet.js:3497 6.0/applet.js:3497
 msgid "Remove custom setting"
 msgstr "Fjern brugerdefineret indstilling"
 
-#: 4.0/applet.js:3452 6.0/applet.js:3452
+#: 4.0/applet.js:3504 6.0/applet.js:3504
 msgid "Use window title"
 msgstr "Brug vinduestitel"
 
-#: 4.0/applet.js:3459 6.0/applet.js:3459
+#: 4.0/applet.js:3511 6.0/applet.js:3511
 msgid "Use application name"
 msgstr "Brug programnavn"
 
-#: 4.0/applet.js:3466 6.0/applet.js:3466
+#: 4.0/applet.js:3518 6.0/applet.js:3518
 msgid "No label"
 msgstr "Ingen etiket"
 
-#: 4.0/applet.js:3477 6.0/applet.js:3477
+#: 4.0/applet.js:3529 6.0/applet.js:3529
 msgid "Ungroup application windows"
 msgstr "Opsplit gruppen af programmervinduer"
 
-#: 4.0/applet.js:3486 6.0/applet.js:3486
+#: 4.0/applet.js:3538 6.0/applet.js:3538
 msgid "Group application windows"
 msgstr "Gruppér programvinduer"
 
-#: 4.0/applet.js:3499 6.0/applet.js:3499
+#: 4.0/applet.js:3551 6.0/applet.js:3551
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatisk gruppering/opsplitning af gruppe"
 
@@ -192,31 +197,31 @@ msgstr "Automatisk gruppering/opsplitning af gruppe"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3529 6.0/applet.js:3529
+#: 4.0/applet.js:3581 6.0/applet.js:3581
 msgid "Move titlebar on to screen"
 msgstr "Flyt titellinje til skærm"
 
-#: 4.0/applet.js:3534 6.0/applet.js:3534
+#: 4.0/applet.js:3586 6.0/applet.js:3586
 msgid "Restore"
 msgstr "Gendan"
 
-#: 4.0/applet.js:3538 6.0/applet.js:3538
+#: 4.0/applet.js:3590 6.0/applet.js:3590
 msgid "Minimize"
 msgstr "Minimér"
 
-#: 4.0/applet.js:3544 6.0/applet.js:3544
+#: 4.0/applet.js:3596 6.0/applet.js:3596
 msgid "Unmaximize"
 msgstr "Gendan"
 
-#: 4.0/applet.js:3551 6.0/applet.js:3551
+#: 4.0/applet.js:3603 6.0/applet.js:3603
 msgid "Close others"
 msgstr "Luk andre"
 
-#: 4.0/applet.js:3562 6.0/applet.js:3562
+#: 4.0/applet.js:3614 6.0/applet.js:3614
 msgid "Close all"
 msgstr "Luk alle"
 
-#: 4.0/applet.js:3571 6.0/applet.js:3571
+#: 4.0/applet.js:3623 6.0/applet.js:3623
 msgid "Close"
 msgstr "Luk"
 
@@ -1149,6 +1154,21 @@ msgstr "Flyt til næste arbejdsområde"
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Synlig på dette/alle arbejdsområder"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Toggle always on top"
+msgstr ""
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options

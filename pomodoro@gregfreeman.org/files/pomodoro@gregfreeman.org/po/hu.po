@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: pomodoro@gregfreeman.org 1.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-25 20:30+1000\n"
-"PO-Revision-Date: 2021-04-01 22:55+0200\n"
+"PO-Revision-Date: 2024-07-28 07:58-0400\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:278
 msgid "Short break running"
@@ -81,7 +80,7 @@ msgstr "A számolt ciklusok és az időzítő visszaállítása"
 
 #: applet.js:787
 msgid "Skip To Next Timer"
-msgstr ""
+msgstr "Ugrás a következő időzítőhöz"
 
 #: applet.js:794
 msgid "What is this?"
@@ -148,14 +147,12 @@ msgid "Short break finished, ready to continue?"
 msgstr "A rövid szünet véget ért, készen áll a folytatásra?"
 
 #: applet.js:953
-#, fuzzy
 msgid "Start break"
-msgstr "Tarts egy rövid szünetet"
+msgstr "Kezdje a szünetet"
 
 #: applet.js:970
-#, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
-msgstr "A pomodoro szett kész, megérdemel egy kis szünetet!"
+msgstr "Pomodoro végzett, készen áll a szünetre?"
 
 #. metadata.json->description
 msgid "Great tool for boosted productivity!"
@@ -186,18 +183,16 @@ msgid "Options"
 msgstr "Beállítások"
 
 #. settings-schema.json->start_automatically_on_load->description
-#, fuzzy
 msgid "Start the pomodoro timer as soon as the applet loads"
-msgstr "Pomodoro időzítő megjelenítése a kisalkalmazás panelen"
+msgstr "Indítsa el a pomodoro időzítőt, amint az applet betöltődik"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr "Párbeszédüzenetek megjelenítése"
 
 #. settings-schema.json->auto_start_after_pomodoro_ends->description
-#, fuzzy
 msgid "Auto start after a pomodoro ends"
-msgstr "Az automatikus indítás egy rövid szünet után"
+msgstr "Automatikus indítás a pomodoro befejezése után"
 
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
@@ -221,7 +216,7 @@ msgstr "Pomodoro időzítő megjelenítése a kisalkalmazás panelen"
 
 #. settings-schema.json->hotkey->description
 msgid "Set the keybinding to open the applet menu"
-msgstr ""
+msgstr "A kisalkalmazás menü megnyitásához állítsa be a billentyűkombinációt"
 
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
@@ -278,16 +273,16 @@ msgstr "Start hangfájl"
 
 #. settings-schema.json->head_scripts->description
 msgid "Scripts"
-msgstr ""
+msgstr "Szkriptek"
 
 #. settings-schema.json->enable_scripts->description
 msgid "Enable scripts"
-msgstr ""
+msgstr "Engedélyezze a szkripteket"
 
 #. settings-schema.json->custom_short_break_script->description
 msgid "Execute this custom script when a short break starts"
-msgstr ""
+msgstr "Futtassa ezt az egyéni szkriptet, amikor egy rövid szünet kezdődik"
 
 #. settings-schema.json->custom_long_break_script->description
 msgid "Execute this custom script when a long break starts"
-msgstr ""
+msgstr "Futtassa ezt az egyéni szkriptet, ha hosszú szünet kezdődik"

@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-23 04:17+0200\n"
-"PO-Revision-Date: 2024-01-06 22:51+0100\n"
+"PO-Revision-Date: 2024-07-28 07:57-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -161,11 +160,11 @@ msgstr "Grafikonok frissítése"
 
 #: 6.0/applet.js:301
 msgid "Without any graphics"
-msgstr ""
+msgstr "Mindenféle grafika nélkül"
 
 #: 6.0/applet.js:307
 msgid "With graphics"
-msgstr ""
+msgstr "Grfikával"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "00-20"
@@ -224,7 +223,7 @@ msgstr "Írás"
 #: 6.0/util.js:244 5.6/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr ""
+msgstr "A '%s' végrehajtása sikertelen:"
 
 #: 3.4/applet.js:62
 msgid ""

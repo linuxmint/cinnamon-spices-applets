@@ -4713,6 +4713,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
+    // EasyEffects (if any)
+    if (find_program_in_path("easyeffects") && this.context_menu_item_easyEffects == null) {
+      this.context_menu_item_easyEffects = new PopupIconMenuItem(_("Easy Effects"), "easyeffects", IconType.SYMBOLIC);
+      this.context_menu_item_easyEffects.connect('activate', async () => { spawnCommandLine("easyeffects") });
+      if (items.indexOf(this.context_menu_item_easyEffects) == -1) {
+        this._applet_context_menu.addMenuItem(this.context_menu_item_easyEffects);
+      }
+    }
+
     // Remove applet
     if (this.context_menu_item_remove == null) {
       this.context_menu_item_remove = new PopupIconMenuItem(_("Remove '%s'")

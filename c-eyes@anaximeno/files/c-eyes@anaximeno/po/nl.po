@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-06-15 16:50-0100\n"
-"PO-Revision-Date: 2024-04-22 11:56+0200\n"
+"PO-Revision-Date: 2024-07-24 10:02+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -24,6 +24,12 @@ msgid ""
 "installed\n"
 "on the Cinnamon Extensions settings module for versions of Cinnamon >= 5.4"
 msgstr ""
+"📢 De klik-effecten worden verwijderd uit deze applet in versie 6.2 van "
+"Cinnamon\n"
+" en verplaatst naar een nieuwe extensie genaamd mouse-click-effects, die al "
+"geïnstalleerd kan worden\n"
+" in het instellingenmodule voor Cinnamon-extensies voor versies van Cinnamon "
+">= 5.4"
 
 #: 4.2/applet.js:389 5.4/applet.js:385
 msgid "click to deactivate the eye"
@@ -39,20 +45,19 @@ msgstr "TIP"
 
 #: 6.2/applet.js:46
 msgid "Hey, I saw that!"
-msgstr ""
+msgstr "Hé, dat heb ik gezien!"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
 msgstr "Cinnamon Ogen"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "An applet for Cinnamon that adds an eye to the panel bar that follows your "
 "cursor."
 msgstr ""
-"Een applet voor Cinnamon dat een oog aan de paneelbalk toevoegt dat je "
-"cursor volgt en klikanimaties weergeeft."
+"Een applet voor Cinnamon die een oog toevoegt aan de paneelbalk die je "
+"cursor volgt."
 
 #. 4.2->settings-schema.json->eye->title
 #. 5.4->settings-schema.json->eye->title
@@ -395,7 +400,7 @@ msgstr "Algemene ondoorzichtigheid"
 #. 5.4->settings-schema.json->click-info->title
 #. 6.2->settings-schema.json->info->description
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
@@ -405,32 +410,35 @@ msgid ""
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
 "which can be installed through the Cinnamon Extensions settings module."
 msgstr ""
+"In Cinnamon-versies 6.2 en later zijn de klik-effecten verwijderd uit deze "
+"applet en verplaatst naar een nieuwe extensie genaamd 'mouse-click-effects,' "
+"die kan worden geïnstalleerd via het instellingenmodule voor Cinnamon-"
+"extensies."
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
-msgstr ""
+msgstr "Tooltip bericht bij zweven met de muis"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
-msgstr ""
+msgstr "Gebruik alternatieve kleuren voor het oog"
 
 #. 6.2->settings-schema.json->use-alternative-colors->tooltip
 msgid ""
 "When disabled it will use the current system theme's default color for panel "
 "items."
 msgstr ""
+"Indien uitgeschakeld, zal het de standaardkleur van het huidige systeemthema "
+"voor paneelitems gebruiken."
 
 #. 6.2->settings-schema.json->base-color->description
-#, fuzzy
 msgid "Base Color"
-msgstr "Geactiveerde basiskleur"
+msgstr "Basiskleur"
 
 #. 6.2->settings-schema.json->iris-color->description
-#, fuzzy
 msgid "Iris Color"
-msgstr "Geactiveerde iriskleur"
+msgstr "Kleur van de iris"
 
 #. 6.2->settings-schema.json->pupil-color->description
-#, fuzzy
 msgid "Pupil Color"
-msgstr "Geactiveerde pupilkleur"
+msgstr "Kleur van de pupil"

@@ -40,6 +40,7 @@ body:
     - Cinnamenu@json @fredcw
     - cinnamon-multi-line-taskbar-applet
     - cinnamon-timer@jake1164 @jake1164
+    - cinnamonvantage@garlayntoji @Garlayntoji
     - CinnVIIStarkMenu@NikoKrause @fredcw
     - clean-show-desktop@filipetorresbr @FilipeTorresBR
     - clipboard-eraser@Techcrafter @Techcrafter
@@ -58,7 +59,7 @@ body:
     - CustomPlaces@Nicolas01 @Nicolas01
     - darkMode@linuxedo.com @slgobinath
     - ddcci-monitor-control@andr35 @andr35
-    - ddcci-multi-monitor@tim-we @tim-we
+    - ddcci-multi-monitor@tim-we @GingerGigiCat
     - desaturate-all@hkoosha @hkoosha
     - devbar@ludvigbostrom @ludvigbostrom
     - devutils@fogl

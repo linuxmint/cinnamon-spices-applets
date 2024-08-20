@@ -1,0 +1,82 @@
+#!/usr/bin/python3
+
+import argparse
+import json
+import os
+import sys
+import shutil
+import subprocess
+from pathlib import Path
+
+DEV_PREFIX = "devtest-"
+APPLETS_PATH = f'{Path.home()}/.local/share/cinnamon/applets/'
+
+
+def validate_spice(uuid):
+    """
+    Run the validation for the Spice
+    """
+    try:
+        out = subprocess.run(['./validate-spice', uuid], check=False,
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if out.returncode != 0:
+            print(out.stdout.decode('ascii') + '\nValidation failed!')
+    except FileNotFoundError:
+        print('Errors encountered! Please try running again from the top-level'
+              ' directory of the repository.')
+
+
+def copy_xlet(uuid):
+    """
+    Copy the UUID directory and action file for testing purposes
+    """
+    uuid_path = f'{uuid}/files/{uuid}'
+    dev_dest = f'{APPLETS_PATH}{DEV_PREFIX}{uuid}'
+
+    try:
+        shutil.copytree(uuid_path, dev_dest, dirs_exist_ok=True)
+        metadata_file = f'{dev_dest}/metadata.json'
+        with open(metadata_file, 'r+', encoding='utf-8') as metadata:
+            data = json.load(metadata)
+            metadata.seek(0)
+            data['uuid'] = f"{DEV_PREFIX}{data['uuid']}"
+            data['name'] = f"({DEV_PREFIX.replace('-', '')}) {data['name']}"
+            json.dump(data, metadata, indent=4)
+    except (FileNotFoundError, KeyError):
+        # metadata.json file not found or missing valid keys
+        pass
+
+
+def main():
+    """
+    Simpler testing of Spices for developers
+    """
+    parser = argparse.ArgumentParser()
+    parser.description = 'Copy a Spice locally for testing purposes'
+    parser.add_argument('-r', '--remove', action='store_true',
+                        help='Remove all test Spices')
+    parser.add_argument('-s', '--skip', action='store_true',
+                        help='Skip Spice validation with validate-spice')
+    parser.add_argument('uuid', type=str, metavar='UUID', nargs='?',
+                        help='the UUID of the Spice')
+    args = parser.parse_args()
+
+    if args.remove and not args.uuid:
+        for file_path in os.listdir(APPLETS_PATH):
+            if file_path.startswith(DEV_PREFIX):
+                rm_path = f'{APPLETS_PATH}{file_path}'
+                if Path.is_dir(Path(rm_path)):
+                    shutil.rmtree(rm_path)
+        sys.exit(0)
+    elif args.skip and args.uuid:
+        copy_xlet(args.uuid.rstrip('/'))
+    elif args.uuid and not args.remove:
+        validate_spice(args.uuid.rstrip('/'))
+        copy_xlet(args.uuid.rstrip('/'))
+    else:
+        parser.print_help()
+        sys.exit(2)
+
+
+if __name__ == "__main__":
+    main()

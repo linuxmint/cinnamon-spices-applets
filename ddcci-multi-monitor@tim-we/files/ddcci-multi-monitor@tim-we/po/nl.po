@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-multi-monitor@tim-we 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-20 15:38-0400\n"
+"PO-Revision-Date: 2024-07-23 23:51+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+#: applet.js:19
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Pas de helderheid van de monitor aan via DDC/CI"
+
+#: applet.js:162
+msgid "Detect displays"
+msgstr "Detecteer schermen"
+
+#: applet.js:174
+msgid "Detecting displays..."
+msgstr "Schermen aan het detecteren..."
+
+#: applet.js:263
+msgid "Failed to detect displays."
+msgstr "Kon geen schermen detecteren."
+
+#: applet.js:264
+msgid "Make sure you have ddcutil installed and the correct permissions."
+msgstr ""
+"Zorg ervoor dat je ddcutil hebt geïnstalleerd en de juiste machtigingen hebt."
+
+#: applet.js:265
+msgid "Error:"
+msgstr "Fout:"
+
+#. metadata.json->name
+msgid "DDC/CI Multi-Monitor"
+msgstr "DDC/CI Multi-Monitor"

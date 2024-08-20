@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-25 20:30+1000\n"
-"PO-Revision-Date: 2024-04-22 21:02+0200\n"
+"PO-Revision-Date: 2024-07-24 10:14+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -270,16 +270,16 @@ msgstr "Startgeluid bestand"
 
 #. settings-schema.json->head_scripts->description
 msgid "Scripts"
-msgstr ""
+msgstr "Scripts"
 
 #. settings-schema.json->enable_scripts->description
 msgid "Enable scripts"
-msgstr ""
+msgstr "Scripts inschakelen"
 
 #. settings-schema.json->custom_short_break_script->description
 msgid "Execute this custom script when a short break starts"
-msgstr ""
+msgstr "Voer dit aangepaste script uit wanneer een korte pauze start"
 
 #. settings-schema.json->custom_long_break_script->description
 msgid "Execute this custom script when a long break starts"
-msgstr ""
+msgstr "Voer dit aangepaste script uit wanneer een lange pauze start"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 21:08+0200\n"
-"PO-Revision-Date: 2024-04-22 17:30+0200\n"
+"PO-Revision-Date: 2024-07-24 09:25+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2945,3 +2945,151 @@ msgstr "Zoeken..."
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
 msgstr "Geselecteerde items verwijderen"
+
+#: applet.js:2668
+msgid "Categories"
+msgstr "Categorieën"
+
+#: applet.js:2670
+msgid "Radio Stations"
+msgstr "Radio Stations"
+
+#: applet.js:2679
+msgid "All Categories"
+msgstr "Alle Categorieën"
+
+#: scripts/popup_menu.py:71
+msgid "Open Folder"
+msgstr "Map Openen"
+
+#: scripts/popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Openen in Terminal"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "EXPERIMENTEEL"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Cache"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Toon de stationslijst naast de categorielijst"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Aangevinkt: Beweeg de muis (zonder te klikken) over een categorie om haar "
+"lijst van stations weer te geven; selecteer vervolgens je station.\n"
+"Niet aangevinkt: Eén enkele lijst met elke categorie gevolgd door de "
+"bijbehorende stations."
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Geen cache"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Als je deze optie aanvinkt, wordt het geheugengebruik beperkt, maar is het "
+"niet langer mogelijk om de cache terug te spoelen (met behulp van de "
+"sound150@claudiux applet)."
+
+#. settings-schema.json->cache-mins->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Minuten om te cachen\n"
+"0 betekent geen limiet (standaard). 1 uur = 60 minuten. 24 uur = 1440 "
+"minuten."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Cache op schijf\n"
+"(Schrijf pakketgegevens naar een tijdelijk bestand, in plaats van ze in het "
+"geheugen te houden.)"
+
+#. settings-schema.json->cache-dir->description
+msgid ""
+"Directory used for data caching\n"
+"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
+"sufficient free space.)"
+msgstr ""
+"Map gebruikt voor gegevenscaching\n"
+"(Gebruik dit voorzichtig op SSD-schijven. Geef de voorkeur aan een map "
+"opgeslagen in RAM, met voldoende vrije ruimte.)"
+
+#. settings-schema.json->cache-dir-open->description
+msgid "Open cache directory"
+msgstr "Cache-map openen"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Stream cache grootte"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 1 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"De hoeveelheid cache voor de stream. Standaard: 1 MiB.\n"
+"Let op, dit instellen op een grote waarde kan de prestaties verminderen."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Geen limiet"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"

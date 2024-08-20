@@ -216,7 +216,8 @@ const MouseAction = {
   GroupedWindow2: 36,
   GroupedWindow3: 37,
   GroupedWindow4: 38,
-  MoveHere: 39           // Change the windows monitor and workspace to be the current monitor and workspace
+  MoveHere: 39,          // Change the windows monitor and workspace to be the current monitor and workspace
+  AlwaysOnTop: 40        // Toggle the windows "Always on top" state
 }
 
 // Possible value for the Mouse scroll wheel action setting
@@ -1476,6 +1477,7 @@ class WindowListButton {
     this._signalManager.connect(this.actor, "button-press-event", this._onButtonPress, this);
     this._signalManager.connect(this.actor, "button-release-event", this._onButtonRelease, this);
     this._signalManager.connect(this.actor, "scroll-event", this._onScrollEvent, this);
+    this._signalManager.connect(this.actor, "notify::allocation", this._allocationChanged, this);
     this._signalManager.connect(this._settings, "changed::caption-type", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::hide-caption-for-minimized", this._updateLabel, this);
@@ -1510,6 +1512,21 @@ class WindowListButton {
     this.isDraggableApp = true;
     this._updateNumber();
     this._updateSpacing();
+  }
+
+  _allocationChanged() {
+     // Update the icon location so Cinnamon's minimize/restore animation can work correctly
+     let curWS = global.screen.get_active_workspace_index();
+     if (this._windows.length>0 && curWS === this._workspace._wsNum && this._settings.getValue("group-windows")!==GroupType.Launcher) {
+        let rect = new Meta.Rectangle();
+        [rect.x, rect.y] = this._iconBin.get_transformed_position();
+        [rect.width, rect.height] = this._iconBin.get_transformed_size();
+        this._windows.forEach((window) => {
+           if (window.is_on_all_workspaces() || window.get_workspace().index() === curWS ) {
+              window.set_icon_geometry(rect);
+           }
+        });
+     }
   }
 
   // Sort this._windows by workspace and monitor
@@ -1726,6 +1743,14 @@ class WindowListButton {
     if (this._settings.getValue("menu-sort-groups")) {
        this._sortWindows();
     }
+    // Update the icon location so Cinnamon's minimize/restore animation can work correctly
+    let curWS = global.screen.get_active_workspace_index();
+    if (this._settings.getValue("group-windows")!==GroupType.Launcher && ((metaWindow.is_on_all_workspaces() && curWS === this._workspace._wsNum ) || metaWindow.get_workspace().index() === this._workspace._wsNum)) {
+       let rect = new Meta.Rectangle();
+       [rect.x, rect.y] = this._iconBin.get_transformed_position();
+       [rect.width, rect.height] = this._iconBin.get_transformed_size();
+       metaWindow.set_icon_geometry(rect);
+    }
   }
 
   removeWindow(metaWindow) {
@@ -1799,6 +1824,13 @@ class WindowListButton {
     this._applet.windowWorkspaceChanged(window, wsNum);
     if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.OtherWorkspaces) {
        this.updateIconSelection();
+    }
+    // Update the icon location so Cinnamon's minimize/restore animation can work correctly
+    if (!window.is_on_all_workspaces() && window.get_workspace() && this._workspace._wsNum === window.get_workspace().index()) {
+       let rect = new Meta.Rectangle();
+       [rect.x, rect.y] = this._iconBin.get_transformed_position();
+       [rect.width, rect.height] = this._iconBin.get_transformed_size();
+       window.set_icon_geometry(rect);
     }
   }
 
@@ -1902,7 +1934,7 @@ class WindowListButton {
   updateIcon() {
     let panelHeight = this._applet._panelHeight;
 
-    this.iconSize = this._applet.getPanelIconSize(St.IconType.FULLCOLOR) -2;
+    this.iconSize = this._applet.getPanelIconSize(St.IconType.FULLCOLOR);
 
     let icon = null;
 
@@ -2515,7 +2547,7 @@ class WindowListButton {
      if (wheelSetting===ScrollWheelAction.Off || !this.menu || !this.menu.isOpen) {
         // The Thumbnail menu is closed, so do the defined scroll wheel action
         wheelSetting = this._settings.getValue("mouse-action-scroll");
-        if (wheelSetting !== MouseScrollAction.None && !this._scrollIgnore && this._currentWindow && (!this.menu || !this.menu.isOpen)) {
+        if (wheelSetting !== MouseScrollAction.None && this._currentWindow && (!this.menu || !this.menu.isOpen)) {
            let window = this._currentWindow;
            let direction = event.get_scroll_direction();
            if (wheelSetting === MouseScrollAction.ChangeState) {
@@ -2922,6 +2954,15 @@ class WindowListButton {
               moveWindowHere(window, global.screen.get_active_workspace_index(), this._applet.panel.monitorIndex);
            }
            break;
+        case MouseAction.AlwaysOnTop:
+           if (window && (typeof window.is_above === "function")) {
+              if (window.is_above()) {
+                 window.unmake_above();
+              } else {
+                 window.make_above();
+              }
+           }
+           break;
       }
   }
 
@@ -3305,6 +3346,17 @@ class WindowListButton {
         metaWindow = this._currentWindow;
       }
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+      if (typeof metaWindow.is_above === "function") {
+         item = new PopupMenu.PopupSwitchMenuItem(_("Always on top"), metaWindow.is_above());
+         item.connect("toggled", Lang.bind(this, function(menuItem, state) {
+            if (state) {
+               metaWindow.make_above();
+            } else {
+               metaWindow.unmake_above();
+            }
+         }));
+         this._contextMenu.addMenuItem(item);
+      }
       // window ops for workspaces
       if (metaWindow.is_on_all_workspaces()) {
         this._contextMenu.addAction(_("Only on this workspace"), Lang.bind(this, function() {metaWindow.unstick()}));
@@ -3739,6 +3791,9 @@ class WindowListButton {
      }
   }
 
+  updateIconGeometry() {
+     this._allocationChanged();
+  }
 }
 
 // Represents a windowlist on a workspace (one for each workspace)
@@ -3778,9 +3833,9 @@ class Workspace {
 
     // Expand the pinned-apps array if required
     let pinSetting = this._settings.getValue("pinned-apps");
-    if (pinSetting.length < wsNum) {
+    while (pinSetting.length <= wsNum) {
+      pinSetting.push([]);
       let newSetting = pinSetting.slice();
-      newSetting.push([]);
       this._settings.setValue("pinned-apps", newSetting);
     }
 
@@ -4757,6 +4812,12 @@ class Workspace {
       return this._settings.getValue("pinned-apps")[this._wsNum];
     }
   }
+
+  updateIconGeometry() {
+    for (let i=0 ; i<this._appButtons.length ; i++) {
+       this._appButtons[i].updateIconGeometry();
+    }
+  }
 }
 
 // The windowlist manager, one instance for each windowlist
@@ -5450,6 +5511,7 @@ class WindowList extends Applet.Applet {
         ws.actor.show();
         ws._updateAppButtonVisibility();
         ws._updateFocus();
+        ws.updateIconGeometry()
       } else {
         ws.actor.hide();
       }

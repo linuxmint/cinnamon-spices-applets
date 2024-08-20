@@ -58,6 +58,30 @@ To check if a spice with UUID satifies those requirements run the `validate-spic
 ./validate-spice UUID
 ```
 
+## Development
+
+To facilitate easier testing of Applets locally, run the `test-spice` script in this repo:
+
+Validate and then copy a Spice with UUID:
+
+```bash
+./test-spice UUID
+```
+
+Skip validation (not recommended) and then copy a Spice with UUID:
+
+```bash
+./test-spice -s UUID
+```
+
+Remove all locally installed development copies of Spices:
+
+```bash
+./test-spice -r
+```
+
+NOTE: Local copies of Spices for development/testing purposes will have a `devtest-` prefix attached for easier identification and cleanup.
+
 # Rights and responsibility of the author
 
 The author is in charge of the development of the spice.
