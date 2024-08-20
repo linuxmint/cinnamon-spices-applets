@@ -1,10 +1,11 @@
 import { REQUEST_TIMEOUT_SECONDS } from "../consts";
 import { setTimeout } from "../utils";
 import type { HTTPHeaders, HTTPParams, Method } from "./httpLib";
+import { LoadContents } from "./io_lib";
 import { Logger } from "./services/logger";
 const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;
-const { Cancellable } = imports.gi.Gio;
+const { Cancellable, File } = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
 export interface SoupLibSendOptions {
@@ -24,7 +25,12 @@ export interface SoupLib {
 		options?: SoupLibSendOptions
 	) => Promise<SoupResponse | null>;
 
-	SetUserAgent: (userAgent: string | null) => void;
+	/**
+	 * Needs to be called at least once on startup!
+	 * @param userAgent
+	 * @returns
+	 */
+	SetUserAgent: (userAgent: string | null) => Promise<void>;
 }
 
 export interface SoupResponse {
@@ -54,22 +60,59 @@ function AddHeadersToMessage(message: imports.gi.Soup.Message, headers?: HTTPHea
     }
 }
 
-const DEFAULT_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0";
+/**
+ * Best attempt at getting a unique user agent the make sure we are only blocked if we are really doing something wrong.
+ *
+ * No CGNAT, VPN or Tor issues.
+ * @returns
+ */
+async function GetDefaultUserAgent(): Promise<string> {
+	const machineIDFile = File.new_for_path("/etc/machine-id");
+	let machineID: string | null = null;
+	try {
+		machineID = await LoadContents(machineIDFile);
+	}
+	catch (e) {
+		if (e instanceof Error)
+			Logger.Error("Error reading machine-id file: ", e);
+	}
+
+	machineID = machineID?.trim() ?? null;
+
+	// Trailing space is important because Soup will append it's own version to the user agent. We need to make this as unique as possible.
+	return `Mozilla/5.0 (X11; Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0 ${imports.misc.config.PACKAGE_NAME}/${imports.misc.config.PACKAGE_VERSION} ${machineID ?? "none"} `;
+}
+
 
 class Soup3 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	private readonly _httpSession = new Session();
 
+	private defaultUserAgent: string | null = null;
+	private defaultUserAgentReady: Promise<void>;
+	private defaultUserAgentResolver: (() => void) | null = null;
+
+	private async EnsureUserAgent(): Promise<string> {
+		if (this.defaultUserAgent == null)
+			this.defaultUserAgent = await GetDefaultUserAgent();
+
+		return this.defaultUserAgent;
+	}
+
     constructor() {
-        this._httpSession.user_agent = DEFAULT_USER_AGENT;
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
+		this.defaultUserAgentReady = new Promise((resolve) => {
+			this.defaultUserAgentResolver = resolve;
+		});
     }
 
-	public SetUserAgent = (userAgent: string | null) =>  {
+	public SetUserAgent = async (userAgent: string | null) =>  {
+		const DEFAULT_USER_AGENT = await this.EnsureUserAgent();
 		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
 		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+		this.defaultUserAgentResolver?.();
 	};
 
     async Send(
@@ -83,6 +126,8 @@ class Soup3 implements SoupLib {
 			cancellable,
 			noEncode = false
 		} = options;
+
+		await this.defaultUserAgentReady;
 
 		if (cancellable?.is_cancelled()) {
 			return null;
@@ -150,17 +195,37 @@ class Soup2 implements SoupLib {
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	private readonly _httpSession: Soup2Session;
 
+	private defaultUserAgent: string | null = null;
+	private defaultUserAgentReady: Promise<void>;
+	private defaultUserAgentResolver: (() => void) | null = null;
+
+	private async EnsureUserAgent(): Promise<string> {
+		if (this.defaultUserAgent == null)
+			this.defaultUserAgent = await GetDefaultUserAgent();
+
+		return this.defaultUserAgent;
+	}
+
+	public SetUserAgent = async (userAgent: string | null) =>  {
+		const DEFAULT_USER_AGENT = await this.EnsureUserAgent();
+		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
+		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
+		this.defaultUserAgentResolver?.();
+	};
+
     constructor() {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
         const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 		this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = DEFAULT_USER_AGENT;
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
 		this._httpSession.use_thread_context = true;
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
 		this._httpSession.add_feature(new ProxyResolverDefault());
+		this.defaultUserAgentReady = new Promise((resolve) => {
+			this.defaultUserAgentResolver = resolve;
+		});
     }
 
     /**
@@ -179,6 +244,8 @@ class Soup2 implements SoupLib {
 			method = "GET",
 			cancellable
 		} = options;
+
+		await this.defaultUserAgentReady;
 
 		if (cancellable?.is_cancelled()) {
 			return null;
@@ -239,11 +306,6 @@ class Soup2 implements SoupLib {
 		});
 
 		return data;
-	}
-
-	public SetUserAgent = (userAgent: string | null) => {
-		Logger.Info("Setting user agent to: " + (userAgent || DEFAULT_USER_AGENT));
-		this._httpSession.user_agent = userAgent || DEFAULT_USER_AGENT;
 	}
 
 	private async read_all_bytes(stream: imports.gi.Gio.InputStream, cancellable: imports.gi.Gio.Cancellable): Promise<string | null> {

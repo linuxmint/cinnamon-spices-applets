@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Services } from "../../config";
+import type { Config, Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
@@ -7,6 +7,7 @@ import { CelsiusToKelvin, IsLangSupported, KPHtoMPS, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { VisualCrossingAlert } from "./alerts";
 import type { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 
 export class VisualCrossing extends BaseProvider {
@@ -31,12 +32,12 @@ export class VisualCrossing extends BaseProvider {
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		if (loc == null) return null;
-		this.params['key'] = this.app.config.ApiKey;
+		this.params['key'] = config.ApiKey;
 		let translate = true;
-		if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
-			this.params['lang'] = this.app.config.Language;
+		if (IsLangSupported(config.Language, this.supportedLangs)) {
+			this.params['lang'] = config.Language;
 			translate = false;
 		}
 
@@ -327,7 +328,7 @@ export class VisualCrossing extends BaseProvider {
 
 	private HandleHttpError(error: ErrorResponse): boolean {
 		if (error?.ErrorData.code == 401) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "bad key",

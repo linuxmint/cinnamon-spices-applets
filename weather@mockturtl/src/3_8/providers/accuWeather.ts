@@ -1,12 +1,12 @@
 import { DateTime } from "luxon";
-import type { Services } from "../config";
+import type { Config, Services } from "../config";
 import type { ErrorResponse} from "../lib/httpLib";
 import { HttpLib } from "../lib/httpLib";
-import type { WeatherApplet } from "../main";
 import type { Condition, ForecastData, HourlyForecastData, Precipitation, WeatherData } from "../weather-data";
 import { CelsiusToKelvin, KPHtoMPS, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 import type { LocationData } from "../types";
+import { ErrorHandler } from "../lib/services/error_handler";
 
 export class AccuWeather extends BaseProvider {
     public readonly needsApiKey: boolean = true;
@@ -58,9 +58,9 @@ export class AccuWeather extends BaseProvider {
 
     private readonly locationCache: {[key: string]: LocationPayload} = {};
 
-    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
         const locationID = `${loc.lat},${loc.lon}`;
-        const locale = this.app.config._translateCondition ? this.app.config.currentLocale?.toLowerCase() ?? "en-us" : "en-us";
+        const locale = config._translateCondition ? config.currentLocale?.toLowerCase() ?? "en-us" : "en-us";
 
         let location: LocationPayload | null;
         if (this.locationCache[locationID] != null) {
@@ -70,7 +70,7 @@ export class AccuWeather extends BaseProvider {
             location = await HttpLib.Instance.LoadJsonSimple<LocationPayload>({
 				url: this.locSearchUrl,
 				cancellable,
-				params: { q: locationID, details: true, language: locale, apikey: this.app.config.ApiKey },
+				params: { q: locationID, details: true, language: locale, apikey: config.ApiKey },
 				HandleError: this.HandleErrors
 			});
 		}
@@ -84,19 +84,19 @@ export class AccuWeather extends BaseProvider {
             HttpLib.Instance.LoadJsonAsync<CurrentPayload[]>({
 				url: this.currentConditionUrl + location.Key,
 				cancellable,
-				params: { apikey: this.app.config.ApiKey, details: true, language: locale, },
+				params: { apikey: config.ApiKey, details: true, language: locale, },
 				HandleError: this.HandleErrors
 			}),
             HttpLib.Instance.LoadJsonAsync<DailyPayload>({
 				url: this.dailyForecastUrl + location.Key,
 				cancellable,
-				params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
+				params: { apikey: config.ApiKey, details: true, metric: true, language: locale, },
 				HandleError: this.HandleErrors
 			}),
             HttpLib.Instance.LoadJsonAsync<HourlyPayload[]>({
 				url: this.hourlyForecastUrl + location.Key,
 				cancellable,
-				params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
+				params: { apikey: config.ApiKey, details: true, metric: true, language: locale, },
 				HandleError: this.HandleErrors
 			})
         ])
@@ -113,10 +113,6 @@ export class AccuWeather extends BaseProvider {
         // Base
         this.SetTier(Number.parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
-    }
-
-    public constructor(app: WeatherApplet) {
-        super(app);
     }
 
     /**
@@ -234,21 +230,21 @@ export class AccuWeather extends BaseProvider {
         switch (e.ErrorData.code) {
             /** Request had bad syntax or the parameters supplied were invalid */
             case 400:
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "bad api response"
                 })
                 return true;
             /** Unauthorized. API authorization failed */
             case 401:
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "bad key",
                 })
                 return true;
             /** Unauthorized. You do not have permission to access this endpoint */
             case 403:
-                this.app.ShowError({
+                ErrorHandler.Instance.PostError({
                     type: "hard",
                     detail: "key blocked",
                 })
