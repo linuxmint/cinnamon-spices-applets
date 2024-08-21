@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-06-03 12:04-0400\n"
+"PO-Revision-Date: 2024-08-20 20:45-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1546,6 +1546,8 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"El servicio de búsqueda de direcciones está bloqueado. Puede intentar "
+"cambiar su User-Agent en la ayuda para ver si se resuelve el problema."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1909,157 +1911,139 @@ msgstr "Abrir Meteo"
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Chubascos dispersos"
+msgstr "Aguanieve dispersa"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Tormenta eléctrica"
+msgstr "Posibilidad de tormentas eléctricas"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
-#, fuzzy
 msgid "Light Rain"
 msgstr "Lluvia ligera"
 
 #: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
-#, fuzzy
 msgid "Light Sleet"
-msgstr "Lluvia ligera de Aguanieve"
+msgstr "Aguanieve ligera"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Lluvia intermitente"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Aguanieve intermitente"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Nieve intermitente"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Tormenta eléctrica fuerte"
+msgstr "Tormentas frecuentes"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Nubarrones"
+msgstr "Nubes altas"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Nubarrones"
+msgstr "Nubes bajas"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Nublado y con viento"
+msgstr "Nublado y seco"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Nieve ligera"
+msgstr "Ligeramente tormentoso"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Chubascos de nieve dispersos"
+msgstr "Lluvias de nieve tormentosas"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "Tormenta de truenos"
+msgstr "Lluvias tormentosas"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Tormenta de truenos"
+msgstr "Chubascos tormentosos de nieve"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Advertencia"
+msgstr "Alerta de viento"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Tormenta con lluvia"
+msgstr "Alerta de tormenta"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Advertencia"
+msgstr "Alerta de lluvia"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Advertencia"
+msgstr "Alerta de nieve"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Alerta de carreteras resbaladizas"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Advertencia"
+msgstr "Alerta de heladas"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Aviso de movimientos de masas"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Advertencia"
+msgstr "Aviso de calor"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Alerta de avalancha"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Alerta sísmica"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Alerta de incendios forestales"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Advertencia"
+msgstr "Aviso de inundación"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Swiss Météo"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Para este proveedor, debe utilizar un código postal."
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Para este proveedor, debe utilizar un código postal suizo, del 1000 al 9999."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Suiza"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2149,9 +2133,8 @@ msgid "Saved to {filePath}"
 msgstr "Guardado en {filePath}"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Ubicación"
+msgstr "Servicio de localización bloqueado"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
@@ -2700,7 +2683,7 @@ msgstr "US National Weather (solo Estados Unidos)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Swiss Météo (sólo Suiza)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2727,7 +2710,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (necesita clave)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2736,12 +2718,12 @@ msgid ""
 "replaced automatically for validating your choice. Powered by nominatim."
 "openstreetmap.org."
 msgstr ""
-"Puede introducir las coordenadas 'Latitud,Longitud' (ej. 51.5085,-0.1257) o "
-"utilizar 'Ciudad,Código de país' (ej. Londres,Reino Unido) o intentar "
-"introducir {Número de casa} {Street} {Ciudad/Pueblo}{Postcode} {Country}. El "
-"algoritmo de búsqueda es muy flexible con el formato. Después de 3 segundos "
-"sin escribir, la dirección introducida se sustituye automáticamente para "
-"validar su elección."
+"Puede introducir las coordenadas 'Latitud,Longitud' (p. ej. 51.5085,-0.1257) "
+"o utilizar 'Ciudad,Código de país' (p. ej. Londres,UK) o intentar introducir "
+"{Número de casa} {Street} {Ciudad/Pueblo} {Postcode} {Country}. El algoritmo "
+"de búsqueda es muy flexible con el formato. Después de 3 segundos sin "
+"escribir, la dirección introducida se sustituye automáticamente para validar "
+"su elección. Desarrollado por nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
