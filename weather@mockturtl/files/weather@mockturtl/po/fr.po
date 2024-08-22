@@ -7,11 +7,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.6.3\n"
+"Project-Id-Version: weather@mockturtl 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-07-04 09:47+0200\n"
+"PO-Revision-Date: 2024-08-22 09:38+0200\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:20441
@@ -1553,6 +1553,9 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Le service de recherche de localisation d'adresses vers des emplacements est "
+"bloqué. Vous pouvez essayer de modifier l'Agent Utilisateur dans l'aide pour "
+"voir si cela résout le problème."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1916,157 +1919,140 @@ msgstr "Open Meteo"
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Averses dispersées"
+msgstr "Grésil dispersé"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Orages"
+msgstr "Risque d'orages"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
-#, fuzzy
 msgid "Light Rain"
 msgstr "Pluie légère"
 
 #: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
-#, fuzzy
 msgid "Light Sleet"
 msgstr "Léger grésil"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Pluie intermittente"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Grésil intermittent"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Neige intermittente"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Orages violents"
+msgstr "Orages fréquents"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Nuageux"
+msgstr "Nuages ​​élevés"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Nuageux"
+msgstr "Nuages bas"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Ciel couvert et venteux"
+msgstr "Ciel couvert et sec"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Neige légère"
+msgstr "Légèrement orageux"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Averses de neige dispersées"
+msgstr "Averses de neige orageuses"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "Averses et orage"
+msgstr "Averses orageuses"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Averses et orage"
+msgstr "Averses de neige orageuses"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Avertissement"
+msgstr "Avertissement vent"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Orage avec pluie"
+msgstr "Avertissement orage"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Avertissement"
+msgstr "Avertissement pluie"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Avertissement"
+msgstr "Avertissement neige"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Avertissement routes glissantes"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Avertissement"
+msgstr "Avertissement gel"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Avertissement glissements de terrain"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Avertissement"
+msgstr "Avertissement chaleur"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Avertissement avalanche"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Avertissement tremblement de terre"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Avertissement incendie de forêt"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Avertissement"
+msgstr "Avertissement inondation"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "MétéoSuisse"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Pour ce fournisseur, vous devez utiliser un code postal."
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Pour ce fournisseur, vous devez utiliser un code postal suisse, de 1000 à "
+"9999."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Suisse"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2155,9 +2141,8 @@ msgid "Saved to {filePath}"
 msgstr "Enregistré dans {filePath}"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Dépôt de localisation"
+msgstr "Service de localisation bloqué"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
@@ -2297,8 +2282,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : "
-"« 68.1932, 17.1426 » ou une adresse.\n"
+"Les entrées acceptables sont « Latitude, Longitude ». Par exemple : « "
+"68.1932, 17.1426 » ou une adresse.\n"
 "Attendez 3 secondes après avoir arrêté de taper, puis actualisez la météo."
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -2711,7 +2696,7 @@ msgstr "US National Weather (États-Unis uniquement)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "MétéoSuisse (Suisse seulement)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2738,7 +2723,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (clé requise)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2752,7 +2736,7 @@ msgstr ""
 "essayer d'entrer « {Numéro de maison} {Rue} {Ville} {Code postal} {Pays} ». "
 "L'algorithme de recherche est très flexible avec le format. Après 3 secondes "
 "sans saisie, l'adresse que vous avez entrée est automatiquement remplacée "
-"pour valider votre choix."
+"pour valider votre choix. Service fourni par nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -3010,12 +2994,12 @@ msgid ""
 "automatically for validating your choice."
 msgstr ""
 "Dans la plupart des cas, votre emplacement fonctionne automatiquement, mais "
-"vous pouvez l'entrer manuellement par les coordonnées « Latitude, "
-"Longitude » (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du "
-"pays » (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} "
-"{Rue} {Ville} {Code postal} {Pays} ». L'algorithme de recherche est très "
-"flexible avec le format. Au bout de 3 secondes sans saisie, l'adresse que "
-"vous avez entrée est automatiquement remplacée pour valider votre choix."
+"vous pouvez l'entrer manuellement par les coordonnées « Latitude, Longitude "
+"» (par exemple « 51, 5085, -0,1257 ») ou utiliser « Ville, Code du pays "
+"» (par exemple « Paris, FR ») ou essayer d'entrer « {Numéro de maison} {Rue} "
+"{Ville} {Code postal} {Pays} ». L'algorithme de recherche est très flexible "
+"avec le format. Au bout de 3 secondes sans saisie, l'adresse que vous avez "
+"entrée est automatiquement remplacée pour valider votre choix."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
