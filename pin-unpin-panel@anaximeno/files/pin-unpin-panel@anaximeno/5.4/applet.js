@@ -45,6 +45,9 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 		this.signalsManager = new SignalManager.SignalManager(null);
         this.signalsManager.connect(global.settings, "changed::" + Panel.PANEL_AUTOHIDE_KEY, this.on_panels_autohide_state_changed, this);
 
+		this.default_pin_icon_path = `${metadata.path}/../icons/pin-symbolic.svg`;
+		this.default_unpin_icon_path = `${metadata.path}/../icons/unpin-symbolic.svg`;
+
 		this.on_panels_autohide_state_changed();
 	}
 
@@ -58,14 +61,19 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 				cb: null,
 			},
 			{
+				key: 'use-custom-icons',
+				value: 'use_custom_icons',
+				cb: this.update_panel_applet_ui_state,
+			},
+			{
 				key: 'pin-icon',
-				value: 'pin_icon',
-				cb: null,
+				value: 'custom_pin_icon',
+				cb: this.update_panel_applet_ui_state,
 			},
 			{
 				key: 'unpin-icon',
-				value: 'unpin_icon',
-				cb: null,
+				value: 'custom_unpin_icon',
+				cb: this.update_panel_applet_ui_state,
 			},
 		];
 
@@ -91,16 +99,19 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	update_panel_applet_ui_state() {
-		const icon_name = this.pinned ? this.unpin_icon : this.pin_icon;
-		const tooltip = this.pinned ? _("Click to Unpin the Panel") : _("Click to Pin the Panel");
-		this.set_applet_icon_symbolic_name(icon_name);
-		this.set_applet_tooltip(tooltip);
+		if (this.use_custom_icons) {
+			this.set_applet_icon_name(this.pinned ? this.custom_unpin_icon : this.custom_pin_icon);
+		} else {
+			this.set_applet_icon_symbolic_path(this.pinned ? this.default_unpin_icon_path : this.default_pin_icon_path);
+		}
+
+		this.set_applet_tooltip(this.pinned ? _("Click to Unpin the Panel") : _("Click to Pin the Panel"));
 	}
 
 	get_panel_autohide_state() {
 		const autohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
 		const autohideState = autohideStates ? autohideStates.find((v, i, arr) => v.split(":")[0] == this.panel.panelId) : undefined;
-		return autohideState ? autohideState.split(':')[1] : undefined;
+		return autohideState && autohideState.split(':').length > 1 ? autohideState.split(':')[1] : undefined;
 	}
 
 	set_panel_autohide_state(state) {

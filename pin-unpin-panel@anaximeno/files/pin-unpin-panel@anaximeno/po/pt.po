@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-25 00:22-0100\n"
+"POT-Creation-Date: 2024-08-25 15:40-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. 5.4/applet.js:95
+#. 5.4/applet.js:108
 msgid "Click to Unpin the Panel"
 msgstr "Clique para Desafixar o Painel"
 
-#. 5.4/applet.js:95
+#. 5.4/applet.js:108
 msgid "Click to Pin the Panel"
 msgstr "Clique para Fixar o Painel"
 
@@ -57,6 +57,10 @@ msgstr "Ocultação Inteligente"
 #. 5.4->settings-schema.json->style->description
 msgid "Style"
 msgstr "Estilo"
+
+#. 5.4->settings-schema.json->use-custom-icons->description
+msgid "Use Custom Icons"
+msgstr "Usar Ícones Personalizados"
 
 #. 5.4->settings-schema.json->pin-icon->description
 msgid "Pin Icon"

@@ -19,15 +19,22 @@
         "description": "Style"
     },
 
+    "use-custom-icons": {
+        "type": "switch",
+        "description": "Use Custom Icons",
+        "default": false
+    },
     "pin-icon": {
         "type": "iconfilechooser",
-        "default": "window-pin-symbolic",
-        "description": "Pin Icon"
+        "default": "xapp-pin-symbolic",
+        "description": "Pin Icon",
+        "dependency": "use-custom-icons"
     },
     "unpin-icon": {
         "type": "iconfilechooser",
-        "default": "window-unpin-symbolic",
-        "description": "Unpin Icon"
+        "default": "xapp-unpin-symbolic",
+        "description": "Unpin Icon",
+        "dependency": "use-custom-icons"
     }
 
 }
