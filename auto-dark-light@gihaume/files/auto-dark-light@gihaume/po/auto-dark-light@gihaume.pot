@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# This file is put in the public domain.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: auto-dark-light@gihaume 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-08-25 16:23+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-26 00:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:26
+#: applet.js:28
 msgid "Click: toggle dark/light mode"
 msgstr ""
 
-#: applet.js:27
+#: applet.js:29
 msgid "Middle-click: toggle automatic switch mode"
 msgstr ""
 
-#: applet.js:307
+#: applet.js:309
 msgid "Today's automatic mode switch times:"
 msgstr ""
 
-#: applet.js:308
+#: applet.js:310
 msgid "Light mode:"
 msgstr ""
 
-#: applet.js:309
+#: applet.js:311
 msgid "Dark mode:"
 msgstr ""
 
-#: applet.js:342
+#: applet.js:344
 msgid "Error:"
 msgstr ""
 
-#: applet.js:348
+#: applet.js:350
 msgid "Critical error:"
 msgstr ""
 
-#: lib/twilights_calculator.js:22
+#: lib/twilights_calculator.js:24
 msgid "unable to calculate twilight times, check coordinates format or range"
 msgstr ""
 
-#: lib/time_change_listener/time_change_listener.js:25
+#: lib/time_change_listener/time_change_listener.js:26
 msgid ""
-"Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
-"system with `sudo apt install build-essential`, then reload the applet (in e."
-"g. in restarting Cinnamon)."
+"Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based"
+" system with `sudo apt install build-essential`, then reload the applet (in "
+"e.g. in restarting Cinnamon)."
 msgstr ""
 
 #. metadata.json->name
@@ -132,8 +132,8 @@ msgstr ""
 
 #. settings-schema.json->settings_location_button_open-os-settings->tooltip
 msgid ""
-"Open the system's settings window to select the region and city for the time "
-"zone"
+"Open the system's settings window to select the region and city for the time"
+" zone"
 msgstr ""
 
 #. settings-schema.json->settings_location_entry_latitude->description

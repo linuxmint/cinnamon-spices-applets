@@ -1,3 +1,5 @@
+const { _ }       = require('./lib/translator.js');
+
 const {Gio, GLib} = imports.gi;
 
 /**

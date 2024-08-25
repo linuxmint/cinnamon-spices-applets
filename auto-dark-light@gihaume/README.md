@@ -15,22 +15,22 @@
 ## Applet icons legend
 
 <div style="display: flex; align-items: center;">
-    <img src="files/auto-dark-light@gihaume/icons/auto-symbolic.svg" alt="Applet Icon" width="75" height="75" style="margin-right: 10px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/auto-symbolic.svg" alt="Auto" width="75" height="75" style="margin-right: 10px;">
     Automatic mode switch enabled.
 </div>
 <p>
 <div style="display: flex; align-items: center;">
-    <img src="files/auto-dark-light@gihaume/icons/auto-inverted-symbolic.svg" alt="Applet Icon" width="75" height="75" style="margin-right: 10px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/auto-inverted-symbolic.svg" alt="Auto inverted" width="75" height="75" style="margin-right: 10px;">
     Automatic mode switch enabled but the current mode has been set while not in sync with the actual daytime, so any external changes won't update it until the next scheduled mode change or if entering auto mode switch again.
 </div>
 <p>
 <div style="display: flex; align-items: center;">
-    <img src="files/auto-dark-light@gihaume/icons/light-symbolic.svg" alt="Applet Icon" width="75" height="75" style="margin-right: 10px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/light-symbolic.svg" alt="Light" width="75" height="75" style="margin-right: 10px;">
     Automatic mode switch disabled and the current mode is light.
 </div>
 <p>
 <div style="display: flex; align-items: center;">
-    <img src="files/auto-dark-light@gihaume/icons/dark-symbolic.svg" alt="Applet Icon" width="75" height="75" style="margin-right: 10px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/dark-symbolic.svg" alt="Dark" width="75" height="75" style="margin-right: 10px;">
     Automatic mode switch disabled and the current mode is dark.
 </div>
 <p>

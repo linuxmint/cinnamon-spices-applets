@@ -8,6 +8,7 @@ const Timezone_change_listener     = require('./lib/timezone_change_listener.js'
 const Timezone_coordinates_finder  = require('./lib/timezones_coordinates/timezone_coordinates_finder.js');
 const Sleep_wakeup_listener        = require('./lib/sleep_wakeup_listener.js');
 const Color_scheme_change_listener = require('./lib/color_scheme_change_listener.js');
+const { _ }                        = require('./lib/translator.js');
 
 const Applet   = imports.ui.applet;
 const GLib     = imports.gi.GLib;
