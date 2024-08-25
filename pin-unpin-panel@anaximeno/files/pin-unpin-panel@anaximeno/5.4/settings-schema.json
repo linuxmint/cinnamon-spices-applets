@@ -1,0 +1,33 @@
+{
+    "general": {
+        "type": "section",
+        "description": "General"
+    },
+
+    "unpin-autohide-type": {
+        "type": "combobox",
+        "description": "Hide Type on Unpin",
+        "default": "intel",
+        "options": {
+            "Auto Hide": "true",
+            "Intelligent Hide": "intel"
+        }
+    },
+
+    "style": {
+        "type": "section",
+        "description": "Style"
+    },
+
+    "pin-icon": {
+        "type": "iconfilechooser",
+        "default": "window-pin-symbolic",
+        "description": "Pin Icon"
+    },
+    "unpin-icon": {
+        "type": "iconfilechooser",
+        "default": "window-unpin-symbolic",
+        "description": "Unpin Icon"
+    }
+
+}
