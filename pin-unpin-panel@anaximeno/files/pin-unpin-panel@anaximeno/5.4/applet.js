@@ -111,7 +111,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	get_panel_autohide_state() {
 		const autohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
 		const autohideState = autohideStates ? autohideStates.find((v, i, arr) => v.split(":")[0] == this.panel.panelId) : undefined;
-		return autohideState && autohideState.length > 1 ? autohideState.split(':')[1] : undefined;
+		return autohideState && autohideState.split(':').length > 1 ? autohideState.split(':')[1] : undefined;
 	}
 
 	set_panel_autohide_state(state) {
