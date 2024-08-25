@@ -22,6 +22,7 @@ const Mainloop = imports.mainloop
 const FOOLS_DAY_CHECK_INTERVAL_IN_MS = 60000 // 1 minute
 // Margins around the animation in px. Hard-coded for now. See: determineAnimationRenderOptions method
 const ANIMATION_MARGIN = 8
+const FORTUNE_COMMAND = "fortune"
 
 export class FishApplet extends Applet {
   private metadata: Metadata
@@ -291,7 +292,7 @@ We strongly advise you against using %s for anything which would make the applet
 
       if (GLib.find_program_in_path(program) == null) {
         // show a dedicated error message with instruction on how to solve it for the default "fortune" command
-        if (program === "fortune") {
+        if (program === FORTUNE_COMMAND) {
           const fortuneNotInstalledMessage =
             // Do not indent. Tabs would be applied on the string as well (template literal).
             _(`Normally, the Fish's wisdom is derived from the 'fortune' command-line utility. 

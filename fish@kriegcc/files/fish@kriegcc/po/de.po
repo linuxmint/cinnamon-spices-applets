@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# FISH
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# kriegcc, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fish@kriegcc 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-22 13:29+0200\n"
-"PO-Revision-Date: 2024-08-22 13:30+0200\n"
+"POT-Creation-Date: 2024-08-25 08:44+0200\n"
+"PO-Revision-Date: 2024-08-25 08:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,69 +18,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: fish-applet.js:687
+#. fish-applet.js:687
 msgid "Fish Applet"
 msgstr "Fisch Applet"
 
-#: fish-applet.js:777
+#. fish-applet.js:777
 msgid "Copy Message"
 msgstr "Nachricht kopieren"
 
-#: fish-applet.js:789
+#. fish-applet.js:789
 msgid "Speak again"
 msgstr "Erneut sprechen"
 
-#: fish-applet.js:794
+#. fish-applet.js:794
 msgid "Close"
 msgstr "Schließen"
 
-#: fish-applet.js:814
+#. fish-applet.js:814
 #, javascript-format
 msgid "%s the Fish Says:"
 msgstr "%s der Fisch, sagt:"
 
-#: fish-applet.js:822
+#. fish-applet.js:822
 msgid "Message copied to the clipboard"
 msgstr "Nachricht wurde in die Zwischenablage kopiert"
 
-#: fish-applet.js:875
+#. fish-applet.js:875
 msgid "There's something fishy going on here:"
 msgstr "Hier stimmt etwas nicht:"
 
-#: fish-applet.js:916
+#. fish-applet.js:916
 msgid "Copy Error Messages"
 msgstr "Fehlermeldungen kopieren"
 
-#: fish-applet.js:919
+#. fish-applet.js:919
 msgid "Copy Error Message"
 msgstr "Fehlermeldung kopieren"
 
-#: fish-applet.js:935 fish-applet.js:1242
+#. fish-applet.js:935 fish-applet.js:1243
 msgid "Open Preferences"
 msgstr "Einstellungen öffnen"
 
-#: fish-applet.js:947
+#. fish-applet.js:947
 msgid "Errors copied to the clipboard"
 msgstr "Fehler wurden in die Zwischenablage kopiert"
 
-#: fish-applet.js:950
+#. fish-applet.js:950
 msgid "Error copied to the clipboard"
 msgstr "Fehler wurde in die Zwischenablage kopiert"
 
-#: fish-applet.js:984
+#. fish-applet.js:984
 msgid "The water needs changing"
 msgstr "Das Wasser muss gewechselt werden"
 
-#: fish-applet.js:989
+#. fish-applet.js:989
 msgid "Look at today's date!"
 msgstr "Man beachte das heutige Datum!"
 
-#: fish-applet.js:1205
+#. fish-applet.js:1206
 #, javascript-format
 msgid "%s the Fish, the fortune teller"
 msgstr "%s, der wahrsagende Fisch"
 
-#: fish-applet.js:1222
+#. fish-applet.js:1223
 #, javascript-format
 msgid ""
 "Warning: The command appears to be something actually useful. \n"
@@ -95,7 +95,7 @@ msgstr ""
 "Wir raten davon ab, %s für irgendetwas zu nutzen, was dieses Applet "
 "praktisch oder gar nützlich machen könnte."
 
-#: fish-applet.js:1230
+#. fish-applet.js:1231
 msgid ""
 "Normally, the Fish's wisdom is derived from the 'fortune' command-line "
 "utility. \n"
@@ -113,19 +113,19 @@ msgstr ""
 "Falls Sie keine weiteren Pakete installieren möchten, können Sie auch den "
 "Befehl in den Einstellungen des Applets ändern."
 
-#: fish-applet.js:1238
+#. fish-applet.js:1239
 msgid "Open Documentation"
 msgstr "Dokumentation öffnen"
 
-#: ImageChooser.py:59
+#. ImageChooser.py:59
 msgid "File"
 msgstr "Datei"
 
-#: ImageChooser.py:64
+#. ImageChooser.py:64
 msgid "Select an animation"
 msgstr "Animation auswählen"
 
-#: ImageChooser.py:69
+#. ImageChooser.py:69
 msgid "Images"
 msgstr "Bilder"
 
@@ -326,7 +326,7 @@ msgid "Opens the applet's page on Cinnamon Spices website."
 msgstr "Öffnet die Seite des Applets auf der Cinnamon Spices Website."
 
 #. settings-schema.json->keyVersion->description
-msgid "v0.1.0- ()"
+msgid "v0.1.0"
 msgstr ""
 
 #. settings-schema.json->keyLicenseText->description

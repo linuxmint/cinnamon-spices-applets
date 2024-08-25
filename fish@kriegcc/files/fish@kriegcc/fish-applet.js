@@ -1056,6 +1056,7 @@ const { GLib: FishApplet_GLib } = imports.gi;
 const Mainloop = imports.mainloop;
 const FOOLS_DAY_CHECK_INTERVAL_IN_MS = 60000;
 const ANIMATION_MARGIN = 8;
+const FORTUNE_COMMAND = "fortune";
 class FishApplet extends Applet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -1226,7 +1227,7 @@ We strongly advise you against using %s for anything which would make the applet
                 showNotification({ message: commandWarningMessage, type: "Warning", isPersistent: true });
             }
             if (FishApplet_GLib.find_program_in_path(program) == null) {
-                if (program === "fortune") {
+                if (program === FORTUNE_COMMAND) {
                     const fortuneNotInstalledMessage = _(`Normally, the Fish's wisdom is derived from the 'fortune' command-line utility. 
 It seems that this dependency is missing on your system.
 However, it should be available for most distributions. 
