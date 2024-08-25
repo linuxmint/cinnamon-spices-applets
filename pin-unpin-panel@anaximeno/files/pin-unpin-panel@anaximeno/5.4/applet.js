@@ -92,7 +92,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 
 	update_panel_applet_ui_state() {
 		const icon_name = this.pinned ? this.unpin_icon : this.pin_icon;
-		const tooltip = this.pinned ? _("Click to Unpin") : _("Click to Pin");
+		const tooltip = this.pinned ? _("Click to Unpin the Panel") : _("Click to Pin the Panel");
 		this.set_applet_icon_symbolic_name(icon_name);
 		this.set_applet_tooltip(tooltip);
 	}
