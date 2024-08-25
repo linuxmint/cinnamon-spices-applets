@@ -59,7 +59,7 @@ msgstr "Estilo"
 
 #. 5.4->settings-schema.json->use-custom-icons->description
 msgid "Use Custom Icons"
-msgstr ""
+msgstr "Utilizar iconos personalizados"
 
 #. 5.4->settings-schema.json->pin-icon->description
 msgid "Pin Icon"
