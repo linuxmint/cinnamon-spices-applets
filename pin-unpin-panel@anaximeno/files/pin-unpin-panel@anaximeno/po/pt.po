@@ -20,11 +20,11 @@ msgstr ""
 
 #. 5.4/applet.js:95
 msgid "Click to Unpin the Panel"
-msgstr "Clique para Fixar o Painel"
+msgstr "Clique para Desafixar o Painel"
 
 #. 5.4/applet.js:95
 msgid "Click to Pin the Panel"
-msgstr "Clique para Desafixar o Painel"
+msgstr "Clique para Fixar o Painel"
 
 #. metadata.json->name
 msgid "Pin-Unpin the Panel"
