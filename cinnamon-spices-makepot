@@ -214,6 +214,8 @@ def make_pot(uuid: str) -> CapturedOutput:
 
     if os.path.exists(pot_file_path):
         pot_file_path.chmod(0o0644)
+    else:
+        return output
 
     # Extract translatable strings from glade
     glade_list = glob('**/*.glade', recursive=True, root_dir=output_dir)
