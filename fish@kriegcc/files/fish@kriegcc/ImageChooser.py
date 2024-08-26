@@ -6,10 +6,7 @@ from gi.repository import Gio, Gtk, GLib, GdkPixbuf
 from xapp.SettingsWidgets import SettingsWidget
 from xapp.GSettingsWidgets import PXGSettingsBackend
 
-# TODO: scaling needed (HiDPI)?
-# Maybe automatically detect proper size based on box's dimensions?
-# self.preview_allocation: Gdk.Rectangle
-# preview_image_container.connect("size-allocate", self._on_size_allocate)
+# TODO: Maybe automatically detect proper size based on box's dimensions?
 IMAGE_PREVIEW_SIZE = 256 # preview in settings window (max width or height in px)
 IMAGE_CHOOSER_PREVIEW_SIZE = 128 # preview in dialog (max width or height in px)
 
@@ -123,8 +120,11 @@ class ImageChooser(SettingsWidget):
     # using pixbuf enables to limit the dimensions of the image shown in the preview
     # without pixbuf but original size: Gtk.Image().set_from_file(filename)
     def _create_pixbuf_from_file(self, filename: str, size: int) -> GdkPixbuf.Pixbuf | None:
-        try: 
-            return GdkPixbuf.Pixbuf.new_from_file_at_size(filename, size, size)
+        try:
+            # Scale up the image on HiDPI screens. It does not support fractional scaling.
+            # See method get_scale_factor on GTK.Widget.
+            scale_factor: int = self.get_scale_factor()
+            return GdkPixbuf.Pixbuf.new_from_file_at_size(filename, size * scale_factor, size * scale_factor)
         except GLib.Error as e:
             print("Could not load image file '%s': %s" % (filename, e.message))
         return None

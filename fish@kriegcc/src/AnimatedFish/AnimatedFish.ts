@@ -171,7 +171,7 @@ export const AnimatedFish = GObject.registerClass(
         renderOptions: foolsDayRenderOptions,
       }
 
-      // TODO: make some funny changes.
+      // TODO: make some more funny changes.
 
       try {
         this.animation = new Animation(animationProps)

@@ -74,7 +74,7 @@ export const Animation = GObject.registerClass(
       // However fractional scaling does not seem to be support. The returned scale factor is an integer.
 
       // TODO: In original source, the signal "resource-scale-changed" is used.
-      // Is is not available here and if added, it causes a crash.
+      // It is not available here and if added, it causes a crash.
       // this.connect("resource-scale-changed", () => this.loadFile())
       // The signal below is always triggered and causes that loadFile is called twice.
       this.connect("notify::resource-scale", () => {
@@ -94,7 +94,7 @@ export const Animation = GObject.registerClass(
         this.stop()
 
         // This is wrong in the original source, I guess.
-        // It overwrites width and height. There is no chance to decrease scale then again.
+        // It overwrites width and height. There is no chance to decrease scale then again. Fixed here by saving the initial dimensions.
         this.set_size(this.initialWidth * themeContext.scale_factor, this.initialHeight * themeContext.scale_factor)
         this.loadFile()
 
