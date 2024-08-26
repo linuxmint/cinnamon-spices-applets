@@ -17,14 +17,15 @@ const Twilights_calculator = {
      * @throws {Error} If the calculation fails.
      */
     get_today(latitude, longitude) {
-        const now   = DateTime.new_now_local().to_unix_usec() / 1000, // [ms]
+        const now   = DateTime.new_now_local().to_unix() * 1000, // [ms]
               dates = SunCalc.getTimes(now, latitude, longitude);
 
         if (isNaN(dates.sunrise) || isNaN(dates.sunset))
             throw Error(_("unable to calculate twilight times, check coordinates format or range"));
 
         const [sunrise, sunset] = [dates.sunrise, dates.sunset].map(date => {
-            const date_glib = DateTime.new_from_unix_local_usec(date.getTime() * 1000);
+            const unix_time = date.getTime() / 1000, // [s]
+                  date_glib = DateTime.new_from_unix_local(unix_time);
             return new Time_of_day(date_glib);
         });
 
