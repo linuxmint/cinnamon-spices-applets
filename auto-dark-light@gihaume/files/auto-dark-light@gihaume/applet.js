@@ -43,14 +43,14 @@ class ThisApplet extends Applet.IconApplet {
                     this.themes_light.detect();
         }
 
-        this.apply_ui_switch_sync_from_timezone();
-        this._update();
-
         this.color_scheme_change_listener.enable();
         if (this.ui_switch_auto_mode) {
             this.time_change_listener.enable();
             this.sleep_wakeup_listener.enable();
         }
+
+        this.apply_ui_switch_sync_from_timezone();
+        this._update();
     }
 
     _init_libs() {
@@ -288,7 +288,7 @@ class ThisApplet extends Applet.IconApplet {
             this.is_auto_mode_inverted = !this.is_auto_mode_inverted;
         this.ui_switch_dark_mode = !this.ui_switch_dark_mode;
         this.apply_ui_switch_dark_mode();
-        this._update();
+        this._update_state();
     }
 
     on_applet_middle_clicked() { // built-in method

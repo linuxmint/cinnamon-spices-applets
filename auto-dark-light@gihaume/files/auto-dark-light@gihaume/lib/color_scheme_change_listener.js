@@ -13,11 +13,17 @@ class Color_scheme_change_listener {
     }
 
     enable() {
+        this.disable(); // Ensure only one signal is connected
         this.#signal_id =
             this.#interface.connect('changed::color-scheme', this.#callback);
     }
 
-    disable() { this.#interface.disconnect(this.#signal_id); }
+    disable() {
+        if (this.#signal_id !== undefined) {
+            this.#interface.disconnect(this.#signal_id);
+            this.#signal_id = undefined;
+        }
+    }
 
     /**
      * Declare the object as finished to release any ressource acquired.
