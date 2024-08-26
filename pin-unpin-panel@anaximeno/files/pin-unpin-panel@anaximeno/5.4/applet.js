@@ -58,7 +58,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 			{
 				key: 'unpin-autohide-type',
 				value: 'unpin_autohide_type',
-				cb: null,
+				cb: this.on_applet_autohide_type_settings_changed,
 			},
 			{
 				key: 'use-custom-icons',
@@ -96,6 +96,10 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 		const autohideState = this.get_panel_autohide_state();
 		this.pinned = !autohideState || autohideState == 'false';
 		this.update_panel_applet_ui_state();
+	}
+
+	on_applet_autohide_type_settings_changed() {
+		if (!this.pinned) this.set_panel_autohide_state(this.unpin_autohide_type);
 	}
 
 	update_panel_applet_ui_state() {
