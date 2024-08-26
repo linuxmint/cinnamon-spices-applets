@@ -109,17 +109,27 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	get_panel_autohide_state() {
-		const autohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
-		const autohideState = autohideStates ? autohideStates.find((v, i, arr) => v.split(":")[0] == this.panel.panelId) : undefined;
-		return autohideState && autohideState.split(':').length > 1 ? autohideState.split(':')[1] : undefined;
+		const panelAutohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
+
+		if (!panelAutohideStates) return undefined;
+
+		for (const panelAutohideState of panelAutohideStates) {
+			let [panelId, autohideState] = panelAutohideState.split(":");
+
+			if (panelId == this.panel.panelId)
+				return autohideState;
+		}
+
+		return undefined;
 	}
 
 	set_panel_autohide_state(state) {
 		const newStates = [];
 		const panelAutohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
 
-		for (let i = 0 ; i < panelAutohideStates.length ; i++) {
-			let panelAutohideState = panelAutohideStates[i];
+		if (!panelAutohideStates) return;
+
+		for (const panelAutohideState of panelAutohideStates) {
 			let [panelId, autohideState] = panelAutohideState.split(":");
 
 			if (panelId == this.panel.panelId)
@@ -129,7 +139,6 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 		}
 
 		global.settings.set_strv(Panel.PANEL_AUTOHIDE_KEY, newStates);
-		this.update_panel_applet_ui_state();
 	}
 
 	destroy() {
