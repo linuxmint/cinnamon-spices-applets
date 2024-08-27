@@ -279,7 +279,7 @@ class TapoApplet extends Applet.TextIconApplet {
     }
 
     reloadApplet() {
-        let cmd = `dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'${this.metadata.uuid}' string:'APPLET'`;
+        let cmd = `/usr/bin/cinnamon-dbus-command ReloadXlet ${this.metadata.uuid} APPLET`;
         Util.spawnCommandLine(cmd);
     }
 }
