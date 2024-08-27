@@ -279,7 +279,7 @@ class TapoApplet extends Applet.TextIconApplet {
     }
 
     reloadApplet() {
-        let cmd = `/usr/bin/cinnamon-dbus-command ReloadXlet ${this.metadata.uuid} APPLET`;
+        let cmd = `/usr/bin/cinnamon-dbus-command ReloadXlet '${this.metadata.uuid}' APPLET`;
         Util.spawnCommandLine(cmd);
     }
 }
