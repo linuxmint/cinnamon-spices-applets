@@ -97,21 +97,21 @@ function show_notification(title, message, icon_name) {
  * @exports QUtils.show_error_notification
  */
 function show_error_notification(message) {
-    this.show_notification('QRedshift', message, 'dialog-error');
+    this.show_notification('Tapo', message, 'dialog-error');
 }
 
 /**
  * @exports QUtils.show_warning_notification
  */
 function show_warning_notification(message) {
-    this.show_notification('QRedshift', message, 'dialog-warning');
+    this.show_notification('Tapo', message, 'dialog-warning');
 }
 
 /**
  * @exports QUtils.show_info_notification
  */
 function show_info_notification(message) {
-    this.show_notification('QRedshift', message, 'dialog-information');
+    this.show_notification('Tapo', message, 'dialog-information');
 }
 
 
