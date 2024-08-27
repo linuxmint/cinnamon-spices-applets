@@ -4,6 +4,5 @@
     "name": "Tapo Control Panel",
     "version": "1.0.0",
     "max-instances": 1,
-    "author": "Stefan Miklosovic",
-    "last-edited": 1722168753
+    "author": "Stefan Miklosovic"
 }
