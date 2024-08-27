@@ -2,7 +2,6 @@
 # 2 = password
 login()
 {
-    echo "logging $1 $2 $3" >> /tmp/getting_statuses
     OUTPUT=$(curl -s -X POST -H "Content-Type: application/json" --data "{ \"password\": \"$2\" }" $1/login)
     if [ "$?" == 0 ]; then
         if [ "$OUTPUT" = "Invalid credentials provided" ]; then
@@ -23,7 +22,6 @@ login()
 get_status()
 {
   OUTPUT=$(curl -s -X GET -H "Authorization: Bearer $3" "$2/actions/p110/get-device-info?device=$1")
-  echo "$(date) getting status for $1 against $2 for token $3" >> /tmp/getting_statuses
   echo -n $OUTPUT | jq -j .device_on
 }
 
