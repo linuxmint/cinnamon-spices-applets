@@ -1,0 +1,9 @@
+{
+    "description": "Control Tapo Appliances",
+    "uuid": "tapo@smiklosovic",
+    "name": "Tapo Control Panel",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "author": "Stefan Miklosovic",
+    "last-edited": 1722168753
+}
