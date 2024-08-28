@@ -25,6 +25,10 @@ const SignalManager = imports.misc.signalManager;
 const GLib = imports.gi.GLib;
 
 const UUID = "pin-unpin-panel@anaximeno";
+// XXX: Sync With Panel.PANEL_AUTOHIDE_KEY. Not using that directly because
+// the ES6 standard doesn't support direct import of values declared with const or let
+// from modules.
+const PANEL_AUTOHIDE_KEY = "panels-autohide";
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -43,7 +47,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 		this.pinned = true;
 
 		this.signalsManager = new SignalManager.SignalManager(null);
-        this.signalsManager.connect(global.settings, "changed::" + Panel.PANEL_AUTOHIDE_KEY, this.on_panels_autohide_state_changed, this);
+        this.signalsManager.connect(global.settings, "changed::" + PANEL_AUTOHIDE_KEY, this.on_panels_autohide_state_changed, this);
 
 		this.default_pin_icon_path = `${metadata.path}/../icons/pin-symbolic.svg`;
 		this.default_unpin_icon_path = `${metadata.path}/../icons/unpin-symbolic.svg`;
@@ -113,7 +117,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	get_panel_autohide_state() {
-		const panelAutohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
+		const panelAutohideStates = global.settings.get_strv(PANEL_AUTOHIDE_KEY);
 
 		if (!panelAutohideStates) return undefined;
 
@@ -129,7 +133,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 
 	set_panel_autohide_state(state) {
 		const newStates = [];
-		const panelAutohideStates = global.settings.get_strv(Panel.PANEL_AUTOHIDE_KEY);
+		const panelAutohideStates = global.settings.get_strv(PANEL_AUTOHIDE_KEY);
 
 		if (!panelAutohideStates) return;
 
@@ -142,7 +146,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 			newStates.push([panelId, autohideState].join(":"));
 		}
 
-		global.settings.set_strv(Panel.PANEL_AUTOHIDE_KEY, newStates);
+		global.settings.set_strv(PANEL_AUTOHIDE_KEY, newStates);
 	}
 
 	destroy() {
