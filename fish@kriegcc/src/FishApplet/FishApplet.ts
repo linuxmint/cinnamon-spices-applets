@@ -4,7 +4,14 @@ import { FishMessagePopupMenu, ErrorPopupMenu, FoolsDayPopupMenu } from "PopupMe
 import { Metadata, AppletSettingsProps } from "types"
 
 import { ErrorIcon } from "utils/icons"
-import { expandHomeDir, isFoolsDay, isHorizontalOriented, openWebsite, runCommandAsyncIO } from "utils/common"
+import {
+  expandHomeDir,
+  getThemeAppearance,
+  isFoolsDay,
+  isHorizontalOriented,
+  openWebsite,
+  runCommandAsyncIO,
+} from "utils/common"
 import { logger } from "utils/logging"
 import { NotificationButton, showNotification } from "utils/notification"
 import { _ } from "utils/translation"
@@ -16,6 +23,8 @@ import { FISH_APPLET_CINNAMON_SPICES_WEBSITE, KNOWN_USEFUL_PROGRAMS, REPORT_BUGS
 const { Applet } = imports.ui.applet
 const { AppletSettings } = imports.ui.settings
 const { PopupMenuManager } = imports.ui.popupMenu
+const { SignalManager } = imports.misc.signalManager
+const { themeManager } = imports.ui.main
 const { GLib } = imports.gi
 const Mainloop = imports.mainloop
 
@@ -23,6 +32,7 @@ const FOOLS_DAY_CHECK_INTERVAL_IN_MS = 60000 // 1 minute
 // Margins around the animation in px. Hard-coded for now. See: determineAnimationRenderOptions method
 const ANIMATION_MARGIN = 8
 const FORTUNE_COMMAND = "fortune"
+const DEFAULT_APPLET_CLASS_NAME = "applet-box"
 
 export class FishApplet extends Applet {
   private metadata: Metadata
@@ -41,6 +51,10 @@ export class FishApplet extends Applet {
   // props of this object are initialized and bound by AppletSetting
   private settingsObject = {} as AppletSettingsProps
   private animatedFish: AnimatedFish | undefined
+
+  // signal manager, used for listening for theme changes
+  // initialized in helper function initApplet()
+  private signalManager!: imports.misc.signalManager.SignalManager
 
   // popup menu
   // initialized in helper function initPopupMenu()
@@ -102,6 +116,15 @@ export class FishApplet extends Applet {
     // need to manually init this property because there is no proper binding (see TODO in bindSetting)
     this.settingsObject.imagePath = this.settings.getValue("keyImagePath")
 
+    // signaling setup
+    this.signalManager = new SignalManager()
+    // Subscribe to theme changes to adjust the applet's own theme accordingly.
+    // The signal is only triggered on entire "style" changes, not on a switch between "appearance" setting (dark/light/mixed) within a style.
+    // TODO: seems to work though. Need to further test..
+    this.signalManager.connect(themeManager, "theme-set", this.changeTheme.bind(this), this)
+    // adds additional "dark" (CSS) class name on dark mode which can be used for dark mode style adjustments
+    this.setThemeStyleClasses()
+
     this.initAnimation()
     this.updateMessagePopup()
     this.updateName() // MessagePopup needs to be initialized before!
@@ -123,6 +146,8 @@ export class FishApplet extends Applet {
         this.setActiveMessagePopup()
       }
     }
+    // TODO: not optimal. Maybe set styles for menu separately or completely refactor menus (e.g. abstract class or don't always re-init them)
+    this.setThemeStyleClasses()
   }
 
   private setActiveMessagePopup(): void {
@@ -563,5 +588,33 @@ If you prefer not to install any additional packages, you can change the command
       Mainloop.source_remove(this.foolsDayTimeoutId)
       this.foolsDayTimeoutId = 0
     }
+  }
+
+  private setThemeStyleClasses(): void {
+    if (this.isDarkMode()) {
+      this.actor.add_style_class_name("dark")
+      if (this.messagePopup) {
+        this.messagePopup.actor.add_style_class_name("dark")
+      }
+    } else {
+      this.actor.remove_style_class_name("dark")
+      if (this.messagePopup) {
+        this.messagePopup.actor.remove_style_class_name("dark")
+      }
+    }
+    // TODO
+    // if (this.isDarkMode()) {
+    //   this.messagePopup.actor.add_style_class_name("dark")
+    // } else {
+    //   this.messagePopup.actor.remove_style_class_name("dark")
+    // }
+  }
+
+  private changeTheme(): void {
+    this.setThemeStyleClasses()
+  }
+
+  private isDarkMode(): boolean {
+    return getThemeAppearance(DEFAULT_APPLET_CLASS_NAME) === "Dark" ? true : false
   }
 }

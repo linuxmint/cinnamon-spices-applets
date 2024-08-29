@@ -49,9 +49,16 @@
 .fish-message-popup .message-scroll-container {
   padding: 0.5em;
   /* taken from calendar ("calendar@cinnamon.org", "calendar-events-main-box") */
-  border: 1px solid #666;
+  border: 1px solid #999;
   border-radius: 8px;
   background-gradient-direction: vertical;
+  background-gradient-start: rgba(255, 255, 255, 0.8);
+  background-gradient-end: rgba(255, 255, 255, 0.2);
+}
+
+/* on dark mode, adjust colors of for better readability */
+.menu.dark .fish-message-popup .message-scroll-container {
+  border: 1px solid #666;
   background-gradient-start: rgba(85,85,85,0.8);
   background-gradient-end: rgba(85,85,85,0.2);
 }
@@ -130,6 +137,10 @@
 .fish-applet {
 }
 
+/* dark mode adjustments */
+.fish-applet.dark {
+}
+
 /* Animated fish object container (St.Bin) */
 .fish-applet .animated-fish {
 }
@@ -137,3 +148,4 @@
 /* Actual animated fish (St.Bin) */
 .fish-applet .animation {
 }
+

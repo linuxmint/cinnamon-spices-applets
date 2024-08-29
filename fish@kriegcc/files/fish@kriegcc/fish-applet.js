@@ -264,7 +264,47 @@ function readFile(filePath) {
     });
 }
 
+;// CONCATENATED MODULE: ./src/utils/common/theme.ts
+function getThemeAppearance(className) {
+    const theme = getThemeNodeOfClass(className);
+    const color = theme.get_foreground_color();
+    const invertedColor = invertColor(color);
+    return inferThemeAppearanceFromColor(invertedColor);
+}
+function inferThemeAppearanceFromColor(color) {
+    const red = color.red / 255;
+    const green = color.green / 255;
+    const blue = color.blue / 255;
+    const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+    const isDarkTheme = luminance < 0.5;
+    return isDarkTheme ? "Dark" : "Light";
+}
+function getThemeNodeOfClass(className) {
+    const themeContext = imports.gi.St.ThemeContext.get_for_stage(global.stage);
+    const themeNode = imports.gi.St.ThemeNode.new(themeContext, null, themeContext.get_theme(), imports.gi.St.Widget, "", className, "", " ", true);
+    return themeNode;
+}
+function getThemeNodeOfWidget(widget) {
+    if (!isWidgetOnStage(widget)) {
+        throw new Error("Actor is not on the stage.");
+    }
+    return widget.get_theme_node();
+}
+function isWidgetOnStage(widget) {
+    return !!widget.get_parent();
+}
+function invertColor(color) {
+    const invertedColor = new imports.gi.Clutter.Color({
+        red: 255 - color.red,
+        green: 255 - color.green,
+        blue: 255 - color.blue,
+        alpha: color.alpha,
+    });
+    return invertedColor;
+}
+
 ;// CONCATENATED MODULE: ./src/utils/common/index.ts
+
 
 
 
@@ -1052,11 +1092,14 @@ class FishAppletErrorManager {
 const { Applet } = imports.ui.applet;
 const { AppletSettings } = imports.ui.settings;
 const { PopupMenuManager } = imports.ui.popupMenu;
+const { SignalManager } = imports.misc.signalManager;
+const { themeManager } = imports.ui.main;
 const { GLib: FishApplet_GLib } = imports.gi;
 const Mainloop = imports.mainloop;
 const FOOLS_DAY_CHECK_INTERVAL_IN_MS = 60000;
 const ANIMATION_MARGIN = 8;
 const FORTUNE_COMMAND = "fortune";
+const DEFAULT_APPLET_CLASS_NAME = "applet-box";
 class FishApplet extends Applet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -1096,6 +1139,9 @@ class FishApplet extends Applet {
         const expandedPath = expandHomeDir(this.settings.getValue("keyImagePath"));
         this.settings.setValue("keyImagePath", expandedPath);
         this.settingsObject.imagePath = this.settings.getValue("keyImagePath");
+        this.signalManager = new SignalManager();
+        this.signalManager.connect(themeManager, "theme-set", this.changeTheme.bind(this), this);
+        this.setThemeStyleClasses();
         this.initAnimation();
         this.updateMessagePopup();
         this.updateName();
@@ -1113,6 +1159,7 @@ class FishApplet extends Applet {
                 this.setActiveMessagePopup();
             }
         }
+        this.setThemeStyleClasses();
     }
     setActiveMessagePopup() {
         if (this.messagePopup && this.messagePopup instanceof FishMessagePopupMenu) {
@@ -1440,6 +1487,26 @@ If you prefer not to install any additional packages, you can change the command
             Mainloop.source_remove(this.foolsDayTimeoutId);
             this.foolsDayTimeoutId = 0;
         }
+    }
+    setThemeStyleClasses() {
+        if (this.isDarkMode()) {
+            this.actor.add_style_class_name("dark");
+            if (this.messagePopup) {
+                this.messagePopup.actor.add_style_class_name("dark");
+            }
+        }
+        else {
+            this.actor.remove_style_class_name("dark");
+            if (this.messagePopup) {
+                this.messagePopup.actor.remove_style_class_name("dark");
+            }
+        }
+    }
+    changeTheme() {
+        this.setThemeStyleClasses();
+    }
+    isDarkMode() {
+        return getThemeAppearance(DEFAULT_APPLET_CLASS_NAME) === "Dark" ? true : false;
     }
 }
 
