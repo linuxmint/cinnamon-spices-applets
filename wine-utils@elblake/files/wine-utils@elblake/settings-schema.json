@@ -1,0 +1,77 @@
+{
+    "head0": {
+        "type": "header",
+        "description": "Settings for wine-utils@elblake"
+    },
+
+    "head1": {
+        "type": "header",
+        "description": "General"
+    },
+
+    "show-run-command": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Run Command...'",
+        "tooltip": "For running a Wine command.",
+        "value": true
+    },
+    "show-cmd": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show 'Command Prompt'",
+        "tooltip": "For easy access to the Wine command prompt.",
+        "value": true
+    },
+    "show-admin-programs-menu": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the Configuration menu",
+        "tooltip": "Show a menu of useful Wine utilities that typically need to be accessed by CLI.",
+        "value": true
+    },
+    "show-programs-menu": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show the Programs menu",
+        "tooltip": "Show a menu to access programs directly from Wine's installed program shortcuts.",
+        "value": true
+    },
+
+
+    "head2": {
+        "type": "header",
+        "description": "Advanced"
+    },
+    "prefix-file-list": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Path to prefix list",
+        "tooltip": "Select a text file, each line in the file should contain the full path of a wine prefix directory. You can add a name followed by a colon at the beginning of each line to give that prefix path a label.",
+        "allow-none" : true
+    },
+    "specify-wine-exec": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Specify the wine executable",
+        "tooltip": "Specify the wine executable, by default 'wine' is used.",
+        "value": false
+    },
+    "wine-exec": {
+        "type": "entry",
+        "default": "wine",
+        "description": "Wine executable",
+        "indent": true,
+        "dependency": "specify-wine-exec",
+        "tooltip": "The wine executable to use."
+    },
+    "wineconsole-exec": {
+        "type": "entry",
+        "default": "wineconsole",
+        "description": "Wine console executable",
+        "indent": true,
+        "dependency": "specify-wine-exec",
+        "tooltip": "The wine console executable to use."
+    }
+}
+
