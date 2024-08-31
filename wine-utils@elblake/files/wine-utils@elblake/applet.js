@@ -12,6 +12,13 @@ const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+
+var uuid;
+function _(str) {
+    return Gettext.dgettext(uuid, str);
+}
+
 
 function MyApplet(orientation,panel_height,instance_id) {
     this._init(orientation,panel_height,instance_id);
@@ -28,7 +35,10 @@ MyApplet.prototype = {
         try {
             Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-            let uuid = metadata["uuid"];
+            uuid = metadata["uuid"];
+
+            Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
+            
 
             this._path = imports.ui.appletManager.appletMeta[uuid].path;
 
