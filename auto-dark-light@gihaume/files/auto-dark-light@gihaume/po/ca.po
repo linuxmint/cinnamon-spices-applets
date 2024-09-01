@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# AUTOMATIC DARK/LIGHT THEMES
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# guillaume-mueller, 2024
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 00:01+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-01 19:02-0400\n"
 "PO-Revision-Date: 2024-09-02 00:01+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,41 +19,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:28
+#. applet.js:28
 msgid "Click: toggle dark/light mode"
 msgstr "Clic: alterna el mode fosc/clar"
 
-#: applet.js:29
+#. applet.js:29
 msgid "Middle-click: toggle automatic switch mode"
 msgstr "Clic del mig: alterna el mode de canvi automàtic"
 
-#: applet.js:335
+#. applet.js:335
 msgid "Today's automatic mode switch times:"
 msgstr "Hores de canvi de mode automàtic d'avui:"
 
-#: applet.js:336
+#. applet.js:336
 msgid "Light mode:"
 msgstr "Mode clar:"
 
-#: applet.js:337
+#. applet.js:337
 msgid "Dark mode:"
 msgstr "Mode fosc:"
 
-#: applet.js:376
+#. applet.js:376
 msgid "Error:"
 msgstr "Error:"
 
-#: applet.js:382
+#. applet.js:382
 msgid "Critical error:"
 msgstr "Error crític:"
 
-#: lib/twilights_calculator.js:24
+#. lib/twilights_calculator.js:24
 msgid "unable to calculate twilight times, check coordinates format or range"
 msgstr ""
 "no s'han pogut calcular les hores de crepuscle, reviseu el format o el rang "
 "de les coordenades"
 
-#: lib/time_change_listener/time_change_listener.js:27
+#. lib/time_change_listener/time_change_listener.js:27
 msgid ""
 "Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
 "system with `sudo apt install build-essential`, then reload the applet (in e."
@@ -273,15 +274,12 @@ msgstr ""
 #. settings->tooltip
 #. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
 #, fuzzy
-#| msgid "Open the system's settings window to select the themes"
 msgid "Open the system's settings window to set the background settings"
 msgstr ""
 "Obre la finestra de configuració del sistema per a seleccionar els temes"
 
 #. settings-schema.json->light-mode_background_button_detect->tooltip
 #, fuzzy
-#| msgid ""
-#| "Detect the system's themes currently set and assign them to the light mode"
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "light mode"
@@ -319,7 +317,6 @@ msgstr ""
 
 #. settings-schema.json->light-mode_background_button_apply->tooltip
 #, fuzzy
-#| msgid "Apply the light mode themes to the system manually"
 msgid "Apply the light mode background settings to the system manually"
 msgstr "Aplica els temes clars al sistema manualment"
 
@@ -334,8 +331,6 @@ msgstr "Aplica els temes foscos al sistema manualment"
 
 #. settings-schema.json->dark-mode_background_button_detect->tooltip
 #, fuzzy
-#| msgid ""
-#| "Detect the system's themes currently set and assign them to the dark mode"
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "dark mode"
@@ -343,6 +338,5 @@ msgstr "Detecta els temes actius del sistema i els assigna al mode fosc"
 
 #. settings-schema.json->dark-mode_background_button_apply->tooltip
 #, fuzzy
-#| msgid "Apply the dark mode themes to the system manually"
 msgid "Apply the dark mode background settings to the system manually"
 msgstr "Aplica els temes foscos al sistema manualment"

@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# AUTOMATIC DARK/LIGHT THEMES
 # This file is put in the public domain.
 # gihaume <gihaume@hotmail.com>, 2024.
 #
@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: auto-dark-light@gihaume 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 00:01+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-01 19:02-0400\n"
 "PO-Revision-Date: 2024-09-02 00:04+0200\n"
 "Last-Translator: gihaume <gihaume@hotmail.com>\n"
 "Language-Team: \n"
@@ -17,41 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:28
+#. applet.js:28
 msgid "Click: toggle dark/light mode"
 msgstr "Clique : basculer le mode sombre/clair"
 
-#: applet.js:29
+#. applet.js:29
 msgid "Middle-click: toggle automatic switch mode"
 msgstr "Clique du milieu : basculer la commutation de mode automatique"
 
-#: applet.js:335
+#. applet.js:335
 msgid "Today's automatic mode switch times:"
 msgstr "Heures des commutations de mode automatiques d'aujourd'hui :"
 
-#: applet.js:336
+#. applet.js:336
 msgid "Light mode:"
 msgstr "Mode clair :"
 
-#: applet.js:337
+#. applet.js:337
 msgid "Dark mode:"
 msgstr "Mode sombre :"
 
-#: applet.js:376
+#. applet.js:376
 msgid "Error:"
 msgstr "Erreur :"
 
-#: applet.js:382
+#. applet.js:382
 msgid "Critical error:"
 msgstr "Erreur critique :"
 
-#: lib/twilights_calculator.js:24
+#. lib/twilights_calculator.js:24
 msgid "unable to calculate twilight times, check coordinates format or range"
 msgstr ""
 "impossible de calculer les heures de crépuscule, vérifiez le format ou la "
 "plage des coordonnées"
 
-#: lib/time_change_listener/time_change_listener.js:27
+#. lib/time_change_listener/time_change_listener.js:27
 msgid ""
 "Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
 "system with `sudo apt install build-essential`, then reload the applet (in e."
