@@ -14,12 +14,20 @@
         "light-mode": {
             "type": "page",
             "title": "Light mode",
-            "sections": ["light-mode_themes"]
+            "sections": [
+                "light-mode_themes",
+                "light-mode_other",
+                "light-mode_background"
+            ]
         },
         "dark-mode": {
             "type": "page",
             "title": "Dark mode",
-            "sections": ["dark-mode_themes"]
+            "sections": [
+                "dark-mode_themes",
+                "dark-mode_other",
+                "dark-mode_background"
+            ]
         },
 
         "settings_state": {
@@ -57,6 +65,24 @@
                 "light-mode_themes_button_apply"
             ]
         },
+        "light-mode_other": {
+            "type": "section",
+            "title": "Other",
+            "keys": ["both-modes_background_switch_enable"]
+        },
+        "light-mode_background": {
+            "dependency": "both-modes_background_switch_enable=true",
+            "type": "section",
+            "title": "Desktop background",
+            "keys": [
+                "light-mode_background_button_open-os-settings",
+                "light-mode_background_button_detect",
+                "light-mode_background_switch_slideshow",
+                "light-mode_background_filechooser_file",
+                "light-mode_background_filechooser_folder",
+                "light-mode_background_button_apply"
+            ]
+        },
         "dark-mode_themes": {
             "type": "section",
             "title": "Themes",
@@ -68,6 +94,24 @@
                 "dark-mode_themes_entry_icons",
                 "dark-mode_themes_entry_desktop",
                 "dark-mode_themes_button_apply"
+            ]
+        },
+        "dark-mode_other": {
+            "type": "section",
+            "title": "Other",
+            "keys": ["both-modes_background_switch_enable"]
+        },
+        "dark-mode_background": {
+            "dependency": "both-modes_background_switch_enable=true",
+            "type": "section",
+            "title": "Desktop background",
+            "keys": [
+                "dark-mode_background_button_open-os-settings",
+                "dark-mode_background_button_detect",
+                "dark-mode_background_switch_slideshow",
+                "dark-mode_background_filechooser_file",
+                "dark-mode_background_filechooser_folder",
+                "dark-mode_background_button_apply"
             ]
         }
     },
@@ -163,6 +207,51 @@
         "description": "Apply to the system",
         "tooltip": "Apply the light mode themes to the system manually"
     },
+    "both-modes_background_switch_enable": {
+        "type": "switch",
+        "default": false,
+        "description": "Set desktop background",
+        "tooltip": "Set desktop background for light and dark modes"
+    },
+    "light-mode_background_button_open-os-settings": {
+        "type": "button",
+        "callback": "on_button_open_os_background_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to set the background settings"
+    },
+    "light-mode_background_button_detect": {
+        "type": "button",
+        "callback": "on_button_detect_background_light",
+        "description": "Detect from the system",
+        "tooltip": "Detect the system's background settings currently set and assign them to the light mode"
+    },
+    "light-mode_background_switch_slideshow": {
+        "type": "switch",
+        "default": false,
+        "description": "Slideshow",
+        "tooltip": "Set the desktop background to be a slideshow"
+    },
+    "light-mode_background_filechooser_file": {
+        "dependency": "light-mode_background_switch_slideshow!=true",
+        "type": "filechooser",
+        "default": "",
+        "description": "Image file",
+        "tooltip": "Image file to be set as the desktop background"
+    },
+    "light-mode_background_filechooser_folder": {
+        "dependency": "light-mode_background_switch_slideshow=true",
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Images folder",
+        "tooltip": "Folder containing images to be set for the desktop background slideshow"
+    },
+    "light-mode_background_button_apply": {
+        "type": "button",
+        "callback": "on_button_apply_background_light",
+        "description": "Apply to the system",
+        "tooltip": "Apply the light mode background settings to the system manually"
+    },
     "dark-mode_themes_button_open-os-settings": {
         "type": "button",
         "callback": "on_button_open_os_themes_settings",
@@ -204,6 +293,45 @@
         "callback": "on_button_apply_themes_dark",
         "description": "Apply to the system",
         "tooltip": "Apply the dark mode themes to the system manually"
+    },
+    "dark-mode_background_button_open-os-settings": {
+        "type": "button",
+        "callback": "on_button_open_os_background_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to set the background settings"
+    },
+    "dark-mode_background_button_detect": {
+        "type": "button",
+        "callback": "on_button_detect_background_dark",
+        "description": "Detect from the system",
+        "tooltip": "Detect the system's background settings currently set and assign them to the dark mode"
+    },
+    "dark-mode_background_switch_slideshow": {
+        "type": "switch",
+        "default": false,
+        "description": "Slideshow",
+        "tooltip": "Set the desktop background to be a slideshow"
+    },
+    "dark-mode_background_filechooser_file": {
+        "dependency": "dark-mode_background_switch_slideshow!=true",
+        "type": "filechooser",
+        "default": "",
+        "description": "Image file",
+        "tooltip": "Image file to be set as the desktop background"
+    },
+    "dark-mode_background_filechooser_folder": {
+        "dependency": "dark-mode_background_switch_slideshow=true",
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Images folder",
+        "tooltip": "Folder containing images to be set for the desktop background slideshow"
+    },
+    "dark-mode_background_button_apply": {
+        "type": "button",
+        "callback": "on_button_apply_background_dark",
+        "description": "Apply to the system",
+        "tooltip": "Apply the dark mode background settings to the system manually"
     },
 
     "has-detected-themes-light": {

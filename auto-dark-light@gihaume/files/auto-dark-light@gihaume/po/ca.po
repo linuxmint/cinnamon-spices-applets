@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 00:00+0200\n"
-"PO-Revision-Date: 2024-08-26 03:01+0200\n"
+"POT-Creation-Date: 2024-09-02 00:01+0200\n"
+"PO-Revision-Date: 2024-09-02 00:01+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -26,23 +26,23 @@ msgstr "Clic: alterna el mode fosc/clar"
 msgid "Middle-click: toggle automatic switch mode"
 msgstr "Clic del mig: alterna el mode de canvi automàtic"
 
-#: applet.js:309
+#: applet.js:335
 msgid "Today's automatic mode switch times:"
 msgstr "Hores de canvi de mode automàtic d'avui:"
 
-#: applet.js:310
+#: applet.js:336
 msgid "Light mode:"
 msgstr "Mode clar:"
 
-#: applet.js:311
+#: applet.js:337
 msgid "Dark mode:"
 msgstr "Mode fosc:"
 
-#: applet.js:344
+#: applet.js:376
 msgid "Error:"
 msgstr "Error:"
 
-#: applet.js:350
+#: applet.js:382
 msgid "Critical error:"
 msgstr "Error crític:"
 
@@ -52,7 +52,7 @@ msgstr ""
 "no s'han pogut calcular les hores de crepuscle, reviseu el format o el rang "
 "de les coordenades"
 
-#: lib/time_change_listener/time_change_listener.js:26
+#: lib/time_change_listener/time_change_listener.js:27
 msgid ""
 "Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
 "system with `sudo apt install build-essential`, then reload the applet (in e."
@@ -101,6 +101,16 @@ msgstr "Ubicació"
 msgid "Themes"
 msgstr "Temes"
 
+#. settings-schema.json->light-mode_other->title
+#. settings-schema.json->dark-mode_other->title
+msgid "Other"
+msgstr ""
+
+#. settings-schema.json->light-mode_background->title
+#. settings-schema.json->dark-mode_background->title
+msgid "Desktop background"
+msgstr ""
+
 #. settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
 msgstr "Canvia de mode automàticament"
@@ -137,7 +147,11 @@ msgstr ""
 #. settings->description
 #. settings-schema.json->light-mode_themes_button_open-os-
 #. settings->description
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->description
 #. settings-schema.json->dark-mode_themes_button_open-os-settings->description
+#. settings-schema.json->dark-mode_background_button_open-os-
+#. settings->description
 msgid "Open the system settings"
 msgstr "Obre la configuració del sistema"
 
@@ -185,7 +199,9 @@ msgstr ""
 "Obre la finestra de configuració del sistema per a seleccionar els temes"
 
 #. settings-schema.json->light-mode_themes_button_detect->description
+#. settings-schema.json->light-mode_background_button_detect->description
 #. settings-schema.json->dark-mode_themes_button_detect->description
+#. settings-schema.json->dark-mode_background_button_detect->description
 msgid "Detect from the system"
 msgstr "Detecta des del sistema"
 
@@ -235,12 +251,76 @@ msgid "Name of the desktop theme (Cinnamon theme)"
 msgstr "Nom del tema de l'escriptori (tema Cinnamon)"
 
 #. settings-schema.json->light-mode_themes_button_apply->description
+#. settings-schema.json->light-mode_background_button_apply->description
 #. settings-schema.json->dark-mode_themes_button_apply->description
+#. settings-schema.json->dark-mode_background_button_apply->description
 msgid "Apply to the system"
 msgstr "Aplica al sistema"
 
 #. settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
+msgstr "Aplica els temes clars al sistema manualment"
+
+#. settings-schema.json->both-modes_background_switch_enable->description
+msgid "Set desktop background"
+msgstr ""
+
+#. settings-schema.json->both-modes_background_switch_enable->tooltip
+msgid "Set desktop background for light and dark modes"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->tooltip
+#. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
+#, fuzzy
+#| msgid "Open the system's settings window to select the themes"
+msgid "Open the system's settings window to set the background settings"
+msgstr ""
+"Obre la finestra de configuració del sistema per a seleccionar els temes"
+
+#. settings-schema.json->light-mode_background_button_detect->tooltip
+#, fuzzy
+#| msgid ""
+#| "Detect the system's themes currently set and assign them to the light mode"
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"light mode"
+msgstr "Detecta els temes actius del sistema i els assigna al mode clar"
+
+#. settings-schema.json->light-mode_background_switch_slideshow->description
+#. settings-schema.json->dark-mode_background_switch_slideshow->description
+msgid "Slideshow"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+msgid "Set the desktop background to be a slideshow"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_file->description
+#. settings-schema.json->dark-mode_background_filechooser_file->description
+msgid "Image file"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_file->tooltip
+msgid "Image file to be set as the desktop background"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_folder->description
+#. settings-schema.json->dark-mode_background_filechooser_folder->description
+msgid "Images folder"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_folder->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+msgid "Folder containing images to be set for the desktop background slideshow"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_button_apply->tooltip
+#, fuzzy
+#| msgid "Apply the light mode themes to the system manually"
+msgid "Apply the light mode background settings to the system manually"
 msgstr "Aplica els temes clars al sistema manualment"
 
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
@@ -250,4 +330,19 @@ msgstr "Detecta els temes actius del sistema i els assigna al mode fosc"
 
 #. settings-schema.json->dark-mode_themes_button_apply->tooltip
 msgid "Apply the dark mode themes to the system manually"
+msgstr "Aplica els temes foscos al sistema manualment"
+
+#. settings-schema.json->dark-mode_background_button_detect->tooltip
+#, fuzzy
+#| msgid ""
+#| "Detect the system's themes currently set and assign them to the dark mode"
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"dark mode"
+msgstr "Detecta els temes actius del sistema i els assigna al mode fosc"
+
+#. settings-schema.json->dark-mode_background_button_apply->tooltip
+#, fuzzy
+#| msgid "Apply the dark mode themes to the system manually"
+msgid "Apply the dark mode background settings to the system manually"
 msgstr "Aplica els temes foscos al sistema manualment"

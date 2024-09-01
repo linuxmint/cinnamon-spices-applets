@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 00:00+0200\n"
+"POT-Creation-Date: 2024-09-02 00:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,23 +25,23 @@ msgstr ""
 msgid "Middle-click: toggle automatic switch mode"
 msgstr ""
 
-#: applet.js:309
+#: applet.js:335
 msgid "Today's automatic mode switch times:"
 msgstr ""
 
-#: applet.js:310
+#: applet.js:336
 msgid "Light mode:"
 msgstr ""
 
-#: applet.js:311
+#: applet.js:337
 msgid "Dark mode:"
 msgstr ""
 
-#: applet.js:344
+#: applet.js:376
 msgid "Error:"
 msgstr ""
 
-#: applet.js:350
+#: applet.js:382
 msgid "Critical error:"
 msgstr ""
 
@@ -49,7 +49,7 @@ msgstr ""
 msgid "unable to calculate twilight times, check coordinates format or range"
 msgstr ""
 
-#: lib/time_change_listener/time_change_listener.js:26
+#: lib/time_change_listener/time_change_listener.js:27
 msgid ""
 "Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based"
 " system with `sudo apt install build-essential`, then reload the applet (in "
@@ -93,6 +93,16 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
+#. settings-schema.json->light-mode_other->title
+#. settings-schema.json->dark-mode_other->title
+msgid "Other"
+msgstr ""
+
+#. settings-schema.json->light-mode_background->title
+#. settings-schema.json->dark-mode_background->title
+msgid "Desktop background"
+msgstr ""
+
 #. settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
 msgstr ""
@@ -126,7 +136,11 @@ msgstr ""
 #. settings->description
 #. settings-schema.json->light-mode_themes_button_open-os-
 #. settings->description
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->description
 #. settings-schema.json->dark-mode_themes_button_open-os-settings->description
+#. settings-schema.json->dark-mode_background_button_open-os-
+#. settings->description
 msgid "Open the system settings"
 msgstr ""
 
@@ -169,7 +183,9 @@ msgid "Open the system's settings window to select the themes"
 msgstr ""
 
 #. settings-schema.json->light-mode_themes_button_detect->description
+#. settings-schema.json->light-mode_background_button_detect->description
 #. settings-schema.json->dark-mode_themes_button_detect->description
+#. settings-schema.json->dark-mode_background_button_detect->description
 msgid "Detect from the system"
 msgstr ""
 
@@ -219,12 +235,69 @@ msgid "Name of the desktop theme (Cinnamon theme)"
 msgstr ""
 
 #. settings-schema.json->light-mode_themes_button_apply->description
+#. settings-schema.json->light-mode_background_button_apply->description
 #. settings-schema.json->dark-mode_themes_button_apply->description
+#. settings-schema.json->dark-mode_background_button_apply->description
 msgid "Apply to the system"
 msgstr ""
 
 #. settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
+msgstr ""
+
+#. settings-schema.json->both-modes_background_switch_enable->description
+msgid "Set desktop background"
+msgstr ""
+
+#. settings-schema.json->both-modes_background_switch_enable->tooltip
+msgid "Set desktop background for light and dark modes"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->tooltip
+#. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
+msgid "Open the system's settings window to set the background settings"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the"
+" light mode"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_switch_slideshow->description
+#. settings-schema.json->dark-mode_background_switch_slideshow->description
+msgid "Slideshow"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+msgid "Set the desktop background to be a slideshow"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_file->description
+#. settings-schema.json->dark-mode_background_filechooser_file->description
+msgid "Image file"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_file->tooltip
+msgid "Image file to be set as the desktop background"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_folder->description
+#. settings-schema.json->dark-mode_background_filechooser_folder->description
+msgid "Images folder"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_filechooser_folder->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+msgid ""
+"Folder containing images to be set for the desktop background slideshow"
+msgstr ""
+
+#. settings-schema.json->light-mode_background_button_apply->tooltip
+msgid "Apply the light mode background settings to the system manually"
 msgstr ""
 
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
@@ -234,4 +307,14 @@ msgstr ""
 
 #. settings-schema.json->dark-mode_themes_button_apply->tooltip
 msgid "Apply the dark mode themes to the system manually"
+msgstr ""
+
+#. settings-schema.json->dark-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the"
+" dark mode"
+msgstr ""
+
+#. settings-schema.json->dark-mode_background_button_apply->tooltip
+msgid "Apply the dark mode background settings to the system manually"
 msgstr ""

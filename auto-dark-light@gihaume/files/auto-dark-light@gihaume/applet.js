@@ -1,4 +1,5 @@
 const Themes_handler               = require('./lib/themes_handler.js');
+const Background_handler           = require('./lib/background_handler.js');
 const Twilights_calculator         = require('./lib/twilights_calculator.js');
 const Event_scheduler              = require('./lib/event_scheduler.js');
 const Timer_absolute               = require('./lib/timer_absolute.js');
@@ -83,6 +84,23 @@ class ThisApplet extends Applet.IconApplet {
                 this._update_state();
             });
 
+        this.background_light = new Background_handler(
+            this.settings,
+            {
+                is_slideshow:     'light-mode_background_switch_slideshow',
+                background_file:  'light-mode_background_filechooser_file',
+                slideshow_folder: 'light-mode_background_filechooser_folder'
+            }
+        );
+        this.background_dark = new Background_handler(
+            this.settings,
+            {
+                is_slideshow:     'dark-mode_background_switch_slideshow',
+                background_file:  'dark-mode_background_filechooser_file',
+                slideshow_folder: 'dark-mode_background_filechooser_folder'
+            }
+        );
+
         try {
             this.time_change_listener = new Time_change_listener(
                 `${this.metadata.path}/lib/time_change_listener`,
@@ -145,6 +163,10 @@ class ThisApplet extends Applet.IconApplet {
                               "ui_entry_longitude",
             () => { this.apply_ui_entry_coordinates(); this._update(); }
         );
+        this.settings.bind(
+            'both-modes_background_switch_enable',
+                                "ui_switch_enable_background"
+        )
     }
 
     apply_ui_switch_dark_mode() {
@@ -152,6 +174,11 @@ class ThisApplet extends Applet.IconApplet {
         this.ui_switch_dark_mode ? this.themes_dark. apply()
                                  : this.themes_light.apply();
         this.color_scheme_change_listener.enable();
+
+        if (this.ui_switch_enable_background)
+            this.ui_switch_dark_mode ? this.background_dark.apply()
+                                     : this.background_light.apply();
+
         this._update_applet_icon();
     }
 
@@ -321,10 +348,7 @@ class ThisApplet extends Applet.IconApplet {
         this._update_state();
     }
 
-    on_button_apply_themes_light() {
-        this._apply_light_mode();
-        this._update_state();
-    }
+    on_button_apply_themes_light() { this.themes_light.apply(); }
 
     on_button_detect_themes_dark() {
         this.themes_dark.detect();
@@ -332,10 +356,19 @@ class ThisApplet extends Applet.IconApplet {
         this._update_state();
     }
 
-    on_button_apply_themes_dark() {
-        this._apply_dark_mode();
-        this._update_state();
+    on_button_apply_themes_dark() { this.themes_dark.apply(); }
+
+    on_button_open_os_background_settings() {
+        Util.spawnCommandLineAsync('cinnamon-settings background', null, null);
     }
+
+    on_button_detect_background_light() { this.background_light.detect(); }
+
+    on_button_apply_background_light() { this.background_light.apply(); }
+
+    on_button_detect_background_dark() { this.background_dark.detect(); }
+
+    on_button_apply_background_dark() { this.background_dark.apply(); }
 
     _notify(msg) { Main.notify(this.metadata.name, msg); }
 
