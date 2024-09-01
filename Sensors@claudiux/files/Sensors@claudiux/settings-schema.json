@@ -306,6 +306,23 @@
     "step": 1,
     "description": "Character size (% of standard size)"
   },
+  "vertical-align": {
+    "type": "combobox",
+    "default": "text-bottom",
+    "options": {
+      "baseline": "baseline",
+      "sub": "sub",
+      "super": "super",
+      "text-top": "text-top",
+      "text-bottom": "text-bottom",
+      "middle": "middle",
+      "top": "top",
+      "bottom": "bottom",
+      "unset": "unset",
+      "inherit": "inherit"
+    },
+    "description": "Vertical alignment"
+  },
   "char_color_customized": {
     "type": "switch",
     "default": false,

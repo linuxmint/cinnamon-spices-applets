@@ -10,7 +10,6 @@
     border-radius: 10px;
     border-color: rgba(127,127,127,0.5);
     text-align: center;
-    vertical-align: middle;
 }
 
 .sensors-high {
@@ -21,7 +20,6 @@
     border-radius: 10px;
     border-color: rgba(255,141,0,0.5);
     text-align: center;
-    vertical-align: middle;
 }
 
 .sensors-critical {
@@ -32,7 +30,6 @@
     border-radius: 10px;
     border-color: rgba(194,34,34,0.5);
     text-align: center;
-    vertical-align: middle;
 }
 
 .sensors-label-noborder {
@@ -41,7 +38,6 @@
     padding: 0 2px;
     border: 0;
     text-align: center;
-    vertical-align: middle;
 }
 
 .sensors-high-noborder {
@@ -50,7 +46,6 @@
     padding: 0 2px;
     border: 0;
     text-align: center;
-    vertical-align: middle;
 }
 
 .sensors-critical-noborder {
@@ -59,7 +54,6 @@
     padding: 0 2px;
     border: 0;
     text-align: center;
-    vertical-align: middle;
 }
 
 .sensors-size80 {
@@ -244,4 +238,44 @@
 
 .tcolordefault {
     color: "#CFD8DC";
+}
+
+.vertalign-baseline {
+    vertical-align: baseline;
+}
+
+.vertalign-sub {
+    vertical-align: sub;
+}
+
+.vertalign-super {
+    vertical-align: super;
+}
+
+.vertalign-text-top {
+    vertical-align: text-top;
+}
+
+.vertalign-text-bottom {
+    vertical-align: text-bottom;
+}
+
+.vertalign-middle {
+    vertical-align: middle;
+}
+
+.vertalign-top {
+    vertical-align: top;
+}
+
+.vertalign-bottom {
+    vertical-align: bottom;
+}
+
+.vertalign-unset {
+    vertical-align: unset;
+}
+
+.vertalign-inherit {
+    vertical-align: inherit;
 }
