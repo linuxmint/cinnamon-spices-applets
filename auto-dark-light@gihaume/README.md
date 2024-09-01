@@ -1,14 +1,14 @@
 # Automatic dark/light themes
 
-This Cinnamon applet brings the ability to automatically switch between dark and light themes at twilight times based on a location.
+This Cinnamon applet brings the ability to automatically switch between dark and light themes and desktop background at twilight times based on a location.
 
 ## Features
 
-- Dump system themes settings in one click to take advantage of the Cinnamon `Themes` settings menu.
+- Dump system themes and desktop background settings in one click to take advantage of the Cinnamon settings menu.
 - Sync location from the system `Region` and `City` settings using a local database to determine the geographical coordinates.
 - Enter manually any geographical coordinates if needed.
 - Always sync instantaneously with external changes of color scheme change, region/city, time (in e.g. from a sleep wakeup).
-- Fully event based (no polling).
+- Fully event based, zero polling.
 - Automatic mode switch can be disabled.
 - Dark/light mode can be switched manually.
 
@@ -37,6 +37,11 @@ This Cinnamon applet brings the ability to automatically switch between dark and
 ## Dependencies
 
 `make` and `gcc`, which can be installed on Debian-based system with `sudo apt install build-essentials`.
+
+## Feedback
+
+- Add a *Like* if you like it.
+- Report issues on the [GitHub repository](https://github.com/linuxmint/cinnamon-spices-applets/issues) in mentionning `@guillaume-mueller` to notify me.
 
 ## Donate
 
