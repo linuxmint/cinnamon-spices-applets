@@ -6,11 +6,11 @@
 # Åke Engelbrektson <eson@svenskasprakfiler.se> - 2017, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.6.1\n"
+"Project-Id-Version: weather@mockturtl 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-06-03 22:37+0200\n"
+"PO-Revision-Date: 2024-09-02 22:43+0200\n"
 "Last-Translator: jorgenqv <jorgenqv@yahoo.com>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -1536,6 +1536,8 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Adress till plats-sökningstjänsten är blockerad. Du kan prova att byta din "
+"användar-klient i hjälpen för att se om detta löser problemet."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1897,16 +1899,14 @@ msgstr "Open Meteo"
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Spridda skurar"
+msgstr "Spridda slaskskurar"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Åskväder"
+msgstr "Risk för åskväder"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
 #, fuzzy
@@ -1920,134 +1920,121 @@ msgstr "Lätt slask"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Lätt regn"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Lätt slaskregn"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Lätt snö"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Kraftigt åskväder"
+msgstr "Återkommande åskväder"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Moln"
+msgstr "Höga moln"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Moln"
+msgstr "Låga moln"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Mulet och blåsigt"
+msgstr "Mulet och torrt"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Lätt snöfall"
+msgstr "Småstormigt"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Spridda snöbyar"
+msgstr "Stormiga snöbyar"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
 msgstr "Åskskurar"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Åskskurar"
+msgstr "Snö åskskurar"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Varning"
+msgstr "Vindvarning"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Åska med regn"
+msgstr "Åskvarning"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Varning"
+msgstr "Regnvarning"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Varning"
+msgstr "Snövarning"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Halkvarning"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Varning"
+msgstr "Frostvarning"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Lerskreds varning"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Varning"
+msgstr "Värmevarning"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Lavinvarning"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Jordbävningsvarning"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Skogsbrandvarning"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Varning"
+msgstr "Översvämningsvarning"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Swiss Météo"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "För denna väderlekstjänst så behöver du ett postnummer"
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"För denna väderlekstjänst så behöver du ett Schweiziskt postnummer, mellan "
+"1000-9999."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Schweiz"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2132,9 +2119,8 @@ msgid "Saved to {filePath}"
 msgstr "Sparad i {filePath}"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Spara plats"
+msgstr "Platstjänst blockerad"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
@@ -2677,7 +2663,7 @@ msgstr "US National Weather (enbart USA)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Swiss Météo (enbart Schweiz)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2704,7 +2690,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (nyckel behövs)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2717,7 +2702,8 @@ msgstr ""
 "använda 'Stad,Landskod' (t.ex. London,UK) eller prova ange {Gatunummer} "
 "{Gata} {Stad/Ort} {Postnummer} {Land}. Sök-algoritmen är mycket flexibel med "
 "formatet. Efter 3 sekunders inaktivitet vid skrivande av adressen du angett "
-"så byts denna ut automatiskt för att validera ditt val."
+"så byts denna ut automatiskt för att validera ditt val. Driftas av nominatim."
+"openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
