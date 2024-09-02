@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-01 19:02-0400\n"
-"PO-Revision-Date: 2024-09-02 00:01+0200\n"
+"PO-Revision-Date: 2024-09-02 11:29-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. applet.js:28
 msgid "Click: toggle dark/light mode"
@@ -104,12 +104,12 @@ msgstr "Temas"
 #. settings-schema.json->light-mode_other->title
 #. settings-schema.json->dark-mode_other->title
 msgid "Other"
-msgstr ""
+msgstr "Otros"
 
 #. settings-schema.json->light-mode_background->title
 #. settings-schema.json->dark-mode_background->title
 msgid "Desktop background"
-msgstr ""
+msgstr "Fondo de escritorio"
 
 #. settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
@@ -267,63 +267,64 @@ msgstr "Aplicar manualmente los temas del modo claro al sistema"
 
 #. settings-schema.json->both-modes_background_switch_enable->description
 msgid "Set desktop background"
-msgstr ""
+msgstr "Establecer fondo de escritorio"
 
 #. settings-schema.json->both-modes_background_switch_enable->tooltip
 msgid "Set desktop background for light and dark modes"
-msgstr ""
+msgstr "Establecer el fondo de escritorio para los modos claro y oscuro"
 
 #. settings-schema.json->light-mode_background_button_open-os-
 #. settings->tooltip
 #. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
-#, fuzzy
 msgid "Open the system's settings window to set the background settings"
 msgstr ""
-"Abra la ventana de configuración del sistema para seleccionar los temas"
+"Abra la ventana de configuración del sistema para establecer la "
+"configuración del fondo"
 
 #. settings-schema.json->light-mode_background_button_detect->tooltip
-#, fuzzy
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "light mode"
 msgstr ""
-"Detecta los temas del sistema actualmente configurados y los asigna al modo "
-"claro"
+"Detecta los ajustes de fondo del sistema actualmente configurados y los "
+"asigna al modo de claro"
 
 #. settings-schema.json->light-mode_background_switch_slideshow->description
 #. settings-schema.json->dark-mode_background_switch_slideshow->description
 msgid "Slideshow"
-msgstr ""
+msgstr "Presentación"
 
 #. settings-schema.json->light-mode_background_switch_slideshow->tooltip
 #. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
 msgid "Set the desktop background to be a slideshow"
 msgstr ""
+"Configurar el fondo de escritorio para que sea una presentación de imágenes"
 
 #. settings-schema.json->light-mode_background_filechooser_file->description
 #. settings-schema.json->dark-mode_background_filechooser_file->description
 msgid "Image file"
-msgstr ""
+msgstr "Archivo de imagen"
 
 #. settings-schema.json->light-mode_background_filechooser_file->tooltip
 #. settings-schema.json->dark-mode_background_filechooser_file->tooltip
 msgid "Image file to be set as the desktop background"
-msgstr ""
+msgstr "Archivo de imagen que se establecerá como fondo de escritorio"
 
 #. settings-schema.json->light-mode_background_filechooser_folder->description
 #. settings-schema.json->dark-mode_background_filechooser_folder->description
 msgid "Images folder"
-msgstr ""
+msgstr "Carpeta de imágenes"
 
 #. settings-schema.json->light-mode_background_filechooser_folder->tooltip
 #. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
 msgid "Folder containing images to be set for the desktop background slideshow"
 msgstr ""
+"Carpeta que contiene las imágenes que se van a utilizar en la presentación "
+"de fondo de escritorio"
 
 #. settings-schema.json->light-mode_background_button_apply->tooltip
-#, fuzzy
 msgid "Apply the light mode background settings to the system manually"
-msgstr "Aplicar manualmente los temas del modo claro al sistema"
+msgstr "Aplicar manualmente los ajustes de fondo del modo claro al sistema"
 
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -337,15 +338,14 @@ msgid "Apply the dark mode themes to the system manually"
 msgstr "Aplicar manualmente los temas del modo oscuro al sistema"
 
 #. settings-schema.json->dark-mode_background_button_detect->tooltip
-#, fuzzy
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "dark mode"
 msgstr ""
-"Detectar los temas del sistema actualmente configurados y asignarlos al modo "
-"oscuro"
+"Detectar los ajustes de fondo del sistema actualmente configurados y "
+"asignarlos al modo oscuro"
 
 #. settings-schema.json->dark-mode_background_button_apply->tooltip
-#, fuzzy
 msgid "Apply the dark mode background settings to the system manually"
-msgstr "Aplicar manualmente los temas del modo oscuro al sistema"
+msgstr ""
+"Aplicar manualmente la configuración de fondo del modo oscuro al sistema"
