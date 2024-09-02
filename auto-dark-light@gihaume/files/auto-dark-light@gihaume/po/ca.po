@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-01 19:02-0400\n"
-"PO-Revision-Date: 2024-09-02 00:01+0200\n"
+"PO-Revision-Date: 2024-09-02 05:28+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -105,12 +105,12 @@ msgstr "Temes"
 #. settings-schema.json->light-mode_other->title
 #. settings-schema.json->dark-mode_other->title
 msgid "Other"
-msgstr ""
+msgstr "Altres"
 
 #. settings-schema.json->light-mode_background->title
 #. settings-schema.json->dark-mode_background->title
 msgid "Desktop background"
-msgstr ""
+msgstr "Fons d'escriptori"
 
 #. settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
@@ -264,61 +264,64 @@ msgstr "Aplica els temes clars al sistema manualment"
 
 #. settings-schema.json->both-modes_background_switch_enable->description
 msgid "Set desktop background"
-msgstr ""
+msgstr "Establir fons d'escriptori"
 
 #. settings-schema.json->both-modes_background_switch_enable->tooltip
 msgid "Set desktop background for light and dark modes"
-msgstr ""
+msgstr "Estableix el fons d'escriptori per als modes clar i fosc"
 
 #. settings-schema.json->light-mode_background_button_open-os-
 #. settings->tooltip
 #. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
-#, fuzzy
 msgid "Open the system's settings window to set the background settings"
 msgstr ""
-"Obre la finestra de configuració del sistema per a seleccionar els temes"
+"Obre la finestra de configuració del sistema per establir les opcions del "
+"fons d'escriptori"
 
 #. settings-schema.json->light-mode_background_button_detect->tooltip
-#, fuzzy
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "light mode"
-msgstr "Detecta els temes actius del sistema i els assigna al mode clar"
+msgstr ""
+"Detecta els paràmetres establerts sobre el fons d'escriptori i els assigna "
+"al mode clar"
 
 #. settings-schema.json->light-mode_background_switch_slideshow->description
 #. settings-schema.json->dark-mode_background_switch_slideshow->description
 msgid "Slideshow"
-msgstr ""
+msgstr "Presentació"
 
 #. settings-schema.json->light-mode_background_switch_slideshow->tooltip
 #. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
 msgid "Set the desktop background to be a slideshow"
-msgstr ""
+msgstr "Estableix el fons de l'escriptori com una presentació"
 
 #. settings-schema.json->light-mode_background_filechooser_file->description
 #. settings-schema.json->dark-mode_background_filechooser_file->description
 msgid "Image file"
-msgstr ""
+msgstr "Fitxer d'imatge"
 
 #. settings-schema.json->light-mode_background_filechooser_file->tooltip
 #. settings-schema.json->dark-mode_background_filechooser_file->tooltip
 msgid "Image file to be set as the desktop background"
-msgstr ""
+msgstr "Fitxer d'imatge a establir com a fons de l'escriptori"
 
 #. settings-schema.json->light-mode_background_filechooser_folder->description
 #. settings-schema.json->dark-mode_background_filechooser_folder->description
 msgid "Images folder"
-msgstr ""
+msgstr "Carpeta d'imatges"
 
 #. settings-schema.json->light-mode_background_filechooser_folder->tooltip
 #. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
 msgid "Folder containing images to be set for the desktop background slideshow"
 msgstr ""
+"Carpeta contenidora de les imatges a utilitzar per a la presentació dels "
+"fons d'escriptori"
 
 #. settings-schema.json->light-mode_background_button_apply->tooltip
-#, fuzzy
 msgid "Apply the light mode background settings to the system manually"
-msgstr "Aplica els temes clars al sistema manualment"
+msgstr ""
+"Aplica la configuració dels fons d'escriptori clars al sistema manualment"
 
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -330,13 +333,14 @@ msgid "Apply the dark mode themes to the system manually"
 msgstr "Aplica els temes foscos al sistema manualment"
 
 #. settings-schema.json->dark-mode_background_button_detect->tooltip
-#, fuzzy
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "dark mode"
-msgstr "Detecta els temes actius del sistema i els assigna al mode fosc"
+msgstr ""
+"Detecta els paràmetres establerts sobre el fons d'escriptori i els assigna "
+"al mode fosc"
 
 #. settings-schema.json->dark-mode_background_button_apply->tooltip
-#, fuzzy
 msgid "Apply the dark mode background settings to the system manually"
-msgstr "Aplica els temes foscos al sistema manualment"
+msgstr ""
+"Aplica la configuració dels fons d'escriptori foscos al sistema manualment"
