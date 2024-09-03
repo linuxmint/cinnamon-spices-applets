@@ -16,7 +16,14 @@ const Gettext = imports.gettext;
 
 var uuid;
 function _(str) {
-    return Gettext.dgettext(uuid, str);
+    let str1 = Gettext.dgettext(uuid, str);
+    if (str1 === '') {
+        return str;
+    }
+    return str1;
+}
+function _util_name(str) {
+    return _(str);
 }
 
 
@@ -39,6 +46,24 @@ MyApplet.prototype = {
 
             Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
             
+            // This array is so the translation strings can be found, when normally they only
+            // show up in config files.
+            let UTIL_NAMES = [
+                
+                // admin-programs.list
+                _("Config"),
+                _("Control Panel"),
+                _("Files"),
+                _("Files (winefile)"),
+                _("Registry Editor"),
+                _("Task Manager"),
+                
+                // launchers.list
+                _("Bottles"),
+                _("Lutris"),
+                _("PlayOnLinux"),
+                _("Q4Wine")
+            ];
 
             this._path = imports.ui.appletManager.appletMeta[uuid].path;
 
@@ -90,9 +115,42 @@ MyApplet.prototype = {
                 "wineconsole-exec",
                 "wineconsoleExec",
                 this.on_setting_changed);
+
+            this.settings.bindProperty(
+                Settings.BindingDirection.IN,
+                "use-dark-theme-icons",
+                "useDarkThemeIcons",
+                this.on_setting_changed);
+            this.settings.bindProperty(
+                Settings.BindingDirection.IN,
+                "icon-style",
+                "iconStyle",
+                this.on_setting_changed);
+            this.settings.bindProperty(
+                Settings.BindingDirection.IN,
+                "specify-custom-icon",
+                "specifyCustomIcon",
+                this.on_setting_changed);
+            this.settings.bindProperty(
+                Settings.BindingDirection.IN,
+                "custom-icon",
+                "customIcon",
+                this.on_setting_changed);
+
+            this.settings.bindProperty(
+                Settings.BindingDirection.IN,
+                "show-launchers",
+                "showLaunchers",
+                this.on_setting_changed);
+
+            this._flatpak_available = false;
+            if (GLib.find_program_in_path("flatpak")) {
+                this._flatpak_available = true;
+            }
+            this._flatpak_installed = {};
             
-            this.set_applet_icon_name("wine-utils-icon");
-            this.set_applet_tooltip(_("WINE Utils"));
+            this.set_applet_icon_name(this.get_icon_for_panel());
+            this.set_applet_tooltip(_("Wine Utils"));
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this._orientation = orientation;
@@ -100,13 +158,16 @@ MyApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             let admin_programs_file = 'admin-programs.list';
-            this.load_files([this.script_path(admin_programs_file)],
+            let launchers_file = 'launchers.list';
+            this.load_files([
+                        this.script_path(admin_programs_file),
+                        this.script_path(launchers_file)],
                 Lang.bind(this, function (text) {
                     let admin_programs_list = [];
                     let lines = this.parse_list(text[0]);
                     for (let i = 0; i < lines.length; ++i) {
                         let [ret_0, ret_1] = lines[i];
-                        let arr = ret_1.split(' ');
+                        let arr = ret_1.split(/\s+/);
                         let iconname = '';
                         if (ret_0 === '') {
                             if (arr.length > 1) {
@@ -126,10 +187,42 @@ MyApplet.prototype = {
                         }
                         
                         let ico = iconname;
-                        admin_programs_list.push([_(ret_0), arr, ico]);
+                        admin_programs_list.push([_util_name(ret_0), arr, ico]);
                     }
                     this.admin_programs_list = admin_programs_list;
-                    this.rebuild_menu();
+
+                    let launcher_list = [];
+                    lines = this.parse_list(text[1]);
+                    for (let i = 0; i < lines.length; ++i) {
+                        let [ret_0, ret_1] = lines[i];
+                        let arr_0 = ret_1.split(/\s+/);
+                        if (ret_0 === '') {
+                            ret_0 = arr_0[0];
+                        }
+                        let arr = [];
+                        let arr_1 = [];
+                        for (let j = 0; j < arr_0.length; ++j) {
+                            if (arr_0[j] === ';;') {
+                                if ((arr_1.length > 0) && (arr_1[0].length > 0)) {
+                                    arr.push(arr_1);
+                                }
+                                arr_1 = [];
+                                continue;
+                            }
+                            arr_1.push(arr_0[j]);
+                        }
+                        if ((arr_1.length > 0) && (arr_1[0].length > 0)) {
+                            arr.push(arr_1);
+                        }
+                        launcher_list.push([_util_name(ret_0), arr]);
+                    }
+                    this.launcher_list = launcher_list;
+
+                    this.update_flatpak_list(
+                        Lang.bind(this, function () {
+                            this.update_available_launcher_list();
+                            this.rebuild_menu();
+                        }));
                 }
             ));
         } catch (e) {
@@ -170,12 +263,16 @@ MyApplet.prototype = {
                 continue;
             }
             if (a.substr(0,1) !== '#') {
-                let ret = a.split(':', 2);
-                let ret_1 = ret[1].trim();
-                if (ret.length == 2) {
-                    list.push([ret[0].trim(), ret_1]);
-                } else if (ret.length == 1) {
-                    list.push(['', ret_1]);
+                while (a.endsWith('\\')) {
+                    ++i;
+                    a = a.substr(0, a.length-1) + lines[i];
+                    a = a.trim();
+                }
+                let ret = a.match(/^([^:]+?)(:(.+))?$/);
+                if (typeof ret[3] == 'undefined') {
+                    list.push(['', ret[1]]);
+                } else {
+                    list.push([ret[1].trim(), ret[3].trim()]);
                 }
             }
         }
@@ -183,7 +280,7 @@ MyApplet.prototype = {
     },
 
     parse_icon: function (name) {
-        let arr = name.match(/^(.+)\s+\(icon:([^()]+)\)\s*$/);
+        let arr = name.match(/^(.+)\s+\(icon;([^()]+)\)\s*$/);
         if ((arr !== null) && (arr.length > 2)) {
             return [arr[1].trim(), arr[2].trim()];
         } else {
@@ -192,11 +289,45 @@ MyApplet.prototype = {
     },
 
     rebuild_menu: function () {
+        let have_launchers = false;
         this.menu.removeAll();
 
+        if (this.showLaunchers) {
+            for (let i = 0; i < this.launcher_list.length; ++i) {
+                if (this._found_launchers[i] !== false) {
+                    let program_name = this.launcher_list[i][0];
+                    let program_to_run = this._found_launchers[i];
+                    this.menu_new_item(
+                        this,
+                        program_name,
+                        'none',
+                        Lang.bind(this,
+                            function () {
+                                if (program_to_run[0].indexOf(':') > 0) {
+                                    let arg_ = program_to_run[0].split(':');
+                                    if (arg_[0] === 'flatpak') {
+                                        Util.spawn([
+                                            "flatpak",
+                                            "run",
+                                            arg_[1]
+                                            ]);
+                                    }
+                                } else {
+                                    Util.spawn(program_to_run);
+                                }
+                            }));
+                    have_launchers = true;
+                }
+            }
+        }
+
+        if (have_launchers) {
+            this.menu_separator();
+        }
+        
         if (this.prefixFileList !== '') {
             this.menu_prefixes = this.menu_tools(_('Prefixes'), []);
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            this.menu_separator();
         } else {
             this.menu_prefixes = null;
         }
@@ -241,8 +372,8 @@ MyApplet.prototype = {
             }
             let filename = list.shift();
             Gio.file_new_for_path(filename).
-                load_contents_async(null, Lang.bind(applet,
-                    function (file, ready) {
+                load_contents_async(null, 
+                    Lang.bind(applet, function (file, ready) {
                         let text = null;
                         try {
                             let [loaded, bytes, unused] = file.load_contents_finish(ready);
@@ -269,8 +400,7 @@ MyApplet.prototype = {
                             this.script_path('list-programs.pl'),
                             this._prefix,
                             this._wine],
-                        Lang.bind(this,
-                function (vals) {
+                Lang.bind(this, function (vals) {
                     let prog_l = [];
                     let vals_l = vals.toString().split("\n");
                     for (let i = 0; i < vals_l.length; i++) {
@@ -368,9 +498,11 @@ MyApplet.prototype = {
                                 ico = ':0:';
                             }
                             ico += iconname;
-                            prefix_l.push([ret_0, Lang.bind(this, function (event) {
-                                this._prefix = ret_1;
-                            }), ico]);
+                            prefix_l.push([ret_0,
+                                Lang.bind(this, function (event) {
+                                    this._prefix = ret_1;
+                                }),
+                                ico]);
                         }
                         this.menu_tools_update(this.menu_prefixes, prefix_l);
                     }
@@ -382,6 +514,9 @@ MyApplet.prototype = {
 
     },
 
+    menu_separator: function () {
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    },
     
     menu_new_item: function (menuItem_1, name, iconstr, callback) {
         if (iconstr.substr(0, 1) === ':') {
@@ -431,6 +566,81 @@ MyApplet.prototype = {
             this._wineconsole]);
     },
 
+    update_flatpak_list: function (callback) {
+        if (this._flatpak_available) {
+            try {
+                Util.spawn_async(["flatpak", "list"],
+                    Lang.bind(this, function (vals) {
+                        let lines = vals.split("\n");
+                        let flatpak_installed = {};
+                        for (let i = 0; i < lines.length; ++i) {
+                            let flat = lines[i].split("\t");
+                            if (flat.length > 1) {
+                                flatpak_installed[flat[1]] = true;
+                            }
+                        }
+                        this._flatpak_installed = flatpak_installed;
+                        callback();
+                    }));
+            } catch (e) {
+                global.log("Error: " + e);
+                this._flatpak_installed = {};
+                callback();
+            }
+        } else {
+            this._flatpak_installed = {};
+            callback();
+        }
+        
+    },
+
+    update_available_launcher_list: function () {
+        let found_launchers = [];
+        for (let i = 0; i < this.launcher_list.length; ++i) {
+            let launcher_paths = this.launcher_list[i][1];
+            let found = false;
+            for (let j = 0; j < launcher_paths.length; ++j) {
+                let arg_0 = launcher_paths[j][0];
+                if (arg_0.indexOf(':') > 0) {
+                    let arg_ = arg_0.split(':');
+                    if (arg_[0] === 'flatpak') {
+                        if (this._flatpak_installed.hasOwnProperty(arg_[1])) {
+                            found = launcher_paths[j];
+                            break;
+                        }
+                    }
+                    continue;
+                }
+                if (GLib.find_program_in_path(arg_0)) {
+                    found = launcher_paths[j];
+                    break;
+                }
+            }
+            found_launchers.push(found);
+        }
+        this._found_launchers = found_launchers;
+    },
+
+    get_icon_for_panel: function () {
+        let ico = '';
+        if (this.specifyCustomIcon) {
+            if ((typeof this.customIcon === 'string') && (this.customIcon.length > 0)) {
+                return this.customIcon;
+            }
+        }
+
+        if ((typeof this.iconStyle === 'string') && (this.iconStyle.length > 0)) {
+            ico = this.iconStyle;
+        }
+        if (ico !== '') {
+            if (this.useDarkThemeIcons) {
+                ico += '_dark';
+            }
+        }
+        return "wine-utils-icon" + ico;
+    },
+
+
     on_setting_changed: function() {
         if (this.specifyWineExec) {
             this._wine =
@@ -444,7 +654,13 @@ MyApplet.prototype = {
             this._wineconsole = DEFAULT_WINECONSOLE;
         }
 
-        this.rebuild_menu();
+        this.set_applet_icon_name(this.get_icon_for_panel());
+
+        this.update_flatpak_list(
+            Lang.bind(this, function () {
+                this.update_available_launcher_list();
+                this.rebuild_menu();
+            }));
     },
 
     on_applet_clicked: function () {

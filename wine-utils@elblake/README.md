@@ -6,7 +6,9 @@ Provides easy access to wine's utilities as an applet.
 ## Features
 
  * Easy access to Wine command prompt, utilities and installed programs.
+ * Menu of available launcher applications.
  * Switchable between prefixes, a list of prefixes can be specified in a file.
+
 
 ## Prefix List
 

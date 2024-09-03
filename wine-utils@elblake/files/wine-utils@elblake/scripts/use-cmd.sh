@@ -11,7 +11,9 @@ wineconsole_cmd=$1; shift
 WINEPREFIX="$prefix" $wineconsole_cmd $@
 if [ "$?" -ne 0 ]
 then
-    zenity --info --text="${PROMPT_ERROR}" \
+    . "$(dirname $0)/version.sh"
+    get_wine_version
+    zenity --info --text="${PROMPT_ERROR}\n\n${WINE_VER_MSG}${wine_version}" \
                   --title="${PROMPT_ERROR}" \
                   --width="380"
 fi
