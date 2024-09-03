@@ -20,7 +20,7 @@
     },
     "page_Temperatures": {
       "type": "page",
-      "title": "🌡 Temperature",
+      "title": "⦿ Temperature",
       "sections": [
         "section_tempDisplay",
         "section_tempOptions",
