@@ -21,5 +21,4 @@ get_wine_version ()
     fi
 }
 
-zenity --info --text="Here"
 

@@ -583,7 +583,7 @@ MyApplet.prototype = {
                         callback();
                     }));
             } catch (e) {
-                global.log("Error: " + e);
+                global.log("Error: " + e.toString());
                 this._flatpak_installed = {};
                 callback();
             }
