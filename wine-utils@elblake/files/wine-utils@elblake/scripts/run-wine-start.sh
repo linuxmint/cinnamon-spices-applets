@@ -13,7 +13,10 @@ wine_cmd=$1; shift
 WINEPREFIX="$prefix" $wine_cmd start /unix "$@"
 if [ "$?" -ne 0 ]
 then
-    zenity --info --text="${ERROR_MSG}:\n\n$1" \
+    cmd_used=$1
+    . "$(dirname $0)/version.sh"
+    get_wine_version
+    zenity --info --text="${ERROR_MSG}:\n\n${cmd_used}\n\n${WINE_VER_MSG}${wine_version}" \
                   --title="${ERROR_TITLE}" \
                   --width="380"
 fi

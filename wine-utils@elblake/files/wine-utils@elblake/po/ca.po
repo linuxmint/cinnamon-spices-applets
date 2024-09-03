@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: wine-utils@elblake 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-31 15:09-0400\n"
+"POT-Creation-Date: 2024-09-03 08:25-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,37 +18,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:95
-msgid "WINE Utils"
-msgstr "Utilitats WINE"
+#. applet.js:50
+#, fuzzy
+msgid "Config"
+msgstr "Configuració"
 
-#. applet.js:198
+#. applet.js:51
+msgid "Control Panel"
+msgstr ""
+
+#. applet.js:52
+msgid "Files"
+msgstr ""
+
+#. applet.js:53
+msgid "Files (winefile)"
+msgstr ""
+
+#. applet.js:54
+msgid "Registry Editor"
+msgstr ""
+
+#. applet.js:55
+msgid "Task Manager"
+msgstr ""
+
+#. applet.js:58
+msgid "Bottles"
+msgstr ""
+
+#. applet.js:59
+msgid "Lutris"
+msgstr ""
+
+#. applet.js:60
+msgid "PlayOnLinux"
+msgstr ""
+
+#. applet.js:61
+msgid "Q4Wine"
+msgstr ""
+
+#. metadata.json->name
+#. applet.js:149
+msgid "Wine Utils"
+msgstr "Utilitats Wine"
+
+#. applet.js:326
 msgid "Prefixes"
 msgstr "Prefixos"
 
-#. applet.js:207
+#. applet.js:335
 msgid "Run Command..."
 msgstr "Executar ordre..."
 
-#. applet.js:215
+#. applet.js:343
 msgid "Command Prompt"
 msgstr "Símbol del sistema"
 
-#. applet.js:221
+#. applet.js:349
 msgid "Configuration"
 msgstr "Configuració"
 
-#. applet.js:226
+#. applet.js:354
 msgid "Programs"
 msgstr "Programes"
 
-#. applet.js:356
+#. applet.js:483
 msgid "Default"
 msgstr "Per defecte"
-
-#. metadata.json->name
-msgid "Wine Utils"
-msgstr "Utilitats Wine"
 
 #. metadata.json->description
 msgid "Easy access to Wine's utilities"
@@ -61,6 +99,14 @@ msgstr "Configuració de wine-utils@elblake"
 #. settings-schema.json->head1->description
 msgid "General"
 msgstr "General"
+
+#. settings-schema.json->show-launchers->description
+msgid "Show Launchers"
+msgstr ""
+
+#. settings-schema.json->show-launchers->tooltip
+msgid "Show some of the Wine launchers if they are installed."
+msgstr ""
 
 #. settings-schema.json->show-run-command->description
 msgid "Show 'Run Command...'"
@@ -102,6 +148,43 @@ msgstr ""
 "Mostra un menú per accedir directament als accessos directes dels programes "
 "instal·lats amb Wine."
 
+#. settings-schema.json->use-dark-theme-icons->description
+msgid "Use dark theme icons when available."
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Panel Icon Style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+#, fuzzy
+msgid "default"
+msgstr "Per defecte"
+
+#. settings-schema.json->icon-style->options
+msgid "style 1"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "style 2"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "style 3"
+msgstr ""
+
+#. settings-schema.json->specify-custom-icon->description
+msgid "Use custom panel icon"
+msgstr ""
+
+#. settings-schema.json->specify-custom-icon->tooltip
+msgid "Use a custom icon for the applet."
+msgstr ""
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
+msgstr ""
+
 #. settings-schema.json->head2->description
 msgid "Advanced"
 msgstr "Avançat"
@@ -117,8 +200,8 @@ msgid ""
 "beginning of each line to give that prefix path a label."
 msgstr ""
 "Seleccioneu un fitxer de text on cada línia ha de contenir la ruta completa "
-"d'un directori de prefix de Wine. Podeu afegir un nom seguit de dos punts "
-"al començament de cada línia per tal d'etiquetar la ruta del prefix."
+"d'un directori de prefix de Wine. Podeu afegir un nom seguit de dos punts al "
+"començament de cada línia per tal d'etiquetar la ruta del prefix."
 
 #. settings-schema.json->specify-wine-exec->description
 msgid "Specify the wine executable"
@@ -175,3 +258,15 @@ msgstr "Error d'execució d'ordre"
 #. scripts/use-cmd.sh:6
 msgid "Command Prompt Error"
 msgstr "Error de símbol del sistema"
+
+#. scripts/version.sh:3
+msgid "Wine could not be found, make sure Wine is installed correctly."
+msgstr ""
+
+#. scripts/version.sh:4
+msgid "Wine Not Found"
+msgstr ""
+
+#. scripts/version.sh:5
+msgid "Wine version: "
+msgstr ""

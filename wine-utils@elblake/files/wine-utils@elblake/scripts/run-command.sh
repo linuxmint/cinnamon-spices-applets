@@ -23,7 +23,9 @@ then
     WINEPREFIX="$prefix" $wine_cmd $cmd
     if [ "$?" -ne 0 ]
     then
-        zenity --info --text="${ERROR_MSG}\n\n$cmd" \
+        . "$(dirname $0)/version.sh"
+        get_wine_version
+        zenity --info --text="${ERROR_MSG}\n\n$cmd\n\n${WINE_VER_MSG}${wine_version}" \
                       --title="${ERROR_TITLE}" \
                       --width="380"
     fi

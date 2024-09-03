@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: wine-utils@elblake 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-31 15:09-0400\n"
+"POT-Creation-Date: 2024-09-03 08:25-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,36 +17,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:95
-msgid "WINE Utils"
+#. applet.js:50
+msgid "Config"
 msgstr ""
 
-#. applet.js:198
-msgid "Prefixes"
+#. applet.js:51
+msgid "Control Panel"
 msgstr ""
 
-#. applet.js:207
-msgid "Run Command..."
+#. applet.js:52
+msgid "Files"
 msgstr ""
 
-#. applet.js:215
-msgid "Command Prompt"
+#. applet.js:53
+msgid "Files (winefile)"
 msgstr ""
 
-#. applet.js:221
-msgid "Configuration"
+#. applet.js:54
+msgid "Registry Editor"
 msgstr ""
 
-#. applet.js:226
-msgid "Programs"
+#. applet.js:55
+msgid "Task Manager"
 msgstr ""
 
-#. applet.js:356
-msgid "Default"
+#. applet.js:58
+msgid "Bottles"
+msgstr ""
+
+#. applet.js:59
+msgid "Lutris"
+msgstr ""
+
+#. applet.js:60
+msgid "PlayOnLinux"
+msgstr ""
+
+#. applet.js:61
+msgid "Q4Wine"
 msgstr ""
 
 #. metadata.json->name
+#. applet.js:149
 msgid "Wine Utils"
+msgstr ""
+
+#. applet.js:326
+msgid "Prefixes"
+msgstr ""
+
+#. applet.js:335
+msgid "Run Command..."
+msgstr ""
+
+#. applet.js:343
+msgid "Command Prompt"
+msgstr ""
+
+#. applet.js:349
+msgid "Configuration"
+msgstr ""
+
+#. applet.js:354
+msgid "Programs"
+msgstr ""
+
+#. applet.js:483
+msgid "Default"
 msgstr ""
 
 #. metadata.json->description
@@ -59,6 +96,14 @@ msgstr ""
 
 #. settings-schema.json->head1->description
 msgid "General"
+msgstr ""
+
+#. settings-schema.json->show-launchers->description
+msgid "Show Launchers"
+msgstr ""
+
+#. settings-schema.json->show-launchers->tooltip
+msgid "Show some of the Wine launchers if they are installed."
 msgstr ""
 
 #. settings-schema.json->show-run-command->description
@@ -95,6 +140,42 @@ msgstr ""
 msgid ""
 "Show a menu to access programs directly from Wine's installed program "
 "shortcuts."
+msgstr ""
+
+#. settings-schema.json->use-dark-theme-icons->description
+msgid "Use dark theme icons when available."
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Panel Icon Style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "default"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "style 1"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "style 2"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "style 3"
+msgstr ""
+
+#. settings-schema.json->specify-custom-icon->description
+msgid "Use custom panel icon"
+msgstr ""
+
+#. settings-schema.json->specify-custom-icon->tooltip
+msgid "Use a custom icon for the applet."
+msgstr ""
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
 msgstr ""
 
 #. settings-schema.json->head2->description
@@ -166,4 +247,16 @@ msgstr ""
 
 #. scripts/use-cmd.sh:6
 msgid "Command Prompt Error"
+msgstr ""
+
+#. scripts/version.sh:3
+msgid "Wine could not be found, make sure Wine is installed correctly."
+msgstr ""
+
+#. scripts/version.sh:4
+msgid "Wine Not Found"
+msgstr ""
+
+#. scripts/version.sh:5
+msgid "Wine version: "
 msgstr ""
