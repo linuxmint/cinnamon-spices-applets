@@ -149,6 +149,7 @@ sync@szlldm/**                                     @szlldm
 sysmonitor@orcus/**                                @orcuscz
 system-controls@rcalixte/**                        @rcalixte
 system-monitor@spacy01/**                          @spacy01
+tapo@smiklosovic/**                                @stefanmiklosovic
 temperature@fevimu/**                              @claudiux
 text-to-speech-applet@cardsurf/**                  @cardsurf
 timeout@narutrey/**                                @narutrey
@@ -169,6 +170,7 @@ website-notifier@cardsurf/**                       @cardsurf
 window-list@sangorys/**                            @sangorys
 window-list@zeripath.sdf-eu.org/**                 @zeripath
 windowlist@cobinja.de/**                           @Cobinja
+wine-utils@elblake/**                              @elblake
 wireguard@nicoulaj.net/**                          @nicoulaj
 workspace-grid@hernejj/**                          @hernejj
 workspace-name@willurd/**                          @willurd
