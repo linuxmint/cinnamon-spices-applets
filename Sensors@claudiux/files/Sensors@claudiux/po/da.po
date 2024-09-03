@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-03 19:28+0200\n"
+"POT-Creation-Date: 2024-09-03 15:24+0200\n"
 "PO-Revision-Date: 2023-12-23 16:27+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -21,104 +21,108 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:214
+#. applet.js:218
 msgid "Sensors Monitor"
 msgstr "Sensorovervågning"
 
-#: applet.js:394
+#. applet.js:399
 msgid "Suspended"
 msgstr ""
 
-#: applet.js:612 applet.js:654
+#. applet.js:617 applet.js:659
 msgid "high:"
 msgstr "høj:"
 
-#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:697
+#. applet.js:617 applet.js:619 applet.js:659 applet.js:661 applet.js:703
 msgid "n/a"
 msgstr "—"
 
-#: applet.js:614 applet.js:656
+#. applet.js:619 applet.js:661
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:697 applet.js:740
+#. applet.js:703 applet.js:747
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:742
+#. applet.js:749
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:770
+#. applet.js:778
 msgid "No intrusion detected"
 msgstr "Ingen indtrængen detekteret"
 
-#: applet.js:770
+#. applet.js:778
 msgid "INTRUSION DETECTED!"
 msgstr "INDTRÆNGEN DETEKTERET!"
 
-#: applet.js:790
+#. applet.js:798
 msgid "Must be configured!"
 msgstr "Skal konfigureres!"
 
-#: applet.js:1125
+#. applet.js:1185
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: applet.js:1125
+#. applet.js:1185
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:1132
+#. applet.js:1192
 msgid "⚙ General"
 msgstr "⚙ Generelt"
 
-#: applet.js:1142
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Temperatursensorer"
+#. applet.js:1202
+#, fuzzy, javascript-format
+msgid "%s Temperature sensors"
+msgstr "Temperatursensorer"
 
-#: applet.js:1152
-msgid "🤂 Fan sensors"
-msgstr "🤂 Ventilatorsensorer"
+#. applet.js:1212
+#, fuzzy, javascript-format
+msgid "%s Fan sensors"
+msgstr "Ventilatorsensorer"
 
-#: applet.js:1162
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Spændingssensorer"
+#. applet.js:1222
+#, fuzzy, javascript-format
+msgid "%s Voltage sensors"
+msgstr "Spændingssensorer"
 
-#: applet.js:1172
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ Indtrængningssensorer"
+#. applet.js:1232
+#, fuzzy, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "Indtrængningssensorer"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:1193
+#. applet.js:1253
 msgid "Run xsensors"
 msgstr "Kør xsensors"
 
-#: applet.js:1202
+#. applet.js:1262
 #, fuzzy
 msgid "Suspend Sensors"
 msgstr "Kør xsensors"
 
-#: applet.js:1213
+#. applet.js:1273
 msgid "Reload this applet"
 msgstr "Genindlæs panelprogrammet"
 
-#: applet.js:1514
+#. applet.js:1574
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Er du sikker på at du vil fjerne “%s”?"
 
-#: lib/checkDependencies.js:317
+#. lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Panelprogrammet %s er fuldt fungerende."
 
-#: lib/checkDependencies.js:318
+#. lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Alle afhængigheder er installeret"
 
-#: lib/checkDependencies.js:346
+#. lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -126,62 +130,62 @@ msgstr ""
 "Det lader til, nogle programmer mangler for at give panelprogrammet alle "
 "dets funktioner."
 
-#: lib/checkDependencies.js:347
+#. lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Udfør følgende kommandoer i terminalen, som lige åbnede:"
 
-#: lib/checkDependencies.js:348
+#. lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Nogle afhængigheder er ikke installeret!"
 
-#: lib/util.js:244
+#. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Kørsel af “%s” mislykkedes:"
 
-#: scripts/xs.py:206
+#. scripts/xs.py:206
 msgid "Previous instance"
 msgstr "Forrige forekomst"
 
-#: scripts/xs.py:210
+#. scripts/xs.py:210
 msgid "Next instance"
 msgstr "Næste forekomst"
 
-#: scripts/xs.py:219
+#. scripts/xs.py:219
 msgid "More options"
 msgstr "Flere indstillinger"
 
-#: scripts/xs.py:225
+#. scripts/xs.py:225
 msgid "Import from a file"
 msgstr "Importér fra en fil"
 
-#: scripts/xs.py:230
+#. scripts/xs.py:230
 msgid "Export to a file"
 msgstr "Eksportér til en fil"
 
-#: scripts/xs.py:235
+#. scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr "Gendan standardindstillinger"
 
-#: scripts/xs.py:244
+#. scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr "Genindlæs %s"
 
-#: scripts/xs.py:425
+#. scripts/xs.py:425
 #, python-format
 msgid "Settings for %s"
 msgstr "Indstillinger for %s"
 
-#: scripts/xs.py:517
+#. scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr "Vælg eller indtast filnavn, der skal eksporteres til"
 
-#: scripts/xs.py:525 scripts/xs.py:546
+#. scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr "JSON-filer"
 
-#: scripts/xs.py:539
+#. scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr "Vælg en JSON-fil, der skal importeres"
 
@@ -196,7 +200,8 @@ msgstr ""
 "farveændring, når en værdi når eller overskrider sin grænse."
 
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
+#, fuzzy
+msgid "⦿ Temperature"
 msgstr "🌡 Temperatur"
 
 #. settings-schema.json->page_Fans->title
@@ -389,6 +394,50 @@ msgstr ""
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
 msgstr "Tegnstørrelse (% af standardstørrelse)"
+
+#. settings-schema.json->vertical-align->options
+msgid "baseline"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "sub"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "super"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "middle"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "unset"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "inherit"
+msgstr ""
+
+#. settings-schema.json->vertical-align->description
+msgid "Vertical alignment"
+msgstr ""
 
 #. settings-schema.json->char_color_customized->description
 #, fuzzy
@@ -858,7 +907,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
+#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Eksempel på sensorværdier fra denne computer"
 

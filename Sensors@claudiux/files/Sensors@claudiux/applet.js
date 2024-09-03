@@ -33,7 +33,11 @@ const {SensorsReaper} = require("./lib/sensorsReaper");
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
-const DEFAULT_APPLET_LABEL = ['🌡', '🤂', '🗲', '⮿'];
+const C_TEMP = '⦿'; //'🌡'
+const C_FAN = '🤂';
+const C_VOLT = '🗲';
+const C_INTRU = '⮿';
+const DEFAULT_APPLET_LABEL = [C_TEMP, C_FAN, C_VOLT, C_INTRU];
 
 const LOG_HIGH_SCRIPT = SCRIPTS_DIR+"/log_high_value.sh";
 const LOG_CRIT_SCRIPT = SCRIPTS_DIR+"/log_crit_value.sh";
@@ -668,7 +672,7 @@ class SensorsApplet extends Applet.TextApplet {
       }
 
       if (_tooltip.length !== 0) {
-        _tooltip = "🌡" + "\n" + _tooltip;
+        _tooltip = C_TEMP + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -706,7 +710,7 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
       if (_tooltip !== "") {
-        _tooltip = "🤂" + "\n" + _tooltip;
+        _tooltip = C_FAN + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -751,7 +755,7 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
       if (_tooltip !== "") {
-        _tooltip = "🗲" + "\n" + _tooltip;
+        _tooltip = C_VOLT + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -784,7 +788,7 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
       if (_tooltip !== "") {
-        _tooltip = "⮿" + "\n" + _tooltip;
+        _tooltip = C_INTRU + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
     }
@@ -900,7 +904,7 @@ class SensorsApplet extends Applet.TextApplet {
                 _shown_name = t["shown_name"]+" ";
             }
 
-            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🌡");
+            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
 
             if (t["user_formula"] && t["user_formula"].length > 0) {
               let _formula_result = t["user_formula"].replace(/\$/g, _temp);
@@ -958,7 +962,7 @@ class SensorsApplet extends Applet.TextApplet {
             else
               _shown_name = (disk["shown_name"].length > 0) ? disk["shown_name"]+" " : _disk_name+" ";
           }
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🌡");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_TEMP);
           let _label_part = _shown_name+this._formatted_temp(_temp, vertical);
 
           this.label_parts.push(""+_label_part);
@@ -994,7 +998,7 @@ class SensorsApplet extends Applet.TextApplet {
             _fan = 1.0*eval(_formula_result)
           }
 
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🤂"); //✇
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_FAN); //✇
           this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
 
           let _fan_min = (f["min_by_user"] && f["min_by_user"].length > 0) ?
@@ -1041,7 +1045,7 @@ class SensorsApplet extends Applet.TextApplet {
           }
           let str_value = this._formatted_voltage(_voltage).padStart(10, " ");
 
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🗲");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_VOLT);
           this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical));
 
           let _max_defined_by_user = v["max_by_user"];
@@ -1086,7 +1090,7 @@ class SensorsApplet extends Applet.TextApplet {
               _shown_name = i["shown_name"]+" ";
           }
 
-          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("⮿");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_INTRU);
           this.label_parts.push(_shown_name+this._formatted_intrusion(_intrusion, vertical));
 
           let _intrusion_alarm = this._get_alarm_intrusion(this.data["intrusions"][i["sensor"]]);
@@ -1195,7 +1199,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_general_button);
 
     // Button Temperature:
-    let _temp_button = new PopupMenu.PopupMenuItem("  " + _("🌡 Temperature sensors"));
+    let _temp_button = new PopupMenu.PopupMenuItem("  " + _("%s Temperature sensors").format(C_TEMP));
     _temp_button.connect("activate",
       (event) => {
         this.kill_all_pids();
@@ -1205,7 +1209,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_temp_button);
 
     // Button Fan:
-    let _fan_button = new PopupMenu.PopupMenuItem("  " + _("🤂 Fan sensors"));
+    let _fan_button = new PopupMenu.PopupMenuItem("  " + _("%s Fan sensors").format(C_FAN));
     _fan_button.connect("activate",
       (event) => {
         this.kill_all_pids();
@@ -1215,7 +1219,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_fan_button);
 
     // Button Voltage:
-    let _voltage_button = new PopupMenu.PopupMenuItem("  " + _("🗲 Voltage sensors"));
+    let _voltage_button = new PopupMenu.PopupMenuItem("  " + _("%s Voltage sensors").format(C_VOLT));
     _voltage_button.connect("activate",
       (event) => {
         this.kill_all_pids();
@@ -1225,7 +1229,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_voltage_button);
 
     // Button Intrusion:
-    let _intrusion_button = new PopupMenu.PopupMenuItem("  " + _("⮿ Intrusion sensors"));
+    let _intrusion_button = new PopupMenu.PopupMenuItem("  " + _("%s Intrusion sensors").format(C_INTRU));
     _intrusion_button.connect("activate",
       (event) => {
         this.kill_all_pids();
