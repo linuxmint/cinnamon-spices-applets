@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-03 15:24+0200\n"
-"PO-Revision-Date: 2024-07-03 19:41+0200\n"
+"PO-Revision-Date: 2024-09-04 16:09+0200\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:218
@@ -74,24 +74,24 @@ msgid "⚙ General"
 msgstr "⚙ Allgemein"
 
 #. applet.js:1202
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Temperatursensoren"
+msgstr "%s Temperatursensoren"
 
 #. applet.js:1212
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Lüftersensoren"
+msgstr "%s Lüftersensoren"
 
 #. applet.js:1222
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Spannungssensoren"
+msgstr "%s Spannungssensoren"
 
 #. applet.js:1232
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Einbruchsensoren"
+msgstr "%s Einbruchsensoren"
 
 #. settings-schema.json->xsensors->description
 #. applet.js:1253
@@ -199,9 +199,8 @@ msgstr ""
 "Farbänderung, wenn ein Wert ein Limit erreicht oder überschreitet."
 
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Temperatur"
+msgstr "⦿ Temperatur"
 
 #. settings-schema.json->page_Fans->title
 msgid "🤂 Fan"
@@ -435,7 +434,7 @@ msgstr ""
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Vertikale Ausrichtung"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
