@@ -1,5 +1,13 @@
 import { AnimatedFish, AnimatedFishProps, AnimationRotation, RenderOptions } from "AnimatedFish"
-import { FishMessagePopupMenu, ErrorPopupMenu, FoolsDayPopupMenu } from "PopupMenu"
+import {
+  FishMessagePopupMenu,
+  BasePopupMenu,
+  PopupMenuType,
+  PopupMenuProps,
+  PopupMenuFactory,
+  FoolsDayPopupMenu,
+  ErrorPopupMenu,
+} from "PopupMenu"
 
 import { Metadata, AppletSettingsProps } from "types"
 
@@ -60,7 +68,7 @@ export class FishApplet extends Applet {
   // initialized in helper function initPopupMenu()
   private menuManager!: imports.ui.popupMenu.PopupMenuManager
   // either shows fortune message or error (or a special popup on fools day)
-  private messagePopup!: imports.ui.applet.AppletPopupMenu
+  private messagePopup!: BasePopupMenu
 
   constructor(metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId)
@@ -118,12 +126,8 @@ export class FishApplet extends Applet {
 
     // signaling setup
     this.signalManager = new SignalManager()
-    // Subscribe to theme changes to adjust the applet's own theme accordingly.
-    // The signal is only triggered on entire "style" changes, not on a switch between "appearance" setting (dark/light/mixed) within a style.
-    // TODO: seems to work though. Need to further test..
+    // Subscribe to theme changes to adjust the applet's own theme accordingly (dark / light mode styles).
     this.signalManager.connect(themeManager, "theme-set", this.changeTheme.bind(this), this)
-    // adds additional "dark" (CSS) class name on dark mode which can be used for dark mode style adjustments
-    this.setThemeStyleClasses()
 
     this.initAnimation()
     this.updateMessagePopup()
@@ -135,89 +139,122 @@ export class FishApplet extends Applet {
     this.updateCommand()
   }
 
-  // decides which popup type to set: error or "fortune" message
+  // decides which popup type to set: error or "fortune" message (or fools day)
   private updateMessagePopup(): void {
+    let popupMenuType: PopupMenuType
+
     if (this.errorManager.hasErrors()) {
-      this.setActiveErrorPopup()
+      popupMenuType = "Error"
+    } else if (this.isFoolsDay) {
+      popupMenuType = "FoolsDay"
     } else {
-      if (this.isFoolsDay) {
-        this.setActiveFoolsDayPopup()
-      } else {
-        this.setActiveMessagePopup()
+      popupMenuType = "FishMessage"
+    }
+    this.setActivePopup(popupMenuType)
+  }
+
+  private setActivePopup(popupMenuType: PopupMenuType): void {
+    if (popupMenuType === "Error" && !this.errorManager.hasErrors()) {
+      // The Applet has no errors, so do not show the error popup!
+      return
+    }
+
+    if (this.isTargetPopupMenuAlreadyActive(popupMenuType)) {
+      // Correct popup menu is already active, so there is nothing to do!
+      return
+    }
+
+    // set correct init props for respective popup menu type:
+    let popupMenuProps: PopupMenuProps
+    switch (popupMenuType) {
+      case "FishMessage":
+        popupMenuProps = {
+          popupMenuType: "FishMessage",
+          popupMenuProps: {
+            launcher: this,
+            orientation: this.orientation,
+            name: this.settingsObject.name,
+            onSpeakAgain: this.runCommand.bind(this),
+            onClose: () => this.messagePopup.close(true),
+          },
+        }
+        break
+      case "FoolsDay":
+        popupMenuProps = {
+          popupMenuType: "FoolsDay",
+          popupMenuProps: {
+            launcher: this,
+            orientation: this.orientation,
+          },
+        }
+        break
+      case "Error":
+        popupMenuProps = {
+          popupMenuType: "Error",
+          popupMenuProps: {
+            launcher: this,
+            orientation: this.orientation,
+            errors: this.errorManager.getAllErrors(),
+            onOpenPreferences: () => {
+              this.messagePopup.close(true)
+              this.configureApplet()
+            },
+          },
+        }
+        break
+      default:
+        throw new Error("Unknown popup menu type")
+    }
+
+    // directly init popup menu with correct style class
+    // this is passed in the options props member
+    if (this.isDarkMode()) {
+      const styleClassName = "dark"
+      popupMenuProps.popupMenuOptions = {
+        ...popupMenuProps.popupMenuOptions,
+        styleClassName,
       }
     }
-    // TODO: not optimal. Maybe set styles for menu separately or completely refactor menus (e.g. abstract class or don't always re-init them)
-    this.setThemeStyleClasses()
-  }
 
-  private setActiveMessagePopup(): void {
-    if (this.messagePopup && this.messagePopup instanceof FishMessagePopupMenu) {
-      // message popup is already active - nothing to do
-      return
-    }
-    // reset menu manager and add fish message
+    // reset menu manager and create new the new popup with the defined props from above
     if (this.menuManager) {
       this.menuManager.destroy()
     }
     this.menuManager = new PopupMenuManager(this)
-
-    this.messagePopup = new FishMessagePopupMenu({
-      launcher: this,
-      orientation: this.orientation,
-      name: this.settingsObject.name,
-      onSpeakAgain: this.runCommand.bind(this),
-      onClose: () => this.messagePopup.close(true),
-    })
-    // need to run command so that its result will be shown in the popup
-    this.runCommand()
+    // returns a popup menu instance with respective popup menu type (fishMessage, error, foolsday)
+    this.messagePopup = PopupMenuFactory.createPopupMenu(popupMenuProps)
     this.menuManager.addMenu(this.messagePopup)
+
+    // for fish message popup, need to run command already once so that its result will be shown in the popup
+    // TODO: maybe do on applet click instead ..
+    if (popupMenuType === "FishMessage") {
+      this.runCommand()
+    }
   }
 
-  private setActiveFoolsDayPopup(): void {
-    if (this.messagePopup && this.messagePopup instanceof FoolsDayPopupMenu) {
-      // fools day popup is already active - nothing to do
-      return
+  private isTargetPopupMenuAlreadyActive(targetPopupMenuTyp: PopupMenuType): boolean {
+    switch (targetPopupMenuTyp) {
+      case "FishMessage":
+        if (this.messagePopup instanceof FishMessagePopupMenu) {
+          return true
+        } else {
+          return false
+        }
+      case "FoolsDay":
+        if (this.messagePopup instanceof FoolsDayPopupMenu) {
+          return true
+        } else {
+          return false
+        }
+      case "Error":
+        if (this.messagePopup instanceof ErrorPopupMenu) {
+          return true
+        } else {
+          return false
+        }
+      default:
+        throw new Error("Unknown popup menu type")
     }
-    // reset menu manager and add fish message
-    if (this.menuManager) {
-      this.menuManager.destroy()
-    }
-    this.menuManager = new PopupMenuManager(this)
-
-    this.messagePopup = new FoolsDayPopupMenu({
-      launcher: this,
-      orientation: this.orientation,
-    })
-    this.menuManager.addMenu(this.messagePopup)
-  }
-
-  private setActiveErrorPopup(): void {
-    if (!this.errorManager.hasErrors()) {
-      // applet has no errors, so do not show the error popup
-      return
-    }
-    if (this.messagePopup && this.messagePopup instanceof ErrorPopupMenu) {
-      // error popup is already active - nothing to do
-      return
-    }
-    // reset menu manager and add error message popup
-    if (this.menuManager) {
-      this.menuManager.destroy()
-    }
-    this.menuManager = new PopupMenuManager(this)
-
-    this.messagePopup = new ErrorPopupMenu({
-      launcher: this,
-      orientation: this.orientation,
-      name: this.settingsObject.name,
-      errors: this.errorManager.getAllErrors(),
-      onOpenPreferences: () => {
-        this.messagePopup.close(true)
-        this.configureApplet()
-      },
-    })
-
-    this.menuManager.addMenu(this.messagePopup)
   }
 
   // asynchronously updates the message in the popup
@@ -594,20 +631,14 @@ If you prefer not to install any additional packages, you can change the command
     if (this.isDarkMode()) {
       this.actor.add_style_class_name("dark")
       if (this.messagePopup) {
-        this.messagePopup.actor.add_style_class_name("dark")
+        this.messagePopup.addStyleClassName("dark")
       }
     } else {
       this.actor.remove_style_class_name("dark")
       if (this.messagePopup) {
-        this.messagePopup.actor.remove_style_class_name("dark")
+        this.messagePopup.removeStyleClassName("dark")
       }
     }
-    // TODO
-    // if (this.isDarkMode()) {
-    //   this.messagePopup.actor.add_style_class_name("dark")
-    // } else {
-    //   this.messagePopup.actor.remove_style_class_name("dark")
-    // }
   }
 
   private changeTheme(): void {

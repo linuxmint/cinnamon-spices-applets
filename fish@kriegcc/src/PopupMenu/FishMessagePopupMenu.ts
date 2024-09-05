@@ -1,7 +1,7 @@
 import { _ } from "utils/translation"
 import { showNotification } from "utils/notification"
+import { BasePopupMenu } from "./BasePopupMenu"
 
-const { AppletPopupMenu } = imports.ui.applet
 const { St, Pango } = imports.gi
 
 export type FishMessagePopupMenuProps = {
@@ -12,7 +12,7 @@ export type FishMessagePopupMenuProps = {
   onSpeakAgain: () => void
   onClose: () => void
 }
-export class FishMessagePopupMenu extends AppletPopupMenu {
+export class FishMessagePopupMenu extends BasePopupMenu {
   private name = ""
   private message = ""
 

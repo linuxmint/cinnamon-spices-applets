@@ -1,14 +1,14 @@
 import { _ } from "utils/translation"
 import { InfoIcon } from "utils/icons"
+import { BasePopupMenu } from "./BasePopupMenu"
 
-const { AppletPopupMenu } = imports.ui.applet
 const { St } = imports.gi
 
 export type FoolsDayPopupMenuProps = {
   launcher: imports.ui.applet.Applet
   orientation: imports.gi.St.Side
 }
-export class FoolsDayPopupMenu extends AppletPopupMenu {
+export class FoolsDayPopupMenu extends BasePopupMenu {
   constructor(props: FoolsDayPopupMenuProps) {
     const { launcher, orientation } = props
     super(launcher, orientation)

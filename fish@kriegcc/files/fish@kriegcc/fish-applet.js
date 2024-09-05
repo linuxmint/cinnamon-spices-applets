@@ -704,6 +704,21 @@ function mapAnimationRotationToPixbufRotation(rotation) {
 
 
 
+;// CONCATENATED MODULE: ./src/PopupMenu/BasePopupMenu.ts
+const { AppletPopupMenu } = imports.ui.applet;
+class BasePopupMenu extends AppletPopupMenu {
+    constructor(launcher, orientation) {
+        super(launcher, orientation);
+        this.actor.add_style_class_name("fish-menu");
+    }
+    addStyleClassName(className) {
+        this.actor.add_style_class_name(className);
+    }
+    removeStyleClassName(className) {
+        this.actor.remove_style_class_name(className);
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/utils/translation/translation.ts
 
 const Gettext = imports.gettext;
@@ -716,6 +731,22 @@ function _(text) {
 }
 
 ;// CONCATENATED MODULE: ./src/utils/translation/index.ts
+
+
+;// CONCATENATED MODULE: ./src/utils/icons/icons.ts
+const { St: icons_St } = imports.gi;
+const ErrorIcon = (iconsSize = 24) => new icons_St.Icon({
+    icon_name: "error",
+    icon_type: icons_St.IconType.SYMBOLIC,
+    icon_size: iconsSize,
+});
+const InfoIcon = (iconsSize = 24) => new icons_St.Icon({
+    icon_name: "info",
+    icon_type: icons_St.IconType.SYMBOLIC,
+    icon_size: iconsSize,
+});
+
+;// CONCATENATED MODULE: ./src/utils/icons/index.ts
 
 
 ;// CONCATENATED MODULE: ./src/utils/notification/notification.ts
@@ -751,12 +782,127 @@ function showNotification(props) {
 ;// CONCATENATED MODULE: ./src/utils/notification/index.ts
 
 
+;// CONCATENATED MODULE: ./src/PopupMenu/ErrorPopupMenu.ts
+
+
+
+
+const { St: ErrorPopupMenu_St, Pango } = imports.gi;
+class ErrorPopupMenu extends BasePopupMenu {
+    constructor(props) {
+        const { launcher, orientation, errors, onOpenPreferences } = props;
+        super(launcher, orientation);
+        this.errors = [];
+        this.errors = errors;
+        const popupContainer = new ErrorPopupMenu_St.BoxLayout({
+            vertical: true,
+            style_class: "fish-popup-container fish-error-popup",
+        });
+        const mainContainer = new ErrorPopupMenu_St.BoxLayout({
+            style_class: "main-container",
+        });
+        const errorIcon = ErrorIcon(48);
+        errorIcon.set_y_align(imports.gi.Clutter.ActorAlign.START);
+        mainContainer.add(errorIcon);
+        const messageContainer = new ErrorPopupMenu_St.BoxLayout({
+            vertical: true,
+            style_class: "message-container",
+        });
+        mainContainer.add(messageContainer);
+        popupContainer.add(mainContainer);
+        const titleLabel = new ErrorPopupMenu_St.Label({
+            style_class: "header-label",
+            text: _("There's something fishy going on here:"),
+        });
+        messageContainer.add(titleLabel);
+        const errorMessagesScrollContainer = new ErrorPopupMenu_St.ScrollView({
+            style_class: "error-messages-scroll-container",
+            hscrollbar_policy: ErrorPopupMenu_St.PolicyType.AUTOMATIC,
+            vscrollbar_policy: ErrorPopupMenu_St.PolicyType.AUTOMATIC,
+            overlay_scrollbars: false,
+            enable_mouse_scrolling: true,
+            enable_auto_scrolling: false,
+            x_fill: false,
+            y_fill: false,
+            x_expand: true,
+            y_expand: true,
+            y_align: ErrorPopupMenu_St.Align.MIDDLE,
+            x_align: ErrorPopupMenu_St.Align.MIDDLE,
+        });
+        messageContainer.add(errorMessagesScrollContainer);
+        const errorMessagesBox = new ErrorPopupMenu_St.BoxLayout({
+            style_class: "error-messages-box",
+        });
+        errorMessagesScrollContainer.add_actor(errorMessagesBox);
+        const errorMessagesLabel = new ErrorPopupMenu_St.Label({
+            style_class: "error-messages-label",
+            text: this.getAllErrorMessages(),
+        });
+        const messageClutterText = errorMessagesLabel.get_clutter_text();
+        messageClutterText.set_ellipsize(Pango.EllipsizeMode.NONE);
+        messageClutterText.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        errorMessagesBox.add(errorMessagesLabel);
+        const buttonContainer = new ErrorPopupMenu_St.BoxLayout({
+            style_class: "button-container",
+        });
+        const buttonContainerLeft = new ErrorPopupMenu_St.BoxLayout({
+            x_align: imports.gi.Clutter.ActorAlign.START,
+            y_align: imports.gi.Clutter.ActorAlign.CENTER,
+            x_expand: true,
+            y_expand: true,
+        });
+        let copyButtonText;
+        if (this.errors.length > 1) {
+            copyButtonText = _("Copy Error Messages");
+        }
+        else {
+            copyButtonText = _("Copy Error Message");
+        }
+        const copyButton = new ErrorPopupMenu_St.Button({
+            label: copyButtonText,
+            style_class: "applet-box",
+        });
+        copyButton.connect("clicked", this.onCopy.bind(this));
+        buttonContainerLeft.add(copyButton);
+        buttonContainer.add(buttonContainerLeft);
+        const buttonContainerRight = new ErrorPopupMenu_St.BoxLayout({
+            x_align: imports.gi.Clutter.ActorAlign.END,
+            y_align: imports.gi.Clutter.ActorAlign.CENTER,
+            x_expand: true,
+            y_expand: true,
+        });
+        const openPreferencesButton = new ErrorPopupMenu_St.Button({
+            label: _("Open Preferences"),
+            style_class: "applet-box",
+        });
+        openPreferencesButton.connect("clicked", onOpenPreferences);
+        buttonContainerRight.add(openPreferencesButton);
+        buttonContainer.add(buttonContainerRight);
+        popupContainer.add(buttonContainer);
+        this.box.add(popupContainer);
+    }
+    onCopy() {
+        let notificationText;
+        if (this.errors.length > 1) {
+            notificationText = _("Errors copied to the clipboard");
+        }
+        else {
+            notificationText = _("Error copied to the clipboard");
+        }
+        ErrorPopupMenu_St.Clipboard.get_default().set_text(ErrorPopupMenu_St.ClipboardType.CLIPBOARD, this.getAllErrorMessages());
+        showNotification({ message: notificationText });
+    }
+    getAllErrorMessages() {
+        return this.errors.map((error) => error.message).join("\n\n");
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/PopupMenu/FishMessagePopupMenu.ts
 
 
-const { AppletPopupMenu } = imports.ui.applet;
-const { St: FishMessagePopupMenu_St, Pango } = imports.gi;
-class FishMessagePopupMenu extends AppletPopupMenu {
+
+const { St: FishMessagePopupMenu_St, Pango: FishMessagePopupMenu_Pango } = imports.gi;
+class FishMessagePopupMenu extends BasePopupMenu {
     constructor(props) {
         const { launcher, orientation, name, message, onSpeakAgain, onClose } = props;
         super(launcher, orientation);
@@ -798,8 +944,8 @@ class FishMessagePopupMenu extends AppletPopupMenu {
             style_class: "message-label",
         });
         const messageClutterText = this.messageLabel.get_clutter_text();
-        messageClutterText.set_ellipsize(Pango.EllipsizeMode.NONE);
-        messageClutterText.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        messageClutterText.set_ellipsize(FishMessagePopupMenu_Pango.EllipsizeMode.NONE);
+        messageClutterText.set_line_wrap_mode(FishMessagePopupMenu_Pango.WrapMode.WORD_CHAR);
         this.setMessage();
         messageBox.add(this.messageLabel);
         messageScrollContainer.add_actor(messageBox);
@@ -863,146 +1009,12 @@ class FishMessagePopupMenu extends AppletPopupMenu {
     }
 }
 
-;// CONCATENATED MODULE: ./src/utils/icons/icons.ts
-const { St: icons_St } = imports.gi;
-const ErrorIcon = (iconsSize = 24) => new icons_St.Icon({
-    icon_name: "error",
-    icon_type: icons_St.IconType.SYMBOLIC,
-    icon_size: iconsSize,
-});
-const InfoIcon = (iconsSize = 24) => new icons_St.Icon({
-    icon_name: "info",
-    icon_type: icons_St.IconType.SYMBOLIC,
-    icon_size: iconsSize,
-});
-
-;// CONCATENATED MODULE: ./src/utils/icons/index.ts
-
-
-;// CONCATENATED MODULE: ./src/PopupMenu/ErrorPopupMenu.ts
-
-
-
-const { AppletPopupMenu: ErrorPopupMenu_AppletPopupMenu } = imports.ui.applet;
-const { St: ErrorPopupMenu_St, Pango: ErrorPopupMenu_Pango } = imports.gi;
-class ErrorPopupMenu extends ErrorPopupMenu_AppletPopupMenu {
-    constructor(props) {
-        const { launcher, orientation, name, errors, onOpenPreferences } = props;
-        super(launcher, orientation);
-        this.errors = [];
-        this.errors = errors;
-        if (name) {
-            this.name = name;
-        }
-        const popupContainer = new ErrorPopupMenu_St.BoxLayout({
-            vertical: true,
-            style_class: "fish-popup-container fish-error-popup",
-        });
-        const mainContainer = new ErrorPopupMenu_St.BoxLayout({
-            style_class: "main-container",
-        });
-        const errorIcon = ErrorIcon(48);
-        errorIcon.set_y_align(imports.gi.Clutter.ActorAlign.START);
-        mainContainer.add(errorIcon);
-        const messageContainer = new ErrorPopupMenu_St.BoxLayout({
-            vertical: true,
-            style_class: "message-container",
-        });
-        mainContainer.add(messageContainer);
-        popupContainer.add(mainContainer);
-        const titleLabel = new ErrorPopupMenu_St.Label({
-            style_class: "header-label",
-            text: _("There's something fishy going on here:"),
-        });
-        messageContainer.add(titleLabel);
-        const errorMessagesScrollContainer = new ErrorPopupMenu_St.ScrollView({
-            style_class: "error-messages-scroll-container",
-            hscrollbar_policy: ErrorPopupMenu_St.PolicyType.AUTOMATIC,
-            vscrollbar_policy: ErrorPopupMenu_St.PolicyType.AUTOMATIC,
-            overlay_scrollbars: false,
-            enable_mouse_scrolling: true,
-            enable_auto_scrolling: false,
-            x_fill: false,
-            y_fill: false,
-            x_expand: true,
-            y_expand: true,
-            y_align: ErrorPopupMenu_St.Align.MIDDLE,
-            x_align: ErrorPopupMenu_St.Align.MIDDLE,
-        });
-        messageContainer.add(errorMessagesScrollContainer);
-        const errorMessagesBox = new ErrorPopupMenu_St.BoxLayout({
-            style_class: "error-messages-box",
-        });
-        errorMessagesScrollContainer.add_actor(errorMessagesBox);
-        const errorMessagesLabel = new ErrorPopupMenu_St.Label({
-            style_class: "error-messages-label",
-            text: this.getAllErrorMessages(),
-        });
-        const messageClutterText = errorMessagesLabel.get_clutter_text();
-        messageClutterText.set_ellipsize(ErrorPopupMenu_Pango.EllipsizeMode.NONE);
-        messageClutterText.set_line_wrap_mode(ErrorPopupMenu_Pango.WrapMode.WORD_CHAR);
-        errorMessagesBox.add(errorMessagesLabel);
-        const buttonContainer = new ErrorPopupMenu_St.BoxLayout({
-            style_class: "button-container",
-        });
-        const buttonContainerLeft = new ErrorPopupMenu_St.BoxLayout({
-            x_align: imports.gi.Clutter.ActorAlign.START,
-            y_align: imports.gi.Clutter.ActorAlign.CENTER,
-            x_expand: true,
-            y_expand: true,
-        });
-        let copyButtonText;
-        if (this.errors.length > 1) {
-            copyButtonText = _("Copy Error Messages");
-        }
-        else {
-            copyButtonText = _("Copy Error Message");
-        }
-        const copyButton = new ErrorPopupMenu_St.Button({
-            label: copyButtonText,
-            style_class: "applet-box",
-        });
-        copyButton.connect("clicked", this.onCopy.bind(this));
-        buttonContainerLeft.add(copyButton);
-        buttonContainer.add(buttonContainerLeft);
-        const buttonContainerRight = new ErrorPopupMenu_St.BoxLayout({
-            x_align: imports.gi.Clutter.ActorAlign.END,
-            y_align: imports.gi.Clutter.ActorAlign.CENTER,
-            x_expand: true,
-            y_expand: true,
-        });
-        const openPreferencesButton = new ErrorPopupMenu_St.Button({
-            label: _("Open Preferences"),
-            style_class: "applet-box",
-        });
-        openPreferencesButton.connect("clicked", onOpenPreferences);
-        buttonContainerRight.add(openPreferencesButton);
-        buttonContainer.add(buttonContainerRight);
-        popupContainer.add(buttonContainer);
-        this.box.add(popupContainer);
-    }
-    onCopy() {
-        let notificationText;
-        if (this.errors.length > 1) {
-            notificationText = _("Errors copied to the clipboard");
-        }
-        else {
-            notificationText = _("Error copied to the clipboard");
-        }
-        ErrorPopupMenu_St.Clipboard.get_default().set_text(ErrorPopupMenu_St.ClipboardType.CLIPBOARD, this.getAllErrorMessages());
-        showNotification({ message: notificationText });
-    }
-    getAllErrorMessages() {
-        return this.errors.map((error) => error.message).join("\n\n");
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/PopupMenu/FoolsDayPopupMenu.ts
 
 
-const { AppletPopupMenu: FoolsDayPopupMenu_AppletPopupMenu } = imports.ui.applet;
+
 const { St: FoolsDayPopupMenu_St } = imports.gi;
-class FoolsDayPopupMenu extends FoolsDayPopupMenu_AppletPopupMenu {
+class FoolsDayPopupMenu extends BasePopupMenu {
     constructor(props) {
         const { launcher, orientation } = props;
         super(launcher, orientation);
@@ -1035,7 +1047,37 @@ class FoolsDayPopupMenu extends FoolsDayPopupMenu_AppletPopupMenu {
     }
 }
 
+;// CONCATENATED MODULE: ./src/PopupMenu/PopupMenuFactory.ts
+
+
+
+class PopupMenuFactory {
+    static createPopupMenu(props) {
+        const { popupMenuType, popupMenuProps, popupMenuOptions } = props;
+        let popupMenu;
+        switch (popupMenuType) {
+            case "FishMessage":
+                popupMenu = new FishMessagePopupMenu(popupMenuProps);
+                break;
+            case "FoolsDay":
+                popupMenu = new FoolsDayPopupMenu(popupMenuProps);
+                break;
+            case "Error":
+                popupMenu = new ErrorPopupMenu(popupMenuProps);
+                break;
+            default:
+                throw new Error("Unknown popup menu type");
+        }
+        if (popupMenuOptions === null || popupMenuOptions === void 0 ? void 0 : popupMenuOptions.styleClassName) {
+            popupMenu.addStyleClassName(popupMenuOptions.styleClassName);
+        }
+        return popupMenu;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/PopupMenu/index.ts
+
+
 
 
 
@@ -1141,80 +1183,114 @@ class FishApplet extends Applet {
         this.settingsObject.imagePath = this.settings.getValue("keyImagePath");
         this.signalManager = new SignalManager();
         this.signalManager.connect(themeManager, "theme-set", this.changeTheme.bind(this), this);
-        this.setThemeStyleClasses();
         this.initAnimation();
         this.updateMessagePopup();
         this.updateName();
         this.updateCommand();
     }
     updateMessagePopup() {
+        let popupMenuType;
         if (this.errorManager.hasErrors()) {
-            this.setActiveErrorPopup();
+            popupMenuType = "Error";
+        }
+        else if (this.isFoolsDay) {
+            popupMenuType = "FoolsDay";
         }
         else {
-            if (this.isFoolsDay) {
-                this.setActiveFoolsDayPopup();
-            }
-            else {
-                this.setActiveMessagePopup();
-            }
+            popupMenuType = "FishMessage";
         }
-        this.setThemeStyleClasses();
+        this.setActivePopup(popupMenuType);
     }
-    setActiveMessagePopup() {
-        if (this.messagePopup && this.messagePopup instanceof FishMessagePopupMenu) {
+    setActivePopup(popupMenuType) {
+        if (popupMenuType === "Error" && !this.errorManager.hasErrors()) {
             return;
+        }
+        if (this.isTargetPopupMenuAlreadyActive(popupMenuType)) {
+            return;
+        }
+        let popupMenuProps;
+        switch (popupMenuType) {
+            case "FishMessage":
+                popupMenuProps = {
+                    popupMenuType: "FishMessage",
+                    popupMenuProps: {
+                        launcher: this,
+                        orientation: this.orientation,
+                        name: this.settingsObject.name,
+                        onSpeakAgain: this.runCommand.bind(this),
+                        onClose: () => this.messagePopup.close(true),
+                    },
+                };
+                break;
+            case "FoolsDay":
+                popupMenuProps = {
+                    popupMenuType: "FoolsDay",
+                    popupMenuProps: {
+                        launcher: this,
+                        orientation: this.orientation,
+                    },
+                };
+                break;
+            case "Error":
+                popupMenuProps = {
+                    popupMenuType: "Error",
+                    popupMenuProps: {
+                        launcher: this,
+                        orientation: this.orientation,
+                        errors: this.errorManager.getAllErrors(),
+                        onOpenPreferences: () => {
+                            this.messagePopup.close(true);
+                            this.configureApplet();
+                        },
+                    },
+                };
+                break;
+            default:
+                throw new Error("Unknown popup menu type");
+        }
+        if (this.isDarkMode()) {
+            const styleClassName = "dark";
+            popupMenuProps.popupMenuOptions = {
+                ...popupMenuProps.popupMenuOptions,
+                styleClassName,
+            };
         }
         if (this.menuManager) {
             this.menuManager.destroy();
         }
         this.menuManager = new PopupMenuManager(this);
-        this.messagePopup = new FishMessagePopupMenu({
-            launcher: this,
-            orientation: this.orientation,
-            name: this.settingsObject.name,
-            onSpeakAgain: this.runCommand.bind(this),
-            onClose: () => this.messagePopup.close(true),
-        });
-        this.runCommand();
+        this.messagePopup = PopupMenuFactory.createPopupMenu(popupMenuProps);
         this.menuManager.addMenu(this.messagePopup);
+        if (popupMenuType === "FishMessage") {
+            this.runCommand();
+        }
     }
-    setActiveFoolsDayPopup() {
-        if (this.messagePopup && this.messagePopup instanceof FoolsDayPopupMenu) {
-            return;
+    isTargetPopupMenuAlreadyActive(targetPopupMenuTyp) {
+        switch (targetPopupMenuTyp) {
+            case "FishMessage":
+                if (this.messagePopup instanceof FishMessagePopupMenu) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case "FoolsDay":
+                if (this.messagePopup instanceof FoolsDayPopupMenu) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case "Error":
+                if (this.messagePopup instanceof ErrorPopupMenu) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            default:
+                throw new Error("Unknown popup menu type");
         }
-        if (this.menuManager) {
-            this.menuManager.destroy();
-        }
-        this.menuManager = new PopupMenuManager(this);
-        this.messagePopup = new FoolsDayPopupMenu({
-            launcher: this,
-            orientation: this.orientation,
-        });
-        this.menuManager.addMenu(this.messagePopup);
-    }
-    setActiveErrorPopup() {
-        if (!this.errorManager.hasErrors()) {
-            return;
-        }
-        if (this.messagePopup && this.messagePopup instanceof ErrorPopupMenu) {
-            return;
-        }
-        if (this.menuManager) {
-            this.menuManager.destroy();
-        }
-        this.menuManager = new PopupMenuManager(this);
-        this.messagePopup = new ErrorPopupMenu({
-            launcher: this,
-            orientation: this.orientation,
-            name: this.settingsObject.name,
-            errors: this.errorManager.getAllErrors(),
-            onOpenPreferences: () => {
-                this.messagePopup.close(true);
-                this.configureApplet();
-            },
-        });
-        this.menuManager.addMenu(this.messagePopup);
     }
     runCommand() {
         if (this.errorManager.hasError("command")) {
@@ -1492,13 +1568,13 @@ If you prefer not to install any additional packages, you can change the command
         if (this.isDarkMode()) {
             this.actor.add_style_class_name("dark");
             if (this.messagePopup) {
-                this.messagePopup.actor.add_style_class_name("dark");
+                this.messagePopup.addStyleClassName("dark");
             }
         }
         else {
             this.actor.remove_style_class_name("dark");
             if (this.messagePopup) {
-                this.messagePopup.actor.remove_style_class_name("dark");
+                this.messagePopup.removeStyleClassName("dark");
             }
         }
     }

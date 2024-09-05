@@ -25,7 +25,7 @@
  /* common styles */
  /* --------------*/
 
-.fish-popup-container {
+ .fish-menu .fish-popup-container {
   /* TODO: allow to change the popup size in settings by the user? */
   max-width: 50em;
   max-height: 25em;
@@ -33,12 +33,12 @@
   spacing: 0.5em
 }
 
-.fish-popup-container .header-label {
+.fish-menu .fish-popup-container .header-label {
   font-weight: bold;
   font-size: large;
 }
 
-.fish-popup-container .button-container {
+.fish-menu .fish-popup-container .button-container {
   spacing: 2em;
 }
 
@@ -46,7 +46,7 @@
 /* Message Popup specific */
 /* -----------------------*/
 
-.fish-message-popup .message-scroll-container {
+.fish-menu .fish-message-popup .message-scroll-container {
   padding: 0.5em;
   /* taken from calendar ("calendar@cinnamon.org", "calendar-events-main-box") */
   border: 1px solid #999;
@@ -57,16 +57,16 @@
 }
 
 /* on dark mode, adjust colors of for better readability */
-.menu.dark .fish-message-popup .message-scroll-container {
+.fish-menu.dark .fish-message-popup .message-scroll-container {
   border: 1px solid #666;
   background-gradient-start: rgba(85,85,85,0.8);
   background-gradient-end: rgba(85,85,85,0.2);
 }
 
-.fish-message-popup .message-box {
+.fish-menu .fish-message-popup .message-box {
 }
 
-.fish-message-popup .message-label {
+.fish-menu .fish-message-popup .message-label {
   font-family: "monospace";
   font-size: medium;
 }
@@ -75,32 +75,40 @@
 /* Error Popup specific */
 /* ---------------------*/
 
-.fish-error-popup {
+.fish-menu .fish-error-popup {
   spacing: 1em
 }
 
-.fish-error-popup .main-container {
+.fish-menu .fish-error-popup .main-container {
   spacing: 1em
 }
 
-.fish-error-popup .message-container {
+.fish-menu .fish-error-popup .message-container {
   spacing: 1em
 }
 
-.fish-error-popup .error-messages-scroll-container {
+.fish-menu .fish-error-popup .error-messages-scroll-container {
   padding: 0.5em;
   /* taken from calendar but adjusted colors ("calendar@cinnamon.org", "calendar-events-main-box") */
-  border: 1px solid #666;
+  border: 1px solid #999;
   border-radius: 8px;
   background-gradient-direction: vertical;
-  background-gradient-start: rgba(87, 65, 65, 0.8);
-  background-gradient-end: rgba(85, 11, 11, 0.2);
+  background-gradient-start: rgba(240, 165, 165, 0.8);
+  background-gradient-end: rgba(240, 165, 165, 0.2);
 }
 
-.fish-error-popup .error-messages-box {
+/* on dark mode, adjust colors of for better readability */
+.fish-menu.dark .fish-error-popup .error-messages-scroll-container  {
+  border: 1px solid #666;
+  background-gradient-direction: vertical;
+  background-gradient-start: rgba(155, 104, 104, 0.8);
+  background-gradient-end: rgba(155, 104, 104, 0.2);
 }
 
-.fish-error-popup .error-messages-label {
+.fish-menu .fish-error-popup .error-messages-box {
+}
+
+.fish-menu .fish-error-popup .error-messages-label {
   font-family: "monospace";
   font-size: medium;
 }
@@ -109,20 +117,20 @@
 /* Fools Day Popup specific */
 /* -------------------------*/
 
-.fish-fools-day-popup .main-container {
+.fish-menu .fish-fools-day-popup .main-container {
   spacing: 1em
 }
 
-.fish-fools-day-popup .message-container {
+.fish-menu .fish-fools-day-popup .message-container {
   spacing: 1em
 }
 
-.fish-fools-day-popup .message-label {
+.fish-menu .fish-fools-day-popup .message-label {
   font-weight: bold;
   font-size: large;
 }
 
-.fish-fools-day-popup .secondary-message-label {
+.fish-menu .fish-fools-day-popup .secondary-message-label {
   font-size: medium;
 }
 

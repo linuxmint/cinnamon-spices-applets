@@ -2,30 +2,25 @@ import { FishAppletError } from "FishApplet/ErrorManager"
 import { _ } from "utils/translation"
 import { ErrorIcon } from "utils/icons"
 import { showNotification } from "utils/notification"
+import { BasePopupMenu } from "./BasePopupMenu"
 
-const { AppletPopupMenu } = imports.ui.applet
 const { St, Pango } = imports.gi
 
 export type ErrorPopupMenuProps = {
   launcher: imports.ui.applet.Applet
   orientation: imports.gi.St.Side
-  name?: string
   errors: FishAppletError[]
   onOpenPreferences: () => void
 }
-export class ErrorPopupMenu extends AppletPopupMenu {
+export class ErrorPopupMenu extends BasePopupMenu {
   private name: string | undefined
   private errors: FishAppletError[] = []
 
   constructor(props: ErrorPopupMenuProps) {
-    const { launcher, orientation, name, errors, onOpenPreferences } = props
+    const { launcher, orientation, errors, onOpenPreferences } = props
     super(launcher, orientation)
 
     this.errors = errors
-
-    if (name) {
-      this.name = name
-    }
 
     // Layout:
     //   popup-container (St.BoxLayout, vertical)
