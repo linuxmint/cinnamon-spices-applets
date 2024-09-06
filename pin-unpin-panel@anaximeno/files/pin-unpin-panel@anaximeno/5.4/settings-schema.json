@@ -7,7 +7,7 @@
     "unpin-autohide-type": {
         "type": "combobox",
         "description": "Hide Type on Unpin",
-        "default": "intel",
+        "default": "true",
         "options": {
             "Auto Hide": "true",
             "Intelligent Hide": "intel"
@@ -35,6 +35,23 @@
         "default": "xapp-unpin-symbolic",
         "description": "Unpin Icon",
         "dependency": "use-custom-icons"
-    }
+    },
 
-}
+    "key-bindings": {
+        "type": "section",
+        "description": "Key Bindinds"
+    },
+
+    "toggle-panel-pin-binding-keys": {
+        "type": "keybinding",
+        "description": "Toggle Panel Pin State",
+        "default": "",
+        "tooltip": "Set keybinding to pin the panel"
+    },
+    "peek-panel-bindind-keys": {
+        "type": "keybinding",
+        "description": "Peek Hidden Panel",
+        "default": "",
+        "tooltip": "Set keybinding to temporarily show the panel"
+    }
+ }
