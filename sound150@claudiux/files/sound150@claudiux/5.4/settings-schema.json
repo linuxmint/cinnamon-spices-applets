@@ -218,7 +218,7 @@
   },
   "middleClickAction": {
     "type": "combobox",
-    "default": "mute",
+    "default": "out_mute",
     "options": {
       "Toggle Mute": "mute",
       "Toggle Mute output": "out_mute",

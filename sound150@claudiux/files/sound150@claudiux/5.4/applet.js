@@ -2280,6 +2280,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
             this._output.change_is_muted(true);
             this.mute_out_switch.setToggleState(true);
+            this._outputIcon = "audio-volume-muted-symbolic";
+            this.set_applet_icon_symbolic_name(this._outputIcon);
         }
     }
 
@@ -2338,6 +2340,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                     this._output.volume = 0;
                     if (!prev_muted)
                         this._output.change_is_muted(true);
+                    this._outputIcon = "audio-volume-muted-symbolic";
+                    this.set_applet_icon_symbolic_name(this._outputIcon);
                 } else {
                     // 100% is magnetic:
                     if (this.magneticOn === true && this._output.volume != this._volumeNorm && this._output.volume > this._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
@@ -2389,7 +2393,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             let volume = this.volume.slice(0, -1);
             let icon_name = "audio-volume";
             if (volume > 100) icon_name += "-overamplified";
-            else if (volume <1) icon_name += "-muted";
+            else if (volume <1) {
+                icon_name += "-muted";
+                volume = 0;
+                this.volume = "0%";
+            }
             else if (volume < 33) icon_name += "-low";
             else if (volume < 67) icon_name += "-medium";
             else icon_name += "-high";
@@ -2591,6 +2599,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     setAppletIcon(player, path) {
         //~ log("setAppletIcon path:"+path, true);
+        if (this.volume === "0%") {
+            this.setIcon("audio-volume-muted-symbolic", "player-name");
+            return
+        }
         if (path != null) {
             if (path === true) {
                 // Restore the icon path from the saved path.
