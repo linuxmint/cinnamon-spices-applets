@@ -7,7 +7,7 @@
     "unpin-autohide-type": {
         "type": "combobox",
         "description": "Hide Type on Unpin",
-        "default": "intel",
+        "default": "true",
         "options": {
             "Auto Hide": "true",
             "Intelligent Hide": "intel"
