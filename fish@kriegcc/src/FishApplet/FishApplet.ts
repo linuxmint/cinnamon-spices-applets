@@ -15,6 +15,7 @@ import { ErrorIcon } from "utils/icons"
 import {
   expandHomeDir,
   getThemeAppearance,
+  getThemeNodeOfClass,
   isFoolsDay,
   isHorizontalOriented,
   openWebsite,
@@ -37,8 +38,6 @@ const { GLib } = imports.gi
 const Mainloop = imports.mainloop
 
 const FOOLS_DAY_CHECK_INTERVAL_IN_MS = 60000 // 1 minute
-// Margins around the animation in px. Hard-coded for now. See: determineAnimationRenderOptions method
-const ANIMATION_MARGIN = 8
 const FORTUNE_COMMAND = "fortune"
 const DEFAULT_APPLET_CLASS_NAME = "applet-box"
 
@@ -392,22 +391,6 @@ If you prefer not to install any additional packages, you can change the command
 
   // Sets the size of the animation to fit into the panel
   private determineAnimationRenderOptions(): RenderOptions {
-    // TODO: try to read margins from the theme
-    //
-    // The call below causes an error in console: "st_widget_get_theme_node called on the widget [0x5d15a2aab6c0 StBoxLayout.applet-box] which is not in the stage."
-    // const themeNode = this.actor.get_theme_node()
-    // const margin = themeNode.get_horizontal_padding() + themeNode.get_border_width(St.Side.TOP) +  themeNode.get_border_width(St.Side.BOTTOM);
-    // global.log("margin: ", margin)
-    //
-    // With signal "style-changed" it would work, but the signal is triggered with every hover over the applet.
-    // this.actor.connect("style-changed", (actor) => {
-    //   global.log("--> style changed")
-    //   const themeNode = actor.get_theme_node()
-    //   global.log("--> themeNode: ", themeNode)
-    //   const margin = themeNode.get_horizontal_padding() + themeNode.get_border_width(St.Side.TOP) +  themeNode.get_border_width(St.Side.BOTTOM);
-    //   global.log("--> margin: ", margin)
-    // })
-
     let isRotated = this.settingsObject.rotate
     // Guard to allow rotation only on vertical panel (as stated in setting's description). Maybe remove in future.
     if (isRotated && isHorizontalOriented(this.orientation)) {
@@ -418,23 +401,24 @@ If you prefer not to install any additional packages, you can change the command
     let width = undefined
     let rotation: AnimationRotation | undefined = undefined
 
+    const margin = this.getAppletMargin()
     const isInHorizontalPanel = isHorizontalOriented(this.orientation)
 
     if (isInHorizontalPanel) {
       if (isRotated) {
-        width = this.panelHeight - ANIMATION_MARGIN
+        width = this.panelHeight - margin
         height = undefined
       } else {
         width = undefined
-        height = this.panelHeight - ANIMATION_MARGIN
+        height = this.panelHeight - margin
       }
     } else {
       // on a vertical panel
       if (isRotated) {
         width = undefined
-        height = this.panelHeight - ANIMATION_MARGIN
+        height = this.panelHeight - margin
       } else {
-        width = this.panelHeight - ANIMATION_MARGIN
+        width = this.panelHeight - margin
         height = undefined
       }
     }
@@ -647,5 +631,15 @@ If you prefer not to install any additional packages, you can change the command
 
   private isDarkMode(): boolean {
     return getThemeAppearance(DEFAULT_APPLET_CLASS_NAME) === "Dark" ? true : false
+  }
+
+  // reads and calculate margins from active CSS stylesheet, element "applet-box"
+  private getAppletMargin(): number {
+    const themeNode = getThemeNodeOfClass(DEFAULT_APPLET_CLASS_NAME)
+    const margin =
+      themeNode.get_horizontal_padding() +
+      themeNode.get_border_width(imports.gi.St.Side.TOP) +
+      themeNode.get_border_width(imports.gi.St.Side.BOTTOM)
+    return margin
   }
 }

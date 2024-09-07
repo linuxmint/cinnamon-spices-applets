@@ -1139,7 +1139,6 @@ const { themeManager } = imports.ui.main;
 const { GLib: FishApplet_GLib } = imports.gi;
 const Mainloop = imports.mainloop;
 const FOOLS_DAY_CHECK_INTERVAL_IN_MS = 60000;
-const ANIMATION_MARGIN = 8;
 const FORTUNE_COMMAND = "fortune";
 const DEFAULT_APPLET_CLASS_NAME = "applet-box";
 class FishApplet extends Applet {
@@ -1389,24 +1388,25 @@ If you prefer not to install any additional packages, you can change the command
         let height = undefined;
         let width = undefined;
         let rotation = undefined;
+        const margin = this.getAppletMargin();
         const isInHorizontalPanel = isHorizontalOriented(this.orientation);
         if (isInHorizontalPanel) {
             if (isRotated) {
-                width = this.panelHeight - ANIMATION_MARGIN;
+                width = this.panelHeight - margin;
                 height = undefined;
             }
             else {
                 width = undefined;
-                height = this.panelHeight - ANIMATION_MARGIN;
+                height = this.panelHeight - margin;
             }
         }
         else {
             if (isRotated) {
                 width = undefined;
-                height = this.panelHeight - ANIMATION_MARGIN;
+                height = this.panelHeight - margin;
             }
             else {
-                width = this.panelHeight - ANIMATION_MARGIN;
+                width = this.panelHeight - margin;
                 height = undefined;
             }
         }
@@ -1583,6 +1583,13 @@ If you prefer not to install any additional packages, you can change the command
     }
     isDarkMode() {
         return getThemeAppearance(DEFAULT_APPLET_CLASS_NAME) === "Dark" ? true : false;
+    }
+    getAppletMargin() {
+        const themeNode = getThemeNodeOfClass(DEFAULT_APPLET_CLASS_NAME);
+        const margin = themeNode.get_horizontal_padding() +
+            themeNode.get_border_width(imports.gi.St.Side.TOP) +
+            themeNode.get_border_width(imports.gi.St.Side.BOTTOM);
+        return margin;
     }
 }
 
