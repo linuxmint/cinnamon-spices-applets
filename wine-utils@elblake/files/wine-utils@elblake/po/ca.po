@@ -19,45 +19,44 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:50
-#, fuzzy
 msgid "Config"
 msgstr "Configuració"
 
 #. applet.js:51
 msgid "Control Panel"
-msgstr ""
+msgstr "Tauler de Control"
 
 #. applet.js:52
 msgid "Files"
-msgstr ""
+msgstr "Fitxers"
 
 #. applet.js:53
 msgid "Files (winefile)"
-msgstr ""
+msgstr "Fitxers (winefile)"
 
 #. applet.js:54
 msgid "Registry Editor"
-msgstr ""
+msgstr "Editor del Registre"
 
 #. applet.js:55
 msgid "Task Manager"
-msgstr ""
+msgstr "Gestor de Tasques"
 
 #. applet.js:58
 msgid "Bottles"
-msgstr ""
+msgstr "Bottles"
 
 #. applet.js:59
 msgid "Lutris"
-msgstr ""
+msgstr "Lutris"
 
 #. applet.js:60
 msgid "PlayOnLinux"
-msgstr ""
+msgstr "PlayOnLinux"
 
 #. applet.js:61
 msgid "Q4Wine"
-msgstr ""
+msgstr "Q4Wine"
 
 #. metadata.json->name
 #. applet.js:149
@@ -102,11 +101,11 @@ msgstr "General"
 
 #. settings-schema.json->show-launchers->description
 msgid "Show Launchers"
-msgstr ""
+msgstr "Mostrar llançadors"
 
 #. settings-schema.json->show-launchers->tooltip
 msgid "Show some of the Wine launchers if they are installed."
-msgstr ""
+msgstr "Mostra alguns dels llançadors de Wine si estan instal·lats."
 
 #. settings-schema.json->show-run-command->description
 msgid "Show 'Run Command...'"
@@ -150,40 +149,39 @@ msgstr ""
 
 #. settings-schema.json->use-dark-theme-icons->description
 msgid "Use dark theme icons when available."
-msgstr ""
+msgstr "Utilitzar icones del tema fosc quan estiguin disponibles."
 
 #. settings-schema.json->icon-style->description
 msgid "Panel Icon Style"
-msgstr ""
+msgstr "Estil de la icona del tauler"
 
 #. settings-schema.json->icon-style->options
-#, fuzzy
 msgid "default"
-msgstr "Per defecte"
+msgstr "per defecte"
 
 #. settings-schema.json->icon-style->options
 msgid "style 1"
-msgstr ""
+msgstr "estil 1"
 
 #. settings-schema.json->icon-style->options
 msgid "style 2"
-msgstr ""
+msgstr "estil 2"
 
 #. settings-schema.json->icon-style->options
 msgid "style 3"
-msgstr ""
+msgstr "estil 3"
 
 #. settings-schema.json->specify-custom-icon->description
 msgid "Use custom panel icon"
-msgstr ""
+msgstr "Utilitzar una icona del tauler personalitzada"
 
 #. settings-schema.json->specify-custom-icon->tooltip
 msgid "Use a custom icon for the applet."
-msgstr ""
+msgstr "Utilitzeu una icona personalitzada per a la miniaplicació."
 
 #. settings-schema.json->custom-icon->description
 msgid "Custom icon"
-msgstr ""
+msgstr "Icona personalitzada"
 
 #. settings-schema.json->head2->description
 msgid "Advanced"
@@ -262,11 +260,12 @@ msgstr "Error de símbol del sistema"
 #. scripts/version.sh:3
 msgid "Wine could not be found, make sure Wine is installed correctly."
 msgstr ""
+"No s'ha pogut trobar Wine. Assegureu-vos que estigui instal·lat correctament."
 
 #. scripts/version.sh:4
 msgid "Wine Not Found"
-msgstr ""
+msgstr "No s'ha trobat Wine"
 
 #. scripts/version.sh:5
 msgid "Wine version: "
-msgstr ""
+msgstr "Versió de Wine: "
