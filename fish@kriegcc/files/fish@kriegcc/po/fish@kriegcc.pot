@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: fish@kriegcc 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-25 08:44+0200\n"
+"POT-Creation-Date: 2024-09-07 10:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. fish-applet.js:687
+#. fish-applet.js:758
 msgid "Fish Applet"
 msgstr ""
 
-#. fish-applet.js:777
+#. fish-applet.js:815
+msgid "There's something fishy going on here:"
+msgstr ""
+
+#. fish-applet.js:856
+msgid "Copy Error Messages"
+msgstr ""
+
+#. fish-applet.js:859
+msgid "Copy Error Message"
+msgstr ""
+
+#. fish-applet.js:875 fish-applet.js:1365
+msgid "Open Preferences"
+msgstr ""
+
+#. fish-applet.js:887
+msgid "Errors copied to the clipboard"
+msgstr ""
+
+#. fish-applet.js:890
+msgid "Error copied to the clipboard"
+msgstr ""
+
+#. fish-applet.js:963
 msgid "Copy Message"
 msgstr ""
 
-#. fish-applet.js:789
+#. fish-applet.js:975
 msgid "Speak again"
 msgstr ""
 
-#. fish-applet.js:794
+#. fish-applet.js:980
 msgid "Close"
 msgstr ""
 
-#. fish-applet.js:814
+#. fish-applet.js:1000
 #, javascript-format
 msgid "%s the Fish Says:"
 msgstr ""
 
-#. fish-applet.js:822
+#. fish-applet.js:1008
 msgid "Message copied to the clipboard"
 msgstr ""
 
-#. fish-applet.js:875
-msgid "There's something fishy going on here:"
-msgstr ""
-
-#. fish-applet.js:916
-msgid "Copy Error Messages"
-msgstr ""
-
-#. fish-applet.js:919
-msgid "Copy Error Message"
-msgstr ""
-
-#. fish-applet.js:935 fish-applet.js:1243
-msgid "Open Preferences"
-msgstr ""
-
-#. fish-applet.js:947
-msgid "Errors copied to the clipboard"
-msgstr ""
-
-#. fish-applet.js:950
-msgid "Error copied to the clipboard"
-msgstr ""
-
-#. fish-applet.js:984
+#. fish-applet.js:1036
 msgid "The water needs changing"
 msgstr ""
 
-#. fish-applet.js:989
+#. fish-applet.js:1041
 msgid "Look at today's date!"
 msgstr ""
 
-#. fish-applet.js:1206
+#. fish-applet.js:1328
 #, javascript-format
 msgid "%s the Fish, the fortune teller"
 msgstr ""
 
-#. fish-applet.js:1223
+#. fish-applet.js:1345
 #, javascript-format
 msgid ""
 "Warning: The command appears to be something actually useful. \n"
@@ -88,7 +88,7 @@ msgid ""
 "applet \"practical\" or useful."
 msgstr ""
 
-#. fish-applet.js:1231
+#. fish-applet.js:1353
 msgid ""
 "Normally, the Fish's wisdom is derived from the 'fortune' command-line "
 "utility. \n"
@@ -99,19 +99,19 @@ msgid ""
 "command in the applet's settings."
 msgstr ""
 
-#. fish-applet.js:1239
+#. fish-applet.js:1361
 msgid "Open Documentation"
 msgstr ""
 
-#. ImageChooser.py:59
+#. ImageChooser.py:56
 msgid "File"
 msgstr ""
 
-#. ImageChooser.py:64
+#. ImageChooser.py:61
 msgid "Select an animation"
 msgstr ""
 
-#. ImageChooser.py:69
+#. ImageChooser.py:66
 msgid "Images"
 msgstr ""
 
