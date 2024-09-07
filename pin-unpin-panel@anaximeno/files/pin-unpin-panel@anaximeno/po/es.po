@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-06 05:44-0100\n"
+"POT-Creation-Date: 2024-09-07 10:57-0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -70,7 +70,7 @@ msgid "Unpin Icon"
 msgstr "Icono de desanclar"
 
 #. 5.4->settings-schema.json->key-bindings->description
-msgid "Key Bindinds"
+msgid "Key Bindings"
 msgstr "Combinaciones de teclas"
 
 #. 5.4->settings-schema.json->toggle-panel-pin-binding-keys->description

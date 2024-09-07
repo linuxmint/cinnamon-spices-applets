@@ -39,7 +39,7 @@
 
     "key-bindings": {
         "type": "section",
-        "description": "Key Bindinds"
+        "description": "Key Bindings"
     },
 
     "toggle-panel-pin-binding-keys": {
