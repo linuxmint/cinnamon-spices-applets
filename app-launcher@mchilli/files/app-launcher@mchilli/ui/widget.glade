@@ -206,6 +206,9 @@
             <property name="label" translatable="yes">save</property>
             <property name="icon-name">gtk-save</property>
             <signal name="clicked" handler="on_save_list" swapped="no"/>
+            <style>
+              <class name="suggested-action"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>

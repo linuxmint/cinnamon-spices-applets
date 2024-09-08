@@ -30,6 +30,11 @@ class CustomAppList(SettingsWidget):
 
         self.saved_configuration = True
 
+        provider = Gtk.CssProvider()
+        provider.load_from_path(os.path.join(APPLET_DIR, "ui", "style.css"))
+        context = Gtk.StyleContext()
+        context.add_provider_for_screen(Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+
         self.builder = Gtk.Builder()
         self.builder.add_from_file(os.path.join(APPLET_DIR, "ui", "widget.glade"))
         
