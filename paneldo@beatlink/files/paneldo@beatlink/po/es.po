@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# PANELDO
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# beatlink, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: paneldo@beatlink 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"POT-Creation-Date: 2024-09-08 08:07-0400\n"
 "PO-Revision-Date: 2024-04-12 22:07-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:59
+msgid "Edit Todos"
+msgstr ""
+
+#. applet.js:63
+msgid "Toggle Reminders"
+msgstr ""
 
 #. metadata.json->description
 msgid "Panel based quick todo applet for Cinnamon"
@@ -49,10 +57,13 @@ msgstr "El texto agregado al final de cada mensaje del panel"
 msgid "The width of the panel text in characters"
 msgstr "El ancho del texto del panel en caracteres"
 
+#. settings-schema.json->reminder_enabled->description
+msgid "Sets whether the reminder flashes are enabled or not"
+msgstr ""
+
 #. settings-schema.json->reminder_delay->description
-msgid ""
-"How often (in seconds) to flash the applet periodically for reminders. Set "
-"to 0 to disable"
+#, fuzzy
+msgid "How often (in seconds) to flash the applet periodically for reminders."
 msgstr ""
 "Con qué frecuencia (en segundos) actualizar periódicamente el subprograma "
 "para recibir recordatorios. Establecer en 0 para desactivar"
