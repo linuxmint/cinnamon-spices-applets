@@ -1,0 +1,349 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["settings", "light-mode", "dark-mode"],
+        "settings": {
+            "type": "page",
+            "title": "Settings",
+            "sections": [
+                "settings_state",
+                "settings_control",
+                "settings_location"
+            ]
+        },
+        "light-mode": {
+            "type": "page",
+            "title": "Light mode",
+            "sections": [
+                "light-mode_themes",
+                "light-mode_other",
+                "light-mode_background"
+            ]
+        },
+        "dark-mode": {
+            "type": "page",
+            "title": "Dark mode",
+            "sections": [
+                "dark-mode_themes",
+                "dark-mode_other",
+                "dark-mode_background"
+            ]
+        },
+
+        "settings_state": {
+            "type": "section",
+            "title": "State",
+            "keys": ["settings_state_switch_dark-mode"]
+        },
+        "settings_control": {
+            "type": "section",
+            "title": "Control",
+            "keys": ["settings_control_switch_auto-mode"]
+        },
+        "settings_location": {
+            "dependency": "settings_control_switch_auto-mode=true",
+            "type": "section",
+            "title": "Location",
+            "keys": [
+                "settings_location_switch_sync-from-timezone",
+                "settings_location_button_open-os-settings",
+                "settings_location_entry_latitude",
+                "settings_location_entry_longitude",
+                "settings_location_button_show-twilight-times"
+            ]
+        },
+        "light-mode_themes": {
+            "type": "section",
+            "title": "Themes",
+            "keys": [
+                "light-mode_themes_button_open-os-settings",
+                "light-mode_themes_button_detect",
+                "light-mode_themes_entry_mouse-pointer",
+                "light-mode_themes_entry_applications",
+                "light-mode_themes_entry_icons",
+                "light-mode_themes_entry_desktop",
+                "light-mode_themes_button_apply"
+            ]
+        },
+        "light-mode_other": {
+            "type": "section",
+            "title": "Other",
+            "keys": ["both-modes_background_switch_enable"]
+        },
+        "light-mode_background": {
+            "dependency": "both-modes_background_switch_enable=true",
+            "type": "section",
+            "title": "Desktop background",
+            "keys": [
+                "light-mode_background_button_open-os-settings",
+                "light-mode_background_button_detect",
+                "light-mode_background_switch_slideshow",
+                "light-mode_background_filechooser_file",
+                "light-mode_background_filechooser_folder",
+                "light-mode_background_button_apply"
+            ]
+        },
+        "dark-mode_themes": {
+            "type": "section",
+            "title": "Themes",
+            "keys": [
+                "dark-mode_themes_button_open-os-settings",
+                "dark-mode_themes_button_detect",
+                "dark-mode_themes_entry_mouse-pointer",
+                "dark-mode_themes_entry_applications",
+                "dark-mode_themes_entry_icons",
+                "dark-mode_themes_entry_desktop",
+                "dark-mode_themes_button_apply"
+            ]
+        },
+        "dark-mode_other": {
+            "type": "section",
+            "title": "Other",
+            "keys": ["both-modes_background_switch_enable"]
+        },
+        "dark-mode_background": {
+            "dependency": "both-modes_background_switch_enable=true",
+            "type": "section",
+            "title": "Desktop background",
+            "keys": [
+                "dark-mode_background_button_open-os-settings",
+                "dark-mode_background_button_detect",
+                "dark-mode_background_switch_slideshow",
+                "dark-mode_background_filechooser_file",
+                "dark-mode_background_filechooser_folder",
+                "dark-mode_background_button_apply"
+            ]
+        }
+    },
+
+    "settings_control_switch_auto-mode": {
+        "type": "switch",
+        "default": false,
+        "description": "Automatically switch modes",
+        "tooltip": "Automatically switch between light and dark modes based on the location and time of day"
+    },
+    "settings_state_switch_dark-mode": {
+        "type": "switch",
+        "default": false,
+        "description": "Light/dark mode",
+        "tooltip": "Toggle light or dark mode manually"
+    },
+    "settings_state_is-auto-mode-inverted": {
+        "type": "generic",
+        "default": false
+    },
+    "settings_location_switch_sync-from-timezone": {
+        "type": "switch",
+        "default": true,
+        "description": "Sync from the system",
+        "tooltip": "Dynamically sync the location coordinates from the region and city defined in the system using a local database"
+    },
+    "settings_location_button_open-os-settings": {
+        "dependency": "settings_location_switch_sync-from-timezone=true",
+        "type": "button",
+        "callback": "on_button_open_os_date_time_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to select the region and city for the time zone"
+    },
+    "settings_location_entry_latitude": {
+        "dependency": "settings_location_switch_sync-from-timezone!=true",
+        "type": "entry",
+        "default": "0.0",
+        "description": "Latitude",
+        "tooltip": "Geographical latitude in decimal degrees"
+    },
+    "settings_location_entry_longitude": {
+        "dependency": "settings_location_switch_sync-from-timezone!=true",
+        "type": "entry",
+        "default": "0.0",
+        "description": "Longitude",
+        "tooltip": "Geographical longitude in decimal degrees"
+    },
+    "settings_location_button_show-twilight-times": {
+        "type": "button",
+        "callback": "on_button_show_start_times",
+        "description": "Check today's switch times in a notification",
+        "tooltip": "Show today's switch times for light and dark modes based on the current location via a system notification message"
+    },
+    "light-mode_themes_button_open-os-settings": {
+        "type": "button",
+        "callback": "on_button_open_os_themes_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to select the themes"
+    },
+    "light-mode_themes_button_detect": {
+        "type": "button",
+        "callback": "on_button_detect_themes_light",
+        "description": "Detect from the system",
+        "tooltip": "Detect the system's themes currently set and assign them to the light mode"
+    },
+    "light-mode_themes_entry_mouse-pointer": {
+        "type": "entry",
+        "default": "",
+        "description": "Mouse pointer",
+        "tooltip": "Name of the mouse pointer theme"
+    },
+    "light-mode_themes_entry_applications": {
+        "type": "entry",
+        "default": "",
+        "description": "Applications",
+        "tooltip": "Name of the applications theme (GTK theme)"
+    },
+    "light-mode_themes_entry_icons": {
+        "type": "entry",
+        "default": "",
+        "description": "Icons",
+        "tooltip": "Name of the icons theme"
+    },
+    "light-mode_themes_entry_desktop": {
+        "type": "entry",
+        "default": "",
+        "description": "Desktop",
+        "tooltip": "Name of the desktop theme (Cinnamon theme)"
+    },
+    "light-mode_themes_button_apply": {
+        "type": "button",
+        "callback": "on_button_apply_themes_light",
+        "description": "Apply to the system",
+        "tooltip": "Apply the light mode themes to the system manually"
+    },
+    "both-modes_background_switch_enable": {
+        "type": "switch",
+        "default": false,
+        "description": "Set desktop background",
+        "tooltip": "Set desktop background for light and dark modes"
+    },
+    "light-mode_background_button_open-os-settings": {
+        "type": "button",
+        "callback": "on_button_open_os_background_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to set the background settings"
+    },
+    "light-mode_background_button_detect": {
+        "type": "button",
+        "callback": "on_button_detect_background_light",
+        "description": "Detect from the system",
+        "tooltip": "Detect the system's background settings currently set and assign them to the light mode"
+    },
+    "light-mode_background_switch_slideshow": {
+        "type": "switch",
+        "default": false,
+        "description": "Slideshow",
+        "tooltip": "Set the desktop background to be a slideshow"
+    },
+    "light-mode_background_filechooser_file": {
+        "dependency": "light-mode_background_switch_slideshow!=true",
+        "type": "filechooser",
+        "default": "",
+        "description": "Image file",
+        "tooltip": "Image file to be set as the desktop background"
+    },
+    "light-mode_background_filechooser_folder": {
+        "dependency": "light-mode_background_switch_slideshow=true",
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Images folder",
+        "tooltip": "Folder containing images to be set for the desktop background slideshow"
+    },
+    "light-mode_background_button_apply": {
+        "type": "button",
+        "callback": "on_button_apply_background_light",
+        "description": "Apply to the system",
+        "tooltip": "Apply the light mode background settings to the system manually"
+    },
+    "dark-mode_themes_button_open-os-settings": {
+        "type": "button",
+        "callback": "on_button_open_os_themes_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to select the themes"
+    },
+    "dark-mode_themes_button_detect": {
+        "type": "button",
+        "callback": "on_button_detect_themes_dark",
+        "description": "Detect from the system",
+        "tooltip": "Detect the system's themes currently set and assign them to the dark mode"
+    },
+    "dark-mode_themes_entry_mouse-pointer": {
+        "type": "entry",
+        "default": "",
+        "description": "Mouse pointer",
+        "tooltip": "Name of the mouse pointer theme"
+    },
+    "dark-mode_themes_entry_applications": {
+        "type": "entry",
+        "default": "",
+        "description": "Applications",
+        "tooltip": "Name of the applications theme (GTK theme)"
+    },
+    "dark-mode_themes_entry_icons": {
+        "type": "entry",
+        "default": "",
+        "description": "Icons",
+        "tooltip": "Name of the icons theme"
+    },
+    "dark-mode_themes_entry_desktop": {
+        "type": "entry",
+        "default": "",
+        "description": "Desktop",
+        "tooltip": "Name of the desktop theme (Cinnamon theme)"
+    },
+    "dark-mode_themes_button_apply": {
+        "type": "button",
+        "callback": "on_button_apply_themes_dark",
+        "description": "Apply to the system",
+        "tooltip": "Apply the dark mode themes to the system manually"
+    },
+    "dark-mode_background_button_open-os-settings": {
+        "type": "button",
+        "callback": "on_button_open_os_background_settings",
+        "description": "Open the system settings",
+        "tooltip": "Open the system's settings window to set the background settings"
+    },
+    "dark-mode_background_button_detect": {
+        "type": "button",
+        "callback": "on_button_detect_background_dark",
+        "description": "Detect from the system",
+        "tooltip": "Detect the system's background settings currently set and assign them to the dark mode"
+    },
+    "dark-mode_background_switch_slideshow": {
+        "type": "switch",
+        "default": false,
+        "description": "Slideshow",
+        "tooltip": "Set the desktop background to be a slideshow"
+    },
+    "dark-mode_background_filechooser_file": {
+        "dependency": "dark-mode_background_switch_slideshow!=true",
+        "type": "filechooser",
+        "default": "",
+        "description": "Image file",
+        "tooltip": "Image file to be set as the desktop background"
+    },
+    "dark-mode_background_filechooser_folder": {
+        "dependency": "dark-mode_background_switch_slideshow=true",
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Images folder",
+        "tooltip": "Folder containing images to be set for the desktop background slideshow"
+    },
+    "dark-mode_background_button_apply": {
+        "type": "button",
+        "callback": "on_button_apply_background_dark",
+        "description": "Apply to the system",
+        "tooltip": "Apply the dark mode background settings to the system manually"
+    },
+
+    "has-detected-themes-light": {
+        "type": "generic",
+        "default": false
+    },
+    "has-detected-themes-dark": {
+        "type": "generic",
+        "default": false
+    },
+    "timer-absolute-set-timeout": {
+        "type": "generic",
+        "default": 0
+    }
+}

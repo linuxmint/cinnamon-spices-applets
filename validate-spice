@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import glob
 import json
 import os
 import sys
@@ -27,6 +28,15 @@ def validate_xlet(uuid):
         for file in ["info.json", "screenshot.png", "files/%s/metadata.json" % uuid, "files/%s/icon.png" % uuid]:
             if not os.path.exists(file):
                 raise CheckError("[%s] Missing file: %s" % (uuid, file))
+
+        # Check if there are any improperly placed files
+        for file in glob.glob("*"):
+            if file.endswith(".po") or file.endswith(".pot"):
+                raise CheckError(f"[{uuid}] Invalid location for translation files!")
+
+        # Check if there is an improperly duplicated file
+        if len(glob.glob("files/*/po/*.pot")) > 1:
+            raise CheckError(f"[{uuid}] Too many .pot files!")
 
         found = False
         for root, dirs, files in os.walk("files/%s" % uuid):

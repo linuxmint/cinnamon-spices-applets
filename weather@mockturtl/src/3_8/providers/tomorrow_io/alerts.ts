@@ -32,6 +32,9 @@ export interface TomorrowIoAlert {
 		link: string;
 		distance: number;
 		direction: number;
+		location: {
+			coordinates: [[number, number][]];
+		}
 	}
 }
 

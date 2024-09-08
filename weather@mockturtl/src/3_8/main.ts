@@ -182,17 +182,18 @@ export class WeatherApplet extends TextIconApplet {
 		try {
 			this.encounteredError = false;
 
+			this.EnsureProvider();
+			if (this.provider == null) {
+				return RefreshState.Error;
+			}
+
 			if (!location) {
-				location = await this.config.GetLocation(cancellable);
+				location = await this.config.GetLocation(cancellable, this.provider);
 				if (!location) {
 					return RefreshState.NoLocation;
 				}
 			}
 
-			this.EnsureProvider();
-			if (this.provider == null) {
-				return RefreshState.Error;
-			}
 
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
@@ -621,6 +622,7 @@ The contents of the file saved from the applet help page goes here
 		"unusual payload": _("Service Error"),
 		"import error": _("Missing Packages"),
 		"location not covered": _("Location not covered"),
+		"location service blocked": _("Location Service Blocked")
 	}
 
 	public ShowError(error: AppletError): void {

@@ -204,6 +204,7 @@
 			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather",
+			"Swiss Météo (Switzerland only)": "Swiss Meteo",
 			"OpenWeatherMap OneCall (key needed)": "OpenWeatherMap_OneCall",
 			"Pirate Weather (key needed)": "PirateWeather",
 			"Visual Crossing (key needed)": "Visual Crossing",
@@ -230,7 +231,7 @@
 		"default": "London,UK",
 		"dependency": "manualLocation",
 		"description": "Location",
-		"tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
+		"tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice. Powered by nominatim.openstreetmap.org."
 	},
 	"locationDescription": {
 		"type": "label",
