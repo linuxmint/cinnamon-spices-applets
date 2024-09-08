@@ -6,22 +6,27 @@ from contextlib import contextmanager
 import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")
-from gi.repository import Gio, Gtk, Gdk, GLib
+gi.require_version("XApp", "1.0")
+from gi.repository import Gio, Gtk, Gdk, GdkPixbuf, GLib, XApp
 
 UUID = 'app-launcher@mchilli'
 APP_NAME = "App Launcher"
 APPLET_DIR = os.path.join(os.path.dirname(__file__))
 
+DEFAULT_APP_ICON = "application-x-executable"
+DEFAULT_FOLDER_ICON = "folder"
+
 class EditDialog():
     def __init__(self, variant, groups, item=None):
         self.groups = groups
         self.variant = variant
+        self.item = item
         if self.variant == 'edit' and item:
-            self.item = item
             self.type = self.item[0]['type']
         else:
             self.type = self.variant
         
+        self.icon_string = DEFAULT_FOLDER_ICON if self.type == "group" else DEFAULT_APP_ICON
         self.name_origin = ''
         self.new_group = None
 
@@ -56,10 +61,7 @@ class EditDialog():
         if self.variant == 'edit':
             self.name_entry.set_text(self.item[2])
             self.name_origin = self.item[2]
-            try:
-                self.icon_entry.set_icon(self.item[1].to_string()) #Used from Settings widget
-            except:
-                self.icon_entry.set_icon(self.item[1]) #Used from JS Applet
+            self._set_icon(self.item[1])
             if self.type == 'app':
                 self.group_entry.set_active_id(self.item[0]["group"])
                 self.command_entry.set_text(self.item[3])
@@ -76,7 +78,7 @@ class EditDialog():
         values = {
                 "type": self.type,
                 "name": self.name_entry.get_text(),
-                "icon": self.icon_entry.get_icon()
+                "icon": self._get_icon()
             }
         
         if self.type == 'app':
@@ -93,6 +95,50 @@ class EditDialog():
         hints.max_height = rect.height
         mask = Gdk.WindowHints.MAX_SIZE
         widget.set_geometry_hints(None, hints, mask)
+
+    def on_choose_icon(self, *args):
+        ''' Opens an icon chooser dialog, allowing the user to select an icon
+            If an item exists, its current icon is pre-selected in the dialog
+        '''
+        dialog = XApp.IconChooserDialog()
+        dialog.set_transient_for(self.dialog)
+        dialog.set_modal(True)
+
+        if self.item:
+            icon_string = self.item[1]
+            if hasattr(icon_string, 'to_string'):
+                # is an object when opened from Settingswidget else string
+                icon_string = icon_string.to_string()
+
+            response = dialog.run_with_icon(icon_string)
+        else:
+            response = dialog.run()
+
+        if response == Gtk.ResponseType.OK:
+            self._set_icon(dialog.get_icon_string())
+    
+    def _set_icon(self, icon_string):
+        ''' Sets the icon for the widget based on the provided icon_string
+            If the icon_string is a file path, it loads the image from the file
+            Otherwise, it sets the icon using the icon theme's icon name
+        '''
+        if hasattr(icon_string, 'to_string'):
+            # is an object when opened from Settingswidget else string
+            icon_string = icon_string.to_string()
+
+        self.icon_string = icon_string
+
+        if icon_string.startswith("/"):
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(icon_string, 48, 48)
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.dialog.get_scale_factor(), None)
+            self.icon_entry.set_from_surface(surface)
+        else:
+            self.icon_entry.set_from_icon_name(icon_string, Gtk.IconSize.DIALOG)
+
+    def _get_icon(self):
+        ''' Returns the current icon string
+        '''
+        return self.icon_string
 
     def on_open_filechooser(self, *args):
         dialog = Gtk.FileChooserDialog(
@@ -130,10 +176,10 @@ class EditDialog():
                     if self.name_entry.get_text() != data['Name']:
                         import_data['Name'] = (self.name_entry.get_text(), data['Name'])
                 if 'Icon' in data:
-                    if self.icon_entry.get_icon() == 'application-x-executable':
-                        self.icon_entry.set_icon(data['Icon'])
-                    if self.icon_entry.get_icon() != data['Icon']:
-                        import_data['Icon'] = (self.icon_entry.get_icon(), data['Icon'])
+                    if self._get_icon() == DEFAULT_APP_ICON:
+                        self._set_icon(data['Icon'])
+                    if self._get_icon() != data['Icon']:
+                        import_data['Icon'] = (self._get_icon(), data['Icon'])
                 if 'Exec' in data:
                     if self.command_entry.get_text() == '':
                         self.command_entry.set_text(data['Exec'])
@@ -145,7 +191,7 @@ class EditDialog():
                     data = dialog.run()
                     if data:
                         if 'Name' in data: self.name_entry.set_text(data['Name'])
-                        if 'Icon' in data: self.icon_entry.set_icon(data['Icon'])
+                        if 'Icon' in data: self._set_icon(data['Icon'])
                         if 'Exec' in data: self.command_entry.set_text(data['Exec'])
 
             else:    
@@ -154,7 +200,7 @@ class EditDialog():
                 else:
                     mimetype, val = Gio.content_type_guess(filename=file, data=None)
                     icon = Gio.content_type_get_generic_icon_name(mimetype)
-                    self.icon_entry.set_icon(icon)
+                    self._set_icon(icon)
                     
                     self.command_entry.set_text(f'xdg-open {file}')
         else:
