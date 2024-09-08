@@ -1,13 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# This file is put in the public domain.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: app-launcher@mchilli 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-02-05 14:46-0500\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-05 14:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,94 +29,114 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: applet.js:739 applet.js:1033
+#: applet.js:739 applet.js:1033 dialogs.py:38 dialogs.py:247
 msgid "Cancel"
+msgstr ""
+
+#: dialogs.py:36 dialogs.py:246
+msgid "OK"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
+#: dialogs.py:39 widgets.py:43
 msgid "Name"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:51 dialogs.glade:104
+#: dialogs.py:45
 msgid "Group"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:52 widgets.py:43 dialogs.glade:115
+#: dialogs.py:46 widgets.py:44
 msgid "Command"
 msgstr ""
 
-#: dialogs.py:203
+#: dialogs.py:190
 msgid "The name cannot be empty"
 msgstr ""
 
-#: dialogs.py:208
+#: dialogs.py:195
 msgid "The name is already used"
 msgstr ""
 
-#: dialogs.py:215
+#: dialogs.py:202
 msgid "Valid name"
 msgstr ""
 
-#: dialogs.py:221
+#: dialogs.py:208
 msgid "Valid command"
 msgstr ""
 
-#: dialogs.py:224
+#: dialogs.py:211
 msgid "The command is not valid"
 msgstr ""
 
-#: dialogs.py:236
+#: dialogs.py:245
 msgid "Which data should be replaced from *.desktop file?"
 msgstr ""
 
-#: dialogs.py:281 dialogs.glade:561
+#: dialogs.py:289
 msgid "really delete?"
+msgstr ""
+
+#: dialogs.py:290
+msgid "No"
+msgstr ""
+
+#: dialogs.py:291
+msgid "Yes"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:29
+#: widgets.py:42
 msgid "Icon"
 msgstr ""
 
-#: widgets.py:125
+#: widgets.py:47
 msgid "Add application"
 msgstr ""
 
-#: widgets.py:126
+#: widgets.py:48
 msgid "Add new entry"
 msgstr ""
 
-#: widgets.py:130
+#: widgets.py:51
 msgid "Add separator"
 msgstr ""
 
-#: widgets.py:138
-msgid "Remove selected entry"
-msgstr ""
-
-#: widgets.py:144
+#: widgets.py:54
 msgid "Edit selected entry"
 msgstr ""
 
-#: widgets.py:150
+#: widgets.py:57
 msgid "Duplicate selected entry"
 msgstr ""
 
-#: widgets.py:156
+#: widgets.py:60
 msgid "Move selected entry up"
 msgstr ""
 
-#: widgets.py:162
+#: widgets.py:63
 msgid "Move selected entry down"
 msgstr ""
 
-#: widgets.py:323
+#: widgets.py:66
+msgid "Remove selected entry"
+msgstr ""
+
+#: widgets.py:69
+msgid "Save?"
+msgstr ""
+
+#: widgets.py:70
+msgid "Save the current configuration"
+msgstr ""
+
+#: widgets.py:257
 msgid "Separator"
 msgstr ""
 

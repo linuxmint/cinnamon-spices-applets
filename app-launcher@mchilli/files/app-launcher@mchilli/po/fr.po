@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-02-05 14:46-0500\n"
-"PO-Revision-Date: 2023-04-14 17:45+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-05 14:38+0200\n"
+"PO-Revision-Date: 2024-09-05 17:19+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:108
 msgid "Edit Applications"
@@ -30,94 +30,115 @@ msgstr "Supprimer"
 msgid "Edit"
 msgstr "Modifier"
 
-#: applet.js:739 applet.js:1033
+#: applet.js:739 applet.js:1033 dialogs.py:38 dialogs.py:247
 msgid "Cancel"
 msgstr "Abandon"
 
+#: dialogs.py:36 dialogs.py:246
+msgid "OK"
+msgstr "OK"
+
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
+#: dialogs.py:39 widgets.py:43
 msgid "Name"
 msgstr "Nom"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:51 dialogs.glade:104
+#: dialogs.py:45
 msgid "Group"
 msgstr "Groupe"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:52 widgets.py:43 dialogs.glade:115
+#: dialogs.py:46 widgets.py:44
 msgid "Command"
 msgstr "Commande"
 
-#: dialogs.py:203
+#: dialogs.py:190
 msgid "The name cannot be empty"
 msgstr "Le nom ne peut pas être vide"
 
-#: dialogs.py:208
+#: dialogs.py:195
 msgid "The name is already used"
 msgstr "Le nom est déjà utilisé"
 
-#: dialogs.py:215
+#: dialogs.py:202
 msgid "Valid name"
 msgstr "Nom valide"
 
-#: dialogs.py:221
+#: dialogs.py:208
 msgid "Valid command"
 msgstr "Commande valide"
 
-#: dialogs.py:224
+#: dialogs.py:211
 msgid "The command is not valid"
 msgstr "La commande est invalide"
 
-#: dialogs.py:236
+#: dialogs.py:245
 msgid "Which data should be replaced from *.desktop file?"
-msgstr "Quelles données doivent être remplacées à partir du fichier *.desktop ?"
+msgstr ""
+"Quelles données doivent être remplacées à partir du fichier *.desktop ?"
 
-#: dialogs.py:281 dialogs.glade:561
+#: dialogs.py:289
 msgid "really delete?"
 msgstr "supprimer vraiment ?"
+
+#: dialogs.py:290
+msgid "No"
+msgstr "Non"
+
+#: dialogs.py:291
+msgid "Yes"
+msgstr "Oui"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:29
+#: widgets.py:42
 msgid "Icon"
 msgstr "Icône"
 
-#: widgets.py:125
+#: widgets.py:47
 msgid "Add application"
 msgstr "Ajouter une application"
 
-#: widgets.py:126
+#: widgets.py:48
 msgid "Add new entry"
 msgstr "Ajouter une nouvelle entrée"
 
-#: widgets.py:130
+#: widgets.py:51
 msgid "Add separator"
 msgstr "Ajouter un séparateur"
 
-#: widgets.py:138
-msgid "Remove selected entry"
-msgstr "Supprimer l'entrée sélectionnée"
-
-#: widgets.py:144
+#: widgets.py:54
 msgid "Edit selected entry"
 msgstr "Modifier l'entrée sélectionnée"
 
-#: widgets.py:150
+#: widgets.py:57
 msgid "Duplicate selected entry"
 msgstr "Dupliquer l'entrée sélectionnée"
 
-#: widgets.py:156
+#: widgets.py:60
 msgid "Move selected entry up"
 msgstr "Monter l'entrée sélectionnée"
 
-#: widgets.py:162
+#: widgets.py:63
 msgid "Move selected entry down"
 msgstr "Descendre l'entrée sélectionnée"
 
-#: widgets.py:323
+#: widgets.py:66
+msgid "Remove selected entry"
+msgstr "Supprimer l'entrée sélectionnée"
+
+#: widgets.py:69
+msgid "Save?"
+msgstr "Sauver?"
+
+#: widgets.py:70
+msgid "Save the current configuration"
+msgstr "Sauvegarder la configuration actuelle"
+
+#: widgets.py:257
 msgid "Separator"
 msgstr "Séparateur"
 
@@ -188,7 +209,9 @@ msgstr "Largeur fixe du menu"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr "Basé sur le plus grand élément de sous-menu, pour éviter tout scintillement dû à la largeur du menu"
+msgstr ""
+"Basé sur le plus grand élément de sous-menu, pour éviter tout scintillement "
+"dû à la largeur du menu"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"
