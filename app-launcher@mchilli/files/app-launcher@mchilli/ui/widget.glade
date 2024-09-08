@@ -199,6 +199,21 @@
           </packing>
         </child>
         <child>
+          <object class="GtkToolButton" id="cancel_button">
+            <property name="visible">True</property>
+            <property name="sensitive">False</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">cancel</property>
+            <property name="use-underline">True</property>
+            <property name="icon-name">gtk-cancel</property>
+            <signal name="clicked" handler="on_cancel_changes" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="homogeneous">True</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkToolButton" id="save_button">
             <property name="visible">True</property>
             <property name="sensitive">False</property>

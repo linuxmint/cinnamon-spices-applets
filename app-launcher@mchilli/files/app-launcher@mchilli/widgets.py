@@ -7,7 +7,6 @@ from JsonSettingsWidgets import *
 
 import gi
 gi.require_version("Gtk", "3.0")
-gi.require_version('XApp', '1.0')
 from gi.repository import GLib, Gio, Gtk, Gdk
 
 UUID = 'app-launcher@mchilli'
@@ -69,6 +68,9 @@ class CustomAppList(SettingsWidget):
 
         self.remove_button = self.builder.get_object("remove_button")
         self.remove_button.set_tooltip_text(_("Remove selected entry"))
+
+        self.cancel_button = self.builder.get_object("cancel_button")
+        self.cancel_button.set_tooltip_text(_("Cancel"))
 
         self.save_button = self.builder.get_object("save_button")
         self.save_button.set_label(_("Save?"))
@@ -170,7 +172,7 @@ class CustomAppList(SettingsWidget):
         if new_group and parent:
             self.tree_view.expand_row(self.tree_store.get_path(parent), True)
 
-        self._configuration_changed()
+        self._configuration_changed(True)
 
     def _prepare_store_entry(self, entry_type, entry_data):
         ''' Creates a formatted store entry based on the entry type and provided data
@@ -220,7 +222,7 @@ class CustomAppList(SettingsWidget):
         }
         self.tree_store.append(None, self._prepare_store_entry('separator', data))
 
-        self._configuration_changed()
+        self._configuration_changed(True)
 
     def _choose_separator_color(self, rgb=[127, 127, 127]):
         ''' Opens a color chooser dialog and returns the selected color as an RGB list
@@ -276,7 +278,7 @@ class CustomAppList(SettingsWidget):
         else:
             self._remove_item_and_cleanup_parent(item_iter)
         
-        self._configuration_changed()
+        self._configuration_changed(True)
 
     def _move_children_to_root(self, item_iter):
         ''' Moves children of a deleted group element to the root level
@@ -354,7 +356,7 @@ class CustomAppList(SettingsWidget):
                 self.groups[data["name"]] = self.groups.pop(
                     group_origin, None)
             
-            self._configuration_changed()
+            self._configuration_changed(True)
                 
         # edit a separator
         elif item_type == 'separator':
@@ -366,7 +368,7 @@ class CustomAppList(SettingsWidget):
             self.tree_store[item_iter][0]['color'] = rgb
             self.tree_store[item_iter][2] = self._create_separator_markup(rgb)
 
-            self._configuration_changed()
+            self._configuration_changed(True)
 
     def on_duplicate_item(self, *args):
         ''' Duplicates the currently selected item in the tree view
@@ -380,7 +382,7 @@ class CustomAppList(SettingsWidget):
         self.tree_store.insert_after(parent, item_iter, list(item_data))
 
         self._update_button_sensitivity()
-        self._configuration_changed()
+        self._configuration_changed(True)
 
     def on_move_item_up(self, *args):
         ''' Moves the selected item in the tree view up by one position
@@ -390,7 +392,7 @@ class CustomAppList(SettingsWidget):
         self.tree_store.swap(item_iter, self.tree_store.iter_previous(item_iter))
 
         self._update_button_sensitivity()
-        self._configuration_changed()
+        self._configuration_changed(True)
 
     def on_move_item_down(self, *args):
         ''' Moves the selected item in the tree view down by one position
@@ -400,7 +402,7 @@ class CustomAppList(SettingsWidget):
         self.tree_store.swap(item_iter, self.tree_store.iter_next(item_iter))
 
         self._update_button_sensitivity()
-        self._configuration_changed()
+        self._configuration_changed(True)
 
     def _valid_backup_restore(self, key, changed_entries):
         ''' restore list only if there are changes between internally 
@@ -417,17 +419,24 @@ class CustomAppList(SettingsWidget):
         if not changed_entries == compared_to:
             self._restore_list()
 
-    def _configuration_changed(self):
-        ''' Marks the configuration as changed and enabling the save button.
+    def _configuration_changed(self, changed):
+        ''' Marks the configuration as changed and set the state of the save and cancel button.
         '''
-        self.saved_configuration = False
-        self.save_button.set_is_important(True)
-        self.save_button.set_sensitive(True)
+        self.saved_configuration = not changed
+        self.save_button.set_is_important(changed)
+        self.save_button.set_sensitive(changed)
+        self.cancel_button.set_sensitive(changed)
 
     def on_save_list(self, *args):
         ''' Handles the save event by calling the method to save the current configuration
         '''
         self._save_configuration()
+    
+    def on_cancel_changes(self, *args):
+        ''' Resets any changes made by restoring the list to its original state
+        '''
+        self._restore_list()
+        self._configuration_changed(False)
 
     def _save_configuration(self, *args):
         ''' Saves the current configuration of applications and groups.
@@ -465,8 +474,5 @@ class CustomAppList(SettingsWidget):
         self.settings.set_value('list-applications', self.stored_apps)
         self.settings.set_value('list-groups', self.stored_groups)
 
-        self.saved_configuration = True
-        self.save_button.set_is_important(False)
-        self.save_button.set_sensitive(False)
-
         self._update_button_sensitivity()
+        self._configuration_changed(False)
