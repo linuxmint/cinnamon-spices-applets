@@ -17,8 +17,7 @@
     "enable-panel-shadow-tweak": {
         "type": "switch",
         "description": "Tweak Panel Shadow",
-        "default": false,
-        "tooltip": "If all values from the shadow settings are equal to 0, no shadow will be applied."
+        "default": false
     },
     "panel-shadow-x-axis-shift": {
         "type": "spinbutton",
