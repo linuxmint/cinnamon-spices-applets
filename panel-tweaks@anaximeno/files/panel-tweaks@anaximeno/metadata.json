@@ -1,0 +1,8 @@
+{
+    "version": "0.1.0",
+    "uuid": "panel-tweaks@anaximeno",
+    "name": "Cinnamon Panel Tweaker",
+    "multiversion": true,
+    "max-instances": -1,
+    "description": "Make some additional tweaks to each panel like color, shadow, border, etc"
+  }
