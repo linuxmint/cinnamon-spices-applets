@@ -42,7 +42,7 @@ const {
 } = require('./settingsController.js');
 
 
-class ExtraPanelSettingsApplet extends Applet.IconApplet {
+class PanelTweaksApplet extends Applet.IconApplet {
 	constructor(metadata, orientation, panelHeight, instanceId) {
 		super(orientation, panelHeight, instanceId);
 		this.metadata = metadata;
@@ -136,5 +136,5 @@ class ExtraPanelSettingsApplet extends Applet.IconApplet {
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-	return new ExtraPanelSettingsApplet(metadata, orientation, panelHeight, instanceId);
+	return new PanelTweaksApplet(metadata, orientation, panelHeight, instanceId);
 }
