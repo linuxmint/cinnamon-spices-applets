@@ -282,7 +282,8 @@ def make_pot(uuid: str) -> CapturedOutput:
                                 '--date=format:%Y', '--reverse', '--no-merges',
                                  str(folder)], capture_output=True, check=True,
                                 text=True)
-        git_author, year = result.stdout.strip().splitlines()[0].split('|')
+        if result.stdout:
+            git_author, year = result.stdout.strip().splitlines()[0].split('|')
     except subprocess.CalledProcessError:
         pass
 
