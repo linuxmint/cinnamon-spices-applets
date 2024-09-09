@@ -76,7 +76,6 @@
           <object class="GtkMenuToolButton" id="add_button">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">add</property>
             <property name="icon-name">gtk-add</property>
             <signal name="clicked" handler="on_add_item" swapped="no"/>
             <child type="menu">
@@ -103,7 +102,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">edit</property>
             <property name="icon-name">gtk-edit</property>
             <signal name="clicked" handler="on_edit_item" swapped="no"/>
           </object>
@@ -117,7 +115,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">duplicate</property>
             <property name="icon-name">gtk-copy</property>
             <signal name="clicked" handler="on_duplicate_item" swapped="no"/>
           </object>
@@ -141,7 +138,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">up</property>
             <property name="icon-name">gtk-go-up</property>
             <signal name="clicked" handler="on_move_item_up" swapped="no"/>
           </object>
@@ -155,7 +151,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">down</property>
             <property name="icon-name">gtk-go-down</property>
             <signal name="clicked" handler="on_move_item_down" swapped="no"/>
           </object>
@@ -179,7 +174,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">remove</property>
             <property name="icon-name">gtk-remove</property>
             <signal name="clicked" handler="on_remove_item" swapped="no"/>
           </object>
@@ -203,7 +197,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">cancel</property>
             <property name="use-underline">True</property>
             <property name="icon-name">gtk-cancel</property>
             <signal name="clicked" handler="on_cancel_changes" swapped="no"/>
@@ -218,7 +211,6 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">save</property>
             <property name="icon-name">gtk-save</property>
             <signal name="clicked" handler="on_save_list" swapped="no"/>
             <style>

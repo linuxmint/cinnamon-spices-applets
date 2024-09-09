@@ -23,7 +23,7 @@
             <property name="layout-style">expand</property>
             <child>
               <object class="GtkButton" id="button_cancel">
-                <property name="label" translatable="yes">Cancel</property>
+                <property name="label">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -36,7 +36,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_ok">
-                <property name="label" translatable="yes">OK</property>
+                <property name="label">OK</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can-focus">True</property>
@@ -94,7 +94,7 @@
                   <object class="GtkLabel" id="label_name">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Name</property>
+                    <property name="label">Name</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
