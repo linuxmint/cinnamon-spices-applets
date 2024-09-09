@@ -22,7 +22,7 @@
             <property name="layout-style">expand</property>
             <child>
               <object class="GtkButton" id="button_no">
-                <property name="label" translatable="yes">No</property>
+                <property name="label">No</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -35,7 +35,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_yes">
-                <property name="label" translatable="yes">Yes</property>
+                <property name="label">Yes</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -97,7 +97,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-end">15</property>
-                    <property name="label" translatable="yes">really delete?</property>
+                    <property name="label">really delete?</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
