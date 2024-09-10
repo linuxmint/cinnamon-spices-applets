@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-08 08:07-0400\n"
-"PO-Revision-Date: 2024-07-13 02:59+0200\n"
+"PO-Revision-Date: 2024-09-10 19:53+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #. applet.js:59
 msgid "Edit Todos"
-msgstr ""
+msgstr "Editar tasques pendents"
 
 #. applet.js:63
 msgid "Toggle Reminders"
-msgstr ""
+msgstr "Alternar recordatoris"
 
 #. metadata.json->description
 msgid "Panel based quick todo applet for Cinnamon"
@@ -60,14 +60,13 @@ msgstr "L'amplada del text del tauler, en número de càracters"
 
 #. settings-schema.json->reminder_enabled->description
 msgid "Sets whether the reminder flashes are enabled or not"
-msgstr ""
+msgstr "Determina si els parpellejos de recordatori estan activats o no"
 
 #. settings-schema.json->reminder_delay->description
-#, fuzzy
 msgid "How often (in seconds) to flash the applet periodically for reminders."
 msgstr ""
 "Com de sovint (en segons) la miniaplicació mostrarà un avís visual a mode de "
-"recordatori. 0 per a desactivar"
+"recordatori."
 
 #. settings-schema.json->reminder_time->description
 msgid ""
