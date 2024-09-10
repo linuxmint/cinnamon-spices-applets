@@ -48,7 +48,7 @@ class PanelTweaksApplet extends Applet.IconApplet {
 		this.metadata = metadata;
 		this.settings = this._setup_applet_settings(metadata.uuid, instanceId);
 		this.signalsManager = new SignalManager.SignalManager(null);
-		this.iconPath = `${metadata.path}/../icons/panel-tweaks.svg`
+		this.iconPath = `${metadata.path}/../icons/panel-tweaks-icon-symbolic.svg`
 
 		// --> declare panel settings controllers
 
