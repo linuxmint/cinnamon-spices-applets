@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-03 15:24+0200\n"
-"PO-Revision-Date: 2024-07-24 09:32+0200\n"
+"PO-Revision-Date: 2024-09-11 12:03+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -74,24 +74,23 @@ msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
 #. applet.js:1202
-#, fuzzy, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Temperatuursensoren"
+msgstr "%s Temperatuursensoren"
 
 #. applet.js:1212
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Ventilatorsensoren"
+msgstr "%s Ventilatorsensoren"
 
 #. applet.js:1222
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Spanningssensoren"
+msgstr "%s Spanningssensoren"
 
 #. applet.js:1232
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Verstoringsensoren"
+msgstr "%s Inbraaksensoren"
 
 #. settings-schema.json->xsensors->description
 #. applet.js:1253
@@ -199,9 +198,8 @@ msgstr ""
 "overschrijdt."
 
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Temperatuur"
+msgstr "⦿ Temperatuur"
 
 #. settings-schema.json->page_Fans->title
 msgid "🤂 Fan"
@@ -400,47 +398,47 @@ msgstr "Tekengrootte (% van de standaardgrootte)"
 
 #. settings-schema.json->vertical-align->options
 msgid "baseline"
-msgstr ""
+msgstr "basislijn"
 
 #. settings-schema.json->vertical-align->options
 msgid "sub"
-msgstr ""
+msgstr "onder"
 
 #. settings-schema.json->vertical-align->options
 msgid "super"
-msgstr ""
+msgstr "boven"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-top"
-msgstr ""
+msgstr "tekst-boven"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-bottom"
-msgstr ""
+msgstr "tekst-onder"
 
 #. settings-schema.json->vertical-align->options
 msgid "middle"
-msgstr ""
+msgstr "midden"
 
 #. settings-schema.json->vertical-align->options
 msgid "top"
-msgstr ""
+msgstr "boven"
 
 #. settings-schema.json->vertical-align->options
 msgid "bottom"
-msgstr ""
+msgstr "onder"
 
 #. settings-schema.json->vertical-align->options
 msgid "unset"
-msgstr ""
+msgstr "onbepaald"
 
 #. settings-schema.json->vertical-align->options
 msgid "inherit"
-msgstr ""
+msgstr "overneme"
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Verticale uitlijning"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
