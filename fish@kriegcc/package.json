@@ -1,6 +1,6 @@
 {
   "name": "fish-kriegcc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Displays a small fish in your panel and does nothing useful whatsoever beyond that.",
   "scripts": {
     "prebuild": "node scripts/set-version.cjs",

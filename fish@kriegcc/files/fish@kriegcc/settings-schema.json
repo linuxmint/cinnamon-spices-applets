@@ -175,7 +175,7 @@
   },
   "keyVersion": {
     "type": "label",
-    "description": "v0.1.0"
+    "description": "v0.1.1"
   },
   "keyLicenseText": {
     "type": "label",
