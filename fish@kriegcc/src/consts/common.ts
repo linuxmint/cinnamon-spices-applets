@@ -1,5 +1,4 @@
 export const UUID = "fish@kriegcc"
-export const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path
 
 export const KNOWN_USEFUL_PROGRAMS = ["ps", "who", "uptime", "tail"]
 

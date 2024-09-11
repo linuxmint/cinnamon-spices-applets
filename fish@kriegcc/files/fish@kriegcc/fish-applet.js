@@ -66,14 +66,9 @@ __webpack_require__.d(__webpack_exports__, {
 
 ;// CONCATENATED MODULE: ./src/consts/common.ts
 const UUID = "fish@kriegcc";
-const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path;
 const KNOWN_USEFUL_PROGRAMS = ["ps", "who", "uptime", "tail"];
 const FISH_APPLET_CINNAMON_SPICES_WEBSITE = "https://cinnamon-spices.linuxmint.com/applets/view/xy";
 const REPORT_BUGS_INSTRUCTIONS_WEBSITE = "https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md";
-
-;// CONCATENATED MODULE: ./src/consts/index.ts
-
-
 
 ;// CONCATENATED MODULE: ./src/utils/logging/Logger.ts
 
