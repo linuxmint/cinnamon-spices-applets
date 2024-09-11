@@ -26,19 +26,19 @@ msgstr "Tenporizadorea"
 #: 2.6/applet.js:94 2.6/applet.js:221 2.6/applet.js:301 3.4/applet.js:224
 #: 3.4/applet.js:264 3.4/applet.js:357
 msgid "Minutes"
-msgstr "Minutuak"
+msgstr "minutu"
 
 #. 3.4->settings-schema.json->preset_time->columns->title
 #: 2.6/applet.js:220 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:263
 #: 3.4/applet.js:357
 msgid "Hours"
-msgstr "Orduak"
+msgstr "ordu"
 
 #. 3.4->settings-schema.json->preset_time->columns->title
 #: 2.6/applet.js:222 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:265
 #: 3.4/applet.js:357
 msgid "Seconds"
-msgstr "Segundoak"
+msgstr "segundo"
 
 #: 2.6/applet.js:224 3.4/applet.js:241
 msgid "Reset"
@@ -72,19 +72,19 @@ msgstr "Hautatu hau denbora igaro denean leihoan gonbita jartzeko."
 #. 2.6->settings-schema.json->confirm-prompt-enable->tooltip
 #. 3.4->settings-schema.json->confirm-prompt-enable->tooltip
 msgid "Check this to place a prompt on the window when time has elapsed"
-msgstr "Hautatu hau denbora igaro denean leihoan gonbita jartzeko"
+msgstr "Markatu hau denbora igarotzean leihatila bat irekitzeko"
 
 #. 2.6->settings-schema.json->message-prompt-enable->description
 #. 2.6->settings-schema.json->message-prompt-enable->tooltip
 #. 3.4->settings-schema.json->message-prompt-enable->description
 #. 3.4->settings-schema.json->message-prompt-enable->tooltip
 msgid "Display a notification when time has elapsed"
-msgstr "Bistaratu jakinarazpen bat denbora igaro denean"
+msgstr "Bistaratu jakinarazpen bat denbora igarotzean"
 
 #. 2.6->settings-schema.json->display-message->description
 #. 2.6->settings-schema.json->display-message->tooltip
 msgid "Message displayed in notification windows"
-msgstr "Jakinarazpen-leihoetan bistaratzen den mezua"
+msgstr "Jakinarazpen-leihatilan bistaratzen den mezua"
 
 #. 2.6->settings-schema.json->sound-prompt-enable->description
 #. 2.6->settings-schema.json->sound-prompt-enable->tooltip
@@ -141,7 +141,7 @@ msgstr "Soinuak"
 #. 3.4->settings-schema.json->section3->title
 #. 3.4->settings-schema.json->preset_time->description
 msgid "Preset Times"
-msgstr "Aurrez ezarritako orduak"
+msgstr "Aurrez ezarritako ordu"
 
 #. 3.4->settings-schema.json->page4->title
 #. 3.4->settings-schema.json->section4->title
@@ -163,8 +163,8 @@ msgid ""
 "Global message displayed in notification windows unless defined in preset "
 "time."
 msgstr ""
-"Mezu globala jakinarazpen-leihoetan bistaratuko da aurrez ezarritako "
-"denboran zehaztu ezean."
+"Mezu hau bistaratuko da jakinarazpen-leihoatilan bistaratuko da"
+"besterik zehaztu ezean."
 
 #. 3.4->settings-schema.json->sound-volume->description
 #. 3.4->settings-schema.json->sound-volume->tooltip
@@ -178,7 +178,7 @@ msgstr "Bistaratu alarma-ordua panelean"
 
 #. 3.4->settings-schema.json->alarmtime-format-small->description
 msgid "Format used to display alarm time in the near future"
-msgstr "Etorkizun hurbilean alarma-ordua bistaratzeko erabiltzen den formatua"
+msgstr "Denbora laburrean alarma-ordua bistaratzekoformatua"
 
 #. 3.4->settings-schema.json->alarmtime-format-small->tooltip
 msgid ""
@@ -187,7 +187,7 @@ msgid ""
 "(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
 "format)"
 msgstr ""
-"Alarma-ordua behean zehaztutako minutuak baino txikiagoa bada,\\n\n"
+"Alarma-ordua behean zehaztutako minutu baino txikiagoa bada,\\n\n"
 "alarmaren ordua xehetasun gehiagorekin bistaratu daiteke\\n\n"
 "(ikus https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
 "time-format)"
@@ -195,7 +195,7 @@ msgstr ""
 #. 3.4->settings-schema.json->alarmtime-format-large->description
 msgid "Format used to display alarm time in the not so near future"
 msgstr ""
-"Etorkizun ez hain hurbilean alarma-ordua bistaratzeko erabiltzen den formatua"
+"Denbora luzean alarma-ordua bistaratzeko formatua"
 
 #. 3.4->settings-schema.json->alarmtime-format-large->tooltip
 msgid ""
@@ -204,7 +204,7 @@ msgid ""
 "(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
 "format)"
 msgstr ""
-"Alarma-ordua behean zehaztutako minutuak baino gehiago badira,\\n\n"
+"Alarma-ordua behean zehaztutako minutu baino gehiago badira,\\n\n"
 "alarmaren ordua xehetasun gutxiagorekin bistaratu daiteke\\n\n"
 "(ikus https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
 "time-format)"
