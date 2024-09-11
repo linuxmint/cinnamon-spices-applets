@@ -59,7 +59,7 @@ Unlike most fishes, this fish requires little care and no fishbowl cleaning. It 
 
 Left-clicking on the applet shows a popup with the fish's message. Clicking somewhere outside the popup or on **Close** button closes the popup.
 
-![Popup message](./docs/images/applet/applet.gif)
+![Popup message][applet-gif]
 
 Right-clicking on the applet brings up a menu containing the following items:
 
@@ -67,13 +67,13 @@ Right-clicking on the applet brings up a menu containing the following items:
 - **Configure...** opens the Properties dialog.
 - **Remove 'Fish'** deletes the applet from the panel.
 
-![Context menu](./docs/images/applet/context-menu.png)
+![Context menu][applet-context-menu]
 
 ## Customization
 
 You can customize Fish applet by right-clicking on it and choosing 'Configure...'. This will open the Properties dialog, which allows you to change various settings.
 
-![Properties dialog](./docs/images/applet/settings-window.png)
+![Properties dialog][applet-preferences-main]
 
 The properties are:
 
@@ -111,7 +111,7 @@ See: [Contributing](#contributing)
 Fish applet uses [Semantic Versioning](http://semver.org/).
 For the current version number, see `metadata.json`.
 
-A changelog is available here: [Changelog](./CHANGELOG.md)
+A changelog is available here: [Changelog][changelog]
 
 ## Contributing
 
@@ -124,9 +124,9 @@ You can participate in many ways, including:
 - Translating
 - Code reviews and coding
 
-See: [Contributing](./docs/CONTRIBUTING.md)
+See: [Contributing][contributing]
 
-For active development, please refer to the [Development](./docs/DEVELOPMENT.md) guide.
+For active development, please refer to the [Development][development] guide.
 
 ## Credits
 
@@ -198,10 +198,20 @@ Thank you to all contributors and the open-source community for their support an
 
 [GPL-3.0-or-later](https://spdx.org/licenses/GPL-3.0-or-later.html)
 
-See: [License](./COPYING)
+See: [License][license]
 
 ## Resources
 
 ### Miscellaneous
 
 - Wanda The Fish fan page (by ePsiLoN, last update 2013): http://wandathefish.com/blog/wanda-fan-site/
+
+<!-- adjust URLs so they work on the Cinnamon Applet Spices website -->
+
+[applet-gif]: https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/fish@kriegcc/docs/images/applet/applet.gif
+[applet-context-menu]: https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/fish%40kriegcc/docs/images/applet/context-menu.png
+[applet-preferences-main]: https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/fish%40kriegcc/docs/images/applet/settings-window.png
+[changelog]: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/fish%40kriegcc/CHANGELOG.md
+[contributing]: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/fish%40kriegcc/docs/CONTRIBUTING.md
+[development]: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/fish%40kriegcc/docs/DEVELOPMENT.md
+[license]: https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/fish%40kriegcc/COPYING
