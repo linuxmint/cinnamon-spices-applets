@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-08 08:07-0400\n"
-"PO-Revision-Date: 2024-04-21 14:14+0200\n"
+"PO-Revision-Date: 2024-09-11 12:28+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -18,11 +18,11 @@ msgstr ""
 
 #. applet.js:59
 msgid "Edit Todos"
-msgstr ""
+msgstr "Todo's bijwerken"
 
 #. applet.js:63
 msgid "Toggle Reminders"
-msgstr ""
+msgstr "Herinneringen in- en uitschakelen"
 
 #. metadata.json->description
 msgid "Panel based quick todo applet for Cinnamon"
@@ -59,14 +59,12 @@ msgstr "De breedte van de paneeltekst in tekens"
 
 #. settings-schema.json->reminder_enabled->description
 msgid "Sets whether the reminder flashes are enabled or not"
-msgstr ""
+msgstr "Stelt in of de herinneringsflitsen zijn ingeschakeld of niet."
 
 #. settings-schema.json->reminder_delay->description
-#, fuzzy
 msgid "How often (in seconds) to flash the applet periodically for reminders."
 msgstr ""
-"Hoe vaak (in seconden) de applet periodiek moet knipperen voor "
-"herinneringen. Stel in op 0 om uit te schakelen"
+"Hoe vaak (in seconden) de applet periodiek moet flitsen voor herinneringen."
 
 #. settings-schema.json->reminder_time->description
 msgid ""
