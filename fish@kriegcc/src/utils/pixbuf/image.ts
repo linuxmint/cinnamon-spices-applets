@@ -61,6 +61,15 @@ export function getPixbufFromFileAtScale(
     throw new Error(`File path is null.`)
   }
 
+  // The new_from_file_at_scale method does not throw an error but has an assertion: ('height > 0 || height == -1') and ('width > 0 || width == -1').
+  // Therefore, check parameters in advance.
+  if (height !== -1 && height < 1) {
+    throw new Error(`Invalid image height value: ${height}`)
+  }
+  if (width !== -1 && width < 1) {
+    throw new Error(`Invalid image width value: ${width}`)
+  }
+
   const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filePath, width, height, preserveAspectRatio)
   if (!pixbuf) {
     throw new Error(`Failed to load image from file: ${file}`)

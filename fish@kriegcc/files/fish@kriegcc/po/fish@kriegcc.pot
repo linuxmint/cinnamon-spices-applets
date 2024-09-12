@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: fish@kriegcc 0.1.1\n"
+"Project-Id-Version: fish@kriegcc 0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-11 17:44+0200\n"
+"POT-Creation-Date: 2025-01-20 18:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. fish-applet.js:753
+#. fish-applet.js:838
 msgid "Fish Applet"
 msgstr ""
 
-#. fish-applet.js:810
+#. fish-applet.js:895
 msgid "There's something fishy going on here:"
 msgstr ""
 
-#. fish-applet.js:851
+#. fish-applet.js:936
 msgid "Copy Error Messages"
 msgstr ""
 
-#. fish-applet.js:854
+#. fish-applet.js:939
 msgid "Copy Error Message"
 msgstr ""
 
-#. fish-applet.js:870 fish-applet.js:1360
+#. fish-applet.js:955 fish-applet.js:1459
 msgid "Open Preferences"
 msgstr ""
 
-#. fish-applet.js:882
+#. fish-applet.js:967
 msgid "Errors copied to the clipboard"
 msgstr ""
 
-#. fish-applet.js:885
+#. fish-applet.js:970
 msgid "Error copied to the clipboard"
 msgstr ""
 
-#. fish-applet.js:958
+#. fish-applet.js:1043
 msgid "Copy Message"
 msgstr ""
 
-#. fish-applet.js:970
+#. fish-applet.js:1055
 msgid "Speak again"
 msgstr ""
 
-#. fish-applet.js:975
+#. fish-applet.js:1060
 msgid "Close"
 msgstr ""
 
-#. fish-applet.js:995
+#. fish-applet.js:1080
 #, javascript-format
 msgid "%s the Fish Says:"
 msgstr ""
 
-#. fish-applet.js:1003
+#. fish-applet.js:1088
 msgid "Message copied to the clipboard"
 msgstr ""
 
-#. fish-applet.js:1031
+#. fish-applet.js:1116
 msgid "The water needs changing"
 msgstr ""
 
-#. fish-applet.js:1036
+#. fish-applet.js:1121
 msgid "Look at today's date!"
 msgstr ""
 
-#. fish-applet.js:1323
+#. fish-applet.js:1422
 #, javascript-format
 msgid "%s the Fish, the fortune teller"
 msgstr ""
 
-#. fish-applet.js:1340
+#. fish-applet.js:1439
 #, javascript-format
 msgid ""
 "Warning: The command appears to be something actually useful. \n"
@@ -88,7 +88,7 @@ msgid ""
 "applet \"practical\" or useful."
 msgstr ""
 
-#. fish-applet.js:1348
+#. fish-applet.js:1447
 msgid ""
 "Normally, the Fish's wisdom is derived from the 'fortune' command-line "
 "utility. \n"
@@ -99,7 +99,7 @@ msgid ""
 "command in the applet's settings."
 msgstr ""
 
-#. fish-applet.js:1356
+#. fish-applet.js:1455
 msgid "Open Documentation"
 msgstr ""
 
@@ -129,6 +129,10 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
+#. settings-schema.json->pageAdvancedSettings->title
+msgid "Advanced Settings"
+msgstr ""
+
 #. settings-schema.json->pageHelp->title
 msgid "Help"
 msgstr ""
@@ -143,6 +147,23 @@ msgstr ""
 
 #. settings-schema.json->sectionAnimation->title
 msgid "Animation"
+msgstr ""
+
+#. settings-schema.json->sectionAdvancedAnimationSettings->title
+msgid "Animation Settings"
+msgstr ""
+
+#. settings-schema.json->sectionAdvancedAnimationSettingsMargin->title
+msgid "Animation Margin"
+msgstr ""
+
+#. settings-
+#. schema.json->sectionAdvancedAnimationSettingsCustomDimension->title
+msgid "Animation Custom Dimension"
+msgstr ""
+
+#. settings-schema.json->sectionDeveloperOptions->title
+msgid "Developer Options"
 msgstr ""
 
 #. settings-schema.json->sectionInstruction->title
@@ -217,20 +238,152 @@ msgid ""
 "animation."
 msgstr ""
 
-#. settings-schema.json->keyRotate->description
-msgid "Rotate on vertical panels"
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->description
+msgid "Flip sideways on vertical panels"
 msgstr ""
 
-#. settings-schema.json->keyRotate->tooltip
+#. settings-schema.json->keyFlipSidewaysOnVerticalPanel->tooltip
 msgid ""
-"Select this option to rotate the applet image when you add the applet to a "
-"vertical panel."
+"Select this option to rotate the applet image sideways when you add the "
+"applet to a vertical panel."
 msgstr ""
 
 #. settings-schema.json->keyImagePath->tooltip
 msgid ""
 "Use this field to select the image to display in the applet. You can select "
 "an image that is supplied with the applet or a personal image."
+msgstr ""
+
+#. settings-schema.json->keyAnimationScalingMode->description
+msgid "Scaling Mode"
+msgstr ""
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Auto-fit"
+msgstr ""
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Preserve original size"
+msgstr ""
+
+#. settings-schema.json->keyAnimationScalingMode->options
+msgid "Custom"
+msgstr ""
+
+#. settings-schema.json->keyAnimationScalingMode->tooltip
+msgid "Select how the animation image in the panel should be scaled."
+msgstr ""
+
+#. settings-schema.json->keyAnimationMarginHint->description
+msgid ""
+"Margin options apply only when the 'auto-fit' option is enabled. For other "
+"settings, margins appear if the animation is smaller than the panel."
+msgstr ""
+
+#. settings-schema.json->keyAnimationAutoMargin->description
+msgid "Auto-margin"
+msgstr ""
+
+#. settings-schema.json->keyAnimationAutoMargin->tooltip
+msgid "Check this to use the default margin from theme."
+msgstr ""
+
+#. settings-schema.json->keyAnimationMargin->units
+#. settings-schema.json->keyAnimationHeight->units
+#. settings-schema.json->keyAnimationWidth->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->keyAnimationMargin->description
+msgid "Margin around the animation frame"
+msgstr ""
+
+#. settings-schema.json->keyAnimationMargin->tooltip
+msgid ""
+"Use this spin box to specify the margin around the animation frame shown in "
+"the panel."
+msgstr ""
+
+#. settings-schema.json->keyAnimationHeight->description
+msgid "Height"
+msgstr ""
+
+#. settings-schema.json->keyAnimationHeight->tooltip
+msgid "Use this spin box to specify a custom height for the animation frame."
+msgstr ""
+
+#. settings-schema.json->keyAnimationWidth->description
+msgid "Width"
+msgstr ""
+
+#. settings-schema.json->keyAnimationWidth->tooltip
+msgid "Use this spin box to specify a custom width for the animation frame."
+msgstr ""
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->description
+msgid "Preserve aspect ratio"
+msgstr ""
+
+#. settings-schema.json->keyAnimationPreserveAspectRatio->tooltip
+msgid ""
+"Enable this option to maintain the original aspect ratio of the animation. "
+"If enabled, the specified width will be ignored."
+msgstr ""
+
+#. settings-schema.json->keyAnimationRotationHint->description
+msgid ""
+"If a rotation is selected, the image may also be flipped sideways depending "
+"on the 'Flip sideways on vertical panels' option."
+msgstr ""
+
+#. settings-schema.json->keyAnimationRotation->description
+msgid "Rotation"
+msgstr ""
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "0°"
+msgstr ""
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "90°"
+msgstr ""
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "180°"
+msgstr ""
+
+#. settings-schema.json->keyAnimationRotation->options
+msgid "270°"
+msgstr ""
+
+#. settings-schema.json->keyLogLevel->description
+msgid "Log Level"
+msgstr ""
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Info"
+msgstr ""
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Debug"
+msgstr ""
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Warning"
+msgstr ""
+
+#. settings-schema.json->keyLogLevel->options
+msgid "Error"
+msgstr ""
+
+#. settings-schema.json->keyForceFoolsDay->description
+msgid "Force Fool's Day"
+msgstr ""
+
+#. settings-schema.json->keyForceFoolsDay->tooltip
+msgid ""
+"Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April "
+"1st) without modifying the system date."
 msgstr ""
 
 #. settings-schema.json->keyInstructionsText->description
@@ -279,7 +432,7 @@ msgid "Opens the applet's page on Cinnamon Spices website."
 msgstr ""
 
 #. settings-schema.json->keyVersion->description
-msgid "v0.1.1"
+msgid "v0.2.0"
 msgstr ""
 
 #. settings-schema.json->keyLicenseText->description

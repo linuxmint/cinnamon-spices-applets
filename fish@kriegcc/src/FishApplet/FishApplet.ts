@@ -1,4 +1,4 @@
-import { AnimatedFish, AnimatedFishProps, AnimationRotation, RenderOptions } from "AnimatedFish"
+import { AnimatedFish, AnimatedFishProps, RenderOptions } from "AnimatedFish"
 import {
   FishMessagePopupMenu,
   BasePopupMenu,
@@ -13,15 +13,18 @@ import { Metadata, AppletSettingsProps } from "types"
 
 import { ErrorIcon } from "utils/icons"
 import {
+  determineRenderOptionsFromSettings,
   expandHomeDir,
+  getMargin,
   getThemeAppearance,
-  getThemeNodeOfClass,
   isFoolsDay,
   isHorizontalOriented,
+  mapNumberToAnimationRotation,
+  mapStringToAnimationScalingMode,
   openWebsite,
   runCommandAsyncIO,
 } from "utils/common"
-import { logger } from "utils/logging"
+import { logger, mapStringToLogLevel } from "utils/logging"
 import { NotificationButton, showNotification } from "utils/notification"
 import { _ } from "utils/translation"
 
@@ -29,7 +32,7 @@ import { ErrorLocation, FishAppletError, FishAppletErrorManager } from "./ErrorM
 
 import { FISH_APPLET_CINNAMON_SPICES_WEBSITE, KNOWN_USEFUL_PROGRAMS, REPORT_BUGS_INSTRUCTIONS_WEBSITE } from "consts"
 
-const { Applet } = imports.ui.applet
+const { Applet, AllowedLayout } = imports.ui.applet
 const { AppletSettings } = imports.ui.settings
 const { PopupMenuManager } = imports.ui.popupMenu
 const { SignalManager } = imports.misc.signalManager
@@ -64,10 +67,12 @@ export class FishApplet extends Applet {
   private signalManager!: imports.misc.signalManager.SignalManager
 
   // popup menu
-  // initialized in helper function initPopupMenu()
+  // initialized in helper function initApplet()
   private menuManager!: imports.ui.popupMenu.PopupMenuManager
-  // either shows fortune message or error (or a special popup on fools day)
+  // either shows fortune message or error (or a special popup on Fool's Day)
   private messagePopup!: BasePopupMenu
+
+  private lastCommandOutput: string
 
   constructor(metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId)
@@ -78,23 +83,30 @@ export class FishApplet extends Applet {
     this.panelHeight = panelHeight
     this.instanceId = instanceId
 
+    // allow applet to be also placed on vertical panel
+    this.setAllowedLayout(AllowedLayout.BOTH)
+
     // add instead of set to not remove the default applet-box style
     this.actor.add_style_class_name("fish-applet")
 
-    // setup fools day check
+    // setup Fool's Day check
     this.isFoolsDay = false
     this.foolsDayTimeoutId = 0
     this.startPeriodicFoolsDayCheck()
 
     this.errorManager = new FishAppletErrorManager()
 
+    this.lastCommandOutput = ""
+
     this.bindSettings()
+    this.updateLogLevel()
     this.initApplet()
   }
 
   public override on_panel_height_changed(): void {
     this.panelHeight = this._panelHeight
     this.initAnimation()
+    this.updateApplet()
   }
 
   public override on_applet_removed_from_panel(): void {
@@ -111,8 +123,8 @@ export class FishApplet extends Applet {
 
   public override on_orientation_changed(orientation: imports.gi.St.Side): void {
     this.orientation = orientation
-    const isRotated = this.settingsObject.rotate
-    this.updateRotate(isRotated)
+    const isFlipSidewaysOnVerticalPanel = this.settingsObject.flipSidewaysOnVerticalPanel
+    this.updateFlipSidewaysOnVerticalPanel(isFlipSidewaysOnVerticalPanel)
   }
 
   private initApplet(): void {
@@ -129,8 +141,12 @@ export class FishApplet extends Applet {
     this.signalManager.connect(themeManager, "theme-set", this.changeTheme.bind(this), this)
 
     this.initAnimation()
+
+    this.menuManager = new PopupMenuManager(this)
     this.updateMessagePopup()
-    this.updateName() // MessagePopup needs to be initialized before!
+
+    // inits the tooltip
+    this.updateName()
 
     // TODO: the call here is to check at startup the defined command.
     // However the "useful command" warning is always shown then if one of it is in use.
@@ -138,7 +154,7 @@ export class FishApplet extends Applet {
     this.updateCommand()
   }
 
-  // decides which popup type to set: error or "fortune" message (or fools day)
+  // decides which popup type to set: error or "fortune" message (or Fool's Day)
   private updateMessagePopup(): void {
     let popupMenuType: PopupMenuType
 
@@ -173,6 +189,7 @@ export class FishApplet extends Applet {
             launcher: this,
             orientation: this.orientation,
             name: this.settingsObject.name,
+            message: this.lastCommandOutput,
             onSpeakAgain: this.runCommand.bind(this),
             onClose: () => this.messagePopup.close(true),
           },
@@ -215,20 +232,15 @@ export class FishApplet extends Applet {
       }
     }
 
-    // reset menu manager and create new the new popup with the defined props from above
-    if (this.menuManager) {
-      this.menuManager.destroy()
+    // remove old popup menu
+    if (this.messagePopup) {
+      this.menuManager.removeMenu(this.messagePopup)
+      this.messagePopup.destroy()
     }
-    this.menuManager = new PopupMenuManager(this)
-    // returns a popup menu instance with respective popup menu type (fishMessage, error, foolsday)
+
+    // create and add the new one
     this.messagePopup = PopupMenuFactory.createPopupMenu(popupMenuProps)
     this.menuManager.addMenu(this.messagePopup)
-
-    // for fish message popup, need to run command already once so that its result will be shown in the popup
-    // TODO: maybe do on applet click instead ..
-    if (popupMenuType === "FishMessage") {
-      this.runCommand()
-    }
   }
 
   private isTargetPopupMenuAlreadyActive(targetPopupMenuTyp: PopupMenuType): boolean {
@@ -273,6 +285,7 @@ export class FishApplet extends Applet {
         if (this.messagePopup instanceof FishMessagePopupMenu) {
           this.messagePopup.updateMessage(message)
         }
+        this.lastCommandOutput = message
       },
       (error) => {
         this.handleError(error, "commandExecution")
@@ -294,7 +307,11 @@ export class FishApplet extends Applet {
       "pausePerFrameInSeconds",
       this.updateAnimationPause.bind(this),
     )
-    this.settings.bind<boolean>("keyRotate", "rotate", this.updateRotate.bind(this))
+    this.settings.bind<boolean>(
+      "keyFlipSidewaysOnVerticalPanel",
+      "flipSidewaysOnVerticalPanel",
+      this.updateFlipSidewaysOnVerticalPanel.bind(this),
+    )
     // TODO: the line below does not work. See TODO in ImageChooser.py
     // this.settings.bind<string>("keyImagePath", "imagePath", this.updateAnimationImage.bind(this))
     // workaround:
@@ -303,6 +320,24 @@ export class FishApplet extends Applet {
       this.settingsObject.imagePath = newValue
       this.updateAnimationImage(newValue)
     })
+
+    // advanced settings
+    // animation
+    this.settings.bind("keyAnimationScalingMode", "animationScalingMode", this.updateAnimationScalingMode.bind(this))
+    this.settings.bind("keyAnimationAutoMargin", "autoAnimationMargin", this.updateAnimationAutoMargin.bind(this))
+    this.settings.bind("keyAnimationMargin", "customAnimationMargin", this.updateAnimationMargin.bind(this))
+    this.settings.bind("keyAnimationHeight", "customAnimationHeight", this.updateCustomAnimationHeight.bind(this))
+    this.settings.bind("keyAnimationWidth", "customAnimationWidth", this.updateCustomAnimationWidth.bind(this))
+    this.settings.bind(
+      "keyAnimationPreserveAspectRatio",
+      "preserveAnimationAspectRatio",
+      this.updatePreserveAnimationAspectRatio.bind(this),
+    )
+    this.settings.bind("keyAnimationRotation", "animationRotation", this.updateAnimationRotation.bind(this))
+    // developer options
+    this.settings.bind("keyDeveloperOptionsEnabled", "developerOptionsEnabled")
+    this.settings.bind("keyLogLevel", "logLevel", this.updateLogLevel.bind(this))
+    this.settings.bind("keyForceFoolsDay", "forceFoolsDay", this.updateForceFoolsDay.bind(this))
   }
 
   // -------------------------------------------------------------------------------------------------
@@ -389,65 +424,33 @@ If you prefer not to install any additional packages, you can change the command
     }
   }
 
-  // Sets the size of the animation to fit into the panel
   private determineAnimationRenderOptions(): RenderOptions {
-    let isRotated = this.settingsObject.rotate
-    // Guard to allow rotation only on vertical panel (as stated in setting's description). Maybe remove in future.
-    if (isRotated && isHorizontalOriented(this.orientation)) {
-      isRotated = false
-    }
-
-    let height = undefined
-    let width = undefined
-    let rotation: AnimationRotation | undefined = undefined
-
-    const margin = this.getAppletMargin()
-    const isInHorizontalPanel = isHorizontalOriented(this.orientation)
-
-    if (isInHorizontalPanel) {
-      if (isRotated) {
-        width = this.panelHeight - margin
-        height = undefined
-      } else {
-        width = undefined
-        height = this.panelHeight - margin
-      }
-    } else {
-      // on a vertical panel
-      if (isRotated) {
-        width = undefined
-        height = this.panelHeight - margin
-      } else {
-        width = this.panelHeight - margin
-        height = undefined
-      }
-    }
-
-    if (isRotated) {
-      rotation = 90
-    }
-
-    const renderOptions: RenderOptions = {
-      height,
-      width,
-      rotation,
-    }
-    return renderOptions
+    return determineRenderOptionsFromSettings({
+      isInHorizontalPanel: isHorizontalOriented(this.orientation),
+      panelHeight: this.panelHeight,
+      scalingMode: mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode),
+      margin: this.getAppletMargin(),
+      customHeight: this.settingsObject.customAnimationHeight,
+      customWidth: this.settingsObject.customAnimationWidth,
+      isPreserveAspectRatio: this.settingsObject.preserveAnimationAspectRatio,
+      isFlipSidewaysOnVerticalPanel: this.settingsObject.flipSidewaysOnVerticalPanel,
+      rotation: mapNumberToAnimationRotation(this.settingsObject.animationRotation),
+    })
   }
 
   private initAnimation(): void {
-    const configuration: AnimatedFishProps = {
-      imagePath: this.settingsObject.imagePath,
-      frames: this.settingsObject.frames,
-      pausePerFrameInMs: Math.floor(this.settingsObject.pausePerFrameInSeconds * 1000),
-      renderOptions: this.determineAnimationRenderOptions(),
-      isFoolsDay: this.isFoolsDay,
-    }
-
-    // delete previous error if there were any
-    this.errorManager.deleteError("animation")
-
     try {
+      // delete previous error if there were any
+      this.errorManager.deleteError("animation")
+
+      const configuration: AnimatedFishProps = {
+        imagePath: this.settingsObject.imagePath,
+        frames: this.settingsObject.frames,
+        pausePerFrameInMs: Math.floor(this.settingsObject.pausePerFrameInSeconds * 1000),
+        renderOptions: this.determineAnimationRenderOptions(),
+        isFoolsDay: this.isFoolsDay,
+      }
+
       if (this.animatedFish === undefined) {
         this.animatedFish = new AnimatedFish(configuration)
       } else {
@@ -509,10 +512,10 @@ If you prefer not to install any additional packages, you can change the command
     }
   }
 
-  private updateRotate(rotate: boolean): void {
-    // Guard to allow rotation only on vertical panel (as stated in setting's description). Maybe remove in future.
-    if (rotate && isHorizontalOriented(this.orientation)) {
-      logger.logWarning("Rotation works only when the applet is placed on a vertical panel.")
+  private updateFlipSidewaysOnVerticalPanel(isFlipSidewaysOnVerticalPanel: boolean): void {
+    // Maybe remove this option in future. There is now a dedicated rotation option in advance settings.
+    if (isFlipSidewaysOnVerticalPanel && isHorizontalOriented(this.orientation)) {
+      logger.logWarning("Flip sideways option works only when the applet is placed on a vertical panel.")
       return
     }
 
@@ -531,6 +534,105 @@ If you prefer not to install any additional packages, you can change the command
       this.handleError(error, "animation")
     }
   }
+
+  // -------------------------------------------------------------------------------------------------
+  // Callback functions of advanced settings:
+  // Mostly, the changes are applied via a re-init (call of initAnimation).
+  // Some advanced settings depend on each other, e.g. it does not make sense to adjust the margin value when auto margin is enabled.
+  // The updated settings values (e.g. height, width) will be used then (inside "determineRenderOptions" method).
+  // Afterwards, an updateApplet is necessary to clear any possible error states (e.g. recover from invalid values) and to update the popup menu.
+  // TODO: Consider consolidating most functions here because they do essentially the same (init and update call).
+
+  private updateAnimationScalingMode(): void {
+    this.initAnimation()
+    this.updateApplet()
+  }
+
+  private updateAnimationAutoMargin(): void {
+    // This guard should not be necessary, as the option is hidden in the settings menu when auto-fit is not selected.
+    const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode)
+    if (scalingMode !== "AutoFit") {
+      logger.logDebug("Margin options only apply when the 'auto-fit' animation scaling option is enabled.")
+    } else {
+      this.initAnimation()
+      this.updateApplet()
+    }
+  }
+
+  private updateAnimationMargin(): void {
+    // The guards here should not be necessary as well.
+    const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode)
+    if (scalingMode !== "AutoFit") {
+      logger.logDebug("Margin options only apply when the 'auto-fit' animation scaling option is enabled.")
+    } else if (this.settingsObject.autoAnimationMargin) {
+      // This should already be handled by the dependency option of the related spinbutton setting widget (see: settings-schema.json -> keyAnimationMargin).
+      logger.logDebug("The 'auto-margin' option is turned on, so the custom margin value is ignored.")
+    } else {
+      this.initAnimation()
+      this.updateApplet()
+    }
+  }
+
+  private updateCustomAnimationHeight(): void {
+    // This guard should not be necessary, as the option is hidden in the settings menu when not applicable.
+    const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode)
+    if (scalingMode !== "Custom") {
+      logger.logDebug("Custom height options only apply when the 'custom' animation scaling option is enabled.")
+    } else {
+      this.initAnimation()
+      this.updateApplet()
+    }
+  }
+
+  private updateCustomAnimationWidth(): void {
+    // This guard should not be necessary, as the option is hidden in the settings menu when not applicable.
+    const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode)
+    if (scalingMode !== "Custom") {
+      logger.logDebug("Custom width options only apply when the 'custom' animation scaling option is enabled.")
+    } else {
+      this.initAnimation()
+      this.updateApplet()
+    }
+  }
+
+  private updatePreserveAnimationAspectRatio(): void {
+    // This guard should not be necessary, as the option is hidden in the settings menu when not applicable.
+    const scalingMode = mapStringToAnimationScalingMode(this.settingsObject.animationScalingMode)
+    if (scalingMode !== "Custom") {
+      logger.logDebug(
+        "The 'Preserve aspect ratio' option only apply when the 'custom' animation scaling option is used.",
+      )
+    } else {
+      this.initAnimation()
+      this.updateApplet()
+    }
+  }
+
+  private updateAnimationRotation(): void {
+    this.initAnimation()
+    this.updateApplet()
+  }
+
+  // developer options
+  private updateLogLevel(): void {
+    const logLevel = mapStringToLogLevel(this.settingsObject.logLevel)
+    logger.setLogLevel(logLevel)
+  }
+  private updateForceFoolsDay(): void {
+    const isActivated = this.settingsObject.forceFoolsDay
+    if (isActivated) {
+      this.stopPeriodicFoolsDayCheck()
+      this.isFoolsDay = true
+      // need to re-init applet with Fool's Day animation and popup
+      this.initAnimation()
+      this.updateApplet()
+    } else {
+      // function will once directly do a check and re-inits the applet correctly again
+      this.startPeriodicFoolsDayCheck()
+    }
+  }
+
+  // -------------------------------------------------------------------------------------------------
 
   // Applet is in a normal state. Show the fish.
   private updateApplet(): void {
@@ -577,7 +679,7 @@ If you prefer not to install any additional packages, you can change the command
   private async checkIfFoolsDay(): Promise<void> {
     const prev = this.isFoolsDay
     this.isFoolsDay = await isFoolsDay()
-    // Fools day has just began or is now over. Need to re-init animation and popup.
+    // Fool's Day has just began or is now over. Need to re-init animation and popup.
     if (prev !== this.isFoolsDay) {
       if (this.isFoolsDay) {
         this.animatedFish?.enableIsFoolsDay()
@@ -589,7 +691,9 @@ If you prefer not to install any additional packages, you can change the command
   }
 
   private startPeriodicFoolsDayCheck(): void {
-    // check immediately
+    // before starting a new timeout, stop previous if any
+    this.stopPeriodicFoolsDayCheck()
+    // check once immediately
     this.checkIfFoolsDay()
     // TODO: Mainloop is marked as "deprecated". What to use instead?
     // Use GLib functions directly (like in Animation.ts)?
@@ -633,13 +737,10 @@ If you prefer not to install any additional packages, you can change the command
     return getThemeAppearance(DEFAULT_APPLET_CLASS_NAME) === "Dark" ? true : false
   }
 
-  // reads and calculate margins from active CSS stylesheet, element "applet-box"
   private getAppletMargin(): number {
-    const themeNode = getThemeNodeOfClass(DEFAULT_APPLET_CLASS_NAME)
-    const margin =
-      themeNode.get_horizontal_padding() +
-      themeNode.get_border_width(imports.gi.St.Side.TOP) +
-      themeNode.get_border_width(imports.gi.St.Side.BOTTOM)
-    return margin
+    if (this.settingsObject.autoAnimationMargin) {
+      return getMargin(DEFAULT_APPLET_CLASS_NAME)
+    }
+    return this.settingsObject.customAnimationMargin
   }
 }

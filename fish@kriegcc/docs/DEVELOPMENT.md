@@ -193,6 +193,31 @@ The coding guidelines are not definitive. Feel free to suggest changes or additi
 - If you copy code from another applet, add a comment and give credit.
 - Ensure that no copyright is violated and the applet's license is retained (GPL-3.0-or-later).
 
+## Developer Options
+
+There is a hidden **Developer Options** section in the **Advanced Settings** tab of the Preferences dialog. This section contains options intended for debugging and development purposes. For example, it includes an option to trigger the Fool's Day easter egg without changing the system date. You can also add additional options here that should remain hidden from normal users.
+
+![Developer Options][advanced-settings-developer-options]
+
+### Enable Display of Developer Options
+
+The visibility of the **Developer Options** section is controlled by the `keyDeveloperOptionsEnabled` setting, which is of type `generic`. To enable it:
+
+1. Locate the Fish applet's configuration JSON file under: `~/.config/cinnamon/spices/fish@kriegcc`
+2. Modify the `keyDeveloperOptionsEnabled` value to `true`. The updated JSON entry should look like this:
+
+```json
+"keyDeveloperOptionsEnabled": {
+  "type": "generic",
+  "default": false,
+  "value": true
+}
+```
+
+3. Close the Preferences dialog (if it is open) and reopen it.
+
+The next time you open the applet preferences, the **Developer Options** section will be visible in the Advanced Settings tab.
+
 ## Troubleshooting
 
 Unhandled errors can easily lead to a crash of the Cinnamon desktop. When this happens, window decorations may disappear, and nothing may be clickable.
@@ -266,3 +291,5 @@ Source code of the original Fish applet:
 
 - [GNOME](https://gitlab.gnome.org/GNOME/gnome-panel/-/tree/master/modules/fish)
 - [MATE](https://github.com/mate-desktop/mate-panel/tree/master/applets/fish)
+
+[advanced-settings-developer-options]: ./images/applet/advanced-settings-developer-options.png

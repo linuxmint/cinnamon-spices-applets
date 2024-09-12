@@ -67,3 +67,13 @@ export function invertColor(color: imports.gi.Clutter.Color): imports.gi.Clutter
   })
   return invertedColor
 }
+
+// reads and calculate margin of provided element in active CSS stylesheet
+export function getMargin(className: string): number {
+  const themeNode = getThemeNodeOfClass(className)
+  const margin =
+    themeNode.get_horizontal_padding() +
+    themeNode.get_border_width(imports.gi.St.Side.TOP) +
+    themeNode.get_border_width(imports.gi.St.Side.BOTTOM)
+  return margin
+}

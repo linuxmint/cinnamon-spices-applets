@@ -35,8 +35,6 @@ export const AnimatedFish = GObject.registerClass(
 
     public update(props: AnimatedFishProps): void {
       this.props = props
-      // remove old animation
-      this.cleanUp()
       // create new one
       this.initAnimation()
     }
