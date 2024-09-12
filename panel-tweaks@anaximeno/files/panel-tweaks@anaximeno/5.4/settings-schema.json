@@ -19,6 +19,22 @@
         "description": "Tweak Panel Shadow",
         "default": false
     },
+    "panel-shadow-color": {
+        "type": "colorchooser",
+        "description": "Panel Shadow Color",
+        "dependency": "enable-panel-shadow-tweak",
+        "default": "#010101"
+    },
+    "panel-shadow-bluriness": {
+        "type": "spinbutton",
+        "units": "px",
+        "dependency": "enable-panel-shadow-tweak",
+        "description": "Shadow Bluriness",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 16.0,
+        "step": 0.05
+    },
     "panel-shadow-x-axis-shift": {
         "type": "spinbutton",
         "units": "px",
@@ -38,22 +54,6 @@
         "min": -10.0,
         "max": 10.0,
         "step": 0.05
-    },
-    "panel-shadow-bluriness": {
-        "type": "spinbutton",
-        "units": "px",
-        "dependency": "enable-panel-shadow-tweak",
-        "description": "Shadow Bluriness",
-        "default": 0.0,
-        "min": 0.0,
-        "max": 16.0,
-        "step": 0.05
-    },
-    "panel-shadow-color": {
-        "type": "colorchooser",
-        "description": "Panel Shadow Color",
-        "dependency": "enable-panel-shadow-tweak",
-        "default": "#010101"
     },
     "enable-panel-border-tweak": {
         "type": "switch",

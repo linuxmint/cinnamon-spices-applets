@@ -17,7 +17,7 @@
  */
 'use strict';
 
-const { STYLE_UNSET_KEY } = require("./constants.js");
+const { STYLE_TWEAK_UNSET_KEY } = require("./constants.js");
 
 function basicStylesDecoder(stylesText) {
     let stylesObject = {};
@@ -40,8 +40,13 @@ function basicStylesEncoder(stylesObject) {
 
     if (stylesObject)
         for (let [key, value] of Object.entries(stylesObject))
-            if (value && value !== STYLE_UNSET_KEY)
+            if (value && value !== STYLE_TWEAK_UNSET_KEY)
                 stylesEncoded += `${key}: ${value}; `;
 
     return stylesEncoded.trimEnd();
+}
+
+function round(value, nplaces = 0) {
+    let multDiv = 10 ** nplaces;
+    return Math.round(value * multDiv) / multDiv;
 }
