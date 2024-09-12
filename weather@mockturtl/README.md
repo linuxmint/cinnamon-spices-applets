@@ -168,7 +168,6 @@ Weather Underground is a privately owned, web-based weather information company.
 - You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
 - Disclaimer: Observations don't provide weather conditions so the forecast one for the day is used.
 
-
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 
 The setting allows you to make the applet display basically anything in the form of text in the panel (and other places). In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
@@ -191,7 +190,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{country}`       | Country name shown in the popup                           |
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
 | `{last_updated}`  | Formatted last updated time                               |
-| `{br}`            | Line Break		                                            |
+| `{br}`            | Line Break                                                |
 
 ## Run script when the weather data changes
 
@@ -228,7 +227,9 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * On subsequent refreshes/relogins the popup menu's element's may lose all padding.
 
-* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed. 
+* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed.
+
+* New Breeze icons don't display properly. If you are using them or any icon theme that inherits from them they (mostly) will appear as white boxes. See [Symbolic icon rendering issues in Arch linux Cinnamon (#20) · Issues · Frameworks / Breeze Icons · GitLab](https://invent.kde.org/frameworks/breeze-icons/-/issues/20)
 
 ### Report a new issue
 
