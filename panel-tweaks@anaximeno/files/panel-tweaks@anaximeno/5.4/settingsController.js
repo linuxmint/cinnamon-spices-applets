@@ -18,8 +18,8 @@
 'use strict';
 
 const Params = imports.misc.params;
-const { basicStylesEncoder, basicStylesDecoder } = require("./helpers.js");
-const { STYLE_UNSET_KEY } = require("./constants.js");
+const { basicStylesEncoder, basicStylesDecoder, round } = require("./helpers.js");
+const { STYLE_TWEAK_UNSET_KEY } = require("./constants.js");
 
 
 var PanelTweakController = class PanelTweakController {
@@ -30,12 +30,14 @@ var PanelTweakController = class PanelTweakController {
         this.enablerKey = enablerKey;
 
         if (enablerKey) {
-            this.settings.bind(enablerKey, enablerKey.replaceAll('-', '_'), this.on_enabler_switched.bind(this));
+            this.settings.bind(
+                this.enablerKey,
+                this.enablerKey.replaceAll('-', '_'),
+                this.on_enabler_switched.bind(this),
+            );
         }
 
-        if (this.enabled) {
-            this.start();
-        }
+        if (this.enabled) this.start();
     }
 
     get values() {
@@ -72,8 +74,13 @@ var PanelTweakController = class PanelTweakController {
     }
 
     start() {
-        for (const key of this.keys)
-            this.settings.bind(key, key.replaceAll('-', '_'), this.on_changed.bind(this));
+        for (const key of this.keys) {
+            this.settings.bind(
+                key,
+                key.replaceAll('-', '_'),
+                this.on_changed.bind(this),
+            );
+        }
         this.on_changed();
     }
 
@@ -88,10 +95,6 @@ var PanelTweakController = class PanelTweakController {
 
 
 var PanelColorTweakController = class PanelColorTweakController extends PanelTweakController {
-    constructor(applet, settings, key, enablerKey) {
-        super(applet, settings, key, enablerKey);
-    }
-
     on_changed() {
         let [value] = this.values;
         this.set_panel_style({
@@ -103,44 +106,36 @@ var PanelColorTweakController = class PanelColorTweakController extends PanelTwe
 
     finalize() {
         this.set_panel_style({
-            "background-color": STYLE_UNSET_KEY,
-            "background-gradient-end": STYLE_UNSET_KEY,
-            "background-gradient-start": STYLE_UNSET_KEY,
+            "background-color": STYLE_TWEAK_UNSET_KEY,
+            "background-gradient-end": STYLE_TWEAK_UNSET_KEY,
+            "background-gradient-start": STYLE_TWEAK_UNSET_KEY,
         });
     }
 }
 
 var PanelShadowTweakController = class PanelShadowTweakController extends PanelTweakController {
-    constructor(applet, settings, key, enablerKey) {
-        super(applet, settings, key, enablerKey);
-    }
-
     on_changed() {
         let values = this.valuesKeysMapped;
-        let x = values["panel-shadow-x-axis-shift"];
-        let y = values["panel-shadow-y-axis-shift"];
-        let bluriness = values["panel-shadow-bluriness"];
+        let x = round(values["panel-shadow-x-axis-shift"], 2);
+        let y = round(values["panel-shadow-y-axis-shift"], 2);
+        let bluriness = round(values["panel-shadow-bluriness"], 2);
         let color = values["panel-shadow-color"];
         let shadow = `${x}px ${y}px ${bluriness}px ${color}`;
         this.set_panel_style({ "box-shadow": shadow });
     }
 
     finalize() {
-        this.set_panel_style({ "box-shadow": STYLE_UNSET_KEY });
+        this.set_panel_style({ "box-shadow": STYLE_TWEAK_UNSET_KEY });
     }
 }
 
 var PanelBorderTweakController = class PanelBorderTweakController extends PanelTweakController {
-    constructor(applet, settings, key, enablerKey) {
-        super(applet, settings, key, enablerKey);
-    }
-
     on_changed() {
         let values = this.valuesKeysMapped;
-        let top = values["panel-border-top-thickness"];
-        let right = values["panel-border-right-thickness"];
-        let bottom = values["panel-border-bottom-thickness"];
-        let left = values["panel-border-left-thickness"];
+        let top = round(values["panel-border-top-thickness"], 2);
+        let right = round(values["panel-border-right-thickness"], 2);
+        let bottom = round(values["panel-border-bottom-thickness"], 2);
+        let left = round(values["panel-border-left-thickness"], 2);
         let color = values["panel-border-color"];
         this.set_panel_style({
             "border-top": `${top}px`,
@@ -153,11 +148,11 @@ var PanelBorderTweakController = class PanelBorderTweakController extends PanelT
 
     finalize() {
         this.set_panel_style({
-            "border-top": STYLE_UNSET_KEY,
-            "border-right": STYLE_UNSET_KEY,
-            "border-bottom": STYLE_UNSET_KEY,
-            "border-left": STYLE_UNSET_KEY,
-            "border-color": STYLE_UNSET_KEY,
+            "border-top": STYLE_TWEAK_UNSET_KEY,
+            "border-right": STYLE_TWEAK_UNSET_KEY,
+            "border-bottom": STYLE_TWEAK_UNSET_KEY,
+            "border-left": STYLE_TWEAK_UNSET_KEY,
+            "border-color": STYLE_TWEAK_UNSET_KEY,
         });
     }
 }
