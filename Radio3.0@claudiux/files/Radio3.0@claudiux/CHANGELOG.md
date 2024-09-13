@@ -1,3 +1,6 @@
+### v2.1.3~20240913
+  * Now the "unassigned" word can be translated. See #6415.
+
 ### v2.1.2~20240731
   * Adds "Easy Effects" entry in context menu when easyeffects is present.
   * To install easyeffects (for pipewire): `apt install easyeffects calf-plugins`

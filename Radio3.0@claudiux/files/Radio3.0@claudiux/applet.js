@@ -233,6 +233,8 @@ const QUEUE = 1;
 
 var VERSION;
 
+let dummy = _("unassigned"); // Only for translation.
+
 /* Check if string is valid UUID */
 function isValidUUID(str) {
   // Regular expression to check if string is a valid UUID
