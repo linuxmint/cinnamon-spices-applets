@@ -12,10 +12,12 @@ if len(sys.argv) != 2:
     print("./validate-spice --all")
     sys.exit(1)
 
-SPICE_TYPE="applet"
+SPICE_TYPE = "applet"
+
 
 class CheckError(Exception):
     pass
+
 
 # function with checks for an xlet
 def validate_xlet(uuid):
@@ -41,7 +43,9 @@ def validate_xlet(uuid):
         found = False
         for root, dirs, files in os.walk("files/%s" % uuid):
             if any(ext.endswith(".po") for ext in files) and not any(ext.endswith(".pot") for ext in files):
-                raise CheckError("[%s] Invalid location for translation files!" % (uuid))
+                raise CheckError("[%s] Invalid location for translation files! (Move any .po or .pot to files/%s/po)" % (uuid, uuid))
+            if any(ext.endswith(".mo") for ext in files):
+                raise CheckError("[%s] Translation files should not be compiled! (Delete any .mo files in %s)" % (uuid, uuid))
             for file in files:
                 if file == "%s.js" % SPICE_TYPE:
                     found = True
@@ -133,7 +137,8 @@ def validate_xlet(uuid):
     os.chdir("..")
     return valid
 
-def quit(valid):
+
+def exit_status(valid):
     if (valid):
         print ("No errors found. Everything looks good.")
         sys.exit(0)
@@ -141,6 +146,7 @@ def quit(valid):
         print ("\nErrors were found! Once you fix the issue, please re-run "
                "'validate-spice <uuid>'' to check for further errors.")
         sys.exit(1)
+
 
 if sys.argv[1] == "--all":
     valid = True
@@ -150,4 +156,4 @@ if sys.argv[1] == "--all":
 else:
     valid = validate_xlet(sys.argv[1])
 
-quit(valid)
+exit_status(valid)
