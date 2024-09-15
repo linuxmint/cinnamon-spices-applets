@@ -357,6 +357,11 @@ function resizeActor(actor, time, toWidth, text, button) {
              this._minLabelSize = curWidth;
           }
        }
+       // Update all the icon geometry info since any change in the actor size can move all buttons when the applet is located in the centre of a panel.
+       let currentWs = global.screen.get_active_workspace_index();
+       if (button._workspace._wsNum === currentWs) {
+          button._workspace.updateIconGeometry();
+       }
     },
     onCompleteScope: button
   });
@@ -404,11 +409,21 @@ function animatedRemoveAppButton(workspace, time, button) {
        transition: "easeInOutQuad",
        onComplete() {
           this._removeAppButton(button);
+          // Update all the icon geometry info since any change in the actor size can move all buttons when the applet is located in the centre of a panel.
+          let currentWs = global.screen.get_active_workspace_index();
+          if (button._workspace._wsNum === currentWs) {
+             button._workspace.updateIconGeometry();
+          }
        },
        onCompleteScope: workspace
      });
   } else {
      workspace._removeAppButton(button);
+    // Update all the icon geometry info since any change in the actor size can move all buttons when the applet is located in the centre of a panel.
+    let currentWs = global.screen.get_active_workspace_index();
+    if (button._workspace._wsNum === currentWs) {
+       button._workspace.updateIconGeometry();
+    }
   }
 }
 
@@ -1231,9 +1246,19 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
       let window = windows[i];
       this.addWindow(window);
     }
+    this.numThumbs = this._settings.getValue("number-of-unshrunk-previews");
     let wheelSetting = this._settings.getValue("wheel-adjusts-preview-size");
-    if (wheelSetting===ScrollWheelAction.OnGlobal)
+    if (wheelSetting===ScrollWheelAction.OnGlobal) {
        this.numThumbs = this._appButton._workspace.thumbnailSize;
+    } else if (wheelSetting===ScrollWheelAction.OnApplication) {
+       let appThumbSizes = this._settings.getValue("app-preview-size");
+       for ( let i=0 ; i < appThumbSizes.length ; i++ ) {
+          if (appThumbSizes[i].app == this._appButton._app.get_id()) {
+             this.numThumbs = appThumbSizes[i].size;
+             break;
+          }
+       }
+    }
     this.updateUrgentState();
     this.recalcItemSizes();
 
@@ -1477,7 +1502,7 @@ class WindowListButton {
     this._signalManager.connect(this.actor, "button-press-event", this._onButtonPress, this);
     this._signalManager.connect(this.actor, "button-release-event", this._onButtonRelease, this);
     this._signalManager.connect(this.actor, "scroll-event", this._onScrollEvent, this);
-    this._signalManager.connect(this.actor, "notify::allocation", this._allocationChanged, this);
+    //this._signalManager.connect(this.actor, "notify::allocation", this._allocationChanged, this);
     this._signalManager.connect(this._settings, "changed::caption-type", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::hide-caption-for-minimized", this._updateLabel, this);
@@ -1514,20 +1539,9 @@ class WindowListButton {
     this._updateSpacing();
   }
 
-  _allocationChanged() {
-     // Update the icon location so Cinnamon's minimize/restore animation can work correctly
-     let curWS = global.screen.get_active_workspace_index();
-     if (this._windows.length>0 && curWS === this._workspace._wsNum && this._settings.getValue("group-windows")!==GroupType.Launcher) {
-        let rect = new Meta.Rectangle();
-        [rect.x, rect.y] = this._iconBin.get_transformed_position();
-        [rect.width, rect.height] = this._iconBin.get_transformed_size();
-        this._windows.forEach((window) => {
-           if (window.is_on_all_workspaces() || window.get_workspace().index() === curWS ) {
-              window.set_icon_geometry(rect);
-           }
-        });
-     }
-  }
+  //_allocationChanged() {
+  //   this.updateIconGeometry();
+  //}
 
   // Sort this._windows by workspace and monitor
   _sortWindows() {
@@ -2664,11 +2678,43 @@ class WindowListButton {
      this.menu.numThumbs = numThumbs;
      this.menu.recalcItemSizes();
      if (wheelSetting===ScrollWheelAction.OnGlobal) {
-        this._workspace.thumbnailSize = numThumbs;
+        for (let i = 0; i < this._applet._workspaces.length; i++) {
+           let ws = this._applet._workspaces[i];
+           ws.thumbnailSize = numThumbs;
+        }
+        this._settings.setValue("global-preview-size", numThumbs);
      } else if (wheelSetting===ScrollWheelAction.OnApplication) {
-        let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
-        for (let idx=0 ; idx < btns.length ; idx++ ) {
-           btns[idx].menu.numThumbs = numThumbs;
+        // Apply this new preview size to all buttons on all workspaces for this app
+        for (let i = 0; i < this._applet._workspaces.length; i++) {
+           let ws = this._applet._workspaces[i];
+           let btns = ws._lookupAllAppButtonsForApp(this._app);
+           for (let idx=0 ; idx < btns.length ; idx++ ) {
+              btns[idx].menu.numThumbs = numThumbs;
+           }
+        }
+
+        let appThumbSizes = this._settings.getValue("app-preview-size");
+        let appThumbSize = null;
+        let i=0
+        for ( ; i < appThumbSizes.length ; i++ ) {
+           if (appThumbSizes[i].app == this._app.get_id()) {
+              appThumbSize = appThumbSizes[i];
+              break;
+           }
+        }
+        // Save/delete this new per-app preview size into the config json
+        if (numThumbs === this._settings.getValue("number-of-unshrunk-previews")) {
+           if (appThumbSize) {
+              appThumbSizes.splice(i, 1);
+              this._settings.setValue("app-preview-size", appThumbSizes);
+           }
+        } else {
+           if (appThumbSize) {
+              appThumbSizes[i].size = numThumbs;
+           } else {
+              appThumbSizes.push( { app: this._app.get_id(), size: numThumbs } );
+           }
+           this._settings.setValue("app-preview-size", appThumbSizes);
         }
      }
   }
@@ -3792,7 +3838,18 @@ class WindowListButton {
   }
 
   updateIconGeometry() {
-     this._allocationChanged();
+     // Update the icon location so Cinnamon's minimize/restore animation can work correctly
+     let curWS = global.screen.get_active_workspace_index();
+     if (this._windows.length>0 && curWS === this._workspace._wsNum && this._settings.getValue("group-windows")!==GroupType.Launcher) {
+        let rect = new Meta.Rectangle();
+        [rect.x, rect.y] = this._iconBin.get_transformed_position();
+        [rect.width, rect.height] = this._iconBin.get_transformed_size();
+        this._windows.forEach((window) => {
+           if (window.is_on_all_workspaces() || window.get_workspace().index() === curWS ) {
+              window.set_icon_geometry(rect);
+           }
+        });
+     }
   }
 }
 
@@ -3820,7 +3877,10 @@ class Workspace {
 
     this.menuManager = new ThumbnailMenuManager(this);
     this.currentMenu = undefined; // The currently open Thumbnail menu
-    this.thumbnailSize = this._settings.getValue("number-of-unshrunk-previews");
+    if (this._settings.getValue("wheel-adjusts-preview-size")===ScrollWheelAction.OnGlobal)
+       this.thumbnailSize = this._settings.getValue("global-preview-size");
+    else
+       this.thumbnailSize = this._settings.getValue("number-of-unshrunk-previews");
 
     this._appButtons = [];
     this._settings = this._applet._settings;
@@ -5307,12 +5367,25 @@ class WindowList extends Applet.Applet {
     this._signalManager.connect(this._settings, "changed::display-pinned", this._onDisplayPinnedChanged, this);
     this._signalManager.connect(this._settings, "changed::synchronize-pinned", this._onSynchronizePinnedChanged, this);
     this._signalManager.connect(this._settings, "changed::show-windows-for-all-workspaces", this._onShowOnAllWorkspacesChanged, this);
+    this._signalManager.connect(this._settings, "changed::number-of-unshrunk-previews", this._updateGlobalPreviewSize, this);
     this._signalManager.connect(this._settings, "settings-changed", this._onSettingsChanged, this);
 
     if (this._settings.getValue("runWizard")===1) {
        let command = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this._uuid + "/setupWizard " + this._uuid + " " + this.instance_id;
        Util.spawnCommandLineAsync(command);
     }
+  }
+
+  _updateGlobalPreviewSize() {
+     // Set the new thumbnail sizes. Only set the size used when the ScrollWheel setting is "On (global default)"
+     // Under the other ScrollWheel settings we don't use the ws.thumbnailSize variable
+     let numThumbs = this._settings.getValue("number-of-unshrunk-previews");
+     this._settings.setValue("global-preview-size", numThumbs);
+     for (let i = 0; i < this._workspaces.length; i++) {
+        let ws = this._workspaces[i];
+        ws.thumbnailSize = numThumbs;
+     }
+     this._settings.setValue("app-preview-size", []);
   }
 
   _onShowOnAllWorkspacesChanged() {

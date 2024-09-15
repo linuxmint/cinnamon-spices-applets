@@ -1,7 +1,10 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features designed to give you more control over how your window-list operates.
 
-Recent new features (Aug 2023 - July 2024):
+Recent new features (Aug 2023 - Sept 2024):
 
+* Saves new default thumbnail window sizes (adjusted using the mouse scroll-wheel) across cinnamon restarts
+* Now uses application specific thumbnail windows sizes across all workspaces
+* Changing the "Default thumbnail window size" setting will now reset all scroll-wheel set thumbnail sizes
 * Add "Always on top" item to the button context menu as well as "Always on top" mouse actions (Cinnamon 5.4+)
 * Allow rearranging Thumbnail menu items using drag-and-drop, also allow dropping on the desktop
 * Add options for hiding button labels when the windows workspace/monitor is not the current workspace/monitor
@@ -35,7 +38,7 @@ The design goals are to:
 1. Allow you to declutter your window list when running many windows without having to do without button labels
 2. Keyboard hot-keys to switch to specific windows so you don't have to reach for the mouse so often
 3. Allow you to make full use of your mouse buttons to interact with the window list
-4. A panel launcher that will activate existing windows rather then unconditionally launching new ones
+4. A panel launcher that can activate existing windows rather then unconditionally launching new ones
 
 ## Requirements
 This applet requires at least Cinnamon 4.0 but Cinnamon 6.0 is recommended

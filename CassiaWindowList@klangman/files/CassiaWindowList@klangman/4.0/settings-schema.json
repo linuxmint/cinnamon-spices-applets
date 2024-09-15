@@ -934,6 +934,14 @@
     "type": "generic",
     "default": [1, 1, 1]
   },
+  "app-preview-size": {
+     "type": "generic",
+     "default": []
+  },
+  "global-preview-size": {
+     "type": "generic",
+     "default": 7
+  },
 
   "runWizard": {
      "type": "generic",

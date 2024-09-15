@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.3.4
+
+* Saves new default thumbnail window sizes (adjusted using the mouse scroll-wheel) across cinnamon restarts
+* Now uses application specific thumbnail windows sizes across all workspaces
+* Changing the "Default thumbnail window size" setting will now reset all scroll-wheel set thumbnail sizes
+* Fix the icon geometry so that it is set correctly in more (all?) cases
+
 ## 2.3.3
 
 * Improve the window icon geometry update logic for more accurate minimize/unminimize animations. It's still not perfect, but this fixes most of the issues.
