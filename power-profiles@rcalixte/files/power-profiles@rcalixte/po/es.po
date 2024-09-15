@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. 5.4/applet.js:25
 msgid "Power Saver"
@@ -31,9 +31,8 @@ msgid "Performance"
 msgstr "Alto rendimiento"
 
 #. 5.4/applet.js:60
-#, fuzzy
 msgid "Power Profiles Applet Error"
-msgstr "Perfiles de energía"
+msgstr "Error en el applet de perfiles de energía"
 
 #. 5.4/applet.js:61
 msgid ""
@@ -41,14 +40,17 @@ msgid ""
 "\n"
 "Please install it and reload the applet."
 msgstr ""
+"El paquete del sistema 'power-profiles-daemon' no está instalado.\n"
+"\n"
+"Por favor, instálelo y vuelva a cargar el applet."
 
 #. 5.4/applet.js:63
 msgid "Open README"
-msgstr ""
+msgstr "Abrir README"
 
 #. 5.4/applet.js:64
 msgid "Open Website"
-msgstr ""
+msgstr "Abrir el sitio web"
 
 #. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
@@ -141,22 +143,24 @@ msgstr "Mostrar en pantalla el nuevo perfil al utilizar los atajos de teclado"
 
 #. 5.4->settings-schema.json->section2->description
 msgid "Appearance"
-msgstr ""
+msgstr "Apariencia"
 
 #. 5.4->settings-schema.json->iconStyle->description
 msgid "Icon Style"
-msgstr ""
+msgstr "Estilo de icono"
 
 #. 5.4->settings-schema.json->iconStyle->options
 msgid "Classic"
-msgstr ""
+msgstr "Clásico"
 
 #. 5.4->settings-schema.json->iconStyle->options
 msgid "Papirus"
-msgstr ""
+msgstr "Papirus"
 
 #. 5.4->settings-schema.json->iconStyle->tooltip
 msgid ""
 "Choose the style of the applet's icon. This is used for the panel and the on-"
 "screen display."
 msgstr ""
+"Elija el estilo del icono del applet. Se utiliza para el panel y la "
+"visualización en pantalla."
