@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-06 22:34-0400\n"
+"POT-Creation-Date: 2024-09-15 16:04-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,19 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: 5.4/applet.js:24
+#. 5.4/applet.js:25
 msgid "Power Saver"
 msgstr "Energiatakarékos"
 
-#: 5.4/applet.js:25
+#. 5.4/applet.js:26
 msgid "Balanced"
 msgstr "Kiegyensúlyozott"
 
-#: 5.4/applet.js:26
+#. 5.4/applet.js:27
 msgid "Performance"
 msgstr "Teljesítmény"
 
-#: 5.4/applet.js:58 5.4/applet.js:64
+#. 5.4/applet.js:60
+#, fuzzy
+msgid "Power Profiles Applet Error"
+msgstr "Teljesítményprofilok"
+
+#. 5.4/applet.js:61
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+
+#. 5.4/applet.js:63
+msgid "Open README"
+msgstr ""
+
+#. 5.4/applet.js:64
+msgid "Open Website"
+msgstr ""
+
+#. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
 "Please make sure the power-profiles-daemon package is installed and the "
 "service is running."
@@ -38,19 +58,19 @@ msgstr ""
 "Győződjön meg arról, hogy telepítve van a power-profiles-daemon csomag, és "
 "hogy a szolgáltatás fut."
 
-#: 5.4/applet.js:59
+#. 5.4/applet.js:89
 msgid "exception:"
 msgstr "kivétel:"
 
-#: 5.4/applet.js:110
+#. 5.4/applet.js:138
 msgid "Current Profile:"
 msgstr "Aktuális profil:"
 
-#: 5.4/applet.js:115
+#. 5.4/applet.js:143
 msgid "Performance Degraded:"
 msgstr "Csökkent teljesítmény:"
 
-#: 5.4/applet.js:126
+#. 5.4/applet.js:154
 msgid "Active Profile Holds:"
 msgstr "Aktív profil megtartása:"
 
@@ -118,3 +138,25 @@ msgid ""
 "Show on-screen display of the new profile when using the keyboard shortcuts"
 msgstr ""
 "Képernyőn az új profil megjelenítése a gyorsbillentyűvel történő váltáskor"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
