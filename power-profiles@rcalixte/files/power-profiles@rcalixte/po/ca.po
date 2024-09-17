@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-15 16:04-0400\n"
-"PO-Revision-Date: 2024-07-13 03:25+0200\n"
+"PO-Revision-Date: 2024-09-17 02:17+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -31,9 +31,8 @@ msgid "Performance"
 msgstr "Rendiment"
 
 #. 5.4/applet.js:60
-#, fuzzy
 msgid "Power Profiles Applet Error"
-msgstr "Plans d'energia"
+msgstr "Error de la miniaplicació de perfils d'energia"
 
 #. 5.4/applet.js:61
 msgid ""
@@ -41,14 +40,17 @@ msgid ""
 "\n"
 "Please install it and reload the applet."
 msgstr ""
+"El paquet de sistema 'power-profiles-daemon' no està instal·lat.\n"
+"\n"
+"Si us plau, instal·leu-lo i recarregueu la miniaplicació."
 
 #. 5.4/applet.js:63
 msgid "Open README"
-msgstr ""
+msgstr "Obrir README"
 
 #. 5.4/applet.js:64
 msgid "Open Website"
-msgstr ""
+msgstr "Obrir Web"
 
 #. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
@@ -114,8 +116,8 @@ msgstr ""
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
 "If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
 "\n"
 "If disabled, if the current profile is 'Power Saver' and the 'Previous "
 "profile' keyboard shortcut is used, the profile would not change."
@@ -140,22 +142,24 @@ msgstr ""
 
 #. 5.4->settings-schema.json->section2->description
 msgid "Appearance"
-msgstr ""
+msgstr "Aparença"
 
 #. 5.4->settings-schema.json->iconStyle->description
 msgid "Icon Style"
-msgstr ""
+msgstr "Estil de la icona"
 
 #. 5.4->settings-schema.json->iconStyle->options
 msgid "Classic"
-msgstr ""
+msgstr "Clàssic"
 
 #. 5.4->settings-schema.json->iconStyle->options
 msgid "Papirus"
-msgstr ""
+msgstr "Papirus"
 
 #. 5.4->settings-schema.json->iconStyle->tooltip
 msgid ""
 "Choose the style of the applet's icon. This is used for the panel and the on-"
 "screen display."
 msgstr ""
+"Trieu l'estil de la icona de la miniaplicació. S'utilitzarà al tauler i a la "
+"visualització en pantalla."
