@@ -17,7 +17,6 @@
  */
 'use strict';
 
-const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
@@ -28,6 +27,7 @@ const { GLib, St, Clutter } = imports.gi;
 const { EyeModeFactory } = require("./eyeModes.js");
 const { Debouncer } = require("./helpers.js");
 const { AREA_DEFAULT_WIDTH, UUID } = require("./constants.js");
+const PointerWatcher = require("./pointerWatcher.js").getPointerWatcher();
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -57,16 +57,9 @@ class Eye extends Applet.Applet {
 		this.actor.add(this.area);
 
 		this.eyePainter = EyeModeFactory.createEyeMode(this.mode);
-
 		this.signals = new SignalManager.SignalManager(null);
+
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
-		this.signals.connect(global.screen, 'workspace-switched', () => {
-			// If the eye is refreshed exactly during the workspace switch process it's possible that the position
-			// of the panel is not correctly accessed, so the position of the eye cannot be estimated correctly,
-			// resulting in the eye looking at the wrong direction, to avoid that we will give it some timeout and
-			// wait first for the switch process to complete.
-			Util.setTimeout(() => this.on_property_updated(), 400);
-		}, this);
 		this.signals.connect(Main.layoutManager, 'monitors-changed', () => {
 			Util.setTimeout(() => this.on_property_updated(), 100);
 		}, this);
@@ -222,12 +215,8 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	on_refresh_timeout() {
-		if (this.should_redraw()) {
-			this.area.queue_repaint();
-		}
-
-		return true;
+	on_mouse_moved(x, y) {
+		if (this.should_redraw(x, y)) this.area.queue_repaint();
 	}
 
 	on_eye_mode_update() {
@@ -238,13 +227,6 @@ class Eye extends Applet.Applet {
 
 	on_optimization_mode_updated() {
 		// TODO
-	}
-
-	destroy() {
-		this.set_active(false);
-		this.signals.disconnectAllSignals();
-		this.area.destroy();
-		this.settings.finalize();
 	}
 
 	update_sizes() {
@@ -264,53 +246,36 @@ class Eye extends Applet.Applet {
 		this.area.set_height(height);
 	}
 
-	set_active(enabled) {
-		this.on_property_updated();
-
-		if (this._update_handler) {
-			Mainloop.source_remove(this._update_handler);
-			this._update_handler = null;
-		}
-
-		this.signals.disconnect('repaint', this.area);
-
-		if (enabled) {
-			this.signals.connect(this.area, 'repaint', this.paint_eye, this);
-
-			this._update_handler = Mainloop.timeout_add(
-				this.repaint_interval, this.on_refresh_timeout.bind(this)
-			);
-
-			this.area.queue_repaint();
-		}
-
-		let status = enabled ? "enabled" : "disabled";
-		global.log(UUID, `Eye/${this.instanceId} was ${status}!`);
-	}
-
 	update_tooltip() {
 		this.set_applet_tooltip(_(this.tooltip_message), false);
 	}
 
-	get_area_position() {
-		let obj = this.area;
+	set_active(enabled) {
+		this.on_property_updated();
 
-		let area_x = 0;
-		let area_y = 0;
+		this.signals.disconnect('repaint', this.area);
+		if (this.pointerMovementListener) {
+			this.pointerMovementListener.remove();
+			this.pointerMovementListener = null;
+		}
 
-		do {
-			let pos = obj.get_position();
+		if (enabled) {
+			this.signals.connect(this.area, 'repaint', this.paint_eye, this);
+			this.pointerMovementListener = PointerWatcher.addWatch(
+				this.repaint_interval,
+				this.on_mouse_moved.bind(this),
+			);
+			this.area.queue_repaint();
+		}
 
-			if (pos) {
-				let [tx, ty] = pos;
-				area_x += tx;
-				area_y += ty;
-			}
+		global.log(UUID, `Eye/${this.instanceId} ${enabled ? "enabled" : "disabled"}`);
+	}
 
-			obj = obj.get_parent();
-		} while (obj);
-
-		return [area_x, area_y];
+	destroy() {
+		this.set_active(false);
+		this.signals.disconnectAllSignals();
+		this.area.destroy();
+		this.settings.finalize();
 	}
 
 	paint_eye(area) {
@@ -342,19 +307,41 @@ class Eye extends Applet.Applet {
 			base_color: base_color,
 			iris_color: iris_color,
 			pupil_color: pupil_color,
-			line_width: this.line_width * global.ui_scale,
 			padding: this.padding * global.ui_scale,
-			lids_fill: this.fill_lids_color_painting &&
-				this.use_alternative_colors,
-			bulb_fill: this.fill_bulb_color_painting &&
-				this.use_alternative_colors,
-			is_vertical: this.orientation == St.Side.LEFT ||
-				this.orientation == St.Side.RIGHT,
+			line_width: this.line_width * global.ui_scale,
+			is_vertical: this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT,
+			lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
+			bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
 		});
 	}
 
-	should_redraw() {
-		const [mouse_x, mouse_y, _] = global.get_pointer();
+	get_area_position() {
+		let obj = this.area;
+
+		let area_x = 0;
+		let area_y = 0;
+
+		do {
+			let pos = obj.get_position();
+
+			if (pos) {
+				let [tx, ty] = pos;
+				area_x += tx;
+				area_y += ty;
+			}
+
+			obj = obj.get_parent();
+		} while (obj);
+
+		return [area_x, area_y];
+	}
+
+	should_redraw(mouse_x, mouse_y) {
+		if (!mouse_x || !mouse_y) {
+			const [x, y, _] = global.get_pointer();
+			mouse_x = x, mouse_y = y;
+		}
+
 		const [ox, oy] = this.get_area_position();
 
 		let should_redraw = true;
