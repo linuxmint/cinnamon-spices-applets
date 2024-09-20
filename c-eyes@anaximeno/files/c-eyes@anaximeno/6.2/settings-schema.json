@@ -1,27 +1,137 @@
 {
-	"info": {
-		"type": "section",
-		"description": "Info"
+	"layout": {
+		"type": "layout",
+		"pages": [
+			"general-page",
+			"style-page"
+		],
+		"general-page": {
+			"type": "page",
+			"title": "General",
+			"sections": [
+				"info-section",
+				"general-section",
+				"optimization-section"
+			]
+		},
+		"style-page": {
+			"type": "page",
+			"title": "Style",
+			"sections": [
+				"styles-section",
+				"colors-section"
+			]
+		},
+		"info-section": {
+			"type": "section",
+			"title": "Info",
+			"keys": [
+				"click-effects-moved-info"
+			]
+		},
+		"general-section": {
+			"type": "section",
+			"title": "General",
+			"keys": [
+				"tooltip-message",
+				"mode",
+				"deactivate-on-fullscreen",
+				"double-paint",
+				"optimization-mode"
+			]
+		},
+		"optimization-section": {
+			"type": "section",
+			"dependency": "optimization-mode=manual",
+			"title": "Optimizations",
+			"keys": [
+				"repaint-interval",
+				"repaint-angle"
+			]
+		},
+		"styles-section": {
+			"type": "section",
+			"title": "Style",
+			"keys": [
+				"mode",
+				"line-width",
+				"padding",
+				"margin",
+				"use-alternative-colors"
+			]
+		},
+		"colors-section": {
+			"type": "section",
+			"title": "Colors",
+			"dependency": "use-alternative-colors=true",
+			"keys": [
+				"base-color",
+				"iris-color",
+				"pupil-color",
+				"fill-lids-color-painting",
+				"fill-bulb-color-painting"
+			]
+		}
 	},
-
 	"click-effects-moved-info": {
 		"type": "label",
 		"description": "In Cinnamon versions 6.2 and later, the click effects have been removed from this applet and relocated to a new extension called 'mouse-click-effects,' which can be installed through the Cinnamon Extensions settings module."
 	},
-
-	"general": {
-		"type": "section",
-		"description": "General"
-	},
-
 	"mode": {
 		"type": "combobox",
 		"default": "lids",
-		"description": "Mode",
+		"description": "Eye Mode",
 		"options": {
 			"Lids": "lids",
 			"Bulb": "bulb"
 		}
+	},
+	"tooltip-message": {
+		"type": "entry",
+		"default": "Hey, I saw that!",
+		"description": "Tooltip Message on Hover"
+	},
+	"deactivate-on-fullscreen": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Deactivate On Fullscreen"
+	},
+	"optimization-mode": {
+		"type": "combobox",
+		"default": "balance",
+		"description": "Optimization Mode",
+		"options": {
+			"Battery": "battery",
+			"Balanced": "balance",
+			"Performance": "performance",
+			"Manual": "manual"
+		}
+	},
+	"repaint-interval": {
+		"type": "spinbutton",
+		"default": 55,
+		"min": 5,
+		"max": 200,
+		"step": 5,
+		"units": "ms",
+		"description": "Eye Update Interval",
+		"tooltip": "This setting controls the time to redraw the eye again. Lower values (measured in miliseconds) result in smoother animation but require more processing power."
+	},
+	"repaint-angle": {
+		"type": "spinbutton",
+		"default": 0.05,
+		"min": 0,
+		"max": 1,
+		"step": 0.05,
+		"units": "radians",
+		"description": "Eye Update Sensitivity",
+		"tooltip": "This setting controls the minimum angle change between mouse movements required to redraw the eye. Lower values (measured in radians) result in smoother animation but require more processing power."
+	},
+	"double-paint": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Paint the Eye Two Times on Update",
+		"tooltip": "Paint the eye two times to have more guarantee that it gets painted correctly"
 	},
 	"line-width": {
 		"type": "spinbutton",
@@ -50,49 +160,12 @@
 		"units": "px",
 		"description": "Padding"
 	},
-	"repaint-interval": {
-		"type": "spinbutton",
-		"default": 55,
-		"min": 5,
-		"max": 200,
-		"step": 5,
-		"units": "ms",
-		"description": "Eye Update Interval",
-		"tooltip": "This setting controls the time to redraw the eye again. Lower values (measured in miliseconds) result in smoother animation but require more processing power."
-	},
-	"repaint-angle": {
-		"type": "spinbutton",
-		"default": 0.05,
-		"min": 0,
-		"max": 1,
-		"step": 0.05,
-		"units": "radians",
-		"description": "Eye Update Sensitivity",
-		"tooltip": "This setting controls the minimum angle change between mouse movements required to redraw the eye. Lower values (measured in radians) result in smoother animation but require more processing power."
-	},
-	"tooltip-message": {
-		"type": "entry",
-		"default": "Hey, I saw that!",
-		"description": "Tooltip Message on Hover"
-	},
-	"deactivate-on-fullscreen": {
-		"type": "checkbox",
-		"default": true,
-		"description": "Deactivate On Fullscreen"
-	},
 	"use-alternative-colors": {
 		"type": "switch",
 		"default": true,
 		"description": "Use Alternative Colors for the Eye",
 		"tooltip": "When disabled it will use the current system theme's default color for panel items."
 	},
-
-	"colors": {
-		"type": "section",
-		"description": "Colors",
-		"dependency": "use-alternative-colors=true"
-	},
-
 	"base-color": {
 		"type": "colorchooser",
 		"default": "#BBBBBB",
