@@ -27,9 +27,8 @@
 			"keys": [
 				"tooltip-message",
 				"mode",
-				"deactivate-on-fullscreen",
-				"double-paint",
-				"optimization-mode"
+				"optimization-mode",
+				"deactivate-on-fullscreen"
 			]
 		},
 		"optimization-section": {
@@ -114,12 +113,6 @@
 		"units": "radians",
 		"description": "Eye Update Sensitivity",
 		"tooltip": "This setting controls the minimum angle change between mouse movements required to redraw the eye. Lower values (measured in radians) result in smoother animation but require more processing power."
-	},
-	"double-paint": {
-		"type": "checkbox",
-		"default": true,
-		"description": "Paint the Eye Two Times on Update",
-		"tooltip": "Paint the eye two times to have more guarantee that it gets painted correctly"
 	},
 	"line-width": {
 		"type": "spinbutton",
