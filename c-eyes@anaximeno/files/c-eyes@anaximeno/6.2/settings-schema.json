@@ -9,7 +9,6 @@
 			"type": "page",
 			"title": "General",
 			"sections": [
-				"info-section",
 				"general-section",
 				"optimization-section"
 			]
@@ -20,13 +19,6 @@
 			"sections": [
 				"styles-section",
 				"colors-section"
-			]
-		},
-		"info-section": {
-			"type": "section",
-			"title": "Info",
-			"keys": [
-				"click-effects-moved-info"
 			]
 		},
 		"general-section": {
@@ -72,10 +64,6 @@
 				"fill-bulb-color-painting"
 			]
 		}
-	},
-	"click-effects-moved-info": {
-		"type": "label",
-		"description": "In Cinnamon versions 6.2 and later, the click effects have been removed from this applet and relocated to a new extension called 'mouse-click-effects,' which can be installed through the Cinnamon Extensions settings module."
 	},
 	"mode": {
 		"type": "combobox",
