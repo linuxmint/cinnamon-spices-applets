@@ -26,7 +26,7 @@ const Util = imports.misc.util;
 const { GLib, St, Clutter } = imports.gi;
 const { EyeModeFactory } = require("./eyeModes.js");
 const { Debouncer } = require("./helpers.js");
-const { AREA_DEFAULT_WIDTH, UUID } = require("./constants.js");
+const { AREA_DEFAULT_WIDTH, UUID, Optimizations, MONITORS_CHANGED_UPDATE_TIMEOUT_MS } = require("./constants.js");
 const PointerWatcher = require("./pointerWatcher.js").getPointerWatcher();
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -49,8 +49,8 @@ class Eye extends Applet.Applet {
 		this.metadata = metadata;
 		this.instanceId = instanceId;
 		this.orientation = orientation;
-		this.settings = this._setup_settings(metadata.uuid, instanceId);
 
+		this.settings = this._setup_settings(metadata.uuid, instanceId);
 		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
 		this.area = new St.DrawingArea();
@@ -60,17 +60,40 @@ class Eye extends Applet.Applet {
 		this.signals = new SignalManager.SignalManager(null);
 
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
-		this.signals.connect(Main.layoutManager, 'monitors-changed', () => {
-			Util.setTimeout(() => this.on_property_updated(), 100);
-		}, this);
+		this.signals.connect(Main.layoutManager, 'monitors-changed',
+			() => Util.setTimeout(() => this.on_property_updated(), MONITORS_CHANGED_UPDATE_TIMEOUT_MS),
+			this);
 
 		this._last_mouse_x = undefined;
 		this._last_mouse_y = undefined;
 		this._last_eye_x = undefined;
 		this._last_eye_y = undefined;
 
+		this.enabled = false;
 		this.set_active(true);
 		this.update_tooltip();
+	}
+
+	get repaint_interval() {
+		let repaint_interval = this._repaint_interval;
+
+		if (this.optimization_mode != "manual") {
+			let r = Optimizations[this.optimization_mode]["repaint_interval_ms"];
+			if (r != null || r != undefined) repaint_interval = r;
+		}
+
+		return repaint_interval;
+	}
+
+	get repaint_angle() {
+		let repaint_angle = this._repaint_angle;
+
+		if (this.optimization_mode != "manual") {
+			let r = Optimizations[this.optimization_mode]["repaint_angle_rad"];
+			if (r != null || r != undefined) repaint_angle = r;
+		}
+
+		return repaint_angle;
 	}
 
 	_setup_settings(uuid, instanceId) {
@@ -79,12 +102,12 @@ class Eye extends Applet.Applet {
 		const bindings = [
 			{
 				key: "repaint-interval",
-				value: "repaint_interval",
+				value: "_repaint_interval",
 				cb: _d.debounce((value) => this.set_active(true), 300),
 			},
 			{
 				key: "repaint-angle",
-				value: "repaint_angle",
+				value: "_repaint_angle",
 				cb: null,
 			},
 			{
@@ -216,7 +239,10 @@ class Eye extends Applet.Applet {
 	}
 
 	on_mouse_moved(x, y) {
-		if (this.should_redraw(x, y)) this.area.queue_repaint();
+		if (this.should_redraw(x, y)) {
+			// global.log(UUID, `repainting with ${this.repaint_interval}ms interval, mouse pos = (${x}, ${y})`);
+			this.area.queue_repaint();
+		}
 	}
 
 	on_eye_mode_update() {
@@ -226,7 +252,8 @@ class Eye extends Applet.Applet {
 	}
 
 	on_optimization_mode_updated() {
-		// TODO
+		this.set_active(this.enabled);
+		global.log(UUID, `optimizing to ${this.optimization_mode}`);
 	}
 
 	update_sizes() {
@@ -251,6 +278,7 @@ class Eye extends Applet.Applet {
 	}
 
 	set_active(enabled) {
+		this.enabled = enabled;
 		this.on_property_updated();
 
 		this.signals.disconnect('repaint', this.area);
@@ -337,11 +365,6 @@ class Eye extends Applet.Applet {
 	}
 
 	should_redraw(mouse_x, mouse_y) {
-		if (!mouse_x || !mouse_y) {
-			const [x, y, _] = global.get_pointer();
-			mouse_x = x, mouse_y = y;
-		}
-
 		const [ox, oy] = this.get_area_position();
 
 		let should_redraw = true;
