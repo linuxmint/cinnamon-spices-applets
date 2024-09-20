@@ -6,6 +6,8 @@ const IDLE_TIME = 1000;
 
 const MONITORS_CHANGED_UPDATE_TIMEOUT_MS = 100;
 
+const WS_SWITCHED_UPDATE_TIMEOUT_MS = 400;
+
 const Optimizations = Object.freeze({
 	"battery": {
 		repaint_interval_ms: 70,

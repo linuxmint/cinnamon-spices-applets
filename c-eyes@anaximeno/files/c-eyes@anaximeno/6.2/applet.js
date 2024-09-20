@@ -25,8 +25,15 @@ const SignalManager = imports.misc.signalManager;
 const Util = imports.misc.util;
 const { GLib, St, Clutter } = imports.gi;
 const { EyeModeFactory } = require("./eyeModes.js");
+const {
+	AREA_DEFAULT_WIDTH,
+	WS_SWITCHED_UPDATE_TIMEOUT_MS,
+	UUID,
+	Optimizations,
+	MONITORS_CHANGED_UPDATE_TIMEOUT_MS,
+} = require("./constants.js");
 const { Debouncer } = require("./helpers.js");
-const { AREA_DEFAULT_WIDTH, UUID, Optimizations, MONITORS_CHANGED_UPDATE_TIMEOUT_MS } = require("./constants.js");
+
 const PointerWatcher = require("./pointerWatcher.js").getPointerWatcher();
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -61,8 +68,15 @@ class Eye extends Applet.Applet {
 
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
 		this.signals.connect(Main.layoutManager, 'monitors-changed',
-			() => Util.setTimeout(() => this.on_property_updated(), MONITORS_CHANGED_UPDATE_TIMEOUT_MS),
+			() => Util.setTimeout(this.on_property_updated.bind(this), MONITORS_CHANGED_UPDATE_TIMEOUT_MS),
 			this);
+		this.signals.connect(global.screen, 'workspace-switched', () => {
+			// If the eye is refreshed exactly during the workspace switch process it's possible that the position
+			// of the panel is not correctly accessed, so the position of the eye cannot be estimated correctly,
+			// resulting in the eye looking at the wrong direction, to avoid that we will give it some timeout and
+			// wait first for the switch process to complete.
+			Util.setTimeout(this.on_property_updated.bind(this), WS_SWITCHED_UPDATE_TIMEOUT_MS);
+		}, this);
 
 		this._last_mouse_x = undefined;
 		this._last_mouse_y = undefined;
