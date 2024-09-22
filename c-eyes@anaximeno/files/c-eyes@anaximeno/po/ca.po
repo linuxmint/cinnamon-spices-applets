@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# CINNAMON EYES
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# anaximeno, 2023
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 2.1.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-15 16:50-0100\n"
+"POT-Creation-Date: 2024-09-22 04:46-0100\n"
 "PO-Revision-Date: 2024-07-22 00:37+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 4.2/applet.js:56 5.4/applet.js:55
+#. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
 "📢 The click effects will be removed from this applet on the version 6.2 of "
 "Cinnamon\n"
@@ -32,19 +32,19 @@ msgstr ""
 "instal·lada en l'actualitat\n"
 "a les opcions de les extensions de Cinnamon per versions >= 5.4"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to deactivate the eye"
 msgstr "cliqueu per desactivar l'ull"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to activate the eye"
 msgstr "cliqueu per activar l'ull"
 
-#: 4.2/applet.js:390 5.4/applet.js:386
+#. 4.2/applet.js:397 5.4/applet.js:394
 msgid "TIP"
 msgstr "TIP"
 
-#: 6.2/applet.js:46
+#. 6.2/applet.js:48
 msgid "Hey, I saw that!"
 msgstr "Ei, he vist això!"
 
@@ -74,7 +74,8 @@ msgstr "Efectes"
 #. 4.2->settings-schema.json->click-generic->title
 #. 5.4->settings-schema.json->eye-generic->title
 #. 5.4->settings-schema.json->click-generic->title
-#. 6.2->settings-schema.json->general->description
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
 msgid "General"
 msgstr "General"
 
@@ -82,7 +83,7 @@ msgstr "General"
 #. 4.2->settings-schema.json->click-colors->title
 #. 5.4->settings-schema.json->eye-colors->title
 #. 5.4->settings-schema.json->click-colors->title
-#. 6.2->settings-schema.json->colors->description
+#. 6.2->settings-schema.json->colors-section->title
 msgid "Colors"
 msgstr "Colors"
 
@@ -93,7 +94,6 @@ msgstr "Esdeveniments"
 
 #. 4.2->settings-schema.json->eye-mode->description
 #. 5.4->settings-schema.json->eye-mode->description
-#. 6.2->settings-schema.json->mode->description
 msgid "Mode"
 msgstr "Mode"
 
@@ -399,13 +399,11 @@ msgid "General Opacity"
 msgstr "Opacitat general"
 
 #. 5.4->settings-schema.json->click-info->title
-#. 6.2->settings-schema.json->info->description
 msgid "Info"
 msgstr "Info"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
-#. 6.2->settings-schema.json->click-effects-moved-info->description
 msgid ""
 "In Cinnamon versions 6.2 and later, the click effects have been removed from "
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
@@ -415,9 +413,44 @@ msgstr ""
 "eliminat i han passat a formar part de l'extensió 'mouse-click-effects', que "
 "pot ser instal·lada des de les opcions del mòdul d'extensions de Cinnamon."
 
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr ""
+
+#. 6.2->settings-schema.json->mode->description
+#, fuzzy
+msgid "Eye Mode"
+msgstr "Mode"
+
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Missatge de barra d'eines en passar el cursor per sobre de l'ull"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+#, fuzzy
+msgid "Optimization Mode"
+msgstr "Mode d'animació del clic"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr ""
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"

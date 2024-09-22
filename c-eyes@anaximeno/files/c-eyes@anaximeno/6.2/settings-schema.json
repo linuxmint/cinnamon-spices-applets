@@ -27,8 +27,8 @@
 			"keys": [
 				"tooltip-message",
 				"mode",
-				"optimization-mode",
-				"deactivate-on-fullscreen"
+				"deactivate-on-fullscreen",
+				"optimization-mode"
 			]
 		},
 		"optimization-section": {
