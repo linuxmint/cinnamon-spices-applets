@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-22 04:46-0100\n"
-"PO-Revision-Date: 2024-09-22 04:48-0100\n"
+"PO-Revision-Date: 2024-09-22 15:44-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -435,7 +435,7 @@ msgstr "Mensagem da Dica durante a Sobreposição"
 
 #. 6.2->settings-schema.json->optimization-mode->description
 msgid "Optimization Mode"
-msgstr "Modo de Animação do Clique"
+msgstr "Modo de Optimização"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Battery"
