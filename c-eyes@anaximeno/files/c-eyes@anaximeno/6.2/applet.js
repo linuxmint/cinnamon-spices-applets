@@ -34,8 +34,6 @@ const {
 } = require("./constants.js");
 const { Debouncer } = require("./helpers.js");
 
-const PointerWatcher = require("./pointerWatcher.js").getPointerWatcher();
-
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 
@@ -77,6 +75,8 @@ class Eye extends Applet.Applet {
 			// wait first for the switch process to complete.
 			Util.setTimeout(this.on_property_updated.bind(this), WS_SWITCHED_UPDATE_TIMEOUT_MS);
 		}, this);
+
+		this.refresh_handler_id = 0;
 
 		this._last_mouse_x = undefined;
 		this._last_mouse_y = undefined;
@@ -252,11 +252,13 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	on_mouse_moved(x, y) {
-		if (this.should_redraw(x, y)) {
-			// global.log(UUID, `repainting with ${this.repaint_interval}ms interval, mouse pos = (${x}, ${y})`);
+	on_refresh_timeout() {
+		if (this.should_redraw()) {
+			// global.log(UUID, `repainting with ${this.repaint_interval}ms interval`);
 			this.area.queue_repaint();
 		}
+
+		return GLib.SOURCE_CONTINUE;
 	}
 
 	on_eye_mode_update() {
@@ -293,21 +295,21 @@ class Eye extends Applet.Applet {
 
 	set_active(enabled) {
 		this.enabled = enabled;
-		this.on_property_updated();
 
 		this.signals.disconnect('repaint', this.area);
-		if (this.pointerMovementListener) {
-			this.pointerMovementListener.remove();
-			this.pointerMovementListener = null;
+
+		if (this.refresh_handler_id) {
+			GLib.source_remove(this.refresh_handler_id);
+			this.refresh_handler_id = 0;
 		}
 
 		if (enabled) {
 			this.signals.connect(this.area, 'repaint', this.paint_eye, this);
-			this.pointerMovementListener = PointerWatcher.addWatch(
+			this.refresh_handler_id = GLib.timeout_add(
+				GLib.PRIORITY_DEFAULT,
 				this.repaint_interval,
-				this.on_mouse_moved.bind(this),
-			);
-			this.area.queue_repaint();
+				this.on_refresh_timeout.bind(this));
+			this.on_property_updated();
 		}
 
 		global.log(UUID, `Eye/${this.instanceId} ${enabled ? "enabled" : "disabled"}`);
@@ -378,7 +380,8 @@ class Eye extends Applet.Applet {
 		return [area_x, area_y];
 	}
 
-	should_redraw(mouse_x, mouse_y) {
+	should_redraw() {
+		const [mouse_x, mouse_y, _] = global.get_pointer();
 		const [ox, oy] = this.get_area_position();
 
 		let should_redraw = true;
