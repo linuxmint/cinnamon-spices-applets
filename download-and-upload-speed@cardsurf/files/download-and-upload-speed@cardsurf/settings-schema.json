@@ -27,6 +27,16 @@
         },
         "tooltip" : "Base data unit shown in the panel"
     },
+    "is_binary" : {
+        "type": "combobox",
+        "default": false,
+        "description" : "Decimal or binary",
+        "options" : {
+            "Decimal" : false,
+            "Binary" : true
+        },
+        "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
+    },
     "update_every": {
         "type": "spinbutton",
         "default": 1.0,

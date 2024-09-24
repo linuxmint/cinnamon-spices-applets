@@ -1,105 +1,175 @@
 # Main translation file for download-and-upload-speed@cardsurf.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 00:05+0100\n"
-"PO-Revision-Date: 2021-02-28 18:06+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-24 09:51+0200\n"
+"PO-Revision-Date: 2024-09-24 09:57+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:437
+#. applet.js:438
 msgid "Network interfaces"
 msgstr "Interfaces réseau"
 
-#: applet.js:506
+#. applet.js:507
 msgid "Total data start"
 msgstr "Quantités totales depuis..."
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:514
 msgid "Launch of applet"
 msgstr "le lancement de l'applet"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:515
 msgid "Today"
 msgstr "aujourd'hui"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:516
 msgid "Yesterday"
 msgstr "hier"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:517
 msgid "3 days ago"
 msgstr "3 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:518
 msgid "5 days ago"
 msgstr "5 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:519
 msgid "7 days ago"
 msgstr "7 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:520
 msgid "10 days ago"
 msgstr "10 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:521
 msgid "14 days ago"
 msgstr "14 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:522
 msgid "30 days ago"
 msgstr "30 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:523
 msgid "Custom date"
 msgstr "la date choisie"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:560
 msgid "Gui"
 msgstr "Affichage"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Compact"
 msgstr "Compact"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Large"
 msgstr "Étendu"
 
-#: applet.js:825
+#. applet.js:796
+msgid "TiB"
+msgstr " Tio"
+
+#. applet.js:799
+msgid "GiB"
+msgstr " Gio"
+
+#. applet.js:802
+msgid "MiB"
+msgstr " Mio"
+
+#. applet.js:805
+msgid "kiB"
+msgstr " kio"
+
+#. applet.js:807 applet.js:821
+msgid "B"
+msgstr " o"
+
+#. applet.js:810
+msgid "TB"
+msgstr " To"
+
+#. applet.js:813
+msgid "GB"
+msgstr " Go"
+
+#. settings-schema.json->data_limit->units
+#. applet.js:816
+msgid "MB"
+msgstr "Mo"
+
+#. applet.js:819
+msgid "kB"
+msgstr " ko"
+
+#. applet.js:831
+msgid "Tib"
+msgstr " Tib"
+
+#. applet.js:834
+msgid "Gib"
+msgstr " Gib"
+
+#. applet.js:837
+msgid "Mib"
+msgstr " Mib"
+
+#. applet.js:840
+msgid "kib"
+msgstr " kib"
+
+#. applet.js:842 applet.js:856
 msgid "b"
 msgstr "b"
 
-#: appletGui.js:470
+#. applet.js:845
+msgid "Tb"
+msgstr " Tb"
+
+#. applet.js:848
+msgid "Gb"
+msgstr " Gb"
+
+#. applet.js:851
+msgid "Mb"
+msgstr " Mb"
+
+#. applet.js:854
+msgid "kb"
+msgstr " kb"
+
+#. appletGui.js:478
 msgid "Total download:"
 msgstr "Total reçu :"
 
-#: appletGui.js:471
+#. appletGui.js:479
 msgid "Total upload:"
 msgstr "Total envoyé :"
 
@@ -146,6 +216,26 @@ msgstr "Bits"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "Unité de base des données affichées dans le panneau"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Décimal ou binaire"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Décimal"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binaire"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Décimal : k, M, G, T\n"
+"Binaire : ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
@@ -357,10 +447,6 @@ msgstr ""
 msgid "Data limits"
 msgstr "Quantité limite de données"
 
-#. settings-schema.json->data_limit->units
-msgid "MB"
-msgstr "Mo"
-
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
 msgstr "Quantité limite de données"
@@ -439,17 +525,3 @@ msgid "A command used to list current Internet connections"
 msgstr ""
 "Saisir une commande permettant d'obtenir la liste des connexions internet "
 "disponibles"
-
-#~ msgid "An icon displayed next to download speed in the panel"
-#~ msgstr ""
-#~ "Choisir une icône affichée à côté de la vitesse de réception dans le "
-#~ "panneau"
-
-#~ msgid "An icon displayed next to upload speed in the panel"
-#~ msgstr ""
-#~ "Choisir une icône affichée à côté de la vitesse d'envoi dans le panneau"
-
-#~ msgid "Settings for download-and-upload-speed@cardsurf"
-#~ msgstr ""
-#~ "Réglages pour l'applet Vitesses d'Envoi et de Réception (download-and-"
-#~ "upload-speed@cardsurf)"
