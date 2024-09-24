@@ -23,6 +23,16 @@
         },
         "tooltip" : "Base data unit shown in the panel"
     },
+    "is_binary" : {
+        "type": "combobox",
+        "default": false,
+        "description" : "Decimal or binary",
+        "options" : {
+            "Decimal" : false,
+            "Binary" : true
+        },
+        "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
+    },
     "update_every": {
         "type": "spinbutton",
         "default": 1.0,
@@ -59,9 +69,9 @@
         "options" : {
             "Auto" : -1,
             "0 " : 0,
-        	"1 " : 1,
-        	"2 " : 2,
-        	"3 " : 3
+            "1 " : 1,
+            "2 " : 2,
+            "3 " : 3
         },
         "tooltip" : "Decimal places of disk read and write speed shown in the panel"
     },
@@ -206,9 +216,9 @@
         "options" : {
             "Auto" : -1,
             "0 " : 0,
-        	"1 " : 1,
-        	"2 " : 2,
-        	"3 " : 3
+            "1 " : 1,
+            "2 " : 2,
+            "3 " : 3
         },
         "tooltip" : "Decimal places of total amount of data read and written shown in the hover popup"
     },

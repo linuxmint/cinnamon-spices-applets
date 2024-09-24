@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# DISK READ AND WRITE SPEED
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2017
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: disk-read-and-write-speed@cardsurf 1.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"POT-Creation-Date: 2024-09-24 18:02+0200\n"
 "PO-Revision-Date: 2024-04-22 13:45+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -15,6 +15,80 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:978
+msgid "TiB"
+msgstr ""
+
+#. applet.js:981
+#, fuzzy
+msgid "GiB"
+msgstr "Grafische gebruikersinterface"
+
+#. applet.js:984
+msgid "MiB"
+msgstr ""
+
+#. applet.js:987
+msgid "kiB"
+msgstr ""
+
+#. applet.js:989 applet.js:1003
+msgid "B"
+msgstr ""
+
+#. applet.js:992
+msgid "TB"
+msgstr ""
+
+#. applet.js:995
+msgid "GB"
+msgstr ""
+
+#. applet.js:998
+msgid "MB"
+msgstr ""
+
+#. applet.js:1001
+msgid "kB"
+msgstr ""
+
+#. applet.js:1013
+msgid "Tib"
+msgstr ""
+
+#. applet.js:1016
+#, fuzzy
+msgid "Gib"
+msgstr "Grafische gebruikersinterface"
+
+#. applet.js:1019
+msgid "Mib"
+msgstr ""
+
+#. applet.js:1022
+msgid "kib"
+msgstr ""
+
+#. applet.js:1024 applet.js:1038
+msgid "b"
+msgstr ""
+
+#. applet.js:1027
+msgid "Tb"
+msgstr ""
+
+#. applet.js:1030
+msgid "Gb"
+msgstr ""
+
+#. applet.js:1033
+msgid "Mb"
+msgstr ""
+
+#. applet.js:1036
+msgid "kb"
+msgstr ""
 
 #. metadata.json->description
 msgid "Shows usage of a disk"
@@ -59,6 +133,25 @@ msgstr "Bits"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "Basisgegevenseenheid weergegeven in het paneel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+#, fuzzy
+msgid "Decimal"
+msgstr "Decimalen"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
 
 #. settings-schema.json->update_every->units
 msgid "seconds"
