@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# DOWNLOAD AND UPLOAD SPEED
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.6.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-23 03:28-0100\n"
+"POT-Creation-Date: 2024-09-24 09:51+0200\n"
 "PO-Revision-Date: 2024-06-25 02:39-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,88 +18,161 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: applet.js:437
+#. applet.js:438
 msgid "Network interfaces"
 msgstr "Interfaces de rede"
 
-#: applet.js:506
+#. applet.js:507
 msgid "Total data start"
 msgstr "Início do total dos dados"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:514
 msgid "Launch of applet"
 msgstr "Ao lançar do applet"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:515
 msgid "Today"
 msgstr "Hoje"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:516
 msgid "Yesterday"
 msgstr "Ontem"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:517
 msgid "3 days ago"
 msgstr "3 dias antes"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:518
 msgid "5 days ago"
 msgstr "5 dias antes"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:519
 msgid "7 days ago"
 msgstr "7 dias antes"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:520
 msgid "10 days ago"
 msgstr "10 dias antes"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:521
 msgid "14 days ago"
 msgstr "14 dias antes"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:522
 msgid "30 days ago"
 msgstr "30 dias antes"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:523
 msgid "Custom date"
 msgstr "Data personalizada"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:560
 msgid "Gui"
 msgstr "Interface"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Compact"
 msgstr "Compacto"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Large"
 msgstr "Largo"
 
-#: applet.js:825
+#. applet.js:796
+msgid "TiB"
+msgstr ""
+
+#. applet.js:799
+#, fuzzy
+msgid "GiB"
+msgstr "Interface"
+
+#. applet.js:802
+#, fuzzy
+msgid "MiB"
+msgstr "MB"
+
+#. applet.js:805
+msgid "kiB"
+msgstr ""
+
+#. applet.js:807 applet.js:821
+#, fuzzy
+msgid "B"
+msgstr "MB"
+
+#. applet.js:810
+msgid "TB"
+msgstr ""
+
+#. applet.js:813
+msgid "GB"
+msgstr ""
+
+#. settings-schema.json->data_limit->units
+#. applet.js:816
+msgid "MB"
+msgstr "MB"
+
+#. applet.js:819
+msgid "kB"
+msgstr ""
+
+#. applet.js:831
+msgid "Tib"
+msgstr ""
+
+#. applet.js:834
+#, fuzzy
+msgid "Gib"
+msgstr "Interface"
+
+#. applet.js:837
+msgid "Mib"
+msgstr ""
+
+#. applet.js:840
+msgid "kib"
+msgstr ""
+
+#. applet.js:842 applet.js:856
 msgid "b"
 msgstr ""
 
-#: appletGui.js:478
+#. applet.js:845
+msgid "Tb"
+msgstr ""
+
+#. applet.js:848
+msgid "Gb"
+msgstr ""
+
+#. applet.js:851
+msgid "Mb"
+msgstr ""
+
+#. applet.js:854
+msgid "kb"
+msgstr ""
+
+#. appletGui.js:478
 msgid "Total download:"
 msgstr "Download total:"
 
-#: appletGui.js:479
+#. appletGui.js:479
 msgid "Total upload:"
 msgstr "Upload total:"
 
@@ -146,6 +219,25 @@ msgstr "Bits"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "Unidade base mostrada no painel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+#, fuzzy
+msgid "Decimal"
+msgstr "Casas decimais"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
@@ -356,10 +448,6 @@ msgstr ""
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
 msgstr "Limites dos dados"
-
-#. settings-schema.json->data_limit->units
-msgid "MB"
-msgstr "MB"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"

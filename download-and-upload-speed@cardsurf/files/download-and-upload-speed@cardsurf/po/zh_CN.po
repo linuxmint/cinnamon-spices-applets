@@ -1,13 +1,14 @@
 # Chinese translation for download-and-upload-speed@cardsurf.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 00:05+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-24 09:51+0200\n"
 "PO-Revision-Date: 2023-06-01 17:30+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -18,88 +19,165 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: applet.js:437
+#. applet.js:438
 msgid "Network interfaces"
 msgstr "网络接口"
 
-#: applet.js:506
+#. applet.js:507
 msgid "Total data start"
 msgstr "总数据开始"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:514
 msgid "Launch of applet"
 msgstr "启动小程序"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:515
 msgid "Today"
 msgstr "今天"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:516
 msgid "Yesterday"
 msgstr "昨天"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:517
 msgid "3 days ago"
 msgstr "3 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:518
 msgid "5 days ago"
 msgstr "5 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:519
 msgid "7 days ago"
 msgstr "7 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:520
 msgid "10 days ago"
 msgstr "10 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:521
 msgid "14 days ago"
 msgstr "14 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:522
 msgid "30 days ago"
 msgstr "30 天前"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:523
 msgid "Custom date"
 msgstr "自定义日期"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:560
 msgid "Gui"
 msgstr "图形用户界面"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Compact"
 msgstr "小"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Large"
 msgstr "大"
 
-#: applet.js:825
+#. applet.js:796
+msgid "TiB"
+msgstr ""
+
+#. applet.js:799
+#, fuzzy
+msgid "GiB"
+msgstr "图形用户界面"
+
+#. applet.js:802
+#, fuzzy
+msgid "MiB"
+msgstr "MB"
+
+#. applet.js:805
+msgid "kiB"
+msgstr ""
+
+#. applet.js:807 applet.js:821
+#, fuzzy
+msgid "B"
+msgstr "MB"
+
+#. applet.js:810
+msgid "TB"
+msgstr ""
+
+#. applet.js:813
+msgid "GB"
+msgstr ""
+
+#. settings-schema.json->data_limit->units
+#. applet.js:816
+msgid "MB"
+msgstr "MB"
+
+#. applet.js:819
+msgid "kB"
+msgstr ""
+
+#. applet.js:831
+msgid "Tib"
+msgstr ""
+
+#. applet.js:834
+#, fuzzy
+msgid "Gib"
+msgstr "图形用户界面"
+
+#. applet.js:837
+msgid "Mib"
+msgstr ""
+
+#. applet.js:840
+msgid "kib"
+msgstr ""
+
+#. applet.js:842 applet.js:856
 msgid "b"
 msgstr "b"
 
-#: appletGui.js:470
+#. applet.js:845
+#, fuzzy
+msgid "Tb"
+msgstr "b"
+
+#. applet.js:848
+#, fuzzy
+msgid "Gb"
+msgstr "b"
+
+#. applet.js:851
+#, fuzzy
+msgid "Mb"
+msgstr "b"
+
+#. applet.js:854
+#, fuzzy
+msgid "kb"
+msgstr "b"
+
+#. appletGui.js:478
 msgid "Total download:"
 msgstr "总下载："
 
-#: appletGui.js:471
+#. appletGui.js:479
 msgid "Total upload:"
 msgstr "总上传："
 
@@ -146,6 +224,25 @@ msgstr "比特"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "显示在面板中的基本数据单位"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+#, fuzzy
+msgid "Decimal"
+msgstr "小数位"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
@@ -342,10 +439,6 @@ msgstr "将下载和上传的数据总量保存到文件的频率。0 表示不�
 msgid "Data limits"
 msgstr "数据限制"
 
-#. settings-schema.json->data_limit->units
-msgid "MB"
-msgstr "MB"
-
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
 msgstr "数据限制"
@@ -413,9 +506,3 @@ msgstr "命令 "
 #. settings-schema.json->list_connections_command->tooltip
 msgid "A command used to list current Internet connections"
 msgstr "用来列出当前互联网连接的命令"
-
-#~ msgid "Settings for download-and-upload-speed@cardsurf"
-#~ msgstr "download-and-upload-speed@cardsurf的设置"
-
-#~ msgid "An icon displayed next to download speed in the panel"
-#~ msgstr "显示面板中下载速度旁边的图标"
