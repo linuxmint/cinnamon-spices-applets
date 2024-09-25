@@ -42,6 +42,15 @@
     "description" : "Inhibit screensaver at startup",
     "indent": true
  },
+ "seconds-after-startup": {
+        "type" : "scale",
+        "default" : 0,
+        "min" : 0,
+        "max" : 60,
+        "step" : 1,
+        "dependency": "inhibit-at-startup",
+        "description" : "Number of seconds before screensaver inhibition"
+ },
  "head3" : {
     "type" : "header",
     "description" : "Way to block the screensaver"

@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSAVER INHIBITOR
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: screen-inhibit@mtwebster 2.1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-24 00:19+0200\n"
+"POT-Creation-Date: 2024-09-25 22:35+0200\n"
 "PO-Revision-Date: 2024-07-09 23:27+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:21
+#. applet.js:21
 msgid "Currently preventing screensaver"
 msgstr "Actualment impedint el protector de pantalla"
 
-#: applet.js:22
+#. applet.js:22
 msgid "Currently allowing screensaver"
 msgstr "Actualment permetent el protector de pantalla"
 
-#: applet.js:123
+#. applet.js:126
 msgid "Screensaver settings"
 msgstr "Configuració del protector de pantalla"
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:127
+#. applet.js:130
 msgid "Inhibit screensaver at startup"
 msgstr "Inhibit el protector de pantalla en arrancar"
 
@@ -77,6 +77,11 @@ msgstr "Assigneu la drecera per a l'inhibidor del protector de pantalla"
 #. settings-schema.json->head2->description
 msgid "Startup"
 msgstr "Inici"
+
+#. settings-schema.json->seconds-after-startup->description
+#, fuzzy
+msgid "Number of seconds before screensaver inhibition"
+msgstr "Assigneu la drecera per a l'inhibidor del protector de pantalla"
 
 #. settings-schema.json->head3->description
 msgid "Way to block the screensaver"
