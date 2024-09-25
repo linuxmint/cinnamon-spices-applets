@@ -79,6 +79,9 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.settings.bind( "inhibit-at-startup",
                                 "inhibit_at_startup",
                                 this.on_inhibit_at_startup_changed);
+            this.settings.bind( "seconds-after-startup",
+                                "seconds_after_startup",
+                                null);
             this.settings.bind( "locktype",
                                 "locktype",
                                 this.loop);
@@ -269,10 +272,11 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         if (this.inhibit_at_startup && !this.inhibited) {
             let id = setInterval ( () => {
                 if (this._sessionProxy) { // Ensures that this._sessionProxy is defined.
-                    this.on_applet_clicked();
+                    if (!this.inhibited)
+                        this.on_applet_clicked();
                     clearTimeout(id);
                 }
-            }, 300);
+            }, (this.seconds_after_startup === 0) ? 300 : this.seconds_after_startup*1000);
         }
     }
 
