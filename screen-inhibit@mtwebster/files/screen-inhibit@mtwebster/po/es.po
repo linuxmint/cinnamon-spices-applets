@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-25 22:35+0200\n"
-"PO-Revision-Date: 2024-06-24 18:48-0400\n"
+"PO-Revision-Date: 2024-09-25 18:17-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -84,11 +84,8 @@ msgid "Startup"
 msgstr "Inicio"
 
 #. settings-schema.json->seconds-after-startup->description
-#, fuzzy
 msgid "Number of seconds before screensaver inhibition"
-msgstr ""
-"Establecer la combinación de teclas para permitir la inhibición del "
-"protector de pantalla"
+msgstr "Número de segundos antes de la inhibición del protector de pantalla"
 
 #. settings-schema.json->head3->description
 msgid "Way to block the screensaver"
