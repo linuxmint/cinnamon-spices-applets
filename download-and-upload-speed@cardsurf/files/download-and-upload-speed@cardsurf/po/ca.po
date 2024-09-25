@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-24 09:51+0200\n"
-"PO-Revision-Date: 2024-07-19 02:25+0200\n"
+"PO-Revision-Date: 2024-09-25 18:46+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -94,34 +94,31 @@ msgstr "Gran"
 
 #. applet.js:796
 msgid "TiB"
-msgstr ""
+msgstr "TiB"
 
 #. applet.js:799
-#, fuzzy
 msgid "GiB"
-msgstr "Interfície"
+msgstr "GiB"
 
 #. applet.js:802
-#, fuzzy
 msgid "MiB"
-msgstr "MB"
+msgstr "MiB"
 
 #. applet.js:805
 msgid "kiB"
-msgstr ""
+msgstr "kiB"
 
 #. applet.js:807 applet.js:821
-#, fuzzy
 msgid "B"
-msgstr "MB"
+msgstr "B"
 
 #. applet.js:810
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
 #. applet.js:813
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #. settings-schema.json->data_limit->units
 #. applet.js:816
@@ -130,48 +127,43 @@ msgstr "MB"
 
 #. applet.js:819
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 #. applet.js:831
 msgid "Tib"
-msgstr ""
+msgstr "Tib"
 
 #. applet.js:834
-#, fuzzy
 msgid "Gib"
-msgstr "Interfície"
+msgstr "Gib"
 
 #. applet.js:837
 msgid "Mib"
-msgstr ""
+msgstr "Mib"
 
 #. applet.js:840
 msgid "kib"
-msgstr ""
+msgstr "kib"
 
 #. applet.js:842 applet.js:856
 msgid "b"
 msgstr "b"
 
 #. applet.js:845
-#, fuzzy
 msgid "Tb"
-msgstr "b"
+msgstr "Tb"
 
 #. applet.js:848
-#, fuzzy
 msgid "Gb"
-msgstr "b"
+msgstr "Gb"
 
 #. applet.js:851
-#, fuzzy
 msgid "Mb"
-msgstr "b"
+msgstr "Mb"
 
 #. applet.js:854
-#, fuzzy
 msgid "kb"
-msgstr "b"
+msgstr "kb"
 
 #. appletGui.js:478
 msgid "Total download:"
@@ -227,22 +219,23 @@ msgstr "Unit base de les dades mostrades al tauler"
 
 #. settings-schema.json->is_binary->description
 msgid "Decimal or binary"
-msgstr ""
+msgstr "Decimal o binari"
 
 #. settings-schema.json->is_binary->options
-#, fuzzy
 msgid "Decimal"
-msgstr "Número de decimals"
+msgstr "Decimal"
 
 #. settings-schema.json->is_binary->options
 msgid "Binary"
-msgstr ""
+msgstr "Binari"
 
 #. settings-schema.json->is_binary->tooltip
 msgid ""
 "Decimal: k, M, G, T\n"
 "Binary: ki, Mi, Gi, Ti"
 msgstr ""
+"Decimal: k, M, G, T\n"
+"Binari: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
