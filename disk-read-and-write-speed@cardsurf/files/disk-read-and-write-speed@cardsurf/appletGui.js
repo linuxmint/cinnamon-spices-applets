@@ -207,10 +207,10 @@ GuiSpeed.prototype = {
     _get_fixed_width_text: function() {
         let text = "";
         if(this.decimal_places == AppletConstants.DecimalPlaces.AUTO) {
-            text = "99.9MB";
+            text = " 99.9 MiB"; // " 99.9MB";
         }
         else {
-            text = "999." + this.repeat_string("9", this.decimal_places) + "MB";
+            text = " 999." + this.repeat_string("9", this.decimal_places) + " MiB"; //"MB"
         }
         return text;
     },

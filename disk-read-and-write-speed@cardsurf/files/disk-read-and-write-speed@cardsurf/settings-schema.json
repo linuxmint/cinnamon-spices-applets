@@ -77,7 +77,7 @@
     },
     "gui_text_css": {
         "type": "entry",
-        "default": "font-weight: bold;",
+        "default": "font-weight: bold; font-size: 16px; text-align: right; font-family: monospace;",
         "description": "Text CSS",
         "tooltip": "A CSS style applied to the text in the panel"
     },
