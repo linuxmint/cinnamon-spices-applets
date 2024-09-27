@@ -95,8 +95,8 @@ IconLabel.prototype = {
 
 
 
-function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places) {
-    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places);
+function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary) {
+    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary);
 };
 
 GuiSpeed.prototype = {
