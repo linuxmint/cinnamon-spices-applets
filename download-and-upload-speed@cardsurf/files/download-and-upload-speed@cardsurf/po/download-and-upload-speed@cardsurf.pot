@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: download-and-upload-speed@cardsurf 1.6.6\n"
+"Project-Id-Version: download-and-upload-speed@cardsurf 1.6.7\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-24 09:51+0200\n"
+"POT-Creation-Date: 2024-09-27 21:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -91,83 +91,90 @@ msgid "Large"
 msgstr ""
 
 #. applet.js:796
-msgid "TiB"
+msgid " TiB"
 msgstr ""
 
 #. applet.js:799
-msgid "GiB"
+msgid " GiB"
 msgstr ""
 
 #. applet.js:802
-msgid "MiB"
+msgid " MiB"
 msgstr ""
 
 #. applet.js:805
-msgid "kiB"
+msgid " kiB"
 msgstr ""
 
-#. applet.js:807 applet.js:821
-msgid "B"
+#. applet.js:807
+msgid "   B"
 msgstr ""
 
 #. applet.js:810
-msgid "TB"
+msgid " TB"
 msgstr ""
 
 #. applet.js:813
-msgid "GB"
+msgid " GB"
 msgstr ""
 
-#. settings-schema.json->data_limit->units
 #. applet.js:816
-msgid "MB"
+msgid " MB"
 msgstr ""
 
 #. applet.js:819
-msgid "kB"
+msgid " kB"
+msgstr ""
+
+#. applet.js:821
+msgid "  B"
 msgstr ""
 
 #. applet.js:831
-msgid "Tib"
+msgid " Tib"
 msgstr ""
 
 #. applet.js:834
-msgid "Gib"
+msgid " Gib"
 msgstr ""
 
 #. applet.js:837
-msgid "Mib"
+msgid " Mib"
 msgstr ""
 
 #. applet.js:840
-msgid "kib"
+msgid " kib"
 msgstr ""
 
-#. applet.js:842 applet.js:856
-msgid "b"
+#. applet.js:842
+msgid "   b"
 msgstr ""
 
 #. applet.js:845
-msgid "Tb"
+msgid " Tb"
 msgstr ""
 
 #. applet.js:848
-msgid "Gb"
+msgid " Gb"
 msgstr ""
 
 #. applet.js:851
-msgid "Mb"
+msgid " Mb"
 msgstr ""
 
 #. applet.js:854
-msgid "kb"
+msgid " kb"
 msgstr ""
 
-#. appletGui.js:478
+#. applet.js:856
+msgid "  b"
+msgstr ""
+
+#. appletGui.js:480
 msgid "Total download:"
 msgstr ""
 
-#. appletGui.js:479
+#. appletGui.js:481
 msgid "Total upload:"
 msgstr ""
 
@@ -420,6 +427,10 @@ msgstr ""
 
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
+msgstr ""
+
+#. settings-schema.json->data_limit->units
+msgid "MB"
 msgstr ""
 
 #. settings-schema.json->data_limit->description

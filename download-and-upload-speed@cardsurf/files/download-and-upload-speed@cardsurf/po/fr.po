@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-24 09:51+0200\n"
-"PO-Revision-Date: 2024-09-24 09:57+0200\n"
+"POT-Creation-Date: 2024-09-27 21:38+0200\n"
+"PO-Revision-Date: 2024-09-27 21:43+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -93,83 +93,90 @@ msgid "Large"
 msgstr "Étendu"
 
 #. applet.js:796
-msgid "TiB"
+msgid " TiB"
 msgstr " Tio"
 
 #. applet.js:799
-msgid "GiB"
+msgid " GiB"
 msgstr " Gio"
 
 #. applet.js:802
-msgid "MiB"
+msgid " MiB"
 msgstr " Mio"
 
 #. applet.js:805
-msgid "kiB"
+msgid " kiB"
 msgstr " kio"
 
-#. applet.js:807 applet.js:821
-msgid "B"
-msgstr " o"
+#. applet.js:807
+msgid "   B"
+msgstr "   o"
 
 #. applet.js:810
-msgid "TB"
+msgid " TB"
 msgstr " To"
 
 #. applet.js:813
-msgid "GB"
+msgid " GB"
 msgstr " Go"
 
-#. settings-schema.json->data_limit->units
 #. applet.js:816
-msgid "MB"
-msgstr "Mo"
+msgid " MB"
+msgstr " Mo"
 
 #. applet.js:819
-msgid "kB"
+msgid " kB"
 msgstr " ko"
 
+#. applet.js:821
+msgid "  B"
+msgstr "  o"
+
 #. applet.js:831
-msgid "Tib"
+msgid " Tib"
 msgstr " Tib"
 
 #. applet.js:834
-msgid "Gib"
+msgid " Gib"
 msgstr " Gib"
 
 #. applet.js:837
-msgid "Mib"
+msgid " Mib"
 msgstr " Mib"
 
 #. applet.js:840
-msgid "kib"
+msgid " kib"
 msgstr " kib"
 
-#. applet.js:842 applet.js:856
-msgid "b"
-msgstr "b"
+#. applet.js:842
+msgid "   b"
+msgstr "   b"
 
 #. applet.js:845
-msgid "Tb"
+msgid " Tb"
 msgstr " Tb"
 
 #. applet.js:848
-msgid "Gb"
+msgid " Gb"
 msgstr " Gb"
 
 #. applet.js:851
-msgid "Mb"
+msgid " Mb"
 msgstr " Mb"
 
 #. applet.js:854
-msgid "kb"
+msgid " kb"
 msgstr " kb"
 
-#. appletGui.js:478
+#. applet.js:856
+msgid "  b"
+msgstr "  b"
+
+#. appletGui.js:480
 msgid "Total download:"
 msgstr "Total reçu :"
 
-#. appletGui.js:479
+#. appletGui.js:481
 msgid "Total upload:"
 msgstr "Total envoyé :"
 
@@ -446,6 +453,10 @@ msgstr ""
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
 msgstr "Quantité limite de données"
+
+#. settings-schema.json->data_limit->units
+msgid "MB"
+msgstr "Mo"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
