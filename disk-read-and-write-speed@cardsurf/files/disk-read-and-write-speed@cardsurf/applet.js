@@ -574,7 +574,7 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_decimal_places);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_decimal_places, this.is_binary);
         this.actor.destroy_all_children();
         this._add_gui_speed();
     },
