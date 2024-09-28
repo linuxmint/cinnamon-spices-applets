@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-24 09:51+0200\n"
+"POT-Creation-Date: 2024-09-27 21:38+0200\n"
 "PO-Revision-Date: 2022-10-26 18:50+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -93,91 +93,96 @@ msgid "Large"
 msgstr "Stor"
 
 #. applet.js:796
-msgid "TiB"
+msgid " TiB"
 msgstr ""
 
 #. applet.js:799
-#, fuzzy
-msgid "GiB"
-msgstr "Grafisk brugergrænseflade"
-
-#. applet.js:802
-#, fuzzy
-msgid "MiB"
-msgstr "MB"
-
-#. applet.js:805
-msgid "kiB"
+msgid " GiB"
 msgstr ""
 
-#. applet.js:807 applet.js:821
-#, fuzzy
-msgid "B"
-msgstr "MB"
+#. applet.js:802
+msgid " MiB"
+msgstr ""
+
+#. applet.js:805
+msgid " kiB"
+msgstr ""
+
+#. applet.js:807
+msgid "   B"
+msgstr ""
 
 #. applet.js:810
-msgid "TB"
+msgid " TB"
 msgstr ""
 
 #. applet.js:813
-msgid "GB"
-msgstr ""
+#, fuzzy
+msgid " GB"
+msgstr "Grafisk brugergrænseflade"
 
-#. settings-schema.json->data_limit->units
 #. applet.js:816
-msgid "MB"
+#, fuzzy
+msgid " MB"
 msgstr "MB"
 
 #. applet.js:819
-msgid "kB"
+msgid " kB"
+msgstr ""
+
+#. applet.js:821
+msgid "  B"
 msgstr ""
 
 #. applet.js:831
-msgid "Tib"
+msgid " Tib"
 msgstr ""
 
 #. applet.js:834
-#, fuzzy
-msgid "Gib"
-msgstr "Grafisk brugergrænseflade"
+msgid " Gib"
+msgstr ""
 
 #. applet.js:837
-msgid "Mib"
+msgid " Mib"
 msgstr ""
 
 #. applet.js:840
-msgid "kib"
+msgid " kib"
 msgstr ""
 
-#. applet.js:842 applet.js:856
-msgid "b"
-msgstr "b"
+#. applet.js:842
+msgid "   b"
+msgstr ""
 
 #. applet.js:845
 #, fuzzy
-msgid "Tb"
+msgid " Tb"
 msgstr "b"
 
 #. applet.js:848
 #, fuzzy
-msgid "Gb"
+msgid " Gb"
 msgstr "b"
 
 #. applet.js:851
 #, fuzzy
-msgid "Mb"
+msgid " Mb"
 msgstr "b"
 
 #. applet.js:854
 #, fuzzy
-msgid "kb"
+msgid " kb"
 msgstr "b"
 
-#. appletGui.js:478
+#. applet.js:856
+msgid "  b"
+msgstr ""
+
+#. appletGui.js:480
 msgid "Total download:"
 msgstr "Total download:"
 
-#. appletGui.js:479
+#. appletGui.js:481
 msgid "Total upload:"
 msgstr "Total upload:"
 
@@ -449,6 +454,10 @@ msgstr ""
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
 msgstr "Datagrænser"
+
+#. settings-schema.json->data_limit->units
+msgid "MB"
+msgstr "MB"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
