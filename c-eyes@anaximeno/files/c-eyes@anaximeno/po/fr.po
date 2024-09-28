@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-22 04:46-0100\n"
-"PO-Revision-Date: 2024-06-27 16:55+0200\n"
+"PO-Revision-Date: 2024-09-28 20:30+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -418,41 +418,39 @@ msgstr ""
 #. 6.2->settings-schema.json->style-page->title
 #. 6.2->settings-schema.json->styles-section->title
 msgid "Style"
-msgstr ""
+msgstr "Style"
 
 #. 6.2->settings-schema.json->optimization-section->title
 msgid "Optimizations"
-msgstr ""
+msgstr "Optimisations"
 
 #. 6.2->settings-schema.json->mode->description
-#, fuzzy
 msgid "Eye Mode"
-msgstr "Mode"
+msgstr "Type d’œil"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Afficher une info-bulle au survol"
 
 #. 6.2->settings-schema.json->optimization-mode->description
-#, fuzzy
 msgid "Optimization Mode"
-msgstr "Mode d'animation du clic"
+msgstr "Type d'optimisation"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Battery"
-msgstr ""
+msgstr "Batterie"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Balanced"
-msgstr ""
+msgstr "Équilibré"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Performance"
-msgstr ""
+msgstr "Performance"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Manual"
-msgstr ""
+msgstr "Manuel"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
