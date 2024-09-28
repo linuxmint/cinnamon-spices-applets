@@ -4,6 +4,7 @@ const Lang = imports.lang;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
+const Gettext = imports.gettext;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
 let AppletConstants, ShellUtils, Files, AppletGui, Compatibility;
@@ -22,7 +23,9 @@ if (typeof require !== 'undefined') {
     Compatibility = AppletDirectory.compatibility;
 }
 
-
+function _(str) {
+    return Gettext.dgettext(uuid, str);
+}
 
 
 
@@ -177,6 +180,7 @@ MyApplet.prototype = {
         for(let [binding, property_name, callback] of [
                 [Settings.BindingDirection.IN, "display_mode", null],
                 [Settings.BindingDirection.IN, "unit_type", null],
+                [Settings.BindingDirection.IN, "is_binary", null],
                 [Settings.BindingDirection.IN, "update_every", null],
                 [Settings.BindingDirection.IN, "column_spaces", null],
                 [Settings.BindingDirection.IN, "column_type_sort", null],
@@ -570,7 +574,7 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_decimal_places);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_decimal_places, this.is_binary);
         this.actor.destroy_all_children();
         this._add_gui_speed();
     },
@@ -972,19 +976,34 @@ MyApplet.prototype = {
     },
 
     convert_bytes_to_readable_unit: function (bytes) {
+        if (this.is_binary === true) {
+            if(bytes >= Math.pow(2, 40)) {
+                return [bytes/Math.pow(2, 40), _(" TiB")];
+            }
+            if(bytes >= Math.pow(2, 30)) {
+                return [bytes/Math.pow(2, 30), _(" GiB")];
+            }
+            if(bytes >= Math.pow(2, 20)) {
+                return [bytes/Math.pow(2, 20), _(" MiB")];
+            }
+            if(bytes >= Math.pow(2, 10)) {
+                return [bytes/Math.pow(2, 10), _(" kiB")];
+            }
+            return [bytes, _("   B")];
+        }
         if(bytes >= 1000000000000) {
-            return [bytes/1000000000000, "TB"];
+            return [bytes/1000000000000, _(" TB")];
         }
         if(bytes >= 1000000000) {
-            return [bytes/1000000000, "GB"];
+            return [bytes/1000000000, _(" GB")];
         }
         if(bytes >= 1000000) {
-            return [bytes/1000000, "MB"];
+            return [bytes/1000000, _(" MB")];
         }
         if(bytes >= 1000) {
-            return [bytes/1000, "kB"];
+            return [bytes/1000, _(" kB")];
         }
-        return [bytes, "B"];
+        return [bytes, _("  B")];
     },
 
     convert_to_bits: function (bytes) {
@@ -992,19 +1011,34 @@ MyApplet.prototype = {
     },
 
     convert_bits_to_readable_unit: function (bits) {
+        if (this.is_binary === true) {
+            if(bits >= Math.pow(2, 40)) {
+                return [bits/Math.pow(2, 40), _(" Tib")];
+            }
+            if(bits >= Math.pow(2, 30)) {
+                return [bits/Math.pow(2, 30), _(" Gib")];
+            }
+            if(bits >= Math.pow(2, 20)) {
+                return [bits/Math.pow(2, 20), _(" Mib")];
+            }
+            if(bits >= Math.pow(2, 10)) {
+                return [bits/Math.pow(2, 10), _(" kib")];
+            }
+            return [bits, _("   b")];
+        }
         if(bits >= 1000000000000) {
-            return [bits/1000000000000, "Tb"];
+            return [bits/1000000000000, _(" Tb")];
         }
         if(bits >= 1000000000) {
-            return [bits/1000000000, "Gb"];
+            return [bits/1000000000, _(" Gb")];
         }
         if(bits >= 1000000) {
-            return [bits/1000000, "Mb"];
+            return [bits/1000000, _(" Mb")];
         }
         if(bits >= 1000) {
-            return [bits/1000, "kb"];
+            return [bits/1000, _(" kb")];
         }
-        return [bits, "b"];
+        return [bits, _("  b")];
     },
 
     is_base: function (unit) {

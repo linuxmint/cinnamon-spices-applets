@@ -23,6 +23,16 @@
         },
         "tooltip" : "Base data unit shown in the panel"
     },
+    "is_binary" : {
+        "type": "combobox",
+        "default": false,
+        "description" : "Decimal or binary",
+        "options" : {
+            "Decimal" : false,
+            "Binary" : true
+        },
+        "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
+    },
     "update_every": {
         "type": "spinbutton",
         "default": 1.0,
@@ -59,17 +69,18 @@
         "options" : {
             "Auto" : -1,
             "0 " : 0,
-        	"1 " : 1,
-        	"2 " : 2,
-        	"3 " : 3
+            "1 " : 1,
+            "2 " : 2,
+            "3 " : 3
         },
         "tooltip" : "Decimal places of disk read and write speed shown in the panel"
     },
     "gui_text_css": {
         "type": "entry",
-        "default": "font-weight: bold;",
+        "default": "font-weight: bold; font-size: 15px; text-align: right; font-family: monospace;",
         "description": "Text CSS",
-        "tooltip": "A CSS style applied to the text in the panel"
+        "tooltip": "A CSS style applied to the text in the panel",
+        "expand-width": true
     },
     "gui_read_icon_filename" : {
         "type" : "filechooser",
@@ -87,13 +98,15 @@
         "type": "entry",
         "default": "font-size: 15px; padding: 5px 5px 3px 5px; font-weight: bold; font-family: monospace;",
         "description": "Popup headers CSS",
-        "tooltip": "A CSS style applied to headers in the hover popup"
+        "tooltip": "A CSS style applied to headers in the hover popup",
+        "expand-width": true
     },
     "hover_popup_rows_css": {
         "type": "entry",
         "default": "font-size: 15px; padding: 0px 5px 5px 5px; font-weight: normal; font-family: monospace;",
         "description": "Popup rows CSS",
-        "tooltip": "A CSS style applied to rows in the hover popup"
+        "tooltip": "A CSS style applied to rows in the hover popup",
+        "expand-width": true
     },
     "gui_end" : {
         "type" : "separator"
@@ -105,19 +118,19 @@
         "description": "Total data"
     },
     "show_hover" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Show total read and write on hover",
         "tooltip": "Show the hover popup with total amount of data read and written"
      },
     "show_total_bytes_read" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Show total bytes read",
         "tooltip": "Show the column with the total amount of bytes read in the hover popup"
      },
     "show_total_bytes_written" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Show total bytes written",
         "tooltip": "Show the column with the total amount of bytes written in the hover popup"
@@ -126,37 +139,43 @@
         "type" : "entry",
         "default" : "Read",
         "description": "Total bytes read column name",
-        "tooltip": "A name of the column with the total amount of bytes read in the hover popup"
+        "tooltip": "A name of the column with the total amount of bytes read in the hover popup",
+        "expand-width": true
      },
     "total_bytes_written_column_name" : {
         "type" : "entry",
         "default" : "Written",
         "description": "Total bytes written column name",
-        "tooltip": "A name of the column with the total amount of bytes written in the hover popup"
+        "tooltip": "A name of the column with the total amount of bytes written in the hover popup",
+        "expand-width": true
      },
     "devices_regex_string": {
         "type": "entry",
         "default": "sd",
         "description": "Disks",
-        "tooltip": "A regular expression that matches disk names to show in the hover popup"
+        "tooltip": "A regular expression that matches disk names to show in the hover popup",
+        "expand-width": true
     },
     "device_aliases_string": {
         "type": "entry",
         "default": "sdX:root,sdY:home",
         "description": "Aliases",
-        "tooltip": "A comma separated list of \"disk:alias\" pairs that replace disk names in the hover popup"
+        "tooltip": "A comma separated list of \"disk:alias\" pairs that replace disk names in the hover popup",
+        "expand-width": true
     },
     "column_names_string" : {
         "type": "entry",
         "default": "Major number,Minor number,Disk,Reads completed,Reads merged,Sectors read,Reads ms,Writes completed,Writes merged,Sectors written,Writes ms,IO progress,IO ms,Weighted IO ms,Discards completed,Discards merged,Sectors discarded,Time discarding",
         "description": "Headers",
-        "tooltip": "A comma separated list of column headers to show in the hover popup"
+        "tooltip": "A comma separated list of column headers to show in the hover popup",
+        "expand-width": true
     },
     "column_indexes_string" : {
         "type": "entry",
         "default": "2",
         "description": "Columns",
-        "tooltip": "A comma separated list of column indexes to show in the hover popup"
+        "tooltip": "A comma separated list of column indexes to show in the hover popup",
+        "expand-width": true
     },
     "column_spaces": {
         "type": "spinbutton",
@@ -206,9 +225,9 @@
         "options" : {
             "Auto" : -1,
             "0 " : 0,
-        	"1 " : 1,
-        	"2 " : 2,
-        	"3 " : 3
+            "1 " : 1,
+            "2 " : 2,
+            "3 " : 3
         },
         "tooltip" : "Decimal places of total amount of data read and written shown in the hover popup"
     },
@@ -222,7 +241,7 @@
         "description": "Processes"
     },
     "launch_terminal" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "List input and output information per process",
         "tooltip": "Open a terminal with a list of input and output informations per process on a left mouse click. The next click closes the terminal."
@@ -231,7 +250,8 @@
         "type": "entry",
         "default": "watch -n 1 \\\" find /proc/ -mindepth 2 -maxdepth 2 -type f -name stat -exec cut -d' ' -f 1,2,42 {} \\+ | sort -r -n -k 3,3 | head -n 40 | sed '1 i pid executable iodelay' | column -t \\\"",
         "description": "Command",
-        "tooltip": "A command used to show input and output information per process"
+        "tooltip": "A command used to show input and output information per process",
+        "expand-width": true
     },
     "processes_end": {
         "type" : "separator"
