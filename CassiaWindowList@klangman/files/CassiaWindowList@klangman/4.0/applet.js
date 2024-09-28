@@ -124,8 +124,6 @@ const ICON_NAMES = {
    writer: 'x-office-document'
 }
 
-const majorVersion = parseInt(Config.PACKAGE_VERSION.substring(0,1));
-
 // The possible user setting for the caption contents
 const CaptionType = {
   Name: 0,           // Caption is set to the Application Name (i.e. Firefox)
@@ -5369,10 +5367,12 @@ class WindowList extends Applet.Applet {
     this._signalManager.connect(this._settings, "changed::show-windows-for-all-workspaces", this._onShowOnAllWorkspacesChanged, this);
     this._signalManager.connect(this._settings, "changed::number-of-unshrunk-previews", this._updateGlobalPreviewSize, this);
     this._signalManager.connect(this._settings, "settings-changed", this._onSettingsChanged, this);
+    this._signalManager.connect(global, "scale-changed", this._updateCurrentWorkspace, this);
 
     if (this._settings.getValue("runWizard")===1) {
        let command = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this._uuid + "/setupWizard " + this._uuid + " " + this.instance_id;
        Util.spawnCommandLineAsync(command);
+       this._settings.setValue("runWizard", 0);
     }
   }
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.5
+
+* Fix for the "number bubble" showing up incorrectly after changing the UI scale settings in display setting application.
+* Add a 2nd layer of code to try and ensure that the "Welcome Wizard" dialog does not reappear after a restart
+
 ## 2.3.4
 
 * Saves new default thumbnail window sizes (adjusted using the mouse scroll-wheel) across cinnamon restarts
