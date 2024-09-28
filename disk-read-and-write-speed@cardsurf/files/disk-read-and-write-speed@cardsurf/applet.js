@@ -978,32 +978,32 @@ MyApplet.prototype = {
     convert_bytes_to_readable_unit: function (bytes) {
         if (this.is_binary === true) {
             if(bytes >= Math.pow(2, 40)) {
-                return [bytes/Math.pow(2, 40), _("TiB")];
+                return [bytes/Math.pow(2, 40), _(" TiB")];
             }
             if(bytes >= Math.pow(2, 30)) {
-                return [bytes/Math.pow(2, 30), _("GiB")];
+                return [bytes/Math.pow(2, 30), _(" GiB")];
             }
             if(bytes >= Math.pow(2, 20)) {
-                return [bytes/Math.pow(2, 20), _("MiB")];
+                return [bytes/Math.pow(2, 20), _(" MiB")];
             }
             if(bytes >= Math.pow(2, 10)) {
-                return [bytes/Math.pow(2, 10), _("kiB")];
+                return [bytes/Math.pow(2, 10), _(" kiB")];
             }
-            return [bytes, _("B")];
+            return [bytes, _("   B")];
         }
         if(bytes >= 1000000000000) {
-            return [bytes/1000000000000, _("TB")];
+            return [bytes/1000000000000, _(" TB")];
         }
         if(bytes >= 1000000000) {
-            return [bytes/1000000000, _("GB")];
+            return [bytes/1000000000, _(" GB")];
         }
         if(bytes >= 1000000) {
-            return [bytes/1000000, _("MB")];
+            return [bytes/1000000, _(" MB")];
         }
         if(bytes >= 1000) {
-            return [bytes/1000, _("kB")];
+            return [bytes/1000, _(" kB")];
         }
-        return [bytes, _("B")];
+        return [bytes, _("  B")];
     },
 
     convert_to_bits: function (bytes) {
@@ -1013,32 +1013,32 @@ MyApplet.prototype = {
     convert_bits_to_readable_unit: function (bits) {
         if (this.is_binary === true) {
             if(bits >= Math.pow(2, 40)) {
-                return [bits/Math.pow(2, 40), _("Tib")];
+                return [bits/Math.pow(2, 40), _(" Tib")];
             }
             if(bits >= Math.pow(2, 30)) {
-                return [bits/Math.pow(2, 30), _("Gib")];
+                return [bits/Math.pow(2, 30), _(" Gib")];
             }
             if(bits >= Math.pow(2, 20)) {
-                return [bits/Math.pow(2, 20), _("Mib")];
+                return [bits/Math.pow(2, 20), _(" Mib")];
             }
             if(bits >= Math.pow(2, 10)) {
-                return [bits/Math.pow(2, 10), _("kib")];
+                return [bits/Math.pow(2, 10), _(" kib")];
             }
-            return [bits, _("b")];
+            return [bits, _("   b")];
         }
         if(bits >= 1000000000000) {
-            return [bits/1000000000000, _("Tb")];
+            return [bits/1000000000000, _(" Tb")];
         }
         if(bits >= 1000000000) {
-            return [bits/1000000000, _("Gb")];
+            return [bits/1000000000, _(" Gb")];
         }
         if(bits >= 1000000) {
-            return [bits/1000000, _("Mb")];
+            return [bits/1000000, _(" Mb")];
         }
         if(bits >= 1000) {
-            return [bits/1000, _("kb")];
+            return [bits/1000, _(" kb")];
         }
-        return [bits, _("b")];
+        return [bits, _("  b")];
     },
 
     is_base: function (unit) {
