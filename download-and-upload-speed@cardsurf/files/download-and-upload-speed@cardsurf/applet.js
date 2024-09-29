@@ -26,6 +26,11 @@ if (typeof require !== 'undefined') {
     Infos = AppletDirectory.infos;
 }
 
+const _KI = Math.pow(2, 10);
+const _MI = Math.pow(2, 20);
+const _GI = Math.pow(2, 30);
+const _TI = Math.pow(2, 40);
+
 function _(str) {
     return Gettext.dgettext(uuid, str);
 }
@@ -792,17 +797,17 @@ MyApplet.prototype = {
 
     convert_bytes_to_readable_unit: function (bytes) {
         if (this.is_binary === true) {
-            if(bytes >= Math.pow(2, 40)) {
-                return [bytes/Math.pow(2, 40), _(" TiB")];
+            if(bytes >= _TI) {
+                return [bytes/_TI, _(" TiB")];
             }
-            if(bytes >= Math.pow(2, 30)) {
-                return [bytes/Math.pow(2, 30), _(" GiB")];
+            if(bytes >= _GI) {
+                return [bytes/_GI, _(" GiB")];
             }
-            if(bytes >= Math.pow(2, 20)) {
-                return [bytes/Math.pow(2, 20), _(" MiB")];
+            if(bytes >= _MI) {
+                return [bytes/_MI, _(" MiB")];
             }
-            if(bytes >= Math.pow(2, 10)) {
-                return [bytes/Math.pow(2, 10), _(" kiB")];
+            if(bytes >= _KI) {
+                return [bytes/_KI, _(" kiB")];
             }
             return [bytes, _("   B")];
         }
@@ -827,17 +832,17 @@ MyApplet.prototype = {
 
     convert_bits_to_readable_unit: function (bits) {
         if (this.is_binary === true) {
-            if(bits >= Math.pow(2, 40)) {
-                return [bits/Math.pow(2, 40), _(" Tib")];
+            if(bits >= _TI) {
+                return [bits/_TI, _(" Tib")];
             }
-            if(bits >= Math.pow(2, 30)) {
-                return [bits/Math.pow(2, 30), _(" Gib")];
+            if(bits >= _GI) {
+                return [bits/_GI, _(" Gib")];
             }
-            if(bits >= Math.pow(2, 20)) {
-                return [bits/Math.pow(2, 20), _(" Mib")];
+            if(bits >= _MI) {
+                return [bits/_MI, _(" Mib")];
             }
-            if(bits >= Math.pow(2, 10)) {
-                return [bits/Math.pow(2, 10), _(" kib")];
+            if(bits >= _KI) {
+                return [bits/_KI, _(" kib")];
             }
             return [bits, _("   b")];
         }
