@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# EXIT
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 21:43+0200\n"
 "PO-Revision-Date: 2024-06-18 14:35+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,35 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 5.4/applet.js:96
+#. 5.4/applet.js:110
 msgid "Restart Cinnamon"
 msgstr "Riavvia Cinnamon"
 
-#: 5.4/applet.js:108
+#. 5.4/applet.js:122
 msgid "Lock Screen"
 msgstr "Blocca lo schermo"
 
-#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
 msgid "Switch User"
 msgstr "Cambia utente"
 
-#: 5.4/applet.js:166
+#. 5.4/applet.js:180
 msgid "Log Out"
 msgstr "Abbandona sessione"
 
-#: 5.4/applet.js:178
+#. 5.4/applet.js:192
 msgid "Suspend"
 msgstr "Sospendi"
 
-#: 5.4/applet.js:187
+#. 5.4/applet.js:201
 msgid "Hibernate"
 msgstr "Iberna"
 
-#: 5.4/applet.js:199
+#. 5.4/applet.js:216
 msgid "Restart"
 msgstr "Riavvia"
 
-#: 5.4/applet.js:208
+#. 5.4/applet.js:225
 msgid "Power Off"
 msgstr "Spegni"
 
@@ -55,8 +56,8 @@ msgid ""
 "Restart Cinnamon, lock the screen, switch users, log out, suspend, "
 "hibernate, reboot or shut down the computer"
 msgstr ""
-"Riavvia Cinnamon, blocca lo schermo, cambia utente, disconnettiti, "
-"sospendi, iberna, riavvia o spegni il computer"
+"Riavvia Cinnamon, blocca lo schermo, cambia utente, disconnettiti, sospendi, "
+"iberna, riavvia o spegni il computer"
 
 #. metadata.json->name
 msgid "Exit"
@@ -89,6 +90,10 @@ msgstr "Mostra l'opzione Sospendi"
 #. 5.4->settings-schema.json->showHibernate->description
 msgid "Show the Hibernate option"
 msgstr "Mostra l'opzione Ibernazione"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr ""
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"

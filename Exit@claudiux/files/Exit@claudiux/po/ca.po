@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# EXIT
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2024
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 21:43+0200\n"
 "PO-Revision-Date: 2024-07-03 23:49+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,35 +19,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 5.4/applet.js:96
+#. 5.4/applet.js:110
 msgid "Restart Cinnamon"
 msgstr "Reiniciar Cinnamon"
 
-#: 5.4/applet.js:108
+#. 5.4/applet.js:122
 msgid "Lock Screen"
 msgstr "Bloquejar la pantalla"
 
-#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
 msgid "Switch User"
 msgstr "Canviar d'usuari"
 
-#: 5.4/applet.js:166
+#. 5.4/applet.js:180
 msgid "Log Out"
 msgstr "Tancar la sessió"
 
-#: 5.4/applet.js:178
+#. 5.4/applet.js:192
 msgid "Suspend"
 msgstr "Suspendre"
 
-#: 5.4/applet.js:187
+#. 5.4/applet.js:201
 msgid "Hibernate"
 msgstr "Hivernar"
 
-#: 5.4/applet.js:199
+#. 5.4/applet.js:216
 msgid "Restart"
 msgstr "Reiniciar"
 
-#: 5.4/applet.js:208
+#. 5.4/applet.js:225
 msgid "Power Off"
 msgstr "Apagar"
 
@@ -90,6 +91,10 @@ msgstr "Mostrar la opció de suspendre l'equip"
 msgid "Show the Hibernate option"
 msgstr "Mostrar la opció d'hivernar l'equip"
 
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr ""
+
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
 msgstr "Mostrar la opció de reiniciar l'equip"
@@ -103,8 +108,8 @@ msgid ""
 "All the menu options below may be managed by the system.\n"
 "If they are, you can't see them."
 msgstr ""
-"És possible que el sistema administri algunes o totes les opcions "
-"llistades a continuació.\n"
+"És possible que el sistema administri algunes o totes les opcions llistades "
+"a continuació.\n"
 "En cas afirmatiu, no les podreu veure."
 
 #. 5.4->settings-schema.json->showLockscreen->description
