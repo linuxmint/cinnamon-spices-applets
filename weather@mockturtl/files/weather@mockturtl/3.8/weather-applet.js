@@ -9346,7 +9346,7 @@ function InjectValues(text, weather, config, inCommand = false) {
     const searchEntry = (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "";
     const tmr = weather.forecasts && weather.forecasts[1] ? weather.forecasts[1] : null;
     const forecastHours = weather.hourlyForecasts && weather.hourlyForecasts[2] ? weather.hourlyForecasts : null;
-    const tempHourDiff = forecastHours ? ValueChange(TempToUserConfig(forecastHours[0].temp, config, false), TempToUserConfig(forecastHours[2].temp, config, false), false) : "";
+    const tempHourDiff = forecastHours ? ValueChange(TempToUserConfig(forecastHours[0].temp, config, false), TempToUserConfig(forecastHours[2].temp, config, false)) : "";
     const conditionTomorrow = tmr ? tmr.condition.main : "";
     const tempMin = tmr ? TempToUserConfig(weather.forecasts[0].temp_min, config, false).toString() : "";
     const tempMax = tmr ? TempToUserConfig(weather.forecasts[0].temp_max, config, false).toString() : "";
@@ -9362,7 +9362,7 @@ function InjectValues(text, weather, config, inCommand = false) {
     const now = new Date();
     const sunny = now > weather.sunrise && now < weather.sunset;
     const daylightRemain = sunny ? ToHoursMinutes(weather.sunset - now) : "";
-    const dayLengthlightRemain = "" + dayLength + (sunny ? " (" + daylightRemain + ")" : "");
+    const dayLengthlightRemain = dayLength + (sunny ? " (" + daylightRemain + ")" : "");
     const valuesPaddingDefaults = [
         ['t', temp, 4, true],
         ['u', tempUnit],
@@ -9400,7 +9400,7 @@ function InjectValues(text, weather, config, inCommand = false) {
         ['t_h_diff', tempHourDiff],
         ['br', "\n"]
     ];
-    var regexp, match, pad, padLeft, padChar, newVal, isLiteral, padLiteral, dontPad;
+    let regexp, match, pad, padLeft, padChar, newVal, isLiteral, padLiteral, dontPad;
     for (const value of valuesPaddingDefaults) {
       regexp = new RegExp(
           '(?<isLiteral>\\{{1,3})' +
@@ -9756,18 +9756,18 @@ function SignedNumber(number) {
 }
 function ToHoursMinutes(number) {
     const m = Math.floor(number / 1000 / 60);
-    return Math.floor(m / 60) + ":" + (m % 60);
+    return Math.floor(m / 60) + ":" + (m % 60).toString().padStart(2, '0');
 }
 function EscapeRegex(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 function ValueChange(temp1, temp2, large_percent) {
-    var arrows = ['↡', '↓', '↔', '↑', '↟'];
-    var diff = temp2 - temp1;
-    var drop = diff < 0;
-    var rise = diff > 0;
-    var large = Math.abs(diff * 100 / temp2) >= (large_percent || 20);
-    var index = (drop && large ? 0 : drop ? 1 : diff == 0 ? 2 : rise && !large ? 3 : 4);
+    const arrows = ['↡', '↓', '↔', '↑', '↟'];
+    const diff = temp2 - temp1;
+    const drop = diff < 0;
+    const rise = diff > 0;
+    const large = Math.abs(diff * 100 / temp2) >= (large_percent || 15);
+    const index = (drop && large ? 0 : drop ? 1 : diff == 0 ? 2 : rise && !large ? 3 : 4);
     return arrows[index] + Math.abs(diff);
 }
 function IsNight(sunTimes, date) {
