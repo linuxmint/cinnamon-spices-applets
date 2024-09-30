@@ -36,7 +36,7 @@ class EyeMode {
     topAndLatSizes(area_width, area_height, options) {
         let top_size, lat_size;
 
-        if(options.is_vertical) {
+        if (options.is_vertical) {
             top_size = area_width;
             lat_size = area_height;
         } else {
@@ -50,7 +50,7 @@ class EyeMode {
 
 class EyelidMode extends EyeMode {
     drawEye(area, options) {
-        let [area_width, area_height] = area.get_surface_size();
+        let [area_width, area_height] = area.allocation.get_size();
         let [mouse_x, mouse_y] = [options.mouse_x, options.mouse_y];
         let [area_x, area_y] = [options.area_x, options.area_y];
 
@@ -81,6 +81,14 @@ class EyelidMode extends EyeMode {
         const eye_ang = Math.atan(mouse_rad / iris_r);
 
         let cr = area.get_context();
+
+        // Add a ransparent background to avoid
+        // blemishes from previous drawings.
+        cr.setSourceRGBA(0, 0, 0, 0);
+        cr.rectangle(0, 0, area_width, area_height);
+        cr.fill();
+
+        cr.save();
 
         // -- Drawing the base of the eye
 
@@ -142,18 +150,15 @@ class EyelidMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
         cr.fill();
 
-        cr.save();
         cr.restore();
-        cr.$dispose();
     }
 }
 
 
 class BulbMode extends EyeMode {
     drawEye(area, options) {
-        let [area_width, area_height] = area.get_surface_size();
-        let [mouse_x, mouse_y] = [options.mouse_x, options.mouse_y];
-        let [area_x, area_y] = [options.area_x, options.area_y];
+        let [area_width, area_height] = area.allocation.get_size();
+        let { mouse_x, mouse_y, area_x, area_y } = options;
 
         area_x += area_width / 2;
         area_y += area_height / 2;
@@ -180,7 +185,15 @@ class BulbMode extends EyeMode {
 
         const eye_ang = Math.atan(mouse_rad / iris_r);
 
-        const cr = area.get_context();
+        let cr = area.get_context();
+
+        // Add a ransparent background to avoid
+        // blemishes from previous drawings.
+        cr.setSourceRGBA(0, 0, 0, 0);
+        cr.rectangle(0, 0, area_width, area_height);
+        cr.fill();
+
+        cr.save();
 
         // -- Drawing the base of the eye
 
@@ -217,9 +230,7 @@ class BulbMode extends EyeMode {
         cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
         cr.fill();
 
-        cr.save();
         cr.restore();
-        cr.$dispose();
     }
 }
 
