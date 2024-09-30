@@ -78,6 +78,8 @@ class Eye extends Applet.Applet {
 
 		this.refresh_handler_id = 0;
 
+		this.cos_repaint_angle = Math.cos(this.repaint_angle);
+
 		this._last_mouse_x = undefined;
 		this._last_mouse_y = undefined;
 		this._last_eye_x = undefined;
@@ -122,7 +124,7 @@ class Eye extends Applet.Applet {
 			{
 				key: "repaint-angle",
 				value: "_repaint_angle",
-				cb: null,
+				cb: () => this.cos_repaint_angle = Math.cos(this.repaint_angle),
 			},
 			{
 				key: "mode",
@@ -398,17 +400,18 @@ class Eye extends Applet.Applet {
 		) {
 			should_redraw = true;
 		} else {
-			const dist = (x, y) => Math.sqrt(x * x + y * y);
+			const sq_dist = (x, y) => x * x + y * y;
 			const [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
 			const [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
-			const dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
+			const current_sq_dist = sq_dist(current_x, current_y);
+			const last_sq_dist = sq_dist(last_x, last_y);
 
-			if (dist_prod == 0) {
+			if (last_sq_dist === 0 || current_sq_dist === 0) {
 				should_redraw = true;
 			} else {
 				const dot_prod = current_x * last_x + current_y * last_y;
-				const angle = Math.acos(dot_prod / dist_prod);
-				should_redraw = angle >= this.repaint_angle;
+				const cos_angle = dot_prod / Math.sqrt(last_sq_dist * current_sq_dist);
+				should_redraw = cos_angle <= this.cos_repaint_angle;
 			}
 		}
 
