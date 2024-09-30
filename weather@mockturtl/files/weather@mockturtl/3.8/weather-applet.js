@@ -9339,8 +9339,11 @@ function InjectValues(text, weather, config, inCommand = false) {
     const pressureUnit = config._pressureUnit;
     const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
     const extraName = weather.extra_field ? weather.extra_field.name : "";
-    const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
+    const windUnit = config.WindSpeedUnit;
+    const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, windUnit) : "";
     const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
+    const windArrow = weather.wind.degree != null ? CompassDirectionArrow(weather.wind.degree) : "";
+    const windDegree = weather.wind.degree != null ? weather.wind.degree.toString() : "";
     const city = (_e = weather.location.city) !== null && _e !== void 0 ? _e : "";
     const country = (_f = weather.location.country) !== null && _f !== void 0 ? _f : "";
     const searchEntry = (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "";
