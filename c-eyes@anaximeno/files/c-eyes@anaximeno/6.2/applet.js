@@ -91,7 +91,7 @@ class Eye extends Applet.Applet {
 	get repaint_interval() {
 		let repaint_interval = this._repaint_interval;
 
-		if (this.optimization_mode != "manual") {
+		if (this.optimization_mode != "manual" && this.optimization_mode in Optimizations) {
 			let r = Optimizations[this.optimization_mode]["repaint_interval_ms"];
 			if (r != null || r != undefined) repaint_interval = r;
 		}
@@ -102,7 +102,7 @@ class Eye extends Applet.Applet {
 	get repaint_angle() {
 		let repaint_angle = this._repaint_angle;
 
-		if (this.optimization_mode != "manual") {
+		if (this.optimization_mode != "manual" && this.optimization_mode in Optimizations) {
 			let r = Optimizations[this.optimization_mode]["repaint_angle_rad"];
 			if (r != null || r != undefined) repaint_angle = r;
 		}
