@@ -208,7 +208,7 @@ Left-pad values with up to 3 zeros using `{humidty,3.0}`. Right-pad values with 
 
 Multiline example for panel: ` {c} {t}{u}{t_h_diff}{br} {wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
 
-Multiline example for tooltip - extra spaces fix rounded tooltips: `          {city} {country}, Last updated {last_updated}          {br}Min / Max: {min} / {max} {u}{br}Tomorrow: {tmr_t} {br}Day Length: {day_length}{br}Sunset `
+Multiline example for tooltip - extra spaces fix rounded tooltips: `          {city} {country}, Last updated {last_updated}          {br}Min / Max: {min} / {max} {u}{br}Tomorrow: {tmr_t} {br}Day Length: {day_length} `
 
 ## Run script when the weather data changes
 
