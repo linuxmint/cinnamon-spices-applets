@@ -139,7 +139,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	    ['t_h_diff', tempHourDiff],
 	    ['br', "\n"]
 	];
-	var regexp, match, pad, padLeft, padChar, newVal, isLiteral, padLiteral, dontPad;
+	let regexp, match, pad, padLeft, padChar, newVal, isLiteral, padLiteral, dontPad;
 	for (const value of valuesPaddingDefaults) {
 	  regexp = new RegExp(
 	      '(?<isLiteral>\\{{1,3})' +
