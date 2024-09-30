@@ -75,48 +75,95 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const pressureUnit = config._pressureUnit;
 	const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
 	const extraName = weather.extra_field ? weather.extra_field.name : "";
-	const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
+	const windUnit = config.WindSpeedUnit;
+	const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, windUnit) : "";
 	const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
+	const windArrow = weather.wind.degree != null ? CompassDirectionArrow(weather.wind.degree) : "";
+	const windDegree = weather.wind.degree != null ? weather.wind.degree.toString() : "";
 	const city = weather.location.city ?? "";
 	const country = weather.location.country ?? "";
 	const searchEntry = config.CurrentLocation?.entryText ?? "";
-	if (inCommand) {
-		text =  text.replace(/{{t}}/g, Literal(temp))
-					.replace(/{{u}}/g, Literal(tempUnit))
-					.replace(/{{c}}/g, Literal(condition))
-					.replace(/{{c_long}}/g, Literal(conditionLong))
-					.replace(/{{dew_point}}/g, Literal(dewPoint))
-					.replace(/{{humidity}}/g, Literal(humidity))
-					.replace(/{{pressure}}/g, Literal(pressure))
-					.replace(/{{pressure_unit}}/g, Literal(pressureUnit))
-					.replace(/{{extra_value}}/g, Literal(extraValue))
-					.replace(/{{extra_name}}/g, Literal(extraName))
-					.replace(/{{wind_speed}}/g, Literal(windSpeed))
-					.replace(/{{wind_dir}}/g, Literal(windDir))
-					.replace(/{{city}}/g, Literal(city))
-					.replace(/{{country}}/g, Literal(country))
-					.replace(/{{search_entry}}/g, Literal(searchEntry))
-					.replace(/{{last_updated}}/g, Literal(lastUpdatedTime))
-					.replace(/{{br}}/g, Literal("\n"));
+	const tmr = weather.forecasts && weather.forecasts[1] ? weather.forecasts[1] : null;
+	const forecastHours = weather.hourlyForecasts && weather.hourlyForecasts[2] ? weather.hourlyForecasts : null;
+	const tempHourDiff = forecastHours ? ValueChange(TempToUserConfig(forecastHours[0].temp, config, false), TempToUserConfig(forecastHours[2].temp, config, false), false) : "";
+	const conditionTomorrow = tmr ? tmr.condition.main : "";
+	const tempMin = tmr ? TempToUserConfig(weather.forecasts[0].temp_min, config, false).toString() : "";
+	const tempMax = tmr ? TempToUserConfig(weather.forecasts[0].temp_max, config, false).toString() : "";
+	const tempMinTomorrow = tmr ? TempToUserConfig(tmr.temp_min, config, false).toString() : "";
+	const tempMaxTomorrow = tmr ? TempToUserConfig(tmr.temp_max, config, false).toString() : "";
+	const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
+	const tmrMinTempChange = tempMinTomorrow && temp ? SignedNumber(tempMinTomorrow - tempMin) : "";
+	const tmrMaxTempChange = tempMaxTomorrow && temp ? SignedNumber(tempMaxTomorrow - tempMax) : "";
+	const tempsTomorrowWithDifferences = tmr ? tempsTomorrow + " (" + tmrMinTempChange + " / " + tmrMaxTempChange + ")" : "";
+	const sunset = (GetHoursMinutes(weather.sunset, config._show24Hours));
+	const sunrise = (GetHoursMinutes(weather.sunrise, config._show24Hours));
+	const dayLength = ToHoursMinutes(weather.sunset - weather.sunrise);
+	const now = new Date();
+	const sunny = now > weather.sunrise && now < weather.sunset;
+	const daylightRemain = sunny ? ToHoursMinutes(weather.sunset - now) : "";
+	const dayLengthlightRemain = "" + dayLength + (sunny ? " (" + daylightRemain + ")" : "");
+	const valuesPaddingDefaults = [
+	    ['t', temp, 4, true],
+	    ['u', tempUnit],
+	    ['c', condition],
+	    ['c_long', conditionLong],
+	    ['dew_point', dewPoint],
+	    ['humidity', humidity, 3],
+	    ['pressure', pressure, 7],
+	    ['pressure_unit', pressureUnit],
+	    ['extra_value', extraValue],
+	    ['extra_name', extraName],
+	    ['city', city],
+	    ['country', country],
+	    ['search_entry', searchEntry],
+	    ['last_updated', lastUpdatedTime],
+	    ['wind_speed', windSpeed],
+	    ['wind_dir', windDir],
+	    ['wind_arrow', windArrow],
+	    ['wind_deg', windDegree],
+	    ['wind_unit', windUnit],
+	    ['min', tempMin],
+	    ['max', tempMax],
+	    ['tmr_min', tempMinTomorrow],
+	    ['tmr_max', tempMaxTomorrow],
+	    ['tmr_min_diff', tmrMinTempChange],
+	    ['tmr_max_diff', tmrMaxTempChange],
+	    ['tmr_c', conditionTomorrow],
+	    ['tmr_t', tempsTomorrow],
+	    ['tmr_td', tempsTomorrowWithDifferences],
+	    ['sunset', sunset],
+	    ['sunrise', sunrise],
+	    ['day_length', dayLength],
+	    ['day_remain', daylightRemain],
+	    ['day_len_rem', dayLengthlightRemain],
+	    ['t_h_diff', tempHourDiff],
+	    ['br', "\n"]
+	];
+	var regexp, match, pad, padLeft, padChar, newVal, isLiteral, padLiteral, dontPad;
+	for (const value of valuesPaddingDefaults) {
+	  regexp = new RegExp(
+	      '(?<isLiteral>\\{{1,3})' +
+	      '(?<value>\\b' + EscapeRegex(value[0]) + '\\b)' +
+	      '(?<padLeft>[,\\.]{0,1})' +
+	      '(?<pad>\\d{0,2})' +
+	      '\\.{0,1}(?<padChar>[^\\}]{0,1})' +
+	      '(?<isLiteralEnd>\\}{1,3})', 'g');
+	  match = regexp.exec(text);
+	  if (!match || match.length == 0) {
+	    continue;
+	  }
+	  match = match.groups;
+	  padLiteral = match.isLiteral == "{{{" && match.isLiteralEnd == "}}}";
+	  isLiteral = match.isLiteral == "{{" && match.isLiteralEnd == "}}";
+	  dontPad = inCommand && !padLiteral;
+	  padLeft = match.padLeft ? match.padLeft == ',' : value[3] != false;
+	  pad = match.pad ? match.pad : value[2] || 0;
+	  padChar = match.padChar ? match.padChar : value[4] || ' ';
+	  newVal = value[1];
+	  newVal = dontPad ? newVal : padLeft ? newVal.padStart(pad, padChar) : newVal.padEnd(pad, padChar);
+	  text = text.replace(regexp, isLiteral || padLiteral ? Literal(newVal) : newVal);
 	}
-
-	return  text.replace(/{t}/g, temp)
-				.replace(/{u}/g, tempUnit)
-				.replace(/{c}/g, condition)
-				.replace(/{c_long}/g, conditionLong)
-				.replace(/{dew_point}/g, dewPoint)
-				.replace(/{humidity}/g, humidity)
-				.replace(/{pressure}/g, pressure)
-				.replace(/{pressure_unit}/g, pressureUnit)
-				.replace(/{extra_value}/g, extraValue)
-				.replace(/{extra_name}/g, extraName)
-				.replace(/{wind_speed}/g, windSpeed)
-				.replace(/{wind_dir}/g, windDir)
-				.replace(/{city}/g, city)
-				.replace(/{country}/g, country)
-				.replace(/{search_entry}/g, searchEntry)
-				.replace(/{last_updated}/g, lastUpdatedTime)
-				.replace(/{br}/g, "\n");
+	return text;
 }
 
 export function CapitalizeFirstLetter(description: string): string {
@@ -533,8 +580,29 @@ export function CompassDirectionText(deg: number): string {
 	const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
 	return directions[Math.round(deg / 45) % directions.length]
 }
-
-
+export function CompassDirectionArrow(deg: number): string {
+	const directions = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
+	return directions[Math.round(deg / 45) % directions.length];
+}
+export function SignedNumber(number: number): string {
+	return number < 0 ? number.toString() : '+' + number;
+}
+export function ToHoursMinutes(number: number): string {
+	const m = Math.floor(number / 1000 / 60);
+	return Math.floor(m / 60) + ":" + (m % 60);
+}
+export function EscapeRegex(string: string): string {
+	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+export function ValueChange(temp1: number, temp2: number, large_percent: number): string {
+	var arrows = ['↡', '↓', '↔', '↑', '↟'];
+	var diff = temp2 - temp1;
+	var drop = diff < 0;
+	var rise = diff > 0;
+	var large = Math.abs(diff * 100 / temp2) >= (large_percent || 20);
+	var index = (drop && large ? 0 : drop ? 1 : diff == 0 ? 2 : rise && !large ? 3 : 4);
+	return arrows[index] + Math.abs(diff);
+}
 // -----------------------------------------------------------------
 // Testers
 
