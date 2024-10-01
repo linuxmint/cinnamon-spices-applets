@@ -46,6 +46,15 @@ class EyeMode {
 
         return [top_size, lat_size];
     }
+
+    /** Add a ransparent background to avoid blemishes from previous drawings. */
+    clearArea(cr, area_width, area_height) {
+        cr.save();
+        cr.setSourceRGBA(0, 0, 0, 0);
+        cr.rectangle(0, 0, area_width, area_height);
+        cr.fill();
+        cr.restore();
+    }
 }
 
 class EyelidMode extends EyeMode {
@@ -81,12 +90,7 @@ class EyelidMode extends EyeMode {
         const eye_ang = Math.atan(mouse_rad / iris_r);
 
         let cr = area.get_context();
-
-        // Add a ransparent background to avoid
-        // blemishes from previous drawings.
-        cr.setSourceRGBA(0, 0, 0, 0);
-        cr.rectangle(0, 0, area_width, area_height);
-        cr.fill();
+        this.clearArea(cr, area_width, area_height);
 
         cr.save();
 
@@ -186,12 +190,7 @@ class BulbMode extends EyeMode {
         const eye_ang = Math.atan(mouse_rad / iris_r);
 
         let cr = area.get_context();
-
-        // Add a ransparent background to avoid
-        // blemishes from previous drawings.
-        cr.setSourceRGBA(0, 0, 0, 0);
-        cr.rectangle(0, 0, area_width, area_height);
-        cr.fill();
+        this.clearArea(cr, area_width, area_height);
 
         cr.save();
 
