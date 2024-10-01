@@ -1,3 +1,6 @@
+### v2.2.0~20241001
+  * Add a timer to end screen saver inhibition.
+
 ### v2.1.3~20240925
   * Users can select the number of seconds (0-60) that elapse before the screen saver is disabled.
 
