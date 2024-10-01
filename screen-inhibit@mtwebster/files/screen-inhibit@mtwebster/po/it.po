@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-25 22:35+0200\n"
+"POT-Creation-Date: 2024-10-01 18:55+0200\n"
 "PO-Revision-Date: 2024-07-05 11:01+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -27,12 +27,12 @@ msgstr "Sto prevenendo lo screensaver"
 msgid "Currently allowing screensaver"
 msgstr "Sto consentendo lo screensaver"
 
-#. applet.js:126
+#. applet.js:134
 msgid "Screensaver settings"
 msgstr "Impostazioni screensaver"
 
 #. settings-schema.json->inhibit-at-startup->description
-#. applet.js:130
+#. applet.js:138
 msgid "Inhibit screensaver at startup"
 msgstr "Inibisci lo screensaver all'avvio"
 
@@ -46,9 +46,56 @@ msgstr ""
 msgid "Screensaver Inhibitor"
 msgstr "Inibitore Screensaver"
 
-#. settings-schema.json->head->description
+#. settings-schema.json->pGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pIcons->title
+#. settings-schema.json->sectionIcons->title
 msgid "Icons"
 msgstr "Icone"
+
+#. settings-schema.json->pKeybindings->title
+#. settings-schema.json->sectionKeybindings->title
+msgid "Keybinding"
+msgstr "Associazione di tasti"
+
+#. settings-schema.json->sectionStartup->title
+msgid "Startup"
+msgstr "Avvio"
+
+#. settings-schema.json->sectionDurationOrEndTime->title
+#, fuzzy
+msgid "Duration or End Time of screen saver inhibition"
+msgstr "Imposta l'associazione dei tasti per l'inibizione dello screensaver"
+
+#. settings-schema.json->sectionBlocking->title
+msgid "Way to block the screensaver"
+msgstr "Modo per bloccare lo screensaver"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->tooltip
+msgid "Seconds will be ignored."
+msgstr ""
+
+#. settings-schema.json->end-type->description
+msgid "The time shown above is"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "to be disregarded"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit duration"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit end time"
+msgstr ""
 
 #. settings-schema.json->off-icon->description
 msgid "Power management allowed icon:"
@@ -69,26 +116,14 @@ msgstr "Icona di gestione risparmio energetico:"
 msgid "Reset to default icons"
 msgstr "Ripristina le icone predefinite"
 
-#. settings-schema.json->head1->description
-msgid "Keybinding"
-msgstr "Associazione di tasti"
-
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding for screensaver inhibit"
 msgstr "Imposta l'associazione dei tasti per l'inibizione dello screensaver"
-
-#. settings-schema.json->head2->description
-msgid "Startup"
-msgstr "Avvio"
 
 #. settings-schema.json->seconds-after-startup->description
 #, fuzzy
 msgid "Number of seconds before screensaver inhibition"
 msgstr "Imposta l'associazione dei tasti per l'inibizione dello screensaver"
-
-#. settings-schema.json->head3->description
-msgid "Way to block the screensaver"
-msgstr "Modo per bloccare lo screensaver"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"
