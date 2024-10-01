@@ -9972,8 +9972,21 @@ class LocationStore {
         this.config = config;
         this.locations = config._locationList;
     }
+    AreLocationsDifferent(old, newLocs) {
+        if (old.length != newLocs.length)
+            return true;
+        for (let i = 0; i < old.length; i++) {
+            if (!this.IsEqual(old[i], newLocs[i]))
+                return true;
+        }
+        return false;
+    }
     OnLocationChanged(locs) {
         var _a;
+        if (!this.AreLocationsDifferent(this.locations, locs)) {
+            logger_Logger.Debug("Location store not changed, skipping update");
+            return;
+        }
         for (let index = 0; index < locs.length; index++) {
             const element = locs[index];
             if (!element.entryText) {
