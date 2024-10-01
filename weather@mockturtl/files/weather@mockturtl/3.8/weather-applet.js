@@ -9361,11 +9361,14 @@ function InjectValues(text, weather, config, inCommand = false) {
     const tempsTomorrowWithDifferences = tmr ? tempsTomorrow + " (" + tmrMinTempChange + " / " + tmrMaxTempChange + ")" : "";
     const sunset = (GetHoursMinutes(weather.sunset, config._show24Hours));
     const sunrise = (GetHoursMinutes(weather.sunrise, config._show24Hours));
-    const dayLength = ToHoursMinutes(weather.sunset - weather.sunrise);
+    const dayLen = weather.sunset - weather.sunrise;
+    const dayLength = ToHoursMinutes(dayLen);
     const now = new Date();
     const sunny = now > weather.sunrise && now < weather.sunset;
-    const daylightRemain = sunny ? ToHoursMinutes(weather.sunset - now) : "";
-    const dayLengthlightRemain = dayLength + (sunny ? " (" + daylightRemain + ")" : "");
+    const dayRem = weather.sunset - now + (now - weather.date);
+    const daylightRemain = sunny ? ToHoursMinutes(dayRem) : "";
+    const daylightRemainPct = sunny ? Math.round(dayRem * 100 / dayLen).toString() : "0";
+    const dayLengthLightRemain = dayLength + (sunny ? " (" + daylightRemain + ")" : "");
     const valuesPaddingDefaults = [
         ['t', temp, 4, true],
         ['u', tempUnit],
@@ -9399,7 +9402,8 @@ function InjectValues(text, weather, config, inCommand = false) {
         ['sunrise', sunrise],
         ['day_length', dayLength],
         ['day_remain', daylightRemain],
-        ['day_len_rem', dayLengthlightRemain],
+        ['day_len_rem', dayLengthLightRemain],
+        ['day_rem_pct', daylightRemainPct],
         ['t_h_diff', tempHourDiff],
         ['br', "\n"]
     ];

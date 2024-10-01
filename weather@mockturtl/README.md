@@ -189,8 +189,9 @@ The setting allows you to make the applet display basically anything in the form
 | `{wind_deg}`      | Wind direction as degree value                            |
 | `{sunrise}`       | Sunrise time                                              |
 | `{sunet}`         | Sunset time                                               |
-| `{day_length}`    | Day length in hours and minutes                           |
+| `{day_length}`    | Daylight length in hours and minutes                      |
 | `{day_remain}`    | Daylight remaining in hours and minutes ("" after dark)   |
+| `{day_rem_pct}`   | Daylight remaining as percentage ("0" after dark)         |
 | `{day_len_rem}`   | Day length and Daylight remaining (or just Day length)    |
 | `{min}`           | Minimum temperature                                       |
 | `{max}`           | Maximum temperature                                       |
@@ -206,9 +207,9 @@ The setting allows you to make the applet display basically anything in the form
 
 Left-pad values with up to 3 zeros using `{humidty,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`.  Some values have an overridable default padding (t: 4 padded left, humidity: 3 padded left, pressure: 7 padded left; all using spaces).
 
-Multiline example for panel: ` {c} {t}{u}{t_h_diff}{br} {wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
+Multiline example for panel: ` {c} {t}{u}{t_h_diff}{br} {wind_speed}{wind_arrow} {humidity}% {pressure} {day_rem_pct}`
 
-Multiline example for tooltip - extra spaces fix rounded tooltips: `          {city} {country}, Last updated {last_updated}          {br}Min / Max: {min} / {max} {u}{br}Tomorrow: {tmr_t} {br}Day Length: {day_length} `
+Multiline example for tooltip - extra spaces fix rounded tooltips: `          {city} {country}, Last updated {last_updated}          {br}Min / Max: {min} / {max} {u}{br}Tomorrow: {tmr_t} {br}Day Length: {day_len_rem} `
 
 ## Run script when the weather data changes
 
@@ -224,7 +225,7 @@ Multiline example for tooltip - extra spaces fix rounded tooltips: `          {c
 
 ## Future Plans
 
-* Add presets for custom overrides.
+* Add presets for custom overrides, then remove concatenated tag overrides.
 
 ## Language Translations
 
