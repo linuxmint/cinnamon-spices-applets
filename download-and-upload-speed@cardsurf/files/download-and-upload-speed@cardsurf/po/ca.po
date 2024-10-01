@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-27 21:38+0200\n"
-"PO-Revision-Date: 2024-09-25 18:46+0200\n"
+"PO-Revision-Date: 2024-10-01 03:04+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -94,91 +94,83 @@ msgstr "Gran"
 
 #. applet.js:796
 msgid " TiB"
-msgstr ""
+msgstr " TiB"
 
 #. applet.js:799
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #. applet.js:802
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #. applet.js:805
 msgid " kiB"
-msgstr ""
+msgstr " kiB"
 
 #. applet.js:807
 msgid "   B"
-msgstr ""
+msgstr "   B"
 
 #. applet.js:810
-#, fuzzy
 msgid " TB"
-msgstr "TB"
+msgstr " TB"
 
 #. applet.js:813
-#, fuzzy
 msgid " GB"
-msgstr "GB"
+msgstr " GB"
 
 #. applet.js:816
-#, fuzzy
 msgid " MB"
-msgstr "MB"
+msgstr " MB"
 
 #. applet.js:819
-#, fuzzy
 msgid " kB"
-msgstr "kB"
+msgstr " kB"
 
 #. applet.js:821
 msgid "  B"
-msgstr ""
+msgstr "  B"
 
 #. applet.js:831
 msgid " Tib"
-msgstr ""
+msgstr " Tib"
 
 #. applet.js:834
 msgid " Gib"
-msgstr ""
+msgstr " Gib"
 
 #. applet.js:837
 msgid " Mib"
-msgstr ""
+msgstr " Mib"
 
 #. applet.js:840
 msgid " kib"
-msgstr ""
+msgstr " kib"
 
 #. applet.js:842
 msgid "   b"
-msgstr ""
+msgstr "   b"
 
 #. applet.js:845
-#, fuzzy
 msgid " Tb"
-msgstr "Tb"
+msgstr " Tb"
 
 #. applet.js:848
-#, fuzzy
 msgid " Gb"
-msgstr "Gb"
+msgstr " Gb"
 
 #. applet.js:851
-#, fuzzy
 msgid " Mb"
-msgstr "Mb"
+msgstr " Mb"
 
 #. applet.js:854
-#, fuzzy
 msgid " kb"
-msgstr "kb"
+msgstr " kb"
 
 #. applet.js:856
 msgid "  b"
-msgstr ""
+msgstr "  b"
 
 #. appletGui.js:480
 msgid "Total download:"
