@@ -225,7 +225,7 @@ Multiline example for tooltip - extra spaces fix rounded tooltips: `          {c
 
 ## Future Plans
 
-* Add presets for custom overrides, then remove concatenated tag overrides.
+* Add presets for custom overrides.
 
 ## Language Translations
 
