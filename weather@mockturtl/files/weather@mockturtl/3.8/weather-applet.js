@@ -11905,7 +11905,7 @@ function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
 
 async function GetMETNorwayAlerts(cancellable, lat, lon) {
     const response = await HttpLib.Instance.LoadJsonSimple({
-        url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
+        url: "https://api.met.no/weatherapi/metalerts/2.0/current.json",
         cancellable: cancellable,
     });
     if (response === null) {
