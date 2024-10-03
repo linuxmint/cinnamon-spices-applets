@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-29 21:43+0200\n"
-"PO-Revision-Date: 2024-02-03 06:44+0100\n"
+"PO-Revision-Date: 2024-10-02 16:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.4/applet.js:110
 msgid "Restart Cinnamon"
@@ -94,7 +94,7 @@ msgstr "Hibernálási opció megjelenítése"
 
 #. 5.4->settings-schema.json->hibernateNeedsSudo->description
 msgid "Hibernate needs root user rights (sudo)"
-msgstr ""
+msgstr "A hibernáláshoz root felhasználói jogok szükségesek (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
