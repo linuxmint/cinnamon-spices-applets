@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-03 15:24+0200\n"
-"PO-Revision-Date: 2024-07-28 07:48-0400\n"
+"PO-Revision-Date: 2024-10-02 16:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:218
@@ -73,24 +73,24 @@ msgid "⚙ General"
 msgstr "⚙ Általános"
 
 #. applet.js:1202
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Hőmérséklet szenzorok"
+msgstr "%s Hőmérséklet szenzorok"
 
 #. applet.js:1212
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Ventilátor szenzorok"
+msgstr "%s Ventilátor szenzorok"
 
 #. applet.js:1222
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Feszültség szenzorok"
+msgstr "%s Feszültség szenzorok"
 
 #. applet.js:1232
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Behatolás szenzorok"
+msgstr "%s Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
 #. applet.js:1253
@@ -398,47 +398,47 @@ msgstr "Karakter méret (az alapértelmezett %-a)"
 
 #. settings-schema.json->vertical-align->options
 msgid "baseline"
-msgstr ""
+msgstr "alaphelyzet"
 
 #. settings-schema.json->vertical-align->options
 msgid "sub"
-msgstr ""
+msgstr "sub"
 
 #. settings-schema.json->vertical-align->options
 msgid "super"
-msgstr ""
+msgstr "super"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-top"
-msgstr ""
+msgstr "szöveg-felül"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-bottom"
-msgstr ""
+msgstr "szöveg-alul"
 
 #. settings-schema.json->vertical-align->options
 msgid "middle"
-msgstr ""
+msgstr "középen"
 
 #. settings-schema.json->vertical-align->options
 msgid "top"
-msgstr ""
+msgstr "felül"
 
 #. settings-schema.json->vertical-align->options
 msgid "bottom"
-msgstr ""
+msgstr "alul"
 
 #. settings-schema.json->vertical-align->options
 msgid "unset"
-msgstr ""
+msgstr "nincs beállítva"
 
 #. settings-schema.json->vertical-align->options
 msgid "inherit"
-msgstr ""
+msgstr "örökölt"
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Függőleges igazítás"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"

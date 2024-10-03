@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-22 04:46-0100\n"
-"PO-Revision-Date: 2024-07-28 07:51-0400\n"
+"PO-Revision-Date: 2024-10-02 17:01+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -401,7 +401,7 @@ msgstr "Általános átlátszatlanság"
 
 #. 5.4->settings-schema.json->click-info->title
 msgid "Info"
-msgstr "információ"
+msgstr "Információ"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
@@ -418,41 +418,39 @@ msgstr ""
 #. 6.2->settings-schema.json->style-page->title
 #. 6.2->settings-schema.json->styles-section->title
 msgid "Style"
-msgstr ""
+msgstr "Stílus"
 
 #. 6.2->settings-schema.json->optimization-section->title
 msgid "Optimizations"
-msgstr ""
+msgstr "Optimalizációk"
 
 #. 6.2->settings-schema.json->mode->description
-#, fuzzy
 msgid "Eye Mode"
-msgstr "Üzemmód"
+msgstr "Szem mód"
 
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Eszköztipp üzenet az egérmutatóval"
 
 #. 6.2->settings-schema.json->optimization-mode->description
-#, fuzzy
 msgid "Optimization Mode"
-msgstr "Kattintás animáció üzemmódja"
+msgstr "Optimalizációs mód"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Battery"
-msgstr ""
+msgstr "Akkumulátor"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Balanced"
-msgstr ""
+msgstr "Kiegyensúlyozott"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Performance"
-msgstr ""
+msgstr "Teljesítmény"
 
 #. 6.2->settings-schema.json->optimization-mode->options
 msgid "Manual"
-msgstr ""
+msgstr "Kézi"
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"

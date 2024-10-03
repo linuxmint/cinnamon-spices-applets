@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-01 18:55+0200\n"
-"PO-Revision-Date: 2024-07-28 07:59-0400\n"
+"PO-Revision-Date: 2024-10-02 19:03+0200\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:21
 msgid "Currently preventing screensaver"
@@ -43,11 +43,11 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Screensaver Inhibitor"
-msgstr "Képernyővédő gátló"
+msgstr "Képernyővédő tiltó"
 
 #. settings-schema.json->pGeneral->title
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #. settings-schema.json->pIcons->title
 #. settings-schema.json->sectionIcons->title
@@ -64,9 +64,8 @@ msgid "Startup"
 msgstr "Indítás"
 
 #. settings-schema.json->sectionDurationOrEndTime->title
-#, fuzzy
 msgid "Duration or End Time of screen saver inhibition"
-msgstr "Állítsa be a billentyűparancsot a képernyővédő gátlásához"
+msgstr "A képernyővédő tiltásának időtartama vagy vége"
 
 #. settings-schema.json->sectionBlocking->title
 msgid "Way to block the screensaver"
@@ -74,27 +73,27 @@ msgstr "A képernyővédő blokkolásának módja"
 
 #. settings-schema.json->end-timechooser->description
 msgid "Time"
-msgstr ""
+msgstr "Idő"
 
 #. settings-schema.json->end-timechooser->tooltip
 msgid "Seconds will be ignored."
-msgstr ""
+msgstr "A másodperceket figyelmen kívül hagyja."
 
 #. settings-schema.json->end-type->description
 msgid "The time shown above is"
-msgstr ""
+msgstr "A fent látható idő"
 
 #. settings-schema.json->end-type->options
 msgid "to be disregarded"
-msgstr ""
+msgstr "figyelmen kívül kell hagyni"
 
 #. settings-schema.json->end-type->options
 msgid "the inhibit duration"
-msgstr ""
+msgstr "a tiltás időtartama"
 
 #. settings-schema.json->end-type->options
 msgid "the inhibit end time"
-msgstr ""
+msgstr "a tiltás befejezési ideje"
 
 #. settings-schema.json->off-icon->description
 msgid "Power management allowed icon:"
@@ -118,9 +117,8 @@ msgid "Set the keybinding for screensaver inhibit"
 msgstr "Állítsa be a billentyűparancsot a képernyővédő gátlásához"
 
 #. settings-schema.json->seconds-after-startup->description
-#, fuzzy
 msgid "Number of seconds before screensaver inhibition"
-msgstr "Állítsa be a billentyűparancsot a képernyővédő gátlásához"
+msgstr "A képernyővédő letiltása előtt eltelt másodpercek száma"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"
