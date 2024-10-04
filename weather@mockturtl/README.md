@@ -202,6 +202,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{tmr_t}`         | Tomorrow's min and max temperatures                       |
 | `{tmr_td}`        | Tomorrow's min and max temperatures with differences      |
 | `{tmr_c}`         | Tomorrow's short condition text                           |
+| `{t_h}`           | Temperature in next 1-2 hours                             |
 | `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |
 | `{br}`            | Line Break                                                |
 
@@ -226,6 +227,8 @@ Multiline example for tooltip - extra spaces fix rounded tooltips: `          {c
 ## Future Plans
 
 * Add presets for custom overrides.
+
+* Add more tags for changes in values.
 
 ## Language Translations
 
