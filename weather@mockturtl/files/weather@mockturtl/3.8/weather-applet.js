@@ -8301,7 +8301,7 @@ function GenerateLocationText(weather, config) {
     return location;
 }
 function InjectValues(text, weather, config, inCommand = false) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
     const { date, temperature, condition, dewPoint, humidity, pressure, wind, location, forecasts, hourlyForecasts, sunrise, sunset, extra_field } = weather;
     const { _show24Hours, TemperatureUnit, _pressureUnit, WindSpeedUnit, CurrentLocation } = config;
     const lastUpdatedTime = AwareDateString(date, _show24Hours, DateTime.local().zoneName);
@@ -8323,21 +8323,20 @@ function InjectValues(text, weather, config, inCommand = false) {
     const searchEntry = (_j = CurrentLocation === null || CurrentLocation === void 0 ? void 0 : CurrentLocation.entryText) !== null && _j !== void 0 ? _j : "";
     const tmr = (_k = forecasts === null || forecasts === void 0 ? void 0 : forecasts[1]) !== null && _k !== void 0 ? _k : null;
     const forecastHours = (hourlyForecasts === null || hourlyForecasts === void 0 ? void 0 : hourlyForecasts[2]) ? hourlyForecasts : null;
-    const forecastNow = (_l = forecastHours === null || forecastHours === void 0 ? void 0 : forecastHours[0]) !== null && _l !== void 0 ? _l : null;
-    const forecastHour = (_m = forecastHours === null || forecastHours === void 0 ? void 0 : forecastHours[2]) !== null && _m !== void 0 ? _m : null;
-    const tempHourDiff = ((forecastNow === null || forecastNow === void 0 ? void 0 : forecastNow.temp) != null && (forecastHour === null || forecastHour === void 0 ? void 0 : forecastHour.temp) != null) ? ValueChange(forecastNow.temp, forecastHour.temp, 15) : "";
-    const tempHour = ((forecastNow === null || forecastNow === void 0 ? void 0 : forecastNow.temp) != null && (forecastHour === null || forecastHour === void 0 ? void 0 : forecastHour.temp) != null) ? (_o = TempToUserConfig(forecastNow.temp + forecastHour.temp, config, false)) !== null && _o !== void 0 ? _o : "" : "";
-    const conditionTomorrow = (_p = tmr === null || tmr === void 0 ? void 0 : tmr.condition.main) !== null && _p !== void 0 ? _p : "";
-    const tempMin = tmr ? (_q = TempToUserConfig(forecasts[0].temp_min, config, false)) !== null && _q !== void 0 ? _q : "" : "";
-    const tempMax = tmr ? (_r = TempToUserConfig(forecasts[0].temp_max, config, false)) !== null && _r !== void 0 ? _r : "" : "";
-    const tempMinTomorrow = tmr ? (_s = TempToUserConfig(tmr.temp_min, config, false)) !== null && _s !== void 0 ? _s : "" : "";
-    const tempMaxTomorrow = tmr ? (_t = TempToUserConfig(tmr.temp_max, config, false)) !== null && _t !== void 0 ? _t : "" : "";
+    const forecastHour = (_l = forecastHours === null || forecastHours === void 0 ? void 0 : forecastHours[2]) !== null && _l !== void 0 ? _l : null;
+    const tempHourDiff = (temperature != null && (forecastHour === null || forecastHour === void 0 ? void 0 : forecastHour.temp) != null) ? ValueChange(Number(TempToUserConfig(temperature, config, false)), Number(TempToUserConfig(forecastHour.temp, config, false)), 15) : "";
+    const tempHour = ((forecastHour === null || forecastHour === void 0 ? void 0 : forecastHour.temp) != null) ? (_m = TempToUserConfig(forecastHour.temp, config, false)) !== null && _m !== void 0 ? _m : "" : "";
+    const conditionTomorrow = (_o = tmr === null || tmr === void 0 ? void 0 : tmr.condition.main) !== null && _o !== void 0 ? _o : "";
+    const tempMin = tmr ? (_p = TempToUserConfig(forecasts[0].temp_min, config, false)) !== null && _p !== void 0 ? _p : "" : "";
+    const tempMax = tmr ? (_q = TempToUserConfig(forecasts[0].temp_max, config, false)) !== null && _q !== void 0 ? _q : "" : "";
+    const tempMinTomorrow = tmr ? (_r = TempToUserConfig(tmr.temp_min, config, false)) !== null && _r !== void 0 ? _r : "" : "";
+    const tempMaxTomorrow = tmr ? (_s = TempToUserConfig(tmr.temp_max, config, false)) !== null && _s !== void 0 ? _s : "" : "";
     const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
-    const tmrMinTempChange = tempMinTomorrow && tempMax ? (_u = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _u !== void 0 ? _u : "" : "";
-    const tmrMaxTempChange = tempMaxTomorrow && temp ? (_v = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _v !== void 0 ? _v : "" : "";
+    const tmrMinTempChange = tempMinTomorrow && tempMax ? (_t = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _t !== void 0 ? _t : "" : "";
+    const tmrMaxTempChange = tempMaxTomorrow && temp ? (_u = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _u !== void 0 ? _u : "" : "";
     const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
-    const sunsetTime = sunrise && sunset ? GetHoursMinutes(sunset, _show24Hours) : "";
-    const sunriseTime = sunrise && sunset ? GetHoursMinutes(sunrise, _show24Hours) : "";
+    const sunsetTime = sunset ? GetHoursMinutes(sunset, _show24Hours) : "";
+    const sunriseTime = sunrise ? GetHoursMinutes(sunrise, _show24Hours) : "";
     const dayLength = sunset && sunrise ? ToHoursMinutes(Number(sunset) - Number(sunrise)) : "";
     const now = DateTime.now().toJSDate();
     const daylightRemain = (sunrise && sunset && now >= sunrise.toJSDate() && now <= sunset.toJSDate()) ? ToHoursMinutes(sunset.toJSDate().valueOf() - now.valueOf()) : "";
@@ -8385,12 +8384,7 @@ function InjectValues(text, weather, config, inCommand = false) {
     for (const [tagName, tagValue, padLength = 0, padLeft = true, padChar = ' '] of valuesPaddingDefaults) {
         if (tagName == null || tagValue == null)
             continue;
-        const regexp = new RegExp('(\\{{1,3})' +
-            '(\\b' + EscapeRegex(tagName) + '\\b)' +
-            '([,\\.]{0,1})' +
-            '(\\d{0,2})' +
-            '\\.{0,1}([^\\}]{0,1})' +
-            '(\\}{1,3})', 'g');
+        const regexp = new RegExp('(\\{{1,3})(\\b' + EscapeRegex(tagName) + '\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})', 'g');
         let match;
         while ((match = regexp.exec(text)) !== null) {
             const literalStart = match[1];

@@ -88,10 +88,9 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	// Forecast-related variables
 	const tmr = forecasts?.[1] ?? null;
 	const forecastHours = hourlyForecasts?.[2] ? hourlyForecasts : null;
-	const forecastNow = forecastHours?.[0] ?? null;
 	const forecastHour = forecastHours?.[2] ?? null;
-	const tempHourDiff = (forecastNow?.temp != null && forecastHour?.temp != null) ? ValueChange(forecastNow.temp, forecastHour.temp, 15) : "";
-	const tempHour = (forecastNow?.temp != null && forecastHour?.temp != null)? TempToUserConfig(forecastNow.temp + forecastHour.temp, config, false) ?? "" : "";
+	const tempHourDiff = (temperature != null && forecastHour?.temp != null) ? ValueChange(Number(TempToUserConfig(temperature, config, false)), Number(TempToUserConfig(forecastHour.temp, config, false)), 15) : "";
+	const tempHour = (forecastHour?.temp != null) ? TempToUserConfig(forecastHour.temp, config, false) ?? "" : "";
 	const conditionTomorrow = tmr?.condition.main ?? "";
 	const tempMin = tmr ? TempToUserConfig(forecasts[0].temp_min, config, false) ?? "" : "";
 	const tempMax = tmr ? TempToUserConfig(forecasts[0].temp_max, config, false) ?? "" : "";
@@ -103,8 +102,8 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
 
 	// Sunrise and sunset calculations
-	const sunsetTime = sunrise && sunset ? GetHoursMinutes(sunset, _show24Hours) : "";
-	const sunriseTime = sunrise && sunset ? GetHoursMinutes(sunrise, _show24Hours) : "";
+	const sunsetTime = sunset ? GetHoursMinutes(sunset, _show24Hours) : "";
+	const sunriseTime = sunrise ? GetHoursMinutes(sunrise, _show24Hours) : "";
 	const dayLength = sunset && sunrise ? ToHoursMinutes(Number(sunset) - Number(sunrise)) : "";
 	const now = DateTime.now().toJSDate();
 	const daylightRemain = (sunrise && sunset && now >= sunrise.toJSDate() && now <= sunset.toJSDate()) ? ToHoursMinutes(sunset.toJSDate().valueOf() - now.valueOf()) : "";
@@ -155,13 +154,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	for (const [tagName, tagValue, padLength = 0, padLeft = true, padChar = ' '] of valuesPaddingDefaults) {
 		if (tagName == null || tagValue == null) continue;
 
-		const regexp = new RegExp(
-			'(\\{{1,3})' +
-			'(\\b' + EscapeRegex(tagName) + '\\b)' +
-			'([,\\.]{0,1})' +
-			'(\\d{0,2})' +
-			'\\.{0,1}([^\\}]{0,1})' +
-			'(\\}{1,3})', 'g');
+		const regexp = new RegExp('(\\{{1,3})(\\b' + EscapeRegex(tagName) + '\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})', 'g');
 		let match;
 		while ((match = regexp.exec(text)) !== null) {
 			const literalStart = match[1];

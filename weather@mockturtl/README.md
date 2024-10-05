@@ -188,7 +188,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{wind_arrow}`    | Wind direction as text arrow (↘, etc)                     |
 | `{wind_deg}`      | Wind direction as degree value                            |
 | `{sunrise}`       | Sunrise time                                              |
-| `{sunet}`         | Sunset time                                               |
+| `{sunset}`        | Sunset time                                               |
 | `{day_length}`    | Daylight length in hours and minutes                      |
 | `{day_remain}`    | Daylight remaining in hours and minutes ("" after dark)   |
 | `{day_rem_pct}`   | Daylight remaining as percentage ("0" after dark)         |
@@ -206,7 +206,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |
 | `{br}`            | Line Break                                                |
 
-Left-pad values with up to 3 zeros using `{humidty,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 4 padded left, humidity: 3 padded left, pressure: 7 padded left; all using spaces).
+Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 4 padded left, humidity: 3 padded left, pressure: 7 padded left; all using spaces).
 
 Multiline example for panel: ` {c} {t}{u}{t_h_diff}{br} {wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
 
@@ -214,7 +214,7 @@ Multiline example for tooltip - extra spaces fix rounded tooltips: `          {c
 
 ## Run script when the weather data changes
 
-"Run a script when the weather info changes" field will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get `{full_data}` which is the full current weather data. Interpolation with single brackets `{xxx}` will not be escaped, with double brackets `{{xxxx}}` they are wrapped in single quotes `'` and all other single quotes are escaped inside. Padding and padding defaults can be included with tripple brackets `{{{xxx}}}`.  You can use this to integrate the weather data with other parts of your system.
+"Run a script when the weather info changes" field will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get `{full_data}` which is the full current weather data. Interpolation with single brackets `{xxx}` will not be escaped, with double brackets `{{xxxx}}` they are wrapped in single quotes `'` and all other single quotes are escaped inside. Padding and padding defaults can be included with triple brackets `{{{xxx}}}`.  You can use this to integrate the weather data with other parts of your system.
 
 ### Examples
 
@@ -226,9 +226,15 @@ Multiline example for tooltip - extra spaces fix rounded tooltips: `          {c
 
 ## Future Plans
 
-* Add presets for custom overrides.
+# Custom Overrides
+
+* Add presets.
 
 * Add more tags for changes in values.
+
+* Add support for minutely forecasts.
+
+* Make tags that (or a way to) default to '' when no upcoming forecast changes in value to save panel space.
 
 ## Language Translations
 
