@@ -1,3 +1,6 @@
+### v1.1.0~20241005
+  * Opens the settings for the spices you use.
+
 ### v1.0.6~20240330
   * Code cleanup.
 
@@ -8,10 +11,10 @@
   * Removes the --window-icon parameter for zenity v4.
 
 ### v1.0.3~20230428
-  * Code cleanup
+  * Code cleanup.
 
 ### v1.0.2~20230412
-  * Close menu before restarting Cinnamon
+  * Close menu before restarting Cinnamon.
 
 ### v1.0.1~20230213
   * Middle-click on icon shows ~/.xsession-errors.
