@@ -10,12 +10,12 @@ const WS_SWITCHED_UPDATE_TIMEOUT_MS = 400;
 
 const Optimizations = Object.freeze({
 	"battery": {
-		repaint_interval_ms: 70,
-		repaint_angle_rad: 0.07,
+		repaint_interval_ms: 120,
+		repaint_angle_rad: 0.09,
 	},
 	"balance": {
-		repaint_interval_ms: 55,
-		repaint_angle_rad: 0.05,
+		repaint_interval_ms: 70,
+		repaint_angle_rad: 0.07,
 	},
 	"performance": {
 		repaint_interval_ms: 30,
