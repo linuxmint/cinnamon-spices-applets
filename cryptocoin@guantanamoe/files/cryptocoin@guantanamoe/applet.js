@@ -190,6 +190,11 @@ MyApplet.prototype = {
             const close = (height - 20)*((data.close - minLow)/delta);
             const x = step / 2 + step * index;
             const top = height - 10;
+	    if (data.close < data.open) {
+                var [res, color] = Clutter.Color.from_string('#FF0000');
+            } else {
+                var [res, color] = Clutter.Color.from_string('#00FF00');
+            }
             cr.setSourceRGBA(color.red/255, color.green/255, color.blue/255, 1)
             cr.moveTo(x, top - low);
             cr.setLineWidth(1);
