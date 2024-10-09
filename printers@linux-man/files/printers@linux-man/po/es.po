@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-08 19:45-0400\n"
-"PO-Revision-Date: 2021-12-26 18:56-0300\n"
+"PO-Revision-Date: 2024-10-09 11:53-0300\n"
 "Last-Translator: João Lopes <joao.caldas.lopes@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. metadata.json->name
 #. applet.js:59 applet.js:173
@@ -43,7 +43,7 @@ msgstr "Administración de Impresiones e Impresoras"
 
 #. metadata.json->contributors
 msgid "Caldas Lopes"
-msgstr ""
+msgstr "Caldas Lopes"
 
 #. settings-schema.json->show-icon->description
 msgid "Show icon"
