@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.5
+
+- Add Breeze icon theme problems to known issues.
+- Fix Swiss Meteo crashing when alerts don't have a `valid_from` field
+- Fix MET Norway breaking when Alerts are enabled
+- Include README changes from @jorgenqv
+
 ## 3.6.4
 
 - Add attribution to nominatim
