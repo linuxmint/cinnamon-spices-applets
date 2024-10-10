@@ -1,0 +1,13 @@
+.textLabel {
+    opacity:0.1;
+    margin: 5px 5px;
+}
+
+.tempSlider {
+    margin: 5px 0px;
+    padding:0px;
+}
+
+.my-custom-section {
+   padding:0 18px;
+}
