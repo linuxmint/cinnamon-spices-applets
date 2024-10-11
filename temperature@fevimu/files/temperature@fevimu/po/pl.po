@@ -1,4 +1,4 @@
-# European Portuguese translation of Temperature Cinnamon applet.
+# European Polish translation of Temperature Cinnamon applet.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR: Marcin Golesz <marcingolesz@gmail.com>, 2018.
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-03 19:49+0200\n"
-"PO-Revision-Date: 2018-10-07 03:30-0500\n"
+"PO-Revision-Date: 2024-10-11 23:58+0100\n"
 "Last-Translator: Marcin Golesz <marcingolesz@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -43,12 +43,12 @@ msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
-"Proszę zainstalować lm_sensors. Jeśli to nie pomaga, kliknij tutaj, aby "
-"zgłosić nieprawidłowe działanie komendy sensors!"
+"Proszę zainstalować pakiet lm_sensors. Jeśli to nie pomaga, kliknij tutaj,"
+"aby zgłosić nieprawidłowe działanie programu sensors!"
 
 #: applet.js:229
 msgid "Thresholds Info"
-msgstr ""
+msgstr "Informacje o progach"
 
 #: applet.js:230
 #, fuzzy
@@ -94,35 +94,35 @@ msgstr "Pokaż temperaturę w wartościach całkowitych"
 
 #. settings-schema.json->show-unit->description
 msgid "Show unit"
-msgstr ""
+msgstr "Pokaż jednostkę"
 
 #. settings-schema.json->show-unit->tooltip
 msgid "Whether or not show the unit after the temperature value."
-msgstr ""
+msgstr "Określa, czy po wartości temperatury ma być wyświetlana jednostka."
 
 #. settings-schema.json->show-unit-letter->description
 msgid "Show unit letter"
-msgstr ""
+msgstr "Pokaż literę jednostki"
 
 #. settings-schema.json->show-unit-letter->tooltip
 msgid "Whether or not show the unit letter (C or F)."
-msgstr ""
+msgstr "Określa, czy wyświetlać lub nie wyświetlać litery jednostki (C lub F)."
 
 #. settings-schema.json->show-label-prefix->description
 msgid "Show label prefix"
-msgstr ""
+msgstr "Pokaż prefix"
 
 #. settings-schema.json->show-label-prefix->tooltip
 msgid "Whether or not to add a label before the temperature value."
-msgstr ""
+msgstr "Określa, czy przed wartością temperatury ma zostać dodany prefix."
 
 #. settings-schema.json->label-prefix->description
 msgid "Label prefix"
-msgstr ""
+msgstr "Prefix"
 
 #. settings-schema.json->label-prefix->tooltip
 msgid "The label to be shown before the temperature value."
-msgstr ""
+msgstr "Tekst wyświetlany przed wartością temperatury."
 
 #. settings-schema.json->interval->units
 msgid "ms"
@@ -134,7 +134,7 @@ msgstr "Interwał odświeżania"
 
 #. settings-schema.json->change-color->description
 msgid "Change color when the temperature becomes High or Critical"
-msgstr ""
+msgstr "Zmień kolor, gdy temperatura staje się wysoka lub krytyczna"
 
 #. settings-schema.json->change-color->tooltip
 msgid ""
@@ -142,20 +142,25 @@ msgid ""
 " orange when the High Temperature Threshold is reached,\n"
 " red when the Critical Temperature Threshold is reached."
 msgstr ""
+„Zaznaczenie tej opcji spowoduje, że aplet zmieni kolor na:\n”
+„ pomarańczowy po osiągnięciu progu wysokiej temperatury,\n”
+„ czerwony po osiągnięciu progu krytycznej temperatury.”.
 
 #. settings-schema.json->only-colors->description
 msgid "Only use colors to alert me"
-msgstr ""
+msgstr "Używaj tylko kolorów, aby mnie ostrzec"
 
 #. settings-schema.json->only-colors->tooltip
 msgid ""
 "Select this option to not display text alerts in horizontal panels.\n"
 "(No text alert is ever displayed on vertical panels.)"
 msgstr ""
+„Zaznacz tę opcję, aby nie wyświetlać alertów tekstowych w panelach poziomych.\n”
+„(W panelach pionowych nigdy nie są wyświetlane alerty tekstowe).”
 
 #. settings-schema.json->keep_size->description
 msgid "Avoid size changes"
-msgstr ""
+msgstr "„Unikaj zmian rozmiaru”"
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
@@ -163,3 +168,6 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
+„Zaznaczone: Rozmiar tego apletu pozostaje stały, gdy wszystkie preferencje ”
+„zostały zdefiniowane.\n”
+„Niezaznaczone: Rozmiar tego apletu jest zoptymalizowany, ale może ulec zmianie.”
