@@ -85,6 +85,7 @@
         "showMicMutedOnIcon",
         "showMicUnmutedOnIcon",
         "adaptColor",
+        "color0_100",
         "color101_115",
         "color116_130",
         "color131_150",
@@ -95,7 +96,8 @@
       "type": "section",
       "title": "Sound Settings",
       "keys": [
-        "setAmplification",
+        "openSystemSoundSettings",
+        "allowOveramplification",
         "stepVolume",
         "magneticOn",
         "magnetic25On",
@@ -291,10 +293,16 @@
     "default": false,
     "description": "Display icon indicating that the microphone is activated, if applicable"
   },
-  "setAmplification": {
+  "openSystemSoundSettings": {
     "type": "button",
-    "description": "Maximum volume control",
-    "callback": "_onSetApmlificationPressed"
+    "description": "System Sound Settings",
+    "callback": "_onSystemSoundSettingsPressed"
+  },
+  "allowOveramplification": {
+	"type": "switch",
+	"description": "Overamplification",
+	"default": false,
+	"tooltip": "Allow the volume to exceed 100%, with reduced sound quality."
   },
   "stepVolume": {
     "type": "combobox",
@@ -330,6 +338,12 @@
     "type": "switch",
     "description": "Adjust the color of the icon to the volume",
     "default": true
+  },
+  "color0_100": {
+    "type": "colorchooser",
+    "dependency": "adaptColor",
+    "default": "#e4e4e4",
+    "description": "Icon color: 0%-100%"
   },
   "color101_115": {
     "type": "colorchooser",
