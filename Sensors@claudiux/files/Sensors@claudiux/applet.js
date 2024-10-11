@@ -257,6 +257,7 @@ class SensorsApplet extends Applet.TextApplet {
       this.strictly_positive_fan ? 1 : 0,
       this.strictly_positive_volt ? 1 : 0
     );
+    this.reaper.reap_nvidia_smi();
 
     // Events:
     this._connectIds = [];
@@ -395,11 +396,13 @@ class SensorsApplet extends Applet.TextApplet {
         this.strictly_positive_fan ? 1 : 0,
         this.strictly_positive_volt ? 1 : 0
       );
+      this.reaper.reap_nvidia_smi();
     } else {
       this.set_applet_label(_("Suspended"));
     }
 
     this.loopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_sensors());
+    this.nvidiaLoopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_nvidia_smi());
     return false
   }
 
@@ -1459,6 +1462,10 @@ class SensorsApplet extends Applet.TextApplet {
         Mainloop.source_remove(this.loopId);
         this.loopId = 0;
     }
+    if (this.nvidiaLoopId != undefined && this.nvidiaLoopId > 0) {
+      Mainloop.source_remove(this.nvidiaLoopId);
+      this.nvidiaLoopId = 0;
+    }
     this.detect_markup();
     this.isLooping = true;
     this.reap_sensors();
@@ -1480,6 +1487,10 @@ class SensorsApplet extends Applet.TextApplet {
     if ((this.loopId != undefined) && (this.loopId > 0)) {
       Mainloop.source_remove(this.loopId);
       this.loopId = 0;
+    }
+    if (this.nvidiaLoopId != undefined && this.nvidiaLoopId > 0) {
+      Mainloop.source_remove(this.nvidiaLoopId);
+      this.nvidiaLoopId = 0;
     }
 
     if (this.checkDepInterval && (this.checkDepInterval != 0)) {

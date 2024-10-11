@@ -14,6 +14,7 @@ const {
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
+  NVIDIA_SMI_VERSION_REGEX,
   _,
   DEBUG,
   RELOAD,
@@ -41,6 +42,14 @@ class SensorsReaper {
     this.sensors_json_data = {};
     this.sensors_program = ""+GLib.find_program_in_path("sensors");
     this.get_sensors_command();
+
+    // Support for the Nvidia System Management Interface (nvidia-smi)
+    // The Nvidia System Management Interface docs are at 
+    //   https://developer.nvidia.com/system-management-interface
+    // Note: The fan values are returned as a percentage instead of RPM
+    //   so are not processed
+    this.nvidia_smi_program = "" + GLib.find_program_in_path("nvidia-smi");
+    this.get_nvidia_smi_command();
 
     this.in_fahrenheit = false;
     this.raw_data = {};
@@ -85,6 +94,65 @@ class SensorsReaper {
     }
   }
 
+  get_nvidia_smi_command() {
+    if (this.nvidia_smi_command != undefined)
+      return this.nvidia_smi_command;
+
+    /*
+      The 'nvidia-smi --version' command returns the version in the following format:
+        NVIDIA-SMI version  : 550.107.02
+        NVML version        : 550.107
+        DRIVER version      : 550.107.02
+        CUDA Version        : 12.4
+      
+      The command used here returns a list in headerless csv format with the following fields:
+        GPU name, PCI bus id, and temperature in C
+    */
+    if (this.nvidia_smi_program) {
+      let command = `${this.nvidia_smi_program} --version`;
+      let subProcess = Util.spawnCommandLineAsyncIO(command,
+        Lang.bind(this, function (stdout, stderr, exitCode) {
+          if (exitCode === 0) {
+            let output = stdout;
+            if (typeof stdout === "object")
+              output = to_string(stdout);
+            let versions = output.match(NVIDIA_SMI_VERSION_REGEX);
+            let version =
+              versions === null || versions.length === 0
+                ? null
+                : versions[0];
+            // global.log(`Nvidia SMI version: ${version}`);
+            if (versionCompare(version, "550.107.02") >= 0) {
+              this.nvidia_smi_version = version;
+              this.nvidia_smi_command =
+                `${this.nvidia_smi_program} --format=csv,noheader --query-gpu=name,pci.bus_id,temperature.gpu`;
+            }
+            // Test the command because Nvidia doesn't guarantee backwards compatability
+            let testProcess = Util.spawnCommandLineAsyncIO(this.nvidia_smi_command,
+              Lang.bind(this, function (stdout, stderr, exitCode) {
+                if (exitCode != 0) {
+                  global.logError(`Nvidia SMI call failed with code ${exitCode}: ${stdout}, ${stderr}`)
+                  global.log(`Incompatible Nvidia SMI: ${this.nvidia_smi_program} v${this.nvidia_smi_version} `);
+                  this.nvidia_smi_command = undefined;
+                  this.nvidia_smi_program = undefined;
+                  this.nvidia_smi_version = undefined;
+                } else {
+                  global.log(`Nvidia SMI v${this.nvidia_smi_version} command: ${this.nvidia_smi_command}`);
+                }
+                testProcess.send_signal(9);
+              })
+            );
+            subProcess.send_signal(9);
+          }
+        })
+      );
+
+      return this.nvidia_smi_command;
+    } else {
+      return undefined;
+    }
+  }
+
   reap_sensors(hide_zero_temp=0, hide_zero_fan=0, hide_zero_voltage=0) {
     if (this.isRunning) return;
     this.isRunning = true;
@@ -102,6 +170,36 @@ class SensorsReaper {
             this._sensors_reaped(convert_to_json(stdout));
         }
         //Util.unref(subProcess);
+        subProcess.send_signal(9);
+      }));
+    }
+
+  }
+
+  reap_nvidia_smi() {
+    if (this.nvidia_smi_command != undefined) {
+      let subProcess = Util.spawnCommandLineAsyncIO(this.nvidia_smi_command, Lang.bind(this, function (stdout, stderr, exitCode) {
+        if (exitCode === 0) {
+          let results = {};
+
+          let output = stdout.replaceAll(", ", ",").replaceAll("\r", "").replaceAll(" %", "");
+          if (output.endsWith("\n"))
+            output = output.substring(0, output.length - 1)
+
+          let lines = output.split("\n");
+          lines.forEach(element => {
+            let values = element.split(",");
+            results[values[1]] = {
+              "Adapter": values[0],
+              "temp1": {
+                "temp1_input": values[2]
+              },
+            };
+          });
+          this._sensors_reaped(JSON.stringify(results));
+        } else {
+          global.logError(`Nvidia SMI call failed with code ${exitCode}: ${stdout}, ${stderr}`);
+        }
         subProcess.send_signal(9);
       }));
     }
