@@ -160,7 +160,7 @@ msgstr ""
 
 #. settings-schema.json->keep_size->description
 msgid "Avoid size changes"
-msgstr "„Unikaj zmian rozmiaru”"
+msgstr "Unikaj zmian rozmiaru"
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
