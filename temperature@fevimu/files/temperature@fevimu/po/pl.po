@@ -142,9 +142,9 @@ msgid ""
 " orange when the High Temperature Threshold is reached,\n"
 " red when the Critical Temperature Threshold is reached."
 msgstr ""
-„Zaznaczenie tej opcji spowoduje, że aplet zmieni kolor na:\n”
-„ pomarańczowy po osiągnięciu progu wysokiej temperatury,\n”
-„ czerwony po osiągnięciu progu krytycznej temperatury.”.
+"Zaznaczenie tej opcji spowoduje, że aplet zmieni kolor na:\n"
+" pomarańczowy po osiągnięciu progu wysokiej temperatury,\n"
+" czerwony po osiągnięciu progu krytycznej temperatury.".
 
 #. settings-schema.json->only-colors->description
 msgid "Only use colors to alert me"
