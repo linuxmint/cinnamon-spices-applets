@@ -251,6 +251,7 @@ MyApplet.prototype = {
             gtk_theme = this.light_gtk_theme;
             cinnamon_theme = this.light_cinnamon_theme;
             icon_theme = this.light_icon_theme;
+            prefer_scheme = 'prefer-light'; // 'default' or 'prefer-dark' or 'prefer-light'
             this.set_applet_icon_symbolic_path(ICON_SUN);
         }
 
