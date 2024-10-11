@@ -9,6 +9,8 @@ const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 
+const NVIDIA_SMI_VERSION_REGEX = /(?<=nvidia-smi version  : )\d+\.\d+\.\d+/gi;
+
 const versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;
@@ -125,6 +127,7 @@ module.exports = {
   SCRIPTS_DIR,
   ICONS_DIR,
   XS_PATH,
+  NVIDIA_SMI_VERSION_REGEX,
   _,
   DEBUG,
   RELOAD,
