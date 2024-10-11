@@ -168,6 +168,6 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
-„Zaznaczone: Rozmiar tego apletu pozostaje stały, gdy wszystkie preferencje ”
-„zostały zdefiniowane.\n”
-„Niezaznaczone: Rozmiar tego apletu jest zoptymalizowany, ale może ulec zmianie.”
+"Zaznaczone: Rozmiar tego apletu pozostaje stały, gdy wszystkie preferencje "
+"zostały zdefiniowane.\n"
+"Niezaznaczone: Rozmiar tego apletu jest zoptymalizowany, ale może ulec zmianie."
