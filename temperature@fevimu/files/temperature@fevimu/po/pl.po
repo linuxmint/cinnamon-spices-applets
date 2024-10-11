@@ -155,8 +155,8 @@ msgid ""
 "Select this option to not display text alerts in horizontal panels.\n"
 "(No text alert is ever displayed on vertical panels.)"
 msgstr ""
-„Zaznacz tę opcję, aby nie wyświetlać alertów tekstowych w panelach poziomych.\n”
-„(W panelach pionowych nigdy nie są wyświetlane alerty tekstowe).”
+"Zaznacz tę opcję, aby nie wyświetlać alertów tekstowych w panelach poziomych.\n"
+"(W panelach pionowych nigdy nie są wyświetlane alerty tekstowe)."
 
 #. settings-schema.json->keep_size->description
 msgid "Avoid size changes"
