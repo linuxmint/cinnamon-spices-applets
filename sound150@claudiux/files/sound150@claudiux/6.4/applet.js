@@ -338,7 +338,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         let icon = Gio.Icon.new_for_string(this._volumeToIcon(this._value));
 
         if (this.applet.showOSD) {
-			// ~ logDebug("volume: "+volume);
+            //~ logDebug("volume: "+volume);
             Main.osdWindowManager.show(-1, icon, Math.round(volume/this.applet._volumeNorm * 100), null);
         }
 
@@ -1814,8 +1814,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volumeSoundFile", "volumeSoundFile", this.on_volumeSoundFile_changed);
         this.settings.setValue("volumeSoundEnabled", this._sounds_settings.get_boolean(VOLUME_SOUND_ENABLED_KEY));
         this.settings.bind("volumeSoundEnabled", "volumeSoundEnabled", this.on_volumeSoundEnabled_changed);
-        this.settings.setValue("allowOveramplification", this._sounds_settings.get_boolean(OVERAMPLIFICATION_KEY));
-        this.settings.bind("allowOveramplification", "allowOveramplification", this._on_overamplification_change);
+        this.settings.bind("maxVolume", "maxVolume", (value) => this._on_maxVolume_changed(value));
 
         this.settings.setValue("showMediaKeysOSD", global.settings.get_string(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", this.on_showMediaKeysOSD_changed);
@@ -1996,7 +1995,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this._loopArtId = null;
         //~ this.loopArt();
     }
-    
+
     on_volumeSoundFile_changed() {
         this._sounds_settings.set_string(VOLUME_SOUND_FILE_KEY, this.volumeSoundFile);
     }
@@ -2167,21 +2166,32 @@ class Sound150Applet extends Applet.TextIconApplet {
                 }
             });
     } // End of _setKeybinding
-    
-    _on_overamplification_change() {
-		this._sounds_settings.set_boolean(OVERAMPLIFICATION_KEY, this.allowOveramplification);
-	}
+
+    _on_maxVolume_changed(value) {
+        if (value > 100) {
+            this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, true);
+        } else {
+            this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, false);
+        }
+        this._on_sound_settings_change();
+    }
 
     _on_sound_settings_change() {
-        if (this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY)) {
-			this.allowOveramplification = true;
-            this._volumeMax = 1.5 * this._volumeNorm;
-            this._outputVolumeSection.set_mark(1/1.5);
+        if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
+            this.maxVolume = 100;
         }
+        this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
+        if (this.maxVolume > 100)
+            this._outputVolumeSection.set_mark(100/this.maxVolume);
         else {
-			this.allowOveramplification = false;
-            this._volumeMax = this._volumeNorm;
             this._outputVolumeSection.set_mark(0);
+            if (this.maxVolume === 100)
+                this._volumeMax = this._volumeNorm;
+        }
+        if (parseInt(this.volume.slice(0, -1)) > this.maxVolume) {
+            this.volume = "" + this.maxVolume + "%";
+            this._volumeChange(Clutter.ScrollDirection.DOWN);
+            this._volumeChange(Clutter.ScrollDirection.UP);
         }
         this._outputVolumeSection._update();
     }
@@ -2206,12 +2216,12 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-		this._on_sound_settings_change();
+        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this._on_sound_settings_change();
 
         this._loopArtId = null;
         this.loopArt();
-        
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+
         this.volume_near_icon()
     }
 
@@ -2429,8 +2439,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this.showOSD) {
                 //~ Main.osdWindowManager.hideAll();
                 try {
-					Main.osdWindowManager.show(-1, icon, volume, null);
-				} catch(e) {}
+                    Main.osdWindowManager.show(-1, icon, volume, null);
+                } catch(e) {}
                 //Main.osdWindowManager.show(0, icon, volume, true);
             }
             var intervalId = null;
@@ -3008,9 +3018,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                 changeColor = true;
             }
             else {
-				color = this.color0_100; //Default is "#e4e4e4";
+                color = this.color0_100; //Default is "#e4e4e4";
                 changeColor = true;
-			}
+            }
         }
         let _style = "color: %s;".format(color);
 
@@ -3227,7 +3237,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _reset_colors() {
-		this.color0_100 = "#e4e4e4";
+        this.color0_100 = "#e4e4e4";
         this.color101_115 = "yellow";
         this.color116_130 = "orange";
         this.color131_150 = "red";

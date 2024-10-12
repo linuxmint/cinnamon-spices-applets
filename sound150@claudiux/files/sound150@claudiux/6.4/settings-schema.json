@@ -97,7 +97,7 @@
       "title": "Sound Settings",
       "keys": [
         "openSystemSoundSettings",
-        "allowOveramplification",
+        "maxVolume",
         "stepVolume",
         "magneticOn",
         "magnetic25On",
@@ -298,11 +298,13 @@
     "description": "System Sound Settings",
     "callback": "_onSystemSoundSettingsPressed"
   },
-  "allowOveramplification": {
-	"type": "switch",
-	"description": "Overamplification",
-	"default": false,
-	"tooltip": "Allow the volume to exceed 100%, with reduced sound quality."
+  "maxVolume": {
+	"type": "scale",
+	"description": "Maximum volume (%)",
+	"default": 100,
+	"min": 30,
+	"max": 150,
+	"step": 5
   },
   "stepVolume": {
     "type": "combobox",
