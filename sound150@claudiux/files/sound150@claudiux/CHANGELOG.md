@@ -1,3 +1,7 @@
+### v7.0.0~20241011
+  * Compatible with Cinnamon 6.4.
+
+
 ### v6.18.1~20240907
   * Fixes #6301.
 
