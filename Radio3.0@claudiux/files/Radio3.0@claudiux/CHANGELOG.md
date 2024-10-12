@@ -1,3 +1,6 @@
+### v2.1.4~20241012
+  * Fixes an OSD error.
+
 ### v2.1.3~20240913
   * Now the "unassigned" word can be translated. See #6415.
 
