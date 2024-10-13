@@ -99,7 +99,8 @@
         "stepVolume",
         "magneticOn",
         "magnetic25On",
-        "alwaysCanChangeMic"
+        "alwaysCanChangeMic",
+        "avoidCrackingAtShutdown"
       ]
     },
     "sectionSound2": {
@@ -360,6 +361,11 @@
     "description": "Always allow microphone to be reactivated",
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
+  },
+  "avoidCrackingAtShutdown": {
+    "type": "switch",
+    "description": "Try to avoid loud cracking sound at shutdown",
+    "default": false
   },
   "showMediaKeysOSD": {
     "type": "combobox",

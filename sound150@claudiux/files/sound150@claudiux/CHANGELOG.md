@@ -1,3 +1,7 @@
+### v7.1.0~20241013
+  * Option to try to avoid loud cracking sound at shutdown.
+  * Fixes https://github.com/linuxmint/cinnamon/issues/12446.
+
 ### v7.0.0~20241011
   * Compatible with Cinnamon 6.4.
 
