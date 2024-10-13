@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-07 10:57-0100\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Unpin the Panel"
 msgstr "Kattintson a panel rögzítésének feloldásához"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Pin the Panel"
 msgstr "Kattintson a panel rögzítéséhez"
 
@@ -35,8 +35,8 @@ msgid ""
 "An applet that lets you pin or unpin the panel, making it fixed or "
 "collapsible."
 msgstr ""
-"Egy kisalkalmazás, amely lehetővé teszi a panel rögzítését vagy "
-"feloldását, így téve azt rögzítetté vagy összecsukhatóvá."
+"Egy kisalkalmazás, amely lehetővé teszi a panel rögzítését vagy feloldását, "
+"így téve azt rögzítetté vagy összecsukhatóvá."
 
 #. 5.4->settings-schema.json->general->description
 msgid "General"
@@ -53,6 +53,24 @@ msgstr "Automatikus elrejtés"
 #. 5.4->settings-schema.json->unpin-autohide-type->options
 msgid "Intelligent Hide"
 msgstr "Intelligens elrejtés"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr ""
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr ""
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+#, fuzzy
+msgid "Pin the panel"
+msgstr "Panel rögzítése/feloldása"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+#, fuzzy
+msgid "Unpin the panel"
+msgstr "Panel rögzítése/feloldása"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"

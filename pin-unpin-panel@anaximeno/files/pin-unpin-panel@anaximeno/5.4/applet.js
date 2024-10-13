@@ -76,6 +76,11 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 				cb: this.on_applet_autohide_type_settings_changed,
 			},
 			{
+				key: 'pinned-at-startup',
+				value: 'pinned_at_startup',
+				cb: null,
+			},
+			{
 				key: 'use-custom-icons',
 				value: 'use_custom_icons',
 				cb: this.update_panel_applet_ui_state,
@@ -109,6 +114,13 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 
 	on_applet_clicked(event) {
 		this.toggle_panel_pin_state();
+	}
+
+	on_applet_added_to_panel(userEnabled) {
+		global.log(UUID+": instance "+this.instanceId);
+		if (this.pinned_at_startup !== 0 && (this.pinned_at_startup === 1) !== this.pinned) {
+			this.toggle_panel_pin_state();
+		}
 	}
 
 	on_applet_removed_from_panel(deleteConfig) {

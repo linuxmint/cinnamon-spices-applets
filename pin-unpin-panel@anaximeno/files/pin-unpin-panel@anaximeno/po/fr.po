@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-07 10:57-0100\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Unpin the Panel"
-msgstr "Cliquez pour désépingler le panneau"
+msgstr "Clic pour désépingler le panneau"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Pin the Panel"
-msgstr "Cliquez pour épingler le panneau"
+msgstr "Clic pour épingler le panneau"
 
 #. metadata.json->name
 msgid "Pin-Unpin the Panel"
@@ -53,6 +53,22 @@ msgstr "Masquage auto"
 #. 5.4->settings-schema.json->unpin-autohide-type->options
 msgid "Intelligent Hide"
 msgstr "Masquage intelligent"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr "Au démarrage"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr "Laisser le panneau tel quel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr "Épingler le panneau"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr "Désépingler le panneau"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"
