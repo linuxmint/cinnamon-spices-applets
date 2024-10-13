@@ -56,21 +56,19 @@ msgstr "Ocultação Inteligente"
 
 #. 5.4->settings-schema.json->pinned-at-startup->description
 msgid "At Startup"
-msgstr ""
+msgstr "Ao Iniciar"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
 msgid "Leave the panel as it is"
-msgstr ""
+msgstr "Manter o estado atual do painel"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Pin the panel"
-msgstr "Fixar-Desafixar o Painel"
+msgstr "Fixar o painel"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Unpin the panel"
-msgstr "Fixar-Desafixar o Painel"
+msgstr "Desafixar o painel"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"
