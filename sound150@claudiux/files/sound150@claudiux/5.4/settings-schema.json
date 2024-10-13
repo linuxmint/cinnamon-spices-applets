@@ -365,7 +365,7 @@
   "avoidCrackingAtShutdown": {
     "type": "switch",
     "description": "Try to avoid loud cracking sound at shutdown",
-    "default": false
+    "default": true
   },
   "showMediaKeysOSD": {
     "type": "combobox",
