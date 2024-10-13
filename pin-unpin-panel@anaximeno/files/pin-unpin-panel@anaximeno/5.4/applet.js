@@ -117,7 +117,7 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	on_applet_added_to_panel(userEnabled) {
-		global.log(UUID+": instance "+this.instanceId);
+		//~ global.log(UUID+": instance "+this.instanceId);
 		if (this.pinned_at_startup !== 0 && (this.pinned_at_startup === 1) !== this.pinned) {
 			this.toggle_panel_pin_state();
 		}
