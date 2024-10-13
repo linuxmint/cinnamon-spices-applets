@@ -338,7 +338,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         let icon = Gio.Icon.new_for_string(this._volumeToIcon(this._value));
 
         if (this.applet.showOSD) {
-            Main.osdWindowManager.show(-1, icon, Math.round(volume/this.applet._volumeNorm * 100), null);
+            Main.osdWindowManager.show(-1, icon, ""+Math.round(volume/this.applet._volumeNorm * 100), null);
         }
 
 
@@ -1806,6 +1806,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("tooltipShowArtistTitle", "tooltipShowArtistTitle", this.on_settings_changed);
 
         this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
+        this.settings.bind("avoidCrackingAtShutdown", "avoidCrackingAtShutdown", null);
 
         this._sounds_settings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
         this.settings.setValue("volumeSoundFile", this._sounds_settings.get_string(VOLUME_SOUND_FILE_KEY));
@@ -2206,6 +2207,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        if (this.avoidCrackingAtShutdown && this._output && !this._output.is_muted) {
+            let old_volume = this.volume;
+            this._toggle_out_mute();
+            this.volume = old_volume;
+        }
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
@@ -2414,8 +2420,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.set_applet_icon_symbolic_name(icon_name);
             if (this.showOSD) {
                 //~ Main.osdWindowManager.hideAll();
-                Main.osdWindowManager.show(-1, icon, volume, null);
-                //Main.osdWindowManager.show(0, icon, volume, true);
+                Main.osdWindowManager.show(-1, icon, ""+volume, null);
+                //Main.osdWindowManager.show(0, icon, ""+volume, true);
             }
             var intervalId = null;
             intervalId = Util.setInterval(() => {

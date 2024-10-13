@@ -1808,6 +1808,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("tooltipShowArtistTitle", "tooltipShowArtistTitle", this.on_settings_changed);
 
         this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
+        this.settings.bind("avoidCrackingAtShutdown", "avoidCrackingAtShutdown", null);
 
         this._sounds_settings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
         this.settings.setValue("volumeSoundFile", this._sounds_settings.get_string(VOLUME_SOUND_FILE_KEY));
@@ -2230,6 +2231,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        if (this.avoidCrackingAtShutdown && this._output && !this._output.is_muted) {
+            let old_volume = this.volume;
+            this._toggle_out_mute();
+            this.volume = old_volume;
+        }
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
