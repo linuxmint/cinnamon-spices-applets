@@ -1,0 +1,9 @@
+{
+    "description": "Numworks Calculator Simulator. All rights reserved. NumWorks is a registered trademark.",
+    "uuid": "NumworksCalculator@claudiux",
+    "name": "Numworks Calculator",
+    "version": "23.2.1",
+    "max-instances": -1,
+    "website": "https://github.com/numworks",
+    "author": "claudiux"
+}
