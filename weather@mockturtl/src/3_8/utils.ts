@@ -64,59 +64,121 @@ export function GenerateLocationText(weather: WeatherData, config: Config): stri
 }
 
 export function InjectValues(text: string, weather: WeatherData, config: Config, inCommand: boolean = false): string {
-	const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
-	const temp = TempToUserConfig(weather.temperature, config, false) ?? "";
-	const tempUnit = UnitToUnicode(config.TemperatureUnit);
-	const condition = weather.condition.main;
-	const conditionLong = weather.condition.description;
-	const dewPoint = TempToUserConfig(weather.dewPoint, config, false) ?? "";
-	const humidity = weather.humidity?.toString() ?? "";
-	const pressure = weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "";
-	const pressureUnit = config._pressureUnit;
-	const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
-	const extraName = weather.extra_field ? weather.extra_field.name : "";
-	const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
-	const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
-	const city = weather.location.city ?? "";
-	const country = weather.location.country ?? "";
-	const searchEntry = config.CurrentLocation?.entryText ?? "";
-	if (inCommand) {
-		text =  text.replace(/{{t}}/g, Literal(temp))
-					.replace(/{{u}}/g, Literal(tempUnit))
-					.replace(/{{c}}/g, Literal(condition))
-					.replace(/{{c_long}}/g, Literal(conditionLong))
-					.replace(/{{dew_point}}/g, Literal(dewPoint))
-					.replace(/{{humidity}}/g, Literal(humidity))
-					.replace(/{{pressure}}/g, Literal(pressure))
-					.replace(/{{pressure_unit}}/g, Literal(pressureUnit))
-					.replace(/{{extra_value}}/g, Literal(extraValue))
-					.replace(/{{extra_name}}/g, Literal(extraName))
-					.replace(/{{wind_speed}}/g, Literal(windSpeed))
-					.replace(/{{wind_dir}}/g, Literal(windDir))
-					.replace(/{{city}}/g, Literal(city))
-					.replace(/{{country}}/g, Literal(country))
-					.replace(/{{search_entry}}/g, Literal(searchEntry))
-					.replace(/{{last_updated}}/g, Literal(lastUpdatedTime))
-					.replace(/{{br}}/g, Literal("\n"));
+	const { date, temperature, condition, dewPoint, humidity, pressure, wind, location, forecasts, hourlyForecasts, sunrise, sunset, extra_field } = weather;
+	const { _show24Hours, TemperatureUnit, _pressureUnit, WindSpeedUnit, CurrentLocation } = config;
+
+	const lastUpdatedTime = AwareDateString(date, _show24Hours, DateTime.local().zoneName);
+	const temp = TempToUserConfig(temperature, config, false) ?? "";
+	const tempUnit = UnitToUnicode(TemperatureUnit);
+	const conditionMain = condition.main;
+	const conditionDescription = condition.description;
+	const dewPointVal = TempToUserConfig(dewPoint, config, false) ?? "";
+	const humidityVal = humidity?.toString() ?? "";
+	const pressureVal = pressure ? PressToUserUnits(pressure, _pressureUnit).toString() : "";
+	const extraValue = extra_field ? ExtraFieldToUserUnits(extra_field, config) : "";
+	const extraName = extra_field?.name ?? "";
+	const windSpeed = wind.speed ? MPStoUserUnits(wind.speed, WindSpeedUnit) : "";
+	const windDir = wind.degree ? CompassDirectionText(wind.degree) : "";
+	const windArrow = wind.degree ? CompassDirectionArrow(wind.degree) : "";
+	const windDegree = wind.degree?.toString() ?? "";
+	const city = location.city ?? "";
+	const country = location.country ?? "";
+	const searchEntry = CurrentLocation?.entryText ?? "";
+
+	// Forecast-related variables
+	const tmr = forecasts?.[1] ?? null;
+	const forecastHours = hourlyForecasts?.[2] ? hourlyForecasts : null;
+	const forecastHour = forecastHours?.[2] ?? null;
+	const tempHourDiff = (temperature != null && forecastHour?.temp != null) ? ValueChange(Number(TempToUserConfig(temperature, config, false)), Number(TempToUserConfig(forecastHour.temp, config, false)), 15) : "";
+	const tempHour = (forecastHour?.temp != null) ? TempToUserConfig(forecastHour.temp, config, false) ?? "" : "";
+	const conditionTomorrow = tmr?.condition.main ?? "";
+	const tempMin = tmr ? TempToUserConfig(forecasts[0].temp_min, config, false) ?? "" : "";
+	const tempMax = tmr ? TempToUserConfig(forecasts[0].temp_max, config, false) ?? "" : "";
+	const tempMinTomorrow = tmr ? TempToUserConfig(tmr.temp_min, config, false) ?? "" : "";
+	const tempMaxTomorrow = tmr ? TempToUserConfig(tmr.temp_max, config, false) ?? "" : "";
+	const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
+	const tmrMinTempChange = tempMinTomorrow && tempMax ? SignedNumber(Number(tempMaxTomorrow) - Number(tempMax)) ?? "" : "";
+	const tmrMaxTempChange = tempMaxTomorrow && temp ? SignedNumber(Number(tempMaxTomorrow) - Number(tempMax)) ?? "" : "";
+	const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
+
+	// Sunrise and sunset calculations
+	const sunsetTime = sunset ? GetHoursMinutes(sunset, _show24Hours) : "";
+	const sunriseTime = sunrise ? GetHoursMinutes(sunrise, _show24Hours) : "";
+	const dayLength = sunset && sunrise ? ToHoursMinutes(Number(sunset) - Number(sunrise)) : "";
+	const now = DateTime.now().toJSDate();
+	const daylightRemain = (sunrise && sunset && now >= sunrise.toJSDate() && now <= sunset.toJSDate()) ? ToHoursMinutes(sunset.toJSDate().valueOf() - now.valueOf()) : "";
+	const daylightRemainPct = (sunrise && sunset && now >= sunrise.toJSDate() && now <= sunset.toJSDate()) ? Math.round((sunset.toJSDate().valueOf() - now.valueOf()) * 100 / (sunset.toJSDate().valueOf() - sunrise.toJSDate().valueOf())).toString()	: "0";
+	const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
+
+	// Define values and their defaults for padding and formatting
+	const valuesPaddingDefaults: [string, string, number?, boolean?, string?][] = [
+		['t', temp, 4, true],
+		['u', tempUnit],
+		['c', conditionMain],
+		['c_long', conditionDescription],
+		['dew_point', dewPointVal],
+		['humidity', humidityVal, 3],
+		['pressure', pressureVal, 7],
+		['pressure_unit', _pressureUnit],
+		['extra_value', extraValue],
+		['extra_name', extraName],
+		['city', city],
+		['country', country],
+		['search_entry', searchEntry],
+		['last_updated', lastUpdatedTime],
+		['wind_speed', windSpeed],
+		['wind_dir', windDir],
+		['wind_arrow', windArrow],
+		['wind_deg', windDegree],
+		['wind_unit', WindSpeedUnit],
+		['min', tempMin],
+		['max', tempMax],
+		['tmr_min', tempMinTomorrow],
+		['tmr_max', tempMaxTomorrow],
+		['tmr_min_diff', tmrMinTempChange],
+		['tmr_max_diff', tmrMaxTempChange],
+		['tmr_c', conditionTomorrow],
+		['tmr_t', tempsTomorrow],
+		['tmr_td', tempsTomorrowWithDifferences],
+		['sunset', sunsetTime],
+		['sunrise', sunriseTime],
+		['day_length', dayLength],
+		['day_remain', daylightRemain],
+		['day_len_rem', dayLengthLightRemain],
+		['day_rem_pct', daylightRemainPct],
+		['t_h', tempHour],
+		['t_h_diff', tempHourDiff],
+		['br', "\n"]
+	];
+	// Process text replacement for each tag
+	for (const [tagName, tagValue, padLength = 0, padLeft = true, padChar = ' '] of valuesPaddingDefaults) {
+		if (tagName == null || tagValue == null) continue;
+
+		const regexp = new RegExp('(\\{{1,3})(\\b' + EscapeRegex(tagName) + '\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})', 'g');
+		let match;
+		while ((match = regexp.exec(text)) !== null) {
+			const literalStart = match[1];
+			const literalEnd = match[6];
+			const paddingSpecifier = match[3];
+			const paddingSize = match[4];
+			const padCharMatch = match[5]; // capture group for the padding character
+
+			const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
+			const isLiteral = literalStart === "{{" && literalEnd === "}}";
+			const noPad = inCommand && !padLiteral;
+			const applyPadLeft = paddingSpecifier ? paddingSpecifier === ',' : padLeft;
+			const applyPad = paddingSize ? Number(paddingSize) : padLength;
+			const charPad = padCharMatch || padChar;
+
+			let formattedValue = tagValue.toString();
+			if (!noPad) {
+				formattedValue = applyPadLeft ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
+			}
+			text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
+		}
 	}
 
-	return  text.replace(/{t}/g, temp)
-				.replace(/{u}/g, tempUnit)
-				.replace(/{c}/g, condition)
-				.replace(/{c_long}/g, conditionLong)
-				.replace(/{dew_point}/g, dewPoint)
-				.replace(/{humidity}/g, humidity)
-				.replace(/{pressure}/g, pressure)
-				.replace(/{pressure_unit}/g, pressureUnit)
-				.replace(/{extra_value}/g, extraValue)
-				.replace(/{extra_name}/g, extraName)
-				.replace(/{wind_speed}/g, windSpeed)
-				.replace(/{wind_dir}/g, windDir)
-				.replace(/{city}/g, city)
-				.replace(/{country}/g, country)
-				.replace(/{search_entry}/g, searchEntry)
-				.replace(/{last_updated}/g, lastUpdatedTime)
-				.replace(/{br}/g, "\n");
+	return text;
 }
 
 export function CapitalizeFirstLetter(description: string): string {
@@ -533,8 +595,40 @@ export function CompassDirectionText(deg: number): string {
 	const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
 	return directions[Math.round(deg / 45) % directions.length]
 }
-
-
+export function CompassDirectionArrow(deg: number): string {
+	const directions = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
+	return directions[Math.round(deg / 45) % directions.length];
+}
+export function SignedNumber(number: number): string {
+	return number < 0 ? number.toString() : '+' + number;
+}
+export function ToHoursMinutes(number: number): string {
+	const m = Math.floor(number / 1000 / 60);
+	return Math.floor(m / 60) + ":" + (m % 60).toString().padStart(2, '0');
+}
+export function EscapeRegex(string: string): string {
+	return string.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&');
+}
+export function ValueChange(temp1: number, temp2: number, large_percent?: number): string {
+	const arrows = ['↡', '↓', '↔', '↑', '↟'];
+	const diff = Math.round(temp2 - temp1);
+	const drop = diff < 0;
+	const rise = diff > 0;
+	const large = Math.abs(diff * 100 / temp2) >= (large_percent || 15);
+	let index = 2;
+	if (drop && large) {
+		index = 0;
+	} else if (drop) {
+		index = 1;
+	} else if (diff == 0) {
+		index = 2;
+	} else if (rise && !large) {
+		index = 3;
+	} else {
+		index = 4;
+	}
+	return arrows[index] + Math.abs(diff);
+}
 // -----------------------------------------------------------------
 // Testers
 
