@@ -30,6 +30,12 @@
     "default": true,
     "description": "Show the Hibernate option"
   },
+  "hibernateNeedsSudo": {
+    "type": "switch",
+    "default": false,
+    "dependency": "showHibernate",
+    "description": "Hibernate needs root user rights (sudo)"
+  },
   "showRestart": {
     "type": "switch",
     "default": true,

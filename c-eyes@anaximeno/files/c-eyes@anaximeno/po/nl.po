@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# CINNAMON EYES
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# anaximeno, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: c-eyes@anaximeno 1.14.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-15 16:50-0100\n"
+"POT-Creation-Date: 2024-09-22 04:46-0100\n"
 "PO-Revision-Date: 2024-07-24 10:02+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.2/applet.js:56 5.4/applet.js:55
+#. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
 "📢 The click effects will be removed from this applet on the version 6.2 of "
 "Cinnamon\n"
@@ -31,19 +31,19 @@ msgstr ""
 " in het instellingenmodule voor Cinnamon-extensies voor versies van Cinnamon "
 ">= 5.4"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to deactivate the eye"
 msgstr "klik om het oog te deactiveren"
 
-#: 4.2/applet.js:389 5.4/applet.js:385
+#. 4.2/applet.js:396 5.4/applet.js:393
 msgid "click to activate the eye"
 msgstr "klik om het oog te activeren"
 
-#: 4.2/applet.js:390 5.4/applet.js:386
+#. 4.2/applet.js:397 5.4/applet.js:394
 msgid "TIP"
 msgstr "TIP"
 
-#: 6.2/applet.js:46
+#. 6.2/applet.js:48
 msgid "Hey, I saw that!"
 msgstr "Hé, dat heb ik gezien!"
 
@@ -73,7 +73,8 @@ msgstr "Effecten"
 #. 4.2->settings-schema.json->click-generic->title
 #. 5.4->settings-schema.json->eye-generic->title
 #. 5.4->settings-schema.json->click-generic->title
-#. 6.2->settings-schema.json->general->description
+#. 6.2->settings-schema.json->general-page->title
+#. 6.2->settings-schema.json->general-section->title
 msgid "General"
 msgstr "Algemeen"
 
@@ -81,7 +82,7 @@ msgstr "Algemeen"
 #. 4.2->settings-schema.json->click-colors->title
 #. 5.4->settings-schema.json->eye-colors->title
 #. 5.4->settings-schema.json->click-colors->title
-#. 6.2->settings-schema.json->colors->description
+#. 6.2->settings-schema.json->colors-section->title
 msgid "Colors"
 msgstr "Kleuren"
 
@@ -92,7 +93,6 @@ msgstr "Gebeurtenissen"
 
 #. 4.2->settings-schema.json->eye-mode->description
 #. 5.4->settings-schema.json->eye-mode->description
-#. 6.2->settings-schema.json->mode->description
 msgid "Mode"
 msgstr "Modus"
 
@@ -398,13 +398,11 @@ msgid "General Opacity"
 msgstr "Algemene ondoorzichtigheid"
 
 #. 5.4->settings-schema.json->click-info->title
-#. 6.2->settings-schema.json->info->description
 msgid "Info"
 msgstr "Info"
 
 #. 5.4->settings-schema.json->click-effects-moved-on-
 #. cinnamon-6.2-info->description
-#. 6.2->settings-schema.json->click-effects-moved-info->description
 msgid ""
 "In Cinnamon versions 6.2 and later, the click effects have been removed from "
 "this applet and relocated to a new extension called 'mouse-click-effects,' "
@@ -415,9 +413,44 @@ msgstr ""
 "die kan worden geïnstalleerd via het instellingenmodule voor Cinnamon-"
 "extensies."
 
+#. 6.2->settings-schema.json->style-page->title
+#. 6.2->settings-schema.json->styles-section->title
+msgid "Style"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-section->title
+msgid "Optimizations"
+msgstr ""
+
+#. 6.2->settings-schema.json->mode->description
+#, fuzzy
+msgid "Eye Mode"
+msgstr "Modus"
+
 #. 6.2->settings-schema.json->tooltip-message->description
 msgid "Tooltip Message on Hover"
 msgstr "Tooltip bericht bij zweven met de muis"
+
+#. 6.2->settings-schema.json->optimization-mode->description
+#, fuzzy
+msgid "Optimization Mode"
+msgstr "Klikanimatiemodus"
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Battery"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Balanced"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Performance"
+msgstr ""
+
+#. 6.2->settings-schema.json->optimization-mode->options
+msgid "Manual"
+msgstr ""
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"

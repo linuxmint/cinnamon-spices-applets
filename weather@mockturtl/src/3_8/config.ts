@@ -1,5 +1,5 @@
 import type { WeatherApplet } from "./main";
-import type { LocationData, LocationServiceResult} from "./types";
+import type { LocationData, LocationServiceResult, WeatherProvider} from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/services/logger";
 import type { LogLevel} from "./consts";
@@ -30,6 +30,7 @@ import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 import type settingsSchema from "../../files/weather@mockturtl/3.8/settings-schema.json";
 import { soupLib } from "./lib/soupLib";
 import { GeoTimezone } from "./location_services/tz_lookup";
+import { SwissMeteo } from "./providers/swiss-meteo/provider";
 
 const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -70,23 +71,26 @@ export type Services =
 	"WeatherUnderground" |
 	"PirateWeather" |
 	"OpenMeteo" |
-	"OpenWeatherMap_OneCall";
+	"OpenWeatherMap_OneCall" |
+	"Swiss Meteo"
+	;
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap_Open": (app) => new OpenWeatherMapOpen(app),
-	"OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
-	"MetNorway": (app) => new MetNorway(app),
-	"Weatherbit": (app) => new Weatherbit(app),
-	"Tomorrow.io": (app) => new ClimacellV4(app),
-	"Met Office UK": (app) => new MetUk(app),
-	"US Weather": (app) => new USWeather(app),
-	"Visual Crossing": (app) => new VisualCrossing(app),
-	"DanishMI": (app) => new DanishMI(app),
-	"AccuWeather": (app) => new AccuWeather(app),
-	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-	"WeatherUnderground": (app) => new WeatherUnderground(app),
-	"PirateWeather": (app) => new PirateWeather(app),
-	"OpenMeteo": (app) => new OpenMeteo(app),
+	"OpenWeatherMap_Open": () => new OpenWeatherMapOpen(),
+	"OpenWeatherMap_OneCall": () => new OpenWeatherMapOneCall(),
+	"MetNorway": () => new MetNorway(),
+	"Weatherbit": () => new Weatherbit(),
+	"Tomorrow.io": () => new ClimacellV4(),
+	"Met Office UK": () => new MetUk(),
+	"US Weather": () => new USWeather(),
+	"Visual Crossing": () => new VisualCrossing(),
+	"DanishMI": () => new DanishMI(),
+	"AccuWeather": () => new AccuWeather(),
+	"DeutscherWetterdienst": () => new DeutscherWetterdienst(),
+	"WeatherUnderground": () => new WeatherUnderground(),
+	"PirateWeather": () => new PirateWeather(),
+	"OpenMeteo": () => new OpenMeteo(),
+	"Swiss Meteo": () => new SwissMeteo(),
 }
 
 export class Config {
@@ -322,9 +326,34 @@ export class Config {
 		return (!key || key == "");
 	};
 
-	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable, provider: WeatherProvider): Promise<LocationData | null> {
 		this.currentLocation = null;
-		const loc = await this.EnsureLocation(cancellable);
+
+		let loc: LocationServiceResult | null = null;
+		switch (provider.locationType) {
+			case "postcode": {
+				const foundLoc = this.LocStore.FindLocation(this._location);
+				if (foundLoc != null) {
+					Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
+					this.LocStore.SwitchToLocation(foundLoc);
+					this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
+					loc = foundLoc;
+				}
+				else {
+					loc = {
+						entryText: this._location,
+						lat: -1,
+						lon: -1,
+					}
+				}
+				break;
+			}
+			case "coordinates": {
+				loc = await this.EnsureLocation(cancellable);
+				break;
+			}
+		}
+
 		if (loc == null) {
 			return null;
 		}
@@ -350,9 +379,7 @@ export class Config {
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
-	public async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
-		this.currentLocation = null;
-
+	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		// Automatic location
 		if (!this._manualLocation) {
 			const geoClue = await this.geoClue.GetLocation(cancellable);
@@ -450,7 +477,7 @@ export class Config {
 		this.settings.bind("selectedLogPath",
 			"_selectedLogPath", () => this.SelectedLogPathChanged.Invoke(this));
 
-		soupLib.SetUserAgent(this._userAgentStringOverride);
+		void soupLib.SetUserAgent(this._userAgentStringOverride);
 		this.UserAgentStringOverrideChanged.Subscribe(() => soupLib.SetUserAgent(this._userAgentStringOverride));
 	}
 

@@ -1,25 +1,22 @@
-# Sound 150%
+# Enhanced Sound applet
 
 ## Summary
 
-This sound150@claudiux applet is an enhanced sound applet.
+This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound applet.
 
 **This applet works with Pulseaudio or Pipewire.**
 
-**It can display icons indicating that the microphone is muted, if applicable.**
+**It can display icons indicating that the microphone is muted or activated.**
 
 **Sound volume:**
 
   * **The volume step can be redefined** (from 1% to 10%).
   * **All multiples of 25% (or only 100%) can be magnetized.**
   * The **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
-  * **A mark on slider signals the '100%' position of volume.**
 
 **The song's cover art** can be displayed when it is embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
 
-**You can control the sound volume up to 150% of its nominal value.**
-
-**You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control microphone volume.**
+**You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control the microphone volume.**
 
 **The icon can be colored according to the volume when it exceeds 100%.**
 
@@ -35,7 +32,7 @@ From 131 to 150%: red icon (by default).
 
 **You can redefine multimedia key bindings.**
 
-Successfully tested on Cinnamon versions 2.8 to 6.0 (Linux Mint 17.3 to 21.3). Does not work on Cinnamon prior to version 2.8 (Linux Mint prior to 17.3).
+Successfully tested on Cinnamon versions 2.8 to 6.2 (Linux Mint 17.3 to 22). Does not work on Cinnamon prior to version 2.8 (Linux Mint prior to 17.3).
 
 ## Dependencies
 

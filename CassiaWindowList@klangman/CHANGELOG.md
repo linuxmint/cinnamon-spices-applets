@@ -1,5 +1,27 @@
 # Changelog
 
+## 2.3.5
+
+* Fix for the "number bubble" showing up incorrectly after changing the UI scale settings in display setting application.
+* Add a 2nd layer of code to try and ensure that the "Welcome Wizard" dialog does not reappear after a restart
+
+## 2.3.4
+
+* Saves new default thumbnail window sizes (adjusted using the mouse scroll-wheel) across cinnamon restarts
+* Now uses application specific thumbnail windows sizes across all workspaces
+* Changing the "Default thumbnail window size" setting will now reset all scroll-wheel set thumbnail sizes
+* Fix the icon geometry so that it is set correctly in more (all?) cases
+
+## 2.3.3
+
+* Improve the window icon geometry update logic for more accurate minimize/unminimize animations. It's still not perfect, but this fixes most of the issues.
+
+## 2.3.2
+
+* Enable Cinnamon restore/minimize animation by setting window icon geometry
+* Fix (hopefully) an exception seen opening a context menu under Mint 22
+* Fix blurry icons caused by not respecting the panel setting colored icon size
+
 ## 2.3.1
 
 * Added a window-list button context menu item to toggle the "Always on top" window state

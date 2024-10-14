@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-07-10 01:49-0400\n"
-"PO-Revision-Date: 2024-07-28 08:05-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-13 11:40+0200\n"
+"PO-Revision-Date: 2024-10-02 16:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,26 +16,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:325
+#: applet.js:236
+msgid "unassigned"
+msgstr "nincs hozzárendelve"
+
+#: applet.js:327
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Ez az Ön saját kategóriáinak és rádióállomásainak listája."
 
-#: applet.js:326
+#: applet.js:328
 msgid "You can add more using the [+] button."
 msgstr "Többet is hozzáadhat a [+] gombbal."
 
-#: applet.js:327
+#: applet.js:329
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 "Egy kategória esetén csak a nevét írja be; hagyja üresen a többi mezőt."
 
-#: applet.js:328
+#: applet.js:330
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Rádióállomás esetén csak a nevét és a streaming URL-jét adja meg."
 
-#: applet.js:329
+#: applet.js:331
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -44,7 +47,7 @@ msgstr ""
 "A sorokat húzással vagy a lista alatti gombok és eszközök használatával "
 "rendezheti."
 
-#: applet.js:330
+#: applet.js:332
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -52,7 +55,7 @@ msgstr ""
 "A lista alatt jobbra található gombok segítségével oldalanként vagy "
 "kategóriánként kategóriánként navigálhat."
 
-#: applet.js:331
+#: applet.js:333
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -60,7 +63,7 @@ msgstr ""
 "Az egyik állomás megkereséséhez kattintson a listára, és kezdje el beírni a "
 "nevét."
 
-#: applet.js:332
+#: applet.js:334
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -68,13 +71,13 @@ msgstr ""
 "Ha egyszerűen szeretne állomásokat hozzáadni a listához, használja a "
 "következő 2 lapot: Keresés és importálás."
 
-#: applet.js:333
+#: applet.js:335
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Jelölje be a „Menü” négyzetet, ha egy állomást vagy kategóriát szeretne "
 "megjeleníteni a menüben."
 
-#: applet.js:334
+#: applet.js:336
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -82,12 +85,12 @@ msgstr ""
 "Jelölje be a '♪/➟' jelölőnégyzetet az állomás hallgatásához, vagy a lista "
 "alatti eszközök segítségével áthelyezheti egy másik kategóriába."
 
-#: applet.js:336
+#: applet.js:338
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 "Az állomások listáját internetes adatbázisok segítségével ellenőrizheti."
 
-#: applet.js:337
+#: applet.js:339
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -95,7 +98,7 @@ msgstr ""
 "Bármely állomás, amelyet ezen adatbázisok valamelyike felismer, kap egy "
 "univerzális egyedi azonosítót (UUID), amelyet ez az adatbázis biztosít."
 
-#: applet.js:338
+#: applet.js:340
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -103,7 +106,7 @@ msgstr ""
 "Tehát, ha a streaming URL megváltozott, egy következő ellenőrzés frissíti "
 "azt, és továbbra is hallgathatja az érintett állomást."
 
-#: applet.js:340
+#: applet.js:342
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -111,7 +114,7 @@ msgstr ""
 "Itt kereshet más állomásokat az interneten keresztül elérhető ingyenes "
 "rádióadatbázisban."
 
-#: applet.js:341
+#: applet.js:343
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -119,7 +122,7 @@ msgstr ""
 "Töltse ki az alábbi űrlap legalább néhány mezőjét, majd kattintson a "
 "\"Keresés...\" gombra."
 
-#: applet.js:342
+#: applet.js:344
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -129,7 +132,7 @@ msgstr ""
 "jelenik meg az oldal második részében, ahol tesztelhet bizonyos állomásokat, "
 "és felveheti azokat a menübe."
 
-#: applet.js:343
+#: applet.js:345
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -137,7 +140,7 @@ msgstr ""
 "A menüjében már szereplő állomás csak akkor jelenik meg a keresési "
 "eredmények között, ha a streaming URL-je megváltozott."
 
-#: applet.js:344
+#: applet.js:346
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -145,7 +148,7 @@ msgstr ""
 "Ha nem jelenik meg új oldal, az azt jelenti, hogy a keresési feltételeknek "
 "megfelelő összes eredmény megjelenik."
 
-#: applet.js:346
+#: applet.js:348
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -153,7 +156,7 @@ msgstr ""
 "Ön importálhat egy fájlt, amely legalább egy rádióállomás nevét és streaming "
 "URL-jét tartalmazza."
 
-#: applet.js:347
+#: applet.js:349
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -161,11 +164,11 @@ msgstr ""
 "Ezek a rádióállomások az alábbi listában jelennek meg. A ♪ négyzet "
 "bejelölésével tesztelheti őket."
 
-#: applet.js:348
+#: applet.js:350
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Ezután kezelheti ezt a listát a lap alján található gombokkal."
 
-#: applet.js:350
+#: applet.js:352
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -173,7 +176,7 @@ msgstr ""
 "A Shoutcast könyvtárban kattintson az állomás nevétől balra található "
 "letöltés gombra."
 
-#: applet.js:351
+#: applet.js:353
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -181,11 +184,11 @@ msgstr ""
 "Válassza ki a nyitott formátumot (.XSPF), és mentse el a fájlt az állomás "
 "névvel megegyező névvel."
 
-#: applet.js:352
+#: applet.js:354
 msgid "This file can then be imported here."
 msgstr "Ez a fájl ezután ide importálható."
 
-#: applet.js:354
+#: applet.js:356
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bájt = %s GB = %s GiB"
@@ -196,315 +199,320 @@ msgstr "%s bájt = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:520 applet.js:534 applet.js:5038 applet.js:5050
+#: applet.js:522 applet.js:536 applet.js:5049 applet.js:5061
 msgid "(Undefined)"
 msgstr "(Nincs megadva)"
 
-#: applet.js:732
+#: applet.js:734
 msgid "Radio3.0 web page..."
 msgstr "Radio3.0 weboldal..."
 
-#: applet.js:2056
+#: applet.js:2058
 msgid "Start"
 msgstr "Indulás"
 
-#: applet.js:2064 applet.js:2768
+#: applet.js:2066 applet.js:2770
 msgid "Stop"
 msgstr "Leállítás"
 
-#: applet.js:2299 applet.js:2335 applet.js:2382
+#: applet.js:2301 applet.js:2337 applet.js:2384
 msgid "Middle-Click: Stop Recording"
 msgstr "Középső kattintás: Felvétel leállítása"
 
-#: applet.js:2331 applet.js:2378
+#: applet.js:2333 applet.js:2380
 msgid "Volume: %s%"
 msgstr "Hangerő: %s%"
 
-#: applet.js:2337 applet.js:2384
+#: applet.js:2339 applet.js:2386
 msgid "Middle-click: ON/OFF"
 msgstr "Középső kattintás: BE/KI"
 
-#: applet.js:2339 applet.js:2386
+#: applet.js:2341 applet.js:2388
 msgid "Click: Select another station"
 msgstr "Kattintás: Válasszon másik állomást"
 
-#: applet.js:2352
+#: applet.js:2354
 msgid "Click to select a station"
 msgstr "Kattintson egy állomás kiválasztásához"
 
-#: applet.js:2388
+#: applet.js:2390
 msgid "Scroll wheel: volume change"
 msgstr "Görgő: hangerő változtatás"
 
-#: applet.js:2438 applet.js:2786 applet.js:4663
+#: applet.js:2440 applet.js:2788 applet.js:4665
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: applet.js:2442 applet.js:2778
+#: applet.js:2444 applet.js:2780
 msgid "Search for new stations..."
 msgstr "Új állomások keresése..."
 
-#: applet.js:2448 applet.js:2790 applet.js:4700
+#: applet.js:2450 applet.js:2792 applet.js:4702
 msgid "Sound Settings"
 msgstr "Hangbeállítások"
 
-#: applet.js:2518
+#: applet.js:2520
 msgid "Watch on YT"
 msgstr "Nézd meg a YT-n"
 
-#: applet.js:2525
+#: applet.js:2527
 msgid "Try to download it from YT (unsafe)"
 msgstr "Próbáld meg letölteni a YT-ről (nem biztonságos)"
 
-#: applet.js:2588
+#: applet.js:2590
 msgid "Recently Played Stations:"
 msgstr "Legutóbb játszott állomások:"
 
-#: applet.js:2630
+#: applet.js:2632
 msgid "Visit the home page of this station"
 msgstr "Látogassa meg az állomás kezdőlapját"
 
-#: applet.js:2669
+#: applet.js:2671
 msgid "Categories"
 msgstr "Kategóriák"
 
-#: applet.js:2671
+#: applet.js:2673
 msgid "Radio Stations"
 msgstr "Rádióállomások"
 
-#: applet.js:2681
+#: applet.js:2683
 msgid "All Categories"
 msgstr "Összes kategória"
 
-#: applet.js:2711
+#: applet.js:2713
 msgid "My Radio Stations"
 msgstr "Saját rádióállomások"
 
-#: applet.js:2910
+#: applet.js:2912
 msgid "Downloading..."
 msgstr "Letöltés…"
 
-#: applet.js:2912
+#: applet.js:2914
 msgid "Stop downloading"
 msgstr "Letöltés leállítása"
 
-#: applet.js:3016
+#: applet.js:3018
 msgid "Download complete"
 msgstr "Letöltés befejeződött"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#: applet.js:3018 applet.js:3027 applet.js:4462 applet.js:4471 applet.js:4480
-#: applet.js:4781
+#: applet.js:3020 applet.js:3029 applet.js:4464 applet.js:4473 applet.js:4482
+#: applet.js:4792
 msgid "Open the recordings folder"
 msgstr "Nyissa meg a felvételek mappát"
 
-#: applet.js:3025 applet.js:4459 applet.js:4469 applet.js:4478
+#: applet.js:3027 applet.js:4461 applet.js:4471 applet.js:4480
 msgid "An error seems to have occurred during recording!"
 msgstr "Úgy tűnik, hiba történt a rögzítés közben!"
 
-#: applet.js:3026 applet.js:4461 applet.js:4470 applet.js:4479
+#: applet.js:3028 applet.js:4463 applet.js:4472 applet.js:4481
 msgid "Please check this record."
 msgstr "Kérjük, ellenőrizze ezt a rekordot."
 
-#: applet.js:3133 applet.js:3167
+#: applet.js:3135 applet.js:3169
 msgid "Record from now"
 msgstr "Felvétel mostantól"
 
-#: applet.js:3151 applet.js:4944
+#: applet.js:3153 applet.js:4955
 msgid "Stop Current Recording"
 msgstr "Az aktuális rögzítés leállítása"
 
-#: applet.js:3279
+#: applet.js:3281
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Lejátszás: %s%s"
 
-#: applet.js:3332
+#: applet.js:3334
 msgid "Radio OFF"
 msgstr "Rádió Ki"
 
-#: applet.js:3460
+#: applet.js:3462
 msgid "Unable to record anything!"
 msgstr "Semmit nem lehet rögzíteni!"
 
-#: applet.js:3460 applet.js:4801
+#: applet.js:3462 applet.js:4812
 msgid "Insufficient space"
 msgstr "Elégtelen hely"
 
-#: applet.js:3460
+#: applet.js:3462
 msgid "The limit you set has been reached."
 msgstr "Elérte a beállított korlátot."
 
-#: applet.js:3846
+#: applet.js:3848
 msgid "Please Log Out then Log In"
 msgstr "Kérjük, jelentkezzen ki, majd jelentkezzen be"
 
-#: applet.js:3846
+#: applet.js:3848
 msgid "to finalize yt-dlp update"
 msgstr "az yt-dlp frissítés véglegesítéséhez"
 
-#: applet.js:3951
+#: applet.js:3953
 msgid "Nothing to save."
 msgstr "Nincs mit menteni."
 
-#: applet.js:3964
+#: applet.js:3966
 msgid "List of saved radio stations"
 msgstr "A mentett rádióállomások listája"
 
-#: applet.js:3982
+#: applet.js:3984
 msgid "This will replace all current radio stations."
 msgstr "Ez felváltja az összes jelenlegi rádióállomást."
 
-#: applet.js:3983
+#: applet.js:3985
 msgid "Are you sure you want to continue?"
 msgstr "Biztos vagy benne, hogy folytatni akarod?"
 
-#: applet.js:4043
+#: applet.js:4045
 msgid "Update in progress"
 msgstr "Frissítés folyamatban"
 
-#: applet.js:4043
+#: applet.js:4045
 msgid "It may take a while ... Please wait."
 msgstr "Eltarthat egy ideig... Kérem, várjon."
 
-#: applet.js:4133
+#: applet.js:4135
 msgid "Update completed successfully"
 msgstr "A frissítés sikeresen befejeződött"
 
-#: applet.js:4343 applet.js:4399
+#: applet.js:4345 applet.js:4401
 msgid "ERROR: Invalid YT video URL!"
 msgstr "HIBA: Érvénytelen YT-videó URL-je!"
 
-#: applet.js:4368
+#: applet.js:4370
 msgid "Unable to extract a single soundtrack"
 msgstr "HIBA: Érvénytelen YT-videó URL-je"
 
-#: applet.js:4368
+#: applet.js:4370
 msgid "Maybe it's a playlist?"
 msgstr "Talán ez egy lejátszási lista?"
 
-#: applet.js:4401
+#: applet.js:4403
 msgid "Close"
 msgstr "Bezárás"
 
-#: applet.js:4621
+#: applet.js:4623
 msgid "About..."
 msgstr "Névjegy…"
 
-#: applet.js:4644
+#: applet.js:4646
 msgid "Manual..."
 msgstr "Kézi…"
 
-#: applet.js:4676
+#: applet.js:4678
 msgid "Schedule a background record..."
 msgstr "Háttérrekord ütemezése..."
 
-#: applet.js:4688
+#: applet.js:4690
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Hangsáv kinyerése a YouTube videóból..."
 
-#: applet.js:4709
+#: applet.js:4711
 msgid "Pulse Effects"
 msgstr "Pulse Effects"
 
-#: applet.js:4718
+#: applet.js:4720
+#| msgid "Pulse Effects"
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+#: applet.js:4729
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#: applet.js:4731
+#: applet.js:4742
 msgid "Radio ON at startup"
 msgstr "Rádió BE indításkor"
 
-#: applet.js:4745
+#: applet.js:4756
 msgid "Display Station Logo"
 msgstr "Az állomás logójának megjelenítése"
 
 #. settings-schema.json->dont-check-dependencies->description
-#: applet.js:4759
+#: applet.js:4770
 msgid "Do not check about dependencies"
 msgstr "Ne ellenőrizze a függőségeket"
 
-#: applet.js:4798
+#: applet.js:4809
 msgid "(auto)"
 msgstr "(auto)"
 
-#: applet.js:4798
+#: applet.js:4809
 msgid "(manual)"
 msgstr "(kézi)"
 
-#: applet.js:4801 applet.js:4993
+#: applet.js:4812 applet.js:5004
 msgid "Stop Recording"
 msgstr "Felvétel leállítása"
 
-#: applet.js:4801
+#: applet.js:4812
 msgid "Start Recording"
 msgstr "Felvétel elindítása"
 
-#: applet.js:4822
+#: applet.js:4833
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#: applet.js:4838
+#: applet.js:4849
 msgid "Display volume level near icon"
 msgstr "Hangerőszint megjelenítése az ikon közelében"
 
-#: applet.js:4856
+#: applet.js:4867
 msgid "Cancel downloads from YT"
 msgstr "Letöltések megszakítása a YOUTUBE webhelyről"
 
-#: applet.js:4994
+#: applet.js:5005
 msgid "Close without stopping recording"
 msgstr "Zárja be a felvétel leállítása nélkül"
 
-#: applet.js:5204
+#: applet.js:5215
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Felvétel indítása %s:%s és %s:%s között"
 
-#: applet.js:5216
+#: applet.js:5227
 msgid "Recording completed"
 msgstr "Felvétel kész"
 
-#: applet.js:5311
+#: applet.js:5322
 msgid "This will import a new file containing radio stations."
 msgstr "Ezzel egy új fájlt importál, amely rádióállomásokat tartalmaz."
 
-#: applet.js:5312
+#: applet.js:5323
 msgid "Do you want to continue?"
 msgstr "Szeretné folytatni?"
 
-#: applet.js:5383
+#: applet.js:5394
 msgid "No new radio in your list."
 msgstr "Nincs új rádió a listán."
 
-#: applet.js:5385
+#: applet.js:5396
 msgid "One more radio in your list."
 msgstr "Még egy rádió a listán."
 
-#: applet.js:5387
+#: applet.js:5398
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s további rádió a listán."
 
-#: applet.js:5594
+#: applet.js:5605
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 "Nincsenek új állomások, amelyeket hozzáadhatna a Radio3.0 kisalkalmazás "
 "menühöz"
 
-#: applet.js:5596
+#: applet.js:5607
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Új állomás került a Radio3.0 kisalkalmazás menüjébe"
 
-#: applet.js:5598
+#: applet.js:5609
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s új állomás került a Radio3.0 kisalkalmazás menüjébe"
 
-#: applet.js:5799
+#: applet.js:5810
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
@@ -3082,10 +3090,8 @@ msgstr "Keresés…"
 msgid "Remove selected items"
 msgstr "Kiválasztott elemek eltávolítása"
 
-#: scripts/popup_menu.py:71
-msgid "Open Folder"
-msgstr "Mappa megnyitása"
+#~ msgid "Open Folder"
+#~ msgstr "Mappa megnyitása"
 
-#: scripts/popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Megnyitás terminálban"
+#~ msgid "Open in Terminal"
+#~ msgstr "Megnyitás terminálban"

@@ -338,7 +338,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         let icon = Gio.Icon.new_for_string(this._volumeToIcon(this._value));
 
         if (this.applet.showOSD) {
-            Main.osdWindowManager.show(-1, icon, Math.round(volume/this.applet._volumeNorm * 100), null);
+            Main.osdWindowManager.show(-1, icon, ""+Math.round(volume/this.applet._volumeNorm * 100), null);
         }
 
 
@@ -1088,14 +1088,15 @@ class Player extends PopupMenu.PopupMenuSection {
         this._cover_load_handle = 0;
         this._cover_path = null;
 
-        this.display_cover_button = new ControlButton("x-shape-image",
-            _("View cover"),
-            () => {
-                Util.spawnCommandLineAsync("xdg-open "+this._cover_path)
-            }
-        );
+        //~ this.display_cover_button = new ControlButton("image-x-generic",
+            //~ _("View cover"),
+            //~ () => {
+                //~ Util.spawnCommandLineAsync("xdg-open "+this._cover_path)
+            //~ },
+            //~ true
+        //~ );
         //~ this.coverBox.add_actor(this.display_cover_button.getActor());
-        //~ this.display_cover_button.hide();
+        //~ this.display_cover_button.getActor().show();
 
         // Track info (artist + title)
         this._artist = _("Unknown Artist");
@@ -1805,6 +1806,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("tooltipShowArtistTitle", "tooltipShowArtistTitle", this.on_settings_changed);
 
         this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
+        this.settings.bind("avoidCrackingAtShutdown", "avoidCrackingAtShutdown", null);
 
         this._sounds_settings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
         this.settings.setValue("volumeSoundFile", this._sounds_settings.get_string(VOLUME_SOUND_FILE_KEY));
@@ -1955,12 +1957,19 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let easy_effects = this.get_easy_effects();
+        let easy_effects = this.get_effects("Easy Effects");
         //~ log("easy_effects: "+easy_effects, true);
         if (easy_effects) {
             this.context_menu_item_easyEffects = new PopupMenu.PopupIconMenuItem(_("Easy Effects"), "easyeffects", St.IconType.SYMBOLIC);
             this.context_menu_item_easyEffects.connect("activate", async () => { Util.spawnCommandLine("%s".format(easy_effects)) });
             this._applet_context_menu.addMenuItem(this.context_menu_item_easyEffects);
+        }
+
+        let pulse_effects = this.get_effects("PulseEffects");
+        if (pulse_effects) {
+            this.context_menu_item_pulseEffects = new PopupMenu.PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", St.IconType.SYMBOLIC);
+            this.context_menu_item_pulseEffects.connect("activate", async () => { Util.spawnCommandLine("%s".format(pulse_effects)) });
+            this._applet_context_menu.addMenuItem(this.context_menu_item_pulseEffects);
         }
 
         this.mute_out_switch.connect("toggled", () => this._toggle_out_mute());
@@ -2023,7 +2032,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         dialog.open();
     }
 
-    get_easy_effects() {
+    get_effects(name) {
         var commandline = null;
         let appsys = Cinnamon.AppSystem.get_default();
         const dirs = [];
@@ -2051,7 +2060,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                                 const id = entry.get_desktop_file_id();
                                 const app = appsys.lookup_app(id);
                                 //~ log("APP NAME: "+app.get_name(), true);
-                                if (app.get_name() == "Easy Effects") {
+                                if (app.get_name() == name) {
                                     commandline = appInfo.get_commandline();
                                     break;
                                 }
@@ -2198,6 +2207,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        if (this.avoidCrackingAtShutdown && this._output && !this._output.is_muted) {
+            let old_volume = this.volume;
+            this._toggle_out_mute();
+            this.volume = old_volume;
+        }
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
@@ -2272,6 +2286,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
             this._output.change_is_muted(true);
             this.mute_out_switch.setToggleState(true);
+            this._outputIcon = "audio-volume-muted-symbolic";
+            this.set_applet_icon_symbolic_name(this._outputIcon);
         }
     }
 
@@ -2330,6 +2346,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                     this._output.volume = 0;
                     if (!prev_muted)
                         this._output.change_is_muted(true);
+                    this._outputIcon = "audio-volume-muted-symbolic";
+                    this.set_applet_icon_symbolic_name(this._outputIcon);
                 } else {
                     // 100% is magnetic:
                     if (this.magneticOn === true && this._output.volume != this._volumeNorm && this._output.volume > this._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
@@ -2381,7 +2399,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             let volume = this.volume.slice(0, -1);
             let icon_name = "audio-volume";
             if (volume > 100) icon_name += "-overamplified";
-            else if (volume <1) icon_name += "-muted";
+            else if (volume <1) {
+                icon_name += "-muted";
+                volume = 0;
+                this.volume = "0%";
+            }
             else if (volume < 33) icon_name += "-low";
             else if (volume < 67) icon_name += "-medium";
             else icon_name += "-high";
@@ -2398,8 +2420,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.set_applet_icon_symbolic_name(icon_name);
             if (this.showOSD) {
                 //~ Main.osdWindowManager.hideAll();
-                Main.osdWindowManager.show(-1, icon, volume, null);
-                //Main.osdWindowManager.show(0, icon, volume, true);
+                Main.osdWindowManager.show(-1, icon, ""+volume, null);
+                //Main.osdWindowManager.show(0, icon, ""+volume, true);
             }
             var intervalId = null;
             intervalId = Util.setInterval(() => {
@@ -2583,6 +2605,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     setAppletIcon(player, path) {
         //~ log("setAppletIcon path:"+path, true);
+        if (this.volume === "0%") {
+            this.setIcon("audio-volume-muted-symbolic", "player-name");
+            return
+        }
         if (path != null) {
             if (path === true) {
                 // Restore the icon path from the saved path.

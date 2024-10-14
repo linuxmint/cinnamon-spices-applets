@@ -19,6 +19,7 @@ import type { WeatherBitCurrentWeatherData } from "./current";
 import type { WeatherBitDailyWeatherDataResponse } from "./daily";
 import type { WeatherBitHourlyWeatherDataResponse } from "./hourly";
 import type { LocationData } from "../../types";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class Weatherbit extends BaseProvider {
 
@@ -55,10 +56,10 @@ export class Weatherbit extends BaseProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
-		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
+		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable, config);
 		let hourlyPromise = null;
-		if (this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
-		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable);
+		if (this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable, config);
+		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable, config);
 		if (!currentResult) return null;
 
 		const forecastResult = await forecastPromise;
@@ -67,7 +68,7 @@ export class Weatherbit extends BaseProvider {
 		currentResult.hourlyForecasts = hourlyResult ?? [];
 
 		if (config._showAlerts) {
-			const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
+			const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable, config);
 			if (alertResult == null)
 				return null;
 
@@ -83,8 +84,8 @@ export class Weatherbit extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData<T, K>(baseUrl: string, loc: LocationData, ParseFunction: (json: K, translated: boolean) => T, cancellable: imports.gi.Gio.Cancellable) {
-		const query = this.ConstructQuery(loc);
+	private async GetData<T, K>(baseUrl: string, loc: LocationData, ParseFunction: (json: K, translated: boolean) => T, cancellable: imports.gi.Gio.Cancellable, config: Config) {
+		const query = this.ConstructQuery(loc, config);
 		if (query == null)
 			return null;
 
@@ -101,8 +102,8 @@ export class Weatherbit extends BaseProvider {
 		return ParseFunction(json as K, !!query.lang);
 	}
 
-	private async GetHourlyData(baseUrl: string, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
-		const query = this.ConstructQuery(loc);
+	private async GetHourlyData(baseUrl: string, loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config) {
+		const query = this.ConstructQuery(loc, config);
 		if (query == null)
 			return null;
 
@@ -198,7 +199,7 @@ export class Weatherbit extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Weatherbit Weather Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
 			return null;
 		}
 	};
@@ -225,7 +226,7 @@ export class Weatherbit extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	};
@@ -260,7 +261,7 @@ export class Weatherbit extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Weatherbit Forecast Parsing error: " + e.message, e);
-			this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
+			ErrorHandler.Instance.PostError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
 			return null;
 		}
 	}
@@ -320,16 +321,16 @@ export class Weatherbit extends BaseProvider {
 		return lang;
 	}
 
-	private ConstructQuery(loc: LocationData): HTTPParams {
+	private ConstructQuery(loc: LocationData, config: Config): HTTPParams {
 		const result: HTTPParams = {
-			key: this.app.config.ApiKey,
+			key: config.ApiKey,
 			lat: loc.lat,
 			lon: loc.lon,
 			units: "S"
 		};
 
-		const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
-		if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+		const lang = this.ConvertToAPILocale(config.currentLocale);
+		if (IsLangSupported(lang, this.supportedLanguages) && config._translateCondition) {
 			result.lang = lang;
 		}
 		return result;
@@ -342,7 +343,7 @@ export class Weatherbit extends BaseProvider {
 	*/
 	private HandleError(message: ErrorResponse): boolean {
 		if (message.ErrorData.code == 403) { // bad key
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "bad key",

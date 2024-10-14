@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# APP LAUNCHER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mchilli, 2021
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-02-05 14:46-0500\n"
-"PO-Revision-Date: 2023-11-20 18:04-0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-09 06:05+0200\n"
+"PO-Revision-Date: 2024-09-08 18:15-0300\n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,108 +17,128 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.4\n"
 
-#: applet.js:108
+#. applet.js:108
 msgid "Edit Applications"
 msgstr "Editar aplicaciones"
 
-#: applet.js:737 applet.js:1031
+#. applet.js:737 applet.js:1031
 msgid "Delete"
 msgstr "Borrar"
 
-#: applet.js:738 applet.js:1032
+#. applet.js:738 applet.js:1032
 msgid "Edit"
 msgstr "Editar"
 
-#: applet.js:739 applet.js:1033
+#. applet.js:739 applet.js:1033 dialogs.py:43 dialogs.py:293 widgets.py:73
 msgid "Cancel"
 msgstr "Cancelar"
 
+#. dialogs.py:41 dialogs.py:292
+msgid "OK"
+msgstr "OK"
+
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
+#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nombre"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:51 dialogs.glade:104
+#. dialogs.py:50
 msgid "Group"
 msgstr "Grupo"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:52 widgets.py:43 dialogs.glade:115
+#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Comando"
 
-#: dialogs.py:203
+#. dialogs.py:236
 msgid "The name cannot be empty"
 msgstr "El nombre no puede estar vacío"
 
-#: dialogs.py:208
+#. dialogs.py:241
 msgid "The name is already used"
 msgstr "El nombre ya está siendo utilizado"
 
-#: dialogs.py:215
+#. dialogs.py:248
 msgid "Valid name"
 msgstr "Nombre válido"
 
-#: dialogs.py:221
+#. dialogs.py:254
 msgid "Valid command"
 msgstr "Comando válido"
 
-#: dialogs.py:224
+#. dialogs.py:257
 msgid "The command is not valid"
 msgstr "El comando no es válido"
 
-#: dialogs.py:236
+#. dialogs.py:291
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "¿Qué datos deben reemplazarse del archivo * .desktop?"
 
-#: dialogs.py:281 dialogs.glade:561
+#. dialogs.py:335
 msgid "really delete?"
 msgstr "¿realmente lo desea borrar?"
+
+#. dialogs.py:336
+msgid "No"
+msgstr "No"
+
+#. dialogs.py:337
+msgid "Yes"
+msgstr "Sí"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:29
+#. widgets.py:46 ui/widget.glade:29
 msgid "Icon"
 msgstr "Icono"
 
-#: widgets.py:125
+#. widgets.py:51
 msgid "Add application"
 msgstr "Añadir aplicación"
 
-#: widgets.py:126
+#. widgets.py:52
 msgid "Add new entry"
 msgstr "Añadir una nueva entrada"
 
-#: widgets.py:130
+#. widgets.py:55
 msgid "Add separator"
 msgstr "Añadir un separador"
 
-#: widgets.py:138
-msgid "Remove selected entry"
-msgstr "Eliminar la entrada seleccionada"
-
-#: widgets.py:144
+#. widgets.py:58
 msgid "Edit selected entry"
 msgstr "Editar la entrada seleccionada"
 
-#: widgets.py:150
+#. widgets.py:61
 msgid "Duplicate selected entry"
 msgstr "Duplicar entrada seleccionada"
 
-#: widgets.py:156
+#. widgets.py:64
 msgid "Move selected entry up"
 msgstr "Mover la entrada seleccionada hacia arriba"
 
-#: widgets.py:162
+#. widgets.py:67
 msgid "Move selected entry down"
 msgstr "Mover la entrada seleccionada hacia abajo"
 
-#: widgets.py:323
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr "Eliminar la entrada seleccionada"
+
+#. widgets.py:76
+msgid "Save?"
+msgstr "¿Guardar?"
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr "Guardar la configuración actual"
+
+#. widgets.py:264
 msgid "Separator"
 msgstr "Separador"
 
@@ -188,7 +209,9 @@ msgstr "Ancho fijo del menú"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr "Basado en el elemento más grande del submenú, para evitar que el ancho del menú parpadee"
+msgstr ""
+"Basado en el elemento más grande del submenú, para evitar que el ancho del "
+"menú parpadee"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

@@ -162,7 +162,7 @@ class LGS extends Applet.IconApplet {
 
         this.menu.addMenuItem(itemReloadCinnamon);
 
-        // Reload
+        // Reload:
         let reloadHead = new PopupMenu.PopupMenuItem(_("--- Reload Spices ---"), {
             reactive: false
         });
@@ -213,7 +213,58 @@ class LGS extends Applet.IconApplet {
             this.subMenuReloadExtensions.menu.addMenuItem(s)
         }
 
-        // View Code
+        // Settings:
+        let settingsHead = new PopupMenu.PopupMenuItem(_("--- Settings for ---"), {
+            reactive: false
+        });
+        this.menu.addMenuItem(settingsHead);
+
+        // Applets
+        this.subMenuSettingsApplets = new PopupMenu.PopupSubMenuMenuItem(_("Applet:"));
+        this.menu.addMenuItem(this.subMenuSettingsApplets);
+
+        for (let applet of this.get_active_spices("applets")) {
+            let s =  new PopupMenu.PopupMenuItem(applet, {
+                reactive: true
+            });
+            s.connect("activate", () => {
+                if (this.menu.isOpen) this.menu.close();
+                Util.spawnCommandLineAsync('bash -c "cinnamon-settings applets %s"'.format(applet))
+            });
+            this.subMenuSettingsApplets.menu.addMenuItem(s)
+        }
+
+        // Desklets
+        this.subMenuSettingsDesklets = new PopupMenu.PopupSubMenuMenuItem(_("Desklet:"));
+        this.menu.addMenuItem(this.subMenuSettingsDesklets);
+
+        for (let desklet of this.get_active_spices("desklets")) {
+            let s =  new PopupMenu.PopupMenuItem(desklet, {
+                reactive: true
+            });
+            s.connect("activate", () => {
+                if (this.menu.isOpen) this.menu.close();
+                Util.spawnCommandLineAsync('bash -c "cinnamon-settings desklets %s"'.format(desklet))
+            });
+            this.subMenuSettingsDesklets.menu.addMenuItem(s)
+        }
+
+        // Extensions
+        this.subMenuSettingsExtensions = new PopupMenu.PopupSubMenuMenuItem(_("Extension:"));
+        this.menu.addMenuItem(this.subMenuSettingsExtensions);
+
+        for (let extension of this.get_active_spices("extensions")) {
+            let s =  new PopupMenu.PopupMenuItem(extension, {
+                reactive: true
+            });
+            s.connect("activate", () => {
+                if (this.menu.isOpen) this.menu.close();
+                Util.spawnCommandLineAsync('bash -c "cinnamon-settings extensions %s"'.format(extension))
+            });
+            this.subMenuSettingsExtensions.menu.addMenuItem(s)
+        }
+
+        // View Code:
         let codeHead = new PopupMenu.PopupMenuItem(_("--- View Code ---"), {
             reactive: false
         });

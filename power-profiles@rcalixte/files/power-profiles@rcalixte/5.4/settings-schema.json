@@ -26,5 +26,19 @@
         "default": true,
         "description": "On-screen display for keyboard shortcuts",
         "tooltip": "Show on-screen display of the new profile when using the keyboard shortcuts"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Appearance"
+    },
+    "iconStyle": {
+        "type": "combobox",
+        "default": "classic",
+        "description": "Icon Style",
+        "options": {
+            "Classic": "classic",
+            "Papirus": "papirus"
+        },
+        "tooltip": "Choose the style of the applet's icon. This is used for the panel and the on-screen display."
     }
 }

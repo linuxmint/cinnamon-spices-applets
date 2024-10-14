@@ -1,0 +1,7 @@
+{
+    "uuid": "auto-dark-light@gihaume",
+    "name": "Automatic dark/light themes",
+    "description": "Automatically switch between dark and light themes at twilight times.",
+    "version": "1.1.0",
+    "max-instances": "1"
+}

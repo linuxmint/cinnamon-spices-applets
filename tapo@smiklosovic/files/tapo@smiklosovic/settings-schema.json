@@ -1,0 +1,25 @@
+{
+  "device-names": {
+    "type": "entry",
+    "default": "none",
+    "description": "Device names",
+    "tooltip": "Device names, separated by comma. Names have to correspond to names in tapo-rest settings in devices object in the configuration file."
+   },
+  "service-url": {
+    "type": "entry",
+    "default": "",
+    "description": "URL for tapo-rest service",
+    "tooltip": "URL for tapo-rest service"
+  },
+  "password": {
+    "type": "entry",
+    "default": "", 
+    "description": "Password for tapo-rest",
+    "tooltip": "Enter password for tapo-rest service"
+  },
+  "perform-login": {
+     "type": "button",
+     "description" : "Login to tapo-rest",
+     "callback" : "performLogin"
+  }
+}

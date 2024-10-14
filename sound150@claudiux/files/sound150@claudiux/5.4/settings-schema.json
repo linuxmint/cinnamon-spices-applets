@@ -99,7 +99,8 @@
         "stepVolume",
         "magneticOn",
         "magnetic25On",
-        "alwaysCanChangeMic"
+        "alwaysCanChangeMic",
+        "avoidCrackingAtShutdown"
       ]
     },
     "sectionSound2": {
@@ -218,7 +219,7 @@
   },
   "middleClickAction": {
     "type": "combobox",
-    "default": "mute",
+    "default": "out_mute",
     "options": {
       "Toggle Mute": "mute",
       "Toggle Mute output": "out_mute",
@@ -359,6 +360,11 @@
     "type": "switch",
     "description": "Always allow microphone to be reactivated",
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
+    "default": true
+  },
+  "avoidCrackingAtShutdown": {
+    "type": "switch",
+    "description": "Try to avoid loud cracking sound at shutdown",
     "default": true
   },
   "showMediaKeysOSD": {

@@ -19,6 +19,7 @@ import type { OWMOneCallPayload} from "./payload/onecall";
 import { OWMOneCallToWeatherData } from "./payload/onecall";
 import type { OWMWeatherResponse } from "./payload/weather";
 import type { WeatherData } from "../../weather-data";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};
@@ -45,7 +46,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 	//--------------------------------------------------------
 
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
-		const params = this.ConstructParams(loc, config.ApiKey);
+		const params = this.ConstructParams(loc, config.ApiKey, config);
 
 		const cachedID = IDCache[`${loc.lat},${loc.lon}`];
 
@@ -73,7 +74,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		return OWMOneCallToWeatherData(json, !!params.lang);
 	};
 
-	private ConstructParams(loc: LocationData, key: string): HTTPParams {
+	private ConstructParams(loc: LocationData, key: string, config: Config): HTTPParams {
 		const params: HTTPParams = {
 			lat: loc.lat,
 			lon: loc.lon,
@@ -81,8 +82,8 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		};
 
 		// Append Language if supported and enabled
-		const locale: string = ConvertLocaleToOWMLang(this.app.config.currentLocale);
-		if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+		const locale: string = ConvertLocaleToOWMLang(config.currentLocale);
+		if (config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
 			params.lang = locale;
 		}
 		return params;
@@ -128,7 +129,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 				error.message = _("Unknown Error, please see the logs in Looking Glass");
 				break;
 		};
-		this.app.ShowError(error);
+		ErrorHandler.Instance.PostError(error);
 		Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
 		Logger.Error(errorMsg + errorPayload.message);
 		return false;

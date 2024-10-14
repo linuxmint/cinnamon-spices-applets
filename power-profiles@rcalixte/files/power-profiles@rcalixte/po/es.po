@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 16:24-0400\n"
+"POT-Creation-Date: 2024-09-15 16:04-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
@@ -16,21 +16,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
-#: 5.4/applet.js:24
+#. 5.4/applet.js:25
 msgid "Power Saver"
 msgstr "Ahorro de energía"
 
-#: 5.4/applet.js:25
+#. 5.4/applet.js:26
 msgid "Balanced"
 msgstr "Equilibrado"
 
-#: 5.4/applet.js:26
+#. 5.4/applet.js:27
 msgid "Performance"
 msgstr "Alto rendimiento"
 
-#: 5.4/applet.js:58 5.4/applet.js:64
+#. 5.4/applet.js:60
+msgid "Power Profiles Applet Error"
+msgstr "Error en el applet de perfiles de energía"
+
+#. 5.4/applet.js:61
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"El paquete del sistema 'power-profiles-daemon' no está instalado.\n"
+"\n"
+"Por favor, instálelo y vuelva a cargar el applet."
+
+#. 5.4/applet.js:63
+msgid "Open README"
+msgstr "Abrir README"
+
+#. 5.4/applet.js:64
+msgid "Open Website"
+msgstr "Abrir el sitio web"
+
+#. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
 "Please make sure the power-profiles-daemon package is installed and the "
 "service is running."
@@ -38,19 +60,19 @@ msgstr ""
 "Asegúrese de que el paquete power-profiles-daemon está instalado y de que el "
 "servicio se está ejecutando."
 
-#: 5.4/applet.js:59
+#. 5.4/applet.js:89
 msgid "exception:"
 msgstr "excepción:"
 
-#: 5.4/applet.js:110
+#. 5.4/applet.js:138
 msgid "Current Profile:"
 msgstr "Perfil actual:"
 
-#: 5.4/applet.js:115
+#. 5.4/applet.js:143
 msgid "Performance Degraded:"
 msgstr "Rendimiento degradado:"
 
-#: 5.4/applet.js:126
+#. 5.4/applet.js:154
 msgid "Active Profile Holds:"
 msgstr "Perfil activo conservado:"
 
@@ -118,3 +140,27 @@ msgstr "Atajos de teclado en pantalla"
 msgid ""
 "Show on-screen display of the new profile when using the keyboard shortcuts"
 msgstr "Mostrar en pantalla el nuevo perfil al utilizar los atajos de teclado"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Estilo de icono"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Clásico"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
+"Elija el estilo del icono del applet. Se utiliza para el panel y la "
+"visualización en pantalla."

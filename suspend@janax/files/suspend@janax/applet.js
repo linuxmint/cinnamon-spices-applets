@@ -27,7 +27,7 @@ class SuspendApplet extends Applet.Applet {
 
       // Icon Box to contain the icon and the count down label
       let iconSize = this.getPanelIconSize( (this.settings.getValue("fullcolor-icon")) ? St.IconType.FULLCOLOR : St.IconType.SYMBOLIC);
-      this._iconBox = new St.Group({natural_width: iconSize, natural_height: iconSize, x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER});
+      this._iconBox = new St.Group({natural_width: iconSize * global.ui_scale, natural_height: iconSize * global.ui_scale, x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER});
 
       // Create the icon and it's container
       this.actor.add_actor(this._iconBox);
@@ -47,6 +47,13 @@ class SuspendApplet extends Applet.Applet {
       this._labelNumberBox.hide();
       this.set_applet_tooltip(_("Suspend"));
       this.signalManager.connect(this.settings, "changed::fullcolor-icon", this._updateIcon, this);
+      this.signalManager.connect(global, "scale-changed", this._updateUIScale, this);
+   }
+
+   _updateUIScale() {
+      let iconSize = this.getPanelIconSize( (this.settings.getValue("fullcolor-icon")) ? St.IconType.FULLCOLOR : St.IconType.SYMBOLIC);
+      this._iconBox.set_width( iconSize * global.ui_scale );
+      this._iconBox.set_height( iconSize * global.ui_scale );
    }
 
    _updateIcon() {

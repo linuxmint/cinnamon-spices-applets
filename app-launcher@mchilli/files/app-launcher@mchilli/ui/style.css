@@ -1,0 +1,23 @@
+.suggested-action:disabled button{
+    background-clip: inherit;
+    color: inherit;
+    outline-color: transparent;
+    background-color: inherit;
+    border-color: transparent;
+}
+
+.suggested-action button{
+    background-clip: border-box;
+    color: #ffffff;
+    outline-color: rgba(255, 255, 255, 0.3);
+    background-color: #6db442;
+    border-color: #6db442;
+}
+
+.suggested-action button:hover {
+    background-clip: border-box;
+    color: #ffffff;
+    outline-color: rgba(255, 255, 255, 0.3);
+    background-color: #88c663;
+    border-color: #88c663; 
+}
