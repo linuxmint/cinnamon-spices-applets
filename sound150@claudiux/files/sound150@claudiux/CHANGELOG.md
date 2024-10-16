@@ -1,3 +1,8 @@
+### v7.1.1~20241016
+  * Avoids loud cracking sound at shutdown.
+  * Option removed. This is basic now.
+
+
 ### v7.1.0~20241013
   * Option to try to avoid loud cracking sound at shutdown.
   * Fixes https://github.com/linuxmint/cinnamon/issues/12446.
