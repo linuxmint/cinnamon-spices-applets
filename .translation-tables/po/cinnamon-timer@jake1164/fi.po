@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-24 11:51+0100\n"
+"PO-Revision-Date: 2022-11-23 17:44+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 3.4/applet.js:218 3.4/applet.js:380 2.6/applet.js:88 2.6/applet.js:303
+msgid "Timer"
+msgstr "Ajastin"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#: 3.4/applet.js:224 3.4/applet.js:263 3.4/applet.js:357 2.6/applet.js:220
+#: 2.6/applet.js:301
+msgid "Hours"
+msgstr "Tuntia"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#: 3.4/applet.js:224 3.4/applet.js:264 3.4/applet.js:357 2.6/applet.js:94
+#: 2.6/applet.js:221 2.6/applet.js:301
+msgid "Minutes"
+msgstr "Minuuttia"
+
+#: 3.4/applet.js:224 3.4/applet.js:357 2.6/applet.js:301
+msgid "and"
+msgstr "ja"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+#: 3.4/applet.js:224 3.4/applet.js:265 3.4/applet.js:357 2.6/applet.js:222
+#: 2.6/applet.js:301
+msgid "Seconds"
+msgstr "Sekuntia"
+
+#: 3.4/applet.js:241 2.6/applet.js:224
+msgid "Reset"
+msgstr "Nollaa"
+
+#: 3.4/applet.js:533 2.6/applet.js:450
+msgid "Okay"
+msgstr "No niin!"
+
+#: 3.4/applet.js:551 2.6/applet.js:468
+msgid "Cinnamon Timer"
+msgstr "Cinnamon ajastin"
+
+#. metadata.json->name
+msgid "Timer with notifications"
+msgstr ""
+
+#. metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr ""
+
+#. 3.4->settings-schema.json->page1->title
+msgid "General"
+msgstr "Yleistä"
+
+#. 3.4->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Ääni"
+
+#. 3.4->settings-schema.json->page3->title
+#. 3.4->settings-schema.json->section3->title
+#. 3.4->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Esiasetus"
+
+#. 3.4->settings-schema.json->page4->title
+#. 3.4->settings-schema.json->section4->title
+#. 3.4->settings-schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Liukusäätimen aikaväli"
+
+#. 3.4->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#. 3.4->settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Ääniasetukset"
+
+#. 3.4->settings-schema.json->confirm-prompt-enable->description
+#. 2.6->settings-schema.json->confirm-prompt-enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr ""
+"Valitse tämä, jos haluat näyttää viestin ikkunassa kun aika on kulunut "
+"loppuun."
+
+#. 3.4->settings-schema.json->confirm-prompt-enable->tooltip
+#. 2.6->settings-schema.json->confirm-prompt-enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr ""
+"Hämärtää näytön ja näyttää viestin pienessä ikkunassa kun aika on kulunut "
+"loppuun"
+
+#. 3.4->settings-schema.json->message-prompt-enable->description
+#. 3.4->settings-schema.json->message-prompt-enable->tooltip
+#. 2.6->settings-schema.json->message-prompt-enable->description
+#. 2.6->settings-schema.json->message-prompt-enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Näytä ilmoitus, kun aika on kulunut"
+
+#. 3.4->settings-schema.json->display-message->description
+#. 3.4->settings-schema.json->display-message->tooltip
+msgid ""
+"Global message displayed in notification windows unless defined in preset "
+"time."
+msgstr ""
+"Yleinen viesti näytetään, ellei sitä ole tehty esiasetuksiin omalla "
+"viestillään."
+
+#. 3.4->settings-schema.json->sound-prompt-enable->description
+#. 3.4->settings-schema.json->sound-prompt-enable->tooltip
+#. 2.6->settings-schema.json->sound-prompt-enable->description
+#. 2.6->settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Toista äänimerkki, kun aika on kulunut"
+
+#. 3.4->settings-schema.json->sound-file->description
+#. 2.6->settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Hälytysäänen koko polku ja tiedostonimi"
+
+#. 3.4->settings-schema.json->sound-file->tooltip
+#. 2.6->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr ""
+"Sinulla on oltava Sox asennettuna. Useimmat äänitiedostot ovat tuettuna"
+
+#. 3.4->settings-schema.json->sound-volume->description
+#. 3.4->settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr ""
+
+#. 3.4->settings-schema.json->display-menu-enable->description
+#. 3.4->settings-schema.json->display-menu-enable->tooltip
+#. 2.6->settings-schema.json->display-menu-enable->description
+#. 2.6->settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Näytä ajastimen valikko, kun aika on kulunut"
+
+#. 3.4->settings-schema.json->duration-display-enable->description
+#. 3.4->settings-schema.json->duration-display-enable->tooltip
+#. 2.6->settings-schema.json->time_display_enable->description
+#. 2.6->settings-schema.json->time_display_enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Näytä jäljellä oleva aika paneelissa"
+
+#. 3.4->settings-schema.json->alarmtime-display-enable->description
+#. 3.4->settings-schema.json->alarmtime-display-enable->tooltip
+msgid "Display alarm time in panel"
+msgstr "Näytä hälytysaika paneelissa"
+
+#. 3.4->settings-schema.json->alarmtime-format-small->description
+msgid "Format used to display alarm time in the near future"
+msgstr "Muoto, jota käytetään hälytysajan näyttämiseen"
+
+#. 3.4->settings-schema.json->alarmtime-format-small->tooltip
+msgid ""
+"If the alarm time is less than the minutes specified below away,\n"
+"the alarm time can be displayed with more details\n"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+msgstr ""
+"Jos hälytysaika on määritetty alle minuutin päässä,\n"
+"hälytysaika voidaan näyttää tarkemmilla tiedoilla\n"
+"(katso https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
+"time-format)"
+
+#. 3.4->settings-schema.json->alarmtime-format-large->description
+msgid "Format used to display alarm time in the not so near future"
+msgstr "Muoto, jota käytetään hälytysajan näyttämiseen"
+
+#. 3.4->settings-schema.json->alarmtime-format-large->tooltip
+msgid ""
+"If the alarm time is more than the minutes specified below away,\n"
+"the alarm time can be displayed with less details\n"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+msgstr ""
+"Jos hälytysaika on määritetty kauempana kuin minuutin päässä,\n"
+"hälytysaika voidaan näyttää vähemmillä tiedoilla\n"
+"(katso https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
+"time-format)"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->units
+msgid "minutes"
+msgstr "minuuttia"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->description
+msgid "Time when switching from small to large time format"
+msgstr "Aika kun vaihdetaan pienestä suureen aikaformaattiin"
+
+#. 3.4->settings-schema.json->alarmtime-format-switchover->tooltip
+msgid "Switch over time between the two formats specified above"
+msgstr "Vaihda aika kahden yllä määritellyn muodon välillä"
+
+#. 3.4->settings-schema.json->auto-loop-enable->description
+#. 3.4->settings-schema.json->auto-loop-enable->tooltip
+#, fuzzy
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Näytä ajastimen valikko, kun aika on kulunut"
+
+#. 3.4->settings-schema.json->alarm_end->description
+#. 3.4->settings-schema.json->alarm_end->tooltip
+#. 3.4->settings-schema.json->alarm_start->description
+#. 3.4->settings-schema.json->alarm_start->tooltip
+#. 2.6->settings-schema.json->alarm_end->description
+#. 2.6->settings-schema.json->alarm_end->tooltip
+#. 2.6->settings-schema.json->alarm_start->description
+#. 2.6->settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Älä tee muutosta, jos kellonaika on asetettu laskemaan"
+
+#. 3.4->settings-schema.json->message->description
+#. 3.4->settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr "Älä tee muutosta, viesti näytetään kun nykyinen ajastin umpeutuu"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Minimi"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Maksimi"
+
+#. 3.4->settings-schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Askel"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Nimi"
+
+#. 3.4->settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Oma viesti (ohittaa yleisen viestin)"
+
+#. 2.6->settings-schema.json->display-message->description
+#. 2.6->settings-schema.json->display-message->tooltip
+#, fuzzy
+msgid "Message displayed in notification windows"
+msgstr ""
+"Yleinen viesti näytetään, ellei sitä ole tehty esiasetuksiin omalla "
+"viestillään."

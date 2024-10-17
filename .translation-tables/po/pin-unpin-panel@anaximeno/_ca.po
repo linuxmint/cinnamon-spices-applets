@@ -1,0 +1,22 @@
+# PIN-UNPIN THE PANEL
+# This file is put in the public domain.
+# anaximeno, 2024
+#
+msgid ""
+msgstr ""
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr ""
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr ""
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr ""
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr ""

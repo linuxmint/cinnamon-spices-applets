@@ -1,0 +1,38 @@
+# SCREENSAVER INHIBITOR
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->pGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->sectionDurationOrEndTime->title
+msgid "Duration or End Time of screen saver inhibition"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->tooltip
+msgid "Seconds will be ignored."
+msgstr ""
+
+#. settings-schema.json->end-type->description
+msgid "The time shown above is"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "to be disregarded"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit duration"
+msgstr ""
+
+#. settings-schema.json->end-type->options
+msgid "the inhibit end time"
+msgstr ""

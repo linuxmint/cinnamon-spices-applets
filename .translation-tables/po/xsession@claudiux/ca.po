@@ -1,0 +1,122 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-06 01:02+0200\n"
+"PO-Revision-Date: 2024-07-06 03:34+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:45
+msgid "Applet"
+msgstr "Miniaplicació"
+
+#. applet.js:46
+msgid "Desklet"
+msgstr "Miniaplicació d'escriptori"
+
+#. applet.js:47
+msgid "Extension"
+msgstr "Extensió"
+
+#. applet.js:50
+msgid "Applets"
+msgstr "Miniaplicacions"
+
+#. applet.js:51
+msgid "Desklets"
+msgstr "Miniaplicacions d'escriptori"
+
+#. applet.js:52
+msgid "Extensions"
+msgstr "Extensions"
+
+#. applet.js:88
+msgid "Middle-click: \n"
+msgstr "Clic del mig:\n"
+
+#. applet.js:88 applet.js:141
+msgid "Show .xsession-errors"
+msgstr "Mostrar .xsession-errors"
+
+#. applet.js:152
+msgid "Restart Cinnamon"
+msgstr "Reiniciar Cinnamon"
+
+#. applet.js:166
+msgid "--- Reload Spices ---"
+msgstr "--- Recarregar Espècies ---"
+
+#. applet.js:172
+msgid "Reload Applet:"
+msgstr "Recarregar la miniaplicació:"
+
+#. applet.js:187
+msgid "Reload Desklet:"
+msgstr "Recarregar la miniaplicació d'escriptori:"
+
+#. applet.js:202
+msgid "Reload Extension:"
+msgstr "Recarregar l'extensió:"
+
+#. applet.js:217
+msgid "--- Settings for ---"
+msgstr ""
+
+#. applet.js:223
+#, fuzzy
+msgid "Applet:"
+msgstr "Miniaplicació"
+
+#. applet.js:238
+#, fuzzy
+msgid "Desklet:"
+msgstr "Miniaplicació d'escriptori"
+
+#. applet.js:253
+#, fuzzy
+msgid "Extension:"
+msgstr "Extensió"
+
+#. applet.js:268
+msgid "--- View Code ---"
+msgstr "--- Veure el codi ---"
+
+#. applet.js:274
+msgid "View Applet Code for:"
+msgstr "Veure el codi de la miniaplicació:"
+
+#. applet.js:289
+msgid "View Desklet Code for:"
+msgstr "Veure el codi de la miniaplicació d'escriptori:"
+
+#. applet.js:304
+msgid "View Extension Code for:"
+msgstr "Veure el codi de l'extensió:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+#, fuzzy
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"Ús permet reiniciar o obrir el codi font d'espècies (miniaplicacions, "
+"miniaplicacions d'escriptori, extensions), mostrar el contingut del fitxer ."
+"xsession-errors en temps real i reiniciar Cinnamon."

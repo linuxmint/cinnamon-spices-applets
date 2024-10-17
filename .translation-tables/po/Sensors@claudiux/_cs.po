@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensors@claudiux Czech 3.7.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-03 15:24+0200\n"
+"PO-Revision-Date: 2024-07-13 17:09+0200\n"
+"Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
+"Language-Team: \n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: .\n"
+
+#. applet.js:1202
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr ""
+
+#. applet.js:1212
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr ""
+
+#. applet.js:1222
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr ""
+
+#. applet.js:1232
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr ""
+
+#. settings-schema.json->page_Temperatures->title
+msgid "⦿ Temperature"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "baseline"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "sub"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "super"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "middle"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "unset"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "inherit"
+msgstr ""
+
+#. settings-schema.json->vertical-align->description
+msgid "Vertical alignment"
+msgstr ""

@@ -1,0 +1,239 @@
+# APP LAUNCHER
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-09 06:05+0200\n"
+"PO-Revision-Date: 2024-09-05 17:37+0200\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:108
+msgid "Edit Applications"
+msgstr "Uygulamaları Düzenle"
+
+#. applet.js:737 applet.js:1031
+msgid "Delete"
+msgstr "Sil"
+
+#. applet.js:738 applet.js:1032
+msgid "Edit"
+msgstr "Düzenle"
+
+#. applet.js:739 applet.js:1033 dialogs.py:43 dialogs.py:293 widgets.py:73
+msgid "Cancel"
+msgstr "İptal"
+
+#. dialogs.py:41 dialogs.py:292
+msgid "OK"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
+msgid "Name"
+msgstr "Ad"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:50
+msgid "Group"
+msgstr "Grup"
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
+msgid "Command"
+msgstr "Komut"
+
+#. dialogs.py:236
+msgid "The name cannot be empty"
+msgstr "İsim boş olamaz"
+
+#. dialogs.py:241
+msgid "The name is already used"
+msgstr "İsim zaten kullanılıyor"
+
+#. dialogs.py:248
+msgid "Valid name"
+msgstr "Geçerli isim"
+
+#. dialogs.py:254
+msgid "Valid command"
+msgstr "Geçerli komut"
+
+#. dialogs.py:257
+msgid "The command is not valid"
+msgstr "Komut geçerli değil"
+
+#. dialogs.py:291
+msgid "Which data should be replaced from *.desktop file?"
+msgstr ""
+
+#. dialogs.py:335
+msgid "really delete?"
+msgstr "silmek istiyor musun?"
+
+#. dialogs.py:336
+msgid "No"
+msgstr "Hayır"
+
+#. dialogs.py:337
+msgid "Yes"
+msgstr "Evet"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#. widgets.py:46 ui/widget.glade:29
+msgid "Icon"
+msgstr "Simge"
+
+#. widgets.py:51
+#, fuzzy
+msgid "Add application"
+msgstr "Uygulamalar"
+
+#. widgets.py:52
+msgid "Add new entry"
+msgstr "Yeni girdi ekle"
+
+#. widgets.py:55
+msgid "Add separator"
+msgstr ""
+
+#. widgets.py:58
+msgid "Edit selected entry"
+msgstr "Seçili girdiyi düzenle"
+
+#. widgets.py:61
+#, fuzzy
+msgid "Duplicate selected entry"
+msgstr "Seçili girdiyi düzenle"
+
+#. widgets.py:64
+msgid "Move selected entry up"
+msgstr "Seçili girdiyi yukarı taşı"
+
+#. widgets.py:67
+msgid "Move selected entry down"
+msgstr "Seçili girdiyi aşağı taşı"
+
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr "Seçili girdiyi sil"
+
+#. widgets.py:76
+msgid "Save?"
+msgstr "Kaydetmek mi?"
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr "Geçerli yapılandırmayı kaydet"
+
+#. widgets.py:264
+msgid "Separator"
+msgstr ""
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Uygulama Başlatıcı"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Basit bir Uygulama Başlatıcı"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Uygulamalar"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Ayarlar"
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Genel Ayarlar"
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Uygulama Ayarları"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Etiketi Göster"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Etiket"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Özel Simge"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Bildirimleri Göster"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Uygulama başlatıldığında bildirimi göster"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Bildirim Metni"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s uygulama adınız olacak"
+
+#. settings-schema.json->hotkey-binding->description
+#, fuzzy
+msgid "Show menu"
+msgstr "Etiketi Göster"
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr ""
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Uygulama Simgelerini Göster"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Açılır Menüde Uygulama Simgelerini Göster"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Sembolik Uygulama Simgelerini Kullanın"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Mümkün olduğunda Sembolik Uygulama Simgelerini kullanın"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Uygulama Simge Boyutu"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Simge boyutunu ayarla"
