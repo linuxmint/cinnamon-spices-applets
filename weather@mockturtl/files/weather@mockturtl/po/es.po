@@ -1905,7 +1905,7 @@ msgstr "Sensación térmica"
 
 #: 3.8/weather-applet.js:17130
 msgid "Open Meteo"
-msgstr "Abrir Meteo"
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
