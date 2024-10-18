@@ -1,0 +1,128 @@
+# translation of weather@mockturtl.po to Icelandic
+# Copyright (C) 2024 Icelandic translations of Cinnamon applets
+# This file is distributed under the same license as the Cinnamon package.
+#
+# SPDX-FileCopyrightText: 2012, 2014, 2021, 2022, 2023, 2024 Sveinn í Felli <sv1@fellsnet.is>
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-20 20:06+0100\n"
+"PO-Revision-Date: 2024-10-18 10:04+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 23.08.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: 3.8/weather-applet.js:10545
+msgid ""
+"Address to location lookup service is blocked. You can try to change your "
+"User-Agent in help to see if it resolves the issue."
+msgstr ""
+
+#: 3.8/weather-applet.js:11348
+msgid "Ash"
+msgstr ""
+
+#: 3.8/weather-applet.js:16979
+msgid "Snow grains"
+msgstr ""
+
+#: 3.8/weather-applet.js:17130
+msgid "Open Meteo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
+msgid "Intermittent Rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
+msgid "Intermittent Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
+msgid "Intermittent Snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:17886
+msgid "Slippery Roads Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17890
+msgid "Mass Movements Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17894
+msgid "Avalanche Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17896
+msgid "Earthquake Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17898
+msgid "Forest Fire Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17920
+msgid "Swiss Météo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17939
+msgid "For this provider, you need to use a postcode."
+msgstr ""
+
+#: 3.8/weather-applet.js:17951
+msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
+msgstr ""
+
+#: 3.8/weather-applet.js:17973
+msgid "Switzerland"
+msgstr ""
+
+#: 3.8/weather-applet.js:20008
+msgid "{count} weather alert(s)"
+msgstr ""
+
+#: 3.8/weather-applet.js:20633
+msgid "No Script Provided"
+msgstr ""
+
+#. 3.8->settings-schema.json->translateCondition->tooltip
+msgid ""
+"Should your provider translate the conditions to your language if your "
+"locale is supported by the provider. Otherwise the applet will use it's own "
+"translation system."
+msgstr ""
+
+#. 3.8->settings-schema.json->userAgentStringOverride->tooltip
+msgid ""
+"If you have issues with the applet not working properly and you know the "
+"User Agent string is the problem you can try to override it. Only change it "
+"if you know what you are doing. This is a string that is sent to the server "
+"when the applet tries to get the weather data."
+msgstr ""
+
+#. 3.8->settings-schema.json->runScript->tooltip
+msgid ""
+"The applet will run the command you provide every time the weather data is "
+"updated. The command will be interpolated with the same values with the same "
+"format you can get in any of the overrides, in addition you get {full_data} "
+"which is the full current weather data. Interpolation with single brackets "
+"{xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in "
+"single quotes (') and all other single quotes are escaped inside. You can "
+"use this to integrate the weather data with other parts of your system. You "
+"can look up the full weather data structure via the link in the README.\n"
+"\n"
+"Example: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' "
+"will show a notification with the current weather condition and "
+"temperature.\n"
+"\n"
+"Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
+"data to a file in /tmp."
+msgstr ""

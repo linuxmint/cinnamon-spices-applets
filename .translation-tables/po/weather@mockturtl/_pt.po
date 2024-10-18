@@ -1,0 +1,330 @@
+# Portuguese translation for gnome-shell-extension-weather
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Daniel Miranda <dmiranda@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-20 20:06+0100\n"
+"PO-Revision-Date: 2024-06-23 03:27-0100\n"
+"Last-Translator: \n"
+"Language-Team: Português ; Daniel Miranda <dmiranda@gmail.com>, Luiz Rodrigo "
+"<contact@lurodrigo.com>, Zé Bento <bento2000@gmail.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: 3.8/weather-applet.js:772
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:10545
+msgid ""
+"Address to location lookup service is blocked. You can try to change your "
+"User-Agent in help to see if it resolves the issue."
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:10638
+msgid "Met Office UK"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:11698 3.8/weather-applet.js:17239
+msgid "OpenWeatherMap"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:11984
+msgid "MET Norway"
+msgstr ""
+
+#: 3.8/weather-applet.js:12549
+msgid "WeatherBit"
+msgstr ""
+
+#: 3.8/weather-applet.js:13168
+msgid "Tomorrow.io"
+msgstr ""
+
+#: 3.8/weather-applet.js:13745
+msgid "US Weather"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:14636
+msgid "DMI Denmark"
+msgstr ""
+
+#: 3.8/weather-applet.js:14998
+msgid "AccuWeather"
+msgstr ""
+
+#: 3.8/weather-applet.js:15454
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#: 3.8/weather-applet.js:16419
+msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:17130
+msgid "Open Meteo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
+#: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
+#: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
+#: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
+msgid "Scattered Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
+#: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
+#: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
+msgid "Chance of Thunderstorms"
+msgstr ""
+
+#: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
+msgid "Light Rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
+msgid "Light Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
+msgid "Intermittent Rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
+msgid "Intermittent Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
+msgid "Intermittent Snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
+msgid "Frequent Thunderstorms"
+msgstr ""
+
+#: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
+#: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
+msgid "High Clouds"
+msgstr ""
+
+#: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
+msgid "Low Clouds"
+msgstr ""
+
+#: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
+msgid "Overcast and Dry"
+msgstr ""
+
+#: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
+#: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
+#: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
+#: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
+msgid "Slightly Stormy"
+msgstr ""
+
+#: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
+#: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
+msgid "Stormy Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
+#: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
+msgid "Thundery Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
+#: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
+#: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
+msgid "Thundery Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17878
+msgid "Wind Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17880
+msgid "Thunderstorm Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17882
+msgid "Rain Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17884
+msgid "Snow Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17886
+msgid "Slippery Roads Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17888
+msgid "Frost Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17890
+msgid "Mass Movements Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17892
+msgid "Heat Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17894
+msgid "Avalanche Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17896
+msgid "Earthquake Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17898
+msgid "Forest Fire Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17900
+msgid "Flood Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17920
+msgid "Swiss Météo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17939
+msgid "For this provider, you need to use a postcode."
+msgstr ""
+
+#: 3.8/weather-applet.js:17951
+msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
+msgstr ""
+
+#: 3.8/weather-applet.js:17973
+msgid "Switzerland"
+msgstr ""
+
+#: 3.8/weather-applet.js:20458
+msgid "Location Service Blocked"
+msgstr ""
+
+#: 3.8/weather-applet.js:20633
+msgid "No Script Provided"
+msgstr ""
+
+#: 3.8/weather-applet.js:20633
+msgid "You need to add a script first."
+msgstr ""
+
+#: 3.8/weather-applet.js:20637
+msgid "No weather data to run script with"
+msgstr ""
+
+#: 3.8/weather-applet.js:20645
+msgid "Script Executed Successfully"
+msgstr ""
+
+#: 3.8/weather-applet.js:20645
+msgid "Your script has been executed successfully."
+msgstr ""
+
+#: 3.8/weather-applet.js:20648
+msgid "Error Running Script"
+msgstr ""
+
+#: 3.8/weather-applet.js:20648
+msgid "Script returned error, see logs for more information"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Yahoo"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Open-Meteo"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Met Office UK (UK only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "US National Weather (US only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Swiss Météo (Switzerland only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap OneCall (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "AccuWeather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
+msgstr ""
