@@ -1,5 +1,8 @@
+### v7.2.1~20241018
+  * Some improvements to fix #6504.
+
 ### v7.2.0~20241017
-  * Fixes #6504. (Enhancements are planed.)
+  * Fixes #6504. (Improvements are planed.)
 
 ### v7.1.1~20241016
   * Avoids loud cracking sound at shutdown.
