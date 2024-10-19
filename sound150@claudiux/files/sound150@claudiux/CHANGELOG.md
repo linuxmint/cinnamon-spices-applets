@@ -1,3 +1,6 @@
+### v7.2.2~20241019
+  * Minor bug fix.
+
 ### v7.2.1~20241018
   * Some improvements to fix #6504.
 

@@ -26,6 +26,7 @@ OLDTITLE=""
 [[ -f ${OLDTITLEFILE} ]] && OLDTITLE=$( cat ${OLDTITLEFILE} )
 rm -f ${OLDTITLEFILE}
 echo -n "${TITLE}" > ${OLDTITLEFILE}
+[[ -z ${TITLE} && -d $ARTDIR ]] && rm -f $ARTDIR/*
 
 XESAM_URL=$(playerctl -a metadata "xesam:url")
 MPRIS_ARTURL=$(playerctl -a metadata "mpris:artUrl" > /dev/null 2>&1 || echo -n "")
