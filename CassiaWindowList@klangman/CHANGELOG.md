@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.6
+
+* Added context menu options to close all/other windows for the buttons application (when button is not grouped)
+
 ## 2.3.5
 
 * Fix for the "number bubble" showing up incorrectly after changing the UI scale settings in display setting application.
