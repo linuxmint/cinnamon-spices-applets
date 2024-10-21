@@ -178,17 +178,43 @@ The setting allows you to make the applet display basically anything in the form
 | `{pressure_unit}` | Pressure unit                                             |
 | `{extra_value}`   | API specific value (usually "Feels Like" or "Cloudiness") |
 | `{extra_name}`    | API specific value's name                                 |
-| `{wind_speed}`    | Wind speed with unit                                      |
-| `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
 | `{city}`          | City name shown in the popup                              |
 | `{country}`       | Country name shown in the popup                           |
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
 | `{last_updated}`  | Formatted last updated time                               |
-| `{br}`            | Line Break		                                            |
+| `{wind_speed}`    | Wind speed                                                |
+| `{wind_unit}`     | Wind speed unit                                           |
+| `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
+| `{wind_arrow}`    | Wind direction as text arrow (↘, etc)                     |
+| `{wind_deg}`      | Wind direction as degree value                            |
+| `{sunrise}`       | Sunrise time                                              |
+| `{sunset}`        | Sunset time                                               |
+| `{day_length}`    | Daylight length in hours and minutes                      |
+| `{day_remain}`    | Daylight remaining in hours and minutes ("" after dark)   |
+| `{day_rem_pct}`   | Daylight remaining as percentage ("0" after dark)         |
+| `{day_len_rem}`   | Day length and daylight remaining (or day length)         |
+| `{min}`           | Minimum temperature                                       |
+| `{max}`           | Maximum temperature                                       |
+| `{tmr_min}`       | Tomorrow's min temperature                                |
+| `{tmr_max}`       | Tomorrow's max temperature                                |
+| `{tmr_min_diff}`  | Tomorrow's min temperature difference from today          |
+| `{tmr_max_diff}`  | Tomorrow's max temperature difference from today          |
+| `{tmr_t}`         | Tomorrow's min and max temperatures                       |
+| `{tmr_td}`        | Tomorrow's min and max temperatures with differences      |
+| `{tmr_c}`         | Tomorrow's short condition text                           |
+| `{t_h}`           | Temperature in next 1-2 hours                             |
+| `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |
+| `{br}`            | Line Break                                                |
+
+Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 4 padded left, humidity: 3 padded left, pressure: 7 padded left; all using spaces).
+
+Multiline example for panel: `{c} {t}{u}{t_h_diff}{br}{wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
+
+Multiline example for tooltip - extra spaces fix rounded tooltips: `          {city} {country}, Last updated {last_updated}          {br}Min / Max: {min} / {max} {u}{br}Tomorrow: {tmr_t} {br}Day Length: {day_length} ({day_rem_pct}%)`
 
 ## Run script when the weather data changes
 
-"Run a script when the weather info changes" field will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get `{full_data}` which is the full current weather data. Interpolation with single brackets `{xxx}` will not be escaped, with double brackets `{{xxxx}}` they are wrapped in single quotes `'` and all other single quotes are escaped inside. You can use this to integrate the weather data with other parts of your system.
+"Run a script when the weather info changes" field will run the command you provide every time the weather data is updated. The command will be interpolated with the same values with the same format you can get in any of the overrides, in addition you get `{full_data}` which is the full current weather data. Interpolation with single brackets `{xxx}` will not be escaped, with double brackets `{{xxxx}}` they are wrapped in single quotes `'` and all other single quotes are escaped inside. Padding and padding defaults can be included with triple brackets `{{{xxx}}}`.  You can use this to integrate the weather data with other parts of your system.
 
 ### Examples
 
@@ -200,7 +226,17 @@ The setting allows you to make the applet display basically anything in the form
 
 ## Future Plans
 
-* Add special formatting options (like padded temperature) for values in panel in the "Override label on panel" setting 
+# Custom Overrides
+
+* Add presets.
+
+* Add more tags for changes in values.
+
+* Add support for minutely forecasts.
+
+* Add ability to specify number of decimal places in values, e.g., `{t_h_diff,4. .1}` for 1 decimal place, left-padded with spaces to width of 4
+
+* Make tags that (or a way to) default to '' when no upcoming forecast changes in value to save panel space.
 
 ## Language Translations
 
