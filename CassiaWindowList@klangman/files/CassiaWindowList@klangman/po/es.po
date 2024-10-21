@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-20 09:59-0400\n"
-"PO-Revision-Date: 2024-07-18 23:50-0400\n"
+"PO-Revision-Date: 2024-10-21 15:32-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -220,18 +220,16 @@ msgid "Close others"
 msgstr "Cerrar otros"
 
 #. 4.0/applet.js:3649 6.0/applet.js:3649
-#, fuzzy
 msgid "Close other windows for application"
-msgstr "Mostrar miniaturas de todas las ventanas de un grupo de aplicaciones"
+msgstr "Cerrar otras ventanas para la aplicación"
 
 #. 4.0/applet.js:3670 6.0/applet.js:3670
 msgid "Close all"
 msgstr "Cerrar todo"
 
 #. 4.0/applet.js:3672 6.0/applet.js:3672
-#, fuzzy
 msgid "Close all windows for application"
-msgstr "Mostrar miniaturas de todas las ventanas de un grupo de aplicaciones"
+msgstr "Cerrar todas las ventanas para la aplicación"
 
 #. 4.0/applet.js:3688 6.0/applet.js:3688
 msgid "Close"
