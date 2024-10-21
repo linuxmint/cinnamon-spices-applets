@@ -4,8 +4,10 @@
 rm -f /tmp/*.mediaplayer-cover
 #~ rm -f /tmp/audacious-temp-*
 
-ARTDIR="$HOME/.config/sound150/arts"
+ARTDIR="$XDG_RUNTIME_DIR/sound150/arts"
 [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
+[[ -f "$XDG_RUNTIME_DIR/sound150/Title" ]] && rm -f "$XDG_RUNTIME_DIR/sound150/Title"
+
 
 SCRIPTSPWD=$(pwd)
 VLCARTDIR="$HOME/.cache/vlc/art/arturl"
