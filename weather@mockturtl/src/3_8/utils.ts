@@ -63,11 +63,19 @@ export function GenerateLocationText(weather: WeatherData, config: Config): stri
 	return location;
 }
 
+interface TagOptions {
+	value: string; // Ensure value is always a string
+	padLength?: number; // Optional padding length
+	padLeft?: boolean; // Optional flag for left or right padding
+	padChar?: string; // Optional character for padding
+}
+
 export function InjectValues(text: string, weather: WeatherData, config: Config, inCommand: boolean = false): string {
 	const { date, temperature, condition, dewPoint, humidity, pressure, wind, location, forecasts, hourlyForecasts, sunrise, sunset, extra_field } = weather;
 	const { _show24Hours, TemperatureUnit, _pressureUnit, WindSpeedUnit, CurrentLocation } = config;
 
-	const lastUpdatedTime = AwareDateString(date, _show24Hours, DateTime.local().zoneName);
+	const currentZone = DateTime.local().zoneName;
+	const lastUpdatedTime = AwareDateString(date, _show24Hours, currentZone);
 	const temp = TempToUserConfig(temperature, config, false) ?? "";
 	const tempUnit = UnitToUnicode(TemperatureUnit);
 	const conditionMain = condition.main;
@@ -89,8 +97,8 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const tmr = forecasts?.[1] ?? null;
 	const forecastHours = hourlyForecasts?.[2] ? hourlyForecasts : null;
 	const forecastHour = forecastHours?.[2] ?? null;
-	const tempHourDiff = (temperature != null && forecastHour?.temp != null) ? ValueChange(Number(TempToUserConfig(temperature, config, false)), Number(TempToUserConfig(forecastHour.temp, config, false)), 15) : "";
 	const tempHour = (forecastHour?.temp != null) ? TempToUserConfig(forecastHour.temp, config, false) ?? "" : "";
+	const tempHourDiff = (temperature != null && tempHour != null) ? ValueChange(Number(temp), Number(tempHour), config) : "";
 	const conditionTomorrow = tmr?.condition.main ?? "";
 	const tempMin = tmr ? TempToUserConfig(forecasts[0].temp_min, config, false) ?? "" : "";
 	const tempMax = tmr ? TempToUserConfig(forecasts[0].temp_max, config, false) ?? "" : "";
@@ -102,82 +110,96 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
 
 	// Sunrise and sunset calculations
-	const sunsetTime = sunset ? GetHoursMinutes(sunset, _show24Hours) : "";
-	const sunriseTime = sunrise ? GetHoursMinutes(sunrise, _show24Hours) : "";
-	const dayLength = sunset && sunrise ? ToHoursMinutes(Number(sunset) - Number(sunrise)) : "";
-	const now = DateTime.now().toJSDate();
-	const daylightRemain = (sunrise && sunset && now >= sunrise.toJSDate() && now <= sunset.toJSDate()) ? ToHoursMinutes(sunset.toJSDate().valueOf() - now.valueOf()) : "";
-	const daylightRemainPct = (sunrise && sunset && now >= sunrise.toJSDate() && now <= sunset.toJSDate()) ? Math.round((sunset.toJSDate().valueOf() - now.valueOf()) * 100 / (sunset.toJSDate().valueOf() - sunrise.toJSDate().valueOf())).toString()	: "0";
+	const sunriseTime = sunrise ? GetHoursMinutes(sunrise, _show24Hours) ?? "" : "";
+	const sunsetTime = sunset ? GetHoursMinutes(sunset, _show24Hours) ?? "" : "";
+	const dayLengthVal = sunset && sunrise ? sunset.diff(sunrise) : "";
+	const dayLength = dayLengthVal ? dayLengthVal.toFormat("h:mm") : "";
+	const timeNow = DateTime.utc().setZone(currentZone);
+
+	const daylightRemainVal = sunrise && sunset ? sunset.diff(timeNow) : null;
+	const isDaylight = sunrise && sunset ? timeNow.toJSDate() >= sunrise.toJSDate() && timeNow.toJSDate() <= sunset.toJSDate() : null;
+	const daylightRemain = isDaylight && daylightRemainVal ? daylightRemainVal.toFormat("h:mm") : "";
+	const daylightRemainPct = sunrise && sunset && isDaylight
+		? Math.round((sunset.toJSDate().valueOf() - timeNow.valueOf()) * 100 / (sunset.toJSDate().valueOf() - sunrise.toJSDate().valueOf())).toString()
+		: "0";
 	const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
 
 	// Define values and their defaults for padding and formatting
-	const valuesPaddingDefaults: [string, string, number?, boolean?, string?][] = [
-		['t', temp, 4, true],
-		['u', tempUnit],
-		['c', conditionMain],
-		['c_long', conditionDescription],
-		['dew_point', dewPointVal],
-		['humidity', humidityVal, 3],
-		['pressure', pressureVal, 7],
-		['pressure_unit', _pressureUnit],
-		['extra_value', extraValue],
-		['extra_name', extraName],
-		['city', city],
-		['country', country],
-		['search_entry', searchEntry],
-		['last_updated', lastUpdatedTime],
-		['wind_speed', windSpeed],
-		['wind_dir', windDir],
-		['wind_arrow', windArrow],
-		['wind_deg', windDegree],
-		['wind_unit', WindSpeedUnit],
-		['min', tempMin],
-		['max', tempMax],
-		['tmr_min', tempMinTomorrow],
-		['tmr_max', tempMaxTomorrow],
-		['tmr_min_diff', tmrMinTempChange],
-		['tmr_max_diff', tmrMaxTempChange],
-		['tmr_c', conditionTomorrow],
-		['tmr_t', tempsTomorrow],
-		['tmr_td', tempsTomorrowWithDifferences],
-		['sunset', sunsetTime],
-		['sunrise', sunriseTime],
-		['day_length', dayLength],
-		['day_remain', daylightRemain],
-		['day_len_rem', dayLengthLightRemain],
-		['day_rem_pct', daylightRemainPct],
-		['t_h', tempHour],
-		['t_h_diff', tempHourDiff],
-		['br', "\n"]
-	];
+	const valuesPaddingDefaults: Record<string, TagOptions> = {
+		t: { value: temp.toString(), padLength: 3, padLeft: true, padChar: ' ' },
+		u: { value: tempUnit.toString() },
+		c: { value: conditionMain.toString() },
+		c_long: { value: conditionDescription.toString() },
+		dew_point: { value: dewPointVal.toString() },
+		humidity: { value: humidityVal.toString(), padLength: 3 },
+		pressure: { value: pressureVal.toString(), padLength: 7 },
+		pressure_unit: { value: _pressureUnit.toString() },
+		extra_value: { value: extraValue.toString() },
+		extra_name: { value: extraName.toString() },
+		city: { value: city.toString() },
+		country: { value: country.toString() },
+		search_entry: { value: searchEntry.toString() },
+		last_updated: { value: lastUpdatedTime.toString() },
+		wind_speed: { value: windSpeed.toString() },
+		wind_dir: { value: windDir.toString() },
+		wind_arrow: { value: windArrow.toString() },
+		wind_deg: { value: windDegree.toString() },
+		wind_unit: { value: WindSpeedUnit.toString() },
+		min: { value: tempMin.toString() },
+		max: { value: tempMax.toString() },
+		tmr_min: { value: tempMinTomorrow.toString() },
+		tmr_max: { value: tempMaxTomorrow.toString() },
+		tmr_min_diff: { value: tmrMinTempChange.toString() },
+		tmr_max_diff: { value: tmrMaxTempChange.toString() },
+		tmr_c: { value: conditionTomorrow.toString() },
+		tmr_t: { value: tempsTomorrow.toString() },
+		tmr_td: { value: tempsTomorrowWithDifferences.toString() },
+		sunset: { value: sunsetTime.toString() },
+		sunrise: { value: sunriseTime.toString() },
+		day_length: { value: dayLength.toString() },
+		day_remain: { value: daylightRemain.toString() },
+		day_len_rem: { value: dayLengthLightRemain.toString() },
+		day_rem_pct: { value: daylightRemainPct.toString() },
+		t_h: { value: tempHour.toString() },
+		t_h_diff: { value: tempHourDiff.toString() },
+		br: { value: "\n" },
+	};
+
 	// Process text replacement for each tag
-	for (const [tagName, tagValue, padLength = 0, padLeft = true, padChar = ' '] of valuesPaddingDefaults) {
+	for (const tagName in valuesPaddingDefaults) {
+		const options = valuesPaddingDefaults[tagName];
+		const { value: tagValue, padLength = 0, padLeft = true, padChar = ' ' } = options;
+
 		if (tagName == null || tagValue == null) continue;
 
-		const regexp = new RegExp('(\\{{1,3})(\\b' + EscapeRegex(tagName) + '\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})', 'g');
-		let match;
+		const regexp = new RegExp(`(\\{{1,3})(\\b${EscapeRegex(tagName)}\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})`, 'g');
+		let match: RegExpExecArray | null;
+
 		while ((match = regexp.exec(text)) !== null) {
-			const literalStart = match[1];
-			const literalEnd = match[6];
-			const paddingSpecifier = match[3];
-			const paddingSize = match[4];
-			const padCharMatch = match[5]; // capture group for the padding character
+		const literalStart = match[1] || '';
+		const literalEnd = match[6] || '';
 
-			const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
-			const isLiteral = literalStart === "{{" && literalEnd === "}}";
-			const noPad = inCommand && !padLiteral;
-			const applyPadLeft = paddingSpecifier ? paddingSpecifier === ',' : padLeft;
-			const applyPad = paddingSize ? Number(paddingSize) : padLength;
-			const charPad = padCharMatch || padChar;
+		const paddingSpecifier = match[3] || undefined;
+		const paddingSize = match[4] || undefined;
+		const padCharMatch = match[5] || undefined;
 
-			let formattedValue = tagValue.toString();
-			if (!noPad) {
-				formattedValue = applyPadLeft ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
-			}
-			text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
+		const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
+		const isLiteral = literalStart === "{{" && literalEnd === "}}";
+		const noPad = inCommand && !padLiteral;
+
+		const applyPadLeft: boolean = (paddingSpecifier === ',' || (paddingSpecifier === undefined && padLeft));
+		const applyPad: number = paddingSize ? Number(paddingSize) : padLength;
+		const charPad: string = padCharMatch || padChar;
+
+		let formattedValue: string = tagValue; // tagValue is guaranteed to be a string
+
+		if (!noPad) {
+			formattedValue = applyPadLeft ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
+		}
+
+		text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
 		}
 	}
-
 	return text;
 }
 
@@ -602,20 +624,20 @@ export function CompassDirectionArrow(deg: number): string {
 export function SignedNumber(number: number): string {
 	return number < 0 ? number.toString() : '+' + number;
 }
-export function ToHoursMinutes(number: number): string {
-	const m = Math.floor(number / 1000 / 60);
-	return Math.floor(m / 60) + ":" + (m % 60).toString().padStart(2, '0');
-}
 export function EscapeRegex(string: string): string {
 	return string.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&');
 }
-export function ValueChange(temp1: number, temp2: number, large_percent?: number): string {
+export function ValueChange(temp1: number, temp2: number, config: Config, large_percent: number = 15): string {
 	const arrows = ['↡', '↓', '↔', '↑', '↟'];
-	const diff = Math.round(temp2 - temp1);
-	const drop = diff < 0;
-	const rise = diff > 0;
-	const large = Math.abs(diff * 100 / temp2) >= (large_percent || 15);
-	let index = 2;
+	const diff: number = Math.round((temp2 - temp1) * 10) / 10;
+	const absDiff: number = Math.abs(diff);
+	const drop: boolean = diff < 0;
+	const rise: boolean = diff > 0;
+
+	const percentageChange: number = (absDiff * 100 / Math.max(temp1, temp2));
+	const large: boolean = percentageChange >= large_percent;
+
+	let index: number;
 	if (drop && large) {
 		index = 0;
 	} else if (drop) {
@@ -627,8 +649,9 @@ export function ValueChange(temp1: number, temp2: number, large_percent?: number
 	} else {
 		index = 4;
 	}
-	return arrows[index] + Math.abs(diff);
-}
+  
+	return `${arrows[index]}${absDiff}`;
+  }
 // -----------------------------------------------------------------
 // Testers
 

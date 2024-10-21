@@ -208,7 +208,7 @@ The setting allows you to make the applet display basically anything in the form
 
 Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 4 padded left, humidity: 3 padded left, pressure: 7 padded left; all using spaces).
 
-Multiline example for panel: ` {c} {t}{u}{t_h_diff}{br} {wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
+Multiline example for panel: `{c} {t}{u}{t_h_diff}{br}{wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
 
 Multiline example for tooltip - extra spaces fix rounded tooltips: `          {city} {country}, Last updated {last_updated}          {br}Min / Max: {min} / {max} {u}{br}Tomorrow: {tmr_t} {br}Day Length: {day_length} ({day_rem_pct}%)`
 
