@@ -106,7 +106,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const tempMaxTomorrow = tmr ? TempToUserConfig(tmr.temp_max, config, false) ?? "" : "";
 	const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
 	const tmrMinTempChange = tempMinTomorrow && tempMin ? SignedNumber(Number(tempMinTomorrow) - Number(tempMin)) ?? "" : "";
-	const tmrMaxTempChange = tempMaxTomorrow && temp ? SignedNumber(Number(tempMaxTomorrow) - Number(tempMax)) ?? "" : "";
+	const tmrMaxTempChange = tempMaxTomorrow && tempMax ? SignedNumber(Number(tempMaxTomorrow) - Number(tempMax)) ?? "" : "";
 	const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
 
 	// Sunrise and sunset calculations
