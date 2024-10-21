@@ -8333,7 +8333,7 @@ function InjectValues(text, weather, config, inCommand = false) {
     const tempMinTomorrow = tmr ? (_r = TempToUserConfig(tmr.temp_min, config, false)) !== null && _r !== void 0 ? _r : "" : "";
     const tempMaxTomorrow = tmr ? (_s = TempToUserConfig(tmr.temp_max, config, false)) !== null && _s !== void 0 ? _s : "" : "";
     const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
-    const tmrMinTempChange = tempMinTomorrow && tempMax ? (_t = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _t !== void 0 ? _t : "" : "";
+    const tmrMinTempChange = tempMinTomorrow && tempMax ? (_t = SignedNumber(Number(tempMinTomorrow) - Number(tempMin))) !== null && _t !== void 0 ? _t : "" : "";
     const tmrMaxTempChange = tempMaxTomorrow && temp ? (_u = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _u !== void 0 ? _u : "" : "";
     const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
     const sunriseTime = sunrise ? (_v = GetHoursMinutes(sunrise, _show24Hours)) !== null && _v !== void 0 ? _v : "" : "";

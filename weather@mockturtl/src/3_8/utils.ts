@@ -105,7 +105,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const tempMinTomorrow = tmr ? TempToUserConfig(tmr.temp_min, config, false) ?? "" : "";
 	const tempMaxTomorrow = tmr ? TempToUserConfig(tmr.temp_max, config, false) ?? "" : "";
 	const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
-	const tmrMinTempChange = tempMinTomorrow && tempMax ? SignedNumber(Number(tempMinTomorrow) - Number(tempMax)) ?? "" : "";
+	const tmrMinTempChange = tempMinTomorrow && tempMax ? SignedNumber(Number(tempMinTomorrow) - Number(tempMin)) ?? "" : "";
 	const tmrMaxTempChange = tempMaxTomorrow && temp ? SignedNumber(Number(tempMaxTomorrow) - Number(tempMax)) ?? "" : "";
 	const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
 
