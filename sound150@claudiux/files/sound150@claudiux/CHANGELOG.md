@@ -1,3 +1,6 @@
+### v7.2.3~20241021
+  * Improvements to album art display.
+
 ### v7.2.2~20241019
   * Minor bug fix.
 
