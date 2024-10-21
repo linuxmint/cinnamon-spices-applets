@@ -1,0 +1,60 @@
+# Sensors@claudiux
+# Copyright (C) 2020 claudiux aka Claude Clerc
+# This file is distributed under the same license as the Sensors@claudiux package.
+# claudiux <claude.clerc@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.5.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-03 15:24+0200\n"
+"PO-Revision-Date: 2024-09-04 16:09+0200\n"
+"Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. settings-schema.json->vertical-align->options
+msgid "baseline"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "sub"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "super"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "middle"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "unset"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "inherit"
+msgstr ""

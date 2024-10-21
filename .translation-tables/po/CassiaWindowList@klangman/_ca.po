@@ -1,0 +1,14 @@
+# CASSIA WINDOW LIST
+# This file is put in the public domain.
+# klangman, 2023
+#
+msgid ""
+msgstr ""
+
+#. 4.0/applet.js:3649 6.0/applet.js:3649
+msgid "Close other windows for application"
+msgstr ""
+
+#. 4.0/applet.js:3672 6.0/applet.js:3672
+msgid "Close all windows for application"
+msgstr ""

@@ -1,0 +1,346 @@
+# AUTOMATIC DARK/LIGHT THEMES
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# guillaume-mueller, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-01 19:02-0400\n"
+"PO-Revision-Date: 2024-09-02 05:28+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:28
+msgid "Click: toggle dark/light mode"
+msgstr "Clic: alterna el mode fosc/clar"
+
+#. applet.js:29
+msgid "Middle-click: toggle automatic switch mode"
+msgstr "Clic del mig: alterna el mode de canvi automàtic"
+
+#. applet.js:335
+msgid "Today's automatic mode switch times:"
+msgstr "Hores de canvi de mode automàtic d'avui:"
+
+#. applet.js:336
+msgid "Light mode:"
+msgstr "Mode clar:"
+
+#. applet.js:337
+msgid "Dark mode:"
+msgstr "Mode fosc:"
+
+#. applet.js:376
+msgid "Error:"
+msgstr "Error:"
+
+#. applet.js:382
+msgid "Critical error:"
+msgstr "Error crític:"
+
+#. lib/twilights_calculator.js:24
+msgid "unable to calculate twilight times, check coordinates format or range"
+msgstr ""
+"no s'han pogut calcular les hores de crepuscle, reviseu el format o el rang "
+"de les coordenades"
+
+#. lib/time_change_listener/time_change_listener.js:27
+msgid ""
+"Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
+"system with `sudo apt install build-essential`, then reload the applet (in e."
+"g. in restarting Cinnamon)."
+msgstr ""
+"Falten les dependències `make` i `gcc`. Instal·leu-les, per exemple, en "
+"sistemes basats en Debian, amb `sudo apt install build-essential` i "
+"recarregueu la miniaplicació (per exemple, reiniciant Cinnamon)."
+
+#. metadata.json->name
+msgid "Automatic dark/light themes"
+msgstr "Temes fosc/clar automàtics"
+
+#. metadata.json->description
+msgid "Automatically switch between dark and light themes at twilight times."
+msgstr ""
+"Canvia de manera automàtica entre els temes fosc i clar en hores de "
+"crepuscle."
+
+#. settings-schema.json->settings->title
+msgid "Settings"
+msgstr "Opcions"
+
+#. settings-schema.json->light-mode->title
+msgid "Light mode"
+msgstr "Mode clar"
+
+#. settings-schema.json->dark-mode->title
+msgid "Dark mode"
+msgstr "Mode fosc"
+
+#. settings-schema.json->settings_state->title
+msgid "State"
+msgstr "Estat"
+
+#. settings-schema.json->settings_control->title
+msgid "Control"
+msgstr "Control"
+
+#. settings-schema.json->settings_location->title
+msgid "Location"
+msgstr "Ubicació"
+
+#. settings-schema.json->light-mode_themes->title
+#. settings-schema.json->dark-mode_themes->title
+msgid "Themes"
+msgstr "Temes"
+
+#. settings-schema.json->light-mode_other->title
+#. settings-schema.json->dark-mode_other->title
+msgid "Other"
+msgstr "Altres"
+
+#. settings-schema.json->light-mode_background->title
+#. settings-schema.json->dark-mode_background->title
+msgid "Desktop background"
+msgstr "Fons d'escriptori"
+
+#. settings-schema.json->settings_control_switch_auto-mode->description
+msgid "Automatically switch modes"
+msgstr "Canvia de mode automàticament"
+
+#. settings-schema.json->settings_control_switch_auto-mode->tooltip
+msgid ""
+"Automatically switch between light and dark modes based on the location and "
+"time of day"
+msgstr ""
+"Canvia de modes entre clar i fosc basat en la ubicació i l'hora del dia"
+
+#. settings-schema.json->settings_state_switch_dark-mode->description
+msgid "Light/dark mode"
+msgstr "Mode clar/fosc"
+
+#. settings-schema.json->settings_state_switch_dark-mode->tooltip
+msgid "Toggle light or dark mode manually"
+msgstr "Alterna el mode clar o fosc manualment"
+
+#. settings-schema.json->settings_location_switch_sync-from-
+#. timezone->description
+msgid "Sync from the system"
+msgstr "Sincronitza des del sistema"
+
+#. settings-schema.json->settings_location_switch_sync-from-timezone->tooltip
+msgid ""
+"Dynamically sync the location coordinates from the region and city defined "
+"in the system using a local database"
+msgstr ""
+"Sincronitza de manera dinàmica les coordenades d'ubicació de la regió i "
+"ciutat definides al sistema utilitzant una base de dades local"
+
+#. settings-schema.json->settings_location_button_open-os-
+#. settings->description
+#. settings-schema.json->light-mode_themes_button_open-os-
+#. settings->description
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->description
+#. settings-schema.json->dark-mode_themes_button_open-os-settings->description
+#. settings-schema.json->dark-mode_background_button_open-os-
+#. settings->description
+msgid "Open the system settings"
+msgstr "Obre la configuració del sistema"
+
+#. settings-schema.json->settings_location_button_open-os-settings->tooltip
+msgid ""
+"Open the system's settings window to select the region and city for the time "
+"zone"
+msgstr ""
+"Obre la finestra de la configuració del sistema per seleccionar regió i "
+"ciutat per la zona horària"
+
+#. settings-schema.json->settings_location_entry_latitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->settings_location_entry_latitude->tooltip
+msgid "Geographical latitude in decimal degrees"
+msgstr "Latitud geogràfica en graus decimals"
+
+#. settings-schema.json->settings_location_entry_longitude->description
+msgid "Longitude"
+msgstr "Longitud"
+
+#. settings-schema.json->settings_location_entry_longitude->tooltip
+msgid "Geographical longitude in decimal degrees"
+msgstr "Longitud geogràfica en graus decimals"
+
+#. settings-schema.json->settings_location_button_show-twilight-
+#. times->description
+msgid "Check today's switch times in a notification"
+msgstr "Revisa els horaris de canvi d'avui en una notificació"
+
+#. settings-schema.json->settings_location_button_show-twilight-times->tooltip
+msgid ""
+"Show today's switch times for light and dark modes based on the current "
+"location via a system notification message"
+msgstr ""
+"Mostra els horaris de canvi d'avui entre els modes clar i fosc basats en la "
+"ubicació actual mitjançant un missatge de notificació del sistema"
+
+#. settings-schema.json->light-mode_themes_button_open-os-settings->tooltip
+#. settings-schema.json->dark-mode_themes_button_open-os-settings->tooltip
+msgid "Open the system's settings window to select the themes"
+msgstr ""
+"Obre la finestra de configuració del sistema per a seleccionar els temes"
+
+#. settings-schema.json->light-mode_themes_button_detect->description
+#. settings-schema.json->light-mode_background_button_detect->description
+#. settings-schema.json->dark-mode_themes_button_detect->description
+#. settings-schema.json->dark-mode_background_button_detect->description
+msgid "Detect from the system"
+msgstr "Detecta des del sistema"
+
+#. settings-schema.json->light-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the light mode"
+msgstr "Detecta els temes actius del sistema i els assigna al mode clar"
+
+#. settings-schema.json->light-mode_themes_entry_mouse-pointer->description
+#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->description
+msgid "Mouse pointer"
+msgstr "Cursor del ratolí"
+
+#. settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
+#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
+msgid "Name of the mouse pointer theme"
+msgstr "Nom del tema del cursor del ratolí"
+
+#. settings-schema.json->light-mode_themes_entry_applications->description
+#. settings-schema.json->dark-mode_themes_entry_applications->description
+msgid "Applications"
+msgstr "Aplicacions"
+
+#. settings-schema.json->light-mode_themes_entry_applications->tooltip
+#. settings-schema.json->dark-mode_themes_entry_applications->tooltip
+msgid "Name of the applications theme (GTK theme)"
+msgstr "Nom del tema d'aplicacions (tema GTK)"
+
+#. settings-schema.json->light-mode_themes_entry_icons->description
+#. settings-schema.json->dark-mode_themes_entry_icons->description
+msgid "Icons"
+msgstr "Icones"
+
+#. settings-schema.json->light-mode_themes_entry_icons->tooltip
+#. settings-schema.json->dark-mode_themes_entry_icons->tooltip
+msgid "Name of the icons theme"
+msgstr "Nom del tema d'icones"
+
+#. settings-schema.json->light-mode_themes_entry_desktop->description
+#. settings-schema.json->dark-mode_themes_entry_desktop->description
+msgid "Desktop"
+msgstr "Escriptori"
+
+#. settings-schema.json->light-mode_themes_entry_desktop->tooltip
+#. settings-schema.json->dark-mode_themes_entry_desktop->tooltip
+msgid "Name of the desktop theme (Cinnamon theme)"
+msgstr "Nom del tema de l'escriptori (tema Cinnamon)"
+
+#. settings-schema.json->light-mode_themes_button_apply->description
+#. settings-schema.json->light-mode_background_button_apply->description
+#. settings-schema.json->dark-mode_themes_button_apply->description
+#. settings-schema.json->dark-mode_background_button_apply->description
+msgid "Apply to the system"
+msgstr "Aplica al sistema"
+
+#. settings-schema.json->light-mode_themes_button_apply->tooltip
+msgid "Apply the light mode themes to the system manually"
+msgstr "Aplica els temes clars al sistema manualment"
+
+#. settings-schema.json->both-modes_background_switch_enable->description
+msgid "Set desktop background"
+msgstr "Establir fons d'escriptori"
+
+#. settings-schema.json->both-modes_background_switch_enable->tooltip
+msgid "Set desktop background for light and dark modes"
+msgstr "Estableix el fons d'escriptori per als modes clar i fosc"
+
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->tooltip
+#. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
+msgid "Open the system's settings window to set the background settings"
+msgstr ""
+"Obre la finestra de configuració del sistema per establir les opcions del "
+"fons d'escriptori"
+
+#. settings-schema.json->light-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"light mode"
+msgstr ""
+"Detecta els paràmetres establerts sobre el fons d'escriptori i els assigna "
+"al mode clar"
+
+#. settings-schema.json->light-mode_background_switch_slideshow->description
+#. settings-schema.json->dark-mode_background_switch_slideshow->description
+msgid "Slideshow"
+msgstr "Presentació"
+
+#. settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+msgid "Set the desktop background to be a slideshow"
+msgstr "Estableix el fons de l'escriptori com una presentació"
+
+#. settings-schema.json->light-mode_background_filechooser_file->description
+#. settings-schema.json->dark-mode_background_filechooser_file->description
+msgid "Image file"
+msgstr "Fitxer d'imatge"
+
+#. settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_file->tooltip
+msgid "Image file to be set as the desktop background"
+msgstr "Fitxer d'imatge a establir com a fons de l'escriptori"
+
+#. settings-schema.json->light-mode_background_filechooser_folder->description
+#. settings-schema.json->dark-mode_background_filechooser_folder->description
+msgid "Images folder"
+msgstr "Carpeta d'imatges"
+
+#. settings-schema.json->light-mode_background_filechooser_folder->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+msgid "Folder containing images to be set for the desktop background slideshow"
+msgstr ""
+"Carpeta contenidora de les imatges a utilitzar per a la presentació dels "
+"fons d'escriptori"
+
+#. settings-schema.json->light-mode_background_button_apply->tooltip
+msgid "Apply the light mode background settings to the system manually"
+msgstr ""
+"Aplica la configuració dels fons d'escriptori clars al sistema manualment"
+
+#. settings-schema.json->dark-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the dark mode"
+msgstr "Detecta els temes actius del sistema i els assigna al mode fosc"
+
+#. settings-schema.json->dark-mode_themes_button_apply->tooltip
+msgid "Apply the dark mode themes to the system manually"
+msgstr "Aplica els temes foscos al sistema manualment"
+
+#. settings-schema.json->dark-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"dark mode"
+msgstr ""
+"Detecta els paràmetres establerts sobre el fons d'escriptori i els assigna "
+"al mode fosc"
+
+#. settings-schema.json->dark-mode_background_button_apply->tooltip
+msgid "Apply the dark mode background settings to the system manually"
+msgstr ""
+"Aplica la configuració dels fons d'escriptori foscos al sistema manualment"
