@@ -16,8 +16,9 @@
             "title": "Light mode",
             "sections": [
                 "light-mode_themes",
-                "light-mode_other",
-                "light-mode_background"
+                "light-mode_others",
+                "light-mode_background",
+                "light-mode_commands"
             ]
         },
         "dark-mode": {
@@ -25,8 +26,9 @@
             "title": "Dark mode",
             "sections": [
                 "dark-mode_themes",
-                "dark-mode_other",
-                "dark-mode_background"
+                "dark-mode_others",
+                "dark-mode_background",
+                "dark-mode_commands"
             ]
         },
 
@@ -65,10 +67,13 @@
                 "light-mode_themes_button_apply"
             ]
         },
-        "light-mode_other": {
+        "light-mode_others": {
             "type": "section",
-            "title": "Other",
-            "keys": ["both-modes_background_switch_enable"]
+            "title": "Others",
+            "keys": [
+                "both-modes_background_switch_enable",
+                "light-mode_commands_switch_enable"
+            ]
         },
         "light-mode_background": {
             "dependency": "both-modes_background_switch_enable=true",
@@ -81,6 +86,15 @@
                 "light-mode_background_filechooser_file",
                 "light-mode_background_filechooser_folder",
                 "light-mode_background_button_apply"
+            ]
+        },
+        "light-mode_commands": {
+            "dependency": "light-mode_commands_switch_enable=true",
+            "type": "section",
+            "title": "Custom commands",
+            "keys": [
+                "light-mode_commands_list",
+                "light-mode_commands_button_launch"
             ]
         },
         "dark-mode_themes": {
@@ -96,10 +110,13 @@
                 "dark-mode_themes_button_apply"
             ]
         },
-        "dark-mode_other": {
+        "dark-mode_others": {
             "type": "section",
-            "title": "Other",
-            "keys": ["both-modes_background_switch_enable"]
+            "title": "Others",
+            "keys": [
+                "both-modes_background_switch_enable",
+                "dark-mode_commands_switch_enable"
+            ]
         },
         "dark-mode_background": {
             "dependency": "both-modes_background_switch_enable=true",
@@ -112,6 +129,15 @@
                 "dark-mode_background_filechooser_file",
                 "dark-mode_background_filechooser_folder",
                 "dark-mode_background_button_apply"
+            ]
+        },
+        "dark-mode_commands": {
+            "dependency": "dark-mode_commands_switch_enable=true",
+            "type": "section",
+            "title": "Custom commands",
+            "keys": [
+                "dark-mode_commands_list",
+                "dark-mode_commands_button_launch"
             ]
         }
     },
@@ -211,7 +237,13 @@
         "type": "switch",
         "default": false,
         "description": "Set desktop background",
-        "tooltip": "Set desktop background for light and dark modes"
+        "tooltip": "Enable setting the desktop backgrounds for light and dark modes"
+    },
+    "light-mode_commands_switch_enable": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch custom commands",
+        "tooltip": "Enable setting commands to be launched when switching to light mode"
     },
     "light-mode_background_button_open-os-settings": {
         "type": "button",
@@ -251,6 +283,23 @@
         "callback": "on_button_apply_background_light",
         "description": "Apply to the system",
         "tooltip": "Apply the light mode background settings to the system manually"
+    },
+    "light-mode_commands_list": {
+        "type" : "list",
+        "columns" : [
+            {"id": "name", "title": "Name", "type": "string", "default": "unnamed"},
+            {"id": "active", "title": "Active", "type": "boolean", "defaut": true},
+            {"id": "expiry", "title": "Expiry (s)", "type": "integer", "align": 1, "default": 10, "min": 0, "max": 1000},
+            {"id": "command", "title": "Command", "type": "string"}
+        ],
+        "default" : [],
+        "tooltip" : "List of commands to be executed when switching to this mode\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time kills the command's process\n- an expiry of 0 seconds means never\n- any child process won't be able to expire\n- the path is in the ~ directory\n- the error messages reports stderr when the return status is not 0 and will appear in a notification"
+    },
+    "light-mode_commands_button_launch": {
+        "type": "button",
+        "callback": "on_button_launch_commands_light",
+        "description": "Launch commands",
+        "tooltip": "Launch the commands set for the light mode"
     },
     "dark-mode_themes_button_open-os-settings": {
         "type": "button",
@@ -294,6 +343,12 @@
         "description": "Apply to the system",
         "tooltip": "Apply the dark mode themes to the system manually"
     },
+    "dark-mode_commands_switch_enable": {
+        "type": "switch",
+        "default": false,
+        "description": "Launch custom commands",
+        "tooltip": "Enable setting commands to be launched when switching to dark mode"
+    },
     "dark-mode_background_button_open-os-settings": {
         "type": "button",
         "callback": "on_button_open_os_background_settings",
@@ -332,6 +387,23 @@
         "callback": "on_button_apply_background_dark",
         "description": "Apply to the system",
         "tooltip": "Apply the dark mode background settings to the system manually"
+    },
+    "dark-mode_commands_list": {
+        "type" : "list",
+        "columns" : [
+            {"id": "name", "title": "Name", "type": "string", "default": "unnamed"},
+            {"id": "active", "title": "Active", "type": "boolean", "defaut": true},
+            {"id": "expiry", "title": "Expiry (s)", "type": "integer", "align": 1, "default": 10, "min": 0, "max": 1000},
+            {"id": "command", "title": "Command", "type": "string"}
+        ],
+        "default" : [],
+        "tooltip" : "List of commands to be executed when switching to this mode\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time kills the command's process\n- an expiry of 0 seconds means never\n- any child process won't be able to expire\n- the path is in the ~ directory\n- the error messages reports stderr when the return status is not 0 and will appear in a notification"
+    },
+    "dark-mode_commands_button_launch": {
+        "type": "button",
+        "callback": "on_button_launch_commands_dark",
+        "description": "Launch commands",
+        "tooltip": "Launch the commands set for the dark mode"
     },
 
     "has-detected-themes-light": {

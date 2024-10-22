@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: auto-dark-light@gihaume 1.1.0\n"
+"Project-Id-Version: auto-dark-light@gihaume 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-01 19:02-0400\n"
+"POT-Creation-Date: 2024-10-22 07:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,32 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:28
+#. applet.js:33
 msgid "Click: toggle dark/light mode"
 msgstr ""
 
-#. applet.js:29
+#. applet.js:34
 msgid "Middle-click: toggle automatic switch mode"
 msgstr ""
 
-#. applet.js:335
-msgid "Today's automatic mode switch times:"
+#. applet.js:366
+msgid "Today's automatic mode switch times"
 msgstr ""
 
-#. applet.js:336
-msgid "Light mode:"
+#. applet.js:366 applet.js:367 applet.js:368 applet.js:411 applet.js:417
+#. lib/commands_launcher.js:30 lib/commands_launcher.js:37
+#. lib/commands_launcher.js:39
+msgid ":"
 msgstr ""
 
-#. applet.js:337
-msgid "Dark mode:"
+#. settings-schema.json->light-mode->title
+#. applet.js:367
+msgid "Light mode"
 msgstr ""
 
-#. applet.js:376
-msgid "Error:"
+#. settings-schema.json->dark-mode->title
+#. applet.js:368
+msgid "Dark mode"
 msgstr ""
 
-#. applet.js:382
-msgid "Critical error:"
+#. applet.js:411
+msgid "Error"
+msgstr ""
+
+#. applet.js:417
+msgid "Critical error"
+msgstr ""
+
+#. lib/commands_launcher.js:28
+msgid "the command"
+msgstr ""
+
+#. lib/commands_launcher.js:28
+msgid "failed"
+msgstr ""
+
+#. lib/commands_launcher.js:30
+msgid "due to a wrong format"
+msgstr ""
+
+#. lib/commands_launcher.js:34
+msgid "due to time expiration"
+msgstr ""
+
+#. lib/commands_launcher.js:37
+msgid "with the following errors"
 msgstr ""
 
 #. lib/twilights_calculator.js:24
@@ -68,14 +96,6 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. settings-schema.json->light-mode->title
-msgid "Light mode"
-msgstr ""
-
-#. settings-schema.json->dark-mode->title
-msgid "Dark mode"
-msgstr ""
-
 #. settings-schema.json->settings_state->title
 msgid "State"
 msgstr ""
@@ -93,14 +113,19 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#. settings-schema.json->light-mode_other->title
-#. settings-schema.json->dark-mode_other->title
-msgid "Other"
+#. settings-schema.json->light-mode_others->title
+#. settings-schema.json->dark-mode_others->title
+msgid "Others"
 msgstr ""
 
 #. settings-schema.json->light-mode_background->title
 #. settings-schema.json->dark-mode_background->title
 msgid "Desktop background"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands->title
+#. settings-schema.json->dark-mode_commands->title
+msgid "Custom commands"
 msgstr ""
 
 #. settings-schema.json->settings_control_switch_auto-mode->description
@@ -250,7 +275,16 @@ msgid "Set desktop background"
 msgstr ""
 
 #. settings-schema.json->both-modes_background_switch_enable->tooltip
-msgid "Set desktop background for light and dark modes"
+msgid "Enable setting the desktop backgrounds for light and dark modes"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_switch_enable->description
+#. settings-schema.json->dark-mode_commands_switch_enable->description
+msgid "Launch custom commands"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to light mode"
 msgstr ""
 
 #. settings-schema.json->light-mode_background_button_open-os-
@@ -299,6 +333,50 @@ msgstr ""
 msgid "Apply the light mode background settings to the system manually"
 msgstr ""
 
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Active"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Expiry (s)"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Command"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_list->tooltip
+#. settings-schema.json->dark-mode_commands_list->tooltip
+msgid ""
+"List of commands to be executed when switching to this mode\n"
+"\n"
+"Notes:\n"
+"- the name's purpose is for error messages\n"
+"- the expiry time kills the command's process\n"
+"- an expiry of 0 seconds means never\n"
+"- any child process won't be able to expire\n"
+"- the path is in the ~ directory\n"
+"- the error messages reports stderr when the return status is not 0 and will "
+"appear in a notification"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_button_launch->description
+#. settings-schema.json->dark-mode_commands_button_launch->description
+msgid "Launch commands"
+msgstr ""
+
+#. settings-schema.json->light-mode_commands_button_launch->tooltip
+msgid "Launch the commands set for the light mode"
+msgstr ""
+
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
 "Detect the system's themes currently set and assign them to the dark mode"
@@ -306,6 +384,10 @@ msgstr ""
 
 #. settings-schema.json->dark-mode_themes_button_apply->tooltip
 msgid "Apply the dark mode themes to the system manually"
+msgstr ""
+
+#. settings-schema.json->dark-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to dark mode"
 msgstr ""
 
 #. settings-schema.json->dark-mode_background_button_detect->tooltip
@@ -316,4 +398,8 @@ msgstr ""
 
 #. settings-schema.json->dark-mode_background_button_apply->tooltip
 msgid "Apply the dark mode background settings to the system manually"
+msgstr ""
+
+#. settings-schema.json->dark-mode_commands_button_launch->tooltip
+msgid "Launch the commands set for the dark mode"
 msgstr ""
