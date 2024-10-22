@@ -13,9 +13,7 @@ const IO = {
     }
 };
 
-/**
- * A `Cinnamon desktop` themes handler that detects and applies the themes.
- */
+/** A `Cinnamon desktop` themes handler that detects and applies the themes. */
 class Themes_handler {
     #color_scheme;
 
@@ -38,9 +36,7 @@ class Themes_handler {
         this.#color_scheme = is_dark ? 'prefer-dark' : 'prefer-light';
     }
 
-    /**
-     * Detects and save the current themes applied to Cinnamon desktop.
-     */
+    /** Detects and save the current themes applied to Cinnamon desktop. */
     detect() {
         this.mouse_pointer = IO.DESKTOP .get_string(IO.KEYS.MOUSE_POINTER);
         this.applications  = IO.DESKTOP .get_string(IO.KEYS.APPLICATIONS);
@@ -49,9 +45,7 @@ class Themes_handler {
         this.has_detected  = true;
     }
 
-    /**
-     * Applies the saved themes to Cinnamon desktop.
-     */
+    /** Applies the saved themes to Cinnamon desktop. */
     apply() {
         if (!this.has_detected)
             return;

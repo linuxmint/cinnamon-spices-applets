@@ -1,8 +1,6 @@
 const GLib = imports.gi.GLib;
 
-/**
- * A time handler in hour, minute and second and 24-hour format.
- */
+/** A time handler in hour, minute and second and 24-hour format. */
 class Time_of_day {
     #hour;
     #minute;
@@ -10,7 +8,7 @@ class Time_of_day {
 
     /**
      * @param {GLib.DateTime} date - The object to take the hour, minute and second from.
-     * `GLib.DateTime` type is chosen over `Date` to take into account timezone changes during runtime.
+     * @note `GLib.DateTime` type is chosen over `Date` to take into account timezone changes during runtime.
      */
     constructor(date) {
         this.#hour   = date.get_hour();
@@ -18,14 +16,10 @@ class Time_of_day {
         this.#second = date.get_second();
     }
 
-    /**
-     * @returns {Time_of_day} The current local time of day.
-     */
+    /** @returns {Time_of_day} The current local time of day. */
     static now() { return new Time_of_day(GLib.DateTime.new_now_local()); }
 
-    /**
-     * @returns {string} The time of day as a string in the format "(H)H:MM:SS".
-     */
+    /** @returns {string} The time of day as a string in the format "(H)H:MM:SS". */
     as_string() {
         const minute = String(this.#minute).padStart(2, '0'),
               second = String(this.#second).padStart(2, '0');

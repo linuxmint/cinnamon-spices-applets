@@ -10,9 +10,7 @@ const IO = {
     }
 };
 
-/**
- * A `Cinnamon desktop` background handler that detects and applies the background settings.
- */
+/** A `Cinnamon desktop` background handler that detects and applies the background settings. */
 class Background_handler {
     /**
     * @param {Settings.XletSettingsBase} settings - The settings of the desk/applet.
@@ -27,9 +25,7 @@ class Background_handler {
         settings.bindWithObject(this, keys.slideshow_folder, "slideshow_folder");
     }
 
-    /**
-     * Detects and save the current background settings applied to Cinnamon desktop.
-     */
+    /** Detects and save the current background settings applied to Cinnamon desktop. */
     detect() {
         this.is_slideshow     = IO.SLIDESHOW. get_boolean(IO.KEYS.IS_SLIDESHOW);
         this.background_file  = IO.BACKGROUND.get_string( IO.KEYS.BACKGROUND_FILE);
@@ -40,9 +36,7 @@ class Background_handler {
         this.slideshow_folder = IO.SLIDESHOW.get_string(IO.KEYS.SLIDESHOW_FOLDER).replace('directory://', "file://");
     }
 
-    /**
-     * Applies the saved background settings to Cinnamon desktop.
-     */
+    /** Applies the saved background settings to Cinnamon desktop. */
     apply() {
         IO.SLIDESHOW. set_boolean(IO.KEYS.IS_SLIDESHOW,     this.is_slideshow);
         IO.BACKGROUND.set_string( IO.KEYS.BACKGROUND_FILE,  this.background_file);

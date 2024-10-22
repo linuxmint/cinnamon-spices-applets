@@ -1,15 +1,16 @@
-const launch_command = require('./lib/launch_command.js');
+const launch_command = require('./lib/commands_launcher/launch_command.js');
 const { _ }          = require('./lib/translator.js');
 
 const {Gio, GLib} = imports.gi;
 
+/** A launcher for the commands of the settings list. */
 class Commands_launcher {
     #callback_for_errors;
 
     /**
      * @param {Settings.XletSettingsBase} settings - The settings of the desk/applet.
      * @param {object} key_of_list - The keys of the settings' commands list.
-     * @param {function(string): void} callback_for_errors - The callback with a message for when an error occurs.
+     * @param {function(string): void} callback_for_errors - The function to call with a message for when an error occurs.
      */
     constructor(settings, key_of_list, callback_for_errors) {
         settings.bindWithObject(this, key_of_list, "list");
@@ -19,13 +20,13 @@ class Commands_launcher {
     async launch_commands() {
         for (const item of this.list) {
             const { name, active, expiry, command } = item;
-
             if (!active)
                 continue;
 
             try { await launch_command(command, expiry); }
             catch (error) {
-                let msg = `${_("the command")} '${name}' ${_("failed")}`;
+                const name_for_error = name !== '' ? name : command;
+                let msg = `${_("the command")} '${name_for_error}' ${_("failed")}`;
                 if (error instanceof GLib.ShellError)
                     msg += ` ${_("due to a wrong format")}${_(":")} ${error.message}`;
                 else

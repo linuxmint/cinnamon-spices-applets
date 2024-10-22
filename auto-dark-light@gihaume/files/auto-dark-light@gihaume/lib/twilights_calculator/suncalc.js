@@ -31,9 +31,7 @@ SunCalc is a JavaScript library for calculating sun/moon position and light phas
 https://github.com/mourner/suncalc
 */
 
-/**
- * This version has been reduced by `gihaume` to contain only the used parts.
- */
+// This version has been reduced to contain only the useful parts for the `auto-dark-light` applet.
 
 (function () { 'use strict';
 

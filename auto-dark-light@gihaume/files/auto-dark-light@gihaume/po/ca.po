@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-22 07:37+0200\n"
+"POT-Creation-Date: 2024-10-22 19:07+0200\n"
 "PO-Revision-Date: 2024-10-22 07:41+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -27,61 +27,37 @@ msgstr "Clic: alterna el mode fosc/clar"
 msgid "Middle-click: toggle automatic switch mode"
 msgstr "Clic del mig: alterna el mode de canvi automàtic"
 
-#. applet.js:366
+#. applet.js:367
 msgid "Today's automatic mode switch times"
 msgstr "Hores de canvi de mode automàtic d'avui"
 
-#. applet.js:366 applet.js:367 applet.js:368 applet.js:411 applet.js:417
-#. lib/commands_launcher.js:30 lib/commands_launcher.js:37
-#. lib/commands_launcher.js:39
+#. applet.js:367 applet.js:368 applet.js:369 applet.js:412 applet.js:418
+#. lib/time_change_listener/time_change_listener.js:97
+#. lib/commands_launcher/commands_launcher.js:31
+#. lib/commands_launcher/commands_launcher.js:38
+#. lib/commands_launcher/commands_launcher.js:40
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->light-mode->title
-#. applet.js:367
+#. applet.js:368
 msgid "Light mode"
 msgstr "Mode clar"
 
 #. settings-schema.json->dark-mode->title
-#. applet.js:368
+#. applet.js:369
 msgid "Dark mode"
 msgstr "Mode fosc"
 
-#. applet.js:411
+#. applet.js:412
 msgid "Error"
 msgstr "Error"
 
-#. applet.js:417
+#. applet.js:418
 msgid "Critical error"
 msgstr "Error crític"
 
-#. lib/commands_launcher.js:28
-msgid "the command"
-msgstr ""
-
-#. lib/commands_launcher.js:28
-msgid "failed"
-msgstr ""
-
-#. lib/commands_launcher.js:30
-msgid "due to a wrong format"
-msgstr ""
-
-#. lib/commands_launcher.js:34
-msgid "due to time expiration"
-msgstr ""
-
-#. lib/commands_launcher.js:37
-msgid "with the following errors"
-msgstr ""
-
-#. lib/twilights_calculator.js:24
-msgid "unable to calculate twilight times, check coordinates format or range"
-msgstr ""
-"no s'han pogut calcular les hores de crepuscle, reviseu el format o el rang "
-"de les coordenades"
-
-#. lib/time_change_listener/time_change_listener.js:27
+#. lib/time_change_listener/time_change_listener.js:31
 msgid ""
 "Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
 "system with `sudo apt install build-essential`, then reload the applet (in e."
@@ -90,6 +66,45 @@ msgstr ""
 "Falten les dependències `make` i `gcc`. Instal·leu-les, per exemple, en "
 "sistemes basats en Debian, amb `sudo apt install build-essential` i "
 "recarregueu la miniaplicació (per exemple, reiniciant Cinnamon)."
+
+#. lib/time_change_listener/time_change_listener.js:44
+msgid "Compilation of"
+msgstr ""
+
+#. lib/time_change_listener/time_change_listener.js:44
+#. lib/commands_launcher/commands_launcher.js:29
+msgid "failed"
+msgstr ""
+
+#. lib/time_change_listener/time_change_listener.js:97
+msgid "the subprocess"
+msgstr ""
+
+#. lib/time_change_listener/time_change_listener.js:97
+msgid "wrote on its error output"
+msgstr ""
+
+#. lib/twilights_calculator/twilights_calculator.js:22
+msgid "unable to calculate twilight times, check coordinates format or range"
+msgstr ""
+"no s'han pogut calcular les hores de crepuscle, reviseu el format o el rang "
+"de les coordenades"
+
+#. lib/commands_launcher/commands_launcher.js:29
+msgid "the command"
+msgstr ""
+
+#. lib/commands_launcher/commands_launcher.js:31
+msgid "due to a wrong format"
+msgstr ""
+
+#. lib/commands_launcher/commands_launcher.js:35
+msgid "due to time expiration"
+msgstr ""
+
+#. lib/commands_launcher/commands_launcher.js:38
+msgid "with the following errors"
+msgstr ""
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"

@@ -288,7 +288,7 @@
         "type" : "list",
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "default": "unnamed"},
-            {"id": "active", "title": "Active", "type": "boolean", "defaut": true},
+            {"id": "active", "title": "Active", "type": "boolean", "default": true},
             {"id": "expiry", "title": "Expiry (s)", "type": "integer", "align": 1, "default": 10, "min": 0, "max": 1000},
             {"id": "command", "title": "Command", "type": "string"}
         ],
@@ -392,7 +392,7 @@
         "type" : "list",
         "columns" : [
             {"id": "name", "title": "Name", "type": "string", "default": "unnamed"},
-            {"id": "active", "title": "Active", "type": "boolean", "defaut": true},
+            {"id": "active", "title": "Active", "type": "boolean", "default": true},
             {"id": "expiry", "title": "Expiry (s)", "type": "integer", "align": 1, "default": 10, "min": 0, "max": 1000},
             {"id": "command", "title": "Command", "type": "string"}
         ],

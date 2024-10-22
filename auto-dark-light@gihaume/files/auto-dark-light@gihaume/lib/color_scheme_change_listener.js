@@ -1,8 +1,6 @@
 const Gio = imports.gi.Gio;
 
-/**
- * Listens for changes in the color scheme and calls the provided callback
- */
+/** Listens for changes in the color scheme and calls the provided callback */
 class Color_scheme_change_listener {
     #interface = Gio.Settings.new('org.x.apps.portal');
     #callback;
@@ -25,9 +23,7 @@ class Color_scheme_change_listener {
         }
     }
 
-    /**
-     * Declare the object as finished to release any ressource acquired.
-     */
+    /** Declare the object as finished to release any ressource acquired. */
     finalize() { this.disable(); }
 }
 
