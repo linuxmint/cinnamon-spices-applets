@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.5
+
+- Add more tags for overrides, including forecasts when available, details in README
+- Add left/right padding options and a pad fill option for tags in overrides
+- Add ability to programatically set overridable default padding options for tags in overrides, added 3 defaults
+
 ## 3.6.4
 
 - Add attribution to nominatim
