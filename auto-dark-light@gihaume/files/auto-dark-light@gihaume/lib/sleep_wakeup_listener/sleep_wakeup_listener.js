@@ -1,12 +1,10 @@
 const Dbus                = require('./lib/dbus.js');
-const Screen_lock_handler = require('./lib/screen_lock_handler.js');
+const Screen_lock_checker = require('./lib/sleep_wakeup_listener/screen_lock_checker.js');
 
-/**
- * A gatekeeper for the sleep combined with the screen locked on wakeup.
- */
+/** A gatekeeper for the sleep combined with the screen locked on wakeup. */
 class Sleep_wakeup_listener {
-    #sleep = new Dbus.Sleep();
-    #lock  = new Screen_lock_handler();
+    #sleep_dbus   = new Dbus.Sleep();
+    #lock_checker = new Screen_lock_checker();
     #on_sleep_entry_callback;
     #on_wakeup_unlocked_callback;
 
@@ -20,27 +18,25 @@ class Sleep_wakeup_listener {
     }
 
     enable() {
-        this.#sleep.subscribe_to_changes((is_sleeping) => {
+        this.#sleep_dbus.subscribe_to_changes((is_sleeping) => {
             if (is_sleeping)
                 this.#on_sleep_entry_callback();
             else
-                this.#lock.try_now_or_postpone_until_unlocked(
+                this.#lock_checker.try_now_or_postpone_until_unlocked(
                     this.#on_wakeup_unlocked_callback.bind(this)
                 );
         });
     }
 
     disable() {
-        this.#sleep.unsubscribe_to_changes();
-        this.#lock.cancel();
+        this.#sleep_dbus.unsubscribe_to_changes();
+        this.#lock_checker.cancel();
     }
 
-    /**
-     * Declare the object as finished to release any ressource acquired.
-     */
+    /** Declare the object as finished to release any ressource acquired. */
     finalize() {
-        this.#sleep.unsubscribe_to_changes();
-        this.#lock.finalize();
+        this.#sleep_dbus.unsubscribe_to_changes();
+        this.#lock_checker.finalize();
     }
 }
 

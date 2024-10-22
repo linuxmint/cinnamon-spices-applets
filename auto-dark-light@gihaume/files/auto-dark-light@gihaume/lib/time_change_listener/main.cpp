@@ -6,21 +6,24 @@
 #include <exception>
 
 int main(int argc, char* argv[]) {
-    std::vector<std::string> args{argv, argv + argc};
+    {
+        std::vector<std::string> args{argv, argv + argc};
 
-    if (std::find(args.begin(), args.end(), "--help") != args.end()) {
-        std::cout << "Usage: " << args[0] << '\n'
-                  << "Listens for system time changes and prints 'changed' to `stdout` each time it occurs.\n"
-                  << '\n'
-                  << "Commands via `stdin`:\n"
-                  << "  'enable': Enable listening for the system time changes.\n"
-                  << "  'disable': Disable listening for the system time changes.\n"
-                  << "  'exit': Exit the program.\n"
-                  << '\n'
-                  << "Options:\n"
-                  << "  --help: Display this help message.\n"
-                  << std::endl;
-        return 0;
+        if (std::find(args.begin(), args.end(), "--help") != args.end()) {
+            std::cout
+                << "Usage: " << args[0] << '\n'
+                << "Listens for system time changes and prints 'changed' to `stdout` each time it occurs.\n"
+                << '\n'
+                << "Commands via `stdin`:\n"
+                << "  'enable': Enable listening for the system time changes.\n"
+                << "  'disable': Disable listening for the system time changes.\n"
+                << "  'exit': Exit the program.\n"
+                << '\n'
+                << "Options:\n"
+                << "  --help: Display this help message.\n"
+                << std::endl;
+            return 0;
+        }
     }
 
     try {

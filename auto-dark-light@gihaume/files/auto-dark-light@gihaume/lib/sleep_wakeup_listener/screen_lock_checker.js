@@ -1,9 +1,7 @@
 const Dbus = require('./lib/dbus.js');
 
-/**
- * A gatekeeper for the screen locked state.
- */
-class Screen_lock_handler {
+/** A gatekeeper for the screen locked state. */
+class Screen_lock_checker {
     #lock = new Dbus.Screen_lock();
 
     /**
@@ -24,15 +22,11 @@ class Screen_lock_handler {
         });
     }
 
-    /**
-     * Cancel the `try_now_or_postpone` procedure.
-     */
+    /** Cancel the `try_now_or_postpone` procedure. */
     cancel() { this.#lock.unsubscribe_to_changes(); }
 
-    /**
-     * Declare the object as finished to release any ressource acquired.
-     */
+    /** Declare the object as finished to release any ressource acquired. */
     finalize() { this.cancel(); }
 }
 
-module.exports = Screen_lock_handler;
+module.exports = Screen_lock_checker;

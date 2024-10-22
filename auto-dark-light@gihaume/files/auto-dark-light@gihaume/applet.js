@@ -1,15 +1,15 @@
 const Themes_handler               = require('./lib/themes_handler.js');
 const Background_handler           = require('./lib/background_handler.js');
-const Twilights_calculator         = require('./lib/twilights_calculator.js');
+const Twilights_calculator         = require('./lib/twilights_calculator/twilights_calculator.js');
 const Event_scheduler              = require('./lib/event_scheduler.js');
 const Timer_absolute               = require('./lib/timer_absolute.js');
 const Time_of_day                  = require('./lib/time_of_day.js');
 const Time_change_listener         = require('./lib/time_change_listener/time_change_listener.js');
 const Timezone_change_listener     = require('./lib/timezone_change_listener.js');
 const Timezone_coordinates_finder  = require('./lib/timezones_coordinates/timezone_coordinates_finder.js');
-const Sleep_wakeup_listener        = require('./lib/sleep_wakeup_listener.js');
+const Sleep_wakeup_listener        = require('./lib/sleep_wakeup_listener/sleep_wakeup_listener.js');
 const Color_scheme_change_listener = require('./lib/color_scheme_change_listener.js');
-const Commands_launcher            = require('./lib/commands_launcher.js');
+const Commands_launcher            = require('./lib/commands_launcher/commands_launcher.js');
 const { _ }                        = require('./lib/translator.js');
 
 const Applet   = imports.ui.applet;
@@ -120,7 +120,8 @@ class ThisApplet extends Applet.IconApplet {
         try {
             this.time_change_listener = new Time_change_listener(
                 `${this.metadata.path}/lib/time_change_listener`,
-                this._update.bind(this)
+                this._update.bind(this),
+                this._notify_error.bind(this)
             );
         } catch (error) {
             this._notify_critical(error.message);

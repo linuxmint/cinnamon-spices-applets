@@ -4,7 +4,6 @@ Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
 
 /**
  * Executes a command with a timeout and transmits any error on failure.
- *
  * @async
  * @param {string} command - The shell command to execute.
  * @param {number} [timeout_seconds=10] - The delay in seconds before cancelling the command. `0` means infinity/never.
@@ -14,6 +13,7 @@ Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
  * @throws {Gio.IOErrorEnum.FAILED} - If the command fails with a non-zero exit code. The error message is the `stderr` output if any, otherwise the exit status.
  */
 async function launch_command(command, timeout_seconds = 10) {
+    command = `sh -c ${GLib.shell_quote(`exec ${command}`)}`; // brings shell features
     const [_ok, argvp] = GLib.shell_parse_argv(command); // can throw GLib.ShellError
 
     const proc = new Gio.Subprocess({

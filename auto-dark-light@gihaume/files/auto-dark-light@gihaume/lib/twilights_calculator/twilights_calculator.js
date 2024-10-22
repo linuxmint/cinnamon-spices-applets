@@ -1,13 +1,11 @@
-const SunCalc     = require('./lib/suncalc.js');
+const SunCalc     = require('./lib/twilights_calculator/suncalc.js');
 const Time_of_day = require('./lib/time_of_day.js');
 const { _ }       = require('./lib/translator.js');
 
 const GLib = imports.gi.GLib;
 const DateTime = GLib.DateTime;
 
-/**
- * A twilight times calculator of the ~current day.
- */
+/** A twilight times calculator of the ~current day. */
 const Twilights_calculator = {
     /**
      * Get the twilight times of the current day.
