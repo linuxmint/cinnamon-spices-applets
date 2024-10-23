@@ -206,35 +206,24 @@ The setting allows you to make the applet display basically anything in the form
 | `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |
 | `{br}`            | Line Break                                                |
 
-Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 4 padded left, humidity: 3 padded left, pressure: 7 padded left; all using spaces).
+Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 3, humidity: 3, pressure: 6, extra_value: 3; all padded right using spaces).
 
-Single line examples:
+1-Line Examples:
 
-Current Temperature, Condition: `{t} {u}, {c}`
-Current Temperature, Condition, and Feels Like: `{t} {u}, {c}, Feels like: {extra_value} {u}`
-Daylight Summary: `Day length: {day_len_rem} ({day_rem_pct}%)`
-Full Current Weather Report: `{t} {u}, {c_long}. Humidity: {humidity}%, Wind: {wind_speed} {wind_unit} {wind_dir}, Pressure: {pressure} {pressure_unit}`
-Location and Current Weather: `{city}, {country}: {t} {u}, {c}`
-Max and Min Temperature for Today: `Min: {min} {u}, Max: {max} {u}`
-Pressure and Humidity: `Pressure: {pressure} {pressure_unit}, Humidity: {humidity}%`
-Sunrise and Sunset Times: `Sunrise: {sunrise}, Sunset: {sunset}`
-Tomorrow's Temperature Forecast: `Tomorrow: {tmr_min} {u} - {tmr_max} {u}, {tmr_c}`
-Wind Direction and Degree: `Wind: {wind_speed} {wind_unit}, Direction: {wind_dir} ({wind_deg}°)`
-Wind Information with Arrow: `{wind_speed} {wind_unit} {wind_dir} ({wind_arrow})`
+Current Temp, Condition: `{t}{u}, {c}`
+Daylight & Extremes: `{day_len_rem} ({day_rem_pct}%), Min: {min}{u}, Max: {max}{u}`
+Full Current Weather: `{t}{u}{t_h_diff}, {c_long}, {humidity}%, {wind_speed}{wind_unit} {wind_dir} ({wind_deg}°), {pressure}{pressure_unit}`
+Location & Weather: `{city} {country}: {t}{u}, {c}, Wind: {wind_speed}{wind_unit}`
+Pressure, Humidity, & Wind: `{pressure}{pressure_unit}, {humidity}%, {wind_speed}{wind_unit} {wind_dir}`
+Tomorrow's Full Forecast: `Tomorrow: {tmr_min}{u} - {tmr_max}{u}, {tmr_c}`
 
-Two line examples:
+2-Line Examples:
 
-Compact Weather Report with Daylight Remaining: `{c} {t}{t_h_diff}{br}{wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
-Current Temperature, Condition, and Feels Like: `{t} {u}, {c}{br}Feels like: {extra_value} {u}`
-Daylight Summary: `Day length: {day_length}{br}Remaining: {day_remain} ({day_rem_pct}%)`
-Feels Like with Wind Info: `Feels like: {extra_value} {u}{br}Wind: {wind_speed} {wind_unit}, {wind_dir}`
-Full Current Weather Report: `{t} {u}, {c_long}{br}Humidity: {humidity}%, Wind: {wind_speed} {wind_unit} {wind_dir}`
-Location with Weather and Wind: `{city}, {country}: {t} {u}{br}{c}, Wind: {wind_speed} {wind_unit} {wind_dir} ({wind_arrow})`
-Max/Min Temperature with Wind Info: `Min: {min} {u}, Max: {max} {u}{br}Wind: {wind_speed} {wind_unit} {wind_dir}`
-Pressure and Humidity with Temp and Wind: `Pressure: {pressure} {pressure_unit}, Humidity: {humidity}%{br}{t} {u}, Wind: {wind_speed} {wind_unit}, {wind_dir}`
-Sunrise and Sunset with Daylight Info: `Sunrise: {sunrise}, Sunset: {sunset}{br}Day length: {day_length}, Remaining: {day_remain}`
-Tomorrow's Forecast with Conditions: `Tomorrow: {tmr_c}{br}{tmr_td}`
-Wind Speed and Direction with Degree: `Wind: {wind_speed} {wind_unit}{br}Direction: {wind_dir} ({wind_deg}°)`
+Comprehensive Weather & Daylight: `{c} {t}{t_h_diff}{br}{wind_speed}{wind_arrow}, {humidity}% {pressure} {day_remain}`
+Feels Like with Full Wind Info: `{t}{u}{t_h_diff} Feels: {extra_value}{u}{br}Wind: {wind_speed}{wind_unit}, {wind_dir} ({wind_deg}°)`
+Full Daylight & Timing: `{sunrise} - {sunset}{br}{day_len_rem} ({day_rem_pct}%)`
+Location, Weather, & Wind Details: `{city}, {country}: {t}{u}{t_h_diff}{br}{c}, {wind_speed}{wind_unit} {wind_dir}, {humidity}%`
+Today and Tomorrow: `{min} / {max} {u} {c} {t}{u}{br}{tmr_t} {tmr_c}`
 
 ## Run script when the weather data changes
 
@@ -258,7 +247,7 @@ Wind Speed and Direction with Degree: `Wind: {wind_speed} {wind_unit}{br}Directi
 
 * Add support for minutely forecasts.
 
-* Add ability to specify number of decimal places in values, e.g., `{t_h_diff,4. .1}` for 1 decimal place, left-padded with spaces to width of 4
+* Add ability to specify number of decimal places in values, e.g., `{t_h_diff,4. .1}` for 1 decimal place, left-padded with spaces to width of 4.  (This might be achievable by extracting float values then applying a default or specified precision to all numerical values.)
 
 * Make tags that (or a way to) default to '' when no upcoming forecast changes in value to save panel space.
 

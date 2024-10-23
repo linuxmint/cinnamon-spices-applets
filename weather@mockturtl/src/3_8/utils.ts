@@ -66,8 +66,9 @@ export function GenerateLocationText(weather: WeatherData, config: Config): stri
 interface TagOptions {
 	value: string; // Ensure value is always a string
 	padLength?: number; // Optional padding length
-	padLeft?: boolean; // Optional flag for left or right padding
+	padRight?: boolean; // Optional flag for left or right padding
 	padChar?: string; // Optional character for padding
+	precision?: number; // Optional number of decimal places
 }
 
 export function InjectValues(text: string, weather: WeatherData, config: Config, inCommand: boolean = false): string {
@@ -125,15 +126,15 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 
 	// Define values and their defaults for padding and formatting
 	const valuesPaddingDefaults: Record<string, TagOptions> = {
-		t: { value: temp.toString(), padLength: 3, padLeft: true, padChar: ' ' },
+		t: { value: temp.toString(), padLength: 3, padRight: true, padChar: ' ' },
 		u: { value: tempUnit.toString() },
 		c: { value: conditionMain.toString() },
 		c_long: { value: conditionDescription.toString() },
 		dew_point: { value: dewPointVal.toString() },
-		humidity: { value: humidityVal.toString(), padLength: 3 },
-		pressure: { value: pressureVal.toString(), padLength: 7 },
+		humidity: { value: humidityVal.toString(), padLength: 3, padRight: true },
+		pressure: { value: pressureVal.toString(), padLength: 6, padRight: true },
 		pressure_unit: { value: _pressureUnit.toString() },
-		extra_value: { value: extraValue.toString() },
+		extra_value: { value: extraValue.toString(), padLength: 3, padRight: true },
 		extra_name: { value: extraName.toString() },
 		city: { value: city.toString() },
 		country: { value: country.toString() },
@@ -167,7 +168,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	// Process text replacement for each tag
 	for (const tagName in valuesPaddingDefaults) {
 		const options = valuesPaddingDefaults[tagName];
-		const { value: tagValue, padLength = 0, padLeft = true, padChar = ' ' } = options;
+		const { value: tagValue, padLength = 0, padRight = true, padChar = ' ' } = options;
 
 		if (tagName == null || tagValue == null) continue;
 
@@ -186,14 +187,15 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		const isLiteral = literalStart === "{{" && literalEnd === "}}";
 		const noPad = inCommand && !padLiteral;
 
-		const applyPadLeft: boolean = (paddingSpecifier === ',' || (paddingSpecifier === undefined && padLeft));
+		const applyPadRight: boolean = (paddingSpecifier === ',' || (paddingSpecifier === undefined && padRight));
 		const applyPad: number = paddingSize ? Number(paddingSize) : padLength;
 		const charPad: string = padCharMatch || padChar;
 
 		let formattedValue: string = tagValue; // tagValue is guaranteed to be a string
 
+
 		if (!noPad) {
-			formattedValue = applyPadLeft ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
+			formattedValue = applyPadRight ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
 		}
 
 		text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);

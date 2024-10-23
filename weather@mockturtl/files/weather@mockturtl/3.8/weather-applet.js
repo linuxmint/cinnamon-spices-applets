@@ -8349,15 +8349,15 @@ function InjectValues(text, weather, config, inCommand = false) {
         : "0";
     const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
     const valuesPaddingDefaults = {
-        t: { value: temp.toString(), padLength: 3, padLeft: true, padChar: ' ' },
+        t: { value: temp.toString(), padLength: 3, padRight: true, padChar: ' ' },
         u: { value: tempUnit.toString() },
         c: { value: conditionMain.toString() },
         c_long: { value: conditionDescription.toString() },
         dew_point: { value: dewPointVal.toString() },
-        humidity: { value: humidityVal.toString(), padLength: 3 },
-        pressure: { value: pressureVal.toString(), padLength: 7 },
+        humidity: { value: humidityVal.toString(), padLength: 3, padRight: true },
+        pressure: { value: pressureVal.toString(), padLength: 6, padRight: true },
         pressure_unit: { value: _pressureUnit.toString() },
-        extra_value: { value: extraValue.toString() },
+        extra_value: { value: extraValue.toString(), padLength: 3, padRight: true },
         extra_name: { value: extraName.toString() },
         city: { value: city.toString() },
         country: { value: country.toString() },
@@ -8389,7 +8389,7 @@ function InjectValues(text, weather, config, inCommand = false) {
     };
     for (const tagName in valuesPaddingDefaults) {
         const options = valuesPaddingDefaults[tagName];
-        const { value: tagValue, padLength = 0, padLeft = true, padChar = ' ' } = options;
+        const { value: tagValue, padLength = 0, padRight = true, padChar = ' ' } = options;
         if (tagName == null || tagValue == null)
             continue;
         const regexp = new RegExp(`(\\{{1,3})(\\b${EscapeRegex(tagName)}\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})`, 'g');
@@ -8403,12 +8403,12 @@ function InjectValues(text, weather, config, inCommand = false) {
             const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
             const isLiteral = literalStart === "{{" && literalEnd === "}}";
             const noPad = inCommand && !padLiteral;
-            const applyPadLeft = (paddingSpecifier === ',' || (paddingSpecifier === undefined && padLeft));
+            const applyPadRight = (paddingSpecifier === ',' || (paddingSpecifier === undefined && padRight));
             const applyPad = paddingSize ? Number(paddingSize) : padLength;
             const charPad = padCharMatch || padChar;
             let formattedValue = tagValue;
             if (!noPad) {
-                formattedValue = applyPadLeft ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
+                formattedValue = applyPadRight ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
             }
             text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
         }
