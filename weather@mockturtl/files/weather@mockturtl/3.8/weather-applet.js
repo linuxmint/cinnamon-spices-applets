@@ -17140,7 +17140,7 @@ function OpenMeteoResponseToData(payload) {
 class OpenMeteo extends BaseProvider {
     constructor() {
         super(...arguments);
-        this.prettyName = _("Open Meteo");
+        this.prettyName = _("Open-Meteo");
         this.name = "OpenMeteo";
         this.maxForecastSupport = 16;
         this.website = "https://open-meteo.com/";

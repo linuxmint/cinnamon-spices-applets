@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.6.5
+## 3.6.6
 
 - Add Breeze icon theme problems to known issues.
 - Fix Swiss Meteo crashing when alerts don't have a `valid_from` field
@@ -45,7 +45,7 @@
 - Better error logging on exception handling in most places
 - Fix Accuweather having wrong weather condition info on "clear sky"
 - Add missing type information for weather/location providers
-- Fix incorrect wind speed reported with Open Meteo
+- Fix incorrect wind speed reported with Open-Meteo
 - Resolve [[weather@mockturtl] Feature Request: Save Weather Service JSON #5420](https://github.com/linuxmint/cinnamon-spices-applets/issues/5420)
 - Resolve [[weather@mockturtl] Feature Request: Configurable UserAgent String #5999](https://github.com/linuxmint/cinnamon-spices-applets/issues/5999)
 - Fix [weather@mockturtl: Incorrectly formatted text #6011](https://github.com/linuxmint/cinnamon-spices-applets/issues/6011) - mostly
