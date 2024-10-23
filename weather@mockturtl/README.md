@@ -164,49 +164,47 @@ Alerts are an US only feature as of May 2024.
 
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 
-The setting allows you to make the applet display basically anything in the form of text in the panel (and other places). In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
+The setting allows you to make the applet display basically anything in the form of text in the panel (and other places). In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.  Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding.
 
-| Text to enter     | Mapped value                                              |
-| ----------------- | --------------------------------------------------------- |
-| `{t}`             | Temperature value                                         |
-| `{u}`             | Temperature unit                                          |
-| `{c}`             | Short condition text                                      |
-| `{c_long}`        | Long condition text (same as short if not available)      |
-| `{dew_point}`     | Dew point value                                           |
-| `{humidity}`      | Humidity value (always as percent)                        |
-| `{pressure}`      | Pressure value                                            |
-| `{pressure_unit}` | Pressure unit                                             |
-| `{extra_value}`   | API specific value (usually "Feels Like" or "Cloudiness") |
-| `{extra_name}`    | API specific value's name                                 |
-| `{city}`          | City name shown in the popup                              |
-| `{country}`       | Country name shown in the popup                           |
-| `{search_entry}`  | Search entry text in manual location (or location store)  |
-| `{last_updated}`  | Formatted last updated time                               |
-| `{wind_speed}`    | Wind speed                                                |
-| `{wind_unit}`     | Wind speed unit                                           |
-| `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
-| `{wind_arrow}`    | Wind direction as text arrow (↘, etc)                     |
-| `{wind_deg}`      | Wind direction as degree value                            |
-| `{sunrise}`       | Sunrise time                                              |
-| `{sunset}`        | Sunset time                                               |
-| `{day_length}`    | Daylight length in hours and minutes                      |
-| `{day_remain}`    | Daylight remaining in hours and minutes ("" after dark)   |
-| `{day_rem_pct}`   | Daylight remaining as percentage ("0" after dark)         |
-| `{day_len_rem}`   | Day length and daylight remaining (or day length)         |
-| `{min}`           | Minimum temperature                                       |
-| `{max}`           | Maximum temperature                                       |
-| `{tmr_min}`       | Tomorrow's min temperature                                |
-| `{tmr_max}`       | Tomorrow's max temperature                                |
-| `{tmr_min_diff}`  | Tomorrow's min temperature difference from today          |
-| `{tmr_max_diff}`  | Tomorrow's max temperature difference from today          |
-| `{tmr_t}`         | Tomorrow's min and max temperatures                       |
-| `{tmr_td}`        | Tomorrow's min and max temperatures with differences      |
-| `{tmr_c}`         | Tomorrow's short condition text                           |
-| `{t_h}`           | Temperature in next 1-2 hours                             |
-| `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |
-| `{br}`            | Line Break                                                |
-
-Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding (t: 3, humidity: 3, pressure: 6, extra_value: 3; all padded right using spaces).
+| Text to enter     | Mapped value                                              | Padding | Pad Right | Pad Char |
+| ----------------- | --------------------------------------------------------- |---------|-----------|----------|
+| `{t}`             | Temperature value                                         | 3       | true      |          |
+| `{u}`             | Temperature unit                                          |         |           |          |
+| `{c}`             | Short condition text                                      |         |           |          |
+| `{c_long}`        | Long condition text (same as short if not available)      |         |           |          |
+| `{dew_point}`     | Dew point value                                           |         |           |          |
+| `{humidity}`      | Humidity value (always as percent)                        | 3       | true      |          |
+| `{pressure}`      | Pressure value                                            | 6       | true      |          |
+| `{pressure_unit}` | Pressure unit                                             |         |           |          |
+| `{extra_value}`   | API specific value (usually "Feels Like" or "Cloudiness") | 3       | true      |          |
+| `{extra_name}`    | API specific value's name                                 |         |           |          |
+| `{city}`          | City name shown in the popup                              |         |           |          |
+| `{country}`       | Country name shown in the popup                           |         |           |          |
+| `{search_entry}`  | Search entry text in manual location (or location store)  |         |           |          |
+| `{last_updated}`  | Formatted last updated time                               |         |           |          |
+| `{wind_speed}`    | Wind speed                                                |         |           |          |
+| `{wind_unit}`     | Wind speed unit                                           |         |           |          |
+| `{wind_dir}`      | Wind direction in text format (NW, etc)                   |         |           |          |
+| `{wind_arrow}`    | Wind direction as text arrow (↘, etc)                     |         |           |          |
+| `{wind_deg}`      | Wind direction as degree value                            |         |           |          |
+| `{sunrise}`       | Sunrise time                                              |         |           |          |
+| `{sunset}`        | Sunset time                                               |         |           |          |
+| `{day_length}`    | Daylight length in hours and minutes                      |         |           |          |
+| `{day_remain}`    | Daylight remaining in hours and minutes ("" after dark)   |         |           |          |
+| `{day_rem_pct}`   | Daylight remaining as percentage ("0" after dark)         |         |           |          |
+| `{day_len_rem}`   | Day length and daylight remaining (or day length)         |         |           |          |
+| `{min}`           | Minimum temperature                                       |         |           |          |
+| `{max}`           | Maximum temperature                                       |         |           |          |
+| `{tmr_min}`       | Tomorrow's min temperature                                |         |           |          |
+| `{tmr_max}`       | Tomorrow's max temperature                                |         |           |          |
+| `{tmr_min_diff}`  | Tomorrow's min temperature difference from today          |         |           |          |
+| `{tmr_max_diff}`  | Tomorrow's max temperature difference from today          |         |           |          |
+| `{tmr_t}`         | Tomorrow's min and max temperatures                       |         |           |          |
+| `{tmr_td}`        | Tomorrow's min and max temperatures with differences      |         |           |          |
+| `{tmr_c}`         | Tomorrow's short condition text                           |         |           |          |
+| `{t_h}`           | Temperature in next 1-2 hours                             |         |           |          |
+| `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |         |           |          |
+| `{br}`            | Line Break                                                |         |           |          |
 
 1-Line Examples:
 
@@ -219,7 +217,7 @@ Tomorrow's Full Forecast: `Tomorrow: {tmr_min}{u} - {tmr_max}{u}, {tmr_c}`
 
 2-Line Examples:
 
-Comprehensive Weather & Daylight: `{c} {t}{t_h_diff}{br}{wind_speed}{wind_arrow}, {humidity}% {pressure} {day_remain}`
+Comprehensive Weather & Daylight: `{c} {t}{t_h_diff}{br}{wind_speed}{wind_arrow} {humidity}% {pressure} {day_remain}`
 Feels Like with Full Wind Info: `{t}{u}{t_h_diff} Feels: {extra_value}{u}{br}Wind: {wind_speed}{wind_unit}, {wind_dir} ({wind_deg}°)`
 Full Daylight & Timing: `{sunrise} - {sunset}{br}{day_len_rem} ({day_rem_pct}%)`
 Location, Weather, & Wind Details: `{city}, {country}: {t}{u}{t_h_diff}{br}{c}, {wind_speed}{wind_unit} {wind_dir}, {humidity}%`

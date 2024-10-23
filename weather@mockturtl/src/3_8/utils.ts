@@ -152,7 +152,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		tmr_min_diff: { value: tmrMinTempChange.toString() },
 		tmr_max_diff: { value: tmrMaxTempChange.toString() },
 		tmr_c: { value: conditionTomorrow.toString() },
-		tmr_t: { value: tempsTomorrow.toString() },
+		tmr_t: { value: tempsTomorrow.toString(), padLength: 3, padRight: true },
 		tmr_td: { value: tempsTomorrowWithDifferences.toString() },
 		sunset: { value: sunsetTime.toString() },
 		sunrise: { value: sunriseTime.toString() },
@@ -187,15 +187,14 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		const isLiteral = literalStart === "{{" && literalEnd === "}}";
 		const noPad = inCommand && !padLiteral;
 
-		const applyPadRight: boolean = (paddingSpecifier === ',' || (paddingSpecifier === undefined && padRight));
+		const applyPadRight: boolean = (paddingSpecifier === '.' || (paddingSpecifier === undefined && padRight));
 		const applyPad: number = paddingSize ? Number(paddingSize) : padLength;
 		const charPad: string = padCharMatch || padChar;
 
 		let formattedValue: string = tagValue; // tagValue is guaranteed to be a string
 
-
 		if (!noPad) {
-			formattedValue = applyPadRight ? formattedValue.padStart(applyPad, charPad) : formattedValue.padEnd(applyPad, charPad);
+			formattedValue = applyPadRight ? formattedValue.padEnd(applyPad, charPad) : formattedValue.padStart(applyPad, charPad);
 		}
 
 		text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);

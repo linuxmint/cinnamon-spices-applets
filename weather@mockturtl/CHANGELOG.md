@@ -4,7 +4,7 @@
 
 - Add more tags for overrides, including forecasts when available, details in README
 - Add left/right padding options and a pad fill option for tags in overrides
-- Add ability to programatically set overridable default padding options for tags in overrides, added 3 defaults
+- Add ability to programatically set overridable default padding options for tags in overrides, added some defaults
 
 ## 3.6.4
 
