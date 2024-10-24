@@ -1,0 +1,59 @@
+{
+    "head_startupOptions": {
+        "type": "header",
+        "description": "Startup Options"
+    },
+    "launchAppletOnBoot": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Automatically Enable Blue Light Blocker\n(On computer startup or whenever the applet is added to a panel.)",
+		"tooltip": "Automatically Enable Blue Light Blocker\n(On computer startup or whenever the applet is added to a panel.)"
+	},
+    "defaultTempValueOnBoot": {
+        "type": "spinbutton",
+        "default": 3500,
+        "min": 1000,
+        "max": 8000,
+        "step": 1,
+        "units": "K",
+        "description": "Default Color Temperature Value",
+        "tooltip" : "The color temperature value that will be applied on startup or when the applet is added to a panel."
+    },
+    "defaultBrightnessPercentageValueOnBoot": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 20,
+        "max": 100,
+        "step": 1,
+        "units": "%",
+        "description": "Default brightness value",
+        "tooltip" : "The brightness percentage value that will be applied on startup or when the applet is added to a panel."
+    },
+    "head_calculations": {
+        "type": "header",
+        "description": "Panel"
+    },
+    "tray_text_format": {
+        "type": "combobox",
+        "default": "default",
+        "description": "Applet panel text format",
+        "options": {
+            "Default Format, e.g.: 2500 K (25%)": "default",
+            "Color Temperature Only, e.g.: 2500 K": "onlyTemperature",
+            "Brightness Only, e.g.: 25%": "onlyBrightness",
+            "None": "none"
+        }
+    },
+    "head_accessibility": {
+        "type": "header",
+        "description": "Accessibility"
+    },
+    "enableAccessibleSliders": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable Accessible Sliders",
+		"tooltip": "Allows you interact with the sliders using the keyboard (Tab + arrow keys). If you do not require this, it is recommended to disable this feature for a better visual experience. This option DOES NOT affect performances."
+	}
+    
+
+}
