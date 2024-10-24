@@ -1,3 +1,7 @@
+### v1.2.0~20240929
+
+* Allows hibernation using root user rights.
+
 ### v1.1.2~20240623
 
 * Improves translations.

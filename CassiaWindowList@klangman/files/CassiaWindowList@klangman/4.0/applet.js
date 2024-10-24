@@ -124,8 +124,6 @@ const ICON_NAMES = {
    writer: 'x-office-document'
 }
 
-const majorVersion = parseInt(Config.PACKAGE_VERSION.substring(0,1));
-
 // The possible user setting for the caption contents
 const CaptionType = {
   Name: 0,           // Caption is set to the Application Name (i.e. Firefox)
@@ -3388,6 +3386,8 @@ class WindowListButton {
     }
 
     if (this._currentWindow || metaWindow != undefined) {
+      let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
+
       if (metaWindow == undefined) {
         metaWindow = this._currentWindow;
       }
@@ -3579,7 +3579,6 @@ class WindowListButton {
                }));
             this._contextMenu.addMenuItem(item);
          } else {
-            let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
             if (btns && btns.length > 1) {
               item = new PopupMenu.PopupMenuItem(_("Group application windows"));
               item.connect("activate", Lang.bind(this, function() {
@@ -3602,7 +3601,6 @@ class WindowListButton {
                  this._grouped=GroupingType.Auto;
                  this._workspace._tryExpandingAppGroups();
               } else {
-                 let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
                  for (let i=0 ; i<btns.length ; i++)
                     btns[i]._grouped = GroupingType.NotGrouped;
               }
@@ -3611,7 +3609,6 @@ class WindowListButton {
               if (this._grouped > GroupingType.NotGrouped) {
                  this._grouped = GroupingType.ForcedOn;
               } else {
-                 let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
                  for (let i=0 ; i<btns.length ; i++)
                     btns[i]._grouped = GroupingType.ForcedOff;
               }
@@ -3645,22 +3642,44 @@ class WindowListButton {
       }
 
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-      if (this._windows.length > 1) {
-        item = new PopupMenu.PopupIconMenuItem(_("Close others"), "application-exit", St.IconType.SYMBOLIC);
+      if (this._windows.length > 1 || btns.length > 1) {
+        if (this._windows.length > 1) {
+          item = new PopupMenu.PopupIconMenuItem(_("Close others"), "application-exit", St.IconType.SYMBOLIC);
+        } else {
+          item = new PopupMenu.PopupIconMenuItem(_("Close other windows for application"), "application-exit", St.IconType.SYMBOLIC);
+        }
         item.connect("activate", Lang.bind(this, function() {
-          let curIdx = this._windows.indexOf(metaWindow);
-          this._windows.splice(curIdx, 1);
-          this._windows.push(metaWindow);
-          for (let i = this._windows.length - 2; i >= 0; i--) {
-            this._windows[i].delete(global.get_current_time());
+          if (this._windows.length > 1) {
+             let curIdx = this._windows.indexOf(metaWindow);
+             this._windows.splice(curIdx, 1);
+             this._windows.push(metaWindow);
+             for (let i = this._windows.length - 2; i >= 0; i--) {
+               this._windows[i].delete(global.get_current_time());
+             }
+          } else { // We have a more than one button for this application
+             for (let i = btns.length-1 ; i >= 0 ; i--) {
+                if (btns[i] != this) {
+                   btns[i]._currentWindow.delete(global.get_current_time());
+                }
+             }
           }
         }));
         this._contextMenu.addMenuItem(item);
 
-        item = new PopupMenu.PopupIconMenuItem(_("Close all"), "window-close", St.IconType.SYMBOLIC);
+        if (this._windows.length > 1) {
+          item = new PopupMenu.PopupIconMenuItem(_("Close all"), "window-close", St.IconType.SYMBOLIC);
+        } else {
+          item = new PopupMenu.PopupIconMenuItem(_("Close all windows for application"), "window-close", St.IconType.SYMBOLIC);
+        }
         item.connect("activate", Lang.bind(this, function() {
-          for (let i = this._windows.length - 1; i >= 0; i--) {
-            this._windows[i].delete(global.get_current_time());
+          if (this._windows.length > 1) {
+             for (let i = this._windows.length - 1; i >= 0; i--) {
+               this._windows[i].delete(global.get_current_time());
+             }
+          } else { // We have more than one button for this application
+             for (let i = btns.length-1 ; i >= 0 ; i--) {
+                btns[i]._currentWindow.delete(global.get_current_time());
+             }
           }
         }));
         this._contextMenu.addMenuItem(item);
@@ -5369,10 +5388,12 @@ class WindowList extends Applet.Applet {
     this._signalManager.connect(this._settings, "changed::show-windows-for-all-workspaces", this._onShowOnAllWorkspacesChanged, this);
     this._signalManager.connect(this._settings, "changed::number-of-unshrunk-previews", this._updateGlobalPreviewSize, this);
     this._signalManager.connect(this._settings, "settings-changed", this._onSettingsChanged, this);
+    this._signalManager.connect(global, "scale-changed", this._updateCurrentWorkspace, this);
 
     if (this._settings.getValue("runWizard")===1) {
        let command = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this._uuid + "/setupWizard " + this._uuid + " " + this.instance_id;
        Util.spawnCommandLineAsync(command);
+       this._settings.setValue("runWizard", 0);
     }
   }
 

@@ -9,13 +9,9 @@ const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 
-const APPLET_PATH = imports.ui.appletManager.appletMeta['anime-wallpaper@flyflyan'].path;
 const SAVE_IMAGE_PATH = `${GLib.get_home_dir()}/Pictures/`;
 
-const SAVE_SCRIPT = `${APPLET_PATH}/savefile.sh`;
 const ANIME_URL = 'https://www.loliapi.com/acg/pc/';
-
-const logging = false;
 
 let _httpSession;
 if (Soup.MAJOR_VERSION == 2) {
@@ -25,17 +21,39 @@ if (Soup.MAJOR_VERSION == 2) {
     _httpSession = new Soup.Session();
 }
 
-function log(message) {
-    if (logging) global.log(`[anime-wallpaper@flyflyan]: ${message}`);
+const LOG_LEVELS = {
+    ERROR: 0,
+    WARNING: 1,
+    INFO: 2,
+    DEBUG: 3
+};
+
+let currentLogLevel = LOG_LEVELS.INFO; // Default log level
+
+function setLogLevel(level) {
+    if (LOG_LEVELS.hasOwnProperty(level)) {
+        currentLogLevel = LOG_LEVELS[level];
+    } else {
+        global.log(`[anime-wallpaper@flyflyan]: Invalid log level: ${level}`);
+    }
 }
+
+function log(level, message) {
+    if (LOG_LEVELS[level] <= currentLogLevel) {
+        global.log(`[anime-wallpaper@flyflyan: ${level}]: ${message}`);
+    }
+}
+
+// Set log level
+setLogLevel('INFO');
 
 class AnimeWallpaperApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-
-        this.set_applet_icon_symbolic_name("anime-wallpaper");
+        this.detecting = false;
+        this.set_applet_icon_symbolic_name("image-x-generic");
         this.set_applet_tooltip('Anime Desktop Wallpaper');
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
@@ -54,7 +72,6 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
         this.click = true;
         this.apiUrl = ANIME_URL;
 
-        this._init_scripts();
         this._bind_settings();
 
         // get Settings
@@ -65,12 +82,6 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
 
         // Begin refresh loop
         this._refresh();
-    }
-
-    _init_scripts() {
-        Util.spawn_async(['chmod', '0755', SAVE_SCRIPT], Lang.bind(this, function (out) {
-            log("chmod 755 [" + SAVE_SCRIPT + "]");
-        }));
     }
 
     _bind_settings() {
@@ -100,55 +111,55 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
     }
 
     _on_save_image_changed() {
-        log("_on_save_image_changed:active");
-        log(this.settings.getValue("saveImage"));
+        log('DEBUG', "_on_save_image_changed:active");
+        log('DEBUG', this.settings.getValue("saveImage"));
         if (this.settings.getValue("saveImage")) {
             this.settings.setValue("saveImage", false);
-            log("_on_save_image_changed " + "get saveImage " + this.settings.getValue("saveImage"));
+            log('INFO', "_on_save_image_changed " + "get saveImage " + this.settings.getValue("saveImage"));
         } else {
             this.settings.setValue("saveImage", true);
-            log("_on_save_image_changed " + "get saveImage " + this.settings.getValue("saveImage"));
+            log('INFO', "_on_save_image_changed " + "get saveImage " + this.settings.getValue("saveImage"));
         }
 
         this._on_settings_changed();
     }
 
     _on_auto_refresh_changed() {
-        log("_on_auto_refresh_changed:active");
-        log(this.settings.getValue("slideshow"));
+        log('DEBUG', "_on_auto_refresh_changed:active");
+        log('DEBUG', this.settings.getValue("slideshow"));
         if (this.settings.getValue("slideshow")) {
             this.settings.setValue("slideshow", false);
-            log("_on_auto_refresh_changed " + "get slideshow " + this.settings.getValue("slideshow"));
+            log('INFO', "_on_auto_refresh_changed " + "get slideshow " + this.settings.getValue("slideshow"));
         } else {
             this.settings.setValue("slideshow", true);
-            log("_on_auto_refresh_changed " + "get slideshow " + this.settings.getValue("slideshow"));
+            log('INFO', "_on_auto_refresh_changed " + "get slideshow " + this.settings.getValue("slideshow"));
         }
 
         this._on_settings_changed();
     }
 
     _on_click_changed() {
-        log("_on_click_changed:active");
-        log(this.settings.getValue("click"));
+        log('DEBUG', "_on_click_changed:active");
+        log('DEBUG', this.settings.getValue("click"));
         if (this.settings.getValue("click")) {
             this.settings.setValue("click", false);
-            log("_on_save_image_changed " + "get click " + this.settings.getValue("click"));
+            log('INFO', "_on_save_image_changed " + "get click " + this.settings.getValue("click"));
         } else {
             this.settings.setValue("click", true);
-            log("_on_save_image_changed " + "get click " + this.settings.getValue("click"));
+            log('INFO', "_on_save_image_changed " + "get click " + this.settings.getValue("click"));
         }
 
         this._on_settings_changed();
     }
 
     _on_settings_changed() {
-        log("_on_settings_changed");
-        log(this.settings.getValue("resource"));
-        log(this.settings.getValue("slideshow"));
-        log(this.settings.getValue("saveImage"));
-        log(this.settings.getValue("saveImagePath"));
-        log(this.settings.getValue("delay"));
-        log(this.settings.getValue("click"));
+        log('DEBUG', "_on_settings_changed");
+        log('DEBUG', this.settings.getValue("resource"));
+        log('DEBUG', this.settings.getValue("slideshow"));
+        log('DEBUG', this.settings.getValue("saveImage"));
+        log('DEBUG', this.settings.getValue("saveImagePath"));
+        log('DEBUG', this.settings.getValue("delay"));
+        log('DEBUG', this.settings.getValue("click"));
 
         this.autoRefresh = (this.settings.getValue("slideshow") != null) ? this.settings.getValue("slideshow") : true;
         this.saveImage = (this.settings.getValue("saveImage") != null) ? this.settings.getValue("saveImage") : true;
@@ -158,9 +169,9 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
         let apiURL = this.settings.getValue("resource");
         if ((apiURL != null) && (apiURL != "")) {
             this.apiUrl = apiURL;
-            log(apiURL);
+            log('INFO', "resource:" + apiURL);
         } else {
-            log("not set apiURL, set to " + ANIME_URL);
+            log('WARNING', "not set apiURL, set to " + ANIME_URL);
             this.apiUrl = ANIME_URL;
         }
 
@@ -168,19 +179,19 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
         if ((saveImagePath != null) && (saveImagePath != "")) {
             this.saveImagePath = saveImagePath;
         } else {
-            log("not set saveImagePath, set to " + SAVE_IMAGE_PATH);
+            log('WARNING', "not set saveImagePath, set to " + SAVE_IMAGE_PATH);
             this.saveImagePath = SAVE_IMAGE_PATH;
             if (this.saveImage) {
                 this.settings.setValue("saveImagePath", SAVE_IMAGE_PATH);
             }
         }
 
-        log(this.apiUrl);
+        log('DEBUG', this.apiUrl);
         this.set_applet_tooltip(this.apiUrl);
         this.saveImagePath = this.saveImagePath.replace("file://", "");
-        log(this.saveImagePath);
+        log('DEBUG', this.saveImagePath);
 
-        log("set auto-refresh");
+        log('DEBUG', "set auto-refresh");
         this._remove_timeout();
         if (this.autoRefresh) {
             this._set_timeout(this.reloadTime);
@@ -205,12 +216,12 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
     _set_timeout(seconds) {
         /** Cancel current timeout in event of an error and try again shortly */
         this._remove_timeout();
-        log(`Setting timeout (${seconds}s)`);
+        log('DEBUG', `Setting timeout (${seconds}s)`);
         this._timeout = Mainloop.timeout_add_seconds(seconds, Lang.bind(this, this._refresh));
     }
 
     _refresh() {
-        log(`Beginning refresh`);
+        log('DEBUG', 'Beginning refresh');
         this._download_image();
 
         if (this.autoRefresh) {
@@ -221,7 +232,7 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
     }
 
     _download_image() {
-        log('downloading new image');
+        log('DEBUG', 'downloading new image');
         let gFile = Gio.file_new_for_path(this.wallpaperPath);
         let url = this.apiUrl;
         // open the file
@@ -249,7 +260,7 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
                 if (message.status_code === 200 && contentLength === bytesTotal) {
                     this._set_background();
                 } else {
-                    log("Couldn't fetch image from " + url);
+                    log('ERROR', "Couldn't fetch image from " + url);
                     gFile.delete(null);
                     this._set_timeout(60)  // Try again
                 }
@@ -263,10 +274,10 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
                     }
                     // request completed
                     fStream.close(null);
-                    log('Download successful');
+                    log('DEBUG', 'Download successful');
                     this._set_background();
                 } else {
-                    log("Couldn't fetch image from " + url);
+                    log('ERROR', "Couldn't fetch image from " + url);
                     this._set_timeout(60)  // Try again
                 }
             });
@@ -274,31 +285,55 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
     }
 
     _save_image() {
-        let time = GLib.get_real_time();
-        let savePath = this.saveImagePath;
+        let sourceUri = 'file://' + this.wallpaperPath;
 
-        log(APPLET_PATH);
-        Util.spawn_async([SAVE_SCRIPT, this.wallpaperPath, savePath], Lang.bind(this, function (out) {
-            log("save image [" + this.wallpaperPath + "] to " + savePath);
-        }));
+        // Create a GFile object for the specified URI
+        let sourceFile = Gio.File.new_for_uri(sourceUri);
+        // Query the file info
+        let fileInfo = sourceFile.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
+        // Get the MIME type
+        let mimeType = fileInfo.get_content_type();
+
+        log('DEBUG', 'The MIME type of the file is: ' + mimeType.slice(6));
+
+        let [success, contents] = sourceFile.load_contents(null);
+        if (!success) {
+            log('ERROR', "Read file failed");
+        }
+
+        let md5Hash = GLib.compute_checksum_for_data(GLib.ChecksumType.MD5, contents);
+
+        if (!md5Hash) {
+            log('ERROR', "Create MD5 failed");
+        }
+        log('DEBUG', "MD5: " + md5Hash);
+
+        let saveUri = 'file://' + this.saveImagePath + '/' + md5Hash + '.' + mimeType.slice(6);
+        let destinationFile = Gio.File.new_for_uri(saveUri);
+        try {
+            // Copy the file
+            sourceFile.copy(destinationFile, Gio.FileCopyFlags.OVERWRITE, null, null);
+            log('DEBUG', 'File copied from ' + sourceUri + ' to ' + saveUri);
+        } catch (e) {
+            log('ERROR', 'Error copying file: ' + e.message);
+        }
     }
 
     _set_background() {
 
         let gSetting = new Gio.Settings({ schema: 'org.cinnamon.desktop.background' });
-        const uri = 'file://' + this.wallpaperPath;
-        log(uri);
+        let wallpaperUri = 'file://' + this.wallpaperPath;
+        log('DEBUG', 'wallpaperUri: ' + wallpaperUri);
 
         if (this.saveImage) {
             this._save_image();
         }
 
-        // Util.spawn(['dwebp', this.wallpaperPath, '-o', this.wallpaperPath + '.png']);
         Util.spawn_async(['dwebp', this.wallpaperPath, '-o', this.wallpaperPath], Lang.bind(this, function (out) {
-            log("The conversion was successful using dewbp")
+            log('DEBUG', "The conversion was successful using dewbp")
         }));
 
-        gSetting.set_string('picture-uri', uri);
+        gSetting.set_string('picture-uri', wallpaperUri);
         gSetting.set_string('picture-options', 'zoom');
         Gio.Settings.sync();
         gSetting.apply();

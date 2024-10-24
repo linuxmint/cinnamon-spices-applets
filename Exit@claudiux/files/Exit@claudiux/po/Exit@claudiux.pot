@@ -1,51 +1,51 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# EXIT
+# This file is put in the public domain.
+# claudiux, 2024
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-25 23:19+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: Exit@claudiux 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 21:43+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 5.4/applet.js:96
+#. 5.4/applet.js:110
 msgid "Restart Cinnamon"
 msgstr ""
 
-#: 5.4/applet.js:108
+#. 5.4/applet.js:122
 msgid "Lock Screen"
 msgstr ""
 
-#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
 msgid "Switch User"
 msgstr ""
 
-#: 5.4/applet.js:166
+#. 5.4/applet.js:180
 msgid "Log Out"
 msgstr ""
 
-#: 5.4/applet.js:178
+#. 5.4/applet.js:192
 msgid "Suspend"
 msgstr ""
 
-#: 5.4/applet.js:187
+#. 5.4/applet.js:201
 msgid "Hibernate"
 msgstr ""
 
-#: 5.4/applet.js:199
+#. 5.4/applet.js:216
 msgid "Restart"
 msgstr ""
 
-#: 5.4/applet.js:208
+#. 5.4/applet.js:225
 msgid "Power Off"
 msgstr ""
 
@@ -85,6 +85,10 @@ msgstr ""
 
 #. 5.4->settings-schema.json->showHibernate->description
 msgid "Show the Hibernate option"
+msgstr ""
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
 msgstr ""
 
 #. 5.4->settings-schema.json->showRestart->description

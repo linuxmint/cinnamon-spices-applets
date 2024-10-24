@@ -69,6 +69,7 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showRestartCinnamon", "showRestartCinnamon");
         this.s.bind("showSuspend", "showSuspend");
         this.s.bind("showHibernate", "showHibernate");
+        this.s.bind("hibernateNeedsSudo", "hibernateNeedsSudo");
         this.s.bind("showRestart", "showRestart");
         this.s.bind("showPowerOff", "showPowerOff");
         this.s.bind("showLockscreen", "showLockscreen");
@@ -200,7 +201,10 @@ class ExitApplet extends Applet.IconApplet {
             item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
             item.connect('activate', Lang.bind(this, function () {
                 this.menu.close(true);
-                launcher.spawnv(["systemctl", "hibernate"]);
+                if (this.hibernateNeedsSudo)
+                    launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
+                else
+                    launcher.spawnv(["systemctl", "hibernate"]);
             }));
             this.menu.addMenuItem(item);
         }

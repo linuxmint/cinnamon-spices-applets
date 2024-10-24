@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-08 08:07-0400\n"
-"PO-Revision-Date: 2024-07-28 09:03+0200\n"
+"PO-Revision-Date: 2024-10-02 18:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:59
 msgid "Edit Todos"
-msgstr ""
+msgstr "Teendők szerkesztése"
 
 #. applet.js:63
 msgid "Toggle Reminders"
-msgstr ""
+msgstr "Értesítések bekapcsolása"
 
 #. metadata.json->description
 msgid "Panel based quick todo applet for Cinnamon"
@@ -61,13 +61,13 @@ msgstr "A panel szövegének szélessége karakterekben"
 #. settings-schema.json->reminder_enabled->description
 msgid "Sets whether the reminder flashes are enabled or not"
 msgstr ""
+"Beállítja, hogy az emlékeztető villogások engedélyezve legyenek-e vagy sem"
 
 #. settings-schema.json->reminder_delay->description
-#, fuzzy
 msgid "How often (in seconds) to flash the applet periodically for reminders."
 msgstr ""
 "Milyen gyakran (másodpercekben) kell felvillantani az appletet az "
-"emlékeztetőkért. A letiltáshoz állítsa 0-ra"
+"emlékeztetőkért."
 
 #. settings-schema.json->reminder_time->description
 msgid ""

@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SUSPEND COMPUTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# janax, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-07 23:19-0500\n"
+"POT-Creation-Date: 2024-09-29 20:37-0400\n"
 "PO-Revision-Date: 2024-06-18 16:00+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:48
+#. applet.js:48
 msgid "Suspend"
 msgstr "Sospendi"
 
@@ -43,8 +43,8 @@ msgid ""
 "When enabled, a double-click will suspend the computer, otherwise the "
 "computer will suspend on a single click."
 msgstr ""
-"Se abilitato, un doppio clic sospenderà il computer, altrimenti il ​​"
-"computer verrà sospeso con un singolo clic."
+"Se abilitato, un doppio clic sospenderà il computer, altrimenti il ​​computer "
+"verrà sospeso con un singolo clic."
 
 #. settings-schema.json->count-down->description
 msgid "Use a count down before suspending"
@@ -79,9 +79,9 @@ msgid ""
 "without starting a count down or waiting for an existing count down to "
 "finish."
 msgstr ""
-"Se abilitato, l'utilizzo di Ctrl+clic sospenderà immediatamente il "
-"computer, senza avviare un conto alla rovescia o attendere il "
-"completamento di un conto alla rovescia esistente."
+"Se abilitato, l'utilizzo di Ctrl+clic sospenderà immediatamente il computer, "
+"senza avviare un conto alla rovescia o attendere il completamento di un "
+"conto alla rovescia esistente."
 
 #. settings-schema.json->fullcolor-icon->description
 msgid "Use a full color icon"

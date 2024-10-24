@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: CassiaWindowList@klangman 2.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-15 16:02-0400\n"
+"POT-Creation-Date: 2024-10-20 09:59-0400\n"
 "PO-Revision-Date: 2024-07-28 07:47-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,32 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. 4.0/applet.js:583 6.0/applet.js:583
+#. 4.0/applet.js:581 6.0/applet.js:581
 msgid "all buttons"
 msgstr "minden gomb"
 
-#. 4.0/applet.js:3174 6.0/applet.js:3174
+#. 4.0/applet.js:3172 6.0/applet.js:3172
 msgid "Applet Preferences"
 msgstr "Kisalkalmazás beállítások"
 
-#. 4.0/applet.js:3178 6.0/applet.js:3178
+#. 4.0/applet.js:3176 6.0/applet.js:3176
 msgid "About..."
 msgstr "Névjegy…"
 
-#. 4.0/applet.js:3182 6.0/applet.js:3182
+#. 4.0/applet.js:3180 6.0/applet.js:3180
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#. 4.0/applet.js:3186 6.0/applet.js:3186
+#. 4.0/applet.js:3184 6.0/applet.js:3184
 msgid "Website"
 msgstr "Weboldal"
 
-#. 4.0/applet.js:3190 6.0/applet.js:3190
+#. 4.0/applet.js:3188 6.0/applet.js:3188
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#. 4.0/applet.js:3192 6.0/applet.js:3192
+#. 4.0/applet.js:3190 6.0/applet.js:3190
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
 
@@ -59,47 +59,47 @@ msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példány
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3201 6.0/applet.js:3201
+#. 4.0/applet.js:3199 6.0/applet.js:3199
 msgid "Open new window"
 msgstr "Új ablak megnyitása"
 
-#. 4.0/applet.js:3209 6.0/applet.js:3209
+#. 4.0/applet.js:3207 6.0/applet.js:3207
 msgid "Remove from panel"
 msgstr "Eltávolítás a panelról"
 
-#. 4.0/applet.js:3211 6.0/applet.js:3211
+#. 4.0/applet.js:3209 6.0/applet.js:3209
 msgid "Remove from this workspace"
 msgstr "Eltávolítás erről a munkaterületről"
 
-#. 4.0/applet.js:3217 6.0/applet.js:3217
+#. 4.0/applet.js:3215 6.0/applet.js:3215
 msgid "Pin to panel"
 msgstr "Panelhez rögzítés"
 
-#. 4.0/applet.js:3219 6.0/applet.js:3219
+#. 4.0/applet.js:3217 6.0/applet.js:3217
 msgid "Pin to this workspace"
 msgstr "Erre a munkaterületre rögzítés"
 
-#. 4.0/applet.js:3260 6.0/applet.js:3260
+#. 4.0/applet.js:3258 6.0/applet.js:3258
 msgid "Pin to other workspaces"
 msgstr "Más munkaterületre rögzítés"
 
-#. 4.0/applet.js:3281 6.0/applet.js:3281
+#. 4.0/applet.js:3279 6.0/applet.js:3279
 msgid "Pin to all workspaces"
 msgstr "Az összes munkaterületre rögzítés"
 
-#. 4.0/applet.js:3299 6.0/applet.js:3299
+#. 4.0/applet.js:3297 6.0/applet.js:3297
 msgid "Pin to launcher"
 msgstr "Alkalmazásindítóhoz rögzítés"
 
-#. 4.0/applet.js:3317 4.0/applet.js:3520 6.0/applet.js:3317 6.0/applet.js:3520
+#. 4.0/applet.js:3315 4.0/applet.js:3520 6.0/applet.js:3315 6.0/applet.js:3520
 msgid "Add new Hotkey for"
 msgstr "Új gyorsbillentyű hozzáadása ehhez"
 
-#. 4.0/applet.js:3331 6.0/applet.js:3331
+#. 4.0/applet.js:3329 6.0/applet.js:3329
 msgid "Recent files"
 msgstr "Nemrég használt fájlok"
 
-#. 4.0/applet.js:3355 6.0/applet.js:3355
+#. 4.0/applet.js:3353 6.0/applet.js:3353
 msgid "Places"
 msgstr "Helyek"
 
@@ -179,11 +179,11 @@ msgstr "Nincs címke"
 msgid "Ungroup application windows"
 msgstr "Ablakokat ne csoportosítsa alkalmazás szerint"
 
-#. 4.0/applet.js:3584 6.0/applet.js:3584
+#. 4.0/applet.js:3583 6.0/applet.js:3583
 msgid "Group application windows"
 msgstr "Alkalmazás ablakok csoportosítása"
 
-#. 4.0/applet.js:3597 6.0/applet.js:3597
+#. 4.0/applet.js:3596 6.0/applet.js:3596
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 
@@ -199,31 +199,41 @@ msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3627 6.0/applet.js:3627
+#. 4.0/applet.js:3624 6.0/applet.js:3624
 msgid "Move titlebar on to screen"
 msgstr "Címsor mozgatása a kijelzőre"
 
-#. 4.0/applet.js:3632 6.0/applet.js:3632
+#. 4.0/applet.js:3629 6.0/applet.js:3629
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#. 4.0/applet.js:3636 6.0/applet.js:3636
+#. 4.0/applet.js:3633 6.0/applet.js:3633
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#. 4.0/applet.js:3642 6.0/applet.js:3642
+#. 4.0/applet.js:3639 6.0/applet.js:3639
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#. 4.0/applet.js:3649 6.0/applet.js:3649
+#. 4.0/applet.js:3647 6.0/applet.js:3647
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#. 4.0/applet.js:3660 6.0/applet.js:3660
+#. 4.0/applet.js:3649 6.0/applet.js:3649
+#, fuzzy
+msgid "Close other windows for application"
+msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához"
+
+#. 4.0/applet.js:3670 6.0/applet.js:3670
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#. 4.0/applet.js:3669 6.0/applet.js:3669
+#. 4.0/applet.js:3672 6.0/applet.js:3672
+#, fuzzy
+msgid "Close all windows for application"
+msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához"
+
+#. 4.0/applet.js:3688 6.0/applet.js:3688
 msgid "Close"
 msgstr "Bezárás"
 

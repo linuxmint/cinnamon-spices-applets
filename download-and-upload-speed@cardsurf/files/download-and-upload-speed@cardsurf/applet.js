@@ -26,6 +26,11 @@ if (typeof require !== 'undefined') {
     Infos = AppletDirectory.infos;
 }
 
+const _KI = Math.pow(2, 10);
+const _MI = Math.pow(2, 20);
+const _GI = Math.pow(2, 30);
+const _TI = Math.pow(2, 40);
+
 function _(str) {
     return Gettext.dgettext(uuid, str);
 }
@@ -166,6 +171,7 @@ MyApplet.prototype = {
         for(let [binding, property_name, callback] of [
                         [Settings.BindingDirection.IN, "display_mode", null],
                         [Settings.BindingDirection.IN, "unit_type", null],
+                        [Settings.BindingDirection.IN, "is_binary", null],
                         [Settings.BindingDirection.IN, "update_every", null],
                         [Settings.BindingDirection.IN, "update_available_interfaces_every", null],
                         [Settings.BindingDirection.IN, "launch_terminal", null],
@@ -671,7 +677,7 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_value_order, this.decimal_places);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_value_order, this.decimal_places, this.is_binary);
         this.gui_data_limit = new AppletGui.GuiDataLimit(this._panelHeight, this.gui_data_limit_type);
         this.actor.destroy_all_children();
         this._add_gui_speed();
@@ -760,11 +766,11 @@ MyApplet.prototype = {
     },
 
     replace_with_zero: function (bytes, minimum) {
-        return bytes >= minimum ? bytes : 0;
+        return (bytes >= minimum) ? bytes : 0;
     },
 
     scale: function (bytes) {
-        return this.display_mode == AppletConstants.DisplayMode.SPEED ? Math.round(bytes / this.update_every) : bytes;
+        return (this.display_mode == AppletConstants.DisplayMode.SPEED) ? Math.round(bytes / this.update_every) : bytes;
     },
 
     convert_to_readable_string: function (bytes) {
@@ -790,19 +796,34 @@ MyApplet.prototype = {
     },
 
     convert_bytes_to_readable_unit: function (bytes) {
+        if (this.is_binary === true) {
+            if(bytes >= _TI) {
+                return [bytes/_TI, _(" TiB")];
+            }
+            if(bytes >= _GI) {
+                return [bytes/_GI, _(" GiB")];
+            }
+            if(bytes >= _MI) {
+                return [bytes/_MI, _(" MiB")];
+            }
+            if(bytes >= _KI) {
+                return [bytes/_KI, _(" kiB")];
+            }
+            return [bytes, _("   B")];
+        }
         if(bytes >= 1000000000000) {
-            return [bytes/1000000000000, "TB"];
+            return [bytes/1000000000000, _(" TB")];
         }
         if(bytes >= 1000000000) {
-            return [bytes/1000000000, "GB"];
+            return [bytes/1000000000, _(" GB")];
         }
         if(bytes >= 1000000) {
-            return [bytes/1000000, "MB"];
+            return [bytes/1000000, _(" MB")];
         }
         if(bytes >= 1000) {
-            return [bytes/1000, "kB"];
+            return [bytes/1000, _(" kB")];
         }
-        return [bytes, "B"];
+        return [bytes, _("  B")];
     },
 
     convert_to_bits: function (bytes) {
@@ -810,19 +831,34 @@ MyApplet.prototype = {
     },
 
     convert_bits_to_readable_unit: function (bits) {
+        if (this.is_binary === true) {
+            if(bits >= _TI) {
+                return [bits/_TI, _(" Tib")];
+            }
+            if(bits >= _GI) {
+                return [bits/_GI, _(" Gib")];
+            }
+            if(bits >= _MI) {
+                return [bits/_MI, _(" Mib")];
+            }
+            if(bits >= _KI) {
+                return [bits/_KI, _(" kib")];
+            }
+            return [bits, _("   b")];
+        }
         if(bits >= 1000000000000) {
-            return [bits/1000000000000, "Tb"];
+            return [bits/1000000000000, _(" Tb")];
         }
         if(bits >= 1000000000) {
-            return [bits/1000000000, "Gb"];
+            return [bits/1000000000, _(" Gb")];
         }
         if(bits >= 1000000) {
-            return [bits/1000000, "Mb"];
+            return [bits/1000000, _(" Mb")];
         }
         if(bits >= 1000) {
-            return [bits/1000, "kb"];
+            return [bits/1000, _(" kb")];
         }
-        return [bits, _("b")];
+        return [bits, _("  b")];
     },
 
     is_base: function (unit) {
@@ -830,7 +866,7 @@ MyApplet.prototype = {
     },
 
     round_output_number: function (number) {
-        let output_number = this.decimal_places == AppletConstants.DecimalPlaces.AUTO ?
+        let output_number = (this.decimal_places == AppletConstants.DecimalPlaces.AUTO) ?
                             this.round_output_number_auto(number) : number.toFixed(this.decimal_places);
         return output_number;
     },

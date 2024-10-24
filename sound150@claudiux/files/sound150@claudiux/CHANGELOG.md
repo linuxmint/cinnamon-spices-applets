@@ -1,3 +1,26 @@
+### v7.2.3~20241021
+  * Improvements to album art display.
+
+### v7.2.2~20241019
+  * Minor bug fix.
+
+### v7.2.1~20241018
+  * Some improvements to fix #6504.
+
+### v7.2.0~20241017
+  * Fixes #6504. (Improvements are planed.)
+
+### v7.1.1~20241016
+  * Avoids loud cracking sound at shutdown.
+  * Option removed. This is basic now.
+
+### v7.1.0~20241013
+  * Option to try to avoid loud cracking sound at shutdown.
+  * Fixes https://github.com/linuxmint/cinnamon/issues/12446.
+
+### v7.0.0~20241011
+  * Compatible with Cinnamon 6.4.
+
 ### v6.18.1~20240907
   * Fixes #6301.
 

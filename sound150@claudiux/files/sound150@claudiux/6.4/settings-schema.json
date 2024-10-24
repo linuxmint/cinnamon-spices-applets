@@ -1,0 +1,476 @@
+{
+  "layoutsound150": {
+    "type": "layout",
+    "pages": [
+      "page_behavior",
+      "page_sound",
+      "page_icon",
+      "page_shortcuts"
+    ],
+    "page_behavior": {
+      "type": "page",
+      "title": "Behavior",
+      "sections": [
+        "sectionBehavior1",
+        "sectionBehavior2",
+        "sectionBehavior3"
+      ]
+    },
+    "page_icon": {
+      "type": "page",
+      "title": "Icon",
+      "sections": [
+        "sectionIcon1"
+      ]
+    },
+    "page_sound": {
+      "type": "page",
+      "title": "Sound",
+      "sections": [
+        "sectionSound1",
+        "sectionSound2",
+        "sectionSound3",
+        "sectionSound4"
+      ]
+    },
+    "page_shortcuts": {
+      "type": "page",
+      "title": "Shortcuts",
+      "sections": [
+        "sectionShortcuts1"
+      ]
+    },
+    "sectionBehavior1": {
+      "type": "section",
+      "title": "Menu",
+      "keys": [
+        "playerControl",
+        "extendedPlayerControl",
+        "keepPlayerListOpen",
+        "keepChoosePlayerOpen",
+        "avoidTwice",
+        "seekerTooltipDelay"
+      ]
+    },
+    "sectionBehavior2": {
+      "type": "section",
+      "title": "Panel",
+      "keys": [
+        "showtrack",
+        "truncatetext",
+        "middleClickAction",
+        "middleShiftClickAction",
+        "horizontalScroll",
+        "showalbum",
+        "keepAlbumAspectRatio",
+        "hideSystray"
+      ]
+    },
+    "sectionBehavior3": {
+      "type": "section",
+      "title": "Tooltip",
+      "keys": [
+        "tooltipShowVolume",
+        "tooltipShowPlayer",
+        "tooltipShowArtistTitle"
+      ]
+    },
+    "sectionIcon1": {
+      "type": "section",
+      "title": "Icon",
+      "keys": [
+        "showalbum",
+        "keepAlbumAspectRatio",
+        "showVolumeLevelNearIcon",
+        "showMicMutedOnIcon",
+        "showMicUnmutedOnIcon",
+        "adaptColor",
+        "color0_100",
+        "color101_115",
+        "color116_130",
+        "color131_150",
+        "resetColorsButton"
+      ]
+    },
+    "sectionSound1": {
+      "type": "section",
+      "title": "Sound Settings",
+      "keys": [
+        "openSystemSoundSettings",
+        "maxVolume",
+        "stepVolume",
+        "magneticOn",
+        "magnetic25On",
+        "alwaysCanChangeMic"
+      ]
+    },
+    "sectionSound2": {
+      "type": "section",
+      "title": "OSD",
+      "keys": [
+        "showMediaKeysOSD",
+        "showOSDonStartup"
+      ]
+    },
+    "sectionSound3": {
+      "type": "section",
+      "title": "Sounds",
+      "keys": [
+        "volumeSoundFile",
+        "volumeSoundEnabled"
+      ]
+    },
+    "sectionSound4": {
+      "type": "section",
+      "dependency": "soundATcinnamonDOTorg_is_loaded",
+      "title": "Remove incompatible applets",
+      "keys": [
+        "remove_soundATcinnamonDOTorg"
+      ]
+    },
+    "sectionShortcuts1": {
+      "type": "section",
+      "title": "Shortcuts",
+      "keys": [
+        "keyOpen",
+        "keySwitchPlayer",
+        "redefine-volume-keybindings",
+        "button-set-to-default-keybindings",
+        "audio-stop",
+        "pause-on-off",
+        "volume-mute",
+        "volume-up",
+        "volume-down",
+        "audio-next",
+        "audio-prev"
+      ]
+    }
+  },
+  "playerControl": {
+    "type": "switch",
+    "default": true,
+    "description": "Control Players"
+  },
+  "extendedPlayerControl": {
+    "type": "switch",
+    "default": false,
+    "description": "Show Loop and Shuffle controls",
+    "dependency": "playerControl"
+  },
+  "keepPlayerListOpen": {
+    "type": "switch",
+    "dependency": "playerControl",
+    "default": false,
+    "description": "Keep the player list open"
+  },
+  "keepChoosePlayerOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the player controller selector open"
+  },
+  "avoidTwice": {
+    "type": "switch",
+    "default": false,
+    "description": "Avoid displaying controllers twice"
+  },
+  "seekerTooltipDelay": {
+    "type": "spinbutton",
+    "default": 400,
+    "units": "ms",
+    "min": 50,
+    "max": 1500,
+    "step": 50,
+    "description": "Seeker tooltip: time to disappear"
+  },
+  "keyOpen": {
+    "type": "keybinding",
+    "description": "Show menu",
+    "default": "<Shift><Super>s",
+    "tooltip": "Set keybinding(s) to show the sound applet menu."
+  },
+  "keySwitchPlayer": {
+    "type": "keybinding",
+    "description": "Switch to next player",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to switch to the next player if it exists."
+  },
+  "_knownPlayers": {
+    "type": "generic",
+    "default": [
+      "banshee",
+      "vlc",
+      "rhythmbox"
+    ]
+  },
+  "showtrack": {
+    "type": "switch",
+    "default": false,
+    "description": "Show song information on the panel",
+    "dependency": "playerControl"
+  },
+  "truncatetext": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 5,
+    "max": 512,
+    "units": "characters",
+    "step": 1,
+    "description": "Limit song information to",
+    "dependency": "showtrack"
+  },
+  "middleClickAction": {
+    "type": "combobox",
+    "default": "out_mute",
+    "options": {
+      "Toggle Mute": "mute",
+      "Toggle Mute output": "out_mute",
+      "Toggle Mute input": "in_mute",
+      "Toggle Play / Pause": "player"
+    },
+    "description": "Action on middle click"
+  },
+  "middleShiftClickAction": {
+    "type": "combobox",
+    "default": "in_mute",
+    "options": {
+      "Toggle Mute": "mute",
+      "Toggle Mute output": "out_mute",
+      "Toggle Mute input": "in_mute",
+      "Toggle Play / Pause": "player"
+    },
+    "description": "Action on shift+middle click"
+  },
+  "horizontalScroll": {
+    "type": "switch",
+    "default": false,
+    "description": "Use horizontal scrolling to move between tracks",
+    "dependency": "playerControl"
+  },
+  "showalbum": {
+    "type": "switch",
+    "default": false,
+    "description": "Show album art as icon",
+    "dependency": "playerControl"
+  },
+  "keepAlbumAspectRatio": {
+    "type": "switch",
+    "default": true,
+    "description": "Keep album art aspect ratio",
+    "dependency": "playerControl"
+  },
+  "hideSystray": {
+    "type": "switch",
+    "description": "Hide system tray icons for compatible players",
+    "default": true
+  },
+  "tooltipShowVolume": {
+    "type": "switch",
+    "default": true,
+    "description": "Show volume in tooltip"
+  },
+  "tooltipShowPlayer": {
+    "type": "switch",
+    "default": false,
+    "description": "Show player in tooltip"
+  },
+  "tooltipShowArtistTitle": {
+    "type": "switch",
+    "default": false,
+    "description": "Show song artist and title in tooltip"
+  },
+  "showVolumeLevelNearIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display volume level near icon"
+  },
+  "showMicMutedOnIcon": {
+    "type": "switch",
+    "default": true,
+    "description": "Display icon indicating that the microphone is muted, if applicable"
+  },
+  "showMicUnmutedOnIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display icon indicating that the microphone is activated, if applicable"
+  },
+  "openSystemSoundSettings": {
+    "type": "button",
+    "description": "System Sound Settings",
+    "callback": "_onSystemSoundSettingsPressed"
+  },
+  "maxVolume": {
+	"type": "scale",
+	"description": "Maximum volume (%)",
+	"default": 100,
+	"min": 30,
+	"max": 150,
+	"step": 5
+  },
+  "stepVolume": {
+    "type": "combobox",
+    "default": 5,
+    "options": {
+      "10%": 10,
+      "9%": 9,
+      "8%": 8,
+      "7%": 7,
+      "6%": 6,
+      "5%": 5,
+      "4%": 4,
+      "3%": 3,
+      "2%": 2,
+      "1%": 1
+    },
+    "tooltip": "% of nominal volume",
+    "description": "+/-"
+  },
+  "magneticOn": {
+    "type": "switch",
+    "description": "Magnetize the 'Volume 100%' mark",
+    "tooltip": "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step.",
+    "default": true
+  },
+  "magnetic25On": {
+    "type": "switch",
+    "description": "Magnetize all multiples of 25%",
+    "dependency": "magneticOn",
+    "default": false
+  },
+  "adaptColor": {
+    "type": "switch",
+    "description": "Adjust the color of the icon to the volume",
+    "default": true
+  },
+  "color0_100": {
+    "type": "colorchooser",
+    "dependency": "adaptColor",
+    "default": "#e4e4e4",
+    "description": "Icon color: 0%-100%"
+  },
+  "color101_115": {
+    "type": "colorchooser",
+    "dependency": "adaptColor",
+    "default": "yellow",
+    "description": "Icon color: 101%-115%"
+  },
+  "color116_130": {
+    "type": "colorchooser",
+    "dependency": "adaptColor",
+    "default": "orange",
+    "description": "Icon color: 116%-130%"
+  },
+  "color131_150": {
+    "type": "colorchooser",
+    "dependency": "adaptColor",
+    "default": "red",
+    "description": "Icon color: 131%-150%"
+  },
+  "resetColorsButton": {
+    "type": "button",
+    "dependency": "adaptColor",
+    "description": "Set colors to default values (yellow, orange, red)",
+    "callback": "_reset_colors"
+  },
+  "alwaysCanChangeMic": {
+    "type": "switch",
+    "description": "Always allow microphone to be reactivated",
+    "tooltip": "Always show the 'Mute input' switch in the context menu.",
+    "default": true
+  },
+  "showMediaKeysOSD": {
+    "type": "combobox",
+    "default": "medium",
+    "options": {
+      "disabled": "disabled",
+      "small": "small",
+      "medium": "medium",
+      "large": "large"
+    },
+    "description": "Whether the media keys osd is disabled or its relative display size"
+  },
+  "showOSDonStartup": {
+    "type": "switch",
+    "description": "Show volume level in OSD on startup",
+    "default": false
+  },
+  "volumeSoundFile": {
+    "type": "soundfilechooser",
+    "description": "Which sound to play when the volume is changed",
+    "default": "/usr/share/mint-artwork/sounds/volume.oga"
+  },
+  "volumeSoundEnabled": {
+    "type": "switch",
+    "description": "Whether to play a sound when the volume is changed",
+    "default": false
+  },
+  "redefine-volume-keybindings": {
+    "type": "switch",
+    "description": "Redefine Multimedia Keyboard Shortcuts",
+    "default": false
+  },
+  "button-set-to-default-keybindings": {
+    "type": "button",
+    "dependency": "redefine-volume-keybindings",
+    "description": "Use the same shortcuts as those defined by Cinnamon",
+    "callback": "_set_shortcuts_as_default"
+  },
+  "pause-on-off": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Pause/Play toggle"
+  },
+  "audio-stop": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Stop"
+  },
+  "volume-mute": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Volume Mute"
+  },
+  "volume-up": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Volume Up"
+  },
+  "volume-down": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Volume Down"
+  },
+  "audio-next": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Next Track"
+  },
+  "audio-prev": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Previous Track"
+  },
+  "volume": {
+    "type": "generic",
+    "default": "50%"
+  },
+  "mic-level": {
+    "type": "generic",
+    "default": "50%"
+  },
+  "soundATcinnamonDOTorg_is_loaded": {
+    "type": "generic",
+    "default": false
+  },
+  "remove_soundATcinnamonDOTorg": {
+    "type": "button",
+    "description": "Remove from panel the sound@cinnamon.org applet",
+    "callback": "_on_remove_soundATcinnamonDOTorg_from_panels"
+  }
+}

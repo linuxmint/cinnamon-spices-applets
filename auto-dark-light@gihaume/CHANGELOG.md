@@ -1,6 +1,14 @@
-# Change log
+## 1.2.1 - 22.10.2024
 
-## 1.1.0 - 2.09.2024
+- Custom commands launching feature:
+  - Corrected list's `Active` attribute default to `true`
+  - Added shell features support
+
+## 1.2.0 - 22.10.2024
+
+- Added custom commands launching feature
+
+## 1.1.0 - 02.09.2024
 
 - Added desktop background support
 

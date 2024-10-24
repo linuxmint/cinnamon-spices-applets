@@ -95,19 +95,20 @@ IconLabel.prototype = {
 
 
 
-function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places) {
-    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places);
+function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary) {
+    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary);
 };
 
 GuiSpeed.prototype = {
 
-    _init: function(panel_height, gui_speed_type, gui_value_order, decimal_places) {
+    _init: function(panel_height, gui_speed_type, gui_value_order, decimal_places, is_binary=false) {
 
         this.panel_height = panel_height;
         this.gui_speed_type = gui_speed_type;
         this.gui_value_order = gui_value_order;
         this.decimal_places = decimal_places;
         this.text_spacing = 5;
+        this.is_binary = is_binary;
 
         this.actor = new St.BoxLayout();
         this.iconlabel_received = new IconLabel();
@@ -235,10 +236,11 @@ GuiSpeed.prototype = {
     _get_fixed_width_text: function() {
         let text = "";
         if(this.decimal_places == AppletConstants.DecimalPlaces.AUTO) {
-            text = " 99.9MB";
+            text = (this.is_binary) ? " 999.9 MiB " : " 999.9 MB ";
         }
         else {
-            text = " 999." + this.repeat_string("9", this.decimal_places) + "MB";
+            text = " 999." + this.repeat_string("9", this.decimal_places);
+            text += (this.is_binary) ? " MiB " : " MB ";
         }
         return text;
     },

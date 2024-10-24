@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# EXIT
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-25 23:19+0100\n"
-"PO-Revision-Date: 2024-02-03 06:44+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 21:43+0200\n"
+"PO-Revision-Date: 2024-10-02 16:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,37 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: 5.4/applet.js:91
+#. 5.4/applet.js:110
 msgid "Restart Cinnamon"
 msgstr "Cinnamon újraindítása"
 
-#: 5.4/applet.js:103
+#. 5.4/applet.js:122
 msgid "Lock Screen"
 msgstr "Képernyő zárolása"
 
-#: 5.4/applet.js:126 5.4/applet.js:136 5.4/applet.js:145
+#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
 msgid "Switch User"
 msgstr "Felhasználó váltás"
 
-#: 5.4/applet.js:157
+#. 5.4/applet.js:180
 msgid "Log Out"
 msgstr "Kijelentkezés"
 
-#: 5.4/applet.js:169
+#. 5.4/applet.js:192
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: 5.4/applet.js:178
+#. 5.4/applet.js:201
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: 5.4/applet.js:190
+#. 5.4/applet.js:216
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: 5.4/applet.js:199
+#. 5.4/applet.js:225
 msgid "Power Off"
 msgstr "Kikapcsolás"
 
@@ -90,6 +91,10 @@ msgstr "A felfüggesztési opció megjelenítése"
 #. 5.4->settings-schema.json->showHibernate->description
 msgid "Show the Hibernate option"
 msgstr "Hibernálási opció megjelenítése"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "A hibernáláshoz root felhasználói jogok szükségesek (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
