@@ -1,0 +1,18 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.4->settings-schema.json->openSystemSoundSettings->description
+msgid "System Sound Settings"
+msgstr ""
+
+#. 6.4->settings-schema.json->maxVolume->description
+msgid "Maximum volume (%)"
+msgstr ""
+
+#. 6.4->settings-schema.json->color0_100->description
+msgid "Icon color: 0%-100%"
+msgstr ""
