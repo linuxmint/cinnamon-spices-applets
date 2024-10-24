@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-22 19:07+0200\n"
-"PO-Revision-Date: 2024-10-22 12:41-0300\n"
+"PO-Revision-Date: 2024-10-24 12:41-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -68,7 +68,7 @@ msgstr ""
 
 #. lib/time_change_listener/time_change_listener.js:44
 msgid "Compilation of"
-msgstr ""
+msgstr "Compilación de"
 
 #. lib/time_change_listener/time_change_listener.js:44
 #. lib/commands_launcher/commands_launcher.js:29
@@ -77,11 +77,11 @@ msgstr "ha fallado"
 
 #. lib/time_change_listener/time_change_listener.js:97
 msgid "the subprocess"
-msgstr ""
+msgstr "el subproceso"
 
 #. lib/time_change_listener/time_change_listener.js:97
 msgid "wrote on its error output"
-msgstr ""
+msgstr "escribió en su salida de error"
 
 #. lib/twilights_calculator/twilights_calculator.js:22
 msgid "unable to calculate twilight times, check coordinates format or range"
