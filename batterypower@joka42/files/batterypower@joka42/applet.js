@@ -69,6 +69,8 @@ BatteryPowerApplet.prototype = {
 				this.set_applet_label(value + unit_string);
 				break;
 			case "unknown":
+			case "not charging":
+			case "full":
 				this.set_applet_tooltip('Battery is fully charged. AC is plugged in.');
 				this.set_applet_label(charging_indicator);
 				break;
