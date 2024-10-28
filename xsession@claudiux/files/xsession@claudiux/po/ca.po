@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-06 01:02+0200\n"
-"PO-Revision-Date: 2024-07-06 03:34+0200\n"
+"PO-Revision-Date: 2024-10-28 03:02+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -73,22 +73,19 @@ msgstr "Recarregar l'extensió:"
 
 #. applet.js:217
 msgid "--- Settings for ---"
-msgstr ""
+msgstr "--- Opcions per ---"
 
 #. applet.js:223
-#, fuzzy
 msgid "Applet:"
-msgstr "Miniaplicació"
+msgstr "Miniaplicació:"
 
 #. applet.js:238
-#, fuzzy
 msgid "Desklet:"
-msgstr "Miniaplicació d'escriptori"
+msgstr "Miniaplicació d'escriptori:"
 
 #. applet.js:253
-#, fuzzy
 msgid "Extension:"
-msgstr "Extensió"
+msgstr "Extensió:"
 
 #. applet.js:268
 msgid "--- View Code ---"
@@ -111,12 +108,11 @@ msgid "Xsession"
 msgstr "Xsession"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart, access source code and configure your Spices (Applets, Desklets, "
 "Extensions). View the contents of your .xsession-errors file in real time. "
 "Restart Cinnamon."
 msgstr ""
 "Ús permet reiniciar o obrir el codi font d'espècies (miniaplicacions, "
-"miniaplicacions d'escriptori, extensions), mostrar el contingut del fitxer ."
-"xsession-errors en temps real i reiniciar Cinnamon."
+"miniaplicacions d'escriptori, extensions), veure el contingut del vostre "
+"fitxer .xsession-errors en temps real i reiniciar Cinnamon."
