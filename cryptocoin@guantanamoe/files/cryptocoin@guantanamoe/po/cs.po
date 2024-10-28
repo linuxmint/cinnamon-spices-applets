@@ -243,7 +243,7 @@ msgstr "Čára"
 
 #. settings-schema.json->graph-color->description
 msgid "Graph Foreground Color"
-msgstr "Barva pozedí grafu"
+msgstr "Barva grafu"
 
 #. settings-schema.json->alert-delta-update-interval->units
 msgid "seconds"
