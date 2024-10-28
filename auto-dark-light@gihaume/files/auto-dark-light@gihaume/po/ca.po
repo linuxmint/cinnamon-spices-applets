@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-22 19:07+0200\n"
-"PO-Revision-Date: 2024-10-22 07:41+0200\n"
+"PO-Revision-Date: 2024-10-28 02:52+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -69,20 +69,20 @@ msgstr ""
 
 #. lib/time_change_listener/time_change_listener.js:44
 msgid "Compilation of"
-msgstr ""
+msgstr "Compilació de"
 
 #. lib/time_change_listener/time_change_listener.js:44
 #. lib/commands_launcher/commands_launcher.js:29
 msgid "failed"
-msgstr ""
+msgstr "ha fallat"
 
 #. lib/time_change_listener/time_change_listener.js:97
 msgid "the subprocess"
-msgstr ""
+msgstr "el subprocés"
 
 #. lib/time_change_listener/time_change_listener.js:97
 msgid "wrote on its error output"
-msgstr ""
+msgstr "ha escrit a la seva sortida d'error"
 
 #. lib/twilights_calculator/twilights_calculator.js:22
 msgid "unable to calculate twilight times, check coordinates format or range"
@@ -92,19 +92,19 @@ msgstr ""
 
 #. lib/commands_launcher/commands_launcher.js:29
 msgid "the command"
-msgstr ""
+msgstr "l'ordre"
 
 #. lib/commands_launcher/commands_launcher.js:31
 msgid "due to a wrong format"
-msgstr ""
+msgstr "degut a un format invàlid"
 
 #. lib/commands_launcher/commands_launcher.js:35
 msgid "due to time expiration"
-msgstr ""
+msgstr "degut a l'esgotament del temps"
 
 #. lib/commands_launcher/commands_launcher.js:38
 msgid "with the following errors"
-msgstr ""
+msgstr "amb els següents errors"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -139,7 +139,6 @@ msgstr "Temes"
 
 #. settings-schema.json->light-mode_others->title
 #. settings-schema.json->dark-mode_others->title
-#, fuzzy
 msgid "Others"
 msgstr "Altres"
 
@@ -151,7 +150,7 @@ msgstr "Fons d'escriptori"
 #. settings-schema.json->light-mode_commands->title
 #. settings-schema.json->dark-mode_commands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Ordres personalitzades"
 
 #. settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
@@ -308,18 +307,17 @@ msgid "Set desktop background"
 msgstr "Establir fons d'escriptori"
 
 #. settings-schema.json->both-modes_background_switch_enable->tooltip
-#, fuzzy
 msgid "Enable setting the desktop backgrounds for light and dark modes"
-msgstr "Estableix el fons d'escriptori per als modes clar i fosc"
+msgstr "Activar l'establiment dels fons d'escriptori per als modes clar i fosc"
 
 #. settings-schema.json->light-mode_commands_switch_enable->description
 #. settings-schema.json->dark-mode_commands_switch_enable->description
 msgid "Launch custom commands"
-msgstr ""
+msgstr "Llançar ordres personalitzades"
 
 #. settings-schema.json->light-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to light mode"
-msgstr ""
+msgstr "Activar el llançament d'ordres en canviar al mode clar"
 
 #. settings-schema.json->light-mode_background_button_open-os-
 #. settings->tooltip
@@ -377,22 +375,22 @@ msgstr ""
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Expiry (s)"
-msgstr ""
+msgstr "Esgotament (s)"
 
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Ordre"
 
 #. settings-schema.json->light-mode_commands_list->tooltip
 #. settings-schema.json->dark-mode_commands_list->tooltip
@@ -408,15 +406,25 @@ msgid ""
 "- the error messages reports stderr when the return status is not 0 and will "
 "appear in a notification"
 msgstr ""
+"Llista d'ordres que seran executades en canviar a aquest mode\n"
+"\n"
+"Notes:\n"
+"- La finalitat del nom és facilitar la identificació de missatges d'error\n"
+"- El temps d'esgotament interromp el procés d'execució de l'ordre\n"
+"- Un temps d'esgotament de 0 segons significa mai\n"
+"- Qualsevol procés fill no serà aturat\n"
+"- La ruta és al directori ~\n"
+"- Els missatges d'error reporten stderr quan l'estat del retorn no és 0 i "
+"apareixeran en una notificació"
 
 #. settings-schema.json->light-mode_commands_button_launch->description
 #. settings-schema.json->dark-mode_commands_button_launch->description
 msgid "Launch commands"
-msgstr ""
+msgstr "Llançar ordres"
 
 #. settings-schema.json->light-mode_commands_button_launch->tooltip
 msgid "Launch the commands set for the light mode"
-msgstr ""
+msgstr "Llançar ordres establertes pel mode clar"
 
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -429,7 +437,7 @@ msgstr "Aplica els temes foscos al sistema manualment"
 
 #. settings-schema.json->dark-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to dark mode"
-msgstr ""
+msgstr "Activar l'execució d'ordres en canviar al mode fosc"
 
 #. settings-schema.json->dark-mode_background_button_detect->tooltip
 msgid ""
@@ -446,4 +454,4 @@ msgstr ""
 
 #. settings-schema.json->dark-mode_commands_button_launch->tooltip
 msgid "Launch the commands set for the dark mode"
-msgstr ""
+msgstr "Llançar ordres establertes pel mode fosc"
