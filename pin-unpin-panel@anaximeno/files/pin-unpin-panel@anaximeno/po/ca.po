@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.4/applet.js:155
 msgid "Click to Unpin the Panel"
@@ -55,21 +55,19 @@ msgstr "Ocultació intel·ligent"
 
 #. 5.4->settings-schema.json->pinned-at-startup->description
 msgid "At Startup"
-msgstr ""
+msgstr "A l'inici"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
 msgid "Leave the panel as it is"
-msgstr ""
+msgstr "Deixa el tauler tal com està"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Pin the panel"
-msgstr "Fixa o plega el tauler"
+msgstr "Fixa el tauler"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Unpin the panel"
-msgstr "Fixa o plega el tauler"
+msgstr "Plega el tauler"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"
