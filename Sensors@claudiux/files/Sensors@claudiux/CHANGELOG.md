@@ -1,3 +1,9 @@
+### v3.8.3~20241029
+  * Fixes #6541. Adds FAQ about Nvidia video card temperature readings. Thanks to @JEleniel!
+
+### v3.8.2~20241011
+  * Adds support for Nvidia SMI temperatures. Thanks to @JEleniel!
+
 ### v3.8.1~20240901
   * Fixes #6353. Repairs tooltip.
 
