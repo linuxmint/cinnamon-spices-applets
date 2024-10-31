@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# DIRECTORY MENU
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# torchipeppo, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-12 13:55-0400\n"
+"POT-Creation-Date: 2024-10-31 18:13+0100\n"
 "PO-Revision-Date: 2024-04-07 22:38-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,6 +41,10 @@ msgstr ""
 msgid "Base Directory"
 msgstr "Diretório base"
 
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr ""
+
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
 msgstr "Ícone"
@@ -57,12 +61,32 @@ msgstr "Texto da Dica"
 msgid "Panel Text"
 msgstr "Texto do Painel"
 
-#. settings-schema.json->show-menu->description
-msgid "Show menu"
+#. settings-schema.json->behavior-section->description
+msgid "Behavior"
 msgstr ""
 
-#. settings-schema.json->show-menu->tooltip
-msgid "Set keybinding(s) to show the menu."
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Incluir ficheiros ocultos"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr ""
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr ""
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr ""
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
 msgstr ""
 
 #. settings-schema.json->limit-characters->description
@@ -81,6 +105,14 @@ msgstr ""
 "O número (aproximado) de caracteres para cada entrada.\n"
 "Útil caso achar que o menu está muito largo."
 
-#. settings-schema.json->show-hidden->description
-msgid "Include hidden files"
-msgstr "Incluir ficheiros ocultos"
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr ""

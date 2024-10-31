@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# DIRECTORY MENU
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# torchipeppo, 2024
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-12 13:55-0400\n"
+"POT-Creation-Date: 2024-10-31 18:13+0100\n"
 "PO-Revision-Date: 2024-07-19 01:57+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -41,6 +41,10 @@ msgstr ""
 msgid "Base Directory"
 msgstr "Directori base"
 
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr ""
+
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
 msgstr "Icona (passeu el cursor per aquí per més informació!)"
@@ -57,13 +61,33 @@ msgstr "Text de la informació d'eines"
 msgid "Panel Text"
 msgstr "Text del tauler"
 
-#. settings-schema.json->show-menu->description
-msgid "Show menu"
-msgstr "Mostrar el menú"
+#. settings-schema.json->behavior-section->description
+msgid "Behavior"
+msgstr ""
 
-#. settings-schema.json->show-menu->tooltip
-msgid "Set keybinding(s) to show the menu."
-msgstr "Dreceres del teclat per mostrar el menú."
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Inclou els fitxers ocults"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr ""
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr ""
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr ""
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr ""
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
@@ -81,6 +105,14 @@ msgstr ""
 "(Aproximadament) Limita el número de caràcters de cada element.\n"
 "Útil si penseu que el menú és massa ample."
 
-#. settings-schema.json->show-hidden->description
-msgid "Include hidden files"
-msgstr "Inclou els fitxers ocults"
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "Mostrar el menú"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "Dreceres del teclat per mostrar el menú."

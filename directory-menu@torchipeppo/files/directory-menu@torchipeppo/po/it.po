@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# DIRECTORY MENU
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# torchipeppo, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-12 13:55-0400\n"
+"POT-Creation-Date: 2024-10-31 18:13+0100\n"
 "PO-Revision-Date: 2024-02-10 15:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,6 +38,10 @@ msgstr "Naviga rapidamente attraverso le tue cartelle con un menù a tendina."
 msgid "Base Directory"
 msgstr "Cartella principale"
 
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr ""
+
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
 msgstr "Icona (tieni il mouse qui per info!)"
@@ -56,13 +60,33 @@ msgstr "Didascalia"
 msgid "Panel Text"
 msgstr "Testo sul pannello"
 
-#. settings-schema.json->show-menu->description
-msgid "Show menu"
-msgstr "Apri il menù"
+#. settings-schema.json->behavior-section->description
+msgid "Behavior"
+msgstr ""
 
-#. settings-schema.json->show-menu->tooltip
-msgid "Set keybinding(s) to show the menu."
-msgstr "Imposta una o più scorciatoie da tastiera per aprire il menù."
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Mostra i file nascosti"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr ""
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr ""
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr ""
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr ""
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
@@ -80,6 +104,14 @@ msgstr ""
 "Limita (approssimativamente) il numero di caratteri di ciascuna riga.\n"
 "Utile se il menù risulta troppo largo."
 
-#. settings-schema.json->show-hidden->description
-msgid "Include hidden files"
-msgstr "Mostra i file nascosti"
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "Apri il menù"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "Imposta una o più scorciatoie da tastiera per aprire il menù."
