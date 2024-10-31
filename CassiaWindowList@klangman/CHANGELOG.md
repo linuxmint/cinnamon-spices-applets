@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.8
+
+* Remove the focus highlighting when no window has the focus (i.e. after you click on the desktop)
+
 ## 2.3.7
 
 * Added scroll-wheel options, cycle all window-list windows and cycle group/pool windows

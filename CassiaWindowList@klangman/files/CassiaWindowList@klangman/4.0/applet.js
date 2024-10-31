@@ -4616,6 +4616,10 @@ class Workspace {
              }
           }
           this._currentFocus = newFocus;
+       } else if (this._currentFocus) {
+          this._currentFocus.actor.remove_style_pseudo_class("focus");
+          if (this._applet._displayPinned === DisplayPinned.Disabled)
+             this._currentFocus.actor.remove_style_pseudo_class("active");
        }
     }
   }
