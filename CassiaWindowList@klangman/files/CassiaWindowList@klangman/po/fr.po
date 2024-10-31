@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-20 09:59-0400\n"
+"POT-Creation-Date: 2024-10-30 20:53-0400\n"
 "PO-Revision-Date: 2024-10-02 21:39+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,32 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. 4.0/applet.js:581 6.0/applet.js:581
+#. 4.0/applet.js:584 6.0/applet.js:584
 msgid "all buttons"
 msgstr "tous les boutons"
 
-#. 4.0/applet.js:3172 6.0/applet.js:3172
+#. 4.0/applet.js:3258 6.0/applet.js:3258
 msgid "Applet Preferences"
 msgstr "Préférences"
 
-#. 4.0/applet.js:3176 6.0/applet.js:3176
+#. 4.0/applet.js:3262 6.0/applet.js:3262
 msgid "About..."
 msgstr "À propos..."
 
-#. 4.0/applet.js:3180 6.0/applet.js:3180
+#. 4.0/applet.js:3266 6.0/applet.js:3266
 msgid "Configure..."
 msgstr "Configurer..."
 
-#. 4.0/applet.js:3184 6.0/applet.js:3184
+#. 4.0/applet.js:3270 6.0/applet.js:3270
 msgid "Website"
 msgstr "Site web"
 
-#. 4.0/applet.js:3188 6.0/applet.js:3188
+#. 4.0/applet.js:3274 6.0/applet.js:3274
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Supprimer '%s'"
 
-#. 4.0/applet.js:3190 6.0/applet.js:3190
+#. 4.0/applet.js:3276 6.0/applet.js:3276
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
 
@@ -60,75 +60,75 @@ msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3199 6.0/applet.js:3199
+#. 4.0/applet.js:3285 6.0/applet.js:3285
 msgid "Open new window"
 msgstr "Ouvrir une nouvelle fenêtre"
 
-#. 4.0/applet.js:3207 6.0/applet.js:3207
+#. 4.0/applet.js:3293 6.0/applet.js:3293
 msgid "Remove from panel"
 msgstr "Retirer du panneau"
 
-#. 4.0/applet.js:3209 6.0/applet.js:3209
+#. 4.0/applet.js:3295 6.0/applet.js:3295
 msgid "Remove from this workspace"
 msgstr "Retirer de cet espace de travail"
 
-#. 4.0/applet.js:3215 6.0/applet.js:3215
+#. 4.0/applet.js:3301 6.0/applet.js:3301
 msgid "Pin to panel"
 msgstr "Épingler au panneau"
 
-#. 4.0/applet.js:3217 6.0/applet.js:3217
+#. 4.0/applet.js:3303 6.0/applet.js:3303
 msgid "Pin to this workspace"
 msgstr "Épingler à cet espace de travail"
 
-#. 4.0/applet.js:3258 6.0/applet.js:3258
+#. 4.0/applet.js:3344 6.0/applet.js:3344
 msgid "Pin to other workspaces"
 msgstr "Épingler aux autres espaces de travail"
 
-#. 4.0/applet.js:3279 6.0/applet.js:3279
+#. 4.0/applet.js:3365 6.0/applet.js:3365
 msgid "Pin to all workspaces"
 msgstr "Épingler à tous les espaces de travail"
 
-#. 4.0/applet.js:3297 6.0/applet.js:3297
+#. 4.0/applet.js:3383 6.0/applet.js:3383
 msgid "Pin to launcher"
 msgstr "Épingler au lanceur"
 
-#. 4.0/applet.js:3315 4.0/applet.js:3520 6.0/applet.js:3315 6.0/applet.js:3520
+#. 4.0/applet.js:3401 4.0/applet.js:3606 6.0/applet.js:3401 6.0/applet.js:3606
 msgid "Add new Hotkey for"
 msgstr "Ajouter un nouveau raccourci clavier pour"
 
-#. 4.0/applet.js:3329 6.0/applet.js:3329
+#. 4.0/applet.js:3415 6.0/applet.js:3415
 msgid "Recent files"
 msgstr "Fichiers récents"
 
-#. 4.0/applet.js:3353 6.0/applet.js:3353
+#. 4.0/applet.js:3439 6.0/applet.js:3439
 msgid "Places"
 msgstr "Emplacements"
 
-#. 4.0/applet.js:3396 6.0/applet.js:3396
+#. 4.0/applet.js:3482 6.0/applet.js:3482
 msgid "Always on top"
 msgstr "Toujours au-dessus"
 
-#. 4.0/applet.js:3408 6.0/applet.js:3408
+#. 4.0/applet.js:3494 6.0/applet.js:3494
 msgid "Only on this workspace"
 msgstr "Seulement sur cet espace de travail"
 
-#. 4.0/applet.js:3410 6.0/applet.js:3410
+#. 4.0/applet.js:3496 6.0/applet.js:3496
 msgid "Visible on all workspaces"
 msgstr "Visible sur tous les espaces de travail"
 
-#. 4.0/applet.js:3411 6.0/applet.js:3411
+#. 4.0/applet.js:3497 6.0/applet.js:3497
 msgid "Move to another workspace"
 msgstr "Déplacer vers un autre espace de travail"
 
-#. 4.0/applet.js:3420 6.0/applet.js:3420
+#. 4.0/applet.js:3506 6.0/applet.js:3506
 msgid " (this workspace)"
 msgstr " (cet espace de travail)"
 
-#. 4.0/applet.js:3433 6.0/applet.js:3433
+#. 4.0/applet.js:3519 6.0/applet.js:3519
 msgid "Move to another monitor"
 msgstr "Déplacer vers un autre moniteur"
 
-#. 4.0/applet.js:3441 6.0/applet.js:3441
+#. 4.0/applet.js:3527 6.0/applet.js:3527
 msgid "Monitor"
 msgstr "Moniteur"
 
@@ -144,47 +144,47 @@ msgstr "Moniteur"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3458 6.0/applet.js:3458
+#. 4.0/applet.js:3544 6.0/applet.js:3544
 msgid "Move window here"
 msgstr "Déplacer la fenêtre ici"
 
-#. 4.0/applet.js:3475 6.0/applet.js:3475
+#. 4.0/applet.js:3561 6.0/applet.js:3561
 msgid "unassigned"
 msgstr "non attribué"
 
-#. 4.0/applet.js:3486 4.0/applet.js:3517 6.0/applet.js:3486 6.0/applet.js:3517
+#. 4.0/applet.js:3572 4.0/applet.js:3603 6.0/applet.js:3572 6.0/applet.js:3603
 msgid "Assign window to a hotkey"
 msgstr "Attribuer une fenêtre à un raccourci clavier"
 
-#. 4.0/applet.js:3540 6.0/applet.js:3540
+#. 4.0/applet.js:3626 6.0/applet.js:3626
 msgid "Change application label contents"
 msgstr "Modifier le libellé de l'étiquette de l'application"
 
-#. 4.0/applet.js:3543 6.0/applet.js:3543
+#. 4.0/applet.js:3629 6.0/applet.js:3629
 msgid "Remove custom setting"
 msgstr "Supprimer le paramètre personnalisé"
 
-#. 4.0/applet.js:3550 6.0/applet.js:3550
+#. 4.0/applet.js:3636 6.0/applet.js:3636
 msgid "Use window title"
 msgstr "Utiliser le titre de fenêtre"
 
-#. 4.0/applet.js:3557 6.0/applet.js:3557
+#. 4.0/applet.js:3643 6.0/applet.js:3643
 msgid "Use application name"
 msgstr "Utiliser le nom de l'application"
 
-#. 4.0/applet.js:3564 6.0/applet.js:3564
+#. 4.0/applet.js:3650 6.0/applet.js:3650
 msgid "No label"
 msgstr "Sans étiquette"
 
-#. 4.0/applet.js:3575 6.0/applet.js:3575
+#. 4.0/applet.js:3661 6.0/applet.js:3661
 msgid "Ungroup application windows"
 msgstr "Dégrouper les fenêtres de l'application"
 
-#. 4.0/applet.js:3583 6.0/applet.js:3583
+#. 4.0/applet.js:3669 6.0/applet.js:3669
 msgid "Group application windows"
 msgstr "Grouper les fenêtres par application"
 
-#. 4.0/applet.js:3596 6.0/applet.js:3596
+#. 4.0/applet.js:3682 6.0/applet.js:3682
 msgid "Automatic grouping/ungrouping"
 msgstr "Regrouper/dégrouper automatiquement"
 
@@ -200,45 +200,45 @@ msgstr "Regrouper/dégrouper automatiquement"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3624 6.0/applet.js:3624
+#. 4.0/applet.js:3710 6.0/applet.js:3710
 msgid "Move titlebar on to screen"
 msgstr "Déplacer la barre de titre sur l'écran"
 
-#. 4.0/applet.js:3629 6.0/applet.js:3629
+#. 4.0/applet.js:3715 6.0/applet.js:3715
 msgid "Restore"
 msgstr "Restaurer"
 
-#. 4.0/applet.js:3633 6.0/applet.js:3633
+#. 4.0/applet.js:3719 6.0/applet.js:3719
 msgid "Minimize"
 msgstr "Minimiser"
 
-#. 4.0/applet.js:3639 6.0/applet.js:3639
+#. 4.0/applet.js:3725 6.0/applet.js:3725
 msgid "Unmaximize"
 msgstr "Démaximiser"
 
-#. 4.0/applet.js:3647 6.0/applet.js:3647
+#. 4.0/applet.js:3733 6.0/applet.js:3733
 msgid "Close others"
 msgstr "Fermer les autres"
 
-#. 4.0/applet.js:3649 6.0/applet.js:3649
+#. 4.0/applet.js:3735 6.0/applet.js:3735
 #, fuzzy
 msgid "Close other windows for application"
 msgstr ""
 "Afficher les miniatures de toutes les fenêtre d'un groupement pour une "
 "application"
 
-#. 4.0/applet.js:3670 6.0/applet.js:3670
+#. 4.0/applet.js:3756 6.0/applet.js:3756
 msgid "Close all"
 msgstr "Tout fermer"
 
-#. 4.0/applet.js:3672 6.0/applet.js:3672
+#. 4.0/applet.js:3758 6.0/applet.js:3758
 #, fuzzy
 msgid "Close all windows for application"
 msgstr ""
 "Afficher les miniatures de toutes les fenêtre d'un groupement pour une "
 "application"
 
-#. 4.0/applet.js:3688 6.0/applet.js:3688
+#. 4.0/applet.js:3774 6.0/applet.js:3774
 msgid "Close"
 msgstr "Fermer"
 
@@ -1749,6 +1749,18 @@ msgstr "Déplacer les fenêtres vers un autre écran"
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 msgid "Change window tiling"
 msgstr "Modifier la juxtaposition des fenêtres"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#, fuzzy
+msgid "Cycle all window-list button windows"
+msgstr "Cycle des fenêtres d'applications"
+
+#. 4.0->settings-schema.json->mouse-action-scroll->options
+#. 6.0->settings-schema.json->mouse-action-scroll->options
+#, fuzzy
+msgid "Cycle grouped/pooled button windows"
+msgstr "Cycle des fenêtres d'applications"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
