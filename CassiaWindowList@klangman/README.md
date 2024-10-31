@@ -2,6 +2,7 @@ This is a Cinnamon window list and panel launcher applet based on CobiWindowList
 
 Recent new features (Aug 2023 - Oct 2024):
 
+* Added scroll-wheel options, cycle all window-list windows and cycle group/pool windows
 * Added context menu options to close all/other windows for the buttons application
 * Saves new default thumbnail window sizes (adjusted using the mouse scroll-wheel) across cinnamon restarts
 * Now uses application specific thumbnail windows sizes across all workspaces

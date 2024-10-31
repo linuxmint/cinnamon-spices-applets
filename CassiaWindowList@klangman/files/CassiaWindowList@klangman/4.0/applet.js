@@ -218,13 +218,15 @@ const MouseAction = {
   AlwaysOnTop: 40        // Toggle the windows "Always on top" state
 }
 
-// Possible value for the Mouse scroll wheel action setting
+// Possible value for the Mouse scroll wheel action setting (used when the Thumbnail menu is closed, or the Thumbnail scroll action is disabled)
 const MouseScrollAction = {
    None: 0,
    ChangeState: 1,      // Minimize/Restore/Maximize the window
    ChangeWorkspace: 2,  // Next/Previous workspace
    ChangeMonitor: 3,    // Next/Previous monitor
-   ChangeTiling: 4      // Change tiling in a counter/clockwise direction
+   ChangeTiling: 4,     // Change tiling in a counter/clockwise direction
+   CycleButtons: 5,     // Cycle through the windows for the window-list buttons
+   CycleApp: 6          // Cycle through the windows for a group/pool
 }
 
 // Possible settings for the left mouse action for grouped buttons (or Launcher with running windows)
@@ -253,6 +255,7 @@ const IndicatorType = {
    Auto: 7
 }
 
+// This is the possible values for the scroll wheel when the Thumbnail menu is open
 const ScrollWheelAction = {
    Off: 0,
    On: 1,
@@ -1746,7 +1749,8 @@ class WindowListButton {
     //this._signalManager.connect(metaWindow, "notify::progress", this._onProgressChange, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
 
-    this.actor.add_style_pseudo_class("active");
+    if (this._applet._displayPinned !== DisplayPinned.Disabled)
+       this.actor.add_style_pseudo_class("active");
     this._updateTooltip();
     if (this.menu && this._windows.length == 1) {
       this._workspace.menuManager.addMenu(this.menu);
@@ -2351,6 +2355,8 @@ class WindowListButton {
       let metaWindow = this._windows[i];
       if (hasFocus(metaWindow, true) && !metaWindow.minimized) {
         this.actor.add_style_pseudo_class("focus");
+        if (this._applet._displayPinned === DisplayPinned.Disabled)
+           this.actor.add_style_pseudo_class("active");
         this.actor.remove_style_class_name(STYLE_CLASS_ATTENTION_STATE);
         this._currentWindow = metaWindow;
         this._updateLabel();
@@ -2363,6 +2369,8 @@ class WindowListButton {
         break;
       } else {
         this.actor.remove_style_pseudo_class("focus");
+        if (this._applet._displayPinned === DisplayPinned.Disabled)
+           this.actor.remove_style_pseudo_class("active");
         this._updateLabel();
         if (this._workspace.iconSaturation!=100 && this._workspace.saturationType != SaturationType.All) {
            this.updateIconSelection();
@@ -2557,9 +2565,9 @@ class WindowListButton {
   _onScrollEvent(actor, event) {
      let wheelSetting = this._settings.getValue("wheel-adjusts-preview-size");
      if (wheelSetting===ScrollWheelAction.Off || !this.menu || !this.menu.isOpen) {
-        // The Thumbnail menu is closed, so do the defined scroll wheel action
+        // The Thumbnail menu is closed or the Thumbnail scroll action is disabled, so do the defined scroll wheel action
         wheelSetting = this._settings.getValue("mouse-action-scroll");
-        if (wheelSetting !== MouseScrollAction.None && this._currentWindow && (!this.menu || !this.menu.isOpen)) {
+        if (wheelSetting !== MouseScrollAction.None && this._currentWindow /*&& (!this.menu || !this.menu.isOpen)*/) {
            let window = this._currentWindow;
            let direction = event.get_scroll_direction();
            if (wheelSetting === MouseScrollAction.ChangeState) {
@@ -2659,6 +2667,84 @@ class WindowListButton {
                  reTile(window, tileNext);
               } else if (direction === Clutter.ScrollDirection.DOWN) {
                  reTile(window, tilePrev);
+              }
+           } else if (wheelSetting === MouseScrollAction.CycleButtons) {
+              if (direction === Clutter.ScrollDirection.UP || direction === Clutter.ScrollDirection.DOWN) {
+                 let childern = this._workspace.actor.get_children();
+                 let window = global.display.get_focus_window();
+                 if (window) {
+                    let focus = this._workspace._lookupAppButtonForWindow(window);
+                    let idx = childern.indexOf(focus.actor);
+                    if (idx>=0) {
+                       do {
+                          if (direction === Clutter.ScrollDirection.DOWN) {
+                             if (idx === childern.length-1) {
+                                idx = 0;
+                             } else {
+                                idx += 1;
+                             }
+                          } else if (direction === Clutter.ScrollDirection.UP) {
+                             if (idx === 0) {
+                                idx = childern.length-1;
+                             } else {
+                                idx -= 1;
+                             }
+                          }
+                       } while ( !childern[idx]._delegate._currentWindow ); // ignore pinned app buttons with no active windows
+                       Main.activateWindow(childern[idx]._delegate._currentWindow);
+                    }
+                 }
+              }
+           } else if (wheelSetting === MouseScrollAction.CycleApp) {
+              if (direction === Clutter.ScrollDirection.UP || direction === Clutter.ScrollDirection.DOWN) {
+                 if (this._windows.length === 1) {
+                    let groupingType = this._settings.getValue("group-windows");
+                    if ((groupingType == GroupType.Pooled || groupingType == GroupType.Auto) && this._grouped != GroupingType.ForcedOn) {
+                       let window = global.display.get_focus_window();
+                       let focus = this._workspace._lookupAppButtonForWindow(window);
+                       if (focus._app != this._app) {
+                          Main.activateWindow(this._currentWindow);
+                       } else {
+                          let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
+                          let idx = btns.indexOf(focus);
+                          if (direction === Clutter.ScrollDirection.DOWN) {
+                             if (idx === btns.length-1)
+                                Main.activateWindow(btns[0]._currentWindow);
+                             else
+                                Main.activateWindow(btns[idx+1]._currentWindow);
+                          } else {
+                             if (idx === 0)
+                                Main.activateWindow(btns[btns.length-1]._currentWindow);
+                             else
+                                Main.activateWindow(btns[idx-1]._currentWindow);
+                          }
+                       }
+                    } else {
+                       Main.activateWindow(this._currentWindow);
+                    }
+                 } else if (this._windows.length > 1) {
+                    if (direction === Clutter.ScrollDirection.DOWN) {
+                       if (hasFocus(this._currentWindow)) {
+                          let idx = this._windows.indexOf(this._currentWindow);
+                          if (idx === this._windows.length-1 )
+                             Main.activateWindow(this._windows[0]);
+                          else
+                             Main.activateWindow(this._windows[idx+1]);
+                       } else {
+                          Main.activateWindow(this._currentWindow);
+                       }
+                    }else if (direction === Clutter.ScrollDirection.UP) {
+                       if (hasFocus(this._currentWindow)) {
+                          let idx = this._windows.indexOf(this._currentWindow);
+                          if (idx === 0 )
+                             Main.activateWindow(this._windows[this._windows.length-1]);
+                          else
+                             Main.activateWindow(this._windows[idx-1]);
+                       } else {
+                          Main.activateWindow(this._currentWindow);
+                       }
+                    }
+                 }
               }
            }
         }
@@ -4479,6 +4565,7 @@ class Workspace {
              Lang.bind(this, function(ancestor) {
                 newFocus = this._lookupAppButtonForWindow(ancestor);
                 if (newFocus) {
+                   window = ancestor;
                    return(false);
                 }
                 return(true);
@@ -4488,6 +4575,8 @@ class Workspace {
        if (newFocus) {
           if (this._currentFocus && newFocus != this._currentFocus) {
              this._currentFocus.actor.remove_style_pseudo_class("focus");
+             if (this._applet._displayPinned === DisplayPinned.Disabled)
+                this._currentFocus.actor.remove_style_pseudo_class("active");
              this._currentFocus._updateLabel();
              if (this.iconSaturation!=100 && this.saturationType == SaturationType.Focused) {
                 this._currentFocus.updateIconSelection();
@@ -4511,7 +4600,21 @@ class Workspace {
              newFocus.appLastFocus = true;
              this._currentFocus._updateNumber();
           }
+          let prevCurrentWindow = (this._currentFocus)?this._currentFocus._currentWindow:null;
           newFocus._updateFocus();
+          // If there is an open Thumbnail menu, update the outline highlighting
+          if (this.currentMenu && this.currentMenu.isOpen) {
+             let menuItem =  this.currentMenu._findMenuItemForWindow(window);
+             if (menuItem) {
+                 menuItem._box.add_style_pseudo_class('outlined');
+             }
+             if (prevCurrentWindow) {
+                let menuItem =  this.currentMenu._findMenuItemForWindow(prevCurrentWindow);
+                if (menuItem) {
+                   menuItem._box.remove_style_pseudo_class('outlined');
+                }
+             }
+          }
           this._currentFocus = newFocus;
        }
     }
@@ -5420,6 +5523,26 @@ class WindowList extends Applet.Applet {
 
   _onDisplayPinnedChanged(){
      let newDisplayPinned = this._settings.getValue("display-pinned");
+     if (newDisplayPinned != this._displayPinned && (newDisplayPinned === DisplayPinned.Disabled || this._displayPinned === DisplayPinned.Disabled)) {
+        // Need to reset the buttons so that the "active" pseudo class style is set correctly for all buttons
+        for (let i = 0; i < this._workspaces.length; i++) {
+           let ws = this._workspaces[i];
+           if (newDisplayPinned === DisplayPinned.Disabled) {
+              ws._appButtons.forEach( (btn) => { btn.actor.remove_style_pseudo_class("active");} );
+              // Now we need to add the "active" style back to the focused window
+              let window = global.display.get_focus_window();
+              if (window) {
+                 let curWS = global.screen.get_active_workspace_index();
+                 let focus = this._workspaces[curWS]._lookupAppButtonForWindow(window);
+                 if (focus) {
+                    focus.actor.add_style_pseudo_class("active");
+                 }
+              }
+           } else {
+              ws._appButtons.forEach( (btn) => { btn.actor.add_style_pseudo_class("active");} );
+           }
+        }
+     }
      let curWS = global.screen.get_active_workspace_index();
      if (newDisplayPinned == DisplayPinned.Synchronized && this._displayPinned == DisplayPinned.Enabled) {
         let pinSetting = this._settings.getValue("pinned-apps");
@@ -5433,7 +5556,7 @@ class WindowList extends Applet.Applet {
      }
      if (newDisplayPinned != this._displayPinned) {
         this._displayPinned = newDisplayPinned;
-        this._updatePinnedApps();
+        this._workspaces[curWS]._updatePinnedApps();
      }
   }
 
