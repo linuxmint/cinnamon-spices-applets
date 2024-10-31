@@ -709,6 +709,8 @@
       "Change windows workspace": 2,
       "Change windows monitor": 3,
       "Change window tiling": 4,
+      "Cycle all window-list button windows": 5,
+      "Cycle grouped/pooled button windows": 6,
       "Do nothing": 0
     },
     "description": "Scroll wheel action",

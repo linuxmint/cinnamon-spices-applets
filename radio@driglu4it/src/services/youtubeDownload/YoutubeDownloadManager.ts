@@ -74,7 +74,7 @@ const notifyYouTubeDownloadFinished = (props: {
       buttons: [
         {
           text: "Play",
-          onClick: () => spawnCommandLine(`xdg-open '${downloadPath}'`),
+          onClick: () => spawnCommandLine(`xdg-open '${downloadPath.replaceAll("'", "'\\''")}'`),
         },
       ],
     }
@@ -196,7 +196,6 @@ const moveFileFromTmpDir = (props: {
     return;
   }
 
-  // @ts-ignore
   tmpFile.move(
     File.parse_name(targetFilePath),
     FileCopyFlags.BACKUP,

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.7
+
+* Added scroll-wheel options, cycle all window-list windows and cycle group/pool windows
+* The "active" class (window-list button underline in MintY theme) is now used as an active window highlight when pinning is disabled
+* Fixed bug preventing pinned buttons from being removed after disabling the pinned buttons support ("Pinning of window list buttons" -> "Disabled")
+* The window-list mouse scroll-wheel action will apply when the Thumbnail menu is open and the Thumbnail menu scroll-wheel setting is "Disabled"
+* If the active window changes when the Thumbnail menu is open, the outlined Thumbnail menu item will change if the new active window is one of the menu items
+
 ## 2.3.6
 
 * Added context menu options to close all/other windows for the buttons application (when button is not grouped)

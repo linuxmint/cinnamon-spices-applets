@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-16 16:13+0200\n"
-"PO-Revision-Date: 2024-07-31 18:45+0200\n"
+"PO-Revision-Date: 2024-10-28 03:00+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -838,19 +838,16 @@ msgstr ""
 "exemple per a l'ordinador d'un infant."
 
 #. 6.4->settings-schema.json->openSystemSoundSettings->description
-#, fuzzy
 msgid "System Sound Settings"
-msgstr "Opcions de so"
+msgstr "Opcions de so del sistema"
 
 #. 6.4->settings-schema.json->maxVolume->description
-#, fuzzy
 msgid "Maximum volume (%)"
-msgstr "Control del volum màxim"
+msgstr "Volum màxim (%)"
 
 #. 6.4->settings-schema.json->color0_100->description
-#, fuzzy
 msgid "Icon color: 0%-100%"
-msgstr "Color d'icona: 101%-115%"
+msgstr "Color de la icona: 0%-100%"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
