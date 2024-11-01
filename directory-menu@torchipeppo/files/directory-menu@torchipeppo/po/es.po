@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# DIRECTORY MENU
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# torchipeppo, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 18:39-0100\n"
+"POT-Creation-Date: 2024-10-31 18:13+0100\n"
 "PO-Revision-Date: 2024-04-25 18:54-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,6 +41,10 @@ msgstr ""
 msgid "Base Directory"
 msgstr "Directorio base"
 
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr ""
+
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
 msgstr "Icono (pase el ratón para obtener información)"
@@ -57,13 +61,33 @@ msgstr "Texto de información sobre herramientas"
 msgid "Panel Text"
 msgstr "Texto del panel"
 
-#. settings-schema.json->show-menu->description
-msgid "Show menu"
-msgstr "Mostrar menú"
+#. settings-schema.json->behavior-section->description
+msgid "Behavior"
+msgstr ""
 
-#. settings-schema.json->show-menu->tooltip
-msgid "Set keybinding(s) to show the menu."
-msgstr "Establezca la combinación de teclas para mostrar el menú."
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Incluir archivos ocultos"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr ""
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr ""
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr ""
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr ""
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
@@ -81,6 +105,14 @@ msgstr ""
 "Limita (aproximadamente) el número de caracteres de cada entrada.\n"
 "Útil si crees que el menú es demasiado amplio."
 
-#. settings-schema.json->show-hidden->description
-msgid "Include hidden files"
-msgstr "Incluir archivos ocultos"
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "Mostrar menú"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "Establezca la combinación de teclas para mostrar el menú."
