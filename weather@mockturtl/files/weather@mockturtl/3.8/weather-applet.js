@@ -8354,7 +8354,7 @@ function InjectValues(text, weather, config, inCommand = false) {
         c: { value: conditionMain.toString() },
         c_long: { value: conditionDescription.toString() },
         dew_point: { value: dewPointVal.toString() },
-        humidity: { value: humidityVal.toString(), padLength: 3, padRight: true },
+        humidity: { value: humidityVal.toString(), padLength: 2, padRight: true },
         pressure: { value: pressureVal.toString(), padLength: 6, padRight: true },
         pressure_unit: { value: _pressureUnit.toString() },
         extra_value: { value: extraValue.toString(), padLength: 3, padRight: true },

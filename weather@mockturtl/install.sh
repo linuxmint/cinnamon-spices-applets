@@ -4,14 +4,8 @@
 # - typescript installed
 VERSION=3.8
 DEBUG=false # set to true to open Looking Glass
-GIT_CHECK=false # set to true to abort if there are upstream changes detected
 
-if $GIT_CHECK; then
-  echo "Checking for upstream changes..."
-  git fetch origin && [ "$(git rev-parse @)" = "$(git rev-parse @{u})" ] || { echo "Upstream changes detected. A git pull is required."; exit -3; }
-else
-  echo "Remember to check for upstream changes to avoid merge conflicts in translations"
-fi
+echo "Remember to check for upstream changes to avoid merge conflicts in translations"
 
 # Resolve Symlinks
 SOURCE="${BASH_SOURCE[0]}"

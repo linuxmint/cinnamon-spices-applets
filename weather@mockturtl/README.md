@@ -173,7 +173,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{c}`             | Short condition text                                      |         |           |          |
 | `{c_long}`        | Long condition text (same as short if not available)      |         |           |          |
 | `{dew_point}`     | Dew point value                                           |         |           |          |
-| `{humidity}`      | Humidity value (always as percent)                        | 3       | true      |          |
+| `{humidity}`      | Humidity value (always as percent)                        | 2       | true      |          |
 | `{pressure}`      | Pressure value                                            | 6       | true      |          |
 | `{pressure_unit}` | Pressure unit                                             |         |           |          |
 | `{extra_value}`   | API specific value (usually "Feels Like" or "Cloudiness") | 3       | true      |          |
@@ -239,15 +239,17 @@ Today and Tomorrow: `{min} / {max} {u} {c} {t}{u}{br}{tmr_t} {tmr_c}`
 
 # Custom Overrides
 
-* Add presets.
-
-* Add more tags for changes in values.
+* Store more forecast variables such as Humidity and Pressure, and add more tags for changes in values
 
 * Add support for minutely forecasts.
 
 * Add ability to specify number of decimal places in values, e.g., `{t_h_diff,4. .1}` for 1 decimal place, left-padded with spaces to width of 4.  (This might be achievable by extracting float values then applying a default or specified precision to all numerical values.)
 
 * Make tags that (or a way to) default to '' when no upcoming forecast changes in value to save panel space.
+
+* Add options to use [different Unicode arrows](https://unicode-explorer.com/list/arrows) for wind direction and change in temp indicators.
+
+* Add presets.
 
 ## Language Translations
 
