@@ -1,3 +1,6 @@
+### v2.2.0~20241107
+  * Now can display Radio name and Song title on horizontal panels.
+
 ### v2.1.4~20241012
   * Fixes an OSD error.
 
