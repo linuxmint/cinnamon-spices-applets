@@ -58,7 +58,8 @@
         "sectionBehaviorTooltip",
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
-        "sectionBehaviorSymbolicIconColor"
+        "sectionBehaviorSymbolicIconColor",
+        "sectionBehaviorHorizontalPanel"
       ]
     },
     "pageRecording": {
@@ -282,6 +283,15 @@
         "color-recording",
         "show-favicon",
         "show-volume-level-near-icon"
+      ]
+    },
+    "sectionBehaviorHorizontalPanel": {
+      "type": "section",
+      "title": "Only on horizontal panels",
+      "keys": [
+        "horizontal-show-name",
+        "horizontal-show-title",
+        "horizontal-max-title-length"
       ]
     },
     "sectionNetworkQuality": {
@@ -1844,5 +1854,25 @@
     "type": "switch",
     "description": "Display volume level near icon",
     "default": true
+  },
+  "horizontal-show-name": {
+    "type": "switch",
+    "description": "Display radio name",
+    "default": false
+  },
+  "horizontal-show-title": {
+    "type": "switch",
+    "description": "Display title",
+    "default": false
+  },
+  "horizontal-max-title-length": {
+    "type": "scale",
+    "dependency": "horizontal-show-title",
+    "default": 0,
+    "step": 1,
+    "min": 0,
+    "max": 255,
+    "description": "Maximum title length",
+    "tooltip": "0 means no maximum"
   }
 }

@@ -31,7 +31,7 @@ const ModalDialog = imports.ui.modalDialog;
 //Gio:
 const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, DataInputStream, UnixInputStream, Settings } = imports.gi.Gio;
 //St:
-const { Icon, IconType, Button, Widget, ScrollView, Align, Label, BoxLayout, Bin, Side, Clipboard, ClipboardType } = imports.gi.St;
+const { Icon, IconType, Button, Widget, ScrollView, Align, Label, BoxLayout, Bin, Side, Clipboard, ClipboardType, TextDirection } = imports.gi.St;
 //Tooltips:
 const { Tooltip } = imports.ui.tooltips;
 //MessageTray:
@@ -1284,6 +1284,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("color-recording", "color_recording", this.set_color.bind(this));
     this.settings.bind("show-favicon", "show_favicon",
       this.on_switch_show_favicon.bind(this));
+    this.settings.bind("horizontal-show-name", "horizontal_show_name", this.volume_near_icon.bind(this));
+    this.settings.bind("horizontal-show-title", "horizontal_show_title", this.volume_near_icon.bind(this));
+    this.settings.bind("horizontal-max-title-length", "horizontal_max_title_length", this.volume_near_icon.bind(this));
     // Menu:
     this.settings.bind("show-by-category", "show_by_category");
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
@@ -1341,6 +1344,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (index > -1 && this.context_menu_item_showVolumeNearIcon._switch.state != this.show_volume_level_near_icon) {
       this.context_menu_item_showVolumeNearIcon._switch.setToggleState(this.show_volume_level_near_icon);
     }
+
+    this.display_horizontal_info();
   }
 
   on_database_favorite_changed() {
@@ -2424,6 +2429,31 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("updateUI");
     this.set_color();
     this.set_radio_tooltip_to_default_one();
+
+    this.volume_near_icon();
+  }
+
+  display_horizontal_info() {
+    if (!this.isHorizontal || this.mpvStatus == "STOP") return;
+
+    let label = this._applet_label.get_text();
+    let title = this.songTitle;
+    if (title.length > 0 && this.horizontal_max_title_length > 0 && title.length > this.horizontal_max_title_length) {
+      title = title.slice(0, this.horizontal_max_title_length);
+    }
+    let name = this.get_radio_name(this.radioId);
+    let both = this.horizontal_show_name && this.horizontal_show_title;
+    if (both && title.length > 0 && name.length > 0) {
+      if (label.length > 0) label += " ";
+      label += name + "\n" + title;
+    } else if (this.horizontal_show_name && name.length > 0) {
+      if (label.length > 0) label += " ";
+      label += name;
+    } else if (this.horizontal_show_title && title.length > 0) {
+      if (label.length > 0) label += " ";
+      label += title;
+    }
+    this.set_applet_label(label);
   }
 
   minimal_menu() {
@@ -3853,6 +3883,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         },
         60000
       );
+    }
+    if (Widget.get_default_direction() === TextDirection.RTL) {
+      this._applet_label.set_style("text-align: right;");
+    } else {
+      this._applet_label.set_style("text-align: left;");
     }
 
     this.volume_near_icon();
@@ -6052,6 +6087,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     radios = null;
     currentCat = null;
     return cws;
+  }
+
+  get streamripper_is_present() {
+    return find_program_in_path("streamripper") != null
   }
 };
 

@@ -1,0 +1,2 @@
+#streamripper:
+streamripper https://i4.streams.ovh:8352/stream -d /home/claude/Musique/Radio3.0/RipDir -u "Firefox"
