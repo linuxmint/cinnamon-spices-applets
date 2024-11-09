@@ -1,3 +1,6 @@
+### v2.2.1~20241109
+  * Fixes a dependency error about pulseaudio/pipewire on LM.
+
 ### v2.2.0~20241107
   * Now can display Radio name and Song title on horizontal panels.
 
