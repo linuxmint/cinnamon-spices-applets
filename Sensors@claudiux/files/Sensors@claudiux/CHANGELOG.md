@@ -1,3 +1,6 @@
+### v3.9.0~20241109
+  * Fixes #6076: Ignores 'empty' sensors (sensors not sending data).
+
 ### v3.8.3~20241029
   * Fixes #6541. Adds FAQ about Nvidia video card temperature readings. Thanks to @JEleniel!
 
