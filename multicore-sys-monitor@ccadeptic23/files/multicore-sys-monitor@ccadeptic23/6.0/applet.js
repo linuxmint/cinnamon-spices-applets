@@ -273,6 +273,10 @@ mcsm.prototype = {
     this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, () => this._update());
   },
 
+  on_applet_added_to_panel: function() {
+    this.numberOfNetDevices = this.networkProvider.getNumberOfNetDevices();
+  },
+
   on_applet_removed_from_panel: function() {
     if (gtopFailed) return;
     if (this.loopId > 0) {
@@ -360,6 +364,11 @@ mcsm.prototype = {
 
       return false;
     }
+
+    if (this.numberOfNetDevices && this.numberOfNetDevices != this.networkProvider.getNumberOfNetDevices()) {
+      reloadExtension(UUID, Type.APPLET)
+    }
+
     if (this.childProcessHandler != null) {
       let currentMessage = this.childProcessHandler.getCurrentMessage();
 

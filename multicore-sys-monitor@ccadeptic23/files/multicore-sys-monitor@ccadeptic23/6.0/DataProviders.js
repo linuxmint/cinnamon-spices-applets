@@ -250,6 +250,14 @@ NetDataProvider.prototype = {
       this.currentReadings[i].down = this.gtop.bytes_in;
     }
   },
+  getNumberOfNetDevices: function() {
+    let devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
+    let altMethod = devices == null;
+    if (altMethod) {
+      devices = this.nmClient.get_devices();
+    }
+    return devices.length;
+  },
   getNetDevices: function(init = false) {
     this.currentReadings = [];
 
