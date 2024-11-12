@@ -27,17 +27,19 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
+        this._hideTimeoutId = null;
+
         try {
             Gtk.IconTheme.get_default().append_search_path(metadata.path);
             this.set_applet_icon_symbolic_name("1");
 
             this.settings = new Settings.AppletSettings(this, "show-hide-applets@mohammad-sn", this.instance_id);
             this.settings.bindProperty(Settings.BindingDirection.IN, "autohide", "auto_hide", Lang.bind(this, function(){
-                    if (this._hideTimeoutId & !this.auto_hide){
+                    if (this._hideTimeoutId && !this.auto_hide) {
                         Mainloop.source_remove(this._hideTimeoutId);
-                        this._hideTimeoutId = 0;
+                        this._hideTimeoutId = null;
                     }
-                    else if(this.auto_hide & this.h)
+                    else if(this.auto_hide && this.h)
                         this.autodo(true);
                 }), null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "disablestarttimeautohide", "disable_starttime_autohide", function(){}, null);
@@ -95,7 +97,8 @@ MyApplet.prototype = {
                     this.doAction(true);
             }));*/
 
-            this.cbox = Main.panel._rightBox;
+            //this.cbox = Main.panel._rightBox;
+            this.cbox = this.panel._rightBox;
 
             /*this doesn't work, i don't know why!
             if (Main.panel2 !== null){
@@ -142,7 +145,7 @@ MyApplet.prototype = {
     doAction: function(updalreadyH) {
         if (this._hideTimeoutId){
             Mainloop.source_remove(this._hideTimeoutId);
-            this._hideTimeoutId = 0;
+            this._hideTimeoutId = null;
         }
         let _children = this.cbox.get_children();
         let p = _children.indexOf(this.actor);
@@ -197,7 +200,7 @@ MyApplet.prototype = {
                 Main.statusIconDispatcher.redisplay();
             }
 
-            if(this.auto_hide & !global.settings.get_boolean("panel-edit-mode"))
+            if(this.auto_hide && !global.settings.get_boolean("panel-edit-mode"))
                 this._hideTimeoutId = Mainloop.timeout_add_seconds(this.hide_time, Lang.bind(this,function(){this.autodo(updalreadyH);}));
         }
         this.h = !this.h;
