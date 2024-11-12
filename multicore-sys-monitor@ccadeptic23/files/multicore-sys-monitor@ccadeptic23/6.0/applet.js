@@ -20,6 +20,7 @@ const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Util = imports.misc.util;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
+const PopupMenu = imports.ui.popupMenu;
 const {
   reloadExtension,
   Type
@@ -314,6 +315,15 @@ mcsm.prototype = {
         reloadExtension(UUID, Type.APPLET)
       });
       this._applet_context_menu.addMenuItem(w_graphs_item);
+    }
+    if (GLib.find_program_in_path("pkexec") && GLib.find_program_in_path("sysctl")) {
+      this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+      let drop_cache_item = new Applet.MenuItem(
+        _("Drop Memory Cache (needs root rights)"),
+        "go-bottom", //"view-bottom-pane",
+        () => { Util.spawnCommandLineAsync('pkexec sysctl vm.drop_caches=3') }
+      );
+      this._applet_context_menu.addMenuItem(drop_cache_item);
     }
     this.out_reader = null;
   },
