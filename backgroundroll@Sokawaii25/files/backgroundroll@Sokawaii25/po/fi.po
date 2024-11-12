@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-07 22:29+0000\n"
-"PO-Revision-Date: 2024-06-26 14:34+0300\n"
+"PO-Revision-Date: 2024-11-11 20:21+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,15 +20,15 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Background Roll"
-msgstr "Taustarulla"
+msgstr "Background Roll"
 
 #. metadata.json->description
 msgid ""
 "Changes the background randomly using the images in ~/Images/backgrounds\n"
 "Middle-click lets you roll back to previous background"
 msgstr ""
-"Muuttaa taustaa satunnaisesti kuvien avulla ~/Images/backgrounds\n"
-"Hiiren keskimmöisellä voit palata edelliseen taustaan"
+"Muuttaa taustakuvaa satunnaisesti kuvien avulla ~/Images/backgrounds\n"
+"Hiiren keskipainikkeella voit palata edelliseen taustakuvaan"
 
 #. settings-schema.json->Settings->description
 msgid "Notifications"
@@ -36,8 +36,8 @@ msgstr "Ilmoitukset"
 
 #. settings-schema.json->Notifications->description
 msgid "Send a notification when the background is changed"
-msgstr "Lähetä ilmoitus kun tausta vaihtuu"
+msgstr "Lähetä ilmoitus kun taustakuva vaihtuu"
 
 #. settings-schema.json->Notifications->tooltip
 msgid "Activate to see a notification when the background rolls"
-msgstr "Aktivoi, jos haluat nähdä ilmoituksen kun tausta vaihtuu"
+msgstr "Aktivoi, jos haluat nähdä ilmoituksia taustakuvien vaihtuessa"
