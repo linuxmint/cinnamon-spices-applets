@@ -21,6 +21,7 @@ const Util = imports.misc.util;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const Lang = imports.lang;
 const {
   reloadExtension,
   Type
@@ -210,7 +211,25 @@ mcsm.prototype = {
   __init: function() {
     this.configSettings = new ConfigSettings(this.configFilePath);
 
-    this._initContextMenu();
+    // Is the user a sudoer?
+    var user = GLib.get_user_name();
+    const HOME_DIR = GLib.get_home_dir();
+    const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+    const SCRIPTS_DIR = APPLET_DIR + "/scripts";
+    let command = SCRIPTS_DIR + "/get-sudoers.sh";
+    this.is_sudoer = false;
+    let sudoersProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+      if (exitCode == 0) {
+        let list = stdout.trim().split(",");
+        if (list.indexOf(user) > -1) {
+          this.is_sudoer = true;
+        }
+        this._initContextMenu();
+      } else {
+        this._initContextMenu();
+      }
+      sudoersProcess.send_signal(9);
+    }));
 
     this.actor.connect('enter-event', () => {
       this.hovered = true;
@@ -316,7 +335,7 @@ mcsm.prototype = {
       });
       this._applet_context_menu.addMenuItem(w_graphs_item);
     }
-    if (GLib.find_program_in_path("pkexec") && GLib.find_program_in_path("sysctl")) {
+    if (this.is_sudoer && GLib.find_program_in_path("pkexec") && GLib.find_program_in_path("sysctl")) {
       this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       let drop_cache_item = new Applet.MenuItem(
         _("Drop Memory Cache (needs root rights)"),
