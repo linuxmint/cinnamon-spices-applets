@@ -1,0 +1,153 @@
+# EXIT
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Exit@claudiux 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-29 21:43+0200\n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#. 5.4/applet.js:110
+msgid "Restart Cinnamon"
+msgstr "Käynnistä Cinnamon"
+
+#. 5.4/applet.js:122
+msgid "Lock Screen"
+msgstr "Lukitse näyttö"
+
+#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
+msgid "Switch User"
+msgstr "Vaihda käyttäjä"
+
+#. 5.4/applet.js:180
+msgid "Log Out"
+msgstr "Kirjaudu ulos"
+
+#. 5.4/applet.js:192
+msgid "Suspend"
+msgstr "Valmiustila"
+
+#. 5.4/applet.js:201
+msgid "Hibernate"
+msgstr "Lepotila"
+
+#. 5.4/applet.js:216
+msgid "Restart"
+msgstr "Käynnistä uudelleen"
+
+#. 5.4/applet.js:225
+msgid "Power Off"
+msgstr "Sammuta"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
+"hibernate, reboot or shut down the computer"
+msgstr ""
+"Käynnistä Cinnamon uudelleen, lukitse näyttö, vaihda käyttäjä, kirjaudu "
+"ulos, valmiustila, lepotila, käynnistä uudelleen tai sammuta tietokone"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Exit"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+msgid "Cinnamon restart"
+msgstr "Käynnistä Cinnamon uudelleen"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "Näytä ilmoitus kun Cinnamon käynnistyy uudelleen"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD on lyhenne joka tarkoittaa: On Screen Display"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+msgid "Menu options"
+msgstr "Valikon asetukset"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Näytä Käynnistä Cinnamon"
+
+#. 5.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Näytä Valmiustila"
+
+#. 5.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Näytä Lepotila"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "Lepotila tarvitsee root oikeudet (sudo)"
+
+#. 5.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Näytä Käynnistä uudelleen"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Näytä Sammuta"
+
+#. 5.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Järjestelmä hallinnoi kaikkia alla olevia valikon vaihtoehtoja.\n"
+"Jos ne ovat, et näe niitä."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Näytä Lukitse näyttö"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Hallinnoi järjestelmä"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Näytä Vaihda käyttäjä"
+
+#. 5.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Näytä Kirjaudu ulos"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Käyttäjä kirjautuu ulos"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Vahvistuksen kanssa"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Ilman vahvistusta"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Pakota"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"Vaihtoehdon \"Pakota\" avulla voit kirjautua ulos ja jättää estäjät "
+"huomiotta. Hyödyllinen kun useita istuntoja on auki samaan aikaan."
