@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-27 21:38+0200\n"
-"PO-Revision-Date: 2022-11-23 14:56+0200\n"
+"PO-Revision-Date: 2024-11-13 18:26+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:438
 msgid "Network interfaces"
-msgstr "Verkkoliitännät"
+msgstr "Verkkoliitäntä"
 
 #. applet.js:507
 msgid "Total data start"
@@ -80,7 +80,7 @@ msgstr "Mukautettu päivämäärä"
 #. settings-schema.json->gui_start->description
 #. applet.js:560
 msgid "Gui"
-msgstr "Gui"
+msgstr "Pääte"
 
 #. settings-schema.json->gui_speed_type->options
 #. applet.js:560
@@ -94,89 +94,83 @@ msgstr "Suuri"
 
 #. applet.js:796
 msgid " TiB"
-msgstr ""
+msgstr " TiB"
 
 #. applet.js:799
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #. applet.js:802
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #. applet.js:805
 msgid " kiB"
-msgstr ""
+msgstr " kiB"
 
 #. applet.js:807
 msgid "   B"
-msgstr ""
+msgstr "   B"
 
 #. applet.js:810
 msgid " TB"
-msgstr ""
+msgstr " TB"
 
 #. applet.js:813
-#, fuzzy
 msgid " GB"
-msgstr "Gui"
+msgstr " GB"
 
 #. applet.js:816
-#, fuzzy
 msgid " MB"
-msgstr "Mt"
+msgstr " MB"
 
 #. applet.js:819
 msgid " kB"
-msgstr ""
+msgstr " kB"
 
 #. applet.js:821
 msgid "  B"
-msgstr ""
+msgstr "  B"
 
 #. applet.js:831
 msgid " Tib"
-msgstr ""
+msgstr " Tib"
 
 #. applet.js:834
 msgid " Gib"
-msgstr ""
+msgstr " Gib"
 
 #. applet.js:837
 msgid " Mib"
-msgstr ""
+msgstr " Mib"
 
 #. applet.js:840
 msgid " kib"
-msgstr ""
+msgstr " kib"
 
 #. applet.js:842
 msgid "   b"
-msgstr ""
+msgstr "   b"
 
 #. applet.js:845
-#, fuzzy
 msgid " Tb"
-msgstr "b"
+msgstr " Tb"
 
 #. applet.js:848
-#, fuzzy
 msgid " Gb"
-msgstr "b"
+msgstr " Gb"
 
 #. applet.js:851
-#, fuzzy
 msgid " Mb"
-msgstr "b"
+msgstr " Mb"
 
 #. applet.js:854
-#, fuzzy
 msgid " kb"
-msgstr "b"
+msgstr " kb"
 
 #. applet.js:856
 msgid "  b"
-msgstr ""
+msgstr "  b"
 
 #. appletGui.js:480
 msgid "Total download:"
@@ -188,15 +182,15 @@ msgstr "Lähetys yhteensä:"
 
 #. metadata.json->description
 msgid "Shows usage of a network interface"
-msgstr "Näyttää verkkokortin käytön, tilastot ja latausnopeudet"
+msgstr "Näyttää verkkokortin liikenteen, tilastot ja latausnopeudet"
 
 #. metadata.json->name
 msgid "Download and upload speed"
-msgstr "Latausnopeus ja lähetysnopeus"
+msgstr "Download and upload speed"
 
 #. settings-schema.json->configuration->description
 msgid "Configuration"
-msgstr "Määritys"
+msgstr "Asetukset"
 
 #. settings-schema.json->display_mode->description
 msgid "Show"
@@ -232,28 +226,29 @@ msgstr "Tietoyksikkö näkyy paneelissa"
 
 #. settings-schema.json->is_binary->description
 msgid "Decimal or binary"
-msgstr ""
+msgstr "Tavua tai bittiä"
 
 #. settings-schema.json->is_binary->options
-#, fuzzy
 msgid "Decimal"
-msgstr "Desimaalit"
+msgstr "Kymmenluku"
 
 #. settings-schema.json->is_binary->options
 msgid "Binary"
-msgstr ""
+msgstr "Binaarinen"
 
 #. settings-schema.json->is_binary->tooltip
 msgid ""
 "Decimal: k, M, G, T\n"
 "Binary: ki, Mi, Gi, Ti"
 msgstr ""
+"Kymmenluku: k, M, G, T\n"
+"Binaarinen: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
 #. settings-schema.json->write_every->units
 msgid "seconds"
-msgstr "sekuntia"
+msgstr "sekunti"
 
 #. settings-schema.json->update_every->description
 msgid "Calculate every"
@@ -272,8 +267,8 @@ msgid ""
 "How often to update list of available network interfaces. 0 means list of "
 "available network interfaces is not updated periodically."
 msgstr ""
-"Kuinka usein saatavilla olevien verkkokorttien lista päivitetään. 0 "
-"tarkoittaa, että verkkokortteja ei päivitetä säännöllisesti."
+"Kuinka usein verkkokortit päivitetään. 0 tarkoittaa, että verkkokortteja ei "
+"päivitetä säännöllisesti."
 
 #. settings-schema.json->gui_speed_type->description
 msgid "Type"
@@ -281,7 +276,7 @@ msgstr "Tyyppi"
 
 #. settings-schema.json->gui_speed_type->tooltip
 msgid "Applet Gui"
-msgstr "Sovelma Gui"
+msgstr "Sovelman pääte"
 
 #. settings-schema.json->gui_value_order->description
 msgid "Value order"
@@ -301,7 +296,7 @@ msgstr "Paneelissa ja ponnahdusikkunassa näkyvä arvojen järjestys"
 
 #. settings-schema.json->decimal_places->description
 msgid "Decimal places"
-msgstr "Desimaalit"
+msgstr "Desimaalipilkku"
 
 #. settings-schema.json->decimal_places->options
 msgid "Auto"
@@ -333,7 +328,7 @@ msgstr "Teksti CSS"
 
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
-msgstr "Paneelin tekstiin käytetty CSS"
+msgstr "Paneelin tekstiin käytetty CSS-tyyli"
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
@@ -350,7 +345,7 @@ msgstr ""
 
 #. settings-schema.json->gui_sent_icon_filename->description
 msgid "Upload icon"
-msgstr "Lähetä kuvake"
+msgstr "Lähtevä kuvake"
 
 #. settings-schema.json->gui_sent_icon_filename->tooltip
 msgid ""
@@ -453,7 +448,7 @@ msgstr "Datarajoitukset"
 
 #. settings-schema.json->data_limit->units
 msgid "MB"
-msgstr "Mt"
+msgstr "MB"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
