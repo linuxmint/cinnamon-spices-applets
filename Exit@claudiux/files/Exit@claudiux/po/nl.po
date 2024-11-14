@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-29 21:43+0200\n"
+"POT-Creation-Date: 2024-11-14 23:59+0100\n"
 "PO-Revision-Date: 2024-04-20 11:02+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,42 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.4/applet.js:110
+#. 5.4/applet.js:126
 msgid "Restart Cinnamon"
 msgstr "Herstart Cinnamon"
 
-#. 5.4/applet.js:122
+#. 5.4/applet.js:138
+msgid "Screen Off"
+msgstr ""
+
+#. 5.4/applet.js:163
 msgid "Lock Screen"
 msgstr "Vergrendel scherm"
 
-#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
+#. 5.4/applet.js:190 5.4/applet.js:200 5.4/applet.js:209
 msgid "Switch User"
 msgstr "Gebruiker wisselen"
 
-#. 5.4/applet.js:180
+#. 5.4/applet.js:225
 msgid "Log Out"
 msgstr "Afmelden"
 
-#. 5.4/applet.js:192
+#. 5.4/applet.js:237
 msgid "Suspend"
 msgstr "Slaapstand"
 
-#. 5.4/applet.js:201
+#. 5.4/applet.js:246
 msgid "Hibernate"
 msgstr "Slaapstand naar schijf"
 
-#. 5.4/applet.js:216
+#. 5.4/applet.js:261
 msgid "Restart"
 msgstr "Herstart"
 
-#. 5.4/applet.js:225
+#. 5.4/applet.js:270
 msgid "Power Off"
 msgstr "Uitschakelen"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
-"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
-"hibernate, reboot or shut down the computer"
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
 "Herstart Cinnamon, vergrendel het scherm, wissel van gebruiker, meld je af, "
 "zet de computer in slaapstand (al dan niet naar schijf), herstart of schakel "
@@ -109,6 +114,25 @@ msgid ""
 msgstr ""
 "Alle onderstaande menuopties kunnen worden beheerd door het systeem.\n"
 " Als dat het geval is, dan kun je ze niet zien."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+#, fuzzy
+msgid "Show the Screen Off option"
+msgstr "Toon de optie Scherm vergrendelen"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr ""
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr ""
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
