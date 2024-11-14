@@ -237,6 +237,9 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.tooltip = new Tooltips.Tooltip(this.actor, this.tooltipText);
 
         this.connect("value-changed", () => this._onValueChanged());
+        if (tooltip === _("Volume")) {
+            this.connect("drag-end", () => this._onDragEnd());
+        }
 
         this.app_icon = app_icon;
         if (this.app_icon == null) {
@@ -349,6 +352,12 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             this.applet._notifyVolumeChange(this.stream);
     }
 
+    _onDragEnd() {
+        if (this.stream) {
+            this.applet._notifyVolumeChange(this.stream);
+        }
+    }
+
     _onScrollEvent(actor, event) {
         let direction = event.get_scroll_direction();
 
@@ -379,7 +388,6 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             }
             this._slider.queue_repaint();
             this.emit("value-changed", this._value);
-            this.emit("drag-end");
             return true;
         }
         return false;
