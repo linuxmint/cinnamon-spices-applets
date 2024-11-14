@@ -7,53 +7,58 @@ msgstr ""
 "Project-Id-Version: Exit@claudiux 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-29 21:43+0200\n"
+"POT-Creation-Date: 2024-11-14 23:59+0100\n"
 "PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
-#. 5.4/applet.js:110
+#. 5.4/applet.js:126
 msgid "Restart Cinnamon"
 msgstr "Käynnistä Cinnamon"
 
-#. 5.4/applet.js:122
+#. 5.4/applet.js:138
+msgid "Screen Off"
+msgstr ""
+
+#. 5.4/applet.js:163
 msgid "Lock Screen"
 msgstr "Lukitse näyttö"
 
-#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
+#. 5.4/applet.js:190 5.4/applet.js:200 5.4/applet.js:209
 msgid "Switch User"
 msgstr "Vaihda käyttäjä"
 
-#. 5.4/applet.js:180
+#. 5.4/applet.js:225
 msgid "Log Out"
 msgstr "Kirjaudu ulos"
 
-#. 5.4/applet.js:192
+#. 5.4/applet.js:237
 msgid "Suspend"
 msgstr "Valmiustila"
 
-#. 5.4/applet.js:201
+#. 5.4/applet.js:246
 msgid "Hibernate"
 msgstr "Lepotila"
 
-#. 5.4/applet.js:216
+#. 5.4/applet.js:261
 msgid "Restart"
 msgstr "Käynnistä uudelleen"
 
-#. 5.4/applet.js:225
+#. 5.4/applet.js:270
 msgid "Power Off"
 msgstr "Sammuta"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
-"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
-"hibernate, reboot or shut down the computer"
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
 "Käynnistä Cinnamon uudelleen, lukitse näyttö, vaihda käyttäjä, kirjaudu "
 "ulos, valmiustila, lepotila, käynnistä uudelleen tai sammuta tietokone"
@@ -109,6 +114,25 @@ msgid ""
 msgstr ""
 "Järjestelmä hallinnoi kaikkia alla olevia valikon vaihtoehtoja.\n"
 "Jos ne ovat, et näe niitä."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+#, fuzzy
+msgid "Show the Screen Off option"
+msgstr "Näytä Lukitse näyttö"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr ""
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr ""
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"

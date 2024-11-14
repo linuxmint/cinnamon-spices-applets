@@ -50,6 +50,23 @@
     "type": "label",
     "description": "All the menu options below may be managed by the system.\nIf they are, you can't see them."
   },
+  "showScreenOff": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the Screen Off option"
+  },
+  "mouse-deactivation-duration": {
+    "type": "scale",
+    "dependency": "showScreenOff",
+    "default": 5,
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "units": "seconds",
+    "show-value": true,
+    "description": "Duration of deactivation of the mouse",
+    "tooltip": "To prevent the monitor from turning on too soon after turning it off, the mouse will be disabled for the number of seconds set here."
+  },
   "showLockscreen": {
     "type": "switch",
     "dependency": "displayLockScreenSetting",
