@@ -4,22 +4,41 @@ const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Main = imports.ui.main;
+const Settings = imports.ui.settings;
 
-const RSS_URL = "https://www.googlewatchblog.de/feed/";
 
-function MyApplet(orientation, panel_height, instance_id) {
-    this._init(orientation, panel_height, instance_id);
+function MyApplet(metadata, orientation, panel_height, instance_id) {
+    this._init(metadata, orientation, panel_height, instance_id);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.TextApplet.prototype,
 
-    _init: function (orientation, panel_height, instance_id) {
+    _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.TextApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         this.set_applet_label(_("Loading Newsticker..."));
 
         this.actor.set_style("width: 400px;");
+
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+
+        // Get settings
+        this.rssURL = this.settings.getValue("rssURL") || "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
+        this.tickerSeperator = this.settings.getValue("tickerSeperator") || "*******";
+        this.refreshInterval = this.settings.getValue("refreshInterval") || 300;
+        this.tickerSpeed = this.settings.getValue("tickerSpeed") || 100;
+
+        // Bind settings properties
+        const boundSettings = [
+            "rssURL",
+            "tickerSeperator",
+            "refreshInterval",
+            "tickerSpeed"
+        ]
+        boundSettings.forEach(setting => {
+            this.settings.bindProperty(Settings.BindingDirection.IN, setting, setting, this.on_settings_changed, null);
+        });
 
         this._headlineIndex = 0;
         this._headlines = [];
@@ -30,11 +49,11 @@ MyApplet.prototype = {
         this._tickerLoop();
 
         // refresh every 5 minutes
-        this._refreshLoop = Mainloop.timeout_add_seconds(300, Lang.bind(this, this._updateFeed));
+        this._refreshLoop = Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this._updateFeed));
     },
 
     _updateFeed: function () {
-        let request = Gio.file_new_for_uri(RSS_URL);
+        let request = Gio.file_new_for_uri(this.rssURL);
         request.load_contents_async(null, Lang.bind(this, function (obj, res) {
             try {
                 let [success, contents] = obj.load_contents_finish(res);
@@ -56,8 +75,8 @@ MyApplet.prototype = {
         const items = feed.match(/<item>([\s\S]*?)<\/item>/g) || [];
 
         items.forEach(item => {
-            const title = item.match(/<title>(.*?)<\/title>/)?.[1] || "Keine Überschrift";
-            const description = item.match(/<description>(.*?)<\/description>/)?.[1] || "Keine Beschreibung";
+            const title = item.match(/<title>(.*?)<\/title>/)?.[1] || "No Title";
+            const description = item.match(/<description>(.*?)<\/description>/)?.[1] || "No Description";
             const link = item.match(/<link>(.*?)<\/link>/)?.[1] || "#";
 
             this._headlines.push({
@@ -76,7 +95,7 @@ MyApplet.prototype = {
 
     _tickerLoop: function () {
         if (this._headlines.length > 0) {
-            this._tickerText = this._headlines.map(item => item.title).join("   *******   ");
+            this._tickerText = this._headlines.map(item => item.title).join(' ' + this.tickerSeperator + ' ');
 
             // set window of 60 characters
             const displayText = this._tickerText.substring(this._tickerPosition, this._tickerPosition + 60);
@@ -91,7 +110,7 @@ MyApplet.prototype = {
             }
         }
 
-        Mainloop.timeout_add(100, Lang.bind(this, this._tickerLoop));
+        Mainloop.timeout_add(this.tickerSpeed, Lang.bind(this, this._tickerLoop));
     },
 
     // click on applet
@@ -110,5 +129,5 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new MyApplet(orientation, panel_height, instance_id);
+    return new MyApplet(metadata, orientation, panel_height, instance_id);
 }

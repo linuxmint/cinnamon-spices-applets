@@ -1,0 +1,36 @@
+{
+    "head0": {
+        "type": "header",
+        "description": "General"
+    },
+    "rssURL": {
+        "type": "entry",
+        "default": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+        "description": "URL of RSS feed"
+    },
+    "head1": {
+        "type": "header",
+        "description": "Ticker"
+    },
+    "tickerSeperator": {
+        "type": "entry",
+        "default": "*****",
+        "description": "Separator between headlines"
+    },
+    "refreshInterval": {
+        "type": "scale",
+        "default": 300,
+        "min": 30,
+        "max": 900,
+        "step": 1,
+        "description": "Refresh interval in seconds"
+    },
+    "tickerSpeed": {
+        "type": "scale",
+        "default": 100,
+        "min": 100,
+        "max": 500,
+        "step": 1,
+        "description": "Speed of ticker in ms"
+    }
+}
