@@ -96,55 +96,43 @@ MyApplet.prototype = {
     },
 
     _buildMenu: function () {
-        // Menü zurücksetzen
         this.menu.removeAll();
 
-        if (this._headlines.length === 0) {
-            let menuItem = new PopupMenu.PopupMenuItem("Keine Nachrichten verfügbar");
-            this.menu.addMenuItem(menuItem);
-            return;
-        }
+        if (this._headlines.length === 0) return;
 
-        // PopupMenuSection als Container erstellen
-        let menuSection = new PopupMenu.PopupMenuSection();
+        const menuSection = new PopupMenu.PopupMenuSection({ style_class: "popup-menu-section" });
 
-        // ScrollView erstellen und an den MenuSection Container anhängen
-        let scrollView = new St.ScrollView({
+        const scrollView = new St.ScrollView({
             x_fill: true,
             y_fill: true,
-            style_class: "popup-menu-content"  // Styling-Klasse für ScrollView
+            style_class: "scrollView",
+            clip_to_allocation: true
         });
-        scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);  // nur vertikales Scrollen erlauben
+        scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
 
-        // BoxLayout als Container für die Menüeinträge innerhalb des ScrollView erstellen
-        let menuContainer = new St.BoxLayout({ vertical: true });
+        const menuContainer = new St.BoxLayout({ vertical: true, style_class: "menuBox" });
         scrollView.add_actor(menuContainer);
 
-        // Menüelemente hinzufügen
         this._headlines.forEach(item => {
-            let menuItem = new PopupMenu.PopupMenuItem(item.title);
+            const btn = new St.Button({ reactive: true, track_hover: true, style_class: "menuButton", x_align: St.Align.START });
 
-            let descriptionLabel = new St.Label({
-                text: item.description,
-                style_class: "popup-inactive-menu-item"
-            });
-            menuItem.actor.add_actor(descriptionLabel);
+            const box = new St.BoxLayout({ vertical: true, style_class: "buttonBox" });
 
-            // Klick-Event zum Öffnen des Links
-            menuItem.connect("activate", () => {
+            const titleLabel = new St.Label({ text: item.title, style_class: "popup-menu-item-title" });
+            const descriptionLabel = new St.Label({ text: item.description, style_class: "popup-menu-item-description" });
+
+            box.add_actor(titleLabel);
+            box.add_actor(descriptionLabel);
+            btn.add_actor(box);
+
+            btn.connect("clicked", () => {
                 Gio.app_info_launch_default_for_uri(item.link, null);
             });
 
-            menuContainer.add_child(menuItem.actor);  // Menüeintrag in den Container hinzufügen
+            menuContainer.add_child(btn);
         });
 
-        // ScrollView zum Menü-Abschnitt hinzufügen
         menuSection.actor.add_actor(scrollView);
-
-        // Begrenzung der maximalen Größe des ScrollViews
-        scrollView.style = "max-height: 400px; max-width: 300px;";
-
-        // Menüabschnitt zum Menü hinzufügen
         this.menu.addMenuItem(menuSection);
     },
 
