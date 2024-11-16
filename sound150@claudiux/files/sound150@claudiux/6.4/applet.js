@@ -2553,17 +2553,19 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (source === "output") {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
-                if (this._iconTimeoutId) {
-                    try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
-                        this._iconTimeoutId = null;
+                if (this.stream && !this.stream.is_muted) {
+                    if (this._iconTimeoutId) {
+                        try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
+                            this._iconTimeoutId = null;
+                        }
                     }
+                    this._iconTimeoutId = Mainloop.timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
+                        try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
+                            this._iconTimeoutId = null;
+                        }
+                        this.setIcon();
+                    });
                 }
-                this._iconTimeoutId = Mainloop.timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
-                    try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
-                        this._iconTimeoutId = null;
-                    }
-                    this.setIcon();
-                });
             } else {
                 // if we have an active player and want to change the icon, change it immediately
                 if (this._playerIcon[1]) {

@@ -1,3 +1,6 @@
+### v7.2.4~20241116
+  * Fixes #6513: Always show mute icon when sound is muted.
+
 ### v7.2.3~20241021
   * Improvements to album art display.
 
