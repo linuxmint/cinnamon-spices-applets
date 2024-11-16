@@ -22,15 +22,15 @@
         "default": 300,
         "min": 30,
         "max": 900,
-        "step": 1,
+        "step": 10,
         "description": "Refresh interval in seconds"
     },
     "tickerSpeed": {
         "type": "scale",
-        "default": 100,
+        "default": 300,
         "min": 100,
         "max": 500,
-        "step": 1,
+        "step": 10,
         "description": "Speed of ticker in ms"
     }
 }
