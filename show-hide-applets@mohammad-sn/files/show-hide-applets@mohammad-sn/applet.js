@@ -27,20 +27,29 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
+        this.orientation = orientation;
         this._hideTimeoutId = null;
+        this._rshideTimeoutId = null;
 
         try {
             Gtk.IconTheme.get_default().append_search_path(metadata.path);
-            this.set_applet_icon_symbolic_name("1");
+            if (this.is_vertical())
+                this.set_applet_icon_symbolic_name("1v");
+            else
+                this.set_applet_icon_symbolic_name("1");
 
             this.settings = new Settings.AppletSettings(this, "show-hide-applets@mohammad-sn", this.instance_id);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "autohide", "auto_hide", Lang.bind(this, function(){
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "autohide", "auto_hide", Lang.bind(this, function(){
                     if (this._hideTimeoutId && !this.auto_hide) {
                         Mainloop.source_remove(this._hideTimeoutId);
                         this._hideTimeoutId = null;
                     }
                     else if(this.auto_hide && this.h)
                         this.autodo(true);
+
+                    if (this.itemAutohide) {
+                        this.itemAutohide._switch.setToggleState(this.auto_hide);
+                    }
                 }), null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "disablestarttimeautohide", "disable_starttime_autohide", function(){}, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "hoveractivates", "hover_activates", function(){}, null);
@@ -73,7 +82,14 @@ MyApplet.prototype = {
             addapplets.addActor(addappletsicon, { align: St.Align.END });
             this._applet_context_menu.addMenuItem(addapplets);
 
+            this.itemAutohide = new PopupMenu.PopupSwitchMenuItem(_("Autohide"),
+              this.auto_hide,
+              null);
+            this.itemAutohide.connect("toggled", Lang.bind(this, function() {
+              this.auto_hide = !this.auto_hide;
+            }));
 
+            this._applet_context_menu.addMenuItem(this.itemAutohide);
 
             global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
             this.actor.connect('enter-event', Lang.bind(this, this._onEntered));
@@ -89,27 +105,17 @@ MyApplet.prototype = {
                 }));
             }
 
-
-
-            /*if more than one instance
-            this.actor.connect('hide', Lang.bind(this, function(){
-                if (this.h)
-                    this.doAction(true);
-            }));*/
-
             //this.cbox = Main.panel._rightBox;
-            this.cbox = this.panel._rightBox;
-
-            /*this doesn't work, i don't know why!
-            if (Main.panel2 !== null){
-                let c2=Main.panel2._rightBox.get_children();
-                if (c2.indexOf(this.actor) > -1)
-                    this.cbox = Main.panel2._rightBox;
-            }*/
+            if (this.locationLabel === "right")
+                this.cbox = this.panel._rightBox;
+            else if (this.locationLabel === "left")
+                this.cbox = this.panel._leftBox;
+            else
+                this.cbox = this.panel._centerBox;
 
             if (this._rshideTimeoutId){
                 Mainloop.source_remove(this._rshideTimeoutId);
-                this._rshideTimeoutId = 0;
+                this._rshideTimeoutId = null;
             }
 
             this.cbox.connect('queue-relayout', Lang.bind(this, Lang.bind(this, function(actor, m){
@@ -152,7 +158,10 @@ MyApplet.prototype = {
         if(this.h){
             if (updalreadyH)
                 this.alreadyH=[];
-            this.set_applet_icon_symbolic_name("2");
+            if (this.is_vertical())
+                this.set_applet_icon_symbolic_name("2v");
+            else
+                this.set_applet_icon_symbolic_name("2");
             for(let i = p - 1; i > -1; i--){
                 if(!_children[i].visible && updalreadyH)
                     this.alreadyH.push(_children[i]);
@@ -178,7 +187,10 @@ MyApplet.prototype = {
             }
         }
         else{
-            this.set_applet_icon_symbolic_name("1");
+            if (this.is_vertical())
+                this.set_applet_icon_symbolic_name("1v");
+            else
+                this.set_applet_icon_symbolic_name("1");
             for(let i = 0; i < p; i++){
                 if(this.alreadyH.indexOf(_children[i])<0)
                     _children[i].show();
@@ -217,6 +229,10 @@ MyApplet.prototype = {
         }
     },
 
+    on_orientation_changed: function(orientation) {
+        this.orientation = orientation;
+    },
+
     autodo: function(updalreadyH){
         let postpone=this.actor.hover && this.hover_activates;
         let _children = this.cbox.get_children();
@@ -241,6 +257,10 @@ MyApplet.prototype = {
         if(!this.h){
             this.doAction(true);
         }
+    },
+
+    is_vertical: function() {
+        return this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT;
     }
 };
 

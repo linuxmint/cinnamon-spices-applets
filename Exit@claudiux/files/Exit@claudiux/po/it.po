@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-29 21:43+0200\n"
+"POT-Creation-Date: 2024-11-14 23:59+0100\n"
 "PO-Revision-Date: 2024-06-18 14:35+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -19,42 +19,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. 5.4/applet.js:110
+#. 5.4/applet.js:126
 msgid "Restart Cinnamon"
 msgstr "Riavvia Cinnamon"
 
-#. 5.4/applet.js:122
+#. 5.4/applet.js:138
+msgid "Screen Off"
+msgstr ""
+
+#. 5.4/applet.js:163
 msgid "Lock Screen"
 msgstr "Blocca lo schermo"
 
-#. 5.4/applet.js:145 5.4/applet.js:155 5.4/applet.js:164
+#. 5.4/applet.js:190 5.4/applet.js:200 5.4/applet.js:209
 msgid "Switch User"
 msgstr "Cambia utente"
 
-#. 5.4/applet.js:180
+#. 5.4/applet.js:225
 msgid "Log Out"
 msgstr "Abbandona sessione"
 
-#. 5.4/applet.js:192
+#. 5.4/applet.js:237
 msgid "Suspend"
 msgstr "Sospendi"
 
-#. 5.4/applet.js:201
+#. 5.4/applet.js:246
 msgid "Hibernate"
 msgstr "Iberna"
 
-#. 5.4/applet.js:216
+#. 5.4/applet.js:261
 msgid "Restart"
 msgstr "Riavvia"
 
-#. 5.4/applet.js:225
+#. 5.4/applet.js:270
 msgid "Power Off"
 msgstr "Spegni"
 
 #. metadata.json->description
+#, fuzzy
 msgid ""
-"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
-"hibernate, reboot or shut down the computer"
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
 "Riavvia Cinnamon, blocca lo schermo, cambia utente, disconnettiti, sospendi, "
 "iberna, riavvia o spegni il computer"
@@ -111,6 +116,25 @@ msgstr ""
 "Tutte le opzioni del menù sottostanti potrebbero essere gestite dal "
 "sistema.\n"
 "In tal caso, non puoi vederle."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+#, fuzzy
+msgid "Show the Screen Off option"
+msgstr "Mostra l'opzione Schermata di blocco"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr ""
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr ""
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"

@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
+const Util = imports.misc.util;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
@@ -31,6 +32,19 @@ function _(str) {
     // If the text was not found locally then try with system-wide translations:
     return Gettext.gettext(str);
 }
+
+/**
+ * Execute a function only once after a few seconds.
+ * @callback: function to execute.
+ * @s: number of seconds.
+ */
+function setTimeoutInSeconds(callback, s) {
+    return Mainloop.timeout_add_seconds(s, () => {
+        callback();
+        return false;
+    }, null);
+}
+
 
 class ExitApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -72,6 +86,8 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("hibernateNeedsSudo", "hibernateNeedsSudo");
         this.s.bind("showRestart", "showRestart");
         this.s.bind("showPowerOff", "showPowerOff");
+        this.s.bind("showScreenOff", "showScreenOff");
+        this.s.bind("mouse-deactivation-duration", "mouseDeactivationDuration");
         this.s.bind("showLockscreen", "showLockscreen");
         this.s.bind("showSwitchUser", "showSwitchUser");
         this.s.bind("showLogout", "showLogout");
@@ -118,6 +134,31 @@ class ExitApplet extends Applet.IconApplet {
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
 
+            if (this.showScreenOff) {
+                item = new PopupMenu.PopupIconMenuItem(_("Screen Off"), "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    let duration = Math.trunc(this.mouseDeactivationDuration);
+                    Util.spawn_async(
+                        ['/bin/bash', '-c',
+                        'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+                        xinput disable $m; done'],
+                        null
+                    );
+                    Util.spawnCommandLine('xset dpms force off');
+                    setTimeoutInSeconds(
+                        function () {
+                            Util.spawn_async(
+                                ['/bin/bash', '-c',
+                                'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+                                xinput enable $m; done'],
+                                null);
+                            },
+                        duration
+                    );
+                }));
+                this.menu.addMenuItem(item);
+            }
+
             if (allow_lock_screen && this.showLockscreen) {
                 item = new PopupMenu.PopupIconMenuItem(_("Lock Screen"), "system-lock-screen-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', Lang.bind(this, function () {
@@ -137,6 +178,10 @@ class ExitApplet extends Applet.IconApplet {
                     }
                 }));
                 this.menu.addMenuItem(item);
+            }
+
+            if (this.showScreenOff || (allow_lock_screen && this.showLockscreen)) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
 
             if (allow_switch_user && this.showSwitchUser) {

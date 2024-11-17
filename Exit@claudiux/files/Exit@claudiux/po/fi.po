@@ -1,25 +1,26 @@
 # EXIT
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # claudiux, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Exit@claudiux 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-14 23:59+0100\n"
-"PO-Revision-Date: 2024-04-20 11:02+0200\n"
-"Last-Translator: qadzek\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
-"Language: nl\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. 5.4/applet.js:126
 msgid "Restart Cinnamon"
-msgstr "Herstart Cinnamon"
+msgstr "Käynnistä Cinnamon"
 
 #. 5.4/applet.js:138
 msgid "Screen Off"
@@ -27,31 +28,31 @@ msgstr ""
 
 #. 5.4/applet.js:163
 msgid "Lock Screen"
-msgstr "Vergrendel scherm"
+msgstr "Lukitse näyttö"
 
 #. 5.4/applet.js:190 5.4/applet.js:200 5.4/applet.js:209
 msgid "Switch User"
-msgstr "Gebruiker wisselen"
+msgstr "Vaihda käyttäjä"
 
 #. 5.4/applet.js:225
 msgid "Log Out"
-msgstr "Afmelden"
+msgstr "Kirjaudu ulos"
 
 #. 5.4/applet.js:237
 msgid "Suspend"
-msgstr "Slaapstand"
+msgstr "Valmiustila"
 
 #. 5.4/applet.js:246
 msgid "Hibernate"
-msgstr "Slaapstand naar schijf"
+msgstr "Lepotila"
 
 #. 5.4/applet.js:261
 msgid "Restart"
-msgstr "Herstart"
+msgstr "Käynnistä uudelleen"
 
 #. 5.4/applet.js:270
 msgid "Power Off"
-msgstr "Uitschakelen"
+msgstr "Sammuta"
 
 #. metadata.json->description
 #, fuzzy
@@ -59,66 +60,65 @@ msgid ""
 "Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
 "out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"Herstart Cinnamon, vergrendel het scherm, wissel van gebruiker, meld je af, "
-"zet de computer in slaapstand (al dan niet naar schijf), herstart of schakel "
-"de computer uit"
+"Käynnistä Cinnamon uudelleen, lukitse näyttö, vaihda käyttäjä, kirjaudu "
+"ulos, valmiustila, lepotila, käynnistä uudelleen tai sammuta tietokone"
 
 #. metadata.json->name
 msgid "Exit"
-msgstr "Afsluiten"
+msgstr "Exit"
 
 #. 5.4->settings-schema.json->sectionOSD->description
 msgid "Cinnamon restart"
-msgstr "Herstart Cinnamon"
+msgstr "Käynnistä Cinnamon uudelleen"
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "Show OSD while restarting Cinnamon"
-msgstr "Toon OSD tijdens het herstarten van Cinnamon"
+msgstr "Näytä ilmoitus kun Cinnamon käynnistyy uudelleen"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
 msgid "OSD: On Screen Display"
-msgstr "OSD: On Screen Display"
+msgstr "OSD on lyhenne joka tarkoittaa: On Screen Display"
 
 #. 5.4->settings-schema.json->sectionMenu->description
 msgid "Menu options"
-msgstr "Menu opties"
+msgstr "Valikon asetukset"
 
 #. 5.4->settings-schema.json->showRestartCinnamon->description
 msgid "Show the Restart Cinnamon option"
-msgstr "Toon de optie Herstart Cinnamon"
+msgstr "Näytä Käynnistä Cinnamon"
 
 #. 5.4->settings-schema.json->showSuspend->description
 msgid "Show the Suspend option"
-msgstr "Toon de optie Slaapstand"
+msgstr "Näytä Valmiustila"
 
 #. 5.4->settings-schema.json->showHibernate->description
 msgid "Show the Hibernate option"
-msgstr "Toon de optie Slaapstand naar schijf"
+msgstr "Näytä Lepotila"
 
 #. 5.4->settings-schema.json->hibernateNeedsSudo->description
 msgid "Hibernate needs root user rights (sudo)"
-msgstr ""
+msgstr "Lepotila tarvitsee root oikeudet (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
-msgstr "Toon de optie Herstart"
+msgstr "Näytä Käynnistä uudelleen"
 
 #. 5.4->settings-schema.json->showPowerOff->description
 msgid "Show the Power Off option"
-msgstr "Toon de optie Uitschakelen"
+msgstr "Näytä Sammuta"
 
 #. 5.4->settings-schema.json->labelOthers->description
 msgid ""
 "All the menu options below may be managed by the system.\n"
 "If they are, you can't see them."
 msgstr ""
-"Alle onderstaande menuopties kunnen worden beheerd door het systeem.\n"
-" Als dat het geval is, dan kun je ze niet zien."
+"Järjestelmä hallinnoi kaikkia alla olevia valikon vaihtoehtoja.\n"
+"Jos ne ovat, et näe niitä."
 
 #. 5.4->settings-schema.json->showScreenOff->description
 #, fuzzy
 msgid "Show the Screen Off option"
-msgstr "Toon de optie Scherm vergrendelen"
+msgstr "Näytä Lukitse näyttö"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
@@ -136,42 +136,42 @@ msgstr ""
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
-msgstr "Toon de optie Scherm vergrendelen"
+msgstr "Näytä Lukitse näyttö"
 
 #. 5.4->settings-schema.json->showLockscreen->tooltip
 #. 5.4->settings-schema.json->showSwitchUser->tooltip
 #. 5.4->settings-schema.json->showLogout->tooltip
 msgid "Managed by system"
-msgstr "Beheerd door systeem"
+msgstr "Hallinnoi järjestelmä"
 
 #. 5.4->settings-schema.json->showSwitchUser->description
 msgid "Show the Switch User option"
-msgstr "Toon de optie Gebruiker wisselen"
+msgstr "Näytä Vaihda käyttäjä"
 
 #. 5.4->settings-schema.json->showLogout->description
 msgid "Show the Log Out option"
-msgstr "Toon de optie Afmelden"
+msgstr "Näytä Kirjaudu ulos"
 
 #. 5.4->settings-schema.json->logoutMode->description
 msgid "Log Out Mode"
-msgstr "Afmeldmodus"
+msgstr "Käyttäjä kirjautuu ulos"
 
 #. 5.4->settings-schema.json->logoutMode->options
 msgid "With confirmation"
-msgstr "Met bevestiging"
+msgstr "Vahvistuksen kanssa"
 
 #. 5.4->settings-schema.json->logoutMode->options
 msgid "Without confirmation"
-msgstr "Zonder bevestiging"
+msgstr "Ilman vahvistusta"
 
 #. 5.4->settings-schema.json->logoutMode->options
 msgid "Force"
-msgstr "Forceer"
+msgstr "Pakota"
 
 #. 5.4->settings-schema.json->logoutMode->tooltip
 msgid ""
 "The 'Force' option lets you log out while ignoring inhibitors. Useful when "
 "several sessions are open."
 msgstr ""
-"De 'Forceer' optie stelt je in staat om af te melden terwijl inhibiteurs "
-"worden genegeerd. Handig wanneer meerdere sessies zijn geopend."
+"Vaihtoehdon \"Pakota\" avulla voit kirjautua ulos ja jättää estäjät "
+"huomiotta. Hyödyllinen kun useita istuntoja on auki samaan aikaan."

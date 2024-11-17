@@ -1,3 +1,6 @@
+### v2.2.2~20241114
+  * Soup2/Soup3: better detection.
+
 ### v2.2.1~20241109
   * Fixes a dependency error about pulseaudio/pipewire on LM.
 

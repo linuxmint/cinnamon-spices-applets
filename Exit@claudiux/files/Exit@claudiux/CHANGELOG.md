@@ -1,3 +1,7 @@
+### v1.3.0~20241114
+
+* New option: Screen Off. You can also set the mouse deactivation time to prevent the screen from turning on too soon after you've turned it off.
+
 ### v1.2.0~20240929
 
 * Allows hibernation using root user rights.

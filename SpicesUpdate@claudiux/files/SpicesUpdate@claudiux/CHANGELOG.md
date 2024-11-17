@@ -1,3 +1,6 @@
+### v7.4.5~20241114
+  * Soup2/Soup3: better detection.
+
 ### v7.4.4~20240602
   * Restarts httpLib when network interface status changes.
 
