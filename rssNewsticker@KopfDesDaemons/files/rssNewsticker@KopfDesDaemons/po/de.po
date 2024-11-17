@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: rssNewsticker@KopfDesDaemons 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-17 01:41+0100\n"
+"POT-Creation-Date: 2024-11-17 20:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,22 +22,21 @@ msgstr ""
 msgid "Loading Newsticker..."
 msgstr "Lade Newsticker..."
 
-#. applet.js:67
+#. applet.js:89
 msgid "Could not load RSS-Feed"
 msgstr "RSS-Feed konnte nicht geladen werden"
 
-#. applet.js:72
-#, fuzzy
+#. applet.js:94
 msgid "Error while loading RSS"
-msgstr "Fehler beim Laden des RSS"
+msgstr "Fehler beim RSS Laden"
 
 #. metadata.json->name
 msgid "RSS Newsticker"
 msgstr "RSS Newsticker"
 
 #. metadata.json->description
-msgid "Displays the headlines of a RSS feed"
-msgstr "Zeigt die Schlagzeilen von einen RSS-Feed"
+msgid "Displays the headlines of an RSS feed"
+msgstr "Zeigt die Schlagzeilen eines RSS-Feeds"
 
 #. settings-schema.json->head0->description
 msgid "General"
@@ -50,6 +49,10 @@ msgstr "URL des RSS-Feeds"
 #. settings-schema.json->head1->description
 msgid "Ticker"
 msgstr "Ticker"
+
+#. settings-schema.json->width->description
+msgid "Width of ticker in px"
+msgstr "Breite des Tickers in px"
 
 #. settings-schema.json->tickerSeperator->description
 msgid "Separator between headlines"

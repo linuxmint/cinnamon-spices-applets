@@ -19,8 +19,6 @@ MyApplet.prototype = {
 
         this.set_applet_label(_("Loading Newsticker..."));
 
-        this.actor.set_style("width: 400px;");
-
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this._setupSettings();
 
@@ -29,6 +27,7 @@ MyApplet.prototype = {
         this._tickerText = "";
         this._tickerPosition = 0;
         this._error = false;
+        this.tickerCaracters = 60;
 
         // Create popup menu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -37,6 +36,7 @@ MyApplet.prototype = {
 
         this._updateFeed();
         this._tickerLoop();
+        this._setWidth();
 
         // refresh every 5 minutes
         this._refreshLoop = Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this._updateFeed));
@@ -44,16 +44,27 @@ MyApplet.prototype = {
 
     _setupSettings: function () {
         // Get settings
-        this.rssURL = this.settings.getValue("rssURL") || "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
+        this.rssURL = this.settings.getValue("rssURL") || "http://rss.cnn.com/rss/money_topstories.rss";
         this.tickerSeperator = this.settings.getValue("tickerSeperator") || "*******";
         this.refreshInterval = this.settings.getValue("refreshInterval") || 300;
         this.tickerSpeed = this.settings.getValue("tickerSpeed") || 300;
+        this.width = this.settings.getValue("width") || 390;
 
         // Bind settings properties
         this.settings.bindProperty(Settings.BindingDirection.IN, 'rssURL', 'rssURL', this._updateFeed, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, 'tickerSeperator', 'tickerSeperator');
         this.settings.bindProperty(Settings.BindingDirection.IN, 'refreshInterval', 'refreshInterval', this._updateFeed, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, 'tickerSpeed', 'tickerSpeed');
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'width', 'width', this._setWidth, null);
+    },
+
+    _setWidth: function () {
+        this.actor.set_style("width: " + this.width + "px;");
+        this.actor.x_align = St.Align.MIDDLE;
+
+        // calculate number of characters in ticker text
+        // 6.5px per character on average
+        this.tickerCaracters = this.width / 6.5;
     },
 
     /**
@@ -180,7 +191,7 @@ MyApplet.prototype = {
         }
 
         // get the window of the ticker text that will be displayed
-        const textWindow = this._tickerText.substring(this._tickerPosition, this._tickerPosition + 60);
+        const textWindow = this._tickerText.substring(this._tickerPosition, this._tickerPosition + this.tickerCaracters);
 
         this.set_applet_label(textWindow);
 

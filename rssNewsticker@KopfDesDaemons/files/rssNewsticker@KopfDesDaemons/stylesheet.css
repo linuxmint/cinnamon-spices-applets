@@ -1,11 +1,9 @@
 .menuButton:hover {
-    cursor: pointer;
     background-color: rgba(136, 136, 136, 0.521);
 }
 
 .popup-menu-item-title {
     font-weight: bold;
-    /* background-color: royalblue; */
 }
 
 .menuButton {
@@ -13,7 +11,6 @@
 }
 
 .buttonBox {
-    /* border: 2px solid rgb(199, 27, 27); */
     padding: 10px;
     margin: 0;
     width: 500px;
@@ -22,5 +19,4 @@
 .scrollView {
     max-height: 400px;
     width: 500px;
-    overflow: hidden;
 }

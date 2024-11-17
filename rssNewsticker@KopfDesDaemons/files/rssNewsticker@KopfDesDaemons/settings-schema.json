@@ -5,12 +5,20 @@
     },
     "rssURL": {
         "type": "entry",
-        "default": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+        "default": "http://rss.cnn.com/rss/money_topstories.rss",
         "description": "URL of RSS feed"
     },
     "head1": {
         "type": "header",
         "description": "Ticker"
+    },
+    "width": {
+        "type": "scale",
+        "default": 390,
+        "min": 50,
+        "max": 2000,
+        "step": 5,
+        "description": "Width of ticker in px"
     },
     "tickerSeperator": {
         "type": "entry",
