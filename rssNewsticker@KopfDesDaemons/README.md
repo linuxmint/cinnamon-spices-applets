@@ -2,7 +2,7 @@ A running news ticker directly in the start bar.
 
 ## Setup Custom RSS Feed
 
-1. Search online for a URL of a RSS feed you like.
+1. Search online for a URL of an RSS feed you like.
 2. Copy the URL.
 3. Open the settings and paste the URL into the URL field.
 

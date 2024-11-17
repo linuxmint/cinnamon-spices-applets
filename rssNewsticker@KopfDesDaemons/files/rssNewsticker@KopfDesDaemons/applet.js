@@ -22,18 +22,7 @@ MyApplet.prototype = {
         this.actor.set_style("width: 400px;");
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-
-        // Get settings
-        this.rssURL = this.settings.getValue("rssURL") || "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
-        this.tickerSeperator = this.settings.getValue("tickerSeperator") || "*******";
-        this.refreshInterval = this.settings.getValue("refreshInterval") || 300;
-        this.tickerSpeed = this.settings.getValue("tickerSpeed") || 300;
-
-        // Bind settings properties
-        this.settings.bindProperty(Settings.BindingDirection.IN, 'rssURL', 'rssURL', this._updateFeed, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, 'tickerSeperator', 'tickerSeperator');
-        this.settings.bindProperty(Settings.BindingDirection.IN, 'refreshInterval', 'refreshInterval', this._updateFeed, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, 'tickerSpeed', 'tickerSpeed');
+        this._setupSettings();
 
         this._headlineIndex = 0;
         this._headlines = [];
@@ -53,13 +42,35 @@ MyApplet.prototype = {
         this._refreshLoop = Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this._updateFeed));
     },
 
+    _setupSettings: function () {
+        // Get settings
+        this.rssURL = this.settings.getValue("rssURL") || "https://rss.nytimes.com/services/xml/rss/nyt/World.xml";
+        this.tickerSeperator = this.settings.getValue("tickerSeperator") || "*******";
+        this.refreshInterval = this.settings.getValue("refreshInterval") || 300;
+        this.tickerSpeed = this.settings.getValue("tickerSpeed") || 300;
+
+        // Bind settings properties
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'rssURL', 'rssURL', this._updateFeed, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'tickerSeperator', 'tickerSeperator');
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'refreshInterval', 'refreshInterval', this._updateFeed, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'tickerSpeed', 'tickerSpeed');
+    },
+
+    /**
+    * Updates the RSS feed by asynchronously loading data from the feed URL.
+    * 
+    * Sends an asynchronous request to load the RSS feed contents from `rssURL`.
+    * If the request is successful, the feed content is parsed using `_parseFeed`.
+    * In case of an error, it logs the issue and sets an error message.
+    * 
+    */
     _updateFeed: function () {
-        let request = Gio.file_new_for_uri(this.rssURL);
+        const request = Gio.file_new_for_uri(this.rssURL);
         request.load_contents_async(null, Lang.bind(this, function (obj, res) {
             try {
-                let [success, contents] = obj.load_contents_finish(res);
+                const [success, contents] = obj.load_contents_finish(res);
                 if (success) {
-                    let feed = contents.toString();
+                    const feed = contents.toString();
                     this._parseFeed(feed);
                     this._error = false;
                 } else {
@@ -73,9 +84,16 @@ MyApplet.prototype = {
                 this._error = true;
             }
         }));
-        return true;
     },
 
+    /**
+    * Parses an RSS feed and extracts items into `_headlines`.
+    * 
+    * Extracts the title, description, and link from each `<item>` in the feed
+    * and stores them in the `_headlines` array.
+    * 
+    * @param {string} feed - RSS feed as an XML string.
+    */
     _parseFeed: function (feed) {
         this._headlines = [];
         const items = feed.match(/<item>([\s\S]*?)<\/item>/g) || [];
@@ -95,13 +113,22 @@ MyApplet.prototype = {
         this._buildMenu();
     },
 
+    /**
+    * Builds the popup menu for the applet.
+    * 
+    * This menu is displayed when the applet is clicked.
+    * It contains buttons for each headline in the `_headlines` array.
+    * 
+    */
     _buildMenu: function () {
         this.menu.removeAll();
 
+        // no menu if no headlines
         if (this._headlines.length === 0) return;
 
         const menuSection = new PopupMenu.PopupMenuSection({ style_class: "popup-menu-section" });
 
+        // create scroll view
         const scrollView = new St.ScrollView({
             x_fill: true,
             y_fill: true,
@@ -110,24 +137,25 @@ MyApplet.prototype = {
         });
         scrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
 
+        // add new container to scroll view
         const menuContainer = new St.BoxLayout({ vertical: true, style_class: "menuBox" });
         scrollView.add_actor(menuContainer);
 
         this._headlines.forEach(item => {
+            // create button for each headline
             const btn = new St.Button({ reactive: true, track_hover: true, style_class: "menuButton", x_align: St.Align.START });
 
+            // box in button containing title and description
             const box = new St.BoxLayout({ vertical: true, style_class: "buttonBox" });
-
             const titleLabel = new St.Label({ text: item.title, style_class: "popup-menu-item-title" });
             const descriptionLabel = new St.Label({ text: item.description, style_class: "popup-menu-item-description" });
-
             box.add_actor(titleLabel);
             box.add_actor(descriptionLabel);
+
             btn.add_actor(box);
 
-            btn.connect("clicked", () => {
-                Gio.app_info_launch_default_for_uri(item.link, null);
-            });
+            // open link on click
+            btn.connect("clicked", () => { Gio.app_info_launch_default_for_uri(item.link, null); });
 
             menuContainer.add_child(btn);
         });
@@ -136,16 +164,29 @@ MyApplet.prototype = {
         this.menu.addMenuItem(menuSection);
     },
 
+    /**
+    * Continuously updates the ticker display by cycling through the headlines.
+    * 
+    * Combines all headlines into a single scrolling string, then displays a 
+    * windowed portion of it in the applet label. Loops back to the beginning 
+    * when the ticker reaches the end of the text.
+    * 
+    */
     _tickerLoop: function () {
+        // get chained headlines string
         if (this._headlines.length > 0) {
-            this._tickerText = this._headlines.map(item => item.title).join(' ' + this.tickerSeperator + ' ');
+            const chainedHeadlines = this._headlines.map(item => item.title);
+            this._tickerText = chainedHeadlines.join(' ' + this.tickerSeperator + ' ');
         }
 
-        const displayText = this._tickerText.substring(this._tickerPosition, this._tickerPosition + 60);
+        // get the window of the ticker text that will be displayed
+        const textWindow = this._tickerText.substring(this._tickerPosition, this._tickerPosition + 60);
 
-        this.set_applet_label(displayText);
+        this.set_applet_label(textWindow);
+
         this._tickerPosition += 1;
 
+        // play the ticker from the beginning when it reaches the end
         if (this._tickerPosition >= this._tickerText.length) {
             this._tickerPosition = 0;
         }
@@ -153,14 +194,17 @@ MyApplet.prototype = {
         Mainloop.timeout_add(this.tickerSpeed, Lang.bind(this, this._tickerLoop));
     },
 
-    on_applet_clicked: function (event) {
+
+    on_applet_clicked: function () {
         this.menu.toggle();
     },
+
 
     on_applet_removed_from_panel: function () {
         Mainloop.source_remove(this._refreshLoop);
     }
 };
+
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new MyApplet(metadata, orientation, panel_height, instance_id);

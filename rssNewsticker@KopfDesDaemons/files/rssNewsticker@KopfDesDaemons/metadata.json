@@ -1,6 +1,6 @@
 {
     "uuid": "rssNewsticker@KopfDesDaemons",
     "name": "RSS Newsticker",
-    "description": "Displays the headlines of a RSS feed",
+    "description": "Displays the headlines of an RSS feed",
     "version": "1.0"
 }
