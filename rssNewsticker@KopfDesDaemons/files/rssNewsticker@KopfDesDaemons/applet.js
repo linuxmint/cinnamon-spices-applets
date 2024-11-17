@@ -69,7 +69,7 @@ MyApplet.prototype = {
                 }
             } catch (e) {
                 global.logError("Error while loading RSS: " + e.message);
-                this._tickerText = _("Error while loading RSS: " + e.message);
+                this._tickerText = _("Error while loading RSS") + ": " + e.message;
                 this._error = true;
             }
         }));
