@@ -156,7 +156,7 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 
-if (GLib.find_program_in_path("pipewire")) {
+if (GLib.find_program_in_path("pipewire") && versionCompare(GLib.getenv("CINNAMON_VERSION"), "6.2") >= 0) {
   DEPENDENCIES["default"].push(["pipewire-pulse", "/usr/bin/pipewire-pulse", "pipewire-pulse"]);
 } else {
   DEPENDENCIES["default"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
