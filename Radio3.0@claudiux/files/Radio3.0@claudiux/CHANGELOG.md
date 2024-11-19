@@ -1,3 +1,7 @@
+### v2.2.3~20241119
+  * Fixes #6583: Remove dummy device.
+  * Updates version number.
+
 ### v2.2.2~20241114
   * Soup2/Soup3: better detection.
 
