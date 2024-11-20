@@ -87,9 +87,9 @@ MyApplet.prototype = {
 
             let addapplets = new PopupMenu.PopupMenuItem(_("Add applets to the panel"));
             let addappletsicon = new St.Icon({icon_name: "applets", icon_size: 22, icon_type: St.IconType.FULLCOLOR });
-            addapplets.connect('activate', function() {
-                Util.spawnCommandLine("cinnamon-settings applets");
-            });
+            addapplets.connect('activate', Lang.bind(this, function() {
+                Util.spawnCommandLine("cinnamon-settings applets panel"+this.panel.panelId);
+            }));
             addapplets.addActor(addappletsicon, { align: St.Align.END });
             this._applet_context_menu.addMenuItem(addapplets);
 
