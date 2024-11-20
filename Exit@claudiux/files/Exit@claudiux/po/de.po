@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-14 23:59+0100\n"
-"PO-Revision-Date: 2024-02-14 22:09+0100\n"
+"PO-Revision-Date: 2024-11-20 18:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. 5.4/applet.js:126
 msgid "Restart Cinnamon"
@@ -25,7 +25,7 @@ msgstr "Starte Cinnamon neu"
 
 #. 5.4/applet.js:138
 msgid "Screen Off"
-msgstr ""
+msgstr "Bildschirm ausschalten"
 
 #. 5.4/applet.js:163
 msgid "Lock Screen"
@@ -56,13 +56,13 @@ msgid "Power Off"
 msgstr "Ausschalten"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
 "out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"Cinnamon neu starten, Bildschirm sperren, Benutzer wechseln, Abmelden, "
-"Bereitschaft, Ruhezustand, den Computer neu starten oder herunterfahren"
+"Cinnamon neu starten, den Bildschirm ausschalten, Bildschirm sperren, "
+"Benutzer wechseln, Abmelden, Bereitschaft, Ruhezustand, den Computer neu "
+"starten oder herunterfahren"
 
 #. metadata.json->name
 msgid "Exit"
@@ -98,7 +98,7 @@ msgstr "Die Option \"Ruhezustand\" anzeigen"
 
 #. 5.4->settings-schema.json->hibernateNeedsSudo->description
 msgid "Hibernate needs root user rights (sudo)"
-msgstr ""
+msgstr "Ruhezustand benötigt Root-User Rechte (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
@@ -113,27 +113,30 @@ msgid ""
 "All the menu options below may be managed by the system.\n"
 "If they are, you can't see them."
 msgstr ""
-"Alle nachstehenden Menüoptionen werden möglicherweise vom System verwaltet.\n"
+"Alle nachstehenden Menüoptionen werden möglicherweise vom System "
+"verwaltet.\n"
 "Wenn dies der Fall ist, können Sie sie nicht sehen."
 
 #. 5.4->settings-schema.json->showScreenOff->description
-#, fuzzy
 msgid "Show the Screen Off option"
-msgstr "Die Option \"Bildschirm sperren\" anzeigen"
+msgstr "Die Option \"Bildschirm ausschalten\" anzeigen"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
-msgstr ""
+msgstr "Sekunden"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
-msgstr ""
+msgstr "Dauer der Deaktivierung der Maus"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
 msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
+"Um zu verhindern, dass der Monitor zu früh an geht, nachdem er "
+"ausgeschaltet wurde, wird die Maus für die hier angegebenen Sekunden "
+"deaktiviert."
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
