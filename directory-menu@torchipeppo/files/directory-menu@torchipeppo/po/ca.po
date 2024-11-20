@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-31 18:13+0100\n"
-"PO-Revision-Date: 2024-07-19 01:57+0200\n"
+"PO-Revision-Date: 2024-11-20 02:09+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -43,7 +43,7 @@ msgstr "Directori base"
 
 #. settings-schema.json->appearance-section->description
 msgid "Appearance"
-msgstr ""
+msgstr "Aparença"
 
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
@@ -63,7 +63,7 @@ msgstr "Text del tauler"
 
 #. settings-schema.json->behavior-section->description
 msgid "Behavior"
-msgstr ""
+msgstr "Comportament"
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
@@ -71,23 +71,23 @@ msgstr "Inclou els fitxers ocults"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. settings-schema.json->order-by->options
 msgid "Date modified"
-msgstr ""
+msgstr "Data de modificació"
 
 #. settings-schema.json->order-by->description
 msgid "Order by..."
-msgstr ""
+msgstr "Ordenar per..."
 
 #. settings-schema.json->favorites-first->description
 msgid "Show favorite items first"
-msgstr ""
+msgstr "Mostrar els elements preferits primer"
 
 #. settings-schema.json->pinned-first->description
 msgid "Show pinned items first"
-msgstr ""
+msgstr "Mostrar els elements fixats primer"
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
@@ -107,7 +107,7 @@ msgstr ""
 
 #. settings-schema.json->keybindings-section->description
 msgid "Keybindings"
-msgstr ""
+msgstr "Dreceres del teclat"
 
 #. settings-schema.json->show-menu->description
 msgid "Show menu"
