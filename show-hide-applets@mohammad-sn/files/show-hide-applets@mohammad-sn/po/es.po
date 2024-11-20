@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# DRAWER (SHOW/HIDE APPLETS)
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mohammad-sn, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 13:13+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
 "PO-Revision-Date: 2021-12-18 02:18-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,15 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:51
+#. applet.js:60 applet.js:231
+#, fuzzy
+msgid "Autohide ON"
+msgstr "Ocultar automáticamente"
+
+#. applet.js:62 applet.js:233
+#, fuzzy
+msgid "Autohide OFF"
+msgstr "Ocultar automáticamente"
+
+#. applet.js:82
 msgid "Panel Edit mode"
 msgstr "Modo de edición del panel"
 
-#: applet.js:57
+#. applet.js:88
 msgid "Add applets to the panel"
 msgstr "Añadir applets al panel"
 
-#. show-hide-applets@mohammad-sn->metadata.json->description
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Ocultar automáticamente"
+
+#. metadata.json->description
 msgid ""
 "hide a few applet to have a neater panel, and make them show up again by a "
 "click"
@@ -34,79 +50,73 @@ msgstr ""
 "ocultar algunos applet para tener un panel más ordenado, y hacer que "
 "aparezcan de nuevo con un clic"
 
-#. show-hide-applets@mohammad-sn->metadata.json->name
+#. metadata.json->name
 msgid "Drawer (show/hide applets)"
 msgstr "Cajón (mostrar/ocultar applets)"
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivateshide->description
-msgid "Hide on hovering again"
-msgstr "Volver a ocultar al pasar el ratón"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivateshide->tooltip
-msgid "toggle visibility of applets on mouse hover"
-msgstr "cambiar la visibilidad de los applets al pasar el ratón por encima"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->autohiderstime->description
-msgid "Reshowers' autohide delay: "
-msgstr "Retraso de re-activación del auto-ocultamiento: "
-
-#. show-hide-applets@mohammad-sn->settings-schema.json->autohiderstime->units
-#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->units
-msgid "seconds"
-msgstr "segundos"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->disablestarttimeautohide->description
-msgid "Disable start time autohide"
-msgstr "Desactivar la ocultación automática al inicio"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->disablestarttimeautohide->tooltip
-msgid "if not in autohide mode"
-msgstr "si no está en modo de ocultación automática"
-
-#. show-hide-applets@mohammad-sn->settings-schema.json->head->description
+#. settings-schema.json->head->description
 msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Configuración de show-hide-applets@mohammad-sn"
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->description
-msgid "Autohide"
-msgstr "Ocultar automáticamente"
-
-#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->tooltip
+#. settings-schema.json->autohide->tooltip
+#, fuzzy
 msgid ""
-"check if you want to hide applets automatically, unless you should click on "
-"applet to do so"
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
 msgstr ""
 "marque si desea ocultar los applets automáticamente, a menos que deba hacer "
 "clic en el applet para hacerlo"
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->autohiders->description
-msgid "Autohide reshowing applets"
-msgstr "Ocultar y volver a mostrar los applets automáticamente"
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr ""
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->description
-msgid "Hover activates/hides after "
-msgstr "Al pasar el ratón por encima se activa/se oculta después de  "
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Desactivar la ocultación automática al inicio"
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->units
-msgid "miliseconds"
-msgstr "milisegundos"
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "si no está en modo de ocultación automática"
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->description
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->hidetime->description
 msgid "Autohide after "
 msgstr "Ocultar automáticamente tras "
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivates->description
+#. settings-schema.json->hoveractivates->description
 msgid "Activate on hover"
 msgstr "Activar al pasar el ratón por encima"
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivates->tooltip
+#. settings-schema.json->hoveractivates->tooltip
 msgid "show applets on mouse hover"
 msgstr "mostrar applets al pasar el ratón por encima"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Volver a ocultar al pasar el ratón"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "cambiar la visibilidad de los applets al pasar el ratón por encima"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "milisegundos"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Al pasar el ratón por encima se activa/se oculta después de  "
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Ocultar y volver a mostrar los applets automáticamente"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Retraso de re-activación del auto-ocultamiento: "
