@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-12 00:32+0100\n"
-"PO-Revision-Date: 2024-07-04 23:08+0200\n"
+"PO-Revision-Date: 2024-11-20 02:07+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -95,9 +95,8 @@ msgid "Show number of translations in the menu"
 msgstr "Mostrar el número de traduccions al menú"
 
 #. settings-schema.json->show-issues->description
-#, fuzzy
 msgid "Show number of issues in the menu"
-msgstr "Mostrar el número de traduccions al menú"
+msgstr "Mostrar el número d'incidències al menú"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"
