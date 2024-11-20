@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-20 06:07+0100\n"
-"PO-Revision-Date: 2021-12-18 02:18-0300\n"
+"PO-Revision-Date: 2024-11-20 18:44-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,17 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. applet.js:60 applet.js:231
-#, fuzzy
 msgid "Autohide ON"
-msgstr "Ocultar automáticamente"
+msgstr "Ocultar automáticamente ACTIVADO"
 
 #. applet.js:62 applet.js:233
-#, fuzzy
 msgid "Autohide OFF"
-msgstr "Ocultar automáticamente"
+msgstr "Ocultar automáticamente DESACTIVADO"
 
 #. applet.js:82
 msgid "Panel Edit mode"
@@ -59,18 +57,21 @@ msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Configuración de show-hide-applets@mohammad-sn"
 
 #. settings-schema.json->autohide->tooltip
-#, fuzzy
 msgid ""
 "Check it if you want to hide applets automatically, unless you should click "
 "on applet to do so.\n"
 "Its status can be changed by middle-clicking on this applet."
 msgstr ""
-"marque si desea ocultar los applets automáticamente, a menos que deba hacer "
-"clic en el applet para hacerlo"
+"Márquelo si desea ocultar los applets automáticamente, a menos que deba "
+"hacer clic en el applet para hacerlo.\n"
+"Puede cambiar su estado haciendo clic con el botón central del ratón sobre "
+"este applet."
 
 #. settings-schema.json->statusintooltip->description
 msgid "Show Autohide status in tooltip"
 msgstr ""
+"Mostrar el estado de Ocultar automáticamente en la información sobre "
+"herramientas"
 
 #. settings-schema.json->disablestarttimeautohide->description
 msgid "Disable start time autohide"
