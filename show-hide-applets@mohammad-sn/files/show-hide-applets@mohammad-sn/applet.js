@@ -51,6 +51,17 @@ MyApplet.prototype = {
                         this.itemAutohide._switch.setToggleState(this.auto_hide);
                     }
                 }), null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN, "statusintooltip", "statusintooltip", Lang.bind(this, function(){
+                    if (!this.statusintooltip) {
+                        this.set_applet_tooltip("");
+                    } else {
+                        if (this.auto_hide)
+                            this.set_applet_tooltip(_("Autohide ON"));
+                        else
+                            this.set_applet_tooltip(_("Autohide OFF"));
+                    }
+                }), null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "disablestarttimeautohide", "disable_starttime_autohide", function(){}, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "hoveractivates", "hover_activates", function(){}, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "hoveractivateshide", "hover_activates_hide", function(){}, null);
@@ -155,7 +166,7 @@ MyApplet.prototype = {
         }
         let _children = this.cbox.get_children();
         let p = _children.indexOf(this.actor);
-        if(this.h){
+        if (this.h){ // applets are hidden:
             if (updalreadyH)
                 this.alreadyH=[];
             if (this.is_vertical())
@@ -215,6 +226,12 @@ MyApplet.prototype = {
             if(this.auto_hide && !global.settings.get_boolean("panel-edit-mode"))
                 this._hideTimeoutId = Mainloop.timeout_add_seconds(this.hide_time, Lang.bind(this,function(){this.autodo(updalreadyH);}));
         }
+        if (this.statusintooltip) {
+            if (this.auto_hide)
+                this.set_applet_tooltip(_("Autohide ON"));
+            else
+                this.set_applet_tooltip(_("Autohide OFF"));
+        }
         this.h = !this.h;
     },
 
@@ -248,7 +265,7 @@ MyApplet.prototype = {
         }
         if (postpone)
             this._hideTimeoutId = Mainloop.timeout_add_seconds(this.hide_time, Lang.bind(this,function(){this.autodo(updalreadyH);}));
-        else if(this.h && !global.settings.get_boolean("panel-edit-mode"))
+        else if (this.h && !global.settings.get_boolean("panel-edit-mode"))
             this.doAction(updalreadyH);
 
     },
@@ -257,6 +274,14 @@ MyApplet.prototype = {
         if(!this.h){
             this.doAction(true);
         }
+    },
+
+    on_applet_middle_clicked: function(event) {
+        this.auto_hide = !this.auto_hide;
+        if (this.itemAutohide) {
+            this.itemAutohide._switch.setToggleState(this.auto_hide);
+        }
+        this.doAction(this.auto_hide);
     },
 
     is_vertical: function() {
