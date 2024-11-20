@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-31 19:50-0400\n"
-"PO-Revision-Date: 2024-10-21 15:32-0300\n"
+"PO-Revision-Date: 2024-11-20 18:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1734,15 +1734,13 @@ msgstr "Cambiar mosaico de ventana"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle all window-list button windows"
-msgstr "Desplazarse por las ventanas de la aplicación"
+msgstr "Desplazarse por los botones de las ventanas de la lista"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle grouped/pooled button windows"
-msgstr "Desplazarse por las ventanas de la aplicación"
+msgstr "Desplazarse por los botones de las ventanas agrupadas"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
