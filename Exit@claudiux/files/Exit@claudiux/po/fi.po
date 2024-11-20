@@ -24,7 +24,7 @@ msgstr "Käynnistä Cinnamon"
 
 #. 5.4/applet.js:138
 msgid "Screen Off"
-msgstr ""
+msgstr "Näytönsäästäjä"
 
 #. 5.4/applet.js:163
 msgid "Lock Screen"
@@ -55,13 +55,12 @@ msgid "Power Off"
 msgstr "Sammuta"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
 "out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"Käynnistä Cinnamon uudelleen, lukitse näyttö, vaihda käyttäjä, kirjaudu "
-"ulos, valmiustila, lepotila, käynnistä uudelleen tai sammuta tietokone"
+"Valitse näytönsäästäjä, lukitse näyttö, vaihda käyttäjää, kirjaudu ulos, "
+"valmiustila, lepotila, käynnistä tai sammuta tietokone"
 
 #. metadata.json->name
 msgid "Exit"
@@ -85,15 +84,15 @@ msgstr "Valikon asetukset"
 
 #. 5.4->settings-schema.json->showRestartCinnamon->description
 msgid "Show the Restart Cinnamon option"
-msgstr "Näytä Käynnistä Cinnamon"
+msgstr "Käynnistä Cinnamon"
 
 #. 5.4->settings-schema.json->showSuspend->description
 msgid "Show the Suspend option"
-msgstr "Näytä Valmiustila"
+msgstr "Valmiustila"
 
 #. 5.4->settings-schema.json->showHibernate->description
 msgid "Show the Hibernate option"
-msgstr "Näytä Lepotila"
+msgstr "Lepotila"
 
 #. 5.4->settings-schema.json->hibernateNeedsSudo->description
 msgid "Hibernate needs root user rights (sudo)"
@@ -101,42 +100,43 @@ msgstr "Lepotila tarvitsee root oikeudet (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
-msgstr "Näytä Käynnistä uudelleen"
+msgstr "Käynnistä uudelleen"
 
 #. 5.4->settings-schema.json->showPowerOff->description
 msgid "Show the Power Off option"
-msgstr "Näytä Sammuta"
+msgstr "Sammuta"
 
 #. 5.4->settings-schema.json->labelOthers->description
 msgid ""
 "All the menu options below may be managed by the system.\n"
 "If they are, you can't see them."
 msgstr ""
-"Järjestelmä hallinnoi kaikkia alla olevia valikon vaihtoehtoja.\n"
-"Jos ne ovat, et näe niitä."
+"Järjestelmä hallinnoi kaikkia alla olevia kohteita.\n"
+"Et ehkä näe niitä kaikkia."
 
 #. 5.4->settings-schema.json->showScreenOff->description
-#, fuzzy
 msgid "Show the Screen Off option"
-msgstr "Näytä Lukitse näyttö"
+msgstr "Näytönsäästäjä"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
-msgstr ""
+msgstr "sekuntia"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
-msgstr ""
+msgstr "Aikamäärä jolloin hiiri on poistettu käytöstä"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
 msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
+"Jotta näyttö ei palaudu liian aikaisin sammumisen jälkeen, voit määrittää "
+"hiiren poistoviiveen ajan."
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
-msgstr "Näytä Lukitse näyttö"
+msgstr "Lukitse näyttö"
 
 #. 5.4->settings-schema.json->showLockscreen->tooltip
 #. 5.4->settings-schema.json->showSwitchUser->tooltip
@@ -146,11 +146,11 @@ msgstr "Hallinnoi järjestelmä"
 
 #. 5.4->settings-schema.json->showSwitchUser->description
 msgid "Show the Switch User option"
-msgstr "Näytä Vaihda käyttäjä"
+msgstr "Vaihda käyttäjä"
 
 #. 5.4->settings-schema.json->showLogout->description
 msgid "Show the Log Out option"
-msgstr "Näytä Kirjaudu ulos"
+msgstr "Kirjaudu ulos"
 
 #. 5.4->settings-schema.json->logoutMode->description
 msgid "Log Out Mode"
