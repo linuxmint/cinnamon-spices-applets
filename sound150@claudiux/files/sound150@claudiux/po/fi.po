@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-16 16:13+0200\n"
-"PO-Revision-Date: 2022-11-30 10:35+0200\n"
+"PO-Revision-Date: 2024-11-21 16:43+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -183,48 +183,48 @@ msgstr "Ääniasetukset"
 
 #. 5.4/applet.js:260 6.4/applet.js:260
 msgid "Mute"
-msgstr ""
+msgstr "Vaimenna"
 
 #. 5.4/applet.js:1962 6.4/applet.js:1966
 msgid "Easy Effects"
-msgstr ""
+msgstr "Easy Effects"
 
 #. 5.4/applet.js:1969 6.4/applet.js:1973
 msgid "Pulse Effects"
-msgstr ""
+msgstr "Pulse Effects"
 
 #. 5.4/applet.js:2013 6.4/applet.js:2014
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr ""
+msgstr "Haluatko poistaa “%s”?"
 
 #. 5.4/applet.js:2692 6.4/applet.js:2718
 msgid "The 'playerctl' package is required!"
-msgstr ""
+msgstr "Ohjelmapaketti \"playerctl\" vaaditaan!"
 
 #. 5.4/applet.js:2693 6.4/applet.js:2719
 msgid "Please select 'Install playerctl' in this menu"
-msgstr ""
+msgstr "Valitse tästä valikosta \"Asenna playerctl\""
 
 #. 5.4/applet.js:2849 6.4/applet.js:2875
 msgid "Reload this applet"
-msgstr ""
+msgstr "Lataa sovelma uudelleen"
 
 #. 5.4/applet.js:2855 6.4/applet.js:2881
 msgid "Remove sound applet"
-msgstr ""
+msgstr "Poista äänisovelma"
 
 #. 5.4/applet.js:2864 6.4/applet.js:2890
 msgid "Install playerctl"
-msgstr ""
+msgstr "Asenna playerctl"
 
 #. metadata.json->name
 msgid "Enhanced Sound applet"
-msgstr ""
+msgstr "Enhanced Sound applet"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
-msgstr ""
+msgstr "Enhanced sound applet"
 
 #. 4.4->settings-schema.json->section1->description
 #. 5.4->settings-schema.json->sectionBehavior1->title
@@ -250,7 +250,7 @@ msgstr "Hallitse soittimia"
 #. 6.4->settings-schema.json->extendedPlayerControl->description
 #. 3.4->settings-schema.json->extendedPlayerControl->description
 msgid "Show Loop and Shuffle controls"
-msgstr "Näytä jatkuvan toiston ja sekoituksen säätimet"
+msgstr "Näytä toiston ja sekoituksen säätimet"
 
 #. 4.4->settings-schema.json->section2->description
 #. 5.4->settings-schema.json->sectionBehavior2->title
@@ -267,7 +267,7 @@ msgstr "Paneeli"
 #. 6.4->settings-schema.json->showtrack->description
 #. 3.4->settings-schema.json->showtrack->description
 msgid "Show song information on the panel"
-msgstr "Näytä kappaleen tiedot paneelissa"
+msgstr "Näytä paneelissa kappaleen tiedot"
 
 #. 4.4->settings-schema.json->truncatetext->units
 #. 5.4->settings-schema.json->truncatetext->units
@@ -357,7 +357,7 @@ msgstr "Näytä albumin kannet kuvakkeena"
 #. 4.6->settings-schema.json->keepAlbumAspectRatio->description
 #. 6.4->settings-schema.json->keepAlbumAspectRatio->description
 msgid "Keep album art aspect ratio"
-msgstr "Säilytä albumin kannen kuvasuhde"
+msgstr "Säilytä albumin kansien kuvasuhde"
 
 #. 4.4->settings-schema.json->hideSystray->description
 #. 5.4->settings-schema.json->hideSystray->description
@@ -489,73 +489,71 @@ msgstr "Keltainen 101% - 115%; oranssi 116% - 130%; punainen yli 130%."
 #. 5.4->settings-schema.json->page_behavior->title
 #. 6.4->settings-schema.json->page_behavior->title
 msgid "Behavior"
-msgstr ""
+msgstr "Toiminta"
 
 #. 5.4->settings-schema.json->page_icon->title
 #. 5.4->settings-schema.json->sectionIcon1->title
 #. 6.4->settings-schema.json->page_icon->title
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon"
-msgstr ""
+msgstr "Kuvake"
 
 #. 5.4->settings-schema.json->page_sound->title
 #. 6.4->settings-schema.json->page_sound->title
-#, fuzzy
 msgid "Sound"
-msgstr "Sound 150%"
+msgstr "Ääni"
 
 #. 5.4->settings-schema.json->page_shortcuts->title
 #. 5.4->settings-schema.json->sectionShortcuts1->title
 #. 6.4->settings-schema.json->page_shortcuts->title
 #. 6.4->settings-schema.json->sectionShortcuts1->title
 msgid "Shortcuts"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #. 5.4->settings-schema.json->sectionBehavior3->title
 #. 6.4->settings-schema.json->sectionBehavior3->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Vihje"
 
 #. 5.4->settings-schema.json->sectionSound2->title
 #. 6.4->settings-schema.json->sectionSound2->title
 msgid "OSD"
-msgstr ""
+msgstr "Ruutu"
 
 #. 5.4->settings-schema.json->sectionSound3->title
 #. 6.4->settings-schema.json->sectionSound3->title
-#, fuzzy
 msgid "Sounds"
-msgstr "Sound 150%"
+msgstr "Äänet"
 
 #. 5.4->settings-schema.json->sectionSound4->title
 #. 6.4->settings-schema.json->sectionSound4->title
 msgid "Remove incompatible applets"
-msgstr ""
+msgstr "Poista yhteensopimattomat sovelmat"
 
 #. 5.4->settings-schema.json->keepPlayerListOpen->description
 #. 6.4->settings-schema.json->keepPlayerListOpen->description
 msgid "Keep the player list open"
-msgstr ""
+msgstr "Pidä soitinlista auki"
 
 #. 5.4->settings-schema.json->keepChoosePlayerOpen->description
 #. 6.4->settings-schema.json->keepChoosePlayerOpen->description
 msgid "Keep the player controller selector open"
-msgstr ""
+msgstr "Pidä säätimen valitsin auki"
 
 #. 5.4->settings-schema.json->avoidTwice->description
 #. 6.4->settings-schema.json->avoidTwice->description
 msgid "Avoid displaying controllers twice"
-msgstr ""
+msgstr "Vältä säätimien näyttämistä kahdesti"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 #. 6.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
 #. 6.4->settings-schema.json->seekerTooltipDelay->description
 msgid "Seeker tooltip: time to disappear"
-msgstr ""
+msgstr "Hakuvinkki: katoamisaika"
 
 #. 5.4->settings-schema.json->keyOpen->description
 #. 4.6->settings-schema.json->keyOpen->description
@@ -572,50 +570,49 @@ msgstr "Aseta pikanäppäin näyttämään äänisovelman valikko."
 #. 5.4->settings-schema.json->keySwitchPlayer->description
 #. 6.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
-msgstr ""
+msgstr "Vaihda seuraava soitin"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->tooltip
 #. 6.4->settings-schema.json->keySwitchPlayer->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to switch to the next player if it exists."
-msgstr "Aseta pikanäppäin näyttämään äänisovelman valikko."
+msgstr ""
+"Aseta pikanäppäin (vaihtamaan) seuraavaan soittimeen, jos sellainen on "
+"olemassa."
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 #. 6.4->settings-schema.json->middleShiftClickAction->description
-#, fuzzy
 msgid "Action on shift+middle click"
-msgstr "Keskipainikkeen toiminta"
+msgstr "Toiminto on vaihto+keskipainike"
 
 #. 5.4->settings-schema.json->tooltipShowVolume->description
 #. 6.4->settings-schema.json->tooltipShowVolume->description
 msgid "Show volume in tooltip"
-msgstr ""
+msgstr "Näytä voimakkuuden vihje"
 
 #. 5.4->settings-schema.json->tooltipShowPlayer->description
 #. 6.4->settings-schema.json->tooltipShowPlayer->description
-#, fuzzy
 msgid "Show player in tooltip"
-msgstr "Valitse soittimen säätimet"
+msgstr "Näytä soittimen vihje"
 
 #. 5.4->settings-schema.json->tooltipShowArtistTitle->description
 #. 6.4->settings-schema.json->tooltipShowArtistTitle->description
 msgid "Show song artist and title in tooltip"
-msgstr ""
+msgstr "Näytä vihjeessä esittäjän ja kappaleen nimi"
 
 #. 5.4->settings-schema.json->showVolumeLevelNearIcon->description
 #. 6.4->settings-schema.json->showVolumeLevelNearIcon->description
 msgid "Display volume level near icon"
-msgstr ""
+msgstr "Näytä voimakkuus kuvakkeessa"
 
 #. 5.4->settings-schema.json->showMicMutedOnIcon->description
 #. 6.4->settings-schema.json->showMicMutedOnIcon->description
 msgid "Display icon indicating that the microphone is muted, if applicable"
-msgstr ""
+msgstr "Kuvake osoittaa että mikrofoni on vaimennettu, jos mahdollista"
 
 #. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
 #. 6.4->settings-schema.json->showMicUnmutedOnIcon->description
 msgid "Display icon indicating that the microphone is activated, if applicable"
-msgstr ""
+msgstr "Kuvake osoittaa että mikrofoni on aktivoitu, jos mahdollista"
 
 #. 5.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
@@ -648,126 +645,122 @@ msgstr "7%"
 #. 5.4->settings-schema.json->magnetic25On->description
 #. 6.4->settings-schema.json->magnetic25On->description
 msgid "Magnetize all multiples of 25%"
-msgstr ""
+msgstr "Magnetoi kaikki 25%:n kerrannaiset"
 
 #. 5.4->settings-schema.json->color101_115->description
 #. 6.4->settings-schema.json->color101_115->description
 msgid "Icon color: 101%-115%"
-msgstr ""
+msgstr "Kuvakkeen väri: 101%-115%"
 
 #. 5.4->settings-schema.json->color116_130->description
 #. 6.4->settings-schema.json->color116_130->description
 msgid "Icon color: 116%-130%"
-msgstr ""
+msgstr "Kuvakkeen väri: 116%-130%"
 
 #. 5.4->settings-schema.json->color131_150->description
 #. 6.4->settings-schema.json->color131_150->description
 msgid "Icon color: 131%-150%"
-msgstr ""
+msgstr "Kuvakkeen väri: 131%-150%"
 
 #. 5.4->settings-schema.json->resetColorsButton->description
 #. 6.4->settings-schema.json->resetColorsButton->description
 msgid "Set colors to default values (yellow, orange, red)"
-msgstr ""
+msgstr "Aseta värit oletuksiin (keltainen, oranssi, punainen)"
 
 #. 5.4->settings-schema.json->alwaysCanChangeMic->description
 #. 6.4->settings-schema.json->alwaysCanChangeMic->description
 msgid "Always allow microphone to be reactivated"
-msgstr ""
+msgstr "Salli mikrofonin aina aktivoitua uudelleen"
 
 #. 5.4->settings-schema.json->alwaysCanChangeMic->tooltip
 #. 6.4->settings-schema.json->alwaysCanChangeMic->tooltip
 msgid "Always show the 'Mute input' switch in the context menu."
-msgstr ""
+msgstr "Näytä aina \"Mykistä sisääntulo\" pudotusvalikossa."
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 #. 6.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr ""
+msgstr "poistettu"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 #. 6.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr ""
+msgstr "pieni"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 #. 6.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr ""
+msgstr "keskikoko"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 #. 6.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr ""
+msgstr "suuri"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether the media keys osd is disabled or its relative display size"
-msgstr ""
+msgstr "Poistetaanko medianäppäimet ruutu tai sen suhteellinen koko"
 
 #. 5.4->settings-schema.json->showOSDonStartup->description
 #. 6.4->settings-schema.json->showOSDonStartup->description
 msgid "Show volume level in OSD on startup"
-msgstr ""
+msgstr "Näytä voimakkuuden näyttö käynnistyksen yhteydessä"
 
 #. 5.4->settings-schema.json->volumeSoundFile->description
 #. 6.4->settings-schema.json->volumeSoundFile->description
 msgid "Which sound to play when the volume is changed"
-msgstr ""
+msgstr "Mikä ääni kuuluu kun voimakkuutta muutetaan"
 
 #. 5.4->settings-schema.json->volumeSoundEnabled->description
 #. 6.4->settings-schema.json->volumeSoundEnabled->description
 msgid "Whether to play a sound when the volume is changed"
-msgstr ""
+msgstr "Toistetaanko äänimerkki kun voimakkuutta muutetaan"
 
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
 #. 6.4->settings-schema.json->redefine-volume-keybindings->description
 msgid "Redefine Multimedia Keyboard Shortcuts"
-msgstr ""
+msgstr "Määritä multimedianäppäimet uudelleen"
 
 #. 5.4->settings-schema.json->button-set-to-default-keybindings->description
 #. 6.4->settings-schema.json->button-set-to-default-keybindings->description
 msgid "Use the same shortcuts as those defined by Cinnamon"
-msgstr ""
+msgstr "Käytä samoja pikanäppäimiä kuin Cinnamonissa"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 #. 6.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
-msgstr ""
+msgstr "Vaihto Toisto/Tauko"
 
 #. 5.4->settings-schema.json->volume-mute->description
 #. 6.4->settings-schema.json->volume-mute->description
-#, fuzzy
 msgid "Volume Mute"
-msgstr "Kytke vaimennus"
+msgstr "Mykistä ääni"
 
 #. 5.4->settings-schema.json->volume-up->description
 #. 6.4->settings-schema.json->volume-up->description
-#, fuzzy
 msgid "Volume Up"
-msgstr "Voimakkuus"
+msgstr "Enemmän"
 
 #. 5.4->settings-schema.json->volume-down->description
 #. 6.4->settings-schema.json->volume-down->description
-#, fuzzy
 msgid "Volume Down"
-msgstr "Voimakkuus"
+msgstr "Hiljempaa"
 
 #. 5.4->settings-schema.json->audio-next->description
 #. 6.4->settings-schema.json->audio-next->description
 msgid "Next Track"
-msgstr ""
+msgstr "Seuraava"
 
 #. 5.4->settings-schema.json->audio-prev->description
 #. 6.4->settings-schema.json->audio-prev->description
-#, fuzzy
 msgid "Previous Track"
 msgstr "Edellinen"
 
 #. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 #. 6.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 msgid "Remove from panel the sound@cinnamon.org applet"
-msgstr ""
+msgstr "Poista paneelista sovelma sound@cinnamon.org"
 
 #. 2.8->settings-schema.json->percentMaxVol->options
 #. 3.4->settings-schema.json->percentMaxVol->options
@@ -846,18 +839,16 @@ msgstr ""
 "tietokoneelle."
 
 #. 6.4->settings-schema.json->openSystemSoundSettings->description
-#, fuzzy
 msgid "System Sound Settings"
 msgstr "Ääniasetukset"
 
 #. 6.4->settings-schema.json->maxVolume->description
-#, fuzzy
 msgid "Maximum volume (%)"
-msgstr "Suurinman voimakkuuden säätö"
+msgstr "Suurin voimakkuus (%)"
 
 #. 6.4->settings-schema.json->color0_100->description
 msgid "Icon color: 0%-100%"
-msgstr ""
+msgstr "Kuvakkeen väri: 0%-100%"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
