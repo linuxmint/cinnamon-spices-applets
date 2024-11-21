@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-09 06:05+0200\n"
+"POT-Creation-Date: 2024-11-21 11:01+0100\n"
 "PO-Revision-Date: 2024-09-05 17:19+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:108
+#. applet.js:118
 msgid "Edit Applications"
 msgstr "Modification des applications"
 
-#. applet.js:737 applet.js:1031
+#. applet.js:837 applet.js:1131
 msgid "Delete"
 msgstr "Supprimer"
 
-#. applet.js:738 applet.js:1032
+#. applet.js:838 applet.js:1132
 msgid "Edit"
 msgstr "Modifier"
 
-#. applet.js:739 applet.js:1033 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
 msgid "Cancel"
 msgstr "Abandon"
 
@@ -196,13 +196,25 @@ msgstr "Texte de notification"
 msgid "%s will be your application name"
 msgstr "%s sera le nom de votre application"
 
-#. settings-schema.json->hotkey-binding->description
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr ""
+
+#. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
 msgstr "Afficher le menu"
 
-#. settings-schema.json->hotkey-binding->tooltip
+#. settings-schema.json->hotkey-bindings->tooltip
 msgid "Set keybinding(s) to show the menu"
 msgstr "Définir le(s) raccourcis-clavier pour ouvrir le menu de cette applet."
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

@@ -23,6 +23,14 @@ let appSystem = Cinnamon.AppSystem.get_default();
 const UUID = 'app-launcher@mchilli';
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
+// Define panel positions
+const PANEL = {
+    TOP : 0,
+    BOTTOM : 1,
+    LEFT : 2,
+    RIGHT : 3
+};
+
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -53,7 +61,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.bindSettings();
             this.initMenu();
             this.connectSignals();
-            this.addHotkey();
+            this.addHotKey();
             this.initIcons();
             this.initLabel();
         } catch (e) {
@@ -73,7 +81,9 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('launcher-icon', 'launcherIcon', this.initIcons);
         this.settings.bind('notification-enabled', 'notificationEnabled');
         this.settings.bind('notification-text', 'notificationText');
-        this.settings.bind('hotkey-binding', 'hotkeyBinding', this.addHotkey);
+        this.settings.bind('hotkeys-enabled', 'hotkeysEnabled', this.updateHotKey);
+        this.settings.bind('hotkey-bindings', 'hotkeyBindings', this.addHotKey);
+        this.settings.bind('menu-at-pointer', 'menuAtPointer');
 
         this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
         this.settings.bind('visible-app-icons', 'visibleAppIcons', this.updateMenu);
@@ -351,12 +361,24 @@ class MyApplet extends Applet.TextIconApplet {
         return icon;
     }
 
-    addHotkey() {
+    updateHotKey() {
+        if (this.hotkeysEnabled) {
+            this.addHotKey();
+        } else {
+            this.removeHotkey();
+        }
+    }
+
+    addHotKey() {
         Main.keybindingManager.addHotKey(
             `app-launcher-${this.instanceId}`,
-            this.hotkeyBinding,
+            this.hotkeyBindings,
             () => {
-                this.menu.toggle();
+                if (this.menuAtPointer) {
+                    this.menu.toggleOnPointer();
+                } else {
+                    this.menu.toggle();
+                }
             }
         );
     }
@@ -527,8 +549,86 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this._menuGroupItems = [];
 
             this.contextOpen = false;
+            this.hotkeyTriggered = false;
+            this.pointerX = 0;
+            this.pointerY = 0;
+            this.actorPlaced = false;
         } catch (error) {
             global.log(error);
+        }
+    }
+
+    close(animate) {
+        this.hotkeyTriggered = false;
+        this.actorPlaced = false;
+        super.close(animate);
+    }
+
+    toggleOnPointer() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.hotkeyTriggered = true;
+            [this.pointerX, this.pointerY] = global.get_pointer();
+            this.open();
+            this.actor.set_position(this.pointerX, this.pointerY);
+        }
+    }
+
+    _allocationChanged (actor, pspec) {
+        if (this.hotkeyTriggered) {
+            let posX = this.pointerX;
+            let posY = this.pointerY;
+
+            // Find the monitor at the pointer position
+            const monitorIndex = Main.layoutManager.findMonitorIndexAt(posX, posY);
+            const monitor = Main.layoutManager.monitors[monitorIndex];
+
+            // Initialize panel heights for all sides of the monitor
+            const panelHeight = [0, 0, 0, 0];
+
+            // Get all visible panels for the current monitor and update their heights
+            const panels = Main.panelManager.getPanelsInMonitor(monitorIndex);
+            for (const panel of panels) {
+                if (!panel._hidden) {
+                    panelHeight[panel.panelPosition] = panel.height
+                }
+            }
+
+            if (this.actorPlaced) {
+                // // Ensure the actor fits within the monitor's width and height
+                posX = Math.min(posX, monitor.x + monitor.width - this.actor.width - panelHeight[PANEL.RIGHT]);
+                posY = Math.min(posY, monitor.y + monitor.height - this.actor.height - panelHeight[PANEL.BOTTOM]);
+            } else {
+                // Adjust X position to fit within the monitor, considering left and right panels
+                if (posX - monitor.x + this.actor.width > monitor.width - panelHeight[PANEL.RIGHT]) {
+                    posX -= this.actor.width;
+                }
+                if (posX < monitor.x + panelHeight[PANEL.LEFT]) {
+                    posX = monitor.x + panelHeight[PANEL.LEFT];
+                }
+
+                // Adjust Y position to fit within the monitor, considering top and bottom panels
+                if (posY - monitor.y + this.actor.height > monitor.height - panelHeight[PANEL.BOTTOM]) {
+                    posY -= this.actor.height;
+                }
+                if (posY < monitor.y + panelHeight[PANEL.TOP]) {
+                    posY = monitor.y + panelHeight[PANEL.TOP];
+                }
+
+                // Update pointer positions and mark menu as placed
+                this.pointerX = posX;
+                this.pointerY = posY;
+                this.actorPlaced = true
+            }
+
+            this.actor.set_position(posX, posY);
+            return
+        };
+        
+        if (!this.animating && !this.sourceActor.is_finalized() && this.sourceActor.get_stage() != null) {
+            let [xPos, yPos] = this._calculatePosition();
+            this.actor.set_position(xPos, yPos);
         }
     }
 
