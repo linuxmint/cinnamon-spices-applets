@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# CALENDAR WITH PUBLIC HOLIDAYS
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# ccprog, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-05 14:47-0500\n"
+"POT-Creation-Date: 2024-11-22 17:45-0500\n"
 "PO-Revision-Date: 2024-02-08 15:05+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -19,65 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
+#. eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
 msgid "%A, %B %-e, %Y"
 msgstr "%Y. %B %-e., %A"
 
-#: eventView.js:65 5.2/eventView.js:67
+#. eventView.js:65 5.2/eventView.js:67
 msgid "Starting in a few minutes"
 msgstr "Perceken belül elindul"
 
-#: eventView.js:69 5.2/eventView.js:71
+#. eventView.js:69 5.2/eventView.js:71
 #, javascript-format
 msgid "Starting in %d minutes"
 msgstr "%d perc múlva elindul"
 
-#: eventView.js:79 5.2/eventView.js:81
+#. eventView.js:79 5.2/eventView.js:81
 msgid "This evening"
 msgstr "Ma reggel"
 
-#: eventView.js:82 5.2/eventView.js:84
+#. eventView.js:82 5.2/eventView.js:84
 msgid "Starting later today"
 msgstr "Mai nap folyamán kezdődik"
 
-#: eventView.js:85 5.2/eventView.js:87
+#. eventView.js:85 5.2/eventView.js:87
 #, javascript-format
 msgid "In %d hour"
 msgid_plural "In %d hours"
 msgstr[0] "%d órán belül"
 msgstr[1] "%d órán belül"
 
-#: eventView.js:664 5.2/eventView.js:683
+#. eventView.js:664 5.2/eventView.js:693
 msgid "No Events"
 msgstr "Nincsenek események"
 
-#: eventView.js:925 5.2/eventView.js:944
+#. eventView.js:925 5.2/eventView.js:966
 msgid "In progress"
 msgstr "Folyamatban"
 
-#: eventView.js:946 5.2/eventView.js:965
+#. eventView.js:946 5.2/eventView.js:987
 msgid "All day"
 msgstr "Egész nap"
 
-#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
-#: 5.2/eventView.js:992 5.2/eventView.js:1015 5.2/eventView.js:1053
-#: 5.2/eventView.js:1075
+#. eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+#. 5.2/eventView.js:1014 5.2/eventView.js:1037 5.2/eventView.js:1075
+#. 5.2/eventView.js:1097
 msgid "Today"
 msgstr "Ma"
 
-#: 3.8/applet.js:21 5.2/applet.js:21
+#. 3.8/applet.js:21 5.2/applet.js:21
 msgid "%B %-e, %Y"
 msgstr "%Y. %B %-e."
 
-#: 3.8/applet.js:131 5.2/applet.js:137
+#. 3.8/applet.js:131 5.2/applet.js:138
 msgid "Date and Time Settings"
 msgstr "Dátum és idő beállítások"
 
-#: 3.8/settings_widgets.py:95 5.2/settings_widgets.py:95
+#. 3.8/settings_widgets.py:95 5.2/settings_widgets.py:95
 msgid "Add new entry"
 msgstr "Új bejegyzés hozzáadása"
 
-#: 3.8/settings_widgets.py:99 5.2/settings_widgets.py:99
+#. 3.8/settings_widgets.py:99 5.2/settings_widgets.py:99
 msgid "Edit entry"
 msgstr "Bejegyzés szerkesztése"
 
@@ -91,6 +91,7 @@ msgstr "Bejegyzés szerkesztése"
 #. 3.8->settings-schema.json->region_gbr->description
 #. 3.8->settings-schema.json->region_usa->description
 #. 5.2->settings-schema.json->region_aus->description
+#. 5.2->settings-schema.json->region_bel->description
 #. 5.2->settings-schema.json->region_can->description
 #. 5.2->settings-schema.json->region_deu->description
 #. 5.2->settings-schema.json->region_esp->description
@@ -99,11 +100,11 @@ msgstr "Bejegyzés szerkesztése"
 #. 5.2->settings-schema.json->region_che->description
 #. 5.2->settings-schema.json->region_gbr->description
 #. 5.2->settings-schema.json->region_usa->description
-#: 3.8/settings_widgets.py:122 5.2/settings_widgets.py:122
+#. 3.8/settings_widgets.py:122 5.2/settings_widgets.py:122
 msgid "Region"
 msgstr "Régió"
 
-#: 3.8/settings_widgets.py:123 5.2/settings_widgets.py:123
+#. 3.8/settings_widgets.py:123 5.2/settings_widgets.py:123
 msgid "City"
 msgstr "Város"
 
@@ -1332,3 +1333,39 @@ msgstr "Név megjelenítése"
 #. 5.2->settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
 msgstr "Időzóna"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->description
+#, fuzzy
+msgid "Date format for tooltip"
+msgstr "Dátumformátum"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->tooltip
+#, fuzzy
+msgid "Set your custom tooltip format here."
+msgstr "Egyéni dátumformátum megadása itt."
+
+#. 5.2->settings-schema.json->country->options
+msgid "Cyprus"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "El Salvador"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "Montenegro"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Brussels"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+#, fuzzy
+msgid "Flemish Region"
+msgstr "Régió"
+
+#. 5.2->settings-schema.json->region_bel->options
+#, fuzzy
+msgid "Walloon Region"
+msgstr "Régió"
