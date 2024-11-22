@@ -41,6 +41,7 @@
                 "country",
                 "has_region",
                 "region_aus",
+                "region_bel",
                 "region_can",
                 "region_deu",
                 "region_esp",
@@ -134,8 +135,10 @@
             "China": "chn",
             "Colombia": "col",
             "Croatia": "hrv",
+            "Cyprus": "cyp",
             "Czech Republic": "cze",
             "Denmark": "dnk",
+            "El Salvador": "slv",
             "Estonia": "est",
             "Spain": "esp",
             "Finland": "fin",
@@ -156,6 +159,7 @@
             "Lithuania": "ltu",
             "Luxembourg": "lux",
             "Macedonia": "mkd",
+            "Montenegro": "mne",
             "Mexico": "mex",
             "Netherlands": "nld",
             "New Zealand": "nzl",
@@ -183,6 +187,7 @@
         "type": "generic",
         "default": [
             "aus",
+            "bel",
             "can",
             "deu",
             "esp",
@@ -208,6 +213,17 @@
             "Western Australia": "wa"
         },
         "dependency": "country=aus"
+    },
+    "region_bel": {
+        "type": "combobox",
+        "default": "bru",
+        "description": "Region",
+        "options": {
+            "Brussels": "bru",
+            "Flemish Region": "vlg",
+            "Walloon Region": "wal"
+        },
+        "dependency": "country=bel"
     },
     "region_can": {
         "type": "combobox",
