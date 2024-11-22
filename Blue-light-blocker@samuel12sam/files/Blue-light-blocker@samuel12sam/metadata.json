@@ -1,0 +1,8 @@
+{
+    "uuid": "Blue-light-blocker@samuel12sam",
+    "name": "Blue Light Blocker",
+    "description": "Protect your eyes from blue light! Give a warm tone to your screen in the same way 'Night Light' and 'Night Shift' do it on Windows and macOS. Simple sliders allow you to control the yellow-tint of your screen and it's brightness. Batteries-included: no extra packages to download. You are in control: the time of the day or the position of the sun will not affect Blue Light Blocker.",
+    "icon": "icon",
+    "stylesheet": "stylesheet.css",    
+    "max-instances": 1
+}
