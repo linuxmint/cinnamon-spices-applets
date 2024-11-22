@@ -56,6 +56,16 @@ MyApplet.prototype = {
 
             try {
                 this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "soundcard",
+                                     "soundcard",
+                                     this.on_settings_changed,
+                                     null);
+                this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "input",
+                                     "input",
+                                     this.on_settings_changed,
+                                     null);
+                this.settings.bindProperty(Settings.BindingDirection.IN,
                                      "keybinding",
                                      "keybinding",
                                      this.on_settings_changed,
@@ -97,15 +107,34 @@ MyApplet.prototype = {
             if (this.settings) {
                 this.on_settings_changed();
             }
+            
+            // per default use first soundcard 
+            this.soundcard_id = "0";
+            let soundcard_list_cmd = "cat /proc/asound/cards"; 
+            let [res, stdout] = GLib.spawn_command_line_sync(soundcard_list_cmd); 
 
-            this.amixer = "amixer";
+            if (res) {
+              // Split the result into lines 
+              let lines = stdout.toString().split('\n');
+
+              // Filter lines that contain the soundcard search string
+              let filteredLines = lines.filter(line => line.includes(this.soundcard)); 
+
+              // Extract the field after splitting by space and getting the second field (index 1) 
+              this.soundcard_id = filteredLines.map(line => line.split(' ')[1]);
+            }
+  
+            log("Use soundcard id: '" + this.soundcard_id + "'");
+
+            this.amixer = "amixer -c " + this.soundcard_id;
+
             const parameters = ["", " -D pulse"];
             for (let param of parameters) {
                 let cmd = this.amixer + param + " scontrols";
                 log("Test mixer command '" + cmd + "'");
                 // TODO: Make it async.
                 let [res, stdout] = GLib.spawn_command_line_sync(cmd);
-                if (res && to_string(stdout).indexOf("'Capture'") != -1) {
+                if (res && to_string(stdout).indexOf(this.input) != -1) {
                     this.amixer += param;
                     log("Use mixer command '" + this.amixer + "'");
                     break;
@@ -146,7 +175,7 @@ MyApplet.prototype = {
             let cmd = [
                 "sh",
                 "-c",
-                this.amixer + " sget Capture"
+                this.amixer + " sget " + this.input
                 ];
             Util.spawn_async(cmd, (stdout) => {
                 try{
@@ -197,7 +226,7 @@ MyApplet.prototype = {
             let cmd = [
                 "sh",
                 "-c",
-                this.amixer + " set Capture toggle"
+                this.amixer + " set " + this.input + " toggle"
             ];
             Util.spawn_async(cmd, (stdout) => {
                 this.is_audio_muted();

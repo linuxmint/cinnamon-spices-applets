@@ -1,4 +1,22 @@
 {
+  "section_soundcard": {
+    "type": "section",
+    "description": "Soundcard settings",
+    "keys": [
+      "soundcard",
+      "input"
+    ]
+  },
+  "soundcard": {
+    "type": "entry",
+    "description": "Soundcard identifier",
+    "default": "USB-Audio - USB"
+  },
+  "input": {
+    "type": "entry",
+    "description": "Input name (e.g. Capture, Mic, ...)",
+    "default": "Mic"
+  },
   "section_keybinding": {
     "type": "section",
     "description": "Keyboard shortcuts",
