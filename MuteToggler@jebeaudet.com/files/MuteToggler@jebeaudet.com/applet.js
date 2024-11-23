@@ -16,7 +16,7 @@ const APPNAME = "MuteToggler";
 const UUID = APPNAME + "@jebeaudet.com";
 const HOME_DIR = GLib.get_home_dir();
 
-var VERBOSE = false; // VERBOSE value will be changed according to this applet settings.
+var VERBOSE = true; // VERBOSE value will be changed according to this applet settings.
 
 const POTENTIAL_INPUTS = ["'Capture'", "'Mic'"];
 
@@ -116,8 +116,9 @@ MyApplet.prototype = {
             
             this.amixer = "amixer";
 
-            this.evaluate_soundcard();
- 
+            this.evaluate_soundcard(); 
+            this.evaluate_input();
+            
             const parameters = ["", " -D pulse"];
             for (let param of parameters) {
                 let cmd = this.amixer + param + " scontrols";
@@ -130,8 +131,6 @@ MyApplet.prototype = {
                     break;
                 }
             }
-
-            this.evaluate_input();
             
             this.applet_is_running = true;
             this.set_not_muted_icon();
