@@ -214,7 +214,7 @@ MyApplet.prototype = {
 
     evaluate_soundcard: function() {
       // only use specific soundcard if searchstring is not empty
-      if (this.soundcard.trim() !== '')
+      if (this.soundcard.trim().length > 0)
       {
         // per default use first soundcard 
         this.soundcard_id = "0";
@@ -224,7 +224,7 @@ MyApplet.prototype = {
 
         if (res) {
           // Split the result into lines 
-          let lines = stdout.toString().split('\n');
+          let lines = to_string(stdout).split('\n');
 
           // Filter lines that contain the soundcard search string
           let filteredLines = lines.filter(line => line.includes(this.soundcard)); 
