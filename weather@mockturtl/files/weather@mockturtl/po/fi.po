@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-07-02 14:18+0300\n"
+"PO-Revision-Date: 2024-11-23 00:55+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: suomi <>\n"
 "Language: fi\n"
@@ -40,11 +40,11 @@ msgstr "Palvelussa virhe"
 
 #: 3.0/applet.js:168 3.8/weather-applet.js:20443
 msgid "Incorrect API Key"
-msgstr "Väärä API avain"
+msgstr "Väärä APIAVAIN"
 
 #: 3.0/applet.js:170 3.8/weather-applet.js:20445
 msgid "Incorrect Location Format"
-msgstr "Väärä muoto sijainnissa"
+msgstr "Väärä sijainti"
 
 #: 3.0/applet.js:172 3.8/weather-applet.js:20447
 msgid "Key Blocked"
@@ -56,7 +56,7 @@ msgstr "Sijaintia ei löytynyt"
 
 #: 3.0/applet.js:175 3.8/weather-applet.js:20450
 msgid "No Api Key"
-msgstr "Ei API avainta"
+msgstr "Ei APIAVAINTA"
 
 #: 3.0/applet.js:176 3.8/weather-applet.js:20451
 msgid "No Location"
@@ -80,7 +80,7 @@ msgstr "..."
 
 #: 3.0/applet.js:218 3.8/weather-applet.js:20718
 msgid "Click to open"
-msgstr "Avaa napsauttamalla"
+msgstr "Avaa painamalla"
 
 #: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:19147
 #: 3.8/weather-applet.js:20721
@@ -195,7 +195,7 @@ msgstr ""
 
 #: 3.0/applet.js:1901 3.8/weather-applet.js:10592
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
-msgstr "Paikannuksen kutsuminen epäonnistui, katso Looking Glass virheet."
+msgstr "Geolocation API:n kutsu epäonnistui, katso Looking Glass virheet."
 
 #: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:10107
 msgid "Warning"
@@ -270,7 +270,7 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://developer.climacell.co/sign-up"
 msgstr ""
-"Anna API-avain asetuksissa.\n"
+"Anna APIAVAINn asetuksissa.\n"
 "Hanki se ensin https://developer.climacell.co/sign-up"
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
@@ -279,8 +279,8 @@ msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
 msgstr ""
-"Oletko varma että,\n"
-"annoit API-avaimen oikein tai onko tunnuksesi voimassa"
+"Oletko varma että annoit,\n"
+"APIAVAIMEN oikein tai onko sinun tunnus vielä voimassa"
 
 #: 3.0/climacell.js:248 3.8/weather-applet.js:13242
 msgid ""
@@ -288,7 +288,7 @@ msgid ""
 "entered the API key that you have from Climacell"
 msgstr ""
 "Varmista, että antamasi\n"
-"API-avain on peräisin yritykseltä Climacell"
+"APIAVAIN on peräisin yritykseltä Climacell"
 
 #: 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
 #: 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
@@ -579,7 +579,7 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
-"Anna API-avain asetuksissa.\n"
+"Anna APIAVAIN asetuksissa.\n"
 "Hanki se ensin https://darksky.net/dev/register"
 
 #: 3.0/darkSky.js:238
@@ -588,7 +588,7 @@ msgid ""
 "entered the API key that you have from DarkSky"
 msgstr ""
 "Varmista, että antamasi\n"
-"API-avain on peräisin yritykseltä DarkSky"
+"APIAVAIN on peräisin yritykseltä DarkSky"
 
 #: 3.0/ipApi.js:89 3.8/weather-applet.js:16836
 msgid "Could not obtain location"
@@ -1329,7 +1329,7 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://www.weatherbit.io/account/create"
 msgstr ""
-"Anna API-avain asetuksissa.\n"
+"Anna APIAVAINn asetuksissa.\n"
 "Hanki se ensin https://www.weatherbit.io/account/create"
 
 #: 3.0/yahoo.js:78
@@ -1536,6 +1536,8 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Osoite sijainnin hakupalvelussa on estetty. Voit yrittää vaihtaa sovelmaa "
+"nähdäksesi, ratkaiseeko se ongelman."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1755,7 +1757,7 @@ msgstr "Puolipilvistä"
 
 #: 3.8/weather-applet.js:14619
 msgid "Please make sure you entered the API key correctly"
-msgstr "Oletko varma että, annoit API-avaimen oikein"
+msgstr "Oletko varma että, annoit APIAVAIMEN oikein"
 
 #. 3.8->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:14636
@@ -1809,7 +1811,7 @@ msgstr "Weather Underground"
 
 #: 3.8/weather-applet.js:15990
 msgid "The API key you provided is invalid."
-msgstr "Antamasi API-avain on virheellinen."
+msgstr "Antamasi APIAVAIN on virheellinen."
 
 #: 3.8/weather-applet.js:15997
 msgid "The location you provided was not found."
@@ -1857,7 +1859,7 @@ msgid ""
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Varmista, että antamasi\n"
-"API-avain on peräisin yritykseltä Pirate Weather"
+"APIAVAIN on peräisin yritykseltä Pirate Weather"
 
 #: 3.8/weather-applet.js:16816
 msgid ""
@@ -1897,157 +1899,140 @@ msgstr "Open Meteo"
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Paikoin sadekuuroja"
+msgstr "Hajanaista räntää"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Ukkosmyrskyjä"
+msgstr "Mahdollisesti ukkosta"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
-#, fuzzy
 msgid "Light Rain"
-msgstr "Heikkoa vesisadetta"
+msgstr "Heikkoa sadetta"
 
 #: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
-#, fuzzy
 msgid "Light Sleet"
-msgstr "Heikkoa räntäsadetta"
+msgstr "Heikkoa räntää"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Ajoittain sadetta"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Ajoittain räntää"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Ajoittain lumisadetta"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Hajanaisia ukkosmyrskyjä"
+msgstr "Usein ukkosta"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Pilvistä"
+msgstr "Korkeat pilvet"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Pilvistä"
+msgstr "Matalia pilviä"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Pilvistä ja tuulista"
+msgstr "Pilvistä ja kuivaa"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Heikosti lunta"
+msgstr "Hieman myrskyistä"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Paikoin lumisadetta"
+msgstr "Myrskyisiä lumisateita"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "Ukkoskuuroja"
+msgstr "Ukkostasateita"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
 msgstr "Ukkoskuuroja"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Varoitus"
+msgstr "Tuulivaroitus"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Ukkosta ja sadekuuroja"
+msgstr "Varoitus ukkosmyrskystä"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Varoitus"
+msgstr "Varoitus sateesta"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Varoitus"
+msgstr "Lumivaroitus"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Varoitus liukkaasta tiestä"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Varoitus"
+msgstr "Pakkasvaroitus"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Varoitus joukkoliikkeistä"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Varoitus"
+msgstr "Varoitus kuumuudesta"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Varoitus lumivyörystä"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Maanjäristysvaroitus"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Metsäpalovaara"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Varoitus"
+msgstr "Tulvavaroitus"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Swiss Météo"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Palveluntarjoajaa varten sinun on käytettävä postinumeroa."
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Tämän palveluntarjoajan kohdalla sinun on käytettävä Sveitsiläistä "
+"postinumeroa 1000-9999."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Sveitsi"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2071,7 +2056,7 @@ msgstr "Varmista, että annoit sijaintisi tai käytä automaattista hakua."
 
 #: 3.8/weather-applet.js:18705
 msgid "This provider requires an API key to operate"
-msgstr "Tämä palvelu vaatii API-avaimen"
+msgstr "Palvelu vaatii APIAVAIMEN"
 
 #: 3.8/weather-applet.js:19113
 msgid "Dew Point"
@@ -2131,9 +2116,8 @@ msgid "Saved to {filePath}"
 msgstr "Tallennettu {filePath}"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Sijainti"
+msgstr "Sijaintipalvelun esto"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
@@ -2203,7 +2187,7 @@ msgstr "Sääpalvelun tiedot"
 
 #. 3.0->settings-schema.json->moreInfo->description
 msgid "Click here for detailed description"
-msgstr "Yksityiskohtainen kuvaus napsauttamalla"
+msgstr "Tarkka kuvaus painamalla tästä"
 
 #. 3.0->settings-schema.json->moreInfo->tooltip
 #. 3.0->settings-schema.json->getLocation->tooltip
@@ -2241,7 +2225,7 @@ msgstr "Climacell (avain tarvitaan)"
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key"
-msgstr "API-avain"
+msgstr "APIAVAIN"
 
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
@@ -2275,7 +2259,7 @@ msgstr ""
 
 #. 3.0->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
-msgstr "Aseta API avain ja sijainti"
+msgstr "Aseta APIAVAIN ja sijainti"
 
 #. 3.0->settings-schema.json->refreshInterval->units
 #. 3.8->settings-schema.json->refreshInterval->units
@@ -2480,7 +2464,7 @@ msgstr "Mukautetut kuvakkeet paneelissa"
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
 msgid "Presentation"
-msgstr "Esitystapa"
+msgstr "Näkymä"
 
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
@@ -2549,7 +2533,7 @@ msgstr "Näytä ylin lämpötila ensin"
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
 msgid "Show temperature Russian style"
-msgstr "Näytä lämpötila venäläiseen tyyliin"
+msgstr "Näytä venäläiset lämpötilat"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
@@ -2650,10 +2634,11 @@ msgid ""
 "The options are described in detail on the Cinnamon Spices Website which you "
 "can access with the button on the Help tab."
 msgstr ""
-"Voit valita sääpalvelujen  välillä. Jotkut vaativat toimiakseen API-avaimen, "
-"joskus on alueellinen rajoitus ja ennusteen pituus vaihtelee. Kaikki vaatii "
-"Internet-yhteyden toimiakseen. Vaihtoehdot on kerrottu yksityiskohtaisesti "
-"Cinnamon Spices sivustolla, johon pääset Ohje-välilehden painikkeella."
+"Voit valita sääpalvelujen  välillä. Jotkut vaativat toimiakseen APIAVAIMEN, "
+"joskus on maakohtainen rajoitus ja ennusteen pituus vaihtelee. Kaikki "
+"vaativat Internet-yhteyden toimiakseen. Vaihtoehdot on kerrottu "
+"yksityiskohtaisesti Cinnamon Spices sivustolla, johon pääset Ohje-välilehden "
+"painikkeella."
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
@@ -2673,7 +2658,7 @@ msgstr "US National Weather (vain US)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Swiss Météo (vain Sveitsi)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2700,7 +2685,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (avain tarvitaan)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2711,9 +2695,9 @@ msgid ""
 msgstr ""
 "Voit antaa koodinaatit \"leveysaste,pituusaste\" (esim. 51.5085,-0.1257) tai "
 "käytä \"kaupunki,maakoodi\" (esim. Tampere,FI) tai osoitteella {talon "
-"numero} {katu} {kaupunki/pitäjä} {postinumero} {maa}. Haussa on hyvin "
-"joustavat muodot. Kun olet kirjoittanut odota 3 sekuntia niin arvot tulevat "
-"automaattisesti valintasi mukaan."
+"numero} {katu} {kaupunki/pitäjä} {postinumero} {maa}.  Hakualgoritmi on "
+"erittäin joustava. Kolmen sekunnin kuluttua kirjoittamastasi osoitteesta, "
+"tulos tulee automaattisesti. Palvelun tarjoaa nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -2744,8 +2728,8 @@ msgid ""
 "If you are using a provider with API keys set it to an interval you won't "
 "run out of your quota with."
 msgstr ""
-"Jos käytät palveluntarjoajaa, jolla on API-avaimia, aseta se aikavälille, "
-"jolla kiintiösi ei lopu."
+"Jos käytät palveluntarjoajaa, jolla on APIAVAIMIA, anna se  jotta kiintiösi "
+"ei lopu."
 
 #. 3.8->settings-schema.json->forecastDays->tooltip
 msgid ""
@@ -2767,7 +2751,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr "Sääennuste näytetään tästä hetkestä eteenpäin, ei vrk alusta"
+msgstr "Ennuste näytetään tästä hetkestä eteenpäin, ei vuorokauden alusta"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -2987,9 +2971,7 @@ msgstr "Paina ja tallenna debug-tiedot tiedostoon"
 msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
-msgstr ""
-"Tämä sisältää sovelman lokit ja nykyiset asetukset, joissa API-avaimesi on "
-"poistettu."
+msgstr "Sisältää sovelman lokit ja asetukset, mutta APIAVAIN on poistettu."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
