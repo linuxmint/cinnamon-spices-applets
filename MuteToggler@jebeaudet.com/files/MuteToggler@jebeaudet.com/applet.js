@@ -55,7 +55,7 @@ function findFirstMatch(searchStrings, checkString) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(metadata, orientation, panel_height, instance_id) {
+    _init: async function(metadata, orientation, panel_height, instance_id) {
         try {
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
             VERBOSE = this.settings.getValue("verbose");
@@ -115,9 +115,8 @@ MyApplet.prototype = {
             }
             
             this.amixer = "amixer";
-
-            this.evaluate_soundcard(); 
-            this.evaluate_input();
+            await this.evaluate_soundcard(); 
+            await this.evaluate_input();
             
             const parameters = ["", " -D pulse"];
             for (let param of parameters) {
@@ -213,42 +212,54 @@ MyApplet.prototype = {
     },
 
     evaluate_soundcard: function() {
-      // only use specific soundcard if searchstring is not empty
-      if (this.soundcard.trim().length > 0)
-      {
-        // per default use first soundcard 
-        this.soundcard_id = "0";
-  
-        let soundcard_list_cmd = "cat /proc/asound/cards"; 
-        let [res, stdout] = GLib.spawn_command_line_sync(soundcard_list_cmd); 
+      return new Promise((resolve, reject) => {
+        // only use specific soundcard if searchstring is not empty
+        if (this.soundcard.trim().length > 0) {
+          // per default use first soundcard 
+          this.soundcard_id = "0";
+          
+          let soundcard_list_cmd =  
+          Util.spawn_async(["sh","-c","cat /proc/asound/cards"], (stdout) => {
+            try {
+              // Split the result into lines 
+              let lines = stdout.split('\n');
 
-        if (res) {
-          // Split the result into lines 
-          let lines = to_string(stdout).split('\n');
+              // Filter lines that contain the soundcard search string
+              let filteredLines = lines.filter(line => line.includes(this.soundcard));
 
-          // Filter lines that contain the soundcard search string
-          let filteredLines = lines.filter(line => line.includes(this.soundcard)); 
-
-          // Extract the field after splitting by space and getting the second field (index 1) 
-          this.soundcard_id = filteredLines.map(line => line.split(' ')[1]);
+              // Extract the field after splitting by space and getting the second field (index 1) 
+              if (filteredLines.length > 0) {
+                this.soundcard_id = filteredLines[0].split(' ')[1];
+              }
+              log("Use specific soundcard id: '" + this.soundcard_id + "'");
+              this.amixer = this.amixer + " -c " + this.soundcard_id;
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          });
+        } else {
+          resolve();
         }
-        log("Use specific soundcard id: '" + this.soundcard_id + "'");
-
-        this.amixer = this.amixer + " -c " + this.soundcard_id;
-      }
+      });
     },
 
     evaluate_input: function() {
-      this.input = POTENTIAL_INPUTS[0];
-      let [res, stdout] = GLib.spawn_command_line_sync(this.amixer);
-      if (res) {
-        let found_input = findFirstMatch(POTENTIAL_INPUTS, to_string(stdout));
-        if (found_input !== null)
-        {
-          this.input = found_input;
-        }
-      }
-      log("Use input: " + this.input);
+      return new Promise((resolve, reject) => {
+        this.input = POTENTIAL_INPUTS[0];
+        Util.spawn_async(["sh", "-c", this.amixer], (stdout) => {
+          try {
+            let found_input = findFirstMatch(POTENTIAL_INPUTS, stdout);
+            if (found_input !== null) {
+              this.input = found_input;
+            }
+            log("Use input: " + this.input);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
     },
 
     on_applet_clicked: function(event) {
