@@ -9,9 +9,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
 "ues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-10-18 10:04+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2024-11-23 18:07+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is> <translation-team-is@lists.sourceforge.net>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1545,6 +1545,9 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Þjónustan með uppflettingu heimilisfangs yfir í staðsetningu er lokuð. Þú"
+" getur reynt að breyta kennistrengnum þínum (User-Agent) í hjálpinni og"
+" athugað hvort það leysi vandamálið."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1603,7 +1606,7 @@ msgstr "Mjög gott"
 
 #: 3.8/weather-applet.js:11348
 msgid "Ash"
-msgstr ""
+msgstr "Aska"
 
 #: 3.8/weather-applet.js:11350
 msgid "Squall"
@@ -1877,7 +1880,6 @@ msgstr ""
 " Looking Glass"
 
 #: 3.8/weather-applet.js:16979
-#, fuzzy
 msgid "Snow grains"
 msgstr "Kornsnjór"
 
@@ -1903,7 +1905,7 @@ msgstr "Með vindkælingu"
 
 #: 3.8/weather-applet.js:17130
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
@@ -1928,15 +1930,15 @@ msgstr "Dálítil slydda"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Rigning með köflum"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Slydda með köflum"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Snjókoma með köflum"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
 msgid "Frequent Thunderstorms"
@@ -1996,7 +1998,7 @@ msgstr "Aðvörun vegna snjókomu"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Aðvörun vegna hálku á vegum"
 
 #: 3.8/weather-applet.js:17888
 msgid "Frost Warning"
@@ -2004,7 +2006,7 @@ msgstr "Aðvörun vegna frosts"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Aðvörun vegna skriðufalla"
 
 #: 3.8/weather-applet.js:17892
 msgid "Heat Warning"
@@ -2012,15 +2014,15 @@ msgstr "Aðvörun vegna hita"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Aðvörun vegna snjóflóða"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Aðvörun vegna jarðskjálfta"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Aðvörun vegna skógarelda"
 
 #: 3.8/weather-applet.js:17900
 msgid "Flood Warning"
@@ -2028,19 +2030,20 @@ msgstr "Aðvörun vegna flóða"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Météo Suisse"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Fyrir þessa þjónustuveitu þarf að nota póstnúmer."
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Fyrir þessa þjónustuveitu þarf að nota svissneskt póstnúmer, frá 1000-9999."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Sviss"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2109,7 +2112,7 @@ msgstr "Svæði: {stationArea}"
 
 #: 3.8/weather-applet.js:20008
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} veðuraðvörun/aðvaranir"
 
 #: 3.8/weather-applet.js:20403 3.8/weather-applet.js:20413
 #: 3.8/weather-applet.js:20420
@@ -2134,7 +2137,7 @@ msgstr "Lokað á staðsetningaþjónustu"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
-msgstr ""
+msgstr "Engin skrifta gefin"
 
 #: 3.8/weather-applet.js:20633
 msgid "You need to add a script first."
@@ -2886,6 +2889,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Ef þjónustuveitan býður upp á þýðingar á veðurskilyrðum yfir á tungumálið"
+" þitt og staðfærslan þín sé studd af þjónustuveitunni, verður það notað."
+" Annars notar smáforritið sitt eigið þýðingakerfi."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
