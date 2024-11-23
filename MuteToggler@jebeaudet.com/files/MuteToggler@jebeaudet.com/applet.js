@@ -16,7 +16,9 @@ const APPNAME = "MuteToggler";
 const UUID = APPNAME + "@jebeaudet.com";
 const HOME_DIR = GLib.get_home_dir();
 
-var VERBOSE = true; // VERBOSE value will be changed according to this applet settings.
+var VERBOSE = false; // VERBOSE value will be changed according to this applet settings.
+
+const POTENTIAL_INPUTS = ["'Capture'", "'Mic'"];
 
 /**
  * Usage of log and logError:
@@ -41,6 +43,15 @@ function _(str) {
   return gettext(str);
 }
 
+function findFirstMatch(searchStrings, checkString) {
+  for (let i = 0; i < searchStrings.length; i++) { 
+    if (checkString.includes(searchStrings[i])) { 
+      return searchStrings[i]; 
+    }  
+  } 
+  return null; // Return null if no match is found 
+}
+
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
@@ -58,11 +69,6 @@ MyApplet.prototype = {
                 this.settings.bindProperty(Settings.BindingDirection.IN,
                                      "soundcard",
                                      "soundcard",
-                                     this.on_settings_changed,
-                                     null);
-                this.settings.bindProperty(Settings.BindingDirection.IN,
-                                     "input",
-                                     "input",
                                      this.on_settings_changed,
                                      null);
                 this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -108,26 +114,10 @@ MyApplet.prototype = {
                 this.on_settings_changed();
             }
             
-            // per default use first soundcard 
-            this.soundcard_id = "0";
-            let soundcard_list_cmd = "cat /proc/asound/cards"; 
-            let [res, stdout] = GLib.spawn_command_line_sync(soundcard_list_cmd); 
+            this.amixer = "amixer";
 
-            if (res) {
-              // Split the result into lines 
-              let lines = stdout.toString().split('\n');
-
-              // Filter lines that contain the soundcard search string
-              let filteredLines = lines.filter(line => line.includes(this.soundcard)); 
-
-              // Extract the field after splitting by space and getting the second field (index 1) 
-              this.soundcard_id = filteredLines.map(line => line.split(' ')[1]);
-            }
-  
-            log("Use soundcard id: '" + this.soundcard_id + "'");
-
-            this.amixer = "amixer -c " + this.soundcard_id;
-
+            this.evaluate_soundcard();
+ 
             const parameters = ["", " -D pulse"];
             for (let param of parameters) {
                 let cmd = this.amixer + param + " scontrols";
@@ -141,6 +131,8 @@ MyApplet.prototype = {
                 }
             }
 
+            this.evaluate_input();
+            
             this.applet_is_running = true;
             this.set_not_muted_icon();
             this.is_audio_muted();
@@ -219,6 +211,45 @@ MyApplet.prototype = {
         } else {
             this.set_applet_icon_name("muted");
         }
+    },
+
+    evaluate_soundcard: function() {
+      // only use specific soundcard if searchstring is not empty
+      if (this.soundcard.trim() !== '')
+      {
+        // per default use first soundcard 
+        this.soundcard_id = "0";
+  
+        let soundcard_list_cmd = "cat /proc/asound/cards"; 
+        let [res, stdout] = GLib.spawn_command_line_sync(soundcard_list_cmd); 
+
+        if (res) {
+          // Split the result into lines 
+          let lines = stdout.toString().split('\n');
+
+          // Filter lines that contain the soundcard search string
+          let filteredLines = lines.filter(line => line.includes(this.soundcard)); 
+
+          // Extract the field after splitting by space and getting the second field (index 1) 
+          this.soundcard_id = filteredLines.map(line => line.split(' ')[1]);
+        }
+        log("Use specific soundcard id: '" + this.soundcard_id + "'");
+
+        this.amixer = this.amixer + " -c " + this.soundcard_id;
+      }
+    },
+
+    evaluate_input: function() {
+      this.input = POTENTIAL_INPUTS[0];
+      let [res, stdout] = GLib.spawn_command_line_sync(this.amixer);
+      if (res) {
+        let found_input = findFirstMatch(POTENTIAL_INPUTS, to_string(stdout));
+        if (found_input !== null)
+        {
+          this.input = found_input;
+        }
+      }
+      log("Use input: " + this.input);
     },
 
     on_applet_clicked: function(event) {
