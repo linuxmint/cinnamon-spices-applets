@@ -218,7 +218,6 @@ MyApplet.prototype = {
           // per default use first soundcard 
           this.soundcard_id = "0";
           
-          let soundcard_list_cmd =  
           Util.spawn_async(["sh","-c","cat /proc/asound/cards"], (stdout) => {
             try {
               // Split the result into lines 
