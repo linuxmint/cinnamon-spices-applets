@@ -53,15 +53,7 @@ def reload_xlet(uuid):
     """
     Reloads the Spice via dbus-send.
     """
-    args = ['dbus-send', 
-        '--dest=org.Cinnamon',
-        '--print-reply',
-        '--type=method_call',
-        '/org/Cinnamon',
-        'org.Cinnamon.ReloadXlet',
-        f'string:{uuid}', 
-        'string:APPLET'
-        ]
+    args = ['/usr/bin/cinnamon-dbus-command', 'ReloadXlet', uuid, 'APPLET']
     out = subprocess.run(args, check=False, 
         stdout=subprocess.DEVNULL, stderr=subprocess.PIPE
     )
