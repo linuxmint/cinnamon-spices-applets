@@ -28,6 +28,7 @@ def validate_spice(uuid):
               ' directory of the repository.')
         return False
 
+
 def copy_xlet(uuid):
     """
     Copy the UUID directory and action file for testing purposes
@@ -49,16 +50,17 @@ def copy_xlet(uuid):
         # metadata.json file not found or missing valid keys
         pass
 
+
 def reload_xlet(uuid):
     """
     Reloads the Spice via dbus-send.
     """
     args = ['/usr/bin/cinnamon-dbus-command', 'ReloadXlet', uuid, 'APPLET']
-    out = subprocess.run(args, check=False, 
-        stdout=subprocess.DEVNULL, stderr=subprocess.PIPE
-    )
+    out = subprocess.run(args, check=False,
+                         stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
     if out.returncode != 0:
         print(out.stderr.decode('ascii') + '\nReload error!')
+
 
 def main():
     """
