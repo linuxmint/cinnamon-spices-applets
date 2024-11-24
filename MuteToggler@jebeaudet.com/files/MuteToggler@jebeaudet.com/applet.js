@@ -152,6 +152,7 @@ MyApplet.prototype = {
         }
 
         VERBOSE = this.verbose;
+        this.evaluate_soundcard();
     },
 
     refresh_loop: function() {
