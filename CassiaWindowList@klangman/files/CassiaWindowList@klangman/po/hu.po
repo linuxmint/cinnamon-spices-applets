@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-31 19:50-0400\n"
-"PO-Revision-Date: 2024-07-28 07:47-0400\n"
+"PO-Revision-Date: 2024-11-24 19:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.0/applet.js:584 6.0/applet.js:584
 msgid "all buttons"
@@ -220,18 +220,16 @@ msgid "Close others"
 msgstr "Többi bezárása"
 
 #. 4.0/applet.js:3735 6.0/applet.js:3735
-#, fuzzy
 msgid "Close other windows for application"
-msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához"
+msgstr "Zárja be a többi ablakot az alkalmazáshoz"
 
 #. 4.0/applet.js:3756 6.0/applet.js:3756
 msgid "Close all"
 msgstr "Minden bezárása"
 
 #. 4.0/applet.js:3758 6.0/applet.js:3758
-#, fuzzy
 msgid "Close all windows for application"
-msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához"
+msgstr "Zárja be az összes ablakot az alkalmazáshoz"
 
 #. 4.0/applet.js:3774 6.0/applet.js:3774
 msgid "Close"
@@ -1715,15 +1713,13 @@ msgstr "Ablak csempézés módosítása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle all window-list button windows"
-msgstr "Alkalmazási ablakok ciklusa"
+msgstr "Az összes ablaklista gomb ablakának forgatása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle grouped/pooled button windows"
-msgstr "Alkalmazási ablakok ciklusa"
+msgstr "Csoportosított/összevont gombablakok forgatása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description

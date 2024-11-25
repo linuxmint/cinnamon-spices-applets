@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-31 18:13+0100\n"
-"PO-Revision-Date: 2024-07-28 07:52-0400\n"
+"PO-Revision-Date: 2024-11-25 07:14+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: popup_menu.py:71
 msgid "Open Folder"
@@ -43,7 +43,7 @@ msgstr "Alapkönyvtár"
 
 #. settings-schema.json->appearance-section->description
 msgid "Appearance"
-msgstr ""
+msgstr "Megjelenés"
 
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
@@ -64,7 +64,7 @@ msgstr "Panel szöveg"
 
 #. settings-schema.json->behavior-section->description
 msgid "Behavior"
-msgstr ""
+msgstr "Viselkedés"
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
@@ -72,23 +72,23 @@ msgstr "Tartalmazza a rejtett fájlokat is"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #. settings-schema.json->order-by->options
 msgid "Date modified"
-msgstr ""
+msgstr "Módosítás dátuma"
 
 #. settings-schema.json->order-by->description
 msgid "Order by..."
-msgstr ""
+msgstr "Rendezés a következő szerint..."
 
 #. settings-schema.json->favorites-first->description
 msgid "Show favorite items first"
-msgstr ""
+msgstr "Először jelenítse meg a kedvenc elemeket"
 
 #. settings-schema.json->pinned-first->description
 msgid "Show pinned items first"
-msgstr ""
+msgstr "Először jelenítse meg a kitűzött elemeket"
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
@@ -108,7 +108,7 @@ msgstr ""
 
 #. settings-schema.json->keybindings-section->description
 msgid "Keybindings"
-msgstr ""
+msgstr "Billentyűzetkiosztás"
 
 #. settings-schema.json->show-menu->description
 msgid "Show menu"
