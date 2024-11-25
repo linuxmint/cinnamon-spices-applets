@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-07 17:47+0100\n"
-"PO-Revision-Date: 2024-10-02 16:32+0200\n"
+"PO-Revision-Date: 2024-11-24 19:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -774,7 +774,7 @@ msgstr "Ikon"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
-msgstr ""
+msgstr "Csak vízszintes paneleken"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -3095,19 +3095,17 @@ msgid "Remove selected items"
 msgstr "Kiválasztott elemek eltávolítása"
 
 #. settings-schema.json->horizontal-show-name->description
-#, fuzzy
 msgid "Display radio name"
-msgstr "Az állomás logójának megjelenítése"
+msgstr "Az állomás nevének megjelenítése"
 
 #. settings-schema.json->horizontal-show-title->description
-#, fuzzy
 msgid "Display title"
-msgstr "Az állomás logójának megjelenítése"
+msgstr "Cím megjelenítése"
 
 #. settings-schema.json->horizontal-max-title-length->description
 msgid "Maximum title length"
-msgstr ""
+msgstr "A cím maximális hossza"
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
-msgstr ""
+msgstr "A 0 azt jelenti, hogy nincs maximum"

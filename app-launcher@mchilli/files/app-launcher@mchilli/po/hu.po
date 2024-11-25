@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-09-05 17:29+0200\n"
+"PO-Revision-Date: 2024-11-24 20:51+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -196,7 +196,7 @@ msgstr "A(z) %s lesz az alkalmazás neve"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Gyorsbillentyűk engedélyezése"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -208,11 +208,12 @@ msgstr "Menüt megjelenítő billentyűkombináció beállítása"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Menü az egér pozíciójában"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr ""
+"A menü megjelenítése a kurzor mellett, amikor a gyorsbillentyű aktiválja"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
