@@ -2,14 +2,14 @@
 # This file is put in the public domain.
 # claudiux, 2022
 #
-# Sveinn í Felli <sv1@fellsnet.is> 2024
+# SPDX-FileCopyrightText: 2024 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
 "ues\n"
 "POT-Creation-Date: 2024-11-07 17:47+0100\n"
-"PO-Revision-Date: 2024-11-25 15:42+0000\n"
+"PO-Revision-Date: 2024-11-26 15:17+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -55,56 +55,74 @@ msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
 msgstr ""
+"Hnapparnir hægra megin neðan við listann gera þér kleift að flakka síðu fyrir"
+" síðu eða flokk fyrir flokk."
 
 #. applet.js:333
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
 msgstr ""
+"Til að leita að einhverri stöðvanna þinna, skaltu smella á listann og byrja"
+" að skrifa nafn hennar."
 
 #. applet.js:334
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
 msgstr ""
+"Til að bæta stöðvum á listann þinn á einfaldan máta, skaltu nota eftirfarandi"
+" 2 flipa: 'Leita' og 'Flytja inn'."
 
 #. applet.js:335
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
+"Merktu í valmyndarreit færslu til að birta stöð eða flokk í valmyndinni."
 
 #. applet.js:336
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
 msgstr ""
+"Merktu við '♪/➟' reit stöðvar til að hlusta á hana eða færðu hana yfir í"
+" annan flokk með verkfærunum fyrir neðan listann."
 
 #. applet.js:338
 msgid "You can have your list of stations checked by internet databases."
-msgstr ""
+msgstr "Þú getur látið gagnagrunna á internetinu fara yfir stöðvarnar þínar."
 
 #. applet.js:339
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
 msgstr ""
+"Allar stöðvar sem einhver þessara gagnagrunna þekkir, mun fá einstakt"
+" auðkenni (Universal Unique Identifier - UUID) frá viðkomandi gagnagrunni."
 
 #. applet.js:340
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
 msgstr ""
+"Þar af leiðandi, ef slóð streymis breytist fyrir einhverja stöðina, myndi"
+" næsta athugun uppfæra hana og þú getur áfram hlustað á viðkomandi"
+" útvarpsstöð."
 
 #. applet.js:342
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
 msgstr ""
+"Hér geturðu leitað að öðrum stöðvum í frjálsum netgagnagrunni yfir"
+" útvarpsstöðvar."
 
 #. applet.js:343
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
 msgstr ""
+"Fylltu inn helst nokkra reiti hér fyrir neðan og smelltu svo á 'Leita ...'"
+" hnappinn."
 
 #. applet.js:344
 msgid ""
@@ -112,40 +130,54 @@ msgid ""
 "second part of this page, where you can test certain stations and include "
 "them in the menu."
 msgstr ""
+"Í hvert skipti sem smellt er á hnappinn, birtist ný síða með"
+" leitarniðurstöðum á neðri hluta flipans, þar sem þú getur prófað tilteknar"
+" útvarpsstöðvar og fært þær svo inn í valmyndina þína."
 
 #. applet.js:345
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
 msgstr ""
+"Stöðvar sem þegar eru í valmyndinni þinni munu aðeins birtast í"
+" leitarniðurstöðum ef slóð streymisins þeirra hefur breyst."
 
 #. applet.js:346
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
 msgstr ""
+"Þegar engin ný síða birtist, táknar það að allar samsvarandi"
+" leitarniðurstöður hafa komið fram."
 
 #. applet.js:348
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
 msgstr ""
+"Þú getur flutt inn skrá sem inniheldur nafn og streymisslóð a.m.k. einnar"
+" útvarpsstöðvar."
 
 #. applet.js:349
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
 msgstr ""
+"Þessar útvarpsstöðvar birtast á listanum hér fyrir neðan. Þú getur prófað þær"
+" með því að merkja í ♪ reit þeirra."
 
 #. applet.js:350
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
+"Síðan geturðu sýslað með þennan lista með hnöppunum neðst á þessum flipa."
 
 #. applet.js:352
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
 msgstr ""
+"Í Shoutcast-möppunni skaltu smella á niðurhalshnappinn vinstra megin við"
+" heiti útvarpsstöðvar."
 
 #. applet.js:353
 msgid ""
@@ -1001,6 +1033,12 @@ msgid ""
 "VPN users: By checking this, the radio broadcast could use your VPN link in "
 "the event that this one is active before the start of this applet."
 msgstr ""
+"Valda útvarpsstöðin verður sú sem þú hlustaðir síðast á, jafnvel þótt þú"
+" hafir stöðvað hana.\n"
+"\n"
+"VPN-notendur: Með því að merkja við þetta gæti útvarpsútsendingin verið að"
+" nota VPN-tenginguna þína í þeim tilfellum sem að stöðin er virk áður en"
+" smáforritið ræsist."
 
 #. settings-schema.json->volume-at-startup->description
 msgid "Volume level starting a new radio (%)"
@@ -1108,6 +1146,12 @@ msgid ""
 "Please note that you can change the volume level scrolling on this applet "
 "icon, or using the slider in the context menu."
 msgstr ""
+"Ef þetta er stillt verður hljóðstyrk breytt þegar ný útvarpsstöð er sett í"
+" gang, í prósentum af almennum hljóðstyrk.\n"
+"Sjálfgefið er (óskilgreint): Hljóðstyrkur helst óbreyttur.\n"
+"\n"
+"Athugaðu að þú getur breytt skruni hljóðstyrks ofan á táknmynd smáforritsins"
+" eða notað sleðann í samhengisvalmyndinni."
 
 #. settings-schema.json->volume-step->description
 msgid "Volume step scrolling on icon"
