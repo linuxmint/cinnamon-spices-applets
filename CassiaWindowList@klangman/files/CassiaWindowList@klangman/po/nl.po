@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-31 19:50-0400\n"
-"PO-Revision-Date: 2024-07-24 00:36+0200\n"
+"PO-Revision-Date: 2024-11-28 16:48+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -219,18 +219,16 @@ msgid "Close others"
 msgstr "Sluit anderen"
 
 #. 4.0/applet.js:3735 6.0/applet.js:3735
-#, fuzzy
 msgid "Close other windows for application"
-msgstr "Miniaturen weergeven voor alle vensters van een applicatiepool"
+msgstr "Sluit andere vensters van applicatie"
 
 #. 4.0/applet.js:3756 6.0/applet.js:3756
 msgid "Close all"
 msgstr "Sluit alle"
 
 #. 4.0/applet.js:3758 6.0/applet.js:3758
-#, fuzzy
 msgid "Close all windows for application"
-msgstr "Miniaturen weergeven voor alle vensters van een applicatiepool"
+msgstr "Sluit alle vensters van applicatie"
 
 #. 4.0/applet.js:3774 6.0/applet.js:3774
 msgid "Close"
@@ -1734,15 +1732,13 @@ msgstr "Verander venstertegelen"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle all window-list button windows"
-msgstr "Vensters van applicaties wisselen"
+msgstr "Doorloop alle vensters van de vensterlijstknop"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle grouped/pooled button windows"
-msgstr "Vensters van applicaties wisselen"
+msgstr "Doorloop gegroepeerde/gebundelde vensterknoppen"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
