@@ -182,28 +182,6 @@ function getOverheadSize(actor) {
   return [width, height];
 }
 
-function getMonitors() {
-  let result = [];
-
-  try {
-    let gdkScreen = Gdk.Screen.get_default();
-    // let screen = CinnamonDesktop.RRScreen.new(gdkScreen);
-    // let currentConfig = CinnamonDesktop.RRConfig.new_current(screen);
-    // let outputInfos = currentConfig.get_outputs();
-
-    // for (let index = 0; index < outputInfos.length; index++) {
-    //   let output = outputInfos[index];
-    //   if (output.is_active()) {
-    //     result.push(output.get_display_name());
-    //   }
-    // }
-  } catch (err) {
-    return [];
-  }
-
-  return result;
-}
-
 const dummy = {};
 
 class CobiWindowListSettings extends Settings.AppletSettings {
