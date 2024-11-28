@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-14 23:59+0100\n"
-"PO-Revision-Date: 2024-04-20 11:02+0200\n"
+"PO-Revision-Date: 2024-11-28 16:54+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -23,7 +23,7 @@ msgstr "Herstart Cinnamon"
 
 #. 5.4/applet.js:138
 msgid "Screen Off"
-msgstr ""
+msgstr "Scherm uitzetten"
 
 #. 5.4/applet.js:163
 msgid "Lock Screen"
@@ -54,14 +54,13 @@ msgid "Power Off"
 msgstr "Uitschakelen"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
 "out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"Herstart Cinnamon, vergrendel het scherm, wissel van gebruiker, meld je af, "
-"zet de computer in slaapstand (al dan niet naar schijf), herstart of schakel "
-"de computer uit"
+"Herstart Cinnamon, zet het scherm uit, vergrendel het scherm, wissel van "
+"gebruiker, log uit, zet in slaapstand, zet in slaapstand naar schijf, "
+"herstart of sluit de computer af"
 
 #. metadata.json->name
 msgid "Exit"
@@ -97,7 +96,7 @@ msgstr "Toon de optie Slaapstand naar schijf"
 
 #. 5.4->settings-schema.json->hibernateNeedsSudo->description
 msgid "Hibernate needs root user rights (sudo)"
-msgstr ""
+msgstr "Slaapstand naar schijf vereist rootrechten (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
@@ -116,23 +115,24 @@ msgstr ""
 " Als dat het geval is, dan kun je ze niet zien."
 
 #. 5.4->settings-schema.json->showScreenOff->description
-#, fuzzy
 msgid "Show the Screen Off option"
-msgstr "Toon de optie Scherm vergrendelen"
+msgstr "Toon de optie Scherm uitzetten"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
-msgstr ""
+msgstr "seconden"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
-msgstr ""
+msgstr "Duur van de deactivering van de muis"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
 msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
+"Om te voorkomen dat de monitor te snel weer aangaat na het uitschakelen, "
+"wordt de muis voor het hier ingestelde aantal seconden uitgeschakeld."
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
