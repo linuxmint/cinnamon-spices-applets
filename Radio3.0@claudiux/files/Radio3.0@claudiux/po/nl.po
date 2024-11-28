@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-07 17:47+0100\n"
-"PO-Revision-Date: 2024-07-24 09:25+0200\n"
+"PO-Revision-Date: 2024-11-28 16:57+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. applet.js:236
 msgid "unassigned"
-msgstr ""
+msgstr "niet toegewezen"
 
 #. applet.js:327
 msgid "This is your own list of Categories and Radio Stations."
@@ -409,9 +409,8 @@ msgid "Pulse Effects"
 msgstr "Pulse-effecten"
 
 #. applet.js:4755
-#, fuzzy
 msgid "Easy Effects"
-msgstr "Pulse-effecten"
+msgstr "Easy Effects"
 
 #. applet.js:4764
 #, javascript-format
@@ -772,7 +771,7 @@ msgstr "Pictogram"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
-msgstr ""
+msgstr "Alleen op horizontale panelen"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -3097,19 +3096,17 @@ msgid "Remove selected items"
 msgstr "Geselecteerde items verwijderen"
 
 #. settings-schema.json->horizontal-show-name->description
-#, fuzzy
 msgid "Display radio name"
-msgstr "Toon stationlogo"
+msgstr "Toon radionaam"
 
 #. settings-schema.json->horizontal-show-title->description
-#, fuzzy
 msgid "Display title"
-msgstr "Toon stationlogo"
+msgstr "Toon titel"
 
 #. settings-schema.json->horizontal-max-title-length->description
 msgid "Maximum title length"
-msgstr ""
+msgstr "Maximale titel lengte"
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
-msgstr ""
+msgstr "0 betekent geen maximum"
