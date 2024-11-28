@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-06 01:02+0200\n"
-"PO-Revision-Date: 2024-04-22 10:46+0200\n"
+"PO-Revision-Date: 2024-11-28 18:04+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -71,22 +71,19 @@ msgstr "Herlaad Extensie:"
 
 #. applet.js:217
 msgid "--- Settings for ---"
-msgstr ""
+msgstr "--- Instellingen voor ---"
 
 #. applet.js:223
-#, fuzzy
 msgid "Applet:"
-msgstr "Applet"
+msgstr "Applet:"
 
 #. applet.js:238
-#, fuzzy
 msgid "Desklet:"
-msgstr "Desklet"
+msgstr "Desklet:"
 
 #. applet.js:253
-#, fuzzy
 msgid "Extension:"
-msgstr "Extensie"
+msgstr "Extensie:"
 
 #. applet.js:268
 msgid "--- View Code ---"
@@ -109,12 +106,11 @@ msgid "Xsession"
 msgstr "Xsession"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart, access source code and configure your Spices (Applets, Desklets, "
 "Extensions). View the contents of your .xsession-errors file in real time. "
 "Restart Cinnamon."
 msgstr ""
-"Hiermee kun je Spices (applets, desklets, extensies) herstarten of de "
-"broncode openen, in realtime de inhoud van je .xsession-errors bestand "
-"bekijken en Cinnamon herstarten."
+"Herstart, krijg toegang tot de broncode en configureer je Spices (Applets, "
+"Desklets, Extensies). Bekijk de inhoud van je .xsession-errors bestand in "
+"realtime. Herstart Cinnamon."
