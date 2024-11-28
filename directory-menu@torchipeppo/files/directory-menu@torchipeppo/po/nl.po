@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-31 18:13+0100\n"
-"PO-Revision-Date: 2024-07-24 10:03+0200\n"
+"PO-Revision-Date: 2024-11-28 17:21+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -41,7 +41,7 @@ msgstr "Basismap"
 
 #. settings-schema.json->appearance-section->description
 msgid "Appearance"
-msgstr ""
+msgstr "Uiterlijk"
 
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
@@ -61,7 +61,7 @@ msgstr "Paneeltekst"
 
 #. settings-schema.json->behavior-section->description
 msgid "Behavior"
-msgstr ""
+msgstr "Gedrag"
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
@@ -69,23 +69,23 @@ msgstr "Verborgen bestanden opnemen"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. settings-schema.json->order-by->options
 msgid "Date modified"
-msgstr ""
+msgstr "Datum gewijzigd"
 
 #. settings-schema.json->order-by->description
 msgid "Order by..."
-msgstr ""
+msgstr "Sorteer op..."
 
 #. settings-schema.json->favorites-first->description
 msgid "Show favorite items first"
-msgstr ""
+msgstr "Toon favoriete items eerst"
 
 #. settings-schema.json->pinned-first->description
 msgid "Show pinned items first"
-msgstr ""
+msgstr "Toon vastgemaakte items eerst"
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
@@ -105,7 +105,7 @@ msgstr ""
 
 #. settings-schema.json->keybindings-section->description
 msgid "Keybindings"
-msgstr ""
+msgstr "Sneltoetsen"
 
 #. settings-schema.json->show-menu->description
 msgid "Show menu"
