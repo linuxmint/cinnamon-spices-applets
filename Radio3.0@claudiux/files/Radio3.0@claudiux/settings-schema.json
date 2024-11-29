@@ -59,7 +59,8 @@
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
         "sectionBehaviorSymbolicIconColor",
-        "sectionBehaviorHorizontalPanel"
+        "sectionBehaviorHorizontalPanel",
+        "sectionBehaviorAlbumArtDesklet"
       ]
     },
     "pageRecording": {
@@ -292,6 +293,15 @@
         "horizontal-show-name",
         "horizontal-show-title",
         "horizontal-max-title-length"
+      ]
+    },
+    "sectionBehaviorAlbumArtDesklet": {
+      "type": "section",
+      "title": "Album Art desklet",
+      "keys": [
+        "desklet-activate-button",
+        "desklet-show-on-desktop",
+        "desklet-activated-label"
       ]
     },
     "sectionNetworkQuality": {
@@ -1874,5 +1884,26 @@
     "max": 255,
     "description": "Maximum title length",
     "tooltip": "0 means no maximum"
+  },
+  "desklet-activate-button": {
+    "type": "button",
+    "dependency": "!desklet-is-activated",
+    "description": "Activate desklet displaying the Radio3.0 Album Art",
+    "callback": "on_button_activate_desklet_clicked"
+  },
+  "desklet-activated-label": {
+    "type": "label",
+    "dependency": "desklet-is-activated",
+    "description": "The desklet displaying the Radio3.0 Album Art is activated"
+  },
+  "desklet-show-on-desktop" : {
+    "type": "switch",
+    "dependency": "desklet-is-activated",
+    "default": false,
+    "description": "Show Album Art on desktop"
+  },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
   }
 }

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-07 17:47+0100\n"
+"POT-Creation-Date: 2024-11-29 22:18+0100\n"
 "PO-Revision-Date: 2024-02-01 15:30+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:236
+#. applet.js:238
 msgid "unassigned"
 msgstr ""
 
-#. applet.js:327
+#. applet.js:329
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Detta är din egen lista med kategorier och radiostationer."
 
-#. applet.js:328
+#. applet.js:330
 msgid "You can add more using the [+] button."
 msgstr "Du kan lägga till fler med knappen [+]."
 
-#. applet.js:329
+#. applet.js:331
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr "För en kategori - Fyll endast i namn och lämna övriga fält tomma."
 
-#. applet.js:330
+#. applet.js:332
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "För radiostationer - Ange endast namn och strömnings-URL."
 
-#. applet.js:331
+#. applet.js:333
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -46,7 +46,7 @@ msgstr ""
 "Du kan sortera raderna med dra & släpp, eller med knappar och verktyg under "
 "listan."
 
-#. applet.js:332
+#. applet.js:334
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -54,7 +54,7 @@ msgstr ""
 "Knapparna till höger, under listan, låter dig navigera sida för sida eller "
 "kategori för kategori."
 
-#. applet.js:333
+#. applet.js:335
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -62,7 +62,7 @@ msgstr ""
 "För att söka efter någon av dina stationer, klickar du på listan och börjar "
 "skriva dess namn."
 
-#. applet.js:334
+#. applet.js:336
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -70,11 +70,11 @@ msgstr ""
 "För att enkelt lägga till stationer i din lista använder du följande flikar: "
 "Sök och Importera."
 
-#. applet.js:335
+#. applet.js:337
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr "Markera rutan \"Meny\" för att visa en station eller kategori i menyn."
 
-#. applet.js:336
+#. applet.js:338
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -82,11 +82,11 @@ msgstr ""
 "Markera rutan \"♪/➟\" för att lyssna på stationen eller flytta den till en "
 "annan kategori med hjälp av verktygen under listan."
 
-#. applet.js:338
+#. applet.js:340
 msgid "You can have your list of stations checked by internet databases."
 msgstr "Du kan få din stationslista kontrollerad av internetdatabaser."
 
-#. applet.js:339
+#. applet.js:341
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -94,7 +94,7 @@ msgstr ""
 "Varje station som identifieras av någon av dessa databaser kommer att få en "
 "Universal Unique Identifier (UUID) som tillhandahålls av denna databas."
 
-#. applet.js:340
+#. applet.js:342
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -102,7 +102,7 @@ msgstr ""
 "Så om en strömnings-URL ändras kommer nästa kontroll att uppdatera den, så "
 "att du kan fortsätta lyssna på den berörda stationen."
 
-#. applet.js:342
+#. applet.js:344
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -110,7 +110,7 @@ msgstr ""
 "Här kan du söka efter andra stationer i en fri radiodatabas, tillgänglig via "
 "Internet."
 
-#. applet.js:343
+#. applet.js:345
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -118,7 +118,7 @@ msgstr ""
 "Fyll i åtminstone några fält i formuläret nedan och klicka sedan på knappen "
 "\"Sök...\"."
 
-#. applet.js:344
+#. applet.js:346
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -128,7 +128,7 @@ msgstr ""
 "andra delen av den här sidan, där du kan testa vissa stationer och inkludera "
 "dem i menyn."
 
-#. applet.js:345
+#. applet.js:347
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -136,7 +136,7 @@ msgstr ""
 "En station som redan finns i din meny visas bara i sökresultaten om dess "
 "strömnings-URL har ändrats."
 
-#. applet.js:346
+#. applet.js:348
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -144,7 +144,7 @@ msgstr ""
 "När ingen ny sida visas betyder det att alla resultat som matchar dina "
 "sökkriterier redan har visats."
 
-#. applet.js:348
+#. applet.js:350
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -152,7 +152,7 @@ msgstr ""
 "Du kan importera en fil som innehåller namn och strömnings-URL för minst en "
 "radiostation."
 
-#. applet.js:349
+#. applet.js:351
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -160,12 +160,12 @@ msgstr ""
 "Dessa radiostationer visas i listan nedan. Du kan testa dem genom att "
 "markera rutan \"♪\"."
 
-#. applet.js:350
+#. applet.js:352
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
 "Hantera sedan den här listan med knapparna längst ner, på den här fliken."
 
-#. applet.js:352
+#. applet.js:354
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -173,18 +173,18 @@ msgstr ""
 "På Shoutcast-sidan klickar du på nedladdningsknappen till vänster om "
 "stationsnamnet."
 
-#. applet.js:353
+#. applet.js:355
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
 msgstr ""
 "Välj det öppna formatet (.XSPF) och spara filen med samma namn som stationen."
 
-#. applet.js:354
+#. applet.js:356
 msgid "This file can then be imported here."
 msgstr "Denna fil kan sedan importeras här."
 
-#. applet.js:356
+#. applet.js:358
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s byte = %s GB = %s GiB"
@@ -195,335 +195,345 @@ msgstr "%s byte = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#. applet.js:522 applet.js:536 applet.js:5084 applet.js:5096
+#. applet.js:524 applet.js:538 applet.js:5148 applet.js:5160
 msgid "(Undefined)"
 msgstr "(Odefinierad)"
 
-#. applet.js:734
+#. applet.js:736
 msgid "Radio3.0 web page..."
 msgstr "Radio3.0 webbplats..."
 
-#. applet.js:2063
+#. applet.js:2080
 msgid "Start"
 msgstr "Start"
 
-#. applet.js:2071 applet.js:2800
+#. applet.js:2088 applet.js:2817
 msgid "Stop"
 msgstr "Stopp"
 
-#. applet.js:2306 applet.js:2342 applet.js:2389
+#. applet.js:2323 applet.js:2359 applet.js:2406
 msgid "Middle-Click: Stop Recording"
 msgstr "Mushjulsklick: Stoppa inspelning"
 
-#. applet.js:2338 applet.js:2385
+#. applet.js:2355 applet.js:2402
 msgid "Volume: %s%"
 msgstr "Volym: %s%"
 
-#. applet.js:2344 applet.js:2391
+#. applet.js:2361 applet.js:2408
 msgid "Middle-click: ON/OFF"
 msgstr "Mushjulsklick: PÅ/AV"
 
-#. applet.js:2346 applet.js:2393
+#. applet.js:2363 applet.js:2410
 msgid "Click: Select another station"
 msgstr "Klick: Välj en annan station"
 
-#. applet.js:2359
+#. applet.js:2376
 msgid "Click to select a station"
 msgstr "Klicka för att välja en station"
 
-#. applet.js:2395
+#. applet.js:2412
 msgid "Scroll wheel: volume change"
 msgstr "Rullningshjul: Volymändring"
 
-#. applet.js:2470 applet.js:2818 applet.js:4700
+#. applet.js:2487 applet.js:2835 applet.js:4722
 msgid "Configure..."
 msgstr "Konfigurera..."
 
-#. applet.js:2474 applet.js:2810
+#. applet.js:2491 applet.js:2827
 msgid "Search for new stations..."
 msgstr "Sök efter nya stationer..."
 
-#. applet.js:2480 applet.js:2822 applet.js:4737
+#. applet.js:2497 applet.js:2839 applet.js:4759
 msgid "Sound Settings"
 msgstr "Ljudinställningar"
 
-#. applet.js:2550
+#. applet.js:2567
 msgid "Watch on YT"
 msgstr "Titta på YT"
 
-#. applet.js:2557
+#. applet.js:2574
 msgid "Try to download it from YT (unsafe)"
 msgstr "Försök ladda ner det från YT (osäkert)"
 
-#. applet.js:2620
+#. applet.js:2637
 msgid "Recently Played Stations:"
 msgstr "Nyligen spelade stationer:"
 
-#. applet.js:2662
+#. applet.js:2679
 msgid "Visit the home page of this station"
 msgstr "Besök hemsidan för denna station"
 
-#. applet.js:2701
+#. applet.js:2718
 #, fuzzy
 msgid "Categories"
 msgstr "Mina kategorier"
 
-#. applet.js:2703
+#. applet.js:2720
 #, fuzzy
 msgid "Radio Stations"
 msgstr "Mina radiostationer"
 
-#. applet.js:2713
+#. applet.js:2730
 #, fuzzy
 msgid "All Categories"
 msgstr "Mina kategorier"
 
-#. applet.js:2743
+#. applet.js:2760
 msgid "My Radio Stations"
 msgstr "Mina radiostationer"
 
-#. applet.js:2942
+#. applet.js:2959
 msgid "Downloading..."
 msgstr "Laddar ner..."
 
-#. applet.js:2944
+#. applet.js:2961
 msgid "Stop downloading"
 msgstr "Stoppa nerladdning"
 
-#. applet.js:3048
+#. applet.js:3065
 msgid "Download complete"
 msgstr "Nerladdning slutförd"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3050 applet.js:3059 applet.js:4499 applet.js:4508 applet.js:4517
-#. applet.js:4827
+#. applet.js:3067 applet.js:3076 applet.js:4516 applet.js:4525 applet.js:4534
+#. applet.js:4865
 msgid "Open the recordings folder"
 msgstr "Öppna inspelningsmappen"
 
-#. applet.js:3057 applet.js:4496 applet.js:4506 applet.js:4515
+#. applet.js:3074 applet.js:4513 applet.js:4523 applet.js:4532
 msgid "An error seems to have occurred during recording!"
 msgstr "Ett fel verkar ha inträffat under inspelning!"
 
-#. applet.js:3058 applet.js:4498 applet.js:4507 applet.js:4516
+#. applet.js:3075 applet.js:4515 applet.js:4524 applet.js:4533
 msgid "Please check this record."
 msgstr "Kontrollera denna inspelning."
 
-#. applet.js:3165 applet.js:3199
+#. applet.js:3182 applet.js:3216
 msgid "Record from now"
 msgstr "Spela in från nu"
 
-#. applet.js:3183 applet.js:4990
+#. applet.js:3200 applet.js:5054
 msgid "Stop Current Recording"
 msgstr "Stoppa aktuell inspelning"
 
-#. applet.js:3311
+#. applet.js:3328
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Spelar upp %s%s"
 
-#. applet.js:3364
+#. applet.js:3381
 msgid "Radio OFF"
 msgstr "Radio AV"
 
-#. applet.js:3492
+#. applet.js:3509
 msgid "Unable to record anything!"
 msgstr "Kan inte spela in någonting!"
 
-#. applet.js:3492 applet.js:4847
+#. applet.js:3509 applet.js:4885
 msgid "Insufficient space"
 msgstr "Otillräckligt utrymme"
 
-#. applet.js:3492
+#. applet.js:3509
 msgid "The limit you set has been reached."
 msgstr "Gränsen du anger har nåtts."
 
-#. applet.js:3878
+#. applet.js:3895
 msgid "Please Log Out then Log In"
 msgstr "Logga ut och in igen"
 
-#. applet.js:3878
+#. applet.js:3895
 msgid "to finalize yt-dlp update"
 msgstr "för att slutföra uppdateringen av yt-dlp"
 
-#. applet.js:3988
+#. applet.js:4005
 msgid "Nothing to save."
 msgstr "Inget att spara."
 
-#. applet.js:4001
+#. applet.js:4018
 msgid "List of saved radio stations"
 msgstr "Lista över sparade radiostationer"
 
-#. applet.js:4019
+#. applet.js:4036
 msgid "This will replace all current radio stations."
 msgstr "Detta kommer att ersätta alla aktuella radiostationer."
 
-#. applet.js:4020
+#. applet.js:4037
 msgid "Are you sure you want to continue?"
 msgstr "Vill du verkligen fortsätta?"
 
-#. applet.js:4080
+#. applet.js:4097
 msgid "Update in progress"
 msgstr "Uppdatering pågår"
 
-#. applet.js:4080
+#. applet.js:4097
 msgid "It may take a while ... Please wait."
 msgstr "Det kan ta en stund... vänta!"
 
-#. applet.js:4170
+#. applet.js:4187
 msgid "Update completed successfully"
 msgstr "Uppdatering slutförd"
 
-#. applet.js:4380 applet.js:4436
+#. applet.js:4397 applet.js:4453
 msgid "ERROR: Invalid YT video URL!"
 msgstr "FEL: Ogiltig YT video-URL!"
 
-#. applet.js:4405
+#. applet.js:4422
 msgid "Unable to extract a single soundtrack"
 msgstr "Kan inte extrahera ett enskilt ljudspår"
 
-#. applet.js:4405
+#. applet.js:4422
 msgid "Maybe it's a playlist?"
 msgstr "Det kanske är en spelningslista?"
 
-#. applet.js:4438
+#. applet.js:4455
 msgid "Close"
 msgstr "Stäng"
 
-#. applet.js:4658
+#. applet.js:4680
 msgid "About..."
 msgstr "Om..."
 
-#. applet.js:4681
+#. applet.js:4703
 msgid "Manual..."
 msgstr "Manual..."
 
-#. applet.js:4713
+#. applet.js:4735
 msgid "Schedule a background record..."
 msgstr "Schemalägg bakgrundsinspelning..."
 
-#. applet.js:4725
+#. applet.js:4747
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Extrahera ljudspår från YouTube-video..."
 
-#. applet.js:4746
+#. applet.js:4768
 msgid "Pulse Effects"
 msgstr "Pulse Effects"
 
-#. applet.js:4755
+#. applet.js:4777
 #, fuzzy
 msgid "Easy Effects"
 msgstr "Pulse Effects"
 
-#. applet.js:4764
+#. applet.js:4786
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Ta bort \"%s\""
 
-#. applet.js:4777
+#. applet.js:4799
 msgid "Radio ON at startup"
 msgstr "Radio PÅ vid uppstart"
 
-#. applet.js:4791
+#. applet.js:4813
 msgid "Display Station Logo"
 msgstr "Visa stationslogo"
 
+#. settings-schema.json->desklet-show-on-desktop->description
+#. applet.js:4828
+msgid "Show Album Art on desktop"
+msgstr ""
+
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:4805
+#. applet.js:4843
 msgid "Do not check about dependencies"
 msgstr "Kontrollera inte beroenden"
 
-#. applet.js:4844
+#. applet.js:4882
 msgid "(auto)"
 msgstr "(auto)"
 
-#. applet.js:4844
+#. applet.js:4882
 msgid "(manual)"
 msgstr "(manuell)"
 
-#. applet.js:4847 applet.js:5039
+#. applet.js:4885 applet.js:5103
 msgid "Stop Recording"
 msgstr "Stoppa inspelning"
 
-#. applet.js:4847
+#. applet.js:4885
 msgid "Start Recording"
 msgstr "Starta inspelning"
 
-#. applet.js:4868
+#. applet.js:4906
 msgid "Reload this applet"
 msgstr "Uppdatera detta panelprogram"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:4884
+#. applet.js:4922
 msgid "Display volume level near icon"
 msgstr "Visa volymnivå nära ikonen"
 
-#. applet.js:4902
+#. applet.js:4940
 msgid "Cancel downloads from YT"
 msgstr "Avbryt nerladdningar från YT"
 
-#. applet.js:5040
+#. applet.js:5104
 msgid "Close without stopping recording"
 msgstr "Stäng utan stoppa inspelning"
 
-#. applet.js:5250
+#. applet.js:5314
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Startar inspelning från %s:%s till %s:%s"
 
-#. applet.js:5262
+#. applet.js:5326
 msgid "Recording completed"
 msgstr "Inspelning slutförd"
 
-#. applet.js:5357
+#. applet.js:5421
 msgid "This will import a new file containing radio stations."
 msgstr "Detta importerar en ny fil innehållande radistationer."
 
-#. applet.js:5358
+#. applet.js:5422
 msgid "Do you want to continue?"
 msgstr "Vill du fortsätta?"
 
-#. applet.js:5429
+#. applet.js:5493
 msgid "No new radio in your list."
 msgstr "Ingen ny radiostation i din lista."
 
-#. applet.js:5431
+#. applet.js:5495
 msgid "One more radio in your list."
 msgstr "En radiostation till i din lista."
 
-#. applet.js:5433
+#. applet.js:5497
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s radiostationer till i din lista."
 
-#. applet.js:5640
+#. applet.js:5704
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Det finns inga nya stationer att lägga till i panelmenyn för Radio3.0"
 
-#. applet.js:5642
+#. applet.js:5706
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "En ny station har lagts till i panelmenyn för Radio3.0"
 
-#. applet.js:5644
+#. applet.js:5708
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s nya stationer har lagts till i panelmenyn för Radio3.0"
 
-#. applet.js:5845
+#. applet.js:5951
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#. lib/checkDependencies.js:392
+#. desklet/AlbumArt3.0@claudiux/desklet.js:33
+#, fuzzy
+msgid "Radio3.0 Album Art"
+msgstr "Radio3.0"
+
+#. lib/checkDependencies.js:397
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Panelprogrammet %s fungerar fullt ut."
 
-#. lib/checkDependencies.js:393
+#. lib/checkDependencies.js:398
 msgid "All dependencies are installed"
 msgstr "Alla beroenden är installerade"
 
-#. lib/checkDependencies.js:423
+#. lib/checkDependencies.js:428
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -531,11 +541,11 @@ msgstr ""
 "Du verkar sakna några av de program som krävs för att detta panelprogram "
 "skall få alla funktioner."
 
-#. lib/checkDependencies.js:424
+#. lib/checkDependencies.js:429
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Kör, i den just öppnade terminalen, följande kommandon:"
 
-#. lib/checkDependencies.js:425
+#. lib/checkDependencies.js:430
 msgid "Some dependencies are not installed!"
 msgstr "Vissa beroenden är inte installerade!"
 
@@ -770,6 +780,10 @@ msgstr "Ikon"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
+msgid "Album Art desklet"
 msgstr ""
 
 #. settings-schema.json->sectionNetworkQuality->title
@@ -3083,4 +3097,33 @@ msgstr ""
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->desklet-activate-button->description
+msgid "Activate desklet displaying the Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->desklet-activated-label->description
+msgid "The desklet displaying the Radio3.0 Album Art is activated"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
 msgstr ""
