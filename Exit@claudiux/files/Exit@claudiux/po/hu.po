@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-14 23:59+0100\n"
-"PO-Revision-Date: 2024-10-02 16:31+0200\n"
+"PO-Revision-Date: 2024-11-24 19:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -56,14 +56,13 @@ msgid "Power Off"
 msgstr "Kikapcsolás"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
 "out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"A Cinnamon újraindítása, a képernyő zárolása, felhasználóváltás, "
-"kijelentkezés, felfüggesztés, hibernálás, újraindítás vagy a számítógép "
-"leállítása"
+"Indítsa újra a Cinnamont, kapcsolja ki a képernyőt, zárja le a képernyőt, "
+"váltson felhasználót, jelentkezzen ki, függessze fel, hibernálja, indítsa "
+"újra vagy állítsa le a számítógépet"
 
 #. metadata.json->name
 msgid "Exit"
@@ -118,23 +117,25 @@ msgstr ""
 "Ha igen, akkor nem láthatja őket."
 
 #. 5.4->settings-schema.json->showScreenOff->description
-#, fuzzy
 msgid "Show the Screen Off option"
-msgstr "A Zárolási képernyő opció megjelenítése"
+msgstr "Jelenítse meg a Képernyő kikapcsolása opciót"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
-msgstr ""
+msgstr "másodperc"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
-msgstr ""
+msgstr "Az egér deaktiválásának időtartama"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
 msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
 msgstr ""
+"Annak elkerülése érdekében, hogy a monitor túl hamar bekapcsoljon a "
+"kikapcsolást követően, az egér le lesz tiltva az itt beállított "
+"másodpercekig."
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"

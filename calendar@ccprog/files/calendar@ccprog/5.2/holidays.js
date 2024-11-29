@@ -89,7 +89,9 @@ class Enrico extends Provider {
                 d.month === single.month && d.day === single.day && d.region === this.region);
 
         if (known) {
-            known.name += '\n' + name;
+            if (!known.name.split('\n').includes(single.name)) {
+                known.name += '\n' + single.name;                
+            }
         } else {
             this.data.push(single);
         }
@@ -171,6 +173,17 @@ class Enrico extends Provider {
         });
     }
 
+    staleCache (year) {
+        if (this.years[year]) {
+            const retrieved = this.years[year][this.region];
+            if (retrieved &&  Date.now() - new Date(retrieved).getTime() < UPDATE_PERIOD) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     setPlace (country, region = "global") {
         if (this.country !== country) {
             const data = this.loadFromFile(Enrico.fn, country);
@@ -182,7 +195,7 @@ class Enrico extends Provider {
         this.region = region;
 
         const year = new Date().getFullYear();
-        if (!this.years[year] || this.region && !this.years[year][this.region]) {
+        if (this.staleCache(year) || this.region && !this.years[year][this.region]) {
             this.retrieveForYear(year);
         }
     }
@@ -193,16 +206,13 @@ class Enrico extends Provider {
     }
 
     getHolidays (year, month, callback) {
-        if (this.years[year]) {
-            const retrieved = this.years[year][this.region];
-            if (retrieved &&  Date.now() - new Date(retrieved).getTime() < UPDATE_PERIOD) {
+        if (this.staleCache(year)) {
+            this.retrieveForYear(year, () => {
                 callback(this.matchMonth(year, month));
-                return;
-            }
-        }
-        this.retrieveForYear(year, () => {
+            });
+        } else {
             callback(this.matchMonth(year, month));
-        });
+        }
     }
 }
 Enrico.url = "https://kayaposoft.com/enrico/json/v2.0?action=getHolidaysForYear";

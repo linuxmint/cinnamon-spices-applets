@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-12 00:32+0100\n"
-"PO-Revision-Date: 2024-07-28 07:48-0400\n"
+"PO-Revision-Date: 2024-11-24 19:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:550
 msgid "Mark all as read"
@@ -94,9 +94,8 @@ msgid "Show number of translations in the menu"
 msgstr "A fordítások számának megjelenítése a menüben"
 
 #. settings-schema.json->show-issues->description
-#, fuzzy
 msgid "Show number of issues in the menu"
-msgstr "A fordítások számának megjelenítése a menüben"
+msgstr "A problémák számának megjelenítése a menüben"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"

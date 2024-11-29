@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-16 16:13+0200\n"
-"PO-Revision-Date: 2024-10-02 19:04+0200\n"
+"PO-Revision-Date: 2024-11-25 07:30+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -842,19 +842,16 @@ msgstr ""
 "gyermek számítógépén."
 
 #. 6.4->settings-schema.json->openSystemSoundSettings->description
-#, fuzzy
 msgid "System Sound Settings"
-msgstr "Hangbeállítások"
+msgstr "Rendszer hangbeállításai"
 
 #. 6.4->settings-schema.json->maxVolume->description
-#, fuzzy
 msgid "Maximum volume (%)"
-msgstr "Maximális hangerő szabályzása"
+msgstr "Maximális hangerő (%)"
 
 #. 6.4->settings-schema.json->color0_100->description
-#, fuzzy
 msgid "Icon color: 0%-100%"
-msgstr "Ikon színe: 101%-115%"
+msgstr "Ikon színe: 0%-100%"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"

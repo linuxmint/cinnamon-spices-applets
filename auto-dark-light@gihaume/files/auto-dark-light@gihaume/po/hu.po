@@ -68,20 +68,20 @@ msgstr ""
 
 #. lib/time_change_listener/time_change_listener.js:44
 msgid "Compilation of"
-msgstr ""
+msgstr "A következő összeállítása:"
 
 #. lib/time_change_listener/time_change_listener.js:44
 #. lib/commands_launcher/commands_launcher.js:29
 msgid "failed"
-msgstr ""
+msgstr "sikertelen"
 
 #. lib/time_change_listener/time_change_listener.js:97
 msgid "the subprocess"
-msgstr ""
+msgstr "az alfolyamat"
 
 #. lib/time_change_listener/time_change_listener.js:97
 msgid "wrote on its error output"
-msgstr ""
+msgstr "írta a hibakimenetére"
 
 #. lib/twilights_calculator/twilights_calculator.js:22
 msgid "unable to calculate twilight times, check coordinates format or range"
@@ -91,19 +91,19 @@ msgstr ""
 
 #. lib/commands_launcher/commands_launcher.js:29
 msgid "the command"
-msgstr ""
+msgstr "a parancs"
 
 #. lib/commands_launcher/commands_launcher.js:31
 msgid "due to a wrong format"
-msgstr ""
+msgstr "rossz formátum miatt"
 
 #. lib/commands_launcher/commands_launcher.js:35
 msgid "due to time expiration"
-msgstr ""
+msgstr "idő lejárta miatt"
 
 #. lib/commands_launcher/commands_launcher.js:38
 msgid "with the following errors"
-msgstr ""
+msgstr "a következő hibákkal"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -136,9 +136,8 @@ msgstr "Témák"
 
 #. settings-schema.json->light-mode_others->title
 #. settings-schema.json->dark-mode_others->title
-#, fuzzy
 msgid "Others"
-msgstr "Más"
+msgstr "Mások"
 
 #. settings-schema.json->light-mode_background->title
 #. settings-schema.json->dark-mode_background->title
@@ -148,7 +147,7 @@ msgstr "Asztal háttere"
 #. settings-schema.json->light-mode_commands->title
 #. settings-schema.json->dark-mode_commands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Egyéni parancsok"
 
 #. settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
@@ -307,18 +306,20 @@ msgid "Set desktop background"
 msgstr "Asztali háttér beállítása"
 
 #. settings-schema.json->both-modes_background_switch_enable->tooltip
-#, fuzzy
 msgid "Enable setting the desktop backgrounds for light and dark modes"
-msgstr "Asztali háttér beállítása világos és sötét üzemmódokhoz"
+msgstr ""
+"Engedélyezze az asztal hátterének beállítását világos és sötét módokhoz"
 
 #. settings-schema.json->light-mode_commands_switch_enable->description
 #. settings-schema.json->dark-mode_commands_switch_enable->description
 msgid "Launch custom commands"
-msgstr ""
+msgstr "Egyéni parancsok indítása"
 
 #. settings-schema.json->light-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to light mode"
 msgstr ""
+"Engedélyezze a beállítási parancsok elindítását, amikor világos üzemmódra "
+"vált"
 
 #. settings-schema.json->light-mode_background_button_open-os-
 #. settings->tooltip
@@ -372,22 +373,22 @@ msgstr "A fénymód háttérbeállításainak manuális alkalmazása a rendszerr
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Active"
-msgstr ""
+msgstr "Aktív"
 
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Expiry (s)"
-msgstr ""
+msgstr "Lejárat(ok)"
 
 #. settings-schema.json->light-mode_commands_list->columns->title
 #. settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Parancs"
 
 #. settings-schema.json->light-mode_commands_list->tooltip
 #. settings-schema.json->dark-mode_commands_list->tooltip
@@ -403,15 +404,25 @@ msgid ""
 "- the error messages reports stderr when the return status is not 0 and will "
 "appear in a notification"
 msgstr ""
+"Az ebbe a módba váltáskor végrehajtandó parancsok listája\n"
+"\n"
+"Megjegyzések:\n"
+"- a név célja a hibaüzenetek\n"
+"- a lejárati idő leállítja a parancs folyamatát\n"
+"- 0 másodperc lejárta azt jelenti, hogy soha\n"
+"- az alárendelt folyamatok nem járhatnak le\n"
+"- az elérési út a ~ könyvtárban van\n"
+"- a hibaüzenetek az stderr-t jelentik, ha a visszatérési állapot nem 0, és "
+"értesítésben jelenik meg"
 
 #. settings-schema.json->light-mode_commands_button_launch->description
 #. settings-schema.json->dark-mode_commands_button_launch->description
 msgid "Launch commands"
-msgstr ""
+msgstr "Parancsok indítása"
 
 #. settings-schema.json->light-mode_commands_button_launch->tooltip
 msgid "Launch the commands set for the light mode"
-msgstr ""
+msgstr "Indítsa el a világos módhoz beállított parancsokat"
 
 #. settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -427,6 +438,7 @@ msgstr "Alkalmazza a sötét üzemmód témáit a rendszerre manuálisan"
 #. settings-schema.json->dark-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to dark mode"
 msgstr ""
+"Engedélyezze a beállítási parancsok elindítását, amikor sötét módba vált"
 
 #. settings-schema.json->dark-mode_background_button_detect->tooltip
 msgid ""
@@ -442,4 +454,4 @@ msgstr "Alkalmazza a sötét mód háttérbeállításait a rendszerre manuális
 
 #. settings-schema.json->dark-mode_commands_button_launch->tooltip
 msgid "Launch the commands set for the dark mode"
-msgstr ""
+msgstr "Indítsa el a sötét módhoz beállított parancsokat"
