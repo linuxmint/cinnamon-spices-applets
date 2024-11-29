@@ -224,6 +224,8 @@ const YTDL_PROGRAM = () => {
   return find_program_in_path("youtube-dl");
 };
 
+const ENABLED_DESKLETS_KEY = 'enabled-desklets';
+
 // mpv --no-terminal --no-video --input-ipc-server=/tmp/mpvsocket http://95.217.68.35:8352/stream
 
 const REFRESH_INTERVAL = 5; // (seconds)
@@ -960,7 +962,7 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
 
 class CategoriesStationsBox {
     constructor() {
-        this.actor = new St.BoxLayout({ vertical: false });
+        this.actor = new BoxLayout({ vertical: false });
         this.actor._delegate = this;
     }
 }
@@ -1008,6 +1010,9 @@ var R3PopupMenu = class R3PopupMenu extends PopupMenu {
 class WebRadioReceiverAndRecorder extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
     super(orientation, panel_height, instance_id);
+
+    this.install_desklet();
+
     this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
 
     this.radiosHash = {};
@@ -1132,15 +1137,21 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ this.stopItem = new PopupMenuItem(_("Stop"));
     //~ this.stopItem.connect('activate', Lang.bind(this, this.stop_mpv));
 
-    // Contextual menu:
-    this.context_menu_item_slider = null;
-    this.context_menu_yt_downloads = [];
-
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
     this.get_user_settings();
     this.set_MPV_ALIAS();
+
+    // Desklet:
+    this.setup_desklet();
+    this._is_desklet_activated();
+
+    // Contextual menu:
+    this.context_menu_item_slider = null;
+    this.context_menu_yt_downloads = [];
+
+
 
     this.on_rec_path_changed();
 
@@ -1237,6 +1248,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_user_settings() {
+    this.settings.bind("desklet-show-on-desktop", "show_desklet", () => {
+      if (this.context_menu_item_showDesklet) {
+        this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+      }
+    });
+    this.settings.bind("desklet-is-activated", "desklet_is_activated");
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
@@ -4645,10 +4662,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   finalizeContextMenu() {
     //~ logDebug("finalizeContextMenu");
 
+
     // Add default context menus if we're in panel edit mode, ensure their removal if we're not
     if (this.context_menu_item_manageRecording)
       this.context_menu_item_manageRecording.destroy();
     this.context_menu_item_manageRecording = null;
+
+    if (this.context_menu_item_showDesklet)
+      this.context_menu_item_showDesklet.destroy();
+    this.context_menu_item_showDesklet = null;
 
     let items = this._applet_context_menu._getMenuItems();
     //~ logDebug("items.length: "+items.length);
@@ -4800,6 +4822,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this._applet_context_menu.addMenuItem(this.context_menu_item_showLogo);
     }
 
+    // Show AlbumArt3.0 desklet
+    if (this._is_desklet_activated()) {
+      if (this.context_menu_item_showDesklet == null) {
+        this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
+          this.show_desklet,
+          null);
+        this.context_menu_item_showDesklet.connect("toggled", Lang.bind(this, function() {
+            this.show_desklet = !this.show_desklet;
+            this.setup_desklet();
+          }));
+      }
+      if (items.indexOf(this.context_menu_item_showDesklet) == -1) {
+          this._applet_context_menu.addMenuItem(this.context_menu_item_showDesklet);
+      }
+    }
+
     // Do not check about dependencies
     if (this.context_menu_item_dontCheckDep == null) {
         this.context_menu_item_dontCheckDep = new PopupSwitchMenuItem(_("Do not check about dependencies"),
@@ -4919,6 +4957,32 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
+  }
+
+  install_desklet() {
+    // Installs the AlbumArt3.0 desklet.
+    const desklet_source_path = APPLET_DIR + "/desklet/AlbumArt3.0@claudiux";
+    if (find_program_in_path("cinnamon-install-spice")) {
+      spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
+    } else {
+      const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
+      spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
+    }
+  }
+
+  setup_desklet() {
+    //this.show_desklet
+    //~ logDebug("this.show_desklet: "+this.show_desklet);
+    const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux";
+    const HIDDEN_file_path = desklet_path+"/HIDDEN";
+    const HIDDEN_EXISTS = file_test(HIDDEN_file_path, FileTest.EXISTS);
+
+    if (HIDDEN_EXISTS && this.show_desklet) {
+      spawnCommandLineAsync("rm -f \""+HIDDEN_file_path+"\"");
+    }
+    if (!HIDDEN_EXISTS && !this.show_desklet) {
+      spawnCommandLineAsync("touch \""+HIDDEN_file_path+"\"");
+    }
   }
 
   open_rec_folder() {
@@ -5733,6 +5797,48 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   empty_recents() {
     this.recentRadios = []; // this.settings.setValue("recentRadios", []);
+  }
+
+  // Behavior:
+  on_button_activate_desklet_clicked() {
+    //~ logDebug("on_button_activate_desklet_clicked");
+    if (this._is_desklet_activated()) {
+      //~ this.desklet_is_activated = true;
+    } else {
+      //~ this.desklet_is_activated = false;
+      let enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
+      let next_desklet_id = global.settings.get_int("next-desklet-id");
+      let x_pos = global.screen_width - 600;
+      let y_pos = global.screen_height - 500;
+      enabledDesklets.push('AlbumArt3.0@claudiux:'+next_desklet_id+':'+x_pos+':'+y_pos);
+      global.settings.set_int("next-desklet-id", next_desklet_id + 1);
+      global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
+      //~ this.desklet_is_activated = this._is_desklet_activated();
+
+    }
+    if (this._is_desklet_activated())
+      this.show_desklet = true;
+    this.finalizeContextMenu();
+  }
+
+  _is_desklet_activated() {
+    let enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
+    var ret = false;
+    for (let i = 0; i < enabledDesklets.length; i++){
+      let name = enabledDesklets[i].split(":")[0];
+      //~ logDebug("Desklet name: "+name);
+      if (name == "AlbumArt3.0@claudiux") {
+        ret = true;
+        break;
+      }
+    }
+    this.desklet_is_activated = ret;
+    if (!ret && this.context_menu_item_showDesklet) {
+      this.context_menu_item_showDesklet._switch.setToggleState(ret);
+      this.context_menu_item_showDesklet.destroy();
+      this.context_menu_item_showDesklet = null;
+    }
+    return ret;
   }
 
   icon_rotate() {

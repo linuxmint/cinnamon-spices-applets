@@ -1,3 +1,7 @@
+### v2.3.0~20241129
+  * Adds the ability to display on desktop the Album (or Song) Art.
+  * Solves the problem with pulseaudio/pipewire.
+
 ### v2.2.3~20241119
   * Fixes #6583: Remove dummy device.
   * Updates version number.
