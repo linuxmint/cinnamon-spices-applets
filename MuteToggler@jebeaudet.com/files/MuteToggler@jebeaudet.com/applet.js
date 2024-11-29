@@ -55,7 +55,7 @@ function findFirstMatch(searchStrings, checkString) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: async function(metadata, orientation, panel_height, instance_id) {
+    _init: function(metadata, orientation, panel_height, instance_id) {
         try {
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
             VERBOSE = this.settings.getValue("verbose");
@@ -114,23 +114,6 @@ MyApplet.prototype = {
                 this.on_settings_changed();
             }
             
-            this.amixer = "amixer";
-            await this.evaluate_soundcard(); 
-            await this.evaluate_input();
-            
-            const parameters = ["", " -D pulse"];
-            for (let param of parameters) {
-                let cmd = this.amixer + param + " scontrols";
-                log("Test mixer command '" + cmd + "'");
-                // TODO: Make it async.
-                let [res, stdout] = GLib.spawn_command_line_sync(cmd);
-                if (res && to_string(stdout).indexOf(this.input) != -1) {
-                    this.amixer += param;
-                    log("Use mixer command '" + this.amixer + "'");
-                    break;
-                }
-            }
-            
             this.applet_is_running = true;
             this.set_not_muted_icon();
             this.is_audio_muted();
@@ -152,7 +135,7 @@ MyApplet.prototype = {
         }
 
         VERBOSE = this.verbose;
-        this.evaluate_soundcard();
+        this.evaluate_cmd_line();
     },
 
     refresh_loop: function() {
@@ -260,6 +243,25 @@ MyApplet.prototype = {
           }
         });
       });
+    },
+
+    evaluate_cmd_line: async function() { 
+        this.amixer = "amixer";
+        await this.evaluate_soundcard(); 
+        await this.evaluate_input();
+
+        const parameters = ["", " -D pulse"];
+        for (let param of parameters) {
+            let cmd = this.amixer + param + " scontrols";
+            log("Test mixer command '" + cmd + "'");
+            // TODO: Make it async.
+            let [res, stdout] = GLib.spawn_command_line_sync(cmd);
+            if (res && to_string(stdout).indexOf(this.input) != -1) {
+                this.amixer += param;
+                log("Use mixer command '" + this.amixer + "'");
+                break;
+            }
+        }
     },
 
     on_applet_clicked: function(event) {
