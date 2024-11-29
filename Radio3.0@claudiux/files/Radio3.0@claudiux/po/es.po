@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-29 22:18+0100\n"
-"PO-Revision-Date: 2024-11-07 17:48-0300\n"
+"PO-Revision-Date: 2024-11-29 18:46-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -434,7 +434,7 @@ msgstr "Mostrar logotipo de la estación"
 #. settings-schema.json->desklet-show-on-desktop->description
 #. applet.js:4828
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Mostrar la carátula del álbum en el escritorio"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:4843
@@ -523,9 +523,8 @@ msgid "%s kbps"
 msgstr "%s kbps"
 
 #. desklet/AlbumArt3.0@claudiux/desklet.js:33
-#, fuzzy
 msgid "Radio3.0 Album Art"
-msgstr "Radio3.0"
+msgstr "Carátula del álbum para Radio3.0"
 
 #. lib/checkDependencies.js:397
 #, javascript-format
@@ -787,7 +786,7 @@ msgstr "Sólo en paneles horizontales"
 
 #. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
 msgid "Album Art desklet"
-msgstr ""
+msgstr "Desklet de Carátula del álbum"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -3132,29 +3131,31 @@ msgstr "0 significa que no hay máximo"
 
 #. settings-schema.json->desklet-activate-button->description
 msgid "Activate desklet displaying the Radio3.0 Album Art"
-msgstr ""
+msgstr "Activar desklet que muestra la carátula del álbum para Radio3.0"
 
 #. settings-schema.json->desklet-activated-label->description
 msgid "The desklet displaying the Radio3.0 Album Art is activated"
-msgstr ""
+msgstr "Activa el desklet que muestra la carátula del álbum para Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
-msgstr ""
+msgstr "Carátula del álbum para Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
 msgid "A digital photo frame desklet to display the Radio3.0 album art"
 msgstr ""
+"Un marco de fotos digital de escritorio para mostrar la carátula del álbum "
+"para Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
-msgstr ""
+msgstr "Altura"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
 msgid "pixels"
-msgstr ""
+msgstr "pixeles"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
-msgstr ""
+msgstr "Anchura"
