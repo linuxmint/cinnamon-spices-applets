@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-01 02:43+0100\n"
-"PO-Revision-Date: 2024-11-29 18:46-0300\n"
+"PO-Revision-Date: 2024-12-01 10:41-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -3139,9 +3139,8 @@ msgid "The desklet displaying the Radio3.0 Album Art is activated"
 msgstr "Activa el desklet que muestra la carátula del álbum para Radio3.0"
 
 #. settings-schema.json->desklet-open-settings-button->description
-#, fuzzy
 msgid "Album Art desklet settings"
-msgstr "Desklet de Carátula del álbum"
+msgstr "Configuracion del desklet de la carátula del álbum"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
@@ -3169,59 +3168,57 @@ msgstr "Anchura"
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. effect->description
 msgid "Fade"
-msgstr ""
+msgstr "Desvanecimiento"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
-#, fuzzy
 msgid "None"
-msgstr "(Ninguno)"
+msgstr "Ninguno"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quad"
-msgstr ""
+msgstr "Cuádruple"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Cubic"
-msgstr ""
+msgstr "Cúbico"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quart"
-msgstr ""
+msgstr "Cuarto"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quint"
-msgstr ""
+msgstr "Quinta"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Sine"
-msgstr ""
+msgstr "Seno"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Expo"
-msgstr ""
+msgstr "Exposición"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Circ"
-msgstr ""
+msgstr "Círculo"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Elastic"
-msgstr ""
+msgstr "Elástico"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Back"
-msgstr ""
+msgstr "Atrás"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Bounce"
-msgstr ""
+msgstr "Rebote"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. delay->description
 msgid "Fade delay"
-msgstr ""
+msgstr "Retardo de desvanecimiento"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
-#, fuzzy
 msgid "0 means no fade"
-msgstr "0 significa que no hay máximo"
+msgstr "0 significa que no hay desvanecimiento"
