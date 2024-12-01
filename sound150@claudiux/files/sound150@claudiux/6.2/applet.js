@@ -139,6 +139,8 @@ const ICON_SIZE = Math.trunc(28*global.ui_scale);
 
 const CINNAMON_DESKTOP_SOUNDS = "org.cinnamon.desktop.sound";
 const OVERAMPLIFICATION_KEY = "allow-amplified-volume";
+const MAXIMUM_VOLUME_KEY = "maximum-volume";
+var isOverAmplificationPresent;
 const VOLUME_SOUND_ENABLED_KEY = "volume-sound-enabled";
 const VOLUME_SOUND_FILE_KEY = "volume-sound-file";
 
@@ -1771,7 +1773,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.title_text = "";
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
+
+        this.settings.bind("isOverAmplificationPresent", "isOverAmplificationPresent");
+        this.settings.bind("isSetAmplificationPresent", "isSetAmplificationPresent");
+        this.settings.bind("isOpenSoundSettingsPresent", "isOpenSoundSettingsPresent");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
+
         this.showOSD = this.showOSDonStartup;
         this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
@@ -1922,10 +1929,28 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._control.connect("stream-added", (...args) => this._onStreamAdded(...args));
         this._control.connect("stream-removed", (...args) => this._onStreamRemoved(...args));
 
-        this._sound_settings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
         this._volumeNorm = this._control.get_vol_max_norm();
         //~ logDebug("this._volumeNorm: "+this._volumeNorm);
-        this._volumeMax = this._volumeNorm;
+
+        this._sound_settings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
+        if (this._sound_settings.list_keys().indexOf(OVERAMPLIFICATION_KEY) > -1) {
+            // Like 6.4:
+            logDebug(OVERAMPLIFICATION_KEY+" is here (6.4).");
+            isOverAmplificationPresent = true;
+            this._volumeMax = this._volumeNorm;
+        } else {
+            // Like 5.4:
+            logDebug(OVERAMPLIFICATION_KEY+" is NOT here (5.4).");
+            isOverAmplificationPresent = false;
+            this._volumeMax = this._sounds_settings.get_int(MAXIMUM_VOLUME_KEY) / 100 * this._control.get_vol_max_norm();
+        }
+
+
+        this.isOverAmplificationPresent = isOverAmplificationPresent;
+        this.isSetAmplificationPresent = !this.isOverAmplificationPresent && !this.isArchLinux();
+        this.isOpenSoundSettingsPresent = this.isOverAmplificationPresent && !this.isArchLinux();
+        //~ logDebug("this._sound_settings.list_keys(): "+this._sound_settings.list_keys());
+
 
         this._streams = [];
         this._devices = [];
@@ -2005,11 +2030,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         let appsys = Cinnamon.AppSystem.get_default();
         appsys.connect("installed-changed", () => this._updateLaunchPlayer());
 
-        this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
-        //~ this._on_sound_settings_change();
+        if (this._volumeMax > this._volumeNorm) {
+            this._outputVolumeSection.set_mark(this._volumeNorm / this._volumeMax);
+        }
 
-        //~ this._loopArtId = null;
-        //~ this.loopArt();
+        if (this.isOverAmplificationPresent) {
+            this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
+        } else {
+            this._sound_settings.connect("changed::" + MAXIMUM_VOLUME_KEY, () => this._on_sound_settings_change());
+        }
     }
 
     on_volumeSoundFile_changed() {
@@ -2184,19 +2213,24 @@ class Sound150Applet extends Applet.TextIconApplet {
     } // End of _setKeybinding
 
     _on_maxVolume_changed(value) {
-        if (value > 100) {
-            this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, true);
+        if (this.isOverAmplificationPresent) {
+            if (value > 100) {
+                this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, true);
+            } else {
+                this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, false);
+            }
         } else {
-            this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, false);
+
         }
         this._on_sound_settings_change();
     }
 
     _on_sound_settings_change() {
-        if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
-            this.maxVolume = 100;
+        if (this.isOverAmplificationPresent) {
+            if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
+                this.maxVolume = 100;
+            }
         }
-
         this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
         if (this.maxVolume > 100)
             this._outputVolumeSection.set_mark(100/this.maxVolume);
@@ -3247,6 +3281,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         Extension.reloadExtension(UUID, Extension.Type.APPLET);
     }
 
+    _onSetApmlificationPressed() {
+        let command = "cinnamon-settings sound -t 4";
+        Util.spawnCommandLine(command);
+    }
+
     _onSystemSoundSettingsPressed() {
         let command = "cinnamon-settings sound";
         Util.spawnCommandLineAsync(command);
@@ -3303,11 +3342,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.audio_prev = audio_prev.join("::");
     }
 
+    isArchLinux() {
+        return Gio.file_new_for_path("/etc/arch-release").query_exists(null)
+    }
+
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");
     }
 }
 
 function main(metadata, orientation, panel_height, instanceId) {
+    logDebug(UUID+" Cinnamon 6.2");
     return new Sound150Applet(metadata, orientation, panel_height, instanceId);
 }

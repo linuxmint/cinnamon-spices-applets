@@ -1,3 +1,11 @@
+### v7.3.1~20241130
+  * Fixes #6655: The OSD is no longer displayed at startup if it is not required.
+
+
+### v7.3.0~20241128
+  * Add specific code for Cinnamon 6.2.
+
+
 ### v7.2.4~20241116
   * Fixes #6513: Always show mute icon when sound is muted.
 
