@@ -16,5 +16,33 @@
         "description" : "Width",
         "units" : "pixels",
         "step": 50
-    }
+    },
+    "fade-effect": {
+        "default": "None",
+        "type": "combobox",
+        "description" : "Fade",
+        "options": {
+            "None": "None",
+            "Quad": "Quad",
+            "Cubic": "Cubic",
+            "Quart": "Quart",
+            "Quint": "Quint",
+            "Sine": "Sine",
+            "Expo": "Expo",
+            "Circ": "Circ",
+            "Elastic": "Elastic",
+            "Back": "Back",
+            "Bounce": "Bounce"
+        }
+    },
+    "fade-delay": {
+        "default": 0,
+        "type": "scale",
+        "min": 0,
+        "max": 300,
+        "description" : "Fade delay",
+        "units" : "seconds",
+        "step": 5,
+        "tooltip": "0 means no fade"
+     }
 }
