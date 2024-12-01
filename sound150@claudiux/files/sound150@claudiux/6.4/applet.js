@@ -224,6 +224,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
         applet.showOSD = applet.showOSDonStartup;
         super(startLevel);
+        this.oldValue = startLevel;
         this.applet = applet;
         this.oldValue = startLevel;
 
@@ -340,9 +341,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         let icon = Gio.Icon.new_for_string(this._volumeToIcon(this._value));
 
-        if (this.applet.showOSD) {
-            //~ logDebug("volume: "+volume);
-            Main.osdWindowManager.show(-1, icon, Math.round(volume/this.applet._volumeNorm * 100), null);
+        if (this.applet.showOSD && Math.round(volume/this.applet._volumeNorm * 100) != Math.round(this.oldValue)) {
+            Main.osdWindowManager.show(-1, icon, ""+Math.round(volume/this.applet._volumeNorm * 100), null);
         }
 
 
@@ -1836,6 +1836,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
 
         this.settings.bind("volume", "volume");
+        this.old_volume = this.volume;
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
         this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
@@ -2195,6 +2196,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
             this.maxVolume = 100;
         }
+
         this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
         if (this.maxVolume > 100)
             this._outputVolumeSection.set_mark(100/this.maxVolume);
@@ -2246,9 +2248,9 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         if (this._output && !this._output.is_muted) {
-            let old_volume = this.volume;
+            this.old_volume = this.volume;
             this._toggle_out_mute();
-            this.volume = old_volume;
+            this.volume = this.old_volume;
         }
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
@@ -2459,13 +2461,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             icon_name += "-symbolic";
             let icon = Gio.Icon.new_for_string(icon_name);
             this.set_applet_icon_symbolic_name(icon_name);
-            if (this.showOSD) {
+            if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
                 //~ Main.osdWindowManager.hideAll();
                 try {
-                    Main.osdWindowManager.show(-1, icon, volume, null);
+                    Main.osdWindowManager.show(-1, icon, ""+volume, null);
                 } catch(e) {}
-                //Main.osdWindowManager.show(0, icon, volume, true);
+                //Main.osdWindowManager.show(0, icon, ""+volume, true);
             }
+            this.old_volume = ""+volume+"%";
             var intervalId = null;
             intervalId = Util.setInterval(() => {
                 this._applet_tooltip.hide();
