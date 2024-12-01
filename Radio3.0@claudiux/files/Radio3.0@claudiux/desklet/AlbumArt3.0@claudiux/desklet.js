@@ -8,6 +8,10 @@ const GLib = imports.gi.GLib;
 const Tweener = imports.ui.tweener;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain("Radio3.0@claudiux", GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain("cinnamon", "/usr/share/locale");
 
 class AlbumArtRadio30 extends Desklet.Desklet {
     constructor(metadata, desklet_id) {
@@ -20,11 +24,13 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.dir = "file://"+GLib.get_home_dir()+"/.config/Radio3.0/song-art";
         this.shuffle = false;
         this.delay = 3;
-        this.fade_delay = 0;
+        //this.fade_delay = 0;
         this.effect = "";
         this.settings = new Settings.DeskletSettings(this, this.metadata.uuid, this.instance_id);
         this.settings.bind('height', 'height', this.on_setting_changed);
         this.settings.bind('width', 'width', this.on_setting_changed);
+        this.settings.bind('fade-delay', 'fade_delay', this.on_setting_changed);
+        this.settings.bind('fade-effect', 'fade_effect', this.on_setting_changed);
 
         this.dir_monitor_id = 0;
         this.dir_monitor = null;
@@ -207,16 +213,19 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.currentPicture.path = image_path;
 
         if (this.fade_delay > 0) {
+            let _transition = "easeNone";
+            if (this.fade_effect != "None")
+                _transition = "easeOut"+this.fade_effect;
             Tweener.addTween(this._bin, {
-                opacity: 0,
-                time: this.fade_delay,
-                transition: 'easeInSine',
+                opacity: 255, //0,
+                time: 0, //this.fade_delay,
+                transition: _transition, //'easeInSine',
                 onComplete: () => {
                     this._bin.set_child(this.currentPicture);
                     Tweener.addTween(this._bin, {
-                        opacity: 255,
+                        opacity: 0, //255,
                         time: this.fade_delay,
-                        transition: 'easeInSine'
+                        transition: _transition, //'easeInSine',
                     });
                 }
             });

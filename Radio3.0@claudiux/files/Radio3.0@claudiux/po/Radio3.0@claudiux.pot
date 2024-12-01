@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Radio3.0@claudiux 2.3.0\n"
+"Project-Id-Version: Radio3.0@claudiux 2.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-29 22:18+0100\n"
+"POT-Creation-Date: 2024-12-01 02:43+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -476,12 +476,12 @@ msgstr ""
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr ""
 
-#. applet.js:5951
+#. applet.js:5955
 #, javascript-format
 msgid "%s kbps"
 msgstr ""
 
-#. desklet/AlbumArt3.0@claudiux/desklet.js:33
+#. desklet/AlbumArt3.0@claudiux/desklet.js:38
 msgid "Radio3.0 Album Art"
 msgstr ""
 
@@ -1290,6 +1290,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->notif-song-duration->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->units
 msgid "seconds"
 msgstr ""
 
@@ -3009,6 +3010,10 @@ msgstr ""
 msgid "The desklet displaying the Radio3.0 Album Art is activated"
 msgstr ""
 
+#. settings-schema.json->desklet-open-settings-button->description
+msgid "Album Art desklet settings"
+msgstr ""
+
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
 msgstr ""
@@ -3028,4 +3033,62 @@ msgstr ""
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "None"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+msgid "0 means no fade"
 msgstr ""

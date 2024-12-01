@@ -1,3 +1,6 @@
+### v2.3.1~20241201
+  * Adds an optional fade effect to the Album Art. See the Behavior tab of this applet settings.
+
 ### v2.3.0~20241129
   * Adds the ability to display on desktop the Album (or Song) Art.
   * Solves the problem with pulseaudio/pipewire.

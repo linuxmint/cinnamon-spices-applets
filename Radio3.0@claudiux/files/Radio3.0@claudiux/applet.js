@@ -3835,6 +3835,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (!are_translations_installed()) install_translations();
 
     spawnCommandLineAsync("bash -c '"+DEL_SONG_ARTS_SCRIPT+"'");
+    spawnCommandLineAsync("bash -c '%s/fix-desklet-translations.sh'".format(SCRIPTS_DIR));
 
     let subProcess = spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
       try {
@@ -5819,6 +5820,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this._is_desklet_activated())
       this.show_desklet = true;
     this.finalizeContextMenu();
+  }
+
+  on_desklet_open_settings_button_clicked() {
+    spawnCommandLineAsync("cinnamon-settings desklets AlbumArt3.0@claudiux");
   }
 
   _is_desklet_activated() {

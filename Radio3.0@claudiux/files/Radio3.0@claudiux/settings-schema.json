@@ -301,6 +301,7 @@
       "keys": [
         "desklet-activate-button",
         "desklet-show-on-desktop",
+        "desklet-open-settings-button",
         "desklet-activated-label"
       ]
     },
@@ -1901,6 +1902,12 @@
     "dependency": "desklet-is-activated",
     "default": false,
     "description": "Show Album Art on desktop"
+  },
+  "desklet-open-settings-button": {
+    "type": "button",
+    "dependency": "desklet-is-activated",
+    "description": "Album Art desklet settings",
+    "callback": "on_desklet_open_settings_button_clicked"
   },
   "desklet-is-activated": {
     "type": "generic",
