@@ -1,3 +1,6 @@
+### v2.3.2~20241203
+  * Redesigned context menu.
+
 ### v2.3.1~20241201
   * Adds an optional fade effect to the Album Art. See the Behavior tab of this applet settings.
 
