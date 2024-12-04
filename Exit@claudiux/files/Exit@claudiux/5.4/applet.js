@@ -12,10 +12,11 @@ const St = imports.gi.St;
 const { restartCinnamon } = imports.ui.main;
 const Mainloop = imports.mainloop;
 
-// l10n/translation support
 const UUID = "Exit@claudiux";
-//~ Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const SCRIPTS_DIR = GLib.get_home_dir()+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
+const CANSHUTDOWN_SCRIPT = SCRIPTS_DIR+"/can-shutdown.sh";
 
+// l10n/translation support
 function _(str) {
     Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
     let _str = Gettext.dgettext(UUID, str);
@@ -56,6 +57,8 @@ class ExitApplet extends Applet.IconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.isWaylandSession = Meta.is_wayland_compositor();
+
+        this.can_shutdown = false;
 
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
 
@@ -98,6 +101,17 @@ class ExitApplet extends Applet.IconApplet {
         this.displayLockScreenSetting = !this.lockdown_settings.get_boolean('disable-lock-screen') && !this.isWaylandSession;
         this.displaySwitchUserSetting = !this.lockdown_settings.get_boolean('disable-user-switching') && !this.isWaylandSession;
         this.displayLogoutSetting = !this.lockdown_settings.get_boolean('disable-log-out');
+
+        let subProcess =  Util.spawnCommandLineAsyncIO(CANSHUTDOWN_SCRIPT, Lang.bind(this,
+            function(stdout, stderr, exitCode) {
+                if (exitCode == 0) {
+                    this.can_shutdown = true;
+                } else {
+                    this.can_shutdown = false;
+                }
+                subProcess.send_signal(9);
+            })
+        );
 
         this.loop = Mainloop.timeout_add_seconds(1, () => this.check_system_managed_options());
         return false;
@@ -185,32 +199,41 @@ class ExitApplet extends Applet.IconApplet {
             }
 
             if (allow_switch_user && this.showSwitchUser) {
-                if (GLib.getenv("XDG_SEAT_PATH")) {
-                    // LightDM
-                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                if (this.can_shutdown) {
+                    if (GLib.getenv("XDG_SEAT_PATH")) {
+                        // LightDM
+                        item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                        item.connect('activate', Lang.bind(this, function () {
+                            this.menu.close(true);
+                            launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                            launcher.spawnv(["dm-tool", "switch-to-greeter"]);
+                        }));
+                        this.menu.addMenuItem(item);
+                    }
+                    else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
+                        // MDM
+                        item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                        item.connect('activate', Lang.bind(this, function () {
+                            this.menu.close(true);
+                            launcher.spawnv(["mdmflexiserver"]);
+                        }));
+                        this.menu.addMenuItem(item);
+                    }
+                    else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
+                        // GDM
+                        item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
+                        item.connect('activate', Lang.bind(this, function () {
+                            this.menu.close(true);
+                            launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                            launcher.spawnv(["gdmflexiserver"]);
+                        }));
+                        this.menu.addMenuItem(item);
+                    }
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                     item.connect('activate', Lang.bind(this, function () {
                         this.menu.close(true);
-                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
-                        launcher.spawnv(["dm-tool", "switch-to-greeter"]);
-                    }));
-                    this.menu.addMenuItem(item);
-                }
-                else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
-                    // MDM
-                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                    item.connect('activate', Lang.bind(this, function () {
-                        this.menu.close(true);
-                        launcher.spawnv(["mdmflexiserver"]);
-                    }));
-                    this.menu.addMenuItem(item);
-                }
-                else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
-                    // GDM
-                    item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
-                    item.connect('activate', Lang.bind(this, function () {
-                        this.menu.close(true);
-                        launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
-                        launcher.spawnv(["gdmflexiserver"]);
+                        launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                     }));
                     this.menu.addMenuItem(item);
                 }
@@ -222,57 +245,102 @@ class ExitApplet extends Applet.IconApplet {
         }
 
         if (allow_log_out && this.showLogout) {
-            item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (allow_log_out || allow_lock_screen || allow_switch_user)
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.showSuspend) {
-            item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "suspend"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["systemctl", "suspend"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (this.showHibernate) {
-            item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                if (this.hibernateNeedsSudo)
-                    launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
-                else
-                    launcher.spawnv(["systemctl", "hibernate"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    if (this.hibernateNeedsSudo)
+                        launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
+                    else
+                        launcher.spawnv(["systemctl", "hibernate"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (this.showSuspend || this.showHibernate)
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.showRestart) {
-            item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "reboot"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["systemctl", "reboot"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Restart"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
         if (this.showPowerOff) {
-            item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
-            item.connect('activate', Lang.bind(this, function () {
-                this.menu.close(true);
-                launcher.spawnv(["systemctl", "poweroff"]);
-            }));
-            this.menu.addMenuItem(item);
+            if (this.can_shutdown) {
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["systemctl", "poweroff"]);
+                }));
+                this.menu.addMenuItem(item);
+            } else {
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
+                item.connect('activate', Lang.bind(this, function () {
+                    this.menu.close(true);
+                    launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
+                }));
+                this.menu.addMenuItem(item);
+            }
         }
 
     }
