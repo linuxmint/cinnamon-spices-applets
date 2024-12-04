@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-01 02:43+0100\n"
-"PO-Revision-Date: 2024-11-08 13:53+0100\n"
+"PO-Revision-Date: 2024-12-04 09:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -440,7 +440,7 @@ msgstr "Senderlogo anzeigen"
 #. settings-schema.json->desklet-show-on-desktop->description
 #. applet.js:4828
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Albumcover auf dem Desktop anzeigen"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:4843
@@ -531,9 +531,8 @@ msgid "%s kbps"
 msgstr "%s kbps"
 
 #. desklet/AlbumArt3.0@claudiux/desklet.js:38
-#, fuzzy
 msgid "Radio3.0 Album Art"
-msgstr "Radio3.0"
+msgstr "Radio3.0-Albumcover"
 
 #. lib/checkDependencies.js:397
 #, javascript-format
@@ -798,7 +797,7 @@ msgstr "Nur auf horizontalen Panels"
 
 #. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
 msgid "Album Art desklet"
-msgstr ""
+msgstr "Albumcover-Desklet"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -3155,93 +3154,95 @@ msgstr "0 bedeutet unbegrenzt"
 
 #. settings-schema.json->desklet-activate-button->description
 msgid "Activate desklet displaying the Radio3.0 Album Art"
-msgstr ""
+msgstr "Desklet aktivieren, das das Radio3.0-Albumcover anzeigt"
 
 #. settings-schema.json->desklet-activated-label->description
 msgid "The desklet displaying the Radio3.0 Album Art is activated"
-msgstr ""
+msgstr "Das Desklet, das das Radio3.0-Albumcover anzeigt, ist aktiviert"
 
 #. settings-schema.json->desklet-open-settings-button->description
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Einstellungen für das Albumcover-Desklet"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
-msgstr ""
+msgstr "Albumcover für Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
 msgid "A digital photo frame desklet to display the Radio3.0 album art"
 msgstr ""
+"Ein digitales Bilderrahmen-Desklet zur Anzeige des Radio3.0-Albumcovers"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
-msgstr ""
+msgstr "Höhe"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
 msgid "pixels"
-msgstr ""
+msgstr "Pixel"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
-msgstr ""
+msgstr "Breite"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. effect->description
 msgid "Fade"
-msgstr ""
+msgstr "Überblenden"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
-#, fuzzy
 msgid "None"
-msgstr "(Keine)"
+msgstr "Keine"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quad"
-msgstr ""
+msgstr "Quadratisch"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Cubic"
-msgstr ""
+msgstr "Kubisch"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quart"
-msgstr ""
+msgstr "Quartisch"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quint"
-msgstr ""
+msgstr "Quintisch"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Sine"
-msgstr ""
+msgstr "Sinus"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Expo"
-msgstr ""
+msgstr "Exponential"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Circ"
-msgstr ""
+msgstr "Kreisförmig"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Elastic"
-msgstr ""
+msgstr "Elastisch"
 
+# "Back" fade effect option.
+# Feel free to provide a better translation for this effect option.
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Back"
-msgstr ""
+msgstr "Rückwärts"
 
+# Is there a better translation for a bounce fade effect?
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Bounce"
-msgstr ""
+msgstr "Hüpfen"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. delay->description
 msgid "Fade delay"
-msgstr ""
+msgstr "Überblendverzögerung"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
-#, fuzzy
 msgid "0 means no fade"
-msgstr "0 bedeutet unbegrenzt"
+msgstr "0 bedeutet kein Überblenden"
