@@ -57,7 +57,7 @@ Just go to `System Settings > Applets` then
 
 ## Settings
 
-There are five tabs in settings:
+There are six tabs in settings:
 
   * General
   * Temperature
