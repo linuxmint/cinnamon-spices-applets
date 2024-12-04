@@ -1272,6 +1272,16 @@ class SensorsApplet extends Applet.TextApplet {
     );
     this.menu.addMenuItem(_intrusion_button);
 
+    // Button Wattage:
+    let _wattage_button = new PopupMenu.PopupMenuItem("  " + _("%s Wattage sensors").format(C_WATT));
+    _wattage_button.connect("activate",
+      (event) => {
+        this.kill_all_pids();
+        this.pids.push(Util.spawnCommandLine("%s applet %s -t 5 &".format(XS_PATH, UUID)))
+      }
+    );
+    this.menu.addMenuItem(_wattage_button);
+
     // Button Custom:
     //~ let _custom_button = new PopupMenu.PopupMenuItem("  " + _("⛓ Custom sensors"));
     //~ _custom_button.connect("activate",
