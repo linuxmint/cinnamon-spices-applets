@@ -31,12 +31,15 @@ const {
 
 const {SensorsReaper} = require("./lib/sensorsReaper");
 
+const {fetchCPUWattage} = require("./lib/rapl");
+
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
 const C_TEMP = '⦿'; //'🌡'
 const C_FAN = '🤂';
 const C_VOLT = '🗲';
 const C_INTRU = '⮿';
+const C_WATT = '🔌';
 const DEFAULT_APPLET_LABEL = [C_TEMP, C_FAN, C_VOLT, C_INTRU];
 
 const LOG_HIGH_SCRIPT = SCRIPTS_DIR+"/log_high_value.sh";
@@ -337,6 +340,13 @@ class SensorsApplet extends Applet.TextApplet {
 
     // Custom tab
     this.s.bind("custom_sensors", "custom_sensors", null, null);
+
+    // Wattage tab
+    this.s.bind("show_wattage", "show_wattage", null, null);
+    this.s.bind("host_wattage", "host_wattage", null, null);
+    this.s.bind("port_wattage", "port_wattage", null, null);
+    this.s.bind("wattage_decimal", "wattage_decimal", null, null);
+    
 
     // Whether temperature@fevimu is loaded:
     let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
@@ -795,6 +805,19 @@ class SensorsApplet extends Applet.TextApplet {
       }
     }
 
+    // Wattage:
+    _tooltip = "";
+    if (this.show_wattage) {
+      try {
+        const numberInWatts = fetchCPUWattage(this.host_wattage, this.port_wattage, this.wattage_decimal);
+        _tooltip = C_WATT + "\n" + "CPU Wattage: ";
+        _tooltip += this.bold_values ? "<b>" + numberInWatts + " W</b>" : numberInWatts + " W";
+        _tooltips.push(_tooltip.trim());
+      } catch (e) {
+        global.log("Error fetching CPU wattage: " + e);
+      }
+    }
+
     _tooltip = "";
     if (_tooltips.length === 0)
       _tooltip = _("Must be configured!");
@@ -1111,6 +1134,15 @@ class SensorsApplet extends Applet.TextApplet {
       //~ if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
     //~ global.log("_actor_style: "+_actor_style);
+
+    if (this.show_wattage) {
+      try {
+        const numberInWatts = fetchCPUWattage(this.host_wattage, this.port_wattage, this.wattage_decimal);
+        this.label_parts.push(`${numberInWatts} W`);
+      } catch (e) {
+        global.log("Error fetching CPU wattage: " + e);
+      }
+    }
 
     if (this.label_parts.length === 0) {
       _appletLabel = this._get_default_applet_label();
