@@ -7,7 +7,8 @@ This applet displays and monitors the values ​​of many computer sensors conc
   * **Temperatures** (from CPU, GPU, Power Supply, Disks)
   * **Fan Speed**
   * **Voltages**
-  * **Intrusions**.
+  * **Intrusions**
+  * **CPU Wattage** (Experimental)
 
 It notifies you with color changes when a value reaches or exceeds its limit.
 
@@ -37,6 +38,7 @@ This applet needs 4 packages:
   * _xsensors_ to display these values in an independent graphical interface.
   * _fonts-symbola_ that contains some symbols used by this applet.
   * _smartmontools_ that provides `smartctl` to read disk temperature.
+  * [_pcm_][pcm] only necessary if you want to use CPU Wattage sensor.
 
 
 _**Sensors@claudiux** helps you to install these packages, if any._
@@ -62,6 +64,7 @@ There are five tabs in settings:
   * Fan
   * Voltage
   * Intrusion
+  * CPU Wattage (experimental)
 
 All these tabs are directly accessible from the menu of this applet.
 
@@ -192,6 +195,7 @@ Claudiux ([@claudiux][claudiux])
 [sanitize]: https://cinnamon-spices.linuxmint.com/extensions/view/87
 [claudiux]: https://github.com/claudiux
 [lmsensors]: https://github.com/lm-sensors/lm-sensors
+[pcm]: https://github.com/intel/pcm
 [lmsensorsconfigs]: https://github.com/lm-sensors/lm-sensors/tree/master/configs
 [spicesupdate]: https://cinnamon-spices.linuxmint.com/applets/view/309
 [download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?09ba80da-c2b5-4b1a-9edf-bea2b8b11589
