@@ -1,3 +1,6 @@
+### v2.3.3~20241205
+  * Clicking on the Album Art desklet updates the image.
+
 ### v2.3.2~20241203
   * Redesigned context menu.
 
