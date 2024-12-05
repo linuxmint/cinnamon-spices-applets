@@ -1,181 +1,185 @@
-# SOME DESCRIPTIVE TITLE.
+# SENSORS MONITOR
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 3.7.0\n"
+"Project-Id-Version: Sensors@claudiux 3.8.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-03 19:28+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2024-10-29 14:28+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:214
+#. applet.js:218
 msgid "Sensors Monitor"
 msgstr ""
 
-#: applet.js:394
+#. applet.js:401
 msgid "Suspended"
 msgstr ""
 
-#: applet.js:612 applet.js:654
+#. applet.js:619 applet.js:661
 msgid "high:"
 msgstr ""
 
-#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:697
+#. applet.js:619 applet.js:621 applet.js:661 applet.js:663 applet.js:705
 msgid "n/a"
 msgstr ""
 
-#: applet.js:614 applet.js:656
+#. applet.js:621 applet.js:663
 msgid "crit:"
 msgstr ""
 
-#: applet.js:697 applet.js:740
+#. applet.js:705 applet.js:749
 msgid "min:"
 msgstr ""
 
-#: applet.js:742
+#. applet.js:751
 msgid "max:"
 msgstr ""
 
-#: applet.js:770
+#. applet.js:780
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:770
+#. applet.js:780
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:790
+#. applet.js:800
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:1125
+#. applet.js:1187
 msgid "Settings"
 msgstr ""
 
-#: applet.js:1125
+#. applet.js:1187
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:1132
+#. applet.js:1194
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:1142
-msgid "🌡 Temperature sensors"
+#. applet.js:1204
+#, javascript-format
+msgid "%s Temperature sensors"
 msgstr ""
 
-#: applet.js:1152
-msgid "🤂 Fan sensors"
+#. applet.js:1214
+#, javascript-format
+msgid "%s Fan sensors"
 msgstr ""
 
-#: applet.js:1162
-msgid "🗲 Voltage sensors"
+#. applet.js:1224
+#, javascript-format
+msgid "%s Voltage sensors"
 msgstr ""
 
-#: applet.js:1172
-msgid "⮿ Intrusion sensors"
+#. applet.js:1234
+#, javascript-format
+msgid "%s Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:1193
+#. applet.js:1255
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:1202
+#. applet.js:1264
 msgid "Suspend Sensors"
 msgstr ""
 
-#: applet.js:1213
+#. applet.js:1275
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1514
+#. applet.js:1576
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#: lib/checkDependencies.js:317
+#. lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#: lib/checkDependencies.js:318
+#. lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr ""
 
-#: lib/checkDependencies.js:346
+#. lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: lib/checkDependencies.js:347
+#. lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: lib/checkDependencies.js:348
+#. lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: lib/util.js:244
+#. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr ""
 
-#: scripts/xs.py:206
+#. scripts/xs.py:206
 msgid "Previous instance"
 msgstr ""
 
-#: scripts/xs.py:210
+#. scripts/xs.py:210
 msgid "Next instance"
 msgstr ""
 
-#: scripts/xs.py:219
+#. scripts/xs.py:219
 msgid "More options"
 msgstr ""
 
-#: scripts/xs.py:225
+#. scripts/xs.py:225
 msgid "Import from a file"
 msgstr ""
 
-#: scripts/xs.py:230
+#. scripts/xs.py:230
 msgid "Export to a file"
 msgstr ""
 
-#: scripts/xs.py:235
+#. scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr ""
 
-#: scripts/xs.py:244
+#. scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr ""
 
-#: scripts/xs.py:425
+#. scripts/xs.py:425
 #, python-format
 msgid "Settings for %s"
 msgstr ""
 
-#: scripts/xs.py:517
+#. scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr ""
 
-#: scripts/xs.py:525 scripts/xs.py:546
+#. scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr ""
 
-#: scripts/xs.py:539
+#. scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr ""
 
@@ -187,7 +191,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
+msgid "⦿ Temperature"
 msgstr ""
 
 #. settings-schema.json->page_Fans->title
@@ -375,6 +379,50 @@ msgstr ""
 
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "baseline"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "sub"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "super"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "middle"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "unset"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "inherit"
+msgstr ""
+
+#. settings-schema.json->vertical-align->description
+msgid "Vertical alignment"
 msgstr ""
 
 #. settings-schema.json->char_color_customized->description
@@ -784,7 +832,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
+#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr ""
 

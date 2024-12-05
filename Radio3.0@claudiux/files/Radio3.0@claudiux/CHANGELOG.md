@@ -1,3 +1,32 @@
+### v2.3.2~20241203
+  * Redesigned context menu.
+
+### v2.3.1~20241201
+  * Adds an optional fade effect to the Album Art. See the Behavior tab of this applet settings.
+
+### v2.3.0~20241129
+  * Adds the ability to display on desktop the Album (or Song) Art.
+  * Solves the problem with pulseaudio/pipewire.
+
+### v2.2.3~20241119
+  * Fixes #6583: Remove dummy device.
+  * Updates version number.
+
+### v2.2.2~20241114
+  * Soup2/Soup3: better detection.
+
+### v2.2.1~20241109
+  * Fixes a dependency error about pulseaudio/pipewire on LM.
+
+### v2.2.0~20241107
+  * Now can display Radio name and Song title on horizontal panels.
+
+### v2.1.4~20241012
+  * Fixes an OSD error.
+
+### v2.1.3~20240913
+  * Now the "unassigned" word can be translated. See #6415.
+
 ### v2.1.2~20240731
   * Adds "Easy Effects" entry in context menu when easyeffects is present.
   * To install easyeffects (for pipewire): `apt install easyeffects calf-plugins`

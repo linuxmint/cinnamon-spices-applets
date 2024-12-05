@@ -2,28 +2,28 @@
 # Copyright (C) 2021 Free Software Foundation
 # This file is distributed under the same license as the Cinnamon package.
 #
-# Sveinn í Felli <sv1@fellsnet.is>, 2021.
+# Sveinn í Felli <sv1@fellsnet.is>,  2021, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2024-07-03 19:54+0200\n"
-"PO-Revision-Date: 2024-04-15 12:03+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2024-11-23 17:24+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: 4.8/SU_messageTray.js:1282 4.6/SU_messageTray.js:1282
 #: 6.0/SU_messageTray.js:1284 5.6/SU_messageTray.js:1282
 #: 4.2/SU_messageTray.js:1282
 msgid "Open"
-msgstr ""
+msgstr "Opna"
 
 #: 4.8/SU_messageTray.js:1289 4.6/SU_messageTray.js:1289
 #: 6.0/SU_messageTray.js:1291 5.6/SU_messageTray.js:1289
@@ -35,14 +35,13 @@ msgstr ""
 #: cs/4.4/modules/cs_desklets.py:77 cs/4.2/modules/cs_applets.py:56
 #: cs/4.2/modules/cs_desklets.py:76
 msgid "Remove"
-msgstr ""
+msgstr "Fjarlægja"
 
 #: 4.8/SU_messageTray.js:1913 4.6/SU_messageTray.js:1913
 #: 6.0/SU_messageTray.js:1915 5.6/SU_messageTray.js:1913
 #: 4.2/SU_messageTray.js:1913
-#, fuzzy
 msgid "System Information"
-msgstr "Stillingar á uppfærslu Spices-atriða"
+msgstr "Kerfisupplýsingar"
 
 #. metadata.json->name
 #: 4.8/applet.js:213 4.8/applet.js:717 4.8/applet.js:736 4.8/applet.js:1233
@@ -507,43 +506,36 @@ msgstr "Þegar þú hefur lokið við að velja, skaltu smella á Endurlesa-hnap
 #. 6.0->settings-schema.json->Actions->title
 #: 6.0/applet.js:1902 6.0/constants.js:145
 #: cs/6.0_FUTURE/modules/cs_actions.py:35
-#, fuzzy
 msgid "Actions"
-msgstr "Tilkynningar"
+msgstr "Aðgerðir"
 
 #: 6.0/constants.js:150
-#, fuzzy
 msgid "One action needs update:"
-msgstr "Uppfæra þarf eina viðbót:"
+msgstr "Uppfæra þarf eina aðgerð:"
 
 #: 6.0/constants.js:155
-#, fuzzy
 msgid "Some actions need update:"
-msgstr "Uppfæra þarf nokkrar viðbætur:"
+msgstr "Uppfæra þarf nokkrar aðgerðir:"
 
 #: 6.0/constants.js:160
-#, fuzzy
 msgid "New action available:"
-msgstr "Ný viðbót tiltæk:"
+msgstr "Ný aðgerð tiltæk:"
 
 #: 6.0/constants.js:165
-#, fuzzy
 msgid "New actions available:"
-msgstr "Nýjar viðbætur tiltækar:"
+msgstr "Nýjar aðgerðir tiltækar:"
 
 #: 6.0/constants.js:173
-#, fuzzy
 msgid "If you do not want a nemo action to be checked, uncheck its first box."
 msgstr ""
-"Ef þú vilt ekki að athugað sé með viðbót, skaltu taka merkið úr fyrri reit "
-"hennar."
+"Ef þú vilt ekki að athugað sé með nemo-aðgerð, skaltu fyrst taka merkið úr"
+" reit hennar."
 
 #: 6.0/constants.js:181
-#, fuzzy
 msgid ""
 "If you want to get the latest version of a nemo action now, check both boxes."
 msgstr ""
-"Ef þú vilt fá nýjustu útgáfu viðbótar núna, skaltu merkja í báða reitina."
+"Ef þú vilt fá nýjustu útgáfu nemo-aðgerðar núna, skaltu merkja í báða reitina."
 
 #: 3.8/applet.js:80
 msgid ""
@@ -631,100 +623,99 @@ msgstr "Endurræsa Cinnamon"
 #: cs/4.4/cinnamon-settings.py:50 cs/4.4/cinnamon-settings.py:380
 #: cs/4.4/cinnamon-settings.py:718 cs/4.2/cinnamon-settings.py:50
 #: cs/4.2/cinnamon-settings.py:379 cs/4.2/cinnamon-settings.py:717
-#, fuzzy
 msgid "System Settings"
-msgstr "Stillingar á uppfærslu Spices-atriða"
+msgstr "Kerfisstillingar"
 
 #: cs/4.6/cinnamon-settings.py:51 cs/4.0/cinnamon-settings.py:49
 #: cs/6.0_FUTURE/cinnamon-settings.py:42
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:58 cs/3.8/cinnamon-settings.py:49
 #: cs/4.4/cinnamon-settings.py:51 cs/4.2/cinnamon-settings.py:51
 msgid "Control Center"
-msgstr ""
+msgstr "Stjórnborð"
 
 #: cs/4.6/cinnamon-settings.py:66 cs/4.0/cinnamon-settings.py:64
 #: cs/6.0_FUTURE/cinnamon-settings.py:64
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:80 cs/3.8/cinnamon-settings.py:64
 #: cs/4.4/cinnamon-settings.py:66 cs/4.2/cinnamon-settings.py:66
 msgid "Appearance"
-msgstr ""
+msgstr "Útlit"
 
 #: cs/4.6/cinnamon-settings.py:67 cs/4.0/cinnamon-settings.py:65
 #: cs/6.0_FUTURE/cinnamon-settings.py:65
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:81 cs/3.8/cinnamon-settings.py:65
 #: cs/4.4/cinnamon-settings.py:67 cs/4.2/cinnamon-settings.py:67
 msgid "Preferences"
-msgstr ""
+msgstr "Kjörstillingar"
 
 #: cs/4.6/cinnamon-settings.py:68 cs/4.0/cinnamon-settings.py:66
 #: cs/6.0_FUTURE/cinnamon-settings.py:66
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:82 cs/3.8/cinnamon-settings.py:66
 #: cs/4.4/cinnamon-settings.py:68 cs/4.2/cinnamon-settings.py:68
 msgid "Hardware"
-msgstr ""
+msgstr "Vélbúnaður"
 
 #: cs/4.6/cinnamon-settings.py:69 cs/4.0/cinnamon-settings.py:67
 #: cs/6.0_FUTURE/cinnamon-settings.py:67
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:83 cs/3.8/cinnamon-settings.py:67
 #: cs/4.4/cinnamon-settings.py:69 cs/4.2/cinnamon-settings.py:69
 msgid "Administration"
-msgstr ""
+msgstr "Kerfisstjórnun"
 
 #: cs/4.6/cinnamon-settings.py:74 cs/4.0/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/3.8/cinnamon-settings.py:72
 #: cs/4.4/cinnamon-settings.py:74 cs/4.2/cinnamon-settings.py:74
 msgid "Network"
-msgstr ""
+msgstr "Netkerfi"
 
 #: cs/4.6/cinnamon-settings.py:74 cs/4.0/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings.py:72
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:88 cs/3.8/cinnamon-settings.py:72
 #: cs/4.4/cinnamon-settings.py:74 cs/4.2/cinnamon-settings.py:74
 msgid "network, wireless, wifi, ethernet, broadband, internet"
-msgstr ""
+msgstr "netvinnsla, net, þráðlaust, wifi, ethernet, breiðband, internet"
 
 #: cs/4.6/cinnamon-settings.py:75 cs/4.0/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings.py:73
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/3.8/cinnamon-settings.py:74
 #: cs/4.4/cinnamon-settings.py:75 cs/4.2/cinnamon-settings.py:76
 msgid "Color"
-msgstr ""
+msgstr "Litur"
 
 #: cs/4.6/cinnamon-settings.py:75 cs/4.0/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings.py:73
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:89 cs/3.8/cinnamon-settings.py:74
 #: cs/4.4/cinnamon-settings.py:75 cs/4.2/cinnamon-settings.py:76
 msgid "color, profile, display, printer, output"
-msgstr ""
+msgstr "litur, litasnið, skjár, prentun, skanni, úttak"
 
 #: cs/4.6/cinnamon-settings.py:76 cs/4.0/cinnamon-settings.py:75
 #: cs/6.0_FUTURE/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/3.8/cinnamon-settings.py:75
 #: cs/4.4/cinnamon-settings.py:76 cs/4.2/cinnamon-settings.py:77
 msgid "Graphics Tablet"
-msgstr ""
+msgstr "Teiknitafla"
 
 #: cs/4.6/cinnamon-settings.py:76 cs/4.0/cinnamon-settings.py:75
 #: cs/6.0_FUTURE/cinnamon-settings.py:74
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:90 cs/3.8/cinnamon-settings.py:75
 #: cs/4.4/cinnamon-settings.py:76 cs/4.2/cinnamon-settings.py:77
 msgid "wacom, digitize, tablet, graphics, calibrate, stylus"
-msgstr ""
+msgstr "wacom, stafræn, tafla, mynd, afstilling, kvörðun, teikning"
 
 #: cs/4.6/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:80
 #: cs/6.0_FUTURE/cinnamon-settings.py:79
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/3.8/cinnamon-settings.py:80
 #: cs/4.4/cinnamon-settings.py:81 cs/4.2/cinnamon-settings.py:82
 msgid "Printers"
-msgstr ""
+msgstr "Prentarar"
 
 #: cs/4.6/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:80
 #: cs/6.0_FUTURE/cinnamon-settings.py:79
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:95 cs/3.8/cinnamon-settings.py:80
 #: cs/4.4/cinnamon-settings.py:81 cs/4.2/cinnamon-settings.py:82
 msgid "printers, laser, inkjet"
-msgstr ""
+msgstr "prentarar, laser, bleksprautu"
 
 #: cs/4.6/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:83
 #: cs/4.0/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:82
@@ -735,7 +726,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:83 cs/4.2/cinnamon-settings.py:83
 #: cs/4.2/cinnamon-settings.py:84
 msgid "Firewall"
-msgstr ""
+msgstr "Eldveggur"
 
 #: cs/4.6/cinnamon-settings.py:82 cs/4.6/cinnamon-settings.py:83
 #: cs/4.0/cinnamon-settings.py:81 cs/4.0/cinnamon-settings.py:82
@@ -746,28 +737,28 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:83 cs/4.2/cinnamon-settings.py:83
 #: cs/4.2/cinnamon-settings.py:84
 msgid "firewall, block, filter, programs"
-msgstr ""
+msgstr "eldveggur, loka, síun, forrit"
 
 #: cs/4.6/cinnamon-settings.py:84 cs/4.0/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings.py:82
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/3.8/cinnamon-settings.py:83
 #: cs/4.4/cinnamon-settings.py:84 cs/4.2/cinnamon-settings.py:85
 msgid "Languages"
-msgstr ""
+msgstr "Tungumál"
 
 #: cs/4.6/cinnamon-settings.py:84 cs/4.0/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings.py:82
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:98 cs/3.8/cinnamon-settings.py:83
 #: cs/4.4/cinnamon-settings.py:84 cs/4.2/cinnamon-settings.py:85
 msgid "language, install, foreign"
-msgstr ""
+msgstr "tungumál, uppsetning, erlent"
 
 #: cs/4.6/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings.py:83
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:99 cs/3.8/cinnamon-settings.py:84
 #: cs/4.4/cinnamon-settings.py:85 cs/4.2/cinnamon-settings.py:86
 msgid "Input Method"
-msgstr ""
+msgstr "Innsláttaraðferð"
 
 #: cs/4.6/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:84
 #: cs/6.0_FUTURE/cinnamon-settings.py:83
@@ -776,6 +767,8 @@ msgstr ""
 msgid ""
 "language, install, foreign, input, method, chinese, korean, japanese, typing"
 msgstr ""
+"tungumál, uppsetning, erlend, inntak, aðferð, kínverska, kóreska, japanska, "
+"ritun"
 
 #: cs/4.6/cinnamon-settings.py:86 cs/4.6/cinnamon-settings.py:87
 #: cs/4.0/cinnamon-settings.py:85 cs/4.0/cinnamon-settings.py:86
@@ -786,7 +779,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:87 cs/4.2/cinnamon-settings.py:87
 #: cs/4.2/cinnamon-settings.py:88
 msgid "Login Window"
-msgstr ""
+msgstr "Innskráningargluggi"
 
 #: cs/4.6/cinnamon-settings.py:86 cs/4.0/cinnamon-settings.py:85
 #: cs/6.0_FUTURE/cinnamon-settings.py:84
@@ -794,20 +787,21 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:86 cs/4.2/cinnamon-settings.py:87
 msgid "login, lightdm, mdm, gdm, manager, user, password, startup, switch"
 msgstr ""
+"innskráning, lightdm, mdm, gdm, stjórnun, notandi, lykilorð, ræsing, skipta"
 
 #: cs/4.6/cinnamon-settings.py:87 cs/4.0/cinnamon-settings.py:86
 #: cs/6.0_FUTURE/cinnamon-settings.py:85
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:101 cs/3.8/cinnamon-settings.py:86
 #: cs/4.4/cinnamon-settings.py:87 cs/4.2/cinnamon-settings.py:88
 msgid "login, lightdm, manager, settings, editor"
-msgstr ""
+msgstr "innskráning, lightdm, stýring, stillingar, ritill"
 
 #: cs/4.6/cinnamon-settings.py:88 cs/4.0/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings.py:86
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:102 cs/3.8/cinnamon-settings.py:87
 #: cs/4.4/cinnamon-settings.py:88 cs/4.2/cinnamon-settings.py:89
 msgid "Driver Manager"
-msgstr ""
+msgstr "Stjórnun rekla"
 
 #: cs/4.6/cinnamon-settings.py:88 cs/4.0/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings.py:86
@@ -817,35 +811,36 @@ msgid ""
 "video, driver, wifi, card, hardware, proprietary, nvidia, radeon, nouveau, "
 "fglrx"
 msgstr ""
+"vídeó, myndmerki, rekill, wifi, þráðlaust, netkort, vélbúnaður, séreigna, "
+"nvidia, radeon, nouveau, fglrx"
 
 #: cs/4.6/cinnamon-settings.py:89 cs/4.0/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/3.8/cinnamon-settings.py:88
 #: cs/4.4/cinnamon-settings.py:89 cs/4.2/cinnamon-settings.py:90
-#, fuzzy
 msgid "Nvidia Settings"
-msgstr "Stillingar á uppfærslu Spices-atriða"
+msgstr "Stillingar Nvidia"
 
 #: cs/4.6/cinnamon-settings.py:89 cs/4.0/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings.py:87
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:103 cs/3.8/cinnamon-settings.py:88
 #: cs/4.4/cinnamon-settings.py:89 cs/4.2/cinnamon-settings.py:90
 msgid "video, driver, proprietary, nvidia, settings"
-msgstr ""
+msgstr "vídeó, myndmerki, rekill, séreigna, nvidia, stillingar"
 
 #: cs/4.6/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:89
 #: cs/6.0_FUTURE/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/3.8/cinnamon-settings.py:89
 #: cs/4.4/cinnamon-settings.py:90 cs/4.2/cinnamon-settings.py:91
 msgid "Software Sources"
-msgstr ""
+msgstr "Hugbúnaðarsöfn"
 
 #: cs/4.6/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:89
 #: cs/6.0_FUTURE/cinnamon-settings.py:88
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:104 cs/3.8/cinnamon-settings.py:89
 #: cs/4.4/cinnamon-settings.py:90 cs/4.2/cinnamon-settings.py:91
 msgid "ppa, repository, package, source, download"
-msgstr ""
+msgstr "ppa, repó, hugbúnaðarsafn, pakki, uppruni, kóði, niðurhal, sækja"
 
 #: cs/4.6/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:92
 #: cs/4.0/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:91
@@ -856,7 +851,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:92 cs/4.2/cinnamon-settings.py:92
 #: cs/4.2/cinnamon-settings.py:93
 msgid "Package Management"
-msgstr ""
+msgstr "Pakkastjórnun"
 
 #: cs/4.6/cinnamon-settings.py:91 cs/4.6/cinnamon-settings.py:92
 #: cs/4.0/cinnamon-settings.py:90 cs/4.0/cinnamon-settings.py:91
@@ -868,13 +863,14 @@ msgstr ""
 #: cs/4.2/cinnamon-settings.py:93
 msgid "update, install, repository, package, source, download"
 msgstr ""
+"uppfæra, setja upp, hugbúnaðarsafn, pakki, uppruni, kóði, niðurhal, sækja"
 
 #: cs/4.6/cinnamon-settings.py:93 cs/4.0/cinnamon-settings.py:92
 #: cs/6.0_FUTURE/cinnamon-settings.py:91
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:107 cs/3.8/cinnamon-settings.py:92
 #: cs/4.4/cinnamon-settings.py:93 cs/4.2/cinnamon-settings.py:94
 msgid "Users and Groups"
-msgstr ""
+msgstr "Notendur og hópar"
 
 #: cs/4.6/cinnamon-settings.py:93 cs/4.0/cinnamon-settings.py:92
 #: cs/6.0_FUTURE/cinnamon-settings.py:91
@@ -882,6 +878,7 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:93 cs/4.2/cinnamon-settings.py:94
 msgid "user, users, account, accounts, group, groups, password"
 msgstr ""
+"notandi, notendur, heimildir, aðgangur, aðgangar, hópur, hópar, lykilorð"
 
 #: cs/4.6/cinnamon-settings.py:94 cs/4.0/cinnamon-settings.py:93
 #: cs/6.0_FUTURE/cinnamon-settings.py:92 cs/6.0_FUTURE/cinnamon-settings.py:93
@@ -889,7 +886,7 @@ msgstr ""
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/3.8/cinnamon-settings.py:93
 #: cs/4.4/cinnamon-settings.py:94 cs/4.2/cinnamon-settings.py:95
 msgid "Bluetooth"
-msgstr ""
+msgstr "Blátönn (bluetooth)"
 
 #: cs/4.6/cinnamon-settings.py:94 cs/4.0/cinnamon-settings.py:93
 #: cs/6.0_FUTURE/cinnamon-settings.py:92 cs/6.0_FUTURE/cinnamon-settings.py:93
@@ -897,26 +894,26 @@ msgstr ""
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:109 cs/3.8/cinnamon-settings.py:93
 #: cs/4.4/cinnamon-settings.py:94 cs/4.2/cinnamon-settings.py:95
 msgid "bluetooth, dongle, transfer, mobile"
-msgstr ""
+msgstr "bluetooth, blátönn, pungur, flutningur, farsími"
 
 #: cs/4.6/cinnamon-settings.py:95 cs/4.0/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/3.8/cinnamon-settings.py:94
 #: cs/4.4/cinnamon-settings.py:95 cs/4.2/cinnamon-settings.py:96
 msgid "Manage Services and Units"
-msgstr ""
+msgstr "Sýsla með þjónustur og einingar"
 
 #: cs/4.6/cinnamon-settings.py:95 cs/4.0/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings.py:94
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:110 cs/3.8/cinnamon-settings.py:94
 #: cs/4.4/cinnamon-settings.py:95 cs/4.2/cinnamon-settings.py:96
 msgid "systemd, units, services, systemctl, init"
-msgstr ""
+msgstr "systemd, einingar, þjónustur, systemctl, init"
 
 #: cs/4.6/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.4/cinnamon-settings.py:96
 msgid "Disks"
-msgstr ""
+msgstr "Diskar"
 
 #: cs/4.6/cinnamon-settings.py:96 cs/6.0_FUTURE/cinnamon-settings.py:95
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:111 cs/4.4/cinnamon-settings.py:96
@@ -924,13 +921,15 @@ msgid ""
 "disks, manage, hardware, management, hard, hdd, pendrive, format, erase, "
 "test, create, iso, ISO, disk, image"
 msgstr ""
+"diskar, stýra, vélbúnaður, stýring, harður, hdd, minnislykill, forsníða, "
+"eyða, prófa, útbúa, iso, ISO, diskur, diskmynd"
 
 #: cs/4.6/cinnamon-settings.py:290 cs/4.0/cinnamon-settings.py:223
 #: cs/6.0_FUTURE/cinnamon-settings.py:295
 #: cs/6.0_FUTURE/cinnamon-settings_OLD.py:311 cs/3.8/cinnamon-settings.py:215
 #: cs/4.4/cinnamon-settings.py:290 cs/4.2/cinnamon-settings.py:289
 msgid "Back to all settings"
-msgstr ""
+msgstr "Til baka í allar stillingar"
 
 #: cs/4.6/cinnamon-settings.py:297 cs/4.0/cinnamon-settings.py:233
 #: cs/6.0_FUTURE/cinnamon-settings.py:302
@@ -938,14 +937,13 @@ msgstr ""
 #: cs/4.4/cinnamon-settings.py:297 cs/4.2/cinnamon-settings.py:296
 #: cs/4.2/bin/SUExtensionCore.py:370 cs/4.2/bin/SUExtensionCore.py:730
 msgid "Search"
-msgstr ""
+msgstr "Leita"
 
 #: cs/4.6/modules/cs_applets.py:14 cs/4.0/modules/cs_applets.py:13
 #: cs/6.0_FUTURE/modules/cs_applets.py:14 cs/3.8/modules/cs_applets.py:13
 #: cs/4.4/modules/cs_applets.py:14 cs/4.2/modules/cs_applets.py:13
-#, fuzzy
 msgid "Manage Cinnamon applets"
-msgstr "Opna nytsamlegar stillingar Cinnamon"
+msgstr "Sýsla með Cinnamon forritlinga"
 
 #: cs/4.6/modules/cs_applets.py:33 cs/4.0/modules/cs_applets.py:32
 #: cs/6.0_FUTURE/modules/cs_applets.py:33 cs/3.8/modules/cs_applets.py:32
@@ -953,13 +951,14 @@ msgstr "Opna nytsamlegar stillingar Cinnamon"
 msgid ""
 "You can remove specific instances in panel edit mode via the context menu."
 msgstr ""
+"Þú getur fjarlægt tiltekin tilvik í skjástikubreytingarham með "
+"samhengisvalmyndinni."
 
 #: cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
 #: cs/6.0_FUTURE/modules/cs_applets.py:35 cs/3.8/modules/cs_applets.py:34
 #: cs/4.4/modules/cs_applets.py:35 cs/4.2/modules/cs_applets.py:34
-#, fuzzy
 msgid "applet"
-msgstr "Smáforrit (applet)"
+msgstr "smáforrit"
 
 #: cs/4.6/modules/cs_applets.py:47 cs/4.6/modules/cs_desklets.py:45
 #: cs/4.6/modules/cs_extensions.py:45 cs/4.0/modules/cs_applets.py:46
@@ -973,7 +972,7 @@ msgstr "Smáforrit (applet)"
 #: cs/4.4/modules/cs_extensions.py:45 cs/4.2/modules/cs_applets.py:46
 #: cs/4.2/modules/cs_desklets.py:44 cs/4.2/modules/cs_extensions.py:44
 msgid "Manage"
-msgstr ""
+msgstr "Skipuleggja"
 
 #: cs/4.6/modules/cs_applets.py:50 cs/4.6/modules/cs_desklets.py:48
 #: cs/4.6/modules/cs_extensions.py:48 cs/4.0/modules/cs_applets.py:49
@@ -987,14 +986,13 @@ msgstr ""
 #: cs/4.4/modules/cs_extensions.py:48 cs/4.2/modules/cs_applets.py:49
 #: cs/4.2/modules/cs_desklets.py:47 cs/4.2/modules/cs_extensions.py:47
 msgid "Download"
-msgstr ""
+msgstr "Sækja"
 
 #: cs/4.6/modules/cs_applets.py:55 cs/4.0/modules/cs_applets.py:54
 #: cs/6.0_FUTURE/modules/cs_applets.py:55 cs/3.8/modules/cs_applets.py:54
 #: cs/4.4/modules/cs_applets.py:55 cs/4.2/modules/cs_applets.py:54
-#, fuzzy
 msgid "Installed applets"
-msgstr "Viðbætur (extensions)"
+msgstr "Uppsett smáforrit"
 
 #: cs/4.6/modules/cs_applets.py:56 cs/4.6/modules/cs_desklets.py:76
 #: cs/4.0/modules/cs_applets.py:55 cs/4.0/modules/cs_desklets.py:75
@@ -1004,7 +1002,7 @@ msgstr "Viðbætur (extensions)"
 #: cs/4.4/modules/cs_desklets.py:76 cs/4.2/modules/cs_applets.py:55
 #: cs/4.2/modules/cs_desklets.py:75
 msgid "Add"
-msgstr ""
+msgstr "Bæta við"
 
 #: cs/4.6/modules/cs_applets.py:58 cs/4.6/modules/cs_desklets.py:78
 #: cs/4.6/modules/cs_extensions.py:56 cs/4.0/modules/cs_applets.py:57
@@ -1019,32 +1017,31 @@ msgstr ""
 #: cs/4.2/modules/cs_desklets.py:77 cs/4.2/modules/cs_extensions.py:55
 #: cs/4.2/bin/SUExtensionCore.py:782
 msgid "Uninstall"
-msgstr ""
+msgstr "Fjarlægja"
 
 #: cs/4.6/modules/cs_applets.py:59 cs/4.0/modules/cs_applets.py:58
 #: cs/6.0_FUTURE/modules/cs_applets.py:59 cs/3.8/modules/cs_applets.py:58
 #: cs/4.4/modules/cs_applets.py:59 cs/4.2/modules/cs_applets.py:58
 msgid "Reset all"
-msgstr ""
+msgstr "Endurstilla allt"
 
 #: cs/4.6/modules/cs_applets.py:74 cs/4.0/modules/cs_applets.py:73
 #: cs/6.0_FUTURE/modules/cs_applets.py:74 cs/3.8/modules/cs_applets.py:73
 #: cs/4.4/modules/cs_applets.py:74 cs/4.2/modules/cs_applets.py:73
 msgid "Previous Panel"
-msgstr ""
+msgstr "Fyrri skjástika"
 
 #: cs/4.6/modules/cs_applets.py:78 cs/4.0/modules/cs_applets.py:77
 #: cs/6.0_FUTURE/modules/cs_applets.py:78 cs/3.8/modules/cs_applets.py:77
 #: cs/4.4/modules/cs_applets.py:78 cs/4.2/modules/cs_applets.py:77
 msgid "Next Panel"
-msgstr ""
+msgstr "Næsta skjástika"
 
 #: cs/4.6/modules/cs_desklets.py:10 cs/4.0/modules/cs_desklets.py:9
 #: cs/6.0_FUTURE/modules/cs_desklets.py:10 cs/3.8/modules/cs_desklets.py:9
 #: cs/4.4/modules/cs_desklets.py:10 cs/4.2/modules/cs_desklets.py:9
-#, fuzzy
 msgid "Manage your Cinnamon desklets"
-msgstr "Opna nytsamlegar stillingar Cinnamon"
+msgstr "Sýsla með stillingar fyrir Cinnamon skjáborðsgræjur (desklets)"
 
 #: cs/4.6/modules/cs_desklets.py:30 cs/4.0/modules/cs_desklets.py:29
 #: cs/6.0_FUTURE/modules/cs_desklets.py:30 cs/3.8/modules/cs_desklets.py:29
@@ -1053,231 +1050,223 @@ msgid ""
 "You can remove specific instances from the desktop via that desklet's "
 "context menu"
 msgstr ""
+"Þú getur fjarlægt tiltekin tilvik af skjáborðinu með samhengisvalmynd "
+"skjáborðsgræjunnar"
 
 #: cs/4.6/modules/cs_desklets.py:31 cs/4.0/modules/cs_desklets.py:30
 #: cs/6.0_FUTURE/modules/cs_desklets.py:31 cs/3.8/modules/cs_desklets.py:30
 #: cs/4.4/modules/cs_desklets.py:31 cs/4.2/modules/cs_desklets.py:30
 msgid "desklet, desktop, slideshow"
-msgstr ""
+msgstr "skjáborðsgræja, skjáborð, skyggnusýning"
 
 #: cs/4.6/modules/cs_desklets.py:51 cs/4.0/modules/cs_desklets.py:50
 #: cs/6.0_FUTURE/modules/cs_desklets.py:51 cs/3.8/modules/cs_desklets.py:50
 #: cs/4.4/modules/cs_desklets.py:51 cs/4.2/modules/cs_desklets.py:50
-#, fuzzy
 msgid "General Settings"
-msgstr "Almennt"
+msgstr "Almennar stillingar"
 
 #: cs/4.6/modules/cs_desklets.py:53 cs/4.0/modules/cs_desklets.py:52
 #: cs/6.0_FUTURE/modules/cs_desklets.py:53 cs/3.8/modules/cs_desklets.py:52
 #: cs/4.4/modules/cs_desklets.py:53 cs/4.2/modules/cs_desklets.py:52
-#, fuzzy
 msgid "General Desklets Settings"
-msgstr "Almennt"
+msgstr "Almennar stillingar skjáborðsgræja"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
-#, fuzzy
 msgid "No decoration"
-msgstr "Tilkynningar"
+msgstr "Engin gluggaskreyting"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
 msgid "Border only"
-msgstr ""
+msgstr "Aðeins  jaðar"
 
 #: cs/4.6/modules/cs_desklets.py:55 cs/4.0/modules/cs_desklets.py:54
 #: cs/6.0_FUTURE/modules/cs_desklets.py:55 cs/3.8/modules/cs_desklets.py:54
 #: cs/4.4/modules/cs_desklets.py:55 cs/4.2/modules/cs_desklets.py:54
 msgid "Border and header"
-msgstr ""
+msgstr "Jaðar og  haus"
 
 #: cs/4.6/modules/cs_desklets.py:57 cs/4.0/modules/cs_desklets.py:56
 #: cs/6.0_FUTURE/modules/cs_desklets.py:57 cs/3.8/modules/cs_desklets.py:56
 #: cs/4.4/modules/cs_desklets.py:57 cs/4.2/modules/cs_desklets.py:56
 msgid "Decoration of desklets"
-msgstr ""
+msgstr "Skreytingar skjáborðsgræja"
 
 #: cs/4.6/modules/cs_desklets.py:60 cs/4.0/modules/cs_desklets.py:59
 #: cs/6.0_FUTURE/modules/cs_desklets.py:60 cs/3.8/modules/cs_desklets.py:59
 #: cs/4.4/modules/cs_desklets.py:60 cs/4.2/modules/cs_desklets.py:59
 msgid "Note: Some desklets require the border/header to be always present"
 msgstr ""
+"ATH: Sumar skjáborðsgræjur krefjast þess að jaðar/titill sé alltaf til staðar"
 
 #: cs/4.6/modules/cs_desklets.py:64 cs/4.0/modules/cs_desklets.py:63
 #: cs/6.0_FUTURE/modules/cs_desklets.py:64 cs/3.8/modules/cs_desklets.py:63
 #: cs/4.4/modules/cs_desklets.py:64 cs/4.2/modules/cs_desklets.py:63
 msgid "Such requirements override the settings selected here"
-msgstr ""
+msgstr "Slíkar kröfur gilda frekar en stillingar sem valdar eru hér"
 
 #: cs/4.6/modules/cs_desklets.py:69 cs/4.0/modules/cs_desklets.py:68
 #: cs/6.0_FUTURE/modules/cs_desklets.py:69 cs/3.8/modules/cs_desklets.py:68
 #: cs/4.4/modules/cs_desklets.py:69 cs/4.2/modules/cs_desklets.py:68
 msgid "Snap desklets to grid"
-msgstr ""
+msgstr "Jafna skjáborðsgræjur við hnitanet"
 
 #: cs/4.6/modules/cs_desklets.py:70 cs/4.0/modules/cs_desklets.py:69
 #: cs/6.0_FUTURE/modules/cs_desklets.py:70 cs/3.8/modules/cs_desklets.py:69
 #: cs/4.4/modules/cs_desklets.py:70 cs/4.2/modules/cs_desklets.py:69
 msgid "Width of desklet snap grid"
-msgstr ""
+msgstr "Breidd festinets skjáborðsgræja"
 
 #: cs/4.6/modules/cs_desklets.py:75 cs/4.0/modules/cs_desklets.py:74
 #: cs/6.0_FUTURE/modules/cs_desklets.py:75 cs/3.8/modules/cs_desklets.py:74
 #: cs/4.4/modules/cs_desklets.py:75 cs/4.2/modules/cs_desklets.py:74
-#, fuzzy
 msgid "Installed desklets"
-msgstr "Viðbætur (extensions)"
+msgstr "Uppsettar skjáborðsgræjur"
 
 #: cs/4.6/modules/cs_desklets.py:79 cs/4.0/modules/cs_desklets.py:78
 #: cs/6.0_FUTURE/modules/cs_actions.py:61
 #: cs/6.0_FUTURE/modules/cs_desklets.py:79 cs/3.8/modules/cs_desklets.py:78
 #: cs/4.4/modules/cs_desklets.py:79 cs/4.2/modules/cs_desklets.py:78
 msgid "Remove all"
-msgstr ""
+msgstr "Fjarlægja allt"
 
 #: cs/4.6/modules/cs_extensions.py:12 cs/4.0/modules/cs_extensions.py:11
 #: cs/6.0_FUTURE/modules/cs_extensions.py:12 cs/3.8/modules/cs_extensions.py:11
 #: cs/4.4/modules/cs_extensions.py:12 cs/4.2/modules/cs_extensions.py:11
-#, fuzzy
 msgid "Manage your Cinnamon extensions"
-msgstr "Opna nytsamlegar stillingar Cinnamon"
+msgstr "Sýsla með stillingar fyrir Cinnamon viðbætur"
 
 #: cs/4.6/modules/cs_extensions.py:31 cs/4.0/modules/cs_extensions.py:30
 #: cs/6.0_FUTURE/modules/cs_extensions.py:31 cs/3.8/modules/cs_extensions.py:30
 #: cs/4.4/modules/cs_extensions.py:31 cs/4.2/modules/cs_extensions.py:30
-#, fuzzy
 msgid "extension, addon"
-msgstr "Viðbót (extension)"
+msgstr "viðbót, hjálparforrit"
 
 #: cs/4.6/modules/cs_extensions.py:53 cs/4.0/modules/cs_extensions.py:52
 #: cs/6.0_FUTURE/modules/cs_extensions.py:53 cs/3.8/modules/cs_extensions.py:52
 #: cs/4.4/modules/cs_extensions.py:53 cs/4.2/modules/cs_extensions.py:52
-#, fuzzy
 msgid "Installed extensions"
-msgstr "Viðbætur (extensions)"
+msgstr "Uppsettar viðbætur"
 
 #: cs/4.6/modules/cs_extensions.py:54 cs/4.0/modules/cs_extensions.py:53
 #: cs/6.0_FUTURE/modules/cs_actions.py:57
 #: cs/6.0_FUTURE/modules/cs_extensions.py:54 cs/3.8/modules/cs_extensions.py:53
 #: cs/4.4/modules/cs_extensions.py:54 cs/4.2/modules/cs_extensions.py:53
 msgid "Enable"
-msgstr ""
+msgstr "Virkja"
 
 #: cs/4.6/modules/cs_extensions.py:55 cs/4.0/modules/cs_extensions.py:54
 #: cs/6.0_FUTURE/modules/cs_actions.py:58
 #: cs/6.0_FUTURE/modules/cs_extensions.py:55 cs/3.8/modules/cs_extensions.py:54
 #: cs/4.4/modules/cs_extensions.py:55 cs/4.2/modules/cs_extensions.py:54
 msgid "Disable"
-msgstr ""
+msgstr "Gera óvirkt"
 
 #: cs/4.6/modules/cs_extensions.py:57 cs/4.0/modules/cs_extensions.py:56
 #: cs/6.0_FUTURE/modules/cs_extensions.py:57 cs/3.8/modules/cs_extensions.py:56
 #: cs/4.4/modules/cs_extensions.py:57 cs/4.2/modules/cs_extensions.py:56
 msgid "Disable all"
-msgstr ""
+msgstr "Gera allt óvirkt"
 
 #: cs/4.6/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:28
 #: cs/6.0_FUTURE/modules/cs_themes.py:36 cs/3.8/modules/cs_themes.py:15
 #: cs/4.4/modules/cs_themes.py:34 cs/4.2/modules/cs_themes.py:30
 msgid "Manage themes to change how your desktop looks"
-msgstr ""
+msgstr "Sýsla með þemu til að breyta útliti skjáborðsins"
 
 #: cs/4.6/modules/cs_themes.py:41 cs/4.0/modules/cs_themes.py:33
 #: cs/6.0_FUTURE/modules/cs_themes.py:41 cs/3.8/modules/cs_themes.py:20
 #: cs/4.4/modules/cs_themes.py:39 cs/4.2/modules/cs_themes.py:35
 msgid "themes, style"
-msgstr ""
+msgstr "þemu, stíll"
 
 #: cs/4.6/modules/cs_themes.py:79 cs/4.0/modules/cs_themes.py:63
 #: cs/6.0_FUTURE/modules/cs_themes.py:79 cs/3.8/modules/cs_themes.py:50
 #: cs/4.4/modules/cs_themes.py:76 cs/4.2/modules/cs_themes.py:65
 msgid "Window borders"
-msgstr ""
+msgstr "Gluggajaðrar"
 
 #: cs/4.6/modules/cs_themes.py:82 cs/4.0/modules/cs_themes.py:66
 #: cs/6.0_FUTURE/modules/cs_themes.py:82 cs/3.8/modules/cs_themes.py:53
 #: cs/4.4/modules/cs_themes.py:79 cs/4.2/modules/cs_themes.py:68
 msgid "Icons"
-msgstr ""
+msgstr "Táknmyndir"
 
 #: cs/4.6/modules/cs_themes.py:85 cs/4.0/modules/cs_themes.py:69
 #: cs/6.0_FUTURE/modules/cs_themes.py:85 cs/3.8/modules/cs_themes.py:56
 #: cs/4.4/modules/cs_themes.py:82 cs/4.2/modules/cs_themes.py:71
 msgid "Controls"
-msgstr ""
+msgstr "Stýringar"
 
 #: cs/4.6/modules/cs_themes.py:88 cs/4.0/modules/cs_themes.py:72
 #: cs/6.0_FUTURE/modules/cs_themes.py:88 cs/3.8/modules/cs_themes.py:59
 #: cs/4.4/modules/cs_themes.py:85 cs/4.2/modules/cs_themes.py:74
 msgid "Mouse Pointer"
-msgstr ""
+msgstr "Músarbendill"
 
 #: cs/4.6/modules/cs_themes.py:91 cs/4.0/modules/cs_themes.py:75
 #: cs/6.0_FUTURE/modules/cs_themes.py:91 cs/3.8/modules/cs_themes.py:62
 #: cs/4.4/modules/cs_themes.py:88 cs/4.2/modules/cs_themes.py:77
-#, fuzzy
 msgid "Desktop"
-msgstr "Skjágræja (desklet)"
+msgstr "Skjáborð"
 
 #: cs/4.6/modules/cs_themes.py:95 cs/4.0/modules/cs_themes.py:79
 #: cs/6.0_FUTURE/modules/cs_themes.py:95 cs/3.8/modules/cs_themes.py:66
 #: cs/4.4/modules/cs_themes.py:92 cs/4.2/modules/cs_themes.py:81
 msgid "Add/Remove"
-msgstr ""
+msgstr "Bæta við/Fjarlægja"
 
 #: cs/4.6/modules/cs_themes.py:98 cs/4.0/modules/cs_themes.py:82
 #: cs/6.0_FUTURE/modules/cs_themes.py:98 cs/3.8/modules/cs_themes.py:69
 #: cs/4.4/modules/cs_themes.py:95 cs/4.2/modules/cs_themes.py:84
-#, fuzzy
 msgid "Settings"
-msgstr "Stillingar á uppfærslu Spices-atriða"
+msgstr "Stillingar"
 
 #: cs/4.6/modules/cs_themes.py:100 cs/4.0/modules/cs_themes.py:84
 #: cs/6.0_FUTURE/modules/cs_themes.py:100 cs/3.8/modules/cs_themes.py:71
 #: cs/4.4/modules/cs_themes.py:97 cs/4.2/modules/cs_themes.py:86
 msgid "Miscellaneous options"
-msgstr ""
+msgstr "Ýmsir valkostir"
 
 #: cs/4.6/modules/cs_themes.py:102 cs/4.0/modules/cs_themes.py:86
 #: cs/6.0_FUTURE/modules/cs_themes.py:102 cs/3.8/modules/cs_themes.py:73
 #: cs/4.4/modules/cs_themes.py:99 cs/4.2/modules/cs_themes.py:88
-#, fuzzy
 msgid "Show icons in menus"
-msgstr "Með aðgerðahnöppum"
+msgstr "Sýna tákn í valmyndum"
 
 #: cs/4.6/modules/cs_themes.py:105 cs/4.0/modules/cs_themes.py:89
 #: cs/6.0_FUTURE/modules/cs_themes.py:105 cs/3.8/modules/cs_themes.py:76
 #: cs/4.4/modules/cs_themes.py:102 cs/4.2/modules/cs_themes.py:91
-#, fuzzy
 msgid "Show icons on buttons"
-msgstr "Með aðgerðahnöppum"
+msgstr "Sýnir táknmyndir á hnöppum"
 
 #: cs/4.6/modules/cs_themes.py:114 cs/6.0_FUTURE/modules/cs_themes.py:114
 #: cs/4.4/modules/cs_themes.py:105 cs/4.2/modules/cs_themes.py:94
 msgid "Scrollbar behavior"
-msgstr ""
+msgstr "Hegðun skrunstiku"
 
 #: cs/4.6/modules/cs_themes.py:119 cs/6.0_FUTURE/modules/cs_themes.py:119
 #: cs/4.4/modules/cs_themes.py:110 cs/4.2/modules/cs_themes.py:99
 msgid "Jump to position when clicking in a trough"
-msgstr ""
+msgstr "Fara á staðsetningu þegar smellt er á stað í skrunstiku"
 
 #: cs/4.6/modules/cs_themes.py:122 cs/6.0_FUTURE/modules/cs_themes.py:122
 #: cs/4.4/modules/cs_themes.py:113 cs/4.2/modules/cs_themes.py:102
 msgid "Use overlay scroll bars"
-msgstr ""
+msgstr "Nota skrunstikur sem yfirlag"
 
 #: cs/4.6/modules/cs_themes.py:127 cs/6.0_FUTURE/modules/cs_themes.py:127
 #: cs/4.4/modules/cs_themes.py:118 cs/4.2/modules/cs_themes.py:107
 msgid "Override the current theme's scrollbar width"
-msgstr ""
+msgstr "Skrifa yfir breidd skrunstika í fyrirliggjandi þema"
 
 #: cs/4.6/modules/cs_themes.py:131 cs/6.0_FUTURE/modules/cs_themes.py:131
 #: cs/4.4/modules/cs_themes.py:122 cs/4.2/modules/cs_themes.py:111
 msgid "Scrollbar width"
-msgstr ""
+msgstr "Breidd skrunsláa"
 
 #: cs/4.6/modules/cs_themes.py:146 cs/6.0_FUTURE/modules/cs_themes.py:146
 #: cs/4.4/modules/cs_themes.py:137 cs/4.2/modules/cs_themes.py:126
@@ -1285,6 +1274,8 @@ msgid ""
 "Changes will take effect the next time you log in and may not affect all "
 "applications."
 msgstr ""
+"Breytingar taka gildi við næstu innskráningu og gætu haft áhrif á ekki öll "
+"forrit."
 
 #: cs/4.6/bin/SUSpices.py:136 cs/4.0/bin/SUSpices.py:132
 #: cs/6.0_FUTURE/bin/SUSpices.py:136 cs/6.0_FUTURE/bin/Spices.py:705
@@ -1295,6 +1286,8 @@ msgid ""
 "An error occurred during the installation of %s. Please report this incident "
 "to its developer."
 msgstr ""
+"Villa átti sér stað við uppsetningu á %s. Endilega tilkynntu þetta atvik til "
+"forritanna."
 
 #. 4.8->settings-schema.json->section_general4->title
 #. 4.6->settings-schema.json->section_general4->title
@@ -1308,78 +1301,76 @@ msgstr "Birting"
 #: cs/4.0/cinnamon-settings.py:73 cs/3.8/cinnamon-settings.py:73
 #: cs/4.2/cinnamon-settings.py:75
 msgid "display, screen, monitor, layout, resolution, dual, lcd"
-msgstr ""
+msgstr "birting, skjár, framsetning, upplausn, margir skjáir, lcd, plasma"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:11
-#, fuzzy
 msgid "Manage your actions"
-msgstr "Opna nytsamlegar stillingar Cinnamon"
+msgstr "Sýslaðu með aðgerðirnar þínar"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:33
-#, fuzzy
 msgid "action"
-msgstr "Tilkynningar"
+msgstr "aðgerð"
 
 #: cs/6.0_FUTURE/modules/cs_actions.py:59
-#, fuzzy
 msgid "Installed actions"
-msgstr "Viðbætur (extensions)"
+msgstr "Uppsettar aðgerðir"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:174
 msgid "Checking dependencies"
-msgstr ""
+msgstr "Athuga kerfiskröfur"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:175
 #, python-format
 msgid "Please install: %s"
-msgstr ""
+msgstr "Endilega settu upp: %s"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:374
 msgid "_Cancel"
-msgstr ""
+msgstr "_Hætta við"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:375
 msgid "_Open"
-msgstr ""
+msgstr "_Opna"
 
 #: cs/6.0_FUTURE/bin/SettingsWidgets.py:388
 msgid "Sound files"
-msgstr ""
+msgstr "Hljóðskrár"
 
 #: cs/6.0_FUTURE/bin/Spices.py:328
 msgid "Downloading images:"
-msgstr ""
+msgstr "Sæki myndir:"
 
 #: cs/6.0_FUTURE/bin/Spices.py:402
 msgid ""
 "An error occurred while trying to access the server. Please try again in a "
 "little while."
-msgstr ""
+msgstr "Villa kom upp við að tengjast þjóninum. Reyndu aftur eftir smá stund."
 
 #: cs/6.0_FUTURE/bin/Spices.py:586
 msgid ""
 "Something went wrong with the spices download. Please try refreshing the "
 "list again."
 msgstr ""
+"Eitthvað fór úrskeiðis við að ná í smáforritin. Prófaðu að endurlesa listann."
 
 #: cs/6.0_FUTURE/bin/Spices.py:601
 msgid "Refreshing the cache"
-msgstr ""
+msgstr "Hressi skyndiminnið"
 
 #: cs/6.0_FUTURE/bin/Spices.py:681
-#, fuzzy, python-format
+#, python-format
 msgid "Installing %s"
-msgstr "Viðbætur (extensions)"
+msgstr "Set upp %s"
 
 #: cs/6.0_FUTURE/bin/Spices.py:786
 #, python-format
 msgid "Uninstalling %s"
-msgstr ""
+msgstr "Fjarlægi %s"
 
 #: cs/6.0_FUTURE/bin/Spices.py:820
 #, python-format
 msgid "A problem occurred while removing %s."
-msgstr ""
+msgstr "Villa kom upp við að fjarlægja %s."
 
 #: cs/6.0_FUTURE/bin/Spices.py:842
 #, python-format
@@ -1388,30 +1379,36 @@ msgid ""
 "\n"
 "Details:  %s"
 msgstr ""
+"\n"
+"\n"
+"Nánar:  %s"
 
 #: cs/4.2/bin/SUExtensionCore.py:247
 msgid "This is a system applet. It cannot be removed."
 msgstr ""
+"Þetta er innbyggt smáforrit fyrir kerfið, sem ekki er hægt að fjarlægja."
 
 #: cs/4.2/bin/SUExtensionCore.py:249
 msgid "This is a system desklet. It cannot be removed."
 msgstr ""
+"Þetta er innbyggð skjáborðsgræja fyrir kerfið, sem ekki er hægt að fjarlægja."
 
 #: cs/4.2/bin/SUExtensionCore.py:251
 msgid "This is a system extension. It cannot be removed."
 msgstr ""
+"Þetta er innbyggð forritsviðbót fyrir kerfið, sem ekki er hægt að fjarlægja."
 
 #: cs/4.2/bin/SUExtensionCore.py:302
 msgid "This applet is currently enabled"
-msgstr ""
+msgstr "Þetta smáforrit er virkt"
 
 #: cs/4.2/bin/SUExtensionCore.py:304
 msgid "This desklet is currently enabled"
-msgstr ""
+msgstr "Þessi skjáborðsgræja er virk"
 
 #: cs/4.2/bin/SUExtensionCore.py:306
 msgid "This extension is currently enabled"
-msgstr ""
+msgstr "Þessi forritsviðbót er virk"
 
 #: cs/4.2/bin/SUExtensionCore.py:345
 msgid ""
@@ -1419,6 +1416,9 @@ msgid ""
 "crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Þetta smáforrit inniheldur aðgerðarköll sem gætu valdið því að Cinnamon "
+"myndi hrynja eða frjósa. Ef þú verður var við hrun eða frost, prófaðu að "
+"fjarlægja það."
 
 #: cs/4.2/bin/SUExtensionCore.py:347
 msgid ""
@@ -1426,6 +1426,9 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Þessi skjáborðsgræja inniheldur aðgerðarköll sem gætu valdið því að Cinnamon "
+"myndi hrynja eða frjósa. Ef þú verður var við hrun eða frost, prófaðu að "
+"fjarlægja hana."
 
 #: cs/4.2/bin/SUExtensionCore.py:349
 msgid ""
@@ -1433,10 +1436,13 @@ msgid ""
 "to crash or freeze. If you are experiencing crashes or freezing, please try "
 "removing it."
 msgstr ""
+"Þessi viðbót inniheldur aðgerðarköll sem gætu valdið því að Cinnamon myndi "
+"hrynja eða frjósa. Ef þú verður var við hrun eða frost, prófaðu að fjarlægja "
+"hana."
 
 #: cs/4.2/bin/SUExtensionCore.py:458
 msgid "About"
-msgstr ""
+msgstr "Um hugbúnaðinn"
 
 #: cs/4.2/bin/SUExtensionCore.py:514
 #, python-format
@@ -1444,34 +1450,43 @@ msgid ""
 "Extension %s is not compatible with current version of cinnamon. Using it "
 "may break your system. Load anyway?"
 msgstr ""
+"%s viðbótin er ekki samhæfð við þessa útgáfu Cinnamon. Ef þú notar hana "
+"geturðu skemmt kerfið. Hlaða samt inn?"
 
 #: cs/4.2/bin/SUExtensionCore.py:528
 msgid ""
 "There are multiple instances enabled. Are you sure you want to remove all of "
 "them?"
 msgstr ""
+"Það eru mörg tilvik af þessu virk. Eru viss um að þú viljir fjarlægja þau "
+"öll?"
 
 #: cs/4.2/bin/SUExtensionCore.py:536 cs/4.2/bin/SUExtensionCore.py:885
 #, python-format
 msgid "Are you sure you want to completely remove %s?"
-msgstr ""
+msgstr "Ertu viss um að þú viljir endanlega fjarlægja %s?"
 
 #: cs/4.2/bin/SUExtensionCore.py:544
 msgid ""
 "This will restore the default set of enabled applets. Are you sure you want "
 "to do this?"
 msgstr ""
+"Þetta mun endurheimta sjálfgefið sett af virkum smáforritum. Ertu viss um að "
+"þú viljir gera þetta?"
 
 #: cs/4.2/bin/SUExtensionCore.py:546
 msgid ""
 "This will restore the default set of enabled desklets. Are you sure you want "
 "to do this?"
 msgstr ""
+"Þetta mun endurheimta sjálfgefið sett af virkum skjáborðsgræjum. Ertu viss "
+"um að þú viljir gera þetta?"
 
 #: cs/4.2/bin/SUExtensionCore.py:548
 msgid ""
 "This will disable all active extensions. Are you sure you want to do this?"
 msgstr ""
+"Þetta mun gera allar viðbætur óvirkar. Ertu viss um að þú viljir gera þetta?"
 
 #: cs/4.2/bin/SUExtensionCore.py:581
 #, python-format
@@ -1479,74 +1494,71 @@ msgid ""
 "Something went wrong while loading %s. Please make sure you are using the "
 "latest version, and then report the issue to its developer."
 msgstr ""
+"Eitthvað mistókst þegar %s var hlaðið inn. Gakktu úr skugga um að þú sért að "
+"nota nýjustu útgáfuna, og endilega tilkynntu þetta atvik til forritanna."
 
 #: cs/4.2/bin/SUExtensionCore.py:656
 msgid "Install"
-msgstr ""
+msgstr "Setja upp"
 
 #: cs/4.2/bin/SUExtensionCore.py:662
-#, fuzzy
 msgid "Update"
-msgstr "Uppfærsla Spices-atriða"
+msgstr "Uppfæra"
 
 #: cs/4.2/bin/SUExtensionCore.py:665 cs/4.2/bin/SUExtensionCore.py:722
-#, fuzzy
 msgid "Installed"
-msgstr "Viðbætur (extensions)"
+msgstr "Uppsett"
 
 #: cs/4.2/bin/SUExtensionCore.py:709
 msgid "Sort by"
-msgstr ""
+msgstr "Raða eftir"
 
 #: cs/4.2/bin/SUExtensionCore.py:719
 msgid "Name"
-msgstr ""
+msgstr "Heiti"
 
 #: cs/4.2/bin/SUExtensionCore.py:720
 msgid "Popularity"
-msgstr ""
+msgstr "Vinsældum"
 
 #: cs/4.2/bin/SUExtensionCore.py:721
 msgid "Date"
-msgstr ""
+msgstr "Dagsteningu"
 
 #: cs/4.2/bin/SUExtensionCore.py:723
 msgid "Upgradable"
-msgstr ""
+msgstr "Uppfæranlegt"
 
 #: cs/4.2/bin/SUExtensionCore.py:775
 msgid "More info"
-msgstr ""
+msgstr "Nánari upplýsingar"
 
 #: cs/4.2/bin/SUExtensionCore.py:915
-#, fuzzy
 msgid "Update all"
-msgstr "Uppfæra þau öll núna!"
+msgstr "Uppfæra allt"
 
 #: cs/4.2/bin/SUExtensionCore.py:915
-#, fuzzy, python-format
+#, python-format
 msgid "%d update available"
 msgid_plural "%d updates available"
-msgstr[0] "Nýtt þema tiltækt:"
-msgstr[1] "Nýtt þema tiltækt:"
+msgstr[0] "%d uppfærsla tiltæk"
+msgstr[1] "%d uppfærslur tiltækar"
 
 #: cs/4.2/bin/SUExtensionCore.py:917
-#, fuzzy
 msgid "No updates available"
-msgstr "Ný þemu tiltæk:"
+msgstr "Engar uppfærslur tiltækar"
 
 #: cs/4.2/bin/SUExtensionCore.py:934
 msgid "Your cache is out of date. Would you like to update it now?"
-msgstr ""
+msgstr "Skyndiminnið þitt er úrelt. Viltu uppfæra það núna?"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Warns you when installed Spices (actions, applets, desklets, extensions, "
 "themes) require an update or new Spices are available."
 msgstr ""
-"Aðvarar þegar uppsett Spices-atriði (smáforrit, viðbætur, skjágræjur, þemu) "
-"krefjast uppfærslu eða þegar ný atriði eru tiltæk."
+"Aðvarar þegar uppsett Spices-atriði (aðgerðir, smáforrit, viðbætur,"
+" skjágræjur, þemu) krefjast uppfærslu eða þegar ný atriði eru tiltæk."
 
 #. 4.8->settings-schema.json->section_applets1->title
 #. 4.8->settings-schema.json->section_desklets1->title
@@ -1649,7 +1661,7 @@ msgstr "Athugaðu reglulega hvort smáforritin þín séu af nýjustu gerð"
 #. 4.2->settings-schema.json->check_applets->tooltip
 msgid "If applets updates do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhyggjur af uppfærslum smáforrita, skaltu taka hakið úr "
+"Ef þú hefur ekki áhyggjur af uppfærslum smáforrita, skaltu taka merkið úr "
 "þessum reit."
 
 #. 4.8->settings-schema.json->check_new_applets->description
@@ -1671,7 +1683,7 @@ msgstr "Athugaðu reglulega hvort nýjar útgáfur smáforrita séu tiltækar"
 #. 4.2->settings-schema.json->check_new_applets->tooltip
 msgid "If new applets do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhuga á nýjum smáforritum, skaltu taka hakið úr þessum reit."
+"Ef þú hefur ekki áhuga á nýjum smáforritum, skaltu taka merkið úr þessum reit."
 
 #. 4.8->settings-schema.json->unprotected_applets->description
 #. 4.6->settings-schema.json->unprotected_applets->description
@@ -1777,7 +1789,7 @@ msgstr "Athugaðu reglulega hvort skjágræjurnar þínar séu af nýjustu gerð
 #. 4.2->settings-schema.json->check_desklets->tooltip
 msgid "If desklets updates do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhyggjur af uppfærslum skjágræja, skaltu taka hakið úr "
+"Ef þú hefur ekki áhyggjur af uppfærslum skjágræja, skaltu taka merkið úr "
 "þessum reit."
 
 #. 4.8->settings-schema.json->check_new_desklets->description
@@ -1799,7 +1811,7 @@ msgstr "Athugaðu reglulega hvort nýjar útgáfur skjágræja séu tiltækar"
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
 msgid "If new desklets do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhuga á nýjum skjágræjum, skaltu taka hakið úr þessum reit."
+"Ef þú hefur ekki áhuga á nýjum skjágræjum, skaltu taka merkið úr þessum reit."
 
 #. 4.8->settings-schema.json->unprotected_desklets->description
 #. 4.6->settings-schema.json->unprotected_desklets->description
@@ -1849,7 +1861,7 @@ msgstr "Athugaðu reglulega hvort viðbæturnar þínar séu af nýjustu gerð"
 #. 4.2->settings-schema.json->check_extensions->tooltip
 msgid "If extensions updates do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhyggjur af uppfærslum viðbóta, skaltu taka hakið úr þessum "
+"Ef þú hefur ekki áhyggjur af uppfærslum viðbóta, skaltu taka merkið úr þessum "
 "reit."
 
 #. 4.8->settings-schema.json->check_new_extensions->description
@@ -1871,7 +1883,7 @@ msgstr "Athugaðu reglulega hvort nýjar útgáfur viðbóta séu tiltækar"
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
 msgid "If new extensions do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhuga á nýjum viðbótum, skaltu taka hakið úr þessum reit."
+"Ef þú hefur ekki áhuga á nýjum viðbótum, skaltu taka merkið úr þessum reit."
 
 #. 4.8->settings-schema.json->unprotected_extensions->description
 #. 4.6->settings-schema.json->unprotected_extensions->description
@@ -1921,7 +1933,7 @@ msgstr "Athugaðu reglulega hvort þemurnar þínar séu af nýjustu gerð"
 #. 4.2->settings-schema.json->check_themes->tooltip
 msgid "If themes updates do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhyggjur af uppfærslum á þemum, skaltu taka hakið úr þessum "
+"Ef þú hefur ekki áhyggjur af uppfærslum á þemum, skaltu taka merkið úr þessum "
 "reit."
 
 #. 4.8->settings-schema.json->check_new_themes->description
@@ -1943,7 +1955,7 @@ msgstr "Athugaðu reglulega hvort nýjar útgáfur á þemum séu tiltækar"
 #. 4.2->settings-schema.json->check_new_themes->tooltip
 msgid "If new themes do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhuga á nýjum þemum, skaltu taka hakið úr þessum reit."
+"Ef þú hefur ekki áhuga á nýjum þemum, skaltu taka merkið úr þessum reit."
 
 #. 4.8->settings-schema.json->unprotected_themes->description
 #. 4.6->settings-schema.json->unprotected_themes->description
@@ -2273,48 +2285,41 @@ msgstr ""
 "rúmast á?"
 
 #. 6.0->settings-schema.json->check_actions->description
-#, fuzzy
 msgid "Check regularly whether your nemo actions are up to date"
-msgstr "Athugaðu reglulega hvort viðbæturnar þínar séu af nýjustu gerð"
+msgstr "Athugaðu reglulega hvort nemo-aðgerðirnar þínar séu af nýjustu gerð"
 
 #. 6.0->settings-schema.json->check_actions->tooltip
-#, fuzzy
 msgid "If nemo actions updates do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhyggjur af uppfærslum viðbóta, skaltu taka hakið úr þessum "
+"Ef þú hefur ekki áhyggjur af uppfærslum nemo-aðgerða, skaltu taka merkið úr"
+" þessum "
 "reit."
 
 #. 6.0->settings-schema.json->check_new_actions->description
-#, fuzzy
 msgid "Check regularly whether new nemo actions are available"
-msgstr "Athugaðu reglulega hvort nýjar útgáfur viðbóta séu tiltækar"
+msgstr "Athugaðu reglulega hvort nýjar útgáfur nemo-aðgerða séu tiltækar"
 
 #. 6.0->settings-schema.json->check_new_actions->tooltip
-#, fuzzy
 msgid "If new nemo actions do not concern you, uncheck this box."
 msgstr ""
-"Ef þú hefur ekki áhuga á nýjum viðbótum, skaltu taka hakið úr þessum reit."
+"Ef þú hefur ekki áhuga á nýjum nemo-aðgerðum, skaltu taka merkið úr þessum"
+" reit."
 
 #. 6.0->settings-schema.json->unprotected_actions->description
-#, fuzzy
 msgid "Update these nemo actions:"
-msgstr "Uppfæra þessar viðbætur:"
+msgstr "Uppfæra þessar nemo-aðgerðir:"
 
 #. 6.0->settings-schema.json->unprotected_actions->columns->title
-#, fuzzy
 msgid "Your nemo actions"
-msgstr "Viðbæturnar þínar"
+msgstr "Nemo-aðgerðirnar þínar"
 
 #. 6.0->settings-schema.json->btn_cs_actions->description
-#, fuzzy
 msgid "Open Cinnamon Settings to manage all the nemo actions"
-msgstr ""
-"Opna stillingar fyrir Cinnamon til að sýsla með allar viðbætur (extensions)"
+msgstr "Opna stillingar fyrir Cinnamon til að sýsla með allar nemo-aðgerðir"
 
 #. 6.0->settings-schema.json->processing_color->description
-#, fuzzy
 msgid "The icon color while SpicesUpdate is processing"
-msgstr "Litur táknmyndar þegar uppfærsla Spices-atriða er nauðsynleg"
+msgstr "Litur táknmyndar þegar uppfærsla Spices-atriða er í gangi"
 
 #. 3.8->settings-schema.json->section_general3->title
 #. 4.2->settings-schema.json->section_general4->title

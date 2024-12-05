@@ -8,6 +8,8 @@ This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound a
 
 **It can display icons indicating that the microphone is muted or activated.**
 
+**It avoids loud cracking sound at shutdown.**
+
 **Sound volume:**
 
   * **The volume step can be redefined** (from 1% to 10%).
@@ -32,7 +34,7 @@ From 131 to 150%: red icon (by default).
 
 **You can redefine multimedia key bindings.**
 
-Successfully tested on Cinnamon versions 2.8 to 6.2 (Linux Mint 17.3 to 22). Does not work on Cinnamon prior to version 2.8 (Linux Mint prior to 17.3).
+Successfully tested on Cinnamon versions 2.8 to 6.4 (Linux Mint 17.3 to 22.1). Does not work on Cinnamon prior to version 2.8 (Linux Mint prior to 17.3).
 
 ## Dependencies
 

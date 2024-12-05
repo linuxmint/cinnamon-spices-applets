@@ -8,6 +8,8 @@ import { BaseProvider } from "../BaseProvider";
 import { PirateWeatherSummaryToTranslated, type PirateWeatherIcon, type PirateWeatherPayload, type PirateWeatherQueryUnits } from "./types/common";
 import { ALERT_LEVEL_ORDER } from "../../consts";
 import type { LocationData, SunTime } from "../../types";
+import type { Config } from "../../config";
+import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class PirateWeather extends BaseProvider {
 
@@ -36,13 +38,13 @@ export class PirateWeather extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
-		const unit = this.GetQueryUnit();
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
+		const unit = this.GetQueryUnit(config);
 
 		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
-			url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+			url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
 			cancellable,
-			params: { units: this.GetQueryUnit()},
+			params: { units: this.GetQueryUnit(config)},
 			HandleError: this.HandleError
 		});
 
@@ -175,7 +177,7 @@ export class PirateWeather extends BaseProvider {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Pirate Weather payload parsing error: " + e.message, e)
-			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
+			ErrorHandler.Instance.PostError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}
 	};
@@ -202,7 +204,7 @@ export class PirateWeather extends BaseProvider {
 	 */
 	private HandleError = (message: ErrorResponse): boolean => {
 		if (message.ErrorData.code == 403) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "bad key",
@@ -212,7 +214,7 @@ export class PirateWeather extends BaseProvider {
 			return false;
 		}
 		else if (message.ErrorData.code == 401) {
-			this.app.ShowError({
+			ErrorHandler.Instance.PostError({
 				type: "hard",
 				userError: true,
 				detail: "no key",
@@ -278,9 +280,9 @@ export class PirateWeather extends BaseProvider {
 		}
 	}
 
-	private GetQueryUnit(): PirateWeatherQueryUnits {
-		if (this.app.config.TemperatureUnit == "celsius") {
-			if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
+	private GetQueryUnit(config: Config): PirateWeatherQueryUnits {
+		if (config.TemperatureUnit == "celsius") {
+			if (config.WindSpeedUnit == "kph" || config.WindSpeedUnit == "m/s") {
 				return 'si';
 			}
 			else {

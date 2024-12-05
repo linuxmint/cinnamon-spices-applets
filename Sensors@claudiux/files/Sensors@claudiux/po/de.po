@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-03 19:28+0200\n"
-"PO-Revision-Date: 2024-07-03 19:41+0200\n"
+"POT-Creation-Date: 2024-10-29 14:28+0100\n"
+"PO-Revision-Date: 2024-09-04 16:09+0200\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,106 +17,110 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#: applet.js:214
+#. applet.js:218
 msgid "Sensors Monitor"
 msgstr "Sensorüberwachung"
 
-#: applet.js:394
+#. applet.js:401
 msgid "Suspended"
 msgstr "Pausiert"
 
-#: applet.js:612 applet.js:654
+#. applet.js:619 applet.js:661
 msgid "high:"
 msgstr "hoch:"
 
-#: applet.js:612 applet.js:614 applet.js:654 applet.js:656 applet.js:697
+#. applet.js:619 applet.js:621 applet.js:661 applet.js:663 applet.js:705
 msgid "n/a"
 msgstr "-"
 
-#: applet.js:614 applet.js:656
+#. applet.js:621 applet.js:663
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:697 applet.js:740
+#. applet.js:705 applet.js:749
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:742
+#. applet.js:751
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:770
+#. applet.js:780
 msgid "No intrusion detected"
 msgstr "Kein Einbruch entdeckt"
 
-#: applet.js:770
+#. applet.js:780
 msgid "INTRUSION DETECTED!"
 msgstr "EINBRUCH ENTDECKT!"
 
-#: applet.js:790
+#. applet.js:800
 msgid "Must be configured!"
 msgstr "Muss konfiguriert werden!"
 
-#: applet.js:1125
+#. applet.js:1187
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: applet.js:1125
+#. applet.js:1187
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:1132
+#. applet.js:1194
 msgid "⚙ General"
 msgstr "⚙ Allgemein"
 
-#: applet.js:1142
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Temperatursensoren"
+#. applet.js:1204
+#, javascript-format
+msgid "%s Temperature sensors"
+msgstr "%s Temperatursensoren"
 
-#: applet.js:1152
-msgid "🤂 Fan sensors"
-msgstr "🤂 Lüftersensoren"
+#. applet.js:1214
+#, javascript-format
+msgid "%s Fan sensors"
+msgstr "%s Lüftersensoren"
 
-#: applet.js:1162
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Spannungssensoren"
+#. applet.js:1224
+#, javascript-format
+msgid "%s Voltage sensors"
+msgstr "%s Spannungssensoren"
 
-#: applet.js:1172
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ Einbruchsensoren"
+#. applet.js:1234
+#, javascript-format
+msgid "%s Intrusion sensors"
+msgstr "%s Einbruchsensoren"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:1193
+#. applet.js:1255
 msgid "Run xsensors"
 msgstr "Xsensors starten"
 
-#: applet.js:1202
+#. applet.js:1264
 msgid "Suspend Sensors"
 msgstr "Sensoren pausieren"
 
-#: applet.js:1213
+#. applet.js:1275
 msgid "Reload this applet"
 msgstr "Applet neu laden"
 
-#: applet.js:1514
+#. applet.js:1576
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Sind Sie sicher, dass Sie \"%s\" entfernen wollen?"
 
-#: lib/checkDependencies.js:317
+#. lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Das %s-Applet ist voll funktionsfähig."
 
-#: lib/checkDependencies.js:318
+#. lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Alle Abhängigkeiten installiert"
 
-#: lib/checkDependencies.js:346
+#. lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -124,63 +128,63 @@ msgstr ""
 "Es scheinen einige Programme zu fehlen, die dieses Applet für den vollen "
 "Funktionsumfang benötigt."
 
-#: lib/checkDependencies.js:347
+#. lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Bitte führen Sie im soeben geöffneten Terminalfenster folgende Befehle aus:"
 
-#: lib/checkDependencies.js:348
+#. lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Einige Abhängigkeiten sind nicht installiert!"
 
-#: lib/util.js:244
+#. lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Ausführung von \"%s\" fehlgeschlagen:"
 
-#: scripts/xs.py:206
+#. scripts/xs.py:206
 msgid "Previous instance"
 msgstr "Vorherige Instanz"
 
-#: scripts/xs.py:210
+#. scripts/xs.py:210
 msgid "Next instance"
 msgstr "Nächste Instanz"
 
-#: scripts/xs.py:219
+#. scripts/xs.py:219
 msgid "More options"
 msgstr "Weitere Optionen"
 
-#: scripts/xs.py:225
+#. scripts/xs.py:225
 msgid "Import from a file"
 msgstr "Von Datei importieren"
 
-#: scripts/xs.py:230
+#. scripts/xs.py:230
 msgid "Export to a file"
 msgstr "In Datei exportieren"
 
-#: scripts/xs.py:235
+#. scripts/xs.py:235
 msgid "Reset to defaults"
 msgstr "Auf Standardwerte zurücksetzen"
 
-#: scripts/xs.py:244
+#. scripts/xs.py:244
 #, python-format
 msgid "Reload %s"
 msgstr "%s neu laden"
 
-#: scripts/xs.py:425
+#. scripts/xs.py:425
 #, python-format
 msgid "Settings for %s"
 msgstr "Einstellungen für %s"
 
-#: scripts/xs.py:517
+#. scripts/xs.py:517
 msgid "Select or enter file to export to"
 msgstr "Wählen Sie eine Exportdatei aus oder geben Sie deren Namen ein"
 
-#: scripts/xs.py:525 scripts/xs.py:546
+#. scripts/xs.py:525 scripts/xs.py:546
 msgid "JSON files"
 msgstr "JSON-Dateien"
 
-#: scripts/xs.py:539
+#. scripts/xs.py:539
 msgid "Select a JSON file to import"
 msgstr "Wählen Sie eine JSON-Datei zum Importieren aus"
 
@@ -195,8 +199,8 @@ msgstr ""
 "Farbänderung, wenn ein Wert ein Limit erreicht oder überschreitet."
 
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
-msgstr "🌡 Temperatur"
+msgid "⦿ Temperature"
+msgstr "⦿ Temperatur"
 
 #. settings-schema.json->page_Fans->title
 msgid "🤂 Fan"
@@ -387,6 +391,50 @@ msgstr ""
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
 msgstr "Schriftgröße (% der Standardgröße)"
+
+#. settings-schema.json->vertical-align->options
+msgid "baseline"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "sub"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "super"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "text-bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "middle"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "top"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "bottom"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "unset"
+msgstr ""
+
+#. settings-schema.json->vertical-align->options
+msgid "inherit"
+msgstr ""
+
+#. settings-schema.json->vertical-align->description
+msgid "Vertical alignment"
+msgstr "Vertikale Ausrichtung"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -865,7 +913,7 @@ msgstr ""
 "und dem Pfad der zu überwachenden Datei (/sys/class/...) hinzu."
 
 #. settings-schema.json->report->description
-#: scripts/show_sensor_values.sh:5
+#. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Beispiele für Sensorwerte von diesem Rechner"
 

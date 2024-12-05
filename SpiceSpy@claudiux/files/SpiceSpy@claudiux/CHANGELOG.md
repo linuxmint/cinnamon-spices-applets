@@ -1,3 +1,10 @@
+### v4.0.1~20241114
+  * Soup2/Soup3: better detection.
+
+### v4.0.0~20241111
+
+* Added an option to display the number of open issues for each Spice.
+
 ### v3.0.0~20240704
 
 * Settings:

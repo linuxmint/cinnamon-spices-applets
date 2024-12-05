@@ -1,5 +1,43 @@
 # Changelog
 
+## 2.3.9
+
+* Fix the Thumbnail menu item remove animation that is used when the window-list is on a vertical panel
+* Use an "up arrow" unicode character as the minimized window status indicator when the window-list is on the top panel
+* Focus a buttons window when the user drags an object onto a window-list button so that the window is made visible enabling the user to drop the dragged object on to the window
+
+## 2.3.8
+
+* Remove the focus highlighting when no window has the focus (i.e. after you click on the desktop)
+
+## 2.3.7
+
+* Added scroll-wheel options, cycle all window-list windows and cycle group/pool windows
+* The "active" class (window-list button underline in MintY theme) is now used as an active window highlight when pinning is disabled
+* Fixed bug preventing pinned buttons from being removed after disabling the pinned buttons support ("Pinning of window list buttons" -> "Disabled")
+* The window-list mouse scroll-wheel action will apply when the Thumbnail menu is open and the Thumbnail menu scroll-wheel setting is "Disabled"
+* If the active window changes when the Thumbnail menu is open, the outlined Thumbnail menu item will change if the new active window is one of the menu items
+
+## 2.3.6
+
+* Added context menu options to close all/other windows for the buttons application (when button is not grouped)
+
+## 2.3.5
+
+* Fix for the "number bubble" showing up incorrectly after changing the UI scale settings in display setting application.
+* Add a 2nd layer of code to try and ensure that the "Welcome Wizard" dialog does not reappear after a restart
+
+## 2.3.4
+
+* Saves new default thumbnail window sizes (adjusted using the mouse scroll-wheel) across cinnamon restarts
+* Now uses application specific thumbnail windows sizes across all workspaces
+* Changing the "Default thumbnail window size" setting will now reset all scroll-wheel set thumbnail sizes
+* Fix the icon geometry so that it is set correctly in more (all?) cases
+
+## 2.3.3
+
+* Improve the window icon geometry update logic for more accurate minimize/unminimize animations. It's still not perfect, but this fixes most of the issues.
+
 ## 2.3.2
 
 * Enable Cinnamon restore/minimize animation by setting window icon geometry
@@ -32,7 +70,6 @@
 * When appropriate, the Thumbnail menu items will now show the windows workspace and monitor number to the right of the window title. This will only appear when one of the window-list options are enabled that shows windows from other monitors/workspaces and only when there are more then one monitor/workspace available. The number(s) will appear in the order "(workspace#/Monitor#)" when both numbers are needed.
 * When the "number label" is set to show workspace numbers and button is grouped, I fixed the "number label" so that it is updated when the focus changes causing the current window for the grouped button to change. This is needed in case the workspace for the newly focused window is on a different workspace than the previous most recently focused window of the group.
 * Fixed the number of arguments passed to the API call for moving windows to other workspaces on older OS's (pre Cinnamon 5.4).
-
 
 ## 2.1.0
 

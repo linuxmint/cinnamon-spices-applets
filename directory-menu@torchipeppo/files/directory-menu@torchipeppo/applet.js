@@ -53,6 +53,9 @@ class CassettoneApplet extends Applet.TextIconApplet {
         this.settings.bind("show-menu", "show_menu", this.set_keybinding, null);
         this.settings.bind("limit-characters", "limit_characters", null, null);
         this.settings.bind("character-limit", "character_limit", null, null);
+        this.settings.bind("favorites-first", "favorites_first", null, null);
+        this.settings.bind("pinned-first", "pinned_first", null, null);
+        this.settings.bind("order-by", "order_by", null, null);
         this.starting_uri = this.normalize_tilde(this.starting_uri);
 
         this.set_applet_tooltip(_(this.tooltip_text));
@@ -172,6 +175,9 @@ class CassettoneApplet extends Applet.TextIconApplet {
             "y": y,
             "orientation": o,
             "character_limit": this.limit_characters ? this.character_limit : -1,
+            "favorites_first": this.favorites_first,
+            "pinned_first": this.pinned_first,
+            "order_by": this.order_by,
         }
 
         Util.spawn_async(['python3', `${this.metadata.path}/popup_menu.py`, JSON.stringify(args)]);

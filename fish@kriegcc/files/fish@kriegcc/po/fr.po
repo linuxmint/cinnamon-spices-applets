@@ -1,0 +1,380 @@
+# FISH
+# This file is put in the public domain.
+# kriegcc, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fish@kriegcc 0.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-11 17:44+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. fish-applet.js:753
+msgid "Fish Applet"
+msgstr "Applet Poisson"
+
+#. fish-applet.js:810
+msgid "There's something fishy going on here:"
+msgstr "Il y a là quelque chose de louche :"
+
+#. fish-applet.js:851
+msgid "Copy Error Messages"
+msgstr "Copier les messages d'erreur"
+
+#. fish-applet.js:854
+msgid "Copy Error Message"
+msgstr "Copier le message d'erreur"
+
+#. fish-applet.js:870 fish-applet.js:1360
+msgid "Open Preferences"
+msgstr "Modifier les paramètres"
+
+#. fish-applet.js:882
+msgid "Errors copied to the clipboard"
+msgstr "Erreurs copiées dans le presse-papiers"
+
+#. fish-applet.js:885
+msgid "Error copied to the clipboard"
+msgstr "Erreur copiée dans le presse-papiers"
+
+#. fish-applet.js:958
+msgid "Copy Message"
+msgstr "Copier le message"
+
+#. fish-applet.js:970
+msgid "Speak again"
+msgstr "Dire autre chose"
+
+#. fish-applet.js:975
+msgid "Close"
+msgstr "Fermer"
+
+#. fish-applet.js:995
+#, javascript-format
+msgid "%s the Fish Says:"
+msgstr "%s le Poisson dit :"
+
+#. fish-applet.js:1003
+msgid "Message copied to the clipboard"
+msgstr "Message copié dans le presse-papiers"
+
+#. fish-applet.js:1031
+msgid "The water needs changing"
+msgstr "L'eau a besoin d'être changée"
+
+#. fish-applet.js:1036
+msgid "Look at today's date!"
+msgstr "Regarde la date d'aujourd'hui !"
+
+#. fish-applet.js:1323
+#, javascript-format
+msgid "%s the Fish, the fortune teller"
+msgstr "%s le Poisson, diseur de bonne aventure"
+
+#. fish-applet.js:1340
+#, javascript-format
+msgid ""
+"Warning: The command appears to be something actually useful. \n"
+"Since this is a useless applet, you may not want to do this. \n"
+"We strongly advise you against using %s for anything which would make the "
+"applet \"practical\" or useful."
+msgstr ""
+"Attention : La commande semble être quelque chose d'utile. \\n\n"
+"Mais puisqu'il s'agit d'une applet inutile, vous ne voudrez peut-être pas "
+"faire ceci. \\n\n"
+"Nous vous déconseillons fortement d'utiliser %s pour tout ce qui pourrait "
+"rendre l'applet « pratique » ou utile."
+
+#. fish-applet.js:1348
+msgid ""
+"Normally, the Fish's wisdom is derived from the 'fortune' command-line "
+"utility. \n"
+"It seems that this dependency is missing on your system.\n"
+"However, it should be available for most distributions. \n"
+"Please refer to the documentation for instructions on how to install it. \n"
+"If you prefer not to install any additional packages, you can change the "
+"command in the applet's settings."
+msgstr ""
+"Normalement, la sagesse du Poisson provient de l'utilitaire de ligne de "
+"commande 'fortune'. \\n\n"
+"Il semble que cette dépendance soit absente de votre système.\n"
+"Cependant, elle devrait être disponible pour la plupart des distributions. "
+"\\n\n"
+"Veuillez vous référer à la documentation pour savoir comment l'installer. "
+"\\n\n"
+"Si vous préférez ne pas installer de paquets supplémentaires, vous pouvez "
+"modifier la commande dans les paramètres de l'applet."
+
+#. fish-applet.js:1356
+msgid "Open Documentation"
+msgstr "Consulter la documentation"
+
+#. ImageChooser.py:56
+msgid "File"
+msgstr "Fichier"
+
+#. ImageChooser.py:61
+msgid "Select an animation"
+msgstr "Choisir une animation"
+
+#. ImageChooser.py:66
+msgid "Images"
+msgstr "Images"
+
+#. metadata.json->name
+msgid "Fish"
+msgstr "Poisson"
+
+#. metadata.json->description
+msgid ""
+"Displays a small fish in your panel and does nothing useful whatsoever "
+"beyond that."
+msgstr ""
+"Affiche un petit poisson dans votre tableau de bord et ne fait rien d'autre "
+"d'utile."
+
+#. settings-schema.json->pagePreferences->title
+msgid "Preferences"
+msgstr "Préférences"
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr "Aide"
+
+#. settings-schema.json->pageAbout->title
+msgid "About"
+msgstr "À propos"
+
+#. settings-schema.json->sectionGeneral->title
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->sectionAnimation->title
+msgid "Animation"
+msgstr "Animation"
+
+#. settings-schema.json->sectionInstruction->title
+msgid "Manual"
+msgstr "Manuel"
+
+#. settings-schema.json->sectionReportIssue->title
+msgid "Report an Issue"
+msgstr "Soumettre un problème"
+
+#. settings-schema.json->sectionAbout->title
+msgid "About Fish Applet"
+msgstr "À propos de l'applet Poisson"
+
+#. settings-schema.json->sectionVersion->title
+msgid "Version"
+msgstr "Version"
+
+#. settings-schema.json->sectionLicense->title
+msgid "License"
+msgstr "Licence"
+
+#. settings-schema.json->sectionCredits->title
+msgid "Credits"
+msgstr "Générique"
+
+#. settings-schema.json->sectionMaintainersAndContributors->title
+msgid "Maintainer and Contributors"
+msgstr "Mainteneur et contributeurs"
+
+#. settings-schema.json->keyNameOfFish->description
+msgid "Name of fish"
+msgstr "Nom du poisson"
+
+#. settings-schema.json->keyNameOfFish->tooltip
+msgid "Use this text box to specify the name of the fish."
+msgstr "Utilisez cette zone de texte pour spécifier le nom du poisson."
+
+#. settings-schema.json->keyCommand->description
+msgid "Command to run when clicked"
+msgstr "Commande à exécuter en cas de clic"
+
+#. settings-schema.json->keyCommand->tooltip
+msgid ""
+"By default, Fish runs the 'fortune' command when you click on the applet. "
+"Use this text box to specify an alternative command to run."
+msgstr ""
+"Par défaut, le Poisson exécute la commande « fortune » lorsque vous cliquez "
+"sur l'applet. Utilisez cette zone de texte pour spécifier une autre commande "
+"à exécuter."
+
+#. settings-schema.json->keyFrames->units
+msgid "frames"
+msgstr "images"
+
+#. settings-schema.json->keyFrames->description
+msgid "Total frames in animation"
+msgstr "Nombre total d'images dans l'animation"
+
+#. settings-schema.json->keyFrames->tooltip
+msgid "Use this spin box to specify the number of frames in the animation."
+msgstr "Utilisez ceci pour spécifier le nombre d'images dans l'animation."
+
+#. settings-schema.json->keyPausePerFrameInSeconds->units
+msgid "seconds"
+msgstr "secondes"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->description
+msgid "Pause per frame"
+msgstr "Pause par image"
+
+#. settings-schema.json->keyPausePerFrameInSeconds->tooltip
+msgid ""
+"Use this spin box to specify the pause in seconds between each frame in the "
+"animation."
+msgstr ""
+"Utilisez ceci pour spécifier la pause en secondes entre chaque image de "
+"l'animation."
+
+#. settings-schema.json->keyRotate->description
+msgid "Rotate on vertical panels"
+msgstr "Pivoter sur les panneaux verticaux"
+
+#. settings-schema.json->keyRotate->tooltip
+msgid ""
+"Select this option to rotate the applet image when you add the applet to a "
+"vertical panel."
+msgstr ""
+"Sélectionnez cette option pour faire pivoter l'image de l'applet lorsque "
+"vous ajoutez l'applet à un panneau vertical."
+
+#. settings-schema.json->keyImagePath->tooltip
+msgid ""
+"Use this field to select the image to display in the applet. You can select "
+"an image that is supplied with the applet or a personal image."
+msgstr ""
+"Ce champ permet de sélectionner l'image à afficher dans l'applet. Vous "
+"pouvez sélectionner une image fournie avec l'applet ou une image personnelle."
+
+#. settings-schema.json->keyInstructionsText->description
+msgid ""
+"For instructions on how to use and configure this applet, please visit the "
+"applet's page on the Cinnamon Spices website."
+msgstr ""
+"Pour obtenir des instructions sur l'utilisation et la configuration de cette "
+"applet, veuillez consulter la page de l'applet sur le site web des Cinnamon "
+"Spices."
+
+#. settings-schema.json->keyReportIssueText->description
+msgid ""
+"If you encounter a problem with this applet, please file an issue report on "
+"GitHub. Note that a GitHub account is required to submit an issue. Before "
+"doing so, check if the issue has already been submitted by someone else. "
+"Since this applet is part of Linux Mint's `cinnamon-spices-applets` "
+"repository, it's important to follow their guidelines for this process. Make "
+"sure that the applet name (fish@kriegcc) is included in the title when "
+"opening a new issue. Follow the provided template for the description and "
+"provide as much information as possible about the issue."
+msgstr ""
+"Si vous rencontrez un problème avec cette applet, veuillez déposer un "
+"rapport de problème (une issue) sur GitHub. Notez qu'un compte GitHub est "
+"nécessaire pour soumettre un problème. Avant de le faire, vérifiez si le "
+"problème n'a pas déjà été soumis par quelqu'un d'autre. Comme cette applet "
+"fait partie du dépôt `cinnamon-spices-applets` de Linux Mint, il est "
+"important de suivre leurs directives pour ce processus. Assurez-vous que le "
+"nom de l'applet (fish@kriegcc) est inclus dans le titre lorsque vous ouvrez "
+"un nouveau problème. Suivez le modèle fourni pour la description et "
+"fournissez autant d'informations que possible sur le problème."
+
+#. settings-schema.json->keyButtonReportIssueInstructions->description
+msgid "Reporting Bugs Instructions of Cinnamon Spices applets"
+msgstr "Instructions pour signaler les bogues des applets Cinnamon Spices"
+
+#. settings-schema.json->keyButtonReportIssueInstructions->tooltip
+msgid ""
+"Opens the contributions guidelines of the Cinnamon Spices applets repository "
+"on Github."
+msgstr ""
+"Ouvre les directives de contribution du dépôt d'applets Cinnamon Spices sur "
+"Github."
+
+#. settings-schema.json->keyAboutText->description
+msgid ""
+"The Fish applet displays a small fish, called Wanda, in the panel. Wanda "
+"does nothing useful. The applet has really no use what-so-ever. It only "
+"takes up disk space and compilation time, and if loaded it also takes up "
+"precious panel space and memory. Anybody found using it should be promptly "
+"sent for a psychiatric evaluation."
+msgstr ""
+"L'applet Poisson affiche un petit poisson, appelé Wanda, dans le panneau. "
+"Wanda ne fait rien d'utile. L'applet n'a vraiment aucune utilité. Elle ne "
+"fait qu'occuper de l'espace disque et du temps de compilation, et si elle "
+"est chargée, elle occupe également de l'espace et de la mémoire dans le "
+"panneau. Toute personne surprise en train de l'utiliser devrait être "
+"rapidement envoyée pour une évaluation psychiatrique."
+
+#. settings-schema.json->keyButtonWebsite->description
+msgid "Fish Applet at Cinnamon Spices Website"
+msgstr "Applet Poisson sur le site Cinnamon Spices"
+
+#. settings-schema.json->keyButtonWebsite->tooltip
+msgid "Opens the applet's page on Cinnamon Spices website."
+msgstr "Ouvre la page de l'applet sur le site web des Cinnamon Spices."
+
+#. settings-schema.json->keyVersion->description
+msgid "v0.1.1"
+msgstr "v0.1.1"
+
+#. settings-schema.json->keyLicenseText->description
+msgid "GPL-3.0-or-later"
+msgstr "GPL-3.0-ou-supérieure"
+
+#. settings-schema.json->keyCreditsText->description
+msgid ""
+"This project is an adaption of the Fish applet from GNOME and MATE desktops "
+"for Cinnamon desktop.\n"
+"The original Fish applet is licensed under the GNU General Public License "
+"(GPL).\n"
+"\n"
+"Original Authors:\n"
+"George Lebl\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"Copyright:\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\n"
+"(C) 2012-2021 MATE developers"
+msgstr ""
+"Ce projet est une adaptation de l'applet Fish des bureaux GNOME et MATE pour "
+"le bureau Cinnamon.\n"
+"L'applet Fish originale est sous licence GNU General Public License (GPL)."
+"\\N- L'applet Fish originale est sous licence GNU General Public License "
+"(GPL).\n"
+"\n"
+"Auteurs originaux:\\N- George Leblanc\n"
+"George Leblon\n"
+"Mark McLoughlin\n"
+"Vincent Untz\n"
+"Stefano Karapetsas\n"
+"\n"
+"Copyright:\\N- (C)\n"
+"(C) 1998-2002 Free Software Foundation, Inc.\n"
+"(C) 2002-2005 Vincent Untz\\n\n"
+"(C) 2012-2021 Développeurs de MATE"
+
+#. settings-schema.json->keyMaintainersAndContributorsText->description
+msgid ""
+"Maintainer:\n"
+"kriegcc\n"
+"\n"
+"Contributors:\n"
+msgstr ""
+"Mainteneur:\n"
+"kriegcc\n"
+"\n"
+"Contributeurs:\n"

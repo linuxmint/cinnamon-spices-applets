@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# DOWNLOAD AND UPLOAD SPEED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 00:05+0100\n"
-"PO-Revision-Date: 2024-04-22 13:55+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-27 21:38+0200\n"
+"PO-Revision-Date: 2024-11-28 17:28+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,88 +17,164 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:437
+#. applet.js:438
 msgid "Network interfaces"
 msgstr "Netwerkinterfaces"
 
-#: applet.js:506
+#. applet.js:507
 msgid "Total data start"
 msgstr "Totale gegevens start"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:514
 msgid "Launch of applet"
 msgstr "Start van applet"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:515
 msgid "Today"
 msgstr "Vandaag"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:516
 msgid "Yesterday"
 msgstr "Gisteren"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:517
 msgid "3 days ago"
 msgstr "3 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:518
 msgid "5 days ago"
 msgstr "5 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:519
 msgid "7 days ago"
 msgstr "7 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:520
 msgid "10 days ago"
 msgstr "10 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:521
 msgid "14 days ago"
 msgstr "14 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:522
 msgid "30 days ago"
 msgstr "30 dagen geleden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:523
 msgid "Custom date"
 msgstr "Aangepaste datum"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:560
 msgid "Gui"
 msgstr "Grafische gebruikersinterface"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Compact"
 msgstr "Compact"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Large"
 msgstr "Groot"
 
-#: applet.js:825
-msgid "b"
-msgstr "b"
+#. applet.js:796
+msgid " TiB"
+msgstr " TiB"
 
-#: appletGui.js:470
+#. applet.js:799
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:802
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:805
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:807
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:810
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:813
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:816
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:819
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:821
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:831
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:834
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:837
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:840
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:842
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:845
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:848
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:851
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:854
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:856
+msgid "  b"
+msgstr "  b"
+
+#. appletGui.js:480
 msgid "Total download:"
 msgstr "Totaal gedownload:"
 
-#: appletGui.js:471
+#. appletGui.js:481
 msgid "Total upload:"
 msgstr "Totaal geüpload:"
 
@@ -144,6 +221,26 @@ msgstr "Bits"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "Basisgegevenseenheid weergegeven in het paneel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Decimaal of binair"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Decimaal"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binair"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Decimaal: k, M, G, T\n"
+"Binair: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units

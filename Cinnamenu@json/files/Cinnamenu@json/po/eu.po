@@ -497,7 +497,7 @@ msgstr "Itxura"
 #. 4.0->settings-schema.json->tips->title
 #. 4.0->settings-schema.json->tips-section->title
 msgid "Tips"
-msgstr "Aholikuak"
+msgstr "Aholkuak"
 
 #. 5.8->settings-schema.json->menu-content->title
 #. 3.2->settings-schema.json->menu-content->title
@@ -526,7 +526,7 @@ msgstr "Menua"
 #. 5.8->settings-schema.json->applications-view-mode->description
 #. 4.0->settings-schema.json->applications-view-mode->description
 msgid "Applications view mode"
-msgstr "Aaplikazioak begi bistan modua"
+msgstr "Aplikazioak begi bistan modua"
 
 #. 5.8->settings-schema.json->applications-view-mode->options
 #. 3.2->settings-schema.json->startup-view-mode->options

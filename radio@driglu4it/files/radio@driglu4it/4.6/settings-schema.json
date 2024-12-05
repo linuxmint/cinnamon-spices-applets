@@ -176,7 +176,7 @@
 		"type": "combobox", 
 		"description": "YouTube Download CLI tool", 
 		"tooltip": "The CLI tool used to download songs from YouTube", 
-		"default": "youtube-dl",
+		"default": "yt-dlp",
 		"options": {
 			"yt-dlp": "yt-dlp", 
 			"youtube-dl": "youtube-dl"

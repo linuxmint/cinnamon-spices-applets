@@ -22,20 +22,29 @@ KNOWN ISSUES
 
 import subprocess
 import sys
-import json
 import os
+
+import json
+from collections import defaultdict
 
 import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")
 gi.require_version("GLib", "2.0")
-from gi.repository import Gio, Gtk, Gdk, GLib
+gi.require_version("XApp", "1.0")
+from gi.repository import Gio, Gtk, Gdk, GLib, XApp
 
 import gettext
 UUID = "directory-menu@torchipeppo"
 HOME = os.path.expanduser("~")
 gettext.bindtextdomain(UUID, os.path.join(HOME, ".local/share/locale"))
 gettext.textdomain(UUID)
+
+# low number is higher priority
+STANDARD_PRIORITY = 50
+FAVORITE_PRIORITY_MOD = -30
+PINNED_PRIORITY_MOD = -10
+DIRECTORY_PRIORITY_MOD = -1
 
 def _(message: str) -> str:
     return gettext.gettext(message)
@@ -46,6 +55,20 @@ def log(message):
     print(message, file=sys.stderr)
 
 
+def modification_sort_key(info):
+    try:
+        return -info.get_modification_date_time().to_unix()
+    except AttributeError:  # in case info.get_modification_date_time() is None
+        log(f"Unknown last edit time: {info.display_name}")
+        return 0
+
+# MEMO keep these in line with settings-scheme.json !!
+SORT_KEYS = [
+    # sort by name
+    lambda info: info.display_name.lower(),
+    # sort by date modified
+    modification_sort_key,
+]
 
 
 class Cassettone:
@@ -81,12 +104,15 @@ class Cassettone:
 
         # log(directory_uri)
 
-        iter = directory.enumerate_children('standard::*', Gio.FileQueryInfoFlags.NONE, None)
+        dir_iter = directory.enumerate_children(
+            'standard::*,metadata::pinned-to-top,time::modified,time::modified-usec',
+            Gio.FileQueryInfoFlags.NONE,
+            None
+        )
 
-        dirs = []
-        nondirs = []
+        priority_bins = defaultdict(list)
 
-        info = iter.next_file(None)
+        info = dir_iter.next_file(None)
         while info != None:
             if (not info.get_is_hidden() or self.show_hidden):     # // <-- skip hidden files
                 info.display_name = info.get_display_name()
@@ -94,20 +120,24 @@ class Cassettone:
                 info.file = directory.get_child_for_display_name(info.display_name)
                 info.is_directory = (info.get_content_type() == "inode/directory")
 
-                if (info.is_directory):
-                    dirs.append(info)
-                else:
-                    nondirs.append(info)
+                priority = STANDARD_PRIORITY
+                if self.favorites_first and self.favorites.find_by_uri(info.file.get_uri()):
+                    priority += FAVORITE_PRIORITY_MOD
+                if self.pinned_first and info.get_attribute_as_string("metadata::pinned-to-top") == "true":
+                    priority += PINNED_PRIORITY_MOD
 
-            info = iter.next_file(None)
+                if info.is_directory:
+                    priority += DIRECTORY_PRIORITY_MOD
 
-        dirs.sort(key = lambda info: info.display_name.lower())
-        nondirs.sort(key = lambda info: info.display_name.lower())
+                priority_bins[priority].append(info)
 
-        for info in dirs:
-            self.add_to_menu_from_gioinfo(menu, info)
-        for info in nondirs:
-            self.add_to_menu_from_gioinfo(menu, info)
+            info = dir_iter.next_file(None)
+
+        for priority in sorted(priority_bins.keys()):
+            lst = priority_bins[priority]
+            lst.sort(key = SORT_KEYS[self.order_by])
+            for info in lst:
+                self.add_to_menu_from_gioinfo(menu, info)
 
     def add_to_menu_from_gioinfo(self, menu, info):
         display_text = info.display_name
@@ -241,6 +271,11 @@ class Cassettone:
         self.y = args["y"]
         self.orientation = args["orientation"]
         self.character_limit = args["character_limit"]
+        self.favorites_first = args["favorites_first"]
+        self.pinned_first = args["pinned_first"]
+        self.order_by = args["order_by"]
+
+        self.favorites = XApp.Favorites.get_default()
 
         # https://github.com/linuxmint/xapp/blob/master/libxapp/xapp-status-icon.c#L222
         # would be nice to determine it somehow, but it might not be so important right now
@@ -252,11 +287,6 @@ class Cassettone:
 
         if not Gtk.Widget.get_realized(self.main_menu):
             self.main_menu.realize()
-            # toplevel = self.main_menu.get_toplevel()
-            # context = toplevel.get_style_context()
-
-            # context.remove_class("csd")
-            # context.add_class("xapp-status-icon-menu-window")
 
 
         event, window, win_rect, rect_anchor, menu_anchor = self.synthesize_event()

@@ -1,0 +1,101 @@
+# Swap usage:
+swapon --bytes --show=SIZE,USED | tail +2
+returns:
+32767995904 786432
+
+# list of blocks:
+lsblk -f
+#Output:
+NAME   FSTYPE FSVER LABEL            UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sda
+├─sda1 vfat   FAT32                  15F4-E10D                             504,8M     1% /boot/efi
+├─sda2 ext4   1.0                    e0443689-0a6e-40eb-83b2-ffb277b3d5f3     26G    48% /
+├─sda3 ext4   1.0                    d81e9146-8f33-4ee7-99f4-ccc2d5223fc4  145,3G    77% /home
+└─sda4 swap   1                      167dbcd0-bbde-4874-958c-33de48952af2                [SWAP]
+sdb
+└─sdb1 ext4   1.0   5TB_easyStroreSV d81e7a8f-9a5f-479e-8907-39e20cc735f0      2T    50% /mnt/usb-WD_5TB_SVG
+
+# list of blocks in JSON format:
+lsblk -J
+#Output:
+{
+   "blockdevices": [
+      {
+         "name": "sda",
+         "maj:min": "8:0",
+         "rm": false,
+         "size": "931,5G",
+         "ro": false,
+         "type": "disk",
+         "mountpoints": [
+             null
+         ],
+         "children": [
+            {
+               "name": "sda1",
+               "maj:min": "8:1",
+               "rm": false,
+               "size": "512M",
+               "ro": false,
+               "type": "part",
+               "mountpoints": [
+                   "/boot/efi"
+               ]
+            },{
+               "name": "sda2",
+               "maj:min": "8:2",
+               "rm": false,
+               "size": "57,2G",
+               "ro": false,
+               "type": "part",
+               "mountpoints": [
+                   "/"
+               ]
+            },{
+               "name": "sda3",
+               "maj:min": "8:3",
+               "rm": false,
+               "size": "843,3G",
+               "ro": false,
+               "type": "part",
+               "mountpoints": [
+                   "/home"
+               ]
+            },{
+               "name": "sda4",
+               "maj:min": "8:4",
+               "rm": false,
+               "size": "30,5G",
+               "ro": false,
+               "type": "part",
+               "mountpoints": [
+                   "[SWAP]"
+               ]
+            }
+         ]
+      },{
+         "name": "sdb",
+         "maj:min": "8:16",
+         "rm": false,
+         "size": "4,5T",
+         "ro": false,
+         "type": "disk",
+         "mountpoints": [
+             null
+         ],
+         "children": [
+            {
+               "name": "sdb1",
+               "maj:min": "8:17",
+               "rm": false,
+               "size": "4,5T",
+               "ro": false,
+               "type": "part",
+               "mountpoints": [
+                   "/mnt/usb-WD_5TB_SVG"
+               ]
+            }
+         ]
+      }
+   ]
+}

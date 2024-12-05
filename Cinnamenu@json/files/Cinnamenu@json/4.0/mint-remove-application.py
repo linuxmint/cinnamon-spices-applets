@@ -10,7 +10,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-import mintcommon.aptdaemon
+import aptkit.simpleclient
 
 # i18n
 gettext.install("Cinnamenu@json", os.environ['HOME'] + "/.local/share/locale")
@@ -101,7 +101,7 @@ class MintRemoveWindow:
 
         warnDlg.get_content_area().add(scrolledwindow)
 
-        self.apt = mintcommon.aptdaemon.APT(warnDlg)
+        self.apt = aptkit.simpleclient.SimpleAPTClient(warnDlg)
 
         response = warnDlg.run()
         if response == Gtk.ResponseType.OK:

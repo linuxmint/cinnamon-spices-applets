@@ -136,7 +136,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             let iconName = this._volumeToIcon(1.0*this.applet.percentage/100, "audio-volume-webradioreceiver-")+"-symbolic";
             let icon = Gio.Icon.new_for_string(iconName);
             try {
-                Main.osdWindowManager.show(-1, icon, this.applet.percentage, null);
+                Main.osdWindowManager.show(-1, icon, ""+this.applet.percentage, null);
             } catch (e) {
                 // Do nothing
             }

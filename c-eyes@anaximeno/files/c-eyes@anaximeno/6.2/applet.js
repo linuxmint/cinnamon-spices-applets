@@ -17,7 +17,6 @@
  */
 'use strict';
 
-const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
@@ -25,16 +24,18 @@ const Gettext = imports.gettext;
 const SignalManager = imports.misc.signalManager;
 const Util = imports.misc.util;
 const { GLib, St, Clutter } = imports.gi;
-
 const { EyeModeFactory } = require("./eyeModes.js");
+const {
+	AREA_DEFAULT_WIDTH,
+	WS_SWITCHED_UPDATE_TIMEOUT_MS,
+	UUID,
+	Optimizations,
+	MONITORS_CHANGED_UPDATE_TIMEOUT_MS,
+} = require("./constants.js");
 const { Debouncer } = require("./helpers.js");
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-const UUID = "c-eyes@anaximeno";
-const LOC_DIR = GLib.get_home_dir() + "/.local/share/locale";
-const AREA_DEFAULT_WIDTH = 28;
-
-Gettext.bindtextdomain(UUID, LOC_DIR);
 
 function _(text) {
 	let loc = Gettext.dgettext(UUID, text);
@@ -42,61 +43,88 @@ function _(text) {
 }
 
 
-// Mark this for translation since it won't be
-// marked by the translation tool
-const _DEFAULT_TOOLTIP = _("Hey, I saw that!");
+// Mark this for translation because it will
+// not be marked by the translation tool.
+const _t = _("Hey, I saw that!");
 
 
 class Eye extends Applet.Applet {
-	constructor(metadata, orientation, panelHeight, instanceId, areaWidth) {
+	constructor(metadata, orientation, panelHeight, instanceId) {
 		super(orientation, panelHeight, instanceId);
-		this.settings = this._setup_settings(metadata.uuid, instanceId);
-		this.orientation  = orientation;
 		this.metadata = metadata;
-		this.area_width = areaWidth;
-		this.instance_id = instanceId;
+		this.instanceId = instanceId;
+		this.orientation = orientation;
 
+		this.settings = this._setup_settings(metadata.uuid, instanceId);
 		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
 		this.area = new St.DrawingArea();
 		this.actor.add(this.area);
 
-		this.eye_painter = EyeModeFactory.createEyeMode(this.mode);
-
+		this.eyePainter = EyeModeFactory.createEyeMode(this.mode);
 		this.signals = new SignalManager.SignalManager(null);
+
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
+		this.signals.connect(Main.layoutManager, 'monitors-changed',
+			() => Util.setTimeout(this.on_property_updated.bind(this), MONITORS_CHANGED_UPDATE_TIMEOUT_MS),
+			this);
 		this.signals.connect(global.screen, 'workspace-switched', () => {
 			// If the eye is refreshed exactly during the workspace switch process it's possible that the position
 			// of the panel is not correctly accessed, so the position of the eye cannot be estimated correctly,
 			// resulting in the eye looking at the wrong direction, to avoid that we will give it some timeout and
 			// wait first for the switch process to complete.
-			Util.setTimeout(() => this.on_property_updated(), 400);
+			Util.setTimeout(this.on_property_updated.bind(this), WS_SWITCHED_UPDATE_TIMEOUT_MS);
 		}, this);
-        this.signals.connect(Main.layoutManager, 'monitors-changed', () => {
-			Util.setTimeout(() => this.on_property_updated(), 100);
-		}, this);
+
+		this.refresh_handler_id = 0;
+
+		this.cos_repaint_angle = Math.cos(this.repaint_angle);
 
 		this._last_mouse_x = undefined;
 		this._last_mouse_y = undefined;
 		this._last_eye_x = undefined;
 		this._last_eye_y = undefined;
 
+		this.enabled = false;
 		this.set_active(true);
 		this.update_tooltip();
 	}
 
+	get repaint_interval() {
+		let repaint_interval = this._repaint_interval;
+
+		if (this.optimization_mode != "manual" && this.optimization_mode in Optimizations) {
+			let r = Optimizations[this.optimization_mode]["repaint_interval_ms"];
+			if (r != null || r != undefined) repaint_interval = r;
+		}
+
+		return repaint_interval;
+	}
+
+	get repaint_angle() {
+		let repaint_angle = this._repaint_angle;
+
+		if (this.optimization_mode != "manual" && this.optimization_mode in Optimizations) {
+			let r = Optimizations[this.optimization_mode]["repaint_angle_rad"];
+			if (r != null || r != undefined) repaint_angle = r;
+		}
+
+		return repaint_angle;
+	}
+
 	_setup_settings(uuid, instanceId) {
-		const d = new Debouncer();
+		const _d = new Debouncer();
+
 		const bindings = [
 			{
 				key: "repaint-interval",
-				value: "repaint_interval",
-				cb: d.debounce((value) => this.set_active(true), 300),
+				value: "_repaint_interval",
+				cb: _d.debounce((value) => this.set_active(true), 300),
 			},
 			{
 				key: "repaint-angle",
-				value: "repaint_angle",
-				cb: null,
+				value: "_repaint_angle",
+				cb: () => this.cos_repaint_angle = Math.cos(this.repaint_angle),
 			},
 			{
 				key: "mode",
@@ -109,14 +137,14 @@ class Eye extends Applet.Applet {
 			{
 				key: "line-width",
 				value: "line_width",
-				cb: d.debounce(
+				cb: _d.debounce(
 					this.on_property_updated.bind(this),
 					300),
 			},
 			{
 				key: "margin",
 				value: "margin",
-				cb: d.debounce(
+				cb: _d.debounce(
 					this.on_property_updated.bind(this),
 					300),
 			},
@@ -158,27 +186,35 @@ class Eye extends Applet.Applet {
 			{
 				key: "padding",
 				value: "padding",
-				cb: d.debounce(
+				cb: _d.debounce(
 					this.on_property_updated.bind(this),
 					300),
 			},
 			{
 				key: "tooltip-message",
 				value: "tooltip_message",
-				cb: d.debounce((value) => {
+				cb: _d.debounce((value) => {
 					this.update_tooltip();
 					this.on_property_updated(value);
 				}, 100),
+			},
+			{
+				key: "optimization-mode",
+				value: "optimization_mode",
+				cb: (value) => {
+					this.on_optimization_mode_updated();
+					this.on_property_updated(value);
+				},
 			}
 		];
 
 		let settings = new Settings.AppletSettings(this, uuid, instanceId);
 
-		bindings.forEach(
-			s => settings.bind(
-				s.key, s.value, s.cb ? (...args) => s.cb.call(this, ...args) : null
-			)
-		);
+		bindings.forEach(s => settings.bind(
+			s.key,
+			s.value,
+			s.cb ? (...args) => s.cb.call(this, ...args) : null
+		));
 
 		return settings;
 	}
@@ -186,7 +222,7 @@ class Eye extends Applet.Applet {
 	on_orientation_changed(orientation) {
 		this.orientation = orientation;
 		this.update_sizes();
-    }
+	}
 
 	on_applet_removed_from_panel(deleteConfig) {
 		this.destroy();
@@ -219,22 +255,23 @@ class Eye extends Applet.Applet {
 	}
 
 	on_refresh_timeout() {
-		if (this.should_redraw())
+		if (this.should_redraw()) {
+			// global.log(UUID, `repainting with ${this.repaint_interval}ms interval`);
 			this.area.queue_repaint();
-		return true;
+		}
+
+		return GLib.SOURCE_CONTINUE;
 	}
 
 	on_eye_mode_update() {
-		if (!this.eye_painter || this.eye_painter.mode != this.mode) {
-			this.eye_painter = EyeModeFactory.createEyeMode(this.mode);
+		if (!this.eyePainter || this.eyePainter.mode != this.mode) {
+			this.eyePainter = EyeModeFactory.createEyeMode(this.mode);
 		}
 	}
 
-	destroy() {
-		this.set_active(false);
-		this.signals.disconnectAllSignals();
-		this.area.destroy();
-		this.settings.finalize();
+	on_optimization_mode_updated() {
+		this.set_active(this.enabled);
+		global.log(UUID, `optimizing to ${this.optimization_mode}`);
 	}
 
 	update_sizes() {
@@ -242,11 +279,11 @@ class Eye extends Applet.Applet {
 
 		if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
 			this.actor.set_style("padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;");
-			height = (this.area_width + 2 * this.margin) * global.ui_scale;
+			height = (AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
 			width = this.panel.height;
 		} else {
 			this.actor.set_style("padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px;");
-			width = (this.area_width + 2 * this.margin) * global.ui_scale;
+			width = (AREA_DEFAULT_WIDTH + 2 * this.margin) * global.ui_scale;
 			height = this.panel.height;
 		}
 
@@ -254,53 +291,37 @@ class Eye extends Applet.Applet {
 		this.area.set_height(height);
 	}
 
-	set_active(enabled) {
-		this.on_property_updated();
-
-		if (this._update_handler) {
-			Mainloop.source_remove(this._update_handler);
-			this._update_handler = null;
-		}
-
-		this.signals.disconnect('repaint', this.area);
-
-		if (enabled) {
-			this.signals.connect(this.area, 'repaint', this.paint_eye, this);
-
-			this._update_handler = Mainloop.timeout_add(
-				this.repaint_interval, this.on_refresh_timeout.bind(this)
-			);
-
-			this.area.queue_repaint();
-		}
-
-		let status = enabled ? "enabled" : "disabled";
-		global.log(UUID, `Eye/${this.instance_id} was ${status}!`);
-	}
-
 	update_tooltip() {
 		this.set_applet_tooltip(_(this.tooltip_message), false);
 	}
 
-	get_area_position() {
-		let obj = this.area;
+	set_active(enabled) {
+		this.enabled = enabled;
 
-		let area_x = 0;
-		let area_y = 0;
+		this.signals.disconnect('repaint', this.area);
 
-		do {
-			let pos = obj.get_position();
+		if (this.refresh_handler_id) {
+			GLib.source_remove(this.refresh_handler_id);
+			this.refresh_handler_id = 0;
+		}
 
-			if (pos) {
-				let [tx, ty] = pos;
-				area_x += tx;
-				area_y += ty;
-			}
+		if (enabled) {
+			this.signals.connect(this.area, 'repaint', this.paint_eye, this);
+			this.refresh_handler_id = GLib.timeout_add(
+				GLib.PRIORITY_DEFAULT,
+				this.repaint_interval,
+				this.on_refresh_timeout.bind(this));
+			this.on_property_updated();
+		}
 
-			obj = obj.get_parent();
-		} while (obj);
+		global.log(UUID, `Eye/${this.instanceId} ${enabled ? "enabled" : "disabled"}`);
+	}
 
-		return [area_x, area_y];
+	destroy() {
+		this.set_active(false);
+		this.signals.disconnectAllSignals();
+		this.area.destroy();
+		this.settings.finalize();
 	}
 
 	paint_eye(area) {
@@ -324,7 +345,7 @@ class Eye extends Applet.Applet {
 			pupil_color = ok ? color : pupil_color;
 		}
 
-		this.eye_painter.drawEye(area, {
+		this.eyePainter.drawEye(area, {
 			area_x: area_x,
 			area_y: area_y,
 			mouse_x: mouse_x,
@@ -332,15 +353,33 @@ class Eye extends Applet.Applet {
 			base_color: base_color,
 			iris_color: iris_color,
 			pupil_color: pupil_color,
-			line_width: this.line_width * global.ui_scale,
 			padding: this.padding * global.ui_scale,
-			lids_fill: this.fill_lids_color_painting &&
-					   this.use_alternative_colors,
-			bulb_fill: this.fill_bulb_color_painting &&
-			           this.use_alternative_colors,
-			is_vertical: this.orientation == St.Side.LEFT ||
-							  this.orientation == St.Side.RIGHT,
+			line_width: this.line_width * global.ui_scale,
+			is_vertical: this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT,
+			lids_fill: this.fill_lids_color_painting && this.use_alternative_colors,
+			bulb_fill: this.fill_bulb_color_painting && this.use_alternative_colors,
 		});
+	}
+
+	get_area_position() {
+		let obj = this.area;
+
+		let area_x = 0;
+		let area_y = 0;
+
+		do {
+			let pos = obj.get_position();
+
+			if (pos) {
+				let [tx, ty] = pos;
+				area_x += tx;
+				area_y += ty;
+			}
+
+			obj = obj.get_parent();
+		} while (obj);
+
+		return [area_x, area_y];
 	}
 
 	should_redraw() {
@@ -355,23 +394,24 @@ class Eye extends Applet.Applet {
 		) {
 			should_redraw = false;
 		} else if (this._last_mouse_x == undefined ||
-			       this._last_mouse_y == undefined ||
-				   this._last_eye_x != ox ||
-				   this._last_eye_y != oy
+			this._last_mouse_y == undefined ||
+			this._last_eye_x != ox ||
+			this._last_eye_y != oy
 		) {
 			should_redraw = true;
 		} else {
-			const dist = (x, y) => Math.sqrt(x * x + y * y);
+			const sq_dist = (x, y) => x * x + y * y;
 			const [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
 			const [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
-			const dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
+			const current_sq_dist = sq_dist(current_x, current_y);
+			const last_sq_dist = sq_dist(last_x, last_y);
 
-			if (dist_prod == 0) {
+			if (last_sq_dist === 0 || current_sq_dist === 0) {
 				should_redraw = true;
 			} else {
 				const dot_prod = current_x * last_x + current_y * last_y;
-				const angle = Math.acos(dot_prod / dist_prod);
-				should_redraw = angle >= this.repaint_angle;
+				const cos_angle = dot_prod / Math.sqrt(last_sq_dist * current_sq_dist);
+				should_redraw = cos_angle <= this.cos_repaint_angle;
 			}
 		}
 
@@ -387,5 +427,5 @@ class Eye extends Applet.Applet {
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-	return new Eye(metadata, orientation, panelHeight, instanceId, AREA_DEFAULT_WIDTH);
+	return new Eye(metadata, orientation, panelHeight, instanceId);
 }

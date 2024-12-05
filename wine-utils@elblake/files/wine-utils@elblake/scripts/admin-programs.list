@@ -1,0 +1,23 @@
+
+#
+# Each line should be written similar to:
+#
+# ProgramName: % exename
+#
+# where exename is the wine program, either as a full path
+# or the exe file itself if it is in wine's search paths.
+#
+# If the utility does not use wine to run, the percent symbol
+# should be omitted and it will be run as a normal program.
+#
+# The % symbol at the beginning of the command line will be
+# substituted with the wine command.
+#
+
+Config: % winecfg
+Control Panel: % control
+Files: % explorer
+Files (winefile): % winefile
+Registry Editor: % regedit
+Task Manager: % taskmgr
+

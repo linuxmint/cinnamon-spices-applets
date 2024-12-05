@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32mm"
+   height="32mm"
+   viewBox="0 0 32 32"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="wine-cmd.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="3.7059484"
+     inkscape:cx="63.816323"
+     inkscape:cy="62.602059"
+     inkscape:window-width="1366"
+     inkscape:window-height="696"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-global="false" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#1d201f;fill-opacity:1;stroke:#878884;stroke-width:2.11667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect236"
+       width="25.762167"
+       height="18.027945"
+       x="3.2338121"
+       y="7.1890883"
+       ry="3.0803075" />
+    <path
+       id="rect1538"
+       style="fill:#ffffff;stroke-width:2.11667"
+       d="m 6.0080683,10.222162 h 2.2210212 l 1.6725458,6.343765 H 7.6806145 Z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="rect1538-3"
+       style="fill:#ffffff;stroke-width:2.11667"
+       d="m 10.487507,10.159717 h 2.221021 l 2.580156,3.337801 -2.580156,3.005964 h -2.221021 l 2.580156,-3.018573 z"
+       sodipodi:nodetypes="ccccccc" />
+  </g>
+</svg>

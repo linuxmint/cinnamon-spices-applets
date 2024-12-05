@@ -58,7 +58,9 @@
         "sectionBehaviorTooltip",
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
-        "sectionBehaviorSymbolicIconColor"
+        "sectionBehaviorSymbolicIconColor",
+        "sectionBehaviorHorizontalPanel",
+        "sectionBehaviorAlbumArtDesklet"
       ]
     },
     "pageRecording": {
@@ -282,6 +284,25 @@
         "color-recording",
         "show-favicon",
         "show-volume-level-near-icon"
+      ]
+    },
+    "sectionBehaviorHorizontalPanel": {
+      "type": "section",
+      "title": "Only on horizontal panels",
+      "keys": [
+        "horizontal-show-name",
+        "horizontal-show-title",
+        "horizontal-max-title-length"
+      ]
+    },
+    "sectionBehaviorAlbumArtDesklet": {
+      "type": "section",
+      "title": "Album Art desklet",
+      "keys": [
+        "desklet-activate-button",
+        "desklet-show-on-desktop",
+        "desklet-open-settings-button",
+        "desklet-activated-label"
       ]
     },
     "sectionNetworkQuality": {
@@ -1844,5 +1865,52 @@
     "type": "switch",
     "description": "Display volume level near icon",
     "default": true
+  },
+  "horizontal-show-name": {
+    "type": "switch",
+    "description": "Display radio name",
+    "default": false
+  },
+  "horizontal-show-title": {
+    "type": "switch",
+    "description": "Display title",
+    "default": false
+  },
+  "horizontal-max-title-length": {
+    "type": "scale",
+    "dependency": "horizontal-show-title",
+    "default": 0,
+    "step": 1,
+    "min": 0,
+    "max": 255,
+    "description": "Maximum title length",
+    "tooltip": "0 means no maximum"
+  },
+  "desklet-activate-button": {
+    "type": "button",
+    "dependency": "!desklet-is-activated",
+    "description": "Activate desklet displaying the Radio3.0 Album Art",
+    "callback": "on_button_activate_desklet_clicked"
+  },
+  "desklet-activated-label": {
+    "type": "label",
+    "dependency": "desklet-is-activated",
+    "description": "The desklet displaying the Radio3.0 Album Art is activated"
+  },
+  "desklet-show-on-desktop" : {
+    "type": "switch",
+    "dependency": "desklet-is-activated",
+    "default": false,
+    "description": "Show Album Art on desktop"
+  },
+  "desklet-open-settings-button": {
+    "type": "button",
+    "dependency": "desklet-is-activated",
+    "description": "Album Art desklet settings",
+    "callback": "on_desklet_open_settings_button_clicked"
+  },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
   }
 }
