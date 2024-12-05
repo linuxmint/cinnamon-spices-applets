@@ -16,6 +16,7 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
+const St = imports.gi.St;
 
 const UUID = "cinnamonvantage@garlayntoji";
 
@@ -244,18 +245,41 @@ MyApplet.prototype = {
 
     _showRestartNotification: function() {
         try {
+            // Create notification source if it doesn't exist
+            if (!this._source) {
+                this._source = new MessageTray.Source(_("CinnamonVantage"), "dialog-information");
+                this._source.createNotificationIcon = function() {
+                    return new St.Icon({
+                        icon_name: "dialog-information", // Icône standard
+                        icon_type: St.IconType.SYMBOLIC,
+                        icon_size: 24
+                    });
+                };
+                // Add source to message tray
+                Main.messageTray.add(this._source);
+            }
+            // Create notification
             let notification = new MessageTray.Notification(
-                new MessageTray.Source(_("CinnamonVantage"), "legion-white"),
+                this._source,
                 _("System reboot required"),
                 _("A system reboot is required for this change to take effect.")
             );
-            notification.setTransient(true);  // This makes the notification auto-dismiss after a short time
-            Main.messageTray.add(notification);
-            notification.show();
+            // Make notification temporary
+            notification.setTransient(true);
+            notification.setUrgency(MessageTray.Urgency.NORMAL);
+
+            // Show notification
+            this._source.notify(notification);
+    
         } catch (e) {
+            console.log("Error in _showRestartNotification:");
+            console.log(e);
             globalThis.logError(`Error showing restart notification: ${e}`);
         }
     }
+    
+    
+    
     
 };
 
