@@ -270,17 +270,13 @@ MyApplet.prototype = {
 
             // Show notification
             this._source.notify(notification);
-    
+
         } catch (e) {
             console.log("Error in _showRestartNotification:");
             console.log(e);
             globalThis.logError(`Error showing restart notification: ${e}`);
         }
     }
-    
-    
-    
-    
 };
 
 // Initialize applet
