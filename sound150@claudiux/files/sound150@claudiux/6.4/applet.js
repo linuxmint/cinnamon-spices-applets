@@ -2348,7 +2348,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
             iconName += "-symbolic";
             this._outputIcon = iconName;
-            if (this.showOSD) {
+            if (this.showMediaKeysOSD) {
                 icon = Gio.Icon.new_for_string(this._outputIcon);
                 Main.osdWindowManager.show(-1, icon, ""+volume, null);
             }
@@ -2364,7 +2364,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             iconName += "-symbolic";
             this._outputIcon = iconName;
             this.set_applet_icon_symbolic_name(this._outputIcon);
-            if (this.showOSD) {
+            if (this.showMediaKeysOSD) {
                 icon = Gio.Icon.new_for_string(this._outputIcon);
                 Main.osdWindowManager.show(-1, icon, ""+this.volume.slice(0,-1), null);
             }
