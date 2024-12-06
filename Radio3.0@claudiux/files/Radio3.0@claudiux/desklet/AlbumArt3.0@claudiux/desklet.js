@@ -242,7 +242,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     on_desklet_clicked(event) {
         try {
             if (event.get_button() == 1) {
-                this._update();
+                //~ this._update();
+                this.on_setting_changed();
             } else if (event.get_button() == 2) {
                 Util.spawn(['xdg-open', this.currentPicture.path]);
             }

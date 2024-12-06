@@ -3912,6 +3912,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
     //~ logDebug("Nbr of categories: "+Object.keys(cws).length);
     //~ logDebug("categories_with_stations: \n"+JSON.stringify(this.categories_with_stations, null, 4));
+
+    if (this.desklet_is_activated)
+      reloadExtension("AlbumArt3.0@claudiux", Type.DESKLET);
   }
 
   on_applet_removed_from_panel() {
