@@ -1,0 +1,479 @@
+# Indonesian translation for Cinnamon Applet Weather.
+# Copyright (C) 2022
+# This file is distributed under the same license as the Cinnamon Weather Applet package.
+# Ruddy Pranata <ruddy.pranata@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 3.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-20 20:06+0100\n"
+"PO-Revision-Date: 2022-03-22 13:51+0700\n"
+"Last-Translator: Ruddy Pranata <ruddy.pranata@gmail.com>\n"
+"Language-Team: Ruddy Pranata <ruddy.pranata@gmail.com>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+#: 3.8/weather-applet.js:10545
+msgid ""
+"Address to location lookup service is blocked. You can try to change your "
+"User-Agent in help to see if it resolves the issue."
+msgstr ""
+
+#: 3.8/weather-applet.js:10743
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr ""
+
+#: 3.8/weather-applet.js:11348
+msgid "Ash"
+msgstr ""
+
+#: 3.8/weather-applet.js:11350
+msgid "Squall"
+msgstr ""
+
+#: 3.8/weather-applet.js:11427
+msgid "Light shower sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:12925
+msgid "Light shower rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12929
+msgid "Heavy shower rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12937
+msgid "Mix snow/rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:12939
+msgid "Snow shower"
+msgstr ""
+
+#: 3.8/weather-applet.js:15454
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#: 3.8/weather-applet.js:15467
+msgid "Please select a different provider or location"
+msgstr ""
+
+#: 3.8/weather-applet.js:15784
+msgid "Weather Underground"
+msgstr ""
+
+#: 3.8/weather-applet.js:15990
+msgid "The API key you provided is invalid."
+msgstr ""
+
+#: 3.8/weather-applet.js:15997
+msgid "The location you provided was not found."
+msgstr ""
+
+#: 3.8/weather-applet.js:16033 3.8/weather-applet.js:16034
+msgid "Strong Storm"
+msgstr ""
+
+#: 3.8/weather-applet.js:16048 3.8/weather-applet.js:16049
+msgid "Rain and Snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:16055 3.8/weather-applet.js:16056
+msgid "Rain and Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:16104 3.8/weather-applet.js:16105
+#: 3.8/weather-applet.js:17415 3.8/weather-applet.js:17416
+#: 3.8/weather-applet.js:17422 3.8/weather-applet.js:17423
+#: 3.8/weather-applet.js:17457 3.8/weather-applet.js:17458
+#: 3.8/weather-applet.js:17464 3.8/weather-applet.js:17465
+msgid "Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:16167 3.8/weather-applet.js:16168
+msgid "Breezy"
+msgstr ""
+
+#: 3.8/weather-applet.js:16181 3.8/weather-applet.js:16182
+msgid "Frigid"
+msgstr ""
+
+#: 3.8/weather-applet.js:16237 3.8/weather-applet.js:16238
+msgid "Mostly Clear"
+msgstr ""
+
+#: 3.8/weather-applet.js:16419
+msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:16446
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:16816
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:16979
+msgid "Snow grains"
+msgstr ""
+
+#: 3.8/weather-applet.js:16986
+msgid "Light showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17000
+msgid "Heavy showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17028
+msgid "Thunderstorm with slight hail"
+msgstr ""
+
+#: 3.8/weather-applet.js:17035
+msgid "Thunderstorm with hail"
+msgstr ""
+
+#: 3.8/weather-applet.js:17062 3.8/weather-applet.js:17222
+msgid "Feels like"
+msgstr ""
+
+#: 3.8/weather-applet.js:17130
+msgid "Open Meteo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
+#: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
+#: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
+#: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
+msgid "Scattered Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
+#: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
+#: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
+msgid "Chance of Thunderstorms"
+msgstr ""
+
+#: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
+msgid "Light Rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
+msgid "Light Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
+msgid "Intermittent Rain"
+msgstr ""
+
+#: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
+msgid "Intermittent Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
+msgid "Intermittent Snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
+msgid "Frequent Thunderstorms"
+msgstr ""
+
+#: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
+#: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
+msgid "High Clouds"
+msgstr ""
+
+#: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
+msgid "Low Clouds"
+msgstr ""
+
+#: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
+msgid "Overcast and Dry"
+msgstr ""
+
+#: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
+#: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
+#: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
+#: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
+msgid "Slightly Stormy"
+msgstr ""
+
+#: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
+#: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
+msgid "Stormy Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
+#: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
+msgid "Thundery Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
+#: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
+#: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
+msgid "Thundery Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:17878
+msgid "Wind Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17880
+msgid "Thunderstorm Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17882
+msgid "Rain Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17884
+msgid "Snow Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17886
+msgid "Slippery Roads Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17888
+msgid "Frost Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17890
+msgid "Mass Movements Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17892
+msgid "Heat Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17894
+msgid "Avalanche Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17896
+msgid "Earthquake Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17898
+msgid "Forest Fire Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17900
+msgid "Flood Warning"
+msgstr ""
+
+#: 3.8/weather-applet.js:17920
+msgid "Swiss Météo"
+msgstr ""
+
+#: 3.8/weather-applet.js:17939
+msgid "For this provider, you need to use a postcode."
+msgstr ""
+
+#: 3.8/weather-applet.js:17951
+msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
+msgstr ""
+
+#: 3.8/weather-applet.js:17973
+msgid "Switzerland"
+msgstr ""
+
+#: 3.8/weather-applet.js:18404
+msgid ""
+"Could not retrieve config, file was not found under paths\n"
+" {configFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:18687
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+
+#: 3.8/weather-applet.js:19995
+msgid "Station Name: {stationName}"
+msgstr ""
+
+#: 3.8/weather-applet.js:19998
+msgid "Area: {stationArea}"
+msgstr ""
+
+#: 3.8/weather-applet.js:20008
+msgid "{count} weather alert(s)"
+msgstr ""
+
+#: 3.8/weather-applet.js:20420
+msgid "Could not open file {filePath} for writing"
+msgstr ""
+
+#: 3.8/weather-applet.js:20458
+msgid "Location Service Blocked"
+msgstr ""
+
+#: 3.8/weather-applet.js:20633
+msgid "No Script Provided"
+msgstr ""
+
+#: 3.8/weather-applet.js:20633
+msgid "You need to add a script first."
+msgstr ""
+
+#: 3.8/weather-applet.js:20637
+msgid "No Weather Data"
+msgstr ""
+
+#: 3.8/weather-applet.js:20637
+msgid "No weather data to run script with"
+msgstr ""
+
+#: 3.8/weather-applet.js:20645
+msgid "Script Executed Successfully"
+msgstr ""
+
+#: 3.8/weather-applet.js:20645
+msgid "Your script has been executed successfully."
+msgstr ""
+
+#: 3.8/weather-applet.js:20648
+msgid "Error Running Script"
+msgstr ""
+
+#: 3.8/weather-applet.js:20648
+msgid "Script returned error, see logs for more information"
+msgstr ""
+
+#: 3.8/AlertsWindow.py:119
+msgid "Weather Applet Alerts"
+msgstr ""
+
+#. 3.8->settings-schema.json->technical-automation->title
+msgid "Technical and Automation"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Open-Meteo"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Swiss Météo (Switzerland only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap OneCall (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
+msgstr ""
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""
+
+#. 3.8->settings-schema.json->showAlerts->description
+msgid "Enable displaying weather alerts"
+msgstr ""
+
+#. 3.8->settings-schema.json->showAlerts->tooltip
+msgid ""
+"Alerts button will be visible in the popup menu if there are any active "
+"alerts for your location."
+msgstr ""
+
+#. 3.8->settings-schema.json->tooltipTextOverride->description
+msgid "Override tooltip on panel"
+msgstr ""
+
+#. 3.8->settings-schema.json->tooltipTextOverride->tooltip
+msgid ""
+"Has the same behavior and available values as 'Override label on panel'."
+msgstr ""
+
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Provider should translate conditions if available"
+msgstr ""
+
+#. 3.8->settings-schema.json->translateCondition->tooltip
+msgid ""
+"Should your provider translate the conditions to your language if your "
+"locale is supported by the provider. Otherwise the applet will use it's own "
+"translation system."
+msgstr ""
+
+#. 3.8->settings-schema.json->userAgentStringOverride->description
+msgid "User Agent String Override"
+msgstr ""
+
+#. 3.8->settings-schema.json->userAgentStringOverride->tooltip
+msgid ""
+"If you have issues with the applet not working properly and you know the "
+"User Agent string is the problem you can try to override it. Only change it "
+"if you know what you are doing. This is a string that is sent to the server "
+"when the applet tries to get the weather data."
+msgstr ""
+
+#. 3.8->settings-schema.json->runScript->description
+msgid "Run a command when the weather info changes"
+msgstr ""
+
+#. 3.8->settings-schema.json->runScript->tooltip
+msgid ""
+"The applet will run the command you provide every time the weather data is "
+"updated. The command will be interpolated with the same values with the same "
+"format you can get in any of the overrides, in addition you get {full_data} "
+"which is the full current weather data. Interpolation with single brackets "
+"{xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in "
+"single quotes (') and all other single quotes are escaped inside. You can "
+"use this to integrate the weather data with other parts of your system. You "
+"can look up the full weather data structure via the link in the README.\n"
+"\n"
+"Example: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' "
+"will show a notification with the current weather condition and "
+"temperature.\n"
+"\n"
+"Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
+"data to a file in /tmp."
+msgstr ""
+
+#. 3.8->settings-schema.json->testRunScript->description
+msgid "Test your command"
+msgstr ""

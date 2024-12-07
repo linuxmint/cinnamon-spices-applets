@@ -1,0 +1,48 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: calendar@ccprog 1.1.6\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-22 17:45-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 5.2->settings-schema.json->custom-tooltip-format->description
+msgid "Date format for tooltip"
+msgstr ""
+
+#. 5.2->settings-schema.json->custom-tooltip-format->tooltip
+msgid "Set your custom tooltip format here."
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "Cyprus"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "El Salvador"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "Montenegro"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Brussels"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Flemish Region"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Walloon Region"
+msgstr ""
