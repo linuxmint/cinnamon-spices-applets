@@ -2231,6 +2231,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (!this._sound_settings.get_boolean(OVERAMPLIFICATION_KEY) && this.maxVolume > 100) {
                 this.maxVolume = 100;
             }
+        } else {
+            this.maxVolume = this._sound_settings.get_int(MAXIMUM_VOLUME_KEY);
         }
         this._volumeMax = this.maxVolume / 100 * this._volumeNorm;
         if (this.maxVolume > 100)
