@@ -37,7 +37,9 @@ const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
-// /org/cinnamon/show-media-keys-osd
+
+// From Cinnamon 6.4, the /org/cinnamon/show-media-keys-osd key
+// becomes a boolean, no longer a character string!
 const SHOW_MEDIA_KEYS_OSD_KEY = "show-media-keys-osd";
 
 const RUNTIME_DIR = GLib.get_user_runtime_dir();
@@ -1831,9 +1833,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volumeSoundEnabled", "volumeSoundEnabled", this.on_volumeSoundEnabled_changed);
         this.settings.bind("maxVolume", "maxVolume", (value) => this._on_maxVolume_changed(value));
 
-        this.settings.setValue("showMediaKeysOSD", global.settings.get_string(SHOW_MEDIA_KEYS_OSD_KEY));
+        this.settings.setValue("showMediaKeysOSD", global.settings.get_boolean(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", this.on_showMediaKeysOSD_changed);
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
 
         this.settings.bind("volume", "volume");
         this.old_volume = this.volume;
@@ -2021,7 +2023,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_showMediaKeysOSD_changed() {
-        global.settings.set_string(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
+        global.settings.set_boolean(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
     }
 
     _on_remove_soundATcinnamonDOTorg_from_panels() {
@@ -2189,6 +2191,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
             this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, false);
         }
+        this.maxVolume = value;
         this._on_sound_settings_change();
     }
 
@@ -2233,7 +2236,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
         this._on_sound_settings_change();
 
         this._loopArtId = null;
@@ -2243,7 +2246,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_reloaded() {
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
     }
 
     on_applet_removed_from_panel() {
@@ -2322,21 +2325,56 @@ class Sound150Applet extends Applet.TextIconApplet {
     _toggle_out_mute() {
         if (!this._output)
             return;
-
+        let iconName = "audio-volume-";
+        let icon;
         if (this._output.is_muted) {
             this._output.change_is_muted(false);
             this.mute_out_switch.setToggleState(false);
+
+            let volume = Math.round(this._output.volume/this._volumeNorm*100);
+            //~ logDebug("VOLUME: "+volume);
+            if (volume < 1)
+                iconName += "muted";
+            else if (volume < 33)
+                iconName += "low";
+            else if (volume < 67)
+                iconName += "medium";
+            else if (volume <= 100)
+                iconName += "high";
+            else
+                iconName += "overamplified";
+
+            if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state)) iconName += "-with-mic-disabled";
+            else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state)) iconName += "-with-mic-enabled";
+
+            iconName += "-symbolic";
+            this._outputIcon = iconName;
+            if (this.showMediaKeysOSD) {
+                icon = Gio.Icon.new_for_string(this._outputIcon);
+                Main.osdWindowManager.show(-1, icon, ""+volume, null);
+            }
+            //~ this.setIcon();
         } else {
             this._output.change_is_muted(true);
             this.mute_out_switch.setToggleState(true);
-            this._outputIcon = "audio-volume-muted-symbolic";
+            iconName = "audio-volume-muted";
+
+            if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state)) iconName += "-with-mic-disabled";
+            else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state)) iconName += "-with-mic-enabled";
+
+            iconName += "-symbolic";
+            this._outputIcon = iconName;
             this.set_applet_icon_symbolic_name(this._outputIcon);
+            if (this.showMediaKeysOSD) {
+                icon = Gio.Icon.new_for_string(this._outputIcon);
+                Main.osdWindowManager.show(-1, icon, ""+this.volume.slice(0,-1), null);
+            }
         }
     }
 
     _toggle_in_mute() {
         if (!this._input) {
-            this.showOSD = (this.showMediaKeysOSD != "disabled");
+            this.showOSD = this.showMediaKeysOSD;
             this._volumeChange(null);
             return;
         }
@@ -2344,14 +2382,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
         this.mute_in_switch.setToggleState(newStatus);
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
+        this.showOSD = this.showMediaKeysOSD;
         this._volumeChange(null);
     }
 
     _onScrollEvent(actor, event) {
         //~ logDebug("event: "+event.originalEvent.ctrlKey);
         let _event = event;
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
+        this.showOSD = this.showMediaKeysOSD;
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
         let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
@@ -2459,6 +2497,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             )
                 icon_name += "-with-mic-enabled";
             icon_name += "-symbolic";
+            this._outputIcon = icon_name;
             let icon = Gio.Icon.new_for_string(icon_name);
             this.set_applet_icon_symbolic_name(icon_name);
             if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
@@ -2479,7 +2518,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._applet_tooltip.hide();
         }
 
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
+        this.showOSD = this.showMediaKeysOSD;
 
         this.volume_near_icon()
     }

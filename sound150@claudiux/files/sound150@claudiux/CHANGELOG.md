@@ -1,3 +1,7 @@
+### v7.3.2~20241206
+  * Fixes OSD problems.
+  * Fixes #6669.
+
 ### v7.3.1~20241130
   * Fixes #6655: The OSD is no longer displayed at startup if it is not required.
 
