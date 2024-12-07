@@ -6,7 +6,8 @@
       "page_Temperatures",
       "page_Fans",
       "page_Voltages",
-      "page_Intrusion"
+      "page_Intrusion",
+      "page_Wattage"
     ],
     "page_General": {
       "type": "page",
@@ -63,6 +64,14 @@
         "section_customDisclaimer",
         "section_customDisplay",
         "section_customSensors"
+      ]
+    },
+    "page_Wattage": {
+      "type": "page",
+      "title": "🔌 Wattage",
+      "sections": [
+        "section_wattDisplay",
+        "section_wattOptions"
       ]
     },
     "section_Display": {
@@ -255,6 +264,22 @@
       "keys": [
         "custom_sensors",
         "update_display"
+      ]
+    },
+    "section_wattDisplay": {
+      "type": "section",
+      "title": "Display",
+      "keys": [
+        "show_wattage",
+        "wattage_decimal"
+      ]
+    },
+    "section_wattOptions": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "host_wattage",
+        "port_wattage"
       ]
     }
   },
@@ -911,6 +936,34 @@
     ],
     "tooltip": "Add a line by custom sensor to set the type, the name and the path of the file to monitor (/sys/class/...).",
     "show-buttons": true
+  },
+  "show_wattage": {
+    "type": "switch",
+    "default": false,
+    "description": "Display wattage values of the cpu (Experimental)",
+    "tooltip": "Whether or not to display the wattage value of the cpu."
+  },
+  "wattage_decimal": {
+    "type": "scale",
+    "dependency": "show_wattage",
+    "default": 2,
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "description": "Number of decimals",
+    "tooltip": "Number of decimals to display wattage"
+  },
+  "host_wattage": {
+    "type": "entry",
+    "default": "http://localhost",
+    "description": "Host to connect to get the wattage value",
+    "tooltip": "The host to connect to get the wattage value. Default is \"localhost\"."
+  },
+  "port_wattage": {
+    "type": "entry",
+    "default": "9738",
+    "description": "Port to connect to get the wattage value",
+    "tooltip": "The port to connect to get the wattage value. Default is '9738'."
   },
   "report": {
     "type": "button",
