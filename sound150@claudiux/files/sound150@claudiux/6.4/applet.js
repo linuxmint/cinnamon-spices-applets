@@ -2191,6 +2191,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
             this._sound_settings.set_boolean(OVERAMPLIFICATION_KEY, false);
         }
+        this.maxVolume = value;
         this._on_sound_settings_change();
     }
 

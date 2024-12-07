@@ -2222,6 +2222,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
 
         }
+        this.maxVolume = value;
         this._on_sound_settings_change();
     }
 
