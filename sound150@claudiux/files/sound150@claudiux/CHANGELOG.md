@@ -1,3 +1,6 @@
+### v7.3.3~20241212
+  * Improves compatibility with Cinnamon 6.4 removing "%" after volume level.
+
 ### v7.3.2~20241206
   * Fixes OSD problems.
   * Fixes #6669.
