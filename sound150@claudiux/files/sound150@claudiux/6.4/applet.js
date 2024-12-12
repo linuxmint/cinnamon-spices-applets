@@ -159,7 +159,7 @@ class ControlButton {
         this.icon = new St.Icon({
             icon_type: St.IconType.SYMBOLIC,
             icon_name: icon,
-            style_class: (small) ? "popup-menu-icon" : ""
+            style_class: (small) ? "popup-menu-icon" : null
         });
         this.button.set_child(this.icon);
         this.actor.add_actor(this.button);
@@ -994,7 +994,8 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
 
         if (name != "Muffin") { // This test is it really necessary?
             this.slider = new VolumeSlider(applet, stream, name, iconName);
-            this.slider._slider.style = "min-width: 6em;";
+            //FIXME: which line? is this useful? it seems DEPRECATED.
+            //~ this.slider._slider.style = "min-width: 6em;";
             //~ this.slider._slider.style = "width: 6em;";
             this.addMenuItem(this.slider);
         } else {
@@ -2236,6 +2237,21 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
+        //~ this.actor.set_style(null);
+        //~ this._applet_label.set_style(null);
+
+        //~ let color;
+        //~ try {
+            //~ if (!this.themeNode) {
+                //~ this.themeNode = this.actor.get_theme_node();
+            //~ }
+            //~ let defaultColor = this.themeNode.get_foreground_color();
+            //~ color = "rgba(" + defaultColor.red + "," + defaultColor.green + "," + defaultColor.blue + "," + defaultColor.alpha + ")";
+        //~ } catch(e) {
+            //~ color = this.color0_100;
+        //~ }
+        //~ this.color0_100 = color;
+
         this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
         this._on_sound_settings_change();
 
@@ -2326,12 +2342,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._output)
             return;
         let iconName = "audio-volume-";
-        let icon;
+        let icon, volume;
         if (this._output.is_muted) {
             this._output.change_is_muted(false);
             this.mute_out_switch.setToggleState(false);
 
-            let volume = Math.round(this._output.volume/this._volumeNorm*100);
+            volume = Math.round(this._output.volume/this._volumeNorm*100);
             //~ logDebug("VOLUME: "+volume);
             if (volume < 1)
                 iconName += "muted";
@@ -2367,7 +2383,15 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.set_applet_icon_symbolic_name(this._outputIcon);
             if (this.showMediaKeysOSD) {
                 icon = Gio.Icon.new_for_string(this._outputIcon);
-                Main.osdWindowManager.show(-1, icon, ""+this.volume.slice(0,-1), null);
+                if (typeof(this.volume) == "string") {
+                    if (this.volume.endsWith("%"))
+                        volume = parseInt(this.volume.slice(0,-1));
+                    else
+                        volume = parseInt(this.volume);
+                } else {
+                    volume = this.volume;
+                }
+                Main.osdWindowManager.show(-1, icon, ""+volume, null);
             }
         }
     }
@@ -2477,7 +2501,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._notifyVolumeChange(this._output);
             this.setAppletTooltip();
             this._applet_tooltip.show();
-            let volume = this.volume.slice(0, -1);
+            let volume = parseInt(this.volume.slice(0, -1));
             let icon_name = "audio-volume";
             if (volume > 100) icon_name += "-overamplified";
             else if (volume <1) {
@@ -3068,13 +3092,22 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.volume = percentage;
         this.setAppletTooltip();
 
-        if (!this.themeNode) {
-            this.themeNode = this.actor.get_theme_node();
-        }
-        let defaultColor = this.themeNode.get_foreground_color();
-        let color = "rgba(" + defaultColor.red + "," + defaultColor.green + "," + defaultColor.blue + "," + defaultColor.alpha + ")";
-
+        let color;
         let changeColor = false;
+
+        //~ try {
+            //~ if (!this.themeNode) {
+                //~ this.themeNode = this.actor.get_theme_node();
+            //~ }
+            //~ let defaultColor = this.themeNode.get_foreground_color();
+            //~ color = "rgba(" + defaultColor.red + "," + defaultColor.green + "," + defaultColor.blue + "," + defaultColor.alpha + ")";
+        //~ } catch(e) {
+            //~ color = this.color0_100;
+            //~ changeColor = true;
+        //~ }
+        color = this.color0_100;
+        changeColor = true;
+
         if (this.adaptColor) {
             let pc = Math.round(percentage.split("%")[0]);
             if (pc > 130) {
