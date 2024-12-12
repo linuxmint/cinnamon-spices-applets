@@ -237,6 +237,13 @@ var VERSION;
 
 let dummy = _("unassigned"); // Only for translation.
 
+var radioppConfigFilePath = HOME_DIR + "/.cinnamon/configs/radio@driglu4it/radio@driglu4it.json";
+if (!file_test(radioppConfigFilePath, FileTest.EXISTS)) {
+  radioppConfigFilePath = HOME_DIR + "/.config/cinnamon/spices/radio@driglu4it/radio@driglu4it.json";
+}
+if (!file_test(radioppConfigFilePath, FileTest.EXISTS)) {
+  radioppConfigFilePath = null;
+}
 /* Check if string is valid UUID */
 function isValidUUID(str) {
   // Regular expression to check if string is a valid UUID
@@ -1248,6 +1255,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_user_settings() {
+    this.settings.bind("radiopp-is-here", "radiopp_is_here");
+    this.radiopp_is_here = radioppConfigFilePath != null;
     this.settings.bind("desklet-show-on-desktop", "show_desklet", () => {
       if (this.context_menu_item_showDesklet) {
         this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
@@ -5446,6 +5455,28 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
 
   /// Import ///
+  on_button_import_radiopp_clicked() {
+    if (!radioppConfigFilePath) return;
+
+    let radioppSettings = JSON.parse((to_string(file_get_contents(radioppConfigFilePath)[1])).trim());
+    let contents = radioppSettings["tree"]["value"];
+
+    this.set_radio_hashtable();
+
+    let i=0;
+    while (i<contents.length) {
+      if (this.radiosHash[""+contents[i].url])
+        contents.splice(i,1);
+      else
+        i++;
+    }
+
+    let id = setTimeout(() => {
+      this.settings.setValue("import-list", contents);
+      clearTimeout(id);
+    }, 800); // 800 ms
+  }
+
   on_button_import_shoutcast_clicked() {
     spawnCommandLineAsync("xdg-open https://directory.shoutcast.com/")
   }

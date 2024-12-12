@@ -26,6 +26,7 @@
       "type": "page",
       "title": "Import",
       "sections": [
+      "sectionImportRadiopp",
         "sectionImportShoutcast",
         "sectionImportFile",
         "sectionImportList"
@@ -134,6 +135,14 @@
         "button-update-help",
         "button-update",
         "scale-update"
+      ]
+    },
+    "sectionImportRadiopp": {
+      "type": "section",
+      "dependency": "radiopp-is-here",
+      "title": "Only for Radio++ users",
+      "keys": [
+        "import-radiopp-button"
       ]
     },
     "sectionImportShoutcast": {
@@ -620,6 +629,11 @@
     "description": "Help",
     "height": 100,
     "dependency": "show-help-in-tabs"
+  },
+  "import-radiopp-button": {
+    "type": "button",
+    "description": "Import your stations from Radio++",
+    "callback": "on_button_import_radiopp_clicked"
   },
   "import-shoutcast-button": {
     "type": "button",
@@ -1910,6 +1924,10 @@
     "callback": "on_desklet_open_settings_button_clicked"
   },
   "desklet-is-activated": {
+    "type": "generic",
+    "default": false
+  },
+  "radiopp-is-here": {
     "type": "generic",
     "default": false
   }
