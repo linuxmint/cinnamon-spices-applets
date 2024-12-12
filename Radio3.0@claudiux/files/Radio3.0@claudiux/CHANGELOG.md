@@ -1,3 +1,6 @@
+### v2.4.0~20241212
+  * You can now import your stations from Radio++ if you use it. See Import tab in settings.
+
 ### v2.3.3~20241205
   * Clicking on the Album Art desklet updates the image.
 
