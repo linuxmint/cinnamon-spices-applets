@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-12 22:53+0100\n"
-"PO-Revision-Date: 2024-12-01 10:41-0300\n"
+"PO-Revision-Date: 2024-12-13 20:53-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -724,7 +724,7 @@ msgstr "Actualizar la lista de estaciones"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Sólo para usuarios de Radio++"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -970,7 +970,7 @@ msgstr "%"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "Importe sus emisoras de Radio++"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
