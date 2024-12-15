@@ -1,3 +1,8 @@
+### v2.5.0~20241215
+  * You can now set/unset favorite radio stations by clicking on ♥︎ in the menu while listening to them.
+  * The first category you see is ♥︎.
+  * Stations are displayed beside their category. (Forced.)
+
 ### v2.4.0~20241212
   * You can now import your stations from Radio++ if you use it. See Import tab in settings.
 

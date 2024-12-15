@@ -9,7 +9,7 @@ const { WindowTracker, AppSystem } = imports.gi.Cinnamon;
 //Lang:
 const Lang = imports.lang;
 //PopupMenu:
-const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, PopupIconMenuItem, PopupSwitchMenuItem, PopupMenuSection, PopupSubMenuMenuItem, PopupBaseMenuItem, PopupSubMenu, arrowIcon } = imports.ui.popupMenu;
+const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, PopupIconMenuItem, PopupSwitchMenuItem, PopupMenuSection, PopupSubMenuMenuItem, PopupBaseMenuItem, PopupSubMenu, PopupSwitchIconMenuItem, arrowIcon } = imports.ui.popupMenu;
 // Settings:
 const { AppletSettings } = imports.ui.settings;
 // ./lib/util:
@@ -1314,7 +1314,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("horizontal-show-title", "horizontal_show_title", this.volume_near_icon.bind(this));
     this.settings.bind("horizontal-max-title-length", "horizontal_max_title_length", this.volume_near_icon.bind(this));
     // Menu:
-    this.settings.bind("show-by-category", "show_by_category");
+    //~ this.settings.bind("show-by-category", "show_by_category");
+    this.show_by_category = true; // forced.
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-down", "shortcutVolDown", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-cut", "shortcutVolCut", this.onShortcutChanged.bind(this));
@@ -1701,6 +1702,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         continue;
       if (station.url.length > 0 && station.url != "null") {
         this.radiosHash[""+station.url] = {
+          "fav": (station.fav != undefined) ? station.fav : false,
           "inc": station.inc,
           "name": ""+station.name,
           "bitrate": ""+station.bitrate,
@@ -2702,7 +2704,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
-      if (this.show_by_category && this.number_of_categories > 0) {
+      // FAV SWITCH
+      let fav_switch_item = new PopupSwitchIconMenuItem("", this.is_fav_radio, "emblem-favorite", IconType.SYMBOLIC);
+      fav_switch_item.connect('activate', Lang.bind(this, function() {
+        this.is_fav_radio = !this.is_fav_radio;
+        this.menu.toggle();
+      }));
+      this.menu.addMenuItem(fav_switch_item);
+
+      // CATEGORIES AND RADIO STATIONS
+      //~ if (this.show_by_category && this.number_of_categories > 0) {
+      if (this.show_by_category) {
         // Category list beside of Radio Station list:
         let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
         let _cats = Object.keys(cws);
@@ -4148,6 +4160,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (id && (id.length > 0) && this.radiosHash[id]) {
           //log("NEW: "+i+"/"+nb_of_urls);
           let rh = this.radiosHash[id];
+          new_station["fav"] = station.fav;
           new_station["inc"] = station.inc;
           new_station["play"] = false;
           new_station["name"] = station.name;
@@ -4173,6 +4186,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           new_station["favicon"] = rh.favicon ? rh.favicon : "";
           new_station["author_title_swap"] = rh.author_title_swap != undefined ? rh.author_title_swap : false;
         } else {
+          new_station["fav"] = false;
           new_station["inc"] = station.inc;
           new_station["play"] = false;
           new_station["name"] = station.name;
@@ -6036,6 +6050,23 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return ret
   }
 
+  get is_fav_radio() {
+    if (this.radiosHash && this.radiosHash[this.last_radio_listened_to] && this.radiosHash[this.last_radio_listened_to].fav)
+      return this.radiosHash[this.last_radio_listened_to].fav;
+    else
+      return false;
+  }
+
+  set is_fav_radio(value) {
+    let radios = this.radios;
+    for (let radio of radios) {
+      if (radio.url == this.last_radio_listened_to)
+        radio["fav"] = value;
+    }
+    this.radios = radios;
+    radios = null;
+  }
+
   get codec() {
     if (file_test(MPV_CODEC_FILE, FileTest.EXISTS)) {
       let codec = (to_string(file_get_contents(MPV_CODEC_FILE)[1])).trim().toUpperCase();
@@ -6244,7 +6275,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get categories_with_stations() {
-    var cws = {"All Categories": {}};
+    var cws = {"♥︎": {}, "All Categories": {}};
     let radios = this.radios;
     var currentCat = "All Categories";
     for (let radio of radios) {
@@ -6252,6 +6283,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         currentCat = radio.name;
         cws[currentCat] = {};
       } else {
+        let is_fav = radio.fav;
         let title = radio.name;
         let elts = []
         let bitrate = (this.show_bitrate) ? ""+parseInt(radio.bitrate) : "";
@@ -6265,7 +6297,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           elts.push(" *");
 
         title = title + elts.join(" ");
-
+        if (is_fav)
+          cws["♥︎"][title] = radio.url.trim();
         cws[currentCat][title] = radio.url.trim();
         cws["All Categories"][title] = radio.url.trim();
       }
