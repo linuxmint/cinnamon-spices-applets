@@ -14,7 +14,7 @@ But also, it can:
 
   * try to restart the VPN link when it shuts down incidentally,
 
-  * close the VPN-related apps (like Transmission, qBittorrent, Deluge...) when your VPN shuts down, and restart them when your VPN link becomes active again,
+  * close the VPN-related apps (like Transmission, qBittorrent, Deluge..., also flakpak ones) when your VPN shuts down, and restart them when your VPN link becomes active again,
 
   * quickly close a VPN-related app if it is started when the VPN is idle.
 
