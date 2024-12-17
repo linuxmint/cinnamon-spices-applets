@@ -83,6 +83,8 @@ const VolumeSlider = require("./lib/volumeslider");
 const ScreensaverInhibitor = require("./lib/screensaverInhibitor");
 // to-string:
 const {to_string} = require("./lib/to-string");
+// text-wrap:
+const {formatTextWrap} = require("./lib/text-wrap");
 // httpLib:
 const {HttpLib} = require("./lib/httpLib");
 // fixedEncodeURIComponent:
@@ -93,6 +95,8 @@ const { are_translations_installed, install_translations } = require("./lib/chec
 //~ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
+
+var WRAP_LENGTH = 25;
 
 const range = (start, stop, step) =>
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
@@ -1314,8 +1318,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("horizontal-show-title", "horizontal_show_title", this.volume_near_icon.bind(this));
     this.settings.bind("horizontal-max-title-length", "horizontal_max_title_length", this.volume_near_icon.bind(this));
     // Menu:
-    //~ this.settings.bind("show-by-category", "show_by_category");
-    this.show_by_category = true; // forced.
+    this.settings.bind("show-by-category", "show_by_category");
+    //~ this.show_by_category = false; // forced.
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-down", "shortcutVolDown", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-cut", "shortcutVolCut", this.onShortcutChanged.bind(this));
@@ -2146,12 +2150,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     var name = "";
 
     if (this.radiosHash != null && this.radiosHash[""+id] != null) { // && this.radiosHash[""+id].inc == true) {
-      return "" + this.radiosHash[""+id].name;
+      name = "" + this.radiosHash[""+id].name;
+      if (this.radiosHash[""+id].fav) name = "♥︎ "+name;
+      return name;
     } else {
       let radios = this.settings.getValue("radios");
       for (let i = 0, _length = radios.length; i < _length; i++) {
         if ((id == radios[i].url) && (radios[i].inc)) {
           name = "" + radios[i].name;
+          if (radios[i].fav) name = "♥︎ "+name;
           break;
         }
       }
@@ -2521,6 +2528,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // NORMAL MENU
     if (force || this.oldRadios != JSON.stringify(this.radios)) {
+      //~ this.mainBox = new BoxLayout({
+        //~ style_class: 'menu-applications-outer-box',
+        //~ style: 'spacing: 0px;',
+        //~ vertical: true, reactive: true,
+        //~ show_on_set_parent: false
+      //~ });
+      //~ this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
+
       this.set_radio_hashtable();
 
       if (change_tooltip) this.set_radio_tooltip_to_default_one();
@@ -2530,6 +2545,16 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       this.menu = new AppletPopupMenu(this, this.orientation);
       this.menuManager.addMenu(this.menu);
+
+      //~ this.mainBox.add(this.menu.box, {
+        //~ expand: false, x_fill: false,
+        //~ x_align: Align.START, y_align: Align.MIDDLE,
+      //~ });
+
+      if (this.menu._signals.isConnected('enter-event', this.menu.actor)) {
+        this.menu._signals.disconnect('enter-event', this.menu.actor);
+        this.menu._signals.disconnect('leave-event', this.menu.actor);
+      }
 
       this.currentMenuItem = null;
       this.menuItems = [];
@@ -2567,7 +2592,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
         //~ log("yt_dl_command: "+yt_dl_command);
 
-        let brainz_item = new PopupIconMenuItem(""+title, "audio-x-generic", IconType.SYMBOLIC, { reactive: true });
+        let brainz_item = new PopupIconMenuItem(""+formatTextWrap(title, WRAP_LENGTH), "audio-x-generic", IconType.SYMBOLIC, { reactive: true });
         brainz_item.label.clutterText.line_wrap_mode = WrapMode.WORD_CHAR;
         brainz_item.label.clutterText.ellipsize = EllipsizeMode.NONE;
         brainz_item.connect('activate', Lang.bind(this, function() {
@@ -2575,14 +2600,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }));
         this.menu.addMenuItem(brainz_item);
 
-        let yt_watch_item  = new PopupIconMenuItem(_("Watch on YT"), "media-playback-start", IconType.SYMBOLIC, { reactive: true });
+        let yt_watch_item  = new PopupIconMenuItem(formatTextWrap(_("Watch on YT"), WRAP_LENGTH), "media-playback-start", IconType.SYMBOLIC, { reactive: true });
         yt_watch_item.connect('activate', Lang.bind(this, function() {
           spawnCommandLineAsync("xdg-open " + yt_watch_link);
         }));
         this.menu.addMenuItem(yt_watch_item);
 
         if (this.yt_downloads.indexOf(title) < 0 && this.check_hd_space_left(false)) {
-          let yt_dl_item  = new PopupIconMenuItem(_("Try to download it from YT (unsafe)"), "folder-download-symbolic", IconType.SYMBOLIC, { reactive: true });
+          let yt_dl_item  = new PopupIconMenuItem(formatTextWrap(_("Try to download it from YT (unsafe)"), WRAP_LENGTH), "folder-download-symbolic", IconType.SYMBOLIC, { reactive: true });
 
           yt_dl_item.connect('activate', Lang.bind(this, function() {
             this.download_from_YT(title, yt_dl_command, RADIO30_MUSIC_DIR);
@@ -2645,7 +2670,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // RECENTS STATIONS:
       var to_remove_from_recentRadios = [];
       if (this.recent_number > 0) {
-        let menuitemHead2 = new TitleSeparatorMenuItem(_("Recently Played Stations:"), "pan-down");
+        let menuitemHead2 = new TitleSeparatorMenuItem(formatTextWrap(_("Recently Played Stations:"), WRAP_LENGTH), "pan-down");
         this.menu.addMenuItem(menuitemHead2);
 
         var titles = [];
@@ -2666,7 +2691,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           if (indexRecentRadios > this.recent_number)
             break;
 
-          let item = new PopupMenuItem(title, { reactive: true });
+          let item = new PopupMenuItem(formatTextWrap(title, WRAP_LENGTH), { reactive: true });
           item.connect('activate', Lang.bind(this, function() {
             if (this.currentMenuItem === null || this.currentMenuItem != item) {
               if (change_tooltip) {
@@ -2687,7 +2712,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             let homepage = this.get_radio_homepage(id);
             item_homepage = null;
             if (homepage && homepage != 'null' && homepage.length > 0) {
-              item_homepage = new PopupIconMenuItem(_("Visit the home page of this station"), "web-browser", IconType.SYMBOLIC, { reactive: true });
+              item_homepage = new PopupIconMenuItem(formatTextWrap(_("Visit the home page of this station"), WRAP_LENGTH), "web-browser", IconType.SYMBOLIC, { reactive: true });
               item_homepage.connect('activate', () => { spawnCommandLineAsync(`xdg-open ${homepage}`) });
             }
           }
@@ -2716,29 +2741,39 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       //~ if (this.show_by_category && this.number_of_categories > 0) {
       if (this.show_by_category) {
         // Category list beside of Radio Station list:
-        let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
+        let cws = JSON.parse(JSON.stringify(this.categories_with_stations)); //cws: categories with stations
         let _cats = Object.keys(cws);
         //~ logDebug("Nbr of categories: "+_cats.length);
         //~ logDebug("categories_with_stations: \n"+JSON.stringify(cws, null, 4));
 
         let section = new PopupMenuSection();
         section.box.set_vertical(false);
-        section.box.set_style("width: 900px;");
+        section.box.set_style("width: 800px;spacing: 0px;padding:0px;");
         this.menu.addMenuItem(section);
 
         let sectionCats = new PopupMenuSection();
+        sectionCats.blockSourceEvents = true;
         sectionCats.box.set_vertical(true);
-        //~ sectionCats.box.set_style("width: 200px;");
+        sectionCats.box.set_style("spacing: 0px;padding: 0px;");
         section.addMenuItem(sectionCats);
 
         let sectionStations = new PopupMenuSection();
+        sectionStations.blockSourceEvents = true;
         sectionStations.box.set_vertical(true);
-        //~ sectionStations.box.set_style("width: 500px;");
+        sectionStations.box.set_style("width: 350px;spacing: 0px;padding: 0px;");
+        //~ sectionStations.box.connect("leave-event", () => {
+          //~ let toID = setTimeout( () => {
+            //~ clearTimeout(toID);
+          //~ }, 75);
+        //~ });
+        sectionStations.box.set_style("spacing: 0px;padding: 0px;");
         section.addMenuItem(sectionStations);
 
-        this.categoriesMenu = new StationsPopupSubMenuMenuItem(_("Categories"));
+        this.categoriesMenu = new StationsPopupSubMenuMenuItem(formatTextWrap(_("Categories"), WRAP_LENGTH));
+        //~ this.categoriesMenu.style="width: 250px;";
 
-        this.stationsMenu = new PopupSubMenuMenuItem(_("Radio Stations"));
+        this.stationsMenu = new PopupSubMenuMenuItem(formatTextWrap(_("Radio Stations"), WRAP_LENGTH));
+        //~ this.stationsMenu.style="width: 350px;";
 
         sectionCats.addMenuItem(this.categoriesMenu, { expand: true, span: 1, align: Align.START });
         sectionStations.addMenuItem(this.stationsMenu, { expand: true, span: 1, align: Align.START });
@@ -2753,16 +2788,48 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           catItems.push(catItem);
           this.categoriesMenu.menu.addMenuItem(catItems[iCats]);
           catItems[iCats].actor.connect("enter-event", Lang.bind(this, function() {
+            //~ logDebug(`enter-event ${c} BEGIN`);
+            this.menu.actor.show();
+            this.stationsMenu.menu.actor.show();
             this.stationsMenu.menu.removeAll();
             this.stationsMenu.menu.open();
+            sectionStations.box.show();
+
             for (let s of _keys) {
               let id = cws[c][s];
-              let item = new PopupMenuItem(s, { reactive: true });
+              let item = new PopupMenuItem(formatTextWrap(s, WRAP_LENGTH), { reactive: true });
               item.setShowDot(id == this.last_radio_listened_to);
-              if (id == this.last_radio_listened_to && c!="All Categories") {
+              if (id == this.last_radio_listened_to && c!=="All Categories" && c!=="♥︎") {
                 catItem.setShowDot(true);
                 this.last_category = c;
               }
+              item.connect("enter-event", Lang.bind(this, function() {
+                //~ logDebug(`enter-event ${s} BEGIN`);
+                //~ this.menu.open();
+                this.menu.actor.show();
+                this.categoriesMenu.menu.actor.show();
+                //~ logDebug(`enter-event ${s} END`);
+              }));
+              //~ item.connect("leave-event", () => {
+                //~ logDebug(`leave-event ${s} BEGIN`);
+                //~ sectionStations.box.show();
+                //~ let toID = setTimeout( () => {
+                  //~ sectionStations.box.show();
+                  //~ logDebug(`leave-event ${s} END`);
+                  //~ clearTimeout(toID);
+                //~ }, 75);
+              //~ });
+              //~ item.connect("motion-event", Lang.bind(this, function() {
+                //~ //this.menu.open();
+                //~ this.menu.actor.show();
+                //~ this.categoriesMenu.menu.actor.show();
+              //~ }));
+              //~ item.connect("leave-event", Lang.bind(this, function() {
+                //~ //this.menu.open();
+                //~ this.menu.actor.show();
+                //~ this.categoriesMenu.menu.actor.show();
+              //~ }));
+              //~ item.disconnect("leave-event");
               item.connect('activate', Lang.bind(this, function() {
                 this.last_category = c;
                 this.set_radio_tooltip_to_default_one();
@@ -2774,15 +2841,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               }));
               this.stationsMenu.menu.addMenuItem(item);
             }
+            this.menu.actor.show();
+            //~ let toID = setTimeout( () => {
+              //~ sectionStations.box.show();
+              //~ logDebug(`enter-event ${c} END`);
+              //~ clearTimeout(toID);
+            //~ }, 75);
           }));
         }
       } else {
         // MY RADIO STATIONS:
-        let allRadiosMenu = new RadioPopupSubMenuMenuItem(_("My Radio Stations") + "  (%s)".format(""+this.number_of_stations));
+        let allRadiosMenu = new RadioPopupSubMenuMenuItem(formatTextWrap(_("My Radio Stations") + "  (%s)".format(""+this.number_of_stations), WRAP_LENGTH));
         this.menu.addMenuItem(allRadiosMenu);
 
         for (let i = 0, _length = (this.radios) ? this.radios.length : 0; i < _length; i++) {
           let title = ""+this.radios[i].name;
+          if (this.radios[i].fav) title = "♥︎ " + title;
           let id = (this.radios[i].url) ? ""+this.radios[i].url : "";
           let isCategory = id.length === 0;
           let reactive = !isCategory;
@@ -2805,7 +2879,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           }
 
           if (this.radios[i] != null && this.radios[i].inc === true) {
-            this.menuItems[i] = new PopupMenuItem(title, { reactive: reactive });
+            this.menuItems[i] = new PopupMenuItem(formatTextWrap(title, WRAP_LENGTH), { reactive: reactive });
             allRadiosMenu.menu.addMenuItem(this.menuItems[i]);
 
             if (reactive) this.menuItems[i].connect('activate', Lang.bind(this, function() {
@@ -2835,7 +2909,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       // STOP:
       if (this.stopItem) this.stopItem.destroy();
-      this.stopItem = new TitleSeparatorMenuItem(_("Stop"), "media-playback-stop", true);
+      this.stopItem = new TitleSeparatorMenuItem(formatTextWrap(_("Stop"), WRAP_LENGTH), "media-playback-stop", true);
       this.stopItem.connect('activate', Lang.bind(this, this.stop_mpv));
       this.menu.addMenuItem(this.stopItem);
       if (force) {
@@ -2845,7 +2919,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       // SEARCH FOR NEW STATIONS:
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
-      let searchItem = new PopupIconMenuItem(_("Search for new stations..."), "system-search", IconType.SYMBOLIC);
+      let searchItem = new PopupIconMenuItem(formatTextWrap(_("Search for new stations..."), WRAP_LENGTH), "system-search", IconType.SYMBOLIC);
       searchItem.connect('activate', Lang.bind(this, () => {
         let pidOfSearch = this.configureApplet(this.tabNumberOfSearch);
       } ));
@@ -2853,11 +2927,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       // CONFIGURE APPLET and SOUND SETTINGS:
       if (this.show_system_items) {
-        let configureItem = new PopupIconMenuItem(_("Configure..."), "system-run", IconType.SYMBOLIC);
+        let configureItem = new PopupIconMenuItem(formatTextWrap(_("Configure..."), WRAP_LENGTH), "system-run", IconType.SYMBOLIC);
         configureItem.connect('activate', Lang.bind(this, this.configureApplet));
         this.menu.addMenuItem(configureItem);
 
-        let soundSettingsItem = new PopupIconMenuItem(_("Sound Settings"), "audio-card", IconType.SYMBOLIC);
+        let soundSettingsItem = new PopupIconMenuItem(formatTextWrap(_("Sound Settings"), WRAP_LENGTH), "audio-card", IconType.SYMBOLIC);
         soundSettingsItem.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
         this.menu.addMenuItem(soundSettingsItem);
       }
@@ -2877,7 +2951,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
     let _cats = Object.keys(cws);
     for (let c of _cats) {
-      if (c == "All Categories") continue;
+      if (c === "All Categories" || c === "♥︎") continue;
       let _keys = Object.keys(cws[c]);
       for (let s of _keys) {
         if (id == cws[c][s]) {
@@ -3658,6 +3732,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("on_applet_clicked");
     if (!this.menu || !this.menu.isOpen) {
       this.make_menu(true, false, false);
+      //~ this.mainBox.show();
       this.change_selected_item();
       this.menu.open();
       if (this.categoriesMenu) {
@@ -3670,6 +3745,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.menu) {
       this.menu.toggle();
       this.menu.destroy();
+      //~ this.mainBox.hide();
     }
   }
 
@@ -6297,8 +6373,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           elts.push(" *");
 
         title = title + elts.join(" ");
-        if (is_fav)
+        if (is_fav) {
+          title = "♥︎ " + title;
           cws["♥︎"][title] = radio.url.trim();
+        }
         cws[currentCat][title] = radio.url.trim();
         cws["All Categories"][title] = radio.url.trim();
       }
