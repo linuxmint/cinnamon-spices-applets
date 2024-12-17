@@ -1,3 +1,10 @@
+### v2.5.1~20241217
+  * Fixes #6689.
+  * Improved menu display.
+  * Reintroduces the "Display the Station list beside the Category list" option.
+  * If this option is not checked, the first category is not ♥︎.
+  * Favorite stations are marked with a ♥︎ in the menu.
+
 ### v2.5.0~20241215
   * You can now set/unset favorite radio stations by clicking on ♥︎ in the menu while listening to them.
   * The first category you see is ♥︎.

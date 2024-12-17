@@ -236,6 +236,7 @@
       "keys": [
         "show-title-and-version",
         "recent-number",
+        "show-by-category",
         "show-system-items"
       ]
     },
@@ -962,6 +963,12 @@
     "type": "button",
     "description": "Empty your Recently Played Stations list now",
     "callback": "empty_recents"
+  },
+  "show-by-category": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the Station list beside the Category list",
+    "tooltip": "Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\nUnchecked: Single list containing each category followed by its stations."
   },
   "show-system-items": {
     "type": "switch",
