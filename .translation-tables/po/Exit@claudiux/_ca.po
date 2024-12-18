@@ -1,0 +1,17 @@
+# EXIT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Performing automatic updates"
+msgstr ""
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Please wait"
+msgstr ""
