@@ -1,3 +1,31 @@
+### v2.5.1~20241217
+  * Fixes #6689.
+  * Improved menu display.
+  * Reintroduces the "Display the Station list beside the Category list" option.
+  * If this option is not checked, the first category is not ♥︎.
+  * Favorite stations are marked with a ♥︎ in the menu.
+
+### v2.5.0~20241215
+  * You can now set/unset favorite radio stations by clicking on ♥︎ in the menu while listening to them.
+  * The first category you see is ♥︎.
+  * Stations are displayed beside their category. (Forced.)
+
+### v2.4.0~20241212
+  * You can now import your stations from Radio++ if you use it. See Import tab in settings.
+
+### v2.3.3~20241205
+  * Clicking on the Album Art desklet updates the image.
+
+### v2.3.2~20241203
+  * Redesigned context menu.
+
+### v2.3.1~20241201
+  * Adds an optional fade effect to the Album Art. See the Behavior tab of this applet settings.
+
+### v2.3.0~20241129
+  * Adds the ability to display on desktop the Album (or Song) Art.
+  * Solves the problem with pulseaudio/pipewire.
+
 ### v2.2.3~20241119
   * Fixes #6583: Remove dummy device.
   * Updates version number.

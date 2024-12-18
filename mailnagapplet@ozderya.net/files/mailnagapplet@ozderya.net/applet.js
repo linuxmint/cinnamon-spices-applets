@@ -526,7 +526,9 @@ MyApplet.prototype = {
 
 	makeMenuItem: function(mail)
 	{
-		let mi = new MailItem(mail.id, mail.sender, mail.sender_address, mail.subject, mail.datetime, mail.account);
+		let mi = new MailItem(mail.id, mail.sender, mail.sender_address, 
+				      mail.subject.length > 64 ? mail.subject.substr(0,64) + "..." : mail.subject, 
+				      mail.datetime, mail.account);
 		mi.markReadButton.connect(
 			'clicked',
             Lang.bind(this, function(){this.markMailRead(mail.id)}));

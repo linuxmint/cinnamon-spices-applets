@@ -56,21 +56,19 @@ msgstr "Intelligens elrejtés"
 
 #. 5.4->settings-schema.json->pinned-at-startup->description
 msgid "At Startup"
-msgstr ""
+msgstr "Indításkor"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
 msgid "Leave the panel as it is"
-msgstr ""
+msgstr "Hagyja a panelt úgy, ahogy van"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Pin the panel"
-msgstr "Panel rögzítése/feloldása"
+msgstr "Panel rögzítése"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Unpin the panel"
-msgstr "Panel rögzítése/feloldása"
+msgstr "Panel feloldása"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.4.0
+
+* Fix issues when running under Cinnamon 6.4 (port of cobinja's fix for CobiWindowList). Make sure you have this fix BEFORE upgrading to Cinnamon 6.4
+
+## 2.3.9
+
+* Fix the Thumbnail menu item remove animation that is used when the window-list is on a vertical panel
+* Use an "up arrow" unicode character as the minimized window status indicator when the window-list is on the top panel
+* Focus a buttons window when the user drags an object onto a window-list button so that the window is made visible enabling the user to drop the dragged object on to the window
+
 ## 2.3.8
 
 * Remove the focus highlighting when no window has the focus (i.e. after you click on the desktop)
@@ -64,7 +74,6 @@
 * When appropriate, the Thumbnail menu items will now show the windows workspace and monitor number to the right of the window title. This will only appear when one of the window-list options are enabled that shows windows from other monitors/workspaces and only when there are more then one monitor/workspace available. The number(s) will appear in the order "(workspace#/Monitor#)" when both numbers are needed.
 * When the "number label" is set to show workspace numbers and button is grouped, I fixed the "number label" so that it is updated when the focus changes causing the current window for the grouped button to change. This is needed in case the workspace for the newly focused window is on a different workspace than the previous most recently focused window of the group.
 * Fixed the number of arguments passed to the API call for moving windows to other workspaces on older OS's (pre Cinnamon 5.4).
-
 
 ## 2.1.0
 

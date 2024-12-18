@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# CASSIA WINDOW LIST
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# klangman, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: CassiaWindowList@klangman 2.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-31 19:50-0400\n"
+"POT-Creation-Date: 2024-12-06 20:39-0500\n"
 "PO-Revision-Date: 2024-11-21 00:50+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 
-#. 4.0/applet.js:584 6.0/applet.js:584
+#. 4.0/applet.js:584 6.0/applet.js:584 6.4/applet.js:562
 msgid "all buttons"
 msgstr "kaikki painikkeet"
 
-#. 4.0/applet.js:3258 6.0/applet.js:3258
+#. 4.0/applet.js:3277 6.0/applet.js:3277 6.4/applet.js:3249
 msgid "Applet Preferences"
 msgstr "Sovelman asetukset"
 
-#. 4.0/applet.js:3262 6.0/applet.js:3262
+#. 4.0/applet.js:3281 6.0/applet.js:3281 6.4/applet.js:3253
 msgid "About..."
 msgstr "Tietoja..."
 
-#. 4.0/applet.js:3266 6.0/applet.js:3266
+#. 4.0/applet.js:3285 6.0/applet.js:3285 6.4/applet.js:3257
 msgid "Configure..."
 msgstr "Aseta..."
 
-#. 4.0/applet.js:3270 6.0/applet.js:3270
+#. 4.0/applet.js:3289 6.0/applet.js:3289 6.4/applet.js:3261
 msgid "Website"
 msgstr "Verkkosivu"
 
-#. 4.0/applet.js:3274 6.0/applet.js:3274
+#. 4.0/applet.js:3293 6.0/applet.js:3293 6.4/applet.js:3265
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Poista \"%s\""
 
-#. 4.0/applet.js:3276 6.0/applet.js:3276
+#. 4.0/applet.js:3295 6.0/applet.js:3295 6.4/applet.js:3267
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Haluatko tosiaan poistaa tämän mahdollisuuden Cassiaikkunalistasta?"
 
@@ -58,75 +58,82 @@ msgstr "Haluatko tosiaan poistaa tämän mahdollisuuden Cassiaikkunalistasta?"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3285 6.0/applet.js:3285
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 4.0/applet.js:3304 6.0/applet.js:3304 6.4/applet.js:3276
 msgid "Open new window"
 msgstr "Avaa uusi ikkuna"
 
-#. 4.0/applet.js:3293 6.0/applet.js:3293
+#. 4.0/applet.js:3312 6.0/applet.js:3312 6.4/applet.js:3284
 msgid "Remove from panel"
 msgstr "Poista paneelista"
 
-#. 4.0/applet.js:3295 6.0/applet.js:3295
+#. 4.0/applet.js:3314 6.0/applet.js:3314 6.4/applet.js:3286
 msgid "Remove from this workspace"
 msgstr "Poista tästä työtilasta"
 
-#. 4.0/applet.js:3301 6.0/applet.js:3301
+#. 4.0/applet.js:3320 6.0/applet.js:3320 6.4/applet.js:3292
 msgid "Pin to panel"
 msgstr "Kiinnitä paneeliin"
 
-#. 4.0/applet.js:3303 6.0/applet.js:3303
+#. 4.0/applet.js:3322 6.0/applet.js:3322 6.4/applet.js:3294
 msgid "Pin to this workspace"
 msgstr "Kiinnitä työtilaan"
 
-#. 4.0/applet.js:3344 6.0/applet.js:3344
+#. 4.0/applet.js:3363 6.0/applet.js:3363 6.4/applet.js:3335
 msgid "Pin to other workspaces"
 msgstr "Kiinnitä toiseen työtilaan"
 
-#. 4.0/applet.js:3365 6.0/applet.js:3365
+#. 4.0/applet.js:3384 6.0/applet.js:3384 6.4/applet.js:3356
 msgid "Pin to all workspaces"
 msgstr "Kiinnitä kaikkiin työtiloihin"
 
-#. 4.0/applet.js:3383 6.0/applet.js:3383
+#. 4.0/applet.js:3402 6.0/applet.js:3402 6.4/applet.js:3374
 msgid "Pin to launcher"
 msgstr "Kiinnitä käynnistimeen"
 
-#. 4.0/applet.js:3401 4.0/applet.js:3606 6.0/applet.js:3401 6.0/applet.js:3606
+#. 4.0/applet.js:3420 4.0/applet.js:3625 6.0/applet.js:3420 6.0/applet.js:3625
+#. 6.4/applet.js:3392 6.4/applet.js:3594
 msgid "Add new Hotkey for"
 msgstr "Lisää pikanäppäin"
 
-#. 4.0/applet.js:3415 6.0/applet.js:3415
+#. 4.0/applet.js:3434 6.0/applet.js:3434 6.4/applet.js:3406
 msgid "Recent files"
 msgstr "Käytetyt tiedostot"
 
-#. 4.0/applet.js:3439 6.0/applet.js:3439
+#. 4.0/applet.js:3458 6.0/applet.js:3458 6.4/applet.js:3430
 msgid "Places"
 msgstr "Paikat"
 
-#. 4.0/applet.js:3482 6.0/applet.js:3482
+#. 4.0/applet.js:3501 6.0/applet.js:3501 6.4/applet.js:3473
 msgid "Always on top"
 msgstr "Aina päällimmäisenä"
 
-#. 4.0/applet.js:3494 6.0/applet.js:3494
+#. 4.0/applet.js:3513 6.0/applet.js:3513 6.4/applet.js:3485
 msgid "Only on this workspace"
 msgstr "Ainoastaan tämä työtila"
 
-#. 4.0/applet.js:3496 6.0/applet.js:3496
+#. 4.0/applet.js:3515 6.0/applet.js:3515 6.4/applet.js:3487
 msgid "Visible on all workspaces"
 msgstr "Näytä kaikki työtilat"
 
-#. 4.0/applet.js:3497 6.0/applet.js:3497
+#. 4.0/applet.js:3516 6.0/applet.js:3516 6.4/applet.js:3488
 msgid "Move to another workspace"
 msgstr "Siirrä toiseen työtilaan"
 
-#. 4.0/applet.js:3506 6.0/applet.js:3506
+#. 4.0/applet.js:3525 6.0/applet.js:3525 6.4/applet.js:3497
 msgid " (this workspace)"
 msgstr " (tämä työtila)"
 
-#. 4.0/applet.js:3519 6.0/applet.js:3519
+#. 4.0/applet.js:3538 6.0/applet.js:3538 6.4/applet.js:3510
 msgid "Move to another monitor"
 msgstr "Siirrä toiseen näyttöön"
 
-#. 4.0/applet.js:3527 6.0/applet.js:3527
+#. 4.0/applet.js:3546 6.0/applet.js:3546 6.4/applet.js:3518
 msgid "Monitor"
 msgstr "Näyttö"
 
@@ -142,47 +149,54 @@ msgstr "Näyttö"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3544 6.0/applet.js:3544
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 4.0/applet.js:3563 6.0/applet.js:3563 6.4/applet.js:3532
 msgid "Move window here"
 msgstr "Siirrä ikkuna tähän"
 
-#. 4.0/applet.js:3561 6.0/applet.js:3561
+#. 4.0/applet.js:3580 6.0/applet.js:3580 6.4/applet.js:3549
 msgid "unassigned"
 msgstr "ei allekirjoitettu"
 
-#. 4.0/applet.js:3572 4.0/applet.js:3603 6.0/applet.js:3572 6.0/applet.js:3603
+#. 4.0/applet.js:3591 4.0/applet.js:3622 6.0/applet.js:3591 6.0/applet.js:3622
+#. 6.4/applet.js:3560 6.4/applet.js:3591
 msgid "Assign window to a hotkey"
 msgstr "Määritä ikkuna pikanäppäimelle"
 
-#. 4.0/applet.js:3626 6.0/applet.js:3626
+#. 4.0/applet.js:3645 6.0/applet.js:3645 6.4/applet.js:3614
 msgid "Change application label contents"
 msgstr "Muuta sovelluksen merkin sisältöä"
 
-#. 4.0/applet.js:3629 6.0/applet.js:3629
+#. 4.0/applet.js:3648 6.0/applet.js:3648 6.4/applet.js:3617
 msgid "Remove custom setting"
 msgstr "Poista mukautetut aasetukset"
 
-#. 4.0/applet.js:3636 6.0/applet.js:3636
+#. 4.0/applet.js:3655 6.0/applet.js:3655 6.4/applet.js:3624
 msgid "Use window title"
 msgstr "Käytä ikkunan otsikkoa"
 
-#. 4.0/applet.js:3643 6.0/applet.js:3643
+#. 4.0/applet.js:3662 6.0/applet.js:3662 6.4/applet.js:3631
 msgid "Use application name"
 msgstr "Käytä sovelluksen nimeä"
 
-#. 4.0/applet.js:3650 6.0/applet.js:3650
+#. 4.0/applet.js:3669 6.0/applet.js:3669 6.4/applet.js:3638
 msgid "No label"
 msgstr "Ei merkkiä"
 
-#. 4.0/applet.js:3661 6.0/applet.js:3661
+#. 4.0/applet.js:3680 6.0/applet.js:3680 6.4/applet.js:3649
 msgid "Ungroup application windows"
 msgstr "Pura ikkunoiden ryhmittely"
 
-#. 4.0/applet.js:3669 6.0/applet.js:3669
+#. 4.0/applet.js:3688 6.0/applet.js:3688 6.4/applet.js:3657
 msgid "Group application windows"
 msgstr "Ryhmitä sovellusikkunat"
 
-#. 4.0/applet.js:3682 6.0/applet.js:3682
+#. 4.0/applet.js:3701 6.0/applet.js:3701 6.4/applet.js:3670
 msgid "Automatic grouping/ungrouping"
 msgstr "Automaattinen ryhmittely/purku"
 
@@ -198,39 +212,45 @@ msgstr "Automaattinen ryhmittely/purku"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3710 6.0/applet.js:3710
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
 msgid "Move titlebar on to screen"
 msgstr "Siirrä otsikkorivi näytölle"
 
-#. 4.0/applet.js:3715 6.0/applet.js:3715
+#. 4.0/applet.js:3734 6.0/applet.js:3734 6.4/applet.js:3703
 msgid "Restore"
 msgstr "Palauta"
 
-#. 4.0/applet.js:3719 6.0/applet.js:3719
+#. 4.0/applet.js:3738 6.0/applet.js:3738 6.4/applet.js:3707
 msgid "Minimize"
 msgstr "Pienennä"
 
-#. 4.0/applet.js:3725 6.0/applet.js:3725
+#. 4.0/applet.js:3744 6.0/applet.js:3744 6.4/applet.js:3713
 msgid "Unmaximize"
 msgstr "Suurenna"
 
-#. 4.0/applet.js:3733 6.0/applet.js:3733
+#. 4.0/applet.js:3752 6.0/applet.js:3752 6.4/applet.js:3721
 msgid "Close others"
 msgstr "Sulje muut"
 
-#. 4.0/applet.js:3735 6.0/applet.js:3735
+#. 4.0/applet.js:3754 6.0/applet.js:3754 6.4/applet.js:3723
 msgid "Close other windows for application"
 msgstr "Sulje muut ikkunat sovellusta varten"
 
-#. 4.0/applet.js:3756 6.0/applet.js:3756
+#. 4.0/applet.js:3775 6.0/applet.js:3775 6.4/applet.js:3744
 msgid "Close all"
 msgstr "Sulje kaikki"
 
-#. 4.0/applet.js:3758 6.0/applet.js:3758
+#. 4.0/applet.js:3777 6.0/applet.js:3777 6.4/applet.js:3746
 msgid "Close all windows for application"
 msgstr "Sulje kaikki ikkunat sovellusta varten"
 
-#. 4.0/applet.js:3774 6.0/applet.js:3774
+#. 4.0/applet.js:3793 6.0/applet.js:3793 6.4/applet.js:3762
 msgid "Close"
 msgstr "Sulje"
 
@@ -260,61 +280,73 @@ msgstr ""
 
 #. 4.0->settings-schema.json->caption-page->title
 #. 6.0->settings-schema.json->caption-page->title
+#. 6.4->settings-schema.json->caption-page->title
 msgid "Labels"
 msgstr "Merkit"
 
 #. 4.0->settings-schema.json->general-page->title
 #. 6.0->settings-schema.json->general-page->title
+#. 6.4->settings-schema.json->general-page->title
 msgid "General"
 msgstr "Yleistä"
 
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
+#. 6.4->settings-schema.json->preview-page->title
 msgid "Thumbnails"
 msgstr "Pikkukuvakkeet"
 
 #. 4.0->settings-schema.json->hotkey-page->title
 #. 6.0->settings-schema.json->hotkey-page->title
+#. 6.4->settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
 msgstr "Pikanäppäimet"
 
 #. 4.0->settings-schema.json->advanced-page->title
 #. 6.0->settings-schema.json->advanced-page->title
+#. 6.4->settings-schema.json->advanced-page->title
 msgid "Advanced"
 msgstr "Kehittynyt"
 
 #. 4.0->settings-schema.json->caption-settings->title
 #. 6.0->settings-schema.json->caption-settings->title
+#. 6.4->settings-schema.json->caption-settings->title
 msgid "Window list button label settings"
 msgstr "Ikkunalistna painikkeen asetukset"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
+#. 6.4->settings-schema.json->caption-number-settings->title
 msgid "Number label settings"
 msgstr "Numero merkin asetukset"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
+#. 6.4->settings-schema.json->general-settings->title
 msgid "General window list settings"
 msgstr "Ylleisen ikkunan listan asetukset"
 
 #. 4.0->settings-schema.json->general-mouse->title
 #. 6.0->settings-schema.json->general-mouse->title
+#. 6.4->settings-schema.json->general-mouse->title
 msgid "Window list mouse settings"
 msgstr "Ikkunalistan hiiren asetukset"
 
 #. 4.0->settings-schema.json->preview-settings->title
 #. 6.0->settings-schema.json->preview-settings->title
+#. 6.4->settings-schema.json->preview-settings->title
 msgid "Thumbnails menu settings"
 msgstr "Pikkukuvakkeiden valikon asetukset"
 
 #. 4.0->settings-schema.json->preview-mouse-section->title
 #. 6.0->settings-schema.json->preview-mouse-section->title
+#. 6.4->settings-schema.json->preview-mouse-section->title
 msgid "Thumbnails menu mouse settings"
 msgstr "Pikkukuvavalikon hiiren asetukset"
 
 #. 4.0->settings-schema.json->hotkey-settings->title
 #. 6.0->settings-schema.json->hotkey-settings->title
+#. 6.4->settings-schema.json->hotkey-settings->title
 msgid "Hotkey settings"
 msgstr "Pikanäppäimien asetukset"
 
@@ -322,26 +354,32 @@ msgstr "Pikanäppäimien asetukset"
 #. 4.0->settings-schema.json->adv-mouse-list->description
 #. 6.0->settings-schema.json->adv-mouse-settings->title
 #. 6.0->settings-schema.json->adv-mouse-list->description
+#. 6.4->settings-schema.json->adv-mouse-settings->title
+#. 6.4->settings-schema.json->adv-mouse-list->description
 msgid "Ctrl/Shift + mouse button actions"
 msgstr "Ctrl/Shift + hiirenpainikkeiden toiminnot"
 
 #. 4.0->settings-schema.json->caption-type->options
 #. 6.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
 msgid "Application name"
 msgstr "Sovelluksen nimi"
 
 #. 4.0->settings-schema.json->caption-type->options
 #. 6.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
 msgid "Window title"
 msgstr "Ikkunan otsikko"
 
 #. 4.0->settings-schema.json->caption-type->description
 #. 6.0->settings-schema.json->caption-type->description
+#. 6.4->settings-schema.json->caption-type->description
 msgid "Label contents"
 msgstr "Tarran sisältö"
 
 #. 4.0->settings-schema.json->caption-type->tooltip
 #. 6.0->settings-schema.json->caption-type->tooltip
+#. 6.4->settings-schema.json->caption-type->tooltip
 msgid "What the content of the label will be"
 msgstr "Mikä etiketin sisältö tulee olemaan"
 
@@ -349,6 +387,8 @@ msgstr "Mikä etiketin sisältö tulee olemaan"
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
 msgid "Never"
 msgstr "Koskaan"
 
@@ -358,6 +398,9 @@ msgstr "Koskaan"
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
 #. 6.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-number->options
 msgid "Always"
 msgstr "Aina"
 
@@ -365,21 +408,26 @@ msgstr "Aina"
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
 msgid "Focused"
 msgstr "Khdistettu"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
 msgid "One per application pool"
 msgstr "Yksi sovellusta kohden"
 
 #. 4.0->settings-schema.json->display-caption-for->description
 #. 6.0->settings-schema.json->display-caption-for->description
+#. 6.4->settings-schema.json->display-caption-for->description
 msgid "Display labels for generic window list buttons"
 msgstr "Näytä yleisten ikkunaluettelopainikkeiden tarrat"
 
 #. 4.0->settings-schema.json->display-caption-for->tooltip
 #. 6.0->settings-schema.json->display-caption-for->tooltip
+#. 6.4->settings-schema.json->display-caption-for->tooltip
 msgid ""
 "Never: No windows get labels\n"
 "Always: All windows get labels\n"
@@ -395,16 +443,19 @@ msgstr ""
 
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.4->settings-schema.json->display-caption-for-pined->options
 msgid "Running"
 msgstr "Ajaa"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->description
 #. 6.0->settings-schema.json->display-caption-for-pined->description
+#. 6.4->settings-schema.json->display-caption-for-pined->description
 msgid "Display labels for pinned buttons"
 msgstr "Näytä tarrat kiinnitetyissä painikkeissa"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.0->settings-schema.json->display-caption-for-pined->tooltip
+#. 6.4->settings-schema.json->display-caption-for-pined->tooltip
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
@@ -420,6 +471,8 @@ msgstr ""
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->display-indicators->options
 msgid "None"
 msgstr "Ollenkaan"
 
@@ -427,26 +480,32 @@ msgstr "Ollenkaan"
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->display-indicators->options
 msgid "Minimized windows"
 msgstr "Pienennetyt ikkunat"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
 msgid "Windows on other workspaces"
 msgstr "Ikkunat muissa työtiloissa"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->options
 #. 6.0->settings-schema.json->hide-caption-for-minimized->options
+#. 6.4->settings-schema.json->hide-caption-for-minimized->options
 msgid "Windows on other monitors"
 msgstr "Ikkunat muissa näytöissä"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
 #. 6.0->settings-schema.json->hide-caption-for-minimized->description
+#. 6.4->settings-schema.json->hide-caption-for-minimized->description
 msgid "Hide labels for"
 msgstr "Piilota tarrat kohteelle"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
 #. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
+#. 6.4->settings-schema.json->hide-caption-for-minimized->tooltip
 msgid ""
 "Select the type of window state for which window list button labels should "
 "be hidden. For application pools, the label will still show unless all "
@@ -458,11 +517,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
 msgid "Pinned applications"
 msgstr "Kiinnitetyt sovellukset"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
 msgid "Minimized and pinned"
 msgstr "Pienennetyt ja kiinnitetyt"
 
@@ -470,16 +531,20 @@ msgstr "Pienennetyt ja kiinnitetyt"
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->display-indicators->options
 #. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->group-windows->options
 msgid "Automatic"
 msgstr "Automaattinen"
 
 #. 4.0->settings-schema.json->display-indicators->description
 #. 6.0->settings-schema.json->display-indicators->description
+#. 6.4->settings-schema.json->display-indicators->description
 msgid "Display status indicators"
 msgstr "Näytä tilailmaisimet"
 
 #. 4.0->settings-schema.json->display-indicators->tooltip
 #. 6.0->settings-schema.json->display-indicators->tooltip
+#. 6.4->settings-schema.json->display-indicators->tooltip
 msgid ""
 "Choose if the minimized and the pinned indicator characters will be "
 "prepended to button label text. Buttons without a text label will not "
@@ -495,11 +560,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->description
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->description
+#. 6.4->settings-schema.json->show-ellipsis-for-groups->description
 msgid "Show a vertical ellipsis (...) for grouped buttons"
 msgstr "Näytä pystysuora ellipsi (...) ryhmitetyille painikkeille"
 
 #. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
 #. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 6.4->settings-schema.json->show-ellipsis-for-groups->tooltip
 msgid ""
 "Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
 "list buttons with more then one window. When on a vertical panel this option "
@@ -512,6 +579,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
+#. 6.4->settings-schema.json->trailing-pinned-behaviour->description
 msgid "Add new window buttons ahead of trailing pinned buttons"
 msgstr ""
 "Lisää uusia ikkunapainikkeita perässä olevien kiinnitettyjen painikkeiden "
@@ -519,6 +587,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->tooltip
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+#. 6.4->settings-schema.json->trailing-pinned-behaviour->tooltip
 msgid ""
 "When enabled, new windows will be added to the left of any pinned buttons "
 "currently placed on the right of the window list, effectively this allows "
@@ -539,16 +608,23 @@ msgstr ""
 #. 6.0->settings-schema.json->label-animation-time->units
 #. 6.0->settings-schema.json->preview-timeout-show->units
 #. 6.0->settings-schema.json->preview-timeout-hide->units
+#. 6.4->settings-schema.json->fade-animation-time->units
+#. 6.4->settings-schema.json->hover-peek-delay->units
+#. 6.4->settings-schema.json->label-animation-time->units
+#. 6.4->settings-schema.json->preview-timeout-show->units
+#. 6.4->settings-schema.json->preview-timeout-hide->units
 msgid "milliseconds"
 msgstr "millisekuntti"
 
 #. 4.0->settings-schema.json->fade-animation-time->description
 #. 6.0->settings-schema.json->fade-animation-time->description
+#. 6.4->settings-schema.json->fade-animation-time->description
 msgid "Fade animation effect duration"
 msgstr "Häivytysanimaatiotehosteen kesto"
 
 #. 4.0->settings-schema.json->fade-animation-time->tooltip
 #. 6.0->settings-schema.json->fade-animation-time->tooltip
+#. 6.4->settings-schema.json->fade-animation-time->tooltip
 msgid ""
 "This defines the duration of the fade-in/out animation effect. It applies to "
 "the Thumbnail menus and the full size window previews"
@@ -558,11 +634,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->description
 #. 6.0->settings-schema.json->hover-peek-delay->description
+#. 6.4->settings-schema.json->hover-peek-delay->description
 msgid "Hover time before showing a full size window preview"
 msgstr "Osoitinaika ennen täysikokoisen ikkunan esikatselun näyttämistä"
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.4->settings-schema.json->hover-peek-delay->tooltip
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
 "appear. It applies when hovering over either window-list buttons or "
@@ -579,66 +657,80 @@ msgstr ""
 #. 4.0->settings-schema.json->button-spacing->units
 #. 6.0->settings-schema.json->label-width->units
 #. 6.0->settings-schema.json->button-spacing->units
+#. 6.4->settings-schema.json->label-width->units
+#. 6.4->settings-schema.json->button-spacing->units
 msgid "pixels"
 msgstr "pixelit"
 
 #. 4.0->settings-schema.json->label-width->description
 #. 6.0->settings-schema.json->label-width->description
+#. 6.4->settings-schema.json->label-width->description
 msgid "Label width"
 msgstr "Tarran pituus"
 
 #. 4.0->settings-schema.json->label-width->tooltip
 #. 6.0->settings-schema.json->label-width->tooltip
+#. 6.4->settings-schema.json->label-width->tooltip
 msgid "This defines the width of the label section of a window list button"
 msgstr "Tämä määrittää ikkunaluettelopainikkeen tunnisteosan leveyden"
 
 #. 4.0->settings-schema.json->label-animation->description
 #. 6.0->settings-schema.json->label-animation->description
+#. 6.4->settings-schema.json->label-animation->description
 msgid "Animate label"
 msgstr "Animoitu tunniste"
 
 #. 4.0->settings-schema.json->label-animation-time->description
 #. 6.0->settings-schema.json->label-animation-time->description
+#. 6.4->settings-schema.json->label-animation-time->description
 msgid "Label animation duration"
 msgstr "Tunnisteen animaation kesto"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
 msgid "Nothing"
 msgstr "Tyhjää"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
 msgid "Application group window count"
 msgstr "Sovellusryhmän ikkunoiden määrä"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
 msgid "Workspace number"
 msgstr "Työtilan numero"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
 msgid "Monitor number"
 msgstr "Näytön numero"
 
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
+#. 6.4->settings-schema.json->number-type->description
 msgid "Number label contents"
 msgstr "Numerotunnisteen sisältö"
 
 #. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
 msgid "Smart"
 msgstr "Fiksu"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
+#. 6.4->settings-schema.json->display-number->description
 msgid "Display number"
 msgstr "Näytettävä numero"
 
 #. 4.0->settings-schema.json->display-number->tooltip
 #. 6.0->settings-schema.json->display-number->tooltip
+#. 6.4->settings-schema.json->display-number->tooltip
 msgid ""
 "Controls when the number label is used. Smart means the the label will only "
 "appear when it is appropriate depending on the number label contents setting "
@@ -652,21 +744,25 @@ msgstr ""
 
 #. 4.0->settings-schema.json->number-style->options
 #. 6.0->settings-schema.json->number-style->options
+#. 6.4->settings-schema.json->number-style->options
 msgid "Icon overlay"
 msgstr "Kuvakkeen peittokuva"
 
 #. 4.0->settings-schema.json->number-style->options
 #. 6.0->settings-schema.json->number-style->options
+#. 6.4->settings-schema.json->number-style->options
 msgid "Label prepend"
 msgstr "Tunnisteen edelle"
 
 #. 4.0->settings-schema.json->number-style->description
 #. 6.0->settings-schema.json->number-style->description
+#. 6.4->settings-schema.json->number-style->description
 msgid "Number style"
 msgstr "Numeron tyyli"
 
 #. 4.0->settings-schema.json->number-style->tooltip
 #. 6.0->settings-schema.json->number-style->tooltip
+#. 6.4->settings-schema.json->number-style->tooltip
 msgid ""
 "Controls how the number label is presented. When on a vertical panel or when "
 "in launcher mode, the \"label prepend\" option is not possible so \"icon "
@@ -678,31 +774,37 @@ msgstr ""
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
 msgid "Grouped"
 msgstr "Ryhmitelty"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
 msgid "Pooled"
 msgstr "Yhdistetty"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
 msgid "One to one"
 msgstr "Yhdestä yhteen"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
 msgid "Launcher"
 msgstr "Käynnistin"
 
 #. 4.0->settings-schema.json->group-windows->description
 #. 6.0->settings-schema.json->group-windows->description
+#. 6.4->settings-schema.json->group-windows->description
 msgid "Window list behavior style"
 msgstr "Ikkunaluettelon käyttäytymistyyli"
 
 #. 4.0->settings-schema.json->group-windows->tooltip
 #. 6.0->settings-schema.json->group-windows->tooltip
+#. 6.4->settings-schema.json->group-windows->tooltip
 msgid ""
 "Grouped: All windows for an application are managed by one button,\n"
 "Pooled: All window list buttons for an application are pooled side by side,\n"
@@ -722,26 +824,31 @@ msgstr ""
 
 #. 4.0->settings-schema.json->display-pinned->options
 #. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->display-pinned->options
 msgid "Disabled"
 msgstr "Poissa käytöstä"
 
 #. 4.0->settings-schema.json->display-pinned->options
 #. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->display-pinned->options
 msgid "Unique for each workspace"
 msgstr "Ainutlaatuinen jokaiseen työtilaan"
 
 #. 4.0->settings-schema.json->display-pinned->options
 #. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->display-pinned->options
 msgid "Common across workspaces"
 msgstr "Yleinen kaikissa työtiloissa"
 
 #. 4.0->settings-schema.json->display-pinned->description
 #. 6.0->settings-schema.json->display-pinned->description
+#. 6.4->settings-schema.json->display-pinned->description
 msgid "Pinning of window list buttons"
 msgstr "Ikkunaluettelopainikkeiden kiinnitys"
 
 #. 4.0->settings-schema.json->display-pinned->tooltip
 #. 6.0->settings-schema.json->display-pinned->tooltip
+#. 6.4->settings-schema.json->display-pinned->tooltip
 msgid ""
 "Controls whether window list buttons can be pinned, and whether each "
 "workspace has a unique set of pinned buttons or one common set shared across "
@@ -755,11 +862,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->synchronize-pinned->description
 #. 6.0->settings-schema.json->synchronize-pinned->description
+#. 6.4->settings-schema.json->synchronize-pinned->description
 msgid "Synchronize launcher buttons across all workspaces"
 msgstr "Synkronoi käynnistyspainikkeet kaikissa työtiloissa"
 
 #. 4.0->settings-schema.json->synchronize-pinned->tooltip
 #. 6.0->settings-schema.json->synchronize-pinned->tooltip
+#. 6.4->settings-schema.json->synchronize-pinned->tooltip
 msgid ""
 "If enabled, the number and order of launcher buttons on the panel will be "
 "synchronize across all workspaces."
@@ -769,11 +878,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->description
 #. 6.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->description
 msgid "Only show windows on the same monitor"
 msgstr "Näytä vain ikkunat samassa näytössä"
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
 #. 6.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->tooltip
 msgid ""
 "If enabled, this applet instance only manages windows\n"
 "that are displayed on the same monitor"
@@ -783,16 +894,19 @@ msgstr ""
 
 #. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
 #. 6.0->settings-schema.json->show-windows-for-all-workspaces->description
+#. 6.4->settings-schema.json->show-windows-for-all-workspaces->description
 msgid "Include windows from all workspaces"
 msgstr "Sisällytä ikkunat kaikista työtiloista"
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
+#. 6.4->settings-schema.json->show-tooltips->description
 msgid "Show tooltips for window list buttons"
 msgstr "Näytä vihjeet ikkunalista painikkeista"
 
 #. 4.0->settings-schema.json->show-tooltips->tooltip
 #. 6.0->settings-schema.json->show-tooltips->tooltip
+#. 6.4->settings-schema.json->show-tooltips->tooltip
 msgid ""
 "Enable to show tooltips using window title or application name when hovering "
 "over window list buttons"
@@ -802,6 +916,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hide-panel-apps->description
 #. 6.0->settings-schema.json->hide-panel-apps->description
+#. 6.4->settings-schema.json->hide-panel-apps->description
 msgid ""
 "Hide window buttons of pinned buttons on other CassiaWindowList instances"
 msgstr ""
@@ -810,6 +925,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hide-panel-apps->tooltip
 #. 6.0->settings-schema.json->hide-panel-apps->tooltip
+#. 6.4->settings-schema.json->hide-panel-apps->tooltip
 msgid ""
 "When enabled, windows for applications with pinned buttons on other "
 "instances of the CassiaWindowList applet will not show up in this window list"
@@ -820,11 +936,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->button-spacing->description
 #. 6.0->settings-schema.json->button-spacing->description
+#. 6.4->settings-schema.json->button-spacing->description
 msgid "Spacing between buttons"
 msgstr "Painikkeiden väli"
 
 #. 4.0->settings-schema.json->button-spacing->tooltip
 #. 6.0->settings-schema.json->button-spacing->tooltip
+#. 6.4->settings-schema.json->button-spacing->tooltip
 msgid ""
 "This defines the spacing between the buttons, the value will be divided in "
 "half and added to the left of the icon and to the right of the label on "
@@ -836,12 +954,14 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->description
 #. 6.0->settings-schema.json->hover-peek-windowlist->description
+#. 6.4->settings-schema.json->hover-peek-windowlist->description
 msgid "Show a full size window preview when hovering over a button"
 msgstr ""
 "Näytä täysikokoinen ikkunan esikatselu, kun viet hiiren painikkeen päälle"
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.4->settings-schema.json->hover-peek-windowlist->tooltip
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a window-list button. The delay before the preview appears is "
@@ -853,11 +973,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
+#. 6.4->settings-schema.json->no-click-activate->description
 msgid "Automatic focus change when leaving the panel"
 msgstr "Automaattinen tarkennuksen vaihto poistuttaessa paneelista"
 
 #. 4.0->settings-schema.json->no-click-activate->tooltip
 #. 6.0->settings-schema.json->no-click-activate->tooltip
+#. 6.4->settings-schema.json->no-click-activate->tooltip
 msgid ""
 "If enabled, the current window for a window-list button will get the focus "
 "when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
@@ -873,11 +995,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
 #. 6.0->settings-schema.json->menu-show-on-hover->description
+#. 6.4->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
 msgstr "Näytä hiirellä"
 
 #. 4.0->settings-schema.json->menu-show-on-hover->tooltip
 #. 6.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.4->settings-schema.json->menu-show-on-hover->tooltip
 msgid ""
 "If enabled, a popup menu with a list of current windows will show when "
 "hovering"
@@ -887,11 +1011,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->show-previews->description
 #. 6.0->settings-schema.json->show-previews->description
+#. 6.4->settings-schema.json->show-previews->description
 msgid "Show window thumbnails in the popup window list menu"
 msgstr "Näytä ikkunoiden pikkukuvat ponnahdusikkunaluettelovalikossa"
 
 #. 4.0->settings-schema.json->show-previews->tooltip
 #. 6.0->settings-schema.json->show-previews->tooltip
+#. 6.4->settings-schema.json->show-previews->tooltip
 msgid ""
 "If enabled, the popup menu will show window thumbnails,\n"
 "otherwise the menu will only show window titles\n"
@@ -903,41 +1029,49 @@ msgstr ""
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra large"
 msgstr "Suurempi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Large"
 msgstr "Suuri"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Medium"
 msgstr "Keskikokoinen"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Small"
 msgstr "Pieni"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra small"
 msgstr "Pienempi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->description
 #. 6.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->description
 msgid "Default thumbnail window size"
 msgstr "Pikkukuvaikkunan oletuskoko"
 
 #. 4.0->settings-schema.json->menu-sort-groups->description
 #. 6.0->settings-schema.json->menu-sort-groups->description
+#. 6.4->settings-schema.json->menu-sort-groups->description
 msgid "Sort grouped button thumbnail menu items"
 msgstr "Lajittele ryhmitetyt painikkeet valikon pikkukuvissa"
 
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
+#. 6.4->settings-schema.json->menu-sort-groups->tooltip
 msgid ""
 "If enabled, the thumbnail menu will be sorted first by workspace and the by "
 "monitor number for grouped buttons. Pooled windows can not be sorted since "
@@ -955,6 +1089,8 @@ msgstr ""
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
 #. 6.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 6.0->settings-schema.json->menu-all-windows-of-auto->description
+#. 6.4->settings-schema.json->menu-all-windows-of-pool->description
+#. 6.4->settings-schema.json->menu-all-windows-of-auto->description
 msgid "Show thumbnails for all windows of an application pool"
 msgstr "Näytä pikkukuvat kaikille sovellusjoukon ikkunoille"
 
@@ -962,6 +1098,8 @@ msgstr "Näytä pikkukuvat kaikille sovellusjoukon ikkunoille"
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
 #. 6.0->settings-schema.json->menu-all-windows-of-pool->tooltip
 #. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+#. 6.4->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 6.4->settings-schema.json->menu-all-windows-of-auto->tooltip
 msgid ""
 "If enabled, a popup menu will contain all the application windows in the "
 "application pool rather then just the selected window within the application "
@@ -972,11 +1110,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->preview-timeout-show->description
 #. 6.0->settings-schema.json->preview-timeout-show->description
+#. 6.4->settings-schema.json->preview-timeout-show->description
 msgid "Hover time before showing menu"
 msgstr "Osoitinaika ennen valikon näyttämistä"
 
 #. 4.0->settings-schema.json->preview-timeout-show->tooltip
 #. 6.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.4->settings-schema.json->preview-timeout-show->tooltip
 msgid ""
 "The waiting time before the thumbnail menu appears when hovering over a "
 "button\n"
@@ -988,11 +1128,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->preview-timeout-hide->description
 #. 6.0->settings-schema.json->preview-timeout-hide->description
+#. 6.4->settings-schema.json->preview-timeout-hide->description
 msgid "Time before closing after pointer leaves the menu"
 msgstr "Aika ennen sulkemista sen jälkeen, kun osoitin poistuu valikosta"
 
 #. 4.0->settings-schema.json->preview-timeout-hide->tooltip
 #. 6.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.4->settings-schema.json->preview-timeout-hide->tooltip
 msgid ""
 "The waiting time for the thumbnail menu to close when leaving a button\n"
 "(Not used when moving directly to a different button in the list)"
@@ -1006,6 +1148,9 @@ msgstr ""
 #. 6.0->settings-schema.json->preview-middle-click->options
 #. 6.0->settings-schema.json->preview-back-click->options
 #. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
 msgid "Close thumbnail menu"
 msgstr "Suljaa pikkukuvakkeiden valikko"
 
@@ -1021,6 +1166,12 @@ msgstr "Suljaa pikkukuvakkeiden valikko"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Close window"
 msgstr "Sulje ikkuna"
 
@@ -1036,6 +1187,12 @@ msgstr "Sulje ikkuna"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Minimize/Restore"
 msgstr "Pienennä/Palauta"
 
@@ -1051,6 +1208,12 @@ msgstr "Pienennä/Palauta"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Maximize/Restore"
 msgstr "Suurenna/Palauta"
 
@@ -1066,6 +1229,12 @@ msgstr "Suurenna/Palauta"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Group/Ungroup windows"
 msgstr "Ryhmittele/Pura ryhmitys"
 
@@ -1081,6 +1250,12 @@ msgstr "Ryhmittele/Pura ryhmitys"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 1"
 msgstr "Siirrä työtilaan 1"
 
@@ -1096,6 +1271,12 @@ msgstr "Siirrä työtilaan 1"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 2"
 msgstr "Siirrä työtilaan 2"
 
@@ -1111,6 +1292,12 @@ msgstr "Siirrä työtilaan 2"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 3"
 msgstr "Siirrä työtilaan 3"
 
@@ -1126,6 +1313,12 @@ msgstr "Siirrä työtilaan 3"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 4"
 msgstr "Siirrä työtilaan 4"
 
@@ -1141,6 +1334,12 @@ msgstr "Siirrä työtilaan 4"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to previous workspace"
 msgstr "Siirrä edelliseen työtilaan"
 
@@ -1156,6 +1355,12 @@ msgstr "Siirrä edelliseen työtilaan"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to next workspace"
 msgstr "Siirrä seuraavaan työtilaan"
 
@@ -1171,6 +1376,12 @@ msgstr "Siirrä seuraavaan työtilaan"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to this workspace"
 msgstr "Siirrä tähän työtilaan"
 
@@ -1186,6 +1397,12 @@ msgstr "Siirrä tähän työtilaan"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Näkyy tässä/kaikissa työtiloissa"
 
@@ -1201,6 +1418,12 @@ msgstr "Näkyy tässä/kaikissa työtiloissa"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Toggle always on top"
 msgstr "Vaihda aina päällimmäiseksi"
 
@@ -1216,6 +1439,12 @@ msgstr "Vaihda aina päällimmäiseksi"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 1"
 msgstr "Siirry näyttöön 1"
 
@@ -1231,6 +1460,12 @@ msgstr "Siirry näyttöön 1"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 2"
 msgstr "Siirry näyttöön 2"
 
@@ -1246,6 +1481,12 @@ msgstr "Siirry näyttöön 2"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 3"
 msgstr "Siirry näyttöön 3"
 
@@ -1261,6 +1502,12 @@ msgstr "Siirry näyttöön 3"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 4"
 msgstr "Siirry näyttöön 4"
 
@@ -1276,6 +1523,12 @@ msgstr "Siirry näyttöön 4"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to previous monitor"
 msgstr "Siirry edelliseen näyttöön"
 
@@ -1291,6 +1544,12 @@ msgstr "Siirry edelliseen näyttöön"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to next monitor"
 msgstr "Siirry seuraavaan näyttöön"
 
@@ -1306,6 +1565,12 @@ msgstr "Siirry seuraavaan näyttöön"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Move to current/next monitor"
 msgstr "Siirry nykyiseen/seuraavaan näyttöön"
 
@@ -1321,6 +1586,12 @@ msgstr "Siirry nykyiseen/seuraavaan näyttöön"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Pin to panel toggle"
 msgstr "Kiinnitä paneeliin"
 
@@ -1336,6 +1607,12 @@ msgstr "Kiinnitä paneeliin"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile left"
 msgstr "Laatoita vasemmalle"
 
@@ -1351,6 +1628,12 @@ msgstr "Laatoita vasemmalle"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top left"
 msgstr "Laatoita ylös vasemmalle"
 
@@ -1366,6 +1649,12 @@ msgstr "Laatoita ylös vasemmalle"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top"
 msgstr "Laatoita ylös"
 
@@ -1381,6 +1670,12 @@ msgstr "Laatoita ylös"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top right"
 msgstr "Laatoita ylös oikealle"
 
@@ -1396,6 +1691,12 @@ msgstr "Laatoita ylös oikealle"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile right"
 msgstr "Laatoita laatoita oikealle"
 
@@ -1411,6 +1712,12 @@ msgstr "Laatoita laatoita oikealle"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom right"
 msgstr "Laatoita alas oikealle"
 
@@ -1426,6 +1733,12 @@ msgstr "Laatoita alas oikealle"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom"
 msgstr "Laatoita alas"
 
@@ -1441,6 +1754,12 @@ msgstr "Laatoita alas"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom left"
 msgstr "Laatoita alas vasemmalle"
 
@@ -1456,6 +1775,12 @@ msgstr "Laatoita alas vasemmalle"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Untile window"
 msgstr "Pura laatoitus"
 
@@ -1473,32 +1798,44 @@ msgstr "Pura laatoitus"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->preview-middle-click->options
+#. 6.4->settings-schema.json->preview-back-click->options
+#. 6.4->settings-schema.json->preview-forward-click->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Do nothing"
 msgstr "Älä tee mitään"
 
 #. 4.0->settings-schema.json->preview-middle-click->description
 #. 6.0->settings-schema.json->preview-middle-click->description
+#. 6.4->settings-schema.json->preview-middle-click->description
 msgid "Thumbnail window middle button action"
 msgstr "Pikkukuvaikkunan keskipainikkeen toiminta"
 
 #. 4.0->settings-schema.json->preview-back-click->description
 #. 6.0->settings-schema.json->preview-back-click->description
+#. 6.4->settings-schema.json->preview-back-click->description
 msgid "Thumbnail window back button action"
 msgstr "Pikkukuvaikkunan takaisin -painikkeen toiminta"
 
 #. 4.0->settings-schema.json->preview-forward-click->description
 #. 6.0->settings-schema.json->preview-forward-click->description
+#. 6.4->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
 msgstr "Pikkukuvaikkuna eteenpäin -painikkeen toiminta"
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->description
 #. 6.0->settings-schema.json->hover-peek-thumbnail->description
+#. 6.4->settings-schema.json->hover-peek-thumbnail->description
 msgid "Show a full size window preview when hovering over a Thumbnail"
 msgstr ""
 "Näytä täysikokoinen ikkunan esikatselu, kun vie hiiri pikkukuvan päälle"
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
 #. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.4->settings-schema.json->hover-peek-thumbnail->tooltip
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a Thumbnail menu item. The delay before the preview appears is "
@@ -1510,11 +1847,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->description
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->description
+#. 6.4->settings-schema.json->no-click-activate-thumbnail->description
 msgid "Automatic focus change when leaving the Thumbnail menu"
 msgstr "Automaattinen tarkennuksen vaihto poistuttaessa Thumbnail-valikosta"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+#. 6.4->settings-schema.json->no-click-activate-thumbnail->tooltip
 msgid ""
 "If enabled, the window associated with the Thumbnail menu item will get the "
 "focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
@@ -1532,6 +1871,8 @@ msgstr ""
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize most recent window"
 msgstr "Palauta/pienennä viimeisin ikkuna"
 
@@ -1539,6 +1880,8 @@ msgstr "Palauta/pienennä viimeisin ikkuna"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize 1st window in group"
 msgstr "Palauta/pienennä ensimmäinen ikkuna ryhmässä"
 
@@ -1546,6 +1889,8 @@ msgstr "Palauta/pienennä ensimmäinen ikkuna ryhmässä"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore then cycle windows"
 msgstr "Palauta ja kierrä ikkunat"
 
@@ -1553,6 +1898,8 @@ msgstr "Palauta ja kierrä ikkunat"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Show thumbnail menu"
 msgstr "Näytä pikkukuvavalikko"
 
@@ -1560,16 +1907,20 @@ msgstr "Näytä pikkukuvavalikko"
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore or hold for thumbnail menu"
 msgstr "Palauta pikkukuvavalikko tai pidä sitä painettuna"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->description
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->description
 msgid "Left button action for grouped buttons"
 msgstr "Vasemman painikkeen toiminto ryhmitellyille painikkeille"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
 #. 6.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+#. 6.4->settings-schema.json->grouped-mouse-action-btn1->tooltip
 msgid ""
 "Action taken when using the left mouse button on a window list entry for a "
 "group of windows"
@@ -1579,16 +1930,19 @@ msgstr ""
 
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "New window or hold for thumbnail menu"
 msgstr "Uusi ikkuna tai pidä painettuna pikkukuvavalikkoa varten"
 
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->description
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->description
 msgid "Left button action (with running windows)"
 msgstr "Vasemman painikkeen toiminta (ikkunoiden ollessa käynnissä)"
 
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
 #. 6.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+#. 6.4->settings-schema.json->launcher-mouse-action-btn1->tooltip
 msgid ""
 "Action taken when using the left mouse button on a launcher button with one "
 "or more running windows"
@@ -1602,6 +1956,9 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Thumbnail menu toggle"
 msgstr "Pikkukuvavalikon vaihto"
 
@@ -1611,6 +1968,9 @@ msgstr "Pikkukuvavalikon vaihto"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Thumbnail menu hold"
 msgstr "Pikkukuvavalikon pito"
 
@@ -1620,6 +1980,9 @@ msgstr "Pikkukuvavalikon pito"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Restore most recent application window"
 msgstr "Palauta viimeisin sovellusikkuna"
 
@@ -1629,6 +1992,9 @@ msgstr "Palauta viimeisin sovellusikkuna"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Restore/minimize 1st window in group"
 msgstr "Palauta/pienennä ensimmäinen ikkuna ryhmässä"
 
@@ -1638,6 +2004,9 @@ msgstr "Palauta/pienennä ensimmäinen ikkuna ryhmässä"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Restore/minimize 2nd window in group"
 msgstr "Palauta/pienennä toinen ikkuna ryhmässä"
 
@@ -1647,6 +2016,9 @@ msgstr "Palauta/pienennä toinen ikkuna ryhmässä"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Restore/minimize 3rd window in group"
 msgstr "Palauta/pienennä kolmas ikkuna ryhmässä"
 
@@ -1656,27 +2028,34 @@ msgstr "Palauta/pienennä kolmas ikkuna ryhmässä"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
+#. 6.4->settings-schema.json->mouse-action-btn2->options
+#. 6.4->settings-schema.json->mouse-action-btn8->options
+#. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Restore/minimize 4th window in group"
 msgstr "Palauta/pienennä neljäs ikkuna ryhmässä"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
 #. 6.0->settings-schema.json->mouse-action-btn2->description
+#. 6.4->settings-schema.json->mouse-action-btn2->description
 msgid "Middle button action"
 msgstr "Keskimmäisen painikkeen toiminto"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->tooltip
 #. 6.0->settings-schema.json->mouse-action-btn2->tooltip
+#. 6.4->settings-schema.json->mouse-action-btn2->tooltip
 msgid "Action taken when using the middle mouse button on window list entries"
 msgstr ""
 "Toimenpide käytettäessä hiiren keskipainiketta ikkunaluettelomerkinnöissä"
 
 #. 4.0->settings-schema.json->mouse-action-btn8->description
 #. 6.0->settings-schema.json->mouse-action-btn8->description
+#. 6.4->settings-schema.json->mouse-action-btn8->description
 msgid "Back button action"
 msgstr "Takaisinpainikkeen toiminto"
 
 #. 4.0->settings-schema.json->mouse-action-btn8->tooltip
 #. 6.0->settings-schema.json->mouse-action-btn8->tooltip
+#. 6.4->settings-schema.json->mouse-action-btn8->tooltip
 msgid "Action taken when using the back mouse button on window list entries"
 msgstr ""
 "Toimenpide käytettäessä hiiren taaksepäin painiketta "
@@ -1684,11 +2063,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-btn9->description
 #. 6.0->settings-schema.json->mouse-action-btn9->description
+#. 6.4->settings-schema.json->mouse-action-btn9->description
 msgid "Forward button action"
 msgstr "Eteenpäin painikkeen toiminto"
 
 #. 4.0->settings-schema.json->mouse-action-btn9->tooltip
 #. 6.0->settings-schema.json->mouse-action-btn9->tooltip
+#. 6.4->settings-schema.json->mouse-action-btn9->tooltip
 msgid "Action taken when using the forward mouse button on window list entries"
 msgstr ""
 "Toimenpide käytettäessä hiiren eteenpäin-painiketta "
@@ -1696,41 +2077,49 @@ msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Minimize/Restore/Maximize window"
 msgstr "Pienennä/Palauta/Suurenna ikkuna"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows workspace"
 msgstr "Vaihda ikkunan työtilaa"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Change windows monitor"
 msgstr "Vaihda ikkunan näyttöä"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Change window tiling"
 msgstr "Vaihda ikkunoiden asettelua"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Cycle all window-list button windows"
 msgstr "Kierrä ikkunoiden painikkeet"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
+#. 6.4->settings-schema.json->mouse-action-scroll->options
 msgid "Cycle grouped/pooled button windows"
 msgstr "Kierrä ryhmitetyt painikeikkunat"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description
+#. 6.4->settings-schema.json->mouse-action-scroll->description
 msgid "Scroll wheel action"
 msgstr "Hiiren rullan toiminta"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->tooltip
 #. 6.0->settings-schema.json->mouse-action-scroll->tooltip
+#. 6.4->settings-schema.json->mouse-action-scroll->tooltip
 msgid ""
 "Action taken when using the mouse scroll wheel on a window list button. This "
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
@@ -1740,31 +2129,37 @@ msgstr ""
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "Off"
 msgstr "Pois"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (temporary)"
 msgstr "Päällä (väliaikainen)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (global default)"
 msgstr "Päällä ( kaikille oletusarvo)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (application default)"
 msgstr "Päällä (sovelluksen oletus)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->description
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->description
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->description
 msgid "Adjust the thumbnail window sizes using the scroll-wheel"
 msgstr "Säädä pikkukuvaikkunoiden kokoa vierityspyörällä"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
 #. 6.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+#. 6.4->settings-schema.json->wheel-adjusts-preview-size->tooltip
 msgid ""
 "If enabled, the size of thumbnail windows will respond to the mouse scroll-"
 "wheel. The new size can have a temporary effect or persist on a global or "
@@ -1776,6 +2171,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-bindings->description
 #. 6.0->settings-schema.json->hotkey-bindings->description
+#. 6.4->settings-schema.json->hotkey-bindings->description
 msgid "Hotkey binding available for assignment to a window"
 msgstr "Pikanäppäinsidonta käytettävissä määritettäväksi ikkunaan"
 
@@ -1783,26 +2179,32 @@ msgstr "Pikanäppäinsidonta käytettävissä määritettäväksi ikkunaan"
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
 #. 6.0->settings-schema.json->hotkey-bindings->columns->title
 #. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
 msgid "Enabled"
 msgstr "Käytössä"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 #. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
 msgid "Cycle application windows"
 msgstr "Kierrä sovellusten ikkunat"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 #. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
 msgid "Key sequence"
 msgstr "Näppäinjärjestys"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 #. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.4->settings-schema.json->hotkey-bindings->columns->title
 msgid "Description"
 msgstr "Kuvaus"
 
 #. 4.0->settings-schema.json->hotkey-bindings->tooltip
 #. 6.0->settings-schema.json->hotkey-bindings->tooltip
+#. 6.4->settings-schema.json->hotkey-bindings->tooltip
 msgid ""
 "Define a list of hotkeys used to bring to the foreground specific windows."
 msgstr ""
@@ -1811,11 +2213,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-minimize->description
 #. 6.0->settings-schema.json->hotkey-minimize->description
+#. 6.4->settings-schema.json->hotkey-minimize->description
 msgid "Minimize window when hotkey target is already in focus"
 msgstr "Pienennä ikkuna, kun pikanäppäinkohde on jo tarkennettu"
 
 #. 4.0->settings-schema.json->hotkey-minimize->tooltip
 #. 6.0->settings-schema.json->hotkey-minimize->tooltip
+#. 6.4->settings-schema.json->hotkey-minimize->tooltip
 msgid ""
 "If enabled and application cycling is not enabled or there is only one "
 "window for the application, windows will be minimized if the window is "
@@ -1826,11 +2230,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-new->description
 #. 6.0->settings-schema.json->hotkey-new->description
+#. 6.4->settings-schema.json->hotkey-new->description
 msgid "Open a new window when the application is not running"
 msgstr "Avaa uusi ikkuna, kun sovellus ei ole käynnissä"
 
 #. 4.0->settings-schema.json->hotkey-new->tooltip
 #. 6.0->settings-schema.json->hotkey-new->tooltip
+#. 6.4->settings-schema.json->hotkey-new->tooltip
 msgid ""
 "Start a new window if no window is attached to a hotkey and the hotkey "
 "description is an exact match for the application name of a pinned button or "
@@ -1842,6 +2248,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
+#. 6.4->settings-schema.json->hotkey-sequence->description
 msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
 msgstr ""
 "Älykkäät numeeriset pikanäppäimet (\"1\" laajenee automaattisesti arvoihin "
@@ -1849,6 +2256,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
+#. 6.4->settings-schema.json->hotkey-sequence->tooltip
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
@@ -1862,12 +2270,14 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-grave-help->description
 #. 6.0->settings-schema.json->hotkey-grave-help->description
+#. 6.4->settings-schema.json->hotkey-grave-help->description
 msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
 msgstr ""
 "Näytä pikanäppäinvihjekuplat käyttämällä muokkareita + `-kutsunäppäintä"
 
 #. 4.0->settings-schema.json->hotkey-grave-help->tooltip
 #. 6.0->settings-schema.json->hotkey-grave-help->tooltip
+#. 6.4->settings-schema.json->hotkey-grave-help->tooltip
 msgid ""
 "If enabled, The hotkey modifier(s) + ` will be registered for each unique "
 "modifier set defined in the hotkey list. Using these hotkeys will temporally "
@@ -1880,6 +2290,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-help->description
 #. 6.0->settings-schema.json->hotkey-help->description
+#. 6.4->settings-schema.json->hotkey-help->description
 msgid ""
 "Hotkeys can be assigned to a window in two ways:\n"
 "1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
@@ -1903,21 +2314,25 @@ msgstr ""
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
 #. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
 msgid "Key and mouse button"
 msgstr "Näppäin ja hiiren painike"
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
 #. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
 msgid "Mouse click context"
 msgstr "Hiiren klikkauskonteksti"
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
 #. 6.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.4->settings-schema.json->adv-mouse-list->columns->title
 msgid "Action to perform"
 msgstr "Suoritettava toimenpide"
 
 #. 4.0->settings-schema.json->adv-mouse-list->tooltip
 #. 6.0->settings-schema.json->adv-mouse-list->tooltip
+#. 6.4->settings-schema.json->adv-mouse-list->tooltip
 msgid ""
 "Define a set of mouse button actions when the Ctrl or Shift keys are pressed."
 msgstr ""
@@ -1939,11 +2354,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->animate-icon->description
 #. 6.0->settings-schema.json->animate-icon->description
+#. 6.4->settings-schema.json->animate-icon->description
 msgid "Icon animation when launching new windows"
 msgstr "Kuvakeanimaatio uusia ikkunoita käynnistettäessä"
 
 #. 4.0->settings-schema.json->animate-icon->tooltip
 #. 6.0->settings-schema.json->animate-icon->tooltip
+#. 6.4->settings-schema.json->animate-icon->tooltip
 msgid ""
 "When enabled, the icon will animate when launching new windows for an "
 "application"
@@ -1953,11 +2370,13 @@ msgstr ""
 
 #. 4.0->settings-schema.json->backup-file-name->description
 #. 6.0->settings-schema.json->backup-file-name->description
+#. 6.4->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
 msgstr "Asetusten varmuuskopion nimi"
 
 #. 4.0->settings-schema.json->backup-file-name->tooltip
 #. 6.0->settings-schema.json->backup-file-name->tooltip
+#. 6.4->settings-schema.json->backup-file-name->tooltip
 msgid ""
 "If a name is entered here, the configuration of this applet instance will be "
 "backed up under that name. Backups will be listed in the Setup Wizard "
@@ -1969,16 +2388,19 @@ msgstr ""
 
 #. 4.0->settings-schema.json->icon-saturation->units
 #. 6.0->settings-schema.json->icon-saturation->units
+#. 6.4->settings-schema.json->icon-saturation->units
 msgid "percent"
 msgstr "prosentti"
 
 #. 4.0->settings-schema.json->icon-saturation->description
 #. 6.0->settings-schema.json->icon-saturation->description
+#. 6.4->settings-schema.json->icon-saturation->description
 msgid "Icon color saturation"
 msgstr "Kuvakkeen värin saturaatio"
 
 #. 4.0->settings-schema.json->icon-saturation->tooltip
 #. 6.0->settings-schema.json->icon-saturation->tooltip
+#. 6.4->settings-schema.json->icon-saturation->tooltip
 msgid ""
 "Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
 "100%\n"
@@ -1992,41 +2414,49 @@ msgstr ""
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
 msgid "All Buttons"
 msgstr "Kaikki painikkeet"
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
 msgid "Minimized buttons"
 msgstr "Piilota tarrat piennetyista painikkeista"
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
 msgid "Idle pinned buttons"
 msgstr "Tyhjennä kiinnitetyt painikkeet"
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
 msgid "Buttons for windows on other workspaces"
 msgstr "Muiden työtilojen ikkunoiden painikkeet"
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
 msgid "Buttons for windows on other monitors"
 msgstr "Muiden näyttöjen ikkunoiden painikkeet"
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
+#. 6.4->settings-schema.json->saturation-application->options
 msgid "All buttons excepted focused window"
 msgstr "Kaikki painikkeet paitsi tarkennettu ikkuna"
 
 #. 4.0->settings-schema.json->saturation-application->description
 #. 6.0->settings-schema.json->saturation-application->description
+#. 6.4->settings-schema.json->saturation-application->description
 msgid "Where to apply the icon color saturation"
 msgstr "Missä käytetään kuvakkeen värikylläisyyttä"
 
 #. 4.0->settings-schema.json->saturation-application->tooltip
 #. 6.0->settings-schema.json->saturation-application->tooltip
+#. 6.4->settings-schema.json->saturation-application->tooltip
 msgid ""
 "Which buttons will have the custom icon color saturation applied\n"
 "This option is only available when the saturation is not set to 100%"
@@ -2250,22 +2680,3 @@ msgstr "Näyttö 1 paneelikäynnistäjä"
 #. SetupWizard.ui:643
 msgid "Monitor2PanelLauncher"
 msgstr "Näyttö 2 paneelikäynnistäjä"
-
-#~ msgid ""
-#~ "For groups/pools the label will still show unless all application windows "
-#~ "are minimized"
-#~ msgstr ""
-#~ "Ryhmien/poolien tarra näkyy edelleen, ellei kaikkia sovellusikkunoita ole "
-#~ "pienennetty"
-
-#~ msgid "Activate 1st window in grouped button"
-#~ msgstr "Aktivoi ensimmäinen ikkuna ryhmitellyssä painikkeessa"
-
-#~ msgid "Activate 2nd window in grouped button"
-#~ msgstr "Aktivoi toinen ikkuna ryhmitellyssä painikkeessa"
-
-#~ msgid "Activate 3rd window in grouped button"
-#~ msgstr "Aktivoi kolmas ikkuna ryhmitellyssä painikkeessa"
-
-#~ msgid "Activate 4th window in grouped button"
-#~ msgstr "Aktivoi neljäs ikkuna ryhmitellyssä painikkeessa"

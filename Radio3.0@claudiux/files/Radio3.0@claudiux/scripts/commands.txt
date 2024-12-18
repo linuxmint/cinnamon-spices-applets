@@ -1,2 +1,17 @@
 #streamripper:
 streamripper https://i4.streams.ovh:8352/stream -d /home/claude/Musique/Radio3.0/RipDir -u "Firefox"
+
+
+$ ls -A /usr/lib/systemd/user/ | grep pulse
+Returns on "pipewire-pulse" systems:
+pipewire-pulse.service
+pipewire-pulse.socket
+
+$ ls -A /usr/lib/systemd/user/ | grep pulse
+Returns on "pulseaudio" systems:
+pulseaudio.service
+pulseaudio.socket
+pulseaudio-x11.service
+
+
+$ pactl info | grep -i pulseaudio | grep -i pipewire

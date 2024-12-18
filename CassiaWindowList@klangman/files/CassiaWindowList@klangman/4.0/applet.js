@@ -1016,21 +1016,40 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
     this._closeBin.hide();
 
     if (this._cloneBin) {
-      let animTime = 0.5; //this._settings.getValue("label-animation-time") * 0.001;
-      Tweener.addTween(this.actor, {
-        width: 0,
-        time: animTime,
-        transition: "easeInOutQuad",
-        onUpdate: Lang.bind(this, function() {
-          this.actor.set_clip(this.actor.x, this.actor.y, this.actor.width, this.actor.height);
-        }),
-        onComplete: Lang.bind(this, function () {
-          this.actor.hide();
-          this.actor.set_width(-1);
-          this._menu._inHiding = false;
-          this.destroy();
-        })
-      });
+      let animTime = 0.2; //this._settings.getValue("label-animation-time") * 0.001;
+      log( `AnimationTime: ${animTime}` );
+      if (this._appButton._applet.orientation == St.Side.LEFT ||
+          this._appButton._applet.orientation == St.Side.RIGHT ) {
+         Tweener.addTween(this.actor, {
+           height: 0,
+           time: animTime,
+           transition: "easeInOutQuad",
+           onUpdate: Lang.bind(this, function() {
+             this.actor.set_clip(this.actor.x, this.actor.y, this.actor.width, this.actor.height);
+           }),
+           onComplete: Lang.bind(this, function () {
+             this.actor.hide();
+             this.actor.set_width(-1);
+             this._menu._inHiding = false;
+             this.destroy();
+           })
+         });
+       } else {
+         Tweener.addTween(this.actor, {
+           width: 0,
+           time: animTime,
+           transition: "easeInOutQuad",
+           onUpdate: Lang.bind(this, function() {
+             this.actor.set_clip(this.actor.x, this.actor.y, this.actor.width, this.actor.height);
+           }),
+           onComplete: Lang.bind(this, function () {
+             this.actor.hide();
+             this.actor.set_width(-1);
+             this._menu._inHiding = false;
+             this.destroy();
+           })
+         });
+       }
     } else {
       this.actor.hide();
       this._menu._inHiding = false;
@@ -2209,7 +2228,7 @@ class WindowListButton {
     }
     // Do we need a minimized char
     if (this._currentWindow && this._currentWindow.minimized && (this._applet.indicators&IndicatorType.Minimized) && this._workspace.autoIndicatorsOff==false) {
-      text = "\u{2193}" + text;  // The Unicode character "down arrow"
+      text = ((this._applet.orientation === St.Side.BOTTOM)?"\u{2193}":"\u{2191}") + text;  // The Unicode character up or down arrow
     } 
     // Do we need a pinned char
     if (this._pinned && (this._applet.indicators&IndicatorType.Pinned) && this._workspace.autoIndicatorsOff==false) {
@@ -3940,6 +3959,17 @@ class WindowListButton {
            this._settings.setValue("custom-app-grouping", customAppGrouping);
         }
      }
+  }
+
+  // If dragging (something that is not a App) over this button, activate the buttons
+  // window so that the user can drop the item on the window
+  handleDragOver(source, actor, x, y, time) {
+    if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))) {
+       if (this._windows.length > 0) {
+          Main.activateWindow(this._windows[0]);
+       }
+    }
+    return DND.DragMotionResult.CONTINUE;;
   }
 
   updateIconGeometry() {

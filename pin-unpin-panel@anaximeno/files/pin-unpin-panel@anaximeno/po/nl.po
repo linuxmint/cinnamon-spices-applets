@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-13 14:05+0200\n"
-"PO-Revision-Date: 2024-09-11 12:33+0200\n"
+"PO-Revision-Date: 2024-11-28 17:48+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -54,21 +54,19 @@ msgstr "Intelligent verbergen"
 
 #. 5.4->settings-schema.json->pinned-at-startup->description
 msgid "At Startup"
-msgstr ""
+msgstr "Bij opstarten"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
 msgid "Leave the panel as it is"
-msgstr ""
+msgstr "Laat het paneel zoals het is"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Pin the panel"
-msgstr "Paneel vast- of loskoppelen"
+msgstr "Paneel vastkoppelen"
 
 #. 5.4->settings-schema.json->pinned-at-startup->options
-#, fuzzy
 msgid "Unpin the panel"
-msgstr "Paneel vast- of loskoppelen"
+msgstr "Paneel loskoppelen"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"

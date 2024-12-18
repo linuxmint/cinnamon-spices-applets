@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-07 17:47+0100\n"
+"POT-Creation-Date: 2024-12-12 22:53+0100\n"
 "PO-Revision-Date: 2023-01-12 15:17+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
@@ -20,27 +20,27 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:236
+#. applet.js:238
 msgid "unassigned"
 msgstr ""
 
-#. applet.js:327
+#. applet.js:336
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Ovo je vaš popis Kategorija i Radio stanica."
 
-#. applet.js:328
+#. applet.js:337
 msgid "You can add more using the [+] button."
 msgstr "Možete dodati više pomoću [+] tipke."
 
-#. applet.js:329
+#. applet.js:338
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr "Za kategoriju, popunite samo naziv, ostala polja ostavite prazna."
 
-#. applet.js:330
+#. applet.js:339
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Za radio stanicu, popunite samo njen naziv i URL strujanja."
 
-#. applet.js:331
+#. applet.js:340
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -48,7 +48,7 @@ msgstr ""
 "Možete mijenjati radoslijed redaka povlačenjem i ispuštanjem ili korištenjem "
 "tipki i alata ispod na popisu."
 
-#. applet.js:332
+#. applet.js:341
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -56,7 +56,7 @@ msgstr ""
 "Tipke desno ispod popisa omogućuju vam navigaciju stranicu po stranicu ili "
 "kategoriju po kategoriju."
 
-#. applet.js:333
+#. applet.js:342
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -64,7 +64,7 @@ msgstr ""
 "Za pretragu jedne od vaših stanica, kliknite na popis i započnite upisivati "
 "njen naziv."
 
-#. applet.js:334
+#. applet.js:343
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -72,12 +72,12 @@ msgstr ""
 "Za jednostavno dodavanje stanica na vaš popis, koristite sljedeće 2 kartice: "
 "Pretraga i Uvoz."
 
-#. applet.js:335
+#. applet.js:344
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Odaberite njen 'Izbornik' okvir za prikaz stanice ili kategorije u izborniku."
 
-#. applet.js:336
+#. applet.js:345
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -85,13 +85,13 @@ msgstr ""
 "Odaberite njen '♪/➟' okvir kako bi slušali stanicu ili premjestili u drugu "
 "kategoriju pomoću alata ispod na popisu."
 
-#. applet.js:338
+#. applet.js:347
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 "Možete imati vlastiti popis stanica, provjeren od strane internetske baze "
 "podataka."
 
-#. applet.js:339
+#. applet.js:348
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -100,7 +100,7 @@ msgstr ""
 "Univerzalni Jedinstveni Identifikator (UUID) omogućen od strane tih baza "
 "podataka."
 
-#. applet.js:340
+#. applet.js:349
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -108,7 +108,7 @@ msgstr ""
 "Stoga, ako je URL strujanja promijenjen, sljedeća provjera će ga nadopuniti "
 "i možete nastaviti slušati dotičnu stanicu."
 
-#. applet.js:342
+#. applet.js:351
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -116,14 +116,14 @@ msgstr ""
 "Ovdje možete pretraživati druge stanice u besplatnoj radio bazi podataka "
 "dostupnoj putem interneta."
 
-#. applet.js:343
+#. applet.js:352
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
 msgstr ""
 "Popunite nekoliko polja obrasca ispod, zatim kliknite na 'Pretraži...' tipku."
 
-#. applet.js:344
+#. applet.js:353
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -133,7 +133,7 @@ msgstr ""
 "drugom dijelu ove stranice, gdje možete testirati pojedine stanice i dodati "
 "ih u izbornik."
 
-#. applet.js:345
+#. applet.js:354
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -141,7 +141,7 @@ msgstr ""
 "Stanica koja se već nalazi u vašem izborniku pojavit će se samo u "
 "rezultatima pretrage ako je njen URL strujanja promijenjen."
 
-#. applet.js:346
+#. applet.js:355
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -149,7 +149,7 @@ msgstr ""
 "Kada se nova stranica ne pojavi, to znači da se svi rezultati podudaraju s "
 "vašim prikazanim kriterijima pretrage."
 
-#. applet.js:348
+#. applet.js:357
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -157,7 +157,7 @@ msgstr ""
 "Možete uvesti datoteku koja sadrži naziv i URL strujanja najmanje jedne "
 "radio stanice."
 
-#. applet.js:349
+#. applet.js:358
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -165,11 +165,11 @@ msgstr ""
 "Te će se radio stanice prikazati na popisu ispod. Možete ih testirati "
 "odabirom njihova ♪ okvira."
 
-#. applet.js:350
+#. applet.js:359
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Tada možete upravljati ovim popisom tipkama na dnu ove kartice."
 
-#. applet.js:352
+#. applet.js:361
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -177,7 +177,7 @@ msgstr ""
 "U Shoutcast direktoriju, kliknite tipku preuzimanja lijevo od naziva "
 "stranice."
 
-#. applet.js:353
+#. applet.js:362
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -185,11 +185,11 @@ msgstr ""
 "Odaberite otvoreni format (.XSPF) i spremite datoteku pod istim nazivom kao "
 "i stanica."
 
-#. applet.js:354
+#. applet.js:363
 msgid "This file can then be imported here."
 msgstr "Ta datoteka tada može biti uvezena ovdje."
 
-#. applet.js:356
+#. applet.js:365
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bajta = %s GB = %s GiB"
@@ -200,344 +200,354 @@ msgstr "%s bajta = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#. applet.js:522 applet.js:536 applet.js:5084 applet.js:5096
+#. applet.js:531 applet.js:545 applet.js:5202 applet.js:5214
 msgid "(Undefined)"
 msgstr "(Neodređeno)"
 
-#. applet.js:734
+#. applet.js:743
 msgid "Radio3.0 web page..."
 msgstr ""
 
-#. applet.js:2063
+#. applet.js:2089
 msgid "Start"
 msgstr "Pokreni"
 
-#. applet.js:2071 applet.js:2800
+#. applet.js:2097 applet.js:2826
 msgid "Stop"
 msgstr "Zaustavi"
 
-#. applet.js:2306 applet.js:2342 applet.js:2389
+#. applet.js:2332 applet.js:2368 applet.js:2415
 msgid "Middle-Click: Stop Recording"
 msgstr "Srednji-klik: Zaustavi snimanje"
 
-#. applet.js:2338 applet.js:2385
+#. applet.js:2364 applet.js:2411
 msgid "Volume: %s%"
 msgstr "Glasnoća zvuka: %s%"
 
-#. applet.js:2344 applet.js:2391
+#. applet.js:2370 applet.js:2417
 msgid "Middle-click: ON/OFF"
 msgstr "Srednji-klik: ISKLJ/UKLJ"
 
-#. applet.js:2346 applet.js:2393
+#. applet.js:2372 applet.js:2419
 msgid "Click: Select another station"
 msgstr "Klik: Odaberi drugu stanicu"
 
-#. applet.js:2359
+#. applet.js:2385
 msgid "Click to select a station"
 msgstr "Klikni za odabir druge stanice"
 
-#. applet.js:2395
+#. applet.js:2421
 msgid "Scroll wheel: volume change"
 msgstr "Pomicanje kotačića miša: promjena glasnoće zvuka"
 
-#. applet.js:2470 applet.js:2818 applet.js:4700
+#. applet.js:2496 applet.js:2844 applet.js:4777
 msgid "Configure..."
 msgstr "Prilagodi..."
 
-#. applet.js:2474 applet.js:2810
+#. applet.js:2500 applet.js:2836
 msgid "Search for new stations..."
 msgstr "Pretraži novu stanicu..."
 
-#. applet.js:2480 applet.js:2822 applet.js:4737
+#. applet.js:2506 applet.js:2848 applet.js:4906
 msgid "Sound Settings"
 msgstr "Postavke zvuka"
 
-#. applet.js:2550
+#. applet.js:2576
 msgid "Watch on YT"
 msgstr "Gledaj na YT"
 
-#. applet.js:2557
+#. applet.js:2583
 msgid "Try to download it from YT (unsafe)"
 msgstr "Probaj preuzeti s YT (nesigurno)"
 
-#. applet.js:2620
+#. applet.js:2646
 msgid "Recently Played Stations:"
 msgstr "Nedavno slušane stanice:"
 
-#. applet.js:2662
+#. applet.js:2688
 msgid "Visit the home page of this station"
 msgstr "Posjeti naslovnicu ove stanice"
 
-#. applet.js:2701
+#. applet.js:2727
 msgid "Categories"
 msgstr ""
 
-#. applet.js:2703
+#. applet.js:2729
 #, fuzzy
 msgid "Radio Stations"
 msgstr "Moje radio stanice"
 
-#. applet.js:2713
+#. applet.js:2739
 msgid "All Categories"
 msgstr ""
 
-#. applet.js:2743
+#. applet.js:2769
 msgid "My Radio Stations"
 msgstr "Moje radio stanice"
 
-#. applet.js:2942
+#. applet.js:2968
 msgid "Downloading..."
 msgstr "Preuzimanje..."
 
-#. applet.js:2944
+#. applet.js:2970
 msgid "Stop downloading"
 msgstr "Zaustavi preuzimanje"
 
-#. applet.js:3048
+#. applet.js:3074
 msgid "Download complete"
 msgstr "Preuzimanje je završeno"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3050 applet.js:3059 applet.js:4499 applet.js:4508 applet.js:4517
-#. applet.js:4827
+#. applet.js:3076 applet.js:3085 applet.js:4529 applet.js:4538 applet.js:4547
+#. applet.js:4832
 msgid "Open the recordings folder"
 msgstr "Otvori mape snimanja"
 
-#. applet.js:3057 applet.js:4496 applet.js:4506 applet.js:4515
+#. applet.js:3083 applet.js:4526 applet.js:4536 applet.js:4545
 msgid "An error seems to have occurred during recording!"
 msgstr "Dogodila se greška tijekom snimanja!"
 
-#. applet.js:3058 applet.js:4498 applet.js:4507 applet.js:4516
+#. applet.js:3084 applet.js:4528 applet.js:4537 applet.js:4546
 msgid "Please check this record."
 msgstr "Provjerite ovu snimku."
 
-#. applet.js:3165 applet.js:3199
+#. applet.js:3191 applet.js:3225
 msgid "Record from now"
 msgstr "Snimaj od sada"
 
-#. applet.js:3183 applet.js:4990
+#. applet.js:3209 applet.js:5108
 msgid "Stop Current Recording"
 msgstr "Zaustavi trenutno snimanje"
 
-#. applet.js:3311
+#. applet.js:3337
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Reprodukcija %s%s"
 
-#. applet.js:3364
+#. applet.js:3390
 msgid "Radio OFF"
 msgstr "Radio ISKLJUČEN"
 
-#. applet.js:3492
+#. applet.js:3518
 msgid "Unable to record anything!"
 msgstr "Nemoguće je bilo što snimiti!"
 
-#. applet.js:3492 applet.js:4847
+#. applet.js:3518 applet.js:4852
 msgid "Insufficient space"
 msgstr "Nedovoljno prostora"
 
-#. applet.js:3492
+#. applet.js:3518
 msgid "The limit you set has been reached."
 msgstr "Ograničenje koje ste postavili je dosegnuto."
 
-#. applet.js:3878
+#. applet.js:3905
 msgid "Please Log Out then Log In"
 msgstr ""
 
-#. applet.js:3878
+#. applet.js:3905
 msgid "to finalize yt-dlp update"
 msgstr ""
 
-#. applet.js:3988
+#. applet.js:4018
 msgid "Nothing to save."
 msgstr "Nema ništa za spremanje."
 
-#. applet.js:4001
+#. applet.js:4031
 msgid "List of saved radio stations"
 msgstr "Popis spremljenih radio stanica"
 
-#. applet.js:4019
+#. applet.js:4049
 msgid "This will replace all current radio stations."
 msgstr "Ovo će zamijeniti sve trenutne radio stanice."
 
-#. applet.js:4020
+#. applet.js:4050
 msgid "Are you sure you want to continue?"
 msgstr "Želite li sigurno nastaviti?"
 
-#. applet.js:4080
+#. applet.js:4110
 msgid "Update in progress"
 msgstr "Nadopuna u tijeku"
 
-#. applet.js:4080
+#. applet.js:4110
 msgid "It may take a while ... Please wait."
 msgstr "Može potrajati... Pričekajte."
 
-#. applet.js:4170
+#. applet.js:4200
 msgid "Update completed successfully"
 msgstr "Nadopuna je završena uspješno"
 
-#. applet.js:4380 applet.js:4436
+#. applet.js:4410 applet.js:4466
 msgid "ERROR: Invalid YT video URL!"
 msgstr "GREŠKA: Nevaljali URL YT video snimke!"
 
-#. applet.js:4405
+#. applet.js:4435
 msgid "Unable to extract a single soundtrack"
 msgstr "Nemoguće izdvajanje jednog zvučnog zapisa"
 
-#. applet.js:4405
+#. applet.js:4435
 msgid "Maybe it's a playlist?"
 msgstr "Možda je popis izvođenja?"
 
-#. applet.js:4438
+#. applet.js:4468
 msgid "Close"
 msgstr "Zatvori"
 
-#. applet.js:4658
+#. applet.js:4699
 msgid "About..."
 msgstr "O programu..."
 
-#. applet.js:4681
+#. applet.js:4722
 msgid "Manual..."
 msgstr "Ručno..."
 
-#. applet.js:4713
-msgid "Schedule a background record..."
-msgstr "Zakaži pozadinsko snimanje..."
-
-#. applet.js:4725
-msgid "Extract soundtrack from YouTube video..."
-msgstr "Izdvoji zvučni zapis iz YouTube videa..."
-
-#. applet.js:4746
-msgid "Pulse Effects"
-msgstr "Pulse Effects"
-
-#. applet.js:4755
-#, fuzzy
-msgid "Easy Effects"
-msgstr "Pulse Effects"
-
-#. applet.js:4764
+#. applet.js:4733
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Ukloni '%s'"
 
-#. applet.js:4777
-msgid "Radio ON at startup"
-msgstr "Uključi radio pri pokretanju"
-
-#. applet.js:4791
-msgid "Display Station Logo"
-msgstr ""
-
-#. settings-schema.json->dont-check-dependencies->description
-#. applet.js:4805
-msgid "Do not check about dependencies"
-msgstr "Ne provjeravaj zavisnosti"
-
-#. applet.js:4844
-msgid "(auto)"
-msgstr "(automatski)"
-
-#. applet.js:4844
-msgid "(manual)"
-msgstr "(ručno)"
-
-#. applet.js:4847 applet.js:5039
-msgid "Stop Recording"
-msgstr "Zaustavi snimanje"
-
-#. applet.js:4847
-msgid "Start Recording"
-msgstr "Pokreni snimanje"
-
-#. applet.js:4868
+#. applet.js:4759
 msgid "Reload this applet"
 msgstr "Ponovno učitaj ovaj aplet"
 
-#. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:4884
-msgid "Display volume level near icon"
-msgstr ""
+#. applet.js:4791
+msgid "Schedule a background record..."
+msgstr "Zakaži pozadinsko snimanje..."
 
-#. applet.js:4902
+#. applet.js:4803
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Izdvoji zvučni zapis iz YouTube videa..."
+
+#. applet.js:4849
+msgid "(auto)"
+msgstr "(automatski)"
+
+#. applet.js:4849
+msgid "(manual)"
+msgstr "(ručno)"
+
+#. applet.js:4852 applet.js:5157
+msgid "Stop Recording"
+msgstr "Zaustavi snimanje"
+
+#. applet.js:4852
+msgid "Start Recording"
+msgstr "Pokreni snimanje"
+
+#. applet.js:4874
 msgid "Cancel downloads from YT"
 msgstr "Prekini preuzimanje s YT"
 
-#. applet.js:5040
+#. applet.js:4915
+msgid "Pulse Effects"
+msgstr "Pulse Effects"
+
+#. applet.js:4924
+#, fuzzy
+msgid "Easy Effects"
+msgstr "Pulse Effects"
+
+#. applet.js:4943
+msgid "Radio ON at startup"
+msgstr "Uključi radio pri pokretanju"
+
+#. applet.js:4957
+msgid "Display Station Logo"
+msgstr ""
+
+#. settings-schema.json->desklet-show-on-desktop->description
+#. applet.js:4972
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:4987
+msgid "Do not check about dependencies"
+msgstr "Ne provjeravaj zavisnosti"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5002
+msgid "Display volume level near icon"
+msgstr ""
+
+#. applet.js:5158
 msgid "Close without stopping recording"
 msgstr "Zatvori bez zaustavljanja snimanja"
 
-#. applet.js:5250
+#. applet.js:5368
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Pokretanje snimanja od %s:%s do %s:%s"
 
-#. applet.js:5262
+#. applet.js:5380
 msgid "Recording completed"
 msgstr "Snimanje završilo"
 
-#. applet.js:5357
+#. applet.js:5497
 msgid "This will import a new file containing radio stations."
 msgstr "Ovo će uvesti novu datoteku koja sadrži radio stanice."
 
-#. applet.js:5358
+#. applet.js:5498
 msgid "Do you want to continue?"
 msgstr "Želite li nastaviti?"
 
-#. applet.js:5429
+#. applet.js:5569
 msgid "No new radio in your list."
 msgstr "Nema novih radio stanicu u vašem popisu."
 
-#. applet.js:5431
+#. applet.js:5571
 msgid "One more radio in your list."
 msgstr "Još jedna radio stanica u vašem popisu."
 
-#. applet.js:5433
+#. applet.js:5573
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "Još %s radio stanica u vašem popisu."
 
-#. applet.js:5640
+#. applet.js:5780
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Nema novih stanica za dodavanje u izbornik Radio3.0 apleta"
 
-#. applet.js:5642
+#. applet.js:5782
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Dodana je nova stanica u izbornik Radio3.0 apleta"
 
-#. applet.js:5644
+#. applet.js:5784
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s novih stanica je dodano u izbornik Radio3.0 apleta"
 
-#. applet.js:5845
+#. applet.js:6031
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#. lib/checkDependencies.js:392
+#. desklet/AlbumArt3.0@claudiux/desklet.js:39
+#, fuzzy
+msgid "Radio3.0 Album Art"
+msgstr "Radio3.0"
+
+#. lib/checkDependencies.js:397
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Aplet %s je potpuno funkcionalan."
 
-#. lib/checkDependencies.js:393
+#. lib/checkDependencies.js:398
 msgid "All dependencies are installed"
 msgstr "Sve zavisnosti su instalirane"
 
-#. lib/checkDependencies.js:423
+#. lib/checkDependencies.js:428
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Izgleda da nedostaju određeni programi potrebni za sve značajke ovog apleta."
 
-#. lib/checkDependencies.js:424
+#. lib/checkDependencies.js:429
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Pokrenite, u upravo otvorenom terminalu naredbu:"
 
-#. lib/checkDependencies.js:425
+#. lib/checkDependencies.js:430
 msgid "Some dependencies are not installed!"
 msgstr "Određene zavisnosti nisu instalirane!"
 
@@ -712,6 +722,10 @@ msgstr "Spremanje i obnova"
 msgid "Update this station list"
 msgstr "Nadopuna ovog popisa stanica"
 
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
 msgstr "Nabava datoteka na Shoutcastu za uvoz"
@@ -772,6 +786,10 @@ msgstr "Ikona"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
+msgid "Album Art desklet"
 msgstr ""
 
 #. settings-schema.json->sectionNetworkQuality->title
@@ -945,6 +963,10 @@ msgstr "Nadopuni moj popis stanica pomoću podataka Radio baze podataka"
 #. settings-schema.json->recordings-extract-update->description
 msgid "%"
 msgstr "%"
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1343,6 +1365,7 @@ msgstr ""
 "ili programa."
 
 #. settings-schema.json->notif-song-duration->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->units
 msgid "seconds"
 msgstr "sekunde"
 
@@ -3085,4 +3108,96 @@ msgstr ""
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->desklet-activate-button->description
+msgid "Activate desklet displaying the Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->desklet-activated-label->description
+msgid "The desklet displaying the Radio3.0 Album Art is activated"
+msgstr ""
+
+#. settings-schema.json->desklet-open-settings-button->description
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+#, fuzzy
+msgid "None"
+msgstr "(Nijedno)"
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+msgid "0 means no fade"
 msgstr ""

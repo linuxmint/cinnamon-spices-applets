@@ -248,7 +248,7 @@
   },
   "showalbum": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
@@ -280,7 +280,7 @@
   },
   "showVolumeLevelNearIcon": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display volume level near icon"
   },
   "showMicMutedOnIcon": {
@@ -299,12 +299,12 @@
     "callback": "_onSystemSoundSettingsPressed"
   },
   "maxVolume": {
-	"type": "scale",
-	"description": "Maximum volume (%)",
-	"default": 100,
-	"min": 30,
-	"max": 150,
-	"step": 5
+    "type": "scale",
+    "description": "Maximum volume (%)",
+    "default": 100,
+    "min": 30,
+    "max": 150,
+    "step": 5
   },
   "stepVolume": {
     "type": "combobox",
@@ -378,15 +378,9 @@
     "default": true
   },
   "showMediaKeysOSD": {
-    "type": "combobox",
-    "default": "medium",
-    "options": {
-      "disabled": "disabled",
-      "small": "small",
-      "medium": "medium",
-      "large": "large"
-    },
-    "description": "Whether the media keys osd is disabled or its relative display size"
+    "type": "switch",
+    "default": true,
+    "description": "Whether or not to show the media keys osd"
   },
   "showOSDonStartup": {
     "type": "switch",

@@ -18,6 +18,8 @@ const HOME_DIR = GLib.get_home_dir();
 
 var VERBOSE = true; // VERBOSE value will be changed according to this applet settings.
 
+const POTENTIAL_INPUTS = ["'Capture'", "'Mic'"];
+
 /**
  * Usage of log and logError:
  * log("Any message here") to log the message only if VERBOSE is set to true.
@@ -41,6 +43,15 @@ function _(str) {
   return gettext(str);
 }
 
+function findFirstMatch(searchStrings, checkString) {
+  for (let i = 0; i < searchStrings.length; i++) { 
+    if (checkString.includes(searchStrings[i])) { 
+      return searchStrings[i]; 
+    }  
+  } 
+  return null; // Return null if no match is found 
+}
+
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
@@ -55,6 +66,11 @@ MyApplet.prototype = {
             this.set_applet_tooltip(_("Click to mute/unmute microphone"));
 
             try {
+                this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "soundcard",
+                                     "soundcard",
+                                     this.on_settings_changed,
+                                     null);
                 this.settings.bindProperty(Settings.BindingDirection.IN,
                                      "keybinding",
                                      "keybinding",
@@ -97,21 +113,7 @@ MyApplet.prototype = {
             if (this.settings) {
                 this.on_settings_changed();
             }
-
-            this.amixer = "amixer";
-            const parameters = ["", " -D pulse"];
-            for (let param of parameters) {
-                let cmd = this.amixer + param + " scontrols";
-                log("Test mixer command '" + cmd + "'");
-                // TODO: Make it async.
-                let [res, stdout] = GLib.spawn_command_line_sync(cmd);
-                if (res && to_string(stdout).indexOf("'Capture'") != -1) {
-                    this.amixer += param;
-                    log("Use mixer command '" + this.amixer + "'");
-                    break;
-                }
-            }
-
+            
             this.applet_is_running = true;
             this.set_not_muted_icon();
             this.is_audio_muted();
@@ -133,6 +135,7 @@ MyApplet.prototype = {
         }
 
         VERBOSE = this.verbose;
+        this.evaluate_cmd_line();
     },
 
     refresh_loop: function() {
@@ -146,7 +149,7 @@ MyApplet.prototype = {
             let cmd = [
                 "sh",
                 "-c",
-                this.amixer + " sget Capture"
+                this.amixer + " sget " + this.input
                 ];
             Util.spawn_async(cmd, (stdout) => {
                 try{
@@ -192,12 +195,81 @@ MyApplet.prototype = {
         }
     },
 
+    evaluate_soundcard: function() {
+      return new Promise((resolve, reject) => {
+        // only use specific soundcard if searchstring is not empty
+        if (this.soundcard.trim().length > 0) {
+          // per default use first soundcard 
+          this.soundcard_id = "0";
+          
+          Util.spawn_async(["sh","-c","cat /proc/asound/cards"], (stdout) => {
+            try {
+              // Split the result into lines 
+              let lines = stdout.split('\n');
+
+              // Filter lines that contain the soundcard search string
+              let filteredLines = lines.filter(line => line.includes(this.soundcard));
+
+              // Extract the field after splitting by space and getting the second field (index 1) 
+              if (filteredLines.length > 0) {
+                this.soundcard_id = filteredLines[0].split(' ')[1];
+              }
+              log("Use specific soundcard id: '" + this.soundcard_id + "'");
+              this.amixer = this.amixer + " -c " + this.soundcard_id;
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          });
+        } else {
+          resolve();
+        }
+      });
+    },
+
+    evaluate_input: function() {
+      return new Promise((resolve, reject) => {
+        this.input = POTENTIAL_INPUTS[0];
+        Util.spawn_async(["sh", "-c", this.amixer], (stdout) => {
+          try {
+            let found_input = findFirstMatch(POTENTIAL_INPUTS, stdout);
+            if (found_input !== null) {
+              this.input = found_input;
+            }
+            log("Use input: " + this.input);
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+    },
+
+    evaluate_cmd_line: async function() { 
+        this.amixer = "amixer";
+        await this.evaluate_soundcard(); 
+        await this.evaluate_input();
+
+        const parameters = ["", " -D pulse"];
+        for (let param of parameters) {
+            let cmd = this.amixer + param + " scontrols";
+            log("Test mixer command '" + cmd + "'");
+            // TODO: Make it async.
+            let [res, stdout] = GLib.spawn_command_line_sync(cmd);
+            if (res && to_string(stdout).indexOf(this.input) != -1) {
+                this.amixer += param;
+                log("Use mixer command '" + this.amixer + "'");
+                break;
+            }
+        }
+    },
+
     on_applet_clicked: function(event) {
         try{
             let cmd = [
                 "sh",
                 "-c",
-                this.amixer + " set Capture toggle"
+                this.amixer + " set " + this.input + " toggle"
             ];
             Util.spawn_async(cmd, (stdout) => {
                 this.is_audio_muted();

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-07 17:47+0100\n"
+"POT-Creation-Date: 2024-12-12 22:53+0100\n"
 "PO-Revision-Date: 2024-09-14 03:06+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -19,31 +19,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:236
+#. applet.js:238
 msgid "unassigned"
 msgstr "sense assignar"
 
-#. applet.js:327
+#. applet.js:336
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Aquesta és la vostra llista de categories i emissores de ràdio."
 
-#. applet.js:328
+#. applet.js:337
 msgid "You can add more using the [+] button."
 msgstr "En podeu afegir més utilitzant el botó [+]."
 
-#. applet.js:329
+#. applet.js:338
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 "Per a les categories, introduïu només el seu nom; deixeu la resta de camps "
 "buits."
 
-#. applet.js:330
+#. applet.js:339
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr ""
 "Per a les emissores de ràdio, introduïu només el seu nom i el seva URL de "
 "retransmissió."
 
-#. applet.js:331
+#. applet.js:340
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -51,7 +51,7 @@ msgstr ""
 "Podeu ordenar les files via arrossegant-les i deixant-les anar o utilitzant "
 "els botons i les eines de sota de la llista."
 
-#. applet.js:332
+#. applet.js:341
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -59,7 +59,7 @@ msgstr ""
 "Els botons de la dreta de sota de la llista us permeten navegar pàgina per "
 "pàgina o categoria per categoria."
 
-#. applet.js:333
+#. applet.js:342
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -67,7 +67,7 @@ msgstr ""
 "Per a buscar una de les vostres emissores, cliqueu a la llista i comenceu a "
 "escriure'n el nom."
 
-#. applet.js:334
+#. applet.js:343
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -75,12 +75,12 @@ msgstr ""
 "Per a afegir emissores fàcilment a la vostra llista, utilitzeu les dues "
 "pestanyes següents: Buscar i Importar."
 
-#. applet.js:335
+#. applet.js:344
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Marqueu la casella 'Menú' per a mostrar una emissora o categoria al menú."
 
-#. applet.js:336
+#. applet.js:345
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -88,13 +88,13 @@ msgstr ""
 "Marqueu la casella  '♪/➟' per escoltar l'emissora o moure-la a una altra "
 "categoria utilitzant les eines de sota de la llista."
 
-#. applet.js:338
+#. applet.js:347
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 "Podeu fer que la vostra llista d'emissores sigui revisada per bases de dades "
 "d'internet."
 
-#. applet.js:339
+#. applet.js:348
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -102,7 +102,7 @@ msgstr ""
 "Qualsevol emissora reconeguda per una d'aquestes bases de dades rebrà un "
 "identificador únic (UUID) per part d'aquesta base de dades."
 
-#. applet.js:340
+#. applet.js:349
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -110,7 +110,7 @@ msgstr ""
 "Per tant, si una URL de retransmissió canvia, la propera revisió "
 "l'actualitzarà i podreu seguir-la escoltant."
 
-#. applet.js:342
+#. applet.js:351
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -118,7 +118,7 @@ msgstr ""
 "Aquí podeu buscar altres emissores a una base de dades gratuïta de ràdios a "
 "través d'Internet."
 
-#. applet.js:343
+#. applet.js:352
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -126,7 +126,7 @@ msgstr ""
 "Ompliu com a mínim uns quants camps del formulari i després cliqueu el botó "
 "'Buscar ...'."
 
-#. applet.js:344
+#. applet.js:353
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -136,7 +136,7 @@ msgstr ""
 "a la segona part d'aquesta pàgina, on podeu provar certes emissores i "
 "incloure-les al menú."
 
-#. applet.js:345
+#. applet.js:354
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -144,7 +144,7 @@ msgstr ""
 "Una emissora que ja sigui al vostre menú només apareixerà als resultats de "
 "cerca si la seva URL de retransmissió ha canviat."
 
-#. applet.js:346
+#. applet.js:355
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -152,7 +152,7 @@ msgstr ""
 "Quan no apareix cap més pàgina nova, vol dir que tots els resultats "
 "encaixant els vostres paràmetres ja s'han mostrat."
 
-#. applet.js:348
+#. applet.js:357
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -160,7 +160,7 @@ msgstr ""
 "Podeu importar un fitxer contenent el nom i la URL de retransmissió de com a "
 "mínim una emissora de ràdio."
 
-#. applet.js:349
+#. applet.js:358
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -168,13 +168,13 @@ msgstr ""
 "Aquestes emissores de ràdio es mostren a la llista de sota. Podeu provar-les "
 "marcant la seva casella ♪."
 
-#. applet.js:350
+#. applet.js:359
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
 "I després gestionar aquesta llista amb els botons de la part de baix "
 "d'aquesta pestanya."
 
-#. applet.js:352
+#. applet.js:361
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -182,7 +182,7 @@ msgstr ""
 "Al directori Shoutcast, cliqueu el botó de descàrrega a l'esquerra de "
 "l'emissora de ràdio."
 
-#. applet.js:353
+#. applet.js:362
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -190,11 +190,11 @@ msgstr ""
 "Seleccioneu el format obert (.XSPF) i guardeu el fitxer donant-li el mateix "
 "nom que el de l'emissora."
 
-#. applet.js:354
+#. applet.js:363
 msgid "This file can then be imported here."
 msgstr "Aquest fitxer, aleshores, pot ser importat aquí."
 
-#. applet.js:356
+#. applet.js:365
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bytes = %s GB = %s GiB"
@@ -205,334 +205,344 @@ msgstr "%s bytes = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#. applet.js:522 applet.js:536 applet.js:5084 applet.js:5096
+#. applet.js:531 applet.js:545 applet.js:5202 applet.js:5214
 msgid "(Undefined)"
 msgstr "(Sense definir)"
 
-#. applet.js:734
+#. applet.js:743
 msgid "Radio3.0 web page..."
 msgstr "Lloc web de Radio3.0..."
 
-#. applet.js:2063
+#. applet.js:2089
 msgid "Start"
 msgstr "Iniciar"
 
-#. applet.js:2071 applet.js:2800
+#. applet.js:2097 applet.js:2826
 msgid "Stop"
 msgstr "Aturar"
 
-#. applet.js:2306 applet.js:2342 applet.js:2389
+#. applet.js:2332 applet.js:2368 applet.js:2415
 msgid "Middle-Click: Stop Recording"
 msgstr "Clic del mig: Aturar gravació"
 
-#. applet.js:2338 applet.js:2385
+#. applet.js:2364 applet.js:2411
 msgid "Volume: %s%"
 msgstr "Volum: %s%"
 
-#. applet.js:2344 applet.js:2391
+#. applet.js:2370 applet.js:2417
 msgid "Middle-click: ON/OFF"
 msgstr "Clic del mig: Encès/Apagat"
 
-#. applet.js:2346 applet.js:2393
+#. applet.js:2372 applet.js:2419
 msgid "Click: Select another station"
 msgstr "Clic: Seleccioneu una altra emissora"
 
-#. applet.js:2359
+#. applet.js:2385
 msgid "Click to select a station"
 msgstr "Clic per a seleccionar una emissora"
 
-#. applet.js:2395
+#. applet.js:2421
 msgid "Scroll wheel: volume change"
 msgstr "Roda del ratolí: canvi de volum"
 
-#. applet.js:2470 applet.js:2818 applet.js:4700
+#. applet.js:2496 applet.js:2844 applet.js:4777
 msgid "Configure..."
 msgstr "Configurar..."
 
-#. applet.js:2474 applet.js:2810
+#. applet.js:2500 applet.js:2836
 msgid "Search for new stations..."
 msgstr "Buscar noves emissores..."
 
-#. applet.js:2480 applet.js:2822 applet.js:4737
+#. applet.js:2506 applet.js:2848 applet.js:4906
 msgid "Sound Settings"
 msgstr "Configuració de So"
 
-#. applet.js:2550
+#. applet.js:2576
 msgid "Watch on YT"
 msgstr "Veure a Youtube"
 
-#. applet.js:2557
+#. applet.js:2583
 msgid "Try to download it from YT (unsafe)"
 msgstr "Intentar descarregar-ho de Youtube (no és segur)"
 
-#. applet.js:2620
+#. applet.js:2646
 msgid "Recently Played Stations:"
 msgstr "Emissores escoltades recentment:"
 
-#. applet.js:2662
+#. applet.js:2688
 msgid "Visit the home page of this station"
 msgstr "Visiteu el lloc web d'aquesta emissora"
 
-#. applet.js:2701
+#. applet.js:2727
 msgid "Categories"
 msgstr "Categories"
 
-#. applet.js:2703
+#. applet.js:2729
 msgid "Radio Stations"
 msgstr "Emissores de Ràdio"
 
-#. applet.js:2713
+#. applet.js:2739
 msgid "All Categories"
 msgstr "Totes les categories"
 
-#. applet.js:2743
+#. applet.js:2769
 msgid "My Radio Stations"
 msgstr "Les meves emissores"
 
-#. applet.js:2942
+#. applet.js:2968
 msgid "Downloading..."
 msgstr "Descarregant..."
 
-#. applet.js:2944
+#. applet.js:2970
 msgid "Stop downloading"
 msgstr "Atura la descàrrega"
 
-#. applet.js:3048
+#. applet.js:3074
 msgid "Download complete"
 msgstr "Descàrrega completa"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3050 applet.js:3059 applet.js:4499 applet.js:4508 applet.js:4517
-#. applet.js:4827
+#. applet.js:3076 applet.js:3085 applet.js:4529 applet.js:4538 applet.js:4547
+#. applet.js:4832
 msgid "Open the recordings folder"
 msgstr "Obre la carpeta de les gravacions"
 
-#. applet.js:3057 applet.js:4496 applet.js:4506 applet.js:4515
+#. applet.js:3083 applet.js:4526 applet.js:4536 applet.js:4545
 msgid "An error seems to have occurred during recording!"
 msgstr "Sembla que hi ha hagut un error mentre es gravava!"
 
-#. applet.js:3058 applet.js:4498 applet.js:4507 applet.js:4516
+#. applet.js:3084 applet.js:4528 applet.js:4537 applet.js:4546
 msgid "Please check this record."
 msgstr "Si us plau, reviseu aquesta gravació."
 
-#. applet.js:3165 applet.js:3199
+#. applet.js:3191 applet.js:3225
 msgid "Record from now"
 msgstr "Gravar des d'ara"
 
-#. applet.js:3183 applet.js:4990
+#. applet.js:3209 applet.js:5108
 msgid "Stop Current Recording"
 msgstr "Aturar la gravació actual"
 
-#. applet.js:3311
+#. applet.js:3337
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Reproduint %s%s"
 
-#. applet.js:3364
+#. applet.js:3390
 msgid "Radio OFF"
 msgstr "Ràdio Apagada"
 
-#. applet.js:3492
+#. applet.js:3518
 msgid "Unable to record anything!"
 msgstr "No s'ha pogut gravar res!"
 
-#. applet.js:3492 applet.js:4847
+#. applet.js:3518 applet.js:4852
 msgid "Insufficient space"
 msgstr "Espai insuficient"
 
-#. applet.js:3492
+#. applet.js:3518
 msgid "The limit you set has been reached."
 msgstr "S'ha arribat al límit que heu establert."
 
-#. applet.js:3878
+#. applet.js:3905
 msgid "Please Log Out then Log In"
 msgstr "Si us plau tanqueu la sessió i inicieu-la de nou"
 
-#. applet.js:3878
+#. applet.js:3905
 msgid "to finalize yt-dlp update"
 msgstr "per acabar l'actualització de yt-dlp"
 
-#. applet.js:3988
+#. applet.js:4018
 msgid "Nothing to save."
 msgstr "No hi ha res a guardar."
 
-#. applet.js:4001
+#. applet.js:4031
 msgid "List of saved radio stations"
 msgstr "Llista d'emissores de ràdio guardades"
 
-#. applet.js:4019
+#. applet.js:4049
 msgid "This will replace all current radio stations."
 msgstr "Això substituirà totes les emissores de ràdio actuals."
 
-#. applet.js:4020
+#. applet.js:4050
 msgid "Are you sure you want to continue?"
 msgstr "Segur que voleu continuar?"
 
-#. applet.js:4080
+#. applet.js:4110
 msgid "Update in progress"
 msgstr "Actualització en procés"
 
-#. applet.js:4080
+#. applet.js:4110
 msgid "It may take a while ... Please wait."
 msgstr "Pot ser que tardi una mica... si us plau, espereu."
 
-#. applet.js:4170
+#. applet.js:4200
 msgid "Update completed successfully"
 msgstr "S'ha completat l'actualització amb èxit"
 
-#. applet.js:4380 applet.js:4436
+#. applet.js:4410 applet.js:4466
 msgid "ERROR: Invalid YT video URL!"
 msgstr "ERROR: URL de vídeo de Youtube invàlida!"
 
-#. applet.js:4405
+#. applet.js:4435
 msgid "Unable to extract a single soundtrack"
 msgstr "No s'ha pogut extreure cap pista de so"
 
-#. applet.js:4405
+#. applet.js:4435
 msgid "Maybe it's a playlist?"
 msgstr "Potser és una llista de reproducció?"
 
-#. applet.js:4438
+#. applet.js:4468
 msgid "Close"
 msgstr "Tancar"
 
-#. applet.js:4658
+#. applet.js:4699
 msgid "About..."
 msgstr "Quant a..."
 
-#. applet.js:4681
+#. applet.js:4722
 msgid "Manual..."
 msgstr "Manual..."
 
-#. applet.js:4713
-msgid "Schedule a background record..."
-msgstr "Programar una gravació desatesa..."
-
-#. applet.js:4725
-msgid "Extract soundtrack from YouTube video..."
-msgstr "Extreure pista d'àudio d'un vídeo de Youtube..."
-
-#. applet.js:4746
-msgid "Pulse Effects"
-msgstr "Pulse Effects"
-
-#. applet.js:4755
-msgid "Easy Effects"
-msgstr "Easy Effects"
-
-#. applet.js:4764
+#. applet.js:4733
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#. applet.js:4777
-msgid "Radio ON at startup"
-msgstr "Ràdio engegada a l'inici"
-
-#. applet.js:4791
-msgid "Display Station Logo"
-msgstr "Mostrar el logo de l'emissora"
-
-#. settings-schema.json->dont-check-dependencies->description
-#. applet.js:4805
-msgid "Do not check about dependencies"
-msgstr "No facis comprovacions de dependències"
-
-#. applet.js:4844
-msgid "(auto)"
-msgstr "(auto)"
-
-#. applet.js:4844
-msgid "(manual)"
-msgstr "(manual)"
-
-#. applet.js:4847 applet.js:5039
-msgid "Stop Recording"
-msgstr "Para de gravar"
-
-#. applet.js:4847
-msgid "Start Recording"
-msgstr "Inicia la gravació"
-
-#. applet.js:4868
+#. applet.js:4759
 msgid "Reload this applet"
 msgstr "Recarrega aquesta miniaplicació"
 
-#. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:4884
-msgid "Display volume level near icon"
-msgstr "Mostra el nivell de volum al costat de la icona"
+#. applet.js:4791
+msgid "Schedule a background record..."
+msgstr "Programar una gravació desatesa..."
 
-#. applet.js:4902
+#. applet.js:4803
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Extreure pista d'àudio d'un vídeo de Youtube..."
+
+#. applet.js:4849
+msgid "(auto)"
+msgstr "(auto)"
+
+#. applet.js:4849
+msgid "(manual)"
+msgstr "(manual)"
+
+#. applet.js:4852 applet.js:5157
+msgid "Stop Recording"
+msgstr "Para de gravar"
+
+#. applet.js:4852
+msgid "Start Recording"
+msgstr "Inicia la gravació"
+
+#. applet.js:4874
 msgid "Cancel downloads from YT"
 msgstr "Cancel·la descàrregues de Youtube"
 
-#. applet.js:5040
+#. applet.js:4915
+msgid "Pulse Effects"
+msgstr "Pulse Effects"
+
+#. applet.js:4924
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+#. applet.js:4943
+msgid "Radio ON at startup"
+msgstr "Ràdio engegada a l'inici"
+
+#. applet.js:4957
+msgid "Display Station Logo"
+msgstr "Mostrar el logo de l'emissora"
+
+#. settings-schema.json->desklet-show-on-desktop->description
+#. applet.js:4972
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:4987
+msgid "Do not check about dependencies"
+msgstr "No facis comprovacions de dependències"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5002
+msgid "Display volume level near icon"
+msgstr "Mostra el nivell de volum al costat de la icona"
+
+#. applet.js:5158
 msgid "Close without stopping recording"
 msgstr "Tanca sense aturar la gravació"
 
-#. applet.js:5250
+#. applet.js:5368
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Comença la gravació des de %s:%s fins a %s:%s"
 
-#. applet.js:5262
+#. applet.js:5380
 msgid "Recording completed"
 msgstr "Gravació completada"
 
-#. applet.js:5357
+#. applet.js:5497
 msgid "This will import a new file containing radio stations."
 msgstr "Això importarà un fitxer nou contenint emissores de ràdio."
 
-#. applet.js:5358
+#. applet.js:5498
 msgid "Do you want to continue?"
 msgstr "Voleu continuar?"
 
-#. applet.js:5429
+#. applet.js:5569
 msgid "No new radio in your list."
 msgstr "No hi ha cap ràdio nova a la vostra llista."
 
-#. applet.js:5431
+#. applet.js:5571
 msgid "One more radio in your list."
 msgstr "Una nova ràdio a la vostra llista."
 
-#. applet.js:5433
+#. applet.js:5573
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s ràdios noves a la vostra llista."
 
-#. applet.js:5640
+#. applet.js:5780
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 "No hi ha noves emissores per afegir al menú de la miniaplicació Radio3.0"
 
-#. applet.js:5642
+#. applet.js:5782
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr ""
 "Una nova emissora de ràdio s'ha afegit al menú de la miniaplicació Radio3.0"
 
-#. applet.js:5644
+#. applet.js:5784
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr ""
 "%s noves emissores de ràdio s'han afegir al menú de la miniaplicació Radio3.0"
 
-#. applet.js:5845
+#. applet.js:6031
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#. lib/checkDependencies.js:392
+#. desklet/AlbumArt3.0@claudiux/desklet.js:39
+#, fuzzy
+msgid "Radio3.0 Album Art"
+msgstr "Radio3.0"
+
+#. lib/checkDependencies.js:397
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "La miniaplicació %s funciona correctament."
 
-#. lib/checkDependencies.js:393
+#. lib/checkDependencies.js:398
 msgid "All dependencies are installed"
 msgstr "Totes les dependències estan instal·lades"
 
-#. lib/checkDependencies.js:423
+#. lib/checkDependencies.js:428
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -540,12 +550,12 @@ msgstr ""
 "Sembla que us falta instal·lar alguns programes necessaris per al correcte "
 "funcionament aquesta miniaplicació."
 
-#. lib/checkDependencies.js:424
+#. lib/checkDependencies.js:429
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Si us plau, executeu les següents ordres al terminal que acaba d'obrir-se:"
 
-#. lib/checkDependencies.js:425
+#. lib/checkDependencies.js:430
 msgid "Some dependencies are not installed!"
 msgstr "Algunes dependències no estan instal·lades!"
 
@@ -722,6 +732,10 @@ msgstr "Guardar i restaurar"
 msgid "Update this station list"
 msgstr "Actualitzar aquesta llista d'emissores"
 
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
 msgstr "Obteniu fitxers a Shoutcast per a importar aquí"
@@ -782,6 +796,10 @@ msgstr "Icona"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
+msgid "Album Art desklet"
 msgstr ""
 
 #. settings-schema.json->sectionNetworkQuality->title
@@ -958,6 +976,10 @@ msgstr "Actualitza la meva llista d'emissores amb la base de dades de ràdios"
 #. settings-schema.json->recordings-extract-update->description
 msgid "%"
 msgstr "%"
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1361,6 +1383,7 @@ msgstr ""
 "programa."
 
 #. settings-schema.json->notif-song-duration->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->units
 msgid "seconds"
 msgstr "segons"
 
@@ -3118,4 +3141,96 @@ msgstr ""
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->desklet-activate-button->description
+msgid "Activate desklet displaying the Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->desklet-activated-label->description
+msgid "The desklet displaying the Radio3.0 Album Art is activated"
+msgstr ""
+
+#. settings-schema.json->desklet-open-settings-button->description
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+#, fuzzy
+msgid "None"
+msgstr "(Cap)"
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+msgid "0 means no fade"
 msgstr ""
