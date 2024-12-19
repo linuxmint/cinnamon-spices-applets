@@ -1,3 +1,6 @@
+### v2.5.2~20241219
+  * Improved menu behavior. The menu no longer closes when you switch from the station list to the category list.
+
 ### v2.5.1~20241217
   * Fixes #6689.
   * Improved menu display.
