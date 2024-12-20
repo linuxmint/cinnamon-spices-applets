@@ -2752,7 +2752,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         section.box.set_vertical(false);
         section.blockSourceEvents = true;
         section.box.connect("leave-event", () => {});
-        section.box.set_style("width: 800px;spacing: 0px;padding:0px;expand: true; x_fill: true;");
+        section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true; x_fill: true;");
         this.menu.addMenuItem(section);
 
         let sectionCats = new PopupMenuSection();
@@ -2776,21 +2776,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         section.addMenuItem(sectionStations);
 
         this.categoriesMenu = new StationsPopupSubMenuMenuItem(formatTextWrap(_("Categories"), WRAP_LENGTH));
-        //~ this.categoriesMenu.style="width: 250px;";
+        this.categoriesMenu.style="width: 250px;";
 
         this.stationsMenu = new PopupSubMenuMenuItem(formatTextWrap(_("Radio Stations"), WRAP_LENGTH));
-        //~ this.stationsMenu.style="width: 350px;";
+        this.stationsMenu.style="width: 450px;";
 
-        sectionCats.addMenuItem(this.categoriesMenu, { expand: true, span: 1, align: Align.END });
-        sectionStations.addMenuItem(this.stationsMenu, { expand: true, span: 1, align: Align.START });
+        sectionCats.addMenuItem(this.categoriesMenu, { expand: true, span: 25, align: Align.START });
+        sectionStations.addMenuItem(this.stationsMenu, { expand: true, span: 25, align: Align.END });
 
         var catItems = [];
         var iCats = -1;
         for (let c of _cats) {
           iCats++;
           let _keys = Object.keys(cws[c]);
-          let catItem = new PopupMenuItem((c=="All Categories") ? _("All Categories") + " (" + _keys.length + ")" : c + " (" + _keys.length + ")", { reactive: true });
+          let catItem = new PopupMenuItem((c=="All Categories") ? _("All Categories") + " (" + _keys.length + ")" : c + " (" + _keys.length + ")", { reactive: true, });
           catItem.setShowDot(c == this.last_category);
+          catItem.style="width: 250px;";
           catItems.push(catItem);
           this.categoriesMenu.menu.addMenuItem(catItems[iCats]);
           catItems[iCats].actor.connect("enter-event", Lang.bind(this, function() {
@@ -2804,7 +2805,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             for (let i = 0; i < children.length; i++) {
                 let item = children[i];
                 item._signals.disconnectAllSignals();
-                item.label.set_text("");
+                item.label.set_text(" ".repeat(25)); // item.label.set_text("");
+                item.setShowDot(false);
                 item.reactive = false;
                 item.visible = false;
                 //item.destroy(); // -> CULPRIT!
@@ -2820,6 +2822,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               let id = cws[c][s];
               let item = new PopupMenuItem(formatTextWrap(s, WRAP_LENGTH), { reactive: true });
               item.setShowDot(id == this.last_radio_listened_to);
+              item.style="width: 450px;";
               if (id == this.last_radio_listened_to && c!=="All Categories" && c!=="♥︎") {
                 catItem.setShowDot(true);
                 this.last_category = c;
