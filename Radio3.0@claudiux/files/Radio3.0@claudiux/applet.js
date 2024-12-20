@@ -40,7 +40,7 @@ const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports
 var RADIO_NOTIFICATION_TIMEOUT = 2;
 const RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET = 10;
 //Mainloop:
-const { timeout_add_seconds, source_remove } = imports.mainloop;
+//~ const { timeout_add_seconds, source_remove } = imports.mainloop;
 //Pango
 const { parse_markup, WrapMode, EllipsizeMode } = imports.gi.Pango;
 //Extension:
@@ -860,8 +860,10 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         this._signals.connect(menu, 'active-changed', (submenu, submenuItem) => {
             if (this._activeMenuItem && this._activeMenuItem != submenuItem)
                 this._activeMenuItem.setActive(false);
-            this._activeMenuItem = submenuItem;
-            this.emit('active-changed', submenuItem);
+            if (submenuItem) {
+              this._activeMenuItem = submenuItem;
+              this.emit('active-changed', submenuItem);
+            }
         });
     }
 
@@ -895,14 +897,23 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             //~ }
         });
         this._signals.connect(menuItem, 'destroy', (emitter) => {
-            this._signals.disconnect('activate', menuItem);
-            this._signals.disconnect('active-changed', menuItem);
-            this._signals.disconnect('sensitive-changed', menuItem);
-            if (menuItem.menu) {
+            if (menuItem && menuItem.menu) {
+              if (this._signals.isConnected)('activate', menuItem.menu)
                 this._signals.disconnect('activate', menuItem.menu);
+              if (this._signals.isConnected)('active-changed', menuItem.menu)
                 this._signals.disconnect('active-changed', menuItem.menu);
+              if (this._signals.isConnected)('open-state-changed', menuItem.menu)
                 this._signals.disconnect('open-state-changed', this);
             }
+            if (menuItem) {
+              if (this._signals.isConnected)('activate', menuItem)
+                this._signals.disconnect('activate', menuItem);
+              if (this._signals.isConnected)('active-changed', menuItem)
+                this._signals.disconnect('active-changed', menuItem);
+               if (this._signals.isConnected)('sensitive-changed', menuItem)
+              this._signals.disconnect('sensitive-changed', menuItem);
+            }
+
             if (menuItem == this._activeMenuItem)
                 this._activeMenuItem = null;
             this.length--;
@@ -924,7 +935,10 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         if (menuItem instanceof PopupMenuSection) {
             this._connectSubMenuSignals(menuItem, menuItem);
             this._signals.connect(menuItem, 'destroy', () => {
+              logDebug('Destroying PopupMenuSection');
+              if (this._signals.isConnected)('activate', menuItem)
                 this._signals.disconnect('activate', menuItem);
+              if (this._signals.isConnected)('active-changed', menuItem)
                 this._signals.disconnect('active-changed', menuItem);
 
                 this.length--;
@@ -945,6 +959,9 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
                     //~ }
                 //~ }
             }, this);
+            this._signals.connect(menuItem, 'destroy', () => {
+              logDebug('Destroying PopupSubMenuMenuItem');
+            });
         } else if (menuItem instanceof PopupSeparatorMenuItem) {
             this._connectItemSignals(menuItem);
 
@@ -954,6 +971,10 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             // precise ways would require a lot more bookkeeping.
             let updateSeparatorVisibility = this._updateSeparatorVisibility.bind(this, menuItem);
             this._signals.connect(this, 'open-state-changed', updateSeparatorVisibility);
+
+            this._signals.connect(menuItem, 'destroy', () => {
+              logDebug('Destroying PopupSeparatorMenuItem');
+            });
         } else if (menuItem instanceof PopupBaseMenuItem)
             this._connectItemSignals(menuItem);
         else
@@ -2528,35 +2549,23 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // NORMAL MENU
     if (force || this.oldRadios != JSON.stringify(this.radios)) {
-      //~ this.mainBox = new BoxLayout({
-        //~ style_class: 'menu-applications-outer-box',
-        //~ style: 'spacing: 0px;',
-        //~ vertical: true, reactive: true,
-        //~ show_on_set_parent: false
-      //~ });
-      //~ this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
-
       this.set_radio_hashtable();
 
       if (change_tooltip) this.set_radio_tooltip_to_default_one();
 
       if (this.menu) {
         this.menu.removeAll();
-        //~ this.menu.destroy();
+      } else {
+        this.menu = new AppletPopupMenu(this, this.orientation);
+        this.menuManager.addMenu(this.menu);
       }
 
-      this.menu = new AppletPopupMenu(this, this.orientation);
-      this.menuManager.addMenu(this.menu);
-
-      //~ this.mainBox.add(this.menu.box, {
-        //~ expand: false, x_fill: false,
-        //~ x_align: Align.START, y_align: Align.MIDDLE,
-      //~ });
-
-      if (this.menu._signals.isConnected('enter-event', this.menu.actor)) {
-        this.menu._signals.disconnect('enter-event', this.menu.actor);
-        this.menu._signals.disconnect('leave-event', this.menu.actor);
-      }
+      //~ if (this.menu._signals.isConnected('enter-event', this.menu.actor)) {
+        //~ this.menu._signals.disconnect('enter-event', this.menu.actor);
+      //~ }
+      //~ if (this.menu._signals.isConnected('leave-event', this.menu.actor)) {
+        //~ this.menu._signals.disconnect('leave-event', this.menu.actor);
+      //~ }
 
       this.currentMenuItem = null;
       this.menuItems = [];
@@ -2752,33 +2761,34 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         section.box.set_vertical(false);
         section.blockSourceEvents = true;
         section.box.connect("leave-event", () => {});
-        section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true; x_fill: true;");
+        //~ section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true; x_fill: true;");
+        section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true;");
         this.menu.addMenuItem(section);
 
         let sectionCats = new PopupMenuSection();
         sectionCats.blockSourceEvents = true;
         sectionCats.box.set_vertical(true);
-        sectionCats.box.set_style("width: stretch;spacing: 0px;padding: 0px;expand: true; x_fill: true;");
+        //~ sectionCats.box.set_style("width: stretch;spacing: 0px;padding: 0px;expand: true; x_fill: true;");
         section.addMenuItem(sectionCats);
 
         let sectionStations = new PopupMenuSection();
         sectionStations.blockSourceEvents = true;
         sectionStations.box.set_vertical(true);
-        sectionStations.box.set_style("width: stretch;spacing: 0px;padding: 0px;expand: true; x_fill: true;");
-        sectionStations.box.connect("leave-event", () => {
+        //~ sectionStations.box.set_style("width: stretch;spacing: 0px;padding: 0px;expand: true; x_fill: true;");
+        //sectionStations.box.connect("leave-event", () => {
           //~ this.stopItem.actor.emit("enter-event", Clutter.ClutterEvent.CLUTTER_MOTION);
           //~ this.stopItem.actor.emit("leave-event", Clutter.ClutterEvent.CLUTTER_MOTION);
 
           //~ let toID = setTimeout( () => {
             //~ clearTimeout(toID);
           //~ }, 75);
-        });
+        //});
         section.addMenuItem(sectionStations);
 
         this.categoriesMenu = new StationsPopupSubMenuMenuItem(formatTextWrap(_("Categories"), WRAP_LENGTH));
         this.categoriesMenu.style="width: 250px;";
 
-        this.stationsMenu = new PopupSubMenuMenuItem(formatTextWrap(_("Radio Stations"), WRAP_LENGTH));
+        this.stationsMenu = new StationsPopupSubMenuMenuItem(formatTextWrap(_("Radio Stations"), WRAP_LENGTH));
         this.stationsMenu.style="width: 450px;";
 
         sectionCats.addMenuItem(this.categoriesMenu, { expand: true, span: 25, align: Align.START });
@@ -2943,7 +2953,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
       // STOP:
-      if (this.stopItem) this.stopItem.destroy();
+      if (this.stopItem) this.stopItem.destroy(); // ???
       this.stopItem = new TitleSeparatorMenuItem(formatTextWrap(_("Stop"), WRAP_LENGTH), "media-playback-stop", true);
       this.stopItem.connect('activate', Lang.bind(this, this.stop_mpv));
       this.menu.addMenuItem(this.stopItem);
@@ -3769,17 +3779,19 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.make_menu(true, false, false);
       //~ this.mainBox.show();
       this.change_selected_item();
-      this.menu.open();
-      if (this.categoriesMenu) {
+      if (this.menu)
+        this.menu.open();
+      if (this.categoriesMenu && this.categoriesMenu.menu)
         this.categoriesMenu.menu.open();
+      if (this.stationsMenu && this.stationsMenu.menu)
         this.stationsMenu.menu.open();
-      }
+
       return
     }
 
     if (this.menu) {
       this.menu.toggle();
-      this.menu.destroy();
+      //this.menu.destroy(); // ???
       //~ this.mainBox.hide();
     }
   }
@@ -4074,7 +4086,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.oldRadios = null;
 
     if (this._control) this._control.close();
-    if (this.menu) this.menu.destroy();
+    if (this.menu) this.menu.destroy(); // ???
     if (this._applet_context_menu) this._applet_context_menu.destroy();
 
     // Unmonitor all:
@@ -4835,12 +4847,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     // Web page...
-    if (this.context_menu_item_webpage == null) {
-      this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
-    }
-    if (items.indexOf(this.context_menu_item_webpage) == -1) {
-      this.context_menu_item_system_section.addMenuItem(this.context_menu_item_webpage);
-    }
+    //~ if (this.context_menu_item_webpage == null) {
+      //~ this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
+    //~ }
+    //~ if (items.indexOf(this.context_menu_item_webpage) == -1) {
+      //~ this.context_menu_item_system_section.addMenuItem(this.context_menu_item_webpage);
+    //~ }
 
     // Manual...
     if (this.context_menu_item_manual == null) {
@@ -4996,7 +5008,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.submenu_cancel_yt_downloads.destroy();
     this.submenu_cancel_yt_downloads = null;
     if (this.context_menu_yt_downloads.length > 0) {
-      this.submenu_cancel_yt_downloads = new RadioPopupSubMenuMenuItem(_("Cancel downloads from YT"));
+      this.submenu_cancel_yt_downloads = new RadioPopupSubMenuMenuItem(formatTextWrap(_("Cancel downloads from YT"), WRAP_LENGTH));
       this.context_menu_item_recordings_section.addMenuItem(this.submenu_cancel_yt_downloads);
 
       for (let dl of this.context_menu_yt_downloads) {

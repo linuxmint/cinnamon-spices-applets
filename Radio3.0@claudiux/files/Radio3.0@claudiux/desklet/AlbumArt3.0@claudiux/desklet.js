@@ -43,7 +43,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
 
     on_setting_changed() {
         if (this.update_id) {
-            Mainloop.source_remove(this.update_id);
+            try {
+                Mainloop.source_remove(this.update_id);
+            } catch(e) {}
             //~ this.update_id = null;
         }
         this.update_id = null;
@@ -89,10 +91,16 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.dir_monitor_id = null;
 
         if (this.update_id) {
-            Mainloop.source_remove(this.update_id);
+            try {
+                Mainloop.source_remove(this.update_id);
+            }
+            catch(e) {}
+            finally {
+                this.update_id = null;
+            }
             //~ this.update_id = null;
         }
-        this.update_id = null;
+        //~ this.update_id = null;
     }
 
     _scan_dir(dir) {
@@ -158,7 +166,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     _update_loop() {
         this._update();
         if (this.update_id) {
-            Mainloop.source_remove(this.update_id);
+            try {
+                Mainloop.source_remove(this.update_id);
+            } catch(e) {}
         }
         this.update_id = null;
         this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));

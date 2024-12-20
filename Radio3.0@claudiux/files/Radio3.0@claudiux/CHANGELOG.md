@@ -1,3 +1,7 @@
+### v2.5.3~20241220
+  * Fixed menu bugs (when the Category list is beside the Radio Station list).
+
+
 ### v2.5.2~20241219
   * Improved menu behavior. The menu no longer closes when you switch from the station list to the category list.
   * Some bugfixes, also in desklet.
