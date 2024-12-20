@@ -144,13 +144,15 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	update_panel_applet_ui_state() {
-		if (this.use_custom_icons) {
-			let icon = this.pinned ? this.custom_unpin_icon : this.custom_pin_icon;
-			icon.endsWith('-symbolic') ? this.set_applet_icon_symbolic_name(icon) : this.set_applet_icon_name(icon);
-		} else {
-			let icon = this.pinned ? this._default_unpin_icon_path : this._default_pin_icon_path;
-			this.set_applet_icon_symbolic_path(icon);
-		}
+		let icon = this.pinned ? this._default_unpin_icon_path : this._default_pin_icon_path;
+
+		if (this.use_custom_icons)
+			icon = this.pinned ? this.custom_unpin_icon : this.custom_pin_icon;
+
+		if (icon.endsWith('-symbolic')) this.set_applet_icon_symbolic_name(icon);
+		else if (icon.endsWith('-symbolic.svg')) this.set_applet_icon_symbolic_path(icon);
+		else if (icon.endsWith('.png')) this.set_applet_icon_path(icon);
+		else this.set_applet_icon_name(icon);
 
 		let tooltip = this.pinned ? _("Click to Unpin the Panel") : _("Click to Pin the Panel");
 		this.set_applet_tooltip(tooltip);
@@ -172,18 +174,20 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	set_panel_autohide_state(state) {
-		const newStates = [];
 		const panelAutohideStates = global.settings.get_strv(PANEL_AUTOHIDE_KEY);
 
 		if (!panelAutohideStates) return;
 
+		const newStates = [];
 		for (const panelAutohideState of panelAutohideStates) {
 			let [panelId, autohideState] = panelAutohideState.split(":");
 
 			if (panelId == this.panel.panelId)
 				autohideState = state;
 
-			newStates.push([panelId, autohideState].join(":"));
+			let newState = [panelId, autohideState].join(":");
+			if (!newStates.includes(newState))
+				newStates.push(newState);
 		}
 
 		global.settings.set_strv(PANEL_AUTOHIDE_KEY, newStates);
