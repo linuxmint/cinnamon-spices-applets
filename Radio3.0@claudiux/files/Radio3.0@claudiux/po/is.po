@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2024-12-12 22:53+0100\n"
-"PO-Revision-Date: 2024-11-26 15:17+0000\n"
+"PO-Revision-Date: 2024-12-20 09:50+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -458,7 +458,7 @@ msgstr "Birta táknmerki stöðvar"
 #. settings-schema.json->desklet-show-on-desktop->description
 #. applet.js:4972
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Sýna umslagsmyndir á skjáborði"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:4987
@@ -526,9 +526,8 @@ msgid "%s kbps"
 msgstr "%s kb/sek"
 
 #. desklet/AlbumArt3.0@claudiux/desklet.js:39
-#, fuzzy
 msgid "Radio3.0 Album Art"
-msgstr "Radio3.0"
+msgstr "Radio3.0 umslagsmyndir"
 
 #. lib/checkDependencies.js:397
 #, javascript-format
@@ -729,7 +728,7 @@ msgstr "Uppfæra þennan stöðvalista"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Aðeins fyrir notendur Radio++"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -795,7 +794,7 @@ msgstr "Bara á láréttum skjástikum"
 
 #. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
 msgid "Album Art desklet"
-msgstr ""
+msgstr "Skjágræja fyrir umslagsmyndir"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -972,7 +971,7 @@ msgstr "%"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "Flyttu stöðvarnar þínar inn úr Radio++"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -3142,93 +3141,91 @@ msgstr "0 þýðir ekkert hámark"
 
 #. settings-schema.json->desklet-activate-button->description
 msgid "Activate desklet displaying the Radio3.0 Album Art"
-msgstr ""
+msgstr "Virkja skjágræju til að birta umslagsmyndir úr Radio3.0"
 
 #. settings-schema.json->desklet-activated-label->description
 msgid "The desklet displaying the Radio3.0 Album Art is activated"
-msgstr ""
+msgstr "Skjágræja til að birta umslagsmyndir úr Radio3.0 er virk"
 
 #. settings-schema.json->desklet-open-settings-button->description
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Stillingar skjágræju fyrir umslagsmyndir"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
-msgstr ""
+msgstr "Umslagsmyndir fyrir Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
 msgid "A digital photo frame desklet to display the Radio3.0 album art"
-msgstr ""
+msgstr "Stafræn myndarammagræja til að birta umslagsmyndir úr Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
-msgstr ""
+msgstr "Hæð"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
 msgid "pixels"
-msgstr ""
+msgstr "mynddílar"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
-msgstr ""
+msgstr "Breidd"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. effect->description
 msgid "Fade"
-msgstr ""
+msgstr "Deyfa út"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
-#, fuzzy
 msgid "None"
-msgstr "(Ekkert)"
+msgstr "Ekkert"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quad"
-msgstr ""
+msgstr "Fernings"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Cubic"
-msgstr ""
+msgstr "Tenings"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quart"
-msgstr ""
+msgstr "Fjórðungs"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quint"
-msgstr ""
+msgstr "Fimmtungs"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Sine"
-msgstr ""
+msgstr "Sínus"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Expo"
-msgstr ""
+msgstr "Veldi"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Circ"
-msgstr ""
+msgstr "Hring"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Elastic"
-msgstr ""
+msgstr "Teygjanlegt"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Back"
-msgstr ""
+msgstr "Til baka"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Bounce"
-msgstr ""
+msgstr "Skoppa"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. delay->description
 msgid "Fade delay"
-msgstr ""
+msgstr "Töf deyfingar"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
-#, fuzzy
 msgid "0 means no fade"
-msgstr "0 þýðir ekkert hámark"
+msgstr "0 þýðir engin deyfing"
