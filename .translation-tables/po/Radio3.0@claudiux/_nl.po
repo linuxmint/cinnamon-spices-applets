@@ -1,0 +1,130 @@
+# RADIO3.0
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-12 22:53+0100\n"
+"PO-Revision-Date: 2024-11-28 16:57+0100\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->desklet-show-on-desktop->description
+#. applet.js:4972
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. desklet/AlbumArt3.0@claudiux/desklet.js:39
+msgid "Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
+msgid "Album Art desklet"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
+
+#. settings-schema.json->desklet-activate-button->description
+msgid "Activate desklet displaying the Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->desklet-activated-label->description
+msgid "The desklet displaying the Radio3.0 Album Art is activated"
+msgstr ""
+
+#. settings-schema.json->desklet-open-settings-button->description
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "None"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+msgid "0 means no fade"
+msgstr ""

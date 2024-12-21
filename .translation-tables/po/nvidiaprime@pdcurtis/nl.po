@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nvidiaprime@pdcurtis 3.3.5\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-21 14:02+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:123 3.8/applet.js:123
+msgid "Waiting for nvidia"
+msgstr "Wachten op Nvidia"
+
+#: applet.js:183 3.8/applet.js:183
+msgid "Open Power Statistics"
+msgstr "Open energie-statistieken"
+
+#: applet.js:189 3.8/applet.js:189
+msgid "Open System Monitor"
+msgstr "Open systeemmonitor"
+
+#: applet.js:207 3.8/applet.js:207
+msgid "Housekeeping and System Sub Menu"
+msgstr "Onderhouds- en systeemsubmenu"
+
+#: applet.js:210 3.8/applet.js:210
+msgid "View the Changelog"
+msgstr "Bekijk de wijzigingslog"
+
+#: applet.js:216 3.8/applet.js:216
+msgid "Open the Help file"
+msgstr "Open het helpbestand"
+
+#: applet.js:258 3.8/applet.js:258
+msgid "NVidia based GPU is Off"
+msgstr "Nvidia-gebaseerde GPU is uitgeschakeld"
+
+#: applet.js:281 3.8/applet.js:281
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "Nvidia-gebaseerde GPU is ingeschakeld en de kerntemperatuur is"
+
+#: applet.js:289 3.8/applet.js:289
+msgid "Err"
+msgstr "Fout"
+
+#: applet.js:290 3.8/applet.js:290
+msgid ""
+"Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-"
+"prime  installed?"
+msgstr ""
+"Nvidia Prime is niet correct ingesteld - zijn de Nvidia-stuurprogramma's en "
+"nvidia-prime geïnstalleerd?"
+
+#. metadata.json->description
+msgid ""
+"Displays which Graphics processor is active and nVidia GPU Temperature when "
+"active and in a horizontal panel"
+msgstr ""
+"Toont welke grafische processor actief is en de temperatuur van de Nvidia "
+"GPU wanneer deze actief en in een horizontaal paneel is"
+
+#. metadata.json->name
+msgid "nVidia Prime GPU Display"
+msgstr "nVidia Prime GPU-weergave"
+
+#. settings-schema.json->head->description
+#. 3.8->settings-schema.json->head->description
+msgid "General Settings for the nVidia Prime Monitoring Applet"
+msgstr "Algemene instellingen voor de nVidia Prime monitoringapplet"
+
+#. settings-schema.json->refreshInterval-spinner->units
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->refreshInterval-spinner->description
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Vernieuwingsinterval voor weergave:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Verhoog of verlaag deze spinnerwaarde om de vernieuwingsinterval te wijzigen "
+"- gebruik een langzame vernieuwing als je een langzame machine hebt"
+
+#. settings-schema.json->showGpuTemp->description
+#. 3.8->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Toon GPU-temperatuur én pictogram"
+
+#. settings-schema.json->showGpuTemp->tooltip
+#. 3.8->settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"Beschikbaar in horizontale en verticale panelen. Weergave is in graden "
+"Celsius."
+
+#. settings-schema.json->head2->description
+#. 3.8->settings-schema.json->head2->description
+msgid "Additional Functionality"
+msgstr "Aanvullende functionaliteit"
+
+#. settings-schema.json->displayExtra->description
+#. 3.8->settings-schema.json->displayExtra->description
+msgid ""
+"Access enhanced functionality through Context Menu - needs Cinnamon Restart"
+msgstr ""
+"Toegang tot verbeterde functionaliteit via het contextmenu - vereist "
+"herstart van Cinnamon"
+
+#. settings-schema.json->displayExtra->tooltip
+#. 3.8->settings-schema.json->displayExtra->tooltip
+msgid ""
+"Currently  adds glxspheres64 Graphics Processor Test - VirtualGL needs to be "
+"installed"
+msgstr ""
+"Voegt momenteel glxspheres64 Graphics Processor Test toe - vereist "
+"installatie van VirtualGL"

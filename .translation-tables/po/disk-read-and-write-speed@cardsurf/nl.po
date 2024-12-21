@@ -1,0 +1,453 @@
+# DISK READ AND WRITE SPEED
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: disk-read-and-write-speed@cardsurf 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-28 14:32+0200\n"
+"PO-Revision-Date: 2024-11-28 17:25+0100\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:981
+msgid " TiB"
+msgstr " TiB"
+
+#. applet.js:984
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:987
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:990
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:992
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:995
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:998
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:1001
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:1004
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:1006
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:1016
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:1019
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:1022
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:1025
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:1027
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:1030
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:1033
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:1036
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:1039
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:1041
+msgid "  b"
+msgstr "  b"
+
+#. metadata.json->description
+msgid "Shows usage of a disk"
+msgstr "Toont het gebruik van een schijf"
+
+#. metadata.json->name
+msgid "Disk read and write speed"
+msgstr "Leessnelheid en schrijfsnelheid van de schijf"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuratie"
+
+#. settings-schema.json->display_mode->description
+msgid "Show"
+msgstr "Toon"
+
+#. settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr "Gemiddelde snelheid per seconde"
+
+#. settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr "Hoeveelheid overgedragen gegevens"
+
+#. settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "Waarden weergegeven in het paneel"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Eenheid"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Bytes"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bits"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Basisgegevenseenheid weergegeven in het paneel"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Decimaal of binair"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Decimaal"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binair"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Decimaal: k, M, G, T\n"
+"Binair: ki, Mi, Gi, Ti"
+
+#. settings-schema.json->update_every->units
+msgid "seconds"
+msgstr "seconden"
+
+#. settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "Bereken elke"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to calculate disk read and write speed"
+msgstr ""
+"Hoe vaak de lees- en schrijfsnelheid van de schijf moet worden berekend"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Grafische gebruikersinterface"
+
+#. settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr "Type"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Compact"
+msgstr "Compact"
+
+#. settings-schema.json->gui_speed_type->options
+msgid "Large"
+msgstr "Groot"
+
+#. settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr "Grafische gebruikersinterface applet"
+
+#. settings-schema.json->gui_decimal_places->description
+#. settings-schema.json->hover_popup_decimal_places->description
+msgid "Decimal places"
+msgstr "Decimalen"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "0 "
+msgstr "0"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "1 "
+msgstr "1"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "2 "
+msgstr "2"
+
+#. settings-schema.json->gui_decimal_places->options
+#. settings-schema.json->hover_popup_decimal_places->options
+msgid "3 "
+msgstr "3"
+
+#. settings-schema.json->gui_decimal_places->tooltip
+msgid "Decimal places of disk read and write speed shown in the panel"
+msgstr ""
+"Decimalen van de lees- en schrijfsnelheid van de schijf weergegeven in het "
+"paneel"
+
+#. settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr "Tekst CSS"
+
+#. settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr "Een CSS-stijl toegepast op de tekst in het paneel"
+
+#. settings-schema.json->gui_read_icon_filename->description
+msgid "Read icon"
+msgstr "Leespictogram"
+
+#. settings-schema.json->gui_read_icon_filename->tooltip
+msgid "An icon displayed next to disk read speed in the panel"
+msgstr ""
+"Een pictogram weergegeven naast de leessnelheid van de schijf in het paneel"
+
+#. settings-schema.json->gui_written_icon_filename->description
+msgid "Write icon"
+msgstr "Schrijfpictogram"
+
+#. settings-schema.json->gui_written_icon_filename->tooltip
+msgid "An icon displayed next to disk write speed in the panel"
+msgstr ""
+"Een pictogram weergegeven naast de schrijfsnelheid van de schijf in het "
+"paneel"
+
+#. settings-schema.json->hover_popup_headers_css->description
+msgid "Popup headers CSS"
+msgstr "Popup kopteksten CSS"
+
+#. settings-schema.json->hover_popup_headers_css->tooltip
+msgid "A CSS style applied to headers in the hover popup"
+msgstr "Een CSS-stijl toegepast op kopteksten in de hover-popup"
+
+#. settings-schema.json->hover_popup_rows_css->description
+msgid "Popup rows CSS"
+msgstr "Popup rijen CSS"
+
+#. settings-schema.json->hover_popup_rows_css->tooltip
+msgid "A CSS style applied to rows in the hover popup"
+msgstr "Een CSS-stijl toegepast op rijen in de hover-popup"
+
+#. settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr "Totale gegevens"
+
+#. settings-schema.json->show_hover->description
+msgid "Show total read and write on hover"
+msgstr "Toon totaal gelezen en geschreven bij hover met de muis"
+
+#. settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data read and written"
+msgstr ""
+"Toon de hover-popup met het totale aantal aan gelezen en geschreven gegevens"
+
+#. settings-schema.json->show_total_bytes_read->description
+msgid "Show total bytes read"
+msgstr "Toon totaal aantal bytes gelezen"
+
+#. settings-schema.json->show_total_bytes_read->tooltip
+msgid "Show the column with the total amount of bytes read in the hover popup"
+msgstr "Toon de kolom met het totale aantal bytes gelezen in de hover-popup"
+
+#. settings-schema.json->show_total_bytes_written->description
+msgid "Show total bytes written"
+msgstr "Toon totaal aantal bytes geschreven"
+
+#. settings-schema.json->show_total_bytes_written->tooltip
+msgid ""
+"Show the column with the total amount of bytes written in the hover popup"
+msgstr "Toon de kolom met het totale aantal bytes geschreven in de hover-popup"
+
+#. settings-schema.json->total_bytes_read_column_name->description
+msgid "Total bytes read column name"
+msgstr "Naam van de kolom met het totale aantal bytes gelezen"
+
+#. settings-schema.json->total_bytes_read_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes read in the hover popup"
+msgstr ""
+"Naam van de kolom met het totale aantal bytes gelezen in de hover-popup"
+
+#. settings-schema.json->total_bytes_written_column_name->description
+msgid "Total bytes written column name"
+msgstr "Naam van de kolom met het totale aantal bytes geschreven"
+
+#. settings-schema.json->total_bytes_written_column_name->tooltip
+msgid ""
+"A name of the column with the total amount of bytes written in the hover "
+"popup"
+msgstr ""
+"Naam van de kolom met het totale aantal bytes geschreven in de hover-popup"
+
+#. settings-schema.json->devices_regex_string->description
+msgid "Disks"
+msgstr "Schijven"
+
+#. settings-schema.json->devices_regex_string->tooltip
+msgid "A regular expression that matches disk names to show in the hover popup"
+msgstr ""
+"Een reguliere expressie die overeenkomt met schijfnamen om weer te geven in "
+"de hover-popup"
+
+#. settings-schema.json->device_aliases_string->description
+msgid "Aliases"
+msgstr "Aliassen"
+
+#. settings-schema.json->device_aliases_string->tooltip
+msgid ""
+"A comma separated list of \"disk:alias\" pairs that replace disk names in "
+"the hover popup"
+msgstr ""
+"A lijst, gescheiden door komma's, van 'schijf:alias' paren die schijfnamen "
+"vervangen in de hover-popup"
+
+#. settings-schema.json->column_names_string->description
+msgid "Headers"
+msgstr "Kopteksten"
+
+#. settings-schema.json->column_names_string->tooltip
+msgid "A comma separated list of column headers to show in the hover popup"
+msgstr ""
+"Een komma-gescheiden lijst van kolomkopteksten om weer te geven in de hover-"
+"popup"
+
+#. settings-schema.json->column_indexes_string->description
+msgid "Columns"
+msgstr "Kolommen"
+
+#. settings-schema.json->column_indexes_string->tooltip
+msgid "A comma separated list of column indexes to show in the hover popup"
+msgstr ""
+"Een komma-gescheiden lijst van kolomindexen om weer te geven in de hover-"
+"popup"
+
+#. settings-schema.json->column_spaces->description
+msgid "Spaces"
+msgstr "Spaties"
+
+#. settings-schema.json->column_spaces->tooltip
+msgid "A number of spaces between columns in the hover popup"
+msgstr "Een aantal spaties tussen kolommen in de hover-popup"
+
+#. settings-schema.json->column_type_sort->description
+msgid "Column sort"
+msgstr "Kolomsortering"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes read"
+msgstr "Bytes gelezen"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Bytes written"
+msgstr "Bytes geschreven"
+
+#. settings-schema.json->column_type_sort->options
+msgid "Other"
+msgstr "Anders"
+
+#. settings-schema.json->column_type_sort->tooltip
+msgid "A column used to sort rows in the hover popup"
+msgstr "Een kolom die wordt gebruikt om rijen te sorteren in de hover-popup"
+
+#. settings-schema.json->column_index_sort->description
+msgid "Sort column index"
+msgstr "Sorteer kolomindex"
+
+#. settings-schema.json->column_index_sort->tooltip
+msgid "An index of a column that is used to sort rows in the hover popup"
+msgstr ""
+"Een index van een kolom die wordt gebruikt om rijen te sorteren in de hover-"
+"popup"
+
+#. settings-schema.json->column_sort_order->description
+msgid "Order"
+msgstr "Volgorde"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Ascending"
+msgstr "Oplopend"
+
+#. settings-schema.json->column_sort_order->options
+msgid "Descending"
+msgstr "Aflopend"
+
+#. settings-schema.json->column_sort_order->tooltip
+msgid "An order used to sort rows in the hover popup"
+msgstr "Een volgorde die wordt gebruikt om rijen te sorteren in de hover-popup"
+
+#. settings-schema.json->hover_popup_decimal_places->tooltip
+msgid ""
+"Decimal places of total amount of data read and written shown in the hover "
+"popup"
+msgstr ""
+"Decimalen van totale hoeveelheid gelezen en geschreven gegevens weergegeven "
+"in de hover-popup"
+
+#. settings-schema.json->processes_start->description
+msgid "Processes"
+msgstr "Processen"
+
+#. settings-schema.json->launch_terminal->description
+msgid "List input and output information per process"
+msgstr "Lijst met invoer- en uitvoerinformatie per proces"
+
+#. settings-schema.json->launch_terminal->tooltip
+msgid ""
+"Open a terminal with a list of input and output informations per process on "
+"a left mouse click. The next click closes the terminal."
+msgstr ""
+"Open een terminal met een lijst van invoer- en uitvoerinformatie per proces "
+"met een linkermuisklik. De volgende klik sluit de terminal."
+
+#. settings-schema.json->terminal_command->description
+msgid "Command"
+msgstr "Commando"
+
+#. settings-schema.json->terminal_command->tooltip
+msgid "A command used to show input and output information per process"
+msgstr ""
+"Een commando gebruikt om invoer- en uitvoerinformatie per proces te tonen"

@@ -1,0 +1,20 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->description
+#. 6.4->settings-schema.json->startupVolume->description
+msgid "Volume at start-up (%)"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->tooltip
+#. 6.4->settings-schema.json->startupVolume->tooltip
+msgid "Value -1 means \"No change\""
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaKeysOSD->description
+msgid "Whether or not to show the media keys osd"
+msgstr ""
