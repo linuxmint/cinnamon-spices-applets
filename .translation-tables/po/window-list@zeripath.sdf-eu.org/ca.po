@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: window-list@zeripath.sdf-eu.org 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-07-06 03:09+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:826
+msgid "Move to the other monitor"
+msgstr "Mou a l'altre monitor"
+
+#: applet.js:836
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "Mou al monitor %d"
+
+#: applet.js:847
+msgid "Only on this workspace"
+msgstr "Només en aquest espai de treball"
+
+#: applet.js:853
+msgid "Visible on all workspaces"
+msgstr "Visible a tots els espais de treball"
+
+#: applet.js:859
+msgid "Move to another workspace"
+msgstr "Mou a un altre espai de treball"
+
+#: applet.js:882
+msgid "Preferences"
+msgstr "Preferències"
+
+#: applet.js:885
+msgid "About..."
+msgstr "Quant a..."
+
+#: applet.js:889
+msgid "Configure..."
+msgstr "Configura..."
+
+#: applet.js:893
+msgid "Remove 'Window list'"
+msgstr "Elimina 'Llista de Finestres'"
+
+#: applet.js:902
+msgid "Close all"
+msgstr "Tancar totes"
+
+#: applet.js:911
+msgid "Close others"
+msgstr "Tancar altres"
+
+#: applet.js:925
+msgid "Restore to full opacity"
+msgstr "Restaurar a plena opacitat"
+
+#: applet.js:933
+msgid "Restore"
+msgstr "Restaurar"
+
+#: applet.js:938
+msgid "Minimize"
+msgstr "Minimitza"
+
+#: applet.js:946
+msgid "Unmaximize"
+msgstr "Desmaximitza"
+
+#: applet.js:951
+msgid "Maximize"
+msgstr "Maximitza"
+
+#: applet.js:958
+msgid "Close"
+msgstr "Tanca"
+
+#. metadata.json->name
+msgid "Zeripaths Window list"
+msgstr "Llista de finestres de Zeripath"
+
+#. metadata.json->description
+msgid "Zeripaths variant of Cinnamon window list"
+msgstr "Variant de llista de finestres de Zeripath"
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr "Comportament"
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr "Mostra les finestres de tots els espais de treball"
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"Mostra una notificació a la llista de finestres quan una finestra d'un "
+"altre espai de treball necessiti atenció"
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "Activa el moviment amb la roda del ratolí a la llista de finestres"
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr ""
+"Inverteix la direcció del moviment de la roda del ratolí a la llista de "
+"finestres"
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr "Clic del mig per tancar la finestra"
+
+#. settings-schema.json->section2->description
+msgid "Display"
+msgstr "Visualització"
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Els botons de les finestres poden tenir diferents mides i utilitzar tot "
+"l'espai disponible"
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Mostra miniatures de les finestres en passar-hi el ratolí per sobre"
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr "Mostra el títol a sobre de les miniatures"
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr "Mida de la miniatura"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr "Petita"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr "Mitjana"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr "Gran"
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr "La més gran"

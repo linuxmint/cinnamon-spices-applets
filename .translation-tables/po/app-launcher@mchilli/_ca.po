@@ -1,0 +1,18 @@
+# APP LAUNCHER
+# This file is put in the public domain.
+# mchilli, 2021
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""

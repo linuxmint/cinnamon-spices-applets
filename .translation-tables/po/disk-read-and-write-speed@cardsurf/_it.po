@@ -1,0 +1,117 @@
+# DISK READ AND WRITE SPEED
+# This file is put in the public domain.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: disk-read-and-write-speed@cardsurf 1.1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-28 14:32+0200\n"
+"PO-Revision-Date: 2024-07-05 11:00+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:981
+msgid " TiB"
+msgstr ""
+
+#. applet.js:984
+msgid " GiB"
+msgstr ""
+
+#. applet.js:987
+msgid " MiB"
+msgstr ""
+
+#. applet.js:990
+msgid " kiB"
+msgstr ""
+
+#. applet.js:992
+msgid "   B"
+msgstr ""
+
+#. applet.js:995
+msgid " TB"
+msgstr ""
+
+#. applet.js:998
+msgid " GB"
+msgstr ""
+
+#. applet.js:1001
+msgid " MB"
+msgstr ""
+
+#. applet.js:1004
+msgid " kB"
+msgstr ""
+
+#. applet.js:1006
+msgid "  B"
+msgstr ""
+
+#. applet.js:1016
+msgid " Tib"
+msgstr ""
+
+#. applet.js:1019
+msgid " Gib"
+msgstr ""
+
+#. applet.js:1022
+msgid " Mib"
+msgstr ""
+
+#. applet.js:1025
+msgid " kib"
+msgstr ""
+
+#. applet.js:1027
+msgid "   b"
+msgstr ""
+
+#. applet.js:1030
+msgid " Tb"
+msgstr ""
+
+#. applet.js:1033
+msgid " Gb"
+msgstr ""
+
+#. applet.js:1036
+msgid " Mb"
+msgstr ""
+
+#. applet.js:1039
+msgid " kb"
+msgstr ""
+
+#. applet.js:1041
+msgid "  b"
+msgstr ""
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
