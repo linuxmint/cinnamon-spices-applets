@@ -1773,7 +1773,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.title_text = "";
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
-
+        this.settings.bind("startupVolume", "startupVolume");
         this.settings.bind("isOverAmplificationPresent", "isOverAmplificationPresent");
         this.settings.bind("isSetAmplificationPresent", "isSetAmplificationPresent");
         this.settings.bind("isOpenSoundSettingsPresent", "isOpenSoundSettingsPresent");
@@ -2288,6 +2288,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.old_volume = this.volume;
             this._toggle_out_mute();
             this.volume = this.old_volume;
+            this.volume_near_icon()
         }
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
@@ -2511,7 +2512,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._notifyVolumeChange(this._output);
             this.setAppletTooltip();
             this._applet_tooltip.show();
-            let volume = this.volume.slice(0, -1);
+            let volume = parseInt(this.volume.slice(0, -1));
             let icon_name = "audio-volume";
             if (volume > 100) icon_name += "-overamplified";
             else if (volume <1) {
@@ -3169,6 +3170,16 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._outputVolumeSection.connectWithStream(this._output);
             this._outputMutedId = this._output.connect("notify::is-muted", (...args) => this._mutedChanged(...args, "_output"));
             this._mutedChanged(null, null, "_output");
+
+            if (this.startupVolume > -1) {
+                this.volume = ""+Math.round(this.startupVolume).toString()+"%";
+                this.old_volume = this.volume;
+
+                this._output.volume = Math.round(this.startupVolume) / 100 * this._volumeNorm;
+                this._output.push_volume();
+                this._volumeChange(Clutter.ScrollDirection.UP);
+                this._volumeChange(Clutter.ScrollDirection.DOWN);
+            }
         } else {
             this.setIcon("audio-volume-muted-symbolic", "output");
         }

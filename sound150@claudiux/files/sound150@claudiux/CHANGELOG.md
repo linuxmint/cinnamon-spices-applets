@@ -1,3 +1,6 @@
+### v7.3.4~20241221
+  * New option to fix volume at start-up. Value -1 means "No change". (Related to #6690.)
+
 ### v7.3.3~20241212
   * Improves compatibility with Cinnamon 6.4 removing "%" after volume level.
 
