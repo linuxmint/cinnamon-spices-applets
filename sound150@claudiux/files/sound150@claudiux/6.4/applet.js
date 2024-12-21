@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -1774,6 +1774,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.title_text = "";
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
+        this.settings.bind("startupVolume", "startupVolume");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
         this.showOSD = this.showOSDonStartup;
         this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
@@ -1834,12 +1835,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volumeSoundEnabled", "volumeSoundEnabled", this.on_volumeSoundEnabled_changed);
         this.settings.bind("maxVolume", "maxVolume", (value) => this._on_maxVolume_changed(value));
 
+        this.settings.bind("volume", "volume");
+
+        this.old_volume = this.volume;
         this.settings.setValue("showMediaKeysOSD", global.settings.get_boolean(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", this.on_showMediaKeysOSD_changed);
         this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
 
-        this.settings.bind("volume", "volume");
-        this.old_volume = this.volume;
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
         this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
@@ -2009,10 +2011,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         appsys.connect("installed-changed", () => this._updateLaunchPlayer());
 
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
-        //~ this._on_sound_settings_change();
-
-        //~ this._loopArtId = null;
-        //~ this.loopArt();
     }
 
     on_volumeSoundFile_changed() {
@@ -2253,6 +2251,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this.color0_100 = color;
 
         this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
+
         this._on_sound_settings_change();
 
         this._loopArtId = null;
@@ -2270,7 +2269,9 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.old_volume = this.volume;
             this._toggle_out_mute();
             this.volume = this.old_volume;
+            this.volume_near_icon()
         }
+
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
@@ -3168,6 +3169,16 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._outputVolumeSection.connectWithStream(this._output);
             this._outputMutedId = this._output.connect("notify::is-muted", (...args) => this._mutedChanged(...args, "_output"));
             this._mutedChanged(null, null, "_output");
+
+            if (this.startupVolume > -1) {
+                this.volume = ""+Math.round(this.startupVolume).toString()+"%";
+                this.old_volume = this.volume;
+
+                this._output.volume = Math.round(this.startupVolume) / 100 * this._volumeNorm;
+                this._output.push_volume();
+                this._volumeChange(Clutter.ScrollDirection.UP);
+                this._volumeChange(Clutter.ScrollDirection.DOWN);
+            }
         } else {
             this.setIcon("audio-volume-muted-symbolic", "output");
         }

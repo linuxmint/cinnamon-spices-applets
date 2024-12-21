@@ -99,6 +99,7 @@
         "openSystemSoundSettings",
         "maxVolume",
         "stepVolume",
+        "startupVolume",
         "magneticOn",
         "magnetic25On",
         "alwaysCanChangeMic"
@@ -305,6 +306,15 @@
     "min": 30,
     "max": 150,
     "step": 5
+  },
+  "startupVolume": {
+    "type": "scale",
+    "description": "Volume at start-up (%)",
+    "default": -1,
+    "min": -1,
+    "max": 150,
+    "step": 1,
+    "tooltip": "Value -1 means \"No change\""
   },
   "stepVolume": {
     "type": "combobox",
