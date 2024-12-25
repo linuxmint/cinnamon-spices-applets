@@ -1,3 +1,4 @@
+//"use strict";
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Desklet = imports.ui.desklet;
@@ -45,10 +46,13 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         if (this.update_id) {
             try {
                 Mainloop.source_remove(this.update_id);
-            } catch(e) {}
-            //~ this.update_id = null;
+            }
+            catch(e) {
+                // Nothing to do.
+            } finally {
+                this.update_id = null;
+            }
         }
-        this.update_id = null;
 
         this._setup_dir_monitor();
         if (this.currentPicture) {
@@ -94,13 +98,12 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             try {
                 Mainloop.source_remove(this.update_id);
             }
-            catch(e) {}
-            finally {
+            catch(e) {
+                // Nothing to do.
+            } finally {
                 this.update_id = null;
             }
-            //~ this.update_id = null;
         }
-        //~ this.update_id = null;
     }
 
     _scan_dir(dir) {
@@ -168,10 +171,13 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         if (this.update_id) {
             try {
                 Mainloop.source_remove(this.update_id);
-            } catch(e) {}
+            }
+            catch(e) {
+                // Nothing to do.
+            } finally {
+                this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+            }
         }
-        this.update_id = null;
-        this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
     }
 
     _size_pic(image) {
