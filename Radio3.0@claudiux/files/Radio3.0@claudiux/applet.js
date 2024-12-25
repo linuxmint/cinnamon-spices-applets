@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 // infos on use strict: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode
 //Applet:
 const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
@@ -237,7 +237,7 @@ const REFRESH_INTERVAL = 5; // (seconds)
 const VERTICAL = 2;
 const QUEUE = 1;
 
-var VERSION;
+var VERSION, METADATA;
 
 let dummy = _("unassigned"); // Only for translation.
 
@@ -764,7 +764,7 @@ class R3WebpageMenuItem extends PopupBaseMenuItem {
   }
 
   destroy() {
-    super.destroy();
+    //super.destroy();
   }
 }
 
@@ -1172,6 +1172,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
+    this.context_menu_item_showDesklet = null;
     this.get_user_settings();
     this.set_MPV_ALIAS();
 
@@ -1182,7 +1183,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Contextual menu:
     this.context_menu_item_slider = null;
     this.context_menu_yt_downloads = [];
-
+    //~ this._applet_context_menu.removeAll();
+    //~ this.create_contextmenu_items();
+    //~ this.setContextMenuVisibilities();
 
 
     this.on_rec_path_changed();
@@ -1277,16 +1280,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       //this._on_mpv_title_changed();
       ////global.log('wow!',value);
     //});
+
+
   }
 
   get_user_settings() {
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
-    this.settings.bind("desklet-show-on-desktop", "show_desklet", () => {
-      if (this.context_menu_item_showDesklet) {
-        this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-      }
-    });
+    this.settings.bind("desklet-show-on-desktop", "show_desklet", this.switch_showDesklet.bind(this));
     this.settings.bind("desklet-is-activated", "desklet_is_activated");
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
@@ -1372,6 +1373,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Help TextViews:
     this.populate_help_textviews()
+  }
+
+  switch_showDesklet() {
+    if (this.context_menu_item_showDesklet)
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
   }
 
   ensure_radio30_music_dir() {
@@ -2539,8 +2545,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   make_menu(force=false, notify_user=true, change_tooltip=true) {
-    //log("!!!! make_menu: this.radios: "+JSON.stringify(this.radios, null, 2));
-
     // MINIMAL MENU:
     if (!this.radios || this.radios.length === 0) {
       this.minimal_menu();
@@ -3777,7 +3781,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("on_applet_clicked");
     if (!this.menu || !this.menu.isOpen) {
       this.make_menu(true, false, false);
-      //~ this.mainBox.show();
       this.change_selected_item();
       if (this.menu)
         this.menu.open();
@@ -3791,13 +3794,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (this.menu) {
       this.menu.toggle();
-      //this.menu.destroy(); // ???
-      //~ this.mainBox.hide();
     }
   }
 
   on_applet_middle_clicked(event) {
-    if (this.menu.isOpen) this.menu.close();
+    if (this.menu && this.menu.isOpen) this.menu.close();
 
     if (this.record_pid != null) {
       this.stop_recording(this.record_pid);
@@ -3835,10 +3836,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     } else if (button === 2) {
       this.on_applet_middle_clicked(event);
     } else if (button === 3) {
-      this.finalizeContextMenu();
-      if (this._applet_context_menu._getMenuItems().length > 0) {
+      //~ this.finalizeContextMenu();
+
+      //~ if (this._applet_context_menu._getMenuItems().length > 0) {
+        this.setContextMenuVisibilities();
         this._applet_context_menu.toggle();
-      }
+      //~ }
     }
 
     return true;
@@ -4057,6 +4060,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ logDebug("Nbr of categories: "+Object.keys(cws).length);
     //~ logDebug("categories_with_stations: \n"+JSON.stringify(this.categories_with_stations, null, 4));
 
+
+    this._applet_context_menu.removeAll();
+    this.create_contextmenu_items();
+    this.setContextMenuVisibilities();
+
     if (this.desklet_is_activated)
       reloadExtension("AlbumArt3.0@claudiux", Type.DESKLET);
   }
@@ -4111,7 +4119,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this._control.close();
 
     // Finalize settings:
-    this.settings.finalize();
+    //~ this.settings.finalize();
   }
 
   _clean_str(str) {
@@ -4809,7 +4817,317 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return new_indexes.join(',')
   }
 
+  create_contextmenu_items() {
+    //~ logDebug("create_contextmenu_items()");
+    /// Create sections:
+    if (!this.context_menu_section_system)
+      this.context_menu_section_system = new PopupMenuSection(); // section 'system'
+    else
+      return; // This function must be executed only once.
+
+    if (!this.context_menu_section_config) {
+      this.context_menu_section_config = new PopupMenuSection(); // section 'config'
+    }
+
+    if (!this.context_menu_section_recordings) {
+      this.context_menu_section_recordings = new PopupMenuSection(); // section 'about recordings'
+    }
+
+    if (!this.context_menu_section_external) {
+      this.context_menu_section_external = new PopupMenuSection(); // section 'external settings'
+    }
+
+    if (this.context_menu_section_switches == null) {
+      this.context_menu_section_switches = new PopupMenuSection(); // Section containing switches
+    }
+
+
+    /// Create items:
+    if (!this.context_menu_separator1) {
+      this.context_menu_separator1 = new PopupSeparatorMenuItem(); // separator1
+      this.context_menu_separator2 = new PopupSeparatorMenuItem(); // separator2
+      this.context_menu_separator3 = new PopupSeparatorMenuItem(); // separator3
+      this.context_menu_separator4 = new PopupSeparatorMenuItem(); // separator4
+      this.context_menu_separator5 = new PopupSeparatorMenuItem(); // separator5
+    }
+
+    if (!this.context_menu_item_remove) { // Remove applet
+      this.context_menu_item_remove = new PopupIconMenuItem(_("Remove '%s'")
+        .format(METADATA.name),
+          "edit-delete",
+          IconType.SYMBOLIC);
+      this.context_menu_item_remove.connect('activate', (actor, event) => this.confirmRemoveApplet(event));
+    }
+
+    if (!this.context_menu_item_about) { // About...
+      this.context_menu_item_about = new PopupIconMenuItem(_("About..."),
+        "dialog-question",
+        IconType.SYMBOLIC);
+      this.context_menu_item_about.connect('activate', Lang.bind(this, this.openAbout));
+    }
+
+    if (!this.context_menu_item_manual) { // Manual...
+      this.context_menu_item_manual = new PopupIconMenuItem(_("Manual..."),
+        "help-faq",
+        IconType.SYMBOLIC);
+      this.context_menu_item_manual.connect('activate', Lang.bind(this, this.openManual));
+    }
+
+    if (!this.context_menu_item_reloadThisApplet) { // Reload
+      this.context_menu_item_reloadThisApplet = new PopupIconMenuItem(_("Reload this applet"), "reload", IconType.SYMBOLIC);
+      this.context_menu_item_reloadThisApplet.connect("activate", (event) => this.on_option_menu_reload_this_applet_clicked());
+    }
+    this.context_menu_item_reloadThisApplet.actor.visible = (RELOAD() === true || this.show_reload);
+
+    if (!this.context_menu_item_configure) { // Configure...
+      this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
+        "system-run",
+        IconType.SYMBOLIC);
+      this.context_menu_item_configure.connect('activate', Lang.bind(this, this.configureApplet));
+    }
+    this.context_menu_item_configure.actor.visible = (
+      !METADATA["hide-configuration"] &&
+      file_test(METADATA["path"] + "/settings-schema.json", FileTest.EXISTS)
+    );
+
+    if (!this.context_menu_item_scheduleARecording) {
+      this.context_menu_item_scheduleARecording = new PopupIconMenuItem(_("Schedule a background record..."),
+        "system-run",
+        IconType.SYMBOLIC);
+      this.context_menu_item_scheduleARecording.connect('activate', Lang.bind(this, () => this.configureApplet(this.tabNumberOfScheduling)));
+    }
+
+    if (!this.context_menu_item_recording) {
+      this.context_menu_item_recording = new PopupIconMenuItem(_("Extract soundtrack from YouTube video..."),
+        "yt",
+        IconType.SYMBOLIC);
+      this.context_menu_item_recording.connect('activate', Lang.bind(this, () => this.configureApplet(this.tabNumberOfYT)));
+    }
+
+    if (!this.context_menu_item_openRecordingsFolder) { // Open Recordings Folder
+      this.context_menu_item_openRecordingsFolder = new PopupIconMenuItem(
+        _("Open the recordings folder"),
+        "folder-music",
+        IconType.SYMBOLIC
+      );
+      this.context_menu_item_openRecordingsFolder.connect("activate", Lang.bind(this, function(event) {
+        this.open_rec_folder()
+      }));
+    }
+
+    if (!this.context_menu_item_manageRecording) { // Start/Stop recording
+      let record_pid = this.record_pid;
+      let recording = (record_pid != null);
+
+      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+      let message_about_ending_recording = this.get_recording_ends_auto() ? _("(auto)") : _("(manual)");
+      let sufficient_space_left = this.check_hd_space_left(false);
+      this.context_menu_item_manageRecording = new PopupIconMenuItem(
+        recording ? _("Stop Recording") + "\n" + message_about_ending_recording : sufficient_space_left ? _("Start Recording") : _("Insufficient space"),
+        recording ? "media-playback-stop": sufficient_space_left ? "media-record" : "music-folder-full",
+        IconType.SYMBOLIC
+      );
+      this.context_menu_item_manageRecording.connect("activate", Lang.bind(this, function(event) {
+        if (recording) {
+          this.stop_recording(record_pid)
+        } else if (sufficient_space_left) {
+          this.start_recording()
+        } else {
+          this.configureApplet(this.tabNumberOfRecording)
+        }
+      }));
+    }
+
+    if (!this.submenu_cancel_yt_downloads) { // Submenu 'Cancel YT downloads'
+      this.submenu_cancel_yt_downloads = new RadioPopupSubMenuMenuItem(formatTextWrap(_("Cancel downloads from YT"), WRAP_LENGTH));
+    }
+
+    if (!this.context_menu_item_systemSoundSettings) { // Sound Settings
+      this.context_menu_item_systemSoundSettings = new PopupIconMenuItem(_("Sound Settings"), "audio-card", IconType.SYMBOLIC);
+      this.context_menu_item_systemSoundSettings.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
+    }
+
+    if (!this.context_menu_item_pulseEffects) { // PulseEffects (if any)
+      this.context_menu_item_pulseEffects = new PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", IconType.SYMBOLIC);
+      this.context_menu_item_pulseEffects.connect('activate', async () => { spawnCommandLine("pulseeffects") });
+    }
+
+    if (!this.context_menu_item_easyEffects) { // EasyEffects (if any)
+      this.context_menu_item_easyEffects = new PopupIconMenuItem(_("Easy Effects"), "easyeffects", IconType.SYMBOLIC);
+      this.context_menu_item_easyEffects.connect('activate', async () => { spawnCommandLine("easyeffects") });
+    }
+
+    if (!this.context_menu_item_onAtStartup) { // switch 'Radio ON at startup'
+        this.context_menu_item_onAtStartup = new PopupSwitchMenuItem(_("Radio ON at startup"),
+          this.switch_on_last_station_at_start_up,
+          null);
+        this.context_menu_item_onAtStartup.connect("toggled", Lang.bind(this, function() {
+          this.switch_on_last_station_at_start_up = !this.switch_on_last_station_at_start_up;
+        }));
+    }
+
+    if (!this.context_menu_item_showLogo) { // switch 'Show Station Logo'
+        this.context_menu_item_showLogo = new PopupSwitchMenuItem(_("Display Station Logo"),
+          this.show_favicon,
+          null);
+        this.context_menu_item_showLogo.connect("toggled", Lang.bind(this, function() {
+          this.show_favicon = !this.show_favicon;
+          this.icon_or_favicon(this.radioId);
+        }));
+    }
+
+    if (!this.context_menu_item_showDesklet) { // switch 'Show AlbumArt3.0 desklet'
+      this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
+        this.show_desklet,
+        null);
+      this.context_menu_item_showDesklet.connect("toggled", Lang.bind(this, function() {
+          this.show_desklet = !this.show_desklet;
+          this.setup_desklet();
+        }));
+    }
+
+    if (!this.context_menu_item_dontCheckDep) { // switch 'Do not check about dependencies'
+        this.context_menu_item_dontCheckDep = new PopupSwitchMenuItem(_("Do not check about dependencies"),
+          this.dont_check_dependencies,
+          null);
+        this.context_menu_item_dontCheckDep.connect("toggled", Lang.bind(this, function() {
+          this.dont_check_dependencies = !this.dont_check_dependencies;
+          this.on_option_menu_reload_this_applet_clicked();
+        }));
+    }
+
+    if (!this.context_menu_item_showVolumeNearIcon) { // switch 'Display volume level near icon?'
+        this.context_menu_item_showVolumeNearIcon = new PopupSwitchMenuItem(_("Display volume level near icon"),
+          this.show_volume_level_near_icon,
+          null);
+        this.context_menu_item_showVolumeNearIcon.connect("toggled", Lang.bind(this, function() {
+          this.show_volume_level_near_icon = !this.show_volume_level_near_icon;
+          this.volume_near_icon();
+        }));
+    }
+    /// Set items in sections:
+    this.context_menu_section_system.addMenuItem(this.context_menu_item_about);
+    this.context_menu_section_system.addMenuItem(this.context_menu_item_manual);
+    this.context_menu_section_system.addMenuItem(this.context_menu_item_remove);
+    this.context_menu_section_system.addMenuItem(this.context_menu_separator1);
+
+    this.context_menu_section_config.addMenuItem(this.context_menu_item_reloadThisApplet);
+    this.context_menu_section_config.addMenuItem(this.context_menu_item_configure);
+    this.context_menu_section_config.addMenuItem(this.context_menu_item_scheduleARecording);
+    this.context_menu_section_config.addMenuItem(this.context_menu_item_recording);
+    this.context_menu_section_config.addMenuItem(this.context_menu_separator2);
+
+    this.context_menu_section_recordings.addMenuItem(this.context_menu_item_openRecordingsFolder);
+    this.context_menu_section_recordings.addMenuItem(this.context_menu_item_manageRecording);
+    this.context_menu_section_recordings.addMenuItem(this.submenu_cancel_yt_downloads);
+    this.context_menu_section_recordings.addMenuItem(this.context_menu_separator3);
+
+    this.context_menu_section_external.addMenuItem(this.context_menu_item_systemSoundSettings);
+    this.context_menu_section_external.addMenuItem(this.context_menu_item_pulseEffects);
+    this.context_menu_section_external.addMenuItem(this.context_menu_item_easyEffects);
+    this.context_menu_section_external.addMenuItem(this.context_menu_separator4);
+
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_showLogo);
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_dontCheckDep);
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_showVolumeNearIcon);
+    this.context_menu_section_switches.addMenuItem(this.context_menu_separator5);
+
+    /// Add sections in context menu:
+    let contextMenuSections = this._applet_context_menu._getMenuItems();
+
+    if (contextMenuSections.indexOf(this.context_menu_section_system) < 0)
+      this._applet_context_menu.addMenuItem(this.context_menu_section_system);
+
+    if (contextMenuSections.indexOf(this.context_menu_section_config) < 0)
+      this._applet_context_menu.addMenuItem(this.context_menu_section_config);
+
+    if (contextMenuSections.indexOf(this.context_menu_section_recordings) < 0)
+      this._applet_context_menu.addMenuItem(this.context_menu_section_recordings);
+
+    if (contextMenuSections.indexOf(this.context_menu_section_external) < 0)
+      this._applet_context_menu.addMenuItem(this.context_menu_section_external);
+
+    if (contextMenuSections.indexOf(this.context_menu_section_switches) < 0)
+      this._applet_context_menu.addMenuItem(this.context_menu_section_switches);
+  } // End of create_contextmenu_items
+
+  setContextMenuVisibilities() {
+    this.context_menu_item_reloadThisApplet.actor.visible = (RELOAD() === true || this.show_reload);
+
+    this.context_menu_item_configure.actor.visible = (
+      !METADATA["hide-configuration"] &&
+      file_test(METADATA["path"] + "/settings-schema.json", FileTest.EXISTS)
+    );
+
+    let record_pid = this.record_pid;
+    let recording = (record_pid != null);
+    let message_about_ending_recording = this.get_recording_ends_auto() ? _("(auto)") : _("(manual)");
+    let sufficient_space_left = this.check_hd_space_left(false);
+    this.context_menu_item_manageRecording.setIconSymbolicName(recording ? "media-playback-stop": sufficient_space_left ? "media-record" : "music-folder-full");
+    this.context_menu_item_manageRecording.label.text = recording ? _("Stop Recording") + "\n" + message_about_ending_recording : sufficient_space_left ? _("Start Recording") : _("Insufficient space");
+    //~ if (this._signals.isConnected('activate', this.context_menu_item_manageRecording))
+      //~ this._signals.disconnect("activate", this.context_menu_item_manageRecording);
+    this.context_menu_item_manageRecording.connect("activate", Lang.bind(this, function(event) {
+      if (recording) {
+        this.stop_recording(record_pid)
+      } else if (sufficient_space_left) {
+        this.start_recording()
+      } else {
+        this.configureApplet(this.tabNumberOfRecording)
+      }
+    }));
+    this.context_menu_item_manageRecording.actor.visible = (this.mpvStatus === "PLAY");
+
+    if (this.context_menu_yt_downloads && this.context_menu_yt_downloads.length > 0) {
+      for (let dl of this.context_menu_yt_downloads) {
+        // dl[0] contains the title; dl[1] contains the callback.
+        let submenu_cancel_yt_downloads_item = new PopupMenuItem(dl[0], { reactive: true });
+        submenu_cancel_yt_downloads_item.connect('activate', () => {
+          dl[1]();
+          this.set_applet_label("");
+          let i = this.yt_downloads.indexOf(dl[0]);
+          this.yt_downloads.splice(i, 1);
+          this.context_menu_yt_downloads.splice(i, 1);
+          if (this.yt_downloads.length === 0) {
+            this.change_symbolic_icon()
+          }
+        });
+        this.submenu_cancel_yt_downloads.menu.addMenuItem(submenu_cancel_yt_downloads_item);
+      }
+    }
+
+    this.submenu_cancel_yt_downloads.actor.visible = (this.context_menu_yt_downloads.length > 0);
+
+    //~ if (find_program_in_path("pulseeffects")) {
+      //~ this.context_menu_item_pulseEffects.actor.visible = true;
+      //~ this.context_menu_item_pulseEffects.actor.show();
+    //~ } else {
+      //~ this.context_menu_item_pulseEffects.actor.visible = false;
+      //~ this.context_menu_item_pulseEffects.actor.hide();
+    //~ }
+    this.context_menu_item_pulseEffects.actor.visible = (find_program_in_path("pulseeffects") != null);
+    this.context_menu_item_easyEffects.actor.visible = (find_program_in_path("easyeffects") != null);
+
+
+    this.context_menu_item_onAtStartup._switch.setToggleState(this.switch_on_last_station_at_start_up);
+    this.context_menu_item_showLogo._switch.setToggleState(this.show_favicon);
+    if (this.context_menu_item_showDesklet) {
+      this.context_menu_item_showDesklet.actor.visible = true;
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+      this.context_menu_item_showDesklet.actor.visible = this._is_desklet_activated();
+    }
+    this.context_menu_item_dontCheckDep._switch.setToggleState(this.dont_check_dependencies);
+    this.context_menu_item_showVolumeNearIcon._switch.setToggleState(this.show_volume_level_near_icon);
+    this.context_menu_separator5.actor.visible = (this.mpvStatus === "PLAY");
+  } // End of setContextMenuVisibilities
+
   finalizeContextMenu() {
+    // Must be empty for this applet.
+  }
+
+  finalizeContextMenu_OLD() {
     //~ logDebug("finalizeContextMenu");
 
 
@@ -4826,9 +5144,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ logDebug("items.length: "+items.length);
 
     /// Section 'system':
-    if (this.context_menu_item_system_section == null) {
-      this.context_menu_item_system_section = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_item_system_section);
+    if (this.context_menu_section_system == null) {
+      this.context_menu_section_system = new PopupMenuSection();
+      this._applet_context_menu.addMenuItem(this.context_menu_section_system);
     }
 
     // About...
@@ -4843,7 +5161,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ else
       //~ logDebug("this.context_menu_item_about is well created!!!");
     if (items.indexOf(this.context_menu_item_about) == -1) {
-      this.context_menu_item_system_section.addMenuItem(this.context_menu_item_about);
+      this.context_menu_section_system.addMenuItem(this.context_menu_item_about);
     }
 
     // Web page...
@@ -4851,7 +5169,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       //~ this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
     //~ }
     //~ if (items.indexOf(this.context_menu_item_webpage) == -1) {
-      //~ this.context_menu_item_system_section.addMenuItem(this.context_menu_item_webpage);
+      //~ this.context_menu_section_system.addMenuItem(this.context_menu_item_webpage);
     //~ }
 
     // Manual...
@@ -4862,20 +5180,20 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_manual.connect('activate', Lang.bind(this, this.openManual));
     }
     if (items.indexOf(this.context_menu_item_manual) == -1) {
-      this.context_menu_item_system_section.addMenuItem(this.context_menu_item_manual);
+      this.context_menu_section_system.addMenuItem(this.context_menu_item_manual);
     }
 
     // Remove applet
     if (this.context_menu_item_remove == null) {
       this.context_menu_item_remove = new PopupIconMenuItem(_("Remove '%s'")
-        .format(this._(this._meta.name)),
+        .format(this._(METADATA.name)),
           "edit-delete",
           IconType.SYMBOLIC);
       this.context_menu_item_remove.connect('activate', (actor, event) => this.confirmRemoveApplet(event));
     }
     if (items.indexOf(this.context_menu_item_remove) == -1) {
       //~ this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      this.context_menu_item_system_section.addMenuItem(this.context_menu_item_remove);
+      this.context_menu_section_system.addMenuItem(this.context_menu_item_remove);
     }
 
     // Separator
@@ -4885,9 +5203,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     /// Section config:
-    if (this.context_menu_item_config_section == null) {
-      this.context_menu_item_config_section = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_item_config_section);
+    if (this.context_menu_section_config == null) {
+      this.context_menu_section_config = new PopupMenuSection();
+      this._applet_context_menu.addMenuItem(this.context_menu_section_config);
     }
     // Reload this applet
     if (RELOAD() === true || this.show_reload) {
@@ -4904,11 +5222,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
     if (this.context_menu_item_reloadThisApplet != null && items.indexOf(this.context_menu_item_reloadThisApplet) == -1) {
       //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      this.context_menu_item_config_section.addMenuItem(this.context_menu_item_reloadThisApplet);
+      this.context_menu_section_config.addMenuItem(this.context_menu_item_reloadThisApplet);
     }
 
     // Configure:
-    if (!this._meta["hide-configuration"] && file_test(this._meta["path"] + "/settings-schema.json", FileTest.EXISTS)) {
+    if (!METADATA["hide-configuration"] && file_test(METADATA["path"] + "/settings-schema.json", FileTest.EXISTS)) {
       //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
       if (this.context_menu_item_configure == null) {
         this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
@@ -4917,7 +5235,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.context_menu_item_configure.connect('activate', Lang.bind(this, this.configureApplet));
       }
       if (items.indexOf(this.context_menu_item_configure) == -1) {
-        this.context_menu_item_config_section.addMenuItem(this.context_menu_item_configure);
+        this.context_menu_section_config.addMenuItem(this.context_menu_item_configure);
       }
 
       // Schedule a recording:
@@ -4931,7 +5249,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_scheduleARecording.connect('activate', Lang.bind(this, () => this.configureApplet(this.tabNumberOfScheduling)));
 
       if (items.indexOf(this.context_menu_item_scheduleARecording) == -1) {
-        this.context_menu_item_config_section.addMenuItem(this.context_menu_item_scheduleARecording);
+        this.context_menu_section_config.addMenuItem(this.context_menu_item_scheduleARecording);
       }
 
       if (this.context_menu_item_recording != null)
@@ -4943,7 +5261,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_recording.connect('activate', Lang.bind(this, () => this.configureApplet(this.tabNumberOfYT)));
 
       if (items.indexOf(this.context_menu_item_recording) == -1) {
-        this.context_menu_item_config_section.addMenuItem(this.context_menu_item_recording);
+        this.context_menu_section_config.addMenuItem(this.context_menu_item_recording);
       }
     }
 
@@ -4953,9 +5271,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     /// Section about recordings
-    if (this.context_menu_item_recordings_section == null) {
-      this.context_menu_item_recordings_section = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_item_recordings_section);
+    if (this.context_menu_section_recordings == null) {
+      this.context_menu_section_recordings = new PopupMenuSection();
+      this._applet_context_menu.addMenuItem(this.context_menu_section_recordings);
     }
     // Open Recordings Folder
     if (this.context_menu_item_openRecordingsFolder != null) {
@@ -4974,7 +5292,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.open_rec_folder()
     }));
 
-    this.context_menu_item_recordings_section.addMenuItem(this.context_menu_item_openRecordingsFolder);
+    this.context_menu_section_recordings.addMenuItem(this.context_menu_item_openRecordingsFolder);
 
 
     // Start / Stop recording:
@@ -5000,16 +5318,16 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }
       }));
 
-      this.context_menu_item_recordings_section.addMenuItem(this.context_menu_item_manageRecording);
+      this.context_menu_section_recordings.addMenuItem(this.context_menu_item_manageRecording);
     }
 
     // Submenu Cancel YT downloads
     if (this.submenu_cancel_yt_downloads != null)
       this.submenu_cancel_yt_downloads.destroy();
     this.submenu_cancel_yt_downloads = null;
-    if (this.context_menu_yt_downloads.length > 0) {
+    if (this.context_menu_yt_downloads && this.context_menu_yt_downloads.length > 0) {
       this.submenu_cancel_yt_downloads = new RadioPopupSubMenuMenuItem(formatTextWrap(_("Cancel downloads from YT"), WRAP_LENGTH));
-      this.context_menu_item_recordings_section.addMenuItem(this.submenu_cancel_yt_downloads);
+      this.context_menu_section_recordings.addMenuItem(this.submenu_cancel_yt_downloads);
 
       for (let dl of this.context_menu_yt_downloads) {
         // dl[0] contains the title; dl[1] contains the callback.
@@ -5034,16 +5352,16 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     /// Section external settings
-    if (this.context_menu_item_external_section == null) {
-      this.context_menu_item_external_section = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_item_external_section);
+    if (this.context_menu_section_external == null) {
+      this.context_menu_section_external = new PopupMenuSection();
+      this._applet_context_menu.addMenuItem(this.context_menu_section_external);
     }
     // Sound Settings
     if (this.context_menu_item_systemSoundSettings == null) {
       this.context_menu_item_systemSoundSettings = new PopupIconMenuItem(_("Sound Settings"), "audio-card", IconType.SYMBOLIC);
       this.context_menu_item_systemSoundSettings.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
       if (items.indexOf(this.context_menu_item_systemSoundSettings) == -1) {
-        this.context_menu_item_external_section.addMenuItem(this.context_menu_item_systemSoundSettings);
+        this.context_menu_section_external.addMenuItem(this.context_menu_item_systemSoundSettings);
       }
     }
 
@@ -5052,7 +5370,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_pulseEffects = new PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", IconType.SYMBOLIC);
       this.context_menu_item_pulseEffects.connect('activate', async () => { spawnCommandLine("pulseeffects") });
       if (items.indexOf(this.context_menu_item_pulseEffects) == -1) {
-        this.context_menu_item_external_section.addMenuItem(this.context_menu_item_pulseEffects);
+        this.context_menu_section_external.addMenuItem(this.context_menu_item_pulseEffects);
       }
     }
 
@@ -5061,7 +5379,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_easyEffects = new PopupIconMenuItem(_("Easy Effects"), "easyeffects", IconType.SYMBOLIC);
       this.context_menu_item_easyEffects.connect('activate', async () => { spawnCommandLine("easyeffects") });
       if (items.indexOf(this.context_menu_item_easyEffects) == -1) {
-        this.context_menu_item_external_section.addMenuItem(this.context_menu_item_easyEffects);
+        this.context_menu_section_external.addMenuItem(this.context_menu_item_easyEffects);
       }
     }
     if (this.context_menu_separator4 == null && this._applet_context_menu.numMenuItems > 0) {
@@ -5070,9 +5388,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     /// Section containing switches:
-    if (this.context_menu_switches_section == null) {
-      this.context_menu_switches_section = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_switches_section);
+    if (this.context_menu_section_switches == null) {
+      this.context_menu_section_switches = new PopupMenuSection();
+      this._applet_context_menu.addMenuItem(this.context_menu_section_switches);
     }
 
     // Radio ON at startup
@@ -5085,8 +5403,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }));
     }
     if (items.indexOf(this.context_menu_item_onAtStartup) == -1) {
-        //this.context_menu_switches_section.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_switches_section.addMenuItem(this.context_menu_item_onAtStartup);
+        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
+        this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
     }
 
     // Show Station Logo
@@ -5100,7 +5418,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }));
     }
     if (items.indexOf(this.context_menu_item_showLogo) == -1) {
-        this.context_menu_switches_section.addMenuItem(this.context_menu_item_showLogo);
+        this.context_menu_section_switches.addMenuItem(this.context_menu_item_showLogo);
     }
 
     // Show AlbumArt3.0 desklet
@@ -5115,7 +5433,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           }));
       }
       if (items.indexOf(this.context_menu_item_showDesklet) == -1) {
-          this.context_menu_switches_section.addMenuItem(this.context_menu_item_showDesklet);
+          this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
       }
     }
 
@@ -5130,8 +5448,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }));
     }
     if (items.indexOf(this.context_menu_item_dontCheckDep) == -1) {
-        //this.context_menu_switches_section.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_switches_section.addMenuItem(this.context_menu_item_dontCheckDep);
+        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
+        this.context_menu_section_switches.addMenuItem(this.context_menu_item_dontCheckDep);
     }
 
     // Display volume level near icon?
@@ -5145,13 +5463,26 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }));
     }
     if (items.indexOf(this.context_menu_item_showVolumeNearIcon) == -1) {
-        //this.context_menu_switches_section.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_switches_section.addMenuItem(this.context_menu_item_showVolumeNearIcon);
+        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
+        this.context_menu_section_switches.addMenuItem(this.context_menu_item_showVolumeNearIcon);
     }
   }
 
   install_desklet() {
     // Installs the AlbumArt3.0 desklet.
+    let enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
+    var deskletEDKline = "";
+    for (let i = 0; i < enabledDesklets.length; i++){
+      let name = enabledDesklets[i].split(":")[0];
+      //~ logDebug("Desklet name: "+name);
+      if (name == "AlbumArt3.0@claudiux") {
+        deskletEDKline = ""+enabledDesklets[i];
+        enabledDesklets.splice(i, 1);
+        break;
+      }
+    }
+
+
     const desklet_source_path = APPLET_DIR + "/desklet/AlbumArt3.0@claudiux";
     if (find_program_in_path("cinnamon-install-spice")) {
       spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
@@ -5159,6 +5490,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
       spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
     }
+
+    if (deskletEDKline.length > 0) {
+      var found = false;
+      for (let i = 0; i < enabledDesklets.length; i++){
+        let name = enabledDesklets[i].split(":")[0];
+        //~ logDebug("Desklet name: "+name);
+        if (name == "AlbumArt3.0@claudiux") {
+          enabledDesklets[i] = deskletEDKline;
+          found = true;
+          break;
+        }
+      }
+      if (found)
+        global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
+    }
+
   }
 
   setup_desklet() {
@@ -6031,7 +6378,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
     if (this._is_desklet_activated())
       this.show_desklet = true;
-    this.finalizeContextMenu();
+
+    if (this.context_menu_item_showDesklet) {
+      this.context_menu_item_showDesklet.actor.visible = true;
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+    }
+    //~ this.finalizeContextMenu();
   }
 
   on_desklet_open_settings_button_clicked() {
@@ -6452,6 +6804,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 // Loaded applet Radio3.0@claudiux in 132 ms
 
 function main(metadata, orientation, panel_height, instance_id) {
+  METADATA = metadata;
   VERSION = metadata.version;
   return new WebRadioReceiverAndRecorder(orientation, panel_height, instance_id);
 }

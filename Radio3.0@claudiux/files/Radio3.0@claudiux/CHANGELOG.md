@@ -1,3 +1,7 @@
+### v2.5.4~20241225
+  * Fixed context menu bugs.
+  * Fixed desklet bugs.
+
 ### v2.5.3~20241220
   * Fixed menu bugs (when the Category list is beside the Radio Station list).
 
