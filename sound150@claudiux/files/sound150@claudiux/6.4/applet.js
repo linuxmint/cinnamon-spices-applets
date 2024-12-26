@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -208,11 +208,14 @@ class ControlButton {
         this.destroyed = true;
         try {
             this.tooltip.destroy();
-            this.actor.remove_actor(this.button);
             this.button.remove_all_children();
+            this.actor.remove_actor(this.button);
             this.button.destroy();
             this.actor.destroy();
-        } catch(e) {}
+        }
+        catch(e) {
+            logError("Error destroying ControllButton: "+e);
+        }
         finally {
             this.tooltip = null;
             this.button = null;
@@ -797,13 +800,13 @@ class Seeker extends Slider.Slider {
     }
 
     _updateTimer() {
+        if (this.destroyed) return GLib.SOURCE_REMOVE;
+
         if (this._timeoutId) {
             try {Mainloop.source_remove(this._timeoutId);} catch(e) {} finally {
                 this._timeoutId = null;
             }
         }
-
-        if (this.destroyed) return GLib.SOURCE_REMOVE;
 
         if (this.status === "Playing") {
             if (this.canSeek) {
