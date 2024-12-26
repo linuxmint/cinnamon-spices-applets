@@ -58,7 +58,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         if (this.currentPicture) {
             this.currentPicture.destroy();
         }
-        this._photoFrame.destroy();
+        if (this._photoFrame) {
+            this._photoFrame.destroy();
+        }
         this.setup_display();
     }
 
@@ -256,9 +258,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         } else {
             this._bin.set_child(this.currentPicture);
         }
-        if (old_pic) {
-            old_pic.destroy();
-        }
+        //~ if (old_pic) {
+            //~ old_pic.destroy();
+        //~ }
 
         this.updateInProgress = false;
     }

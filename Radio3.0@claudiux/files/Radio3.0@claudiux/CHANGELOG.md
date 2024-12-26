@@ -1,3 +1,6 @@
+### v2.5.5~20241226
+  * Minor bugfixes.
+
 ### v2.5.4~20241225
   * Fixed context menu bugs.
   * Fixed desklet bugs.

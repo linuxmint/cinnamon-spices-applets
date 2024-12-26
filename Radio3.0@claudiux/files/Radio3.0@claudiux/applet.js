@@ -763,9 +763,9 @@ class R3WebpageMenuItem extends PopupBaseMenuItem {
     super.activate();
   }
 
-  destroy() {
-    //super.destroy();
-  }
+  //~ destroy() {
+    //~ //super.destroy();
+  //~ }
 }
 
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
