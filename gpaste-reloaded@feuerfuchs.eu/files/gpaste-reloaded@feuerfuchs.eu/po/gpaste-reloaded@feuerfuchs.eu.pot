@@ -88,6 +88,10 @@ msgstr ""
 msgid "GPaste Reloaded"
 msgstr ""
 
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""
+
 #. settings-schema.json->shown-entries->description
 msgid "Shown entries"
 msgstr ""

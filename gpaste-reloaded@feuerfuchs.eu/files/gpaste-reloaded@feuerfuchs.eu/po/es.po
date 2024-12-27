@@ -90,6 +90,10 @@ msgstr "Accede y gestiona al instante el historial del portapapeles"
 msgid "GPaste Reloaded"
 msgstr "GPaste recargado"
 
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr "Mostrar el icono de la bandeja, incluso cuando el applet no está en uso"
+
 #. settings-schema.json->shown-entries->description
 msgid "Shown entries"
 msgstr "Entradas visualizadas"

@@ -6,7 +6,7 @@
     "always-show-icon": {
         "default":     true,
         "type":        "checkbox",
-        "description": "Show tray icon, even when the applet is not in use."
+        "description": "Show tray icon, even when the applet is not in use"
     },
     "display-track-switch": {
         "default":     true,
