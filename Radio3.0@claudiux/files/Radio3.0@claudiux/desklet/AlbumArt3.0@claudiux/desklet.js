@@ -45,10 +45,10 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     on_setting_changed() {
         if (this.update_id) {
             try {
-                Mainloop.source_remove(this.update_id);
+                if (Mainloop.source_remove(this.update_id)) this.update_id = null;
             }
             catch(e) {
-                // Nothing to do.
+                this.update_id = null;
             } finally {
                 this.update_id = null;
             }
@@ -58,9 +58,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         if (this.currentPicture) {
             this.currentPicture.destroy();
         }
-        if (this._photoFrame) {
-            this._photoFrame.destroy();
-        }
+        //~ if (this._photoFrame) {
+        this._photoFrame.destroy();
+        //~ }
         this.setup_display();
     }
 
@@ -92,16 +92,16 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     on_desklet_removed() {
         if (this.dir_monitor_id && this.dir_monitor) {
             this.dir_monitor.disconnect(this.dir_monitor_id);
-            //~ this.dir_monitor_id = null;
+            this.dir_monitor_id = null;
         }
-        this.dir_monitor_id = null;
+        //~ this.dir_monitor_id = null;
 
         if (this.update_id) {
             try {
-                Mainloop.source_remove(this.update_id);
+                if (Mainloop.source_remove(this.update_id)) this.update_id = null;
             }
             catch(e) {
-                // Nothing to do.
+                this.update_id = null;
             } finally {
                 this.update_id = null;
             }
@@ -163,23 +163,29 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             this.updateInProgress = false;
             this.currentPicture = null;
 
-            //~ this.update_id = null;
+            this.update_id = null;
             this._update_loop();
         }
     }
 
     _update_loop() {
         this._update();
-        if (this.update_id) {
-            try {
-                Mainloop.source_remove(this.update_id);
-            }
-            catch(e) {
-                // Nothing to do.
-            } finally {
-                this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
-            }
-        }
+        //~ if (this.update_id) {
+            //~ try {
+                //~ if (Mainloop.source_remove(this.update_id)) this.update_id = null;
+            //~ }
+            //~ catch(e) {
+                //~ // Nothing to do.
+            //~ } finally {
+                //~ this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+            //~ }
+        //~ }
+        //~ if (this.update_id) {
+        //~     return true
+        //~ } else {
+        //~     this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+        //~ }
+        this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
     }
 
     _size_pic(image) {
@@ -292,10 +298,12 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     _show_or_hide() {
-        if (GLib.file_test(GLib.get_home_dir()+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux/HIDDEN", GLib.FileTest.EXISTS))
-            this.actor.hide();
-        else
-            this.actor.show();
+        if (GLib.file_test(GLib.get_home_dir()+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux/HIDDEN", GLib.FileTest.EXISTS)) {
+            if (this.actor) this.actor.hide();
+        }
+        else {
+            if (this.actor) this.actor.show();
+        }
     }
 }
 

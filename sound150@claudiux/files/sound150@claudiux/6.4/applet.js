@@ -659,7 +659,7 @@ class Seeker extends Slider.Slider {
         else
             this._updateValue();
         if (this._timeoutId) {
-            try {Mainloop.source_remove(this._timeoutId)} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;} catch(e) {} finally {
                 this._timeoutId = null;
             }
         }
@@ -674,7 +674,7 @@ class Seeker extends Slider.Slider {
         else
             this._updateValue();
         if (this._timeoutId) {
-            try {Mainloop.source_remove(this._timeoutId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;} catch(e) {} finally {
                 this._timeoutId = null;
             }
         }
@@ -755,7 +755,7 @@ class Seeker extends Slider.Slider {
                     if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
                     if (this._timeoutId2) {
-                        try {Mainloop.source_remove(this._timeoutId2);} catch(e) {} finally {
+                        try {if (Mainloop.source_remove(this._timeoutId2)) this._timeoutId2 = null;} catch(e) {} finally {
                             this._timeoutId2 = null;
                         }
                     }
@@ -793,9 +793,9 @@ class Seeker extends Slider.Slider {
             this._timerTicker = 0;
             this._currentTime = 0;
         }
-        if (this._timeoutId) try {Mainloop.source_remove(this._timeoutId);} catch(e) {} finally {
-            this._timeoutId = null;
-        }
+        //~ if (this._timeoutId) try {if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;} catch(e) {} finally {
+            //~ this._timeoutId = null;
+        //~ }
         return GLib.SOURCE_REMOVE;
     }
 
@@ -803,7 +803,7 @@ class Seeker extends Slider.Slider {
         if (this.destroyed) return GLib.SOURCE_REMOVE;
 
         if (this._timeoutId) {
-            try {Mainloop.source_remove(this._timeoutId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;} catch(e) {} finally {
                 this._timeoutId = null;
             }
         }
@@ -813,7 +813,7 @@ class Seeker extends Slider.Slider {
                 this._getPosition();
                 this._timerTicker = 0;
                 //~ if (this._timeoutId) {
-                    //~ Mainloop.source_remove(this._timeoutId);
+                    //~ if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;
                     //~ this._timeoutId = null;
                 //~ }
                 try {this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));} catch(e) {}
@@ -821,7 +821,7 @@ class Seeker extends Slider.Slider {
                 this._getPosition();
                 this._timerTicker = 0;
                 //~ if (this._timeoutId) {
-                    //~ Mainloop.source_remove(this._timeoutId);
+                    //~ if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;
                     //~ this._timeoutId = null;
                 //~ }
                 this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
@@ -830,7 +830,7 @@ class Seeker extends Slider.Slider {
             if (this.status === "Stopped") {
                 this._currentTime = 0;
                 //~ if (this._timeoutId) {
-                    //~ Mainloop.source_remove(this._timeoutId);
+                    //~ if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;
                     //~ this._timeoutId = null;
                 //~ }
             }
@@ -931,12 +931,12 @@ class Seeker extends Slider.Slider {
     destroy() {
         this.destroyed = true;
         if (this._timeoutId) {
-            try {Mainloop.source_remove(this._timeoutId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;} catch(e) {} finally {
                 this._timeoutId = null;
             }
         }
         if (this._timeoutId2) {
-            try {Mainloop.source_remove(this._timeoutId2);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._timeoutId2)) this._timeoutId2 = null;} catch(e) {} finally {
                 this._timeoutId2 = null;
             }
         }
@@ -2300,17 +2300,17 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
-            try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._iconTimeoutId)) this._iconTimeoutId = null;} catch(e) {} finally {
                 this._iconTimeoutId = null;
             }
         }
         if (this._loopArtId) {
-            try {Mainloop.source_remove(this._loopArtId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._loopArtId)) this._loopArtId = null;} catch(e) {} finally {
                 this._loopArtId = null;
             }
         }
         if (this._seeker && this._seeker._timeoutId) {
-            try {Mainloop.source_remove(this._seeker._timeoutId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._seeker._timeoutId)) this._seeker._timeoutId = null;} catch(e) {} finally {
                 this._seeker._timeoutId = 0;
             }
         }
@@ -2606,7 +2606,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     setIcon(icon, source) {
         //~ log("setIcon("+icon+", "+source+")", true);
         if (this._iconTimeoutId) {
-            try {Mainloop.source_remove(this._iconTimeoutId)} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._iconTimeoutId)) this._iconTimeoutId = null;} catch(e) {} finally {
                 this._iconTimeoutId = null;
             }
         }
@@ -2625,12 +2625,12 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this.set_applet_icon_symbolic_name(this._outputIcon);
                 if (this.stream && !this.stream.is_muted) {
                     if (this._iconTimeoutId) {
-                        try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
+                        try {if (Mainloop.source_remove(this._iconTimeoutId)) this._iconTimeoutId = null;} catch(e) {} finally {
                             this._iconTimeoutId = null;
                         }
                     }
                     this._iconTimeoutId = Mainloop.timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
-                        try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {} finally {
+                        try {if (Mainloop.source_remove(this._iconTimeoutId)) this._iconTimeoutId = null;} catch(e) {} finally {
                             this._iconTimeoutId = null;
                         }
                         this.setIcon();
@@ -2682,7 +2682,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     loopArt() {
         if (!this._playerctl) {
             if (this._loopArtId) {
-                try {Mainloop.source_remove(this._loopArtId);} catch(e) {} finally {
+                try {if (Mainloop.source_remove(this._loopArtId)) this._loopArtId = null;} catch(e) {} finally {
                     this._loopArtId = null;
                 }
             }
@@ -2716,7 +2716,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             subProcess.send_signal(9);
         }));
         if (this._loopArtId) {
-            try {Mainloop.source_remove(this._loopArtId);} catch(e) {} finally {
+            try {if (Mainloop.source_remove(this._loopArtId)) this._loopArtId = null;} catch(e) {} finally {
                 this._loopArtId = null;
             }
         }
