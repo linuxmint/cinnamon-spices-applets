@@ -1,3 +1,9 @@
+### v7.3.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v7.3.5~20241226
+  * Bugfixes.
+
 ### v7.3.4~20241221
   * New option to fix volume at start-up. Value -1 means "No change". (Related to #6690.)
 

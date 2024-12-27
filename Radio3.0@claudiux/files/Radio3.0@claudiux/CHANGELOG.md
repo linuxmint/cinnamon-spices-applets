@@ -1,3 +1,13 @@
+### v2.5.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v2.5.5~20241226
+  * Minor bugfixes.
+
+### v2.5.4~20241225
+  * Fixed context menu bugs.
+  * Fixed desklet bugs.
+
 ### v2.5.3~20241220
   * Fixed menu bugs (when the Category list is beside the Radio Station list).
 
