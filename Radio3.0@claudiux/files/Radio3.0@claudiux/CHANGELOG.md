@@ -1,3 +1,6 @@
+### v2.5.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
 ### v2.5.5~20241226
   * Minor bugfixes.
 

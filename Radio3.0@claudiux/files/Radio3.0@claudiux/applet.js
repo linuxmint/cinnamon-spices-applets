@@ -826,8 +826,17 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     let topMenu = this._getTopMenu();
     if(!topMenu)
         return false;
+    if(!topMenu.actor)
+        return false;
     let [topMinHeight, topNaturalHeight] = topMenu.actor.get_preferred_height(-1);
-    let topThemeNode = topMenu.actor.get_theme_node();
+    let topThemeNode = null;
+
+    try {
+      topThemeNode = topMenu.actor.get_theme_node();
+    } catch(e) {
+      topThemeNode = null;
+    }
+    if (!topThemeNode) return false;
 
     let topMaxHeight = topThemeNode.get_max_height();
     return topMaxHeight >= 0 && topNaturalHeight >= topMaxHeight;

@@ -1,3 +1,6 @@
+### v7.3.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
 ### v7.3.5~20241226
   * Bugfixes.
 
