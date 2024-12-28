@@ -308,10 +308,8 @@
       "type": "section",
       "title": "Album Art desklet",
       "keys": [
-        "desklet-activate-button",
         "desklet-show-on-desktop",
-        "desklet-open-settings-button",
-        "desklet-activated-label"
+        "desklet-open-settings-button"
       ]
     },
     "sectionNetworkQuality": {
@@ -1907,6 +1905,10 @@
     "description": "Maximum title length",
     "tooltip": "0 means no maximum"
   },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
+  },
   "desklet-activate-button": {
     "type": "button",
     "dependency": "!desklet-is-activated",
@@ -1920,22 +1922,25 @@
   },
   "desklet-show-on-desktop" : {
     "type": "switch",
-    "dependency": "desklet-is-activated",
     "default": false,
     "description": "Show Album Art on desktop"
   },
   "desklet-open-settings-button": {
     "type": "button",
-    "dependency": "desklet-is-activated",
+    "dependency": "desklet-show-on-desktop",
     "description": "Album Art desklet settings",
     "callback": "on_desklet_open_settings_button_clicked"
-  },
-  "desklet-is-activated": {
-    "type": "generic",
-    "default": false
   },
   "radiopp-is-here": {
     "type": "generic",
     "default": false
+  },
+  "desklet-x": {
+    "type": "generic",
+    "default": -1
+  },
+  "desklet-y": {
+    "type": "generic",
+    "default": -1
   }
 }
