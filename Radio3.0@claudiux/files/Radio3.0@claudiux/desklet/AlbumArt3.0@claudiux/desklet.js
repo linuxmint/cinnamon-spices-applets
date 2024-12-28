@@ -90,11 +90,12 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     on_desklet_removed() {
-        if (this.dir_monitor_id && this.dir_monitor) {
+        if (this.dir_monitor) {
+            //~ this.dir_monitor.disconnectAllSignals();
             this.dir_monitor.disconnect(this.dir_monitor_id);
-            this.dir_monitor_id = null;
+            //~ this.dir_monitor_id = null;
         }
-        //~ this.dir_monitor_id = null;
+        this.dir_monitor_id = null;
 
         if (this.update_id) {
             try {
@@ -207,7 +208,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     _update() {
-        this._show_or_hide();
+        //~ this._show_or_hide();
 
         if (this.updateInProgress) {
             return;
@@ -297,14 +298,14 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         }
     }
 
-    _show_or_hide() {
-        if (GLib.file_test(GLib.get_home_dir()+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux/HIDDEN", GLib.FileTest.EXISTS)) {
-            if (this.actor) this.actor.hide();
-        }
-        else {
-            if (this.actor) this.actor.show();
-        }
-    }
+    //~ _show_or_hide() {
+        //~ if (GLib.file_test(GLib.get_home_dir()+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux/HIDDEN", GLib.FileTest.EXISTS)) {
+            //~ if (this.actor) this.actor.hide();
+        //~ }
+        //~ else {
+            //~ if (this.actor) this.actor.show();
+        //~ }
+    //~ }
 }
 
 function main(metadata, desklet_id) {

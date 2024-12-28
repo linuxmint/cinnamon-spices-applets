@@ -1,3 +1,8 @@
+### v2.5.7~20241228
+  * New management of desklet displaying Album Art. Use context menu to show it.
+  * Better management of signals.
+  * No error reloading this applet.
+
 ### v2.5.6~20241227
   * No error at start-up. Fixes a nasty bug!
 
