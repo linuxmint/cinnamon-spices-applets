@@ -1,3 +1,6 @@
+### v7.3.7~20211228
+  * Improved functionality (icons and album art)
+
 ### v7.3.6~20241227
   * No error at start-up. Fixes a nasty bug!
 
