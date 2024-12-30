@@ -1,4 +1,9 @@
-### v7.3.7~20211228
+### v7.4.0~20241230
+  * Better compatibility with Cinnamon 6.4.
+  * Make optional suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
+  * Improves management of objects and signals when restarting this applet.
+
+### v7.3.7~20241228
   * Improved functionality (icons and album art)
 
 ### v7.3.6~20241227
