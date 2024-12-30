@@ -1,6 +1,6 @@
 ### v7.4.0~20241230
   * Better compatibility with Cinnamon 6.4.
-  * Make optionnal suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
+  * Make optional suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
   * Improves management of objects and signals when restarting this applet.
 
 ### v7.3.7~20241228
