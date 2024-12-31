@@ -1,3 +1,6 @@
+### v2.5.8~20241230
+  * Album Art 3.0 settings now accessible via the applet context menu.
+
 ### v2.5.7~20241228
   * New management of desklet displaying Album Art. Use context menu to show it.
   * Better management of signals.

@@ -4999,6 +4999,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }));
     }
 
+    if (!this.context_menu_item_configDesklet) { // 'Album Art desklet settings'
+      this.context_menu_item_configDesklet = new PopupIconMenuItem(_("Album Art desklet settings"), "system-run", IconType.SYMBOLIC);
+      this.context_menu_item_configDesklet.connect('activate', this.on_desklet_open_settings_button_clicked.bind(this) );
+    }
+
     if (!this.context_menu_item_showDesklet) { // switch 'Show AlbumArt3.0 desklet'
       this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
         this.show_desklet,
@@ -5006,6 +5011,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_showDesklet.connect("toggled", Lang.bind(this, function() {
           this.show_desklet = !this.show_desklet;
           this.setup_desklet();
+          if (this.context_menu_item_configDesklet)
+            this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         }));
     }
 
@@ -5051,6 +5058,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_section_external.addMenuItem(this.context_menu_separator4);
 
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_configDesklet);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_showLogo);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_showVolumeNearIcon);
@@ -5140,6 +5148,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_showDesklet.actor.visible = true;
       this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
       //~ this.context_menu_item_showDesklet.actor.visible = this._is_desklet_activated();
+    }
+    if (this.context_menu_item_configDesklet) {
+      this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
     }
     this.context_menu_item_dontCheckDep._switch.setToggleState(this.dont_check_dependencies);
     this.context_menu_item_showVolumeNearIcon._switch.setToggleState(this.show_volume_level_near_icon);
@@ -5573,6 +5584,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
     this.show_desklet = false;
     this.desklet_is_activated = false;
+    const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux"
+    spawnCommandLineAsync("rm -rf "+desklet_path);
   }
 
   setup_desklet() {
