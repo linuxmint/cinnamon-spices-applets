@@ -1,3 +1,7 @@
+### v2.5.8~20241231
+  * Album Art 3.0 becomes faster.
+  * Bugfixes.
+
 ### v2.5.8~20241230
   * Album Art 3.0 settings now accessible via the applet context menu.
 
