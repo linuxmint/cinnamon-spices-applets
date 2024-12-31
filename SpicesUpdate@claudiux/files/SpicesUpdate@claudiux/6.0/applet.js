@@ -904,6 +904,7 @@ class SpicesUpdate extends IconApplet {
 
     // ++ Function called when settings are changed
     on_settings_changed() {
+        //~ logDebug("on_settings_changed() BEGIN");
         // Label
         this._set_main_label();
 
@@ -933,6 +934,7 @@ class SpicesUpdate extends IconApplet {
             _dir_xlets = undefined;
             isEmpty = undefined;
         }
+        //~ logDebug("on_settings_changed() END");
     } // End of on_settings_changed
 
     // Buttons in settings:
@@ -1036,7 +1038,7 @@ class SpicesUpdate extends IconApplet {
     */
     populateSettingsUnprotectedSpices(type) {
         if (this.OKtoPopulateSettings[type] != true) return;
-
+        //~ logDebug("populateSettingsUnprotectedSpices("+type+") BEGIN");
         // Prevents multiple access to the json config file of SpiceUpdate@claudiux:
         this.OKtoPopulateSettings[type] = false;
         this.unprotectedList[type] = [];
@@ -1063,9 +1065,10 @@ class SpicesUpdate extends IconApplet {
         //~ logDebug("blacklist: "+blacklist);
 
         // populate this.unprotected_<type> with the this.unprotected_<type> elements, removing uninstalled <type>:
-        let unprotectedSpices_length = unprotectedSpices.length;
-        for (var i=0; i < unprotectedSpices_length; i++) {
-            let a = unprotectedSpices[i];
+        //~ let unprotectedSpices_length = unprotectedSpices.length;
+        //~ for (var i=0; i < unprotectedSpices_length; i++) {
+            //~ let a = unprotectedSpices[i];
+        for (let a of unprotectedSpices) {
             let d = file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
             if (d.query_exists(null)) {
                 // the blacklist takes priority over this applet:
@@ -1085,11 +1088,18 @@ class SpicesUpdate extends IconApplet {
                 if (!a["isunprotected"]) {
                     this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
                 }
-                this.unprotectedList[type].push({
-                    "name": a["name"],
-                    "isunprotected": a["isunprotected"] && !isSystemProtected,
-                    "requestnewdownload": false
-                });
+                if (a["name"] === "AlbumArt3.0@claudiux")
+                    this.unprotectedList[type].push({
+                        "name": a["name"],
+                        "isunprotected": false,
+                        "requestnewdownload": false
+                    });
+                else
+                    this.unprotectedList[type].push({
+                        "name": a["name"],
+                        "isunprotected": a["isunprotected"] && !isSystemProtected,
+                        "requestnewdownload": false
+                    });
             }
         }
 
@@ -1145,6 +1155,7 @@ class SpicesUpdate extends IconApplet {
         //~ WAITING[type] = (this.unprotectedList[type].length + 3) * 1000;
         unprotectedSpices = undefined;
         this.cache[type] = "{}";
+        //~ logDebug("populateSettingsUnprotectedSpices("+type+") END");
     } // End of populateSettingsUnprotectedSpices
 
     populateSettingsUnprotectedApplets() {
@@ -1168,11 +1179,22 @@ class SpicesUpdate extends IconApplet {
     } // End of populateSettingsUnprotectedActions
 
     _compare(a,b) {
+        // Protect AlbumArt3.0@claudiux desklet:
+        if (a["name"] === "AlbumArt3.0@claudiux")
+            a["isunprotected"] = false;
+
         // We know that a["name"] and b["name"] are different.
-        if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
-            return -1;
+        if (!a["isunprotected"]) {
+            if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
+                return -2;
+            } else {
+                return -1;
+            }
         }
-        return 1;
+        else if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
+            return 1;
+        }
+        return 2;
     } // End of _compare
 
     _get_singular_type(t) {

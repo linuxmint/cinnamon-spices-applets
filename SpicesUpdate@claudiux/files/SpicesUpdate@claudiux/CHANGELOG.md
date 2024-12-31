@@ -1,3 +1,6 @@
+### v7.4.6~20241230
+  * Spices not selected in the lists of settings are displayed first.
+
 ### v7.4.5~20241114
   * Soup2/Soup3: better detection.
 
