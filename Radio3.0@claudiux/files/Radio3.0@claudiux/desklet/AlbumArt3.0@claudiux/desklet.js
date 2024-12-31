@@ -21,6 +21,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.metadata = metadata;
         this.update_id = null;
         this.old_image_path = null;
+        this.isLooping = true;
 
         this.dir = "file://"+GLib.get_home_dir()+"/.config/Radio3.0/song-art";
         this.shuffle = false;
@@ -43,24 +44,26 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     on_setting_changed() {
-        if (this.update_id) {
-            try {
-                if (Mainloop.source_remove(this.update_id)) this.update_id = null;
-            }
-            catch(e) {
-                this.update_id = null;
-            } finally {
-                this.update_id = null;
-            }
-        }
+        this.isLooping = false;
+        //~ if (this.update_id) {
+            //~ try {
+                //~ if (Mainloop.source_remove(this.update_id)) this.update_id = null;
+            //~ }
+            //~ catch(e) {
+                //~ this.update_id = null;
+            //~ } finally {
+                //~ this.update_id = null;
+            //~ }
+        //~ }
 
         this._setup_dir_monitor();
         if (this.currentPicture) {
             this.currentPicture.destroy();
         }
-        //~ if (this._photoFrame) {
-        this._photoFrame.destroy();
-        //~ }
+        if (this._photoFrame) {
+            this._photoFrame.destroy();
+        }
+        this.isLooping = true;
         this.setup_display();
     }
 
@@ -89,9 +92,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.dir_monitor_id = this.dir_monitor.connect('changed', Lang.bind(this, this.on_setting_changed));
     }
 
-    on_desklet_added_to_desktop(userEnabled) {
-        this.actor.reactive = true;
-    }
+    //~ on_desklet_added_to_desktop(userEnabled) {
+        //~ this.actor.reactive = true;
+    //~ }
 
     on_desklet_removed() {
         if (this.dir_monitor) {
@@ -101,16 +104,18 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         }
         this.dir_monitor_id = null;
 
-        if (this.update_id) {
-            try {
-                if (Mainloop.source_remove(this.update_id)) this.update_id = null;
-            }
-            catch(e) {
-                this.update_id = null;
-            } finally {
-                this.update_id = null;
-            }
-        }
+        this.isLooping = false;
+
+        //~ if (this.update_id) {
+            //~ try {
+                //~ if (Mainloop.source_remove(this.update_id)) this.update_id = null;
+            //~ }
+            //~ catch(e) {
+                //~ this.update_id = null;
+            //~ } finally {
+                //~ this.update_id = null;
+            //~ }
+        //~ }
     }
 
     _scan_dir(dir) {
@@ -142,25 +147,27 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this._bin.set_size(this.width, this.height);
 
         this._images = [];
-        this._photoFrame.set_child(this._bin);
-        this.setContent(this._photoFrame);
-
-        if (this.effect == 'black-and-white') {
-            let effect = new Clutter.DesaturateEffect();
-            this._bin.add_effect(effect);
-        } else if (this.effect == 'sepia') {
-            let color = new Clutter.Color();
-            color.from_hls(17.0, 0.59, 0.4);
-            let colorize_effect = new Clutter.ColorizeEffect(color);
-            let contrast_effect = new Clutter.BrightnessContrastEffect();
-            let desaturate_effect = new Clutter.DesaturateEffect();
-            desaturate_effect.set_factor(0.41);
-            contrast_effect.set_brightness_full(0.1, 0.1, 0.1);
-            contrast_effect.set_contrast_full(0.1, 0.1, 0.1);
-            this._bin.add_effect(colorize_effect);
-            this._bin.add_effect(contrast_effect);
-            this._bin.add_effect(desaturate_effect);
+        if (this._photoFrame) {
+            this._photoFrame.set_child(this._bin);
+            this.setContent(this._photoFrame);
         }
+
+        //~ if (this.effect == 'black-and-white') {
+            //~ let effect = new Clutter.DesaturateEffect();
+            //~ this._bin.add_effect(effect);
+        //~ } else if (this.effect == 'sepia') {
+            //~ let color = new Clutter.Color();
+            //~ color.from_hls(17.0, 0.59, 0.4);
+            //~ let colorize_effect = new Clutter.ColorizeEffect(color);
+            //~ let contrast_effect = new Clutter.BrightnessContrastEffect();
+            //~ let desaturate_effect = new Clutter.DesaturateEffect();
+            //~ desaturate_effect.set_factor(0.41);
+            //~ contrast_effect.set_brightness_full(0.1, 0.1, 0.1);
+            //~ contrast_effect.set_contrast_full(0.1, 0.1, 0.1);
+            //~ this._bin.add_effect(colorize_effect);
+            //~ this._bin.add_effect(contrast_effect);
+            //~ this._bin.add_effect(desaturate_effect);
+        //~ }
 
         if (this.dir_file.query_exists(null)) {
             this._scan_dir(this.dir);
@@ -174,6 +181,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     _update_loop() {
+        if (!this.isLooping) return false;
         this._update();
         //~ if (this.update_id) {
             //~ try {
@@ -190,7 +198,10 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         //~ } else {
         //~     this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
         //~ }
-        this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+        if (this.isLooping)
+            this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+        else
+            return false;
     }
 
     _size_pic(image) {
@@ -253,21 +264,25 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             let _transition = "easeNone";
             if (this.fade_effect != "None")
                 _transition = "easeOut"+this.fade_effect;
-            Tweener.addTween(this._bin, {
-                opacity: 255, //0,
-                time: 0, //this.fade_delay,
-                transition: _transition, //'easeInSine',
-                onComplete: () => {
-                    this._bin.set_child(this.currentPicture);
-                    Tweener.addTween(this._bin, {
-                        opacity: 0, //255,
-                        time: this.fade_delay,
-                        transition: _transition, //'easeInSine',
-                    });
-                }
-            });
+            if (this._bin) {
+                Tweener.addTween(this._bin, {
+                    opacity: 255, //0,
+                    time: 0, //this.fade_delay,
+                    transition: _transition, //'easeInSine',
+                    onComplete: () => {
+                        if (this._bin) {
+                            this._bin.set_child(this.currentPicture);
+                            Tweener.addTween(this._bin, {
+                                opacity: 0, //255,
+                                time: this.fade_delay,
+                                transition: _transition, //'easeInSine',
+                            });
+                        }
+                    }
+                });
+            }
         } else {
-            this._bin.set_child(this.currentPicture);
+            if (this._bin) this._bin.set_child(this.currentPicture);
         }
         //~ if (old_pic) {
             //~ old_pic.destroy();

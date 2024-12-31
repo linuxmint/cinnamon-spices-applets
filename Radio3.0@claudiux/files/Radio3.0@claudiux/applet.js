@@ -5584,8 +5584,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
     this.show_desklet = false;
     this.desklet_is_activated = false;
-    const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux"
-    spawnCommandLineAsync("rm -rf "+desklet_path);
+    //~ const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux"
+    //~ spawnCommandLineAsync("rm -rf "+desklet_path);
   }
 
   setup_desklet() {
