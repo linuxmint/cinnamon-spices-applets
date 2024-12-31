@@ -89,6 +89,10 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.dir_monitor_id = this.dir_monitor.connect('changed', Lang.bind(this, this.on_setting_changed));
     }
 
+    on_desklet_added_to_desktop(userEnabled) {
+        this.actor.reactive = true;
+    }
+
     on_desklet_removed() {
         if (this.dir_monitor) {
             //~ this.dir_monitor.disconnectAllSignals();
