@@ -1,4 +1,7 @@
-### v2.5.8~20241231
+### v2.5.10~20250101
+  * Better monitoring of files and directories.
+
+### v2.5.9~20241231
   * Album Art 3.0 becomes faster.
   * Bugfixes.
 

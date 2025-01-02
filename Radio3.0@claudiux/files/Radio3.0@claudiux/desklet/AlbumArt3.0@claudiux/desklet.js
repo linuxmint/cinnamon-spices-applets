@@ -1,4 +1,5 @@
 //"use strict";
+const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Desklet = imports.ui.desklet;
@@ -22,6 +23,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.update_id = null;
         this.old_image_path = null;
         this.isLooping = true;
+        this.dir_monitor_loop_is_active = true;
 
         this.dir = "file://"+GLib.get_home_dir()+"/.config/Radio3.0/song-art";
         this.shuffle = false;
@@ -45,16 +47,6 @@ class AlbumArtRadio30 extends Desklet.Desklet {
 
     on_setting_changed() {
         this.isLooping = false;
-        //~ if (this.update_id) {
-            //~ try {
-                //~ if (Mainloop.source_remove(this.update_id)) this.update_id = null;
-            //~ }
-            //~ catch(e) {
-                //~ this.update_id = null;
-            //~ } finally {
-                //~ this.update_id = null;
-            //~ }
-        //~ }
 
         this._setup_dir_monitor();
         if (this.currentPicture) {
@@ -68,54 +60,32 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     _setup_dir_monitor() {
-        if (this.dir_monitor_id && this.dir_monitor) {
-            this.dir_monitor.disconnect(this.dir_monitor_id);
-            this.dir_monitor_id = null;
-        }
-
-        /* The widget used to choose the folder the images are drawn from
-           was changed to use a URI instead of a path. This check is just
-           to ensure that people upgrading cinnamon versions will get the
-           existing path converted to a proper URI */
-        if (this.dir.indexOf('://') === -1) {
-            let file = Gio.file_new_for_path(this.dir);
-            this.dir = file.get_uri();
-        }
-
-        if (this.dir === ' ') {
-            let file = Gio.file_new_for_path(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES));
-            this.dir = file.get_uri();
-        }
+        if (this.dir_monitor_id != null) return;
 
         this.dir_file = Gio.file_new_for_uri(this.dir);
         this.dir_monitor = this.dir_file.monitor_directory(0, null);
-        this.dir_monitor_id = this.dir_monitor.connect('changed', Lang.bind(this, this.on_setting_changed));
+        this.dir_monitor_id = this.dir_monitor.connect('changed', Lang.bind(this, this.dir_monitor_loop));
     }
 
-    //~ on_desklet_added_to_desktop(userEnabled) {
-        //~ this.actor.reactive = true;
-    //~ }
+    dir_monitor_loop() {
+        if (!this.dir_monitor_loop_is_active) {
+            this.dir_monitor_id = null;
+            return false;
+        }
+        this.on_setting_changed();
+        return true;
+    }
 
     on_desklet_removed() {
-        if (this.dir_monitor) {
+        //~ if (this.dir_monitor) {
             //~ this.dir_monitor.disconnectAllSignals();
-            this.dir_monitor.disconnect(this.dir_monitor_id);
+            //~ this.dir_monitor.disconnect(this.dir_monitor_id);
             //~ this.dir_monitor_id = null;
-        }
-        this.dir_monitor_id = null;
+        //~ }
+        //~ this.dir_monitor_id = null;
 
         this.isLooping = false;
-
-        //~ if (this.update_id) {
-            //~ try {
-                //~ if (Mainloop.source_remove(this.update_id)) this.update_id = null;
-            //~ }
-            //~ catch(e) {
-                //~ this.update_id = null;
-            //~ } finally {
-                //~ this.update_id = null;
-            //~ }
-        //~ }
+        this.dir_monitor_loop_is_active = false;
     }
 
     _scan_dir(dir) {
@@ -152,23 +122,6 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             this.setContent(this._photoFrame);
         }
 
-        //~ if (this.effect == 'black-and-white') {
-            //~ let effect = new Clutter.DesaturateEffect();
-            //~ this._bin.add_effect(effect);
-        //~ } else if (this.effect == 'sepia') {
-            //~ let color = new Clutter.Color();
-            //~ color.from_hls(17.0, 0.59, 0.4);
-            //~ let colorize_effect = new Clutter.ColorizeEffect(color);
-            //~ let contrast_effect = new Clutter.BrightnessContrastEffect();
-            //~ let desaturate_effect = new Clutter.DesaturateEffect();
-            //~ desaturate_effect.set_factor(0.41);
-            //~ contrast_effect.set_brightness_full(0.1, 0.1, 0.1);
-            //~ contrast_effect.set_contrast_full(0.1, 0.1, 0.1);
-            //~ this._bin.add_effect(colorize_effect);
-            //~ this._bin.add_effect(contrast_effect);
-            //~ this._bin.add_effect(desaturate_effect);
-        //~ }
-
         if (this.dir_file.query_exists(null)) {
             this._scan_dir(this.dir);
 
@@ -183,21 +136,6 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     _update_loop() {
         if (!this.isLooping) return false;
         this._update();
-        //~ if (this.update_id) {
-            //~ try {
-                //~ if (Mainloop.source_remove(this.update_id)) this.update_id = null;
-            //~ }
-            //~ catch(e) {
-                //~ // Nothing to do.
-            //~ } finally {
-                //~ this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
-            //~ }
-        //~ }
-        //~ if (this.update_id) {
-        //~     return true
-        //~ } else {
-        //~     this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
-        //~ }
         if (this.isLooping)
             this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
         else
@@ -223,8 +161,6 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     _update() {
-        //~ this._show_or_hide();
-
         if (this.updateInProgress) {
             return;
         }
@@ -294,7 +230,6 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     on_desklet_clicked(event) {
         try {
             if (event.get_button() == 1) {
-                //~ this._update();
                 this.on_setting_changed();
             } else if (event.get_button() == 2) {
                 Util.spawn(['xdg-open', this.currentPicture.path]);
@@ -316,15 +251,6 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             return null;
         }
     }
-
-    //~ _show_or_hide() {
-        //~ if (GLib.file_test(GLib.get_home_dir()+"/.local/share/cinnamon/desklets/AlbumArt3.0@claudiux/HIDDEN", GLib.FileTest.EXISTS)) {
-            //~ if (this.actor) this.actor.hide();
-        //~ }
-        //~ else {
-            //~ if (this.actor) this.actor.show();
-        //~ }
-    //~ }
 }
 
 function main(metadata, desklet_id) {

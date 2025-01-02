@@ -1046,6 +1046,12 @@ var R3PopupMenu = class R3PopupMenu extends PopupMenu {
     if (!sourceActor._applet_context_menu.isOpen)
       sourceActor.actor.change_style_pseudo_class("checked", open);
   }
+
+  destroy() {
+    this._signals.disconnectAllSignals();
+    //~ this.actor.destroy();
+    this.emit('destroy');
+  }
 }
 
 class WebRadioReceiverAndRecorder extends TextIconApplet {
@@ -1268,6 +1274,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Recordings Directory monitor:
     this.recMonitor = null;
     this.recMonitorId = null;
+
+    // Other monitors:
+    this.r30stopMonitor = null;
+    this.r30stopMonitorId = null;
+    this.r30nextMonitor = null;
+    this.r30nextMonitorId = null;
+    this.r30previousMonitor = null;
+    this.r30previousMonitorId = null;
 
     // Run all monitors:
     this.on_network_monitoring_changed();
@@ -1927,11 +1941,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.r30stopMonitor == null) return;
 
     try {
-      if (this.r30stopMonitorId > 0) {
+      if (this.r30stopMonitorId != null) {
         //this.r30stopMonitor.cancel();
         this.r30stopMonitor.disconnect(this.r30stopMonitorId);
         this.r30stopMonitor = null;
-        this.r30stopMonitorId = 0;
+        this.r30stopMonitorId = null;
       }
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30STOP), e)
@@ -1942,11 +1956,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.r30previousMonitor == null) return;
 
     try {
-      if (this.r30previousMonitorId > 0) {
+      if (this.r30previousMonitorId != null) {
         //this.r30previousMonitor.cancel();
         this.r30previousMonitor.disconnect(this.r30previousMonitorId);
         this.r30previousMonitor = null;
-        this.r30previousMonitorId = 0;
+        this.r30previousMonitorId = null;
       }
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30PREVIOUS), e)
@@ -1957,11 +1971,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.r30nextMonitor == null) return;
 
     try {
-      if (this.r30nextMonitorId > 0) {
+      if (this.r30nextMonitorId != null) {
         //this.r30nextMonitor.cancel();
         this.r30nextMonitor.disconnect(this.r30nextMonitorId);
         this.r30nextMonitor = null;
-        this.r30nextMonitorId = 0;
+        this.r30nextMonitorId = null;
       }
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30NEXT), e)
@@ -1969,6 +1983,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   _on_r30stop_changed() {
+    if (this.actor.get_stage() == null) return;
     let file = file_new_for_path(R30STOP);
     if (file.query_exists(null)) {
       this.stop_mpv();
@@ -1976,6 +1991,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   _on_mpv_title_changed() {
+    if (this.actor.get_stage() == null) return;
     //log("_on_mpv_title_changed: " + MPV_TITLE_FILE);
 
     let title = to_string(file_get_contents(MPV_TITLE_FILE)[1]).trim();
@@ -2086,6 +2102,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   _on_jobs_dir_changed() {
+    if (this.actor.get_stage() == null) return;
     //log("_on_jobs_dir_changed: " + JOBS_DIR);
 
     let dir = file_new_for_path(JOBS_DIR);
