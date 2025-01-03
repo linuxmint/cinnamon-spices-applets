@@ -1,3 +1,7 @@
+### v7.4.1~20250103
+  * Fixes #6726: SMPlayer no longer freezes
+  * Displays the thumbnail of the video viewed with SMPlayer
+
 ### v7.4.0~20241230
   * Better compatibility with Cinnamon 6.4.
   * Make optional suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
