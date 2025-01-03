@@ -14,8 +14,8 @@ const CMD_VBOX = "virtualbox"
 const CMD_VBOXMANAGE = "vboxmanage"
 
 const CMD_VBOX_VM = CMD_VBOXMANAGE + " startvm "
-const CMD_VBOX_LIST = CMD_VBOXMANAGE + " list vms"
-const CMD_VBOX_LIST_RUN = CMD_VBOXMANAGE + " list runningvms"
+const CMD_VBOX_LIST = CMD_VBOXMANAGE + " list --sorted vms"
+const CMD_VBOX_LIST_RUN = CMD_VBOXMANAGE + " list --sorted runningvms"
 const CMD_VBOX_VERSION = CMD_VBOXMANAGE + " -v"
 var VBOX_ISRUNNING = "0"
 
@@ -71,12 +71,12 @@ const stringFromUTF8Array = function(data) {
 }
 
 
-function MyApplet(metadata, orientation, panelHeight, instanceId) {
+function VBoxLauncher(metadata, orientation, panelHeight, instanceId) {
   this.settings = new Settings.AppletSettings(this, UUID, instanceId)
   this._init(orientation, panelHeight, instanceId)
 }
 
-MyApplet.prototype = {
+VBoxLauncher.prototype = {
   __proto__: Applet.IconApplet.prototype
 
 ,  _init: function(orientation, panelHeight, instanceId) {
@@ -325,9 +325,14 @@ MyApplet.prototype = {
 ,  onSwitchShowHeadless: function() {
     this.updateMenu() // Whether or not to show headless modes
   }
+,  on_applet_removed_from_panel: function(event) {
+    if (this.menu.isOpen)
+      this.menu.close();
+    this.menu.removeAll();
+  }
 
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-  return new MyApplet(metadata, orientation, panelHeight, instanceId)
+  return new VBoxLauncher(metadata, orientation, panelHeight, instanceId)
 }
