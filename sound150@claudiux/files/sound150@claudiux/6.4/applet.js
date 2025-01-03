@@ -216,8 +216,8 @@ class ControlButton {
             if (this.tooltip) this.tooltip.destroy();
             //~ this.button.remove_all_children();
             if (this.button) {
-                this.actor.remove_actor(this.button);
                 this.button.disconnect("clicked");
+                this.actor.remove_actor(this.button);
                 this.button.destroy();
             }
             this.actor.destroy();
