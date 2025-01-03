@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: sound150@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-03 17:18+0100\n"
-"PO-Revision-Date: 2024-06-18 15:56+0200\n"
+"POT-Creation-Date: 2024-12-30 20:20+0100\n"
+"PO-Revision-Date: 2025-01-03 15:23+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:132 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:140 3.4/applet.js:65
@@ -181,10 +181,10 @@ msgstr "Dispositivo di ingresso"
 msgid "Easy Effects"
 msgstr "Effetti semplici"
 
-#. 6.2/applet.js:2014 5.4/applet.js:1986 6.4/applet.js:2045
-#, fuzzy
+
+#. 6.2/applet.js:2014 5.4/applet.js:1986 6.4/applet.js:2017
 msgid "Pulse Effects"
-msgstr "Effetti semplici"
+msgstr "Effetti Pulse"
 
 #. 6.2/applet.js:2059 5.4/applet.js:2030 6.4/applet.js:2084
 #, javascript-format
@@ -237,9 +237,8 @@ msgid "Videos"
 msgstr ""
 
 #. metadata.json->name
-#, fuzzy
 msgid "Enhanced Sound applet"
-msgstr "Applet audio migliorata"
+msgstr "Applet audio avanzato"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -575,25 +574,23 @@ msgstr "Controllo del volume massimo"
 
 #. 6.2->settings-schema.json->openSystemSoundSettings->description
 #. 6.4->settings-schema.json->openSystemSoundSettings->description
-#, fuzzy
 msgid "System Sound Settings"
-msgstr "Impostazioni del Suono"
+msgstr "Impostazioni audio di sistema"
 
 #. 6.2->settings-schema.json->maxVolume->description
 #. 6.4->settings-schema.json->maxVolume->description
-#, fuzzy
 msgid "Maximum volume (%)"
-msgstr "Controllo del volume massimo"
+msgstr "Volume massimo (%)"
 
 #. 6.2->settings-schema.json->startupVolume->description
 #. 6.4->settings-schema.json->startupVolume->description
 msgid "Volume at start-up (%)"
-msgstr ""
+msgstr "Volume all'avvio (%)"
 
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr ""
+msgstr "Il valore -1 significa \"Nessun cambiamento\""
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -749,9 +746,8 @@ msgstr "Regola il colore dell'icona sul volume"
 
 #. 6.2->settings-schema.json->color0_100->description
 #. 6.4->settings-schema.json->color0_100->description
-#, fuzzy
 msgid "Icon color: 0%-100%"
-msgstr "Colore icona: 101%-115%"
+msgstr "Colore icona: 0%-100%"
 
 #. 6.2->settings-schema.json->color101_115->description
 #. 5.4->settings-schema.json->color101_115->description
@@ -974,7 +970,7 @@ msgstr ""
 
 #. 6.4->settings-schema.json->muteSoundOnClosing->description
 msgid "Mute sound on closing"
-msgstr ""
+msgstr "Disattiva l'audio in chiusura"
 
 #. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
 msgid ""
@@ -983,10 +979,14 @@ msgid ""
 "applet's icon.\n"
 "It is NOT recommended to check this box."
 msgstr ""
+"Se noti un rumore sgradevole alla chiusura, seleziona questa casella.\n"
+"Dovrai ripristinare il suono all'avvio, cliccando con il tasto centrale "
+"sull'icona di questa applet.\n"
+"NON è consigliabile selezionare questa casella."
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys osd"
-msgstr ""
+msgstr "Se mostrare o meno i tasti multimediali OSD"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"

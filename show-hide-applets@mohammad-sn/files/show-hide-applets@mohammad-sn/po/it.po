@@ -9,25 +9,23 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-20 06:07+0100\n"
-"PO-Revision-Date: 2022-06-03 19:09+0200\n"
+"PO-Revision-Date: 2025-01-03 15:21+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:60 applet.js:231
-#, fuzzy
 msgid "Autohide ON"
-msgstr "Nascondi automaticamente"
+msgstr "Auto-nascondimento ON"
 
 #. applet.js:62 applet.js:233
-#, fuzzy
 msgid "Autohide OFF"
-msgstr "Nascondi automaticamente"
+msgstr "Auto-nascondimento OFF"
 
 #. applet.js:82
 msgid "Panel Edit mode"
@@ -59,18 +57,19 @@ msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Impostazioni di show-hide-applets@mohammad-sn"
 
 #. settings-schema.json->autohide->tooltip
-#, fuzzy
 msgid ""
 "Check it if you want to hide applets automatically, unless you should click "
 "on applet to do so.\n"
 "Its status can be changed by middle-clicking on this applet."
 msgstr ""
-"seleziona se vuoi nascondere automaticamente le applet, a meno che tu non "
-"faccia clic sull'applet per farlo"
+"Selezionalo se vuoi nascondere automaticamente le applet, a meno che tu non "
+"voglia cliccare sull'applet per farlo.\n"
+"Il suo stato può essere modificato cliccando con il tasto centrale su "
+"questa applet."
 
 #. settings-schema.json->statusintooltip->description
 msgid "Show Autohide status in tooltip"
-msgstr ""
+msgstr "Mostra lo stato del l'auto-nascondimento nel tooltip"
 
 #. settings-schema.json->disablestarttimeautohide->description
 msgid "Disable start time autohide"
@@ -95,7 +94,7 @@ msgstr "Attiva al passaggio del mouse"
 
 #. settings-schema.json->hoveractivates->tooltip
 msgid "show applets on mouse hover"
-msgstr "Mostra applet al passaggio del mouse"
+msgstr "mostra applet al passaggio del mouse"
 
 #. settings-schema.json->hoveractivateshide->description
 msgid "Hide on hovering again"

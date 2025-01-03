@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-09-05 17:31+0200\n"
+"PO-Revision-Date: 2025-01-03 15:05+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -197,7 +197,7 @@ msgstr "%s sarà il nome della tua applicazione"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Abilita tasti di scelta rapida"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -209,11 +209,13 @@ msgstr "Imposta tasto(i) di scelta rapida per mostrare il menù"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Menù alla posizione del mouse"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr ""
+"Mostra il menù accanto al cursore quando attivato tramite tasto di scelta "
+"rapida"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

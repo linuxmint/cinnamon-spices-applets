@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-06 20:39-0500\n"
-"PO-Revision-Date: 2024-07-25 10:03+0200\n"
+"PO-Revision-Date: 2025-01-03 14:48+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.0/applet.js:584 6.0/applet.js:584 6.4/applet.js:562
 msgid "all buttons"
@@ -241,18 +241,16 @@ msgid "Close others"
 msgstr "Chiudi altri"
 
 #. 4.0/applet.js:3754 6.0/applet.js:3754 6.4/applet.js:3723
-#, fuzzy
 msgid "Close other windows for application"
-msgstr "Mostra le miniature per tutte le finestre di un pool di applicazioni"
+msgstr "Chiudi le altre finestre per l'applicazione"
 
 #. 4.0/applet.js:3775 6.0/applet.js:3775 6.4/applet.js:3744
 msgid "Close all"
 msgstr "Chiudi tutto"
 
 #. 4.0/applet.js:3777 6.0/applet.js:3777 6.4/applet.js:3746
-#, fuzzy
 msgid "Close all windows for application"
-msgstr "Mostra le miniature per tutte le finestre di un pool di applicazioni"
+msgstr "Chiudi tutte le finestre per l'applicazione"
 
 #. 4.0/applet.js:3793 6.0/applet.js:3793 6.4/applet.js:3762
 msgid "Close"
@@ -2131,16 +2129,14 @@ msgstr "Cambia la piastrellatura delle finestre"
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle all window-list button windows"
-msgstr "Scorri le finestre dell'applicazione"
+msgstr "Scorri tutti i pulsanti dell'elenco delle finestre"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle grouped/pooled button windows"
-msgstr "Scorri le finestre dell'applicazione"
+msgstr "Scorri i pulsanti delle finestre raggruppate/in pool"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description

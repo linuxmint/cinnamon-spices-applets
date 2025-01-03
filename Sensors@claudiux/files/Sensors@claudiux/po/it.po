@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-29 14:28+0100\n"
-"PO-Revision-Date: 2024-07-05 10:25+0200\n"
+"PO-Revision-Date: 2025-01-03 15:03+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:218
@@ -74,24 +74,24 @@ msgid "⚙ General"
 msgstr "⚙ Generale"
 
 #. applet.js:1204
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Sensori di temperatura"
+msgstr "%s Sensori di temperatura"
 
 #. applet.js:1214
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Sensori delle ventole"
+msgstr "%s Sensori delle ventole"
 
 #. applet.js:1224
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Sensori di tensione"
+msgstr "%s Sensori di tensione"
 
 #. applet.js:1234
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Sensori di intrusione"
+msgstr "%s Sensori di intrusione"
 
 #. settings-schema.json->xsensors->description
 #. applet.js:1255
@@ -198,9 +198,8 @@ msgstr ""
 "con cambiamenti di colore quando un valore raggiunge o supera il suo limite."
 
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Temperatura"
+msgstr "⦿ Temperatura"
 
 #. settings-schema.json->page_Fans->title
 msgid "🤂 Fan"
@@ -395,47 +394,47 @@ msgstr "Dimensione carattere (% della dimensione standard)"
 
 #. settings-schema.json->vertical-align->options
 msgid "baseline"
-msgstr ""
+msgstr "baseline"
 
 #. settings-schema.json->vertical-align->options
 msgid "sub"
-msgstr ""
+msgstr "sub"
 
 #. settings-schema.json->vertical-align->options
 msgid "super"
-msgstr ""
+msgstr "super"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-top"
-msgstr ""
+msgstr "testo-sù"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-bottom"
-msgstr ""
+msgstr "testo-giù"
 
 #. settings-schema.json->vertical-align->options
 msgid "middle"
-msgstr ""
+msgstr "centrale"
 
 #. settings-schema.json->vertical-align->options
 msgid "top"
-msgstr ""
+msgstr "su"
 
 #. settings-schema.json->vertical-align->options
 msgid "bottom"
-msgstr ""
+msgstr "giù"
 
 #. settings-schema.json->vertical-align->options
 msgid "unset"
-msgstr ""
+msgstr "disattiva"
 
 #. settings-schema.json->vertical-align->options
 msgid "inherit"
-msgstr ""
+msgstr "eredita"
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Allineamento verticale"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
