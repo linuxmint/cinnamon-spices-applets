@@ -21,7 +21,7 @@ export interface SwissMeteoWarning {
 	/**
 	 * Unix timestamp in milliseconds
 	 */
-	validFrom: number;
+	validFrom?: number;
 	/**
 	 * Unix timestamp in milliseconds
 	 */
