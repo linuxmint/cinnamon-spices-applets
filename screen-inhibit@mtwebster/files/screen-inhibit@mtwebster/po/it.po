@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-01 18:55+0200\n"
-"PO-Revision-Date: 2024-07-05 11:01+0200\n"
+"PO-Revision-Date: 2025-01-03 15:18+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:21
 msgid "Currently preventing screensaver"
@@ -48,7 +48,7 @@ msgstr "Inibitore Screensaver"
 
 #. settings-schema.json->pGeneral->title
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #. settings-schema.json->pIcons->title
 #. settings-schema.json->sectionIcons->title
@@ -65,9 +65,8 @@ msgid "Startup"
 msgstr "Avvio"
 
 #. settings-schema.json->sectionDurationOrEndTime->title
-#, fuzzy
 msgid "Duration or End Time of screen saver inhibition"
-msgstr "Imposta l'associazione dei tasti per l'inibizione dello screensaver"
+msgstr "Durata o ora di fine dell'inibizione dello screensaver"
 
 #. settings-schema.json->sectionBlocking->title
 msgid "Way to block the screensaver"
@@ -75,27 +74,27 @@ msgstr "Modo per bloccare lo screensaver"
 
 #. settings-schema.json->end-timechooser->description
 msgid "Time"
-msgstr ""
+msgstr "Orario"
 
 #. settings-schema.json->end-timechooser->tooltip
 msgid "Seconds will be ignored."
-msgstr ""
+msgstr "I secondi saranno ignorati."
 
 #. settings-schema.json->end-type->description
 msgid "The time shown above is"
-msgstr ""
+msgstr "L'ora indicata sopra è"
 
 #. settings-schema.json->end-type->options
 msgid "to be disregarded"
-msgstr ""
+msgstr "da ignorare"
 
 #. settings-schema.json->end-type->options
 msgid "the inhibit duration"
-msgstr ""
+msgstr "la durata dell'inibizione"
 
 #. settings-schema.json->end-type->options
 msgid "the inhibit end time"
-msgstr ""
+msgstr "il tempo di fine inibizione"
 
 #. settings-schema.json->off-icon->description
 msgid "Power management allowed icon:"
@@ -121,9 +120,8 @@ msgid "Set the keybinding for screensaver inhibit"
 msgstr "Imposta l'associazione dei tasti per l'inibizione dello screensaver"
 
 #. settings-schema.json->seconds-after-startup->description
-#, fuzzy
 msgid "Number of seconds before screensaver inhibition"
-msgstr "Imposta l'associazione dei tasti per l'inibizione dello screensaver"
+msgstr "Numero di secondi prima dell'inibizione dello screensaver"
 
 #. settings-schema.json->locklabel->description
 msgid "(Avoid using aggressive ways, if possible.)"

@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-27 21:38+0200\n"
-"PO-Revision-Date: 2022-06-03 16:44+0200\n"
+"PO-Revision-Date: 2025-01-03 15:10+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:438
 msgid "Network interfaces"
@@ -94,89 +94,83 @@ msgstr "Grande"
 
 #. applet.js:796
 msgid " TiB"
-msgstr ""
+msgstr " TiB"
 
 #. applet.js:799
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #. applet.js:802
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #. applet.js:805
 msgid " kiB"
-msgstr ""
+msgstr " kiB"
 
 #. applet.js:807
 msgid "   B"
-msgstr ""
+msgstr "   B"
 
 #. applet.js:810
 msgid " TB"
-msgstr ""
+msgstr " TB"
 
 #. applet.js:813
-#, fuzzy
 msgid " GB"
-msgstr "Interfaccia Grafica"
+msgstr " GB"
 
 #. applet.js:816
-#, fuzzy
 msgid " MB"
-msgstr "MB"
+msgstr " MB"
 
 #. applet.js:819
 msgid " kB"
-msgstr ""
+msgstr " kB"
 
 #. applet.js:821
 msgid "  B"
-msgstr ""
+msgstr "  B"
 
 #. applet.js:831
 msgid " Tib"
-msgstr ""
+msgstr " Tib"
 
 #. applet.js:834
 msgid " Gib"
-msgstr ""
+msgstr " Gib"
 
 #. applet.js:837
 msgid " Mib"
-msgstr ""
+msgstr " Mib"
 
 #. applet.js:840
 msgid " kib"
-msgstr ""
+msgstr " kib"
 
 #. applet.js:842
 msgid "   b"
-msgstr ""
+msgstr "   b"
 
 #. applet.js:845
-#, fuzzy
 msgid " Tb"
-msgstr "b"
+msgstr " Tb"
 
 #. applet.js:848
-#, fuzzy
 msgid " Gb"
-msgstr "b"
+msgstr " Gb"
 
 #. applet.js:851
-#, fuzzy
 msgid " Mb"
-msgstr "b"
+msgstr " Mb"
 
 #. applet.js:854
-#, fuzzy
 msgid " kb"
-msgstr "b"
+msgstr " kb"
 
 #. applet.js:856
 msgid "  b"
-msgstr ""
+msgstr "  b"
 
 #. appletGui.js:480
 msgid "Total download:"
@@ -232,22 +226,23 @@ msgstr "Unità di dati di base mostrata nel pannello"
 
 #. settings-schema.json->is_binary->description
 msgid "Decimal or binary"
-msgstr ""
+msgstr "Decimale o binario"
 
 #. settings-schema.json->is_binary->options
-#, fuzzy
 msgid "Decimal"
-msgstr "Posizioni decimali"
+msgstr "Decimale"
 
 #. settings-schema.json->is_binary->options
 msgid "Binary"
-msgstr ""
+msgstr "Binario"
 
 #. settings-schema.json->is_binary->tooltip
 msgid ""
 "Decimal: k, M, G, T\n"
 "Binary: ki, Mi, Gi, Ti"
 msgstr ""
+"Decimali: k, M, G, T\n"
+"Binario: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
@@ -532,7 +527,7 @@ msgstr ""
 
 #. settings-schema.json->list_connections_command->description
 msgid "Command "
-msgstr "Comando"
+msgstr "Comando "
 
 #. settings-schema.json->list_connections_command->tooltip
 msgid "A command used to list current Internet connections"
