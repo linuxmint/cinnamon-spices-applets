@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-06 01:02+0200\n"
-"PO-Revision-Date: 2023-03-29 17:08+0200\n"
+"PO-Revision-Date: 2025-01-03 15:35+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:45
 msgid "Applet"
@@ -73,22 +73,19 @@ msgstr "Ricarica Estensione:"
 
 #. applet.js:217
 msgid "--- Settings for ---"
-msgstr ""
+msgstr "--- Impostazioni di ---"
 
 #. applet.js:223
-#, fuzzy
 msgid "Applet:"
-msgstr "Applet"
+msgstr "Applet:"
 
 #. applet.js:238
-#, fuzzy
 msgid "Desklet:"
-msgstr "Desklet"
+msgstr "Desklet:"
 
 #. applet.js:253
-#, fuzzy
 msgid "Extension:"
-msgstr "Estensione"
+msgstr "Estensione:"
 
 #. applet.js:268
 msgid "--- View Code ---"
@@ -111,12 +108,11 @@ msgid "Xsession"
 msgstr "Xsession"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart, access source code and configure your Spices (Applets, Desklets, "
 "Extensions). View the contents of your .xsession-errors file in real time. "
 "Restart Cinnamon."
 msgstr ""
-"Consente di riavviare o aprire il codice sorgente delle Spice (applet, "
-"desklet, estensioni), mostrare in tempo reale il contenuto del file ."
-"xsession-errors e riavviare Cinnamon."
+"Riavvia, accedi al codice sorgente e configura le tue Spice (Applet, "
+"Desklet, Estensioni). Visualizza il contenuto del tuo file .xsession-"
+"errors in tempo reale. Riavvia Cinnamon."

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-12 22:53+0100\n"
-"PO-Revision-Date: 2024-06-18 14:56+0200\n"
+"PO-Revision-Date: 2025-01-03 14:59+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:238
 msgid "unassigned"
-msgstr ""
+msgstr "non assegnato"
 
 #. applet.js:336
 msgid "This is your own list of Categories and Radio Stations."
@@ -444,9 +444,8 @@ msgid "Pulse Effects"
 msgstr "Effetti Pulse"
 
 #. applet.js:4924
-#, fuzzy
 msgid "Easy Effects"
-msgstr "Effetti Pulse"
+msgstr "Effetti semplici"
 
 #. applet.js:4943
 msgid "Radio ON at startup"
@@ -459,7 +458,7 @@ msgstr "Mostra Logo Stazione"
 #. settings-schema.json->desklet-show-on-desktop->description
 #. applet.js:4972
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Mostra la copertina dell'album sul desktop"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:4987
@@ -524,9 +523,8 @@ msgid "%s kbps"
 msgstr "%s kbps"
 
 #. desklet/AlbumArt3.0@claudiux/desklet.js:39
-#, fuzzy
 msgid "Radio3.0 Album Art"
-msgstr "Radio3.0"
+msgstr "Copertina Album Radio3.0"
 
 #. lib/checkDependencies.js:397
 #, javascript-format
@@ -727,7 +725,7 @@ msgstr "Aggiorna questo elenco stazioni"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Solo per gli utenti di Radio++"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -789,11 +787,11 @@ msgstr "Icona"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
-msgstr ""
+msgstr "Solo su pannelli orizzontali"
 
 #. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
 msgid "Album Art desklet"
-msgstr ""
+msgstr "Desklet Copertina Album"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -973,7 +971,7 @@ msgstr "%"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "Importa le tue stazioni da Radio++"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -3130,111 +3128,109 @@ msgid "Remove selected items"
 msgstr "Rimuovi elementi selezionati"
 
 #. settings-schema.json->horizontal-show-name->description
-#, fuzzy
 msgid "Display radio name"
-msgstr "Mostra Logo Stazione"
+msgstr "Mostra nome radio"
 
 #. settings-schema.json->horizontal-show-title->description
-#, fuzzy
 msgid "Display title"
-msgstr "Mostra Logo Stazione"
+msgstr "Mostra titolo"
 
 #. settings-schema.json->horizontal-max-title-length->description
 msgid "Maximum title length"
-msgstr ""
+msgstr "Lunghezza massima del titolo"
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
-msgstr ""
+msgstr "0 significa nessun massimo"
 
 #. settings-schema.json->desklet-activate-button->description
 msgid "Activate desklet displaying the Radio3.0 Album Art"
-msgstr ""
+msgstr "Attiva il desklet che visualizza la copertina dell'album Radio3.0"
 
 #. settings-schema.json->desklet-activated-label->description
 msgid "The desklet displaying the Radio3.0 Album Art is activated"
-msgstr ""
+msgstr "Il desklet che mostra la copertina dell'album di Radio3.0 è attivo"
 
 #. settings-schema.json->desklet-open-settings-button->description
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Impostazioni desklet copertina album"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
-msgstr ""
+msgstr "Copertina dell'album per Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
 msgid "A digital photo frame desklet to display the Radio3.0 album art"
 msgstr ""
+"Una cornice digitale desklet per esporre la copertina dell'album Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
-msgstr ""
+msgstr "Altezza"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
 msgid "pixels"
-msgstr ""
+msgstr "pixels"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
-msgstr ""
+msgstr "Larghezza"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. effect->description
 msgid "Fade"
-msgstr ""
+msgstr "Dissolvenza"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
-#, fuzzy
 msgid "None"
-msgstr "(Nessuno)"
+msgstr "Nessuna"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quad"
-msgstr ""
+msgstr "Quad"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Cubic"
-msgstr ""
+msgstr "Cubic"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quart"
-msgstr ""
+msgstr "Quart"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quint"
-msgstr ""
+msgstr "Quint"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Sine"
-msgstr ""
+msgstr "Sine"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Expo"
-msgstr ""
+msgstr "Expo"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Circ"
-msgstr ""
+msgstr "Circ"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Elastic"
-msgstr ""
+msgstr "Elastico"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Back"
-msgstr ""
+msgstr "Indietro"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Bounce"
-msgstr ""
+msgstr "Rimbalzo"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. delay->description
 msgid "Fade delay"
-msgstr ""
+msgstr "Ritardo dissolvenza"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
 msgid "0 means no fade"
-msgstr ""
+msgstr "0 significa nessuna dissolvenza"
