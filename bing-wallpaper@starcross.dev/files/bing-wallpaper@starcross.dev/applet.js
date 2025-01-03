@@ -5,6 +5,8 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
+const PopupMenu = imports.ui.popupMenu;
+const St = imports.gi.St;
 
 const logging = false;
 
@@ -45,9 +47,18 @@ BingWallpaperApplet.prototype = {
         this.wallpaperPath = `${this.wallpaperDir}/BingWallpaper.jpg`;
         this.metaDataPath = `${this.wallpaperDir}/meta.json`;
 
+        let refreshBg = new PopupMenu.PopupIconMenuItem(_("Refresh Now"), "view-refresh", St.IconType.SYMBOLIC);
+        refreshBg.connect('activate', Lang.bind(this, function() {
+            this.forceReload = true;
+            this._refresh()
+        }));
+        this._applet_context_menu.addMenuItem(refreshBg);
+
         // Begin refresh loop
         this._refresh();
     },
+
+    forceReload: false,
 
     _refresh: function () {
         log(`Beginning refresh`);
@@ -100,7 +111,7 @@ BingWallpaperApplet.prototype = {
             const end_date = start_date.add_days(1);
             const now = GLib.DateTime.new_now_utc();
 
-            if (now.to_unix() < end_date.to_unix()) {
+            if (now.to_unix() < end_date.to_unix() && !this.forceReload) {
                 log('metadata up to date');
 
                 // Look for image file, check this is up to date
@@ -111,7 +122,6 @@ BingWallpaperApplet.prototype = {
                     let image_file_info = image_file.query_info('*', Gio.FileQueryInfoFlags.NONE, null);
                     let image_file_size = image_file_info.get_size();
                     let image_file_mod_secs = image_file_info.get_modification_time().tv_sec;
-
                     if ((image_file_mod_secs > end_date.to_unix()) || !image_file_size) { // Is the image old, or empty?
                         this._downloadImage();
 
@@ -126,7 +136,8 @@ BingWallpaperApplet.prototype = {
 
             }
             else {
-                log('metadata is old, requesting new...');
+                log(this.forceReload ? 'force reload, requesting new...' : 'metadata is old, requesting new...');
+                this.forceReload = false;
                 this._downloadMetaData();
             }
 
@@ -140,7 +151,7 @@ BingWallpaperApplet.prototype = {
 
     _downloadMetaData: function () {
         const process_result = data => {
-            
+
             // Write to meta data file
             let gFile = Gio.file_new_for_path(this.metaDataPath);
             let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
@@ -157,7 +168,7 @@ BingWallpaperApplet.prototype = {
             this._downloadImage();
 
         };
-            
+
         // Retrieve json metadata, either from local file or remote
         let request = Soup.Message.new('GET', `${bingHost}${bingRequestPath}`);
         if (Soup.MAJOR_VERSION === 2) {
@@ -168,7 +179,7 @@ BingWallpaperApplet.prototype = {
                     log(`Failed to acquire image metadata (${message.status_code})`);
                     this._setTimeout(60)  // Try again
                 }
-                
+
             });
         } else { //version 3
             _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (_httpSession, message) => {
