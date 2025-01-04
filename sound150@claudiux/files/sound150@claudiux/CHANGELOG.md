@@ -1,3 +1,6 @@
+### v7.4.3~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+
 ### v7.4.2~20250104
   * Fixes #6728: Corrects a regression in Cinnamon 6.2.
   * Closes menu before restarting.
