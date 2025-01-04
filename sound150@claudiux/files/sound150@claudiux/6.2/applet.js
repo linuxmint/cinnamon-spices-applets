@@ -236,7 +236,6 @@ class ControlButton {
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
         const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
-        applet.showOSD = applet.showOSDonStartup;
         super(startLevel);
         this.oldValue = startLevel;
         this.applet = applet;
@@ -360,7 +359,6 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         if (this.applet.showOSD && Math.round(volume/this.applet._volumeNorm * 100) != Math.round(this.oldValue)) {
             Main.osdWindowManager.show(-1, icon, ""+Math.round(volume/this.applet._volumeNorm * 100), null);
         }
-
 
         if (this.stream.is_muted !== muted)
             this.stream.change_is_muted(muted);
@@ -1820,6 +1818,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.title_text = "";
 
+        this.startingUp = true;
+
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.settings.bind("muteSoundOnClosing", "muteSoundOnClosing");
         this.settings.bind("startupVolume", "startupVolume");
@@ -1827,7 +1827,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("isSetAmplificationPresent", "isSetAmplificationPresent");
         this.settings.bind("isOpenSoundSettingsPresent", "isOpenSoundSettingsPresent");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
-        this.showOSD = this.showOSDonStartup;
         this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
         this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
@@ -1891,7 +1890,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.old_volume = this.volume;
         this.settings.setValue("showMediaKeysOSD", global.settings.get_string(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", this.on_showMediaKeysOSD_changed);
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this.on_showMediaKeysOSD_changed();
 
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
@@ -2103,6 +2102,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_showMediaKeysOSD_changed() {
+        // Security:
+        let available = ["disabled", "small", "medium", "large"]; // Available values.
+        if (available.indexOf(this.showMediaKeysOSD) === -1) // When this.showMediaKeysOSD isn't an available value...
+            this.showMediaKeysOSD = "medium"; // ...sets the default value.
+
         global.settings.set_string(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
     }
 
@@ -2324,7 +2328,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-		this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this.startingUp = true;
         if (this._playerctl)
             kill_playerctld();
         //~ logDebug("on_applet_added_to_panel()");
@@ -2356,7 +2360,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this.color0_100 = color;
 
         this._iconLooping = true;
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+
         this._on_sound_settings_change();
 
         this._loopArtId = null;
@@ -2364,14 +2368,21 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this));
         //~ this.loopArt();
 
-        this.volume_near_icon()
+        this.volume_near_icon();
+
+        let to = setTimeout( () => {
+                this.startingUp = false;
+                clearTimeout(to);
+            },
+            (this.actor.get_stage() != null) ? 2100 : 20000
+        );
     }
 
     on_applet_reloaded() {
         //~ logDebug("on_applet_reloaded()");
         this._iconLooping = false;
         this._artLooping = false;
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+        this.startingUp = true;
         if (this.muteSoundOnClosing && this._output && !this._output.is_muted) {
             this.old_volume = this.volume;
             this._toggle_out_mute();
@@ -2391,16 +2402,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     on_applet_removed_from_panel() {
         //~ logDebug("on_applet_removed_from_panel() BEGIN");
 
-        // REMOVED: BUG!
-        //if (this.actor && (this.actor.get_stage() != null) && this._control) {
-            //try {
-                //this.control.disconnect("any_signal");
-                ////this._control.close();
-            //} catch(e) {logError("this.control.disconnect('any_signal') DOESN'T WORK")};
-            //logDebug("_control closed");
-        //}
-		this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
-		
+        this.startingUp = true;
+
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
@@ -2516,7 +2519,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
             iconName += "-symbolic";
             this._outputIcon = iconName;
-            if (this.showMediaKeysOSD != "disabled") {
+            if (this.showOSD) {
                 icon = Gio.Icon.new_for_string(this._outputIcon);
                 Main.osdWindowManager.show(-1, icon, ""+volume, null);
             }
@@ -2545,14 +2548,14 @@ class Sound150Applet extends Applet.TextIconApplet {
                 } else {
                     volume = this.volume;
                 }
-                Main.osdWindowManager.show(-1, icon, ""+volume, null);
+                if (this.showOSD)
+                    Main.osdWindowManager.show(-1, icon, ""+volume, null);
             }
         }
     }
 
     _toggle_in_mute() {
         if (!this._input) {
-            this.showOSD = (this.showMediaKeysOSD != "disabled");
             this._volumeChange(null);
             return;
         }
@@ -2560,14 +2563,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
         this.mute_in_switch.setToggleState(newStatus);
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
         this._volumeChange(null);
     }
 
     _onScrollEvent(actor, event) {
         //~ logDebug("event: "+event.originalEvent.ctrlKey);
         let _event = event;
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
         let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
@@ -2679,7 +2680,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._outputIcon = icon_name;
             let icon = Gio.Icon.new_for_string(icon_name);
             this.set_applet_icon_symbolic_name(icon_name);
-            if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
+            if (this.showOSD && (volume != parseInt(this.old_volume.slice(0, -1)))) {
                 //~ Main.osdWindowManager.hideAll();
                 try {
                     Main.osdWindowManager.show(-1, icon, ""+volume, null);
@@ -2700,9 +2701,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._applet_tooltip.hide();
         }
 
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
-
-        this.volume_near_icon()
+        this.volume_near_icon();
     }
 
     _onButtonPressEvent(actor, event) {
@@ -3501,7 +3500,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     _on_reload_this_applet_pressed() {
         kill_playerctld();
         this.menu.close();
-        this.showOSD = this.showOSDonStartup && (this.showMediaKeysOSD != "disabled");
+
         // Reload this applet
         Extension.reloadExtension(UUID, Extension.Type.APPLET);
     }
@@ -3587,6 +3586,18 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");
+    }   //~ }
+
+    get showOSD() {
+        if (this.showMediaKeysOSD == "disabled") {
+            return false;
+        } else {
+            if (this.startingUp) {
+                return this.showOSDonStartup;
+            } else {
+                return true;
+            }
+        }
     }
 }
 
