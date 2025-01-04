@@ -355,11 +355,11 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.stream.push_volume();
 
         let icon = Gio.Icon.new_for_string(this._volumeToIcon(this._value));
-		
-		if (this.applet.showOSD && Math.round(volume/this.applet._volumeNorm * 100) != Math.round(this.oldValue)) {
+
+        if (this.applet.showOSD && Math.round(volume/this.applet._volumeNorm * 100) != Math.round(this.oldValue)) {
             Main.osdWindowManager.show(-1, icon, ""+Math.round(volume/this.applet._volumeNorm * 100), null);
         }
-        
+
         if (this.stream.is_muted !== muted)
             this.stream.change_is_muted(muted);
 
@@ -1817,7 +1817,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._ownerChangedId = null;
 
         this.title_text = "";
-        
+
         this.startingUp = true;
 
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
@@ -1891,7 +1891,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.setValue("showMediaKeysOSD", global.settings.get_string(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", this.on_showMediaKeysOSD_changed);
         this.on_showMediaKeysOSD_changed();
-        
+
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
         this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
@@ -2092,7 +2092,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._sound_settings.connect("changed::" + MAXIMUM_VOLUME_KEY, () => this._on_sound_settings_change());
         }
     }
-    
+
     on_volumeSoundFile_changed() {
         this._sounds_settings.set_string(VOLUME_SOUND_FILE_KEY, this.volumeSoundFile);
     }
@@ -2102,10 +2102,10 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_showMediaKeysOSD_changed() {
-		// Security:
-		let available = ["disabled", "small", "medium", "large"]; // Available values.
-		if (available.indexOf(this.showMediaKeysOSD) === -1) // When this.showMediaKeysOSD isn't an available value...
-			this.showMediaKeysOSD = "medium"; // ...sets the default value.
+        // Security:
+        let available = ["disabled", "small", "medium", "large"]; // Available values.
+        if (available.indexOf(this.showMediaKeysOSD) === -1) // When this.showMediaKeysOSD isn't an available value...
+            this.showMediaKeysOSD = "medium"; // ...sets the default value.
 
         global.settings.set_string(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
     }
@@ -2328,8 +2328,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
-		this.startingUp = true;
-		if (this._playerctl)
+        this.startingUp = true;
+        if (this._playerctl)
             kill_playerctld();
         //~ logDebug("on_applet_added_to_panel()");
         players_without_seek_support = original_players_without_seek_support;
@@ -2360,7 +2360,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this.color0_100 = color;
 
         this._iconLooping = true;
-        
+
         this._on_sound_settings_change();
 
         this._loopArtId = null;
@@ -2369,12 +2369,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this.loopArt();
 
         this.volume_near_icon();
-        
+
         let to = setTimeout( () => {
-				this.startingUp = false;
-				clearTimeout(to);
-			},
-			(this.actor.get_stage() != null) ? 2100 : 20000
+                this.startingUp = false;
+                clearTimeout(to);
+            },
+            (this.actor.get_stage() != null) ? 2100 : 20000
         );
     }
 
@@ -2549,7 +2549,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     volume = this.volume;
                 }
                 if (this.showOSD)
-					Main.osdWindowManager.show(-1, icon, ""+volume, null);
+                    Main.osdWindowManager.show(-1, icon, ""+volume, null);
             }
         }
     }
@@ -2700,7 +2700,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._applet_tooltip)
                 this._applet_tooltip.hide();
         }
-        
+
         this.volume_near_icon();
     }
 
@@ -3500,7 +3500,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     _on_reload_this_applet_pressed() {
         kill_playerctld();
         this.menu.close();
-       
+
         // Reload this applet
         Extension.reloadExtension(UUID, Extension.Type.APPLET);
     }
@@ -3586,19 +3586,19 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");
-    }	//~ }
-	
-	get showOSD() {
-		if (this.showMediaKeysOSD == "disabled") {
-			return false;
-		} else {
-			if (this.startingUp) {
-				return this.showOSDonStartup;
-			} else {
-				return true;
-			}
-		}
-	}
+    }   //~ }
+
+    get showOSD() {
+        if (this.showMediaKeysOSD == "disabled") {
+            return false;
+        } else {
+            if (this.startingUp) {
+                return this.showOSDonStartup;
+            } else {
+                return true;
+            }
+        }
+    }
 }
 
 function main(metadata, orientation, panel_height, instanceId) {
