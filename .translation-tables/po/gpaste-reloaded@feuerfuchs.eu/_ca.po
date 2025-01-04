@@ -1,0 +1,15 @@
+# GPASTE RELOADED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# feuerfuchs, 2016
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->description
+msgid "Instantly access and manage your clipboard history."
+msgstr ""
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""

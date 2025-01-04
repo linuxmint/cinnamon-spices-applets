@@ -1,0 +1,25 @@
+# DRAWER (SHOW/HIDE APPLETS)
+# This file is put in the public domain.
+# mohammad-sn, 2016
+#
+msgid ""
+msgstr ""
+
+#. applet.js:60 applet.js:231
+msgid "Autohide ON"
+msgstr ""
+
+#. applet.js:62 applet.js:233
+msgid "Autohide OFF"
+msgstr ""
+
+#. settings-schema.json->autohide->tooltip
+msgid ""
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
+msgstr ""
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr ""

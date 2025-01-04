@@ -1,0 +1,50 @@
+# ENHANCED SOUND APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-04 01:27+0100\n"
+"PO-Revision-Date: 2024-11-21 16:43+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 6.2/applet.js:1020 6.4/applet.js:1021
+msgid "Videos"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->description
+#. 6.4->settings-schema.json->startupVolume->description
+msgid "Volume at start-up (%)"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->tooltip
+#. 6.4->settings-schema.json->startupVolume->tooltip
+msgid "Value -1 means \"No change\""
+msgstr ""
+
+#. 6.4->settings-schema.json->muteSoundOnClosing->description
+msgid "Mute sound on closing"
+msgstr ""
+
+#. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
+msgid ""
+"If you notice an unpleasant noise on closing, check this box.\n"
+"You'll need to restore the sound at startup, by middle-clicking on this "
+"applet's icon.\n"
+"It is NOT recommended to check this box."
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaKeysOSD->description
+msgid "Whether or not to show the media keys osd"
+msgstr ""

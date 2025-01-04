@@ -1,0 +1,38 @@
+# CALENDAR WITH PUBLIC HOLIDAYS
+# This file is put in the public domain.
+# ccprog, 2020
+#
+msgid ""
+msgstr ""
+
+#. 5.2->settings-schema.json->custom-tooltip-format->description
+msgid "Date format for tooltip"
+msgstr ""
+
+#. 5.2->settings-schema.json->custom-tooltip-format->tooltip
+msgid "Set your custom tooltip format here."
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "Cyprus"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "El Salvador"
+msgstr ""
+
+#. 5.2->settings-schema.json->country->options
+msgid "Montenegro"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Brussels"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Flemish Region"
+msgstr ""
+
+#. 5.2->settings-schema.json->region_bel->options
+msgid "Walloon Region"
+msgstr ""

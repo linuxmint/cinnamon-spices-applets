@@ -1,0 +1,297 @@
+# Swedish translation for Radio3.0@claudiux.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2023,2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-12 22:53+0100\n"
+"PO-Revision-Date: 2024-02-01 15:30+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:238
+msgid "unassigned"
+msgstr ""
+
+#. applet.js:2727
+msgid "Categories"
+msgstr ""
+
+#. applet.js:2729
+msgid "Radio Stations"
+msgstr ""
+
+#. applet.js:2739
+msgid "All Categories"
+msgstr ""
+
+#. applet.js:4924
+msgid "Easy Effects"
+msgstr ""
+
+#. settings-schema.json->desklet-show-on-desktop->description
+#. applet.js:4972
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. desklet/AlbumArt3.0@claudiux/desklet.js:39
+msgid "Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
+msgid "Album Art desklet"
+msgstr ""
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr ""
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr ""
+
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr ""
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr ""
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr ""
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr ""
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+
+#. settings-schema.json->cache-mins->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+
+#. settings-schema.json->cache-dir->description
+msgid ""
+"Directory used for data caching\n"
+"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
+"sufficient free space.)"
+msgstr ""
+
+#. settings-schema.json->cache-dir-open->description
+msgid "Open cache directory"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 1 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr ""
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr ""
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr ""
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr ""
+
+#. settings-schema.json->desklet-activate-button->description
+msgid "Activate desklet displaying the Radio3.0 Album Art"
+msgstr ""
+
+#. settings-schema.json->desklet-activated-label->description
+msgid "The desklet displaying the Radio3.0 Album Art is activated"
+msgstr ""
+
+#. settings-schema.json->desklet-open-settings-button->description
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "None"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+msgid "0 means no fade"
+msgstr ""
