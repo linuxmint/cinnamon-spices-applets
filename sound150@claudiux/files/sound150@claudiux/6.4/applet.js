@@ -3470,6 +3470,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _on_reload_this_applet_pressed() {
         kill_playerctld();
+        //~ this._applet_context_menu.close();
+        this.menu.close();
         // Reload this applet
         Extension.reloadExtension(UUID, Extension.Type.APPLET);
     }
