@@ -1,3 +1,6 @@
+### v1.2.0~20250104
+  * Introduces action delayers to avoid errors.
+
 ### v1.1.0~20241005
   * Opens the settings for the spices you use.
 
