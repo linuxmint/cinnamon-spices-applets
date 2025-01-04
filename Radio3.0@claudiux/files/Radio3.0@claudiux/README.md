@@ -4,6 +4,8 @@ Radio3.0 is an *Internet Radio Receiver & Recorder* applet for Cinnamon.
 
 With Radio3.0 you can:
 
+  * Import your stations from Radio++ if you use it. See Import tab in settings.
+
   * Listen to any type of radio stream (MP3, AAC, AAC+, OGG, FLAC, FLV...)
 
   * Perform research in an internet database that references tens of thousands of radio stations.

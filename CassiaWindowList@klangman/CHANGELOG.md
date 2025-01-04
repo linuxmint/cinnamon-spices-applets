@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.0
+
+* Fix issues when running under Cinnamon 6.4 (port of cobinja's fix for CobiWindowList). Make sure you have this fix BEFORE upgrading to Cinnamon 6.4
+
 ## 2.3.9
 
 * Fix the Thumbnail menu item remove animation that is used when the window-list is on a vertical panel

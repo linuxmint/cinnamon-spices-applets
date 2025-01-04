@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 5.4/applet.js:25
 msgid "Power Saver"
@@ -31,9 +31,8 @@ msgid "Performance"
 msgstr "Prestazioni"
 
 #. 5.4/applet.js:60
-#, fuzzy
 msgid "Power Profiles Applet Error"
-msgstr "Profili Energetici"
+msgstr "Errore dell'applet dei profili energetici"
 
 #. 5.4/applet.js:61
 msgid ""
@@ -41,14 +40,17 @@ msgid ""
 "\n"
 "Please install it and reload the applet."
 msgstr ""
+"Il pacchetto di sistema 'power-profiles-daemon' non è installato.\n"
+"\n"
+"Installalo e ricarica l'applet."
 
 #. 5.4/applet.js:63
 msgid "Open README"
-msgstr ""
+msgstr "Apri LEGGIMI"
 
 #. 5.4/applet.js:64
 msgid "Open Website"
-msgstr ""
+msgstr "Apri sito web"
 
 #. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
@@ -117,8 +119,8 @@ msgstr "Scorri i profili quando usi le scorciatoie da tastiera"
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
 "If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
 "\n"
 "If disabled, if the current profile is 'Power Saver' and the 'Previous "
 "profile' keyboard shortcut is used, the profile would not change."
@@ -144,22 +146,24 @@ msgstr ""
 
 #. 5.4->settings-schema.json->section2->description
 msgid "Appearance"
-msgstr ""
+msgstr "Aspetto"
 
 #. 5.4->settings-schema.json->iconStyle->description
 msgid "Icon Style"
-msgstr ""
+msgstr "Stile Icona"
 
 #. 5.4->settings-schema.json->iconStyle->options
 msgid "Classic"
-msgstr ""
+msgstr "Classica"
 
 #. 5.4->settings-schema.json->iconStyle->options
 msgid "Papirus"
-msgstr ""
+msgstr "Papirus"
 
 #. 5.4->settings-schema.json->iconStyle->tooltip
 msgid ""
 "Choose the style of the applet's icon. This is used for the panel and the on-"
 "screen display."
 msgstr ""
+"Scegli lo stile dell'icona dell'applet. Questo è usato per il pannello e la "
+"visualizzazione sullo schermo."

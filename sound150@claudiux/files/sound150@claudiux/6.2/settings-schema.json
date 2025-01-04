@@ -100,9 +100,11 @@
         "openSystemSoundSettings",
         "maxVolume",
         "stepVolume",
+        "startupVolume",
         "magneticOn",
         "magnetic25On",
-        "alwaysCanChangeMic"
+        "alwaysCanChangeMic",
+        "muteSoundOnClosing"
       ]
     },
     "sectionSound2": {
@@ -249,7 +251,7 @@
   },
   "showalbum": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Show album art as icon",
     "dependency": "playerControl"
   },
@@ -281,7 +283,7 @@
   },
   "showVolumeLevelNearIcon": {
     "type": "switch",
-    "default": false,
+    "default": true,
     "description": "Display volume level near icon"
   },
   "showMicMutedOnIcon": {
@@ -314,6 +316,15 @@
     "min": 30,
     "max": 150,
     "step": 5
+  },
+  "startupVolume": {
+    "type": "scale",
+    "description": "Volume at start-up (%)",
+    "default": -1,
+    "min": -1,
+    "max": 150,
+    "step": 1,
+    "tooltip": "Value -1 means \"No change\""
   },
   "stepVolume": {
     "type": "combobox",
@@ -385,6 +396,12 @@
     "description": "Always allow microphone to be reactivated",
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
+  },
+  "muteSoundOnClosing": {
+    "type": "switch",
+    "description": "Mute sound on closing",
+    "tooltip": "If you notice an unpleasant noise on closing, check this box.\nYou'll need to restore the sound at startup, by middle-clicking on this applet's icon.\nIt is NOT recommended to check this box.",
+    "default": false
   },
   "showMediaKeysOSD": {
     "type": "combobox",

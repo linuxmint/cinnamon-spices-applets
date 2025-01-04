@@ -1,3 +1,54 @@
+### v2.5.10~20250101
+  * Better monitoring of files and directories.
+
+### v2.5.9~20241231
+  * Album Art 3.0 becomes faster.
+  * Bugfixes.
+
+### v2.5.8~20241230
+  * Album Art 3.0 settings now accessible via the applet context menu.
+
+### v2.5.7~20241228
+  * New management of desklet displaying Album Art. Use context menu to show it.
+  * Better management of signals.
+  * No error reloading this applet.
+
+### v2.5.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v2.5.5~20241226
+  * Minor bugfixes.
+
+### v2.5.4~20241225
+  * Fixed context menu bugs.
+  * Fixed desklet bugs.
+
+### v2.5.3~20241220
+  * Fixed menu bugs (when the Category list is beside the Radio Station list).
+
+
+### v2.5.2~20241219
+  * Improved menu behavior. The menu no longer closes when you switch from the station list to the category list.
+  * Some bugfixes, also in desklet.
+
+### v2.5.1~20241217
+  * Fixes #6689.
+  * Improved menu display.
+  * Reintroduces the "Display the Station list beside the Category list" option.
+  * If this option is not checked, the first category is not ♥︎.
+  * Favorite stations are marked with a ♥︎ in the menu.
+
+### v2.5.0~20241215
+  * You can now set/unset favorite radio stations by clicking on ♥︎ in the menu while listening to them.
+  * The first category you see is ♥︎.
+  * Stations are displayed beside their category. (Forced.)
+
+### v2.4.0~20241212
+  * You can now import your stations from Radio++ if you use it. See Import tab in settings.
+
+### v2.3.3~20241205
+  * Clicking on the Album Art desklet updates the image.
+
 ### v2.3.2~20241203
   * Redesigned context menu.
 

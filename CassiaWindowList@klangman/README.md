@@ -47,6 +47,8 @@ The design goals are to:
 
 This applet requires at least Cinnamon 4.0 but Cinnamon 6.0 is recommended
 
+Before upgrading to Cinnamon 6.4 make sure you are running version 2.4.0 or better of this applet
+
 ## Installation
 
 1. Right click on the cinnamon panel that you wish to add the CassiaWindowList to and click "Applets"

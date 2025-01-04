@@ -167,6 +167,7 @@ GPasteApplet.prototype = {
 
             this._appletSettings = new Settings.AppletSettings(this, uuid, instance_id);
 
+            this._appletSettings.bind("always-show-icon",      "alwaysShowIcon",      this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-track-switch",  "displayTrackSwitch",  this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-new-item",      "displayNewItem",      this._onDisplaySettingsUpdated);
             this._appletSettings.bind("display-searchbar",     "displaySearchBar",    this._onDisplaySettingsUpdated);
@@ -229,10 +230,14 @@ GPasteApplet.prototype = {
                     if (this.displaySearchBar) {
                         global.stage.set_key_focus(this.mitemSearch.entry);
                     }
+                    this.actor.visible = true;
                 } else {
                     this.mitemSearch.reset();
+                    this.actor.visible = this.alwaysShowIcon;
                 }
             }));
+            
+            global.settings.connect('changed::panel-edit-mode', () => this._on_panel_edit_mode_changed());
         }
         catch (e) {
             global.logError(e);
@@ -265,6 +270,7 @@ GPasteApplet.prototype = {
     _onDisplaySettingsUpdated: function() {
         this.mitemSearch.reset();
 
+        this.actor.visible = this.alwaysShowIcon;
         this.mitemTrack.actor.visible        = this.displayTrackSwitch;
         this.msepTop.actor.visible           = this.displayTrackSwitch;
         this.mitemSearch.actor.visible       = this.displaySearchBar;
@@ -611,5 +617,12 @@ GPasteApplet.prototype = {
      */
     on_applet_clicked: function(event) {
         this.menu.toggle();
+    },
+
+    /*
+     * Panel edit mode has been toggled
+     */
+    _on_panel_edit_mode_changed() {
+        this.actor.visible = global.settings.get_boolean('panel-edit-mode') || this.alwaysShowIcon;
     }
 };

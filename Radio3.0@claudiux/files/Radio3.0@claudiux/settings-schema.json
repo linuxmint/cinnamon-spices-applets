@@ -26,6 +26,7 @@
       "type": "page",
       "title": "Import",
       "sections": [
+      "sectionImportRadiopp",
         "sectionImportShoutcast",
         "sectionImportFile",
         "sectionImportList"
@@ -134,6 +135,14 @@
         "button-update-help",
         "button-update",
         "scale-update"
+      ]
+    },
+    "sectionImportRadiopp": {
+      "type": "section",
+      "dependency": "radiopp-is-here",
+      "title": "Only for Radio++ users",
+      "keys": [
+        "import-radiopp-button"
       ]
     },
     "sectionImportShoutcast": {
@@ -299,10 +308,8 @@
       "type": "section",
       "title": "Album Art desklet",
       "keys": [
-        "desklet-activate-button",
         "desklet-show-on-desktop",
-        "desklet-open-settings-button",
-        "desklet-activated-label"
+        "desklet-open-settings-button"
       ]
     },
     "sectionNetworkQuality": {
@@ -457,6 +464,13 @@
     "show-buttons": true,
     "reorderable": true,
     "columns": [
+      {
+        "id": "fav",
+        "title": "♥︎",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
       {
         "id": "inc",
         "title": "Menu",
@@ -620,6 +634,11 @@
     "description": "Help",
     "height": 100,
     "dependency": "show-help-in-tabs"
+  },
+  "import-radiopp-button": {
+    "type": "button",
+    "description": "Import your stations from Radio++",
+    "callback": "on_button_import_radiopp_clicked"
   },
   "import-shoutcast-button": {
     "type": "button",
@@ -1886,6 +1905,10 @@
     "description": "Maximum title length",
     "tooltip": "0 means no maximum"
   },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
+  },
   "desklet-activate-button": {
     "type": "button",
     "dependency": "!desklet-is-activated",
@@ -1899,18 +1922,25 @@
   },
   "desklet-show-on-desktop" : {
     "type": "switch",
-    "dependency": "desklet-is-activated",
     "default": false,
     "description": "Show Album Art on desktop"
   },
   "desklet-open-settings-button": {
     "type": "button",
-    "dependency": "desklet-is-activated",
+    "dependency": "desklet-show-on-desktop",
     "description": "Album Art desklet settings",
     "callback": "on_desklet_open_settings_button_clicked"
   },
-  "desklet-is-activated": {
+  "radiopp-is-here": {
     "type": "generic",
     "default": false
+  },
+  "desklet-x": {
+    "type": "generic",
+    "default": -1
+  },
+  "desklet-y": {
+    "type": "generic",
+    "default": -1
   }
 }

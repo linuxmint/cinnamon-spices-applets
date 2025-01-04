@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# GPASTE RELOADED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# feuerfuchs, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 23:31+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-27 14:39-0500\n"
 "PO-Revision-Date: 2024-11-13 19:32+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -18,19 +19,19 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: GPasteNewItemDialog.js:53
+#. GPasteNewItemDialog.js:53
 msgid "Please enter the text you want to add to the current history:"
 msgstr "Kirjoita teksti, jonka haluat lisätä historiaan:"
 
-#: GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
+#. GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
 msgid "OK"
 msgstr "OK"
 
-#: GPasteNewItemDialog.js:63
+#. GPasteNewItemDialog.js:63
 msgid "Cancel"
 msgstr "Peru"
 
-#: GPasteNotInstalledDialog.js:27
+#. GPasteNotInstalledDialog.js:27
 msgid ""
 "GPaste is not installed. Please install the necessary packages and then "
 "restart Cinnamon for this applet to start working."
@@ -38,53 +39,54 @@ msgstr ""
 "GPaste ei ole asennettuna. Asenna sudo apt install gpaste gir1.2-gpaste-1.0 "
 "ja käynnistä sitten Cinnamon uudelleen."
 
-#: GPasteSearchItem.js:34
+#. GPasteSearchItem.js:34
 msgid "Type to search..."
 msgstr "Kirjoita haku..."
 
-#: applet.js:73
+#. applet.js:73
 msgid "[GPaste is not installed]"
 msgstr "[GPaste ei ole asennettu]"
 
-#: applet.js:109
+#. applet.js:109
 msgid "GPaste clipboard"
 msgstr "GPaste leikepöytä"
 
 #. settings-schema.json->gpaste-settings->description
-#: applet.js:115 applet.js:153
+#. applet.js:115 applet.js:153
 msgid "GPaste Main Program"
 msgstr "GPaste ohjelma"
 
-#: applet.js:120
+#. applet.js:120
 msgid "Select History"
 msgstr "Valitse historia"
 
-#: applet.js:129
+#. applet.js:129
 msgid "Track clipboard changes"
 msgstr "Seuraa leikepöydän muutoksia"
 
-#: applet.js:137
+#. applet.js:137
 msgid "(Empty)"
 msgstr "(tyhjä)"
 
-#: applet.js:140
+#. applet.js:140
 msgid "(No results)"
 msgstr "(ei tuloksia)"
 
-#: applet.js:145
+#. applet.js:145
 msgid "New item"
 msgstr "Uusi kohde"
 
-#: applet.js:148
+#. applet.js:148
 msgid "Empty history"
 msgstr "Tyhjennä historia"
 
-#: applet.js:465
+#. applet.js:471
 msgid "Do you really want to empty the current history?"
 msgstr "Haluatko tyhjentää nykyisen historian?"
 
 #. metadata.json->description
-msgid "Instantly access and manage your clipboard history"
+#, fuzzy
+msgid "Instantly access and manage your clipboard history."
 msgstr "Selaa leikepöydän historiaa ja liitä niitä ohjelmiin"
 
 #. metadata.json->name
@@ -94,6 +96,10 @@ msgstr "GPaste Reloaded"
 #. settings-schema.json->shown-entries->description
 msgid "Shown entries"
 msgstr "Näytä kohteet"
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"
@@ -126,9 +132,3 @@ msgstr "Näytä historia"
 #. settings-schema.json->other->description
 msgid "Other"
 msgstr "Muu"
-
-#~ msgid ""
-#~ "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
-#~ msgstr ""
-#~ "GPaste on kirjoitettu kokonaan uudelleen ja perustuu Gnome Shell "
-#~ "laajennukseen"
