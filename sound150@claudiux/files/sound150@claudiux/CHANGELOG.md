@@ -1,3 +1,7 @@
+### v7.4.2~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+  * Closes menu before restarting.
+
 ### v7.4.1~20250103
   * Fixes #6726: SMPlayer no longer freezes
   * Displays the thumbnail of the video viewed with SMPlayer
