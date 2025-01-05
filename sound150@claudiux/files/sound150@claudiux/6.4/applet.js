@@ -1920,7 +1920,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
-        this._setKeybinding();
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
 
@@ -2335,7 +2334,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this));
         //~ this.loopArt();
 
-        this.volume_near_icon()
+        this.volume_near_icon();
+
+        let to = setTimeout( () => {
+                this._setKeybinding();
+                clearTimeout(to);
+            },
+            300
+        );
     }
 
     on_applet_reloaded() {
@@ -3473,7 +3479,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ this._applet_context_menu.close();
         this.menu.close();
         // Reload this applet
-        Extension.reloadExtension(UUID, Extension.Type.APPLET);
+        let to = setTimeout( () => {
+            Extension.reloadExtension(UUID, Extension.Type.APPLET);
+            clearTimeout(to);
+        },
+        300);
     }
 
     _onSystemSoundSettingsPressed() {
