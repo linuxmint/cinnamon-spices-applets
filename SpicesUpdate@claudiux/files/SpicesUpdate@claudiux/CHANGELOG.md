@@ -1,3 +1,6 @@
+### v7.4.7~20250105
+  * Now compatible with Cinnamon on Gentoo.
+
 ### v7.4.6~20241230
   * Spices not selected in the lists of settings are displayed first.
 

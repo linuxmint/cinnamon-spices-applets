@@ -1207,6 +1207,7 @@ class SpicesUpdate extends IconApplet {
             file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
             file_new_for_path("/usr/share/fonts/truetype/Symbola.ttf").query_exists(null) ||
             file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
+            file_new_for_path("/usr/share/fonts/ttf-ancient-fonts/Symbola_hint.ttf").query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null);
@@ -1216,7 +1217,9 @@ class SpicesUpdate extends IconApplet {
             let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
             let _openSUSEWitnessFile = file_new_for_path("/usr/share/licenses/openSUSE-release");
             let _isopenSUSE = _openSUSEWitnessFile.query_exists(null);
-            if (_isArchlinux || _isopenSUSE) {
+            let _GentoWitnessFile = file_new_for_path("/etc/gentoo-release"); // Gentoo
+            let _isGentoo = _GentoWitnessFile.query_exists(null);
+            if (_isArchlinux || _isopenSUSE || _isGentoo) {
                 Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
                 _fonts_installed = true
             }
