@@ -1,3 +1,6 @@
+### v7.4.4~20250105
+  * Improved functioning.
+
 ### v7.4.3~20250104
   * Fixes #6728: Corrects a regression in Cinnamon 6.2.
 

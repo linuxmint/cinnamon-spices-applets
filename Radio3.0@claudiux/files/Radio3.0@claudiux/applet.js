@@ -825,9 +825,11 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
 
     let topMenu = this._getTopMenu();
     if(!topMenu)
-        return false;
+      return false;
     if(!topMenu.actor)
-        return false;
+      return false;
+    if(!topMenu.actor.get_layout_manager())
+      return false;
     let [topMinHeight, topNaturalHeight] = topMenu.actor.get_preferred_height(-1);
     let topThemeNode = null;
 
@@ -1294,9 +1296,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Connect signals:
     this._connect_signals();
-
-    // Shortcuts:
-    this.onShortcutChanged();
 
     //title_obj.watch('prop', function(value){
       //this._on_mpv_title_changed();
@@ -1927,8 +1926,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     try {
       if (this.titleMonitorId) {
-        //this.titleMonitor.cancel();
         this.titleMonitor.disconnect(this.titleMonitorId);
+        this.titleMonitor.cancel();
         this.titleMonitor = null;
         this.titleMonitorId = null;
       }
@@ -1942,8 +1941,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     try {
       if (this.r30stopMonitorId != null) {
-        //this.r30stopMonitor.cancel();
         this.r30stopMonitor.disconnect(this.r30stopMonitorId);
+        this.r30stopMonitor.cancel();
         this.r30stopMonitor = null;
         this.r30stopMonitorId = null;
       }
@@ -1957,8 +1956,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     try {
       if (this.r30previousMonitorId != null) {
-        //this.r30previousMonitor.cancel();
         this.r30previousMonitor.disconnect(this.r30previousMonitorId);
+        this.r30previousMonitor.cancel();
         this.r30previousMonitor = null;
         this.r30previousMonitorId = null;
       }
@@ -1972,8 +1971,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     try {
       if (this.r30nextMonitorId != null) {
-        //this.r30nextMonitor.cancel();
         this.r30nextMonitor.disconnect(this.r30nextMonitorId);
+        this.r30nextMonitor.cancel();
         this.r30nextMonitor = null;
         this.r30nextMonitorId = null;
       }
@@ -2050,8 +2049,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     try {
       if (this.recMonitorId) {
-        //this.recMonitor.cancel();
         this.recMonitor.disconnect(this.recMonitorId);
+        this.recMonitor.cancel();
         this.recMonitor = null;
         this.recMonitorId = null;
       }
@@ -2091,8 +2090,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     try {
       if (this.jobsMonitorId) {
-        //this.jobsMonitor.cancel();
         this.jobsMonitor.disconnect(this.jobsMonitorId);
+        this.jobsMonitor.cancel();
         this.jobsMonitor = null;
         this.jobsMonitorId = null;
       }
@@ -4090,10 +4089,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ logDebug("Nbr of categories: "+Object.keys(cws).length);
     //~ logDebug("categories_with_stations: \n"+JSON.stringify(this.categories_with_stations, null, 4));
 
-
     this._applet_context_menu.removeAll();
     this.create_contextmenu_items();
     this.setContextMenuVisibilities();
+
+    // Shortcuts:
+    let to = setTimeout( () => {
+        this.onShortcutChanged();
+        clearTimeout(to);
+      },
+      300
+    );
 
     if (this.desklet_is_activated)
       reloadExtension("AlbumArt3.0@claudiux", Type.DESKLET);
@@ -4474,8 +4480,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_option_menu_reload_this_applet_clicked() {
     //log("on_option_menu_reload_this_applet_clicked");
     this.stop_mpv(false);
-    // Reload this applet
-    reloadExtension(UUID, Type.APPLET);
+    this._applet_context_menu.close();
+    let to = setTimeout( () => {
+        // Reload this applet
+        reloadExtension(UUID, Type.APPLET);
+        clearTimeout(to);
+      },
+      300
+    );
   }
 
   on_switch_on_last_station_at_start_up() {
@@ -5163,6 +5175,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_showLogo._switch.setToggleState(this.show_favicon);
     if (this.context_menu_item_showDesklet) {
       this.context_menu_item_showDesklet.actor.visible = true;
+      if (!this._is_desklet_activated())
+        this.show_desklet = false;
       this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
       //~ this.context_menu_item_showDesklet.actor.visible = this._is_desklet_activated();
     }

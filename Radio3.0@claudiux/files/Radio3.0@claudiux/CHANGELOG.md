@@ -1,3 +1,6 @@
+### v2.5.11~20250105
+  * Improved functioning.
+
 ### v2.5.10~20250101
   * Better monitoring of files and directories.
 
