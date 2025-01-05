@@ -1230,18 +1230,42 @@ class SpicesUpdate extends IconApplet {
     } // End of are_dependencies_installed
 
     get_terminal() {
+        let _SETTINGS_SCHEMA = "org.cinnamon.desktop.default-applications.terminal";
+        let _SETTINGS_KEY = "exec";
+        let gsettings = new Settings({ schema_id: _SETTINGS_SCHEMA });
         var term_found = "";
-        var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
-        var t;
-        let _terminals_length = _terminals.length;
-        for (t=0; t < _terminals_length ; t++) {
-            if (find_program_in_path(_terminals[t])) {
-                term_found = find_program_in_path(_terminals[t]);
-                break
+        term_found = gsettings.get_string(_SETTINGS_KEY);
+        if (term_found.length === 0) {
+            var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
+            var t;
+            let _terminals_length = _terminals.length;
+            for (t=0; t < _terminals_length ; t++) {
+                if (find_program_in_path(_terminals[t])) {
+                    term_found = find_program_in_path(_terminals[t]);
+                    break
+                }
             }
         }
         return term_found;
     } // End of get_terminal
+
+    get_terminal_separator() {
+        let _SETTINGS_SCHEMA = "org.cinnamon.desktop.default-applications.terminal";
+        let _SETTINGS_KEY = "exec-arg";
+        let gsettings = new Settings({ schema_id: _SETTINGS_SCHEMA });
+        var sep_found = "";
+        sep_found = gsettings.get_string(_SETTINGS_KEY);
+        if (sep_found.length === 0) {
+            const _terminals_with_double_dashes = ["gnome-terminal"];
+            const _terminals_with_e = ["tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
+            let terminal = this.get_terminal();
+            if (_terminals_with_double_dashes.indexOf(terminal) > -1)
+                return "--";
+            if (_terminals_with_e.indexOf(terminal) > -1)
+                return "-e";
+        }
+        return sep_found;
+    } // End of get_terminal_separator
 
     check_dependencies() {
         if (!this.dependenciesMet && this.are_dependencies_installed()) {
@@ -1269,8 +1293,9 @@ class SpicesUpdate extends IconApplet {
                 icon_size: 36 });
             // Got a terminal used on this system:
             let terminal = this.get_terminal();
-            // apturl is it present?
-            let _is_apturl_present = find_program_in_path("apturl");
+            let term_sep = this.get_terminal_separator();
+            // xdg-open is it present?
+            let _is_xdg_open_present = find_program_in_path("xdg-open");
             // Detects the distrib in use and make adapted message and notification:
             let _isFedora = find_program_in_path("dnf");
             let _ArchlinuxWitnessFile = file_new_for_path("/etc/arch-release");
@@ -1284,22 +1309,26 @@ class SpicesUpdate extends IconApplet {
             //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install fonts-symbola" : "sudo apt install fonts-symbola";
             var _apt_install = _isFedora ? "sudo dnf install gdouros-symbola-fonts" : _isArchlinux ? "" : _isDebian ? "apt install fonts-symbola" : _isopenSUSE ? "sudo yast2 --install gdouros-symbola-fonts" : "sudo apt install fonts-symbola";
             let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
-            let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
+            let criticalMessage = _is_xdg_open_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
             this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
-            if (!_is_apturl_present) {
-                if (terminal != "") {
+            if (!_is_xdg_open_present) {
+                if (terminal.length > 0) {
+                    Util.spawnCommandLineAsync(terminal);
                     // TRANSLATORS: The next messages should not be translated.
-                    if (_isDebian === true) {
-                        Util.spawnCommandLineAsync(terminal + " -e '/bin/sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
-                    } else {
-                        Util.spawnCommandLineAsync(terminal + " -e '/bin/sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
-                    }
+                    //~ if (_isDebian === true) {
+                        //~ Util.spawnCommandLineAsync(terminal + " " + term_sep + " " + " '/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
+                    //~ } else {
+                        //~ Util.spawnCommandLineAsync(terminal + " " + term_sep + " " + `'/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo ${_apt_update} ${_and} ${_apt_install}; sleep 1; exec bash\"'`, null, null);
+                    //~ }
                 }
             } else {
                 if (!this.fonts_installed)
-                    Util.spawnCommandLineAsync("/usr/bin/apturl apt://fonts-symbola");
+                    Util.spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
             }
+            //~ if (_is_xdg_open_present && !this.fonts_installed) {
+                //~ Util.spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
+            //~ }
             this.dependenciesMet = false;
         }
         // End of check_dependencies
