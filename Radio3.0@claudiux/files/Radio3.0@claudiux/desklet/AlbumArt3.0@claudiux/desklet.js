@@ -86,6 +86,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
 
         this.isLooping = false;
         this.dir_monitor_loop_is_active = false;
+        this.dir_monitor.cancel();
+        this.dir_monitor = null;
     }
 
     _scan_dir(dir) {
