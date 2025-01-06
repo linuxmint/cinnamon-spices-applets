@@ -1,3 +1,6 @@
+### v2.6.0~20250106
+  * Improved functioning (start-up).
+
 ### v2.5.11~20250105
   * Improved functioning.
 

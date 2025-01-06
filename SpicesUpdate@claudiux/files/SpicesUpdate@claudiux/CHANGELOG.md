@@ -1,3 +1,8 @@
+### v7.4.7~20250105
+  * Now compatible with Cinnamon on Gentoo.
+  * Replaces apturl with xdg-open.
+  * Lets the user enter commands when dependencies are missing.
+
 ### v7.4.6~20241230
   * Spices not selected in the lists of settings are displayed first.
 

@@ -69,8 +69,9 @@ So you should not have to run any of the commands listed below.
 |Linux Mint, Ubuntu|`sudo apt install fonts-symbola`|`sudo apt install libnotify-bin`|
 |Debian (with root rights)|`apt install fonts-symbola`|`apt install libnotify-bin`|
 |openSUSE|`sudo yast2 --install gdouros-symbola-fonts`|`sudo yast2 --install libnotify-tools`|
+|Gentoo|`sudo emerge media-fonts/ttf-ancient-fonts::guru`|`sudo emerge x11-libs/libnotify`|
 
-**(*) Useless for Spices Update version 6.0.0 and more.**
+**(*) Not required for Spices Update version 6.0.0 and higher, except for Gentoo.**
 
 ## Settings
 

@@ -1747,7 +1747,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.actor.set_opacity(255);
       this.set_color();
     }
-    this.actor.queue_relayout();
+    if (this.actor.get_stage() != null)
+      this.actor.queue_relayout();
   }
 
   set_radio_hashtable() {
@@ -4098,7 +4099,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.onShortcutChanged();
         clearTimeout(to);
       },
-      300
+      2100
     );
 
     if (this.desklet_is_activated)
@@ -4486,7 +4487,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         reloadExtension(UUID, Type.APPLET);
         clearTimeout(to);
       },
-      300
+      600
     );
   }
 
@@ -5888,7 +5889,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (maximize_vertically) {
       var app = null;
       var intervalId = null;
-      intervalId = setInterval(() => {
+      //~ intervalId = setInterval(() => {
+      intervalId = setTimeout(() => {
         app = this.tracker.get_app_from_pid(pid);
         if (app != null) {
           let window = app.get_windows()[0];
@@ -5896,16 +5898,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           //window.default_width = 1000;
           //window.default_height = 600;
           // window.resize(QUEUE, 1000, 600); // Obsolete.
+
           window.maximize(VERTICAL);
           window.activate(300);
           this.settingsWindow = window;
 
-          clearInterval(intervalId);
-          return false;
+          //~ clearInterval(intervalId);
+          clearTimeout(intervalId);
+          //~ return false;
         } else {
-          return true
+          //~ return true
         }
-      }, 100);
+      }, 600);
     }
 
     // Returns the pid:
