@@ -1,3 +1,6 @@
+### v2.6.1~20250106
+  * Fixes desklet issue for Cinnamon 6.0.
+
 ### v2.6.0~20250106
   * Improved functioning (start-up).
 
