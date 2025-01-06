@@ -20,6 +20,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         super(metadata, desklet_id);
 
         this.metadata = metadata;
+        this._bin = null;
         this.update_id = null;
         this.old_image_path = null;
         this.isLooping = true;
@@ -69,7 +70,12 @@ class AlbumArtRadio30 extends Desklet.Desklet {
 
     dir_monitor_loop() {
         if (!this.dir_monitor_loop_is_active) {
+            if (this.dir_monitor_id != null) {
+                this.dir_monitor.disconnect(this.dir_monitor_id);
+                this.dir_monitor.cancel();
+            }
             this.dir_monitor_id = null;
+            this.dir_monitor = null;
             return false;
         }
         this.on_setting_changed();
@@ -83,14 +89,27 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             //~ this.dir_monitor_id = null;
         //~ }
         //~ this.dir_monitor_id = null;
-
+        if (this.dir_monitor != null) {
+            if (this.dir_monitor_id != null) {
+                this.dir_monitor.disconnect(this.dir_monitor_id);
+            }
+            this.dir_monitor.cancel();
+        }
+        this.dir_monitor_id = null;
+        this.dir_monitor = null;
         this.isLooping = false;
         this.dir_monitor_loop_is_active = false;
-        this.dir_monitor.cancel();
-        this.dir_monitor = null;
+
+        if (this._bin != null) {
+            this._bin.removeTween();
+            this._bin.destroy_all_children();
+            this._bin.destroy();
+            this._bin = null;
+        }
     }
 
     _scan_dir(dir) {
+        if (!this.isLooping) return;
         let dir_file = Gio.file_new_for_uri(dir);
         let fileEnum = dir_file.enumerate_children('standard::type,standard::name,standard::is-hidden', Gio.FileQueryInfoFlags.NONE, null);
 
@@ -113,6 +132,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     }
 
     setup_display() {
+        if (!this.isLooping) return;
         this._photoFrame = new St.Bin({style_class: 'albumart30-box', x_align: St.Align.START});
 
         this._bin = new St.Bin();
@@ -204,16 +224,16 @@ class AlbumArtRadio30 extends Desklet.Desklet {
                 _transition = "easeOut"+this.fade_effect;
             if (this._bin) {
                 Tweener.addTween(this._bin, {
-                    opacity: 255, //0,
-                    time: 0, //this.fade_delay,
-                    transition: _transition, //'easeInSine',
+                    opacity: 255,
+                    time: 0,
+                    transition: _transition,
                     onComplete: () => {
                         if (this._bin) {
                             this._bin.set_child(this.currentPicture);
                             Tweener.addTween(this._bin, {
-                                opacity: 0, //255,
+                                opacity: 0,
                                 time: this.fade_delay,
-                                transition: _transition, //'easeInSine',
+                                transition: _transition,
                             });
                         }
                     }
