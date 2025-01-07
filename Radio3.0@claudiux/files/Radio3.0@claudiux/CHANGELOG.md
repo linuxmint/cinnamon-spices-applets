@@ -1,3 +1,8 @@
+### v2.7.0~20250107
+  * You can choose the Quality of the downloaded album cover.
+  * Desklet AlbumArt3.0: New option in context menu to display the Album Art at full size. Middle-clicking on the desklet does the same.
+  * Bufixes in applet and in desklet.
+
 ### v2.6.1~20250106
   * Fixes desklet issue for Cinnamon 6.0.
 

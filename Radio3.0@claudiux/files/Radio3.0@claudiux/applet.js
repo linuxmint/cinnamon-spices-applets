@@ -241,6 +241,8 @@ const QUEUE = 1;
 var VERSION, METADATA;
 
 let dummy = _("unassigned"); // Only for translation.
+dummy = _("Display Album Art at full size"); // used in desklet.
+dummy = undefined;
 
 var radioppConfigFilePath = HOME_DIR + "/.cinnamon/configs/radio@driglu4it/radio@driglu4it.json";
 if (!file_test(radioppConfigFilePath, FileTest.EXISTS)) {
@@ -1310,6 +1312,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_user_settings() {
+    this.settings.bind("image-resolution", "res", this.reload_songArt.bind(this));
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
     this.settings.bind("desklet-x", "desklet_x");
@@ -1737,7 +1740,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       let reg = new RegExp(`rgb[(]([0-9]+),([0-9]+),([0-9]+)[)]`);
       let color = "%s".format(this.settings.getValue("color-on"));
       let [, red, green, blue] = reg.exec(color);
-      let alpha_value = Math.ceil(2.55 * this.progress);
+      let alpha_value = Math.min(Math.ceil(2.55 * this.progress), 255);
       let alpha = ""+alpha_value;
       this.actor.style = "color: rgba(%s,%s,%s,%s)".format(red, green, blue, alpha);
 
@@ -3406,17 +3409,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.updateUI();
 
     if (!has_no_title)
-      this.download_songArt(title);
+      this.download_songArt(title, this.res);
 
     pid = null;
   }
 
-  download_songArt(title) {
+  download_songArt(title, res="") {
     if (!YTDL_PROGRAM().includes("yt-dlp")) return;
 
-    let command = '%s/get_song_art.sh "%s"'.format(SCRIPTS_DIR, title);
+    let command = '%s/get_song_art.sh "%s" "%s"'.format(SCRIPTS_DIR, title, res);
     //~ log("command: "+command, true);
     spawnCommandLineAsync(command);
+  }
+
+  reload_songArt() {
+    if (this.songTitle && this.songTitle.length > 0)
+      this.download_songArt(this.songTitle, this.res);
   }
 
   change_selected_item() {

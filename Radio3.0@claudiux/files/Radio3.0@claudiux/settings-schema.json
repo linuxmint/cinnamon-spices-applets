@@ -316,7 +316,8 @@
       "type": "section",
       "title": "Quality",
       "keys": [
-        "network-quality"
+        "network-quality",
+        "image-resolution"
       ]
     },
     "sectionNetworkMonitoring": {
@@ -1087,6 +1088,18 @@
       "Low": "low"
     },
     "tooltip": "High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n\nLow Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+  },
+  "image-resolution": {
+    "type": "combobox",
+    "default": "hq",
+    "description": "Quality of downloaded Album Art",
+    "options": {
+      "Max Resolution": "maxres",
+      "High Quality": "hq",
+      "Medium": "mq",
+      "Standard": "sd"
+    },
+    "tooltip": "Default: High Quality. Choose a value corresponding to your Network Quality."
   },
   "network-monitoring": {
     "type": "switch",

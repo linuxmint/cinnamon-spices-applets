@@ -1,6 +1,7 @@
 //"use strict";
 const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
+const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Desklet = imports.ui.desklet;
 const Lang = imports.lang;
@@ -101,7 +102,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.dir_monitor_loop_is_active = false;
 
         if (this._bin != null) {
-            this._bin.removeTween();
+            Tweener.removeTweens(this._bin);
             this._bin.destroy_all_children();
             this._bin.destroy();
             this._bin = null;
@@ -111,7 +112,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
     _scan_dir(dir) {
         if (!this.isLooping) return;
         let dir_file = Gio.file_new_for_uri(dir);
-        let fileEnum = dir_file.enumerate_children('standard::type,standard::name,standard::is-hidden', Gio.FileQueryInfoFlags.NONE, null);
+        //~ let fileEnum = dir_file.enumerate_children('standard::type,standard::name,standard::is-hidden', Gio.FileQueryInfoFlags.NONE, null);
+        let fileEnum = dir_file.enumerate_children('standard::*', Gio.FileQueryInfoFlags.NONE, null);
 
         let info;
         while ((info = fileEnum.next_file(null)) != null) {
@@ -259,6 +261,20 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         } catch (e) {
             global.logError(e);
         }
+    }
+
+    /**
+     * on_desklet_added_to_desktop:
+     *
+     * This function is called by deskletManager when the desklet is added to the desktop.
+     */
+     on_desklet_added_to_desktop(userEnabled) {
+         // Set "Display Album Art at full size" menu item, in top position:
+        let displayCoverArtInRealSize = new PopupMenu.PopupIconMenuItem(_("Display Album Art at full size"), "image-x-generic-symbolic", St.IconType.SYMBOLIC);
+        displayCoverArtInRealSize.connect("activate", (event) => {
+            GLib.spawn_command_line_async("xdg-open "+this.currentPicture.path);
+        });
+        this._menu.addMenuItem(displayCoverArtInRealSize, 0); // 0 for top position.
     }
 
     _loadImage(filePath) {
