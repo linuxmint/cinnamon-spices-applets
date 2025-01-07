@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-07 20:17+0100\n"
-"PO-Revision-Date: 2024-12-13 20:53-0300\n"
+"PO-Revision-Date: 2025-01-07 16:53-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -25,7 +25,7 @@ msgstr "sin asignar"
 
 #. applet.js:244 desklet/AlbumArt3.0@claudiux/desklet.js:273
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Mostrar la carátula del álbum a tamaño completo"
 
 #. applet.js:348
 msgid "This is your own list of Categories and Radio Stations."
@@ -873,7 +873,7 @@ msgstr "Lista de estaciones"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -1480,29 +1480,30 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "Calidad de la carátula descargada"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Resolución máxima"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Calidad"
+msgstr "Alta calidad"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Calidad media"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Estándar"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
 msgstr ""
+"Por defecto: Alta Calidad. Elija un valor correspondiente a la calidad de su "
+"red."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
