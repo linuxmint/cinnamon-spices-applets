@@ -10,7 +10,7 @@ const _           = require('./__init__')._;
 var GPasteNewItemDialog = GObject.registerClass(
     class GPasteNewItemDialog extends ModalDialog.ModalDialog {
         _init(callback) {
-            super._init({ styleClass: 'gpaste__new-item-dialog' });
+            super._init({ styleClass: 'gpaste__new-item-dialog', destroyOnClose: false });
             
             this._callback = callback;
             this.entry = new St.Entry({
