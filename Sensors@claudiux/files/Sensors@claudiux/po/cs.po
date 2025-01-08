@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux Czech 3.7.0\n"
+"Project-Id-Version: Sensors@claudiux Czech 3.9.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-10-29 14:28+0100\n"
-"PO-Revision-Date: 2024-07-13 17:09+0200\n"
+"PO-Revision-Date: 2025-01-08 19:22+0100\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 
 #. metadata.json->name
@@ -70,24 +70,24 @@ msgid "⚙ General"
 msgstr "⚙ Obecné"
 
 #. applet.js:1204
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Teplotní senzory"
+msgstr "%s Teplotní senzory"
 
 #. applet.js:1214
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Senzory větráků"
+msgstr "%s Senzory větráků"
 
 #. applet.js:1224
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Napěťové senzory"
+msgstr "%s Napěťové senzory"
 
 #. applet.js:1234
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Senzory narušení"
+msgstr "%s Senzory narušení"
 
 #. settings-schema.json->xsensors->description
 #. applet.js:1255
@@ -194,9 +194,8 @@ msgstr ""
 "dosáhnout nebo přesáhnou limity."
 
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Teploty"
+msgstr "⦿  Teploty"
 
 #. settings-schema.json->page_Fans->title
 msgid "🤂 Fan"
@@ -390,47 +389,47 @@ msgstr "Velikost písma (% standardní velikosti)"
 
 #. settings-schema.json->vertical-align->options
 msgid "baseline"
-msgstr ""
+msgstr "základní linka"
 
 #. settings-schema.json->vertical-align->options
 msgid "sub"
-msgstr ""
+msgstr "dolní index"
 
 #. settings-schema.json->vertical-align->options
 msgid "super"
-msgstr ""
+msgstr "horní index"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-top"
-msgstr ""
+msgstr "text nahoře"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-bottom"
-msgstr ""
+msgstr "text dole"
 
 #. settings-schema.json->vertical-align->options
 msgid "middle"
-msgstr ""
+msgstr "na střed"
 
 #. settings-schema.json->vertical-align->options
 msgid "top"
-msgstr ""
+msgstr "horní"
 
 #. settings-schema.json->vertical-align->options
 msgid "bottom"
-msgstr ""
+msgstr "dolní"
 
 #. settings-schema.json->vertical-align->options
 msgid "unset"
-msgstr ""
+msgstr "nenastaveno"
 
 #. settings-schema.json->vertical-align->options
 msgid "inherit"
-msgstr ""
+msgstr "zdědit"
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Vertikální zarovnání"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
