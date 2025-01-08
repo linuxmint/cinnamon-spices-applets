@@ -1,3 +1,7 @@
+### v7.4.5~20250108
+  * Improved seeker display in the menu.
+  * Duration calculation becomes faster. Note that many radio stations provide the total duration every 1 second, others every 5 seconds.
+
 ### v7.4.4~20250105
   * Improved functioning.
 
