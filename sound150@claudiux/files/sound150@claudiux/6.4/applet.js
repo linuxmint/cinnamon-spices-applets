@@ -510,6 +510,7 @@ class Seeker extends Slider.Slider {
         this.destroyed = false;
 
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
+        //~ this.actor.expand = true;
         //~ this.actor.set_draw_value(true);
         this.tooltipText = "00:00";
         this.tooltip = new Tooltips.Tooltip(this.actor, this.tooltipText);
@@ -523,7 +524,7 @@ class Seeker extends Slider.Slider {
         this._trackid = "";
 
         this._timeoutId = null;
-        this._timeoutId2 = null;
+        this._timeoutId_timerCallback = null;
         this._timerTicker = 0;
 
         this._mediaServerPlayer = mediaServerPlayer;
@@ -533,18 +534,25 @@ class Seeker extends Slider.Slider {
         this.startingDate = Date.now();
 
         this.seekerBox = new St.BoxLayout();
+        this.seekerBox.expand = true;
+        this.seekerBox.x_align = St.Align.END;
+
+
 
         this.posLabel = new St.Label({text:" 00:00 "});
+        this.posLabel.x_align = St.Align.START;
         //~ logDebug("this.posLabel: "+this.posLabel);
         //~ this.posLabel.clutterText.line_wrap = false;
         //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this.durLabel = new St.Label({text:" 00:00 "});
+        this.durLabel.x_align = St.Align.END;
         //~ logDebug("this.durLabel: "+this.durLabel);
         //~ this.durLabel.clutterText.line_wrap = false;
         //~ this.durLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         //~ this.durLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
 
+        this.actor.x_align = St.Align.MIDDLE;
         this.seekerBox.add_actor(this.posLabel);
         this.seekerBox.add_actor(this.actor);
         this.seekerBox.add_actor(this.durLabel);
@@ -633,38 +641,14 @@ class Seeker extends Slider.Slider {
     }
 
     time_for_label(sec) {
-        //~ log("time_for_label("+sec+")", true);
-        let _sec = sec;
-        let _str = "";
-        let h = 0;
-        let m = 0;
-        let s = 0;
-        if (_sec > 3600) {
-            h = Math.floor(_sec / 3600);
-            _str = _str + h;
-            if (h < 10)
-                _str = "0" + _str;
-            _str += ":";
-            _sec = _sec - 3600 * h;
-        }
-        if (_sec > 60) {
-            m = Math.floor(_sec / 60);
-            if (m < 10)
-                _str = _str + "0" + m;
-            else
-                _str = _str + m;
-            _str += ":";
-            _sec = _sec - 60 * m
-        } else {
-            _str += "00:";
-        }
-        s = Math.round(_sec);
-        if (s < 10)
-            _str = _str + "0" + s;
+        let milliseconds = 1000 * sec;
+        var date = new Date(milliseconds);
+        var timeString;
+        if (milliseconds < 3600000)
+            timeString = date.toISOString().substring(14, 19);
         else
-            _str = _str + s;
-
-        return " "+_str+" ";
+            timeString = date.toISOString().substring(11, 19);
+        return " "+timeString+" ";
     }
 
     play() {
@@ -778,15 +762,19 @@ class Seeker extends Slider.Slider {
                 } else if (!this._dragging) {
                     if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    //~ if (this._timeoutId2) {
-                        //~ try {if (Mainloop.source_remove(this._timeoutId2)) this._timeoutId2 = null;} catch(e) {} finally {
-                            //~ this._timeoutId2 = null;
-                        //~ }
-                    //~ }
+                    if (this._timeoutId != null) {
+                        Mainloop.source_remove(this._timeoutId);
+                        this._timeoutId = null;
+                    }
+                    if (this._timeoutId_timerCallback != null) {
+                        Mainloop.source_remove(this._timeoutId_timerCallback);
+                        this._timeoutId_timerCallback = null;
+                    }
 
-                    //~ this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
-                    if (!this.destroyed)
-                        this._timeoutId2 = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
+                    if (!this.destroyed) {
+                        this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
+                        this._timeoutId_timerCallback = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
+                    }
                     //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
             } else {
@@ -824,41 +812,28 @@ class Seeker extends Slider.Slider {
     }
 
     _updateTimer() {
-        if (this.destroyed) return GLib.SOURCE_REMOVE;
+        //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
 
-        //~ if (this._timeoutId) {
-            //~ try {if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;} catch(e) {} finally {
-                //~ this._timeoutId = null;
-            //~ }
-        //~ }
+        if (this._timeoutId_timerCallback != null) {
+            Mainloop.source_remove(this._timeoutId_timerCallback);
+            this._timeoutId_timerCallback = null;
+        }
 
         if (this.status === "Playing") {
             if (this.canSeek) {
                 this._getPosition();
                 this._timerTicker = 0;
-                //~ if (this._timeoutId) {
-                    //~ if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;
-                    //~ this._timeoutId = null;
-                //~ }
-                try {this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));} catch(e) {}
+                this._timeoutId_timerCallback = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
             } else if (this._length > 0) {
                 this._getPosition();
                 this._timerTicker = 0;
-                //~ if (this._timeoutId) {
-                    //~ if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;
-                    //~ this._timeoutId = null;
-                //~ }
-                this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
+                this._timeoutId_timerCallback = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
             }
         } else {
             if (this.status === "Stopped") {
                 this._currentTime = 0;
-                //~ if (this._timeoutId) {
-                    //~ if (Mainloop.source_remove(this._timeoutId)) this._timeoutId = null;
-                    //~ this._timeoutId = null;
-                //~ }
             }
-            //this._updateValue();
+            //this._updateValue(); //???
         }
     }
 
@@ -962,9 +937,9 @@ class Seeker extends Slider.Slider {
                 //~ this._timeoutId = null;
             //~ }
         //~ }
-        //~ if (this._timeoutId2 != null) {
-            //~ try {if (Mainloop.source_remove(this._timeoutId2)) this._timeoutId2 = null;} catch(e) {} finally {
-                //~ this._timeoutId2 = null;
+        //~ if (this._timeoutId_timerCallback != null) {
+            //~ try {if (Mainloop.source_remove(this._timeoutId_timerCallback)) this._timeoutId_timerCallback = null;} catch(e) {} finally {
+                //~ this._timeoutId_timerCallback = null;
             //~ }
         //~ }
         if (this._seekChangedId) {
@@ -2340,7 +2315,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._setKeybinding();
                 clearTimeout(to);
             },
-            300
+            2100
         );
     }
 
