@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.6.2\n"
+"Project-Id-Version: 3.6.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-06-14 18:56+0200\n"
+"PO-Revision-Date: 2025-01-08 19:12+0100\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:20441
@@ -1905,141 +1905,122 @@ msgstr ""
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Rozptýlené přeháňky"
+msgstr "Roztroušené sněhové srážky"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Bouřky"
+msgstr "Možnost výskytu bouřek"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
-#, fuzzy
 msgid "Light Rain"
 msgstr "Slabý déšť"
 
 #: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
-#, fuzzy
 msgid "Light Sleet"
-msgstr "Slabý déšť se sněhem"
+msgstr "Slabý mrznoucí déšť"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Dešťové přeháňky"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Přeháňky mrznoucího deště"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Sněhové přeháňky"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Extrémní bouřky"
+msgstr "Vysoký výskyt bouřek"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Zataženo"
+msgstr "Vysoká oblačnost"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Zataženo"
+msgstr "Nízká oblačnost"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Zataženo a větrno"
+msgstr "Sucho a zataženo"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Lehké sněžení"
+msgstr "Mírně bouřlivé"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Rozptýlené sněhové přeháňky"
+msgstr "Bouřlivé sněhové přeháňky"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "Bouřková přeháňka"
+msgstr "Bouřkové přeháňky"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Bouřková přeháňka"
+msgstr "Bouřkové sněhové přeháňky"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Varování"
+msgstr "Výstrahaí před větrem"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Bouřka s deštěm"
+msgstr "Bouřková výstraha"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Varování"
+msgstr "Výstraha před dešťovými srážkami"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Varování"
+msgstr "Sněhová výstraha"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Výstraha na možnost kluzkých silnic"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Varování"
+msgstr "Výstraha před námrazou"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Výstraha před sesuvy půdy"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Varování"
+msgstr "Výstraha před vysokými teplotami"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Lavinová výstraha"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Varování - zemětřesení"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Výstraha před lesními požáry"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Varování"
+msgstr "Výstraha před povodní"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
@@ -2047,15 +2028,17 @@ msgstr ""
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Pro tohoto poskytovatele musíte uvést poštovní směrovací číslo"
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Tento poskytovatel vyžaduje poštovní směrovací číslo ve švýcarském formátu "
+"1000-9999"
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Švýcarsko"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2141,9 +2124,8 @@ msgid "Saved to {filePath}"
 msgstr "Uloženo do {filePath}"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Uložení lokace"
+msgstr "Lokační služba je blokovaná"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
@@ -2483,7 +2465,7 @@ msgstr "Sada ikon weather-icons od Erika Flowerse"
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
-msgstr "Použít alternativní ikony na panelu"
+msgstr "Použít  ikony na panelu"
 
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
@@ -2710,7 +2692,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (vyžaduje klíč)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2722,9 +2703,9 @@ msgstr ""
 "Pozici lze vložit ručně pomocí zeměpisných souřadnic (například "
 "51.5085,-0.1257) nebo zadáním názvu města a státu (např. London,UK), zkusit "
 "lze i zadání {House number} {Street} {City/Town} {Postcode} {Country}. "
-"Vyhledávací algoritmus je co se týče formátu velmi flexibilní. Po 3 s po "
-"zastavení zadávání adresy by tato měla být dokončena automaticky a očekává "
-"potvrzení volby."
+"Vyhledávací algoritmus je co se týče formátu velmi flexibilní. Po 3 s bez "
+"vkládání nového textu by měla být adresa dokončena automaticky a očekávat "
+"potvrzení nálezu. Zajišťuje nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -2904,11 +2885,11 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr "Není aplikováno na volitelný set ikon, ten je zjednodušený v základu"
+msgstr "Není aplikováno na volitelný set ikon, ten je symbolický v základu"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr "Použít piktogramy všude v appletu"
+msgstr "Použít symbolické ikony všude v appletu"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
