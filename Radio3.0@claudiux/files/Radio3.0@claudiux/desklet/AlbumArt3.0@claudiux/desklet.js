@@ -13,8 +13,23 @@ const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 
-Gettext.bindtextdomain("Radio3.0@claudiux", GLib.get_home_dir() + "/.local/share/locale")
+const APPLET_UUID = "Radio3.0@claudiux";
+const DESKLET_UUID = "AlbumArt3.0@claudiux";
+Gettext.bindtextdomain(APPLET_UUID, GLib.get_home_dir() + "/.local/share/locale");
 Gettext.bindtextdomain("cinnamon", "/usr/share/locale");
+
+function _(str) {
+    let customTrans = Gettext.dgettext(APPLET_UUID, str);
+    if (customTrans !== str && customTrans.length > 0)
+        return customTrans;
+
+    customTrans = Gettext.dgettext("cinnamon", str);
+    if (customTrans !== str && customTrans.length > 0)
+        return customTrans;
+
+    return Gettext.gettext(str);
+}
+
 
 class AlbumArtRadio30 extends Desklet.Desklet {
     constructor(metadata, desklet_id) {
@@ -32,7 +47,10 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.delay = 3;
         //this.fade_delay = 0;
         this.effect = "";
-        this.settings = new Settings.DeskletSettings(this, this.metadata.uuid, this.instance_id);
+
+        this._updateDecoration();
+
+        this.settings = new Settings.DeskletSettings(this, DESKLET_UUID, this.instance_id);
         this.settings.bind('height', 'height', this.on_setting_changed);
         this.settings.bind('width', 'width', this.on_setting_changed);
         this.settings.bind('fade-delay', 'fade_delay', this.on_setting_changed);
@@ -45,6 +63,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.setHeader(_("Radio3.0 Album Art"));
         this._setup_dir_monitor();
         this.setup_display();
+        this._updateDecoration(); // once again?
     }
 
     on_setting_changed() {

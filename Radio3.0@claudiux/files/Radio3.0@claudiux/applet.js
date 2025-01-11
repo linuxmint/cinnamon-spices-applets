@@ -92,6 +92,8 @@ const { fixedEncodeURIComponent } = require("./lib/fixedEncodeURIComponent");
 // checkTranslations:
 const { are_translations_installed, install_translations } = require("./lib/checkTranslations");
 
+const { source_exists } = require("./lib/sourceExists");
+
 //~ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
@@ -273,7 +275,7 @@ function spaceAvailable(path) {
     let info = dir.query_filesystem_info('filesystem::free', null);
     if (info == null) return 0;
     let free = info.get_attribute_as_string('filesystem::free');
-    return parseInt(free)
+    return 1*parseInt(free)
   } catch(e) {
     logError("spaceAvailable("+path+"): "+e);
     return 0;
@@ -672,10 +674,11 @@ RadioNotificationSource.prototype = {
   destroyAllNotifications: function() {
     if (this.notifications.length > 0) {
       for (let i = this.notifications.length - 1; i >= 0; i--) {
-        try {
+        if (this.notifications[i]) {
           this.notifications[i].destroy();
-        } catch(e) {
+        } else {
           // Do nothing.
+          logDebug("Unable to destroy notification number "+i);
         }
       }
     }
@@ -826,6 +829,11 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     this._signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
   }
 
+  _subMenuOpenStateChanged(menu, open) {
+        if (this.actor.get_stage() == null) return;
+        this.actor.change_style_pseudo_class('open', open);
+    }
+
   _needsScrollbar() {
     if (!this.needScrollbar) return false;
 
@@ -913,21 +921,22 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
                 //~ this.close(true);
             //~ }
         });
-        this._signals.connect(menuItem, 'destroy', (emitter) => {
+        //~ this._signals.connect(menuItem, 'destroy', (emitter) => {
+        this._signals.connect(menuItem, 'destroy', () => {
             if (menuItem && menuItem.menu) {
-              if (this._signals.isConnected)('activate', menuItem.menu)
+              if (this._signals.isConnected('activate', menuItem.menu))
                 this._signals.disconnect('activate', menuItem.menu);
-              if (this._signals.isConnected)('active-changed', menuItem.menu)
+              if (this._signals.isConnected('active-changed', menuItem.menu))
                 this._signals.disconnect('active-changed', menuItem.menu);
-              if (this._signals.isConnected)('open-state-changed', menuItem.menu)
+              if (this._signals.isConnected('open-state-changed', menuItem.menu))
                 this._signals.disconnect('open-state-changed', this);
             }
             if (menuItem) {
-              if (this._signals.isConnected)('activate', menuItem)
+              if (this._signals.isConnected('activate', menuItem))
                 this._signals.disconnect('activate', menuItem);
-              if (this._signals.isConnected)('active-changed', menuItem)
+              if (this._signals.isConnected('active-changed', menuItem))
                 this._signals.disconnect('active-changed', menuItem);
-               if (this._signals.isConnected)('sensitive-changed', menuItem)
+               if (this._signals.isConnected('sensitive-changed', menuItem))
               this._signals.disconnect('sensitive-changed', menuItem);
             }
 
@@ -953,9 +962,9 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             this._connectSubMenuSignals(menuItem, menuItem);
             this._signals.connect(menuItem, 'destroy', () => {
               logDebug('Destroying PopupMenuSection');
-              if (this._signals.isConnected)('activate', menuItem)
+              if (this._signals.isConnected('activate', menuItem))
                 this._signals.disconnect('activate', menuItem);
-              if (this._signals.isConnected)('active-changed', menuItem)
+              if (this._signals.isConnected('active-changed', menuItem))
                 this._signals.disconnect('active-changed', menuItem);
 
                 this.length--;
@@ -1009,12 +1018,12 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
     }
 }
 
-class CategoriesStationsBox {
-    constructor() {
-        this.actor = new BoxLayout({ vertical: false });
-        this.actor._delegate = this;
-    }
-}
+//~ class CategoriesStationsBox {
+    //~ constructor() {
+        //~ this.actor = new BoxLayout({ vertical: false });
+        //~ this.actor._delegate = this;
+    //~ }
+//~ }
 
 /**
  * #R3PopupMenu:
@@ -1316,9 +1325,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
     this.settings.bind("desklet-x", "desklet_x");
+    this.desklet_x = 1*parseInt(this.desklet_x);
     this.settings.bind("desklet-y", "desklet_y");
+    this.desklet_y = 1*parseInt(this.desklet_y);
+    this.settings.bind("desklet-dbus-id", "desklet_dbusId");
+    this.desklet_dbusId = 1*parseInt(this.desklet_dbusId);
     this.settings.bind("desklet-is-activated", "desklet_is_activated");
-    this.settings.bind("desklet-show-on-desktop", "show_desklet", this.switch_showDesklet.bind(this));
+    //~ this.settings.bind("desklet-show-on-desktop", "show_desklet", this.switch_showDesklet.bind(this));
+    this.show_desklet = false; // forced
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
@@ -1405,16 +1419,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.populate_help_textviews()
   }
 
-  switch_showDesklet() {
-    if (this.context_menu_item_showDesklet) {
-      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-    }
+  //~ switch_showDesklet() {
+    //~ if (this.context_menu_item_showDesklet != null) {
+      //~ this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+      //~ this.context_menu_item_showDesklet.toggle();
+    //~ }
+
+    //~ this.setup_desklet();
+    //~ if (this.context_menu_item_configDesklet)
+      //~ this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
+
     //~ this.desklet_is_activated = this.show_desklet;
-    let to = setTimeout( () => {
-      this.settings.setValue("desklet-is-activated", this.show_desklet);
-      clearTimeout(to);
-    }, 150);
-  }
+    //~ let to = setTimeout( () => {
+      //~ this.settings.setValue("desklet-is-activated", this.show_desklet);
+      //~ clearTimeout(to);
+    //~ }, 150);
+  //~ }
 
   ensure_radio30_music_dir() {
     if (!file_test(RADIO30_MUSIC_DIR, FileTest.EXISTS)) {
@@ -1930,60 +1950,52 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   unmonitor_mpv_title() {
     //log("unmonitor_mpv_title");
-    if (this.titleMonitor == null) return;
+    if (this.titleMonitor == null || this.titleMonitorId == null || this.titleMonitor.is_cancelled()) return;
 
     try {
-      if (this.titleMonitorId != null) {
-        this.titleMonitor.disconnect(this.titleMonitorId);
-        this.titleMonitor.cancel();
-        this.titleMonitor = null;
-        this.titleMonitorId = null;
-      }
+      this.titleMonitor.disconnect(this.titleMonitorId);
+      this.titleMonitor.cancel();
+      this.titleMonitor = null;
+      this.titleMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(MPV_TITLE_FILE), e)
     }
   }
 
   unmonitor_r30stop() {
-    if (this.r30stopMonitor == null) return;
+    if (this.r30stopMonitor == null || this.r30stopMonitorId == null || this.r30stopMonitor.is_cancelled()) return;
 
     try {
-      if (this.r30stopMonitorId != null) {
-        this.r30stopMonitor.disconnect(this.r30stopMonitorId);
-        this.r30stopMonitor.cancel();
-        this.r30stopMonitor = null;
-        this.r30stopMonitorId = null;
-      }
+      this.r30stopMonitor.disconnect(this.r30stopMonitorId);
+      this.r30stopMonitor.cancel();
+      this.r30stopMonitor = null;
+      this.r30stopMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30STOP), e)
     }
   }
 
   unmonitor_r30previous() {
-    if (this.r30previousMonitor == null) return;
+    if (this.r30previousMonitor == null || this.r30previousMonitorId == null || this.r30previousMonitor.is_cancelled()) return;
 
     try {
-      if (this.r30previousMonitorId != null) {
-        this.r30previousMonitor.disconnect(this.r30previousMonitorId);
-        this.r30previousMonitor.cancel();
-        this.r30previousMonitor = null;
-        this.r30previousMonitorId = null;
-      }
+      this.r30previousMonitor.disconnect(this.r30previousMonitorId);
+      this.r30previousMonitor.cancel();
+      this.r30previousMonitor = null;
+      this.r30previousMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30PREVIOUS), e)
     }
   }
 
   unmonitor_r30next() {
-    if (this.r30nextMonitor == null) return;
+    if (this.r30nextMonitor == null || this.r30nextMonitorId == null || this.r30nextMonitor.is_cancelled()) return;
 
     try {
-      if (this.r30nextMonitorId != null) {
-        this.r30nextMonitor.disconnect(this.r30nextMonitorId);
-        this.r30nextMonitor.cancel();
-        this.r30nextMonitor = null;
-        this.r30nextMonitorId = null;
-      }
+      this.r30nextMonitor.disconnect(this.r30nextMonitorId);
+      this.r30nextMonitor.cancel();
+      this.r30nextMonitor = null;
+      this.r30nextMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(R30NEXT), e)
     }
@@ -2038,7 +2050,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   monitor_rec_folder() {
-    if (this.recMonitor || this.recMonitorId) return;
+    if (this.recMonitor != null) return;
 
     let file = file_new_for_path(RADIO30_MUSIC_DIR);
 
@@ -2053,15 +2065,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   unmonitor_rec_folder() {
-    if (this.recMonitor == null) return;
+    if (this.recMonitor == null || this.recMonitorId == null || this.recMonitor.is_cancelled()) return;
 
     try {
-      if (this.recMonitorId) {
-        this.recMonitor.disconnect(this.recMonitorId);
-        this.recMonitor.cancel();
-        this.recMonitor = null;
-        this.recMonitorId = null;
-      }
+      this.recMonitor.disconnect(this.recMonitorId);
+      this.recMonitor.cancel();
+      this.recMonitor = null;
+      this.recMonitorId = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(RADIO30_MUSIC_DIR), e)
     }
@@ -2076,7 +2086,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   monitor_jobs_dir() {
     //log("monitor_jobs_dir");
-    if (this.jobsMonitor || this.jobsMonitorId) return;
+    if (this.jobsMonitor != null) return;
 
     let file = file_new_for_path(JOBS_DIR);
 
@@ -2094,15 +2104,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   unmonitor_jobs_dir() {
     //log("unmonitor_jobs_dir");
-    if (this.jobsMonitor == null) return;
+    if (this.jobsMonitor == null || thisjobsMonitorId == null || this.jobsMonitor.is_cancelled()) return;
 
     try {
-      if (this.jobsMonitorId != null) {
-        this.jobsMonitor.disconnect(this.jobsMonitorId);
-        this.jobsMonitor.cancel();
-        this.jobsMonitor = null;
-        this.jobsMonitorId = null;
-      }
+      this.jobsMonitor.disconnect(this.jobsMonitorId);
+      this.jobsMonitorId = null;
+      this.jobsMonitor.cancel();
+      this.jobsMonitor = null;
     } catch(e) {
       logError("Unable to unmonitor %s!".format(JOBS_DIR), e)
     }
@@ -2114,7 +2122,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let dir = file_new_for_path(JOBS_DIR);
     if (dir.query_exists(null)) {
-        let children = dir.enumerate_children("standard::name,standard::type,time::modified", FileQueryInfoFlags.NONE, null);
+        let children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", FileQueryInfoFlags.NONE, null);
         let info, file_type;
         var name;
         var json_files = [];
@@ -3055,7 +3063,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let nbr = 0;
     let dir = file_new_for_path(dir_path);
     if (dir.query_exists(null)) {
-      let children = dir.enumerate_children("standard::name", FileQueryInfoFlags.NONE, null);
+      let children = dir.enumerate_children("standard::name,standard::icon", FileQueryInfoFlags.NONE, null);
       let info, file_type;
       var name;
 
@@ -5555,31 +5563,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   install_desklet() {
     // Installs the AlbumArt3.0 desklet.
-    let enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
-    var deskletEDKline = "";
-    for (let i = 0; i < enabledDesklets.length; i++){
-      let name = enabledDesklets[i].split(":")[0];
-      //~ logDebug("Desklet name: "+name);
-      if (name == DESKLET_UUID) {
-        deskletEDKline = ""+enabledDesklets[i];
-        enabledDesklets.splice(i, 1);
-        break;
-      }
-    }
 
-
-    const desklet_source_path = APPLET_DIR + "/desklet/" + DESKLET_UUID;
-    if (find_program_in_path("cinnamon-install-spice")) {
-      spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
-    } else {
-      const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
-      spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
-    }
-
+    // First, install the '.json' config file:
     var spices_config_path = HOME_DIR+"/.config/cinnamon/spices";
     var desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
     if (!file_test(spices_config_path, FileTest.EXISTS)) {
-      spices_config_path = HOME_DIR+".cinnamon/configs";
+      spices_config_path = HOME_DIR+"/.cinnamon/configs";
       desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
     }
     if (file_test(spices_config_path, FileTest.EXISTS)) {
@@ -5589,6 +5578,29 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
+    // enabledDesklets will contain all desklets:
+    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY); //??? var or let? (previously let)
+    var deskletEDKline = "";
+    for (let i = 0; i < enabledDesklets.length; i++){
+      let name = enabledDesklets[i].split(":")[0];
+      //~ logDebug("Desklet name: "+name);
+      if (name == DESKLET_UUID) {
+        deskletEDKline = ""+enabledDesklets[i];
+        //~ enabledDesklets.splice(i, 1); //useless
+        break;
+      }
+    }
+
+    // Put the desklet code at the right place:
+    const desklet_source_path = APPLET_DIR + "/desklet/" + DESKLET_UUID;
+    if (find_program_in_path("cinnamon-install-spice")) {
+      spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
+    } else {
+      const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
+      spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
+    }
+
+    // Register this desklet in DBus:
     var found = false;
     if (deskletEDKline.length > 0) {
       for (let i = 0; i < enabledDesklets.length; i++){
@@ -5602,32 +5614,91 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
       if (found)
         global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    } else {
+    } else { // deskletEDKline is empty. We must fill it.
       var pos = -1;
+      var numMax = -1;
+      var nums = [];
+      var [name, num, x, y] = ["", -1, -1, -1];
+      var [desklet_num, desklet_x, desklet_y] = [1*parseInt(this.desklet_dbusId), 1*parseInt(this.desklet_x), 1*parseInt(this.desklet_y)];
       for (let i = 0; i < enabledDesklets.length; i++){
-        let name = enabledDesklets[i].split(":")[0];
+        //~ let name = enabledDesklets[i].split(":")[0];
+        [name, num, x, y] = enabledDesklets[i].split(":");
+        [num, x, y] = [1*parseInt(num), 1*parseInt(x), 1*parseInt(y)];
         //~ logDebug("Desklet name: "+name);
         if (name == DESKLET_UUID) {
           found = true;
           pos = i;
-          break;
+          [desklet_num, desklet_x, desklet_y] = [1*num, 1*x, 1*y];
+          this.desklet_dbusId = 1*desklet_num;
+          //~ break;
+        } else {
+          if (nums.indexOf(num) === -1)
+            nums.push(1*num);
+          else
+            logError("Many desklets have the same id in D-Bus! To check it, execute: gsettings get org.cinnamon enabled-desklets"); // Should never occur!
+          if (1*num > numMax) numMax = 1*num;
+
         }
       }
-      if (this.desklet_x < 0)
-        this.desklet_x = global.screen_width - 600;
-      if (this.desklet_y < 0)
-        this.desklet_y = global.screen_height - 500;
-      let next_desklet_id = global.settings.get_int("next-desklet-id");
-      deskletEDKline = `${DESKLET_UUID}:${next_desklet_id}:${this.desklet_x}:${this.desklet_y}`;
+      if (1*this.desklet_x < 0)
+        this.desklet_x = 1*global.screen_width - 600;
+      if (1*this.desklet_y < 0)
+        this.desklet_y = 1*global.screen_height - 500;
+
+      let next_desklet_id = 1*global.settings.get_int("next-desklet-id");
+      if (this.desklet_dbusId < 0) { // We have to choose the best possible id.
+        if (1*numMax+1 === next_desklet_id) {
+          desklet_num = 1*numMax+1;
+          this.desklet_dbusId = 1*desklet_num;
+          next_desklet_id += 1;
+          global.settings.set_int("next-desklet-id", next_desklet_id);
+        } else if (numMax+1 < next_desklet_id) {
+          desklet_num = 1*numMax+1;
+          this.desklet_dbusId = 1*desklet_num;
+        } else { // Should never occur! (numMax+1 > next_desklet_id)
+          desklet_num = 1*numMax+1;
+          this.desklet_dbusId = 1*desklet_num;
+          next_desklet_id = 1*numMax+2;
+          global.settings.set_int("next-desklet-id", next_desklet_id);
+        }
+        deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
+      } else {
+        if (nums.indexOf(this.desklet_dbusId) === -1) {
+          deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
+        } else { // this.desklet_dbusId is already used by another desklet!
+          desklet_num = 0;
+          nums.sort( (a, b) => {
+            if (Math.round(a) < Math.round(b))
+              return -1;
+            else if (Math.round(a) > Math.round(b))
+              return 1;
+            return 0;
+          });
+          var num_found = false;
+          while (!num_found) {
+            desklet_num = 1*desklet_num + 1;
+            if ((nums.indexOf(desklet_num) === -1) || (desklet_num >= nums.length) || (desklet_num >= 1*next_desklet_id))
+              num_found = true;
+          }
+          this.desklet_dbusId = 1*desklet_num;
+          if (1*desklet_num >= 1*next_desklet_id) {
+            next_desklet_id = 1*desklet_num + 1;
+            global.settings.set_int("next-desklet-id", next_desklet_id);
+          }
+          deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
+        }
+      }
+
+      //deskletEDKline = `${DESKLET_UUID}:${next_desklet_id}:${this.desklet_x}:${this.desklet_y}`;
       if (found)
         enabledDesklets[pos] = deskletEDKline;
       else
         enabledDesklets.push(deskletEDKline);
-      global.settings.set_int("next-desklet-id", next_desklet_id + 1);
+      //~ global.settings.set_int("next-desklet-id", 1*next_desklet_id + 1);
       global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
     }
-    this.show_desklet = true;
     this.desklet_is_activated = true;
+    this.show_desklet = true;
   }
 
   uninstall_desklet() {
@@ -5637,8 +5708,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       let [name, num, x, y] = enabledDesklets[i].split(":");
       //~ logDebug("Desklet name: "+name);
       if (name == DESKLET_UUID) {
-        this.desklet_x = x;
-        this.desklet_y = y;
+        this.desklet_x = 1*x;
+        this.desklet_y = 1*y;
+        this.desklet_dbusId = 1*num;
         enabledDesklets.splice(i, 1);
         found = true;
         break;
@@ -6511,31 +6583,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   // Behavior:
-  on_button_activate_desklet_clicked() {
-    //~ logDebug("on_button_activate_desklet_clicked");
-    if (this._is_desklet_activated()) {
-      //~ this.desklet_is_activated = true;
-    } else {
-      //~ this.desklet_is_activated = false;
-      let enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
-      let next_desklet_id = global.settings.get_int("next-desklet-id");
-      let x_pos = global.screen_width - 600;
-      let y_pos = global.screen_height - 500;
-      enabledDesklets.push(DESKLET_UUID+':'+next_desklet_id+':'+x_pos+':'+y_pos);
-      global.settings.set_int("next-desklet-id", next_desklet_id + 1);
-      global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-      //~ this.desklet_is_activated = this._is_desklet_activated();
-
-    }
-
-    this.show_desklet = this._is_desklet_activated();
-
-    if (this.context_menu_item_showDesklet) {
-      this.context_menu_item_showDesklet.actor.visible = true;
-      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-    }
-    //~ this.finalizeContextMenu();
-  }
 
   on_desklet_open_settings_button_clicked() {
     spawnCommandLineAsync("cinnamon-settings desklets "+DESKLET_UUID);
