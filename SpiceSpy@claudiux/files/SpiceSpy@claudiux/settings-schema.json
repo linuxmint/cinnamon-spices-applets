@@ -30,6 +30,7 @@
         "show-icon-in-menu",
         "icon-size",
         "show-translations",
+        "show-issues",
         "sort-by",
         "show-uuid",
         "translate-name",
@@ -88,6 +89,11 @@
   "show-translations": {
     "type": "switch",
     "description": "Show number of translations in the menu",
+    "default": false
+  },
+  "show-issues": {
+    "type": "switch",
+    "description": "Show number of issues in the menu",
     "default": false
   },
   "sort-by": {

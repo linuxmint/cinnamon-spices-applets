@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# DIRECTORY MENU
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# torchipeppo, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-12 13:55-0400\n"
+"POT-Creation-Date: 2024-10-31 18:13+0100\n"
 "PO-Revision-Date: 2024-03-29 23:13+0100\n"
 "Last-Translator: Martin Posselt <nekomajin@gmx.de>\n"
 "Language-Team: \n"
@@ -42,6 +42,10 @@ msgstr ""
 msgid "Base Directory"
 msgstr "Basisverzeichnis"
 
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr ""
+
 #. settings-schema.json->icon-name->description
 msgid "Icon (hover here for info!)"
 msgstr "Icon (für weitere Infos mit dem Mauszeiger berühren)"
@@ -59,12 +63,32 @@ msgstr "Tooltip-Text"
 msgid "Panel Text"
 msgstr ""
 
-#. settings-schema.json->show-menu->description
-msgid "Show menu"
+#. settings-schema.json->behavior-section->description
+msgid "Behavior"
 msgstr ""
 
-#. settings-schema.json->show-menu->tooltip
-msgid "Set keybinding(s) to show the menu."
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Versteckte Dateien anzeigen"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr ""
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr ""
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr ""
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
 msgstr ""
 
 #. settings-schema.json->limit-characters->description
@@ -83,6 +107,14 @@ msgstr ""
 "Begrenzt die Anzahl der Zeichen für jeden Eintrag.\n"
 "Nützlich, wenn das Menü zu umfangreich ist."
 
-#. settings-schema.json->show-hidden->description
-msgid "Include hidden files"
-msgstr "Versteckte Dateien anzeigen"
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr ""

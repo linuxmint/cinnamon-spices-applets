@@ -5,9 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.2.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-25 23:19+0100\n"
-"PO-Revision-Date: 2024-01-25 23:22+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-04 14:43+0100\n"
+"PO-Revision-Date: 2024-12-04 14:59+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -15,47 +16,62 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: 5.4/applet.js:96
+#. 5.4/applet.js:140
 msgid "Restart Cinnamon"
 msgstr "Redémarrer Cinnamon"
 
-#: 5.4/applet.js:108
+#. 5.4/applet.js:152
+msgid "Screen Off"
+msgstr "Éteindre l'écran"
+
+#. 5.4/applet.js:177
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
+#. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
 msgid "Switch User"
 msgstr "Changer d'utilisateur"
 
-#: 5.4/applet.js:166
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Performing automatic updates"
+msgstr "Mises à jour automatiques en cours d'exécution"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Please wait"
+msgstr "Veuillez patienter..."
+
+#. 5.4/applet.js:249 5.4/applet.js:256
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: 5.4/applet.js:178
+#. 5.4/applet.js:270 5.4/applet.js:277
 msgid "Suspend"
 msgstr "Mettre en veille"
 
-#: 5.4/applet.js:187
+#. 5.4/applet.js:288 5.4/applet.js:298
 msgid "Hibernate"
 msgstr "Hiberner"
 
-#: 5.4/applet.js:199
+#. 5.4/applet.js:312 5.4/applet.js:319
 msgid "Restart"
 msgstr "Redémarrer l'ordinateur"
 
-#: 5.4/applet.js:208
+#. 5.4/applet.js:330 5.4/applet.js:337
 msgid "Power Off"
 msgstr "Arrêter l'ordinateur"
 
 #. metadata.json->description
 msgid ""
-"Restart Cinnamon, lock the screen, switch users, log out, suspend, "
-"hibernate, reboot or shut down the computer"
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
 msgstr ""
-"Redémarrer Cinnamon, verrouiller l'écran, changer d'utilisateur, se "
-"déconnecter, mettre en veille, hiberner, redémarrer ou arrêter l'ordinateur"
+"Redémarrer Cinnamon, éteindre l'écran, verrouiller l'écran, changer "
+"d'utilisateur, se déconnecter, mettre en veille, hiberner, redémarrer ou "
+"arrêter l'ordinateur"
 
 #. metadata.json->name
 msgid "Exit"
@@ -89,6 +105,10 @@ msgstr "Afficher l'option Mettre en veille"
 msgid "Show the Hibernate option"
 msgstr "Afficher l'option Hibernation"
 
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "Hiberner nécessite les droits de l'utilisateur root (sudo)"
+
 #. 5.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
 msgstr "Afficher l'option Redémarrer"
@@ -104,6 +124,26 @@ msgid ""
 msgstr ""
 "Toutes les options de menu ci-dessous peuvent être gérées par le système.\n"
 "Si c'est le cas, vous ne pouvez pas les voir."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+msgid "Show the Screen Off option"
+msgstr "Afficher l'option Éteindre l'écran"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr " secondes"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Durée de désactivation de la souris"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Pour éviter que l'écran ne se rallume trop tôt après l'avoir éteint, la "
+"souris sera désactivée pendant le nombre de secondes défini ici."
 
 #. 5.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
@@ -146,6 +186,3 @@ msgid ""
 msgstr ""
 "L'option \"Forcer\" vous permet de vous déconnecter tout en ignorant les "
 "inhibiteurs. Utile lorsque plusieurs sessions sont ouvertes."
-
-#~ msgid "System Controls"
-#~ msgstr "Les contrôles du système"

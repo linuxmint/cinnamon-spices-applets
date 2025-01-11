@@ -7,6 +7,7 @@ This is a simple, configurable applet for displaying an Exit menu on your panel.
 ## Available Menu options
 
   * Restart Cinnamon
+  * Screen Off
   * Lock Screen
   * Switch user
   * Log Out
@@ -37,6 +38,7 @@ These include `disable-lock-screen`, `disable-log-out` and `disable-switching-us
 For now, these menu options are not available using a **wayland** session:
 
 * Restart Cinnamon
+* Screen Off
 * Lock Screen
 * Switch User
 

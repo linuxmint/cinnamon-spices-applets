@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.4
+
+* A fix for handling cases where a UI scaling factor is used (Display user interface scale is something other than 100%)
+
 ## 2.0.3
 
 * Added an option to allow Ctrl-Click to bypass the count down timer and suspend immediately

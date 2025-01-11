@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# APP LAUNCHER
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mchilli, 2021
 #
 #, fuzzy
 msgid ""
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: app-launcher@mchilli 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-05 14:46-0500\n"
-"PO-Revision-Date: 2024-07-21 01:39+0200\n"
-"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"POT-Creation-Date: 2024-11-21 11:01+0100\n"
+"PO-Revision-Date: 2024-09-05 17:00+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -18,106 +18,126 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:108
+#. applet.js:118
 msgid "Edit Applications"
 msgstr "Editar aplicacions"
 
-#: applet.js:737 applet.js:1031
+#. applet.js:837 applet.js:1131
 msgid "Delete"
 msgstr "Eliminar"
 
-#: applet.js:738 applet.js:1032
+#. applet.js:838 applet.js:1132
 msgid "Edit"
 msgstr "Editar"
 
-#: applet.js:739 applet.js:1033
+#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
 msgid "Cancel"
 msgstr "Cancel·lar"
 
+#. dialogs.py:41 dialogs.py:292
+msgid "OK"
+msgstr "D'acord"
+
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
+#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nom"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:51 dialogs.glade:104
+#. dialogs.py:50
 msgid "Group"
 msgstr "Grup"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:52 widgets.py:43 dialogs.glade:115
+#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Ordre"
 
-#: dialogs.py:203
+#. dialogs.py:236
 msgid "The name cannot be empty"
 msgstr "El nom no pot estar buit"
 
-#: dialogs.py:208
+#. dialogs.py:241
 msgid "The name is already used"
 msgstr "El nom ja està en ús"
 
-#: dialogs.py:215
+#. dialogs.py:248
 msgid "Valid name"
 msgstr "Nom vàlid"
 
-#: dialogs.py:221
+#. dialogs.py:254
 msgid "Valid command"
 msgstr "Ordre vàlida"
 
-#: dialogs.py:224
+#. dialogs.py:257
 msgid "The command is not valid"
 msgstr "L'ordre no és vàlida"
 
-#: dialogs.py:236
+#. dialogs.py:291
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "Quina informació s'hauria de substituir al fitxer *.desktop?"
 
-#: dialogs.py:281 dialogs.glade:561
+#. dialogs.py:335
 msgid "really delete?"
 msgstr "segur que ho voleu eliminar?"
+
+#. dialogs.py:336
+msgid "No"
+msgstr "No"
+
+#. dialogs.py:337
+msgid "Yes"
+msgstr "Sí"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:29
+#. widgets.py:46 ui/widget.glade:29
 msgid "Icon"
 msgstr "Icona"
 
-#: widgets.py:125
+#. widgets.py:51
 msgid "Add application"
 msgstr "Afegir aplicació"
 
-#: widgets.py:126
+#. widgets.py:52
 msgid "Add new entry"
 msgstr "Afegir element nou"
 
-#: widgets.py:130
+#. widgets.py:55
 msgid "Add separator"
 msgstr "Afegir separador"
 
-#: widgets.py:138
-msgid "Remove selected entry"
-msgstr "Eliminar l'element seleccionat"
-
-#: widgets.py:144
+#. widgets.py:58
 msgid "Edit selected entry"
 msgstr "Editar l'element seleccionat"
 
-#: widgets.py:150
+#. widgets.py:61
 msgid "Duplicate selected entry"
 msgstr "Duplicar l'element seleccionat"
 
-#: widgets.py:156
+#. widgets.py:64
 msgid "Move selected entry up"
 msgstr "Moure l'element seleccionat a dalt"
 
-#: widgets.py:162
+#. widgets.py:67
 msgid "Move selected entry down"
 msgstr "Moure l'element seleccionat a baix"
 
-#: widgets.py:323
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr "Eliminar l'element seleccionat"
+
+#. widgets.py:76
+msgid "Save?"
+msgstr "Desar?"
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr "Desa la configuració actual"
+
+#. widgets.py:264
 msgid "Separator"
 msgstr "Separador"
 
@@ -174,13 +194,25 @@ msgstr "Text de les notificacions"
 msgid "%s will be your application name"
 msgstr "%s equival al nom de la vostra aplicació"
 
-#. settings-schema.json->hotkey-binding->description
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr ""
+
+#. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
 msgstr "Mostrar el menú"
 
-#. settings-schema.json->hotkey-binding->tooltip
+#. settings-schema.json->hotkey-bindings->tooltip
 msgid "Set keybinding(s) to show the menu"
 msgstr "Assignar dreceres per mostrar el menú"
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
@@ -204,8 +236,7 @@ msgstr "Utilitzar icones simbòliques per a les aplicacions"
 
 #. settings-schema.json->use-symbolic-icons->tooltip
 msgid "Use Symbolic Application Icons, where it's possible"
-msgstr ""
-"Utilitzar icones simbòliques per les aplicacions, quan sigui possible"
+msgstr "Utilitzar icones simbòliques per les aplicacions, quan sigui possible"
 
 #. settings-schema.json->app-icon-size->description
 msgid "Application Icon Size"

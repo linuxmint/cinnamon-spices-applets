@@ -92,21 +92,16 @@ NightLightApplet.prototype = {
   },
 
   _check_time: function() {
-    let now = Date.now();
-    let start = new Date();
-    start.setHours(this.startH);
-    start.setMinutes(this.startM);
-    start.setSeconds(0);
-    let end;
-    if ((this.endH * 60 + this.endM) >= (this.startH * 60 + this.startM)) {
-      end = new Date();
+    let start = this.startH * 3600 + this.startM * 60;
+    let end = this.endH * 3600 + this.endM * 60;
+    let now = new Date(); now = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+    let on = false;
+    if (start <= end) {
+      if (now >= start && now < end) on = true;
     } else {
-      end = new Date (now + 86400000);
+      if ((now >= start && now < 86400) || (now >= 0 && now < end)) on = true;
     }
-    end.setHours(this.endH);
-    end.setMinutes(this.endM);
-    end.setSeconds(0);
-    if (now >= start && now < end) {
+    if (on) {
       this.autoAndOn = true;
       this._turn_on();
     } else {

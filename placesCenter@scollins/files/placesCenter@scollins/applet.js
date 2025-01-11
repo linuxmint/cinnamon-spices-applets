@@ -359,6 +359,7 @@ class MyApplet extends Applet.TextIconApplet {
                 recentPane.addMenuItem(this.clearRecent);
                 this.clearRecent.connect("activate", Lang.bind(this, function() {
                     this.recentManager.purge_items();
+                    this.recentSection.removeAll();
                 }));
 
                 this.openRecent = new IconMenuItem(_("Recent"), "folder-recent");

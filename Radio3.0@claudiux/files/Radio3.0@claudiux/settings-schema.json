@@ -26,6 +26,7 @@
       "type": "page",
       "title": "Import",
       "sections": [
+      "sectionImportRadiopp",
         "sectionImportShoutcast",
         "sectionImportFile",
         "sectionImportList"
@@ -58,7 +59,9 @@
         "sectionBehaviorTooltip",
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
-        "sectionBehaviorSymbolicIconColor"
+        "sectionBehaviorSymbolicIconColor",
+        "sectionBehaviorHorizontalPanel",
+        "sectionBehaviorAlbumArtDesklet"
       ]
     },
     "pageRecording": {
@@ -132,6 +135,14 @@
         "button-update-help",
         "button-update",
         "scale-update"
+      ]
+    },
+    "sectionImportRadiopp": {
+      "type": "section",
+      "dependency": "radiopp-is-here",
+      "title": "Only for Radio++ users",
+      "keys": [
+        "import-radiopp-button"
       ]
     },
     "sectionImportShoutcast": {
@@ -284,11 +295,29 @@
         "show-volume-level-near-icon"
       ]
     },
+    "sectionBehaviorHorizontalPanel": {
+      "type": "section",
+      "title": "Only on horizontal panels",
+      "keys": [
+        "horizontal-show-name",
+        "horizontal-show-title",
+        "horizontal-max-title-length"
+      ]
+    },
+    "sectionBehaviorAlbumArtDesklet": {
+      "type": "section",
+      "title": "Album Art desklet",
+      "keys": [
+        "desklet-show-on-desktop",
+        "desklet-open-settings-button"
+      ]
+    },
     "sectionNetworkQuality": {
       "type": "section",
       "title": "Quality",
       "keys": [
-        "network-quality"
+        "network-quality",
+        "image-resolution"
       ]
     },
     "sectionNetworkMonitoring": {
@@ -436,6 +465,13 @@
     "show-buttons": true,
     "reorderable": true,
     "columns": [
+      {
+        "id": "fav",
+        "title": "♥︎",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
       {
         "id": "inc",
         "title": "Menu",
@@ -599,6 +635,11 @@
     "description": "Help",
     "height": 100,
     "dependency": "show-help-in-tabs"
+  },
+  "import-radiopp-button": {
+    "type": "button",
+    "description": "Import your stations from Radio++",
+    "callback": "on_button_import_radiopp_clicked"
   },
   "import-shoutcast-button": {
     "type": "button",
@@ -1047,6 +1088,18 @@
       "Low": "low"
     },
     "tooltip": "High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n\nLow Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+  },
+  "image-resolution": {
+    "type": "combobox",
+    "default": "hq",
+    "description": "Quality of downloaded Album Art",
+    "options": {
+      "Max Resolution": "maxres",
+      "High Quality": "hq",
+      "Medium": "mq",
+      "Standard": "sd"
+    },
+    "tooltip": "Default: High Quality. Choose a value corresponding to your Network Quality."
   },
   "network-monitoring": {
     "type": "switch",
@@ -1844,5 +1897,63 @@
     "type": "switch",
     "description": "Display volume level near icon",
     "default": true
+  },
+  "horizontal-show-name": {
+    "type": "switch",
+    "description": "Display radio name",
+    "default": false
+  },
+  "horizontal-show-title": {
+    "type": "switch",
+    "description": "Display title",
+    "default": false
+  },
+  "horizontal-max-title-length": {
+    "type": "scale",
+    "dependency": "horizontal-show-title",
+    "default": 0,
+    "step": 1,
+    "min": 0,
+    "max": 255,
+    "description": "Maximum title length",
+    "tooltip": "0 means no maximum"
+  },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
+  },
+  "desklet-activate-button": {
+    "type": "button",
+    "dependency": "!desklet-is-activated",
+    "description": "Activate desklet displaying the Radio3.0 Album Art",
+    "callback": "on_button_activate_desklet_clicked"
+  },
+  "desklet-activated-label": {
+    "type": "label",
+    "dependency": "desklet-is-activated",
+    "description": "The desklet displaying the Radio3.0 Album Art is activated"
+  },
+  "desklet-show-on-desktop" : {
+    "type": "switch",
+    "default": false,
+    "description": "Show Album Art on desktop"
+  },
+  "desklet-open-settings-button": {
+    "type": "button",
+    "dependency": "desklet-show-on-desktop",
+    "description": "Album Art desklet settings",
+    "callback": "on_desklet_open_settings_button_clicked"
+  },
+  "radiopp-is-here": {
+    "type": "generic",
+    "default": false
+  },
+  "desklet-x": {
+    "type": "generic",
+    "default": -1
+  },
+  "desklet-y": {
+    "type": "generic",
+    "default": -1
   }
 }

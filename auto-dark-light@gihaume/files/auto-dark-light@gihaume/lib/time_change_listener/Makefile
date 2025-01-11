@@ -1,9 +1,9 @@
 BUILD_FOLDER   := build
 SOURCE_FILES   := $(wildcard *.cpp)
 OBJECT_FILES   := $(patsubst %.cpp, $(BUILD_FOLDER)/%.o, $(SOURCE_FILES))
-EXECUTABLE     := time_change_listener
+EXECUTABLE     := auto-dark-light-time-change-listener
 COMPILER       := g++
-COMPILER_FLAGS := -std=c++20 -Wall -pedantic -Wextra
+COMPILER_FLAGS := -std=c++20
 LINKER_FLAGS   :=
 
 
@@ -22,11 +22,7 @@ $(BUILD_FOLDER)/%.o: %.cpp
 	$(COMPILER) -c $(COMPILER_FLAGS) -o $@ $< -MMD -MF $(@:.o=.d)
 
 
-run: $(EXECUTABLE)
-	./$(EXECUTABLE)
-
-
 clean:
 	$(RM) -rf $(BUILD_FOLDER)
 
-.PHONY: all build run clean
+.PHONY: all build clean

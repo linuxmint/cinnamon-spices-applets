@@ -257,6 +257,7 @@ class SensorsApplet extends Applet.TextApplet {
       this.strictly_positive_fan ? 1 : 0,
       this.strictly_positive_volt ? 1 : 0
     );
+    this.reaper.reap_nvidia_smi();
 
     // Events:
     this._connectIds = [];
@@ -395,6 +396,7 @@ class SensorsApplet extends Applet.TextApplet {
         this.strictly_positive_fan ? 1 : 0,
         this.strictly_positive_volt ? 1 : 0
       );
+      this.reaper.reap_nvidia_smi();
     } else {
       this.set_applet_label(_("Suspended"));
     }

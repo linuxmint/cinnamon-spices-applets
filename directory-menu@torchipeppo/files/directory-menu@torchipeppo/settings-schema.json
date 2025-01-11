@@ -5,6 +5,11 @@
         "description": "Base Directory",
         "select-dir": true
     },
+
+    "appearance-section": {
+        "type": "section",
+        "description": "Appearance"
+    },
     "icon-name": {
         "type": "iconfilechooser",
         "default": "folder-symbolic",
@@ -21,11 +26,34 @@
         "default": "",
         "description": "Panel Text"
     },
-    "show-menu": {
-        "type": "keybinding",
-        "description": "Show menu",
-        "default": "",
-        "tooltip": "Set keybinding(s) to show the menu."
+
+    "behavior-section": {
+        "type": "section",
+        "description": "Behavior"
+    },
+    "show-hidden": {
+        "type": "switch",
+        "default": false,
+        "description": "Include hidden files"
+    },
+    "order-by": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Name": 0,
+            "Date modified": 1
+        },
+        "description": "Order by..."
+    },
+    "favorites-first": {
+        "type": "switch",
+        "default": false,
+        "description": "Show favorite items first"
+    },
+    "pinned-first": {
+        "type": "switch",
+        "default": false,
+        "description": "Show pinned items first"
     },
     "limit-characters": {
         "type": "switch",
@@ -42,9 +70,15 @@
         "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
         "dependency": "limit-characters"
     },
-    "show-hidden": {
-        "type": "switch",
-        "default": false,
-        "description": "Include hidden files"
+
+    "keybindings-section": {
+        "type": "section",
+        "description": "Keybindings"
+    },
+    "show-menu": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu."
     }
 }

@@ -4,6 +4,8 @@ Radio3.0 is an *Internet Radio Receiver & Recorder* applet for Cinnamon.
 
 With Radio3.0 you can:
 
+  * Import your stations from Radio++ if you use it. See Import tab in settings.
+
   * Listen to any type of radio stream (MP3, AAC, AAC+, OGG, FLAC, FLV...)
 
   * Perform research in an internet database that references tens of thousands of radio stations.
@@ -32,6 +34,7 @@ With Radio3.0 you can:
 
   * Modify the volume of the radio, independent of the general sound volume. This volume level can be displayed near the icon.
 
+  * Display (in a frame on the desktop) the album art of the song currently playing, if available.
 
 Details, help and FAQ can be found in the [Manual](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/Radio3.0%40claudiux/files/Radio3.0%40claudiux/help/MANUAL.md).
 

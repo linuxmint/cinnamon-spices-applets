@@ -1,13 +1,16 @@
-const { _ }       = require('./lib/translator.js');
+const { _ } = require('./lib/translator.js');
 
 const {Gio, GLib} = imports.gi;
+
+const EXECUTABLE_NAME = "auto-dark-light-time-change-listener";
 
 /**
  * A passive listener for system time changes. It interfaces the C++ program
  * which API is in `time_change_listener.hpp`.
  */
 class Time_change_listener {
-    #callback;
+    #callback_when_change;
+    #callback_for_errors;
     #subprocess;
     #input;
     #input_error;
@@ -16,12 +19,13 @@ class Time_change_listener {
 
     /**
      * @param {string} path - The absolute path where the C++ files are located.
-     * @param {function(): void} callback - The function to be called when the system time changes.
-     * @throws {Error} If the `make` and `gcc` commands are not found in the system.
-     *
+     * @param {function(): void} callback_when_change - The function to be called when the system time changes.
+     * @param {function(string): void} callback_for_errors - The function to call with a message for when an error occurs.
+     * @throws {Error} If the `make` and `gcc` commands are not found in the system or if the compilation of the C++ program fails.
      */
-    constructor(path, callback) {
-        this.#callback = callback;
+    constructor(path, callback_when_change, callback_for_errors) {
+        this.#callback_when_change = callback_when_change;
+        this.#callback_for_errors = callback_for_errors;
 
         if (!(GLib.find_program_in_path('make') && GLib.find_program_in_path('gcc')))
             throw new Error(_("Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based system with `sudo apt install build-essential`, then reload the applet (in e.g. in restarting Cinnamon)."));
@@ -37,12 +41,12 @@ class Time_change_listener {
                 throw new Error(stderr);
         } catch (error) {
             throw new Error(
-                "Compilation of `time_change_listener` failed.\n\n"
+                `${_("Compilation of")} \`${EXECUTABLE_NAME}\` ${_("failed")}.\n\n`
                 + error.message
             );
         }
 
-        const executable_path = `${path}/time_change_listener`;
+        const executable_path = `${path}/${EXECUTABLE_NAME}`;
         this.#subprocess = new Gio.Subprocess({
             argv: [executable_path],
             flags:
@@ -69,7 +73,7 @@ class Time_change_listener {
             await new Promise(resolve =>
                 this.#input.read_line_async(GLib.PRIORITY_DEFAULT, null, resolve)
             );
-            this.#callback();
+            this.#callback_when_change();
         } while (!this.#end_listen);
     }
 
@@ -82,32 +86,28 @@ class Time_change_listener {
                     (source, result) => {
                         try { resolve(source.read_line_finish(result)); }
                         catch (error) {
-                            global.logError(error);
+                            this.#callback_for_errors(error);
                             resolve([null, 0]);
                         }
                     }
                 )
             );
             if (line !== null && length > 0)
-                global.logError("time_change_listener process error: " + line);
+                this.#callback_for_errors(
+                    `${_("the subprocess")} \`${EXECUTABLE_NAME}\` ${_("wrote on its error output")}${_(":")} ${line}`
+                );
         } while (!this.#end_listen);
     }
 
-    /**
-     * Enable listening for the system time changes.
-     */
+    /** Enable listening for the system time changes. */
     enable() { this.#output.write('enable\n', null); }
 
-    /**
-     * Disable listening for the system time changes.
-     */
+    /** Disable listening for the system time changes. */
     disable() { this.#output.write('disable\n', null); }
 
-    /**
-     * Declare the object as finished to release any ressource acquired.
-     */
+    /** Declare the object as finished to release any ressource acquired. */
     finalize() {
-        this.#callback = () => {};
+        this.#callback_when_change = () => {};
         this.#end_listen = true;
         this.#output.write('exit\n', null);
         this.#subprocess.wait(null);

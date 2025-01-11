@@ -1,22 +1,22 @@
 # translation of weather@mockturtl.po to Icelandic
-# Copyright (C) 2022 Icelandic translations of Cinnamon applets
+# Copyright (C) 2024 Icelandic translations of Cinnamon applets
 # This file is distributed under the same license as the Cinnamon package.
 #
-# Sveinn í Felli <sv1@fellsnet.is>, 2012, 2014, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2012, 2014, 2021, 2022, 2023, 2024 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: weather@mockturtl\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2023-07-21 16:50+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"PO-Revision-Date: 2024-11-23 18:07+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is> <translation-team-is@lists.sourceforge.net>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
@@ -1545,6 +1545,9 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Þjónustan með uppflettingu heimilisfangs yfir í staðsetningu er lokuð. Þú"
+" getur reynt að breyta kennistrengnum þínum (User-Agent) í hjálpinni og"
+" athugað hvort það leysi vandamálið."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1603,17 +1606,15 @@ msgstr "Mjög gott"
 
 #: 3.8/weather-applet.js:11348
 msgid "Ash"
-msgstr ""
+msgstr "Aska"
 
 #: 3.8/weather-applet.js:11350
-#, fuzzy
 msgid "Squall"
-msgstr "Vindhviður"
+msgstr "Rokur"
 
 #: 3.8/weather-applet.js:11427
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "Dálítil snjóél"
+msgstr "Dálítil slydduél"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1637,22 +1638,18 @@ msgid "Heavy drizzle"
 msgstr "Mikil súld"
 
 #: 3.8/weather-applet.js:12925
-#, fuzzy
 msgid "Light shower rain"
-msgstr "Dálítil snjóél"
+msgstr "Dálitlar skúraleiðingar"
 
 #: 3.8/weather-applet.js:12929
-#, fuzzy
 msgid "Heavy shower rain"
-msgstr "Talsverð snjóél"
+msgstr "Talsverðar skúraleiðingar"
 
 #: 3.8/weather-applet.js:12937
-#, fuzzy
 msgid "Mix snow/rain"
-msgstr "Snjókennd rigning"
+msgstr "Snjókoma eða rigning"
 
 #: 3.8/weather-applet.js:12939
-#, fuzzy
 msgid "Snow shower"
 msgstr "Snjóél"
 
@@ -1867,211 +1864,186 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #: 3.8/weather-applet.js:16446
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Gakktu úr skugga um að þú hafir\n"
-"sett API-lykilinn frá Climacell rétt inn"
+"sett API-lykilinn frá Pirate Weather rétt inn"
 
 #: 3.8/weather-applet.js:16816
-#, fuzzy
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
 msgstr ""
-"Staðsetningarþjónusta svaraði með villum, skoðaðu atvikaskrár í Looking Glass"
+"Staðsetningarþjónusta fann ekki staðsetninguna þína, skoðaðu atvikaskrár í"
+" Looking Glass"
 
 #: 3.8/weather-applet.js:16979
-#, fuzzy
 msgid "Snow grains"
-msgstr "Snjókennd rigning"
+msgstr "Kornsnjór"
 
 #: 3.8/weather-applet.js:16986
-#, fuzzy
 msgid "Light showers"
-msgstr "Dálítil snjóél"
+msgstr "Dálitlir skúrir"
 
 #: 3.8/weather-applet.js:17000
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Talsverð snjóél"
+msgstr "Talsverðir skúrir"
 
 #: 3.8/weather-applet.js:17028
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Þrumuveður með dálítilli rigningu"
+msgstr "Þrumuveður með dálitlum hagléljum"
 
 #: 3.8/weather-applet.js:17035
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Þrumuveður með rigningu"
+msgstr "Þrumuveður með hagléljum"
 
 #: 3.8/weather-applet.js:17062 3.8/weather-applet.js:17222
-#, fuzzy
 msgid "Feels like"
 msgstr "Með vindkælingu"
 
 #: 3.8/weather-applet.js:17130
 msgid "Open Meteo"
-msgstr ""
+msgstr "Open Meteo"
 
 #: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Skúrir á dreif"
+msgstr "Slydda á dreif"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Þrumuveður"
+msgstr "Mögulegt þrumuveður"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
-#, fuzzy
 msgid "Light Rain"
 msgstr "Dálítil rigning"
 
 #: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
-#, fuzzy
 msgid "Light Sleet"
 msgstr "Dálítil slydda"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Rigning með köflum"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Slydda með köflum"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Snjókoma með köflum"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Hvasst þrumuveður"
+msgstr "Tíð þrumuveður"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Skýjað"
+msgstr "Háskýjað"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Skýjað"
+msgstr "Lágskýjað"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Alskýjað og vindur"
+msgstr "Alskýjað og þurrt"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Örlítil snjókoma"
+msgstr "Dálítið vindasamt"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Snjóél á dreif"
+msgstr "Hvöss snjóél"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
 msgstr "Þrumuskúrir"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Þrumuskúrir"
+msgstr "Þrumu-snjóél"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Aðvörun"
+msgstr "Aðvörun vegna vinds"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Þrumuveður með rigningu"
+msgstr "Aðvörun vegna þrumuveðurs"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Aðvörun"
+msgstr "Aðvörun vegna rigningar"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Aðvörun"
+msgstr "Aðvörun vegna snjókomu"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Aðvörun vegna hálku á vegum"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Aðvörun"
+msgstr "Aðvörun vegna frosts"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Aðvörun vegna skriðufalla"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Aðvörun"
+msgstr "Aðvörun vegna hita"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Aðvörun vegna snjóflóða"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Aðvörun vegna jarðskjálfta"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Aðvörun vegna skógarelda"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Aðvörun"
+msgstr "Aðvörun vegna flóða"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "Météo Suisse"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Fyrir þessa þjónustuveitu þarf að nota póstnúmer."
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Fyrir þessa þjónustuveitu þarf að nota svissneskt póstnúmer, frá 1000-9999."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "Sviss"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2090,11 +2062,10 @@ msgstr ""
 " {configFilePath}"
 
 #: 3.8/weather-applet.js:18687
-#, fuzzy
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
-"Gakktu úr skugga um að þú hafir sett inn staðsetningu eða sért að nota "
-"sjálfvirka staðsetningu"
+"Gakktu úr skugga um að þú hafir sett inn staðsetningu eða sért að nota"
+" sjálfvirka staðsetningu."
 
 #: 3.8/weather-applet.js:18705
 msgid "This provider requires an API key to operate"
@@ -2141,7 +2112,7 @@ msgstr "Svæði: {stationArea}"
 
 #: 3.8/weather-applet.js:20008
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} veðuraðvörun/aðvaranir"
 
 #: 3.8/weather-applet.js:20403 3.8/weather-applet.js:20413
 #: 3.8/weather-applet.js:20420
@@ -2149,9 +2120,8 @@ msgid "Error Saving Debug Information"
 msgstr "Villa við að vista villuleitarupplýsingar"
 
 #: 3.8/weather-applet.js:20420
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "Gat ekki náð í veðurupplýsingar"
+msgstr "Gat ekki opnað skrána {filePath} sem skrifanlega"
 
 #: 3.8/weather-applet.js:20429
 msgid "Debug Information saved successfully"
@@ -2162,47 +2132,45 @@ msgid "Saved to {filePath}"
 msgstr "Vistað í {filePath}"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Vistun staðsetninga"
+msgstr "Lokað á staðsetningaþjónustu"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
-msgstr ""
+msgstr "Engin skrifta gefin"
 
 #: 3.8/weather-applet.js:20633
 msgid "You need to add a script first."
-msgstr ""
+msgstr "Þú þarft fyrst að bæta við skriftu."
 
 #: 3.8/weather-applet.js:20637
-#, fuzzy
 msgid "No Weather Data"
-msgstr "US Weather"
+msgstr "Engin veðurgögn"
 
 #: 3.8/weather-applet.js:20637
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "Engin veðurgögn til að keyra með skriftu"
 
 #: 3.8/weather-applet.js:20645
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "Tókst að keyra skriftu"
 
 #: 3.8/weather-applet.js:20645
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "Það tókst að keyra skriftuna þína."
 
 #: 3.8/weather-applet.js:20648
 msgid "Error Running Script"
-msgstr ""
+msgstr "Villa við að keyra skriftu"
 
 #: 3.8/weather-applet.js:20648
 msgid "Script returned error, see logs for more information"
 msgstr ""
+"Skriftan skilaði villu, skoðaðu atvikaskrárnar til að sjá nánari upplýsingar"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Veðursmáforrit"
+msgstr "Aðvaranir veðursmáforrit"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2637,7 +2605,7 @@ msgstr "Staðsetningarstillingar"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "Tæknilegt og sjálfvirkni"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2692,7 +2660,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2708,12 +2676,11 @@ msgstr "US National Weather (aðeins í BNA)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "Suisse Météo (aðeins Sviss)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (lykill nauðsynlegur)"
+msgstr "OpenWeatherMap OneCall (lykill nauðsynlegur)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2736,7 +2703,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (lykill nauðsynlegur)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2745,18 +2711,20 @@ msgid ""
 "replaced automatically for validating your choice. Powered by nominatim."
 "openstreetmap.org."
 msgstr ""
-"Þú getur sett inn hnit á sniðinu 'Breiddargráða,Lengdargráða' (t.d. "
-"51.5085,-0.1257) eða notað 'Borg,Landskóði' (t.d. London,UK) eða prófað að "
-"setja inn {Húsnúmer} {Gata} {Borg/Sveitarfélag} {Póstnúmer} {Land}. "
-"Reiknirit leitarinnar er mjög sveigjanlegt varðandi sniðið. Eftir 3 sekúndur "
-"án þess að skrifa neitt verður fyllt sjálfkrafa inn með viðkomandi "
-"heimilisfangi á réttu sniði."
+"Þú getur sett inn hnit á sniðinu 'Breiddargráða,Lengdargráða' (t.d."
+" 51.5085,-0.1257) eða notað 'Borg,Landskóði' (t.d. London,UK) eða prófað að"
+" setja inn {Húsnúmer} {Gata} {Borg/Sveitarfélag} {Póstnúmer} {Land}."
+" Reiknirit leitarinnar er mjög sveigjanlegt varðandi sniðið. Eftir 3 sekúndur"
+" án þess að skrifa neitt verður fyllt sjálfkrafa inn með viðkomandi"
+" heimilisfangi á réttu sniði. Keyrt með nominatim.openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
 msgstr ""
+"Ef leitarreiturinn samsvarar vistaðri staðsetningu, skal not vistuðu"
+" staðsetninguna í staðinn."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2817,13 +2785,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Virkja birtingu aðvarana vegna veðurs"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"Aðvörunarhnappur verður sýnilegur í sprettvalmyndinni ef einhverjar aðvaranir"
+" eru virkar fyrir staðsetninguna þína."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2911,7 +2881,7 @@ msgstr "Eins og SA, N í stað tákna fyrir stefnu."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Þjónusta ætti að þýða veðurskilyrði ef slíkar þýðingar eru tiltækar"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2919,6 +2889,9 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"Ef þjónustuveitan býður upp á þýðingar á veðurskilyrðum yfir á tungumálið"
+" þitt og staðfærslan þín sé studd af þjónustuveitunni, verður það notað."
+" Annars notar smáforritið sitt eigið þýðingakerfi."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -3040,7 +3013,7 @@ msgstr "Valin slóð þar sem á að vista atvikaskrár"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "Nota annan kennistreng"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -3052,7 +3025,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "Keyra skipun þegar veðurupplýsingar breytast"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -3075,4 +3048,4 @@ msgstr ""
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "Prófaðu skipunina þína"

@@ -1,3 +1,14 @@
+### v7.4.7~20250105
+  * Now compatible with Cinnamon on Gentoo.
+  * Replaces apturl with xdg-open.
+  * Lets the user enter commands when dependencies are missing.
+
+### v7.4.6~20241230
+  * Spices not selected in the lists of settings are displayed first.
+
+### v7.4.5~20241114
+  * Soup2/Soup3: better detection.
+
 ### v7.4.4~20240602
   * Restarts httpLib when network interface status changes.
 

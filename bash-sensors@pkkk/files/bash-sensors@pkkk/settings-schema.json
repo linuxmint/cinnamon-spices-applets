@@ -13,7 +13,7 @@
 		"type": "spinbutton",
 		"default": 10,
 		"min": 0,
-		"max": 60,
+		"max": 3600,
 		"step": 1,
 		"units": "seconds",
 		"description": "Refresh interval [0 for no refresh]"

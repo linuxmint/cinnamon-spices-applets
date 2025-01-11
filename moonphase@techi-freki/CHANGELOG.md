@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.1
+- Fixes #6185.
+
 ## v1.0.0
 - Feature add: Adds geolocation features
 - Feature add: Adds moon rise, set, and transit times on left click

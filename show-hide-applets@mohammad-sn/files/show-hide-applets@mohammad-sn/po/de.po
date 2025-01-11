@@ -1,32 +1,48 @@
-# SOME DESCRIPTIVE TITLE.
+# DRAWER (SHOW/HIDE APPLETS)
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mohammad-sn, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 16:04+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
 "PO-Revision-Date: 2017-09-27 17:48+0200\n"
+"Last-Translator: Peter Moser <pitiz29a@gmail.com>\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Peter Moser <pitiz29a@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de\n"
 
-#: applet.js:51
+#. applet.js:60 applet.js:231
+#, fuzzy
+msgid "Autohide ON"
+msgstr "Verstecke automatisch"
+
+#. applet.js:62 applet.js:233
+#, fuzzy
+msgid "Autohide OFF"
+msgstr "Verstecke automatisch"
+
+#. applet.js:82
 msgid "Panel Edit mode"
 msgstr "Leistenbearbeitungsmodus"
 
-#: applet.js:57
+#. applet.js:88
 msgid "Add applets to the panel"
 msgstr "Applets zur Leiste hinzufügen"
 
-#. show-hide-applets@mohammad-sn->metadata.json->description
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Verstecke automatisch"
+
+#. metadata.json->description
 msgid ""
 "hide a few applet to have a neater panel, and make them show up again by a "
 "click"
@@ -34,80 +50,74 @@ msgstr ""
 "Verstecke ein paar Applets, damit die Leiste aufgeräumter aussieht. Ein "
 "einfacher Klick zeigt sie wieder."
 
-#. show-hide-applets@mohammad-sn->metadata.json->name
+#. metadata.json->name
 msgid "Drawer (show/hide applets)"
 msgstr "Schublade (zeige/verstecke Applets)"
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivateshide->description
-msgid "Hide on hovering again"
-msgstr "Verstecke beim Darüberbewegen wieder"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivateshide->tooltip
-msgid "toggle visibility of applets on mouse hover"
-msgstr "Schalte die Sichtbarkeit der Applets beim Darüberbewegen der Maus um"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->autohiderstime->description
-msgid "Reshowers' autohide delay: "
-msgstr "Verstecke wiederauftauchender Applets nach"
-
-#. show-hide-applets@mohammad-sn->settings-schema.json->autohiderstime->units
-#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->units
-msgid "seconds"
-msgstr "Sekunden"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->disablestarttimeautohide->description
-msgid "Disable start time autohide"
-msgstr "Deaktiviere Verzögerung für das automatische Verstecken"
-
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->disablestarttimeautohide->tooltip
-msgid "if not in autohide mode"
-msgstr "Wenn \"Verstecke automatisch\" nicht aktiviert ist."
-
 # Other applet do not show the internal applet name. We should therefore just call this "Settings" and nothing more.
-#. show-hide-applets@mohammad-sn->settings-schema.json->head->description
+#. settings-schema.json->head->description
 msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Einstellungen"
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->description
-msgid "Autohide"
-msgstr "Verstecke automatisch"
-
-#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->tooltip
+#. settings-schema.json->autohide->tooltip
+#, fuzzy
 msgid ""
-"check if you want to hide applets automatically, unless you should click on "
-"applet to do so"
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
 msgstr ""
 "Aktiviere diese Funktion, wenn du Applets automatisch verstecken möchtest, "
 "ansonsten werden sie nur bei einem Mausklick versteckt."
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->autohiders->description
-msgid "Autohide reshowing applets"
-msgstr "Verstecke wiederauftauchende Applets automatisch"
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr ""
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->description
-msgid "Hover activates/hides after "
-msgstr "Aktiviere/Verstecke beim Darüberbewegen nach"
+#. settings-schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Deaktiviere Verzögerung für das automatische Verstecken"
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->units
-msgid "miliseconds"
-msgstr "Millisekunden"
+#. settings-schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "Wenn \"Verstecke automatisch\" nicht aktiviert ist."
 
-#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->description
+#. settings-schema.json->hidetime->units
+#. settings-schema.json->autohiderstime->units
+msgid "seconds"
+msgstr "Sekunden"
+
+#. settings-schema.json->hidetime->description
 msgid "Autohide after "
 msgstr "Verstecke automatisch nach"
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivates->description
+#. settings-schema.json->hoveractivates->description
 msgid "Activate on hover"
 msgstr "Aktiviere beim Darüberbewegen"
 
-#. show-hide-applets@mohammad-sn->settings-
-#. schema.json->hoveractivates->tooltip
+#. settings-schema.json->hoveractivates->tooltip
 msgid "show applets on mouse hover"
 msgstr "Zeige Applets beim Darüberbewegen"
+
+#. settings-schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Verstecke beim Darüberbewegen wieder"
+
+#. settings-schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "Schalte die Sichtbarkeit der Applets beim Darüberbewegen der Maus um"
+
+#. settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "Millisekunden"
+
+#. settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Aktiviere/Verstecke beim Darüberbewegen nach"
+
+#. settings-schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Verstecke wiederauftauchende Applets automatisch"
+
+#. settings-schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Verstecke wiederauftauchender Applets nach"

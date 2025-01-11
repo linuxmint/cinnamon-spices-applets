@@ -17,6 +17,7 @@
  */
 'use strict';
 
+const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
 const Panel = imports.ui.panel;
@@ -25,12 +26,15 @@ const SignalManager = imports.misc.signalManager;
 const GLib = imports.gi.GLib;
 
 const UUID = "pin-unpin-panel@anaximeno";
+
 // XXX: Sync With Panel.PANEL_AUTOHIDE_KEY. Not using that directly because
 // the ES6 standard doesn't support direct import of values declared with const or let
 // from modules.
 const PANEL_AUTOHIDE_KEY = "panels-autohide";
 
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
 
 function _(text) {
 	let loc = Gettext.dgettext(UUID, text);
@@ -41,17 +45,24 @@ function _(text) {
 class PinUnpinPanelApplet extends Applet.IconApplet {
 	constructor(metadata, orientation, panelHeight, instanceId) {
 		super(orientation, panelHeight, instanceId);
+		this.instanceId = instanceId;
 		this.metadata = metadata;
+
 		this.settings = this._setup_settings(metadata.uuid, instanceId);
 
 		this.pinned = true;
 
 		this.signalsManager = new SignalManager.SignalManager(null);
-        this.signalsManager.connect(global.settings, "changed::" + PANEL_AUTOHIDE_KEY, this.on_panels_autohide_state_changed, this);
+		this.signalsManager.connect(global.settings, "changed::" + PANEL_AUTOHIDE_KEY, this.on_panels_autohide_state_changed, this);
 
-		this.default_pin_icon_path = `${metadata.path}/../icons/pin-symbolic.svg`;
-		this.default_unpin_icon_path = `${metadata.path}/../icons/unpin-symbolic.svg`;
+		this._default_pin_icon_path = `${metadata.path}/../icons/pin-symbolic.svg`;
+		this._default_unpin_icon_path = `${metadata.path}/../icons/unpin-symbolic.svg`;
 
+		this._toggle_panel_pin_binding_id = `${metadata.uuid}-toggle-panel-pin-binding-keys-${this.instanceId}`;
+		this._panel_peek_binding_id = `${metadata.uuid}-peek-panel-bindind-keys-${this.instanceId}`;
+
+		this.set_toggle_panel_pin_keydind();
+		this.set_peek_panek_keybind();
 		this.on_panels_autohide_state_changed();
 	}
 
@@ -63,6 +74,11 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 				key: 'unpin-autohide-type',
 				value: 'unpin_autohide_type',
 				cb: this.on_applet_autohide_type_settings_changed,
+			},
+			{
+				key: 'pinned-at-startup',
+				value: 'pinned_at_startup',
+				cb: null,
 			},
 			{
 				key: 'use-custom-icons',
@@ -79,6 +95,16 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 				value: 'custom_unpin_icon',
 				cb: this.update_panel_applet_ui_state,
 			},
+			{
+				key: 'toggle-panel-pin-binding-keys',
+				value: 'toggle_panel_pin_binding_keys',
+				cb: this.set_toggle_panel_pin_keydind,
+			},
+			{
+				key: 'peek-panel-bindind-keys',
+				value: 'peek_panel_bindind_keys',
+				cb: this.set_peek_panek_keybind,
+			},
 		];
 
 		bindings.forEach(s => settings.bind(s.key, s.value, s.cb ? (...args) => s.cb.call(this, ...args) : null));
@@ -87,9 +113,14 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	on_applet_clicked(event) {
-		this.pinned = !this.pinned;
-		this.set_panel_autohide_state(this.pinned ? false : this.unpin_autohide_type);
-		global.log(UUID, `Panel ${this.panel.panelId} was ${this.pinned ? "pinned" : "unpinned"}`);
+		this.toggle_panel_pin_state();
+	}
+
+	on_applet_added_to_panel(userEnabled) {
+		//~ global.log(UUID+": instance "+this.instanceId);
+		if (this.pinned_at_startup !== 0 && (this.pinned_at_startup === 1) !== this.pinned) {
+			this.toggle_panel_pin_state();
+		}
 	}
 
 	on_applet_removed_from_panel(deleteConfig) {
@@ -106,14 +137,25 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 		if (!this.pinned) this.set_panel_autohide_state(this.unpin_autohide_type);
 	}
 
-	update_panel_applet_ui_state() {
-		if (this.use_custom_icons) {
-			this.set_applet_icon_name(this.pinned ? this.custom_unpin_icon : this.custom_pin_icon);
-		} else {
-			this.set_applet_icon_symbolic_path(this.pinned ? this.default_unpin_icon_path : this.default_pin_icon_path);
-		}
+	toggle_panel_pin_state() {
+		this.pinned = !this.pinned;
+		this.set_panel_autohide_state(this.pinned ? false : this.unpin_autohide_type);
+		global.log(UUID, `Panel ${this.panel.panelId} was ${this.pinned ? "pinned" : "unpinned"}`);
+	}
 
-		this.set_applet_tooltip(this.pinned ? _("Click to Unpin the Panel") : _("Click to Pin the Panel"));
+	update_panel_applet_ui_state() {
+		let icon = this.pinned ? this._default_unpin_icon_path : this._default_pin_icon_path;
+
+		if (this.use_custom_icons)
+			icon = this.pinned ? this.custom_unpin_icon : this.custom_pin_icon;
+
+		if (icon.endsWith('-symbolic')) this.set_applet_icon_symbolic_name(icon);
+		else if (icon.endsWith('-symbolic.svg')) this.set_applet_icon_symbolic_path(icon);
+		else if (icon.endsWith('.png')) this.set_applet_icon_path(icon);
+		else this.set_applet_icon_name(icon);
+
+		let tooltip = this.pinned ? _("Click to Unpin the Panel") : _("Click to Pin the Panel");
+		this.set_applet_tooltip(tooltip);
 	}
 
 	get_panel_autohide_state() {
@@ -132,26 +174,59 @@ class PinUnpinPanelApplet extends Applet.IconApplet {
 	}
 
 	set_panel_autohide_state(state) {
-		const newStates = [];
 		const panelAutohideStates = global.settings.get_strv(PANEL_AUTOHIDE_KEY);
 
 		if (!panelAutohideStates) return;
 
+		const newStates = [];
 		for (const panelAutohideState of panelAutohideStates) {
 			let [panelId, autohideState] = panelAutohideState.split(":");
 
 			if (panelId == this.panel.panelId)
 				autohideState = state;
 
-			newStates.push([panelId, autohideState].join(":"));
+			let newState = [panelId, autohideState].join(":");
+			if (!newStates.includes(newState))
+				newStates.push(newState);
 		}
 
 		global.settings.set_strv(PANEL_AUTOHIDE_KEY, newStates);
 	}
 
+	peek_panel() {
+		this.panel.peekPanel();
+	}
+
+	set_toggle_panel_pin_keydind() {
+		this.set_keybinding(
+			this._toggle_panel_pin_binding_id,
+			this.toggle_panel_pin_binding_keys,
+			this.toggle_panel_pin_state.bind(this),
+		);
+	}
+
+	set_peek_panek_keybind() {
+		this.set_keybinding(
+			this._panel_peek_binding_id,
+			this.peek_panel_bindind_keys,
+			this.peek_panel.bind(this),
+		);
+	}
+
+	set_keybinding(id, keys, cb) {
+		this.unset_keybinding(id);
+		Main.keybindingManager.addHotKey(id, keys, cb);
+	}
+
+	unset_keybinding(id) {
+		Main.keybindingManager.removeHotKey(id);
+	}
+
 	destroy() {
 		this.signalsManager.disconnectAllSignals();
 		this.settings.finalize();
+		this.unset_keybinding(this._toggle_panel_pin_binding_id);
+		this.unset_keybinding(this._panel_peek_binding_id);
 	}
 }
 

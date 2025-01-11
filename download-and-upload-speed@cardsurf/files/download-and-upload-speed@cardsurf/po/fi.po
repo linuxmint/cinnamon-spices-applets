@@ -1,119 +1,196 @@
-# SOME DESCRIPTIVE TITLE.
+# DOWNLOAD AND UPLOAD SPEED
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 00:05+0100\n"
-"PO-Revision-Date: 2022-11-23 14:56+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-27 21:38+0200\n"
+"PO-Revision-Date: 2024-11-13 18:26+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
-#: applet.js:437
+#. applet.js:438
 msgid "Network interfaces"
-msgstr "Verkkoliitännät"
+msgstr "Verkkoliitäntä"
 
-#: applet.js:506
+#. applet.js:507
 msgid "Total data start"
 msgstr "Datan määrä alkaen"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:514
 msgid "Launch of applet"
 msgstr "Sovelman avaamisesta"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:515
 msgid "Today"
 msgstr "Tänään"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:516
 msgid "Yesterday"
 msgstr "Eilen"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:517
 msgid "3 days ago"
 msgstr "3 päivää sitten"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:518
 msgid "5 days ago"
 msgstr "5 päivää sitten"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:519
 msgid "7 days ago"
 msgstr "7 päivää sitten"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:520
 msgid "10 days ago"
 msgstr "10 päivää sitten"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:521
 msgid "14 days ago"
 msgstr "14 päivää sitten"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:522
 msgid "30 days ago"
 msgstr "30 päivää sitten"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:523
 msgid "Custom date"
 msgstr "Mukautettu päivämäärä"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:560
 msgid "Gui"
-msgstr "Gui"
+msgstr "Pääte"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Compact"
 msgstr "Tiivis"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Large"
 msgstr "Suuri"
 
-#: applet.js:825
-msgid "b"
-msgstr "b"
+#. applet.js:796
+msgid " TiB"
+msgstr " TiB"
 
-#: appletGui.js:470
+#. applet.js:799
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:802
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:805
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:807
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:810
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:813
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:816
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:819
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:821
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:831
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:834
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:837
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:840
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:842
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:845
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:848
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:851
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:854
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:856
+msgid "  b"
+msgstr "  b"
+
+#. appletGui.js:480
 msgid "Total download:"
 msgstr "Lataus yhteensä:"
 
-#: appletGui.js:471
+#. appletGui.js:481
 msgid "Total upload:"
 msgstr "Lähetys yhteensä:"
 
 #. metadata.json->description
 msgid "Shows usage of a network interface"
-msgstr "Näyttää verkkokortin käytön, tilastot ja latausnopeudet"
+msgstr "Näyttää verkkokortin liikenteen, tilastot ja latausnopeudet"
 
 #. metadata.json->name
 msgid "Download and upload speed"
-msgstr "Latausnopeus ja lähetysnopeus"
+msgstr "Download and upload speed"
 
 #. settings-schema.json->configuration->description
 msgid "Configuration"
-msgstr "Määritys"
+msgstr "Asetukset"
 
 #. settings-schema.json->display_mode->description
 msgid "Show"
@@ -147,11 +224,31 @@ msgstr "Bittiä"
 msgid "Base data unit shown in the panel"
 msgstr "Tietoyksikkö näkyy paneelissa"
 
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Tavua tai bittiä"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Kymmenluku"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binaarinen"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Kymmenluku: k, M, G, T\n"
+"Binaarinen: ki, Mi, Gi, Ti"
+
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
 #. settings-schema.json->write_every->units
 msgid "seconds"
-msgstr "sekuntia"
+msgstr "sekunti"
 
 #. settings-schema.json->update_every->description
 msgid "Calculate every"
@@ -170,8 +267,8 @@ msgid ""
 "How often to update list of available network interfaces. 0 means list of "
 "available network interfaces is not updated periodically."
 msgstr ""
-"Kuinka usein saatavilla olevien verkkokorttien lista päivitetään. 0 "
-"tarkoittaa, että verkkokortteja ei päivitetä säännöllisesti."
+"Kuinka usein verkkokortit päivitetään. 0 tarkoittaa, että verkkokortteja ei "
+"päivitetä säännöllisesti."
 
 #. settings-schema.json->gui_speed_type->description
 msgid "Type"
@@ -179,7 +276,7 @@ msgstr "Tyyppi"
 
 #. settings-schema.json->gui_speed_type->tooltip
 msgid "Applet Gui"
-msgstr "Sovelma Gui"
+msgstr "Sovelman pääte"
 
 #. settings-schema.json->gui_value_order->description
 msgid "Value order"
@@ -199,7 +296,7 @@ msgstr "Paneelissa ja ponnahdusikkunassa näkyvä arvojen järjestys"
 
 #. settings-schema.json->decimal_places->description
 msgid "Decimal places"
-msgstr "Desimaalit"
+msgstr "Desimaalipilkku"
 
 #. settings-schema.json->decimal_places->options
 msgid "Auto"
@@ -231,7 +328,7 @@ msgstr "Teksti CSS"
 
 #. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
-msgstr "Paneelin tekstiin käytetty CSS"
+msgstr "Paneelin tekstiin käytetty CSS-tyyli"
 
 #. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
@@ -248,7 +345,7 @@ msgstr ""
 
 #. settings-schema.json->gui_sent_icon_filename->description
 msgid "Upload icon"
-msgstr "Lähetä kuvake"
+msgstr "Lähtevä kuvake"
 
 #. settings-schema.json->gui_sent_icon_filename->tooltip
 msgid ""
@@ -351,7 +448,7 @@ msgstr "Datarajoitukset"
 
 #. settings-schema.json->data_limit->units
 msgid "MB"
-msgstr "Mt"
+msgstr "MB"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"

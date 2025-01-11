@@ -143,7 +143,14 @@ class LGS extends Applet.IconApplet {
         });
         itemWatchXSE.connect(
             "activate",
-            () => Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'")
+            () => {
+                if (this.menu.isOpen) this.menu.close();
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+                    clearTimeout(to);
+                },
+                300);
+            }
         );
 
         this.menu.addMenuItem(itemWatchXSE);
@@ -156,13 +163,17 @@ class LGS extends Applet.IconApplet {
             "activate",
             () => {
                 if (this.menu.isOpen) this.menu.close();
-                restartCinnamon(true)
+                let to = setTimeout( () => {
+                    restartCinnamon(true);
+                    clearTimeout(to);
+                },
+                300);
             }
         );
 
         this.menu.addMenuItem(itemReloadCinnamon);
 
-        // Reload
+        // Reload:
         let reloadHead = new PopupMenu.PopupMenuItem(_("--- Reload Spices ---"), {
             reactive: false
         });
@@ -178,7 +189,11 @@ class LGS extends Applet.IconApplet {
             });
             s.connect("activate", () => {
                 if (this.menu.isOpen) this.menu.close();
-                reloadExtension(applet, Type.APPLET)
+                let to = setTimeout( () => {
+                    reloadExtension(applet, Type.APPLET);
+                    clearTimeout(to);
+                },
+                300);
             });
             this.subMenuReloadApplets.menu.addMenuItem(s)
         }
@@ -193,7 +208,11 @@ class LGS extends Applet.IconApplet {
             });
             s.connect("activate", () => {
                 if (this.menu.isOpen) this.menu.close();
-                reloadExtension(desklet, Type.DESKLET)
+                let to = setTimeout( () => {
+                    reloadExtension(desklet, Type.DESKLET);
+                    clearTimeout(to);
+                },
+                300);
             });
             this.subMenuReloadDesklets.menu.addMenuItem(s)
         }
@@ -208,12 +227,79 @@ class LGS extends Applet.IconApplet {
             });
             s.connect("activate", () => {
                 if (this.menu.isOpen) this.menu.close();
-                reloadExtension(extension, Type.EXTENSION)
+                let to = setTimeout( () => {
+                    reloadExtension(extension, Type.EXTENSION);
+                    clearTimeout(to);
+                },
+                300);
             });
             this.subMenuReloadExtensions.menu.addMenuItem(s)
         }
 
-        // View Code
+        // Settings:
+        let settingsHead = new PopupMenu.PopupMenuItem(_("--- Settings for ---"), {
+            reactive: false
+        });
+        this.menu.addMenuItem(settingsHead);
+
+        // Applets
+        this.subMenuSettingsApplets = new PopupMenu.PopupSubMenuMenuItem(_("Applet:"));
+        this.menu.addMenuItem(this.subMenuSettingsApplets);
+
+        for (let applet of this.get_active_spices("applets")) {
+            let s =  new PopupMenu.PopupMenuItem(applet, {
+                reactive: true
+            });
+            s.connect("activate", () => {
+                if (this.menu.isOpen) this.menu.close();
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync('bash -c "cinnamon-settings applets %s"'.format(applet));
+                    clearTimeout(to);
+                },
+                300);
+            });
+            this.subMenuSettingsApplets.menu.addMenuItem(s)
+        }
+
+        // Desklets
+        this.subMenuSettingsDesklets = new PopupMenu.PopupSubMenuMenuItem(_("Desklet:"));
+        this.menu.addMenuItem(this.subMenuSettingsDesklets);
+
+        for (let desklet of this.get_active_spices("desklets")) {
+            let s =  new PopupMenu.PopupMenuItem(desklet, {
+                reactive: true
+            });
+            s.connect("activate", () => {
+                if (this.menu.isOpen) this.menu.close();
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync('bash -c "cinnamon-settings desklets %s"'.format(desklet));
+                    clearTimeout(to);
+                },
+                300);
+            });
+            this.subMenuSettingsDesklets.menu.addMenuItem(s)
+        }
+
+        // Extensions
+        this.subMenuSettingsExtensions = new PopupMenu.PopupSubMenuMenuItem(_("Extension:"));
+        this.menu.addMenuItem(this.subMenuSettingsExtensions);
+
+        for (let extension of this.get_active_spices("extensions")) {
+            let s =  new PopupMenu.PopupMenuItem(extension, {
+                reactive: true
+            });
+            s.connect("activate", () => {
+                if (this.menu.isOpen) this.menu.close();
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync('bash -c "cinnamon-settings extensions %s"'.format(extension));
+                    clearTimeout(to);
+                },
+                300);
+            });
+            this.subMenuSettingsExtensions.menu.addMenuItem(s)
+        }
+
+        // View Code:
         let codeHead = new PopupMenu.PopupMenuItem(_("--- View Code ---"), {
             reactive: false
         });
@@ -229,7 +315,11 @@ class LGS extends Applet.IconApplet {
             });
             s.connect("activate", () => {
                 if (this.menu.isOpen) this.menu.close();
-                Util.spawnCommandLineAsync('bash -c "xdg-open %s/applets/%s/"'.format(SPICES_DIR, applet))
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync('bash -c "xdg-open %s/applets/%s/"'.format(SPICES_DIR, applet));
+                    clearTimeout(to);
+                },
+                300);
             });
             this.subMenuCodeApplets.menu.addMenuItem(s)
         }
@@ -244,7 +334,11 @@ class LGS extends Applet.IconApplet {
             });
             s.connect("activate", () => {
                 if (this.menu.isOpen) this.menu.close();
-                Util.spawnCommandLineAsync('bash -c "xdg-open %s/desklets/%s/"'.format(SPICES_DIR, desklet))
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync('bash -c "xdg-open %s/desklets/%s/"'.format(SPICES_DIR, desklet));
+                    clearTimeout(to);
+                },
+                300);
             });
             this.subMenuCodeDesklets.menu.addMenuItem(s)
         }
@@ -259,7 +353,11 @@ class LGS extends Applet.IconApplet {
             });
             s.connect("activate", () => {
                 if (this.menu.isOpen) this.menu.close();
-                Util.spawnCommandLineAsync('bash -c "xdg-open %s/extensions/%s/"'.format(SPICES_DIR, extension))
+                let to = setTimeout( () => {
+                    Util.spawnCommandLineAsync('bash -c "xdg-open %s/extensions/%s/"'.format(SPICES_DIR, extension));
+                    clearTimeout(to);
+                },
+                300);
             });
             this.subMenuCodeExtensions.menu.addMenuItem(s)
         }
@@ -267,7 +365,12 @@ class LGS extends Applet.IconApplet {
     }; // End of makeMenu
 
     on_applet_middle_clicked(event) {
-        Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'")
+        if (this.menu.isOpen) this.menu.close();
+        let to = setTimeout( () => {
+            Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+            clearTimeout(to);
+        },
+        300);
     }
 } // End of class LGS
 

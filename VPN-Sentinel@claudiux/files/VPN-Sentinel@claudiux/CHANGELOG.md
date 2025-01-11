@@ -1,3 +1,6 @@
+### 2.3.0~20241215
+  * Proper shutdown of flatpak internet applications when VPN is closed.
+
 ### v2.2.3~20240726
   * Solves dependency problem.
 

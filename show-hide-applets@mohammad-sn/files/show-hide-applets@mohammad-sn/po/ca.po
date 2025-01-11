@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# DRAWER (SHOW/HIDE APPLETS)
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mohammad-sn, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: show-hide-applets@mohammad-sn 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"POT-Creation-Date: 2024-11-20 06:07+0100\n"
 "PO-Revision-Date: 2024-07-10 00:09+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,13 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:60
+#. applet.js:60 applet.js:231
+#, fuzzy
+msgid "Autohide ON"
+msgstr "Auto-amagar"
+
+#. applet.js:62 applet.js:233
+#, fuzzy
+msgid "Autohide OFF"
+msgstr "Auto-amagar"
+
+#. applet.js:82
 msgid "Panel Edit mode"
 msgstr "Mode d'edició del tauler"
 
-#: applet.js:66
+#. applet.js:88
 msgid "Add applets to the panel"
 msgstr "Afegir miniaplicacions al tauler"
+
+#. settings-schema.json->autohide->description
+#. applet.js:96
+msgid "Autohide"
+msgstr "Auto-amagar"
 
 #. metadata.json->description
 msgid ""
@@ -42,17 +57,19 @@ msgstr "Calaix (mostra/amaga miniaplicacions)"
 msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Configuració de show-hide-applets@mohammad-sn"
 
-#. settings-schema.json->autohide->description
-msgid "Autohide"
-msgstr "Auto-amagar"
-
 #. settings-schema.json->autohide->tooltip
+#, fuzzy
 msgid ""
-"check if you want to hide applets automatically, unless you should click on "
-"applet to do so"
+"Check it if you want to hide applets automatically, unless you should click "
+"on applet to do so.\n"
+"Its status can be changed by middle-clicking on this applet."
 msgstr ""
 "marqueu si voleu amagar miniaplicacions automàticament o si cal clicar-les "
 "d'una en una"
+
+#. settings-schema.json->statusintooltip->description
+msgid "Show Autohide status in tooltip"
+msgstr ""
 
 #. settings-schema.json->disablestarttimeautohide->description
 msgid "Disable start time autohide"

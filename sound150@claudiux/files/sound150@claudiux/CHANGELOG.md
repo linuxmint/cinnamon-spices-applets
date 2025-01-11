@@ -1,3 +1,82 @@
+### v7.4.5~20250108
+  * Improved seeker display in the menu.
+  * Duration calculation becomes faster. Note that many radio stations provide the total duration every 1 second, others every 5 seconds.
+
+### v7.4.4~20250105
+  * Improved functioning.
+
+### v7.4.3~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+
+### v7.4.2~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+  * Closes menu before restarting.
+
+### v7.4.1~20250103
+  * Fixes #6726: SMPlayer no longer freezes
+  * Displays the thumbnail of the video viewed with SMPlayer
+
+### v7.4.0~20241230
+  * Better compatibility with Cinnamon 6.4.
+  * Make optional suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
+  * Improves management of objects and signals when restarting this applet.
+
+### v7.3.7~20241228
+  * Improved functionality (icons and album art)
+
+### v7.3.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v7.3.5~20241226
+  * Bugfixes.
+
+### v7.3.4~20241221
+  * New option to fix volume at start-up. Value -1 means "No change". (Related to #6690.)
+
+### v7.3.3~20241212
+  * Improves compatibility with Cinnamon 6.4 removing "%" after volume level.
+
+### v7.3.2~20241206
+  * Fixes OSD problems.
+  * Fixes #6669.
+
+### v7.3.1~20241130
+  * Fixes #6655: The OSD is no longer displayed at startup if it is not required.
+
+
+### v7.3.0~20241128
+  * Add specific code for Cinnamon 6.2.
+
+
+### v7.2.4~20241116
+  * Fixes #6513: Always show mute icon when sound is muted.
+
+### v7.2.3~20241021
+  * Improvements to album art display.
+
+### v7.2.2~20241019
+  * Minor bug fix.
+
+### v7.2.1~20241018
+  * Some improvements to fix #6504.
+
+### v7.2.0~20241017
+  * Fixes #6504. (Improvements are planed.)
+
+### v7.1.1~20241016
+  * Avoids loud cracking sound at shutdown.
+  * Option removed. This is basic now.
+
+### v7.1.0~20241013
+  * Option to try to avoid loud cracking sound at shutdown.
+  * Fixes https://github.com/linuxmint/cinnamon/issues/12446.
+
+### v7.0.0~20241011
+  * Compatible with Cinnamon 6.4.
+
+### v6.18.1~20240907
+  * Fixes #6301.
+
 ### v6.18.0~20240731
   * Improves certain icons.
   * Improved support for Pulse Effects and Easy Effects.
