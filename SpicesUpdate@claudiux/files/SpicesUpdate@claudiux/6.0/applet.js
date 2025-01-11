@@ -25,6 +25,7 @@ const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
 const { Display } = imports.gi.Gdk;
 //Mainloop:
 const { source_remove, timeout_add_seconds } = imports.mainloop;
+const { source_exists, timeout_exists, interval_exists } = require("./sourceExists");
 
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
@@ -278,7 +279,8 @@ class SpicesUpdate extends IconApplet {
         this.disable_system_auto_update();
         let stoId = setTimeout( () => {
             this._loop_refresh_cache();
-            clearTimeout(stoId);
+            if (timeout_exists(stoId))
+                clearTimeout(stoId);
             stoId = null;
         }, 20000); // Wait 20 seconds for mintupdate to run correctly.
 
@@ -286,7 +288,7 @@ class SpicesUpdate extends IconApplet {
     } // End of constructor
 
     _loop_refresh_cache() {
-        if (this.loopRefreshId) {
+        if (source_exists(this.loopRefreshId)) {
             source_remove(this.loopRefreshId);
         }
         this.loopRefreshId = null;
@@ -614,7 +616,8 @@ class SpicesUpdate extends IconApplet {
             let id = setTimeout(() => {
                 this.http = new HttpLib();
                 //~ this._on_refresh_pressed();
-                clearTimeout(id);
+                if (timeout_exists(id))
+                    clearTimeout(id);
                 id = null
             }, 30000);
         } else {
@@ -886,10 +889,10 @@ class SpicesUpdate extends IconApplet {
     } // End of _set_main_label
 
     on_frequency_changed() {
-        if (this.loopId) {
+        if (source_exists(this.loopId)) {
             source_remove(this.loopId);
-            this.loopId = null;
         }
+        this.loopId = null;
 
         //~ let coeff = QUICK() ? 720 : 3600;
         this.refreshInterval = 3600 * this.general_frequency;
@@ -988,7 +991,7 @@ class SpicesUpdate extends IconApplet {
         let isEmpty = true;
         let info;
         if (dir.query_exists(null)) {
-            let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
+            let children = dir.enumerate_children("standard::name,standard::type,standard::icon", FileQueryInfoFlags.NONE, null);
             if ((info = children.next_file(null)) != null) {
                 isEmpty = false;
             }
@@ -1106,7 +1109,7 @@ class SpicesUpdate extends IconApplet {
         // Are there new applets installed? If there are, then push them in this.unprotected_applets:
         let dir = file_new_for_path(DIR_MAP[type]);
         if (dir.query_exists(null)) {
-            let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
+            let children = dir.enumerate_children("standard::name,standard::type,standard::icon", FileQueryInfoFlags.NONE, null);
             let info, file_type;
             var name;
             var isSystemUnprotected;
@@ -1483,7 +1486,7 @@ class SpicesUpdate extends IconApplet {
 
         var latest_time = dir.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
         var latest_file = dir;
-        let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
+        let children = dir.enumerate_children("standard::name,standard::type,standard::icon", FileQueryInfoFlags.NONE, null);
         let info, file_type;
         let file, file_time;
         while ((info = children.next_file(null)) != null) {
@@ -1528,7 +1531,8 @@ class SpicesUpdate extends IconApplet {
                 //this.isProcessing = false;
             this.updateUI();
             if (newSpices.length === 0) {
-                clearInterval(id);
+                if (interval_exists(id))
+                    clearInterval(id);
                 this.isProcessing = false;
                 this.updateUI();
                 newSpices = undefined;
@@ -1555,7 +1559,8 @@ class SpicesUpdate extends IconApplet {
                 this.do_rotation = false;
                 this.updateUI();
             } else {
-                clearInterval(id);
+                if (interval_exists(id))
+                    clearInterval(id);
                 indexTypes = undefined;
                 type = undefined;
             }
@@ -1710,7 +1715,7 @@ class SpicesUpdate extends IconApplet {
         let uuids = this.get_uuids_from_cache(type);
         let png_dir = file_new_for_path(CACHE_DIR + "/%s".format(this._get_singular_type(type)));
         if (png_dir.query_exists(null)) {
-            let children = png_dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
+            let children = png_dir.enumerate_children("standard::name,standard::type,standard::icon", FileQueryInfoFlags.NONE, null);
             let info;
             var name;
             while ((info = children.next_file(null)) != null) {
@@ -1751,13 +1756,14 @@ class SpicesUpdate extends IconApplet {
     } // End of monitor_png_directory
 
     _on_pngDir_changed(type) {
-        if (this.timeoutId) {
+        if (timeout_exists(this.timeoutId)) {
             clearTimeout(this.timeoutId);
-            this.timeoutId = null;
         }
+        this.timeoutId = null;
         this.timeoutId = setTimeout(() => {
             this._on_refresh_pressed();
-            clearTimeout(this.timeoutId);
+            if (timeout_exists(this.timeoutId))
+                clearTimeout(this.timeoutId);
             this.timeoutId = null;
         }, 12000);
     } // End of _on_pngDir_changed
@@ -1796,13 +1802,14 @@ class SpicesUpdate extends IconApplet {
         if (this.isLooping) {
             this.new_loop_requested = true;
         } else {
-            if (this.timeoutId) {
+            if (timeout_exists(this.timeoutId)) {
                 clearTimeout(this.timeoutId);
-                this.timeoutId = null;
             }
+            this.timeoutId = null;
             this.timeoutId = setTimeout(() => {
                 this._on_refresh_pressed();
-                clearTimeout(this.timeoutId);
+                if (timeout_exists(this.timeoutId))
+                    clearTimeout(this.timeoutId);
                 this.timeoutId = null;
             }, 12000);
         }
@@ -1890,15 +1897,16 @@ class SpicesUpdate extends IconApplet {
     } // End of get_active_spices
 
     get_default_icon_color() {
-        try {
+        if (this.actor.get_stage() != null) {
             let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
             let icon_color = themeNode.get_icon_colors();
             this.defaultColor = icon_color.foreground.to_string();
             icon_color = undefined;
             themeNode = undefined;
-        } catch(e) {
+        } else {
             this.defaultColor = "white";
         }
+        //~ logDebug("this.defaultColor: "+this.defaultColor);
     } // End of get_default_icon_color
 
     makeMenu() {
@@ -2053,7 +2061,7 @@ class SpicesUpdate extends IconApplet {
         this.refresh_requested = true;
 
         if (!this.isLooping) {
-            if (this.loopId) {
+            if (source_exists(this.loopId)) {
                 source_remove(this.loopId);
             }
             this.loopId = null;
@@ -2067,7 +2075,7 @@ class SpicesUpdate extends IconApplet {
     _on_reload_this_applet_pressed() {
         // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
         this.applet_running = false;
-        if (this.loopId) {
+        if (source_exists(this.loopId)) {
             source_remove(this.loopId);
         }
         this.loopId = null;
@@ -2180,8 +2188,10 @@ class SpicesUpdate extends IconApplet {
         }
 
         if (this.do_rotation) {
-            if (!this.interval)
+            if (this.interval == null)
                 this.interval = setInterval(() => this.icon_rotate(), 10);
+            //~ logDebug("updateUI this.interval.source_id: "+this.interval.source_id);
+            //~ logDebug("updateUI: source_exists("+this.interval.source_id+"): "+source_exists(this.interval.source_id));
         }
 
         this.set_icon_color();
@@ -2236,7 +2246,8 @@ class SpicesUpdate extends IconApplet {
                 transition: "linear",
                 time: 0.5,
                 onComplete: Lang.bind(this, function() {
-                    clearInterval(this.interval);
+                    if (interval_exists(this.interval))
+                        clearInterval(this.interval);
                     this.interval = null;
                     this.angle = 0;
                     this.set_applet_icon_symbolic_name("spices-update");
@@ -2260,10 +2271,10 @@ class SpicesUpdate extends IconApplet {
             //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
-            if (this.loopId) {
+            if (source_exists(this.loopId)) {
                 source_remove(this.loopId);
-                this.loopId = null;
             }
+            this.loopId = null;
 
             this.loopId = timeout_add_seconds(10, () => this.updateLoop());
             return;
@@ -2273,10 +2284,10 @@ class SpicesUpdate extends IconApplet {
         }
         //~ logDebug("ONE MORE LOOP!");
         this.isLooping = true;
-        if (this.loopId) {
+        if (source_exists(this.loopId)) {
             source_remove(this.loopId);
-            this.loopId = null;
         }
+        this.loopId = null;
 
         this.check_dependencies();
 
@@ -2469,6 +2480,7 @@ class SpicesUpdate extends IconApplet {
     } // End of on_generic_changed
 
     on_applet_added_to_panel() {
+        this.get_default_icon_color();
         // Events:
         this._connectIds = [];
         this._connectIds.push(this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event)));
@@ -2525,30 +2537,30 @@ class SpicesUpdate extends IconApplet {
         // When applet is reloaded or removed from panel: stop the loop, inhibit the update timer,
         // remove all bindings and disconnect all signals (if any) to avoid errors.
         this.applet_running = false;
-        if (this.loopRefreshId) {
+        if (source_exists(this.loopRefreshId)) {
             source_remove(this.loopRefreshId);
         }
         this.loopRefreshId = null;
 
-        if (this.loopId) {
+        if (source_exists(this.loopId)) {
             source_remove(this.loopId);
         }
         this.loopId = null;
-
-        if (this.interval){
+        //~ logDebug("on_applet_reloaded source_exists("+this.interval+"): "+source_exists(this.interval));
+        if (interval_exists(this.interval)) {
             clearInterval(this.interval);
         }
         this.interval = null;
 
-        if (this.timeoutId) {
+        if (timeout_exists(this.timeoutId)) {
             clearTimeout(this.timeoutId);
         }
         this.timeoutId = null;
 
-        if (this.loopCacheIntervalId) {
+        if (interval_exists(this.loopCacheIntervalId)) {
             clearInterval(this.loopCacheIntervalId);
-            this.loopCacheIntervalId = null;
         }
+        this.loopCacheIntervalId = null;
 
 
         this.destroy_all_notifications();
