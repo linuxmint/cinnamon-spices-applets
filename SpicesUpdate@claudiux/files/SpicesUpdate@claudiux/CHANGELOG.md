@@ -1,3 +1,6 @@
+### v7.5.0~20250111
+  * Improved management of loops.
+
 ### v7.4.7~20250105
   * Now compatible with Cinnamon on Gentoo.
   * Replaces apturl with xdg-open.
