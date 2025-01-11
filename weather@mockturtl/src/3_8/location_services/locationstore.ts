@@ -29,7 +29,24 @@ export class LocationStore {
 		this.locations = config._locationList;
 	}
 
+	private AreLocationsDifferent(old: LocationData[], newLocs: LocationData[]): boolean {
+		if (old.length != newLocs.length)
+			return true;
+
+		for (let i = 0; i < old.length; i++) {
+			if (!this.IsEqual(old[i], newLocs[i]))
+				return true;
+		}
+
+		return false;
+	}
+
 	public OnLocationChanged(locs: LocationData[]): void {
+		if (!this.AreLocationsDifferent(this.locations, locs)) {
+			Logger.Debug("Location store not changed, skipping update")
+			return;
+		}
+
 		// Ensure Entry text is not empty
 		for (let index = 0; index < locs.length; index++) {
 			const element = locs[index];
@@ -249,7 +266,7 @@ export class LocationStore {
 		let key: keyof LocationData;
 		for (key in newLoc) {
 			if (oldLoc[key] != newLoc[key]) {
-				return false
+				return false;
 			}
 		}
 		return true;

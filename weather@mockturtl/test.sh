@@ -15,4 +15,4 @@ cp -arf files/weather@mockturtl/* ~/.local/share/cinnamon/applets/weather@mocktu
 cd ..
 # ./cinnamon-spices-makepot weather@mockturtl
 cd $PWD
-export DISPLAY=:0; cinnamon --replace &
+dbus-send --type=method_call --print-reply --dest=org.Cinnamon /org/Cinnamon org.Cinnamon.ReloadXlet string:'weather@mockturtl' string:'APPLET'
