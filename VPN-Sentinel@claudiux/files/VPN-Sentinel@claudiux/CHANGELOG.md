@@ -1,3 +1,6 @@
+### 2.3.1~20250111
+  * Minor change in FileInfo.js.
+
 ### 2.3.0~20241215
   * Proper shutdown of flatpak internet applications when VPN is closed.
 
