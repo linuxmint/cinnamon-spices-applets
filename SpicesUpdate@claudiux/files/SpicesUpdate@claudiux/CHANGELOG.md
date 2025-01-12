@@ -1,3 +1,6 @@
+### v7.5.1~20250112
+  * Now use mainloopTools to optimize loop management.
+
 ### v7.5.0~20250111
   * Improved management of loops.
 
