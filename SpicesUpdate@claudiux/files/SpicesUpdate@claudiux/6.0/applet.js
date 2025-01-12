@@ -213,7 +213,7 @@ class SpicesUpdate extends IconApplet {
 
         this.timeoutId = null;
         this.isProcessing = false;
-        this.loopCacheIntervalId = null;
+        //~ this.loopCacheIntervalId = null;
 
         // Default icon color
         this.defaultColor = "white";
@@ -287,9 +287,7 @@ class SpicesUpdate extends IconApplet {
     } // End of constructor
 
     _loop_refresh_cache() {
-        if (source_exists(this.loopRefreshId)) {
-            source_remove(this.loopRefreshId);
-        }
+        source_remove(this.loopRefreshId);
         this.loopRefreshId = null;
         var is_to_download = false;
         for (let t of TYPES) {
@@ -615,7 +613,7 @@ class SpicesUpdate extends IconApplet {
             let id = setTimeout(() => {
                 this.http = new HttpLib();
                 clearTimeout(id);
-                id = null
+                id = null;
             }, 30000);
         } else {
             //~ logDebug("The network connectivity has been LOST.");
@@ -886,9 +884,7 @@ class SpicesUpdate extends IconApplet {
     } // End of _set_main_label
 
     on_frequency_changed() {
-        if (source_exists(this.loopId)) {
-            source_remove(this.loopId);
-        }
+        source_remove(this.loopId);
         this.loopId = null;
 
         //~ let coeff = QUICK() ? 720 : 3600;
@@ -2050,9 +2046,7 @@ class SpicesUpdate extends IconApplet {
         this.refresh_requested = true;
 
         if (!this.isLooping) {
-            if (source_exists(this.loopId)) {
-                source_remove(this.loopId);
-            }
+            source_remove(this.loopId);
             this.loopId = null;
             this.refreshInterval = 3600 * this.general_frequency;
             this.do_rotation = true;
@@ -2063,9 +2057,7 @@ class SpicesUpdate extends IconApplet {
     _on_reload_this_applet_pressed() {
         // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
         this.applet_running = false;
-        if (source_exists(this.loopId)) {
-            source_remove(this.loopId);
-        }
+        source_remove(this.loopId);
         this.loopId = null;
         var monitor, Id;
         for (let tuple of this.monitors) {
@@ -2252,9 +2244,7 @@ class SpicesUpdate extends IconApplet {
             //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
-            if (source_exists(this.loopId)) {
-                source_remove(this.loopId);
-            }
+            source_remove(this.loopId);
             this.loopId = null;
 
             this.loopId = timeout_add_seconds(10, () => this.updateLoop());
@@ -2265,9 +2255,7 @@ class SpicesUpdate extends IconApplet {
         }
         //~ logDebug("ONE MORE LOOP!");
         this.isLooping = true;
-        if (source_exists(this.loopId)) {
-            source_remove(this.loopId);
-        }
+        source_remove(this.loopId);
         this.loopId = null;
 
         this.check_dependencies();
@@ -2531,8 +2519,8 @@ class SpicesUpdate extends IconApplet {
         clearTimeout(this.timeoutId);
         this.timeoutId = null;
 
-        clearInterval(this.loopCacheIntervalId);
-        this.loopCacheIntervalId = null;
+        //~ clearInterval(this.loopCacheIntervalId);
+        //~ this.loopCacheIntervalId = null;
 
 
         this.destroy_all_notifications();
