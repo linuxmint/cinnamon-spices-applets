@@ -1,3 +1,6 @@
+### v4.1.0~20250112
+  * Now uses mainloopTools to optimize loop management.
+
 ### v4.0.1~20241114
   * Soup2/Soup3: better detection.
 
