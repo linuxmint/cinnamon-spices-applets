@@ -279,8 +279,7 @@ class SpicesUpdate extends IconApplet {
         this.disable_system_auto_update();
         let stoId = setTimeout( () => {
             this._loop_refresh_cache();
-            //~ if (timeout_exists(stoId))
-                clearTimeout(stoId);
+            clearTimeout(stoId);
             stoId = null;
         }, 20000); // Wait 20 seconds for mintupdate to run correctly.
 
