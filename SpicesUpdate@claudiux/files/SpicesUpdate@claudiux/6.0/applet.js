@@ -24,10 +24,8 @@ const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
 //Gdk:
 const { Display } = imports.gi.Gdk;
 //Util
-//~ const { setTimeout, clearTimeout, setInterval, clearInterval, spawnCommandLineAsync } = imports.misc.util;
 const { spawnCommandLineAsync } = imports.misc.util;
 //Mainloop:
-//~ const { source_remove, timeout_add_seconds } = imports.mainloop;
 const { timeout_add_seconds, timeout_add, setTimeout, clearTimeout, setInterval, clearInterval, source_exists, source_remove, remove_all_sources } = require("mainloopTools");
 
 const Main = imports.ui.main;
@@ -617,9 +615,7 @@ class SpicesUpdate extends IconApplet {
             this.applet_running = true;
             let id = setTimeout(() => {
                 this.http = new HttpLib();
-                //~ this._on_refresh_pressed();
-                //~ if (timeout_exists(id))
-                    clearTimeout(id);
+                clearTimeout(id);
                 id = null
             }, 30000);
         } else {
@@ -899,7 +895,6 @@ class SpicesUpdate extends IconApplet {
         //~ let coeff = QUICK() ? 720 : 3600;
         this.refreshInterval = 3600 * this.general_frequency;
         this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
-        //~ coeff = undefined;
     } // End of on_frequency_changed
 
     on_display_type_changed() {
@@ -1067,12 +1062,8 @@ class SpicesUpdate extends IconApplet {
         }
 
         const blacklist = this.get_blacklisted_packages();
-        //~ logDebug("blacklist: "+blacklist);
 
         // populate this.unprotected_<type> with the this.unprotected_<type> elements, removing uninstalled <type>:
-        //~ let unprotectedSpices_length = unprotectedSpices.length;
-        //~ for (var i=0; i < unprotectedSpices_length; i++) {
-            //~ let a = unprotectedSpices[i];
         for (let a of unprotectedSpices) {
             let d = file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
             if (d.query_exists(null)) {
@@ -1340,9 +1331,6 @@ class SpicesUpdate extends IconApplet {
                 if (!this.fonts_installed)
                     spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
             }
-            //~ if (_is_xdg_open_present && !this.fonts_installed) {
-                //~ spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
-            //~ }
             this.dependenciesMet = false;
         }
         // End of check_dependencies
@@ -1542,8 +1530,7 @@ class SpicesUpdate extends IconApplet {
                 //this.isProcessing = false;
             this.updateUI();
             if (newSpices.length === 0) {
-                //~ if (interval_exists(id))
-                    clearInterval(id);
+                clearInterval(id);
                 this.isProcessing = false;
                 this.updateUI();
                 newSpices = undefined;
@@ -1570,8 +1557,7 @@ class SpicesUpdate extends IconApplet {
                 this.do_rotation = false;
                 this.updateUI();
             } else {
-                //~ if (interval_exists(id))
-                    clearInterval(id);
+                clearInterval(id);
                 indexTypes = undefined;
                 type = undefined;
             }
@@ -1767,13 +1753,11 @@ class SpicesUpdate extends IconApplet {
     } // End of monitor_png_directory
 
     _on_pngDir_changed(type) {
-        //~ if (timeout_exists(this.timeoutId))
-            clearTimeout(this.timeoutId);
+        clearTimeout(this.timeoutId);
         this.timeoutId = null;
         this.timeoutId = setTimeout(() => {
             this._on_refresh_pressed();
-            //~ if (timeout_exists(this.timeoutId))
-                clearTimeout(this.timeoutId);
+            clearTimeout(this.timeoutId);
             this.timeoutId = null;
         }, 12000);
     } // End of _on_pngDir_changed
@@ -1812,13 +1796,11 @@ class SpicesUpdate extends IconApplet {
         if (this.isLooping) {
             this.new_loop_requested = true;
         } else {
-            //~ if (timeout_exists(this.timeoutId))
-                clearTimeout(this.timeoutId);
+            clearTimeout(this.timeoutId);
             this.timeoutId = null;
             this.timeoutId = setTimeout(() => {
                 this._on_refresh_pressed();
-                //~ if (timeout_exists(this.timeoutId))
-                    clearTimeout(this.timeoutId);
+                clearTimeout(this.timeoutId);
                 this.timeoutId = null;
             }, 12000);
         }
@@ -1860,7 +1842,6 @@ class SpicesUpdate extends IconApplet {
 
     get_active_spices(type) {
         // Returns the list of active spices of type 'type'
-        //~ var dconfEnabled;
         var elt = (type.toString() === "applets") ? 3 : 0;
         let listCanBeUpdated = this.get_can_be_updated(type);
         let enabled;
@@ -2074,7 +2055,6 @@ class SpicesUpdate extends IconApplet {
                 source_remove(this.loopId);
             }
             this.loopId = null;
-            //~ this.refreshInterval = QUICK() ? 720 * this.general_frequency : 3600 * this.general_frequency;
             this.refreshInterval = 3600 * this.general_frequency;
             this.do_rotation = true;
             this.updateLoop();
@@ -2199,8 +2179,6 @@ class SpicesUpdate extends IconApplet {
         if (this.do_rotation) {
             if (this.interval == null)
                 this.interval = setInterval(() => this.icon_rotate(), 10);
-            //~ logDebug("updateUI this.interval.source_id: "+this.interval.source_id);
-            //~ logDebug("updateUI: source_exists("+this.interval.source_id+"): "+source_exists(this.interval.source_id));
         }
 
         this.set_icon_color();
@@ -2240,12 +2218,8 @@ class SpicesUpdate extends IconApplet {
         let fontSize = this.badge_font_size();
         if (this.isHorizontal) {
             this.numberLabel.set_pivot_point(this.horizontal_anchor_x(), this.horizontal_anchor_y());
-            //~ this.numberLabel.anchor_x = this.horizontal_anchor_x();
-            //~ this.numberLabel.anchor_y = this.horizontal_anchor_y()
         } else {
             this.numberLabel.set_pivot_point(this.vertical_anchor_x(), this.vertical_anchor_y());
-            //~ this.numberLabel.anchor_x = this.vertical_anchor_x();
-            //~ this.numberLabel.anchor_y = this.vertical_anchor_y() // FIXME: anchor_x and anchor_y are DEPRECATED. Use pivot_point instead.
         }
         this.numberLabel.style = "font-size: %spx; padding: 0px; color: %s;".format(""+fontSize, this.defaultColor);
 
@@ -2255,8 +2229,7 @@ class SpicesUpdate extends IconApplet {
                 transition: "linear",
                 time: 0.5,
                 onComplete: Lang.bind(this, function() {
-                    //~ if (interval_exists(this.interval))
-                        clearInterval(this.interval);
+                    clearInterval(this.interval);
                     this.interval = null;
                     this.angle = 0;
                     this.set_applet_icon_symbolic_name("spices-update");
@@ -2548,24 +2521,18 @@ class SpicesUpdate extends IconApplet {
         // When applet is reloaded or removed from panel: stop the loop, inhibit the update timer,
         // remove all bindings and disconnect all signals (if any) to avoid errors.
         this.applet_running = false;
-        //~ if (source_exists(this.loopRefreshId))
-            source_remove(this.loopRefreshId);
+        source_remove(this.loopRefreshId);
         this.loopRefreshId = null;
 
-        //~ if (source_exists(this.loopId))
-            source_remove(this.loopId);
+        source_remove(this.loopId);
         this.loopId = null;
-        //~ logDebug("on_applet_reloaded source_exists("+this.interval+"): "+source_exists(this.interval));
-        //~ if (interval_exists(this.interval))
-            clearInterval(this.interval);
+        clearInterval(this.interval);
         this.interval = null;
 
-        //~ if (timeout_exists(this.timeoutId))
-            clearTimeout(this.timeoutId);
+        clearTimeout(this.timeoutId);
         this.timeoutId = null;
 
-        //~ if (interval_exists(this.loopCacheIntervalId))
-            clearInterval(this.loopCacheIntervalId);
+        clearInterval(this.loopCacheIntervalId);
         this.loopCacheIntervalId = null;
 
 
