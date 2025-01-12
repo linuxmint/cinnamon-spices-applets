@@ -21,15 +21,17 @@ const { LogLevelFlags, getenv, get_language_names, filename_to_uri, find_program
 const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, icon_new_for_string, FileQueryInfoFlags, FileType, Settings, FileCreateFlags } = imports.gi.Gio;
 //Gtk:
 const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
-// Gdk:
+//Gdk:
 const { Display } = imports.gi.Gdk;
+//Util
+//~ const { setTimeout, clearTimeout, setInterval, clearInterval, spawnCommandLineAsync } = imports.misc.util;
+const { spawnCommandLineAsync } = imports.misc.util;
 //Mainloop:
-const { source_remove, timeout_add_seconds } = imports.mainloop;
-const { source_exists, timeout_exists, interval_exists } = require("./sourceExists");
+//~ const { source_remove, timeout_add_seconds } = imports.mainloop;
+const { timeout_add_seconds, timeout_add, setTimeout, clearTimeout, setInterval, clearInterval, source_exists, source_remove, remove_all_sources } = require("mainloopTools");
 
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
-const Util = imports.misc.util;
 const Extension = imports.ui.extension;
 const Tooltips = imports.ui.tooltips;
 const Tweener = imports.ui.tweener;
@@ -58,7 +60,7 @@ ICONTHEME.prepend_search_path(ICONS_DIR);
 //ICONTHEME.add_resource_path(ICONS_DIR);
 
 
-Util.spawnCommandLineAsync("/bin/sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
+spawnCommandLineAsync("/bin/sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
 
 
 
@@ -111,7 +113,7 @@ function criticalNotify(msg, details, icon, button=[]) {
         notification.addButton(button[1], button[0]);
         notification.connect("action-invoked", (self, action) => {
             if (action === button[1]) {
-                Util.spawnCommandLineAsync(button[2]);
+                spawnCommandLineAsync(button[2]);
             }
         });
     }
@@ -164,10 +166,10 @@ class SpicesUpdate extends IconApplet {
         this.http = new HttpLib();
 
         // To be sure that the scripts will be executable:
-        Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
+        spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
         // Move themes to their new location (from ~/.themes to ~/.local/share/themes):
-        Util.spawnCommandLineAsync(SCRIPTS_DIR + "/move_themes.sh")
+        spawnCommandLineAsync(SCRIPTS_DIR + "/move_themes.sh")
 
         //http session:
         //~ this.define_http_session();
@@ -279,7 +281,7 @@ class SpicesUpdate extends IconApplet {
         this.disable_system_auto_update();
         let stoId = setTimeout( () => {
             this._loop_refresh_cache();
-            if (timeout_exists(stoId))
+            //~ if (timeout_exists(stoId))
                 clearTimeout(stoId);
             stoId = null;
         }, 20000); // Wait 20 seconds for mintupdate to run correctly.
@@ -319,7 +321,7 @@ class SpicesUpdate extends IconApplet {
         //~ logDebug("is_to_download: "+is_to_download);
         if (is_to_download) {
             //~ logDebug("Cache refresh requested.");
-            Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
+            spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
         }
         is_to_download = undefined;
 
@@ -616,7 +618,7 @@ class SpicesUpdate extends IconApplet {
             let id = setTimeout(() => {
                 this.http = new HttpLib();
                 //~ this._on_refresh_pressed();
-                if (timeout_exists(id))
+                //~ if (timeout_exists(id))
                     clearTimeout(id);
                 id = null
             }, 30000);
@@ -819,9 +821,9 @@ class SpicesUpdate extends IconApplet {
 
             notification.connect("action-invoked", (self, action) => {
                         if (action == "su-%s-symbolic".format(""+type)) {
-                            Util.spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, ""+type, TAB, SORT));
+                            spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, ""+type, TAB, SORT));
                         } else if (action == "software-update-available-symbolic") {
-                            Util.spawnCommandLineAsync("%s %s -t %s -s %s -u".format(CS_PATH, ""+type, TAB, SORT));
+                            spawnCommandLineAsync("%s %s -t %s -s %s -u".format(CS_PATH, ""+type, TAB, SORT));
                             let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
                             n.destroy(3);
                         } else if (action == "su-forget-symbolic") {
@@ -956,23 +958,23 @@ class SpicesUpdate extends IconApplet {
     } // End of on_btn_test_notif_pressed
 
     on_btn_cs_applets_pressed() {
-        Util.spawnCommandLineAsync("%s applets -t %s -s %s".format(CS_PATH, TAB, SORT));
+        spawnCommandLineAsync("%s applets -t %s -s %s".format(CS_PATH, TAB, SORT));
     } // End of on_btn_cs_applets_pressed
 
     on_btn_cs_desklets_pressed() {
-        Util.spawnCommandLineAsync("%s desklets -t %s -s %s".format(CS_PATH, TAB, SORT));
+        spawnCommandLineAsync("%s desklets -t %s -s %s".format(CS_PATH, TAB, SORT));
     } // End of on_btn_cs_desklets_pressed
 
     on_btn_cs_extensions_pressed() {
-        Util.spawnCommandLineAsync("%s extensions -t %s -s %s".format(CS_PATH, TAB, SORT));
+        spawnCommandLineAsync("%s extensions -t %s -s %s".format(CS_PATH, TAB, SORT));
     } // End of on_btn_cs_extensions_pressed
 
     on_btn_cs_themes_pressed() {
-        Util.spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+        spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
     } // End of on_btn_cs_themes_pressed
 
     on_btn_cs_actions_pressed() {
-        Util.spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
+        spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
     } // End of on_btn_cs_themes_pressed
 
     on_tooltip_max_width_screen_percentage_changed() {
@@ -1129,21 +1131,36 @@ class SpicesUpdate extends IconApplet {
                 }
             }
 
+            var _protected = [];
+            var _unprotected = [];
+
+            this.unprotectedList[type].forEach( s => {
+                if (s["name"] === "AlbumArt3.0@claudiux")
+                    s["isunprotected"] = false;
+                if (s["isunprotected"])
+                    _unprotected.push(s);
+                else
+                    _protected.push(s);
+            });
+            _unprotected.sort((a,b) => this._compare(a,b));
+            _protected.sort((a,b) => this._compare(a,b));
+            this.unprotectedList[type] = _protected.concat(_unprotected);
+
             switch (type) {
                 case "applets":
-                    this.unprotected_applets = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
+                    this.unprotected_applets = this.unprotectedList[type];
                     break;
                 case "desklets":
-                    this.unprotected_desklets = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
+                    this.unprotected_desklets = this.unprotectedList[type];
                     break;
                 case "extensions":
-                    this.unprotected_extensions = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
+                    this.unprotected_extensions = this.unprotectedList[type];
                     break;
                 case "themes":
-                    this.unprotected_themes = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
+                    this.unprotected_themes = this.unprotectedList[type];
                     break;
                 case "actions":
-                    this.unprotected_actions = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
+                    this.unprotected_actions = this.unprotectedList[type];
             }
 
             children.close(null);
@@ -1152,6 +1169,10 @@ class SpicesUpdate extends IconApplet {
             file_type = undefined;
             name = undefined;
             isSystemUnprotected = undefined;
+            _protected = [];
+            _unprotected = [];
+            _protected = undefined;
+            _unprotected = undefined;
         }
         dir = undefined;
 
@@ -1182,22 +1203,12 @@ class SpicesUpdate extends IconApplet {
     } // End of populateSettingsUnprotectedActions
 
     _compare(a,b) {
-        // Protect AlbumArt3.0@claudiux desklet:
-        if (a["name"] === "AlbumArt3.0@claudiux")
-            a["isunprotected"] = false;
-
         // We know that a["name"] and b["name"] are different.
-        if (!a["isunprotected"]) {
-            if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
-                return -2;
-            } else {
-                return -1;
-            }
-        }
-        else if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
+        if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
+            return -1;
+        } else {
             return 1;
         }
-        return 2;
     } // End of _compare
 
     _get_singular_type(t) {
@@ -1223,7 +1234,7 @@ class SpicesUpdate extends IconApplet {
             let _GentoWitnessFile = file_new_for_path("/etc/gentoo-release"); // Gentoo
             let _isGentoo = _GentoWitnessFile.query_exists(null);
             if (_isArchlinux || _isopenSUSE || _isGentoo) {
-                Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
+                spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
                 _fonts_installed = true
             }
         }
@@ -1317,20 +1328,20 @@ class SpicesUpdate extends IconApplet {
 
             if (!_is_xdg_open_present) {
                 if (terminal.length > 0) {
-                    Util.spawnCommandLineAsync(terminal);
+                    spawnCommandLineAsync(terminal);
                     // TRANSLATORS: The next messages should not be translated.
                     //~ if (_isDebian === true) {
-                        //~ Util.spawnCommandLineAsync(terminal + " " + term_sep + " " + " '/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
+                        //~ spawnCommandLineAsync(terminal + " " + term_sep + " " + " '/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
                     //~ } else {
-                        //~ Util.spawnCommandLineAsync(terminal + " " + term_sep + " " + `'/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo ${_apt_update} ${_and} ${_apt_install}; sleep 1; exec bash\"'`, null, null);
+                        //~ spawnCommandLineAsync(terminal + " " + term_sep + " " + `'/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo ${_apt_update} ${_and} ${_apt_install}; sleep 1; exec bash\"'`, null, null);
                     //~ }
                 }
             } else {
                 if (!this.fonts_installed)
-                    Util.spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
+                    spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
             }
             //~ if (_is_xdg_open_present && !this.fonts_installed) {
-                //~ Util.spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
+                //~ spawnCommandLineAsync("/usr/bin/xdg-open apt://fonts-symbola");
             //~ }
             this.dependenciesMet = false;
         }
@@ -1531,7 +1542,7 @@ class SpicesUpdate extends IconApplet {
                 //this.isProcessing = false;
             this.updateUI();
             if (newSpices.length === 0) {
-                if (interval_exists(id))
+                //~ if (interval_exists(id))
                     clearInterval(id);
                 this.isProcessing = false;
                 this.updateUI();
@@ -1559,7 +1570,7 @@ class SpicesUpdate extends IconApplet {
                 this.do_rotation = false;
                 this.updateUI();
             } else {
-                if (interval_exists(id))
+                //~ if (interval_exists(id))
                     clearInterval(id);
                 indexTypes = undefined;
                 type = undefined;
@@ -1586,7 +1597,7 @@ class SpicesUpdate extends IconApplet {
 
         let command = THUMB_DOWNLOADER + " " + url + " " + this._get_singular_type(type) + " " + _basename;
         //~ logDebug("command: "+command);
-        Util.spawnCommandLineAsync(command);
+        spawnCommandLineAsync(command);
         memberName = undefined;
         url = undefined;
         target = undefined;
@@ -1756,13 +1767,12 @@ class SpicesUpdate extends IconApplet {
     } // End of monitor_png_directory
 
     _on_pngDir_changed(type) {
-        if (timeout_exists(this.timeoutId)) {
+        //~ if (timeout_exists(this.timeoutId))
             clearTimeout(this.timeoutId);
-        }
         this.timeoutId = null;
         this.timeoutId = setTimeout(() => {
             this._on_refresh_pressed();
-            if (timeout_exists(this.timeoutId))
+            //~ if (timeout_exists(this.timeoutId))
                 clearTimeout(this.timeoutId);
             this.timeoutId = null;
         }, 12000);
@@ -1802,13 +1812,12 @@ class SpicesUpdate extends IconApplet {
         if (this.isLooping) {
             this.new_loop_requested = true;
         } else {
-            if (timeout_exists(this.timeoutId)) {
+            //~ if (timeout_exists(this.timeoutId))
                 clearTimeout(this.timeoutId);
-            }
             this.timeoutId = null;
             this.timeoutId = setTimeout(() => {
                 this._on_refresh_pressed();
-                if (timeout_exists(this.timeoutId))
+                //~ if (timeout_exists(this.timeoutId))
                     clearTimeout(this.timeoutId);
                 this.timeoutId = null;
             }, 12000);
@@ -1938,7 +1947,7 @@ class SpicesUpdate extends IconApplet {
             if (this.new_Spices[t].length > 0) ts += "   %s %s".format(char_new, (this.new_Spices[t].length).toString());
             this.spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
             this.spicesMenuItems[t].connect("activate", (event) => {
-                Util.spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
+                spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
             });
             this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
             this.menu.addMenuItem(this.spicesMenuItems[t]);
@@ -1969,7 +1978,7 @@ class SpicesUpdate extends IconApplet {
             let _optionTitle = _configureOptions[i];
             let _icon = _iconNames[i];
             _options[i] = new PopupIconMenuItem(_optionTitle, _icon, IconType.SYMBOLIC);
-            _options[i].connect("activate", (event) => Util.spawnCommandLineAsync("/usr/bin/xlet-settings applet %s -i %s -t %s".format(UUID, this.instanceId, i.toString())));
+            _options[i].connect("activate", (event) => spawnCommandLineAsync("/usr/bin/xlet-settings applet %s -i %s -t %s".format(UUID, this.instanceId, i.toString())));
             _configure.menu.addMenuItem(_options[i])
         }
         _configure.menu.open();
@@ -1992,10 +2001,10 @@ class SpicesUpdate extends IconApplet {
         this.help_button.connect("activate", (event) => {
                 let _language = this.get_user_language();
                 if (_language.startsWith("en")) {
-                    Util.spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/309");
+                    spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/309");
                 } else {
                     let url_help = "https://cinnamon--spices-linuxmint-com.translate.goog/applets/view/309?_x_tr_sl=auto&_x_tr_tl=%s&_x_tr_hl=%s&_x_tr_pto=wapp".format(_language, _language);
-                    Util.spawnCommandLineAsync("/usr/bin/xdg-open "+url_help);
+                    spawnCommandLineAsync("/usr/bin/xdg-open "+url_help);
                     url_help = undefined;
                 }
             });
@@ -2246,7 +2255,7 @@ class SpicesUpdate extends IconApplet {
                 transition: "linear",
                 time: 0.5,
                 onComplete: Lang.bind(this, function() {
-                    if (interval_exists(this.interval))
+                    //~ if (interval_exists(this.interval))
                         clearInterval(this.interval);
                     this.interval = null;
                     this.angle = 0;
@@ -2433,7 +2442,7 @@ class SpicesUpdate extends IconApplet {
         for (let t of TYPES) {
             if (this.nb_in_menu[t] > 0) {
                 let command = "%s %s -t %s -s %s".format(CS_PATH, ""+t, TAB, SORT);
-                Util.spawnCommandLineAsync(command);
+                spawnCommandLineAsync(command);
                 command = undefined;
             }
         }
@@ -2531,35 +2540,32 @@ class SpicesUpdate extends IconApplet {
                 logError(e)
             }
         }
+
+        remove_all_sources();
     } // End of on_applet_removed_from_panel
 
     on_applet_reloaded() {
         // When applet is reloaded or removed from panel: stop the loop, inhibit the update timer,
         // remove all bindings and disconnect all signals (if any) to avoid errors.
         this.applet_running = false;
-        if (source_exists(this.loopRefreshId)) {
+        //~ if (source_exists(this.loopRefreshId))
             source_remove(this.loopRefreshId);
-        }
         this.loopRefreshId = null;
 
-        if (source_exists(this.loopId)) {
+        //~ if (source_exists(this.loopId))
             source_remove(this.loopId);
-        }
         this.loopId = null;
         //~ logDebug("on_applet_reloaded source_exists("+this.interval+"): "+source_exists(this.interval));
-        if (interval_exists(this.interval)) {
+        //~ if (interval_exists(this.interval))
             clearInterval(this.interval);
-        }
         this.interval = null;
 
-        if (timeout_exists(this.timeoutId)) {
+        //~ if (timeout_exists(this.timeoutId))
             clearTimeout(this.timeoutId);
-        }
         this.timeoutId = null;
 
-        if (interval_exists(this.loopCacheIntervalId)) {
+        //~ if (interval_exists(this.loopCacheIntervalId))
             clearInterval(this.loopCacheIntervalId);
-        }
         this.loopCacheIntervalId = null;
 
 
