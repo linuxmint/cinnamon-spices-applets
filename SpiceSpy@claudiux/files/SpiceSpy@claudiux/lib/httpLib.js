@@ -6,11 +6,11 @@
  */
 const DEBUG = false;
 function log(message, alwaysLog=false) {
-  if (DEBUG || alwaysLog) global.log("[httpLib.js]: " + message);
+  if (DEBUG || alwaysLog) global.log("[SpicesSpy httpLib.js]: " + message);
 }
 
 function logError(error) {
-  global.logError("\n[httpLib.js]: " + error + "\n")
+  global.logError("\n[SpicesSpy httpLib.js]: " + error + "\n")
 }
 
 
