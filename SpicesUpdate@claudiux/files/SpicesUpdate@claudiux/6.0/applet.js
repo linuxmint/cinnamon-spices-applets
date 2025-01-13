@@ -213,7 +213,7 @@ class SpicesUpdate extends IconApplet {
 
         this.timeoutId = null;
         this.isProcessing = false;
-        this.loopCacheIntervalId = null;
+        //~ this.loopCacheIntervalId = null;
 
         // Default icon color
         this.defaultColor = "white";
@@ -287,9 +287,7 @@ class SpicesUpdate extends IconApplet {
     } // End of constructor
 
     _loop_refresh_cache() {
-        if (source_exists(this.loopRefreshId)) {
-            source_remove(this.loopRefreshId);
-        }
+        source_remove(this.loopRefreshId);
         this.loopRefreshId = null;
         var is_to_download = false;
         for (let t of TYPES) {
@@ -615,7 +613,7 @@ class SpicesUpdate extends IconApplet {
             let id = setTimeout(() => {
                 this.http = new HttpLib();
                 clearTimeout(id);
-                id = null
+                id = null;
             }, 30000);
         } else {
             //~ logDebug("The network connectivity has been LOST.");
@@ -886,9 +884,7 @@ class SpicesUpdate extends IconApplet {
     } // End of _set_main_label
 
     on_frequency_changed() {
-        if (source_exists(this.loopId)) {
-            source_remove(this.loopId);
-        }
+        source_remove(this.loopId);
         this.loopId = null;
 
         //~ let coeff = QUICK() ? 720 : 3600;
@@ -2050,9 +2046,7 @@ class SpicesUpdate extends IconApplet {
         this.refresh_requested = true;
 
         if (!this.isLooping) {
-            if (source_exists(this.loopId)) {
-                source_remove(this.loopId);
-            }
+            source_remove(this.loopId);
             this.loopId = null;
             this.refreshInterval = 3600 * this.general_frequency;
             this.do_rotation = true;
@@ -2063,9 +2057,7 @@ class SpicesUpdate extends IconApplet {
     _on_reload_this_applet_pressed() {
         // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
         this.applet_running = false;
-        if (source_exists(this.loopId)) {
-            source_remove(this.loopId);
-        }
+        source_remove(this.loopId);
         this.loopId = null;
         var monitor, Id;
         for (let tuple of this.monitors) {
@@ -2131,8 +2123,8 @@ class SpicesUpdate extends IconApplet {
         }
         Tweener.addTween(this.actor, {
             opacity: 255,
-            transition: "linear",
-            time: 0.5,
+            transition: "easeOutQuad", //"linear",
+            time: 1,
             onComplete: null
         });
     } // End of set_icon_color
@@ -2175,7 +2167,7 @@ class SpicesUpdate extends IconApplet {
             }
         }
 
-        if (this.do_rotation) {
+        if (this.do_rotation && this.actor.get_stage() != null) {
             if (this.interval == null)
                 this.interval = setInterval(() => this.icon_rotate(), 10);
         }
@@ -2222,18 +2214,14 @@ class SpicesUpdate extends IconApplet {
         }
         this.numberLabel.style = "font-size: %spx; padding: 0px; color: %s;".format(""+fontSize, this.defaultColor);
 
-        if (!this.do_rotation && this.interval) {
+        if (!this.do_rotation && this.interval && this.actor.get_stage() != null) {
             Tweener.addTween(this.actor, {
-                opacity: 0,
-                transition: "linear",
-                time: 0.5,
-                onComplete: Lang.bind(this, function() {
-                    clearInterval(this.interval);
-                    this.interval = null;
-                    this.angle = 0;
-                    this.set_applet_icon_symbolic_name("spices-update");
-                    this.set_icon_color();
-                })
+                opacity: 255,
+                transition: "easeOutQuad", //"linear",
+                delay: 0,
+                time: 1,
+                rounded: true,
+                onComplete: () => { this._on_updateUI_tween_completed(); },
             });
         }
 
@@ -2246,15 +2234,23 @@ class SpicesUpdate extends IconApplet {
         // End of updateUI
     }
 
+    _on_updateUI_tween_completed() {
+        this.angle = 0;
+        this.set_applet_icon_symbolic_name("spices-update");
+        this.set_icon_color();
+        this.do_rotation = false;
+        Tweener.removeTweens(this.actor);
+        clearInterval(this.interval);
+        this.interval = null;
+    }
+
     // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
         if (this.isLooping === true) {
             //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
-            if (source_exists(this.loopId)) {
-                source_remove(this.loopId);
-            }
+            source_remove(this.loopId);
             this.loopId = null;
 
             this.loopId = timeout_add_seconds(10, () => this.updateLoop());
@@ -2265,9 +2261,7 @@ class SpicesUpdate extends IconApplet {
         }
         //~ logDebug("ONE MORE LOOP!");
         this.isLooping = true;
-        if (source_exists(this.loopId)) {
-            source_remove(this.loopId);
-        }
+        source_remove(this.loopId);
         this.loopId = null;
 
         this.check_dependencies();
@@ -2513,6 +2507,9 @@ class SpicesUpdate extends IconApplet {
             }
         }
 
+        if (Tweener.getTweenCount(this.actor) > 0)
+            Tweener.removeTweens(this.actor);
+
         remove_all_sources();
     } // End of on_applet_removed_from_panel
 
@@ -2531,8 +2528,8 @@ class SpicesUpdate extends IconApplet {
         clearTimeout(this.timeoutId);
         this.timeoutId = null;
 
-        clearInterval(this.loopCacheIntervalId);
-        this.loopCacheIntervalId = null;
+        //~ clearInterval(this.loopCacheIntervalId);
+        //~ this.loopCacheIntervalId = null;
 
 
         this.destroy_all_notifications();
