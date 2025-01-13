@@ -1,7 +1,7 @@
 # BAZI TANIMLAYICI BAŞLIK.
 # Telif hakkı (C) 2022 PAKETİN TELİF HAKKI SAHİBİ Radio3.0
 # Bu dosya Radio3.0 paketi ile aynı lisans altında dağıtılmaktadır..
-# Serkan Önder <serkanonder@outlook.com>, 2022.2023.
+# Serkan Önder <serkanonder@outlook.com>, 2022.2023.2025.
 #
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-07 20:17+0100\n"
-"PO-Revision-Date: 2023-12-17 14:38+0300\n"
+"PO-Revision-Date: 2025-01-13 12:14+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:243
 msgid "unassigned"
-msgstr ""
+msgstr "atanmamış"
 
 #. applet.js:244 desklet/AlbumArt3.0@claudiux/desklet.js:273
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Albüm Kapağını tam boyutta görüntüle"
 
 #. applet.js:348
 msgid "This is your own list of Categories and Radio Stations."
@@ -267,19 +267,16 @@ msgid "Visit the home page of this station"
 msgstr "Bu istasyonun ana sayfasını ziyaret edin"
 
 #. applet.js:2831
-#, fuzzy
 msgid "Categories"
-msgstr "Kategorilerim"
+msgstr "Kategoriler"
 
 #. applet.js:2834
-#, fuzzy
 msgid "Radio Stations"
-msgstr "Radyo İstasyonlarım"
+msgstr "Radyo İstasyonları"
 
 #. applet.js:2845
-#, fuzzy
 msgid "All Categories"
-msgstr "Kategorilerim"
+msgstr "Tüm Kategoriler"
 
 #. applet.js:2942
 msgid "My Radio Stations"
@@ -396,7 +393,7 @@ msgstr "Kapat"
 #. applet.js:4927 applet.js:5273
 #, javascript-format
 msgid "Remove '%s'"
-msgstr "'%s'yi kaldır"
+msgstr "'%s'ı kaldır"
 
 #. applet.js:4935 applet.js:5239
 msgid "About..."
@@ -443,9 +440,8 @@ msgid "Pulse Effects"
 msgstr "Nabız Efektleri"
 
 #. applet.js:5028 applet.js:5464
-#, fuzzy
 msgid "Easy Effects"
-msgstr "Nabız Efektleri"
+msgstr "Kolay Efektler"
 
 #. applet.js:5033 applet.js:5483
 msgid "Radio ON at startup"
@@ -458,12 +454,12 @@ msgstr "İstasyon Logosunu Göster"
 #. settings-schema.json->desklet-open-settings-button->description
 #. applet.js:5052
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Albüm Kapağı masaüstü ayarları"
 
 #. settings-schema.json->desklet-show-on-desktop->description
 #. applet.js:5057 applet.js:5512
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Masaüstünde Albüm Kapağını Göster"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:5069 applet.js:5527
@@ -559,12 +555,11 @@ msgstr "Çeviri kurulumunu tamamlamak için lütfen Tarçın'ı yeniden başlat�
 #. lib/util.js:245
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr ""
+msgstr "'%s' yürütmesi başarısız oldu:"
 
 #. desklet/AlbumArt3.0@claudiux/desklet.js:45
-#, fuzzy
 msgid "Radio3.0 Album Art"
-msgstr "Radio3.0"
+msgstr "Radio3.0 Albüm Kapağı"
 
 #. xs/xlet-settings.py:214
 msgid "Previous instance"
@@ -680,7 +675,7 @@ msgstr "Radyolar"
 
 #. settings-schema.json->pageImport->title
 msgid "Import"
-msgstr "İçeri aktar"
+msgstr "İçe aktar"
 
 #. settings-schema.json->pageSearch->title
 msgid "Search"
@@ -730,7 +725,7 @@ msgstr "Bu istasyon listesini güncelle"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Sadece Radio++ kullanıcıları için"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -792,11 +787,11 @@ msgstr "Simge"
 
 #. settings-schema.json->sectionBehaviorHorizontalPanel->title
 msgid "Only on horizontal panels"
-msgstr ""
+msgstr "Sadece yatay panellerde"
 
 #. settings-schema.json->sectionBehaviorAlbumArtDesklet->title
 msgid "Album Art desklet"
-msgstr ""
+msgstr "Albüm Kapağı masaüstü"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -816,11 +811,11 @@ msgstr "Veritabanı Bilgisi"
 
 #. settings-schema.json->sectionExperimental->title
 msgid "EXPERIMENTAL"
-msgstr ""
+msgstr "DENEYSEL"
 
 #. settings-schema.json->sectionRecordingCache->title
 msgid "Cache"
-msgstr ""
+msgstr "Önbellek"
 
 #. settings-schema.json->sectionRecordingRecordings->title
 #. settings-schema.json->sectionYTFormat->title
@@ -872,7 +867,7 @@ msgstr "İstasyon listesi"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -976,7 +971,7 @@ msgstr "%"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "İstasyonlarınızı Radio++'dan içe aktarın"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1215,7 +1210,7 @@ msgstr ""
 
 #. settings-schema.json->volume-magnetic-on->description
 msgid "Magnetize all multiples of 25%"
-msgstr ""
+msgstr "%25'in tüm katlarını mıknatısla"
 
 #. settings-schema.json->volume-show-osd->description
 msgid "Show OSD while changing volume"
@@ -1226,9 +1221,8 @@ msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
 msgstr "Sesi değiştirirken OSD (Ekranda Gösterim) görüntülenmeli mi?"
 
 #. settings-schema.json->volume-show-osd-starting-radio->description
-#, fuzzy
 msgid "Show volume OSD when changing radio station"
-msgstr "Sesi değiştirirken OSD'yi göster"
+msgstr "Radyo istasyonunu değiştirirken ses OSD'sini göster"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -1289,7 +1283,7 @@ msgstr "Son Çalınan İstasyonlar listenizi şimdi boşaltın"
 
 #. settings-schema.json->show-by-category->description
 msgid "Display the Station list beside the Category list"
-msgstr ""
+msgstr "Kategori listesinin yanında İstasyon listesini görüntüle"
 
 #. settings-schema.json->show-by-category->tooltip
 msgid ""
@@ -1297,6 +1291,9 @@ msgid ""
 "Stations; then select your station.\n"
 "Unchecked: Single list containing each category followed by its stations."
 msgstr ""
+"İşaretli: İstasyonlar listesini görüntülemek için bir Kategorinin üzerine "
+"gelin (tıklamadan); ardından istasyonunuzu seçin.\n"
+"İşaretsiz: Her kategoriyi ve ardından istasyonlarını içeren tek liste."
 
 #. settings-schema.json->show-system-items->description
 msgid "Show system items in the menu"
@@ -1466,29 +1463,29 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "İndirilen Albüm Kapağının Kalitesi"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Azami Çözünürlük"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Kalite"
+msgstr "Yüksek Kalite"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Orta"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Standart"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
 msgstr ""
+"Varsayılan: Yüksek Kalite. Ağ Kalitenize karşılık gelen bir değer seçin."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
@@ -1530,12 +1527,11 @@ msgstr "HTTP Proxy'sini uygula"
 
 #. settings-schema.json->database-favorite->description
 msgid "Your favorite database:"
-msgstr ""
+msgstr "En sevdiğiniz veritabanı:"
 
 #. settings-schema.json->database-favorite->options
-#, fuzzy
 msgid "Random"
-msgstr "rasgele"
+msgstr "Rastgele"
 
 #. settings-schema.json->database-url->description
 msgid "Database URL"
@@ -1543,25 +1539,33 @@ msgstr "Veritabanı URL'si"
 
 #. settings-schema.json->cache-no-cache->description
 msgid "No cache"
-msgstr ""
+msgstr "Önbellek yok"
 
 #. settings-schema.json->cache-no-cache->tooltip
 msgid ""
 "Checking this option limits memory usage, but no longer allows the user to "
 "rewind the cache (using the sound150@claudiux applet)."
 msgstr ""
+"Bu seçeneği işaretlemek bellek kullanımını sınırlar, ancak artık "
+"kullanıcının önbelleği geri sarmasına (sound150@claudiux uygulamasını "
+"kullanarak) izin vermez."
 
 #. settings-schema.json->cache-mins->description
 msgid ""
 "Minutes to cache\n"
 "0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
 msgstr ""
+"Önbelleğe alma dakikası\n"
+"0, sınır olmadığı anlamına gelir (varsayılan). 1 saat = 60 dakika. 24 saat = "
+"1440 dakika."
 
 #. settings-schema.json->cache-on-disk->description
 msgid ""
 "Cache on disk\n"
 "(Write packet data to a temporary file, instead of keeping them in memory.)"
 msgstr ""
+"Diskte önbellek\n"
+"(Paket verilerini bellekte tutmak yerine geçici bir dosyaya yazın.)"
 
 #. settings-schema.json->cache-dir->description
 msgid ""
@@ -1569,70 +1573,73 @@ msgid ""
 "(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
 "sufficient free space.)"
 msgstr ""
+"Veri önbelleğe alma için kullanılan dizin\n"
+"(SSD disklerde dikkatli kullanın. RAM'de depolanan, yeterli boş alana sahip "
+"bir dizini tercih edin.)"
 
 #. settings-schema.json->cache-dir-open->description
-#, fuzzy
 msgid "Open cache directory"
-msgstr "Shoutcast dizinini aç"
+msgstr "Önbellek dizinini aç"
 
 #. settings-schema.json->cache-stream-size->description
 msgid "Stream cache size"
-msgstr ""
+msgstr "Akış önbellek boyutu"
 
 #. settings-schema.json->cache-stream-size->tooltip
 msgid ""
 "The amount of stream cache. Default: 1 MiB.\n"
 "Beware, setting this to a large value can reduce performance."
 msgstr ""
+"Akış önbelleğinin miktarı. Varsayılan: 1 MB.\n"
+"Dikkat edin, bunu büyük bir değere ayarlamak performansı düşürebilir."
 
 #. settings-schema.json->cache-stream-size->options
-#, fuzzy
 msgid "No limit"
-msgstr "Sınır"
+msgstr "Sınır Yok"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "64 KiB"
-msgstr ""
+msgstr "64 KB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "128 KiB"
-msgstr ""
+msgstr "128 KB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "256 KiB"
-msgstr ""
+msgstr "256 KB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "512 KiB"
-msgstr ""
+msgstr "512 KB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "1 MiB"
-msgstr ""
+msgstr "1 MB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "2 Mib"
-msgstr ""
+msgstr "2 MB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "3 MiB"
-msgstr ""
+msgstr "3 MB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "4 MiB"
-msgstr ""
+msgstr "4 MB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "5 MiB"
-msgstr ""
+msgstr "5 MB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "10 MiB"
-msgstr ""
+msgstr "10 MB"
 
 #. settings-schema.json->cache-stream-size->options
 msgid "20 MiB"
-msgstr ""
+msgstr "20 MB"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
@@ -3130,107 +3137,105 @@ msgid "Remove selected items"
 msgstr "Seçili öğeleri kaldır"
 
 #. settings-schema.json->horizontal-show-name->description
-#, fuzzy
 msgid "Display radio name"
-msgstr "İstasyon Logosunu Göster"
+msgstr "Radyo adını görüntüle"
 
 #. settings-schema.json->horizontal-show-title->description
-#, fuzzy
 msgid "Display title"
-msgstr "İstasyon Logosunu Göster"
+msgstr "Başlık görüntüle"
 
 #. settings-schema.json->horizontal-max-title-length->description
 msgid "Maximum title length"
-msgstr ""
+msgstr "Azami başlık uzunluğu"
 
 #. settings-schema.json->horizontal-max-title-length->tooltip
 msgid "0 means no maximum"
-msgstr ""
+msgstr "0 azami sayı olmadığı anlamına gelir"
 
 #. settings-schema.json->desklet-activate-button->description
 msgid "Activate desklet displaying the Radio3.0 Album Art"
-msgstr ""
+msgstr "Radio3.0 Albüm Kapağını görüntüleyen masaüstünü etkinleştirin"
 
 #. settings-schema.json->desklet-activated-label->description
 msgid "The desklet displaying the Radio3.0 Album Art is activated"
-msgstr ""
+msgstr "Radio3.0 Albüm Kapağını görüntüleyen masaüstü etkinleştirildi"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
-msgstr ""
+msgstr "Radio3.0 için Albüm Kapağı"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
 msgid "A digital photo frame desklet to display the Radio3.0 album art"
 msgstr ""
+"Radio3.0 albüm kapağını görüntülemek için dijital fotoğraf çerçevesi masaüstü"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
-msgstr ""
+msgstr "Yükseklik"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
 msgid "pixels"
-msgstr ""
+msgstr "piksel"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
-msgstr ""
+msgstr "Genişlik"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. effect->description
 msgid "Fade"
-msgstr ""
+msgstr "Solma"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
-#, fuzzy
 msgid "None"
-msgstr "(Hiçbiri)"
+msgstr "Hiçbiri"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quad"
-msgstr ""
+msgstr "Dörtlü"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Cubic"
-msgstr ""
+msgstr "Kübik"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quart"
-msgstr ""
+msgstr "Çeyrek"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quint"
-msgstr ""
+msgstr "Beşinci"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Sine"
-msgstr ""
+msgstr "Sinüs"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Expo"
-msgstr ""
+msgstr "Sergi"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Circ"
-msgstr ""
+msgstr "Dairesel"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Elastic"
-msgstr ""
+msgstr "Elastik"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Back"
-msgstr ""
+msgstr "Geri"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Bounce"
-msgstr ""
+msgstr "Sıçrama"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. delay->description
 msgid "Fade delay"
-msgstr ""
+msgstr "Solma gecikmesi"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
 msgid "0 means no fade"
-msgstr ""
+msgstr "0 solma olmadığı anlamına gelir"
