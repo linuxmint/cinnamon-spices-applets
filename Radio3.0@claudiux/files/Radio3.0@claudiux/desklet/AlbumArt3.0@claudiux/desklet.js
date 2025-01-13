@@ -5,13 +5,16 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Desklet = imports.ui.desklet;
 const Lang = imports.lang;
-const Mainloop = imports.mainloop;
+//~ const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
 const Tweener = imports.ui.tweener;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+//Mainloop:
+const { timeout_add_seconds, timeout_add, setTimeout, clearTimeout, setInterval, clearInterval, source_exists, source_remove, remove_all_sources } = require("mainloopTools");
+
 
 const APPLET_UUID = "Radio3.0@claudiux";
 const DESKLET_UUID = "AlbumArt3.0@claudiux";
@@ -121,11 +124,14 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this.dir_monitor_loop_is_active = false;
 
         if (this._bin != null) {
-            Tweener.removeTweens(this._bin);
+            if (Tweener.getTweenCount(this._bin) > 0)
+                Tweener.removeTweens(this._bin);
             this._bin.destroy_all_children();
             this._bin.destroy();
             this._bin = null;
         }
+
+        remove_all_sources();
     }
 
     _scan_dir(dir) {
@@ -160,12 +166,12 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         this._bin.set_size(this.width, this.height);
 
         this._images = [];
-        if (this._photoFrame) {
+        if (this._photoFrame && (this._bin != null)) {
             this._photoFrame.set_child(this._bin);
             this.setContent(this._photoFrame);
         }
 
-        if (this.dir_file.query_exists(null)) {
+        if (this.dir_file != null && this.dir_file.query_exists(null)) {
             this._scan_dir(this.dir);
 
             this.updateInProgress = false;
@@ -180,7 +186,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         if (!this.isLooping) return false;
         this._update();
         if (this.isLooping)
-            this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+            //~ this.update_id = Mainloop.timeout_add_seconds(this.delay, Lang.bind(this, this._update_loop));
+            this.update_id = timeout_add_seconds(this.delay, () => { this._update_loop() });
         else
             return false;
     }
@@ -243,13 +250,13 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             let _transition = "easeNone";
             if (this.fade_effect != "None")
                 _transition = "easeOut"+this.fade_effect;
-            if (this._bin) {
+            if (this._bin != null) {
                 Tweener.addTween(this._bin, {
                     opacity: 255,
                     time: 0,
                     transition: _transition,
                     onComplete: () => {
-                        if (this._bin) {
+                        if (this._bin != null) {
                             this._bin.set_child(this.currentPicture);
                             Tweener.addTween(this._bin, {
                                 opacity: 0,
@@ -261,7 +268,7 @@ class AlbumArtRadio30 extends Desklet.Desklet {
                 });
             }
         } else {
-            if (this._bin) this._bin.set_child(this.currentPicture);
+            if (this._bin != null) this._bin.set_child(this.currentPicture);
         }
         //~ if (old_pic) {
             //~ old_pic.destroy();
@@ -275,7 +282,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
             if (event.get_button() == 1) {
                 this.on_setting_changed();
             } else if (event.get_button() == 2) {
-                Util.spawn(['xdg-open', this.currentPicture.path]);
+                if (this.currentPicture != null)
+                    Util.spawn(['xdg-open', this.currentPicture.path]);
             }
         } catch (e) {
             global.logError(e);
@@ -291,7 +299,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
          // Set "Display Album Art at full size" menu item, in top position:
         let displayCoverArtInRealSize = new PopupMenu.PopupIconMenuItem(_("Display Album Art at full size"), "image-x-generic-symbolic", St.IconType.SYMBOLIC);
         displayCoverArtInRealSize.connect("activate", (event) => {
-            GLib.spawn_command_line_async("xdg-open "+this.currentPicture.path);
+            if (this.currentPicture != null)
+                GLib.spawn_command_line_async("xdg-open "+this.currentPicture.path);
         });
         this._menu.addMenuItem(displayCoverArtInRealSize, 0); // 0 for top position.
     }

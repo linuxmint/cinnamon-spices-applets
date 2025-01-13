@@ -1,3 +1,7 @@
+### v2.7.2~20250112
+  * Now the desklet uses the mainloopTools library.
+  * Minor bugfixes.
+
 ### v2.7.1~20250111
   * Improved management of loops.
   * Improved management of desklet.

@@ -13,7 +13,7 @@ const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, Popu
 // Settings:
 const { AppletSettings } = imports.ui.settings;
 // ./lib/util:
-const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn_async, trySpawnCommandLine, setTimeout, clearTimeout } = require("./lib/util");
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn_async, trySpawnCommandLine } = require("./lib/util");
 //Clutter:
 const { ScrollDirection, Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
 //Gettext:
@@ -39,8 +39,6 @@ const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports
 
 var RADIO_NOTIFICATION_TIMEOUT = 2;
 const RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET = 10;
-//Mainloop:
-//~ const { timeout_add_seconds, source_remove } = imports.mainloop;
 //Pango
 const { parse_markup, WrapMode, EllipsizeMode } = imports.gi.Pango;
 //Extension:
@@ -59,40 +57,52 @@ const Atk = imports.gi.Atk;
 const Cvc = imports.gi.Cvc;
 //Signals:
 const Signals = imports.signals;
-// checkDependencies:
+//checkDependencies:
 const { Dependencies, criticalNotify } = require("./lib/checkDependencies");
-// htmlEncodeDecode:
+//htmlEncodeDecode:
 let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
-// xml2json.min:
+//xml2json.min:
 const { xml2json } = require('./lib/xml2json.min');
-// filesCsv:
+//filesCsv:
 const FilesCsv = require("./lib/filesCsv");
-// filesPls:
+//filesPls:
 const FilesPls = require("./lib/filesPls");
-// filesM3u:
+//filesM3u:
 const FilesM3u = require("./lib/filesM3u");
-// filesXspf:
+//filesXspf:
 const FilesXspf = require("./lib/filesXspf");
-// filesJson:
+//filesJson:
 const FilesJson = require("./lib/filesJson");
-// files:
+//files:
 const Files = require("./lib/files");
-// volumeslider:
+//volumeslider:
 const VolumeSlider = require("./lib/volumeslider");
-// screensaverInhibitor:
+//screensaverInhibitor:
 const ScreensaverInhibitor = require("./lib/screensaverInhibitor");
-// to-string:
+//to-string:
 const {to_string} = require("./lib/to-string");
-// text-wrap:
+//text-wrap:
 const {formatTextWrap} = require("./lib/text-wrap");
-// httpLib:
-const {HttpLib} = require("./lib/httpLib");
-// fixedEncodeURIComponent:
+//httpLib:
+const{HttpLib} = require("./lib/httpLib");
+//fixedEncodeURIComponent:
 const { fixedEncodeURIComponent } = require("./lib/fixedEncodeURIComponent");
-// checkTranslations:
+//checkTranslations:
 const { are_translations_installed, install_translations } = require("./lib/checkTranslations");
 
-const { source_exists } = require("./lib/sourceExists");
+//mainloopTools:
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 //~ const {
   //~ Shoutcast
@@ -1466,7 +1476,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.database_favorite !== "random") {
       //~ this.database_url = ""+this.database_favorite;
 
-      let id_to = setTimeout( Lang.bind(this, () => {
+      let id_to = setTimeout( () => {
         //~ var fav = ""+this.settings.getValue("database-favorite");
         //~ this.settings.setValue("database-url", ""+fav);
         //~ this.settings.getValue("database-url");
@@ -1475,7 +1485,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         //~ this.settings.emit("settings-changed");
         this.get_random_server_name();
         clearTimeout(id_to);
-      }), 1000);
+      }, 1000);
     } else {
       this.get_random_server_name();
     }
@@ -1863,10 +1873,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         let songTitle = this.songTitle;
         this.stop_mpv_radio(false);
         this.songTitle = songTitle;
-        let idtemp = setTimeout (Lang.bind(this, () => {
+        let idtemp = setTimeout (() => {
           this.start_mpv_radio(this.last_radio_listened_to);
           clearTimeout(idtemp);
-        }), (this.network_quality === "high") ? 5000 : 12000); // 5 or 12 seconds
+        }, (this.network_quality === "high") ? 5000 : 12000); // 5 or 12 seconds
       } else {
         this.stop_mpv_radio();
       }
@@ -2104,7 +2114,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   unmonitor_jobs_dir() {
     //log("unmonitor_jobs_dir");
-    if (this.jobsMonitor == null || thisjobsMonitorId == null || this.jobsMonitor.is_cancelled()) return;
+    if (this.jobsMonitor == null || this.jobsMonitorId == null || this.jobsMonitor.is_cancelled()) return;
 
     try {
       this.jobsMonitor.disconnect(this.jobsMonitorId);
@@ -3509,7 +3519,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.icon_or_favicon(_id);
 
     this.progress = 10/REFRESH_INTERVAL;
-    this.interval = setInterval(() => this.on_progress_change(), 100);  // 100 ms.
+    this.interval = setInterval(() => { this.on_progress_change(); }, 100);  // 100 ms.
 
     this.monitor_mpv_title();
     this.monitor_r30stop();
@@ -4072,7 +4082,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // Some dependencies are missing. Suggest to the user to install them.
       this.appletRunning = false;
       if (!this.dont_check_dependencies) {
-        this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+        this.checkDepInterval = setInterval(() => { this.dependencies.check_dependencies(); }, 10000);
       }
     }
 
@@ -4192,8 +4202,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this._control)
       this._control.close();
 
-    // Finalize settings:
-    //~ this.settings.finalize();
+    remove_all_sources();
   }
 
   _clean_str(str) {
@@ -4511,8 +4520,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this._applet_context_menu.close();
     let to = setTimeout( () => {
         // Reload this applet
-        reloadExtension(UUID, Type.APPLET);
         clearTimeout(to);
+        reloadExtension(UUID, Type.APPLET);
       },
       600
     );
@@ -4728,7 +4737,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (this.do_rotation) {
           this.icon_rotate()
         } else {
-          clearInterval();
+          clearInterval(this.rot_interval);
           this.rot_interval = 0
         }
       }, 50);
@@ -5950,10 +5959,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.settings.setValue("search-list-page-label", ""+(this.settings.getValue("search-page")-1));
     }
 
-    let _idto = setTimeout(Lang.bind(this, () => {
+    let _idto = setTimeout(() => {
       file_set_contents(UPDATE_OPTIONS_FILE, ""+uuid_string_random());
       clearTimeout(_idto);
-    }), 300);
+    }, 300);
 
 
     //if (this.settingsWindow != undefined) {
