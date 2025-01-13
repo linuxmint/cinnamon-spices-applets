@@ -73,7 +73,7 @@
             },
             "Word boundary": {
                 "description": "Capitalized is not",
-                "code": "\b"
+                "code": "\\b"
             },
             "Start of word": {
                 "description": "",
