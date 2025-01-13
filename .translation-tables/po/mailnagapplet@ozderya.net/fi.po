@@ -1,0 +1,170 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-21 19:27+0800\n"
+"PO-Revision-Date: 2024-11-14 00:33+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:165
+msgid "just now"
+msgstr "juuri nyt"
+
+#: applet.js:169
+msgid "1 minute ago"
+msgstr "1 minuutti sitten"
+
+#: applet.js:173
+msgid " minutes ago"
+msgstr " minuuttia sitten"
+
+#: applet.js:177
+msgid "1 hour ago"
+msgstr "1 tunti sitten"
+
+#: applet.js:181
+msgid " hours ago"
+msgstr " tuntia sitten"
+
+#: applet.js:188
+msgid "yesterday"
+msgstr "eilen"
+
+#: applet.js:192
+msgid " days ago"
+msgstr " päivää sitten"
+
+#: applet.js:196
+msgid " weeks ago"
+msgstr " viikkoa sitten"
+
+#: applet.js:281
+msgid "Configure Mailnag"
+msgstr "Määritä Mailnag"
+
+#: applet.js:360
+msgid "Mailnag daemon stopped working!"
+msgstr "Mailnag lakkasi toimimasta!"
+
+#: applet.js:364
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr "Gnote ei ole käynnissä! Oletko asentanut mailnag ohjelman?"
+
+#: applet.js:593
+#, c-format
+msgid "You have %d new mails!"
+msgstr "Sinulla on %d uutta viestiä!"
+
+#: applet.js:594 applet.js:639
+msgid "Mark All Read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#: applet.js:602
+msgid "You have new mail!"
+msgstr "Sinulle on sähköpostia!"
+
+#: applet.js:604
+msgid "Mark Read"
+msgstr "Merkitse luetuksi"
+
+#: applet.js:687 applet.js:749
+msgid "No unread mails."
+msgstr "Ei lukematonta sähköpostia."
+
+#: applet.js:725
+msgid "Mailnag daemon is not running!"
+msgstr "Mailnag ei ole käynnissä!"
+
+#: applet.js:738
+#, c-format
+msgid "You have a mail from %s!"
+msgstr "Sinulle on sähköpostia %s!"
+
+#: applet.js:744
+#, c-format
+msgid "You have %d unread mails!"
+msgstr "Sinulla on %d lukematonta!"
+
+#: applet.js:760
+msgid "Click to see error!"
+msgstr "Painamalla näet virheilmoituksen!"
+
+#: applet.js:761
+msgid "Error: "
+msgstr "Virhe: "
+
+#. mailnagapplet@ozderya.net->metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. mailnagapplet@ozderya.net->metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr ""
+"Mailnag ilmoittaa saapuneista sähköposteista. Asenna myös mailnag ohjelma "
+"lisäksi"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "Näytä ilmoitukset"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr ""
+"Näyttää ilmoituksen saapuneesta postista. Varmista, että poistat mailnag-"
+"ilmoitukset laajennuksen käytöstä, muuten sinulla on kaksoiskappaleita."
+
+#. mailnagapplet@ozderya.net->settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "Sähköpostiohjelma (tai verkkosivu)"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr ""
+"Kirjoita komento tähän joka käynnistää sähköpostiohjelman. Voit myös "
+"kirjoittaa \"http\" osoitteen."
+
+#. mailnagapplet@ozderya.net->settings-
+#. schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "Avaa sähköpostiohjelma painamalla"
+
+#. mailnagapplet@ozderya.net->settings-
+#. schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr "Sähköpostiohjelma käynnistyy kun paneelin kuvaketta painetaan."
+
+#. mailnagapplet@ozderya.net->settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "Hiiren keskipainike:"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr "Mitä tapahtuu kun sovelman kuvaketta painetaan keskipainikkeella"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "Avaa sähköpostiohjelma"
+
+#. mailnagapplet@ozderya.net->settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "Älä tee mitään"
