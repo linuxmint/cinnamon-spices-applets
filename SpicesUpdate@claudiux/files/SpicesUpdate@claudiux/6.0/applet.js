@@ -2123,8 +2123,8 @@ class SpicesUpdate extends IconApplet {
         }
         Tweener.addTween(this.actor, {
             opacity: 255,
-            transition: "linear",
-            time: 0.5,
+            transition: "easeOutQuad", //"linear",
+            time: 1,
             onComplete: null
         });
     } // End of set_icon_color
@@ -2167,7 +2167,7 @@ class SpicesUpdate extends IconApplet {
             }
         }
 
-        if (this.do_rotation) {
+        if (this.do_rotation && this.actor.get_stage() != null) {
             if (this.interval == null)
                 this.interval = setInterval(() => this.icon_rotate(), 10);
         }
@@ -2214,18 +2214,14 @@ class SpicesUpdate extends IconApplet {
         }
         this.numberLabel.style = "font-size: %spx; padding: 0px; color: %s;".format(""+fontSize, this.defaultColor);
 
-        if (!this.do_rotation && this.interval) {
+        if (!this.do_rotation && this.interval && this.actor.get_stage() != null) {
             Tweener.addTween(this.actor, {
-                opacity: 0,
-                transition: "linear",
-                time: 0.5,
-                onComplete: Lang.bind(this, function() {
-                    clearInterval(this.interval);
-                    this.interval = null;
-                    this.angle = 0;
-                    this.set_applet_icon_symbolic_name("spices-update");
-                    this.set_icon_color();
-                })
+                opacity: 255,
+                transition: "easeOutQuad", //"linear",
+                delay: 0,
+                time: 1,
+                rounded: true,
+                onComplete: () => { this._on_updateUI_tween_completed(); },
             });
         }
 
@@ -2236,6 +2232,16 @@ class SpicesUpdate extends IconApplet {
 
         this.isUpdatingUI = false;
         // End of updateUI
+    }
+
+    _on_updateUI_tween_completed() {
+        this.angle = 0;
+        this.set_applet_icon_symbolic_name("spices-update");
+        this.set_icon_color();
+        this.do_rotation = false;
+        Tweener.removeTweens(this.actor);
+        clearInterval(this.interval);
+        this.interval = null;
     }
 
     // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
@@ -2500,6 +2506,9 @@ class SpicesUpdate extends IconApplet {
                 logError(e)
             }
         }
+
+        if (Tweener.getTweenCount(this.actor) > 0)
+            Tweener.removeTweens(this.actor);
 
         remove_all_sources();
     } // End of on_applet_removed_from_panel

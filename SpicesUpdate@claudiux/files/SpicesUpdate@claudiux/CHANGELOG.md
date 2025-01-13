@@ -1,5 +1,5 @@
 ### v7.5.2~20250112
-  * Minor bugfixes.
+  * Fixed minor bugs in animations.
 
 ### v7.5.1~20250112
   * Now use mainloopTools to optimize loop management.
