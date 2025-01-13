@@ -375,14 +375,21 @@ class PomodoroApplet extends Applet.TextIconApplet {
                     this._pomodoroFinishedDialog.open();
                 }
             }
-            else if (!this._opt_autoContinueAfterShortBreak && timer === pomodoroTimer) {
-                timerQueue.preventStart(true);
-                timerQueue.stop();
-                this._appletMenu.toggleTimerState(false);
-                this._setAppletTooltip(0);
-                if (this._opt_showDialogMessages) {
-                    this._playStartSound();
-                    this._shortBreakdialog.open();
+            else if (timer === pomodoroTimer) {
+                // Close any short break dialog if we auto-continue once
+                // the break is over.
+                if (this._opt_autoContinueAfterShortBreak) {
+                    if (this._shortBreakdialog.state == ModalDialog.State.OPENED)
+                        this._shortBreakdialog.close();
+                } else {
+                    timerQueue.preventStart(true);
+                    timerQueue.stop();
+                    this._appletMenu.toggleTimerState(false);
+                    this._setAppletTooltip(0);
+                    if (this._opt_showDialogMessages) {
+                        this._playStartSound();
+                        this._shortBreakdialog.open();
+                    }
                 }
             }
         });
@@ -415,14 +422,19 @@ class PomodoroApplet extends Applet.TextIconApplet {
         // connect the short break timer signals
 
         shortBreakTimer.connect('timer-tick', this._timerTickUpdate.bind(this));
-        
+        shortBreakTimer.connect('timer-tick', this._shortBreakdialog.setTimeRemaining.bind(this._shortBreakdialog));
+
         shortBreakTimer.connect('timer-started', () => {
             this._setCurrentState('short-break');
             this._playBreakSound();
+            if (this._opt_showDialogMessages) {
+                this._shortBreakdialog.open();
+            } else {
+                Main.notify(_("Take a short break"));
+            }
             this._numPomodoriFinished++;
             this._appletMenu.updateCounts(this._numPomodoroSetFinished, this._numPomodoriFinished);
             this._appletMenu.showPomodoroInProgress(this._opt_pomodoriNumber);
-            Main.notify(_("Take a short break"));
             if (this._opt_enableScripts && this._opt_customShortBreakScript) {
                 this._checkAndExecuteCustomScript(this._opt_customShortBreakScript);
             }
@@ -645,14 +657,32 @@ class PomodoroApplet extends Applet.TextIconApplet {
     
     _createShortBreakDialog() {
         this._shortBreakdialog = new PomodoroShortBreakFinishedDialog();
-    
-        this._shortBreakdialog.connect('continue-current-pomodoro', () => {
+
+        this._shortBreakdialog.connect('take-break', () => {
+            this._shortBreakdialog.close();
+        });
+
+        this._shortBreakdialog.connect('skip-break', () => {
+            this._timerQueue.skip();
             this._shortBreakdialog.close();
             this._timerQueue.preventStart(false);
             this._appletMenu.toggleTimerState(true);
             this._timerQueue.start();
         });
-    
+
+        this._shortBreakdialog.connect('pause-pomodoro', () => {
+            this._timerQueue.stop();
+            this._appletMenu.toggleTimerState(false);
+            this._shortBreakdialog.close();
+        });
+
+        this._shortBreakdialog.connect('start-next-pomodoro', () => {
+            this._shortBreakdialog.close();
+            this._timerQueue.preventStart(false);
+            this._appletMenu.toggleTimerState(true);
+            this._timerQueue.start();
+        });
+
         this._shortBreakdialog.connect('pause-pomodoro', () => {
             this._timerQueue.stop();
             this._appletMenu.toggleTimerState(false);
@@ -915,11 +945,26 @@ class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
         this._timeLabel = new St.Label();
         this.contentLayout.add(this._timeLabel);
 
+        this.reset();
+    }
+
+    close() {
+        super.close();
+        this.reset();
+    }
+
+    reset() {
         this.setButtons([
             {
-                label: _("Continue Current Pomodoro"),
+                label: _("Take Break"),
                 action: () => {
-                    this.emit('continue-current-pomodoro');
+                    this.emit('take-break');
+                }
+            },
+            {
+                label: _("Skip Break"),
+                action: () => {
+                    this.emit('skip-break');
                 }
             },
             {
@@ -930,12 +975,55 @@ class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
             }
         ]);
 
-        this.setDefaultLabels();
+        this._subjectLabel.set_text(_("Pomodoro finished, take a short break?") + "\n");
+        this._timeLabel.text = '';
     }
 
-    setDefaultLabels() {
+    finished() {
+        this.setButtons([
+            {
+                label: _("Start Next Pomodoro"),
+                action: () => {
+                    this.emit('start-next-pomodoro');
+                }
+            },
+            {
+                label: _("Pause Pomodoro"),
+                action: () => {
+                    this.emit('pause-pomodoro');
+                }
+            }
+        ]);
+
         this._subjectLabel.set_text(_("Short break finished, ready to continue?") + "\n");
         this._timeLabel.text = '';
+    }
+
+    setTimeRemaining(timer) {
+        let tickCount = timer.getTicksRemaining();
+
+        if (tickCount === 0) {
+            this.finished();
+            return;
+        }
+
+        // Update the time label text based on the time remaining
+        this._setTimeLabelText(_("A new pomodoro begins in %s.").format(this._getTimeString(tickCount)));
+    }
+
+    _setTimeLabelText(label) {
+        this._timeLabel.set_text(label + "\n");
+    }
+
+    _getTimeString(totalSeconds) {
+        // Convert total seconds to minutes and seconds
+        let minutes = parseInt(totalSeconds / 60);
+        let seconds = parseInt(totalSeconds % 60);
+
+        let min = Gettext.dngettext(UUID, "%d minute", "%d minutes", minutes).format(minutes);
+        let sec = Gettext.dngettext(UUID, "%d second", "%d seconds", seconds).format(seconds);
+
+        return _("%s and %s").format(min, sec);
     }
 }
 
