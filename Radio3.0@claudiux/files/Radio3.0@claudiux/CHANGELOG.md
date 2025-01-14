@@ -1,3 +1,7 @@
+### 2.7.3~20250114
+  * Increases the size of the stream buffer for improved listening comfort.
+  * Settings: Sets the default value for each multimedia key bind.
+
 ### v2.7.2~20250112
   * Now the desklet uses the mainloopTools library.
   * Minor bugfixes.

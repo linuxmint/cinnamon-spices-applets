@@ -635,9 +635,9 @@ R3AppletSettings.prototype = {
       });
       this._saveToFile();
       let id = setTimeout( Lang.bind(this, () => {
+        clearTimeout(id);
         this._checkSettings();
         //this.emit('changed::'+this.settingsData[key].id, this.settingsData[key].id,  [this.settingsData[key].options]);
-        clearTimeout(id);
       }), 300); // 300 ms
 
       //this._ensureSettingsFiles();
@@ -1413,9 +1413,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("database-favorite", "database_favorite", this.on_database_favorite_changed.bind(this));
     // Cache:
     this.settings.bind("cache-no-cache", "cache_no_cache", this.set_MPV_ALIAS.bind(this));
-    this.settings.bind("cache-stream-size", "cache_stream_size", this.set_MPV_ALIAS.bind(this));
+    //~ this.settings.bind("cache-stream-size", "cache_stream_size", this.set_MPV_ALIAS.bind(this));
+    this.cache_stream_size = "10MiB"; // forced
     this.settings.bind("cache-mins", "cache_minutes", this.set_MPV_ALIAS.bind(this));
-    this.settings.bind("cache-on-disk", "cache_on_disk", this.set_MPV_ALIAS.bind(this));
+    //~ this.settings.bind("cache-on-disk", "cache_on_disk", this.set_MPV_ALIAS.bind(this));
+    this.cache_on_disk = false; // forced
     this.settings.bind("cache-dir", "cache_dir", this.set_MPV_ALIAS.bind(this));
 
     // YT:
@@ -1441,8 +1443,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //~ this.desklet_is_activated = this.show_desklet;
     //~ let to = setTimeout( () => {
-      //~ this.settings.setValue("desklet-is-activated", this.show_desklet);
       //~ clearTimeout(to);
+      //~ this.settings.setValue("desklet-is-activated", this.show_desklet);
     //~ }, 150);
   //~ }
 
@@ -1477,6 +1479,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       //~ this.database_url = ""+this.database_favorite;
 
       let id_to = setTimeout( () => {
+        clearTimeout(id_to);
         //~ var fav = ""+this.settings.getValue("database-favorite");
         //~ this.settings.setValue("database-url", ""+fav);
         //~ this.settings.getValue("database-url");
@@ -1484,7 +1487,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         //~ this.configureApplet(this.tabNumberOfNetwork);
         //~ this.settings.emit("settings-changed");
         this.get_random_server_name();
-        clearTimeout(id_to);
       }, 1000);
     } else {
       this.get_random_server_name();
@@ -1778,8 +1780,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       this.progress = this.progress + 10.0/REFRESH_INTERVAL;
     } else {
-      this.progress = 0;
       clearInterval(this.interval);
+      this.progress = 0;
       this.interval = 0;
       this.actor.set_opacity(255);
       this.set_color();
@@ -1874,8 +1876,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.stop_mpv_radio(false);
         this.songTitle = songTitle;
         let idtemp = setTimeout (() => {
-          this.start_mpv_radio(this.last_radio_listened_to);
           clearTimeout(idtemp);
+          this.start_mpv_radio(this.last_radio_listened_to);
         }, (this.network_quality === "high") ? 5000 : 12000); // 5 or 12 seconds
       } else {
         this.stop_mpv_radio();
@@ -2255,8 +2257,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // Search on Radio Database
       let prom = this.search_name_by_url_on_RDB(id).then( Lang.bind(this, (result) => {
         let id_to = setTimeout( () => {
-          this.settings.setValue("name_found", ""+result);
           clearTimeout(id_to)
+          this.settings.setValue("name_found", ""+result);
         }, 800);
       })).catch(e => logError(e));
       name = this.settings.getValue("name_found");
@@ -2911,9 +2913,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
                 //~ logDebug(`leave-event ${s} BEGIN`);
                 //~ sectionStations.box.show();
                 //~ let toID = setTimeout( () => {
+                  //~ clearTimeout(toID);
                   //~ sectionStations.box.show();
                   //~ logDebug(`leave-event ${s} END`);
-                  //~ clearTimeout(toID);
                 //~ }, 75);
               //~ });
               //~ item.connect("motion-event", Lang.bind(this, function() {
@@ -2949,9 +2951,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             //~ }
             //~ this.menu.actor.show();
             //~ let toID = setTimeout( () => {
+              //~ clearTimeout(toID);
               //~ sectionStations.box.show();
               //~ logDebug(`enter-event ${c} END`);
-              //~ clearTimeout(toID);
             //~ }, 75);
           }));
         }
@@ -3816,10 +3818,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   stop_recording_later(pid, continue_recording=false) {
     //log("stop_recording_later");
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.stop_recording(pid);
       this.stopRecordingId = null;
       if (continue_recording) this.start_recording();
-      clearTimeout(id);
     }, 1000); // 1000 ms
 
     this.stopRecordingId = id;
@@ -4131,8 +4133,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Shortcuts:
     let to = setTimeout( () => {
-        this.onShortcutChanged();
         clearTimeout(to);
+        this.onShortcutChanged();
       },
       2100
     );
@@ -4589,9 +4591,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Rewrite radios:
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("radios", radios);
       radios = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -4623,9 +4625,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Rewrite radios:
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("radios", radios);
       radios = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -5960,8 +5962,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let _idto = setTimeout(() => {
-      file_set_contents(UPDATE_OPTIONS_FILE, ""+uuid_string_random());
       clearTimeout(_idto);
+      file_set_contents(UPDATE_OPTIONS_FILE, ""+uuid_string_random());
     }, 300);
 
 
@@ -6157,8 +6159,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         schedRec.push(j);
       } else {
         let id = setTimeout(() => {
-          spawnCommandLine("bash -c 'rm -f %s/*%s*'".format(JOBS_DIR, j.uuid));
           clearTimeout(id);
+          spawnCommandLine("bash -c 'rm -f %s/*%s*'".format(JOBS_DIR, j.uuid));
         }, 800); // 800 ms
       }
     }
@@ -6188,8 +6190,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
-      this.settings.setValue("import-list", contents);
       clearTimeout(id);
+      this.settings.setValue("import-list", contents);
     }, 800); // 800 ms
   }
 
@@ -6259,8 +6261,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }
 
         let id = setTimeout(() => {
-          this.settings.setValue("import-list", contents);
           clearTimeout(id);
+          this.settings.setValue("import-list", contents);
         }, 800); // 800 ms
       }), params);
     })).open();
@@ -6280,6 +6282,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("radios", radios);
       if (count === 0)  {
         this.radio_notify(_("No new radio in your list."))
@@ -6292,7 +6295,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       radios = null;
       this.on_button_import_remove_clicked();
       this._set_settings_options();
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -6307,10 +6309,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("import-list", new_imports);
       imports = null;
       new_imports = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -6322,9 +6324,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue(whichList, imports);
       imports = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -6340,12 +6342,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   /// Search ///
   on_button_search_reset_clicked() {
     let id = setTimeout(() => {
+      clearTimeout(id);
       for (let val of [ "search-name", "search-country", "search-tag",
                         "search-codec", "search-limit", "search-page",
                         "search-order", "search-minimalBitrate"]) {
         this.settings.setValue(val, this.settings.getDefaultValue(val));
       }
-      clearTimeout(id);
     }, 800); // 800 ms
     this.settings.setValue("search-list-page-label", "0");
     this.on_button_search_select_all_clicked();
@@ -6448,12 +6450,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       //global.log(JSON.stringify(rows, null, 4));
 
       let id = setTimeout(() => {
+        clearTimeout(id);
         this.settings.setValue("search-list-page-label", ""+page);
         this.page_label = page;
         this.settings.setValue("search-list", rows);
         if (rows.length === limit)
           this.settings.setValue("search-page", page + 1);
-        clearTimeout(id);
       }, 800); // 800 ms
     }).catch(e => logError(e));
   }
@@ -6491,6 +6493,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("radios", radios);
       if (count === 0)  {
         this.radio_notify(_("There are no new stations to add to the Radio3.0 applet menu"))
@@ -6504,7 +6507,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       urls_already_here = null;
       this.on_button_search_remove_clicked();
       this._set_settings_options();
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -6524,8 +6526,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
-      this.settings.setValue(whichList, to_test);
       clearTimeout(id);
+      this.settings.setValue(whichList, to_test);
     }, 800); // 800 ms
   }
 
@@ -6552,10 +6554,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("search-list", new_imports);
       imports = null;
       new_imports = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -6567,9 +6569,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("search-list", imports);
       imports = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 
@@ -6581,9 +6583,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     let id = setTimeout(() => {
+      clearTimeout(id);
       this.settings.setValue("search-list", imports);
       imports = null;
-      clearTimeout(id);
     }, 800); // 800 ms
   }
 

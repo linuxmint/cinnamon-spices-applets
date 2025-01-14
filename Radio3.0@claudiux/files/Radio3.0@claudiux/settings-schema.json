@@ -975,34 +975,34 @@
   "shortcut-volume-up": {
     "type": "keybinding",
     "description": "Increase Volume",
-    "default": ""
+    "default": "<Alt>AudioRaiseVolume::"
   },
   "shortcut-volume-down": {
     "type": "keybinding",
     "description": "Decrease Volume",
-    "default": ""
+    "default": "<Alt>AudioLowerVolume::"
   },
   "shortcut-volume-cut": {
     "type": "keybinding",
     "description": "Mute",
-    "default": ""
+    "default": "<Alt>AudioPlay::"
   },
   "shortcut-radio-on-off": {
     "type": "keybinding",
     "description": "Radio ON/OFF",
-    "default": ""
+    "default": "<Alt>AudioStop::"
   },
   "shortcut-next-recent-radio": {
     "type": "keybinding",
     "description": "Next station",
     "tooltip": "Next station recently listened to",
-    "default": ""
+    "default": "<Alt>AudioNext::"
   },
   "shortcut-previous-recent-radio": {
     "type": "keybinding",
     "description": "Previous station",
     "tooltip": "Previous station recently listened to",
-    "default": ""
+    "default": "<Alt>AudioPrev::"
   },
   "show-help-in-tooltip": {
     "type": "switch",
@@ -1162,7 +1162,7 @@
   },
   "cache-stream-size": {
     "type": "combobox",
-    "default": "1MiB",
+    "default": "10MiB",
     "dependency": "!cache-no-cache",
     "description": "Stream cache size",
     "tooltip": "The amount of stream cache. Default: 1 MiB.\nBeware, setting this to a large value can reduce performance.",
