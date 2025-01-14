@@ -1723,15 +1723,31 @@ class SensorsApplet extends Applet.TextApplet {
    * Events
    */
   on_enter_event(actor, event) {
-    this.tooltip_must_be_updated = true;
-    this.updateUI();
-    this.isUpdatingUI = true;
-    this.updateTooltip();
+    this.isActorEntered = true;
+    this.onEnterEventInterval = setInterval( () => {
+        this.tooltip_must_be_updated = true;
+        this.reap_sensors();
+        this.isUpdatingUI = false; //new
+        this.updateUI();
+        this.isUpdatingUI = true;
+        this.updateTooltip();
+        return this.isActorEntered;
+      },
+      1000
+    );
   }
 
   on_leave_event(actor, event) {
+    this.isActorEntered = false;
+    if (this.onEnterEventInterval != null) {
+      clearInterval(this.onEnterEventInterval);
+      this.onEnterEventInterval = false;
+    }
     this.tooltip_must_be_updated = false;
     this.isUpdatingUI = false;
+    this.isActorEntered = false;
+    remove_all_sources();
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
 
   /**
