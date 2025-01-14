@@ -2,14 +2,14 @@
 # This file is put in the public domain.
 # claudiux, 2022
 #
-# SPDX-FileCopyrightText: 2024 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2024, 2025 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2025-01-07 20:17+0100\n"
-"PO-Revision-Date: 2024-12-20 09:50+0000\n"
+"PO-Revision-Date: 2025-01-14 14:13+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -25,7 +25,7 @@ msgstr "ekki úthlutað"
 
 #. applet.js:244 desklet/AlbumArt3.0@claudiux/desklet.js:273
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Birta umslagsmyndir í fullri stærð"
 
 #. applet.js:348
 msgid "This is your own list of Categories and Radio Stations."
@@ -876,7 +876,7 @@ msgstr "Listi yfir útvarpsstöðvar"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -1479,29 +1479,28 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "Gæði sóttra umslagsmynda"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Hámarksupplausn"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Gæði"
+msgstr "Hágæða"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Miðlungs"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Venjuleg"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
-msgstr ""
+msgstr "Sjálfgefið: Hágæða. Veldu gildi sem hentar afköstum netkerfisins þíns."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
