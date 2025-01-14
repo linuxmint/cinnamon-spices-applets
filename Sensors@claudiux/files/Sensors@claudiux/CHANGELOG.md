@@ -1,6 +1,9 @@
+### v4.0.1~20250114
+  * As long as the icon is hovered over, the sensors are checked every second.
+
 ### v4.0.0~20250114
   * Now uses mainloopTools to improve loop management.
-  * Maybe fixes #6744.
+  * Fixes #6744.
 
 ### v3.9.0~20241109
   * Fixes #6076: Ignores 'empty' sensors (sensors not sending data).
