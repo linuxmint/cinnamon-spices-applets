@@ -28,7 +28,8 @@ var LOCAL_DATA = {
       "temps": {},
       "fans": {},
       "voltages": {},
-      "intrusions": {}
+      "intrusions": {},
+      "currents": {}
     };
 /**
  * Class SensorsReaper
@@ -57,7 +58,8 @@ class SensorsReaper {
       "temps": {},
       "fans": {},
       "voltages": {},
-      "intrusions": {}
+      "intrusions": {},
+      "currents": {}
     };
     this.isRunning = false;
   }
@@ -327,6 +329,16 @@ class SensorsReaper {
             ) {
               type_of_feature = "voltages";
             }
+          } else if (subfeat.startsWith("curr")) {
+            if  (type_of_feature === "" &&
+                (!this.hide_zero_voltage ||
+                  (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
+                )
+            ) {
+              type_of_feature = "currents";
+            }
+          } else {
+            continue
           }
           feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
         }

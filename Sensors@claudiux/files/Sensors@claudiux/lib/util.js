@@ -594,7 +594,10 @@ function setTimeout(callback, ms) {
  * Convenience wrapper for Mainloop.source_remove.
  */
 function clearTimeout(id) {
-    if (id) Mainloop.source_remove(id);
+    if (id) {
+        if (Mainloop.source_remove(id))
+            id = null;
+    }
 };
 
 
@@ -629,7 +632,10 @@ function setInterval(callback, ms) {
  * Convenience wrapper for Mainloop.source_remove.
  */
 function clearInterval(id) {
-    if (id) Mainloop.source_remove(id);
+    if (id) {
+        if (Mainloop.source_remove(id))
+            id = null;
+    }
 };
 
 /**
