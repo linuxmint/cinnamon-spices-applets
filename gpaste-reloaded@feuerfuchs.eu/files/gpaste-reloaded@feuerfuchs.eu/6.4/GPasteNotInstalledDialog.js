@@ -1,6 +1,7 @@
 const ModalDialog = imports.ui.modalDialog;
 const St          = imports.gi.St;
 const GObject     = imports.gi.GObject;
+const Pango       = imports.gi.Pango;
 
 const _           = require('./__init__')._;
 
@@ -10,7 +11,11 @@ var GPasteNotInstalledDialog = GObject.registerClass(
         _init(callback) {
             super._init({ styleClass: 'gpaste__not-found-dialog', destroyOnClose: false });
 
-            this.contentLayout.add(new St.Label({ text: _("GPaste is not installed. Please install the necessary packages and then restart Cinnamon for this applet to start working.") }));
+            this.label = new St.Label({ text: _("GPaste is not installed. Please install the necessary packages and then restart Cinnamon for this applet to start working.") });
+            this.label.clutter_text.line_wrap = true;
+            this.label.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+
+            this.contentLayout.add(this.label);
             this.contentLayout.add_style_class_name('gpaste__not-found-dialog__content');
 
             this.setButtons([
