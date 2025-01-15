@@ -25,7 +25,7 @@ const ModalDialog = imports.ui.modalDialog;
 
 let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
 const { xml2json } = require("lib/xml2json.min");
-
+const { source_exists } = require("./lib/sourceExists");
 
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
@@ -762,14 +762,14 @@ class Seeker extends Slider.Slider {
                 } else if (!this._dragging) {
                     if (this.status === "Playing" && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    if (this._timeoutId != null) {
+                    if (source_exists(this._timeoutId)) {
                         Mainloop.source_remove(this._timeoutId);
-                        this._timeoutId = null;
                     }
-                    if (this._timeoutId_timerCallback != null) {
+                    this._timeoutId = null;
+                    if (source_exists(this._timeoutId_timerCallback)) {
                         Mainloop.source_remove(this._timeoutId_timerCallback);
-                        this._timeoutId_timerCallback = null;
                     }
+                    this._timeoutId_timerCallback = null;
 
                     if (!this.destroyed) {
                         this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
@@ -814,10 +814,10 @@ class Seeker extends Slider.Slider {
     _updateTimer() {
         //~ if (this.destroyed) return GLib.SOURCE_REMOVE;
 
-        if (this._timeoutId_timerCallback != null) {
+        if (source_exists(this._timeoutId_timerCallback)) {
             Mainloop.source_remove(this._timeoutId_timerCallback);
-            this._timeoutId_timerCallback = null;
         }
+        this._timeoutId_timerCallback = null;
 
         if (this.status === "Playing") {
             if (this.canSeek) {

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-07 20:17+0100\n"
-"PO-Revision-Date: 2025-01-07 20:20+0100\n"
+"PO-Revision-Date: 2025-01-08 20:40+0100\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -26,7 +26,7 @@ msgstr "non attribué"
 
 #. applet.js:244 desklet/AlbumArt3.0@claudiux/desklet.js:273
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Afficher en taille réelle la Pochette de l'album"
 
 #. applet.js:348
 msgid "This is your own list of Categories and Radio Stations."

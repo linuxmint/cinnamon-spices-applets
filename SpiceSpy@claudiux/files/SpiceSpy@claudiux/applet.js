@@ -2,7 +2,6 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 
-const Mainloop = imports.mainloop;
 var Util = imports.misc.util;
 
 const St = imports.gi.St;
@@ -18,6 +17,8 @@ const {
 
 const { HttpLib } = require("./lib/httpLib");
 const { to_string } = require("./lib/to-string");
+//mainloopTools:
+const { timeout_add_seconds, timeout_add, setTimeout, clearTimeout, setInterval, clearInterval, source_exists, source_remove, remove_all_sources } = require("./lib/mainloopTools");
 
 const UUID = "SpiceSpy@claudiux";
 
@@ -204,8 +205,10 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
     this.settings.bind("update-interval", "update_interval");
-    this.settings.bind("standard-opacity", "standard_opacity", this.make_menu);
-    this.settings.bind("color-on-change", "color_on_change", this.make_menu);
+    //~ this.settings.bind("standard-opacity", "standard_opacity", this.make_menu.bind(this));
+    this.settings.bind("standard-opacity", "standard_opacity");
+    //~ this.settings.bind("color-on-change", "color_on_change", this.make_menu.bind(this));
+    this.settings.bind("color-on-change", "color_on_change");
     this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
     this.settings.bind("icon-size", "icon_size");
     this.settings.bind("show-translations", "show_translations");
@@ -213,26 +216,19 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
-    this.settings.bind("display-on-panel", "display_on_panel", this.make_menu);
-    this.settings.bind("useful-only", "useful_only", this.make_menu);
+    //~ this.settings.bind("display-on-panel", "display_on_panel", this.make_menu.bind(this));
+    this.settings.bind("display-on-panel", "display_on_panel");
+    //~ this.settings.bind("useful-only", "useful_only", this.make_menu.bind(this));
+    this.settings.bind("useful-only", "useful_only");
     this.settings.bind("author-list", "author_list", this.update_authors.bind(this));
     this.settings.bind("uuid-list", "uuid_list", this.update_uuids.bind(this));
     this.settings.bind("spices_to_spy", "spices_to_spy");
     this.settings.bind("old_spices_to_spy", "old_spices_to_spy");
 
-    this.make_menu();
 
-    this.renew_caches();
-    this.update_authors();
-    this.update_uuids();
-    this.get_spices_to_spy();
-    this.update_issues();
-    this.update_comments();
-
-    this.loopId = Mainloop.timeout_add(60000, this.loop.bind(this));
   } // End of constructor
 
-  _add_user_Spices() {
+  _add_user_Spices() { ///Obsolete (not used)
     var userSpices = [];
     let gsettings;
     let children, info, file_type;
@@ -248,7 +244,7 @@ class SpiceSpy extends Applet.TextIconApplet {
           gsettings = Gio.Settings.new("org.nemo.plugins");
           disabled_actions = gsettings.get_strv("disabled-actions");
           let enabled_actions = [];
-          children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+          children = dir.enumerate_children("standard::name,standard::type,standard::icon", Gio.FileQueryInfoFlags.NONE, null);
 
           while ((info = children.next_file(null)) != null) {
             file_type = info.get_file_type();
@@ -276,7 +272,7 @@ class SpiceSpy extends Applet.TextIconApplet {
         case "themes":
           gsettings = Gio.Settings.new("org.cinnamon.theme");
           let theme_name = gsettings.get_string("name");
-          children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+          children = dir.enumerate_children("standard::name,standard::type,standard::icon", Gio.FileQueryInfoFlags.NONE, null);
           while ((info = children.next_file(null)) != null) {
             file_type = info.get_file_type();
             if (file_type === Gio.FileType.DIRECTORY) {
@@ -296,7 +292,10 @@ class SpiceSpy extends Applet.TextIconApplet {
         }
       }
       this.settings.setValue("uuid-list", _uuid_list);
-      this.loop();
+
+      // Loop next tick (value 0) to ensure that this.actor is on stage:
+      setTimeout(() => this.loop(), 0); //.bind(this)
+      //~ this.loop();
     }
   } // End of _add_user_Spices
 
@@ -350,10 +349,8 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of updateUI
 
   loop() {
-    if (this.loopId) {
-      Mainloop.source_remove(this.loopId);
-      this.loopId = null;
-    }
+    source_remove(this.loopId);
+    this.loopId = null;
 
     // Initialization (first time this applet is launched):
     const old_keys = Object.keys(this.old_spices_to_spy);
@@ -373,11 +370,11 @@ class SpiceSpy extends Applet.TextIconApplet {
     }
     this.fistTime = false;
 
-    this.make_menu();
+    //~ this.make_menu();
     this.set_applet_tooltip(this.metadata.name);
 
     let ms = this.update_interval * 60000;
-    this.loopId = Mainloop.timeout_add(ms, this.loop.bind(this));
+    this.loopId = timeout_add(ms, this.loop.bind(this));
   } // End of loop
 
   update_authors() {
@@ -466,7 +463,7 @@ class SpiceSpy extends Applet.TextIconApplet {
                             ) ? this.spices_to_spy[type][""+spices[spice].uuid]["comments"] : 0,
                 "issues": ( this.spices_to_spy[type] &&
                               this.spices_to_spy[type][""+spices[spice].uuid] &&
-                              this.spices_to_spy[type][""+spices[spice].uuid]["issues"]
+                              this.spices_to_spy[type][""+spices[spice].uuid]["issues"] != null
                             ) ? this.spices_to_spy[type][""+spices[spice].uuid]["issues"] : 0,
               };
               //~ _temp_uuids.push(""+spices[spice].uuid);
@@ -486,14 +483,16 @@ class SpiceSpy extends Applet.TextIconApplet {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
         const page = spices[spice]['url']+`#${HTML_COUNT_ID}`;
-        let id = setTimeout(async () => {
-          let response = await http.LoadAsync(page);
+        //~ let id = setTimeout(async () => {
+          //~ let response = await http.LoadAsync(page);
+          let id = setTimeout(() => {
+          let response = http.LoadAsync(page);
           if (response.Success) {
             let result = COMMENTS_REGEX.exec(response.Data);
             if (result && result[1]) {
               let count = parseInt(result[1]);
               this.spices_to_spy[type][spice]['comments'] = count;
-              this.make_menu();
+              //~ this.make_menu();
             } else {
               global.logWarning(spices[spice]['uuid'] + ": This spice is cached in the "
               + ".json file but doesn't actually exist in the "
@@ -501,7 +500,7 @@ class SpiceSpy extends Applet.TextIconApplet {
               + "(please report if there are 0 items)");
             }
           }
-          clearTimeout(id);
+          //~ clearTimeout(id);
         }, index*interval);
         index += 1;
       }
@@ -519,7 +518,13 @@ class SpiceSpy extends Applet.TextIconApplet {
           let command = ""+GET_ISSUES_SCRIPT+" "+type+" "+spices[spice]['uuid'];
           let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
             if (exitCode == 0) {
-              this.spices_to_spy[type][spice]['issues'] = parseInt(stdout);
+              let _nb_issues = parseInt(stdout);
+
+              if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
+              this.spices_to_spy[type][spice]['issues'] = _nb_issues;
+              this.make_menu();
+            } else if (exitCode == 1) {
+              this.spices_to_spy[type][spice]['issues'] = 0;
               this.make_menu();
             }
             subProcess.send_signal(9);
@@ -636,15 +641,28 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   mark_all_as_read() {
     this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
-    this.make_menu();
+    //~ this.make_menu();
   } // End of mark_all_as_read
 
   mark_as_read(spice) {
     if (!spice) return;
     this.old_spices_to_spy[spice.type][spice.uuid] = this.spices_to_spy[spice.type][spice.uuid];
     this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
-    this.make_menu();
+    //~ this.make_menu();
   } // End of mark_as_read
+
+  on_applet_added_to_panel() {
+    //~ this.make_menu();
+
+    this.renew_caches();
+    this.update_authors();
+    this.update_uuids();
+    this.get_spices_to_spy();
+    this.update_issues();
+    this.update_comments();
+
+    this.loopId = timeout_add(60000, this.loop.bind(this));
+  }
 
   on_applet_clicked() {
     this.settings.setValue("spices_to_spy", this.spices_to_spy);
@@ -653,10 +671,8 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {
-    if (this.loopId) {
-      Mainloop.source_remove(this.loopId);
-      this.loopId = null;
-    }
+    remove_all_sources();
+    this.loopId = null;
   } // End of on_applet_removed_from_panel
 
   _reload_this_applet() {

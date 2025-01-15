@@ -3,7 +3,7 @@
         let _localeFolder = Gio.file_new_for_path(_shareFolder + "locale/");
         let _moFolder = Gio.file_new_for_path(_shareFolder + "cinnamon/applets/" + this._uuid + "/locale/mo/");
 
-        let children = _moFolder.enumerate_children('standard::name,standard::type,time::modified',
+        let children = _moFolder.enumerate_children('standard::name,standard::type,standard::icon,time::modified',
                                                    Gio.FileQueryInfoFlags.NONE, null);
         let info, child, _moFile, _moLocale, _moPath;
 

@@ -1,3 +1,15 @@
+### 2.7.3~20250114
+  * Increases the size of the stream buffer for improved listening comfort.
+  * Settings: Sets the default value for each multimedia key bind.
+
+### v2.7.2~20250112
+  * Now the desklet uses the mainloopTools library.
+  * Minor bugfixes.
+
+### v2.7.1~20250111
+  * Improved management of loops.
+  * Improved management of desklet.
+
 ### v2.7.0~20250107
   * You can choose the Quality of the downloaded album cover.
   * Desklet AlbumArt3.0: New option in context menu to display the Album Art at full size. Middle-clicking on the desklet does the same.

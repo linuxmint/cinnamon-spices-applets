@@ -2,7 +2,7 @@
 SPTYPE=$1
 SPUUID=$2
 PAGE="https://github.com/linuxmint/cinnamon-spices-${SPTYPE}/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+${SPUUID}";
-TMP_FILE=$(mktemp -q /tmp/SpiceSpy.XXXXXX)
+TMP_FILE=$(mktemp -q /$XDG_RUNTIME_DIR/SpiceSpy.XXXXXX)
 if [ $? -ne 0 ]; then
     echo "0"
     exit 1

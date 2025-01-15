@@ -8,7 +8,7 @@
 # Simon Claessens <gagalago@gmail.com>, 2011.
 # ecyrbe <ecyrbe@gmail.com>, 2011.
 # Serdar Sağlam <teknomobil@yandex.com>, 2018.
-# Serkan ÖNDER <serkanonder@outlook.com>, 2021,2022,2023.2024.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021,2022,2023.2024.2025.
 #
 msgid ""
 msgstr ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-20 20:06+0100\n"
-"PO-Revision-Date: 2024-06-18 14:02+0300\n"
+"PO-Revision-Date: 2025-01-13 12:49+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:20441
@@ -1542,6 +1542,8 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"Adresten konuma arama hizmeti engellendi. Sorunu çözüp çözmediğini görmek "
+"için yardımda Kullanıcı Aracınızı değiştirmeyi deneyebilirsiniz."
 
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10638
@@ -1904,157 +1906,140 @@ msgstr "Open Meteo"
 #: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
 #: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
 #: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "Sağanak Yağış"
+msgstr "Dağınık sulu kar"
 
 #: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
 #: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
 #: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "Gök gürültülü"
+msgstr "Fırtına Olasılığı"
 
 #: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
-#, fuzzy
 msgid "Light Rain"
-msgstr "Hafif yağmur"
+msgstr "Hafif Yağmur"
 
 #: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
-#, fuzzy
 msgid "Light Sleet"
 msgstr "Hafif Sulu kar"
 
 #: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17525
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Aralıklı Yağmur"
 
 #: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Aralıklı sulu kar"
 
 #: 3.8/weather-applet.js:17540 3.8/weather-applet.js:17541
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Aralıklı Kar"
 
 #: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
-#, fuzzy
 msgid "Frequent Thunderstorms"
-msgstr "Şiddetli Fırtınalar"
+msgstr "Sık sık gök gürültülü fırtınalar"
 
 #: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
 #: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
-#, fuzzy
 msgid "High Clouds"
-msgstr "Bulutlu"
+msgstr "Yüksek Bulutlar"
 
 #: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
-#, fuzzy
 msgid "Low Clouds"
-msgstr "Bulutlu"
+msgstr "Alçak Bulutlar"
 
 #: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "Bulutlu ve rüzgarlı"
+msgstr "Kapalı ve Kuru"
 
 #: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
 #: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
 #: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
 #: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "Hafif kar"
+msgstr "Hafif Fırtınalı"
 
 #: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
 #: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "Dağınık Kar Yağışı"
+msgstr "Fırtınalı Kar Sağanakları"
 
 #: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
 #: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "Gökgürültülü sağnak"
+msgstr "Gök gürültülü sağnak yağış"
 
 #: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
 #: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
 #: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "Gökgürültülü sağnak"
+msgstr "Gök gürültülü kar yağışları"
 
 #: 3.8/weather-applet.js:17878
-#, fuzzy
 msgid "Wind Warning"
-msgstr "Uyarı"
+msgstr "Rüzgar Uyarısı"
 
 #: 3.8/weather-applet.js:17880
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "Fırtına ve yağmur"
+msgstr "Fırtına Uyarısı"
 
 #: 3.8/weather-applet.js:17882
-#, fuzzy
 msgid "Rain Warning"
-msgstr "Uyarı"
+msgstr "Yağmur Uyarısı"
 
 #: 3.8/weather-applet.js:17884
-#, fuzzy
 msgid "Snow Warning"
-msgstr "Uyarı"
+msgstr "Kar Uyarısı"
 
 #: 3.8/weather-applet.js:17886
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "Kaygan Yollar Uyarısı"
 
 #: 3.8/weather-applet.js:17888
-#, fuzzy
 msgid "Frost Warning"
-msgstr "Uyarı"
+msgstr "Don Uyarısı"
 
 #: 3.8/weather-applet.js:17890
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "Kitle Hareketleri Uyarısı"
 
 #: 3.8/weather-applet.js:17892
-#, fuzzy
 msgid "Heat Warning"
-msgstr "Uyarı"
+msgstr "Isı Uyarısı"
 
 #: 3.8/weather-applet.js:17894
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Çığ Uyarısı"
 
 #: 3.8/weather-applet.js:17896
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Deprem Uyarısı"
 
 #: 3.8/weather-applet.js:17898
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Orman Yangını Uyarısı"
 
 #: 3.8/weather-applet.js:17900
-#, fuzzy
 msgid "Flood Warning"
-msgstr "Uyarı"
+msgstr "Sel Uyarısı"
 
 #: 3.8/weather-applet.js:17920
 msgid "Swiss Météo"
-msgstr ""
+msgstr "İsviçre Meteo"
 
 #: 3.8/weather-applet.js:17939
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "Bu sağlayıcı için posta kodu kullanmanız gerekiyor."
 
 #: 3.8/weather-applet.js:17951
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
 msgstr ""
+"Bu sağlayıcı için 1000-9999 arası bir İsviçre posta kodunu kullanmanız "
+"gerekiyor."
 
 #: 3.8/weather-applet.js:17973
 msgid "Switzerland"
-msgstr ""
+msgstr "İsviçre"
 
 #: 3.8/weather-applet.js:18404
 msgid ""
@@ -2141,9 +2126,8 @@ msgid "Saved to {filePath}"
 msgstr "{filePath} klasörüne kaydedildi"
 
 #: 3.8/weather-applet.js:20458
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "Konum Deposu"
+msgstr "Konum Hizmeti Engellendi"
 
 #: 3.8/weather-applet.js:20633
 msgid "No Script Provided"
@@ -2684,7 +2668,7 @@ msgstr "ABD Ulusal Hava Durumu (yalnızca ABD)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "İsviçre Meteo (sadece İsviçre)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap OneCall (key needed)"
@@ -2711,7 +2695,6 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (anahtar gerekli)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
@@ -2721,10 +2704,11 @@ msgid ""
 "openstreetmap.org."
 msgstr ""
 "Koordinatları 'Enlem, Boylam' (ör. 51.5085, -0.1257) girebilir veya 'Şehir, "
-"Ülke kodu' (ör. Londra, İngiltere) kullanabilir veya {Ev numarası} {Sokak} "
+"Ülke kodu' (ör. Ankara, Türkiye) kullanabilir veya {Ev numarası} {Sokak} "
 "{Şehir/Kasaba} {Postakodu} {Ulke} girmeyi deneyebilirsiniz. Arama "
-"algoritması, format ile çok esnektir. Girdiğiniz adresi yazdıktan 3 saniye "
-"sonra, seçiminizi doğrulamak için otomatik olarak kaydedilir."
+"algoritması, formatı çok esnektir. Girdiğiniz adresi yazdıktan 3 saniye "
+"sonra, seçiminiz doğrulanır ve otomatik olarak kaydedilir. nominatim."
+"openstreetmap.org tarafından desteklenmektedir."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -2972,7 +2956,7 @@ msgid ""
 msgstr ""
 "Konumunuz çoğu durumda otomatik olarak çalışır, ancak 'Enlem, Boylam' (örn. "
 "51.5085, -0.1257) koordinatlarıyla manuel olarak girebilir veya 'Şehir, Ülke "
-"kodu' (örn. Londra, İngiltere) kullanabilir veya {Ev numarası} girmeyi "
+"kodu' (örn. Ankara, Türkiye) kullanabilir veya {Ev numarası} girmeyi "
 "deneyebilirsiniz. {Sokak} {Şehir/Kasaba} {Posta Kodu} {Ülke}. Arama "
 "algoritması, format ile çok esnektir. Girdiğiniz adresi yazdıktan 3 saniye "
 "sonra, seçiminizi doğrulamak için otomatik olarak değiştirilir."

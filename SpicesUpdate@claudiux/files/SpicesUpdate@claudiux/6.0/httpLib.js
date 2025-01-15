@@ -2,7 +2,7 @@ const {
     source_remove,
     timeout_add_seconds,
     timeout_add
-} = imports.mainloop; //Mainloop
+} = require("mainloopTools");
 
 /**
  * Usage of log and logError:

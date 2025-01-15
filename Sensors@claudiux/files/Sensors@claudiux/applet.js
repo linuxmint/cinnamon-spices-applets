@@ -2,17 +2,32 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio; // Needed for file infos
-const Mainloop = imports.mainloop;
+//~ const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
 //const Gettext = imports.gettext;
 const Extension = imports.ui.extension; // Needed to reload this applet
 const ModalDialog = imports.ui.modalDialog;
 const Lang = imports.lang;
-
-const Util = require("./lib/util");
+//util
+const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
+//to-string
 const {to_string} = require("./lib/to-string");
+//checkDependencies
 const {Dependencies} = require("./lib/checkDependencies");
+//mainloopTools
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 const {
   UUID,
@@ -35,7 +50,7 @@ const ENABLED_APPLETS_KEY = "enabled-applets";
 
 const C_TEMP = '⦿'; //'🌡'
 const C_FAN = '🤂';
-const C_VOLT = '🗲';
+const C_VOLT = '🗲'; //'🔌'
 const C_INTRU = '⮿';
 const DEFAULT_APPLET_LABEL = [C_TEMP, C_FAN, C_VOLT, C_INTRU];
 
@@ -84,11 +99,11 @@ class LoggerTemp {
     this.previous_values[category_sensor] = value;
     if (value == prev) return;
     if (crit_limit && !isNaN(crit_limit) && (value >= crit_limit || (prev >= crit_limit && value < crit_limit))) {
-      Util.spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
       return;
     }
     if (high_limit && !isNaN(high_limit) && (value >= high_limit || (prev >= high_limit && value < high_limit))) {
-      Util.spawnCommandLineAsync(LOG_HIGH_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      spawnCommandLineAsync(LOG_HIGH_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
     }
   }
 }
@@ -112,7 +127,7 @@ class LoggerFan {
     this.previous_values[category_sensor] = value;
     if (value == prev) return;
     if (value <= min_limit || (prev <= min_limit && value > min_limit)) {
-      Util.spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
     }
   }
 }
@@ -142,11 +157,11 @@ class LoggerVoltage {
     this.previous_values[category_sensor] = value;
     if (value == prev) return;
     if (value <= min_limit || (prev <= min_limit && value > min_limit)) {
-      Util.spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
       return
     }
     if (value >= max_limit || (prev >= max_limit && value < max_limit)) {
-      Util.spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value+unit);
     }
   }
 }
@@ -169,7 +184,7 @@ class LoggerIntrusion {
     this.previous_values[category_sensor] = value;
     if (value == prev) return;
     if (value != 0) {
-      Util.spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value);
+      spawnCommandLineAsync(LOG_CRIT_SCRIPT+" "+category+ " "+sensor.replace(/ /g, "_")+" "+value);
     }
   }
 }
@@ -187,15 +202,16 @@ class SensorsApplet extends Applet.TextApplet {
     this.applet_name = metadata.name;
     this._temp = [];
     this.suspended = false;
+    this.loopId = null;
 
     // Both types of panel: horizontal and vertical:
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
     // To be sure that the scripts will be executable:
-    Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
+    spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
     this.sudo_or_wheel = "none";
-    let subProcess = Util.spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
       if (exitCode == 0) {
         let groups = out.trim().split(' ');
         if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
@@ -381,12 +397,12 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   reap_sensors() {
-    if (this.checkDepInterval) {
+    if (this.checkDepInterval != null) {
       clearTimeout(this.checkDepInterval);
-      this.checkDepInterval = undefined
+      this.checkDepInterval = null;
     }
 
-    if (!this.isLooping) return;
+    if (!this.isLooping) return false;
 
     // this.reaper.set_fahrenheit(this.use_fahrenheit); // Useless because toooo buggy! Let this applet do the job.
 
@@ -401,8 +417,8 @@ class SensorsApplet extends Applet.TextApplet {
       this.set_applet_label(_("Suspended"));
     }
 
-    this.loopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_sensors());
-    return false
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
+    return this.isLooping
   }
 
   /**
@@ -485,10 +501,10 @@ class SensorsApplet extends Applet.TextApplet {
       this.sensors_list[type].set_value(ret);
       this.updateUI();
     }
-    //Util.unref(ret);
+    //unref(ret);
     ret = null;
     _known_keys = null;
-    //Util.unref(toPush);
+    //unref(toPush);
     toPush = null;
     name = null;
     modified = null;
@@ -513,7 +529,7 @@ class SensorsApplet extends Applet.TextApplet {
         let _temp;
         //~ if (disk["value"])
           //~ _temp = disk["value"];
-        let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+        let subProcess = spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
           if (exitCode === 0) {
             //~ this._temp[_disk_name] = stdout;
 
@@ -546,7 +562,7 @@ class SensorsApplet extends Applet.TextApplet {
   populate_temp_disks_in_settings() {
     let command = SCRIPTS_DIR+"/get_disk_list.sh";
     var temp_disks = this.temp_disks;
-    let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+    let subProcess = spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
       if (exitCode === 0) {
         let out = stdout.trim();
         let disks = out.split(" ");
@@ -1175,6 +1191,7 @@ class SensorsApplet extends Applet.TextApplet {
    * updateMenu: updates the menu of the applet.
    */
   updateMenu() {
+    if (this.menu.isOpen) this.menu.close();
     this.menu.removeAll();
 
     // Head
@@ -1195,7 +1212,13 @@ class SensorsApplet extends Applet.TextApplet {
     _general_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("/usr/bin/xlet-settings applet %s &".format(UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            this.pids.push(spawnCommandLine("/usr/bin/xlet-settings applet %s &".format(UUID)));
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_general_button);
@@ -1205,7 +1228,13 @@ class SensorsApplet extends Applet.TextApplet {
     _temp_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        Util.spawnCommandLineAsync("%s applet %s -t 1 &".format(XS_PATH, UUID))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            this.pids.push(spawnCommandLineAsync("%s applet %s -t 1 &".format(XS_PATH, UUID)));
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_temp_button);
@@ -1215,7 +1244,13 @@ class SensorsApplet extends Applet.TextApplet {
     _fan_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 2 &".format(XS_PATH, UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            this.pids.push(spawnCommandLine("%s applet %s -t 2 &".format(XS_PATH, UUID)));
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_fan_button);
@@ -1225,7 +1260,13 @@ class SensorsApplet extends Applet.TextApplet {
     _voltage_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 3 &".format(XS_PATH, UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            this.pids.push(spawnCommandLine("%s applet %s -t 3 &".format(XS_PATH, UUID)));
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_voltage_button);
@@ -1235,7 +1276,13 @@ class SensorsApplet extends Applet.TextApplet {
     _intrusion_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 4 &".format(XS_PATH, UUID)))
+        let _to = setTimeout( () => {
+            clearTimeout(_to);
+            if (this.menu.isOpen) this.menu.close();
+            this.pids.push(spawnCommandLine("%s applet %s -t 4 &".format(XS_PATH, UUID)));
+          },
+          300
+        );
       }
     );
     this.menu.addMenuItem(_intrusion_button);
@@ -1245,7 +1292,7 @@ class SensorsApplet extends Applet.TextApplet {
     //~ _custom_button.connect("activate",
       //~ (event) => {
         //~ this.kill_all_pids();
-        //~ this.pids.push(Util.spawnCommandLine("%s applet %s -t 5 &".format(XS_PATH, UUID)))
+        //~ this.pids.push(spawnCommandLine("%s applet %s -t 5 &".format(XS_PATH, UUID)))
       //~ }
     //~ );
     //~ this.menu.addMenuItem(_custom_button);
@@ -1263,8 +1310,8 @@ class SensorsApplet extends Applet.TextApplet {
     // Button suspend
     let suspend_switch = new PopupMenu.PopupSwitchMenuItem(_("Suspend Sensors"), this.suspended);
     suspend_switch.connect("toggled", Lang.bind(this, function() {
+      this.menu.toggle();
       this.suspended = !this.suspended;
-      this.menu.toggle()
     }));
     this.menu.addMenuItem(suspend_switch);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -1457,13 +1504,14 @@ class SensorsApplet extends Applet.TextApplet {
    */
   on_settings_changed() {
     this.isLooping = false;
-    if (this.loopId != undefined && this.loopId > 0) {
-        Mainloop.source_remove(this.loopId);
-        this.loopId = 0;
+    if (this.loopId != null) {
+        source_remove(this.loopId);
+        this.loopId = null;
     }
     this.detect_markup();
     this.isLooping = true;
-    this.reap_sensors();
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
+    //~ this.reap_sensors();
   }
 
   on_applet_clicked() {
@@ -1479,14 +1527,14 @@ class SensorsApplet extends Applet.TextApplet {
   on_applet_reloaded() {
     this.isLooping = false;
 
-    if ((this.loopId != undefined) && (this.loopId > 0)) {
-      Mainloop.source_remove(this.loopId);
-      this.loopId = 0;
-    }
+    //~ if (this.loopId) {
+      //~ Mainloop.source_remove(this.loopId);
+      //~ this.loopId = null;
+    //~ }
 
-    if (this.checkDepInterval && (this.checkDepInterval != 0)) {
+    if (this.checkDepInterval != null) {
       clearInterval(this.checkDepInterval);
-      this.checkDepInterval = 0;
+      this.checkDepInterval = null;
     }
 
     if (this.reaper && this._connectReaperId) {
@@ -1511,12 +1559,13 @@ class SensorsApplet extends Applet.TextApplet {
 
   on_applet_removed_from_panel() {
     this.on_applet_reloaded();
-    this.s.finalize();
+    //~ this.s.finalize();
+    remove_all_sources();
   }
 
   on_applet_added_to_panel(userEnabled) {
     // Check about dependencies:
-    this.checkDepInterval = undefined;
+    this.checkDepInterval = null;
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       this.isLooping = true;
@@ -1524,7 +1573,14 @@ class SensorsApplet extends Applet.TextApplet {
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
       this.isLooping = false;
-      this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+      this.checkDepInterval = setInterval(
+        () => {
+          clearInterval(this.checkDepInterval);
+          this.dependencies.check_dependencies();
+          this.checkDepInterval = null;
+        },
+        10000
+      );
     }
   }
 
@@ -1533,7 +1589,7 @@ class SensorsApplet extends Applet.TextApplet {
 
     while (this.pids.length != 0) {
       let pid = this.pids.pop();
-      Util.spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
+      spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
     }
   }
 
@@ -1548,6 +1604,7 @@ class SensorsApplet extends Applet.TextApplet {
    * Buttons in settings
    */
   on_option_menu_reload_this_applet_clicked() {
+    if (this.menu.isOpen) this.menu.close();
     // Reload this applet:
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
   }
@@ -1559,19 +1616,37 @@ class SensorsApplet extends Applet.TextApplet {
     let text = this.reaper.get_sensors_data_formatted_text();
 
     GLib.file_set_contents(SCRIPTS_DIR + "/report.txt", text);
-
-    Util.spawnCommandLineAsync("%s/show_sensor_values.sh".format(SCRIPTS_DIR));
+    if (this.menu.isOpen) this.menu.close();
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("%s/show_sensor_values.sh".format(SCRIPTS_DIR));
+      },
+      300
+    );
   }
 
   _on_xsensors_pressed() {
-    Util.spawnCommandLineAsync("/usr/bin/xsensors &");
+    //~ if (this.menu.isOpen) this.menu.close();
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("/usr/bin/xsensors &");
+      },
+      300
+    );
   }
 
   _on_open_README() {
-    Util.spawnCommandLineAsync("xdg-open "+APPLET_DIR+"/README.pdf");
+    if (this.menu.isOpen) this.menu.close();
+    let _to = setTimeout( () => {
+        clearTimeout(_to);
+        spawnCommandLineAsync("xdg-open "+APPLET_DIR+"/README.pdf");
+      },
+      300
+    );
   }
 
   _on_remove_temperatureATfevimu_from_panels() {
+    if (this.menu.isOpen) this.menu.close();
     let dialog = new ModalDialog.ConfirmDialog(
       _("Are you sure you want to remove '%s'?").format("temperature@fevimu"),
       () => {
@@ -1594,7 +1669,7 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   _on_disktemp_button_pressed() {
-    let subProcess = Util.spawnCommandLineAsyncIO(
+    let subProcess = spawnCommandLineAsyncIO(
       "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
       Lang.bind(this, (out, err, exitCode) => {
         this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
@@ -1607,7 +1682,7 @@ class SensorsApplet extends Applet.TextApplet {
     //~ let now = 1*Math.ceil(Date.now() / 1000);
     //~ let old_value = this.s.getValue("disktemp_is_user_readable");
     //~ if (force || now - this.future_hddtemp_check > 0) {
-      //~ Util.spawnCommandLineAsyncIO("/bin/bash -c '%s/is_hddtemp_usable_by_user.sh'".format(SCRIPTS_DIR),
+      //~ spawnCommandLineAsyncIO("/bin/bash -c '%s/is_hddtemp_usable_by_user.sh'".format(SCRIPTS_DIR),
                                     //~ (out, err, exitCode) => {
         //~ if (exitCode == 0) {
           //~ this.s.setValue("disktemp_is_user_readable", true);
@@ -1623,7 +1698,7 @@ class SensorsApplet extends Applet.TextApplet {
               //~ let tabTemperatures = 1*userSettings["layoutsensors"]["pages"].indexOf("page_Temperatures");
               //~ userSettings = null;
               //~ this.kill_all_pids();
-              //~ Util.spawnCommandLineAsync("%s applet %s -t %s &".format(XS_PATH, UUID, ""+tabTemperatures))
+              //~ spawnCommandLineAsync("%s applet %s -t %s &".format(XS_PATH, UUID, ""+tabTemperatures))
             //~ }
           //~ } else { //exitCode is 2.
             //~ logError(_("hddtemp is NOT installed."));
@@ -1648,15 +1723,31 @@ class SensorsApplet extends Applet.TextApplet {
    * Events
    */
   on_enter_event(actor, event) {
-    this.tooltip_must_be_updated = true;
-    this.updateUI();
-    this.isUpdatingUI = true;
-    this.updateTooltip();
+    this.isActorEntered = true;
+    this.onEnterEventInterval = setInterval( () => {
+        this.tooltip_must_be_updated = true;
+        this.reap_sensors();
+        this.isUpdatingUI = false; //new
+        this.updateUI();
+        this.isUpdatingUI = true;
+        this.updateTooltip();
+        return this.isActorEntered;
+      },
+      1000
+    );
   }
 
   on_leave_event(actor, event) {
+    this.isActorEntered = false;
+    if (this.onEnterEventInterval != null) {
+      clearInterval(this.onEnterEventInterval);
+      this.onEnterEventInterval = false;
+    }
     this.tooltip_must_be_updated = false;
     this.isUpdatingUI = false;
+    this.isActorEntered = false;
+    remove_all_sources();
+    this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
 
   /**
