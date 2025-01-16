@@ -1,3 +1,6 @@
+### v4.1.1~20250116
+  * mainloopTools library: improvements.
+
 ### v4.1.0~20250112
   * Now uses mainloopTools to optimize loop management.
 

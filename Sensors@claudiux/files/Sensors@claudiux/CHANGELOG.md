@@ -1,3 +1,6 @@
+### v4.0.2~20250116
+  * mainloopTools library: improvements.
+
 ### v4.0.1~20250114
   * As long as the icon is hovered over, the sensors are checked every second.
 

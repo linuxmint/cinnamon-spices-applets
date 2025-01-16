@@ -204,6 +204,10 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.loopId = null;
 
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
+
+  } // End of constructor
+
+  get_user_settings() {
     this.settings.bind("update-interval", "update_interval");
     //~ this.settings.bind("standard-opacity", "standard_opacity", this.make_menu.bind(this));
     this.settings.bind("standard-opacity", "standard_opacity");
@@ -224,9 +228,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("uuid-list", "uuid_list", this.update_uuids.bind(this));
     this.settings.bind("spices_to_spy", "spices_to_spy");
     this.settings.bind("old_spices_to_spy", "old_spices_to_spy");
-
-
-  } // End of constructor
+  } // End of get_user_settings
 
   _add_user_Spices() { ///Obsolete (not used)
     var userSpices = [];
@@ -381,7 +383,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     //FIXME: removing all spices of an author from this.spices_to_spy.
     var _authors = [];
     for (let author of this.author_list) {
-      _authors.push(author.author.toLowerCase());
+      _authors.push(author["author"].toLowerCase());
     }
     this.authors = _authors;
   } // End of update_authors
@@ -407,9 +409,9 @@ class SpiceSpy extends Applet.TextIconApplet {
       const jsonFile = Gio.file_new_for_path(INDEX);
 
       if (jsonFile.query_exists(null)) {
-        const jsonModifTime = jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
+        const jsonModifTime = parseInt(jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix());
         const currentTime = parseInt(new Date / 1000);
-        const difference = parseInt(currentTime - jsonModifTime);
+        const difference = currentTime - jsonModifTime;
         is_to_download = (difference > 720); // 720s = 12 min.
       } else {
         is_to_download = true;
@@ -420,7 +422,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     if (is_to_download) {
       Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
     }
-    is_to_download = undefined;
+    //~ is_to_download = undefined;
   } // End of renew_caches
 
   get_spices_to_spy() {
@@ -436,9 +438,9 @@ class SpiceSpy extends Applet.TextIconApplet {
         if (success) {
           const spices = JSON.parse(to_string(array_chars));
           for (let spice of Object.keys(spices)) {
-            let _uuid = (type!="themes") ? ""+spices[spice].uuid : ""+spices[spice].name;
+            let _uuid = (type!="themes") ? ""+spices[spice]["uuid"] : ""+spices[spice]["name"];
 
-            if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice].author_user) > -1) {
+            if (this.uuids.indexOf(_uuid) > -1 || this.authors.indexOf(spices[spice]["author_user"]) > -1) {
               let _nb_translations = 0;
               if (type!="themes") { // No translations for themes.
                 var list_translations = [];
@@ -453,18 +455,18 @@ class SpiceSpy extends Applet.TextIconApplet {
               _spices_to_spy[type][_uuid] = {
                 "type": type,
                 "uuid": _uuid,
-                "name": spices[spice].name,
-                "score": spices[spice].score,
+                "name": spices[spice]["name"],
+                "score": spices[spice]["score"],
                 "translations": _nb_translations,
                 "url": "https://cinnamon-spices.linuxmint.com/"+type+"/view/"+spices[spice]["spices-id"],
                 "comments": ( this.spices_to_spy[type] &&
-                              this.spices_to_spy[type][""+spices[spice].uuid] &&
-                              this.spices_to_spy[type][""+spices[spice].uuid]["comments"]
-                            ) ? this.spices_to_spy[type][""+spices[spice].uuid]["comments"] : 0,
+                              this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
+                              this.spices_to_spy[type][""+spices[spice]["uuid"]]["comments"]
+                            ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["comments"] : 0,
                 "issues": ( this.spices_to_spy[type] &&
-                              this.spices_to_spy[type][""+spices[spice].uuid] &&
-                              this.spices_to_spy[type][""+spices[spice].uuid]["issues"] != null
-                            ) ? this.spices_to_spy[type][""+spices[spice].uuid]["issues"] : 0,
+                              this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
+                              this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] != null
+                            ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] : 0,
               };
               //~ _temp_uuids.push(""+spices[spice].uuid);
             }
@@ -485,7 +487,8 @@ class SpiceSpy extends Applet.TextIconApplet {
         const page = spices[spice]['url']+`#${HTML_COUNT_ID}`;
         //~ let id = setTimeout(async () => {
           //~ let response = await http.LoadAsync(page);
-          let id = setTimeout(() => {
+        let id = setTimeout(() => {
+          clearTimeout(id);
           let response = http.LoadAsync(page);
           if (response.Success) {
             let result = COMMENTS_REGEX.exec(response.Data);
@@ -500,7 +503,6 @@ class SpiceSpy extends Applet.TextIconApplet {
               + "(please report if there are 0 items)");
             }
           }
-          //~ clearTimeout(id);
         }, index*interval);
         index += 1;
       }
@@ -514,7 +516,8 @@ class SpiceSpy extends Applet.TextIconApplet {
     for (let type of TYPES) {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
-        let id = setTimeout(async () => {
+        let id = setTimeout( () => { //old: async () => {
+          clearTimeout(id);
           let command = ""+GET_ISSUES_SCRIPT+" "+type+" "+spices[spice]['uuid'];
           let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
             if (exitCode == 0) {
@@ -529,7 +532,6 @@ class SpiceSpy extends Applet.TextIconApplet {
             }
             subProcess.send_signal(9);
           }));
-          clearTimeout(id);
         }, index*interval);
         index += 1;
       }
@@ -559,6 +561,8 @@ class SpiceSpy extends Applet.TextIconApplet {
       let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh", St.IconType.SYMBOLIC);
       refresh.connect("activate", this.loop.bind(this));
       this.menu.addMenuItem(refresh);
+
+      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
       let section = new PopupMenu.PopupSubMenuMenuItem(_("Spices"));
       //~ section.box.set_vertical(true);
@@ -632,6 +636,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       section.menu.open();
     }
 
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     let config_button = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
     config_button.connect('activate', Lang.bind(this, this.configureApplet));
     this.menu.addMenuItem(config_button);
@@ -652,6 +657,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of mark_as_read
 
   on_applet_added_to_panel() {
+    this.get_user_settings();
     //~ this.make_menu();
 
     this.renew_caches();
@@ -671,11 +677,14 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {
+    this.menu.removeAll();
     remove_all_sources();
     this.loopId = null;
   } // End of on_applet_removed_from_panel
 
   _reload_this_applet() {
+    //~ remove_all_sources();
+    //~ this.loopId = null;
     reloadExtension(UUID, Type.APPLET)
   } // End of _reload_this_applet
 }

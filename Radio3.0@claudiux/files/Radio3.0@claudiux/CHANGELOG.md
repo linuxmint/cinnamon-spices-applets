@@ -1,3 +1,6 @@
+### 2.7.4~20250116
+  * mainloopTools library: improvements.
+
 ### 2.7.3~20250114
   * Increases the size of the stream buffer for improved listening comfort.
   * Settings: Sets the default value for each multimedia key bind.
