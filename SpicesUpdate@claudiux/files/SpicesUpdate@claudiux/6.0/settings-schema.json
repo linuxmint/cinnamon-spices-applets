@@ -246,7 +246,6 @@
   },
   "was_empty_applets":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_desklets": {
@@ -307,7 +306,6 @@
   },
   "was_empty_desklets":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_extensions": {
@@ -368,7 +366,6 @@
   },
   "was_empty_extensions":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_themes": {
@@ -429,7 +426,6 @@
   },
   "was_empty_themes":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_actions": {
@@ -490,7 +486,6 @@
   },
   "was_empty_actions":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "general_frequency": {
@@ -547,7 +542,6 @@
   },
   "general_force_notifications": {
     "type": "generic",
-    "value": false,
     "default": false
   },
   "general_type_notif": {
@@ -573,8 +567,7 @@
   },
   "displayType": {
     "type": "generic",
-    "default": "compact",
-    "value": "compact"
+    "default": "compact"
   },
   "general_hide": {
     "type": "switch",
@@ -594,7 +587,6 @@
   },
   "first_time": {
     "type": "generic",
-    "value": true,
     "default": true
   },
   "next_type": {

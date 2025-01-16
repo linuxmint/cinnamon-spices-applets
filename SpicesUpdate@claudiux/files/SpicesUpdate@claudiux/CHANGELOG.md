@@ -1,3 +1,6 @@
+### v7.5.3~20250116
+  * mainloopTools library: improvements.
+
 ### v7.5.2~20250112
   * Fixed minor bugs in animations.
 
