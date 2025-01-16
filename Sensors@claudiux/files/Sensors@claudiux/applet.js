@@ -44,6 +44,8 @@ const {
   logError
 } = require("./lib/constants");
 
+const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+
 const {SensorsReaper} = require("./lib/sensorsReaper");
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
@@ -1589,7 +1591,8 @@ class SensorsApplet extends Applet.TextApplet {
 
     while (this.pids.length != 0) {
       let pid = this.pids.pop();
-      spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
+      if (pid != undefined)
+        spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
     }
   }
 
@@ -1615,7 +1618,7 @@ class SensorsApplet extends Applet.TextApplet {
   _on_report_button_pressed() {
     let text = this.reaper.get_sensors_data_formatted_text();
 
-    GLib.file_set_contents(SCRIPTS_DIR + "/report.txt", text);
+    GLib.file_set_contents(XDG_RUNTIME_DIR + "/Sensors_report.txt", text);
     if (this.menu.isOpen) this.menu.close();
     let _to = setTimeout( () => {
         clearTimeout(_to);
