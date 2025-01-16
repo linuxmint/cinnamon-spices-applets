@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-16 20:55+0100\n"
-"PO-Revision-Date: 2024-10-07 16:34-0300\n"
+"PO-Revision-Date: 2025-01-16 17:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -118,40 +118,40 @@ msgstr ""
 
 #. settings-schema.json->section1->description
 msgid "Icon size"
-msgstr ""
+msgstr "Tamaño del icono"
 
 #. settings-schema.json->icon_size->description
 msgid "Size (in pixels) of menu icons"
-msgstr ""
+msgstr "Tamaño (en píxeles) de los iconos de menú"
 
 #. settings-schema.json->icon_size->options
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #. settings-schema.json->icon_size->options
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. settings-schema.json->icon_size->options
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #. settings-schema.json->icon_size->options
 msgid "32"
-msgstr ""
+msgstr "32"
 
 #. settings-schema.json->icon_size->options
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #. settings-schema.json->icon_size->options
 msgid "64"
-msgstr ""
+msgstr "64"
 
 #. settings-schema.json->icon_size->options
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #. settings-schema.json->icon_size->options
 msgid "128"
-msgstr ""
+msgstr "128"
