@@ -1,3 +1,7 @@
+### v2.0.0~20250116
+  * Adds Spices icons in menus.
+  * Improves applet stability and user comfort.
+
 ### v1.2.0~20250104
   * Introduces action delayers to avoid errors.
 
