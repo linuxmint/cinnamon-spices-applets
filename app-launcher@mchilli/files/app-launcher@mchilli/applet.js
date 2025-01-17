@@ -61,7 +61,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.bindSettings();
             this.initMenu();
             this.connectSignals();
-            this.addHotKey();
+            this.updateHotKey();
             this.initIcons();
             this.initLabel();
         } catch (e) {
