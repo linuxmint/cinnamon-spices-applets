@@ -130,7 +130,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>
-                    <property name="secondary-icon-name">gtk-stop</property>
+                    <property name="secondary-icon-name">process-stop-symbolic</property>
                     <signal name="changed" handler="on_input_changed" swapped="no"/>
                   </object>
                   <packing>
@@ -165,7 +165,7 @@
                           <object class="GtkImage">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="icon-name">gtk-add</property>
+                            <property name="icon-name">list-add-symbolic</property>
                           </object>
                         </child>
                       </object>
@@ -190,7 +190,7 @@
                       <object class="GtkEntry" id="command">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
-                        <property name="secondary-icon-name">gtk-stop</property>
+                        <property name="secondary-icon-name">process-stop-symbolic</property>
                         <signal name="changed" handler="on_input_changed" swapped="no"/>
                       </object>
                       <packing>
@@ -209,7 +209,7 @@
                           <object class="GtkImage">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="icon-name">gtk-open</property>
+                            <property name="icon-name">folder-symbolic</property>
                           </object>
                         </child>
                       </object>
