@@ -72,11 +72,12 @@
       <object class="GtkToolbar">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="icon_size">4</property>
         <child>
           <object class="GtkMenuToolButton" id="add_button">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-add</property>
+            <property name="icon-name">list-add-symbolic</property>
             <signal name="clicked" handler="on_add_item" swapped="no"/>
             <child type="menu">
               <object class="GtkMenu">
@@ -102,7 +103,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-edit</property>
+            <property name="icon-name">list-edit-symbolic</property>
             <signal name="clicked" handler="on_edit_item" swapped="no"/>
           </object>
           <packing>
@@ -115,7 +116,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-copy</property>
+            <property name="icon-name">edit-copy-symbolic</property>
             <signal name="clicked" handler="on_duplicate_item" swapped="no"/>
           </object>
           <packing>
@@ -138,7 +139,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-go-up</property>
+            <property name="icon-name">go-up-symbolic</property>
             <signal name="clicked" handler="on_move_item_up" swapped="no"/>
           </object>
           <packing>
@@ -151,7 +152,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-go-down</property>
+            <property name="icon-name">go-down-symbolic</property>
             <signal name="clicked" handler="on_move_item_down" swapped="no"/>
           </object>
           <packing>
@@ -174,7 +175,7 @@
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-remove</property>
+            <property name="icon-name">list-remove-symbolic</property>
             <signal name="clicked" handler="on_remove_item" swapped="no"/>
           </object>
           <packing>
@@ -194,11 +195,9 @@
         </child>
         <child>
           <object class="GtkToolButton" id="cancel_button">
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can-focus">False</property>
             <property name="use-underline">True</property>
-            <property name="icon-name">gtk-cancel</property>
+            <property name="icon-name">edit-undo-symbolic</property>
             <signal name="clicked" handler="on_cancel_changes" swapped="no"/>
           </object>
           <packing>
@@ -208,10 +207,8 @@
         </child>
         <child>
           <object class="GtkToolButton" id="save_button">
-            <property name="visible">True</property>
-            <property name="sensitive">False</property>
             <property name="can-focus">False</property>
-            <property name="icon-name">gtk-save</property>
+            <property name="icon-name">document-save-symbolic</property>
             <signal name="clicked" handler="on_save_list" swapped="no"/>
             <style>
               <class name="suggested-action"/>
