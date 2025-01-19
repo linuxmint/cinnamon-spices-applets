@@ -18,7 +18,7 @@ const Lang = imports.lang;
 //GLib:
 const { LogLevelFlags, getenv, get_language_names, filename_to_uri, find_program_in_path, mkdir_with_parents, file_set_contents, file_get_contents, markup_escape_text, SOURCE_CONTINUE, SOURCE_REMOVE } = imports.gi.GLib;
 //Gio:
-const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, icon_new_for_string, FileQueryInfoFlags, FileType, Settings, FileCreateFlags } = imports.gi.Gio;
+const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, icon_new_for_string, FileQueryInfoFlags, FileType, Settings, FileCreateFlags, FileMonitorFlags, Cancellable } = imports.gi.Gio;
 //Gtk:
 const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
 //Gdk:
@@ -322,7 +322,7 @@ class SpicesUpdate extends IconApplet {
         //~ is_to_download = undefined;
 
         if (this.applet_running)
-            this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
+            this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache());
     } // End of _loop_refresh_cache
 
     get_SU_settings() {
@@ -766,7 +766,8 @@ class SpicesUpdate extends IconApplet {
             notification.setResident(true);
             notification.setUseActionIcons(false);
             about_updates ? this.notifications_about_updates[type].push(notification) : this.notifications_about_news[type].push(notification);
-            notification.connect("destroy", (self) => {
+            //~ notification.connect("destroy", (self) => {
+            notification.connect("destroy", () => {
                 about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
             });
             source.notify(notification);
@@ -831,7 +832,7 @@ class SpicesUpdate extends IconApplet {
                         } else if (action == "software-update-available-symbolic") {
                             spawnCommandLineAsync("%s %s -t %s -s %s -u".format(CS_PATH, ""+type, TAB, SORT));
                             let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
-                            n.destroy(3);
+                            if (n) n.destroy(3);
                         } else if (action == "su-forget-symbolic") {
                             this._forget_new_spices(type);
                             this.clear_notifications_about_news(type);
@@ -854,8 +855,10 @@ class SpicesUpdate extends IconApplet {
                             this._on_refresh_pressed();
                         }
                     });
-            notification.connect("destroy", (self) => {
+            //~ notification.connect("destroy", (self) => {
+            notification.connect("destroy", () => {
                         about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
+                        notification.clearButtons();
                     });
             notification.actor.remove_style_class_name('notification-applet-container');
             notification.actor.add_style_class_name('SU-notification-applet-container');
@@ -1050,6 +1053,7 @@ class SpicesUpdate extends IconApplet {
         //~ logDebug("populateSettingsUnprotectedSpices("+type+") BEGIN");
         // Prevents multiple access to the json config file of SpiceUpdate@claudiux:
         this.OKtoPopulateSettings[type] = false;
+        this._load_cache(type);
         this.unprotectedList[type] = [];
         this.unprotectedDico[type] = {};
         var unprotectedSpices = null;
@@ -1082,15 +1086,23 @@ class SpicesUpdate extends IconApplet {
                 this.unprotectedDico[type][a["name"]] = a["isunprotected"] && !isSystemProtected;
                 let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
                 if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
-                    this._load_cache(type);
                     let created = this._get_member_from_cache(type, a["name"], "created");
                     let last_edited = this._get_last_edited_from_cache(type, a["name"]);
                     if (created !== null && last_edited !== null && created >= last_edited)
                         created = last_edited - 1;
 
-                    if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+                    if (created !== null) {
+                        this._rewrite_metadataFile(metadataFileName, created);
+                    } else {
+                        a["isunprotected"] = false;
+                        a["requestnewdownload"] = false;
+                    }
                 }
-                if (!a["isunprotected"]) {
+                if (!this._is_in_cache(type, a["name"])) { // This Spice is private.
+                    a["isunprotected"] = false;
+                    a["requestnewdownload"] = false;
+                }
+                if (!a["isunprotected"]) { // We protect this Spice: no update requested for it.
                     this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
                 }
                 if (a["name"] === "AlbumArt3.0@claudiux")
@@ -1363,6 +1375,21 @@ class SpicesUpdate extends IconApplet {
         //~ jsonFile = undefined;
         //~ jsonFileName = undefined;
     } // End of _load_cache
+
+    _is_in_cache(type, uuid) {
+        //~ var cacheParser = new Json.Parser();
+        //~ cacheParser.load_from_data(this.cache[type], -1);
+        var ok = false;
+        var value = null;
+        try {
+            value = this._get_last_edited_from_cache(type, uuid);
+            if (value) ok = true;
+        } catch(e) {
+            // Nothing to do.
+        }
+        //~ logDebug(""+type+" "+uuid+": "+ok);
+        return ok;
+    }// End of _is_in_cache
 
     _get_last_edited_from_cache(type, uuid) {
         var cacheParser = new Json.Parser();
@@ -1745,8 +1772,8 @@ class SpicesUpdate extends IconApplet {
 
             if (pngDir.query_exists(null)) {
                 try {
-                    let monitor = pngDir.monitor_directory(0, null);
-                    let Id = monitor.connect("changed", (type) => this._on_pngDir_changed(type));
+                    let monitor = pngDir.monitor_directory(0, new Cancellable());
+                    let Id = monitor.connect("changed", (type) => { this._on_pngDir_changed(type); });
                     this.monitors.push([monitor, Id]);
                     this.monitorsPngId[type] = Id;
                 } catch(e) {
@@ -1781,7 +1808,7 @@ class SpicesUpdate extends IconApplet {
 
         if (metadataFile.query_exists(null)) {
             try {
-                let monitor = metadataFile.monitor(0, null);
+                let monitor = metadataFile.monitor_file(FileMonitorFlags.NONE, new Cancellable());
                 let Id = monitor.connect("changed", (type, uuid) => this._on_metadatajson_changed(type, uuid));
                 this.monitors.push([monitor, Id]);
                 this.alreadyMonitored.push(uuid);
@@ -2004,13 +2031,13 @@ class SpicesUpdate extends IconApplet {
         if (type) {
             while (this.notifications_about_updates[type].length != 0) {
                 let n = this.notifications_about_updates[type].pop();
-                n.destroy(3);
+                if (n) n.destroy(3);
             }
         } else {
             for (let t of TYPES) {
                 while (this.notifications_about_updates[t].length != 0) {
                     let n = this.notifications_about_updates[t].pop();
-                    n.destroy(3);
+                    if (n) n.destroy(3);
                 }
             }
         }
@@ -2020,13 +2047,13 @@ class SpicesUpdate extends IconApplet {
         if (type) {
             while (this.notifications_about_news[type].length != 0) {
                 let n = this.notifications_about_news[type].pop();
-                n.destroy(3);
+                if (n) n.destroy(3);
             }
         } else {
             for (let t of TYPES) {
                 while (this.notifications_about_news[t].length != 0) {
                     let n = this.notifications_about_news[t].pop();
-                    n.destroy(3);
+                    if (n) n.destroy(3);
                 }
             }
         }
@@ -2050,11 +2077,17 @@ class SpicesUpdate extends IconApplet {
         }
     } // End of destroy_all_notifications
 
-    _on_refresh_pressed() {
+    _on_refresh_pressed(type=null) {
         if (this.menu.isOpen)
             this.menu.toggle();
+
+        if (type!=null) {
+            this.populateSettingsUnprotectedSpices(type);
+        }
+
         this.first_loop = false;
         this.refresh_requested = true;
+        this.applet_running = true;
 
         if (!this.isLooping) {
             source_remove(this.loopId);
@@ -2064,6 +2097,26 @@ class SpicesUpdate extends IconApplet {
             this.updateLoop();
         }
     } // End of _on_refresh_pressed
+
+    _on_refresh_pressed_applets() {
+        this._on_refresh_pressed("applets")
+    }
+
+    _on_refresh_pressed_desklets() {
+        this._on_refresh_pressed("desklets")
+    }
+
+    _on_refresh_pressed_extensions() {
+        this._on_refresh_pressed("extensions")
+    }
+
+    _on_refresh_pressed_themes() {
+        this._on_refresh_pressed("themes")
+    }
+
+    _on_refresh_pressed_actions() {
+        this._on_refresh_pressed("actions")
+    }
 
     _on_reload_this_applet_pressed() {
         // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
