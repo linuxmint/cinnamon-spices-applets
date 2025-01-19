@@ -161,11 +161,11 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
   }
 
-  destroy() {
-    this.comments_label = null;
-    this.comments_box = null;
-    super.destroy();
-  }
+  //~ destroy() {
+    //~ this.comments_label = null;
+    //~ this.comments_box = null;
+    //~ super.destroy();
+  //~ }
 };
 
 class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
@@ -189,6 +189,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     super(orientation, panel_height, instance_id);
     this.metadata = metadata;
     this.set_applet_icon_symbolic_name("cinnamon");
+    this.set_applet_label("");
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
     //~ this.updateUI();
@@ -199,16 +200,25 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.authors = [];
     this.uuids = [];
-    //~ this.temp_uuids = [];
+    this.commentsJobsList = []; // contains array items: [type, spice, page].
+    this.issuesJobsList = [];
+
     this.fistTime = true;
     this.loopId = null;
+    this.jobsLoopId = null;
+    this.issuesLoopId = null;
 
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
 
   } // End of constructor
 
   get_user_settings() {
-    this.settings.bind("update-interval", "update_interval");
+    this.settings.bind("update-interval-hours", "update_interval", this.update_interval_value.bind(this));
+    if (this.settings.getValue("update-interval") > 0) {
+      // Converts old "update-interval" in minutes to new this.update_interval in hours.
+      this.update_interval = 0.5 * Math.round(this.settings.getValue("update-interval") / 30);
+      this.settings.setValue("update-interval", -1);
+    }
     //~ this.settings.bind("standard-opacity", "standard_opacity", this.make_menu.bind(this));
     this.settings.bind("standard-opacity", "standard_opacity");
     //~ this.settings.bind("color-on-change", "color_on_change", this.make_menu.bind(this));
@@ -230,7 +240,16 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("old_spices_to_spy", "old_spices_to_spy");
   } // End of get_user_settings
 
-  _add_user_Spices() { ///Obsolete (not used)
+  update_interval_value() {
+    this.update_interval = 0.5 * Math.round(this.update_interval * 2);
+    const sec = Math.round(this.update_interval * 3600); // From hours to seconds.
+    if (this.loopId != null)
+      source_remove(this.loopId);
+    this.is_looping = true;
+    this.loopId = timeout_add_seconds(sec, this.loop.bind(this));
+  }
+
+  _add_user_Spices() { ///Used by the "Add all the Spices I use" button in settings.
     var userSpices = [];
     let gsettings;
     let children, info, file_type;
@@ -297,7 +316,6 @@ class SpiceSpy extends Applet.TextIconApplet {
 
       // Loop next tick (value 0) to ensure that this.actor is on stage:
       setTimeout(() => this.loop(), 0); //.bind(this)
-      //~ this.loop();
     }
   } // End of _add_user_Spices
 
@@ -350,14 +368,86 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   } // End of updateUI
 
+  issuesJobs_loop() {
+    if (!this.is_looping) {
+      this.issuesJobsList = [];
+      return false;
+    }
+
+    if (this.issuesJobsList.length > 0) {
+      const [type, spice, command] = this.issuesJobsList.shift();
+      this.do_issuesJob(type, spice, command);
+    }
+
+    return this.is_looping;
+  } // End of issuesJobs_loop
+
+  do_issuesJob(type, spice, command) {
+    if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
+      this.issuesJobsList.push([type, spice, command]);
+      return
+    }
+    let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+      if (exitCode == 0) {
+        let _nb_issues = parseInt(stdout);
+        if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
+        this.spices_to_spy[type][spice]['issues'] = _nb_issues
+      } else if (exitCode == 1) {
+        this.spices_to_spy[type][spice]['issues'] = 0;
+      }
+      this.make_menu(); //???
+      subProcess.send_signal(9);
+    }));
+  }
+
+  commentsJobs_loop() {
+    if (!this.is_looping) {
+      this.commentsJobsList = [];
+      return false;
+    }
+
+    if (this.commentsJobsList.length > 0) {
+      const [type, spice, page] = this.commentsJobsList.shift();
+      this.do_commentsJob(type, spice, page);
+    }
+
+    return this.is_looping;
+  } // End of commentsJobs_loop
+
+  do_commentsJob(type, spice, page) {
+    if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
+      this.commentsJobsList.push([type, spice, page]);
+      return
+    }
+    var http = new HttpLib();
+    let response = http.LoadAsync(page);
+    if (response.Success) {
+      let result = COMMENTS_REGEX.exec(response.Data);
+      if (result && result[1]) {
+        let count = parseInt(result[1]);
+        this.spices_to_spy[type][spice]['comments'] = count;
+        //~ this.make_menu();
+      } else {
+        global.logWarning(spices[spice]['uuid'] + ": This spice is cached in the "
+        + ".json file but doesn't actually exist in the "
+        + "Spices now OR the Cinnamon Spices changed the ID "
+        + "(please report if there are 0 items)");
+      }
+    }
+  } // End of do_commentsJob
+
   loop() {
-    source_remove(this.loopId);
+    if (!this.is_looping) return false;
+
+    if (this.loopId != null )
+      source_remove(this.loopId);
     this.loopId = null;
 
     // Initialization (first time this applet is launched):
     const old_keys = Object.keys(this.old_spices_to_spy);
     if (old_keys.length < 5) {
-      this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
+      //~ this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
+      this.old_spices_to_spy = this.spices_to_spy;
     }
 
     if (!this.fistTime) {
@@ -367,16 +457,17 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.get_spices_to_spy();
       this.update_issues();
       this.update_comments();
-      this.settings.setValue("spices_to_spy", this.spices_to_spy);
-      this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
+      //~ this.settings.setValue("spices_to_spy", this.spices_to_spy);
+      //~ this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
     }
     this.fistTime = false;
 
     //~ this.make_menu();
     this.set_applet_tooltip(this.metadata.name);
 
-    let ms = this.update_interval * 60000;
-    this.loopId = timeout_add(ms, this.loop.bind(this));
+    let sec = Math.round(this.update_interval * 3600);
+    this.loopId = timeout_add_seconds(sec, this.loop.bind(this));
+    return this.is_looping;
   } // End of loop
 
   update_authors() {
@@ -427,7 +518,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   get_spices_to_spy() {
     var _spices_to_spy = {};
-    //~ var _temp_uuids = [];
+
     for (let type of TYPES) {
       _spices_to_spy[type] = {};
       const INDEX = HOME_DIR + "/.cache/cinnamon/spices/" + type.slice(0, -1) + "/index.json";
@@ -467,44 +558,43 @@ class SpiceSpy extends Applet.TextIconApplet {
                               this.spices_to_spy[type][""+spices[spice]["uuid"]] &&
                               this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] != null
                             ) ? this.spices_to_spy[type][""+spices[spice]["uuid"]]["issues"] : 0,
-              };
-              //~ _temp_uuids.push(""+spices[spice].uuid);
+              }
             }
           }
         }
       }
     }
-    this.settings.setValue("spices_to_spy", _spices_to_spy);
+    //~ this.settings.setValue("spices_to_spy", _spices_to_spy);
+    this.spices_to_spy = _spices_to_spy;
   } // End of get_spices_to_spy
 
   update_comments() {
-    const interval = 13000; //ms = 13 seconds (the spices website accepts a maximum of 5 requests per minute.)
-    var index = 0;
+    //~ const interval = 13000; //ms = 13 seconds (the spices website accepts a maximum of 5 requests per minute.)
+    //~ var index = 0;
     var http = new HttpLib();
     for (let type of TYPES) {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
         const page = spices[spice]['url']+`#${HTML_COUNT_ID}`;
-        //~ let id = setTimeout(async () => {
-          //~ let response = await http.LoadAsync(page);
-        let id = setTimeout(() => {
-          clearTimeout(id);
-          let response = http.LoadAsync(page);
-          if (response.Success) {
-            let result = COMMENTS_REGEX.exec(response.Data);
-            if (result && result[1]) {
-              let count = parseInt(result[1]);
-              this.spices_to_spy[type][spice]['comments'] = count;
-              //~ this.make_menu();
-            } else {
-              global.logWarning(spices[spice]['uuid'] + ": This spice is cached in the "
-              + ".json file but doesn't actually exist in the "
-              + "Spices now OR the Cinnamon Spices changed the ID "
-              + "(please report if there are 0 items)");
-            }
-          }
-        }, index*interval);
-        index += 1;
+        this.commentsJobsList.push([type, spice, page]);
+        //~ let id = setTimeout(() => {
+          //~ clearTimeout(id);
+          //~ let response = http.LoadAsync(page);
+          //~ if (response.Success) {
+            //~ let result = COMMENTS_REGEX.exec(response.Data);
+            //~ if (result && result[1]) {
+              //~ let count = parseInt(result[1]);
+              //~ this.spices_to_spy[type][spice]['comments'] = count;
+              //~ //this.make_menu();
+            //~ } else {
+              //~ global.logWarning(spices[spice]['uuid'] + ": This spice is cached in the "
+              //~ + ".json file but doesn't actually exist in the "
+              //~ + "Spices now OR the Cinnamon Spices changed the ID "
+              //~ + "(please report if there are 0 items)");
+            //~ }
+          //~ }
+        //~ }, index*interval);
+        //~ index += 1;
       }
     }
   } // End of update_comments
@@ -512,28 +602,29 @@ class SpiceSpy extends Applet.TextIconApplet {
   update_issues() {
     const GET_ISSUES_SCRIPT = SCRIPTS_DIR+"/get-issues.sh"
     const interval = 5000; //ms = 5 seconds.
-    var index = 0;
+    //~ var index = 0;
     for (let type of TYPES) {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
-        let id = setTimeout( () => { //old: async () => {
-          clearTimeout(id);
+        //~ let id = setTimeout( () => { //old: async () => {
+          //~ clearTimeout(id);
           let command = ""+GET_ISSUES_SCRIPT+" "+type+" "+spices[spice]['uuid'];
-          let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
-            if (exitCode == 0) {
-              let _nb_issues = parseInt(stdout);
+          this.issuesJobsList.push(type, spice, command);
+          //~ let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+            //~ if (exitCode == 0) {
+              //~ let _nb_issues = parseInt(stdout);
 
-              if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
-              this.spices_to_spy[type][spice]['issues'] = _nb_issues;
-              this.make_menu();
-            } else if (exitCode == 1) {
-              this.spices_to_spy[type][spice]['issues'] = 0;
-              this.make_menu();
-            }
-            subProcess.send_signal(9);
-          }));
-        }, index*interval);
-        index += 1;
+              //~ if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
+              //~ this.spices_to_spy[type][spice]['issues'] = _nb_issues;
+              //~ this.make_menu();
+            //~ } else if (exitCode == 1) {
+              //~ this.spices_to_spy[type][spice]['issues'] = 0;
+              //~ this.make_menu();
+            //~ }
+            //~ subProcess.send_signal(9);
+          //~ }));
+        //~ }, index*interval);
+        //~ index += 1;
       }
     }
   } // End of update_issues
@@ -645,41 +736,47 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of make_menu
 
   mark_all_as_read() {
-    this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
+    //~ this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
+    this.old_spices_to_spy = this.spices_to_spy;
     //~ this.make_menu();
   } // End of mark_all_as_read
 
   mark_as_read(spice) {
     if (!spice) return;
     this.old_spices_to_spy[spice.type][spice.uuid] = this.spices_to_spy[spice.type][spice.uuid];
-    this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
-    //~ this.make_menu();
+    //~ this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
   } // End of mark_as_read
 
   on_applet_added_to_panel() {
+    this.is_looping = true;
     this.get_user_settings();
     //~ this.make_menu();
 
     this.renew_caches();
-    this.update_authors();
-    this.update_uuids();
-    this.get_spices_to_spy();
-    this.update_issues();
-    this.update_comments();
+    //~ this.update_authors();
+    //~ this.update_uuids();
+    //~ this.get_spices_to_spy();
+    //~ this.update_issues();
+    //~ this.update_comments();
 
-    this.loopId = timeout_add(60000, this.loop.bind(this));
+    this.loopId = timeout_add_seconds(60, this.loop.bind(this));
+    this.jobsLoopId = timeout_add_seconds(13, this.commentsJobs_loop.bind(this));
+    this.issuesLoopId = timeout_add_seconds(6, this.issuesJobs_loop.bind(this));
   }
 
   on_applet_clicked() {
-    this.settings.setValue("spices_to_spy", this.spices_to_spy);
+    //~ this.settings.setValue("spices_to_spy", this.spices_to_spy);
     this.make_menu();
     this.menu.toggle();
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {
-    this.menu.removeAll();
+    this.is_looping = false;
     remove_all_sources();
+    this.menu.removeAll();
     this.loopId = null;
+    this.jobsLoopId = null;
+    this.issuesLoopId = null;
   } // End of on_applet_removed_from_panel
 
   _reload_this_applet() {

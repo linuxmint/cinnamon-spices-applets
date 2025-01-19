@@ -24,7 +24,7 @@
       "type": "section",
       "title": "Options",
       "keys": [
-        "update-interval",
+        "update-interval-hours",
         "standard-opacity",
         "color-on-change",
         "show-icon-in-menu",
@@ -50,13 +50,17 @@
     }
   },
   "update-interval": {
-    "type": "spinbutton",
+    "type": "generic",
+    "default": -1
+  },
+  "update-interval-hours": {
+    "type": "scale",
     "description": "Update interval",
-    "units": "minutes",
-    "default": 240,
-    "min": 15,
-    "max": 2880,
-    "step": 5
+    "units": "hours",
+    "default": 4.0,
+    "min": 0.5,
+    "max": 24.0,
+    "step": 0.5
   },
   "standard-opacity": {
     "type": "spinbutton",
@@ -181,13 +185,21 @@
   "spices_to_spy": {
     "type": "generic",
     "default": {
-
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
     }
   },
   "old_spices_to_spy": {
     "type": "generic",
     "default": {
-
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
     }
   }
 }

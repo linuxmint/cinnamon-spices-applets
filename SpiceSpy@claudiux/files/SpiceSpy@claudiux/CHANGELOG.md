@@ -1,3 +1,7 @@
+### v4.2.0~20250119
+  * Better start.
+  * Avoids usage of Lang.bind() in code.
+
 ### v4.1.1~20250116
   * mainloopTools library: improvements.
 
