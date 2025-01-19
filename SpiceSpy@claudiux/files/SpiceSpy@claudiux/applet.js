@@ -646,11 +646,21 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     if (this.spices_to_spy) {
       let read_all = new PopupMenu.PopupIconMenuItem(_("Mark all as read"), "object-select", St.IconType.SYMBOLIC);
-      read_all.connect("activate", this.mark_all_as_read.bind(this));
+      read_all.connect("activate",
+        () => {
+          this.menu.toggle(true);
+          this.mark_all_as_read();
+        }
+      );
       this.menu.addMenuItem(read_all);
 
       let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh", St.IconType.SYMBOLIC);
-      refresh.connect("activate", this.loop.bind(this));
+      refresh.connect("activate",
+        () => {
+          this.menu.toggle(true);
+          this.loop();
+        }
+      );
       this.menu.addMenuItem(refresh);
 
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -729,7 +739,12 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     let config_button = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
-    config_button.connect('activate', Lang.bind(this, this.configureApplet));
+    config_button.connect('activate',
+      () => {
+        this.menu.toggle(true);
+        this.configureApplet();
+      }
+    );
     this.menu.addMenuItem(config_button);
 
     this.updateUI(total_diff_score, total_diff_comments, total_diff_translations);
