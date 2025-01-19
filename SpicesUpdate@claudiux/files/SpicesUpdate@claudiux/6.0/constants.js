@@ -181,7 +181,7 @@ const EXP2 = {
   "actions": _("If you want to get the latest version of a nemo action now, check both boxes.")
 }
 
-const EXP3 = _("When all your choices are made, click the Refresh button.");
+const EXP3 = _("For private Spices, both boxes will be considered unchecked.") + "\n" + _("When all your choices are made, click the Refresh button.");
 
 module.exports = {
   UUID,

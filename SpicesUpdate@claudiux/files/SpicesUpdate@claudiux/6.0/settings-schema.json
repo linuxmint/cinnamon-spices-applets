@@ -205,12 +205,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_applets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_applets"
   },
   "unprotected_applets": {
     "type": "list",
@@ -265,12 +265,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_desklets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_desklets"
   },
   "unprotected_desklets": {
     "type": "list",
@@ -325,12 +325,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_extensions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_extensions"
   },
   "unprotected_extensions": {
     "type": "list",
@@ -385,12 +385,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_themes": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_themes"
   },
   "unprotected_themes": {
     "type": "list",
@@ -445,12 +445,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_actions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_actions"
   },
   "unprotected_actions": {
     "type": "list",

@@ -38,6 +38,10 @@ The highly configurable ** Spices Update ** applet can play these roles:
 | Network monitoring | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
 | Manage Actions for nemo | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
 
+### Cinnamon 6.4
+
+Do not check private Spices. A private Spice is a Spice that is not listed on the Cinnamon Spices website.
+
 ### Cinnamon 6.0
 
 Update all Spices from a category (Applets, Desklets...) using the Update button in Cinnamon settings for this category.
