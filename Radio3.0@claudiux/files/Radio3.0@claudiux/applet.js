@@ -29,7 +29,7 @@ const FileDialog = imports.misc.fileDialog;
 //ModalDialog:
 const ModalDialog = imports.ui.modalDialog;
 //Gio:
-const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, DataInputStream, UnixInputStream, Settings } = imports.gi.Gio;
+const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, DataInputStream, UnixInputStream, Settings, Cancellable } = imports.gi.Gio;
 //St:
 const { Icon, IconType, Button, Widget, ScrollView, Align, Label, BoxLayout, Bin, Side, Clipboard, ClipboardType, TextDirection } = imports.gi.St;
 //Tooltips:
@@ -836,7 +836,8 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     }
 
     this.menu = new PopupSubMenu(this.actor, this._triangle);
-    this._signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+    //~ this._signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+    this._signals.connect(this.menu, 'open-state-changed', () => { this._subMenuOpenStateChanged(); });
   }
 
   _subMenuOpenStateChanged(menu, open) {
@@ -939,7 +940,8 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
               if (this._signals.isConnected('active-changed', menuItem.menu))
                 this._signals.disconnect('active-changed', menuItem.menu);
               if (this._signals.isConnected('open-state-changed', menuItem.menu))
-                this._signals.disconnect('open-state-changed', this);
+                this._signals.disconnect('open-state-changed', menuItem.menu);
+                //~ this._signals.disconnect('open-state-changed', this);
             }
             if (menuItem) {
               if (this._signals.isConnected('activate', menuItem))
@@ -995,9 +997,9 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
                     //~ }
                 //~ }
             }, this);
-            this._signals.connect(menuItem, 'destroy', () => {
-              logDebug('Destroying PopupSubMenuMenuItem');
-            });
+            //~ this._signals.connect(menuItem, 'destroy', () => {
+              //~ logDebug('Destroying PopupSubMenuMenuItem');
+            //~ });
         } else if (menuItem instanceof PopupSeparatorMenuItem) {
             this._connectItemSignals(menuItem);
 
@@ -1008,9 +1010,9 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             let updateSeparatorVisibility = this._updateSeparatorVisibility.bind(this, menuItem);
             this._signals.connect(this, 'open-state-changed', updateSeparatorVisibility);
 
-            this._signals.connect(menuItem, 'destroy', () => {
-              logDebug('Destroying PopupSeparatorMenuItem');
-            });
+            //~ this._signals.connect(menuItem, 'destroy', () => {
+              //~ logDebug('Destroying PopupSeparatorMenuItem');
+            //~ });
         } else if (menuItem instanceof PopupBaseMenuItem)
             this._connectItemSignals(menuItem);
         else
@@ -1343,7 +1345,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("desklet-is-activated", "desklet_is_activated");
     //~ this.settings.bind("desklet-show-on-desktop", "show_desklet", this.switch_showDesklet.bind(this));
     this.show_desklet = false; // forced
-    this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
+    this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", () => { this.volume_near_icon() });
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
     this.settings.bind("volume-magnetic-on", "magnetic25On");
@@ -1360,6 +1362,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("volume-show-osd-starting-radio","showOSDonStartup");
     this.settings.bind("volume-show-osd", "volume_show_osd");
     this.showOSD = this.volume_show_osd && this.showOSDonStartup;
+    this.settings.bind("show-percent-char-in-osd", "show_percent");
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
@@ -1786,8 +1789,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.actor.set_opacity(255);
       this.set_color();
     }
-    if (this.actor.get_stage() != null)
-      this.actor.queue_relayout();
+    //~ if (this.actor.get_stage() != null)
+      //~ this.actor.queue_relayout();
   }
 
   set_radio_hashtable() {
@@ -1895,7 +1898,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (file.query_exists(null)) {
       try {
-        this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, null);
+        //~ this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, null);
+        this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
         //this.titleMonitor.set_rate_limit(300); // 300 ms (default value: 800)
 
         this.titleMonitorId = this.titleMonitor.connect('changed', Lang.bind(this, this._on_mpv_title_changed));
@@ -1913,7 +1917,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //if (file.query_exists(null)) {
       try {
-        this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        //~ this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
         //this.r30stopMonitor.set_rate_limit(300); // 300 ms (default value: 800)
 
         this.r30stopMonitorId = this.r30stopMonitor.connect('changed', Lang.bind(this, this._on_r30stop_changed));
@@ -1931,7 +1936,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //if (file.query_exists(null)) {
       try {
-        this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        //~ this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
         //this.r30nextMonitor.set_rate_limit(300); // 300 ms (default value: 800)
 
         this.r30nextMonitorId = this.r30nextMonitor.connect('changed', Lang.bind(this, this.on_next_event));
@@ -1949,7 +1955,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //if (file.query_exists(null)) {
       try {
-        this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        //~ this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
         //this.r30previousMonitor.set_rate_limit(300); // 300 ms (default value: 800)
 
         this.r30previousMonitorId = this.r30previousMonitor.connect('changed', Lang.bind(this, this.on_previous_event));
@@ -2068,7 +2075,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (file.query_exists(null)) {
       try {
-        this.recMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, null);
+        //~ this.recMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, null);
+        this.recMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, new Cancellable());
         this.recMonitorId = this.recMonitor.connect('changed', Lang.bind(this, () => this._on_rec_folder_changed()));
       } catch(e) {
         logError("Unable to monitor %s!".format(RADIO30_MUSIC_DIR), e)
@@ -2105,7 +2113,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (file.query_exists(null)) {
       try {
         //this.jobsMonitor = file.monitor_directory(0, null);
-        this.jobsMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, null); //FileMonitorFlags.NONE
+        //~ this.jobsMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, null); //FileMonitorFlags.NONE
+        this.jobsMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, new Cancellable()); //FileMonitorFlags.NONE
         //this.jobsMonitor.set_rate_limit(300); // 300 ms (default value: 800)
         this.jobsMonitorId = this.jobsMonitor.connect('changed', Lang.bind(this, this._on_jobs_dir_changed));
       } catch(e) {

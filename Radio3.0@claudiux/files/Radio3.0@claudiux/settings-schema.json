@@ -56,6 +56,7 @@
       "sections": [
         "sectionBehaviorStartUp",
         "sectionBehaviorVolumeStep",
+        "sectionBehaviorOSD",
         "sectionBehaviorTooltip",
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
@@ -216,9 +217,16 @@
       "title": "Volume step",
       "keys": [
         "volume-step",
-        "volume-magnetic-on",
+        "volume-magnetic-on"
+      ]
+    },
+    "sectionBehaviorOSD": {
+      "type": "section",
+      "title": "OSD",
+      "keys": [
         "volume-show-osd",
-        "volume-show-osd-starting-radio"
+        "volume-show-osd-starting-radio",
+        "show-percent-char-in-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -919,6 +927,12 @@
     "dependency": "volume-show-osd",
     "default": true,
     "description": "Show volume OSD when changing radio station"
+  },
+  "show-percent-char-in-osd": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": false,
+    "description": "Show '%' in OSD"
   },
   "show-title-and-version": {
     "type": "switch",
