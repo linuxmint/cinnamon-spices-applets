@@ -20,7 +20,9 @@
       "type": "page",
       "title": "Icon",
       "sections": [
-        "sectionIcon1"
+        "sectionIcon1",
+        "sectionIcon2",
+        "sectionIcon3"
       ]
     },
     "page_sound": {
@@ -77,19 +79,32 @@
     },
     "sectionIcon1": {
       "type": "section",
-      "title": "Icon",
+      "title": "Icon appearance",
       "keys": [
         "showalbum",
         "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
-        "showMicUnmutedOnIcon",
+        "showMicUnmutedOnIcon"
+      ]
+    },
+    "sectionIcon2": {
+      "type": "section",
+      "title": "Icon colors",
+      "keys": [
         "adaptColor",
         "color0_100",
         "color101_115",
         "color116_130",
         "color131_150",
         "resetColorsButton"
+      ]
+    },
+    "sectionIcon3": {
+      "type": "section",
+      "title": "Scrolling",
+      "keys": [
+        "reverseScrolling"
       ]
     },
     "sectionSound1": {
@@ -111,7 +126,10 @@
       "title": "OSD",
       "keys": [
         "showMediaKeysOSD",
-        "showOSDonStartup"
+        "showOSDonStartup",
+        "showVolumeValue",
+        "showPercent",
+        "showBarLevel"
       ]
     },
     "sectionSound3": {
@@ -382,6 +400,12 @@
     "description": "Set colors to default values (yellow, orange, red)",
     "callback": "_reset_colors"
   },
+  "reverseScrolling": {
+    "type": "switch",
+    "description": "Reverse scrolling effect",
+    "tooltip": "",
+    "default": false
+  },
   "alwaysCanChangeMic": {
     "type": "switch",
     "description": "Always allow microphone to be reactivated",
@@ -403,6 +427,24 @@
     "type": "switch",
     "description": "Show volume level in OSD on startup",
     "default": false
+  },
+  "showVolumeValue": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show volume level in OSD",
+    "default": true
+  },
+  "showPercent": {
+    "type": "switch",
+    "dependency": "showVolumeValue",
+    "description": "Show '%' in OSD",
+    "default": false
+  },
+  "showBarLevel": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show bar level in OSD",
+    "default": true
   },
   "volumeSoundFile": {
     "type": "soundfilechooser",

@@ -15,10 +15,13 @@ This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound a
   * **The volume step can be redefined** (from 1% to 10%).
   * **All multiples of 25% (or only 100%) can be magnetized.**
   * The **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
+  * The **OSD** is compatible with Cinnamon 6.4 (use of horizontal OSD is not recommended).
 
 **The song's cover art** can be displayed when it is embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
 
 **You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control the microphone volume.**
+
+You can reverse this scrolling effect at will. (Only available from Cinnamon 6.4 and version 8.0.0 of this applet).
 
 **The icon can be colored according to the volume when it exceeds 100%.**
 
