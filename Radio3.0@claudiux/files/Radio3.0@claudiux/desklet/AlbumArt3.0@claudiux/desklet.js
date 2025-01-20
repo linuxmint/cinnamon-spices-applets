@@ -87,8 +87,9 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         if (this.dir_monitor_id != null) return;
 
         this.dir_file = Gio.file_new_for_uri(this.dir);
-        this.dir_monitor = this.dir_file.monitor_directory(0, null);
-        this.dir_monitor_id = this.dir_monitor.connect('changed', Lang.bind(this, this.dir_monitor_loop));
+        this.dir_monitor = this.dir_file.monitor_directory(0, new Gio.Cancellable());
+        //~ this.dir_monitor_id = this.dir_monitor.connect('changed', Lang.bind(this, this.dir_monitor_loop));
+        this.dir_monitor_id = this.dir_monitor.connect('changed', () => { this.dir_monitor_loop(); });
     }
 
     dir_monitor_loop() {
@@ -309,7 +310,8 @@ class AlbumArtRadio30 extends Desklet.Desklet {
         try {
             let image = St.TextureCache.get_default().load_uri_async(filePath, this.width, this.height);
 
-            image._notif_id = image.connect('notify::size', Lang.bind(this, this._size_pic));
+            //~ image._notif_id = image.connect('notify::size', Lang.bind(this, this._size_pic));
+            image._notif_id = image.connect('notify::size', (image) => { this._size_pic(image); });
 
             return image;
         } catch (x) {
