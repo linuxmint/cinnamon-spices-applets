@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-20 02:52+0100\n"
-"PO-Revision-Date: 2025-01-03 17:25-0300\n"
+"PO-Revision-Date: 2025-01-20 12:02-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -236,9 +236,8 @@ msgid "Install playerctl"
 msgstr "Instalar playerctl"
 
 #. 6.4/applet.js:190 6.4/applet.js:1848 6.4/applet.js:1853
-#, fuzzy
 msgid "%"
-msgstr "9%"
+msgstr "%"
 
 #. metadata.json->name
 msgid "Enhanced Sound applet"
@@ -995,38 +994,35 @@ msgstr ""
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Apariencia del icono"
 
 #. 6.4->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Icon colors"
-msgstr "Color del icono: 0%-100%"
+msgstr "Color de iconos"
 
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Desplazamiento"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Efecto de desplazamiento inverso"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys osd"
 msgstr "Mostrar o no las teclas multimedia en pantalla"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "Mostrar nivel de volumen en OSD al inicio"
+msgstr "Mostrar nivel de volumen en OSD"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Mostrar '%' en OSD"
 
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "Mostrar nivel de volumen en OSD al inicio"
+msgstr "Mostrar nivel de barra en OSD"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
