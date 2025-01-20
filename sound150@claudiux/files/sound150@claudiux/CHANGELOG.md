@@ -1,3 +1,7 @@
+### v8.0.0~20250119
+  * Major changes for OSD, icon scrolling and stability.
+  * Using mainloopTools library to manage loops.
+
 ### v7.5.0~20250111
   * Improved management of loops.
 
