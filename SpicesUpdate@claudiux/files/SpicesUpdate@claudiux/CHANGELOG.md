@@ -1,3 +1,6 @@
+### v7.6.1~20250120
+  * Fixes #6776.
+
 ### v7.6.0~20250119
   * Do not check private Spices. A private Spice is a Spice that is not listed on the Cinnamon Spices website.
   * Code: Avoids using Lang.bind() in response to signals.
