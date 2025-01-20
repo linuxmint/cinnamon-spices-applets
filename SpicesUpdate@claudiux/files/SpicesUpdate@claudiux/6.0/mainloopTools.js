@@ -80,9 +80,7 @@ function setTimeout(callback, ms) {
 function clearTimeout(id) {
     if (id) {
       //~ Mainloop.source_remove(id);
-      GLib.source_remove(id);
-      const pos = _sourceIds.indexOf(id);
-      if (pos > -1) _sourceIds.splice(pos, 1);
+      source_remove(id);
     }
 }
 
@@ -123,9 +121,7 @@ function setInterval(callback, ms) {
 function clearInterval(id) {
     if (id) {
       //~ Mainloop.source_remove(id);
-      GLib.source_remove(id);
-      const pos = _sourceIds.indexOf(id);
-      if (pos > -1) _sourceIds.splice(pos, 1);
+      source_remove(id);
     }
 };
 

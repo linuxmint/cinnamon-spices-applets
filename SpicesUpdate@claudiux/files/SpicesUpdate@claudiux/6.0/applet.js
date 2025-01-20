@@ -275,19 +275,14 @@ class SpicesUpdate extends IconApplet {
         // SignalManager
         this.signals = new SignalManager(null);
         this._signalsConnectId = this.signals.connect(global, "scale-changed", () => this.updateUI());
-
-        // Run loop to refresh caches:
-        this.disable_system_auto_update();
-        let stoId = setTimeout( () => {
-            clearTimeout(stoId);
-            this._loop_refresh_cache();
-            stoId = null;
-        }, 20000); // Wait 20 seconds for mintupdate to run correctly.
-
-        //this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
     } // End of constructor
 
     _loop_refresh_cache() {
+        if (this.isLoopingForRefreshCache) {
+            this.isLoopingForRefreshCache = !this.applet_running;
+            return this.applet_running;
+        }
+        this.isLoopingForRefreshCache = true;
         source_remove(this.loopRefreshId);
         this.loopRefreshId = null;
         var is_to_download = false;
@@ -321,8 +316,8 @@ class SpicesUpdate extends IconApplet {
         }
         //~ is_to_download = undefined;
 
-        if (this.applet_running)
-            this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache());
+        this.isLoopingForRefreshCache = false;
+        return this.applet_running;
     } // End of _loop_refresh_cache
 
     get_SU_settings() {
@@ -1841,10 +1836,13 @@ class SpicesUpdate extends IconApplet {
 
     disable_system_auto_update() {
         try {
+            // /com/linuxmint/updates/auto-update-cinnamon-spices
             let _SETTINGS_SCHEMA = "com.linuxmint.updates";
-            let _SETTINGS_KEY = "auto-update-cinnamon-spices";
+            let _SETTINGS_KEYS = ["auto-update-cinnamon-spices", "show-cinnamon-updates"];
             let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
-            _interface_settings.set_boolean(_SETTINGS_KEY, false);
+            for (let _SETTINGS_KEY of _SETTINGS_KEYS)
+                _interface_settings.set_boolean(_SETTINGS_KEY, false);
+
         } catch(e) {
             // The used distrib doesn't have mintupdate installed: nothing to do.
         }
@@ -2529,6 +2527,19 @@ class SpicesUpdate extends IconApplet {
 
     on_applet_added_to_panel() {
         this.get_default_icon_color();
+
+        // Run loop to refresh caches:
+        this.disable_system_auto_update();
+        this.isLoopingForRefreshCache = false;
+        let stoId = setTimeout( () => {
+            if (stoId)
+                clearTimeout(stoId);
+            if (this.applet_running)
+                this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache());
+            this._loop_refresh_cache();
+            stoId = null;
+        }, 60000); // Wait 60 seconds for mintupdate to run correctly.
+
         // Events:
         this._connectIds = [];
         this._connectIds.push(this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event)));
