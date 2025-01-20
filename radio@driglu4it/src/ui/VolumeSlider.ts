@@ -36,6 +36,7 @@ export function createVolumeSlider() {
 
   const icon = new Icon({
     icon_type: IconType.SYMBOLIC,
+    style: "icon-size: 16px;",
     style_class: POPUP_ICON_CLASS,
     reactive: true,
   });
