@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-20 21:00+0100\n"
-"PO-Revision-Date: 2025-01-10 09:45+0100\n"
+"PO-Revision-Date: 2025-01-22 21:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -775,7 +775,7 @@ msgstr "Lautstärkeschritt"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -1252,7 +1252,7 @@ msgstr "Lautstärke-OSD beim Ändern des Radiosenders anzeigen"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "'%' im OSD anzeigen"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
