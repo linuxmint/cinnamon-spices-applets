@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2025-01-20 21:00+0100\n"
-"PO-Revision-Date: 2025-01-14 14:13+0000\n"
+"PO-Revision-Date: 2025-01-22 17:33+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -769,7 +769,7 @@ msgstr "Þrep hljóðstyrks"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD-stjórntexti"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -1237,7 +1237,7 @@ msgstr "Birta OSD-stjórntæki fyrir hljóðstyrk þegar skipt er um stöð"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Birta '%' í OSD-stjórntexta"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
