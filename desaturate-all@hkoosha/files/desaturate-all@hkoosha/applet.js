@@ -1,4 +1,7 @@
 const Applet = imports.ui.applet;
+const Lang = imports.lang;
+const Settings = imports.ui.settings;
+const UUID = "desaturate-all@hkoosha";
 const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
 
@@ -18,6 +21,11 @@ MyApplet.prototype = {
 
         this.effect = new Clutter.DesaturateEffect();
         this.set_applet_icon_symbolic_name("applications-graphics");
+
+        this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
+        this.settings.bind("keybinding", "keybinding", this.on_keybinding_changed);
+
+        this.on_keybinding_changed();
     },
 
     _toggleEffect: function() {
@@ -30,6 +38,10 @@ MyApplet.prototype = {
 
     on_applet_clicked: function() {
         this._toggleEffect();
+    },
+
+    on_keybinding_changed() {
+        Main.keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this._toggleEffect));
     }
 };
 
