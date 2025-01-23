@@ -4,7 +4,7 @@ This Cinnamon applet brings the ability to automatically switch between dark and
 
 ## Features
 
-- Dump system themes and desktop background settings in one click to take advantage of the Cinnamon settings menu.
+- Dump system themes and desktop background settings as light/dark presets in one click in order to keep using the Cinnamon settings menu.
 - Sync location from the system `Region` and `City` settings using a local database to automatically determine the geographical coordinates.
 - Enter manually any geographical coordinates if needed.
 - Always sync instantaneously with external changes of color scheme, region/city and time (useful in e.g. after a sleep wake up).

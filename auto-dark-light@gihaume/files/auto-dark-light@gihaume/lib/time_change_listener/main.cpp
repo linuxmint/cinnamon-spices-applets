@@ -1,5 +1,6 @@
 #include "time_change_listener.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
