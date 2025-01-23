@@ -1,3 +1,7 @@
+## 1.2.2 - 23.01.2025
+
+- Added missing import in `time_change_listener/main.cpp` for GCC 14.2
+
 ## 1.2.1 - 22.10.2024
 
 - Custom commands launching feature:
