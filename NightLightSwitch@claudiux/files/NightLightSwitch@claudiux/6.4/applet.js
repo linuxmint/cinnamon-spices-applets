@@ -1,6 +1,6 @@
 const Applet = imports.ui.applet;
 const Gio = imports.gi.Gio;
-const GWeather = imports.gi.GWeather;
+//~ const GWeather = imports.gi.GWeather;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const St = imports.gi.St;
@@ -176,21 +176,22 @@ class NightLightSwitch extends Applet.IconApplet {
     lat = lat.unpack(); // type (d)
     lon = lon.unpack(); // type (d)
     //~ global.log("lat: "+lat+" - lon: "+lon);
-    if (Math.round(lat) == 91 || Math.round(lon) == 181) {
-      this.sunrise = 6;
-      this.sunset = 12;
-    } else {
-      this.weather = GWeather.Info.new(GWeather.Location.new_detached("local", null, lat, lon));
-      let sunrise = this.weather.get_sunrise().trim().split(":");
-      let sunset = this.weather.get_sunset().trim().split(":");
-      //~ global.log("sunrise: " + sunrise);
-      //~ global.log("sunset: " + sunset);
-      this.sunrise = parseInt(sunrise[0][0])*10+parseInt(sunrise[0][1])+(parseInt(sunrise[0][3])*10+parseInt(sunrise[0][4]))/60;
-      this.sunset = parseInt(sunset[0][0])*10+parseInt(sunset[0][1])+(parseInt(sunset[0][3])*10+parseInt(sunset[0][4]))/60;
-    }
-    this.sunrise = Math.round(this.sunrise * 4)/4;
-    this.sunset = Math.round(this.sunset * 4)/4;
-    //~ global.log("sunrise: " + this.sunrise + " - sunset: " + this.sunset);
+
+    //~ if (Math.round(lat) == 91 || Math.round(lon) == 181) {
+      //~ this.sunrise = 6;
+      //~ this.sunset = 12;
+    //~ } else {
+      //~ this.weather = GWeather.Info.new(GWeather.Location.new_detached("local", null, lat, lon));
+      //~ let sunrise = this.weather.get_sunrise().trim().split(":");
+      //~ let sunset = this.weather.get_sunset().trim().split(":");
+      //~ //global.log("sunrise: " + sunrise);
+      //~ //global.log("sunset: " + sunset);
+      //~ this.sunrise = parseInt(sunrise[0][0])*10+parseInt(sunrise[0][1])+(parseInt(sunrise[0][3])*10+parseInt(sunrise[0][4]))/60;
+      //~ this.sunset = parseInt(sunset[0][0])*10+parseInt(sunset[0][1])+(parseInt(sunset[0][3])*10+parseInt(sunset[0][4]))/60;
+    //~ }
+    //~ this.sunrise = Math.round(this.sunrise * 4)/4;
+    //~ this.sunset = Math.round(this.sunset * 4)/4;
+    //~ //global.log("sunrise: " + this.sunrise + " - sunset: " + this.sunset);
 
     let items = this._applet_context_menu._getMenuItems();
     if (this.context_menu_item_configure == null) {
