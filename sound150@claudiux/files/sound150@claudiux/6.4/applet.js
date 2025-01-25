@@ -1,5 +1,5 @@
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
+//~ const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Interfaces = imports.misc.interfaces;
 const Util = imports.misc.util;
@@ -7,6 +7,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
+//~ const PopupMenu = require("./lib/popupMenu");
 const GLib = imports.gi.GLib;
 const Cogl = imports.gi.Cogl; //Cogl
 const Gdk = imports.gi.Gdk;
@@ -23,7 +24,7 @@ const Pango = imports.gi.Pango;
 const ModalDialog = imports.ui.modalDialog;
 
 let HtmlEncodeDecode = require("./lib/htmlEncodeDecode");
-const { xml2json } = require("lib/xml2json.min");
+const { xml2json } = require("./lib/xml2json.min");
 const {
   _sourceIds,
   timeout_add_seconds,
@@ -1522,8 +1523,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 change = true;
             }
         } else if(metadata["xesam:url"]) {
-            //~ await Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
-            Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
+            Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
                 if (exitCode === 0) {
                     this._trackCoverFile = "file://"+stdout;
                     if (this._oldTrackCoverFile != this._trackCoverFile) {
@@ -1550,7 +1550,7 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = null;
                     change = true;
                 }
-            }));
+            });
         } else {
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
@@ -2034,7 +2034,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted-symbolic", St.IconType.SYMBOLIC);
         this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted-symbolic", St.IconType.SYMBOLIC);
-        this._applet_context_menu.addMenuItem(this.mute_out_switch);
+        this._applet_context_menu.addMenuItem(this.mute_out_switch); //FIXME
         this._applet_context_menu.addMenuItem(this.mute_in_switch);
         if (!this.alwaysCanChangeMic)
             this.mute_in_switch.actor.hide();
@@ -2175,8 +2175,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _setKeybinding() {
-        Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
-        Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, Lang.bind(this, this._switchToNextPlayer));
+        Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, () => { this._openMenu() });
+        Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, () => { this._switchToNextPlayer() });
 
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
@@ -2848,7 +2848,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._playerctl) {
             return this._artLooping;
         }
-        let subProcess = Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
+        let subProcess = Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this._trackCoverFile = "file://"+stdout;
                 let cover_path = decodeURIComponent(this._trackCoverFile);
@@ -2874,7 +2874,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._trackCoverFile = null;
             }
             subProcess.send_signal(9);
-        }));
+        });
         return this._artLooping;
     }
 

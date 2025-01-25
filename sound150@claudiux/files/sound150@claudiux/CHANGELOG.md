@@ -1,3 +1,6 @@
+### v8.0.1~20250125
+  * Increases stability with Cinnamon 6.4: Removes Lang.bind() calls.
+
 ### v8.0.0~20250119
   * Major changes for OSD, icon scrolling and stability.
   * Using mainloopTools library to manage loops.
