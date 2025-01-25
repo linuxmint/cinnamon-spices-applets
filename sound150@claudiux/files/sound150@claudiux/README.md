@@ -1,5 +1,8 @@
 # Enhanced Sound applet
 
+ ▶︎ •၊၊||၊|။||||| 0:10 
+
+
 ## Summary
 
 This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound applet.
