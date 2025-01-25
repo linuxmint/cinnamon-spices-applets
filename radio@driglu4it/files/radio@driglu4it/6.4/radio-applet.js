@@ -4185,7 +4185,7 @@ function downloadWithYouTubeDl(props) {
             return;
         }
         if (stdout) {
-            onSuccess();
+            onSuccess(downloadCommand);
             return;
         }
         if (stderr) {
@@ -4215,7 +4215,7 @@ function downloadWithYtDlp(props) {
             return;
         }
         if (stdout) {
-            onSuccess();
+            onSuccess(downloadCommand);
             return;
         }
         if (stderr) {
@@ -4242,12 +4242,17 @@ const { File: YoutubeDownloadManager_File, FileCopyFlags, FileQueryInfoFlags } =
 const notifyYouTubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
     notifyError(`Couldn't download Song from YouTube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
-    \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
+    \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead.
+    \nReview the logs for more information`, errorMessage, {
         additionalBtns: [
             {
                 text: "View Installation Instruction",
                 onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `),
             },
+            {
+                text: "View Logs",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ~/.xsession-errors`),
+            }
         ],
     });
 };
@@ -4305,28 +4310,25 @@ function downloadSongFromYouTube(title) {
             downloadProcesses = downloadProcesses.filter((downloadingSong) => downloadingSong.songTitle !== title);
             downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
         },
-        onSuccess: () => {
-            try {
-                moveFileFromTmpDir({
-                    targetDirPath: music_dir_absolut,
-                    tmpDirPath,
-                    onFileMoved: (props) => {
-                        const { fileAlreadyExist, targetFilePath } = props;
-                        updateFileModifiedTime(targetFilePath);
-                        notifyYouTubeDownloadFinished({
-                            downloadPath: targetFilePath,
-                            fileAlreadyExist,
-                        });
-                    },
-                });
-            }
-            catch (error) {
-                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : error;
-                notifyYouTubeDownloadFailed({
-                    youtubeCli,
-                    errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}`,
-                });
-            }
+        onSuccess: (downloadCommand) => {
+            moveFileFromTmpDir({
+                targetDirPath: music_dir_absolut,
+                tmpDirPath,
+                onFileMoved: (props) => {
+                    const { fileAlreadyExist, targetFilePath } = props;
+                    updateFileModifiedTime(targetFilePath);
+                    notifyYouTubeDownloadFinished({
+                        downloadPath: targetFilePath,
+                        fileAlreadyExist,
+                    });
+                },
+                onError: (errorMessage) => {
+                    notifyYouTubeDownloadFailed({
+                        youtubeCli,
+                        errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}. The tmp dir Path is: ${tmpDirPath}. The download command is: ${downloadCommand}`,
+                    });
+                },
+            });
         },
     };
     const { cancel } = youtubeCli === "youtube-dl"
@@ -4337,24 +4339,32 @@ function downloadSongFromYouTube(title) {
     downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
 }
 const moveFileFromTmpDir = (props) => {
-    var _a;
-    const { tmpDirPath, targetDirPath, onFileMoved } = props;
-    const fileName = (_a = YoutubeDownloadManager_File.new_for_path(tmpDirPath)
-        .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
-        .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
-    if (!fileName) {
-        throw new Error(`filename couldn't be determined`);
+    var _a, _b;
+    const { tmpDirPath, targetDirPath, onFileMoved, onError } = props;
+    try {
+        const fileName = (_a = YoutubeDownloadManager_File.new_for_path(tmpDirPath)
+            .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
+            .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
+        if (!fileName) {
+            throw new Error(`filename couldn't be determined.This seems to be a problem with the used Youtube Download Cli tool.`);
+        }
+        const tmpFile = YoutubeDownloadManager_File.new_for_path(`${tmpDirPath}/${fileName}`);
+        if ((_b = tmpFile.get_path()) === null || _b === void 0 ? void 0 : _b.endsWith(".webp")) {
+            throw new Error("Only the cover image has been downloaded. This seems to be a problem with the used Youtube Download Cli tool.");
+        }
+        const targetFilePath = `${targetDirPath}/${fileName}`;
+        const targetFile = YoutubeDownloadManager_File.parse_name(targetFilePath);
+        if (targetFile.query_exists(null)) {
+            onFileMoved({ targetFilePath, fileAlreadyExist: true });
+            return;
+        }
+        tmpFile.move(YoutubeDownloadManager_File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
+        onFileMoved({ targetFilePath, fileAlreadyExist: false });
     }
-    const tmpFilePath = `${tmpDirPath}/${fileName}`;
-    const tmpFile = YoutubeDownloadManager_File.new_for_path(tmpFilePath);
-    const targetFilePath = `${targetDirPath}/${fileName}`;
-    const targetFile = YoutubeDownloadManager_File.parse_name(targetFilePath);
-    if (targetFile.query_exists(null)) {
-        onFileMoved({ targetFilePath, fileAlreadyExist: true });
-        return;
+    catch (error) {
+        const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : error;
+        onError(errorMessage);
     }
-    tmpFile.move(YoutubeDownloadManager_File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
-    onFileMoved({ targetFilePath, fileAlreadyExist: false });
 };
 const getCurrentDownloadingSongs = () => {
     return downloadProcesses.map((downloadingSong) => downloadingSong.songTitle);
