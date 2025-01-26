@@ -1,3 +1,7 @@
+### v4.0.3~20250126
+  * Improved code. Greater stability.
+  * Change of Fan symbol.
+
 ### v4.0.2~20250116
   * mainloopTools library: improvements.
 

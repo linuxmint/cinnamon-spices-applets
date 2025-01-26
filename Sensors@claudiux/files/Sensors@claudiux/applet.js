@@ -8,7 +8,6 @@ const {AppletSettings} = imports.ui.settings;
 //const Gettext = imports.gettext;
 const Extension = imports.ui.extension; // Needed to reload this applet
 const ModalDialog = imports.ui.modalDialog;
-const Lang = imports.lang;
 //util
 const {spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, unref} = require("./lib/util");
 //to-string
@@ -51,7 +50,7 @@ const {SensorsReaper} = require("./lib/sensorsReaper");
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
 const C_TEMP = '⦿'; //'🌡'
-const C_FAN = '🤂';
+const C_FAN = '𖣘'; //'🤂'
 const C_VOLT = '🗲'; //'🔌'
 const C_INTRU = '⮿';
 const DEFAULT_APPLET_LABEL = [C_TEMP, C_FAN, C_VOLT, C_INTRU];
@@ -213,14 +212,14 @@ class SensorsApplet extends Applet.TextApplet {
     spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
     this.sudo_or_wheel = "none";
-    let subProcess = spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO("/bin/bash -c 'groups'", (out, err, exitCode) => {
       if (exitCode == 0) {
         let groups = out.trim().split(' ');
         if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
         if (groups.indexOf("sudo") > -1) this.sudo_or_wheel = "sudo";
       }
       subProcess.send_signal(9);
-    }));
+    });
 
     // Detect language for numeric format:
     this.num_lang = this._get_lang();
@@ -531,7 +530,7 @@ class SensorsApplet extends Applet.TextApplet {
         let _temp;
         //~ if (disk["value"])
           //~ _temp = disk["value"];
-        let subProcess = spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+        let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
           if (exitCode === 0) {
             //~ this._temp[_disk_name] = stdout;
 
@@ -556,7 +555,7 @@ class SensorsApplet extends Applet.TextApplet {
             }
           }
           subProcess.send_signal(9);
-        }));
+        });
       }
     }
   }
@@ -564,7 +563,7 @@ class SensorsApplet extends Applet.TextApplet {
   populate_temp_disks_in_settings() {
     let command = SCRIPTS_DIR+"/get_disk_list.sh";
     var temp_disks = this.temp_disks;
-    let subProcess = spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+    let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode === 0) {
         let out = stdout.trim();
         let disks = out.split(" ");
@@ -579,7 +578,7 @@ class SensorsApplet extends Applet.TextApplet {
         this.temp_disks = temp_disks
       };
       subProcess.send_signal(9);
-    }))
+    });
   }
 
   populate_fan_sensors_in_settings(force = true) {
@@ -1311,7 +1310,6 @@ class SensorsApplet extends Applet.TextApplet {
 
     // Button suspend
     let suspend_switch = new PopupMenu.PopupSwitchMenuItem(_("Suspend Sensors"), this.suspended);
-    //~ suspend_switch.connect("toggled", Lang.bind(this, function() {
     suspend_switch.connect("toggled", () => {
       this.menu.toggle();
       this.suspended = !this.suspended;
@@ -1675,10 +1673,10 @@ class SensorsApplet extends Applet.TextApplet {
   _on_disktemp_button_pressed() {
     let subProcess = spawnCommandLineAsyncIO(
       "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
-      Lang.bind(this, (out, err, exitCode) => {
+      (out, err, exitCode) => {
         this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
         subProcess.send_signal(9);
-    }));
+    });
   }
 
   //~ check_disktemp_user_readable(force=false) {
