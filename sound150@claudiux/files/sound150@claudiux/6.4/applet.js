@@ -2034,7 +2034,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted-symbolic", St.IconType.SYMBOLIC);
         this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted-symbolic", St.IconType.SYMBOLIC);
-        this._applet_context_menu.addMenuItem(this.mute_out_switch); //FIXME
+        this._applet_context_menu.addMenuItem(this.mute_out_switch);
         this._applet_context_menu.addMenuItem(this.mute_in_switch);
         if (!this.alwaysCanChangeMic)
             this.mute_in_switch.actor.hide();
@@ -2310,10 +2310,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         else
             this.setAppletTextIcon();
 
-       if (this.alwaysCanChangeMic)
-            this.mute_in_switch.actor.show();
+        if (this.alwaysCanChangeMic)
+            if (this.mute_in_switch)
+                this.mute_in_switch.actor.show();
         else if (this._recordingAppsNum === 0)
-            this.mute_in_switch.actor.hide();
+             if (this.mute_in_switch)
+                this.mute_in_switch.actor.hide();
 
         this._changeActivePlayer(this._activePlayer);
     }
@@ -2569,7 +2571,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
-        this.mute_in_switch.setToggleState(newStatus);
+        if (this.mute_in_switch) this.mute_in_switch.setToggleState(newStatus);
         this.showOSD = this.showMediaKeysOSD;
         this._volumeChange(null);
     }
@@ -3242,9 +3244,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _mutedChanged(object, param_spec, property) {
         if (property == "_output") {
-            this.mute_out_switch.setToggleState(this._output.is_muted);
+            if (this.mute_out_switch)
+                this.mute_out_switch.setToggleState(this._output.is_muted);
         } else if (property == "_input") {
-            this.mute_in_switch.setToggleState(this._input.is_muted);
+            if (this.mute_in_switch)
+                this.mute_in_switch.setToggleState(this._input.is_muted);
             this._volumeChange(null);
         }
     }
@@ -3255,7 +3259,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _outputValuesChanged(actor, iconName, percentage) {
         this.setIcon(iconName, "output");
-        this.mute_out_switch.setIconSymbolicName(iconName);
+        if (this.mute_out_switch)
+            this.mute_out_switch.setIconSymbolicName(iconName);
         this.volume = percentage;
         this.setAppletTooltip();
 
@@ -3311,7 +3316,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _inputValuesChanged(actor, iconName, percentage) {
-        this.mute_in_switch.setIconSymbolicName(iconName);
+        if (this.mute_in_switch) this.mute_in_switch.setIconSymbolicName(iconName);
         this.mic_level = percentage;
     }
 
@@ -3438,7 +3443,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._streams.push({ id: id, type: "SourceOutput" });
             if (this._recordingAppsNum++ === 0) {
                 this._inputSection.actor.show();
-                this.mute_in_switch.actor.show();
+                if (this.mute_in_switch) this.mute_in_switch.actor.show();
                 run_playerctld();
             }
         }
@@ -3466,7 +3471,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
                     if (this.alwaysCanChangeMic) {
                         this._inputSection.actor.show();
-                        this.mute_in_switch.actor.show();
+                        if (this.mute_in_switch) this.mute_in_switch.actor.show();
                     }
                     //~ kill_playerctld();
                 }
