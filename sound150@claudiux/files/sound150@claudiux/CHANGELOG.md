@@ -1,3 +1,6 @@
+### v8.0.2~20250126
+  * Improved stability with Cinnamon 6.4: More tests on the existence of objects before acting on them.
+
 ### v8.0.1~20250125
   * Increases stability with Cinnamon 6.4: Removes Lang.bind() calls.
 
