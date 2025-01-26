@@ -2524,6 +2524,7 @@ class SpicesUpdate extends IconApplet {
     } // End of on_generic_changed
 
     on_applet_added_to_panel() {
+        this.makeMenu();
         this.get_default_icon_color();
 
         // Run loop to refresh caches:
