@@ -1979,9 +1979,10 @@ class SpicesUpdate extends IconApplet {
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
         // sub-menu Configure
-        let _configure = new PopupSubMenuMenuItem(_("Configure"));
+        //~ let _configure = new PopupSubMenuMenuItem(_("Configure"));
+        let _configure = new PopupIconMenuItem(_("Configure")+" ⬇ ", "system-run", IconType.SYMBOLIC, { reactive: false });
         this.menu.addMenuItem(_configure);
-        this.menu.addMenuItem(new PopupSeparatorMenuItem());
+        //~ this.menu.addMenuItem(new PopupSeparatorMenuItem());
         let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes"), _("Actions")];
         let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes", "su-actions"];
         let _options = [];
@@ -1991,9 +1992,9 @@ class SpicesUpdate extends IconApplet {
             let _icon = _iconNames[i];
             _options[i] = new PopupIconMenuItem(_optionTitle, _icon, IconType.SYMBOLIC);
             _options[i].connect("activate", (event) => spawnCommandLineAsync("/usr/bin/xlet-settings applet %s -i %s -t %s".format(UUID, this.instanceId, i.toString())));
-            _configure.menu.addMenuItem(_options[i])
+            this.menu.addMenuItem(_options[i])
         }
-        _configure.menu.open();
+        //~ _configure.menu.open();
 
         // button Reload this applet
         if (DEBUG() || RELOAD()) {
@@ -2001,9 +2002,6 @@ class SpicesUpdate extends IconApplet {
             _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
             this.menu.addMenuItem(_reload_button);
         }
-
-        // Here the (future) notification list:
-
 
         // Help
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
