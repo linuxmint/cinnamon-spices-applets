@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-26 12:36-0500\n"
-"PO-Revision-Date: 2018-07-26 20:41+0200\n"
+"PO-Revision-Date: 2025-01-26 15:03-0300\n"
 "Last-Translator: JM Piñol <jmpigon@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. applet.js:169
 msgid "just now"
@@ -25,11 +25,11 @@ msgstr "justo ahora"
 
 #. applet.js:177
 msgid " minutes ago"
-msgstr "minutos atrás"
+msgstr " minutos atrás"
 
 #. applet.js:185
 msgid " hours ago"
-msgstr "horas atrás"
+msgstr " horas atrás"
 
 #. applet.js:192
 msgid "yesterday"
@@ -37,11 +37,11 @@ msgstr "ayer"
 
 #. applet.js:196
 msgid " days ago"
-msgstr "días atrás"
+msgstr " días atrás"
 
 #. applet.js:200
 msgid " weeks ago"
-msgstr "semanas atrás"
+msgstr " semanas atrás"
 
 #. applet.js:285
 msgid "Configure Mailnag"
@@ -96,7 +96,7 @@ msgstr "¡Hacer click para ver el error!"
 
 #. applet.js:775
 msgid "Error: "
-msgstr "Error:"
+msgstr " Error:"
 
 #. metadata.json->name
 msgid "Mailnag"
@@ -125,7 +125,8 @@ msgstr "Ejecutar cliente de correo al hacer click"
 
 #. settings-schema.json->launch_client_on_click->tooltip
 msgid "Mail client is launched when clicked on a menu item."
-msgstr "El cliente de correo se ejecuta al hacer click en un elemento del menú"
+msgstr ""
+"El cliente de correo se ejecuta al hacer click en un elemento del menú."
 
 #. settings-schema.json->middle_click->description
 msgid "On middle click:"
@@ -149,11 +150,11 @@ msgstr "No hacer nada"
 
 #. settings-schema.json->max_length->description
 msgid "Max sender / subject display length"
-msgstr ""
+msgstr "Longitud máxima de remitente / asunto"
 
 #. settings-schema.json->max_length->tooltip
 msgid "Sender or subject lines longer than this will be cropped"
-msgstr ""
+msgstr "Las líneas de remitente o asunto más largas se recortarán"
 
 #. settings-schema.json->client->description
 msgid "Mail client to launch (or webpage)"
