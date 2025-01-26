@@ -303,6 +303,8 @@ MyApplet.prototype = {
                 "client", "client", function(){});
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "middle_click", "middle_click_behavior", function(){});
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "max_length", "max_length", this.onSettingsChanged.bind(this));
 		}
 		catch (e)
 		{
@@ -320,6 +322,10 @@ MyApplet.prototype = {
 		{
 			global.logError(e);
 		}
+    },
+
+	onSettingsChanged: function() {
+		this.onBusAppeared();
     },
 
 	// called on applet startup (even though mailnag bus already exists)
@@ -526,8 +532,10 @@ MyApplet.prototype = {
 
 	makeMenuItem: function(mail)
 	{
-		let mi = new MailItem(mail.id, mail.sender, mail.sender_address, 
-				      mail.subject.length > 64 ? mail.subject.substr(0,64) + "..." : mail.subject, 
+		let mi = new MailItem(mail.id, 
+				      mail.sender.length > this.max_length ? mail.sender.substr(0,this.max_length) + "..." : mail.sender,
+				      mail.sender_address.length > this.max_length ? mail.sender_address.substr(0,this.max_length) + "..." : mail.sender_address,
+				      mail.subject.length > this.max_length ? mail.subject.substr(0,this.max_length) + "..." : mail.subject,
 				      mail.datetime, mail.account);
 		mi.markReadButton.connect(
 			'clicked',
