@@ -6,32 +6,46 @@ import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../wea
 export type METNorwayAlertEvent = "blowingSnow" | "forestFire" | "gale" | "ice" | "icing" | "lightning" | "polarLow" | "rain" | "rainFlood" | "snow" | "stormSurge" | "wind";
 
 export interface METNorwayAlert {
+	altitude_above_sea_level: number;
 	area: string;
 	awarenessResponse: string;
+	awarenessSeriousness: string;
 	/**
 	 * @example "2; yellow; Moderate"
 	 */
-	awareness_level: `${number}: ${string}: ${string}`;
+	awareness_level: `${number}; ${string}; ${string}`;
 	/**
 	 * @example "8; forest-fire"
 	 */
-	awareness_type: `${number}: ${string}`;
-	description: string;
-	instruction: string;
+	awareness_type: `${number}; ${string}`;
+	ceiling_above_sea_level: number;
+	certainty: string;
 	consequences: string;
+	contact: string;
+	county: string[];
+	description: string;
 	/**
 	 * Event type
-	 *
-	 * @example "forestFire"
-	 */
+	*
+	* @example "forestFire"
+	*/
 	event: METNorwayAlertEvent;
 	/**
 	 * Localised event name
 	 * @example "Skogbrannfare"
-	 */
+	*/
 	eventAwarenessName: string;
-	title: string;
+	geographicDomain: string;
+	id: string;
+	instruction: string;
+	resources: { description: string; uri: string, mimeType: string }[];
+	riskMatrixColor: string;
 	severity: "Extreme" | "Severe" | "Moderate" | "Minor" | "Unknown";
+	status: "Actual" | "Exercise" | "System";
+	title: string;
+	triggerLevel: string;
+	type: "Alert";
+	web: string;
 }
 
 export interface METNorwayAlertFeature {
@@ -41,15 +55,33 @@ export interface METNorwayAlertFeature {
 	};
 	properties: METNorwayAlert;
 	type: "Feature";
+	when: {
+		interval: [
+			/**
+			 * ISO timestamp with timezone
+			 */
+			string,
+			/**
+			 * ISO timestamp with timezone
+			 */
+			string
+		]
+	}
 }
 
 export interface METNorwayAlertResponse {
 	features: METNorwayAlertFeature[];
+	lang: string;
+	/**
+	 * ISO timestamp with timezone
+	 */
+	lastChange: string;
+	type: "FeatureCollection";
 }
 
 export async function GetMETNorwayAlerts(cancellable: imports.gi.Gio.Cancellable, lat: number, lon: number): Promise<AlertData[] | null>{
 	const response = await HttpLib.Instance.LoadJsonSimple<METNorwayAlertResponse>({
-		url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
+		url: "https://api.met.no/weatherapi/metalerts/2.0/current.json",
 		cancellable: cancellable,
 	})
 
