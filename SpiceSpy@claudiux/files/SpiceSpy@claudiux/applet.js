@@ -2,6 +2,7 @@ const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const Tooltips = imports.ui.tooltips;
 
 var Util = imports.misc.util;
 
@@ -19,7 +20,7 @@ const {
 const { HttpLib } = require("./lib/httpLib");
 const { to_string } = require("./lib/to-string");
 //mainloopTools:
-const { timeout_add_seconds, timeout_add, setTimeout, clearTimeout, setInterval, clearInterval, source_exists, source_remove, remove_all_sources } = require("./lib/mainloopTools");
+const { _sourceIds, timeout_add_seconds, timeout_add, setTimeout, clearTimeout, setInterval, clearInterval, source_exists, source_remove, remove_all_sources } = require("./lib/mainloopTools");
 
 const UUID = "SpiceSpy@claudiux";
 
@@ -94,8 +95,11 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
         label_text = spice.name;
     }
     let label = new St.Label({ text: label_text, reactive: true, track_hover: true });
-    label.connect("enter-event", () => { this.url = this.spice.url });
-    this.addActor(label);
+
+    let label_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
+    label_box.add_actor(label);
+    label_box.connect("enter-event", () => { this.url = this.spice.url });
+    this.addActor(label_box);
 
     if (this.parent.show_icon_in_menu) {
       let icon_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
@@ -115,49 +119,62 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       this.addActor(icon_box);
     }
 
-    let stars_box = new St.BoxLayout({ style: "spacing: .25em;" , reactive: true, track_hover: true });
+    let stars_box = new St.BoxLayout({ style: "spacing: .25em;" , reactive: true, track_hover: true, can_focus: true });
     let star_icon = new St.Icon({ icon_name: "starred", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
     let star_count = new St.Label({ text: spice.score.toString() });
     stars_box.add_actor(star_icon);
     stars_box.add_actor(star_count);
+    let stars_tooltip = new Tooltips.Tooltip(stars_box, _("score"));
     stars_box.connect("enter-event", () => { this.url = this.spice.url });
     this.addActor(stars_box);
     stars_box.opacity = (this.new_stars) ? 255 : this.parent.standard_opacity;
     if (this.new_stars) stars_box.set_style("color: %s;".format(this.parent.color_on_change));
 
 
-    this.comments_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
+    this.comments_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true, can_focus: true });
     let comments_icon = new St.Icon({ icon_name: "user-available", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
     this.comments_label = new St.Label({ text:  spice.comments.toString()});
     this.comments_box.add_actor(comments_icon);
     this.comments_box.add_actor(this.comments_label);
+    let comments_tooltip = new Tooltips.Tooltip(this.comments_box, _("comments"));
     //~ this.comments_box.track_hover = true;
     this.comments_box.connect("enter-event", () => { this.url = this.spice.url+"#count" });
     this.addActor(this.comments_box);
     this.comments_box.opacity = (this.new_comments) ? 255 : this.parent.standard_opacity;
     if (this.new_comments) this.comments_box.set_style("color: %s;".format(this.parent.color_on_change));
 
+    if (this.parent.show_issues) {
+      let issues_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true, can_focus: true });
+      let issues_icon = new St.Icon({ icon_name: "nb-issues", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
+      let issues_count = new St.Label({ text: spice.issues.toString() });
+      issues_box.add_actor(issues_icon);
+      issues_box.add_actor(issues_count);
+      let issues_tooltip = new Tooltips.Tooltip(issues_box, _("recent issues"));
+      issues_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+"+this.spice.uuid; });
+      this.addActor(issues_box);
+      issues_box.opacity = (parseInt(spice.issues) != 0) ? 255 : this.parent.standard_opacity;
+    }
+    let translations_box, translations_icon, translations_count;
     if (this.parent.show_translations && this.spice.type != "themes") {
-      let translations_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
-      let translations_icon = new St.Icon({ icon_name: "nb-translations", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
-      let translations_count = new St.Label({ text: spice.translations.toString() });
+      translations_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true, can_focus: true });
+      translations_icon = new St.Icon({ icon_name: "nb-translations", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
+      translations_count = new St.Label({ text: spice.translations.toString() });
       translations_box.add_actor(translations_icon);
       translations_box.add_actor(translations_count);
+      let translations_tooltip = new Tooltips.Tooltip(translations_box, _("translations"));
       translations_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-%s/blob/translation-status-tables/.translation-tables/tables/%s.md".format(this.spice.type, this.spice.uuid) });
       this.addActor(translations_box);
       translations_box.opacity = (this.new_translations) ? 255 : this.parent.standard_opacity;
       if (this.new_translations) translations_box.set_style("color: %s;".format(this.parent.color_on_change));
     }
-
-    if (this.parent.show_issues) {
-      let issues_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
-      let issues_icon = new St.Icon({ icon_name: "nb-issues", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
-      let issues_count = new St.Label({ text: spice.issues.toString() });
-      issues_box.add_actor(issues_icon);
-      issues_box.add_actor(issues_count);
-      issues_box.connect("enter-event", () => { this.url = "https://github.com/linuxmint/cinnamon-spices-"+this.spice.type+"/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+"+this.spice.uuid; });
-      this.addActor(issues_box);
-      issues_box.opacity = (parseInt(spice.issues) != 0) ? 255 : this.parent.standard_opacity;
+    if (this.parent.show_translations && this.spice.type === "themes") {
+      translations_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: false, track_hover: false, can_focus: false });
+      translations_icon = new St.Icon({ icon_name: "empty", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
+      translations_count = new St.Label({ text: "" });
+      translations_box.add_actor(translations_icon);
+      translations_box.add_actor(translations_count);
+      translations_box.opacity = 0;
+      this.addActor(translations_box);
     }
   }
 
@@ -168,7 +185,7 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
   }
 
   update_comment_count(count) {
-    if (!this.comments_label)
+    if (!this.comments_label || !this.comments_box)
       return;
 
     this.comments_label.set_text(count.toString());
@@ -208,6 +225,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
     super(orientation, panel_height, instance_id);
     this.metadata = metadata;
+    this.orientation = orientation;
     this.set_applet_icon_symbolic_name("cinnamon");
     this.set_applet_label("");
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -218,6 +236,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
+    this.issuesJsonLoopId = null;
     this.authors = [];
     this.uuids = [];
     this.commentsJobsList = []; // contains array items: [type, spice, page].
@@ -262,7 +281,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of get_user_settings
 
   update_interval_value() {
-    this.update_interval = 0.5 * Math.round(this.update_interval * 2);
+    //~ this.update_interval = 0.5 * Math.round(this.update_interval * 2);
     const sec = Math.round(this.update_interval * 3600); // From hours to seconds.
     if (this.loopId != null)
       source_remove(this.loopId);
@@ -336,7 +355,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.settings.setValue("uuid-list", _uuid_list);
 
       // Loop next tick (value 0) to ensure that this.actor is on stage:
-      setTimeout(() => this.loop(), 0); //.bind(this)
+      setTimeout(() => this.loop(), 0);
     }
   } // End of _add_user_Spices
 
@@ -390,39 +409,57 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of updateUI
 
   issuesJobs_loop() {
-    //~ if (!this.is_looping) {
-      //~ this.issuesJobsList = [];
-      //~ return false;
-    //~ }
-
+    //~ logDebug("issuesJobs_loop()\n");
     if (this.issuesJobsList.length > 0) {
-      const [type, spice, command] = this.issuesJobsList.shift();
-      this.do_issuesJob(type, spice, command);
+      const [type, uuid] = this.issuesJobsList.shift();
+      this.do_issuesJob(type, uuid);
     }
-
-    return this.is_looping;
   } // End of issuesJobs_loop
 
-  do_issuesJob(type, spice, command) {
-    logDebug("do_issuesJob type: "+type+" spice: "+spice+" command: "+command);
+  do_issuesJob(type, uuid) {
+    const jsonFilePath = `${HOME_DIR}/.config/cinnamon/spices/SpiceSpy@claudiux/issues/issues-${type}.json`
+    const jsonFile = Gio.file_new_for_path(jsonFilePath);
+    if (!jsonFile.query_exists(null)) return;
+
+    const [success, jsonFileContents] = GLib.file_get_contents(jsonFilePath);
+    if (!success) return;
+
+    //~ const data = JSON.parse(JSON.stringify(jsonFileContents, null, "\t"));
+    const data = eval(to_string(jsonFileContents).replace(/\n/g, "")); //.replace(/\}\]\[\{/g, "},{"));
+    const fullName = uuid;
+    //~ const nickName = fullName.split("@")[0];
+    var issuesNumber = 0;
+
+    for (let d of data) {
+      //~ logDebug("do_issuesJob 434: "+d["title"]);
+      if ((d["title"] && d["title"].includes(fullName)) || (d["body"] && d["body"].includes(fullName))) {
+        issuesNumber += 1;
+      }
+    }
+    //~ logDebug("do_issuesJob: "+type+" "+uuid+": "+issuesNumber+" issues.");
+    this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
+  } // End of do_issuesJob
+
+  do_issuesJob_OLD(type, spice, command) {
+    //~ logDebug("do_issuesJob type: "+type+" spice: "+spice+" command: "+command);
     if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
       this.issuesJobsList.push([type, spice, command]);
       return
     }
     let subProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode == 0) {
-        logDebug("exitCode: 0");
+        //~ logDebug("exitCode: 0");
         let _nb_issues = parseInt(stdout);
         if (_nb_issues == null || isNaN(_nb_issues)) _nb_issues = 0;
         this.spices_to_spy[type][spice]['issues'] = _nb_issues
       } else if (exitCode == 1) {
-        logDebug("exitCode: 1");
+        //~ logDebug("exitCode: 1");
         this.spices_to_spy[type][spice]['issues'] = 0;
       }
       this.make_menu(); //???
       subProcess.send_signal(9);
     });
-  }
+  } // End of do_issuesJob_OLD
 
   commentsJobs_loop() {
     //~ if (!this.is_looping) {
@@ -435,7 +472,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.do_commentsJob(type, spice, page);
     }
 
-    return this.is_looping;
+    //~ return this.is_looping;
   } // End of commentsJobs_loop
 
   do_commentsJob(type, spice, page) {
@@ -461,7 +498,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of do_commentsJob
 
   loop() {
-    logDebug("loop() this.fistTime:"+this.fistTime+" this.is_looping:"+this.is_looping);
+    //~ logDebug("loop() this.fistTime:"+this.fistTime+" this.is_looping:"+this.is_looping);
     //~ if (!this.is_looping) return false;
 
     if (this.loopId != null )
@@ -483,8 +520,9 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.get_spices_to_spy();
       this.update_issues();
       this.update_comments();
-      //~ this.settings.setValue("spices_to_spy", this.spices_to_spy);
-      //~ this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
+
+      this.settings.setValue("spices_to_spy", this.spices_to_spy);
+      this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
     }
     this.fistTime = false;
 
@@ -493,7 +531,8 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     let sec = Math.round(this.update_interval * 3600);
     this.loopId = timeout_add_seconds(sec, () => { this.loop() });
-    return this.is_looping;
+    this.issuesLoopId = timeout_add(500, () => { this.issuesJobs_loop(); return (this.issuesJobsList.length > 0 && this.is_looping); });
+    //~ return this.is_looping;
   } // End of loop
 
   update_authors() {
@@ -522,7 +561,8 @@ class SpiceSpy extends Applet.TextIconApplet {
   renew_caches() {
     var is_to_download = false;
     for (let type of TYPES) {
-      const INDEX = HOME_DIR + "/.cache/cinnamon/spices/" + type.slice(0, -1) + "/index.json";
+      const INDEX_DIR = HOME_DIR + "/.cache/cinnamon/spices/" + type.slice(0, -1);
+      const INDEX = INDEX_DIR + "/index.json";
       const jsonFile = Gio.file_new_for_path(INDEX);
 
       if (jsonFile.query_exists(null)) {
@@ -531,9 +571,10 @@ class SpiceSpy extends Applet.TextIconApplet {
         const difference = currentTime - jsonModifTime;
         is_to_download = (difference > 720); // 720s = 12 min.
       } else {
+        Util.spawnCommandLineAsync(`mkdir -p "${INDEX_DIR}"; echo "{}" > "${INDEX}"`);
         is_to_download = true;
       }
-      if (is_to_download) break;
+      //~ if (is_to_download) break; // Removed to create every index.json file.
     }
 
     if (is_to_download) {
@@ -590,8 +631,8 @@ class SpiceSpy extends Applet.TextIconApplet {
         }
       }
     }
-    this.settings.setValue("spices_to_spy", _spices_to_spy);
-    //~ this.spices_to_spy = _spices_to_spy;
+    //~ this.settings.setValue("spices_to_spy", _spices_to_spy);
+    this.spices_to_spy = _spices_to_spy;
   } // End of get_spices_to_spy
 
   update_comments() {
@@ -625,7 +666,24 @@ class SpiceSpy extends Applet.TextIconApplet {
     }
   } // End of update_comments
 
+  update_issues_json() {
+    const GET_ISSUES_JSON_SCRIPT = SCRIPTS_DIR + "/get_issues_json.sh";
+    Util.spawnCommandLineAsync(GET_ISSUES_JSON_SCRIPT);
+    const interval = 1200; // 1200 s = 20 min.
+    this.issuesJsonLoopId = timeout_add_seconds(interval, () => { Util.spawnCommandLineAsync(GET_ISSUES_JSON_SCRIPT) ; return this.is_looping; });
+  } // End of update_issues_json
+
   update_issues() {
+    for (let type of TYPES) {
+      let spices = this.spices_to_spy[type];
+      for (let uuid of Object.keys(spices)) {
+        this.issuesJobsList.push([type, uuid]);
+      }
+    }
+    //~ logDebug("update_issues() this.issuesJobsList: "+this.issuesJobsList.join("\n"));
+  } // End of update_issues
+
+  update_issues_OLD() {
     const GET_ISSUES_SCRIPT = SCRIPTS_DIR+"/get-issues.sh"
     const interval = 5000; //ms = 5 seconds.
     //~ var index = 0;
@@ -653,7 +711,7 @@ class SpiceSpy extends Applet.TextIconApplet {
         //~ index += 1;
       }
     }
-  } // End of update_issues
+  } // End of update_issues_OLD
 
   make_menu() {
     var total_diff_score = 0;
@@ -668,13 +726,18 @@ class SpiceSpy extends Applet.TextIconApplet {
       //~ this.set_applet_tooltip(this.metadata.name);
     //~ this.fistTime = true;
 
-    this.menu.removeAll();
+    if (this.menu) {
+      this.menu.removeAll();
+    } else {
+      this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+      this.menuManager.addMenu(this.menu);
+    }
 
     if (this.spices_to_spy) {
       let read_all = new PopupMenu.PopupIconMenuItem(_("Mark all as read"), "object-select", St.IconType.SYMBOLIC);
       read_all.connect("activate",
         () => {
-          this.menu.toggle(true);
+          if (this.menu) this.menu.toggle(true);
           this.mark_all_as_read();
         }
       );
@@ -683,7 +746,7 @@ class SpiceSpy extends Applet.TextIconApplet {
       let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh", St.IconType.SYMBOLIC);
       refresh.connect("activate",
         () => {
-          this.menu.toggle(true);
+          if (this.menu) this.menu.toggle(true);
           this.is_looping = true;
           this.fistTime = false;
           this.loop();
@@ -769,7 +832,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     let config_button = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
     config_button.connect('activate',
       () => {
-        this.menu.toggle(true);
+        if (this.menu) this.menu.toggle(true);
         this.configureApplet();
       }
     );
@@ -791,10 +854,9 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of mark_as_read
 
   on_applet_added_to_panel() {
-    logDebug("on_applet_added_to_panel()");
+    //~ logDebug("on_applet_added_to_panel()");
     this.is_looping = true;
     this.get_user_settings();
-    //~ this.make_menu();
 
     this.renew_caches();
     //~ this.update_authors();
@@ -804,28 +866,29 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ this.update_comments();
 
     this.loopId = timeout_add_seconds(60, () => { this.loop() });
-    this.jobsLoopId = timeout_add_seconds(13, () => { this.commentsJobs_loop() });
-    this.issuesLoopId = timeout_add_seconds(6, () => { this.issuesJobs_loop() });
+    this.jobsLoopId = timeout_add_seconds(13, () => { this.commentsJobs_loop(); return this.is_looping; });
+
+    this.update_issues_json();
+    this.make_menu();
   } // End of on_applet_added_to_panel
 
   on_applet_clicked() {
-    //~ this.settings.setValue("spices_to_spy", this.spices_to_spy);
+    this.settings.setValue("spices_to_spy", this.spices_to_spy);
     this.make_menu();
-    this.menu.toggle();
+    if (this.menu) this.menu.toggle();
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {
     this.is_looping = false;
     remove_all_sources();
-    this.menu.removeAll();
+    if (this.menu) this.menu.removeAll();
     this.loopId = null;
     this.jobsLoopId = null;
     this.issuesLoopId = null;
+    this.issuesJsonLoopId = null;
   } // End of on_applet_removed_from_panel
 
-  _reload_this_applet() {
-    //~ remove_all_sources();
-    //~ this.loopId = null;
+  _reload_this_applet(event=null) {
     reloadExtension(UUID, Type.APPLET)
   } // End of _reload_this_applet
 }

@@ -141,13 +141,18 @@ function source_exists(id) {
  * boolean.
  */
 function source_remove(id, remove_from_sourceIds=true) {
+  if (remove_from_sourceIds) {
+    const pos = _sourceIds.indexOf(id);
+    if (pos > -1) _sourceIds.splice(pos, 1);
+  }
   if (source_exists(id)) {
-    GLib.source_remove(id);
-    if (remove_from_sourceIds) {
-      const pos = _sourceIds.indexOf(id);
-      if (pos > -1) _sourceIds.splice(pos, 1);
+    try {
+      GLib.source_remove(id);
     }
-    return true;
+    catch(e) {}
+    finally {
+      return true;
+    }
   }
   return false;
 }

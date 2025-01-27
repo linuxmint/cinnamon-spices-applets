@@ -1,3 +1,9 @@
+### v4.3.0~20250127
+  * New method to check recent issues.
+  * Adds tooltips in menu.
+  * Updates the mainloopTools library.
+  * Removes all Lang.bind() calls.
+
 ### v4.2.0~20250119
   * Better start.
   * Avoids usage of Lang.bind() in code.

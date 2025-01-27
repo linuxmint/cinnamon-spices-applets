@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-12 00:32+0100\n"
+"POT-Creation-Date: 2025-01-27 10:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,19 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. applet.js:550
+#. applet.js:127
+msgid "score"
+msgstr ""
+
+#. applet.js:139
+msgid "comments"
+msgstr ""
+
+#. applet.js:152
+msgid "recent issues"
+msgstr ""
+
+#. applet.js:164
+msgid "translations"
+msgstr ""
+
+#. applet.js:737
 msgid "Mark all as read"
 msgstr "Alle als gelesen markieren"
 
-#. applet.js:554
+#. applet.js:746
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#. applet.js:558
+#. applet.js:759
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:630
+#. applet.js:832
 msgid "Configure..."
 msgstr "Einstellen..."
 
@@ -42,8 +58,8 @@ msgstr "SpiceSpy"
 msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
 msgstr ""
-"Benachrichtigt Sie, wenn es eine Änderung bei Ihren Lieblings-spices auf "
-"der Website gibt."
+"Benachrichtigt Sie, wenn es eine Änderung bei Ihren Lieblings-spices auf der "
+"Website gibt."
 
 #. settings-schema.json->pageGeneral->title
 msgid "General"
@@ -62,13 +78,13 @@ msgstr "Liste der Autoren der Spices an denen du interessiert bist"
 msgid "List of specific Spices you are interested in"
 msgstr "Liste der Spices an denen du interessiert bist"
 
-#. settings-schema.json->update-interval->description
+#. settings-schema.json->update-interval-hours->description
 msgid "Update interval"
 msgstr "Aktualisierungs Intervall"
 
-#. settings-schema.json->update-interval->units
-msgid "minutes"
-msgstr "minuten"
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr ""
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
