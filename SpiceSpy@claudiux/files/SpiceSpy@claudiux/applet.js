@@ -3,6 +3,7 @@ const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
+const Clutter = imports.gi.Clutter;
 
 var Util = imports.misc.util;
 
@@ -75,7 +76,96 @@ function logError(error) {
   global.logError("\n[" + UUID + "]: " + error + "\n")
 }
 
-class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
+var SpiceSpyPopupSubMenuMenuItem = class SpiceSpyPopupSubMenuMenuItem extends PopupMenu.PopupSubMenuMenuItem {
+  _init(text, needScrollbar=true) {
+
+    super._init.call(this);
+
+    this.needScrollbar = needScrollbar;
+
+    let icon_box = new St.BoxLayout({ style: 'spacing: .25em;' });
+    //~ logDebug("icon_box: "+icon_box);
+
+    let cinnamon_icon = new St.Icon({ icon_name: 'cinnamon-symbolic', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+    icon_box.add_actor(cinnamon_icon);
+    this.addActor(icon_box, { expand: false, span: 1, align: St.Align.MIDDLE });
+    //~ this.addActor(icon_box);
+
+    this._triangle = null;
+
+    // This check allows PopupSubMenu to be used as a generic scrollable container.
+    if (typeof text === 'string') {
+      this.actor.add_style_class_name('popup-submenu-menu-item');
+
+      this.label = new St.Label({ text: text,
+                                  y_expand: true,
+                                  y_align: Clutter.ActorAlign.CENTER });
+      //~ this.label = new St.Label({ text: text });
+      //~ this.addActor(this.label);
+      this.addActor(this.label, { expand: true,
+                                         span: 0,
+                                         align: St.Align.START });
+      this.actor.label_actor = this.label;
+
+      this._triangleBin = new St.Bin({ x_align: St.Align.END });
+      this.addActor(this._triangleBin, { expand: true,
+                                         span: -1,
+                                         align: St.Align.END });
+
+      this._triangle = PopupMenu.arrowIcon(St.Side.RIGHT);
+      this._triangle.pivot_point = new Clutter.Point({ x: 0.5, y: 0.5 });
+      this._triangleBin.child = this._triangle;
+    }
+
+    this.menu = new PopupMenu.PopupSubMenu(this.actor, this._triangle);
+    //~ this._signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+    this._signals.connect(this.menu, 'open-state-changed', () => { this._subMenuOpenStateChanged(); });
+  }
+
+  _subMenuOpenStateChanged(menu, open) {
+        if (this.actor.get_stage() == null) return;
+        this.actor.change_style_pseudo_class('open', open);
+    }
+
+  _needsScrollbar() {
+    return this.needScrollbar;
+    //~ if (!this.needScrollbar) return false;
+
+    //~ let topMenu = this._getTopMenu();
+    //~ if(!topMenu)
+      //~ return false;
+    //~ if(!topMenu.actor)
+      //~ return false;
+    //~ if(!topMenu.actor.get_layout_manager())
+      //~ return false;
+    //~ let [topMinHeight, topNaturalHeight] = topMenu.actor.get_preferred_height(-1);
+    //~ let topThemeNode = null;
+
+    //~ try {
+      //~ topThemeNode = topMenu.actor.get_theme_node();
+    //~ } catch(e) {
+      //~ topThemeNode = null;
+    //~ }
+    //~ if (!topThemeNode) return false;
+
+    //~ let topMaxHeight = topThemeNode.get_max_height();
+    //~ return topMaxHeight >= 0 && topNaturalHeight >= topMaxHeight;
+  }
+
+  _boxGetPreferredWidth (actor, forHeight, alloc) {
+        let columnWidths = this.getColumnWidths();
+        this.setColumnWidths(columnWidths);
+
+        // Now they will request the right sizes
+        [alloc.min_size, alloc.natural_size] = this.box.get_preferred_width(forHeight || 0);
+    }
+
+    _boxGetPreferredHeight (actor, forWidth, alloc) {
+        [alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
+    }
+}
+
+var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
   constructor(parent, spice, new_stars, new_comments, new_translations, params) {
     super(params);
     this.parent = parent;
@@ -101,23 +191,7 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     label_box.connect("enter-event", () => { this.url = this.spice.url });
     this.addActor(label_box);
 
-    if (this.parent.show_icon_in_menu) {
-      let icon_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
-      let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
-      let icon_file = Gio.file_new_for_path(icon_path);
-      let icon;
-      if (icon_file.query_exists(null)) {
-        let gicon = Gio.icon_new_for_string(icon_path);
-        icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
-      } else {
-        let icon_name = "spices-"+spice.type;
-        //~ icon_file = Gio.file_new_for_path(icon_path);
-        icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
-      }
-      icon_box.add_actor(icon);
-      icon_box.connect("enter-event", () => { this.url = this.spice.url });
-      this.addActor(icon_box);
-    }
+
 
     let stars_box = new St.BoxLayout({ style: "spacing: .25em;" , reactive: true, track_hover: true, can_focus: true });
     let star_icon = new St.Icon({ icon_name: "starred", icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
@@ -176,6 +250,24 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       translations_box.opacity = 0;
       this.addActor(translations_box);
     }
+
+    if (this.parent.show_icon_in_menu) {
+      let icon_box = new St.BoxLayout({ style: "spacing: .25em;", reactive: true, track_hover: true });
+      let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+spice.type.slice(0,-1)+"/"+spice.uuid+".png";
+      let icon_file = Gio.file_new_for_path(icon_path);
+      let icon;
+      if (icon_file.query_exists(null)) {
+        let gicon = Gio.icon_new_for_string(icon_path);
+        icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
+      } else {
+        let icon_name = "spices-"+spice.type;
+        //~ icon_file = Gio.file_new_for_path(icon_path);
+        icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+      }
+      icon_box.add_actor(icon);
+      icon_box.connect("enter-event", () => { this.url = this.spice.url });
+      this.addActor(icon_box);
+    }
   }
 
   activate() {
@@ -198,6 +290,18 @@ class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
   }
 
+  _boxGetPreferredWidth (actor, forHeight, alloc) {
+    let columnWidths = this.getColumnWidths();
+    this.setColumnWidths(columnWidths);
+
+    // Now they will request the right sizes
+    [alloc.min_size, alloc.natural_size] = this.box.get_preferred_width(forHeight || 0);
+    }
+
+    _boxGetPreferredHeight (actor, forWidth, alloc) {
+        [alloc.min_size, alloc.natural_size] = this.box.get_preferred_height(forWidth || 0);
+    }
+
   //~ destroy() {
     //~ this.comments_label = null;
     //~ this.comments_box = null;
@@ -210,7 +314,8 @@ class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
     super({ reactive: false });
     if (typeof icon_name === "string") {
       let icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
-      this.addActor(icon, { span: 0 });
+      //~ this.addActor(icon, { span: 0 });
+      this.addActor(icon);
     }
     this.label = new St.Label({ text: title, style_class: "popup-subtitle-menu-item" });
     this.addActor(this.label);
@@ -234,6 +339,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
+    //~ this.menu = new PopupMenu.PopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
     this.issuesJsonLoopId = null;
@@ -263,10 +369,13 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("standard-opacity", "standard_opacity");
     //~ this.settings.bind("color-on-change", "color_on_change", this.make_menu.bind(this));
     this.settings.bind("color-on-change", "color_on_change");
-    this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
+    //~ this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
+    this.show_icon_in_menu = true;
     this.settings.bind("icon-size", "icon_size");
-    this.settings.bind("show-translations", "show_translations");
+    //~ this.settings.bind("show-translations", "show_translations");
+    this.show_translations = true;
     this.settings.bind("show-issues", "show_issues");
+    this.show_issues = true;
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
@@ -730,36 +839,28 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.menu.removeAll();
     } else {
       this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+      //~ this.menu = new PopupMenu.PopupMenu(this, this.orientation);
       this.menuManager.addMenu(this.menu);
     }
 
+    //~ this.spicesSection = new PopupMenu.PopupSubMenuMenuItem(_("Spices"));
+    this.spicesSection = new SpiceSpyPopupSubMenuMenuItem(_("Spices"));
+    //~ this.spicesSection = new PopupMenu.PopupSubMenu(this.actor, null);
+    this.spicesSection.menu.actor.vscrollbar_policy = St.PolicyType.ALLWAYS;
+    this.spicesSection.menu.actor.hscrollbar_policy = St.PolicyType.NEVER;
+    this.spicesSection.menu._needsScrollbar = function() {
+      return true;
+    }
+    //~ logDebug("global.screen_height: "+global.screen_height);
+    //~ this.spicesSection.actor.style = "height: %spx;width: %spx;spacing: 0px;padding:0px;expand: true;".format((1*global.screen_height - 240).toString(), (560+this.icon_size-24).toString());
+    this.spicesSection.actor.style = "width: %spx;spacing: 0px;padding:0px;expand: false;".format((560+this.icon_size-24).toString());
+    //~ this.spicesSection.menu.open();
+
+    //~ this.spicesSection.box.set_vertical(true);
+
+    this.menu.addMenuItem(this.spicesSection);
+
     if (this.spices_to_spy) {
-      let read_all = new PopupMenu.PopupIconMenuItem(_("Mark all as read"), "object-select", St.IconType.SYMBOLIC);
-      read_all.connect("activate",
-        () => {
-          if (this.menu) this.menu.toggle(true);
-          this.mark_all_as_read();
-        }
-      );
-      this.menu.addMenuItem(read_all);
-
-      let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh", St.IconType.SYMBOLIC);
-      refresh.connect("activate",
-        () => {
-          if (this.menu) this.menu.toggle(true);
-          this.is_looping = true;
-          this.fistTime = false;
-          this.loop();
-        }
-      );
-      this.menu.addMenuItem(refresh);
-
-      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
-      let section = new PopupMenu.PopupSubMenuMenuItem(_("Spices"));
-      //~ section.box.set_vertical(true);
-      this.menu.addMenuItem(section);
-
       for (let type of TYPES) {
         //if (!this.spices_to_spy || !this.spices_to_spy[type]) continue;
         var menuItems = [];
@@ -767,7 +868,7 @@ class SpiceSpy extends Applet.TextIconApplet {
         if (uuids.length > 0) {
           let title = type[0].toUpperCase() + type.substring(1);
           //this.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
-          section.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
+          this.spicesSection.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
           for (let uuid of uuids) {
             let spice = this.spices_to_spy[type][uuid];
             let diff_comments = 0;
@@ -821,12 +922,35 @@ class SpiceSpy extends Applet.TextIconApplet {
             }
 
             for(let item of menuItems)
-              section.menu.addMenuItem(item);//this.menu.addMenuItem(item);
+              this.spicesSection.menu.addMenuItem(item);//this.menu.addMenuItem(item);
           }
         }
       }
-      section.menu.open();
+      //~ setTimeout( () => { this.spicesSection.menu.open() }, 0);
+      //~ this.spicesSection.menu.open();
+
+      let read_all = new PopupMenu.PopupIconMenuItem(_("Mark all as read"), "object-select", St.IconType.SYMBOLIC);
+      read_all.connect("activate",
+        () => {
+          if (this.menu) this.menu.toggle(true);
+          this.mark_all_as_read();
+        }
+      );
+      this.menu.addMenuItem(read_all);
     }
+
+      let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh", St.IconType.SYMBOLIC);
+      refresh.connect("activate",
+        () => {
+          if (this.menu) this.menu.toggle(true);
+          this.is_looping = true;
+          this.fistTime = false;
+          this.loop();
+        }
+      );
+      this.menu.addMenuItem(refresh);
+
+      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     let config_button = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
@@ -837,6 +961,10 @@ class SpiceSpy extends Applet.TextIconApplet {
       }
     );
     this.menu.addMenuItem(config_button);
+
+    //~ this.spicesSection.menu.open();
+    this.spicesSection.menu.toggle();
+    //~ this.spicesSection.menu.close();
 
     this.updateUI(total_diff_score, total_diff_comments, total_diff_translations);
   } // End of make_menu
@@ -874,8 +1002,12 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   on_applet_clicked() {
     this.settings.setValue("spices_to_spy", this.spices_to_spy);
-    this.make_menu();
+    if (!this.menu || (this.menu && !this.menu.isOpen))
+      this.make_menu();
     if (this.menu) this.menu.toggle();
+    //~ try {
+      //~ if (this.spicesSection) this.spicesSection.menu.toggle();
+    //~ } catch(e) {}
   } // End of on_applet_clicked
 
   on_applet_removed_from_panel() {
