@@ -1,3 +1,7 @@
+### v5.0.0~20250128
+  * Fixes menu display.
+  * Changes this applet settings.
+
 ### v4.3.0~20250127
   * New method to check recent issues.
   * Adds tooltips in menu.
