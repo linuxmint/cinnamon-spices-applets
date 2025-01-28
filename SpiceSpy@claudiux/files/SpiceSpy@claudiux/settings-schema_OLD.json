@@ -27,7 +27,10 @@
         "update-interval-hours",
         "standard-opacity",
         "color-on-change",
+        "show-icon-in-menu",
         "icon-size",
+        "show-translations",
+        "show-issues",
         "sort-by",
         "show-uuid",
         "translate-name",
@@ -75,32 +78,27 @@
   "show-icon-in-menu": {
     "type": "switch",
     "description": "Show each Spice icon in the menu",
-    "default": true
+    "default": false
   },
   "icon-size": {
-    "type": "combobox",
+    "type": "spinbutton",
+    "dependency": "show-icon-in-menu",
     "description": "Icon size",
+    "units": "pixels",
     "default": 24,
-    "options": {
-      "16": 16,
-      "22": 22,
-      "24": 24,
-      "32": 32,
-      "48": 48,
-      "64": 64,
-      "96": 96,
-      "128":128
-    }
+    "min": 16,
+    "max": 64,
+    "step": 2
   },
   "show-translations": {
     "type": "switch",
     "description": "Show number of translations in the menu",
-    "default": true
+    "default": false
   },
   "show-issues": {
     "type": "switch",
     "description": "Show number of issues in the menu",
-    "default": true
+    "default": false
   },
   "sort-by": {
     "type": "combobox",
