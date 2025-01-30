@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux Czech 3.9.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-29 14:28+0100\n"
+"POT-Creation-Date: 2025-01-30 13:21+0100\n"
 "PO-Revision-Date: 2025-01-08 19:22+0100\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
@@ -16,120 +16,124 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:235
 msgid "Sensors Monitor"
 msgstr "Sledování senzorů"
 
-#. applet.js:401
+#. applet.js:418
 msgid "Suspended"
 msgstr "Zastaveno"
 
-#. applet.js:619 applet.js:661
+#. applet.js:636 applet.js:678
 msgid "high:"
 msgstr "vysoká:"
 
-#. applet.js:619 applet.js:621 applet.js:661 applet.js:663 applet.js:705
+#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:621 applet.js:663
+#. applet.js:638 applet.js:680
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:705 applet.js:749
+#. applet.js:722 applet.js:766
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:751
+#. applet.js:768
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:780
+#. applet.js:797
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#. applet.js:780
+#. applet.js:797
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#. applet.js:800
+#. applet.js:817
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#. applet.js:1187
+#. applet.js:1205
 msgid "Settings"
 msgstr "Předvolby"
 
-#. applet.js:1187
+#. applet.js:1205
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1194
+#. applet.js:1212
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#. applet.js:1204
+#. applet.js:1228
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Teplotní senzory"
 
-#. applet.js:1214
+#. applet.js:1244
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Senzory větráků"
 
-#. applet.js:1224
+#. applet.js:1260
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Napěťové senzory"
 
-#. applet.js:1234
+#. applet.js:1276
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1255
+#. applet.js:1303
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#. applet.js:1264
+#. applet.js:1312
 msgid "Suspend Sensors"
 msgstr "Pozastavit Sledování senzorů"
 
-#. applet.js:1275
+#. applet.js:1323
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#. applet.js:1576
+#. applet.js:1653
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:350
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s je plně funkční."
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:351
 msgid "All dependencies are installed"
 msgstr "Všechny závislosti jsou nainstalované"
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:380
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Zdá se, že chybí některé z programů vyžadovaných pro plnou funkčnost appletu."
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "V právě otevřeném okně terminálu prosím proveďte následující příkazy:"
+#. lib/checkDependencies.js:382
+msgid "Please install these packages:"
+msgstr ""
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
 msgstr "Některé závislosti nejsou nainstalované!"
+
+#. lib/checkDependencies.js:398
+msgid "Install these packages now"
+msgstr ""
 
 #. lib/util.js:244
 #, javascript-format
@@ -193,12 +197,17 @@ msgstr ""
 "narušení (otevření krytu). Upozorní barevnými změnami, pokud hodnoty "
 "dosáhnout nebo přesáhnou limity."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿  Teploty"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+#, fuzzy
+msgid "𖣘 Fan"
 msgstr "🤂 Větráky"
 
 #. settings-schema.json->page_Voltages->title

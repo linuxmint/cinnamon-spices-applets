@@ -1,3 +1,7 @@
+### v4.1.0~20250130
+  * Improves dependency installation.
+  * Fixes #6809 and #6818.
+
 ### v4.0.3~20250126
   * Improved code. Greater stability.
   * Change of Fan symbol.
