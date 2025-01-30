@@ -1934,22 +1934,22 @@ class SpicesUpdate extends IconApplet {
         this.menu.removeAll();
 
         // Head
-        this.menuitemHead1 = new PopupMenuItem(this.default_tooltip, {
+        let menuitemHead1 = new PopupMenuItem(this.default_tooltip, {
             reactive: false
         });
-        this.menu.addMenuItem(this.menuitemHead1);
+        this.menu.addMenuItem(menuitemHead1);
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
         if (this.dependenciesMet) {
             // Refresh button
-            this.refreshButton = new PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", IconType.SYMBOLIC);
-            this.refreshButton.connect("activate", (event) => this._on_refresh_pressed());
-            this.menu.addMenuItem(this.refreshButton);
+            let refreshButton = new PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", IconType.SYMBOLIC);
+            refreshButton.connect("activate", (event) => this._on_refresh_pressed());
+            this.menu.addMenuItem(refreshButton);
             this.menu.addMenuItem(new PopupSeparatorMenuItem());
         }
 
         // Status of each type of Spices:
-        this.spicesMenuItems = {};
+        let spicesMenuItems = {};
         let char_update = "\u21BB";
         let char_new = "\u2604";
         let ts;
@@ -1957,12 +1957,12 @@ class SpicesUpdate extends IconApplet {
             ts = _(capitalize(t.toString()));
             if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += "   %s %s".format(char_update, (this.nb_in_menu[t] - this.new_Spices[t].length).toString());
             if (this.new_Spices[t].length > 0) ts += "   %s %s".format(char_new, (this.new_Spices[t].length).toString());
-            this.spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
-            this.spicesMenuItems[t].connect("activate", (event) => {
+            spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
+            spicesMenuItems[t].connect("activate", (event) => {
                 spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
             });
-            this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
-            this.menu.addMenuItem(this.spicesMenuItems[t]);
+            spicesMenuItems[t].setShowDot(this.menuDots[t]);
+            this.menu.addMenuItem(spicesMenuItems[t]);
         }
         // button Forget
         if (this.nb_to_watch > 0) {
@@ -2007,8 +2007,8 @@ class SpicesUpdate extends IconApplet {
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
         // button Help...
-        this.help_button = new PopupIconMenuItem(_("Help", "cinnamon-control-center") + "...", "folder-documents-symbolic", IconType.SYMBOLIC);
-        this.help_button.connect("activate", (event) => {
+        let help_button = new PopupIconMenuItem(_("Help", "cinnamon-control-center") + "...", "folder-documents-symbolic", IconType.SYMBOLIC);
+        help_button.connect("activate", (event) => {
                 let _language = this.get_user_language();
                 if (_language.startsWith("en")) {
                     spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/309");
@@ -2019,7 +2019,7 @@ class SpicesUpdate extends IconApplet {
                 }
             });
 
-        this.menu.addMenuItem(this.help_button);
+        this.menu.addMenuItem(help_button);
         // End of makeMenu
     }
 

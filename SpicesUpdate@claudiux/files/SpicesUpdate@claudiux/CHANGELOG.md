@@ -1,3 +1,6 @@
+### v7.6.3~20250130
+  * Try to fix #6776.
+
 ### v7.6.2~20250126
   * Modification of the menu to fix #6781.
 
