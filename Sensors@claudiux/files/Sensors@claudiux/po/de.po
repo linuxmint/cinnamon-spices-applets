@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-30 13:21+0100\n"
-"PO-Revision-Date: 2024-09-04 16:09+0200\n"
+"PO-Revision-Date: 2025-01-30 16:27+0100\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
 #. applet.js:235
@@ -130,7 +130,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:382
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Bitte installieren Sie diese Pakete:"
 
 #. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
@@ -138,7 +138,7 @@ msgstr "Einige Abhängigkeiten sind nicht installiert!"
 
 #. lib/checkDependencies.js:398
 msgid "Install these packages now"
-msgstr ""
+msgstr "Installieren Sie diese Pakete jetzt"
 
 #. lib/util.js:244
 #, javascript-format
@@ -203,14 +203,13 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Autor. JEleniel: Unterstützung für NVidia-Grafikkarten."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatur"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
 msgstr "🤂 Lüfter"
 
@@ -402,43 +401,43 @@ msgstr "Schriftgröße (% der Standardgröße)"
 
 #. settings-schema.json->vertical-align->options
 msgid "baseline"
-msgstr ""
+msgstr "Grundlinie"
 
 #. settings-schema.json->vertical-align->options
 msgid "sub"
-msgstr ""
+msgstr "Tiefgestellt"
 
 #. settings-schema.json->vertical-align->options
 msgid "super"
-msgstr ""
+msgstr "Hochgestellt"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-top"
-msgstr ""
+msgstr "Text-oben"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-bottom"
-msgstr ""
+msgstr "Text-unten"
 
 #. settings-schema.json->vertical-align->options
 msgid "middle"
-msgstr ""
+msgstr "Mitte"
 
 #. settings-schema.json->vertical-align->options
 msgid "top"
-msgstr ""
+msgstr "Oben"
 
 #. settings-schema.json->vertical-align->options
 msgid "bottom"
-msgstr ""
+msgstr "Unten"
 
 #. settings-schema.json->vertical-align->options
 msgid "unset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #. settings-schema.json->vertical-align->options
 msgid "inherit"
-msgstr ""
+msgstr "Erben"
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
