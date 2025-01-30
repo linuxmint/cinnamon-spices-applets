@@ -425,6 +425,7 @@
   },
   "showOSDonStartup": {
     "type": "switch",
+    "dependency": "showMediaKeysOSD",
     "description": "Show volume level in OSD on startup",
     "default": false
   },
@@ -436,7 +437,7 @@
   },
   "showPercent": {
     "type": "switch",
-    "dependency": "showVolumeValue",
+    "dependency": "showMediaKeysOSD",
     "description": "Show '%' in OSD",
     "default": false
   },

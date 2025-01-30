@@ -1,3 +1,7 @@
+### v8.0.3~20250130
+  * Improved OSD management.
+  * Fixes #6820.
+
 ### v8.0.2~20250126
   * Improved stability with Cinnamon 6.4: More tests on the existence of objects before acting on them.
 

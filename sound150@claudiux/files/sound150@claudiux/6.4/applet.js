@@ -276,7 +276,6 @@ class ControlButton {
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
         const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
-        applet.showOSD = applet.showOSDonStartup;
         super(startLevel);
         this.oldValue = startLevel;
         this.applet = applet;
@@ -1838,11 +1837,12 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.title_text = "";
 
+        this.startingUp = true;
+
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.settings.bind("muteSoundOnClosing", "muteSoundOnClosing");
         this.settings.bind("startupVolume", "startupVolume");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
-        this.showOSD = this.showOSDonStartup;
         this.settings.bind("showPercent", "showPercent", () => {
             if (this.showPercent)
                 PERCENT_CHAR = _("%");
@@ -1921,7 +1921,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.old_volume = this.volume;
         this.settings.setValue("showMediaKeysOSD", global.settings.get_boolean(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", () => { this.on_showMediaKeysOSD_changed() });
-        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
 
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", () => { this.volume_near_icon() });
@@ -2321,6 +2320,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
+        this.startingUp = true;
         if (this._playerctl)
             kill_playerctld();
         //~ logDebug("on_applet_added_to_panel()");
@@ -2353,8 +2353,6 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._iconLooping = true;
 
-        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
-
         //~ if (this._output && this._output.is_muted) {
             //~ this.old_volume = this.volume;
             //~ this._toggle_out_mute();
@@ -2376,13 +2374,20 @@ class Sound150Applet extends Applet.TextIconApplet {
             },
             2100
         );
+
+        let _to = setTimeout( () => {
+                this.startingUp = false;
+                clearTimeout(_to);
+            },
+            (this.actor.get_stage() != null) ? 2100 : 20000
+        );
     }
 
     on_applet_reloaded() {
         //~ logDebug("on_applet_reloaded()");
         this._iconLooping = false;
         this._artLooping = false;
-        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
+        this.startingUp = true;
         if (this.muteSoundOnClosing && this._output && !this._output.is_muted) {
             this.old_volume = this.volume;
             this._toggle_out_mute();
@@ -2400,6 +2405,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
+        this.startingUp = true;
         //~ logDebug("on_applet_removed_from_panel() BEGIN");
 
         // REMOVED: BUG!
@@ -2564,7 +2570,6 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _toggle_in_mute() {
         if (!this._input) {
-            this.showOSD = this.showMediaKeysOSD;
             this._volumeChange(null);
             return;
         }
@@ -2572,14 +2577,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
         if (this.mute_in_switch) this.mute_in_switch.setToggleState(newStatus);
-        this.showOSD = this.showMediaKeysOSD;
         this._volumeChange(null);
     }
 
     _onScrollEvent(actor, event) {
         //~ logDebug("event: "+event.originalEvent.ctrlKey);
         let _event = event;
-        this.showOSD = this.showMediaKeysOSD;
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
         let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
@@ -2725,8 +2728,6 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._applet_tooltip)
                 this._applet_tooltip.hide();
         }
-
-        this.showOSD = this.showMediaKeysOSD;
 
         this.volume_near_icon()
     }
@@ -3584,6 +3585,18 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");
+    }
+
+    get showOSD() {
+        if (!this.showMediaKeysOSD) {
+            return false;
+        } else {
+            if (this.startingUp) {
+                return this.showOSDonStartup;
+            } else {
+                return true;
+            }
+        }
     }
 }
 
