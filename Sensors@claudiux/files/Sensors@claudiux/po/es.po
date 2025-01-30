@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-30 13:21+0100\n"
-"PO-Revision-Date: 2024-09-03 15:16-0400\n"
+"PO-Revision-Date: 2025-01-30 10:26-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -130,7 +130,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:382
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Por favor, instale estos paquetes:"
 
 #. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
@@ -138,7 +138,7 @@ msgstr "¡Algunas dependencias no están instaladas!"
 
 #. lib/checkDependencies.js:398
 msgid "Install these packages now"
-msgstr ""
+msgstr "Instale estos paquetes ahora"
 
 #. lib/util.js:244
 #, javascript-format
@@ -204,16 +204,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Autor. JEleniel: soporte para tarjetas de video NVidia."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatura"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventiladores"
+msgstr "🤂 Ventilador"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
