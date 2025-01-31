@@ -1,3 +1,7 @@
+### v7.6.4~20250131
+  * Improves directory and file management.
+  * Code clean-up.
+
 ### v7.6.3~20250130
   * Try to fix #6776.
 
