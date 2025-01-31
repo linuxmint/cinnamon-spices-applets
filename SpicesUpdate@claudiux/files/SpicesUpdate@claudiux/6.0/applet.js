@@ -1031,7 +1031,7 @@ class SpicesUpdate extends IconApplet {
     */
     populateSettingsUnprotectedSpices(type) {
         if (this.OKtoPopulateSettings[type] != true) return;
-        logDebug("populateSettingsUnprotectedSpices("+type+") BEGIN");
+        //~ logDebug("populateSettingsUnprotectedSpices("+type+") BEGIN");
         // Prevents multiple access to the json config file of SpiceUpdate@claudiux:
         this.OKtoPopulateSettings[type] = false;
         this._load_cache(type);
@@ -1178,7 +1178,7 @@ class SpicesUpdate extends IconApplet {
 
         //~ WAITING[type] = (this.unprotectedList[type].length + 3) * 1000;
         this.cache[type] = "{}";
-        logDebug("populateSettingsUnprotectedSpices("+type+") END");
+        //~ logDebug("populateSettingsUnprotectedSpices("+type+") END");
     } // End of populateSettingsUnprotectedSpices
 
     populateSettingsUnprotectedApplets() {
