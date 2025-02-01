@@ -1,3 +1,9 @@
+### v9.0.0~20250201
+  * Major changes for OSD and menu.
+  * OSD: Volume value can be displayed beside the volume bar.
+  * New option for the menu: Show Media-Optical icon. Don't show it to save space and visual comfort.
+  * Fixes #6830.
+
 ### v8.0.3~20250130
   * Improved OSD management.
   * Fixes #6820.

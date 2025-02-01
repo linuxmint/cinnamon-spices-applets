@@ -51,7 +51,8 @@
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
         "avoidTwice",
-        "seekerTooltipDelay"
+        "seekerTooltipDelay",
+        "showMediaOptical"
       ]
     },
     "sectionBehavior2": {
@@ -129,6 +130,7 @@
         "showOSDonStartup",
         "showVolumeValue",
         "showPercent",
+        "OSDhorizontal",
         "showBarLevel"
       ]
     },
@@ -201,6 +203,11 @@
     "max": 1500,
     "step": 50,
     "description": "Seeker tooltip: time to disappear"
+  },
+  "showMediaOptical": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Media-Optical icon"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -439,6 +446,12 @@
     "type": "switch",
     "dependency": "showMediaKeysOSD",
     "description": "Show '%' in OSD",
+    "default": false
+  },
+  "OSDhorizontal": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show horizontal OSD",
     "default": false
   },
   "showBarLevel": {
