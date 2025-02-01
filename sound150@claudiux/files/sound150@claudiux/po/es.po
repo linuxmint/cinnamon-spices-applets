@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-01 14:52+0100\n"
-"PO-Revision-Date: 2025-01-20 12:02-0300\n"
+"PO-Revision-Date: 2025-02-01 12:28-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1006,7 +1006,7 @@ msgstr "Desplazamiento"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Mostrar icono de medios ópticos"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
@@ -1025,9 +1025,8 @@ msgid "Show '%' in OSD"
 msgstr "Mostrar '%' en OSD"
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Mostrar '%' en OSD"
+msgstr "Mostrar OSD horizontal"
 
 #. 6.4->settings-schema.json->showBarLevel->description
 msgid "Show bar level in OSD"
