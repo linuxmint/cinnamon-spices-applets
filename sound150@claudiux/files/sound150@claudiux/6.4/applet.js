@@ -294,7 +294,7 @@ class ControlButton {
 
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
-        logDebug("VolumeSlider constructor tooltip: "+tooltip);
+        //~ logDebug("VolumeSlider constructor tooltip: "+tooltip);
         const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
         super(startLevel);
         this.oldValue = startLevel;
@@ -2452,16 +2452,16 @@ class Sound150Applet extends Applet.TextIconApplet {
             //logDebug("_control closed");
         //}
 
-        logDebug("this.volume: "+this.volume);
+        //~ logDebug("this.volume: "+this.volume);
         let old_volume = this.volume;
         if (this.muteSoundOnClosing && this._output && !this._output.is_muted) {
             this.old_volume = this.volume;
             this._toggle_out_mute();
-            logDebug("this.volume: "+this.volume);
+            //~ logDebug("this.volume: "+this.volume);
             this.volume = this.old_volume;
-            logDebug("Output is now muted");
+            //~ logDebug("Output is now muted");
         }
-        logDebug("this.volume: "+this.volume);
+        //~ logDebug("this.volume: "+this.volume);
 
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
@@ -2517,7 +2517,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         kill_playerctld();
 
 
-        logDebug("old_volume: "+old_volume);
+        //~ logDebug("old_volume: "+old_volume);
         //~ this.volume = old_volume;
         this.settings.setValue("volume", old_volume);
         //~ setTimeout(() => { this.volume = old_volume; logDebug("this.volume: "+this.volume); }, 2100);
