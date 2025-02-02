@@ -1,3 +1,7 @@
+### v7.6.5~20250202
+  * Fixes #6776.
+  * Code: No 'bind(this)' calls anymore.
+
 ### v7.6.4~20250131
   * Improves directory and file management.
   * Code clean-up.

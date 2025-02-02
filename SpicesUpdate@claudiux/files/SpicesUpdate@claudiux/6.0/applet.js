@@ -326,7 +326,7 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "general_frequency",
             "general_frequency",
-            this.on_frequency_changed.bind(this)
+            () => { this.on_frequency_changed() }
         );
         //~ this.refreshInterval = QUICK() ? 720 * this.general_frequency : 3600 * this.general_frequency;
         this.refreshInterval = 3600 * this.general_frequency;
@@ -385,25 +385,25 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "general_warning",
             "general_warning",
-            this.updateUI.bind(this)
+            () => { this.updateUI() }
         );
 
         this.settings.bind(
             "events_color",
             "events_color",
-            this.updateUI.bind(this)
+            () => { this.updateUI() }
         );
 
         this.settings.bind(
             "processing_color",
             "processing_color",
-            this.updateUI.bind(this)
+            () => { this.updateUI() }
         );
 
         this.settings.bind(
             "general_notifications",
             "general_notifications",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
@@ -433,19 +433,19 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "displayType",
             "displayType",
-            this.on_display_type_changed.bind(this)
+            () => { this.on_display_type_changed() }
         );
 
         this.settings.bind(
             "general_hide",
             "general_hide",
-            this.on_display_type_changed.bind(this)
+            () => { this.on_display_type_changed() }
         );
 
         this.settings.bind(
             "tooltip_max_width_screen_percentage",
             "tooltip_max_width_screen_percentage",
-            this.on_tooltip_max_width_screen_percentage_changed.bind(this)
+            () => { this.on_tooltip_max_width_screen_percentage_changed() }
         );
 
         this.settings.bind(
@@ -457,13 +457,13 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "check_applets", // The setting key
             "check_applets", // The property to manage (this.check_applets)
-            this.on_settings_changed.bind(this) // Callback when value changes
+            () => { this.on_settings_changed() } // Callback when value changes
         );
 
         this.settings.bind(
             "check_new_applets",
             "check_new_applets",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
@@ -476,20 +476,20 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "unprotected_applets",
             "unprotected_applets",
-            this.populateSettingsUnprotectedApplets.bind(this)
+            () => { this.populateSettingsUnprotectedApplets() }
         );
 
         // Desklets
         this.settings.bind(
             "check_desklets",
             "check_desklets",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
             "check_new_desklets",
             "check_new_desklets",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
@@ -502,85 +502,82 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "unprotected_desklets",
             "unprotected_desklets",
-            this.populateSettingsUnprotectedDesklets.bind(this)
+            () => { this.populateSettingsUnprotectedDesklets() }
         );
 
         // Extensions
         this.settings.bind(
             "check_extensions",
             "check_extensions",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
             "check_new_extensions",
             "check_new_extensions",
-            this.on_settings_changed.bind(this),
-            null);
+            () => { this.on_settings_changed() }
+        );
 
         this.settings.bind(
             "exp_extensions",
-            "exp_extensions",
-            null
+            "exp_extensions"
         );
         this.exp_extensions = "%s\n%s\n%s".format(EXP1["extensions"], EXP2["extensions"], EXP3);
 
         this.settings.bind(
             "unprotected_extensions",
             "unprotected_extensions",
-            this.populateSettingsUnprotectedExtensions.bind(this)
+            () => { this.populateSettingsUnprotectedExtensions() }
         );
 
         // Themes
         this.settings.bind(
             "check_themes",
             "check_themes",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
             "check_new_themes",
             "check_new_themes",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
             "exp_themes",
-            "exp_themes",
-            null
+            "exp_themes"
         );
         this.exp_themes = "%s\n%s\n%s".format(EXP1["themes"], EXP2["themes"], EXP3);
 
         this.settings.bind(
             "unprotected_themes",
             "unprotected_themes",
-            this.populateSettingsUnprotectedThemes.bind(this)
+            () => { this.populateSettingsUnprotectedThemes() }
         );
 
         // Nemo actions
         this.settings.bind(
             "check_actions",
             "check_actions",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
             "check_new_actions",
             "check_new_actions",
-            this.on_settings_changed.bind(this)
+            () => { this.on_settings_changed() }
         );
 
         this.settings.bind(
             "exp_actions",
-            "exp_actions",
-            null
+            "exp_actions"
         );
         this.exp_actions = "%s\n%s\n%s".format(EXP1["actions"], EXP2["actions"], EXP3);
 
         this.settings.bind(
             "unprotected_actions",
             "unprotected_actions",
-            this.populateSettingsUnprotectedActions.bind(this)
+            () => { this.populateSettingsUnprotectedActions() }
         );
     } // End of get_SU_settings
 
