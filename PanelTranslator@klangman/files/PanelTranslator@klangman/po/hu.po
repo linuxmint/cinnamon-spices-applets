@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-01 15:50-0500\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
 "PO-Revision-Date: 2024-07-10 01:54-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,66 +20,66 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:108 applet.js:344 applet.js:346
+#. applet.js:108 applet.js:345 applet.js:347
 msgid "Translator"
 msgstr "Fordító"
 
-#. applet.js:272
+#. applet.js:273
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 "Nem lehet lekérdezni a rendelkezésre álló nyelveket a translate-shellből"
 
-#. applet.js:283
+#. applet.js:284
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 "A szükséges \"trans\" parancs nem található, kérjük telepítse a translate-"
 "shellt"
 
-#. applet.js:287
+#. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Hiba, a \"trans\" parancs a következő kilépési kódot adta vissza: "
 
-#. applet.js:367
+#. applet.js:368
 msgid "Swap Languages"
 msgstr "Nyelvek cseréje"
 
-#. applet.js:410
+#. applet.js:411
 msgid "{Text to translate}"
 msgstr "{Szöveg a fordításhoz}"
 
-#. applet.js:421
+#. applet.js:422
 msgid "{Translated text}"
 msgstr "{Lefordított szöveg}"
 
-#. applet.js:435
+#. applet.js:436
 msgid "Configure"
 msgstr "Beállítás"
 
-#. applet.js:436
+#. applet.js:437
 msgid "Help"
 msgstr "Segítség"
 
-#. applet.js:440
+#. applet.js:441
 msgid "Play"
 msgstr "Lejátszás"
 
-#. applet.js:444
+#. applet.js:445
 msgid "Paste"
 msgstr "Beillesztés"
 
-#. applet.js:448
+#. applet.js:449
 msgid "Clear"
 msgstr "Törlés"
 
-#. applet.js:452
+#. applet.js:453
 msgid "Translate"
 msgstr "Fordítás"
 
-#. applet.js:457
+#. applet.js:458
 msgid "Copy"
 msgstr "Másolás"
 
-#. applet.js:463
+#. applet.js:464
 msgid "Play Translation"
 msgstr "Fordítás lejátszása"
 

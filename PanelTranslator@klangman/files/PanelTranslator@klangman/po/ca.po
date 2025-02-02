@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-01 15:50-0500\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
 "PO-Revision-Date: 2024-07-13 02:48+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,66 +18,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:108 applet.js:344 applet.js:346
+#. applet.js:108 applet.js:345 applet.js:347
 msgid "Translator"
 msgstr "Traductor"
 
-#. applet.js:272
+#. applet.js:273
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 "No ha estat possible sol·licitar els idiomes disponibles de translate-shell"
 
-#. applet.js:283
+#. applet.js:284
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 "No s'ha trobat l'ordre requerida \"trans\". Si us plau, instal·leu translate-"
 "shell"
 
-#. applet.js:287
+#. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Error. L'ordre \"trans\" ha retornat el codi de sortida "
 
-#. applet.js:367
+#. applet.js:368
 msgid "Swap Languages"
 msgstr "Intercanviar idiomes"
 
-#. applet.js:410
+#. applet.js:411
 msgid "{Text to translate}"
 msgstr "{Text a traduir}"
 
-#. applet.js:421
+#. applet.js:422
 msgid "{Translated text}"
 msgstr "{Text traduït}"
 
-#. applet.js:435
+#. applet.js:436
 msgid "Configure"
 msgstr "Configura"
 
-#. applet.js:436
+#. applet.js:437
 msgid "Help"
 msgstr "Ajuda"
 
-#. applet.js:440
+#. applet.js:441
 msgid "Play"
 msgstr "Reproduir"
 
-#. applet.js:444
+#. applet.js:445
 msgid "Paste"
 msgstr "Enganxar"
 
-#. applet.js:448
+#. applet.js:449
 msgid "Clear"
 msgstr "Netejar"
 
-#. applet.js:452
+#. applet.js:453
 msgid "Translate"
 msgstr "Traduir"
 
-#. applet.js:457
+#. applet.js:458
 msgid "Copy"
 msgstr "Copiar"
 
-#. applet.js:463
+#. applet.js:464
 msgid "Play Translation"
 msgstr "Reproduir traducció"
 

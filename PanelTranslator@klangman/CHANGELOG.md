@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+* Fix for a 1.2.0 regression when running under older Cinnamon releases where the PopupResizeHandler class does not exist. The popup window can only be resized in versions of Cinnamon where that class exists (5.8+), but the Applet will now work with or without that class.
+
 ## 1.2.0
 
 * Fixed the output for right-to-left language output by using the -no-bidi translation-shell parameter when translating text
