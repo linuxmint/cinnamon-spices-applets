@@ -198,7 +198,7 @@ let x = _("Playing");
 x = _("Paused");
 x = _("Stopped");
 
-let VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
+let VOLUME_ADJUSTMENT_STEP = 0.05; /* Volume adjustment step in % */
 
 const ICON_SIZE = Math.trunc(28*global.ui_scale);
 
@@ -807,7 +807,7 @@ class Seeker extends Slider.Slider {
     }
 
     _updateValue() {
-        if (this.destroyed) return; // GLib.SOURCE_REMOVE; //???
+        if (this.destroyed) return;
         //~ this._currentTime = (Date.now() - this.startingDate) / 1000;
 
         if (this.canSeek) {
@@ -852,8 +852,8 @@ class Seeker extends Slider.Slider {
                     this._timeoutId_timerCallback = null;
 
                     if (!this.destroyed) {
-                        this._timeoutId = timeout_add_seconds(1, this._updateValue.bind(this));
-                        this._timeoutId_timerCallback = timeout_add_seconds(1, this._timerCallback.bind(this));
+                        this._timeoutId = timeout_add_seconds(1, () => { this._updateValue(); return !this.destroyed });
+                        this._timeoutId_timerCallback = timeout_add_seconds(1, () => { return this._timerCallback() });
                     }
                     //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
@@ -899,11 +899,11 @@ class Seeker extends Slider.Slider {
             if (this.canSeek) {
                 this._getPosition();
                 this._timerTicker = 0;
-                this._timeoutId_timerCallback = timeout_add_seconds(1, this._timerCallback.bind(this));
+                this._timeoutId_timerCallback = timeout_add_seconds(1, () => { return this._timerCallback() });
             } else if (this._length > 0) {
                 this._getPosition();
                 this._timerTicker = 0;
-                this._timeoutId_timerCallback = timeout_add_seconds(1, this._timerCallback.bind(this));
+                this._timeoutId_timerCallback = timeout_add_seconds(1, () => { return this._timerCallback() });
             }
         } else {
             if (this.status === "Stopped") {
@@ -1089,7 +1089,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         let asyncReadyCb = (proxy, error, property) => {
             if (error)
-                log(error);
+                logError(error);
             else {
                 this[property] = proxy;
                 this._dbus_acquired();
@@ -1123,7 +1123,7 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         let mainBox = new PopupMenu.PopupMenuSection();
-        this.addMenuItem(mainBox);
+        //~ this.addMenuItem(mainBox);
 
         this.vertBox = new St.BoxLayout({
             style_class: "sound-player",
@@ -1131,6 +1131,7 @@ class Player extends PopupMenu.PopupMenuSection {
             vertical: true
         });
         mainBox.addActor(this.vertBox, { expand: false });
+        this.addMenuItem(mainBox);
 
         // Player info
         this._playerBox = new St.BoxLayout();
@@ -1725,7 +1726,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 cover_path,
                 Math.trunc(300*global.ui_scale),
                 Math.trunc(300*global.ui_scale),
-                this._on_cover_loaded.bind(this)
+                (cache, handle, actor) => { this._on_cover_loaded(cache, handle, actor) }
             );
             this._applet.setIcon();
 
@@ -1819,6 +1820,7 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._seeker)
             this._seeker.destroy();
 
+        //FIXME!!! Error when a media is playing:
         try {
             PopupMenu.PopupMenuSection.prototype.destroy.call(this);
         } catch(e) {logError("Error destroying Player!!!: "+e)}
@@ -1918,13 +1920,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("keyOpen", "keyOpen", () => { this._setKeybinding() });
         this.settings.bind("keySwitchPlayer", "keySwitchPlayer", () => { this._setKeybinding() });
 
-        this.settings.bind("stepVolume", "stepVolume", () => {
-            VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
-            //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
-        });
-        VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
-        //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
-
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
         this.settings.bind("magnetic25On", "magnetic25On", () => this._on_sound_settings_change());
 
@@ -1967,6 +1962,21 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volume-down", "volume_down", () => { this._setKeybinding() });
         this.settings.bind("audio-next", "audio_next", () => { this._setKeybinding() });
         this.settings.bind("audio-prev", "audio_prev", () => { this._setKeybinding() });
+
+        this.settings.bind("stepVolume", "stepVolume", () => {
+            let sv = this.settings.getValue("stepVolume");
+            let vu = this.settings.getValue("volume-up");
+            let old_VAS = Math.round(VOLUME_ADJUSTMENT_STEP*100);
+            VOLUME_ADJUSTMENT_STEP = sv / 100;
+            if (old_VAS == 5 && sv != 5 && vu.length <= 2) {
+                this.settings.setValue("redefine-volume-keybindings", true);
+                this._set_shortcuts_as_default();
+                this._setKeybinding();
+            }
+            //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
+        });
+        VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
+        //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
 
         // Whether sound@cinnamon.org is loaded:
         let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
@@ -2428,6 +2438,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._iconLooping = false;
         this._artLooping = false;
         this.startingUp = true;
+        //~ if (GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
+            //~ GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
+        //~ }
 
 
         if (this.actor && (this.actor.get_stage() != null) && this._control && (this._control.get_state() != Cvc.MixerControlState.CLOSED)) {
@@ -2495,6 +2508,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ logDebug("this._iconLooping = false;");
         this._artLooping = false;
         //~ logDebug("this._artLooping = false;");
+
+        if (this._control) {
+            for (let i = 0, l = this._streams.length; i < l; ++i) {
+                let id = this._streams[i].id;
+                this._control.emit("stream-removed", id);
+            }
+        }
+
         if (this._seeker) {
             this._seeker.destroy();
             //~ logDebug("Seeker destroyed");
