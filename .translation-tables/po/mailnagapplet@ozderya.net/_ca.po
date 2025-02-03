@@ -1,0 +1,15 @@
+# MAILNAG
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hyOzd, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr ""
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr ""

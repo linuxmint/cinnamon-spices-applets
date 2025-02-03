@@ -1,0 +1,25 @@
+# PANEL TRANSLATOR
+# This file is put in the public domain.
+# klangman, 2024
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->hotkey-settings->title
+msgid "Translation action hotkeys"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically translate on left click"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically translate the selection/clipboard contents when opening the "
+"Panel Translator popup window using a left click on the Panel Translator "
+"button"
+msgstr ""

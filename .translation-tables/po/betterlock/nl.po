@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"PO-Revision-Date: 2024-09-11 12:16+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:105
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
+#: applet.js:109
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: applet.js:113
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: applet.js:148
+msgid "Lock Keys"
+msgstr "Toetsen vergrendelen"
+
+#: applet.js:208
+msgid "Scr lock on"
+msgstr "Scr lock aan"
+
+#: applet.js:211
+msgid "Scr lock off"
+msgstr "Scr lock uit"
+
+#: applet.js:220
+msgid "Num lock on"
+msgstr "Num lock aan"
+
+#: applet.js:223
+msgid "Num lock off"
+msgstr "Num lock uit"
+
+#: applet.js:232
+msgid "Caps lock on"
+msgstr "Caps lock aan"
+
+#: applet.js:235
+msgid "Caps lock off"
+msgstr "Caps lock uit"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Toont of caps lock/num lock/scr lock aan staat, en geeft een melding wanneer "
+"deze veranderen."
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "Vergrendelingstoetsenindicator met meldingen"
+
+#. settings-schema.json->show-notifications->description
+msgid "Show notifications"
+msgstr "Meldingen tonen"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "Demp het systeemwaarschuwingsgeluid"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Caps lock-indicator tonen"
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "Num lock-indicator tonen"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "Scr lock-indicator tonen"

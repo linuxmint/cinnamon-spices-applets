@@ -1,0 +1,28 @@
+# BAZI TANIMLAYICI BAŞLIK.
+# Telif hakkı (C) 2022 PAKETİN TELİF HAKKI SAHİBİ Radio3.0
+# Bu dosya Radio3.0 paketi ile aynı lisans altında dağıtılmaktadır..
+# Serkan Önder <serkanonder@outlook.com>, 2022.2023.2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Radio3.0 v1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 21:00+0100\n"
+"PO-Revision-Date: 2025-01-13 12:14+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr ""
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr ""

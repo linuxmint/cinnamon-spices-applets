@@ -1,0 +1,22 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+msgid ""
+msgstr ""
+
+#. lib/checkDependencies.js:382
+msgid "Please install these packages:"
+msgstr ""
+
+#. lib/checkDependencies.js:398
+msgid "Install these packages now"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
+#. settings-schema.json->page_Fans->title
+msgid " Fan"
+msgstr ""

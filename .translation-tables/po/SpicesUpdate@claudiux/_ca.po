@@ -1,0 +1,11 @@
+# SPICES UPDATE
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2019
+#
+msgid ""
+msgstr ""
+
+#. 6.0/constants.js:184
+msgid "For private Spices, both boxes will be considered unchecked."
+msgstr ""

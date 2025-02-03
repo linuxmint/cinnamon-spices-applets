@@ -1,0 +1,26 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. applet.js:127
+msgid "score"
+msgstr ""
+
+#. applet.js:139
+msgid "comments"
+msgstr ""
+
+#. applet.js:152
+msgid "recent issues"
+msgstr ""
+
+#. applet.js:164
+msgid "translations"
+msgstr ""
+
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
+msgstr ""
