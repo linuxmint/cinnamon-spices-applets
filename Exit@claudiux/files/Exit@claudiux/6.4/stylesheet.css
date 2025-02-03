@@ -1,0 +1,10 @@
+.controls-box {
+     padding: .4em 1.75em;
+     spacing: .4em;
+}
+
+.controls-label {
+     color: #fff;
+     font-size: 1em;
+     margin: .4em;
+}

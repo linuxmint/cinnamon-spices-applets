@@ -1,3 +1,7 @@
+### v1.5.0~20250203
+* Now using mainloopTools library.
+* Avoids errors on restart.
+
 ### v1.4.0~20241204
 
 * Take into account inhibition during automatic updates.
