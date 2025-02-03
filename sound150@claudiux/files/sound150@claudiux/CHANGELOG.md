@@ -1,3 +1,8 @@
+### v9.1.0~20250203
+  * Functional improvement.
+  * When the volume step differs from 5, multimedia key shortcuts are automatically redefined.
+  * Code: Avoid using 'bind' calls.
+
 ### v9.0.0~20250201
   * Major changes for OSD and menu.
   * OSD: Volume value can be displayed beside the volume bar.
