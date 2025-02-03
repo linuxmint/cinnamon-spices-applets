@@ -39,7 +39,8 @@
       "type": "page",
       "title": "Shortcuts",
       "sections": [
-        "sectionShortcuts1"
+        "sectionShortcuts1",
+        "sectionCommands"
       ]
     },
     "sectionBehavior1": {
@@ -165,6 +166,15 @@
         "volume-down",
         "audio-next",
         "audio-prev"
+      ]
+    },
+    "sectionCommands": {
+      "type": "section",
+      "title": "Custom commands",
+      "keys": [
+        "custom-commands-label",
+        "custom-commands-list",
+        "button-reload-applet"
       ]
     }
   },
@@ -522,6 +532,36 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Previous Track"
+  },
+  "custom-commands-label": {
+    "type": "label",
+    "description": "These commands will appear in the context menu once you've reloaded this applet."
+  },
+  "custom-commands-list": {
+    "type": "list",
+    "description": "Commands",
+    "default": [],
+    "columns": [
+      {
+        "id": "title",
+        "title": "Title",
+        "type": "string",
+        "default": "",
+        "expand-width": false
+      },
+      {
+        "id": "command",
+        "title": "Command",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
+  },
+  "button-reload-applet": {
+    "type": "button",
+    "description": "Reload this applet",
+    "callback": "_on_reload_this_applet_pressed"
   },
   "volume": {
     "type": "generic",

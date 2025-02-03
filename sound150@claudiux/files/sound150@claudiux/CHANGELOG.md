@@ -1,3 +1,7 @@
+### v9.2.0~20250203
+  * Add custom commands (see Shortcuts tab in settings).
+  * Fixes #6847.
+
 ### v9.1.0~20250203
   * Functional improvement.
   * When the volume step differs from 5, multimedia key shortcuts are automatically redefined.
