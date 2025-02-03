@@ -1,3 +1,6 @@
+### v7.6.6~20250203
+  * No more errors on restart.
+
 ### v7.6.5~20250202
   * Fixes #6776.
   * Code: No 'bind(this)' calls anymore.

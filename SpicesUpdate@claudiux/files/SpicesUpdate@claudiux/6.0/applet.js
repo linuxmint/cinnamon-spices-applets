@@ -146,6 +146,8 @@ class SpicesUpdate extends IconApplet {
         this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n%s".format(_("Middle-Click to Refresh"));
         //this.set_applet_tooltip(this.tooltip_contents, true);
 
+        this.applet_running = true;
+
         this.img_path = ICONS_DIR + "/spices-update-symbolic.svg";
         //this.general_frequency = 10; //(seconds between two loops)
         this.isUpdatingUI = false;
@@ -238,7 +240,6 @@ class SpicesUpdate extends IconApplet {
         this.details_by_uuid = {};
         this.forceRefresh = false;
         this.refresh_requested = false;
-        this.applet_running = true;
         this.loopId = null;
         this.first_loop = true; // To do nothing for 1 minute.
 
@@ -2239,16 +2240,17 @@ class SpicesUpdate extends IconApplet {
             //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
-            source_remove(this.loopId);
+            if (this.loopId != null)
+                source_remove(this.loopId);
             this.loopId = null;
 
             this.loopId = timeout_add_seconds(10, () => this.updateLoop());
-            return;
-            //return false;
-
+            //logDebug("updateLoop: Next in 10 sec.");
+            //~ return;
+            return SOURCE_REMOVE;
             //~ return SOURCE_CONTINUE;
         }
-        //~ logDebug("ONE MORE LOOP!");
+        // logDebug("updateLoop: ONE MORE LOOP!");
         this.isLooping = true;
         source_remove(this.loopId);
         this.loopId = null;
@@ -2390,7 +2392,8 @@ class SpicesUpdate extends IconApplet {
 
         // One more loop !
         this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
-        //~ return SOURCE_REMOVE
+        // logDebug("updateLoop: Next in %s sec.".format(this.refreshInterval));
+        return SOURCE_REMOVE;
     } // End of updateLoop
 
     open_each_download_tab() {
