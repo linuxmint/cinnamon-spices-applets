@@ -1978,6 +1978,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
         //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
 
+        // Custom commands:
+        this.settings.bind("custom-commands-list", "custom_commands");
+
         // Whether sound@cinnamon.org is loaded:
         let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
         var _soundATcinnamonDOTorg_is_loaded = false;
@@ -2118,6 +2121,15 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.context_menu_item_pulseEffects = new PopupMenu.PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", St.IconType.SYMBOLIC);
             this.context_menu_item_pulseEffects.connect("activate", async () => { Util.spawnCommandLine("%s".format(pulse_effects)) });
             this._applet_context_menu.addMenuItem(this.context_menu_item_pulseEffects);
+        }
+
+        // Custom commands:
+        if (this.custom_commands.length > 0) {
+            let commands_menu_item = new PopupMenu.PopupSubMenuMenuItem(_("Commands"));
+            for (let c of this.custom_commands) {
+                commands_menu_item.menu.addAction(c["title"], () => { Util.spawnCommandLineAsync(`${c["command"]}`) });
+            }
+            this._applet_context_menu.addMenuItem(commands_menu_item);
         }
 
         // button Reload this applet
