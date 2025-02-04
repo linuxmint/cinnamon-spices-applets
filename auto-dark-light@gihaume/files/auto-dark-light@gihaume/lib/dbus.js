@@ -1,6 +1,6 @@
 const {Gio, GLib} = imports.gi;
 
-class Dbus {
+class Dbus { // namespace-like
     /** An interface to read the system screensaver lock state. */
     static Screen_lock = class {
         #signal_id;

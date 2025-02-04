@@ -1,3 +1,30 @@
+### v5.0.0~20250128
+  * Fixes menu display.
+  * Changes this applet settings.
+
+### v4.3.0~20250127
+  * New method to check recent issues.
+  * Adds tooltips in menu.
+  * Updates the mainloopTools library.
+  * Removes all Lang.bind() calls.
+
+### v4.2.0~20250119
+  * Better start.
+  * Avoids usage of Lang.bind() in code.
+
+### v4.1.1~20250116
+  * mainloopTools library: improvements.
+
+### v4.1.0~20250112
+  * Now uses mainloopTools to optimize loop management.
+
+### v4.0.1~20241114
+  * Soup2/Soup3: better detection.
+
+### v4.0.0~20241111
+
+* Added an option to display the number of open issues for each Spice.
+
 ### v3.0.0~20240704
 
 * Settings:

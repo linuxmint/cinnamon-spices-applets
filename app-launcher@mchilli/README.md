@@ -16,6 +16,7 @@ _A simple launcher for your panels_
     -   set custom applet icon
     -   enable/disable **notification**
     -   set **hotkey** to open the menu
+    -   open with hotkey at mouse position
     -   show/hide application icons
     -   set application icon size
 

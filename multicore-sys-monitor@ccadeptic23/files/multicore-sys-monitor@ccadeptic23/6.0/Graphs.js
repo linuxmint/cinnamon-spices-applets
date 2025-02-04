@@ -92,7 +92,7 @@ GraphVBars.prototype = {
 
       let use_natural_colors = this.configSettings.getUseProgressiveColors();
 
-      if (!this.configSettings.getByActivity()) {
+      if (!this.configSettings.getByActivity() || providerName == 'SWAP') {
         //use this to select cpu from our colorlist, its incase we have more cpus than colors
         //This shouldnt happen but just incase
         let cpunum = i % colorsList.length;

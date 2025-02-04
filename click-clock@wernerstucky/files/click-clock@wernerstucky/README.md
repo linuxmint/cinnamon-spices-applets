@@ -1,0 +1,3 @@
+- Keeping focused is important
+- Resist the urge to see the time constantly
+- You need to click to see the time

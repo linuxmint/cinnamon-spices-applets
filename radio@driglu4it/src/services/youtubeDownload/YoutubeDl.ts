@@ -26,7 +26,7 @@ export function downloadWithYouTubeDl(
     }
 
     if (stdout) {
-      onSuccess();
+      onSuccess(downloadCommand);
       return;
     }
 

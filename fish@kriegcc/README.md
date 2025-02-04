@@ -87,20 +87,21 @@ The properties are:
 - **File**: You can change the animation here. You can select an image that is supplied with the applet or a personal image.
 - **Total frames in animation**: You need to specify here the number of frames of the selected image.
 - **Pause between frames**: You can specify here the pause in seconds between each frame in the animation. The default is 0.3 seconds, but the range is from 0.1 to 10 seconds.
-- **Rotate on vertical panels**: This checkbox is used for vertical panels, and when checked, the fish will appear swimming upwards on a vertical panel. If it is not checked, it will appear the same way as on a horizontal panel.
+- **Flip sideways on vertical panels**: This checkbox is used for vertical panels, and when checked, the fish will appear swimming upwards on a vertical panel. If it is not checked, it will appear the same way as on a horizontal panel.
+
+### Advanced Settings
+
+The **Advanced Settings** tab in the Preferences dialog allows further customization of the animation, such as adjusting its size and configuring margins around it within the panel.
 
 ## Known Bugs and Limitations
 
-This Cinnamon port of the Fish applet is in early development.
-If you prefer a stable and clean experience, check out the original applet for GNOME and MATE desktops.
+This Cinnamon port of the Fish applet is currently under development.
+For a more stable and polished experience, consider using the original applet available for GNOME and MATE desktops.
 
 ### Known Issues
 
-- lack of tests
-- missing translations
-- inconsistent, ugly styles
+- style issues:
   - message in popup might be cut or overlapped by scroll bars
-- lot's of TODOs in code
 
 Please feel free to provide feedback, report problems, or support the development of this applet.
 

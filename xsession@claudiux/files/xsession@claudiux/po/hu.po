@@ -8,100 +8,97 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-06 01:02+0200\n"
-"PO-Revision-Date: 2023-03-13 14:41+0100\n"
+"POT-Creation-Date: 2025-01-16 20:55+0100\n"
+"PO-Revision-Date: 2024-11-25 07:32+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:45
+#. applet.js:47
 msgid "Applet"
 msgstr "Kisalkalmazás"
 
-#. applet.js:46
+#. applet.js:48
 msgid "Desklet"
 msgstr "Asztalkalmazás"
 
-#. applet.js:47
+#. applet.js:49
 msgid "Extension"
 msgstr "Bővítmény"
 
-#. applet.js:50
+#. applet.js:52
 msgid "Applets"
 msgstr "Kisalkalmazások"
 
-#. applet.js:51
+#. applet.js:53
 msgid "Desklets"
 msgstr "Asztalkalmazások"
 
-#. applet.js:52
+#. applet.js:54
 msgid "Extensions"
 msgstr "Bővítmények"
 
-#. applet.js:88
+#. applet.js:150
 msgid "Middle-click: \n"
 msgstr "Kattintás a középső egérgombbal: \n"
 
-#. applet.js:88 applet.js:141
+#. applet.js:150 applet.js:211
 msgid "Show .xsession-errors"
 msgstr "Az „.xsession-errors” fájl megjelenítése"
 
-#. applet.js:152
+#. applet.js:227
 msgid "Restart Cinnamon"
 msgstr "Cinnamon környezet újraindítása"
 
-#. applet.js:166
+#. applet.js:244
 msgid "--- Reload Spices ---"
 msgstr "--- Spices kiegészítők újratöltése ---"
 
-#. applet.js:172
+#. applet.js:251
 msgid "Reload Applet:"
 msgstr "Kisalkalmazás újratöltése:"
 
-#. applet.js:187
+#. applet.js:262
 msgid "Reload Desklet:"
 msgstr "Asztalkalmazás újratöltése:"
 
-#. applet.js:202
+#. applet.js:271
 msgid "Reload Extension:"
 msgstr "Bővítmény újratöltése:"
 
-#. applet.js:217
+#. applet.js:280
 msgid "--- Settings for ---"
-msgstr ""
+msgstr "--- Beállítások ehhez: ---"
 
-#. applet.js:223
-#, fuzzy
+#. applet.js:286
 msgid "Applet:"
-msgstr "Kisalkalmazás"
+msgstr "Kisalkalmazás:"
 
-#. applet.js:238
-#, fuzzy
+#. applet.js:295
 msgid "Desklet:"
-msgstr "Asztalkalmazás"
+msgstr "Asztalkalmazás:"
 
-#. applet.js:253
-#, fuzzy
+#. applet.js:304
 msgid "Extension:"
-msgstr "Bővítmény"
+msgstr "Bővítmény:"
 
-#. applet.js:268
+#. applet.js:313
 msgid "--- View Code ---"
 msgstr "--- Kód megjelenítése ---"
 
-#. applet.js:274
+#. applet.js:319
 msgid "View Applet Code for:"
 msgstr "Kisalkalmazás forráskód megjelenítése:"
 
-#. applet.js:289
+#. applet.js:328
 msgid "View Desklet Code for:"
 msgstr "Asztalkalmazás forráskód megjelenítése:"
 
-#. applet.js:304
+#. applet.js:337
 msgid "View Extension Code for:"
 msgstr "Bővítmény forráskód megjelenítése:"
 
@@ -120,3 +117,43 @@ msgstr ""
 "bővítmények) újraindítását vagy forráskódjának megnyitását, továbbá valós "
 "időben megjeleníti a „.xsession-errors” fájl tartalmát, valamint újraindítja "
 "a Cinnamon környezetet."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr ""

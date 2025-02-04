@@ -1,0 +1,7 @@
+{
+    "keybinding" : {
+        "type" : "keybinding",
+        "description" : "Shortcut to toggle grayscale",
+        "default" : ""
+    }
+}

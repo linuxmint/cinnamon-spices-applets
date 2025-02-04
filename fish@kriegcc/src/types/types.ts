@@ -9,5 +9,18 @@ export type AppletSettingsProps = {
   imagePath: string
   frames: number
   pausePerFrameInSeconds: number
-  rotate: boolean
+  flipSidewaysOnVerticalPanel: boolean
+  // advanced settings
+  // animation
+  animationScalingMode: string
+  autoAnimationMargin: boolean
+  customAnimationMargin: number
+  customAnimationHeight: number
+  customAnimationWidth: number
+  preserveAnimationAspectRatio: boolean
+  animationRotation: number
+  // developer options
+  developerOptionsEnabled: boolean
+  logLevel: string
+  forceFoolsDay: boolean
 }

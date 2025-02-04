@@ -1,0 +1,205 @@
+{
+  "SpiceSpyLayout": {
+    "type": "layout",
+    "pages": [
+      "pageGeneral",
+      "pageOptions"
+    ],
+    "pageGeneral": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "section2",
+        "section3"
+      ]
+    },
+    "pageOptions": {
+      "type": "page",
+      "title": "Options",
+      "sections": [
+        "section1"
+      ]
+    },
+    "section1": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "update-interval-hours",
+        "standard-opacity",
+        "color-on-change",
+        "show-icon-in-menu",
+        "icon-size",
+        "show-translations",
+        "show-issues",
+        "sort-by",
+        "show-uuid",
+        "translate-name",
+        "display-on-panel",
+        "useful-only"
+      ]
+    },
+    "section2": {
+      "type": "section",
+      "title": "List of authors of the Spices you are interested in",
+      "keys": ["author-list"]
+    },
+    "section3": {
+      "type": "section",
+      "title": "List of specific Spices you are interested in",
+      "keys": ["uuid-list", "button-my-spices", "label-reload", "button-reload"]
+    }
+  },
+  "update-interval": {
+    "type": "generic",
+    "default": -1
+  },
+  "update-interval-hours": {
+    "type": "scale",
+    "description": "Update interval",
+    "units": "hours",
+    "default": 4.0,
+    "min": 0.5,
+    "max": 24.0,
+    "step": 0.5
+  },
+  "standard-opacity": {
+    "type": "spinbutton",
+    "description": "Opacity in absence of change",
+    "default": 192,
+    "min": 64,
+    "max": 240,
+    "step": 16
+  },
+  "color-on-change": {
+    "type": "colorchooser",
+    "description": "Color on change",
+    "default": "#e4e4e4"
+  },
+  "show-icon-in-menu": {
+    "type": "switch",
+    "description": "Show each Spice icon in the menu",
+    "default": false
+  },
+  "icon-size": {
+    "type": "spinbutton",
+    "dependency": "show-icon-in-menu",
+    "description": "Icon size",
+    "units": "pixels",
+    "default": 24,
+    "min": 16,
+    "max": 64,
+    "step": 2
+  },
+  "show-translations": {
+    "type": "switch",
+    "description": "Show number of translations in the menu",
+    "default": false
+  },
+  "show-issues": {
+    "type": "switch",
+    "description": "Show number of issues in the menu",
+    "default": false
+  },
+  "sort-by": {
+    "type": "combobox",
+    "description": "Sort by",
+    "default": "translated",
+    "options": {
+      "Translated name": "translated",
+      "Original name": "untranslated",
+      "UUID": "uuid",
+      "Score (bottom-up)": "score",
+      "Score (top-down)": "dscore",
+      "Number of comments (bottom-up)": "comments",
+      "Number of comments (top-down)": "dcomments"
+    }
+  },
+  "show-uuid": {
+    "type": "switch",
+    "description": "Show UUID instead of name",
+    "default": false
+  },
+  "translate-name": {
+    "type": "switch",
+    "dependency": "!show-uuid",
+    "description": "Show translated name if available",
+    "default": true
+  },
+  "display-on-panel": {
+    "type": "combobox",
+    "description": "If there is nothing new",
+    "default": "normal",
+    "options": {
+      "Show icon and label": "normal",
+      "Show icon only": "icon",
+      "Do not show anything": "mask"
+    }
+  },
+  "useful-only": {
+    "type": "switch",
+    "description": "Show only non-zero values in panel",
+    "default": false
+  },
+  "author-list": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "author",
+        "title": "GitHub user name",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+
+    ]
+  },
+  "uuid-list": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "uuid",
+        "title": "UUID",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+
+    ]
+  },
+  "button-my-spices": {
+    "type": "button",
+    "description": "Add all the Spices I use",
+    "callback": "_add_user_Spices"
+  },
+  "label-reload": {
+    "type": "label",
+    "description": "There's no need to include Spices maintained by members of the Authors list in the UUID list.\nOnce your lists are correct, you can reload this applet to speed up the process.\nJust don't do it too often."
+  },
+  "button-reload": {
+    "type": "button",
+    "description": "Reload this applet",
+    "callback": "_reload_this_applet"
+  },
+  "spices_to_spy": {
+    "type": "generic",
+    "default": {
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
+    }
+  },
+  "old_spices_to_spy": {
+    "type": "generic",
+    "default": {
+      "actions": {},
+      "applets": {},
+      "desklets": {},
+      "extensions": {},
+      "themes": {}
+    }
+  }
+}

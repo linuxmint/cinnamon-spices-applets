@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-29 14:28+0100\n"
-"PO-Revision-Date: 2024-07-05 10:25+0200\n"
+"POT-Creation-Date: 2025-01-30 13:21+0100\n"
+"PO-Revision-Date: 2025-01-03 15:03+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -17,110 +17,110 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:235
 msgid "Sensors Monitor"
 msgstr "Monitoraggio Sensori"
 
-#. applet.js:401
+#. applet.js:418
 msgid "Suspended"
 msgstr "Sospeso"
 
-#. applet.js:619 applet.js:661
+#. applet.js:636 applet.js:678
 msgid "high:"
 msgstr "alto:"
 
-#. applet.js:619 applet.js:621 applet.js:661 applet.js:663 applet.js:705
+#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
 msgid "n/a"
 msgstr "n/d"
 
-#. applet.js:621 applet.js:663
+#. applet.js:638 applet.js:680
 msgid "crit:"
 msgstr "crit:"
 
-#. applet.js:705 applet.js:749
+#. applet.js:722 applet.js:766
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:751
+#. applet.js:768
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:780
+#. applet.js:797
 msgid "No intrusion detected"
 msgstr "Nessuna intrusione rilevata"
 
-#. applet.js:780
+#. applet.js:797
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSIONE RILEVATA!"
 
-#. applet.js:800
+#. applet.js:817
 msgid "Must be configured!"
 msgstr "Deve essere configurato!"
 
-#. applet.js:1187
+#. applet.js:1205
 msgid "Settings"
 msgstr "Impostazioni"
 
-#. applet.js:1187
+#. applet.js:1205
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1194
+#. applet.js:1212
 msgid "⚙ General"
 msgstr "⚙ Generale"
 
-#. applet.js:1204
-#, fuzzy, javascript-format
+#. applet.js:1228
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Sensori di temperatura"
+msgstr "%s Sensori di temperatura"
 
-#. applet.js:1214
-#, fuzzy, javascript-format
+#. applet.js:1244
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Sensori delle ventole"
+msgstr "%s Sensori delle ventole"
 
-#. applet.js:1224
-#, fuzzy, javascript-format
+#. applet.js:1260
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Sensori di tensione"
+msgstr "%s Sensori di tensione"
 
-#. applet.js:1234
-#, fuzzy, javascript-format
+#. applet.js:1276
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Sensori di intrusione"
+msgstr "%s Sensori di intrusione"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1255
+#. applet.js:1303
 msgid "Run xsensors"
 msgstr "Esegui xsensors"
 
-#. applet.js:1264
+#. applet.js:1312
 msgid "Suspend Sensors"
 msgstr "Sospendi i sensori"
 
-#. applet.js:1275
+#. applet.js:1323
 msgid "Reload this applet"
 msgstr "Ricarica questa applet"
 
-#. applet.js:1576
+#. applet.js:1653
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Rimuovere '%s'?"
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:350
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s è totalmente funzionante."
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:351
 msgid "All dependencies are installed"
 msgstr "Tutte le dipendenze sono installate"
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:380
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -128,13 +128,17 @@ msgstr ""
 "Sembra che manchino alcuni dei programmi necessari affinché questa applet "
 "abbia tutte le sue funzionalità."
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "Si prega di eseguire, nel terminale appena aperto, i comandi:"
+#. lib/checkDependencies.js:382
+msgid "Please install these packages:"
+msgstr ""
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
 msgstr "Alcune dipendenze non sono installate!"
+
+#. lib/checkDependencies.js:398
+msgid "Install these packages now"
+msgstr ""
 
 #. lib/util.js:244
 #, javascript-format
@@ -197,13 +201,17 @@ msgstr ""
 "(CPU - GPU - Alimentatore), Velocità Ventole, Tensioni, Intrusioni. Avvisa "
 "con cambiamenti di colore quando un valore raggiunge o supera il suo limite."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Temperatura"
+msgstr "⦿ Temperatura"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+#, fuzzy
+msgid "𖣘 Fan"
 msgstr "🤂 Ventola"
 
 #. settings-schema.json->page_Voltages->title
@@ -395,47 +403,47 @@ msgstr "Dimensione carattere (% della dimensione standard)"
 
 #. settings-schema.json->vertical-align->options
 msgid "baseline"
-msgstr ""
+msgstr "baseline"
 
 #. settings-schema.json->vertical-align->options
 msgid "sub"
-msgstr ""
+msgstr "sub"
 
 #. settings-schema.json->vertical-align->options
 msgid "super"
-msgstr ""
+msgstr "super"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-top"
-msgstr ""
+msgstr "testo-sù"
 
 #. settings-schema.json->vertical-align->options
 msgid "text-bottom"
-msgstr ""
+msgstr "testo-giù"
 
 #. settings-schema.json->vertical-align->options
 msgid "middle"
-msgstr ""
+msgstr "centrale"
 
 #. settings-schema.json->vertical-align->options
 msgid "top"
-msgstr ""
+msgstr "su"
 
 #. settings-schema.json->vertical-align->options
 msgid "bottom"
-msgstr ""
+msgstr "giù"
 
 #. settings-schema.json->vertical-align->options
 msgid "unset"
-msgstr ""
+msgstr "disattiva"
 
 #. settings-schema.json->vertical-align->options
 msgid "inherit"
-msgstr ""
+msgstr "eredita"
 
 #. settings-schema.json->vertical-align->description
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Allineamento verticale"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"

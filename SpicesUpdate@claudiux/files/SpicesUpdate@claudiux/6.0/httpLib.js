@@ -2,7 +2,7 @@ const {
     source_remove,
     timeout_add_seconds,
     timeout_add
-} = imports.mainloop; //Mainloop
+} = require("mainloopTools");
 
 /**
  * Usage of log and logError:
@@ -119,7 +119,8 @@ class Soup2 {
         return data;
     }
 }
-const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+//~ const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+const soupLib = (imports.gi.Soup.SessionAsync == undefined) ? new Soup3() : new Soup2();
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 

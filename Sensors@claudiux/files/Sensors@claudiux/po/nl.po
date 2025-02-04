@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-29 14:28+0100\n"
+"POT-Creation-Date: 2025-01-30 13:21+0100\n"
 "PO-Revision-Date: 2024-09-11 12:03+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -20,107 +20,107 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:235
 msgid "Sensors Monitor"
 msgstr "Sensoren Monitor"
 
-#. applet.js:401
+#. applet.js:418
 msgid "Suspended"
 msgstr "Opgeschort"
 
-#. applet.js:619 applet.js:661
+#. applet.js:636 applet.js:678
 msgid "high:"
 msgstr "hoog:"
 
-#. applet.js:619 applet.js:621 applet.js:661 applet.js:663 applet.js:705
+#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
 msgid "n/a"
 msgstr "n.v.t"
 
-#. applet.js:621 applet.js:663
+#. applet.js:638 applet.js:680
 msgid "crit:"
 msgstr "kritiek:"
 
-#. applet.js:705 applet.js:749
+#. applet.js:722 applet.js:766
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:751
+#. applet.js:768
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:780
+#. applet.js:797
 msgid "No intrusion detected"
 msgstr "Geen verstoring gedetecteerd"
 
-#. applet.js:780
+#. applet.js:797
 msgid "INTRUSION DETECTED!"
 msgstr "VERSTORING GEDETECTEERD!"
 
-#. applet.js:800
+#. applet.js:817
 msgid "Must be configured!"
 msgstr "Moet worden ingesteld!"
 
-#. applet.js:1187
+#. applet.js:1205
 msgid "Settings"
 msgstr "Instellingen"
 
-#. applet.js:1187
+#. applet.js:1205
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1194
+#. applet.js:1212
 msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
-#. applet.js:1204
+#. applet.js:1228
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatuursensoren"
 
-#. applet.js:1214
+#. applet.js:1244
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensoren"
 
-#. applet.js:1224
+#. applet.js:1260
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spanningssensoren"
 
-#. applet.js:1234
+#. applet.js:1276
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Inbraaksensoren"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1255
+#. applet.js:1303
 msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
-#. applet.js:1264
+#. applet.js:1312
 msgid "Suspend Sensors"
 msgstr "Opschorten van sensors"
 
-#. applet.js:1275
+#. applet.js:1323
 msgid "Reload this applet"
 msgstr "Herlaad deze hulptoepassing"
 
-#. applet.js:1576
+#. applet.js:1653
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:350
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "De hulptoepassing %s is volledig functioneel."
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:351
 msgid "All dependencies are installed"
 msgstr "Alle afhankelijkheden zijn geïnstalleerd"
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:380
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -128,13 +128,17 @@ msgstr ""
 "U lijkt een aantal van de programma's te missen die nodig zijn voor deze "
 "hulptoepassing om alle functies te hebben."
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "Voer de commando's uit in de zojuist geopende terminal:"
+#. lib/checkDependencies.js:382
+msgid "Please install these packages:"
+msgstr ""
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
+
+#. lib/checkDependencies.js:398
+msgid "Install these packages now"
+msgstr ""
 
 #. lib/util.js:244
 #, javascript-format
@@ -198,12 +202,17 @@ msgstr ""
 "kleurveranderingen aan wanneer een waarde de grenswaarde bereikt of "
 "overschrijdt."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatuur"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+#, fuzzy
+msgid "𖣘 Fan"
 msgstr "🤂 Ventilator"
 
 #. settings-schema.json->page_Voltages->title

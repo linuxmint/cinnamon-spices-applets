@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-23 04:17+0200\n"
-"PO-Revision-Date: 2019-08-22 01:09+0300\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-11-15 23:57+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 6.0/DataProviders.js:47 3.4/DataProviders.js:49 4.0/DataProviders.js:47
@@ -41,12 +41,12 @@ msgstr "------------- CPU ------------"
 #: 6.0/DataProviders.js:126 3.4/DataProviders.js:129 4.0/DataProviders.js:126
 #: 3.2/DataProviders.js:117 3.0/DataProviders.js:117 5.6/DataProviders.js:126
 msgid "Core"
-msgstr "Ydin"
+msgstr "Core"
 
 #: 6.0/DataProviders.js:138 3.4/DataProviders.js:141 4.0/DataProviders.js:138
 #: 3.2/DataProviders.js:157 3.0/DataProviders.js:157 5.6/DataProviders.js:138
 msgid "MEM"
-msgstr "MUISTI"
+msgstr "MEM"
 
 #: 6.0/DataProviders.js:158 3.4/DataProviders.js:161 4.0/DataProviders.js:158
 #: 3.2/DataProviders.js:163 3.0/DataProviders.js:163 5.6/DataProviders.js:158
@@ -81,7 +81,7 @@ msgstr "SWAP"
 #: 6.0/DataProviders.js:193 3.4/DataProviders.js:194 4.0/DataProviders.js:193
 #: 3.2/DataProviders.js:199 3.0/DataProviders.js:199 5.6/DataProviders.js:193
 msgid "------------ Swap ------------"
-msgstr "------- Levyvälimuisti -------"
+msgstr "------------ Swap ------------"
 
 #: 6.0/DataProviders.js:194 3.4/DataProviders.js:195 4.0/DataProviders.js:194
 #: 3.2/DataProviders.js:200 3.0/DataProviders.js:200 5.6/DataProviders.js:194
@@ -93,7 +93,7 @@ msgstr "Swap"
 #: 6.0/DataProviders.js:204 3.4/DataProviders.js:205 4.0/DataProviders.js:204
 #: 3.2/DataProviders.js:264 3.0/DataProviders.js:264 5.6/DataProviders.js:204
 msgid "NET"
-msgstr "NETTI"
+msgstr "LAN"
 
 #: 6.0/DataProviders.js:287 3.4/DataProviders.js:289 4.0/DataProviders.js:287
 #: 3.2/DataProviders.js:305 3.0/DataProviders.js:305 5.6/DataProviders.js:287
@@ -113,7 +113,7 @@ msgstr "Ylös:"
 #: 6.0/DataProviders.js:315 3.4/DataProviders.js:317 4.0/DataProviders.js:315
 #: 3.2/DataProviders.js:382 3.0/DataProviders.js:382 5.6/DataProviders.js:315
 msgid "DISK"
-msgstr "LEVY"
+msgstr "DISK"
 
 #: 6.0/DataProviders.js:376 3.4/DataProviders.js:378 4.0/DataProviders.js:376
 #: 3.2/DataProviders.js:408 3.0/DataProviders.js:408 5.6/DataProviders.js:376
@@ -135,7 +135,6 @@ msgid "Dependency missing"
 msgstr "Puuttuvat riippuvuudet"
 
 #: 6.0/applet.js:72 4.0/applet.js:66 5.6/applet.js:72
-#, fuzzy
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -144,11 +143,12 @@ msgid ""
 "\topenSUSE: libgtop-devel\n"
 "to use "
 msgstr ""
-"Suositus asenna  GTop paketti\n"
+"Asenna gtop suraavasti\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
 "\tFedora: libgtop2-devel\n"
 "\tArch: libgtop\n"
-"käyttöön. "
+"\tOpenSUSE: libgtop-devel\n"
+" "
 
 #: 6.0/applet.js:294 3.4/applet.js:264 4.0/applet.js:275 3.2/applet.js:139
 #: 3.0/applet.js:141 5.6/applet.js:283
@@ -156,37 +156,36 @@ msgid "Preferences"
 msgstr "Asetukset"
 
 #: 6.0/applet.js:297 4.0/applet.js:277 5.6/applet.js:285
-#, fuzzy
 msgid "Refresh graphs"
-msgstr "Päivitysnopeus (ms)"
+msgstr "Päivitä kaaviot"
 
 #: 6.0/applet.js:301
 msgid "Without any graphics"
-msgstr ""
+msgstr "Ilman grafiikkaa"
 
 #: 6.0/applet.js:307
 msgid "With graphics"
-msgstr ""
+msgstr "Grafiikan kanssa"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "00-20"
-msgstr ""
+msgstr "00-20"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "20-40"
-msgstr ""
+msgstr "20-40"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "40-60"
-msgstr ""
+msgstr "40-60"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "60-80"
-msgstr ""
+msgstr "60-80"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "80-100"
-msgstr ""
+msgstr "80-100"
 
 #: 6.0/prefs.js:483 6.0/prefs.js:619 3.4/prefs.js:327 3.4/prefs.js:463
 #: 4.0/prefs.js:483 4.0/prefs.js:619 3.2/prefs.js:283 3.2/prefs.js:398
@@ -225,7 +224,7 @@ msgstr "Kirjoitus"
 #: 6.0/util.js:244 5.6/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr ""
+msgstr "Kohteen \"%s\" suoritus epäonnistui:"
 
 #: 3.4/applet.js:62
 msgid ""
@@ -258,7 +257,7 @@ msgstr "(MiB/s)"
 #: 3.2/ErrorApplet.js:28 3.2/ErrorApplet.js:34 3.0/ErrorApplet.js:28
 #: 3.0/ErrorApplet.js:34
 msgid "Multi-Core System Monitor Error."
-msgstr "Moniydin valvojan virhe."
+msgstr "Multi-Core System Monitor virhe."
 
 #: 3.2/applet.js:334 3.0/applet.js:323
 msgid "Please install \"gir1.2-gtop-2.0\" package."
@@ -266,46 +265,46 @@ msgstr "Asenna uudestaan\"gir1.2-gtop-2.0\" paketti."
 
 #: 3.2/applet.js:339 3.0/applet.js:328
 msgid "Reload this applet"
-msgstr ""
+msgstr "Lataa sovelma uudelleen"
 
 #: 3.2/prefs.js:540 3.0/prefs.js:530
 msgid "Error while saving file:"
-msgstr "Virhe tiedostoa tallennettaessa:"
+msgstr "Virhe tiedoston tallennuksessa:"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Multi-Core System Monitor"
-msgstr "Moniydin valvojan virhe."
+msgstr "Multi-Core System Monitor"
 
 #. metadata.json->description
 msgid ""
 "Displays in realtime the cpu usage for each core/cpu and overall memory "
 "usage."
 msgstr ""
+"Näyttää reaaliajassa prosessorin, muistin ja kiintolevyn käyttöasteen."
 
 #: 6.0/prefsui.glade:56 3.4/prefsui.glade:49 4.0/prefsui.glade:56
 #: 3.2/prefsui.glade:49 3.0/prefsui.glade:49 5.6/prefsui.glade:56
 msgid "Multi-Core System Monitor Preferences"
-msgstr "Moniydin valvojan asetukset"
+msgstr "Multi-Core System Monitor asetukset"
 
 #: 6.0/prefsui.glade:90 3.4/prefsui.glade:83 4.0/prefsui.glade:90
 #: 3.2/prefsui.glade:81 3.0/prefsui.glade:81 5.6/prefsui.glade:90
 msgid "Labels"
-msgstr "Nimet"
+msgstr "Merkitse nimet"
 
 #: 6.0/prefsui.glade:140 3.4/prefsui.glade:133 4.0/prefsui.glade:140
 #: 3.2/prefsui.glade:132 3.0/prefsui.glade:132 5.6/prefsui.glade:140
 msgid "Refresh Rate (ms)"
-msgstr "Päivitysnopeus (ms)"
+msgstr "Virkistystaajuus (ms)"
 
 #: 6.0/prefsui.glade:168 4.0/prefsui.glade:168 5.6/prefsui.glade:168
 msgid "Curves thickness"
-msgstr ""
+msgstr "Viivan paksuus"
 
 #: 6.0/prefsui.glade:212 3.4/prefsui.glade:177 4.0/prefsui.glade:212
 #: 3.2/prefsui.glade:245 5.6/prefsui.glade:212
 msgid "Label Color"
-msgstr "Nimen väri"
+msgstr "Väri"
 
 #: 6.0/prefsui.glade:263 3.4/prefsui.glade:228 4.0/prefsui.glade:263
 #: 3.2/prefsui.glade:297 3.0/prefsui.glade:245 5.6/prefsui.glade:263
@@ -326,15 +325,15 @@ msgstr "Yleinen"
 #: 3.0/prefsui.glade:912 3.0/prefsui.glade:1245 5.6/prefsui.glade:376
 #: 5.6/prefsui.glade:659 5.6/prefsui.glade:1032 5.6/prefsui.glade:1378
 msgid "Width"
-msgstr "Leveys"
+msgstr "Alueen leveys"
 
 #: 6.0/prefsui.glade:433 4.0/prefsui.glade:433 5.6/prefsui.glade:433
 msgid "Color by activity level"
-msgstr ""
+msgstr "Väri aktiivisuustason mukaan"
 
 #: 6.0/prefsui.glade:460 4.0/prefsui.glade:460 5.6/prefsui.glade:460
 msgid "Use automatic colors"
-msgstr ""
+msgstr "Automaattiset värit"
 
 #: 6.0/prefsui.glade:494 6.0/prefsui.glade:710 3.4/prefsui.glade:392
 #: 3.4/prefsui.glade:564 4.0/prefsui.glade:494 4.0/prefsui.glade:710
@@ -345,11 +344,11 @@ msgstr "Värit"
 
 #: 6.0/prefsui.glade:508 4.0/prefsui.glade:508 5.6/prefsui.glade:508
 msgid "by CPU:"
-msgstr ""
+msgstr "prosessorille:"
 
 #: 6.0/prefsui.glade:538 4.0/prefsui.glade:538 5.6/prefsui.glade:538
 msgid "by activity level (in %):"
-msgstr ""
+msgstr "Aktiivisuus (%):"
 
 #: 6.0/prefsui.glade:733 3.4/prefsui.glade:587 4.0/prefsui.glade:733
 #: 3.2/prefsui.glade:658 3.0/prefsui.glade:606 5.6/prefsui.glade:733
@@ -388,7 +387,7 @@ msgstr "Skaalaus"
 #: 3.2/prefsui.glade:1071 3.2/prefsui.glade:1404 3.0/prefsui.glade:1019
 #: 3.0/prefsui.glade:1352 5.6/prefsui.glade:1139 5.6/prefsui.glade:1485
 msgid "Auto Scale"
-msgstr "Automaattinen skaalaus"
+msgstr "Autom. skaalaaminen"
 
 #: 6.0/prefsui.glade:1177 6.0/prefsui.glade:1523 3.4/prefsui.glade:1031
 #: 3.4/prefsui.glade:1377 4.0/prefsui.glade:1177 4.0/prefsui.glade:1523
@@ -412,12 +411,12 @@ msgstr "Verkko"
 #: 6.0/prefsui.glade:1635 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635
 #: 3.2/prefsui.glade:1540 3.0/prefsui.glade:1488 5.6/prefsui.glade:1635
 msgid "Disk IO"
-msgstr "Levy"
+msgstr "Kiintolevy"
 
 #: 6.0/prefsui.glade:1695 3.4/prefsui.glade:1549 4.0/prefsui.glade:1695
 #: 3.2/prefsui.glade:1602 3.0/prefsui.glade:1550 5.6/prefsui.glade:1695
 msgid "Scaling Description"
-msgstr "Skaalauksen kuvaus"
+msgstr "Skaalaamisen kuvaus"
 
 #: 6.0/prefsui.glade:1710 3.4/prefsui.glade:1564 4.0/prefsui.glade:1710
 #: 3.2/prefsui.glade:1614 3.0/prefsui.glade:1562 5.6/prefsui.glade:1710
@@ -425,18 +424,19 @@ msgid "Close"
 msgstr "Sulje"
 
 #: 6.0/prefsui.glade:1740 4.0/prefsui.glade:1740 5.6/prefsui.glade:1740
-#, fuzzy
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
 "    displayed area. Once the largest reading is no longer displayed\n"
 "    the next largest becomes the new value by which the readings\n"
 "    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
-"    However, it also means that if there is a large reading small readings\n"
+"    However, it also means that if there is a large reading small "
+"readings\n"
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading since\n"
+"    If not enabled the largest value used will be the largest reading "
+"since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -444,22 +444,20 @@ msgid ""
 "    logarithmic scale. If you are not familiar basically, it reduces the\n"
 "    large values so that they dont dominate the smaller readings."
 msgstr ""
-"Automaattinen skaalaus:\n"
-"\tTämä skaalaa viivakaavion suurimmalla mahdollisella näytettävällä "
-"alueella.\n"
-"\tKun suurinta lukemaa ei enää näytetä seuraavasta suurimmasta tulee uusi\n"
-"\tarvo, jolla lukemat ovat skaalattuja. Kuvaajan avulla \"zoom\" näyttää\n"
-"\tkuvaajan yksityiskohdat..\n"
-"\tSe tarkoittaa kuitenkin myös sitä, että suurin ja pienin lukema, voivat\n"
-"\terottua nollasta. Jos on vain pieniä lukemia, hiukan suuremmat lukemat\n"
-"\tsaattavat näyttää suurempina kuin pitäisi. Jos tätä ei käytetä, suurin\n"
-"\tkäytetty arvo on suurin lukema mittauksen aloittamisen jälkeen.\n"
+"Autom. skaalaus:\n"
+"    Skaalaa viivan kokonaan näytettävälle alueelle.\n"
+"    Kun mitattava lukema loppuu, seuraava aloitaa uuden\n"
+"    arvon skaalattuna. Kuvaajan näyttää arvojen tulokset\n"
+"    \n"
+"    Suurin ja pienin lukema, voi erottua nollasta vain vähän.\n"
+"    Jos tulee vain pieniä lukemia niin hieman suuremmat\n"
+"    saattavat näyttää isompina kuin pitäisi. Jos skaalausta ei käytetä,\n"
+"    suurin arvo on ohjelman aloittamisen jälkeen saatu arvo.\n"
 "\n"
 "Logaritminen skaalaus:\n"
-"\tTämä muuttaa lukemia siten, että ne näytetään painikkeella logaritminen\n"
-"\tasteikko. Jos et tunne termiä, se vähentää suuret arvot niin, että ne "
-"eivät\n"
-"\thallitse pienempiä lukemia."
+"    Lukemia näytetään käyttämällä logaritmi asteikkoa.\n"
+"    Jos et tunne termiä, se vähentää suuria arvoja, jotta ne eivät\n"
+"    hallitse pienempiä lukemia."
 
 #: 3.4/prefsui.glade:1594 3.2/prefsui.glade:1644 3.0/prefsui.glade:1592
 msgid ""
@@ -469,7 +467,8 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small "
+"readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -479,7 +478,7 @@ msgid ""
 "\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
 "\tlarge values so that they dont dominate the smaller readings."
 msgstr ""
-"Automaattinen skaalaus:\n"
+"Autom. skaalaus:\n"
 "\tTämä skaalaa viivakaavion suurimmalla mahdollisella näytettävällä "
 "alueella.\n"
 "\tKun suurinta lukemaa ei enää näytetä seuraavasta suurimmasta tulee uusi\n"

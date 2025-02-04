@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-01-20
+
+### Fixed
+
+- Fix a crash when popup menu is replaced (e.g. transition from error to normal message) while it is still open.
+
+### Added
+
+- Add an advanced settings tab to the preferences window with options to adjust animation size and margin.
+
 ## [0.1.1] - 2024-09-11
 
 ### Fixed

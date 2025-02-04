@@ -54,44 +54,18 @@ PowerProfilesApplet.prototype = {
     this._profilesProxy = null;
     this._proxyId = 0;
 
-    if (!GLib.find_program_in_path("powerprofilesctl")) {
-      let source = new MessageTray.Source(this.metadata.name);
-      let params = { icon: new St.Icon({ icon_name: "dialog-error-symbolic", icon_size: 48 }) };
-      let notification = new MessageTray.Notification(source, _("Power Profiles Applet Error"),
-        _("The system package 'power-profiles-daemon' is not installed.\n\nPlease install it and reload the applet."), params);
-
-      notification.addButton("open-readme", _("Open README"));
-      notification.addButton("open-website", _("Open Website"));
-      notification.connect("action-invoked", (self, action) => {
-        let launcher = new Gio.SubprocessLauncher({
-          flags: (Gio.SubprocessFlags.STDIN_PIPE |
-              Gio.SubprocessFlags.STDOUT_PIPE |
-              Gio.SubprocessFlags.STDERR_PIPE)
-        });
-
-        if (action == "open-readme") {
-          launcher.spawnv(["open", `${metadata.path}/../README.md`]);
-        } else if (action == "open-website") {
-          launcher.spawnv(["open",
-            "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/power-profiles@rcalixte#dependencies"]);
-        }
-      });
-
-      Main.messageTray.add(source);
-      source.notify(notification);
-      return;
-    }
-
     try {
       this._profilesProxy = new PowerProfilesProxy(Gio.DBus.system, BUS_NAME, BUS_PATH);
     } catch (error) {
       global.log(`${UUID}: ` + _("Please make sure the power-profiles-daemon package is installed and the service is running."));
       global.logError(`${UUID}: ` + _("exception:") + ` ${error.toString()}`);
+      self._check_powerprofilesctl();
       return;
     }
 
     if (!this._profilesProxy.ActiveProfile) {
       global.logError(`${UUID}: ` + _("Please make sure the power-profiles-daemon package is installed and the service is running."));
+      self._check_powerprofilesctl();
       return;
     }
 
@@ -125,6 +99,36 @@ PowerProfilesApplet.prototype = {
     this._updateApplet();
     this.set_show_label_in_vertical_panels(false);
     this._setKeybinding();
+  },
+
+  _check_powerprofilesctl() {
+    if (!GLib.find_program_in_path("powerprofilesctl")) {
+      let source = new MessageTray.Source(this.metadata.name);
+      let params = { icon: new St.Icon({ icon_name: "dialog-error-symbolic", icon_size: 48 }) };
+      let notification = new MessageTray.Notification(source, _("Power Profiles Applet Error"),
+        _("The system package 'power-profiles-daemon' is not installed.\n\nPlease install it and reload the applet."), params);
+
+      notification.addButton("open-readme", _("Open README"));
+      notification.addButton("open-website", _("Open Website"));
+      notification.connect("action-invoked", (self, action) => {
+        let launcher = new Gio.SubprocessLauncher({
+          flags: (Gio.SubprocessFlags.STDIN_PIPE |
+              Gio.SubprocessFlags.STDOUT_PIPE |
+              Gio.SubprocessFlags.STDERR_PIPE)
+        });
+
+        if (action == "open-readme") {
+          launcher.spawnv(["open", `${metadata.path}/../README.md`]);
+        } else if (action == "open-website") {
+          launcher.spawnv(["open",
+            "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/power-profiles@rcalixte#dependencies"]);
+        }
+      });
+
+      Main.messageTray.add(source);
+      source.notify(notification);
+      return;
+    }
   },
 
   _update() {

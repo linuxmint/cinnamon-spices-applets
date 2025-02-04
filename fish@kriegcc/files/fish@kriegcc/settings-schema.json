@@ -3,6 +3,7 @@
     "type": "layout",
     "pages": [
       "pagePreferences",
+      "pageAdvancedSettings",
       "pageHelp",
       "pageAbout"
     ],
@@ -12,6 +13,16 @@
       "sections": [
         "sectionGeneral",
         "sectionAnimation"
+      ]
+    },
+    "pageAdvancedSettings": {
+      "type": "page",
+      "title": "Advanced Settings",
+      "sections": [
+        "sectionAdvancedAnimationSettings",
+        "sectionAdvancedAnimationSettingsMargin",
+        "sectionAdvancedAnimationSettingsCustomDimension",
+        "sectionDeveloperOptions"
       ]
     },
     "pageHelp": {
@@ -48,8 +59,46 @@
         "keyImagePath",
         "keyFrames",
         "keyPausePerFrameInSeconds",
-        "keyRotate"
+        "keyFlipSidewaysOnVerticalPanel"
       ]
+    },
+    "sectionAdvancedAnimationSettings": {
+      "type": "section",
+      "title": "Animation Settings",
+      "keys": [
+        "keyAnimationScalingMode",
+        "keyAnimationRotationHint",
+        "keyAnimationRotation"
+      ]
+    },
+    "sectionAdvancedAnimationSettingsMargin": {
+      "type": "section",
+      "title": "Animation Margin",
+      "keys": [
+        "keyAnimationMarginHint",
+        "keyAnimationAutoMargin",
+        "keyAnimationMargin"
+      ],
+      "dependency": "keyAnimationScalingMode=AutoFit"
+    },
+    "sectionAdvancedAnimationSettingsCustomDimension": {
+      "type": "section",
+      "title": "Animation Custom Dimension",
+      "keys": [
+        "keyAnimationHeight",
+        "keyAnimationWidth",
+        "keyAnimationPreserveAspectRatio"
+      ],
+      "dependency": "keyAnimationScalingMode=Custom"
+    },
+    "sectionDeveloperOptions": {
+      "type": "section",
+      "title": "Developer Options",
+      "keys": [
+        "keyLogLevel",
+        "keyForceFoolsDay"
+      ],
+      "dependency": "keyDeveloperOptionsEnabled"
     },
     "sectionInstruction": {
       "type": "section",
@@ -136,11 +185,11 @@
     "description": "Pause per frame",
     "tooltip": "Use this spin box to specify the pause in seconds between each frame in the animation."
   },
-  "keyRotate": {
+  "keyFlipSidewaysOnVerticalPanel": {
     "type": "switch",
     "default": false,
-    "description": "Rotate on vertical panels",
-    "tooltip": "Select this option to rotate the applet image when you add the applet to a vertical panel."
+    "description": "Flip sideways on vertical panels",
+    "tooltip": "Select this option to rotate the applet image sideways when you add the applet to a vertical panel."
   },
   "keyImagePath": {
     "type": "custom",
@@ -148,6 +197,100 @@
     "widget": "ImageChooser",
     "default": "~/.local/share/cinnamon/applets/fish@kriegcc/animations/wanda.svg",
     "tooltip": "Use this field to select the image to display in the applet. You can select an image that is supplied with the applet or a personal image."
+  },
+  "keyAnimationScalingMode": {
+    "type": "radiogroup",
+    "default": "AutoFit",
+    "description": "Scaling Mode",
+    "options": {
+      "Auto-fit": "AutoFit",
+      "Preserve original size": "PreserveOriginal",
+      "Custom": "Custom"
+    },
+    "tooltip": "Select how the animation image in the panel should be scaled."
+  },
+  "keyAnimationMarginHint": {
+    "type": "label",
+    "description": "Margin options apply only when the 'auto-fit' option is enabled. For other settings, margins appear if the animation is smaller than the panel."
+  },
+  "keyAnimationAutoMargin": {
+    "type": "switch",
+    "default": true,
+    "description": "Auto-margin",
+    "tooltip": "Check this to use the default margin from theme."
+  },
+  "keyAnimationMargin": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "px",
+    "description": "Margin around the animation frame",
+    "tooltip": "Use this spin box to specify the margin around the animation frame shown in the panel.",
+    "dependency": "!keyAnimationAutoMargin"
+  },
+  "keyAnimationHeight": {
+    "type": "spinbutton",
+    "default": 40,
+    "min": 1,
+    "max": 480,
+    "step": 1,
+    "units": "px",
+    "description": "Height",
+    "tooltip": "Use this spin box to specify a custom height for the animation frame."
+  },
+  "keyAnimationWidth": {
+    "type": "spinbutton",
+    "default": 40,
+    "min": 1,
+    "max": 480,
+    "step": 1,
+    "units": "px",
+    "description": "Width",
+    "tooltip": "Use this spin box to specify a custom width for the animation frame."
+  },
+  "keyAnimationPreserveAspectRatio": {
+    "type": "switch",
+    "default": true,
+    "description": "Preserve aspect ratio",
+    "tooltip": "Enable this option to maintain the original aspect ratio of the animation. If enabled, the specified width will be ignored."
+  },
+  "keyAnimationRotationHint": {
+    "type": "label",
+    "description": "If a rotation is selected, the image may also be flipped sideways depending on the 'Flip sideways on vertical panels' option."
+  },
+  "keyAnimationRotation": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Rotation",
+    "options": {
+      "0°": 0,
+      "90°": 90,
+      "180°": 180,
+      "270°": 270
+    }
+  },
+  "keyDeveloperOptionsEnabled": {
+    "type": "generic",
+    "default": false
+  },
+  "keyLogLevel": {
+    "type": "combobox",
+    "default": "Info",
+    "description": "Log Level",
+    "options": {
+      "Info": "Info",
+      "Debug": "Debug",
+      "Warning": "Warning",
+      "Error": "Error"
+    }
+  },
+  "keyForceFoolsDay": {
+    "type": "switch",
+    "default": false,
+    "description": "Force Fool's Day",
+    "tooltip": "Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April 1st) without modifying the system date."
   },
   "keyInstructionsText": {
     "type": "label",
@@ -175,7 +318,7 @@
   },
   "keyVersion": {
     "type": "label",
-    "description": "v0.1.1"
+    "description": "v0.2.0"
   },
   "keyLicenseText": {
     "type": "label",

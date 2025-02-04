@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-30 23:12+0200\n"
-"PO-Revision-Date: 2022-11-30 23:38+0200\n"
+"POT-Creation-Date: 2023-05-20 13:52+0200\n"
+"PO-Revision-Date: 2024-11-22 11:31+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:110
+#: applet.js:112
 msgid "Mark all as read"
 msgstr "Merkitse kaikki luetuiksi"
 
-#: applet.js:122
+#: applet.js:135
 msgid "No xlets found, click to reload"
 msgstr "Ei löytynyt xlets, lataa uudelleen"
 
@@ -32,7 +32,9 @@ msgstr "Spices notifier"
 
 #. metadata.json->description
 msgid "Notifies of comments on the Cinnamon Spices website"
-msgstr "Ilmoittaa kommenteista Cinnamon Spices sivustolla"
+msgstr ""
+"Ilmoittaa kommentit Cinnamon Spices sivustolla. Pysyt seuraamaan "
+"lempisovelman tapahtumia"
 
 #. settings-schema.json->username->description
 msgid "GitHub user name"
@@ -48,4 +50,20 @@ msgstr "minuuttia"
 
 #. settings-schema.json->show-nonzero-only->description
 msgid "Hide panel icon when there are no unread comments"
-msgstr "Piilota kuvake, kun lukemattomia kommentteja ei ole"
+msgstr "Piilota kuvake kun ei ole lukemattomia kommentteja"
+
+#. settings-schema.json->label-uuids->description
+msgid "Additional uuid:s:"
+msgstr "Lisää sovelmia uuid:n perustella:"
+
+#. settings-schema.json->uuids->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->uuids->tooltip
+msgid ""
+"Additional uuid:s for applets, desklets, extensions and themes you want to "
+"follow (add a row for each of them)."
+msgstr ""
+"Muut sovelmat valintasi mukaan (lisää rivi kullekin niistä). Esim. spices-"
+"notifier@germanfr on UUID."

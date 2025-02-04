@@ -639,6 +639,15 @@ class VPNSentinel extends Applet.TextIconApplet {
 
   async super_kill(app) {
     let app_name = app.get_name();
+    let isFlatpak = app.get_is_flatpak();
+
+    if (isFlatpak) {
+      let flatpakId = app.get_flatpak_app_id();
+      Util.spawnCommandLineAsync("flatpak kill "+flatpakId);
+      this.activityLog.log(_("%s has just been stopped.").format(""+app_name));
+      return
+    }
+
     let kw = this.keyword_for_pkill(app);
     let result = killall(kw);
     if (result) {

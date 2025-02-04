@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-06 01:02+0200\n"
+"POT-Creation-Date: 2025-01-16 20:55+0100\n"
 "PO-Revision-Date: 2023-12-28 08:51+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -19,90 +19,90 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:45
+#. applet.js:47
 msgid "Applet"
 msgstr "Panelprogram"
 
-#. applet.js:46
+#. applet.js:48
 msgid "Desklet"
 msgstr "Skrivebordsprogram"
 
-#. applet.js:47
+#. applet.js:49
 msgid "Extension"
 msgstr "Udvidelse"
 
-#. applet.js:50
+#. applet.js:52
 msgid "Applets"
 msgstr "Panelprogrammer"
 
-#. applet.js:51
+#. applet.js:53
 msgid "Desklets"
 msgstr "Skrivebordsprogrammer"
 
-#. applet.js:52
+#. applet.js:54
 msgid "Extensions"
 msgstr "Udvidelser"
 
-#. applet.js:88
+#. applet.js:150
 msgid "Middle-click: \n"
 msgstr "Midterklik: \n"
 
-#. applet.js:88 applet.js:141
+#. applet.js:150 applet.js:211
 msgid "Show .xsession-errors"
 msgstr "Vis .xsession-errors"
 
-#. applet.js:152
+#. applet.js:227
 msgid "Restart Cinnamon"
 msgstr "Genstart Cinnamon"
 
-#. applet.js:166
+#. applet.js:244
 msgid "--- Reload Spices ---"
 msgstr "--- Genindlæs Spices ---"
 
-#. applet.js:172
+#. applet.js:251
 msgid "Reload Applet:"
 msgstr "Genindlæs panelprogram:"
 
-#. applet.js:187
+#. applet.js:262
 msgid "Reload Desklet:"
 msgstr "Genindlæs skrivebordsprogram:"
 
-#. applet.js:202
+#. applet.js:271
 msgid "Reload Extension:"
 msgstr "Genindlæs udvidelse:"
 
-#. applet.js:217
+#. applet.js:280
 msgid "--- Settings for ---"
 msgstr ""
 
-#. applet.js:223
+#. applet.js:286
 #, fuzzy
 msgid "Applet:"
 msgstr "Panelprogram"
 
-#. applet.js:238
+#. applet.js:295
 #, fuzzy
 msgid "Desklet:"
 msgstr "Skrivebordsprogram"
 
-#. applet.js:253
+#. applet.js:304
 #, fuzzy
 msgid "Extension:"
 msgstr "Udvidelse"
 
-#. applet.js:268
+#. applet.js:313
 msgid "--- View Code ---"
 msgstr "--- Vis kode ---"
 
-#. applet.js:274
+#. applet.js:319
 msgid "View Applet Code for:"
 msgstr "Vis koden for panelprogrammet:"
 
-#. applet.js:289
+#. applet.js:328
 msgid "View Desklet Code for:"
 msgstr "Vis koden for skrivebordsprogrammet:"
 
-#. applet.js:304
+#. applet.js:337
 msgid "View Extension Code for:"
 msgstr "Vis koden for udvidelsen:"
 
@@ -120,3 +120,43 @@ msgstr ""
 "Giver dig mulighed for at genstarte eller åbne kildekoden til Spices "
 "(panelprogrammer, skrivebordsprogrammer, udvidelser), vise indholdet af din ."
 "xsession-errors-fil i realtid og genstarte Cinnamon."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr ""

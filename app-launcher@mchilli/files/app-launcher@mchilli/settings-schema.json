@@ -28,7 +28,9 @@
                 "launcher-icon",
                 "notification-enabled",
                 "notification-text",
-                "hotkey-binding"
+                "hotkeys-enabled",
+                "hotkey-bindings",
+                "menu-at-pointer"
             ]
         },
         "section-settings-applications": {
@@ -102,11 +104,24 @@
         "dependency": "notification-enabled",
         "tooltip": "%s will be your application name"
     },
-    "hotkey-binding": {
+    "hotkeys-enabled": {
+        "type": "switch",
+        "description": "Enable Hotkeys",
+        "default": false
+    },
+    "hotkey-bindings": {
         "type": "keybinding",
         "description": "Show menu",
         "default": "",
+        "dependency": "hotkeys-enabled",
         "tooltip": "Set keybinding(s) to show the menu"
+    },
+    "menu-at-pointer": {
+        "type": "switch",
+        "description": "Menu at mouse position",
+        "default": false,
+        "dependency": "hotkeys-enabled",
+        "tooltip": "Show the menu next to the cursor when triggered by hotkey"
     },
     "fixed-menu-width": {
         "type": "switch",

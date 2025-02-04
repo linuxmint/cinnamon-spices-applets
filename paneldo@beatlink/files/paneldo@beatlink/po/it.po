@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-08 08:07-0400\n"
-"PO-Revision-Date: 2024-07-05 11:50+0200\n"
+"PO-Revision-Date: 2025-01-03 15:13+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:59
 msgid "Edit Todos"
-msgstr ""
+msgstr "Modifica To-Do"
 
 #. applet.js:63
 msgid "Toggle Reminders"
-msgstr ""
+msgstr "Attiva/disattiva promemoria"
 
 #. metadata.json->description
 msgid "Panel based quick todo applet for Cinnamon"
@@ -60,14 +60,13 @@ msgstr "La larghezza del testo del pannello in caratteri"
 
 #. settings-schema.json->reminder_enabled->description
 msgid "Sets whether the reminder flashes are enabled or not"
-msgstr ""
+msgstr "Imposta se i promemoria lampeggianti sono abilitati o meno"
 
 #. settings-schema.json->reminder_delay->description
-#, fuzzy
 msgid "How often (in seconds) to flash the applet periodically for reminders."
 msgstr ""
-"La frequenza con cui (in secondi) eseguire periodicamente il flashing "
-"dell'applet per i promemoria. Impostare su 0 per disabilitare"
+"Con quale frequenza (in secondi) aggiornare periodicamente l'applet per i "
+"promemoria."
 
 #. settings-schema.json->reminder_time->description
 msgid ""

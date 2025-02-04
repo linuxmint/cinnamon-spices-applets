@@ -106,6 +106,8 @@ The *nvidia-smi* tool is part of the Nvidia closed source drivers, and only supp
 
 When requesting help with this feature, please include the output of `nvidia-smi -L` as well as any entries in the '~/.xsession-errors' file related to 'Nvidia SMI'.
 
+*Many thanks to @JEleniel for her contribution!*
+
 ### My PC has several temperature sensors and their values ​​are different. Why and which one to choose?
 
 Example:

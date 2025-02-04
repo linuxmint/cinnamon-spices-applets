@@ -79,7 +79,7 @@ export const Animation = GObject.registerClass(
 
       // Initializes the data required for painting and box sizing, taking into account the specified rendering options (if any).
       // The method for reading the image into a Pixbuf (see utility function) can throw an error if the provided parameters are invalid.
-      // For example, an error may occur if the dimensions become negative due to excessively large margins.
+      // For example, an error may occur if the dimensions become negative due to excessively large margin.
       try {
         this.loadRenderData()
       } catch (error) {

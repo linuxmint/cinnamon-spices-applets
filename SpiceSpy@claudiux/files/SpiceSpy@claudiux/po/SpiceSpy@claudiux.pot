@@ -1,35 +1,51 @@
-# SOME DESCRIPTIVE TITLE.
+# SPICESPY
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2024
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
+"Project-Id-Version: SpiceSpy@claudiux 4.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-04 17:36+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2025-01-27 10:32+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:527
+#. applet.js:127
+msgid "score"
+msgstr ""
+
+#. applet.js:139
+msgid "comments"
+msgstr ""
+
+#. applet.js:152
+msgid "recent issues"
+msgstr ""
+
+#. applet.js:164
+msgid "translations"
+msgstr ""
+
+#. applet.js:737
 msgid "Mark all as read"
 msgstr ""
 
-#: applet.js:531
+#. applet.js:746
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:535
+#. applet.js:759
 msgid "Spices"
 msgstr ""
 
-#: applet.js:607
+#. applet.js:832
 msgid "Configure..."
 msgstr ""
 
@@ -59,12 +75,12 @@ msgstr ""
 msgid "List of specific Spices you are interested in"
 msgstr ""
 
-#. settings-schema.json->update-interval->description
+#. settings-schema.json->update-interval-hours->description
 msgid "Update interval"
 msgstr ""
 
-#. settings-schema.json->update-interval->units
-msgid "minutes"
+#. settings-schema.json->update-interval-hours->units
+msgid "hours"
 msgstr ""
 
 #. settings-schema.json->standard-opacity->description
@@ -89,6 +105,10 @@ msgstr ""
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
+msgstr ""
+
+#. settings-schema.json->show-issues->description
+msgid "Show number of issues in the menu"
 msgstr ""
 
 #. settings-schema.json->sort-by->description

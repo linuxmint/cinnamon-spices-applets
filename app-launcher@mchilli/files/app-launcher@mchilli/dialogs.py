@@ -16,6 +16,9 @@ APPLET_DIR = os.path.join(os.path.dirname(__file__))
 DEFAULT_APP_ICON = "application-x-executable"
 DEFAULT_FOLDER_ICON = "folder"
 
+ICON_VALID = "object-select-symbolic"
+ICON_INVALID = "process-stop-symbolic"
+
 class EditDialog():
     def __init__(self, variant, groups, item=None):
         self.groups = groups
@@ -232,28 +235,28 @@ class EditDialog():
         valid_name = False
 
         if name.strip() == '':
-            self.name_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'gtk-stop')
+            self.name_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, ICON_INVALID)
             self.name_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("The name cannot be empty"))
         else:
             if self.type == 'group':
                 if name != self.name_origin and name in self.groups:
-                    self.name_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'gtk-stop')
+                    self.name_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, ICON_INVALID)
                     self.name_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("The name is already used"))
                 else:
                     valid_name = True
             else:
                 valid_name = True
         if valid_name:
-            self.name_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'gtk-ok')
+            self.name_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, ICON_VALID)
             self.name_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Valid name"))
 
         if self.type == 'app':
             valid_command = self._is_command_valid(self.command_entry.get_text())
             if valid_command:
-                self.command_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'gtk-ok')
+                self.command_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, ICON_VALID)
                 self.command_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Valid command"))
             else:
-                self.command_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'gtk-stop')
+                self.command_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, ICON_INVALID)
                 self.command_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("The command is not valid"))
 
         self.button_ok.set_sensitive(valid_name and (valid_command if self.type == 'app' else True))

@@ -51,8 +51,11 @@ MPRIS_ARTURL=$(playerctl -a metadata "mpris:artUrl" > /dev/null 2>&1 || echo -n 
 }
 
 #~ [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
-
-DECODED=$(urldecode "${XESAM_URL:7}") # Removes 7 first characters.
+[[ $XESAM_URL == /* ]] && {
+        DECODED=$(urldecode "${XESAM_URL}")
+} || {
+        DECODED=$(urldecode "${XESAM_URL:7}") # Removes 7 first characters.
+}
 MIMETYPE=$(file -b --mime-type "$DECODED")
 rm -f $HOME/mimetype.txt
 [[ $MIMETYPE == *video* ]] && {
