@@ -1,3 +1,7 @@
+### v5.1.0~20250204
+  * Better update of the number of comments.
+  * Improved menu management.
+
 ### v5.0.0~20250128
   * Fixes menu display.
   * Changes this applet settings.
