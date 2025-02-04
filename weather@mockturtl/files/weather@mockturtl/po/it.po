@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-04 06:47-0500\n"
+"POT-Creation-Date: 2025-02-04 07:03-0500\n"
 "PO-Revision-Date: 2025-01-03 15:33+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -1913,25 +1913,24 @@ msgstr "Percepita"
 msgid "Open Meteo"
 msgstr "Open Meteo"
 
-
-#: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
-#: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
-#: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
-#: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
+#. 3.8/weather-applet.js:16471 3.8/weather-applet.js:16472
+#. 3.8/weather-applet.js:16478 3.8/weather-applet.js:16479
+#. 3.8/weather-applet.js:16722 3.8/weather-applet.js:16723
+#. 3.8/weather-applet.js:16729 3.8/weather-applet.js:16730
 msgid "Scattered Sleet"
 msgstr "Nevischio sparso"
 
-#: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
-#: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
-#: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
+#. 3.8/weather-applet.js:16541 3.8/weather-applet.js:16542
+#. 3.8/weather-applet.js:16548 3.8/weather-applet.js:16549
+#. 3.8/weather-applet.js:16642 3.8/weather-applet.js:16643
 msgid "Chance of Thunderstorms"
 msgstr "Possibilità di temporali"
 
-#: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
+#. 3.8/weather-applet.js:16570 3.8/weather-applet.js:16571
 msgid "Light Rain"
 msgstr "Pioggia Leggera"
 
-#: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
+#. 3.8/weather-applet.js:16578 3.8/weather-applet.js:16579
 msgid "Light Sleet"
 msgstr "Nevischio leggero"
 
@@ -1947,59 +1946,59 @@ msgstr "Nevischio intermittente"
 msgid "Intermittent Snow"
 msgstr "Neve intermittente"
 
-#: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
+#. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
 msgid "Frequent Thunderstorms"
 msgstr "Temporali frequenti"
 
-#: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
-#: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
+#. 3.8/weather-applet.js:16665 3.8/weather-applet.js:16666
+#. 3.8/weather-applet.js:16672 3.8/weather-applet.js:16673
 msgid "High Clouds"
 msgstr "Nuvole alte"
 
-#: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
+#. 3.8/weather-applet.js:16680 3.8/weather-applet.js:16681
 msgid "Low Clouds"
 msgstr "Nuvole basse"
 
-#: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
+#. 3.8/weather-applet.js:16779 3.8/weather-applet.js:16780
 msgid "Overcast and Dry"
 msgstr "Nuvoloso e asciutto"
 
-#: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
-#: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
-#: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
-#: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
+#. 3.8/weather-applet.js:16786 3.8/weather-applet.js:16787
+#. 3.8/weather-applet.js:16793 3.8/weather-applet.js:16794
+#. 3.8/weather-applet.js:16843 3.8/weather-applet.js:16844
+#. 3.8/weather-applet.js:16851 3.8/weather-applet.js:16852
 msgid "Slightly Stormy"
 msgstr "Leggermente tempestoso"
 
-#: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
-#: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
+#. 3.8/weather-applet.js:16800 3.8/weather-applet.js:16801
+#. 3.8/weather-applet.js:16807 3.8/weather-applet.js:16808
 msgid "Stormy Snow Showers"
 msgstr "Nevicate tempestose"
 
-#: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
-#: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
+#. 3.8/weather-applet.js:16814 3.8/weather-applet.js:16815
+#. 3.8/weather-applet.js:16821 3.8/weather-applet.js:16822
 msgid "Thundery Showers"
 msgstr "Rovesci temporaleschi"
 
-#: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
-#: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
-#: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
+#. 3.8/weather-applet.js:16828 3.8/weather-applet.js:16829
+#. 3.8/weather-applet.js:16835 3.8/weather-applet.js:16836
+#. 3.8/weather-applet.js:16859 3.8/weather-applet.js:16860
 msgid "Thundery Snow Showers"
 msgstr "Nevicate temporalesche"
 
-#: 3.8/weather-applet.js:17878
+#. 3.8/weather-applet.js:16948
 msgid "Wind Warning"
 msgstr "Allerta vento"
 
-#: 3.8/weather-applet.js:17880
+#. 3.8/weather-applet.js:16950
 msgid "Thunderstorm Warning"
 msgstr "Allerta temporale"
 
-#: 3.8/weather-applet.js:17882
+#. 3.8/weather-applet.js:16952
 msgid "Rain Warning"
 msgstr "Allerta pioggia"
 
-#: 3.8/weather-applet.js:17884
+#. 3.8/weather-applet.js:16954
 msgid "Snow Warning"
 msgstr "Allerta neve"
 
@@ -2007,7 +2006,7 @@ msgstr "Allerta neve"
 msgid "Slippery Roads Warning"
 msgstr "Allerta strade scivolose"
 
-#: 3.8/weather-applet.js:17888
+#. 3.8/weather-applet.js:16958
 msgid "Frost Warning"
 msgstr "Allerta gelo"
 
@@ -2015,7 +2014,7 @@ msgstr "Allerta gelo"
 msgid "Mass Movements Warning"
 msgstr "Allerta movimenti di massa"
 
-#: 3.8/weather-applet.js:17892
+#. 3.8/weather-applet.js:16962
 msgid "Heat Warning"
 msgstr "Allerta caldo"
 
@@ -2031,7 +2030,7 @@ msgstr "Allerta terremoto"
 msgid "Forest Fire Warning"
 msgstr "Allerta incendio boschivo"
 
-#: 3.8/weather-applet.js:17900
+#. 3.8/weather-applet.js:16970
 msgid "Flood Warning"
 msgstr "Allerta inondazione"
 
@@ -2138,7 +2137,7 @@ msgstr "Informazioni di debug salvate con successo"
 msgid "Saved to {filePath}"
 msgstr "Salvate in {filePath}"
 
-#: 3.8/weather-applet.js:20458
+#. 3.8/weather-applet.js:19528
 msgid "Location Service Blocked"
 msgstr "Servizio di localizzazione bloccato"
 
@@ -2986,12 +2985,12 @@ msgid ""
 "replaced automatically for validating your choice."
 msgstr ""
 "La tua posizione nella maggior parte dei casi funziona automaticamente, ma "
-"puoi inserirla manualmente tramite le coordinate \"Latitudine, "
-"Longitudine\" (ad es. 51.5085,-0.1257) o utilizzare \"Città, codice "
-"paese\" (ad es. Roma,IT) o provare a inserire {Numero civico} {Via} {Città/"
-"Paese} {Codice postale} {Nazione}. L'algoritmo di ricerca è molto flessibile "
-"con il formato. Dopo 3 secondi senza digitare l'indirizzo che hai inserito "
-"viene sostituito automaticamente per convalidare la tua scelta."
+"puoi inserirla manualmente tramite le coordinate \"Latitudine, Longitudine\" "
+"(ad es. 51.5085,-0.1257) o utilizzare \"Città, codice paese\" (ad es. "
+"Roma,IT) o provare a inserire {Numero civico} {Via} {Città/Paese} {Codice "
+"postale} {Nazione}. L'algoritmo di ricerca è molto flessibile con il "
+"formato. Dopo 3 secondi senza digitare l'indirizzo che hai inserito viene "
+"sostituito automaticamente per convalidare la tua scelta."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"

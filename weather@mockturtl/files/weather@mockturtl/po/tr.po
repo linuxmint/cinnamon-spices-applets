@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: 3.2.8\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-04 06:47-0500\n"
+"POT-Creation-Date: 2025-02-04 07:03-0500\n"
 "PO-Revision-Date: 2025-01-13 12:49+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -1902,25 +1902,24 @@ msgstr "Hissedilen"
 msgid "Open Meteo"
 msgstr "Open Meteo"
 
-
-#: 3.8/weather-applet.js:17401 3.8/weather-applet.js:17402
-#: 3.8/weather-applet.js:17408 3.8/weather-applet.js:17409
-#: 3.8/weather-applet.js:17652 3.8/weather-applet.js:17653
-#: 3.8/weather-applet.js:17659 3.8/weather-applet.js:17660
+#. 3.8/weather-applet.js:16471 3.8/weather-applet.js:16472
+#. 3.8/weather-applet.js:16478 3.8/weather-applet.js:16479
+#. 3.8/weather-applet.js:16722 3.8/weather-applet.js:16723
+#. 3.8/weather-applet.js:16729 3.8/weather-applet.js:16730
 msgid "Scattered Sleet"
 msgstr "Dağınık sulu kar"
 
-#: 3.8/weather-applet.js:17471 3.8/weather-applet.js:17472
-#: 3.8/weather-applet.js:17478 3.8/weather-applet.js:17479
-#: 3.8/weather-applet.js:17572 3.8/weather-applet.js:17573
+#. 3.8/weather-applet.js:16541 3.8/weather-applet.js:16542
+#. 3.8/weather-applet.js:16548 3.8/weather-applet.js:16549
+#. 3.8/weather-applet.js:16642 3.8/weather-applet.js:16643
 msgid "Chance of Thunderstorms"
 msgstr "Fırtına Olasılığı"
 
-#: 3.8/weather-applet.js:17500 3.8/weather-applet.js:17501
+#. 3.8/weather-applet.js:16570 3.8/weather-applet.js:16571
 msgid "Light Rain"
 msgstr "Hafif Yağmur"
 
-#: 3.8/weather-applet.js:17508 3.8/weather-applet.js:17509
+#. 3.8/weather-applet.js:16578 3.8/weather-applet.js:16579
 msgid "Light Sleet"
 msgstr "Hafif Sulu kar"
 
@@ -1936,59 +1935,59 @@ msgstr "Aralıklı sulu kar"
 msgid "Intermittent Snow"
 msgstr "Aralıklı Kar"
 
-#: 3.8/weather-applet.js:17588 3.8/weather-applet.js:17589
+#. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
 msgid "Frequent Thunderstorms"
 msgstr "Sık sık gök gürültülü fırtınalar"
 
-#: 3.8/weather-applet.js:17595 3.8/weather-applet.js:17596
-#: 3.8/weather-applet.js:17602 3.8/weather-applet.js:17603
+#. 3.8/weather-applet.js:16665 3.8/weather-applet.js:16666
+#. 3.8/weather-applet.js:16672 3.8/weather-applet.js:16673
 msgid "High Clouds"
 msgstr "Yüksek Bulutlar"
 
-#: 3.8/weather-applet.js:17610 3.8/weather-applet.js:17611
+#. 3.8/weather-applet.js:16680 3.8/weather-applet.js:16681
 msgid "Low Clouds"
 msgstr "Alçak Bulutlar"
 
-#: 3.8/weather-applet.js:17709 3.8/weather-applet.js:17710
+#. 3.8/weather-applet.js:16779 3.8/weather-applet.js:16780
 msgid "Overcast and Dry"
 msgstr "Kapalı ve Kuru"
 
-#: 3.8/weather-applet.js:17716 3.8/weather-applet.js:17717
-#: 3.8/weather-applet.js:17723 3.8/weather-applet.js:17724
-#: 3.8/weather-applet.js:17773 3.8/weather-applet.js:17774
-#: 3.8/weather-applet.js:17781 3.8/weather-applet.js:17782
+#. 3.8/weather-applet.js:16786 3.8/weather-applet.js:16787
+#. 3.8/weather-applet.js:16793 3.8/weather-applet.js:16794
+#. 3.8/weather-applet.js:16843 3.8/weather-applet.js:16844
+#. 3.8/weather-applet.js:16851 3.8/weather-applet.js:16852
 msgid "Slightly Stormy"
 msgstr "Hafif Fırtınalı"
 
-#: 3.8/weather-applet.js:17730 3.8/weather-applet.js:17731
-#: 3.8/weather-applet.js:17737 3.8/weather-applet.js:17738
+#. 3.8/weather-applet.js:16800 3.8/weather-applet.js:16801
+#. 3.8/weather-applet.js:16807 3.8/weather-applet.js:16808
 msgid "Stormy Snow Showers"
 msgstr "Fırtınalı Kar Sağanakları"
 
-#: 3.8/weather-applet.js:17744 3.8/weather-applet.js:17745
-#: 3.8/weather-applet.js:17751 3.8/weather-applet.js:17752
+#. 3.8/weather-applet.js:16814 3.8/weather-applet.js:16815
+#. 3.8/weather-applet.js:16821 3.8/weather-applet.js:16822
 msgid "Thundery Showers"
 msgstr "Gök gürültülü sağnak yağış"
 
-#: 3.8/weather-applet.js:17758 3.8/weather-applet.js:17759
-#: 3.8/weather-applet.js:17765 3.8/weather-applet.js:17766
-#: 3.8/weather-applet.js:17789 3.8/weather-applet.js:17790
+#. 3.8/weather-applet.js:16828 3.8/weather-applet.js:16829
+#. 3.8/weather-applet.js:16835 3.8/weather-applet.js:16836
+#. 3.8/weather-applet.js:16859 3.8/weather-applet.js:16860
 msgid "Thundery Snow Showers"
 msgstr "Gök gürültülü kar yağışları"
 
-#: 3.8/weather-applet.js:17878
+#. 3.8/weather-applet.js:16948
 msgid "Wind Warning"
 msgstr "Rüzgar Uyarısı"
 
-#: 3.8/weather-applet.js:17880
+#. 3.8/weather-applet.js:16950
 msgid "Thunderstorm Warning"
 msgstr "Fırtına Uyarısı"
 
-#: 3.8/weather-applet.js:17882
+#. 3.8/weather-applet.js:16952
 msgid "Rain Warning"
 msgstr "Yağmur Uyarısı"
 
-#: 3.8/weather-applet.js:17884
+#. 3.8/weather-applet.js:16954
 msgid "Snow Warning"
 msgstr "Kar Uyarısı"
 
@@ -1996,7 +1995,7 @@ msgstr "Kar Uyarısı"
 msgid "Slippery Roads Warning"
 msgstr "Kaygan Yollar Uyarısı"
 
-#: 3.8/weather-applet.js:17888
+#. 3.8/weather-applet.js:16958
 msgid "Frost Warning"
 msgstr "Don Uyarısı"
 
@@ -2004,7 +2003,7 @@ msgstr "Don Uyarısı"
 msgid "Mass Movements Warning"
 msgstr "Kitle Hareketleri Uyarısı"
 
-#: 3.8/weather-applet.js:17892
+#. 3.8/weather-applet.js:16962
 msgid "Heat Warning"
 msgstr "Isı Uyarısı"
 
@@ -2020,7 +2019,7 @@ msgstr "Deprem Uyarısı"
 msgid "Forest Fire Warning"
 msgstr "Orman Yangını Uyarısı"
 
-#: 3.8/weather-applet.js:17900
+#. 3.8/weather-applet.js:16970
 msgid "Flood Warning"
 msgstr "Sel Uyarısı"
 
@@ -2126,7 +2125,7 @@ msgstr "Hata Ayıklama Bilgileri başarıyla kaydedildi"
 msgid "Saved to {filePath}"
 msgstr "{filePath} klasörüne kaydedildi"
 
-#: 3.8/weather-applet.js:20458
+#. 3.8/weather-applet.js:19528
 msgid "Location Service Blocked"
 msgstr "Konum Hizmeti Engellendi"
 
@@ -2708,8 +2707,8 @@ msgstr ""
 "Ülke kodu' (ör. Ankara, Türkiye) kullanabilir veya {Ev numarası} {Sokak} "
 "{Şehir/Kasaba} {Postakodu} {Ulke} girmeyi deneyebilirsiniz. Arama "
 "algoritması, formatı çok esnektir. Girdiğiniz adresi yazdıktan 3 saniye "
-"sonra, seçiminiz doğrulanır ve otomatik olarak kaydedilir. nominatim."
-"openstreetmap.org tarafından desteklenmektedir."
+"sonra, seçiminiz doğrulanır ve otomatik olarak kaydedilir. "
+"nominatim.openstreetmap.org tarafından desteklenmektedir."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
