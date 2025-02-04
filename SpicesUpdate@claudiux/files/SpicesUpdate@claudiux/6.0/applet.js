@@ -717,7 +717,7 @@ class SpicesUpdate extends IconApplet {
             return null;
         }
         try {
-            language = get_language_names().toString().split(",")[0].toString();
+            language = to_string(to_string(get_language_names()).split(",")[0]);
         } catch(e) {
             // Unable to detect language. Return English help file by default.
             return default_file_name;
@@ -727,7 +727,7 @@ class SpicesUpdate extends IconApplet {
         if (help_file.query_exists(null)) {
             return file_name;
         } else {
-            lang = language.split("_")[0].toString();
+            lang = to_string(language.split("_")[0]);
             if (lang === language) {
                 // Not found
                 return default_file_name;
@@ -789,8 +789,8 @@ class SpicesUpdate extends IconApplet {
 
             notification.setUseActionIcons(this.general_type_notif === "iconic");
 
-            let buttonLabel = "%s".format(capitalize(type.toString()));
-            notification.addButton("su-%s-symbolic".format(type.toString()), _(buttonLabel));
+            let buttonLabel = "%s".format(capitalize(type));
+            notification.addButton("su-%s-symbolic".format(type), _(buttonLabel));
 
             let buttonLabel2;
             if (this.general_show_updateall_button && about_updates) {
@@ -1453,7 +1453,7 @@ class SpicesUpdate extends IconApplet {
         let most_recent;
 
         // For some themes, the metadata.json file is in the subfolder /cinnamon:
-        if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
+        if (type === "themes" && !metadataFile.query_exists(null)) {
             metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
             metadataFile = file_new_for_path(metadataFileName);
         }
@@ -1606,7 +1606,7 @@ class SpicesUpdate extends IconApplet {
                 var smaller_difference = Math.round(Date.now() / 1000);
                 let difference;
                 while (result == subject_regexp.exec(data)) {
-                    commit_time = Date.parse(result[1].toString()) / 1000;
+                    commit_time = Date.parse(to_string(result[1])) / 1000;
                     difference = Math.abs(timestamp - commit_time);
                     if (difference < smaller_difference) {
                         smaller_difference = difference;
@@ -1748,7 +1748,7 @@ class SpicesUpdate extends IconApplet {
         let metadataFile = file_new_for_path(metadataFileName);
 
         // For some themes, the metadata.json file is in the subfolder /cinnamon:
-        if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
+        if (type === "themes" && !metadataFile.query_exists(null)) {
             metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
             metadataFile = file_new_for_path(metadataFileName);
         }
@@ -1819,14 +1819,14 @@ class SpicesUpdate extends IconApplet {
 
     get_active_spices(type) {
         // Returns the list of active spices of type 'type'
-        var elt = (type.toString() === "applets") ? 3 : 0;
+        var elt = (type === "applets") ? 3 : 0;
         let listCanBeUpdated = this.get_can_be_updated(type);
         let enabled;
         var listEnabled = new Array();
         let _SETTINGS_SCHEMA, _SETTINGS_KEY;
         let _interface_settings;
 
-        if (type.toString() === "themes") {
+        if (type === "themes") {
             _SETTINGS_SCHEMA = "org.cinnamon.theme";
             _SETTINGS_KEY = "name";
             _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
@@ -1837,13 +1837,13 @@ class SpicesUpdate extends IconApplet {
         }
 
         _SETTINGS_SCHEMA = "org.cinnamon";
-        _SETTINGS_KEY = "enabled-%s".format(type.toString());
+        _SETTINGS_KEY = "enabled-%s".format(type);
         _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
 
         enabled = _interface_settings.get_strv(_SETTINGS_KEY);
         let xlet_uuid;
         for (let xl of enabled) {
-            xlet_uuid = xl.split(":")[elt].toString().replace(/'/g,"");
+            xlet_uuid = to_string(xl.split(":")[elt]).replace(/'/g,"");
             if (!xlet_uuid.endsWith("@cinnamon.org") && (listCanBeUpdated.indexOf(xlet_uuid)>-1))
                 listEnabled.push(xlet_uuid);
         }
@@ -1886,12 +1886,12 @@ class SpicesUpdate extends IconApplet {
         let char_new = "\u2604";
         let ts;
         for (let t of TYPES) {
-            ts = _(capitalize(t.toString()));
+            ts = _(capitalize(t));
             if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += "   %s %s".format(char_update, (this.nb_in_menu[t] - this.new_Spices[t].length).toString());
             if (this.new_Spices[t].length > 0) ts += "   %s %s".format(char_new, (this.new_Spices[t].length).toString());
             spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
             spicesMenuItems[t].connect("activate", (event) => {
-                spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
+                spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t, TAB, SORT));
             });
             spicesMenuItems[t].setShowDot(this.menuDots[t]);
             this.menu.addMenuItem(spicesMenuItems[t]);
@@ -2322,7 +2322,7 @@ class SpicesUpdate extends IconApplet {
                                         if (this.general_type_notif === "minimal") this.notify_without_button(this._clean_str(this.new_message[t]), t, uuid);
                                         else this.notify_with_button(this._clean_str(this.new_message[t]), t, uuid);
                                     }
-                                    this.old_message[t] = this.new_message[t].toString();
+                                    this.old_message[t] = to_string(this.new_message[t]);
                                 }
 
                             } else {
@@ -2352,7 +2352,7 @@ class SpicesUpdate extends IconApplet {
                                             this.notify_with_button(this._clean_str(this.new_watch_message[t]), t, null, false);
                                         }
                                     }
-                                    this.old_watch_message[t] = this.new_watch_message[t].toString();
+                                    this.old_watch_message[t] = to_string(this.new_watch_message[t]);
                                 }
                             } else {
                                 this.old_watch_message[t] = "";

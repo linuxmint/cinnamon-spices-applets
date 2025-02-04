@@ -1,3 +1,6 @@
+### v7.6.7~20250204
+  * Avoids the use of Array.toString() in the code.
+
 ### v7.6.6~20250203
   * No more errors on restart.
 
