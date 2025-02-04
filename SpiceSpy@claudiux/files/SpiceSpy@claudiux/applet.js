@@ -34,7 +34,10 @@ const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
 const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
 const HTML_COUNT_ID = "count";
-const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
+
+// <h3 class="cs-comments-amount"><span id="count">173</span> Comments</h3>
+//~ const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
+const COMMENTS_REGEX = new RegExp(`<span id="${HTML_COUNT_ID}">([0-9]+)</span>`);
 const ISSUES_REGEX = new RegExp(`([0-9]+) Open`);
 
 const DIR_MAP = {
@@ -359,7 +362,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of constructor
 
   get_user_settings() {
-    this.settings.bind("update-interval-hours", "update_interval", this.update_interval_value.bind(this));
+    this.settings.bind("update-interval-hours", "update_interval", () => { this.update_interval_value() });
     if (this.settings.getValue("update-interval") > 0) {
       // Converts old "update-interval" in minutes to new this.update_interval in hours.
       this.update_interval = 0.5 * Math.round(this.settings.getValue("update-interval") / 30);
@@ -368,7 +371,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ this.settings.bind("standard-opacity", "standard_opacity", this.make_menu.bind(this));
     this.settings.bind("standard-opacity", "standard_opacity");
     //~ this.settings.bind("color-on-change", "color_on_change", this.make_menu.bind(this));
-    this.settings.bind("color-on-change", "color_on_change");
+    this.settings.bind("color-on-change", "color_on_change", () => { this.make_menu() });
     //~ this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
     this.show_icon_in_menu = true;
     this.settings.bind("icon-size", "icon_size");
@@ -383,8 +386,8 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("display-on-panel", "display_on_panel");
     //~ this.settings.bind("useful-only", "useful_only", this.make_menu.bind(this));
     this.settings.bind("useful-only", "useful_only");
-    this.settings.bind("author-list", "author_list", this.update_authors.bind(this));
-    this.settings.bind("uuid-list", "uuid_list", this.update_uuids.bind(this));
+    this.settings.bind("author-list", "author_list", () => { this.update_authors() });
+    this.settings.bind("uuid-list", "uuid_list", () => { this.update_uuids() });
     this.settings.bind("spices_to_spy", "spices_to_spy");
     this.settings.bind("old_spices_to_spy", "old_spices_to_spy");
   } // End of get_user_settings
@@ -547,6 +550,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     }
     //~ logDebug("do_issuesJob: "+type+" "+uuid+": "+issuesNumber+" issues.");
     this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
+    this.make_menu();
   } // End of do_issuesJob
 
   do_issuesJob_OLD(type, spice, command) {
@@ -584,17 +588,22 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ return this.is_looping;
   } // End of commentsJobs_loop
 
-  do_commentsJob(type, spice, page) {
+  async do_commentsJob(type, spice, page) {
+    logDebug(`do_commentsJob(${type}, ${spice}, ${page})`);
     if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
       this.commentsJobsList.push([type, spice, page]);
+      //~ logDebug("Re-inserted at the end of the list.")
       return
     }
     var http = new HttpLib();
-    let response = http.LoadAsync(page);
+    let response = await http.LoadAsync(page.slice(0, -6));
     if (response.Success) {
+      //~ logDebug("Success");
       let result = COMMENTS_REGEX.exec(response.Data);
+      //~ logDebug("result: "+result);
       if (result && result[1]) {
         let count = parseInt(result[1]);
+        //~ logDebug("count: "+count);
         this.spices_to_spy[type][spice]['comments'] = count;
         //~ this.make_menu();
       } else {
@@ -603,7 +612,10 @@ class SpiceSpy extends Applet.TextIconApplet {
         + "Spices now OR the Cinnamon Spices changed the ID "
         + "(please report if there are 0 items)");
       }
+    } else {
+      //~ logDebug("Check and mate");
     }
+    this.make_menu();
   } // End of do_commentsJob
 
   loop() {
@@ -634,9 +646,8 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
     }
     this.fistTime = false;
-
-    //~ this.make_menu();
     this.set_applet_tooltip(this.metadata.name);
+    this.make_menu();
 
     let sec = Math.round(this.update_interval * 3600);
     this.loopId = timeout_add_seconds(sec, () => { this.loop() });
@@ -747,7 +758,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   update_comments() {
     //~ const interval = 13000; //ms = 13 seconds (the spices website accepts a maximum of 5 requests per minute.)
     //~ var index = 0;
-    var http = new HttpLib();
+    //~ var http = new HttpLib();
     for (let type of TYPES) {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
@@ -979,6 +990,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     if (!spice) return;
     this.old_spices_to_spy[spice.type][spice.uuid] = this.spices_to_spy[spice.type][spice.uuid];
     //~ this.settings.setValue("old_spices_to_spy", this.old_spices_to_spy);
+    this.make_menu();
   } // End of mark_as_read
 
   on_applet_added_to_panel() {
@@ -997,7 +1009,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.jobsLoopId = timeout_add_seconds(13, () => { this.commentsJobs_loop(); return this.is_looping; });
 
     this.update_issues_json();
-    this.make_menu();
+    //~ this.make_menu();
   } // End of on_applet_added_to_panel
 
   on_applet_clicked() {
