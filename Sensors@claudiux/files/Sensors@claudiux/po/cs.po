@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux Czech 3.9.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-30 13:21+0100\n"
+"POT-Creation-Date: 2025-02-05 10:49+0100\n"
 "PO-Revision-Date: 2025-01-08 19:22+0100\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
@@ -24,85 +24,85 @@ msgstr "Sledování senzorů"
 msgid "Suspended"
 msgstr "Zastaveno"
 
-#. applet.js:636 applet.js:678
+#. applet.js:638 applet.js:682
 msgid "high:"
 msgstr "vysoká:"
 
-#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
+#. applet.js:638 applet.js:642 applet.js:682 applet.js:684 applet.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:638 applet.js:680
+#. applet.js:642 applet.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:722 applet.js:766
+#. applet.js:726 applet.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:768
+#. applet.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:797
+#. applet.js:801
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#. applet.js:797
+#. applet.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#. applet.js:817
+#. applet.js:821
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#. applet.js:1205
+#. applet.js:1208
 msgid "Settings"
 msgstr "Předvolby"
 
-#. applet.js:1205
+#. applet.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1212
+#. applet.js:1215
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#. applet.js:1228
+#. applet.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Teplotní senzory"
 
-#. applet.js:1244
+#. applet.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Senzory větráků"
 
-#. applet.js:1260
+#. applet.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Napěťové senzory"
 
-#. applet.js:1276
+#. applet.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1303
+#. applet.js:1306
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#. applet.js:1312
+#. applet.js:1315
 msgid "Suspend Sensors"
 msgstr "Pozastavit Sledování senzorů"
 
-#. applet.js:1323
+#. applet.js:1326
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#. applet.js:1653
+#. applet.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
@@ -396,50 +396,6 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Velikost písma (% standardní velikosti)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr "základní linka"
-
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr "dolní index"
-
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr "horní index"
-
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr "text nahoře"
-
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr "text dole"
-
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr "na střed"
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr "horní"
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr "dolní"
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr "nenastaveno"
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr "zdědit"
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr "Vertikální zarovnání"
-
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
 msgstr "Přizpůsobit barvu textu"
@@ -548,7 +504,6 @@ msgstr ""
 "senzoru ze seznamu níže. Ve vertikálním umístění panelu bez účinku."
 
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Zobrazovat výhradně kladné hodnoty"
@@ -732,6 +687,11 @@ msgstr ""
 "Označení disku je hodnota vracená příkazem 'lsblk'. Více v nápovědě.\n"
 "Hodnoty Nejvyšší a Kritická konzultujte s technickým listem nebo manuálem "
 "vašeho konkrétního disku."
+
+#. settings-schema.json->strictly_positive_fan->description
+#, fuzzy
+msgid "Show only positive or zero values"
+msgstr "Zobrazovat výhradně kladné hodnoty"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""

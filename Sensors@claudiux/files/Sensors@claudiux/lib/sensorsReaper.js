@@ -301,7 +301,7 @@ class SensorsReaper {
           if (subfeat.startsWith("fan")) {
             if  (type_of_feature === "" &&
                 (!this.hide_zero_fan ||
-                  (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
+                  (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] >= 0)
                 )
             ) {
               type_of_feature = "fans";

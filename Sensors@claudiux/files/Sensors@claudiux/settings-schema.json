@@ -307,21 +307,8 @@
     "description": "Character size (% of standard size)"
   },
   "vertical-align": {
-    "type": "combobox",
-    "default": "text-bottom",
-    "options": {
-      "baseline": "baseline",
-      "sub": "sub",
-      "super": "super",
-      "text-top": "text-top",
-      "text-bottom": "text-bottom",
-      "middle": "middle",
-      "top": "top",
-      "bottom": "bottom",
-      "unset": "unset",
-      "inherit": "inherit"
-    },
-    "description": "Vertical alignment"
+    "type": "generic",
+    "default": "text-bottom"
   },
   "char_color_customized": {
     "type": "switch",
@@ -581,7 +568,7 @@
   "strictly_positive_fan": {
     "type": "switch",
     "default": false,
-    "description": "Show only strictly positive values"
+    "description": "Show only positive or zero values"
   },
   "show_fan_unit": {
     "type": "switch",
