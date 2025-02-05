@@ -1,3 +1,6 @@
+### 2.7.8~20250205
+  * Improves applet startup.
+
 ### 2.7.7~20250204
   * Code improvement.
 

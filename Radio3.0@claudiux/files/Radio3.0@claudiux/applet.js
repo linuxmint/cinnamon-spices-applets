@@ -1088,7 +1088,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
     super(orientation, panel_height, instance_id);
 
-    //this.install_desklet();
+    this.desklet_is_activated = false;
 
     this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
 
@@ -1313,17 +1313,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.r30previousMonitor = null;
     this.r30previousMonitorId = null;
 
-    // Run all monitors:
-    this.on_network_monitoring_changed();
-    this.monitor_mpv_title();
-    this.monitor_jobs_dir();
-    this.monitor_rec_folder();
-    this.monitor_r30stop();
-    this.monitor_r30next();
-    this.monitor_r30previous();
-
-    // Connect signals:
-    this._connect_signals();
 
     //title_obj.watch('prop', function(value){
       //this._on_mpv_title_changed();
@@ -4051,6 +4040,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_applet_added_to_panel() {
+    // Run all monitors:
+    this.on_network_monitoring_changed();
+    this.monitor_mpv_title();
+    this.monitor_jobs_dir();
+    this.monitor_rec_folder();
+    this.monitor_r30stop();
+    this.monitor_r30next();
+    this.monitor_r30previous();
+
+    // Connect signals:
+    this._connect_signals();
+
     // Install or update translations, if any:
     if (!are_translations_installed()) install_translations();
 
