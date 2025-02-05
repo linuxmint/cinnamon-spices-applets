@@ -824,7 +824,7 @@ msgstr "gran"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->description
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
-msgid "Whether the media keys osd is disabled or its relative display size"
+msgid "Whether the media keys OSD is disabled or its relative display size"
 msgstr ""
 "Si l'OSD de les tecles multimèdia està desactivat o la seva mida relativa de "
 "visualització"
@@ -1010,7 +1010,7 @@ msgid "Reverse scrolling effect"
 msgstr ""
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
-msgid "Whether or not to show the media keys osd"
+msgid "Whether or not to show the media keys OSD"
 msgstr ""
 
 #. 6.4->settings-schema.json->showVolumeValue->description
