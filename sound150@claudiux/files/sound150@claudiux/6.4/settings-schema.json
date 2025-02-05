@@ -438,7 +438,7 @@
   "showMediaKeysOSD": {
     "type": "switch",
     "default": true,
-    "description": "Whether or not to show the media keys osd"
+    "description": "Whether or not to show the media keys OSD"
   },
   "showOSDonStartup": {
     "type": "switch",

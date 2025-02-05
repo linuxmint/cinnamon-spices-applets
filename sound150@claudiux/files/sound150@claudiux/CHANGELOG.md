@@ -1,3 +1,6 @@
+### v9.2.1~20250205
+  * Fixes #6854: Typo in settings.
+
 ### v9.2.0~20250203
   * Add custom commands (see Shortcuts tab in settings).
   * Fixes #6847.

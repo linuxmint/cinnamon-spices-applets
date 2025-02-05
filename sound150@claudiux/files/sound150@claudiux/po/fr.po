@@ -836,9 +836,9 @@ msgstr "grand"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->description
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
-msgid "Whether the media keys osd is disabled or its relative display size"
+msgid "Whether the media keys OSD is disabled or its relative display size"
 msgstr ""
-"Choisissez si l'osd des touches de média est désactivé ou bien sa taille "
+"Choisissez si l'OSD des touches de média est désactivé ou bien sa taille "
 "relative d'affichage"
 
 #. 6.2->settings-schema.json->showOSDonStartup->description
@@ -1021,7 +1021,7 @@ msgid "Reverse scrolling effect"
 msgstr "Inverser l'effet du défilement"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
-msgid "Whether or not to show the media keys osd"
+msgid "Whether or not to show the media keys OSD"
 msgstr "Afficher ou non l'OSD des touches média"
 
 #. 6.4->settings-schema.json->showVolumeValue->description

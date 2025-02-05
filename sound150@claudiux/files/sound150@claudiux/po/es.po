@@ -836,9 +836,9 @@ msgstr "grande"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->description
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
-msgid "Whether the media keys osd is disabled or its relative display size"
+msgid "Whether the media keys OSD is disabled or its relative display size"
 msgstr ""
-"Si el osd de las teclas multimedia está desactivado o su tamaño de "
+"Si el OSD de las teclas multimedia está desactivado o su tamaño de "
 "visualización relativo"
 
 #. 6.2->settings-schema.json->showOSDonStartup->description
@@ -1023,7 +1023,7 @@ msgid "Reverse scrolling effect"
 msgstr "Efecto de desplazamiento inverso"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
-msgid "Whether or not to show the media keys osd"
+msgid "Whether or not to show the media keys OSD"
 msgstr "Mostrar o no las teclas multimedia en pantalla"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
