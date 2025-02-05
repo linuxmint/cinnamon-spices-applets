@@ -632,10 +632,14 @@ class SensorsApplet extends Applet.TextApplet {
               _tooltip += (this.bold_values) ?
                 "  <b>" + str_value + "</b>" :
                 "  " + str_value;
-              let _max_temp = this._get_max_temp(this.data["temps"][t["sensor"]]);
-              _tooltip += "  "+ _("high:") + " " + ((_max_temp === 0) ? _("n/a") : this._formatted_temp(_max_temp));
-              let _crit_temp = this._get_crit_temp(this.data["temps"][t["sensor"]]);
-              _tooltip += "  "+ _("crit:") + " " + ((_crit_temp === 0) ? _("n/a") : this._formatted_temp(_crit_temp));
+              //~ let _max_temp = this._get_max_temp(this.data["temps"][t["sensor"]]);
+              let _max_temp = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
+                1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
+              _tooltip += "  "+ _("high:") + " " + ((_max_temp < 0) ? _("n/a") : this._formatted_temp(_max_temp));
+              //~ let _crit_temp = this._get_crit_temp(this.data["temps"][t["sensor"]]);
+              let _crit_temp = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
+                1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
+              _tooltip += "  "+ _("crit:") + " " + ((_crit_temp < 0) ? _("n/a") : this._formatted_temp(_crit_temp));
               _tooltip += "\n";
               _crit_temp = null;
               _max_temp = null;
@@ -760,8 +764,8 @@ class SensorsApplet extends Applet.TextApplet {
               let _max_defined_by_user = v["max_by_user"];
               let _min_defined_by_user = v["min_by_user"];
 
-              let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
-              let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
+              let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0 && !isNaN(_max_defined_by_user)) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+              let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0 && !isNaN(_min_defined_by_user)) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
 
               _tooltip += "  "+ _("min:") + " " + this._formatted_voltage(_voltage_min);
               _tooltip += " ";
@@ -932,9 +936,9 @@ class SensorsApplet extends Applet.TextApplet {
 
             this.label_parts.push(_shown_name+this._formatted_temp(_temp, vertical));
 
-            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0) ?
+            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0 && !isNaN(t["high_by_user"])) ?
               1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
-            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0) ?
+            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0 && !isNaN(t["crit_by_user"])) ?
               1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
 
             if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit)
@@ -1020,7 +1024,7 @@ class SensorsApplet extends Applet.TextApplet {
           if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push(C_FAN); //✇
           this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
 
-          let _fan_min = (f["min_by_user"] && f["min_by_user"].length > 0) ?
+          let _fan_min = (f["min_by_user"] && f["min_by_user"].length > 0 && !isNaN(f["min_by_user"])) ?
             1.0*f["min_by_user"] : 1.0*this._get_min_fan(this.data["fans"][f["sensor"]]);
 
           if (_fan < _fan_min)
@@ -1070,15 +1074,14 @@ class SensorsApplet extends Applet.TextApplet {
           let _max_defined_by_user = v["max_by_user"];
           let _min_defined_by_user = v["min_by_user"];
 
-          let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
-          let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
+          let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0 && !isNaN(_max_defined_by_user)) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+          let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0 && !isNaN(_min_defined_by_user)) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
 
           if (_voltage >= _voltage_max || _voltage < _voltage_min)
             _actor_style = "%s sensors-critical%s sensors-size%s vertalign-%s".format(_monospace, _border_type, this.char_size, this.vertical_align);
 
           if (this.journalize_volt)
             this.loggerVoltage.log(_voltage, _voltage_min, _voltage_max, v["sensor"]);
-
 
           nbr_already_shown += 1;
         }

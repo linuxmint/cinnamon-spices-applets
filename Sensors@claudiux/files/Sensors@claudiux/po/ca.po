@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-30 13:21+0100\n"
+"POT-Creation-Date: 2025-02-05 10:49+0100\n"
 "PO-Revision-Date: 2024-09-07 06:32+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -27,85 +27,85 @@ msgstr "Monitor de sensors"
 msgid "Suspended"
 msgstr "Suspès"
 
-#. applet.js:636 applet.js:678
+#. applet.js:638 applet.js:682
 msgid "high:"
 msgstr "alt:"
 
-#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
+#. applet.js:638 applet.js:642 applet.js:682 applet.js:684 applet.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:638 applet.js:680
+#. applet.js:642 applet.js:684
 msgid "crit:"
 msgstr "crít:"
 
-#. applet.js:722 applet.js:766
+#. applet.js:726 applet.js:770
 msgid "min:"
 msgstr "mín:"
 
-#. applet.js:768
+#. applet.js:772
 msgid "max:"
 msgstr "màx:"
 
-#. applet.js:797
+#. applet.js:801
 msgid "No intrusion detected"
 msgstr "No s'ha detectat intrusió"
 
-#. applet.js:797
+#. applet.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSIÓ DETECTADA!"
 
-#. applet.js:817
+#. applet.js:821
 msgid "Must be configured!"
 msgstr "S'ha de configurar!"
 
-#. applet.js:1205
+#. applet.js:1208
 msgid "Settings"
 msgstr "Opcions"
 
-#. applet.js:1205
+#. applet.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1212
+#. applet.js:1215
 msgid "⚙ General"
 msgstr "⚙ General"
 
-#. applet.js:1228
+#. applet.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Sensors de temperatura"
 
-#. applet.js:1244
+#. applet.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Sensors de ventilador"
 
-#. applet.js:1260
+#. applet.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Sensors de voltatge"
 
-#. applet.js:1276
+#. applet.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Sensors d'intrusió"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1303
+#. applet.js:1306
 msgid "Run xsensors"
 msgstr "Executar xsensors"
 
-#. applet.js:1312
+#. applet.js:1315
 msgid "Suspend Sensors"
 msgstr "Suspendre sensors"
 
-#. applet.js:1323
+#. applet.js:1326
 msgid "Reload this applet"
 msgstr "Refresca aquesta miniaplicació"
 
-#. applet.js:1653
+#. applet.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Segur que voleu eliminar '%s'?"
@@ -401,50 +401,6 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Mida de caràcter (% de la mida estandard)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr "línia base"
-
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr "sub"
-
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr "super"
-
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr "text-superior"
-
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr "text-inferior"
-
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr "centre"
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr "superior"
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr "inferior"
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr "no configurat"
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr "heredar"
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr "Alineació vertical"
-
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
 msgstr "Personalitzar el color del text"
@@ -558,7 +514,6 @@ msgstr ""
 "seleccionats de la llista de sota. No té cap efecte en panells verticals."
 
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Mostrar només valors estrictament positius"
@@ -740,6 +695,11 @@ msgid ""
 msgstr ""
 "Nom del disc: El nom del disc retornat per l'ordre 'lsblk'. Vegeu l'ajuda.\n"
 "Per a valors alts o crítics, consulteu el manual del vostre disc."
+
+#. settings-schema.json->strictly_positive_fan->description
+#, fuzzy
+msgid "Show only positive or zero values"
+msgstr "Mostrar només valors estrictament positius"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""

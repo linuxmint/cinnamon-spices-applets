@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-30 13:21+0100\n"
+"POT-Creation-Date: 2025-02-05 10:49+0100\n"
 "PO-Revision-Date: 2024-09-11 12:03+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -28,85 +28,85 @@ msgstr "Sensoren Monitor"
 msgid "Suspended"
 msgstr "Opgeschort"
 
-#. applet.js:636 applet.js:678
+#. applet.js:638 applet.js:682
 msgid "high:"
 msgstr "hoog:"
 
-#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
+#. applet.js:638 applet.js:642 applet.js:682 applet.js:684 applet.js:726
 msgid "n/a"
 msgstr "n.v.t"
 
-#. applet.js:638 applet.js:680
+#. applet.js:642 applet.js:684
 msgid "crit:"
 msgstr "kritiek:"
 
-#. applet.js:722 applet.js:766
+#. applet.js:726 applet.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:768
+#. applet.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:797
+#. applet.js:801
 msgid "No intrusion detected"
 msgstr "Geen verstoring gedetecteerd"
 
-#. applet.js:797
+#. applet.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "VERSTORING GEDETECTEERD!"
 
-#. applet.js:817
+#. applet.js:821
 msgid "Must be configured!"
 msgstr "Moet worden ingesteld!"
 
-#. applet.js:1205
+#. applet.js:1208
 msgid "Settings"
 msgstr "Instellingen"
 
-#. applet.js:1205
+#. applet.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1212
+#. applet.js:1215
 msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
-#. applet.js:1228
+#. applet.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatuursensoren"
 
-#. applet.js:1244
+#. applet.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensoren"
 
-#. applet.js:1260
+#. applet.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spanningssensoren"
 
-#. applet.js:1276
+#. applet.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Inbraaksensoren"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1303
+#. applet.js:1306
 msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
-#. applet.js:1312
+#. applet.js:1315
 msgid "Suspend Sensors"
 msgstr "Opschorten van sensors"
 
-#. applet.js:1323
+#. applet.js:1326
 msgid "Reload this applet"
 msgstr "Herlaad deze hulptoepassing"
 
-#. applet.js:1653
+#. applet.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
@@ -406,50 +406,6 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Tekengrootte (% van de standaardgrootte)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr "basislijn"
-
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr "onder"
-
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr "boven"
-
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr "tekst-boven"
-
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr "tekst-onder"
-
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr "midden"
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr "boven"
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr "onder"
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr "onbepaald"
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr "overneme"
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr "Verticale uitlijning"
-
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
 msgstr "Tekstkleur aanpassen"
@@ -563,7 +519,6 @@ msgstr ""
 "in verticale panelen."
 
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Toon alleen strikt positieve waarden"
@@ -740,6 +695,11 @@ msgstr ""
 "Schijfnaam: De naam van de schijf, zoals teruggegeven door het 'lsblk' "
 "commando. Zie help.\n"
 "Hoge en kritieke waarden: Cf. technische handleiding van uw schijf."
+
+#. settings-schema.json->strictly_positive_fan->description
+#, fuzzy
+msgid "Show only positive or zero values"
+msgstr "Toon alleen strikt positieve waarden"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""

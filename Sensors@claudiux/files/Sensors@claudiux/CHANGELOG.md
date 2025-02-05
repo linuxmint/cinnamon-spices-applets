@@ -1,3 +1,9 @@
+### v4.2.0~20250205
+  * Fixes several issues.
+  * Fixes #6845.
+  * Fixes #6766.
+  * Fixes #6842.
+
 ### v4.1.0~20250130
   * Improves dependency installation.
   * Fixes #6809 and #6818.
