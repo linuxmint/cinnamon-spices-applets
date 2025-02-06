@@ -1,3 +1,6 @@
+### v9.2.2~20250206
+  * Eliminates Cinnamon reload errors when a sound stream is playing.
+
 ### v9.2.1~20250205
   * Fixes #6854: Typo in settings.
 
