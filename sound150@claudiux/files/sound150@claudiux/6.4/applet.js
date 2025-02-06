@@ -1013,7 +1013,7 @@ class Seeker extends Slider.Slider {
             this._seekChangedId = null;
         }
 
-        this.disconnectAll();
+        //~ this.disconnectAll(); //??? Seems cause of bugs.
 
         this.posLabel = null;
         this.durLabel = null;
@@ -2521,17 +2521,18 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._artLooping = false;
         //~ logDebug("this._artLooping = false;");
 
-        if (this._control) {
-            for (let i = 0, l = this._streams.length; i < l; ++i) {
-                let id = this._streams[i].id;
-                this._control.emit("stream-removed", id);
-            }
-        }
+        //~ if (this._control) {
+            //~ for (let i = 0, l = this._streams.length; i < l; ++i) {
+                //~ let id = this._streams[i].id;
+                //~ this._control.emit("stream-removed", id);
+            //~ }
+        //~ }
 
-        if (this._seeker) {
-            this._seeker.destroy();
-            //~ logDebug("Seeker destroyed");
-        }
+        //~ if (this._seeker) {
+            //~ this._seeker.destroy();
+        //~ }
+
+        this._removeAllStreams();
 
         if (this._ownerChangedId && this._dbus) {
             this._dbus.disconnectSignal(this._ownerChangedId);
@@ -3571,6 +3572,37 @@ class Sound150Applet extends Applet.TextIconApplet {
                 break;
             }
         }
+    }
+
+    _removeAllStreams() {
+        for (let i = 0, l = this._streams.length; i < l; ++i) {
+            let stream = this._streams[i];
+            if (stream.item) {
+                stream.item.destroy();
+            }
+
+            // hide submenus or sections if showing them is unnecessary
+            if (stream.type === "SinkInput") {
+                if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                    this._outputApplicationsMenu.actor.hide();
+            } else if (stream.type === "SourceOutput") {
+                if (--this._recordingAppsNum === 0) {
+                    this._inputSection.actor.hide();
+                    this.mute_in_switch.actor.hide();
+                }
+
+                if (this.alwaysCanChangeMic) {
+                    this._inputSection.actor.show();
+                    if (this.mute_in_switch) this.mute_in_switch.actor.show();
+                }
+            }
+            this._streams.splice(i, 1);
+        }
+        if (this._seeker) {
+            this._seeker.destroy();
+        }
+        this._seeker = null;
+        kill_playerctld();
     }
 
     registerSystrayIcons() {
