@@ -3576,35 +3576,29 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _removeAllStreams() {
         for (let i = 0, l = this._streams.length; i < l; ++i) {
-            //~ if (this._streams[i].id === id) {
-                let stream = this._streams[i];
-                if (stream.item) {
-                    //~ logDebug("stream.item.destroy()");
-                    stream.item.destroy();
+            let stream = this._streams[i];
+            if (stream.item) {
+                stream.item.destroy();
+            }
+
+            // hide submenus or sections if showing them is unnecessary
+            if (stream.type === "SinkInput") {
+                if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                    this._outputApplicationsMenu.actor.hide();
+            } else if (stream.type === "SourceOutput") {
+                if (--this._recordingAppsNum === 0) {
+                    this._inputSection.actor.hide();
+                    this.mute_in_switch.actor.hide();
                 }
 
-                // hide submenus or sections if showing them is unnecessary
-                if (stream.type === "SinkInput") {
-                    if (this._outputApplicationsMenu.menu.numMenuItems === 0)
-                        this._outputApplicationsMenu.actor.hide();
-                } else if (stream.type === "SourceOutput") {
-                    if (--this._recordingAppsNum === 0) {
-                        this._inputSection.actor.hide();
-                        this.mute_in_switch.actor.hide();
-                    }
-
-                    if (this.alwaysCanChangeMic) {
-                        this._inputSection.actor.show();
-                        if (this.mute_in_switch) this.mute_in_switch.actor.show();
-                    }
-                    //~ kill_playerctld();
+                if (this.alwaysCanChangeMic) {
+                    this._inputSection.actor.show();
+                    if (this.mute_in_switch) this.mute_in_switch.actor.show();
                 }
-                this._streams.splice(i, 1);
-                //~ break;
-            //~ }
+            }
+            this._streams.splice(i, 1);
         }
         if (this._seeker) {
-            //~ logDebug("this._seeker.destroy()");
             this._seeker.destroy();
         }
         this._seeker = null;
