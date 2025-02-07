@@ -1,3 +1,8 @@
+### v10.0.0~20250207
+  * OSD is now managed by an extension. (Cinnamon 6.4)
+  * This extension is named OSD150@claudiux and it is automatically installed by this applet.
+  * Added the ability to remove incompatible extensions. (See menu if they are installed. Nothing in menu? All is OK.)
+
 ### v9.2.2~20250206
   * Eliminates Cinnamon reload errors when a sound stream is playing.
 
