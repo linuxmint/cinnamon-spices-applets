@@ -32,7 +32,8 @@
         "sectionSound1",
         "sectionSound2",
         "sectionSound3",
-        "sectionSound4"
+        "sectionSound4",
+        "sectionSound5"
       ]
     },
     "page_shortcuts": {
@@ -149,6 +150,14 @@
       "title": "Remove incompatible applets",
       "keys": [
         "remove_soundATcinnamonDOTorg"
+      ]
+    },
+    "sectionSound5": {
+      "type": "section",
+      "dependency": "OsdWithNumberATJosephMcc_is_loaded",
+      "title": "Remove incompatible extensions",
+      "keys": [
+        "remove_OsdWithNumberATJosephMcc"
       ]
     },
     "sectionShortcuts1": {
@@ -579,5 +588,15 @@
     "type": "button",
     "description": "Remove from panel the sound@cinnamon.org applet",
     "callback": "_on_remove_soundATcinnamonDOTorg_from_panels"
+  },
+  "OsdWithNumberATJosephMcc_is_loaded": {
+    "type": "generic",
+    "default": false
+  },
+  "remove_OsdWithNumberATJosephMcc": {
+    "type": "button",
+    "description": "Remove the OsdWithNumber extension",
+    "callback": "_on_remove_OsdWithNumber_from_extensions"
   }
+
 }

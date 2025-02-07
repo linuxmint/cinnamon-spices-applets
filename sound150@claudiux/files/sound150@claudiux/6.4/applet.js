@@ -39,8 +39,10 @@ const {
 }  = require("./lib/mainloopTools");
 
 const UUID = "sound150@claudiux";
+const EXTENSION_UUID = "OSD150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
-const PATH2SCRIPTS = HOME_DIR+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const PATH2SCRIPTS = APPLET_DIR+"/scripts";
 
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
@@ -54,6 +56,7 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 });
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
+const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
 
 // From Cinnamon 6.4, the /org/cinnamon/show-media-keys-osd key
 // becomes a boolean, no longer a character string!
@@ -65,7 +68,7 @@ const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
 // how long to show the output icon when volume is adjusted during media playback.
 const OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
-var OSD_HORIZONTAL = false;
+//~ var OSD_HORIZONTAL = false;
 
 function run_playerctld() {
     Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
@@ -75,50 +78,50 @@ function kill_playerctld() {
     Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/kill_playerctld.sh'");
 }
 
-Main.osdWindowManager._showOsdWindow = function(monitorIndex, icon, label, level, maxLevel=1) {
-    if (maxLevel>1.5) maxLevel=1.5;
-    else if (maxLevel < 0.3) maxLevel=0.3;
+//~ Main.osdWindowManager._showOsdWindow = function(monitorIndex, icon, label, level, maxLevel=1) {
+    //~ if (maxLevel>1.5) maxLevel=1.5;
+    //~ else if (maxLevel < 0.3) maxLevel=0.3;
 
-    this._osdWindows[monitorIndex]._vbox.remove_all_children();
-    this._osdWindows[monitorIndex]._hbox.remove_all_children();
+    //~ this._osdWindows[monitorIndex]._vbox.remove_all_children();
+    //~ this._osdWindows[monitorIndex]._hbox.remove_all_children();
 
-    this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._icon);
-    this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._vbox);
-    if (!OSD_HORIZONTAL) {
-        this._osdWindows[monitorIndex]._label.y_align = Clutter.ActorAlign.FILL;
-        this._osdWindows[monitorIndex]._vbox.add_child(this._osdWindows[monitorIndex]._label);
-    } else {
-        this._osdWindows[monitorIndex]._label.y_align = Clutter.ActorAlign.CENTER;
-        this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._label);
-    }
-    this._osdWindows[monitorIndex]._level.maximum_value = maxLevel;
-    this._osdWindows[monitorIndex]._vbox.add_child(this._osdWindows[monitorIndex]._level);
+    //~ this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._icon);
+    //~ this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._vbox);
+    //~ if (!OSD_HORIZONTAL) {
+        //~ this._osdWindows[monitorIndex]._label.y_align = Clutter.ActorAlign.FILL;
+        //~ this._osdWindows[monitorIndex]._vbox.add_child(this._osdWindows[monitorIndex]._label);
+    //~ } else {
+        //~ this._osdWindows[monitorIndex]._label.y_align = Clutter.ActorAlign.CENTER;
+        //~ this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._label);
+    //~ }
+    //~ this._osdWindows[monitorIndex]._level.maximum_value = maxLevel;
+    //~ this._osdWindows[monitorIndex]._vbox.add_child(this._osdWindows[monitorIndex]._level);
 
-    this._osdWindows[monitorIndex].setIcon(icon);
-    this._osdWindows[monitorIndex].setLabel(label);
-    this._osdWindows[monitorIndex].setMaxLevel(maxLevel);
-    this._osdWindows[monitorIndex].setLevel(level);
-    this._osdWindows[monitorIndex].show();
-}
+    //~ this._osdWindows[monitorIndex].setIcon(icon);
+    //~ this._osdWindows[monitorIndex].setLabel(label);
+    //~ this._osdWindows[monitorIndex].setMaxLevel(maxLevel);
+    //~ this._osdWindows[monitorIndex].setLevel(level);
+    //~ this._osdWindows[monitorIndex].show();
+//~ }
 
-Main.osdWindowManager.show = function(monitorIndex, icon, label, level, maxLevel, convertIndex) {
-    if (this._osdWindows.length === 0)
-        return;
+//~ Main.osdWindowManager.show = function(monitorIndex, icon, label, level, maxLevel, convertIndex) {
+    //~ if (this._osdWindows.length === 0)
+        //~ return;
 
-    if (monitorIndex !== -1) {
-        if (convertIndex)
-            monitorIndex = convertGdkIndex(monitorIndex);
-        for (let i = 0; i < this._osdWindows.length; i++) {
-            if (i === monitorIndex)
-                this._showOsdWindow(i, icon, label, level, maxLevel);
-            else
-                this._osdWindows[i].cancel();
-        }
-    } else {
-        for (let i = 0; i < this._osdWindows.length; i++)
-            this._showOsdWindow(i, icon, label, level, maxLevel);
-    }
-}
+    //~ if (monitorIndex !== -1) {
+        //~ if (convertIndex)
+            //~ monitorIndex = convertGdkIndex(monitorIndex);
+        //~ for (let i = 0; i < this._osdWindows.length; i++) {
+            //~ if (i === monitorIndex)
+                //~ this._showOsdWindow(i, icon, label, level, maxLevel);
+            //~ else
+                //~ this._osdWindows[i].cancel();
+        //~ }
+    //~ } else {
+        //~ for (let i = 0; i < this._osdWindows.length; i++)
+            //~ this._showOsdWindow(i, icon, label, level, maxLevel);
+    //~ }
+//~ }
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -439,10 +442,10 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         if (this.applet.showBarLevel === true)
             _bar_level =  rounded_volume;
         let _maxLevel = Math.round(this.applet._volumeMax/this.applet._volumeNorm * 100) / 100;
-        OSD_HORIZONTAL = this.OSDhorizontal;
+        //~ OSD_HORIZONTAL = this.OSDhorizontal;
 
         if (this.applet.showOSD && rounded_volume != Math.round(this.oldValue)) {
-            Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+            Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
         }
 
         if (this.stream.is_muted !== muted)
@@ -1872,6 +1875,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.startingUp = true;
 
+        this.install_OSD150();
+
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.settings.bind("showMediaOptical", "showMediaOptical", () => {
             SHOW_MEDIA_OPTICAL = this.showMediaOptical;
@@ -1890,10 +1895,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("showBarLevel", "showBarLevel");
         this.settings.bind("showVolumeValue", "showVolumeValue");
         this.settings.bind("OSDhorizontal","OSDhorizontal");
-        OSD_HORIZONTAL = this.OSDhorizontal;
+        //~ OSD_HORIZONTAL = this.OSDhorizontal;
 
         this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
+        this.settings.bind("OsdWithNumberATJosephMcc_is_loaded", "OsdWithNumberATJosephMcc_is_loaded");
         this.settings.bind("showtrack", "showtrack", () => { this.on_settings_changed() });
         this.settings.bind("middleClickAction", "middleClickAction");
         this.settings.bind("middleShiftClickAction", "middleShiftClickAction");
@@ -1991,6 +1997,9 @@ class Sound150Applet extends Applet.TextIconApplet {
           }
         }
         this.settings.setValue("soundATcinnamonDOTorg_is_loaded", _soundATcinnamonDOTorg_is_loaded);
+
+        // Whether OsdWithNumber@JosephMcc is loaded:
+        this.OsdWithNumberATJosephMcc_is_loaded = this.OsdWithNumberATJosephMcc_is_loaded_internal;
 
         Main.themeManager.connect("theme-set", () => { this._theme_set() });
 
@@ -2167,6 +2176,30 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_showMediaKeysOSD_changed() {
         global.settings.set_boolean(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
+    }
+
+    _on_remove_OsdWithNumber_from_extensions() {
+        const TO_REMOVE = "OsdWithNumber@JosephMcc";
+        let dialog = new ModalDialog.ConfirmDialog(
+            _("Are you sure you want to remove '%s'?").format(TO_REMOVE),
+                () => {
+                Extension.unloadExtension(TO_REMOVE, Extension.Type.EXTENSION, false, false);
+
+                let oldList = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+                let newList = [];
+
+                for (let i = 0; i < oldList.length; i++) {
+                    let info = oldList[i];
+                    if (info != TO_REMOVE) {
+                        newList.push(oldList[i]);
+                    }
+                }
+                global.settings.set_strv(ENABLED_EXTENSIONS_KEY, newList);
+                this.settings.setValue("OsdWithNumberATJosephMcc_is_loaded", false);
+                //~ this._on_reload_this_applet_pressed();
+            }
+        );
+        dialog.open();
     }
 
     _on_remove_soundATcinnamonDOTorg_from_panels() {
@@ -2464,7 +2497,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
     }
 
-    on_applet_removed_from_panel() {
+    on_applet_removed_from_panel(deleteConfig) {
         this.startingUp = true;
         //~ logDebug("on_applet_removed_from_panel() BEGIN");
 
@@ -2521,17 +2554,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._artLooping = false;
         //~ logDebug("this._artLooping = false;");
 
-        //~ if (this._control) {
-            //~ for (let i = 0, l = this._streams.length; i < l; ++i) {
-                //~ let id = this._streams[i].id;
-                //~ this._control.emit("stream-removed", id);
-            //~ }
-        //~ }
-
-        //~ if (this._seeker) {
-            //~ this._seeker.destroy();
-        //~ }
-
         this._removeAllStreams();
 
         if (this._ownerChangedId && this._dbus) {
@@ -2556,6 +2578,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.setValue("volume", old_volume);
         //~ setTimeout(() => { this.volume = old_volume; logDebug("this.volume: "+this.volume); }, 2100);
         remove_all_sources();
+
+        if (deleteConfig)
+            this.uninstall_OSD150();
         //~ logDebug("old_volume: "+old_volume);
         //~ this.volume = old_volume;
         //~ logDebug("playerctld killed");
@@ -2572,6 +2597,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._chooseActivePlayerItem.menu.open();
         if (!this._launchPlayerItemActorIsHidden && kplo)
             this._launchPlayerItem.menu.open();
+        if (this.OsdWithNumberATJosephMcc_is_loaded_internal)
+            this._remove_OsdWithNumberATJosephMcc_button.actor.show();
+        else
+            this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
     }
 
     _openMenu() {
@@ -2617,9 +2646,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                     _volume_str = ""+volume+PERCENT_CHAR
                 if (this.showBarLevel === true)
                     _bar_level =  volume;
-                OSD_HORIZONTAL = this.OSDhorizontal;
+                //~ OSD_HORIZONTAL = this.OSDhorizontal;
 
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
             }
             //~ this.setIcon();
         } else {
@@ -2652,8 +2681,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                     _volume_str = ""+volume+PERCENT_CHAR
                 if (this.showBarLevel === true)
                     _bar_level =  volume;
-                OSD_HORIZONTAL = this.OSDhorizontal;
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+                //~ OSD_HORIZONTAL = this.OSDhorizontal;
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
             }
         }
     }
@@ -2799,11 +2828,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this.showBarLevel === true)
                 _bar_level = volume;
             let _maxLevel = Math.round(this._volumeMax/this._volumeNorm * 100) / 100;
-            OSD_HORIZONTAL = this.OSDhorizontal;
+            //~ OSD_HORIZONTAL = this.OSDhorizontal;
             if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
                 //~ Main.osdWindowManager.hideAll();
                 try {
-                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
                 } catch(e) {}
             }
             this.old_volume = ""+volume+"%";
@@ -3231,6 +3260,17 @@ class Sound150Applet extends Applet.TextIconApplet {
             });
             this.menu.addMenuItem(_remove_soundATcinnamonDOTorg_button);
         }
+
+        // button "remove_OsdWithNumber"
+        this._remove_OsdWithNumberATJosephMcc_button = new PopupMenu.PopupIconMenuItem(_("Remove the OsdWithNumber extension"), "edit-delete", St.IconType.SYMBOLIC);
+        this._remove_OsdWithNumberATJosephMcc_button.connect("activate", (event) => {
+            this._on_remove_OsdWithNumber_from_extensions()
+        });
+        this.menu.addMenuItem(this._remove_OsdWithNumberATJosephMcc_button);
+        if (this.OsdWithNumberATJosephMcc_is_loaded_internal)
+            this._remove_OsdWithNumberATJosephMcc_button.actor.show();
+        else
+            this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
 
         //button Install playerctl (when it isn't installed)
         if (this._playerctl === null) {
@@ -3700,6 +3740,58 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.audio_prev = audio_prev.join("::");
     }
 
+    install_OSD150() {
+        // Installs the OSD150 extension.
+
+        // First, install the '.json' config file:
+        // There is no config file to install!
+
+        // enabledExtensions will contain all desklets:
+        var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        var extensionEEKline = "";
+        for (let i = 0; i < enabledExtensions.length; i++){
+          let name = enabledExtensions[i];
+          //~ logDebug("Desklet name: "+name);
+          if (name == EXTENSION_UUID) {
+            extensionEEKline = ""+enabledExtensions[i];
+            //~ enabledExtensions.splice(i, 1); //useless
+            break;
+          }
+        }
+
+        // Put the extension code at the right place:
+        const extension_source_path = APPLET_DIR + "/extension/" + EXTENSION_UUID;
+        if (GLib.find_program_in_path("cinnamon-install-spice")) {
+          Util.spawnCommandLineAsync("cinnamon-install-spice extension "+extension_source_path);
+        } else {
+          const extension_target_path = HOME_DIR+"/.local/share/cinnamon/extensions/"
+          Util.spawnCommandLineAsync("cp -a -f "+extension_source_path+" "+extension_target_path);
+        }
+
+        if (extensionEEKline.length === 0) {
+            // OSD150 must be installed.
+            enabledExtensions.push(EXTENSION_UUID);
+            global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+        }
+        //~ // OSD150 must be reloaded.
+        //~ Extension.reloadExtension(EXTENSION_UUID, Extension.Type.EXTENSION);
+    }
+
+    uninstall_OSD150() {
+        var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        //~ var extensionEEKline = "";
+        for (let i = 0; i < enabledExtensions.length; i++){
+          let name = enabledExtensions[i];
+          //~ logDebug("Desklet name: "+name);
+          if (name == EXTENSION_UUID) {
+            //~ extensionEEKline = ""+enabledExtensions[i];
+            enabledExtensions.splice(i, 1); //useless
+            //~ break;
+          }
+        }
+        global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+    }
+
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");
     }
@@ -3714,6 +3806,19 @@ class Sound150Applet extends Applet.TextIconApplet {
                 return true;
             }
         }
+    }
+
+    get OsdWithNumberATJosephMcc_is_loaded_internal() {
+        let enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        var _OsdWithNumberATJosephMcc_is_loaded = false;
+        for (let extData of enabledExtensions) {
+          if (extData === "OsdWithNumber@JosephMcc") {
+            _OsdWithNumberATJosephMcc_is_loaded = true;
+            break;
+          }
+        }
+        this.settings.setValue("OsdWithNumberATJosephMcc_is_loaded", _OsdWithNumberATJosephMcc_is_loaded);
+        return _OsdWithNumberATJosephMcc_is_loaded;
     }
 }
 
