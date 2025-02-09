@@ -8,7 +8,7 @@ import { OpenMeteoResponseToData } from "./payload/response";
 
 export class OpenMeteo extends BaseProvider {
 
-	public readonly prettyName = _("Open Meteo");
+	public readonly prettyName = _("Open-Meteo");
 	public readonly name = "OpenMeteo";
 	public readonly maxForecastSupport = 16;
 	public readonly website = "https://open-meteo.com/";

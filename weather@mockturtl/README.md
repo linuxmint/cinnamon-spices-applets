@@ -30,26 +30,30 @@ You can also save locations what you entered manually and switch between them in
 
 | Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts  | Other information             |
 | -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------- | ----------------------------- |
+| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | Default provider              |
 | **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | --                            |
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
-| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | Default provider              |
-| **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | -                             |
-| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
+| **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | --                            |
+| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Depends | Previously known as Climacell |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No*     | Limited free calls            |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
-| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
+
+### Open-Meteo
+
+[Open-Meteo](https://open-meteo.com/) is an open-source weather API since 2022 that offers free access for non-commercial use. This applets default weather provider from 2024. No API key required. Read more about the service [here](https://open-meteo.com/en/about).
 
 ### OpenWeatherMap
 
 Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquarters in London UK. [OpenWeatherMap Website](https://openweathermap.org/). Read more about the service [here](https://en.wikipedia.org/wiki/OpenWeatherMap).
 
-* This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
+* This used to be the default provider until May 2024. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
@@ -93,13 +97,31 @@ The National Weather Service in the USA is a federal government agency formed in
 
 * Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
 
-### Open-Meteo
+### Swiss Météo
 
-[Open-Meteo](https://open-meteo.com/) is an open-source weather API and offers free access for non-commercial use. No API key required.
+Weather Forecast service in Switzerland run by [Federal Office of Meteorology and Climatology MeteoSwiss](https://www.meteoswiss.admin.ch/) since 2000 with history back to 1864. Read more about the agency [here](https://www.meteoswiss.admin.ch/about-us.html).
+
+* **Only covers Switzerland**
 
 ### OpenWeatherMap OneCall
 
 Version of OpenWeatherMap that supports more features (as before), but needs an API key. You can register for an API key [here](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base). After that change your Call limit from 2000 to 1000 to make sure you are not charged.
+
+* Provides 1000 Free calls a day
+
+### Pirate Weather
+
+Direct replacement to DarkSky. Run by one guy, it's also open source. If you like the accuracy of the data or you want to keep the project going, subscribe to a paid plan. 10000 calls free. You can get an API key [here](https://pirate-weather.apiable.io/products/weather-data).
+
+You can read about the project [here](http://pirateweather.net/en/latest/).
+
+Alerts are an US only feature as of May 2024.
+
+### Visual Crossing
+
+Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/). Read more about the service [here](https://www.visualcrossing.com/about). 
+
+* Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
 * Provides 1000 Free calls a day
 
@@ -114,14 +136,6 @@ Historical and Forecast Weather data service provided by Weatherbit LLC in the U
 * **Hourly Weather forecast requires a non-free account
 
 * *Using alerts will increase call usage by 33%.
-
-### Visual Crossing
-
-Weather service from Visual Crossing Corporation founded in 2003 with headquarters in USA and Germany. [Visual Crossing Website](https://www.visualcrossing.com/). Read more about the service [here](https://www.visualcrossing.com/about). 
-
-* Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
-
-* Provides 1000 Free calls a day
 
 ### Tomorrow.io
 
@@ -154,15 +168,8 @@ Weather Underground is a privately owned, web-based weather information company.
 - You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
 - Disclaimer: Observations don't provide weather conditions so the forecast one for the day is used.
 
-### Pirate Weather
-
-Direct replacement to DarkSky. Run by one guy, it's also open source. If you like the accuracy of the data or you want to keep the project going, subscribe to a paid plan. 10000 calls free. You can get an API key [here](https://pirate-weather.apiable.io/products/weather-data).
-
-You can read about the project [here](http://pirateweather.net/en/latest/).
-
-Alerts are an US only feature as of May 2024.
-
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
+
 
 The setting allows you to make the applet display basically anything in the form of text in the panel (and other places). In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.  Left-pad values with up to 3 zeros using `{humidity,3.0}`. Right-pad values with up to 4 spaces using `{t.4}` (or `{t.4. }`).  Some values have an overridable default padding.
 
@@ -182,6 +189,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{country}`       | Country name shown in the popup                           |         |           |          |
 | `{search_entry}`  | Search entry text in manual location (or location store)  |         |           |          |
 | `{last_updated}`  | Formatted last updated time                               |         |           |          |
+| `{br}`            | Line Break                                                |         |           |          |
 | `{wind_speed}`    | Wind speed                                                |         |           |          |
 | `{wind_unit}`     | Wind speed unit                                           |         |           |          |
 | `{wind_dir}`      | Wind direction in text format (NW, etc)                   |         |           |          |
@@ -270,7 +278,9 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * On subsequent refreshes/relogins the popup menu's element's may lose all padding.
 
-* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed. 
+* If the popup menu is open while refreshing the current weather value row (Temp, Pressure, etc) might shrink so it can't display the values. Workaround: Manual refresh while the popup menu is closed.
+
+* New Breeze icons don't display properly. If you are using them or any icon theme that inherits from them they (mostly) will appear as white boxes. See [Symbolic icon rendering issues in Arch linux Cinnamon (#20) · Issues · Frameworks / Breeze Icons · GitLab](https://invent.kde.org/frameworks/breeze-icons/-/issues/20)
 
 ### Report a new issue
 
