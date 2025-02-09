@@ -38,6 +38,8 @@ class Monitor {
         this.index = index;
         this.name = name;
         this.brightness = 50;
+        this.send_brightness = null;
+        this.sent_brightness = null;
         this.bus = bus;
         this.menuLabel = null;
         this.menuSlider = null;
@@ -50,7 +52,7 @@ class Monitor {
             const cmd = `ddcutil --bus=${this.bus} getvcp 10`;
             Util.spawnCommandLineAsyncIO(cmd, (stdout, stderr, exitCode) => {
                 // guarantee resolve, even if the following code fails
-                setTimeout(resolve, 10);
+                setTimeout(resolve, 500);
 
                 if (exitCode == 0) {
                     // regex from ddcci-monitor-control@andr35
@@ -82,16 +84,36 @@ class Monitor {
 
     setBrightness(value) {
         this.brightness = Math.round(value);
+        this.send_brightness = this.brightness;
         this.updateMenu();
         this.#promises = this.#promises.then(() => {
             return new Promise((resolve, reject) => {
-                Util.spawnCommandLineAsync(
-                    `ddcutil --bus=${this.bus} setvcp 10 ${this.brightness}`,
-                    resolve,
-                    reject
-                );
+                setTimeout(resolve, 5000);
+                this.trySetBrightness(resolve, reject, 16);
             });
         });
+    }
+
+    trySetBrightness(resolve, reject, attempts) {
+        if (attempts <= 0) {
+            log(`Failed to change brightness of ${this.name} after multiple attempts.`, "warning");
+            return resolve();
+        }
+        const target_brightness = this.send_brightness;
+        if (target_brightness !== this.sent_brightness) {
+            Util.spawnCommandLineAsync(
+                `ddcutil --bus=${this.bus} setvcp 10 ${target_brightness}`,
+                () => {
+                    this.sent_brightness = target_brightness;
+                    resolve();
+                },
+                () => {
+                    this.trySetBrightness(resolve, reject, attempts - 1);
+                },
+            );
+        } else {
+            resolve();
+        }
     }
 
     addToMenu(menu) {

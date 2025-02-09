@@ -1,4 +1,16 @@
 {
+  "section_soundcard": {
+    "type": "section",
+    "description": "Soundcard settings",
+    "keys": [
+      "soundcard"
+    ]
+  },
+  "soundcard": {
+    "type": "entry",
+    "description": "Soundcard search string in /proc/asound/cards (empty: deactivate)",
+    "default": ""
+  },
   "section_keybinding": {
     "type": "section",
     "description": "Keyboard shortcuts",

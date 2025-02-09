@@ -9,9 +9,7 @@ export type FishAppletError = {
   message: string
 }
 
-type ErrorDictionary = {
-  [key in ErrorLocation]?: FishAppletError[]
-}
+type ErrorDictionary = Partial<Record<ErrorLocation, FishAppletError[]>>
 
 /**
  * Stores errors and is used to manage the applet's state (normal / error).

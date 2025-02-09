@@ -1,88 +1,96 @@
-# SOME DESCRIPTIVE TITLE.
+# RADIO3.0
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 18:37+0100\n"
-"PO-Revision-Date: 2023-12-13 15:20+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 21:00+0100\n"
+"PO-Revision-Date: 2024-11-19 00:53+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
 
-#: applet.js:426
+#. applet.js:255
+msgid "unassigned"
+msgstr "määrittämätön"
+
+#. applet.js:256 desklet/AlbumArt3.0@claudiux/desklet.js:301
+msgid "Display Album Art at full size"
+msgstr ""
+
+#. applet.js:360
 msgid "This is your own list of Categories and Radio Stations."
-msgstr "Tämä on sinun oma lista musiikista ja radioasemista."
+msgstr "Tämä on sinun oma lista radioasemista."
 
-#: applet.js:427
+#. applet.js:361
 msgid "You can add more using the [+] button."
-msgstr "Voit lisätä lisää [+] painikkeella."
+msgstr "Voit lisätä [+] painikkeella."
 
-#: applet.js:428
+#. applet.js:362
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
-"Jos haluat tietyn kategorian, täytä vain sen nimi; jätä muut kentät tyhjiksi."
+"Jos haluat tietyn kategorian, täytä vain sen nimi; jätä muut kentät tyhjäksi."
 
-#: applet.js:429
+#. applet.js:363
 msgid "For a radio station, enter only its name and its streaming URL."
-msgstr "Anna radioasemalle vain sen nimi ja suoratoiston URL-osoite."
+msgstr "Anna vain radioasemalle sen nimi ja suoratoiston URL-osoite."
 
-#: applet.js:430
+#. applet.js:364
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
 msgstr ""
-"Voit järjestää rivit vetämällä ja pudottamalla tai käyttää nuolipainikkeita."
+"Järjestä rivit vedä ja pudota periaatteella tai käyttää nuolipainikkeita."
 
-#: applet.js:431
+#. applet.js:365
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
 msgstr ""
-"Oikealla olevilla painikkeilla voit navigoida sivu sivulta tai ryhmän mukaan."
+"Oikealla olevilla painikkeilla voit selata sivu sivulta tai kategorian "
+"mukaan."
 
-#: applet.js:432
+#. applet.js:366
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
 msgstr ""
 "Jos haluat etsiä radioasemaa, paina radiolistaa ja kirjoita aseman nimi."
 
-#: applet.js:433
+#. applet.js:367
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
 msgstr ""
-"Voit helposti lisätä asemia listallesi käyttämällä kahta välilehteä: Hae ja "
-"Tuo."
+"Voit lisätä radioasemia listallesi käyttämällä kahta välilehteä: Hae ja Tuo."
 
-#: applet.js:434
+#. applet.js:368
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
-"Laita ruksi ruutuun \"Valikko\" ja asema tulee näkyviin ohjelman kuvakkeen "
-"valikkoon."
+"Laita ruksi \"Valikko\" ruutuun ja radioasema tulee näkyviin valikossa."
 
-#: applet.js:435
+#. applet.js:369
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
 msgstr ""
-"Laita ruksi ruutuun \"♪/➟\" kuuntele asemaa tai siirrä se toiseen ryhmään "
-"alla olevilla työkaluilla."
+"Laita ruksi ruutuun \"♪/➟\" kuuntele asemaa tai siirrä se toiseen "
+"kategoriaan alla olevilla työkaluilla."
 
-#: applet.js:437
+#. applet.js:371
 msgid "You can have your list of stations checked by internet databases."
 msgstr "Voit tarkistaa radiolistan Internet-tietokantojen avulla."
 
-#: applet.js:438
+#. applet.js:372
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -90,7 +98,7 @@ msgstr ""
 "Jokainen näistä tietokannan tunnistama asema saa tämän tietokannan tarjoaman "
 "UUID-tunnuksen (Universal Unique Identifier)."
 
-#: applet.js:439
+#. applet.js:373
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -98,15 +106,15 @@ msgstr ""
 "Joten jos suoratoiston URL-osoitetta muutettiin, seuraava tarkistus "
 "päivittää sen ja voit jatkaa valitun aseman kuuntelemista."
 
-#: applet.js:441
+#. applet.js:375
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
 msgstr ""
-"Täältä voit etsiä asemia radiotietokannasta, joka on käytettävissä "
-"Internetin kautta."
+"Voit etsiä asemia radiotietokannasta, joka on käytettävissä Internetin "
+"kautta."
 
-#: applet.js:442
+#. applet.js:376
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -114,32 +122,32 @@ msgstr ""
 "Täytä ainakin muutama kenttä alla olevasta lomakkeesta ja paina \"Hae...\" "
 "painiketta."
 
-#: applet.js:443
+#. applet.js:377
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
 "them in the menu."
 msgstr ""
-"Joka kerta kun tätä painetaan, tämän sivun alaosassa näytetään uusi "
-"tulossivu, jolla voit testata asemia ja lisätä ne listallesi."
+"Kun hakua painetaan niin sivun alaosassa näkyy uusi hakutulos. Voit testata "
+"asemia ja lisätä sinun listalle."
 
-#: applet.js:444
+#. applet.js:378
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
 msgstr ""
-"Sinun valikossasi oleva asema näkyy hakutuloksissa vain, jos sen "
-"suoratoiston URL-osoite on muuttunut."
+"Asema joka on jo listallasi näkyy haussa vain, jos sen suoratoiston URL on "
+"muuttunut."
 
-#: applet.js:445
+#. applet.js:379
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
 msgstr ""
-"Kun hakusivulle ei tule mitään se tarkoittaa, että kaikki hakuehtojasi "
-"vastaavat tulokset on ohi."
+"Jos uutta tietoa ei ole se tarkoittaa, että kaikki hakuehtojasi vastaavat "
+"tulokset on näytetty."
 
-#: applet.js:447
+#. applet.js:381
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -147,7 +155,7 @@ msgstr ""
 "Voit tuoda tiedoston, joka sisältää vähintään yhden radioaseman ja "
 "suoratoiston URL-osoitteen."
 
-#: applet.js:448
+#. applet.js:382
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -155,11 +163,11 @@ msgstr ""
 "Nämä radioasemat näkyvät alla olevassa listassa. Voit testata niitä "
 "valitsemalla ♪ ruudun."
 
-#: applet.js:449
+#. applet.js:383
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Hallinnoi listaa alareunassa olevilla painikkeilla."
 
-#: applet.js:451
+#. applet.js:385
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -167,7 +175,7 @@ msgstr ""
 "Paina Shoutcast luettelossa aseman nimen vasemmalla puolella olevaa lataa-"
 "kuvaketta."
 
-#: applet.js:452
+#. applet.js:386
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -175,11 +183,11 @@ msgstr ""
 "Valitse avoimessa formaatissa (.XSPF) ja tallenna tiedosto samalla nimellä "
 "kuin asema on kirjoitettu."
 
-#: applet.js:453
+#. applet.js:387
 msgid "This file can then be imported here."
 msgstr "Tämä kyseinen tiedosto sitten voidaan tuoda tänne."
 
-#: applet.js:455
+#. applet.js:389
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bytes = %s GB = %s GiB"
@@ -190,317 +198,335 @@ msgstr "%s bytes = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:616 applet.js:630 applet.js:4693 applet.js:4705
+#. applet.js:555 applet.js:569 applet.js:5926 applet.js:5938
 msgid "(Undefined)"
 msgstr "(ei valintaa)"
 
-#: applet.js:1022 applet.js:1751 applet.js:2173
-msgid "Stop"
-msgstr "Pysäytä"
-
-#: applet.js:1743
+#. applet.js:2191
 msgid "Start"
 msgstr "Aloita"
 
-#: applet.js:1989 applet.js:2031 applet.js:2087
+#. applet.js:2199 applet.js:3029
+msgid "Stop"
+msgstr "Pysäytä"
+
+#. applet.js:2438 applet.js:2474 applet.js:2521
 msgid "Middle-Click: Stop Recording"
 msgstr "Keskipainike: Lopeta tallennus"
 
-#: applet.js:2027 applet.js:2083
+#. applet.js:2470 applet.js:2517
 msgid "Volume: %s%"
 msgstr "Voimakkuus: %s%"
 
-#: applet.js:2033 applet.js:2089
+#. applet.js:2476 applet.js:2523
 msgid "Middle-click: ON/OFF"
 msgstr "Keskipainike: ON/OFF"
 
-#: applet.js:2035 applet.js:2091
+#. applet.js:2478 applet.js:2525
 msgid "Click: Select another station"
 msgstr "Painallus: Valitse toinen asema"
 
-#: applet.js:2048
+#. applet.js:2491
 msgid "Click to select a station"
 msgstr "Valitse asema painamalla"
 
-#: applet.js:2093
+#. applet.js:2527
 msgid "Scroll wheel: volume change"
 msgstr "Rulla: voimakkuus muuttuu"
 
-#: applet.js:2149 applet.js:2508 applet.js:4337
+#. applet.js:2600 applet.js:3047 applet.js:4983 applet.js:5345
 msgid "Configure..."
 msgstr "Asetukset..."
 
-#: applet.js:2153 applet.js:2500
+#. applet.js:2604 applet.js:3039
 msgid "Search for new stations..."
-msgstr "Etsi uusia asemia..."
+msgstr "Haei asemia..."
 
-#: applet.js:2159 applet.js:2512 applet.js:4374
+#. applet.js:2610 applet.js:3051 applet.js:5046 applet.js:5474
 msgid "Sound Settings"
-msgstr "Ääniasetukset"
+msgstr "Laitteet"
 
-#: applet.js:2222 applet.js:2269
+#. applet.js:2686
 msgid "Watch on YT"
 msgstr "Katso YT"
 
-#: applet.js:2229
+#. applet.js:2693
 msgid "Try to download it from YT (unsafe)"
 msgstr "Yritä ladata YT:n kautta (turvaton)"
 
-#: applet.js:2260
-#, javascript-format
-msgid "Infos on: %s"
-msgstr "Tietoja: %s"
-
-#: applet.js:2290
+#. applet.js:2756
 msgid "Recently Played Stations:"
 msgstr "Viimeiksi toistetut asemat:"
 
-#: applet.js:2326
+#. applet.js:2798
 msgid "Visit the home page of this station"
 msgstr "Vieraile tämän aseman kotisivulla"
 
-#: applet.js:2367
-msgid "My Categories"
-msgstr "Omat ryhmät"
+#. applet.js:2860
+msgid "Categories"
+msgstr "Kategoriat"
 
-#: applet.js:2436
+#. applet.js:2863
+msgid "Radio Stations"
+msgstr "Radioasemat"
+
+#. applet.js:2874
+msgid "All Categories"
+msgstr "Kaikki kategoriat"
+
+#. applet.js:2971
 msgid "My Radio Stations"
-msgstr "Minun valitsemat asemat"
+msgstr "Minun asemat"
 
-#: applet.js:2620
+#. applet.js:3171
 msgid "Downloading..."
 msgstr "Ladataan..."
 
-#: applet.js:2622
+#. applet.js:3173
 msgid "Stop downloading"
 msgstr "Pysäytä lataaminen"
 
-#: applet.js:2730
+#. applet.js:3277
 msgid "Download complete"
 msgstr "Lataaminen valmis"
 
-#: applet.js:2732 applet.js:2741 applet.js:4139 applet.js:4148 applet.js:4157
-#: applet.js:4455
+#. settings-schema.json->button-open-rec-folder->description
+#. settings-schema.json->recordings-open-folder->description
+#. applet.js:3279 applet.js:3288 applet.js:4774 applet.js:4783 applet.js:4792
+#. applet.js:5009 applet.js:5400
 msgid "Open the recordings folder"
 msgstr "Avaa tallennuskansio"
 
-#: applet.js:2739 applet.js:4136 applet.js:4146 applet.js:4155
+#. applet.js:3286 applet.js:4771 applet.js:4781 applet.js:4790
 msgid "An error seems to have occurred during recording!"
 msgstr "Virhe tapahtui tallennuksen aikana!"
 
-#: applet.js:2740 applet.js:4138 applet.js:4147 applet.js:4156
+#. applet.js:3287 applet.js:4773 applet.js:4782 applet.js:4791
 msgid "Please check this record."
 msgstr "Tarkista tämä tallennus."
 
-#: applet.js:2847 applet.js:2881
+#. applet.js:3394 applet.js:3428
 msgid "Record from now"
 msgstr "Nauhoita tästä"
 
-#: applet.js:2865 applet.js:4599
+#. applet.js:3412 applet.js:5832
 msgid "Stop Current Recording"
 msgstr "Lopeta nykyinen tallennus"
 
-#: applet.js:2977
+#. applet.js:3545
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Nyt soi %s%s"
 
-#: applet.js:3026
+#. applet.js:3598
 msgid "Radio OFF"
 msgstr "Radio POIS"
 
-#: applet.js:3154
+#. applet.js:3726
 msgid "Unable to record anything!"
 msgstr "Ei voi tallentaa mitään!"
 
-#: applet.js:3154 applet.js:4475
+#. applet.js:3726 applet.js:5026 applet.js:5177 applet.js:5420
 msgid "Insufficient space"
 msgstr "Levytilaa ei ole riittävästi"
 
-#: applet.js:3154
+#. applet.js:3726
 msgid "The limit you set has been reached."
 msgstr "Asetamasi raja on saavutettu."
 
-#: applet.js:3536
+#. applet.js:4117
 msgid "Please Log Out then Log In"
 msgstr "Kirjaudu ulos ja sitten sisään"
 
-#: applet.js:3536
+#. applet.js:4117
 msgid "to finalize yt-dlp update"
 msgstr "yt-dlp päivityksen viimeistelemiseksi"
 
-#: applet.js:3627
+#. applet.js:4255
 msgid "Nothing to save."
 msgstr "Ei mitään tallennettavaa."
 
-#: applet.js:3640
+#. applet.js:4268
 msgid "List of saved radio stations"
 msgstr "Lista tallennetuista radioasemista"
 
-#: applet.js:3658
+#. applet.js:4286
 msgid "This will replace all current radio stations."
 msgstr "Tämä korvaa kaikki nykyiset radioasemat."
 
-#: applet.js:3659
+#. applet.js:4287
 msgid "Are you sure you want to continue?"
 msgstr "Haluatko varmasti jatkaa?"
 
-#: applet.js:3719 applet.js:3812
+#. applet.js:4347
 msgid "Update in progress"
 msgstr "Päivitys käynnissä"
 
-#: applet.js:3719 applet.js:3812
+#. applet.js:4347
 msgid "It may take a while ... Please wait."
 msgstr "Tämä voi kestää hetken... Odota."
 
-#: applet.js:3807 applet.js:3889
+#. applet.js:4439
 msgid "Update completed successfully"
 msgstr "Päivitys suoritettu onnistuneesti"
 
-#: applet.js:4017 applet.js:4073
+#. applet.js:4655 applet.js:4711
 msgid "ERROR: Invalid YT video URL!"
 msgstr "VIRHE: Virheellinen YT videon URL-osoite!"
 
-#: applet.js:4042
+#. applet.js:4680
 msgid "Unable to extract a single soundtrack"
 msgstr "Yksittäistä ääniraitaa ei voi purkaa"
 
-#: applet.js:4042
+#. applet.js:4680
 msgid "Maybe it's a playlist?"
 msgstr "Ehkä tämä on soittolista?"
 
-#: applet.js:4075
+#. applet.js:4713
 msgid "Close"
 msgstr "Sulje"
 
-#: applet.js:4296
+#. applet.js:4955 applet.js:5301
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Poista \"%s\""
+
+#. applet.js:4963 applet.js:5267
 msgid "About..."
 msgstr "Tietoja..."
 
-#: applet.js:4307
-msgid "Radio3.0 web page..."
-msgstr "Radio3.0 verkkosivu..."
-
-#: applet.js:4318
+#. applet.js:4970 applet.js:5290
 msgid "Manual..."
 msgstr "Manuaali..."
 
-#: applet.js:4350
-msgid "Schedule a background record..."
-msgstr "Ajasta tallennus taustalla..."
-
-#: applet.js:4362
-msgid "Extract soundtrack from YouTube video..."
-msgstr "Poimi ääniraita YouTube videosta..."
-
-#: applet.js:4383
-msgid "Pulse Effects"
-msgstr "Pulse efektit"
-
-#: applet.js:4392
-#, javascript-format
-msgid "Remove '%s'"
-msgstr "Poista '%s'"
-
-#: applet.js:4405
-msgid "Radio ON at startup"
-msgstr "Radio ON (kirjautuessa)"
-
-#: applet.js:4419
-msgid "Display Station Logo"
-msgstr "Näytä aseman logo"
-
-#. settings-schema.json->dont-check-dependencies->description
-#: applet.js:4433
-msgid "Do not check about dependencies"
-msgstr "Älä tarkista riippuvuuksia"
-
-#: applet.js:4472
-msgid "(auto)"
-msgstr "(auto)"
-
-#: applet.js:4472
-msgid "(manual)"
-msgstr "(manuaalinen)"
-
-#: applet.js:4475 applet.js:4648
-msgid "Stop Recording"
-msgstr "Lopeta tallennus"
-
-#: applet.js:4475
-msgid "Start Recording"
-msgstr "Aloita tallennus"
-
-#: applet.js:4496
+#. applet.js:4977 applet.js:5327
 msgid "Reload this applet"
 msgstr "Lataa sovelma uudelleen"
 
-#: applet.js:4515
+#. applet.js:4994 applet.js:5359
+msgid "Schedule a background record..."
+msgstr "Ajasta tallennus taustalla..."
+
+#. applet.js:5001 applet.js:5371
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Poimi ääniraita YouTube videosta..."
+
+#. applet.js:5023 applet.js:5174 applet.js:5417
+msgid "(auto)"
+msgstr "(auto)"
+
+#. applet.js:5023 applet.js:5174 applet.js:5417
+msgid "(manual)"
+msgstr "(manuaalinen)"
+
+#. applet.js:5026 applet.js:5177 applet.js:5420 applet.js:5881
+msgid "Stop Recording"
+msgstr "Lopeta tallennus"
+
+#. applet.js:5026 applet.js:5177 applet.js:5420
+msgid "Start Recording"
+msgstr "Aloita tallennus"
+
+#. applet.js:5042 applet.js:5442
 msgid "Cancel downloads from YT"
 msgstr "Peruuta Youtube lataukset"
 
-#: applet.js:4649
+#. applet.js:5051 applet.js:5483
+msgid "Pulse Effects"
+msgstr "Pulse Effects"
+
+#. applet.js:5056 applet.js:5492
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+#. applet.js:5061 applet.js:5511
+msgid "Radio ON at startup"
+msgstr "Radio ON (kirjautuessa)"
+
+#. applet.js:5070 applet.js:5525
+msgid "Display Station Logo"
+msgstr "Näytä aseman logo"
+
+#. applet.js:5080
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. applet.js:5085 applet.js:5540
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5097 applet.js:5555
+msgid "Do not check about dependencies"
+msgstr "Riippuvuuksia ei tarkisteta"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5107 applet.js:5570
+msgid "Display volume level near icon"
+msgstr "Näytä voimakkuus kuvakkeessa"
+
+#. applet.js:5882
 msgid "Close without stopping recording"
 msgstr "Sulje lopettamatta tallennusta"
 
-#: applet.js:4859
+#. applet.js:6095
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Tallennus alkaa %s:%s - %s:%s"
 
-#: applet.js:4871
+#. applet.js:6107
 msgid "Recording completed"
 msgstr "Tallennus valmis"
 
-#: applet.js:4965
+#. applet.js:6224
 msgid "This will import a new file containing radio stations."
 msgstr "Tämä tuo uuden tiedoston, joka sisältää radioasemia."
 
-#: applet.js:4966
+#. applet.js:6225
 msgid "Do you want to continue?"
 msgstr "Haluatko jatkaa?"
 
-#: applet.js:5037
+#. applet.js:6297
 msgid "No new radio in your list."
 msgstr "Ei uutta radiota listallasi."
 
-#: applet.js:5039
+#. applet.js:6299
 msgid "One more radio in your list."
 msgstr "Yksi radio lisää listallasi."
 
-#: applet.js:5041
+#. applet.js:6301
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s radiota lisää sinun listalla."
 
-#: applet.js:5248
+#. applet.js:6508
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Radio3.0 sovelman valikkoon ei ole lisättävää uutta asemaa"
 
-#: applet.js:5250
+#. applet.js:6510
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Radio3.0 sovelman valikkoon on lisätty uusi asema"
 
-#: applet.js:5252
+#. applet.js:6512
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s uutta asemaa on lisätty Radio3.0 sovelman valikkoon"
 
-#: applet.js:5453
+#. applet.js:6738
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#: lib/checkDependencies.js:384
+#. lib/checkDependencies.js:397
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Sovelma %s on täysin toimiva."
 
-#: lib/checkDependencies.js:385
+#. lib/checkDependencies.js:398
 msgid "All dependencies are installed"
 msgstr "Kaikki riippuvuudet on asennettu"
 
-#: lib/checkDependencies.js:413
+#. lib/checkDependencies.js:428
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -508,113 +534,129 @@ msgstr ""
 "Sinulta puuttuu joitakin ohjelmia, joita sovelma tarvitsee, jotta se saa "
 "kaikki ominaisuudet toimimaan."
 
-#: lib/checkDependencies.js:414
+#. lib/checkDependencies.js:429
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Suorita komennot juuri avatussa päätteessä:"
 
-#: lib/checkDependencies.js:415
+#. lib/checkDependencies.js:430
 msgid "Some dependencies are not installed!"
 msgstr "Joitakin riippuvuuksia ei ole asennettu!"
 
-#: lib/checkTranslations.js:108
+#. lib/checkTranslations.js:108
 msgid "To finalize the translation installation, please restart Cinnamon"
 msgstr "Viimeistele käynnistämällä Cinnamon uudelleen"
 
-#: xs/xlet-settings.py:214
+#. lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "Kohteen \"%s\" suoritus epäonnistui:"
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:172
+msgid "%"
+msgstr "%"
+
+#. desklet/AlbumArt3.0@claudiux/desklet.js:66
+#, fuzzy
+msgid "Radio3.0 Album Art"
+msgstr "Radio3.0"
+
+#. xs/xlet-settings.py:214
 msgid "Previous instance"
 msgstr "Edellinen instanssi"
 
-#: xs/xlet-settings.py:218
+#. xs/xlet-settings.py:218
 msgid "Next instance"
 msgstr "Seuraava instanssi"
 
-#: xs/xlet-settings.py:227
+#. xs/xlet-settings.py:227
 msgid "More options"
 msgstr "Lisää valintoja"
 
-#: xs/xlet-settings.py:233
+#. xs/xlet-settings.py:233
 msgid "Import from a file"
 msgstr "Tuo tiedostosta"
 
-#: xs/xlet-settings.py:238
+#. xs/xlet-settings.py:238
 msgid "Export to a file"
 msgstr "Vie tiedostoon"
 
-#: xs/xlet-settings.py:243
+#. xs/xlet-settings.py:243
 msgid "Reset to defaults"
 msgstr "Palauta oletukset"
 
-#: xs/xlet-settings.py:252
+#. xs/xlet-settings.py:252
 #, python-format
 msgid "Reload %s"
 msgstr "Lataa %s uudelleen"
 
-#: xs/xlet-settings.py:441
+#. xs/xlet-settings.py:441
 #, python-format
 msgid "Settings for %s"
 msgstr "%s - asetukset"
 
-#: xs/xlet-settings.py:533
+#. xs/xlet-settings.py:533
 msgid "Select or enter file to export to"
 msgstr "Valitse tai kirjoita tiedostonimi, johon viedään"
 
-#: xs/xlet-settings.py:541 xs/xlet-settings.py:562
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
 msgid "JSON files"
 msgstr "JSON-tiedostot"
 
-#: xs/xlet-settings.py:555
+#. xs/xlet-settings.py:555
 msgid "Select a JSON file to import"
 msgstr "Valitse tuotava JSON-tiedosto"
 
-#: xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
 msgid "Add new entry"
 msgstr "Lisää uusi kohde"
 
-#: xs/bin/R3TreeListWidgets.py:282
+#. xs/bin/R3TreeListWidgets.py:282
 msgid "Remove selected entry"
 msgstr "Poista valittu tietue"
 
-#: xs/bin/R3TreeListWidgets.py:287
+#. xs/bin/R3TreeListWidgets.py:287
 msgid "Edit selected entry"
 msgstr "Muokkaa valittua"
 
-#: xs/bin/R3TreeListWidgets.py:292
+#. xs/bin/R3TreeListWidgets.py:292
 msgid "Unselect the selected row"
 msgstr "Poista valittu rivi"
 
-#: xs/bin/R3TreeListWidgets.py:297
+#. xs/bin/R3TreeListWidgets.py:297
 msgid "Move selected entry up"
 msgstr "Siirrä valittu ylöspäin"
 
-#: xs/bin/R3TreeListWidgets.py:302
+#. xs/bin/R3TreeListWidgets.py:302
 msgid "Move selected entry down"
 msgstr "Siirrä valittu alaspäin"
 
-#: xs/bin/R3TreeListWidgets.py:325
+#. xs/bin/R3TreeListWidgets.py:325
 msgid "Go to bottom"
 msgstr "Siirry alas"
 
-#: xs/bin/R3TreeListWidgets.py:331
+#. xs/bin/R3TreeListWidgets.py:331
 msgid "Go to next page"
-msgstr "Siirry seuraavalle sivulle"
+msgstr "Seuraavalle sivulle"
 
-#: xs/bin/R3TreeListWidgets.py:337
+#. xs/bin/R3TreeListWidgets.py:337
 msgid "Go to previous page"
-msgstr "Siirry edelliselle sivulle"
+msgstr "Edelliselle sivulle"
 
-#: xs/bin/R3TreeListWidgets.py:342
+#. xs/bin/R3TreeListWidgets.py:342
 msgid "Go to top"
 msgstr "Siirry ylös"
 
-#: xs/bin/R3TreeListWidgets.py:356
+#. xs/bin/R3TreeListWidgets.py:356
 msgid "Go to next category"
-msgstr "Siirry seuraavaan ryhmään"
+msgstr "Seuraava kategoria"
 
-#: xs/bin/R3TreeListWidgets.py:366
+#. xs/bin/R3TreeListWidgets.py:366
 msgid "Go to previous category"
-msgstr "Siirry edelliseen ryhmään"
+msgstr "Edellinen kategoria"
 
-#: xs/bin/R3TreeListWidgets.py:503
+#. xs/bin/R3TreeListWidgets.py:503
 msgid "Edit entry"
 msgstr "Muokkaa merkintää"
 
@@ -648,7 +690,7 @@ msgstr "Valikko"
 
 #. settings-schema.json->pageBehavior->title
 msgid "Behavior"
-msgstr "Käyttäytyminen"
+msgstr "Toiminta"
 
 #. settings-schema.json->pageRecording->title
 msgid "Recording"
@@ -660,7 +702,7 @@ msgstr "YT"
 
 #. settings-schema.json->pageScheduling->title
 msgid "Scheduling"
-msgstr "Ajastaminen"
+msgstr "Ajastus"
 
 #. settings-schema.json->pageNetwork->title
 msgid "Network"
@@ -668,7 +710,7 @@ msgstr "Verkko"
 
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
-msgstr "Asemat ja ryhmät valikossa"
+msgstr "Asemat ja kategoriat valikossa"
 
 #. settings-schema.json->sectionStationsMove->title
 msgid "Moving selected stations"
@@ -681,6 +723,10 @@ msgstr "Tallenna ja palauta"
 #. settings-schema.json->sectionStationsUpdate->title
 msgid "Update this station list"
 msgstr "Päivitä tämä asemalista"
+
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -696,7 +742,7 @@ msgstr "Tiedoston sisältö"
 
 #. settings-schema.json->sectionSearchOptions->title
 msgid "Search for Radio Stations"
-msgstr "Etsi radioasemia"
+msgstr "Hae radioasemia"
 
 #. settings-schema.json->sectionSearchResults->title
 msgid "Search results"
@@ -704,15 +750,19 @@ msgstr "Hakutulokset"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
-msgstr "Käynnistys"
+msgstr "Käynnistyminen"
 
 #. settings-schema.json->sectionBehaviorVolumeStep->title
 msgid "Volume step"
 msgstr "Voimakkuuden säätö"
 
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr ""
+
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
-msgstr "Näytä ohje"
+msgstr "Näytä ohjeet"
 
 #. settings-schema.json->sectionMenuPrivacy->title
 msgid "Privacy"
@@ -735,8 +785,14 @@ msgid "Codec and Bitrate"
 msgstr "Koodekki ja nopeus"
 
 #. settings-schema.json->sectionBehaviorSymbolicIconColor->title
-msgid "Symbolic Icon Color"
-msgstr "Symbolisen kuvakkeen väri"
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "Kuvake"
+
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr "Vain vaakapaneelissa"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -754,6 +810,14 @@ msgstr "Proxy"
 msgid "Database Info"
 msgstr "Tietokanta"
 
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "KOKEELLINEN"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Välimuisti"
+
 #. settings-schema.json->sectionRecordingRecordings->title
 #. settings-schema.json->sectionYTFormat->title
 msgid "Recordings"
@@ -762,11 +826,6 @@ msgstr "Tallenteet"
 #. settings-schema.json->sectionRecordingLimits->title
 msgid "Preservation of hard disk space"
 msgstr "Kiintolevyllä säilyttäminen"
-
-#. settings-schema.json->sectionRecordingIcon->title
-#. settings-schema.json->sectionYTIcon->title
-msgid "Icon"
-msgstr "Kuvake"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -778,7 +837,7 @@ msgstr "Ajasta tallennus taustalla"
 
 #. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
 msgid "Unable to schedule a background recording"
-msgstr "Taustatallennusta ei voi ajoittaa"
+msgstr "Taustatallennusta ei voi ajastaa"
 
 #. settings-schema.json->sectionRecordingScheduledRecordings->title
 #. settings-schema.json->sched-recordings->description
@@ -787,7 +846,7 @@ msgstr "Ajastetut tallennukset"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
-msgstr "Näytä ohjeet tämän Asetukset-ikkunan jokaisessa välilehdessä"
+msgstr "Tämän Asetukset-ikkunan jokaisessa välilehdessä näytetään ohjeet"
 
 #. settings-schema.json->show-help-in-tabs->tooltip
 msgid ""
@@ -807,12 +866,16 @@ msgid "List of stations"
 msgstr "Lista asemista"
 
 #. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr ""
+
+#. settings-schema.json->radios->columns->title
 msgid "♪/➟"
 msgstr "♪/➟"
 
 #. settings-schema.json->radios->columns->title
 msgid "Station or Category"
-msgstr "Asema tai ryhmä"
+msgstr "Asema tai kategoria"
 
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->import-list->columns->title
@@ -831,7 +894,7 @@ msgstr "Koodekki"
 
 #. settings-schema.json->radios->columns->title
 msgid "Streaming URL (empty for a category)"
-msgstr "Suoratoisto URL (ryhmälle tyhjä)"
+msgstr "Suoratoisto (URL)"
 
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->search-list->columns->title
@@ -855,7 +918,7 @@ msgstr "Kuvake"
 
 #. settings-schema.json->radios->columns->title
 msgid "Artist/Title swap"
-msgstr "Artisti/Nimike vaihto"
+msgstr "Artisti/Otsikko vaihto"
 
 #. settings-schema.json->stations-list-play-button->description
 #. settings-schema.json->import-list-play-button->description
@@ -865,23 +928,23 @@ msgstr "♪ Soita seuraava asema testiksi"
 
 #. settings-schema.json->category-to-move->description
 msgid "Category to which to move the selected stations:"
-msgstr "Ryhmä, johon valitut asemat siirretään:"
+msgstr "Kategoria, johon valitut asemat siirretään:"
 
 #. settings-schema.json->button-moving->description
 msgid "➟ Move selected stations to this category"
-msgstr "➟ Siirrä valitut asemat tähän ryhmään"
+msgstr "➟ Siirrä valitut asemat tähän kategoriaan"
 
 #. settings-schema.json->button_go_to_category->description
 msgid "Go to this category"
-msgstr "Siirry tähän ryhmään"
+msgstr "Siirry tähän kategoriaan"
 
 #. settings-schema.json->button-show-all->description
 msgid "Show all stations and categories in the menu"
-msgstr "Näytä kaikki asemat ja ryhmät valikossa"
+msgstr "Näytä kaikki asemat ja kategoriat valikossa"
 
 #. settings-schema.json->button-hide-all->description
 msgid "Hide all stations and categories (so the menu becomes empty)"
-msgstr "Piilota kaikki asemat ja ryhmät (valikosta tulee tyhjä)"
+msgstr "Piilota kaikki asemat ja kategoriat (valikko tyhjenee)"
 
 #. settings-schema.json->button-save->description
 msgid "Save this list of stations"
@@ -899,10 +962,9 @@ msgstr "Avaa kansio, joka sisältää nämä radiolistat"
 msgid "Update my station list with the Radio Database data"
 msgstr "Päivitä minun asemat radiotietokannan tiedoilla"
 
-#. settings-schema.json->scale-update->description
-#. settings-schema.json->recordings-extract-update->description
-msgid "%"
-msgstr "%"
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -934,7 +996,7 @@ msgstr "Suoratoiston osoite"
 #. settings-schema.json->import-list-button->description
 #. settings-schema.json->search-list-button->description
 msgid "Import the selected stations into my own list"
-msgstr "Tuo valitut asemat minun omaan listaan"
+msgstr "Tuo valitut asemat minun listalle"
 
 #. settings-schema.json->import-remove-from-list-button->description
 #. settings-schema.json->search-remove-from-list-button->description
@@ -949,7 +1011,7 @@ msgstr "Valitse kaikki kohteet"
 #. settings-schema.json->import-unselect-all->description
 #. settings-schema.json->search-unselect-all->description
 msgid "Unselect all items"
-msgstr "Poista kohteiden valinnat"
+msgstr "Poista kaikki valinnat"
 
 #. settings-schema.json->search-list->columns->title
 #. settings-schema.json->sched-recordings->columns->title
@@ -973,7 +1035,7 @@ msgstr "Sivu:"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
-msgstr "Kytke radio päälle, kun Cinnamon käynnistyy"
+msgstr "Kytke radio päälle kun tietokone käynnistyy"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
 msgid ""
@@ -985,8 +1047,8 @@ msgid ""
 msgstr ""
 "Valittu radio on viimeisin jota kuuntelit, vaikka lopettaisit sen.\n"
 "\n"
-"VPN-käyttäjät: Valitsemalla tämän, radiolähetys voi käyttää vpn-linkkiä "
-"siinä tapauksessa, että se on aktiivinen ennen sovelman käynnistämistä."
+"VPN: Radiolähetys voi käyttää VPN:ää, jos se on aktiivinen ennen sovelman "
+"käynnistämistä."
 
 #. settings-schema.json->volume-at-startup->description
 msgid "Volume level starting a new radio (%)"
@@ -1134,24 +1196,36 @@ msgid ""
 "By how much increase or decrease the volume using the mouse scroll wheel on "
 "the icon."
 msgstr ""
-"Kuinka paljon lisätään tai vähennetään voimakkuutta käyttämällä hiiren "
-"rullaa kuvakkeessa."
+"Lisätään tai vähennetään voimakkuutta käyttämällä hiiren rullaa kuvakkeen "
+"päällä."
+
+#. settings-schema.json->volume-magnetic-on->description
+msgid "Magnetize all multiples of 25%"
+msgstr "Magnetoi kaikki 25%:n kerrannaiset"
 
 #. settings-schema.json->volume-show-osd->description
 msgid "Show OSD while changing volume"
-msgstr "Näytä ruutunäyttö kun muutat voimakkuutta"
+msgstr "Ruutu näytetään kun voimakkuutta muutetaan"
 
 #. settings-schema.json->volume-show-osd->tooltip
 msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
-msgstr "Pitäisikö OSD (ruutunäyttö) näyttää, kun voimakkuutta muutetaan?"
+msgstr "Näytetäänkö grafiikkaa (ruutu) kun voimakkuutta muutetaan?"
+
+#. settings-schema.json->volume-show-osd-starting-radio->description
+msgid "Show volume OSD when changing radio station"
+msgstr "Voimakkuuden ruutu näytetään radioasemaa vaihtaessa"
+
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr ""
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
-msgstr "Näytä sovelman nimi ja versio valikossa"
+msgstr "Näytä sovelman nimi ja versio"
 
 #. settings-schema.json->recent-number->description
 msgid "Number of Recently Played Stations in menu"
-msgstr "Viimeksi toistettujen asemien lukumäärä valikossa"
+msgstr "Montako kuunneltua asemaa näytetään"
 
 #. settings-schema.json->recent-number->options
 msgid "1"
@@ -1196,20 +1270,35 @@ msgstr "Kuinka monta viimeiksi kuunneltua asemaa haluat näyttää valikossa?"
 
 #. settings-schema.json->reset-recents->description
 msgid "Empty your Recently Played Stations list at startup"
-msgstr "Tyhjennä viimeksi toistetut lista käynnistyksen yhteydessä"
+msgstr "Tyhjennä kuunnellut lista käynnistyksen yhteydessä"
 
 #. settings-schema.json->button-reset-recents->description
 msgid "Empty your Recently Played Stations list now"
-msgstr "Tyhjennä viimeiksi toistetut lista nyt"
+msgstr "Tyhjennä heti kuunnellut lista"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Näytä asemalista kategorian vieressä"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Valittuna: Vie hiiri (painamalla) kategorian päällä ja näet asemien "
+"luettelon; valitse sitten asema.\n"
+"Ei valittuna: Yksittäinen lista, joka sisältää kaikki kategoriat ja sen "
+"jälkeen asemat."
 
 #. settings-schema.json->show-system-items->description
 msgid "Show system items in the menu"
-msgstr "Näytä järjestelmän kohteet valikossa"
+msgstr "Näytä valikossa asetukset ja laitteet"
 
 #. settings-schema.json->show-system-items->tooltip
 msgid ""
 "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
-msgstr "Haluatko näyttää valikon kohdat \"Asetukset...\" ja \"Ääniasetukset\"?"
+msgstr "Haluatko näyttää valikossa \"Asetukset...\" ja \"Laitteet\"?"
 
 #. settings-schema.json->show-reload->description
 msgid "Show the 'Reload this applet' item in the contextual menu"
@@ -1241,7 +1330,7 @@ msgstr "Seuraava asema"
 
 #. settings-schema.json->shortcut-next-recent-radio->tooltip
 msgid "Next station recently listened to"
-msgstr "Seuraava viimeiksi kuunneltu asema"
+msgstr "Seuraava kuunneltu asema"
 
 #. settings-schema.json->shortcut-previous-recent-radio->description
 msgid "Previous station"
@@ -1249,38 +1338,39 @@ msgstr "Edellinen asema"
 
 #. settings-schema.json->shortcut-previous-recent-radio->tooltip
 msgid "Previous station recently listened to"
-msgstr "Edellinen viimeiksi kuunneltu asema"
+msgstr "Edellinen kuunneltu asema"
 
 #. settings-schema.json->show-help-in-tooltip->description
 msgid "Show help for mouse actions in the tooltip"
-msgstr "Näytä hiiren toimintojen ohje vihjeessä"
+msgstr "Näytä hiiren ohjeet vihjeessä"
 
 #. settings-schema.json->show-help-in-tooltip->tooltip
 msgid "You can uncheck this option when you are familiar with all mouse roles."
-msgstr "Voit poistaa tämän valinnan, kun tunnet kaikki hiiren toiminnat."
+msgstr "Voit poistaa kun osaat kaikki hiiren toiminnat."
 
 #. settings-schema.json->notif-station-change->description
 msgid "Change of radio"
-msgstr "Radion vaihto"
+msgstr "Radioaseman vaihtuessa"
 
 #. settings-schema.json->notif-song-change->description
 msgid "Change of song or program"
-msgstr "Vaihda kappale tai ohjelma"
+msgstr "Kappaleen tai ohjelman vaihtuessa"
 
 #. settings-schema.json->notif-song-change->tooltip
 msgid ""
 "Please note that some radios do not notify you of a song or program change."
 msgstr ""
-"Huomaa, että jotkin radiot eivät ilmoita sinulle kappaleen tai ohjelman "
+"Huomaa: Jotkut radioasemat eivät ilmoita kappaleen tai ohjelman "
 "vaihtumisesta."
 
 #. settings-schema.json->notif-song-duration->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->units
 msgid "seconds"
 msgstr "sekuntia"
 
 #. settings-schema.json->notif-song-duration->description
 msgid "Duration of a song or program change notification"
-msgstr "Ilmoituksen kesto kun kappale vaihtuu"
+msgstr "Ilmoituksen kesto"
 
 #. settings-schema.json->notif-buttons-allowed->description
 msgid "Show in notifications the buttons to start and stop recordings"
@@ -1364,6 +1454,32 @@ msgstr ""
 "äänimerkkejä). Radion voimakkuus asetetaan 100%:iin parhaan laadun "
 "saavuttamiseksi."
 
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+#, fuzzy
+msgid "High Quality"
+msgstr "Laatu"
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr ""
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
 msgstr "Verkon tarkkailu"
@@ -1400,23 +1516,135 @@ msgstr ""
 
 #. settings-schema.json->apply-http-proxy->description
 msgid "Apply HTTP Proxy"
-msgstr "Ota HTTP Proxy käyttöön"
+msgstr "HTTP Proxy käyttöön"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr "Tietokanta:"
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr "Satunnainen"
 
 #. settings-schema.json->database-url->description
 msgid "Database URL"
 msgstr "Tietokannan osoite"
 
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Ei välimuistia"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Valinta rajoittaa muistin käyttöä, mutta ei myöskään salli käyttäjän kelata "
+"välimuistia taaksepäin (käytetään sound150@claudiux sovelmaa)."
+
+#. settings-schema.json->cache-mins->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Minuutit välimuistissa\n"
+"0 tarkoittaa, että ei ole rajaa (oletus). 1 tunti = 60 minuuttia. 24 tuntia "
+"= 1440 minuuttia."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Välimuisti kiintolevyllä\n"
+"(Kirjoittaa dataa väliaikaiseen tiedostoon sen sijaan, että kirjoittasi ne "
+"muistiin.)"
+
+#. settings-schema.json->cache-dir->description
+msgid ""
+"Directory used for data caching\n"
+"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
+"sufficient free space.)"
+msgstr ""
+"Kansio, jota käytetään datan välimuistina\n"
+"(Ei suositella SSD-levylle. Suosi RAM-muistiin tallennettua kansiota, jossa "
+"on riittävästi vapaata tilaa.)"
+
+#. settings-schema.json->cache-dir-open->description
+msgid "Open cache directory"
+msgstr "Avaa välimuistin kansio"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Suoratoiston välimuisti"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 1 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"Suoratoiston välimuistin määrä. Oletus: 1 MiB.\n"
+"Suuren arvon asettaminen voi heikentää suorituskykyä."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Ei rajoitusta"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 Mib"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
+
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
-msgstr "Polku kansioon, joka sisältää tulevat tallennukset"
+msgstr "Polku joka sisältää tulevat tallennukset"
 
 #. settings-schema.json->button-rec-path-to-default->description
 msgid "Set this path to default one"
-msgstr "Aseta tämä polku oletukseksi"
+msgstr "Aseta polku oletukseksi"
 
 #. settings-schema.json->recording-format->description
 msgid "Recording format"
-msgstr "Tallennuksen formaatti"
+msgstr "Tallennusmuoto"
 
 #. settings-schema.json->recording-format->options
 #. settings-schema.json->search-codec->options
@@ -1441,9 +1669,18 @@ msgstr "RAW"
 msgid "WAV"
 msgstr "WAV"
 
+#. settings-schema.json->recording-format->tooltip
+#. settings-schema.json->recording-ends-auto->tooltip
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr ""
+"Huomaa, valinnalla ei ole vaikutusta nykyiseen tallennukseen vaan myöhempiin "
+"tallennuksiin."
+
 #. settings-schema.json->recording-ends-auto->description
 msgid "Way to stop recording"
-msgstr "Tapa lopettaa tallennus"
+msgstr "Tallennuksen lopettaminen"
 
 #. settings-schema.json->recording-ends-auto->options
 msgid "automatically, when the current song ends"
@@ -1453,30 +1690,22 @@ msgstr "automaattisesti, kun kappale päättyy"
 msgid "manually; thus, several recordings can follow one another"
 msgstr "manuaalisesti; useat tallenteet voivat seurata toisiaan"
 
-#. settings-schema.json->recording-ends-auto->tooltip
-msgid ""
-"Please note that this choice will have no effect on any current recording, "
-"but on subsequent ones."
-msgstr ""
-"Huomaa, valinnalla ei ole vaikutusta nykyiseen tallennukseen vaan myöhempiin "
-"tallennuksiin."
-
 #. settings-schema.json->limits-hd-space-left-label->description
 msgid "Space remaining on disk when opening this window:"
-msgstr "Levyllä jäljellä oleva tila, kun tämä ikkuna aukesi:"
+msgstr "Kiintolevyn vapaa tila:"
 
 #. settings-schema.json->limits-hd-size-prefixes->description
 msgid ""
 "Disk space unit as defined in Nemo's display preferences (File size prefixes)"
-msgstr "Levytilan yksikkö sama kuin Nemo asetuksissa (tiedostokoon etuliitee)"
+msgstr "Levytilan mittayksikkö (sama kuin Nemo asetuksissa)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
 msgid "GB (decimal)"
-msgstr "GB (desimaali)"
+msgstr "GB (kymmenluku)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
 msgid "GB (decimal long)"
-msgstr "GB (pitkä desimaali)"
+msgstr "GB (pitkä kymmenluku)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
 msgid "GiB (binary)"
@@ -1492,16 +1721,16 @@ msgstr "Tämän vaihtaminen muuttaa myös Nemon tiedostokoon etuliitteitä."
 
 #. settings-schema.json->limits-hd-value->units
 msgid "Units: As defined above"
-msgstr "Yksiköt: Kuten edellä on määritetty"
+msgstr "Yksiköt: Kuten yllä on määritelty"
 
 #. settings-schema.json->limits-hd-value->description
 msgid "Space to be left free on the hard disk"
-msgstr "Kiintolevylle varattava vapaa tila"
+msgstr "Kiintolevylle jätettävä vapaata tilaa"
 
 #. settings-schema.json->highlight-icon-while-background-
 #. recording->description
 msgid "Highlight this applet icon during background recording"
-msgstr "Korosta sovelman kuvake kun tallennetaan taustalla"
+msgstr "Korosta sovelman kuvake kun tallennetaan"
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
@@ -1554,16 +1783,16 @@ msgid ""
 "cookies."
 msgstr ""
 "YouTube käyttää evästeitä määrittääkseen, mitä videoita voit katsoa. "
-"Chromiumia varten voit valita (suluissa) valitsemasi menetelmä evästeiden "
+"Chromiumia varten voit (suluissa) valita menetelmän evästeiden "
 "tallentamiseen."
 
 #. settings-schema.json->show-yt-progress->description
 msgid "Display, under the icon, the progress of downloads from YT."
-msgstr "Näytä YT-latausten eteneminen kuvakkeen alapuolella."
+msgstr "Näytä YT-latauksen siirtyminen kuvakkeen alapuolella."
 
 #. settings-schema.json->yt-progress-interval->description
 msgid "Progression interval (ms)"
-msgstr "Etenemisväli (ms)"
+msgstr "Siirtyminen (ms)"
 
 #. settings-schema.json->yt-progress-interval->options
 msgid "Depending on network quality"
@@ -2899,3 +3128,100 @@ msgstr "Haku..."
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
 msgstr "Poista valitut kohteet"
+
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr "Näytä radioaseman nimi"
+
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr "Näytä otsikko"
+
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr "Otsikon suurin pituus"
+
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr "0 tarkoittaa, että ei ole maksimiarvoa"
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+#, fuzzy
+msgid "None"
+msgstr "(ei mitään)"
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+#, fuzzy
+msgid "0 means no fade"
+msgstr "0 tarkoittaa, että ei ole maksimiarvoa"

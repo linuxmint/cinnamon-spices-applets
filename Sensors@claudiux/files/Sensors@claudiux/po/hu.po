@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-03 15:24+0200\n"
-"PO-Revision-Date: 2024-07-28 07:48-0400\n"
+"POT-Creation-Date: 2025-02-05 10:49+0100\n"
+"PO-Revision-Date: 2024-11-24 19:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,110 +16,110 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:235
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#. applet.js:399
+#. applet.js:418
 msgid "Suspended"
 msgstr "Felfüggesztve"
 
-#. applet.js:617 applet.js:659
+#. applet.js:638 applet.js:682
 msgid "high:"
 msgstr "magas:"
 
-#. applet.js:617 applet.js:619 applet.js:659 applet.js:661 applet.js:703
+#. applet.js:638 applet.js:642 applet.js:682 applet.js:684 applet.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:619 applet.js:661
+#. applet.js:642 applet.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:703 applet.js:747
+#. applet.js:726 applet.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:749
+#. applet.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:778
+#. applet.js:801
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#. applet.js:778
+#. applet.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#. applet.js:798
+#. applet.js:821
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#. applet.js:1185
+#. applet.js:1208
 msgid "Settings"
 msgstr "Beállítások"
 
-#. applet.js:1185
+#. applet.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1192
+#. applet.js:1215
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#. applet.js:1202
-#, fuzzy, javascript-format
+#. applet.js:1231
+#, javascript-format
 msgid "%s Temperature sensors"
-msgstr "Hőmérséklet szenzorok"
+msgstr "%s Hőmérséklet szenzorok"
 
-#. applet.js:1212
-#, fuzzy, javascript-format
+#. applet.js:1247
+#, javascript-format
 msgid "%s Fan sensors"
-msgstr "Ventilátor szenzorok"
+msgstr "%s Ventilátor szenzorok"
 
-#. applet.js:1222
-#, fuzzy, javascript-format
+#. applet.js:1263
+#, javascript-format
 msgid "%s Voltage sensors"
-msgstr "Feszültség szenzorok"
+msgstr "%s Feszültség szenzorok"
 
-#. applet.js:1232
-#, fuzzy, javascript-format
+#. applet.js:1279
+#, javascript-format
 msgid "%s Intrusion sensors"
-msgstr "Behatolás szenzorok"
+msgstr "%s Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1253
+#. applet.js:1306
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#. applet.js:1262
+#. applet.js:1315
 msgid "Suspend Sensors"
 msgstr "Felfüggesztett Szenzorok"
 
-#. applet.js:1273
+#. applet.js:1326
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#. applet.js:1574
+#. applet.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:350
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:351
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:380
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -127,14 +127,17 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
+#. lib/checkDependencies.js:382
+msgid "Please install these packages:"
 msgstr ""
-"Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
+
+#. lib/checkDependencies.js:398
+msgid "Install these packages now"
+msgstr ""
 
 #. lib/util.js:244
 #, javascript-format
@@ -198,13 +201,17 @@ msgstr ""
 "tekintetében. Színváltozásokkal értesít, ha egy érték eléri vagy túllépi a "
 "határértéket."
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
-#, fuzzy
 msgid "⦿ Temperature"
-msgstr "🌡 Hőmérséklet"
+msgstr "⦿ Hőmérséklet"
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+#, fuzzy
+msgid "𖣘 Fan"
 msgstr "🤂 Ventilátor"
 
 #. settings-schema.json->page_Voltages->title
@@ -396,50 +403,6 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Karakter méret (az alapértelmezett %-a)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr ""
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr ""
-
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
 msgstr "Szövegszín testreszabása"
@@ -552,7 +515,6 @@ msgstr ""
 "név” elemet vagy sem. Nincs hatással a függőleges panelekre."
 
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Csak szigorúan pozitív értékeket mutasson"
@@ -736,6 +698,11 @@ msgstr ""
 "információért tekintse meg a súgót.\n"
 "Magas vagy Kritikus értékek: További információért tekintse meg a lemezhez "
 "tartozó felhasználói dokumentációt."
+
+#. settings-schema.json->strictly_positive_fan->description
+#, fuzzy
+msgid "Show only positive or zero values"
+msgstr "Csak szigorúan pozitív értékeket mutasson"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""

@@ -1,14 +1,15 @@
 const Themes_handler               = require('./lib/themes_handler.js');
 const Background_handler           = require('./lib/background_handler.js');
-const Twilights_calculator         = require('./lib/twilights_calculator.js');
+const Twilights_calculator         = require('./lib/twilights_calculator/twilights_calculator.js');
 const Event_scheduler              = require('./lib/event_scheduler.js');
 const Timer_absolute               = require('./lib/timer_absolute.js');
 const Time_of_day                  = require('./lib/time_of_day.js');
 const Time_change_listener         = require('./lib/time_change_listener/time_change_listener.js');
 const Timezone_change_listener     = require('./lib/timezone_change_listener.js');
 const Timezone_coordinates_finder  = require('./lib/timezones_coordinates/timezone_coordinates_finder.js');
-const Sleep_wakeup_listener        = require('./lib/sleep_wakeup_listener.js');
+const Sleep_wakeup_listener        = require('./lib/sleep_wakeup_listener/sleep_wakeup_listener.js');
 const Color_scheme_change_listener = require('./lib/color_scheme_change_listener.js');
+const Commands_launcher            = require('./lib/commands_launcher/commands_launcher.js');
 const { _ }                        = require('./lib/translator.js');
 
 const Applet   = imports.ui.applet;
@@ -22,7 +23,11 @@ class ThisApplet extends Applet.IconApplet {
         super(orientation, panel_height, instance_id);
 
         this.metadata = metadata;
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings = new Settings.AppletSettings(
+            this,
+            metadata.uuid,
+            instance_id
+        );
 
         this.set_applet_tooltip(
             _("Click: toggle dark/light mode") + "\n"
@@ -101,10 +106,22 @@ class ThisApplet extends Applet.IconApplet {
             }
         );
 
+        this.commands_light = new Commands_launcher(
+            this.settings,
+            'light-mode_commands_list',
+            this._notify_error.bind(this)
+        );
+        this.commands_dark = new Commands_launcher(
+            this.settings,
+            'dark-mode_commands_list',
+            this._notify_error.bind(this)
+        );
+
         try {
             this.time_change_listener = new Time_change_listener(
                 `${this.metadata.path}/lib/time_change_listener`,
-                this._update.bind(this)
+                this._update.bind(this),
+                this._notify_error.bind(this)
             );
         } catch (error) {
             this._notify_critical(error.message);
@@ -144,9 +161,9 @@ class ThisApplet extends Applet.IconApplet {
                            "is_auto_mode_inverted"
         );
         this.settings.bind(
-               'settings_control_switch_auto-mode',
-                             "ui_switch_auto_mode",
-           () => { this.apply_ui_switch_auto_mode(); this._update(); }
+                'settings_control_switch_auto-mode',
+                              "ui_switch_auto_mode",
+            () => { this.apply_ui_switch_auto_mode(); this._update(); }
         );
         this.settings.bind(
                'settings_location_switch_sync-from-timezone',
@@ -165,8 +182,16 @@ class ThisApplet extends Applet.IconApplet {
         );
         this.settings.bind(
             'both-modes_background_switch_enable',
-                                "ui_switch_enable_background"
-        )
+                               "ui_switch_enable_background"
+        );
+        this.settings.bind(
+            'light-mode_commands_switch_enable',
+                             "ui_switch_enable_commands_light"
+        );
+        this.settings.bind(
+            'dark-mode_commands_switch_enable',
+                            "ui_switch_enable_commands_dark"
+        );
     }
 
     apply_ui_switch_dark_mode() {
@@ -179,6 +204,13 @@ class ThisApplet extends Applet.IconApplet {
             this.ui_switch_dark_mode ? this.background_dark.apply()
                                      : this.background_light.apply();
 
+        if (this.ui_switch_dark_mode) {
+            if (this.ui_switch_enable_commands_dark)
+                this.commands_dark.launch_commands();
+        } else {
+            if (this.ui_switch_enable_commands_light)
+                this.commands_light.launch_commands();
+        }
         this._update_applet_icon();
     }
 
@@ -332,9 +364,9 @@ class ThisApplet extends Applet.IconApplet {
         if (!this._update_twilights())
             return;
         this._notify(
-            _("Today's automatic mode switch times:") + '\n'
-            + `- ${_("Light mode:")} ${this.sunrise.as_string()}` + '\n'
-            + `- ${_("Dark mode:") } ${this.sunset .as_string()}`
+            _("Today's automatic mode switch times") + _(":") + '\n'
+            + `- ${_("Light mode")}${_(":")} ${this.sunrise.as_string()}` + '\n'
+            + `- ${_("Dark mode") }${_(":")} ${this.sunset .as_string()}`
         );
     }
 
@@ -370,16 +402,20 @@ class ThisApplet extends Applet.IconApplet {
 
     on_button_apply_background_dark() { this.background_dark.apply(); }
 
+    on_button_launch_commands_light() { this.commands_light.launch_commands(); }
+
+    on_button_launch_commands_dark() { this.commands_dark.launch_commands(); }
+
     _notify(msg) { Main.notify(this.metadata.name, msg); }
 
     _notify_error(msg) {
-        Main.notifyError(this.metadata.name, _("Error:") + " " + msg);
+        Main.notifyError(this.metadata.name, `${_("Error")}${_(":")} ${msg}`);
     }
 
     _notify_critical(msg) {
         Main.criticalNotify(
             this.metadata.name,
-            _("Critical error:") + " " + msg
+            `${_("Critical error")}${_(":")} ${msg}`
         );
     }
 

@@ -1,3 +1,36 @@
+### v4.2.0~20250205
+  * Fixes several issues.
+  * Fixes #6845.
+  * Fixes #6766.
+  * Fixes #6842.
+
+### v4.1.0~20250130
+  * Improves dependency installation.
+  * Fixes #6809 and #6818.
+
+### v4.0.3~20250126
+  * Improved code. Greater stability.
+  * Change of Fan symbol.
+
+### v4.0.2~20250116
+  * mainloopTools library: improvements.
+
+### v4.0.1~20250114
+  * As long as the icon is hovered over, the sensors are checked every second.
+
+### v4.0.0~20250114
+  * Now uses mainloopTools to improve loop management.
+  * Fixes #6744.
+
+### v3.9.0~20241109
+  * Fixes #6076: Ignores 'empty' sensors (sensors not sending data).
+
+### v3.8.3~20241029
+  * Fixes #6541. Adds FAQ about Nvidia video card temperature readings. Thanks to @JEleniel!
+
+### v3.8.2~20241011
+  * Adds support for Nvidia SMI temperatures. Thanks to @JEleniel!
+
 ### v3.8.1~20240901
   * Fixes #6353. Repairs tooltip.
 

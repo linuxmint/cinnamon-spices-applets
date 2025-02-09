@@ -424,8 +424,8 @@ class CustomAppList(SettingsWidget):
         '''
         self.saved_configuration = not changed
         self.save_button.set_is_important(changed)
-        self.save_button.set_sensitive(changed)
-        self.cancel_button.set_sensitive(changed)
+        self.save_button.set_visible(changed)
+        self.cancel_button.set_visible(changed)
 
     def on_save_list(self, *args):
         ''' Handles the save event by calling the method to save the current configuration

@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: power-profiles@rcalixte 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-06 22:34-0400\n"
-"PO-Revision-Date: 2024-04-21 14:43+0200\n"
+"POT-Creation-Date: 2024-09-15 16:04-0400\n"
+"PO-Revision-Date: 2024-11-28 17:51+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,19 +16,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 5.4/applet.js:24
+#. 5.4/applet.js:25
 msgid "Power Saver"
 msgstr "Energiebesparing"
 
-#: 5.4/applet.js:25
+#. 5.4/applet.js:26
 msgid "Balanced"
 msgstr "Evenwichtig"
 
-#: 5.4/applet.js:26
+#. 5.4/applet.js:27
 msgid "Performance"
 msgstr "Prestatie"
 
-#: 5.4/applet.js:58 5.4/applet.js:64
+#. 5.4/applet.js:60
+msgid "Power Profiles Applet Error"
+msgstr "Energieprofielen applet fout"
+
+#. 5.4/applet.js:61
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"Het systeempakket 'power-profiles-daemon' is niet geïnstalleerd.\n"
+"\n"
+"Installeer het en herlaad de applet."
+
+#. 5.4/applet.js:63
+msgid "Open README"
+msgstr "Open README"
+
+#. 5.4/applet.js:64
+msgid "Open Website"
+msgstr "Open website"
+
+#. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
 "Please make sure the power-profiles-daemon package is installed and the "
 "service is running."
@@ -36,19 +58,19 @@ msgstr ""
 "Zorg ervoor dat het power-profiles-daemon-pakket is geïnstalleerd en de "
 "service wordt uitgevoerd."
 
-#: 5.4/applet.js:59
+#. 5.4/applet.js:89
 msgid "exception:"
 msgstr "uitzondering:"
 
-#: 5.4/applet.js:110
+#. 5.4/applet.js:138
 msgid "Current Profile:"
 msgstr "Huidig profiel:"
 
-#: 5.4/applet.js:115
+#. 5.4/applet.js:143
 msgid "Performance Degraded:"
 msgstr "Prestatie aangetast:"
 
-#: 5.4/applet.js:126
+#. 5.4/applet.js:154
 msgid "Active Profile Holds:"
 msgstr "Actief profiel bevat:"
 
@@ -92,8 +114,8 @@ msgstr "Van profielen wisselen bij gebruik van toetsenbordsnelkoppelingen"
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
 "If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
 "\n"
 "If disabled, if the current profile is 'Power Saver' and the 'Previous "
 "profile' keyboard shortcut is used, the profile would not change."
@@ -115,3 +137,27 @@ msgid ""
 msgstr ""
 "Toon weergave op het scherm van het nieuwe profiel bij gebruik van de "
 "toetsenbordsnelkoppelingen"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Weergave"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Pictogramstijl"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Klassiek"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
+"Kies de stijl van het pictogram van de applet. Dit wordt gebruikt voor het "
+"paneel en de weergave op het scherm."

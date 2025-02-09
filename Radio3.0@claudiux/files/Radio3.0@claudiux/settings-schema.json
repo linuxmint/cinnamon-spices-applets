@@ -26,6 +26,7 @@
       "type": "page",
       "title": "Import",
       "sections": [
+      "sectionImportRadiopp",
         "sectionImportShoutcast",
         "sectionImportFile",
         "sectionImportList"
@@ -55,10 +56,12 @@
       "sections": [
         "sectionBehaviorStartUp",
         "sectionBehaviorVolumeStep",
+        "sectionBehaviorOSD",
         "sectionBehaviorTooltip",
         "sectionBehaviorNotifications",
         "sectionBehaviorBitrate",
-        "sectionBehaviorSymbolicIconColor"
+        "sectionBehaviorSymbolicIconColor",
+        "sectionBehaviorHorizontalPanel"
       ]
     },
     "pageRecording": {
@@ -134,6 +137,14 @@
         "scale-update"
       ]
     },
+    "sectionImportRadiopp": {
+      "type": "section",
+      "dependency": "radiopp-is-here",
+      "title": "Only for Radio++ users",
+      "keys": [
+        "import-radiopp-button"
+      ]
+    },
     "sectionImportShoutcast": {
       "type": "section",
       "title": "Get files on Shoutcast to import here",
@@ -206,9 +217,16 @@
       "title": "Volume step",
       "keys": [
         "volume-step",
-        "volume-magnetic-on",
+        "volume-magnetic-on"
+      ]
+    },
+    "sectionBehaviorOSD": {
+      "type": "section",
+      "title": "OSD",
+      "keys": [
         "volume-show-osd",
-        "volume-show-osd-starting-radio"
+        "volume-show-osd-starting-radio",
+        "show-percent-char-in-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -284,11 +302,21 @@
         "show-volume-level-near-icon"
       ]
     },
+    "sectionBehaviorHorizontalPanel": {
+      "type": "section",
+      "title": "Only on horizontal panels",
+      "keys": [
+        "horizontal-show-name",
+        "horizontal-show-title",
+        "horizontal-max-title-length"
+      ]
+    },
     "sectionNetworkQuality": {
       "type": "section",
       "title": "Quality",
       "keys": [
-        "network-quality"
+        "network-quality",
+        "image-resolution"
       ]
     },
     "sectionNetworkMonitoring": {
@@ -436,6 +464,13 @@
     "show-buttons": true,
     "reorderable": true,
     "columns": [
+      {
+        "id": "fav",
+        "title": "♥︎",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
       {
         "id": "inc",
         "title": "Menu",
@@ -599,6 +634,11 @@
     "description": "Help",
     "height": 100,
     "dependency": "show-help-in-tabs"
+  },
+  "import-radiopp-button": {
+    "type": "button",
+    "description": "Import your stations from Radio++",
+    "callback": "on_button_import_radiopp_clicked"
   },
   "import-shoutcast-button": {
     "type": "button",
@@ -888,6 +928,12 @@
     "default": true,
     "description": "Show volume OSD when changing radio station"
   },
+  "show-percent-char-in-osd": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": false,
+    "description": "Show '%' in OSD"
+  },
   "show-title-and-version": {
     "type": "switch",
     "default": true,
@@ -943,34 +989,34 @@
   "shortcut-volume-up": {
     "type": "keybinding",
     "description": "Increase Volume",
-    "default": ""
+    "default": "<Alt>AudioRaiseVolume::"
   },
   "shortcut-volume-down": {
     "type": "keybinding",
     "description": "Decrease Volume",
-    "default": ""
+    "default": "<Alt>AudioLowerVolume::"
   },
   "shortcut-volume-cut": {
     "type": "keybinding",
     "description": "Mute",
-    "default": ""
+    "default": "<Alt>AudioPlay::"
   },
   "shortcut-radio-on-off": {
     "type": "keybinding",
     "description": "Radio ON/OFF",
-    "default": ""
+    "default": "<Alt>AudioStop::"
   },
   "shortcut-next-recent-radio": {
     "type": "keybinding",
     "description": "Next station",
     "tooltip": "Next station recently listened to",
-    "default": ""
+    "default": "<Alt>AudioNext::"
   },
   "shortcut-previous-recent-radio": {
     "type": "keybinding",
     "description": "Previous station",
     "tooltip": "Previous station recently listened to",
-    "default": ""
+    "default": "<Alt>AudioPrev::"
   },
   "show-help-in-tooltip": {
     "type": "switch",
@@ -1048,6 +1094,18 @@
     },
     "tooltip": "High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n\nLow Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
   },
+  "image-resolution": {
+    "type": "combobox",
+    "default": "hq",
+    "description": "Quality of downloaded Album Art",
+    "options": {
+      "Max Resolution": "maxres",
+      "High Quality": "hq",
+      "Medium": "mq",
+      "Standard": "sd"
+    },
+    "tooltip": "Default: High Quality. Choose a value corresponding to your Network Quality."
+  },
   "network-monitoring": {
     "type": "switch",
     "default": false,
@@ -1118,7 +1176,7 @@
   },
   "cache-stream-size": {
     "type": "combobox",
-    "default": "1MiB",
+    "default": "10MiB",
     "dependency": "!cache-no-cache",
     "description": "Stream cache size",
     "tooltip": "The amount of stream cache. Default: 1 MiB.\nBeware, setting this to a large value can reduce performance.",
@@ -1844,5 +1902,45 @@
     "type": "switch",
     "description": "Display volume level near icon",
     "default": true
+  },
+  "horizontal-show-name": {
+    "type": "switch",
+    "description": "Display radio name",
+    "default": false
+  },
+  "horizontal-show-title": {
+    "type": "switch",
+    "description": "Display title",
+    "default": false
+  },
+  "horizontal-max-title-length": {
+    "type": "scale",
+    "dependency": "horizontal-show-title",
+    "default": 0,
+    "step": 1,
+    "min": 0,
+    "max": 255,
+    "description": "Maximum title length",
+    "tooltip": "0 means no maximum"
+  },
+  "desklet-is-activated": {
+    "type": "generic",
+    "default": false
+  },
+  "radiopp-is-here": {
+    "type": "generic",
+    "default": false
+  },
+  "desklet-x": {
+    "type": "generic",
+    "default": -1
+  },
+  "desklet-y": {
+    "type": "generic",
+    "default": -1
+  },
+  "desklet-dbus-id": {
+    "type": "generic",
+    "default": -1
   }
 }

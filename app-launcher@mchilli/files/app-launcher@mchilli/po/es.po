@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-09 06:05+0200\n"
-"PO-Revision-Date: 2024-09-08 18:15-0300\n"
+"POT-Creation-Date: 2024-11-21 11:01+0100\n"
+"PO-Revision-Date: 2024-11-21 11:09-0300\n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. applet.js:108
+#. applet.js:118
 msgid "Edit Applications"
 msgstr "Editar aplicaciones"
 
-#. applet.js:737 applet.js:1031
+#. applet.js:837 applet.js:1131
 msgid "Delete"
 msgstr "Borrar"
 
-#. applet.js:738 applet.js:1032
+#. applet.js:838 applet.js:1132
 msgid "Edit"
 msgstr "Editar"
 
-#. applet.js:739 applet.js:1033 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -195,13 +195,27 @@ msgstr "Texto de notificación"
 msgid "%s will be your application name"
 msgstr "%s será el nombre de su aplicación"
 
-#. settings-schema.json->hotkey-binding->description
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr "Habilitar teclas de acceso rápido"
+
+#. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
 msgstr "Mostrar menú"
 
-#. settings-schema.json->hotkey-binding->tooltip
+#. settings-schema.json->hotkey-bindings->tooltip
 msgid "Set keybinding(s) to show the menu"
 msgstr "Establecer atajos de teclado para mostrar el menú"
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr "Menú en la posición del ratón"
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
+"Mostrar el menú junto al cursor cuando se activa mediante una tecla de "
+"acceso directo"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

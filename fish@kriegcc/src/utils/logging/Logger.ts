@@ -3,6 +3,13 @@ const { isError } = imports.ui.main
 
 export type LogLevel = "Info" | "Debug" | "Warning" | "Error"
 
+export function mapStringToLogLevel(logLevel: string): LogLevel {
+  if (logLevel === "Info" || logLevel === "Debug" || logLevel === "Warning" || logLevel === "Error") {
+    return logLevel
+  }
+  throw new Error(`Invalid log level value: ${logLevel}`)
+}
+
 const DEFAULT_LOG_LEVEL = "Info"
 const logLevelPriority: Record<LogLevel, number> = {
   Error: 1,

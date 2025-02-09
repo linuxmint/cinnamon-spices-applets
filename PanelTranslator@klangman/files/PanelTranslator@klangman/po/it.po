@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# PANEL TRANSLATOR
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# klangman, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-31 11:39-0400\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
 "PO-Revision-Date: 2024-06-18 14:49+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,63 +18,63 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:97 applet.js:332 applet.js:334
+#. applet.js:108 applet.js:345 applet.js:347
 msgid "Translator"
 msgstr "Traduttore"
 
-#: applet.js:260
+#. applet.js:273
 msgid "Unable to query available languages from translate-shell"
 msgstr "Impossibile interrogare le lingue disponibili da Translate-Shell"
 
-#: applet.js:271
+#. applet.js:284
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr "Comando \"trans\" richiesto non trovato, installare Translate-Shell"
 
-#: applet.js:275
+#. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Errore, il comando \"trans\" ha restituito un codice di uscita di"
 
-#: applet.js:355
+#. applet.js:368
 msgid "Swap Languages"
 msgstr "Cambia lingue"
 
-#: applet.js:393
+#. applet.js:411
 msgid "{Text to translate}"
 msgstr "{Testo da tradurre}"
 
-#: applet.js:404
+#. applet.js:422
 msgid "{Translated text}"
 msgstr "{Testo tradotto}"
 
-#: applet.js:418
+#. applet.js:436
 msgid "Configure"
 msgstr "Configurazione"
 
-#: applet.js:419
+#. applet.js:437
 msgid "Help"
 msgstr "Aiuto"
 
-#: applet.js:423
+#. applet.js:441
 msgid "Play"
 msgstr "Play"
 
-#: applet.js:427
+#. applet.js:445
 msgid "Paste"
 msgstr "Incola"
 
-#: applet.js:431
+#. applet.js:449
 msgid "Clear"
 msgstr "Limpido"
 
-#: applet.js:435
+#. applet.js:453
 msgid "Translate"
 msgstr "Traduzione"
 
-#: applet.js:440
+#. applet.js:458
 msgid "Copy"
 msgstr "Copia"
 
-#: applet.js:446
+#. applet.js:464
 msgid "Play Translation"
 msgstr "Riproduci traduzione"
 
@@ -90,8 +90,25 @@ msgstr ""
 "Traduci il testo in altre lingue dal pannello Cinnamon utilizzando Google, "
 "Bing e altri traduttori"
 
-#. settings-schema.json->engine-header->description
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "Tasti di scelta rapida"
+
+#. settings-schema.json->engine-settings->title
 msgid "Translation Engine"
+msgstr "Motore di traduzione"
+
+#. settings-schema.json->action-settings->title
+msgid "Panel Button Actions"
+msgstr "Azioni dei pulsanti del pannello"
+
+#. settings-schema.json->hotkey-settings->title
+#, fuzzy
+msgid "Translation action hotkeys"
 msgstr "Motore di traduzione"
 
 #. settings-schema.json->translate-engine->options
@@ -140,10 +157,6 @@ msgstr ""
 "traducono nemmeno, altri segnalano solo errori HTTP. Quindi è meglio usare "
 "\"Auto\" e lasciare che Translate-Shell decida quale traduttore usare."
 
-#. settings-schema.json->auto-header->description
-msgid "Panel Button Actions"
-msgstr "Azioni dei pulsanti del pannello"
-
 #. settings-schema.json->left-auto-paste->options
 msgid "Disabled"
 msgstr "Disattivato"
@@ -157,13 +170,15 @@ msgid "Clipboard"
 msgstr "Clipboard"
 
 #. settings-schema.json->left-auto-paste->description
-msgid "Automatically paste and translate on left click"
+#, fuzzy
+msgid "Automatically translate on left click"
 msgstr "Incolla e traduci automaticamente con il clic sinistro"
 
 #. settings-schema.json->left-auto-paste->tooltip
+#, fuzzy
 msgid ""
-"Automatically paste the current selection/clipboard content and translate it "
-"when opening the popup window using a left click on the translator panel "
+"Automatically translate the selection/clipboard contents when opening the "
+"Panel Translator popup window using a left click on the Panel Translator "
 "button"
 msgstr ""
 "Incolla automaticamente la selezione corrente/il contenuto degli appunti e "
@@ -181,57 +196,49 @@ msgstr "Non fare niente"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-selection->description
 msgid "Show popup dialog and translate Selection"
 msgstr "Mostra la finestra di dialogo popup e traduci la selezione"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-clipboard->description
 msgid "Show popup dialog and translate Clipboard"
 msgstr "Mostra la finestra di dialogo popup e traduci gli Appunti"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-play-selection->description
 msgid "Show popup dialog, translate Selection and play"
 msgstr "Mostra la finestra di dialogo popup, traduci la selezione e riproduci"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-play-clipboard->description
 msgid "Show popup dialog, translate Clipboard and play"
 msgstr "Mostra la finestra di dialogo popup, traduci gli Appunti e riproduci"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-play-selection->description
 msgid "Play translation of Selection"
 msgstr "Riproduci la traduzione della Selezione"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-play-clipboard->description
 msgid "Play translation of Clipboard"
 msgstr "Riproduci la traduzione degli Appunti"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-copy-selection->description
 msgid "Translate Selection and copy the translation"
 msgstr "Traduci la Selezione e copia la traduzione"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-copy-clipboard->description
 msgid "Translate Clipboard and copy the translation"
 msgstr "Traduci gli Appunti e copia la traduzione"
 
@@ -258,27 +265,3 @@ msgid ""
 msgstr ""
 "Seleziona l'azione da intraprendere tenendo premuto il tasto Ctrl e il clic "
 "del pulsante centrale del mouse sul pannello del traduttore"
-
-#. settings-schema.json->hotkeys-header->description
-msgid "Hotkeys"
-msgstr "Tasti di scelta rapida"
-
-#. settings-schema.json->hotkey1-action->description
-msgid "Hotkey #1"
-msgstr "Tasto di scelta rapida n. 1"
-
-#. settings-schema.json->hotkey1-action->tooltip
-msgid "Select the action to take when the #1 hotkey is pressed"
-msgstr ""
-"Selezionare l'azione da intraprendere quando viene premuto il tasto di "
-"scelta rapida n. 1"
-
-#. settings-schema.json->hotkey2-action->description
-msgid "Hotkey #2"
-msgstr "Tasto di scelta rapida n. 2"
-
-#. settings-schema.json->hotkey2-action->tooltip
-msgid "Select the action to take when the #2 hotkey is pressed"
-msgstr ""
-"Selezionare l'azione da intraprendere quando viene premuto il tasto di "
-"scelta rapida n. 2"

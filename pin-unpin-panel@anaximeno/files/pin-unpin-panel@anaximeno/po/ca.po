@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-07 10:57-0100\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -16,13 +16,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Unpin the Panel"
 msgstr "Feu clic per fer el tauler plegable"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Pin the Panel"
 msgstr "Feu clic per fixar el tauler"
 
@@ -52,6 +52,22 @@ msgstr "Ocultació automàtica"
 #. 5.4->settings-schema.json->unpin-autohide-type->options
 msgid "Intelligent Hide"
 msgstr "Ocultació intel·ligent"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr "A l'inici"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr "Deixa el tauler tal com està"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr "Fixa el tauler"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr "Plega el tauler"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"

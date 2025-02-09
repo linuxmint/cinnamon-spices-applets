@@ -79,6 +79,15 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
             this.settings.bind( "inhibit-at-startup",
                                 "inhibit_at_startup",
                                 this.on_inhibit_at_startup_changed);
+            this.settings.bind( "seconds-after-startup",
+                                "seconds_after_startup",
+                                null);
+            this.settings.bind( "end-timechooser",
+                                "end_time",
+                                this.on_endtime_changed);
+            this.settings.bind( "end-type",
+                                "end_type",
+                                this.on_endtime_changed);
             this.settings.bind( "locktype",
                                 "locktype",
                                 this.loop);
@@ -89,6 +98,8 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
                                 "old_sleep_display_ac");
             this.settings.bind( "old-sleep-inactive-ac-timeout",
                                 "old_sleep_inactive_ac_timeout");
+            this.settings.bind( "starting-time-in-minutes",
+                                "starting_time_in_minutes");
         } catch (e) {
             this.settings = null;
             this.off_icon = "screen-inhibit-symbolic"; // "video-display-symbolic";
@@ -147,20 +158,48 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         }
 
         if (this.inhibited) {
-            switch (this.locktype) {
-                case "normal":
-                    break;
-                case "aggressive1":
-                    if (SCREENSAVER_COMMAND)
-                        Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -d");
-                    break;
-                case "aggressive2":
-                    if (SCREENSAVER_COMMAND)
-                        Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
+            if (!this.is_end_time()) {
+                switch (this.locktype) {
+                    case "normal":
+                        this.lockinterval = 1;
+                        break;
+                    case "aggressive1":
+                        if (SCREENSAVER_COMMAND)
+                            Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -d");
+                        break;
+                    case "aggressive2":
+                        if (SCREENSAVER_COMMAND)
+                            Util.spawnCommandLineAsync(SCREENSAVER_COMMAND+" -e");
+                }
+            } else {
+                this.starting_time_in_minutes = 0;
+                this.end_type = 0;
+                this.on_applet_clicked()
             }
         }
 
         this.loopId = Mainloop.timeout_add(this.lockinterval * 60000, this.loop.bind(this));
+    }
+
+    is_end_time() {
+        if (this.end_type === 0)
+            return false;
+        const date = new Date;
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        if (this.end_type === 2 && (hour*60+minute >= this.end_time.h*60+this.end_time.m))
+            return true;
+        if (this.end_type === 1 && (hour*60+minute - this.starting_time_in_minutes <= this.end_time.h*60+this.end_time.m))
+            return true;
+        return false;
+    }
+
+    on_endtime_changed() {
+        const date = new Date;
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+
+        this.starting_time_in_minutes = hour*60+minute;
     }
 
     on_inhibit_at_startup_changed() {
@@ -269,10 +308,11 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
         if (this.inhibit_at_startup && !this.inhibited) {
             let id = setInterval ( () => {
                 if (this._sessionProxy) { // Ensures that this._sessionProxy is defined.
-                    this.on_applet_clicked();
+                    if (!this.inhibited)
+                        this.on_applet_clicked();
                     clearTimeout(id);
                 }
-            }, 300);
+            }, (this.seconds_after_startup === 0) ? 300 : this.seconds_after_startup*1000);
         }
     }
 

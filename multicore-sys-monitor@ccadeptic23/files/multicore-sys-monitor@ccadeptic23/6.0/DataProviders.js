@@ -1,5 +1,10 @@
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const GIRepository = imports.gi.GIRepository;
+const Util = imports.misc.util;
+const Lang = imports.lang;
+
+const UUID = 'multicore-sys-monitor@ccadeptic23';
 
 let _, tryFn, GTop;
 if (typeof require !== 'undefined') {
@@ -172,19 +177,42 @@ SwapDataProvider.prototype = {
   _init: function() {
     this.name = _('SWAP');
     this.isEnabled = true;
-    this.gtopSwap = new GTop.glibtop_swap();
+    //~ this.gtopSwap = new GTop.glibtop_swap();
     this.swapusage = true;
     this.currentReadings = [0];
   },
   getData: function() {
-    GTop.glibtop_get_swap(this.gtopSwap);
-    this.swapusage = parseInt(this.gtopSwap.total) !== 0;
-    this.currentReadings[0] = this.gtopSwap.used / this.gtopSwap.total;
-    // Check if swap is actually present
-    if (isNaN(this.currentReadings)) {
-      this.currentReadings = [0];
-    }
+    const HOME_DIR = GLib.get_home_dir();
+    const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+    const SCRIPTS_DIR = APPLET_DIR + "/scripts";
+    let command = SCRIPTS_DIR + "/get-swap.sh";
+    let process = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+      if (exitCode == 0) {
+        let swaplist = stdout.trim().split(" ");
+        let [total, used] = swaplist;
+        this.swapusage = parseInt(total) !== 0;
+        if (this.swapusage)
+          this.currentReadings[0] = used / total;
+        else
+          this.currentReadings = [0];
+        if (isNaN(this.currentReadings[0])) {
+          this.currentReadings = [0];
+        }
+      } else {
+        this.currentReadings = [0];
+      }
+      process.send_signal(9);
+    }));
   },
+  //~ getData: function() {
+    //~ GTop.glibtop_get_swap(this.gtopSwap);
+    //~ this.swapusage = parseInt(this.gtopSwap.total) !== 0;
+    //~ this.currentReadings[0] = this.gtopSwap.used / this.gtopSwap.total;
+    //~ // Check if swap is actually present
+    //~ if (isNaN(this.currentReadings)) {
+      //~ this.currentReadings = [0];
+    //~ }
+  //~ },
   getTooltipString: function() {
     //if (!this.isEnabled || !this.currentReadings[0]) { //Replaced by:
     if (!this.isEnabled || !this.swapusage) {
@@ -249,6 +277,14 @@ NetDataProvider.prototype = {
       this.currentReadings[i].up = this.gtop.bytes_out;
       this.currentReadings[i].down = this.gtop.bytes_in;
     }
+  },
+  getNumberOfNetDevices: function() {
+    let devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
+    let altMethod = devices == null;
+    if (altMethod) {
+      devices = this.nmClient.get_devices();
+    }
+    return devices.length;
   },
   getNetDevices: function(init = false) {
     this.currentReadings = [];

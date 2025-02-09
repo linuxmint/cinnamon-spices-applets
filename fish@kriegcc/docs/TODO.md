@@ -15,10 +15,8 @@
 
   - [ ] Display error messages directly for invalid input
 
-- [ ] Advanced settings page in preferences window
+- [] Advanced settings
 
-  - [ ] Add options for animation width and height
-  - [ ] Include toggle for original size display
   - [ ] Add option to allow change of message popup size (max-width, max-height)
 
 - [ ] Improve notifications
@@ -42,3 +40,6 @@
 ### Completed Tasks ✓
 
 - [x] Scale animation image to fit in panel
+- [x] Advanced settings in preferences window
+  - [x] Add options for animation width and height
+  - [x] Include toggle for original size display

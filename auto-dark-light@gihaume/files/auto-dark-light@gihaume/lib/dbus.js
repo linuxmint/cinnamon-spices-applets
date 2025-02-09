@@ -1,9 +1,7 @@
 const {Gio, GLib} = imports.gi;
 
-class Dbus {
-    /**
-     * An interface to read the system screensaver lock state.
-     */
+class Dbus { // namespace-like
+    /** An interface to read the system screensaver lock state. */
     static Screen_lock = class {
         #signal_id;
 
@@ -61,9 +59,7 @@ class Dbus {
         }
     }
 
-    /**
-     * An interface to read the system sleep/wakeup state.
-     */
+    /** An interface to read the system sleep/wakeup state. */
     static Sleep = class {
         #signal_id;
 
@@ -97,9 +93,7 @@ class Dbus {
         }
     }
 
-    /**
-     * An interface to read the system timezone.
-     */
+    /** An interface to read the system timezone. */
     static Timezone = class {
         #signal_id;
 

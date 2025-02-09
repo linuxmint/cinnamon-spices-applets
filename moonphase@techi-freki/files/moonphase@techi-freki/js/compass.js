@@ -18,7 +18,8 @@ class Compass {
             new Direction(202.5, this._('South'), this.app.moon.iconSet.directionDown),
             new Direction(247.5, this._('South West'), this.app.moon.iconSet.directionDownLeft),
             new Direction(292.5, this._('West'), this.app.moon.iconSet.directionLeft),
-            new Direction(337.5, this._('North West'), this.app.moon.iconSet.directionUpLeft)
+            new Direction(337.5, this._('North West'), this.app.moon.iconSet.directionUpLeft),
+            new Direction(360, this._('North'), this.app.moon.iconSet.directionUp)
         ];
     }
 

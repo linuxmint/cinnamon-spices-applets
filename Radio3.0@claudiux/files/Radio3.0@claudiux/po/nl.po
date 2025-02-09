@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# RADIO3.0
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# claudiux, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 21:08+0200\n"
-"PO-Revision-Date: 2024-07-24 09:25+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 21:00+0100\n"
+"PO-Revision-Date: 2024-11-28 16:57+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,23 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:440
+#. applet.js:255
+msgid "unassigned"
+msgstr "niet toegewezen"
+
+#. applet.js:256 desklet/AlbumArt3.0@claudiux/desklet.js:301
+msgid "Display Album Art at full size"
+msgstr ""
+
+#. applet.js:360
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Dit is jouw eigen lijst van Categorieën en Radiostations."
 
-#: applet.js:441
+#. applet.js:361
 msgid "You can add more using the [+] button."
 msgstr "Je kunt meer toevoegen met de [+] knop."
 
-#: applet.js:442
+#. applet.js:362
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr "Voor een categorie, vul alleen de naam in; laat de andere velden leeg."
 
-#: applet.js:443
+#. applet.js:363
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Voor een radiostation, voer alleen de naam en de streaming-URL in."
 
-#: applet.js:444
+#. applet.js:364
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -40,7 +49,7 @@ msgstr ""
 "Je kunt de rijen ordenen door te slepen en neer te zetten of door de knoppen "
 "en tools onder de lijst te gebruiken."
 
-#: applet.js:445
+#. applet.js:365
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -48,7 +57,7 @@ msgstr ""
 "De knoppen rechts, onder de lijst, stellen je in staat om pagina per pagina "
 "of categorie per categorie te navigeren."
 
-#: applet.js:446
+#. applet.js:366
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -56,7 +65,7 @@ msgstr ""
 "Om te zoeken naar één van je stations, klik op de lijst en begin de naam te "
 "typen."
 
-#: applet.js:447
+#. applet.js:367
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -64,13 +73,13 @@ msgstr ""
 "Om gemakkelijk stations aan je lijst toe te voegen, gebruik de volgende 2 "
 "tabbladen: Zoeken en Importeren."
 
-#: applet.js:448
+#. applet.js:368
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Vink het 'Menu'-vakje aan om een station of categorie in het menu weer te "
 "geven."
 
-#: applet.js:449
+#. applet.js:369
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -78,12 +87,12 @@ msgstr ""
 "Vink het '♪/➟' vakje aan om naar het station te luisteren of het naar een "
 "andere categorie te verplaatsen met de tools onder de lijst."
 
-#: applet.js:451
+#. applet.js:371
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 "Je kunt je lijst met stations laten controleren door internetdatabases."
 
-#: applet.js:452
+#. applet.js:372
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -91,7 +100,7 @@ msgstr ""
 "Elk station dat door één van deze databases wordt herkend, ontvangt een "
 "Universal Unique Identifier (UUID) die wordt aangeleverd door deze database."
 
-#: applet.js:453
+#. applet.js:373
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -99,7 +108,7 @@ msgstr ""
 "Dus, als een streaming-URL verandert, dan zou een volgende controle deze "
 "bijwerken en kan je blijven luisteren naar het betreffende station."
 
-#: applet.js:455
+#. applet.js:375
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -107,7 +116,7 @@ msgstr ""
 "Hier kan je zoeken naar andere stations in een gratis radiodatabase die "
 "toegankelijk is via internet."
 
-#: applet.js:456
+#. applet.js:376
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -115,7 +124,7 @@ msgstr ""
 "Vul minstens een paar velden van het formulier hieronder in en klik "
 "vervolgens op de knop 'Zoeken ...'."
 
-#: applet.js:457
+#. applet.js:377
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -125,7 +134,7 @@ msgstr ""
 "weergegeven in het tweede deel van deze pagina, waar je bepaalde stations "
 "kunt testen en ze kunt opnemen in het menu."
 
-#: applet.js:458
+#. applet.js:378
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -133,7 +142,7 @@ msgstr ""
 "Een station dat al in je menu staat, zal alleen in de zoekresultaten "
 "verschijnen als de streaming-URL is gewijzigd."
 
-#: applet.js:459
+#. applet.js:379
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -141,7 +150,7 @@ msgstr ""
 "Als er geen nieuwe pagina verschijnt, betekent dit dat alle resultaten die "
 "overeenkomen met je zoekcriteria zijn weergegeven."
 
-#: applet.js:461
+#. applet.js:381
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
@@ -149,7 +158,7 @@ msgstr ""
 "Je kunt een bestand importeren met de naam en streaming-URL van minstens één "
 "radiostation."
 
-#: applet.js:462
+#. applet.js:382
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -157,18 +166,18 @@ msgstr ""
 "Deze radiostations worden weergegeven in de lijst hieronder. Je kunt ze "
 "testen door het vakje ♪ aan te vinken."
 
-#: applet.js:463
+#. applet.js:383
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr "Beheer deze lijst vervolgens met de knoppen onderaan dit tabblad."
 
-#: applet.js:465
+#. applet.js:385
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
 msgstr ""
 "In de Shoutcast-directory, klik op de downloadknop links van de stationnaam."
 
-#: applet.js:466
+#. applet.js:386
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -176,11 +185,11 @@ msgstr ""
 "Selecteer het open formaat (.XSPF) en sla het bestand op met dezelfde naam "
 "als het station."
 
-#: applet.js:467
+#. applet.js:387
 msgid "This file can then be imported here."
 msgstr "Dit bestand kan hier worden geïmporteerd."
 
-#: applet.js:469
+#. applet.js:389
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s bytes = %s GB = %s GiB"
@@ -191,321 +200,337 @@ msgstr "%s bytes = %s GB = %s GiB"
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:635 applet.js:649 applet.js:4959 applet.js:4971
+#. applet.js:555 applet.js:569 applet.js:5926 applet.js:5938
 msgid "(Undefined)"
 msgstr "(Ongedefinieerd)"
 
-#: applet.js:847
-msgid "Radio3.0 web page..."
-msgstr "Radio3.0 webpagina..."
-
-#: applet.js:1960
+#. applet.js:2191
 msgid "Start"
 msgstr "Start"
 
-#: applet.js:1968 applet.js:2720
+#. applet.js:2199 applet.js:3029
 msgid "Stop"
 msgstr "Stop"
 
-#: applet.js:2208 applet.js:2244 applet.js:2291
+#. applet.js:2438 applet.js:2474 applet.js:2521
 msgid "Middle-Click: Stop Recording"
 msgstr "Middenklik: Stop opname"
 
-#: applet.js:2240 applet.js:2287
+#. applet.js:2470 applet.js:2517
 msgid "Volume: %s%"
 msgstr "Volume: %s%"
 
-#: applet.js:2246 applet.js:2293
+#. applet.js:2476 applet.js:2523
 msgid "Middle-click: ON/OFF"
 msgstr "Middenklik: AAN/UIT"
 
-#: applet.js:2248 applet.js:2295
+#. applet.js:2478 applet.js:2525
 msgid "Click: Select another station"
 msgstr "Klik: Selecteer een ander station"
 
-#: applet.js:2261
+#. applet.js:2491
 msgid "Click to select a station"
 msgstr "Klik om een station te selecteren"
 
-#: applet.js:2297
+#. applet.js:2527
 msgid "Scroll wheel: volume change"
 msgstr "Scrollwiel: volumewijziging"
 
-#: applet.js:2347 applet.js:2738 applet.js:4584
+#. applet.js:2600 applet.js:3047 applet.js:4983 applet.js:5345
 msgid "Configure..."
 msgstr "Configureren..."
 
-#: applet.js:2351 applet.js:2730
+#. applet.js:2604 applet.js:3039
 msgid "Search for new stations..."
 msgstr "Zoeken naar nieuwe stations..."
 
-#: applet.js:2357 applet.js:2742 applet.js:4621
+#. applet.js:2610 applet.js:3051 applet.js:5046 applet.js:5474
 msgid "Sound Settings"
 msgstr "Geluidsinstellingen"
 
-#: applet.js:2442
+#. applet.js:2686
 msgid "Watch on YT"
 msgstr "Bekijken op YT"
 
-#: applet.js:2449
+#. applet.js:2693
 msgid "Try to download it from YT (unsafe)"
 msgstr "Probeer het te downloaden van YT (onveilig)"
 
-#: applet.js:2512
+#. applet.js:2756
 msgid "Recently Played Stations:"
 msgstr "Onlangs afgespeelde stations:"
 
-#: applet.js:2553
+#. applet.js:2798
 msgid "Visit the home page of this station"
 msgstr "Bezoek de homepagina van dit station"
 
-#: applet.js:2596
-msgid "My Categories"
-msgstr "Mijn Categorieën"
+#. applet.js:2860
+msgid "Categories"
+msgstr "Categorieën"
 
-#: applet.js:2663
+#. applet.js:2863
+msgid "Radio Stations"
+msgstr "Radio Stations"
+
+#. applet.js:2874
+msgid "All Categories"
+msgstr "Alle Categorieën"
+
+#. applet.js:2971
 msgid "My Radio Stations"
 msgstr "Mijn Radiostations"
 
-#: applet.js:2845
+#. applet.js:3171
 msgid "Downloading..."
 msgstr "Downloaden..."
 
-#: applet.js:2847
+#. applet.js:3173
 msgid "Stop downloading"
 msgstr "Stop met downloaden"
 
-#: applet.js:2951
+#. applet.js:3277
 msgid "Download complete"
 msgstr "Download voltooid"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#: applet.js:2953 applet.js:2962 applet.js:4388 applet.js:4397 applet.js:4406
-#: applet.js:4702
+#. applet.js:3279 applet.js:3288 applet.js:4774 applet.js:4783 applet.js:4792
+#. applet.js:5009 applet.js:5400
 msgid "Open the recordings folder"
 msgstr "Open de opnamefolder"
 
-#: applet.js:2960 applet.js:4385 applet.js:4395 applet.js:4404
+#. applet.js:3286 applet.js:4771 applet.js:4781 applet.js:4790
 msgid "An error seems to have occurred during recording!"
 msgstr "Er lijkt een fout te zijn opgetreden tijdens het opnemen!"
 
-#: applet.js:2961 applet.js:4387 applet.js:4396 applet.js:4405
+#. applet.js:3287 applet.js:4773 applet.js:4782 applet.js:4791
 msgid "Please check this record."
 msgstr "Controleer deze opname alstublieft."
 
-#: applet.js:3068 applet.js:3102
+#. applet.js:3394 applet.js:3428
 msgid "Record from now"
 msgstr "Neem op vanaf nu"
 
-#: applet.js:3086 applet.js:4865
+#. applet.js:3412 applet.js:5832
 msgid "Stop Current Recording"
 msgstr "Stop huidige opname"
 
-#: applet.js:3214
+#. applet.js:3545
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Afspelen %s%s"
 
-#: applet.js:3267
+#. applet.js:3598
 msgid "Radio OFF"
 msgstr "Radio UIT"
 
-#: applet.js:3395
+#. applet.js:3726
 msgid "Unable to record anything!"
 msgstr "Kan niets opnemen!"
 
-#: applet.js:3395 applet.js:4722
+#. applet.js:3726 applet.js:5026 applet.js:5177 applet.js:5420
 msgid "Insufficient space"
 msgstr "Onvoldoende ruimte"
 
-#: applet.js:3395
+#. applet.js:3726
 msgid "The limit you set has been reached."
 msgstr "Het door jou ingestelde limiet is bereikt."
 
-#: applet.js:3779
+#. applet.js:4117
 msgid "Please Log Out then Log In"
 msgstr "Log uit en log weer in"
 
-#: applet.js:3779
+#. applet.js:4117
 msgid "to finalize yt-dlp update"
 msgstr "om de yt-dlp-update te voltooien"
 
-#: applet.js:3877
+#. applet.js:4255
 msgid "Nothing to save."
 msgstr "Niets om op te slaan."
 
-#: applet.js:3890
+#. applet.js:4268
 msgid "List of saved radio stations"
 msgstr "Lijst met opgeslagen radiostations"
 
-#: applet.js:3908
+#. applet.js:4286
 msgid "This will replace all current radio stations."
 msgstr "Dit zal alle huidige radiostations vervangen."
 
-#: applet.js:3909
+#. applet.js:4287
 msgid "Are you sure you want to continue?"
 msgstr "Weet je zeker dat je door wilt gaan?"
 
-#: applet.js:3969
+#. applet.js:4347
 msgid "Update in progress"
 msgstr "Update bezig"
 
-#: applet.js:3969
+#. applet.js:4347
 msgid "It may take a while ... Please wait."
 msgstr "Het kan even duren ... Even geduld a.u.b."
 
-#: applet.js:4059
+#. applet.js:4439
 msgid "Update completed successfully"
 msgstr "Update succesvol voltooid"
 
-#: applet.js:4269 applet.js:4325
+#. applet.js:4655 applet.js:4711
 msgid "ERROR: Invalid YT video URL!"
 msgstr "FOUT: Ongeldige YT-video-URL!"
 
-#: applet.js:4294
+#. applet.js:4680
 msgid "Unable to extract a single soundtrack"
 msgstr "Kan geen enkel geluidsspoor extraheren"
 
-#: applet.js:4294
+#. applet.js:4680
 msgid "Maybe it's a playlist?"
 msgstr "Misschien is het een afspeellijst?"
 
-#: applet.js:4327
+#. applet.js:4713
 msgid "Close"
 msgstr "Sluiten"
 
-#: applet.js:4546
-msgid "About..."
-msgstr "Over..."
-
-#: applet.js:4565
-msgid "Manual..."
-msgstr "Handleiding..."
-
-#: applet.js:4597
-msgid "Schedule a background record..."
-msgstr "Plan een achtergrondopname..."
-
-#: applet.js:4609
-msgid "Extract soundtrack from YouTube video..."
-msgstr "Soundtrack extraheren uit YouTube-video..."
-
-#: applet.js:4630
-msgid "Pulse Effects"
-msgstr "Pulse-effecten"
-
-#: applet.js:4639
+#. applet.js:4955 applet.js:5301
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Verwijder '%s'"
 
-#: applet.js:4652
-msgid "Radio ON at startup"
-msgstr "Radio AAN bij opstarten"
+#. applet.js:4963 applet.js:5267
+msgid "About..."
+msgstr "Over..."
 
-#: applet.js:4666
-msgid "Display Station Logo"
-msgstr "Toon stationlogo"
+#. applet.js:4970 applet.js:5290
+msgid "Manual..."
+msgstr "Handleiding..."
 
-#. settings-schema.json->dont-check-dependencies->description
-#: applet.js:4680
-msgid "Do not check about dependencies"
-msgstr "Controleer niet op afhankelijkheden"
-
-#: applet.js:4719
-msgid "(auto)"
-msgstr "(automatisch)"
-
-#: applet.js:4719
-msgid "(manual)"
-msgstr "(handmatig)"
-
-#: applet.js:4722 applet.js:4914
-msgid "Stop Recording"
-msgstr "Stop opname"
-
-#: applet.js:4722
-msgid "Start Recording"
-msgstr "Start opname"
-
-#: applet.js:4743
+#. applet.js:4977 applet.js:5327
 msgid "Reload this applet"
 msgstr "Herlaad deze applet"
 
-#. settings-schema.json->show-volume-level-near-icon->description
-#: applet.js:4759
-msgid "Display volume level near icon"
-msgstr "Toon volumeniveau in de buurt van het pictogram"
+#. applet.js:4994 applet.js:5359
+msgid "Schedule a background record..."
+msgstr "Plan een achtergrondopname..."
 
-#: applet.js:4777
+#. applet.js:5001 applet.js:5371
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Soundtrack extraheren uit YouTube-video..."
+
+#. applet.js:5023 applet.js:5174 applet.js:5417
+msgid "(auto)"
+msgstr "(automatisch)"
+
+#. applet.js:5023 applet.js:5174 applet.js:5417
+msgid "(manual)"
+msgstr "(handmatig)"
+
+#. applet.js:5026 applet.js:5177 applet.js:5420 applet.js:5881
+msgid "Stop Recording"
+msgstr "Stop opname"
+
+#. applet.js:5026 applet.js:5177 applet.js:5420
+msgid "Start Recording"
+msgstr "Start opname"
+
+#. applet.js:5042 applet.js:5442
 msgid "Cancel downloads from YT"
 msgstr "Downloads van YT annuleren"
 
-#: applet.js:4915
+#. applet.js:5051 applet.js:5483
+msgid "Pulse Effects"
+msgstr "Pulse-effecten"
+
+#. applet.js:5056 applet.js:5492
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+#. applet.js:5061 applet.js:5511
+msgid "Radio ON at startup"
+msgstr "Radio AAN bij opstarten"
+
+#. applet.js:5070 applet.js:5525
+msgid "Display Station Logo"
+msgstr "Toon stationlogo"
+
+#. applet.js:5080
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. applet.js:5085 applet.js:5540
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+#. applet.js:5097 applet.js:5555
+msgid "Do not check about dependencies"
+msgstr "Controleer niet op afhankelijkheden"
+
+#. settings-schema.json->show-volume-level-near-icon->description
+#. applet.js:5107 applet.js:5570
+msgid "Display volume level near icon"
+msgstr "Toon volumeniveau in de buurt van het pictogram"
+
+#. applet.js:5882
 msgid "Close without stopping recording"
 msgstr "Sluiten zonder opname te stoppen"
 
-#: applet.js:5125
+#. applet.js:6095
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Opname starten vanaf %s:%s tot %s:%s"
 
-#: applet.js:5137
+#. applet.js:6107
 msgid "Recording completed"
 msgstr "Opname voltooid"
 
-#: applet.js:5232
+#. applet.js:6224
 msgid "This will import a new file containing radio stations."
 msgstr "Dit zal een nieuw bestand importeren dat radiozenders bevat."
 
-#: applet.js:5233
+#. applet.js:6225
 msgid "Do you want to continue?"
 msgstr "Wil je doorgaan?"
 
-#: applet.js:5304
+#. applet.js:6297
 msgid "No new radio in your list."
 msgstr "Geen nieuwe radio in je lijst."
 
-#: applet.js:5306
+#. applet.js:6299
 msgid "One more radio in your list."
 msgstr "Nog één radio in je lijst."
 
-#: applet.js:5308
+#. applet.js:6301
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "Nog %s radio's in je lijst."
 
-#: applet.js:5515
+#. applet.js:6508
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 "Er zijn geen nieuwe stations om toe te voegen aan het menu van de Radio3.0-"
 "applet"
 
-#: applet.js:5517
+#. applet.js:6510
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Een nieuw station is toegevoegd aan het menu van de Radio3.0-applet"
 
-#: applet.js:5519
+#. applet.js:6512
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s nieuwe stations zijn toegevoegd aan het menu van de Radio3.0-applet"
 
-#: applet.js:5720
+#. applet.js:6738
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbps"
 
-#: lib/checkDependencies.js:384
+#. lib/checkDependencies.js:397
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "De applet %s is volledig functioneel."
 
-#: lib/checkDependencies.js:385
+#. lib/checkDependencies.js:398
 msgid "All dependencies are installed"
 msgstr "Alle afhankelijkheden zijn geïnstalleerd"
 
-#: lib/checkDependencies.js:413
+#. lib/checkDependencies.js:428
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -513,120 +538,131 @@ msgstr ""
 "Het lijkt erop dat je enkele van de programma's mist die nodig zijn voor "
 "deze applet om al zijn functies te hebben."
 
-#: lib/checkDependencies.js:414
+#. lib/checkDependencies.js:429
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Voer alstublieft, in de zojuist geopende terminal, de commando's uit:"
 
-#: lib/checkDependencies.js:415
+#. lib/checkDependencies.js:430
 msgid "Some dependencies are not installed!"
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
 
-#: lib/checkTranslations.js:108
+#. lib/checkTranslations.js:108
 msgid "To finalize the translation installation, please restart Cinnamon"
 msgstr ""
 "Om de installatie van de vertaling te voltooien, moet je Cinnamon opnieuw "
 "opstarten"
 
-#: lib/util.js:245
+#. lib/util.js:245
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "Uitvoering van '%s' is mislukt:"
 
-#: xs/xlet-settings.py:214
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+#. lib/volumeslider.js:172
+msgid "%"
+msgstr "%"
+
+#. desklet/AlbumArt3.0@claudiux/desklet.js:66
+#, fuzzy
+msgid "Radio3.0 Album Art"
+msgstr "Radio3.0"
+
+#. xs/xlet-settings.py:214
 msgid "Previous instance"
 msgstr "Vorige instantie"
 
-#: xs/xlet-settings.py:218
+#. xs/xlet-settings.py:218
 msgid "Next instance"
 msgstr "Volgende instantie"
 
-#: xs/xlet-settings.py:227
+#. xs/xlet-settings.py:227
 msgid "More options"
 msgstr "Meer opties"
 
-#: xs/xlet-settings.py:233
+#. xs/xlet-settings.py:233
 msgid "Import from a file"
 msgstr "Importeren uit een bestand"
 
-#: xs/xlet-settings.py:238
+#. xs/xlet-settings.py:238
 msgid "Export to a file"
 msgstr "Exporteren naar een bestand"
 
-#: xs/xlet-settings.py:243
+#. xs/xlet-settings.py:243
 msgid "Reset to defaults"
 msgstr "Terugzetten naar standaardinstellingen"
 
-#: xs/xlet-settings.py:252
+#. xs/xlet-settings.py:252
 #, python-format
 msgid "Reload %s"
 msgstr "Herlaad %s"
 
-#: xs/xlet-settings.py:441
+#. xs/xlet-settings.py:441
 #, python-format
 msgid "Settings for %s"
 msgstr "Instellingen voor %s"
 
-#: xs/xlet-settings.py:533
+#. xs/xlet-settings.py:533
 msgid "Select or enter file to export to"
 msgstr "Selecteer of voer bestand in om naar te exporteren"
 
-#: xs/xlet-settings.py:541 xs/xlet-settings.py:562
+#. xs/xlet-settings.py:541 xs/xlet-settings.py:562
 msgid "JSON files"
 msgstr "JSON-bestanden"
 
-#: xs/xlet-settings.py:555
+#. xs/xlet-settings.py:555
 msgid "Select a JSON file to import"
 msgstr "Selecteer een JSON-bestand om te importeren"
 
-#: xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+#. xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
 msgid "Add new entry"
 msgstr "Nieuwe invoer toevoegen"
 
-#: xs/bin/R3TreeListWidgets.py:282
+#. xs/bin/R3TreeListWidgets.py:282
 msgid "Remove selected entry"
 msgstr "Geselecteerde invoer verwijderen"
 
-#: xs/bin/R3TreeListWidgets.py:287
+#. xs/bin/R3TreeListWidgets.py:287
 msgid "Edit selected entry"
 msgstr "Geselecteerde invoer bewerken"
 
-#: xs/bin/R3TreeListWidgets.py:292
+#. xs/bin/R3TreeListWidgets.py:292
 msgid "Unselect the selected row"
 msgstr "Deselecteer de geselecteerde rij"
 
-#: xs/bin/R3TreeListWidgets.py:297
+#. xs/bin/R3TreeListWidgets.py:297
 msgid "Move selected entry up"
 msgstr "Verplaats de geselecteerde invoer omhoog"
 
-#: xs/bin/R3TreeListWidgets.py:302
+#. xs/bin/R3TreeListWidgets.py:302
 msgid "Move selected entry down"
 msgstr "Verplaats de geselecteerde invoer omlaag"
 
-#: xs/bin/R3TreeListWidgets.py:325
+#. xs/bin/R3TreeListWidgets.py:325
 msgid "Go to bottom"
 msgstr "Ga naar de onderkant"
 
-#: xs/bin/R3TreeListWidgets.py:331
+#. xs/bin/R3TreeListWidgets.py:331
 msgid "Go to next page"
 msgstr "Ga naar volgende pagina"
 
-#: xs/bin/R3TreeListWidgets.py:337
+#. xs/bin/R3TreeListWidgets.py:337
 msgid "Go to previous page"
 msgstr "Ga naar vorige pagina"
 
-#: xs/bin/R3TreeListWidgets.py:342
+#. xs/bin/R3TreeListWidgets.py:342
 msgid "Go to top"
 msgstr "Ga naar top"
 
-#: xs/bin/R3TreeListWidgets.py:356
+#. xs/bin/R3TreeListWidgets.py:356
 msgid "Go to next category"
 msgstr "Ga naar volgende categorie"
 
-#: xs/bin/R3TreeListWidgets.py:366
+#. xs/bin/R3TreeListWidgets.py:366
 msgid "Go to previous category"
 msgstr "Ga naar vorige categorie"
 
-#: xs/bin/R3TreeListWidgets.py:503
+#. xs/bin/R3TreeListWidgets.py:503
 msgid "Edit entry"
 msgstr "Bewerk invoer"
 
@@ -694,6 +730,10 @@ msgstr "Opslaan en Herstellen"
 msgid "Update this station list"
 msgstr "Werk deze lijst met stations bij"
 
+#. settings-schema.json->sectionImportRadiopp->title
+msgid "Only for Radio++ users"
+msgstr ""
+
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
 msgstr "Haal bestanden op van Shoutcast om hier te importeren"
@@ -721,6 +761,10 @@ msgstr "Opstarten"
 #. settings-schema.json->sectionBehaviorVolumeStep->title
 msgid "Volume step"
 msgstr "Volumestap"
+
+#. settings-schema.json->sectionBehaviorOSD->title
+msgid "OSD"
+msgstr ""
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -752,6 +796,10 @@ msgstr "Codec en bitsnelheid"
 msgid "Icon"
 msgstr "Pictogram"
 
+#. settings-schema.json->sectionBehaviorHorizontalPanel->title
+msgid "Only on horizontal panels"
+msgstr "Alleen op horizontale panelen"
+
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
 msgstr "Kwaliteit"
@@ -767,6 +815,14 @@ msgstr "Proxy"
 #. settings-schema.json->sectionNetworkDatabase->title
 msgid "Database Info"
 msgstr "Database-info"
+
+#. settings-schema.json->sectionExperimental->title
+msgid "EXPERIMENTAL"
+msgstr "EXPERIMENTEEL"
+
+#. settings-schema.json->sectionRecordingCache->title
+msgid "Cache"
+msgstr "Cache"
 
 #. settings-schema.json->sectionRecordingRecordings->title
 #. settings-schema.json->sectionYTFormat->title
@@ -816,6 +872,10 @@ msgstr "Help"
 #. settings-schema.json->radios->description
 msgid "List of stations"
 msgstr "Lijst van stations"
+
+#. settings-schema.json->radios->columns->title
+msgid "♥︎"
+msgstr ""
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -912,10 +972,9 @@ msgstr "Open de map die deze lijsten bevat"
 msgid "Update my station list with the Radio Database data"
 msgstr "Werk mijn lijst met stations bij met de gegevens van de radiodatabase"
 
-#. settings-schema.json->scale-update->description
-#. settings-schema.json->recordings-extract-update->description
-msgid "%"
-msgstr "%"
+#. settings-schema.json->import-radiopp-button->description
+msgid "Import your stations from Radio++"
+msgstr ""
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1171,6 +1230,10 @@ msgstr ""
 msgid "Show volume OSD when changing radio station"
 msgstr "Toon volume OSD bij het wijzigen van radiostation"
 
+#. settings-schema.json->show-percent-char-in-osd->description
+msgid "Show '%' in OSD"
+msgstr ""
+
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
 msgstr "Toon de naam en de versie van deze applet in het menu"
@@ -1227,6 +1290,21 @@ msgstr "Maak je lijst met recent afgespeelde stations leeg bij het opstarten"
 #. settings-schema.json->button-reset-recents->description
 msgid "Empty your Recently Played Stations list now"
 msgstr "Maak je lijst met recent afgespeelde stations nu leeg"
+
+#. settings-schema.json->show-by-category->description
+msgid "Display the Station list beside the Category list"
+msgstr "Toon de stationslijst naast de categorielijst"
+
+#. settings-schema.json->show-by-category->tooltip
+msgid ""
+"Checked: Hover (without clicking) over a Category to display its list of "
+"Stations; then select your station.\n"
+"Unchecked: Single list containing each category followed by its stations."
+msgstr ""
+"Aangevinkt: Beweeg de muis (zonder te klikken) over een categorie om haar "
+"lijst van stations weer te geven; selecteer vervolgens je station.\n"
+"Niet aangevinkt: Eén enkele lijst met elke categorie gevolgd door de "
+"bijbehorende stations."
 
 #. settings-schema.json->show-system-items->description
 msgid "Show system items in the menu"
@@ -1304,6 +1382,7 @@ msgstr ""
 "een liedje- of programma-wijziging."
 
 #. settings-schema.json->notif-song-duration->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->units
 msgid "seconds"
 msgstr "seconden"
 
@@ -1395,6 +1474,32 @@ msgstr ""
 "met ongewenste geluiden (bijvoorbeeld systeemgeluiden). Het volume van de "
 "radio wordt ingesteld op 100% om de best mogelijke kwaliteit te verkrijgen."
 
+#. settings-schema.json->image-resolution->description
+msgid "Quality of downloaded Album Art"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Max Resolution"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+#, fuzzy
+msgid "High Quality"
+msgstr "Kwaliteit"
+
+#. settings-schema.json->image-resolution->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->image-resolution->options
+msgid "Standard"
+msgstr ""
+
+#. settings-schema.json->image-resolution->tooltip
+msgid ""
+"Default: High Quality. Choose a value corresponding to your Network Quality."
+msgstr ""
+
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
 msgstr "Monitor het netwerk"
@@ -1445,6 +1550,111 @@ msgstr "Willekeurig"
 #. settings-schema.json->database-url->description
 msgid "Database URL"
 msgstr "Database-URL"
+
+#. settings-schema.json->cache-no-cache->description
+msgid "No cache"
+msgstr "Geen cache"
+
+#. settings-schema.json->cache-no-cache->tooltip
+msgid ""
+"Checking this option limits memory usage, but no longer allows the user to "
+"rewind the cache (using the sound150@claudiux applet)."
+msgstr ""
+"Als je deze optie aanvinkt, wordt het geheugengebruik beperkt, maar is het "
+"niet langer mogelijk om de cache terug te spoelen (met behulp van de "
+"sound150@claudiux applet)."
+
+#. settings-schema.json->cache-mins->description
+msgid ""
+"Minutes to cache\n"
+"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+msgstr ""
+"Minuten om te cachen\n"
+"0 betekent geen limiet (standaard). 1 uur = 60 minuten. 24 uur = 1440 "
+"minuten."
+
+#. settings-schema.json->cache-on-disk->description
+msgid ""
+"Cache on disk\n"
+"(Write packet data to a temporary file, instead of keeping them in memory.)"
+msgstr ""
+"Cache op schijf\n"
+"(Schrijf pakketgegevens naar een tijdelijk bestand, in plaats van ze in het "
+"geheugen te houden.)"
+
+#. settings-schema.json->cache-dir->description
+msgid ""
+"Directory used for data caching\n"
+"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
+"sufficient free space.)"
+msgstr ""
+"Map gebruikt voor gegevenscaching\n"
+"(Gebruik dit voorzichtig op SSD-schijven. Geef de voorkeur aan een map "
+"opgeslagen in RAM, met voldoende vrije ruimte.)"
+
+#. settings-schema.json->cache-dir-open->description
+msgid "Open cache directory"
+msgstr "Cache-map openen"
+
+#. settings-schema.json->cache-stream-size->description
+msgid "Stream cache size"
+msgstr "Stream cache grootte"
+
+#. settings-schema.json->cache-stream-size->tooltip
+msgid ""
+"The amount of stream cache. Default: 1 MiB.\n"
+"Beware, setting this to a large value can reduce performance."
+msgstr ""
+"De hoeveelheid cache voor de stream. Standaard: 1 MiB.\n"
+"Let op, dit instellen op een grote waarde kan de prestaties verminderen."
+
+#. settings-schema.json->cache-stream-size->options
+msgid "No limit"
+msgstr "Geen limiet"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "64 KiB"
+msgstr "64 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "128 KiB"
+msgstr "128 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "256 KiB"
+msgstr "256 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "512 KiB"
+msgstr "512 KiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "1 MiB"
+msgstr "1 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "2 Mib"
+msgstr "2 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "3 MiB"
+msgstr "3 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "4 MiB"
+msgstr "4 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "5 MiB"
+msgstr "5 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "10 MiB"
+msgstr "10 MiB"
+
+#. settings-schema.json->cache-stream-size->options
+msgid "20 MiB"
+msgstr "20 MiB"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
@@ -2946,150 +3156,99 @@ msgstr "Zoeken..."
 msgid "Remove selected items"
 msgstr "Geselecteerde items verwijderen"
 
-#: applet.js:2668
-msgid "Categories"
-msgstr "Categorieën"
+#. settings-schema.json->horizontal-show-name->description
+msgid "Display radio name"
+msgstr "Toon radionaam"
 
-#: applet.js:2670
-msgid "Radio Stations"
-msgstr "Radio Stations"
+#. settings-schema.json->horizontal-show-title->description
+msgid "Display title"
+msgstr "Toon titel"
 
-#: applet.js:2679
-msgid "All Categories"
-msgstr "Alle Categorieën"
+#. settings-schema.json->horizontal-max-title-length->description
+msgid "Maximum title length"
+msgstr "Maximale titel lengte"
 
-#: scripts/popup_menu.py:71
-msgid "Open Folder"
-msgstr "Map Openen"
+#. settings-schema.json->horizontal-max-title-length->tooltip
+msgid "0 means no maximum"
+msgstr "0 betekent geen maximum"
 
-#: scripts/popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Openen in Terminal"
-
-#. settings-schema.json->sectionExperimental->title
-msgid "EXPERIMENTAL"
-msgstr "EXPERIMENTEEL"
-
-#. settings-schema.json->sectionRecordingCache->title
-msgid "Cache"
-msgstr "Cache"
-
-#. settings-schema.json->show-by-category->description
-msgid "Display the Station list beside the Category list"
-msgstr "Toon de stationslijst naast de categorielijst"
-
-#. settings-schema.json->show-by-category->tooltip
-msgid ""
-"Checked: Hover (without clicking) over a Category to display its list of "
-"Stations; then select your station.\n"
-"Unchecked: Single list containing each category followed by its stations."
+#. desklet->AlbumArt3.0@claudiux->metadata.json->name
+msgid "Album Art for Radio3.0"
 msgstr ""
-"Aangevinkt: Beweeg de muis (zonder te klikken) over een categorie om haar "
-"lijst van stations weer te geven; selecteer vervolgens je station.\n"
-"Niet aangevinkt: Eén enkele lijst met elke categorie gevolgd door de "
-"bijbehorende stations."
 
-#. settings-schema.json->cache-no-cache->description
-msgid "No cache"
-msgstr "Geen cache"
-
-#. settings-schema.json->cache-no-cache->tooltip
-msgid ""
-"Checking this option limits memory usage, but no longer allows the user to "
-"rewind the cache (using the sound150@claudiux applet)."
+#. desklet->AlbumArt3.0@claudiux->metadata.json->description
+msgid "A digital photo frame desklet to display the Radio3.0 album art"
 msgstr ""
-"Als je deze optie aanvinkt, wordt het geheugengebruik beperkt, maar is het "
-"niet langer mogelijk om de cache terug te spoelen (met behulp van de "
-"sound150@claudiux applet)."
 
-#. settings-schema.json->cache-mins->description
-msgid ""
-"Minutes to cache\n"
-"0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes."
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
+msgid "Height"
 msgstr ""
-"Minuten om te cachen\n"
-"0 betekent geen limiet (standaard). 1 uur = 60 minuten. 24 uur = 1440 "
-"minuten."
 
-#. settings-schema.json->cache-on-disk->description
-msgid ""
-"Cache on disk\n"
-"(Write packet data to a temporary file, instead of keeping them in memory.)"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
+msgid "pixels"
 msgstr ""
-"Cache op schijf\n"
-"(Schrijf pakketgegevens naar een tijdelijk bestand, in plaats van ze in het "
-"geheugen te houden.)"
 
-#. settings-schema.json->cache-dir->description
-msgid ""
-"Directory used for data caching\n"
-"(Use with caution on SSD disks. Prefer a directory stored in RAM, with "
-"sufficient free space.)"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
+msgid "Width"
 msgstr ""
-"Map gebruikt voor gegevenscaching\n"
-"(Gebruik dit voorzichtig op SSD-schijven. Geef de voorkeur aan een map "
-"opgeslagen in RAM, met voldoende vrije ruimte.)"
 
-#. settings-schema.json->cache-dir-open->description
-msgid "Open cache directory"
-msgstr "Cache-map openen"
-
-#. settings-schema.json->cache-stream-size->description
-msgid "Stream cache size"
-msgstr "Stream cache grootte"
-
-#. settings-schema.json->cache-stream-size->tooltip
-msgid ""
-"The amount of stream cache. Default: 1 MiB.\n"
-"Beware, setting this to a large value can reduce performance."
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. effect->description
+msgid "Fade"
 msgstr ""
-"De hoeveelheid cache voor de stream. Standaard: 1 MiB.\n"
-"Let op, dit instellen op een grote waarde kan de prestaties verminderen."
 
-#. settings-schema.json->cache-stream-size->options
-msgid "No limit"
-msgstr "Geen limiet"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+#, fuzzy
+msgid "None"
+msgstr "(None)"
 
-#. settings-schema.json->cache-stream-size->options
-msgid "64 KiB"
-msgstr "64 KiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "128 KiB"
-msgstr "128 KiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "256 KiB"
-msgstr "256 KiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "512 KiB"
-msgstr "512 KiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "1 MiB"
-msgstr "1 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "2 Mib"
-msgstr "2 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "3 MiB"
-msgstr "3 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "4 MiB"
-msgstr "4 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "5 MiB"
-msgstr "5 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "10 MiB"
-msgstr "10 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr ""
 
-#. settings-schema.json->cache-stream-size->options
-msgid "20 MiB"
-msgstr "20 MiB"
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
+#. delay->description
+msgid "Fade delay"
+msgstr ""
+
+#. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
+#, fuzzy
+msgid "0 means no fade"
+msgstr "0 betekent geen maximum"

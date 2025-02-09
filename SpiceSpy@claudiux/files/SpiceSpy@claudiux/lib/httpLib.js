@@ -6,11 +6,15 @@
  */
 const DEBUG = false;
 function log(message, alwaysLog=false) {
-  if (DEBUG || alwaysLog) global.log("[httpLib.js]: " + message);
+  if (DEBUG || alwaysLog) global.log("[SpicesSpy httpLib.js]: " + message);
+}
+
+function logDebug(message) {
+    log(message, true);
 }
 
 function logError(error) {
-  global.logError("\n[httpLib.js]: " + error + "\n")
+  global.logError("\n[SpicesSpy httpLib.js]: " + error + "\n")
 }
 
 
@@ -111,8 +115,8 @@ class Soup2 {
         return data;
     }
 }
-const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
-
+//~ const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+const soupLib = (imports.gi.Soup.SessionAsync == undefined) ? new Soup3() : new Soup2();
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 
 

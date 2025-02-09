@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-07 10:57-0100\n"
-"PO-Revision-Date: 2024-09-11 12:33+0200\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
+"PO-Revision-Date: 2024-11-28 17:48+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Unpin the Panel"
 msgstr "Klik om het paneel los te koppelen"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Pin the Panel"
 msgstr "Klik om het paneel vast te koppelen"
 
@@ -51,6 +51,22 @@ msgstr "Automatisch verbergen"
 #. 5.4->settings-schema.json->unpin-autohide-type->options
 msgid "Intelligent Hide"
 msgstr "Intelligent verbergen"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr "Bij opstarten"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr "Laat het paneel zoals het is"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr "Paneel vastkoppelen"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr "Paneel loskoppelen"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"

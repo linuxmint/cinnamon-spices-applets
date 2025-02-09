@@ -1,0 +1,22 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Icon size"
+  },
+
+  "icon_size": {
+    "type": "combobox",
+    "description": "Size (in pixels) of menu icons",
+    "default": 22,
+    "options": {
+      "16": 16,
+      "22": 22,
+      "24": 24,
+      "32": 32,
+      "48": 48,
+      "64": 64,
+      "96": 96,
+      "128": 128
+    }
+  }
+}

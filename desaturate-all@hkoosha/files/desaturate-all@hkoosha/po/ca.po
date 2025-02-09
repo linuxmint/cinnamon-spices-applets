@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# DESATURATE ALL
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# hkoosha, 2023
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-28 10:55+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-22 12:52-0500\n"
 "PO-Revision-Date: 2024-07-05 00:42+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -25,3 +26,7 @@ msgstr "Desaturar Tot"
 #. metadata.json->description
 msgid "Convert your screen to grayscale."
 msgstr "Converteix la teva pantalla a escala de grisos."
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle grayscale"
+msgstr ""

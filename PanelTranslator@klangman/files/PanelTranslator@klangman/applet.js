@@ -60,6 +60,17 @@ const TranslateAction = {
    TransClipboardCopy: 8
 }
 
+const Hotkeys = [
+   {name: "panelTranslator-trans-selection",      setting: "hotkey-trans-selection",      action: TranslateAction.PopupSelection,     enabled: false},
+   {name: "panelTranslator-trans-clipboard",      setting: "hotkey-trans-clipboard",      action: TranslateAction.PopupClipboard,     enabled: false},
+   {name: "panelTranslator-trans-play-selection", setting: "hotkey-trans-play-selection", action: TranslateAction.PopupSelectionPlay, enabled: false},
+   {name: "panelTranslator-trans-play-clipboard", setting: "hotkey-trans-play-clipboard", action: TranslateAction.PopupClipboardPlay, enabled: false},
+   {name: "panelTranslator-play-selection",       setting: "hotkey-play-selection",       action: TranslateAction.PlaySelection,      enabled: false},
+   {name: "panelTranslator-play-clipboard",       setting: "hotkey-play-clipboard",       action: TranslateAction.PlayClipboard,      enabled: false},
+   {name: "panelTranslator-trans-copy-selection", setting: "hotkey-trans-copy-selection", action: TranslateAction.TransSelectionCopy, enabled: false},
+   {name: "panelTranslator-trans-copy-clipboard", setting: "hotkey-trans-copy-clipboard", action: TranslateAction.TransClipboardCopy, enabled: false},
+]
+
 const Engine = {
    Apertium: 0,
    Aspell: 1,
@@ -108,13 +119,22 @@ class PanelTranslatorApp extends Applet.IconApplet {
       this.getEngine();
       this.languages = [];
       this.getLanguages();
-      this.hotkey1Combo = null;
-      this.hotkey2Combo = null;
+      if (typeof Applet.PopupResizeHandler === "function") {
+         this._resizer = new Applet.PopupResizeHandler(this.menu.actor,
+            () => this._orientation,
+            (w,h) => this.translatorPopup.onBoxResized(w,h),
+            () => this.popup_width,
+            () => this.popup_height);
+      }
+      this.settings.bind("popup-width", "popup_width");
+      this.settings.bind("popup-height", "popup_height");
+
    }
 
    on_applet_added_to_panel() {
-      this._signalManager.connect(this.settings, "changed::hotkey-1", this._updateHotkeys, this);
-      this._signalManager.connect(this.settings, "changed::hotkey-2", this._updateHotkeys, this);
+      for ( let i=0 ; i < Hotkeys.length ; i++ ) {
+         this._signalManager.connect(this.settings, "changed::" + Hotkeys[i].setting, this._updateHotkeys, this);
+      }
       this._updateHotkeys()
    }
 
@@ -123,22 +143,20 @@ class PanelTranslatorApp extends Applet.IconApplet {
    }
 
    _updateHotkeys(register=true) {
-      if (this.hotkey1Combo) {
-         Main.keybindingManager.removeHotKey("panelTranslator-hotkey1");
-         this.hotkey1Combo = null;
-      }
-      if (this.hotkey2Combo) {
-         Main.keybindingManager.removeHotKey("panelTranslator-hotkey2");
-         this.hotkey2Combo = null;
-      }
-      if (register) {
-         this.hotkey1Combo = this.getHotkeySequence("hotkey-1");
-         if (this.hotkey1Combo) {
-            Main.keybindingManager.addHotKey("panelTranslator-hotkey1", this.hotkey1Combo, () => this.performHotkey("hotkey1-action") );
+      let i;
+      for ( i=0 ; i < Hotkeys.length ; i++ ) {
+         if (Hotkeys[i].enabled) {
+            Main.keybindingManager.removeHotKey(Hotkeys[i].name);
+            Hotkeys.enabled = false;
          }
-         this.hotkey2Combo = this.getHotkeySequence("hotkey-2");
-         if (this.hotkey2Combo) {
-            Main.keybindingManager.addHotKey("panelTranslator-hotkey2", this.hotkey2Combo, () => this.performHotkey("hotkey2-action") );
+
+         if (register) {
+            let hotkeyCombo = this.getHotkeySequence(Hotkeys[i].setting);
+            if (hotkeyCombo) {
+               let action = Hotkeys[i].action;
+               Main.keybindingManager.addHotKey(Hotkeys[i].name, hotkeyCombo, () => this._performTranslateAction(action));
+               Hotkeys[i].enabled = true;
+            }
          }
       }
    }
@@ -149,11 +167,6 @@ class PanelTranslatorApp extends Applet.IconApplet {
          return str;
       }
       return null;
-   }
-
-   performHotkey(name) {
-      let action = this.settings.getValue(name);
-      this._performTranslateAction(action);
    }
 
    _performTranslateAction(action) {
@@ -375,10 +388,15 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
             this.toTextBox.set_text(fromText);
       });
 
-      this.fromSearchEntry = new St.Entry({ name: 'menu-search-entry', width: 210, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.START });
+      let monitor = this._applet.panel.monitor;
+      let width = Math.min(monitor.width, this._applet.settings.getValue("popup-width"));
+      let height = Math.min(monitor.height, this._applet.settings.getValue("popup-height"));
+      this._applet.settings.setValue("popup-width", width);
+      this._applet.settings.setValue("popup-height", height);
+      this.fromSearchEntry = new St.Entry({ name: 'menu-search-entry', width: 210*global.ui_scale, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.START });
       this.fromSearchEntry.get_clutter_text().connect( 'key-press-event', Lang.bind(this, this._onKeyPressEvent) );
       this.fromSearchEntry.get_clutter_text().connect( 'key-release-event', (actor, event) => {this._onKeyReleaseEvent(actor, event, this.fromLanguage); } );
-      this.toSearchEntry = new St.Entry({ name: 'menu-search-entry', width: 210, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.END });
+      this.toSearchEntry = new St.Entry({ name: 'menu-search-entry', width: 210*global.ui_scale, track_hover: true, can_focus: true, x_expand: true, x_align: Clutter.ActorAlign.END });
       this.toSearchEntry.get_clutter_text().connect( 'key-press-event', Lang.bind(this, this._onKeyPressEvent) );
       this.toSearchEntry.get_clutter_text().connect( 'key-release-event', (actor, event) => {this._onKeyReleaseEvent(actor, event, this.toLanguage); } );
       this._searchFromIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find', icon_type: St.IconType.SYMBOLIC });
@@ -390,18 +408,18 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       this.languageBox.add_child(this.toSearchEntry);
 
       // Setup the from/to text boxes
-      this.fromTextBox = new St.Entry({name: 'menu-search-entry', hint_text: _("{Text to translate}"), width: 250, height: 180, style: 'margin-right:2px;'});
+      this.fromTextBox = new St.Entry({name: 'menu-search-entry', hint_text: _("{Text to translate}"), width: /*250*/(width/2-45)*global.ui_scale, height: /*180*/(height-90)*global.ui_scale, style: 'margin-right:2px;'});
       let text = this.fromTextBox.get_clutter_text();
       text.set_line_wrap(true);
       text.set_single_line_mode(false);
       text.set_max_length(200);
       text.connect('text-changed', () => {this.enableTranslateIfPossible();});
       text.connect('activate', (actor, event) => {
-         Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
+         Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          });
       this.textBox.add_child(this.fromTextBox);
 
-      this.toTextBox = new St.Entry({name: 'menu-search-entry', hint_text: _("{Translated text}"), width: 250, height: 180, style: 'margin-left:2px;'});
+      this.toTextBox = new St.Entry({name: 'menu-search-entry', hint_text: _("{Translated text}"), width: /*250*/(width/2-45)*global.ui_scale, height: /*180*/(height-90)*global.ui_scale, style: 'margin-left:2px;'});
       text = this.toTextBox.get_clutter_text();
       text.set_line_wrap(true);
       text.set_single_line_mode(false);
@@ -433,7 +451,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          this.toTextBox.set_text("");
          });
       this.translate = new ControlButton("media-playback-start-symbolic", _("Translate"), () => {
-         Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
+         Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          });
       this.translate.setEnabled(false);
       let toBtnBox = new St.BoxLayout({x_align: Clutter.ActorAlign.END, x_expand: true});
@@ -460,6 +478,44 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 
       this.addActor(this.vertBox, {expand: true});
       this._applet._signalManager.connect(this._applet.settings, "changed::translate-engine", this._applet.getEngine, this._applet);
+      this._applet._signalManager.connect(global, "scale-changed", this._onScaleChanged, this);
+   }
+
+   onBoxResized(w,h) {
+      w = Math.max(Math.trunc(w), 540);
+      h = Math.max(Math.trunc(h), 160);
+      this.fromTextBox.set_width((w/2-45)*global.ui_scale);
+      this.fromTextBox.set_height((h-90)*global.ui_scale);
+
+      this.toTextBox.set_width((w/2-45)*global.ui_scale);
+      this.toTextBox.set_height((h-90)*global.ui_scale);
+      this._applet.settings.setValue("popup-width", w);
+      this._applet.settings.setValue("popup-height", h);
+   }
+
+   _onScaleChanged() {
+      let monitor = this._applet.panel.monitor;
+      let width = Math.min(monitor.width, this._applet.settings.getValue("popup-width"));
+      let height = Math.min(monitor.height, this._applet.settings.getValue("popup-height"));
+      this._applet.settings.setValue("popup-width", width);
+      this._applet.settings.setValue("popup-height", height);
+
+      this.fromSearchEntry.set_width(210*global.ui_scale);
+      this.toSearchEntry.set_width(210*global.ui_scale);
+      this.fromTextBox.set_width((width/2-45)*global.ui_scale);
+      this.fromTextBox.set_height((height-90)*global.ui_scale);
+      this.toTextBox.set_width((width/2-45)*global.ui_scale);
+      this.toTextBox.set_height((height-90)*global.ui_scale);
+
+      this.switchButton.updateDisabledIcon();
+      this.config.updateDisabledIcon();
+      this.help.updateDisabledIcon();
+      this.playFrom.updateDisabledIcon();
+      this.paste.updateDisabledIcon();
+      this.clear.updateDisabledIcon();
+      this.translate.updateDisabledIcon();
+      this.copy.updateDisabledIcon();
+      this.playTo.updateDisabledIcon();
    }
 
    // Handles key press events for the from/to language search entry widgets
@@ -583,11 +639,11 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       this.fromTextBox.set_text(text.trim());
       if (translate) {
          if (play) {
-            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.playTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.playTranslation) );
          } else if (copy) {
-            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.copyTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.copyTranslation) );
          } else {
-            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -no-bidi -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          }
       } else {
          this.toTextBox.set_text("");
@@ -615,31 +671,36 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 class ControlButton {
     constructor(icon, tooltip, callback) {
         this.actor = new St.Bin();
-
         this.button = new St.Button({style_class: 'menu-favorites-button' /*'panel-translator-button' 'menu-favorites-button' 'keyboard-key'*/});
         this.button.connect('clicked', callback);
-
+        this.icon_name = icon;
         this.icon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: icon, icon_size: ICON_SIZE });
+        this.updateDisabledIcon();
+        this.button.set_child(this.icon);
+        this.actor.add_actor(this.button);
+        this.tooltip = new Tooltips.Tooltip(this.button, tooltip);
+    }
 
-        let themeIcon = ICONTHEME.lookup_icon(icon, ICON_SIZE, 0);
+    updateDisabledIcon() {
+        let themeIcon = ICONTHEME.lookup_icon(this.icon_name, ICON_SIZE*global.ui_scale, 0);
         if (themeIcon) {
-           let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(themeIcon.get_filename(), ICON_SIZE, ICON_SIZE);
+           let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(themeIcon.get_filename(), ICON_SIZE*global.ui_scale, ICON_SIZE*global.ui_scale);
            if (pixBuf) {
               let image = new Clutter.Image();
               pixBuf.saturate_and_pixelate(pixBuf, 1, true);
               try {
                  image.set_data(pixBuf.get_pixels(), pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-                    ICON_SIZE, ICON_SIZE, pixBuf.get_rowstride() );
-                 this.disabledIcon = new Clutter.Actor({width: ICON_SIZE, height: ICON_SIZE, content: image});
+                    ICON_SIZE*global.ui_scale, ICON_SIZE*global.ui_scale, pixBuf.get_rowstride() );
+                 this.disabledIcon = new Clutter.Actor({width: ICON_SIZE*global.ui_scale, height: ICON_SIZE*global.ui_scale, content: image});
+                 if (this.enabledStatus === false) {
+                    // Since the disabledIcon has changed, we might need to reflect that change in the actual button
+                    this.setEnabled(false);
+                 }
               } catch(e) {
                  // Can't set the image data, so just use the default!
               }
            }
         }
-        this.button.set_child(this.icon);
-        this.actor.add_actor(this.button);
-
-        this.tooltip = new Tooltips.Tooltip(this.button, tooltip);
     }
 
     getActor() {
@@ -656,6 +717,7 @@ class ControlButton {
     }
 
     setEnabled(status) {
+        this.enabledStatus = status;
         this.button.change_style_pseudo_class("insensitive", !status);
         this.button.can_focus = status;
         this.button.reactive = status;

@@ -205,12 +205,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_applets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_applets"
   },
   "unprotected_applets": {
     "type": "list",
@@ -246,7 +246,6 @@
   },
   "was_empty_applets":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_desklets": {
@@ -266,12 +265,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_desklets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_desklets"
   },
   "unprotected_desklets": {
     "type": "list",
@@ -307,7 +306,6 @@
   },
   "was_empty_desklets":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_extensions": {
@@ -327,12 +325,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_extensions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_extensions"
   },
   "unprotected_extensions": {
     "type": "list",
@@ -368,7 +366,6 @@
   },
   "was_empty_extensions":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_themes": {
@@ -388,12 +385,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_themes": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_themes"
   },
   "unprotected_themes": {
     "type": "list",
@@ -429,7 +426,6 @@
   },
   "was_empty_themes":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "check_actions": {
@@ -449,12 +445,12 @@
     "type": "textview",
     "default": "",
     "description": "",
-    "height": 60
+    "height": 100
   },
   "btn_refresh_actions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "_on_refresh_pressed"
+    "callback": "_on_refresh_pressed_actions"
   },
   "unprotected_actions": {
     "type": "list",
@@ -490,7 +486,6 @@
   },
   "was_empty_actions":{
     "type": "generic",
-    "value": false,
     "default": false
   },
   "general_frequency": {
@@ -547,7 +542,6 @@
   },
   "general_force_notifications": {
     "type": "generic",
-    "value": false,
     "default": false
   },
   "general_type_notif": {
@@ -573,8 +567,7 @@
   },
   "displayType": {
     "type": "generic",
-    "default": "compact",
-    "value": "compact"
+    "default": "compact"
   },
   "general_hide": {
     "type": "switch",
@@ -594,7 +587,6 @@
   },
   "first_time": {
     "type": "generic",
-    "value": true,
     "default": true
   },
   "next_type": {

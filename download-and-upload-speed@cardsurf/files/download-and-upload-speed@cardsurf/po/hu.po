@@ -1,105 +1,181 @@
 # Main translation file for download-and-upload-speed@cardsurf.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# cardsurf, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 00:05+0100\n"
-"PO-Revision-Date: 2021-09-26 07:36+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-27 21:38+0200\n"
+"PO-Revision-Date: 2024-10-02 17:08+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:437
-#| msgid "Network interface"
+#. applet.js:438
 msgid "Network interfaces"
 msgstr "Hálózati csatolók"
 
-#: applet.js:506
+#. applet.js:507
 msgid "Total data start"
 msgstr "Összesített adatmennyiség indításkor"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:513
+#. applet.js:514
 msgid "Launch of applet"
 msgstr "Kisalkalmazás indítása"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:514
+#. applet.js:515
 msgid "Today"
 msgstr "Ma"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:515
+#. applet.js:516
 msgid "Yesterday"
 msgstr "Tegnap"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:516
+#. applet.js:517
 msgid "3 days ago"
 msgstr "Három nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:517
+#. applet.js:518
 msgid "5 days ago"
 msgstr "Öt nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:518
+#. applet.js:519
 msgid "7 days ago"
 msgstr "Hét nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:519
+#. applet.js:520
 msgid "10 days ago"
 msgstr "Tíz nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:520
+#. applet.js:521
 msgid "14 days ago"
 msgstr "Tízennégy nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:521
+#. applet.js:522
 msgid "30 days ago"
 msgstr "Harminc nappal ezelőtt"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:522
+#. applet.js:523
 msgid "Custom date"
 msgstr "Egyéni dátum"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:559
+#. applet.js:560
 msgid "Gui"
 msgstr "GUI"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Compact"
 msgstr "Kompakt"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:559
+#. applet.js:560
 msgid "Large"
 msgstr "Nagy"
 
-#: applet.js:825
-msgid "b"
-msgstr "b"
+#. applet.js:796
+msgid " TiB"
+msgstr " TiB"
 
-#: appletGui.js:470
+#. applet.js:799
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:802
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:805
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:807
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:810
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:813
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:816
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:819
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:821
+msgid "  B"
+msgstr "  B"
+
+#. applet.js:831
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:834
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:837
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:840
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:842
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:845
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:848
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:851
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:854
+msgid " kb"
+msgstr " kb"
+
+#. applet.js:856
+msgid "  b"
+msgstr "  b"
+
+#. appletGui.js:480
 msgid "Total download:"
 msgstr "Összes letöltés:"
 
-#: appletGui.js:471
+#. appletGui.js:481
 msgid "Total upload:"
 msgstr "Összes feltöltés:"
 
@@ -146,6 +222,26 @@ msgstr "Bit"
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
 msgstr "A panelen látható alapadat-egység"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Decimal or binary"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Tizedes"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Bináris"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Tizedes: k, M, G, T\n"
+"Bináris: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->update_every->units
 #. settings-schema.json->update_available_interfaces_every->units
@@ -279,7 +375,6 @@ msgstr "Az egérmutatóra előugró számokra alkalmazott CSS-stílus"
 
 #. settings-schema.json->minimum_bytes_received_to_display->units
 #. settings-schema.json->minimum_bytes_sent_to_display->units
-#| msgid "Bytes"
 msgid "bytes"
 msgstr "bytes"
 
@@ -429,9 +524,3 @@ msgstr "Parancs "
 #. settings-schema.json->list_connections_command->tooltip
 msgid "A command used to list current Internet connections"
 msgstr "Az aktuális internetkapcsolatok felsorolására használt parancs"
-
-#~ msgid "Settings for download-and-upload-speed@cardsurf"
-#~ msgstr "Download-and-upload-speed@cardsurf beállításai"
-
-#~ msgid "An icon displayed next to download speed in the panel"
-#~ msgstr "Egy ikon jelenik meg a panelen a letöltési sebesség mellett"

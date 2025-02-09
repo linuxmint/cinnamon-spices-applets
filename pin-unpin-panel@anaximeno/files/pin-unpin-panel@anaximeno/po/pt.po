@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pin-unpin-panel@anaximeno 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-09-07 10:57-0100\n"
+"POT-Creation-Date: 2024-10-13 14:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Unpin the Panel"
 msgstr "Clique para Desafixar o Painel"
 
-#. 5.4/applet.js:139
+#. 5.4/applet.js:155
 msgid "Click to Pin the Panel"
 msgstr "Clique para Fixar o Painel"
 
@@ -53,6 +53,22 @@ msgstr "Ocultação Automática"
 #. 5.4->settings-schema.json->unpin-autohide-type->options
 msgid "Intelligent Hide"
 msgstr "Ocultação Inteligente"
+
+#. 5.4->settings-schema.json->pinned-at-startup->description
+msgid "At Startup"
+msgstr "Ao Iniciar"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Leave the panel as it is"
+msgstr "Manter o estado atual do painel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Pin the panel"
+msgstr "Fixar o painel"
+
+#. 5.4->settings-schema.json->pinned-at-startup->options
+msgid "Unpin the panel"
+msgstr "Desafixar o painel"
 
 #. 5.4->settings-schema.json->style->description
 msgid "Style"

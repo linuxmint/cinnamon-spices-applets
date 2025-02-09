@@ -12,9 +12,16 @@ then
   curl -s -o Symbola.tar.gz ${URLDOWNLOAD} && {
     tar xzf Symbola.tar.gz
     cp "Symbola.otf" "${USRFONTSDIR}"
-    fc-cache -f
+    [[ -f /etc/gentoo-release ]] || {
+      fc-cache -f
+    }
     rm -f Symbola.tar.gz
   }
+fi
+
+if [ -f /etc/gentoo-release ]
+then
+  fc-cache -f
 fi
 
 exit 0

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: power-profiles@rcalixte 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-06 22:34-0400\n"
-"PO-Revision-Date: 2024-07-13 03:25+0200\n"
+"POT-Creation-Date: 2024-09-15 16:04-0400\n"
+"PO-Revision-Date: 2024-09-17 02:17+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -18,19 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 5.4/applet.js:24
+#. 5.4/applet.js:25
 msgid "Power Saver"
 msgstr "Conservador"
 
-#: 5.4/applet.js:25
+#. 5.4/applet.js:26
 msgid "Balanced"
 msgstr "Equilibrat"
 
-#: 5.4/applet.js:26
+#. 5.4/applet.js:27
 msgid "Performance"
 msgstr "Rendiment"
 
-#: 5.4/applet.js:58 5.4/applet.js:64
+#. 5.4/applet.js:60
+msgid "Power Profiles Applet Error"
+msgstr "Error de la miniaplicació de perfils d'energia"
+
+#. 5.4/applet.js:61
+msgid ""
+"The system package 'power-profiles-daemon' is not installed.\n"
+"\n"
+"Please install it and reload the applet."
+msgstr ""
+"El paquet de sistema 'power-profiles-daemon' no està instal·lat.\n"
+"\n"
+"Si us plau, instal·leu-lo i recarregueu la miniaplicació."
+
+#. 5.4/applet.js:63
+msgid "Open README"
+msgstr "Obrir README"
+
+#. 5.4/applet.js:64
+msgid "Open Website"
+msgstr "Obrir Web"
+
+#. 5.4/applet.js:88 5.4/applet.js:94
 msgid ""
 "Please make sure the power-profiles-daemon package is installed and the "
 "service is running."
@@ -38,19 +60,19 @@ msgstr ""
 "Si us plau, assegureu-vos d'haver instal·lat power-profiles-daemon i de què "
 "el servei estigui en marxa."
 
-#: 5.4/applet.js:59
+#. 5.4/applet.js:89
 msgid "exception:"
 msgstr "excepció:"
 
-#: 5.4/applet.js:110
+#. 5.4/applet.js:138
 msgid "Current Profile:"
 msgstr "Perfil actual:"
 
-#: 5.4/applet.js:115
+#. 5.4/applet.js:143
 msgid "Performance Degraded:"
 msgstr "Rendiment degradat:"
 
-#: 5.4/applet.js:126
+#. 5.4/applet.js:154
 msgid "Active Profile Holds:"
 msgstr "Conservacions del perfil actiu:"
 
@@ -94,8 +116,8 @@ msgstr ""
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
 "If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be 'Performance' "
-"(or 'Balanced' on some systems).\n"
+"profile' keyboard shortcut is used, the next profile would be "
+"'Performance' (or 'Balanced' on some systems).\n"
 "\n"
 "If disabled, if the current profile is 'Power Saver' and the 'Previous "
 "profile' keyboard shortcut is used, the profile would not change."
@@ -117,3 +139,27 @@ msgid ""
 msgstr ""
 "Mostrarà el nou pla d'energia a la pantalla en haver canviat de pla "
 "mitjançant dreceres del teclat"
+
+#. 5.4->settings-schema.json->section2->description
+msgid "Appearance"
+msgstr "Aparença"
+
+#. 5.4->settings-schema.json->iconStyle->description
+msgid "Icon Style"
+msgstr "Estil de la icona"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Classic"
+msgstr "Clàssic"
+
+#. 5.4->settings-schema.json->iconStyle->options
+msgid "Papirus"
+msgstr "Papirus"
+
+#. 5.4->settings-schema.json->iconStyle->tooltip
+msgid ""
+"Choose the style of the applet's icon. This is used for the panel and the on-"
+"screen display."
+msgstr ""
+"Trieu l'estil de la icona de la miniaplicació. S'utilitzarà al tauler i a la "
+"visualització en pantalla."

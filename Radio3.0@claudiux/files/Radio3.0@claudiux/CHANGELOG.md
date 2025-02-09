@@ -1,3 +1,118 @@
+### 2.7.8~20250205
+  * Improves applet startup.
+
+### 2.7.7~20250204
+  * Code improvement.
+
+### 2.7.4~20250116
+  * mainloopTools library: improvements.
+
+### 2.7.3~20250114
+  * Increases the size of the stream buffer for improved listening comfort.
+  * Settings: Sets the default value for each multimedia key bind.
+
+### v2.7.2~20250112
+  * Now the desklet uses the mainloopTools library.
+  * Minor bugfixes.
+
+### v2.7.1~20250111
+  * Improved management of loops.
+  * Improved management of desklet.
+
+### v2.7.0~20250107
+  * You can choose the Quality of the downloaded album cover.
+  * Desklet AlbumArt3.0: New option in context menu to display the Album Art at full size. Middle-clicking on the desklet does the same.
+  * Bufixes in applet and in desklet.
+
+### v2.6.1~20250106
+  * Fixes desklet issue for Cinnamon 6.0.
+
+### v2.6.0~20250106
+  * Improved functioning (start-up).
+
+### v2.5.11~20250105
+  * Improved functioning.
+
+### v2.5.10~20250101
+  * Better monitoring of files and directories.
+
+### v2.5.9~20241231
+  * Album Art 3.0 becomes faster.
+  * Bugfixes.
+
+### v2.5.8~20241230
+  * Album Art 3.0 settings now accessible via the applet context menu.
+
+### v2.5.7~20241228
+  * New management of desklet displaying Album Art. Use context menu to show it.
+  * Better management of signals.
+  * No error reloading this applet.
+
+### v2.5.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v2.5.5~20241226
+  * Minor bugfixes.
+
+### v2.5.4~20241225
+  * Fixed context menu bugs.
+  * Fixed desklet bugs.
+
+### v2.5.3~20241220
+  * Fixed menu bugs (when the Category list is beside the Radio Station list).
+
+
+### v2.5.2~20241219
+  * Improved menu behavior. The menu no longer closes when you switch from the station list to the category list.
+  * Some bugfixes, also in desklet.
+
+### v2.5.1~20241217
+  * Fixes #6689.
+  * Improved menu display.
+  * Reintroduces the "Display the Station list beside the Category list" option.
+  * If this option is not checked, the first category is not ♥︎.
+  * Favorite stations are marked with a ♥︎ in the menu.
+
+### v2.5.0~20241215
+  * You can now set/unset favorite radio stations by clicking on ♥︎ in the menu while listening to them.
+  * The first category you see is ♥︎.
+  * Stations are displayed beside their category. (Forced.)
+
+### v2.4.0~20241212
+  * You can now import your stations from Radio++ if you use it. See Import tab in settings.
+
+### v2.3.3~20241205
+  * Clicking on the Album Art desklet updates the image.
+
+### v2.3.2~20241203
+  * Redesigned context menu.
+
+### v2.3.1~20241201
+  * Adds an optional fade effect to the Album Art. See the Behavior tab of this applet settings.
+
+### v2.3.0~20241129
+  * Adds the ability to display on desktop the Album (or Song) Art.
+  * Solves the problem with pulseaudio/pipewire.
+
+### v2.2.3~20241119
+  * Fixes #6583: Remove dummy device.
+  * Updates version number.
+
+### v2.2.2~20241114
+  * Soup2/Soup3: better detection.
+
+### v2.2.1~20241109
+  * Fixes a dependency error about pulseaudio/pipewire on LM.
+
+### v2.2.0~20241107
+  * Now can display Radio name and Song title on horizontal panels.
+
+### v2.1.4~20241012
+  * Fixes an OSD error.
+
+### v2.1.3~20240913
+  * Now the "unassigned" word can be translated. See #6415.
+
 ### v2.1.2~20240731
   * Adds "Easy Effects" entry in context menu when easyeffects is present.
   * To install easyeffects (for pipewire): `apt install easyeffects calf-plugins`

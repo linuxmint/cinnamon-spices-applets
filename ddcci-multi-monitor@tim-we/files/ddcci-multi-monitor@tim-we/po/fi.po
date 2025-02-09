@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-07-20 15:38-0400\n"
-"PO-Revision-Date: 2024-06-27 18:21+0300\n"
+"PO-Revision-Date: 2024-11-13 14:19+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -21,28 +21,29 @@ msgstr ""
 #. metadata.json->description
 #: applet.js:19
 msgid "Adjust monitor brightness via DDC/CI"
-msgstr "Säädä näytöjen kirkkautta DDC/CI:n avulla"
+msgstr "Kirkkauden säätö DDC/CI menetelmällä. Asenna myös ohjalma ddcutil"
 
 #: applet.js:162
 msgid "Detect displays"
-msgstr ""
+msgstr "Tunnista näytöt"
 
 #: applet.js:174
 msgid "Detecting displays..."
-msgstr ""
+msgstr "Tunnistetaan näyttöjä..."
 
 #: applet.js:263
 msgid "Failed to detect displays."
-msgstr ""
+msgstr "Näyttöjen tunnistaminen epäonnistui."
 
 #: applet.js:264
 msgid "Make sure you have ddcutil installed and the correct permissions."
 msgstr ""
+"Varmista, että sinulla on asennettuna ddcutil ja oikeat käyttöoikeudet."
 
 #: applet.js:265
 msgid "Error:"
-msgstr ""
+msgstr "Virhe:"
 
 #. metadata.json->name
 msgid "DDC/CI Multi-Monitor"
-msgstr "Näyttöjen kirkkaus DDC/CI"
+msgstr "DDC/CI Multi-Monitor"

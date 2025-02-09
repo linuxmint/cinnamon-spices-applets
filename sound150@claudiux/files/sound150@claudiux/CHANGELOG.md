@@ -1,3 +1,122 @@
+### v10.0.0~20250207
+  * OSD is now managed by an extension. (Cinnamon 6.4)
+  * This extension is named OSD150@claudiux and it is automatically installed by this applet.
+  * Added the ability to remove incompatible extensions. (See menu if they are installed. Nothing in menu? All is OK.)
+
+### v9.2.2~20250206
+  * Eliminates Cinnamon reload errors when a sound stream is playing.
+
+### v9.2.1~20250205
+  * Fixes #6854: Typo in settings.
+
+### v9.2.0~20250203
+  * Add custom commands (see Shortcuts tab in settings).
+  * Fixes #6847.
+
+### v9.1.0~20250203
+  * Functional improvement.
+  * When the volume step differs from 5, multimedia key shortcuts are automatically redefined.
+  * Code: Avoid using 'bind' calls.
+
+### v9.0.0~20250201
+  * Major changes for OSD and menu.
+  * OSD: Volume value can be displayed beside the volume bar.
+  * New option for the menu: Show Media-Optical icon. Don't show it to save space and visual comfort.
+  * Fixes #6830.
+
+### v8.0.3~20250130
+  * Improved OSD management.
+  * Fixes #6820.
+
+### v8.0.2~20250126
+  * Improved stability with Cinnamon 6.4: More tests on the existence of objects before acting on them.
+
+### v8.0.1~20250125
+  * Increases stability with Cinnamon 6.4: Removes Lang.bind() calls.
+
+### v8.0.0~20250119
+  * Major changes for OSD, icon scrolling and stability.
+  * Using mainloopTools library to manage loops.
+
+### v7.5.0~20250111
+  * Improved management of loops.
+
+### v7.4.5~20250108
+  * Improved seeker display in the menu.
+  * Duration calculation becomes faster. Note that many radio stations provide the total duration every 1 second, others every 5 seconds.
+
+### v7.4.4~20250105
+  * Improved functioning.
+
+### v7.4.3~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+
+### v7.4.2~20250104
+  * Fixes #6728: Corrects a regression in Cinnamon 6.2.
+  * Closes menu before restarting.
+
+### v7.4.1~20250103
+  * Fixes #6726: SMPlayer no longer freezes
+  * Displays the thumbnail of the video viewed with SMPlayer
+
+### v7.4.0~20241230
+  * Better compatibility with Cinnamon 6.4.
+  * Make optional suppressing unpleasant noise at computer shutdown. (See option in Sound tab of settings.)
+  * Improves management of objects and signals when restarting this applet.
+
+### v7.3.7~20241228
+  * Improved functionality (icons and album art)
+
+### v7.3.6~20241227
+  * No error at start-up. Fixes a nasty bug!
+
+### v7.3.5~20241226
+  * Bugfixes.
+
+### v7.3.4~20241221
+  * New option to fix volume at start-up. Value -1 means "No change". (Related to #6690.)
+
+### v7.3.3~20241212
+  * Improves compatibility with Cinnamon 6.4 removing "%" after volume level.
+
+### v7.3.2~20241206
+  * Fixes OSD problems.
+  * Fixes #6669.
+
+### v7.3.1~20241130
+  * Fixes #6655: The OSD is no longer displayed at startup if it is not required.
+
+
+### v7.3.0~20241128
+  * Add specific code for Cinnamon 6.2.
+
+
+### v7.2.4~20241116
+  * Fixes #6513: Always show mute icon when sound is muted.
+
+### v7.2.3~20241021
+  * Improvements to album art display.
+
+### v7.2.2~20241019
+  * Minor bug fix.
+
+### v7.2.1~20241018
+  * Some improvements to fix #6504.
+
+### v7.2.0~20241017
+  * Fixes #6504. (Improvements are planed.)
+
+### v7.1.1~20241016
+  * Avoids loud cracking sound at shutdown.
+  * Option removed. This is basic now.
+
+### v7.1.0~20241013
+  * Option to try to avoid loud cracking sound at shutdown.
+  * Fixes https://github.com/linuxmint/cinnamon/issues/12446.
+
+### v7.0.0~20241011
+  * Compatible with Cinnamon 6.4.
+
 ### v6.18.1~20240907
   * Fixes #6301.
 
