@@ -68,7 +68,22 @@ const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
 // how long to show the output icon when volume is adjusted during media playback.
 const OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
-//~ var OSD_HORIZONTAL = false;
+const IS_OSD150_ENABLED = () => {
+    var enabled = false;
+    const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+    for (let i = 0; i < enabledExtensions.length; i++) {
+        if (enabledExtensions[i] == EXTENSION_UUID) {
+            enabled = true;
+            break;
+        }
+    }
+    return enabled;
+}
+
+const IS_OSD150_INSTALLED = () => {
+    const OSD150_DIR = HOME_DIR+"/.local/share/cinnamon/extensions/"+EXTENSION_UUID;
+    return GLib.file_test(OSD150_DIR, GLib.FileTest.EXISTS);
+}
 
 function run_playerctld() {
     Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
@@ -78,50 +93,6 @@ function kill_playerctld() {
     Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/kill_playerctld.sh'");
 }
 
-//~ Main.osdWindowManager._showOsdWindow = function(monitorIndex, icon, label, level, maxLevel=1) {
-    //~ if (maxLevel>1.5) maxLevel=1.5;
-    //~ else if (maxLevel < 0.3) maxLevel=0.3;
-
-    //~ this._osdWindows[monitorIndex]._vbox.remove_all_children();
-    //~ this._osdWindows[monitorIndex]._hbox.remove_all_children();
-
-    //~ this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._icon);
-    //~ this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._vbox);
-    //~ if (!OSD_HORIZONTAL) {
-        //~ this._osdWindows[monitorIndex]._label.y_align = Clutter.ActorAlign.FILL;
-        //~ this._osdWindows[monitorIndex]._vbox.add_child(this._osdWindows[monitorIndex]._label);
-    //~ } else {
-        //~ this._osdWindows[monitorIndex]._label.y_align = Clutter.ActorAlign.CENTER;
-        //~ this._osdWindows[monitorIndex]._hbox.add_child(this._osdWindows[monitorIndex]._label);
-    //~ }
-    //~ this._osdWindows[monitorIndex]._level.maximum_value = maxLevel;
-    //~ this._osdWindows[monitorIndex]._vbox.add_child(this._osdWindows[monitorIndex]._level);
-
-    //~ this._osdWindows[monitorIndex].setIcon(icon);
-    //~ this._osdWindows[monitorIndex].setLabel(label);
-    //~ this._osdWindows[monitorIndex].setMaxLevel(maxLevel);
-    //~ this._osdWindows[monitorIndex].setLevel(level);
-    //~ this._osdWindows[monitorIndex].show();
-//~ }
-
-//~ Main.osdWindowManager.show = function(monitorIndex, icon, label, level, maxLevel, convertIndex) {
-    //~ if (this._osdWindows.length === 0)
-        //~ return;
-
-    //~ if (monitorIndex !== -1) {
-        //~ if (convertIndex)
-            //~ monitorIndex = convertGdkIndex(monitorIndex);
-        //~ for (let i = 0; i < this._osdWindows.length; i++) {
-            //~ if (i === monitorIndex)
-                //~ this._showOsdWindow(i, icon, label, level, maxLevel);
-            //~ else
-                //~ this._osdWindows[i].cancel();
-        //~ }
-    //~ } else {
-        //~ for (let i = 0; i < this._osdWindows.length; i++)
-            //~ this._showOsdWindow(i, icon, label, level, maxLevel);
-    //~ }
-//~ }
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -304,6 +275,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.applet = applet;
         this.oldValue = startLevel;
 
+        this.isMic = tooltip == _("Microphone"); //???
+
         Gtk.IconTheme.get_default().append_search_path("./icons");
 
         if (tooltip)
@@ -441,11 +414,13 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             _volume_str = ""+rounded_volume+PERCENT_CHAR;
         if (this.applet.showBarLevel === true)
             _bar_level =  rounded_volume;
-        let _maxLevel = Math.round(this.applet._volumeMax/this.applet._volumeNorm * 100) / 100;
-        //~ OSD_HORIZONTAL = this.OSDhorizontal;
+        let _maxLevel = (this.isMic) ? 1 : Math.round(this.applet._volumeMax/this.applet._volumeNorm * 100) / 100;
 
-        if (this.applet.showOSD && rounded_volume != Math.round(this.oldValue)) {
-            Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+        if (this.applet.showOSD && (rounded_volume != Math.round(this.oldValue) || this.isMic)) {
+            if (IS_OSD150_ENABLED())
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+            else
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
         }
 
         if (this.stream.is_muted !== muted)
@@ -569,6 +544,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         let icon;
         if (value < 0.005) {
             icon = "muted";
+            value = 0;
         } else {
             let n2 = Math.floor(300 * value)/100;
             if (this.isMic) {
@@ -1875,7 +1851,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.startingUp = true;
 
-        this.install_OSD150();
+        //~ this.install_OSD150();
 
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.settings.bind("showMediaOptical", "showMediaOptical", () => {
@@ -1894,8 +1870,13 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("showBarLevel", "showBarLevel");
         this.settings.bind("showVolumeValue", "showVolumeValue");
-        this.settings.bind("OSDhorizontal","OSDhorizontal");
-        //~ OSD_HORIZONTAL = this.OSDhorizontal;
+
+        this.settings.bind("OSDhorizontal","OSDhorizontal",
+            () => {
+                this.on_OSDhorizontal_changed();
+            }
+        );
+        this.on_OSDhorizontal_changed();
 
         this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
@@ -2164,6 +2145,56 @@ class Sound150Applet extends Applet.TextIconApplet {
         appsys.connect("installed-changed", () => this._updateLaunchPlayer());
 
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
+    }
+
+    on_OSDhorizontal_changed() {
+        if (!this.OSDhorizontal) return;
+        if (IS_OSD150_ENABLED()) {
+            return;
+        } else {
+            const Button2 = _("Cancel");
+            const summary = _("Enhanced Sound applet");
+            var Button1, body;
+            if (IS_OSD150_INSTALLED()) {
+                Button1 = _("Enable the OSD150 extension");
+                body = _("To obtain an horizontal OSD, you need to enable the OSD150 extension.");
+                Util.spawnCommandLineAsyncIO(
+                    `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
+                    (stdout, stderr, exitCode) => {
+                        if (exitCode === 0) {
+                            logDebug("stdout: "+stdout+" "+ typeof stdout);
+                            if (stdout.startsWith("opt1")) {
+                                this.install_OSD150();
+                            } else {
+                                this.OSDhorizontal = false;
+                            }
+                        } else {
+                            this.OSDhorizontal = false;
+                        }
+                    },
+                    {}
+                );
+            } else {
+                Button1 = _("Download the OSD150 extension");
+                body = _("To obtain an horizontal OSD, you need to download the OSD150 extension.\nClick on the Download button then search for OSD150 and select the ⬇ button.");
+                Util.spawnCommandLineAsyncIO(
+                    `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
+                    (stdout, stderr, exitCode) => {
+                        if (exitCode === 0) {
+                            logDebug("stdout: "+stdout+" "+ typeof stdout);
+                            if (stdout.startsWith("opt1")) {
+                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                            } else {
+                                this.OSDhorizontal = false;
+                            }
+                        } else {
+                            this.OSDhorizontal = false;
+                        }
+                    },
+                    {}
+                );
+            }
+        }
     }
 
     on_volumeSoundFile_changed() {
@@ -2579,8 +2610,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ setTimeout(() => { this.volume = old_volume; logDebug("this.volume: "+this.volume); }, 2100);
         remove_all_sources();
 
-        if (deleteConfig)
-            this.uninstall_OSD150();
+        //~ if (deleteConfig)
+            //~ this.uninstall_OSD150();
         //~ logDebug("old_volume: "+old_volume);
         //~ this.volume = old_volume;
         //~ logDebug("playerctld killed");
@@ -2646,9 +2677,11 @@ class Sound150Applet extends Applet.TextIconApplet {
                     _volume_str = ""+volume+PERCENT_CHAR
                 if (this.showBarLevel === true)
                     _bar_level =  volume;
-                //~ OSD_HORIZONTAL = this.OSDhorizontal;
 
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                if (IS_OSD150_ENABLED())
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                else
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
             }
             //~ this.setIcon();
         } else {
@@ -2681,8 +2714,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                     _volume_str = ""+volume+PERCENT_CHAR
                 if (this.showBarLevel === true)
                     _bar_level =  volume;
-                //~ OSD_HORIZONTAL = this.OSDhorizontal;
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                if (IS_OSD150_ENABLED())
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                else
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
             }
         }
     }
@@ -2828,11 +2863,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this.showBarLevel === true)
                 _bar_level = volume;
             let _maxLevel = Math.round(this._volumeMax/this._volumeNorm * 100) / 100;
-            //~ OSD_HORIZONTAL = this.OSDhorizontal;
             if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
-                //~ Main.osdWindowManager.hideAll();
                 try {
-                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                    if (IS_OSD150_ENABLED())
+                        Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                    else
+                        Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
                 } catch(e) {}
             }
             this.old_volume = ""+volume+"%";
@@ -3760,13 +3796,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
 
         // Put the extension code at the right place:
-        const extension_source_path = APPLET_DIR + "/extension/" + EXTENSION_UUID;
-        if (GLib.find_program_in_path("cinnamon-install-spice")) {
-          Util.spawnCommandLineAsync("cinnamon-install-spice extension "+extension_source_path);
-        } else {
-          const extension_target_path = HOME_DIR+"/.local/share/cinnamon/extensions/"
-          Util.spawnCommandLineAsync("cp -a -f "+extension_source_path+" "+extension_target_path);
-        }
+        //~ const extension_source_path = APPLET_DIR + "/extension/" + EXTENSION_UUID;
+        //~ if (GLib.find_program_in_path("cinnamon-install-spice")) {
+          //~ Util.spawnCommandLineAsync("cinnamon-install-spice extension "+extension_source_path);
+        //~ } else {
+          //~ const extension_target_path = HOME_DIR+"/.local/share/cinnamon/extensions/"
+          //~ Util.spawnCommandLineAsync("cp -a -f "+extension_source_path+" "+extension_target_path);
+        //~ }
 
         if (extensionEEKline.length === 0) {
             // OSD150 must be installed.
@@ -3777,20 +3813,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ Extension.reloadExtension(EXTENSION_UUID, Extension.Type.EXTENSION);
     }
 
-    uninstall_OSD150() {
-        var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
-        //~ var extensionEEKline = "";
-        for (let i = 0; i < enabledExtensions.length; i++){
-          let name = enabledExtensions[i];
-          //~ logDebug("Desklet name: "+name);
-          if (name == EXTENSION_UUID) {
-            //~ extensionEEKline = ""+enabledExtensions[i];
-            enabledExtensions.splice(i, 1); //useless
-            //~ break;
-          }
-        }
-        global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
-    }
+    //~ uninstall_OSD150() {
+        //~ var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        //~ for (let i = 0; i < enabledExtensions.length; i++){
+          //~ let name = enabledExtensions[i];
+          //~ if (name == EXTENSION_UUID) {
+            //~ enabledExtensions.splice(i, 1);
+          //~ }
+        //~ }
+        //~ global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+    //~ }
 
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");

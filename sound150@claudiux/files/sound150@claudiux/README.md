@@ -17,8 +17,9 @@ This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound a
 
   * **The volume step can be redefined** (from 1% to 10%).
   * **All multiples of 25% (or only 100%) can be magnetized.**
-  * The **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
-  * The **OSD** is compatible with Cinnamon 6.4 (use of horizontal OSD is not recommended).
+  * Before Cinnamon 6.4, the **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
+  * The **OSD** is compatible with Cinnamon 6.4 (use of the 'Horizontal OSD' extension, or 'OSD with numbers' extension, is not recommended).
+  * From Cinnamon 6.4, having a horizontal OSD requires the [OSD150@claudiux](https://cinnamon-spices.linuxmint.com/extensions/view/106) extension. Notifications are available to help you install and enable the OSD150@claudiux extension.
 
 **The song's cover art** can be displayed when it is embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
 
