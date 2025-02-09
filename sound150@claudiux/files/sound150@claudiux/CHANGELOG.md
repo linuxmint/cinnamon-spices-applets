@@ -1,3 +1,8 @@
+### v10.1.0~20250209
+  * Changes required by the Linux Mint - Cinnamon team.
+  * From now on, having a horizontal OSD requires the OSD150@claudiux extension.
+  * Notifications are available to help you install and enable the OSD150@claudiux extension.
+
 ### v10.0.0~20250207
   * OSD is now managed by an extension. (Cinnamon 6.4)
   * This extension is named OSD150@claudiux and it is automatically installed by this applet.
