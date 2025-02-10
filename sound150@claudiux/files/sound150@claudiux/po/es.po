@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-09 21:16+0100\n"
-"PO-Revision-Date: 2025-02-03 16:51-0300\n"
+"PO-Revision-Date: 2025-02-10 11:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -247,7 +247,7 @@ msgstr "Comandos"
 
 #. 6.4/applet.js:2155
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. metadata.json->name
 #. 6.4/applet.js:2156
@@ -256,26 +256,30 @@ msgstr "Applet de sonido mejorado"
 
 #. 6.4/applet.js:2159
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Activar la extensión OSD150"
 
 #. 6.4/applet.js:2160
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Para obtener un OSD horizontal, es necesario activar la extensión OSD150."
 
 #. 6.4/applet.js:2178
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Descargar la extensión OSD150"
 
 #. 6.4/applet.js:2179
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Para obtener un OSD horizontal, necesita descargar la extensión OSD150.\n"
+"Haga clic en el botón Descargar y, a continuación, busque OSD150 y "
+"seleccione el botón ⬇."
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:3301
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "Eliminar la extensión OsdWithNumber"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -1039,9 +1043,8 @@ msgid "Scrolling"
 msgstr "Desplazamiento"
 
 #. 6.4->settings-schema.json->sectionSound5->title
-#, fuzzy
 msgid "Remove incompatible extensions"
-msgstr "Eliminar los applets incompatibles"
+msgstr "Eliminar extensiones incompatibles"
 
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
