@@ -1084,18 +1084,11 @@ class SpicesUpdate extends IconApplet {
                 if (!a["isunprotected"]) { // We protect this Spice: no update requested for it.
                     this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
                 }
-                if (a["name"] === "AlbumArt3.0@claudiux")
-                    this.unprotectedList[type].push({
-                        "name": a["name"],
-                        "isunprotected": false,
-                        "requestnewdownload": false
-                    });
-                else
-                    this.unprotectedList[type].push({
-                        "name": a["name"],
-                        "isunprotected": a["isunprotected"] && !isSystemProtected,
-                        "requestnewdownload": false
-                    });
+                this.unprotectedList[type].push({
+                    "name": a["name"],
+                    "isunprotected": a["isunprotected"] && !isSystemProtected,
+                    "requestnewdownload": false
+                });
             }
         }
 
@@ -1127,8 +1120,6 @@ class SpicesUpdate extends IconApplet {
             var _unprotected = [];
 
             this.unprotectedList[type].forEach( s => {
-                if (s["name"] === "AlbumArt3.0@claudiux")
-                    s["isunprotected"] = false;
                 if (s["isunprotected"])
                     _unprotected.push(s);
                 else

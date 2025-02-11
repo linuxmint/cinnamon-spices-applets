@@ -1,3 +1,6 @@
+### v7.7.0~20250211
+  * Consider AlbumArt3.0@claudiux as a common desklet.
+
 ### v7.6.7~20250204
   * Avoids the use of Array.toString() in the code.
 
