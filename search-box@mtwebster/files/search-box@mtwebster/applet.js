@@ -1,6 +1,4 @@
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
@@ -49,17 +47,17 @@ SearchBoxApplet.prototype = {
             this.searchIcon = new St.Icon({icon_name: "edit-find", icon_size: 24, icon_type: St.IconType.FULLCOLOR});
             this._searchIconClickedId = 0;
 
-            this.settings.bind("show-provider", "show_provider", this._reload);
-            this.settings.bind("selected-provider", "selected_provider", this._reload);
+            this.settings.bind("show-provider", "show_provider", () => { this._reload() });
+            this.settings.bind("selected-provider", "selected_provider", () => { this._reload() });
             this.already_changed = false;
-            this.settings.bind("providers", "providers", this._on_providers_changed);
-            this.settings.bind("reset-after-search", "reset_after_search", this._reload);
+            this.settings.bind("providers", "providers", () => { this._on_providers_changed() });
+            this.settings.bind("reset-after-search", "reset_after_search", () => { this._reload() });
             this.settings.bind("use-custom-provider", "use_custom_provider");
             this.settings.bind("custom-provider-label", "custom_provider_label");
             this.settings.bind("custom-provider-url", "custom_provider_url");
-            this.settings.bind("custom-keybinding", "custom_keybinding", this.on_keybinding_changed);
-            this.settings.bind("background-color", "bgd_color", this._set_searchEntry_style);
-            this.settings.bind("text-color", "txt_color", this._set_searchEntry_style);
+            this.settings.bind("custom-keybinding", "custom_keybinding", () => { this.on_keybinding_changed() });
+            this.settings.bind("background-color", "bgd_color", () => { this._set_searchEntry_style() });
+            this.settings.bind("text-color", "txt_color", () => { this._set_searchEntry_style() });
 
             this.set_applet_icon_symbolic_name("edit-find-symbolic");
             this._orientation = orientation;
@@ -80,7 +78,7 @@ SearchBoxApplet.prototype = {
 
             this.buttonbox = new St.BoxLayout();
             let button = new St.Button({ child: this.searchIcon });
-            button.connect("clicked", Lang.bind(this, this._search));
+            button.connect("clicked", () => { this._search() });
             this.buttonbox.add_actor(button);
             this._searchArea.add(this.buttonbox);
             this.searchEntry = new St.Entry({ name: "menu-search-entry",
@@ -93,8 +91,8 @@ SearchBoxApplet.prototype = {
             this.searchBox.add_actor(this.searchEntry);
             this.searchActive = false;
             this.searchEntryText = this.searchEntry.clutter_text;
-            this.searchEntryText.connect("text-changed", Lang.bind(this, this._onSearchTextChanged));
-            this.searchEntryText.connect("key-press-event", Lang.bind(this, this._onMenuKeyPress));
+            this.searchEntryText.connect("text-changed", () => { this._onSearchTextChanged() });
+            this.searchEntryText.connect("key-press-event", (actor, event) => { this._onMenuKeyPress(actor, event) });
             this._previousSearchPattern = "";
 
             this.on_keybinding_changed();
@@ -223,15 +221,15 @@ SearchBoxApplet.prototype = {
     },
 
     _onSearchTextChanged: function () {
-        this.searchActive = this.searchEntry.get_text().length > 0; // != "";
+        this.searchActive = this.searchEntry.get_text().length > 0;
         if (this.searchActive) {
             this.searchEntry.set_secondary_icon(this._searchActiveIcon);
 
             if (this._searchIconClickedId == 0) {
                 this._searchIconClickedId = this.searchEntry.connect("secondary-icon-clicked",
-                    Lang.bind(this, function() {
+                    () => {
                         this.resetSearch();
-                    }));
+                    });
             }
         } else {
             if (this._searchIconClickedId > 0)
@@ -244,7 +242,7 @@ SearchBoxApplet.prototype = {
     },
 
     on_keybinding_changed: function() {
-        Main.keybindingManager.addHotKey("must-be-unique-id", this.custom_keybinding, Lang.bind(this, this.on_hotkey_triggered));
+        Main.keybindingManager.addHotKey("must-be-unique-id", this.custom_keybinding, () => { this.on_hotkey_triggered() });
     },
 
     on_hotkey_triggered: function() {
@@ -271,9 +269,8 @@ SearchBoxApplet.prototype = {
         if (button === 1) {
             this.on_applet_clicked(event);
         } else if (button === 2) {
-            return false; //this.on_applet_middle_clicked(event);
+            return false;
         } else if (button === 3) {
-            //this.finalizeContextMenu();
             if (this._applet_context_menu._getMenuItems().length > 0) {
                 this._applet_context_menu.toggle();
                 if (this._applet_context_menu.isOpen) {
