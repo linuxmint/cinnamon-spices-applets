@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-09-27 21:38+0200\n"
-"PO-Revision-Date: 2024-09-27 21:43+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-02-12 03:07+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -40,42 +40,42 @@ msgstr "aujourd'hui"
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:516
 msgid "Yesterday"
-msgstr "hier"
+msgstr "depuis hier"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:517
 msgid "3 days ago"
-msgstr "3 jours"
+msgstr "3 derniers jours"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:518
 msgid "5 days ago"
-msgstr "5 jours"
+msgstr "5 derniers jours"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:519
 msgid "7 days ago"
-msgstr "7 jours"
+msgstr "7 derniers jours"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:520
 msgid "10 days ago"
-msgstr "10 jours"
+msgstr "10 derniers jours"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:521
 msgid "14 days ago"
-msgstr "14 jours"
+msgstr "14 derniers jours"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:522
 msgid "30 days ago"
-msgstr "30 jours"
+msgstr "30 derniers jours"
 
 #. settings-schema.json->bytes_start_time->options
 #. applet.js:523
 msgid "Custom date"
-msgstr "la date choisie"
+msgstr "la date personnalisée"
 
 #. settings-schema.json->gui_start->description
 #. applet.js:560
