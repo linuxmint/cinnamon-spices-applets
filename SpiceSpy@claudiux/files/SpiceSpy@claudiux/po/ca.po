@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-27 10:32+0100\n"
-"PO-Revision-Date: 2024-11-20 02:07+0100\n"
+"PO-Revision-Date: 2025-02-13 20:49+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -20,19 +20,19 @@ msgstr ""
 
 #. applet.js:127
 msgid "score"
-msgstr ""
+msgstr "puntuació"
 
 #. applet.js:139
 msgid "comments"
-msgstr ""
+msgstr "comentaris"
 
 #. applet.js:152
 msgid "recent issues"
-msgstr ""
+msgstr "incidències recents"
 
 #. applet.js:164
 msgid "translations"
-msgstr ""
+msgstr "traduccions"
 
 #. applet.js:737
 msgid "Mark all as read"
@@ -84,7 +84,7 @@ msgstr "Interval d'actualització"
 
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
-msgstr ""
+msgstr "hores"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
