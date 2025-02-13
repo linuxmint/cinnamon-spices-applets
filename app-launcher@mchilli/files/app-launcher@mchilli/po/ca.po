@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-09-05 17:00+0200\n"
-"Last-Translator: Odyssey <odysseyhyd@gmail.com\n"
+"PO-Revision-Date: 2025-02-13 20:52+0100\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -196,7 +196,7 @@ msgstr "%s equival al nom de la vostra aplicació"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Activar dreceres del teclat"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -208,11 +208,11 @@ msgstr "Assignar dreceres per mostrar el menú"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Menú a la posició del ratolí"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
-msgstr ""
+msgstr "Mostra el menú al costat del cursor en ser iniciat per una drecera"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
