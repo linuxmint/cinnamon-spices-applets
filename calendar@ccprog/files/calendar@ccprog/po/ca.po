@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-22 17:45-0500\n"
-"PO-Revision-Date: 2024-07-08 17:20+0200\n"
+"PO-Revision-Date: 2025-02-13 20:56+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -1334,37 +1334,33 @@ msgid "Timezone"
 msgstr "Zona horària"
 
 #. 5.2->settings-schema.json->custom-tooltip-format->description
-#, fuzzy
 msgid "Date format for tooltip"
-msgstr "Format de la data"
+msgstr "Format de la data del consell informatiu"
 
 #. 5.2->settings-schema.json->custom-tooltip-format->tooltip
-#, fuzzy
 msgid "Set your custom tooltip format here."
 msgstr "Assigneu el vostre format personalitzat aquí."
 
 #. 5.2->settings-schema.json->country->options
 msgid "Cyprus"
-msgstr ""
+msgstr "Xipre"
 
 #. 5.2->settings-schema.json->country->options
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #. 5.2->settings-schema.json->country->options
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #. 5.2->settings-schema.json->region_bel->options
 msgid "Brussels"
-msgstr ""
+msgstr "Brussel·les"
 
 #. 5.2->settings-schema.json->region_bel->options
-#, fuzzy
 msgid "Flemish Region"
-msgstr "Regió"
+msgstr "Regió Flamenca"
 
 #. 5.2->settings-schema.json->region_bel->options
-#, fuzzy
 msgid "Walloon Region"
-msgstr "Regió"
+msgstr "Regió Valona"

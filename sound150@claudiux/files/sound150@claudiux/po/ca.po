@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-09 21:16+0100\n"
-"PO-Revision-Date: 2024-10-28 03:00+0100\n"
+"PO-Revision-Date: 2025-02-13 21:27+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -53,7 +53,7 @@ msgstr "Silenciar"
 
 #. 6.2/applet.js:1018 6.4/applet.js:1038
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #. 6.2/applet.js:1146 6.2/applet.js:1443 6.2/applet.js:1446 6.2/applet.js:1449
 #. 6.2/applet.js:1483 6.2/applet.js:1492 6.2/applet.js:2927 6.2/applet.js:2961
@@ -236,18 +236,17 @@ msgid "Install playerctl"
 msgstr "Instal·la playerctl"
 
 #. 6.4/applet.js:184 6.4/applet.js:1867 6.4/applet.js:1869
-#, fuzzy
 msgid "%"
-msgstr "9%"
+msgstr "%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.4/applet.js:2118
 msgid "Commands"
-msgstr ""
+msgstr "Ordres"
 
 #. 6.4/applet.js:2155
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·la"
 
 #. metadata.json->name
 #. 6.4/applet.js:2156
@@ -256,26 +255,28 @@ msgstr "Miniaplicació de so millorat"
 
 #. 6.4/applet.js:2159
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Activa l'extensió OSD150"
 
 #. 6.4/applet.js:2160
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
-msgstr ""
+msgstr "Per a obtenir l'OSD horitzontal, cal que activeu l'extensió OSD150."
 
 #. 6.4/applet.js:2178
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Descarrega l'extensió OSD150"
 
 #. 6.4/applet.js:2179
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Per a obtenir una OSD horitzontal, cal que descarregueu l'extensió OSD150.\n"
+"Feu clic al botó de descàrrega, busqueu OSD150 i premeu el botó ⬇."
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:3301
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "Elimina l'extensió OsdWithNumber"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -616,12 +617,12 @@ msgstr "Volum màxim (%)"
 #. 6.2->settings-schema.json->startupVolume->description
 #. 6.4->settings-schema.json->startupVolume->description
 msgid "Volume at start-up (%)"
-msgstr ""
+msgstr "Volum en iniciar (%)"
 
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr ""
+msgstr "El valor -1 significa \"Sense canvi\""
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -819,7 +820,7 @@ msgstr "Mostrar sempre 'Silenciar l'entrada' al menú contextual."
 #. 6.2->settings-schema.json->muteSoundOnClosing->description
 #. 6.4->settings-schema.json->muteSoundOnClosing->description
 msgid "Mute sound on closing"
-msgstr ""
+msgstr "Silencia el so en tancar"
 
 #. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
 #. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
@@ -829,6 +830,10 @@ msgid ""
 "applet's icon.\n"
 "It is NOT recommended to check this box."
 msgstr ""
+"Si noteu un soroll molest en tancar, marqueu aquesta casella.\n"
+"Necessitareu restaurar el so en iniciar, fent clic amb el botó del mig a la "
+"icona d'aquesta miniaplicació.\n"
+"És recomanable NO marcar aquesta casella."
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
@@ -1014,70 +1019,67 @@ msgstr ""
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Aparença de la icona"
 
 #. 6.4->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Icon colors"
-msgstr "Color de la icona: 0%-100%"
+msgstr "Colors de la icona"
 
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Desplaçament"
 
 #. 6.4->settings-schema.json->sectionSound5->title
-#, fuzzy
 msgid "Remove incompatible extensions"
-msgstr "Eliminar miniaplicacions incompatibles"
+msgstr "Eliminar extensions incompatibles"
 
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Ordres personalitzades"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Mostra la icona de mitjans òptics"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Inverteix l'efecte de desplaçament"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr ""
+msgstr "Controla si es mostren o no les tecles multimèdia "
 
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "Mostrar el nivell de volum a l'OSD a l'inici"
+msgstr "Mostra el nivell de volum a l'OSD"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Mostra '%' a l'OSD"
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Mostrar el nivell de volum a l'OSD a l'inici"
+msgstr "Mostra l'OSD horitzontal"
 
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "Mostrar el nivell de volum a l'OSD a l'inici"
+msgstr "Mostrar el nivell de la barra a l'OSD"
 
 #. 6.4->settings-schema.json->custom-commands-label->description
 msgid ""
 "These commands will appear in the context menu once you've reloaded this "
 "applet."
 msgstr ""
+"Aquestes ordres apareixeran al menú contextual un cop hagueu recarregat la "
+"miniaplicació."
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Title"
-msgstr ""
+msgstr "Títol"
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Ordre"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"

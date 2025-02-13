@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-05 10:49+0100\n"
-"PO-Revision-Date: 2024-09-07 06:32+0200\n"
+"PO-Revision-Date: 2025-02-13 20:48+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -129,7 +129,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:382
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Si us plau, instal·leu els paquets següents:"
 
 #. lib/checkDependencies.js:386 lib/checkDependencies.js:396
 msgid "Some dependencies are not installed!"
@@ -137,7 +137,7 @@ msgstr "Algunes dependències no estan instal·lades!"
 
 #. lib/checkDependencies.js:398
 msgid "Install these packages now"
-msgstr ""
+msgstr "Instal·leu aquests paquets ara"
 
 #. lib/util.js:244
 #, javascript-format
@@ -203,16 +203,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Autor. JEleniel: suport per a targetes gràfiques Nvidia"
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatura"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventiladors"
+msgstr "🤂 Ventilador"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -697,9 +696,8 @@ msgstr ""
 "Per a valors alts o crítics, consulteu el manual del vostre disc."
 
 #. settings-schema.json->strictly_positive_fan->description
-#, fuzzy
 msgid "Show only positive or zero values"
-msgstr "Mostrar només valors estrictament positius"
+msgstr "Mostrar només valors positius o zero"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""

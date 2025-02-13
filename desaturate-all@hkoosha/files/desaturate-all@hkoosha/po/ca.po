@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-22 12:52-0500\n"
-"PO-Revision-Date: 2024-07-05 00:42+0200\n"
+"PO-Revision-Date: 2025-02-13 20:57+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Desaturate All"
-msgstr "Desaturar Tot"
+msgstr "Dessaturar Tot"
 
 #. metadata.json->description
 msgid "Convert your screen to grayscale."
@@ -29,4 +29,4 @@ msgstr "Converteix la teva pantalla a escala de grisos."
 
 #. settings-schema.json->keybinding->description
 msgid "Shortcut to toggle grayscale"
-msgstr ""
+msgstr "Drecera del teclat per alternar l'escala de grisos"

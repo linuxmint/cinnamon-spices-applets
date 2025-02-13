@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-02 12:30-0500\n"
-"PO-Revision-Date: 2024-07-13 02:48+0200\n"
+"PO-Revision-Date: 2025-02-13 20:45+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -95,7 +95,7 @@ msgstr ""
 
 #. settings-schema.json->general-page->title
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
@@ -110,9 +110,8 @@ msgid "Panel Button Actions"
 msgstr "Accions dels botons del tauler"
 
 #. settings-schema.json->hotkey-settings->title
-#, fuzzy
 msgid "Translation action hotkeys"
-msgstr "Motor de traduccions"
+msgstr "Dreceres d'acció de traducció"
 
 #. settings-schema.json->translate-engine->options
 msgid "Apertium"
@@ -173,19 +172,18 @@ msgid "Clipboard"
 msgstr "Porta-papers"
 
 #. settings-schema.json->left-auto-paste->description
-#, fuzzy
 msgid "Automatically translate on left click"
-msgstr "Enganxar i traduir automàticament en fer clic"
+msgstr "Tradueix automàticament en fer clic esquerre"
 
 #. settings-schema.json->left-auto-paste->tooltip
-#, fuzzy
 msgid ""
 "Automatically translate the selection/clipboard contents when opening the "
 "Panel Translator popup window using a left click on the Panel Translator "
 "button"
 msgstr ""
-"Enganxa la selecció / el contingut del porta-papers i el tradueix a la "
-"finestra emergent quan es clica sobre el botó del traductor al tauler"
+"Tradueix automàticament el contingut de la selecció o el porta-retalls en "
+"obrir la finestra emergent del traductor en fer clic esquerre al botó del "
+"tauler"
 
 #. settings-schema.json->left-auto-play->description
 msgid "Automatically play the translation on left click"

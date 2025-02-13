@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-04 14:43+0100\n"
-"PO-Revision-Date: 2024-11-20 02:06+0100\n"
+"PO-Revision-Date: 2025-02-13 20:41+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -38,12 +38,12 @@ msgstr "Canviar d'usuari"
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
 #. 5.4/applet.js:322 5.4/applet.js:340
 msgid "Performing automatic updates"
-msgstr ""
+msgstr "Actualització automàtica en curs"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
 #. 5.4/applet.js:322 5.4/applet.js:340
 msgid "Please wait"
-msgstr ""
+msgstr "Si us plau, espereu"
 
 #. 5.4/applet.js:249 5.4/applet.js:256
 msgid "Log Out"
