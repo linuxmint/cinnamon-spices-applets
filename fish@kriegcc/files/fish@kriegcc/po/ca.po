@@ -144,7 +144,7 @@ msgstr "Preferències"
 
 #. settings-schema.json->pageAdvancedSettings->title
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Opcions avançades"
 
 #. settings-schema.json->pageHelp->title
 msgid "Help"
@@ -152,7 +152,7 @@ msgstr "Ajuda"
 
 #. settings-schema.json->pageAbout->title
 msgid "About"
-msgstr "Quant a..."
+msgstr "Quant a"
 
 #. settings-schema.json->sectionGeneral->title
 msgid "General"
@@ -163,23 +163,21 @@ msgid "Animation"
 msgstr "Animació"
 
 #. settings-schema.json->sectionAdvancedAnimationSettings->title
-#, fuzzy
 msgid "Animation Settings"
-msgstr "Animació"
+msgstr "Configuració de l'animació"
 
 #. settings-schema.json->sectionAdvancedAnimationSettingsMargin->title
-#, fuzzy
 msgid "Animation Margin"
-msgstr "Animació"
+msgstr "Marge de l'animació"
 
 #. settings-
 #. schema.json->sectionAdvancedAnimationSettingsCustomDimension->title
 msgid "Animation Custom Dimension"
-msgstr ""
+msgstr "Mida personalitzada de l'animació"
 
 #. settings-schema.json->sectionDeveloperOptions->title
 msgid "Developer Options"
-msgstr ""
+msgstr "Opcions del desenvolupador"
 
 #. settings-schema.json->sectionInstruction->title
 msgid "Manual"
@@ -261,18 +259,16 @@ msgstr ""
 "fotograma de l'animació."
 
 #. settings-schema.json->keyFlipSidewaysOnVerticalPanel->description
-#, fuzzy
 msgid "Flip sideways on vertical panels"
-msgstr "Rotar als taulers verticals"
+msgstr "Rotar de costat als taulers verticals"
 
 #. settings-schema.json->keyFlipSidewaysOnVerticalPanel->tooltip
-#, fuzzy
 msgid ""
 "Select this option to rotate the applet image sideways when you add the "
 "applet to a vertical panel."
 msgstr ""
-"Seleccioneu aquesta opció per a ajustar la rotació de la imatge de la "
-"miniaplicació als taulers verticals."
+"Seleccioneu aquesta opció per a rotar la imatge de costat en afegir la "
+"miniaplicació a un tauler vertical."
 
 #. settings-schema.json->keyImagePath->tooltip
 msgid ""
@@ -285,144 +281,148 @@ msgstr ""
 
 #. settings-schema.json->keyAnimationScalingMode->description
 msgid "Scaling Mode"
-msgstr ""
+msgstr "Mode d'escalat"
 
 #. settings-schema.json->keyAnimationScalingMode->options
 msgid "Auto-fit"
-msgstr ""
+msgstr "Ajustament automàtic"
 
 #. settings-schema.json->keyAnimationScalingMode->options
 msgid "Preserve original size"
-msgstr ""
+msgstr "Preserva la mida original"
 
 #. settings-schema.json->keyAnimationScalingMode->options
 msgid "Custom"
-msgstr ""
+msgstr "Personalitzat"
 
 #. settings-schema.json->keyAnimationScalingMode->tooltip
 msgid "Select how the animation image in the panel should be scaled."
-msgstr ""
+msgstr "Seleccioneu com escalarà l'animació de la imatge al tauler."
 
 #. settings-schema.json->keyAnimationMarginHint->description
 msgid ""
 "Margin options apply only when the 'auto-fit' option is enabled. For other "
 "settings, margins appear if the animation is smaller than the panel."
 msgstr ""
+"Les opcions de marge s'apliquen només quan l'ajustament automàtic està "
+"activat. Per a altres opcions, els marges apareixen si l'animació és més "
+"petita que el tauler."
 
 #. settings-schema.json->keyAnimationAutoMargin->description
 msgid "Auto-margin"
-msgstr ""
+msgstr "Marge automàtic"
 
 #. settings-schema.json->keyAnimationAutoMargin->tooltip
 msgid "Check this to use the default margin from theme."
-msgstr ""
+msgstr "Marqueu la opció per a usar el marge per defecte del tema."
 
 #. settings-schema.json->keyAnimationMargin->units
 #. settings-schema.json->keyAnimationHeight->units
 #. settings-schema.json->keyAnimationWidth->units
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. settings-schema.json->keyAnimationMargin->description
 msgid "Margin around the animation frame"
-msgstr ""
+msgstr "Marge al voltant de l'animació"
 
 #. settings-schema.json->keyAnimationMargin->tooltip
-#, fuzzy
 msgid ""
 "Use this spin box to specify the margin around the animation frame shown in "
 "the panel."
-msgstr ""
-"Utilitzeu aquesta casella per especificar el número de fotogrames de "
-"l'animació."
+msgstr "Especifiqueu el marge al voltant de l'animació mostrada al tauler."
 
 #. settings-schema.json->keyAnimationHeight->description
 msgid "Height"
-msgstr ""
+msgstr "Alçada"
 
 #. settings-schema.json->keyAnimationHeight->tooltip
-#, fuzzy
 msgid "Use this spin box to specify a custom height for the animation frame."
 msgstr ""
-"Utilitzeu aquesta casella per especificar el número de fotogrames de "
-"l'animació."
+"Utilitzeu aquesta casella per especificar una alçada personalitzada pel marc "
+"de l'animació."
 
 #. settings-schema.json->keyAnimationWidth->description
 msgid "Width"
-msgstr ""
+msgstr "Amplada"
 
 #. settings-schema.json->keyAnimationWidth->tooltip
-#, fuzzy
 msgid "Use this spin box to specify a custom width for the animation frame."
 msgstr ""
-"Utilitzeu aquesta casella per especificar el número de fotogrames de "
-"l'animació."
+"Utilitzeu aquesta casella per especificar una amplada personalitzada pel "
+"marc de l'animació."
 
 #. settings-schema.json->keyAnimationPreserveAspectRatio->description
 msgid "Preserve aspect ratio"
-msgstr ""
+msgstr "Preservar ràtio d'aspecte"
 
 #. settings-schema.json->keyAnimationPreserveAspectRatio->tooltip
 msgid ""
 "Enable this option to maintain the original aspect ratio of the animation. "
 "If enabled, the specified width will be ignored."
 msgstr ""
+"Activeu aquesta opció per a mantenir el ràtio d'aspecte original de "
+"l'animació. Si s'activa, l'amplada especificada serà ignorada."
 
 #. settings-schema.json->keyAnimationRotationHint->description
 msgid ""
 "If a rotation is selected, the image may also be flipped sideways depending "
 "on the 'Flip sideways on vertical panels' option."
 msgstr ""
+"Si s'ha seleccionat una rotació, la imatge podria ser rotada de costat "
+"depenent de la opció de rotació en taulers verticals."
 
 #. settings-schema.json->keyAnimationRotation->description
 msgid "Rotation"
-msgstr ""
+msgstr "Rotació"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "0°"
-msgstr ""
+msgstr "0°"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "90°"
-msgstr ""
+msgstr "90°"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "180°"
-msgstr ""
+msgstr "180°"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "270°"
-msgstr ""
+msgstr "270°"
 
 #. settings-schema.json->keyLogLevel->description
 msgid "Log Level"
-msgstr ""
+msgstr "Nivell de registre"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Debug"
-msgstr ""
+msgstr "Depuració"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Warning"
-msgstr ""
+msgstr "Avís"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. settings-schema.json->keyForceFoolsDay->description
 msgid "Force Fool's Day"
-msgstr ""
+msgstr "Dia dels innocents"
 
 #. settings-schema.json->keyForceFoolsDay->tooltip
 msgid ""
 "Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April "
 "1st) without modifying the system date."
 msgstr ""
+"Activa el mode de dia dels innocents per raons de depuració. Simula el dia "
+"dels innocents americà (1 d'abril) sense modificar la data del sistema."
 
 #. settings-schema.json->keyInstructionsText->description
 msgid ""
@@ -489,7 +489,7 @@ msgstr "Obre la pàgina web de la miniaplicació a Cinnamon Spices."
 
 #. settings-schema.json->keyVersion->description
 msgid "v0.2.0"
-msgstr ""
+msgstr "v0.2.0"
 
 #. settings-schema.json->keyLicenseText->description
 msgid "GPL-3.0-or-later"
