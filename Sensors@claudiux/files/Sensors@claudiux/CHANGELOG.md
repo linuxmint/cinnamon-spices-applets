@@ -1,3 +1,6 @@
+### v4.2.1~20250215
+  * Fixes #6868.
+
 ### v4.2.0~20250205
   * Fixes several issues.
   * Fixes #6845.
