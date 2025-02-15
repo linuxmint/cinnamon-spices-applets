@@ -8,6 +8,7 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
 
 const UUID = "pomodoro@gregfreeman.org";
 
@@ -837,9 +838,16 @@ class PomodoroMenu extends Applet.AppletPopupMenu {
     }
 }
 
-class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
-    constructor() {
-        super();
+var PomodoroSetFinishedDialog = GObject.registerClass({
+    GTypeName: `pomodoro_applet_PomodoroSetFinishedDialog_${Date.now()}`,
+    Signals: {
+        'switch-off-pomodoro': {},
+        'start-new-pomodoro': {},
+        'hide': {}
+    }
+}, class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
+    _init() {
+        super._init();
         this._subjectLabel = new St.Label();
         this.contentLayout.add(this._subjectLabel);
 
@@ -904,11 +912,17 @@ class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
 
         return _("%s and %s").format(min, sec);
     }
-}
+});
 
-class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
-    constructor() {
-        super();
+var PomodoroShortBreakFinishedDialog = GObject.registerClass({
+    GTypeName: `pomodoro_applet_PomodoroShortBreakFinishedDialog_${Date.now()}`,
+    Signals: {
+        'continue-current-pomodoro': {},
+        'pause-pomodoro': {},
+    }
+}, class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
+    _init() {
+        super._init();
         this._subjectLabel = new St.Label();
         this.contentLayout.add(this._subjectLabel);
 
@@ -937,11 +951,17 @@ class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
         this._subjectLabel.set_text(_("Short break finished, ready to continue?") + "\n");
         this._timeLabel.text = '';
     }
-}
+});
 
-class PomodoroFinishedDialog extends ModalDialog.ModalDialog {
-    constructor() {
-        super();
+var PomodoroFinishedDialog = GObject.registerClass({
+    GTypeName: `pomodoro_applet_PomodoroFinishedDialog_${Date.now()}`,
+    Signals: {
+        'continue-current-pomodoro': {},
+        'pause-pomodoro': {},
+    }
+}, class PomodoroFinishedDialog extends ModalDialog.ModalDialog {
+    _init() {
+        super._init();
         this._subjectLabel = new St.Label();
         this.contentLayout.add(this._subjectLabel);
 
@@ -970,5 +990,5 @@ class PomodoroFinishedDialog extends ModalDialog.ModalDialog {
         this._subjectLabel.set_text(_("Pomodoro finished, ready to take a break?") + "\n");
         this._timeLabel.text = '';
     }
-}
+});
 
