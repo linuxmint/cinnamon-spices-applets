@@ -1,3 +1,6 @@
+### v7.8.0~20250215
+  * Tooltip bug fixed.
+
 ### v7.7.0~20250211
   * Consider AlbumArt3.0@claudiux as a common desklet.
 

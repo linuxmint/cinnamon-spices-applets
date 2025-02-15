@@ -789,8 +789,8 @@ class SpicesUpdate extends IconApplet {
 
             notification.setUseActionIcons(this.general_type_notif === "iconic");
 
-            let buttonLabel = "%s".format(capitalize(type));
-            notification.addButton("su-%s-symbolic".format(type), _(buttonLabel));
+            let buttonLabel = "%s".format(capitalize(type.toString()));
+            notification.addButton("su-%s-symbolic".format(type.toString()), _(buttonLabel));
 
             let buttonLabel2;
             if (this.general_show_updateall_button && about_updates) {
@@ -981,7 +981,7 @@ class SpicesUpdate extends IconApplet {
         let isEmpty = true;
         let info;
         if (dir.query_exists(null)) {
-            let children = dir.enumerate_children("standard::name,standard::type,standard::icon", FileQueryInfoFlags.NONE, null);
+            let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
             if ((info = children.next_file(null)) != null) {
                 isEmpty = false;
             }
@@ -1444,7 +1444,7 @@ class SpicesUpdate extends IconApplet {
         let most_recent;
 
         // For some themes, the metadata.json file is in the subfolder /cinnamon:
-        if (type === "themes" && !metadataFile.query_exists(null)) {
+        if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
             metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
             metadataFile = file_new_for_path(metadataFileName);
         }
@@ -1597,7 +1597,7 @@ class SpicesUpdate extends IconApplet {
                 var smaller_difference = Math.round(Date.now() / 1000);
                 let difference;
                 while (result == subject_regexp.exec(data)) {
-                    commit_time = Date.parse(to_string(result[1])) / 1000;
+                    commit_time = Date.parse(result[1].toString()) / 1000;
                     difference = Math.abs(timestamp - commit_time);
                     if (difference < smaller_difference) {
                         smaller_difference = difference;
@@ -1739,7 +1739,7 @@ class SpicesUpdate extends IconApplet {
         let metadataFile = file_new_for_path(metadataFileName);
 
         // For some themes, the metadata.json file is in the subfolder /cinnamon:
-        if (type === "themes" && !metadataFile.query_exists(null)) {
+        if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
             metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
             metadataFile = file_new_for_path(metadataFileName);
         }
@@ -1810,14 +1810,14 @@ class SpicesUpdate extends IconApplet {
 
     get_active_spices(type) {
         // Returns the list of active spices of type 'type'
-        var elt = (type === "applets") ? 3 : 0;
+        var elt = (type.toString() === "applets") ? 3 : 0;
         let listCanBeUpdated = this.get_can_be_updated(type);
         let enabled;
         var listEnabled = new Array();
         let _SETTINGS_SCHEMA, _SETTINGS_KEY;
         let _interface_settings;
 
-        if (type === "themes") {
+        if (type.toString() === "themes") {
             _SETTINGS_SCHEMA = "org.cinnamon.theme";
             _SETTINGS_KEY = "name";
             _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
@@ -1828,13 +1828,13 @@ class SpicesUpdate extends IconApplet {
         }
 
         _SETTINGS_SCHEMA = "org.cinnamon";
-        _SETTINGS_KEY = "enabled-%s".format(type);
+        _SETTINGS_KEY = "enabled-%s".format(type.toString());
         _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
 
         enabled = _interface_settings.get_strv(_SETTINGS_KEY);
         let xlet_uuid;
         for (let xl of enabled) {
-            xlet_uuid = to_string(xl.split(":")[elt]).replace(/'/g,"");
+            xlet_uuid = xl.split(":")[elt].toString().replace(/'/g,"");
             if (!xlet_uuid.endsWith("@cinnamon.org") && (listCanBeUpdated.indexOf(xlet_uuid)>-1))
                 listEnabled.push(xlet_uuid);
         }
@@ -1877,12 +1877,12 @@ class SpicesUpdate extends IconApplet {
         let char_new = "\u2604";
         let ts;
         for (let t of TYPES) {
-            ts = _(capitalize(t));
+            ts = _(capitalize(t.toString()));
             if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += "   %s %s".format(char_update, (this.nb_in_menu[t] - this.new_Spices[t].length).toString());
             if (this.new_Spices[t].length > 0) ts += "   %s %s".format(char_new, (this.new_Spices[t].length).toString());
             spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
             spicesMenuItems[t].connect("activate", (event) => {
-                spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t, TAB, SORT));
+                spawnCommandLineAsync("%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
             });
             spicesMenuItems[t].setShowDot(this.menuDots[t]);
             this.menu.addMenuItem(spicesMenuItems[t]);
@@ -2158,14 +2158,14 @@ class SpicesUpdate extends IconApplet {
             this.tooltip_contents = "<b>" + this.default_tooltip + "</b>";
             var tooltip_was_modified = false;
             for (let type of TYPES) {
-                if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+                if (this.old_message[type].length > 0 || this.old_watch_message[type].length > 0) {
                     if (!tooltip_was_modified) {
                         this.tooltip_contents += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
                         tooltip_was_modified = true;
                     }
                     this.tooltip_contents += "\n\n<b>%s</b>".format(_(type).toLocaleUpperCase());
-                    if (this.old_message[type] != "") this.tooltip_contents += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
-                    if (this.old_watch_message[type] != "") this.tooltip_contents += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+                    if (this.old_message[type].length > 0) this.tooltip_contents += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
+                    if (this.old_watch_message[type].length > 0) this.tooltip_contents += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
                 }
             }
             if (!tooltip_was_modified) {
@@ -2313,7 +2313,7 @@ class SpicesUpdate extends IconApplet {
                                         if (this.general_type_notif === "minimal") this.notify_without_button(this._clean_str(this.new_message[t]), t, uuid);
                                         else this.notify_with_button(this._clean_str(this.new_message[t]), t, uuid);
                                     }
-                                    this.old_message[t] = to_string(this.new_message[t]);
+                                    this.old_message[t] = this.new_message[t].toString();
                                 }
 
                             } else {
@@ -2343,7 +2343,7 @@ class SpicesUpdate extends IconApplet {
                                             this.notify_with_button(this._clean_str(this.new_watch_message[t]), t, null, false);
                                         }
                                     }
-                                    this.old_watch_message[t] = to_string(this.new_watch_message[t]);
+                                    this.old_watch_message[t] = this.new_watch_message[t].toString();
                                 }
                             } else {
                                 this.old_watch_message[t] = "";
