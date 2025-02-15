@@ -209,7 +209,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
     // To be sure that the scripts will be executable:
-    spawnCommandLineAsync(`/bin/bash -c 'cd ${SCRIPTS_DIR} && chmod 755 *.py *.sh'`, null, null);
+    spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
     this.sudo_or_wheel = "none";
     let subProcess = spawnCommandLineAsyncIO("/bin/bash -c 'groups'", (out, err, exitCode) => {
