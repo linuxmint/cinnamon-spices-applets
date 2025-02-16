@@ -839,6 +839,8 @@ class PomodoroMenu extends Applet.AppletPopupMenu {
 }
 
 var PomodoroSetFinishedDialog = GObject.registerClass({
+    // The GTypeName must be unique, so we use the current timestamp here to avoid
+    // exceptions at runtime when reloading the applet.
     GTypeName: `pomodoro_applet_PomodoroSetFinishedDialog_${Date.now()}`,
     Signals: {
         'switch-off-pomodoro': {},
@@ -915,6 +917,8 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
 });
 
 var PomodoroShortBreakFinishedDialog = GObject.registerClass({
+    // The GTypeName must be unique, so we use the current timestamp here to avoid
+    // exceptions at runtime when reloading the applet.
     GTypeName: `pomodoro_applet_PomodoroShortBreakFinishedDialog_${Date.now()}`,
     Signals: {
         'continue-current-pomodoro': {},
@@ -954,6 +958,8 @@ var PomodoroShortBreakFinishedDialog = GObject.registerClass({
 });
 
 var PomodoroFinishedDialog = GObject.registerClass({
+    // The GTypeName must be unique, so we use the current timestamp here to avoid
+    // exceptions at runtime when reloading the applet.
     GTypeName: `pomodoro_applet_PomodoroFinishedDialog_${Date.now()}`,
     Signals: {
         'continue-current-pomodoro': {},
