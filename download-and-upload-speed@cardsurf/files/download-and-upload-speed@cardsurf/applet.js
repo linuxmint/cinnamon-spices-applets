@@ -574,9 +574,9 @@ DownloadAndUploadSpeed.prototype = {
     _init_menu_item_gui: function () {
         this.menu_item_gui = new AppletGui.RadioMenuItem(_("Gui"), [_("Compact"), _("Large")]);
         this.menu_item_gui.set_active_option(this.gui_speed_type);
-        this.menu_item_gui.set_callback_option_clicked(this, () => { this.on_menu_item_gui_clicked() });
+        this.menu_item_gui.set_callback_option_clicked(this, (option_name, option_index) => { this.on_menu_item_gui_clicked(option_name, option_index) });
         this._applet_context_menu.addMenuItem(this.menu_item_gui);
-        this._applet_context_menu.connect('open-state-changed', () => { this.on_context_menu_state_changed() });
+        this._applet_context_menu.connect('open-state-changed', (actor, event) => { this.on_context_menu_state_changed(actor, event) });
     },
 
     on_menu_item_gui_clicked: function (option_name, option_index) {
