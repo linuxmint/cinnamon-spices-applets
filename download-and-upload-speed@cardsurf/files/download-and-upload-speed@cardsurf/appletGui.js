@@ -77,7 +77,7 @@ IconLabel.prototype = {
     },
 
     set_label_fixed_width: function(fixed_width_text) {
-        timeout_add(1, () => {
+        timeout_add_seconds(1, () => {
             this.set_label_to_preferred_width();
             this.set_label_text(fixed_width_text);
 
@@ -309,7 +309,7 @@ RadioMenuItem.prototype = {
     _add_options: function(option_names) {
         for(let option_name of option_names) {
              let option = new PopupMenu.PopupMenuItem(option_name, false);
-             option.connect('activate', () => { this._on_option_clicked() });
+             option.connect('activate', (option, event) => { this._on_option_clicked(option, event) });
              this.menu.addMenuItem(option);
              this.options.push(option);
         }
@@ -416,7 +416,7 @@ CheckboxMenuItem.prototype = {
              let option_name = option_names[i];
              let option_checked = options_checked[i];
              let option = new PopupMenu.PopupSwitchMenuItem(option_name, option_checked);
-             option.connect('toggled', () => { this._on_option_toggled() });
+             option.connect('toggled', (option, checked) => { this._on_option_toggled(option, checked) });
              this.options.push(option);
         }
     },
