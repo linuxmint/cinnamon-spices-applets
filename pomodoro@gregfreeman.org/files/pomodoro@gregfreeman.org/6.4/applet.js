@@ -637,7 +637,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             }
         });
     
-        this._longBreakdialog.connect('hide', () => {
+        this._longBreakdialog.connect('hide-pomodoro-modal', () => {
             if (!this._timerQueue.isRunning() && !this._opt_autoStartNewAfterFinish) {
                 this._turnOff();
             }
@@ -865,7 +865,7 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
     Signals: {
         'switch-off-pomodoro': {},
         'start-new-pomodoro': {},
-        'hide': {}
+        'hide-pomodoro-modal': {}
     }
 }, class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
     _init() {
@@ -890,7 +890,7 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
             {
                 label: _("Hide"),
                 action: () => {
-                    this.emit('hide');
+                    this.emit('hide-pomodoro-modal');
                 },
                 key: Clutter.Escape
             }
