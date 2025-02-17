@@ -17,7 +17,23 @@ const UUID = APPNAME + "@claudiux";
 
 const HOME_DIR = get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const DEBUG_FILE = APPLET_DIR + "/DEBUG"
+const DEBUG_FILE = APPLET_DIR + "/DEBUG";
+
+const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
+const EXTENSION_UUID = "OSD150@claudiux";
+
+const IS_OSD150_ENABLED = () => {
+    var enabled = false;
+    const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+    for (let i = 0; i < enabledExtensions.length; i++) {
+        if (enabledExtensions[i] == EXTENSION_UUID) {
+            enabled = true;
+            break;
+        }
+    }
+    return enabled;
+}
+
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -167,13 +183,17 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             let iconName = this._volumeToIcon(1.0*this.applet.percentage/100, "audio-volume-webradioreceiver-")+"-symbolic";
             let icon = Gio.Icon.new_for_string(iconName);
             try {
-              let _percentage_str = ""+this.applet.percentage;
-              if (this.applet.show_percent)
-                _percentage_str += _("%");
-              if (IS_AT_LEAST_CINNAMON6DOT4)
-                Main.osdWindowManager.show(-1, icon, _percentage_str, parseInt(this.applet.percentage));
-              else
-                Main.osdWindowManager.show(-1, icon, _percentage_str, null);
+                let _percentage_str = ""+this.applet.percentage;
+                if (this.applet.show_percent)
+                    _percentage_str += _("%");
+                if (IS_AT_LEAST_CINNAMON6DOT4) {
+                    if (IS_OSD150_ENABLED())
+                        Main.osdWindowManager.show(-1, icon, _percentage_str, parseInt(this.applet.percentage), 1, this.applet.OSDhorizontal);
+                    else
+                        Main.osdWindowManager.show(-1, icon, _percentage_str, parseInt(this.applet.percentage));
+                } else {
+                    Main.osdWindowManager.show(-1, icon, _percentage_str, null);
+                }
             } catch (e) {
                 // Do nothing
             }

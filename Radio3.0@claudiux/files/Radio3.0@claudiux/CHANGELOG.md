@@ -1,3 +1,7 @@
+### 2.8.0~20250217
+  * New option to load a sample station list when there is no station in the list.
+  * Some minor changes.
+
 ### 2.7.8~20250205
   * Improves applet startup.
 
