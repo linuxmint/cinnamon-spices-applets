@@ -1,0 +1,110 @@
+# ALBUM ART FOR RADIO3.0
+# This file is put in the public domain.
+# claudiux, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AlbumArt3.0@claudiux 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-desklets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-11 11:04+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. desklet.js:66
+msgid "Radio3.0 Album Art"
+msgstr "Carátula del álbum para Radio3.0"
+
+#. desklet.js:301
+msgid "Display Album Art at full size"
+msgstr "Mostrar la carátula del álbum a tamaño completo"
+
+#. metadata.json->name
+msgid "Album Art for Radio3.0"
+msgstr "Carátula del álbum para Radio3.0"
+
+#. metadata.json->description
+msgid ""
+"A digital photo frame desklet to display the Radio3.0 album art, if available"
+msgstr ""
+"Un marco de fotos digital para mostrar la carátula del álbum Radio3.0, si "
+"está disponible."
+
+#. settings-schema.json->height->description
+msgid "Height"
+msgstr "Altura"
+
+#. settings-schema.json->height->units
+#. settings-schema.json->width->units
+msgid "pixels"
+msgstr "pixeles"
+
+#. settings-schema.json->width->description
+msgid "Width"
+msgstr "Anchura"
+
+#. settings-schema.json->fade-effect->description
+msgid "Fade"
+msgstr "Desvanecimiento"
+
+#. settings-schema.json->fade-effect->options
+msgid "None"
+msgstr "Ninguno"
+
+#. settings-schema.json->fade-effect->options
+msgid "Quad"
+msgstr "Cuádruple"
+
+#. settings-schema.json->fade-effect->options
+msgid "Cubic"
+msgstr "Cúbico"
+
+#. settings-schema.json->fade-effect->options
+msgid "Quart"
+msgstr "Cuarto"
+
+#. settings-schema.json->fade-effect->options
+msgid "Quint"
+msgstr "Quinta"
+
+#. settings-schema.json->fade-effect->options
+msgid "Sine"
+msgstr "Seno"
+
+#. settings-schema.json->fade-effect->options
+msgid "Expo"
+msgstr "Exposición"
+
+#. settings-schema.json->fade-effect->options
+msgid "Circ"
+msgstr "Círculo"
+
+#. settings-schema.json->fade-effect->options
+msgid "Elastic"
+msgstr "Elástico"
+
+#. settings-schema.json->fade-effect->options
+msgid "Back"
+msgstr "Atrás"
+
+#. settings-schema.json->fade-effect->options
+msgid "Bounce"
+msgstr "Rebote"
+
+#. settings-schema.json->fade-delay->description
+msgid "Fade delay"
+msgstr "Retardo de desvanecimiento"
+
+#. settings-schema.json->fade-delay->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->fade-delay->tooltip
+msgid "0 means no fade"
+msgstr "0 significa que no hay desvanecimiento"

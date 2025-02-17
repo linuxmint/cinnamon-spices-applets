@@ -126,7 +126,27 @@ validChars = Array.from(validChars);
 
 // To capitalize each word
 function capitalize_each_word(s) {
-    return s.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+  return s.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+}
+
+const IS_OSD150_ENABLED = () => {
+  const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
+  const EXTENSION_UUID = "OSD150@claudiux";
+  var enabled = false;
+  const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+  for (let i = 0; i < enabledExtensions.length; i++) {
+      if (enabledExtensions[i] == EXTENSION_UUID) {
+          enabled = true;
+          break;
+      }
+  }
+  return enabled;
+}
+
+const IS_OSD150_INSTALLED = () => {
+  const EXTENSION_UUID = "OSD150@claudiux";
+  const OSD150_DIR = HOME_DIR+"/.local/share/cinnamon/extensions/"+EXTENSION_UUID;
+  return file_test(OSD150_DIR, FileTest.EXISTS);
 }
 
 function _get_system_natural_scroll() {
@@ -1353,6 +1373,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("volume-show-osd", "volume_show_osd");
     this.showOSD = this.volume_show_osd && this.showOSDonStartup;
     this.settings.bind("show-percent-char-in-osd", "show_percent");
+    this.settings.bind("show-horizontal-osd","OSDhorizontal",
+        () => {
+            this.on_OSDhorizontal_changed();
+        }
+    );
+    this.on_OSDhorizontal_changed();
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
@@ -2596,6 +2622,49 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       let pidOfSearch = this.configureApplet(this.tabNumberOfSearch);
     });
     this.menu.addMenuItem(searchItem);
+
+    let loadExampleItem = new PopupIconMenuItem(_("Load a sample station list"), "webradioreceiver-symbolic", IconType.SYMBOLIC);
+    loadExampleItem.connect('activate', () => {
+      let fileName = HOME_DIR+"/.config/Radio3.0/radio-lists/Radio3.0_EXAMPLES.json";
+      let file = file_new_for_path(fileName);
+
+      if ( !file.query_exists(null) ) return;
+
+      let json_contents = JSON.parse((to_string(file_get_contents(fileName)[1])).trim());
+
+      let columns = JSON.parse((to_string(file_get_contents(RADIO30_CONFIG_FILE)[1])).trim()).radios.columns;
+        //log("on_button_radios_restore_clicked: columns:"+JSON.stringify(columns, null, 4));
+
+      var ids = [];
+      var defaults = [];
+      for (let column of columns) {
+        ids.push(""+column.id)
+        defaults.push(column['default'])
+      }
+      //log("on_button_radios_restore_clicked: ids:"+ids);
+      //log("on_button_radios_restore_clicked: defaults:"+defaults);
+
+      if (ids.length > 0 && json_contents && json_contents.length > 0) {
+        let new_radios = [];
+        for (let entry of json_contents) {
+          let new_station = {};
+          for (let id of ids) {
+            if (entry[id] != null) {
+              new_station[id] = entry[id]
+            } else {
+              new_station[id] = defaults[ids.indexOf(id)]
+            }
+          }
+          new_radios.push(new_station);
+        }
+        //log("on_button_radios_restore_clicked: new_radios:"+JSON.stringify(new_radios, null, 4));
+        let idto = setTimeout( () => {
+          clearTimeout(idto);
+          this.settings.setValue("radios", new_radios);
+        }, 2100);
+      }
+    });
+    this.menu.addMenuItem(loadExampleItem);
 
     let soundSettingsItem = new PopupIconMenuItem(_("Sound Settings"), "audio-card", IconType.SYMBOLIC);
     soundSettingsItem.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
@@ -4867,6 +4936,78 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     });
   }
 
+  on_OSDhorizontal_changed() {
+    if (!this.OSDhorizontal) return;
+    if (IS_OSD150_ENABLED()) {
+        return;
+    } else {
+        const Button2 = _("Cancel");
+        const summary = _("Radio3.0 applet");
+        var Button1, body;
+        if (IS_OSD150_INSTALLED()) {
+          Button1 = _("Enable the OSD150 extension");
+          body = _("To obtain an horizontal OSD, you need to enable the OSD150 extension.");
+          spawnCommandLineAsyncIO(
+            `notify-send -u critical --icon="webradioreceiver-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
+            (stdout, stderr, exitCode) => {
+              if (exitCode === 0) {
+                logDebug("stdout: "+stdout+" "+ typeof stdout);
+                if (stdout.startsWith("opt1")) {
+                  this.install_OSD150();
+                } else {
+                  this.OSDhorizontal = false;
+                }
+              } else {
+                this.OSDhorizontal = false;
+              }
+            },
+            {}
+        );
+      } else {
+          Button1 = _("Download the OSD150 extension");
+          body = _("To obtain an horizontal OSD, you need to download the OSD150 extension.\nClick on the Download button then search for OSD150 and select the ⬇ button.");
+          spawnCommandLineAsyncIO(
+            `notify-send -u critical --icon="webradioreceiver-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
+            (stdout, stderr, exitCode) => {
+              if (exitCode === 0) {
+                  logDebug("stdout: "+stdout+" "+ typeof stdout);
+                  if (stdout.startsWith("opt1")) {
+                    spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                  } else {
+                    this.OSDhorizontal = false;
+                  }
+                } else {
+                  this.OSDhorizontal = false;
+                }
+            },
+            {}
+        );
+      }
+    }
+  }
+
+  install_OSD150() {
+    // Installs the OSD150 extension.
+    const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
+    const EXTENSION_UUID = "OSD150@claudiux";
+    // enabledExtensions will contain all desklets:
+    var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+    var extensionEEKline = "";
+    for (let i = 0; i < enabledExtensions.length; i++) {
+      let name = enabledExtensions[i];
+      if (name == EXTENSION_UUID) {
+        extensionEEKline = ""+enabledExtensions[i];
+        break;
+      }
+    }
+
+    if (extensionEEKline.length === 0) {
+      // OSD150 must be installed.
+      enabledExtensions.push(EXTENSION_UUID);
+      global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+    }
+  }
+
   on_button_YT_open_dir() {
     spawnCommandLineAsync(`bash -c 'xdg-open "%s/%s"'`.format(
       RADIO30_MUSIC_DIR,
@@ -5600,7 +5741,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     // enabledDesklets will contain all desklets:
-    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY); //??? var or let? (previously let)
+    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
     var deskletEDKline = "";
     for (let i = 0; i < enabledDesklets.length; i++){
       let name = enabledDesklets[i].split(":")[0];
@@ -5720,6 +5861,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
     this.desklet_is_activated = true;
     this.show_desklet = true;
+    //~ reloadExtension(DESKLET_UUID, Type.DESKLET);
   }
 
   uninstall_desklet() {
