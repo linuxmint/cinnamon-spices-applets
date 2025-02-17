@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-17 18:31+0100\n"
-"PO-Revision-Date: 2025-01-21 13:54-0300\n"
+"PO-Revision-Date: 2025-02-17 18:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -251,9 +251,8 @@ msgid "Search for new stations..."
 msgstr "Buscar nuevas estaciones..."
 
 #. applet.js:2626
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Actualizar la lista de estaciones"
+msgstr "Cargar una lista de estaciones de muestra"
 
 #. applet.js:2669 applet.js:3110 applet.js:5188 applet.js:5616
 msgid "Sound Settings"
@@ -401,30 +400,33 @@ msgstr "Cerrar"
 
 #. applet.js:4944
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. applet.js:4945
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Applet Radio3.0"
 
 #. applet.js:4948
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Activar la extensión OSD150"
 
 #. applet.js:4949
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Para obtener un OSD horizontal, es necesario activar la extensión OSD150."
 
 #. applet.js:4967
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Descargar la extensión OSD150"
 
 #. applet.js:4968
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Para obtener un OSD horizontal, necesita descargar la extensión OSD150.\n"
+"Haga clic en el botón Descargar y, a continuación, busque OSD150 y "
+"seleccione el botón ⬇."
 
 #. applet.js:5097 applet.js:5443
 #, javascript-format
@@ -1269,9 +1271,8 @@ msgid "Show '%' in OSD"
 msgstr "Mostrar '%' en OSD"
 
 #. settings-schema.json->show-horizontal-osd->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Mostrar '%' en OSD"
+msgstr "Mostrar OSD horizontal"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -3219,12 +3220,11 @@ msgid "Album Art for Radio3.0"
 msgstr "Carátula del álbum para Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
-#, fuzzy
 msgid ""
 "A digital photo frame desklet to display the Radio3.0 album art, if available"
 msgstr ""
-"Un marco de fotos digital de escritorio para mostrar la carátula del álbum "
-"para Radio3.0"
+"Un desklet de marco de fotos digital para mostrar la carátula del álbum "
+"Radio3.0, si está disponible"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
