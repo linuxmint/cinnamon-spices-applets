@@ -9,6 +9,7 @@ const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
+const Dialog = imports.ui.dialog;
 
 const UUID = "pomodoro@gregfreeman.org";
 
@@ -677,7 +678,25 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._pomodoroFinishedDialog.close();
         });
     }
-    
+
+    _removeDialogs() {
+        if (this._longBreakdialog) {
+            this._longBreakdialog.close();
+            this._longBreakdialog.destroy();
+            this._longBreakdialog = null;
+        }
+        if (this._shortBreakdialog) {
+            this._shortBreakdialog.close();
+            this._shortBreakdialog.destroy();
+            this._shortBreakdialog = null;
+        }
+        if (this._pomodoroFinishedDialog) {
+            this._pomodoroFinishedDialog.close();
+            this._pomodoroFinishedDialog.destroy();
+            this._pomodoroFinishedDialog = null;
+        }
+    }
+
     _onAppletIconChanged() {
         if (this._opt_displayIconInPanel) {
             this._applet_icon_box.show();
@@ -736,6 +755,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey(UUID);
         this._resetTimerQueueState();
         this._settingsProvider.finalize();
+        this._removeDialogs();
     }    
 }
 
@@ -849,12 +869,10 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
     }
 }, class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
     _init() {
-        super._init();
-        this._subjectLabel = new St.Label();
-        this.contentLayout.add(this._subjectLabel);
+        super._init({destroyOnClose: false});
 
-        this._timeLabel = new St.Label();
-        this.contentLayout.add(this._timeLabel);
+        this._content = new Dialog.MessageDialogContent();
+        this.contentLayout.add(this._content);
 
         this.setButtons([
             {
@@ -882,17 +900,17 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
     }
 
     setDefaultLabels() {
-        this._subjectLabel.set_text(_("Pomodoro set finished, you deserve a break!") + "\n");
+        this._content.title = _("Pomodoro set finished, you deserve a break!") + "\n";
         // Reset the time label text
-        this._timeLabel.text = '';
+        this._content.description = '';
     }
 
     setTimeRemaining(timer) {
         let tickCount = timer.getTicksRemaining();
 
         if (tickCount === 0) {
-            this._subjectLabel.text = _("Your break is over, start another pomodoro!") + "\n";
-            this._timeLabel.text = '';
+            this._content.title = _("Your break is over, start another pomodoro!") + "\n";
+            this._content.description = '';
             return;
         }
 
@@ -901,7 +919,7 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
     }
 
     _setTimeLabelText(label) {
-        this._timeLabel.set_text(label + "\n");
+        this._content.description = label + "\n";
     }
 
     _getTimeString(totalSeconds) {
@@ -926,12 +944,10 @@ var PomodoroShortBreakFinishedDialog = GObject.registerClass({
     }
 }, class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
     _init() {
-        super._init();
-        this._subjectLabel = new St.Label();
-        this.contentLayout.add(this._subjectLabel);
+        super._init({destroyOnClose: false});
 
-        this._timeLabel = new St.Label();
-        this.contentLayout.add(this._timeLabel);
+        this._content = new Dialog.MessageDialogContent();
+        this.contentLayout.add(this._content);
 
         this.setButtons([
             {
@@ -952,8 +968,8 @@ var PomodoroShortBreakFinishedDialog = GObject.registerClass({
     }
 
     setDefaultLabels() {
-        this._subjectLabel.set_text(_("Short break finished, ready to continue?") + "\n");
-        this._timeLabel.text = '';
+        this._content.title = _("Short break finished, ready to continue?") + "\n";
+        this._content.description = '';
     }
 });
 
@@ -967,12 +983,10 @@ var PomodoroFinishedDialog = GObject.registerClass({
     }
 }, class PomodoroFinishedDialog extends ModalDialog.ModalDialog {
     _init() {
-        super._init();
-        this._subjectLabel = new St.Label();
-        this.contentLayout.add(this._subjectLabel);
+        super._init({destroyOnClose: false});
 
-        this._timeLabel = new St.Label();
-        this.contentLayout.add(this._timeLabel);
+        this._content = new Dialog.MessageDialogContent();
+        this.contentLayout.add(this._content);
 
         this.setButtons([
             {
@@ -993,8 +1007,8 @@ var PomodoroFinishedDialog = GObject.registerClass({
     }
 
     setDefaultLabels() {
-        this._subjectLabel.set_text(_("Pomodoro finished, ready to take a break?") + "\n");
-        this._timeLabel.text = '';
+        this._content.title = _("Pomodoro finished, ready to take a break?") + "\n";
+        this._content.description = '';
     }
 });
 
