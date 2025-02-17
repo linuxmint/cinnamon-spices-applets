@@ -876,6 +876,13 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
 
         this.setButtons([
             {
+                label: _("Hide"),
+                action: () => {
+                    this.emit('hide-pomodoro-modal');
+                },
+                key: Clutter.KEY_Escape,
+            },
+            {
                 label: _("Switch Off Pomodoro"),
                 action: () => {
                     this.emit('switch-off-pomodoro');
@@ -887,13 +894,6 @@ var PomodoroSetFinishedDialog = GObject.registerClass({
                     this.emit('start-new-pomodoro');
                 }
             },
-            {
-                label: _("Hide"),
-                action: () => {
-                    this.emit('hide-pomodoro-modal');
-                },
-                key: Clutter.Escape
-            }
         ]);
 
         this.setDefaultLabels();
@@ -951,17 +951,18 @@ var PomodoroShortBreakFinishedDialog = GObject.registerClass({
 
         this.setButtons([
             {
-                label: _("Continue Current Pomodoro"),
-                action: () => {
-                    this.emit('continue-current-pomodoro');
-                }
-            },
-            {
                 label: _("Pause Pomodoro"),
                 action: () => {
                     this.emit('pause-pomodoro');
                 }
-            }
+            },
+            {
+                label: _("Continue Current Pomodoro"),
+                default: true,
+                action: () => {
+                    this.emit('continue-current-pomodoro');
+                }
+            },
         ]);
 
         this.setDefaultLabels();
@@ -990,17 +991,18 @@ var PomodoroFinishedDialog = GObject.registerClass({
 
         this.setButtons([
             {
-                label: _("Start break"),
-                action: () => {
-                    this.emit('continue-current-pomodoro');
-                }
-            },
-            {
                 label: _("Pause Pomodoro"),
                 action: () => {
                     this.emit('pause-pomodoro');
                 }
-            }
+            },
+            {
+                label: _("Start break"),
+                default: true,
+                action: () => {
+                    this.emit('continue-current-pomodoro');
+                }
+            },
         ]);
 
         this.setDefaultLabels();
