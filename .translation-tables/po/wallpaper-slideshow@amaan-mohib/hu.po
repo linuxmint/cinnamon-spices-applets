@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2023-06-30 23:20+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Háttérkép Diavetítés"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "A háttérkép nem létezik."
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Késleltetés"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Háttérképek mappa megnyitása"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Következő"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Előző"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "Szüneteltetve"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Beállítások"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr "A háttérkép-diavetítés indítási állapot-megtartása a rendszer újraindítása után"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Háttérkép elérési út"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Adja meg a háttérképek mappa elérési útját"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Például: /home/felhasználó/Képek/háttérképek"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr "Adja meg a háttérképek váltása közti idő másodpercben"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "Például: 86400 az 24 óra"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Egyedi időköz"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Adja meg a frissítések keresése közti egyedi időt"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Alapértelmezett: 1 óra"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Adja meg a frissítések keresése közti idő másodpercben"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "Például: 3600 az 1 óra"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Háttérkép diavetítés szüneteltetése"

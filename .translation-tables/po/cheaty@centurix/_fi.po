@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:87
+msgid "version"
+msgstr ""
+
+#: applet.js:87
+msgid "Author:"
+msgstr ""
+
+#: applet.js:87
+msgid "Email:"
+msgstr ""
+
+#: applet.js:87
+msgid "Repository:"
+msgstr ""
+
+#: applet.js:157
+msgid "Cheaty: Easy access cheatsheets"
+msgstr ""
+
+#: applet.js:307
+msgid "Configure..."
+msgstr ""
+
+#: applet.js:321
+msgid "Code copied to the clipboard"
+msgstr ""
+
+#. metadata.json->description
+msgid "An applet to provide quick access to a variety of cheat sheets."
+msgstr ""
+
+#. metadata.json->name
+msgid "Cheaty - Cheatsheet keeper"
+msgstr ""
+
+#. settings-schema.json->cheatsheetFolder->description
+msgid "cheatsheetFolder"
+msgstr ""
+
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr ""
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr ""
+
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
+msgstr ""

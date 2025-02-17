@@ -1,0 +1,29 @@
+# GPASTE RELOADED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# feuerfuchs, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gpaste-reloaded@feuerfuchs.eu 2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-27 14:39-0500\n"
+"PO-Revision-Date: 2017-11-28 09:55+0100\n"
+"Last-Translator: Feuerfuchs <git@feuerfuchs.eu>\n"
+"Language-Team: Feuerfuchs\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#. metadata.json->description
+msgid "Instantly access and manage your clipboard history."
+msgstr ""
+
+#. settings-schema.json->always-show-icon->description
+msgid "Show tray icon, even when the applet is not in use"
+msgstr ""

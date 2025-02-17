@@ -1,0 +1,39 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensors@claudiux 3.7.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-05 10:49+0100\n"
+"PO-Revision-Date: 2024-11-24 19:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. lib/checkDependencies.js:382
+msgid "Please install these packages:"
+msgstr ""
+
+#. lib/checkDependencies.js:398
+msgid "Install these packages now"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
+#. settings-schema.json->page_Fans->title
+msgid "𖣘 Fan"
+msgstr ""
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr ""

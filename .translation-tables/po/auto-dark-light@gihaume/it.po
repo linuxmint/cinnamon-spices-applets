@@ -1,0 +1,467 @@
+# AUTOMATIC DARK/LIGHT THEMES
+# This file is put in the public domain.
+# guillaume-mueller, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: auto-dark-light@gihaume 1.2.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-10-22 19:07+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:33
+msgid "Click: toggle dark/light mode"
+msgstr "Clic: attiva/disattiva la modalità scura/chiara"
+
+#. applet.js:34
+msgid "Middle-click: toggle automatic switch mode"
+msgstr "Clic centrale: attiva/disattiva la modalità di commutazione automatica"
+
+#. applet.js:367
+msgid "Today's automatic mode switch times"
+msgstr "Orari di cambio modalità automatica di oggi"
+
+#. applet.js:367 applet.js:368 applet.js:369 applet.js:412 applet.js:418
+#. lib/time_change_listener/time_change_listener.js:97
+#. lib/commands_launcher/commands_launcher.js:31
+#. lib/commands_launcher/commands_launcher.js:38
+#. lib/commands_launcher/commands_launcher.js:40
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->light-mode->title
+#. applet.js:368
+msgid "Light mode"
+msgstr "Modalità chiara"
+
+#. settings-schema.json->dark-mode->title
+#. applet.js:369
+msgid "Dark mode"
+msgstr "Modalità scura"
+
+#. applet.js:412
+msgid "Error"
+msgstr "Errore"
+
+#. applet.js:418
+msgid "Critical error"
+msgstr "Errore critico"
+
+#. lib/time_change_listener/time_change_listener.js:31
+msgid ""
+"Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
+"system with `sudo apt install build-essential`, then reload the applet (in e."
+"g. in restarting Cinnamon)."
+msgstr ""
+"Dipendenze mancanti `make` e `gcc`. Installarle, ad esempio su un sistema "
+"basato su Debian con `sudo apt install build-essential`, quindi ricaricare "
+"l'applet (ad esempio riavviando Cinnamon)."
+
+#. lib/time_change_listener/time_change_listener.js:44
+msgid "Compilation of"
+msgstr "Compilazione di"
+
+#. lib/time_change_listener/time_change_listener.js:44
+#. lib/commands_launcher/commands_launcher.js:29
+msgid "failed"
+msgstr "fallita"
+
+#. lib/time_change_listener/time_change_listener.js:97
+msgid "the subprocess"
+msgstr "il sottoprocesso"
+
+#. lib/time_change_listener/time_change_listener.js:97
+msgid "wrote on its error output"
+msgstr "ha scritto sul suo output di errore"
+
+#. lib/twilights_calculator/twilights_calculator.js:22
+msgid "unable to calculate twilight times, check coordinates format or range"
+msgstr ""
+"impossibile calcolare gli orari del crepuscolo, controllare il formato o "
+"l'intervallo delle coordinate"
+
+#. lib/commands_launcher/commands_launcher.js:29
+msgid "the command"
+msgstr "il comando"
+
+#. lib/commands_launcher/commands_launcher.js:31
+msgid "due to a wrong format"
+msgstr "a causa di un formato errato"
+
+#. lib/commands_launcher/commands_launcher.js:35
+msgid "due to time expiration"
+msgstr "a causa della scadenza del tempo"
+
+#. lib/commands_launcher/commands_launcher.js:38
+msgid "with the following errors"
+msgstr "con i seguenti errori"
+
+#. metadata.json->name
+msgid "Automatic dark/light themes"
+msgstr "Temi scuri/chiari automatici"
+
+#. metadata.json->description
+msgid "Automatically switch between dark and light themes at twilight times."
+msgstr ""
+"Passa automaticamente dal tema scuro a quello chiaro e viceversa al "
+"crepuscolo."
+
+#. settings-schema.json->settings->title
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. settings-schema.json->settings_state->title
+msgid "State"
+msgstr "Stato"
+
+#. settings-schema.json->settings_control->title
+msgid "Control"
+msgstr "Controllo"
+
+#. settings-schema.json->settings_location->title
+msgid "Location"
+msgstr "Posizione"
+
+#. settings-schema.json->light-mode_themes->title
+#. settings-schema.json->dark-mode_themes->title
+msgid "Themes"
+msgstr "Temi"
+
+#. settings-schema.json->light-mode_others->title
+#. settings-schema.json->dark-mode_others->title
+msgid "Others"
+msgstr "Altri"
+
+#. settings-schema.json->light-mode_background->title
+#. settings-schema.json->dark-mode_background->title
+msgid "Desktop background"
+msgstr "Sfondo del desktop"
+
+#. settings-schema.json->light-mode_commands->title
+#. settings-schema.json->dark-mode_commands->title
+msgid "Custom commands"
+msgstr "Comandi personalizzati"
+
+#. settings-schema.json->settings_control_switch_auto-mode->description
+msgid "Automatically switch modes"
+msgstr "Cambia automaticamente modalità"
+
+#. settings-schema.json->settings_control_switch_auto-mode->tooltip
+msgid ""
+"Automatically switch between light and dark modes based on the location and "
+"time of day"
+msgstr ""
+"Passa automaticamente dalla modalità chiara a quella scura in base alla "
+"posizione e all'ora del giorno"
+
+#. settings-schema.json->settings_state_switch_dark-mode->description
+msgid "Light/dark mode"
+msgstr "Modalità chiara/scura"
+
+#. settings-schema.json->settings_state_switch_dark-mode->tooltip
+msgid "Toggle light or dark mode manually"
+msgstr "Attiva/disattiva manualmente la modalità chiara o scura"
+
+#. settings-schema.json->settings_location_switch_sync-from-
+#. timezone->description
+msgid "Sync from the system"
+msgstr "Sincronizza dal sistema"
+
+#. settings-schema.json->settings_location_switch_sync-from-timezone->tooltip
+msgid ""
+"Dynamically sync the location coordinates from the region and city defined "
+"in the system using a local database"
+msgstr ""
+"Sincronizza dinamicamente le coordinate della posizione dalla regione e "
+"dalla città definite nel sistema utilizzando un database locale"
+
+#. settings-schema.json->settings_location_button_open-os-
+#. settings->description
+#. settings-schema.json->light-mode_themes_button_open-os-
+#. settings->description
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->description
+#. settings-schema.json->dark-mode_themes_button_open-os-settings->description
+#. settings-schema.json->dark-mode_background_button_open-os-
+#. settings->description
+msgid "Open the system settings"
+msgstr "Aprire le impostazioni di sistema"
+
+#. settings-schema.json->settings_location_button_open-os-settings->tooltip
+msgid ""
+"Open the system's settings window to select the region and city for the time "
+"zone"
+msgstr ""
+"Apre la finestra delle impostazioni del sistema per selezionare la regione e "
+"la città per il fuso orario"
+
+#. settings-schema.json->settings_location_entry_latitude->description
+msgid "Latitude"
+msgstr "Latitudine"
+
+#. settings-schema.json->settings_location_entry_latitude->tooltip
+msgid "Geographical latitude in decimal degrees"
+msgstr "Latitudine geografica in gradi decimali"
+
+#. settings-schema.json->settings_location_entry_longitude->description
+msgid "Longitude"
+msgstr "Longitudine"
+
+#. settings-schema.json->settings_location_entry_longitude->tooltip
+msgid "Geographical longitude in decimal degrees"
+msgstr "Longitudine geografica in gradi decimali"
+
+#. settings-schema.json->settings_location_button_show-twilight-
+#. times->description
+msgid "Check today's switch times in a notification"
+msgstr "Controlla gli orari di cambio di oggi in una notifica"
+
+#. settings-schema.json->settings_location_button_show-twilight-times->tooltip
+msgid ""
+"Show today's switch times for light and dark modes based on the current "
+"location via a system notification message"
+msgstr ""
+"Mostra gli orari di commutazione odierni per le modalità luce e buio in base "
+"alla posizione corrente tramite un messaggio di notifica di sistema"
+
+#. settings-schema.json->light-mode_themes_button_open-os-settings->tooltip
+#. settings-schema.json->dark-mode_themes_button_open-os-settings->tooltip
+msgid "Open the system's settings window to select the themes"
+msgstr "Apre la finestra delle impostazioni del sistema per selezionare i temi"
+
+#. settings-schema.json->light-mode_themes_button_detect->description
+#. settings-schema.json->light-mode_background_button_detect->description
+#. settings-schema.json->dark-mode_themes_button_detect->description
+#. settings-schema.json->dark-mode_background_button_detect->description
+msgid "Detect from the system"
+msgstr "Rileva dal sistema"
+
+#. settings-schema.json->light-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the light mode"
+msgstr ""
+"Rileva i temi del sistema attualmente impostati e li assegna alla modalità "
+"chiara"
+
+#. settings-schema.json->light-mode_themes_entry_mouse-pointer->description
+#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->description
+msgid "Mouse pointer"
+msgstr "Puntatore del mouse"
+
+#. settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
+#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
+msgid "Name of the mouse pointer theme"
+msgstr "Nome del tema del puntatore del mouse"
+
+#. settings-schema.json->light-mode_themes_entry_applications->description
+#. settings-schema.json->dark-mode_themes_entry_applications->description
+msgid "Applications"
+msgstr "Applicazioni"
+
+#. settings-schema.json->light-mode_themes_entry_applications->tooltip
+#. settings-schema.json->dark-mode_themes_entry_applications->tooltip
+msgid "Name of the applications theme (GTK theme)"
+msgstr "Nome del tema dell'applicazione (tema GTK)"
+
+#. settings-schema.json->light-mode_themes_entry_icons->description
+#. settings-schema.json->dark-mode_themes_entry_icons->description
+msgid "Icons"
+msgstr "Icone"
+
+#. settings-schema.json->light-mode_themes_entry_icons->tooltip
+#. settings-schema.json->dark-mode_themes_entry_icons->tooltip
+msgid "Name of the icons theme"
+msgstr "Nome del tema delle icone"
+
+#. settings-schema.json->light-mode_themes_entry_desktop->description
+#. settings-schema.json->dark-mode_themes_entry_desktop->description
+msgid "Desktop"
+msgstr "Scrivania"
+
+#. settings-schema.json->light-mode_themes_entry_desktop->tooltip
+#. settings-schema.json->dark-mode_themes_entry_desktop->tooltip
+msgid "Name of the desktop theme (Cinnamon theme)"
+msgstr "Nome del tema del desktop (tema Cinnamon)"
+
+#. settings-schema.json->light-mode_themes_button_apply->description
+#. settings-schema.json->light-mode_background_button_apply->description
+#. settings-schema.json->dark-mode_themes_button_apply->description
+#. settings-schema.json->dark-mode_background_button_apply->description
+msgid "Apply to the system"
+msgstr "Applica al sistema"
+
+#. settings-schema.json->light-mode_themes_button_apply->tooltip
+msgid "Apply the light mode themes to the system manually"
+msgstr "Applica manualmente i temi della modalità chiara al sistema"
+
+#. settings-schema.json->both-modes_background_switch_enable->description
+msgid "Set desktop background"
+msgstr "Imposta sfondo desktop"
+
+#. settings-schema.json->both-modes_background_switch_enable->tooltip
+msgid "Enable setting the desktop backgrounds for light and dark modes"
+msgstr ""
+"Abilita l'impostazione degli sfondi del desktop per le modalità chiara e "
+"scura"
+
+#. settings-schema.json->light-mode_commands_switch_enable->description
+#. settings-schema.json->dark-mode_commands_switch_enable->description
+msgid "Launch custom commands"
+msgstr "Avvia comandi personalizzati"
+
+#. settings-schema.json->light-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to light mode"
+msgstr ""
+"Abilita i comandi di impostazione da avviare quando si passa alla modalità "
+"chiara"
+
+#. settings-schema.json->light-mode_background_button_open-os-
+#. settings->tooltip
+#. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
+msgid "Open the system's settings window to set the background settings"
+msgstr ""
+"Apre la finestra delle impostazioni del sistema per impostare le "
+"impostazioni dello sfondo"
+
+#. settings-schema.json->light-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"light mode"
+msgstr ""
+"Rileva le impostazioni di sfondo del sistema attualmente impostate e le "
+"assegna alla modalità chiara"
+
+#. settings-schema.json->light-mode_background_switch_slideshow->description
+#. settings-schema.json->dark-mode_background_switch_slideshow->description
+msgid "Slideshow"
+msgstr "Presentazione"
+
+#. settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+msgid "Set the desktop background to be a slideshow"
+msgstr "Imposta lo sfondo del desktop come presentazione"
+
+#. settings-schema.json->light-mode_background_filechooser_file->description
+#. settings-schema.json->dark-mode_background_filechooser_file->description
+msgid "Image file"
+msgstr "File immagine"
+
+#. settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_file->tooltip
+msgid "Image file to be set as the desktop background"
+msgstr "File immagine da impostare come sfondo del desktop"
+
+#. settings-schema.json->light-mode_background_filechooser_folder->description
+#. settings-schema.json->dark-mode_background_filechooser_folder->description
+msgid "Images folder"
+msgstr "Cartella immagini"
+
+#. settings-schema.json->light-mode_background_filechooser_folder->tooltip
+#. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+msgid "Folder containing images to be set for the desktop background slideshow"
+msgstr ""
+"Cartella contenente le immagini da impostare per la presentazione sullo "
+"sfondo del desktop"
+
+#. settings-schema.json->light-mode_background_button_apply->tooltip
+msgid "Apply the light mode background settings to the system manually"
+msgstr ""
+"Applica manualmente le impostazioni dello sfondo in modalità chiara al "
+"sistema"
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Name"
+msgstr "Nome"
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Active"
+msgstr "Attiva"
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Expiry (s)"
+msgstr "Scadenza (s)"
+
+#. settings-schema.json->light-mode_commands_list->columns->title
+#. settings-schema.json->dark-mode_commands_list->columns->title
+msgid "Command"
+msgstr "Comando"
+
+#. settings-schema.json->light-mode_commands_list->tooltip
+#. settings-schema.json->dark-mode_commands_list->tooltip
+msgid ""
+"List of commands to be executed when switching to this mode\n"
+"\n"
+"Notes:\n"
+"- the name's purpose is for error messages\n"
+"- the expiry time kills the command's process\n"
+"- an expiry of 0 seconds means never\n"
+"- any child process won't be able to expire\n"
+"- the path is in the ~ directory\n"
+"- the error messages reports stderr when the return status is not 0 and will "
+"appear in a notification"
+msgstr ""
+"Elenco dei comandi da eseguire quando si passa a questa modalità\n"
+"\n"
+"Nota:\n"
+"- lo scopo del nome è per i messaggi di errore\n"
+"- il tempo di scadenza uccide il processo del comando\n"
+"- una scadenza di 0 secondi significa mai\n"
+"- nessun processo figlio potrà scadere\n"
+"- il percorso è nella directory ~\n"
+"- i messaggi di errore segnalano stderr quando lo stato di ritorno non è 0 e "
+"appariranno in una notifica"
+
+#. settings-schema.json->light-mode_commands_button_launch->description
+#. settings-schema.json->dark-mode_commands_button_launch->description
+msgid "Launch commands"
+msgstr "Comandi di avvio"
+
+#. settings-schema.json->light-mode_commands_button_launch->tooltip
+msgid "Launch the commands set for the light mode"
+msgstr "Avvia i comandi impostati per la modalità chiara"
+
+#. settings-schema.json->dark-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the dark mode"
+msgstr ""
+"Rileva i temi del sistema attualmente impostati e li assegna alla modalità "
+"scura"
+
+#. settings-schema.json->dark-mode_themes_button_apply->tooltip
+msgid "Apply the dark mode themes to the system manually"
+msgstr "Applica manualmente i temi della modalità scura al sistema"
+
+#. settings-schema.json->dark-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to dark mode"
+msgstr ""
+"Abilita i comandi di impostazione da avviare quando si passa alla modalità "
+"scura"
+
+#. settings-schema.json->dark-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"dark mode"
+msgstr ""
+"Rileva le impostazioni di sfondo del sistema attualmente impostate e le "
+"assegna alla modalità scura"
+
+#. settings-schema.json->dark-mode_background_button_apply->tooltip
+msgid "Apply the dark mode background settings to the system manually"
+msgstr ""
+"Applica manualmente le impostazioni dello sfondo in modalità scura al sistema"
+
+#. settings-schema.json->dark-mode_commands_button_launch->tooltip
+msgid "Launch the commands set for the dark mode"
+msgstr "Avvia i comandi impostati per la modalità scura"

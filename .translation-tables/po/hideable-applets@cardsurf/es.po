@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hideable-applets@cardsurf 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 10:25+0100\n"
+"PO-Revision-Date: 2024-02-08 10:17-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+msgid "Hides applets to tray"
+msgstr "Oculta los applets en la barra de tareas"
+
+#. metadata.json->name
+msgid "Hideable applets"
+msgstr "Applets ocultables"
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configuración"
+
+#. settings-schema.json->action_type->description
+msgid "Action"
+msgstr "Acción"
+
+#. settings-schema.json->action_type->options
+msgid "Open or close popup"
+msgstr "Abrir o cerrar la ventana emergente"
+
+#. settings-schema.json->action_type->options
+msgid "Toggle visibility applets"
+msgstr "Activar/Desactivar la visibilidad de los applets"
+
+#. settings-schema.json->action_type->tooltip
+msgid "An action to perform on trigger"
+msgstr "Una acción a realizar en el disparador"
+
+#. settings-schema.json->action_trigger_type->description
+msgid "Trigger"
+msgstr "Disparador"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Left mouse click"
+msgstr "Clic izquierdo del ratón"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "Mouse hover"
+msgstr "Pasar el ratón por encima"
+
+#. settings-schema.json->action_trigger_type->options
+msgid "None"
+msgstr "Ninguno"
+
+#. settings-schema.json->action_trigger_type->tooltip
+msgid "An event that triggers the action"
+msgstr "Un evento que desencadena la acción"
+
+#. settings-schema.json->side_type->description
+msgid "Applets location"
+msgstr "Ubicación de los applets"
+
+#. settings-schema.json->side_type->options
+msgid "Top"
+msgstr "Arriba"
+
+#. settings-schema.json->side_type->options
+msgid "Right"
+msgstr "A la derecha"
+
+#. settings-schema.json->side_type->options
+msgid "Bottom"
+msgstr "Abajo"
+
+#. settings-schema.json->side_type->options
+msgid "Left"
+msgstr "A la izquierda"
+
+#. settings-schema.json->side_type->tooltip
+msgid "A location of applets for which to toggle visibility"
+msgstr ""
+"Una ubicación de los applets para los que activar/desactivar la visibilidad"
+
+#. settings-schema.json->restore_hidden_string->description
+msgid "Restore as hidden"
+msgstr "Restaurar como oculto"
+
+#. settings-schema.json->restore_hidden_string->tooltip
+msgid ""
+"A comma-separated list of applet UUIDs.\n"
+"An applet from this list will be hidden if the applet is configured as "
+"hidden and the applet shows up."
+msgstr ""
+"Una lista de UUID de applets separados por comas.\n"
+"Un applet de esta lista se ocultará si el subprograma está configurado "
+"como oculto y aparece."
+
+#. settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "Guardar cada"
+
+#. settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "Con qué frecuencia guardar los últimos valores utilizados"
+
+#. settings-schema.json->tray_start->description
+msgid "Popup"
+msgstr "Ventana emergente"
+
+#. settings-schema.json->applet_popup_columns->description
+msgid "Columns"
+msgstr "Columnas"
+
+#. settings-schema.json->applet_popup_columns->tooltip
+msgid "A number of columns in the applet popup"
+msgstr "Varias columnas en la ventana emergente del applet"
+
+#. settings-schema.json->applet_popup_icons_size->units
+msgid "pixels"
+msgstr "pixeles"
+
+#. settings-schema.json->applet_popup_icons_size->description
+msgid "Icon size"
+msgstr "Tamaño del icono"
+
+#. settings-schema.json->applet_popup_icons_size->tooltip
+msgid "A size of an icon in the applet popup"
+msgstr "Tamaño de un icono en la ventana emergente del applet"
+
+#. settings-schema.json->applet_popup_icons_css->description
+msgid "Icon CSS"
+msgstr "Icono CSS"
+
+#. settings-schema.json->applet_popup_icons_css->tooltip
+msgid "A CSS style applied to the icons in the applet popup"
+msgstr ""
+"Un estilo CSS aplicado a los iconos de la ventana emergente del applet"
+
+#. settings-schema.json->applet_popup_table_css->description
+msgid "Table CSS"
+msgstr "Tabla CSS"
+
+#. settings-schema.json->applet_popup_table_css->tooltip
+msgid "A CSS style applied to a table in the applet popup"
+msgstr ""
+"Un estilo CSS aplicado a una tabla en la ventana emergente del applet"
+
+#. settings-schema.json->applet_popup_close_leave->description
+msgid "Auto close"
+msgstr "Cerrar automáticamente"
+
+#. settings-schema.json->applet_popup_close_leave->tooltip
+msgid "Close the applet popup when a mouse leaves the user interface"
+msgstr ""
+"Cerrar la ventana emergente del applet cuando el ratón abandona la "
+"interfaz de usuario"
+
+#. settings-schema.json->match_panel_icons_size->description
+msgid "Match panel size"
+msgstr "Coincidir con el tamaño del panel"
+
+#. settings-schema.json->match_panel_icons_size->tooltip
+msgid "Match a size of an icon in the applet popup to a size of the panel"
+msgstr ""
+"Hacer coincidir el tamaño de un icono de la ventana emergente del applet "
+"con el tamaño del panel"
+
+#. settings-schema.json->show_icon_tooltips->description
+msgid "Show tooltips"
+msgstr "Mostrar información sobre herramientas"
+
+#. settings-schema.json->show_icon_tooltips->tooltip
+msgid "Show icon tooltips in the applet popup"
+msgstr ""
+"Mostrar información sobre los iconos en la ventana emergente del applet"
+
+#. settings-schema.json->show_grayscale_icons->description
+msgid "Show grayscale icons"
+msgstr "Mostrar iconos en escala de grises"
+
+#. settings-schema.json->show_grayscale_icons->tooltip
+msgid "Show icons of hidden applets in grayscale"
+msgstr "Mostrar iconos de applets ocultos en escala de grises"
+
+#. settings-schema.json->grayscale_brightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->grayscale_brightness->description
+msgid "Grayscale brightness"
+msgstr "Brillo de la escala de grises"
+
+#. settings-schema.json->grayscale_brightness->tooltip
+msgid "A brightness level of grayscale icons"
+msgstr "Un nivel de brillo de los iconos en escala de grises"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Interfaz"
+
+#. settings-schema.json->gui_sort_type->description
+msgid "Sort"
+msgstr "Ordenar"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Alphabetically"
+msgstr "Alfabéticamente"
+
+#. settings-schema.json->gui_sort_type->options
+msgid "Panel position"
+msgstr "Posición del panel"
+
+#. settings-schema.json->gui_sort_type->tooltip
+msgid "An order of items in the user interface"
+msgstr "Orden de los elementos en la interfaz de usuario"
+
+#. settings-schema.json->gui_icon_type->description
+msgid "Panel icon"
+msgstr "Icono del panel"
+
+#. settings-schema.json->gui_icon_type->options
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Filepath"
+msgstr "Ruta de archivo"
+
+#. settings-schema.json->gui_icon_type->options
+msgid "Symbolic"
+msgstr "Simbólico"
+
+#. settings-schema.json->gui_icon_type->tooltip
+msgid "A type of an icon displayed on the panel"
+msgstr "Tipo de icono que aparece en el panel"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "A path to an icon displayed on a panel"
+msgstr "Ruta a un icono mostrado en un panel"
+
+#. settings-schema.json->gui_icon_symbolic_name->description
+msgid "Symbolic name"
+msgstr "Nombre simbólico"
+
+#. settings-schema.json->gui_icon_symbolic_name->tooltip
+msgid "A name of a symbolic icon displayed on a panel"
+msgstr "Nombre de un icono simbólico que aparece en un panel"
