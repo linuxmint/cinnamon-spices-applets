@@ -1,3 +1,6 @@
+### 2.8.1~20250217
+  * Updates the sample station list.
+
 ### 2.8.0~20250217
   * New option to load a sample station list when there is no station in the list.
   * Some minor changes.
