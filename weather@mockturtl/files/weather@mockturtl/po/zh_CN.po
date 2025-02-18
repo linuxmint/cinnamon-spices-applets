@@ -13,14 +13,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-04 07:03-0500\n"
-"PO-Revision-Date: 2023-05-31 19:39+0800\n"
+"PO-Revision-Date: 2025-02-18 18:32+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:19511
@@ -70,7 +70,7 @@ msgstr "地点未被覆盖"
 
 #. 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9018
 msgid "Weather Applet"
-msgstr "天气小程序"
+msgstr "天气面板小工具"
 
 #. 3.0/applet.js:217 3.8/weather-applet.js:19787
 msgid "..."
@@ -200,7 +200,7 @@ msgstr "警告"
 
 #. 3.0/applet.js:2032
 msgid "You can only save correct locations when the applet is not refreshing"
-msgstr "只有在小程序不刷新的情况下，您才能正确保存位置"
+msgstr "只有在面板小工具不刷新的情况下，您才能正确保存位置"
 
 #. 3.0/applet.js:2036 3.8/weather-applet.js:9177
 msgid "You can't save an incorrect location"
@@ -210,7 +210,7 @@ msgstr "您不能保存一个不正确的位置"
 #. 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
 #. 3.8/weather-applet.js:9181
 msgid "Info"
-msgstr "Info"
+msgstr "信息"
 
 #. 3.0/applet.js:2040 3.8/weather-applet.js:9181
 msgid "Location is already saved"
@@ -226,7 +226,7 @@ msgstr "位置已保存至库"
 
 #. 3.0/applet.js:2062
 msgid "You can't remove a location while the applet is refreshing"
-msgstr "在小程序刷新的时候，您不能删除一个位置"
+msgstr "在面板小工具刷新的时候，您不能删除一个位置"
 
 #. 3.0/applet.js:2066
 msgid "You can't remove an incorrect location"
@@ -912,7 +912,7 @@ msgstr "未找到位置，请确保位置可用或格式正确"
 
 #. 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10803
 msgid "If this problem persists, please contact the Author of this applet"
-msgstr "如果这个问题持续存在，请联系本小程序的作者"
+msgstr "如果这个问题持续存在，请联系本面板小工具的作者"
 
 #. 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10807
 msgid "Unknown Error, please see the logs in Looking Glass"
@@ -1529,6 +1529,7 @@ msgid ""
 "Address to location lookup service is blocked. You can try to change your "
 "User-Agent in help to see if it resolves the issue."
 msgstr ""
+"地址到位置查找服务被阻止。您可以尝试更改 User-Agent，看看它是否能解决问题。"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8/weather-applet.js:9708
@@ -1585,17 +1586,15 @@ msgstr "很好"
 
 #. 3.8/weather-applet.js:10418
 msgid "Ash"
-msgstr ""
+msgstr "火山灰"
 
 #. 3.8/weather-applet.js:10420
-#, fuzzy
 msgid "Squall"
 msgstr "飑"
 
 #. 3.8/weather-applet.js:10497
-#, fuzzy
 msgid "Light shower sleet"
-msgstr "小阵雪"
+msgstr "轻微的雨夹雪"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1619,22 +1618,18 @@ msgid "Heavy drizzle"
 msgstr "强毛雨"
 
 #. 3.8/weather-applet.js:11995
-#, fuzzy
 msgid "Light shower rain"
-msgstr "小阵雪"
+msgstr "小阵雨"
 
 #. 3.8/weather-applet.js:11999
-#, fuzzy
 msgid "Heavy shower rain"
 msgstr "强阵雪"
 
 #. 3.8/weather-applet.js:12007
-#, fuzzy
 msgid "Mix snow/rain"
 msgstr "雨夹雪"
 
 #. 3.8/weather-applet.js:12009
-#, fuzzy
 msgid "Snow shower"
 msgstr "阵雪"
 
@@ -1849,48 +1844,40 @@ msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
 #. 3.8/weather-applet.js:15516
-#, fuzzy
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "请确保您\n"
-"输入从 Climacell 获取的 API 密钥"
+"输入从 Pirate Weather 获取的 API 密钥"
 
 #. 3.8/weather-applet.js:15886
-#, fuzzy
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
-msgstr "定位服务响应错误，请查看 Looking Glass 中的日志"
+msgstr "定位服务无法找到你的位置，请查看 Looking Glass 中的日志"
 
 #. 3.8/weather-applet.js:16049
-#, fuzzy
 msgid "Snow grains"
-msgstr "雨夹雪"
+msgstr "米雪"
 
 #. 3.8/weather-applet.js:16056
-#, fuzzy
 msgid "Light showers"
-msgstr "小阵雪"
+msgstr "小雨"
 
 #. 3.8/weather-applet.js:16070
-#, fuzzy
 msgid "Heavy showers"
-msgstr "强阵雪"
+msgstr "大雨"
 
 #. 3.8/weather-applet.js:16098
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "雷暴，伴有小雨"
+msgstr "雷暴伴有轻微冰雹"
 
 #. 3.8/weather-applet.js:16105
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "雷暴，伴有雨"
+msgstr "雷暴伴冰雹"
 
 #. 3.8/weather-applet.js:16132 3.8/weather-applet.js:16292
-#, fuzzy
 msgid "Feels like"
 msgstr "体感"
 
@@ -1902,157 +1889,138 @@ msgstr ""
 #. 3.8/weather-applet.js:16478 3.8/weather-applet.js:16479
 #. 3.8/weather-applet.js:16722 3.8/weather-applet.js:16723
 #. 3.8/weather-applet.js:16729 3.8/weather-applet.js:16730
-#, fuzzy
 msgid "Scattered Sleet"
-msgstr "零星阵雨"
+msgstr "零星的雨夹雪"
 
 #. 3.8/weather-applet.js:16541 3.8/weather-applet.js:16542
 #. 3.8/weather-applet.js:16548 3.8/weather-applet.js:16549
 #. 3.8/weather-applet.js:16642 3.8/weather-applet.js:16643
-#, fuzzy
 msgid "Chance of Thunderstorms"
-msgstr "雷暴"
+msgstr "雷暴的几率"
 
 #. 3.8/weather-applet.js:16570 3.8/weather-applet.js:16571
-#, fuzzy
 msgid "Light Rain"
 msgstr "小雨"
 
 #. 3.8/weather-applet.js:16578 3.8/weather-applet.js:16579
-#, fuzzy
 msgid "Light Sleet"
 msgstr "小雨夹雪"
 
 #. 3.8/weather-applet.js:16594 3.8/weather-applet.js:16595
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "阵雨"
 
 #. 3.8/weather-applet.js:16602 3.8/weather-applet.js:16603
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "间歇性雨夹雪"
 
 #. 3.8/weather-applet.js:16610 3.8/weather-applet.js:16611
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "阵雪"
 
 #. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
-#, fuzzy
 msgid "Frequent Thunderstorms"
 msgstr "强雷暴"
 
 #. 3.8/weather-applet.js:16665 3.8/weather-applet.js:16666
 #. 3.8/weather-applet.js:16672 3.8/weather-applet.js:16673
-#, fuzzy
 msgid "High Clouds"
-msgstr "云"
+msgstr "高云"
 
 #. 3.8/weather-applet.js:16680 3.8/weather-applet.js:16681
-#, fuzzy
 msgid "Low Clouds"
-msgstr "云"
+msgstr "低云"
 
 #. 3.8/weather-applet.js:16779 3.8/weather-applet.js:16780
-#, fuzzy
 msgid "Overcast and Dry"
-msgstr "阴，有风"
+msgstr "阴，干燥"
 
 #. 3.8/weather-applet.js:16786 3.8/weather-applet.js:16787
 #. 3.8/weather-applet.js:16793 3.8/weather-applet.js:16794
 #. 3.8/weather-applet.js:16843 3.8/weather-applet.js:16844
 #. 3.8/weather-applet.js:16851 3.8/weather-applet.js:16852
-#, fuzzy
 msgid "Slightly Stormy"
-msgstr "小雪"
+msgstr "略微暴风雨"
 
 #. 3.8/weather-applet.js:16800 3.8/weather-applet.js:16801
 #. 3.8/weather-applet.js:16807 3.8/weather-applet.js:16808
-#, fuzzy
 msgid "Stormy Snow Showers"
-msgstr "零星阵雪"
+msgstr "暴风雪阵雨"
 
 #. 3.8/weather-applet.js:16814 3.8/weather-applet.js:16815
 #. 3.8/weather-applet.js:16821 3.8/weather-applet.js:16822
-#, fuzzy
 msgid "Thundery Showers"
-msgstr "阵雷"
+msgstr "雷阵雨"
 
 #. 3.8/weather-applet.js:16828 3.8/weather-applet.js:16829
 #. 3.8/weather-applet.js:16835 3.8/weather-applet.js:16836
 #. 3.8/weather-applet.js:16859 3.8/weather-applet.js:16860
-#, fuzzy
 msgid "Thundery Snow Showers"
-msgstr "阵雷"
+msgstr "雷雨阵雨"
 
 #. 3.8/weather-applet.js:16948
-#, fuzzy
 msgid "Wind Warning"
-msgstr "警告"
+msgstr "风警告"
 
 #. 3.8/weather-applet.js:16950
-#, fuzzy
 msgid "Thunderstorm Warning"
-msgstr "雷暴，伴有雨"
+msgstr "雷暴警告"
 
 #. 3.8/weather-applet.js:16952
-#, fuzzy
 msgid "Rain Warning"
-msgstr "警告"
+msgstr "降雨警告"
 
 #. 3.8/weather-applet.js:16954
-#, fuzzy
 msgid "Snow Warning"
-msgstr "警告"
+msgstr "降雪警告"
 
 #. 3.8/weather-applet.js:16956
 msgid "Slippery Roads Warning"
-msgstr ""
+msgstr "湿滑道路警告"
 
 #. 3.8/weather-applet.js:16958
-#, fuzzy
 msgid "Frost Warning"
-msgstr "警告"
+msgstr "霜冻警告"
 
 #. 3.8/weather-applet.js:16960
 msgid "Mass Movements Warning"
-msgstr ""
+msgstr "地质灾害警告"
 
 #. 3.8/weather-applet.js:16962
-#, fuzzy
 msgid "Heat Warning"
-msgstr "警告"
+msgstr "高温警告"
 
 #. 3.8/weather-applet.js:16964
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "雪崩警告"
 
 #. 3.8/weather-applet.js:16966
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "地震警告"
 
 #. 3.8/weather-applet.js:16968
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "森林火灾警告"
 
 #. 3.8/weather-applet.js:16970
-#, fuzzy
 msgid "Flood Warning"
-msgstr "警告"
+msgstr "洪水警告"
 
 #. 3.8/weather-applet.js:16990
 msgid "Swiss Météo"
-msgstr ""
+msgstr "瑞士气象局"
 
 #. 3.8/weather-applet.js:17009
 msgid "For this provider, you need to use a postcode."
-msgstr ""
+msgstr "对于此提供，您需要使用邮政编码。"
 
 #. 3.8/weather-applet.js:17021
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
-msgstr ""
+msgstr "对于此提供商，您需要使用瑞士邮政编码，范围为 1000-9999。"
 
 #. 3.8/weather-applet.js:17043
 msgid "Switzerland"
-msgstr ""
+msgstr "瑞士"
 
 #. 3.8/weather-applet.js:17474
 msgid ""
@@ -2071,9 +2039,8 @@ msgstr ""
 " {configFilePath}"
 
 #. 3.8/weather-applet.js:17757
-#, fuzzy
 msgid "Make sure you entered a location or use Automatic location instead."
-msgstr "确保您输入了一个位置或使用自动定位代替"
+msgstr "确保您输入了一个位置或使用自动定位代替。"
 
 #. 3.8/weather-applet.js:17775
 msgid "This provider requires an API key to operate"
@@ -2117,7 +2084,7 @@ msgstr "地区：{stationArea}"
 
 #. 3.8/weather-applet.js:19078
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} 个天气警报"
 
 #. 3.8/weather-applet.js:19473 3.8/weather-applet.js:19483
 #. 3.8/weather-applet.js:19490
@@ -2125,9 +2092,8 @@ msgid "Error Saving Debug Information"
 msgstr "保存调试信息时出错"
 
 #. 3.8/weather-applet.js:19490
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "无法获取天气信息"
+msgstr "无法打开文件 {filePath} 进行写入"
 
 #. 3.8/weather-applet.js:19499
 msgid "Debug Information saved successfully"
@@ -2138,47 +2104,44 @@ msgid "Saved to {filePath}"
 msgstr "已保存到 {filePath}"
 
 #. 3.8/weather-applet.js:19528
-#, fuzzy
 msgid "Location Service Blocked"
-msgstr "保存位置"
+msgstr "位置服务已阻止"
 
 #. 3.8/weather-applet.js:19703
 msgid "No Script Provided"
-msgstr ""
+msgstr "未提供脚本"
 
 #. 3.8/weather-applet.js:19703
 msgid "You need to add a script first."
-msgstr ""
+msgstr "您需要先添加一个脚本。"
 
 #. 3.8/weather-applet.js:19707
-#, fuzzy
 msgid "No Weather Data"
-msgstr "美国国家气象局"
+msgstr "无天气数据"
 
 #. 3.8/weather-applet.js:19707
 msgid "No weather data to run script with"
-msgstr ""
+msgstr "没有天气数据来运行脚本"
 
 #. 3.8/weather-applet.js:19715
 msgid "Script Executed Successfully"
-msgstr ""
+msgstr "脚本已成功执行"
 
 #. 3.8/weather-applet.js:19715
 msgid "Your script has been executed successfully."
-msgstr ""
+msgstr "您的脚本已成功执行。"
 
 #. 3.8/weather-applet.js:19718
 msgid "Error Running Script"
-msgstr ""
+msgstr "运行脚本时出错"
 
 #. 3.8/weather-applet.js:19718
 msgid "Script returned error, see logs for more information"
-msgstr ""
+msgstr "脚本返回错误，有关详细信息，请参阅日志"
 
 #. 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "天气小程序"
+msgstr "天气面板小工具警报"
 
 #. 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2199,7 +2162,7 @@ msgstr "查看当地的天气预报"
 
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
-msgstr "weather@mockturtl 3.0+ 的设置"
+msgstr "[天气@mockturtl 3.0+]的设置"
 
 #. 3.0->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
@@ -2241,7 +2204,7 @@ msgstr "WeatherBit (需要密钥)"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Yahoo"
-msgstr "Yahoo"
+msgstr "雅虎"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Climacell (key needed)"
@@ -2581,7 +2544,7 @@ msgstr "图标"
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons in the applet"
-msgstr "在小程序中使用符号图标"
+msgstr "在面板小工具中使用符号图标"
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
@@ -2607,7 +2570,7 @@ msgstr "位置设置"
 
 #. 3.8->settings-schema.json->technical-automation->title
 msgid "Technical and Automation"
-msgstr ""
+msgstr "技术和自动化"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
@@ -2635,7 +2598,7 @@ msgstr "快捷键"
 
 #. 3.8->settings-schema.json->more-info->title
 msgid "More about the Weather applet"
-msgstr "关于天气小程序的更多信息"
+msgstr "关于天气面板小工具的更多信息"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
@@ -2644,7 +2607,7 @@ msgstr "报告问题"
 #. 3.8->settings-schema.json->debug-options->title
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Debug"
-msgstr "Debug"
+msgstr "调试"
 
 #. 3.8->settings-schema.json->dataService->tooltip
 msgid ""
@@ -2661,7 +2624,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo（开放气象）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2677,12 +2640,11 @@ msgstr "美国国家气象局 (仅限美国)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Swiss Météo (Switzerland only)"
-msgstr ""
+msgstr "瑞士联邦气象局（仅限瑞士）"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "WeatherBit (需要密钥)"
+msgstr "OpenWeatherMap OneCall（需要密钥）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2705,14 +2667,13 @@ msgid "Weather Underground (key needed)"
 msgstr "Weather Underground (需要密钥)"
 
 #. 3.8->settings-schema.json->location->tooltip
-#, fuzzy
 msgid ""
 "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "您可以输入坐标 “纬度,经度” (例如 51.5085,-0.1257) 或使用“城市,国家代码” (例"
 "如 London,UK) 或尝试输入 {门牌号码} {街道名称} {城市/城镇} {邮政编码} {国"
@@ -2723,7 +2684,7 @@ msgstr ""
 msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
-msgstr ""
+msgstr "如果位置字段与已保存位置的 '搜索条目' 字段匹配，则将使用已保存的位置。"
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2734,12 +2695,12 @@ msgid ""
 "Saves location information to file so you can switch between them with "
 "buttons in the applet, which will appear if you have more than one."
 msgstr ""
-"将位置信息保存到文件。当您有多个位置时，小程序中会出现一个按钮，让您在它们之"
-"间切换。"
+"将位置信息保存到文件。当您有多个位置时，面板小工具中会出现一个按钮，让您在它"
+"们之间切换。"
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "在 Cinnamon Spices 网站上的天气小程序"
+msgstr "在 Cinnamon Spices 网站上的天气面板小工具"
 
 #. 3.8->settings-schema.json->refreshInterval->tooltip
 msgid ""
@@ -2775,17 +2736,17 @@ msgid ""
 "your provider"
 msgstr ""
 "如果您想使用这个功能，请确保使用您的确切坐标或地址作为位置，以保证其准确性。"
-"请参阅网站上的功能图以了解对您的提供商的支持。"
+"请参阅网站上的功能图以了解对您的提供商的支持"
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "启用显示天气警报"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
-msgstr ""
+msgstr "如果您所在位置有任何活动警报，则弹出菜单中将显示警报按钮。"
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2870,7 +2831,7 @@ msgstr "例如 “东南”、“北”，而不是方向图标。"
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "提供程序应翻译天气状况（如果可用）"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
@@ -2878,6 +2839,8 @@ msgid ""
 "locale is supported by the provider. Otherwise the applet will use it's own "
 "translation system."
 msgstr ""
+"如果您的地区受提供商支持，提供商是否应该将天气状况翻译为您的语言。不翻译时，"
+"面板小工具将使用它自己的翻译系统。"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2885,7 +2848,7 @@ msgstr "不适用于自定义图标集，它默认使用符号图标"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr "在整个小程序中使用符号图标"
+msgstr "在整个面板小工具中使用符号图标"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
@@ -2894,8 +2857,8 @@ msgid ""
 "clicking the button below. Here you can ask questions etc in the comment "
 "section by logging in with your Github account."
 msgstr ""
-"有关小程序的详细信息，请单击下方按钮访问 Spices 网站，查找已知问题、疑难解"
-"答、更新日志等信息，在那里您可以使用 Github 账户登录后在评论区提问。"
+"有关面板小工具的详细信息，请单击下方按钮访问 Spices 网站，查找已知问题、疑难"
+"解答、更新日志等信息，在那里您可以使用 Github 账户登录后在评论区提问。"
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2907,8 +2870,8 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
-"将打开网页，在那里您可以为小程序提交一个新的问题报告，这需要一个 GitHub 账"
-"户。\n"
+"将打开网页，在那里您可以为面板小工具提交一个新的问题报告，这需要一个 GitHub "
+"账户。\n"
 " 请确保该问题没有被提交过。"
 
 #. 3.8->settings-schema.json->maintainer->description
@@ -2927,23 +2890,24 @@ msgid ""
 "the issue is about. Logs with Debug level (which can be saved to a file "
 "below) are also appreciated."
 msgstr ""
-"如果您发现这个小程序有问题，请点击下方按钮并使用 Github 账户登录，以提交报"
-"告。\n"
+"如果您发现这个面板小工具有问题，请点击下方按钮并使用 Github 账户登录，以提交"
+"报告。\n"
 "\n"
 "在您开始描述之前，请确保该问题尚未在 Issue 列表中被提交，并检查问题描述中预先"
-"填写的内容，不要忘记在上方标题栏小程序名称旁边添加简短的描述，以便让大家更容"
-"易了解问题的内容，也欢迎提供 Debug 级别的日志 (可以通过下方按钮保存至文件)"
+"填写的内容，不要忘记在上方标题栏面板小工具名称旁边添加简短的描述，以便让大家"
+"更容易了解问题的内容，也欢迎提供 Debug 级别的日志 (可以通过下方按钮保存至文"
+"件)"
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
-"在大多数情况下小程序会自动定位，但您也可以手动输入坐标 “纬度,经度” (例如 "
+"在大多数情况下面板小工具会自动定位，但您也可以手动输入坐标 “纬度,经度” (例如 "
 "51.5085,-0.1257) 或使用“城市,国家代码” (例如 London,UK) 或尝试输入 {门牌号"
 "码} {街道名称} {城市/城镇} {邮政编码} {国家}，搜索算法非常灵活。停止输入 3 秒"
 "后，您输入的地址将被自动替换，以验证您的选择。"
@@ -2964,7 +2928,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
-msgstr "Verbose"
+msgstr "详细"
 
 #. 3.8->settings-schema.json->fileSelect->description
 msgid "Click Save to save debug information to a file"
@@ -2974,7 +2938,7 @@ msgstr "单击按钮将调试信息保存到文件中"
 msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
-msgstr "它将包含小程序的日志和当前的设置，其中您的 API 密钥会被去除。"
+msgstr "它将包含面板小工具的日志和当前的设置，其中您的 API 密钥会被去除。"
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
@@ -2982,7 +2946,7 @@ msgstr "选择保存日志的路径"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr ""
+msgstr "用户代理字符串覆盖"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
@@ -2991,10 +2955,13 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"如果您遇到面板小工具无法正常工作的问题，并且您知道 User Agent 字符串是问题所"
+"在，您可以尝试覆盖它。只有在您知道自己在做什么时才更改它。这是当 applet 尝试"
+"获取天气数据时发送到服务器的字符串。"
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
-msgstr ""
+msgstr "在天气信息更改时运行命令"
 
 #. 3.8->settings-schema.json->runScript->tooltip
 msgid ""
@@ -3014,7 +2981,18 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"每次更新天气数据时，该面板小工具将运行您提供的命令。该命令将以相同的值和您可"
+"以在任何覆盖中获得的相同格式进行插值，此外，您还可以获得 {full_data}，这是完"
+"整的当前天气数据。带有单括号 {xxx} 的插值不会被转义，带有双括号 {{xxxx}} 的插"
+"值被括在单引号 （'） 中，所有其他单引号都被转义在里面。您可以使用它来将天气数"
+"据与系统的其他部分集成。您可以通过 README 中的链接查找完整的天气数据结构。\n"
+"\n"
+"示例：'notify-send “The weather is {c} and the temperature is {t}{u}”' 将显示"
+"包含当前天气状况和温度的通知。\n"
+"\n"
+"例如： 'echo {{full_data}} > /tmp/weather_data' 会将完整的天气数据保存到 /"
+"tmp 中的文件中。"
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
-msgstr ""
+msgstr "测试您的命令"
