@@ -245,7 +245,14 @@
     "default": [
       "banshee",
       "vlc",
-      "rhythmbox"
+      "rhythmbox",
+      "mpv",
+      "io.github.celluloid_player.Celluloid",
+      "firefox",
+      "spotify",
+      "smplayer",
+      "org.gnome.Totem",
+      "mullvad browser"
     ]
   },
   "showtrack": {

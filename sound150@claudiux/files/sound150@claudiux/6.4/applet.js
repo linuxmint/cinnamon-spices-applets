@@ -3108,7 +3108,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     setAppletTooltip() {
         let tooltips = [];
         if (this.tooltipShowVolume) {
-            tooltips.push(_("Volume") + ": " + this.volume);
+            tooltips.push(_("Volume") + ": " + this.volume + "\n");
         }
         if (this.player && this.player._owner == this._activePlayer) {
             if (this.tooltipShowPlayer) {
@@ -3116,7 +3116,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
             if (this.tooltipShowArtistTitle) {
                 if (this.player._artist != _("Unknown Artist")) {
-                    tooltips.push(this.player._artist);
+                    tooltips.push("<b>" + this.player._artist + "</b>");
                 }
                 if (this._title != _("Unknown Title")) {
                     tooltips.push(this.player._title);
@@ -3128,7 +3128,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             tooltips.push(_("Please select 'Install playerctl' in this menu"));
         }
 
-        this.set_applet_tooltip(tooltips.join("\n"));
+        this.set_applet_tooltip(tooltips.join("\n"), true);
         this.volume_near_icon();
     }
 
