@@ -2472,7 +2472,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.radioNameBolded === undefined)
       this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
 
-    let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n";
+    let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n\n";
     if (title.length > 0) {
       var artist = "";
       if (title.includes(" - ")) {
@@ -2480,10 +2480,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (artist.length > 0)
           _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
       }
-      _tooltip += title.replace(/\"/g, "") + "\n";
+      _tooltip += title.replace(/\"/g, "");
     }
     if (this.percentage !== "undefined")
-      _tooltip += _("Volume: %s%").format(this.percentage);
+      _tooltip += "\n\n" + _("Volume: %s%").format(this.percentage);
 
     if (this.show_help_in_tooltip) {
       if (this.record_pid != null)
@@ -2508,7 +2508,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (this.last_radio_listened_to != null && this.last_radio_listened_to.length > 0) {
       this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
-      _tooltip = "" + this.radioNameBolded + this.codecAndBitrate;
+      _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n";
 
       var title = "" + this.songTitle;
 
@@ -2530,7 +2530,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }
         percentage = null;
       }
-      _tooltip += "\n" + _("Volume: %s%").format(this.percentage);
+      _tooltip += "\n\n" + _("Volume: %s%").format(this.percentage);
 
       if (this.show_help_in_tooltip) {
         if (this.record_pid != null)

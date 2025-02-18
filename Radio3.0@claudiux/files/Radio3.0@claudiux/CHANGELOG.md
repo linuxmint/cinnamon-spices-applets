@@ -1,3 +1,6 @@
+### 2.8.2~20250218
+  * Improved tooltip layout.
+
 ### 2.8.1~20250217
   * Updates the sample station list.
 
