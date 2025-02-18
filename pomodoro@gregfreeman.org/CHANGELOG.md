@@ -1,3 +1,6 @@
+### 1.0.3
+    - Added support for Cinnamon 6.4 new modal dialog format
+
 ### 1.0.2
     - Added options to run custom scripts when a short break and long break starts
 
