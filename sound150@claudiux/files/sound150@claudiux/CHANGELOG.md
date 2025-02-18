@@ -1,3 +1,6 @@
+### v10.1.1~20250218
+  * Improved tooltip layout.
+
 ### v10.1.0~20250209
   * Changes required by the Linux Mint - Cinnamon team.
   * From now on, having a horizontal OSD requires the OSD150@claudiux extension.
