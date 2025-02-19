@@ -24,3 +24,7 @@ msgstr ""
 #. metadata.json->description
 msgid "Download and apply Today's Bing Wallpaper to your desktop"
 msgstr ""
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr ""
