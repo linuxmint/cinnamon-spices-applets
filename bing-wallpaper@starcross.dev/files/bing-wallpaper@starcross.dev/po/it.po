@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BING DESKTOP WALLPAPER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Starcross, 2019
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-07 22:54+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-19 08:43-0500\n"
 "PO-Revision-Date: 2023-12-11 17:59+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -17,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:50
+msgid "Refresh Now"
+msgstr ""
 
 #. metadata.json->name
 msgid "Bing Desktop Wallpaper"
