@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-17 18:31+0100\n"
-"PO-Revision-Date: 2025-01-22 21:33+0100\n"
+"PO-Revision-Date: 2025-02-19 23:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -256,9 +256,8 @@ msgid "Search for new stations..."
 msgstr "Nach neuen Sendern suchen..."
 
 #. applet.js:2626
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Diese Senderliste aktualisieren"
+msgstr "Eine Beispiel-Senderliste laden"
 
 #. applet.js:2669 applet.js:3110 applet.js:5188 applet.js:5616
 msgid "Sound Settings"
@@ -407,30 +406,35 @@ msgstr "Schließen"
 
 #. applet.js:4944
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #. applet.js:4945
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Radio3.0 Applet"
 
 #. applet.js:4948
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Die OSD150-Erweiterung aktivieren"
 
 #. applet.js:4949
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Um ein horizontales OSD zu erhalten, müssen Sie die OSD150-Erweiterung "
+"aktivieren."
 
 #. applet.js:4967
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Die OSD150-Erweiterung herunterladen"
 
 #. applet.js:4968
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Um ein horizontales OSD zu erhalten, müssen Sie die OSD150-Erweiterung "
+"herunterladen.\n"
+"Klicken Sie auf Download, suchen Sie nach OSD150 und wählen Sie die ⬇-"
+"Schaltfläche aus."
 
 #. applet.js:5097 applet.js:5443
 #, javascript-format
@@ -1286,10 +1290,12 @@ msgstr "Lautstärke-OSD beim Ändern des Radiosenders anzeigen"
 msgid "Show '%' in OSD"
 msgstr "'%' im OSD anzeigen"
 
+# OSD = On-Screen-Display ?
+# Maybe translate OSD.
+# "Bildschirmanzeige"?
 #. settings-schema.json->show-horizontal-osd->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "'%' im OSD anzeigen"
+msgstr "Horizontales OSD anzeigen"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -3241,11 +3247,11 @@ msgid "Album Art for Radio3.0"
 msgstr "Albumcover für Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
-#, fuzzy
 msgid ""
 "A digital photo frame desklet to display the Radio3.0 album art, if available"
 msgstr ""
-"Ein digitales Bilderrahmen-Desklet zur Anzeige des Radio3.0-Albumcovers"
+"Ein digitaler Bilderrahmen-Desklet, um das Albumcover von Radio3.0 "
+"anzuzeigen, falls verfügbar"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
