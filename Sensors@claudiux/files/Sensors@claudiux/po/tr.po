@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-05 10:49+0100\n"
+"POT-Creation-Date: 2025-02-20 17:21+0100\n"
 "PO-Revision-Date: 2021-01-04 11:39+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -20,108 +20,110 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
-#. applet.js:235
+#. applet.js:233 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sensörler Monitörü"
 
-#. applet.js:418
+#. applet.js:478 applet_OLD.js:418
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:638 applet.js:682
+#. applet.js:731 applet.js:775 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "yüksek:"
 
-#. applet.js:638 applet.js:642 applet.js:682 applet.js:684 applet.js:726
+#. applet.js:731 applet.js:735 applet.js:775 applet.js:777 applet.js:819
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "d/y"
 
-#. applet.js:642 applet.js:684
+#. applet.js:735 applet.js:777 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "kritik:"
 
-#. applet.js:726 applet.js:770
+#. applet.js:819 applet.js:863 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "asg:"
 
-#. applet.js:772
+#. applet.js:865 applet_OLD.js:772
 msgid "max:"
 msgstr "azm:"
 
-#. applet.js:801
+#. applet.js:894 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "İzinsiz giriş tespit edilmedi"
 
-#. applet.js:801
+#. applet.js:894 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "GİRİŞ TESPİT EDİLDİ!"
 
-#. applet.js:821
+#. applet.js:914 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Yapılandırılmalıdır!"
 
-#. applet.js:1208
+#. applet.js:1321 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Ayarlar"
 
-#. applet.js:1208
+#. applet.js:1321 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1215
+#. applet.js:1328 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Genel"
 
-#. applet.js:1231
+#. applet.js:1344 applet_OLD.js:1231
 #, fuzzy, javascript-format
 msgid "%s Temperature sensors"
 msgstr "Sıcaklık sensörleri"
 
-#. applet.js:1247
+#. applet.js:1360 applet_OLD.js:1247
 #, fuzzy, javascript-format
 msgid "%s Fan sensors"
 msgstr "Fan sensörleri"
 
-#. applet.js:1263
+#. applet.js:1376 applet_OLD.js:1263
 #, fuzzy, javascript-format
 msgid "%s Voltage sensors"
 msgstr "Voltaj sensörleri"
 
-#. applet.js:1279
+#. applet.js:1392 applet_OLD.js:1279
 #, fuzzy, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "İzinsiz giriş sensörleri"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1306
+#. applet.js:1419 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensorleri çalıştır"
 
-#. applet.js:1315
+#. applet.js:1428 applet_OLD.js:1315
 #, fuzzy
 msgid "Suspend Sensors"
 msgstr "Xsensorleri çalıştır"
 
-#. applet.js:1326
+#. applet.js:1439 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Bu uygulamayı yeniden yükleyin"
 
-#. applet.js:1656
+#. applet.js:1769 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "'%s'yi kaldırmak istediğinizden emin misiniz?"
 
-#. lib/checkDependencies.js:350
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "%s uygulaması tamamen işlevseldir."
 
-#. lib/checkDependencies.js:351
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Tüm bağımlılıklar yüklü"
 
-#. lib/checkDependencies.js:380
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -129,15 +131,15 @@ msgstr ""
 "Bu uygulamanın tüm özelliklerine sahip olması için gereken programlardan "
 "bazılarını kaçırıyorsunuz."
 
-#. lib/checkDependencies.js:382
+#. lib/checkDependencies.js:385
 msgid "Please install these packages:"
 msgstr ""
 
-#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Bazı bağımlılıklar kurulu değil!"
 
-#. lib/checkDependencies.js:398
+#. lib/checkDependencies.js:401
 msgid "Install these packages now"
 msgstr ""
 
@@ -415,13 +417,12 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#. settings-schema.json->separator->description
-msgid "Separator"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
 msgstr ""
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -517,6 +518,17 @@ msgid ""
 msgstr ""
 "Aşağıdaki listede seçilen sensörlerin değerlerinin gösterilip "
 "gösterilmeyeceği."
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -686,6 +698,10 @@ msgid ""
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
 #. settings-schema.json->strictly_positive_fan->description
 #, fuzzy
 msgid "Show only positive or zero values"
@@ -720,6 +736,10 @@ msgid ""
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
+msgstr ""
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
 msgstr ""
 
 #. settings-schema.json->volt_unit->description
@@ -780,6 +800,10 @@ msgid ""
 msgstr ""
 "Aşağıdaki listede seçilen sensörlerin değerlerinin gösterilip "
 "gösterilmeyeceği."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
