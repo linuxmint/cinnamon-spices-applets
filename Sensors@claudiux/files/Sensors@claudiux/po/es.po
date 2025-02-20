@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-20 17:21+0100\n"
-"PO-Revision-Date: 2025-02-05 13:30-0300\n"
+"PO-Revision-Date: 2025-02-20 14:50-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -412,18 +412,12 @@ msgid "Text Color"
 msgstr "Color del texto"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Valor\n"
-"crítico"
+msgstr "Color de valor crítico"
 
 #. settings-schema.json->high_color->description
-#, fuzzy
 msgid "High Value Color"
-msgstr ""
-"Valor\n"
-"alto"
+msgstr "Color de alto valor"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -520,14 +514,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "El primer emoji de esta lista se utiliza para la temperatura"
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -716,7 +710,7 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "El primer emoji de esta lista se utiliza para ventilador"
 
 #. settings-schema.json->strictly_positive_fan->description
 msgid "Show only positive or zero values"
@@ -767,7 +761,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "El primer emoji de esta lista se utiliza para el voltaje"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -844,7 +838,7 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "El primer emoji de esta lista se utiliza para intrusión"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
