@@ -1,3 +1,9 @@
+### v5.0.0~20250220
+  * Individual High/Critical Value Indications.
+  * High/Critical Value Color can be selected.
+  * Custom emoji can be added/selected.
+  * Fixes #6846.
+
 ### v4.2.1~20250215
   * Fixes #6868.
 

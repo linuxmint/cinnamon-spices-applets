@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-05 10:49+0100\n"
+"POT-Creation-Date: 2025-02-20 17:21+0100\n"
 "PO-Revision-Date: 2024-11-24 19:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,107 +19,109 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#. applet.js:235
+#. applet.js:233 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#. applet.js:418
+#. applet.js:478 applet_OLD.js:418
 msgid "Suspended"
 msgstr "Felfüggesztve"
 
-#. applet.js:638 applet.js:682
+#. applet.js:731 applet.js:775 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "magas:"
 
-#. applet.js:638 applet.js:642 applet.js:682 applet.js:684 applet.js:726
+#. applet.js:731 applet.js:735 applet.js:775 applet.js:777 applet.js:819
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:642 applet.js:684
+#. applet.js:735 applet.js:777 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:726 applet.js:770
+#. applet.js:819 applet.js:863 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:772
+#. applet.js:865 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:801
+#. applet.js:894 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#. applet.js:801
+#. applet.js:894 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#. applet.js:821
+#. applet.js:914 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#. applet.js:1208
+#. applet.js:1321 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Beállítások"
 
-#. applet.js:1208
+#. applet.js:1321 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1215
+#. applet.js:1328 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#. applet.js:1231
+#. applet.js:1344 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Hőmérséklet szenzorok"
 
-#. applet.js:1247
+#. applet.js:1360 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilátor szenzorok"
 
-#. applet.js:1263
+#. applet.js:1376 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Feszültség szenzorok"
 
-#. applet.js:1279
+#. applet.js:1392 applet_OLD.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1306
+#. applet.js:1419 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#. applet.js:1315
+#. applet.js:1428 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr "Felfüggesztett Szenzorok"
 
-#. applet.js:1326
+#. applet.js:1439 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#. applet.js:1656
+#. applet.js:1769 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
 
-#. lib/checkDependencies.js:350
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#. lib/checkDependencies.js:351
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#. lib/checkDependencies.js:380
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -127,15 +129,15 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#. lib/checkDependencies.js:382
+#. lib/checkDependencies.js:385
 msgid "Please install these packages:"
 msgstr ""
 
-#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
-#. lib/checkDependencies.js:398
+#. lib/checkDependencies.js:401
 msgid "Install these packages now"
 msgstr ""
 
@@ -411,16 +413,19 @@ msgstr "Szövegszín testreszabása"
 msgid "Text Color"
 msgstr "Szövegszín"
 
-#. settings-schema.json->separator->description
-msgid "Separator"
-msgstr "Elválasztó"
-
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
+#. settings-schema.json->crit_color->description
+#, fuzzy
+msgid "Critical Value Color"
 msgstr ""
-"A vízszintes elrendezésben használt értékek elválasztására szolgáló "
-"karakterlánc. Az alapértelmezett érték: „│”."
+"Kritikus\n"
+"érték"
+
+#. settings-schema.json->high_color->description
+#, fuzzy
+msgid "High Value Color"
+msgstr ""
+"Magas\n"
+"érték"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -513,6 +518,17 @@ msgid ""
 msgstr ""
 "Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
 "név” elemet vagy sem. Nincs hatással a függőleges panelekre."
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -699,6 +715,10 @@ msgstr ""
 "Magas vagy Kritikus értékek: További információért tekintse meg a lemezhez "
 "tartozó felhasználói dokumentációt."
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
 #. settings-schema.json->strictly_positive_fan->description
 #, fuzzy
 msgid "Show only positive or zero values"
@@ -748,6 +768,10 @@ msgstr ""
 " Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
 " Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
 " Példa: $*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr ""
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -823,6 +847,10 @@ msgid ""
 msgstr ""
 " Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
 "név” elemet vagy sem. Nincs hatással a függőleges panelekre."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
