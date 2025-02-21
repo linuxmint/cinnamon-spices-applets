@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-20 17:21+0100\n"
-"PO-Revision-Date: 2024-09-11 12:03+0200\n"
+"PO-Revision-Date: 2025-02-21 19:16+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -132,7 +132,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:385
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Installeer deze pakketten:"
 
 #. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
@@ -140,7 +140,7 @@ msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
 
 #. lib/checkDependencies.js:401
 msgid "Install these packages now"
-msgstr ""
+msgstr "Installeer deze pakketten nu"
 
 #. lib/util.js:244
 #, javascript-format
@@ -206,16 +206,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Auteur. JEleniel: ondersteuning voor NVidia-videokaarten."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatuur"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventilator"
+msgstr "𖣘 Ventilator"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -417,18 +416,12 @@ msgid "Text Color"
 msgstr "Kleur van de tekst"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Kritieke\n"
-"waarde"
+msgstr "Kleur voor kritieke waarde"
 
 #. settings-schema.json->high_color->description
-#, fuzzy
 msgid "High Value Color"
-msgstr ""
-"Hoge\n"
-"waarde"
+msgstr "Kleur voor hoge waarde"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -525,14 +518,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor temperatuur"
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -714,12 +707,11 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor de ventilator"
 
 #. settings-schema.json->strictly_positive_fan->description
-#, fuzzy
 msgid "Show only positive or zero values"
-msgstr "Toon alleen strikt positieve waarden"
+msgstr "Toon alleen positieve of nulwaarden"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -763,7 +755,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor voltage"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -840,7 +832,7 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor verstoringen"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
