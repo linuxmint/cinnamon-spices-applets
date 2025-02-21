@@ -261,6 +261,8 @@ class ExitApplet extends Applet.IconApplet {
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
+                    this.menu.close(true);
+                    restartCinnamon(false);
                 });
                 this.menu.addMenuItem(item);
             } else {
