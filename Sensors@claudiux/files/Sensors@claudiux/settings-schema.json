@@ -306,7 +306,7 @@
   "char_size": {
     "type": "scale",
     "default": 100,
-    "min": 80,
+    "min": 60,
     "max": 120,
     "step": 1,
     "description": "Character size (% of standard size)"

@@ -1,3 +1,7 @@
+### v5.1.0~20250221
+  * Font size can now be set from 60% to 120% of standard size (instead of 80% to 120%).
+  * Fixes #6896.
+
 ### v5.0.0~20250220
   * Individual High/Critical Value Indications.
   * High/Critical Value Color can be selected.
