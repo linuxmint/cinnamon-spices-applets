@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-09 21:16+0100\n"
-"PO-Revision-Date: 2024-11-28 18:02+0100\n"
+"PO-Revision-Date: 2025-02-21 19:36+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -51,7 +51,7 @@ msgstr "Dempen"
 
 #. 6.2/applet.js:1018 6.4/applet.js:1038
 msgid "Videos"
-msgstr ""
+msgstr "Video's"
 
 #. 6.2/applet.js:1146 6.2/applet.js:1443 6.2/applet.js:1446 6.2/applet.js:1449
 #. 6.2/applet.js:1483 6.2/applet.js:1492 6.2/applet.js:2927 6.2/applet.js:2961
@@ -234,18 +234,17 @@ msgid "Install playerctl"
 msgstr "Installeer playerctl"
 
 #. 6.4/applet.js:184 6.4/applet.js:1867 6.4/applet.js:1869
-#, fuzzy
 msgid "%"
-msgstr "9%"
+msgstr "%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.4/applet.js:2118
 msgid "Commands"
-msgstr ""
+msgstr "Commando's"
 
 #. 6.4/applet.js:2155
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #. metadata.json->name
 #. 6.4/applet.js:2156
@@ -254,26 +253,30 @@ msgstr "Verbeterde geluidsapplet"
 
 #. 6.4/applet.js:2159
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "OSD150-extensie inschakelen"
 
 #. 6.4/applet.js:2160
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Om een horizontale OSD te verkrijgen, moet je de OSD150-extensie inschakelen."
 
 #. 6.4/applet.js:2178
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "OSD150-extensie downloaden"
 
 #. 6.4/applet.js:2179
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Om een horizontale OSD te verkrijgen, moet je de OSD150-extensie "
+"downloaden.\n"
+"Klik op de Download-knop, zoek naar OSD150 en selecteer de ⬇-knop."
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:3301
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "OsdWithNumber-extensie verwijderen"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -620,12 +623,12 @@ msgstr "Maximale volume (%)"
 #. 6.2->settings-schema.json->startupVolume->description
 #. 6.4->settings-schema.json->startupVolume->description
 msgid "Volume at start-up (%)"
-msgstr ""
+msgstr "Volume bij opstarten (%)"
 
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr ""
+msgstr "Waarde -1 betekent \"Geen wijziging\""
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -823,7 +826,7 @@ msgstr "Toon altijd de schakelaar 'Invoer Dempen' in het contextmenu."
 #. 6.2->settings-schema.json->muteSoundOnClosing->description
 #. 6.4->settings-schema.json->muteSoundOnClosing->description
 msgid "Mute sound on closing"
-msgstr ""
+msgstr "Geluid dempen bij afsluiten"
 
 #. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
 #. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
@@ -833,6 +836,11 @@ msgid ""
 "applet's icon.\n"
 "It is NOT recommended to check this box."
 msgstr ""
+"Als je een onaangenaam geluid opmerkt bij het afsluiten, vink dit vakje "
+"aan.\n"
+"Je moet het geluid bij opstarten herstellen door met de middelste muisknop "
+"op het pictogram van deze applet te klikken.\n"
+"Het wordt NIET aanbevolen om dit vakje aan te vinken."
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
@@ -1018,70 +1026,67 @@ msgstr ""
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Pictogramweergave"
 
 #. 6.4->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Icon colors"
-msgstr "Pictogramkleur: 0%-100%"
+msgstr "Pictogramkleuren"
 
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Scrollen"
 
 #. 6.4->settings-schema.json->sectionSound5->title
-#, fuzzy
 msgid "Remove incompatible extensions"
-msgstr "Verwijder niet-compatibele applets"
+msgstr "Niet-compatibele extensies verwijderen"
 
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Aangepaste commando's"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Media-Optical-pictogram weergeven"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Scroll-effect omkeren"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr ""
+msgstr "Bepaal of de mediatoetsen OSD worden weergegeven"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "Toon volumeniveau in OSD bij opstarten"
+msgstr "Volumeniveau in OSD weergeven"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Toon '%' in OSD"
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Toon volumeniveau in OSD bij opstarten"
+msgstr "Horizontale OSD weergeven"
 
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "Toon volumeniveau in OSD bij opstarten"
+msgstr "Balkniveau in OSD weergeven"
 
 #. 6.4->settings-schema.json->custom-commands-label->description
 msgid ""
 "These commands will appear in the context menu once you've reloaded this "
 "applet."
 msgstr ""
+"Deze commando's verschijnen in het contextmenu zodra je deze applet opnieuw "
+"hebt geladen."
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Commando"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
