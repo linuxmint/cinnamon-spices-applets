@@ -21,7 +21,7 @@ MicLevel.prototype = {
 
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.set_applet_icon_name("microphone-sensitivity-low");
+        this.set_applet_icon_name("microphone-sensitivity-low-symbolic");
 
         this.uuid = metadata.uuid;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
@@ -170,9 +170,10 @@ MicLevel.prototype = {
         args.push(this.measure_time.toString());
 
         Util.spawn_async(args, Lang.bind(this, function(stdout){
-            const level = Math.round(parseFloat(stdout.trim()));
-            if (level == -1) {
-                this.set_applet_icon_name("microphone-sensitivity-muted");
+            const out = stdout.trim();
+            const level = Math.round(parseFloat(out));
+            if (out == "-1" || level == -1) {
+                this.set_applet_icon_name("mic-volume-muted");
                 this.hide_applet_label(true);
             } else {
                 if (level >= 0 && level < 33) {

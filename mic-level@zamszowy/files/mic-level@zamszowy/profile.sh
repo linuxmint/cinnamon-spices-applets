@@ -2,17 +2,17 @@
 
 set -eux
 
-get_info()
+get_mac()
 {
-    pactl info | sed -n "s/Default Sink: bluez_sink\.\(.*\)\.\(.*\)/\1;\2/p"
+    pactl info | sed -n "s/Default Sink: bluez_output\.\(.*\)\.\(.*\)/\1/p"
 }
 
 get_profile()
 {
-    IFS=';' read -r _ profile <<< "$(get_info)"
-    if [[ $profile == "handsfree_head_unit" ]]; then
+    local -r profile="$(pw-dump | jq --raw-output '.[].info.props | ."api.bluez5.profile" | select (.!=null)' | head -1)"
+    if [[ $profile == "headset-head-unit" ]]; then
         echo "hfp"
-    elif [[ $profile == "a2dp_sink" ]]; then
+    elif [[ $profile == "a2dp-sink" ]]; then
         echo "a2dp"
     else
         echo "none"
@@ -21,13 +21,14 @@ get_profile()
 
 toggle_profile()
 {
-    IFS=';' read -r mac profile <<< "$(get_info)"
+    local -r mac="$(get_mac)"
+    local -r profile="$(get_profile)"
 
-    if [[ $profile == "handsfree_head_unit" ]]; then
-        pactl set-card-profile bluez_card."$mac" a2dp_sink
+    if [[ $profile == "hfp" ]]; then
+        pactl set-card-profile bluez_card."$mac" a2dp-sink
         echo "a2dp"
-    elif [[ $profile == "a2dp_sink" ]]; then
-        pactl set-card-profile bluez_card."$mac" handsfree_head_unit
+    elif [[ $profile == "a2dp" ]]; then
+        pactl set-card-profile bluez_card."$mac" "headset-head-unit"
         echo "hfp"
     else
         echo "none"
