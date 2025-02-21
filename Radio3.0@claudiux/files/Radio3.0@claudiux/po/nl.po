@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-17 18:31+0100\n"
-"PO-Revision-Date: 2024-11-28 16:57+0100\n"
+"PO-Revision-Date: 2025-02-21 19:07+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -23,7 +23,7 @@ msgstr "niet toegewezen"
 
 #. applet.js:276 desklet/AlbumArt3.0@claudiux/desklet.js:301
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Albumhoes op volledige grootte weergeven"
 
 #. applet.js:380
 msgid "This is your own list of Categories and Radio Stations."
@@ -245,9 +245,8 @@ msgid "Search for new stations..."
 msgstr "Zoeken naar nieuwe stations..."
 
 #. applet.js:2626
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Werk deze lijst met stations bij"
+msgstr "Een voorbeeldzenderlijst laden"
 
 #. applet.js:2669 applet.js:3110 applet.js:5188 applet.js:5616
 msgid "Sound Settings"
@@ -395,30 +394,33 @@ msgstr "Sluiten"
 
 #. applet.js:4944
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #. applet.js:4945
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Radio3.0-applet"
 
 #. applet.js:4948
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "OSD150-extensie inschakelen"
 
 #. applet.js:4949
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Om een horizontale OSD te verkrijgen, moet je de OSD150-extensie inschakelen."
 
 #. applet.js:4967
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "OSD150-extensie downloaden"
 
 #. applet.js:4968
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Om een horizontale OSD te verkrijgen, moet je de OSD150-extensie "
+"downloaden.\n"
+"Klik op de Download-knop, zoek naar OSD150 en selecteer de ⬇-knop."
 
 #. applet.js:5097 applet.js:5443
 #, javascript-format
@@ -483,11 +485,11 @@ msgstr "Toon stationlogo"
 
 #. applet.js:5222
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Instellingen voor Albumhoes-desklet"
 
 #. applet.js:5227 applet.js:5682
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Albumhoes op het bureaublad weergeven"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:5239 applet.js:5697
@@ -596,9 +598,8 @@ msgid "%"
 msgstr "%"
 
 #. desklet/AlbumArt3.0@claudiux/desklet.js:66
-#, fuzzy
 msgid "Radio3.0 Album Art"
-msgstr "Radio3.0"
+msgstr "Radio3.0 Albumhoes"
 
 #. xs/xlet-settings.py:214
 msgid "Previous instance"
@@ -764,7 +765,7 @@ msgstr "Werk deze lijst met stations bij"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Alleen voor Radio++-gebruikers"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -796,7 +797,7 @@ msgstr "Volumestap"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -907,7 +908,7 @@ msgstr "Lijst van stations"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -1006,7 +1007,7 @@ msgstr "Werk mijn lijst met stations bij met de gegevens van de radiodatabase"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "Importeer je zenders uit Radio++"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1264,11 +1265,11 @@ msgstr "Toon volume OSD bij het wijzigen van radiostation"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Toon '%' in OSD"
 
 #. settings-schema.json->show-horizontal-osd->description
 msgid "Show horizontal OSD"
-msgstr ""
+msgstr "Toon horizontale OSD"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -1512,29 +1513,30 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "Kwaliteit van gedownloade albumhoes"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Maximale resolutie"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Kwaliteit"
+msgstr "Hoge kwaliteit"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Middel"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Standaard"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
 msgstr ""
+"Standaard: Hoge kwaliteit. Kies een waarde die overeenkomt met je "
+"netwerkkwaliteit."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
@@ -3210,82 +3212,82 @@ msgstr "0 betekent geen maximum"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->name
 msgid "Album Art for Radio3.0"
-msgstr ""
+msgstr "Albumhoes voor Radio3.0"
 
 #. desklet->AlbumArt3.0@claudiux->metadata.json->description
 msgid ""
 "A digital photo frame desklet to display the Radio3.0 album art, if available"
 msgstr ""
+"Een digitale fotolijst-desklet om de albumhoes van Radio3.0 weer te geven, "
+"indien beschikbaar"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->description
 msgid "Height"
-msgstr ""
+msgstr "Hoogte"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->height->units
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->units
 msgid "pixels"
-msgstr ""
+msgstr "pixels"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->width->description
 msgid "Width"
-msgstr ""
+msgstr "Breedte"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. effect->description
 msgid "Fade"
-msgstr ""
+msgstr "Vervaging"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
-#, fuzzy
 msgid "None"
-msgstr "(None)"
+msgstr "Geen"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quad"
-msgstr ""
+msgstr "Quad"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Cubic"
-msgstr ""
+msgstr "Kubisch"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quart"
-msgstr ""
+msgstr "Quart"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Quint"
-msgstr ""
+msgstr "Quint"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Sine"
-msgstr ""
+msgstr "Sine"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Expo"
-msgstr ""
+msgstr "Expo"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Circ"
-msgstr ""
+msgstr "Circ"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Elastic"
-msgstr ""
+msgstr "Elastisch"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-effect->options
 msgid "Bounce"
-msgstr ""
+msgstr "Stuiteren"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-
 #. delay->description
 msgid "Fade delay"
-msgstr ""
+msgstr "Vervagingsvertraging"
 
 #. desklet->AlbumArt3.0@claudiux->settings-schema.json->fade-delay->tooltip
-#, fuzzy
 msgid "0 means no fade"
-msgstr "0 betekent geen maximum"
+msgstr "0 betekent geen vervaging"
