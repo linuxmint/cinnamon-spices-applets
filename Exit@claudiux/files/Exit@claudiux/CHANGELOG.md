@@ -1,3 +1,6 @@
+### v1.6.0~20250221
+* It is now possible to log out even when the screensaver is locked in deactivated mode.
+
 ### v1.5.0~20250203
 * Now using mainloopTools library.
 * Avoids errors on restart.
