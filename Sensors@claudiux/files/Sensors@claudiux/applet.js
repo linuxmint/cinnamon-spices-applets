@@ -257,7 +257,7 @@ class SensorsApplet extends Applet.Applet {
     this.set_default_UI();
 
     // Style class name:
-    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-label"; //"applet-box";
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-box"; //"applet-label";
     let _border_type = (this.remove_border) ? "-noborder" : "";
     this.actor.set_style_class_name("%s sensors-label%s vertalign-%s".format(_monospace, _border_type, this.vertical_align));
 
@@ -289,11 +289,15 @@ class SensorsApplet extends Applet.Applet {
     for (let i=0; i<DEFAULT_APPLET_LABEL.length; i++) {
       let layoutBin = new St.Bin();
       let c = DEFAULT_APPLET_LABEL[i];
-      let l = new St.Label({text: c, style_class: 'applet-box sensors-size120'});
+      //~ let l = new St.Label({text: c, style_class: 'applet-box sensors-size120'});
+      //~ let l = new St.Label({text: c, style_class: 'applet-box'});
+      let l = new St.Label({text: c});
       layoutBin.set_child(l);
       this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
                                   y_fill: false,
-                                  style_class: 'applet-box sensors-size120'});
+                                  //~ style_class: 'applet-box sensors-size120',
+                                  //~ style_class: 'applet-box',
+                                });
     }
   }
 
@@ -311,7 +315,6 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("char_color", "char_color", this.updateUI, null);
     this.s.bind("crit_color", "crit_color", this.updateUI, null);
     this.s.bind("high_color", "high_color", this.updateUI, null);
-    this.separator = "|";
     this.s.bind("remove_border", "remove_border", this.updateUI, null);
     this.s.bind("remove_icons", "remove_icons", this.updateUI, null);
     this.s.bind("bold_values", "bold_values", this.updateUI, null);
@@ -500,16 +503,27 @@ class SensorsApplet extends Applet.Applet {
       } else if (this.char_color_customized) {
         l_style = "color: " + this.char_color + ";";
       }
-      let l = new St.Label({text: c, style_class: 'applet-box sensors-size120'});
+      //~ let l = new St.Label({text: c, style_class: 'applet-box sensors-size120'});
+      //~ let l = new St.Label({text: c, style_class: 'applet-box'});
+      let l = new St.Label({text: (i===0) ? c : this.separator + c});
       if (l_style)
         l.set_style(l_style);
 
       layoutBin.set_child(l);
       this.actor.add(layoutBin, { y_align: St.Align.MIDDLE,
                                   y_fill: false,
-                                  style_class: 'applet-box sensors-size120',
+                                  //~ style_class: 'applet-box sensors-size120',
+                                  //~ style_class: 'applet-box',
                                 });
     }
+  }
+
+  get separator() {
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    if (vertical)
+      return "───\n";
+    else
+      return "│";
   }
 
   /**
@@ -955,8 +969,9 @@ class SensorsApplet extends Applet.Applet {
     let _border_type = (this.remove_border) ? "-noborder" : "";
     var _actor_style = "%s sensors-label%s sensors-size%s vertalign-%s".format(_monospace, _border_type, this.char_size, this.vertical_align);
 
-    let vertical = (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT);
-    let sep = (vertical) ? "\n" : this.separator;
+    let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+    //~ let sep = (vertical) ? "\n" : this.separator;
+    let sep = this.separator;
     let _shown_name;
     this.label_parts = [];
 
@@ -1278,8 +1293,8 @@ class SensorsApplet extends Applet.Applet {
       }
     }
     //~ global.log("_appletLabel: '"+_appletLabel+"'");
-    if (vertical)
-      _appletLabel = _appletLabel.replace(this.separator, "\n");
+    //~ if (vertical)
+      //~ _appletLabel = _appletLabel.replace(this.separator, "\n");
 
     this.set_applet_label(_appletLabel);
 
@@ -1712,7 +1727,7 @@ class SensorsApplet extends Applet.Applet {
   }
 
   _get_default_applet_label() {
-    if (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT)
+    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
       return DEFAULT_APPLET_LABEL.join("\n");
     else
       return DEFAULT_APPLET_LABEL.join("");

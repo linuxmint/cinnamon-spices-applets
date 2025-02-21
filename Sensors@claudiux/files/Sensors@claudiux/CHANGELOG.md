@@ -1,3 +1,6 @@
+### v5.2.0~20250221
+  * Separator is coming back!
+
 ### v5.1.0~20250221
   * Font size can now be set from 60% to 120% of standard size (instead of 80% to 120%).
   * Fixes #6896.
