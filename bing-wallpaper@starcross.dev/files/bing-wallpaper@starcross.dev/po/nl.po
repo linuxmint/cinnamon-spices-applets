@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-19 08:43-0500\n"
-"PO-Revision-Date: 2024-04-20 16:17+0200\n"
+"PO-Revision-Date: 2025-02-21 19:20+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. applet.js:50
 msgid "Refresh Now"
-msgstr ""
+msgstr "Nu vernieuwen"
 
 #. metadata.json->name
 msgid "Bing Desktop Wallpaper"
