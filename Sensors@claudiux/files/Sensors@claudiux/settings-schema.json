@@ -72,6 +72,7 @@
         "interval",
         "keep_size",
         "char_size",
+        "separator_type",
         "char_color_customized",
         "char_color",
         "crit_color",
@@ -310,6 +311,16 @@
     "max": 120,
     "step": 1,
     "description": "Character size (% of standard size)"
+  },
+  "separator_type": {
+    "type": "combobox",
+    "default": "bar",
+    "options": {
+      "(none)": "none",
+      "blank": "blank",
+      "bar": "bar"
+    },
+    "description": "Separator"
   },
   "vertical-align": {
     "type": "generic",
