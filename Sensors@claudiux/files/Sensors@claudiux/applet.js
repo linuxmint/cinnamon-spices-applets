@@ -310,6 +310,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("interval", "interval", this.on_settings_changed, null);
     this.s.bind("keep_size", "keep_size", this.updateUI, null);
     this.s.bind("char_size", "char_size", this.updateUI, null);
+    this.s.bind("separator_type", "separator_type", this.updateUI, null);
     this.s.bind("vertical-align", "vertical_align", this.updateUI, null);
     this.s.bind("char_color_customized", "char_color_customized", this.updateUI, null);
     this.s.bind("char_color", "char_color", this.updateUI, null);
@@ -520,10 +521,25 @@ class SensorsApplet extends Applet.Applet {
 
   get separator() {
     let vertical = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
-    if (vertical)
-      return "───\n";
-    else
-      return "│";
+    if (vertical) {
+      switch (this.separator_type) {
+        case "bar":
+          return "───\n";
+        case "blank":
+          return "\n\n\n";
+        default:
+          return "\n\n";
+      }
+    } else {
+      switch (this.separator_type) {
+        case "bar":
+          return "│";
+        case "blank":
+          return " ";
+        default:
+          return "  ";
+      }
+    }
   }
 
   /**

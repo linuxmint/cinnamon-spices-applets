@@ -1,3 +1,6 @@
+### v5.3.0~20250222
+  * Users can now choose the type of separator.
+
 ### v5.2.0~20250221
   * Separator is coming back!
 
