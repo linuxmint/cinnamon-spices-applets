@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-22 17:57+0100\n"
-"PO-Revision-Date: 2025-02-20 19:45+0100\n"
+"PO-Revision-Date: 2025-02-22 20:29+0100\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -403,19 +403,19 @@ msgstr "Schriftgröße (% der Standardgröße)"
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(keines)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "Leerzeichen"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "Strich"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Trennzeichen"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
