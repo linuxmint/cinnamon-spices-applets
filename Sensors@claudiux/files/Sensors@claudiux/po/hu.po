@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-20 17:21+0100\n"
+"POT-Creation-Date: 2025-02-22 17:57+0100\n"
 "PO-Revision-Date: 2024-11-24 19:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,91 +23,91 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#. applet.js:478 applet_OLD.js:418
+#. applet.js:482 applet_OLD.js:418
 msgid "Suspended"
 msgstr "Felfüggesztve"
 
-#. applet.js:731 applet.js:775 applet_OLD.js:638 applet_OLD.js:682
+#. applet.js:761 applet.js:805 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "magas:"
 
-#. applet.js:731 applet.js:735 applet.js:775 applet.js:777 applet.js:819
+#. applet.js:761 applet.js:765 applet.js:805 applet.js:807 applet.js:849
 #. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
 #. applet_OLD.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:735 applet.js:777 applet_OLD.js:642 applet_OLD.js:684
+#. applet.js:765 applet.js:807 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:819 applet.js:863 applet_OLD.js:726 applet_OLD.js:770
+#. applet.js:849 applet.js:893 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:865 applet_OLD.js:772
+#. applet.js:895 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:894 applet_OLD.js:801
+#. applet.js:924 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#. applet.js:894 applet_OLD.js:801
+#. applet.js:924 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#. applet.js:914 applet_OLD.js:821
+#. applet.js:944 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#. applet.js:1321 applet_OLD.js:1208
+#. applet.js:1352 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Beállítások"
 
-#. applet.js:1321 applet_OLD.js:1208
+#. applet.js:1352 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1328 applet_OLD.js:1215
+#. applet.js:1359 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#. applet.js:1344 applet_OLD.js:1231
+#. applet.js:1375 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Hőmérséklet szenzorok"
 
-#. applet.js:1360 applet_OLD.js:1247
+#. applet.js:1391 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilátor szenzorok"
 
-#. applet.js:1376 applet_OLD.js:1263
+#. applet.js:1407 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Feszültség szenzorok"
 
-#. applet.js:1392 applet_OLD.js:1279
+#. applet.js:1423 applet_OLD.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1419 applet_OLD.js:1306
+#. applet.js:1450 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#. applet.js:1428 applet_OLD.js:1315
+#. applet.js:1459 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr "Felfüggesztett Szenzorok"
 
-#. applet.js:1439 applet_OLD.js:1326
+#. applet.js:1470 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#. applet.js:1769 applet_OLD.js:1656
+#. applet.js:1800 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
@@ -404,6 +404,22 @@ msgstr ""
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
 msgstr "Karakter méret (az alapértelmezett %-a)"
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr ""
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr ""
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
