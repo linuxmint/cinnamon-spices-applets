@@ -351,7 +351,8 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("show_fan_name", "show_fan_name", null, null);
     this.s.bind("chars_fan", "chars_fan", this._on_chars_fan_modified, null);
     this._on_chars_fan_modified();
-    this.s.bind("strictly_positive_fan", "strictly_positive_fan", this.populate_fan_sensors_in_settings, null);
+    //~ this.s.bind("strictly_positive_fan", "strictly_positive_fan", this.populate_fan_sensors_in_settings, null);
+    this.strictly_positive_fan = false;
     this.s.bind("show_fan_unit", "show_fan_unit", this.updateUI, null);
     this.s.bind("fan_unit", "fan_unit", this.updateUI, null);
     this.s.bind("fan_sensors", "fan_sensors", null, null);
