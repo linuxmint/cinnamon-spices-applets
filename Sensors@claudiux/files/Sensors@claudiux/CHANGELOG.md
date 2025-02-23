@@ -1,3 +1,6 @@
+### v5.3.1~20250223
+  * Removed option "Only show positive values" for fans. (Value fixed to false.)
+
 ### v5.3.0~20250222
   * Users can now choose the type of separator.
 

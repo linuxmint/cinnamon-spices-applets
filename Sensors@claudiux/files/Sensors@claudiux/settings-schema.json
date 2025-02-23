@@ -170,7 +170,6 @@
       "type": "section",
       "title": "Options",
       "keys": [
-        "strictly_positive_fan",
         "show_fan_unit",
         "fan_unit",
         "journalize_fan"
