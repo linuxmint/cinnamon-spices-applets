@@ -1,0 +1,99 @@
+# APT UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-updates@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-15 13:53+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:35
+msgid "missing dependencies"
+msgstr ""
+
+#. applet.js:63
+#, javascript-format
+msgid "%s updates available"
+msgstr ""
+
+#. applet.js:64
+msgid "No updates available"
+msgstr ""
+
+#. applet.js:89
+#, javascript-format
+msgid "View %s updates"
+msgstr ""
+
+#. applet.js:89
+msgid "No updates to view"
+msgstr ""
+
+#. applet.js:95
+msgid "Check for new updates"
+msgstr ""
+
+#. applet.js:103
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr ""
+
+#. applet.js:103
+msgid "No packages to upgrade"
+msgstr ""
+
+#. metadata.json->name
+msgid "APT updates notifier"
+msgstr ""
+
+#. metadata.json->description
+msgid "Shows icons for pending updates in APT-based systems"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Settings"
+msgstr ""
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing applet"
+msgstr ""
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr ""
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr ""
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr ""
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "Commands to execute in popup menu"
+msgstr ""
+
+#. settings-schema.json->commandUpdate->description
+msgid "Check for updates:"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages:"
+msgstr ""
