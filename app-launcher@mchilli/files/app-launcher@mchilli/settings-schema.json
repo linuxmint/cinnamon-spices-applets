@@ -30,7 +30,8 @@
                 "notification-text",
                 "hotkeys-enabled",
                 "hotkey-bindings",
-                "menu-at-pointer"
+                "menu-at-pointer",
+                "bind-to-workspace"
             ]
         },
         "section-settings-applications": {
@@ -122,6 +123,15 @@
         "default": false,
         "dependency": "hotkeys-enabled",
         "tooltip": "Show the menu next to the cursor when triggered by hotkey"
+    },
+    "bind-to-workspace": {
+        "type": "combobox",
+        "description": "Bind to workspace",
+        "default": "-1",
+        "options": {
+            "": "-1"
+        },
+        "tooltip": "Show the applet only on the selected workspace"
     },
     "fixed-menu-width": {
         "type": "switch",
