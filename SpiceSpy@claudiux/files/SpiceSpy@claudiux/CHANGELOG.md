@@ -1,3 +1,6 @@
+### v5.2.1~20250226
+  * Removed debug messages.
+
 ### v5.2.0~20250226
   * Adapts the panel display to the size of the information.
   * Fixes #6926.
