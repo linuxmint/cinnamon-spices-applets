@@ -1,0 +1,18 @@
+# APP LAUNCHER
+# This file is put in the public domain.
+# mchilli, 2021
+#
+msgid ""
+msgstr ""
+
+#. applet.js:117
+msgid "All workspaces"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr ""

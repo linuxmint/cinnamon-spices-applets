@@ -1,0 +1,3052 @@
+# Swedish translation originally for gnome-shell-extension-weather, now weather@mockturtl
+# Copyright (C) 2011 to 2024, Mauricio Barraza, jorgenqv and Åke Engelbrektson
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Mauricio Barraza <mauricio@barraza.se>, 2011.
+# jorgenqv <jorgenqv@yahoo.com> - 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024
+# Åke Engelbrektson <eson@svenskasprakfiler.se> - 2017, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 3.6.4\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-04 07:03-0500\n"
+"PO-Revision-Date: 2024-09-02 22:43+0200\n"
+"Last-Translator: jorgenqv <jorgenqv@yahoo.com>\n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
+#. 3.8/weather-applet.js:19511
+msgid "Error"
+msgstr "Fel"
+
+#. 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
+#. 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
+#. 3.8/weather-applet.js:19512 3.8/weather-applet.js:19514
+#. 3.8/weather-applet.js:19516 3.8/weather-applet.js:19519
+#. 3.8/weather-applet.js:19522 3.8/weather-applet.js:19523
+#. 3.8/weather-applet.js:19524 3.8/weather-applet.js:19525
+msgid "Service Error"
+msgstr "Tjänst-fel"
+
+#. 3.0/applet.js:168 3.8/weather-applet.js:19513
+msgid "Incorrect API Key"
+msgstr "Felaktig API nyckel"
+
+#. 3.0/applet.js:170 3.8/weather-applet.js:19515
+msgid "Incorrect Location Format"
+msgstr "Felaktigt Plats format"
+
+#. 3.0/applet.js:172 3.8/weather-applet.js:19517
+msgid "Key Blocked"
+msgstr "Nyckel blockerad"
+
+#. 3.0/applet.js:173 3.8/weather-applet.js:19518
+msgid "Can't find location"
+msgstr "Kan inte hitta plats"
+
+#. 3.0/applet.js:175 3.8/weather-applet.js:19520
+msgid "No Api Key"
+msgstr "Ingen Api-nyckel"
+
+#. 3.0/applet.js:176 3.8/weather-applet.js:19521
+msgid "No Location"
+msgstr "Ingen plats"
+
+#. 3.0/applet.js:181 3.8/weather-applet.js:19526
+msgid "Missing Packages"
+msgstr "Saknar paket"
+
+#. 3.0/applet.js:182 3.8/weather-applet.js:19527
+msgid "Location not covered"
+msgstr "Platsen täcks inte"
+
+#. 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9018
+msgid "Weather Applet"
+msgstr "Väder-panelprogram"
+
+#. 3.0/applet.js:217 3.8/weather-applet.js:19787
+msgid "..."
+msgstr "..."
+
+#. 3.0/applet.js:218 3.8/weather-applet.js:19788
+msgid "Click to open"
+msgstr "Klicka för att öppna"
+
+#. 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:18217
+#. 3.8/weather-applet.js:19791
+msgid "Refresh"
+msgstr "Uppdatera"
+
+#. 3.0/applet.js:272
+msgid "API returned status code between 400 and 500"
+msgstr "API returnerade statuskod mellan 400 och 500"
+
+#. 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
+#. 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#. 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9177
+#. 3.8/weather-applet.js:9181
+msgid "Location Store"
+msgstr "Spara plats"
+
+#. 3.0/applet.js:426
+msgid "You can't save a location obtained automatically, sorry"
+msgstr "Du kan inte spara en plats som hämtats automatiskt, tyvärr"
+
+#. 3.0/applet.js:601
+msgid "Could not get weather information"
+msgstr "Kunde inte hämta väderinformation"
+
+#. 3.0/applet.js:624 3.8/weather-applet.js:19619
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr ""
+"Oväntat fel medan uppdatering av väder, vänligen se logg i Looking Glass"
+
+#. 3.0/applet.js:670 3.8/weather-applet.js:19870
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Kunde inte uppdatera väder på ett tag...\n"
+"är du uppkopplad mot internet?"
+
+#. 3.0/applet.js:684
+msgid "Network Error, please check logs in Looking Glass"
+msgstr "Nätverksfel, vänligen checka loggar i Looking Glass"
+
+#. 3.0/applet.js:969 3.0/applet.js:1110
+msgid "As of"
+msgstr "Fr.o.m"
+
+#. 3.0/applet.js:1108 3.8/weather-applet.js:19048
+msgid "Powered by"
+msgstr "Drivs av"
+
+#. 3.0/applet.js:1113
+msgid "from you"
+msgstr "från dig"
+
+#. 3.0/applet.js:1132 3.8/weather-applet.js:18948
+msgid "mm"
+msgstr "mm"
+
+#. 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:18948
+msgid "in"
+msgstr "i"
+
+#. 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10016
+#. 3.8/weather-applet.js:19165
+msgid "mi"
+msgstr "mi"
+
+#. 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10017
+#. 3.8/weather-applet.js:19166
+msgid "km"
+msgstr "km"
+
+#. 3.0/applet.js:1227 3.8/weather-applet.js:19369
+msgid "Loading current weather ..."
+msgstr "Läser in aktuellt väder..."
+
+#. 3.0/applet.js:1230 3.8/weather-applet.js:19372
+msgid "Loading future weather ..."
+msgstr "Läser in kommande väder..."
+
+#. 3.0/applet.js:1280 3.8/weather-applet.js:18149
+msgid "Loading ..."
+msgstr "Läser in..."
+
+#. 3.0/applet.js:1329 3.8/weather-applet.js:18168
+msgid "Temperature"
+msgstr "Temperatur"
+
+#. 3.0/applet.js:1330 3.8/weather-applet.js:18173
+msgid "Humidity"
+msgstr "Luftfuktighet"
+
+#. 3.0/applet.js:1331 3.8/weather-applet.js:18178
+msgid "Pressure"
+msgstr "Lufttryck"
+
+#. 3.0/applet.js:1332 3.8/weather-applet.js:12449 3.8/weather-applet.js:12456
+#. 3.8/weather-applet.js:12457 3.8/weather-applet.js:12463
+#. 3.8/weather-applet.js:14806 3.8/weather-applet.js:14807
+#. 3.8/weather-applet.js:15466 3.8/weather-applet.js:18011
+msgid "Wind"
+msgstr "Vind"
+
+#. 3.0/applet.js:1639
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr ""
+"Kontrollera att du angett en plats eller använd Automatisk plats istället"
+
+#. 3.0/applet.js:1877 3.8/weather-applet.js:9642
+msgid "Could not find location based on address, please check if it's right"
+msgstr ""
+"Kunde inte hitta plats baserad på adress, vänligen kontrollera om det är rätt"
+
+#. 3.0/applet.js:1901 3.8/weather-applet.js:9662
+msgid "Failed to call Geolocation API, see Looking Glass for errors."
+msgstr "Misslyckades att anropa Geolocation API, se Looking Glass för fel."
+
+#. 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9177
+msgid "Warning"
+msgstr "Varning"
+
+#. 3.0/applet.js:2032
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr "Du kan bara spara korrekt plats när panelprogrammet inte uppdateras"
+
+#. 3.0/applet.js:2036 3.8/weather-applet.js:9177
+msgid "You can't save an incorrect location"
+msgstr "Du kan inte spara en inkorrekt plats"
+
+#. 3.8->settings-schema.json->logLevel->options
+#. 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#. 3.8/weather-applet.js:9181
+msgid "Info"
+msgstr "Info"
+
+#. 3.0/applet.js:2040 3.8/weather-applet.js:9181
+msgid "Location is already saved"
+msgstr "Plats är redan sparad"
+
+#. 3.0/applet.js:2049 3.0/applet.js:2083
+msgid "Success"
+msgstr "Framgångsrikt"
+
+#. 3.0/applet.js:2049
+msgid "Location is saved to library"
+msgstr "Plats är sparad till bibliotek"
+
+#. 3.0/applet.js:2062
+msgid "You can't remove a location while the applet is refreshing"
+msgstr "Du kan inte ta bort en plats medan panelprogrammet uppdateras"
+
+#. 3.0/applet.js:2066
+msgid "You can't remove an incorrect location"
+msgstr "Du kan inte ta bort en inkorrekt plats"
+
+#. 3.0/applet.js:2070
+msgid "Location is not in storage, can't delete"
+msgstr "Platsen finns inte i lagringen, kan inte radera"
+
+#. 3.0/applet.js:2083
+msgid "Location is deleted from library"
+msgstr "Plats är raderad från bibliotek"
+
+#. 3.0/applet.js:2131
+msgid ""
+"Failed to load in data from location storage, please see the logs for more "
+"information"
+msgstr ""
+"Misslyckades ladda data från platslagringen, vänligen se loggarna för mer "
+"information"
+
+#. 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
+#. 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
+#. 3.8/weather-applet.js:10664 3.8/weather-applet.js:11700
+#. 3.8/weather-applet.js:12350 3.8/weather-applet.js:13086
+#. 3.8/weather-applet.js:13455 3.8/weather-applet.js:14992
+#. 3.8/weather-applet.js:15571
+msgid "Feels Like"
+msgstr "Känns som"
+
+#. 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
+#. 3.8/weather-applet.js:15646
+msgid "Failed to Process Weather Info"
+msgstr "Misslyckades att behandla väderinformation"
+
+#. 3.0/climacell.js:224
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://developer.climacell.co/sign-up"
+msgstr ""
+"Vänligen ange API nyckel i inställningar,\n"
+"eller hämta en först på https://developer.climacell.co/sign-up"
+
+#. 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
+#. 3.8/weather-applet.js:11891 3.8/weather-applet.js:15506
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly and your account is not locked"
+msgstr ""
+"Vänligen var säker på att du\n"
+"angett API-nyckeln korrekt och att ditt konto inte är låst"
+
+#. 3.0/climacell.js:248 3.8/weather-applet.js:12312
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Climacell"
+msgstr ""
+"Vänligen var säker på att du\n"
+"angett den API-nyckeln du har hos Climacell"
+
+#. 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
+#. 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
+#. 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
+#. 3.0/met_uk.js:632 3.8/weather-applet.js:10220 3.8/weather-applet.js:10227
+#. 3.8/weather-applet.js:10234 3.8/weather-applet.js:10235
+#. 3.8/weather-applet.js:11341 3.8/weather-applet.js:11342
+#. 3.8/weather-applet.js:11348 3.8/weather-applet.js:11355
+#. 3.8/weather-applet.js:11362 3.8/weather-applet.js:11991
+#. 3.8/weather-applet.js:12492 3.8/weather-applet.js:13633
+#. 3.8/weather-applet.js:16007
+msgid "Heavy rain"
+msgstr "Kraftigt regn"
+
+#. 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
+#. 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
+#. 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
+#. 3.0/yahoo.js:448 3.8/weather-applet.js:10398 3.8/weather-applet.js:11516
+#. 3.8/weather-applet.js:11517 3.8/weather-applet.js:11523
+#. 3.8/weather-applet.js:11926 3.8/weather-applet.js:12477
+#. 3.8/weather-applet.js:12478 3.8/weather-applet.js:12484
+#. 3.8/weather-applet.js:12491 3.8/weather-applet.js:12533
+#. 3.8/weather-applet.js:12540 3.8/weather-applet.js:12547
+#. 3.8/weather-applet.js:13228 3.8/weather-applet.js:13277
+#. 3.8/weather-applet.js:13278 3.8/weather-applet.js:13285
+#. 3.8/weather-applet.js:13625 3.8/weather-applet.js:13905
+#. 3.8/weather-applet.js:13906 3.8/weather-applet.js:13947
+#. 3.8/weather-applet.js:14778 3.8/weather-applet.js:14779
+#. 3.8/weather-applet.js:15160 3.8/weather-applet.js:15161
+#. 3.8/weather-applet.js:15460 3.8/weather-applet.js:15992
+#. 3.8/weather-applet.js:15999 3.8/weather-applet.js:16000
+#. 3.8/weather-applet.js:16006 3.8/weather-applet.js:16013
+#. 3.8/weather-applet.js:16020 3.8/weather-applet.js:16618
+#. 3.8/weather-applet.js:16619
+msgid "Rain"
+msgstr "Regn"
+
+#. 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
+#. 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
+#. 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
+#. 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10192
+#. 3.8/weather-applet.js:10199 3.8/weather-applet.js:10213
+#. 3.8/weather-applet.js:10214 3.8/weather-applet.js:10469
+#. 3.8/weather-applet.js:11425 3.8/weather-applet.js:11426
+#. 3.8/weather-applet.js:11432 3.8/weather-applet.js:11439
+#. 3.8/weather-applet.js:11446 3.8/weather-applet.js:11987
+#. 3.8/weather-applet.js:12485 3.8/weather-applet.js:13635
+#. 3.8/weather-applet.js:15993
+msgid "Light rain"
+msgstr "Lättare regn"
+
+#. 3.0/climacell.js:280 3.8/weather-applet.js:12548 3.8/weather-applet.js:13609
+msgid "Heavy freezing rain"
+msgstr "Kraftigt underkylt regn"
+
+#. 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
+#. 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
+#. 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
+#. 3.0/us_weather.js:519 3.8/weather-applet.js:10479
+#. 3.8/weather-applet.js:11993 3.8/weather-applet.js:12534
+#. 3.8/weather-applet.js:13249 3.8/weather-applet.js:13250
+#. 3.8/weather-applet.js:13256 3.8/weather-applet.js:13257
+#. 3.8/weather-applet.js:13263 3.8/weather-applet.js:16021
+msgid "Freezing rain"
+msgstr "Underkylt regn"
+
+#. 3.0/climacell.js:294 3.8/weather-applet.js:12541 3.8/weather-applet.js:13611
+#. 3.8/weather-applet.js:16014
+msgid "Light freezing rain"
+msgstr "Lätt underkylt regn"
+
+#. 3.0/climacell.js:301 3.8/weather-applet.js:15979
+msgid "Light freezing drizzle"
+msgstr "Lätt underkylt duggregn"
+
+#. 3.0/climacell.js:302 3.8/weather-applet.js:12527 3.8/weather-applet.js:15986
+msgid "Freezing drizzle"
+msgstr "Underkylt dyggregn"
+
+#. 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:11981
+#. 3.8/weather-applet.js:13591 3.8/weather-applet.js:15958
+msgid "Light drizzle"
+msgstr "Lätt duggregn"
+
+#. 3.0/climacell.js:315 3.8/weather-applet.js:12562
+msgid "Heavy ice pellets"
+msgstr "Kraftigt hagel"
+
+#. 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
+#. 3.0/climacell.js:330 3.8/weather-applet.js:12554 3.8/weather-applet.js:12555
+#. 3.8/weather-applet.js:12561 3.8/weather-applet.js:12568
+msgid "Ice pellets"
+msgstr "Småhagel"
+
+#. 3.0/climacell.js:329 3.8/weather-applet.js:12569
+msgid "Light ice pellets"
+msgstr "Lätt småhagel"
+
+#. 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
+#. 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
+#. 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
+#. 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10304
+#. 3.8/weather-applet.js:10311 3.8/weather-applet.js:10318
+#. 3.8/weather-applet.js:10319 3.8/weather-applet.js:10493
+#. 3.8/weather-applet.js:11397 3.8/weather-applet.js:11398
+#. 3.8/weather-applet.js:11404 3.8/weather-applet.js:11411
+#. 3.8/weather-applet.js:11418 3.8/weather-applet.js:12005
+#. 3.8/weather-applet.js:12520 3.8/weather-applet.js:13651
+#. 3.8/weather-applet.js:13982 3.8/weather-applet.js:16042
+msgid "Heavy snow"
+msgstr "Tung snö"
+
+#. 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
+#. 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
+#. 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
+#. 3.8/weather-applet.js:10400 3.8/weather-applet.js:10491
+#. 3.8/weather-applet.js:11572 3.8/weather-applet.js:11573
+#. 3.8/weather-applet.js:11579 3.8/weather-applet.js:11934
+#. 3.8/weather-applet.js:12003 3.8/weather-applet.js:12498
+#. 3.8/weather-applet.js:12499 3.8/weather-applet.js:12512
+#. 3.8/weather-applet.js:12519 3.8/weather-applet.js:13221
+#. 3.8/weather-applet.js:13222 3.8/weather-applet.js:13645
+#. 3.8/weather-applet.js:13891 3.8/weather-applet.js:13975
+#. 3.8/weather-applet.js:14792 3.8/weather-applet.js:14793
+#. 3.8/weather-applet.js:15188 3.8/weather-applet.js:15189
+#. 3.8/weather-applet.js:15464 3.8/weather-applet.js:16027
+#. 3.8/weather-applet.js:16034 3.8/weather-applet.js:16035
+#. 3.8/weather-applet.js:16041 3.8/weather-applet.js:16048
+#. 3.8/weather-applet.js:16634 3.8/weather-applet.js:16635
+msgid "Snow"
+msgstr "Snö"
+
+#. 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
+#. 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
+#. 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
+#. 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10283
+#. 3.8/weather-applet.js:10290 3.8/weather-applet.js:10297
+#. 3.8/weather-applet.js:10298 3.8/weather-applet.js:10489
+#. 3.8/weather-applet.js:11481 3.8/weather-applet.js:11482
+#. 3.8/weather-applet.js:11488 3.8/weather-applet.js:11495
+#. 3.8/weather-applet.js:11502 3.8/weather-applet.js:12001
+#. 3.8/weather-applet.js:12513 3.8/weather-applet.js:13653
+#. 3.8/weather-applet.js:16028
+msgid "Light snow"
+msgstr "Lätt snöfall"
+
+#. 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12013
+#. 3.8/weather-applet.js:12505 3.8/weather-applet.js:12506
+#. 3.8/weather-applet.js:15167 3.8/weather-applet.js:15168
+msgid "Flurries"
+msgstr "Kastbyar"
+
+#. 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
+#. 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10394
+#. 3.8/weather-applet.js:10439 3.8/weather-applet.js:11914
+#. 3.8/weather-applet.js:11979 3.8/weather-applet.js:12575
+#. 3.8/weather-applet.js:12576 3.8/weather-applet.js:13294
+#. 3.8/weather-applet.js:13295 3.8/weather-applet.js:13657
+#. 3.8/weather-applet.js:13989 3.8/weather-applet.js:13990
+#. 3.8/weather-applet.js:14799 3.8/weather-applet.js:14800
+#. 3.8/weather-applet.js:16090 3.8/weather-applet.js:16091
+#. 3.8/weather-applet.js:16097 3.8/weather-applet.js:16104
+msgid "Thunderstorm"
+msgstr "Åska"
+
+#. 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12443
+msgid "Light fog"
+msgstr "Lätt dimma"
+
+#. 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
+#. 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
+#. 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
+#. 3.8/weather-applet.js:10171 3.8/weather-applet.js:10172
+#. 3.8/weather-applet.js:10414 3.8/weather-applet.js:10519
+#. 3.8/weather-applet.js:11334 3.8/weather-applet.js:11335
+#. 3.8/weather-applet.js:11948 3.8/weather-applet.js:12027
+#. 3.8/weather-applet.js:12435 3.8/weather-applet.js:12436
+#. 3.8/weather-applet.js:12442 3.8/weather-applet.js:13364
+#. 3.8/weather-applet.js:13365 3.8/weather-applet.js:13599
+#. 3.8/weather-applet.js:14750 3.8/weather-applet.js:14751
+#. 3.8/weather-applet.js:15216 3.8/weather-applet.js:15217
+#. 3.8/weather-applet.js:15468 3.8/weather-applet.js:15950
+#. 3.8/weather-applet.js:15951 3.8/weather-applet.js:16687
+#. 3.8/weather-applet.js:16688
+msgid "Fog"
+msgstr "Dimma"
+
+#. 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
+#. 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
+#. 3.8/weather-applet.js:10178 3.8/weather-applet.js:10179
+#. 3.8/weather-applet.js:11320 3.8/weather-applet.js:11321
+#. 3.8/weather-applet.js:12407 3.8/weather-applet.js:12408
+#. 3.8/weather-applet.js:13884 3.8/weather-applet.js:13885
+#. 3.8/weather-applet.js:14743 3.8/weather-applet.js:14744
+#. 3.8/weather-applet.js:15258 3.8/weather-applet.js:15259
+#. 3.8/weather-applet.js:15462 3.8/weather-applet.js:16450
+#. 3.8/weather-applet.js:16451
+msgid "Cloudy"
+msgstr "Molnigt"
+
+#. 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
+#. 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12428
+#. 3.8/weather-applet.js:12429 3.8/weather-applet.js:13172
+#. 3.8/weather-applet.js:13173 3.8/weather-applet.js:13207
+msgid "Mostly cloudy"
+msgstr "Mestadels molnigt"
+
+#. 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
+#. 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
+#. 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
+#. 3.0/us_weather.js:456 3.8/weather-applet.js:10143
+#. 3.8/weather-applet.js:10144 3.8/weather-applet.js:10150
+#. 3.8/weather-applet.js:10151 3.8/weather-applet.js:11509
+#. 3.8/weather-applet.js:11510 3.8/weather-applet.js:12421
+#. 3.8/weather-applet.js:12422 3.8/weather-applet.js:13165
+#. 3.8/weather-applet.js:13166 3.8/weather-applet.js:13200
+#. 3.8/weather-applet.js:13877 3.8/weather-applet.js:13878
+#. 3.8/weather-applet.js:15935 3.8/weather-applet.js:15936
+msgid "Partly cloudy"
+msgstr "Delvis molnigt"
+
+#. 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12414
+#. 3.8/weather-applet.js:12415
+msgid "Mostly clear"
+msgstr "Mestadels klart"
+
+#. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
+#. 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
+#. 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
+#. 3.8/weather-applet.js:10129 3.8/weather-applet.js:10130
+#. 3.8/weather-applet.js:10402 3.8/weather-applet.js:11950
+#. 3.8/weather-applet.js:12031 3.8/weather-applet.js:12400
+#. 3.8/weather-applet.js:12401 3.8/weather-applet.js:13151
+#. 3.8/weather-applet.js:13152 3.8/weather-applet.js:13186
+#. 3.8/weather-applet.js:13669 3.8/weather-applet.js:13870
+#. 3.8/weather-applet.js:13871 3.8/weather-applet.js:14729
+#. 3.8/weather-applet.js:14730 3.8/weather-applet.js:14736
+#. 3.8/weather-applet.js:14737 3.8/weather-applet.js:15293
+#. 3.8/weather-applet.js:15294 3.8/weather-applet.js:15456
+#. 3.8/weather-applet.js:15921 3.8/weather-applet.js:16393
+#. 3.8/weather-applet.js:16400
+msgid "Clear"
+msgstr "Klart"
+
+#. 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
+#. 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10136
+#. 3.8/weather-applet.js:10137 3.8/weather-applet.js:12400
+#. 3.8/weather-applet.js:12401 3.8/weather-applet.js:15300
+#. 3.8/weather-applet.js:15301
+msgid "Sunny"
+msgstr "Soligt"
+
+#. 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
+#. 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
+#. 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
+#. 3.0/us_weather.js:628 3.8/weather-applet.js:10122
+#. 3.8/weather-applet.js:10123 3.8/weather-applet.js:10157
+#. 3.8/weather-applet.js:10158 3.8/weather-applet.js:10346
+#. 3.8/weather-applet.js:10347 3.8/weather-applet.js:11303
+#. 3.8/weather-applet.js:11304 3.8/weather-applet.js:11601
+#. 3.8/weather-applet.js:11602 3.8/weather-applet.js:11961
+#. 3.8/weather-applet.js:12042 3.8/weather-applet.js:12392
+#. 3.8/weather-applet.js:12393 3.8/weather-applet.js:13142
+#. 3.8/weather-applet.js:13143 3.8/weather-applet.js:13371
+#. 3.8/weather-applet.js:13372 3.8/weather-applet.js:14662
+#. 3.8/weather-applet.js:14663 3.8/weather-applet.js:14813
+#. 3.8/weather-applet.js:14814 3.8/weather-applet.js:15404
+#. 3.8/weather-applet.js:15406 3.8/weather-applet.js:16111
+#. 3.8/weather-applet.js:16112 3.8/weather-applet.js:16867
+#. 3.8/weather-applet.js:16868
+msgid "Unknown"
+msgstr "Okänt"
+
+#. 3.0/darkSky.js:71
+msgid "and"
+msgstr "och"
+
+#. 3.0/darkSky.js:71
+msgid "until"
+msgstr "tills"
+
+#. 3.0/darkSky.js:71
+msgid "Possible"
+msgstr "Möjligen"
+
+#. 3.0/darkSky.js:211
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+"Vänligen ange API nyckel i inställningar,\n"
+"eller hämta en först https://darksky.net/dev/register"
+
+#. 3.0/darkSky.js:238
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from DarkSky"
+msgstr ""
+"Vänligen var säker på att du\n"
+"angett den API-nyckeln du har hos DarkSky"
+
+#. 3.0/ipApi.js:89 3.8/weather-applet.js:15906
+msgid "Could not obtain location"
+msgstr "Kunde inte hämta plats"
+
+#. 3.0/ipApi.js:95
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr ""
+"Plats-tjänsten svarade med felmeddelanden, vänligen se logg i Looking Glass"
+
+#. 3.0/met_norway.js:131 3.8/weather-applet.js:11163
+msgid "Cloudiness"
+msgstr "Molnighet"
+
+#. 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
+#. 3.8/weather-applet.js:10532 3.8/weather-applet.js:11313
+#. 3.8/weather-applet.js:11314 3.8/weather-applet.js:15922
+#. 3.8/weather-applet.js:16394 3.8/weather-applet.js:16401
+msgid "Clear sky"
+msgstr "Klar himmel"
+
+#. 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
+#. 3.8/weather-applet.js:11327 3.8/weather-applet.js:11328
+msgid "Fair"
+msgstr "Klart"
+
+#. 3.0/met_norway.js:316 3.8/weather-applet.js:11349
+msgid "Heavy rain and thunder"
+msgstr "Kraftigt regn med åska"
+
+#. 3.0/met_norway.js:323 3.8/weather-applet.js:11356
+msgid "Heavy rain showers"
+msgstr "Kraftiga regnskurar"
+
+#. 3.0/met_norway.js:330 3.8/weather-applet.js:11363
+msgid "Heavy rain showers and thunder"
+msgstr "Kraftiga regnskurar med åska"
+
+#. 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
+#. 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11369
+#. 3.8/weather-applet.js:11370 3.8/weather-applet.js:11376
+#. 3.8/weather-applet.js:11383 3.8/weather-applet.js:11390
+#. 3.8/weather-applet.js:12017
+msgid "Heavy sleet"
+msgstr "Kraftigt slask"
+
+#. 3.0/met_norway.js:344 3.8/weather-applet.js:11377
+msgid "Heavy sleet and thunder"
+msgstr "Kraftigt slask med åska"
+
+#. 3.0/met_norway.js:351 3.8/weather-applet.js:11384
+msgid "Heavy sleet showers"
+msgstr "Kraftiga slaskskurar"
+
+#. 3.0/met_norway.js:358 3.8/weather-applet.js:11391
+msgid "Heavy sleet showers and thunder"
+msgstr "Kraftiga slaskskurar och åska"
+
+#. 3.0/met_norway.js:372 3.8/weather-applet.js:11405
+msgid "Heavy snow and thunder"
+msgstr "Kraftigt snöfall och åska"
+
+#. 3.0/met_norway.js:379 3.8/weather-applet.js:11412
+#. 3.8/weather-applet.js:13983
+msgid "Heavy snow showers"
+msgstr "Kraftiga snöbyar"
+
+#. 3.0/met_norway.js:386 3.8/weather-applet.js:11419
+msgid "Heavy snow showers and thunder"
+msgstr "Kraftiga snöbyar och åska"
+
+#. 3.0/met_norway.js:400 3.8/weather-applet.js:11433
+msgid "Light rain and thunder"
+msgstr "Lätt regn med åska"
+
+#. 3.0/met_norway.js:407 3.8/weather-applet.js:11440
+msgid "Light rain showers"
+msgstr "Lätta regnskurar"
+
+#. 3.0/met_norway.js:414 3.8/weather-applet.js:11447
+msgid "Light rain showers and thunder"
+msgstr "Lätta regnskurar och åska"
+
+#. 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
+#. 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11453
+#. 3.8/weather-applet.js:11454 3.8/weather-applet.js:11460
+#. 3.8/weather-applet.js:11467 3.8/weather-applet.js:11474
+msgid "Light sleet"
+msgstr "Lätt slask"
+
+#. 3.0/met_norway.js:428 3.8/weather-applet.js:11461
+msgid "Light sleet and thunder"
+msgstr "Lätt slask med åska"
+
+#. 3.0/met_norway.js:435 3.8/weather-applet.js:11468
+msgid "Light sleet showers"
+msgstr "Lätta slaskskurar"
+
+#. 3.0/met_norway.js:442 3.8/weather-applet.js:11475
+msgid "Light sleet showers and thunder"
+msgstr "Lätta slaskskurar och åska"
+
+#. 3.0/met_norway.js:456 3.8/weather-applet.js:11489
+msgid "Light snow and thunder"
+msgstr "Lätt snöfall och åska"
+
+#. 3.0/met_norway.js:463 3.8/weather-applet.js:11496
+#. 3.8/weather-applet.js:16077
+msgid "Light snow showers"
+msgstr "Lätta snöbyar"
+
+#. 3.0/met_norway.js:470 3.8/weather-applet.js:11503
+msgid "Light snow showers and thunder"
+msgstr "Lätta snöbyar och åska"
+
+#. 3.0/met_norway.js:491 3.8/weather-applet.js:11524
+msgid "Rain and thunder"
+msgstr "Regn och åska"
+
+#. 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
+#. 3.0/us_weather.js:542 3.8/weather-applet.js:11530
+#. 3.8/weather-applet.js:11531 3.8/weather-applet.js:11537
+#. 3.8/weather-applet.js:13286 3.8/weather-applet.js:13631
+#. 3.8/weather-applet.js:13948 3.8/weather-applet.js:13954
+msgid "Rain showers"
+msgstr "Regnskurar"
+
+#. 3.0/met_norway.js:505 3.8/weather-applet.js:11538
+msgid "Rain showers and thunder"
+msgstr "Regnskurar och åska"
+
+#. 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:518
+#. 3.0/met_norway.js:525 3.0/met_norway.js:532 3.0/met_uk.js:638
+#. 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
+#. 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
+#. 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
+#. 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10241
+#. 3.8/weather-applet.js:10248 3.8/weather-applet.js:10255
+#. 3.8/weather-applet.js:10256 3.8/weather-applet.js:10495
+#. 3.8/weather-applet.js:11544 3.8/weather-applet.js:11545
+#. 3.8/weather-applet.js:11551 3.8/weather-applet.js:11558
+#. 3.8/weather-applet.js:11565 3.8/weather-applet.js:11937
+#. 3.8/weather-applet.js:12015 3.8/weather-applet.js:13235
+#. 3.8/weather-applet.js:13236 3.8/weather-applet.js:13242
+#. 3.8/weather-applet.js:13243 3.8/weather-applet.js:13270
+#. 3.8/weather-applet.js:13271 3.8/weather-applet.js:14785
+#. 3.8/weather-applet.js:14786 3.8/weather-applet.js:15202
+#. 3.8/weather-applet.js:15203 3.8/weather-applet.js:15470
+#. 3.8/weather-applet.js:16513 3.8/weather-applet.js:16514
+#. 3.8/weather-applet.js:16520 3.8/weather-applet.js:16521
+#. 3.8/weather-applet.js:16626 3.8/weather-applet.js:16627
+msgid "Sleet"
+msgstr "Slask"
+
+#. 3.0/met_norway.js:519 3.8/weather-applet.js:11552
+msgid "Sleet and thunder"
+msgstr "Slask och åska"
+
+#. 3.0/met_norway.js:526 3.8/weather-applet.js:11559
+msgid "Sleet showers"
+msgstr "Slaskskurar"
+
+#. 3.0/met_norway.js:533 3.8/weather-applet.js:11566
+msgid "Sleet showers and thunder"
+msgstr "Slaskskurar och åska"
+
+#. 3.0/met_norway.js:547 3.8/weather-applet.js:11580
+msgid "Snow and thunder"
+msgstr "Snö och åska"
+
+#. 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
+#. 3.8/weather-applet.js:11586 3.8/weather-applet.js:11587
+#. 3.8/weather-applet.js:11593 3.8/weather-applet.js:13649
+#. 3.8/weather-applet.js:13976 3.8/weather-applet.js:16076
+#. 3.8/weather-applet.js:16083 3.8/weather-applet.js:16084
+msgid "Snow showers"
+msgstr "Snöbyar"
+
+#. 3.0/met_norway.js:561 3.8/weather-applet.js:11594
+msgid "Snow showers and thunder"
+msgstr "Snöbyar och åska"
+
+#. 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
+#. 3.0/us_weather.js:179
+msgid "Unexpected response from API"
+msgstr "Oväntad respons från API"
+
+#. 3.0/met_uk.js:316 3.8/weather-applet.js:9941
+msgid "Visibility"
+msgstr "Sikt"
+
+#. 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
+#. 3.0/weatherbit.js:212 3.8/weather-applet.js:9969 3.8/weather-applet.js:11711
+#. 3.8/weather-applet.js:13099
+msgid "Failed to Process Current Weather Info"
+msgstr "Misslyckades med att behandla aktuell Väder-info"
+
+#. 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
+#. 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9750
+#. 3.8/weather-applet.js:9784 3.8/weather-applet.js:11737
+#. 3.8/weather-applet.js:11771 3.8/weather-applet.js:12878
+msgid "Failed to Process Forecast Info"
+msgstr "Misslyckades att behandla prognos-info"
+
+#. 3.0/met_uk.js:408
+msgid "Very poor - Less than"
+msgstr "Mycket dålig - Mindre än"
+
+#. 3.0/met_uk.js:410
+msgid "Poor - Between"
+msgstr "Dålig - Mellan"
+
+#. 3.0/met_uk.js:412
+msgid "Moderate - Between"
+msgstr "Måttlig - Mellan"
+
+#. 3.0/met_uk.js:414
+msgid "Good - Between"
+msgstr "God - Mellan"
+
+#. 3.0/met_uk.js:416
+msgid "Very good - Between"
+msgstr "Mycket god - Mellan"
+
+#. 3.0/met_uk.js:417
+msgid "Excellent - More than"
+msgstr "Utmärkt - Mer än"
+
+#. 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
+#. 3.8/weather-applet.js:10164 3.8/weather-applet.js:10165
+#. 3.8/weather-applet.js:10406 3.8/weather-applet.js:10511
+#. 3.8/weather-applet.js:11939 3.8/weather-applet.js:12019
+#. 3.8/weather-applet.js:13621
+msgid "Mist"
+msgstr "Disigt"
+
+#. 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
+#. 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10185
+#. 3.8/weather-applet.js:10186 3.8/weather-applet.js:11958
+#. 3.8/weather-applet.js:12039 3.8/weather-applet.js:13179
+#. 3.8/weather-applet.js:13180 3.8/weather-applet.js:13214
+#. 3.8/weather-applet.js:13665 3.8/weather-applet.js:15942
+#. 3.8/weather-applet.js:15943 3.8/weather-applet.js:16435
+#. 3.8/weather-applet.js:16436 3.8/weather-applet.js:16442
+#. 3.8/weather-applet.js:16443
+msgid "Overcast"
+msgstr "Mulet"
+
+#. 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10193
+#. 3.8/weather-applet.js:10200
+msgid "Light rain shower"
+msgstr "Lätta regnskurar"
+
+#. 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
+#. 3.0/yahoo.js:445 3.8/weather-applet.js:10206 3.8/weather-applet.js:10207
+#. 3.8/weather-applet.js:10396 3.8/weather-applet.js:10453
+#. 3.8/weather-applet.js:11918 3.8/weather-applet.js:11983
+#. 3.8/weather-applet.js:12470 3.8/weather-applet.js:12471
+#. 3.8/weather-applet.js:12526 3.8/weather-applet.js:13587
+#. 3.8/weather-applet.js:15139 3.8/weather-applet.js:15140
+#. 3.8/weather-applet.js:15957 3.8/weather-applet.js:15964
+#. 3.8/weather-applet.js:15965 3.8/weather-applet.js:15971
+#. 3.8/weather-applet.js:15978 3.8/weather-applet.js:15985
+msgid "Drizzle"
+msgstr "Smådugg"
+
+#. 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10221
+#. 3.8/weather-applet.js:10228
+msgid "Heavy rain shower"
+msgstr "Tunga regnskurar"
+
+#. 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10242
+#. 3.8/weather-applet.js:10249
+msgid "Sleet shower"
+msgstr "Slaskskurar"
+
+#. 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
+#. 3.0/yahoo.js:453 3.8/weather-applet.js:10262 3.8/weather-applet.js:10269
+#. 3.8/weather-applet.js:10276 3.8/weather-applet.js:10277
+#. 3.8/weather-applet.js:13663 3.8/weather-applet.js:14757
+#. 3.8/weather-applet.js:14758 3.8/weather-applet.js:15195
+#. 3.8/weather-applet.js:15196
+msgid "Hail"
+msgstr "Hagel"
+
+#. 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10263
+#. 3.8/weather-applet.js:10270
+msgid "Hail shower"
+msgstr "Hagelbyar"
+
+#. 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10284
+#. 3.8/weather-applet.js:10291
+msgid "Light snow shower"
+msgstr "Lätta snöbyar"
+
+#. 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10305
+#. 3.8/weather-applet.js:10312 3.8/weather-applet.js:12011
+msgid "Heavy snow shower"
+msgstr "Tunga snöbyar"
+
+#. 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
+#. 3.8/weather-applet.js:10325 3.8/weather-applet.js:10332
+#. 3.8/weather-applet.js:10339 3.8/weather-applet.js:10340
+msgid "Thunder"
+msgstr "Åska"
+
+#. 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10326
+#. 3.8/weather-applet.js:10333
+msgid "Thunder shower"
+msgstr "Åskskurar"
+
+#. 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10791
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr "Vänligen var noga med plats är i korrekt format i inställningarna"
+
+#. 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10795
+msgid "Make sure you entered the correct key in settings"
+msgstr "Se till att du angett korrekt nyckel i inställningarna"
+
+#. 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
+#. 3.8/weather-applet.js:10799
+msgid ""
+"Location not found, make sure location is available or it is in the correct "
+"format"
+msgstr ""
+"Plats hittades inte, var säker på att den är tillgänglig och är i rätt format"
+
+#. 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10803
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr ""
+"Om detta problem fortsätter, vänligen kontakta detta panelprograms utvecklare"
+
+#. 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10807
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Okänt fel, vänligen se loggar i Looking Glass"
+
+#. 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10431
+#. 3.8/weather-applet.js:11967
+msgid "Thunderstorm with light rain"
+msgstr "Åska med lättare regn"
+
+#. 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10433
+#. 3.8/weather-applet.js:11969
+msgid "Thunderstorm with rain"
+msgstr "Åska med regn"
+
+#. 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10435
+#. 3.8/weather-applet.js:11971
+msgid "Thunderstorm with heavy rain"
+msgstr "Åska med kraftigt regn"
+
+#. 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10437
+msgid "Light thunderstorm"
+msgstr "Lättare Åska"
+
+#. 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10441
+msgid "Heavy thunderstorm"
+msgstr "Kraftig åska"
+
+#. 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10443
+msgid "Ragged thunderstorm"
+msgstr "Ojämna åskbyar"
+
+#. 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10445
+#. 3.8/weather-applet.js:11973
+msgid "Thunderstorm with light drizzle"
+msgstr "Åska med lättare duggregn"
+
+#. 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10447
+#. 3.8/weather-applet.js:11975
+msgid "Thunderstorm with drizzle"
+msgstr "Åska med duggregn"
+
+#. 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10449
+#. 3.8/weather-applet.js:11977
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Åska med kraftigt duggregn"
+
+#. 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10451
+msgid "Light intensity drizzle"
+msgstr "Lättare smådugg"
+
+#. 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10455
+msgid "Heavy intensity drizzle"
+msgstr "Kraftigt smådugg"
+
+#. 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10457
+msgid "Light intensity drizzle rain"
+msgstr "Lättare duggregn"
+
+#. 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10459
+msgid "Drizzle rain"
+msgstr "Duggregn"
+
+#. 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10461
+msgid "Heavy intensity drizzle rain"
+msgstr "Kraftigt duggregn"
+
+#. 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10463
+msgid "Shower rain and drizzle"
+msgstr "Regnskurar och duggregn"
+
+#. 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10465
+msgid "Heavy shower rain and drizzle"
+msgstr "Kraftiga skurar och duggregn"
+
+#. 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10467
+msgid "Shower drizzle"
+msgstr "Duschregn"
+
+#. 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10471
+#. 3.8/weather-applet.js:11989 3.8/weather-applet.js:13912
+#. 3.8/weather-applet.js:13913
+msgid "Moderate rain"
+msgstr "Måttligt regn"
+
+#. 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10473
+msgid "Heavy intensity rain"
+msgstr "Kraftigt intensivt regn"
+
+#. 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10475
+msgid "Very heavy rain"
+msgstr "Mycket kraftigt regn"
+
+#. 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10477
+msgid "Extreme rain"
+msgstr "Extremt regn"
+
+#. 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10481
+msgid "Light intensity shower rain"
+msgstr "Lätta intensiva regnskurar"
+
+#. 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10483
+#. 3.8/weather-applet.js:11997
+msgid "Shower rain"
+msgstr "Regnskurar"
+
+#. 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10485
+msgid "Heavy intensity shower rain"
+msgstr "Kraftiga intensiva regnskurar"
+
+#. 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10487
+msgid "Ragged shower rain"
+msgstr "Störtskurar"
+
+#. 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10499
+msgid "Shower sleet"
+msgstr "Slaskskurar"
+
+#. 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10501
+msgid "Light rain and snow"
+msgstr "Lätt regn och snö"
+
+#. 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10503
+#. 3.8/weather-applet.js:13919 3.8/weather-applet.js:13920
+#. 3.8/weather-applet.js:13926 3.8/weather-applet.js:13961
+#. 3.8/weather-applet.js:13968
+msgid "Rain and snow"
+msgstr "Regn och snö"
+
+#. 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10505
+msgid "Light shower snow"
+msgstr "Lätta snöbyar"
+
+#. 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10507
+msgid "Shower snow"
+msgstr "Snöbyar"
+
+#. 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10509
+msgid "Heavy shower snow"
+msgstr "Kraftiga snöbyar"
+
+#. 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
+#. 3.8/weather-applet.js:10408 3.8/weather-applet.js:10513
+#. 3.8/weather-applet.js:11941 3.8/weather-applet.js:12021
+#. 3.8/weather-applet.js:13329 3.8/weather-applet.js:13330
+#. 3.8/weather-applet.js:15230 3.8/weather-applet.js:15231
+msgid "Smoke"
+msgstr "Rök"
+
+#. 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
+#. 3.0/yahoo.js:457 3.8/weather-applet.js:10410 3.8/weather-applet.js:10515
+#. 3.8/weather-applet.js:11943 3.8/weather-applet.js:12023
+#. 3.8/weather-applet.js:13336 3.8/weather-applet.js:13337
+#. 3.8/weather-applet.js:15223 3.8/weather-applet.js:15224
+msgid "Haze"
+msgstr "Disigt"
+
+#. 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10517
+msgid "Sand, dust whirls"
+msgstr "Sand, dammvirvlar"
+
+#. 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10416
+#. 3.8/weather-applet.js:10521
+msgid "Sand"
+msgstr "Sand"
+
+#. 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
+#. 3.0/yahoo.js:455 3.8/weather-applet.js:10412 3.8/weather-applet.js:10523
+#. 3.8/weather-applet.js:11945 3.8/weather-applet.js:12025
+#. 3.8/weather-applet.js:13322 3.8/weather-applet.js:13323
+#. 3.8/weather-applet.js:15209 3.8/weather-applet.js:15210
+msgid "Dust"
+msgstr "Damm"
+
+#. 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10525
+msgid "Volcanic ash"
+msgstr "Vulkanisk aska"
+
+#. 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10527
+#. 3.8/weather-applet.js:13655
+msgid "Squalls"
+msgstr "Vindbyar"
+
+#. 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
+#. 3.0/yahoo.js:436 3.8/weather-applet.js:10422 3.8/weather-applet.js:10529
+#. 3.8/weather-applet.js:13301 3.8/weather-applet.js:13302
+#. 3.8/weather-applet.js:15082 3.8/weather-applet.js:15083
+msgid "Tornado"
+msgstr "Tromb"
+
+#. 3.0/openWeatherMap.js:413
+msgid "Sky is clear"
+msgstr "Himmelen är klar"
+
+#. 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10404
+msgid "Clouds"
+msgstr "Moln"
+
+#. 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
+#. 3.0/us_weather.js:449 3.8/weather-applet.js:10534
+#. 3.8/weather-applet.js:11952 3.8/weather-applet.js:12033
+#. 3.8/weather-applet.js:13158 3.8/weather-applet.js:13159
+#. 3.8/weather-applet.js:13193 3.8/weather-applet.js:15928
+#. 3.8/weather-applet.js:15929
+msgid "Few clouds"
+msgstr "Enstaka moln"
+
+#. 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10536
+#. 3.8/weather-applet.js:11954 3.8/weather-applet.js:12035
+msgid "Scattered clouds"
+msgstr "Spridda moln"
+
+#. 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10538
+#. 3.8/weather-applet.js:11956 3.8/weather-applet.js:12037
+msgid "Broken clouds"
+msgstr "Växlande molnighet"
+
+#. 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10540
+msgid "Overcast clouds"
+msgstr "Mulet"
+
+#. 3.0/us_weather.js:120
+msgid "Could not get forecast for your area"
+msgstr "Kunde inte hämta prognos för ditt område"
+
+#. 3.0/us_weather.js:231 3.8/weather-applet.js:12835
+msgid "Location is outside US, please use a different provider."
+msgstr "Platsen är utanför USA, vänligen använd en annan väderlekstjänst."
+
+#. 3.0/us_weather.js:394 3.8/weather-applet.js:12899
+msgid "Failed to Process Hourly Forecast Info"
+msgstr "Det gick inte att behandla prognosinformation per timme"
+
+#. 3.0/us_weather.js:443 3.8/weather-applet.js:13187
+msgid "Clear and windy"
+msgstr "Klart och blåsigt"
+
+#. 3.0/us_weather.js:450 3.8/weather-applet.js:13194
+msgid "Few clouds and windy"
+msgstr "Få moln och blåsigt"
+
+#. 3.0/us_weather.js:457 3.8/weather-applet.js:13201
+msgid "Partly cloudy and windy"
+msgstr "Delvis molnigt och blåsigt"
+
+#. 3.0/us_weather.js:464 3.8/weather-applet.js:13208
+msgid "Mostly cloudy and windy"
+msgstr "Mest molnigt och blåsigt"
+
+#. 3.0/us_weather.js:471 3.8/weather-applet.js:13215
+msgid "Overcast and windy"
+msgstr "Mulet och blåsigt"
+
+#. 3.0/us_weather.js:485 3.8/weather-applet.js:13229
+msgid "Snowy rain"
+msgstr "Snöigt regn"
+
+#. 3.0/us_weather.js:520 3.8/weather-applet.js:13264
+msgid "Freezing rain and snow"
+msgstr "Frysande regn och snö"
+
+#. 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
+#. 3.0/yahoo.js:438 3.8/weather-applet.js:8588 3.8/weather-applet.js:13308
+#. 3.8/weather-applet.js:13309 3.8/weather-applet.js:15096
+#. 3.8/weather-applet.js:15097
+msgid "Hurricane"
+msgstr "Orkan"
+
+#. 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8583
+#. 3.8/weather-applet.js:13315
+msgid "Storm"
+msgstr "Storm"
+
+#. 3.0/us_weather.js:572 3.8/weather-applet.js:13316
+msgid "Tropical storm"
+msgstr "Tropisk storm"
+
+#. 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
+#. 3.8/weather-applet.js:13343 3.8/weather-applet.js:13344
+#. 3.8/weather-applet.js:15328 3.8/weather-applet.js:15329
+msgid "Hot"
+msgstr "Hett"
+
+#. 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
+#. 3.8/weather-applet.js:13350 3.8/weather-applet.js:13351
+msgid "Cold"
+msgstr "Kallt"
+
+#. 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
+#. 3.8/weather-applet.js:13357 3.8/weather-applet.js:13358
+#. 3.8/weather-applet.js:15377 3.8/weather-applet.js:15378
+msgid "Blizzard"
+msgstr "Häftig snöstorm"
+
+#. 3.0/utils.js:146 3.8/weather-applet.js:8467
+msgid "Today"
+msgstr "Idag"
+
+#. 3.0/utils.js:148 3.8/weather-applet.js:8469
+msgid "Tomorrow"
+msgstr "Imorgon"
+
+#. 3.0/utils.js:204
+msgid "Sunday"
+msgstr "Söndag"
+
+#. 3.0/utils.js:204
+msgid "Monday"
+msgstr "Måndag"
+
+#. 3.0/utils.js:204
+msgid "Tuesday"
+msgstr "Tisdag"
+
+#. 3.0/utils.js:204
+msgid "Wednesday"
+msgstr "Onsdag"
+
+#. 3.0/utils.js:204
+msgid "Thursday"
+msgstr "Torsdag"
+
+#. 3.0/utils.js:204
+msgid "Friday"
+msgstr "Fredag"
+
+#. 3.0/utils.js:204
+msgid "Saturday"
+msgstr "Lördag"
+
+#. 3.0/utils.js:301 3.8/weather-applet.js:8553
+msgid "Calm"
+msgstr "Stiljte"
+
+#. 3.0/utils.js:304 3.8/weather-applet.js:8556
+msgid "Light air"
+msgstr "Nästan stiltje"
+
+#. 3.0/utils.js:307 3.8/weather-applet.js:8559
+msgid "Light breeze"
+msgstr "Lätt bris"
+
+#. 3.0/utils.js:310 3.8/weather-applet.js:8562
+msgid "Gentle breeze"
+msgstr "God bris"
+
+#. 3.0/utils.js:313 3.8/weather-applet.js:8565
+msgid "Moderate breeze"
+msgstr "Måttlig bris"
+
+#. 3.0/utils.js:316 3.8/weather-applet.js:8568
+msgid "Fresh breeze"
+msgstr "Frisk bris"
+
+#. 3.0/utils.js:319 3.8/weather-applet.js:8571
+msgid "Strong breeze"
+msgstr "Styv bris"
+
+#. 3.0/utils.js:322 3.8/weather-applet.js:8574
+msgid "Near gale"
+msgstr "Styv kuling"
+
+#. 3.0/utils.js:325 3.8/weather-applet.js:8577
+msgid "Gale"
+msgstr "Hård kuling"
+
+#. 3.0/utils.js:328 3.8/weather-applet.js:8580
+msgid "Strong gale"
+msgstr "Halv storm"
+
+#. 3.0/utils.js:334 3.8/weather-applet.js:8586
+msgid "Violent storm"
+msgstr "Svår storm"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "N"
+msgstr "N"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "NE"
+msgstr "NO"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "E"
+msgstr "Ö"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "SE"
+msgstr "SO"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "S"
+msgstr "S"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "SW"
+msgstr "SV"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "W"
+msgstr "V"
+
+#. 3.0/utils.js:429 3.8/weather-applet.js:8736
+msgid "NW"
+msgstr "NV"
+
+#. 3.0/weatherbit.js:312
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"Vänligen ange API-nyckel i inställningarna,\n"
+"eller hämta en först på https://www.weatherbit.io/account/create"
+
+#. 3.0/yahoo.js:78
+msgid ""
+"Unknown Error happened while calling Yahoo bridge,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Okänt fel uppstod vid anrop av Yahoo bridge,\n"
+" se Looking Glass logg för felet"
+
+#. 3.0/yahoo.js:91
+msgid ""
+"Yahoo bridge responded in bad format,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Yahoo bridge svarade i ett felaktigt format,\n"
+" se Looking Glass logg för felet"
+
+#. 3.0/yahoo.js:177
+msgid "Missing package"
+msgstr "Saknar paket"
+
+#. 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "Please install '"
+msgstr "Vänligen installera '"
+
+#. 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "', then refresh manually."
+msgstr "', därefter uppdatera manuellt."
+
+#. 3.0/yahoo.js:182
+msgid "Could not connect to Yahoo API."
+msgstr "Kunde inte ansluta till Yahoo API."
+
+#. 3.0/yahoo.js:186
+msgid ""
+"Unknown error happened while obtaining weather, see Looking Glass logs for "
+"more information"
+msgstr ""
+"Okänt fel hände medan hämtning av väder, se Looking Glass loggar för mer "
+"infromation"
+
+#. 3.0/yahoo.js:437 3.8/weather-applet.js:15089 3.8/weather-applet.js:15090
+msgid "Tropical Storm"
+msgstr "Tropisk storm"
+
+#. 3.0/yahoo.js:439
+msgid "Severe Thunderstorms"
+msgstr "Kraftigt åskväder"
+
+#. 3.0/yahoo.js:440 3.8/weather-applet.js:15110 3.8/weather-applet.js:15111
+#. 3.8/weather-applet.js:16555 3.8/weather-applet.js:16556
+#. 3.8/weather-applet.js:16562 3.8/weather-applet.js:16563
+#. 3.8/weather-applet.js:16650 3.8/weather-applet.js:16651
+msgid "Thunderstorms"
+msgstr "Åskväder"
+
+#. 3.0/yahoo.js:441
+msgid "Mixed Rain and Snow"
+msgstr "Snöblandat regn"
+
+#. 3.0/yahoo.js:442
+msgid "Mixed Rain and Sleet"
+msgstr "Blandat regnslask"
+
+#. 3.0/yahoo.js:443
+msgid "Mixed Snow and Sleet"
+msgstr "Blandat snö och slask"
+
+#. 3.0/yahoo.js:444 3.8/weather-applet.js:15132 3.8/weather-applet.js:15133
+msgid "Freezing Drizzle"
+msgstr "Fryst duggregn"
+
+#. 3.0/yahoo.js:446 3.8/weather-applet.js:15146 3.8/weather-applet.js:15147
+msgid "Freezing Rain"
+msgstr "Frysande regn"
+
+#. 3.0/yahoo.js:447 3.8/weather-applet.js:15153 3.8/weather-applet.js:15154
+#. 3.8/weather-applet.js:16055 3.8/weather-applet.js:16062
+#. 3.8/weather-applet.js:16063 3.8/weather-applet.js:16069
+#. 3.8/weather-applet.js:16499 3.8/weather-applet.js:16500
+#. 3.8/weather-applet.js:16506 3.8/weather-applet.js:16507
+#. 3.8/weather-applet.js:16736 3.8/weather-applet.js:16737
+#. 3.8/weather-applet.js:16743 3.8/weather-applet.js:16744
+msgid "Showers"
+msgstr "Skurar"
+
+#. 3.0/yahoo.js:449
+msgid "Snow Flurries"
+msgstr "Snöbyar"
+
+#. 3.0/yahoo.js:450 3.8/weather-applet.js:16586 3.8/weather-applet.js:16587
+msgid "Light Snow Showers"
+msgstr "Lätta snöbyar"
+
+#. 3.0/yahoo.js:451 3.8/weather-applet.js:15181 3.8/weather-applet.js:15182
+msgid "Blowing Snow"
+msgstr "Snöblåst"
+
+#. 3.0/yahoo.js:456 3.8/weather-applet.js:13898 3.8/weather-applet.js:13899
+msgid "Foggy"
+msgstr "Dimmigt"
+
+#. 3.0/yahoo.js:458
+msgid "Smoky"
+msgstr "Rökigt"
+
+#. 3.0/yahoo.js:459
+msgid "Blustery"
+msgstr "Häftig blåst"
+
+#. 3.0/yahoo.js:460 3.8/weather-applet.js:15244 3.8/weather-applet.js:15245
+msgid "Windy"
+msgstr "Blåsigt"
+
+#. 3.0/yahoo.js:463 3.8/weather-applet.js:15265 3.8/weather-applet.js:15266
+#. 3.8/weather-applet.js:15272 3.8/weather-applet.js:15273
+#. 3.8/weather-applet.js:16421 3.8/weather-applet.js:16422
+#. 3.8/weather-applet.js:16428 3.8/weather-applet.js:16429
+msgid "Mostly Cloudy"
+msgstr "Mestadels molnigt"
+
+#. 3.0/yahoo.js:464 3.8/weather-applet.js:14764 3.8/weather-applet.js:14765
+#. 3.8/weather-applet.js:14771 3.8/weather-applet.js:14772
+#. 3.8/weather-applet.js:15279 3.8/weather-applet.js:15280
+#. 3.8/weather-applet.js:15286 3.8/weather-applet.js:15287
+#. 3.8/weather-applet.js:15458 3.8/weather-applet.js:16407
+#. 3.8/weather-applet.js:16408 3.8/weather-applet.js:16414
+#. 3.8/weather-applet.js:16415
+msgid "Partly Cloudy"
+msgstr "Delvis molnigt"
+
+#. 3.0/yahoo.js:467 3.8/weather-applet.js:15314 3.8/weather-applet.js:15315
+msgid "Mostly Sunny"
+msgstr "Mestadels soligt"
+
+#. 3.0/yahoo.js:469 3.8/weather-applet.js:15321 3.8/weather-applet.js:15322
+msgid "Mixed Rain and Hail"
+msgstr "Blandat regn och hagel"
+
+#. 3.0/yahoo.js:471 3.8/weather-applet.js:15335 3.8/weather-applet.js:15336
+msgid "Isolated Thunderstorms"
+msgstr "Enstaka åskaväder"
+
+#. 3.0/yahoo.js:472 3.8/weather-applet.js:15342 3.8/weather-applet.js:15343
+#. 3.8/weather-applet.js:15398 3.8/weather-applet.js:15399
+msgid "Scattered Thunderstorms"
+msgstr "Utbrett åskväder"
+
+#. 3.0/yahoo.js:473 3.8/weather-applet.js:15349 3.8/weather-applet.js:15350
+#. 3.8/weather-applet.js:15384 3.8/weather-applet.js:15385
+#. 3.8/weather-applet.js:16457 3.8/weather-applet.js:16458
+#. 3.8/weather-applet.js:16464 3.8/weather-applet.js:16465
+#. 3.8/weather-applet.js:16694 3.8/weather-applet.js:16695
+#. 3.8/weather-applet.js:16701 3.8/weather-applet.js:16702
+msgid "Scattered Showers"
+msgstr "Spridda skurar"
+
+#. 3.0/yahoo.js:474 3.8/weather-applet.js:15356 3.8/weather-applet.js:15357
+#. 3.8/weather-applet.js:16750 3.8/weather-applet.js:16751
+#. 3.8/weather-applet.js:16757 3.8/weather-applet.js:16758
+msgid "Heavy Rain"
+msgstr "Kraftigt regn"
+
+#. 3.0/yahoo.js:475 3.8/weather-applet.js:15363 3.8/weather-applet.js:15364
+#. 3.8/weather-applet.js:15391 3.8/weather-applet.js:15392
+#. 3.8/weather-applet.js:16708 3.8/weather-applet.js:16709
+#. 3.8/weather-applet.js:16715 3.8/weather-applet.js:16716
+msgid "Scattered Snow Showers"
+msgstr "Spridda snöbyar"
+
+#. 3.0/yahoo.js:476 3.8/weather-applet.js:15370 3.8/weather-applet.js:15371
+#. 3.8/weather-applet.js:16764 3.8/weather-applet.js:16765
+#. 3.8/weather-applet.js:16771 3.8/weather-applet.js:16772
+msgid "Heavy Snow"
+msgstr "Blötsnö"
+
+#. 3.0/yahoo.js:478
+msgid "Not Available"
+msgstr "Inte tillgängligt"
+
+#. 3.0/yahoo.js:479
+msgid "Scattered Thundershowers"
+msgstr "Spridda åskbyar"
+
+#. 3.8/weather-applet.js:766
+msgid ""
+"Could not retrieve logs, log file was not found under path\n"
+" {logFilePath}"
+msgstr ""
+"Kunde inte hämta loggar, loggfil hittades inte i sökväg\n"
+" {logFilePath}"
+
+#. 3.8/weather-applet.js:770
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+"Kunde inte hämta innehåll från loggfil i sökväg\n"
+" {logFilePath}"
+
+#. 3.8/weather-applet.js:9615
+msgid ""
+"Address to location lookup service is blocked. You can try to change your "
+"User-Agent in help to see if it resolves the issue."
+msgstr ""
+"Adress till plats-sökningstjänsten är blockerad. Du kan prova att byta din "
+"användar-klient i hjälpen för att se om detta löser problemet."
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:9708
+msgid "Met Office UK"
+msgstr "Met Office UK"
+
+#. 3.8/weather-applet.js:9813
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr ""
+"MET Office UK täcker endast UK, vänligen säkerställ att din plats är i landet"
+
+#. 3.8/weather-applet.js:9901
+msgid "Data was not found for location"
+msgstr "Ingen data hittades för plats"
+
+#. 3.8/weather-applet.js:9982
+msgid "Very poor"
+msgstr "Mycket dåligt"
+
+#. 3.8/weather-applet.js:9982
+msgid "Less than {distance} {distanceUnit}"
+msgstr "Mindre än {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:9986
+msgid "Excellent"
+msgstr "Utmärkt"
+
+#. 3.8/weather-applet.js:9986
+msgid "More than {distance} {distanceUnit}"
+msgstr "Mer än {distance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:9991
+msgid "Poor"
+msgstr "Dåligt"
+
+#. 3.8/weather-applet.js:9991 3.8/weather-applet.js:9996
+#. 3.8/weather-applet.js:10001 3.8/weather-applet.js:10006
+#. 3.8/weather-applet.js:10011
+msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
+msgstr "Mellan {smallerDistance}-{biggerDistance} {distanceUnit}"
+
+#. 3.8/weather-applet.js:9996
+msgid "Moderate"
+msgstr "Måttligt"
+
+#. 3.8/weather-applet.js:10001
+msgid "Good"
+msgstr "God"
+
+#. 3.8/weather-applet.js:10006 3.8/weather-applet.js:10011
+msgid "Very good"
+msgstr "Mycket god"
+
+#. 3.8/weather-applet.js:10418
+msgid "Ash"
+msgstr "Aska"
+
+#. 3.8/weather-applet.js:10420
+msgid "Squall"
+msgstr "Kastvind"
+
+#. 3.8/weather-applet.js:10497
+msgid "Light shower sleet"
+msgstr "Lätta underkylt regn"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:10768 3.8/weather-applet.js:16309
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:11054
+msgid "MET Norway"
+msgstr "MET Norge"
+
+#. 3.8/weather-applet.js:11619
+msgid "WeatherBit"
+msgstr "WeatherBit"
+
+#. 3.8/weather-applet.js:11985 3.8/weather-applet.js:13589
+#. 3.8/weather-applet.js:15972
+msgid "Heavy drizzle"
+msgstr "Kraftigt smådugg"
+
+#. 3.8/weather-applet.js:11995
+msgid "Light shower rain"
+msgstr "Lätta regnskurar"
+
+#. 3.8/weather-applet.js:11999
+msgid "Heavy shower rain"
+msgstr "Kraftiga regnskurar"
+
+#. 3.8/weather-applet.js:12007
+msgid "Mix snow/rain"
+msgstr "Snöblandat regn"
+
+#. 3.8/weather-applet.js:12009
+msgid "Snow shower"
+msgstr "Snöbyar"
+
+#. 3.8/weather-applet.js:12029 3.8/weather-applet.js:13607
+msgid "Freezing fog"
+msgstr "Frysande dimma"
+
+#. 3.8/weather-applet.js:12238
+msgid "Tomorrow.io"
+msgstr "Tomorrow.io"
+
+#. 3.8/weather-applet.js:12450
+msgid "Light wind"
+msgstr "Lätt vind"
+
+#. 3.8/weather-applet.js:12464
+msgid "Strong wind"
+msgstr "Stark vind"
+
+#. 3.8/weather-applet.js:12815
+msgid "US Weather"
+msgstr "US Weather"
+
+#. 3.8/weather-applet.js:13391
+msgid "Visual Crossing"
+msgstr "Visual Crossing"
+
+#. 3.8/weather-applet.js:13585
+msgid "Blowing or drifting snow"
+msgstr "Blåsande eller drivande snö"
+
+#. 3.8/weather-applet.js:13593
+msgid "Heavy drizzle/rain"
+msgstr "Kraftigt dugg/regn"
+
+#. 3.8/weather-applet.js:13595
+msgid "Light drizzle/rain"
+msgstr "Lätt dugg/regn"
+
+#. 3.8/weather-applet.js:13597
+msgid "Dust Storm"
+msgstr "Sandstorm"
+
+#. 3.8/weather-applet.js:13601
+msgid "Freezing drizzle/freezing rain"
+msgstr "Underkylt dugg/underkylt regn"
+
+#. 3.8/weather-applet.js:13603
+msgid "Heavy freezing drizzle/freezing rain"
+msgstr "Kraftigt underkylt dugg/underkylt regn"
+
+#. 3.8/weather-applet.js:13605
+msgid "Light freezing drizzle/freezing rain"
+msgstr "Lätt underkylt dugg/underkylt regn"
+
+#. 3.8/weather-applet.js:13613
+msgid "Funnel cloud/tornado"
+msgstr "Trattmoln/tromb"
+
+#. 3.8/weather-applet.js:13615
+msgid "Hail showers"
+msgstr "Hagelskurar"
+
+#. 3.8/weather-applet.js:13617
+msgid "Ice"
+msgstr "Is"
+
+#. 3.8/weather-applet.js:13619
+msgid "Lightning without thunder"
+msgstr "Blixtar utan åska"
+
+#. 3.8/weather-applet.js:13623
+msgid "Precipitation in vicinity"
+msgstr "Nederbörd i närheten"
+
+#. 3.8/weather-applet.js:13627 3.8/weather-applet.js:13927
+msgid "Heavy rain and snow"
+msgstr "Kraftigt regn och snö"
+
+#. 3.8/weather-applet.js:13629
+msgid "Light rain And snow"
+msgstr "Lätt regn och snö"
+
+#. 3.8/weather-applet.js:13637
+msgid "Sky coverage decreasing"
+msgstr "Minskande himmelstäckning"
+
+#. 3.8/weather-applet.js:13639
+msgid "Sky coverage increasing"
+msgstr "Ökande himmelstäckning"
+
+#. 3.8/weather-applet.js:13641
+msgid "Sky unchanged"
+msgstr "Oförändrad himmel"
+
+#. 3.8/weather-applet.js:13643
+msgid "Smoke or haze"
+msgstr "Rök eller dis"
+
+#. 3.8/weather-applet.js:13647
+msgid "Snow and rain showers"
+msgstr "Snö och regnskurar"
+
+#. 3.8/weather-applet.js:13659
+msgid "Thunderstorm without precipitation"
+msgstr "Åska utan nederbörd"
+
+#. 3.8/weather-applet.js:13661
+msgid "Diamond dust"
+msgstr "Isnål-snö"
+
+#. 3.8/weather-applet.js:13667
+msgid "Partially cloudy"
+msgstr "Delvis molnigt"
+
+#. 3.8/weather-applet.js:13689
+msgid "Please make sure you entered the API key correctly"
+msgstr "Vänligen kolla att du angett API-nyckel korrekt"
+
+#. 3.8->settings-schema.json->dataService->options
+#. 3.8/weather-applet.js:13706
+msgid "DMI Denmark"
+msgstr "DMI Danmark"
+
+#. 3.8/weather-applet.js:13859 3.8/weather-applet.js:13860
+#. 3.8/weather-applet.js:13996 3.8/weather-applet.js:13997
+msgid "NOT FOUND"
+msgstr "HITTADES INTE"
+
+#. 3.8/weather-applet.js:13892
+msgid "Blowing snow"
+msgstr "Snöblåst"
+
+#. 3.8/weather-applet.js:13933 3.8/weather-applet.js:13934
+msgid "Slight snow"
+msgstr "Lätt snöfall"
+
+#. 3.8/weather-applet.js:13940 3.8/weather-applet.js:13941
+msgid "Moderate snow"
+msgstr "Måttligt snöfall"
+
+#. 3.8/weather-applet.js:13955
+msgid "Moderate rain showers"
+msgstr "Måttliga regnskurar"
+
+#. 3.8/weather-applet.js:13962
+msgid "Mixed rain and snow"
+msgstr "Snöblandat regn"
+
+#. 3.8/weather-applet.js:13969
+msgid "Heavy mixed rain and snow"
+msgstr "Kraftigt snöblandat regn"
+
+#. 3.8/weather-applet.js:14068
+msgid "AccuWeather"
+msgstr "AccuWeather"
+
+#. 3.8/weather-applet.js:14524
+msgid "Deutscher Wetterdienst"
+msgstr "Deutscher Wetterdienst"
+
+#. 3.8/weather-applet.js:14537
+msgid "Please select a different provider or location"
+msgstr "Vänligen välj en annan tjänst eller plats"
+
+#. 3.8/weather-applet.js:14854
+msgid "Weather Underground"
+msgstr "Weather Underground"
+
+#. 3.8/weather-applet.js:15060
+msgid "The API key you provided is invalid."
+msgstr "API-nyckeln du angav är ogiltig."
+
+#. 3.8/weather-applet.js:15067
+msgid "The location you provided was not found."
+msgstr "Platsen du angav hittades inte."
+
+#. 3.8/weather-applet.js:15103 3.8/weather-applet.js:15104
+msgid "Strong Storm"
+msgstr "Kraftig storm"
+
+#. 3.8/weather-applet.js:15118 3.8/weather-applet.js:15119
+msgid "Rain and Snow"
+msgstr "Regn och snö"
+
+#. 3.8/weather-applet.js:15125 3.8/weather-applet.js:15126
+msgid "Rain and Sleet"
+msgstr "Blandat regnslask"
+
+#. 3.8/weather-applet.js:15174 3.8/weather-applet.js:15175
+#. 3.8/weather-applet.js:16485 3.8/weather-applet.js:16486
+#. 3.8/weather-applet.js:16492 3.8/weather-applet.js:16493
+#. 3.8/weather-applet.js:16527 3.8/weather-applet.js:16528
+#. 3.8/weather-applet.js:16534 3.8/weather-applet.js:16535
+msgid "Snow Showers"
+msgstr "Snöbyar"
+
+#. 3.8/weather-applet.js:15237 3.8/weather-applet.js:15238
+msgid "Breezy"
+msgstr "Blåsigt"
+
+#. 3.8/weather-applet.js:15251 3.8/weather-applet.js:15252
+msgid "Frigid"
+msgstr "Kylig"
+
+#. 3.8/weather-applet.js:15307 3.8/weather-applet.js:15308
+msgid "Mostly Clear"
+msgstr "Mestadels klart"
+
+#. 3.8/weather-applet.js:15489
+msgid "Pirate Weather"
+msgstr "Pirate Weather"
+
+#. 3.8/weather-applet.js:15516
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Pirate Weather"
+msgstr ""
+"Vänligen var säker på att du\n"
+"angett den API-nyckeln du har hos Pirate Weather"
+
+#. 3.8/weather-applet.js:15886
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+"Plats-tjänsten kunde inte hitta din plats, vänligen se logg i Looking Glass"
+
+#. 3.8/weather-applet.js:16049
+msgid "Snow grains"
+msgstr "Pudersnö"
+
+#. 3.8/weather-applet.js:16056
+msgid "Light showers"
+msgstr "Lätta skurar"
+
+#. 3.8/weather-applet.js:16070
+msgid "Heavy showers"
+msgstr "Kraftiga skurar"
+
+#. 3.8/weather-applet.js:16098
+msgid "Thunderstorm with slight hail"
+msgstr "Åska med lättare hagel"
+
+#. 3.8/weather-applet.js:16105
+msgid "Thunderstorm with hail"
+msgstr "Åska med hagel"
+
+#. 3.8/weather-applet.js:16132 3.8/weather-applet.js:16292
+msgid "Feels like"
+msgstr "Känns som"
+
+#. 3.8/weather-applet.js:16200
+msgid "Open Meteo"
+msgstr "Open Meteo"
+
+#. 3.8/weather-applet.js:16471 3.8/weather-applet.js:16472
+#. 3.8/weather-applet.js:16478 3.8/weather-applet.js:16479
+#. 3.8/weather-applet.js:16722 3.8/weather-applet.js:16723
+#. 3.8/weather-applet.js:16729 3.8/weather-applet.js:16730
+msgid "Scattered Sleet"
+msgstr "Spridda slaskskurar"
+
+#. 3.8/weather-applet.js:16541 3.8/weather-applet.js:16542
+#. 3.8/weather-applet.js:16548 3.8/weather-applet.js:16549
+#. 3.8/weather-applet.js:16642 3.8/weather-applet.js:16643
+msgid "Chance of Thunderstorms"
+msgstr "Risk för åskväder"
+
+#. 3.8/weather-applet.js:16570 3.8/weather-applet.js:16571
+#, fuzzy
+msgid "Light Rain"
+msgstr "Lättare regn"
+
+#. 3.8/weather-applet.js:16578 3.8/weather-applet.js:16579
+#, fuzzy
+msgid "Light Sleet"
+msgstr "Lätt slask"
+
+#. 3.8/weather-applet.js:16594 3.8/weather-applet.js:16595
+msgid "Intermittent Rain"
+msgstr "Lätt regn"
+
+#. 3.8/weather-applet.js:16602 3.8/weather-applet.js:16603
+msgid "Intermittent Sleet"
+msgstr "Lätt slaskregn"
+
+#. 3.8/weather-applet.js:16610 3.8/weather-applet.js:16611
+msgid "Intermittent Snow"
+msgstr "Lätt snö"
+
+#. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
+msgid "Frequent Thunderstorms"
+msgstr "Återkommande åskväder"
+
+#. 3.8/weather-applet.js:16665 3.8/weather-applet.js:16666
+#. 3.8/weather-applet.js:16672 3.8/weather-applet.js:16673
+msgid "High Clouds"
+msgstr "Höga moln"
+
+#. 3.8/weather-applet.js:16680 3.8/weather-applet.js:16681
+msgid "Low Clouds"
+msgstr "Låga moln"
+
+#. 3.8/weather-applet.js:16779 3.8/weather-applet.js:16780
+msgid "Overcast and Dry"
+msgstr "Mulet och torrt"
+
+#. 3.8/weather-applet.js:16786 3.8/weather-applet.js:16787
+#. 3.8/weather-applet.js:16793 3.8/weather-applet.js:16794
+#. 3.8/weather-applet.js:16843 3.8/weather-applet.js:16844
+#. 3.8/weather-applet.js:16851 3.8/weather-applet.js:16852
+msgid "Slightly Stormy"
+msgstr "Småstormigt"
+
+#. 3.8/weather-applet.js:16800 3.8/weather-applet.js:16801
+#. 3.8/weather-applet.js:16807 3.8/weather-applet.js:16808
+msgid "Stormy Snow Showers"
+msgstr "Stormiga snöbyar"
+
+#. 3.8/weather-applet.js:16814 3.8/weather-applet.js:16815
+#. 3.8/weather-applet.js:16821 3.8/weather-applet.js:16822
+msgid "Thundery Showers"
+msgstr "Åskskurar"
+
+#. 3.8/weather-applet.js:16828 3.8/weather-applet.js:16829
+#. 3.8/weather-applet.js:16835 3.8/weather-applet.js:16836
+#. 3.8/weather-applet.js:16859 3.8/weather-applet.js:16860
+msgid "Thundery Snow Showers"
+msgstr "Snö åskskurar"
+
+#. 3.8/weather-applet.js:16948
+msgid "Wind Warning"
+msgstr "Vindvarning"
+
+#. 3.8/weather-applet.js:16950
+msgid "Thunderstorm Warning"
+msgstr "Åskvarning"
+
+#. 3.8/weather-applet.js:16952
+msgid "Rain Warning"
+msgstr "Regnvarning"
+
+#. 3.8/weather-applet.js:16954
+msgid "Snow Warning"
+msgstr "Snövarning"
+
+#. 3.8/weather-applet.js:16956
+msgid "Slippery Roads Warning"
+msgstr "Halkvarning"
+
+#. 3.8/weather-applet.js:16958
+msgid "Frost Warning"
+msgstr "Frostvarning"
+
+#. 3.8/weather-applet.js:16960
+msgid "Mass Movements Warning"
+msgstr "Lerskreds varning"
+
+#. 3.8/weather-applet.js:16962
+msgid "Heat Warning"
+msgstr "Värmevarning"
+
+#. 3.8/weather-applet.js:16964
+msgid "Avalanche Warning"
+msgstr "Lavinvarning"
+
+#. 3.8/weather-applet.js:16966
+msgid "Earthquake Warning"
+msgstr "Jordbävningsvarning"
+
+#. 3.8/weather-applet.js:16968
+msgid "Forest Fire Warning"
+msgstr "Skogsbrandvarning"
+
+#. 3.8/weather-applet.js:16970
+msgid "Flood Warning"
+msgstr "Översvämningsvarning"
+
+#. 3.8/weather-applet.js:16990
+msgid "Swiss Météo"
+msgstr "Swiss Météo"
+
+#. 3.8/weather-applet.js:17009
+msgid "For this provider, you need to use a postcode."
+msgstr "För denna väderlekstjänst så behöver du ett postnummer"
+
+#. 3.8/weather-applet.js:17021
+msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
+msgstr ""
+"För denna väderlekstjänst så behöver du ett Schweiziskt postnummer, mellan "
+"1000-9999."
+
+#. 3.8/weather-applet.js:17043
+msgid "Switzerland"
+msgstr "Schweiz"
+
+#. 3.8/weather-applet.js:17474
+msgid ""
+"Could not retrieve config, file was not found under paths\n"
+" {configFilePath}"
+msgstr ""
+"Kunde inte hämta inställningar, fil hittades inte i sökväg\n"
+" {configFilePath}"
+
+#. 3.8/weather-applet.js:17481
+msgid ""
+"Could not get contents of config file under path\n"
+" {configFilePath}"
+msgstr ""
+"Kunde inte hämta innehåll för inställningsfil i sökväg\n"
+" {configFilePath}"
+
+#. 3.8/weather-applet.js:17757
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+"Kontrollera att du angett en plats eller använd Automatisk plats istället."
+
+#. 3.8/weather-applet.js:17775
+msgid "This provider requires an API key to operate"
+msgstr "Denna väderlekstjänst kräver en API-nyckel för att fungera"
+
+#. 3.8/weather-applet.js:18183
+msgid "Dew Point"
+msgstr "Daggpunkt"
+
+#. 3.8/weather-applet.js:18266
+msgid "Precipitation will end in {precipEnd} minutes"
+msgstr "Nederbörd kommer att upphöra inom {precipEnd} minuter"
+
+#. 3.8/weather-applet.js:18268
+msgid "Precipitation won't end in within an hour"
+msgstr "Nederbörd kommer inte att upphöra inom en timme"
+
+#. 3.8/weather-applet.js:18271
+msgid "Precipitation will start within {precipStart} minutes"
+msgstr "Nederbörd kommer att börja inom {precipStart} minuter"
+
+#. 3.8/weather-applet.js:18474
+msgid "Forecast parsing failed, see logs for more details."
+msgstr "Prognos tolkning misslyckades, se loggar för mer information."
+
+#. 3.8/weather-applet.js:19055 3.8/weather-applet.js:19663
+msgid "As of {lastUpdatedTime}"
+msgstr "Fr.o.m. {lastUpdatedTime}"
+
+#. 3.8/weather-applet.js:19061
+msgid "{distance} {distanceUnit} from you"
+msgstr "{distance} {distanceUnit} från dig"
+
+#. 3.8/weather-applet.js:19065
+msgid "Station Name: {stationName}"
+msgstr "Stationsnamn: {stationName}"
+
+#. 3.8/weather-applet.js:19068
+msgid "Area: {stationArea}"
+msgstr "Område: {stationArea}"
+
+#. 3.8/weather-applet.js:19078
+msgid "{count} weather alert(s)"
+msgstr "{count} vädervarning(ar)"
+
+#. 3.8/weather-applet.js:19473 3.8/weather-applet.js:19483
+#. 3.8/weather-applet.js:19490
+msgid "Error Saving Debug Information"
+msgstr "Fel vid sparande av felsökningsinformation"
+
+#. 3.8/weather-applet.js:19490
+msgid "Could not open file {filePath} for writing"
+msgstr "Kunde inte öppna filen {filePath} för skrivning"
+
+#. 3.8/weather-applet.js:19499
+msgid "Debug Information saved successfully"
+msgstr "Felsökningsinformationen har sparats"
+
+#. 3.8/weather-applet.js:19499
+msgid "Saved to {filePath}"
+msgstr "Sparad i {filePath}"
+
+#. 3.8/weather-applet.js:19528
+msgid "Location Service Blocked"
+msgstr "Platstjänst blockerad"
+
+#. 3.8/weather-applet.js:19703
+msgid "No Script Provided"
+msgstr "Inget skript erbjudet"
+
+#. 3.8/weather-applet.js:19703
+msgid "You need to add a script first."
+msgstr "Du behöver lägga till ett skript först."
+
+#. 3.8/weather-applet.js:19707
+msgid "No Weather Data"
+msgstr "Ingen väderdata"
+
+#. 3.8/weather-applet.js:19707
+msgid "No weather data to run script with"
+msgstr "Ingen väderdata att köra skript med"
+
+#. 3.8/weather-applet.js:19715
+msgid "Script Executed Successfully"
+msgstr "Skriptet exekverat framgångsrikt"
+
+#. 3.8/weather-applet.js:19715
+msgid "Your script has been executed successfully."
+msgstr "Ditt skript har exekverats framgångsrikt."
+
+#. 3.8/weather-applet.js:19718
+msgid "Error Running Script"
+msgstr "Fel vid körning av skript"
+
+#. 3.8/weather-applet.js:19718
+msgid "Script returned error, see logs for more information"
+msgstr "Skriptet returnerade fel, se loggar för mer information"
+
+#. 3.8/AlertsWindow.py:119
+msgid "Weather Applet Alerts"
+msgstr "Väderapplet varningar"
+
+#. 3.8/LogSaver.py:16
+msgid "Save to File"
+msgstr "Spara till fil"
+
+#. 3.8/LogSaver.py:29
+msgid "Select a destination"
+msgstr "Välj en destination"
+
+#. metadata.json->name
+#. 3.8->settings-schema.json->providers->title
+msgid "Weather"
+msgstr "Väder"
+
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "Visar din lokala väderprognos"
+
+#. 3.0->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "Inställningar för weather@mockturtl 3.0+"
+
+#. 3.0->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Ange snabbtangent för att öppna menyn"
+
+#. 3.0->settings-schema.json->descriptions->description
+msgid "Weather service information"
+msgstr "Information väderlekstjänster"
+
+#. 3.0->settings-schema.json->moreInfo->description
+msgid "Click here for detailed description"
+msgstr "Klicka här för detaljerad beskrivning"
+
+#. 3.0->settings-schema.json->moreInfo->tooltip
+#. 3.0->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "Öppnar guide webbsida"
+
+#. 3.0->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->provider-options->title
+msgid "Weather Provider Options"
+msgstr "Alternativ väderlekstjänster"
+
+#. 3.0->settings-schema.json->dataService->description
+#. 3.8->settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "Datatjänst"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "DarkSky (key needed)"
+msgstr "DarkSky (nyckel behövs)"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
+msgstr "Weatherbit (nyckel behövs)"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Climacell (key needed)"
+msgstr "Climacell (nyckel behövs)"
+
+#. 3.0->settings-schema.json->apiKey->description
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "API-nyckel"
+
+#. 3.0->settings-schema.json->apiKey->tooltip
+#. 3.8->settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr ""
+"Kopiera detta från ditt konto i datatjänsten som används och klistra in här."
+
+#. 3.0->settings-schema.json->manualLocation->description
+#. 3.8->settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Manuell plats"
+
+#. 3.0->settings-schema.json->manualLocation->tooltip
+#. 3.8->settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Aktivera detta om din plats inte stämmer"
+
+#. 3.0->settings-schema.json->location->description
+msgid "Location - Coordinates"
+msgstr "Plats - Koordinater"
+
+#. 3.0->settings-schema.json->location->tooltip
+msgid ""
+"Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an "
+"address.\n"
+"Waits for 3 seconds after you stop typing before refreshes the weather."
+msgstr ""
+"Acceptabel input är Latitud,Longitud. t.ex. 68.1932,17.1426 eller en "
+"adress.\n"
+"Vänta i 3 sekunder efter du slutat skriva innan väder uppdateras."
+
+#. 3.0->settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "Inställning för API-nyckel och plats"
+
+#. 3.0->settings-schema.json->refreshInterval->units
+#. 3.8->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "minuter"
+
+#. 3.0->settings-schema.json->refreshInterval->description
+#. 3.8->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Uppdateringsintervall"
+
+#. 3.0->settings-schema.json->forecastDays->units
+#. 3.8->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "dagar"
+
+#. 3.0->settings-schema.json->forecastDays->description
+#. 3.8->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "Prognoslängd"
+
+#. 3.0->settings-schema.json->forecastHours->units
+#. 3.8->settings-schema.json->forecastHours->units
+msgid "hours"
+msgstr "timmar"
+
+#. 3.0->settings-schema.json->forecastHours->description
+#. 3.8->settings-schema.json->forecastHours->description
+msgid "Hourly Forecast length"
+msgstr "Timmars prognoslängd"
+
+#. 3.0->settings-schema.json->unitSettings->description
+msgid "Units"
+msgstr "Enheter"
+
+#. 3.0->settings-schema.json->temperatureUnit->description
+#. 3.8->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "Temperaturenhet"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Automatic"
+msgstr "Automatisk"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Celsius"
+msgstr "Celsius"
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#. 3.0->settings-schema.json->temperatureUnit->tooltip
+#. 3.0->settings-schema.json->distanceUnit->tooltip
+#. 3.8->settings-schema.json->temperatureUnit->tooltip
+#. 3.8->settings-schema.json->distanceUnit->tooltip
+msgid ""
+"Automatic will try to guess your preference based your current display "
+"language."
+msgstr ""
+"Automatisk kommer att prova gissa dina inställningar baserat på ditt "
+"nuvarande visningsspråk."
+
+#. 3.0->settings-schema.json->windSpeedUnit->description
+#. 3.8->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Enhet för vidhastighet"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "kph"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "mph"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/s"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "knop"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "Beaufort"
+msgstr "Beaufort"
+
+#. 3.0->settings-schema.json->pressureUnit->description
+#. 3.8->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "Enhet för atmosfäriskt tryck"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "hPa"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "in Hg"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mm Hg"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "psi"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "at"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "atm"
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
+
+#. 3.0->settings-schema.json->distanceUnit->description
+#. 3.8->settings-schema.json->distanceUnit->description
+msgid "Distance unit"
+msgstr "Enhet avstånd"
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Metric"
+msgstr "Metric"
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Imperial"
+msgstr "Imperial"
+
+#. 3.0->settings-schema.json->panelSettings->description
+msgid "Panel options"
+msgstr "Alternativ panel"
+
+#. 3.0->settings-schema.json->showTextInPanel->description
+#. 3.8->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Visa aktuell temperatur i panelen"
+
+#. 3.0->settings-schema.json->showCommentInPanel->description
+#. 3.8->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Visa väderförhållande (dvs. \"Blåsigt\", \"Klart\") i panelen"
+
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr "Fungerar endast med horisontella paneler"
+
+#. 3.0->settings-schema.json->tempTextOverride->description
+#. 3.8->settings-schema.json->tempTextOverride->description
+msgid "Override label on panel"
+msgstr "Åsidosätt paneletikett"
+
+#. 3.0->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Available values are: {c} is condition, {t} is temperature and {u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart "
+"things."
+msgstr ""
+"Tillgängliga värden är: {c} för tillstånd, {t} är temperatur och {u} är "
+"enhet.\n"
+"Kan användas om etikett inte får plats på vertikal panel, bland andra smarta "
+"saker."
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
+#. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
+msgid "Iconset is weather-icons by Erik Flowers"
+msgstr "Ikonuppsättningen är väderikoner av Erik Flowers"
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->description
+#. 3.8->settings-schema.json->useCustomAppletIcons->description
+msgid "Use custom icons on the panel"
+msgstr "Använd special-ikoner i panelen"
+
+#. 3.0->settings-schema.json->displaySettings->description
+#. 3.8->settings-schema.json->presentation-section->title
+msgid "Presentation"
+msgstr "Presentation"
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "Visa prognos vertikalt"
+
+#. 3.0->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right"
+msgstr "Visar prognoser från topp till botten istället för vänster till höger"
+
+#. 3.0->settings-schema.json->forecastColumns->units
+#. 3.8->settings-schema.json->forecastColumns->units
+msgid "columns"
+msgstr "kolumner"
+
+#. 3.0->settings-schema.json->forecastColumns->description
+#. 3.8->settings-schema.json->forecastColumns->description
+msgid "Maximum number of columns for forecast"
+msgstr "Maximalt antal kolumner för prognoser"
+
+#. 3.0->settings-schema.json->forecastRows->units
+#. 3.8->settings-schema.json->forecastRows->units
+msgid "rows"
+msgstr "rader"
+
+#. 3.0->settings-schema.json->forecastRows->description
+#. 3.8->settings-schema.json->forecastRows->description
+msgid "Maximum number of rows for forecast"
+msgstr "Maximalt antal rader för prognoser"
+
+#. 3.0->settings-schema.json->showSunrise->description
+#. 3.8->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Visa tid för soluppgång / solnedgång"
+
+#. 3.0->settings-schema.json->show24Hours->description
+#. 3.8->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Visa tid i 24-timmarsformat"
+
+#. 3.0->settings-schema.json->shortHourlyTime->description
+#. 3.8->settings-schema.json->shortHourlyTime->description
+msgid "Only display hours for hourly forecast time"
+msgstr "Visa enbart timme i timvis prognostid"
+
+#. 3.0->settings-schema.json->shortHourlyTime->tooltip
+#. 3.8->settings-schema.json->shortHourlyTime->tooltip
+msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
+msgstr "Istället för 15:00 eller 3:00 pm så visas det som 15 eller 3 pm"
+
+#. 3.0->settings-schema.json->showForecastDates->description
+#. 3.8->settings-schema.json->showForecastDates->description
+msgid "Display date for daily forecasts"
+msgstr "Visa datum i dagliga prognoser"
+
+#. 3.0->settings-schema.json->showForecastDates->tooltip
+#. 3.8->settings-schema.json->showForecastDates->tooltip
+msgid "Like \"Friday 15\""
+msgstr "Som t.ex. \"Fredag 15\""
+
+#. 3.0->settings-schema.json->temperatureHighFirst->description
+#. 3.8->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Visa hög temperatur först i prognoser"
+
+#. 3.0->settings-schema.json->tempRussianStyle->description
+#. 3.8->settings-schema.json->tempRussianStyle->description
+msgid "Show temperature Russian style"
+msgstr "Visa temperatur på ryskt sätt"
+
+#. 3.0->settings-schema.json->locationLabelOverride->description
+#. 3.8->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Åsidosätt platsnamn"
+
+#. 3.0->settings-schema.json->conditionSettings->description
+#. 3.8->settings-schema.json->weather-conditions->title
+msgid "Weather conditions"
+msgstr "Väderförhållanden"
+
+#. 3.0->settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "Översätt väderförhållanden"
+
+#. 3.0->settings-schema.json->shortConditions->description
+#. 3.8->settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Mindre mångordiga väderförhållanden"
+
+#. 3.0->settings-schema.json->iconSettings->description
+#. 3.8->settings-schema.json->icons->title
+msgid "Icons"
+msgstr "Ikoner"
+
+#. 3.0->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons in the applet"
+msgstr "Använd symboliska ikoner i panelprogrammet"
+
+#. 3.0->settings-schema.json->useCustomMenuIcons->description
+#. 3.8->settings-schema.json->useCustomMenuIcons->description
+msgid "Use custom icons in the popup menu"
+msgstr "Använd specialikoner i popupmenyn"
+
+#. 3.8->settings-schema.json->locations-page->title
+#. 3.8->settings-schema.json->location->description
+msgid "Location"
+msgstr "Plats"
+
+#. 3.8->settings-schema.json->units-page->title
+msgid "Other options"
+msgstr "Andra alternativ"
+
+#. 3.8->settings-schema.json->info-section->title
+msgid "Help"
+msgstr "Hjälp"
+
+#. 3.8->settings-schema.json->location-section->title
+msgid "Location settings"
+msgstr "Inställningar plats"
+
+#. 3.8->settings-schema.json->technical-automation->title
+msgid "Technical and Automation"
+msgstr "Teknik och automation"
+
+#. 3.8->settings-schema.json->location-store->title
+msgid "Saved Locations"
+msgstr "Sparade platser"
+
+#. 3.8->settings-schema.json->panel-options->title
+msgid "Panel (Taskbar)"
+msgstr "Panel (Aktivitetsfält)"
+
+#. 3.8->settings-schema.json->presentation->title
+msgid "Popup menu"
+msgstr "Popupmeny"
+
+#. 3.8->settings-schema.json->units-section->title
+msgid "Other Units"
+msgstr "Andra enheter"
+
+#. 3.8->settings-schema.json->temp-unit-section->title
+msgid "Temperature Unit"
+msgstr "Temperaturenhet"
+
+#. 3.8->settings-schema.json->keybindings->title
+msgid "Keybindings"
+msgstr "Snabbtangenter"
+
+#. 3.8->settings-schema.json->more-info->title
+msgid "More about the Weather applet"
+msgstr "Mera om Väder-panelprogrammet"
+
+#. 3.8->settings-schema.json->submit-issue->title
+msgid "Report an issue"
+msgstr "Rapportera ett problem"
+
+#. 3.8->settings-schema.json->debug-options->title
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Debug"
+msgstr "Felsökning"
+
+#. 3.8->settings-schema.json->dataService->tooltip
+msgid ""
+"You can choose between several different weather forecast providers. Some "
+"providers require a API key to work, some have regional limits, differ in "
+"forecast length, and they all need a functional internet connection to work. "
+"The options are described in detail on the Cinnamon Spices Website which you "
+"can access with the button on the Help tab."
+msgstr ""
+"Du kan välja mellan flera olika väderprognos-leverantörer. Några "
+"leverantörer kräver en API-nyckel för att funka, några har regionala "
+"begränsningar, skiljer sig i prognos längd, och de behöver alla en "
+"fungerande internetförbindelse för att funka. Valmöjligheterna beskrivs mera "
+"i detalj på Cinnamon Spices webbplats som du kan nå genom knappen under "
+"fliken Hjälp."
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Open-Meteo"
+msgstr "Open-Meteo"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr "Deutscher Wetterdienst (endast Tyskland)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Met Office UK (UK only)"
+msgstr "Met Office UK (enbart Storbritannien)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "US National Weather (US only)"
+msgstr "US National Weather (enbart USA)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Swiss Météo (Switzerland only)"
+msgstr "Swiss Météo (enbart Schweiz)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap OneCall (key needed)"
+msgstr "OpenWeatherMap OneCall (nyckel behövs)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr "Pirate Weather (nyckel behövs)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr "Visual Crossing (nyckel behövs)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr "Tomorrow.io (nyckel behövs)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "AccuWeather (key needed)"
+msgstr "AccuWeather (nyckel behövs)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr "Weather Underground (nyckel behövs)"
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice. Powered by "
+"nominatim.openstreetmap.org."
+msgstr ""
+"Du kan ange koordinater 'Latitud,Longitud' (t.ex. 51.5085,-0.1257) eller "
+"använda 'Stad,Landskod' (t.ex. London,UK) eller prova ange {Gatunummer} "
+"{Gata} {Stad/Ort} {Postnummer} {Land}. Sök-algoritmen är mycket flexibel med "
+"formatet. Efter 3 sekunders inaktivitet vid skrivande av adressen du angett "
+"så byts denna ut automatiskt för att validera ditt val. Driftas av "
+"nominatim.openstreetmap.org."
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""
+"Om plats fältet matchar en sparad plats 'Sökt post' så kommer den sparade "
+"platsen användas i stället."
+
+#. 3.8->settings-schema.json->saveLocation->description
+msgid "Save current location to storage"
+msgstr "Spara nuvarande plats till lagring"
+
+#. 3.8->settings-schema.json->saveLocation->tooltip
+msgid ""
+"Saves location information to file so you can switch between them with "
+"buttons in the applet, which will appear if you have more than one."
+msgstr ""
+"Sparar platsinformation till fil, så du kan pendla emellan dem med knapparna "
+"i panelprogrammet, som kommer att visas om du har mer än en."
+
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Weather Applet at Cinnamon Spices Website"
+msgstr "Väder-panelprogrammet på Cinnamon Spieces webbplats"
+
+#. 3.8->settings-schema.json->refreshInterval->tooltip
+msgid ""
+"If you are using a provider with API keys set it to an interval you won't "
+"run out of your quota with."
+msgstr ""
+"Om du använder en leverantör med API-nycklar så sätt ett intervall som du "
+"inte kör slut på din kvot med."
+
+#. 3.8->settings-schema.json->forecastDays->tooltip
+msgid ""
+"Maximum number of days that can be displayed, available number of data, "
+"maximum rows and columns setting in the Presentation tab will affect the "
+"final number."
+msgstr ""
+"Maximalt antal dagar som kan visas, tillgängligt antal data, max antal rader "
+"och kolumn-inställningar under fliken Presentation kommer att påverka det "
+"slutgiltiga antalet."
+
+#. 3.8->settings-schema.json->forecastHours->tooltip
+msgid ""
+"Maximum number of hours that can be displayed, available numbers of data "
+"will affect the final number."
+msgstr ""
+"Maximalt antal timmar som kan visas, tillgängligt antal data kommer att "
+"påverka det slutgiltiga antalet."
+
+#. 3.8->settings-schema.json->immediatePrecip->description
+msgid "Enable minutely precipitation forecast"
+msgstr "Aktivera minutvis nederbördsprognos"
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""
+"Om du vill använda det här så se till att du använder exakta koordinater/"
+"adress som plats för att förbättra dess noggrannhet. Se Feature map på "
+"webbplatsen för din vädertjänst"
+
+#. 3.8->settings-schema.json->showAlerts->description
+msgid "Enable displaying weather alerts"
+msgstr "Aktivera visning av vädervarningar"
+
+#. 3.8->settings-schema.json->showAlerts->tooltip
+msgid ""
+"Alerts button will be visible in the popup menu if there are any active "
+"alerts for your location."
+msgstr ""
+"Varningar-knapp visas i popup-menyn om det finns några aktiva varningar för "
+"din plats."
+
+#. 3.8->settings-schema.json->showBothTempUnits->description
+msgid "Show both temperature units at the same time"
+msgstr "Visa båda temperaturenheter samtidigt"
+
+#. 3.8->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Some of the available values are: {c} is condition, {t} is temperature and "
+"{u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart "
+"things."
+msgstr ""
+"Några av tillgängliga värden är: {c} för tillstånd, {t} är temperatur och "
+"{u} är enhet.\n"
+"Kan användas om etikett inte får plats på vertikal panel, bland andra smarta "
+"saker."
+
+#. 3.8->settings-schema.json->tooltipTextOverride->description
+msgid "Override tooltip on panel"
+msgstr "Åsidosätt paneletikett på panelen"
+
+#. 3.8->settings-schema.json->tooltipTextOverride->tooltip
+msgid ""
+"Has the same behavior and available values as 'Override label on panel'."
+msgstr ""
+"Har samma funktionsbeteende och tillgängliga värde som 'Åsidosätt "
+"paneletikett på panelen'."
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
+msgid "Always show Hourly Weather"
+msgstr "Visa alltid timvis väder"
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
+msgid ""
+"Hide/Show button will be hidden and Hourly weather will be permanently "
+"visible."
+msgstr ""
+"Göm/visa-knapp kommer att döljas och timvis väder kommer att vara permanent "
+"synligt."
+
+#. 3.8->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right."
+msgstr "Visar prognoser från topp till botten istället för vänster till höger."
+
+#. 3.8->settings-schema.json->locationList->description
+msgid "Your saved locations"
+msgstr "Dina sparade platser"
+
+#. 3.8->settings-schema.json->locationList->tooltip
+msgid ""
+"You have to make sure the Search entry field is unique and your Timezone is "
+"in the IANA time zone format (e.g. 'Europe/London')"
+msgstr ""
+"Du måste se till att det som angetts i sökfältet är unikt och att din "
+"tidszon är i IANA-tidszonsformat (t.ex. 'Europa/London')"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Latitude"
+msgstr "Latitud"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Longitude"
+msgstr "Longitud"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "City"
+msgstr "Stad"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Country"
+msgstr "Land"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Timezone"
+msgstr "Tidzon"
+
+#. 3.8->settings-schema.json->locationList->columns->title
+msgid "Search entry"
+msgstr "Sökt post"
+
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr "Visa vindriktning som text"
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
+msgstr "Såsom SO, N istället för riktnings-ikon."
+
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Provider should translate conditions if available"
+msgstr "Väderlekstjänsten bör översätta villkoren om de finns tillgängliga"
+
+#. 3.8->settings-schema.json->translateCondition->tooltip
+msgid ""
+"Should your provider translate the conditions to your language if your "
+"locale is supported by the provider. Otherwise the applet will use it's own "
+"translation system."
+msgstr ""
+"Ifall din väderlekstjänst ska översätta villkoren till ditt språk om din "
+"språkinställning stöds av leverantören. Annars kommer appleten att använda "
+"sitt eget översättningssystem."
+
+#. 3.8->settings-schema.json->useSymbolicIcons->tooltip
+msgid "Does not apply to custom iconset, that is symbolic by default"
+msgstr "Gäller inte för special-ikoner, de är symboliska enligt standard"
+
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons throughout the applet"
+msgstr "Använd symboliska ikoner genomgående i panelprogrammet"
+
+#. 3.8->settings-schema.json->more-info-label->description
+msgid ""
+"For detailed information about the applet please go to the Spices Website to "
+"find info about known issues, troubleshooting, changelog and more by "
+"clicking the button below. Here you can ask questions etc in the comment "
+"section by logging in with your Github account."
+msgstr ""
+"För mer detaljerad information om panelprogrammet vänligen gå till Spices-"
+"webbplatsen där information om kända problem, felsökning, förändringsloggar "
+"med mera finns, så klicka på knappen nedan. Här kan du ställa frågor och "
+"annat i kommentarsfältet på denna sida genom att logga in med ditt Github-"
+"konto."
+
+#. 3.8->settings-schema.json->submitIssue->description
+msgid "Submit an Issue"
+msgstr "Skicka in om ett problem"
+
+#. 3.8->settings-schema.json->submitIssue->tooltip
+msgid ""
+"Opens webpage where you can fill out a new issue for the applet, needs a "
+"GitHub account.\n"
+" Please make sure that the issue is not already submitted."
+msgstr ""
+"Öppnar webbsida där du kan skriva om nya problem med panelprogrammet, ett "
+"GitHub-konto behövs.\n"
+" Vänligen kontrollera först att problemet inte redan har skickats in."
+
+#. 3.8->settings-schema.json->maintainer->description
+msgid "Current maintainer: Gr3q"
+msgstr "Nuvarande underhållare: Gr3q"
+
+#. 3.8->settings-schema.json->issue-reporting-explanation->description
+msgid ""
+"If you find an issue with this applet please make a report by clicking on "
+"the button below and login in with your Github account.\n"
+"\n"
+"Before you start writing please make sure that the issue is not already "
+"submitted in the issues section and review your prefilled details in the "
+"issue description. Don't forget to add a short description in the top Title "
+"field next to the applet's name to make it easier for everyone to know what "
+"the issue is about. Logs with Debug level (which can be saved to a file "
+"below) are also appreciated."
+msgstr ""
+"Om du hittar ett problem med detta panelprogram så vänligen gör en rapport "
+"genom att klicka på knappen nedan och logga in med ditt Github-konto.\n"
+"\n"
+"Innan du börjar skriva, se till att problemet inte redan har skickats in i "
+"Issue-avdelningen och granska dina förifyllda uppgifter i "
+"problembeskrivningen. Glöm inte att lägga till en kort beskrivning i det "
+"översta rubrikfältet bredvid panelprogrammets namn för att göra det lättare "
+"för alla att veta vad problemet handlar om. Loggar med felsökningsnivå (som "
+"kan sparas i en fil nedan) uppskattas också."
+
+#. 3.8->settings-schema.json->loc-info->description
+msgid ""
+"Your location in most cases work automatically but you can enter it manually "
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice."
+msgstr ""
+"Din plats funkar i de flesta fall automatiskt men du kan ange det manuellt "
+"genom koordinater Latitud,Longitud' (t.ex. 51.5085,-0.1257) eller använda "
+"'Stad,Landskod' (t.ex. London,UK) eller prova ange {Gatunummer} {Gata} {Stad/"
+"Ort} {Postnummer} {Land}. Sök-algoritmen är mycket flexibel med formatet. "
+"Efter 3 sekunders inaktivitet vid skrivande av adressen du angett så byts "
+"denna ut automatiskt för att validera ditt val."
+
+#. 3.8->settings-schema.json->logLevel->description
+msgid "Log Level"
+msgstr "Loggnivå"
+
+#. 3.8->settings-schema.json->logLevel->tooltip
+msgid ""
+"Info is the regular logging, Debug is debug, and Verbose also logs network "
+"request payloads. Changing this will only be effective on future logs. Only "
+"change it you are instructed or you know what you are doing."
+msgstr ""
+"Info är standard-loggning, Felsökning är felsökning, och Utökad loggar också "
+"network request payloads. Ändring av detta kommer endast att gälla i "
+"framtida loggar. Ändra bara om du instrueras att göra så eller om vet du vad "
+"du gör."
+
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Verbose"
+msgstr "Utökad"
+
+#. 3.8->settings-schema.json->fileSelect->description
+msgid "Click Save to save debug information to a file"
+msgstr "Klicka på Spara för att spara felsökningsinformation till en fil"
+
+#. 3.8->settings-schema.json->fileSelect->tooltip
+msgid ""
+"This includes logs for the applet and the current settings with your API key "
+"redacted."
+msgstr ""
+"Detta inkluderar loggar för panelprogrammet och de aktuella inställningarna "
+"med din API-nyckel redigerad."
+
+#. 3.8->settings-schema.json->selectedLogPath->description
+msgid "Selected path to save Logs"
+msgstr "Vald sökväg för att spara loggar"
+
+#. 3.8->settings-schema.json->userAgentStringOverride->description
+msgid "User Agent String Override"
+msgstr "Åsidosätt sträng för User Agent"
+
+#. 3.8->settings-schema.json->userAgentStringOverride->tooltip
+msgid ""
+"If you have issues with the applet not working properly and you know the "
+"User Agent string is the problem you can try to override it. Only change it "
+"if you know what you are doing. This is a string that is sent to the server "
+"when the applet tries to get the weather data."
+msgstr ""
+"Om du har problem med att appleten inte fungerar som den ska och du vet att "
+"User Agent-strängen är problemet kan du försöka åsidosätta den. Ändra den "
+"bara om du vet vad du gör. Det här är en sträng som skickas till servern när "
+"appleten försöker hämta väderdata."
+
+#. 3.8->settings-schema.json->runScript->description
+msgid "Run a command when the weather info changes"
+msgstr "Kör ett kommando när väderinformationen ändras"
+
+#. 3.8->settings-schema.json->runScript->tooltip
+msgid ""
+"The applet will run the command you provide every time the weather data is "
+"updated. The command will be interpolated with the same values with the same "
+"format you can get in any of the overrides, in addition you get {full_data} "
+"which is the full current weather data. Interpolation with single brackets "
+"{xxx} will not be escaped, with double brackets {{xxxx}} they are wrapped in "
+"single quotes (') and all other single quotes are escaped inside. You can "
+"use this to integrate the weather data with other parts of your system. You "
+"can look up the full weather data structure via the link in the README.\n"
+"\n"
+"Example: 'notify-send \"The weather is {c} and the temperature is {t}{u}\"' "
+"will show a notification with the current weather condition and "
+"temperature.\n"
+"\n"
+"Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
+"data to a file in /tmp."
+msgstr ""
+"Appleten kommer att köra det kommando du anger varje gång väderdata "
+"uppdateras. Kommandot interpoleras med samma värden med samma format som du "
+"kan få i någon av åsidosättningarna, dessutom får du {full_data} som är "
+"fullständiga aktuella väderdata. Interpolering med enkla parenteser {xxx} "
+"kommer inte att escapas, med dubbla parenteser {{xxxx}} är de inslagna i "
+"enkla citattecken (') och alla andra enkla citattecken escapas inuti. Du kan "
+"använda detta för att integrera väderdata med andra delar av ditt system. Du "
+"kan se den fullständiga väderdatastrukturen via länken i README.\n"
+"\n"
+"Exempel: 'notify-send ”Vädret är {c} och temperaturen är {t}{u}”' kommer att "
+"visa ett meddelande med aktuellt väder och temperatur.\n"
+"\n"
+"Exempel: ”echo {{full_data}} > /tmp/weather_data' sparar fullständiga "
+"väderdata i en fil i /tmp."
+
+#. 3.8->settings-schema.json->testRunScript->description
+msgid "Test your command"
+msgstr "Testa ditt kommando"

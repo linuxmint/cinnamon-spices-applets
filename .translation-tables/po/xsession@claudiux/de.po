@@ -1,0 +1,157 @@
+# XSESSION
+# This file is put in the public domain.
+# claudiux, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xsession@claudiux 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-16 20:55+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#. applet.js:47
+msgid "Applet"
+msgstr "Applet"
+
+#. applet.js:48
+msgid "Desklet"
+msgstr "Desklet"
+
+#. applet.js:49
+msgid "Extension"
+msgstr "Erweiterung"
+
+#. applet.js:52
+msgid "Applets"
+msgstr "Applets"
+
+#. applet.js:53
+msgid "Desklets"
+msgstr "Desklets"
+
+#. applet.js:54
+msgid "Extensions"
+msgstr "Erweiterungen"
+
+#. applet.js:150
+msgid "Middle-click: \n"
+msgstr "Mittlerer Maus Klick:\n"
+
+#. applet.js:150 applet.js:211
+msgid "Show .xsession-errors"
+msgstr ".xsession-errors anzeigen"
+
+#. applet.js:227
+msgid "Restart Cinnamon"
+msgstr "Cinnamon neustarten"
+
+#. applet.js:244
+msgid "--- Reload Spices ---"
+msgstr "--- Spices neuladen ---"
+
+#. applet.js:251
+msgid "Reload Applet:"
+msgstr "Applet Neuladen:"
+
+#. applet.js:262
+msgid "Reload Desklet:"
+msgstr "Desklet Neuladen:"
+
+#. applet.js:271
+msgid "Reload Extension:"
+msgstr "Extension Neuladen:"
+
+#. applet.js:280
+msgid "--- Settings for ---"
+msgstr "--- Einstellungen für --_"
+
+#. applet.js:286
+msgid "Applet:"
+msgstr "Applet:"
+
+#. applet.js:295
+msgid "Desklet:"
+msgstr "Desklet:"
+
+#. applet.js:304
+msgid "Extension:"
+msgstr "Erweiterung:"
+
+#. applet.js:313
+msgid "--- View Code ---"
+msgstr "--- Code anzeigen ---"
+
+#. applet.js:319
+msgid "View Applet Code for:"
+msgstr "Zeige Applet Code für:"
+
+#. applet.js:328
+msgid "View Desklet Code for:"
+msgstr "Zeige Desklet code für:"
+
+#. applet.js:337
+msgid "View Extension Code for:"
+msgstr "Zeige Erweiterungs Code für:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Restart, access source code and configure your Spices (Applets, Desklets, "
+"Extensions). View the contents of your .xsession-errors file in real time. "
+"Restart Cinnamon."
+msgstr ""
+"Neustarten, Quellcode anzeigen und Spices konfigurieren (Applets, Desklets, "
+"Extensions). Zeige den Inhalt deiner .xsession-errors Datei in Echtzeit. "
+"Cinnamon neustarten."
+
+#. settings-schema.json->section1->description
+msgid "Icon size"
+msgstr ""
+
+#. settings-schema.json->icon_size->description
+msgid "Size (in pixels) of menu icons"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon_size->options
+msgid "128"
+msgstr ""

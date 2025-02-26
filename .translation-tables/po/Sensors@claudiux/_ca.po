@@ -1,0 +1,53 @@
+# SENSORS MONITOR
+# This file is put in the public domain.
+# claudiux, 2020
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr ""
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr ""
+
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr ""
+
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr ""
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
+
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr ""
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""
