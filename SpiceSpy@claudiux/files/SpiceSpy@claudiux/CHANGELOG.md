@@ -1,3 +1,6 @@
+### v5.2.2~20250226
+  * Bugfix.
+
 ### v5.2.1~20250226
   * Removed debug messages.
 

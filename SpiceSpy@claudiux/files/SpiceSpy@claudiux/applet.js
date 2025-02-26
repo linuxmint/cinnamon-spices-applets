@@ -552,7 +552,8 @@ class SpiceSpy extends Applet.TextIconApplet {
       }
     }
     //~ logDebug("do_issuesJob: "+type+" "+uuid+": "+issuesNumber+" issues.");
-    this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
+    if (this.spices_to_spy[type][uuid])
+      this.spices_to_spy[type][uuid]["issues"] = issuesNumber;
     this.make_menu();
   } // End of do_issuesJob
 
