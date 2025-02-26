@@ -1,3 +1,7 @@
+### v5.2.0~20250226
+  * Adapts the panel display to the size of the information.
+  * Fixes #6926.
+
 ### v5.1.0~20250204
   * Better update of the number of comments.
   * Improved menu management.
