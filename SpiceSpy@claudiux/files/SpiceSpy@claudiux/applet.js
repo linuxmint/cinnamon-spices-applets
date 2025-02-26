@@ -507,12 +507,8 @@ class SpiceSpy extends Applet.TextIconApplet {
       if (!this.useful_only || comments!=0) _labels.push("%s %s".format(MESSAGE_CHAR, comments.toString()));
       if (!this.useful_only || (this.show_translations && translations!=0)) _labels.push("%s %s".format(FLAG_CHAR, translations.toString()));
       if (this.is_vertical) {
-        logDebug("Vertical panel");
         _label = ""+_labels.join("\n");
       } else {
-        logDebug("Horizontal panel");
-        logDebug("_labels.length * 20: "+_labels.length * 20);
-        logDebug("this._panelHeight: "+this._panelHeight);
         if (_labels.length * 20 <= this._panelHeight)
           _label = ""+_labels.join("\n");
         else
