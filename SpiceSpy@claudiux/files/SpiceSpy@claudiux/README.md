@@ -65,9 +65,9 @@ To make a Spice type visible, simply open the Download tab for that Spice type f
 
 ### The number of comments is updated very slowly
 
-To avoid overloading the Cinnamon server, requests to it are spaced 13 seconds apart.
+To avoid overloading the Cinnamon server, requests to it are spaced 15 seconds apart.
 
-On first use, all comment numbers are initialized to zero. Then, every 13 seconds, a comment number is updated.
+On first use, all comment numbers are initialized to zero. Then, every 15 seconds, a comment number is updated.
 
 Once all comment numbers have been updated, you can use the *Mark all as read* menu option. The applet is then fully functional: you'll be notified of any score changes or new comments.
 

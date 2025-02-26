@@ -338,8 +338,6 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.set_applet_label("");
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
-    //~ this.updateUI();
-
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     //~ this.menu = new PopupMenu.PopupMenu(this, orientation);
@@ -385,7 +383,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ this.settings.bind("display-on-panel", "display_on_panel", this.make_menu.bind(this));
     this.settings.bind("display-on-panel", "display_on_panel");
     //~ this.settings.bind("useful-only", "useful_only", this.make_menu.bind(this));
-    this.settings.bind("useful-only", "useful_only");
+    this.settings.bind("useful-only", "useful_only", () => { this.make_menu() });
     this.settings.bind("author-list", "author_list", () => { this.update_authors() });
     this.settings.bind("uuid-list", "uuid_list", () => { this.update_uuids() });
     this.settings.bind("spices_to_spy", "spices_to_spy");
@@ -482,11 +480,11 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   updateUI(score=0, comments=0, translations=0) {
     let _label;
-    if (this.show_translations)
-      _label = "%s %s\n%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString(), FLAG_CHAR, translations.toString());
-    else
-      _label = "%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString());
-    this.set_applet_label(_label);
+    //~ if (this.show_translations)
+      //~ _label = "%s %s\n%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString(), FLAG_CHAR, translations.toString());
+    //~ else
+      //~ _label = "%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString());
+    //~ this.set_applet_label(_label);
     if (score==0 && comments==0 && translations==0) {
       if (this.display_on_panel === "normal") {
         this.actor.show();
@@ -504,14 +502,23 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.actor.set_style(null);
       this._applet_label.set_style(null);
     } else {
-      if (this.useful_only) {
-        let _labels = [];
-        if (score!=0) _labels.push("%s %s".format(STAR_CHAR, score.toString()));
-        if (comments!=0) _labels.push("%s %s".format(MESSAGE_CHAR, comments.toString()));
-        if (this.show_translations && translations!=0) _labels.push("%s %s".format(FLAG_CHAR, translations.toString()));
+      let _labels = [];
+      if (!this.useful_only || score!=0) _labels.push("%s %s".format(STAR_CHAR, score.toString()));
+      if (!this.useful_only || comments!=0) _labels.push("%s %s".format(MESSAGE_CHAR, comments.toString()));
+      if (!this.useful_only || (this.show_translations && translations!=0)) _labels.push("%s %s".format(FLAG_CHAR, translations.toString()));
+      if (this.is_vertical) {
+        logDebug("Vertical panel");
         _label = ""+_labels.join("\n");
-        this.set_applet_label(_label);
+      } else {
+        logDebug("Horizontal panel");
+        logDebug("_labels.length * 20: "+_labels.length * 20);
+        logDebug("this._panelHeight: "+this._panelHeight);
+        if (_labels.length * 20 <= this._panelHeight)
+          _label = ""+_labels.join("\n");
+        else
+          _label = ""+_labels.join("  ");
       }
+      this.set_applet_label(_label);
       this.actor.show();
       this.showLabel();
       this.actor.set_style("color: %s;".format(this.color_on_change));
@@ -589,7 +596,7 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of commentsJobs_loop
 
   async do_commentsJob(type, spice, page) {
-    logDebug(`do_commentsJob(${type}, ${spice}, ${page})`);
+    //~ logDebug(`do_commentsJob(${type}, ${spice}, ${page})`);
     if (!this.spices_to_spy[type] || !this.spices_to_spy[type][spice]) {
       this.commentsJobsList.push([type, spice, page]);
       //~ logDebug("Re-inserted at the end of the list.")
@@ -756,32 +763,11 @@ class SpiceSpy extends Applet.TextIconApplet {
   } // End of get_spices_to_spy
 
   update_comments() {
-    //~ const interval = 13000; //ms = 13 seconds (the spices website accepts a maximum of 5 requests per minute.)
-    //~ var index = 0;
-    //~ var http = new HttpLib();
     for (let type of TYPES) {
       let spices = this.spices_to_spy[type];
       for (let spice of Object.keys(spices)) {
         const page = spices[spice]['url']+`#${HTML_COUNT_ID}`;
         this.commentsJobsList.push([type, spice, page]);
-        //~ let id = setTimeout(() => {
-          //~ clearTimeout(id);
-          //~ let response = http.LoadAsync(page);
-          //~ if (response.Success) {
-            //~ let result = COMMENTS_REGEX.exec(response.Data);
-            //~ if (result && result[1]) {
-              //~ let count = parseInt(result[1]);
-              //~ this.spices_to_spy[type][spice]['comments'] = count;
-              //~ //this.make_menu();
-            //~ } else {
-              //~ global.logWarning(spices[spice]['uuid'] + ": This spice is cached in the "
-              //~ + ".json file but doesn't actually exist in the "
-              //~ + "Spices now OR the Cinnamon Spices changed the ID "
-              //~ + "(please report if there are 0 items)");
-            //~ }
-          //~ }
-        //~ }, index*interval);
-        //~ index += 1;
       }
     }
   } // End of update_comments
@@ -1006,10 +992,11 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ this.update_comments();
 
     this.loopId = timeout_add_seconds(60, () => { this.loop() });
-    this.jobsLoopId = timeout_add_seconds(13, () => { this.commentsJobs_loop(); return this.is_looping; });
+    this.jobsLoopId = timeout_add_seconds(15, () => { this.commentsJobs_loop(); return this.is_looping; });
 
     this.update_issues_json();
     //~ this.make_menu();
+    this.updateUI();
   } // End of on_applet_added_to_panel
 
   on_applet_clicked() {
@@ -1032,9 +1019,17 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.issuesJsonLoopId = null;
   } // End of on_applet_removed_from_panel
 
+  on_panel_height_changed() {
+    this.make_menu();
+  }
+
   _reload_this_applet(event=null) {
     reloadExtension(UUID, Type.APPLET)
   } // End of _reload_this_applet
+
+  get is_vertical() {
+    return (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+  }
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
