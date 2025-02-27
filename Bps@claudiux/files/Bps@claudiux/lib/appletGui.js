@@ -20,7 +20,6 @@ const {
 } = require("./lib/mainloopTools");
 
 const UUID = "Bps@claudiux";
-//~ const AppletConstants = require('./lib/appletConstants');
 const CssStylization = require('./lib/cssStylization');
 
 const DecimalPlaces = {

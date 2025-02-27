@@ -32,11 +32,6 @@ const DATA_SCRIPT = `${SCRIPTS_DIR}/get-network-data.sh`;
 const UNPLUGGED_SCRIPT = `${SCRIPTS_DIR}/unplugged-network-devices.sh`;
 
 const AppletGui = require('./lib/appletGui');
-//~ const AppletConstants = require('./lib/appletConstants');
-//~ const ShellUtils = require('./lib/shellUtils');
-//~ const Dates = require('./lib/dates');
-//~ const Translation = require('./lib/translation');
-//~ const Infos = require('./lib/infos');
 
 const _KI = Math.pow(2, 10);
 const _MI = Math.pow(2, 20);
@@ -102,7 +97,6 @@ class Bps extends Applet.Applet {
         this.hover_popup_text_css = "font-size: 15px; padding: 5px; font-weight: normal;";
         this.hover_popup_numbers_css = "font-size: 15px; padding: 5px; font-weight: bold;";
         this.s.bind("minimum_bytes_to_display", "minimum_bytes_to_display");
-        this.s.bind("minimum_bytes_sent_to_display", "minimum_bytes_sent_to_display");
         this.s.bind("checked_interfaces_string", "checked_interfaces_string");
         this.s.bind("unplugged_interfaces_string", "unplugged_interfaces_string");
 
