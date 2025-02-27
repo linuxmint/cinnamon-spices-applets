@@ -1,0 +1,179 @@
+# DOWNLOAD AND UPLOAD SPEED
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bps@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-27 17:53+0100\n"
+"PO-Revision-Date: 2024-11-13 18:26+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:66
+msgid "Does not work on vertical panel!"
+msgstr ""
+
+#. applet.js:230
+msgid " TiB"
+msgstr " TiB"
+
+#. applet.js:233
+msgid " GiB"
+msgstr " GiB"
+
+#. applet.js:236
+msgid " MiB"
+msgstr " MiB"
+
+#. applet.js:239
+msgid " kiB"
+msgstr " kiB"
+
+#. applet.js:241 applet.js:255
+msgid "   B"
+msgstr "   B"
+
+#. applet.js:244
+msgid " TB"
+msgstr " TB"
+
+#. applet.js:247
+msgid " GB"
+msgstr " GB"
+
+#. applet.js:250
+msgid " MB"
+msgstr " MB"
+
+#. applet.js:253
+msgid " kB"
+msgstr " kB"
+
+#. applet.js:261
+msgid " Tib"
+msgstr " Tib"
+
+#. applet.js:264
+msgid " Gib"
+msgstr " Gib"
+
+#. applet.js:267
+msgid " Mib"
+msgstr " Mib"
+
+#. applet.js:270
+msgid " kib"
+msgstr " kib"
+
+#. applet.js:272 applet.js:286
+msgid "   b"
+msgstr "   b"
+
+#. applet.js:275
+msgid " Tb"
+msgstr " Tb"
+
+#. applet.js:278
+msgid " Gb"
+msgstr " Gb"
+
+#. applet.js:281
+msgid " Mb"
+msgstr " Mb"
+
+#. applet.js:284
+msgid " kb"
+msgstr " kb"
+
+#. metadata.json->description
+msgid "Instant Network Speed is a simple network monitor"
+msgstr ""
+
+#. metadata.json->name
+msgid "Bps: Instant Network Speed"
+msgstr ""
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Asetukset"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Yksikkö"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Tavua"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bittiä"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Tietoyksikkö näkyy paneelissa"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr "Tavua tai bittiä"
+
+#. settings-schema.json->is_binary->options
+msgid "Decimal"
+msgstr "Kymmenluku"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr "Binaarinen"
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+"Kymmenluku: k, M, G, T\n"
+"Binaarinen: ki, Mi, Gi, Ti"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Pääte"
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr "Arvojen järjestys"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr "Lataus ensin"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr "Lähetys ensin"
+
+#. settings-schema.json->gui_value_order->tooltip
+#, fuzzy
+msgid "An order of values shown in the panel"
+msgstr "Arvot näytetään paneelissa"
+
+#. settings-schema.json->minimum_bytes_to_display->units
+msgid "bytes"
+msgstr "tavua"
+
+#. settings-schema.json->minimum_bytes_to_display->description
+#, fuzzy
+msgid "Minimum displayed value"
+msgstr "Minimiarvo lähetyksessä"
+
+#. settings-schema.json->minimum_bytes_to_display->tooltip
+#, fuzzy
+msgid "A minimum value (in bytes) to display in the panel"
+msgstr "Lähetyksen minimiarvo, joka näytetään paneelissa"

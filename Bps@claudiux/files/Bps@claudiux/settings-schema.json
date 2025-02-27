@@ -1,0 +1,74 @@
+{
+    "settings_start" : {
+        "type" : "separator"
+    },
+    "configuration": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "unit_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Unit",
+        "options" : {
+            "Bytes" : 0,
+            "Bits" : 1
+        },
+        "tooltip" : "Base data unit shown in the panel"
+    },
+    "is_binary" : {
+        "type": "combobox",
+        "default": true,
+        "description" : "Decimal or binary",
+        "options" : {
+            "Decimal" : false,
+            "Binary" : true
+        },
+        "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+
+
+
+    "gui_value_order" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Value order",
+        "options" : {
+            "Download first" : 0,
+            "Upload first" : 1
+        },
+        "tooltip" : "An order of values shown in the panel"
+    },
+    "minimum_bytes_to_display": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 100000000,
+        "step": 64,
+        "units": "bytes",
+        "description": "Minimum displayed value",
+        "tooltip" : "A minimum value (in bytes) to display in the panel"
+    },
+    "gui_end" : {
+        "type" : "separator"
+    },
+
+
+
+    "checked_interfaces_string" : {
+        "type": "generic",
+        "default" : "eth0"
+    },
+    "unplugged_interfaces_string" : {
+        "type": "generic",
+        "default" : ""
+    }
+
+}
