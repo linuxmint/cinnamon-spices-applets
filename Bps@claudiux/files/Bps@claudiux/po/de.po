@@ -1,0 +1,184 @@
+# Main translation file for download-and-upload-speed@cardsurf.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bps@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-02-27 17:53+0100\n"
+"PO-Revision-Date: 2021-02-27 00:14+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:66
+msgid "Does not work on vertical panel!"
+msgstr ""
+
+#. applet.js:230
+msgid " TiB"
+msgstr ""
+
+#. applet.js:233
+msgid " GiB"
+msgstr ""
+
+#. applet.js:236
+msgid " MiB"
+msgstr ""
+
+#. applet.js:239
+msgid " kiB"
+msgstr ""
+
+#. applet.js:241 applet.js:255
+msgid "   B"
+msgstr ""
+
+#. applet.js:244
+msgid " TB"
+msgstr ""
+
+#. applet.js:247
+#, fuzzy
+msgid " GB"
+msgstr "Darstellung in der Leiste"
+
+#. applet.js:250
+#, fuzzy
+msgid " MB"
+msgstr "MB"
+
+#. applet.js:253
+msgid " kB"
+msgstr ""
+
+#. applet.js:261
+msgid " Tib"
+msgstr ""
+
+#. applet.js:264
+msgid " Gib"
+msgstr ""
+
+#. applet.js:267
+msgid " Mib"
+msgstr ""
+
+#. applet.js:270
+msgid " kib"
+msgstr ""
+
+#. applet.js:272 applet.js:286
+msgid "   b"
+msgstr ""
+
+#. applet.js:275
+#, fuzzy
+msgid " Tb"
+msgstr "b"
+
+#. applet.js:278
+#, fuzzy
+msgid " Gb"
+msgstr "b"
+
+#. applet.js:281
+#, fuzzy
+msgid " Mb"
+msgstr "b"
+
+#. applet.js:284
+#, fuzzy
+msgid " kb"
+msgstr "b"
+
+#. metadata.json->description
+msgid "Instant Network Speed is a simple network monitor"
+msgstr ""
+
+#. metadata.json->name
+msgid "Bps: Instant Network Speed"
+msgstr ""
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Einheit"
+
+#. settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Bytes"
+
+#. settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bits"
+
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Basisdateneinheit, welche in der Leiste angezeigt wird"
+
+#. settings-schema.json->is_binary->description
+msgid "Decimal or binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->options
+#, fuzzy
+msgid "Decimal"
+msgstr "Nachkommastellen"
+
+#. settings-schema.json->is_binary->options
+msgid "Binary"
+msgstr ""
+
+#. settings-schema.json->is_binary->tooltip
+msgid ""
+"Decimal: k, M, G, T\n"
+"Binary: ki, Mi, Gi, Ti"
+msgstr ""
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Darstellung in der Leiste"
+
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr "Wertreihenfolge"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr "Zuerst herunterladen"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr "Zuerst hochladen"
+
+#. settings-schema.json->gui_value_order->tooltip
+#, fuzzy
+msgid "An order of values shown in the panel"
+msgstr "Werte, die in der Leiste angezeigt werden"
+
+#. settings-schema.json->minimum_bytes_to_display->units
+msgid "bytes"
+msgstr "Bytes"
+
+#. settings-schema.json->minimum_bytes_to_display->description
+#, fuzzy
+msgid "Minimum displayed value"
+msgstr "Minimaler angezeigter Upload-Wert"
+
+#. settings-schema.json->minimum_bytes_to_display->tooltip
+#, fuzzy
+msgid "A minimum value (in bytes) to display in the panel"
+msgstr "Ein minimaler Upload-Wert, der in der Leiste angezeigt werden soll"
