@@ -9,105 +9,99 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-27 17:53+0100\n"
-"PO-Revision-Date: 2021-02-27 00:14+0100\n"
+"PO-Revision-Date: 2025-02-28 00:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. applet.js:66
 msgid "Does not work on vertical panel!"
-msgstr ""
+msgstr "Funktioniert nicht auf vertikalen Panels!"
 
 #. applet.js:230
 msgid " TiB"
-msgstr ""
+msgstr " TiB"
 
 #. applet.js:233
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #. applet.js:236
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #. applet.js:239
 msgid " kiB"
-msgstr ""
+msgstr " kiB"
 
 #. applet.js:241 applet.js:255
 msgid "   B"
-msgstr ""
+msgstr " B"
 
 #. applet.js:244
 msgid " TB"
-msgstr ""
+msgstr " TB"
 
 #. applet.js:247
-#, fuzzy
 msgid " GB"
-msgstr "Darstellung in der Leiste"
+msgstr " GB"
 
 #. applet.js:250
-#, fuzzy
 msgid " MB"
-msgstr "MB"
+msgstr " MB"
 
 #. applet.js:253
 msgid " kB"
-msgstr ""
+msgstr " kB"
 
 #. applet.js:261
 msgid " Tib"
-msgstr ""
+msgstr " Tib"
 
 #. applet.js:264
 msgid " Gib"
-msgstr ""
+msgstr " Gib"
 
 #. applet.js:267
 msgid " Mib"
-msgstr ""
+msgstr " Mib"
 
 #. applet.js:270
 msgid " kib"
-msgstr ""
+msgstr " kib"
 
 #. applet.js:272 applet.js:286
 msgid "   b"
-msgstr ""
+msgstr " b"
 
 #. applet.js:275
-#, fuzzy
 msgid " Tb"
-msgstr "b"
+msgstr " Tb"
 
 #. applet.js:278
-#, fuzzy
 msgid " Gb"
-msgstr "b"
+msgstr " Gb"
 
 #. applet.js:281
-#, fuzzy
 msgid " Mb"
-msgstr "b"
+msgstr " Mb"
 
 #. applet.js:284
-#, fuzzy
 msgid " kb"
-msgstr "b"
+msgstr " kb"
 
 #. metadata.json->description
 msgid "Instant Network Speed is a simple network monitor"
-msgstr ""
+msgstr "Instant Network Speed ist ein einfacher Netzwerkmonitor"
 
 #. metadata.json->name
 msgid "Bps: Instant Network Speed"
-msgstr ""
+msgstr "Bps: Instant Network Speed"
 
 #. settings-schema.json->configuration->description
 msgid "Configuration"
@@ -127,30 +121,31 @@ msgstr "Bits"
 
 #. settings-schema.json->unit_type->tooltip
 msgid "Base data unit shown in the panel"
-msgstr "Basisdateneinheit, welche in der Leiste angezeigt wird"
+msgstr "Basiseinheit der Daten, die im Panel angezeigt wird"
 
 #. settings-schema.json->is_binary->description
 msgid "Decimal or binary"
-msgstr ""
+msgstr "Dezimal oder Binär"
 
 #. settings-schema.json->is_binary->options
-#, fuzzy
 msgid "Decimal"
-msgstr "Nachkommastellen"
+msgstr "Dezimal"
 
 #. settings-schema.json->is_binary->options
 msgid "Binary"
-msgstr ""
+msgstr "Binär"
 
 #. settings-schema.json->is_binary->tooltip
 msgid ""
 "Decimal: k, M, G, T\n"
 "Binary: ki, Mi, Gi, Ti"
 msgstr ""
+"Dezimal: k, M, G, T\n"
+"Binär: ki, Mi, Gi, Ti"
 
 #. settings-schema.json->gui_start->description
 msgid "Gui"
-msgstr "Darstellung in der Leiste"
+msgstr "GUI"
 
 #. settings-schema.json->gui_value_order->description
 msgid "Value order"
@@ -158,27 +153,24 @@ msgstr "Wertreihenfolge"
 
 #. settings-schema.json->gui_value_order->options
 msgid "Download first"
-msgstr "Zuerst herunterladen"
+msgstr "Download zuerst"
 
 #. settings-schema.json->gui_value_order->options
 msgid "Upload first"
-msgstr "Zuerst hochladen"
+msgstr "Upload zuerst"
 
 #. settings-schema.json->gui_value_order->tooltip
-#, fuzzy
 msgid "An order of values shown in the panel"
-msgstr "Werte, die in der Leiste angezeigt werden"
+msgstr "Eine Reihenfolge der Werte, die im Panel angezeigt werden"
 
 #. settings-schema.json->minimum_bytes_to_display->units
 msgid "bytes"
 msgstr "Bytes"
 
 #. settings-schema.json->minimum_bytes_to_display->description
-#, fuzzy
 msgid "Minimum displayed value"
-msgstr "Minimaler angezeigter Upload-Wert"
+msgstr "Minimal angezeigter Wert"
 
 #. settings-schema.json->minimum_bytes_to_display->tooltip
-#, fuzzy
 msgid "A minimum value (in bytes) to display in the panel"
-msgstr "Ein minimaler Upload-Wert, der in der Leiste angezeigt werden soll"
+msgstr "Ein minimaler Wert (in Bytes), der im Panel angezeigt wird"
