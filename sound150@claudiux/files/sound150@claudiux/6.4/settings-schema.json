@@ -53,7 +53,6 @@
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
         "avoidTwice",
-        "seekerTooltipDelay",
         "showMediaOptical"
       ]
     },
@@ -214,15 +213,6 @@
     "default": false,
     "description": "Avoid displaying controllers twice"
   },
-  "seekerTooltipDelay": {
-    "type": "spinbutton",
-    "default": 400,
-    "units": "ms",
-    "min": 50,
-    "max": 1500,
-    "step": 50,
-    "description": "Seeker tooltip: time to disappear"
-  },
   "showMediaOptical": {
     "type": "switch",
     "default": true,
@@ -252,7 +242,9 @@
       "spotify",
       "smplayer",
       "org.gnome.Totem",
-      "mullvad browser"
+      "mullvad browser",
+      "io.gitlab.librewolf-community",
+      "LibreWolf"
     ]
   },
   "showtrack": {

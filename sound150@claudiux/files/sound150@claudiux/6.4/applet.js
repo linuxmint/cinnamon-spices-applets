@@ -1,5 +1,4 @@
 const Applet = imports.ui.applet;
-//~ const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Interfaces = imports.misc.interfaces;
 const Util = imports.misc.util;
@@ -7,7 +6,6 @@ const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
-//~ const PopupMenu = require("./lib/popupMenu");
 const GLib = imports.gi.GLib;
 const Cogl = imports.gi.Cogl; //Cogl
 const Gdk = imports.gi.Gdk;
@@ -119,6 +117,8 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
+const MSG_RELOAD = _("Reload this applet");
+
 // Logging
 function log(message, always = false) {
     if (DEBUG() || always)
@@ -163,7 +163,8 @@ const original_players_with_seek_support = [
     "rhythmbox3", "pragha", "quodlibet",
     "amarok", "xnoise", "gmusicbrowser",
     "vlc", "qmmp", "deadbeef",
-    "audacious", "celluloid", "spotify", "mpv", "smplayer"]; // Added: "smplayer"
+    "audacious", "celluloid", "spotify", "mpv", "smplayer",
+    "LibreWolf"]; // Added: "smplayer", "LibreWolf"
 var players_without_seek_support = original_players_without_seek_support;
 var players_with_seek_support = original_players_with_seek_support;
 
@@ -1878,7 +1879,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         );
         this.on_OSDhorizontal_changed();
 
-        this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
+        this.seekerTooltipDelay = 500;
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
         this.settings.bind("OsdWithNumberATJosephMcc_is_loaded", "OsdWithNumberATJosephMcc_is_loaded");
         this.settings.bind("showtrack", "showtrack", () => { this.on_settings_changed() });
@@ -2075,8 +2076,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._iconTimeoutId = null;
         this._iconLooping = true;
 
-        this.actor.connect("scroll-event", (...args) => this._onScrollEvent(...args));
-        this.actor.connect("key-press-event", (...args) => this._onKeyPressEvent(...args));
+        this.scrollEventId = this.actor.connect("scroll-event", (...args) => this._onScrollEvent(...args));
+        this.keypressEventId = this.actor.connect("key-press-event", (...args) => this._onKeyPressEvent(...args));
+        this.enterEventId = this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event));
+        this.leaveEventId = this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event));
+        this.actor.connect('notify::hover', () => { this._applet_tooltip.show(); });
 
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
@@ -2124,7 +2128,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         // button Reload this applet
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        let _reload_button = new PopupMenu.PopupIconMenuItem(_("Reload this applet"), "restart", St.IconType.SYMBOLIC);
+        let _reload_button = new PopupMenu.PopupIconMenuItem(MSG_RELOAD, "restart", St.IconType.SYMBOLIC);
         _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed());
         this._applet_context_menu.addMenuItem(_reload_button);
 
@@ -2145,6 +2149,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         appsys.connect("installed-changed", () => this._updateLaunchPlayer());
 
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
+    }
+
+    on_enter_event(actor, event) {
+        this.setAppletTooltip();
+        this._applet_tooltip.show();
+    }
+
+    on_leave_event(actor, event) {
+        this.set_applet_tooltip("");
     }
 
     on_OSDhorizontal_changed() {
@@ -2302,8 +2315,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, () => { this._openMenu() });
         Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, () => { this._switchToNextPlayer() });
 
-        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
-        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => {
+            this.set_applet_tooltip("");
+            this._volumeChange(Clutter.ScrollDirection.UP);
+            //~ this.setAppletTooltip();
+        });
+        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => {
+            this.set_applet_tooltip("");
+            this._volumeChange(Clutter.ScrollDirection.DOWN);
+            //~ this.setAppletTooltip();
+        });
         Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", () => this._toggle_out_mute());
         Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
 
@@ -2736,6 +2757,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _onScrollEvent(actor, event) {
         //~ logDebug("event: "+event.originalEvent.ctrlKey);
+        //~ this.setAppletTooltip();
+        this._applet_tooltip.show();
         let _event = event;
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
@@ -2744,7 +2767,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._inputVolumeSection._onScrollEvent(this._inputVolumeSection.actor, _event);
             return
         }
-
+        this._applet_tooltip.show();
         let direction = event.get_scroll_direction();
         if (this.reverseScrolling) {
             if (direction == Clutter.ScrollDirection.DOWN)
@@ -2832,7 +2855,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._output.push_volume();
             this._notifyVolumeChange(this._output);
             this.setAppletTooltip();
-            this._applet_tooltip.show();
+            //~ this._applet_tooltip.show();
             let volume = parseInt(this.volume.slice(0, -1));
             let icon_name = "audio-volume";
             if (volume > 100) icon_name += "-overamplified";
@@ -3108,13 +3131,15 @@ class Sound150Applet extends Applet.TextIconApplet {
     setAppletTooltip() {
         let tooltips = [];
         if (this.tooltipShowVolume) {
-            tooltips.push(_("Volume") + ": " + this.volume + "\n");
+            tooltips.push(_("Volume") + ": " + this.volume);
         }
         if (this.player && this.player._owner == this._activePlayer) {
             if (this.tooltipShowPlayer) {
+                if (tooltips.length != 0) tooltips.push("");
                 tooltips.push(this.player._name + " - " + _(this.player._playerStatus));
             }
             if (this.tooltipShowArtistTitle) {
+                if (tooltips.length != 0) tooltips.push("");
                 if (this.player._artist != _("Unknown Artist")) {
                     tooltips.push("<b>" + this.player._artist + "</b>");
                 }
@@ -3124,6 +3149,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
         }
         if (!this._playerctl) {
+            if (tooltips.length != 0) tooltips.push("");
             tooltips.push(_("The 'playerctl' package is required!"));
             tooltips.push(_("Please select 'Install playerctl' in this menu"));
         }
