@@ -12,7 +12,7 @@ This applet displays on the panel, every second, the sum of data (in bytes) rece
 
 ## Settings
 
-The settings are accessible by right-clicking on this applet, then choosing *Configure*.
+The settings are accessible by right-clicking on this applet, then choosing *Configure...*.
 
 You can set:
 
@@ -22,4 +22,14 @@ You can set:
     * Choosing **binary**, the available prefixes are: ki, Mi, Gi, Ti (kibi = 2<sup>10</sup> = 1024; Mebi = 2<sup>20</sup> =  1048576; Gibi = 2<sup>30</sup>; Tebi = 2<sup>40</sup>).
 
   * *Value order*: **Download first** or **Upload first**. An order of values shown in the panel.
-  * *Minimum displayed value*: A minimum value (in bytes) to display in the panel. Min = 0, Max = 100000000, step = 64. Default: 0. A value between 256 and 1024 is comfortable, avoiding display changes due to small data transfers.
+  * *Minimum displayed value*: 
+    * **Value**: A minimum value to display in the panel. Min = 0, Max = 999 (for decimal values) or 1023 (for binary values). Default: 0.
+    * **Multiple**: Can be "1", "k", "M", "G" or "T". Default: "1".
+    * A value set to 1 and a multiple set to “k” are a comfortable combination, avoiding display changes due to small data transfers.
+
+## Links
+
+For your information:
+
+  * [Data-rate units](https://en.wikipedia.org/wiki/Data-rate_units)
+  * [Binary prefix](https://en.wikipedia.org/wiki/Binary_prefix)

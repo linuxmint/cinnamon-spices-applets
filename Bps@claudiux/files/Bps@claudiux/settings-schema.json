@@ -1,7 +1,4 @@
 {
-    "settings_start" : {
-        "type" : "separator"
-    },
     "configuration": {
         "type": "header",
         "description": "Configuration"
@@ -26,15 +23,11 @@
         },
         "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
     },
-    "configuration_end" : {
-        "type" : "separator"
-    },
+
     "gui_start": {
         "type": "header",
         "description": "Gui"
     },
-
-
 
     "gui_value_order" : {
         "type": "combobox",
@@ -46,21 +39,44 @@
         },
         "tooltip" : "An order of values shown in the panel"
     },
-    "minimum_bytes_to_display": {
+
+    "minimum_start": {
+        "type": "header",
+        "description": "Minimum displayed value"
+    },
+
+    "display_minimum_quantity": {
         "type": "spinbutton",
         "default": 0,
         "min": 0,
-        "max": 100000000,
-        "step": 64,
-        "units": "bytes",
-        "description": "Minimum displayed value",
-        "tooltip" : "A minimum value (in bytes) to display in the panel"
+        "max": 1023,
+        "step": 1,
+        "description": "Value",
+        "tooltip": "Value between 0 and 999 (decimal) or 1023 (binary)."
     },
-    "gui_end" : {
-        "type" : "separator"
+    "display_minimum_unit_multiple": {
+        "type": "combobox",
+        "default": "1",
+        "description": "Multiple",
+        "options" : {
+            "1": "1",
+            "k": "k",
+            "M": "M",
+            "G": "G",
+            "T": "T"
+        }
+    },
+    "display_minimum_button": {
+        "type": "button",
+        "description": "Apply",
+        "callback": "_on_display_minimum_button_clicked"
     },
 
 
+    "minimum_bytes_to_display": {
+        "type": "generic",
+        "default": 0
+    },
 
     "checked_interfaces_string" : {
         "type": "generic",
@@ -70,5 +86,4 @@
         "type": "generic",
         "default" : ""
     }
-
 }

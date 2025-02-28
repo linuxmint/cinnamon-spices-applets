@@ -43,6 +43,22 @@ const _P6 = 10**6;
 const _P9 = 10**9;
 const _P12 = 10**12;
 
+const DECIMAL_MULTIPLE = {
+    "k": _P3,
+    "M": _P6,
+    "G": _P9,
+    "T": _P12,
+    "1": 1
+}
+
+const BINARY_MULTIPLE = {
+    "k": _KI,
+    "M": _MI,
+    "G": _GI,
+    "T": _TI,
+    "1": 1
+}
+
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
@@ -96,9 +112,13 @@ class Bps extends Applet.Applet {
         this.gui_symbolic_icon = true;
         this.hover_popup_text_css = "font-size: 15px; padding: 5px; font-weight: normal;";
         this.hover_popup_numbers_css = "font-size: 15px; padding: 5px; font-weight: bold;";
+        this.s.bind("display_minimum_quantity", "display_minimum_quantity");
+        this.s.bind("display_minimum_unit_multiple", "display_minimum_unit_multiple");
         this.s.bind("minimum_bytes_to_display", "minimum_bytes_to_display");
         this.s.bind("checked_interfaces_string", "checked_interfaces_string");
         this.s.bind("unplugged_interfaces_string", "unplugged_interfaces_string");
+
+        this.populate_display_minimum_fields();
 
         this._connect_signals();
 
@@ -213,10 +233,59 @@ class Bps extends Applet.Applet {
     convert_bytes(bytes) {
         if (this.is_vertical)
             return "";
-        if (bytes < this.minimum_bytes_to_display)
-            bytes = 0;
         let unit = "";
         let value = "";
+        let bits;
+        if (bytes < this.minimum_bytes_to_display) {
+            bytes = 0;
+            bits = 0;
+            value = "0.0";
+            if (this.unit_type === 0) { // bytes
+                unit = _("   B");
+                if (this.is_binary === true) {
+                    if (this.minimum_bytes_to_display >= _TI)
+                        unit = _(" TiB");
+                    else if (this.minimum_bytes_to_display >= _GI)
+                        unit = _(" GiB");
+                    else if (this.minimum_bytes_to_display >= _MI)
+                        unit = _(" MiB");
+                    else if (this.minimum_bytes_to_display >= _KI)
+                        unit = _(" kiB");
+                } else { // decimal
+                    if (this.minimum_bytes_to_display >= _P12)
+                        unit = _(" TB");
+                    else if (this.minimum_bytes_to_display >= _P9)
+                        unit = _(" GB");
+                    else if (this.minimum_bytes_to_display >= _P6)
+                        unit = _(" MB");
+                    else if (this.minimum_bytes_to_display >= _P3)
+                        unit = _(" kB");
+                }
+            } else { // bits
+                unit = _("   b");
+                let minimum_bits_to_display = this.minimum_bytes_to_display;
+                if (this.is_binary === true) {
+                    if (minimum_bits_to_display >= _TI)
+                        unit = _(" Tib");
+                    else if (minimum_bits_to_display >= _GI)
+                        unit = _(" Gib");
+                    else if (minimum_bits_to_display >= _MI)
+                        unit = _(" Mib");
+                    else if (minimum_bits_to_display >= _KI)
+                        unit = _(" kib");
+                } else { // decimal
+                    if (minimum_bits_to_display >= _P12)
+                        unit = _(" Tb");
+                    else if (minimum_bits_to_display >= _P9)
+                        unit = _(" Gb");
+                    else if (minimum_bits_to_display >= _P6)
+                        unit = _(" Mb");
+                    else if (minimum_bits_to_display >= _P3)
+                        unit = _(" kb");
+                }
+            }
+            return value + unit;
+        }
 
         if (this.unit_type === 0) { // bytes
             if (this.is_binary === true) { // binary
@@ -249,7 +318,7 @@ class Bps extends Applet.Applet {
                 return "" + this.formatted_string(bytes) + _("   B");
             }
         } else { // bits
-            let bits = bytes * 8;
+            bits = bytes * 8;
             if (this.is_binary === true) { // binary
                 if(bits >= _TI) {
                     return "" + this.formatted_string(Math.round(bits/_TI*10)/10) + _(" Tib");
@@ -298,6 +367,66 @@ class Bps extends Applet.Applet {
             return v+".0"
         }
     } // End of formatted_string
+
+    populate_display_minimum_fields() {
+        let min_value = this.minimum_bytes_to_display;
+        if (this.is_binary) { // binary
+            if (min_value >= _TI) {
+                this.display_minimum_unit_multiple = "T";
+                this.display_minimum_quantity = Math.min(1023, Math.ceil(min_value / _TI));
+                return
+            }
+            if (min_value >= _GI) {
+                this.display_minimum_unit_multiple = "G";
+                this.display_minimum_quantity = Math.min(1023, Math.ceil(min_value / _GI));
+                return
+            }
+            if (min_value >= _MI) {
+                this.display_minimum_unit_multiple = "M";
+                this.display_minimum_quantity = Math.min(1023, Math.ceil(min_value / _MI));
+                return
+            }
+            if (min_value >= _KI) {
+                this.display_minimum_unit_multiple = "k";
+                this.display_minimum_quantity = Math.min(1023, Math.ceil(min_value / _KI));
+                return
+            }
+            this.display_minimum_unit_multiple = "1";
+            this.display_minimum_quantity = Math.min(1023, min_value);
+        } else { // decimal
+            if (min_value >= _P12) {
+                this.display_minimum_unit_multiple = "T";
+                this.display_minimum_quantity = Math.min(999, Math.ceil(min_value / _P12));
+                return
+            }
+            if (min_value >= _P9) {
+                this.display_minimum_unit_multiple = "G";
+                this.display_minimum_quantity = Math.min(999, Math.ceil(min_value / _P9));
+                return
+            }
+            if (min_value >= _P6) {
+                this.display_minimum_unit_multiple = "M";
+                this.display_minimum_quantity = Math.min(999, Math.ceil(min_value / _P6));
+                return
+            }
+            if (min_value >= _P3) {
+                this.display_minimum_unit_multiple = "k";
+                this.display_minimum_quantity = Math.min(999, Math.ceil(min_value / _P3));
+                return
+            }
+            this.display_minimum_unit_multiple = "1";
+            this.display_minimum_quantity = Math.min(999, min_value);
+        }
+    } // End of populate_display_minimum_fields
+
+    _on_display_minimum_button_clicked() {
+        if (this.is_binary) { // binary
+            this.minimum_bytes_to_display = this.display_minimum_quantity * BINARY_MULTIPLE[this.display_minimum_unit_multiple];
+        } else { // decimal
+            this.display_minimum_quantity = Math.min(999, this.display_minimum_quantity);
+            this.minimum_bytes_to_display = this.display_minimum_quantity * DECIMAL_MULTIPLE[this.display_minimum_unit_multiple];
+        }
+    } // End of _on_display_minimum_button_clicked
 
     get is_vertical() {
         return (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
