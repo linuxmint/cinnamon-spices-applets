@@ -5,7 +5,7 @@
 .sensors-label {
     background: transparent;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 2px;
     border-radius: 10px;
     border-color: rgba(127,127,127,0.5);
@@ -15,7 +15,7 @@
 .sensors-high {
     background: DarkOrange;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 2px;
     border-radius: 10px;
     border-color: rgba(255,141,0,0.5);
@@ -25,7 +25,7 @@
 .sensors-critical {
     background: FireBrick;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 2px;
     border-radius: 10px;
     border-color: rgba(194,34,34,0.5);
@@ -35,7 +35,7 @@
 .sensors-label-noborder {
     background: transparent;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 0;
     text-align: center;
 }
@@ -43,7 +43,7 @@
 .sensors-high-noborder {
     background: DarkOrange;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 0;
     text-align: center;
 }
@@ -51,7 +51,7 @@
 .sensors-critical-noborder {
     background: FireBrick;
     margin: 1px;
-    padding: 0 2px;
+    padding: 2px;
     border: 0;
     text-align: center;
 }
