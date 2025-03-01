@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-02 12:30-0500\n"
-"PO-Revision-Date: 2024-11-20 18:46+0100\n"
+"PO-Revision-Date: 2025-03-01 10:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -93,7 +93,7 @@ msgstr ""
 
 #. settings-schema.json->general-page->title
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #. settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
@@ -108,9 +108,8 @@ msgid "Panel Button Actions"
 msgstr "Panel Knopf Aktionen"
 
 #. settings-schema.json->hotkey-settings->title
-#, fuzzy
 msgid "Translation action hotkeys"
-msgstr "Übersetzungs Engine"
+msgstr "Tastenkombinationen für Übersetzungsaktionen"
 
 #. settings-schema.json->translate-engine->options
 msgid "Apertium"
@@ -172,20 +171,18 @@ msgid "Clipboard"
 msgstr "Zwischenablage"
 
 #. settings-schema.json->left-auto-paste->description
-#, fuzzy
 msgid "Automatically translate on left click"
-msgstr "Automatisch einfügen und übersetzen wenn links geklickt wird"
+msgstr "Automatisch bei Linksklick übersetzen"
 
 #. settings-schema.json->left-auto-paste->tooltip
-#, fuzzy
 msgid ""
 "Automatically translate the selection/clipboard contents when opening the "
 "Panel Translator popup window using a left click on the Panel Translator "
 "button"
 msgstr ""
-"Automatisches Einfügen des Inhalts der aktuellen Auswahl/Zwischenablage und "
-"Übersetzen beim Öffnen des Popup-Fensters durch einen Linksklick auf den "
-"Button des Übersetzerfensters"
+"Automatisches Übersetzen der Auswahl oder des Zwischenablageinhalts beim "
+"Öffnen des Popup-Fensters des Panel-Übersetzers durch einen Linksklick auf "
+"die Schaltfläche des Panel-Übersetzers"
 
 #. settings-schema.json->left-auto-play->description
 msgid "Automatically play the translation on left click"
