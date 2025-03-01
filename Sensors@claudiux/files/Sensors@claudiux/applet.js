@@ -527,7 +527,7 @@ class SensorsApplet extends Applet.Applet {
         case "bar":
           return "───\n";
         case "blank":
-          return "\n";
+          return "\r\n";
         default:
           return "NO_SEP";
       }
