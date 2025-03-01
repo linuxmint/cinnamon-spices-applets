@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-08-06 22:42-0400\n"
-"PO-Revision-Date: 2024-08-07 17:20+0200\n"
+"PO-Revision-Date: 2025-03-02 00:14+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -188,7 +188,7 @@ msgstr "Executa amb GPU d'NVIDIA"
 
 #: 5.8/contextmenu.js:256 3.2/buttons.js:1049 4.0/contextmenu.js:260
 msgid "Add to panel"
-msgstr "Afegeix al panell"
+msgstr "Afegeix al tauler"
 
 #: 5.8/contextmenu.js:275 3.2/buttons.js:1051 4.0/contextmenu.js:279
 msgid "Add to desktop"
@@ -511,7 +511,7 @@ msgstr "Contingut"
 #. 4.0->settings-schema.json->panel-behave->title
 #. 4.0->settings-schema.json->panel-appear->title
 msgid "Panel"
-msgstr "Panell"
+msgstr "Tauler"
 
 #. 5.8->settings-schema.json->menu-behave->title
 #. 5.8->settings-schema.json->menu-icons->title
@@ -722,7 +722,7 @@ msgstr "Obre el menú al passar el ratolí per sobre"
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Obre el menú quan mogui el ratolí a sobre de l'icona del panell"
+msgstr "Obre el menú quan mogui el ratolí a sobre de la icona del tauler"
 
 #. 5.8->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->hover-delay->units
@@ -1330,7 +1330,7 @@ msgstr "Utilitza una icona personalitzada"
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
 msgid "Use a custom icon in the panel"
-msgstr "Utilitza una icona personalitzada al panell"
+msgstr "Utilitza una icona personalitzada al tauler"
 
 #. 5.8->settings-schema.json->menu-icon->description
 #. 5.8->settings-schema.json->menu-icon->tooltip
@@ -1339,7 +1339,7 @@ msgstr "Utilitza una icona personalitzada al panell"
 #. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
 msgid "Panel icon"
-msgstr "Icona del panell"
+msgstr "Icona del tauler"
 
 #. 5.8->settings-schema.json->menu-icon-size-custom->description
 #. 4.0->settings-schema.json->menu-icon-size-custom->description
@@ -1349,29 +1349,29 @@ msgstr "Utilitza una mida d'icona personalitzada"
 #. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
 msgid "Use a custom size for the panel icon"
-msgstr "Utilitza una mida d'icona personalitzada per al panell"
+msgstr "Utilitza una mida d'icona personalitzada per al tauler"
 
 #. 5.8->settings-schema.json->menu-icon-size->description
 #. 4.0->settings-schema.json->menu-icon-size->description
 msgid "Panel icon size (pixels)"
-msgstr "Tamany de la icona del panell (píxels)"
+msgstr "Mida de la icona del tauler (píxels)"
 
 #. 5.8->settings-schema.json->menu-icon-size->tooltip
 #. 4.0->settings-schema.json->menu-icon-size->tooltip
 msgid "Choose a custom size for the panel icon"
-msgstr "Tria una mida personalitzada per a la icona del panell"
+msgstr "Tria una mida personalitzada per a la icona del tauler"
 
 #. 5.8->settings-schema.json->menu-label->description
 #. 3.2->settings-schema.json->menu-label->description
 #. 4.0->settings-schema.json->menu-label->description
 msgid "Panel text"
-msgstr "Text del panell"
+msgstr "Text del tauler"
 
 #. 5.8->settings-schema.json->menu-label->tooltip
 #. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
 msgid "Text to show beside the panel icon"
-msgstr "Text a mostrar al costat de la icona del panell"
+msgstr "Text a mostrar al costat de la icona del tauler"
 
 #. 5.8->settings-schema.json->category-icon-size->description
 #. 5.8->settings-schema.json->category-icon-size->tooltip
