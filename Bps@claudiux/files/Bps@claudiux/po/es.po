@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-28 17:40+0100\n"
-"PO-Revision-Date: 2024-09-28 11:14-0300\n"
+"PO-Revision-Date: 2025-03-01 11:40-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:77
 msgid "Does not work on vertical panel!"
-msgstr ""
+msgstr "¡No funciona en panel vertical!"
 
 #. applet.js:244 applet.js:304 applet.js:318
 msgid "   B"
@@ -29,7 +29,7 @@ msgstr "   B"
 
 #. applet.js:247 applet.js:293
 msgid " TiB"
-msgstr "TiB"
+msgstr " TiB"
 
 #. applet.js:249 applet.js:296
 msgid " GiB"
@@ -160,48 +160,45 @@ msgid "Upload first"
 msgstr "Primero la subida"
 
 #. settings-schema.json->gui_value_order->tooltip
-#, fuzzy
 msgid "An order of values shown in the panel"
-msgstr "Valores mostrados en el panel"
+msgstr "Orden de valores mostrados en el panel"
 
 #. settings-schema.json->minimum_start->description
-#, fuzzy
 msgid "Minimum displayed value"
-msgstr "Valor mínimo de subida mostrado"
+msgstr "Valor mínimo mostrado"
 
 #. settings-schema.json->display_minimum_quantity->description
-#, fuzzy
 msgid "Value"
-msgstr "Orden de los valores"
+msgstr "Valor"
 
 #. settings-schema.json->display_minimum_quantity->tooltip
 msgid "Value between 0 and 999 (decimal) or 1023 (binary)."
-msgstr ""
+msgstr "Valor comprendido entre 0 y 999 (decimal) o 1023 (binario)."
 
 #. settings-schema.json->display_minimum_unit_multiple->description
 msgid "Multiple"
-msgstr ""
+msgstr "Multiple"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "k"
-msgstr ""
+msgstr "k"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #. settings-schema.json->display_minimum_button->description
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
