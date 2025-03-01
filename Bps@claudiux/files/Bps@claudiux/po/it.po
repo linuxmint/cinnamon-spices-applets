@@ -97,11 +97,11 @@ msgstr " kb"
 
 #. metadata.json->description
 msgid "Instant Network Speed is a simple network monitor"
-msgstr ""
+msgstr "Instant Network Speed è un semplice monitor di rete"
 
 #. metadata.json->name
 msgid "Bps: Instant Network Speed"
-msgstr ""
+msgstr "Bps: Velocità istantanea della rete"
 
 #. settings-schema.json->configuration->description
 msgid "Configuration"
