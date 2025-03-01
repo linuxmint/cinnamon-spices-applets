@@ -507,7 +507,7 @@ class SensorsApplet extends Applet.Applet {
       }
       //~ let l = new St.Label({text: c, style_class: 'applet-box sensors-size120'});
       //~ let l = new St.Label({text: c, style_class: 'applet-box'});
-      let l = new St.Label({text: (i===0) ? c : this.separator + c});
+      let l = new St.Label({text: (i===0 || this.separator == "NO_SEP") ? c : this.separator + c});
       if (l_style)
         l.set_style(l_style);
 
@@ -527,9 +527,9 @@ class SensorsApplet extends Applet.Applet {
         case "bar":
           return "───\n";
         case "blank":
-          return "\n\n\n";
+          return "\r\n";
         default:
-          return "\n\n";
+          return "NO_SEP";
       }
     } else {
       switch (this.separator_type) {
@@ -538,7 +538,7 @@ class SensorsApplet extends Applet.Applet {
         case "blank":
           return " ";
         default:
-          return "  ";
+          return "NO_SEP";
       }
     }
   }

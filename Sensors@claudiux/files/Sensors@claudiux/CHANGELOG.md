@@ -1,3 +1,6 @@
+### v5.3.2~20250228
+  * Fixes scenario where special characters would appear next to temperatures on the panel.
+
 ### v5.3.1~20250223
   * Removed option "Only show positive values" for fans. (Value fixed to false.)
   * Fixes #6845.
