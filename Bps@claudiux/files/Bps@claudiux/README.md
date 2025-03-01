@@ -27,6 +27,12 @@ You can set:
     * **Multiple**: Can be "1", "k", "M", "G" or "T". Default: "1".
     * A value set to 1 and a multiple set to “k” are a comfortable combination, avoiding display changes due to small data transfers.
 
+## Translations
+
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/Bps@claudiux.md)
+
+Many thanks to all the translators!
+
 ## Links
 
 For your information:
