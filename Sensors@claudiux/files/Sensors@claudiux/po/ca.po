@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-22 17:57+0100\n"
-"PO-Revision-Date: 2025-02-13 20:48+0100\n"
+"PO-Revision-Date: 2025-03-02 00:24+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -205,7 +205,7 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr "claudiux: Autor. JEleniel: suport per a targetes gràfiques Nvidia"
+msgstr "claudiux: Autor. JEleniel: suport per a targetes gràfiques Nvidia."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
@@ -404,19 +404,19 @@ msgstr "Mida de caràcter (% de la mida estandard)"
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(cap)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "buit"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "barra"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Separador"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -427,18 +427,12 @@ msgid "Text Color"
 msgstr "Color del text"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Valor\n"
-"crític"
+msgstr "Color del valor crític"
 
 #. settings-schema.json->high_color->description
-#, fuzzy
 msgid "High Value Color"
-msgstr ""
-"Valor\n"
-"alt"
+msgstr "Color del valor alt"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -535,14 +529,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "El primer emoji de la llista s'utilitzarà per ala temperatura"
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -729,7 +723,7 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "El primer emoji de la llista s'utilitzarà pels ventiladors"
 
 #. settings-schema.json->strictly_positive_fan->description
 msgid "Show only positive or zero values"
@@ -779,7 +773,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "El primer emoji de la llista s'utilitzarà pel voltatge"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -795,7 +789,7 @@ msgstr "Només V"
 
 #. settings-schema.json->volt_unit->options
 msgid "mV only"
-msgstr "Només mV"
+msgstr "només mV"
 
 #. settings-schema.json->journalize_volt->description
 msgid "Log critical voltages"
@@ -855,7 +849,7 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "El primer emoji de la llista s'utilitzarà per a intrusions"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
