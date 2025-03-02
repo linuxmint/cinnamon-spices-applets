@@ -1,3 +1,6 @@
+### v10.2.1~20250302
+  * Improved tooltip management.
+
 ### v10.2.0~20250227
   * Do not display the tooltip when using the multimedia keys to change volume.
   * Avoid unnecessary spaces in the tooltip.

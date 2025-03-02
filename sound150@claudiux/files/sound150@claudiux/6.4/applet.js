@@ -2080,7 +2080,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.keypressEventId = this.actor.connect("key-press-event", (...args) => this._onKeyPressEvent(...args));
         this.enterEventId = this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event));
         this.leaveEventId = this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event));
-        this.actor.connect('notify::hover', () => { this._applet_tooltip.show(); });
+        this.notifyHoverId = this.actor.connect('notify::hover', () => { this._applet_tooltip.show(); });
 
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
@@ -2624,6 +2624,21 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         kill_playerctld();
 
+        if (this.scrollEventId)
+            this.actor.disconnect(this.scrollEventId);
+        if (this.keypressEventId)
+            this.actor.disconnect(this.keypressEventId);
+        if (this.enterEventId)
+            this.actor.disconnect(this.enterEventId);
+        if (this.leaveEventId)
+            this.actor.disconnect(this.leaveEventId);
+        if (this.notifyHoverId)
+            this.actor.disconnect(this.notifyHoverId);
+        this.scrollEventId = null;
+        this.keypressEventId = null;
+        this.enterEventId = null;
+        this.leaveEventId = null;
+        this.notifyHoverId = null;
 
         //~ logDebug("old_volume: "+old_volume);
         //~ this.volume = old_volume;
@@ -3129,7 +3144,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     setAppletTooltip() {
-        let tooltips = [];
+        var tooltips = [];
         if (this.tooltipShowVolume) {
             tooltips.push(_("Volume") + ": " + this.volume);
         }
@@ -3141,10 +3156,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this.tooltipShowArtistTitle) {
                 if (tooltips.length != 0) tooltips.push("");
                 if (this.player._artist != _("Unknown Artist")) {
-                    tooltips.push("<b>" + this.player._artist + "</b>");
+                    tooltips.push("<b>" + this.player._artist.replace(/\&/g, "&amp;").replace(/\"/g, "") + "</b>");
                 }
                 if (this._title != _("Unknown Title")) {
-                    tooltips.push(this.player._title);
+                    tooltips.push(this.player._title.replace(/\&/g, "&amp;").replace(/\"/g, ""));
                 }
             }
         }
@@ -3154,8 +3169,31 @@ class Sound150Applet extends Applet.TextIconApplet {
             tooltips.push(_("Please select 'Install playerctl' in this menu"));
         }
 
-        this.set_applet_tooltip(tooltips.join("\n"), true);
+        this.set_applet_tooltip(this._clean_str(tooltips.join("\n")), true);
+        this._applet_tooltip.preventShow = false;
         this.volume_near_icon();
+    }
+
+    _clean_str(str) {
+        //log("_clean_str");
+        let ret = str.replace(/\\'/gi, "'");
+        ret = ret.replace(/\\"/gi, '"');
+
+        // Support &amp;, &quot;, &apos;, &lt; and &gt;, escape all other
+        // occurrences of '&'.
+        ret = ret.replace(/&(?!amp;|quot;|apos;|lt;|gt;)/g, '&amp;');
+
+        // Support <b>, <i>, and <u>, escape anything else
+        // so it displays as raw markup.
+        ret = ret.replace(/<(?!\/?[biu]>)/g, '&lt;');
+
+        try {
+            Pango.parse_markup(ret, -1, "");
+            return ret;
+        } catch (e) {
+            logError(e);
+            return GLib.markup_escape_text(ret, -1);
+        }
     }
 
     _isInstance(busName) {
