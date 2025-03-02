@@ -276,7 +276,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
           this.applet.percentage = this.percentage;
 
         this.tooltip.set_text(this.tooltipText + this.percentage + "%");
-        this.applet.change_volume_in_radio_tooltip();
+        //~ this.applet.change_volume_in_radio_tooltip();
+        this.applet.set_radio_tooltip_to_default_one();
         if (this._dragging)
             this.tooltip.show();
 

@@ -2446,80 +2446,63 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return str;
   }
 
-  set_radio_tooltip(new_tooltip) {
-    //log("set_radio_tooltip");
+  //~ change_volume_in_radio_tooltip() {
+    //~ var title = "" + this.songTitle;
+    //~ title = title.replace(/\"/g, "");
 
-    let tooltip = "" + new_tooltip;
-    if (this.record_pid != null)
-      tooltip = tooltip + "\n<i>" + _("Middle-Click: Stop Recording") + "</i>";
+    //~ if (this.radioNameBolded === undefined)
+      //~ this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
 
-    if (this.oldTooltip === tooltip) {
-      return;
-    }
+    //~ let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n\n";
+    //~ if (title.length > 0) {
+      //~ var artist = "";
+      //~ if (title.includes(" - ")) {
+        //~ [artist, title] = title.split(" - ");
+        //~ if (artist.length > 0)
+          //~ _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
+      //~ }
+      //~ _tooltip += title.replace(/\"/g, "");
+    //~ }
+    //~ if (this.percentage !== "undefined")
+      //~ _tooltip += "\n\n" + _("Volume: %s%").format(this.percentage);
 
-    if (this.hasMarkup)
-      this.set_applet_tooltip(this._clean_str(tooltip), true);
-    else
-      this.set_applet_tooltip(tooltip);
+    //~ if (this.show_help_in_tooltip) {
+      //~ if (this.record_pid != null)
+        //~ _tooltip += "\n<i>" + _("Middle-Click: Stop Recording") + "</i>";
+      //~ else
+        //~ _tooltip += "\n<i>" + _("Middle-click: ON/OFF") + "</i>";
 
-    this.oldTooltip = "" + new_tooltip;
-  }
+      //~ _tooltip += "\n<i>" + _("Click: Select another station") + "</i>";
+    //~ }
 
-  change_volume_in_radio_tooltip() {
-    var title = "" + this.songTitle;
-    title = title.replace(/\"/g, "");
+    //~ this.set_applet_tooltip(this._clean_str(_tooltip), true);
+    //~ //this._applet_tooltip.show();
+    //~ this._applet_tooltip.preventShow = false;
 
-    if (this.radioNameBolded === undefined)
-      this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
-
-    let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n\n";
-    if (title.length > 0) {
-      var artist = "";
-      if (title.includes(" - ")) {
-        [artist, title] = title.split(" - ");
-        if (artist.length > 0)
-          _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
-      }
-      _tooltip += title.replace(/\"/g, "");
-    }
-    if (this.percentage !== "undefined")
-      _tooltip += "\n\n" + _("Volume: %s%").format(this.percentage);
-
-    if (this.show_help_in_tooltip) {
-      if (this.record_pid != null)
-        _tooltip += "\n<i>" + _("Middle-Click: Stop Recording") + "</i>";
-      else
-        _tooltip += "\n<i>" + _("Middle-click: ON/OFF") + "</i>";
-
-      _tooltip += "\n<i>" + _("Click: Select another station") + "</i>";
-    }
-
-    this.set_applet_tooltip(this._clean_str(_tooltip), true);
-    //this._applet_tooltip.show();
-    this._applet_tooltip.preventShow = false;
-
-    _tooltip = null;
-    title = null;
-    this.volume_near_icon();
-  }
+    //~ _tooltip = null;
+    //~ title = null;
+    //~ this.volume_near_icon();
+  //~ }
 
   set_radio_tooltip_to_default_one() {
-    let _tooltip = _("Click to select a station");
+    var ttElts = []; // tooltip elements.
 
     if (this.last_radio_listened_to != null && this.last_radio_listened_to.length > 0) {
       this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
-      _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n";
+      ttElts.push("" + this.radioNameBolded + this.codecAndBitrate);
 
       var title = "" + this.songTitle;
+      title.replace(/\&/g, "&amp;");
 
       if (title.length > 0) {
+        ttElts.push("");
         var artist = "";
         if (title.includes(" - ")) {
           [artist, title] = title.split(" - ");
         if (artist.length > 0)
-            _tooltip += "\n<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
+            ttElts.push("<i><b>" + artist.replace(/\"/g, "") + "</b></i>");
         }
-        _tooltip += "\n" + title.replace(/\"/g, "");
+        ttElts.push(title.replace(/\"/g, ""));
       }
 
       if (this.context_menu_item_slider != null) {
@@ -2530,23 +2513,32 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         }
         percentage = null;
       }
-      _tooltip += "\n\n" + _("Volume: %s%").format(this.percentage);
+      ttElts.push("");
+      ttElts.push(_("Volume: %s%").format(this.percentage));
 
       if (this.show_help_in_tooltip) {
+        ttElts.push("");
         if (this.record_pid != null)
-          _tooltip += "\n<i>" + _("Middle-Click: Stop Recording") + "</i>";
+          ttElts.push("<i>" + _("Middle-Click: Stop Recording") + "</i>");
         else
-          _tooltip += "\n<i>" + _("Middle-click: ON/OFF") + "</i>";
+          ttElts.push("<i>" + _("Middle-click: ON/OFF") + "</i>");
 
-        _tooltip += "\n<i>" + _("Click: Select another station") + "</i>";
-        if(this.mpvStatus === "PLAY")
-          _tooltip += "\n<i>" + _("Scroll wheel: volume change") + "</i>";
+        ttElts.push("<i>" + _("Click: Select another station") + "</i>");
+        //~ if(this.mpvStatus === "PLAY")
+          ttElts.push("<i>" + _("Scroll wheel: volume change") + "</i>");
       }
+    } else {
+      ttElts.push(_("Click to select a station"));
     }
 
-    this.set_applet_tooltip(this._clean_str(_tooltip), true);
+    let _tooltip = ttElts.join("\n");
 
-    _tooltip = null;
+    this.set_applet_tooltip(this._clean_str(_tooltip), true);
+    this._applet_tooltip.preventShow = false;
+    this.volume_near_icon();
+
+    _tooltip = "";
+    ttElts = [];
   }
 
   icon_or_favicon(_id) {
@@ -4035,7 +4027,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       else if ((direction == ScrollDirection.UP && !invert) || (direction == ScrollDirection.DOWN && invert)) {
         this.percentage = Math.min(100, percentage + step);
       }
-      this.change_volume_in_radio_tooltip();
+      //~ this.change_volume_in_radio_tooltip();
+      this.set_radio_tooltip_to_default_one();
       return;
     }
 

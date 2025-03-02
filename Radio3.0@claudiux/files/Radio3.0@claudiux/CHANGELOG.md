@@ -1,3 +1,6 @@
+### 2.8.3~20250302
+  * Improved tooltip management.
+
 ### 2.8.2~20250218
   * Improved tooltip layout.
 
