@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 const {
     source_remove,
     timeout_add_seconds,

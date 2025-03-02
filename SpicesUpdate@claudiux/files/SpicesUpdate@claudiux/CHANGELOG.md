@@ -1,3 +1,8 @@
+### 7.8.1~20250302
+  * Forces the use of 'cjs' even if 'gjs' is installed.
+  * Uses “try” for each “destroy” command.
+  * Fixes #6933.
+
 ### v7.8.0~20250215
   * Tooltip bug fixed.
 

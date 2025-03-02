@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 const to_string = function(data) {
   return ""+stringFromUTF8Array(data);
 }

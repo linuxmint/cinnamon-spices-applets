@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 /* Spices Update (SpicesUpdate@claudiux) */
 //Applet:
 const { IconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
@@ -756,7 +757,7 @@ class SpicesUpdate extends IconApplet {
             notification.setUseActionIcons(false);
             about_updates ? this.notifications_about_updates[type].push(notification) : this.notifications_about_news[type].push(notification);
             //~ notification.connect("destroy", (self) => {
-            notification.connect("destroy", () => {
+            notification.connect("destroy", (...args) => {
                 about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
             });
             source.notify(notification);
@@ -820,7 +821,7 @@ class SpicesUpdate extends IconApplet {
                         } else if (action == "software-update-available-symbolic") {
                             spawnCommandLineAsync("%s %s -t %s -s %s -u".format(CS_PATH, ""+type, TAB, SORT));
                             let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
-                            if (n) n.destroy(3);
+                            if (n) try { n.destroy(3) } catch(e) {};
                         } else if (action == "su-forget-symbolic") {
                             this._forget_new_spices(type);
                             this.clear_notifications_about_news(type);
@@ -837,7 +838,7 @@ class SpicesUpdate extends IconApplet {
                                 }
                             } else {
                                 let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
-                                if (n) n.destroy(3);
+                                if (n) try { n.destroy(3) } catch(e) {};
                             }
                             about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
                             this._on_refresh_pressed();
@@ -1274,7 +1275,7 @@ class SpicesUpdate extends IconApplet {
             this.dependenciesMet=true;
             try {
                 if (this.notification != null) {
-                    this.notification.destroy(2) // Destroys the precedent critical notification.
+                    try { this.notification.destroy(2) } catch(e) {} // Destroys the precedent critical notification.
                 }
             } catch(e) {
                 // Not an error. Simply, the user has clicked on the notification, destroying it.
@@ -1949,13 +1950,13 @@ class SpicesUpdate extends IconApplet {
         if (type) {
             while (this.notifications_about_updates[type].length != 0) {
                 let n = this.notifications_about_updates[type].pop();
-                if (n) n.destroy(3);
+                if (n) try { n.destroy(3) } catch(e) {};
             }
         } else {
             for (let t of TYPES) {
                 while (this.notifications_about_updates[t].length != 0) {
                     let n = this.notifications_about_updates[t].pop();
-                    if (n) n.destroy(3);
+                    if (n) try { n.destroy(3) } catch(e) {};
                 }
             }
         }
@@ -1965,13 +1966,13 @@ class SpicesUpdate extends IconApplet {
         if (type) {
             while (this.notifications_about_news[type].length != 0) {
                 let n = this.notifications_about_news[type].pop();
-                if (n) n.destroy(3);
+                if (n) try { n.destroy(3) } catch(e) {};
             }
         } else {
             for (let t of TYPES) {
                 while (this.notifications_about_news[t].length != 0) {
                     let n = this.notifications_about_news[t].pop();
-                    if (n) n.destroy(3);
+                    if (n) try { n.destroy(3) } catch(e) {};
                 }
             }
         }
