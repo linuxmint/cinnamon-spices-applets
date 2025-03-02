@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 const  GLib = imports.gi.GLib;
 
 /**
