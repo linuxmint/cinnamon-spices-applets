@@ -207,20 +207,21 @@ class Bps extends Applet.Applet {
         var data = {};
         var received = 0;
         var sent = 0;
+        var diff_ts = 1000;
         let subProcess = Util.spawnCommandLineAsyncIO(DATA_SCRIPT,
             (stdout, stderr, exitCode) => {
                 if (exitCode == 0) {
                     let result = stdout.slice(0, -1).split(" ");
                     for (let r of result) {
                         let d = r.split(":");
-                        data[d[0]] = {"rx": parseInt(d[1]), "tx": parseInt(d[2])}
+                        data[d[0]] = {"rx": parseInt(d[1]), "tx": parseInt(d[2]), "timestamp": Date.now()}
                         if (this.network_data[d[0]]) {
-                            received += data[d[0]]["rx"] - this.network_data[d[0]]["rx"];
-                            sent += data[d[0]]["tx"] - this.network_data[d[0]]["tx"];
+                            diff_ts = (data[d[0]]["timestamp"] - this.network_data[d[0]]["timestamp"]);
+                            received += (data[d[0]]["rx"] - this.network_data[d[0]]["rx"]) * 1000 / diff_ts;
+                            sent += (data[d[0]]["tx"] - this.network_data[d[0]]["tx"]) * 1000 / diff_ts;
                         }
                         this.network_data[d[0]] = data[d[0]];
                     }
-                    //~ global.log("data:\n" + JSON.stringify(data, null, "\t"));
                     this.gui_speed.set_received_text(this.convert_bytes(received));
                     this.gui_speed.set_sent_text(this.convert_bytes(sent));
                 }
