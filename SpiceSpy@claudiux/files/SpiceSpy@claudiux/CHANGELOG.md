@@ -1,3 +1,6 @@
+### v5.2.4~20250303
+  * Bugfix in the `spices-cache-init.sh` script.
+
 ### v5.2.3~20250303
   * Does not try to translate null messages from other Spices. This also helps avoid black screens.
   * Bugfix.

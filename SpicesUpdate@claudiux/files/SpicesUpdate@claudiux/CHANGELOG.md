@@ -1,3 +1,6 @@
+### 7.8.3~20250303
+  * Minor bugfix.
+
 ### 7.8.2~20250303
   * Does not try to translate null messages from other spices. This also helps avoid black screens.
 

@@ -657,7 +657,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
     let sec = Math.round(this.update_interval * 3600);
     this.loopId = timeout_add_seconds(sec, () => { this.loop() });
-    this.issuesLoopId = timeout_add(500, () => { this.issuesJobs_loop(); return (this.issuesJobsList.length > 0 && this.is_looping); });
+    this.issuesLoopId = timeout_add_seconds(5, () => { this.issuesJobs_loop(); return (this.issuesJobsList.length > 0 && this.is_looping); });
     //~ return this.is_looping;
   } // End of loop
 
@@ -681,7 +681,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   /**
    * renew_caches():
-   * Check if the local caches are older than 12 minutes.
+   * Check if the local caches are older than 15 minutes.
    * If this is the case, local caches are renewed using CACHE_UPDATER.
    */
   renew_caches() {
@@ -699,6 +699,7 @@ class SpiceSpy extends Applet.TextIconApplet {
         }
       } else {
         Util.spawnCommandLineAsync(CACHE_INIT);
+        break // CACHE_INIT calls CACHE_UPDATER --update-all.
       }
     }
   } // End of renew_caches

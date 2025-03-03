@@ -13,7 +13,7 @@ const { Pixbuf } = imports.gi.GdkPixbuf;
 //Cogl:
 const { PixelFormat } = imports.gi.Cogl;
 //PopupMenu:
-const { PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, PopupIndicatorMenuItem, PopupIconMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
+const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, PopupIndicatorMenuItem, PopupIconMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 //Lang:
 const Lang = imports.lang;
 //GLib:
