@@ -30,6 +30,7 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
+const CACHE_INIT = SCRIPTS_DIR + "/spices-cache-init.sh";
 
 const TYPES = ["actions", "applets", "desklets", "extensions", "themes"];
 const SPICES_URL = "https://cinnamon-spices.linuxmint.com";
@@ -52,6 +53,7 @@ const Gettext = imports.gettext;
 //~ Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 
 function _(str, uuid=UUID) {
+  if (str == null) return "";
   Gettext.bindtextdomain(uuid, HOME_DIR + "/.local/share/locale");
   let _str = Gettext.dgettext(uuid, str);
   if (_str !== str)
@@ -683,7 +685,6 @@ class SpiceSpy extends Applet.TextIconApplet {
    * If this is the case, local caches are renewed using CACHE_UPDATER.
    */
   renew_caches() {
-    var is_to_download = false;
     for (let type of TYPES) {
       const INDEX_DIR = HOME_DIR + "/.cache/cinnamon/spices/" + type.slice(0, -1);
       const INDEX = INDEX_DIR + "/index.json";
@@ -693,18 +694,13 @@ class SpiceSpy extends Applet.TextIconApplet {
         const jsonModifTime = parseInt(jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix());
         const currentTime = parseInt(new Date / 1000);
         const difference = currentTime - jsonModifTime;
-        is_to_download = (difference > 720); // 720s = 12 min.
+        if (difference >= 900) { // 900s = 15 min.
+          Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
+        }
       } else {
-        Util.spawnCommandLineAsync(`mkdir -p "${INDEX_DIR}"; echo "{}" > "${INDEX}"`);
-        is_to_download = true;
+        Util.spawnCommandLineAsync(CACHE_INIT);
       }
-      //~ if (is_to_download) break; // Removed to create every index.json file.
     }
-
-    if (is_to_download) {
-      Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
-    }
-    //~ is_to_download = undefined;
   } // End of renew_caches
 
   get_spices_to_spy() {
