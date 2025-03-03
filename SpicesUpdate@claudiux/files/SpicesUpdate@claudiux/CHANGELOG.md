@@ -1,3 +1,6 @@
+### 7.8.2~20250303
+  * Does not try to translate null messages from other spices. This also helps avoid black screens.
+
 ### 7.8.1~20250302
   * Forces the use of 'cjs' even if 'gjs' is installed.
   * Uses “try” for each “destroy” command.
