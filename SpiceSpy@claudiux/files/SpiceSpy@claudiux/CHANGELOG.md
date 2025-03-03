@@ -1,3 +1,7 @@
+### v5.2.3~20250303
+  * Does not try to translate null messages from other Spices. This also helps avoid black screens.
+  * Bugfix.
+
 ### v5.2.2~20250226
   * Bugfix.
 

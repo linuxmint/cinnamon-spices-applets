@@ -105,6 +105,7 @@ Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 
 // ++ Always needed if you want localisation/translation support
 function _(str, uuid=UUID) {
+  if (str == null) return "";
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);
