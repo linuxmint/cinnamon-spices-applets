@@ -216,16 +216,12 @@ class Bps extends Applet.Applet {
                         let d = r.split(":");
                         data[d[0]] = {"rx": parseInt(d[1]), "tx": parseInt(d[2]), "timestamp": Date.now()}
                         if (this.network_data[d[0]]) {
-                            //~ received += data[d[0]]["rx"] - this.network_data[d[0]]["rx"];
-                            //~ sent += data[d[0]]["tx"] - this.network_data[d[0]]["tx"];
                             diff_ts = (data[d[0]]["timestamp"] - this.network_data[d[0]]["timestamp"]);
-                            //~ global.log("diff_ts: " + diff_ts);
                             received += (data[d[0]]["rx"] - this.network_data[d[0]]["rx"]) * 1000 / diff_ts;
                             sent += (data[d[0]]["tx"] - this.network_data[d[0]]["tx"]) * 1000 / diff_ts;
                         }
                         this.network_data[d[0]] = data[d[0]];
                     }
-                    //~ global.log("data:\n" + JSON.stringify(data, null, "\t"));
                     this.gui_speed.set_received_text(this.convert_bytes(received));
                     this.gui_speed.set_sent_text(this.convert_bytes(sent));
                 }
