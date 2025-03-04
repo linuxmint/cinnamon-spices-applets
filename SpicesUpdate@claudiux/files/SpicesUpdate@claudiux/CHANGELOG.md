@@ -1,10 +1,13 @@
-### 7.8.3~20250303
+### v7.8.4~20250304
+  * Improved functioning.
+
+### v7.8.3~20250303
   * Minor bugfix.
 
-### 7.8.2~20250303
+### v7.8.2~20250303
   * Does not try to translate null messages from other spices. This also helps avoid black screens.
 
-### 7.8.1~20250302
+### v7.8.1~20250302
   * Forces the use of 'cjs' even if 'gjs' is installed.
   * Uses “try” for each “destroy” command.
   * Fixes #6933.

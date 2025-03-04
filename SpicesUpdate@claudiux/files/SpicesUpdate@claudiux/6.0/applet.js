@@ -299,8 +299,8 @@ class SpicesUpdate extends IconApplet {
                 //~ logDebug("currentTime = "+currentTime);
                 const difference = parseInt(currentTime - jsonModifTime);
                 //~ logDebug("difference = "+difference);
-                if (difference > 720) {
-                    // the cache is older than 12 minutes (720 seconds)
+                if (difference > 900) {
+                    // the cache is older than 15 minutes (900 seconds)
                     is_to_download = true;
                     break
                 }
@@ -888,8 +888,10 @@ class SpicesUpdate extends IconApplet {
     } // End of _set_main_label
 
     on_frequency_changed() {
-        source_remove(this.loopId);
-        this.loopId = null;
+        if (this.loopId != null) {
+            source_remove(this.loopId);
+            this.loopId = null;
+        }
 
         //~ let coeff = QUICK() ? 720 : 3600;
         this.refreshInterval = 3600 * this.general_frequency;
@@ -1549,7 +1551,7 @@ class SpicesUpdate extends IconApplet {
             } else {
                 clearInterval(id);
             }
-        }, (type && this.new_Spices[type] && (this.new_Spices[type].length > 0)) ? this.new_Spices[type].length * 12000 : 12000);
+        }, (type && this.new_Spices[type] && (this.new_Spices[type].length > 0)) ? this.new_Spices[type].length * 15000 : 15000);
     } // End of _on_forget_new_spices_pressed
 
     download_image(type, uuid) {
@@ -1725,13 +1727,15 @@ class SpicesUpdate extends IconApplet {
     } // End of monitor_png_directory
 
     _on_pngDir_changed(type) {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = null;
-        this.timeoutId = setTimeout(() => {
+        if (this.timeoutId != null) {
+            clearTimeout(this.timeoutId);
+            this.timeoutId = null;
+        }
+        this.timeoutId = setTimeout( () => {
             clearTimeout(this.timeoutId);
             this._on_refresh_pressed();
             this.timeoutId = null;
-        }, 12000);
+        }, 15000);
     } // End of _on_pngDir_changed
 
     monitor_metadatajson(type, uuid) {
@@ -1772,7 +1776,7 @@ class SpicesUpdate extends IconApplet {
                 clearTimeout(this.timeoutId);
                 this._on_refresh_pressed();
                 this.timeoutId = null;
-            }, 12000);
+            }, 15000);
         }
     } // End of _on_metadatajson_changed
 
@@ -1864,7 +1868,7 @@ class SpicesUpdate extends IconApplet {
         this.menu.addMenuItem(menuitemHead1);
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
-        if (this.dependenciesMet) {
+        if (this.dependenciesMet && !this.isLooping) {
             // Refresh button
             let refreshButton = new PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", IconType.SYMBOLIC);
             refreshButton.connect("activate", (event) => this._on_refresh_pressed());
@@ -2169,7 +2173,7 @@ class SpicesUpdate extends IconApplet {
                     if (this.old_watch_message[type].length > 0) this.tooltip_contents += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
                 }
             }
-            if (!tooltip_was_modified) {
+            if (!tooltip_was_modified && !this.isLooping) {
                 this.tooltip_contents += "\n%s".format(_("Middle-Click to Refresh"));
             }
             this.numberLabel.text = ""+(this.nb_to_update + this.nb_to_watch);
@@ -2180,7 +2184,8 @@ class SpicesUpdate extends IconApplet {
             this.isProcessing = false;
             this.set_icon_color();
         } else {
-            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n%s".format(_("Middle-Click to Refresh"));
+            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>"
+            if (!this.isLooping) this.tooltip_contents += "\n%s".format(_("Middle-Click to Refresh"));
             this.numberLabel.text = "";
             this.isProcessing = false;
             this.set_icon_color();
@@ -2232,9 +2237,10 @@ class SpicesUpdate extends IconApplet {
             //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
-            if (this.loopId != null)
+            if (this.loopId != null) {
                 source_remove(this.loopId);
-            this.loopId = null;
+                this.loopId = null;
+            }
 
             this.loopId = timeout_add_seconds(10, () => this.updateLoop());
             //logDebug("updateLoop: Next in 10 sec.");
@@ -2244,8 +2250,10 @@ class SpicesUpdate extends IconApplet {
         }
         // logDebug("updateLoop: ONE MORE LOOP!");
         this.isLooping = true;
-        source_remove(this.loopId);
-        this.loopId = null;
+        if (this.loopId != null) {
+            source_remove(this.loopId);
+            this.loopId = null;
+        }
 
         this.check_dependencies();
 
@@ -2371,7 +2379,7 @@ class SpicesUpdate extends IconApplet {
             this.do_rotation = false;
             if (this.new_loop_requested === true) {
                 this.new_loop_requested = false;
-                this.refreshInterval = 12; // 12 seconds
+                this.refreshInterval = 15; // 15 seconds
             }
             //// One more loop !
             //this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
@@ -2424,7 +2432,8 @@ class SpicesUpdate extends IconApplet {
     _onButtonPressEvent(actor, event) {
         if (event.get_button() == 2) {
             if ((this.nb_to_update + this.nb_to_watch) === 0) {
-                this._on_refresh_pressed();
+                if (!this.isLooping)
+                    this._on_refresh_pressed();
             } else {
                 this.open_each_download_tab();
             }
@@ -2450,12 +2459,14 @@ class SpicesUpdate extends IconApplet {
         this.disable_system_auto_update();
         this.isLoopingForRefreshCache = false;
         let stoId = setTimeout( () => {
-            if (stoId)
+            if (stoId) {
                 clearTimeout(stoId);
+                stoId = null;
+            }
             if (this.applet_running)
                 this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache());
             this._loop_refresh_cache();
-            stoId = null;
+
         }, 60000); // Wait 60 seconds for mintupdate to run correctly.
 
         // Events:
@@ -2491,7 +2502,7 @@ class SpicesUpdate extends IconApplet {
     }
 
     on_applet_removed_from_panel() {
-        this.on_applet_reloaded();
+        //~ this.on_applet_reloaded();
 
         for (let type of TYPES) {
             this.monitorsPngId[type] = 0;
@@ -2499,13 +2510,13 @@ class SpicesUpdate extends IconApplet {
             //~ this.oldCache[type] = "{}";
         }
 
-        if (this.settings) {
-            try {
-                this.settings.finalize();
-            } catch(e) {
-                logError(e)
-            }
-        }
+        //~ if (this.settings) {
+            //~ try {
+                //~ this.settings.finalize();
+            //~ } catch(e) {
+                //~ logError(e)
+            //~ }
+        //~ }
 
         if (Tweener.getTweenCount(this.actor) > 0)
             Tweener.removeTweens(this.actor);
