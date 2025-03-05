@@ -1343,6 +1343,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_user_settings() {
+    this.settings.bind("maximize-vertically", "maximize_vertically");
     this.settings.bind("image-resolution", "res", () => { this.reload_songArt() });
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
@@ -6130,7 +6131,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     spawnCommandLineAsync('xdg-open "%s"'.format(MANUAL_HTML))
   }
 
-  configureApplet(tab=0, maximize_vertically=true) {
+  configureApplet(tab=0) {
+    let maximize_vertically = this.maximize_vertically;
     this.menu.close(false);
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
