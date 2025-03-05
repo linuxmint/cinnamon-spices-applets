@@ -54,6 +54,7 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehaviorSettingsWindow",
         "sectionBehaviorStartUp",
         "sectionBehaviorVolumeStep",
         "sectionBehaviorOSD",
@@ -202,6 +203,13 @@
         "search-remove-from-list-button",
         "search-select-all",
         "search-unselect-all"
+      ]
+    },
+    "sectionBehaviorSettingsWindow": {
+      "type": "section",
+      "title": "Settings Window",
+      "keys": [
+        "maximize-vertically"
       ]
     },
     "sectionBehaviorStartUp": {
@@ -857,6 +865,12 @@
     "type": "button",
     "description": "Unselect all items",
     "callback": "on_button_search_unselect_all_clicked"
+  },
+  "maximize-vertically": {
+    "type": "switch",
+    "default": true,
+    "description": "Vertical maximization",
+    "tooltip": "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
   },
   "switch-on-last-station-at-start-up": {
     "type": "switch",
