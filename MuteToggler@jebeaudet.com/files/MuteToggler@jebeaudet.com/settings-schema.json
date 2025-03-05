@@ -3,11 +3,18 @@
     "type": "section",
     "description": "Soundcard settings",
     "keys": [
+      "use_pulseaudio",
       "soundcard"
     ]
   },
+  "use_pulseaudio": {
+    "type": "switch",
+    "description": "Use PulseAudio (default: ALSA)",
+    "default": false
+  },
   "soundcard": {
     "type": "entry",
+    "dependency": "!use_pulseaudio",
     "description": "Soundcard search string in /proc/asound/cards (empty: deactivate)",
     "default": ""
   },
