@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-05 23:14+0100\n"
-"PO-Revision-Date: 2025-02-17 18:39-0300\n"
+"PO-Revision-Date: 2025-03-05 23:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -790,9 +790,8 @@ msgid "Search results"
 msgstr "Resultados de la búsqueda"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "Configuración de %s"
+msgstr "Ventana de configuración"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -1090,13 +1089,15 @@ msgstr "Página:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Maximización vertical"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Si esta opción está activada, la ventana de configuración se maximizará "
+"verticalmente la próxima vez que se abra."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
