@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: NightLightSwitch@claudiux 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-23 21:14+0100\n"
+"POT-Creation-Date: 2025-03-06 19:22-0100\n"
 "PO-Revision-Date: 2025-02-21 18:55+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,9 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 6.4/applet.js:197
+#. 6.4/applet.js:207
 msgid "Configure..."
 msgstr "Configureren..."
+
+#. 6.4/applet.js:235
+msgid "Night Light Enabled - Click to Disable"
+msgstr ""
+
+#. 6.4/applet.js:238
+msgid "Night Light Disabled - Click to Enable"
+msgstr ""
 
 #. metadata.json->description
 msgid "A simple Cinnamon applet to activate/deactivate Night Light mode."
