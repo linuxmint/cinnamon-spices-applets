@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-06 20:39-0500\n"
-"PO-Revision-Date: 2024-10-02 21:39+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-03-07 16:35+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -241,22 +241,16 @@ msgid "Close others"
 msgstr "Fermer les autres"
 
 #. 4.0/applet.js:3754 6.0/applet.js:3754 6.4/applet.js:3723
-#, fuzzy
 msgid "Close other windows for application"
-msgstr ""
-"Afficher les miniatures de toutes les fenêtre d'un groupement pour une "
-"application"
+msgstr "Fermer les autres fenêtres de l'application"
 
 #. 4.0/applet.js:3775 6.0/applet.js:3775 6.4/applet.js:3744
 msgid "Close all"
 msgstr "Tout fermer"
 
 #. 4.0/applet.js:3777 6.0/applet.js:3777 6.4/applet.js:3746
-#, fuzzy
 msgid "Close all windows for application"
-msgstr ""
-"Afficher les miniatures de toutes les fenêtre d'un groupement pour une "
-"application"
+msgstr "Fermer toutes les fenêtres de l'application"
 
 #. 4.0/applet.js:3793 6.0/applet.js:3793 6.4/applet.js:3762
 msgid "Close"
@@ -2138,16 +2132,14 @@ msgstr "Modifier la juxtaposition des fenêtres"
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle all window-list button windows"
-msgstr "Cycle des fenêtres d'applications"
+msgstr "Cyclage de toutes les listes de boutons de fenêtres"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-#, fuzzy
 msgid "Cycle grouped/pooled button windows"
-msgstr "Cycle des fenêtres d'applications"
+msgstr "Cyclage des boutons de fenêtres regroupées"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->description
 #. 6.0->settings-schema.json->mouse-action-scroll->description

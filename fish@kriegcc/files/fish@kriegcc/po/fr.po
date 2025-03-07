@@ -10,7 +10,7 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2025-01-20 18:32+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgstr "Préférences"
 
 #. settings-schema.json->pageAdvancedSettings->title
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Paramètres avancés"
 
 #. settings-schema.json->pageHelp->title
 msgid "Help"
@@ -167,23 +167,21 @@ msgid "Animation"
 msgstr "Animation"
 
 #. settings-schema.json->sectionAdvancedAnimationSettings->title
-#, fuzzy
 msgid "Animation Settings"
-msgstr "Animation"
+msgstr "Paramètres de l'animation"
 
 #. settings-schema.json->sectionAdvancedAnimationSettingsMargin->title
-#, fuzzy
 msgid "Animation Margin"
-msgstr "Animation"
+msgstr "Marge autour de l'animation"
 
 #. settings-
 #. schema.json->sectionAdvancedAnimationSettingsCustomDimension->title
 msgid "Animation Custom Dimension"
-msgstr ""
+msgstr "Dimension personnalisée de l'animation"
 
 #. settings-schema.json->sectionDeveloperOptions->title
 msgid "Developer Options"
-msgstr ""
+msgstr "Options pour développeur"
 
 #. settings-schema.json->sectionInstruction->title
 msgid "Manual"
@@ -263,18 +261,16 @@ msgstr ""
 "l'animation."
 
 #. settings-schema.json->keyFlipSidewaysOnVerticalPanel->description
-#, fuzzy
 msgid "Flip sideways on vertical panels"
 msgstr "Pivoter sur les panneaux verticaux"
 
 #. settings-schema.json->keyFlipSidewaysOnVerticalPanel->tooltip
-#, fuzzy
 msgid ""
 "Select this option to rotate the applet image sideways when you add the "
 "applet to a vertical panel."
 msgstr ""
-"Sélectionnez cette option pour faire pivoter l'image de l'applet lorsque "
-"vous ajoutez l'applet à un panneau vertical."
+"Sélectionnez cette option pour faire pivoter l'image de l'applet sur le côté "
+"lorsque vous ajoutez l'applet à un panneau vertical."
 
 #. settings-schema.json->keyImagePath->tooltip
 msgid ""
@@ -286,138 +282,153 @@ msgstr ""
 
 #. settings-schema.json->keyAnimationScalingMode->description
 msgid "Scaling Mode"
-msgstr ""
+msgstr "Mode de mise à l'échelle"
 
 #. settings-schema.json->keyAnimationScalingMode->options
 msgid "Auto-fit"
-msgstr ""
+msgstr "Ajustement auto"
 
 #. settings-schema.json->keyAnimationScalingMode->options
 msgid "Preserve original size"
-msgstr ""
+msgstr "Conserver la taille d'origine"
 
 #. settings-schema.json->keyAnimationScalingMode->options
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 #. settings-schema.json->keyAnimationScalingMode->tooltip
 msgid "Select how the animation image in the panel should be scaled."
 msgstr ""
+"Sélectionnez la façon dont l'image de l'animation dans le panneau doit être "
+"mise à l'échelle."
 
 #. settings-schema.json->keyAnimationMarginHint->description
 msgid ""
 "Margin options apply only when the 'auto-fit' option is enabled. For other "
 "settings, margins appear if the animation is smaller than the panel."
 msgstr ""
+"Les options de marge ne s'appliquent que lorsque l'option « ajustement auto "
+"» est activée. Pour les autres paramètres, les marges apparaissent si "
+"l'animation est plus petite que le panneau."
 
 #. settings-schema.json->keyAnimationAutoMargin->description
 msgid "Auto-margin"
-msgstr ""
+msgstr "Marge auto"
 
 #. settings-schema.json->keyAnimationAutoMargin->tooltip
 msgid "Check this to use the default margin from theme."
-msgstr ""
+msgstr "Cochez cette case pour utiliser la marge par défaut du thème."
 
 #. settings-schema.json->keyAnimationMargin->units
 #. settings-schema.json->keyAnimationHeight->units
 #. settings-schema.json->keyAnimationWidth->units
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. settings-schema.json->keyAnimationMargin->description
 msgid "Margin around the animation frame"
-msgstr ""
+msgstr "Marge autour du cadre d'animation"
 
 #. settings-schema.json->keyAnimationMargin->tooltip
-#, fuzzy
 msgid ""
 "Use this spin box to specify the margin around the animation frame shown in "
 "the panel."
-msgstr "Utilisez ceci pour spécifier le nombre d'images dans l'animation."
+msgstr ""
+"Utilisez ceci pour spécifier la marge autour du cadre d'animation affiché "
+"dans le panneau."
 
 #. settings-schema.json->keyAnimationHeight->description
 msgid "Height"
-msgstr ""
+msgstr "Hauteur"
 
 #. settings-schema.json->keyAnimationHeight->tooltip
-#, fuzzy
 msgid "Use this spin box to specify a custom height for the animation frame."
-msgstr "Utilisez ceci pour spécifier le nombre d'images dans l'animation."
+msgstr ""
+"Utilisez ceci pour spécifier une hauteur personnalisée pour le cadre "
+"d'animation."
 
 #. settings-schema.json->keyAnimationWidth->description
 msgid "Width"
-msgstr ""
+msgstr "Largeur"
 
 #. settings-schema.json->keyAnimationWidth->tooltip
-#, fuzzy
 msgid "Use this spin box to specify a custom width for the animation frame."
-msgstr "Utilisez ceci pour spécifier le nombre d'images dans l'animation."
+msgstr ""
+"Utilisez ceci pour spécifier une largeur personnalisée pour le cadre "
+"d'animation."
 
 #. settings-schema.json->keyAnimationPreserveAspectRatio->description
 msgid "Preserve aspect ratio"
-msgstr ""
+msgstr "Conserver le rapport hauteur/largeur"
 
 #. settings-schema.json->keyAnimationPreserveAspectRatio->tooltip
 msgid ""
 "Enable this option to maintain the original aspect ratio of the animation. "
 "If enabled, the specified width will be ignored."
 msgstr ""
+"Activez cette option pour conserver le rapport hauteur/largeur d'origine de "
+"l'animation. Si cette option est activée, la largeur spécifiée sera ignorée."
 
 #. settings-schema.json->keyAnimationRotationHint->description
 msgid ""
 "If a rotation is selected, the image may also be flipped sideways depending "
 "on the 'Flip sideways on vertical panels' option."
 msgstr ""
+"Si une rotation est sélectionnée, l'image peut également être retournée "
+"latéralement en fonction de l'option « Retourner latéralement sur les "
+"panneaux verticaux »."
 
 #. settings-schema.json->keyAnimationRotation->description
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "0°"
-msgstr ""
+msgstr "0°"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "90°"
-msgstr ""
+msgstr "90°"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "180°"
-msgstr ""
+msgstr "180°"
 
 #. settings-schema.json->keyAnimationRotation->options
 msgid "270°"
-msgstr ""
+msgstr "270°"
 
 #. settings-schema.json->keyLogLevel->description
 msgid "Log Level"
-msgstr ""
+msgstr "Niveau de log"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Debug"
-msgstr ""
+msgstr "Débogage"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Warning"
-msgstr ""
+msgstr "Attention"
 
 #. settings-schema.json->keyLogLevel->options
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #. settings-schema.json->keyForceFoolsDay->description
 msgid "Force Fool's Day"
-msgstr ""
+msgstr "Forcer le Poisson d'Avril"
 
 #. settings-schema.json->keyForceFoolsDay->tooltip
 msgid ""
 "Enforces Fool's Day mode for debugging purposes. Simulates Fool's Day (April "
 "1st) without modifying the system date."
 msgstr ""
+"Renforce le mode « Fool's Day » à des fins de débogage. Simule le jour du "
+"poisson (1er avril) sans modifier la date du système."
 
 #. settings-schema.json->keyInstructionsText->description
 msgid ""
@@ -486,7 +497,7 @@ msgstr "Ouvre la page de l'applet sur le site web des Cinnamon Spices."
 
 #. settings-schema.json->keyVersion->description
 msgid "v0.2.0"
-msgstr ""
+msgstr "v0.2.0"
 
 #. settings-schema.json->keyLicenseText->description
 msgid "GPL-3.0-or-later"
