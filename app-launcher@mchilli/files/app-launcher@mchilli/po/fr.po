@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-25 17:53+0100\n"
-"PO-Revision-Date: 2024-09-05 17:19+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-03-07 16:45+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:117
 msgid "All workspaces"
-msgstr ""
+msgstr "Tout les espaces de travail"
 
 #. applet.js:145
 msgid "Edit Applications"
@@ -202,7 +202,7 @@ msgstr "%s sera le nom de votre application"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Activer les raccourcis clavier"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -210,23 +210,25 @@ msgstr "Afficher le menu"
 
 #. settings-schema.json->hotkey-bindings->tooltip
 msgid "Set keybinding(s) to show the menu"
-msgstr "Définir le(s) raccourcis-clavier pour ouvrir le menu de cette applet."
+msgstr "Définir le(s) raccourcis-clavier pour ouvrir le menu de cette applet"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Menu à l'endroit où se trouve la souris"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr ""
+"Afficher le menu à côté du curseur lorsqu'il est déclenché par un raccourci "
+"clavier"
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
-msgstr ""
+msgstr "Lier à l'espace de travail"
 
 #. settings-schema.json->bind-to-workspace->tooltip
 msgid "Show the applet only on the selected workspace"
-msgstr ""
+msgstr "Afficher l'applet uniquement sur l'espace de travail sélectionné"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

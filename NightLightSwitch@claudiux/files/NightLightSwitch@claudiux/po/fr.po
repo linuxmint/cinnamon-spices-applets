@@ -24,11 +24,11 @@ msgstr "Configurer..."
 
 #. 6.4/applet.js:235
 msgid "Night Light Enabled - Click to Disable"
-msgstr ""
+msgstr "Mode Nuit activé - Cliquer pour le désactiver"
 
 #. 6.4/applet.js:238
 msgid "Night Light Disabled - Click to Enable"
-msgstr ""
+msgstr "Mode Nuit désactivé - Cliquer pour l'activer"
 
 #. metadata.json->description
 msgid "A simple Cinnamon applet to activate/deactivate Night Light mode."
@@ -36,4 +36,4 @@ msgstr "Une simple applet Cinnamon pour activer/désactiver le mode Nuit."
 
 #. metadata.json->name
 msgid "Night Light Switch"
-msgstr "Interrupteur du mode Nuit"
+msgstr "Interrupteur du Mode Nuit"
