@@ -20,8 +20,7 @@ const UUID = "NightLightSwitch@claudiux";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(text) {
-  let loc = Gettext.dgettext(UUID, text);
-  return loc != text ? loc : window._(text);
+  return Gettext.dgettext(UUID, text);
 }
 
 
