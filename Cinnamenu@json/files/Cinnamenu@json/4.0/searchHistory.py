@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
             conn = sqlite3.Connection(temp_filename)
             cur = conn.cursor()
-            
+
             words = []
             for i in sys.argv[2:]:
                 words += i.split()

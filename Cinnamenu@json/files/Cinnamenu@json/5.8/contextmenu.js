@@ -2,8 +2,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
-const XApp = imports.gi.XApp;
-const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const {PopupBaseMenuItem, PopupMenu, PopupSeparatorMenuItem} = imports.ui.popupMenu;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
@@ -31,8 +29,8 @@ class ContextMenuItem extends PopupBaseMenuItem {
         } else if (insensitive) {//greyed out item
             this.actor.add_style_pseudo_class('insensitive');
         }
-        this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
-        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter.bind(this));
+        this.signals.connect(this.actor, 'leave-event', this.handleLeave.bind(this));
     }
 
     handleEnter(actor, e) {
@@ -78,7 +76,7 @@ class ContextMenu {
         this.isOpen = false;
     }
 
-    openApp(app, e, buttonActor) {
+    openAppContextMenu(app, e, buttonActor) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
         //e is undefined and buttonActor position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
@@ -102,9 +100,12 @@ class ContextMenu {
                 const newEmoji = MODED[i].replace(/\u{1F3FB}/ug, char); //replace light skin tone character in
                                                                        // MODED[i] with skin tone option.
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
-                                        () => { const clipboard = St.Clipboard.get_default();
-                                                clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
-                                                this.appThis.menu.close(); } );
+                    () => {
+                        const clipboard = St.Clipboard.get_default();
+                        clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
+                        this.appThis.menu.close();
+                    }
+                );
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
@@ -119,7 +120,7 @@ class ContextMenu {
         this._showMenu(e, buttonActor);
     }
 
-    openCategory(categoryId, e, buttonActor) {
+    openCategoryContextMenu(categoryId, e, buttonActor) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
         //e is undefined and buttonActor position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
@@ -132,28 +133,32 @@ class ContextMenu {
         };
         if (categoryId.startsWith('/')) {
             addMenuItem(new ContextMenuItem(this.appThis, _('Remove category'), 'user-trash',
-                        () => {
-                            if (categoryId === GLib.get_home_dir()) {
-                                this.appThis.settings.showHomeFolder = false;
-                                this.appThis._onShowHomeFolderChange();
-                            } else {
-                                this.appThis.removeFolderCategory(categoryId);
-                            }
-                            this.appThis.display.categoriesView.update();
-                            this.close();
-                        }));
+                () => {
+                    if (categoryId === GLib.get_home_dir()) {
+                        this.appThis.settings.showHomeFolder = false;
+                        this.appThis._onShowHomeFolderChange();
+                    } else {
+                        this.appThis.removeFolderCategory(categoryId);
+                    }
+                    this.appThis.display.categoriesView.update();
+                    this.close();
+                }
+            ));
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
         }
         addMenuItem(new ContextMenuItem(this.appThis, _('Reset category order'), 'edit-undo-symbolic',
-                            () => { this.appThis.settings.categories = [];
-                                    this.appThis.display.categoriesView.update();
-                                    this.close(); }));
+            () => {
+                this.appThis.settings.categories = [];
+                this.appThis.display.categoriesView.update();
+                this.close();
+            }
+        ));
         
         this._showMenu(e, buttonActor);
     }
 
-    openAppsView(event) {
-        //e is used to position context menu at mouse coords.
+    openAppsViewContextMenu(event) {
+        //event is used to position context menu at mouse coords.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
@@ -204,9 +209,6 @@ class ContextMenu {
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
 
-        //const contextMenuWidth = this.menu.actor.width;
-        //const contextMenuHeight = this.menu.actor.height;
-
         const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
         let mx, my;
         if (e) {
@@ -244,16 +246,19 @@ class ContextMenu {
         //Run with NVIDIA GPU
         if (Main.gpu_offload_supported) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Run with NVIDIA GPU'), 'cpu',
-                            () => { try {
-                                        app.launch_offloaded(0, [], -1);
-                                    } catch (e) {
-                                        logError(e, 'Could not launch app with dedicated gpu: ');
-                                    }
-                                    this.appThis.menu.close(); } ));
+                () => {
+                    try {
+                        app.launch_offloaded(0, [], -1);
+                    } catch (e) {
+                        logError(e, 'Could not launch app with dedicated gpu: ');
+                    }
+                    this.appThis.menu.close();
+                }
+            ));
         }
 
         //Add to panel
-        addMenuItem( new ContextMenuItem(this.appThis, _('Add to panel'), 'list-add',
+        addMenuItem(new ContextMenuItem(this.appThis, _('Add to panel'), 'list-add',
             () => {
                 if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
                     const new_applet_id = global.settings.get_int('next-applet-id');
@@ -267,40 +272,54 @@ class ContextMenu {
                 if (launcherApplet) {
                     launcherApplet.acceptNewLauncher(app.id);
                 }
-                this.close(); } ));
+                this.close();
+            }
+        ));
 
         //Add to desktop
         const userDesktopPath = getUserDesktopDir();
         if (userDesktopPath) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
-                () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename());
-                        const destFile = Gio.file_new_for_path(userDesktopPath + '/' + file.get_basename());
-                        try {
-                            file.copy( destFile, 0, null, null);
-                            changeModeGFile(destFile, 755);
-                        } catch(e) {
-                            global.logError('Cinnamenu: Error creating desktop file', e);
-                        }
-                        this.close(); } ));
+                () => {
+                    const file = Gio.file_new_for_path(app.get_app_info().get_filename());
+                    const destFile = Gio.file_new_for_path(userDesktopPath + '/' + file.get_basename());
+                    try {
+                        file.copy( destFile, 0, null, null);
+                        changeModeGFile(destFile, 755);
+                    } catch(e) {
+                        global.logError('Cinnamenu: Error creating desktop file', e);
+                    }
+                    this.close();
+                }
+            ));
         }
 
         //add/remove favorite
         if (this.appThis.appFavorites.isFavorite(app.id)) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
-                                            () => { this.appThis.appFavorites.removeFavorite(app.id);
-                                                    this.close(); } ));
+                () => {
+                    this.appThis.appFavorites.removeFavorite(app.id);
+                    this.close();
+                }
+            ));
         } else {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                                        () => { this.appThis.appFavorites.addFavorite(app.id);
-                                                this.close(); } ));
+                () => {
+                    this.appThis.appFavorites.addFavorite(app.id);
+                    this.close();
+                }
+            ));
         }
 
-        //uninstall Mint only
+        //uninstall (Mint only)
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
-                                () => { spawnCommandLine("/usr/bin/cinnamon-remove-application '" +
-                                            app.get_app_info().get_filename() + "'");
-                                        this.appThis.menu.close(); } ));
+                () => {
+                    spawnCommandLine("/usr/bin/cinnamon-remove-application '" +
+                                                app.get_app_info().get_filename() + "'");
+                    this.appThis.menu.close();
+                }
+            ));
         }
 
         //show app info 
@@ -329,51 +348,51 @@ class ContextMenu {
 
         //Open with...
         if (fileExists) {
-            addMenuItem( new ContextMenuItem(this.appThis, _('Open with'), null, null ));
+            addMenuItem( new ContextMenuItem(this.appThis, _('Open with'), null, null));
             const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
             if (defaultInfo) {
-                addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
-                                                    () => { defaultInfo.launch([file], null);
-                                                            this.appThis.menu.close(); } ));
+                addMenuItem( new ContextMenuItem(this.appThis, defaultInfo.get_display_name(), null,
+                    () => {
+                        defaultInfo.launch([file], null);
+                        this.appThis.menu.close();
+                    }
+                ));
             }
             Gio.AppInfo.get_all_for_type(app.mimeType).forEach(info => {
                 if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
                     return;
                 }
-                addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
-                                                    () => { info.launch([file], null);
-                                                            this.appThis.menu.close(); } ));
+                addMenuItem( new ContextMenuItem(this.appThis, info.get_display_name(), null,
+                    () => {
+                        info.launch([file], null);
+                        this.appThis.menu.close();
+                    }
+                ));
             });
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
-                                                () => { spawnCommandLine('nemo-open-with ' + app.uri);
-                                                        this.appThis.menu.close(); } ));
+            addMenuItem( new ContextMenuItem(this.appThis, _('Other application...'), null,
+                () => {
+                    spawnCommandLine('nemo-open-with ' + app.uri);
+                    this.appThis.menu.close();
+                }
+            ));
         }
 
         //add/remove favorite
-        const favs = XApp.Favorites.get_default();
         this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-        const updateAfterFavFileChange = () => {
-            this.appThis.display.sidebar.populate();
-            this.appThis.display.categoriesView.update();//in case fav files category needs adding/removing
-            this.appThis.display.updateMenuSize();
-            if (this.appThis.currentCategory === 'favorite_files') {
-                this.appThis.setActiveCategory(this.appThis.currentCategory);
-            }
-        };
-        if (favs.find_by_uri(app.uri)) { //favorite
+        if (this.appThis.xappGetIsFavoriteFile(app.uri)) { //favorite
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
-                                                    () => { favs.remove(app.uri);
-                                                            updateAfterFavFileChange();
-                                                            this.close(); } ));
+                () => {
+                    this.appThis.xappRemoveFavoriteFile(app.uri);
+                    this.close();
+                }
+            ));
         } else {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                    () => {
-                        favs.add(app.uri);
-                        //favs list doesn't update synchronously after adding fav so add small
-                        //delay before updating menu
-                        Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
-                        this.close();
-                    }));
+                () => {
+                    this.appThis.xappAddFavoriteFile(app.uri);
+                    this.close();
+                }
+            ));
         }
 
         //Add folder as category
@@ -389,7 +408,8 @@ class ContextMenu {
                         this.appThis.addFolderCategory(path);
                         this.appThis.display.categoriesView.update();
                         this.close();
-                    }));
+                    }
+                ));
             }
         }
 
@@ -398,11 +418,12 @@ class ContextMenu {
         if (app.isRecentFile || app.isFavoriteFile || app.isFolderviewFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem(new ContextMenuItem(this.appThis, _('Open containing folder'), 'go-jump',
-                    () => {
-                        const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
-                        fileBrowser.launch([folder], null);
-                        this.appThis.menu.close();
-                    }));
+                () => {
+                    const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
+                    fileBrowser.launch([folder], null);
+                    this.appThis.menu.close();
+                }
+            ));
         }
 
         //Move to trash
@@ -412,20 +433,21 @@ class ContextMenu {
             const fileInfo = file.query_info('access::can-trash', Gio.FileQueryInfoFlags.NONE, null);
             const canTrash = fileInfo.get_attribute_boolean('access::can-trash');
             if (canTrash) {
-                addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
-                            () => {
-                                const file = Gio.File.new_for_uri(app.uri);
-                                try {
-                                    file.trash(null);
-                                } catch (e) {
-                                    Main.notify(_('Error while moving file to trash:'), e.message);
-                                }
-                                this.appThis.setActiveCategory(this.appThis.currentCategory);
-                                this.close();
-                            }));
+                addMenuItem(new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
+                    () => {
+                        const file = Gio.File.new_for_uri(app.uri);
+                        try {
+                            file.trash(null);
+                        } catch (e) {
+                            Main.notify(_('Error while moving file to trash:'), e.message);
+                        }
+                        this.appThis.setActiveCategory(this.appThis.currentCategory);
+                        this.close();
+                    }
+                ));
             } else {//show insensitive item
                 addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
-                                                                            null, true /*insensitive*/));
+                                                                        null, true /*insensitive*/));
             }
         }
         return true; //success.

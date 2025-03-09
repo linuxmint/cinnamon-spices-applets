@@ -28,8 +28,11 @@ class CategoryButton {
         //selected category (this.appThis.currentCategory)
         this.has_focus = false;
         this.id = category_id;
-        this.actor = new St.BoxLayout({ style_class: 'menu-category-button', reactive: true,
-                                                                accessible_role: Atk.Role.MENU_ITEM});
+        this.actor = new St.BoxLayout({
+            style_class: 'menu-category-button',
+            reactive: true,
+            accessible_role: Atk.Role.MENU_ITEM
+        });
 
         //----icon
         if (this.id.startsWith('emoji:')) {
@@ -37,11 +40,17 @@ class CategoryButton {
                                     (Math.round(this.appThis.settings.categoryIconSize * 0.85)) + 'px;'});
             this.icon.get_clutter_text().set_text('🌷');
         } else if (icon_name) {
-            this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
-                                            icon_size: this.appThis.settings.categoryIconSize});
+            this.icon = new St.Icon({
+                icon_name: icon_name,
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: this.appThis.settings.categoryIconSize
+            });
         } else {
-            this.icon = new St.Icon({   gicon: gicon, icon_type: St.IconType.FULLCOLOR,
-                                        icon_size: this.appThis.settings.categoryIconSize});
+            this.icon = new St.Icon({
+                gicon: gicon,
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: this.appThis.settings.categoryIconSize
+            });
         }
         if (this.appThis.settings.categoryIconSize > 0) {
             this.actor.add(this.icon, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
@@ -49,7 +58,10 @@ class CategoryButton {
 
         //---label
         this.category_name = category_name ? category_name : '';//is this needed?
-        this.label = new St.Label({text: this.category_name, style_class: 'menu-category-button-label'});
+        this.label = new St.Label({
+            text: this.category_name,
+            style_class: 'menu-category-button-label'
+        });
         this.actor.add(this.label, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
 
         //---dnd
@@ -93,10 +105,9 @@ class CategoryButton {
         this.signals.connect(this.draggable, 'drag-end', () =>
                                 this.appThis.display.categoriesView.resetAllCategoriesOpacity());
 
-        this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
-        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleMouseLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) =>
-                                                        this._handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter.bind(this));
+        this.signals.connect(this.actor, 'leave-event', this.handleMouseLeave.bind(this));
+        this.signals.connect(this.actor, 'button-release-event', this._handleButtonRelease.bind(this));
     }
 
     setHighlight(on) {
@@ -148,10 +159,13 @@ class CategoryButton {
         if (event && !this.appThis.settings.categoryClick && this.appThis.display.badAngle) {
             clearButtonTimeout();
             //badAngle now but check again in a short while
-            buttonTimeoutId = setTimeout(() => {
-                            this.appThis.display.updateMouseTracking();
-                            this.handleEnter(actor, event);
-                        },this.appThis.display.TRACKING_TIME);
+            buttonTimeoutId = setTimeout(
+                () => {
+                    this.appThis.display.updateMouseTracking();
+                    this.handleEnter(actor, event);
+                },
+                this.appThis.display.TRACKING_TIME
+            );
             return Clutter.EVENT_PROPAGATE;
         }
 
@@ -225,7 +239,7 @@ class CategoryButton {
     }
 
     openContextMenu(e) {
-        this.appThis.display.contextMenu.openCategory(this.id, e, this.actor);
+        this.appThis.display.contextMenu.openCategoryContextMenu(this.id, e, this.actor);
     }
 
     disable() {
@@ -249,7 +263,7 @@ class CategoryButton {
     }
 }
 
-/* Creates the categories box and array of CategoryButtons (buttons[]). Updates the categories and
+/* Creates the categories box and array of CategoryButtons (this.buttons[]). Updates the categories and
  * populates the categoriesBox. */
 class CategoriesView {
     constructor(appThis) {
@@ -286,35 +300,37 @@ class CategoriesView {
         newButtons.push(button);
 
         //Add other app categories
-        this.appThis.apps.getDirs().forEach(dir => {                
-            const dirId = dir.get_menu_id();
-            let button = this.buttons.find(button => button.id === dirId);
+        this.appThis.apps.getDirs().forEach(dir => { 
+            let button = this.buttons.find(button => button.id === dir.dirId);
             if (!button) {
-                button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
+                button = new CategoryButton(this.appThis, dir.dirId, dir.get_name(), null, dir.get_icon());
             }
             //highlight category if it contains a new app
-            button.setHighlight(this.appThis.apps.dirHasNewApp(dirId));
+            button.setHighlight(this.appThis.apps.dirHasNewApp(dir.dirId));
             newButtons.push(button);
         });
         
         //Add special categories
         const enableFavFiles = XApp.Favorites.get_default().get_favorites(null).length > 0;
-        [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
+        [
+            [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
             [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
             [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
             [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
             [this.appThis.settings.showEmojiCategory, 'emoji:', _('Emoji'), '']
         ].forEach(param => {
-                if (param[0]) {
-                    let button = this.buttons.find(button => button.id === param[1]);
-                    if (!button) {
-                        button = new CategoryButton(this.appThis, param[1], param[2], param[3], null);
-                    }
-                    newButtons.push(button);
-                }});
+            if (param[0]) {
+                let button = this.buttons.find(button => button.id === param[1]);
+                if (!button) {
+                    button = new CategoryButton(this.appThis, param[1], param[2], param[3], null);
+                }
+                newButtons.push(button);
+            }
+        });
 
         //Add folder categories
         const folderCategories = this.appThis.settings.folderCategories.slice();
+        let folderCategoriesChanged = false;
         folderCategories.forEach((folder, index) => {
             let button = this.buttons.find(button => button.id === folder);
             if (button) {
@@ -334,10 +350,11 @@ class CategoriesView {
                     log("Cinnamenu:Error creating folder category: " + folder + " ...skipping.");
                     //remove this error causing element from the array.
                     folderCategories.splice(index, 1);
+                    folderCategoriesChanged = true;
                 }
             }
         });
-        this.appThis.settings.folderCategories = folderCategories;
+        if (folderCategoriesChanged) this.appThis.settings.folderCategories = folderCategories;
 
         //set user category order to default if none already
         if (this.appThis.settings.categories.length === 0) {
@@ -361,7 +378,9 @@ class CategoriesView {
         });
 
         //replace user button order to remove unused ids.
-        this.appThis.settings.categories = this.buttons.map(button => button.id);
+        if (this.appThis.settings.categories.length > this.buttons.length) {
+            this.appThis.settings.categories = this.buttons.map(button => button.id);
+        }
 
         //populate categoriesBox with buttons
         this.categoriesBox.remove_all_children();
@@ -370,12 +389,13 @@ class CategoriesView {
 
     setSelectedCategoryStyle(categoryId) {
         this.buttons.forEach(categoryButton => {
-                    if (categoryButton.id === categoryId ||
-                                    categoryButton.id === 'emoji:' && categoryId.startsWith('emoji:')) {
-                        categoryButton.setButtonStyleSelected();
-                    } else {
-                        categoryButton.setButtonStyleNormal();
-                    } });
+            if (categoryButton.id === categoryId ||
+                        categoryButton.id === 'emoji:' && categoryId.startsWith('emoji:')) {
+                categoryButton.setButtonStyleSelected();
+            } else {
+                categoryButton.setButtonStyleNormal();
+            }
+        });
     }
 
     setCategoryFocus(categoryId) {

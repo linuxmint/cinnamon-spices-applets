@@ -8,12 +8,14 @@ const Main = imports.ui.main;
 const {SignalManager} = imports.misc.signalManager;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const { _,
-        wordWrap,
-        getThumbnail_gicon,
-        showTooltip,
-        hideTooltipIfVisible,
-        scrollToButton} = require('./utils');
+const {
+    _,
+    wordWrap,
+    getThumbnail_gicon,
+    showTooltip,
+    hideTooltipIfVisible,
+    scrollToButton
+} = require('./utils');
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
@@ -26,9 +28,11 @@ class SidebarButton {
         this.name = name;
         this.description = description;
         this.callback = callback;
-        this.actor = new St.BoxLayout({ style_class: 'menu-favorites-button',
-                                        reactive: true,
-                                        accessible_role: Atk.Role.MENU_ITEM });
+        this.actor = new St.BoxLayout({
+            style_class: 'menu-favorites-button',
+            reactive: true,
+            accessible_role: Atk.Role.MENU_ITEM
+        });
 
         this.has_focus = false;
         if (icon) {
@@ -36,42 +40,58 @@ class SidebarButton {
             this.actor.add_actor(this.icon);
         }
 
-        if (this.app && this.app.isApplication) { //----------dnd--------------
-            this.actor._delegate = {
-                    handleDragOver: (source) => {
-                            if (source.isDraggableApp === true && source.id !== this.app.id) {
-                                this.actor.set_opacity(40);
-                                return DragMotionResult.MOVE_DROP;
-                            }
-                            return DragMotionResult.NO_DROP; },
-                    handleDragOut: () => { this.actor.set_opacity(255); },
-                    acceptDrop: (source) => {
-                            if (source.isDraggableApp === true && source.id !== this.app.id) {
-                                this.actor.set_opacity(255);
-                                this.appThis.addFavoriteAppToPos(source.id, this.app.id);
-                                return true;
-                            } else {
-                                this.actor.set_opacity(255);
-                                return DragMotionResult.NO_DROP;
-                            } },
-                    getDragActorSource: () => this.actor,
-                    _getDragActor: () => new Clutter.Clone({source: this.actor}),
-                    getDragActor: () => new Clutter.Clone({source: this.icon}),
-                    id: this.app.id,
-                    isDraggableApp: true
-            };
+        //----------dnd--------------
+        this.actor._delegate = { //make all sidebar items a drag target for apps and files
+            handleDragOver: (source) => {
+                if (source.isDraggableApp) {
+                    if (this.app && this.app.isApplication && source.id !== this.app.id) {
+                        this.actor.set_opacity(40);
+                    }
+                    return DragMotionResult.MOVE_DROP;
+                } else if (source.isDraggableFile) {
+                    return DragMotionResult.MOVE_DROP;
+                }
+                return DragMotionResult.NO_DROP;
+            },
+            handleDragOut: () => { 
+                if (this.app && this.app.isApplication) {
+                    this.actor.set_opacity(255);
+                }
+            },
+            acceptDrop: (source) => {
+                if (source.isDraggableApp) {
+                    if (this.app && this.app.isApplication && source.id !== this.app.id) {
+                        this.actor.set_opacity(255);
+                        this.appThis.addFavoriteAppToPos(source.id, this.app.id);
+                        return true;
+                    } else if (!(this.app && this.app.isApplication)) {
+                        this.appThis.appFavorites.addFavorite(source.id);
+                        return true;
+                    }
+                    return DragMotionResult.NO_DROP
+                } else if (source.isDraggableFile){
+                    this.appThis.xappAddFavoriteFile(source.uri);
+                    return true;
+                }
+            },
+        };
+
+        if (this.app && this.app.isApplication) { //make sidebar apps draggable
+            Object.assign(this.actor._delegate, {
+                getDragActorSource: () => this.actor,
+                _getDragActor: () => new Clutter.Clone({source: this.actor}),
+                getDragActor: () => new Clutter.Clone({source: this.icon}),
+                id: this.app.id,
+                isDraggableApp: true
+            });
 
             this.draggable = makeDraggable(this.actor);
             this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
-            //this.signals.connect(this.draggable, 'drag-cancelled',
-            //                                    (...args) => this._onDragCancelled(...args));
-            //this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
         }
 
-        this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
-        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event',
-                                                (...args) => this._handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter.bind(this));
+        this.signals.connect(this.actor, 'leave-event', this.handleLeave.bind(this));
+        this.signals.connect(this.actor, 'button-release-event', this._handleButtonRelease.bind(this));
     }
 
     _handleButtonRelease(actor, e) {
@@ -115,7 +135,7 @@ class SidebarButton {
 
     openContextMenu(e) {
         hideTooltipIfVisible();
-        this.appThis.display.contextMenu.openApp(this.app, e, this.actor);
+        this.appThis.display.contextMenu.openAppContextMenu(this.app, e, this.actor);
     }
 
     handleEnter(actor, event) {
@@ -199,22 +219,17 @@ class Sidebar {
         this.appThis = appThis;
         this.items = [];
         this.innerBox = new St.BoxLayout({
-                        vertical: (this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT
-                        || this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT) });
+            vertical: (this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT
+            || this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT)
+        });
 
-        // Cinnamox themes draw a border at the bottom of sidebarScrollBox so
-        // remove menu-favorites-scrollbox class.
-        let themePath = Main.getThemeStylesheet();
-        if (!themePath) themePath = '';
-        const scroll_style = themePath.includes('Cinnamox') ? 'vfade' : 'vfade menu-favorites-scrollbox';
-        this.sidebarScrollBox = new St.ScrollView({ y_align: St.Align.MIDDLE, style_class: scroll_style });
-
+        this.sidebarScrollBox = new St.ScrollView({ y_align: St.Align.MIDDLE, style_class: 'vfade gridmenu-sidebar-scrollbox' });
         this.sidebarScrollBox.add_actor(this.innerBox);
         this.sidebarScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.sidebarScrollBox.set_clip_to_allocation(true);
         this.sidebarScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.sidebarScrollBox.set_mouse_scrolling(true);
-        const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
+        const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : 'gridmenu-sidebar-box';
         this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
         this.sidebarOuterBox.add(this.sidebarScrollBox, { });
         if (!this.appThis.settings.showSidebar) {
@@ -240,30 +255,33 @@ class Sidebar {
         //----add session buttons to this.items[]
         const newSidebarIcon = (iconName) => {
             return new St.Icon({
-                    icon_name: iconName,
-                    icon_size: this.appThis.settings.sidebarIconSize,
-                    icon_type: this.appThis.settings.sidebarIconSize <= 24 ?
-                                                St.IconType.SYMBOLIC : St.IconType.FULLCOLOR });
+                icon_name: iconName,
+                icon_size: this.appThis.settings.sidebarIconSize,
+                icon_type: this.appThis.settings.sidebarIconSize <= 24 ?
+                            St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
+            });
         };
         this.items.push(new SidebarButton(
-                    this.appThis,
-                    newSidebarIcon('system-shutdown'),
-                    null,
-                    _('Quit'),
-                    _('Shutdown the computer'),
-                    () => {
-                        this.appThis.menu.close();
-                        this.appThis.sessionManager.ShutdownRemote();
-                    }));
+            this.appThis,
+            newSidebarIcon('system-shutdown'),
+            null,
+            _('Quit'),
+            _('Shutdown the computer'),
+            () => {
+                this.appThis.menu.close();
+                this.appThis.sessionManager.ShutdownRemote();
+            }
+        ));
         this.items.push(new SidebarButton(
-                    this.appThis, newSidebarIcon('system-log-out'),
-                    null,
-                    _('Logout'),
-                    _('Leave the session'),
-                    () => {
-                        this.appThis.menu.close();
-                        this.appThis.sessionManager.LogoutRemote(0);
-                    }));
+            this.appThis, newSidebarIcon('system-log-out'),
+            null,
+            _('Logout'),
+            _('Leave the session'),
+            () => {
+                this.appThis.menu.close();
+                this.appThis.sessionManager.LogoutRemote(0);
+            }
+        ));
         this.items.push(new SidebarButton(
             this.appThis,
             newSidebarIcon('system-lock-screen'),
@@ -292,9 +310,14 @@ class Sidebar {
                 if (!this.separator1Position) {
                     this.separator1Position = this.items.length;
                 }
-                this.items.push(new SidebarButton( this.appThis,
-                                fav.create_icon_texture(this.appThis.settings.sidebarIconSize),
-                                        fav, fav.name, fav.description, null));
+                this.items.push(new SidebarButton(
+                    this.appThis,
+                    fav.create_icon_texture(this.appThis.settings.sidebarIconSize),
+                    fav,
+                    fav.name,
+                    fav.description,
+                    null
+                ));
             });
         }
         //----add favorite files to this.items[]
@@ -305,9 +328,14 @@ class Sidebar {
                     this.separator2Position = this.items.length;
                 }
                 let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
-                this.items.push(new SidebarButton( this.appThis,
-                        new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
-                        fav, fav.name, fav.description, null));
+                this.items.push(new SidebarButton(
+                    this.appThis,
+                    new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
+                    fav,
+                    fav.name,
+                    fav.description,
+                    null
+                ));
             });
         }
         //----change order of all items depending on buttons placement
@@ -329,19 +357,29 @@ class Sidebar {
             if (this.separator1Position && 
                 ((reverseOrder && i == this.items.length - this.separator1Position) ||
                     (!reverseOrder && i === this.separator1Position))){
-                this.innerBox.add(this.separator1.separator, {x_fill: false, y_fill: false,
-                                                              x_align: St.Align.MIDDLE,
-                                                              y_align: St.Align.MIDDLE });
+                this.innerBox.add(this.separator1.separator, {
+                    x_fill: false,
+                    y_fill: false,
+                    x_align: St.Align.MIDDLE,
+                    y_align: St.Align.MIDDLE
+                });
             }
             if (this.separator2Position && 
                 ((reverseOrder && i == this.items.length - this.separator2Position) ||
                     (!reverseOrder && i === this.separator2Position))){
-                this.innerBox.add(this.separator2.separator, {x_fill: false, y_fill: false,
-                                                              x_align: St.Align.MIDDLE,
-                                                              y_align: St.Align.MIDDLE });
+                this.innerBox.add(this.separator2.separator, {
+                    x_fill: false,
+                    y_fill: false,
+                    x_align: St.Align.MIDDLE,
+                    y_align: St.Align.MIDDLE
+                });
             }
-            this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
-                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+            this.innerBox.add(this.items[i].actor, {
+                x_fill: false,
+                y_fill: false,
+                x_align: St.Align.MIDDLE,
+                y_align: St.Align.MIDDLE
+            });
         }
 
         return;

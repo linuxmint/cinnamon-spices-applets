@@ -12,63 +12,119 @@ class Display {
     constructor (appThis) {
         this.appThis = appThis;
         this.displaySignals = new SignalManager(null);
-        const sidebarPlacement = this.appThis.settings.sidebarPlacement;
+        const sidebarPlacement = this.appThis.settings.showSidebar ?
+                            this.appThis.settings.sidebarPlacement : SidebarPlacement.BOTTOM;
+        switch (sidebarPlacement) {
+            case SidebarPlacement.TOP:
+                this.appThis.menu.setCustomStyleClass('menu-background gridmenu sidebar-top');
+                break;
+            case SidebarPlacement.LEFT:
+                this.appThis.menu.setCustomStyleClass('menu-background gridmenu sidebar-left');
+                break;
+            case SidebarPlacement.BOTTOM:
+                this.appThis.menu.setCustomStyleClass('menu-background gridmenu sidebar-bottom');
+                break;
+            case SidebarPlacement.RIGHT:
+                this.appThis.menu.setCustomStyleClass('menu-background gridmenu sidebar-right');
+                break;
+        }
         this.sidebar = new Sidebar(this.appThis);
 
         //==================bottomPane (may also be at the top)================
         this.searchView = new SearchView(this.appThis);
-        this.displaySignals.connect(this.searchView.searchEntryText, 'text-changed',
-                                        (...args) => this.appThis._onSearchTextChanged(...args));
-        this.displaySignals.connect(this.searchView.searchEntryText, 'key-press-event',
-                                                (...args) => this.appThis._onMenuKeyPress(...args));
+        this.displaySignals.connect(
+            this.searchView.searchEntryText,
+            'text-changed',
+            (...args) => this.appThis._onSearchTextChanged(...args)
+        );
+        this.displaySignals.connect(
+            this.searchView.searchEntryText,
+            'key-press-event',
+            (...args) => this.appThis._onMenuKeyPress(...args)
+        );
         this.bottomPane = new St.BoxLayout({});
         if (sidebarPlacement === SidebarPlacement.TOP || sidebarPlacement === SidebarPlacement.BOTTOM) {
-            this.bottomPane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
-                                                  x_align: St.Align.START, y_align: St.Align.MIDDLE });
+            this.bottomPane.add(this.sidebar.sidebarOuterBox, {
+                expand: false,
+                x_fill: false,
+                y_fill: false,
+                x_align: St.Align.START,
+                y_align: St.Align.MIDDLE
+            });
         }
-        this.bottomPane.add(this.searchView.searchBox, { expand: true, x_fill: true, y_fill: false,
-                                                    x_align: St.Align.END, y_align: St.Align.MIDDLE });
+        this.bottomPane.add(this.searchView.searchBox, {
+            expand: true,
+            x_fill: true,
+            y_fill: false,
+            x_align: St.Align.END,
+            y_align: St.Align.MIDDLE
+        });
 
         //=================middlePane======================
         this.appsView = new AppsView(this.appThis);
         this.categoriesView = new CategoriesView(this.appThis);
-        this.middlePane = new St.BoxLayout();
+        this.middlePane = new St.BoxLayout({style_class: 'gridmenu-middle-pane'});
         if (sidebarPlacement === SidebarPlacement.LEFT) {
-            this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
-                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE });
+            this.middlePane.add(this.sidebar.sidebarOuterBox, {
+                expand: false,
+                x_fill: false,
+                y_fill: false,
+                x_align: St.Align.START,
+                y_align: St.Align.MIDDLE
+            });
         }
-        this.middlePane.add(this.categoriesView.groupCategoriesWorkspacesScrollBox,
-            { x_fill: false, y_fill: false, x_align: St.Align.START, y_align: St.Align.START });
-        this.middlePane.add(this.appsView.applicationsScrollBox, { x_fill: false, y_fill: false,
-                                x_align: St.Align.START, y_align: St.Align.START, expand: false });
+        this.middlePane.add(this.categoriesView.groupCategoriesWorkspacesScrollBox, {
+            x_fill: false,
+            y_fill: false,
+            x_align: St.Align.START,
+            y_align: St.Align.START
+        });
+        this.middlePane.add(this.appsView.applicationsScrollBox, {
+            x_fill: false,
+            y_fill: false,
+            x_align: St.Align.START,
+            y_align: St.Align.START,
+            expand: false
+        });
         if (sidebarPlacement === SidebarPlacement.RIGHT) {
-            this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
-                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE });
+            this.middlePane.add(this.sidebar.sidebarOuterBox, {
+                expand: false,
+                x_fill: false,
+                y_fill: false,
+                x_align: St.Align.START,
+                y_align: St.Align.MIDDLE
+            });
         }
 
         //=============mainBox================
         //set style: 'spacing: 0px' so that extra space is not added to mainBox when contextMenuBox is
         //added. Only happens with themes that have set a spacing value on this class.
-        this.mainBox = new St.BoxLayout({ style_class: 'menu-applications-outer-box', style: 'spacing: 0px;',
-                                        vertical: true, reactive: true,
-                                        show_on_set_parent: false });
+        this.mainBox = new St.BoxLayout({
+            style_class: 'menu-applications-outer-box',
+            style: 'spacing: 0px;',
+            vertical: true,
+            reactive: true,
+            show_on_set_parent: false
+        });
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
-        if (sidebarPlacement === SidebarPlacement.TOP || !this.appThis.settings.showSidebar) {
+        if (sidebarPlacement === SidebarPlacement.TOP && this.appThis.settings.showSidebar) {
             this.mainBox.add(this.bottomPane);
         }
         this.mainBox.add_actor(this.middlePane);
-        if (sidebarPlacement !== SidebarPlacement.TOP && this.appThis.settings.showSidebar) {
+        if (sidebarPlacement !== SidebarPlacement.TOP || !this.appThis.settings.showSidebar) {
             this.mainBox.add(this.bottomPane);
         }
 
         this.contextMenu = new ContextMenu(this.appThis);
-        //Note: The context menu is not fully model. Instead, it is added to the stage by adding it to
-        //mainBox with it's height set to 0. contextMenuBox is then positioned at mouse coords and above
-        //siblings. The context menu is not fully model because then it would be difficult to close both
-        //the context menu and the applet menu when the user clicks outside of both.
+        // Note: The context menu is added to the stage by adding it to mainBox with it's height
+        // set to 0. contextMenuBox is then positioned at mouse coords and above siblings.
         this.contextMenu.contextMenuBox.height = 0;
-        this.mainBox.add(this.contextMenu.contextMenuBox, {expand: false, x_fill: false,
-                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE,});
+        this.mainBox.add(this.contextMenu.contextMenuBox, {
+            expand: false,
+            x_fill: false,
+            x_align: St.Align.START,
+            y_align: St.Align.MIDDLE
+        });
         
         //=============menu================
         const section = new PopupMenuSection();
@@ -170,9 +226,9 @@ class Display {
         if (this.appThis.settings.showSidebar) {
             //find sidebarOuterBox vertical padding
             const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
-            const verticalPadding = Math.max(   themeNode.get_length('padding-top') +
-                                                themeNode.get_length('padding-bottom'),
-                                                themeNode.get_length('padding') * 2);
+            const verticalPadding = Math.max(themeNode.get_length('padding-top') +
+                                             themeNode.get_length('padding-bottom'),
+                                             themeNode.get_length('padding') * 2);
                     
             //set sidebarScrollBox height
             this.sidebar.sidebarScrollBox.set_height(-1);//undo previous set_height()
@@ -212,8 +268,9 @@ class Display {
         const appsBoxWidth = Math.floor(menuWidth - leftSideWidth);
         this.appsView.applicationsListBox.width = appsBoxWidth;
         this.appsView.applicationsGridBox.width = appsBoxWidth;
-        this.appsView.currentGridBoxWidth = appsBoxWidth; //because reading
-                                                        //applicationsGridBox.width seems unreliable.
+        const gridBoxNode = this.appsView.applicationsGridBox.get_theme_node();
+        const gridBoxLRPadding = gridBoxNode.get_padding(St.Side.LEFT) + gridBoxNode.get_padding(St.Side.RIGHT);
+        this.currentGridBoxUsableWidth = appsBoxWidth - gridBoxLRPadding;
 
         //Don't change settings while resizing to avoid excessive disk writes.
         if (!this.appThis.resizer.resizingInProgress) {
@@ -243,10 +300,14 @@ class Display {
 class SearchView {
     constructor(appThis) {
         this.appThis = appThis;
-        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
-                                                icon_name: 'edit-find' });
-        this.searchActiveIcon = new St.Icon({   style_class: 'menu-search-entry-icon',
-                                                icon_name: 'edit-clear' });
+        this.searchInactiveIcon = new St.Icon({
+            style_class: 'menu-search-entry-icon',
+            icon_name: 'edit-find'
+        });
+        this.searchActiveIcon = new St.Icon({
+            style_class: 'menu-search-entry-icon',
+            icon_name: 'edit-clear'
+        });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', track_hover: true, can_focus: true});
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);

@@ -215,13 +215,14 @@ class AppButton {
             return Clutter.EVENT_STOP;
         }  
         const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
-        let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
-                                        SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
-                                        this.app.nameWithSearchMarkup : this.app.name) + '</span>';
+        const name = (this.app.nameWithSearchMarkup && SHOW_SEARCH_MARKUP_IN_TOOLTIP &&
+            this.appThis.searchActive) ? this.app.nameWithSearchMarkup : this.app.name;
+        let tooltipMarkup = '<span>' + wordWrap(name) + '</span>';
         if (this.app.description) {
-            tooltipMarkup += '\n<span size="small">' + wordWrap((this.app.descriptionWithSearchMarkup &&
-                                SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
-                                this.app.descriptionWithSearchMarkup : this.app.description) + '</span>';
+            const des = (this.app.descriptionWithSearchMarkup && SHOW_SEARCH_MARKUP_IN_TOOLTIP &&
+                this.appThis.searchActive) ? this.app.descriptionWithSearchMarkup :
+                this.app.description;
+            tooltipMarkup += '\n<span size="small">' + wordWrap(des) + '</span>';
         }
         tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
         let [x, y] = this.actor.get_transformed_position();

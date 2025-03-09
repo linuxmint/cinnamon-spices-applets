@@ -1137,15 +1137,15 @@ const EMOJI = [
 ],[
 '🤦',
 'person facepalming',
-'disbelief exasperation face palm disappointed'
+'disbelief exasperation face palm facepalm disappointed slap hand forehead'
 ],[
 '🤦‍♂️',
 'man facepalming',
-'disbelief exasperation facepalm man male boy'
+'disbelief exasperation face palm facepalm disappointed slap hand forehead man male boy'
 ],[
 '🤦‍♀️',
 'woman facepalming',
-'disbelief exasperation facepalm woman female girl'
+'disbelief exasperation face palm facepalm disappointed slap hand forehead woman female girl'
 ],[
 '🤷',
 'person shrugging',

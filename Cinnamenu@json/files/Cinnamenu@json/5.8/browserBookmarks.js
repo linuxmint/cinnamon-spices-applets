@@ -31,7 +31,9 @@ const {getChromiumProfileDirs} = require('./utils');
 let Gda = null;
 try {
     Gda = imports.gi.Gda;
-} catch(e) {}
+} catch(e) {
+    log("Cinnamenu: Can't read firefox bookmarks, libgda not installed");
+}
 
 const readFileAsync = function(file, opts = {utf8: true}) {
     const {utf8} = opts;
@@ -82,31 +84,33 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
             'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
             'NULL AND moz_bookmarks.type = 1'
         );
-    } catch(e) {}
 
-    // Gda binding seems buggy on Ubuntu 18.04 with error:
-    // "Unsupported type void, deriving from fundamental void"
-    if (!result) return [];
+        // Gda binding seems buggy on Ubuntu 18.04 with error:
+        // "Unsupported type void, deriving from fundamental void"
+        if (!result) return [];
 
-    let nRows = result.get_n_rows();
+        let nRows = result.get_n_rows();
 
-    const handleMeta = function(result, row) {
-        try {
-            return [result.get_value_at(0, row),
-                    result.get_value_at(1, row)];
-        } catch(e) {
-            return [null, null];
+        const handleMeta = function(result, row) {
+            try {
+                return [result.get_value_at(0, row),
+                        result.get_value_at(1, row)];
+            } catch(e) {
+                return [null, null];
+            }
+        };
+
+        for (let row = 0; row < nRows; row++) {
+            let [name, uri] = handleMeta(result, row);
+
+            bookmarks.push({
+                app: appInfo,
+                name: name.replace(/\//g, '|'),
+                uri: uri
+            });
         }
-    };
-
-    for (let row = 0; row < nRows; row++) {
-        let [name, uri] = handleMeta(result, row);
-
-        bookmarks.push({
-            app: appInfo,
-            name: name.replace(/\//g, '|'),
-            uri: uri
-        });
+    } catch(e) {
+        log("Cinnamenu: error reading firefox bookmarks file: " + e.message);
     }
     return bookmarks;
 };

@@ -1,5 +1,5 @@
-/*css nodes used by Cinnamenu
-┌──.menu-background .cinnamenu───────────────────────────────────────────────────────────────────────────────────────────────────
+/*css selectors used by gridmenu
+┌──.menu-background .gridmenu .gridmenu-sidebar-top .gridmenu-sidebar-bottom .gridmenu-sidebar-left .gridmenu-sidebar-right──────
 │┌──.menu-applications-outer-box .menu-applications-box──────────────────────────────────────────────────────────────────────────
 │|┌──.menu-favorites-box─────────────────┐┌──.menu-categories-scrollbox .vfade──┐┌──.menu-applications-scrollbox .vfade───────────
 │││┌──.menu-favorites-scrollbox .vfade──┐││┌──.menu-categories-box─────────────┐││┌──.menu-applications-inner-box .menu-applications-box──
@@ -10,39 +10,10 @@
 ││┌──.menu-search-box─────────
 │││┌──#menu-search-entry──────────
 */
-/*---session/favorites box--------------------*/
-.menu-favorites-box {} /*(or none dependant on user options.)*/
 
-.menu-favorites-scrollbox {} /*and vfade*/
-
-.menu-favorites-button {}
-
-.menu-favorites-button:hover {}
-
-/*---search box-----------------------------*/
-.menu-search-box {} /*When the searchBox is the full width of the menu (i.e. when session button placement
-is left or right) the left menu-search-box padding will be set to equal the right padding and l&r
-menu-search-box margins will be adjusted to ensure l/r symmetry.*/
-
-#menu-search-entry {}
-
-.menu-search-entry-icon {}
-
-/*---categories box-------------------------*/
-.menu-categories-scrollbox {} /*and .vfade*/
-
-.menu-categories-box {} /*Note: for compatibility with older themes, when the favorites box is not on the
-left of the menu, menu-categories-box left padding will be reduced so that menu-categories-box left
-padding + menu-applications-outer-box left padding does not exceed 20px. Use menu-categories-box left
-margin to override*/
-
-.menu-category-button {}
-
-.menu-category-button-label {}
-
-.menu-category-button-selected {}
-
-.menu-category-button-greyed {}
+.gridmenu .menu-categories-box {
+    padding: 0px 6px;
+}
 
 .menu-category-button:hover {  /*Only used when "activate categories on click" option is set.*/
     background-color: rgba(128,128,128,0.2);
@@ -50,19 +21,18 @@ margin to override*/
     border-image: none;
 }
 
-/*.menu-category-button-hover {} No longer used. Use .menu-category-button:hover instead.*/
-
 .menu-category-button:highlighted, /*Used to highlight category containing newly installed apps.*/
 .menu-category-button-selected:highlighted {
     font-weight: bold;
 }
 
-/*---applications box-----------------------*/
-.menu-applications-scrollbox {} /*and .vfade*/
+.gridmenu .menu-applications-inner-box {
+  padding: 0px;
+}
 
-.menu-applications-inner-box {} /*and .menu-applications-box for compatability with old themes.*/
-
-.menu-applications-grid-box {} /*only used in grid view. There is no list view equivalent.*/
+.menu-applications-grid-box {
+    left-padding: 8px;
+}
 
 .menu-applications-header-text { /*(shows folder name, "no recent files", error messages etc)*/
     font-weight: bold;
@@ -78,34 +48,12 @@ margin to override*/
 }
 
 .menu-applications-subheading-clickable { /*emoji categories*/
-    /*font-weight: bold;*/
     font-size: 100%;
-    /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
 }
 
-.menu-application-button {} /*Note: in grid view mode, top & bottom padding
-                              are set to minimum of 8px in the applet*/
-
-.menu-applications-grid-box .menu-application-button {
-    /*remove l/r padding in grid view to allow maximum space for label*/
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.menu-application-button-label {}
-
-.menu-applications-grid-box .menu-application-button-label {
-    padding-right: 2px;
-    padding-left: 2px;
-    text-align: center;
-}
-
-.menu-application-button-selected {}
-
+.menu-applications-grid-box .menu-application-button,
 .menu-applications-grid-box .menu-application-button-selected {
-    /*remove l/r padding in grid view to allow maximum space for label*/
-    padding-left: 0px;
-    padding-right: 0px;
+    padding: 10px 2px;
 }
 
 .menu-application-button:highlighted, /*Used to highlight newly installed apps in list or grid view.*/
@@ -113,17 +61,34 @@ margin to override*/
     font-weight: bold;
 }
 
-/*---context menu---------------------------
-(.menu)*/
-
-/*---whole menu-----------------------------
-.cinnamenu (and .menu-background)
-(.menu)*/
-
-/*
-Note: You can make a style to apply to Cinnamenu applet but not other menu applets by
-preceeding the class with ".cinnamenu ". Example:
-.cinnamenu .menu-application-button {
-    //this style will only apply to Cinnamenu applet.
+.gridmenu .menu-search-box, .gridmenu .menu-search-box:ltr, .gridmenu .menu-search-box:rtl {
+  min-width: 160px;
+  padding: 0px 8px;
 }
-*/
+
+#menu-search-entry {}
+
+.menu-search-entry-icon {}
+
+
+.gridmenu-sidebar-box {
+  padding: 0px 6px;
+}
+
+.gridmenu.sidebar-left .gridmenu-sidebar-box {
+  padding-right: 24px;
+}
+
+.gridmenu.sidebar-right .gridmenu-sidebar-box {
+  padding-left: 16px;
+}
+
+.gridmenu.sidebar-left .gridmenu-middle-pane,
+.gridmenu.sidebar-right .gridmenu-middle-pane,
+.gridmenu.sidebar-bottom .gridmenu-middle-pane {
+  padding-bottom: 12px;
+}
+
+.gridmenu.sidebar-top .gridmenu-middle-pane {
+  padding-top: 12px;
+}
