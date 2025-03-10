@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.1
+
+* Use the DesaturateEffect class rather than the saturate_and_pixelate() API to adjust the icon color saturation. This has as advantage in that it is able to desaturate the color for all icons where before it was limited in what type of icons it would work on. On the other hand, it has a disadvantage in that it can't oversaturate the icons. Hopefully no one was using the >100% saturation feature because it's not gone now.
+* Fixed the option to hide windows for pinned buttons on other CassiaWindowList instances. Previously this option would only take into account pinned buttons on one other window list instance. Now it creates a super set of application that are present on all other CassiaWindowList instances that are setup to be in "Launcher" mode. Also changed the option name to make it more clear what the option does.
+* Fixed the label width to take into account the user interface scaling factor so that the label width will accommodate the same number of characters even after changing the displays "User interface scale" percentage. This might mean you will have to reduce the label width setting if you had adjusted it be your desired size based on a >100% scaling factor for your display, but now the label width will adapt correctly when changing the scaling factor
+
 ## 2.4.0
 
 * Fix issues when running under Cinnamon 6.4 (port of cobinja's fix for CobiWindowList). Make sure you have this fix BEFORE upgrading to Cinnamon 6.4
