@@ -1,6 +1,6 @@
 /*
  * applet.js
- * Copyright (C) 2022-2024 Kevin Langman <klangman@gmail.com>
+ * Copyright (C) 2022-2025 Kevin Langman <klangman@gmail.com>
  * Copyright (C) 2013 Lars Mueller <cobinja@yahoo.de>
  *
  * CassiaWindowList is a fork of CobiWindowList which is found here:
@@ -1493,7 +1493,6 @@ class WindowListButton {
     this.actor.add_actor(this._labelBox);
 
     this._icon = null;
-    this._modifiedIcon = null;  // This is a version of the icon that has had it saturation modified
     this._iconBin = new St.Bin({name: "appMenuIcon"});
     this._iconBin._delegate = this;
     this._iconBox.add_actor(this._iconBin);
@@ -1949,8 +1948,10 @@ class WindowListButton {
     this._tooltip.preventShow = false;
   }
 
+  // Kinda missnamed, all this does is apply/unapply the DesaturationEffect on this._icon
   updateIconSelection() {
-     if (this._workspace.iconSaturation != 100 && this._modifiedIcon) {
+     let effect = this._icon.get_effect("desat_icon_effect");
+     if (this._workspace.iconSaturation != 100) {
         let satType = this._workspace.saturationType;
         if (satType == SaturationType.All ||
            (satType == SaturationType.Minimized && this._currentWindow && this._currentWindow.minimized) ||
@@ -1959,63 +1960,49 @@ class WindowListButton {
            (satType == SaturationType.OtherMonitors && this.isOnOtherMonitor()) ||
            (satType == SaturationType.Focused && !this._hasFocus()) )
         {
-           this._iconBin.set_child(this._modifiedIcon);
+           let saturation = (100-this._workspace.iconSaturation)/100;
+           if (effect) {
+              effect.set_factor(saturation);
+           } else {
+              if (!this.desatEffect) {
+                 this.desatEffect = new Clutter.DesaturateEffect({factor: saturation});
+              } else {
+                 this.desatEffect.set_factor(saturation);
+              }
+              this._icon.add_effect_with_name("desat_icon_effect", this.desatEffect);
+           }
            return;
         }
      }
-     this._iconBin.set_child(this._icon);
+     if (effect) {
+        this._icon.remove_effect_by_name("desat_icon_effect");
+     }
   }
 
   updateIcon() {
     let panelHeight = this._applet._panelHeight;
 
     this.iconSize = this._applet.getPanelIconSize(St.IconType.FULLCOLOR);
-
     let icon = null;
 
-    if (this._icon)
+    if (this._icon) {
+       if (this._icon.get_effect("desat_icon_effect")) {
+          this._icon.remove_effect_by_name("desat_icon_effect");
+       }
        this._icon.destroy();
-    if (this._modifiedIcon) {
-       this._modifiedIcon.destroy();
-       this._modifiedIcon = null;
     }
 
     if (this._app) {
       let appInfo = this._app.get_app_info();
       if (appInfo) {
         let infoIcon = appInfo.get_icon();
-        let saturation = this._workspace.iconSaturation;
-        if (saturation != 100) {
-           let pixBuf;
-           let themeIcon = ICONTHEME.lookup_icon(infoIcon.to_string(), this.iconSize, 0);
-           if (themeIcon) {
-              pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(themeIcon.get_filename(), this.iconSize, this.iconSize);
-           } else {
-              pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(infoIcon.to_string(), this.iconSize, this.iconSize);
-           }
-           if (pixBuf) {
-              let image = new Clutter.Image();
-              pixBuf.saturate_and_pixelate(pixBuf, saturation/100, false);
-              try {
-                 image.set_data(pixBuf.get_pixels(), pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-                    this.iconSize, this.iconSize, pixBuf.get_rowstride() );
-                 this._modifiedIcon = new Clutter.Actor({width: this.iconSize, height: this.iconSize, content: image});
-              } catch(e) {
-                 // Can't set the image data, so just use the default!
-              }
-           } else {
-              //log( `Can't find icon for ${infoIcon.to_string()}` );
-           }
-        }
-        icon = new St.Icon({ gicon: infoIcon, icon_size: this.iconSize });
+        this._icon = new St.Icon({ gicon: infoIcon, icon_size: this.iconSize });
       } else {
-        icon = this._app.create_icon_texture(this.iconSize);
+        this._icon = this._app.create_icon_texture(this.iconSize);
       }
     } else {
-      icon = new St.Icon({ icon_name: "application-default-icon", icon_type: St.IconType.FULLCOLOR, icon_size: this.iconSize });
+      this._icon = new St.Icon({ icon_name: "application-default-icon", icon_type: St.IconType.FULLCOLOR, icon_size: this.iconSize });
     }
-
-    this._icon = icon;
     this.updateIconSelection();
 
     if (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT) {
@@ -2026,6 +2013,7 @@ class WindowListButton {
     if ((panelHeight - this.iconSize) & 1) {
       panelHeight--;
     }
+    this._iconBin.set_child(this._icon);
     this._iconBin.natural_width = panelHeight;
     this._iconBin.natural_height = panelHeight;
     this._labelNumberBox.natural_width = panelHeight;
@@ -2265,6 +2253,7 @@ class WindowListButton {
        }
     }
 
+    width *= global.ui_scale;
     if (width != this._labelWidth) {
        let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
        resizeActor(this._labelBox, animTime, width, text, this);
@@ -3980,7 +3969,7 @@ class WindowListButton {
         [rect.x, rect.y] = this._iconBin.get_transformed_position();
         [rect.width, rect.height] = this._iconBin.get_transformed_size();
         this._windows.forEach((window) => {
-           if (window.is_on_all_workspaces() || window.get_workspace().index() === curWS ) {
+           if (window.is_on_all_workspaces() || (window.get_workspace() && window.get_workspace().index() === curWS) ) {
               window.set_icon_geometry(rect);
            }
         });
@@ -5883,15 +5872,20 @@ class WindowList extends Applet.Applet {
   // based on which applications other instances have pinned.
   checkForLauncherApplications() {
      let applets = AppletManager.getRunningInstancesForUuid("CassiaWindowList@klangman");
-     //log( `Found ${applets.length} cassia window list applets!` );
+     this._hiddenApps = [];
      for (let i=0 ; i < applets.length ; i++) {
         if (applets[i] != this) {
-           // TODO: Marge the list of pinned apps in case there are more then two instances
-           this._hiddenApps = applets[i].getPinnedList();
-           //log( `Found ${this._hiddenApps[wsIdx].length} apps to hide on workspace ${wsIdx}` );
-           //this._hiddenApps.push(...appList); // Use the "Spread Syntax" to concat to existing array
+           let pinnedList = applets[i].getPinnedList();
+           if (pinnedList) {
+              if (this._hiddenApps.length !== 0)
+                 this._hiddenApps.forEach( (element, index) => element.push(...pinnedList[index]) );
+              else
+                 pinnedList.forEach( (element) => this._hiddenApps.push( [...element] ) );
+           }
         }
      }
+     if (this._hiddenApps.length === 0 )
+        this._hiddenApps = null;
   }
 
 
@@ -5934,16 +5928,10 @@ class WindowList extends Applet.Applet {
 
   // An API that returns a list of pinned applications on this window list
   getPinnedList(){
-    let result;
-    result = this._settings.getValue("pinned-apps");
-    //log( `pinned apps for ${result.length} work spaces` );
-    //for (let idx=0 ; idx < result.length ; idx++ ){
-    //   log( `pinned apps for ws ${idx}: ${result[idx].length}` );
-    //   for (let idx2=0 ; idx2 < result[idx].length ; idx2++ ){
-    //      log( `result[${idx}][${idx2}] = ${result[idx][idx2]}` );
-    //   }
-    //}
-    return(result);
+    if (this.isLauncher())
+       return(this._settings.getValue("pinned-apps"));
+    else
+       return(null);
   }
 
   // An API that returns true if this applet is configured as a Launcher (used by other app instances)
