@@ -1,3 +1,6 @@
+### v5.2.6~20250310
+  * Fixes the `spices-cache-init.sh` script.
+
 ### v5.2.5~20250309
   * Fixes a typo error in a script.
 
