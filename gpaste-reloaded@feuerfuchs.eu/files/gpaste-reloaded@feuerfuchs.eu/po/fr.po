@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-27 14:39-0500\n"
-"PO-Revision-Date: 2023-10-29 17:43+0100\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-03-07 17:16+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. GPasteNewItemDialog.js:53
 msgid "Please enter the text you want to add to the current history:"
@@ -86,9 +86,8 @@ msgid "Do you really want to empty the current history?"
 msgstr "Voulez-vous vraiment vider l'historique actuel ?"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Instantly access and manage your clipboard history."
-msgstr "Accès instantané et gestion de l'historique de votre presse-papier"
+msgstr "Accès instantané et gestion de l'historique de votre presse-papier."
 
 #. metadata.json->name
 msgid "GPaste Reloaded"
@@ -101,6 +100,8 @@ msgstr "Afficher les entrées"
 #. settings-schema.json->always-show-icon->description
 msgid "Show tray icon, even when the applet is not in use"
 msgstr ""
+"Afficher l'icône dans la barre des tâches, même lorsque l'applet n'est pas "
+"utilisée"
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"

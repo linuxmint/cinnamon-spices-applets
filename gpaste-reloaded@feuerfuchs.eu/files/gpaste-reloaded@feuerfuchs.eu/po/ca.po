@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-27 14:39-0500\n"
-"PO-Revision-Date: 2024-07-19 03:06+0200\n"
+"PO-Revision-Date: 2025-02-13 21:09+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -85,9 +85,8 @@ msgid "Do you really want to empty the current history?"
 msgstr "Segur que voleu buidar l'historial actual?"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Instantly access and manage your clipboard history."
-msgstr "Accediu i gestioneu la història del vostre porta-papers"
+msgstr "Accediu i gestioneu la història del vostre porta-retalls."
 
 #. metadata.json->name
 msgid "GPaste Reloaded"
@@ -100,6 +99,7 @@ msgstr "Elements mostrats"
 #. settings-schema.json->always-show-icon->description
 msgid "Show tray icon, even when the applet is not in use"
 msgstr ""
+"Mostra la icona al tauler encara que la miniaplicació no estigui en ús"
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"

@@ -8,6 +8,8 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
+const Dialog = imports.ui.dialog;
 
 const UUID = "pomodoro@gregfreeman.org";
 
@@ -89,12 +91,12 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._settingsProvider = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this._bindSettings();
 
-        this._defaultSoundPath = metadata.path + '/sounds';
+        this._defaultSoundPath = metadata.path + '/../sounds';
         this._sounds = {};
         this._loadSoundEffects();
 
         // If cinnamon crashes or restarts, we want to make sure no zombie sounds are still looping
-        let killLoopingSoundCommand = `python3 ${metadata.path}/bin/kill-looping-sound.py ${this._sounds.tick.getSoundPath()}`;
+        let killLoopingSoundCommand = `python3 ${metadata.path}/../bin/kill-looping-sound.py ${this._sounds.tick.getSoundPath()}`;
         Util.trySpawnCommandLine(killLoopingSoundCommand);
 
         this._timers = {
@@ -635,7 +637,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
             }
         });
     
-        this._longBreakdialog.connect('hide', () => {
+        this._longBreakdialog.connect('hide-pomodoro-modal', () => {
             if (!this._timerQueue.isRunning() && !this._opt_autoStartNewAfterFinish) {
                 this._turnOff();
             }
@@ -676,7 +678,25 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._pomodoroFinishedDialog.close();
         });
     }
-    
+
+    _removeDialogs() {
+        if (this._longBreakdialog) {
+            this._longBreakdialog.close();
+            this._longBreakdialog.destroy();
+            this._longBreakdialog = null;
+        }
+        if (this._shortBreakdialog) {
+            this._shortBreakdialog.close();
+            this._shortBreakdialog.destroy();
+            this._shortBreakdialog = null;
+        }
+        if (this._pomodoroFinishedDialog) {
+            this._pomodoroFinishedDialog.close();
+            this._pomodoroFinishedDialog.destroy();
+            this._pomodoroFinishedDialog = null;
+        }
+    }
+
     _onAppletIconChanged() {
         if (this._opt_displayIconInPanel) {
             this._applet_icon_box.show();
@@ -684,17 +704,17 @@ class PomodoroApplet extends Applet.TextIconApplet {
             let appletIconStatus = '';
             switch (this._currentState) {
             case 'pomodoro-stop':
-                appletIconPath = `${this._metadata.path}/pomodoro-stop`;
+                appletIconPath = `${this._metadata.path}/../pomodoro-stop`;
                 appletIconStatus = 'system-status-icon';
                 break;
             case 'short-break':
             case 'long-break':
-                appletIconPath = `${this._metadata.path}/pomodoro-break`;
+                appletIconPath = `${this._metadata.path}/../pomodoro-break`;
                 appletIconStatus = 'system-status-icon success';
                 break;
             case 'pomodoro':
             default:
-                appletIconPath = `${this._metadata.path}/pomodoro`;
+                appletIconPath = `${this._metadata.path}/../pomodoro`;
                 appletIconStatus = 'system-status-icon error';
                 break;
             }
@@ -735,6 +755,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey(UUID);
         this._resetTimerQueueState();
         this._settingsProvider.finalize();
+        this._removeDialogs();
     }    
 }
 
@@ -837,16 +858,30 @@ class PomodoroMenu extends Applet.AppletPopupMenu {
     }
 }
 
-class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
-    constructor() {
-        super();
-        this._subjectLabel = new St.Label();
-        this.contentLayout.add(this._subjectLabel);
+var PomodoroSetFinishedDialog = GObject.registerClass({
+    // The GTypeName must be unique, so we use the current timestamp here to avoid
+    // exceptions at runtime when reloading the applet.
+    GTypeName: `pomodoro_applet_PomodoroSetFinishedDialog_${Date.now()}`,
+    Signals: {
+        'switch-off-pomodoro': {},
+        'start-new-pomodoro': {},
+        'hide-pomodoro-modal': {}
+    }
+}, class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
+    _init() {
+        super._init({destroyOnClose: false});
 
-        this._timeLabel = new St.Label();
-        this.contentLayout.add(this._timeLabel);
+        this._content = new Dialog.MessageDialogContent();
+        this.contentLayout.add(this._content);
 
         this.setButtons([
+            {
+                label: _("Hide"),
+                action: () => {
+                    this.emit('hide-pomodoro-modal');
+                },
+                key: Clutter.KEY_Escape,
+            },
             {
                 label: _("Switch Off Pomodoro"),
                 action: () => {
@@ -859,30 +894,23 @@ class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
                     this.emit('start-new-pomodoro');
                 }
             },
-            {
-                label: _("Hide"),
-                action: () => {
-                    this.emit('hide');
-                },
-                key: Clutter.Escape
-            }
         ]);
 
         this.setDefaultLabels();
     }
 
     setDefaultLabels() {
-        this._subjectLabel.set_text(_("Pomodoro set finished, you deserve a break!") + "\n");
+        this._content.title = _("Pomodoro set finished, you deserve a break!") + "\n";
         // Reset the time label text
-        this._timeLabel.text = '';
+        this._content.description = '';
     }
 
     setTimeRemaining(timer) {
         let tickCount = timer.getTicksRemaining();
 
         if (tickCount === 0) {
-            this._subjectLabel.text = _("Your break is over, start another pomodoro!") + "\n";
-            this._timeLabel.text = '';
+            this._content.title = _("Your break is over, start another pomodoro!") + "\n";
+            this._content.description = '';
             return;
         }
 
@@ -891,7 +919,7 @@ class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
     }
 
     _setTimeLabelText(label) {
-        this._timeLabel.set_text(label + "\n");
+        this._content.description = label + "\n";
     }
 
     _getTimeString(totalSeconds) {
@@ -904,71 +932,85 @@ class PomodoroSetFinishedDialog extends ModalDialog.ModalDialog {
 
         return _("%s and %s").format(min, sec);
     }
-}
+});
 
-class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
-    constructor() {
-        super();
-        this._subjectLabel = new St.Label();
-        this.contentLayout.add(this._subjectLabel);
+var PomodoroShortBreakFinishedDialog = GObject.registerClass({
+    // The GTypeName must be unique, so we use the current timestamp here to avoid
+    // exceptions at runtime when reloading the applet.
+    GTypeName: `pomodoro_applet_PomodoroShortBreakFinishedDialog_${Date.now()}`,
+    Signals: {
+        'continue-current-pomodoro': {},
+        'pause-pomodoro': {},
+    }
+}, class PomodoroShortBreakFinishedDialog extends ModalDialog.ModalDialog {
+    _init() {
+        super._init({destroyOnClose: false});
 
-        this._timeLabel = new St.Label();
-        this.contentLayout.add(this._timeLabel);
+        this._content = new Dialog.MessageDialogContent();
+        this.contentLayout.add(this._content);
 
         this.setButtons([
+            {
+                label: _("Pause Pomodoro"),
+                action: () => {
+                    this.emit('pause-pomodoro');
+                }
+            },
             {
                 label: _("Continue Current Pomodoro"),
+                default: true,
                 action: () => {
                     this.emit('continue-current-pomodoro');
                 }
             },
-            {
-                label: _("Pause Pomodoro"),
-                action: () => {
-                    this.emit('pause-pomodoro');
-                }
-            }
         ]);
 
         this.setDefaultLabels();
     }
 
     setDefaultLabels() {
-        this._subjectLabel.set_text(_("Short break finished, ready to continue?") + "\n");
-        this._timeLabel.text = '';
+        this._content.title = _("Short break finished, ready to continue?") + "\n";
+        this._content.description = '';
     }
-}
+});
 
-class PomodoroFinishedDialog extends ModalDialog.ModalDialog {
-    constructor() {
-        super();
-        this._subjectLabel = new St.Label();
-        this.contentLayout.add(this._subjectLabel);
+var PomodoroFinishedDialog = GObject.registerClass({
+    // The GTypeName must be unique, so we use the current timestamp here to avoid
+    // exceptions at runtime when reloading the applet.
+    GTypeName: `pomodoro_applet_PomodoroFinishedDialog_${Date.now()}`,
+    Signals: {
+        'continue-current-pomodoro': {},
+        'pause-pomodoro': {},
+    }
+}, class PomodoroFinishedDialog extends ModalDialog.ModalDialog {
+    _init() {
+        super._init({destroyOnClose: false});
 
-        this._timeLabel = new St.Label();
-        this.contentLayout.add(this._timeLabel);
+        this._content = new Dialog.MessageDialogContent();
+        this.contentLayout.add(this._content);
 
         this.setButtons([
             {
-                label: _("Start break"),
-                action: () => {
-                    this.emit('continue-current-pomodoro');
-                }
-            },
-            {
                 label: _("Pause Pomodoro"),
                 action: () => {
                     this.emit('pause-pomodoro');
                 }
-            }
+            },
+            {
+                label: _("Start break"),
+                default: true,
+                action: () => {
+                    this.emit('continue-current-pomodoro');
+                }
+            },
         ]);
 
         this.setDefaultLabels();
     }
 
     setDefaultLabels() {
-        this._subjectLabel.set_text(_("Pomodoro finished, ready to take a break?") + "\n");
-        this._timeLabel.text = '';
+        this._content.title = _("Pomodoro finished, ready to take a break?") + "\n";
+        this._content.description = '';
     }
-}
+});
 

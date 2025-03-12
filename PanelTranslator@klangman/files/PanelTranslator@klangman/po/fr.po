@@ -1,84 +1,84 @@
-# SOME DESCRIPTIVE TITLE.
+# PANEL TRANSLATOR
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# klangman, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PanelTranslator@klangman 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-31 11:39-0400\n"
-"PO-Revision-Date: 2024-04-03 14:49+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
+"PO-Revision-Date: 2025-03-07 16:41+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:97 applet.js:332 applet.js:334
+#. applet.js:108 applet.js:345 applet.js:347
 msgid "Translator"
 msgstr "Traducteur"
 
-#: applet.js:260
+#. applet.js:273
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 "Impossible de demander quelles sont les langues disponibles à partir de "
 "translate-shell"
 
-#: applet.js:271
+#. applet.js:284
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 "La commande \"trans\" requise n'a pas été trouvée, veuillez installer "
 "translate-shell"
 
-#: applet.js:275
+#. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Erreur, la commande \"trans\" a renvoyé un code de sortie de "
 
-#: applet.js:355
+#. applet.js:368
 msgid "Swap Languages"
 msgstr "Intervertir les langues"
 
-#: applet.js:393
+#. applet.js:411
 msgid "{Text to translate}"
 msgstr "{Texte à traduire}"
 
-#: applet.js:404
+#. applet.js:422
 msgid "{Translated text}"
 msgstr "{Texte traduit}"
 
-#: applet.js:418
+#. applet.js:436
 msgid "Configure"
 msgstr "Configurer"
 
-#: applet.js:419
+#. applet.js:437
 msgid "Help"
 msgstr "Aide"
 
-#: applet.js:423
+#. applet.js:441
 msgid "Play"
 msgstr "Écouter"
 
-#: applet.js:427
+#. applet.js:445
 msgid "Paste"
 msgstr "Coller"
 
-#: applet.js:431
+#. applet.js:449
 msgid "Clear"
 msgstr "Effacer"
 
-#: applet.js:435
+#. applet.js:453
 msgid "Translate"
 msgstr "Traduire"
 
-#: applet.js:440
+#. applet.js:458
 msgid "Copy"
 msgstr "Copier"
 
-#: applet.js:446
+#. applet.js:464
 msgid "Play Translation"
 msgstr "Écouter la traduction"
 
@@ -94,9 +94,25 @@ msgstr ""
 "Traduire un texte dans d'autres langues à partir d'un panneau Cinnamon en "
 "utilisant Google, Bing et d'autres traducteurs"
 
-#. settings-schema.json->engine-header->description
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr "Raccourcis-clavier"
+
+#. settings-schema.json->engine-settings->title
 msgid "Translation Engine"
 msgstr "Moteur de traduction"
+
+#. settings-schema.json->action-settings->title
+msgid "Panel Button Actions"
+msgstr "Actions des boutons du panneau"
+
+#. settings-schema.json->hotkey-settings->title
+msgid "Translation action hotkeys"
+msgstr "Touches de raccourci pour la traduction"
 
 #. settings-schema.json->translate-engine->options
 msgid "Apertium"
@@ -145,10 +161,6 @@ msgstr ""
 "est donc préférable d'utiliser \"Auto\" et de laisser translate-shell "
 "décider du traducteur à utiliser."
 
-#. settings-schema.json->auto-header->description
-msgid "Panel Button Actions"
-msgstr "Actions des boutons du panneau"
-
 #. settings-schema.json->left-auto-paste->options
 msgid "Disabled"
 msgstr "Désactivé"
@@ -162,18 +174,18 @@ msgid "Clipboard"
 msgstr "Presse-papiers"
 
 #. settings-schema.json->left-auto-paste->description
-msgid "Automatically paste and translate on left click"
-msgstr "Coller et traduire automatiquement au clic gauche"
+msgid "Automatically translate on left click"
+msgstr "Traduire automatiquement au clic gauche"
 
 #. settings-schema.json->left-auto-paste->tooltip
 msgid ""
-"Automatically paste the current selection/clipboard content and translate it "
-"when opening the popup window using a left click on the translator panel "
+"Automatically translate the selection/clipboard contents when opening the "
+"Panel Translator popup window using a left click on the Panel Translator "
 "button"
 msgstr ""
-"Coller automatiquement le contenu de la sélection actuelle ou du presse-"
-"papiers et le traduire lors de l'ouverture de la fenêtre contextuelle par un "
-"clic gauche sur le bouton du panneau du traducteur"
+"Traduire automatiquement le contenu de la sélection/du tableau de bord lors "
+"de l'ouverture de la fenêtre contextuelle du traducteur de tableau de bord "
+"par un clic gauche sur le bouton Traducteur de tableau de bord"
 
 #. settings-schema.json->left-auto-play->description
 msgid "Automatically play the translation on left click"
@@ -186,30 +198,26 @@ msgstr "Ne rien faire"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-selection->description
 msgid "Show popup dialog and translate Selection"
 msgstr "Afficher la boîte de dialogue et traduire la Sélection"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-clipboard->description
 msgid "Show popup dialog and translate Clipboard"
 msgstr ""
 "Afficher une boîte de dialogue et traduire le contenu du Presse-papiers"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-play-selection->description
 msgid "Show popup dialog, translate Selection and play"
 msgstr "Afficher la boîte de dialogue, traduire la sélection et l'écouter"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-play-clipboard->description
 msgid "Show popup dialog, translate Clipboard and play"
 msgstr ""
 "Afficher une boîte de dialogue, traduire le contenu du presse-papiers et "
@@ -217,29 +225,25 @@ msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-play-selection->description
 msgid "Play translation of Selection"
 msgstr "Écouter la traduction de la Sélection"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-play-clipboard->description
 msgid "Play translation of Clipboard"
 msgstr "Écouter la traduction du contenu du Presse-papiers"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-copy-selection->description
 msgid "Translate Selection and copy the translation"
 msgstr "Traduire la Sélection et copier la traduction"
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
-#. settings-schema.json->hotkey1-action->options
-#. settings-schema.json->hotkey2-action->options
+#. settings-schema.json->hotkey-trans-copy-clipboard->description
 msgid "Translate Clipboard and copy the translation"
 msgstr "Traduire le contenu du presse-papiers et copier la traduction"
 
@@ -267,25 +271,3 @@ msgstr ""
 "Sélectionnez l'action à effectuer lorsque vous maintenez la touche Ctrl "
 "enfoncée et que vous cliquez sur le bouton du panneau du traducteur à l'aide "
 "du bouton du milieu de la souris"
-
-#. settings-schema.json->hotkeys-header->description
-msgid "Hotkeys"
-msgstr "Raccourcis-clavier"
-
-#. settings-schema.json->hotkey1-action->description
-msgid "Hotkey #1"
-msgstr "Raccourci-clavier n°1"
-
-#. settings-schema.json->hotkey1-action->tooltip
-msgid "Select the action to take when the #1 hotkey is pressed"
-msgstr ""
-"Sélectionner l'action à effectuer lorsque le raccourci clavier n°1 est activé"
-
-#. settings-schema.json->hotkey2-action->description
-msgid "Hotkey #2"
-msgstr "Raccourci-clavier n°2"
-
-#. settings-schema.json->hotkey2-action->tooltip
-msgid "Select the action to take when the #2 hotkey is pressed"
-msgstr ""
-"Sélectionner l'action à effectuer lorsque le raccourci clavier n°2 est activé"

@@ -1,3 +1,6 @@
+### v2.3.1~20250211
+  * Improved code: No Mainloop, no Lang.
+
 ### v2.3.0~20240705
   * Now considers the case where the default provider is not selected.
 

@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 const versionCompare = (left, right) => {
   if (typeof left + typeof right != "stringstring")
     return false;

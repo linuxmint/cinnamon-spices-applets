@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 const MessageTray = imports.ui.messageTray;
 const St = imports.gi.St;
 const Lang = imports.lang;
@@ -130,6 +131,5 @@ class SU_Notification extends MessageTray.Notification {
         } catch(e) {
             return 159;
         }
-        //return minHeight;
     }
 }

@@ -52,9 +52,37 @@ export interface SwissMeteoPayload {
 		 */
 		windDirection3h: number[];
 		/**
+		 * 192 items, km/h
+		 */
+		windSpeed1h: number[];
+		/**
+		 * unknown
+		 */
+		windSpeed1hq10: number[];
+		/**
+		 * unknown
+		 */
+		windSpeed1hq90: number[];
+		/**
 		 * 64 items, km/h
 		 */
 		windSpeed3h: number[];
+		/**
+		 * 192 items, km/h
+		 */
+		gustSpeed1h: number[];
+		/**
+		 * unknown
+		 */
+		gustSpeed1hq10: number[];
+		/**
+		 * unknown
+		 */
+		gustSpeed1hq90: number[];
+		/**
+		 * 192 items, % (0-100)
+		 */
+		sunshine1h: number[];
 		/**
 		 * 8 items, unix timestamp in milliseconds
 		 */
@@ -87,6 +115,10 @@ export interface SwissMeteoPayload {
 		 * 192 items, in mm
 		 */
 		precipitationMax1h: number[];
+		/**
+		 * 34 items, in % (0-100)
+		 */
+		precipitationProbability3h: number[];
 	}
 }
 

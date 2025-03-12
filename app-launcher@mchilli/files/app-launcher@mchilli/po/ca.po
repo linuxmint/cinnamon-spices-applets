@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: app-launcher@mchilli 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-09-05 17:00+0200\n"
-"Last-Translator: Odyssey <odysseyhyd@gmail.com\n"
+"POT-Creation-Date: 2025-02-25 17:53+0100\n"
+"PO-Revision-Date: 2025-03-02 00:27+0100\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -18,75 +18,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:118
+#. applet.js:117
+msgid "All workspaces"
+msgstr "Tots els espais de treball"
+
+#. applet.js:145
 msgid "Edit Applications"
 msgstr "Editar aplicacions"
 
-#. applet.js:837 applet.js:1131
+#. applet.js:864 applet.js:1158
 msgid "Delete"
 msgstr "Eliminar"
 
-#. applet.js:838 applet.js:1132
+#. applet.js:865 applet.js:1159
 msgid "Edit"
 msgstr "Editar"
 
-#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:866 applet.js:1160 dialogs.py:46 dialogs.py:296 widgets.py:73
 msgid "Cancel"
 msgstr "Cancel·lar"
 
-#. dialogs.py:41 dialogs.py:292
+#. dialogs.py:44 dialogs.py:295
 msgid "OK"
 msgstr "D'acord"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
+#. dialogs.py:47 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nom"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:50
+#. dialogs.py:53
 msgid "Group"
 msgstr "Grup"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
+#. dialogs.py:54 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Ordre"
 
-#. dialogs.py:236
+#. dialogs.py:239
 msgid "The name cannot be empty"
 msgstr "El nom no pot estar buit"
 
-#. dialogs.py:241
+#. dialogs.py:244
 msgid "The name is already used"
 msgstr "El nom ja està en ús"
 
-#. dialogs.py:248
+#. dialogs.py:251
 msgid "Valid name"
 msgstr "Nom vàlid"
 
-#. dialogs.py:254
+#. dialogs.py:257
 msgid "Valid command"
 msgstr "Ordre vàlida"
 
-#. dialogs.py:257
+#. dialogs.py:260
 msgid "The command is not valid"
 msgstr "L'ordre no és vàlida"
 
-#. dialogs.py:291
+#. dialogs.py:294
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "Quina informació s'hauria de substituir al fitxer *.desktop?"
 
-#. dialogs.py:335
+#. dialogs.py:338
 msgid "really delete?"
 msgstr "segur que ho voleu eliminar?"
 
-#. dialogs.py:336
+#. dialogs.py:339
 msgid "No"
 msgstr "No"
 
-#. dialogs.py:337
+#. dialogs.py:340
 msgid "Yes"
 msgstr "Sí"
 
@@ -196,7 +200,7 @@ msgstr "%s equival al nom de la vostra aplicació"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Activar dreceres del teclat"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -208,11 +212,19 @@ msgstr "Assignar dreceres per mostrar el menú"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Menú a la posició del ratolí"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
-msgstr ""
+msgstr "Mostra el menú al costat del cursor en ser iniciat per una drecera"
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr "Vincular a l'espai de treball"
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr "Només mostra la miniaplicació a l'espai de treball seleccionat"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.6.6
+
+- Add Breeze icon theme problems to known issues.
+- Fix Swiss Meteo crashing when alerts don't have a `valid_from` field
+- Fix MET Norway breaking when Alerts are enabled
+- Include README changes from @jorgenqv
+
+## 3.6.5
+
+- Add more tags for overrides, including forecasts when available, details in README
+- Add left/right padding options and a pad fill option for tags in overrides
+- Add ability to programatically set overridable default padding options for tags in overrides, added some defaults
+
 ## 3.6.4
 
 - Add attribution to nominatim
@@ -38,7 +51,7 @@
 - Better error logging on exception handling in most places
 - Fix Accuweather having wrong weather condition info on "clear sky"
 - Add missing type information for weather/location providers
-- Fix incorrect wind speed reported with Open Meteo
+- Fix incorrect wind speed reported with Open-Meteo
 - Resolve [[weather@mockturtl] Feature Request: Save Weather Service JSON #5420](https://github.com/linuxmint/cinnamon-spices-applets/issues/5420)
 - Resolve [[weather@mockturtl] Feature Request: Configurable UserAgent String #5999](https://github.com/linuxmint/cinnamon-spices-applets/issues/5999)
 - Fix [weather@mockturtl: Incorrectly formatted text #6011](https://github.com/linuxmint/cinnamon-spices-applets/issues/6011) - mostly

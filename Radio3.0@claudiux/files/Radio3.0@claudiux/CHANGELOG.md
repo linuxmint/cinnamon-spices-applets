@@ -1,7 +1,30 @@
-### 2.7.4~20250116
+### v2.9.0~20250305
+  * Vertical maximization of the Settings Window becomes optional.
+  * Fixes #6955.
+
+### v2.8.3~20250302
+  * Improved tooltip management.
+
+### v2.8.2~20250218
+  * Improved tooltip layout.
+
+### v2.8.1~20250217
+  * Updates the sample station list.
+
+### v2.8.0~20250217
+  * New option to load a sample station list when there is no station in the list.
+  * Some minor changes.
+
+### v2.7.8~20250205
+  * Improves applet startup.
+
+### v2.7.7~20250204
+  * Code improvement.
+
+### v2.7.4~20250116
   * mainloopTools library: improvements.
 
-### 2.7.3~20250114
+### v2.7.3~20250114
   * Increases the size of the stream buffer for improved listening comfort.
   * Settings: Sets the default value for each multimedia key bind.
 

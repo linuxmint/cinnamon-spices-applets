@@ -6,14 +6,14 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2024-11-22 17:45-0500\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. eventView.js:26 3.8/applet.js:22 5.2/applet.js:22 5.2/eventView.js:27
 msgid "%A, %B %-e, %Y"
@@ -1333,37 +1333,33 @@ msgid "Timezone"
 msgstr "Fuseau horaire"
 
 #. 5.2->settings-schema.json->custom-tooltip-format->description
-#, fuzzy
 msgid "Date format for tooltip"
-msgstr "Format de date"
+msgstr "Format de date pour l'info-bulle"
 
 #. 5.2->settings-schema.json->custom-tooltip-format->tooltip
-#, fuzzy
 msgid "Set your custom tooltip format here."
-msgstr "Spécifiez votre format ici."
+msgstr "Précisez ici votre format pour l'info-bulle."
 
 #. 5.2->settings-schema.json->country->options
 msgid "Cyprus"
-msgstr ""
+msgstr "Chypre"
 
 #. 5.2->settings-schema.json->country->options
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #. 5.2->settings-schema.json->country->options
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #. 5.2->settings-schema.json->region_bel->options
 msgid "Brussels"
-msgstr ""
+msgstr "Bruxelles"
 
 #. 5.2->settings-schema.json->region_bel->options
-#, fuzzy
 msgid "Flemish Region"
-msgstr "Région"
+msgstr "Flandres"
 
 #. 5.2->settings-schema.json->region_bel->options
-#, fuzzy
 msgid "Walloon Region"
-msgstr "Région"
+msgstr "Wallonie"

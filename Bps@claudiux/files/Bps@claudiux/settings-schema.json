@@ -1,0 +1,89 @@
+{
+    "configuration": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "unit_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Unit",
+        "options" : {
+            "Bytes" : 0,
+            "Bits" : 1
+        },
+        "tooltip" : "Base data unit shown in the panel"
+    },
+    "is_binary" : {
+        "type": "combobox",
+        "default": true,
+        "description" : "Decimal or binary",
+        "options" : {
+            "Decimal" : false,
+            "Binary" : true
+        },
+        "tooltip" : "Decimal: k, M, G, T\nBinary: ki, Mi, Gi, Ti"
+    },
+
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+
+    "gui_value_order" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Value order",
+        "options" : {
+            "Download first" : 0,
+            "Upload first" : 1
+        },
+        "tooltip" : "An order of values shown in the panel"
+    },
+
+    "minimum_start": {
+        "type": "header",
+        "description": "Minimum displayed value"
+    },
+
+    "display_minimum_quantity": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 1023,
+        "step": 1,
+        "description": "Value",
+        "tooltip": "Value between 0 and 999 (decimal) or 1023 (binary)."
+    },
+    "display_minimum_unit_multiple": {
+        "type": "combobox",
+        "default": "1",
+        "description": "Multiple",
+        "options" : {
+            "1": "1",
+            "k": "k",
+            "M": "M",
+            "G": "G",
+            "T": "T"
+        }
+    },
+    "display_minimum_button": {
+        "type": "button",
+        "description": "Apply",
+        "callback": "_on_display_minimum_button_clicked"
+    },
+
+
+    "minimum_bytes_to_display": {
+        "type": "generic",
+        "default": 0
+    },
+
+    "checked_interfaces_string" : {
+        "type": "generic",
+        "default" : "eth0"
+    },
+    "unplugged_interfaces_string" : {
+        "type": "generic",
+        "default" : ""
+    }
+}

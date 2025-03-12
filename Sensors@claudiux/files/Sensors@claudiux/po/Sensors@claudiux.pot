@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 3.8.3\n"
+"Project-Id-Version: Sensors@claudiux 5.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-29 14:28+0100\n"
+"POT-Creation-Date: 2025-02-22 17:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,118 +18,124 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#. applet.js:218
+#. applet.js:233 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr ""
 
-#. applet.js:401
+#. applet.js:482 applet_OLD.js:418
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:619 applet.js:661
+#. applet.js:761 applet.js:805 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr ""
 
-#. applet.js:619 applet.js:621 applet.js:661 applet.js:663 applet.js:705
+#. applet.js:761 applet.js:765 applet.js:805 applet.js:807 applet.js:849
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr ""
 
-#. applet.js:621 applet.js:663
+#. applet.js:765 applet.js:807 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr ""
 
-#. applet.js:705 applet.js:749
+#. applet.js:849 applet.js:893 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr ""
 
-#. applet.js:751
+#. applet.js:895 applet_OLD.js:772
 msgid "max:"
 msgstr ""
 
-#. applet.js:780
+#. applet.js:924 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr ""
 
-#. applet.js:780
+#. applet.js:924 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#. applet.js:800
+#. applet.js:944 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr ""
 
-#. applet.js:1187
+#. applet.js:1352 applet_OLD.js:1208
 msgid "Settings"
 msgstr ""
 
-#. applet.js:1187
+#. applet.js:1352 applet_OLD.js:1208
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#. applet.js:1194
+#. applet.js:1359 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr ""
 
-#. applet.js:1204
+#. applet.js:1375 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr ""
 
-#. applet.js:1214
+#. applet.js:1391 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr ""
 
-#. applet.js:1224
+#. applet.js:1407 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr ""
 
-#. applet.js:1234
+#. applet.js:1423 applet_OLD.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1255
+#. applet.js:1450 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr ""
 
-#. applet.js:1264
+#. applet.js:1459 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr ""
 
-#. applet.js:1275
+#. applet.js:1470 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr ""
 
-#. applet.js:1576
+#. applet.js:1800 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#. lib/checkDependencies.js:317
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#. lib/checkDependencies.js:318
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr ""
 
-#. lib/checkDependencies.js:346
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#. lib/checkDependencies.js:347
-msgid "Please execute, in the just opened terminal, the commands:"
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
 msgstr ""
 
-#. lib/checkDependencies.js:348
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
+msgstr ""
+
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
 msgstr ""
 
 #. lib/util.js:244
@@ -190,12 +196,16 @@ msgid ""
 "color changes when a value reaches or exceeds its limit."
 msgstr ""
 
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr ""
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+msgid "𖣘 Fan"
 msgstr ""
 
 #. settings-schema.json->page_Voltages->title
@@ -381,48 +391,20 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
+#. settings-schema.json->separator_type->options
+msgid "(none)"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "sub"
+#. settings-schema.json->separator_type->options
+msgid "blank"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "super"
+#. settings-schema.json->separator_type->options
+msgid "bar"
 msgstr ""
 
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr ""
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr ""
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
+#. settings-schema.json->separator_type->description
+msgid "Separator"
 msgstr ""
 
 #. settings-schema.json->char_color_customized->description
@@ -433,13 +415,12 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#. settings-schema.json->separator->description
-msgid "Separator"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
 msgstr ""
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -526,8 +507,18 @@ msgid ""
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr ""
@@ -684,6 +675,14 @@ msgid ""
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr ""
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr ""
@@ -713,6 +712,10 @@ msgid ""
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
 "  Example: $*1.1+0.5"
+msgstr ""
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
 msgstr ""
 
 #. settings-schema.json->volt_unit->description
@@ -769,6 +772,10 @@ msgstr ""
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
 msgstr ""
 
 #. settings-schema.json->strictly_positive_intrusion->description

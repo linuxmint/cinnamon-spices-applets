@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-11-21 11:09-0300\n"
+"POT-Creation-Date: 2025-02-25 17:53+0100\n"
+"PO-Revision-Date: 2025-02-26 11:08-0300\n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -19,75 +19,79 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. applet.js:118
+#. applet.js:117
+msgid "All workspaces"
+msgstr "Todos los espacios de trabajo"
+
+#. applet.js:145
 msgid "Edit Applications"
 msgstr "Editar aplicaciones"
 
-#. applet.js:837 applet.js:1131
+#. applet.js:864 applet.js:1158
 msgid "Delete"
 msgstr "Borrar"
 
-#. applet.js:838 applet.js:1132
+#. applet.js:865 applet.js:1159
 msgid "Edit"
 msgstr "Editar"
 
-#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:866 applet.js:1160 dialogs.py:46 dialogs.py:296 widgets.py:73
 msgid "Cancel"
 msgstr "Cancelar"
 
-#. dialogs.py:41 dialogs.py:292
+#. dialogs.py:44 dialogs.py:295
 msgid "OK"
 msgstr "OK"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
+#. dialogs.py:47 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nombre"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:50
+#. dialogs.py:53
 msgid "Group"
 msgstr "Grupo"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
+#. dialogs.py:54 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Comando"
 
-#. dialogs.py:236
+#. dialogs.py:239
 msgid "The name cannot be empty"
 msgstr "El nombre no puede estar vacío"
 
-#. dialogs.py:241
+#. dialogs.py:244
 msgid "The name is already used"
 msgstr "El nombre ya está siendo utilizado"
 
-#. dialogs.py:248
+#. dialogs.py:251
 msgid "Valid name"
 msgstr "Nombre válido"
 
-#. dialogs.py:254
+#. dialogs.py:257
 msgid "Valid command"
 msgstr "Comando válido"
 
-#. dialogs.py:257
+#. dialogs.py:260
 msgid "The command is not valid"
 msgstr "El comando no es válido"
 
-#. dialogs.py:291
+#. dialogs.py:294
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "¿Qué datos deben reemplazarse del archivo * .desktop?"
 
-#. dialogs.py:335
+#. dialogs.py:338
 msgid "really delete?"
 msgstr "¿realmente lo desea borrar?"
 
-#. dialogs.py:336
+#. dialogs.py:339
 msgid "No"
 msgstr "No"
 
-#. dialogs.py:337
+#. dialogs.py:340
 msgid "Yes"
 msgstr "Sí"
 
@@ -216,6 +220,14 @@ msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr ""
 "Mostrar el menú junto al cursor cuando se activa mediante una tecla de "
 "acceso directo"
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr "Vincular al espacio de trabajo"
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr "Mostrar el applet sólo en el espacio de trabajo seleccionado"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

@@ -1,0 +1,8 @@
+{
+  "description": "Instant Network Speed is a simple network monitor",
+  "uuid": "Bps@claudiux",
+  "name": "Bps: Instant Network Speed",
+  "version": "1.2.0",
+  "max-instances": -1,
+  "author": "claudiux"
+}

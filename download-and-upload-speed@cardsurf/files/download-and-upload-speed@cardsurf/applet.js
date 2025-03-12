@@ -1,11 +1,21 @@
 
 const Applet = imports.ui.applet;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const {
+  _sourceIds,
+  timeout_add_seconds,
+  timeout_add,
+  setTimeout,
+  clearTimeout,
+  setInterval,
+  clearInterval,
+  source_exists,
+  source_remove,
+  remove_all_sources
+} = require("./mainloopTools");
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletGui, AppletConstants, ShellUtils, Dates, Translation, Infos;
@@ -41,11 +51,11 @@ function _(str) {
 
 
 
-function MyApplet(metadata, orientation, panel_height, instance_id) {
+function DownloadAndUploadSpeed(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
 };
 
-MyApplet.prototype = {
+DownloadAndUploadSpeed.prototype = {
     __proto__: Applet.Applet.prototype,
 
     _init: function(metadata, orientation, panel_height, instance_id) {
@@ -203,8 +213,8 @@ MyApplet.prototype = {
     },
 
     _connect_signals: function() {
-        global.connect("shutdown", Lang.bind(this, this.on_shutdown));
-        global.connect("scale-changed", Lang.bind(this, this.on_panel_height_changed));
+        global.connect("shutdown", () => { this.on_shutdown() });
+        global.connect("scale-changed", () => { this.on_panel_height_changed() });
     },
 
     on_shutdown: function () {
@@ -564,9 +574,9 @@ MyApplet.prototype = {
     _init_menu_item_gui: function () {
         this.menu_item_gui = new AppletGui.RadioMenuItem(_("Gui"), [_("Compact"), _("Large")]);
         this.menu_item_gui.set_active_option(this.gui_speed_type);
-        this.menu_item_gui.set_callback_option_clicked(this, this.on_menu_item_gui_clicked);
+        this.menu_item_gui.set_callback_option_clicked(this, (option_name, option_index) => { this.on_menu_item_gui_clicked(option_name, option_index) });
         this._applet_context_menu.addMenuItem(this.menu_item_gui);
-        this._applet_context_menu.connect('open-state-changed', Lang.bind(this, this.on_context_menu_state_changed));
+        this._applet_context_menu.connect('open-state-changed', (actor, event) => { this.on_context_menu_state_changed(actor, event) });
     },
 
     on_menu_item_gui_clicked: function (option_name, option_index) {
@@ -715,7 +725,7 @@ MyApplet.prototype = {
 
     _run_calculate_speed: function () {
         this._calculate_speed();
-        Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
+        timeout_add(this.update_every * 1000, () => { this._run_calculate_speed_running() });
     },
 
     _calculate_speed: function () {
@@ -932,10 +942,10 @@ MyApplet.prototype = {
     _run_write_bytes: function () {
         if(this.write_every > 0) {
             this._write_bytes_total();
-            Mainloop.timeout_add(this.write_every * 1000, Lang.bind(this, this._run_write_bytes_running));
+            timeout_add(this.write_every * 1000, () => { this._run_write_bytes_running() });
         }
         else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_write_bytes_running));
+            timeout_add(1000, () => { this._run_write_bytes_running() });
         }
     },
 
@@ -955,30 +965,24 @@ MyApplet.prototype = {
     _run_update_available_interfaces: function () {
         if(this.update_available_interfaces_every > 0) {
             this.update_network_interfaces();
-            Mainloop.timeout_add(this.update_available_interfaces_every * 1000,
-                                 Lang.bind(this, this._run_update_available_interfaces_running));
+            timeout_add(this.update_available_interfaces_every * 1000,
+                                 () => { this._run_update_available_interfaces_running() });
         }
         else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_update_available_interfaces_running));
+            timeout_add(1000, () => { this._run_update_available_interfaces_running() });
         }
+    },
+
+    on_applet_removed_from_panel: function () {
+        remove_all_sources()
     },
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
 function main(metadata, orientation, panel_height, instance_id) {
-    let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
-    return myApplet;
+    //~ let myApplet = new DownloadAndUploadSpeed(metadata, orientation, panel_height, instance_id);
+    //~ return myApplet;
+    return new DownloadAndUploadSpeed(metadata, orientation, panel_height, instance_id);
 }
 
 

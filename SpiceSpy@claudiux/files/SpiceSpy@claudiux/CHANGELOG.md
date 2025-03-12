@@ -1,3 +1,30 @@
+### v5.2.6~20250310
+  * Fixes the `spices-cache-init.sh` script.
+
+### v5.2.5~20250309
+  * Fixes a typo error in a script.
+
+### v5.2.4~20250303
+  * Bugfix in the `spices-cache-init.sh` script.
+
+### v5.2.3~20250303
+  * Does not try to translate null messages from other Spices. This also helps avoid black screens.
+  * Bugfix.
+
+### v5.2.2~20250226
+  * Bugfix.
+
+### v5.2.1~20250226
+  * Removed debug messages.
+
+### v5.2.0~20250226
+  * Adapts the panel display to the size of the information.
+  * Fixes #6926.
+
+### v5.1.0~20250204
+  * Better update of the number of comments.
+  * Improved menu management.
+
 ### v5.0.0~20250128
   * Fixes menu display.
   * Changes this applet settings.

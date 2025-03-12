@@ -22,6 +22,8 @@ export interface SwissMeteoDay {
 	 * in mm
 	 */
 	precipitation: number;
+	precipitationMin: number;
+	precipitationMax: number;
 }
 
 export function SwissMeteoDayToForecastData(day: SwissMeteoDay): ForecastData {

@@ -32,14 +32,16 @@
         "sectionSound1",
         "sectionSound2",
         "sectionSound3",
-        "sectionSound4"
+        "sectionSound4",
+        "sectionSound5"
       ]
     },
     "page_shortcuts": {
       "type": "page",
       "title": "Shortcuts",
       "sections": [
-        "sectionShortcuts1"
+        "sectionShortcuts1",
+        "sectionCommands"
       ]
     },
     "sectionBehavior1": {
@@ -51,7 +53,7 @@
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
         "avoidTwice",
-        "seekerTooltipDelay"
+        "showMediaOptical"
       ]
     },
     "sectionBehavior2": {
@@ -129,6 +131,7 @@
         "showOSDonStartup",
         "showVolumeValue",
         "showPercent",
+        "OSDhorizontal",
         "showBarLevel"
       ]
     },
@@ -148,6 +151,14 @@
         "remove_soundATcinnamonDOTorg"
       ]
     },
+    "sectionSound5": {
+      "type": "section",
+      "dependency": "OsdWithNumberATJosephMcc_is_loaded",
+      "title": "Remove incompatible extensions",
+      "keys": [
+        "remove_OsdWithNumberATJosephMcc"
+      ]
+    },
     "sectionShortcuts1": {
       "type": "section",
       "title": "Shortcuts",
@@ -163,6 +174,15 @@
         "volume-down",
         "audio-next",
         "audio-prev"
+      ]
+    },
+    "sectionCommands": {
+      "type": "section",
+      "title": "Custom commands",
+      "keys": [
+        "custom-commands-label",
+        "custom-commands-list",
+        "button-reload-applet"
       ]
     }
   },
@@ -193,14 +213,10 @@
     "default": false,
     "description": "Avoid displaying controllers twice"
   },
-  "seekerTooltipDelay": {
-    "type": "spinbutton",
-    "default": 400,
-    "units": "ms",
-    "min": 50,
-    "max": 1500,
-    "step": 50,
-    "description": "Seeker tooltip: time to disappear"
+  "showMediaOptical": {
+    "type": "switch",
+    "default": true,
+    "description": "Show Media-Optical icon"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -219,7 +235,16 @@
     "default": [
       "banshee",
       "vlc",
-      "rhythmbox"
+      "rhythmbox",
+      "mpv",
+      "io.github.celluloid_player.Celluloid",
+      "firefox",
+      "spotify",
+      "smplayer",
+      "org.gnome.Totem",
+      "mullvad browser",
+      "io.gitlab.librewolf-community",
+      "LibreWolf"
     ]
   },
   "showtrack": {
@@ -421,10 +446,11 @@
   "showMediaKeysOSD": {
     "type": "switch",
     "default": true,
-    "description": "Whether or not to show the media keys osd"
+    "description": "Whether or not to show the media keys OSD"
   },
   "showOSDonStartup": {
     "type": "switch",
+    "dependency": "showMediaKeysOSD",
     "description": "Show volume level in OSD on startup",
     "default": false
   },
@@ -436,8 +462,14 @@
   },
   "showPercent": {
     "type": "switch",
-    "dependency": "showVolumeValue",
+    "dependency": "showMediaKeysOSD",
     "description": "Show '%' in OSD",
+    "default": false
+  },
+  "OSDhorizontal": {
+    "type": "switch",
+    "dependency": "showMediaKeysOSD",
+    "description": "Show horizontal OSD",
     "default": false
   },
   "showBarLevel": {
@@ -509,6 +541,36 @@
     "default": "::",
     "description": "Previous Track"
   },
+  "custom-commands-label": {
+    "type": "label",
+    "description": "These commands will appear in the context menu once you've reloaded this applet."
+  },
+  "custom-commands-list": {
+    "type": "list",
+    "description": "Commands",
+    "default": [],
+    "columns": [
+      {
+        "id": "title",
+        "title": "Title",
+        "type": "string",
+        "default": "",
+        "expand-width": false
+      },
+      {
+        "id": "command",
+        "title": "Command",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ]
+  },
+  "button-reload-applet": {
+    "type": "button",
+    "description": "Reload this applet",
+    "callback": "_on_reload_this_applet_pressed"
+  },
   "volume": {
     "type": "generic",
     "default": "50%"
@@ -525,5 +587,15 @@
     "type": "button",
     "description": "Remove from panel the sound@cinnamon.org applet",
     "callback": "_on_remove_soundATcinnamonDOTorg_from_panels"
+  },
+  "OsdWithNumberATJosephMcc_is_loaded": {
+    "type": "generic",
+    "default": false
+  },
+  "remove_OsdWithNumberATJosephMcc": {
+    "type": "button",
+    "description": "Remove the OsdWithNumber extension",
+    "callback": "_on_remove_OsdWithNumber_from_extensions"
   }
+
 }

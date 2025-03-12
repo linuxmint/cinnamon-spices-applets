@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-27 14:39-0500\n"
-"PO-Revision-Date: 2024-04-21 11:10+0200\n"
+"PO-Revision-Date: 2025-02-21 19:27+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -83,9 +83,8 @@ msgid "Do you really want to empty the current history?"
 msgstr "Wil je echt de huidige geschiedenis leegmaken?"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Instantly access and manage your clipboard history."
-msgstr "Direct toegang krijgen tot en beheren van je klembordgeschiedenis"
+msgstr "Onmiddellijke toegang tot en beheer van je klembordgeschiedenis."
 
 #. metadata.json->name
 msgid "GPaste Reloaded"
@@ -97,7 +96,7 @@ msgstr "Getoonde items"
 
 #. settings-schema.json->always-show-icon->description
 msgid "Show tray icon, even when the applet is not in use"
-msgstr ""
+msgstr "Toon systeempictogram, zelfs wanneer de applet niet in gebruik is."
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"

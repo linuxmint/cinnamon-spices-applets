@@ -11,7 +11,7 @@ Visual Studio Code has the best Typescript support, although you can use other T
 
 ## Build for 3.8
 
-Run `build.sh`, it will build for 3.8.
+Run `build.sh`, it will build for 3.8.  Alternatively, run `install.sh` to build and install, which checks for compile and lint errors before building, then installs the applet and restart Cinnamon.
 
 ## Build for 3.0
 

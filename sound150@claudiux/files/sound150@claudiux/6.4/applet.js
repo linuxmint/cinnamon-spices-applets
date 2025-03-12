@@ -1,5 +1,4 @@
 const Applet = imports.ui.applet;
-//~ const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const Interfaces = imports.misc.interfaces;
 const Util = imports.misc.util;
@@ -7,7 +6,6 @@ const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
-//~ const PopupMenu = require("./lib/popupMenu");
 const GLib = imports.gi.GLib;
 const Cogl = imports.gi.Cogl; //Cogl
 const Gdk = imports.gi.Gdk;
@@ -39,12 +37,16 @@ const {
 }  = require("./lib/mainloopTools");
 
 const UUID = "sound150@claudiux";
+const EXTENSION_UUID = "OSD150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
-const PATH2SCRIPTS = HOME_DIR+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const PATH2SCRIPTS = APPLET_DIR+"/scripts";
 
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
+
+var SHOW_MEDIA_OPTICAL = true;
 
 const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
     x_align: Clutter.BinAlignment.FILL,
@@ -52,6 +54,7 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 });
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
+const ENABLED_EXTENSIONS_KEY = "enabled-extensions";
 
 // From Cinnamon 6.4, the /org/cinnamon/show-media-keys-osd key
 // becomes a boolean, no longer a character string!
@@ -63,6 +66,23 @@ const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
 // how long to show the output icon when volume is adjusted during media playback.
 const OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
+const IS_OSD150_ENABLED = () => {
+    var enabled = false;
+    const enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+    for (let i = 0; i < enabledExtensions.length; i++) {
+        if (enabledExtensions[i] == EXTENSION_UUID) {
+            enabled = true;
+            break;
+        }
+    }
+    return enabled;
+}
+
+const IS_OSD150_INSTALLED = () => {
+    const OSD150_DIR = HOME_DIR+"/.local/share/cinnamon/extensions/"+EXTENSION_UUID;
+    return GLib.file_test(OSD150_DIR, GLib.FileTest.EXISTS);
+}
+
 function run_playerctld() {
     Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
 }
@@ -71,35 +91,6 @@ function kill_playerctld() {
     Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/kill_playerctld.sh'");
 }
 
-Main.osdWindowManager._showOsdWindow = function(monitorIndex, icon, label, level, maxLevel=1) {
-    if (maxLevel>1.5) maxLevel=1.5;
-    else if (maxLevel < 0.3) maxLevel=0.3;
-
-    this._osdWindows[monitorIndex].setIcon(icon);
-    this._osdWindows[monitorIndex].setLabel(label);
-    this._osdWindows[monitorIndex].setMaxLevel(maxLevel);
-    this._osdWindows[monitorIndex].setLevel(level);
-    this._osdWindows[monitorIndex].show();
-}
-
-Main.osdWindowManager.show = function(monitorIndex, icon, label, level, maxLevel, convertIndex) {
-    if (this._osdWindows.length === 0)
-        return;
-
-    if (monitorIndex !== -1) {
-        if (convertIndex)
-            monitorIndex = convertGdkIndex(monitorIndex);
-        for (let i = 0; i < this._osdWindows.length; i++) {
-            if (i === monitorIndex)
-                this._showOsdWindow(i, icon, label, level, maxLevel);
-            else
-                this._osdWindows[i].cancel();
-        }
-    } else {
-        for (let i = 0; i < this._osdWindows.length; i++)
-            this._showOsdWindow(i, icon, label, level, maxLevel);
-    }
-}
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -125,6 +116,8 @@ function _(str) {
         return customTrans;
     return Gettext.gettext(str);
 }
+
+const MSG_RELOAD = _("Reload this applet");
 
 // Logging
 function log(message, always = false) {
@@ -170,7 +163,8 @@ const original_players_with_seek_support = [
     "rhythmbox3", "pragha", "quodlibet",
     "amarok", "xnoise", "gmusicbrowser",
     "vlc", "qmmp", "deadbeef",
-    "audacious", "celluloid", "spotify", "mpv", "smplayer"]; // Added: "smplayer"
+    "audacious", "celluloid", "spotify", "mpv", "smplayer",
+    "LibreWolf"]; // Added: "smplayer", "LibreWolf"
 var players_without_seek_support = original_players_without_seek_support;
 var players_with_seek_support = original_players_with_seek_support;
 
@@ -179,7 +173,7 @@ let x = _("Playing");
 x = _("Paused");
 x = _("Stopped");
 
-let VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
+let VOLUME_ADJUSTMENT_STEP = 0.05; /* Volume adjustment step in % */
 
 const ICON_SIZE = Math.trunc(28*global.ui_scale);
 
@@ -275,12 +269,14 @@ class ControlButton {
 
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
+        //~ logDebug("VolumeSlider constructor tooltip: "+tooltip);
         const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
-        applet.showOSD = applet.showOSDonStartup;
         super(startLevel);
         this.oldValue = startLevel;
         this.applet = applet;
         this.oldValue = startLevel;
+
+        this.isMic = tooltip == _("Microphone"); //???
 
         Gtk.IconTheme.get_default().append_search_path("./icons");
 
@@ -319,13 +315,17 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             () => {
                 let muted = false;
                 if (this._value) this.oldValue = this._value;
-                if (this.applet.get_stage() != null) {
+                if (this.applet.actor.get_stage() != null) {
                     if (this.isMic) {
-                        this.applet.mute_in_switch.setToggleState(!this.applet.mute_in_switch.state);
-                        if (this.applet.mute_in_switch.state) muted = true;
+                        if (this.applet.mute_in_switch) {
+                            this.applet.mute_in_switch.setToggleState(!this.applet.mute_in_switch.state);
+                            if (this.applet.mute_in_switch.state) muted = true;
+                        }
                     } else {
-                        this.applet.mute_out_switch.setToggleState(!this.applet.mute_out_switch.state);
-                        if (this.applet.mute_out_switch.state) muted = true;
+                        if (this.applet.mute_out_switch) {
+                            this.applet.mute_out_switch.setToggleState(!this.applet.mute_out_switch.state);
+                            if (this.applet.mute_out_switch.state) muted = true;
+                        }
                     }
                 }
                 if (muted) {
@@ -410,14 +410,18 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         let _bar_level = null;
         let _volume_str = "";
+        let rounded_volume = Math.round(volume/this.applet._volumeNorm * 100);
         if (this.applet.showVolumeValue === true)
-            _volume_str = ""+Math.round(volume/this.applet._volumeNorm * 100)+PERCENT_CHAR;
+            _volume_str = ""+rounded_volume+PERCENT_CHAR;
         if (this.applet.showBarLevel === true)
-            _bar_level =  Math.round(volume/this.applet._volumeNorm * 100);
-        let _maxLevel = Math.round(this.applet._volumeMax/this.applet._volumeNorm * 100) / 100;
+            _bar_level =  rounded_volume;
+        let _maxLevel = (this.isMic) ? 1 : Math.round(this.applet._volumeMax/this.applet._volumeNorm * 100) / 100;
 
-        if (this.applet.showOSD && Math.round(volume/this.applet._volumeNorm * 100) != Math.round(this.oldValue)) {
-            Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+        if (this.applet.showOSD && (rounded_volume != Math.round(this.oldValue) || this.isMic)) {
+            if (IS_OSD150_ENABLED())
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+            else
+                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
         }
 
         if (this.stream.is_muted !== muted)
@@ -541,6 +545,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         let icon;
         if (value < 0.005) {
             icon = "muted";
+            value = 0;
         } else {
             let n2 = Math.floor(300 * value)/100;
             if (this.isMic) {
@@ -782,7 +787,7 @@ class Seeker extends Slider.Slider {
     }
 
     _updateValue() {
-        if (this.destroyed) return; // GLib.SOURCE_REMOVE; //???
+        if (this.destroyed) return;
         //~ this._currentTime = (Date.now() - this.startingDate) / 1000;
 
         if (this.canSeek) {
@@ -827,8 +832,8 @@ class Seeker extends Slider.Slider {
                     this._timeoutId_timerCallback = null;
 
                     if (!this.destroyed) {
-                        this._timeoutId = timeout_add_seconds(1, this._updateValue.bind(this));
-                        this._timeoutId_timerCallback = timeout_add_seconds(1, this._timerCallback.bind(this));
+                        this._timeoutId = timeout_add_seconds(1, () => { this._updateValue(); return !this.destroyed });
+                        this._timeoutId_timerCallback = timeout_add_seconds(1, () => { return this._timerCallback() });
                     }
                     //return (!this.destroyed && this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE; //???
                 }
@@ -874,11 +879,11 @@ class Seeker extends Slider.Slider {
             if (this.canSeek) {
                 this._getPosition();
                 this._timerTicker = 0;
-                this._timeoutId_timerCallback = timeout_add_seconds(1, this._timerCallback.bind(this));
+                this._timeoutId_timerCallback = timeout_add_seconds(1, () => { return this._timerCallback() });
             } else if (this._length > 0) {
                 this._getPosition();
                 this._timerTicker = 0;
-                this._timeoutId_timerCallback = timeout_add_seconds(1, this._timerCallback.bind(this));
+                this._timeoutId_timerCallback = timeout_add_seconds(1, () => { return this._timerCallback() });
             }
         } else {
             if (this.status === "Stopped") {
@@ -988,7 +993,7 @@ class Seeker extends Slider.Slider {
             this._seekChangedId = null;
         }
 
-        this.disconnectAll();
+        //~ this.disconnectAll(); //??? Seems cause of bugs.
 
         this.posLabel = null;
         this.durLabel = null;
@@ -1064,7 +1069,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         let asyncReadyCb = (proxy, error, property) => {
             if (error)
-                log(error);
+                logError(error);
             else {
                 this[property] = proxy;
                 this._dbus_acquired();
@@ -1098,7 +1103,7 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         let mainBox = new PopupMenu.PopupMenuSection();
-        this.addMenuItem(mainBox);
+        //~ this.addMenuItem(mainBox);
 
         this.vertBox = new St.BoxLayout({
             style_class: "sound-player",
@@ -1106,6 +1111,7 @@ class Player extends PopupMenu.PopupMenuSection {
             vertical: true
         });
         mainBox.addActor(this.vertBox, { expand: false });
+        this.addMenuItem(mainBox);
 
         // Player info
         this._playerBox = new St.BoxLayout();
@@ -1144,6 +1150,11 @@ class Player extends PopupMenu.PopupMenuSection {
             icon_type: St.IconType.SYMBOLIC
         });
         this.coverBox.add_actor(this.cover);
+
+        if (SHOW_MEDIA_OPTICAL)
+            this.cover.show();
+        else
+            this.cover.hide();
 
         this._cover_load_handle = 0;
         this._cover_path = null;
@@ -1695,7 +1706,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 cover_path,
                 Math.trunc(300*global.ui_scale),
                 Math.trunc(300*global.ui_scale),
-                this._on_cover_loaded.bind(this)
+                (cache, handle, actor) => { this._on_cover_loaded(cache, handle, actor) }
             );
             this._applet.setIcon();
 
@@ -1789,6 +1800,7 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._seeker)
             this._seeker.destroy();
 
+        //FIXME!!! Error when a media is playing:
         try {
             PopupMenu.PopupMenuSection.prototype.destroy.call(this);
         } catch(e) {logError("Error destroying Player!!!: "+e)}
@@ -1838,27 +1850,38 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.title_text = "";
 
+        this.startingUp = true;
+
+        //~ this.install_OSD150();
+
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
+        this.settings.bind("showMediaOptical", "showMediaOptical", () => {
+            SHOW_MEDIA_OPTICAL = this.showMediaOptical;
+            this._on_reload_this_applet_pressed();
+        });
+        SHOW_MEDIA_OPTICAL = this.showMediaOptical;
+
         this.settings.bind("muteSoundOnClosing", "muteSoundOnClosing");
         this.settings.bind("startupVolume", "startupVolume");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
-        this.showOSD = this.showOSDonStartup;
         this.settings.bind("showPercent", "showPercent", () => {
-            if (this.showPercent)
-                PERCENT_CHAR = _("%");
-            else
-                PERCENT_CHAR = "";
+            PERCENT_CHAR = (this.showPercent) ? _("%") : "";
         });
-        if (this.showPercent)
-            PERCENT_CHAR = _("%");
-        else
-            PERCENT_CHAR = "";
+        PERCENT_CHAR = (this.showPercent) ? _("%") : "";
 
         this.settings.bind("showBarLevel", "showBarLevel");
         this.settings.bind("showVolumeValue", "showVolumeValue");
 
-        this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
+        this.settings.bind("OSDhorizontal","OSDhorizontal",
+            () => {
+                this.on_OSDhorizontal_changed();
+            }
+        );
+        this.on_OSDhorizontal_changed();
+
+        this.seekerTooltipDelay = 500;
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
+        this.settings.bind("OsdWithNumberATJosephMcc_is_loaded", "OsdWithNumberATJosephMcc_is_loaded");
         this.settings.bind("showtrack", "showtrack", () => { this.on_settings_changed() });
         this.settings.bind("middleClickAction", "middleClickAction");
         this.settings.bind("middleShiftClickAction", "middleShiftClickAction");
@@ -1884,13 +1907,6 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("keyOpen", "keyOpen", () => { this._setKeybinding() });
         this.settings.bind("keySwitchPlayer", "keySwitchPlayer", () => { this._setKeybinding() });
-
-        this.settings.bind("stepVolume", "stepVolume", () => {
-            VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
-            //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
-        });
-        VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
-        //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
 
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
         this.settings.bind("magnetic25On", "magnetic25On", () => this._on_sound_settings_change());
@@ -1921,7 +1937,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.old_volume = this.volume;
         this.settings.setValue("showMediaKeysOSD", global.settings.get_boolean(SHOW_MEDIA_KEYS_OSD_KEY));
         this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", () => { this.on_showMediaKeysOSD_changed() });
-        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
 
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", () => { this.volume_near_icon() });
@@ -1936,6 +1951,24 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("audio-next", "audio_next", () => { this._setKeybinding() });
         this.settings.bind("audio-prev", "audio_prev", () => { this._setKeybinding() });
 
+        this.settings.bind("stepVolume", "stepVolume", () => {
+            let sv = this.settings.getValue("stepVolume");
+            let vu = this.settings.getValue("volume-up");
+            let old_VAS = Math.round(VOLUME_ADJUSTMENT_STEP*100);
+            VOLUME_ADJUSTMENT_STEP = sv / 100;
+            if (old_VAS == 5 && sv != 5 && vu.length <= 2) {
+                this.settings.setValue("redefine-volume-keybindings", true);
+                this._set_shortcuts_as_default();
+                this._setKeybinding();
+            }
+            //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
+        });
+        VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
+        //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
+
+        // Custom commands:
+        this.settings.bind("custom-commands-list", "custom_commands");
+
         // Whether sound@cinnamon.org is loaded:
         let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
         var _soundATcinnamonDOTorg_is_loaded = false;
@@ -1947,6 +1980,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         this.settings.setValue("soundATcinnamonDOTorg_is_loaded", _soundATcinnamonDOTorg_is_loaded);
 
+        // Whether OsdWithNumber@JosephMcc is loaded:
+        this.OsdWithNumberATJosephMcc_is_loaded = this.OsdWithNumberATJosephMcc_is_loaded_internal;
+
         Main.themeManager.connect("theme-set", () => { this._theme_set() });
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -1954,6 +1990,17 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menuManager.addMenu(this.menu);
 
         this.set_applet_icon_symbolic_name("audio-x-generic");
+
+        this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted-symbolic", St.IconType.SYMBOLIC);
+        this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted-symbolic", St.IconType.SYMBOLIC);
+        this._applet_context_menu.addMenuItem(this.mute_out_switch);
+        this._applet_context_menu.addMenuItem(this.mute_in_switch);
+        if (this.alwaysCanChangeMic)
+            this.mute_in_switch.actor.show();
+        else
+            this.mute_in_switch.actor.hide();
+
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this._players = {};
         this._playerItems = [];
@@ -2029,19 +2076,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._iconTimeoutId = null;
         this._iconLooping = true;
 
-        this.actor.connect("scroll-event", (...args) => this._onScrollEvent(...args));
-        this.actor.connect("key-press-event", (...args) => this._onKeyPressEvent(...args));
-
-        this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted-symbolic", St.IconType.SYMBOLIC);
-        this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted-symbolic", St.IconType.SYMBOLIC);
-        this._applet_context_menu.addMenuItem(this.mute_out_switch);
-        this._applet_context_menu.addMenuItem(this.mute_in_switch);
-        if (!this.alwaysCanChangeMic)
-            this.mute_in_switch.actor.hide();
-        else
-            this.mute_in_switch.actor.show();
-
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.scrollEventId = this.actor.connect("scroll-event", (...args) => this._onScrollEvent(...args));
+        this.keypressEventId = this.actor.connect("key-press-event", (...args) => this._onKeyPressEvent(...args));
+        this.enterEventId = this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event));
+        this.leaveEventId = this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event));
+        this.notifyHoverId = this.actor.connect('notify::hover', () => { this._applet_tooltip.show(); });
 
         this._outputApplicationsMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applications"));
         this._selectOutputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Output device"));
@@ -2078,6 +2117,21 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._applet_context_menu.addMenuItem(this.context_menu_item_pulseEffects);
         }
 
+        // Custom commands:
+        if (this.custom_commands.length > 0) {
+            let commands_menu_item = new PopupMenu.PopupSubMenuMenuItem(_("Commands"));
+            for (let c of this.custom_commands) {
+                commands_menu_item.menu.addAction(c["title"], () => { Util.spawnCommandLineAsync(`${c["command"]}`) });
+            }
+            this._applet_context_menu.addMenuItem(commands_menu_item);
+        }
+
+        // button Reload this applet
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        let _reload_button = new PopupMenu.PopupIconMenuItem(MSG_RELOAD, "restart", St.IconType.SYMBOLIC);
+        _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed());
+        this._applet_context_menu.addMenuItem(_reload_button);
+
         this._showFixedElements();
 
         this.mute_out_switch.connect("toggled", () => this._toggle_out_mute());
@@ -2097,6 +2151,65 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._sound_settings.connect("changed::" + OVERAMPLIFICATION_KEY, () => this._on_sound_settings_change());
     }
 
+    on_enter_event(actor, event) {
+        this.setAppletTooltip();
+        this._applet_tooltip.show();
+    }
+
+    on_leave_event(actor, event) {
+        this.set_applet_tooltip("");
+    }
+
+    on_OSDhorizontal_changed() {
+        if (!this.OSDhorizontal) return;
+        if (IS_OSD150_ENABLED()) {
+            return;
+        } else {
+            const Button2 = _("Cancel");
+            const summary = _("Enhanced Sound applet");
+            var Button1, body;
+            if (IS_OSD150_INSTALLED()) {
+                Button1 = _("Enable the OSD150 extension");
+                body = _("To obtain an horizontal OSD, you need to enable the OSD150 extension.");
+                Util.spawnCommandLineAsyncIO(
+                    `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
+                    (stdout, stderr, exitCode) => {
+                        if (exitCode === 0) {
+                            logDebug("stdout: "+stdout+" "+ typeof stdout);
+                            if (stdout.startsWith("opt1")) {
+                                this.install_OSD150();
+                            } else {
+                                this.OSDhorizontal = false;
+                            }
+                        } else {
+                            this.OSDhorizontal = false;
+                        }
+                    },
+                    {}
+                );
+            } else {
+                Button1 = _("Download the OSD150 extension");
+                body = _("To obtain an horizontal OSD, you need to download the OSD150 extension.\nClick on the Download button then search for OSD150 and select the ⬇ button.");
+                Util.spawnCommandLineAsyncIO(
+                    `notify-send -u critical --icon="audio-volume-overamplified-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
+                    (stdout, stderr, exitCode) => {
+                        if (exitCode === 0) {
+                            logDebug("stdout: "+stdout+" "+ typeof stdout);
+                            if (stdout.startsWith("opt1")) {
+                                Util.spawnCommandLineAsync("cinnamon-settings extensions -t download");
+                            } else {
+                                this.OSDhorizontal = false;
+                            }
+                        } else {
+                            this.OSDhorizontal = false;
+                        }
+                    },
+                    {}
+                );
+            }
+        }
+    }
+
     on_volumeSoundFile_changed() {
         this._sounds_settings.set_string(VOLUME_SOUND_FILE_KEY, this.volumeSoundFile);
     }
@@ -2107,6 +2220,30 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_showMediaKeysOSD_changed() {
         global.settings.set_boolean(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
+    }
+
+    _on_remove_OsdWithNumber_from_extensions() {
+        const TO_REMOVE = "OsdWithNumber@JosephMcc";
+        let dialog = new ModalDialog.ConfirmDialog(
+            _("Are you sure you want to remove '%s'?").format(TO_REMOVE),
+                () => {
+                Extension.unloadExtension(TO_REMOVE, Extension.Type.EXTENSION, false, false);
+
+                let oldList = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+                let newList = [];
+
+                for (let i = 0; i < oldList.length; i++) {
+                    let info = oldList[i];
+                    if (info != TO_REMOVE) {
+                        newList.push(oldList[i]);
+                    }
+                }
+                global.settings.set_strv(ENABLED_EXTENSIONS_KEY, newList);
+                this.settings.setValue("OsdWithNumberATJosephMcc_is_loaded", false);
+                //~ this._on_reload_this_applet_pressed();
+            }
+        );
+        dialog.open();
     }
 
     _on_remove_soundATcinnamonDOTorg_from_panels() {
@@ -2178,8 +2315,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, () => { this._openMenu() });
         Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, () => { this._switchToNextPlayer() });
 
-        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
-        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => {
+            this.set_applet_tooltip("");
+            this._volumeChange(Clutter.ScrollDirection.UP);
+            //~ this.setAppletTooltip();
+        });
+        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => {
+            this.set_applet_tooltip("");
+            this._volumeChange(Clutter.ScrollDirection.DOWN);
+            //~ this.setAppletTooltip();
+        });
         Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", () => this._toggle_out_mute());
         Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
 
@@ -2321,6 +2466,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
+        this.startingUp = true;
         if (this._playerctl)
             kill_playerctld();
         //~ logDebug("on_applet_added_to_panel()");
@@ -2353,19 +2499,18 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._iconLooping = true;
 
-        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
-
-        //~ if (this._output && this._output.is_muted) {
-            //~ this.old_volume = this.volume;
-            //~ this._toggle_out_mute();
-            //~ this.volume = this.old_volume;
-        //~ }
+        if (this._output && this._output.is_muted) {
+            this.old_volume = this.volume;
+            this._toggle_out_mute();
+            this.volume = this.old_volume;
+        }
 
         this._on_sound_settings_change();
 
         this._loopArtId = null;
         this._artLooping = true;
-        this._loopArtId = timeout_add_seconds(5, this.loopArt.bind(this));
+        //~ this._loopArtId = timeout_add_seconds(5, this.loopArt.bind(this));
+        this._loopArtId = timeout_add_seconds(5, () => { this.loopArt() });
         //~ this.loopArt();
 
         this.volume_near_icon();
@@ -2376,19 +2521,24 @@ class Sound150Applet extends Applet.TextIconApplet {
             },
             2100
         );
+
+        let _to = setTimeout( () => {
+                this.startingUp = false;
+                clearTimeout(_to);
+            },
+            (this.actor.get_stage() != null) ? 2100 : 20000
+        );
     }
 
     on_applet_reloaded() {
         //~ logDebug("on_applet_reloaded()");
         this._iconLooping = false;
         this._artLooping = false;
-        this.showOSD = this.showOSDonStartup && this.showMediaKeysOSD;
-        if (this.muteSoundOnClosing && this._output && !this._output.is_muted) {
-            this.old_volume = this.volume;
-            this._toggle_out_mute();
-            this.volume = this.old_volume;
-        }
-        //~ logDebug("Output is now muted");
+        this.startingUp = true;
+        //~ if (GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
+            //~ GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
+        //~ }
+
 
         if (this.actor && (this.actor.get_stage() != null) && this._control && (this._control.get_state() != Cvc.MixerControlState.CLOSED)) {
             try {
@@ -2399,7 +2549,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
     }
 
-    on_applet_removed_from_panel() {
+    on_applet_removed_from_panel(deleteConfig) {
+        this.startingUp = true;
         //~ logDebug("on_applet_removed_from_panel() BEGIN");
 
         // REMOVED: BUG!
@@ -2410,6 +2561,17 @@ class Sound150Applet extends Applet.TextIconApplet {
             //} catch(e) {logError("this.control.disconnect('any_signal') DOESN'T WORK")};
             //logDebug("_control closed");
         //}
+
+        //~ logDebug("this.volume: "+this.volume);
+        let old_volume = this.volume;
+        if (this.muteSoundOnClosing && this._output && !this._output.is_muted) {
+            this.old_volume = this.volume;
+            this._toggle_out_mute();
+            //~ logDebug("this.volume: "+this.volume);
+            this.volume = this.old_volume;
+            //~ logDebug("Output is now muted");
+        }
+        //~ logDebug("this.volume: "+this.volume);
 
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
@@ -2443,10 +2605,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ logDebug("this._iconLooping = false;");
         this._artLooping = false;
         //~ logDebug("this._artLooping = false;");
-        if (this._seeker) {
-            this._seeker.destroy();
-            //~ logDebug("Seeker destroyed");
-        }
+
+        this._removeAllStreams();
 
         if (this._ownerChangedId && this._dbus) {
             this._dbus.disconnectSignal(this._ownerChangedId);
@@ -2463,7 +2623,33 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._control.close();
 
         kill_playerctld();
+
+        if (this.scrollEventId)
+            this.actor.disconnect(this.scrollEventId);
+        if (this.keypressEventId)
+            this.actor.disconnect(this.keypressEventId);
+        if (this.enterEventId)
+            this.actor.disconnect(this.enterEventId);
+        if (this.leaveEventId)
+            this.actor.disconnect(this.leaveEventId);
+        if (this.notifyHoverId)
+            this.actor.disconnect(this.notifyHoverId);
+        this.scrollEventId = null;
+        this.keypressEventId = null;
+        this.enterEventId = null;
+        this.leaveEventId = null;
+        this.notifyHoverId = null;
+
+        //~ logDebug("old_volume: "+old_volume);
+        //~ this.volume = old_volume;
+        this.settings.setValue("volume", old_volume);
+        //~ setTimeout(() => { this.volume = old_volume; logDebug("this.volume: "+this.volume); }, 2100);
         remove_all_sources();
+
+        //~ if (deleteConfig)
+            //~ this.uninstall_OSD150();
+        //~ logDebug("old_volume: "+old_volume);
+        //~ this.volume = old_volume;
         //~ logDebug("playerctld killed");
         //~ logDebug("on_applet_removed_from_panel() END");
     }
@@ -2478,6 +2664,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._chooseActivePlayerItem.menu.open();
         if (!this._launchPlayerItemActorIsHidden && kplo)
             this._launchPlayerItem.menu.open();
+        if (this.OsdWithNumberATJosephMcc_is_loaded_internal)
+            this._remove_OsdWithNumberATJosephMcc_button.actor.show();
+        else
+            this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
     }
 
     _openMenu() {
@@ -2524,7 +2714,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                 if (this.showBarLevel === true)
                     _bar_level =  volume;
 
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+                if (IS_OSD150_ENABLED())
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                else
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
             }
             //~ this.setIcon();
         } else {
@@ -2557,14 +2750,16 @@ class Sound150Applet extends Applet.TextIconApplet {
                     _volume_str = ""+volume+PERCENT_CHAR
                 if (this.showBarLevel === true)
                     _bar_level =  volume;
-                Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+                if (IS_OSD150_ENABLED())
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                else
+                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
             }
         }
     }
 
     _toggle_in_mute() {
         if (!this._input) {
-            this.showOSD = this.showMediaKeysOSD;
             this._volumeChange(null);
             return;
         }
@@ -2572,14 +2767,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
         if (this.mute_in_switch) this.mute_in_switch.setToggleState(newStatus);
-        this.showOSD = this.showMediaKeysOSD;
         this._volumeChange(null);
     }
 
     _onScrollEvent(actor, event) {
         //~ logDebug("event: "+event.originalEvent.ctrlKey);
+        //~ this.setAppletTooltip();
+        this._applet_tooltip.show();
         let _event = event;
-        this.showOSD = this.showMediaKeysOSD;
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
         let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
@@ -2587,7 +2782,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._inputVolumeSection._onScrollEvent(this._inputVolumeSection.actor, _event);
             return
         }
-
+        this._applet_tooltip.show();
         let direction = event.get_scroll_direction();
         if (this.reverseScrolling) {
             if (direction == Clutter.ScrollDirection.DOWN)
@@ -2675,7 +2870,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._output.push_volume();
             this._notifyVolumeChange(this._output);
             this.setAppletTooltip();
-            this._applet_tooltip.show();
+            //~ this._applet_tooltip.show();
             let volume = parseInt(this.volume.slice(0, -1));
             let icon_name = "audio-volume";
             if (volume > 100) icon_name += "-overamplified";
@@ -2707,9 +2902,11 @@ class Sound150Applet extends Applet.TextIconApplet {
                 _bar_level = volume;
             let _maxLevel = Math.round(this._volumeMax/this._volumeNorm * 100) / 100;
             if (this.showOSD && (this.showOSDonStartup || volume != parseInt(this.old_volume.slice(0, -1)))) {
-                //~ Main.osdWindowManager.hideAll();
                 try {
-                    Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel);
+                    if (IS_OSD150_ENABLED())
+                        Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level, _maxLevel, this.OSDhorizontal);
+                    else
+                        Main.osdWindowManager.show(-1, icon, _volume_str, _bar_level);
                 } catch(e) {}
             }
             this.old_volume = ""+volume+"%";
@@ -2725,8 +2922,6 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._applet_tooltip)
                 this._applet_tooltip.hide();
         }
-
-        this.showOSD = this.showMediaKeysOSD;
 
         this.volume_near_icon()
     }
@@ -2949,30 +3144,56 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     setAppletTooltip() {
-        let tooltips = [];
+        var tooltips = [];
         if (this.tooltipShowVolume) {
             tooltips.push(_("Volume") + ": " + this.volume);
         }
         if (this.player && this.player._owner == this._activePlayer) {
             if (this.tooltipShowPlayer) {
+                if (tooltips.length != 0) tooltips.push("");
                 tooltips.push(this.player._name + " - " + _(this.player._playerStatus));
             }
             if (this.tooltipShowArtistTitle) {
+                if (tooltips.length != 0) tooltips.push("");
                 if (this.player._artist != _("Unknown Artist")) {
-                    tooltips.push(this.player._artist);
+                    tooltips.push("<b>" + this.player._artist.replace(/\&/g, "&amp;").replace(/\"/g, "") + "</b>");
                 }
                 if (this._title != _("Unknown Title")) {
-                    tooltips.push(this.player._title);
+                    tooltips.push(this.player._title.replace(/\&/g, "&amp;").replace(/\"/g, ""));
                 }
             }
         }
         if (!this._playerctl) {
+            if (tooltips.length != 0) tooltips.push("");
             tooltips.push(_("The 'playerctl' package is required!"));
             tooltips.push(_("Please select 'Install playerctl' in this menu"));
         }
 
-        this.set_applet_tooltip(tooltips.join("\n"));
+        this.set_applet_tooltip(this._clean_str(tooltips.join("\n")), true);
+        this._applet_tooltip.preventShow = false;
         this.volume_near_icon();
+    }
+
+    _clean_str(str) {
+        //log("_clean_str");
+        let ret = str.replace(/\\'/gi, "'");
+        ret = ret.replace(/\\"/gi, '"');
+
+        // Support &amp;, &quot;, &apos;, &lt; and &gt;, escape all other
+        // occurrences of '&'.
+        ret = ret.replace(/&(?!amp;|quot;|apos;|lt;|gt;)/g, '&amp;');
+
+        // Support <b>, <i>, and <u>, escape anything else
+        // so it displays as raw markup.
+        ret = ret.replace(/<(?!\/?[biu]>)/g, '&lt;');
+
+        try {
+            Pango.parse_markup(ret, -1, "");
+            return ret;
+        } catch (e) {
+            logError(e);
+            return GLib.markup_escape_text(ret, -1);
+        }
     }
 
     _isInstance(busName) {
@@ -3131,11 +3352,6 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        // button Reload this applet
-        let _reload_button = new PopupMenu.PopupIconMenuItem(_("Reload this applet"), "restart", St.IconType.SYMBOLIC);
-        _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed());
-        this.menu.addMenuItem(_reload_button);
-
         // button "remove_soundATcinnamonDOTorg"
         if (this.soundATcinnamonDOTorg_is_loaded) {
             let _remove_soundATcinnamonDOTorg_button = new PopupMenu.PopupIconMenuItem(_("Remove sound applet"), "edit-delete", St.IconType.SYMBOLIC);
@@ -3144,6 +3360,17 @@ class Sound150Applet extends Applet.TextIconApplet {
             });
             this.menu.addMenuItem(_remove_soundATcinnamonDOTorg_button);
         }
+
+        // button "remove_OsdWithNumber"
+        this._remove_OsdWithNumberATJosephMcc_button = new PopupMenu.PopupIconMenuItem(_("Remove the OsdWithNumber extension"), "edit-delete", St.IconType.SYMBOLIC);
+        this._remove_OsdWithNumberATJosephMcc_button.connect("activate", (event) => {
+            this._on_remove_OsdWithNumber_from_extensions()
+        });
+        this.menu.addMenuItem(this._remove_OsdWithNumberATJosephMcc_button);
+        if (this.OsdWithNumberATJosephMcc_is_loaded_internal)
+            this._remove_OsdWithNumberATJosephMcc_button.actor.show();
+        else
+            this._remove_OsdWithNumberATJosephMcc_button.actor.hide();
 
         //button Install playerctl (when it isn't installed)
         if (this._playerctl === null) {
@@ -3487,6 +3714,37 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
     }
 
+    _removeAllStreams() {
+        for (let i = 0, l = this._streams.length; i < l; ++i) {
+            let stream = this._streams[i];
+            if (stream.item) {
+                stream.item.destroy();
+            }
+
+            // hide submenus or sections if showing them is unnecessary
+            if (stream.type === "SinkInput") {
+                if (this._outputApplicationsMenu.menu.numMenuItems === 0)
+                    this._outputApplicationsMenu.actor.hide();
+            } else if (stream.type === "SourceOutput") {
+                if (--this._recordingAppsNum === 0) {
+                    this._inputSection.actor.hide();
+                    this.mute_in_switch.actor.hide();
+                }
+
+                if (this.alwaysCanChangeMic) {
+                    this._inputSection.actor.show();
+                    if (this.mute_in_switch) this.mute_in_switch.actor.show();
+                }
+            }
+            this._streams.splice(i, 1);
+        }
+        if (this._seeker) {
+            this._seeker.destroy();
+        }
+        this._seeker = null;
+        kill_playerctld();
+    }
+
     registerSystrayIcons() {
         for (let i = 0; i < players_with_seek_support.length; i++) {
             Main.systrayManager.registerTrayIconReplacement(players_with_seek_support[i], UUID);
@@ -3506,8 +3764,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.menu.close();
         // Reload this applet
         let to = setTimeout( () => {
-            Extension.reloadExtension(UUID, Extension.Type.APPLET);
             clearTimeout(to);
+            Extension.reloadExtension(UUID, Extension.Type.APPLET);
         },
         300);
     }
@@ -3582,8 +3840,81 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.audio_prev = audio_prev.join("::");
     }
 
+    install_OSD150() {
+        // Installs the OSD150 extension.
+
+        // First, install the '.json' config file:
+        // There is no config file to install!
+
+        // enabledExtensions will contain all desklets:
+        var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        var extensionEEKline = "";
+        for (let i = 0; i < enabledExtensions.length; i++){
+          let name = enabledExtensions[i];
+          //~ logDebug("Desklet name: "+name);
+          if (name == EXTENSION_UUID) {
+            extensionEEKline = ""+enabledExtensions[i];
+            //~ enabledExtensions.splice(i, 1); //useless
+            break;
+          }
+        }
+
+        // Put the extension code at the right place:
+        //~ const extension_source_path = APPLET_DIR + "/extension/" + EXTENSION_UUID;
+        //~ if (GLib.find_program_in_path("cinnamon-install-spice")) {
+          //~ Util.spawnCommandLineAsync("cinnamon-install-spice extension "+extension_source_path);
+        //~ } else {
+          //~ const extension_target_path = HOME_DIR+"/.local/share/cinnamon/extensions/"
+          //~ Util.spawnCommandLineAsync("cp -a -f "+extension_source_path+" "+extension_target_path);
+        //~ }
+
+        if (extensionEEKline.length === 0) {
+            // OSD150 must be installed.
+            enabledExtensions.push(EXTENSION_UUID);
+            global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+        }
+        //~ // OSD150 must be reloaded.
+        //~ Extension.reloadExtension(EXTENSION_UUID, Extension.Type.EXTENSION);
+    }
+
+    //~ uninstall_OSD150() {
+        //~ var enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        //~ for (let i = 0; i < enabledExtensions.length; i++){
+          //~ let name = enabledExtensions[i];
+          //~ if (name == EXTENSION_UUID) {
+            //~ enabledExtensions.splice(i, 1);
+          //~ }
+        //~ }
+        //~ global.settings.set_strv(ENABLED_EXTENSIONS_KEY, enabledExtensions);
+    //~ }
+
     get _playerctl() {
         return GLib.find_program_in_path("playerctl");
+    }
+
+    get showOSD() {
+        if (!this.showMediaKeysOSD) {
+            return false;
+        } else {
+            if (this.startingUp) {
+                return this.showOSDonStartup;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    get OsdWithNumberATJosephMcc_is_loaded_internal() {
+        let enabledExtensions = global.settings.get_strv(ENABLED_EXTENSIONS_KEY);
+        var _OsdWithNumberATJosephMcc_is_loaded = false;
+        for (let extData of enabledExtensions) {
+          if (extData === "OsdWithNumber@JosephMcc") {
+            _OsdWithNumberATJosephMcc_is_loaded = true;
+            break;
+          }
+        }
+        this.settings.setValue("OsdWithNumberATJosephMcc_is_loaded", _OsdWithNumberATJosephMcc_is_loaded);
+        return _OsdWithNumberATJosephMcc_is_loaded;
     }
 }
 

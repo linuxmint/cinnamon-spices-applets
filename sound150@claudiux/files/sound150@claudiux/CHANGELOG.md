@@ -1,3 +1,49 @@
+### v10.2.1~20250302
+  * Improved tooltip management.
+
+### v10.2.0~20250227
+  * Do not display the tooltip when using the multimedia keys to change volume.
+  * Avoid unnecessary spaces in the tooltip.
+  * Code cleanup.
+
+### v10.1.1~20250218
+  * Improved tooltip layout.
+
+### v10.1.0~20250209
+  * Changes required by the Linux Mint - Cinnamon team.
+  * From now on, having a horizontal OSD requires the OSD150@claudiux extension.
+  * Notifications are available to help you install and enable the OSD150@claudiux extension.
+
+### v10.0.0~20250207
+  * OSD is now managed by an extension. (Cinnamon 6.4)
+  * This extension is named OSD150@claudiux and it is automatically installed by this applet.
+  * Added the ability to remove incompatible extensions. (See menu if they are installed. Nothing in menu? All is OK.)
+
+### v9.2.2~20250206
+  * Eliminates Cinnamon reload errors when a sound stream is playing.
+
+### v9.2.1~20250205
+  * Fixes #6854: Typo in settings.
+
+### v9.2.0~20250203
+  * Add custom commands (see Shortcuts tab in settings).
+  * Fixes #6847.
+
+### v9.1.0~20250203
+  * Functional improvement.
+  * When the volume step differs from 5, multimedia key shortcuts are automatically redefined.
+  * Code: Avoid using 'bind' calls.
+
+### v9.0.0~20250201
+  * Major changes for OSD and menu.
+  * OSD: Volume value can be displayed beside the volume bar.
+  * New option for the menu: Show Media-Optical icon. Don't show it to save space and visual comfort.
+  * Fixes #6830.
+
+### v8.0.3~20250130
+  * Improved OSD management.
+  * Fixes #6820.
+
 ### v8.0.2~20250126
   * Improved stability with Cinnamon 6.4: More tests on the existence of objects before acting on them.
 

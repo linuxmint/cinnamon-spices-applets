@@ -54,6 +54,7 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehaviorSettingsWindow",
         "sectionBehaviorStartUp",
         "sectionBehaviorVolumeStep",
         "sectionBehaviorOSD",
@@ -204,6 +205,13 @@
         "search-unselect-all"
       ]
     },
+    "sectionBehaviorSettingsWindow": {
+      "type": "section",
+      "title": "Settings Window",
+      "keys": [
+        "maximize-vertically"
+      ]
+    },
     "sectionBehaviorStartUp": {
       "type": "section",
       "title": "Start-up",
@@ -226,7 +234,8 @@
       "keys": [
         "volume-show-osd",
         "volume-show-osd-starting-radio",
-        "show-percent-char-in-osd"
+        "show-percent-char-in-osd",
+        "show-horizontal-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -857,6 +866,12 @@
     "description": "Unselect all items",
     "callback": "on_button_search_unselect_all_clicked"
   },
+  "maximize-vertically": {
+    "type": "switch",
+    "default": true,
+    "description": "Vertical maximization",
+    "tooltip": "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
+  },
   "switch-on-last-station-at-start-up": {
     "type": "switch",
     "default": false,
@@ -933,6 +948,12 @@
     "dependency": "volume-show-osd",
     "default": false,
     "description": "Show '%' in OSD"
+  },
+  "show-horizontal-osd": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": false,
+    "description": "Show horizontal OSD"
   },
   "show-title-and-version": {
     "type": "switch",

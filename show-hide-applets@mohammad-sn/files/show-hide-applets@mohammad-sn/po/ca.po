@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-20 06:07+0100\n"
-"PO-Revision-Date: 2024-07-10 00:09+0200\n"
+"PO-Revision-Date: 2025-02-13 21:18+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -19,14 +19,12 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:60 applet.js:231
-#, fuzzy
 msgid "Autohide ON"
-msgstr "Auto-amagar"
+msgstr "Auto-amagar activat"
 
 #. applet.js:62 applet.js:233
-#, fuzzy
 msgid "Autohide OFF"
-msgstr "Auto-amagar"
+msgstr "Auto-amagar desactivat"
 
 #. applet.js:82
 msgid "Panel Edit mode"
@@ -58,18 +56,19 @@ msgid "Settings for show-hide-applets@mohammad-sn"
 msgstr "Configuració de show-hide-applets@mohammad-sn"
 
 #. settings-schema.json->autohide->tooltip
-#, fuzzy
 msgid ""
 "Check it if you want to hide applets automatically, unless you should click "
 "on applet to do so.\n"
 "Its status can be changed by middle-clicking on this applet."
 msgstr ""
-"marqueu si voleu amagar miniaplicacions automàticament o si cal clicar-les "
-"d'una en una"
+"Marqueu si voleu amagar miniaplicacions automàticament o si cal clicar-les "
+"d'una en una.\n"
+"El seu estat pot ser canviat utilitzant el clic del mig en aquesta "
+"miniaplicació"
 
 #. settings-schema.json->statusintooltip->description
 msgid "Show Autohide status in tooltip"
-msgstr ""
+msgstr "Mostra l'estat d'auto-amagar al consell informatiu"
 
 #. settings-schema.json->disablestarttimeautohide->description
 msgid "Disable start time autohide"
