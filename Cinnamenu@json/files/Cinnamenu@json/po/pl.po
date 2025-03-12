@@ -1320,8 +1320,8 @@ msgstr ""
 "Uwaga: niektóre opcje wyszukiwania mogą być nadal używane, nawet jeśli nie "
 "włączyłeś ich tutaj, poprzedzając wyszukiwane hasło.\n"
 "Na przykład: aby wyszukać emotikon, wpisz „e serce”, aby znaleźć emotikony w "
-"kształcie serca. Podobnie użyj przedrostków „f ” do wyszukiwania plików, "
-"„h ” do historii online i „b ” do wyszukiwania zakładek internetowych.\n"
+"kształcie serca. Podobnie użyj przedrostków „f ” do wyszukiwania plików, „h "
+"” do historii online i „b ” do wyszukiwania zakładek internetowych.\n"
 
 #. 5.8->settings-schema.json->menu-icon-custom->description
 #. 3.2->settings-schema.json->menu-icon-custom->description

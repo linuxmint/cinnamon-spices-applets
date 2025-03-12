@@ -1315,8 +1315,8 @@ msgstr ""
 "Huomaa: Joitakin hakuja voidaan silti käyttää, vaikka et olisi ottanut niitä "
 "käyttöön hyödyntäen etuliitettä hakemiseen.\n"
 "Esimerkiksi: jos haluat etsiä hymiötä, kirjoita \"e heart\" löytää sydämiä. "
-"Samoin etuliitteitä \"f\" tiedostojen hakuun, \"h\" selainhistoriaan ja \"b"
-"\" kirjanmerkkien hakuun.\n"
+"Samoin etuliitteitä \"f\" tiedostojen hakuun, \"h\" selainhistoriaan ja "
+"\"b\" kirjanmerkkien hakuun.\n"
 
 #. 5.8->settings-schema.json->menu-icon-custom->description
 #. 3.2->settings-schema.json->menu-icon-custom->description
