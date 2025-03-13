@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-13 20:49+0100\n"
-"PO-Revision-Date: 2025-02-10 11:14-0300\n"
+"PO-Revision-Date: 2025-03-13 17:52-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -247,26 +247,25 @@ msgstr "Comandos"
 
 #. 6.4/applet.js:2258
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Configuración del deklet de carátula del álbum"
 
 #. 6.4/applet.js:2266
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Mostrar la carátula del álbum como icono"
+msgstr "Mostrar la carátula del álbum en el escritorio"
 
 #. 6.4/applet.js:2338
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Necesitas el desklet 'Album Art 3.0'"
 
 #. 6.4/applet.js:2339
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
-msgstr ""
+msgstr "Puedes instalarlo haciendo clic en el primer botón y buscando Álbum."
 
 #. 6.4/applet.js:2340 6.4/applet.js:2358
 msgid "Desklets"
-msgstr ""
+msgstr "Desklets"
 
 #. 6.4/applet.js:2341 6.4/applet.js:2359 6.4/applet.js:2389
 msgid "Cancel"
@@ -274,13 +273,15 @@ msgstr "Cancelar"
 
 #. 6.4/applet.js:2356
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Necesitas activar el desklet 'Album Art 3.0'"
 
 #. 6.4/applet.js:2357
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Puedes activarlo haciendo clic en el primer botón, luego buscando Álbum y "
+"añadiéndolo con el botón [+]."
 
 #. metadata.json->name
 #. 6.4/applet.js:2390
