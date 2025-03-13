@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-13 20:35+0100\n"
-"PO-Revision-Date: 2025-03-05 23:00-0300\n"
+"PO-Revision-Date: 2025-03-13 17:47-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -509,27 +509,30 @@ msgstr "Mostrar el nivel de volumen cerca del icono"
 
 #. applet.js:5393
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Necesitas el desklet Album Art 3.0"
 
 #. applet.js:5394
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Puedes instalarlo haciendo clic en el primer botón y luego buscando Álbum."
 
 #. applet.js:5395 applet.js:5413
 msgid "Desklets"
-msgstr ""
+msgstr "Desklets"
 
 #. applet.js:5411
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Necesitas activar el desklet 'Album Art 3.0'"
 
 #. applet.js:5412
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Puedes activarlo haciendo clic en el primer botón, luego buscando Álbum y "
+"agregándolo con el botón [+]."
 
 #. applet.js:5719
 msgid "Close without stopping recording"
