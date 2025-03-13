@@ -1,3 +1,6 @@
+### v3.0.0~20250313
+  * Now works with the version 2.0.0 of the AlbumArt3.0 applet.
+
 ### v2.9.0~20250305
   * Vertical maximization of the Settings Window becomes optional.
   * Fixes #6955.

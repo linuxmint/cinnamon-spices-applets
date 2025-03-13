@@ -53,6 +53,16 @@ This applet requires *playerctl*. If this package is not installed, the user can
 
  * Since version 5.0.0, settings have been presented in a new way, with 4 tabs: *Behavior*, *Sound*, *Icon*, *Shortcuts*, making this applet highly configurable.
 
+## FAQ
+
+### Keyboard shortcuts are not respecting volume step
+
+1. Open the *Shortcuts* tab of this applet settings.
+- Check the *Redefine Multimedia Keyboard Shortcuts* option.
+- Click on the *Use the same shortcuts as those defined by Cinnamon* button.
+- Close this settings window.
+- If necessary, restart Cinnamon.
+
 ## Translations
 
 The **Sound 150%** applet is designed to allow translation. A .pot template file is available, which you can use with software such as *poedit* to translate into your own language. You can then submit your translation on github, by forking [this repo](https://github.com/linuxmint/cinnamon-spices-applets) and making a pull request containing your changes.

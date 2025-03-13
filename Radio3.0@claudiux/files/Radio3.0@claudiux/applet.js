@@ -13,7 +13,7 @@ const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, Popu
 // Settings:
 const { AppletSettings } = imports.ui.settings;
 // ./lib/util:
-const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn_async, trySpawnCommandLine } = require("./lib/util");
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn, spawn_async, trySpawnCommandLine } = require("./lib/util");
 //Clutter:
 const { ScrollDirection, Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
 //Gettext:
@@ -201,9 +201,16 @@ const HOME_DIR = get_home_dir();
 const USER_NAME = get_user_name();
 const RUNTIME_DIR = get_user_runtime_dir();
 const DOT_CONFIG_DIR = HOME_DIR + "/.config/" + APPNAME;
-const COVER_ART_DIR = DOT_CONFIG_DIR + "/cover-art";
-const SONG_ART_DIR = DOT_CONFIG_DIR + "/song-art";
+const RADIO_LOGO_DIR = DOT_CONFIG_DIR + "/cover-art"; //FIXME!!!
+const SONG_ART_DIR = DOT_CONFIG_DIR + "/song-art"; //FIXME!!!
+
+const XDG_RUNTIME_DIR = getenv("XDG_RUNTIME_DIR");
+const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
+const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
+const ALBUMART_PICS_DIR = TMP_ALBUMART_DIR + "/song-art";
+
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const DESKLET_DIR = HOME_DIR + "/.local/share/cinnamon/desklets/" + DESKLET_UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const HELP_DIR = APPLET_DIR + "/help";
 const RADIO30_OLD_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
@@ -1148,10 +1155,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
     if (!file_test(JOBS_DIR, FileTest.EXISTS))
       mkdir_with_parents(JOBS_DIR, 0o755);
-    if (!file_test(COVER_ART_DIR, FileTest.EXISTS))
-      mkdir_with_parents(COVER_ART_DIR, 0o755);
+    if (!file_test(RADIO_LOGO_DIR, FileTest.EXISTS))
+      mkdir_with_parents(RADIO_LOGO_DIR, 0o755);
     if (!file_test(SONG_ART_DIR, FileTest.EXISTS))
       mkdir_with_parents(SONG_ART_DIR, 0o755);
+    if (!file_test(ALBUMART_PICS_DIR, FileTest.EXISTS))
+      mkdir_with_parents(ALBUMART_PICS_DIR, 0o755);
     spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
     if (!file_test(DOT_CONFIG_DIR +"/icon.svg", FileTest.EXISTS)) {
       spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
@@ -1243,8 +1252,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.set_MPV_ALIAS();
 
     // Desklet:
-    this.show_desklet = false;
-    this.setup_desklet();
+    //~ this.show_desklet = file_test(ALBUMART_ON, FileTest.EXISTS);
+    //~ this.setup_desklet();
     this._is_desklet_activated();
 
     // Contextual menu:
@@ -1347,15 +1356,16 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("image-resolution", "res", () => { this.reload_songArt() });
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
-    this.settings.bind("desklet-x", "desklet_x");
-    this.desklet_x = 1*parseInt(this.desklet_x);
-    this.settings.bind("desklet-y", "desklet_y");
-    this.desklet_y = 1*parseInt(this.desklet_y);
-    this.settings.bind("desklet-dbus-id", "desklet_dbusId");
-    this.desklet_dbusId = 1*parseInt(this.desklet_dbusId);
+    //~ this.settings.bind("desklet-x", "desklet_x");
+    //~ this.desklet_x = 1*parseInt(this.desklet_x);
+    //~ this.settings.bind("desklet-y", "desklet_y");
+    //~ this.desklet_y = 1*parseInt(this.desklet_y);
+    //~ this.settings.bind("desklet-dbus-id", "desklet_dbusId");
+    //~ this.desklet_dbusId = 1*parseInt(this.desklet_dbusId);
     this.settings.bind("desklet-is-activated", "desklet_is_activated");
     //~ this.settings.bind("desklet-show-on-desktop", "show_desklet", this.switch_showDesklet.bind(this));
-    this.show_desklet = false; // forced
+    //~ this.show_desklet = false; // forced
+    //~ this.show_desklet = file_test(ALBUMART_ON, FileTest.EXISTS);
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", () => { this.volume_near_icon() });
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
@@ -1656,7 +1666,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   set_applet_icon_from_url(url="") {
     let name = this.id2str(this.get_radio_name(this.radioId));
     this.change_symbolic_icon();
-    let png_path = COVER_ART_DIR+"/%s.png".format(name);
+    let png_path = RADIO_LOGO_DIR+"/%s.png".format(name);
     if (file_test(png_path, FileTest.EXISTS)) {
       try {
         this.set_applet_icon_path(png_path);
@@ -4213,8 +4223,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       2100
     );
 
-    if (this.desklet_is_activated)
-      reloadExtension(DESKLET_UUID, Type.DESKLET);
+    //~ if (this.desklet_is_activated)
+      //~ reloadExtension(DESKLET_UUID, Type.DESKLET);
   }
 
   on_applet_removed_from_panel() {
@@ -4226,8 +4236,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.appletRunning = false;
 
     // Remove desklet:
-    this.show_desklet = false;
-    this.setup_desklet();
+    //~ this.show_desklet = false;
+    //~ this.setup_desklet();
     this._is_desklet_activated();
 
     // Stop checks:
@@ -5218,14 +5228,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     if (!this.context_menu_item_showDesklet) { // switch 'Show AlbumArt3.0 desklet'
+      //~ this.show_desklet = file_test(ALBUMART_ON, FileTest.EXISTS);
       this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
         this.show_desklet,
         null);
       this.context_menu_item_showDesklet.connect("toggled", () => {
-          this.show_desklet = !this.show_desklet;
-          this.setup_desklet();
-          if (this.context_menu_item_configDesklet)
-            this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
+          this._on_context_menu_item_showDesklet_toggled();
         });
     }
 
@@ -5359,8 +5367,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_showLogo._switch.setToggleState(this.show_favicon);
     if (this.context_menu_item_showDesklet) {
       this.context_menu_item_showDesklet.actor.visible = true;
-      if (!this._is_desklet_activated())
-        this.show_desklet = false;
+      //~ if (!this._is_desklet_activated())
+        //~ this.show_desklet = false;
       this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
       //~ this.context_menu_item_showDesklet.actor.visible = this._is_desklet_activated();
     }
@@ -5372,533 +5380,227 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_separator5.actor.visible = (this.mpvStatus === "PLAY");
   } // End of setContextMenuVisibilities
 
+  _on_context_menu_item_showDesklet_toggled() {
+    this._is_desklet_activated();
+    if (!this.show_desklet) {
+      spawn(["touch", ALBUMART_ON]);
+      //~ const TEST = true;
+      if (!this.desklet_is_activated) {
+        let command, Button1, Button2, summary, body;
+        if (!file_test(DESKLET_DIR + "/metadata.json", FileTest.EXISTS)) {
+          // The 'Album Art 3.0' desklet wasn't installed.
+          this._applet_context_menu.close();
+          summary = _("You need the 'Album Art 3.0' desklet");
+          body = _("You can install it by clicking on the first button and then searching for Album.");
+          Button1 = _("Desklets");
+          Button2 = _("Cancel");
+          command = `notify-send -u critical --icon="cs-desklets-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`;
+          spawnCommandLineAsyncIO(
+            command,
+            (stdout, stderr, exitCode) => {
+              if (exitCode === 0) {
+                if (stdout.startsWith("opt1")) {
+                  spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                }
+              }
+            }
+          );
+        } else {
+          // The 'Album Art 3.0' desklet is installed but wasn't activated.
+          this._applet_context_menu.close();
+          summary = _("You need to activate the 'Album Art 3.0' desklet");
+          body = _("You can activate it by clicking on the first button, then searching for Album and adding it with button [+].");
+          Button1 = _("Desklets");
+          Button2 = _("Cancel");
+          command = `notify-send -u critical --icon="cs-desklets-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`;
+          spawnCommandLineAsyncIO(
+            command,
+            (stdout, stderr, exitCode) => {
+              if (exitCode === 0) {
+                if (stdout.startsWith("opt1")) {
+                  spawn(["cinnamon-settings", "desklets"]);
+                }
+              }
+            }
+          );
+        }
+      }
+    } else {
+      spawn(["rm", "-f", ALBUMART_ON]);
+    }
+    let _to = setTimeout( () => {
+      clearTimeout(_to);
+      if (this.context_menu_item_configDesklet)
+        this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+    }, 300);
+  } // End of _on_context_menu_item_showDesklet_toggled
+
   finalizeContextMenu() {
     // Must be empty for this applet.
   }
 
-  finalizeContextMenu_OLD() {
-    //~ logDebug("finalizeContextMenu");
+  //~ install_desklet() {
+    //~ // Installs the AlbumArt3.0 desklet.
 
-
-    // Add default context menus if we're in panel edit mode, ensure their removal if we're not
-    if (this.context_menu_item_manageRecording)
-      this.context_menu_item_manageRecording.destroy();
-    this.context_menu_item_manageRecording = null;
-
-    if (this.context_menu_item_showDesklet)
-      this.context_menu_item_showDesklet.destroy();
-    this.context_menu_item_showDesklet = null;
-
-    let items = this._applet_context_menu._getMenuItems();
-    //~ logDebug("items.length: "+items.length);
-
-    /// Section 'system':
-    if (this.context_menu_section_system == null) {
-      this.context_menu_section_system = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_system);
-    }
-
-    // About...
-    if (this.context_menu_item_about == null) {
-      this.context_menu_item_about = new PopupIconMenuItem(_("About..."),
-        "dialog-question",
-        IconType.SYMBOLIC);
-      this.context_menu_item_about.connect('activate', () => { this.openAbout() });
-    }
-    //~ if (this.context_menu_item_about == null)
-      //~ logDebug("Unable to create this.context_menu_item_about!!!");
-    //~ else
-      //~ logDebug("this.context_menu_item_about is well created!!!");
-    if (items.indexOf(this.context_menu_item_about) == -1) {
-      this.context_menu_section_system.addMenuItem(this.context_menu_item_about);
-    }
-
-    // Web page...
-    //~ if (this.context_menu_item_webpage == null) {
-      //~ this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
+    //~ // First, install the '.json' config file:
+    //~ var spices_config_path = HOME_DIR+"/.config/cinnamon/spices";
+    //~ var desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
+    //~ if (!file_test(spices_config_path, FileTest.EXISTS)) {
+      //~ spices_config_path = HOME_DIR+"/.cinnamon/configs";
+      //~ desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
     //~ }
-    //~ if (items.indexOf(this.context_menu_item_webpage) == -1) {
-      //~ this.context_menu_section_system.addMenuItem(this.context_menu_item_webpage);
+    //~ if (file_test(spices_config_path, FileTest.EXISTS)) {
+      //~ if (!file_test(desklet_config_path, FileTest.EXISTS)) {
+        //~ mkdir_with_parents(spices_config_path+"/"+DESKLET_UUID, 0o755)
+        //~ spawnCommandLineAsync("cp -a -f " + APPLET_DIR + "/desklet/" + DESKLET_UUID+".json " + desklet_config_path);
+      //~ }
     //~ }
 
-    // Manual...
-    if (this.context_menu_item_manual == null) {
-      this.context_menu_item_manual = new PopupIconMenuItem(_("Manual..."),
-        "help-faq", //"gtk-help",
-        IconType.SYMBOLIC);
-      this.context_menu_item_manual.connect('activate', () => { this.openManual() });
-    }
-    if (items.indexOf(this.context_menu_item_manual) == -1) {
-      this.context_menu_section_system.addMenuItem(this.context_menu_item_manual);
-    }
+    //~ // enabledDesklets will contain all desklets:
+    //~ var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
+    //~ var deskletEDKline = "";
+    //~ for (let i = 0; i < enabledDesklets.length; i++){
+      //~ let name = enabledDesklets[i].split(":")[0];
+      //~ if (name == DESKLET_UUID) {
+        //~ deskletEDKline = ""+enabledDesklets[i];
+        //~ break;
+      //~ }
+    //~ }
 
-    // Remove applet
-    if (this.context_menu_item_remove == null) {
-      this.context_menu_item_remove = new PopupIconMenuItem(_("Remove '%s'")
-        .format(this._(METADATA.name)),
-          "edit-delete",
-          IconType.SYMBOLIC);
-      this.context_menu_item_remove.connect('activate', (actor, event) => this.confirmRemoveApplet(event));
-    }
-    if (items.indexOf(this.context_menu_item_remove) == -1) {
-      //~ this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      this.context_menu_section_system.addMenuItem(this.context_menu_item_remove);
-    }
+    //~ // Put the desklet code at the right place:
+    //~ const desklet_source_path = APPLET_DIR + "/desklet/" + DESKLET_UUID;
+    //~ if (find_program_in_path("cinnamon-install-spice")) {
+      //~ spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
+    //~ } else {
+      //~ const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
+      //~ spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
+    //~ }
 
-    // Separator
-    if (this.context_menu_separator == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator);
-    }
-
-    /// Section config:
-    if (this.context_menu_section_config == null) {
-      this.context_menu_section_config = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_config);
-    }
-    // Reload this applet
-    if (RELOAD() === true || this.show_reload) {
-      if (this.context_menu_item_reloadThisApplet == null) {
-        //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_item_reloadThisApplet = new PopupIconMenuItem(_("Reload this applet"), "reload", IconType.SYMBOLIC);
-        this.context_menu_item_reloadThisApplet.connect("activate", (event) => this.on_option_menu_reload_this_applet_clicked());
-      }
-    } else {
-      if (this.context_menu_item_reloadThisApplet != null) {
-        this.context_menu_item_reloadThisApplet.destroy();
-        this.context_menu_item_reloadThisApplet = null;
-      }
-    }
-    if (this.context_menu_item_reloadThisApplet != null && items.indexOf(this.context_menu_item_reloadThisApplet) == -1) {
-      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      this.context_menu_section_config.addMenuItem(this.context_menu_item_reloadThisApplet);
-    }
-
-    // Configure:
-    if (!METADATA["hide-configuration"] && file_test(METADATA["path"] + "/settings-schema.json", FileTest.EXISTS)) {
-      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      if (this.context_menu_item_configure == null) {
-        this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
-          "system-run",
-          IconType.SYMBOLIC);
-        this.context_menu_item_configure.connect('activate', () => { this.configureApplet() });
-      }
-      if (items.indexOf(this.context_menu_item_configure) == -1) {
-        this.context_menu_section_config.addMenuItem(this.context_menu_item_configure);
-      }
-
-      // Schedule a recording:
-      if (this.context_menu_item_scheduleARecording != null)
-        this.context_menu_item_scheduleARecording.destroy();
-      this.context_menu_item_scheduleARecording = null;
-
-      this.context_menu_item_scheduleARecording = new PopupIconMenuItem(_("Schedule a background record..."),
-        "system-run",
-        IconType.SYMBOLIC);
-      this.context_menu_item_scheduleARecording.connect('activate', () => { this.configureApplet(this.tabNumberOfScheduling) });
-
-      if (items.indexOf(this.context_menu_item_scheduleARecording) == -1) {
-        this.context_menu_section_config.addMenuItem(this.context_menu_item_scheduleARecording);
-      }
-
-      if (this.context_menu_item_recording != null)
-        this.context_menu_item_recording.destroy();
-      this.context_menu_item_recording = null;
-      this.context_menu_item_recording = new PopupIconMenuItem(_("Extract soundtrack from YouTube video..."),
-        "yt",
-        IconType.SYMBOLIC);
-      this.context_menu_item_recording.connect('activate', () => { this.configureApplet(this.tabNumberOfYT) });
-
-      if (items.indexOf(this.context_menu_item_recording) == -1) {
-        this.context_menu_section_config.addMenuItem(this.context_menu_item_recording);
-      }
-    }
-
-    if (this.context_menu_separator2 == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator2 = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator2);
-    }
-
-    /// Section about recordings
-    if (this.context_menu_section_recordings == null) {
-      this.context_menu_section_recordings = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_recordings);
-    }
-    // Open Recordings Folder
-    if (this.context_menu_item_openRecordingsFolder != null) {
-      this.context_menu_item_openRecordingsFolder.destroy();
-    }
-    this.context_menu_item_openRecordingsFolder = null;
-
-    this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-
-    this.context_menu_item_openRecordingsFolder = new PopupIconMenuItem(
-      _("Open the recordings folder"),
-      "folder-music",
-      IconType.SYMBOLIC
-    );
-    this.context_menu_item_openRecordingsFolder.connect("activate", (event) => {
-      this.open_rec_folder()
-    });
-
-    this.context_menu_section_recordings.addMenuItem(this.context_menu_item_openRecordingsFolder);
-
-
-    // Start / Stop recording:
-    if (this.mpvStatus == "PLAY" && this.context_menu_item_manageRecording == null) {
-      let record_pid = this.record_pid;
-      let recording = (record_pid != null);
-
-      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      let message_about_ending_recording = this.get_recording_ends_auto() ? _("(auto)") : _("(manual)");
-      let sufficient_space_left = this.check_hd_space_left(false);
-      this.context_menu_item_manageRecording = new PopupIconMenuItem(
-        recording ? _("Stop Recording") + "\n" + message_about_ending_recording : sufficient_space_left ? _("Start Recording") : _("Insufficient space"),
-        recording ? "media-playback-stop": sufficient_space_left ? "media-record" : "music-folder-full",
-        IconType.SYMBOLIC
-      );
-      this.context_menu_item_manageRecording.connect("activate", (event) => {
-        if (recording) {
-          this.stop_recording(record_pid)
-        } else if (sufficient_space_left) {
-          this.start_recording()
-        } else {
-          this.configureApplet(this.tabNumberOfRecording)
-        }
-      });
-
-      this.context_menu_section_recordings.addMenuItem(this.context_menu_item_manageRecording);
-    }
-
-    // Submenu Cancel YT downloads
-    if (this.submenu_cancel_yt_downloads != null)
-      this.submenu_cancel_yt_downloads.destroy();
-    this.submenu_cancel_yt_downloads = null;
-    if (this.context_menu_yt_downloads && this.context_menu_yt_downloads.length > 0) {
-      this.submenu_cancel_yt_downloads = new RadioPopupSubMenuMenuItem(formatTextWrap(_("Cancel downloads from YT"), WRAP_LENGTH));
-      this.context_menu_section_recordings.addMenuItem(this.submenu_cancel_yt_downloads);
-
-      for (let dl of this.context_menu_yt_downloads) {
-        // dl[0] contains the title; dl[1] contains the callback.
-        let submenu_cancel_yt_downloads_item = new PopupMenuItem(dl[0], { reactive: true });
-        submenu_cancel_yt_downloads_item.connect('activate', () => {
-          dl[1]();
-          this.set_applet_label("");
-          let i = this.yt_downloads.indexOf(dl[0]);
-          this.yt_downloads.splice(i, 1);
-          this.context_menu_yt_downloads.splice(i, 1);
-          if (this.yt_downloads.length === 0) {
-            this.change_symbolic_icon()
-          }
-        });
-        this.submenu_cancel_yt_downloads.menu.addMenuItem(submenu_cancel_yt_downloads_item);
-      }
-    }
-
-    if (this.context_menu_separator3 == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator3 = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator3);
-    }
-
-    /// Section external settings
-    if (this.context_menu_section_external == null) {
-      this.context_menu_section_external = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_external);
-    }
-    // Sound Settings
-    if (this.context_menu_item_systemSoundSettings == null) {
-      this.context_menu_item_systemSoundSettings = new PopupIconMenuItem(_("Sound Settings"), "audio-card", IconType.SYMBOLIC);
-      this.context_menu_item_systemSoundSettings.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
-      if (items.indexOf(this.context_menu_item_systemSoundSettings) == -1) {
-        this.context_menu_section_external.addMenuItem(this.context_menu_item_systemSoundSettings);
-      }
-    }
-
-    // PulseEffects (if any)
-    if (find_program_in_path("pulseeffects") && this.context_menu_item_pulseEffects == null) {
-      this.context_menu_item_pulseEffects = new PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", IconType.SYMBOLIC);
-      this.context_menu_item_pulseEffects.connect('activate', async () => { spawnCommandLine("pulseeffects") });
-      if (items.indexOf(this.context_menu_item_pulseEffects) == -1) {
-        this.context_menu_section_external.addMenuItem(this.context_menu_item_pulseEffects);
-      }
-    }
-
-    // EasyEffects (if any)
-    if (find_program_in_path("easyeffects") && this.context_menu_item_easyEffects == null) {
-      this.context_menu_item_easyEffects = new PopupIconMenuItem(_("Easy Effects"), "easyeffects", IconType.SYMBOLIC);
-      this.context_menu_item_easyEffects.connect('activate', async () => { spawnCommandLine("easyeffects") });
-      if (items.indexOf(this.context_menu_item_easyEffects) == -1) {
-        this.context_menu_section_external.addMenuItem(this.context_menu_item_easyEffects);
-      }
-    }
-    if (this.context_menu_separator4 == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator4 = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator4);
-    }
-
-    /// Section containing switches:
-    if (this.context_menu_section_switches == null) {
-      this.context_menu_section_switches = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_switches);
-    }
-
-    // Radio ON at startup
-    if (this.context_menu_item_onAtStartup == null) {
-        this.context_menu_item_onAtStartup = new PopupSwitchMenuItem(_("Radio ON at startup"),
-          this.switch_on_last_station_at_start_up,
-          null);
-        this.context_menu_item_onAtStartup.connect("toggled", () => {
-          this.switch_on_last_station_at_start_up = !this.switch_on_last_station_at_start_up;
-        });
-    }
-    if (items.indexOf(this.context_menu_item_onAtStartup) == -1) {
-        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
-    }
-
-    // Show Station Logo
-    if (this.context_menu_item_showLogo == null) {
-        this.context_menu_item_showLogo = new PopupSwitchMenuItem(_("Display Station Logo"),
-          this.show_favicon,
-          null);
-        this.context_menu_item_showLogo.connect("toggled", () => {
-          this.show_favicon = !this.show_favicon;
-          this.icon_or_favicon(this.radioId);
-        });
-    }
-    if (items.indexOf(this.context_menu_item_showLogo) == -1) {
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_showLogo);
-    }
-
-    // Show AlbumArt3.0 desklet
-    if (this._is_desklet_activated()) {
-      if (this.context_menu_item_showDesklet == null) {
-        this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
-          this.show_desklet,
-          null);
-        this.context_menu_item_showDesklet.connect("toggled", () => {
-            this.show_desklet = !this.show_desklet;
-            this.setup_desklet();
-          });
-      }
-      if (items.indexOf(this.context_menu_item_showDesklet) == -1) {
-          this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
-      }
-    }
-
-    // Do not check about dependencies
-    if (this.context_menu_item_dontCheckDep == null) {
-        this.context_menu_item_dontCheckDep = new PopupSwitchMenuItem(_("Do not check about dependencies"),
-          this.dont_check_dependencies,
-          null);
-        this.context_menu_item_dontCheckDep.connect("toggled", () => {
-          this.dont_check_dependencies = !this.dont_check_dependencies;
-          this.on_option_menu_reload_this_applet_clicked();
-        });
-    }
-    if (items.indexOf(this.context_menu_item_dontCheckDep) == -1) {
-        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_dontCheckDep);
-    }
-
-    // Display volume level near icon?
-    if (this.context_menu_item_showVolumeNearIcon == null) {
-        this.context_menu_item_showVolumeNearIcon = new PopupSwitchMenuItem(_("Display volume level near icon"),
-          this.show_volume_level_near_icon,
-          null);
-        this.context_menu_item_showVolumeNearIcon.connect("toggled", () => {
-          this.show_volume_level_near_icon = !this.show_volume_level_near_icon;
-          this.volume_near_icon();
-        });
-    }
-    if (items.indexOf(this.context_menu_item_showVolumeNearIcon) == -1) {
-        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_showVolumeNearIcon);
-    }
-  }
-
-  install_desklet() {
-    // Installs the AlbumArt3.0 desklet.
-
-    // First, install the '.json' config file:
-    var spices_config_path = HOME_DIR+"/.config/cinnamon/spices";
-    var desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
-    if (!file_test(spices_config_path, FileTest.EXISTS)) {
-      spices_config_path = HOME_DIR+"/.cinnamon/configs";
-      desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
-    }
-    if (file_test(spices_config_path, FileTest.EXISTS)) {
-      if (!file_test(desklet_config_path, FileTest.EXISTS)) {
-        mkdir_with_parents(spices_config_path+"/"+DESKLET_UUID, 0o755)
-        spawnCommandLineAsync("cp -a -f " + APPLET_DIR + "/desklet/" + DESKLET_UUID+".json " + desklet_config_path);
-      }
-    }
-
-    // enabledDesklets will contain all desklets:
-    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
-    var deskletEDKline = "";
-    for (let i = 0; i < enabledDesklets.length; i++){
-      let name = enabledDesklets[i].split(":")[0];
-      //~ logDebug("Desklet name: "+name);
-      if (name == DESKLET_UUID) {
-        deskletEDKline = ""+enabledDesklets[i];
-        //~ enabledDesklets.splice(i, 1); //useless
-        break;
-      }
-    }
-
-    // Put the desklet code at the right place:
-    const desklet_source_path = APPLET_DIR + "/desklet/" + DESKLET_UUID;
-    if (find_program_in_path("cinnamon-install-spice")) {
-      spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
-    } else {
-      const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
-      spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
-    }
-
-    // Register this desklet in DBus:
-    var found = false;
-    if (deskletEDKline.length > 0) {
-      for (let i = 0; i < enabledDesklets.length; i++){
-        let name = enabledDesklets[i].split(":")[0];
-        //~ logDebug("Desklet name: "+name);
-        if (name == DESKLET_UUID) {
-          enabledDesklets[i] = deskletEDKline;
-          found = true;
-          break;
-        }
-      }
-      if (found)
-        global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    } else { // deskletEDKline is empty. We must fill it.
-      var pos = -1;
-      var numMax = -1;
-      var nums = [];
-      var [name, num, x, y] = ["", -1, -1, -1];
-      var [desklet_num, desklet_x, desklet_y] = [1*parseInt(this.desklet_dbusId), 1*parseInt(this.desklet_x), 1*parseInt(this.desklet_y)];
-      for (let i = 0; i < enabledDesklets.length; i++){
+    //~ // Register this desklet in DBus:
+    //~ var found = false;
+    //~ if (deskletEDKline.length > 0) {
+      //~ for (let i = 0; i < enabledDesklets.length; i++){
         //~ let name = enabledDesklets[i].split(":")[0];
-        [name, num, x, y] = enabledDesklets[i].split(":");
-        [num, x, y] = [1*parseInt(num), 1*parseInt(x), 1*parseInt(y)];
-        //~ logDebug("Desklet name: "+name);
-        if (name == DESKLET_UUID) {
-          found = true;
-          pos = i;
-          [desklet_num, desklet_x, desklet_y] = [1*num, 1*x, 1*y];
-          this.desklet_dbusId = 1*desklet_num;
+        //~ if (name == DESKLET_UUID) {
+          //~ enabledDesklets[i] = deskletEDKline;
+          //~ found = true;
           //~ break;
-        } else {
-          if (nums.indexOf(num) === -1)
-            nums.push(1*num);
-          else
-            logError("Many desklets have the same id in D-Bus! To check it, execute: gsettings get org.cinnamon enabled-desklets"); // Should never occur!
-          if (1*num > numMax) numMax = 1*num;
+        //~ }
+      //~ }
+      //~ if (found)
+        //~ global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
+    //~ } else { // deskletEDKline is empty. We must fill it.
+      //~ var pos = -1;
+      //~ var numMax = -1;
+      //~ var nums = [];
+      //~ var [name, num, x, y] = ["", -1, -1, -1];
+      //~ var [desklet_num, desklet_x, desklet_y] = [1*parseInt(this.desklet_dbusId), 1*parseInt(this.desklet_x), 1*parseInt(this.desklet_y)];
+      //~ for (let i = 0; i < enabledDesklets.length; i++){
+        //~ [name, num, x, y] = enabledDesklets[i].split(":");
+        //~ [num, x, y] = [1*parseInt(num), 1*parseInt(x), 1*parseInt(y)];
+        //~ if (name == DESKLET_UUID) {
+          //~ found = true;
+          //~ pos = i;
+          //~ [desklet_num, desklet_x, desklet_y] = [1*num, 1*x, 1*y];
+          //~ this.desklet_dbusId = 1*desklet_num;
+        //~ } else {
+          //~ if (nums.indexOf(num) === -1)
+            //~ nums.push(1*num);
+          //~ else
+            //~ logError("Many desklets have the same id in D-Bus! To check it, execute: gsettings get org.cinnamon enabled-desklets"); // Should never occur!
+          //~ if (1*num > numMax) numMax = 1*num;
 
-        }
-      }
-      if (1*this.desklet_x < 0)
-        this.desklet_x = 1*global.screen_width - 600;
-      if (1*this.desklet_y < 0)
-        this.desklet_y = 1*global.screen_height - 500;
+        //~ }
+      //~ }
+      //~ if (1*this.desklet_x < 0)
+        //~ this.desklet_x = 1*global.screen_width - 600;
+      //~ if (1*this.desklet_y < 0)
+        //~ this.desklet_y = 1*global.screen_height - 500;
 
-      let next_desklet_id = 1*global.settings.get_int("next-desklet-id");
-      if (this.desklet_dbusId < 0) { // We have to choose the best possible id.
-        if (1*numMax+1 === next_desklet_id) {
-          desklet_num = 1*numMax+1;
-          this.desklet_dbusId = 1*desklet_num;
-          next_desklet_id += 1;
-          global.settings.set_int("next-desklet-id", next_desklet_id);
-        } else if (numMax+1 < next_desklet_id) {
-          desklet_num = 1*numMax+1;
-          this.desklet_dbusId = 1*desklet_num;
-        } else { // Should never occur! (numMax+1 > next_desklet_id)
-          desklet_num = 1*numMax+1;
-          this.desklet_dbusId = 1*desklet_num;
-          next_desklet_id = 1*numMax+2;
-          global.settings.set_int("next-desklet-id", next_desklet_id);
-        }
-        deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
-      } else {
-        if (nums.indexOf(this.desklet_dbusId) === -1) {
-          deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
-        } else { // this.desklet_dbusId is already used by another desklet!
-          desklet_num = 0;
-          nums.sort( (a, b) => {
-            if (Math.round(a) < Math.round(b))
-              return -1;
-            else if (Math.round(a) > Math.round(b))
-              return 1;
-            return 0;
-          });
-          var num_found = false;
-          while (!num_found) {
-            desklet_num = 1*desklet_num + 1;
-            if ((nums.indexOf(desklet_num) === -1) || (desklet_num >= nums.length) || (desklet_num >= 1*next_desklet_id))
-              num_found = true;
-          }
-          this.desklet_dbusId = 1*desklet_num;
-          if (1*desklet_num >= 1*next_desklet_id) {
-            next_desklet_id = 1*desklet_num + 1;
-            global.settings.set_int("next-desklet-id", next_desklet_id);
-          }
-          deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
-        }
-      }
+      //~ let next_desklet_id = 1*global.settings.get_int("next-desklet-id");
+      //~ if (this.desklet_dbusId < 0) { // We have to choose the best possible id.
+        //~ if (1*numMax+1 === next_desklet_id) {
+          //~ desklet_num = 1*numMax+1;
+          //~ this.desklet_dbusId = 1*desklet_num;
+          //~ next_desklet_id += 1;
+          //~ global.settings.set_int("next-desklet-id", next_desklet_id);
+        //~ } else if (numMax+1 < next_desklet_id) {
+          //~ desklet_num = 1*numMax+1;
+          //~ this.desklet_dbusId = 1*desklet_num;
+        //~ } else { // Should never occur! (numMax+1 > next_desklet_id)
+          //~ desklet_num = 1*numMax+1;
+          //~ this.desklet_dbusId = 1*desklet_num;
+          //~ next_desklet_id = 1*numMax+2;
+          //~ global.settings.set_int("next-desklet-id", next_desklet_id);
+        //~ }
+        //~ deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
+      //~ } else {
+        //~ if (nums.indexOf(this.desklet_dbusId) === -1) {
+          //~ deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
+        //~ } else { // this.desklet_dbusId is already used by another desklet!
+          //~ desklet_num = 0;
+          //~ nums.sort( (a, b) => {
+            //~ if (Math.round(a) < Math.round(b))
+              //~ return -1;
+            //~ else if (Math.round(a) > Math.round(b))
+              //~ return 1;
+            //~ return 0;
+          //~ });
+          //~ var num_found = false;
+          //~ while (!num_found) {
+            //~ desklet_num = 1*desklet_num + 1;
+            //~ if ((nums.indexOf(desklet_num) === -1) || (desklet_num >= nums.length) || (desklet_num >= 1*next_desklet_id))
+              //~ num_found = true;
+          //~ }
+          //~ this.desklet_dbusId = 1*desklet_num;
+          //~ if (1*desklet_num >= 1*next_desklet_id) {
+            //~ next_desklet_id = 1*desklet_num + 1;
+            //~ global.settings.set_int("next-desklet-id", next_desklet_id);
+          //~ }
+          //~ deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
+        //~ }
+      //~ }
 
-      //deskletEDKline = `${DESKLET_UUID}:${next_desklet_id}:${this.desklet_x}:${this.desklet_y}`;
-      if (found)
-        enabledDesklets[pos] = deskletEDKline;
-      else
-        enabledDesklets.push(deskletEDKline);
-      //~ global.settings.set_int("next-desklet-id", 1*next_desklet_id + 1);
-      global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    }
-    this.desklet_is_activated = true;
-    this.show_desklet = true;
-    //~ reloadExtension(DESKLET_UUID, Type.DESKLET);
-  }
-
-  uninstall_desklet() {
-    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
-    var found = false;
-    for (let i = 0; i < enabledDesklets.length; i++){
-      let [name, num, x, y] = enabledDesklets[i].split(":");
-      //~ logDebug("Desklet name: "+name);
-      if (name == DESKLET_UUID) {
-        this.desklet_x = 1*x;
-        this.desklet_y = 1*y;
-        this.desklet_dbusId = 1*num;
-        enabledDesklets.splice(i, 1);
-        found = true;
-        break;
-      }
-    }
-    if (found)
-      global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    this.show_desklet = false;
-    this.desklet_is_activated = false;
-    //~ const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/"+DESKLET_UUID;
-    //~ spawnCommandLineAsync("rm -rf "+desklet_path);
-  }
-
-  setup_desklet() {
-    //~ const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/"+DESKLET_UUID;
-    //~ const HIDDEN_file_path = desklet_path+"/HIDDEN";
-    //~ const HIDDEN_EXISTS = file_test(HIDDEN_file_path, FileTest.EXISTS);
-
-    //~ if (HIDDEN_EXISTS && this.show_desklet) {
-      //~ spawnCommandLineAsync("rm -f \""+HIDDEN_file_path+"\"");
+      //~ //deskletEDKline = `${DESKLET_UUID}:${next_desklet_id}:${this.desklet_x}:${this.desklet_y}`;
+      //~ if (found)
+        //~ enabledDesklets[pos] = deskletEDKline;
+      //~ else
+        //~ enabledDesklets.push(deskletEDKline);
+      //~ global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
     //~ }
-    //~ if (!HIDDEN_EXISTS && !this.show_desklet) {
-      //~ spawnCommandLineAsync("touch \""+HIDDEN_file_path+"\"");
+    //~ this.desklet_is_activated = true;
+    //~ this.show_desklet = true;
+  //~ }
+
+  //~ uninstall_desklet() {
+    //~ var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
+    //~ var found = false;
+    //~ for (let i = 0; i < enabledDesklets.length; i++){
+      //~ let [name, num, x, y] = enabledDesklets[i].split(":");
+      //~ if (name == DESKLET_UUID) {
+        //~ this.desklet_x = 1*x;
+        //~ this.desklet_y = 1*y;
+        //~ this.desklet_dbusId = 1*num;
+        //~ enabledDesklets.splice(i, 1);
+        //~ found = true;
+        //~ break;
+      //~ }
     //~ }
-    if (this.show_desklet) {
-      this.install_desklet();
-    } else {
-      this.uninstall_desklet();
-    }
-    this._is_desklet_activated();
-  }
+    //~ if (found)
+      //~ global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
+    //~ this.show_desklet = false;
+    //~ this.desklet_is_activated = false;
+  //~ }
+
+  //~ setup_desklet() {
+    //~ if (this.show_desklet) {
+      //~ this.install_desklet();
+    //~ } else {
+      //~ this.uninstall_desklet();
+    //~ }
+    //~ this._is_desklet_activated();
+  //~ }
 
   open_rec_folder() {
     spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
@@ -6756,8 +6458,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
     this.desklet_is_activated = ret;
-    if (!ret && this.context_menu_item_showDesklet) {
-      this.context_menu_item_showDesklet._switch.setToggleState(ret);
+    if (this.context_menu_item_showDesklet) {
+      //~ this.context_menu_item_showDesklet._switch.setToggleState(ret);
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
       //~ this.context_menu_item_showDesklet.destroy();
       //~ this.context_menu_item_showDesklet = null;
     }
@@ -7141,6 +6844,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   get streamripper_is_present() {
     return find_program_in_path("streamripper") != null
+  }
+
+  get show_desklet() {
+    return file_test(ALBUMART_ON, FileTest.EXISTS);
   }
 };
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-RSONGART=$HOME/.config/Radio3.0/song-art
+RSONGART=${XDG_RUNTIME_DIR}/AlbumArt/song-art
 [[ -d $RSONGART ]] && {
         RET=""
         for f in $(ls -t1 $RSONGART); do {
@@ -27,7 +27,6 @@ OLDTITLE=""
 rm -f ${OLDTITLEFILE}
 echo -n "${TITLE}" > ${OLDTITLEFILE}
 
-#~ [[ -z ${TITLE} && -d $ARTDIR ]] && rm -f $ARTDIR/*
 [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
 
 XESAM_URL=$(playerctl -a metadata "xesam:url")
@@ -40,7 +39,6 @@ MPRIS_ARTURL=$(playerctl -a metadata "mpris:artUrl" > /dev/null 2>&1 || echo -n 
 
 [[ -z $XESAM_URL ]] && exit 1
 
-#~ [[ "x$OLDTITLE"!="x"  && "$OLDTITLE"="$TITLE" ]] && exit 1
 [[ ! -z "$OLDTITLE" && "$OLDTITLE"="$TITLE" ]] && {
         for f in $(ls -At1 $ARTDIR); do {
                 [[ -z $f ]] || {
@@ -50,7 +48,6 @@ MPRIS_ARTURL=$(playerctl -a metadata "mpris:artUrl" > /dev/null 2>&1 || echo -n 
         }; done
 }
 
-#~ [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
 [[ $XESAM_URL == /* ]] && {
         DECODED=$(urldecode "${XESAM_URL}")
 } || {
@@ -65,7 +62,6 @@ rm -f $HOME/mimetype.txt
         ffmpeg -ss ${THUMBTIME}.000 -i "$DECODED" -vframes 1 $PATHTOFILE > /dev/null 2>&1
 } || {
         [[ -x $(which ffmpegthumbnailer) ]] && {
-                #~ [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
                 ffmpegthumbnailer -i "$DECODED" -o "$PATHTOFILE"
         }
 }
