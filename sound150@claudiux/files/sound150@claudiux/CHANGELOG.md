@@ -1,3 +1,6 @@
+### v11.0.0~20250313
+  * Works with the version 2.0.0 of the 'Album Art 3.0' desklet.
+
 ### v10.2.1~20250302
   * Improved tooltip management.
 
