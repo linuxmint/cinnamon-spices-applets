@@ -1951,17 +1951,5 @@
   "radiopp-is-here": {
     "type": "generic",
     "default": false
-  },
-  "desklet-x": {
-    "type": "generic",
-    "default": -1
-  },
-  "desklet-y": {
-    "type": "generic",
-    "default": -1
-  },
-  "desklet-dbus-id": {
-    "type": "generic",
-    "default": -1
   }
 }
