@@ -1,3 +1,7 @@
+### v5.3.0~20250315
+  * Avoids flooding the Cinnamon Spices server with unnecessary requests.
+  * Better manage loops.
+
 ### v5.2.6~20250310
   * Fixes the `spices-cache-init.sh` script.
 

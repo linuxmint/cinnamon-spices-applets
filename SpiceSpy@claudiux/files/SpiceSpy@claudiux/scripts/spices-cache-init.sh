@@ -1,6 +1,6 @@
 #!/bin/bash
 UUID="SpiceSpy@claudiux"
-for type in "action" "applet" "desklet" "extension" "theme"; do {
+for type in action applet desklet extension theme; do {
         [[ -d ${HOME}/.cache/cinnamon/spices/${type} ]] || {
                 mkdir -p ${HOME}/.cache/cinnamon/spices/${type}
         }
