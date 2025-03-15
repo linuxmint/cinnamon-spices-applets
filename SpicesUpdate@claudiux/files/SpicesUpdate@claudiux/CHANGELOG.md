@@ -1,3 +1,6 @@
+### v7.8.5~20250315
+  * BugFixes in a bash script.
+
 ### v7.8.4~20250304
   * Improved functioning.
 
