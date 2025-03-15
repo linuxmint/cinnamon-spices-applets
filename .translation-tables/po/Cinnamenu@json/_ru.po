@@ -1,0 +1,102 @@
+# CINNAMENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# jaszhix, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2022-06-05 11:17+0300\n"
+"Last-Translator: yankimax <yankidevel@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: 5.8/contextmenu.js:134 4.0/contextmenu.js:134
+msgid "Remove category"
+msgstr ""
+
+#: 5.8/contextmenu.js:167 4.0/contextmenu.js:167
+msgid "List settings apps separately"
+msgstr ""
+
+#: 5.8/contextmenu.js:174 4.0/contextmenu.js:174
+msgid "Single list style"
+msgstr ""
+
+#: 5.8/contextmenu.js:183 4.0/contextmenu.js:183
+msgid "Hide hidden files"
+msgstr ""
+
+#: 5.8/contextmenu.js:384 4.0/contextmenu.js:390
+msgid "Add folder as category"
+msgstr ""
+
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr ""
+
+#. 5.8->settings-schema.json->show-sidebar->description
+#. 4.0->settings-schema.json->show-sidebar->description
+msgid "Show sidebar"
+msgstr ""
+
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+msgid "Show the sidebar in the menu"
+msgstr ""
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps and files"
+msgstr ""
+
+#. 5.8->settings-schema.json->show-categories->description
+#. 4.0->settings-schema.json->show-categories->description
+msgid "Show categories"
+msgstr ""
+
+#. 5.8->settings-schema.json->show-categories->tooltip
+#. 4.0->settings-schema.json->show-categories->tooltip
+msgid "Show list of application categories"
+msgstr ""
+
+#. 5.8->settings-schema.json->show-emoji-category->description
+#. 4.0->settings-schema.json->show-emoji-category->description
+msgid "Show emoji category"
+msgstr ""
+
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+msgid "Show emoji category in the menu"
+msgstr ""
+
+#. 5.8->settings-schema.json->web-suggestions->description
+#. 4.0->settings-schema.json->web-suggestions->description
+msgid "Web search suggestions"
+msgstr ""
+
+#. 5.8->settings-schema.json->info1->description
+#. 4.0->settings-schema.json->info1->description
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+
+#. 5.8->settings-schema.json->info2->description
+#. 4.0->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""

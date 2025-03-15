@@ -1,0 +1,364 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 19:16+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. metadata.json->name
+msgid "Better Backgrounds"
+msgstr "Лучшие Фоновые Обои (Better Backgrounds)"
+
+#. metadata.json->description
+msgid ""
+"Apply new backgrounds from Bing, Himawari 8, Picsum Photos, PlaceKitten."
+"com, Unsplash.com or even whole websites - specify search tags, triggers "
+"and more!"
+msgstr ""
+"Применяйте новые обои на рабочий стол из Bing, Himawari 8, Picsum Photos, "
+"PlaceKitten.com, Unsplash.com или других сайтов - используя теги и не "
+"только!"
+
+#. settings-schema.json->pageBehaviour->title
+msgid "Behaviour"
+msgstr "Поведение"
+
+#. settings-schema.json->pageEffects->title
+msgid "Effects"
+msgstr "Эффекты"
+
+#. settings-schema.json->pageSource->title
+#. settings-schema.json->imagesource->title
+msgid "Source"
+msgstr "Источник"
+
+#. settings-schema.json->pageResolution->title
+#. settings-schema.json->imageresbing->title
+#. settings-schema.json->imageresunsplash->title
+#. settings-schema.json->imageresplacekitten->title
+#. settings-schema.json->imageresplacecutycapt->title
+#. settings-schema.json->imagerespicsum->title
+#. settings-schema.json->imagereshimawari->title
+msgid "Resolution"
+msgstr "Разрешение"
+
+#. settings-schema.json->applet->title
+msgid "Applet"
+msgstr "Апплет"
+
+#. settings-schema.json->applet-store->title
+msgid "Save Pictures"
+msgstr "Сохранить Изображение"
+
+#. settings-schema.json->effects->title
+msgid "Image effects"
+msgstr "Эффекты Изображений"
+
+#. settings-schema.json->changeon->title
+msgid "Triggers"
+msgstr "Триггеры"
+
+#. settings-schema.json->imagetags->title
+msgid "Tags"
+msgstr "Теги"
+
+#. settings-schema.json->imageapply->title
+msgid "Apply"
+msgstr "Применить"
+
+#. settings-schema.json->applet-icon-animation->description
+msgid "Animate icon while downloading"
+msgstr "Анимированный значок при загрузке"
+
+#. settings-schema.json->applet-icon-animation->tooltip
+msgid "When a new background is downloaded the icon gets animated..."
+msgstr "При загрузке нового изображения значок анимируется..."
+
+#. settings-schema.json->applet-show-notification->description
+msgid "Show notifications on problems"
+msgstr "Показывать уведомления о проблемах"
+
+#. settings-schema.json->applet-show-notification->tooltip
+msgid "Bad network? Faulty setup? The applet will notify you. Every time."
+msgstr "Плохая сеть? Неправильная настройка? Апплет уведомит вас. Каждый раз."
+
+#. settings-schema.json->applet-info-issues->description
+msgid ""
+"You found a bug or want to suggest a missing feature? Just checkout the "
+"source code at https://github.com/simonmicro/better-backgrounds right over "
+"on Github!"
+msgstr ""
+"Вы нашли ошибку или хотите внести изменение? Просто исследуйте исходный код "
+"на https://github.com/simonmicro/better-backgrounds Github!"
+
+#. settings-schema.json->applet-store-location->description
+msgid "Picture save location"
+msgstr "Место сохранения изображения"
+
+#. settings-schema.json->applet-store-location->tooltip
+msgid ""
+"When you choose to save the current background, where do you want to put it?"
+msgstr "Если вы решите сохранить изображение, куда его поместить?"
+
+#. settings-schema.json->applet-store-info->description
+msgid ""
+"This feature uses the command 'convert' from the package 'imagemagick'. "
+"Please make sure this package or command is installed."
+msgstr ""
+"Эта функция требует установленного 'imagemagick'. Пожалуйста убедитесь что "
+"эта программа установлена."
+
+#. settings-schema.json->change-onstart->description
+msgid "On applet reloading"
+msgstr "При перезагрузке апплета"
+
+#. settings-schema.json->change-onstart->tooltip
+msgid "Every time the applet is (re-)loaded, the background will be changed"
+msgstr "Каждый раз при (пере)загрузке апплета, фон будет меняться"
+
+#. settings-schema.json->change-onclick->description
+msgid "Clicking on the applet"
+msgstr "При нажатии на апплет"
+
+#. settings-schema.json->change-onclick->tooltip
+msgid "Just click onto the icon in your panel"
+msgstr "Просто кликнете мышью на значке апплета вашей панели"
+
+#. settings-schema.json->change-onclick-nomenu->description
+msgid ""
+"Note that this will disable the menu on clicking the applet - because "
+"clicking will change the background before you've got any chance to press "
+"the corresponding button to e.g. save the image!"
+msgstr ""
+"Это отключит меню при нажатии на апплет. Например не будет меню сохранения "
+"изображения"
+
+#. settings-schema.json->change-ontime->description
+msgid "After some time"
+msgstr "Через заданное время"
+
+#. settings-schema.json->change-ontime->tooltip
+msgid ""
+"After the specified number of minutes passes, we will change the background"
+msgstr "После указанного времени фон будет обновлён"
+
+#. settings-schema.json->change-time->description
+msgid "Change after"
+msgstr "Сменять фон через"
+
+#. settings-schema.json->change-time->units
+msgid "minutes"
+msgstr "минуты"
+
+#. settings-schema.json->effect-note->description
+msgid ""
+"This feature uses the command 'mogrify' from the package 'imagemagick'. "
+"Please make sure this package or command is installed."
+msgstr ""
+"Эта функция требует установленного 'imagemagick'. Пожалуйста убедитесь что "
+"эта программа установлена."
+
+#. settings-schema.json->effect-select->description
+msgid "Apply effects"
+msgstr "Применить эффекты"
+
+#. settings-schema.json->effect-select->options
+msgid "Gaussian blur"
+msgstr ""
+
+#. settings-schema.json->effect-select->options
+msgid "Grayscale"
+msgstr ""
+
+#. settings-schema.json->effect-select->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->image-source->description
+msgid "Image source"
+msgstr "Источник изображений"
+
+#. settings-schema.json->image-source->options
+msgid "Bing"
+msgstr ""
+
+#. settings-schema.json->image-source->options
+msgid "Cutycapt"
+msgstr ""
+
+#. settings-schema.json->image-source->options
+msgid "Himawari 8"
+msgstr ""
+
+#. settings-schema.json->image-source->options
+msgid "Placekitten"
+msgstr ""
+
+#. settings-schema.json->image-source->options
+msgid "Picsum Photos"
+msgstr ""
+
+#. settings-schema.json->image-source->options
+msgid "Unsplash"
+msgstr ""
+
+#. settings-schema.json->source-supports-info->description
+msgid ""
+"This source supports displaying additional image autor information. It will "
+"be shown inside the applets tooltip."
+msgstr ""
+"Этот источник поддерживает информацию об авторе изображения. Информация "
+"будет показана во всплывающем уведомлении."
+
+#. settings-schema.json->install-warn-cutycapt->description
+msgid ""
+"Please make sure to install the 'cutycapt' package from the package manager "
+"of your choice!"
+msgstr "Пожалуйста установите пакет 'cutycapt' через свой пакетный менеджер!"
+
+#. settings-schema.json->install-warn-imagemagick->description
+msgid ""
+"This feature uses the command 'montage' from the package 'imagemagick'. "
+"Please make sure this package or command is installed."
+msgstr ""
+"Эта функция требует установленного 'montage' из 'imagemagick'. Пожалуйста "
+"убедитесь что эта программа установлена."
+
+#. settings-schema.json->source-warn-unsplash->description
+msgid ""
+"This source is known to cause trouble, especially during times of high "
+"demand. Please be patient and try again later if you experience problems. "
+"More information can be found at: https://status.unsplash.com/"
+msgstr ""
+"Иногда с эти источником возникают проблемы, например из за загруженности "
+"сервиса, проявите терпение и попробуйте позже. Больше информации на https://"
+"status.unsplash.com/"
+
+#. settings-schema.json->image-res-manual->description
+msgid "Use custom resolution"
+msgstr "Выбрать своё разрешение"
+
+#. settings-schema.json->image-res-manual->tooltip
+msgid "This is mostly 1920x1080 or higher"
+msgstr "Обычно это 1920x1080 или выше"
+
+#. settings-schema.json->image-res-info->description
+msgid ""
+"Please make sure to choose a common resolution, otherwise the background "
+"can't be changed!"
+msgstr ""
+"Пожалуйста, убедитесь, что вы выбрали доступное разрешение, иначе вон "
+"нельзя будет менять!"
+
+#. settings-schema.json->image-res-width->description
+msgid "Width"
+msgstr "Ширина"
+
+#. settings-schema.json->image-res-width->units
+#. settings-schema.json->image-res-height->units
+msgid "pixels"
+msgstr "пикселей"
+
+#. settings-schema.json->image-res-height->description
+msgid "Height"
+msgstr "Высота"
+
+#. settings-schema.json->image-tag->description
+msgid "Use own search tags"
+msgstr "Использовать свои теги поиска"
+
+#. settings-schema.json->image-tag->tooltip
+msgid "Specify own tags to look for..."
+msgstr "Укажите свои собственные теги для поиска..."
+
+#. settings-schema.json->image-res-himawari->description
+msgid ""
+"Image zoom factor - this factor times the tile size (550 pixels) equals the "
+"image resolution. So e.g. the factor '4x' would result in a 2200x2200 "
+"pixels image. Please note that factor² much tiles will be temporarly "
+"downloaded."
+msgstr ""
+"Коэффициент масштабирования изображения - этот значение умножается на "
+"размер изображения."
+
+#. settings-schema.json->image-res-himawari->options
+msgid "1x"
+msgstr ""
+
+#. settings-schema.json->image-res-himawari->options
+msgid "4x"
+msgstr ""
+
+#. settings-schema.json->image-res-himawari->options
+msgid "8x"
+msgstr ""
+
+#. settings-schema.json->image-res-himawari->options
+msgid "16x"
+msgstr ""
+
+#. settings-schema.json->image-res-himawari->options
+msgid "20x"
+msgstr ""
+
+#. settings-schema.json->image-res-unsupported->description
+msgid "Sorry, the selected source does not support resolution modifiers."
+msgstr ""
+"Извините, выбранный источник не поддерживает смену на такое разрешения."
+
+#. settings-schema.json->image-tag-info->description
+msgid ""
+"Please make sure to choose an available tag, otherwise the background can't "
+"be changed! Make sure to seperate the tags by a ',' and not spaces, also "
+"the tags are understood as AND - not as OR! A valid search term could be "
+"'nature,water'..."
+msgstr ""
+"Выберите тег иначе фон не сможет меняться. Теги разделяются запятыми ',' "
+"вместе теги воспринимаются как И (это и это), а не как ИЛИ! Пример "
+"правильных тегов 'природа,вода'."
+
+#. settings-schema.json->image-tag-data->description
+msgid "Search tags"
+msgstr "Поисковые теги"
+
+#. settings-schema.json->image-tag-data->tooltip
+msgid "Enter your topic filters"
+msgstr "Введите ваш фильтр тем"
+
+#. settings-schema.json->image-align-info->description
+msgid ""
+"Note that properties for the image alignment are not modified from the "
+"original desktop wallpaper. Recommended is to choose the 'zoom' option, "
+"because it ensures always the best fit on your screen."
+msgstr ""
+"Обратите внимание что пропорции изображения не всегда могут соответствовать "
+"экрану. Рекомендуется выбирать 'масштабировать' , поскольку это гарантирует "
+"корректное отображение в соответствии экрану."
+
+#. settings-schema.json->image-uri->description
+msgid "Website URI to render"
+msgstr "Ссылка на сайт-фон"
+
+#. settings-schema.json->image-uri->tooltip
+msgid "Enter the website URI which sould be rendered as your background"
+msgstr "Введите ссылку на сайт, который должен отображаться как фон."
+
+#. settings-schema.json->image-update-button->description
+msgid "Apply now"
+msgstr "Применит сейчас"
+
+#. settings-schema.json->image-update-button->tooltip
+msgid ""
+"The settings are already stored - press this button to force a refresh of "
+"the background now."
+msgstr ""
+"Настройки уже применены. Нажмите на эту кнопку для обновления фона прямо "
+"сейчас."
