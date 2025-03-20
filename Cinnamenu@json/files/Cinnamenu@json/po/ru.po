@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-13 01:41+0100\n"
+"POT-Creation-Date: 2025-03-20 14:06-0400\n"
 "PO-Revision-Date: 2022-06-05 11:17+0300\n"
 "Last-Translator: yankimax <yankidevel@gmail.com>\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
-#. 4.0/applet.js:60 5.8/applet.js:59 3.2/applet.js:157
+#. 4.0/applet.js:60 3.2/applet.js:157 5.8/applet.js:59
 msgid "Initializing"
 msgstr "Инициализация"
 
@@ -86,7 +86,7 @@ msgstr "Смайлики"
 msgid "Click to copy"
 msgstr "Кликните, чтобы скопировать"
 
-#. 4.0/applet.js:1600 5.8/applet.js:1634 3.2/applet.js:1416
+#. 4.0/applet.js:1600 3.2/applet.js:1416 5.8/applet.js:1634
 msgid "Clear List"
 msgstr "Очистить список"
 
@@ -94,8 +94,8 @@ msgstr "Очистить список"
 msgid "Trash"
 msgstr "Корзина"
 
-#. 4.0/applet.js:1644 4.0/applet.js:1645 5.8/applet.js:1678 5.8/applet.js:1679
-#. 3.2/placeDisplay.js:220
+#. 4.0/applet.js:1644 4.0/applet.js:1645 3.2/placeDisplay.js:220
+#. 5.8/applet.js:1678 5.8/applet.js:1679
 msgid "Computer"
 msgstr "Компьютер"
 
@@ -110,7 +110,7 @@ msgstr "Слишком много записей - показаны только
 
 #. 4.0->settings-schema.json->open-on-category->options
 #. 5.8->settings-schema.json->open-on-category->options
-#. 4.0/categoriesview.js:283 5.8/categoriesview.js:284 3.2/applet.js:978
+#. 4.0/categoriesview.js:283 3.2/applet.js:978 5.8/categoriesview.js:284
 msgid "All applications"
 msgstr "Все приложения"
 
@@ -120,7 +120,7 @@ msgstr "Избранное"
 
 #. 4.0->settings-schema.json->open-on-category->options
 #. 5.8->settings-schema.json->open-on-category->options
-#. 4.0/categoriesview.js:302 5.8/categoriesview.js:303 3.2/applet.js:1016
+#. 4.0/categoriesview.js:302 3.2/applet.js:1016 5.8/categoriesview.js:303
 msgid "Places"
 msgstr "Места"
 
@@ -132,7 +132,7 @@ msgstr "Последние"
 
 #. 4.0->settings-schema.json->open-on-category->options
 #. 5.8->settings-schema.json->open-on-category->options
-#. 4.0/categoriesview.js:304 5.8/categoriesview.js:305 3.2/applet.js:1019
+#. 4.0/categoriesview.js:304 3.2/applet.js:1019 5.8/categoriesview.js:305
 msgid "Favorite apps"
 msgstr "Избранные приложения"
 
@@ -185,30 +185,30 @@ msgstr "Показывать скрытые файлы"
 msgid "Show hidden files"
 msgstr "Показывать скрытые файлы"
 
-#. 4.0/contextmenu.js:246 4.0/contextmenu.js:254 5.8/contextmenu.js:246
-#. 3.2/buttons.js:1045 3.2/buttons.js:1047
+#. 4.0/contextmenu.js:246 4.0/contextmenu.js:254 3.2/buttons.js:1045
+#. 3.2/buttons.js:1047 5.8/contextmenu.js:246
 msgid "Run with NVIDIA GPU"
 msgstr "Запуск с GPU NVIDIA"
 
-#. 4.0/contextmenu.js:260 5.8/contextmenu.js:256 3.2/buttons.js:1049
+#. 4.0/contextmenu.js:260 3.2/buttons.js:1049 5.8/contextmenu.js:256
 msgid "Add to panel"
 msgstr "Добавить на панель"
 
-#. 4.0/contextmenu.js:279 5.8/contextmenu.js:275 3.2/buttons.js:1051
+#. 4.0/contextmenu.js:279 3.2/buttons.js:1051 5.8/contextmenu.js:275
 msgid "Add to desktop"
 msgstr "Добавить на рабочий стол"
 
-#. 4.0/contextmenu.js:293 4.0/contextmenu.js:369 5.8/contextmenu.js:289
-#. 5.8/contextmenu.js:364 3.2/buttons.js:1054
+#. 4.0/contextmenu.js:293 4.0/contextmenu.js:369 3.2/buttons.js:1054
+#. 5.8/contextmenu.js:289 5.8/contextmenu.js:364
 msgid "Remove from favorites"
 msgstr "Убрать из \"Избранных\""
 
-#. 4.0/contextmenu.js:297 4.0/contextmenu.js:374 5.8/contextmenu.js:293
-#. 5.8/contextmenu.js:369 3.2/buttons.js:1056
+#. 4.0/contextmenu.js:297 4.0/contextmenu.js:374 3.2/buttons.js:1056
+#. 5.8/contextmenu.js:293 5.8/contextmenu.js:369
 msgid "Add to favorites"
 msgstr "Добавить в \"Избранные\""
 
-#. 4.0/contextmenu.js:304 5.8/contextmenu.js:300 3.2/buttons.js:1059
+#. 4.0/contextmenu.js:304 3.2/buttons.js:1059 5.8/contextmenu.js:300
 msgid "Uninstall"
 msgstr "Удалить"
 
@@ -283,33 +283,29 @@ msgstr "Символы"
 msgid "Flags"
 msgstr "Флаги"
 
-#. 4.0/sidebar.js:251 5.8/sidebar.js:252 3.2/applet.js:2323
+#. 4.0/sidebar.js:251 3.2/applet.js:2323 5.8/sidebar.js:252
 msgid "Quit"
 msgstr "Выход"
 
-#. 4.0/sidebar.js:252 5.8/sidebar.js:253 3.2/applet.js:2324
+#. 4.0/sidebar.js:252 3.2/applet.js:2324 5.8/sidebar.js:253
 msgid "Shutdown the computer"
 msgstr "Выключить компьютер"
 
-#. 4.0/sidebar.js:260 5.8/sidebar.js:261 3.2/applet.js:2315
+#. 4.0/sidebar.js:260 3.2/applet.js:2315 5.8/sidebar.js:261
 msgid "Logout"
 msgstr "Выйти"
 
-#. 4.0/sidebar.js:261 5.8/sidebar.js:262 3.2/applet.js:2316
+#. 4.0/sidebar.js:261 3.2/applet.js:2316 5.8/sidebar.js:262
 msgid "Leave the session"
 msgstr "Покинуть сессию"
 
-#. 4.0/sidebar.js:269 5.8/sidebar.js:270 3.2/applet.js:2293
+#. 4.0/sidebar.js:269 3.2/applet.js:2293 5.8/sidebar.js:270
 msgid "Lock screen"
 msgstr "Блокировка экрана"
 
-#. 4.0/sidebar.js:270 5.8/sidebar.js:271 3.2/applet.js:2294
+#. 4.0/sidebar.js:270 3.2/applet.js:2294 5.8/sidebar.js:271
 msgid "Lock the screen"
 msgstr "Заблокировать экран"
-
-#. 5.8/applet.js:1127
-msgid "files"
-msgstr "файлы"
 
 #. 3.2/applet.js:92
 msgid "Type to search..."
@@ -362,6 +358,11 @@ msgstr "Домашний каталог"
 #. 3.2/placeDisplay.js:224
 msgid "Browse network"
 msgstr "Обзор сети"
+
+#. 5.8/applet.js:1127
+#, fuzzy
+msgid "Files"
+msgstr "Файл"
 
 #. 4.0/mint-remove-application.py:34
 msgid ""
@@ -476,22 +477,22 @@ msgstr ""
 
 #. 4.0->settings-schema.json->layout->title
 #. 4.0->settings-schema.json->menu-layout->title
-#. 5.8->settings-schema.json->layout->title
-#. 5.8->settings-schema.json->menu-layout->title
 #. 3.2->settings-schema.json->menu->title
 #. 3.2->settings-schema.json->menu-layout->title
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
 msgid "Layout"
 msgstr "Внешний вид"
 
 #. 4.0->settings-schema.json->behaviour->title
-#. 5.8->settings-schema.json->behaviour->title
 #. 3.2->settings-schema.json->panel->title
+#. 5.8->settings-schema.json->behaviour->title
 msgid "Behavior"
 msgstr "Поведение"
 
 #. 4.0->settings-schema.json->appearance->title
-#. 5.8->settings-schema.json->appearance->title
 #. 3.2->settings-schema.json->appearance->title
+#. 5.8->settings-schema.json->appearance->title
 msgid "Appearance"
 msgstr "Внешний вид"
 
@@ -503,26 +504,26 @@ msgid "Tips"
 msgstr ""
 
 #. 4.0->settings-schema.json->menu-content->title
-#. 5.8->settings-schema.json->menu-content->title
 #. 3.2->settings-schema.json->menu-content->title
+#. 5.8->settings-schema.json->menu-content->title
 msgid "Content"
 msgstr "Содержание"
 
 #. 4.0->settings-schema.json->panel-behave->title
 #. 4.0->settings-schema.json->panel-appear->title
-#. 5.8->settings-schema.json->panel-behave->title
-#. 5.8->settings-schema.json->panel-appear->title
 #. 3.2->settings-schema.json->panel-appear->title
 #. 3.2->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
 msgid "Panel"
 msgstr "Панель"
 
 #. 4.0->settings-schema.json->menu-behave->title
 #. 4.0->settings-schema.json->menu-icons->title
-#. 5.8->settings-schema.json->menu-behave->title
-#. 5.8->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->menu-behave->title
 #. 3.2->settings-schema.json->menu-icons->title
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
 msgid "Menu"
 msgstr "Меню"
 
@@ -532,14 +533,14 @@ msgid "Applications view mode"
 msgstr "Вид просмотра приложений"
 
 #. 4.0->settings-schema.json->applications-view-mode->options
-#. 5.8->settings-schema.json->applications-view-mode->options
 #. 3.2->settings-schema.json->startup-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
 msgid "List"
 msgstr "Список"
 
 #. 4.0->settings-schema.json->applications-view-mode->options
-#. 5.8->settings-schema.json->applications-view-mode->options
 #. 3.2->settings-schema.json->startup-view-mode->options
+#. 5.8->settings-schema.json->applications-view-mode->options
 msgid "Grid"
 msgstr "Сетка"
 
@@ -658,14 +659,14 @@ msgid "Show list of application categories"
 msgstr "Показывать значки приложений"
 
 #. 4.0->settings-schema.json->show-places-category->description
-#. 5.8->settings-schema.json->show-places-category->description
 #. 3.2->settings-schema.json->show-places->description
+#. 5.8->settings-schema.json->show-places-category->description
 msgid "Show bookmarks and places"
 msgstr "Показывать закладки и места"
 
 #. 4.0->settings-schema.json->show-places-category->tooltip
-#. 5.8->settings-schema.json->show-places-category->tooltip
 #. 3.2->settings-schema.json->show-places->tooltip
+#. 5.8->settings-schema.json->show-places-category->tooltip
 msgid "Show bookmarks and places category in the menu"
 msgstr "Показывать в меню закладки и категории мест"
 
@@ -712,75 +713,75 @@ msgid "Show emoji category in the menu"
 msgstr "Показывать в меню категорию домашнего каталога"
 
 #. 4.0->settings-schema.json->menu-editor-button->description
-#. 5.8->settings-schema.json->menu-editor-button->description
 #. 3.2->settings-schema.json->menu-editor-button->description
+#. 5.8->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Открыть редактор меню"
 
 #. 4.0->settings-schema.json->overlay-key->description
-#. 5.8->settings-schema.json->overlay-key->description
 #. 3.2->settings-schema.json->overlay-key->description
+#. 5.8->settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Сочетание клавиш для открытия и закрытия меню"
 
 #. 4.0->settings-schema.json->activate-on-hover->description
-#. 5.8->settings-schema.json->activate-on-hover->description
 #. 3.2->settings-schema.json->activate-on-hover->description
+#. 5.8->settings-schema.json->activate-on-hover->description
 msgid "Open menu on hover"
 msgstr "Открывать меню при наведении курсора мыши"
 
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-#. 5.8->settings-schema.json->activate-on-hover->tooltip
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Открывать меню при наведении мыши на значок панели"
 
 #. 4.0->settings-schema.json->hover-delay->units
-#. 5.8->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
+#. 5.8->settings-schema.json->hover-delay->units
 msgid "milliseconds"
 msgstr "миллисекунды"
 
 #. 4.0->settings-schema.json->hover-delay->description
-#. 5.8->settings-schema.json->hover-delay->description
 #. 3.2->settings-schema.json->hover-delay->description
+#. 5.8->settings-schema.json->hover-delay->description
 msgid "Menu hover delay"
 msgstr "Задержка при наведении на меню"
 
 #. 4.0->settings-schema.json->enable-animation->description
-#. 5.8->settings-schema.json->enable-animation->description
 #. 3.2->settings-schema.json->enable-animation->description
+#. 5.8->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
 msgstr "Использовать анимацию меню"
 
 #. 4.0->settings-schema.json->enable-animation->tooltip
-#. 5.8->settings-schema.json->enable-animation->tooltip
 #. 3.2->settings-schema.json->enable-animation->tooltip
+#. 5.8->settings-schema.json->enable-animation->tooltip
 msgid "Animate the menu on open and close"
 msgstr "Анимация меню при открытии и закрытии"
 
 #. 4.0->settings-schema.json->category-click->description
-#. 5.8->settings-schema.json->category-click->description
 #. 3.2->settings-schema.json->category-click->description
+#. 5.8->settings-schema.json->category-click->description
 msgid "Activate categories on click"
 msgstr "Активация категории по щелчку мыши"
 
 #. 4.0->settings-schema.json->category-click->tooltip
-#. 5.8->settings-schema.json->category-click->tooltip
 #. 3.2->settings-schema.json->category-click->tooltip
+#. 5.8->settings-schema.json->category-click->tooltip
 msgid "Activate categories on click instead of on hover"
 msgstr "Активация категорий по щелчку, а не по наведению курсора"
 
 #. 4.0->settings-schema.json->open-on-category->description
-#. 5.8->settings-schema.json->open-on-category->description
 #. 3.2->settings-schema.json->startup-view-mode->description
+#. 5.8->settings-schema.json->open-on-category->description
 msgid "Open menu on category:"
 msgstr "Открыть меню в категории:"
 
 #. 4.0->settings-schema.json->open-on-category->tooltip
-#. 5.8->settings-schema.json->open-on-category->tooltip
 #. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 5.8->settings-schema.json->open-on-category->tooltip
 msgid "Always open the menu with this category selected"
 msgstr "Всегда открывать меню с избранной категорией"
 
@@ -790,8 +791,8 @@ msgid "Last used category"
 msgstr "Последняя используемая категория"
 
 #. 4.0->settings-schema.json->enable-autoscroll->description
-#. 5.8->settings-schema.json->enable-autoscroll->description
 #. 3.2->settings-schema.json->enable-autoscroll->description
+#. 5.8->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling"
 msgstr "Включить автопрокрутку"
 
@@ -897,8 +898,8 @@ msgid ""
 "With web search option, also show search suggestions. (Note: Search "
 "suggestions are provided by DuckDuckGo)"
 msgstr ""
-"Вместе с выбором поиской системы, так же показываются подсказки (Примечание: Поисковые "
-"подсказки предоставлены DuckDuckGo)"
+"Вместе с выбором поиской системы, так же показываются подсказки (Примечание: "
+"Поисковые подсказки предоставлены DuckDuckGo)"
 
 #. 4.0->settings-schema.json->enable-home-folder-search->description
 #. 5.8->settings-schema.json->enable-home-folder-search->description
@@ -1331,23 +1332,23 @@ msgstr ""
 "истории и 'b ' для поиска веб-закладок.\n"
 
 #. 4.0->settings-schema.json->menu-icon-custom->description
-#. 5.8->settings-schema.json->menu-icon-custom->description
 #. 3.2->settings-schema.json->menu-icon-custom->description
+#. 5.8->settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
 msgstr "Использовать собственную иконку"
 
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-#. 5.8->settings-schema.json->menu-icon-custom->tooltip
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
 msgid "Use a custom icon in the panel"
 msgstr "Использовать собственную иконку на панели"
 
 #. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-#. 5.8->settings-schema.json->menu-icon->description
-#. 5.8->settings-schema.json->menu-icon->tooltip
 #. 3.2->settings-schema.json->menu-icon->description
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
 msgid "Panel icon"
 msgstr "Иконка панели"
 
@@ -1372,41 +1373,41 @@ msgid "Choose a custom size for the panel icon"
 msgstr "Выбор произвольного размера для значка панели"
 
 #. 4.0->settings-schema.json->menu-label->description
-#. 5.8->settings-schema.json->menu-label->description
 #. 3.2->settings-schema.json->menu-label->description
+#. 5.8->settings-schema.json->menu-label->description
 msgid "Panel text"
 msgstr "Текст панели"
 
 #. 4.0->settings-schema.json->menu-label->tooltip
-#. 5.8->settings-schema.json->menu-label->tooltip
 #. 3.2->settings-schema.json->menu-label->tooltip
+#. 5.8->settings-schema.json->menu-label->tooltip
 msgid "Text to show beside the panel icon"
 msgstr "Текст, отображаемый рядом со значком панели"
 
 #. 4.0->settings-schema.json->category-icon-size->description
 #. 4.0->settings-schema.json->category-icon-size->tooltip
-#. 5.8->settings-schema.json->category-icon-size->description
-#. 5.8->settings-schema.json->category-icon-size->tooltip
 #. 3.2->settings-schema.json->category-icon-size->description
 #. 3.2->settings-schema.json->category-icon-size->tooltip
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size (pixels)"
 msgstr "Размер значка категории (в пикселях)"
 
 #. 4.0->settings-schema.json->apps-list-icon-size->description
 #. 4.0->settings-schema.json->apps-list-icon-size->tooltip
-#. 5.8->settings-schema.json->apps-list-icon-size->description
-#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
 #. 3.2->settings-schema.json->apps-list-icon-size->description
 #. 3.2->settings-schema.json->apps-list-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size (pixels)"
 msgstr "Размер значка списка приложений (в пикселях)"
 
 #. 4.0->settings-schema.json->apps-grid-icon-size->description
 #. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
-#. 5.8->settings-schema.json->apps-grid-icon-size->description
-#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
 #. 3.2->settings-schema.json->apps-grid-icon-size->description
 #. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size (pixels)"
 msgstr "Размер значка приложений сетки (в пикселях)"
 
@@ -1469,8 +1470,8 @@ msgid ""
 "them."
 msgstr ""
 "\n"
-"• Каталоги могут быть установлены или удалены как меню категории по щелку правой кнопкой на "
-"них."
+"• Каталоги могут быть установлены или удалены как меню категории по щелку "
+"правой кнопкой на них."
 
 #. 4.0->settings-schema.json->info4->description
 #. 5.8->settings-schema.json->info4->description
@@ -1486,8 +1487,8 @@ msgstr ""
 "• Дополнительные комбинации клавиш:\n"
 "ctrl-p — Открыть диалог свойств панели запуска текущего выделенного "
 "приложения.\n"
-"ctrl-d — Открыть .desktop файл текущего выделенного приложение в текстовом редакторе "
-"по умолчанию.\n"
+"ctrl-d — Открыть .desktop файл текущего выделенного приложение в текстовом "
+"редакторе по умолчанию.\n"
 
 #. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
