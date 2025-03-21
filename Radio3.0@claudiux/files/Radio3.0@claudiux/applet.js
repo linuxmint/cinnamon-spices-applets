@@ -227,6 +227,8 @@ const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
 var MANUAL_HTML = HELP_DIR + "/MANUAL.html";
 
+const PLAY_TINK = SCRIPTS_DIR + "/tink.sh";
+
 const USER_MUSIC_DIR = get_user_special_dir(UserDirectory.DIRECTORY_MUSIC);
 const DEFAULT_RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
 var RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
@@ -415,6 +417,8 @@ _("This file can then be imported here.");
 
 let limits_hd_space_left_label_text = _("%s bytes = %s GB = %s GiB");
 
+const DAYS_ABBREV = [_("Sun."), _("Mon."), _("Tue."), _("Wed."), _("Thu."), _("Fri."), _("Sat.")];
+
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -592,6 +596,8 @@ R3AppletSettings.prototype = {
               this.settingsData["category-to-move"].value = value_to_set;
 
               let old_sched_radio = this.getValue("sched-radio");
+              let old_working_radio = this.getValue("alarm-clock-working-days-radio");
+              let old_workoff_radio = this.getValue("alarm-clock-workoff-days-radio");
               let sched_radios_options = {};
               sched_radios_options["%s".format(_("(Undefined)"))] = "";
               var items = Object.keys(value).map((k) => { return [value[k].name, value[k].url] });
@@ -601,12 +607,18 @@ R3AppletSettings.prototype = {
                 if (item[1] && item[1].length > 0) // Ignores categories
                   sched_radios_options[item[0]] = item[1];
               this.settingsData["sched-radio"].options = sched_radios_options;
+              this.settingsData["alarm-clock-working-days-radio"].options = sched_radios_options;
+              this.settingsData["alarm-clock-workoff-days-radio"].options = sched_radios_options;
 
               this.settingsData["sched-radio"].value = "";
+              this.settingsData["alarm-clock-working-days-radio"].value = "" + old_working_radio;
+              this.settingsData["alarm-clock-workoff-days-radio"].value = "" + old_workoff_radio;
 
               this._saveToFile();
               this.emit("changed", "category-to-move", old_category, "");
               this.emit("changed", "sched-radio", old_sched_radio, "");
+              //~ this.emit("changed", "alarm-clock-working-days-radio", old_working_radio, "");
+              //~ this.emit("changed", "alarm-clock-workoff-days-radio", old_workoff_radio, "");
             }
           }
 
@@ -716,7 +728,7 @@ RadioNotificationSource.prototype = {
           this.notifications[i].destroy();
         } else {
           // Do nothing.
-          logDebug("Unable to destroy notification number "+i);
+          logError("Unable to destroy notification number "+i);
         }
       }
     }
@@ -1001,7 +1013,7 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         if (menuItem instanceof PopupMenuSection) {
             this._connectSubMenuSignals(menuItem, menuItem);
             this._signals.connect(menuItem, 'destroy', () => {
-              logDebug('Destroying PopupMenuSection');
+              //~ logDebug('Destroying PopupMenuSection');
               if (this._signals.isConnected('activate', menuItem))
                 this._signals.disconnect('activate', menuItem);
               if (this._signals.isConnected('active-changed', menuItem))
@@ -1244,6 +1256,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //~ this.stopItem = new PopupMenuItem(_("Stop"));
     //~ this.stopItem.connect('activate', Lang.bind(this, this.stop_mpv));
 
+    // Alarm Clock:
+    this.alarmClockLoopId = null;
+    this.alarmClockLooping = false;
+
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
@@ -1268,7 +1284,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.tabNumberOfNetwork = 1*userSettings["layoutradio"]["pages"].indexOf("pageNetwork");
     this.tabNumberOfRecording = 1*userSettings["layoutradio"]["pages"].indexOf("pageRecording");
     this.tabNumberOfYT = 1*userSettings["layoutradio"]["pages"].indexOf("pageYT");
-    userSettings = null;
+    this.tabNumberOfAlarmClock = 1*userSettings["layoutradio"]["pages"].indexOf("pageAlarmClock");
+    userSettings = {};
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
     if (nemo_size_prefixes !== this.settings.getValue("limits-hd-size-prefixes")) {
@@ -1436,6 +1453,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //Scheduling:
     this.settings.bind("sched-recordings", "sched_recordings");
 
+    // Alarm Clock:
+    this.settings.bind("alarm-clock-wake-me-up", "wake_me_up", () => { this.onAlarmClockChanged() });
+    this.settings.bind("alarm-clock-working-days", "working_days");
+    this.settings.bind("alarm-clock-working-days-time", "working_days_time");
+    //~ this.settings.bind("alarm-clock-working-days-radio", "working_days_radio");
+    this.settings.bind("alarm-clock-workoff-days", "workoff_days");
+    this.settings.bind("alarm-clock-workoff-days-time", "workoff_days_time");
+    //~ this.settings.bind("alarm-clock-workoff-days-radio", "workoff_days_radio");
+
     // Network:
     this.settings.bind("network-monitoring", "network_monitoring", () => { this.on_network_monitoring_changed() });
     this.settings.bind("network-quality", "network_quality");
@@ -1459,6 +1485,164 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Help TextViews:
     this.populate_help_textviews()
+  }
+
+  onAlarmClockChanged() {
+    //~ logDebug("onAlarmClockChanged()");
+    if (this.wake_me_up) {
+      const d = new Date();
+      const seconds = 60 - d.getSeconds();
+      // Be sure to begin loop at h:m:0.
+      let id = setTimeout( () => {
+        clearTimeout(id);
+        this.alarmClockLooping = true;
+        this.alarmClockLoopId = timeout_add_seconds(60, () => { return this.alarmclock_loop() } );
+      }, seconds * 1000);
+    } else {
+      this.alarmClockLooping = false;
+      this.alarmClockLoopId = null;
+    }
+    this.change_symbolic_icon();
+  }
+
+  alarmclock_loop() {
+    if (! this.wake_me_up)
+      this.alarmClockLooping = false;
+    if (! this.alarmClockLooping)
+      return false;
+    //~ logDebug("alarmclock_loop()");
+
+    const d = new Date();
+    const day = d.getDay();
+    const daystr = `day${day.toString()}`;
+    const hour = d.getHours();
+    const minute = d.getMinutes();
+    const working_days = JSON.parse(JSON.stringify(this.working_days, null, 4));
+    const workoff_days = JSON.parse(JSON.stringify(this.workoff_days, null, 4));
+    const play_tink = this.settings.getValue("alarm-clock-tink-on");
+
+    let radio = this.last_radio_listened_to;
+    let is_playing_tink = false;
+    if (  working_days[0][daystr] &&
+          this.working_days_time.h == hour &&
+          this.working_days_time.m == minute) {
+      is_playing_tink = true;
+      if (play_tink)
+        spawnCommandLineAsync(PLAY_TINK);
+      //~ this.stop_mpv_radio(false);
+      this.stop_mpv_radio();
+      if (this.settings.getValue("alarm-clock-working-days-radio").length > 0)
+        radio = this.settings.getValue("alarm-clock-working-days-radio");
+      this.start_mpv_radio(radio);
+    }
+
+    if (  workoff_days[0][daystr] &&
+          this.workoff_days_time.h == hour &&
+          this.workoff_days_time.m == minute) {
+      if (play_tink && !is_playing_tink)
+        spawnCommandLineAsync(PLAY_TINK);
+      //~ this.stop_mpv_radio(false);
+      this.stop_mpv_radio();
+      if (this.settings.getValue("alarm-clock-workoff-days-radio").length > 0)
+        radio = this.settings.getValue("alarm-clock-workoff-days-radio");
+      this.start_mpv_radio(radio);
+    }
+
+    if (is_playing_tink && this.settings.getValue("alarm-clock-wake-me-softly")) {
+      let showOSD = this.showOSD;
+      this.showOSD = false;
+      let duration = this.settings.getValue("alarm-clock-volume-transition"); //seconds
+      let vol_begin = this.settings.getValue("alarm-clock-volume-begin");
+      let vol_end = this.settings.getValue("alarm-clock-volume-end");
+      let vol_diff = vol_end - vol_begin;
+      if (vol_diff < 0) {
+        vol_end = Math.min(100, vol_begin + 20);
+        if (vol_end < 50)
+          vol_end = 50;
+        vol_diff = vol_end - vol_begin;
+      }
+      var step, value, index;
+      step = Math.ceil(1000 * duration / vol_diff); // step in ms.
+      index = 0;
+      let intervalId1 = setInterval( () => {
+          value = (vol_begin + index);
+          if (value >= vol_end) {
+            value = vol_end;
+            index = 0;
+            clearInterval(intervalId1);
+          }
+          this.showOSD = false;
+          this.percentage = value;
+          if (this.context_menu_item_slider != null) {
+            this.context_menu_item_slider.slider._value = value / 100;
+            this.context_menu_item_slider.slider._slider.queue_repaint();
+            this.context_menu_item_slider.slider.emit('value-changed', value / 100);
+          }
+          if (value >= vol_end) {
+            return false;
+          } else {
+            index += 1;
+            return true;
+          }
+        },
+        step
+      );
+      this.showOSD = showOSD;
+    }
+    is_playing_tink = false;
+    return this.wake_me_up;
+  }
+
+  get next_alarm() {
+    if (!this.wake_me_up) return "";
+    const d = new Date();
+    var day = d.getDay();
+    var daystr = `day${day.toString()}`;
+    const hour = d.getHours();
+    const minute = d.getMinutes();
+    const working_days = JSON.parse(JSON.stringify(this.working_days, null, 4));
+    const workoff_days = JSON.parse(JSON.stringify(this.workoff_days, null, 4));
+    let now_minutes = hour * 60 +  minute;
+    let wd_minutes = 86401;
+    let wo_minutes = 86401;
+    // Today:
+    if (working_days[0][daystr]) {
+      wd_minutes = this.working_days_time.h * 60 + this.working_days_time.m;
+    }
+    if (workoff_days[0][daystr]) {
+      wo_minutes = this.workoff_days_time.h * 60 + this.workoff_days_time.m;
+    }
+    if (wd_minutes < wo_minutes) {
+      if (now_minutes < wd_minutes) {
+        return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+      }
+    } else if (wd_minutes > wo_minutes) {
+      if (now_minutes < wo_minutes) {
+        return DAYS_ABBREV[day] + " " + this.workoff_days_time.h + ":" + this.workoff_days_time.m;
+      }
+    } else if (wd_minutes !== 86401 && now_minutes < wd_minutes) {
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+    }
+    // Tomorrow:
+    day = (day + 1) % 7;
+    daystr = `day${day.toString()}`;
+    wd_minutes = 86401;
+    wo_minutes = 86401;
+    if (working_days[0][daystr]) {
+      wd_minutes = this.working_days_time.h * 60 + this.working_days_time.m;
+    }
+    if (workoff_days[0][daystr]) {
+      wo_minutes = this.workoff_days_time.h * 60 + this.workoff_days_time.m;
+    }
+    if (wd_minutes < wo_minutes) {
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+    } else if (wd_minutes > wo_minutes) {
+      return DAYS_ABBREV[day] + " " + this.workoff_days_time.h + ":" + this.workoff_days_time.m;
+    } else if (wd_minutes !== 86401) {
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+    }
+    // No alarm:
+    return "";
   }
 
   //~ switch_showDesklet() {
@@ -2265,6 +2449,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   change_symbolic_icon(name='webradioreceiver') {
     if (this.actor.get_stage() == null) return;
+    if (this.wake_me_up && name == 'webradioreceiver')
+      name = "clock-webradioreceiver-symbolic";
     this.do_rotation = (name === 'animated');
     this.set_applet_icon_symbolic_name(name);
     this.set_color();
@@ -2540,6 +2726,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     } else {
       ttElts.push(_("Click to select a station"));
+    }
+
+    let next_alarm = this.next_alarm;
+    if (next_alarm.length > 0) {
+      ttElts.push("");
+      ttElts.push(_("Wake Up"));
+      ttElts.push(next_alarm);
     }
 
     let _tooltip = ttElts.join("\n");
@@ -3793,6 +3986,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Disk space is OK.
     this.settings.setValue("scheduling-allowed", true);
     this.settings.setValue("sched-radio", "");
+    //~ this.settings.setValue("alarm-clock-working-days-radio", "");
+    //~ this.settings.setValue("alarm-clock-workoff-days-radio", "");
     this.result_of_last_hd_space_check = true;
     return true
   }
@@ -4223,6 +4418,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       2100
     );
 
+    // Alarm Clock:
+    this.onAlarmClockChanged();
+
     //~ if (this.desklet_is_activated)
       //~ reloadExtension(DESKLET_UUID, Type.DESKLET);
   }
@@ -4234,6 +4432,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // Stop looping:
     this.appletRunning = false;
+    this.alarmClockLooping = false;
 
     // Remove desklet:
     //~ this.show_desklet = false;
@@ -4955,7 +5154,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             `notify-send -u critical --icon="webradioreceiver-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
-                logDebug("stdout: "+stdout+" "+ typeof stdout);
+                //~ logDebug("stdout: "+stdout+" "+ typeof stdout);
                 if (stdout.startsWith("opt1")) {
                   this.install_OSD150();
                 } else {
@@ -4974,7 +5173,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             `notify-send -u critical --icon="webradioreceiver-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
-                  logDebug("stdout: "+stdout+" "+ typeof stdout);
+                  //~ logDebug("stdout: "+stdout+" "+ typeof stdout);
                   if (stdout.startsWith("opt1")) {
                     spawnCommandLineAsync("cinnamon-settings extensions -t download");
                   } else {
@@ -5143,6 +5342,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_scheduleARecording.connect('activate', () => { this.configureApplet(this.tabNumberOfScheduling) });
     }
 
+    if (!this.context_menu_item_AlarmClock) {
+      this.context_menu_item_AlarmClock = new PopupIconMenuItem(_("Configure the Alarm Clock..."),
+        "system-run",
+        IconType.SYMBOLIC);
+      this.context_menu_item_AlarmClock.connect('activate', () => { this.configureApplet(this.tabNumberOfAlarmClock) });
+    }
+
     if (!this.context_menu_item_recording) {
       this.context_menu_item_recording = new PopupIconMenuItem(_("Extract soundtrack from YouTube video..."),
         "yt",
@@ -5264,6 +5470,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.context_menu_section_config.addMenuItem(this.context_menu_item_reloadThisApplet);
     this.context_menu_section_config.addMenuItem(this.context_menu_item_configure);
+    this.context_menu_section_config.addMenuItem(this.context_menu_item_AlarmClock);
     this.context_menu_section_config.addMenuItem(this.context_menu_item_scheduleARecording);
     this.context_menu_section_config.addMenuItem(this.context_menu_item_recording);
     this.context_menu_section_config.addMenuItem(this.context_menu_separator2);
@@ -5737,7 +5944,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return notification;
   }
 
-  set_scheduling_tab() {
+  set_scheduling_and_alarmclock_tabs() {
     let now = DateTime.new_now_local();
     now = now.add_minutes(2);
 
@@ -5757,12 +5964,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (item[1] && item[1].length > 0) // Ignores categories
           sched_radios_options[item[0]] = item[1];
 
+      let old_working_radio = this.settings.getValue("alarm-clock-working-days-radio");
+      let old_workoff_radio = this.settings.getValue("alarm-clock-workoff-days-radio");
       this.settings.setOptions("sched-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-working-days-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-workoff-days-radio", sched_radios_options);
       this.settings.setValue("sched-radio", (this.settings.getValue("scheduling-allowed")) ? this.last_radio_listened_to : "");
+      this.settings.setValue("alarm-clock-working-days-radio", old_working_radio);
+      this.settings.setValue("alarm-clock-workoff-days-radio", old_workoff_radio);
     } else {
       sched_radios_options[""+_("(Undefined)")] = "";
       this.settings.setOptions("sched-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-working-days-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-workoff-days-radio", sched_radios_options);
       this.settings.setValue("sched-radio", "");
+      this.settings.setValue("alarm-clock-working-days-radio", "");
+      this.settings.setValue("alarm-clock-workoff-days-radio", "");
     }
 
     //radios = null;
@@ -5796,7 +6013,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //global.log("_set_settings_options");
 
     this.set_radios_tab();
-    this.set_scheduling_tab();
+    this.set_scheduling_and_alarmclock_tabs();
 
     if (this.page_label != undefined)
       this.settings.setValue("search-list-page-label", ""+this.page_label);
