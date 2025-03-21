@@ -6,19 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2025-03-13 01:41+0100\n"
-"PO-Revision-Date: 2022-06-05 11:17+0300\n"
+"PO-Revision-Date: 2025-03-21 12:43+0200\n"
 "Last-Translator: yankimax <yankidevel@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.0/applet.js:60 5.8/applet.js:59 3.2/applet.js:157
 msgid "Initializing"
@@ -157,9 +156,8 @@ msgid "dark skin tone"
 msgstr "темный тон скина"
 
 #. 4.0/contextmenu.js:134 5.8/contextmenu.js:134
-#, fuzzy
 msgid "Remove category"
-msgstr "Восстановить порядок категорий"
+msgstr "Удалить категорию"
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0/contextmenu.js:147 5.8/contextmenu.js:147
@@ -168,16 +166,15 @@ msgstr "Восстановить порядок категорий"
 
 #. 4.0/contextmenu.js:167 5.8/contextmenu.js:167
 msgid "List settings apps separately"
-msgstr ""
+msgstr "Расположить настройки приложений отдельно"
 
 #. 4.0/contextmenu.js:174 5.8/contextmenu.js:174
 msgid "Single list style"
-msgstr ""
+msgstr "Стиль единого списка"
 
 #. 4.0/contextmenu.js:183 5.8/contextmenu.js:183
-#, fuzzy
 msgid "Hide hidden files"
-msgstr "Показывать скрытые файлы"
+msgstr "Скрывать скрытые файлы"
 
 #. 4.0->settings-schema.json->show-hidden-files->description
 #. 5.8->settings-schema.json->show-hidden-files->description
@@ -229,9 +226,8 @@ msgid "Other application..."
 msgstr "Другие приложения..."
 
 #. 4.0/contextmenu.js:390 5.8/contextmenu.js:384
-#, fuzzy
 msgid "Add folder as category"
-msgstr "Показывать категорию избранных приложений"
+msgstr "Добавить папку как категорию"
 
 #. 4.0/contextmenu.js:406 5.8/contextmenu.js:400 4.0/search.py:48
 #. 5.8/search.py:48
@@ -365,11 +361,10 @@ msgstr "Обзор сети"
 
 #. 4.0/mint-remove-application.py:34
 msgid ""
-"This menu item is not associated to any package. Do you want to remove it "
-"from the menu anyway?"
+"This menu item is not associated to any package. Do you want to remove it from the menu "
+"anyway?"
 msgstr ""
-"Этот пункт меню не связан ни с каким пакетом. Вы все равно хотите удалить "
-"его из меню?"
+"Этот пункт меню не связан ни с каким пакетом. Вы все равно хотите удалить его из меню?"
 
 #. 4.0/mint-remove-application.py:75
 msgid "The following packages will be removed:"
@@ -467,12 +462,10 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
 msgstr ""
-"Гибкое меню с вариантами компоновки в виде сетки или списка, браузером "
-"файлов и поиском по смайликам."
+"Гибкое меню с вариантами компоновки в виде сетки или списка, браузером файлов и поиском по "
+"смайликам."
 
 #. 4.0->settings-schema.json->layout->title
 #. 4.0->settings-schema.json->menu-layout->title
@@ -500,7 +493,7 @@ msgstr "Внешний вид"
 #. 5.8->settings-schema.json->tips->title
 #. 5.8->settings-schema.json->tips-section->title
 msgid "Tips"
-msgstr ""
+msgstr "Подсказки"
 
 #. 4.0->settings-schema.json->menu-content->title
 #. 5.8->settings-schema.json->menu-content->title
@@ -550,15 +543,13 @@ msgstr "Просмотр приложений в виде списка или с
 
 #. 4.0->settings-schema.json->show-sidebar->description
 #. 5.8->settings-schema.json->show-sidebar->description
-#, fuzzy
 msgid "Show sidebar"
-msgstr "Показывать избранное на боковой панели"
+msgstr "Показать боковую панель"
 
 #. 4.0->settings-schema.json->show-sidebar->tooltip
 #. 5.8->settings-schema.json->show-sidebar->tooltip
-#, fuzzy
 msgid "Show the sidebar in the menu"
-msgstr "Показывать в меню категорию домашнего каталога"
+msgstr "Показать боковую панель в меню"
 
 #. 4.0->settings-schema.json->sidebar-placement->description
 #. 5.8->settings-schema.json->sidebar-placement->description
@@ -616,7 +607,6 @@ msgstr "Только файлы"
 
 #. 4.0->settings-schema.json->sidebar-favorites->options
 #. 5.8->settings-schema.json->sidebar-favorites->options
-#, fuzzy
 msgid "Apps and files"
 msgstr "Приложения и файлы"
 
@@ -647,15 +637,13 @@ msgstr "Выбор места отображения описаний прило
 
 #. 4.0->settings-schema.json->show-categories->description
 #. 5.8->settings-schema.json->show-categories->description
-#, fuzzy
 msgid "Show categories"
-msgstr "Показывать значки категорий"
+msgstr "Показывать панель категорий"
 
 #. 4.0->settings-schema.json->show-categories->tooltip
 #. 5.8->settings-schema.json->show-categories->tooltip
-#, fuzzy
 msgid "Show list of application categories"
-msgstr "Показывать значки приложений"
+msgstr "Показывать список категорий приложений"
 
 #. 4.0->settings-schema.json->show-places-category->description
 #. 5.8->settings-schema.json->show-places-category->description
@@ -697,19 +685,17 @@ msgstr "Показывать домашний каталог"
 #. 4.0->settings-schema.json->show-home-folder-category->tooltip
 #. 5.8->settings-schema.json->show-home-folder-category->tooltip
 msgid "Show home folder category in the menu"
-msgstr "Показывать в меню категорию домашнего каталога"
+msgstr "Показывать категорию домашнего каталога в меню"
 
 #. 4.0->settings-schema.json->show-emoji-category->description
 #. 5.8->settings-schema.json->show-emoji-category->description
-#, fuzzy
 msgid "Show emoji category"
-msgstr "Показывать категорию избранных приложений"
+msgstr "Показывать категорию эмодзи"
 
 #. 4.0->settings-schema.json->show-emoji-category->tooltip
 #. 5.8->settings-schema.json->show-emoji-category->tooltip
-#, fuzzy
 msgid "Show emoji category in the menu"
-msgstr "Показывать в меню категорию домашнего каталога"
+msgstr "Показывать категорию эмодзи в меню"
 
 #. 4.0->settings-schema.json->menu-editor-button->description
 #. 5.8->settings-schema.json->menu-editor-button->description
@@ -887,15 +873,14 @@ msgstr "Показывать опцию поиска в Интернете в р
 
 #. 4.0->settings-schema.json->web-suggestions->description
 #. 5.8->settings-schema.json->web-suggestions->description
-#, fuzzy
 msgid "Web search suggestions"
-msgstr "Опция поиска в Интернете"
+msgstr "Предложения по поиску в Интернете"
 
 #. 4.0->settings-schema.json->web-suggestions->tooltip
 #. 5.8->settings-schema.json->web-suggestions->tooltip
 msgid ""
-"With web search option, also show search suggestions. (Note: Search "
-"suggestions are provided by DuckDuckGo)"
+"With web search option, also show search suggestions. (Note: Search suggestions are "
+"provided by DuckDuckGo)"
 msgstr ""
 "Вместе с выбором поиской системы, так же показываются подсказки (Примечание: Поисковые "
 "подсказки предоставлены DuckDuckGo)"
@@ -918,12 +903,12 @@ msgstr "История веб-поиска"
 #. 4.0->settings-schema.json->enable-web-history-search->tooltip
 #. 5.8->settings-schema.json->enable-web-history-search->tooltip
 msgid ""
-"When searching, also search my browser's history (Google Chrome, Chromium, "
-"Opera, Vivaldi, Brave)\n"
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, "
+"Brave)\n"
 "Note: Firefox history is not currently supported."
 msgstr ""
-"При поиске также искать в истории браузера (Google Chrome, Chromium, Opera, "
-"Vivaldi, Brave).\n"
+"При поиске также искать в истории браузера (Google Chrome, Chromium, Opera, Vivaldi, "
+"Brave).\n"
 "Примечание: история Firefox в настоящее время не поддерживается."
 
 #. 4.0->settings-schema.json->enable-web-bookmarks-search->description
@@ -934,17 +919,17 @@ msgstr "Поиск веб-закладок"
 #. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
 #. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian "
+"based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) "
+"and restart your computer."
 msgstr ""
-"При поиске также искать закладки в моем браузере (Google Chrome, Firefox, "
-"Chromium, Opera, Vivaldi, Brave).\n"
-"Примечание: Для поиска закладок Firefox вам необходимо установить пакет "
-"gir1.2-gda-5.0 (дистрибутивы на базе Debian, включая Ubuntu и Linux Mint) "
-"или пакет libgda (дистрибутивы на базе Arch) и перезагрузить компьютер."
+"При поиске также искать закладки в моем браузере (Google Chrome, Firefox, Chromium, Opera, "
+"Vivaldi, Brave).\n"
+"Примечание: Для поиска закладок Firefox вам необходимо установить пакет gir1.2-gda-5.0 "
+"(дистрибутивы на базе Debian, включая Ubuntu и Linux Mint) или пакет libgda (дистрибутивы "
+"на базе Arch) и перезагрузить компьютер."
 
 #. 4.0->settings-schema.json->enable-wikipedia-search->description
 #. 5.8->settings-schema.json->enable-wikipedia-search->description
@@ -1317,18 +1302,17 @@ msgstr "မြန်မာဘာသာ"
 #. 5.8->settings-schema.json->search-help->description
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled "
-"them here by prefixing your search term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. "
-"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
-"for web bookmarks search.\n"
+"Note: Some search options can still be used even if you have not enabled them here by "
+"prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use "
+"prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
 msgstr ""
 "\n"
-"Примечание: Некоторые параметры поиска можно использовать, даже если вы не "
-"включали их здесь, добавив префикс к поисковому запросу.\n"
-"Например, для поиска эмодзи введите 'e heart', чтобы найти эмодзи сердца. "
-"Аналогично, используйте префиксы 'f ' для поиска файлов, 'h ' для веб-"
-"истории и 'b ' для поиска веб-закладок.\n"
+"Примечание: Некоторые параметры поиска можно использовать, даже если вы не включали их "
+"здесь, добавив префикс к поисковому запросу.\n"
+"Например, для поиска эмодзи введите 'e heart', чтобы найти эмодзи сердца. Аналогично, "
+"используйте префиксы 'f ' для поиска файлов, 'h ' для веб-истории и 'b ' для поиска веб-"
+"закладок.\n"
 
 #. 4.0->settings-schema.json->menu-icon-custom->description
 #. 5.8->settings-schema.json->menu-icon-custom->description
@@ -1434,60 +1418,51 @@ msgstr "Использовать стиль плитки"
 
 #. 4.0->settings-schema.json->use-tile-style->tooltip
 #. 5.8->settings-schema.json->use-tile-style->tooltip
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
 msgstr ""
-"Использовать стиль плитки для кнопок приложений (Примечание: может не "
-"работать в некоторых темах)"
+"Использовать стиль плитки для кнопок приложений (Примечание: может не работать в некоторых "
+"темах)"
 
 #. 4.0->settings-schema.json->info1->description
 #. 5.8->settings-schema.json->info1->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Информация/совет: Для изменения размера меню потяните его за край.\n"
+"• Перетащите край меню, чтобы изменить его размер."
 
 #. 4.0->settings-schema.json->info2->description
 #. 5.8->settings-schema.json->info2->description
-#, fuzzy
 msgid ""
 "\n"
 "• Drag and drop menu categories to change their order."
 msgstr ""
 "\n"
-"Информация/совет: Для изменения размера меню потяните его за край.\n"
+"• Перетаскивайте категории меню, чтобы изменить их порядок."
 
 #. 4.0->settings-schema.json->info3->description
 #. 5.8->settings-schema.json->info3->description
 msgid ""
 "\n"
-"• Folders can be set up and removed as menu categories by right-clicking on "
-"them."
+"• Folders can be set up and removed as menu categories by right-clicking on them."
 msgstr ""
 "\n"
-"• Каталоги могут быть установлены или удалены как меню категории по щелку правой кнопкой на "
-"них."
+"• Папки можно добавлять и удалять как категории меню, щелкая по ним правой кнопкой мыши."
 
 #. 4.0->settings-schema.json->info4->description
 #. 5.8->settings-schema.json->info4->description
 msgid ""
 "\n"
 "• Additional key options:\n"
-"ctrl-p — Open launcher properties dialogue of currently highlighted "
-"application.\n"
-"ctrl-d — Open .desktop file of currently highlighted app in default text "
-"editor.\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text editor.\n"
 msgstr ""
 "\n"
 "• Дополнительные комбинации клавиш:\n"
-"ctrl-p — Открыть диалог свойств панели запуска текущего выделенного "
-"приложения.\n"
-"ctrl-d — Открыть .desktop файл текущего выделенного приложение в текстовом редакторе "
-"по умолчанию.\n"
+"ctrl-p — Открыть диалог свойств панели запуска текущего выделенного приложения.\n"
+"ctrl-d — Открыть .desktop файл текущего выделенного приложение в текстовом редакторе по "
+"умолчанию.\n"
 
 #. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
