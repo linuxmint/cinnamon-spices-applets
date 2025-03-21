@@ -1,3 +1,10 @@
+### v3.1.0~20250321
+  * Wake up with Radio 3.0.
+  * New tab Alarm Clock in settings.
+  * New option "Configure the Alarm Clock..." in context menu.
+  * README.md file updated.
+  * New sentences to translate.
+
 ### v3.0.0~20250313
   * Now works with the version 2.0.0 of the AlbumArt3.0 applet.
 
