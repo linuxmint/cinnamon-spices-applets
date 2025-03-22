@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-21 13:51+0300\n"
-"PO-Revision-Date: 2020-10-03 10:40+0100\n"
+"PO-Revision-Date: 2025-03-22 11:41+0000\n"
+"Last-Translator: André Silva\n"
 "Language-Team: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Last-Translator: André Silva\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: pt\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 3.2/providers.js:56 3.0/providers.js:49
 msgid "CPU:"
@@ -164,8 +164,8 @@ msgid ""
 "The number of pixels between each graph. Can be set to -1 to allow single "
 "line borders between graphs if borders are enabled"
 msgstr ""
-"Número de píxeis entre cada gráfico. Pode ser definido como -1 para "
-"permitir uma única linha entre gráficos se as bordas estiverem ativadas"
+"Número de píxeis entre cada gráfico. Pode ser definido como -1 para permitir "
+"uma única linha entre gráficos se as bordas estiverem ativadas"
 
 #. 3.2->settings-schema.json->refresh_rate->description
 #. 3.0->settings-schema.json->refresh_rate->description
@@ -297,3 +297,24 @@ msgstr "Cor Upload"
 #. 3.0->settings-schema.json->load_color_0->description
 msgid "Color"
 msgstr "Cor"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->description
+#. 3.0->settings-schema.json->net_minimum_graph_scale->description
+msgid "Minimum graph scale"
+msgstr "Escala mínima do gráfico"
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
+#. 3.0->settings-schema.json->net_minimum_graph_scale->tooltip
+msgid ""
+"The minimum scale for the graph in Megabits per second.\n"
+"The graph will not scale below this minimum, but it will automatically scale "
+"if the network speed exceeds this value.\n"
+"\n"
+"To always automatically scale, set the value to 0."
+msgstr ""
+"Escala mínima para o gráfico em Megabits por segundo.\n"
+"O gráfico não irá ser ajustado abaixo deste limite, mas irá ajustar-se "
+"automaticamente se a velocidade de rede exceder este valor.\n"
+"\n"
+"Para o gráfico ser redimensionado automaticamente independentemente da "
+"velocidade, defina este valor a 0."

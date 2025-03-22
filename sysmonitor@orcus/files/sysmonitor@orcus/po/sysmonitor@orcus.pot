@@ -292,3 +292,17 @@ msgstr ""
 #. 3.0->settings-schema.json->load_color_0->description
 msgid "Color"
 msgstr ""
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->description
+#. 3.0->settings-schema.json->net_minimum_graph_scale->description
+msgid "Minimum graph scale"
+msgstr ""
+
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
+#. 3.0->settings-schema.json->net_minimum_graph_scale->tooltip
+msgid ""
+"The minimum scale for the graph in Megabits per second.\n"
+"The graph will not scale below this minimum, but it will automatically scale if the network speed exceeds this value.\n\n"
+"To always automatically scale, set the value to 0."
+msgstr ""
