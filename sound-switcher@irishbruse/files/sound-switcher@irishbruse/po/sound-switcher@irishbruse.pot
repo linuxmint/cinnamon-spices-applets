@@ -1,0 +1,56 @@
+# SOUND SWITCHER
+# This file is put in the public domain.
+# IrishBruse, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sound-switcher@irishbruse 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-23 01:56+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Sound Switcher"
+msgstr ""
+
+#. metadata.json->description
+msgid "A Cinnamon applet to toggle between two audio outputs"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->toggleKey->description
+msgid "Audio Toggle"
+msgstr ""
+
+#. settings-schema.json->toggleKey->tooltip
+msgid "Set keybinding(s) to toggle active audio device."
+msgstr ""
+
+#. settings-schema.json->outputDeviceA->description
+#. settings-schema.json->outputDeviceA->tooltip
+msgid "Output Device A"
+msgstr ""
+
+#. settings-schema.json->outputDeviceB->description
+#. settings-schema.json->outputDeviceB->tooltip
+msgid "Output Device B"
+msgstr ""
+
+#. settings-schema.json->outputDeviceAIcon->description
+msgid "Device A Icon"
+msgstr ""
+
+#. settings-schema.json->outputDeviceBIcon->description
+msgid "Device B Icon"
+msgstr ""
