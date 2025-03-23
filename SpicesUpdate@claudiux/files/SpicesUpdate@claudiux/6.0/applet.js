@@ -672,6 +672,7 @@ class SpicesUpdate extends IconApplet {
             important: true,
             text: '',
             anchor_x: -3 * global.ui_scale,
+            anchor_y: 0
         });
         this.numberLabel.clutter_text.ellipsize = false;
         this.badge.add(this.numberLabel, {
@@ -2177,7 +2178,7 @@ class SpicesUpdate extends IconApplet {
                 this.tooltip_contents += "\n%s".format(_("Middle-Click to Refresh"));
             }
             this.numberLabel.text = ""+(this.nb_to_update + this.nb_to_watch);
-            //this.numberLabel.text = "888"; // For test only!
+            //~ this.numberLabel.text = "888"; // For test only!
         } else if (this.cinnamon_server_is_down) {
             this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n<b>%s</b>\n%s".format(_("The Cinnamon Server seems to be DOWN!"), _("Middle-Click to Retry"));
             this.numberLabel.text = "⚠";
@@ -2193,11 +2194,13 @@ class SpicesUpdate extends IconApplet {
 
         let fontSize = this.badge_font_size();
         if (this.isHorizontal) {
-            this.numberLabel.set_pivot_point(this.horizontal_anchor_x(), this.horizontal_anchor_y());
+            this.numberLabel.set_pivot_point(this.horizontal_anchor_x() - 5, this.horizontal_anchor_y() + 2);
         } else {
-            this.numberLabel.set_pivot_point(this.vertical_anchor_x(), this.vertical_anchor_y());
+            //~ this.numberLabel.set_pivot_point(this.vertical_anchor_x(), this.vertical_anchor_y());
+            //~ this.numberLabel.set_pivot_point(this._panelHeight, 5);
+            this.numberLabel.set_pivot_point(-5, 5);
         }
-        this.numberLabel.style = "font-size: %spx; padding: 0px; color: %s;".format(""+fontSize, this.defaultColor);
+        this.numberLabel.style = "font-size: %spx; padding: 2px; color: %s; text-align: center;".format(""+fontSize, this.defaultColor);
 
         if (!this.do_rotation && (this.interval != null) && (this.actor.get_stage() != null)) {
             Tweener.addTween(this.actor, {
@@ -2216,8 +2219,12 @@ class SpicesUpdate extends IconApplet {
             });
         }
 
-        if (this.numberLabel.text.length === 0) this.badge.hide();
-        else this.badge.show();
+        if (this.numberLabel.text.length === 0) {
+            this.badge.hide();
+        } else {
+            this.numberLabel.text += "  ";
+            this.badge.show();
+        }
 
         this.isUpdatingUI = false;
         // End of updateUI
