@@ -1,3 +1,7 @@
+### v7.8.7~20250324
+  * Adapts constants.js for themes.
+  * Code cleanup.
+
 ### v7.8.6~20250323
   * Fixes #6992: Improves the appearance of the label in a horizontal panel.
 
