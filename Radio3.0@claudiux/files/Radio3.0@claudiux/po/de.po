@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-21 10:14+0100\n"
-"PO-Revision-Date: 2025-02-19 23:16+0100\n"
+"PO-Revision-Date: 2025-03-24 16:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -206,31 +206,31 @@ msgstr "%s Bytes = %s GB = %s GiB"
 
 #. applet.js:420
 msgid "Sun."
-msgstr ""
+msgstr "So."
 
 #. applet.js:420
 msgid "Mon."
-msgstr ""
+msgstr "Mo."
 
 #. applet.js:420
 msgid "Tue."
-msgstr ""
+msgstr "Di."
 
 #. applet.js:420
 msgid "Wed."
-msgstr ""
+msgstr "Mi."
 
 #. applet.js:420
 msgid "Thu."
-msgstr ""
+msgstr "Do."
 
 #. applet.js:420
 msgid "Fri."
-msgstr ""
+msgstr "Fr."
 
 #. applet.js:420
 msgid "Sat."
-msgstr ""
+msgstr "Sa."
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -279,7 +279,7 @@ msgstr "Klicken, um einen Sender auszuwählen"
 
 #. applet.js:2734
 msgid "Wake Up"
-msgstr ""
+msgstr "Aufwecken"
 
 #. applet.js:2812 applet.js:3302 applet.js:5328
 msgid "Configure..."
@@ -492,9 +492,8 @@ msgid "Schedule a background record..."
 msgstr "Hintergrundaufnahme planen..."
 
 #. applet.js:5346
-#, fuzzy
 msgid "Configure the Alarm Clock..."
-msgstr "Konfigurieren..."
+msgstr "Wecker konfigurieren..."
 
 #. applet.js:5353
 msgid "Extract soundtrack from YouTube video..."
@@ -556,27 +555,31 @@ msgstr "Lautstärkepegel neben dem Symbol anzeigen"
 
 #. applet.js:5600
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Sie benötigen das 'Album Art 3.0' Desklet"
 
 #. applet.js:5601
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Sie können es installieren, indem Sie auf die erste Schaltfläche klicken und "
+"dann nach Album suchen."
 
 #. applet.js:5602 applet.js:5620
 msgid "Desklets"
-msgstr ""
+msgstr "Desklets"
 
 #. applet.js:5618
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Sie müssen das 'Album Art 3.0' Desklet aktivieren"
 
 #. applet.js:5619
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Sie können es aktivieren, indem Sie auf die erste Schaltfläche klicken, dann "
+"nach Album suchen und es schließlich mit der Schaltfläche [+] hinzufügen."
 
 #. applet.js:5926
 msgid "Close without stopping recording"
@@ -821,7 +824,7 @@ msgstr "Netzwerk"
 
 #. settings-schema.json->pageAlarmClock->title
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Wecker"
 
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
@@ -865,9 +868,8 @@ msgid "Search results"
 msgstr "Suchergebnisse"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "Einstellungen für %s"
+msgstr "Einstellungsfenster"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -968,17 +970,16 @@ msgid "Scheduled recordings"
 msgstr "Geplante Aufnahmen"
 
 #. settings-schema.json->sectionWakeMeUp->title
-#, fuzzy
 msgid "Options"
-msgstr "Weitere Optionen"
+msgstr "Optionen"
 
 #. settings-schema.json->sectionWorkingDays->title
 msgid "Working Days"
-msgstr ""
+msgstr "Arbeitstage"
 
 #. settings-schema.json->sectionWorkOffDays->title
 msgid "Work-Off Days"
-msgstr ""
+msgstr "Freie Tage"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
@@ -1180,13 +1181,15 @@ msgstr "Seite:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Vertikale Maximierung"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Wenn diese Option aktiviert ist, wird dieses Einstellungsfenster beim "
+"nächsten Öffnen vertikal maximiert."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -3336,72 +3339,74 @@ msgstr "0 bedeutet unbegrenzt"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
 msgid "Wake me up!"
-msgstr ""
+msgstr "Weck mich auf!"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
-msgstr ""
+msgstr "Weck mich sanft auf"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->tooltip
 msgid "By checking this box, the sound volume gradually increases."
 msgstr ""
+"Wenn Sie dieses Kontrollkästchen aktivieren, erhöht sich die Lautstärke "
+"allmählich."
 
 #. settings-schema.json->alarm-clock-volume-begin->description
 msgid "Initial volume (%)"
-msgstr ""
+msgstr "Anfangslautstärke (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->description
 msgid "Final volume (%)"
-msgstr ""
+msgstr "Endlautstärke (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->tooltip
 msgid "The final volume must be greater than or equal to the initial volume."
-msgstr ""
+msgstr "Die Endlautstärke muss größer oder gleich der Anfangslautstärke sein."
 
 #. settings-schema.json->alarm-clock-volume-transition->description
 msgid "Transition duration (seconds)"
-msgstr ""
+msgstr "Übergangsdauer (Sekunden)"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Sunday"
-msgstr ""
+msgstr "Sonntag"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Monday"
-msgstr ""
+msgstr "Montag"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Tuesday"
-msgstr ""
+msgstr "Dienstag"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Wednesday"
-msgstr ""
+msgstr "Mittwoch"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Thursday"
-msgstr ""
+msgstr "Donnerstag"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Friday"
-msgstr ""
+msgstr "Freitag"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Saturday"
-msgstr ""
+msgstr "Samstag"
 
 #. settings-schema.json->alarm-clock-working-days-time->description
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
-msgstr ""
+msgstr "Weckzeit"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
-msgstr ""
+msgstr "Aktiviere Tink, um sicherzustellen, dass die Lautsprecher aktiv sind"
