@@ -5602,7 +5602,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   } // End of setContextMenuVisibilities
 
   _on_context_menu_item_wakeMeUp_toggled() {
-    //~ this.wake_me_up = this.context_menu_item_wakeMeUp.getToggleState();
     this.wake_me_up = !this.wake_me_up;
     this.onAlarmClockChanged();
   }
