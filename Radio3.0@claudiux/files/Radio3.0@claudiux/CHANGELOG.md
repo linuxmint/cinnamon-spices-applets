@@ -1,3 +1,6 @@
+### v3.1.1~20250325
+  * Added 'Wake me up!' switch in context menu.
+
 ### v3.1.0~20250321
   * Wake up with Radio 3.0.
   * New tab Alarm Clock in settings.
