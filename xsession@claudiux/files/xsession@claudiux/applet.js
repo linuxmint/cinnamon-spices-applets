@@ -1,11 +1,11 @@
 /* Looking Glass Shortcuts (xsession@claudiux)
 */
-const Applet = imports.ui.applet; // ++ Base for an applet
-const Settings = imports.ui.settings; // To read/write this applet settings
-const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
-const Gio = imports.gi.Gio; // Needed for file infos
-const Gettext = imports.gettext; // ++ Needed for translations
-const Util = imports.misc.util; // Needed for spawnCommandLineAsync()
+const Applet = imports.ui.applet;
+const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const Gettext = imports.gettext;
+const Util = imports.misc.util;
 const {
   reloadExtension,
   Type
@@ -13,9 +13,14 @@ const {
 const { restartCinnamon } = imports.ui.main; // Main
 
 const St = imports.gi.St;
-const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
+const PopupMenu = imports.ui.popupMenu;
 
 const {to_string} = require("./lib/to-string");
+const {
+  setTimeout,
+  clearTimeout,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 // ++ Set DEBUG to true to display log messages in ~/.xsession-errors
 // ++ Set DEBUG to false in production.
@@ -24,18 +29,13 @@ const DEBUG = false;
 const UUID="xsession@claudiux";
 
 const HOME_DIR = GLib.get_home_dir();
-const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
-const CACHE_DIR = HOME_DIR + "/.cinnamon/spices.cache";
 const SPICES_DIR = HOME_DIR + "/.local/share/cinnamon"
 const APPLET_DIR = SPICES_DIR + "/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const ICONS_DIR = APPLET_DIR + "/icons";
 const WATCHXSE_SCRIPT = SCRIPTS_DIR + "/watch-xse.sh";
 
-// ++ l10n support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-// ++ Always needed if you want localisation/translation support
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans !== str && customTrans !== "")
@@ -47,16 +47,11 @@ function _(str) {
 let bidon = _("Applet");
 bidon = _("Desklet");
 bidon = _("Extension");
-//bidon = _("Theme");
-//bidon = _("Search Provider");
 bidon = _("Applets");
 bidon = _("Desklets");
 bidon = _("Extensions");
-//bidon = _("Themes");
-//bidon = _("Search Providers");
 bidon = null;
 
-// ++ Useful for logging
 /**
  * Usage of log and logError:
  * log("Any message here") to log the message only if DEBUG is set to true.
@@ -83,7 +78,6 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
         let label = new St.Label({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: true, text: uuid, reactive: true, track_hover: true });
 
         let icon_box = new St.BoxLayout({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: false, reactive: true, track_hover: true });
-        //~ let icon_box = new St.BoxLayout({ style_class: 'popup-menu-icon', reactive: true, track_hover: true });
         let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+type.slice(0,-1)+"/"+uuid+".png";
         let icon_file = Gio.file_new_for_path(icon_path);
         let icon, gicon;
@@ -142,24 +136,23 @@ class LGS extends Applet.IconApplet {
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
         this.settings.bind("icon_size", "icon_size");
 
-        // ++ Set up left click menu
+        // Left click menu:
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
         let _tooltip = _("Middle-click: \n") + _("Show .xsession-errors");
         this.set_applet_tooltip(_tooltip);
-    }; // End of constructor
+    }
 
-    //++ Handler for when the applet is clicked.
     on_applet_clicked(event) {
         if (!this.menu.isOpen)
             this.makeMenu();
         this.menu.toggle();
-    }; // End of on_applet_clicked
+    }
 
     get_active_spices(type) {
-        // Returns the list of active spices of type 'type'
+        // Returns the list of active spices of given type.
         var dconfEnabled;
         var elt = (type.toString() === "applets") ? 3 : 0;
         let enabled;
@@ -188,7 +181,6 @@ class LGS extends Applet.IconApplet {
                 listEnabled.push(xlet_uuid);
         }
         return listEnabled.sort();
-        // End of get_active_spices
     }
 
     makeMenu() {
@@ -201,21 +193,22 @@ class LGS extends Applet.IconApplet {
         let sectionReload = new PopupMenu.PopupMenuSection();
         let sectionSettings = new PopupMenu.PopupMenuSection();
         let sectionSource = new PopupMenu.PopupMenuSection();
-        // Head
+
+        /// Head
         let menuitemHead1 = new PopupMenu.PopupMenuItem(_(this.name)+' '+this.version, {
             reactive: false
         });
         sectionHead.addMenuItem(menuitemHead1);
         menuitemHead1.emit('allocate');
 
+        // Show .xsession-errors:
         let itemWatchXSE = new PopupMenu.PopupIconMenuItem(_("Show .xsession-errors"), "face-glasses", St.IconType.SYMBOLIC);
         itemWatchXSE.connect(
             "activate",
             () => {
-                //~ if (this.menu.isOpen) this.menu.close();
-                setTimeout( () => {
+                let id = setTimeout( () => {
+                    clearTimeout(id);
                     Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
-                    return false;
                 },
                 0);
             }
@@ -223,15 +216,14 @@ class LGS extends Applet.IconApplet {
 
         sectionHead.addMenuItem(itemWatchXSE);
 
-        // Restart Cinnamon
+        // Restart Cinnamon:
         let itemReloadCinnamon = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "restart", St.IconType.SYMBOLIC);
         itemReloadCinnamon.connect(
             "activate",
             () => {
-                //~ if (this.menu.isOpen) this.menu.close();
-                setTimeout( () => {
+                let id = setTimeout( () => {
+                    clearTimeout(id);
                     restartCinnamon(true);
-                    return false;
                 },
                 0);
             }
@@ -240,14 +232,13 @@ class LGS extends Applet.IconApplet {
         sectionHead.addMenuItem(itemReloadCinnamon);
         sectionHead.emit('allocate');
 
-        // Reload:
+        /// Reload:
         let reloadHead = new PopupMenu.PopupMenuItem(_("--- Reload Spices ---"), {
             reactive: false
         });
         sectionReload.addMenuItem(reloadHead);
 
-        // Applets
-        //~ let subMenuReloadApplets = new PopupMenu.PopupSubMenuMenuItem(_("Reload Applet:"));
+        // Applets:
         let subMenuReloadApplets = new PopupMenu.PopupSubMenuMenuItem(_("Reload Applet:"));
         sectionReload.addMenuItem(subMenuReloadApplets);
 
@@ -258,7 +249,7 @@ class LGS extends Applet.IconApplet {
             subMenuReloadApplets.menu.addMenuItem(s);
         }
 
-        // Desklets
+        // Desklets:
         let subMenuReloadDesklets = new PopupMenu.PopupSubMenuMenuItem(_("Reload Desklet:"));
         sectionReload.addMenuItem(subMenuReloadDesklets);
 
@@ -267,7 +258,7 @@ class LGS extends Applet.IconApplet {
             subMenuReloadDesklets.menu.addMenuItem(s);
         }
 
-        // Extensions
+        // Extensions:
         let subMenuReloadExtensions = new PopupMenu.PopupSubMenuMenuItem(_("Reload Extension:"));
         sectionReload.addMenuItem(subMenuReloadExtensions);
 
@@ -276,13 +267,13 @@ class LGS extends Applet.IconApplet {
             subMenuReloadExtensions.menu.addMenuItem(s);
         }
 
-        // Settings:
+        /// Settings:
         let settingsHead = new PopupMenu.PopupMenuItem(_("--- Settings for ---"), {
             reactive: false
         });
         sectionSettings.addMenuItem(settingsHead);
 
-        // Applets
+        // Applets:
         let subMenuSettingsApplets = new PopupMenu.PopupSubMenuMenuItem(_("Applet:"));
         sectionSettings.addMenuItem(subMenuSettingsApplets);
 
@@ -291,7 +282,7 @@ class LGS extends Applet.IconApplet {
             subMenuSettingsApplets.menu.addMenuItem(s);
         }
 
-        // Desklets
+        // Desklets:
         let subMenuSettingsDesklets = new PopupMenu.PopupSubMenuMenuItem(_("Desklet:"));
         sectionSettings.addMenuItem(subMenuSettingsDesklets);
 
@@ -300,7 +291,7 @@ class LGS extends Applet.IconApplet {
             subMenuSettingsDesklets.menu.addMenuItem(s);
         }
 
-        // Extensions
+        // Extensions:
         let subMenuSettingsExtensions = new PopupMenu.PopupSubMenuMenuItem(_("Extension:"));
         sectionSettings.addMenuItem(subMenuSettingsExtensions);
 
@@ -309,13 +300,13 @@ class LGS extends Applet.IconApplet {
             subMenuSettingsExtensions.menu.addMenuItem(s);
         }
 
-        // View Code:
+        /// View Code:
         let codeHead = new PopupMenu.PopupMenuItem(_("--- View Code ---"), {
             reactive: false
         });
         sectionSource.addMenuItem(codeHead);
 
-        // Applets
+        // Applets:
         let subMenuCodeApplets = new PopupMenu.PopupSubMenuMenuItem(_("View Applet Code for:"));
         sectionSource.addMenuItem(subMenuCodeApplets);
 
@@ -324,7 +315,7 @@ class LGS extends Applet.IconApplet {
             subMenuCodeApplets.menu.addMenuItem(s);
         }
 
-        // Desklets
+        // Desklets:
         let subMenuCodeDesklets = new PopupMenu.PopupSubMenuMenuItem(_("View Desklet Code for:"));
         sectionSource.addMenuItem(subMenuCodeDesklets);
 
@@ -333,7 +324,7 @@ class LGS extends Applet.IconApplet {
             subMenuCodeDesklets.menu.addMenuItem(s);
         }
 
-        // Extensions
+        // Extensions:
         let subMenuCodeExtensions = new PopupMenu.PopupSubMenuMenuItem(_("View Extension Code for:"));
         sectionSource.addMenuItem(subMenuCodeExtensions);
 
@@ -346,17 +337,20 @@ class LGS extends Applet.IconApplet {
         this.menu.addMenuItem(sectionReload);
         this.menu.addMenuItem(sectionSettings);
         this.menu.addMenuItem(sectionSource);
-    }; // End of makeMenu
+    }
 
     on_applet_middle_clicked(event) {
-        //~ if (this.menu.isOpen) this.menu.close();
-        setTimeout( () => {
+        let id = setTimeout( () => {
+            clearTimeout(id);
             Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
-            return false;
         },
         0);
     }
-} // End of class LGS
+
+    on_applet_removed_from_panel(deleteConfig) {
+        remove_all_sources();
+    }
+}
 
 function main(metadata, orientation, panelHeight, instance_id) {
     return new LGS(metadata, orientation, panelHeight, instance_id);
