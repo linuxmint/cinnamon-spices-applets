@@ -1,0 +1,177 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux 6.16.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-13 20:49+0100\n"
+"PO-Revision-Date: 2024-11-25 07:30+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.2/applet.js:1018 6.4/applet.js:1067
+msgid "Videos"
+msgstr ""
+
+#. 6.4/applet.js:205 6.4/applet.js:1934 6.4/applet.js:1936
+msgid "%"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->description
+#. 6.4/applet.js:2248
+msgid "Commands"
+msgstr ""
+
+#. 6.4/applet.js:2258
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. 6.4/applet.js:2266
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. 6.4/applet.js:2338
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:2339
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. 6.4/applet.js:2340 6.4/applet.js:2358
+msgid "Desklets"
+msgstr ""
+
+#. 6.4/applet.js:2341 6.4/applet.js:2359 6.4/applet.js:2389
+msgid "Cancel"
+msgstr ""
+
+#. 6.4/applet.js:2356
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:2357
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. 6.4/applet.js:2393
+msgid "Enable the OSD150 extension"
+msgstr ""
+
+#. 6.4/applet.js:2394
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+
+#. 6.4/applet.js:2411
+msgid "Download the OSD150 extension"
+msgstr ""
+
+#. 6.4/applet.js:2412
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+
+#. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
+#. 6.4/applet.js:3550
+msgid "Remove the OsdWithNumber extension"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->description
+#. 6.4->settings-schema.json->startupVolume->description
+msgid "Volume at start-up (%)"
+msgstr ""
+
+#. 6.2->settings-schema.json->startupVolume->tooltip
+#. 6.4->settings-schema.json->startupVolume->tooltip
+msgid "Value -1 means \"No change\""
+msgstr ""
+
+#. 6.2->settings-schema.json->muteSoundOnClosing->description
+#. 6.4->settings-schema.json->muteSoundOnClosing->description
+msgid "Mute sound on closing"
+msgstr ""
+
+#. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
+#. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
+msgid ""
+"If you notice an unpleasant noise on closing, check this box.\n"
+"You'll need to restore the sound at startup, by middle-clicking on this "
+"applet's icon.\n"
+"It is NOT recommended to check this box."
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon1->title
+msgid "Icon appearance"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon2->title
+msgid "Icon colors"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon3->title
+msgid "Scrolling"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionSound5->title
+msgid "Remove incompatible extensions"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionCommands->title
+msgid "Custom commands"
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaOptical->description
+msgid "Show Media-Optical icon"
+msgstr ""
+
+#. 6.4->settings-schema.json->reverseScrolling->description
+msgid "Reverse scrolling effect"
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaKeysOSD->description
+msgid "Whether or not to show the media keys OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showVolumeValue->description
+msgid "Show volume level in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showPercent->description
+msgid "Show '%' in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->OSDhorizontal->description
+msgid "Show horizontal OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showBarLevel->description
+msgid "Show bar level in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-label->description
+msgid ""
+"These commands will appear in the context menu once you've reloaded this "
+"applet."
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->columns->title
+msgid "Title"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->columns->title
+msgid "Command"
+msgstr ""

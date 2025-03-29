@@ -1,0 +1,216 @@
+# RADIO3.0
+# This file is put in the public domain.
+# claudiux, 2022
+#
+# SPDX-FileCopyrightText: 2024, 2025 Sveinn í Felli <sv1@fellsnet.is>
+msgid ""
+msgstr ""
+"Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-21 10:14+0100\n"
+"PO-Revision-Date: 2025-01-22 17:33+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#. applet.js:420
+msgid "Sun."
+msgstr ""
+
+#. applet.js:420
+msgid "Mon."
+msgstr ""
+
+#. applet.js:420
+msgid "Tue."
+msgstr ""
+
+#. applet.js:420
+msgid "Wed."
+msgstr ""
+
+#. applet.js:420
+msgid "Thu."
+msgstr ""
+
+#. applet.js:420
+msgid "Fri."
+msgstr ""
+
+#. applet.js:420
+msgid "Sat."
+msgstr ""
+
+#. applet.js:2734
+msgid "Wake Up"
+msgstr ""
+
+#. applet.js:2822
+msgid "Load a sample station list"
+msgstr ""
+
+#. applet.js:5147 applet.js:5603 applet.js:5621
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:5148
+msgid "Radio3.0 applet"
+msgstr ""
+
+#. applet.js:5151
+msgid "Enable the OSD150 extension"
+msgstr ""
+
+#. applet.js:5152
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+
+#. applet.js:5170
+msgid "Download the OSD150 extension"
+msgstr ""
+
+#. applet.js:5171
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+
+#. applet.js:5346
+msgid "Configure the Alarm Clock..."
+msgstr ""
+
+#. applet.js:5600
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5601
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. applet.js:5602 applet.js:5620
+msgid "Desklets"
+msgstr ""
+
+#. applet.js:5618
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. applet.js:5619
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. settings-schema.json->pageAlarmClock->title
+msgid "Alarm Clock"
+msgstr ""
+
+#. settings-schema.json->sectionBehaviorSettingsWindow->title
+msgid "Settings Window"
+msgstr ""
+
+#. settings-schema.json->sectionWakeMeUp->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->sectionWorkingDays->title
+msgid "Working Days"
+msgstr ""
+
+#. settings-schema.json->sectionWorkOffDays->title
+msgid "Work-Off Days"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->description
+msgid "Vertical maximization"
+msgstr ""
+
+#. settings-schema.json->maximize-vertically->tooltip
+msgid ""
+"When this option is checked, this Settings Window will be maximized "
+"vertically the next time it is opened."
+msgstr ""
+
+#. settings-schema.json->show-horizontal-osd->description
+msgid "Show horizontal OSD"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-up->description
+msgid "Wake me up!"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->description
+msgid "Wake me up softly"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-wake-me-softly->tooltip
+msgid "By checking this box, the sound volume gradually increases."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-begin->description
+msgid "Initial volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->description
+msgid "Final volume (%)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-end->tooltip
+msgid "The final volume must be greater than or equal to the initial volume."
+msgstr ""
+
+#. settings-schema.json->alarm-clock-volume-transition->description
+msgid "Transition duration (seconds)"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Sunday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Monday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Tuesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Wednesday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Thursday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Friday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days->columns->title
+#. settings-schema.json->alarm-clock-workoff-days->columns->title
+msgid "Saturday"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-working-days-time->description
+#. settings-schema.json->alarm-clock-workoff-days-time->description
+msgid "Wake-Up Time"
+msgstr ""
+
+#. settings-schema.json->alarm-clock-tink-on->description
+msgid "Activate tink to ensure speakers are awake"
+msgstr ""

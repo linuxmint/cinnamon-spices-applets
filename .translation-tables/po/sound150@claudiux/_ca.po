@@ -1,0 +1,38 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.4/applet.js:2258
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. 6.4/applet.js:2266
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. 6.4/applet.js:2338
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:2339
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. 6.4/applet.js:2340 6.4/applet.js:2358
+msgid "Desklets"
+msgstr ""
+
+#. 6.4/applet.js:2356
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:2357
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
