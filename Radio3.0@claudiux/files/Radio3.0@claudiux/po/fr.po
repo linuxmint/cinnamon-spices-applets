@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Radio3.0@claudiux\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-21 10:14+0100\n"
-"PO-Revision-Date: 2025-03-21 10:22+0100\n"
+"POT-Creation-Date: 2025-03-30 19:27+0200\n"
+"PO-Revision-Date: 2025-03-30 19:28+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -236,223 +236,223 @@ msgstr "Sam."
 #. settings-schema.json->search-order->options
 #. settings-schema.json->alarm-clock-working-days-radio->options
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
-#. applet.js:586 applet.js:602 applet.js:5976 applet.js:5992
+#. applet.js:586 applet.js:602 applet.js:6004 applet.js:6020
 msgid "(Undefined)"
 msgstr "(Indéfini)"
 
-#. applet.js:2402
+#. applet.js:2415
 msgid "Start"
 msgstr "Marche"
 
-#. applet.js:2410 applet.js:3284
+#. applet.js:2423 applet.js:3297
 msgid "Stop"
 msgstr "Arrêt"
 
-#. applet.js:2714
+#. applet.js:2727
 msgid "Volume: %s%"
 msgstr "Volume : %s%"
 
-#. applet.js:2719
+#. applet.js:2732
 msgid "Middle-Click: Stop Recording"
 msgstr "Clic-molette : Arrêter l'enregistrement"
 
-#. applet.js:2721
+#. applet.js:2734
 msgid "Middle-click: ON/OFF"
 msgstr "Clic-molette : Marche/Arrêt"
 
-#. applet.js:2723
+#. applet.js:2736
 msgid "Click: Select another station"
 msgstr "Clic : Choisir une autre station"
 
-#. applet.js:2725
+#. applet.js:2738
 msgid "Scroll wheel: volume change"
 msgstr "Roule-molette : Modifier le volume"
 
-#. applet.js:2728
+#. applet.js:2741
 msgid "Click to select a station"
 msgstr "Cliquer pour choisir une autre station"
 
-#. applet.js:2734
+#. applet.js:2747
 msgid "Wake Up"
 msgstr "Réveil"
 
-#. applet.js:2812 applet.js:3302 applet.js:5328
+#. applet.js:2825 applet.js:3315 applet.js:5341
 msgid "Configure..."
 msgstr "Configurer..."
 
-#. applet.js:2816 applet.js:3294
+#. applet.js:2829 applet.js:3307
 msgid "Search for new stations..."
 msgstr "Rechercher de nouvelles stations..."
 
-#. applet.js:2822
+#. applet.js:2835
 msgid "Load a sample station list"
 msgstr "Charger un exemple de liste de stations"
 
-#. applet.js:2865 applet.js:3306 applet.js:5398
+#. applet.js:2878 applet.js:3319 applet.js:5411
 msgid "Sound Settings"
 msgstr "Paramètres du son"
 
-#. applet.js:2941
+#. applet.js:2954
 msgid "Watch on YT"
 msgstr "Voir sur YT"
 
-#. applet.js:2948
+#. applet.js:2961
 msgid "Try to download it from YT (unsafe)"
 msgstr "Essayer de télécharger depuis YT (peu sûr)"
 
-#. applet.js:3011
+#. applet.js:3024
 msgid "Recently Played Stations:"
 msgstr "Stations récemment écoutées :"
 
-#. applet.js:3053
+#. applet.js:3066
 msgid "Visit the home page of this station"
 msgstr "Visiter le site web de cette station"
 
-#. applet.js:3115
+#. applet.js:3128
 msgid "Categories"
 msgstr "Catégories"
 
-#. applet.js:3118
+#. applet.js:3131
 msgid "Radio Stations"
 msgstr "Stations de radio"
 
-#. applet.js:3129
+#. applet.js:3142
 msgid "All Categories"
 msgstr "Toutes catégories"
 
-#. applet.js:3226
+#. applet.js:3239
 msgid "My Radio Stations"
 msgstr "Mes stations de radio"
 
-#. applet.js:3426
+#. applet.js:3439
 msgid "Downloading..."
 msgstr "Téléchargement..."
 
-#. applet.js:3428
+#. applet.js:3441
 msgid "Stop downloading"
 msgstr "Arrêter ce téléchargement"
 
-#. applet.js:3532
+#. applet.js:3545
 msgid "Download complete"
 msgstr "Enregistrement terminé"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3534 applet.js:3543 applet.js:5047 applet.js:5056 applet.js:5065
-#. applet.js:5361
+#. applet.js:3547 applet.js:3556 applet.js:5060 applet.js:5069 applet.js:5078
+#. applet.js:5374
 msgid "Open the recordings folder"
 msgstr "Ouvrir le dossier des enregistrements"
 
-#. applet.js:3541 applet.js:5044 applet.js:5054 applet.js:5063
+#. applet.js:3554 applet.js:5057 applet.js:5067 applet.js:5076
 msgid "An error seems to have occurred during recording!"
 msgstr "Une erreur semble survenue pendant l'enregistrement !"
 
-#. applet.js:3542 applet.js:5046 applet.js:5055 applet.js:5064
+#. applet.js:3555 applet.js:5059 applet.js:5068 applet.js:5077
 msgid "Please check this record."
 msgstr "Veuillez vérifier cet enregistrement."
 
-#. applet.js:3649 applet.js:3683
+#. applet.js:3662 applet.js:3696
 msgid "Record from now"
 msgstr "Enregistrer à partir de maintenant"
 
-#. applet.js:3667 applet.js:5878
+#. applet.js:3680 applet.js:5906
 msgid "Stop Current Recording"
 msgstr "Arrêter l'enregistrement actuel"
 
-#. applet.js:3800
+#. applet.js:3813
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "À l'écoute de %s%s"
 
-#. applet.js:3853
+#. applet.js:3866
 msgid "Radio OFF"
 msgstr "Radio éteinte"
 
-#. applet.js:3981
+#. applet.js:3994
 msgid "Unable to record anything!"
 msgstr "Impossible d'enregistrer !"
 
-#. applet.js:3981 applet.js:5378 applet.js:5528
+#. applet.js:3994 applet.js:5391 applet.js:5551
 msgid "Insufficient space"
 msgstr "Espace insuffisant"
 
-#. applet.js:3981
+#. applet.js:3994
 msgid "The limit you set has been reached."
 msgstr "La limite que vous avez fixée a été atteinte."
 
-#. applet.js:4387
+#. applet.js:4400
 msgid "Please Log Out then Log In"
 msgstr "Veuillez vous déconnecter et vous reconnecter"
 
-#. applet.js:4387
+#. applet.js:4400
 msgid "to finalize yt-dlp update"
 msgstr "pour finaliser la mise à jour de yt-dlp"
 
-#. applet.js:4529
+#. applet.js:4542
 msgid "Nothing to save."
 msgstr "Rien à sauvegarder."
 
-#. applet.js:4542
+#. applet.js:4555
 msgid "List of saved radio stations"
 msgstr "Liste des stations sauvegardées"
 
-#. applet.js:4560
+#. applet.js:4573
 msgid "This will replace all current radio stations."
 msgstr "Cela va remplacer toutes vos stations actuelles."
 
-#. applet.js:4561
+#. applet.js:4574
 msgid "Are you sure you want to continue?"
 msgstr "Êtes-vous sûr(e) de vouloir continuer ?"
 
-#. applet.js:4621
+#. applet.js:4634
 msgid "Update in progress"
 msgstr "Mise à jour en cours"
 
-#. applet.js:4621
+#. applet.js:4634
 msgid "It may take a while ... Please wait."
 msgstr "Cela peut prendre du temps... Merci de patienter."
 
-#. applet.js:4713
+#. applet.js:4726
 msgid "Update completed successfully"
 msgstr "Mise à jour effectuée avec succès"
 
-#. applet.js:4928 applet.js:4984
+#. applet.js:4941 applet.js:4997
 msgid "ERROR: Invalid YT video URL!"
 msgstr "ERREUR : URL de la vidéo YT invalide !"
 
-#. applet.js:4953
+#. applet.js:4966
 msgid "Unable to extract a single soundtrack"
 msgstr "Impossible d'extraire une seule bande son"
 
-#. applet.js:4953
+#. applet.js:4966
 msgid "Maybe it's a playlist?"
 msgstr "S'agit-il d'une playlist ?"
 
-#. applet.js:4986
+#. applet.js:4999
 msgid "Close"
 msgstr "Fermer"
 
-#. applet.js:5147 applet.js:5603 applet.js:5621
+#. applet.js:5160 applet.js:5631 applet.js:5649
 msgid "Cancel"
 msgstr "Annuler"
 
-#. applet.js:5148
+#. applet.js:5161
 msgid "Radio3.0 applet"
 msgstr "Radio3.0"
 
-#. applet.js:5151
+#. applet.js:5164
 msgid "Enable the OSD150 extension"
 msgstr "Activer l'extension OSD150"
 
-#. applet.js:5152
+#. applet.js:5165
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr "Pour obtenir un OSD horizontal, vous devez activer l'extension OSD150."
 
-#. applet.js:5170
+#. applet.js:5183
 msgid "Download the OSD150 extension"
 msgstr "Télécharger l'extension OSD150"
 
-#. applet.js:5171
+#. applet.js:5184
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
@@ -461,94 +461,99 @@ msgstr ""
 "Cliquez sur le bouton Télécharger puis recherchez OSD150 et sélectionnez le "
 "bouton ⬇."
 
-#. applet.js:5300
+#. applet.js:5313
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Supprimer '%s'"
 
-#. applet.js:5308
+#. applet.js:5321
 msgid "About..."
 msgstr "À propos..."
 
-#. applet.js:5315
+#. applet.js:5328
 msgid "Manual..."
 msgstr "Manuel..."
 
-#. applet.js:5322
+#. applet.js:5335
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#. applet.js:5339
+#. applet.js:5352
 msgid "Schedule a background record..."
 msgstr "Planifier un enregistrement en arrière-plan..."
 
-#. applet.js:5346
+#. applet.js:5359
 msgid "Configure the Alarm Clock..."
 msgstr "Configurer le Réveil..."
 
-#. applet.js:5353
+#. applet.js:5366
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Extraire la bande son d'une vidéo YouTube..."
 
-#. applet.js:5375 applet.js:5525
+#. applet.js:5388 applet.js:5548
 msgid "(auto)"
 msgstr "(auto)"
 
-#. applet.js:5375 applet.js:5525
+#. applet.js:5388 applet.js:5548
 msgid "(manual)"
 msgstr "(manuel)"
 
-#. applet.js:5378 applet.js:5528 applet.js:5925
+#. applet.js:5391 applet.js:5551 applet.js:5953
 msgid "Stop Recording"
 msgstr "Arrêter l'enregistrement"
 
-#. applet.js:5378 applet.js:5528
+#. applet.js:5391 applet.js:5551
 msgid "Start Recording"
 msgstr "Démarrer l'enregistrement"
 
-#. applet.js:5394
+#. applet.js:5407
 msgid "Cancel downloads from YT"
 msgstr "Abandon des téléchargements depuis YT"
 
-#. applet.js:5403
+#. applet.js:5416
 msgid "Pulse Effects"
 msgstr "Pulse Effects"
 
-#. applet.js:5408
+#. applet.js:5421
 msgid "Easy Effects"
 msgstr "Easy Effects"
 
-#. applet.js:5413
+#. applet.js:5426
 msgid "Radio ON at startup"
 msgstr "Allumer la radio au démarrage"
 
-#. applet.js:5422
+#. applet.js:5435
 msgid "Display Station Logo"
 msgstr "Afficher le logo de la station"
 
-#. applet.js:5432
+#. applet.js:5445
 msgid "Album Art desklet settings"
 msgstr "Paramètres de la Pochette d'album"
 
-#. applet.js:5438
+#. settings-schema.json->alarm-clock-wake-me-up->description
+#. applet.js:5450
+msgid "Wake me up!"
+msgstr "Réveillez-moi !"
+
+#. applet.js:5460
 msgid "Show Album Art on desktop"
 msgstr "Afficher la pochette d'album sur le Bureau"
 
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:5447
+#. applet.js:5469
 msgid "Do not check about dependencies"
 msgstr "Ne pas vérifier les dépendances"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:5457
+#. applet.js:5479
 msgid "Display volume level near icon"
 msgstr "Afficher le niveau de volume près de l'icône"
 
-#. applet.js:5600
+#. applet.js:5628
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr "Vous avez besoin du desklet Album Art 3.0"
 
-#. applet.js:5601
+#. applet.js:5629
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
@@ -556,15 +561,15 @@ msgstr ""
 "Vous pouvez l'installer en cliquant sur le premier bouton et en recherchant "
 "Album."
 
-#. applet.js:5602 applet.js:5620
+#. applet.js:5630 applet.js:5648
 msgid "Desklets"
 msgstr "Desklets"
 
-#. applet.js:5618
+#. applet.js:5646
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr "Vous devez activer le desklet Album Art 3.0"
 
-#. applet.js:5619
+#. applet.js:5647
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
@@ -572,55 +577,55 @@ msgstr ""
 "Vous pouvez l'activer en cliquant sur le premier bouton, puis en recherchant "
 "Album et en l'ajoutant à l'aide du bouton [+]."
 
-#. applet.js:5926
+#. applet.js:5954
 msgid "Close without stopping recording"
 msgstr "Fermer sans arrêter l'enregistrement"
 
-#. applet.js:6150
+#. applet.js:6178
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Démarrage de l'enregistrement de %s:%s à %s:%s"
 
-#. applet.js:6162
+#. applet.js:6190
 msgid "Recording completed"
 msgstr "Enregistrement terminé"
 
-#. applet.js:6279
+#. applet.js:6307
 msgid "This will import a new file containing radio stations."
 msgstr "Cela va importer un nouveau fichier contenant des stations de radio."
 
-#. applet.js:6280
+#. applet.js:6308
 msgid "Do you want to continue?"
 msgstr "Voulez-vous continuer ?"
 
-#. applet.js:6352
+#. applet.js:6380
 msgid "No new radio in your list."
 msgstr "Aucune nouvelle radio dans votre liste."
 
-#. applet.js:6354
+#. applet.js:6382
 msgid "One more radio in your list."
 msgstr "Une radio de plus dans votre liste."
 
-#. applet.js:6356
+#. applet.js:6384
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "%s radios de plus dans votre liste."
 
-#. applet.js:6563
+#. applet.js:6591
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 "Il n'y a aucune nouvelle station à ajouter au menu de l'applet Radio3.0"
 
-#. applet.js:6565
+#. applet.js:6593
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Une nouvelle station a été ajoutée au menu de l'applet Radio3.0"
 
-#. applet.js:6567
+#. applet.js:6595
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s  nouvelles stations ont été ajoutées au menu de l'applet Radio3.0"
 
-#. applet.js:6794
+#. applet.js:6822
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s kbit/s"
@@ -3319,10 +3324,6 @@ msgstr "Longueur maximale du titre"
 msgid "0 means no maximum"
 msgstr "0 signifie aucun maximum"
 
-#. settings-schema.json->alarm-clock-wake-me-up->description
-msgid "Wake me up!"
-msgstr "Réveillez-moi !"
-
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
 msgstr "Réveillez-moi doucement"
@@ -3386,6 +3387,11 @@ msgstr "Samedi"
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
 msgstr "Heure du réveil"
+
+#. settings-schema.json->alarm-clock-working-days-radio-button->description
+#. settings-schema.json->alarm-clock-workoff-days-radio-button->description
+msgid "Last-listened-to radio station"
+msgstr "Dernière station radio écoutée"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
