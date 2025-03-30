@@ -314,12 +314,12 @@
   },
   "horizontal_width": {
     "type": "scale",
-    "default": -1,
-    "min": -1,
+    "default": 0,
+    "min": 0,
     "max": 2000,
     "step": 5,
-    "description": "Applet width (pixels) for horizontal panels",
-    "tooltip": "-1 means automatic."
+    "description": "Display width (pixels) for horizontal panels",
+    "tooltip": "0 means automatic. This value does not include border."
   },
   "separator_type": {
     "type": "combobox",
