@@ -1503,6 +1503,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.alarmClockLoopId = null;
     }
     this.change_symbolic_icon();
+    if (this.context_menu_item_wakeMeUp) {
+      this.context_menu_item_wakeMeUp._switch.setToggleState(this.wake_me_up);
+    }
+
   }
 
   alarmclock_loop() {
@@ -5433,6 +5437,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_configDesklet.connect('activate', () => { this.on_desklet_open_settings_button_clicked() });
     }
 
+    if (!this.context_menu_item_wakeMeUp) { // switch 'Wake me up!'
+      this.context_menu_item_wakeMeUp = new PopupSwitchMenuItem(_("Wake me up!"),
+        this.wake_me_up,
+        null);
+      this.context_menu_item_wakeMeUp.connect("toggled", () => {
+          this._on_context_menu_item_wakeMeUp_toggled();
+        });
+    }
+
     if (!this.context_menu_item_showDesklet) { // switch 'Show AlbumArt3.0 desklet'
       //~ this.show_desklet = file_test(ALBUMART_ON, FileTest.EXISTS);
       this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
@@ -5485,6 +5498,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_section_external.addMenuItem(this.context_menu_item_easyEffects);
     this.context_menu_section_external.addMenuItem(this.context_menu_separator4);
 
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_wakeMeUp);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_configDesklet);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
@@ -5586,6 +5600,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_showVolumeNearIcon._switch.setToggleState(this.show_volume_level_near_icon);
     this.context_menu_separator5.actor.visible = (this.mpvStatus === "PLAY");
   } // End of setContextMenuVisibilities
+
+  _on_context_menu_item_wakeMeUp_toggled() {
+    this.wake_me_up = !this.wake_me_up;
+    this.onAlarmClockChanged();
+  }
 
   _on_context_menu_item_showDesklet_toggled() {
     this._is_desklet_activated();

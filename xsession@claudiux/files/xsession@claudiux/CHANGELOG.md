@@ -1,3 +1,7 @@
+### v2.0.1~20250326
+  * Uses mainloopTools.
+  * Code cleanup.
+
 ### v2.0.0~20250116
   * Adds Spices icons in menus.
   * Improves applet stability and user comfort.
