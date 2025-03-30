@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #. applet.js:225 applet_OLD.js:235
@@ -403,11 +403,11 @@ msgstr "Schriftgröße (% der Standardgröße)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Applet width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Applet-Breite (Pixel) für horizontale Panels"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "-1 means automatic."
-msgstr ""
+msgstr "-1 für automatisch."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
@@ -939,4 +939,4 @@ msgstr "Anzeige aktualisieren"
 
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
-msgstr "temperature@fevimu-Applet vom Panel entfernen"
+msgstr "Applet temperature@fevimu vom Panel entfernen"
