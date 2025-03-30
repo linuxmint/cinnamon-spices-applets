@@ -1180,7 +1180,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.set_folders_icon();
 
-    TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+    //~ TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
     if (this.setAllowedLayout) this.setAllowedLayout(AllowedLayout.BOTH);
 
@@ -1638,12 +1638,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (workoff_days[0][daystr]) {
       wo_minutes = this.workoff_days_time.h * 60 + this.workoff_days_time.m;
     }
+    let str_m = (this.working_days_time.m < 10) ? "0"+this.working_days_time.m : ""+this.working_days_time.m;
     if (wd_minutes < wo_minutes) {
-      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + str_m;
     } else if (wd_minutes > wo_minutes) {
-      return DAYS_ABBREV[day] + " " + this.workoff_days_time.h + ":" + this.workoff_days_time.m;
+      return DAYS_ABBREV[day] + " " + this.workoff_days_time.h + ":" + str_m;
     } else if (wd_minutes !== 86401) {
-      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + str_m;
     }
     // No alarm:
     return "";
@@ -2317,6 +2318,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.future_check_date <= now) {
       this.check_hd_space_left()
     }
+  }
+
+  _on_working_days_radio_button_clicked() {
+    this.settings.setValue("alarm-clock-working-days-radio", this.last_radio_listened_to);
+  }
+
+  _on_workoff_days_radio_button_clicked() {
+    this.settings.setValue("alarm-clock-workoff-days-radio", this.last_radio_listened_to);
   }
 
   monitor_jobs_dir() {

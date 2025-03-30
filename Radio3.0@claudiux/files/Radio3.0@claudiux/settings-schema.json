@@ -482,7 +482,8 @@
       "keys": [
         "alarm-clock-working-days",
         "alarm-clock-working-days-time",
-        "alarm-clock-working-days-radio"
+        "alarm-clock-working-days-radio",
+        "alarm-clock-working-days-radio-button"
       ]
     },
     "sectionWorkOffDays": {
@@ -491,7 +492,8 @@
       "keys": [
         "alarm-clock-workoff-days",
         "alarm-clock-workoff-days-time",
-        "alarm-clock-workoff-days-radio"
+        "alarm-clock-workoff-days-radio",
+        "alarm-clock-workoff-days-radio-button"
       ]
     }
   },
@@ -2185,6 +2187,16 @@
     "options": {
       "(Undefined)": ""
     }
+  },
+  "alarm-clock-working-days-radio-button": {
+    "type": "button",
+    "description": "Last-listened-to radio station",
+    "callback": "_on_working_days_radio_button_clicked"
+  },
+  "alarm-clock-workoff-days-radio-button": {
+    "type": "button",
+    "description": "Last-listened-to radio station",
+    "callback": "_on_workoff_days_radio_button_clicked"
   },
   "alarm-clock-tink-on": {
       "type": "switch",

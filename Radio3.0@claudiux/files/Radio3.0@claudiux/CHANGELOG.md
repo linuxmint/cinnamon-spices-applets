@@ -1,3 +1,7 @@
+### v3.1.2~20250330
+  * Improved Alarm-Clock settings.
+  * Changes in server list.
+
 ### v3.1.1~20250325
   * Added 'Wake me up!' switch in context menu.
 
