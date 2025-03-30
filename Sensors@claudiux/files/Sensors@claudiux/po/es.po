@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-30 14:17+0200\n"
-"PO-Revision-Date: 2025-02-23 15:04-0300\n"
+"PO-Revision-Date: 2025-03-30 11:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -405,11 +405,11 @@ msgstr "Tamaño de carácter (% del tamaño estándar)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Anchura de pantalla (píxeles) para paneles horizontales"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
-msgstr ""
+msgstr "0 significa automático. Este valor no incluye el borde."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
