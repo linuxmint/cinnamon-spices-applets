@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# KDE CONNECT CONTROL CENTER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Severga, 2020
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 21:48+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-30 02:22-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: CyberBob305 <cyberbob305@netcologne.de>\n"
 "Language-Team: \n"
@@ -17,75 +18,75 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:60
+#. applet.js:61
 msgid "Configure KDE Connect"
 msgstr "KDE Connect Einstellungen"
 
-#: applet.js:111
+#. applet.js:112 applet.js:114
 msgid "No reachable paired devices"
 msgstr "Kein Gerät erreichbar"
 
-#: applet.js:122
+#. applet.js:123
 msgid "Id:  "
 msgstr "Id:  "
 
-#: applet.js:123
+#. applet.js:124
 msgid "    Send Ping to"
 msgstr "Sende einen Ping an"
 
-#: applet.js:124
+#. applet.js:125
 msgid "    Force to Ring"
 msgstr "Smartphone klingeln lassen..."
 
-#: applet.js:125
+#. applet.js:126
 msgid "    Send File to..."
 msgstr "Sende eine Datei an..."
 
-#: applet.js:130
+#. applet.js:131
 msgid "    Send SMS via..."
 msgstr "Sende eine SMS ueber..."
 
-#: applet.js:133
+#. applet.js:134
 msgid "Enter the phone number of your SMS's addressee:"
 msgstr "Bitte geben Sie die Telefonnummer des Empfaengers ein:"
 
-#: applet.js:136
+#. applet.js:137
 msgid "Enter the text of your SMS:"
 msgstr "Bitte geben Sie den Text der SMS NAchricht ein:"
 
-#: applet.js:137
+#. applet.js:138
 msgid "...message body..."
 msgstr "Nachricht"
 
-#: applet.js:139
+#. applet.js:140
 msgid "Press <"
 msgstr "Druecken Sie <"
 
-#: applet.js:139 applet.js:149
+#. applet.js:140 applet.js:150
 msgid "Yes"
 msgstr "Ja"
 
-#: applet.js:139
+#. applet.js:140
 msgid "> if you are ready to send your SMS, or <"
 msgstr "> Wenn Sie bereit sind die SMS Nachricht zu senden, oder <"
 
-#: applet.js:139 applet.js:143
+#. applet.js:140 applet.js:144
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: applet.js:139
+#. applet.js:140
 msgid "> to avoid sending."
 msgstr "> zum abbrechen"
 
-#: applet.js:158
+#. applet.js:159
 msgid "    Mount and Explore"
 msgstr "Geraet einbinden und Durchsuchen"
 
-#: applet.js:182
+#. applet.js:183
 msgid "    Unmount"
 msgstr "Geraet auswerfen"
 
-#: applet.js:202
+#. applet.js:203
 msgid "Reachable paired devices: "
 msgstr "Erreichbare Geraete: "
 
