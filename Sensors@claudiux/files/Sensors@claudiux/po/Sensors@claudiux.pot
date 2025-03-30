@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux 5.4.0\n"
+"Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-30 00:57+0100\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -392,11 +392,11 @@ msgid "Character size (% of standard size)"
 msgstr ""
 
 #. settings-schema.json->horizontal_width->description
-msgid "Applet width (pixels) for horizontal panels"
+msgid "Display width (pixels) for horizontal panels"
 msgstr ""
 
 #. settings-schema.json->horizontal_width->tooltip
-msgid "-1 means automatic."
+msgid "0 means automatic. This value does not include border."
 msgstr ""
 
 #. settings-schema.json->separator_type->options

@@ -1242,7 +1242,7 @@ class SensorsApplet extends Applet.Applet {
     this.set_applet_label(_appletLabel);
 
     this.actor.set_style_class_name(_actor_style);
-    if (this.horizontal_width > -1 && (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM))
+    if (this.horizontal_width > 0 && (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM))
       this.actor.set_style(`width: ${this.horizontal_width}px;`);
     else
       this.actor.set_style(null);
