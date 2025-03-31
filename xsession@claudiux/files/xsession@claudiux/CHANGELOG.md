@@ -1,3 +1,8 @@
+### v3.0.0~20250331
+  * Added option to Reload All spices of a given type.
+  * Now can reload current theme.
+  * Fixes #7018 and #7019.
+
 ### v2.0.1~20250326
   * Uses mainloopTools.
   * Code cleanup.

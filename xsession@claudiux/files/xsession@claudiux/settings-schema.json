@@ -18,5 +18,17 @@
       "96": 96,
       "128": 128
     }
+  },
+
+  "section2": {
+    "type": "section",
+    "description": "RELOAD ALL option"
+  },
+
+  "show_reload_all": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the RELOAD ALL option in submenus",
+    "tooltip": "Caution! Reloading all spices of a given type may lead to errors."
   }
 }

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-16 20:55+0100\n"
+"POT-Creation-Date: 2025-03-31 22:25+0200\n"
 "PO-Revision-Date: 2023-01-31 11:51+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -19,90 +19,98 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:47
+#. applet.js:50
 msgid "Applet"
 msgstr "Uygulamacık"
 
-#. applet.js:48
+#. applet.js:51
 msgid "Desklet"
 msgstr "Masaüstü Uygulamacığı"
 
-#. applet.js:49
+#. applet.js:52
 msgid "Extension"
 msgstr "Eklenti"
 
-#. applet.js:52
+#. applet.js:53
 msgid "Applets"
 msgstr "Uygulamacıklar"
 
-#. applet.js:53
+#. applet.js:54
 msgid "Desklets"
 msgstr "Masaüstü Uygulamacıkları"
 
-#. applet.js:54
+#. applet.js:55
 msgid "Extensions"
 msgstr "Eklentiler"
 
-#. applet.js:150
+#. applet.js:85
+msgid "RELOAD ALL"
+msgstr ""
+
+#. applet.js:211
 msgid "Middle-click: \n"
 msgstr ""
 
-#. applet.js:150 applet.js:211
+#. applet.js:211 applet.js:272
 msgid "Show .xsession-errors"
 msgstr ".xoturumu-hatalarını göster"
 
-#. applet.js:227
+#. applet.js:287
 msgid "Restart Cinnamon"
 msgstr "Cinnamon'u Yeniden Başlat"
 
-#. applet.js:244
+#. applet.js:303
 msgid "--- Reload Spices ---"
 msgstr "--- Uygulamacıkları Yeniden Yükle ---"
 
-#. applet.js:251
+#. applet.js:309
 msgid "Reload Applet:"
 msgstr "Uygulamayı Yeniden Yükle:"
 
-#. applet.js:262
+#. applet.js:336
 msgid "Reload Desklet:"
 msgstr "Masaüstü Uygulamacığını Yeniden Yükle:"
 
-#. applet.js:271
+#. applet.js:363
 msgid "Reload Extension:"
 msgstr "Uzantıyı Yeniden Yükle:"
 
-#. applet.js:280
+#. applet.js:389
+msgid "Reload Current Theme"
+msgstr ""
+
+#. applet.js:403
 msgid "--- Settings for ---"
 msgstr ""
 
-#. applet.js:286
+#. applet.js:409
 #, fuzzy
 msgid "Applet:"
 msgstr "Uygulamacık"
 
-#. applet.js:295
+#. applet.js:418
 #, fuzzy
 msgid "Desklet:"
 msgstr "Masaüstü Uygulamacığı"
 
-#. applet.js:304
+#. applet.js:427
 #, fuzzy
 msgid "Extension:"
 msgstr "Eklenti"
 
-#. applet.js:313
+#. applet.js:436
 msgid "--- View Code ---"
 msgstr "--- Kodu Görüntüle ---"
 
-#. applet.js:319
+#. applet.js:442
 msgid "View Applet Code for:"
 msgstr "Uygulamacık Kodunu Görüntüle:"
 
-#. applet.js:328
+#. applet.js:451
 msgid "View Desklet Code for:"
 msgstr "Masaüstü Uygulamacığı Kodunu Görüntüle:"
 
-#. applet.js:337
+#. applet.js:460
 msgid "View Extension Code for:"
 msgstr "Eklenti Kodunu Görüntüle:"
 
@@ -159,4 +167,16 @@ msgstr ""
 
 #. settings-schema.json->icon_size->options
 msgid "128"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
 msgstr ""
