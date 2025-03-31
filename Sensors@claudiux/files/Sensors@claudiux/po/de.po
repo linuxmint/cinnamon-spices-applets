@@ -402,13 +402,12 @@ msgid "Character size (% of standard size)"
 msgstr "Schriftgröße (% der Standardgröße)"
 
 #. settings-schema.json->horizontal_width->description
-#, fuzzy
 msgid "Display width (pixels) for horizontal panels"
 msgstr "Applet-Breite (Pixel) für horizontale Panels"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
-msgstr ""
+msgstr "0 für automatisch. Der Wert gilt ohne Rand."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
