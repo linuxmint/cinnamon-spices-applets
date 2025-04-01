@@ -289,84 +289,84 @@ class SensorsApplet extends Applet.Applet {
     this.s = new AppletSettings(this, UUID, this.instanceId);
 
     // General tab
-    this.s.bind("show_tooltip", "show_tooltip", this.on_settings_changed, null);
-    this.s.bind("has_set_markup", "has_set_markup", null, null);
-    this.s.bind("interval", "interval", this.on_settings_changed, null);
-    this.s.bind("keep_size", "keep_size", this.updateUI, null);
-    this.s.bind("char_size", "char_size", this.updateUI, null);
-    this.s.bind("horizontal_width", "horizontal_width", this.updateUI, null);
-    this.s.bind("separator_type", "separator_type", this.updateUI, null);
-    this.s.bind("vertical-align", "vertical_align", this.updateUI, null);
-    this.s.bind("char_color_customized", "char_color_customized", this.updateUI, null);
-    this.s.bind("char_color", "char_color", this.updateUI, null);
-    this.s.bind("crit_color", "crit_color", this.updateUI, null);
-    this.s.bind("high_color", "high_color", this.updateUI, null);
-    this.s.bind("remove_border", "remove_border", this.updateUI, null);
-    this.s.bind("remove_icons", "remove_icons", this.updateUI, null);
-    this.s.bind("bold_values", "bold_values", this.updateUI, null);
-    this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", this.updateUI, null);
-    this.s.bind("restart_in_menu", "restart_in_menu", null, null);
+    this.s.bind("show_tooltip", "show_tooltip", () => { this.on_settings_changed() });
+    this.s.bind("has_set_markup", "has_set_markup");
+    this.s.bind("interval", "interval", () => { this.on_settings_changed() });
+    this.s.bind("keep_size", "keep_size", () => { this.updateUI() });
+    this.s.bind("char_size", "char_size", () => { this.updateUI() });
+    this.s.bind("horizontal_width", "horizontal_width", () => { this.updateUI() });
+    this.s.bind("separator_type", "separator_type", () => { this.updateUI() });
+    this.s.bind("vertical-align", "vertical_align", () => { this.updateUI() });
+    this.s.bind("char_color_customized", "char_color_customized", () => { this.updateUI() });
+    this.s.bind("char_color", "char_color", () => { this.updateUI() });
+    this.s.bind("crit_color", "crit_color", () => { this.updateUI() });
+    this.s.bind("high_color", "high_color", () => { this.updateUI() });
+    this.s.bind("remove_border", "remove_border", () => { this.updateUI() });
+    this.s.bind("remove_icons", "remove_icons", () => { this.updateUI() });
+    this.s.bind("bold_values", "bold_values", () => { this.updateUI() });
+    this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", () => { this.updateUI() });
+    this.s.bind("restart_in_menu", "restart_in_menu");
 
     this.detect_markup();
 
     // Custom names (generic)
-    this.s.bind("custom_names", "custom_names", null, null);
+    this.s.bind("custom_names", "custom_names");
 
     // sensors version (generic)
-    this.s.bind("sensors_version", "sensors_version", null, null);
+    this.s.bind("sensors_version", "sensors_version");
 
     // Temperature tab
-    this.s.bind("show_temp", "show_temp", this.populate_temp_sensors_in_settings, null);
-    this.s.bind("show_temp_name", "show_temp_name", null, null);
-    this.s.bind("chars_temp", "chars_temp", this._on_chars_temp_modified, null);
+    this.s.bind("show_temp", "show_temp", () => { this.populate_temp_sensors_in_settings() });
+    this.s.bind("show_temp_name", "show_temp_name");
+    this.s.bind("chars_temp", "chars_temp", () => { this._on_chars_temp_modified() });
     this._on_chars_temp_modified();
-    this.s.bind("strictly_positive_temp", "strictly_positive_temp", this.populate_temp_sensors_in_settings, null);
-    this.s.bind("use_fahrenheit", "use_fahrenheit", this.updateUI, null);
-    this.s.bind("only_integer_part", "only_integer_part", this.updateUI, null);
-    this.s.bind("show_unit", "show_unit", this.updateUI, null);
-    this.s.bind("show_unit_letter", "show_unit_letter", this.updateUI, null);
-    this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", this.updateUI, null);
-    this.s.bind("temp_sensors", "temp_sensors", null, null);
-    this.s.bind("numberOfTempSensors", "numberOfTempSensors", null, null);
-    this.s.bind("temp_disks", "temp_disks", null, null);
-    this.s.bind("journalize_temp", "journalize_temp", null, null);
+    this.s.bind("strictly_positive_temp", "strictly_positive_temp", () => { this.populate_temp_sensors_in_settings() });
+    this.s.bind("use_fahrenheit", "use_fahrenheit", () => { this.updateUI() });
+    this.s.bind("only_integer_part", "only_integer_part", () => { this.updateUI() });
+    this.s.bind("show_unit", "show_unit", () => { this.updateUI() });
+    this.s.bind("show_unit_letter", "show_unit_letter", () => { this.updateUI() });
+    this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", () => { this.updateUI() });
+    this.s.bind("temp_sensors", "temp_sensors");
+    this.s.bind("numberOfTempSensors", "numberOfTempSensors");
+    this.s.bind("temp_disks", "temp_disks");
+    this.s.bind("journalize_temp", "journalize_temp");
 
     // Fan tab
-    this.s.bind("show_fan", "show_fan", this.populate_fan_sensors_in_settings, null);
-    this.s.bind("show_fan_name", "show_fan_name", null, null);
-    this.s.bind("chars_fan", "chars_fan", this._on_chars_fan_modified, null);
+    this.s.bind("show_fan", "show_fan", () => { this.populate_fan_sensors_in_settings() });
+    this.s.bind("show_fan_name", "show_fan_name");
+    this.s.bind("chars_fan", "chars_fan", () => { this._on_chars_fan_modified() });
     this._on_chars_fan_modified();
     this.strictly_positive_fan = false;
-    this.s.bind("show_fan_unit", "show_fan_unit", this.updateUI, null);
-    this.s.bind("fan_unit", "fan_unit", this.updateUI, null);
-    this.s.bind("fan_sensors", "fan_sensors", null, null);
-    this.s.bind("numberOfFanSensors", "numberOfFanSensors", null, null);
-    this.s.bind("journalize_fan", "journalize_fan", null, null);
+    this.s.bind("show_fan_unit", "show_fan_unit", () => { this.updateUI() });
+    this.s.bind("fan_unit", "fan_unit", () => { this.updateUI() });
+    this.s.bind("fan_sensors", "fan_sensors");
+    this.s.bind("numberOfFanSensors", "numberOfFanSensors");
+    this.s.bind("journalize_fan", "journalize_fan");
 
     // Voltage tab
-    this.s.bind("show_volt", "show_volt", this.populate_volt_sensors_in_settings, null);
-    this.s.bind("show_volt_name", "show_volt_name", null, null);
-    this.s.bind("chars_volt", "chars_volt", this._on_chars_volt_modified, null);
+    this.s.bind("show_volt", "show_volt", () => { this.populate_volt_sensors_in_settings() });
+    this.s.bind("show_volt_name", "show_volt_name");
+    this.s.bind("chars_volt", "chars_volt", () => { this._on_chars_volt_modified() });
     this._on_chars_volt_modified();
-    this.s.bind("strictly_positive_volt", "strictly_positive_volt", this.populate_volt_sensors_in_settings, null);
-    this.s.bind("show_volt_unit", "show_volt_unit", this.updateUI, null);
-    this.s.bind("volt_unit", "volt_unit", this.updateUI, null);
-    this.s.bind("volt_sensors", "volt_sensors", null, null);
-    this.s.bind("numberOfVoltageSensors", "numberOfVoltageSensors", null, null);
-    this.s.bind("journalize_volt", "journalize_volt", null, null);
+    this.s.bind("strictly_positive_volt", "strictly_positive_volt", () => { this.populate_volt_sensors_in_settings() });
+    this.s.bind("show_volt_unit", "show_volt_unit", () => { this.updateUI() });
+    this.s.bind("volt_unit", "volt_unit", () => { this.updateUI() });
+    this.s.bind("volt_sensors", "volt_sensors");
+    this.s.bind("numberOfVoltageSensors", "numberOfVoltageSensors");
+    this.s.bind("journalize_volt", "journalize_volt");
 
     // Intrusion tab
-    this.s.bind("show_intrusion", "show_intrusion", this.populate_intrusion_sensors_in_settings, null);
-    this.s.bind("show_intrusion_name", "show_intrusion_name", null, null);
-    this.s.bind("chars_intrusion", "chars_intrusion", this._on_chars_intrusion_modified, null);
+    this.s.bind("show_intrusion", "show_intrusion", () => { this.populate_intrusion_sensors_in_settings() });
+    this.s.bind("show_intrusion_name", "show_intrusion_name");
+    this.s.bind("chars_intrusion", "chars_intrusion", () => { this._on_chars_intrusion_modified() });
     this._on_chars_intrusion_modified();
-    this.s.bind("strictly_positive_intrusion", "strictly_positive_intrusion", this.updateUI, null);
-    this.s.bind("intrusion_sensors", "intrusion_sensors", null, null);
-    this.s.bind("numberOfIntrusionSensors", "numberOfIntrusionSensors", null, null);
-    this.s.bind("journalize_intrusion", "journalize_intrusion", null, null);
+    this.s.bind("strictly_positive_intrusion", "strictly_positive_intrusion", () => { this.updateUI() });
+    this.s.bind("intrusion_sensors", "intrusion_sensors");
+    this.s.bind("numberOfIntrusionSensors", "numberOfIntrusionSensors");
+    this.s.bind("journalize_intrusion", "journalize_intrusion");
 
     // Custom tab
-    this.s.bind("custom_sensors", "custom_sensors", null, null);
+    this.s.bind("custom_sensors", "custom_sensors");
 
     // Whether temperature@fevimu is loaded:
     let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
@@ -391,7 +391,7 @@ class SensorsApplet extends Applet.Applet {
   }
 
   _on_chars_fan_modified() {
-    var selected = "🤂";
+    var selected = "𖣘";
     if (this.chars_fan.length > 0)
       selected = this.chars_fan[0]["emoji"];
     C_FAN = "" + selected;
@@ -400,7 +400,7 @@ class SensorsApplet extends Applet.Applet {
   }
 
   _on_chars_volt_modified() {
-    var selected = "⦿";
+    var selected = "⚡";
     if (this.chars_volt.length > 0)
       selected = this.chars_volt[0]["emoji"];
     C_VOLT = "" + selected;
@@ -409,7 +409,7 @@ class SensorsApplet extends Applet.Applet {
   }
 
   _on_chars_intrusion_modified() {
-    var selected = "⦿";
+    var selected = "🪛";
     if (this.chars_intrusion.length > 0)
       selected = this.chars_intrusion[0]["emoji"];
     C_INTRU = "" + selected;
