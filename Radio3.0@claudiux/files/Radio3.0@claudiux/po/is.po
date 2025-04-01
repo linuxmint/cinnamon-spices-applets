@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2025-03-30 19:27+0200\n"
-"PO-Revision-Date: 2025-01-22 17:33+0000\n"
+"PO-Revision-Date: 2025-04-01 10:28+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -202,31 +202,31 @@ msgstr "%s bæti = %s GB = %s GiB"
 
 #. applet.js:420
 msgid "Sun."
-msgstr ""
+msgstr "Sun."
 
 #. applet.js:420
 msgid "Mon."
-msgstr ""
+msgstr "Mán."
 
 #. applet.js:420
 msgid "Tue."
-msgstr ""
+msgstr "Þri."
 
 #. applet.js:420
 msgid "Wed."
-msgstr ""
+msgstr "Mið."
 
 #. applet.js:420
 msgid "Thu."
-msgstr ""
+msgstr "Fim."
 
 #. applet.js:420
 msgid "Fri."
-msgstr ""
+msgstr "Fös."
 
 #. applet.js:420
 msgid "Sat."
-msgstr ""
+msgstr "Lau."
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -274,7 +274,7 @@ msgstr "Smelltu til að velja stöð"
 
 #. applet.js:2747
 msgid "Wake Up"
-msgstr ""
+msgstr "Vekja"
 
 #. applet.js:2825 applet.js:3315 applet.js:5341
 msgid "Configure..."
@@ -285,9 +285,8 @@ msgid "Search for new stations..."
 msgstr "Leita að nýjum útvarpsstöðvum..."
 
 #. applet.js:2835
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Uppfæra þennan stöðvalista"
+msgstr "Hlaða inn sýnishorni stöðvalista"
 
 #. applet.js:2878 applet.js:3319 applet.js:5411
 msgid "Sound Settings"
@@ -435,30 +434,35 @@ msgstr "Loka"
 
 #. applet.js:5160 applet.js:5631 applet.js:5649
 msgid "Cancel"
-msgstr ""
+msgstr "Hætta við"
 
 #. applet.js:5161
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Radio3.0 smáforritið"
 
 #. applet.js:5164
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Virkjaðu OSD150 forritsaukann"
 
 #. applet.js:5165
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Til að fá fram láréttan OSD-stjórntexta, þarftu að virkja OSD150"
+" forritsaukann."
 
 #. applet.js:5183
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Sækja OSD150 forritsaukann"
 
 #. applet.js:5184
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Til að fá fram láréttan OSD-stjórntexta, þarftu að sækja OSD150"
+" forritsaukann.\n"
+"Smelltu á niðurhalshnappinn og leitaðu síðan að OSD150 og veldu svo ⬇"
+" hnappinn."
 
 #. applet.js:5313
 #, javascript-format
@@ -482,9 +486,8 @@ msgid "Schedule a background record..."
 msgstr "Áætla upptöku í bakgrunni..."
 
 #. applet.js:5359
-#, fuzzy
 msgid "Configure the Alarm Clock..."
-msgstr "Grunnstilla..."
+msgstr "Grunnstilla vekjaraklukkuna..."
 
 #. applet.js:5366
 msgid "Extract soundtrack from YouTube video..."
@@ -533,7 +536,7 @@ msgstr "Stillingar skjágræju fyrir umslagsmyndir"
 #. settings-schema.json->alarm-clock-wake-me-up->description
 #. applet.js:5450
 msgid "Wake me up!"
-msgstr ""
+msgstr "Vekja mig!"
 
 #. applet.js:5460
 msgid "Show Album Art on desktop"
@@ -551,27 +554,31 @@ msgstr "Birta hljóðstyrk nálægt táknmynd"
 
 #. applet.js:5628
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Þú þarft 'Album Art 3.0' skjágræjuna"
 
 #. applet.js:5629
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Þú getur virkjað það með því að smella á fyrsta hnappinn og leita síðan að"
+" albúmi."
 
 #. applet.js:5630 applet.js:5648
 msgid "Desklets"
-msgstr ""
+msgstr "Skjágræjur (desklets)"
 
 #. applet.js:5646
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Þú þarft að virkja 'Album Art 3.0' skjágræjuna"
 
 #. applet.js:5647
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Þú getur virkjað það með því að smella á fyrsta hnappinn, leita síðan að"
+" albúmi og bæta því við með [+] hnappnum."
 
 #. applet.js:5954
 msgid "Close without stopping recording"
@@ -817,7 +824,7 @@ msgstr "Netkerfi"
 
 #. settings-schema.json->pageAlarmClock->title
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Vekjaraklukka"
 
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
@@ -860,9 +867,8 @@ msgid "Search results"
 msgstr "Leitarniðurstöður"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "Stillingar fyrir %s"
+msgstr "Stillingagluggi"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -961,17 +967,16 @@ msgid "Scheduled recordings"
 msgstr "Áætlaðar upptökur"
 
 #. settings-schema.json->sectionWakeMeUp->title
-#, fuzzy
 msgid "Options"
-msgstr "Fleiri valkostir"
+msgstr "Valkostir"
 
 #. settings-schema.json->sectionWorkingDays->title
 msgid "Working Days"
-msgstr ""
+msgstr "Virkir dagar"
 
 #. settings-schema.json->sectionWorkOffDays->title
 msgid "Work-Off Days"
-msgstr ""
+msgstr "Frídagar"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
@@ -1170,13 +1175,15 @@ msgstr "Síða:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Lóðrétt hámörkun"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Þegar merkt er við þennan valkost, mun þessi stillingagluggi verða hámarkaður"
+" lóðrétt næst þegar hann er opnaður."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1368,9 +1375,8 @@ msgid "Show '%' in OSD"
 msgstr "Birta '%' í OSD-stjórntexta"
 
 #. settings-schema.json->show-horizontal-osd->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Birta '%' í OSD-stjórntexta"
+msgstr "Birta láréttan OSD-stjórntexta"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -3312,74 +3318,75 @@ msgstr "0 þýðir ekkert hámark"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
-msgstr ""
+msgstr "Vekja mig rólega"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->tooltip
 msgid "By checking this box, the sound volume gradually increases."
-msgstr ""
+msgstr "Með því að merkja í þennan reit, eykst hljóðstyrkur jafnt og þétt."
 
 #. settings-schema.json->alarm-clock-volume-begin->description
 msgid "Initial volume (%)"
-msgstr ""
+msgstr "Upphafshljóðstyrkur (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->description
 msgid "Final volume (%)"
-msgstr ""
+msgstr "Lokahljóðstyrkur (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->tooltip
 msgid "The final volume must be greater than or equal to the initial volume."
 msgstr ""
+"Lokahljóðstyrkur verður að vera jafn eða meiri en upphafshljóðstyrkurinn."
 
 #. settings-schema.json->alarm-clock-volume-transition->description
 msgid "Transition duration (seconds)"
-msgstr ""
+msgstr "Tímalengd millifærslu (sekúndur)"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Sunday"
-msgstr ""
+msgstr "Sunnudagur"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Monday"
-msgstr ""
+msgstr "Mánudagur"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Tuesday"
-msgstr ""
+msgstr "Þriðjudagur"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Wednesday"
-msgstr ""
+msgstr "Miðvikudagur"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Thursday"
-msgstr ""
+msgstr "Fimmtudagur"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Friday"
-msgstr ""
+msgstr "Föstudagur"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Saturday"
-msgstr ""
+msgstr "Laugardagur"
 
 #. settings-schema.json->alarm-clock-working-days-time->description
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
-msgstr ""
+msgstr "Vöknunartími"
 
 #. settings-schema.json->alarm-clock-working-days-radio-button->description
 #. settings-schema.json->alarm-clock-workoff-days-radio-button->description
-#, fuzzy
 msgid "Last-listened-to radio station"
-msgstr "Listi yfir vistaðar útvarpsstöðvar"
+msgstr "Útvarpsstöð sem síðast var hlustað á"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
-msgstr ""
+msgstr "Virkjaðu 'tink' til að tryggja að hátalarar séu vakandi"
+
