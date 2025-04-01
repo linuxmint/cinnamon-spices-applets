@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-31 22:25+0200\n"
-"PO-Revision-Date: 2025-01-16 17:30-0300\n"
+"PO-Revision-Date: 2025-04-01 12:53-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -44,7 +44,7 @@ msgstr "Extensiones"
 
 #. applet.js:85
 msgid "RELOAD ALL"
-msgstr ""
+msgstr "RECARGAR TODO"
 
 #. applet.js:211
 msgid "Middle-click: \n"
@@ -60,7 +60,7 @@ msgstr "Reiniciar Cinnamon"
 
 #. applet.js:303
 msgid "--- Reload Spices ---"
-msgstr "--- Recargar Spices ---"
+msgstr "--- Recargar Especias ---"
 
 #. applet.js:309
 msgid "Reload Applet:"
@@ -76,7 +76,7 @@ msgstr "Recargar Extensión:"
 
 #. applet.js:389
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Recargar el tema actual"
 
 #. applet.js:403
 msgid "--- Settings for ---"
@@ -166,12 +166,14 @@ msgstr "128"
 
 #. settings-schema.json->section2->description
 msgid "RELOAD ALL option"
-msgstr ""
+msgstr "Opción RECARGAR TODO"
 
 #. settings-schema.json->show_reload_all->description
 msgid "Show the RELOAD ALL option in submenus"
-msgstr ""
+msgstr "Mostrar la opción RECARGAR TODO en los submenús"
 
 #. settings-schema.json->show_reload_all->tooltip
 msgid "Caution! Reloading all spices of a given type may lead to errors."
 msgstr ""
+"¡Atención! Recargar todas las especias de un tipo determinado puede dar "
+"lugar a errores."
