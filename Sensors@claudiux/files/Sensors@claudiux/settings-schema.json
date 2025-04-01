@@ -308,7 +308,7 @@
     "type": "scale",
     "default": 100,
     "min": 60,
-    "max": 120,
+    "max": 160,
     "step": 1,
     "description": "Character size (% of standard size)"
   },

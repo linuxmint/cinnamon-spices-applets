@@ -1,3 +1,7 @@
+### v5.4.2~20250401
+  * Minor changes about font size.
+  * Code cleanup in applet.js.
+
 ### v5.4.1~20250330
   * Minor changes about applet width.
 
