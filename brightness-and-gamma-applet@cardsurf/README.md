@@ -4,6 +4,7 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
 ## Features
 * Set brightness of the screen
 * Set gamma of the screen
+* From Cinnamon 6.4: tooltip displaying current values
 * Customizable:
  * Customize an icon shown in a panel
  * Show: all values, brightness or gamma

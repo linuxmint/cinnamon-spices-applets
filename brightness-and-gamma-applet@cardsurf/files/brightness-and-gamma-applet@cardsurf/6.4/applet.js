@@ -31,6 +31,15 @@ function _(str) {
   return Gettext.dgettext(uuid, str);
 }
 
+const TR_BRIGHTNESS = _("Brightness");
+const TR_RED = _("Red");
+const TR_GREEN = _("Green");
+const TR_BLUE = _("Blue");
+var MAX_TR_LENGTH = TR_BRIGHTNESS.length;
+for (let tr of [TR_RED, TR_GREEN, TR_BLUE]) {
+    if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
+}
+
 class Output {
     constructor(output_name, is_connected) {
         this.output_name = output_name;
@@ -352,6 +361,22 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     on_options_type_changed() {
         this._init_menu_sliders();
+        this.set_MAX_TR_LENGTH();
+        this.update_tooltip();
+    }
+
+    set_MAX_TR_LENGTH() {
+        if (this.options_type == 2) {
+            MAX_TR_LENGTH = TR_RED.length;
+            for (let tr of [TR_GREEN, TR_BLUE]) {
+                if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
+            }
+        } else {
+            MAX_TR_LENGTH = TR_BRIGHTNESS.length;
+            for (let tr of [TR_RED, TR_GREEN, TR_BLUE]) {
+                if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
+            }
+        }
     }
 
     on_gui_icon_changed() {
@@ -446,6 +471,9 @@ class BrightnessAndGamma extends Applet.IconApplet {
     on_applet_added_to_panel() {
         this.on_shortcut_changed();
         this.on_disable_nightmode_changed();
+        this.set_MAX_TR_LENGTH();
+        this._applet_tooltip._tooltip.set_style('font-family: monospace;');
+        this.update_tooltip();
     }
 
     // Override
@@ -720,24 +748,53 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.menu_sliders = new AppletGui.MenuSliders(this, this.panel_orientation);
     }
 
+    update_tooltip() {
+        let tips = [];
+        if (this.options_type != 2) {
+            let s_brightness = "" + this.brightness;
+            if (this.brightness < 100) s_brightness = " " + s_brightness;
+            if (this.brightness < 10 ) s_brightness = " " + s_brightness;
+            tips.push(" ".repeat(MAX_TR_LENGTH - TR_BRIGHTNESS.length) + `${TR_BRIGHTNESS} <b>${s_brightness}</b>`);
+        }
+        if (this.options_type != 1) {
+            let s_gamma_red = "" + this.gamma_red;
+            if (this.gamma_red < 100) s_gamma_red = " " + s_gamma_red;
+            if (this.gamma_red < 10 ) s_gamma_red = " " + s_gamma_red;
+            tips.push(" ".repeat(MAX_TR_LENGTH - TR_RED.length) + `${TR_RED} <b>${s_gamma_red}</b>`);
+            let s_gamma_green = "" + this.gamma_green;
+            if (this.gamma_green < 100) s_gamma_green = " " + s_gamma_green;
+            if (this.gamma_green < 10 ) s_gamma_green = " " + s_gamma_green;
+            tips.push(" ".repeat(MAX_TR_LENGTH - TR_GREEN.length) + `${TR_GREEN} <b>${s_gamma_green}</b>`);
+            let s_gamma_blue = "" + this.gamma_blue;
+            if (this.gamma_blue < 100) s_gamma_blue = " " + s_gamma_blue;
+            if (this.gamma_blue < 10 ) s_gamma_blue = " " + s_gamma_blue;
+            tips.push(" ".repeat(MAX_TR_LENGTH - TR_BLUE.length) + `${TR_BLUE} <b>${s_gamma_blue}</b>`);
+        }
+        this.set_applet_tooltip(tips.join("\n"), true);
+    }
+
     update_brightness(value) {
         this.brightness = value;
         this.update_xrandr();
+        this.update_tooltip();
     }
 
     update_gamma_red(value) {
         this.gamma_red = value;
         this.update_xrandr();
+        this.update_tooltip();
     }
 
     update_gamma_green(value) {
         this.gamma_green = value;
         this.update_xrandr();
+        this.update_tooltip();
     }
 
     update_gamma_blue(value) {
         this.gamma_blue = value;
         this.update_xrandr();
+        this.update_tooltip();
     }
 
     _update_xrandr_startup() {
