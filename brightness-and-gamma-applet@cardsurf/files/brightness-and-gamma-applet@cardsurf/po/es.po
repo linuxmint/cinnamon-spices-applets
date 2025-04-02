@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-02 00:29+0200\n"
-"PO-Revision-Date: 2021-11-30 23:00-0300\n"
+"PO-Revision-Date: 2025-04-02 16:46-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. applet.js:178 6.4/applet.js:167
 msgid "The following packages were not found:"
@@ -64,7 +64,7 @@ msgstr "Applet de brillo y gamma"
 #. settings-schema.json->configuration_start->description
 #. 6.4->settings-schema.json->configuration_start->description
 msgid "Configuration"
-msgstr ""
+msgstr "Configuración"
 
 #. settings-schema.json->apply_startup->description
 #. 6.4->settings-schema.json->apply_startup->description
@@ -232,7 +232,7 @@ msgstr "Icono mostrado en el panel"
 
 #. 6.4->settings-schema.json->disable_nightmode->description
 msgid "Disable Night Mode"
-msgstr ""
+msgstr "Desactivar el modo nocturno"
 
 #. 6.4->settings-schema.json->disable_nightmode->tooltip
 msgid ""
@@ -240,11 +240,15 @@ msgid ""
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
 msgstr ""
+"Desactiva el modo nocturno de Cinnamon mientras se ejecuta este applet.\n"
+"Esto evita que la pantalla parpadee.\n"
+"El tiempo de ajuste puede ser hasta el doble del número de segundos indicado "
+"a continuación."
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
-msgstr ""
+msgstr "Tecla rápida para aumentar el brillo"
 
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
-msgstr ""
+msgstr "Tecla rápida para reducir el brillo"
