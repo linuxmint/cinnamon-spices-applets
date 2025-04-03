@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-01 20:00+0100\n"
-"PO-Revision-Date: 2025-03-21 01:56+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-04-04 00:20+0200\n"
+"Last-Translator: Krivetochka <krivetochkadev@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: applet.js:45
 msgid "Turn off monitor"
-msgstr ""
+msgstr "Выключить экран"
 
 #. metadata.json->name
 msgid "Turn Off Monitor"
