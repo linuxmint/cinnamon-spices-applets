@@ -50,6 +50,7 @@ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
 const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
 const ALBUMART_PICS_DIR = TMP_ALBUMART_DIR + "/song-art";
+const ALBUMART_TITLE_FILE = TMP_ALBUMART_DIR + "/title.txt";
 
 const MPV_RADIO_PID = XDG_RUNTIME_DIR + "/mpv_radio_PID";
 
@@ -1237,6 +1238,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.titleLabel = new St.Label({
             text: this._title
         });
+
         this.titleLabel.clutterText.line_wrap = true;
         this.titleLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
         this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
@@ -1564,6 +1566,11 @@ class Player extends PopupMenu.PopupMenuSection {
         } else {
             this._title = _("Unknown Title");
         }
+
+        if (this._applet.show_desklet) {
+            GLib.file_set_contents(ALBUMART_TITLE_FILE, `${this._artist}\n${this._title}`);
+        }
+
         this.titleLabel.set_text(this._title);
         this._seeker.setTrack(trackid, trackLength, old_title != this._title);
 

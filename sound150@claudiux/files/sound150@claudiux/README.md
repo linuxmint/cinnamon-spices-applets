@@ -57,11 +57,11 @@ This applet requires *playerctl*. If this package is not installed, the user can
 
 ### Keyboard shortcuts are not respecting volume step
 
-1. Open the *Shortcuts* tab of this applet settings.
-- Check the *Redefine Multimedia Keyboard Shortcuts* option.
-- Click on the *Use the same shortcuts as those defined by Cinnamon* button.
-- Close this settings window.
-- If necessary, restart Cinnamon.
+  1. Open the *Shortcuts* tab of this applet settings.
+  2. Check the *Redefine Multimedia Keyboard Shortcuts* option.
+  3. Click on the *Use the same shortcuts as those defined by Cinnamon* button.
+  4. Close this settings window.
+  5. If necessary, restart Cinnamon.
 
 ## Translations
 
