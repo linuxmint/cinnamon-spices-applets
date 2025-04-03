@@ -208,6 +208,7 @@ const XDG_RUNTIME_DIR = getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
 const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
 const ALBUMART_PICS_DIR = TMP_ALBUMART_DIR + "/song-art";
+const ALBUMART_TITLE_FILE = TMP_ALBUMART_DIR + "/title.txt";
 
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const DESKLET_DIR = HOME_DIR + "/.local/share/cinnamon/desklets/" + DESKLET_UUID;
@@ -271,6 +272,7 @@ const YTDL_PROGRAM = () => {
 };
 
 const ENABLED_DESKLETS_KEY = 'enabled-desklets';
+const ENABLED_APPLETS_KEY = 'enabled-applets';
 
 // mpv --no-terminal --no-video --input-ipc-server=/tmp/mpvsocket http://95.217.68.35:8352/stream
 
@@ -2713,6 +2715,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             ttElts.push("<i><b>" + artist.replace(/\"/g, "") + "</b></i>");
         }
         ttElts.push(title.replace(/\"/g, ""));
+      }
+
+      if (this.show_desklet && this.sound150_not_used) {
+        file_set_contents(ALBUMART_TITLE_FILE, `${artist}\n${title}`);
       }
 
       if (this.context_menu_item_slider != null) {
@@ -7093,6 +7099,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   get show_desklet() {
     return file_test(ALBUMART_ON, FileTest.EXISTS);
+  }
+
+  get sound150_not_used() {
+    let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
+    var found = false;
+    for (let appData of enabledApplets) {
+      if (appData.toString().split(":")[3] === "sound150@claudiux") {
+        found = true;
+        break;
+      }
+    }
+    return !found;
   }
 };
 

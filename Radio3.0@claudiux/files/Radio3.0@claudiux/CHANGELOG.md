@@ -1,3 +1,6 @@
+### v3.2.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
 ### v3.1.2~20250330
   * Improved Alarm-Clock settings.
   * Changes in server list.

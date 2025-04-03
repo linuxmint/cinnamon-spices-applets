@@ -1,3 +1,6 @@
+### v11.1.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
 ### v11.0.0~20250313
   * Works with the version 2.0.0 of the 'Album Art 3.0' desklet.
 
