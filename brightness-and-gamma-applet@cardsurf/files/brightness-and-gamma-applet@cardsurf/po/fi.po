@@ -8,48 +8,48 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-02 00:29+0200\n"
-"PO-Revision-Date: 2022-11-30 14:08+0200\n"
+"POT-Creation-Date: 2025-04-02 22:46+0300\n"
+"PO-Revision-Date: 2025-04-03 19:17+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.4/applet.js:167
+#: applet.js:178 6.4/applet.js:176
 msgid "The following packages were not found:"
 msgstr "Seuraavia paketteja ei löytynyt:"
 
-#. applet.js:179 6.4/applet.js:168
+#: applet.js:179 6.4/applet.js:177
 msgid "Please install the above packages to use the applet"
 msgstr "Asenna seuraavat paketit käyttääksesi sovelmaa"
 
-#. applet.js:564 6.4/applet.js:592
+#: applet.js:564 6.4/applet.js:620
 msgid "Screen"
 msgstr "Näyttö"
 
-#. applet.js:647 6.4/applet.js:675
+#: applet.js:647 6.4/applet.js:703
 msgid "Outputs"
 msgstr "Ulostulo"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
-#. appletGui.js:235 6.4/lib/appletGui.js:211
+#: appletGui.js:235 6.4/applet.js:34 6.4/lib/appletGui.js:211
 msgid "Brightness"
 msgstr "Kirkkaus"
 
-#. appletGui.js:236 6.4/lib/appletGui.js:212
+#: appletGui.js:236 6.4/applet.js:35 6.4/lib/appletGui.js:212
 msgid "Red"
 msgstr "Punainen"
 
-#. appletGui.js:237 6.4/lib/appletGui.js:213
+#: appletGui.js:237 6.4/applet.js:36 6.4/lib/appletGui.js:213
 msgid "Green"
 msgstr "Vihreä"
 
-#. appletGui.js:238 6.4/lib/appletGui.js:214
+#: appletGui.js:238 6.4/applet.js:37 6.4/lib/appletGui.js:214
 msgid "Blue"
 msgstr "Sininen"
 
@@ -64,12 +64,12 @@ msgstr "Kirkkauden ja gammatason sovelma"
 #. settings-schema.json->configuration_start->description
 #. 6.4->settings-schema.json->configuration_start->description
 msgid "Configuration"
-msgstr "Määritys"
+msgstr "Määritykset"
 
 #. settings-schema.json->apply_startup->description
 #. 6.4->settings-schema.json->apply_startup->description
 msgid "Apply at startup"
-msgstr "Käytä käynnistettäessä"
+msgstr "Käytä arvoja käynnistyksessä"
 
 #. settings-schema.json->apply_startup->tooltip
 #. 6.4->settings-schema.json->apply_startup->tooltip
@@ -86,7 +86,7 @@ msgstr "sekuntia"
 #. settings-schema.json->apply_every->description
 #. 6.4->settings-schema.json->apply_every->description
 msgid "Apply every"
-msgstr "Käytä joka"
+msgstr "Virkistä"
 
 #. settings-schema.json->apply_every->tooltip
 #. 6.4->settings-schema.json->apply_every->tooltip
@@ -188,7 +188,7 @@ msgstr "Gamman suurin arvo 51% - 200%."
 #. settings-schema.json->save_every->description
 #. 6.4->settings-schema.json->save_every->description
 msgid "Save every"
-msgstr "Tallenna joka"
+msgstr "Tallenna"
 
 #. settings-schema.json->save_every->tooltip
 #. 6.4->settings-schema.json->save_every->tooltip
@@ -198,7 +198,7 @@ msgstr "Kuinka usein käytetyt arvot tallennetaan"
 #. settings-schema.json->gui_start->description
 #. 6.4->settings-schema.json->gui_start->description
 msgid "Gui"
-msgstr "Gui"
+msgstr "Käyttöliittymä"
 
 #. settings-schema.json->options_type->description
 #. 6.4->settings-schema.json->options_type->description
@@ -232,7 +232,7 @@ msgstr "Paneelissa näkyvä kuvake"
 
 #. 6.4->settings-schema.json->disable_nightmode->description
 msgid "Disable Night Mode"
-msgstr ""
+msgstr "Poista yötila"
 
 #. 6.4->settings-schema.json->disable_nightmode->tooltip
 msgid ""
@@ -240,11 +240,14 @@ msgid ""
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
 msgstr ""
+"Poista Cinnamon yötila käytöstä, kun sovelma on käynnissä.\n"
+"Se estää näytön välkkymisen.\n"
+"Säätöaika voi olla enintään kaksi kertaa alla ilmoitettu sekuntimäärä."
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
-msgstr ""
+msgstr "Pikanäppäin kirkkauden lisääminen"
 
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
-msgstr ""
+msgstr "Pikanäppäin kirkkauden laskeminen"
