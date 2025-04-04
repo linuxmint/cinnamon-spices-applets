@@ -15,24 +15,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:127
 msgid "score"
-msgstr ""
+msgstr "pistemäärä"
 
 #. applet.js:139
 msgid "comments"
-msgstr ""
+msgstr "kommentit"
 
 #. applet.js:152
 msgid "recent issues"
-msgstr ""
+msgstr "tunnetut ongelmat"
 
 #. applet.js:164
 msgid "translations"
-msgstr ""
+msgstr "käännökset"
 
 #. applet.js:737
 msgid "Mark all as read"
@@ -84,7 +84,7 @@ msgstr "Päivitysväli"
 
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
-msgstr ""
+msgstr "tuntia"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -100,7 +100,7 @@ msgstr "Näytä sovelman kuvake valikossa"
 
 #. settings-schema.json->icon-size->description
 msgid "Icon size"
-msgstr "Kuvakkeen koko"
+msgstr "Kuvakekoko"
 
 #. settings-schema.json->icon-size->units
 msgid "pixels"
