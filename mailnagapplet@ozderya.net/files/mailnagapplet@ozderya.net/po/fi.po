@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-26 12:36-0500\n"
-"PO-Revision-Date: 2024-11-14 00:33+0200\n"
+"PO-Revision-Date: 2025-04-04 11:45+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:169
 msgid "just now"
@@ -49,16 +49,16 @@ msgstr "Määritä Mailnag"
 
 #. applet.js:370
 msgid "Mailnag daemon stopped working!"
-msgstr "Mailnag lakkasi toimimasta!"
+msgstr "Mailnag palvelu ei toiminnassa!"
 
 #. applet.js:374
 msgid "Mailnag daemon isn't running! Do you have it installed?"
-msgstr "Gnote ei ole käynnissä! Oletko asentanut mailnag ohjelman?"
+msgstr "Mailnag palvelu ei ole käynnissä! Asensitko Mailnag ohjelman?"
 
 #. applet.js:607
 #, javascript-format
 msgid "You have %d new mails!"
-msgstr "Sinulla on %d uutta viestiä!"
+msgstr "Sinulle on %d sähköpostia!"
 
 #. applet.js:608 applet.js:653
 msgid "Mark All Read"
@@ -66,7 +66,7 @@ msgstr "Merkitse kaikki luetuiksi"
 
 #. applet.js:616
 msgid "You have new mail!"
-msgstr "Sinulle on sähköpostia!"
+msgstr "Sinulle on sähköposti!"
 
 #. applet.js:618
 msgid "Mark Read"
@@ -74,11 +74,11 @@ msgstr "Merkitse luetuksi"
 
 #. applet.js:701 applet.js:763
 msgid "No unread mails."
-msgstr "Ei lukematonta sähköpostia."
+msgstr "Ei lukemattomia."
 
 #. applet.js:739
 msgid "Mailnag daemon is not running!"
-msgstr "Mailnag ei ole käynnissä!"
+msgstr "Mailnag palvelu ei ole käynnissä!"
 
 #. applet.js:752
 #, javascript-format
@@ -105,8 +105,7 @@ msgstr "Mailnag"
 #. metadata.json->description
 msgid "Mailnag mail notifier applet"
 msgstr ""
-"Mailnag ilmoittaa saapuneista sähköposteista. Asenna myös mailnag ohjelma "
-"lisäksi"
+"Mailnag ilmoittaa saapuneista sähköposteista. Asenna Mailnag ohjelma lisäksi"
 
 #. settings-schema.json->notifications->description
 msgid "Show notifications"
@@ -117,12 +116,12 @@ msgid ""
 "Enables display of mail arrived notifications by applet. Make sure you "
 "disable mailnag notification plugin, otherwise you will have duplicates."
 msgstr ""
-"Näyttää ilmoituksen saapuneesta postista. Varmista, että poistat mailnag-"
-"ilmoitukset laajennuksen käytöstä, muuten sinulla on kaksoiskappaleita."
+"Näyttää ilmoituksen saapuneesta postista. Varmista, että poistat "
+"laajennuksen mailnag-ilmoitukset käytöstä, muuten viestit ovat kahdesti."
 
 #. settings-schema.json->launch_client_on_click->description
 msgid "Launch mail client on click"
-msgstr "Avaa sähköpostiohjelma painamalla"
+msgstr "Avaa sähköposti"
 
 #. settings-schema.json->launch_client_on_click->tooltip
 msgid "Mail client is launched when clicked on a menu item."
@@ -142,7 +141,7 @@ msgstr "Merkitse kaikki luetuiksi"
 
 #. settings-schema.json->middle_click->options
 msgid "Launch mail client"
-msgstr "Avaa sähköpostiohjelma"
+msgstr "Avaa sähköposti"
 
 #. settings-schema.json->middle_click->options
 msgid "Do nothing"
@@ -150,11 +149,11 @@ msgstr "Älä tee mitään"
 
 #. settings-schema.json->max_length->description
 msgid "Max sender / subject display length"
-msgstr ""
+msgstr "Lähettäjä/aiheen enimmäispituus"
 
 #. settings-schema.json->max_length->tooltip
 msgid "Sender or subject lines longer than this will be cropped"
-msgstr ""
+msgstr "Tätä pidemmät lähettäjän tai aiheen rivit lyhennetään"
 
 #. settings-schema.json->client->description
 msgid "Mail client to launch (or webpage)"
