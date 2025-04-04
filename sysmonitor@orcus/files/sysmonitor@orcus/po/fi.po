@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-22 07:52-0400\n"
-"PO-Revision-Date: 2021-02-16 11:32+0100\n"
-"Last-Translator: Matti Viljanen (direc85) <matti.viljanen@kapsi.fi>\n"
+"PO-Revision-Date: 2025-04-04 18:40+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 3.0/providers.js:49 3.2/providers.js:56
 msgid "CPU:"
@@ -49,11 +49,11 @@ msgstr "Kuorma:"
 
 #. metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
-msgstr "Näytä graafisesti prosessorin, muistin, sivutuksen ja verkon käyttö"
+msgstr "Näyttää graafisesti prosessorin, muistin, sivutuksen ja verkon käytön"
 
 #. metadata.json->name
 msgid "System Monitor"
-msgstr "Järjestelmämonitori"
+msgstr "System Monitor"
 
 #. 3.0->settings-schema.json->header_common->description
 #. 3.2->settings-schema.json->common->title
@@ -63,7 +63,7 @@ msgstr "Yleisasetukset"
 #. 3.0->settings-schema.json->onclick_program->description
 #. 3.2->settings-schema.json->onclick_program->description
 msgid "Program to launch on click"
-msgstr "Suorita ohjelma kuvaajia klikattaessa"
+msgstr "Suorita ohjelma kuvaajaa painamalla"
 
 #. 3.0->settings-schema.json->smooth->description
 #. 3.2->settings-schema.json->smooth->description
@@ -188,7 +188,7 @@ msgstr "Käytössä"
 #. 3.2->settings-schema.json->net_override_graph_width->description
 #. 3.2->settings-schema.json->load_override_graph_width->description
 msgid "Override graph width"
-msgstr "Pakota tämän kuvaajan leveys"
+msgstr "Pakota kuvaajan leveys"
 
 #. 3.0->settings-schema.json->cpu_graph_width->description
 #. 3.0->settings-schema.json->mem_graph_width->description
@@ -201,12 +201,12 @@ msgstr "Pakota tämän kuvaajan leveys"
 #. 3.2->settings-schema.json->net_graph_width->description
 #. 3.2->settings-schema.json->load_graph_width->description
 msgid "Graph width"
-msgstr "Kuvaajan leveys"
+msgstr "Kuvaaja"
 
 #. 3.0->settings-schema.json->cpu_tooltip_decimals->description
 #. 3.2->settings-schema.json->cpu_tooltip_decimals->description
 msgid "Show this many decimals in the tooltip"
-msgstr "Desimaalien määrä vihjetekstissä"
+msgstr "Desimaalit vihjeessä"
 
 #. 3.0->settings-schema.json->cpu_tooltip_decimals->units
 #. 3.2->settings-schema.json->cpu_tooltip_decimals->units
@@ -216,12 +216,12 @@ msgstr "desimaalia"
 #. 3.0->settings-schema.json->cpu_color_0->description
 #. 3.2->settings-schema.json->cpu_color_0->description
 msgid "User color"
-msgstr "Käyttäjäprosessit"
+msgstr "Käyttäjä-prosessit"
 
 #. 3.0->settings-schema.json->cpu_color_1->description
 #. 3.2->settings-schema.json->cpu_color_1->description
 msgid "Nice color"
-msgstr "Taustaprosessit"
+msgstr "Tausta-prosessit"
 
 #. 3.0->settings-schema.json->cpu_color_2->description
 #. 3.2->settings-schema.json->cpu_color_2->description
@@ -231,7 +231,7 @@ msgstr "Kernel-prosessit"
 #. 3.0->settings-schema.json->cpu_color_3->description
 #. 3.2->settings-schema.json->cpu_color_3->description
 msgid "IOWait color"
-msgstr "IOWait-aika"
+msgstr "IOWait-prosessit"
 
 #. 3.0->settings-schema.json->header_mem->description
 #. 3.2->settings-schema.json->mem->title
@@ -287,7 +287,7 @@ msgstr "Väri"
 #. 3.2->settings-schema.json->net_g->title
 #. 3.2->settings-schema.json->load_g->title
 msgid "General"
-msgstr "Perusasetukset"
+msgstr "Yleinen"
 
 #. 3.2->settings-schema.json->common_c->title
 #. 3.2->settings-schema.json->cpu_c->title
@@ -300,11 +300,11 @@ msgstr "Värit"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->description
 msgid "Minimum graph scale"
-msgstr ""
+msgstr "Kaavion pienin mittakaava"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->units
 msgid "Mb/s"
-msgstr ""
+msgstr "Mb/s"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
 msgid ""
@@ -314,3 +314,8 @@ msgid ""
 "\n"
 "To always automatically scale, set the value to 0."
 msgstr ""
+"Kaavion pienin asteikko megabittiä sekunnissa.\n"
+"Kaavio ei skaalaudu minimin alapuolelle, mutta se skaalautuu "
+"automaattisesti, jos verkon nopeus ylittää tämän arvon.\n"
+"\n"
+"Jos haluat skaalata automaattisesti, aseta arvoksi 0."
