@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-03 08:57+0200\n"
-"PO-Revision-Date: 2024-11-19 00:53+0200\n"
+"PO-Revision-Date: 2025-04-04 13:34+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:286
 msgid "unassigned"
@@ -25,7 +25,7 @@ msgstr "määrittämätön"
 
 #. applet.js:287
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Näytä kansikuva täydessä koossa"
 
 #. applet.js:391
 msgid "This is your own list of Categories and Radio Stations."
@@ -194,31 +194,31 @@ msgstr "%s bytes = %s GB = %s GiB"
 
 #. applet.js:422
 msgid "Sun."
-msgstr ""
+msgstr "su"
 
 #. applet.js:422
 msgid "Mon."
-msgstr ""
+msgstr "ma"
 
 #. applet.js:422
 msgid "Tue."
-msgstr ""
+msgstr "ti"
 
 #. applet.js:422
 msgid "Wed."
-msgstr ""
+msgstr "ke"
 
 #. applet.js:422
 msgid "Thu."
-msgstr ""
+msgstr "to"
 
 #. applet.js:422
 msgid "Fri."
-msgstr ""
+msgstr "pe"
 
 #. applet.js:422
 msgid "Sat."
-msgstr ""
+msgstr "la"
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -266,7 +266,7 @@ msgstr "Valitse asema painamalla"
 
 #. applet.js:2753
 msgid "Wake Up"
-msgstr ""
+msgstr "Herätys"
 
 #. applet.js:2831 applet.js:3321 applet.js:5347
 msgid "Configure..."
@@ -274,12 +274,11 @@ msgstr "Asetukset..."
 
 #. applet.js:2835 applet.js:3313
 msgid "Search for new stations..."
-msgstr "Haei asemia..."
+msgstr "Hae asemia..."
 
 #. applet.js:2841
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Päivitä tämä asemalista"
+msgstr "Lataa näyteasemalista"
 
 #. applet.js:2884 applet.js:3325 applet.js:5417
 msgid "Sound Settings"
@@ -299,7 +298,7 @@ msgstr "Viimeiksi toistetut asemat:"
 
 #. applet.js:3072
 msgid "Visit the home page of this station"
-msgstr "Vieraile tämän aseman kotisivulla"
+msgstr "Vieraile aseman kotisivulla"
 
 #. applet.js:3134
 msgid "Categories"
@@ -427,30 +426,31 @@ msgstr "Sulje"
 
 #. applet.js:5166 applet.js:5637 applet.js:5655
 msgid "Cancel"
-msgstr ""
+msgstr "Peru"
 
 #. applet.js:5167
-#, fuzzy
 msgid "Radio3.0 applet"
 msgstr "Radio3.0"
 
 #. applet.js:5170
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Ota OSD150 extension käyttöön"
 
 #. applet.js:5171
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
-msgstr ""
+msgstr "Vaakaruudun saamiseksi sinun on otettava OSD150-laajennus käyttöön."
 
 #. applet.js:5189
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Lataa OSD150 extension"
 
 #. applet.js:5190
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Vaakaruudun saamiseksi sinun on ladattava OSD150-laajennus.\n"
+"Paina Lataa-painiketta, etsi sitten hakusana OSD150 ja valitse ⬇-painike."
 
 #. applet.js:5319
 #, javascript-format
@@ -474,9 +474,8 @@ msgid "Schedule a background record..."
 msgstr "Ajasta tallennus taustalla..."
 
 #. applet.js:5365
-#, fuzzy
 msgid "Configure the Alarm Clock..."
-msgstr "Asetukset..."
+msgstr "Määritä herätyskello..."
 
 #. applet.js:5372
 msgid "Extract soundtrack from YouTube video..."
@@ -520,16 +519,16 @@ msgstr "Näytä aseman logo"
 
 #. applet.js:5451
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Album Art kasikuvien asetukset"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
 #. applet.js:5456
 msgid "Wake me up!"
-msgstr ""
+msgstr "Herätä minut!"
 
 #. applet.js:5466
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Näytä albumin kansi työpöydällä"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:5475
@@ -543,27 +542,31 @@ msgstr "Näytä voimakkuus kuvakkeessa"
 
 #. applet.js:5634
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Sinä tarvitset \"Album Art 3.0\" sovelman työpydälle"
 
 #. applet.js:5635
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Voit asentaa sen painamalla ensimmäistä painiketta ja sitten hakemalla Album "
+"hakusanalla."
 
 #. applet.js:5636 applet.js:5654
 msgid "Desklets"
-msgstr ""
+msgstr "Sovelmia työpöydälle"
 
 #. applet.js:5652
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Sinun on otettava käyttöön Album Art 3.0 työpöytäsovelma"
 
 #. applet.js:5653
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Voit ottaa sen käyttöön painamalla ensimmäistä painiketta, hakemalla Album "
+"hakusanalla ja lisäämällä sen painikkeella [+]."
 
 #. applet.js:5960
 msgid "Close without stopping recording"
@@ -805,7 +808,7 @@ msgstr "Verkko"
 
 #. settings-schema.json->pageAlarmClock->title
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Herätyskello"
 
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
@@ -825,7 +828,7 @@ msgstr "Päivitä tämä asemalista"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Vain Radio++ käyttäjille"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -848,9 +851,8 @@ msgid "Search results"
 msgstr "Hakutulokset"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "%s - asetukset"
+msgstr "Asetukset ikkuna"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -862,7 +864,7 @@ msgstr "Voimakkuuden säätö"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "Ruutu"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -949,17 +951,16 @@ msgid "Scheduled recordings"
 msgstr "Ajastetut tallennukset"
 
 #. settings-schema.json->sectionWakeMeUp->title
-#, fuzzy
 msgid "Options"
-msgstr "Lisää valintoja"
+msgstr "Valinnat"
 
 #. settings-schema.json->sectionWorkingDays->title
 msgid "Working Days"
-msgstr ""
+msgstr "Arkipäivät"
 
 #. settings-schema.json->sectionWorkOffDays->title
 msgid "Work-Off Days"
-msgstr ""
+msgstr "Vapaapäivät"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
@@ -984,7 +985,7 @@ msgstr "Lista asemista"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -1041,7 +1042,7 @@ msgstr "Artisti/Otsikko vaihto"
 #. settings-schema.json->import-list-play-button->description
 #. settings-schema.json->search-list-play-button->description
 msgid "♪ Play the next station to test"
-msgstr "♪ Soita seuraava asema testiksi"
+msgstr "♪ Soita ja testaa seuraava asema"
 
 #. settings-schema.json->category-to-move->description
 msgid "Category to which to move the selected stations:"
@@ -1081,7 +1082,7 @@ msgstr "Päivitä minun asemat radiotietokannan tiedoilla"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "Tuo sinun Radio++ asemat"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1152,13 +1153,15 @@ msgstr "Sivu:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Laajennetaan pystysuuntaan"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Kun valittuna ohjelman asetukset laajennetaan pystysuuntaisesti ja asetuksia "
+"on helpompi rullata hiirellä. Tulee voimaan kun avaat ensikerralla ikkunan."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1292,7 +1295,7 @@ msgstr ""
 
 #. settings-schema.json->volume-step->description
 msgid "Volume step scrolling on icon"
-msgstr "Voimakkuuden säätö kuvakkeen päällä"
+msgstr "Säädä ääntä rullaamalla kuvakkeen päällä"
 
 #. settings-schema.json->volume-step->options
 msgid "±0%"
@@ -1332,7 +1335,7 @@ msgstr "Magnetoi kaikki 25%:n kerrannaiset"
 
 #. settings-schema.json->volume-show-osd->description
 msgid "Show OSD while changing volume"
-msgstr "Ruutu näytetään kun voimakkuutta muutetaan"
+msgstr "Ruutu näytetään kun voimakkuus muuttuu"
 
 #. settings-schema.json->volume-show-osd->tooltip
 msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
@@ -1340,15 +1343,15 @@ msgstr "Näytetäänkö grafiikkaa (ruutu) kun voimakkuutta muutetaan?"
 
 #. settings-schema.json->volume-show-osd-starting-radio->description
 msgid "Show volume OSD when changing radio station"
-msgstr "Voimakkuuden ruutu näytetään radioasemaa vaihtaessa"
+msgstr "Voimakkuus näytetään radioasemaa vaihtaessa"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Näytä ruudussa \"%\""
 
 #. settings-schema.json->show-horizontal-osd->description
 msgid "Show horizontal OSD"
-msgstr ""
+msgstr "Näytä vaakaruutu"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -1553,7 +1556,7 @@ msgstr "Korvaa sovelman kuvake radioaseman logolla, jos saatavilla."
 
 #. settings-schema.json->network-quality->description
 msgid "Network Quality"
-msgstr "Verkon laatu"
+msgstr "Verkkoyhteyden laatu"
 
 #. settings-schema.json->network-quality->options
 msgid "High"
@@ -1586,29 +1589,28 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "Ladatun kansikuvan laatu"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Max resoluutio"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Laatu"
+msgstr "Korkea laatu"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Keskitaso"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Normaali"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
-msgstr ""
+msgstr "Oletus: Korkea laatu. Valitse sinun verkon nopeutta vastaava arvo."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
@@ -1766,7 +1768,7 @@ msgstr "20 MiB"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
-msgstr "Polku joka sisältää tulevat tallennukset"
+msgstr "Tallennuspolku"
 
 #. settings-schema.json->button-rec-path-to-default->description
 msgid "Set this path to default one"
@@ -1970,7 +1972,7 @@ msgstr "3000"
 
 #. settings-schema.json->recordings-extract-url->description
 msgid "YouTube video link"
-msgstr "YouTube video linkki"
+msgstr "YouTube linkki"
 
 #. settings-schema.json->recordings-paste-button->description
 msgid "Paste above the YouTube link you copied"
@@ -3279,74 +3281,75 @@ msgstr "0 tarkoittaa, että ei ole maksimiarvoa"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
-msgstr ""
+msgstr "Herätä minut pehmeästi"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->tooltip
 msgid "By checking this box, the sound volume gradually increases."
-msgstr ""
+msgstr "Valitsemalla tämän voimakkuus kasvaa vähitellen."
 
 #. settings-schema.json->alarm-clock-volume-begin->description
 msgid "Initial volume (%)"
-msgstr ""
+msgstr "Alkuun (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->description
 msgid "Final volume (%)"
-msgstr ""
+msgstr "Loppuun (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->tooltip
 msgid "The final volume must be greater than or equal to the initial volume."
 msgstr ""
+"Lopullisen voimakkuuden on oltava suurempi tai yhtä suuri kuin määritetty "
+"voimakkuus alussa."
 
 #. settings-schema.json->alarm-clock-volume-transition->description
 msgid "Transition duration (seconds)"
-msgstr ""
+msgstr "Siirtymän kesto (sekuntia)"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Sunday"
-msgstr ""
+msgstr "Sunnuntai"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Monday"
-msgstr ""
+msgstr "Maanantai"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Tuesday"
-msgstr ""
+msgstr "Tiistai"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Wednesday"
-msgstr ""
+msgstr "Keskiviikko"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Thursday"
-msgstr ""
+msgstr "Torstai"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Friday"
-msgstr ""
+msgstr "Perjantai"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Saturday"
-msgstr ""
+msgstr "Launtai"
 
 #. settings-schema.json->alarm-clock-working-days-time->description
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
-msgstr ""
+msgstr "Herätysaika"
 
 #. settings-schema.json->alarm-clock-working-days-radio-button->description
 #. settings-schema.json->alarm-clock-workoff-days-radio-button->description
-#, fuzzy
 msgid "Last-listened-to radio station"
-msgstr "Lista tallennetuista radioasemista"
+msgstr "Lista kuunnelluista radioasemista"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
-msgstr ""
+msgstr "Aktivoi ja varmista, että kaiuttimet ovat päällä"
