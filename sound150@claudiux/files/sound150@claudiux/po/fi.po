@@ -9,20 +9,20 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-03 08:57+0200\n"
-"PO-Revision-Date: 2024-11-21 16:43+0200\n"
+"PO-Revision-Date: 2025-04-04 16:43+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:193 3.4/applet.js:65
 msgid "Playing"
-msgstr "Toistetaan"
+msgstr "Soi"
 
 #. 6.2/applet.js:139 4.4/applet.js:73 5.4/applet.js:133 4.6/applet.js:74
 #. 2.8/applet.js:66 6.4/applet.js:194 3.4/applet.js:66
@@ -54,7 +54,7 @@ msgstr "Vaimenna"
 
 #. 6.2/applet.js:1018 6.4/applet.js:1068
 msgid "Videos"
-msgstr ""
+msgstr "Videot"
 
 #. 6.2/applet.js:1146 6.2/applet.js:1443 6.2/applet.js:1446 6.2/applet.js:1449
 #. 6.2/applet.js:1483 6.2/applet.js:1492 6.2/applet.js:2927 6.2/applet.js:2961
@@ -237,51 +237,53 @@ msgid "Install playerctl"
 msgstr "Asenna playerctl"
 
 #. 6.4/applet.js:206 6.4/applet.js:1941 6.4/applet.js:1943
-#, fuzzy
 msgid "%"
-msgstr "9%"
+msgstr "%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.4/applet.js:2255
 msgid "Commands"
-msgstr ""
+msgstr "Komennot"
 
 #. 6.4/applet.js:2265
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Album Art sovelman asetukset"
 
 #. 6.4/applet.js:2273
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Näytä albumin kannet kuvakkeena"
+msgstr "Näytä albumin kansi työpöydällä"
 
 #. 6.4/applet.js:2345
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Sinä tarvitset \"Album Art 3.0\" sovelman työpydälle"
 
 #. 6.4/applet.js:2346
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Voit asentaa sen painamalla ensimmäistä painiketta ja sitten hakemalla Album "
+"hakusanalla."
 
 #. 6.4/applet.js:2347 6.4/applet.js:2365
 msgid "Desklets"
-msgstr ""
+msgstr "Sovelmia työpöydälle"
 
 #. 6.4/applet.js:2348 6.4/applet.js:2366 6.4/applet.js:2396
 msgid "Cancel"
-msgstr ""
+msgstr "Peru"
 
 #. 6.4/applet.js:2363
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Sinun on otettava käyttöön Album Art 3.0 työpöytäsovelma"
 
 #. 6.4/applet.js:2364
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Voit ottaa sen käyttöön painamalla ensimmäistä painiketta, hakemalla Album "
+"hakusanalla ja lisäämällä sen painikkeella [+]."
 
 #. metadata.json->name
 #. 6.4/applet.js:2397
@@ -290,26 +292,28 @@ msgstr "Enhanced Sound applet"
 
 #. 6.4/applet.js:2400
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Ota OSD150 extension käyttöön"
 
 #. 6.4/applet.js:2401
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
-msgstr ""
+msgstr "Vaakaruudun saamiseksi sinun on otettava OSD150-laajennus käyttöön."
 
 #. 6.4/applet.js:2418
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Lataa OSD150 extension"
 
 #. 6.4/applet.js:2419
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Vaakaruudun saamiseksi sinun on ladattava OSD150-laajennus.\n"
+"Paina Lataa-painiketta, etsi sitten hakusana OSD150 ja valitse ⬇-painike."
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:3557
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "Poista OsdWithNumber laajennus"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -650,12 +654,12 @@ msgstr "Suurin voimakkuus (%)"
 #. 6.2->settings-schema.json->startupVolume->description
 #. 6.4->settings-schema.json->startupVolume->description
 msgid "Volume at start-up (%)"
-msgstr ""
+msgstr "Voimakkuus käynnistyksen jälkeen (%)"
 
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr ""
+msgstr "Arvo -1 tarkoittaa \"ei muutosta\""
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -853,7 +857,7 @@ msgstr "Näytä aina \"Mykistä sisääntulo\" pudotusvalikossa."
 #. 6.2->settings-schema.json->muteSoundOnClosing->description
 #. 6.4->settings-schema.json->muteSoundOnClosing->description
 msgid "Mute sound on closing"
-msgstr ""
+msgstr "Mykistä ääni suljettaessa"
 
 #. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
 #. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
@@ -863,6 +867,11 @@ msgid ""
 "applet's icon.\n"
 "It is NOT recommended to check this box."
 msgstr ""
+"Jos huomaat sulkemisen yhteydessä epämiellyttävää ääntä, valitse tämä "
+"ruutu.\n"
+"Sinun on palautettava ääni käynnistyksen yhteydessä painamalla hiiren "
+"keskimmäistä painiketta.\n"
+"Tätä valintaruutua EI suositella yleisesti."
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
@@ -1046,70 +1055,65 @@ msgstr ""
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Kuvakkeen ulkoasu"
 
 #. 6.4->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Icon colors"
-msgstr "Kuvakkeen väri: 0%-100%"
+msgstr "Kuvakkeen värit"
 
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Vieritys"
 
 #. 6.4->settings-schema.json->sectionSound5->title
-#, fuzzy
 msgid "Remove incompatible extensions"
-msgstr "Poista yhteensopimattomat sovelmat"
+msgstr "Poista yhteensopimattomat laajennukset"
 
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Mukautetut komennot"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Näytä Mediakuvake"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Käänteinen vieritystehoste"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr ""
+msgstr "Näytetäänkö medianäppäimet ruudulla"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "Näytä voimakkuuden näyttö käynnistyksen yhteydessä"
+msgstr "Näytä voimakkuuden taso ruudulla"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Näytä ruudussa \"%\""
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Näytä voimakkuuden näyttö käynnistyksen yhteydessä"
+msgstr "Näytä vaakaruutu"
 
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "Näytä voimakkuuden näyttö käynnistyksen yhteydessä"
+msgstr "Näytä säädin ruudulla"
 
 #. 6.4->settings-schema.json->custom-commands-label->description
 msgid ""
 "These commands will appear in the context menu once you've reloaded this "
 "applet."
-msgstr ""
+msgstr "Komennot näkyvät valikossa kun olet ladannut tämän sovelman uudelleen."
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Title"
-msgstr ""
+msgstr "Nimi"
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Komento"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
