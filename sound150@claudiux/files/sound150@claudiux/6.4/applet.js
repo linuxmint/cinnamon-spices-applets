@@ -1967,6 +1967,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("truncatetext", "truncatetext", () => {
             this.on_settings_changed()
         });
+        this.settings.bind("toolongchars", "toolongchars", () => {
+            this.on_settings_changed()
+        });
         this.settings.bind("keepAlbumAspectRatio", "keepAlbumAspectRatio", () => {
             this.on_settings_changed()
         });
@@ -2681,6 +2684,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
     }
 
+    on_panel_height_changed() {
+        this.on_settings_changed();
+    }
+
     on_settings_changed() {
         if (this.playerControl && this._activePlayer)
             this.setAppletTextIcon(this._players[this._activePlayer], true);
@@ -3308,19 +3315,26 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     setAppletText(player) {
         this.title_text = "";
-        if (this.isHorizontal && this.showtrack && player && player._playerStatus == "Playing") {
+        if (this.isHorizontal && this.showtrack && player && player._playerStatus != "Stopped") {
             if (player._artist == _("Unknown Artist")) {
-                this.title_text = player._title;
+                this.title_text = this._truncate(player._title);
             } else {
-                this.title_text = player._title + ' - ' + player._artist;
-            }
-            const glyphs = Util.splitByGlyph(this.title_text);
-            if (glyphs.length > this.truncatetext) {
-                this.title_text = glyphs.slice(0, this.truncatetext - 3).join("") + "...";
+                if (this._panelHeight >= 40)
+                    this.title_text = this._truncate(player._artist) + "\n" + this._truncate(player._title);
+                else
+                    this.title_text = this._truncate(player._title + ' - ' + player._artist);
             }
         }
         //this.set_applet_label(this.title_text);
         //~ log("setAppletText: this.title_text:\n"+this.title_text, true)
+    }
+
+    _truncate(text) {
+        const glyphs = Util.splitByGlyph(text);
+        if (glyphs.length > this.truncatetext) {
+            return glyphs.slice(0, this.truncatetext - this.toolongchars.length).join("") + this.toolongchars;
+        }
+        return text;
     }
 
     setAppletTextIcon(player, icon) {
@@ -3328,7 +3342,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (player && player._owner != this._activePlayer)
             return;
         this.setAppletIcon(player, icon);
-        this.setAppletText(player);
         this.setAppletTooltip();
     }
 
@@ -3351,6 +3364,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     tooltips.push(this.player._title.replace(/\&/g, "&amp;").replace(/\"/g, ""));
                 }
             }
+            this.setAppletText(this.player);
         }
         if (!this._playerctl) {
             if (tooltips.length != 0) tooltips.push("");
@@ -3994,8 +4008,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.showVolumeLevelNearIcon) {
             //~ this._applet_label.set_text(""+this.volume+ (this.title_text.length>0) ? " - "+this.title_text : "");
             label = "" + this.volume;
-            if (this.title_text.length > 0)
-                label += " - " + this.title_text;
+            if (this.title_text.length > 0) {
+                if (this._panelHeight >= 60)
+                    label += "\n" + this.title_text;
+                else
+                    label += " - " + this.title_text;
+            }
 
             try {
                 this.set_applet_label(label);

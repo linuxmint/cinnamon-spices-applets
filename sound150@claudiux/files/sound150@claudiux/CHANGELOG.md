@@ -1,3 +1,7 @@
+### v11.2.0~20250404
+  * Horizontal panel: keep title when paused.
+  * New option: "If the title is too long, end it with" (chosen characters).
+
 ### v11.1.0~20250403
   * Can transfer Artist and Title to AlbumArt3.0 desklet.
 

@@ -62,6 +62,7 @@
       "keys": [
         "showtrack",
         "truncatetext",
+        "toolongchars",
         "middleClickAction",
         "middleShiftClickAction",
         "horizontalScroll",
@@ -262,6 +263,13 @@
     "step": 1,
     "description": "Limit song information to",
     "dependency": "showtrack"
+  },
+  "toolongchars": {
+    "type": "entry",
+    "default": "...",
+    "description": "If the title is too long, end it with:",
+    "dependency": "showtrack",
+    "tooltip": "Emoji accepted"
   },
   "middleClickAction": {
     "type": "combobox",
