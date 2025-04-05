@@ -26,14 +26,9 @@ const {
     xml2json
 } = require("./lib/xml2json.min");
 const {
-    _sourceIds,
     timeout_add_seconds,
-    timeout_add,
     setTimeout,
     clearTimeout,
-    setInterval,
-    clearInterval,
-    source_exists,
     source_remove,
     remove_all_sources
 } = require("./lib/mainloopTools");
@@ -1964,6 +1959,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("showalbum", "showalbum", () => {
             this.on_settings_changed()
         });
+        this.settings.bind("showalbumDelay", "showalbumDelay", () => {
+            this.on_settings_changed()
+        });
         this.settings.bind("truncatetext", "truncatetext", () => {
             this.on_settings_changed()
         });
@@ -3108,12 +3106,25 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.old_volume = "" + volume + "%";
             var intervalId = null;
 
-            intervalId = Util.setInterval(() => {
+            intervalId = setTimeout(() => {
+                clearTimeout(intervalId);
                 if (this._applet_tooltip)
                     this._applet_tooltip.hide();
-                Util.clearInterval(intervalId);
-                return false
-            }, 5000);
+                if (this.playerControl && this._activePlayer)  {
+                    let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
+                    let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
+                    let file = dir_children.next_file(null);
+                    if (file != null) {
+                        //~ logDebug("file.get_name(): " + file.get_name());
+                        this.setAppletTextIcon(this._players[this._activePlayer], ALBUMART_PICS_DIR + "/" + file.get_name());
+                    } else {
+                        this.setAppletTextIcon(this._players[this._activePlayer], true);
+                    }
+                    dir_children.close(null);
+                } else {
+                    this.setAppletTextIcon();
+                }
+            }, 1000 * this.showalbumDelay);
         } else {
             if (this._applet_tooltip)
                 this._applet_tooltip.hide();
@@ -3337,7 +3348,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         return text;
     }
 
-    setAppletTextIcon(player, icon) {
+    setAppletTextIcon(player=null, icon=null) {
         this.player = player;
         if (player && player._owner != this._activePlayer)
             return;
