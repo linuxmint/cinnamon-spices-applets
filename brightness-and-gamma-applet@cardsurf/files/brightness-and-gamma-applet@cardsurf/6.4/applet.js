@@ -8,6 +8,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const Gettext = imports.gettext;
+const PopupMenu = imports.ui.popupMenu;
 
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
@@ -58,6 +59,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.screen_outputs = {};
         this.menu_item_screen_position = 0;
         this.menu_item_outputs_position = 1;
+        this.menu_item_presets_position = 2;
         this.menu_item_screen = null;
         this.menu_item_outputs = null;
         this.menu_sliders = null;
@@ -264,6 +266,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         [Settings.BindingDirection.IN, "minimum_gamma", this.on_gamma_range_changed],
                         [Settings.BindingDirection.IN, "maximum_gamma", this.on_gamma_range_changed],
                         [Settings.BindingDirection.IN, "options_type", this.on_options_type_changed],
+                        [Settings.BindingDirection.IN, "preset_list", this._init_menu_item_presets],
                         [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "last_values_string", null] ]) {
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
@@ -613,6 +616,33 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _init_context_menu() {
         this._init_menu_item_screen();
         this._init_menu_item_outputs();
+        this._init_menu_item_presets();
+    }
+
+    _init_menu_item_presets() {
+        //~ let presets = this.preset_list;
+        if (this.menu_item_presets) {
+            let children = this._applet_context_menu._getMenuItems();
+            children[this.menu_item_presets_position].destroy();
+        }
+        this.menu_item_presets = new PopupMenu.PopupSubMenuMenuItem(_("Presets"));
+        for (let preset of this.preset_list) {
+            if (preset.show) {
+                this.menu_item_presets.menu.addAction(preset["name"], () => {
+                    this.brightness = Math.max(preset["brightness"], this.minimum_brightness);
+                    this.gamma_red = Math.max(preset["gamma_red"], this.minimum_gamma);
+                    this.gamma_green = Math.max(preset["gamma_green"], this.minimum_gamma);
+                    this.gamma_blue = Math.max(preset["gamma_blue"], this.minimum_gamma);
+                    this.menu_sliders.update_items_brightness();
+                    this.menu_sliders.update_items_gamma_red();
+                    this.menu_sliders.update_items_gamma_green();
+                    this.menu_sliders.update_items_gamma_blue();
+                    this.update_xrandr();
+                    this.update_tooltip();
+                });
+            }
+        }
+        this._applet_context_menu.addMenuItem(this.menu_item_presets, this.menu_item_presets_position);
     }
 
     _init_menu_item_screen() {
