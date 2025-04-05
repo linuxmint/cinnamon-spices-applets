@@ -1,3 +1,6 @@
+### v11.3.0~20250405
+  * New option: Delay between icon and album art display.
+
 ### v11.2.0~20250404
   * Horizontal panel: keep title when paused.
   * New option: "If the title is too long, end it with" (chosen characters).

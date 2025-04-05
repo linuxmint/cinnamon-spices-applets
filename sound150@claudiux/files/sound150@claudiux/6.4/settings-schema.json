@@ -85,6 +85,7 @@
       "title": "Icon appearance",
       "keys": [
         "showalbum",
+        "showalbumDelay",
         "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
@@ -303,6 +304,15 @@
     "type": "switch",
     "default": true,
     "description": "Show album art as icon",
+    "dependency": "playerControl"
+  },
+  "showalbumDelay": {
+    "type": "scale",
+    "default": 5,
+    "min": 0,
+    "max":10,
+    "step": 1,
+    "description": "Delay between icon and album art display (seconds)",
     "dependency": "playerControl"
   },
   "keepAlbumAspectRatio": {
