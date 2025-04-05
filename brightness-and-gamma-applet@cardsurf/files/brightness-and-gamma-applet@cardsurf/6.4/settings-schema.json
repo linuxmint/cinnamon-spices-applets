@@ -1,7 +1,58 @@
 {
-    "configuration_start": {
-        "type": "header",
-        "description": "Configuration"
+    "BGAlayout" : {
+        "type": "layout",
+        "pages": ["page_general", "page_presets"],
+        "page_general": {
+            "type": "page",
+            "title" : "General",
+            "sections" : ["section_config", "section_values", "section_gui"]
+        },
+        "page_presets": {
+            "type": "page",
+            "title" : "Presets",
+            "sections" : ["section_presets"]
+        },
+        "section_config": {
+            "type": "section",
+            "title": "Configuration",
+            "keys": [
+                "disable_nightmode",
+                "apply_startup",
+                "apply_every",
+                "apply_asynchronously",
+                "update_scroll",
+                "scroll_step",
+                "brightness_up_shortcut",
+                "brightness_down_shortcut"
+            ]
+        },
+        "section_values": {
+            "type": "section",
+            "title": "Values",
+            "keys": [
+                "minimum_brightness",
+                "maximum_brightness",
+                "minimum_gamma",
+                "maximum_gamma",
+                "save_every"
+            ]
+        },
+        "section_gui": {
+            "type": "section",
+            "title": "Gui",
+            "keys": [
+                "options_type",
+                "gui_icon_filepath"
+            ]
+        },
+        "section_presets": {
+            "type": "section",
+            "title": "Your presets",
+            "keys": [
+                "preset_label",
+                "preset_list"
+            ]
+        }
     },
     "disable_nightmode" : {
         "type" : "checkbox",
@@ -57,14 +108,7 @@
         "default": "::",
         "description": "Hotkey to Decrease brightness"
     },
-    "configuration_end" : {
-        "type" : "separator"
-    },
 
-    "values_start": {
-        "type": "header",
-        "description": "Values"
-    },
     "minimum_brightness": {
         "type": "spinbutton",
         "default": 30,
@@ -115,14 +159,7 @@
         "description": "Save every",
         "tooltip" : "How often to save last used values"
     },
-    "values_end": {
-        "type" : "separator"
-    },
 
-    "gui_start": {
-        "type": "header",
-        "description": "Gui"
-    },
     "options_type" : {
         "type": "combobox",
         "default" : 0,
@@ -140,8 +177,48 @@
         "description" : "Icon",
         "tooltip": "An icon displayed in a panel"
     },
-    "gui_end" : {
-        "type" : "separator"
+
+    "preset_label": {
+        "type": "label",
+        "description": "You can define or modify presets below, which can then be accessed via the applet's context menu."
+    },
+    "preset_list": {
+        "type": "list",
+        "description": "Your presets",
+        "columns" : [
+            {"id": "name", "title": "Name", "type": "string", "expand-width": true},
+            {"id": "show", "title": "Show\nin menu", "type": "boolean", "align": 0.5},
+            {"id": "brightness", "title": "Brightness", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "gamma_red", "title": "Gamma\nRed", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "gamma_green", "title": "Gamma\nGreen", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 100}
+        ],
+        "default": [
+            {
+                "name": "All values at maximum",
+                "show": true,
+                "brightness": 100,
+                "gamma_red": 100,
+                "gamma_green": 100,
+                "gamma_blue": 100
+            },
+            {
+                "name": "Day-time comfort",
+                "show": true,
+                "brightness": 80,
+                "gamma_red": 100,
+                "gamma_green": 95,
+                "gamma_blue": 90
+            },
+            {
+                "name": "Night-time comfort",
+                "show": true,
+                "brightness": 70,
+                "gamma_red": 100,
+                "gamma_green": 90,
+                "gamma_blue": 80
+            }
+        ]
     },
 
     "last_values_string" : {
