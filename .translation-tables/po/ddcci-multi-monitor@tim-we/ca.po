@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-20 15:38-0400\n"
+"PO-Revision-Date: 2024-07-21 03:21+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->description
+#: applet.js:19
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
+
+#: applet.js:162
+msgid "Detect displays"
+msgstr "Detectar monitors"
+
+#: applet.js:174
+msgid "Detecting displays..."
+msgstr "Detectant monitors..."
+
+#: applet.js:263
+msgid "Failed to detect displays."
+msgstr "No s'han pogut detectar monitors."
+
+#: applet.js:264
+msgid "Make sure you have ddcutil installed and the correct permissions."
+msgstr ""
+"Assegureu-vos que teniu 'ddcutil' instal·lat i els permisos correctes."
+
+#: applet.js:265
+msgid "Error:"
+msgstr "Error:"
+
+#. metadata.json->name
+msgid "DDC/CI Multi-Monitor"
+msgstr "Multi-Monitor DDC/CI"

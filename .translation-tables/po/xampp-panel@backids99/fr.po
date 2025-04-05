@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 23:15+0800\n"
+"PO-Revision-Date: 2023-04-27 16:58+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:40
+msgid "Xampp Panel"
+msgstr "Panneau XAMPP"
+
+#: applet.js:48
+msgid "Start XAMPP manager"
+msgstr "Démarrer le gestionnaire de XAMPP"
+
+#: applet.js:51
+msgid "XAMPP Start"
+msgstr "Démarrer XAMPP"
+
+#: applet.js:55
+msgid "XAMPP Stop"
+msgstr "Arrêter XAMPP"
+
+#: applet.js:59
+msgid "XAMPP Restart"
+msgstr "Redémarrer XAMPP"
+
+#: applet.js:66
+msgid "Open Web Dir"
+msgstr "Ouvrir le dossier web"
+
+#: applet.js:70
+msgid "Launch Web Dir"
+msgstr "Lancer le dossier web"
+
+#: applet.js:74
+msgid "Launch phpMyAdmin"
+msgstr "Lancer phpMyAdmin"
+
+#: applet.js:78
+msgid "Edit default php.ini"
+msgstr "Éditer le fichier php.ini par défaut"
+
+#. xampp-panel@backids99->metadata.json->description
+msgid "A Panel Menu for XAMPP Web Developers"
+msgstr "Un menu pour les développeurs XAMPP"
+
+#. xampp-panel@backids99->metadata.json->name
+msgid "Xampp Panel Menu"
+msgstr "Menu du panneau XAMPP"

@@ -1,0 +1,27 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+
+#. applet.js:85
+msgid "RELOAD ALL"
+msgstr ""
+
+#. applet.js:389
+msgid "Reload Current Theme"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
