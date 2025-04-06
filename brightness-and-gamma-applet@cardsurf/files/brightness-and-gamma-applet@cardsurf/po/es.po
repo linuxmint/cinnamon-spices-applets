@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-05 06:30+0200\n"
-"PO-Revision-Date: 2025-04-02 16:46-0300\n"
+"PO-Revision-Date: 2025-04-05 21:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -57,7 +57,7 @@ msgstr "Azul"
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:628
 msgid "Presets"
-msgstr ""
+msgstr "Preajustes"
 
 #. metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
@@ -238,12 +238,12 @@ msgstr "Icono mostrado en el panel"
 
 #. 6.4->settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. 6.4->settings-schema.json->section_presets->title
 #. 6.4->settings-schema.json->preset_list->description
 msgid "Your presets"
-msgstr ""
+msgstr "Tus preajustes"
 
 #. 6.4->settings-schema.json->disable_nightmode->description
 msgid "Disable Night Mode"
@@ -273,34 +273,41 @@ msgid ""
 "You can define or modify presets below, which can then be accessed via the "
 "applet's context menu."
 msgstr ""
+"A continuación puede definir o modificar los preajustes, a los que podrá "
+"acceder a través del menú contextual del applet."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Show\n"
 "in menu"
 msgstr ""
+"Mostrar\n"
+"en el menú"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Red"
-msgstr "Gama de colores"
+msgstr ""
+"Gamma\n"
+"Rojo"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Green"
-msgstr "Verde"
+msgstr ""
+"Gamma\n"
+"Verde"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Blue"
-msgstr "Gama de colores"
+msgstr ""
+"Gamma\n"
+"Azul"
