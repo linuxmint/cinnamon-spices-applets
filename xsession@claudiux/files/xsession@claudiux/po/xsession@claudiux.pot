@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xsession@claudiux 3.0.0\n"
+"Project-Id-Version: xsession@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-31 22:25+0200\n"
+"POT-Creation-Date: 2025-04-06 20:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,95 +17,99 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:50
+#. applet.js:51
 msgid "Applet"
 msgstr ""
 
-#. applet.js:51
+#. applet.js:52
 msgid "Desklet"
 msgstr ""
 
-#. applet.js:52
+#. applet.js:53
 msgid "Extension"
 msgstr ""
 
-#. applet.js:53
+#. applet.js:54
 msgid "Applets"
 msgstr ""
 
-#. applet.js:54
+#. applet.js:55
 msgid "Desklets"
 msgstr ""
 
-#. applet.js:55
+#. applet.js:56
 msgid "Extensions"
 msgstr ""
 
-#. applet.js:85
+#. applet.js:86
 msgid "RELOAD ALL"
 msgstr ""
 
-#. applet.js:211
+#. applet.js:213
 msgid "Middle-click: \n"
 msgstr ""
 
-#. applet.js:211 applet.js:272
+#. applet.js:213 applet.js:274
 msgid "Show .xsession-errors"
 msgstr ""
 
-#. applet.js:287
-msgid "Restart Cinnamon"
+#. applet.js:288
+msgid "Show latest messages"
 msgstr ""
 
 #. applet.js:303
+msgid "Restart Cinnamon"
+msgstr ""
+
+#. applet.js:319
 msgid "--- Reload Spices ---"
 msgstr ""
 
-#. applet.js:309
+#. applet.js:325
 msgid "Reload Applet:"
 msgstr ""
 
-#. applet.js:336
+#. applet.js:352
 msgid "Reload Desklet:"
 msgstr ""
 
-#. applet.js:363
+#. applet.js:379
 msgid "Reload Extension:"
 msgstr ""
 
-#. applet.js:389
+#. applet.js:405
 msgid "Reload Current Theme"
 msgstr ""
 
-#. applet.js:403
+#. applet.js:419
 msgid "--- Settings for ---"
 msgstr ""
 
-#. applet.js:409
+#. applet.js:425
 msgid "Applet:"
 msgstr ""
 
-#. applet.js:418
+#. applet.js:434
 msgid "Desklet:"
 msgstr ""
 
-#. applet.js:427
+#. applet.js:443
 msgid "Extension:"
 msgstr ""
 
-#. applet.js:436
+#. applet.js:452
 msgid "--- View Code ---"
 msgstr ""
 
-#. applet.js:442
+#. applet.js:458
 msgid "View Applet Code for:"
 msgstr ""
 
-#. applet.js:451
+#. applet.js:467
 msgid "View Desklet Code for:"
 msgstr ""
 
-#. applet.js:460
+#. applet.js:476
 msgid "View Extension Code for:"
 msgstr ""
 
@@ -170,4 +174,20 @@ msgstr ""
 
 #. settings-schema.json->show_reload_all->tooltip
 msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr ""
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr ""
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr ""
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
 msgstr ""

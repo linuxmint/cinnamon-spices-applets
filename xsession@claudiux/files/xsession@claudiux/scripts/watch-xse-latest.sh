@@ -1,4 +1,6 @@
 #!/bin/bash
+NBLINES=$1
+[[ -z $NBLINES ]] && NBLINES=50
 LOGFILE=$HOME/.xsession-errors
 APPLET="xsession@claudiux"
 ICON=$HOME/.local/share/cinnamon/applets/$APPLET/icons/face-glasses-symbolic.svg
@@ -8,9 +10,9 @@ TITLE="$HOME/.xsession-errors"
 STR_EDIT=$(gettext -d nemo Edit)
 ZVERSION=$(zenity --version | cut -d"." -f1)
 if [ "v$ZVERSION" = "v3" ]; then {
-    tail --lines=+1 -f $LOGFILE | zenity --title "$TITLE" --text-info --width 1400 --height 960 --window-icon="$ICON" --ok-label="$STR_EDIT" #--extra-button "Restart Cinnamon" --ok-button "OK"
+    tail --lines=$NBLINES -f $LOGFILE | zenity --title "$TITLE" --text-info --width 1400 --height 960 --window-icon="$ICON" --ok-label="$STR_EDIT" #--extra-button "Restart Cinnamon" --ok-button "OK"
 }; else {
-    tail --lines=+1 -f $LOGFILE | zenity --title "$TITLE" --text-info --width 1400 --height 960 --icon="$ICON" --ok-label="$STR_EDIT"
+    tail --lines=$NBLINES -f $LOGFILE | zenity --title "$TITLE" --text-info --width 1400 --height 960 --icon="$ICON" --ok-label="$STR_EDIT"
 }; fi
 
 RESULT=$(echo -n "$?")
