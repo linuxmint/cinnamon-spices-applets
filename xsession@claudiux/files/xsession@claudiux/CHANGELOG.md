@@ -1,3 +1,9 @@
+### v4.0.0~20250406
+  * Added ability to edit error messages.
+  * Added ability to show only latest messages. Number of latest messages can be set.
+  * Fixes #7044.
+  * Fixes #7045.
+
 ### v3.0.0~20250331
   * Added option to Reload All spices of a given type.
   * Now can reload current theme.

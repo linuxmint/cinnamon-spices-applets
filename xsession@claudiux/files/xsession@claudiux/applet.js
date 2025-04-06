@@ -35,6 +35,7 @@ const SPICES_DIR = HOME_DIR + "/.local/share/cinnamon"
 const APPLET_DIR = SPICES_DIR + "/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const WATCHXSE_SCRIPT = SCRIPTS_DIR + "/watch-xse.sh";
+const WATCHXSE_LATEST_SCRIPT = SCRIPTS_DIR + "/watch-xse-latest.sh";
 const ICONS_DIR = APPLET_DIR + "/icons";
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -202,6 +203,7 @@ class LGS extends Applet.IconApplet {
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
         this.settings.bind("icon_size", "icon_size");
         this.settings.bind("show_reload_all", "show_reload_all");
+        this.settings.bind("number_latest", "number_latest");
 
         // Left click menu:
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -277,11 +279,25 @@ class LGS extends Applet.IconApplet {
                     clearTimeout(id);
                     Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
                 },
-                0);
+                300);
             }
         );
 
         sectionHead.addMenuItem(itemWatchXSE);
+
+        let itemWatchXSELatest = new PopupMenu.PopupIconMenuItem(_("Show latest messages"), "bottom", St.IconType.SYMBOLIC);
+        itemWatchXSELatest.connect(
+            "activate",
+            () => {
+                let id = setTimeout( () => {
+                    clearTimeout(id);
+                    Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
+                },
+                300);
+            }
+        );
+
+        sectionHead.addMenuItem(itemWatchXSELatest);
 
         // Restart Cinnamon:
         let itemReloadCinnamon = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "restart", St.IconType.SYMBOLIC);
