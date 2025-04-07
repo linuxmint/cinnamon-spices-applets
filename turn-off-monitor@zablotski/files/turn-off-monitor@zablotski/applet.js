@@ -53,6 +53,14 @@ MyApplet.prototype = {
             null
         );
 
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            'screenlock',
+            'screenlock',
+            null,
+            null
+        );
+
+
         // Keybinding:
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "keybinding",
@@ -90,6 +98,9 @@ MyApplet.prototype = {
             xinput disable $m; done'],
             null
         );
+        if (this.screenlock) {
+                Util.spawnCommandLine('cinnamon-screensaver-command --lock');
+        }
         Util.spawnCommandLine('xset dpms force off');
         setTimeoutInSeconds(
             function () {
