@@ -30,7 +30,7 @@ for TYPE in applets desklets extensions themes actions; do {
 
         [[ -f  ${DEST_FILE} ]] && rm -f ${DEST_FILE}
 
-        [ -f ${TMP_FILE} ] && mv -f ${TMP_FILE} ${DEST_FILE}
+        [[ -f ${TMP_FILE} ]] && mv -f ${TMP_FILE} ${DEST_FILE}
         sleep 2
 }; done
 
