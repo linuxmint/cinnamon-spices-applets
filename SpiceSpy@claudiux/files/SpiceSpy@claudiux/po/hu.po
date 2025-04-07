@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-27 10:32+0100\n"
+"POT-Creation-Date: 2025-04-07 12:12+0200\n"
 "PO-Revision-Date: 2024-11-24 19:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,35 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:127
+#. applet.js:206
 msgid "score"
 msgstr ""
 
-#. applet.js:139
+#. applet.js:218
 msgid "comments"
 msgstr ""
 
-#. applet.js:152
+#. applet.js:231
 msgid "recent issues"
 msgstr ""
 
-#. applet.js:164
+#. applet.js:243
 msgid "translations"
 msgstr ""
 
-#. applet.js:737
-msgid "Mark all as read"
-msgstr "Összes megjelölése olvasottként"
-
-#. applet.js:746
-msgid "Refresh"
-msgstr "Frissítés"
-
-#. applet.js:759
+#. applet.js:851
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:832
+#. applet.js:936
+msgid "Mark all as read"
+msgstr "Összes megjelölése olvasottként"
+
+#. applet.js:947
+msgid "Refresh"
+msgstr "Frissítés"
+
+#. applet.js:959
+msgid "Refreshing in progress"
+msgstr ""
+
+#. applet.js:970
 msgid "Configure..."
 msgstr "Beállítások…"
 
@@ -101,9 +105,37 @@ msgstr "Minden Spice ikon megjelenítése a menüben"
 msgid "Icon size"
 msgstr "Ikonméret"
 
-#. settings-schema.json->icon-size->units
-msgid "pixels"
-msgstr "képpont"
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr ""
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
