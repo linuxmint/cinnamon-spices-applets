@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-06 20:46+0200\n"
-"PO-Revision-Date: 2025-04-01 12:53-0300\n"
+"PO-Revision-Date: 2025-04-07 10:27-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -56,7 +56,7 @@ msgstr "Mostrar .xsession-errors"
 
 #. applet.js:288
 msgid "Show latest messages"
-msgstr ""
+msgstr "Mostrar los últimos mensajes"
 
 #. applet.js:303
 msgid "Restart Cinnamon"
@@ -184,16 +184,16 @@ msgstr ""
 
 #. settings-schema.json->section3->description
 msgid "Latest messages"
-msgstr ""
+msgstr "Últimos mensajes"
 
 #. settings-schema.json->number_latest->description
 msgid "Number of latest messages to show"
-msgstr ""
+msgstr "Número de últimos mensajes a mostrar"
 
 #. settings-schema.json->number_latest->tooltip
 msgid "(Including empty lines.)"
-msgstr ""
+msgstr "(Incluidas las líneas vacías)"
 
 #. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
 msgid "-d"
-msgstr ""
+msgstr "-d"
