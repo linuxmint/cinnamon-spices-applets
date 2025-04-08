@@ -39,7 +39,6 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 const DEL_SONG_ARTS_SCRIPT = PATH2SCRIPTS + "/del_song_arts.sh";
-//~ const RSONGART_DIR = `${HOME_DIR}/.config/Radio3.0/song-art`;
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
@@ -75,7 +74,7 @@ const RUNTIME_DIR = GLib.get_user_runtime_dir();
 const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
 
 // how long to show the output icon when volume is adjusted during media playback.
-const OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
+var OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
 const IS_OSD150_ENABLED = () => {
     var enabled = false;
@@ -1669,8 +1668,10 @@ class Player extends PopupMenu.PopupMenuSection {
         } else if (status == "Paused") {
             this._playButton.setData("media-playback-start", _("Play"));
             this.playerIcon.set_icon_name("media-playback-pause");
-            this._applet.setAppletTextIcon(this, false);
+            //~ this._applet.setAppletTextIcon(this, false);
+            this._applet.setAppletTextIcon(this, true);
             this._seeker.pause();
+            this._applet.volume_near_icon();
         } else if (status == "Stopped") {
             this._playButton.setData("media-playback-start", _("Play"));
             this.playerIcon.set_icon_name("media-playback-stop");
@@ -1745,8 +1746,10 @@ class Player extends PopupMenu.PopupMenuSection {
                     randomIntegerInInterval(1000000, 9999999).toString()
                 ));
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt*'".format(ALBUMART_PICS_DIR));
-                Util.spawnCommandLineAsync("bash -c 'cp %s %s/R3SongArt%s'".format(
+                //~ logDebug("_showCover(): Radio3.0 is not running.");
+                //~ Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt*'".format(ALBUMART_PICS_DIR));
+                Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt* ; sleep 1 ; cp %s %s/R3SongArt%s'".format(
+                    ALBUMART_PICS_DIR,
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(1000000, 9999999).toString()
@@ -1903,7 +1906,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         super(orientation, panel_height, instanceId);
 
         Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
-        Util.spawnCommandLineAsync("bash -c 'mkdir -p %s'".format(ALBUMART_PICS_DIR));
+        Util.spawnCommandLineAsync("bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
         Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/rm_tmp_files.sh'");
 
         this.orientation = orientation;
@@ -1917,6 +1920,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.oldPlayerIcon0 = null;
         this._ownerChangedId = null;
+
+        this.allowChangeArt = true;
 
         this.title_text = "";
 
@@ -2329,6 +2334,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_leave_event(actor, event) {
+        if (this.playerControl && this._activePlayer)
+            this.setAppletTextIcon(this._players[this._activePlayer], true);
+        else
+            this.setAppletTextIcon();
+
         this.set_applet_tooltip("");
     }
 
@@ -2687,6 +2697,9 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_settings_changed() {
+        OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
+        if (this.showalbum && this.showalbumDelay >= 3)
+            OUTPUT_ICON_SHOW_TIME_SECONDS = this.showalbumDelay - 1;
         if (this.playerControl && this._activePlayer)
             this.setAppletTextIcon(this._players[this._activePlayer], true);
         else
@@ -2748,7 +2761,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._artLooping = true;
         //~ this._loopArtId = timeout_add_seconds(5, this.loopArt.bind(this));
         this._loopArtId = timeout_add_seconds(5, () => {
-            this.loopArt()
+            //~ return this.loopArt();
+            this.loopArt();
         });
         //~ this.loopArt();
 
@@ -2851,6 +2865,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         remove_all_sources();
 
         if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
+            //~ logDebug("on_applet_removed_from_panel(): Radio3.0 is not running.");
             Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt*'".format(ALBUMART_PICS_DIR));
         }
     }
@@ -3106,8 +3121,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.old_volume = "" + volume + "%";
             var intervalId = null;
 
+            this.allowChangeArt = false;
+
             intervalId = setTimeout(() => {
                 clearTimeout(intervalId);
+                this.allowChangeArt = true;
                 if (this._applet_tooltip)
                     this._applet_tooltip.hide();
                 if (this.playerControl && this._activePlayer)  {
@@ -3130,7 +3148,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._applet_tooltip.hide();
         }
 
-        this.volume_near_icon()
+        this.volume_near_icon();
     }
 
     _onButtonPressEvent(actor, event) {
@@ -3303,7 +3321,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             path = null;
         }
 
+        if (!this.allowChangeArt) return; // Here? Not sure. FIXME!!!
+
         if (this.showalbum) {
+            //~ if (path && player && (player === true || player._playerStatus == "Playing") && this.allowChangeArt) { // Maybe here. FIXME!!!
             if (path && player && (player === true || player._playerStatus == "Playing")) {
                 this.setIcon(path, "player-path");
             } else {
@@ -3562,6 +3583,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.menu.addMenuItem(this._outputVolumeSection);
         this.menu.addMenuItem(this._inputVolumeSection);
+
+        //~ this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        //~ this.menu.addMenuItem(this._outputApplicationsMenu);
+        //~ this._outputApplicationsMenu.actor.show();
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -3908,8 +3934,9 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._recordingAppsNum++ === 0) {
                 this._inputSection.actor.show();
                 if (this.mute_in_switch) this.mute_in_switch.actor.show();
-                run_playerctld();
+                //~ run_playerctld();
             }
+            run_playerctld();
         }
     }
 
@@ -3937,7 +3964,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this._inputSection.actor.show();
                         if (this.mute_in_switch) this.mute_in_switch.actor.show();
                     }
-                    //~ kill_playerctld();
+                    kill_playerctld();
                 }
                 if (this._seeker) {
                     //~ logDebug("this._seeker.destroy()");
@@ -3980,7 +4007,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         this._seeker = null;
         kill_playerctld();
-        Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+        if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
+            Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+        }
     }
 
     registerSystrayIcons() {
@@ -3998,14 +4027,15 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _on_reload_this_applet_pressed() {
         kill_playerctld();
-        //~ this._applet_context_menu.close();
-        this.menu.close();
+        if (this._applet_context_menu && this._applet_context_menu.isOpen)
+            this._applet_context_menu.close();
+        //~ this.menu.close();
         // Reload this applet
         let to = setTimeout(() => {
                 clearTimeout(to);
                 Extension.reloadExtension(UUID, Extension.Type.APPLET);
             },
-            300);
+            1000);
     }
 
     _onSystemSoundSettingsPressed() {
@@ -4019,27 +4049,23 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.showVolumeLevelNearIcon) {
             //~ this._applet_label.set_text(""+this.volume+ (this.title_text.length>0) ? " - "+this.title_text : "");
             label = "" + this.volume;
+            if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + this.volume;
             if (this.title_text.length > 0) {
                 if (this._panelHeight >= 60)
                     label += "\n" + this.title_text;
                 else
                     label += " - " + this.title_text;
             }
-
-            try {
-                this.set_applet_label(label);
-            } catch (e) {
-                logError("Can't set applet label: " + e);
-            }
         } else {
             //~ this._applet_label.set_text((this.title_text.length>0) ? ""+this.title_text : "");
             if (this.title_text.length > 0)
                 label = "" + this.title_text;
-            try {
-                this.set_applet_label(label);
-            } catch (e) {
-                logError("Can't set applet label: " + e);
-            }
+            if (this._seeker && this._seeker.status == "Paused") label = "⏸ " + label;
+        }
+        try {
+            this.set_applet_label(label);
+        } catch (e) {
+            logError("Can't set applet label: " + e);
         }
         try {
             this.hide_applet_label(label.length === 0);
