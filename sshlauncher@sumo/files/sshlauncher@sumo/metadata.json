@@ -2,5 +2,5 @@
 "uuid": "sshlauncher@sumo",
 "name": "SSH Launcher",
 "description": "An applet to connect to SSH hosts configured in ~/.ssh/config",
-"version": "0.1.1"
+"version": "0.1.2"
 }

@@ -1,8 +1,6 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const GLib = imports.gi.GLib;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Main = imports.ui.main;
@@ -63,12 +61,12 @@ MyApplet.prototype = {
       this.sshHeadless = false;
       this.sshForwardX = false;
       this.homeDir = GLib.get_home_dir();
-	    this.sshConfig = this.homeDir + "/.ssh/config";
+      this.sshConfig = this.homeDir + "/.ssh/config";
       this.msgSource = new MessageTray.SystemNotificationSource(_("SSH Launcher"));
       Main.messageTray.add(this.msgSource);
       let file = Gio.file_new_for_path(this.sshConfig);
       this.monitor = file.monitor_file(Gio.FileMonitorFlags.NONE, new Gio.Cancellable());
-      this.monitor.connect("changed", Lang.bind(this, this.updateMenu));
+      this.monitor.connect("changed", () => { this.updateMenu() });
       this.addRefreshButton();
       this.updateMenu();
     }
@@ -87,12 +85,12 @@ MyApplet.prototype = {
 
     this.setAppletIcon();
 
-    this.settings.connect("changed::" + CUSTOM_ICON_KEY, Lang.bind(this, function () {
+    this.settings.connect("changed::" + CUSTOM_ICON_KEY, () => {
       this.setAppletIcon();
-    }))
-    this.settings.connect("changed::" + SYMBOLIC_ICON_KEY, Lang.bind(this, function () {
+    });
+    this.settings.connect("changed::" + SYMBOLIC_ICON_KEY, () => {
       this.setAppletIcon();
-    }))
+    });
   },
 
   setAppletIcon: function() {
@@ -114,7 +112,7 @@ MyApplet.prototype = {
 
   addRefreshButton: function() {
     let itemLabel = _("Force Update from SSH config");
-    let refreshMenuItem = new Applet.MenuItem(itemLabel, 'view-refresh', Lang.bind(this, this.updateMenu));
+    let refreshMenuItem = new Applet.MenuItem(itemLabel, 'view-refresh', () => { this.updateMenu() });
     this._applet_context_menu.addMenuItem(refreshMenuItem);
   },
 
@@ -181,10 +179,10 @@ MyApplet.prototype = {
   updateMenu: function() {
     this.menu.removeAll();
     let menuitemHeadless = new PopupMenu.PopupSwitchMenuItem(_("Background (-fN)"));
-    menuitemHeadless.connect('activate', Lang.bind(this, this.toggleHeadless));
+    menuitemHeadless.connect('activate', (event) => { this.toggleHeadless(event) });
     this.menu.addMenuItem(menuitemHeadless);
     let menuitemForwardX = new PopupMenu.PopupSwitchMenuItem(_("Forward X11 (-X)"));
-    menuitemForwardX.connect('activate', Lang.bind(this, this.toggleForwardX));
+    menuitemForwardX.connect('activate', (event) => { this.toggleForwardX(event) });
     this.menu.addMenuItem(menuitemForwardX);
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -214,7 +212,7 @@ MyApplet.prototype = {
 
             let hostname = host.replace("Host ", "");
             let item = new PopupMenu.PopupMenuItem(hostname);
-            item.connect('activate', Lang.bind(this, function() { this.connectTo(hostname); }));
+            item.connect('activate', () => { this.connectTo(hostname); });
             if (inGroup) {
               Grouper.menu.addMenuItem(item);
             } else {
@@ -228,7 +226,7 @@ MyApplet.prototype = {
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     let menuitemEdit = new PopupMenu.PopupMenuItem(_("Edit SSH config"));
-    menuitemEdit.connect('activate', Lang.bind(this, this.editConfig));
+    menuitemEdit.connect('activate', () => { this.editConfig() });
     this.menu.addMenuItem(menuitemEdit);
   },
 
