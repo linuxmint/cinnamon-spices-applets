@@ -2928,7 +2928,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // SONG TITLE, BRAINZ LINK, YT LINK:
       if (this.songTitle && this.songTitle.length > 0) {
         let title = this.songTitle.replace(/\//g, " & ");
-        let query = fixedEncodeURIComponent(title);
+        let query = fixedEncodeURIComponent(title.replace(/\ - /g, ' '));
         let proxy = ""+this.settings.getValue("http-proxy");
         proxy = proxy.trim();
         let proxy_option = (proxy.length > 0) ? ` --proxy "${proxy}"` : "";
@@ -3723,6 +3723,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let command = '%s/get_song_art.sh "%s" "%s"'.format(SCRIPTS_DIR, title, res);
     //~ log("command: "+command, true);
     spawnCommandLineAsync(command);
+    timeout_add_seconds(30, () => {
+      let dir = file_new_for_path(ALBUMART_PICS_DIR);
+      let children = dir.enumerate_children("standard::*", FileQueryInfoFlags.NONE, null);
+      let child = children.next_file(null);
+      if (child == null) {
+        this.download_songArt(title, res);
+      } else {
+        //~ let fileInfo = child.query_info("standard::*,unix::uid",
+                        //~ FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+        //~ let size = fileInfo.get_size();
+        let size = child.get_size();
+        if (size == 0)
+          this.download_songArt(title, res);
+      }
+      return false;
+    });
   }
 
   reload_songArt() {

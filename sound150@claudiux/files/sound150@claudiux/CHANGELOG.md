@@ -1,3 +1,6 @@
+### v11.4.0~20250408
+  * Improved album art display.
+
 ### v11.3.0~20250405
   * New option: Delay between icon and album art display.
 

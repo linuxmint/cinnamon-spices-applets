@@ -1,3 +1,6 @@
+### v3.3.0~20250408
+  * Improved album art download.
+
 ### v3.2.0~20250403
   * Can transfer Artist and Title to AlbumArt3.0 desklet.
 
