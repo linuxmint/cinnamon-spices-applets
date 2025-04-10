@@ -82,7 +82,9 @@ msgstr "Scarica plugin a mio rischio"
 msgid ""
 "A radio applet with 1000's of searchable stations, mpris support, youtube-"
 "download function and more"
-msgstr ""
+msgstr "
+"Un applet radio con migliaia di stazioni ricercabili, supporto a mpris, "
+"funzione youtube-download e altro"
 
 #. 3.0->settings-schema.json->page1->title
 #. 3.0->settings-schema.json->tree->description
@@ -263,12 +265,12 @@ msgstr "Impossibile scaricare il brano da YouTube a causa di un errore."
 #. 4.6->settings-schema.json->youtube-download-cli->options
 #. 6.4->settings-schema.json->youtube-download-cli->options
 msgid "yt-dlp"
-msgstr ""
+msgstr "yt-dlp"
 
 #. 4.6->settings-schema.json->youtube-download-cli->options
 #. 6.4->settings-schema.json->youtube-download-cli->options
 msgid "youtube-dl"
-msgstr ""
+msgstr "youtube-dl"
 
 #. 4.6->settings-schema.json->music-download-dir-select->description
 #. 6.4->settings-schema.json->music-download-dir-select->description
