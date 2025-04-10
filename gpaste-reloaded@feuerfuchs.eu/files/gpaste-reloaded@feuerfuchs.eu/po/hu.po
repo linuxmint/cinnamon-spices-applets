@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-12-27 14:39-0500\n"
-"PO-Revision-Date: 2023-06-30 23:36+0200\n"
+"PO-Revision-Date: 2025-04-10 14:33+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. GPasteNewItemDialog.js:53
 msgid "Please enter the text you want to add to the current history:"
@@ -85,9 +85,8 @@ msgid "Do you really want to empty the current history?"
 msgstr "Tényleg törölni szeretné a jelenlegi előzményeket?"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Instantly access and manage your clipboard history."
-msgstr "Azonnal elérheti és kezelheti a vágólap előzményeit"
+msgstr "Azonnal elérheti és kezelheti a vágólap előzményeit."
 
 #. metadata.json->name
 msgid "GPaste Reloaded"
@@ -100,6 +99,7 @@ msgstr "Bejegyzések megjelenítése"
 #. settings-schema.json->always-show-icon->description
 msgid "Show tray icon, even when the applet is not in use"
 msgstr ""
+"Tálcaikon megjelenítése, még akkor is, ha az applet nincs használatban"
 
 #. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"

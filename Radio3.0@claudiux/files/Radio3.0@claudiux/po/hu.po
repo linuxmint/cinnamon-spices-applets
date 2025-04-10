@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-03 08:57+0200\n"
-"PO-Revision-Date: 2024-11-24 19:40+0100\n"
+"PO-Revision-Date: 2025-04-10 14:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. applet.js:286
 msgid "unassigned"
@@ -25,7 +25,7 @@ msgstr "nincs hozzárendelve"
 
 #. applet.js:287
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Album borító teljes méretben történő megjelenítése"
 
 #. applet.js:391
 msgid "This is your own list of Categories and Radio Stations."
@@ -200,31 +200,31 @@ msgstr "%s bájt = %s GB = %s GiB"
 
 #. applet.js:422
 msgid "Sun."
-msgstr ""
+msgstr "Vas."
 
 #. applet.js:422
 msgid "Mon."
-msgstr ""
+msgstr "Hé."
 
 #. applet.js:422
 msgid "Tue."
-msgstr ""
+msgstr "Ked."
 
 #. applet.js:422
 msgid "Wed."
-msgstr ""
+msgstr "Szer."
 
 #. applet.js:422
 msgid "Thu."
-msgstr ""
+msgstr "Csü."
 
 #. applet.js:422
 msgid "Fri."
-msgstr ""
+msgstr "Pé."
 
 #. applet.js:422
 msgid "Sat."
-msgstr ""
+msgstr "Szo."
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -272,7 +272,7 @@ msgstr "Kattintson egy állomás kiválasztásához"
 
 #. applet.js:2753
 msgid "Wake Up"
-msgstr ""
+msgstr "Ébresztő"
 
 #. applet.js:2831 applet.js:3321 applet.js:5347
 msgid "Configure..."
@@ -283,9 +283,8 @@ msgid "Search for new stations..."
 msgstr "Új állomások keresése..."
 
 #. applet.js:2841
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Frissítse ezt az állomáslistát"
+msgstr "Mintaállomás-lista betöltése"
 
 #. applet.js:2884 applet.js:3325 applet.js:5417
 msgid "Sound Settings"
@@ -433,30 +432,33 @@ msgstr "Bezárás"
 
 #. applet.js:5166 applet.js:5637 applet.js:5655
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #. applet.js:5167
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Radio3.0 kisalkalmazás"
 
 #. applet.js:5170
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "OSD150 bővítmény engedélyezése"
 
 #. applet.js:5171
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"A vízszintes OSD megjelenítéséhez engedélyeznie kell az OSD150 bővítményt."
 
 #. applet.js:5189
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "OSD150 bővítmény letöltése"
 
 #. applet.js:5190
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"A vízszintes OSD-hez le kell töltenie az OSD150 bővítményt.\n"
+"Kattintson a Letöltés gombra, majd keresse meg az OSD150-et, és válassza a ⬇ "
+"gombot."
 
 #. applet.js:5319
 #, javascript-format
@@ -480,9 +482,8 @@ msgid "Schedule a background record..."
 msgstr "Háttérrekord ütemezése..."
 
 #. applet.js:5365
-#, fuzzy
 msgid "Configure the Alarm Clock..."
-msgstr "Beállítások…"
+msgstr "Az ébresztőóra beállítása..."
 
 #. applet.js:5372
 msgid "Extract soundtrack from YouTube video..."
@@ -526,16 +527,16 @@ msgstr "Az állomás logójának megjelenítése"
 
 #. applet.js:5451
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Album Borító kisalkalmazás beállítások"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
 #. applet.js:5456
 msgid "Wake me up!"
-msgstr ""
+msgstr "Ébressz fel!"
 
 #. applet.js:5466
 msgid "Show Album Art on desktop"
-msgstr ""
+msgstr "Album Borító megjelenítése az asztalon"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:5475
@@ -549,27 +550,29 @@ msgstr "Hangerőszint megjelenítése az ikon közelében"
 
 #. applet.js:5634
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Szüksége van az 'Album Borító 3.0' asztalkalmazásra"
 
 #. applet.js:5635
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
-msgstr ""
+msgstr "Telepítheti az első gombra kattintva, majd az Album keresésével."
 
 #. applet.js:5636 applet.js:5654
 msgid "Desklets"
-msgstr ""
+msgstr "Asztalkalmazások"
 
 #. applet.js:5652
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Aktiválnia kell az 'Album Borító 3.0' asztalkalmazást."
 
 #. applet.js:5653
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Az első gombra kattintva aktiválhatja, majd keressen egy Albumot, és a [+] "
+"gombbal hozzáadhatja."
 
 #. applet.js:5960
 msgid "Close without stopping recording"
@@ -814,7 +817,7 @@ msgstr "Hálózat"
 
 #. settings-schema.json->pageAlarmClock->title
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Ébresztőóra"
 
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
@@ -834,7 +837,7 @@ msgstr "Frissítse ezt az állomáslistát"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
-msgstr ""
+msgstr "Csak a Radio++ felhasználóknak"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
@@ -857,9 +860,8 @@ msgid "Search results"
 msgstr "Keresési eredmények"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "Beállítások ehhez: %s"
+msgstr "Beállítások Ablak"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -871,7 +873,7 @@ msgstr "Hangerő lépték"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -958,17 +960,16 @@ msgid "Scheduled recordings"
 msgstr "Ütemezett felvételek"
 
 #. settings-schema.json->sectionWakeMeUp->title
-#, fuzzy
 msgid "Options"
-msgstr "További lehetőségek"
+msgstr "Lehetőségek"
 
 #. settings-schema.json->sectionWorkingDays->title
 msgid "Working Days"
-msgstr ""
+msgstr "Munkanapok"
 
 #. settings-schema.json->sectionWorkOffDays->title
 msgid "Work-Off Days"
-msgstr ""
+msgstr "Munkaszüneti napok"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
@@ -993,7 +994,7 @@ msgstr "Rádióállomások listája"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -1090,7 +1091,7 @@ msgstr "Frissítse az állomáslistámat a Radio Database adataival"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
-msgstr ""
+msgstr "Importáld az állomásaidat a Radio++-ból"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -1163,13 +1164,15 @@ msgstr "Oldal:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Függőleges maximalizálás"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Ha ez a beállítás be van jelölve, akkor a Beállítások ablak a következő "
+"megnyitáskor függőlegesen lesz maximalizálva."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1357,11 +1360,11 @@ msgstr "Hangerő OSD megjelenítése rádióállomás váltásakor"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "'%' megjelenítése az OSD-ben"
 
 #. settings-schema.json->show-horizontal-osd->description
 msgid "Show horizontal OSD"
-msgstr ""
+msgstr "Vízszintes OSD megjelenítése"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -1603,29 +1606,30 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "A letöltött Album Borító minősége"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Teljes felbontás"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Minőség"
+msgstr "Magas minőség"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Közepes"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
 msgstr ""
+"Alapértelmezett: Magas minőség. Válassza ki a hálózati minőségnek megfelelő "
+"értéket."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
@@ -3305,74 +3309,75 @@ msgstr "A 0 azt jelenti, hogy nincs maximum"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
-msgstr ""
+msgstr "Ébressz fel finoman"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->tooltip
 msgid "By checking this box, the sound volume gradually increases."
-msgstr ""
+msgstr "Ha bejelölöd ezt a négyzetet, a hangerő fokozatosan növekszik."
 
 #. settings-schema.json->alarm-clock-volume-begin->description
 msgid "Initial volume (%)"
-msgstr ""
+msgstr "Kezdeti hangerő (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->description
 msgid "Final volume (%)"
-msgstr ""
+msgstr "Végső hangerő (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->tooltip
 msgid "The final volume must be greater than or equal to the initial volume."
 msgstr ""
+"A végső térfogatnak nagyobbnak vagy egyenlőnek kell lennie a kezdeti "
+"térfogattal."
 
 #. settings-schema.json->alarm-clock-volume-transition->description
 msgid "Transition duration (seconds)"
-msgstr ""
+msgstr "Átmenet időtartama (másodperc)"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Sunday"
-msgstr ""
+msgstr "Vasárnap"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Monday"
-msgstr ""
+msgstr "Hétfő"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Tuesday"
-msgstr ""
+msgstr "Kedd"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Wednesday"
-msgstr ""
+msgstr "Szerda"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Thursday"
-msgstr ""
+msgstr "Csütörtök"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Friday"
-msgstr ""
+msgstr "Péntek"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Saturday"
-msgstr ""
+msgstr "Szombat"
 
 #. settings-schema.json->alarm-clock-working-days-time->description
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
-msgstr ""
+msgstr "Ébresztő időpontja"
 
 #. settings-schema.json->alarm-clock-working-days-radio-button->description
 #. settings-schema.json->alarm-clock-workoff-days-radio-button->description
-#, fuzzy
 msgid "Last-listened-to radio station"
-msgstr "A mentett rádióállomások listája"
+msgstr "Utoljára hallgatott rádióállomás"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
-msgstr ""
+msgstr "Aktiválja a csörgést a hangszórók ébrenlétének biztosításához"

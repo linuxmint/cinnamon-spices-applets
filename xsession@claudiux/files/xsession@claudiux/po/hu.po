@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-06 20:46+0200\n"
-"PO-Revision-Date: 2024-11-25 07:32+0100\n"
+"PO-Revision-Date: 2025-04-10 14:49+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. applet.js:51
 msgid "Applet"
@@ -44,7 +44,7 @@ msgstr "Bővítmények"
 
 #. applet.js:86
 msgid "RELOAD ALL"
-msgstr ""
+msgstr "ÖSSZES ÚJRATÖLTÉSE"
 
 #. applet.js:213
 msgid "Middle-click: \n"
@@ -56,7 +56,7 @@ msgstr "Az „.xsession-errors” fájl megjelenítése"
 
 #. applet.js:288
 msgid "Show latest messages"
-msgstr ""
+msgstr "Show latest messages"
 
 #. applet.js:303
 msgid "Restart Cinnamon"
@@ -80,7 +80,7 @@ msgstr "Bővítmény újratöltése:"
 
 #. applet.js:405
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Az aktuális téma újratöltése"
 
 #. applet.js:419
 msgid "--- Settings for ---"
@@ -119,81 +119,79 @@ msgid "Xsession"
 msgstr "Xsession"
 
 #. metadata.json->description
-#, fuzzy
 msgid ""
 "Restart, access source code and configure your Spices (Applets, Desklets, "
 "Extensions). View the contents of your .xsession-errors file in real time. "
 "Restart Cinnamon."
 msgstr ""
-"Lehetővé teszi a Spices kiegészítők (kisalkalmazások, asztalkalmazások, "
-"bővítmények) újraindítását vagy forráskódjának megnyitását, továbbá valós "
-"időben megjeleníti a „.xsession-errors” fájl tartalmát, valamint újraindítja "
-"a Cinnamon környezetet."
+"Indítsa újra, nyissa meg a forráskódot, és konfigurálja a Spices-t "
+"(kisalkalmazások, asztalkalmazások, bővítmények). Tekintse meg valós időben "
+"az .xsession-errors fájl tartalmát. Indítsa újra a Cinnamon-t."
 
 #. settings-schema.json->section1->description
 msgid "Icon size"
-msgstr ""
+msgstr "Ikon mérete"
 
 #. settings-schema.json->icon_size->description
 msgid "Size (in pixels) of menu icons"
-msgstr ""
+msgstr "A menüikonok mérete (pixelben)."
 
 #. settings-schema.json->icon_size->options
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #. settings-schema.json->icon_size->options
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. settings-schema.json->icon_size->options
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #. settings-schema.json->icon_size->options
 msgid "32"
-msgstr ""
+msgstr "32"
 
 #. settings-schema.json->icon_size->options
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #. settings-schema.json->icon_size->options
 msgid "64"
-msgstr ""
+msgstr "64"
 
 #. settings-schema.json->icon_size->options
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #. settings-schema.json->icon_size->options
 msgid "128"
-msgstr ""
+msgstr "128"
 
 #. settings-schema.json->section2->description
 msgid "RELOAD ALL option"
-msgstr ""
+msgstr "ÖSSZES ÚJRATÖLTÉSE opció"
 
 #. settings-schema.json->show_reload_all->description
 msgid "Show the RELOAD ALL option in submenus"
-msgstr ""
+msgstr "Az almenükben jelenítse meg az ÖSSZES ÚJRATÖLTÉSE opciót"
 
 #. settings-schema.json->show_reload_all->tooltip
 msgid "Caution! Reloading all spices of a given type may lead to errors."
-msgstr ""
+msgstr "Vigyázat! Az adott típusú Spice-ok újratöltése hibákhoz vezethet."
 
 #. settings-schema.json->section3->description
 msgid "Latest messages"
-msgstr ""
+msgstr "Legújabb üzenetek"
 
 #. settings-schema.json->number_latest->description
 msgid "Number of latest messages to show"
-msgstr ""
+msgstr "A megjelenítendő legutóbbi üzenetek száma"
 
 #. settings-schema.json->number_latest->tooltip
 msgid "(Including empty lines.)"
-msgstr ""
+msgstr "(Az üres sorokat is beleértve.)"
 
 #. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
 msgid "-d"
-msgstr ""
+msgstr "-d"
