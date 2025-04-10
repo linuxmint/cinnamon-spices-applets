@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-06 01:22+0200\n"
-"PO-Revision-Date: 2024-11-25 07:30+0100\n"
+"PO-Revision-Date: 2025-04-10 14:42+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:188 3.4/applet.js:65
@@ -53,7 +53,7 @@ msgstr "Némítás"
 
 #. 6.2/applet.js:1018 6.4/applet.js:1063
 msgid "Videos"
-msgstr ""
+msgstr "Videók"
 
 #. 6.2/applet.js:1146 6.2/applet.js:1443 6.2/applet.js:1446 6.2/applet.js:1449
 #. 6.2/applet.js:1483 6.2/applet.js:1492 6.2/applet.js:2927 6.2/applet.js:2961
@@ -236,51 +236,51 @@ msgid "Install playerctl"
 msgstr "A playerctl telepítése"
 
 #. 6.4/applet.js:201 6.4/applet.js:1936 6.4/applet.js:1938
-#, fuzzy
 msgid "%"
-msgstr "9%"
+msgstr "%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.4/applet.js:2256
 msgid "Commands"
-msgstr ""
+msgstr "Parancsok"
 
 #. 6.4/applet.js:2266
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Album Borító asztalkalmazás beállításai"
 
 #. 6.4/applet.js:2274
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Borítókép megjelenítése ikonként"
+msgstr "Album Borító megjelenítése az asztalon"
 
 #. 6.4/applet.js:2346
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Szüksége van az 'Album Borító 3.0' asztalkalmazáshoz"
 
 #. 6.4/applet.js:2347
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
-msgstr ""
+msgstr "Úgy telepítheti, hogy az első gombra kattint, majd rákeres az Albumra."
 
 #. 6.4/applet.js:2348 6.4/applet.js:2366
 msgid "Desklets"
-msgstr ""
+msgstr "Asztalkalmazás"
 
 #. 6.4/applet.js:2349 6.4/applet.js:2367 6.4/applet.js:2397
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #. 6.4/applet.js:2364
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Aktiválnia kell az 'Album Borító 3.0' asztalkalmazást"
 
 #. 6.4/applet.js:2365
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Az első gombra kattintva aktiválhatja, majd keressen egy Albumot, és a [+] "
+"gombbal hozzáadhatja."
 
 #. metadata.json->name
 #. 6.4/applet.js:2398
@@ -289,26 +289,30 @@ msgstr "Továbbfejlesztett hangkisalkalmazás"
 
 #. 6.4/applet.js:2401
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "OSD150 bővítmény engedélyezése"
 
 #. 6.4/applet.js:2402
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"A vízszintes OSD megjelenítéséhez engedélyeznie kell az OSD150 bővítményt."
 
 #. 6.4/applet.js:2419
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "OSD150 bővítmény letöltése"
 
 #. 6.4/applet.js:2420
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"A vízszintes OSD-hez le kell töltenie az OSD150 bővítményt.\n"
+"Kattintson a Letöltés gombra, majd keresse meg az OSD150-et, és válassza a ⬇ "
+"gombot."
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:3582
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "Távolítsa el az OsdWithNumber kiterjesztést"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -650,12 +654,12 @@ msgstr "Maximális hangerő (%)"
 #. 6.2->settings-schema.json->startupVolume->description
 #. 6.4->settings-schema.json->startupVolume->description
 msgid "Volume at start-up (%)"
-msgstr ""
+msgstr "Hangerő indításkor (%)"
 
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr ""
+msgstr "A -1 érték azt jelenti, hogy \"nincs változás\""
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -854,7 +858,7 @@ msgstr "Mindig jelenítse meg a „Bemenet némítása” kapcsolót a helyi men
 #. 6.2->settings-schema.json->muteSoundOnClosing->description
 #. 6.4->settings-schema.json->muteSoundOnClosing->description
 msgid "Mute sound on closing"
-msgstr ""
+msgstr "Hang némítása bezáráskor"
 
 #. 6.2->settings-schema.json->muteSoundOnClosing->tooltip
 #. 6.4->settings-schema.json->muteSoundOnClosing->tooltip
@@ -864,6 +868,10 @@ msgid ""
 "applet's icon.\n"
 "It is NOT recommended to check this box."
 msgstr ""
+"Ha kellemetlen zajt észlel a záráskor, jelölje be ezt a négyzetet.\n"
+"Indításkor vissza kell állítania a hangot a kisalkalmazás ikonjára való "
+"középső kattintással.\n"
+"NEM ajánlott bejelölni ezt a négyzetet."
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
@@ -1049,82 +1057,79 @@ msgstr ""
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Ikon megjelenése"
 
 #. 6.4->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Icon colors"
-msgstr "Ikon színe: 0%-100%"
+msgstr "Ikon színek"
 
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Görgetés"
 
 #. 6.4->settings-schema.json->sectionSound5->title
-#, fuzzy
 msgid "Remove incompatible extensions"
-msgstr "Távolítsa el az inkompatibilis kisalkalmazásokat"
+msgstr "Távolítsa el az inkompatibilis bővítményeket"
 
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Egyéni parancsok"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Médiaoptikai ikon megjelenítése"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
-msgstr ""
+msgstr "Ha a cím túl hosszú, fejezze be:"
 
 #. 6.4->settings-schema.json->toolongchars->tooltip
 msgid "Emoji accepted"
-msgstr ""
+msgstr "Emoji elfogadva"
 
 #. 6.4->settings-schema.json->showalbumDelay->description
 msgid "Delay between icon and album art display (seconds)"
-msgstr ""
+msgstr "Késleltetés az ikon és az albumborító megjelenítése között (másodperc)"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Fordított görgetési hatás"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr ""
+msgstr "Megjelenik-e a médiagombok OSD-je vagy sem"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "A hangerőszint megjelenítése az OSD-ben indításkor"
+msgstr "Hangerőszint megjelenítése az OSD-ben"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "'%' megjelenítése az OSD-ben"
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "A hangerőszint megjelenítése az OSD-ben indításkor"
+msgstr "Vízszintes OSD megjelenítése"
 
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "A hangerőszint megjelenítése az OSD-ben indításkor"
+msgstr "A sáv szintjének megjelenítése az OSD-ben"
 
 #. 6.4->settings-schema.json->custom-commands-label->description
 msgid ""
 "These commands will appear in the context menu once you've reloaded this "
 "applet."
 msgstr ""
+"Ezek a parancsok megjelennek a helyi menüben, miután újratöltötte ezt a "
+"kisalkalmazást."
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Title"
-msgstr ""
+msgstr "Cím"
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Parancs"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"

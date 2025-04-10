@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-30 14:17+0200\n"
-"PO-Revision-Date: 2024-11-24 19:41+0100\n"
+"PO-Revision-Date: 2025-04-10 14:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. metadata.json->name
 #. applet.js:225 applet_OLD.js:235
@@ -131,7 +131,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:385
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Kérjük, telepítse ezeket a csomagokat:"
 
 #. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
@@ -139,7 +139,7 @@ msgstr "Néhány függőség nincs telepítve!"
 
 #. lib/checkDependencies.js:401
 msgid "Install these packages now"
-msgstr ""
+msgstr "Telepítse ezeket a csomagokat most"
 
 #. lib/util.js:244
 #, javascript-format
@@ -205,16 +205,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Szerző. JEleniel: támogatás NVidia videókártyákhoz."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Hőmérséklet"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventilátor"
+msgstr "𖣘 Ventilátor"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -407,27 +406,28 @@ msgstr "Karakter méret (az alapértelmezett %-a)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Kijelzőszélesség (pixel) vízszintes panelek esetén"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
 msgstr ""
+"A 0 azt jelenti, hogy automatikus. Ez az érték nem tartalmazza a keretet."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(semmi)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "üres"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "sáv"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Elválasztó"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -438,18 +438,12 @@ msgid "Text Color"
 msgstr "Szövegszín"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Kritikus\n"
-"érték"
+msgstr "Kritikus érték szín"
 
 #. settings-schema.json->high_color->description
-#, fuzzy
 msgid "High Value Color"
-msgstr ""
-"Magas\n"
-"érték"
+msgstr "Magas érték szín"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -545,14 +539,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "Az első emoji ebben a listában a hőmérsékletet jelöli."
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -741,12 +735,11 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "Az első emoji ebben a listában a rajongókra utal."
 
 #. settings-schema.json->strictly_positive_fan->description
-#, fuzzy
 msgid "Show only positive or zero values"
-msgstr "Csak szigorúan pozitív értékeket mutasson"
+msgstr "Csak pozitív vagy nulla értékek megjelenítése"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -795,7 +788,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "Az első emoji ebben a listában a feszültséget jelöli."
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -874,7 +867,7 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "Az első emoji ebben a listában a behatolásra szolgál"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"

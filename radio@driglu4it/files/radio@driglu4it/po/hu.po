@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-20 14:55-0500\n"
-"PO-Revision-Date: 2022-06-04 16:39+0200\n"
+"PO-Revision-Date: 2025-04-10 14:36+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. metadata.json->name
 #. 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
@@ -84,6 +84,8 @@ msgid ""
 "A radio applet with 1000's of searchable stations, mpris support, youtube-"
 "download function and more"
 msgstr ""
+"Rádió kisalkalmazás 1000 kereshető állomással, mpris támogatással, youtube-"
+"letöltés funkcióval és még sok mással"
 
 #. 3.0->settings-schema.json->page1->title
 #. 3.0->settings-schema.json->tree->description
@@ -253,25 +255,23 @@ msgstr ""
 
 #. 4.6->settings-schema.json->youtube-download-cli->description
 #. 6.4->settings-schema.json->youtube-download-cli->description
-#, fuzzy
 msgid "YouTube Download CLI tool"
-msgstr "Letöltés a YouTube-ról"
+msgstr "YouTube letöltési CLI eszköz"
 
 #. 4.6->settings-schema.json->youtube-download-cli->tooltip
 #. 6.4->settings-schema.json->youtube-download-cli->tooltip
-#, fuzzy
 msgid "The CLI tool used to download songs from YouTube"
-msgstr "Egy hiba miatt a zeneszám nem tölthető le a YouTube-ról."
+msgstr "A CLI eszköz, amellyel dalokat tölthet le a YouTube-ról"
 
 #. 4.6->settings-schema.json->youtube-download-cli->options
 #. 6.4->settings-schema.json->youtube-download-cli->options
 msgid "yt-dlp"
-msgstr ""
+msgstr "yt-dlp"
 
 #. 4.6->settings-schema.json->youtube-download-cli->options
 #. 6.4->settings-schema.json->youtube-download-cli->options
 msgid "youtube-dl"
-msgstr ""
+msgstr "youtube-dl"
 
 #. 4.6->settings-schema.json->music-download-dir-select->description
 #. 6.4->settings-schema.json->music-download-dir-select->description
@@ -280,8 +280,5 @@ msgstr "Letöltési mappa"
 
 #. 4.6->settings-schema.json->music-download-dir-select->tooltip
 #. 6.4->settings-schema.json->music-download-dir-select->tooltip
-#, fuzzy
 msgid "Songs downloaded from YouTube will be saved to this directory."
-msgstr ""
-"A YouTube webhelyről letöltött zenék ebbe a mappába kerülnek elmentésre. Ez "
-"a funkció az kisalkalmazás helyi menüjében található"
+msgstr "A YouTube-ról letöltött dalokat a rendszer ebbe a könyvtárba menti."
