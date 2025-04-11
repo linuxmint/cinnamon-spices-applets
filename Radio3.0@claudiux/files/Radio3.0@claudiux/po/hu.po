@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-03 08:57+0200\n"
-"PO-Revision-Date: 2025-04-10 14:00+0200\n"
+"PO-Revision-Date: 2025-04-11 09:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -25,7 +25,7 @@ msgstr "nincs hozzárendelve"
 
 #. applet.js:287
 msgid "Display Album Art at full size"
-msgstr "Album borító teljes méretben történő megjelenítése"
+msgstr "Albumborító teljes méretben történő megjelenítése"
 
 #. applet.js:391
 msgid "This is your own list of Categories and Radio Stations."
@@ -527,7 +527,7 @@ msgstr "Az állomás logójának megjelenítése"
 
 #. applet.js:5451
 msgid "Album Art desklet settings"
-msgstr "Album Borító kisalkalmazás beállítások"
+msgstr "Albumborító kisalkalmazás beállítások"
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
 #. applet.js:5456
@@ -536,7 +536,7 @@ msgstr "Ébressz fel!"
 
 #. applet.js:5466
 msgid "Show Album Art on desktop"
-msgstr "Album Borító megjelenítése az asztalon"
+msgstr "Albumborító megjelenítése az asztalon"
 
 #. settings-schema.json->dont-check-dependencies->description
 #. applet.js:5475
@@ -550,7 +550,7 @@ msgstr "Hangerőszint megjelenítése az ikon közelében"
 
 #. applet.js:5634
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr "Szüksége van az 'Album Borító 3.0' asztalkalmazásra"
+msgstr "Szüksége van az 'Albumborító 3.0' asztalkalmazásra"
 
 #. applet.js:5635
 msgid ""
@@ -564,7 +564,7 @@ msgstr "Asztalkalmazások"
 
 #. applet.js:5652
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr "Aktiválnia kell az 'Album Borító 3.0' asztalkalmazást."
+msgstr "Aktiválnia kell az 'Albumborító 3.0' asztalkalmazást."
 
 #. applet.js:5653
 msgid ""
@@ -1606,7 +1606,7 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr "A letöltött Album Borító minősége"
+msgstr "A letöltött Albumborító minősége"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
