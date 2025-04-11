@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-06 01:22+0200\n"
-"PO-Revision-Date: 2025-04-10 14:42+0200\n"
+"PO-Revision-Date: 2025-04-11 09:25+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -246,15 +246,15 @@ msgstr "Parancsok"
 
 #. 6.4/applet.js:2266
 msgid "Album Art desklet settings"
-msgstr "Album Borító asztalkalmazás beállításai"
+msgstr "Albumborító asztalkalmazás beállításai"
 
 #. 6.4/applet.js:2274
 msgid "Show Album Art on desktop"
-msgstr "Album Borító megjelenítése az asztalon"
+msgstr "Albumborító megjelenítése az asztalon"
 
 #. 6.4/applet.js:2346
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr "Szüksége van az 'Album Borító 3.0' asztalkalmazáshoz"
+msgstr "Szüksége van az 'Albumborító 3.0' asztalkalmazáshoz"
 
 #. 6.4/applet.js:2347
 msgid ""
@@ -272,7 +272,7 @@ msgstr "Mégse"
 
 #. 6.4/applet.js:2364
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr "Aktiválnia kell az 'Album Borító 3.0' asztalkalmazást"
+msgstr "Aktiválnia kell az 'Albumborító 3.0' asztalkalmazást"
 
 #. 6.4/applet.js:2365
 msgid ""
