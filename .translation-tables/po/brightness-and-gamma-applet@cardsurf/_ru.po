@@ -1,0 +1,95 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-05 06:30+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. 6.4->settings-schema.json->page_presets->title
+#. 6.4/applet.js:628
+msgid "Presets"
+msgstr ""
+
+#. settings-schema.json->scroll_step->units
+#. settings-schema.json->minimum_brightness->units
+#. settings-schema.json->maximum_brightness->units
+#. settings-schema.json->minimum_gamma->units
+#. settings-schema.json->maximum_gamma->units
+#. 6.4->settings-schema.json->scroll_step->units
+#. 6.4->settings-schema.json->minimum_brightness->units
+#. 6.4->settings-schema.json->maximum_brightness->units
+#. 6.4->settings-schema.json->minimum_gamma->units
+#. 6.4->settings-schema.json->maximum_gamma->units
+msgid "%"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_general->title
+msgid "General"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_presets->title
+#. 6.4->settings-schema.json->preset_list->description
+msgid "Your presets"
+msgstr ""
+
+#. 6.4->settings-schema.json->disable_nightmode->description
+msgid "Disable Night Mode"
+msgstr ""
+
+#. 6.4->settings-schema.json->disable_nightmode->tooltip
+msgid ""
+"Disable Cinnamon Night Mode while this applet is running.\n"
+"This prevents the screen from flickering.\n"
+"The adjustment time can be up to twice the number of seconds indicated below."
+msgstr ""
+
+#. 6.4->settings-schema.json->brightness_up_shortcut->description
+msgid "Hotkey to Increase brightness"
+msgstr ""
+
+#. 6.4->settings-schema.json->brightness_down_shortcut->description
+msgid "Hotkey to Decrease brightness"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_label->description
+msgid ""
+"You can define or modify presets below, which can then be accessed via the "
+"applet's context menu."
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Name"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Show\n"
+"in menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Red"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Green"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Blue"
+msgstr ""

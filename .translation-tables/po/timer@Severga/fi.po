@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-17 13:45+0100\n"
+"PO-Revision-Date: 2024-11-22 18:18+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:42 applet.js:207 applet.js:232 applet.js:257 applet.js:307
+#: applet.js:423 applet.js:493
+msgid "Timer: inactive"
+msgstr "Ajastin: ei käytössä"
+
+#: applet.js:80 applet.js:223 applet.js:248 applet.js:494
+msgid "In:  00:00:00"
+msgstr "Aika:  00:00:00"
+
+#: applet.js:83 applet.js:224 applet.js:249 applet.js:266 applet.js:316
+#: applet.js:464 applet.js:496
+msgid "At:  --:--:--"
+msgstr "Klo:  --:--:--"
+
+#: applet.js:86
+msgid "Turn off computer on timer"
+msgstr "Sammuta tietokone ajastimesta"
+
+#. settings-schema.json->openSubmenu->options
+#: applet.js:90 applet.js:369
+msgid "Quick setup"
+msgstr "Nopea asetus"
+
+#: applet.js:91
+msgid "        Tip: set slider to zero to deactivate timer"
+msgstr "        Vihje: vedä liukusäädin nollaan ajastuksen poistamiseksi"
+
+#: applet.js:100
+msgid "     00:00:00"
+msgstr "     00:00:00"
+
+#: applet.js:107
+msgid "24:00:00     "
+msgstr "24:00:00     "
+
+#. settings-schema.json->openSubmenu->options
+#: applet.js:121 applet.js:370
+msgid "Precise setup"
+msgstr "Tarkka asetus"
+
+#: applet.js:131 applet.js:156 applet.js:181
+msgid "  +  "
+msgstr "  +  "
+
+#: applet.js:135 applet.js:160 applet.js:185
+msgid "00"
+msgstr "00"
+
+#: applet.js:140 applet.js:165 applet.js:190
+msgid "  -  "
+msgstr "  -  "
+
+#: applet.js:148 applet.js:173
+msgid "  :  "
+msgstr "  :  "
+
+#: applet.js:202
+msgid "Set time (today)"
+msgstr "Aseta aika (tänään)"
+
+#: applet.js:227
+msgid "Set time (tomorrow)"
+msgstr "Aseta aika (huominen)"
+
+#: applet.js:252
+msgid "Set period"
+msgstr "Aseta ajanjakso"
+
+#: applet.js:268
+msgid "Add preset"
+msgstr "Lisää esiasetukseksi"
+
+#. settings-schema.json->openSubmenu->options
+#. settings-schema.json->preset->description
+#. settings-schema.json->preset->tooltip
+#: applet.js:277
+msgid "Presets"
+msgstr "Esiasetukset"
+
+#: applet.js:293
+msgid ""
+"        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
+"preset"
+msgstr ""
+"        Vinkki: käytä \"Tarkka asetus\" ja lisää asetus   [ × ]  "
+"painikkeella poistat asetuksen"
+
+#: applet.js:319
+msgid "[ × ]"
+msgstr "[ × ]"
+
+#: applet.js:454 applet.js:476
+msgid "In:  "
+msgstr "Aika:  "
+
+#: applet.js:460 applet.js:484
+msgid "At:  "
+msgstr "Klo:  "
+
+#: applet.js:486
+msgid "Turn off in "
+msgstr "Sammutetaan "
+
+#: applet.js:486
+msgid "s"
+msgstr "s"
+
+#: applet.js:488
+msgid "Timer: "
+msgstr "Ajastin: "
+
+#. metadata.json->name
+#: applet.js:512
+msgid "Timer"
+msgstr "Timer"
+
+#: applet.js:512
+msgid "Time's up!"
+msgstr "Aika on kulunut!"
+
+#. metadata.json->description
+msgid "A timer applet"
+msgstr ""
+"Voit tehdä hälytyksiä tänään tai huomenna. Voit myös sammuttaa tietokoneen "
+"ajastetusti"
+
+#. settings-schema.json->soundOn->description
+#. settings-schema.json->soundOn->tooltip
+msgid "Play sound on timer"
+msgstr "Soita äänimerkki"
+
+#. settings-schema.json->soundPath->description
+#. settings-schema.json->soundPath->tooltip
+msgid "Soundclip file path"
+msgstr "Äänitiedoston polku"
+
+#. settings-schema.json->showNotifications->description
+#. settings-schema.json->showNotifications->tooltip
+msgid "Show system notification on timer"
+msgstr "Näytä ilmoitusalueella"
+
+#. settings-schema.json->openSubmenu->description
+#. settings-schema.json->openSubmenu->tooltip
+msgid "Submenu to open initially"
+msgstr "Valikko joka avataan oletuksena"
