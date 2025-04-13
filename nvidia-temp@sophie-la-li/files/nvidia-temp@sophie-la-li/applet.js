@@ -50,7 +50,7 @@ NvGpuTempApplet.prototype = {
     },
 
     on_applet_clicked: function() {
-        if (GLib.find_program_in_path("nvidia-smi")) {
+        if (GLib.find_program_in_path("nvidia-settings")) {
             GLib.spawn_command_line_async('nvidia-settings');
         }
     },
