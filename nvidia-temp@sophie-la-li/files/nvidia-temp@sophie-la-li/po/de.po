@@ -55,8 +55,7 @@ msgstr "Zeige Temperatur in Fahrenheit"
 
 #. settings-schema.json->use-fahrenheit->tooltip
 msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
-msgstr ""
-"Ob die Temperatur in Fahrenheit statt in Celsius angezeigt werden soll."
+msgstr "Ob die Temperatur in Fahrenheit statt in Celsius angezeigt werden soll."
 
 #. settings-schema.json->show-unit->description
 msgid "Show unit"
@@ -73,3 +72,4 @@ msgstr "Zeige Buchstaben der Temperatur-Einheit"
 #. settings-schema.json->show-unit-letter->tooltip
 msgid "Whether or not show the unit letter (C or F)."
 msgstr "Ob der Einheits-Buchstabe (C oder F) angezeigt werden soll."
+

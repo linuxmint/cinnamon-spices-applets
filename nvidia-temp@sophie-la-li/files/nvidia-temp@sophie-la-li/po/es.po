@@ -22,14 +22,12 @@ msgid "GPU Temperature"
 msgstr "Temperatura de la GPU"
 
 #. applet.js:34
-#, fuzzy
 msgid "NVidia GPU Temperature Indicator: Error"
 msgstr "Indicador de temperatura de la GPU NVidia: Error"
 
 #. applet.js:34
-#, fuzzy
 msgid "It seems that nvidia-smi is not installed."
-msgstr "It seems that nvidia-smi is not installed."
+msgstr "Parece que nvidia-smi no está instalado."
 
 #. metadata.json->name
 msgid "NVidia GPU Temperature Indicator"
@@ -48,18 +46,16 @@ msgid "Update interval"
 msgstr "Intervalo de actualización"
 
 #. settings-schema.json->interval->tooltip
-#, fuzzy
 msgid "How often to update the temperature value."
-msgstr "How often to update the temperature value."
+msgstr "Frecuencia con la que se actualiza el valor de la temperatura."
 
 #. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
 msgstr "Muestra la temperatura en grados Fahrenheit"
 
 #. settings-schema.json->use-fahrenheit->tooltip
-#, fuzzy
 msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
-msgstr "Whether or not show the temperature in Fahrenheit instead of Celsius."
+msgstr "Mostrar o no la temperatura en grados Fahrenheit en lugar de Celsius."
 
 #. settings-schema.json->show-unit->description
 msgid "Show unit"
@@ -76,3 +72,4 @@ msgstr "Mostrar letra de unidad"
 #. settings-schema.json->show-unit-letter->tooltip
 msgid "Whether or not show the unit letter (C or F)."
 msgstr "Mostrar o no la letra de la unidad (C o F)."
+
