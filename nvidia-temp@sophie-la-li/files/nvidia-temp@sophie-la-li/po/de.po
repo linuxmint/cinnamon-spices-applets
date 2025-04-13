@@ -72,4 +72,4 @@ msgstr "Zeige Buchstaben der Temperatur-Einheit"
 
 #. settings-schema.json->show-unit-letter->tooltip
 msgid "Whether or not show the unit letter (C or F)."
-msgstr "Ob der Einheits-Buchstaben (C oder F) angezeigt werden soll."
+msgstr "Ob der Einheits-Buchstabe (C oder F) angezeigt werden soll."
