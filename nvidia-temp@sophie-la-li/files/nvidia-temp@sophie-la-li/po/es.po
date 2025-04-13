@@ -22,7 +22,7 @@ msgid "GPU Temperature"
 msgstr "Temperatura de la GPU"
 
 #. applet.js:34
-msgid "NVidia GPU Temperature Indicator: Error"
+msgid "Nvidia GPU Temperature Indicator: Error"
 msgstr ""
 
 #. applet.js:34
@@ -30,12 +30,12 @@ msgid "It seems that nvidia-smi is not installed."
 msgstr ""
 
 #. metadata.json->name
-msgid "NVidia GPU Temperature Indicator"
-msgstr "Indicador de temperatura de la GPU NVidia"
+msgid "Nvidia GPU Temperature Indicator"
+msgstr "Indicador de temperatura de la GPU Nvidia"
 
 #. metadata.json->description
-msgid "Shows NVidia GPU Temperature"
-msgstr "Muestra las temperaturas de la GPU NVidia"
+msgid "Shows Nvidia GPU Temperature"
+msgstr "Muestra las temperaturas de la GPU Nvidia"
 
 #. settings-schema.json->interval->units
 msgid "ms"

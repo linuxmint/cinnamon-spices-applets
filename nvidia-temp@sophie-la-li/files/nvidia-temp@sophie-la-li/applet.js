@@ -31,7 +31,7 @@ NvGpuTempApplet.prototype = {
                 icon_type: St.IconType.FULLCOLOR,
                 icon_size: 36 
             });
-            Main.criticalNotify(_('NVidia GPU Temperature Indicator: Error'), _('It seems that nvidia-smi is not installed.'), icon);
+            Main.criticalNotify(_('Nvidia GPU Temperature Indicator: Error'), _('It seems that nvidia-smi is not installed.'), icon);
             return;
         }
 
@@ -50,7 +50,9 @@ NvGpuTempApplet.prototype = {
     },
 
     on_applet_clicked: function() {
-        GLib.spawn_command_line_async('nvidia-settings');
+        if (GLib.find_program_in_path("nvidia-smi")) {
+            GLib.spawn_command_line_async('nvidia-settings');
+        }
     },
 
     on_applet_removed_from_panel: function() {

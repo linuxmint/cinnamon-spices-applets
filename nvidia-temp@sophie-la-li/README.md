@@ -1,4 +1,4 @@
-# NVidia GPU Temperature Indicator
+# Nvidia GPU Temperature Indicator
 
 A simple applet that uses nvidia-smi to display the GPU temperature. 
 
