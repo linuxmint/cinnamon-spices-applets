@@ -6,12 +6,14 @@
     "max": 30000,
     "step": 100,
     "units": "ms",
-    "description": "Update interval"
+    "description": "Update interval",
+    "tooltip": "How often to update the temperature value."
   },
   "use-fahrenheit": {
     "type": "switch",
     "default": false,
-    "description": "Show temperature in Fahrenheit."
+    "description": "Show temperature in Fahrenheit",
+    "tooltip": "Whether or not show the temperature in Fahrenheit instead of Celsius."
   },
   "show-unit": {
     "type": "switch",

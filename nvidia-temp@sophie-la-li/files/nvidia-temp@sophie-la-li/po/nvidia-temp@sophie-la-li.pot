@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: nvidia-temp@sophie-la-li 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-12 23:14+0200\n"
+"POT-Creation-Date: 2025-04-13 18:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,8 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:16
+#. applet.js:18
 msgid "GPU Temperature"
+msgstr ""
+
+#. applet.js:34
+msgid "NVidia GPU Temperature Indicator: Error"
+msgstr ""
+
+#. applet.js:34
+msgid "It seems that nvidia-smi is not installed."
 msgstr ""
 
 #. metadata.json->name
@@ -37,8 +45,16 @@ msgstr ""
 msgid "Update interval"
 msgstr ""
 
+#. settings-schema.json->interval->tooltip
+msgid "How often to update the temperature value."
+msgstr ""
+
 #. settings-schema.json->use-fahrenheit->description
-msgid "Show temperature in Fahrenheit."
+msgid "Show temperature in Fahrenheit"
+msgstr ""
+
+#. settings-schema.json->use-fahrenheit->tooltip
+msgid "Whether or not show the temperature in Fahrenheit instead of Celsius."
 msgstr ""
 
 #. settings-schema.json->show-unit->description
