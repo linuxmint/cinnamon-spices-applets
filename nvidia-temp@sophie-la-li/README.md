@@ -1,6 +1,8 @@
-# NVidia GPU Temperature Indicator
+# Nvidia GPU Temperature Indicator
 
-A simple Applet that uses nvidia-smi to display the GPU temperature. The update interval can be adapted in the settings.
+A simple applet that uses nvidia-smi to display the GPU temperature. 
+
+Update interval and unit display can be modified in the settings.
 
 Borrowed some code from temperature@fevimu.
 
