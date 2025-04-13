@@ -1,3 +1,8 @@
+### v3.3.1~20250413
+  * The “Try to download it from YT” menu option works again.
+  * Fixes #7055.
+  
+
 ### v3.3.0~20250408
   * Improved album art download.
 
