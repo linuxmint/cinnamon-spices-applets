@@ -1,7 +1,7 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
-# Copyright (C) 2024
+# Copyright (C) 2025
 # This file is distributed under the same license as the package cinnamon-weather (weather@mockturtl).
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2024.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2025.
 # Jurien (French77) <Jurien@protonmail.com>, 2020-2021.
 #
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-04 07:03-0500\n"
-"PO-Revision-Date: 2024-08-24 21:18+0200\n"
+"PO-Revision-Date: 2025-04-13 15:50+0200\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -2031,7 +2031,7 @@ msgstr "Swiss Météo"
 
 #. 3.8/weather-applet.js:17009
 msgid "For this provider, you need to use a postcode."
-msgstr "Voor deze aanbieder moet u een postcode gebruiken"
+msgstr "Voor deze aanbieder moet u een postcode gebruiken."
 
 #. 3.8/weather-applet.js:17021
 msgid "For this provider, you need to use a Swiss postcode, from 1000-9999."
@@ -2705,8 +2705,8 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "U kunt de coördinaten 'Breedtegraad,Lengtegraad' (bijv. 51,5085,-0,1257) "
 "invoeren of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer {Huisnummer} "
@@ -2956,11 +2956,11 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze ook "
 "handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
@@ -3008,7 +3008,7 @@ msgstr "Gekozen bestandpad voor het opslaan van logboekbestanden"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->description
 msgid "User Agent String Override"
-msgstr "Vervangen van User Agent Tekenreeks"
+msgstr "Vervangen van User Agent-tekenreeks"
 
 #. 3.8->settings-schema.json->userAgentStringOverride->tooltip
 msgid ""
