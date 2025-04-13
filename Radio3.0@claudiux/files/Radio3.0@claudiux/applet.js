@@ -2942,12 +2942,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
                                 .replace(/'/g, "\\\'")
                                 .replace(/&/g, '\\\&');
 
-        let yt_dl_command = `${ytdl_program} --output "${RADIO30_MUSIC_DIR}/${output_title}.%(ext)s"`
+        //~ let yt_dl_command = `${ytdl_program} --output "${RADIO30_MUSIC_DIR}/${output_title}.%(ext)s"`
+        let yt_dl_command = `${ytdl_program} --output "${RADIO30_MUSIC_DIR}/${output_title}.${yt_format}"`
           + proxy_option
           + ` --buffer-size 4096 -x --audio-format ${yt_format} --audio-quality 0`
-          + ` --add-metadata --embed-thumbnail --newline "ytsearch1:${yt_title}&page=1"`;
+          //~ + ` --add-metadata --embed-thumbnail --newline -I 2 "ytsearch2:${yt_title}&page=1"`;
+          + ` --add-metadata --embed-thumbnail --newline -I 1 "ytsearch1:${yt_title}"`;
 
-        //~ log("yt_dl_command: "+yt_dl_command);
+        //~ logDebug("yt_dl_command: "+yt_dl_command);
 
         let brainz_item = new PopupIconMenuItem(""+formatTextWrap(title, WRAP_LENGTH), "audio-x-generic", IconType.SYMBOLIC, { reactive: true });
         brainz_item.label.clutterText.line_wrap_mode = WrapMode.WORD_CHAR;
