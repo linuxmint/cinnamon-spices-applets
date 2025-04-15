@@ -1,3 +1,7 @@
+### v3.4.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+  * Context menu: Submenu 'Configure...' allowing direct access to each settings tab.
+
 ### v3.4.0~20250415
   * The default icon color is now determined by the theme used.
   * Code cleanup.

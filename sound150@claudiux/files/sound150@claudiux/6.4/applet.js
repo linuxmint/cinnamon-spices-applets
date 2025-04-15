@@ -1661,7 +1661,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
         if (this.title_text_old != this.title_text) {
             //~ if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+                Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
             //~ }
         }
         this.title_text_old = this.title_text;
@@ -2340,7 +2340,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._seeker = null;
         kill_playerctld();
         if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-            Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+            Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
         }
     }
 

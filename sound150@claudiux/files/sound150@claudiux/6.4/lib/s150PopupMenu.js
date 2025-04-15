@@ -642,7 +642,7 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         if (old_title != this._title) {
-            Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+            Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
         }
 
         this.titleLabel.set_text(this._title);
