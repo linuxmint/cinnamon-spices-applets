@@ -431,6 +431,7 @@ class SpiceSpy extends Applet.TextIconApplet {
               }
             }
           }
+          children.close(null);
           break;
         case "applets":
         case "desklets":
@@ -458,6 +459,7 @@ class SpiceSpy extends Applet.TextIconApplet {
               }
             }
           }
+          children.close(null);
       }
     }
     if (userSpices.length > 0) {
@@ -661,8 +663,8 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.make_menu();
 
     if (!this.loopId) {
-	    let sec = Math.round(this.update_interval * 3600);
-	    this.loopId = timeout_add_seconds(sec, () => { this.loop() });
+      let sec = Math.round(this.update_interval * 3600);
+      this.loopId = timeout_add_seconds(sec, () => { this.loop() });
     }
     if (this.issuesLoopId) {
       id = this.issuesLoopId;
@@ -670,7 +672,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     }
     this.issuesLoopId = null;
     this.issuesLoopId = timeout_add_seconds(5, () => { this.issuesJobs_loop(); return (this.issuesJobsList.length > 0 && this.is_looping); });
-    
+
     return this.is_looping;
   } // End of loop
 
@@ -956,9 +958,9 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.menu.addMenuItem(refresh);
     } else {
       let refresh_in_progress = new PopupMenu.PopupIconMenuItem(
-        _("Refreshing in progress"), 
-        "view-refresh", 
-        St.IconType.SYMBOLIC, 
+        _("Refreshing in progress"),
+        "view-refresh",
+        St.IconType.SYMBOLIC,
         { reactive: false }
       );
       this.menu.addMenuItem(refresh_in_progress);

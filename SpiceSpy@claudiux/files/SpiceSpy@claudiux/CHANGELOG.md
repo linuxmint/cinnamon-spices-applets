@@ -1,3 +1,6 @@
+### v5.3.2~20250415
+  * Minor bugfix.
+
 ### v5.3.1~20250407
   * Minor bugfix.
   * Updates translations files.
