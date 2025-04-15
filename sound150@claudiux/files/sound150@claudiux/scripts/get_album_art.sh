@@ -101,6 +101,6 @@ rm -f $HOME/mimetype.txt
 }
 
 cp -a $PATHTOFILE $SONG_ART_DIR/$ARTFILE
-sleep 0.5
+#~ sleep 0.5
 echo -n $PATHTOFILE
 exit 0

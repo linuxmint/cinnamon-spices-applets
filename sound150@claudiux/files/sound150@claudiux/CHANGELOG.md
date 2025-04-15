@@ -1,4 +1,7 @@
 ### v11.5.0~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+
+### v11.5.0~20250415
   * Best album cover change.
   * Code: subdivision into libraries.
 
