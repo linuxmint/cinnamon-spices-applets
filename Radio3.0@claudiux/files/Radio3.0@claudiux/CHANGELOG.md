@@ -1,3 +1,7 @@
+### v3.4.0~20250415
+  * The default icon color is now determined by the theme used.
+  * Code cleanup.
+
 ### v3.3.1~20250413
   * The “Try to download it from YT” menu option works again.
   * Fixes #7055.
