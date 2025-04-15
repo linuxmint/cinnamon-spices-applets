@@ -1167,13 +1167,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.on_rec_path_changed();
 
-    this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
+    this.tabNumberOfRadios = 1*userSettings["layoutradio"]["pages"].indexOf("pageStations");
     this.tabNumberOfSearch = 1*userSettings["layoutradio"]["pages"].indexOf("pageSearch");
+    this.tabNumberOfImport = 1*userSettings["layoutradio"]["pages"].indexOf("pageImport");
+    this.tabNumberOfMenu = 1*userSettings["layoutradio"]["pages"].indexOf("pageMenu");
+    this.tabNumberOfBehavior = 1*userSettings["layoutradio"]["pages"].indexOf("pageBehavior");
     this.tabNumberOfNetwork = 1*userSettings["layoutradio"]["pages"].indexOf("pageNetwork");
     this.tabNumberOfRecording = 1*userSettings["layoutradio"]["pages"].indexOf("pageRecording");
     this.tabNumberOfYT = 1*userSettings["layoutradio"]["pages"].indexOf("pageYT");
+    this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
     this.tabNumberOfAlarmClock = 1*userSettings["layoutradio"]["pages"].indexOf("pageAlarmClock");
-    userSettings = {};
+    //~ userSettings = {};
+    userSettings = null;
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
     if (nemo_size_prefixes !== this.settings.getValue("limits-hd-size-prefixes")) {
@@ -4916,10 +4921,21 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_reloadThisApplet.actor.visible = (RELOAD() === true || this.show_reload);
 
     if (!this.context_menu_item_configure) { // Configure...
-      this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
-        "system-run",
-        IconType.SYMBOLIC);
-      this.context_menu_item_configure.connect('activate',() => { this.configureApplet() });
+      //~ this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
+        //~ "system-run",
+        //~ IconType.SYMBOLIC);
+      //~ this.context_menu_item_configure.connect('activate',() => { this.configureApplet() });
+      this.context_menu_item_configure = new PopupSubMenuMenuItem(_("Configure..."));
+      this.context_menu_item_configure.menu.addAction(_("Radios"), () => { this.configureApplet(this.tabNumberOfRadios) });
+      this.context_menu_item_configure.menu.addAction(_("Search"), () => { this.configureApplet(this.tabNumberOfSearch) });
+      this.context_menu_item_configure.menu.addAction(_("Import"), () => { this.configureApplet(this.tabNumberOfImport) });
+      this.context_menu_item_configure.menu.addAction(_("Menu"), () => { this.configureApplet(this.tabNumberOfMenu) });
+      this.context_menu_item_configure.menu.addAction(_("Behavior"), () => { this.configureApplet(this.tabNumberOfBehavior) });
+      this.context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(this.tabNumberOfNetwork) });
+      this.context_menu_item_configure.menu.addAction(_("Recording"), () => { this.configureApplet(this.tabNumberOfRecording) });
+      this.context_menu_item_configure.menu.addAction(_("YT"), () => { this.configureApplet(this.tabNumberOfYT) });
+      this.context_menu_item_configure.menu.addAction(_("Scheduling"), () => { this.configureApplet(this.tabNumberOfScheduling) });
+      this.context_menu_item_configure.menu.addAction(_("Alarm Clock"), () => { this.configureApplet(this.tabNumberOfAlarmClock) });
     }
     this.context_menu_item_configure.actor.visible = (
       !METADATA["hide-configuration"] &&

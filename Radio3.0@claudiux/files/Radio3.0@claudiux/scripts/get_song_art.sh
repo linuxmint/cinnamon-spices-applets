@@ -13,7 +13,7 @@ for num in 1 2 3; do {
     REQUEST="https://img.youtube.com/vi/$YTID/${RES}default.jpg -q -O $SONG_ART_FILE"
     wget $REQUEST
     rm -f ${XDG_RUNTIME_DIR}/ytid
-    sleep 0.5
+    #~ sleep 0.5
     size=$(wc -c <"$SONG_ART_FILE")
     [[ $size -eq 0 ]] || break
 }; done
