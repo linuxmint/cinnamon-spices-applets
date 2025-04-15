@@ -1,3 +1,7 @@
+### v11.5.0~20250415
+  * Best album cover change.
+  * Code: subdivision into libraries.
+
 ### v11.4.0~20250408
   * Improved album art display.
 

@@ -414,10 +414,8 @@
     "default": true
   },
   "color0_100": {
-    "type": "colorchooser",
-    "dependency": "adaptColor",
-    "default": "#e4e4e4",
-    "description": "Icon color: 0%-100%"
+    "type": "generic",
+    "default": "rgba(225,225,225,255)"
   },
   "color101_115": {
     "type": "colorchooser",
@@ -614,6 +612,9 @@
     "type": "button",
     "description": "Remove the OsdWithNumber extension",
     "callback": "_on_remove_OsdWithNumber_from_extensions"
+  },
+  "VOLUME_ADJUSTMENT_STEP": {
+    "type": "generic",
+    "default": 0.05
   }
-
 }
