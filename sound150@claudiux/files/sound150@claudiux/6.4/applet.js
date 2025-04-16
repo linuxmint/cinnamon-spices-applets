@@ -1064,8 +1064,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._loopArtId = null;
         this._artLooping = true;
-        this._loopArtId = timeout_add_seconds(5, () => {
-            return this.loopArt();
+        this._loopArtId = timeout_add_seconds(15, () => {
+            this.loopArt();
         });
 
         this.volume_near_icon();
@@ -1088,6 +1088,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     on_applet_removed_from_panel(deleteConfig) {
         this._iconLooping = false;
         this._artLooping = false;
+        this._loopArtId = null;
         this.startingUp = true;
         if (this.actor && (this.actor.get_stage() != null) && this._control && (this._control.get_state() != Cvc.MixerControlState.CLOSED)) {
             try {
@@ -1165,6 +1166,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.setValue("volume", old_volume);
         remove_all_sources();
+        this._loopArtId = null;
 
         if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
             //~ logDebug("on_applet_removed_from_panel(): Radio3.0 is not running.");
@@ -1520,6 +1522,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
                 if (this.stream && !this.stream.is_muted) {
+                    if (this._iconTimeoutId != null) source_remove(this._iconTimeoutId);
                     this._iconTimeoutId = timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
                         this.setIcon();
                         return this._iconLooping;
@@ -1571,9 +1574,16 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     loopArt() {
-        if (!this._playerctl) {
-            return this._artLooping;
+        source_remove(this._loopArtId);
+        this._loopArtId = null;
+        if (!this._artLooping) return;
+        if (!this._playerctl || this.title_text_old == this.title_text) {
+            this._loopArtId = timeout_add_seconds(15, () => {
+                this.loopArt();
+            });
+            return
         }
+
         let subProcess = Util.spawnCommandLineAsyncIO("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this._trackCoverFile = "file://" + stdout;
@@ -1596,12 +1606,14 @@ class Sound150Applet extends Applet.TextIconApplet {
                     this._trackCoverFile = null;
                 }
             } else {
-                this._icon_path = null; //???
-                this._trackCoverFile = null;
+                //~ this._icon_path = null; //???
+                //~ this._trackCoverFile = null;
             }
             subProcess.send_signal(9);
         });
-        return this._artLooping;
+        this._loopArtId = timeout_add_seconds(15, () => {
+            this.loopArt();
+        });
     }
 
     setAppletIcon(player, path) {
@@ -1660,9 +1672,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
         }
         if (this.title_text_old != this.title_text) {
-            //~ if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
-            //~ }
+            Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
         }
         this.title_text_old = this.title_text;
         //this.set_applet_label(this.title_text);

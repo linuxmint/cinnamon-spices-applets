@@ -2698,7 +2698,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // SONG TITLE, BRAINZ LINK, YT LINK:
       if (this.songTitle && this.songTitle.length > 0) {
         let title = this.songTitle.replace(/\//g, " & ");
-        let query = fixedEncodeURIComponent(title.replace(/\ - /g, ' '));
+        //~ let query = fixedEncodeURIComponent(title.replace(/\ - /g, ' '));
+        let query = fixedEncodeURIComponent(title);
         let proxy = ""+this.settings.getValue("http-proxy");
         proxy = proxy.trim();
         let proxy_option = (proxy.length > 0) ? ` --proxy "${proxy}"` : "";
@@ -3382,7 +3383,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   download_songArt(title, res="") {
     if (!YTDL_PROGRAM().includes("yt-dlp")) return;
 
-    let command = '%s/get_song_art.sh "%s" "%s"'.format(SCRIPTS_DIR, title, res);
+    let command = '%s/get_song_art.sh "%s" "%s" &'.format(SCRIPTS_DIR, title, res);
     spawnCommandLineAsync(command);
     timeout_add_seconds(30, () => {
       let dir = file_new_for_path(ALBUMART_PICS_DIR);
@@ -3791,11 +3792,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.unmonitor_interfaces();
 
-    spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
-    spawnCommandLine("rm -f %s".format(R30STOP));
-    spawnCommandLine("rm -f %s".format(R30NEXT));
-    spawnCommandLine("rm -f %s".format(R30PREVIOUS));
-    spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+    spawnCommandLineAsync("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLineAsync("rm -f %s".format(R30STOP));
+    spawnCommandLineAsync("rm -f %s".format(R30NEXT));
+    spawnCommandLineAsync("rm -f %s".format(R30PREVIOUS));
+    spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
   }
 
   on_applet_clicked(event) {

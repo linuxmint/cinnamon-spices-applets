@@ -1,4 +1,7 @@
-### v11.5.0~20250415
+### v11.5.2~20250416
+  * Bugfix related to [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074)
+
+### v11.5.1~20250415
   * Make certain tasks asynchronous to avoid blockages.
 
 ### v11.5.0~20250415
