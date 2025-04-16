@@ -1,3 +1,6 @@
+### v3.4.2~20250416
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
 ### v3.4.1~20250415
   * Make certain tasks asynchronous to avoid blockages.
   * Context menu: Submenu 'Configure...' allowing direct access to each settings tab.
