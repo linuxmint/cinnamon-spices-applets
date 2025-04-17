@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-06 20:46+0200\n"
+"POT-Creation-Date: 2025-04-17 13:58+0200\n"
 "PO-Revision-Date: 2025-04-10 14:49+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -18,99 +18,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. applet.js:51
+#. applet.js:54
 msgid "Applet"
 msgstr "Kisalkalmazás"
 
-#. applet.js:52
+#. applet.js:55
 msgid "Desklet"
 msgstr "Asztalkalmazás"
 
-#. applet.js:53
+#. applet.js:56
 msgid "Extension"
 msgstr "Bővítmény"
 
-#. applet.js:54
+#. applet.js:57
 msgid "Applets"
 msgstr "Kisalkalmazások"
 
-#. applet.js:55
+#. applet.js:58
 msgid "Desklets"
 msgstr "Asztalkalmazások"
 
-#. applet.js:56
+#. applet.js:59
 msgid "Extensions"
 msgstr "Bővítmények"
 
-#. applet.js:86
+#. applet.js:112
 msgid "RELOAD ALL"
 msgstr "ÖSSZES ÚJRATÖLTÉSE"
 
-#. applet.js:213
+#. applet.js:241
 msgid "Middle-click: \n"
 msgstr "Kattintás a középső egérgombbal: \n"
 
-#. applet.js:213 applet.js:274
+#. applet.js:241 applet.js:317
 msgid "Show .xsession-errors"
 msgstr "Az „.xsession-errors” fájl megjelenítése"
 
-#. applet.js:288
+#. applet.js:242
+#, fuzzy
+msgid "Ctrl + Middle-click: \n"
+msgstr "Kattintás a középső egérgombbal: \n"
+
+#. applet.js:242 applet.js:331
 msgid "Show latest messages"
 msgstr "Show latest messages"
 
-#. applet.js:303
+#. applet.js:295 applet.js:537
+#, fuzzy, javascript-format
+msgid "%s latest messages"
+msgstr "Legújabb üzenetek"
+
+#. applet.js:295 applet.js:537
+msgid "min: 10. max: 250."
+msgstr ""
+
+#. applet.js:348
 msgid "Restart Cinnamon"
 msgstr "Cinnamon környezet újraindítása"
 
-#. applet.js:319
+#. applet.js:364
 msgid "--- Reload Spices ---"
 msgstr "--- Spices kiegészítők újratöltése ---"
 
-#. applet.js:325
+#. applet.js:370
 msgid "Reload Applet:"
 msgstr "Kisalkalmazás újratöltése:"
 
-#. applet.js:352
+#. applet.js:397
 msgid "Reload Desklet:"
 msgstr "Asztalkalmazás újratöltése:"
 
-#. applet.js:379
+#. applet.js:424
 msgid "Reload Extension:"
 msgstr "Bővítmény újratöltése:"
 
-#. applet.js:405
+#. applet.js:450
 msgid "Reload Current Theme"
 msgstr "Az aktuális téma újratöltése"
 
-#. applet.js:419
+#. applet.js:464
 msgid "--- Settings for ---"
 msgstr "--- Beállítások ehhez: ---"
 
-#. applet.js:425
+#. applet.js:470
 msgid "Applet:"
 msgstr "Kisalkalmazás:"
 
-#. applet.js:434
+#. applet.js:479
 msgid "Desklet:"
 msgstr "Asztalkalmazás:"
 
-#. applet.js:443
+#. applet.js:488
 msgid "Extension:"
 msgstr "Bővítmény:"
 
-#. applet.js:452
+#. applet.js:497
 msgid "--- View Code ---"
 msgstr "--- Kód megjelenítése ---"
 
-#. applet.js:458
+#. applet.js:503
 msgid "View Applet Code for:"
 msgstr "Kisalkalmazás forráskód megjelenítése:"
 
-#. applet.js:467
+#. applet.js:512
 msgid "View Desklet Code for:"
 msgstr "Asztalkalmazás forráskód megjelenítése:"
 
-#. applet.js:476
+#. applet.js:521
 msgid "View Extension Code for:"
 msgstr "Bővítmény forráskód megjelenítése:"
 
