@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-06 20:46+0200\n"
+"POT-Creation-Date: 2025-04-17 13:58+0200\n"
 "PO-Revision-Date: 2023-01-31 11:51+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -19,102 +19,115 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:51
+#. applet.js:54
 msgid "Applet"
 msgstr "Uygulamacık"
 
-#. applet.js:52
+#. applet.js:55
 msgid "Desklet"
 msgstr "Masaüstü Uygulamacığı"
 
-#. applet.js:53
+#. applet.js:56
 msgid "Extension"
 msgstr "Eklenti"
 
-#. applet.js:54
+#. applet.js:57
 msgid "Applets"
 msgstr "Uygulamacıklar"
 
-#. applet.js:55
+#. applet.js:58
 msgid "Desklets"
 msgstr "Masaüstü Uygulamacıkları"
 
-#. applet.js:56
+#. applet.js:59
 msgid "Extensions"
 msgstr "Eklentiler"
 
-#. applet.js:86
+#. applet.js:112
 msgid "RELOAD ALL"
 msgstr ""
 
-#. applet.js:213
+#. applet.js:241
 msgid "Middle-click: \n"
 msgstr ""
 
-#. applet.js:213 applet.js:274
+#. applet.js:241 applet.js:317
 msgid "Show .xsession-errors"
 msgstr ".xoturumu-hatalarını göster"
 
-#. applet.js:288
+#. applet.js:242
+msgid "Ctrl + Middle-click: \n"
+msgstr ""
+
+#. applet.js:242 applet.js:331
 msgid "Show latest messages"
 msgstr ""
 
-#. applet.js:303
+#. applet.js:295 applet.js:537
+#, javascript-format
+msgid "%s latest messages"
+msgstr ""
+
+#. applet.js:295 applet.js:537
+msgid "min: 10. max: 250."
+msgstr ""
+
+#. applet.js:348
 msgid "Restart Cinnamon"
 msgstr "Cinnamon'u Yeniden Başlat"
 
-#. applet.js:319
+#. applet.js:364
 msgid "--- Reload Spices ---"
 msgstr "--- Uygulamacıkları Yeniden Yükle ---"
 
-#. applet.js:325
+#. applet.js:370
 msgid "Reload Applet:"
 msgstr "Uygulamayı Yeniden Yükle:"
 
-#. applet.js:352
+#. applet.js:397
 msgid "Reload Desklet:"
 msgstr "Masaüstü Uygulamacığını Yeniden Yükle:"
 
-#. applet.js:379
+#. applet.js:424
 msgid "Reload Extension:"
 msgstr "Uzantıyı Yeniden Yükle:"
 
-#. applet.js:405
+#. applet.js:450
 msgid "Reload Current Theme"
 msgstr ""
 
-#. applet.js:419
+#. applet.js:464
 msgid "--- Settings for ---"
 msgstr ""
 
-#. applet.js:425
+#. applet.js:470
 #, fuzzy
 msgid "Applet:"
 msgstr "Uygulamacık"
 
-#. applet.js:434
+#. applet.js:479
 #, fuzzy
 msgid "Desklet:"
 msgstr "Masaüstü Uygulamacığı"
 
-#. applet.js:443
+#. applet.js:488
 #, fuzzy
 msgid "Extension:"
 msgstr "Eklenti"
 
-#. applet.js:452
+#. applet.js:497
 msgid "--- View Code ---"
 msgstr "--- Kodu Görüntüle ---"
 
-#. applet.js:458
+#. applet.js:503
 msgid "View Applet Code for:"
 msgstr "Uygulamacık Kodunu Görüntüle:"
 
-#. applet.js:467
+#. applet.js:512
 msgid "View Desklet Code for:"
 msgstr "Masaüstü Uygulamacığı Kodunu Görüntüle:"
 
-#. applet.js:476
+#. applet.js:521
 msgid "View Extension Code for:"
 msgstr "Eklenti Kodunu Görüntüle:"
 

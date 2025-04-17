@@ -1,3 +1,7 @@
+### v5.0.0~20250417
+  * Ctrl+MiddleClick opens only latest messages.
+  * Can set from menu the number of latest messages.
+
 ### v4.0.0~20250406
   * Added ability to edit error messages.
   * Added ability to show only latest messages. Number of latest messages can be set.

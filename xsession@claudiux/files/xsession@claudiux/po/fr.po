@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-06 20:46+0200\n"
-"PO-Revision-Date: 2025-04-06 20:53+0200\n"
+"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"PO-Revision-Date: 2025-04-17 13:59+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,99 +19,112 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:51
+#. applet.js:54
 msgid "Applet"
 msgstr "Applet"
 
-#. applet.js:52
+#. applet.js:55
 msgid "Desklet"
 msgstr "Desklet"
 
-#. applet.js:53
+#. applet.js:56
 msgid "Extension"
 msgstr "Extension"
 
-#. applet.js:54
+#. applet.js:57
 msgid "Applets"
 msgstr "Applets"
 
-#. applet.js:55
+#. applet.js:58
 msgid "Desklets"
 msgstr "Desklets"
 
-#. applet.js:56
+#. applet.js:59
 msgid "Extensions"
 msgstr "Extensions"
 
-#. applet.js:86
+#. applet.js:112
 msgid "RELOAD ALL"
 msgstr "TOUT RELANCER"
 
-#. applet.js:213
+#. applet.js:241
 msgid "Middle-click: \n"
 msgstr "Clic-molette : \n"
 
-#. applet.js:213 applet.js:274
+#. applet.js:241 applet.js:317
 msgid "Show .xsession-errors"
 msgstr "Afficher .xsession-errors"
 
-#. applet.js:288
+#. applet.js:242
+msgid "Ctrl + Middle-click: \n"
+msgstr "Ctrl + Clic-molette : \n"
+
+#. applet.js:242 applet.js:331
 msgid "Show latest messages"
 msgstr "Afficher les derniers messages"
 
-#. applet.js:303
+#. applet.js:295 applet.js:537
+#, javascript-format
+msgid "%s latest messages"
+msgstr "%s derniers messages"
+
+#. applet.js:295 applet.js:537
+msgid "min: 10. max: 250."
+msgstr "min: 10. max: 250."
+
+#. applet.js:348
 msgid "Restart Cinnamon"
 msgstr "Redémarrer Cinnamon"
 
-#. applet.js:319
+#. applet.js:364
 msgid "--- Reload Spices ---"
 msgstr "--- Relancer des Spices ---"
 
-#. applet.js:325
+#. applet.js:370
 msgid "Reload Applet:"
 msgstr "Relancer cette Applet :"
 
-#. applet.js:352
+#. applet.js:397
 msgid "Reload Desklet:"
 msgstr "Relancer cette Desklet :"
 
-#. applet.js:379
+#. applet.js:424
 msgid "Reload Extension:"
 msgstr "Relancer cette Extension :"
 
-#. applet.js:405
+#. applet.js:450
 msgid "Reload Current Theme"
 msgstr "Relancer le thème actuel"
 
-#. applet.js:419
+#. applet.js:464
 msgid "--- Settings for ---"
 msgstr "--- Paramètres ---"
 
-#. applet.js:425
+#. applet.js:470
 msgid "Applet:"
 msgstr "Applet :"
 
-#. applet.js:434
+#. applet.js:479
 msgid "Desklet:"
 msgstr "Desklet :"
 
-#. applet.js:443
+#. applet.js:488
 msgid "Extension:"
 msgstr "Extension :"
 
-#. applet.js:452
+#. applet.js:497
 msgid "--- View Code ---"
 msgstr "--- Code Source ---"
 
-#. applet.js:458
+#. applet.js:503
 msgid "View Applet Code for:"
 msgstr "Consulter le code de l'Applet :"
 
-#. applet.js:467
+#. applet.js:512
 msgid "View Desklet Code for:"
 msgstr "Consulter le code de la Desklet :"
 
-#. applet.js:476
+#. applet.js:521
 msgid "View Extension Code for:"
 msgstr "Consulter le code de l'Extension :"
 
