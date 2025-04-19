@@ -91,6 +91,7 @@ export class PirateWeather extends BaseProvider {
 					value: this.ToKelvin(json.currently.apparentTemperature, unit),
 					type: "temperature"
 				},
+				uvIndex: json.currently.uvIndex ?? json.hourly.data[0]?.uvIndex ?? json.daily.data[0]?.uvIndex ?? null,
 				forecasts: [],
 				hourlyForecasts: [],
 			}

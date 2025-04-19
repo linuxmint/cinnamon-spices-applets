@@ -291,6 +291,7 @@ export class USWeather extends BaseProvider {
 				pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100, // from Pa to hPa
 				humidity: observation.properties.relativeHumidity.value,
 				dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
+				uvIndex: null,
 				condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
 				forecasts: []
 			};

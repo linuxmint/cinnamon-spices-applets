@@ -10792,11 +10792,15 @@ class MetUk extends BaseProvider {
         };
         this.ParseHourlyForecast = (json, loc) => {
             const forecasts = [];
+            let uvIndex = null;
             try {
                 for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
                     const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
                     if (!Array.isArray(day.Rep))
                         continue;
+                    uvIndex = ("U" in day.Rep[0]) ? Number.parseInt(day.Rep[0].U) : null;
+                    if (Number.isNaN(uvIndex))
+                        uvIndex = null;
                     for (const element of day.Rep) {
                         const hour = element;
                         const timestamp = date.plus({ hours: Number.parseInt(hour.$) / 60 });
@@ -10815,7 +10819,7 @@ class MetUk extends BaseProvider {
                         forecasts.push(forecast);
                     }
                 }
-                return forecasts;
+                return [forecasts, { uvIndex }];
             }
             catch (e) {
                 if (e instanceof Error)
@@ -10826,6 +10830,7 @@ class MetUk extends BaseProvider {
         };
     }
     async GetWeather(newLoc, cancellable, config) {
+        var _a;
         const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
@@ -10862,8 +10867,14 @@ class MetUk extends BaseProvider {
             return null;
         const forecastResult = await forecastPromise;
         currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
-        const threeHourlyForecast = await hourlyPayload;
-        currentResult.hourlyForecasts = threeHourlyForecast !== null && threeHourlyForecast !== void 0 ? threeHourlyForecast : [];
+        const threeHourlyResolved = await hourlyPayload;
+        if (threeHourlyResolved == null) {
+            currentResult.hourlyForecasts = [];
+            return null;
+        }
+        const [threeHourlyForecast, additionalData] = threeHourlyResolved;
+        currentResult.hourlyForecasts = threeHourlyForecast;
+        currentResult.uvIndex = (_a = additionalData === null || additionalData === void 0 ? void 0 : additionalData.uvIndex) !== null && _a !== void 0 ? _a : null;
         return currentResult;
     }
     ;
@@ -10972,6 +10983,7 @@ class MetUk extends BaseProvider {
                 pressure: null,
                 humidity: null,
                 dewPoint: null,
+                uvIndex: null,
                 condition: this.ResolveCondition(observation === null || observation === void 0 ? void 0 : observation.W),
                 forecasts: []
             };
@@ -11699,6 +11711,7 @@ function OWMOneCallToWeatherData(json, conditionsTranslated) {
             icons: OWMIconToBuiltInIcons((_q = (_p = (_o = json === null || json === void 0 ? void 0 : json.current) === null || _o === void 0 ? void 0 : _o.weather) === null || _p === void 0 ? void 0 : _p[0]) === null || _q === void 0 ? void 0 : _q.icon),
             customIcon: OWMIconToCustomIcon((_t = (_s = (_r = json === null || json === void 0 ? void 0 : json.current) === null || _r === void 0 ? void 0 : _r.weather) === null || _s === void 0 ? void 0 : _s[0]) === null || _t === void 0 ? void 0 : _t.icon)
         },
+        uvIndex: json.current.uvi,
         extra_field: {
             name: _("Feels Like"),
             value: json.current.feels_like,
@@ -12179,7 +12192,7 @@ class MetNorway extends BaseProvider {
         return json;
     }
     ParseWeather(json, loc) {
-        var _a, _b;
+        var _a, _b, _c;
         json = this.RemoveEarlierElements(json, loc);
         const times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
         const suntimes = {
@@ -12209,6 +12222,7 @@ class MetNorway extends BaseProvider {
                 degree: current.data.instant.details.wind_from_direction,
                 speed: current.data.instant.details.wind_speed
             },
+            uvIndex: (_c = current.data.instant.details.ultraviolet_index_clear_sky) !== null && _c !== void 0 ? _c : null,
             location: {
                 timeZone: loc.timeZone
             },
@@ -12740,6 +12754,7 @@ class Weatherbit extends BaseProvider {
                         value: json.app_temp,
                         type: "temperature"
                     },
+                    uvIndex: json.uv,
                     forecasts: []
                 };
                 return weather;
@@ -13390,6 +13405,7 @@ class ClimacellV4 extends BaseProvider {
                 type: "temperature",
                 value: CelsiusToKelvin(current.values.temperatureApparent)
             },
+            uvIndex: null,
             forecasts: []
         };
         const hours = [];
@@ -14117,6 +14133,7 @@ class USWeather extends BaseProvider {
                 pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
                 humidity: observation.properties.relativeHumidity.value,
                 dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
+                uvIndex: null,
                 condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
                 forecasts: []
             };
@@ -14495,6 +14512,7 @@ class VisualCrossing extends BaseProvider {
                 type: "temperature",
                 value: CelsiusToKelvin((_h = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _h !== void 0 ? _h : weather.currentConditions.feelslike)
             },
+            uvIndex: null,
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
         };
@@ -15221,7 +15239,7 @@ class AccuWeather extends BaseProvider {
             this.tier = "free";
     }
     ParseWeather(current, daily, hourly, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
         return {
             date: DateTime.fromISO(current.LocalObservationDateTime),
             coord: {
@@ -15245,6 +15263,7 @@ class AccuWeather extends BaseProvider {
                 speed: KPHtoMPS((_l = (_k = (_j = current.Wind) === null || _j === void 0 ? void 0 : _j.Speed) === null || _k === void 0 ? void 0 : _k.Metric) === null || _l === void 0 ? void 0 : _l.Value),
             },
             condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
+            uvIndex: (_p = (_m = current.UVIndex) !== null && _m !== void 0 ? _m : (_o = hourly[0]) === null || _o === void 0 ? void 0 : _o.UVIndex) !== null && _p !== void 0 ? _p : null,
             hourlyForecasts: this.ParseHourly(hourly),
             forecasts: this.ParseDaily(daily)
         };
@@ -15640,7 +15659,8 @@ class DeutscherWetterdienst extends BaseProvider {
             },
             forecasts: this.ParseForecast(current, hourly, loc),
             hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
-            alerts: alerts
+            alerts: alerts,
+            uvIndex: null
         };
     }
     ParseForecast(current, forecast, loc) {
@@ -15901,7 +15921,7 @@ class WeatherUnderground extends BaseProvider {
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
         this.GetWeather = async (loc, cancellable, config) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
             const locString = `${loc.lat},${loc.lon}`;
             const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc, cancellable, config));
             if (location == null) {
@@ -15953,6 +15973,7 @@ class WeatherUnderground extends BaseProvider {
                 stationInfo: observation.stationInfo,
                 extra_field: observation.extra_field,
                 forecasts: this.ParseForecasts(loc, forecast, config),
+                uvIndex: (_m = observation.uvIndex) !== null && _m !== void 0 ? _m : null,
             };
         };
         this.GetNearbyStations = async (loc, cancellable, config) => {
@@ -16577,6 +16598,7 @@ class PirateWeather extends BaseProvider {
     }
     ;
     ParseWeather(json, unit) {
+        var _a, _b, _c, _d, _e;
         try {
             const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
             const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
@@ -16611,6 +16633,7 @@ class PirateWeather extends BaseProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature, unit),
                     type: "temperature"
                 },
+                uvIndex: (_e = (_c = (_a = json.currently.uvIndex) !== null && _a !== void 0 ? _a : (_b = json.hourly.data[0]) === null || _b === void 0 ? void 0 : _b.uvIndex) !== null && _c !== void 0 ? _c : (_d = json.daily.data[0]) === null || _d === void 0 ? void 0 : _d.uvIndex) !== null && _e !== void 0 ? _e : null,
                 forecasts: [],
                 hourlyForecasts: [],
             };
@@ -17219,13 +17242,14 @@ function OpenMeteoHourWeatherToData(data, timezone) {
 
 
 function OpenMeteoResponseToData(payload) {
+    var _a;
     return Object.assign(Object.assign({ date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }), sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }), sunset: DateTime.fromISO(payload.daily.sunset[0], { zone: payload.timezone }), coord: {
             lat: payload.latitude,
             lon: payload.longitude,
         }, location: {
             timeZone: payload.timezone,
             tzOffset: payload.utc_offset_seconds,
-        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone) });
+        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone), uvIndex: (_a = payload.daily.uv_index_max[0]) !== null && _a !== void 0 ? _a : null });
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/provider.ts
@@ -17260,7 +17284,7 @@ class OpenMeteo extends BaseProvider {
                 longitude: loc.lon,
                 current: "temperature_2m,dewpoint_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
                 hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_10m,wind_direction_10m,is_day",
-                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset",
+                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max",
                 timezone: "auto",
                 forecast_days: "16",
                 forecast_hours: "24"
@@ -17326,6 +17350,7 @@ function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone) {
         pressure: weather.main.pressure,
         humidity: weather.main.humidity,
         dewPoint: null,
+        uvIndex: null,
         extra_field: {
             type: "temperature",
             name: _("Feels like"),
@@ -18093,6 +18118,7 @@ class SwissMeteo extends BaseProvider {
                 degree: result.graph.windDirection3h[0],
             },
             forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
+            uvIndex: null
         };
         const alerts = result.warnings.filter(x => {
             if (x.validTo && DateTime.fromMillis(x.validTo) < DateTime.now()) {
