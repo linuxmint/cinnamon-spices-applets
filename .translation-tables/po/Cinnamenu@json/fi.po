@@ -1,0 +1,1563 @@
+# CINNAMENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# jaszhix, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-06 22:42-0400\n"
+"PO-Revision-Date: 2024-11-12 20:08+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: 5.8/applet.js:59 3.2/applet.js:157 4.0/applet.js:60
+msgid "Initializing"
+msgstr "Alustetaan"
+
+#: 5.8/applet.js:75 4.0/applet.js:78
+msgid "Find files..."
+msgstr "Tiedostohaku..."
+
+#: 5.8/applet.js:283 4.0/applet.js:281
+msgid "Please wait..."
+msgstr "Odota hetki..."
+
+#: 5.8/applet.js:909 5.8/applet.js:1124 4.0/applet.js:884
+msgid "Applications"
+msgstr "Sovellukset"
+
+#: 5.8/applet.js:913 4.0/applet.js:888
+msgid "Documents"
+msgstr "Asiakirjat"
+
+#: 5.8/applet.js:917 4.0/applet.js:892
+msgid "Videos"
+msgstr "Videot"
+
+#: 5.8/applet.js:921 4.0/applet.js:896
+msgid "Images"
+msgstr "Kuvat"
+
+#: 5.8/applet.js:925 4.0/applet.js:900
+msgid "Music"
+msgstr "Musiikki"
+
+#: 5.8/applet.js:934 4.0/applet.js:909
+msgid "No recent Items"
+msgstr "Ei viimeaikaisia kohteita"
+
+#: 5.8/applet.js:981 4.0/applet.js:956
+msgid "Settings"
+msgstr "Asetukset"
+
+#: 5.8/applet.js:1127
+msgid "files"
+msgstr "tiedostot"
+
+#: 5.8/applet.js:1130 4.0/applet.js:1097
+msgid "Other search results"
+msgstr "Muut hakutulokset"
+
+#: 5.8/applet.js:1133 4.0/applet.js:1100
+msgid "Browser bookmarks"
+msgstr "Selaimen kirjanmerkit"
+
+#: 5.8/applet.js:1136 4.0/applet.js:1103
+msgid "Browser history"
+msgstr "Selainhistoria"
+
+#: 5.8/applet.js:1139 5.8/categoriesview.js:306 4.0/applet.js:1106
+#: 4.0/categoriesview.js:305
+msgid "Emoji"
+msgstr "Hymiöt"
+
+#: 5.8/applet.js:1197 5.8/applet.js:1333 5.8/applet.js:1817 4.0/applet.js:1164
+#: 4.0/applet.js:1299 4.0/applet.js:1786
+msgid "Click to copy"
+msgstr "Kopioi napsauttamalla"
+
+#: 5.8/applet.js:1634 3.2/applet.js:1416 4.0/applet.js:1600
+msgid "Clear List"
+msgstr "Tyhjennä luettelo"
+
+#: 5.8/applet.js:1668 5.8/applet.js:1669 4.0/applet.js:1634 4.0/applet.js:1635
+msgid "Trash"
+msgstr "Roskakori"
+
+#: 5.8/applet.js:1678 5.8/applet.js:1679 3.2/placeDisplay.js:220
+#: 4.0/applet.js:1644 4.0/applet.js:1645
+msgid "Computer"
+msgstr "Tietokone"
+
+#: 5.8/appsview.js:295 5.8/sidebar.js:111 4.0/appsview.js:295
+#: 4.0/sidebar.js:111
+msgid "Error while opening file:"
+msgstr "Virhe avattaessa tiedostoa:"
+
+#: 5.8/appsview.js:441 4.0/appsview.js:440
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:284 3.2/applet.js:978 4.0/categoriesview.js:283
+msgid "All applications"
+msgstr "Kaikki ohjelmat"
+
+#: 5.8/categoriesview.js:302 4.0/categoriesview.js:301
+msgid "Favorites"
+msgstr "Suosikiksi merkityt"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:303 3.2/applet.js:1016 4.0/categoriesview.js:302
+msgid "Places"
+msgstr "Kansiot"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:304 4.0/categoriesview.js:303
+msgid "Recent"
+msgstr "Viimeisimmät"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+#: 5.8/categoriesview.js:305 3.2/applet.js:1019 4.0/categoriesview.js:304
+msgid "Favorite apps"
+msgstr "Sovelluksia"
+
+#: 5.8/contextmenu.js:111 4.0/contextmenu.js:111
+msgid "light skin tone"
+msgstr "vaalea sävy"
+
+#: 5.8/contextmenu.js:112 4.0/contextmenu.js:112
+msgid "medium-light skin tone"
+msgstr "keskivaalea sävy"
+
+#: 5.8/contextmenu.js:113 4.0/contextmenu.js:113
+msgid "medium skin tone"
+msgstr "keskisävy"
+
+#: 5.8/contextmenu.js:114 4.0/contextmenu.js:114
+msgid "medium-dark skin tone"
+msgstr "hämärä sävy"
+
+#: 5.8/contextmenu.js:115 4.0/contextmenu.js:115
+msgid "dark skin tone"
+msgstr "tumma sävy"
+
+#: 5.8/contextmenu.js:134 4.0/contextmenu.js:134
+msgid "Remove category"
+msgstr "Poista ryhmä"
+
+#. 3.2->settings-schema.json->resetCategoryOrder-button->description
+#: 5.8/contextmenu.js:147 4.0/contextmenu.js:147
+msgid "Reset category order"
+msgstr "Nollaa ryhmien järjestys"
+
+#: 5.8/contextmenu.js:167 4.0/contextmenu.js:167
+msgid "List settings apps separately"
+msgstr "Listaa sovellukset asetuksista erikseen"
+
+#: 5.8/contextmenu.js:174 4.0/contextmenu.js:174
+msgid "Single list style"
+msgstr "Yhden listan tyyli"
+
+#: 5.8/contextmenu.js:183 4.0/contextmenu.js:183
+msgid "Hide hidden files"
+msgstr "Piilota piilotiedostot"
+
+#. 5.8->settings-schema.json->show-hidden-files->description
+#. 4.0->settings-schema.json->show-hidden-files->description
+#: 5.8/contextmenu.js:190 4.0/contextmenu.js:190
+msgid "Show hidden files"
+msgstr "Näytä piilotiedostot"
+
+#: 5.8/contextmenu.js:246 3.2/buttons.js:1045 3.2/buttons.js:1047
+#: 4.0/contextmenu.js:246 4.0/contextmenu.js:254
+msgid "Run with NVIDIA GPU"
+msgstr "Suorita NVIDIA GPU:lla"
+
+#: 5.8/contextmenu.js:256 3.2/buttons.js:1049 4.0/contextmenu.js:260
+msgid "Add to panel"
+msgstr "Lisää paneeliin"
+
+#: 5.8/contextmenu.js:275 3.2/buttons.js:1051 4.0/contextmenu.js:279
+msgid "Add to desktop"
+msgstr "Lisää työpöydälle"
+
+#: 5.8/contextmenu.js:289 5.8/contextmenu.js:364 3.2/buttons.js:1054
+#: 4.0/contextmenu.js:293 4.0/contextmenu.js:369
+msgid "Remove from favorites"
+msgstr "Poista suosikeista"
+
+#: 5.8/contextmenu.js:293 5.8/contextmenu.js:369 3.2/buttons.js:1056
+#: 4.0/contextmenu.js:297 4.0/contextmenu.js:374
+msgid "Add to favorites"
+msgstr "Lisää suosikkeihin"
+
+#: 5.8/contextmenu.js:300 3.2/buttons.js:1059 4.0/contextmenu.js:304
+msgid "Uninstall"
+msgstr "Asennuksen poisto"
+
+#: 5.8/contextmenu.js:308 4.0/contextmenu.js:312
+msgid "App Info"
+msgstr "Sovelluksen tiedot"
+
+#: 5.8/contextmenu.js:324 4.0/contextmenu.js:328
+msgid "This file is no longer available"
+msgstr "Tämä tiedosto ei ole enää saatavilla"
+
+#: 5.8/contextmenu.js:332 4.0/contextmenu.js:336
+msgid "Open with"
+msgstr "Avaa"
+
+#: 5.8/contextmenu.js:347 4.0/contextmenu.js:351
+msgid "Other application..."
+msgstr "Muu sovellus..."
+
+#: 5.8/contextmenu.js:384 4.0/contextmenu.js:390
+msgid "Add folder as category"
+msgstr "Lisää kansio ryhmäksi"
+
+#: 5.8/contextmenu.js:400 4.0/contextmenu.js:406 5.8/search.py:48
+#: 4.0/search.py:48
+msgid "Open containing folder"
+msgstr "Avaa sisällön kansio"
+
+#: 5.8/contextmenu.js:415 5.8/contextmenu.js:427 4.0/contextmenu.js:421
+#: 4.0/contextmenu.js:433
+msgid "Move to trash"
+msgstr "Siirrä roskakoriin"
+
+#: 5.8/contextmenu.js:421 4.0/contextmenu.js:427
+msgid "Error while moving file to trash:"
+msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
+
+#: 5.8/emoji.js:8 4.0/emoji.js:7739
+msgid "Smileys & Emotion"
+msgstr "Hymiöt ja tunteet"
+
+#: 5.8/emoji.js:685 4.0/emoji.js:7740
+msgid "People & Body"
+msgstr "Ihmiset & keho"
+
+#: 5.8/emoji.js:2245 4.0/emoji.js:7741
+msgid "Animals & Nature"
+msgstr "Eläimet & luonto"
+
+#: 5.8/emoji.js:2861 4.0/emoji.js:7742
+msgid "Food & Drink"
+msgstr "Ruoka & juoma"
+
+#: 5.8/emoji.js:3405 4.0/emoji.js:7743
+msgid "Travel & Places"
+msgstr "Matkailu ja nähtävyys"
+
+#: 5.8/emoji.js:4281 4.0/emoji.js:7744
+msgid "Activities"
+msgstr "Aktiviteetit"
+
+#: 5.8/emoji.js:4625 4.0/emoji.js:7745
+msgid "Objects"
+msgstr "Esineet"
+
+#: 5.8/emoji.js:5677 4.0/emoji.js:7746
+msgid "Symbols"
+msgstr "Symbolit"
+
+#: 5.8/emoji.js:6573 4.0/emoji.js:7747
+msgid "Flags"
+msgstr "Liput"
+
+#: 5.8/sidebar.js:252 3.2/applet.js:2323 4.0/sidebar.js:251
+msgid "Quit"
+msgstr "Lopeta"
+
+#: 5.8/sidebar.js:253 3.2/applet.js:2324 4.0/sidebar.js:252
+msgid "Shutdown the computer"
+msgstr "Sammuta tietokone"
+
+#: 5.8/sidebar.js:261 3.2/applet.js:2315 4.0/sidebar.js:260
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: 5.8/sidebar.js:262 3.2/applet.js:2316 4.0/sidebar.js:261
+msgid "Leave the session"
+msgstr "Poistu istunnosta"
+
+#: 5.8/sidebar.js:270 3.2/applet.js:2293 4.0/sidebar.js:269
+msgid "Lock screen"
+msgstr "Lukitusnäyttö"
+
+#: 5.8/sidebar.js:271 3.2/applet.js:2294 4.0/sidebar.js:270
+msgid "Lock the screen"
+msgstr "Lukitse näyttö"
+
+#: 3.2/applet.js:92
+msgid "Type to search..."
+msgstr "Kirjoita haku..."
+
+#: 3.2/applet.js:284
+msgid "No description available"
+msgstr "Ei kuvausta saatavilla"
+
+#: 3.2/applet.js:1017
+msgid "Recent files"
+msgstr "Viimeaikaiset"
+
+#: 3.2/applet.js:1018
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: 3.2/applet.js:1352
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0-paketti vaaditaan kirjanmerkkeihin Firefox ja Midori."
+
+#: 3.2/applet.js:1427
+msgid "No recent files"
+msgstr "Ei viimeaikaisia tiedostoja"
+
+#: 3.2/applet.js:2279
+msgid "Account details"
+msgstr "Tilin tiedot"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1260
+msgid "Grid View"
+msgstr "Kuvakkeet"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1254
+msgid "List View"
+msgstr "Luettelo"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1261
+msgid "Switch to grid view"
+msgstr "Vaihda kuvakkeisiin"
+
+#: 3.2/applet.js:2287 3.2/buttons.js:1255
+msgid "Switch to list view"
+msgstr "Vaihda luetteloon"
+
+#: 3.2/placeDisplay.js:146
+msgid "Home"
+msgstr "Koti"
+
+#: 3.2/placeDisplay.js:224
+msgid "Browse network"
+msgstr "Selaa verkkoa"
+
+#: 4.0/applet.js:1094
+msgid "Applications and files"
+msgstr "Sovellukset ja tiedostot"
+
+#: 5.8/search.py:43 4.0/search.py:43
+msgid "Open"
+msgstr "Avaa"
+
+#. 5.8->settings-schema.json->search->title
+#. 5.8->settings-schema.json->search-search->title
+#. 4.0->settings-schema.json->search->title
+#. 4.0->settings-schema.json->search-search->title
+#: 5.8/search.py:85 4.0/search.py:85
+msgid "Search"
+msgstr "Haku"
+
+#: 5.8/search.py:106 4.0/search.py:106
+msgid "Start in"
+msgstr "Aloita"
+
+#: 5.8/search.py:107 4.0/search.py:107
+msgid "Select a folder"
+msgstr "Valitse kansio"
+
+#: 5.8/search.py:113 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr "Seuraa symlinkkejä"
+
+#: 5.8/search.py:117 4.0/search.py:117
+msgid "Search hidden"
+msgstr "Hae piilotetut"
+
+#: 5.8/search.py:121 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr "Käytä säännöllisiä lauseita"
+
+#: 5.8/search.py:125 4.0/search.py:125
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: 5.8/search.py:140 4.0/search.py:140
+msgid "File"
+msgstr "Tiedosto"
+
+#: 5.8/search.py:156 4.0/search.py:156
+msgid "Path"
+msgstr "Polku"
+
+#: 5.8/search.py:184 4.0/search.py:184
+msgid "Searching..."
+msgstr "Hakee..."
+
+#: 5.8/search.py:198 5.8/search.py:199 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr "Haku pysäytetty"
+
+#: 5.8/search.py:215 4.0/search.py:215
+msgid "Searching: "
+msgstr "Hakee: "
+
+#: 5.8/search.py:220 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Virhe: oikeudet kansion lukemiseen ei riitä "
+
+#: 5.8/search.py:252 4.0/search.py:252
+msgid "Search Completed"
+msgstr "Haku valmis"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid "Skipping"
+msgstr "Ohitus"
+
+#: 5.8/search.py:259 4.0/search.py:259
+msgid " - directory already searched"
+msgstr " - hakemisto on jo haettu"
+
+#: 4.0/mint-remove-application.py:34
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Tätä valikkokohtaa ei ole liitetty mihinkään pakettiin. Haluatko silti "
+"poistaa sen valikosta?"
+
+#: 4.0/mint-remove-application.py:75
+msgid "The following packages will be removed:"
+msgstr "Seuraavat paketit poistetaan:"
+
+#: 4.0/mint-remove-application.py:82
+msgid "Packages to be removed"
+msgstr "Poistettavat paketit"
+
+#: 4.0/mint-remove-application.py:143
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Pakettia %s ei voi poistaa, koska muut paketit vaativat sitä."
+
+#: 4.0/mint-remove-application.py:149
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Paketti %s on riippuvainen seuraavista paketeista:"
+
+#. metadata.json->name
+#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Joustava valikko, jossa asetteluna ruudukko tai luettelo, tiedostoselain ja "
+"hymiöhaku."
+
+#. 5.8->settings-schema.json->layout->title
+#. 5.8->settings-schema.json->menu-layout->title
+#. 3.2->settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu-layout->title
+#. 4.0->settings-schema.json->layout->title
+#. 4.0->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Asettelu"
+
+#. 5.8->settings-schema.json->behaviour->title
+#. 3.2->settings-schema.json->panel->title
+#. 4.0->settings-schema.json->behaviour->title
+msgid "Behavior"
+msgstr "Toiminta"
+
+#. 5.8->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. 5.8->settings-schema.json->tips->title
+#. 5.8->settings-schema.json->tips-section->title
+#. 4.0->settings-schema.json->tips->title
+#. 4.0->settings-schema.json->tips-section->title
+msgid "Tips"
+msgstr "Vinkki"
+
+#. 5.8->settings-schema.json->menu-content->title
+#. 3.2->settings-schema.json->menu-content->title
+#. 4.0->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Sisältö"
+
+#. 5.8->settings-schema.json->panel-behave->title
+#. 5.8->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
+msgid "Panel"
+msgstr "Paneeli"
+
+#. 5.8->settings-schema.json->menu-behave->title
+#. 5.8->settings-schema.json->menu-icons->title
+#. 3.2->settings-schema.json->menu-behave->title
+#. 3.2->settings-schema.json->menu-icons->title
+#. 4.0->settings-schema.json->menu-behave->title
+#. 4.0->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Valikko"
+
+#. 5.8->settings-schema.json->applications-view-mode->description
+#. 4.0->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Näytä sovellukset"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "List"
+msgstr "Luettelo"
+
+#. 5.8->settings-schema.json->applications-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
+msgid "Grid"
+msgstr "Ruudukko"
+
+#. 5.8->settings-schema.json->applications-view-mode->tooltip
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Näytä sovellukset luettelona tai ruudukkona"
+
+#. 5.8->settings-schema.json->show-sidebar->description
+#. 4.0->settings-schema.json->show-sidebar->description
+msgid "Show sidebar"
+msgstr "Näytä valikon sivupalkki"
+
+#. 5.8->settings-schema.json->show-sidebar->tooltip
+#. 4.0->settings-schema.json->show-sidebar->tooltip
+msgid "Show the sidebar in the menu"
+msgstr "Näytä sivupalkki valikossa"
+
+#. 5.8->settings-schema.json->sidebar-placement->description
+#. 4.0->settings-schema.json->sidebar-placement->description
+msgid "Sidebar location"
+msgstr "Sivupalkin paikka"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Top"
+msgstr "Ylös"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Bottom"
+msgstr "Alas"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Left"
+msgstr "Vasen"
+
+#. 5.8->settings-schema.json->sidebar-placement->options
+#. 4.0->settings-schema.json->sidebar-placement->options
+msgid "Right"
+msgstr "Oikea"
+
+#. 5.8->settings-schema.json->sidebar-placement->tooltip
+#. 4.0->settings-schema.json->sidebar-placement->tooltip
+msgid "Choose where to show the sidebar"
+msgstr "Valitse, missä sivupalkki näytetään"
+
+#. 5.8->settings-schema.json->sidebar-favorites->description
+#. 4.0->settings-schema.json->sidebar-favorites->description
+msgid "Show favorites on sidebar"
+msgstr "Näytä suosikit sivupalkissa"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 5.8->settings-schema.json->description-placement->options
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "None"
+msgstr "Ei mitään"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps only"
+msgstr "Vain sovellukset"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Files only"
+msgstr "Vain tiedostot"
+
+#. 5.8->settings-schema.json->sidebar-favorites->options
+#. 4.0->settings-schema.json->sidebar-favorites->options
+msgid "Apps and files"
+msgstr "Sovellukset ja tiedostot"
+
+#. 5.8->settings-schema.json->sidebar-favorites->tooltip
+#. 4.0->settings-schema.json->sidebar-favorites->tooltip
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Näytä suosikiksi merkityt ja sivupalkissa"
+
+#. 5.8->settings-schema.json->description-placement->description
+#. 4.0->settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Näytä sovelluksen kuvaus"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Työkaluvihjeessä"
+
+#. 5.8->settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Nimen alapuolella"
+
+#. 5.8->settings-schema.json->description-placement->tooltip
+#. 4.0->settings-schema.json->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Valitse, missä kuvaukset näytetään"
+
+#. 5.8->settings-schema.json->show-categories->description
+#. 4.0->settings-schema.json->show-categories->description
+msgid "Show categories"
+msgstr "Näytä ryhmät"
+
+#. 5.8->settings-schema.json->show-categories->tooltip
+#. 4.0->settings-schema.json->show-categories->tooltip
+msgid "Show list of application categories"
+msgstr "Näytä luettelo sovellusryhmistä"
+
+#. 5.8->settings-schema.json->show-places-category->description
+#. 3.2->settings-schema.json->show-places->description
+#. 4.0->settings-schema.json->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Näytä suosikiksi ⭐ merkityt tiedostot ja kansiot"
+
+#. 5.8->settings-schema.json->show-places-category->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 4.0->settings-schema.json->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Näytä kirjanmerkit ja sijainti valikossa"
+
+#. 5.8->settings-schema.json->show-recents-category->description
+#. 4.0->settings-schema.json->show-recents-category->description
+msgid "Show recent items"
+msgstr "Näytä viimeisimmät tiedostot"
+
+#. 5.8->settings-schema.json->show-recents-category->tooltip
+#. 4.0->settings-schema.json->show-recents-category->tooltip
+msgid "Show recent items category in the menu"
+msgstr "Näytä viimeisimmät kohteet omana ryhmänä valikossa"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->description
+#. 4.0->settings-schema.json->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "Näytä suositut ♥ sovellukset"
+
+#. 5.8->settings-schema.json->show-favorite-apps-category->tooltip
+#. 4.0->settings-schema.json->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "Näytä suositut sovellukset omana ryhmänä valikossa"
+
+#. 5.8->settings-schema.json->show-home-folder-category->description
+#. 4.0->settings-schema.json->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "Näytä kotikansio"
+
+#. 5.8->settings-schema.json->show-home-folder-category->tooltip
+#. 4.0->settings-schema.json->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "Näytä kotikansio valikossa"
+
+#. 5.8->settings-schema.json->show-emoji-category->description
+#. 4.0->settings-schema.json->show-emoji-category->description
+msgid "Show emoji category"
+msgstr "Näytä valikoima hymiöitä"
+
+#. 5.8->settings-schema.json->show-emoji-category->tooltip
+#. 4.0->settings-schema.json->show-emoji-category->tooltip
+msgid "Show emoji category in the menu"
+msgstr "Näytä valikoima hymiöitä ryhmänä valikossa"
+
+#. 5.8->settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 4.0->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Avaa valikon muokkausikkuna"
+
+#. 5.8->settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 4.0->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Valikon avaa ja sulje pikanäppäin"
+
+#. 5.8->settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 4.0->settings-schema.json->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Avaa valikko osittamalla hiirellä"
+
+#. 5.8->settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Valikko avautuu kun hiiri siirretään sen päälle"
+
+#. 5.8->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->tooltip-delay->units
+#. 4.0->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisekunnit"
+
+#. 5.8->settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 4.0->settings-schema.json->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Valikon valintaviive"
+
+#. 5.8->settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 4.0->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Valikon animaatio"
+
+#. 5.8->settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 4.0->settings-schema.json->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Valikko animoidaan avatessa ja suljettaessa"
+
+#. 5.8->settings-schema.json->category-click->description
+#. 3.2->settings-schema.json->category-click->description
+#. 4.0->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Avaa ryhmät painalluksella"
+
+#. 5.8->settings-schema.json->category-click->tooltip
+#. 3.2->settings-schema.json->category-click->tooltip
+#. 4.0->settings-schema.json->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Ryhmät avautuvat hiiren painalluksella osoittamisen sijaan"
+
+#. 5.8->settings-schema.json->open-on-category->description
+#. 3.2->settings-schema.json->startup-view-mode->description
+#. 4.0->settings-schema.json->open-on-category->description
+msgid "Open menu on category:"
+msgstr "Avaa valikko valinnan mukaan:"
+
+#. 5.8->settings-schema.json->open-on-category->tooltip
+#. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 4.0->settings-schema.json->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "Avaa valikko aina tämän ryhmän ollessa valittuna"
+
+#. 5.8->settings-schema.json->open-on-category->options
+#. 4.0->settings-schema.json->open-on-category->options
+msgid "Last used category"
+msgstr "Viimeksi käytetyt"
+
+#. 5.8->settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 4.0->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Automaattinen vieritys"
+
+#. 5.8->settings-schema.json->enable-autoscroll->tooltip
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Vieritä sovelluksia automaattisesti osoittamalla hiirellä"
+
+#. 5.8->settings-schema.json->show-hidden-files->tooltip
+#. 4.0->settings-schema.json->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "Näytä piilotetut tiedostot kansioissa"
+
+#. 5.8->settings-schema.json->enable-emoji-search->description
+#. 4.0->settings-schema.json->enable-emoji-search->description
+msgid "Emoji search"
+msgstr "Hymiöhaku"
+
+#. 5.8->settings-schema.json->enable-emoji-search->tooltip
+#. 4.0->settings-schema.json->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
+msgstr "Näytä hymiöt hakutuloksissa"
+
+#. 5.8->settings-schema.json->web-search-option->description
+#. 4.0->settings-schema.json->web-search-option->description
+msgid "Web search option"
+msgstr "Hakukone"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Google"
+msgstr "Google"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Bing"
+msgstr "Bing"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Baidu"
+msgstr "Baidu"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ask"
+msgstr "Ask"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Ecosia"
+msgstr "Ecosia"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "AOL"
+msgstr "AOL"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Startpage"
+msgstr "Startpage"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Brave"
+msgstr "Brave"
+
+#. 5.8->settings-schema.json->web-search-option->options
+#. 4.0->settings-schema.json->web-search-option->options
+msgid "Qwant"
+msgstr "Qwant"
+
+#. 5.8->settings-schema.json->web-search-option->tooltip
+#. 4.0->settings-schema.json->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "Näytä hakukoneiden tuloksia"
+
+#. 5.8->settings-schema.json->web-suggestions->description
+#. 4.0->settings-schema.json->web-suggestions->description
+msgid "Web search suggestions"
+msgstr "Haku Internet"
+
+#. 5.8->settings-schema.json->web-suggestions->tooltip
+#. 4.0->settings-schema.json->web-suggestions->tooltip
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Verkkohaku valinnalla voit näyttää myös hakuehdotuksia (käyttää DuckDuckGo "
+"hakukonetta)"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->description
+#. 4.0->settings-schema.json->enable-home-folder-search->description
+msgid "Search home folder"
+msgstr "Haku kotikansiosta"
+
+#. 5.8->settings-schema.json->enable-home-folder-search->tooltip
+#. 4.0->settings-schema.json->enable-home-folder-search->tooltip
+msgid "When searching, also search my home folder for files"
+msgstr "Haettaessa etsi myös tiedostoja kotikansiosta"
+
+#. 5.8->settings-schema.json->enable-web-history-search->description
+#. 4.0->settings-schema.json->enable-web-history-search->description
+msgid "Web history search"
+msgstr "Haku hakuhistoriasta"
+
+#. 5.8->settings-schema.json->enable-web-history-search->tooltip
+#. 4.0->settings-schema.json->enable-web-history-search->tooltip
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Kun haet, tee hakuja myös selaimen historiasta (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Huomaa: Firefoxin historiaa ei tueta tällä hetkellä."
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->description
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->description
+msgid "Web bookmarks search"
+msgstr "Haku selaimen kirjanmerkeistä"
+
+#. 5.8->settings-schema.json->enable-web-bookmarks-search->tooltip
+#. 4.0->settings-schema.json->enable-web-bookmarks-search->tooltip
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Kun haet, tee hakuja myös selaimen kirjanmerkeistä (Google Chrome, Firefox, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Huomaa: Jotta voit etsiä Firefoxin kirjanmerkkejä on asennettava paketti "
+"gir1.2-gda-5.0 (Debian-pohjaiset, mukaan lukien Ubuntu & Linux Mint) tai "
+"paketti libgda (Arch jakelut) ja käynnistä tietokone uudelleen."
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->description
+#. 4.0->settings-schema.json->enable-wikipedia-search->description
+msgid "Wikipedia search"
+msgstr "Haku Wikipedia"
+
+#. 5.8->settings-schema.json->enable-wikipedia-search->tooltip
+#. 4.0->settings-schema.json->enable-wikipedia-search->tooltip
+msgid "Show some Wikipedia results"
+msgstr "Näytä joitain tuloksia Wikipediasta"
+
+#. 5.8->settings-schema.json->wikipedia-language->description
+#. 5.8->settings-schema.json->wikipedia-language->tooltip
+#. 4.0->settings-schema.json->wikipedia-language->description
+#. 4.0->settings-schema.json->wikipedia-language->tooltip
+msgid "Wikipedia language"
+msgstr "Wikipedia kieli"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "English"
+msgstr "English"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Sinugboanong Binisaya"
+msgstr "Sinugboanong Binisaya"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Svenska"
+msgstr "Ruotsi"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Français"
+msgstr "Français"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nederlands"
+msgstr "Nederlands"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Русский"
+msgstr "Русский"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Italiano"
+msgstr "Italiano"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Español"
+msgstr "Español"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Polski"
+msgstr "Polski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "مصرى (Maṣri)"
+msgstr "مصرى (Maṣri)"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "日本語"
+msgstr "日本語"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tiếng Việt"
+msgstr "Tiếng Việt"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Winaray"
+msgstr "Winaray"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "中文"
+msgstr "中文"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "العربية"
+msgstr "العربية"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Українська"
+msgstr "Українська"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Português"
+msgstr "Português"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "فارسی"
+msgstr "فارسی"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Català"
+msgstr "Català"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Српски / Srpski"
+msgstr "Српски / Srpski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Indonesia"
+msgstr "Bahasa Indonesia"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Norsk (Bokmål)"
+msgstr "Norsk (Bokmål)"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "한국어"
+msgstr "한국어"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Suomi"
+msgstr "Suomi"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Magyar"
+msgstr "Magyar"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Čeština"
+msgstr "Čeština"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Srpskohrvatski / Српскохрватски"
+msgstr "Srpskohrvatski / Српскохрватски"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bân-lâm-gú"
+msgstr "Bân-lâm-gú"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Türkçe"
+msgstr "Türkçe"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Română"
+msgstr "Română"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Нохчийн"
+msgstr "Нохчийн"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Euskara"
+msgstr "Euskara"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Bahasa Melayu"
+msgstr "Bahasa Melayu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Tatarça / Татарча"
+msgstr "Tatarça / Татарча"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "עברית"
+msgstr "עברית"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Հայերեն"
+msgstr "Հայերեն"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Български"
+msgstr "Български"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Dansk"
+msgstr "Dansk"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "تۆرکجه"
+msgstr "تۆرکجه"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenčina"
+msgstr "Slovenčina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Қазақша"
+msgstr "Қазақша"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Minangkabau"
+msgstr "Minangkabau"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Eesti"
+msgstr "Eesti"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Hrvatski"
+msgstr "Hrvatski"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Беларуская"
+msgstr "Беларуская"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Lietuvių"
+msgstr "Lietuvių"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Ελληνικά"
+msgstr "Ελληνικά"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Simple English"
+msgstr "Simple English"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Azərbaycanca"
+msgstr "Azərbaycanca"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Galego"
+msgstr "Galego"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Slovenščina"
+msgstr "Slovenščina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "اردو"
+msgstr "اردو"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Nynorsk"
+msgstr "Nynorsk"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ქართული"
+msgstr "ქართული"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "हिन्दी"
+msgstr "हिन्दी"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "தமிழ்"
+msgstr "தமிழ்"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "ไทย"
+msgstr "ไทย"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "O‘zbek"
+msgstr "O‘zbek"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latina"
+msgstr "Latina"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Cymraeg"
+msgstr "Cymraeg"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Asturianu"
+msgstr "Asturianu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Volapük"
+msgstr "Volapük"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "粵語"
+msgstr "粵語"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Македонски"
+msgstr "Македонски"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "বাংলা"
+msgstr "বাংলা"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Latviešu"
+msgstr "Latviešu"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "Тоҷикӣ"
+msgstr "Тоҷикӣ"
+
+#. 5.8->settings-schema.json->wikipedia-language->options
+#. 4.0->settings-schema.json->wikipedia-language->options
+msgid "မြန်မာဘာသာ"
+msgstr "မြန်မာဘာသာ"
+
+#. 5.8->settings-schema.json->search-help->description
+#. 4.0->settings-schema.json->search-help->description
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Huomaa: Joitakin hakuja voidaan silti käyttää, vaikka et olisi ottanut niitä "
+"käyttöön hyödyntäen etuliitettä hakemiseen.\n"
+"Esimerkiksi: jos haluat etsiä hymiötä, kirjoita \"e heart\" löytää sydämiä. "
+"Samoin etuliitteitä \"f\" tiedostojen hakuun, \"h\" selainhistoriaan ja \"b"
+"\" kirjanmerkkien hakuun.\n"
+
+#. 5.8->settings-schema.json->menu-icon-custom->description
+#. 3.2->settings-schema.json->menu-icon-custom->description
+#. 4.0->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Vaihda kuvake"
+
+#. 5.8->settings-schema.json->menu-icon-custom->tooltip
+#. 3.2->settings-schema.json->menu-icon-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Käytä paneelissa eri kuvaketta"
+
+#. 5.8->settings-schema.json->menu-icon->description
+#. 5.8->settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->description
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Paneelin kuvake"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->description
+#. 4.0->settings-schema.json->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "Kuvakkeen koko"
+
+#. 5.8->settings-schema.json->menu-icon-size-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "Mukauta paneelin kuvakkeen kokoa"
+
+#. 5.8->settings-schema.json->menu-icon-size->description
+#. 4.0->settings-schema.json->menu-icon-size->description
+msgid "Panel icon size (pixels)"
+msgstr "Paneelin kuvakkeen koko (pikseliä)"
+
+#. 5.8->settings-schema.json->menu-icon-size->tooltip
+#. 4.0->settings-schema.json->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "Valitse paneelin kuvakkeeseen mukautettu koko"
+
+#. 5.8->settings-schema.json->menu-label->description
+#. 3.2->settings-schema.json->menu-label->description
+#. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Teksti paneelissa"
+
+#. 5.8->settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 4.0->settings-schema.json->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Kuvakkeen vieressä näkyvä teksti"
+
+#. 5.8->settings-schema.json->category-icon-size->description
+#. 5.8->settings-schema.json->category-icon-size->tooltip
+#. 3.2->settings-schema.json->category-icon-size->description
+#. 3.2->settings-schema.json->category-icon-size->tooltip
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size (pixels)"
+msgstr "Ryhmän kuvakkeen koko (pikseliä)"
+
+#. 5.8->settings-schema.json->apps-list-icon-size->description
+#. 5.8->settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-list-icon-size->description
+#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size (pixels)"
+msgstr "Luettelon kuvakkeen koko (pikseliä)"
+
+#. 5.8->settings-schema.json->apps-grid-icon-size->description
+#. 5.8->settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-grid-icon-size->description
+#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size (pixels)"
+msgstr "Ruudukon kuvakkeen koko (pikseliä)"
+
+#. 5.8->settings-schema.json->sidebar-icon-size->description
+#. 5.8->settings-schema.json->sidebar-icon-size->tooltip
+#. 4.0->settings-schema.json->sidebar-icon-size->description
+#. 4.0->settings-schema.json->sidebar-icon-size->tooltip
+msgid "Sidebar icon size (pixels)"
+msgstr "Sivupalkin kuvakkeen koko (pikseliä)"
+
+#. 5.8->settings-schema.json->use-box-style->description
+#. 4.0->settings-schema.json->use-box-style->description
+msgid "Use sidebar box style"
+msgstr "Sivupalkin ohjelmissa varjostettu laatikko"
+
+#. 5.8->settings-schema.json->use-box-style->tooltip
+#. 4.0->settings-schema.json->use-box-style->tooltip
+msgid "Use a sidebar box style"
+msgstr "Sivupalkin ohjelmien taakse varjostettu laatikko"
+
+#. 5.8->settings-schema.json->use-tile-style->description
+#. 4.0->settings-schema.json->use-tile-style->description
+msgid "Use tile style"
+msgstr "Kuvakkeissa varjostettu laatikko"
+
+#. 5.8->settings-schema.json->use-tile-style->tooltip
+#. 4.0->settings-schema.json->use-tile-style->tooltip
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Käytä sovelluspainikkeissa laattamaista tyyliä (ei ehkä toimi kaikissa "
+"teemoissa)"
+
+#. 5.8->settings-schema.json->info1->description
+#. 4.0->settings-schema.json->info1->description
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Muuta valikon kokoa vetämällä valikon reunasta."
+
+#. 5.8->settings-schema.json->info2->description
+#. 4.0->settings-schema.json->info2->description
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Muuta järjestystä vetämällä ja pudottamalla."
+
+#. 5.8->settings-schema.json->info3->description
+#. 4.0->settings-schema.json->info3->description
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Kansiot voidaan asettaa ja poistaa ryhmiksi painamalla hiiren oikealla "
+"painikkeella."
+
+#. 5.8->settings-schema.json->info4->description
+#. 4.0->settings-schema.json->info4->description
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Näppäinvaihtoehdot:\n"
+"ctrl-p — Avaa valitun sovelluksen käynnistimen valintaikkunan.\n"
+"ctrl-d — Avaa valitun sovelluksen .desktop-tiedoston muokattavaksi "
+"tekstieditoriin.\n"
+
+#. 3.2->settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "Hakupalvelut"
+
+#. 3.2->settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Hakupalvelun laajennuksia ei löytynyt"
+
+#. 3.2->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Viimeisten tiedostojen asetukset"
+
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Automattinen vieritys ohjelmaluettelossa"
+
+#. 3.2->settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "Näytä selaimen kirjanmerkit"
+
+#. 3.2->settings-schema.json->enable-bookmarks->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Näytä selaimen kirjanmerkit valikossa.\n"
+"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox kirjanmerkit."
+
+#. 3.2->settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Ota avoimien ikkunoiden haku käyttöön"
+
+#. 3.2->settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Ota hakupalvelut käyttöön"
+
+#. 3.2->settings-schema.json->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "Valitse, indeksoidaanko hakupalvelun tulokset hakuihin"
+
+#. 3.2->settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "Esimerkkejä hakupalvelun tarjoajista"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "sarakkeet"
+
+#. 3.2->settings-schema.json->apps-grid-column-count->description
+#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Sarakkeiden lukumäärä sovellusruudussa"
+
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Näytä sovellusten kuvakkeet"
+
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Näytä ryhmän kuvakkeet"
+
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Näytä sovellusten kuvaukset otsikoiden alla"
+
+#. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Näytä työkaluvihjeet"
+
+#. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Työkaluvinkin viive"
+
+#. 3.2->settings-schema.json->enable-custom-menu-height->description
+#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Käytä mukautettua valikon korkeutta"
+
+#. 3.2->settings-schema.json->custom-menu-height->description
+#. 3.2->settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height (pixels)"
+msgstr "Muokattu valikon korkeus (pikseliä)"
