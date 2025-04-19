@@ -31,6 +31,7 @@ export interface WeatherData {
 		/** Meteorological Degrees */
 		degree: number | null,
 	};
+	uvIndex: number | null;
 	/** In Kelvin */
 	temperature: number | null;
 	/** In hPa */
