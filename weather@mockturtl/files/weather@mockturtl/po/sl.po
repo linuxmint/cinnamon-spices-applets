@@ -1960,15 +1960,15 @@ msgstr "Rahla sodra"
 
 #. 3.8/weather-applet.js:16594 3.8/weather-applet.js:16595
 msgid "Intermittent Rain"
-msgstr ""
+msgstr "Prehodno deževje"
 
 #. 3.8/weather-applet.js:16602 3.8/weather-applet.js:16603
 msgid "Intermittent Sleet"
-msgstr ""
+msgstr "Prehodna sodra"
 
 #. 3.8/weather-applet.js:16610 3.8/weather-applet.js:16611
 msgid "Intermittent Snow"
-msgstr ""
+msgstr "Prehodno sneženje"
 
 #. 3.8/weather-applet.js:16658 3.8/weather-applet.js:16659
 #, fuzzy
@@ -2058,20 +2058,20 @@ msgstr "Opozorilo"
 
 #. 3.8/weather-applet.js:16964
 msgid "Avalanche Warning"
-msgstr ""
+msgstr "Opozorilo za plazove"
 
 #. 3.8/weather-applet.js:16966
 msgid "Earthquake Warning"
-msgstr ""
+msgstr "Opozorilo za potres"
 
 #. 3.8/weather-applet.js:16968
 msgid "Forest Fire Warning"
-msgstr ""
+msgstr "Opozorilo za gozdne požare"
 
 #. 3.8/weather-applet.js:16970
 #, fuzzy
 msgid "Flood Warning"
-msgstr "Opozorilo"
+msgstr "Opozorilo za poplave"
 
 #. 3.8/weather-applet.js:16990
 msgid "Swiss Météo"
@@ -2112,7 +2112,7 @@ msgstr "Storitev za delovanje zahteva ključ za API"
 
 #. 3.8/weather-applet.js:18183
 msgid "Dew Point"
-msgstr ""
+msgstr "Rosišče"
 
 #. 3.8/weather-applet.js:18266
 msgid "Precipitation will end in {precipEnd} minutes"
@@ -2766,7 +2766,7 @@ msgstr ""
 msgid ""
 "If the location field matches a saved location's 'Search Entry' field, the "
 "saved location will be used instead."
-msgstr ""
+msgstr "Če polje z lokacijo ustreza iskalnemu vnosu shranjene lokacije, bo uporabljena le-ta."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2827,7 +2827,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Omogoči prikaz vremenskih opozoril"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
@@ -2863,7 +2863,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr ""
+msgstr "Vedno pokaži urno vremensko napoved"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
@@ -2921,7 +2921,7 @@ msgstr "Kot npr. SV, S namesto ikon za smer."
 
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Provider should translate conditions if available"
-msgstr ""
+msgstr "Naj ponudnik prevede vremenske razmere, če so prevodi voljo"
 
 #. 3.8->settings-schema.json->translateCondition->tooltip
 msgid ""
