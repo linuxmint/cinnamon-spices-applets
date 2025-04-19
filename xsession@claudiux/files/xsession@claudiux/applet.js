@@ -1,11 +1,16 @@
 /* Looking Glass Shortcuts (xsession@claudiux)
 */
-const Applet = imports.ui.applet; // ++ Base for an applet
-const Settings = imports.ui.settings; // To read/write this applet settings
-const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
-const Gio = imports.gi.Gio; // Needed for file infos
-const Gettext = imports.gettext; // ++ Needed for translations
-const Util = imports.misc.util; // Needed for spawnCommandLineAsync()
+const Applet = imports.ui.applet;
+const Cinnamon = imports.gi.Cinnamon;
+const Clutter = imports.gi.Clutter;
+const Main = imports.ui.main;
+const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
+const Gettext = imports.gettext;
+const Util = imports.misc.util;
+const Tooltips = imports.ui.tooltips;
 const {
   reloadExtension,
   Type
@@ -13,9 +18,14 @@ const {
 const { restartCinnamon } = imports.ui.main; // Main
 
 const St = imports.gi.St;
-const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
+const PopupMenu = imports.ui.popupMenu;
 
 const {to_string} = require("./lib/to-string");
+const {
+  setTimeout,
+  clearTimeout,
+  remove_all_sources
+} = require("./lib/mainloopTools");
 
 // ++ Set DEBUG to true to display log messages in ~/.xsession-errors
 // ++ Set DEBUG to false in production.
@@ -24,18 +34,15 @@ const DEBUG = false;
 const UUID="xsession@claudiux";
 
 const HOME_DIR = GLib.get_home_dir();
-const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
-const CACHE_DIR = HOME_DIR + "/.cinnamon/spices.cache";
 const SPICES_DIR = HOME_DIR + "/.local/share/cinnamon"
 const APPLET_DIR = SPICES_DIR + "/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const ICONS_DIR = APPLET_DIR + "/icons";
 const WATCHXSE_SCRIPT = SCRIPTS_DIR + "/watch-xse.sh";
+const WATCHXSE_LATEST_SCRIPT = SCRIPTS_DIR + "/watch-xse-latest.sh";
+const ICONS_DIR = APPLET_DIR + "/icons";
 
-// ++ l10n support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-// ++ Always needed if you want localisation/translation support
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans !== str && customTrans !== "")
@@ -47,16 +54,11 @@ function _(str) {
 let bidon = _("Applet");
 bidon = _("Desklet");
 bidon = _("Extension");
-//bidon = _("Theme");
-//bidon = _("Search Provider");
 bidon = _("Applets");
 bidon = _("Desklets");
 bidon = _("Extensions");
-//bidon = _("Themes");
-//bidon = _("Search Providers");
 bidon = null;
 
-// ++ Useful for logging
 /**
  * Usage of log and logError:
  * log("Any message here") to log the message only if DEBUG is set to true.
@@ -72,6 +74,78 @@ function logError(error) {
     global.logError("[" + UUID + "]: " + error)
 }
 
+Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
+
+class LGSsliderItem extends PopupMenu.PopupSliderMenuItem {
+    constructor(value) {
+        super(value)
+    }
+    _onScrollEvent (actor, event) {
+        const SLIDER_SCROLL_STEP = 5/240;
+        let direction = event.get_scroll_direction();
+        if (direction == Clutter.ScrollDirection.SMOOTH) {
+            return;
+        }
+
+        if (direction == Clutter.ScrollDirection.DOWN) {
+            this._value = Math.max(0, this._value - SLIDER_SCROLL_STEP);
+        }
+        else if (direction == Clutter.ScrollDirection.UP) {
+            this._value = Math.min(1, this._value + SLIDER_SCROLL_STEP);
+        }
+
+        this._slider.queue_repaint();
+        this.emit('value-changed', this._value);
+    }
+}
+
+class ReloadAllMenuItem extends PopupMenu.PopupBaseMenuItem {
+  constructor(parent, type, params) {
+    super(params);
+    this.parent = parent;
+    this.type = type;
+
+    let label = new St.Label({
+      style: "spacing: .25em; font-weight: bold;" ,
+      x_align: St.Align.START,
+      x_expand: true,
+      text: _("RELOAD ALL"),
+      reactive: true,
+      track_hover: true
+    });
+
+    let icon_box = new St.BoxLayout({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: false, reactive: true, track_hover: true });
+    let icon_path = ICONS_DIR + "/" + this.type + "-symbolic.svg";
+    let icon_file = Gio.file_new_for_path(icon_path);
+    let icon, gicon;
+
+    //~ let icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+
+    gicon = Gio.icon_new_for_string(icon_path);
+    //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
+    //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size, });
+    //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.SYMBOLIC, });
+    icon = new St.Icon();
+    icon.set_icon_size(this.parent.icon_size);
+    icon.set_icon_type(St.IconType.SYMBOLIC);
+    icon.set_gicon(gicon);
+
+    //~ let icon = new St.Icon({ icon_name: ICONS_DIR + "/" + type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+    try {
+      icon_box.add_actor(icon);
+    } catch(e) {
+      logError("Problem with: " + icon_path + ": " + e);
+    }
+
+    this.addActor(label);
+    try {
+      this.addActor(icon_box);
+    } catch(e) {
+      logError("Problem with: " + icon_path + ": " + e);
+    }
+  }
+}
+
 class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
     constructor(parent, type, uuid, action, params) {
         super(params);
@@ -83,7 +157,6 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
         let label = new St.Label({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: true, text: uuid, reactive: true, track_hover: true });
 
         let icon_box = new St.BoxLayout({ style: "spacing: .25em;" , x_align: St.Align.START, x_expand: false, reactive: true, track_hover: true });
-        //~ let icon_box = new St.BoxLayout({ style_class: 'popup-menu-icon', reactive: true, track_hover: true });
         let icon_path = HOME_DIR+"/.cache/cinnamon/spices/"+type.slice(0,-1)+"/"+uuid+".png";
         let icon_file = Gio.file_new_for_path(icon_path);
         let icon, gicon;
@@ -91,12 +164,14 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
         if (icon_file.query_exists(null)) {
             gicon = Gio.icon_new_for_string(icon_path);
             icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
+            //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, });
         } else {
             icon_path = SPICES_DIR + "/" + type + "/" + uuid + "/icon.png";
             icon_file = Gio.file_new_for_path(icon_path);
             if (icon_file.query_exists(null)) {
                 gicon = Gio.icon_new_for_string(icon_path);
                 icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, icon_size: this.parent.icon_size });
+                //~ icon = new St.Icon({ gicon: gicon, icon_type: St.IconType.FULLCOLOR, });
             } else {
                 let metadataJson_path = SPICES_DIR + "/" + type + "/" + uuid + "/metadata.json";
                 let metadataJson_file = Gio.file_new_for_path(metadataJson_path);
@@ -106,18 +181,30 @@ class LGSMenuItem extends PopupMenu.PopupBaseMenuItem {
                     let metadata = JSON.parse(contents);
                     if (metadata["icon"]) {
                         icon = new St.Icon({ icon_name: metadata["icon"], icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+                        //~ icon = new St.Icon({ icon_name: metadata["icon"], icon_type: St.IconType.SYMBOLIC, });
                     } else {
                         icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+                        //~ icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, });
                     }
                 } else {
                     icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, icon_size: this.parent.icon_size });
+                    //~ icon = new St.Icon({ icon_name: type+"-symbolic", icon_type: St.IconType.SYMBOLIC, });
                 }
             }
         }
-        icon_box.add_actor(icon);
+
+        try {
+          icon_box.add_actor(icon);
+        } catch(e) {
+          logError("Problem with: " + icon_path + ": " + e);
+        }
 
         this.addActor(label);
-        this.addActor(icon_box);
+        try {
+          this.addActor(icon_box);
+        } catch(e) {
+          logError("Problem with: " + icon_path + ": " + e);
+        }
 
 
     }
@@ -141,25 +228,29 @@ class LGS extends Applet.IconApplet {
         // Settings:
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
         this.settings.bind("icon_size", "icon_size");
+        this.settings.bind("show_reload_all", "show_reload_all");
+        this.settings.bind("number_latest", "number_latest");
 
-        // ++ Set up left click menu
+        // Left click menu:
+        this.itemNumberLatest = null;
+
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
         let _tooltip = _("Middle-click: \n") + _("Show .xsession-errors");
+        _tooltip += "\n" + _("Ctrl + Middle-click: \n") + _("Show latest messages");
         this.set_applet_tooltip(_tooltip);
-    }; // End of constructor
+    }
 
-    //++ Handler for when the applet is clicked.
     on_applet_clicked(event) {
         if (!this.menu.isOpen)
             this.makeMenu();
         this.menu.toggle();
-    }; // End of on_applet_clicked
+    }
 
     get_active_spices(type) {
-        // Returns the list of active spices of type 'type'
+        // Returns the list of active spices of given type.
         var dconfEnabled;
         var elt = (type.toString() === "applets") ? 3 : 0;
         let enabled;
@@ -188,11 +279,24 @@ class LGS extends Applet.IconApplet {
                 listEnabled.push(xlet_uuid);
         }
         return listEnabled.sort();
-        // End of get_active_spices
     }
 
     makeMenu() {
+        if (this.itemNumberLatest != null) {
+            this.itemNumberLatest.disconnect(this.itemNumberLatestValueChangedId);
+            this.itemNumberLatest.disconnect(this.itemNumberLatestDragEndId);
+            this.itemNumberLatest = null;
+        }
         this.menu.removeAll();
+        this.itemNumberLatest = new LGSsliderItem((this.number_latest - 10) /240);
+        this.itemNumberLatest.set_mark(9/24);
+        this.itemNumberLatest.tooltip = new Tooltips.Tooltip(
+            this.itemNumberLatest.actor,
+            _("%s latest messages").format(this.number_latest) + "\n" + _("min: 10. max: 250.")
+        );
+
+        this.itemNumberLatestValueChangedId = this.itemNumberLatest.connect('value-changed', () => { this.numberSliderChanged() });
+        this.itemNumberLatestDragEndId = this.itemNumberLatest.connect('drag-end', () => { this.numberSliderReleased() });
 
         /**
          *  Sections
@@ -201,37 +305,53 @@ class LGS extends Applet.IconApplet {
         let sectionReload = new PopupMenu.PopupMenuSection();
         let sectionSettings = new PopupMenu.PopupMenuSection();
         let sectionSource = new PopupMenu.PopupMenuSection();
-        // Head
+
+        /// Head
         let menuitemHead1 = new PopupMenu.PopupMenuItem(_(this.name)+' '+this.version, {
             reactive: false
         });
         sectionHead.addMenuItem(menuitemHead1);
         menuitemHead1.emit('allocate');
 
+        // Show .xsession-errors:
         let itemWatchXSE = new PopupMenu.PopupIconMenuItem(_("Show .xsession-errors"), "face-glasses", St.IconType.SYMBOLIC);
         itemWatchXSE.connect(
             "activate",
             () => {
-                //~ if (this.menu.isOpen) this.menu.close();
-                setTimeout( () => {
+                let id = setTimeout( () => {
+                    clearTimeout(id);
                     Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
-                    return false;
                 },
-                0);
+                300);
             }
         );
 
         sectionHead.addMenuItem(itemWatchXSE);
 
-        // Restart Cinnamon
+        let itemWatchXSELatest = new PopupMenu.PopupIconMenuItem(_("Show latest messages"), "bottom", St.IconType.SYMBOLIC);
+        itemWatchXSELatest.connect(
+            "activate",
+            () => {
+                let id = setTimeout( () => {
+                    clearTimeout(id);
+                    Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
+                },
+                300);
+            }
+        );
+
+        sectionHead.addMenuItem(itemWatchXSELatest);
+
+        sectionHead.addMenuItem(this.itemNumberLatest);
+
+        // Restart Cinnamon:
         let itemReloadCinnamon = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "restart", St.IconType.SYMBOLIC);
         itemReloadCinnamon.connect(
             "activate",
             () => {
-                //~ if (this.menu.isOpen) this.menu.close();
-                setTimeout( () => {
+                let id = setTimeout( () => {
+                    clearTimeout(id);
                     restartCinnamon(true);
-                    return false;
                 },
                 0);
             }
@@ -240,49 +360,113 @@ class LGS extends Applet.IconApplet {
         sectionHead.addMenuItem(itemReloadCinnamon);
         sectionHead.emit('allocate');
 
-        // Reload:
+        /// Reload:
         let reloadHead = new PopupMenu.PopupMenuItem(_("--- Reload Spices ---"), {
             reactive: false
         });
         sectionReload.addMenuItem(reloadHead);
 
-        // Applets
-        //~ let subMenuReloadApplets = new PopupMenu.PopupSubMenuMenuItem(_("Reload Applet:"));
+        // Applets:
         let subMenuReloadApplets = new PopupMenu.PopupSubMenuMenuItem(_("Reload Applet:"));
         sectionReload.addMenuItem(subMenuReloadApplets);
 
-        const APPLETS_DIR = SPICES_DIR + "/applets/";
+        if (this.show_reload_all) {
+          //~ let itemReloadAllApplets = new PopupMenu.PopupMenuItem(_("RELOAD ALL"), {style_class: "menu-selected-app-title"}); // make it bold.
+          let itemReloadAllApplets = new ReloadAllMenuItem(this, "applets", {});
+          itemReloadAllApplets.connect(
+            "activate",
+            () => {
+              let id = setTimeout( () => {
+                clearTimeout(id);
+                for (let applet of this.get_active_spices("applets")) {
+                  reloadExtension(applet, Type.APPLET);
+                }
+              },
+              0);
+            }
+          );
+          subMenuReloadApplets.menu.addMenuItem(itemReloadAllApplets);
+        }
 
         for (let applet of this.get_active_spices("applets")) {
             let s = new LGSMenuItem(this, "applets", applet, () => {reloadExtension(applet, Type.APPLET);}, null);
             subMenuReloadApplets.menu.addMenuItem(s);
         }
 
-        // Desklets
+        // Desklets:
         let subMenuReloadDesklets = new PopupMenu.PopupSubMenuMenuItem(_("Reload Desklet:"));
         sectionReload.addMenuItem(subMenuReloadDesklets);
+
+        if (this.show_reload_all) {
+          //~ let itemReloadAllDesklets = new PopupMenu.PopupMenuItem(_("RELOAD ALL"), {style_class: "menu-selected-app-title"}); // make it bold.
+          let itemReloadAllDesklets = new ReloadAllMenuItem(this, "desklets", {});
+          itemReloadAllDesklets.connect(
+            "activate",
+            () => {
+              let id = setTimeout( () => {
+                clearTimeout(id);
+                for (let desklet of this.get_active_spices("desklets")) {
+                  reloadExtension(desklet, Type.DESKLET);
+                }
+              },
+              0);
+            }
+          );
+          subMenuReloadDesklets.menu.addMenuItem(itemReloadAllDesklets);
+        }
 
         for (let desklet of this.get_active_spices("desklets")) {
             let s = new LGSMenuItem(this, "desklets", desklet, () => {reloadExtension(desklet, Type.DESKLET);}, null);
             subMenuReloadDesklets.menu.addMenuItem(s);
         }
 
-        // Extensions
+        // Extensions:
         let subMenuReloadExtensions = new PopupMenu.PopupSubMenuMenuItem(_("Reload Extension:"));
         sectionReload.addMenuItem(subMenuReloadExtensions);
+
+        if (this.show_reload_all) {
+          let itemReloadAllExtensions = new ReloadAllMenuItem(this, "extensions", {});
+          itemReloadAllExtensions.connect(
+            "activate",
+            () => {
+              let id = setTimeout( () => {
+                clearTimeout(id);
+                for (let extension of this.get_active_spices("extensions")) {
+                  reloadExtension(extension, Type.EXTENSION);
+                }
+              },
+              0);
+            }
+          );
+          subMenuReloadExtensions.menu.addMenuItem(itemReloadAllExtensions);
+        }
 
         for (let extension of this.get_active_spices("extensions")) {
             let s = new LGSMenuItem(this, "extensions", extension, () => {reloadExtension(extension, Type.EXTENSION);}, null);
             subMenuReloadExtensions.menu.addMenuItem(s);
         }
 
-        // Settings:
+        // Current Theme:
+        let subMenuReloadTheme = new PopupMenu.PopupMenuItem(_("Reload Current Theme"));
+        subMenuReloadTheme.connect(
+          "activate",
+          () => {
+            let id = setTimeout( () => {
+              clearTimeout(id);
+              Main.loadTheme();
+            },
+            0);
+          }
+        );
+        sectionReload.addMenuItem(subMenuReloadTheme);
+
+        /// Settings:
         let settingsHead = new PopupMenu.PopupMenuItem(_("--- Settings for ---"), {
             reactive: false
         });
         sectionSettings.addMenuItem(settingsHead);
 
-        // Applets
+        // Applets:
         let subMenuSettingsApplets = new PopupMenu.PopupSubMenuMenuItem(_("Applet:"));
         sectionSettings.addMenuItem(subMenuSettingsApplets);
 
@@ -291,7 +475,7 @@ class LGS extends Applet.IconApplet {
             subMenuSettingsApplets.menu.addMenuItem(s);
         }
 
-        // Desklets
+        // Desklets:
         let subMenuSettingsDesklets = new PopupMenu.PopupSubMenuMenuItem(_("Desklet:"));
         sectionSettings.addMenuItem(subMenuSettingsDesklets);
 
@@ -300,7 +484,7 @@ class LGS extends Applet.IconApplet {
             subMenuSettingsDesklets.menu.addMenuItem(s);
         }
 
-        // Extensions
+        // Extensions:
         let subMenuSettingsExtensions = new PopupMenu.PopupSubMenuMenuItem(_("Extension:"));
         sectionSettings.addMenuItem(subMenuSettingsExtensions);
 
@@ -309,13 +493,13 @@ class LGS extends Applet.IconApplet {
             subMenuSettingsExtensions.menu.addMenuItem(s);
         }
 
-        // View Code:
+        /// View Code:
         let codeHead = new PopupMenu.PopupMenuItem(_("--- View Code ---"), {
             reactive: false
         });
         sectionSource.addMenuItem(codeHead);
 
-        // Applets
+        // Applets:
         let subMenuCodeApplets = new PopupMenu.PopupSubMenuMenuItem(_("View Applet Code for:"));
         sectionSource.addMenuItem(subMenuCodeApplets);
 
@@ -324,7 +508,7 @@ class LGS extends Applet.IconApplet {
             subMenuCodeApplets.menu.addMenuItem(s);
         }
 
-        // Desklets
+        // Desklets:
         let subMenuCodeDesklets = new PopupMenu.PopupSubMenuMenuItem(_("View Desklet Code for:"));
         sectionSource.addMenuItem(subMenuCodeDesklets);
 
@@ -333,7 +517,7 @@ class LGS extends Applet.IconApplet {
             subMenuCodeDesklets.menu.addMenuItem(s);
         }
 
-        // Extensions
+        // Extensions:
         let subMenuCodeExtensions = new PopupMenu.PopupSubMenuMenuItem(_("View Extension Code for:"));
         sectionSource.addMenuItem(subMenuCodeExtensions);
 
@@ -346,17 +530,36 @@ class LGS extends Applet.IconApplet {
         this.menu.addMenuItem(sectionReload);
         this.menu.addMenuItem(sectionSettings);
         this.menu.addMenuItem(sectionSource);
-    }; // End of makeMenu
+    }
+
+    numberSliderChanged() {
+        this.number_latest = Math.round((10 + this.itemNumberLatest.value * (250 - 10)) / 5) * 5;
+        this.itemNumberLatest.tooltip.set_text(_("%s latest messages").format(this.number_latest) + "\n" + _("min: 10. max: 250."));
+    }
+
+    numberSliderReleased() {
+        this.numberSliderChanged();
+    }
 
     on_applet_middle_clicked(event) {
-        //~ if (this.menu.isOpen) this.menu.close();
-        setTimeout( () => {
-            Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
-            return false;
+        let modifiers = Cinnamon.get_event_state(event);
+        let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
+        let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
+        let id = setTimeout( () => {
+            clearTimeout(id);
+            if (shiftPressed || ctrlPressed) {
+                Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
+            } else {
+                Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+            }
         },
-        0);
+        300);
     }
-} // End of class LGS
+
+    on_applet_removed_from_panel(deleteConfig) {
+        remove_all_sources();
+    }
+}
 
 function main(metadata, orientation, panelHeight, instance_id) {
     return new LGS(metadata, orientation, panelHeight, instance_id);

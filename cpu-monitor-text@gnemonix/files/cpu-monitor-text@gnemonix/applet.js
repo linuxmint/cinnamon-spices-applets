@@ -72,13 +72,13 @@ MyApplet.prototype = {
 	},
 
 	_pad: function(percent) {
-		let str = "";
+        	let str = percent.toString();
 		let str_length = this.max_percentage.toString().length;
 		
-		while(str.length < str_length) {
-			str = " " + str;
+        	while(str.length < str_length) {
+			str = "\u2007" + str;
 		}
-		return (str + percent.toString()).slice(str_length);
+        	return (str);
 	},
 
 	_update: function() {

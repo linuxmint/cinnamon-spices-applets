@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-22 17:57+0100\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
 "PO-Revision-Date: 2023-12-23 16:27+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -21,96 +21,96 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#. applet.js:233 applet_OLD.js:235
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sensorovervågning"
 
-#. applet.js:482 applet_OLD.js:418
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr ""
 
-#. applet.js:761 applet.js:805 applet_OLD.js:638 applet_OLD.js:682
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "høj:"
 
-#. applet.js:761 applet.js:765 applet.js:805 applet.js:807 applet.js:849
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
 #. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
 #. applet_OLD.js:726
 msgid "n/a"
 msgstr "—"
 
-#. applet.js:765 applet.js:807 applet_OLD.js:642 applet_OLD.js:684
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:849 applet.js:893 applet_OLD.js:726 applet_OLD.js:770
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:895 applet_OLD.js:772
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:924 applet_OLD.js:801
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Ingen indtrængen detekteret"
 
-#. applet.js:924 applet_OLD.js:801
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "INDTRÆNGEN DETEKTERET!"
 
-#. applet.js:944 applet_OLD.js:821
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Skal konfigureres!"
 
-#. applet.js:1352 applet_OLD.js:1208
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Indstillinger"
 
-#. applet.js:1352 applet_OLD.js:1208
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1359 applet_OLD.js:1215
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Generelt"
 
-#. applet.js:1375 applet_OLD.js:1231
+#. applet.js:1298 applet_OLD.js:1231
 #, fuzzy, javascript-format
 msgid "%s Temperature sensors"
 msgstr "Temperatursensorer"
 
-#. applet.js:1391 applet_OLD.js:1247
+#. applet.js:1314 applet_OLD.js:1247
 #, fuzzy, javascript-format
 msgid "%s Fan sensors"
 msgstr "Ventilatorsensorer"
 
-#. applet.js:1407 applet_OLD.js:1263
+#. applet.js:1330 applet_OLD.js:1263
 #, fuzzy, javascript-format
 msgid "%s Voltage sensors"
 msgstr "Spændingssensorer"
 
-#. applet.js:1423 applet_OLD.js:1279
+#. applet.js:1346 applet_OLD.js:1279
 #, fuzzy, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "Indtrængningssensorer"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1450 applet_OLD.js:1306
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Kør xsensors"
 
-#. applet.js:1459 applet_OLD.js:1315
+#. applet.js:1374 applet_OLD.js:1315
 #, fuzzy
 msgid "Suspend Sensors"
 msgstr "Kør xsensors"
 
-#. applet.js:1470 applet_OLD.js:1326
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Genindlæs panelprogrammet"
 
-#. applet.js:1800 applet_OLD.js:1656
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Er du sikker på at du vil fjerne “%s”?"
@@ -405,6 +405,14 @@ msgstr ""
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
 msgstr "Tegnstørrelse (% af standardstørrelse)"
+
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr ""
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr ""
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"

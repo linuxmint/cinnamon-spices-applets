@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-26 12:36-0500\n"
-"PO-Revision-Date: 2020-01-24 19:00+0200\n"
-"Last-Translator: Anonymous <anon@ymous.me>\n"
+"PO-Revision-Date: 2025-03-07 17:19+0100\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:169
 msgid "just now"
@@ -37,11 +37,11 @@ msgstr "hier"
 
 #. applet.js:196
 msgid " days ago"
-msgstr "jours passés"
+msgstr " jours passés"
 
 #. applet.js:200
 msgid " weeks ago"
-msgstr "semaines passées"
+msgstr " semaines passées"
 
 #. applet.js:285
 msgid "Configure Mailnag"
@@ -96,7 +96,7 @@ msgstr "Cliquez pour voir l'erreur !"
 
 #. applet.js:775
 msgid "Error: "
-msgstr "Erreur :"
+msgstr "Erreur : "
 
 #. metadata.json->name
 msgid "Mailnag"
@@ -149,11 +149,13 @@ msgstr "Ne rien faire"
 
 #. settings-schema.json->max_length->description
 msgid "Max sender / subject display length"
-msgstr ""
+msgstr "Longueur maximale pour l'affichage de l'expéditeur / du sujet"
 
 #. settings-schema.json->max_length->tooltip
 msgid "Sender or subject lines longer than this will be cropped"
 msgstr ""
+"Les lignes de l'expéditeur ou de l'objet qui dépassent cette longueur "
+"seront tronquées"
 
 #. settings-schema.json->client->description
 msgid "Mail client to launch (or webpage)"

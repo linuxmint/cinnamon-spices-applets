@@ -72,6 +72,7 @@
         "interval",
         "keep_size",
         "char_size",
+        "horizontal_width",
         "separator_type",
         "char_color_customized",
         "char_color",
@@ -307,9 +308,18 @@
     "type": "scale",
     "default": 100,
     "min": 60,
-    "max": 120,
+    "max": 160,
     "step": 1,
     "description": "Character size (% of standard size)"
+  },
+  "horizontal_width": {
+    "type": "scale",
+    "default": 0,
+    "min": 0,
+    "max": 2000,
+    "step": 5,
+    "description": "Display width (pixels) for horizontal panels",
+    "tooltip": "0 means automatic. This value does not include border."
   },
   "separator_type": {
     "type": "combobox",

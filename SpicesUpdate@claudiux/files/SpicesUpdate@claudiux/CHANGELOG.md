@@ -1,7 +1,23 @@
-### 7.8.2~20250303
+### v7.8.7~20250324
+  * Adapts constants.js for themes.
+  * Code cleanup.
+
+### v7.8.6~20250323
+  * Fixes #6992: Improves the appearance of the label in a horizontal panel.
+
+### v7.8.5~20250315
+  * BugFixes in a bash script.
+
+### v7.8.4~20250304
+  * Improved functioning.
+
+### v7.8.3~20250303
+  * Minor bugfix.
+
+### v7.8.2~20250303
   * Does not try to translate null messages from other spices. This also helps avoid black screens.
 
-### 7.8.1~20250302
+### v7.8.1~20250302
   * Forces the use of 'cjs' even if 'gjs' is installed.
   * Uses “try” for each “destroy” command.
   * Fixes #6933.

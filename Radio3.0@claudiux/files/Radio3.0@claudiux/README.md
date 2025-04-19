@@ -4,37 +4,41 @@ Radio3.0 is an *Internet Radio Receiver & Recorder* applet for Cinnamon.
 
 With Radio3.0 you can:
 
-  * Import your stations from Radio++ if you use it. See Import tab in settings.
+  * **Listen** to any type of radio stream (MP3, AAC, AAC+, OGG, FLAC, FLV...)
 
-  * Listen to any type of radio stream (MP3, AAC, AAC+, OGG, FLAC, FLV...)
+  * **Perform research** in an internet database that references tens of thousands of radio stations.
 
-  * Perform research in an internet database that references tens of thousands of radio stations.
+  * **Import files** containing the URL of radio station streams, obtained from internet directories such as SHOUTcast.
 
-  * Import files containing the URL of radio station streams, obtained from internet directories such as SHOUTcast.
+  * **Import your radio stations from the Radio++ applet** if you use it. See Import tab in settings.
 
-  * Create your list of favorite radio stations, accessible by the menu of this applet.
+  * **Create your list** of favorite radio stations, accessible by the menu of this applet.
 
-  * Manage your list of favorite radios: add, move, remove, modify each radio of your list.
+  * **Manage your list** of favorite radio stations: add, move, remove, modify each radio of your list.
 
-  * Create categories and sort yourself your favorite radios.
+  * **Create categories** and sort yourself your favorite radios.
 
-  * Save and restore entire lists of radios.
+  * **Save and restore** entire lists of radios.
 
-  * Record songs or programs while listening to them.
+  * **Record songs or programs** while listening to them.
 
-  * Schedule background recordings.
+  * **Schedule background recordings**.
 
-  * Try to record from YouTube the currently playing song. (Unsafe; another song can be recorded.)
+  * **Set an Alarm Clock** (one for working days, one for work-off days).
 
-  * Watch videos on YouTube about the song being played.
+  * Try to **record directly from YouTube** the currently playing song. (Unsafe; another song can be recorded.)
 
-  * Extract the soundtrack of a YouTube video.
+  * **Watch videos** on YouTube about the song being played.
 
-  * Launch and use _Pulse Effects_ (if installed) for amazing sound experience.
+  * **Extract** the soundtrack of a YouTube video.
 
-  * Modify the volume of the radio, independent of the general sound volume. This volume level can be displayed near the icon.
+  * Launch and use **Pulse Effects** or **Easy Effects** (if installed) for amazing sound experience.
 
-  * Display (in a frame on the desktop) the album art of the song currently playing, if available.
+  * **Modify the volume** of the radio, independent of the general sound volume. This volume level can be displayed near the icon.
+
+  * **Display the album art** of the song currently playing, if available, in a frame on the desktop.
+
+  * **Use an horizontal OSD**.
 
 Details, help and FAQ can be found in the [Manual](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/Radio3.0%40claudiux/files/Radio3.0%40claudiux/help/MANUAL.md).
 

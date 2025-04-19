@@ -1,3 +1,6 @@
 #!/bin/bash
-[[ -d $HOME/.config/Radio3.0/song-art ]] && rm -f $HOME/.config/Radio3.0/song-art/R3SongArt*.jpg
+DIRART=${XDG_RUNTIME_DIR}/AlbumArt/song-art
+
+[[ -d $DIRART ]] && rm -f ${DIRART}/R3SongArt*
+
 exit 0

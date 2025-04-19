@@ -10,7 +10,8 @@
       "pageNetwork",
       "pageRecording",
       "pageYT",
-      "pageScheduling"
+      "pageScheduling",
+      "pageAlarmClock"
     ],
     "pageStations": {
       "type": "page",
@@ -26,7 +27,7 @@
       "type": "page",
       "title": "Import",
       "sections": [
-      "sectionImportRadiopp",
+        "sectionImportRadiopp",
         "sectionImportShoutcast",
         "sectionImportFile",
         "sectionImportList"
@@ -54,6 +55,7 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
+        "sectionBehaviorSettingsWindow",
         "sectionBehaviorStartUp",
         "sectionBehaviorVolumeStep",
         "sectionBehaviorOSD",
@@ -99,6 +101,15 @@
         "sectionNetworkMonitoring",
         "sectionNetworkProxy",
         "sectionNetworkDatabase"
+      ]
+    },
+    "pageAlarmClock": {
+      "type": "page",
+      "title": "Alarm Clock",
+      "sections": [
+        "sectionWakeMeUp",
+        "sectionWorkingDays",
+        "sectionWorkOffDays"
       ]
     },
     "sectionStationsList": {
@@ -202,6 +213,13 @@
         "search-remove-from-list-button",
         "search-select-all",
         "search-unselect-all"
+      ]
+    },
+    "sectionBehaviorSettingsWindow": {
+      "type": "section",
+      "title": "Settings Window",
+      "keys": [
+        "maximize-vertically"
       ]
     },
     "sectionBehaviorStartUp": {
@@ -346,7 +364,9 @@
     "sectionExperimental": {
       "type": "section",
       "title": "EXPERIMENTAL",
-      "keys": []
+      "keys": [
+
+      ]
     },
     "sectionRecordingCache": {
       "type": "section",
@@ -442,6 +462,38 @@
       "keys": [
         "sched-recordings",
         "sched-rmbutton"
+      ]
+    },
+    "sectionWakeMeUp": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "alarm-clock-wake-me-up",
+        "alarm-clock-wake-me-softly",
+        "alarm-clock-volume-begin",
+        "alarm-clock-volume-end",
+        "alarm-clock-volume-transition",
+        "alarm-clock-tink-on"
+      ]
+    },
+    "sectionWorkingDays": {
+      "type": "section",
+      "title": "Working Days",
+      "keys": [
+        "alarm-clock-working-days",
+        "alarm-clock-working-days-time",
+        "alarm-clock-working-days-radio",
+        "alarm-clock-working-days-radio-button"
+      ]
+    },
+    "sectionWorkOffDays": {
+      "type": "section",
+      "title": "Work-Off Days",
+      "keys": [
+        "alarm-clock-workoff-days",
+        "alarm-clock-workoff-days-time",
+        "alarm-clock-workoff-days-radio",
+        "alarm-clock-workoff-days-radio-button"
       ]
     }
   },
@@ -858,6 +910,12 @@
     "description": "Unselect all items",
     "callback": "on_button_search_unselect_all_clicked"
   },
+  "maximize-vertically": {
+    "type": "switch",
+    "default": true,
+    "description": "Vertical maximization",
+    "tooltip": "When this option is checked, this Settings Window will be maximized vertically the next time it is opened."
+  },
   "switch-on-last-station-at-start-up": {
     "type": "switch",
     "default": false,
@@ -1076,9 +1134,8 @@
     "description": "Color of the symbolic icon while the radio is on"
   },
   "color-off": {
-    "type": "colorchooser",
-    "default": "rgb(240,240,240)",
-    "description": "Color of the symbolic icon while the radio is off"
+    "type": "generic",
+    "default": "rgba(225,225,225,255)"
   },
   "color-recording": {
     "type": "colorchooser",
@@ -1930,6 +1987,222 @@
     "description": "Maximum title length",
     "tooltip": "0 means no maximum"
   },
+  "alarm-clock-wake-me-up": {
+    "type": "switch",
+    "default": false,
+    "description": "Wake me up!"
+  },
+  "alarm-clock-wake-me-softly": {
+    "type": "switch",
+    "default": false,
+    "description": "Wake me up softly",
+    "dependency": "alarm-clock-wake-me-up",
+    "tooltip": "By checking this box, the sound volume gradually increases."
+  },
+  "alarm-clock-volume-begin": {
+      "type": "spinbutton",
+      "dependency": "alarm-clock-wake-me-softly",
+      "default": 30,
+      "min": 25,
+      "max": 80,
+      "step": 1,
+      "description": "Initial volume (%)"
+  },
+  "alarm-clock-volume-end": {
+      "type": "spinbutton",
+      "dependency": "alarm-clock-wake-me-softly",
+      "default": 60,
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "description": "Final volume (%)",
+      "tooltip": "The final volume must be greater than or equal to the initial volume."
+  },
+  "alarm-clock-volume-transition": {
+      "type": "scale",
+      "dependency": "alarm-clock-wake-me-softly",
+      "default": 30,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "description": "Transition duration (seconds)"
+  },
+  "alarm-clock-working-days": {
+    "type": "list",
+    "show-buttons": false,
+    "height": 20,
+    "columns": [
+      {
+        "id": "day0",
+        "title": "Sunday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day1",
+        "title": "Monday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day2",
+        "title": "Tuesday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day3",
+        "title": "Wednesday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day4",
+        "title": "Thursday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day5",
+        "title": "Friday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day6",
+        "title": "Saturday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      }
+    ],
+    "default": [
+        {
+            "day0": false,
+            "day1": true,
+            "day2": true,
+            "day3": true,
+            "day4": true,
+            "day5": true,
+            "day6": false
+        }
+    ]
+  },
+  "alarm-clock-workoff-days": {
+    "type": "list",
+    "show-buttons": false,
+    "height": 20,
+    "columns": [
+      {
+        "id": "day0",
+        "title": "Sunday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "day1",
+        "title": "Monday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day2",
+        "title": "Tuesday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day3",
+        "title": "Wednesday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day4",
+        "title": "Thursday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day5",
+        "title": "Friday",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "day6",
+        "title": "Saturday",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      }
+    ],
+    "default": [
+        {
+            "day0": true,
+            "day1": false,
+            "day2": false,
+            "day3": false,
+            "day4": false,
+            "day5": false,
+            "day6": true
+        }
+    ]
+  },
+  "alarm-clock-working-days-time": {
+      "type": "timechooser",
+      "description": "Wake-Up Time",
+      "default": {"h": 6, "m": 0, "s": 0}
+  },
+  "alarm-clock-workoff-days-time": {
+      "type": "timechooser",
+      "description": "Wake-Up Time",
+      "default": {"h": 12, "m": 0, "s": 0}
+  },
+  "alarm-clock-working-days-radio": {
+    "type": "combobox",
+    "description": "Radio",
+    "default": "",
+    "options": {
+      "(Undefined)": ""
+    }
+  },
+  "alarm-clock-workoff-days-radio": {
+    "type": "combobox",
+    "description": "Radio",
+    "default": "",
+    "options": {
+      "(Undefined)": ""
+    }
+  },
+  "alarm-clock-working-days-radio-button": {
+    "type": "button",
+    "description": "Last-listened-to radio station",
+    "callback": "_on_working_days_radio_button_clicked"
+  },
+  "alarm-clock-workoff-days-radio-button": {
+    "type": "button",
+    "description": "Last-listened-to radio station",
+    "callback": "_on_workoff_days_radio_button_clicked"
+  },
+  "alarm-clock-tink-on": {
+      "type": "switch",
+      "default": true,
+      "dependency": "alarm-clock-wake-me-up",
+      "description": "Activate tink to ensure speakers are awake"
+  },
   "desklet-is-activated": {
     "type": "generic",
     "default": false
@@ -1937,17 +2210,5 @@
   "radiopp-is-here": {
     "type": "generic",
     "default": false
-  },
-  "desklet-x": {
-    "type": "generic",
-    "default": -1
-  },
-  "desklet-y": {
-    "type": "generic",
-    "default": -1
-  },
-  "desklet-dbus-id": {
-    "type": "generic",
-    "default": -1
   }
 }

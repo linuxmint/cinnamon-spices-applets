@@ -13,7 +13,7 @@ const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, Popu
 // Settings:
 const { AppletSettings } = imports.ui.settings;
 // ./lib/util:
-const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn_async, trySpawnCommandLine } = require("./lib/util");
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn, spawn_async, trySpawnCommandLine } = require("./lib/util");
 //Clutter:
 const { ScrollDirection, Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
 //Gettext:
@@ -50,7 +50,7 @@ const { Pixbuf } = imports.gi.GdkPixbuf;
 //Cogl:
 const { PixelFormat } = imports.gi.Cogl;
 //Main:
-const { notificationDaemon, keybindingManager, uiGroup } = imports.ui.main;
+const { notificationDaemon, keybindingManager, uiGroup, themeManager } = imports.ui.main;
 //Atk:
 const Atk = imports.gi.Atk;
 //Cvc:
@@ -201,9 +201,17 @@ const HOME_DIR = get_home_dir();
 const USER_NAME = get_user_name();
 const RUNTIME_DIR = get_user_runtime_dir();
 const DOT_CONFIG_DIR = HOME_DIR + "/.config/" + APPNAME;
-const COVER_ART_DIR = DOT_CONFIG_DIR + "/cover-art";
-const SONG_ART_DIR = DOT_CONFIG_DIR + "/song-art";
+const RADIO_LOGO_DIR = DOT_CONFIG_DIR + "/cover-art"; //FIXME!!!
+const SONG_ART_DIR = DOT_CONFIG_DIR + "/song-art"; //FIXME!!!
+
+const XDG_RUNTIME_DIR = getenv("XDG_RUNTIME_DIR");
+const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
+const ALBUMART_ON = TMP_ALBUMART_DIR + "/ON";
+const ALBUMART_PICS_DIR = TMP_ALBUMART_DIR + "/song-art";
+const ALBUMART_TITLE_FILE = TMP_ALBUMART_DIR + "/title.txt";
+
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const DESKLET_DIR = HOME_DIR + "/.local/share/cinnamon/desklets/" + DESKLET_UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const HELP_DIR = APPLET_DIR + "/help";
 const RADIO30_OLD_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
@@ -219,6 +227,8 @@ const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
 var MANUAL_HTML = HELP_DIR + "/MANUAL.html";
+
+const PLAY_TINK = SCRIPTS_DIR + "/tink.sh";
 
 const USER_MUSIC_DIR = get_user_special_dir(UserDirectory.DIRECTORY_MUSIC);
 const DEFAULT_RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
@@ -262,6 +272,7 @@ const YTDL_PROGRAM = () => {
 };
 
 const ENABLED_DESKLETS_KEY = 'enabled-desklets';
+const ENABLED_APPLETS_KEY = 'enabled-applets';
 
 // mpv --no-terminal --no-video --input-ipc-server=/tmp/mpvsocket http://95.217.68.35:8352/stream
 
@@ -299,7 +310,6 @@ function isValidURL(str) {
 }
 
 function spaceAvailable(path) {
-  //~ logDebug("spaceAvailable("+path+")");
   try {
     let dir = file_new_for_path(""+path);
     let info = dir.query_filesystem_info('filesystem::free', null);
@@ -363,7 +373,6 @@ function _(str) {
  * Returns the language of the user.
  */
 function get_user_language() {
-  //~ log("get_language_names(): "+get_language_names());
   let _language;
   try {
     _language = ""+get_language_names()[0].split("_")[0];
@@ -407,6 +416,8 @@ _("Select the open format (.XSPF) and save the file giving it the same name as t
 _("This file can then be imported here.");
 
 let limits_hd_space_left_label_text = _("%s bytes = %s GB = %s GiB");
+
+const DAYS_ABBREV = [_("Sun."), _("Mon."), _("Tue."), _("Wed."), _("Thu."), _("Fri."), _("Sat.")];
 
 /**
  * DEBUG:
@@ -585,6 +596,8 @@ R3AppletSettings.prototype = {
               this.settingsData["category-to-move"].value = value_to_set;
 
               let old_sched_radio = this.getValue("sched-radio");
+              let old_working_radio = this.getValue("alarm-clock-working-days-radio");
+              let old_workoff_radio = this.getValue("alarm-clock-workoff-days-radio");
               let sched_radios_options = {};
               sched_radios_options["%s".format(_("(Undefined)"))] = "";
               var items = Object.keys(value).map((k) => { return [value[k].name, value[k].url] });
@@ -594,8 +607,12 @@ R3AppletSettings.prototype = {
                 if (item[1] && item[1].length > 0) // Ignores categories
                   sched_radios_options[item[0]] = item[1];
               this.settingsData["sched-radio"].options = sched_radios_options;
+              this.settingsData["alarm-clock-working-days-radio"].options = sched_radios_options;
+              this.settingsData["alarm-clock-workoff-days-radio"].options = sched_radios_options;
 
               this.settingsData["sched-radio"].value = "";
+              this.settingsData["alarm-clock-working-days-radio"].value = "" + old_working_radio;
+              this.settingsData["alarm-clock-workoff-days-radio"].value = "" + old_workoff_radio;
 
               this._saveToFile();
               this.emit("changed", "category-to-move", old_category, "");
@@ -608,7 +625,6 @@ R3AppletSettings.prototype = {
               for (let info of this.bindings[key]) {
                   // if the property had a save function, it is gone now and we need to re-add it
                   if (info.isObject && !this.settingsData[key].value.save) {
-                      //~ this.settingsData[key].value.save = Lang.bind(this, this._saveToFile);
                       this.settingsData[key].value.save = () => { this._saveToFile() };
                   }
 
@@ -709,104 +725,19 @@ RadioNotificationSource.prototype = {
           this.notifications[i].destroy();
         } else {
           // Do nothing.
-          logDebug("Unable to destroy notification number "+i);
+          logError("Unable to destroy notification number "+i);
         }
       }
     }
     this.notifications = [];
 
     this._updateCount();
-    //log("All notifications have been destroyed.");
   }
 }
-
-
 
 const messageTray = new RadioMessageTray();
 const source = new RadioNotificationSource("Radio3.0");
 messageTray.add(source);
-
-//~ class R3Button {
-    //~ constructor(icon, tooltip, callback, small = false) {
-        //~ this.actor = new Bin();
-
-        //~ this.button = new Button({
-          //~ reactive: true,
-          //~ can_focus: true,
-          //~ style_class: "popup-menu-item",
-          //~ style: "height:20px; width:20px; padding:10px!important"
-        //~ });
-        //~ this.button.connect('clicked', callback);
-
-        //~ if (small)
-            //~ this.button.add_style_pseudo_class("small");
-
-        //~ this.icon = new Icon({
-            //~ icon_type: IconType.SYMBOLIC,
-            //~ icon_name: icon
-        //~ });
-        //~ this.button.set_child(this.icon);
-        //~ this.actor.add_actor(this.button);
-
-        //~ this.tooltip = new Tooltip(this.button, tooltip);
-    //~ }
-
-    //~ getActor() {
-        //~ return this.actor;
-    //~ }
-
-    //~ setData(icon, tooltip) {
-        //~ this.icon.icon_name = icon;
-        //~ this.tooltip.set_text(tooltip);
-    //~ }
-
-    //~ setActive(status) {
-        //~ this.button.change_style_pseudo_class("active", status);
-    //~ }
-
-    //~ setEnabled(status) {
-        //~ this.button.change_style_pseudo_class("insensitive", !status);
-        //~ this.button.can_focus = status;
-        //~ this.button.reactive = status;
-    //~ }
-
-    //~ destroy() {
-      //~ this.button.destroy();
-      //~ this.actor.destroy();
-    //~ }
-//~ }
-
-//~ class R3WebpageMenuItem extends PopupBaseMenuItem {
-  //~ constructor(parent, score, params) {
-    //~ super(params);
-    //~ this.parent = parent;
-
-    //~ let boxIconLabel = new BoxLayout({ style: 'spacing: 1em;' });
-
-    //~ let web_icon = new Icon({ icon_name: 'web-browser', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
-    //~ boxIconLabel.add_actor(web_icon);
-    //~ let label = new Label({ text: _("Radio3.0 web page...") });
-    //~ boxIconLabel.add_actor(label);
-    //~ this.addActor(boxIconLabel);
-
-    //~ let stars = new BoxLayout({ style: 'spacing: 0.25em;' });
-
-    //~ let star_icon = new Icon({ icon_name: 'starred', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
-    //~ let star_count = new Label({ text: score.toString() });
-    //~ stars.add_actor(star_icon);
-    //~ stars.add_actor(star_count);
-    //~ this.addActor(stars);
-  //~ }
-
-  //~ activate() {
-    //~ spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'");
-    //~ super.activate();
-  //~ }
-
-  //~ //destroy() {
-    //~ //super.destroy();
-  //~ //}
-//~ }
 
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
@@ -828,7 +759,6 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     this.needScrollbar = needScrollbar;
 
     let icon_box = new BoxLayout({ style: 'spacing: .25em;' });
-    //~ logDebug("icon_box: "+icon_box);
 
     let radio_icon = new Icon({ icon_name: 'audio-input-microphone', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
     icon_box.add_actor(radio_icon);
@@ -910,9 +840,6 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
 
         this._signals.connect(menu, 'activate', (submenu, submenuItem, keepMenu) => {
             this.emit('activate', submenuItem, true); //keepMenu replaced with true
-            //~ if (!keepMenu){
-                //~ this.close(true);
-            //~ }
         });
         this._signals.connect(menu, 'active-changed', (submenu, submenuItem) => {
             if (this._activeMenuItem && this._activeMenuItem != submenuItem)
@@ -949,11 +876,7 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         });
         this._signals.connect(menuItem, 'activate', (menuItem, event, keepMenu) => {
             this.emit('activate', menuItem, true); //keepMenu replaced with true
-            //~ if (!keepMenu){
-                //~ this.close(true);
-            //~ }
         });
-        //~ this._signals.connect(menuItem, 'destroy', (emitter) => {
         this._signals.connect(menuItem, 'destroy', () => {
             if (menuItem && menuItem.menu) {
               if (this._signals.isConnected('activate', menuItem.menu))
@@ -994,7 +917,6 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
         if (menuItem instanceof PopupMenuSection) {
             this._connectSubMenuSignals(menuItem, menuItem);
             this._signals.connect(menuItem, 'destroy', () => {
-              logDebug('Destroying PopupMenuSection');
               if (this._signals.isConnected('activate', menuItem))
                 this._signals.disconnect('activate', menuItem);
               if (this._signals.isConnected('active-changed', menuItem))
@@ -1018,9 +940,6 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
                     //~ }
                 //~ }
             }, this);
-            //~ this._signals.connect(menuItem, 'destroy', () => {
-              //~ logDebug('Destroying PopupSubMenuMenuItem');
-            //~ });
         } else if (menuItem instanceof PopupSeparatorMenuItem) {
             this._connectItemSignals(menuItem);
 
@@ -1030,10 +949,6 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
             // precise ways would require a lot more bookkeeping.
             let updateSeparatorVisibility = (menuItem) => { this._updateSeparatorVisibility(menuItem) };
             this._signals.connect(this, 'open-state-changed', updateSeparatorVisibility);
-
-            //~ this._signals.connect(menuItem, 'destroy', () => {
-              //~ logDebug('Destroying PopupSeparatorMenuItem');
-            //~ });
         } else if (menuItem instanceof PopupBaseMenuItem)
             this._connectItemSignals(menuItem);
         else
@@ -1050,13 +965,6 @@ var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends Po
 
     }
 }
-
-//~ class CategoriesStationsBox {
-    //~ constructor() {
-        //~ this.actor = new BoxLayout({ vertical: false });
-        //~ this.actor._delegate = this;
-    //~ }
-//~ }
 
 /**
  * #R3PopupMenu:
@@ -1099,7 +1007,6 @@ var R3PopupMenu = class R3PopupMenu extends PopupMenu {
 
   destroy() {
     this._signals.disconnectAllSignals();
-    //~ this.actor.destroy();
     this.emit('destroy');
   }
 }
@@ -1148,18 +1055,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
     if (!file_test(JOBS_DIR, FileTest.EXISTS))
       mkdir_with_parents(JOBS_DIR, 0o755);
-    if (!file_test(COVER_ART_DIR, FileTest.EXISTS))
-      mkdir_with_parents(COVER_ART_DIR, 0o755);
+    if (!file_test(RADIO_LOGO_DIR, FileTest.EXISTS))
+      mkdir_with_parents(RADIO_LOGO_DIR, 0o755);
     if (!file_test(SONG_ART_DIR, FileTest.EXISTS))
       mkdir_with_parents(SONG_ART_DIR, 0o755);
+    if (!file_test(ALBUMART_PICS_DIR, FileTest.EXISTS))
+      mkdir_with_parents(ALBUMART_PICS_DIR, 0o755);
     spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
     if (!file_test(DOT_CONFIG_DIR +"/icon.svg", FileTest.EXISTS)) {
       spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
     }
 
     this.set_folders_icon();
-
-    TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
     if (this.setAllowedLayout) this.setAllowedLayout(AllowedLayout.BOTH);
 
@@ -1168,6 +1075,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.angle = 0;
     this.rot_interval = 0;
     this.do_rotation = false;
+
+    themeManager.connect("theme-set", () => {
+      this._theme_set()
+    });
+
+
 
     // Clipboard:
     this.clipboard = Clipboard.get_default();
@@ -1232,8 +1145,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.menuItems = [];
     this.currentMenuItem = null;
     this.allRadiosMenu = null;
-    //~ this.stopItem = new PopupMenuItem(_("Stop"));
-    //~ this.stopItem.connect('activate', Lang.bind(this, this.stop_mpv));
+
+    // Alarm Clock:
+    this.alarmClockLoopId = null;
+    this.alarmClockLooping = false;
 
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
@@ -1243,8 +1158,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.set_MPV_ALIAS();
 
     // Desklet:
-    this.show_desklet = false;
-    this.setup_desklet();
     this._is_desklet_activated();
 
     // Contextual menu:
@@ -1254,11 +1167,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.on_rec_path_changed();
 
-    this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
+    this.tabNumberOfRadios = 1*userSettings["layoutradio"]["pages"].indexOf("pageStations");
     this.tabNumberOfSearch = 1*userSettings["layoutradio"]["pages"].indexOf("pageSearch");
+    this.tabNumberOfImport = 1*userSettings["layoutradio"]["pages"].indexOf("pageImport");
+    this.tabNumberOfMenu = 1*userSettings["layoutradio"]["pages"].indexOf("pageMenu");
+    this.tabNumberOfBehavior = 1*userSettings["layoutradio"]["pages"].indexOf("pageBehavior");
     this.tabNumberOfNetwork = 1*userSettings["layoutradio"]["pages"].indexOf("pageNetwork");
     this.tabNumberOfRecording = 1*userSettings["layoutradio"]["pages"].indexOf("pageRecording");
     this.tabNumberOfYT = 1*userSettings["layoutradio"]["pages"].indexOf("pageYT");
+    this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
+    this.tabNumberOfAlarmClock = 1*userSettings["layoutradio"]["pages"].indexOf("pageAlarmClock");
+    //~ userSettings = {};
     userSettings = null;
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
@@ -1343,18 +1262,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_user_settings() {
+    this.settings.bind("maximize-vertically", "maximize_vertically");
     this.settings.bind("image-resolution", "res", () => { this.reload_songArt() });
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
     this.radiopp_is_here = radioppConfigFilePath != null;
-    this.settings.bind("desklet-x", "desklet_x");
-    this.desklet_x = 1*parseInt(this.desklet_x);
-    this.settings.bind("desklet-y", "desklet_y");
-    this.desklet_y = 1*parseInt(this.desklet_y);
-    this.settings.bind("desklet-dbus-id", "desklet_dbusId");
-    this.desklet_dbusId = 1*parseInt(this.desklet_dbusId);
     this.settings.bind("desklet-is-activated", "desklet_is_activated");
-    //~ this.settings.bind("desklet-show-on-desktop", "show_desklet", this.switch_showDesklet.bind(this));
-    this.show_desklet = false; // forced
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", () => { this.volume_near_icon() });
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
@@ -1414,7 +1326,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("horizontal-max-title-length", "horizontal_max_title_length", () => { this.volume_near_icon() });
     // Menu:
     this.settings.bind("show-by-category", "show_by_category");
-    //~ this.show_by_category = false; // forced.
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", () => { this.onShortcutChanged() });
     this.settings.bind("shortcut-volume-down", "shortcutVolDown", () => { this.onShortcutChanged() });
     this.settings.bind("shortcut-volume-cut", "shortcutVolCut", () => { this.onShortcutChanged() });
@@ -1424,6 +1335,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //Scheduling:
     this.settings.bind("sched-recordings", "sched_recordings");
+
+    // Alarm Clock:
+    this.settings.bind("alarm-clock-wake-me-up", "wake_me_up", () => { this.onAlarmClockChanged() });
+    this.settings.bind("alarm-clock-working-days", "working_days");
+    this.settings.bind("alarm-clock-working-days-time", "working_days_time");
+    this.settings.bind("alarm-clock-workoff-days", "workoff_days");
+    this.settings.bind("alarm-clock-workoff-days-time", "workoff_days_time");
 
     // Network:
     this.settings.bind("network-monitoring", "network_monitoring", () => { this.on_network_monitoring_changed() });
@@ -1450,22 +1368,164 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.populate_help_textviews()
   }
 
-  //~ switch_showDesklet() {
-    //~ if (this.context_menu_item_showDesklet != null) {
-      //~ this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-      //~ this.context_menu_item_showDesklet.toggle();
-    //~ }
+  onAlarmClockChanged() {
+    if (this.wake_me_up) {
+      const d = new Date();
+      const seconds = 60 - d.getSeconds();
+      // Be sure to begin loop at h:m:0.
+      let id = setTimeout( () => {
+        clearTimeout(id);
+        this.alarmClockLooping = true;
+        this.alarmClockLoopId = timeout_add_seconds(60, () => { return this.alarmclock_loop() } );
+      }, seconds * 1000);
+    } else {
+      this.alarmClockLooping = false;
+      this.alarmClockLoopId = null;
+    }
+    this.change_symbolic_icon();
+    if (this.context_menu_item_wakeMeUp) {
+      this.context_menu_item_wakeMeUp._switch.setToggleState(this.wake_me_up);
+    }
 
-    //~ this.setup_desklet();
-    //~ if (this.context_menu_item_configDesklet)
-      //~ this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
+  }
 
-    //~ this.desklet_is_activated = this.show_desklet;
-    //~ let to = setTimeout( () => {
-      //~ clearTimeout(to);
-      //~ this.settings.setValue("desklet-is-activated", this.show_desklet);
-    //~ }, 150);
-  //~ }
+  alarmclock_loop() {
+    if (! this.wake_me_up)
+      this.alarmClockLooping = false;
+    if (! this.alarmClockLooping)
+      return false;
+
+    const d = new Date();
+    const day = d.getDay();
+    const daystr = `day${day.toString()}`;
+    const hour = d.getHours();
+    const minute = d.getMinutes();
+    const working_days = JSON.parse(JSON.stringify(this.working_days, null, 4));
+    const workoff_days = JSON.parse(JSON.stringify(this.workoff_days, null, 4));
+    const play_tink = this.settings.getValue("alarm-clock-tink-on");
+
+    let radio = this.last_radio_listened_to;
+    let is_playing_tink = false;
+    if (  working_days[0][daystr] &&
+          this.working_days_time.h == hour &&
+          this.working_days_time.m == minute) {
+      is_playing_tink = true;
+      if (play_tink)
+        spawnCommandLineAsync(PLAY_TINK);
+      this.stop_mpv_radio();
+      if (this.settings.getValue("alarm-clock-working-days-radio").length > 0)
+        radio = this.settings.getValue("alarm-clock-working-days-radio");
+      this.start_mpv_radio(radio);
+    }
+
+    if (  workoff_days[0][daystr] &&
+          this.workoff_days_time.h == hour &&
+          this.workoff_days_time.m == minute) {
+      if (play_tink && !is_playing_tink)
+        spawnCommandLineAsync(PLAY_TINK);
+      this.stop_mpv_radio();
+      if (this.settings.getValue("alarm-clock-workoff-days-radio").length > 0)
+        radio = this.settings.getValue("alarm-clock-workoff-days-radio");
+      this.start_mpv_radio(radio);
+    }
+
+    if (is_playing_tink && this.settings.getValue("alarm-clock-wake-me-softly")) {
+      let showOSD = this.showOSD;
+      this.showOSD = false;
+      let duration = this.settings.getValue("alarm-clock-volume-transition"); //seconds
+      let vol_begin = this.settings.getValue("alarm-clock-volume-begin");
+      let vol_end = this.settings.getValue("alarm-clock-volume-end");
+      let vol_diff = vol_end - vol_begin;
+      if (vol_diff < 0) {
+        vol_end = Math.min(100, vol_begin + 20);
+        if (vol_end < 50)
+          vol_end = 50;
+        vol_diff = vol_end - vol_begin;
+      }
+      var step, value, index;
+      step = Math.ceil(1000 * duration / vol_diff); // step in ms.
+      index = 0;
+      let intervalId1 = setInterval( () => {
+          value = (vol_begin + index);
+          if (value >= vol_end) {
+            value = vol_end;
+            index = 0;
+            clearInterval(intervalId1);
+          }
+          this.showOSD = false;
+          this.percentage = value;
+          if (this.context_menu_item_slider != null) {
+            this.context_menu_item_slider.slider._value = value / 100;
+            this.context_menu_item_slider.slider._slider.queue_repaint();
+            this.context_menu_item_slider.slider.emit('value-changed', value / 100);
+          }
+          if (value >= vol_end) {
+            return false;
+          } else {
+            index += 1;
+            return true;
+          }
+        },
+        step
+      );
+      this.showOSD = showOSD;
+    }
+    is_playing_tink = false;
+    return this.wake_me_up;
+  }
+
+  get next_alarm() {
+    if (!this.wake_me_up) return "";
+    const d = new Date();
+    var day = d.getDay();
+    var daystr = `day${day.toString()}`;
+    const hour = d.getHours();
+    const minute = d.getMinutes();
+    const working_days = JSON.parse(JSON.stringify(this.working_days, null, 4));
+    const workoff_days = JSON.parse(JSON.stringify(this.workoff_days, null, 4));
+    let now_minutes = hour * 60 +  minute;
+    let wd_minutes = 86401;
+    let wo_minutes = 86401;
+    // Today:
+    if (working_days[0][daystr]) {
+      wd_minutes = this.working_days_time.h * 60 + this.working_days_time.m;
+    }
+    if (workoff_days[0][daystr]) {
+      wo_minutes = this.workoff_days_time.h * 60 + this.workoff_days_time.m;
+    }
+    if (wd_minutes < wo_minutes) {
+      if (now_minutes < wd_minutes) {
+        return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+      }
+    } else if (wd_minutes > wo_minutes) {
+      if (now_minutes < wo_minutes) {
+        return DAYS_ABBREV[day] + " " + this.workoff_days_time.h + ":" + this.workoff_days_time.m;
+      }
+    } else if (wd_minutes !== 86401 && now_minutes < wd_minutes) {
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + this.working_days_time.m;
+    }
+    // Tomorrow:
+    day = (day + 1) % 7;
+    daystr = `day${day.toString()}`;
+    wd_minutes = 86401;
+    wo_minutes = 86401;
+    if (working_days[0][daystr]) {
+      wd_minutes = this.working_days_time.h * 60 + this.working_days_time.m;
+    }
+    if (workoff_days[0][daystr]) {
+      wo_minutes = this.workoff_days_time.h * 60 + this.workoff_days_time.m;
+    }
+    let str_m = (this.working_days_time.m < 10) ? "0"+this.working_days_time.m : ""+this.working_days_time.m;
+    if (wd_minutes < wo_minutes) {
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + str_m;
+    } else if (wd_minutes > wo_minutes) {
+      return DAYS_ABBREV[day] + " " + this.workoff_days_time.h + ":" + str_m;
+    } else if (wd_minutes !== 86401) {
+      return DAYS_ABBREV[day] + " " + this.working_days_time.h + ":" + str_m;
+    }
+    // No alarm:
+    return "";
+  }
 
   ensure_radio30_music_dir() {
     if (!file_test(RADIO30_MUSIC_DIR, FileTest.EXISTS)) {
@@ -1495,22 +1555,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   on_database_favorite_changed() {
     if (this.database_favorite !== "random") {
-      //~ this.database_url = ""+this.database_favorite;
-
       let id_to = setTimeout( () => {
         clearTimeout(id_to);
-        //~ var fav = ""+this.settings.getValue("database-favorite");
-        //~ this.settings.setValue("database-url", ""+fav);
-        //~ this.settings.getValue("database-url");
         this.settings.setValue("database-url", ""+this.settings.getValue("database-favorite"));
-        //~ this.configureApplet(this.tabNumberOfNetwork);
-        //~ this.settings.emit("settings-changed");
         this.get_random_server_name();
       }, 1000);
     } else {
       this.get_random_server_name();
     }
-    //~ this.get_random_server_name()
   }
 
   onShortcutChanged() {
@@ -1582,7 +1634,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_rec_path_changed() {
-    //~ log("on_rec_path_changed");
     let recording_path = this.settings.getValue("recording-path");
     if (  recording_path.length !== 0 &&
           recording_path !== "file://"+RADIO30_MUSIC_DIR) {
@@ -1591,8 +1642,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
     this.recording_path = ""+this.rec_folder;
     this.ensure_radio30_music_dir();
-    //~ log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
-    //~ log("this.rec_folder: "+this.rec_folder);
   }
 
   set_rec_path_to_default() {
@@ -1655,7 +1704,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   set_applet_icon_from_url(url="") {
     let name = this.id2str(this.get_radio_name(this.radioId));
     this.change_symbolic_icon();
-    let png_path = COVER_ART_DIR+"/%s.png".format(name);
+    let png_path = RADIO_LOGO_DIR+"/%s.png".format(name);
     if (file_test(png_path, FileTest.EXISTS)) {
       try {
         this.set_applet_icon_path(png_path);
@@ -1805,13 +1854,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.actor.set_opacity(255);
       this.set_color();
     }
-    //~ if (this.actor.get_stage() != null)
-      //~ this.actor.queue_relayout();
   }
 
   set_radio_hashtable() {
-    //log("set_radio_hashtable", true);
-    //if (this.radiosHash == null || this.radiosHash == undefined)
     this.radiosHash = {};
 
     let radios = this.settings.getValue("radios");
@@ -1914,12 +1959,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (file.query_exists(null)) {
       try {
-        //~ this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, null);
         this.titleMonitor = file.monitor_file(FileMonitorFlags.NONE, new Cancellable());
-        //this.titleMonitor.set_rate_limit(300); // 300 ms (default value: 800)
-
         this.titleMonitorId = this.titleMonitor.connect('changed', () => { this._on_mpv_title_changed() });
-
       } catch(e) {
         logError("Unable to monitor %s!".format(MPV_TITLE_FILE), e)
       }
@@ -1931,18 +1972,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let file = file_new_for_path(R30STOP);
 
-    //if (file.query_exists(null)) {
-      try {
-        //~ this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
-        this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
-        //this.r30stopMonitor.set_rate_limit(300); // 300 ms (default value: 800)
-
-        this.r30stopMonitorId = this.r30stopMonitor.connect('changed', () => { this._on_r30stop_changed() });
-
-      } catch(e) {
-        logError("Unable to monitor %s!".format(R30STOP), e)
-      }
-    //}
+    try {
+      this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
+      this.r30stopMonitorId = this.r30stopMonitor.connect('changed', () => { this._on_r30stop_changed() });
+    } catch(e) {
+      logError("Unable to monitor %s!".format(R30STOP), e)
+    }
   }
 
   monitor_r30next() {
@@ -1950,18 +1985,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let file = file_new_for_path(R30NEXT);
 
-    //if (file.query_exists(null)) {
-      try {
-        //~ this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
-        this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
-        //this.r30nextMonitor.set_rate_limit(300); // 300 ms (default value: 800)
-
-        this.r30nextMonitorId = this.r30nextMonitor.connect('changed', (event) => { this.on_next_event(event) });
-
-      } catch(e) {
-        logError("Unable to monitor %s!".format(R30NEXT), e)
-      }
-    //}
+    try {
+      this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
+      this.r30nextMonitorId = this.r30nextMonitor.connect('changed', (event) => { this.on_next_event(event) });
+    } catch(e) {
+      logError("Unable to monitor %s!".format(R30NEXT), e)
+    }
   }
 
   monitor_r30previous() {
@@ -1969,18 +1998,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let file = file_new_for_path(R30PREVIOUS);
 
-    //if (file.query_exists(null)) {
-      try {
-        //~ this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
-        this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
-        //this.r30previousMonitor.set_rate_limit(300); // 300 ms (default value: 800)
+    try {
+      this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, new Cancellable());
 
-        this.r30previousMonitorId = this.r30previousMonitor.connect('changed', (event) => { this.on_previous_event(event) });
+      this.r30previousMonitorId = this.r30previousMonitor.connect('changed', (event) => { this.on_previous_event(event) });
 
-      } catch(e) {
-        logError("Unable to monitor %s!".format(R30PREVIOUS), e)
-      }
-    //}
+    } catch(e) {
+      logError("Unable to monitor %s!".format(R30PREVIOUS), e)
+    }
   }
 
   unmonitor_mpv_title() {
@@ -2075,11 +2100,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           title = "";
       } catch(e) {
         title = "";
-        //~ logError("XML error: "+e);
       }
     }
-
-    //this.get_mpv_bitrate();
 
     this.on_song_changed(this.get_radio_name(this.radioId), title);
   }
@@ -2091,7 +2113,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (file.query_exists(null)) {
       try {
-        //~ this.recMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, null);
         this.recMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, new Cancellable());
         this.recMonitorId = this.recMonitor.connect('changed', () => { this._on_rec_folder_changed() });
       } catch(e) {
@@ -2120,6 +2141,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
   }
 
+  _on_working_days_radio_button_clicked() {
+    this.settings.setValue("alarm-clock-working-days-radio", this.last_radio_listened_to);
+  }
+
+  _on_workoff_days_radio_button_clicked() {
+    this.settings.setValue("alarm-clock-workoff-days-radio", this.last_radio_listened_to);
+  }
+
   monitor_jobs_dir() {
     //log("monitor_jobs_dir");
     if (this.jobsMonitor != null) return;
@@ -2128,10 +2157,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (file.query_exists(null)) {
       try {
-        //this.jobsMonitor = file.monitor_directory(0, null);
-        //~ this.jobsMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, null); //FileMonitorFlags.NONE
         this.jobsMonitor = file.monitor_directory(FileMonitorFlags.WATCH_MOVES, new Cancellable()); //FileMonitorFlags.NONE
-        //this.jobsMonitor.set_rate_limit(300); // 300 ms (default value: 800)
         this.jobsMonitorId = this.jobsMonitor.connect('changed', () => { this._on_jobs_dir_changed() });
       } catch(e) {
         logError("Unable to monitor %s!".format(JOBS_DIR), e)
@@ -2243,17 +2269,20 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   set_color() {
     if (this.interval != 0 || (this.actor.get_stage() == null)) return;
     if (this.mpvStatus === "PLAY") {
-      if (this.record_pid == null)
-        this.actor.style = "color: %s".format(this.settings.getValue("color-on"));
-      else
-        this.actor.style = "color: %s".format(this.settings.getValue("color-recording"));
+      if (this.record_pid == null) {
+        this.actor.style = `color: ${this.color_on};`;
+      } else {
+        this.actor.style = `color: ${this.color_recording};`;
+      }
     } else {
-      this.actor.style = "color: %s;".format(this.settings.getValue("color-off"));
+      this.actor.style = `color: ${this.color_off};`;
     }
   }
 
   change_symbolic_icon(name='webradioreceiver') {
     if (this.actor.get_stage() == null) return;
+    if (this.wake_me_up && name == 'webradioreceiver')
+      name = "clock-webradioreceiver-symbolic";
     this.do_rotation = (name === 'animated');
     this.set_applet_icon_symbolic_name(name);
     this.set_color();
@@ -2446,44 +2475,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return str;
   }
 
-  //~ change_volume_in_radio_tooltip() {
-    //~ var title = "" + this.songTitle;
-    //~ title = title.replace(/\"/g, "");
-
-    //~ if (this.radioNameBolded === undefined)
-      //~ this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
-
-    //~ let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n\n";
-    //~ if (title.length > 0) {
-      //~ var artist = "";
-      //~ if (title.includes(" - ")) {
-        //~ [artist, title] = title.split(" - ");
-        //~ if (artist.length > 0)
-          //~ _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
-      //~ }
-      //~ _tooltip += title.replace(/\"/g, "");
-    //~ }
-    //~ if (this.percentage !== "undefined")
-      //~ _tooltip += "\n\n" + _("Volume: %s%").format(this.percentage);
-
-    //~ if (this.show_help_in_tooltip) {
-      //~ if (this.record_pid != null)
-        //~ _tooltip += "\n<i>" + _("Middle-Click: Stop Recording") + "</i>";
-      //~ else
-        //~ _tooltip += "\n<i>" + _("Middle-click: ON/OFF") + "</i>";
-
-      //~ _tooltip += "\n<i>" + _("Click: Select another station") + "</i>";
-    //~ }
-
-    //~ this.set_applet_tooltip(this._clean_str(_tooltip), true);
-    //~ //this._applet_tooltip.show();
-    //~ this._applet_tooltip.preventShow = false;
-
-    //~ _tooltip = null;
-    //~ title = null;
-    //~ this.volume_near_icon();
-  //~ }
-
   set_radio_tooltip_to_default_one() {
     var ttElts = []; // tooltip elements.
 
@@ -2505,6 +2496,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         ttElts.push(title.replace(/\"/g, ""));
       }
 
+      if (this.show_desklet && this.sound150_not_used) {
+        file_set_contents(ALBUMART_TITLE_FILE, `${artist}\n${title}`);
+      }
+
       if (this.context_menu_item_slider != null) {
         let percentage = this.context_menu_item_slider.slider.percentage;
         if (""+percentage !== "undefined") {
@@ -2524,11 +2519,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           ttElts.push("<i>" + _("Middle-click: ON/OFF") + "</i>");
 
         ttElts.push("<i>" + _("Click: Select another station") + "</i>");
-        //~ if(this.mpvStatus === "PLAY")
-          ttElts.push("<i>" + _("Scroll wheel: volume change") + "</i>");
+        ttElts.push("<i>" + _("Scroll wheel: volume change") + "</i>");
       }
     } else {
       ttElts.push(_("Click to select a station"));
+    }
+
+    let next_alarm = this.next_alarm;
+    if (next_alarm.length > 0) {
+      ttElts.push("");
+      ttElts.push(_("Wake Up"));
+      ttElts.push(next_alarm);
     }
 
     let _tooltip = ttElts.join("\n");
@@ -2683,13 +2684,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.menuManager.addMenu(this.menu);
       }
 
-      //~ if (this.menu._signals.isConnected('enter-event', this.menu.actor)) {
-        //~ this.menu._signals.disconnect('enter-event', this.menu.actor);
-      //~ }
-      //~ if (this.menu._signals.isConnected('leave-event', this.menu.actor)) {
-        //~ this.menu._signals.disconnect('leave-event', this.menu.actor);
-      //~ }
-
       this.currentMenuItem = null;
       this.menuItems = [];
       var item_homepage = null;
@@ -2697,7 +2691,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // APPLET NAME and VERSION:
       if (this.show_version) {
         let menuitemHead1 = new PopupIconMenuItem("" + APPNAME + "  v" + VERSION, "webradioreceiver", IconType.SYMBOLIC, { reactive: false });
-        //menuitemHead1.label.set_style("text-align: center; min-width: 200px;");
         this.menu.addMenuItem(menuitemHead1);
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
       }
@@ -2705,6 +2698,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // SONG TITLE, BRAINZ LINK, YT LINK:
       if (this.songTitle && this.songTitle.length > 0) {
         let title = this.songTitle.replace(/\//g, " & ");
+        //~ let query = fixedEncodeURIComponent(title.replace(/\ - /g, ' '));
         let query = fixedEncodeURIComponent(title);
         let proxy = ""+this.settings.getValue("http-proxy");
         proxy = proxy.trim();
@@ -2719,12 +2713,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
                                 .replace(/'/g, "\\\'")
                                 .replace(/&/g, '\\\&');
 
-        let yt_dl_command = `${ytdl_program} --output "${RADIO30_MUSIC_DIR}/${output_title}.%(ext)s"`
+        //~ let yt_dl_command = `${ytdl_program} --output "${RADIO30_MUSIC_DIR}/${output_title}.%(ext)s"`
+        let yt_dl_command = `${ytdl_program} --output "${RADIO30_MUSIC_DIR}/${output_title}.${yt_format}"`
           + proxy_option
           + ` --buffer-size 4096 -x --audio-format ${yt_format} --audio-quality 0`
-          + ` --add-metadata --embed-thumbnail --newline "ytsearch1:${yt_title}&page=1"`;
+          //~ + ` --add-metadata --embed-thumbnail --newline -I 2 "ytsearch2:${yt_title}&page=1"`;
+          + ` --add-metadata --embed-thumbnail --newline -I 1 "ytsearch1:${yt_title}"`;
 
-        //~ log("yt_dl_command: "+yt_dl_command);
+        //~ logDebug("yt_dl_command: "+yt_dl_command);
 
         let brainz_item = new PopupIconMenuItem(""+formatTextWrap(title, WRAP_LENGTH), "audio-x-generic", IconType.SYMBOLIC, { reactive: true });
         brainz_item.label.clutterText.line_wrap_mode = WrapMode.WORD_CHAR;
@@ -2754,49 +2750,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             yt_dl_item = null
           }
         }
-
-        //~ let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
-        //~ let songBox = new PopupMenuSection();
-
-        //~ let song_toolbar = new BoxLayout(
-          //~ { style_class: "sound-player",
-            //~ important: true,
-            //~ vertical: true,
-            //~ style: 'padding: 10px;',
-            //~ x_align: Align.MIDDLE
-          //~ }
-        //~ );
-
-        //~ songBox.addActor(song_toolbar, { expand: true });
-
-        //~ let songButtons = new Bin({ x_align: Align.MIDDLE });
-
-        //~ let brainzBtn = new R3Button(
-          //~ "audio-x-generic",
-          //~ _("Infos on: %s").format(title),
-          //~ Lang.bind(this, function() {
-            //~ spawnCommandLineAsync("xdg-open " + brainz_link)
-          //~ }),
-          //~ false
-        //~ );
-
-        //~ let watchOnYT = new R3Button(
-          //~ "media-playback-start",
-          //~ _("Watch on YT"),
-          //~ Lang.bind(this, function() {
-            //~ spawnCommandLineAsync("xdg-open " + yt_watch_link);
-          //~ }),
-          //~ false
-        //~ );
-
-        //~ song_toolbar.add_actor(songButtons);
-        //~ songButtons.add_actor(brainzBtn.getActor());
-        //~ songButtons.add_actor(watchOnYT.getActor());
-
-        //trackInfo.add_actor(songButtons);
-        //~ songBox.set_child(song_toolbar);
-
-        //this.menu.addMenuItem(songBox);
 
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
       }
@@ -2836,7 +2789,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               this.which_category_for_id(id);
               this.start_mpv_radio(id);
 
-              //this.menu.close();
               item.setShowDot(true);
             }
           });
@@ -2872,40 +2824,26 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.menu.addMenuItem(fav_switch_item);
 
       // CATEGORIES AND RADIO STATIONS
-      //~ if (this.show_by_category && this.number_of_categories > 0) {
       if (this.show_by_category) {
         // Category list beside of Radio Station list:
         let cws = JSON.parse(JSON.stringify(this.categories_with_stations)); //cws: categories with stations
         let _cats = Object.keys(cws);
-        //~ logDebug("Nbr of categories: "+_cats.length);
-        //~ logDebug("categories_with_stations: \n"+JSON.stringify(cws, null, 4));
 
         let section = new PopupMenuSection();
         section.box.set_vertical(false);
         section.blockSourceEvents = true;
         section.box.connect("leave-event", () => {});
-        //~ section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true; x_fill: true;");
         section.box.set_style("width: 700px;spacing: 0px;padding:0px;expand: true;");
         this.menu.addMenuItem(section);
 
         let sectionCats = new PopupMenuSection();
         sectionCats.blockSourceEvents = true;
         sectionCats.box.set_vertical(true);
-        //~ sectionCats.box.set_style("width: stretch;spacing: 0px;padding: 0px;expand: true; x_fill: true;");
         section.addMenuItem(sectionCats);
 
         let sectionStations = new PopupMenuSection();
         sectionStations.blockSourceEvents = true;
         sectionStations.box.set_vertical(true);
-        //~ sectionStations.box.set_style("width: stretch;spacing: 0px;padding: 0px;expand: true; x_fill: true;");
-        //sectionStations.box.connect("leave-event", () => {
-          //~ this.stopItem.actor.emit("enter-event", Clutter.ClutterEvent.CLUTTER_MOTION);
-          //~ this.stopItem.actor.emit("leave-event", Clutter.ClutterEvent.CLUTTER_MOTION);
-
-          //~ let toID = setTimeout( () => {
-            //~ clearTimeout(toID);
-          //~ }, 75);
-        //});
         section.addMenuItem(sectionStations);
 
         this.categoriesMenu = new StationsPopupSubMenuMenuItem(formatTextWrap(_("Categories"), WRAP_LENGTH));
@@ -2928,27 +2866,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           catItems.push(catItem);
           this.categoriesMenu.menu.addMenuItem(catItems[iCats]);
           catItems[iCats].actor.connect("enter-event", () => {
-            //~ logDebug(`enter-event ${c} BEGIN`);
-
-            //~ this.menu.actor.show();
-            //~ this.stationsMenu.menu.actor.show();
             //FIXME: replace removeAll() by a function that empties the list of stations.
             //this.stationsMenu.menu.removeAll();
             let children = this.stationsMenu.menu._getMenuItems();
             for (let i = 0; i < children.length; i++) {
                 let item = children[i];
                 item._signals.disconnectAllSignals();
-                item.label.set_text(" ".repeat(25)); // item.label.set_text("");
+                item.label.set_text(" ".repeat(25));
                 item.setShowDot(false);
                 item.reactive = false;
                 item.visible = false;
-                //item.destroy(); // -> CULPRIT!
             }
-            //~ this.stopItem.actor.emit("enter-event", Clutter.ClutterEvent.CLUTTER_MOTION);
-            //~ this.stopItem.actor.emit("leave-event", Clutter.ClutterEvent.CLUTTER_MOTION);
-
-            //~ this.stationsMenu.menu.open();
-            //~ sectionStations.box.show();
 
             var index = 0;
             for (let s of _keys) {
@@ -2960,35 +2888,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
                 catItem.setShowDot(true);
                 this.last_category = c;
               }
-              //~ item.connect("enter-event", Lang.bind(this, function() {
-                //~ logDebug(`enter-event ${s} BEGIN`);
-                //~ this.menu.open();
-
-                //~ this.menu.actor.show();
-                //~ this.categoriesMenu.actor.show();
-
-                //~ logDebug(`enter-event ${s} END`);
-              //~ }));
-              //~ item.connect("leave-event", () => {
-                //~ logDebug(`leave-event ${s} BEGIN`);
-                //~ sectionStations.box.show();
-                //~ let toID = setTimeout( () => {
-                  //~ clearTimeout(toID);
-                  //~ sectionStations.box.show();
-                  //~ logDebug(`leave-event ${s} END`);
-                //~ }, 75);
-              //~ });
-              //~ item.connect("motion-event", Lang.bind(this, function() {
-                //~ //this.menu.open();
-                //~ this.menu.actor.show();
-                //~ this.categoriesMenu.menu.actor.show();
-              //~ }));
-              //~ item.connect("leave-event", Lang.bind(this, function() {
-                //~ //this.menu.open();
-                //~ this.menu.actor.show();
-                //~ this.categoriesMenu.menu.actor.show();
-              //~ }));
-              //~ item.disconnect("leave-event");
               item.connect('activate', () => {
                 this.last_category = c;
                 this.set_radio_tooltip_to_default_one();
@@ -3002,19 +2901,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               index++;
             }
             this.stationsMenu.menu.length = index;
-            //~ let items = this.stationsMenu.menu._getMenuItems();
-            //~ while (index < items.length) {
-              //~ let item = items[index];
-              //~ item.text = "";
-              //~ item.visible = false;
-              //~ index++;
-            //~ }
-            //~ this.menu.actor.show();
-            //~ let toID = setTimeout( () => {
-              //~ clearTimeout(toID);
-              //~ sectionStations.box.show();
-              //~ logDebug(`enter-event ${c} END`);
-            //~ }, 75);
           });
         }
       } else {
@@ -3356,7 +3242,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           if (this.yt_downloads.length === 0) {
             // No more download to do.
             // Empty cache directory to avoid future 'HTTP Error 403: Forbidden':
-            spawnCommandLineAsync(`bash -c "sleep 1 && %s --rm-cache-dir"`.format(YTDL_PROGRAM()))
+            spawnCommandLineAsync(`bash -c "sleep 0.5 && %s --rm-cache-dir"`.format(YTDL_PROGRAM()))
           }
           return false
         }
@@ -3497,9 +3383,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   download_songArt(title, res="") {
     if (!YTDL_PROGRAM().includes("yt-dlp")) return;
 
-    let command = '%s/get_song_art.sh "%s" "%s"'.format(SCRIPTS_DIR, title, res);
-    //~ log("command: "+command, true);
+    let command = '%s/get_song_art.sh "%s" "%s" &'.format(SCRIPTS_DIR, title, res);
     spawnCommandLineAsync(command);
+    timeout_add_seconds(30, () => {
+      let dir = file_new_for_path(ALBUMART_PICS_DIR);
+      let children = dir.enumerate_children("standard::*", FileQueryInfoFlags.NONE, null);
+      let child = children.next_file(null);
+      if (child == null) {
+        this.download_songArt(title, res);
+      } else {
+        let size = child.get_size();
+        if (size == 0)
+          this.download_songArt(title, res);
+      }
+      children.close(null);
+      return false;
+    });
   }
 
   reload_songArt() {
@@ -3893,12 +3792,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.unmonitor_interfaces();
 
-    //~ spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
-    spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
-    spawnCommandLine("rm -f %s".format(R30STOP));
-    spawnCommandLine("rm -f %s".format(R30NEXT));
-    spawnCommandLine("rm -f %s".format(R30PREVIOUS));
-    spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+    spawnCommandLineAsync("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLineAsync("rm -f %s".format(R30STOP));
+    spawnCommandLineAsync("rm -f %s".format(R30NEXT));
+    spawnCommandLineAsync("rm -f %s".format(R30PREVIOUS));
+    spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
   }
 
   on_applet_clicked(event) {
@@ -4027,7 +3925,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       else if ((direction == ScrollDirection.UP && !invert) || (direction == ScrollDirection.DOWN && invert)) {
         this.percentage = Math.min(100, percentage + step);
       }
-      //~ this.change_volume_in_radio_tooltip();
       this.set_radio_tooltip_to_default_one();
       return;
     }
@@ -4120,6 +4017,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     spawnCommandLineAsync("bash -c '"+DEL_SONG_ARTS_SCRIPT+"'");
     spawnCommandLineAsync("bash -c '%s/fix-desklet-translations.sh'".format(SCRIPTS_DIR));
 
+    let color;
+    try {
+      if (!this.themeNode) {
+        this.themeNode = this.actor.get_theme_node();
+      }
+      let defaultColor = this.themeNode.get_foreground_color();
+      color = "rgba(" + defaultColor.red + "," + defaultColor.green + "," + defaultColor.blue + "," + defaultColor.alpha + ")";
+    } catch(e) {
+      color = this.color_off;
+    }
+    this.color_off = color;
+
     this.change_symbolic_icon();
 
     //~ let subProcess = spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
@@ -4196,9 +4105,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.make_menu(true, false, false);
 
     this.volume_near_icon();
-    //~ let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
-    //~ logDebug("Nbr of categories: "+Object.keys(cws).length);
-    //~ logDebug("categories_with_stations: \n"+JSON.stringify(this.categories_with_stations, null, 4));
 
     this._applet_context_menu.removeAll();
     this.create_contextmenu_items();
@@ -4212,21 +4118,19 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       2100
     );
 
-    if (this.desklet_is_activated)
-      reloadExtension(DESKLET_UUID, Type.DESKLET);
+    // Alarm Clock:
+    this.onAlarmClockChanged();
   }
 
   on_applet_removed_from_panel() {
-    //log("on_applet_removed_from_panel", true);
     if (this.menu.isOpen) this.menu.close();
     if (this._applet_context_menu.isOpen) this._applet_context_menu.close();
 
     // Stop looping:
     this.appletRunning = false;
+    this.alarmClockLooping = false;
 
     // Remove desklet:
-    this.show_desklet = false;
-    this.setup_desklet();
     this._is_desklet_activated();
 
     // Stop checks:
@@ -4503,92 +4407,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.radio_notify(_("Update completed successfully"));
   }
 
-  //~ async on_button_radios_update_clicked_OLD() {
-    //~ //FIXME!: Make update in two times: firstly for stations wich have uuid, then for those they don't.
-    //~ this.radio_notify(_("Update in progress"), _("It may take a while ... Please wait."));
-    //~ this.settings.setValue("scale-update", 0);
-    //~ this.settings.setValue("show-scale-update", true);
-    //~ let urls = this.radio_urls;
-    //~ let nb_of_urls = urls.length;
-    //~ var i = 1;
-    //~ for (let url of urls) {
-      //~ await this.search_uuid_by_url_on_RDB(url).then(Lang.bind(this, () => {
-        //~ //log(""+i+"/"+nb_of_urls+": OK!");
-        //~ let scale_value = Math.ceil(100 * (i / nb_of_urls));
-        //~ this.settings.setValue("scale-update", scale_value);
-      //~ })).catch(e => logError(e));
-      //~ i++
-    //~ }
-    //~ this.settings.setValue("scale-update", 100);
-
-    //~ urls = null;
-
-    //~ let stations = this.settings.getValue("radios");
-    //~ var new_stations = [];
-    //~ i = 1;
-    //~ for (let station of stations) {
-      //~ let id = station.url;
-      //~ let uuid = ((station.uuid != null) && (station.uuid.length > 0)) ? ""+station.uuid : "";
-      //~ var new_station = {};
-      //~ try {
-
-        //~ if ((id != null) && (id.length > 0) && this.radiosHash[id]) {
-          //~ //log("NEW: "+i+"/"+nb_of_urls);
-          //~ let rh = this.radiosHash[id];
-          //~ new_station["inc"] = station.inc;
-          //~ new_station["play"] = false;
-          //~ new_station["name"] = station.name;
-
-          //~ new_station["codec"] = ((rh.codec != null) &&
-            //~ (""+rh.codec != "undefined") && (""+rh.codec.length > 0)
-          //~ ) ? ""+rh.codec : (station.codec) ? station.codec : "";
-
-          //~ new_station["bitrate"] = ( (rh.bitrate != null) &&
-            //~ (""+rh.bitrate != "undefined") && (""+rh.bitrate.length > 0)
-          //~ ) ? ""+rh.bitrate : (station.bitrate) ? station.bitrate : "";
-
-          //~ new_station["url"] = ""+id;
-
-          //~ new_station["uuid"] = (rh.uuid != null && ""+rh.uuid != "undefined") ? ""+rh.uuid : "";
-
-          //~ new_station["homepage"] = ( (rh.homepage != null) &&
-            //~ (""+rh.homepage != "undefined") && (""+rh.homepage.length > 0)
-          //~ ) ? ""+rh.homepage : (station.homepage) ? station.homepage : "";
-
-          //~ //log(""+station.name+" - tags: "+`${rh.tags}`);
-          //~ new_station["tags"] = (`${rh.tags}`.length > 0) ? ""+`${rh.tags}` : "";
-          //~ new_station["favicon"] = rh.favicon.length > 0 ? ""+rh.favicon : "";
-        //~ } else {
-          //~ //log("OLD: "+i+"/"+nb_of_urls);
-          //~ new_station["inc"] = station.inc;
-          //~ new_station["play"] = false;
-          //~ new_station["name"] = station.name;
-          //~ new_station["codec"] = (station.codec && (station.codec.length > 0)) ? station.codec : "";
-          //~ new_station["bitrate"] = (station.bitrate && (station.bitrate.length > 0)) ? station.bitrate : "";
-          //~ new_station["url"] = ""+id;
-          //~ new_station["uuid"] = "";
-          //~ new_station["homepage"] = (station.homepage && (station.homepage.length > 0)) ? station.homepage : "";
-          //~ //log(""+station.name+" - tags: "+`${station.tags}`);
-          //~ new_station["tags"] = "";
-          //~ new_station["favicon"] = "";
-        //~ }
-
-        //~ new_stations.push(new_station);
-        //~ i++
-      //~ } catch(e) {
-        //~ logError(e)
-      //~ }
-    //~ }
-
-    //~ this.settings.setValue("radios", new_stations);
-
-    //~ this.radio_notify(_("Update completed successfully"));
-
-
-    //~ this.settings.setValue("scale-update", 0);
-    //~ this.settings.setValue("show-scale-update", false)
-  //~ }
-
   on_option_menu_reload_this_applet_clicked() {
     //log("on_option_menu_reload_this_applet_clicked");
     this.stop_mpv(false);
@@ -4799,7 +4617,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       dir_to_open,
       yt_url
     );
-    //~ log("yt_title_and_dir_command: "+yt_title_and_dir_command);
 
     let titles = [];
     let title = "";
@@ -4919,8 +4736,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         ""+yt_url
       );
 
-      //~ log("yt_dl_command: "+yt_dl_command);
-
       title = titles.join("\n");
 
       this.download_from_YT(title, yt_dl_command, "%s".format(real_dir));
@@ -4944,7 +4759,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             `notify-send -u critical --icon="webradioreceiver-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
-                logDebug("stdout: "+stdout+" "+ typeof stdout);
                 if (stdout.startsWith("opt1")) {
                   this.install_OSD150();
                 } else {
@@ -4963,7 +4777,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             `notify-send -u critical --icon="webradioreceiver-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`,
             (stdout, stderr, exitCode) => {
               if (exitCode === 0) {
-                  logDebug("stdout: "+stdout+" "+ typeof stdout);
                   if (stdout.startsWith("opt1")) {
                     spawnCommandLineAsync("cinnamon-settings extensions -t download");
                   } else {
@@ -5008,11 +4821,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     ))
   }
 
-  //~ on_network_button_favDB_clicked() {
-    //~ this.database_url = ""+this.database_favorite;
-    //~ this.settings._checkSettings();
-  //~ }
-
   to_ranges(arr) {
     // Ex: arr = ['1', '2', '3', '5', '7', '8', '9']
     if (arr.length === 0) return "";
@@ -5053,7 +4861,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   create_contextmenu_items() {
-    //~ logDebug("create_contextmenu_items()");
     /// Create sections:
     if (!this.context_menu_section_system)
       this.context_menu_section_system = new PopupMenuSection(); // section 'system'
@@ -5115,10 +4922,21 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_reloadThisApplet.actor.visible = (RELOAD() === true || this.show_reload);
 
     if (!this.context_menu_item_configure) { // Configure...
-      this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
-        "system-run",
-        IconType.SYMBOLIC);
-      this.context_menu_item_configure.connect('activate',() => { this.configureApplet() });
+      //~ this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
+        //~ "system-run",
+        //~ IconType.SYMBOLIC);
+      //~ this.context_menu_item_configure.connect('activate',() => { this.configureApplet() });
+      this.context_menu_item_configure = new PopupSubMenuMenuItem(_("Configure..."));
+      this.context_menu_item_configure.menu.addAction(_("Radios"), () => { this.configureApplet(this.tabNumberOfRadios) });
+      this.context_menu_item_configure.menu.addAction(_("Search"), () => { this.configureApplet(this.tabNumberOfSearch) });
+      this.context_menu_item_configure.menu.addAction(_("Import"), () => { this.configureApplet(this.tabNumberOfImport) });
+      this.context_menu_item_configure.menu.addAction(_("Menu"), () => { this.configureApplet(this.tabNumberOfMenu) });
+      this.context_menu_item_configure.menu.addAction(_("Behavior"), () => { this.configureApplet(this.tabNumberOfBehavior) });
+      this.context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(this.tabNumberOfNetwork) });
+      this.context_menu_item_configure.menu.addAction(_("Recording"), () => { this.configureApplet(this.tabNumberOfRecording) });
+      this.context_menu_item_configure.menu.addAction(_("YT"), () => { this.configureApplet(this.tabNumberOfYT) });
+      this.context_menu_item_configure.menu.addAction(_("Scheduling"), () => { this.configureApplet(this.tabNumberOfScheduling) });
+      this.context_menu_item_configure.menu.addAction(_("Alarm Clock"), () => { this.configureApplet(this.tabNumberOfAlarmClock) });
     }
     this.context_menu_item_configure.actor.visible = (
       !METADATA["hide-configuration"] &&
@@ -5130,6 +4948,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         "system-run",
         IconType.SYMBOLIC);
       this.context_menu_item_scheduleARecording.connect('activate', () => { this.configureApplet(this.tabNumberOfScheduling) });
+    }
+
+    if (!this.context_menu_item_AlarmClock) {
+      this.context_menu_item_AlarmClock = new PopupIconMenuItem(_("Configure the Alarm Clock..."),
+        "system-run",
+        IconType.SYMBOLIC);
+      this.context_menu_item_AlarmClock.connect('activate', () => { this.configureApplet(this.tabNumberOfAlarmClock) });
     }
 
     if (!this.context_menu_item_recording) {
@@ -5216,15 +5041,21 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_configDesklet.connect('activate', () => { this.on_desklet_open_settings_button_clicked() });
     }
 
+    if (!this.context_menu_item_wakeMeUp) { // switch 'Wake me up!'
+      this.context_menu_item_wakeMeUp = new PopupSwitchMenuItem(_("Wake me up!"),
+        this.wake_me_up,
+        null);
+      this.context_menu_item_wakeMeUp.connect("toggled", () => {
+          this._on_context_menu_item_wakeMeUp_toggled();
+        });
+    }
+
     if (!this.context_menu_item_showDesklet) { // switch 'Show AlbumArt3.0 desklet'
       this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
         this.show_desklet,
         null);
       this.context_menu_item_showDesklet.connect("toggled", () => {
-          this.show_desklet = !this.show_desklet;
-          this.setup_desklet();
-          if (this.context_menu_item_configDesklet)
-            this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
+          this._on_context_menu_item_showDesklet_toggled();
         });
     }
 
@@ -5255,6 +5086,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.context_menu_section_config.addMenuItem(this.context_menu_item_reloadThisApplet);
     this.context_menu_section_config.addMenuItem(this.context_menu_item_configure);
+    this.context_menu_section_config.addMenuItem(this.context_menu_item_AlarmClock);
     this.context_menu_section_config.addMenuItem(this.context_menu_item_scheduleARecording);
     this.context_menu_section_config.addMenuItem(this.context_menu_item_recording);
     this.context_menu_section_config.addMenuItem(this.context_menu_separator2);
@@ -5269,6 +5101,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_section_external.addMenuItem(this.context_menu_item_easyEffects);
     this.context_menu_section_external.addMenuItem(this.context_menu_separator4);
 
+    this.context_menu_section_switches.addMenuItem(this.context_menu_item_wakeMeUp);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_configDesklet);
     this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
@@ -5310,8 +5143,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let sufficient_space_left = this.check_hd_space_left(false);
     this.context_menu_item_manageRecording.setIconSymbolicName(recording ? "media-playback-stop": sufficient_space_left ? "media-record" : "music-folder-full");
     this.context_menu_item_manageRecording.label.text = recording ? _("Stop Recording") + "\n" + message_about_ending_recording : sufficient_space_left ? _("Start Recording") : _("Insufficient space");
-    //~ if (this._signals.isConnected('activate', this.context_menu_item_manageRecording))
-      //~ this._signals.disconnect("activate", this.context_menu_item_manageRecording);
     this.context_menu_item_manageRecording.connect("activate", (event) => {
       if (recording) {
         this.stop_recording(record_pid)
@@ -5343,13 +5174,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.submenu_cancel_yt_downloads.actor.visible = (this.context_menu_yt_downloads.length > 0);
 
-    //~ if (find_program_in_path("pulseeffects")) {
-      //~ this.context_menu_item_pulseEffects.actor.visible = true;
-      //~ this.context_menu_item_pulseEffects.actor.show();
-    //~ } else {
-      //~ this.context_menu_item_pulseEffects.actor.visible = false;
-      //~ this.context_menu_item_pulseEffects.actor.hide();
-    //~ }
     this.context_menu_item_pulseEffects.actor.visible = (find_program_in_path("pulseeffects") != null);
     this.context_menu_item_easyEffects.actor.visible = (find_program_in_path("easyeffects") != null);
 
@@ -5358,10 +5182,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_showLogo._switch.setToggleState(this.show_favicon);
     if (this.context_menu_item_showDesklet) {
       this.context_menu_item_showDesklet.actor.visible = true;
-      if (!this._is_desklet_activated())
-        this.show_desklet = false;
       this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-      //~ this.context_menu_item_showDesklet.actor.visible = this._is_desklet_activated();
     }
     if (this.context_menu_item_configDesklet) {
       this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
@@ -5371,532 +5192,68 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_separator5.actor.visible = (this.mpvStatus === "PLAY");
   } // End of setContextMenuVisibilities
 
+  _on_context_menu_item_wakeMeUp_toggled() {
+    this.wake_me_up = !this.wake_me_up;
+    this.onAlarmClockChanged();
+  }
+
+  _on_context_menu_item_showDesklet_toggled() {
+    this._is_desklet_activated();
+    if (!this.show_desklet) {
+      spawn(["touch", ALBUMART_ON]);
+      if (!this.desklet_is_activated) {
+        let command, Button1, Button2, summary, body;
+        if (!file_test(DESKLET_DIR + "/metadata.json", FileTest.EXISTS)) {
+          // The 'Album Art 3.0' desklet wasn't installed.
+          this._applet_context_menu.close();
+          summary = _("You need the 'Album Art 3.0' desklet");
+          body = _("You can install it by clicking on the first button and then searching for Album.");
+          Button1 = _("Desklets");
+          Button2 = _("Cancel");
+          command = `notify-send -u critical --icon="cs-desklets-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`;
+          spawnCommandLineAsyncIO(
+            command,
+            (stdout, stderr, exitCode) => {
+              if (exitCode === 0) {
+                if (stdout.startsWith("opt1")) {
+                  spawn(["cinnamon-settings", "desklets", "-t", "download"]);
+                }
+              }
+            }
+          );
+        } else {
+          // The 'Album Art 3.0' desklet is installed but wasn't activated.
+          this._applet_context_menu.close();
+          summary = _("You need to activate the 'Album Art 3.0' desklet");
+          body = _("You can activate it by clicking on the first button, then searching for Album and adding it with button [+].");
+          Button1 = _("Desklets");
+          Button2 = _("Cancel");
+          command = `notify-send -u critical --icon="cs-desklets-symbolic" --action="opt1=${Button1}" --action="opt2=${Button2}" "${summary}" "${body}"`;
+          spawnCommandLineAsyncIO(
+            command,
+            (stdout, stderr, exitCode) => {
+              if (exitCode === 0) {
+                if (stdout.startsWith("opt1")) {
+                  spawn(["cinnamon-settings", "desklets"]);
+                }
+              }
+            }
+          );
+        }
+      }
+    } else {
+      spawn(["rm", "-f", ALBUMART_ON]);
+    }
+    let _to = setTimeout( () => {
+      clearTimeout(_to);
+      if (this.context_menu_item_configDesklet)
+        this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+    }, 300);
+  } // End of _on_context_menu_item_showDesklet_toggled
+
   finalizeContextMenu() {
     // Must be empty for this applet.
-  }
-
-  finalizeContextMenu_OLD() {
-    //~ logDebug("finalizeContextMenu");
-
-
-    // Add default context menus if we're in panel edit mode, ensure their removal if we're not
-    if (this.context_menu_item_manageRecording)
-      this.context_menu_item_manageRecording.destroy();
-    this.context_menu_item_manageRecording = null;
-
-    if (this.context_menu_item_showDesklet)
-      this.context_menu_item_showDesklet.destroy();
-    this.context_menu_item_showDesklet = null;
-
-    let items = this._applet_context_menu._getMenuItems();
-    //~ logDebug("items.length: "+items.length);
-
-    /// Section 'system':
-    if (this.context_menu_section_system == null) {
-      this.context_menu_section_system = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_system);
-    }
-
-    // About...
-    if (this.context_menu_item_about == null) {
-      this.context_menu_item_about = new PopupIconMenuItem(_("About..."),
-        "dialog-question",
-        IconType.SYMBOLIC);
-      this.context_menu_item_about.connect('activate', () => { this.openAbout() });
-    }
-    //~ if (this.context_menu_item_about == null)
-      //~ logDebug("Unable to create this.context_menu_item_about!!!");
-    //~ else
-      //~ logDebug("this.context_menu_item_about is well created!!!");
-    if (items.indexOf(this.context_menu_item_about) == -1) {
-      this.context_menu_section_system.addMenuItem(this.context_menu_item_about);
-    }
-
-    // Web page...
-    //~ if (this.context_menu_item_webpage == null) {
-      //~ this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
-    //~ }
-    //~ if (items.indexOf(this.context_menu_item_webpage) == -1) {
-      //~ this.context_menu_section_system.addMenuItem(this.context_menu_item_webpage);
-    //~ }
-
-    // Manual...
-    if (this.context_menu_item_manual == null) {
-      this.context_menu_item_manual = new PopupIconMenuItem(_("Manual..."),
-        "help-faq", //"gtk-help",
-        IconType.SYMBOLIC);
-      this.context_menu_item_manual.connect('activate', () => { this.openManual() });
-    }
-    if (items.indexOf(this.context_menu_item_manual) == -1) {
-      this.context_menu_section_system.addMenuItem(this.context_menu_item_manual);
-    }
-
-    // Remove applet
-    if (this.context_menu_item_remove == null) {
-      this.context_menu_item_remove = new PopupIconMenuItem(_("Remove '%s'")
-        .format(this._(METADATA.name)),
-          "edit-delete",
-          IconType.SYMBOLIC);
-      this.context_menu_item_remove.connect('activate', (actor, event) => this.confirmRemoveApplet(event));
-    }
-    if (items.indexOf(this.context_menu_item_remove) == -1) {
-      //~ this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      this.context_menu_section_system.addMenuItem(this.context_menu_item_remove);
-    }
-
-    // Separator
-    if (this.context_menu_separator == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator);
-    }
-
-    /// Section config:
-    if (this.context_menu_section_config == null) {
-      this.context_menu_section_config = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_config);
-    }
-    // Reload this applet
-    if (RELOAD() === true || this.show_reload) {
-      if (this.context_menu_item_reloadThisApplet == null) {
-        //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_item_reloadThisApplet = new PopupIconMenuItem(_("Reload this applet"), "reload", IconType.SYMBOLIC);
-        this.context_menu_item_reloadThisApplet.connect("activate", (event) => this.on_option_menu_reload_this_applet_clicked());
-      }
-    } else {
-      if (this.context_menu_item_reloadThisApplet != null) {
-        this.context_menu_item_reloadThisApplet.destroy();
-        this.context_menu_item_reloadThisApplet = null;
-      }
-    }
-    if (this.context_menu_item_reloadThisApplet != null && items.indexOf(this.context_menu_item_reloadThisApplet) == -1) {
-      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      this.context_menu_section_config.addMenuItem(this.context_menu_item_reloadThisApplet);
-    }
-
-    // Configure:
-    if (!METADATA["hide-configuration"] && file_test(METADATA["path"] + "/settings-schema.json", FileTest.EXISTS)) {
-      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      if (this.context_menu_item_configure == null) {
-        this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
-          "system-run",
-          IconType.SYMBOLIC);
-        this.context_menu_item_configure.connect('activate', () => { this.configureApplet() });
-      }
-      if (items.indexOf(this.context_menu_item_configure) == -1) {
-        this.context_menu_section_config.addMenuItem(this.context_menu_item_configure);
-      }
-
-      // Schedule a recording:
-      if (this.context_menu_item_scheduleARecording != null)
-        this.context_menu_item_scheduleARecording.destroy();
-      this.context_menu_item_scheduleARecording = null;
-
-      this.context_menu_item_scheduleARecording = new PopupIconMenuItem(_("Schedule a background record..."),
-        "system-run",
-        IconType.SYMBOLIC);
-      this.context_menu_item_scheduleARecording.connect('activate', () => { this.configureApplet(this.tabNumberOfScheduling) });
-
-      if (items.indexOf(this.context_menu_item_scheduleARecording) == -1) {
-        this.context_menu_section_config.addMenuItem(this.context_menu_item_scheduleARecording);
-      }
-
-      if (this.context_menu_item_recording != null)
-        this.context_menu_item_recording.destroy();
-      this.context_menu_item_recording = null;
-      this.context_menu_item_recording = new PopupIconMenuItem(_("Extract soundtrack from YouTube video..."),
-        "yt",
-        IconType.SYMBOLIC);
-      this.context_menu_item_recording.connect('activate', () => { this.configureApplet(this.tabNumberOfYT) });
-
-      if (items.indexOf(this.context_menu_item_recording) == -1) {
-        this.context_menu_section_config.addMenuItem(this.context_menu_item_recording);
-      }
-    }
-
-    if (this.context_menu_separator2 == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator2 = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator2);
-    }
-
-    /// Section about recordings
-    if (this.context_menu_section_recordings == null) {
-      this.context_menu_section_recordings = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_recordings);
-    }
-    // Open Recordings Folder
-    if (this.context_menu_item_openRecordingsFolder != null) {
-      this.context_menu_item_openRecordingsFolder.destroy();
-    }
-    this.context_menu_item_openRecordingsFolder = null;
-
-    this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-
-    this.context_menu_item_openRecordingsFolder = new PopupIconMenuItem(
-      _("Open the recordings folder"),
-      "folder-music",
-      IconType.SYMBOLIC
-    );
-    this.context_menu_item_openRecordingsFolder.connect("activate", (event) => {
-      this.open_rec_folder()
-    });
-
-    this.context_menu_section_recordings.addMenuItem(this.context_menu_item_openRecordingsFolder);
-
-
-    // Start / Stop recording:
-    if (this.mpvStatus == "PLAY" && this.context_menu_item_manageRecording == null) {
-      let record_pid = this.record_pid;
-      let recording = (record_pid != null);
-
-      //this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
-      let message_about_ending_recording = this.get_recording_ends_auto() ? _("(auto)") : _("(manual)");
-      let sufficient_space_left = this.check_hd_space_left(false);
-      this.context_menu_item_manageRecording = new PopupIconMenuItem(
-        recording ? _("Stop Recording") + "\n" + message_about_ending_recording : sufficient_space_left ? _("Start Recording") : _("Insufficient space"),
-        recording ? "media-playback-stop": sufficient_space_left ? "media-record" : "music-folder-full",
-        IconType.SYMBOLIC
-      );
-      this.context_menu_item_manageRecording.connect("activate", (event) => {
-        if (recording) {
-          this.stop_recording(record_pid)
-        } else if (sufficient_space_left) {
-          this.start_recording()
-        } else {
-          this.configureApplet(this.tabNumberOfRecording)
-        }
-      });
-
-      this.context_menu_section_recordings.addMenuItem(this.context_menu_item_manageRecording);
-    }
-
-    // Submenu Cancel YT downloads
-    if (this.submenu_cancel_yt_downloads != null)
-      this.submenu_cancel_yt_downloads.destroy();
-    this.submenu_cancel_yt_downloads = null;
-    if (this.context_menu_yt_downloads && this.context_menu_yt_downloads.length > 0) {
-      this.submenu_cancel_yt_downloads = new RadioPopupSubMenuMenuItem(formatTextWrap(_("Cancel downloads from YT"), WRAP_LENGTH));
-      this.context_menu_section_recordings.addMenuItem(this.submenu_cancel_yt_downloads);
-
-      for (let dl of this.context_menu_yt_downloads) {
-        // dl[0] contains the title; dl[1] contains the callback.
-        let submenu_cancel_yt_downloads_item = new PopupMenuItem(dl[0], { reactive: true });
-        submenu_cancel_yt_downloads_item.connect('activate', () => {
-          dl[1]();
-          this.set_applet_label("");
-          let i = this.yt_downloads.indexOf(dl[0]);
-          this.yt_downloads.splice(i, 1);
-          this.context_menu_yt_downloads.splice(i, 1);
-          if (this.yt_downloads.length === 0) {
-            this.change_symbolic_icon()
-          }
-        });
-        this.submenu_cancel_yt_downloads.menu.addMenuItem(submenu_cancel_yt_downloads_item);
-      }
-    }
-
-    if (this.context_menu_separator3 == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator3 = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator3);
-    }
-
-    /// Section external settings
-    if (this.context_menu_section_external == null) {
-      this.context_menu_section_external = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_external);
-    }
-    // Sound Settings
-    if (this.context_menu_item_systemSoundSettings == null) {
-      this.context_menu_item_systemSoundSettings = new PopupIconMenuItem(_("Sound Settings"), "audio-card", IconType.SYMBOLIC);
-      this.context_menu_item_systemSoundSettings.connect('activate', () => { spawnCommandLine("cinnamon-settings sound") });
-      if (items.indexOf(this.context_menu_item_systemSoundSettings) == -1) {
-        this.context_menu_section_external.addMenuItem(this.context_menu_item_systemSoundSettings);
-      }
-    }
-
-    // PulseEffects (if any)
-    if (find_program_in_path("pulseeffects") && this.context_menu_item_pulseEffects == null) {
-      this.context_menu_item_pulseEffects = new PopupIconMenuItem(_("Pulse Effects"), "pulseeffects", IconType.SYMBOLIC);
-      this.context_menu_item_pulseEffects.connect('activate', async () => { spawnCommandLine("pulseeffects") });
-      if (items.indexOf(this.context_menu_item_pulseEffects) == -1) {
-        this.context_menu_section_external.addMenuItem(this.context_menu_item_pulseEffects);
-      }
-    }
-
-    // EasyEffects (if any)
-    if (find_program_in_path("easyeffects") && this.context_menu_item_easyEffects == null) {
-      this.context_menu_item_easyEffects = new PopupIconMenuItem(_("Easy Effects"), "easyeffects", IconType.SYMBOLIC);
-      this.context_menu_item_easyEffects.connect('activate', async () => { spawnCommandLine("easyeffects") });
-      if (items.indexOf(this.context_menu_item_easyEffects) == -1) {
-        this.context_menu_section_external.addMenuItem(this.context_menu_item_easyEffects);
-      }
-    }
-    if (this.context_menu_separator4 == null && this._applet_context_menu.numMenuItems > 0) {
-      this.context_menu_separator4 = new PopupSeparatorMenuItem();
-      this._applet_context_menu.addMenuItem(this.context_menu_separator4);
-    }
-
-    /// Section containing switches:
-    if (this.context_menu_section_switches == null) {
-      this.context_menu_section_switches = new PopupMenuSection();
-      this._applet_context_menu.addMenuItem(this.context_menu_section_switches);
-    }
-
-    // Radio ON at startup
-    if (this.context_menu_item_onAtStartup == null) {
-        this.context_menu_item_onAtStartup = new PopupSwitchMenuItem(_("Radio ON at startup"),
-          this.switch_on_last_station_at_start_up,
-          null);
-        this.context_menu_item_onAtStartup.connect("toggled", () => {
-          this.switch_on_last_station_at_start_up = !this.switch_on_last_station_at_start_up;
-        });
-    }
-    if (items.indexOf(this.context_menu_item_onAtStartup) == -1) {
-        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_onAtStartup);
-    }
-
-    // Show Station Logo
-    if (this.context_menu_item_showLogo == null) {
-        this.context_menu_item_showLogo = new PopupSwitchMenuItem(_("Display Station Logo"),
-          this.show_favicon,
-          null);
-        this.context_menu_item_showLogo.connect("toggled", () => {
-          this.show_favicon = !this.show_favicon;
-          this.icon_or_favicon(this.radioId);
-        });
-    }
-    if (items.indexOf(this.context_menu_item_showLogo) == -1) {
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_showLogo);
-    }
-
-    // Show AlbumArt3.0 desklet
-    if (this._is_desklet_activated()) {
-      if (this.context_menu_item_showDesklet == null) {
-        this.context_menu_item_showDesklet = new PopupSwitchMenuItem(_("Show Album Art on desktop"),
-          this.show_desklet,
-          null);
-        this.context_menu_item_showDesklet.connect("toggled", () => {
-            this.show_desklet = !this.show_desklet;
-            this.setup_desklet();
-          });
-      }
-      if (items.indexOf(this.context_menu_item_showDesklet) == -1) {
-          this.context_menu_section_switches.addMenuItem(this.context_menu_item_showDesklet);
-      }
-    }
-
-    // Do not check about dependencies
-    if (this.context_menu_item_dontCheckDep == null) {
-        this.context_menu_item_dontCheckDep = new PopupSwitchMenuItem(_("Do not check about dependencies"),
-          this.dont_check_dependencies,
-          null);
-        this.context_menu_item_dontCheckDep.connect("toggled", () => {
-          this.dont_check_dependencies = !this.dont_check_dependencies;
-          this.on_option_menu_reload_this_applet_clicked();
-        });
-    }
-    if (items.indexOf(this.context_menu_item_dontCheckDep) == -1) {
-        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_dontCheckDep);
-    }
-
-    // Display volume level near icon?
-    if (this.context_menu_item_showVolumeNearIcon == null) {
-        this.context_menu_item_showVolumeNearIcon = new PopupSwitchMenuItem(_("Display volume level near icon"),
-          this.show_volume_level_near_icon,
-          null);
-        this.context_menu_item_showVolumeNearIcon.connect("toggled", () => {
-          this.show_volume_level_near_icon = !this.show_volume_level_near_icon;
-          this.volume_near_icon();
-        });
-    }
-    if (items.indexOf(this.context_menu_item_showVolumeNearIcon) == -1) {
-        //this.context_menu_section_switches.addMenuItem(new PopupSeparatorMenuItem());
-        this.context_menu_section_switches.addMenuItem(this.context_menu_item_showVolumeNearIcon);
-    }
-  }
-
-  install_desklet() {
-    // Installs the AlbumArt3.0 desklet.
-
-    // First, install the '.json' config file:
-    var spices_config_path = HOME_DIR+"/.config/cinnamon/spices";
-    var desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
-    if (!file_test(spices_config_path, FileTest.EXISTS)) {
-      spices_config_path = HOME_DIR+"/.cinnamon/configs";
-      desklet_config_path = spices_config_path+"/"+DESKLET_UUID+"/"+DESKLET_UUID+".json";
-    }
-    if (file_test(spices_config_path, FileTest.EXISTS)) {
-      if (!file_test(desklet_config_path, FileTest.EXISTS)) {
-        mkdir_with_parents(spices_config_path+"/"+DESKLET_UUID, 0o755)
-        spawnCommandLineAsync("cp -a -f " + APPLET_DIR + "/desklet/" + DESKLET_UUID+".json " + desklet_config_path);
-      }
-    }
-
-    // enabledDesklets will contain all desklets:
-    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
-    var deskletEDKline = "";
-    for (let i = 0; i < enabledDesklets.length; i++){
-      let name = enabledDesklets[i].split(":")[0];
-      //~ logDebug("Desklet name: "+name);
-      if (name == DESKLET_UUID) {
-        deskletEDKline = ""+enabledDesklets[i];
-        //~ enabledDesklets.splice(i, 1); //useless
-        break;
-      }
-    }
-
-    // Put the desklet code at the right place:
-    const desklet_source_path = APPLET_DIR + "/desklet/" + DESKLET_UUID;
-    if (find_program_in_path("cinnamon-install-spice")) {
-      spawnCommandLineAsync("cinnamon-install-spice desklet "+desklet_source_path);
-    } else {
-      const desklet_target_path = HOME_DIR+"/.local/share/cinnamon/desklets/"
-      spawnCommandLineAsync("cp -a -f "+desklet_source_path+" "+desklet_target_path);
-    }
-
-    // Register this desklet in DBus:
-    var found = false;
-    if (deskletEDKline.length > 0) {
-      for (let i = 0; i < enabledDesklets.length; i++){
-        let name = enabledDesklets[i].split(":")[0];
-        //~ logDebug("Desklet name: "+name);
-        if (name == DESKLET_UUID) {
-          enabledDesklets[i] = deskletEDKline;
-          found = true;
-          break;
-        }
-      }
-      if (found)
-        global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    } else { // deskletEDKline is empty. We must fill it.
-      var pos = -1;
-      var numMax = -1;
-      var nums = [];
-      var [name, num, x, y] = ["", -1, -1, -1];
-      var [desklet_num, desklet_x, desklet_y] = [1*parseInt(this.desklet_dbusId), 1*parseInt(this.desklet_x), 1*parseInt(this.desklet_y)];
-      for (let i = 0; i < enabledDesklets.length; i++){
-        //~ let name = enabledDesklets[i].split(":")[0];
-        [name, num, x, y] = enabledDesklets[i].split(":");
-        [num, x, y] = [1*parseInt(num), 1*parseInt(x), 1*parseInt(y)];
-        //~ logDebug("Desklet name: "+name);
-        if (name == DESKLET_UUID) {
-          found = true;
-          pos = i;
-          [desklet_num, desklet_x, desklet_y] = [1*num, 1*x, 1*y];
-          this.desklet_dbusId = 1*desklet_num;
-          //~ break;
-        } else {
-          if (nums.indexOf(num) === -1)
-            nums.push(1*num);
-          else
-            logError("Many desklets have the same id in D-Bus! To check it, execute: gsettings get org.cinnamon enabled-desklets"); // Should never occur!
-          if (1*num > numMax) numMax = 1*num;
-
-        }
-      }
-      if (1*this.desklet_x < 0)
-        this.desklet_x = 1*global.screen_width - 600;
-      if (1*this.desklet_y < 0)
-        this.desklet_y = 1*global.screen_height - 500;
-
-      let next_desklet_id = 1*global.settings.get_int("next-desklet-id");
-      if (this.desklet_dbusId < 0) { // We have to choose the best possible id.
-        if (1*numMax+1 === next_desklet_id) {
-          desklet_num = 1*numMax+1;
-          this.desklet_dbusId = 1*desklet_num;
-          next_desklet_id += 1;
-          global.settings.set_int("next-desklet-id", next_desklet_id);
-        } else if (numMax+1 < next_desklet_id) {
-          desklet_num = 1*numMax+1;
-          this.desklet_dbusId = 1*desklet_num;
-        } else { // Should never occur! (numMax+1 > next_desklet_id)
-          desklet_num = 1*numMax+1;
-          this.desklet_dbusId = 1*desklet_num;
-          next_desklet_id = 1*numMax+2;
-          global.settings.set_int("next-desklet-id", next_desklet_id);
-        }
-        deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
-      } else {
-        if (nums.indexOf(this.desklet_dbusId) === -1) {
-          deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
-        } else { // this.desklet_dbusId is already used by another desklet!
-          desklet_num = 0;
-          nums.sort( (a, b) => {
-            if (Math.round(a) < Math.round(b))
-              return -1;
-            else if (Math.round(a) > Math.round(b))
-              return 1;
-            return 0;
-          });
-          var num_found = false;
-          while (!num_found) {
-            desklet_num = 1*desklet_num + 1;
-            if ((nums.indexOf(desklet_num) === -1) || (desklet_num >= nums.length) || (desklet_num >= 1*next_desklet_id))
-              num_found = true;
-          }
-          this.desklet_dbusId = 1*desklet_num;
-          if (1*desklet_num >= 1*next_desklet_id) {
-            next_desklet_id = 1*desklet_num + 1;
-            global.settings.set_int("next-desklet-id", next_desklet_id);
-          }
-          deskletEDKline = `${DESKLET_UUID}:${this.desklet_dbusId}:${this.desklet_x}:${this.desklet_y}`;
-        }
-      }
-
-      //deskletEDKline = `${DESKLET_UUID}:${next_desklet_id}:${this.desklet_x}:${this.desklet_y}`;
-      if (found)
-        enabledDesklets[pos] = deskletEDKline;
-      else
-        enabledDesklets.push(deskletEDKline);
-      //~ global.settings.set_int("next-desklet-id", 1*next_desklet_id + 1);
-      global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    }
-    this.desklet_is_activated = true;
-    this.show_desklet = true;
-    //~ reloadExtension(DESKLET_UUID, Type.DESKLET);
-  }
-
-  uninstall_desklet() {
-    var enabledDesklets = global.settings.get_strv(ENABLED_DESKLETS_KEY);
-    var found = false;
-    for (let i = 0; i < enabledDesklets.length; i++){
-      let [name, num, x, y] = enabledDesklets[i].split(":");
-      //~ logDebug("Desklet name: "+name);
-      if (name == DESKLET_UUID) {
-        this.desklet_x = 1*x;
-        this.desklet_y = 1*y;
-        this.desklet_dbusId = 1*num;
-        enabledDesklets.splice(i, 1);
-        found = true;
-        break;
-      }
-    }
-    if (found)
-      global.settings.set_strv(ENABLED_DESKLETS_KEY, enabledDesklets);
-    this.show_desklet = false;
-    this.desklet_is_activated = false;
-    //~ const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/"+DESKLET_UUID;
-    //~ spawnCommandLineAsync("rm -rf "+desklet_path);
-  }
-
-  setup_desklet() {
-    //~ const desklet_path = HOME_DIR+"/.local/share/cinnamon/desklets/"+DESKLET_UUID;
-    //~ const HIDDEN_file_path = desklet_path+"/HIDDEN";
-    //~ const HIDDEN_EXISTS = file_test(HIDDEN_file_path, FileTest.EXISTS);
-
-    //~ if (HIDDEN_EXISTS && this.show_desklet) {
-      //~ spawnCommandLineAsync("rm -f \""+HIDDEN_file_path+"\"");
-    //~ }
-    //~ if (!HIDDEN_EXISTS && !this.show_desklet) {
-      //~ spawnCommandLineAsync("touch \""+HIDDEN_file_path+"\"");
-    //~ }
-    if (this.show_desklet) {
-      this.install_desklet();
-    } else {
-      this.uninstall_desklet();
-    }
-    this._is_desklet_activated();
   }
 
   open_rec_folder() {
@@ -6034,7 +5391,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return notification;
   }
 
-  set_scheduling_tab() {
+  set_scheduling_and_alarmclock_tabs() {
     let now = DateTime.new_now_local();
     now = now.add_minutes(2);
 
@@ -6054,12 +5411,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (item[1] && item[1].length > 0) // Ignores categories
           sched_radios_options[item[0]] = item[1];
 
+      let old_working_radio = this.settings.getValue("alarm-clock-working-days-radio");
+      let old_workoff_radio = this.settings.getValue("alarm-clock-workoff-days-radio");
       this.settings.setOptions("sched-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-working-days-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-workoff-days-radio", sched_radios_options);
       this.settings.setValue("sched-radio", (this.settings.getValue("scheduling-allowed")) ? this.last_radio_listened_to : "");
+      this.settings.setValue("alarm-clock-working-days-radio", old_working_radio);
+      this.settings.setValue("alarm-clock-workoff-days-radio", old_workoff_radio);
     } else {
       sched_radios_options[""+_("(Undefined)")] = "";
       this.settings.setOptions("sched-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-working-days-radio", sched_radios_options);
+      this.settings.setOptions("alarm-clock-workoff-days-radio", sched_radios_options);
       this.settings.setValue("sched-radio", "");
+      this.settings.setValue("alarm-clock-working-days-radio", "");
+      this.settings.setValue("alarm-clock-workoff-days-radio", "");
     }
 
     //radios = null;
@@ -6093,7 +5460,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //global.log("_set_settings_options");
 
     this.set_radios_tab();
-    this.set_scheduling_tab();
+    this.set_scheduling_and_alarmclock_tabs();
 
     if (this.page_label != undefined)
       this.settings.setValue("search-list-page-label", ""+this.page_label);
@@ -6130,7 +5497,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     spawnCommandLineAsync('xdg-open "%s"'.format(MANUAL_HTML))
   }
 
-  configureApplet(tab=0, maximize_vertically=true) {
+  configureApplet(tab=0) {
+    let maximize_vertically = this.maximize_vertically;
     this.menu.close(false);
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
@@ -6147,29 +5515,20 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (maximize_vertically) {
       var app = null;
       var intervalId = null;
-      //~ intervalId = setInterval(() => {
       intervalId = setTimeout(() => {
         app = this.tracker.get_app_from_pid(pid);
         if (app != null) {
           let window = app.get_windows()[0];
           this.settingsTab = tab;
-          //window.default_width = 1000;
-          //window.default_height = 600;
-          // window.resize(QUEUE, 1000, 600); // Obsolete.
 
           window.maximize(VERTICAL);
           window.activate(300);
           this.settingsWindow = window;
 
-          //~ clearInterval(intervalId);
           clearTimeout(intervalId);
-          //~ return false;
-        } else {
-          //~ return true
         }
       }, 600);
     }
-
     // Returns the pid:
     return pid;
   }
@@ -6733,7 +6092,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   empty_recents() {
-    this.recentRadios = []; // this.settings.setValue("recentRadios", []);
+    this.recentRadios = [];
   }
 
   // Behavior:
@@ -6747,15 +6106,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     var ret = false;
     for (let i = 0; i < enabledDesklets.length; i++){
       let name = enabledDesklets[i].split(":")[0];
-      //~ logDebug("Desklet name: "+name);
       if (name == DESKLET_UUID) {
         ret = true;
         break;
       }
     }
     this.desklet_is_activated = ret;
-    if (!ret && this.context_menu_item_showDesklet) {
-      this.context_menu_item_showDesklet._switch.setToggleState(ret);
+    if (this.context_menu_item_showDesklet) {
+      this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
       //~ this.context_menu_item_showDesklet.destroy();
       //~ this.context_menu_item_showDesklet = null;
     }
@@ -6954,6 +6312,25 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     spawnCommandLineAsync("xdg-open "+this.cache_dir);
   }
 
+  _theme_set() {
+    let color;
+    try {
+      if (!this.themeNode) {
+        this.themeNode = this.actor.get_theme_node();
+      }
+      let defaultColor = this.themeNode.get_foreground_color();
+      color = defaultColor.to_string();
+    } catch(e) {
+      color = this.color_off;
+    }
+    this.color_off = color;
+    let _style = `color: ${color};`;
+    this.actor.style = _style;
+    this._setStyle();
+    this.set_color();
+    this.change_symbolic_icon();
+  }
+
   get radio_urls() {
     var _ret = [];
     let radios = this.settings.getValue("radios");
@@ -7139,6 +6516,22 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   get streamripper_is_present() {
     return find_program_in_path("streamripper") != null
+  }
+
+  get show_desklet() {
+    return file_test(ALBUMART_ON, FileTest.EXISTS);
+  }
+
+  get sound150_not_used() {
+    let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
+    var found = false;
+    for (let appData of enabledApplets) {
+      if (appData.toString().split(":")[3] === "sound150@claudiux") {
+        found = true;
+        break;
+      }
+    }
+    return !found;
   }
 };
 

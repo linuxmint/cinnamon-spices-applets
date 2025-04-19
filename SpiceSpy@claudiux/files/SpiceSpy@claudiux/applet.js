@@ -395,8 +395,11 @@ class SpiceSpy extends Applet.TextIconApplet {
   update_interval_value() {
     //~ this.update_interval = 0.5 * Math.round(this.update_interval * 2);
     const sec = Math.round(this.update_interval * 3600); // From hours to seconds.
-    if (this.loopId != null)
-      source_remove(this.loopId);
+    if (this.loopId != null) {
+      let id = this.loopId;
+      source_remove(id);
+    }
+    this.loopId = null;
     this.is_looping = true;
     this.loopId = timeout_add_seconds(sec, () => { this.loop() });
   }
@@ -428,6 +431,7 @@ class SpiceSpy extends Applet.TextIconApplet {
               }
             }
           }
+          children.close(null);
           break;
         case "applets":
         case "desklets":
@@ -455,6 +459,7 @@ class SpiceSpy extends Applet.TextIconApplet {
               }
             }
           }
+          children.close(null);
       }
     }
     if (userSpices.length > 0) {
@@ -627,9 +632,11 @@ class SpiceSpy extends Applet.TextIconApplet {
   loop() {
     //~ logDebug("loop() this.fistTime:"+this.fistTime+" this.is_looping:"+this.is_looping);
     //~ if (!this.is_looping) return false;
-
-    if (this.loopId != null )
-      source_remove(this.loopId);
+    let id;
+    if (this.loopId != null ) {
+      id = this.loopId;
+      source_remove(id);
+    }
     this.loopId = null;
 
     // Initialization (first time this applet is launched):
@@ -655,10 +662,18 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.set_applet_tooltip(this.metadata.name);
     this.make_menu();
 
-    let sec = Math.round(this.update_interval * 3600);
-    this.loopId = timeout_add_seconds(sec, () => { this.loop() });
-    this.issuesLoopId = timeout_add(500, () => { this.issuesJobs_loop(); return (this.issuesJobsList.length > 0 && this.is_looping); });
-    //~ return this.is_looping;
+    if (!this.loopId) {
+      let sec = Math.round(this.update_interval * 3600);
+      this.loopId = timeout_add_seconds(sec, () => { this.loop() });
+    }
+    if (this.issuesLoopId) {
+      id = this.issuesLoopId;
+      source_remove(id);
+    }
+    this.issuesLoopId = null;
+    this.issuesLoopId = timeout_add_seconds(5, () => { this.issuesJobs_loop(); return (this.issuesJobsList.length > 0 && this.is_looping); });
+
+    return this.is_looping;
   } // End of loop
 
   update_authors() {
@@ -681,7 +696,7 @@ class SpiceSpy extends Applet.TextIconApplet {
 
   /**
    * renew_caches():
-   * Check if the local caches are older than 12 minutes.
+   * Check if the local caches are older than 15 minutes.
    * If this is the case, local caches are renewed using CACHE_UPDATER.
    */
   renew_caches() {
@@ -699,6 +714,7 @@ class SpiceSpy extends Applet.TextIconApplet {
         }
       } else {
         Util.spawnCommandLineAsync(CACHE_INIT);
+        break // CACHE_INIT calls CACHE_UPDATER --update-all.
       }
     }
   } // End of renew_caches
@@ -929,7 +945,8 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.menu.addMenuItem(read_all);
     }
 
-      let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh", St.IconType.SYMBOLIC);
+    if (this.issuesJobsList.length === 0) {
+      let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "", St.IconType.SYMBOLIC);
       refresh.connect("activate",
         () => {
           if (this.menu) this.menu.toggle(true);
@@ -939,8 +956,17 @@ class SpiceSpy extends Applet.TextIconApplet {
         }
       );
       this.menu.addMenuItem(refresh);
+    } else {
+      let refresh_in_progress = new PopupMenu.PopupIconMenuItem(
+        _("Refreshing in progress"),
+        "view-refresh",
+        St.IconType.SYMBOLIC,
+        { reactive: false }
+      );
+      this.menu.addMenuItem(refresh_in_progress);
+    }
 
-      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     let config_button = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);

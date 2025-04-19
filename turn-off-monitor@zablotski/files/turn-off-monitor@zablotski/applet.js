@@ -53,6 +53,14 @@ MyApplet.prototype = {
             null
         );
 
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            'screenlock',
+            'screenlock',
+            null,
+            null
+        );
+
+
         // Keybinding:
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "keybinding",
@@ -86,17 +94,20 @@ MyApplet.prototype = {
         let duration = Math.trunc(this.mouseDeactivationDuration);
         Util.spawn_async(
             ['/bin/bash', '-c',
-            'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+            'for m in $(xinput | grep -iE "touchpad|mouse" | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
             xinput disable $m; done'],
             null
         );
+        if (this.screenlock) {
+                Util.spawnCommandLine('cinnamon-screensaver-command --lock');
+        }
         Util.spawnCommandLine('xset dpms force off');
         setTimeoutInSeconds(
             function () {
                 Util.spawn_async(
                     ['/bin/bash', '-c',
-                    'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
-                    xinput enable $m; done'],
+            'for m in $(xinput | grep -iE "touchpad|mouse" | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+            xinput enable $m; done'],
                     null);
                 },
             duration
@@ -122,7 +133,7 @@ MyApplet.prototype = {
     on_shortcut_used: function () {
         Util.spawn_async(
             ['/bin/bash', '-c',
-            'for m in $(xinput | grep Keyboard | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+            'for m in $(xinput | grep -i "keyboard" | grep -iv "virtual" | grep -iv "power" | grep -iv "video" | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
             xinput disable $m; done'],
             null
         );
@@ -131,7 +142,7 @@ MyApplet.prototype = {
             function () {
                 Util.spawn_async(
                     ['/bin/bash', '-c',
-                    'for m in $(xinput | grep Keyboard | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+                    'for m in $(xinput | grep -i "slave" | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
                     xinput enable $m; done'],
                     null);
             },
