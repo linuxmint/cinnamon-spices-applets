@@ -18706,6 +18706,7 @@ var RefreshState;
 
 
 
+
 const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 const weatherAppletGUIDs = {};
 class WeatherLoop {
@@ -18715,6 +18716,9 @@ class WeatherLoop {
         return this.refreshing;
     }
     get Online() {
+        if (!this.NetworkMonitorUsed) {
+            return true;
+        }
         return NetworkMonitor.get_default().connectivity != NetworkConnectivity.LOCAL;
     }
     constructor(app, instanceID) {
@@ -18726,6 +18730,7 @@ class WeatherLoop {
         this.runningRefresh = null;
         this.refreshingResolver = null;
         this.refreshing = null;
+        this.NetworkMonitorUsed = null;
         this.OnNetworkConnectivityChanged = () => {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
@@ -18839,6 +18844,17 @@ class WeatherLoop {
         this.GUID = Guid();
         weatherAppletGUIDs[instanceID] = this.GUID;
         NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+        void this.Init();
+    }
+    async Init() {
+        const nmCheck = await SpawnProcess(["systemctl", "is-active", "--quiet", "NetworkManager"]);
+        if (!nmCheck.Success) {
+            logger_Logger.Info("NetworkManager is not running/used, skipping network connectivity check.");
+            this.NetworkMonitorUsed = false;
+            return;
+        }
+        logger_Logger.Info("NetworkManager is running, using network connectivity check.");
+        this.NetworkMonitorUsed = true;
     }
     IsDataTooOld() {
         if (!this.lastUpdated)
