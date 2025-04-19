@@ -1,3 +1,6 @@
+### v3.4.3~20250419
+  * Improves responsiveness.
+
 ### v3.4.2~20250416
   * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
 

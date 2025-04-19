@@ -2,6 +2,8 @@
 TITLE="$1"
 RES="$2"
 
+[[ -f ${XDG_RUNTIME_DIR}/mpv_radio_PID ]] || exit 0 # Radio3.0 is not running.
+
 # DEBUGGING:
 #~ echo $(date) $(basename $0)" '$TITLE' $RES" >> $HOME/get_song_art.log
 
