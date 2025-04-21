@@ -60,6 +60,12 @@
     color: #AAAAAA;
 }
 
+.weather-current-uvindex {
+	margin-left: 7px;
+    margin-top: 5px;
+}
+
+
 .weather-immediate-precipitation {
 	color: #AAAAAA;
 }

@@ -12,6 +12,7 @@ import { WindBox } from "./windBox";
 
 const { BoxLayout, IconType, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
+const { Tooltip } = imports.ui.tooltips;
 
 // stylesheet.css
 const STYLE_SUMMARYBOX = 'weather-current-summarybox'
@@ -51,6 +52,8 @@ export class CurrentWeather {
 
 	private immediatePrecipitationBox!: imports.gi.St.BoxLayout;
 	private immediatePrecipitationLabel!: imports.gi.St.Label;
+	private uvIndexIcon!: imports.gi.St.Icon;
+	private uvIndexTooltip!: imports.ui.tooltips.Tooltip<imports.gi.St.Icon>;
 
 	private app: WeatherApplet;
 
@@ -96,6 +99,7 @@ export class CurrentWeather {
 			this.SetDewPointField(weather.dewPoint);
 			this.SetAPIUniqueField(weather.extra_field);
 			this.sunTimesUI.Display(weather.sunrise, weather.sunset, weather.location.timeZone);
+			this.SetUVIndex(weather.uvIndex);
 
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
@@ -145,7 +149,27 @@ export class CurrentWeather {
 		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
 		this.immediatePrecipitationBox.hide();
 		middleColumn.add_actor(this.immediatePrecipitationBox);
-		middleColumn.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
+		const sunBox = new BoxLayout({
+			x_align: ActorAlign.CENTER,
+			vertical: false,
+			x_expand: true,
+		});
+		sunBox.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
+
+		// TODO: Refactor
+		const uvIndexBox = new BoxLayout();
+		this.uvIndexIcon = new Icon({
+			icon_name: "sunset-symbolic",
+			icon_type: IconType.SYMBOLIC,
+			icon_size: 24,
+			style_class: "weather-current-uvindex",
+			reactive: true,
+		});
+		this.uvIndexIcon.hide();
+		this.uvIndexTooltip = new Tooltip(this.uvIndexIcon, "");
+		uvIndexBox.add(this.uvIndexIcon);
+		sunBox.add_actor(uvIndexBox)
+		middleColumn.add_actor(sunBox);
 
 		return middleColumn;
 	}
@@ -376,6 +400,36 @@ export class CurrentWeather {
 			this.locationButton.disable();
 		else
 			this.locationButton.url = url;
+	}
+
+	private SetUVIndex(uvIndex: number | null): void {
+		if (uvIndex == null) {
+			this.uvIndexIcon.hide();
+			return;
+		}
+
+		this.uvIndexIcon.show();
+		// TODO: text
+		if (uvIndex < 3) {
+			this.uvIndexIcon.style = "color: #00FF00";
+			this.uvIndexTooltip.set_text(`Low UV Index: ${uvIndex}`);
+		}
+		else if (uvIndex < 6) {
+			this.uvIndexIcon.style = "color: #FFFF00";
+			this.uvIndexTooltip.set_text(`Moderate UV Index: ${uvIndex}`);
+		}
+		else if (uvIndex < 8) {
+			this.uvIndexIcon.style = "color: #FF8000";
+			this.uvIndexTooltip.set_text(`High UV Index: ${uvIndex}`);
+		}
+		else if (uvIndex < 11) {
+			this.uvIndexIcon.style = "color: #FF0000";
+			this.uvIndexTooltip.set_text(`Very High UV Index: ${uvIndex}`);
+		}
+		else {
+			this.uvIndexIcon.style = "color: #FF00FF";
+			this.uvIndexTooltip.set_text(`Extreme UV Index: ${uvIndex}`);
+		}
 	}
 
 	// Callbacks

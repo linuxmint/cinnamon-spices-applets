@@ -19186,6 +19186,7 @@ class WindBox {
 
 const { BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
 const { ActorAlign: uiCurrentWeather_ActorAlign } = imports.gi.Clutter;
+const { Tooltip } = imports.ui.tooltips;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
 const STYLE_SUMMARY = 'weather-current-summary';
 const STYLE_DATABOX = 'weather-current-databox';
@@ -19238,6 +19239,7 @@ class CurrentWeather {
             this.SetDewPointField(weather.dewPoint);
             this.SetAPIUniqueField(weather.extra_field);
             this.sunTimesUI.Display(weather.sunrise, weather.sunset, weather.location.timeZone);
+            this.SetUVIndex(weather.uvIndex);
             this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
             return true;
         }
@@ -19277,7 +19279,25 @@ class CurrentWeather {
         this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
         this.immediatePrecipitationBox.hide();
         middleColumn.add_actor(this.immediatePrecipitationBox);
-        middleColumn.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
+        const sunBox = new uiCurrentWeather_BoxLayout({
+            x_align: uiCurrentWeather_ActorAlign.CENTER,
+            vertical: false,
+            x_expand: true,
+        });
+        sunBox.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
+        const uvIndexBox = new uiCurrentWeather_BoxLayout();
+        this.uvIndexIcon = new uiCurrentWeather_Icon({
+            icon_name: "sunset-symbolic",
+            icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+            icon_size: 24,
+            style_class: "weather-current-uvindex",
+            reactive: true,
+        });
+        this.uvIndexIcon.hide();
+        this.uvIndexTooltip = new Tooltip(this.uvIndexIcon, "");
+        uvIndexBox.add(this.uvIndexIcon);
+        sunBox.add_actor(uvIndexBox);
+        middleColumn.add_actor(sunBox);
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
@@ -19478,6 +19498,33 @@ class CurrentWeather {
             this.locationButton.disable();
         else
             this.locationButton.url = url;
+    }
+    SetUVIndex(uvIndex) {
+        if (uvIndex == null) {
+            this.uvIndexIcon.hide();
+            return;
+        }
+        this.uvIndexIcon.show();
+        if (uvIndex < 3) {
+            this.uvIndexIcon.style = "color: #00FF00";
+            this.uvIndexTooltip.set_text(`Low UV Index: ${uvIndex}`);
+        }
+        else if (uvIndex < 6) {
+            this.uvIndexIcon.style = "color: #FFFF00";
+            this.uvIndexTooltip.set_text(`Moderate UV Index: ${uvIndex}`);
+        }
+        else if (uvIndex < 8) {
+            this.uvIndexIcon.style = "color: #FF8000";
+            this.uvIndexTooltip.set_text(`High UV Index: ${uvIndex}`);
+        }
+        else if (uvIndex < 11) {
+            this.uvIndexIcon.style = "color: #FF0000";
+            this.uvIndexTooltip.set_text(`Very High UV Index: ${uvIndex}`);
+        }
+        else {
+            this.uvIndexIcon.style = "color: #FF00FF";
+            this.uvIndexTooltip.set_text(`Extreme UV Index: ${uvIndex}`);
+        }
     }
     onLocationStorageChanged(sender, itemCount) {
         logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
@@ -20121,7 +20168,7 @@ class UIHourlyForecasts {
 
 
 const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
-const { Tooltip } = imports.ui.tooltips;
+const { Tooltip: uiBar_Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
     get Actor() {
@@ -20224,14 +20271,14 @@ class UIBar {
             can_focus: true,
             child: this.warningButtonIcon
         });
-        this.warningButtonTooltip = new Tooltip(this.warningButton.actor, "");
+        this.warningButtonTooltip = new uiBar_Tooltip(this.warningButton.actor, "");
         this.warningButton.actor.hide();
         this.warningButton.actor.connect(SIGNAL_CLICKED, this.WarningClicked);
         leftBox.add_actor(this.warningButton.actor);
         leftBox.add_actor(new uiBar_Bin({ width: 5 }));
         this._timestamp = new uiBar_Button({ label: "Placeholder" });
         leftBox.add_actor(this._timestamp);
-        this.timestampTooltip = new Tooltip(this._timestamp, "");
+        this.timestampTooltip = new uiBar_Tooltip(this._timestamp, "");
         this.actor.add(leftBox, {
             x_fill: false,
             x_align: uiBar_Align.START,
