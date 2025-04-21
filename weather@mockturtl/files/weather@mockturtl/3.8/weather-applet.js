@@ -16507,35 +16507,7 @@ class WeatherUnderground extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/types/common.ts
-
-
-function PirateWeatherSummaryToTranslated(summary) {
-    switch (summary) {
-        case "Clear":
-            return _("Clear");
-        case "Partly Cloudy":
-            return _("Partly Cloudy");
-        case "Rain":
-            return _("Rain");
-        case "Cloudy":
-            return _("Cloudy");
-        case "Snow":
-            return _("Snow");
-        case "Wind":
-            return _("Wind");
-        case "Fog":
-            return _("Fog");
-        case "Sleet":
-            return _("Sleet");
-        default:
-            logger_Logger.Error(`Unknown PirateWeatherSummary: ${summary}`);
-            return summary;
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
-
 
 
 
@@ -16579,6 +16551,65 @@ class PirateWeather extends BaseProvider {
             }
             return true;
         };
+        this.supportedLanguages = [
+            "ar",
+            "az",
+            "be",
+            "bg",
+            "bn",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "el",
+            "en",
+            "eo",
+            "es",
+            "et",
+            "fa",
+            "fi",
+            "fr",
+            "ga",
+            "gd",
+            "he",
+            "hi",
+            "hr",
+            "hu",
+            "id",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kn",
+            "ko",
+            "kw",
+            "lv",
+            "ml",
+            "mr",
+            "nl",
+            "no",
+            "pa",
+            "pl",
+            "pt",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sr",
+            "sv",
+            "ta",
+            "te",
+            "`tet",
+            "tr",
+            "uk",
+            "ur",
+            "vi",
+            "x-pig-latin",
+            "zh",
+            "zh-tw",
+        ];
     }
     get remainingCalls() {
         return null;
@@ -16589,7 +16620,10 @@ class PirateWeather extends BaseProvider {
         const response = await HttpLib.Instance.LoadJsonAsync({
             url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
             cancellable,
-            params: { units: this.GetQueryUnit(config) },
+            params: {
+                units: this.GetQueryUnit(config),
+                lang: (config._translateCondition && config.Language && this.supportedLanguages.includes(config.Language)) ? config.Language : "en",
+            },
             HandleError: this.HandleError
         });
         if (!response.Success)
@@ -16623,8 +16657,8 @@ class PirateWeather extends BaseProvider {
                 humidity: json.currently.humidity * 100,
                 dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
                 condition: {
-                    main: PirateWeatherSummaryToTranslated(json.currently.summary),
-                    description: PirateWeatherSummaryToTranslated(json.currently.summary),
+                    main: json.currently.summary,
+                    description: json.currently.summary,
                     icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
@@ -16643,8 +16677,8 @@ class PirateWeather extends BaseProvider {
                     temp_min: this.ToKelvin(day.temperatureLow, unit),
                     temp_max: this.ToKelvin(day.temperatureHigh, unit),
                     condition: {
-                        main: PirateWeatherSummaryToTranslated(day.summary),
-                        description: PirateWeatherSummaryToTranslated(day.summary),
+                        main: day.summary,
+                        description: day.summary,
                         icons: this.ResolveIcon(day.icon),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
@@ -16657,8 +16691,8 @@ class PirateWeather extends BaseProvider {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature, unit),
                     condition: {
-                        main: PirateWeatherSummaryToTranslated(hour.summary),
-                        description: PirateWeatherSummaryToTranslated(hour.summary),
+                        main: hour.summary,
+                        description: hour.summary,
                         icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
