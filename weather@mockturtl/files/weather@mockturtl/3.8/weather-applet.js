@@ -19287,9 +19287,9 @@ class CurrentWeather {
         sunBox.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
         const uvIndexBox = new uiCurrentWeather_BoxLayout();
         this.uvIndexIcon = new uiCurrentWeather_Icon({
-            icon_name: "sunset-symbolic",
+            icon_name: "uv-index-symbolic",
             icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-            icon_size: 24,
+            icon_size: 20,
             style_class: "weather-current-uvindex",
             reactive: true,
         });
@@ -19506,24 +19506,25 @@ class CurrentWeather {
         }
         this.uvIndexIcon.show();
         if (uvIndex < 3) {
+            this.uvIndexIcon.hide();
             this.uvIndexIcon.style = "color: #00FF00";
-            this.uvIndexTooltip.set_text(`Low UV Index: ${uvIndex}`);
+            this.uvIndexTooltip.set_text(_("Low Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
         }
         else if (uvIndex < 6) {
             this.uvIndexIcon.style = "color: #FFFF00";
-            this.uvIndexTooltip.set_text(`Moderate UV Index: ${uvIndex}`);
+            this.uvIndexTooltip.set_text(_("Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
         }
         else if (uvIndex < 8) {
             this.uvIndexIcon.style = "color: #FF8000";
-            this.uvIndexTooltip.set_text(`High UV Index: ${uvIndex}`);
+            this.uvIndexTooltip.set_text(_("High Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
         }
         else if (uvIndex < 11) {
             this.uvIndexIcon.style = "color: #FF0000";
-            this.uvIndexTooltip.set_text(`Very High UV Index: ${uvIndex}`);
+            this.uvIndexTooltip.set_text(_("Very High of Harm from sun exposure, Risk UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
         }
         else {
             this.uvIndexIcon.style = "color: #FF00FF";
-            this.uvIndexTooltip.set_text(`Extreme UV Index: ${uvIndex}`);
+            this.uvIndexTooltip.set_text(_("Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
         }
     }
     onLocationStorageChanged(sender, itemCount) {
