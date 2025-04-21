@@ -79,7 +79,7 @@ msgstr "..."
 
 #. 3.0/applet.js:218 3.8/weather-applet.js:19788
 msgid "Click to open"
-msgstr "Нажмите дял открытия"
+msgstr "Нажмите для открытия"
 
 #. 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:18217
 #. 3.8/weather-applet.js:19791
