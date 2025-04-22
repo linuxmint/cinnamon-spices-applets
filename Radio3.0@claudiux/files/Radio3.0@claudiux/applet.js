@@ -3382,8 +3382,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   download_songArt(title, res="") {
     if (!YTDL_PROGRAM().includes("yt-dlp")) return;
+    if (!file_test(XDG_RUNTIME_DIR+"/mpv_radio_PID", FileTest.EXISTS)) return;
 
-    let command = '%s/get_song_art.sh "%s" "%s" &'.format(SCRIPTS_DIR, title, res);
+    let command = `${SCRIPTS_DIR}/get_song_art.sh "${title}" "${res}" &`;
     spawnCommandLineAsync(command);
     timeout_add_seconds(30, () => {
       let dir = file_new_for_path(ALBUMART_PICS_DIR);
@@ -3393,8 +3394,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.download_songArt(title, res);
       } else {
         let size = child.get_size();
-        if (size == 0)
-          this.download_songArt(title, res);
+        if (size == 0 && res != "sd")
+          this.download_songArt(title, res="sd");
       }
       children.close(null);
       return false;
