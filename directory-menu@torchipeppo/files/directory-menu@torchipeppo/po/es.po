@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-22 12:08-0400\n"
-"PO-Revision-Date: 2024-11-01 11:42-0300\n"
+"PO-Revision-Date: 2025-04-22 12:48-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -63,18 +63,17 @@ msgstr "Texto del panel"
 
 #. settings-schema.json->visibility-section->description
 msgid "Visibility"
-msgstr ""
+msgstr "Visibilidad"
 
 #. settings-schema.json->show-header->description
 msgid "Include \"Open Folder\" and \"Open in Terminal\""
-msgstr ""
+msgstr "Incluye \"Abrir carpeta\" y \"Abrir en terminal\""
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Incluir archivos ocultos"
 
 #. settings-schema.json->limit-characters->description
-#, fuzzy
 msgid "Limit the Maximum Number of Characters in the Submenus"
 msgstr "Limitar el número máximo de caracteres en los submenús"
 
@@ -92,7 +91,7 @@ msgstr ""
 
 #. settings-schema.json->ordering-section->description
 msgid "Ordering"
-msgstr ""
+msgstr "Ordenar"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
