@@ -90,17 +90,18 @@ class Cassettone:
         directory = Gio.File.new_for_uri(directory_uri)
         # // First, the two directory actions: Open Folder and Open In Terminal
 
-        open_image = Gtk.Image.new_from_icon_name("folder", Gtk.IconSize.MENU)
-        open_item = self.new_image_menu_item(_("Open Folder"), open_image)
-        open_item.connect("activate", lambda _: self.launch(directory.get_uri(), Gtk.get_current_event_time()))
-        menu.append(open_item)
+        if self.show_header:
+            open_image = Gtk.Image.new_from_icon_name("folder", Gtk.IconSize.MENU)
+            open_item = self.new_image_menu_item(_("Open Folder"), open_image)
+            open_item.connect("activate", lambda _: self.launch(directory.get_uri(), Gtk.get_current_event_time()))
+            menu.append(open_item)
 
-        term_image = Gtk.Image.new_from_icon_name("terminal", Gtk.IconSize.MENU)
-        term_item = self.new_image_menu_item(_("Open in Terminal"), term_image)
-        term_item.connect("activate", lambda _: self.open_terminal_at_path(directory.get_path()))
-        menu.append(term_item)
+            term_image = Gtk.Image.new_from_icon_name("terminal", Gtk.IconSize.MENU)
+            term_item = self.new_image_menu_item(_("Open in Terminal"), term_image)
+            term_item.connect("activate", lambda _: self.open_terminal_at_path(directory.get_path()))
+            menu.append(term_item)
 
-        menu.append(Gtk.SeparatorMenuItem.new())
+            menu.append(Gtk.SeparatorMenuItem.new())
 
         # log(directory_uri)
 
@@ -274,6 +275,7 @@ class Cassettone:
         self.favorites_first = args["favorites_first"]
         self.pinned_first = args["pinned_first"]
         self.order_by = args["order_by"]
+        self.show_header = args["show_header"]
 
         self.favorites = XApp.Favorites.get_default()
 
