@@ -74,6 +74,7 @@ export class CurrentWeather {
 		this.app.config.ImmediatePrecipChanged.Subscribe(this.app.AfterRefresh((config, precip, data) => this.SetImmediatePrecipitation(data.immediatePrecipitation, config)));
 		this.app.config.LocationLabelOverrideChanged.Subscribe(this.app.AfterRefresh(this.OnLocationOverrideChanged));
 		this.app.config.PressureUnitChanged.Subscribe(this.app.AfterRefresh((config, pressure, data) => this.SetPressure(data.pressure)));
+		this.app.config.UV_IndexChanged.Subscribe(this.app.AfterRefresh((config, uvIndex, data) => this.SetUVIndex(data.uvIndex, config._uvIndex)));
 	}
 
 	private OnLocationOverrideChanged = (config: Config, label: string, data: WeatherData) => {
@@ -99,7 +100,7 @@ export class CurrentWeather {
 			this.SetDewPointField(weather.dewPoint);
 			this.SetAPIUniqueField(weather.extra_field);
 			this.sunTimesUI.Display(weather.sunrise, weather.sunset, weather.location.timeZone);
-			this.SetUVIndex(weather.uvIndex);
+			this.SetUVIndex(weather.uvIndex, config._uvIndex);
 
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
@@ -402,8 +403,8 @@ export class CurrentWeather {
 			this.locationButton.url = url;
 	}
 
-	private SetUVIndex(uvIndex: number | null): void {
-		if (uvIndex == null) {
+	private SetUVIndex(uvIndex: number | null, show: boolean): void {
+		if (uvIndex == null || !show) {
 			this.uvIndexIcon.hide();
 			return;
 		}

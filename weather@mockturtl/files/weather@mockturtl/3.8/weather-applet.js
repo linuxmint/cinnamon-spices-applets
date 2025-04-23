@@ -18296,6 +18296,7 @@ class Config {
         this.UserAgentStringOverrideChanged = new Event();
         this.RunScriptChanged = new Event();
         this.TempTextOverrideChanged = new Event();
+        this.UV_IndexChanged = new Event();
         this.FontChanged = new Event();
         this.HotkeyChanged = new Event();
         this.SelectedLogPathChanged = new Event();
@@ -18748,6 +18749,10 @@ const Keys = {
     TEMP_TEXT_OVERRIDE: {
         key: "tempTextOverride",
         prop: "TempTextOverride"
+    },
+    UV_INDEX: {
+        key: "uvIndex",
+        prop: "UV_Index"
     },
 };
 
@@ -19221,6 +19226,7 @@ class CurrentWeather {
         this.app.config.ImmediatePrecipChanged.Subscribe(this.app.AfterRefresh((config, precip, data) => this.SetImmediatePrecipitation(data.immediatePrecipitation, config)));
         this.app.config.LocationLabelOverrideChanged.Subscribe(this.app.AfterRefresh(this.OnLocationOverrideChanged));
         this.app.config.PressureUnitChanged.Subscribe(this.app.AfterRefresh((config, pressure, data) => this.SetPressure(data.pressure)));
+        this.app.config.UV_IndexChanged.Subscribe(this.app.AfterRefresh((config, uvIndex, data) => this.SetUVIndex(data.uvIndex, config._uvIndex)));
     }
     Display(weather, config) {
         try {
@@ -19239,7 +19245,7 @@ class CurrentWeather {
             this.SetDewPointField(weather.dewPoint);
             this.SetAPIUniqueField(weather.extra_field);
             this.sunTimesUI.Display(weather.sunrise, weather.sunset, weather.location.timeZone);
-            this.SetUVIndex(weather.uvIndex);
+            this.SetUVIndex(weather.uvIndex, config._uvIndex);
             this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
             return true;
         }
@@ -19499,8 +19505,8 @@ class CurrentWeather {
         else
             this.locationButton.url = url;
     }
-    SetUVIndex(uvIndex) {
-        if (uvIndex == null) {
+    SetUVIndex(uvIndex, show) {
+        if (uvIndex == null || !show) {
             this.uvIndexIcon.hide();
             return;
         }
