@@ -67,7 +67,6 @@
         "middleShiftClickAction",
         "horizontalScroll",
         "showalbum",
-        "keepAlbumAspectRatio",
         "hideSystray"
       ]
     },
@@ -86,7 +85,6 @@
       "keys": [
         "showalbum",
         "showalbumDelay",
-        "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
         "showMicUnmutedOnIcon"
