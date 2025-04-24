@@ -34,6 +34,7 @@ const {
 } = require("./lib/mainloopTools");
 
 const ICON_SIZE = Math.trunc(28 * global.ui_scale);
+const superRND = (2**31-1)**2;
 
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
@@ -642,7 +643,8 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         if (old_title != this._title) {
-            Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+            Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+            Util.spawnCommandLine("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         this.titleLabel.set_text(this._title);
@@ -656,6 +658,7 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = artUrl;
                     change = true;
                 }
+                Util.spawnCommandLineAsync("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             }
         } else if (metadata["xesam:url"]) {
             if (this._oldTitle != this._title) {
@@ -689,6 +692,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 });
             }
         } else {
+            Util.spawnCommandLineAsync("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
@@ -821,25 +825,25 @@ class Player extends PopupMenu.PopupMenuSection {
             });
             cover_path = null;
         } else {
-            let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
-            let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
-            if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
-                Util.spawnCommandLineAsync("bash -c 'cp %s %s/R3SongArt%s'".format(
-                    cover_path,
-                    ALBUMART_PICS_DIR,
-                    randomIntegerInInterval(1000000, 9999999).toString()
-                ));
-            } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                //~ logDebug("_showCover(): Radio3.0 is not running.");
-                //~ Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt*'".format(ALBUMART_PICS_DIR));
-                Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt* ; sleep 1 ; cp %s %s/R3SongArt%s'".format(
-                    ALBUMART_PICS_DIR,
-                    cover_path,
-                    ALBUMART_PICS_DIR,
-                    randomIntegerInInterval(1000000, 9999999).toString()
-                ));
-            }
-            dir_children.close(null);
+
+            //~ let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
+            //~ let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
+            //~ if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
+                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                    //~ cover_path,
+                    //~ ALBUMART_PICS_DIR,
+                    //~ randomIntegerInInterval(0, superRND).toString()
+                //~ ));
+            //~ } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
+                //~ Util.spawnCommandLineAsync("rm -f %s/R3SongArt* ; sleep 1 ; cp -a %s %s/R3SongArt%s".format(
+                    //~ ALBUMART_PICS_DIR,
+                    //~ cover_path,
+                    //~ ALBUMART_PICS_DIR,
+                    //~ randomIntegerInInterval(0, superRND).toString()
+                //~ ));
+            //~ }
+            //~ dir_children.close(null);
+
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added

@@ -1,3 +1,7 @@
+### v12.0.0~20250424
+  * Produces square rendered images from album covers to display a more pleasing icon.
+  * Requires installation of imagemagick to obtain this result.
+
 ### v11.5.2~20250416
   * Bugfix related to [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074)
 
