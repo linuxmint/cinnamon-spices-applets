@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-24 14:35+0200\n"
-"PO-Revision-Date: 2025-04-05 20:55-0300\n"
+"PO-Revision-Date: 2025-04-24 09:43-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -315,14 +315,12 @@ msgstr ""
 "seleccione el botón ⬇."
 
 #. 6.4/applet.js:1820
-#, fuzzy
 msgid "The 'imagemagick' package is required!"
-msgstr "¡Se necesita el paquete \"playerctl\"!"
+msgstr "¡Se necesita el paquete \"imagemagick\"!"
 
 #. 6.4/applet.js:1821
-#, fuzzy
 msgid "Please select 'Install imagemagick' in this menu"
-msgstr "Seleccione 'Instalar playerctl' en este menú"
+msgstr "Seleccione 'Instalar imagemagick' en este menú"
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:2026
@@ -330,9 +328,8 @@ msgid "Remove the OsdWithNumber extension"
 msgstr "Eliminar la extensión OsdWithNumber"
 
 #. 6.4/applet.js:2046
-#, fuzzy
 msgid "Install imagemagick"
-msgstr "Instalar playerctl"
+msgstr "Instalar imagemagick"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
