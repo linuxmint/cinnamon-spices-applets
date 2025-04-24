@@ -1,3 +1,6 @@
+### v12.0.~20250424
+  * Removes DEBUG mode.
+
 ### v12.0.0~20250424
   * Produces square rendered images from album covers to display a more pleasing icon.
   * Requires installation of imagemagick to obtain this result.

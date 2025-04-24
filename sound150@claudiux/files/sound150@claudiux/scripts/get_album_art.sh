@@ -1,8 +1,9 @@
 #!/bin/bash
-#~ DEBUG=false
-DEBUG=true
+DEBUG=false
+#~ DEBUG=true
 
 [[ $DEBUG == true ]] && echo "$(date) $(basename $0)" >> $HOME/sound150.log # DEBUGGING
+[[ $DEBUG == false ]] && rm -f $HOME/sound150.log # DEBUGGING
 
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 
