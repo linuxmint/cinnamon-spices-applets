@@ -2219,9 +2219,8 @@ class SpicesUpdate extends IconApplet {
     }
 
     // Status of each type of Spices:
-    let spicesMenuItems = {};
-    let char_update = "\u21BB";
-    let char_new = "\u2604";
+    let char_update = "↻"; // "\u21BB";
+    let char_new = "☄"; // "\u2604";
     let ts;
     for (let t of TYPES) {
       ts = _(capitalize(t.toString()));
@@ -2232,19 +2231,16 @@ class SpicesUpdate extends IconApplet {
         );
       if (this.new_Spices[t].length > 0)
         ts += "   %s %s".format(char_new, this.new_Spices[t].length.toString());
-      spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
-      spicesMenuItems[t].connect("activate", (event) => {
-        spawnCommandLineAsync(
-          "%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT),
-        );
-      });
-      spicesMenuItems[t].setShowDot(this.menuDots[t]);
-      this.menu.addMenuItem(spicesMenuItems[t]);
+      if (this.menuDots[t])
+        ts = "⏺  " + ts;
+      else
+        ts = "    " + ts;
+      this.menu.addCommandlineAction(ts, "%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
     }
     // button Forget
     if (this.nb_to_watch > 0) {
       let _forget_button = new PopupIconMenuItem(
-        _("Forget new Spices") + " -\u2604-",
+        _("Forget new Spices") + " -☄-",
         "emblem-ok",
         IconType.SYMBOLIC,
       );
