@@ -217,6 +217,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
         Util.spawnCommandLineAsync("bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
+        Util.spawnCommandLineAsync("bash -c '[[ -d %s ]] || mkdir -p %s'".format(ICONDIR, ICONDIR));
         Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/rm_tmp_files.sh'");
 
         this.orientation = orientation;
