@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-22 12:52-0500\n"
+"POT-Creation-Date: 2025-04-27 15:03-0400\n"
 "PO-Revision-Date: 2025-01-23 12:38-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,9 +23,41 @@ msgid "Desaturate All"
 msgstr "Desaturar todo"
 
 #. metadata.json->description
-msgid "Convert your screen to grayscale."
+#, fuzzy
+msgid "Convert your screen to gray-scale."
 msgstr "Convierta su pantalla a escala de grises."
 
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr ""
+
 #. settings-schema.json->keybinding->description
-msgid "Shortcut to toggle grayscale"
+#, fuzzy
+msgid "Shortcut to toggle desaturation effect"
 msgstr "Acceso directo a la escala de grises"
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr ""
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr ""
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr ""
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
+msgstr ""
