@@ -25,26 +25,32 @@ class Background_handler {
         settings.bindWithObject(this, keys.slideshow_folder, "slideshow_folder");
     }
 
-    /** Detects and save the current background settings applied to Cinnamon desktop. */
+    /** Detects and saves the current background settings applied to Cinnamon desktop. */
     detect() {
-        this.is_slideshow     = IO.SLIDESHOW. get_boolean(IO.KEYS.IS_SLIDESHOW);
-        this.background_file  = IO.BACKGROUND.get_string( IO.KEYS.BACKGROUND_FILE);
-
-        // https://github.com/linuxmint/cinnamon/issues/12374
-        // Replace the uncommented line by the commented one once solved.
-        // this.slideshow_folder = IO.SLIDESHOW. get_string( IO.KEYS.SLIDESHOW_FOLDER);
-        this.slideshow_folder = IO.SLIDESHOW.get_string(IO.KEYS.SLIDESHOW_FOLDER).replace('directory://', "file://");
+        this.is_slideshow = IO.SLIDESHOW.get_boolean(IO.KEYS.IS_SLIDESHOW);
+        if (!this.is_slideshow)  // Irrelevant to get both
+            this.background_file = IO.BACKGROUND.get_string(IO.KEYS.BACKGROUND_FILE);
+        else
+            // The widget filechooser set as 'folderchooser' gives the URI prefixed with `file://` instead of `directory://`.
+            // https://github.com/linuxmint/cinnamon/issues/12374
+            // This "replace" is done so the widget display the folder correctly (it wants 'file://'):
+            this.slideshow_folder = IO.SLIDESHOW.get_string(IO.KEYS.SLIDESHOW_FOLDER).replace('directory://', "file://");
+            // Replace the above line by the below one once solved.
+            // this.slideshow_folder = IO.SLIDESHOW.get_string( IO.KEYS.SLIDESHOW_FOLDER);
     }
 
     /** Applies the saved background settings to Cinnamon desktop. */
     apply() {
-        IO.SLIDESHOW. set_boolean(IO.KEYS.IS_SLIDESHOW,     this.is_slideshow);
-        IO.BACKGROUND.set_string( IO.KEYS.BACKGROUND_FILE,  this.background_file);
-
-        // https://github.com/linuxmint/cinnamon/issues/12374
-        // Replace the uncommented line by the commented one once solved.
-        // IO.SLIDESHOW. set_string( IO.KEYS.SLIDESHOW_FOLDER, this.slideshow_folder);
-        IO.SLIDESHOW. set_string( IO.KEYS.SLIDESHOW_FOLDER, this.slideshow_folder.replace('file://', "directory://"));
+        IO.SLIDESHOW.set_boolean(IO.KEYS.IS_SLIDESHOW, this.is_slideshow);
+        if (!this.is_slideshow)  // Important to not set both
+            IO.BACKGROUND.set_string(IO.KEYS.BACKGROUND_FILE, this.background_file);
+        else
+            // The widget filechooser set as 'folderchooser' gives the URI prefixed with `file://` instead of `directory://`.
+            // https://github.com/linuxmint/cinnamon/issues/12374
+            // This "replace" is done so the saved value from the widget is applied correctly to Cinnamon settings:
+            IO.SLIDESHOW. set_string(IO.KEYS.SLIDESHOW_FOLDER, decodeURIComponent(this.slideshow_folder.replace('file://', "directory://")));
+            // Replace the above line by the below one once solved.
+            // IO.SLIDESHOW. set_string(IO.KEYS.SLIDESHOW_FOLDER, decodeURIComponent(this.slideshow_folder));
     }
 }
 
