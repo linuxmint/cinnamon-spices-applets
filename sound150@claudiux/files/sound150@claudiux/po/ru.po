@@ -200,11 +200,11 @@ msgstr ""
 
 #. 6.2/applet.js:2970 5.4/applet.js:2758 6.4/applet.js:1815
 msgid "The 'playerctl' package is required!"
-msgstr ""
+msgstr "Требуется пакет 'playerctl'! "
 
 #. 6.2/applet.js:2971 5.4/applet.js:2759 6.4/applet.js:1816
 msgid "Please select 'Install playerctl' in this menu"
-msgstr ""
+msgstr "Пожалуйста, выберите 'Установить playerctl' в этом меню."
 
 #. 6.2/applet.js:3110 4.4/applet.js:1397 5.4/applet.js:2890 4.6/applet.js:1417
 #. 2.8/applet.js:1644 6.4/applet.js:245 3.4/applet.js:1571
@@ -230,19 +230,19 @@ msgstr ""
 #. 6.4->settings-schema.json->button-reload-applet->description
 #. 6.2/applet.js:3135 5.4/applet.js:2915 6.4/applet.js:164
 msgid "Reload this applet"
-msgstr ""
+msgstr "Перезагрузить этот апплет"
 
 #. 6.2/applet.js:3141 5.4/applet.js:2921 6.4/applet.js:2018
 msgid "Remove sound applet"
-msgstr ""
+msgstr "Удалить звуковой апплет"
 
 #. 6.2/applet.js:3150 5.4/applet.js:2930 6.4/applet.js:2039
 msgid "Install playerctl"
-msgstr ""
+msgstr "Установить playerctl"
 
 #. 6.4/applet.js:230 6.4/applet.js:260 6.4/applet.js:262
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.4/applet.js:583
