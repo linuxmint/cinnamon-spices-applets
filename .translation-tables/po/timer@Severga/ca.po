@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-17 13:45+0100\n"
+"PO-Revision-Date: 2024-07-08 23:20+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:42 applet.js:207 applet.js:232 applet.js:257 applet.js:307
+#: applet.js:423 applet.js:493
+msgid "Timer: inactive"
+msgstr "Temporitzador: inactiu"
+
+#: applet.js:80 applet.js:223 applet.js:248 applet.js:494
+msgid "In:  00:00:00"
+msgstr "En:  00:00:00"
+
+#: applet.js:83 applet.js:224 applet.js:249 applet.js:266 applet.js:316
+#: applet.js:464 applet.js:496
+msgid "At:  --:--:--"
+msgstr "A:  --:--:--"
+
+#: applet.js:86
+msgid "Turn off computer on timer"
+msgstr "Apagar l'ordinador en finalitzar el temporitzador"
+
+#. settings-schema.json->openSubmenu->options
+#: applet.js:90 applet.js:369
+msgid "Quick setup"
+msgstr "Posada en marxa ràpida"
+
+#: applet.js:91
+msgid "        Tip: set slider to zero to deactivate timer"
+msgstr ""
+"        Consell: establiu el temps a zero per desactivar el temporitzador"
+
+#: applet.js:100
+msgid "     00:00:00"
+msgstr "     00:00:00"
+
+#: applet.js:107
+msgid "24:00:00     "
+msgstr "24:00:00     "
+
+#. settings-schema.json->openSubmenu->options
+#: applet.js:121 applet.js:370
+msgid "Precise setup"
+msgstr "Posada en marxa precisa"
+
+#: applet.js:131 applet.js:156 applet.js:181
+msgid "  +  "
+msgstr "  +  "
+
+#: applet.js:135 applet.js:160 applet.js:185
+msgid "00"
+msgstr "00"
+
+#: applet.js:140 applet.js:165 applet.js:190
+msgid "  -  "
+msgstr "  -  "
+
+#: applet.js:148 applet.js:173
+msgid "  :  "
+msgstr "  :  "
+
+#: applet.js:202
+msgid "Set time (today)"
+msgstr "Hora assignada (avui)"
+
+#: applet.js:227
+msgid "Set time (tomorrow)"
+msgstr "Hora assignada (demà)"
+
+#: applet.js:252
+msgid "Set period"
+msgstr "Establir període"
+
+#: applet.js:268
+msgid "Add preset"
+msgstr "Afegir preselecció"
+
+#. settings-schema.json->openSubmenu->options
+#. settings-schema.json->preset->description
+#. settings-schema.json->preset->tooltip
+#: applet.js:277
+msgid "Presets"
+msgstr "Preseleccions"
+
+#: applet.js:293
+msgid ""
+"        Tip: use 'Precise setup' to add preset and  [ × ]  button to remove "
+"preset"
+msgstr ""
+"        Consell: utilitzeu la configuració precisa per afegir una "
+"preselecció i el botó  [ × ]  per a eliminar-la"
+
+#: applet.js:319
+msgid "[ × ]"
+msgstr "[ × ]"
+
+#: applet.js:454 applet.js:476
+msgid "In:  "
+msgstr "En:  "
+
+#: applet.js:460 applet.js:484
+msgid "At:  "
+msgstr "A:  "
+
+#: applet.js:486
+msgid "Turn off in "
+msgstr "Apagar en "
+
+#: applet.js:486
+msgid "s"
+msgstr "s"
+
+#: applet.js:488
+msgid "Timer: "
+msgstr "Temporitzador: "
+
+#. metadata.json->name
+#: applet.js:512
+msgid "Timer"
+msgstr "Temporitzador"
+
+#: applet.js:512
+msgid "Time's up!"
+msgstr "S'ha acabat el temps!"
+
+#. metadata.json->description
+msgid "A timer applet"
+msgstr "Una miniaplicació de temporitzador"
+
+#. settings-schema.json->soundOn->description
+#. settings-schema.json->soundOn->tooltip
+msgid "Play sound on timer"
+msgstr "Reproduir un so quan s'acaba el temps"
+
+#. settings-schema.json->soundPath->description
+#. settings-schema.json->soundPath->tooltip
+msgid "Soundclip file path"
+msgstr "Ruta del fitxer de so"
+
+#. settings-schema.json->showNotifications->description
+#. settings-schema.json->showNotifications->tooltip
+msgid "Show system notification on timer"
+msgstr "Mostrar notificació de sistema quan s'acaba el temps"
+
+#. settings-schema.json->openSubmenu->description
+#. settings-schema.json->openSubmenu->tooltip
+msgid "Submenu to open initially"
+msgstr "Submenú a obrir inicialment"

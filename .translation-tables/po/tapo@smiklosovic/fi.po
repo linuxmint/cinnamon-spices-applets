@@ -1,0 +1,65 @@
+# TAPO CONTROL PANEL
+# This file is put in the public domain.
+# stefanmiklosovic, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tapo@smiklosovic 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-27 12:46-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+#. applet.js:85
+msgid "Tapo Control Panel"
+msgstr "Tapo Control Panel"
+
+#. applet.js:90
+msgid "Reload Applet"
+msgstr "Lataa sovelma uudelleen"
+
+#. applet.js:188
+msgid "All devices"
+msgstr "Kaikki laitteet"
+
+#. metadata.json->description
+msgid "Control Tapo Appliances"
+msgstr "Ohjaa Tapon valmistamia älylaitteita ja kodinkoneita"
+
+#. settings-schema.json->device-names->description
+msgid "Device names"
+msgstr "Laitenimi"
+
+#. settings-schema.json->device-names->tooltip
+msgid ""
+"Device names, separated by comma. Names have to correspond to names in tapo-"
+"rest settings in devices object in the configuration file."
+msgstr ""
+"Laitteiden nimet pilkulla erotettuina. Nimien tulee vastata "
+"määritystiedoston laiteobjektin tapo-rest asetuksissa olevia nimiä."
+
+#. settings-schema.json->service-url->description
+#. settings-schema.json->service-url->tooltip
+msgid "URL for tapo-rest service"
+msgstr "Tapo-rest palvelun osoite"
+
+#. settings-schema.json->password->description
+msgid "Password for tapo-rest"
+msgstr "Tapo-rest salasana"
+
+#. settings-schema.json->password->tooltip
+msgid "Enter password for tapo-rest service"
+msgstr "Anna tapo-rest palvelun salasana"
+
+#. settings-schema.json->perform-login->description
+msgid "Login to tapo-rest"
+msgstr "Kirjaudu palveluun"

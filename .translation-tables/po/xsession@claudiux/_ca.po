@@ -1,0 +1,60 @@
+# XSESSION
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2022
+#
+msgid ""
+msgstr ""
+
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr ""
+
+#. applet.js:242
+msgid "Ctrl + Middle-click: \n"
+msgstr ""
+
+#. applet.js:242 applet.js:331
+msgid "Show latest messages"
+msgstr ""
+
+#. applet.js:295 applet.js:537
+#, javascript-format
+msgid "%s latest messages"
+msgstr ""
+
+#. applet.js:295 applet.js:537
+msgid "min: 10. max: 250."
+msgstr ""
+
+#. applet.js:450
+msgid "Reload Current Theme"
+msgstr ""
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr ""
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr ""
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr ""
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr ""
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr ""

@@ -1,0 +1,22 @@
+# DIRECTORY MENU
+# This file is put in the public domain.
+# torchipeppo, 2024
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr ""
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr ""
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr ""
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr ""

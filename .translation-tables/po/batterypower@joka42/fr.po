@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 22:41+0000\n"
+"PO-Revision-Date: 2023-12-25 13:27+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+msgid "Power Consumption Display"
+msgstr "Affichage de la consommation d'énergie"
+
+#. metadata.json->description
+msgid "Shows power consumption when in battery mode"
+msgstr "Indique la consommation d'énergie quand l'ordinateur fonctionne sur batterie"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Afficher l'unité"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Show Watt symbol after the value."
+msgstr "Afficher le symbole Watt après la valeur."
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Intervalle de temps entre deux mesures"

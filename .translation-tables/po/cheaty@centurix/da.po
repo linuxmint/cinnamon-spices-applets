@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-15 20:39+0200\n"
+"PO-Revision-Date: 2023-12-24 10:00+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:87
+msgid "version"
+msgstr "version"
+
+#: applet.js:87
+msgid "Author:"
+msgstr "Forfatter:"
+
+#: applet.js:87
+msgid "Email:"
+msgstr "E-mail:"
+
+#: applet.js:87
+msgid "Repository:"
+msgstr "Arkiv:"
+
+#: applet.js:157
+msgid "Cheaty: Easy access cheatsheets"
+msgstr "Kodeoversigt: Lettilgængelige kodeoversigter"
+
+#: applet.js:307
+msgid "Configure..."
+msgstr "Konfigurér …"
+
+#: applet.js:321
+msgid "Code copied to the clipboard"
+msgstr "Kode kopieret til udklipsholderen"
+
+#. metadata.json->description
+msgid "An applet to provide quick access to a variety of cheat sheets."
+msgstr "Et panelprogram som giver hurtig adgang til en række kodeoversigter."
+
+#. metadata.json->name
+msgid "Cheaty - Cheatsheet keeper"
+msgstr "Kodeoversigt - Opbevaring af kodeoversigter"
+
+#. settings-schema.json->cheatsheetFolder->description
+msgid "cheatsheetFolder"
+msgstr "kodeoversigtsmappe"
+
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr "Vis Kodeoversigts pop op-menu"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr "Indstil tastegenveje til visning af Kodeoversigts pop op-menu."
+
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr "Kodeoversigtsvælger"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr "Aktiveret"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr "Navn "
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr "Beskrivelse"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
+msgstr "Forfatter"

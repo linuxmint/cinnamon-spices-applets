@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:57+0800\n"
+"PO-Revision-Date: 2024-04-22 11:04+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. CommandRunner@appdevsw->metadata.json->name
+#: applet.js:47
+msgid "CommandRunner"
+msgstr "CommandoUitvoerder"
+
+#: applet.js:102
+msgid "<no text>"
+msgstr "<geen tekst>"
+
+#: applet.js:136
+msgid "starting..."
+msgstr "aan het starten..."
+
+#: appletgui.js:142
+msgid "Compare error "
+msgstr "Vergelijk de fout "
+
+#: appletgui.js:255 appletgui.js:283
+msgid "XML/JSON error: missing tag "
+msgstr "XML/JSON-fout: ontbrekende tag "
+
+#: appletgui.js:291
+msgid "xml error:"
+msgstr "XML-fout:"
+
+#: appletgui.js:316 appletgui.js:325
+msgid "property not found "
+msgstr "eigenschap niet gevonden "
+
+#: cmdrunner.js:51
+msgid "undefined command!"
+msgstr "commando ongedefinieerd!"
+
+#: cmdrunner.js:143
+msgid "cannot execute command!"
+msgstr "kan commando niet uitvoeren!"
+
+#: simplexml.js:259
+msgid "xml parse error at pos "
+msgstr "XML-parseerfout op positie "
+
+#: simplexml.js:259
+msgid ", level "
+msgstr ", niveau "
+
+#: simplexml.js:259
+msgid ", inside tag "
+msgstr ", binnen tag "
+
+#. CommandRunner@appdevsw->metadata.json->description
+msgid ""
+"Applet runs script or application periodically and displays its output on "
+"the taskbar"
+msgstr ""
+"Applet voert periodiek een script of toepassing uit en geeft de uitvoer weer "
+"op de taakbalk"
+
+#. CommandRunner@appdevsw->settings-
+#. schema.json->form_interval_unit->description
+msgid "Unit"
+msgstr "Eenheid"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->tooltip
+msgid "Unit of the interval: seconds or milliseconds"
+msgstr "Eenheid van het interval: seconden of milliseconden"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " milliseconds"
+msgstr " milliseconden"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " seconds"
+msgstr " seconden"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->description
+msgid "Run interval"
+msgstr "Interval uitvoeren"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->tooltip
+msgid "Specifies how often the command is run"
+msgstr "Geeft aan hoe vaak het commando wordt uitgevoerd"
+
+#. CommandRunner@appdevsw->settings-schema.json->head_title->description
+msgid "CommandRunner settings"
+msgstr "CommandRunner-instellingen"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->description
+msgid "Suffix"
+msgstr "Suffix"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->tooltip
+msgid ""
+"Text or character displayed at the end of the command result (in text mode "
+"only)."
+msgstr ""
+"Tekst of teken weergegeven aan het einde van het resultaat van het commando "
+"(alleen in tekstmodus)."
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->description
+msgid "Command"
+msgstr "Commando"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->tooltip
+msgid ""
+"Command or script or applitaction to run.\n"
+"e.g.\n"
+" /home/user/myscript.sh\n"
+" echo Hello\n"
+"\n"
+"The command should print the result to the standard output, which will be "
+"displayed on the taskbar.\n"
+"\n"
+"You can use predefined parameters:\n"
+" $counter$ - number of command executions\n"
+" $appletdir$ - applet directory\n"
+"\n"
+"  e.g. echo \"I was executed $counter$ times\""
+msgstr ""
+"Commando of script of toepassing om uit te voeren.\n"
+" bv.\n"
+" /home/gebruiker/mijnscript.sh\n"
+" echo Hallo\n"
+"\n"
+"Het commando moet het resultaat printen naar de standaarduitvoer, die zal "
+"worden weergegeven op de taakbalk.\n"
+"\n"
+" U kunt vooraf gedefinieerde parameters gebruiken:\n"
+" $counter$ - aantal uitvoeringen van het commando\n"
+" $appletdir$ - appletmap\n"
+"\n"
+" bv. echo \"Ik ben $counter$ keer uitgevoerd\""
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->description
+msgid "Prefix"
+msgstr "Prefix"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->tooltip
+msgid ""
+"Text or character displayed at the beginning of the command result (in text "
+"mode only)."
+msgstr ""
+"Tekst of teken weergegeven aan het begin van het resultaat van het commando "
+"(alleen in tekstmodus)."
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->description
+msgid "Apply"
+msgstr "Toepassen"
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->tooltip
+msgid "Apply changes"
+msgstr "Wijzigingen toepassen"

@@ -1,0 +1,509 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-12 18:40+0100\n"
+"PO-Revision-Date: 2024-11-25 07:17+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../3.0/prefsui.glade.h:1 ../3.2/prefsui.glade.h:1 ../3.4/prefsui.glade.h:1
+#: ../4.0/prefsui.glade.h:1
+msgid "Multi-Core System Monitor Preferences"
+msgstr "Többmagos rendszerfigyelő beállításai"
+
+#: ../3.0/prefsui.glade.h:2 ../3.2/prefsui.glade.h:2 ../3.4/prefsui.glade.h:2
+#: ../4.0/prefsui.glade.h:2
+msgid "Labels"
+msgstr "Címkék"
+
+#: ../3.0/prefsui.glade.h:3 ../3.2/prefsui.glade.h:3 ../3.4/prefsui.glade.h:3
+#: ../4.0/prefsui.glade.h:3
+msgid "Refresh Rate (ms)"
+msgstr "Frissítési gyakoriság (ms)"
+
+#: ../3.0/prefsui.glade.h:4 ../3.2/prefsui.glade.h:4
+msgid "Height"
+msgstr "Magasság"
+
+#: ../3.0/prefsui.glade.h:5 ../3.2/prefsui.glade.h:6 ../3.4/prefsui.glade.h:5
+#: ../4.0/prefsui.glade.h:6
+msgid "Background Color"
+msgstr "Háttérszín"
+
+#: ../3.0/prefsui.glade.h:6 ../3.2/prefsui.glade.h:7 ../3.4/prefsui.glade.h:6
+#: ../4.0/prefsui.glade.h:7
+msgid "General"
+msgstr "Általános"
+
+#: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:7
+#: ../4.0/prefsui.glade.h:8 ../3.0/prefs.js:279 ../3.0/prefs.js:393
+#: ../3.2/prefs.js:283 ../3.2/prefs.js:398 ../3.4/prefs.js:327
+#: ../3.4/prefs.js:463 ../4.0/prefs.js:483 ../4.0/prefs.js:619
+#: ../5.6/prefs.js:483 ../5.6/prefs.js:619 ../6.0/prefs.js:483
+#: ../6.0/prefs.js:619
+msgid "Enable"
+msgstr "Engedélyezés"
+
+#: ../3.0/prefsui.glade.h:8 ../3.2/prefsui.glade.h:9 ../3.4/prefsui.glade.h:8
+#: ../4.0/prefsui.glade.h:9
+msgid "Width"
+msgstr "Szélesség"
+
+#: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:9
+#: ../4.0/prefsui.glade.h:12
+msgid "Colors"
+msgstr "Színek"
+
+#: ../3.0/prefsui.glade.h:10 ../3.2/prefsui.glade.h:11
+#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:16
+#: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
+#: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
+#: ../4.0/DataProviders.js:55 ../4.0/prefs.js:303 ../5.6/DataProviders.js:55
+#: ../5.6/prefs.js:303 ../6.0/DataProviders.js:55 ../6.0/prefs.js:303
+msgid "CPU"
+msgstr "CPU"
+
+#: ../3.0/prefsui.glade.h:11 ../3.2/prefsui.glade.h:12
+#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:17
+msgid "Usedup"
+msgstr "Felhasznált"
+
+#: ../3.0/prefsui.glade.h:12 ../3.2/prefsui.glade.h:13
+#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:18
+msgid "Cached"
+msgstr "Gyorsítótárazott"
+
+#: ../3.0/prefsui.glade.h:13 ../3.2/prefsui.glade.h:14
+#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:19
+msgid "Buffer"
+msgstr "Puffer"
+
+#: ../3.0/prefsui.glade.h:14 ../3.2/prefsui.glade.h:15
+#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:20
+msgid "Free"
+msgstr "Szabad"
+
+#: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
+#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:21
+#: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
+#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:194
+#: ../5.6/DataProviders.js:194 ../6.0/DataProviders.js:194
+msgid "Swap"
+msgstr "Cserehely"
+
+#: ../3.0/prefsui.glade.h:16 ../3.2/prefsui.glade.h:17
+#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:22
+msgid "Memory"
+msgstr "Memória"
+
+#: ../3.0/prefsui.glade.h:17 ../3.2/prefsui.glade.h:18
+#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:23
+msgid "Scaling"
+msgstr "Méretezés"
+
+#: ../3.0/prefsui.glade.h:18 ../3.2/prefsui.glade.h:19
+#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:24
+msgid "Auto Scale"
+msgstr "Automatikus méretezés"
+
+#: ../3.0/prefsui.glade.h:19 ../3.2/prefsui.glade.h:20
+#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:25
+msgid "Logarithmic"
+msgstr "Logaritmikus"
+
+#: ../3.0/prefsui.glade.h:20 ../3.2/prefsui.glade.h:21
+#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:26
+msgid "Devices"
+msgstr "Eszközök"
+
+#: ../3.0/prefsui.glade.h:21 ../3.2/prefsui.glade.h:22
+#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:27
+msgid "Network"
+msgstr "Hálózat"
+
+#: ../3.0/prefsui.glade.h:22 ../3.2/prefsui.glade.h:23
+#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:28
+msgid "Disk IO"
+msgstr "Lemez IO"
+
+#: ../3.0/prefsui.glade.h:23 ../3.2/prefsui.glade.h:24
+#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:29
+msgid "Scaling Description"
+msgstr "Méretezés leírása"
+
+#: ../3.0/prefsui.glade.h:24 ../3.2/prefsui.glade.h:25
+#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:30
+msgid "Close"
+msgstr "Bezárás"
+
+#: ../3.0/prefsui.glade.h:25 ../3.2/prefsui.glade.h:26
+#: ../3.4/prefsui.glade.h:25
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+"Automatikus méretezés:\n"
+"\tEz a vonaldiagramot a legnagyobb értékkel méretezi\n"
+"\ta megjelenített területen belül. Miután a legnagyobb érték már nem jelenik "
+"meg\n"
+"\ta következő legnagyobb lesz az az új érték, amellyel a diagram\n"
+"\tméreteződik. Ez lehetővé teszi a diagram \"nagyítását\" a grafikon "
+"részleteinek megjelenítéséhez.\n"
+"\tEz azonban azt is jelenti, hogy ha van egy nagy érték, akkor a kicsi "
+"értékek\n"
+"\ta 0-tól megkülönböztethetetlenné válhatnak. Továbbá, ha csak kis értékek "
+"vannak\n"
+"\takkor a valamivel nagyobb értékek nagyobbnak tűnhetnek a kelleténél.\n"
+"\tHa nincs engedélyezve, akkor a Cinnamon indítása óta mért legnagyobb "
+"érték\n"
+"\tlesz a meghatározó.\n"
+"\n"
+"Logaritmikus méretezés:\n"
+"\tEz átalakítja az értékeket úgy, hogy azok logaritmikus skála "
+"segítségével \n"
+"\tjelenjenek meg. Ha nem ismerné, ez csökkenti a nagy értékeket, \n"
+"\tígy azok nem nyomják el a kisebb értékeket."
+
+#: ../3.2/prefsui.glade.h:5 ../3.4/prefsui.glade.h:4 ../4.0/prefsui.glade.h:5
+msgid "Label Color"
+msgstr "Címke színe"
+
+#: ../4.0/prefsui.glade.h:4
+msgid "Curves thickness"
+msgstr "Görbevastagság"
+
+#: ../4.0/prefsui.glade.h:10
+msgid "Color by activity level"
+msgstr "Aktivitás szerinti szín"
+
+#: ../4.0/prefsui.glade.h:11
+msgid "Use automatic colors"
+msgstr "Automatikus színek használata"
+
+#: ../4.0/prefsui.glade.h:13
+msgid "by CPU:"
+msgstr "CPU:"
+
+#: ../4.0/prefsui.glade.h:15
+#, no-c-format
+msgid "by activity level (in %):"
+msgstr "aktivitás szerinti szín (százalékban megadva)"
+
+#: ../4.0/prefsui.glade.h:31
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"Automatikus méretezés:\n"
+"\tEz a vonaldiagramot a legnagyobb értékkel méretezi\n"
+"\ta megjelenített területen belül. Miután a legnagyobb érték már nem jelenik "
+"meg\n"
+"\ta következő legnagyobb lesz az az új érték, amellyel a diagram\n"
+"\tméreteződik. Ez lehetővé teszi a diagram \"nagyítását\" a grafikon "
+"részleteinek megjelenítéséhez.\n"
+"\tEz azonban azt is jelenti, hogy ha van egy nagy érték, akkor a kicsi "
+"értékek\n"
+"\ta 0-tól megkülönböztethetetlenné válhatnak. Továbbá, ha csak kis értékek "
+"vannak\n"
+"\takkor a valamivel nagyobb értékek nagyobbnak tűnhetnek a kelleténél.\n"
+"\tHa nincs engedélyezve, akkor a Cinnamon indítása óta mért legnagyobb "
+"érték\n"
+"\tlesz a meghatározó.\n"
+"\n"
+"Logaritmikus méretezés:\n"
+"\tEz átalakítja az értékeket úgy, hogy azok logaritmikus skála "
+"segítségével \n"
+"\tjelenjenek meg. Ha nem ismerné, ez csökkenti a nagy értékeket, \n"
+"\tígy azok nem nyomják el a kisebb értékeket."
+
+#: ../3.0/DataProviders.js:113 ../3.2/DataProviders.js:113
+#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:123
+#: ../5.6/DataProviders.js:123 ../6.0/DataProviders.js:123
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
+
+#: ../3.0/DataProviders.js:117 ../3.2/DataProviders.js:117
+#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:126
+#: ../5.6/DataProviders.js:126 ../6.0/DataProviders.js:126
+msgid "Core"
+msgstr "Mag"
+
+#: ../3.0/DataProviders.js:157 ../3.2/DataProviders.js:157
+#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:138
+#: ../5.6/DataProviders.js:138 ../6.0/DataProviders.js:138
+msgid "MEM"
+msgstr "MEM"
+
+#: ../3.0/DataProviders.js:163 ../3.2/DataProviders.js:163
+#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:158
+#: ../5.6/DataProviders.js:158 ../6.0/DataProviders.js:158
+msgid "----------- Memory -----------"
+msgstr "----------- Memória -----------"
+
+#: ../3.0/DataProviders.js:164 ../3.2/DataProviders.js:164
+msgid "Usedup:"
+msgstr "Felhasznált:"
+
+#: ../3.0/DataProviders.js:165 ../3.2/DataProviders.js:165
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
+#: ../5.6/DataProviders.js:159 ../6.0/DataProviders.js:159
+msgid "Cached:"
+msgstr "Gyorsítótárazott:"
+
+#: ../3.0/DataProviders.js:166 ../3.2/DataProviders.js:166
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
+#: ../5.6/DataProviders.js:159 ../6.0/DataProviders.js:159
+msgid "Buffer:"
+msgstr "Puffer:"
+
+#: ../3.0/DataProviders.js:167 ../3.2/DataProviders.js:167
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
+#: ../5.6/DataProviders.js:159 ../6.0/DataProviders.js:159
+msgid "Free:"
+msgstr "Szabad:"
+
+#: ../3.0/DataProviders.js:194 ../3.2/DataProviders.js:194
+#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:173
+#: ../5.6/DataProviders.js:173 ../6.0/DataProviders.js:173
+msgid "SWAP"
+msgstr "Cserehely"
+
+#: ../3.0/DataProviders.js:199 ../3.2/DataProviders.js:199
+#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:193
+#: ../5.6/DataProviders.js:193 ../6.0/DataProviders.js:193
+msgid "------------ Swap ------------"
+msgstr "------------ Cserehely ------------"
+
+#: ../3.0/DataProviders.js:264 ../3.2/DataProviders.js:264
+#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:204
+#: ../5.6/DataProviders.js:204 ../6.0/DataProviders.js:204
+msgid "NET"
+msgstr "NET"
+
+#: ../3.0/DataProviders.js:305 ../3.2/DataProviders.js:305
+#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:287
+#: ../5.6/DataProviders.js:287 ../6.0/DataProviders.js:295
+msgid "---------- Networks ----------"
+msgstr "---------- Hálózatok ----------"
+
+#: ../3.0/DataProviders.js:308 ../3.2/DataProviders.js:308
+#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:298
+#: ../5.6/DataProviders.js:298 ../6.0/DataProviders.js:306
+msgid "Down:"
+msgstr "Le:"
+
+#: ../3.0/DataProviders.js:308 ../3.0/DataProviders.js:309
+#: ../3.2/DataProviders.js:308 ../3.2/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KiB/s)"
+
+#: ../3.0/DataProviders.js:309 ../3.2/DataProviders.js:309
+#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:299
+#: ../5.6/DataProviders.js:299 ../6.0/DataProviders.js:307
+msgid "Up:"
+msgstr "Fel:"
+
+#: ../3.0/DataProviders.js:382 ../3.2/DataProviders.js:382
+#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:315
+#: ../5.6/DataProviders.js:315 ../6.0/DataProviders.js:323
+msgid "DISK"
+msgstr "LEMEZ"
+
+#: ../3.0/DataProviders.js:408 ../3.2/DataProviders.js:408
+#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:376
+#: ../5.6/DataProviders.js:376 ../6.0/DataProviders.js:384
+msgid "------------ Disks -----------"
+msgstr "------------ Lemezek -----------"
+
+#: ../3.0/DataProviders.js:411 ../3.2/DataProviders.js:411
+#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:384
+#: ../5.6/DataProviders.js:384 ../6.0/DataProviders.js:392
+msgid "Read:"
+msgstr "Olvasás:"
+
+#: ../3.0/DataProviders.js:411 ../3.0/DataProviders.js:412
+#: ../3.2/DataProviders.js:411 ../3.2/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MiB/s)"
+
+#: ../3.0/DataProviders.js:412 ../3.2/DataProviders.js:412
+#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:385
+#: ../5.6/DataProviders.js:385 ../6.0/DataProviders.js:393
+msgid "Write:"
+msgstr "Írás:"
+
+#: ../3.0/ErrorApplet.js:28 ../3.0/ErrorApplet.js:34 ../3.2/ErrorApplet.js:28
+#: ../3.2/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "Többmagos rendszerfigyelő hiba."
+
+#: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
+#: ../4.0/applet.js:275 ../5.6/applet.js:283 ../6.0/applet.js:299
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: ../3.0/applet.js:323 ../3.2/applet.js:334
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Kérjük, telepítse a \"gir1.2-gtop-2.0\" csomagot."
+
+#: ../3.0/applet.js:328 ../3.2/applet.js:339
+msgid "Reload this applet"
+msgstr "Kisalkalmazás újratöltése"
+
+#: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
+#: ../4.0/prefs.js:494 ../5.6/prefs.js:494 ../6.0/prefs.js:494
+msgid "Down"
+msgstr "Le"
+
+#: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:346
+#: ../4.0/prefs.js:502 ../5.6/prefs.js:502 ../6.0/prefs.js:502
+msgid "Up"
+msgstr "Fel"
+
+#: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:479
+#: ../4.0/prefs.js:635 ../5.6/prefs.js:635 ../6.0/prefs.js:635
+msgid "Read"
+msgstr "Olvasás"
+
+#: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:488
+#: ../4.0/prefs.js:644 ../5.6/prefs.js:644 ../6.0/prefs.js:644
+msgid "Write"
+msgstr "Írás"
+
+#: ../3.0/prefs.js:530 ../3.2/prefs.js:540
+msgid "Error while saving file:"
+msgstr "Hiba a fájl mentése közben:"
+
+#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:47
+#: ../5.6/DataProviders.js:47 ../6.0/DataProviders.js:47
+msgid "/s"
+msgstr "/s"
+
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
+#: ../5.6/DataProviders.js:159 ../6.0/DataProviders.js:159
+msgid "Used:"
+msgstr "Használt:"
+
+#: ../3.4/applet.js:60 ../4.0/applet.js:64 ../5.6/applet.js:70
+#: ../6.0/applet.js:71
+msgid "Dependency missing"
+msgstr "Függőség hiányzik"
+
+#: ../3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+"Kérem telepítse a GTop csomagot\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"a használathoz "
+
+#: ../4.0/applet.js:66 ../5.6/applet.js:72 ../6.0/applet.js:73
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Telepítse a GTop csomagot:\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"a használathoz "
+
+#: ../4.0/applet.js:277 ../5.6/applet.js:285 ../6.0/applet.js:302
+msgid "Refresh graphs"
+msgstr "Grafikonok frissítése"
+
+#: ../4.0/prefs.js:335 ../5.6/prefs.js:335 ../6.0/prefs.js:335
+msgid "00-20"
+msgstr "00-20"
+
+#: ../4.0/prefs.js:335 ../5.6/prefs.js:335 ../6.0/prefs.js:335
+msgid "20-40"
+msgstr "20-40"
+
+#: ../4.0/prefs.js:335 ../5.6/prefs.js:335 ../6.0/prefs.js:335
+msgid "40-60"
+msgstr "40-60"
+
+#: ../4.0/prefs.js:335 ../5.6/prefs.js:335 ../6.0/prefs.js:335
+msgid "60-80"
+msgstr "60-80"
+
+#: ../4.0/prefs.js:335 ../5.6/prefs.js:335 ../6.0/prefs.js:335
+msgid "80-100"
+msgstr "80-100"
+
+#: ../5.6/util.js:244 ../6.0/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "A '%s' végrehajtása sikertelen:"
+
+#: ../6.0/applet.js:306
+msgid "Without any graphics"
+msgstr "Mindenféle grafika nélkül"
+
+#: ../6.0/applet.js:312
+msgid "With graphics"
+msgstr "Grfikával"
+
+#: ../6.0/applet.js:322
+msgid "Drop Memory Cache (needs root rights)"
+msgstr "Memória gyorsítótár elvetése (rendszergazdai jogosultság szükséges)"
+
+#~ msgid "Multi-Core System Monitor"
+#~ msgstr "Többmagos Rendszerfigyelő"
+
+#~ msgid ""
+#~ "Displays in realtime the cpu usage for each core/cpu and overall memory "
+#~ "usage."
+#~ msgstr ""
+#~ "Valós időben jeleníti meg az egyes magok/cpu-k processzorhasználatát és a "
+#~ "teljes memóriahasználatot."

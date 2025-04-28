@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"PO-Revision-Date: 2024-10-02 16:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:105
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
+#: applet.js:109
+msgid "Num Lock"
+msgstr "Num Lock"
+
+#: applet.js:113
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+#: applet.js:148
+msgid "Lock Keys"
+msgstr "Zárógombok"
+
+#: applet.js:208
+msgid "Scr lock on"
+msgstr "Scr Lock be"
+
+#: applet.js:211
+msgid "Scr lock off"
+msgstr "Scr Lock ki"
+
+#: applet.js:220
+msgid "Num lock on"
+msgstr "Num Lock be"
+
+#: applet.js:223
+msgid "Num lock off"
+msgstr "Num Lock ki"
+
+#: applet.js:232
+msgid "Caps lock on"
+msgstr "Caps Lock be"
+
+#: applet.js:235
+msgid "Caps lock off"
+msgstr "Caps Lock ki"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Megmutatja, hogy a caps lock/num lock/scr lock be van-e kapcsolva, és "
+"értesítést jelenít meg, ha ezek megváltoznak."
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "Lezárási gombok jelzője értesítésekkel"
+
+#. settings-schema.json->show-notifications->description
+msgid "Show notifications"
+msgstr "Értesítések mutatása"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr "A rendszer értesítési hangjának elnémítása"
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "Caps lock jelző megjelenítése"
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "Num lock jelző megjelenítése"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "Scr zár jelzőjének megjelenítése"

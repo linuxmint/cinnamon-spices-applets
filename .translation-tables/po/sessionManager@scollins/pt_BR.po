@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Vinícius Queiroz <viniciusqueiroz.voq@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-13 23:47+0100\n"
+"PO-Revision-Date: 2021-09-30 17:28-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:159
+msgid "Session"
+msgstr "Sessão"
+
+#: applet.js:226
+msgid "Lock Screen"
+msgstr "Bloquear tela"
+
+#: applet.js:230
+msgid "Switch User"
+msgstr "Trocar usuário"
+
+#: applet.js:235
+msgid "Guest Session"
+msgstr "Sessão de convidado"
+
+#: applet.js:240
+msgid "Log Off"
+msgstr "Sair"
+
+#: applet.js:246
+msgid "Suspend"
+msgstr "Suspender"
+
+#: applet.js:251
+msgid "Sleep"
+msgstr "Dormir"
+
+#: applet.js:256
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: applet.js:262
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: applet.js:266
+msgid "Shut Down"
+msgstr "Desligar"
+
+#. sessionManager@scollins->settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "Ícone no painel"
+
+#. sessionManager@scollins->settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "Tamanho do ícone"
+
+#. sessionManager@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. sessionManager@scollins->settings-
+#. schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "Ícones monocromáticos no menu"
+
+#. sessionManager@scollins->settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "Texto no painel"
+
+#. sessionManager@scollins->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Configurações gerais"
+
+#. sessionManager@scollins->metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "Fornece acesso fácil para desligar, reiniciar, etc"
+
+#. sessionManager@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Autor"
+
+#. sessionManager@scollins->metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Gerenciador de Seção é um applet que fornece um acesso fácil para controles "
+"de sessão como desligar, reiniciar, sair, trocar usuário, etc. Ele foi "
+"testado no Arch, Fedora e Linux Mint. Oferece compatibilidade com uma ampla "
+"variedade de Linux personalizados. Para solicitar recursos e correção de "
+"erros, entre em contato por meio do GitHub. Eu considerarei o seu pedido "
+"assim que possível."
+
+#. sessionManager@scollins->metadata.json->name
+msgid "Session Manager"
+msgstr "Gerenciador de sessão"

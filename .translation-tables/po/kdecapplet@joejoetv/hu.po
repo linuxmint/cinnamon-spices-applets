@@ -1,0 +1,615 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-08 00:05+0100\n"
+"PO-Revision-Date: 2023-05-07 21:00+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:574
+msgid "No Modules available"
+msgstr "Nincsenek elérhető modulok"
+
+#: applet.js:1065
+msgid "KDE Connect not available"
+msgstr "A KDE Connect nem érhető el"
+
+#: applet.js:1068
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr ""
+"A KDE Connect nem érhető el, győződjön meg róla, hogy az alkalmazás "
+"telepítve van és fut."
+
+#: applet.js:1072 applet.js:1085 applet.js:1270
+msgid "Reload Applet"
+msgstr "Kisalkalmazás újratöltése"
+
+#: applet.js:1077
+msgid "Invalid KDE Connect version returned!"
+msgstr "Nem megfelelő KDE Connect verzió."
+
+#: applet.js:1078 applet.js:1081
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr ""
+"A KDE Connect DBus szolgáltatás érvénytelen verziót adott vissza, próbálja "
+"meg újratölteni a kisalkalmazást."
+
+#: applet.js:1120
+msgid "No connected Devices!"
+msgstr "Nincsenek csatlakoztatott eszközök"
+
+#: applet.js:1120
+msgid "Add them in the KDE Connect settings"
+msgstr "Hozzáadhatja őket a KDE Connect beállításaiban"
+
+#: applet.js:1165
+msgid "Debug Stuff, don't touch!"
+msgstr "Hibakeresési eszközök, ne állítsa el."
+
+#: applet.js:1254
+msgid "KDE Connect Version: {version}"
+msgstr "KDE Connect verzió: {version}"
+
+#: applet.js:1261
+msgid "Own ID: {own_id}"
+msgstr "Saját telefonszám: {own_id}"
+
+#: applet.js:1263
+msgid "own ID"
+msgstr "saját telefonszám"
+
+#: applet.js:1265
+msgid "Click to copy own ID"
+msgstr "Kattintson a saját telefonszám másolásához"
+
+#: applet.js:1275
+msgid "Configure KDE Connect"
+msgstr "KDE Connect beállítása"
+
+#: applet.js:1277
+msgid "Click to open KDE Connect Configuration"
+msgstr "Kattintson a KDE Connect beállításához"
+
+#: applet.js:1321
+msgid "No available devices"
+msgstr "Nincsenek elérhető eszközök"
+
+#: applet.js:1323
+msgid "{deviceCount} available device"
+msgstr "{deviceCount} elérhető eszköz"
+
+#: applet.js:1325
+msgid "{deviceCount} available devices"
+msgstr "{deviceCount} elérhető eszköz"
+
+#: js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr "A(z) „{typestring}” szöveg a vágólapra másolva"
+
+#: js/modules.js:656
+msgid "Charging"
+msgstr "Töltődik"
+
+#: js/modules.js:739
+msgid "ID: {id}"
+msgstr "Telefonszám: {id}"
+
+#: js/modules.js:743
+msgid "Device ID"
+msgstr "Eszközazonosító"
+
+#: js/modules.js:747
+msgid "Click to copy ID"
+msgstr "Kattintson a saját telefonszám másolásához"
+
+#: js/modules.js:820
+msgid "No Signal"
+msgstr "Nincs jelerősség"
+
+#: js/modules.js:823
+msgid "Low"
+msgstr "Alacsony"
+
+#: js/modules.js:826
+msgid "Ok"
+msgstr "Ok"
+
+#: js/modules.js:829
+msgid "Good"
+msgstr "Jó"
+
+#: js/modules.js:832
+msgid "Excellent"
+msgstr "Kiváló"
+
+#: js/modules.js:844
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: js/modules.js:898
+msgid "Ring device"
+msgstr "Eszköz megcsöngetése"
+
+#: js/modules.js:899
+msgid "Click to ring the device"
+msgstr "Kattintson az eszköz megcsöngetéséhez"
+
+#: js/modules.js:978
+msgid "Photo received from '{deviceName}'"
+msgstr "Fénykép érkezett innen: „{deviceName}”"
+
+#: js/modules.js:978 js/modules.js:1154
+msgid "Click to open in default application"
+msgstr "Megnyitás az alapértelmezett alkalmazással"
+
+#: js/modules.js:987
+msgid "Request Photo"
+msgstr "Fotó kérése"
+
+#: js/modules.js:988
+msgid "Click to request a photo from the device"
+msgstr "Kattintson fotó kéréséhez az eszközről"
+
+#: js/modules.js:1038
+msgid "Ping!"
+msgstr "Ping"
+
+#: js/modules.js:1045
+msgid "Sent ping to device '{deviceName}'"
+msgstr "Ping küldés a(z) „{deviceName}”  eszközre"
+
+#: js/modules.js:1051
+msgid "Ping Device"
+msgstr "Ping küldés"
+
+#: js/modules.js:1052
+msgid "Click to send a ping to the device"
+msgstr "Kattintson ping küldéséhez az eszközre"
+
+#: js/modules.js:1154
+msgid "Share received from '{deviceName}'"
+msgstr "Megosztás érkezett innen: „{deviceName}”"
+
+#: js/modules.js:1189
+msgid "Share"
+msgstr "Megosztás"
+
+#: js/modules.js:1202
+msgid "Send URL"
+msgstr "URL küldés"
+
+#: js/modules.js:1203
+msgid "Click to send a URL to the device"
+msgstr "Kattintson URL küldéséhez az eszközre"
+
+#: js/modules.js:1212
+msgid "Send Text"
+msgstr "Szöveges üzenet küldés"
+
+#: js/modules.js:1213 js/modules.js:1488
+msgid "Click to send text to the device"
+msgstr "Kattintson szöveges üzenet küldéséhez az eszközre"
+
+#: js/modules.js:1222
+msgid "Send File(s)"
+msgstr "Fájlok küldése"
+
+#: js/modules.js:1223
+msgid "Click to send file(s) to the device"
+msgstr "Kattintson a fájlküldéshez az eszközre"
+
+#: js/modules.js:1279
+msgid "Unmount"
+msgstr "Leválasztás"
+
+#: js/modules.js:1281
+msgid "Mount"
+msgstr "Csatolás"
+
+#: js/modules.js:1287
+msgid "Click to unmount"
+msgstr "Kattintson a leválasztáshoz"
+
+#: js/modules.js:1289
+msgid "Click to mount"
+msgstr "Kattintson a csatoláshoz"
+
+#: js/modules.js:1362
+msgid "Click to browse files"
+msgstr "Kattintson a fájlok tallózásához"
+
+#: js/modules.js:1466
+msgid "SMS"
+msgstr "SMS"
+
+#: js/modules.js:1479
+msgid "Launch SMS App"
+msgstr "SMS alkalmazás elindítása"
+
+#: js/modules.js:1480
+msgid "Click to open the KDE Connect SMS App"
+msgstr "Kattintson a KDE Connect SMS alkalmazás elindításához"
+
+#: js/modules.js:1487
+msgid "Send SMS"
+msgstr "SMS küldés"
+
+#: settingsWidgets.py:153
+msgid "Move selected entry up"
+msgstr "Kijelölt bejegyzés mozgatása fel"
+
+#: settingsWidgets.py:160
+msgid "Move selected entry down"
+msgstr "Kijelölt bejegyzés mozgatása le"
+
+#: py/dialogs.py:40
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr "URL küldése ide: „{device_name}”"
+
+#: py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+msgid "Cancel"
+msgstr "Mégse"
+
+#: py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+msgid "Send"
+msgstr "Küldés"
+
+#: py/dialogs.py:57
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr "Adja meg a(z) „{device_name}” eszközre küldendő URL-t"
+
+#: py/dialogs.py:61
+msgid "URL"
+msgstr "URL"
+
+#: py/dialogs.py:96
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr "SMS-üzenet küldése ide: „{device_name}”"
+
+#: py/dialogs.py:113
+msgid "Phone Number:"
+msgstr "Telefonszám:"
+
+#: py/dialogs.py:117
+msgid "Phone Number"
+msgstr "Telefonszám"
+
+#: py/dialogs.py:119
+msgid "Message:"
+msgstr "Üzenet:"
+
+#: py/dialogs.py:159
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr "Üzenet küldése ide: „{device_name}”"
+
+#: py/dialogs.py:176
+msgid "Text to send:"
+msgstr "Szöveges üzenet:"
+
+#: py/dialogs.py:222
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr "Válassza ki a(z) „{deviceName}” eszközre küldeni kívánt fájlokat"
+
+#: py/dialogs.py:283
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr ""
+"Válassza ki, hogy hova mentse a(z) „{deviceName}” eszköztől kapott fotót"
+
+#: py/dialogs.py:287
+msgid "photo.jpg"
+msgstr "foto.jpg"
+
+#: py/dialogs.py:290
+msgid "JPEG Photo"
+msgstr "JPEG-kép"
+
+#. metadata.json->name
+msgid "KDE Connect Applet"
+msgstr "KDE Connect kisalkalmazás"
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr ""
+"Lehetővé teszi az interakciót a KDE Connect-en keresztül csatlakoztatott "
+"eszközökkel"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"A KDE Connect Applet lehetővé teszi, hogy könnyedén használja a KDE Connect "
+"által biztosított különböző funkciókat a csatlakoztatott eszközökkel való "
+"interakció során, például: fájlok küldése, SMS-üzenetek küldése, az eszköz "
+"tárolójának böngészése és még sok minden mást"
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr "Johannes Schoeneberger - szerző"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - inspiráció a kisalkalmazáshoz"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr "Modulok"
+
+#. settings-schema.json->section_contextmenu->title
+msgid "Context Menu"
+msgstr "Helyi menü"
+
+#. settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr "Panel"
+
+#. settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr "Eszközök"
+
+#. settings-schema.json->section_info-modules->title
+msgid "Info Modules"
+msgstr "Információs modulok"
+
+#. settings-schema.json->section_action-modules->title
+msgid "Action Modules"
+msgstr "Művelet modulok"
+
+#. settings-schema.json->section_module_battery->title
+msgid "Battery Info Module"
+msgstr "Akkumulátor információs modul"
+
+#. settings-schema.json->section_module_deviceinfo->title
+msgid "Device-Info Info Module"
+msgstr "Eszköz-információ információs modul"
+
+#. settings-schema.json->section_module_connectivity->title
+msgid "Connectivity Info Module"
+msgstr "Kapcsolat információs modul"
+
+#. settings-schema.json->section_module_findmyphone->title
+msgid "FindMyPhone Action Module"
+msgstr "Telefon keresés művelet modul"
+
+#. settings-schema.json->section_module_requestphoto->title
+msgid "Request-Photo Action Module"
+msgstr "Fotó kérés művelet modul"
+
+#. settings-schema.json->section_module_ping->title
+msgid "Ping Action Module"
+msgstr "Ping művelet modul"
+
+#. settings-schema.json->section_module_share->title
+msgid "Share Action Module"
+msgstr "Megosztás művelet modul"
+
+#. settings-schema.json->section_module_sftp->title
+msgid "SFTP Action Module"
+msgstr "SFTP művelet modul"
+
+#. settings-schema.json->section_module_sms->title
+msgid "SMS Action Module"
+msgstr "SMS művelet modul"
+
+#. settings-schema.json->switch_show-own-id->description
+msgid "Show own ID in the context menu of the applet"
+msgstr "Saját azonosító megjelenítése a kisalkalmazás helyi menüjében"
+
+#. settings-schema.json->switch_show-kdec-version->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr ""
+"A KDE Connect verziójának megjelenítése a kisalkalmazás helyi menüjében"
+
+#. settings-schema.json->switch_show-device-count->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr ""
+"Csatlakoztatott eszközök számának megjelenítése az ikon mellett a panelen"
+
+#. settings-schema.json->switch_show-device-count-tooltip->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr "Csatlakoztatott eszközök számának megjelenítése az eszköztipjében"
+
+#. settings-schema.json->combobox_icon-type->description
+msgid "Icon type"
+msgstr "Ikon típus"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr "Szimbolikus"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr "Szín"
+
+#. settings-schema.json->switch_use-custom-icon->description
+msgid "Use custom icon"
+msgstr "Egyéni ikon használata"
+
+#. settings-schema.json->icon_custom-icon->description
+msgid "Custom icon to use"
+msgstr "Egyéni ikon használata"
+
+#. settings-schema.json->button_open-kdec-settings->description
+msgid "Open KDE Connect Configuration"
+msgstr "KDE Connect beállítások megnyitása"
+
+#. settings-schema.json->switch_expand-only-device->description
+msgid ""
+"Expand the device sub menu automatically, if only one device is available"
+msgstr "Eszköz almenüjének automatikus kibontása, ha csak egy eszköz érhető el"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr "Név"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr "Kibontás"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr "Engedélyezve"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "ID"
+msgstr "Azonosító"
+
+#. settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr ""
+"Készülék akkumulátor töltöttségének és töltési állapotának megjelenítése"
+
+#. settings-schema.json->module_deviceinfo_description->description
+msgid "Shows the device icon along with its ID"
+msgstr "Az eszköz ikonjának és telefonszámának megjelenítése"
+
+#. settings-schema.json->module_connectivity_description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr ""
+"A készülék aktuális kapcsolati állapotának és hálózattípusának megjelenítése"
+
+#. settings-schema.json->module_connectivity_showNetworkType->description
+msgid "Show the mobile network type"
+msgstr "Mobilhálózat típusának megjelenítése"
+
+#. settings-schema.json->module_findmyphone_description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr "Lehetővé teszi az eszköz csengésének aktiválását, hogy megtalálja azt"
+
+#. settings-schema.json->module_requestphoto_description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr ""
+"Lehetővé teszi, hogy egy fényképet kérjen le a távoli eszközről, majd mentse "
+"azt ezen az eszközön"
+
+#. settings-schema.json->module_requestphoto_saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr "Kapott fényképek közvetlenül mentése mappába"
+
+#. settings-schema.json->module_requestphoto_saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr "Képek mentése a mappába"
+
+#. settings-schema.json->module_ping_description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr ""
+"Lehetővé teszi a készülék pingelését annak ellenőrzéséhez, hogy "
+"csatlakoztatva van-e"
+
+#. settings-schema.json->module_ping_useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr "Egyéni ping-üzenet használata"
+
+#. settings-schema.json->module_ping_customMessage->description
+msgid "Custom message"
+msgstr "Egyéni üzenet"
+
+#. settings-schema.json->module_share_description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr ""
+"Lehetővé teszi, hogy megosszon URL-hivatkozásokat, fájlokat vagy szöveget az "
+"eszközzel"
+
+#. settings-schema.json->module_share_useSubMenu->description
+#. settings-schema.json->module_sms_useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr "Menüelemek megjelenítése az almenüben"
+
+#. settings-schema.json->module_share_enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr "URL-hivatkozás küldéséhez menüpont engedélyezése"
+
+#. settings-schema.json->module_share_enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr "Üzenet küldéséhez menüpont engedélyezése"
+
+#. settings-schema.json->module_share_enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr "Fájl(ok) küldéséhez menüpont engedélyezése"
+
+#. settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage selected on the device"
+msgstr ""
+"Lehetővé teszi, hogy távolról böngéssze az eszközön kiválasztott tárterületet"
+
+#. settings-schema.json->module_sms_description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr "Lehetővé teszi, hogy távolról SMS-üzeneteket küldjön az eszközről"
+
+#. settings-schema.json->module_sms_enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr "SMS-üzenet küldéséhez menüpont engedélyezése"
+
+#. settings-schema.json->module_sms_enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr "Engedélyezze a menüelemet a KDE Connect SMS alkalmazás indításához"
+
+#: display name of module battery
+msgid "Battery Module"
+msgstr "Akkumulátor modul"
+
+#: display name of module deviceinfo
+msgid "Device-Info Module"
+msgstr "Eszköz-információ modul"
+
+#: display name of module connectivity
+msgid "Connectivity Module"
+msgstr "Kapcsolat modul"
+
+#: display name of module findmyphone
+msgid "FindMyPhone Module"
+msgstr "Telefon keresés modul"
+
+#: display name of module requestphoto
+msgid "Request Photo Module"
+msgstr "Fotó kérés modul"
+
+#: display name of module ping
+msgid "Ping Module"
+msgstr "Ping modul"
+
+#: display name of module share
+msgid "Share Module"
+msgstr "Megosztás modul"
+
+#: display name of module sftp
+msgid "SFTP Module"
+msgstr "SFTP modul"
+
+#: display name of module sms
+msgid "SMS Module"
+msgstr "SMS modul"

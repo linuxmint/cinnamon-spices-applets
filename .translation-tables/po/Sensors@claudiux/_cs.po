@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sensors@claudiux Czech 3.9.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"PO-Revision-Date: 2025-01-08 19:22+0100\n"
+"Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
+"Language-Team: \n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: .\n"
+
+#. lib/checkDependencies.js:385
+msgid "Please install these packages:"
+msgstr ""
+
+#. lib/checkDependencies.js:401
+msgid "Install these packages now"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "claudiux: Author. JEleniel: support for NVidia video cards."
+msgstr ""
+
+#. settings-schema.json->page_Fans->title
+msgid "𖣘 Fan"
+msgstr ""
+
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr ""
+
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr ""
+
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr ""
+
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr ""
+
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr ""
+
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr ""
+
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr ""
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr ""
+
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr ""
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr ""
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr ""
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr ""

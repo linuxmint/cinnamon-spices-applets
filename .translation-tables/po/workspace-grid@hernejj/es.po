@@ -1,0 +1,70 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. workspace-grid@hernejj->metadata.json->description
+msgid "2D workspace grid and switcher for Cinnamon"
+msgstr "Cuadrícula y switcher de espacios de trabajo en 2D para Cinnamon"
+
+#. workspace-grid@hernejj->metadata.json->name
+msgid "Workspace grid (2D) and switcher"
+msgstr "Cuadrícula y switcher de espacios de trabajo en 2D"
+
+#. workspace-grid@hernejj->settings-schema.json->numRows->description
+msgid "Number of rows:"
+msgstr "Número de filas:"
+
+#. workspace-grid@hernejj->settings-schema.json->numRows->units
+#. workspace-grid@hernejj->settings-schema.json->numCols->units
+msgid "desktops"
+msgstr "escritorios"
+
+#. workspace-grid@hernejj->settings-schema.json->style->description
+msgid "Style:"
+msgstr "Estilo:"
+
+#. workspace-grid@hernejj->settings-schema.json->style->options
+msgid "Single Row"
+msgstr "Fila única"
+
+#. workspace-grid@hernejj->settings-schema.json->style->options
+msgid "Grid"
+msgstr "Cuadrícula"
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->registerUpDownKeyBindings->description
+msgid "Use Keyboard shortcuts (Ctrl+Alt+Up/Down) to switch desktop rows"
+msgstr "Utilice los atajos de teclado (Ctrl+Alt+Arriba/Abajo) para cambiar las filas del escritorio"
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->registerUpDownKeyBindings->tooltip
+msgid "This prevents the use of the Expo and Scale keyboard shortcuts in Cinnamon"
+msgstr "Esto impide el uso de los atajos de teclado Expo y Scale en Cinnamon"
+
+#. workspace-grid@hernejj->settings-schema.json->numCols->description
+msgid "Number of columns:"
+msgstr "Número de columnas:"
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->scrollWheelBehavior->description
+msgid "Scroll Wheel Behavior:"
+msgstr "Comportamiento de la rueda de desplazamiento:"
+
+#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+msgid "Scroll By Column"
+msgstr "Desplazarse por columna"
+
+#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+msgid "Scroll By Row"
+msgstr "Desplazarse por fila"

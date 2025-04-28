@@ -1,0 +1,230 @@
+# APP LAUNCHER
+# This file is put in the public domain.
+# mchilli, 2021
+#
+msgid ""
+msgstr ""
+
+#. applet.js:117
+msgid "All workspaces"
+msgstr ""
+
+#. applet.js:145
+msgid "Edit Applications"
+msgstr ""
+
+#. applet.js:864 applet.js:1158
+msgid "Delete"
+msgstr ""
+
+#. applet.js:865 applet.js:1159
+msgid "Edit"
+msgstr ""
+
+#. applet.js:866 applet.js:1160 dialogs.py:46 dialogs.py:296 widgets.py:73
+msgid "Cancel"
+msgstr ""
+
+#. dialogs.py:44 dialogs.py:295
+msgid "OK"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. dialogs.py:47 widgets.py:47 ui/widget.glade:40
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:53
+msgid "Group"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. dialogs.py:54 widgets.py:48 ui/widget.glade:51
+msgid "Command"
+msgstr ""
+
+#. dialogs.py:239
+msgid "The name cannot be empty"
+msgstr ""
+
+#. dialogs.py:244
+msgid "The name is already used"
+msgstr ""
+
+#. dialogs.py:251
+msgid "Valid name"
+msgstr ""
+
+#. dialogs.py:257
+msgid "Valid command"
+msgstr ""
+
+#. dialogs.py:260
+msgid "The command is not valid"
+msgstr ""
+
+#. dialogs.py:338
+msgid "really delete?"
+msgstr ""
+
+#. dialogs.py:339
+msgid "No"
+msgstr ""
+
+#. dialogs.py:340
+msgid "Yes"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#. widgets.py:46 ui/widget.glade:29
+msgid "Icon"
+msgstr ""
+
+#. widgets.py:51
+msgid "Add application"
+msgstr ""
+
+#. widgets.py:52
+msgid "Add new entry"
+msgstr ""
+
+#. widgets.py:55
+msgid "Add separator"
+msgstr ""
+
+#. widgets.py:58
+msgid "Edit selected entry"
+msgstr ""
+
+#. widgets.py:61
+msgid "Duplicate selected entry"
+msgstr ""
+
+#. widgets.py:64
+msgid "Move selected entry up"
+msgstr ""
+
+#. widgets.py:67
+msgid "Move selected entry down"
+msgstr ""
+
+#. widgets.py:70
+msgid "Remove selected entry"
+msgstr ""
+
+#. widgets.py:76
+msgid "Save?"
+msgstr ""
+
+#. widgets.py:77
+msgid "Save the current configuration"
+msgstr ""
+
+#. widgets.py:264
+msgid "Separator"
+msgstr ""
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr ""
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr ""
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr ""
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr ""
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr ""
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr ""
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr ""
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr ""
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr ""
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr ""
+
+#. settings-schema.json->hotkeys-enabled->description
+msgid "Enable Hotkeys"
+msgstr ""
+
+#. settings-schema.json->hotkey-bindings->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->hotkey-bindings->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->description
+msgid "Menu at mouse position"
+msgstr ""
+
+#. settings-schema.json->menu-at-pointer->tooltip
+msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr ""
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr ""
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr ""
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr ""
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr ""
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr ""
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr ""

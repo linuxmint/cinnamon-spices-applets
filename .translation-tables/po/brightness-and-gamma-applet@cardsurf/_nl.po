@@ -1,0 +1,90 @@
+# BRIGHTNESS AND GAMMA APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-05 06:30+0200\n"
+"PO-Revision-Date: 2024-04-20 16:31+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. 6.4->settings-schema.json->page_presets->title
+#. 6.4/applet.js:628
+msgid "Presets"
+msgstr ""
+
+#. settings-schema.json->configuration_start->description
+#. 6.4->settings-schema.json->section_config->title
+msgid "Configuration"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_general->title
+msgid "General"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_presets->title
+#. 6.4->settings-schema.json->preset_list->description
+msgid "Your presets"
+msgstr ""
+
+#. 6.4->settings-schema.json->disable_nightmode->description
+msgid "Disable Night Mode"
+msgstr ""
+
+#. 6.4->settings-schema.json->disable_nightmode->tooltip
+msgid ""
+"Disable Cinnamon Night Mode while this applet is running.\n"
+"This prevents the screen from flickering.\n"
+"The adjustment time can be up to twice the number of seconds indicated below."
+msgstr ""
+
+#. 6.4->settings-schema.json->brightness_up_shortcut->description
+msgid "Hotkey to Increase brightness"
+msgstr ""
+
+#. 6.4->settings-schema.json->brightness_down_shortcut->description
+msgid "Hotkey to Decrease brightness"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_label->description
+msgid ""
+"You can define or modify presets below, which can then be accessed via the "
+"applet's context menu."
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid "Name"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Show\n"
+"in menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Red"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Green"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Gamma\n"
+"Blue"
+msgstr ""

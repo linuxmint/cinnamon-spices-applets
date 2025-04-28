@@ -1,0 +1,32 @@
+# DESATURATE ALL
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hkoosha, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-22 12:52-0500\n"
+"PO-Revision-Date: 2025-04-10 14:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. metadata.json->name
+msgid "Desaturate All"
+msgstr "Minden színtelenítése"
+
+#. metadata.json->description
+msgid "Convert your screen to grayscale."
+msgstr "Alakítsa át a képernyőjét szürkeárnyalatossá."
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle grayscale"
+msgstr "A szürkeárnyalatra kapcsolás parancsikonja"

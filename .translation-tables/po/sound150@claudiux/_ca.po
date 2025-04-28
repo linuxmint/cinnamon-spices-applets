@@ -1,0 +1,62 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.4/applet.js:593
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. 6.4/applet.js:601
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. 6.4/applet.js:719
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:720
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. 6.4/applet.js:721 6.4/applet.js:739
+msgid "Desklets"
+msgstr ""
+
+#. 6.4/applet.js:737
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:738
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. 6.4/applet.js:1820
+msgid "The 'imagemagick' package is required!"
+msgstr ""
+
+#. 6.4/applet.js:1821
+msgid "Please select 'Install imagemagick' in this menu"
+msgstr ""
+
+#. 6.4/applet.js:2046
+msgid "Install imagemagick"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->description
+msgid "If the title is too long, end it with:"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->tooltip
+msgid "Emoji accepted"
+msgstr ""
+
+#. 6.4->settings-schema.json->showalbumDelay->description
+msgid "Delay between icon and album art display (seconds)"
+msgstr ""

@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:221
+msgid "Mark all read"
+msgstr ""
+
+#: applet.js:232
+msgid "Reload"
+msgstr ""
+
+#: applet.js:241
+msgid "Manage feeds"
+msgstr ""
+
+#: applet.js:252
+msgid "Settings"
+msgstr ""
+
+#: applet.js:337
+msgid "No unread feeds"
+msgstr ""
+
+#: applet.js:566
+msgid "Feeds"
+msgstr ""
+
+#: applet.js:775
+msgid "Mark All Posts Read"
+msgstr ""
+
+#: applet.js:788
+msgid "Update feed URL"
+msgstr ""
+
+#: applet.js:847 applet.js:863
+msgid "Published: "
+msgstr ""
+
+#: applet.js:926
+msgid "Mark Post Read"
+msgstr ""
+
+#: feedreader.js:151
+msgid "Invalid feed url"
+msgstr ""
+
+#: feedreader.js:362 feedreader.js:375
+msgid "Loading feed"
+msgstr ""
+
+#: manage_feeds.py:53
+msgid "Manage your feeds"
+msgstr ""
+
+#: manage_feeds.py:88
+msgid "Instance Name:"
+msgstr ""
+
+#: manage_feeds.py:113
+msgid "Enable"
+msgstr ""
+
+#: manage_feeds.py:120
+msgid "Url"
+msgstr ""
+
+#: manage_feeds.py:127
+msgid "Custom title"
+msgstr ""
+
+#: manage_feeds.py:133
+msgid "Notify"
+msgstr ""
+
+#: manage_feeds.py:139
+msgid "Show Read"
+msgstr ""
+
+#: manage_feeds.py:146
+msgid "Interval"
+msgstr ""
+
+#: manage_feeds.py:154
+msgid "Show Image"
+msgstr ""
+
+#: manage_feeds.py:200
+msgid "Import"
+msgstr ""
+
+#: manage_feeds.py:211
+msgid "_Import Feeds File"
+msgstr ""
+
+#: manage_feeds.py:212
+msgid "Import feeds from file"
+msgstr ""
+
+#: manage_feeds.py:218
+msgid "Export"
+msgstr ""
+
+#: manage_feeds.py:222
+msgid "_Export Feeds File"
+msgstr ""
+
+#: manage_feeds.py:223
+msgid "Export feeds to file"
+msgstr ""
+
+#: manage_feeds.py:229
+msgid "Options"
+msgstr ""
+
+#: manage_feeds.py:233
+msgid "_Toggle Hidden Fields"
+msgstr ""
+
+#: manage_feeds.py:234
+msgid "Show or Hide hidden fields"
+msgstr ""
+
+#: manage_feeds.py:251
+msgid "Changes will be discarded, continue?"
+msgstr ""
+
+#: manage_feeds.py:252
+msgid "Are you sure?"
+msgstr ""
+
+#: manage_feeds.py:260
+msgid "New Instance (List) Name"
+msgstr ""
+
+#: manage_feeds.py:262
+msgid "Add New Instance (List)"
+msgstr ""
+
+#: manage_feeds.py:335
+msgid "Failed to save config file"
+msgstr ""
+
+#: manage_feeds.py:349
+msgid "Choose a feed file"
+msgstr ""
+
+#: manage_feeds.py:350 manage_feeds.py:411
+msgid "Text files"
+msgstr ""
+
+#: manage_feeds.py:367 manage_feeds.py:416
+msgid "All files"
+msgstr ""
+
+#: manage_feeds.py:384
+msgid "file imported"
+msgstr ""
+
+#: manage_feeds.py:393
+msgid "Failed to import file"
+msgstr ""
+
+#: manage_feeds.py:400
+msgid "Save a feed file"
+msgstr ""
+
+#: manage_feeds.py:433
+msgid "Unable to export file"
+msgstr ""
+
+#. settings-schema.json->heading1->description
+msgid "Feed URLs"
+msgstr ""
+
+#. settings-schema.json->max_items->units
+msgid "feeds"
+msgstr ""
+
+#. settings-schema.json->max_items->description
+msgid "Maximum number of items"
+msgstr ""
+
+#. settings-schema.json->max_items->tooltip
+msgid "Maximum number of items to display for this feed"
+msgstr ""
+
+#. settings-schema.json->refresh_interval->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->refresh_interval->description
+msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->refresh_interval->tooltip
+msgid "Interval between checking for new items"
+msgstr ""
+
+#. settings-schema.json->notifications_enabled->description
+msgid "Show notifications for new items"
+msgstr ""
+
+#. settings-schema.json->notifications_enabled->tooltip
+msgid "If checked a popup notification will be displayed for new items"
+msgstr ""
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable debug level logging"
+msgstr ""
+
+#. settings-schema.json->instance_name->description
+msgid "Feed Instance Name"
+msgstr ""
+
+#. settings-schema.json->instance_name->tooltip
+msgid "Do not change, this is modified by the Manage Feeds window."
+msgstr ""

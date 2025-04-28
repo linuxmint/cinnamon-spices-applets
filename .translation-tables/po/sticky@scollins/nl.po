@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-07 18:47+0200\n"
+"PO-Revision-Date: 2024-04-22 11:21+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:207 3.2/applet.js:239
+msgid "Change theme"
+msgstr "Thema wijzigen"
+
+#: applet.js:216 3.2/applet.js:250
+msgid "Edit title"
+msgstr "Titel bewerken"
+
+#: applet.js:216 3.2/applet.js:250
+msgid "Add title"
+msgstr "Titel toevoegen"
+
+#: applet.js:222 3.2/applet.js:262
+msgid "Copy"
+msgstr "Kopiëren"
+
+#: applet.js:226 3.2/applet.js:266
+msgid "Paste"
+msgstr "Plakken"
+
+#: applet.js:232 3.2/applet.js:272
+msgid "About..."
+msgstr "Over..."
+
+#: applet.js:236 3.2/applet.js:276
+msgid "Configure..."
+msgstr "Configureren..."
+
+#: applet.js:242 3.2/applet.js:282
+msgid "Remove this note"
+msgstr "Deze notitie verwijderen"
+
+#: applet.js:408 3.2/applet.js:482
+msgid "Title"
+msgstr "Titel"
+
+#: applet.js:504 3.2/applet.js:600
+msgid "Switch to check list"
+msgstr "Omschakelen naar afvinklijst"
+
+#: applet.js:712 3.2/applet.js:808
+msgid "Switch to regular note"
+msgstr "Omschakelen naar gewone notitie"
+
+#: applet.js:716 3.2/applet.js:812
+msgid "Remove completed items"
+msgstr "Voltooide items verwijderen"
+
+#: applet.js:1605 3.2/applet.js:1735
+msgid "New note"
+msgstr "Nieuwe notitie"
+
+#: applet.js:1609 3.2/applet.js:1739
+msgid "New check-list"
+msgstr "Nieuwe afvinklijst"
+
+#: applet.js:1615 3.2/applet.js:1749
+msgid "Pin notes (keep on top)"
+msgstr "Notities vastzetten (bovenaan houden)"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+#: applet.js:1622 3.2/applet.js:1756
+msgid "Hide notes"
+msgstr "Notities verbergen"
+
+#: applet.js:1627 3.2/applet.js:1761
+msgid "Back up notes"
+msgstr "Notities back-uppen"
+
+#: applet.js:1631 3.2/applet.js:1765
+msgid "Restore from backup"
+msgstr "Herstellen van back-up"
+
+#: applet.js:1652 3.2/applet.js:1810
+msgid ""
+"This will permanently remove all existing notes. Are you sure you want to "
+"continue?"
+msgstr ""
+"Dit zal alle bestaande notities permanent verwijderen. Weet u zeker dat u "
+"wilt doorgaan?"
+
+#: 3.2/applet.js:87
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: 3.2/applet.js:92
+msgid "Ok"
+msgstr "Oké"
+
+#: 3.2/applet.js:256
+msgid "Save as template"
+msgstr "Opslaan als sjabloon"
+
+#: 3.2/applet.js:533
+msgid "Enter a name for the template."
+msgstr "Voer een naam in voor het sjabloon."
+
+#: 3.2/applet.js:816
+msgid "Unselect all items"
+msgstr "Alle items deselecteren"
+
+#: 3.2/applet.js:1743
+msgid "New from template"
+msgstr "Nieuw van sjabloon"
+
+#. 3.2->settings-schema.json->behavior->description
+#. sticky@scollins->settings-schema.json->behaviorHeader->description
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. 3.2->settings-schema.json->startState->description
+#. sticky@scollins->settings-schema.json->startState->description
+msgid "When Cinnamon starts"
+msgstr "Wanneer Cinnamon opstart"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Show notes above windows"
+msgstr "Notities boven vensters weergeven"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Restore previous state"
+msgstr "Vorige staat herstellen"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Show notes on Desktop"
+msgstr "Notities op bureaublad weergeven"
+
+#. 3.2->settings-schema.json->appearance->description
+#. sticky@scollins->settings-schema.json->appearanceHeader->description
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#. 3.2->settings-schema.json->height->description
+#. sticky@scollins->settings-schema.json->height->description
+msgid "Default height"
+msgstr "Standaardhoogte"
+
+#. 3.2->settings-schema.json->width->description
+#. sticky@scollins->settings-schema.json->width->description
+msgid "Default width"
+msgstr "Standaardbreedte"
+
+#. 3.2->settings-schema.json->theme->description
+#. sticky@scollins->settings-schema.json->theme->description
+msgid "Default theme"
+msgstr "Standaardthema"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Blue"
+msgstr "Blauw"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Pink"
+msgstr "Roze"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Brown"
+msgstr "Bruin"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Purple"
+msgstr "Paars"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Random"
+msgstr "Willekeurig"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Aqua"
+msgstr "Aqua"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Yellow"
+msgstr "Geel"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Sand"
+msgstr "Zand"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Green"
+msgstr "Groen"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Teal"
+msgstr "Blauwgroen"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Orange"
+msgstr "Oranje"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Red"
+msgstr "Rood"
+
+#. 3.2->settings-schema.json->boxShadow->description
+#. sticky@scollins->settings-schema.json->boxShadow->description
+msgid "Show shadow behind notes"
+msgstr "Schaduw achter notities weergeven"
+
+#. 3.2->settings-schema.json->boxShadow->tooltip
+#. sticky@scollins->settings-schema.json->boxShadow->tooltip
+msgid ""
+"Warning: this has been known to slow down some computers - not recommended "
+"on older hardware"
+msgstr ""
+"Waarschuwing: dit kan sommige computers vertragen - niet aanbevolen op "
+"oudere hardware"
+
+#. 3.2->settings-schema.json->font->description
+msgid "Font"
+msgstr "Lettertype"
+
+#. sticky@scollins->metadata.json->description
+msgid "Applet that allows you to manage desktop notes"
+msgstr "Applet waarmee u bureaubladnotities kunt beheren"
+
+#. sticky@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. sticky@scollins->metadata.json->comments
+msgid ""
+"This applet is designed to be a simple, quick, and easy-to-use note utility. "
+"While there is some customization available, the emphasis is on making it "
+"feel as smooth and easy to use as possible."
+msgstr ""
+"Deze applet is ontworpen als een eenvoudig, snel en gemakkelijk te gebruiken "
+"hulpprogramma voor notities. Hoewel er enige aanpassing mogelijk is, ligt de "
+"nadruk op het zo soepel en gebruiksvriendelijk mogelijk maken."
+
+#. sticky@scollins->metadata.json->name
+msgid "Sticky Notes"
+msgstr "Plaknotities"

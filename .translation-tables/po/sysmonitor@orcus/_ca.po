@@ -1,0 +1,24 @@
+# SYSTEM MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# orcuscz, 2016
+#
+msgid ""
+msgstr ""
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->description
+msgid "Minimum graph scale"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->units
+msgid "Mb/s"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
+msgid ""
+"The minimum scale for the graph in Megabits per second.\n"
+"The graph will not scale below this minimum, but it will automatically scale "
+"if the network speed exceeds this value.\n"
+"\n"
+"To always automatically scale, set the value to 0."
+msgstr ""

@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-26 18:09+0000\n"
+"PO-Revision-Date: 2024-11-13 19:22+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:209
+msgid "Type to search..."
+msgstr "Kirjoita haku..."
+
+#: applet.js:302
+msgid "Gnote stopped working!"
+msgstr "Gnote lakkasi toimimasta!"
+
+#: applet.js:305
+msgid "Gnote isn't running! Do you have it installed?"
+msgstr "Gnote ei ole käynnissä! Oletko asentanut gnote ohjelman?"
+
+#. metadata.json->name
+#: applet.js:338
+msgid "Gnote"
+msgstr "Gnote"
+
+#: applet.js:359
+msgid "New Note"
+msgstr "Uusi muistilappu"
+
+#: applet.js:423
+msgid "GNote DBus service not found. Is GNote installed?"
+msgstr "GNote DBus -palvelua ei löydy. Oletko asentanut gnote ohjelman?"
+
+#: applet.js:425
+msgid "Click to see error!"
+msgstr "Painamalla näet virheilmoituksen!"
+
+#: applet.js:427
+msgid "Error: "
+msgstr "Virhe: "
+
+#: applet.js:428
+msgid "Retry"
+msgstr "Yritä uudelleen"
+
+#. metadata.json->description
+msgid "Lists notes, view, create notes and search notes."
+msgstr ""
+"Luetteloi muistilappuja, katsele, luo muistiinpanoja ja etsi "
+"muistiinpanoista."

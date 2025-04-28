@@ -1,0 +1,146 @@
+# COLOR-BLIND FILTERS
+# This file is put in the public domain.
+# rcalixte, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: color-blind-filters@rcalixte 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-20 21:06-0400\n"
+"PO-Revision-Date: 2024-07-22 01:29+0200\n"
+"Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4/applet.js:109
+msgid "Color Blindness - Corrections"
+msgstr "Daltonisme - Correccions"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:112
+msgid "Protanopia Correction"
+msgstr "Correcció de protanopia"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:118
+msgid "Protanopia High Contrast"
+msgstr "Contrast alt per Protanopia"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:124
+msgid "Deuteranopia Correction"
+msgstr "Correcció de Deuteranopia"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:130
+msgid "Deuteranopia High Contrast"
+msgstr "Contrast alt per Deuteranopia"
+
+#. 5.4->settings-schema.json->color_corrections->options
+#. 5.4/applet.js:136
+msgid "Tritanopia Correction"
+msgstr "Correcció de Tritanopia"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4/applet.js:142
+msgid "Color Blindness - Simulations"
+msgstr "Daltonisme - Simulacions"
+
+#. 5.4->settings-schema.json->color_simulations->options
+#. 5.4/applet.js:145
+msgid "Protanopia Simulation"
+msgstr "Simulació de Protanopia"
+
+#. 5.4->settings-schema.json->color_simulations->options
+#. 5.4/applet.js:151
+msgid "Deuteranopia Simulation"
+msgstr "Simulació de Deuteranopia"
+
+#. 5.4->settings-schema.json->color_simulations->options
+#. 5.4/applet.js:157
+msgid "Tritanopia Simulation"
+msgstr "Simulació de Tritanopia"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4->settings-schema.json->inversions->description
+#. 5.4/applet.js:163
+msgid "Inversions"
+msgstr "Inversions"
+
+#. 5.4->settings-schema.json->inversions->options
+#. 5.4/applet.js:166
+msgid "Lightness Inversion"
+msgstr "Inversió de lluminositat"
+
+#. 5.4->settings-schema.json->inversions->options
+#. 5.4/applet.js:173
+msgid "Color Inversion"
+msgstr "Inversió de color"
+
+#. 5.4->settings-schema.json->category->options
+#. 5.4->settings-schema.json->other->description
+#. 5.4/applet.js:178
+msgid "Other Effects"
+msgstr "Altres efectes"
+
+#. 5.4->settings-schema.json->other->options
+#. 5.4/applet.js:180
+msgid "Desaturation"
+msgstr "Desaturació"
+
+#. 5.4->settings-schema.json->other->options
+#. 5.4/applet.js:185
+msgid "Channel Mixer - GBR"
+msgstr "Mesclador de canals - GBR"
+
+#. 5.4->settings-schema.json->other->options
+#. 5.4/applet.js:190
+msgid "Channel Mixer - BRG"
+msgstr "Mesclador de canals - BRG"
+
+#. 5.4/applet.js:375
+msgid "Current filter:"
+msgstr "Filtre actual:"
+
+#. 5.4/applet.js:380
+msgid "Filters disabled."
+msgstr "Filtres desactivats."
+
+#. metadata.json->description
+msgid ""
+"An applet for the Cinnamon Desktop Environment that offers full-screen color "
+"filters that should help color-blind users and developers."
+msgstr ""
+"Una miniaplicació per l'entorn Cinnamon que ofereix filtres de color per a "
+"usuaris i desenvolupadors amb daltonisme."
+
+#. metadata.json->name
+msgid "Color-blind Filters"
+msgstr "Filtres de daltonisme"
+
+#. 5.4->settings-schema.json->filter_active->description
+msgid "Filter Active"
+msgstr "Filtre actiu"
+
+#. 5.4->settings-schema.json->category->description
+msgid "Category"
+msgstr "Categoria"
+
+#. 5.4->settings-schema.json->color_corrections->description
+msgid "Corrections"
+msgstr "Correccions"
+
+#. 5.4->settings-schema.json->color_simulations->description
+msgid "Simulations"
+msgstr "Simulacions"
+
+#. 5.4->settings-schema.json->filter_strength->description
+msgid "Filter Strength"
+msgstr "Intensitat del filtre"

@@ -1,0 +1,115 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Renan Lazarotto <renanlazarotto@gmail.com>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ScreenShot+RecordDesktop@tech71\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-04 18:50+0200\n"
+"PO-Revision-Date: 2024-10-10 10:44-0300\n"
+"Last-Translator: Renan Lazarotto <renanlazarotto@gmail.com>\n"
+"Language-Team: Renan Lazarotto <renanlazarotto@gmail.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:28
+msgid "ScreenShot"
+msgstr "Captura de tela"
+
+#: applet.js:33
+msgid "Current Window"
+msgstr "Janela atual"
+
+#: applet.js:38
+msgid "Selected Area"
+msgstr "Área selecionada"
+
+#: applet.js:44
+msgid "Whole Screen"
+msgstr "Toda a tela"
+
+#: applet.js:46
+msgid "1 Second Delay"
+msgstr "Atraso de 1 segundo"
+
+#: applet.js:50
+msgid "3 Second Delay"
+msgstr "Atraso de 3 segundos"
+
+#: applet.js:54
+msgid "5 Second Delay"
+msgstr "Atraso de 5 segundos"
+
+#: applet.js:61
+msgid "Record Screencast"
+msgstr "Gravar a tela"
+
+#: applet.js:65
+msgid "Record Desktop With Audio"
+msgstr "Gravar a área de trabalho com som"
+
+#: applet.js:68 applet.js:74 applet.js:81 applet.js:87
+msgid "Recording"
+msgstr "Gravando"
+
+#: applet.js:68 applet.js:81
+msgid "With-Audio"
+msgstr "Com som"
+
+#: applet.js:71
+msgid "Record Desktop Without Audio"
+msgstr "Gravar a área de trabalho sem som"
+
+#: applet.js:74 applet.js:87
+msgid "No-Audio"
+msgstr "Sem som"
+
+#: applet.js:78
+msgid "Record Current Window With Audio"
+msgstr "Gravar a janela atual com som"
+
+#: applet.js:84
+msgid "Record Current Window Without Audio"
+msgstr "Gravar a janela atual sem som"
+
+#: applet.js:91
+msgid "Stop Recording"
+msgstr "Parar gravação"
+
+#: applet.js:96
+msgid "Recording-Stopped"
+msgstr "Gravação parada"
+
+#: applet.js:97
+msgid "Recording-Finished"
+msgstr "Gravação finalizada"
+
+#: applet.js:107
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Capturar a tela ou gravar a sua área de trabalho"
+
+#: applet.js:124
+msgid "Pictures Folder"
+msgstr "Pasta de imagens"
+
+#: applet.js:130
+msgid "Videos Folder"
+msgstr "Pasta de vídeos"
+
+#. metadata.json->description
+msgid ""
+"Take A Snapshot Or Record Your Desktop (recording requires the packages "
+"ffmpeg, xdotool & x11-utils to be installed)"
+msgstr ""
+"Capture a tela ou grave a sua área de trabalho (a gravação de telarequer que "
+"os pacotes ffmpeg, xdotool e x11-utils estejam instalados)"
+
+#. metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "Captura de tela e gravação da área de trabalho"

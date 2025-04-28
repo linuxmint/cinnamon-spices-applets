@@ -1,0 +1,14 @@
+# NIGHT LIGHT SWITCH
+# This file is put in the public domain.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+
+#. 6.4/applet.js:235
+msgid "Night Light Enabled - Click to Disable"
+msgstr ""
+
+#. 6.4/applet.js:238
+msgid "Night Light Disabled - Click to Enable"
+msgstr ""
