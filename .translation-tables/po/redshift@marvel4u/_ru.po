@@ -21,24 +21,24 @@ msgstr ""
 
 #: applet.js:330
 msgid "On"
-msgstr ""
+msgstr "Включен"
 
 #: applet.js:330
 msgid "Off"
-msgstr ""
+msgstr "Выключен"
 
 #: applet.js:334
 msgid "Day colour temperature"
-msgstr ""
+msgstr "Цветовая температура днём"
 
 #: applet.js:335
 msgid "Night colour temperature"
-msgstr ""
+msgstr "Цветовая температура ночью"
 
 #: applet.js:336
 msgid "Day Redshift brightness"
-msgstr ""
+msgstr "Redshift яркость днём"
 
 #: applet.js:337
 msgid "Night Redshift brightness"
-msgstr ""
+msgstr "Redshift яркость ночью"
