@@ -1,15 +1,16 @@
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
-const Util = imports.misc.util;
 const Main = imports.ui.main;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const Gio = imports.gi.Gio;
 const uuid = "AlwaysOn@krivetochka";
-const symbolic_icon_name = "lapt_symb_empty"
-const symbolic_active_icon_name = "lapt_symb"
-const colored_icon_name = "lapt_color_empty"
-const colored_active_icon_name = "lapt_color"
-let switcher = true
+const symbolic_icon_name = "lapt_symb_empty";
+const symbolic_active_icon_name = "lapt_symb";
+const colored_icon_name = "lapt_color_empty";
+const colored_active_icon_name = "lapt_color";
+let giosettings = new Gio.Settings({ schema: 'org.cinnamon.settings-daemon.plugins.power' });
+let switcher = true;
 
 
 // translation support
@@ -35,31 +36,23 @@ class AlwaysOn extends Applet.IconApplet {
     on_applet_clicked(event) {
         if(switcher){        
             // Activate applet functions
-            if (this.idle_dim_battery_switch){
-                Util.spawnCommandLineAsyncIO('gsettings get org.cinnamon.settings-daemon.plugins.power idle-dim-battery', (stdout) => {
-                    this.idle_dim_bat = stdout;
-                });
-                Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power idle-dim-battery false');
+            if (this.idle_dim_battery_switch) {
+                this.idle_dim_bat = giosettings.get_boolean('idle-dim-battery');
+                giosettings.set_boolean('idle-dim-battery', false);
             }
+            
             if (this.sleep_inactive_switch) {
-                Util.spawnCommandLineAsyncIO('gsettings get org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-timeout', (stdout) => {
-                    this.sleep_ac_time = stdout;
-                });
-                Util.spawnCommandLineAsyncIO('gsettings get org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout', (stdout) => {
-                    this.sleep_bat_time = stdout;
-                });
-                Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-timeout 0') //sleep mode when idle
-                Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout 0')
+                this.sleep_ac_time = giosettings.get_int('sleep-inactive-ac-timeout');
+                this.sleep_bat_time = giosettings.get_int('sleep-inactive-battery-timeout');
+                giosettings.set_int('sleep-inactive-ac-timeout', 0);
+                giosettings.set_int('sleep-inactive-battery-timeout', 0);
             }
-            if (this.sleep_display_switch){
-                Util.spawnCommandLineAsyncIO('gsettings get org.cinnamon.settings-daemon.plugins.power sleep-display-ac', (stdout) => {
-                    this.sleep_disp_ac_time = stdout;
-                });
-                Util.spawnCommandLineAsyncIO('gsettings get org.cinnamon.settings-daemon.plugins.power sleep-display-battery', (stdout) => {
-                    this.sleep_disp_bat_time = stdout;
-                });
-                Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-ac 0') //turning off the screen when idle
-                Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery 0')
+            
+            if (this.sleep_display_switch) {
+                this.sleep_disp_ac_time = giosettings.get_int('sleep-display-ac');
+                this.sleep_disp_bat_time = giosettings.get_int('sleep-display-battery');
+                giosettings.set_int('sleep-display-ac', 0);
+                giosettings.set_int('sleep-display-battery', 0);
             }
             
             if (this.notificate){
@@ -75,11 +68,11 @@ class AlwaysOn extends Applet.IconApplet {
         }
         else{
             // Deactivate applet functions
-            Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power idle-dim-battery ' + this.idle_dim_bat)
-            Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-ac-timeout ' + this.sleep_ac_time) //sleep mode when idle
-            Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-inactive-battery-timeout ' + this.sleep_bat_time)
-            Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-ac ' + this.sleep_disp_ac_time) //turning off the screen when idle
-            Util.spawnCommandLine('gsettings set org.cinnamon.settings-daemon.plugins.power sleep-display-battery ' + this.sleep_disp_bat_time)
+            giosettings.set_boolean("idle-dim-battery", this.idle_dim_bat)
+            giosettings.set_int('sleep-inactive-ac-timeout', this.sleep_ac_time);
+            giosettings.set_int('sleep-inactive-battery-timeout', this.sleep_bat_time);
+            giosettings.set_int('sleep-display-ac', this.sleep_disp_ac_time);
+            giosettings.set_int('sleep-display-battery', this.sleep_disp_bat_time);            
 
             if (this.notificate){
                 Main.notify(_("AlwaysOn deactivated"), _("Now your computer can go to sleep."));
