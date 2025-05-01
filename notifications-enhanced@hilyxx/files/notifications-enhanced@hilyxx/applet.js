@@ -152,6 +152,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this._maincontainer.add(this.scrollview);
         this.scrollview.add_actor(this._notificationbin);
         this.scrollview.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
+        this.scrollview.set_clip_to_allocation(true);
 
         let vscroll = this.scrollview.get_vscroll_bar();
         vscroll.connect('scroll-start', Lang.bind(this, function() {
@@ -281,7 +282,6 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                     
             if (!this.showNotificationCount) {  // Don't show notification count
                 this.set_applet_label('');
-                // this.clear_action.actor.hide();
             }
             this.menu_label.label.set_text(stringify(count));
             this._notificationbin.queue_relayout();
@@ -313,20 +313,17 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
 
      _show_hide_tray() { // Show or hide the notification tray.
         if(!global.settings.get_boolean(PANEL_EDIT_MODE_KEY)) {
-            if (this.notifications.length || this.showEmptyTray) {
+            if (this.notifications.length || this.showEmptyTray == true) {
                 this.actor.show();
-            } else {
-                this.actor.hide();
             }
+            this.update_list();
         }
     }
 
     _show_disturb_icon() { // Show disturb icon when show empty tray option is disabled.
         if(global.settings.get_boolean(PANEL_EDIT_MODE_KEY)) {
-           if (!this.showEmptyTray) {                
-                this.actor.show();
-            } else {
-                this.actor.hide();
+           if (this.showEmptyTray == true) {                
+               this.actor.show();
             }
          }
          this.update_list();
