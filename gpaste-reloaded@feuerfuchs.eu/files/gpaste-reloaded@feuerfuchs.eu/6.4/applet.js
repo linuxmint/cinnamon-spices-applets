@@ -211,6 +211,9 @@ class GPasteApplet extends Applet.IconApplet {
             });
             
             global.settings.connect('changed::panel-edit-mode', () => this._on_panel_edit_mode_changed());
+            // Ensure the ui client displays 255 items and so the applet
+            Util.spawnCommandLine("gsettings set org.gnome.GPaste max-displayed-history-size 255");
+
         }
         catch (e) {
             global.logError(e);
@@ -300,12 +303,37 @@ class GPasteApplet extends Applet.IconApplet {
 
         this.menu.addMenuItem(this.mitemTrack);
         this.menu.addMenuItem(this.mitemSearch);
-
         this.menu.addMenuItem(this.msepTop);
 
-        for (let i = 0, len = this._historyItems.length; i < len; ++i) {
-            this.menu.addMenuItem(this._historyItems[i]);
+        let historyScrollViewContainer = new St.ScrollView({
+            x_fill: true,
+            y_fill: true,
+            y_align: St.Align.start,
+            style_class: 'history-scrollview'
+        });
+
+        let historyContainerBox = new St.BoxLayout({
+            vertical: true
+        });
+
+        historyScrollViewContainer.add_actor(historyContainerBox);
+
+        let historySection = new PopupMenu.PopupMenuSection();
+
+        historySection.actor.add_actor(historyScrollViewContainer);
+
+        for(let i = 0, len = this._historyItems.length; i < len; ++i){
+            let item = this._historyItems[i];
+            
+            // Move items from their old parent if needed
+            if(item.actor.get_parent()){
+                item.actor.get_parent().remove_actor(item.actor);
+            }
+            
+            // Add items to the scrollable section
+            historyContainerBox.add_actor(item.actor);
         }
+
         this.menu.addMenuItem(this.mitemHistoryIsEmpty);
         this.menu.addMenuItem(this.mitemNoSearchResults);
 
