@@ -1,0 +1,50 @@
+{
+	"section-general" : {
+		"type" : "section",
+		"description" : "Choose which settings will be affected by the applet"
+	},
+    
+    "idle-dim-battery" : {
+		"type" : "switch",
+        "default" : true,
+		"description" : "Dim the screen when idle"
+	},
+
+    "sleep-inactive" : {
+		"type" : "switch",
+        "default" : true,
+		"description" : "Sleep mode when idle"
+	},
+
+    "sleep-display" : {
+		"type" : "switch",
+        "default" : true,
+		"description" : "Turning off the screen when idle"
+	},
+    
+    	"section-not" : {
+		"type" : "section",
+		"description" : "Notifications"
+	},
+    
+    "notificate" : {
+		"type" : "switch",
+        "default" : false,
+		"description" : "Send notifications from this applet"
+	},
+
+    "section-icon" : {
+		"type" : "section",
+		"description" : "Icon"
+	},
+    
+    "choose-icon": {
+		"type": "combobox",
+		"description": "Choose icon type",
+		"default": "SYMBOLIC",
+		"options": {
+			"Symbolic": "SYMBOLIC",
+			"Colored": "COLORED"
+		}
+	}
+}
