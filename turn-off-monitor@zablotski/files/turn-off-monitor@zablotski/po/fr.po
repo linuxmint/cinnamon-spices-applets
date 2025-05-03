@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-07 14:33-0400\n"
-"PO-Revision-Date: 2019-12-01 20:08+0100\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2025-05-03 21:24+0200\n"
+"Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:45
 msgid "Turn off monitor"
@@ -49,7 +49,7 @@ msgstr "Icône"
 
 #. settings-schema.json->section-lock->title
 msgid "Screen lock"
-msgstr ""
+msgstr "Verrouillage d'écran"
 
 #. settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
@@ -81,4 +81,4 @@ msgstr "Couleur de l'icône symbolique"
 
 #. settings-schema.json->screenlock->description
 msgid "Lock also cinnamon session"
-msgstr ""
+msgstr "Verrouiller également la session Cinnamon"
