@@ -1,0 +1,273 @@
+# WINE UTILS
+# This file is put in the public domain.
+# elblake, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: wine-utils@elblake 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-09-03 08:25-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:50
+msgid "Config"
+msgstr "Config"
+
+#. applet.js:51
+msgid "Control Panel"
+msgstr "Panneau de contrôle"
+
+#. applet.js:52
+msgid "Files"
+msgstr "Fichiers"
+
+#. applet.js:53
+msgid "Files (winefile)"
+msgstr "Fichiers (de Wine)"
+
+#. applet.js:54
+msgid "Registry Editor"
+msgstr "Éditeur de registre"
+
+#. applet.js:55
+msgid "Task Manager"
+msgstr "Gestionnaire de tâches"
+
+#. applet.js:58
+msgid "Bottles"
+msgstr "Flacons"
+
+#. applet.js:59
+msgid "Lutris"
+msgstr "Lutris"
+
+#. applet.js:60
+msgid "PlayOnLinux"
+msgstr "PlayOnLinux"
+
+#. applet.js:61
+msgid "Q4Wine"
+msgstr "Q4Wine"
+
+#. metadata.json->name
+#. applet.js:149
+msgid "Wine Utils"
+msgstr "Utilitaires de Wine"
+
+#. applet.js:326
+msgid "Prefixes"
+msgstr "Préfixes"
+
+#. applet.js:335
+msgid "Run Command..."
+msgstr "Exécuter la commande..."
+
+#. applet.js:343
+msgid "Command Prompt"
+msgstr "Invite de commande"
+
+#. applet.js:349
+msgid "Configuration"
+msgstr "Configuration"
+
+#. applet.js:354
+msgid "Programs"
+msgstr "Programmes"
+
+#. applet.js:483
+msgid "Default"
+msgstr "Par défaut"
+
+#. metadata.json->description
+msgid "Easy access to Wine's utilities"
+msgstr "Accès facile aux services de Wine"
+
+#. settings-schema.json->head0->description
+msgid "Settings for wine-utils@elblake"
+msgstr "Préférences pour wine-utils@elblake"
+
+#. settings-schema.json->head1->description
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->show-launchers->description
+msgid "Show Launchers"
+msgstr "Afficher les lanceurs"
+
+#. settings-schema.json->show-launchers->tooltip
+msgid "Show some of the Wine launchers if they are installed."
+msgstr "Afficher les lanceurs Wine installés."
+
+#. settings-schema.json->show-run-command->description
+msgid "Show 'Run Command...'"
+msgstr "Afficher « Exécuter la commande... »"
+
+#. settings-schema.json->show-run-command->tooltip
+msgid "For running a Wine command."
+msgstr "Pour exécuter une commande Wine."
+
+#. settings-schema.json->show-cmd->description
+msgid "Show 'Command Prompt'"
+msgstr "Afficher « Invite de commande »"
+
+#. settings-schema.json->show-cmd->tooltip
+msgid "For easy access to the Wine command prompt."
+msgstr "Pour un accès facile à l'invite de commande de Wine."
+
+#. settings-schema.json->show-admin-programs-menu->description
+msgid "Show the Configuration menu"
+msgstr "Afficher le menu Configuration"
+
+#. settings-schema.json->show-admin-programs-menu->tooltip
+msgid ""
+"Show a menu of useful Wine utilities that typically need to be accessed by "
+"CLI."
+msgstr ""
+"Affiche un menu d'utilitaires Wine qui doivent généralement être "
+"accessibles via Wine."
+
+#. settings-schema.json->show-programs-menu->description
+msgid "Show the Programs menu"
+msgstr "Afficher le menu Programmes"
+
+#. settings-schema.json->show-programs-menu->tooltip
+msgid ""
+"Show a menu to access programs directly from Wine's installed program "
+"shortcuts."
+msgstr ""
+"Afficher un menu permettant d'accéder aux programmes directement à partir "
+"des raccourcis installés dans Wine."
+
+#. settings-schema.json->use-dark-theme-icons->description
+msgid "Use dark theme icons when available."
+msgstr "Utiliser des icônes sombres lorsqu'elles sont disponibles."
+
+#. settings-schema.json->icon-style->description
+msgid "Panel Icon Style"
+msgstr "Style d'icône du panneau"
+
+#. settings-schema.json->icon-style->options
+msgid "default"
+msgstr "par défaut"
+
+#. settings-schema.json->icon-style->options
+msgid "style 1"
+msgstr "style 1"
+
+#. settings-schema.json->icon-style->options
+msgid "style 2"
+msgstr "style 2"
+
+#. settings-schema.json->icon-style->options
+msgid "style 3"
+msgstr "style 3"
+
+#. settings-schema.json->specify-custom-icon->description
+msgid "Use custom panel icon"
+msgstr "Utiliser une icône de panneau personnalisée"
+
+#. settings-schema.json->specify-custom-icon->tooltip
+msgid "Use a custom icon for the applet."
+msgstr "Utiliser un icône personnalisé pour l'applet."
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
+msgstr "Icône personnalisée"
+
+#. settings-schema.json->head2->description
+msgid "Advanced"
+msgstr "Paramètres avancés"
+
+#. settings-schema.json->prefix-file-list->description
+msgid "Path to prefix list"
+msgstr "Chemin d'accès à la liste des préfixes"
+
+#. settings-schema.json->prefix-file-list->tooltip
+msgid ""
+"Select a text file, each line in the file should contain the full path of a "
+"wine prefix directory. You can add a name followed by a colon at the "
+"beginning of each line to give that prefix path a label."
+msgstr ""
+"Sélectionnez un fichier texte, chaque ligne du fichier doit contenir le "
+"chemin complet d'un répertoire préfixe de Wine. Vous pouvez ajouter un nom "
+"suivi de deux points au début de chaque ligne pour donner une étiquette à "
+"ce chemin de préfixe."
+
+#. settings-schema.json->specify-wine-exec->description
+msgid "Specify the wine executable"
+msgstr "Spécifier le Wine exécutable"
+
+#. settings-schema.json->specify-wine-exec->tooltip
+msgid "Specify the wine executable, by default 'wine' is used."
+msgstr "Spécifier le Wine exécutable, par défaut \"wine\" est utilisé."
+
+#. settings-schema.json->wine-exec->description
+msgid "Wine executable"
+msgstr "Exécutable de Wine"
+
+#. settings-schema.json->wine-exec->tooltip
+msgid "The wine executable to use."
+msgstr "Exécutable de Wine à utiliser."
+
+#. settings-schema.json->wineconsole-exec->description
+msgid "Wine console executable"
+msgstr "Exécutable de la console Wine"
+
+#. settings-schema.json->wineconsole-exec->tooltip
+msgid "The wine console executable to use."
+msgstr "Exécutable de la console Wine à utiliser."
+
+#. scripts/run-wine.sh:6
+msgid "Error running program:"
+msgstr "Erreur lors de l'exécution du programme :"
+
+#. scripts/run-wine.sh:7 scripts/run-wine-start.sh:7
+msgid "Run Program Error"
+msgstr "Exécution de programme : Erreur"
+
+#. scripts/run-wine-start.sh:6
+msgid "Error starting"
+msgstr "Erreur lors du démarrage"
+
+#. scripts/run-command.sh:6
+msgid "Command to run:"
+msgstr "Commande à exécuter :"
+
+#. scripts/run-command.sh:7
+msgid "Run Command"
+msgstr "Exécuter la commande"
+
+#. scripts/run-command.sh:8
+msgid "Error running command:"
+msgstr "Erreur lors de l'exécution de la commande :"
+
+#. scripts/run-command.sh:9
+msgid "Run Command Error"
+msgstr "Exécution de commande : Erreur"
+
+#. scripts/use-cmd.sh:6
+msgid "Command Prompt Error"
+msgstr "Invite de commande : Erreur"
+
+#. scripts/version.sh:3
+msgid "Wine could not be found, make sure Wine is installed correctly."
+msgstr ""
+"Wine n'a pas pu être trouvé, assurez-vous que Wine est installé "
+"correctement."
+
+#. scripts/version.sh:4
+msgid "Wine Not Found"
+msgstr "Wine non trouvé"
+
+#. scripts/version.sh:5
+msgid "Wine version: "
+msgstr "Version de Wine : "

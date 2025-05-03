@@ -1,111 +1,99 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: window-list@zeripath.sdf-eu.org 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-09 14:22-0400\n"
-"PO-Revision-Date: 2025-05-03 21:35+0200\n"
+"PO-Revision-Date: 2025-05-03 21:42+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:1273
-msgid "Window information"
-msgstr "Informations sur la fenêtre"
-
-#: applet.js:1309
+#: applet.js:826
 msgid "Move to the other monitor"
 msgstr "Déplacer vers un autre moniteur"
 
-#: applet.js:1319
+#: applet.js:836
 #, javascript-format
 msgid "Move to monitor %d"
 msgstr "Déplacer vers le moniteur %d"
 
-#: applet.js:1330
+#: applet.js:847
 msgid "Only on this workspace"
-msgstr "Seulement sur cet espace de travail"
+msgstr "Seulement de cet espace de travail"
 
-#: applet.js:1336
+#: applet.js:853
 msgid "Visible on all workspaces"
 msgstr "Visible sur tous les espaces de travail"
 
-#: applet.js:1342
+#: applet.js:859
 msgid "Move to another workspace"
 msgstr "Déplacer vers un autre espace de travail"
 
-#: applet.js:1365
+#: applet.js:882
 msgid "Preferences"
 msgstr "Préférences"
 
-#: applet.js:1368
+#: applet.js:885
 msgid "About..."
 msgstr "À propos..."
 
-#: applet.js:1372
+#: applet.js:889
 msgid "Configure..."
 msgstr "Configurer..."
 
-#: applet.js:1376
+#: applet.js:893
 msgid "Remove 'Window list'"
 msgstr "Supprimer la liste de fenêtres"
 
-#: applet.js:1383
+#: applet.js:902
 msgid "Close all"
 msgstr "Tout fermer"
 
-#: applet.js:1392
+#: applet.js:911
 msgid "Close others"
 msgstr "Fermer les autres"
 
-#: applet.js:1406
+#: applet.js:925
 msgid "Restore to full opacity"
 msgstr "Rétablir la pleine opacité"
 
-#: applet.js:1414
+#: applet.js:933
 msgid "Restore"
-msgstr "Restaurer"
+msgstr "Rétablir"
 
-#: applet.js:1419
+#: applet.js:938
 msgid "Minimize"
-msgstr "Minimiser"
+msgstr "Réduire"
 
-#: applet.js:1427
+#: applet.js:946
 msgid "Unmaximize"
-msgstr "Démaximiser"
+msgstr "Dé-maximiser"
 
-#: applet.js:1432
+#: applet.js:951
 msgid "Maximize"
 msgstr "Maximiser"
 
-#: applet.js:1440
+#: applet.js:958
 msgid "Close"
 msgstr "Fermer"
 
 #. metadata.json->name
-msgid "My perfect window-list applet"
-msgstr "Mon applet de liste de fenêtres parfaite"
+msgid "Zeripaths Window list"
+msgstr "Liste de fenêtres Zeripaths"
 
 #. metadata.json->description
-msgid ""
-"Based on the original Cinnamon window list, the window order is memorized "
-"and restored. The next huge feature is to also group window like Google "
-"Chrome groups tab. This is my definition of a perfect window list applet"
-msgstr ""
-"Basé sur la liste originale des fenêtres de Cinnamon, l'ordre des fenêtres "
-"est mémorisé et restauré. La deuxième grande fonctionnalité est de "
-"regrouper les fenêtres comme Google Chrome le fait pour les onglets. C'est "
-"ma définition d'une applet de liste de fenêtres parfaite"
+msgid "Zeripaths variant of Cinnamon window list"
+msgstr "Variante Zeripaths de la liste des fenêtres de Cinnamon"
 
 #. settings-schema.json->section1->description
 msgid "Behavior"
@@ -134,10 +122,6 @@ msgid "Reverse the direction of mouse-wheel scrolling in the window list"
 msgstr ""
 "Inverser le sens de défilement de la souris dans la liste des fenêtres"
 
-#. settings-schema.json->left-click-minimize->description
-msgid "Left click to minimize window"
-msgstr "Clic gauche pour réduire la fenêtre"
-
 #. settings-schema.json->middle-click-close->description
 msgid "Middle click to close window"
 msgstr "Clic du milieu pour fermer la fenêtre"
@@ -145,18 +129,6 @@ msgstr "Clic du milieu pour fermer la fenêtre"
 #. settings-schema.json->section2->description
 msgid "Display"
 msgstr "Affichage"
-
-#. settings-schema.json->panel-show-label->description
-msgid "Show window names in the panel"
-msgstr "Afficher les noms de fenêtres dans le panneau"
-
-#. settings-schema.json->button-width->units
-msgid "pixels"
-msgstr "pixels"
-
-#. settings-schema.json->button-width->description
-msgid "Window button width in the panel"
-msgstr "Largeur du bouton de fenêtre dans le panneau"
 
 #. settings-schema.json->buttons-use-entire-space->description
 msgid ""

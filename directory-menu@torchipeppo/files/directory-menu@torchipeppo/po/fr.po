@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-22 12:08-0400\n"
-"PO-Revision-Date: 2025-03-07 16:57+0100\n"
+"PO-Revision-Date: 2025-05-03 19:58+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -65,18 +65,17 @@ msgstr "Texte sur le panneau"
 
 #. settings-schema.json->visibility-section->description
 msgid "Visibility"
-msgstr ""
+msgstr "Visibilité"
 
 #. settings-schema.json->show-header->description
 msgid "Include \"Open Folder\" and \"Open in Terminal\""
-msgstr ""
+msgstr "Inclure \"Ouvrir le dossier\" et \"Ouvrir dans un terminal\""
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Montrer également les fichiers cachés"
 
 #. settings-schema.json->limit-characters->description
-#, fuzzy
 msgid "Limit the Maximum Number of Characters in the Submenus"
 msgstr "Limiter le nombre maximum de caractères dans les sous-menus"
 
@@ -94,7 +93,7 @@ msgstr ""
 
 #. settings-schema.json->ordering-section->description
 msgid "Ordering"
-msgstr ""
+msgstr "Tri"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
@@ -106,7 +105,7 @@ msgstr "Date modifiée"
 
 #. settings-schema.json->order-by->description
 msgid "Order by..."
-msgstr "Commande par..."
+msgstr "Trier par..."
 
 #. settings-schema.json->favorites-first->description
 msgid "Show favorite items first"
