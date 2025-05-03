@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: AlwaysOn@krivetochka 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-01 17:21+0200\n"
+"POT-Creation-Date: 2025-05-03 19:31-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,31 +16,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: applet.js:26
+#. applet.js:28
 msgid "Click here to activate AlwaysOn"
 msgstr "Haga clic aquí para activar AlwaysOn"
 
-#: applet.js:66
+#. applet.js:66
 msgid "AlwaysOn activated"
 msgstr "AlwaysOn activado"
 
-#: applet.js:66
+#. applet.js:66
 msgid "Your computer will now stay active."
 msgstr "Tu ordenador permanecerá activo."
 
-#: applet.js:74
+#. applet.js:74
 msgid "Deactivate AlwaysOn"
 msgstr "Desactivar AlwaysOn"
 
-#: applet.js:85
+#. applet.js:85
 msgid "AlwaysOn deactivated"
 msgstr "AlwaysOn desactivado"
 
-#: applet.js:85
+#. applet.js:85
 msgid "Now your computer can go to sleep."
 msgstr "Ahora tu ordenador puede irse a dormir."
 
-#: applet.js:93
+#. applet.js:93
 msgid "Activate AlwaysOn"
 msgstr "Activar AlwaysOn"
 
@@ -58,7 +58,12 @@ msgstr ""
 "configuración del applet."
 
 #. settings-schema.json->section-general->description
-msgid "Choose which settings will be affected by the applet"
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->change-affected-settings->description
+#, fuzzy
+msgid "Click to select which settings will be affected by this applet"
 msgstr "Elija los ajustes que se verán afectados por el applet"
 
 #. settings-schema.json->idle-dim-battery->description
@@ -73,6 +78,10 @@ msgstr "Modo de suspensión cuando está en reposo"
 msgid "Turning off the screen when idle"
 msgstr "Apagar la pantalla cuando esté en reposo"
 
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr ""
+
 #. settings-schema.json->section-not->description
 msgid "Notifications"
 msgstr "Notificaciones"
@@ -82,8 +91,8 @@ msgid "Send notifications from this applet"
 msgstr "Enviar notificaciones desde este applet"
 
 #. settings-schema.json->section-icon->description
-msgid "Icon"
-msgstr "Icono"
+msgid "Appearance"
+msgstr ""
 
 #. settings-schema.json->choose-icon->description
 msgid "Choose icon type"
@@ -96,3 +105,7 @@ msgstr "Simbólico"
 #. settings-schema.json->choose-icon->options
 msgid "Colored"
 msgstr "En color"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet from the panel (works best with notifications enabled)"
+msgstr ""

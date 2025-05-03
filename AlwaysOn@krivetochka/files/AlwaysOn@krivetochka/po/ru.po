@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# ALWAYSON
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Krivetochka, 2025
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-04 00:56+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-03 19:31-0400\n"
 "PO-Revision-Date: 2025-05-04 01:00+0200\n"
 "Last-Translator: Krivetochka <krivetochkadev@gmail.com>\n"
 "Language-Team: \n"
@@ -18,31 +19,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:28
+#. applet.js:28
 msgid "Click here to activate AlwaysOn"
 msgstr "Нажмите чтобы активировать AlwaysOn"
 
-#: applet.js:66
+#. applet.js:66
 msgid "AlwaysOn activated"
 msgstr "AlwaysOn включен"
 
-#: applet.js:66
+#. applet.js:66
 msgid "Your computer will now stay active."
 msgstr "Теперь ваш компьютер будет оставаться активным."
 
-#: applet.js:74
+#. applet.js:74
 msgid "Deactivate AlwaysOn"
 msgstr "Выключить AlwaysOn"
 
-#: applet.js:85
+#. applet.js:85
 msgid "AlwaysOn deactivated"
 msgstr "AlwaysOn выключен"
 
-#: applet.js:85
+#. applet.js:85
 msgid "Now your computer can go to sleep."
 msgstr "Теперь ваш компьютер может войти в спящий режим."
 
-#: applet.js:93
+#. applet.js:93
 msgid "Activate AlwaysOn"
 msgstr "Включить AlwaysOn"
 
@@ -111,6 +112,3 @@ msgstr "Цветной"
 msgid "Hide applet from the panel (works best with notifications enabled)"
 msgstr ""
 "Скрыть апплет с панели (лучше всего работает с включенными уведомлениями)"
-
-#~ msgid "Icon"
-#~ msgstr "Значок"
