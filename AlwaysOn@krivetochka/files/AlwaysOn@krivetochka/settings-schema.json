@@ -1,28 +1,44 @@
 {
 	"section-general" : {
 		"type" : "section",
-		"description" : "Choose which settings will be affected by the applet"
+		"description" : "General"
+	},
+
+    
+    "change-affected-settings" : {
+		"type" : "switch",
+        "default" : false,
+		"description" : "Click to select which settings will be affected by this applet"
 	},
     
     "idle-dim-battery" : {
 		"type" : "switch",
         "default" : true,
-		"description" : "Dim the screen when idle"
+		"description" : "Dim the screen when idle",
+        "dependency" : "change-affected-settings"
 	},
 
     "sleep-inactive" : {
 		"type" : "switch",
         "default" : true,
-		"description" : "Sleep mode when idle"
+		"description" : "Sleep mode when idle",
+        "dependency" : "change-affected-settings"
 	},
 
     "sleep-display" : {
 		"type" : "switch",
         "default" : true,
-		"description" : "Turning off the screen when idle"
+		"description" : "Turning off the screen when idle",
+        "dependency" : "change-affected-settings"
+	},
+
+    "key-bind" : {
+		"type" : "keybinding",
+        "default" : "<Ctrl><Alt>a",
+		"description" : "Select a combination to activate the applet"
 	},
     
-    	"section-not" : {
+    "section-not" : {
 		"type" : "section",
 		"description" : "Notifications"
 	},
@@ -35,7 +51,7 @@
 
     "section-icon" : {
 		"type" : "section",
-		"description" : "Icon"
+		"description" : "Appearance"
 	},
     
     "choose-icon": {
@@ -46,5 +62,11 @@
 			"Symbolic": "SYMBOLIC",
 			"Colored": "COLORED"
 		}
+	},
+
+    "hide-applet" : {
+		"type" : "switch",
+        "default" : false,
+		"description" : "Hide applet from the panel (works best with notifications enabled)"
 	}
 }

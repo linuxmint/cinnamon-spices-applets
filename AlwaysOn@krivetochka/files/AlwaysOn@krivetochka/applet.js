@@ -4,11 +4,13 @@ const Main = imports.ui.main;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
+const Lang = imports.lang;
 const uuid = "AlwaysOn@krivetochka";
 const symbolic_icon_name = "lapt_symb_empty";
 const symbolic_active_icon_name = "lapt_symb";
 const colored_icon_name = "lapt_color_empty";
 const colored_active_icon_name = "lapt_color";
+const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 let giosettings = new Gio.Settings({ schema: 'org.cinnamon.settings-daemon.plugins.power' });
 let switcher = true;
 
@@ -18,7 +20,6 @@ Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(uuid, str);
 }
-
 
 class AlwaysOn extends Applet.IconApplet {
     constructor (metadata, orientation, panelHeight, instance_id) {
@@ -30,7 +31,13 @@ class AlwaysOn extends Applet.IconApplet {
         this.settings.bind("sleep-inactive", "sleep_inactive_switch");
         this.settings.bind("sleep-display", "sleep_display_switch");
         this.settings.bind("notificate", "notificate");
-        this.settings.bind("choose-icon", "icon_type", this.on_iconsettings_changed);
+        this.settings.bind("choose-icon", "icon_type", this.on_settings_changed);
+        this.settings.bind("hide-applet", "hide_applet_switcher", this.on_settings_changed);
+        this.settings.bind("key-bind", "keybind", this.on_shortcut_changed)
+
+        global.settings.connect('changed::' + PANEL_EDIT_MODE_KEY, Lang.bind(this, this.on_settings_changed));
+        this.on_shortcut_changed();
+        this.on_settings_changed();
     }
 
     on_applet_clicked(event) {
@@ -88,7 +95,8 @@ class AlwaysOn extends Applet.IconApplet {
         switcher = !switcher
     }
 
-    on_iconsettings_changed(){
+    on_settings_changed() {
+        // icon settings changed
         if (this.icon_type === "SYMBOLIC"){
             if (!switcher){
                 this.set_applet_icon_symbolic_name(symbolic_active_icon_name);
@@ -105,6 +113,17 @@ class AlwaysOn extends Applet.IconApplet {
                 this.set_applet_icon_name(colored_icon_name);
             }
         }
+
+        // hide applet setting changed
+        if (!this.hide_applet_switcher || global.settings.get_boolean(PANEL_EDIT_MODE_KEY)){
+                this.actor.show();
+            } else {
+                this.actor.hide();
+            }
+        }
+
+    on_shortcut_changed() {
+        Main.keybindingManager.addHotKey(uuid, this.keybind, Lang.bind(this, this.on_applet_clicked));
     }
 }
 
