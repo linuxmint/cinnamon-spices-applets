@@ -826,23 +826,23 @@ class Player extends PopupMenu.PopupMenuSection {
             cover_path = null;
         } else {
 
-            //~ let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
-            //~ let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
-            //~ if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
-                //~ Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
-                    //~ cover_path,
-                    //~ ALBUMART_PICS_DIR,
-                    //~ randomIntegerInInterval(0, superRND).toString()
-                //~ ));
-            //~ } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                //~ Util.spawnCommandLineAsync("rm -f %s/R3SongArt* ; sleep 1 ; cp -a %s %s/R3SongArt%s".format(
-                    //~ ALBUMART_PICS_DIR,
-                    //~ cover_path,
-                    //~ ALBUMART_PICS_DIR,
-                    //~ randomIntegerInInterval(0, superRND).toString()
-                //~ ));
-            //~ }
-            //~ dir_children.close(null);
+            let dir = Gio.file_new_for_path(ALBUMART_PICS_DIR);
+            let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
+            if ((dir_children.next_file(null)) == null) { // dir does not contain any file.
+                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
+                    cover_path,
+                    ALBUMART_PICS_DIR,
+                    randomIntegerInInterval(0, superRND).toString()
+                ));
+            } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
+                Util.spawnCommandLineAsync("rm -f %s/R3SongArt* ; sleep 1 ; cp -a %s %s/R3SongArt%s".format(
+                    ALBUMART_PICS_DIR,
+                    cover_path,
+                    ALBUMART_PICS_DIR,
+                    randomIntegerInInterval(0, superRND).toString()
+                ));
+            }
+            dir_children.close(null);
 
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
