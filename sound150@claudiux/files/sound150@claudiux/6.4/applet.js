@@ -132,6 +132,11 @@ function kill_playerctld() {
     //~ return actor;
 //~ }
 
+const superRND = (2**31-1)**2;
+
+function randomIntegerInInterval(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
 /**
  * DEBUG:
@@ -1735,7 +1740,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.showalbum) {
             //~ if (path && player && (player === true || player._playerStatus == "Playing") && this.allowChangeArt) { // Maybe here. FIXME!!!
             if (path && player && (player === true || player._playerStatus == "Playing")) {
+                //~ logDebug("setAppletIcon path: "+path);
                 this.setIcon(path, "player-path");
+                //~ if (!path.startsWith(ALBUMART_PICS_DIR)) {
+                    //~ let target = ALBUMART_PICS_DIR + "/R3SongArt" + randomIntegerInInterval(0, superRND).toString()
+                    //~ Util.spawnCommandLineAsync(`bash -c "rm -f ${ALBUMART_PICS_DIR}/R3SongArt* ; sleep 1 ; cp -a ${path} ${target}"`);
+                //~ }
             } else {
                 if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
                     this.setIcon("media-optical-cd-audio-with-mic-disabled", "player-name");

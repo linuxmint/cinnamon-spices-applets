@@ -1,3 +1,6 @@
+### v12.0.3~20250504
+  * Improved album art display.
+
 ### v12.0.2~20250427
   * Minor bugfix.
 
