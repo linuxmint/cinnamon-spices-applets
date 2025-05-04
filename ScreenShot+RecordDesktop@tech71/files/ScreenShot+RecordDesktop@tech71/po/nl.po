@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSHOT+RECORD DESKTOP
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# tech71, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-04 18:50+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
 "PO-Revision-Date: 2024-04-20 14:29+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,87 +17,87 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:28
+#. applet.js:27
 msgid "ScreenShot"
 msgstr "Schermafdruk"
 
-#: applet.js:33
+#. applet.js:32
 msgid "Current Window"
 msgstr "Huidig venster"
 
-#: applet.js:38
+#. applet.js:37
 msgid "Selected Area"
 msgstr "Geselecteerd gebied"
 
-#: applet.js:44
+#. applet.js:43
 msgid "Whole Screen"
 msgstr "Volledig scherm"
 
-#: applet.js:46
+#. applet.js:45
 msgid "1 Second Delay"
 msgstr "1 seconde vertraging"
 
-#: applet.js:50
+#. applet.js:49
 msgid "3 Second Delay"
 msgstr "3 seconden vertraging"
 
-#: applet.js:54
+#. applet.js:53
 msgid "5 Second Delay"
 msgstr "5 seconden vertraging"
 
-#: applet.js:61
+#. applet.js:60
 msgid "Record Screencast"
 msgstr "Screencast opnemen"
 
-#: applet.js:65
+#. applet.js:64
 msgid "Record Desktop With Audio"
 msgstr "Desktop opnemen met audio"
 
-#: applet.js:68 applet.js:74 applet.js:81 applet.js:87
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
 msgid "Recording"
 msgstr "Aan het opnemen"
 
-#: applet.js:68 applet.js:81
+#. applet.js:67 applet.js:80
 msgid "With-Audio"
 msgstr "Met audio"
 
-#: applet.js:71
+#. applet.js:70
 msgid "Record Desktop Without Audio"
 msgstr "Desktop opnemen zonder audio"
 
-#: applet.js:74 applet.js:87
+#. applet.js:73 applet.js:86
 msgid "No-Audio"
 msgstr "Zonder audio"
 
-#: applet.js:78
+#. applet.js:77
 msgid "Record Current Window With Audio"
 msgstr "Huidig venster opnemen met audio"
 
-#: applet.js:84
+#. applet.js:83
 msgid "Record Current Window Without Audio"
 msgstr "Huidig venster opnemen zonder audio"
 
-#: applet.js:91
+#. applet.js:90
 msgid "Stop Recording"
 msgstr "Opname stoppen"
 
-#: applet.js:96
+#. applet.js:95
 msgid "Recording-Stopped"
 msgstr "Opname gestopt"
 
-#: applet.js:97
+#. applet.js:96
 msgid "Recording-Finished"
 msgstr "Opname voltooid"
 
-#: applet.js:107
+#. applet.js:106
 msgid "Take A Snapshot or Record Your Desktop"
 msgstr "Maak een schermafdruk of neem je bureaublad op"
 
-#: applet.js:124
+#. applet.js:123
 msgid "Pictures Folder"
 msgstr "Afbeeldingen map"
 
-#: applet.js:130
+#. applet.js:129
 msgid "Videos Folder"
 msgstr "Video's map"
 
