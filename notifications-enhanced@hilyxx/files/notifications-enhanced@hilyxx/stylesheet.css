@@ -1,6 +1,11 @@
 /* Do not edit */
 
-.popup-subtitle-menu-item {
-   font-weight: bold;
+.popup-label {
+   color: #898989;
+   font-weight: 600;
    min-width: 160px !important;
+}
+.popup-label-notif {
+   color: #4E9A06;
+   font-weight: 600;
 }
