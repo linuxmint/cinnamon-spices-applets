@@ -48,7 +48,7 @@ msgstr "Aktualisieren"
 
 #. applet.js:959
 msgid "Refreshing in progress"
-msgstr ""
+msgstr "Aktualisierung läuft"
 
 # Same wording as in context menu on applet right click.
 #. applet.js:970
@@ -109,35 +109,35 @@ msgstr "Icon-Größe"
 
 #. settings-schema.json->icon-size->options
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #. settings-schema.json->icon-size->options
 msgid "22"
-msgstr ""
+msgstr "22"
 
 #. settings-schema.json->icon-size->options
 msgid "24"
-msgstr ""
+msgstr "24"
 
 #. settings-schema.json->icon-size->options
 msgid "32"
-msgstr ""
+msgstr "32"
 
 #. settings-schema.json->icon-size->options
 msgid "48"
-msgstr ""
+msgstr "48"
 
 #. settings-schema.json->icon-size->options
 msgid "64"
-msgstr ""
+msgstr "64"
 
 #. settings-schema.json->icon-size->options
 msgid "96"
-msgstr ""
+msgstr "96"
 
 #. settings-schema.json->icon-size->options
 msgid "128"
-msgstr ""
+msgstr "128"
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
