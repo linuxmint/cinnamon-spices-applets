@@ -10,8 +10,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-04 13:09-0400\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-05-05 11:00-0400\n"
+"Last-Translator: Grom-TS\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -20,94 +20,96 @@ msgstr ""
 
 #. applet.js:27
 msgid "ScreenShot"
-msgstr ""
+msgstr "Скриншот"
 
 #. applet.js:32
 msgid "Current Window"
-msgstr " "
+msgstr "Текущее окно"
 
 #. applet.js:37
 msgid "Selected Area"
-msgstr " "
+msgstr "Выбранная область"
 
 #. applet.js:43
 msgid "Whole Screen"
-msgstr " "
+msgstr "Весь экран"
 
 #. applet.js:45
 msgid "1 Second Delay"
-msgstr "1  "
+msgstr "Задержка 1 секунда"
 
 #. applet.js:49
 msgid "3 Second Delay"
-msgstr "3  "
+msgstr "Задержка 3 секунды"
 
 #. applet.js:53
 msgid "5 Second Delay"
-msgstr "5  "
+msgstr "Задержка 5 секунд"
 
 #. applet.js:60
 msgid "Record Screencast"
-msgstr " "
+msgstr "Запись скринкаста"
 
 #. applet.js:64
 msgid "Record Desktop With Audio"
-msgstr "    "
+msgstr "Запись рабочего стола со звуком"
 
 #. applet.js:67 applet.js:73 applet.js:80 applet.js:86
 msgid "Recording"
-msgstr ""
+msgstr "Запись"
 
 #. applet.js:67 applet.js:80
 msgid "With-Audio"
-msgstr " "
+msgstr "Со звуком"
 
 #. applet.js:70
 msgid "Record Desktop Without Audio"
-msgstr "    "
+msgstr "Запись рабочего стола без звука"
 
 #. applet.js:73 applet.js:86
 msgid "No-Audio"
-msgstr " "
+msgstr "Без звука"
 
 #. applet.js:77
 msgid "Record Current Window With Audio"
-msgstr "    "
+msgstr "Запись текущего окна со звуком"
 
 #. applet.js:83
 msgid "Record Current Window Without Audio"
-msgstr "    "
+msgstr "Запись текущего окна без звука"
 
 #. applet.js:90
 msgid "Stop Recording"
-msgstr " "
+msgstr "Остановить запись"
 
 #. applet.js:95
 msgid "Recording-Stopped"
-msgstr " "
+msgstr "Запись остановлена"
 
 #. applet.js:96
 msgid "Recording-Finished"
-msgstr " "
+msgstr "Запись завершена"
 
 #. applet.js:106
 msgid "Take A Snapshot or Record Your Desktop"
-msgstr "      "
+msgstr "Сделайте снимок или запишите свой рабочий стол"
 
 #. applet.js:123
 msgid "Pictures Folder"
-msgstr "  "
+msgstr "Папка с картинками"
 
 #. applet.js:129
 msgid "Videos Folder"
-msgstr "  "
+msgstr "Папка с видео"
 
 #. metadata.json->description
 msgid ""
 "Take A Snapshot Or Record Your Desktop (recording requires the packages "
 "ffmpeg, xdotool & x11-utils to be installed)"
-msgstr "       (    ffmpeg, xdotool & x11-utils   )"
+msgstr ""
+"Сделайте снимок или запишите свой рабочий стол (для записи требуются пакеты "
+"ffmpeg, xdotool & x11-utils должны быть установленны)"
 
 #. metadata.json->name
 msgid "ScreenShot+Record Desktop"
-msgstr "+  "
+msgstr "Скриншот+Запись рабочего стола"
