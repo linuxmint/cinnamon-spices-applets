@@ -66,27 +66,27 @@ msgstr "Настройки"
 
 #. applet.js:1275 applet_OLD.js:1208
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #. settings-schema.json->page_General->title
 #. applet.js:1282 applet_OLD.js:1215
-msgid "⚙ Общие"
-msgstr ""
+msgid "⚙ General"
+msgstr "⚙ Общие"
 
 #. applet.js:1298 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
-msgstr ""
+msgstr "%s Датчики температуры"
 
 #. applet.js:1314 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
-msgstr ""
+msgstr "%s Датчики вентилятора"
 
 #. applet.js:1330 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
-msgstr ""
+msgstr "%s Датчики напряжения"
 
 #. applet.js:1346 applet_OLD.js:1279
 #, javascript-format
@@ -104,7 +104,7 @@ msgstr ""
 
 #. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
-msgstr ""
+msgstr "Перезагрузить этот апплет"
 
 #. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
@@ -234,15 +234,15 @@ msgstr ""
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
-msgstr ""
+msgstr "Значения датчиков"
 
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
-msgstr ""
+msgstr "Удалить с панелей некоторые апплеты, которые также используют датчики"
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
-msgstr ""
+msgstr "На данный момент температуру диска может прочитать только пользователь root."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -254,19 +254,19 @@ msgstr ""
 
 #. settings-schema.json->section_tempSensors->title
 msgid "Temperature sensors"
-msgstr ""
+msgstr "Датчики температуры"
 
 #. settings-schema.json->section_tempDisks->title
 msgid "Disk temperature sensors"
-msgstr ""
+msgstr "Датчики температуры диска"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
-msgstr ""
+msgstr "Датчики вентилятора"
 
 #. settings-schema.json->section_voltSensors->title
 msgid "Voltage sensors"
-msgstr ""
+msgstr "Датчики напряжения"
 
 #. settings-schema.json->section_intrusionSensors->title
 msgid "Intrusion sensors"
@@ -338,47 +338,47 @@ msgstr ""
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 минута"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 минуты"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 минуты"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 минуты"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 минут"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 минут"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 минут"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 минут"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 час"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
-msgstr ""
+msgstr "Интервал обновления (секунды)"
 
 #. settings-schema.json->keep_size->description
 msgid "Avoid size changes"
-msgstr ""
+msgstr "Избегать изменения размера"
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
@@ -386,10 +386,13 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
+"Отмечено: Размер этого апплета остается постоянным, после того как все ваши настройки будут изменены. "
+"были определены.\n"
+"Не отмечено: Размер этого апплета оптимизирован, но может измениться."
 
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
-msgstr ""
+msgstr "Размер символа (% от стандартного размера)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
@@ -719,7 +722,7 @@ msgid ""
 "'Formula' (optional):\n"
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
-"  Example: $*1.1+0.5"
+"  ple: $*1.1+0.5"
 msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
@@ -772,7 +775,7 @@ msgid ""
 "'Formula' (optional):\n"
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
-"  Example: $*1.1+0.5"
+"  ple: $*1.1+0.5"
 msgstr ""
 
 #. settings-schema.json->show_intrusion_name->tooltip
@@ -849,7 +852,7 @@ msgstr ""
 #. settings-schema.json->report->description
 #. scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
-msgstr ""
+msgstr "Пример значений датчиков с этого компьютера"
 
 #. settings-schema.json->report->tooltip
 msgid "Useful for reporting an issue."
