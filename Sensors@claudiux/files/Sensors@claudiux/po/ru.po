@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 5.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"POT-Creation-Date: 2025-05-06 12:29-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -242,7 +242,8 @@ msgstr "Удалить с панелей некоторые апплеты, ко
 
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
-msgstr "На данный момент температуру диска может прочитать только пользователь root."
+msgstr ""
+"На данный момент температуру диска может прочитать только пользователь root."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -386,8 +387,8 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
-"Отмечено: Размер этого апплета остается постоянным, после того как все ваши настройки будут изменены. "
-"были определены.\n"
+"Отмечено: Размер этого апплета остается постоянным, после того как все ваши "
+"настройки будут изменены. были определены.\n"
 "Не отмечено: Размер этого апплета оптимизирован, но может измениться."
 
 #. settings-schema.json->char_size->description
@@ -722,7 +723,7 @@ msgid ""
 "'Formula' (optional):\n"
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
-"  ple: $*1.1+0.5"
+"  Example: $*1.1+0.5"
 msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
@@ -775,7 +776,7 @@ msgid ""
 "'Formula' (optional):\n"
 "  Use $ as the value returned by the sensor.\n"
 "  You can use the 4 operations (+-*/) and parentheses.\n"
-"  ple: $*1.1+0.5"
+"  Example: $*1.1+0.5"
 msgstr ""
 
 #. settings-schema.json->show_intrusion_name->tooltip
