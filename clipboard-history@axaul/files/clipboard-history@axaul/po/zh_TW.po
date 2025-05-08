@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-07 19:07+0200\n"
+"PO-Revision-Date: 2025-05-08 08:57+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: applet.js:43
+msgid "Open clipboard history"
+msgstr "開啟剪貼簿歷史紀錄"
+
+#: applet.js:107
+msgid "[SETTINGS] Settings change detected"
+msgstr "[設定] 偵測到設定變更"
+
+#: applet.js:115
+msgid "🗑️ Clear entire history"
+msgstr "🗑️ 清除所有歷史紀錄"
+
+#: applet.js:118
+msgid "History emptied and clipboard erased!"
+msgstr "歷史紀錄已清空，剪貼簿已清除！"
+
+#: applet.js:143
+#, javascript-format
+msgid "“%s” copied to clipboard."
+msgstr "“%s” 已複製到剪貼簿。"
+
+#: applet.js:152
+msgid "Clipboard has been emptied."
+msgstr "剪貼簿已清空。"
+
+#: applet.js:161
+msgid "Clipboard cleared (it contained text)."
+msgstr "剪貼簿已清除（內含文字）。"
+
+#: applet.js:163
+msgid "Clipboard not cleared (non-text content)."
+msgstr "剪貼簿未清除（非文字內容）。"
+
+#: applet.js:176
+#, javascript-format
+msgid "An error occurred while adding content to clipboard history: %s"
+msgstr "在將內容新增至剪貼簿歷史紀錄時發生錯誤：%s"
+
+#: applet.js:206
+#, javascript-format
+msgid "New content detected: “%s”"
+msgstr "偵測到新內容：“%s”"
+
+#: applet.js:210
+#, javascript-format
+msgid "The contents of the clipboard have not changed since last %s seconds."
+msgstr "剪貼簿內容自上次 %s 秒以來未變更。"
+
+#: applet.js:215
+msgid "Starting clipboard checking."
+msgstr "開始檢查剪貼簿。"
+
+#: clipboard-history@axaul->metadata.json->name
+msgid "Clipboard history"
+msgstr "剪貼簿歷史紀錄"
+
+#: clipboard-history@axaul->metadata.json->description
+msgid "Utility to access previously copied text."
+msgstr "用於訪問先前複製的文字。"
+
+#: clipboard-history@axaul->settings-schema.json->debug_mode->description
+msgid "Enable debug mode"
+msgstr "啟用除錯模式"
+
+#: clipboard-history@axaul->settings-schema.json->clipboard_history_limit->description
+msgid "Maximum number of items that can be stored in the clipboard history."
+msgstr "剪貼簿歷史紀錄中可儲存的最大項目數量。"
+
+#: clipboard-history@axaul->settings-schema.json->poll_interval->description
+msgid "Clipboard check interval"
+msgstr "剪貼簿檢查間隔"
+
+#: clipboard-history@axaul->settings-schema.json->poll_interval->units
+msgid "seconds"
+msgstr "秒"
+
+#: clipboard-history@axaul->settings-schema.json->open_applet_shortcut->description
+msgid "Open clipboard history with shortcut."
+msgstr "使用快捷鍵開啟剪貼簿歷史紀錄。"
+
+#: clipboard-history@axaul->settings-schema.json->open_applet_shortcut->tooltip
+msgid "Save keyboard shortcuts to open the clipboard history."
+msgstr "儲存開啟剪貼簿歷史紀錄的鍵盤快捷鍵。"

@@ -1,0 +1,30 @@
+{
+    "debug_mode": {
+        "type": "switch",
+        "description": "Enable debug mode",
+        "default": false
+    },
+    "clipboard_history_limit": {
+        "type": "spinbutton",
+        "description": "Maximum number of items that can be stored in the clipboard history.",
+        "step": 5,
+        "default": 15,
+        "min": 1,
+        "max": 100
+    },
+    "poll_interval": {
+        "type": "spinbutton",
+        "description": "Clipboard check interval",
+        "units": "seconds",
+        "step": 1,
+        "default": 5,
+        "min": 1,
+        "max": 100
+    },
+    "open_applet_shortcut": {
+        "type": "keybinding",
+        "description": "Open clipboard history with shortcut.",
+        "default": "<Ctrl><Alt>v",
+        "tooltip": "Save keyboard shortcuts to open the clipboard history."
+    }
+}
