@@ -117,7 +117,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 	const dayLengthVal = sunset && sunrise ? sunset.diff(sunrise) : "";
 	const dayLength = dayLengthVal ? dayLengthVal.toFormat("h:mm") : "";
 	const daylightRemainVal = sunrise && sunset ? sunset.diff(timeNow) : null;
-	const isDaylight = sunrise && sunset ? !IsNight({sunrise: sunrise, sunset: sunset}) : false;
+	const isDaylight = sunrise && sunset ? !IsNight({ sunrise: sunrise, sunset: sunset }) : false;
 	const daylightRemain = isDaylight && daylightRemainVal ? daylightRemainVal.toFormat("h:mm") : "";
 	const daylightRemainPct = sunrise && sunset && isDaylight
 		? Math.round((sunset.toMillis() - timeNow.toMillis()) * 100 / (sunset.toMillis() - sunrise.toMillis())).toString()
@@ -176,28 +176,28 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		let match: RegExpExecArray | null;
 
 		while ((match = regexp.exec(text)) !== null) {
-		const literalStart = match[1] || '';
-		const literalEnd = match[6] || '';
+			const literalStart = match[1] || '';
+			const literalEnd = match[6] || '';
 
-		const paddingSpecifier = match[3] || undefined;
-		const paddingSize = match[4] || undefined;
-		const padCharMatch = match[5] || undefined;
+			const paddingSpecifier = match[3] || undefined;
+			const paddingSize = match[4] || undefined;
+			const padCharMatch = match[5] || undefined;
 
-		const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
-		const isLiteral = literalStart === "{{" && literalEnd === "}}";
-		const noPad = inCommand && !padLiteral;
+			const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
+			const isLiteral = literalStart === "{{" && literalEnd === "}}";
+			const noPad = inCommand && !padLiteral;
 
-		const applyPadRight: boolean = (paddingSpecifier === '.' || (paddingSpecifier === undefined && padRight));
-		const applyPad: number = paddingSize ? Number(paddingSize) : padLength;
-		const charPad: string = padCharMatch || padChar;
+			const applyPadRight: boolean = (paddingSpecifier === '.' || (paddingSpecifier === undefined && padRight));
+			const applyPad: number = paddingSize ? Number(paddingSize) : padLength;
+			const charPad: string = padCharMatch || padChar;
 
-		let formattedValue: string = tagValue; // tagValue is guaranteed to be a string
+			let formattedValue: string = tagValue; // tagValue is guaranteed to be a string
 
-		if (!noPad) {
-			formattedValue = applyPadRight ? formattedValue.padEnd(applyPad, charPad) : formattedValue.padStart(applyPad, charPad);
-		}
+			if (!noPad) {
+				formattedValue = applyPadRight ? formattedValue.padEnd(applyPad, charPad) : formattedValue.padStart(applyPad, charPad);
+			}
 
-		text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
+			text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
 		}
 	}
 	return text;
@@ -271,8 +271,8 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 
 	// today or tomorrow, no need to include date
 	if (useTodayTomorrow) {
-	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
-		delete params.weekday;
+		if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
+			delete params.weekday;
 	}
 
 	let dateString = date.toLocaleString(params);
@@ -649,9 +649,9 @@ export function ValueChange(temp1: number, temp2: number, large_percent: number 
 	} else {
 		index = 4;
 	}
-  
+
 	return `${arrows[index]}${absDiff}`;
-  }
+}
 // -----------------------------------------------------------------
 // Testers
 
@@ -763,7 +763,7 @@ export function ConstructJsLocale(locales: string[]): string | null {
 		try {
 			new Date().toLocaleString(result);
 		}
-		catch(e) {
+		catch (e) {
 			Logger.Info(`Invalid locale: ${result}, not supported by JS, ignoring.`);
 			Logger.Debug(e?.toString() ?? "");
 			continue;
@@ -849,7 +849,7 @@ export const isFinalized = function (obj: unknown): boolean {
 interface CompareVersionOptions {
 	/**
 	 * Changes the result if one version string has less parts than the other. In
- 	 * this case the shorter string will be padded with "zero" parts instead of being considered smaller.
+	   * this case the shorter string will be padded with "zero" parts instead of being considered smaller.
 	 */
 	zeroExtend: boolean;
 }

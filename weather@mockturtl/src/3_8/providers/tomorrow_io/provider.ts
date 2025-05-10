@@ -147,6 +147,7 @@ export class ClimacellV4 extends BaseProvider {
 				type: "temperature",
 				value: CelsiusToKelvin(current.values.temperatureApparent)
 			},
+			uvIndex: null,
 			forecasts: []
 		}
 
