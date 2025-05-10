@@ -1,0 +1,154 @@
+# Swedish translation for redshift@marvel4u
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR: Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: redshift@marvel4u\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:35-0400\n"
+"PO-Revision-Date: 2019-03-02 10:18+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->brightness->description
+#. applet.js:65 applet.js:235 applet.js:340
+msgid "Brightness"
+msgstr "Ljusstyrka"
+
+#. metadata.json->name
+#. applet.js:84 applet.js:341
+msgid "Redshift"
+msgstr "Redshift"
+
+#. applet.js:103
+msgid "Transition on night"
+msgstr "Övergång till natt"
+
+#. applet.js:214
+msgid "Redshift day colour"
+msgstr "Redshifts färg dagtid"
+
+#. applet.js:219
+msgid "Redshift day brightness"
+msgstr "Redshifts ljusstyrka dagtid"
+
+#. applet.js:224
+msgid "Redshift night colour"
+msgstr "Redshifts färg nattetid"
+
+#. applet.js:229
+msgid "Redshift night brightness"
+msgstr "Redshifts ljusstyrka nattetid"
+
+#. applet.js:341
+msgid "On"
+msgstr "På"
+
+#. applet.js:345
+msgid "Day colour temperature"
+msgstr "Färgtemperatur dagtid"
+
+#. applet.js:346
+msgid "Night colour temperature"
+msgstr "Färgtemperatur nattetid"
+
+#. applet.js:347
+msgid "Day Redshift brightness"
+msgstr "Redshifts ljusstyrka dagtid"
+
+#. applet.js:348
+msgid "Night Redshift brightness"
+msgstr "Redshifts ljusstyrka nattetid"
+
+#. applet.js:350
+#, fuzzy
+msgid "Colour temperature"
+msgstr "Färgtemperatur dagtid"
+
+#. applet.js:351
+#, fuzzy
+msgid "Redshift brightness"
+msgstr "Redshifts ljusstyrka dagtid"
+
+#. metadata.json->description
+msgid ""
+"An app to change the red filter level for late night screen time. Requires "
+"redshift: sudo apt-get install redshift"
+msgstr ""
+"Ett panelprogram för att ändra rödfilternivån vid nattlig skärmanvändning. "
+"Kräver att Redshift är installerat: sudo apt install redshift"
+
+#. settings-schema.json->panel->title
+msgid "Redshift settings"
+msgstr "Redshifts inställningar"
+
+#. settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr "Nivå för ljusstyrka"
+
+#. settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr "Redshift konfiguration"
+
+#. settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr "Övergång mellan dag-och nattkonfiguration"
+
+#. settings-schema.json->brightness->units
+#. settings-schema.json->redshiftDayBrightness->units
+#. settings-schema.json->redshiftNightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->enabledOnStartup->description
+msgid "Redshift Enabled"
+msgstr "Redshift aktiverad"
+
+#. settings-schema.json->dayColour->units
+#. settings-schema.json->nightColour->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayColour->description
+msgid "Redshift Day colour temperature"
+msgstr "Redshifts färgtemperatur dagtid"
+
+#. settings-schema.json->redshiftDayBrightness->description
+msgid "Redshift Day Brightness"
+msgstr "Redshifts ljusstyrka dagtid"
+
+#. settings-schema.json->changeOnNight->description
+msgid "Change temperature colour and Redshift brightness between day and night"
+msgstr "Ändra temperaturfärg och Redshifts ljusstyrka mellan dag och natt"
+
+#. settings-schema.json->nightColour->description
+msgid "Redshift Night colour temperature"
+msgstr "Redshifts färgtemperatur nattetid"
+
+#. settings-schema.json->redshiftNightBrightness->description
+msgid "Redshift Night Brightness"
+msgstr "Redshifts ljusstyrka nattetid"
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->latitude->tooltip
+#. settings-schema.json->longitude->tooltip
+msgid "If not entered Redshift would use GeoClue2 provider"
+msgstr ""
+"Om inget annat anges kommer Redshift att använda GeoClue2 som leverantör för "
+"positionsbestämning"
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr "Longitud"

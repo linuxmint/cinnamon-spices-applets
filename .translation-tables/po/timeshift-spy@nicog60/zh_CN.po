@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-25 18:19+0200\n"
+"PO-Revision-Date: 2023-02-10 22:12+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:102
+msgid "Make a new snapshot"
+msgstr "制作一个新的快照"
+
+#: applet.js:314
+msgid "Timeshift not configured"
+msgstr "Timeshift 未配置"
+
+#: applet.js:317
+msgid "Backup device not found"
+msgstr "未找到备份设备"
+
+#: applet.js:322
+msgid "Wait for snapshot to begin"
+msgstr "等待快照开始"
+
+#: applet.js:328
+msgid "Making snapshot..."
+msgstr "制作快照..."
+
+#. metadata.json->description
+msgid ""
+"Show the state of Timeshift, if it is currently making snapshots in the "
+"background"
+msgstr "如果 Timeshift 正在后台制作快照，显示它的状态"
+
+#. metadata.json->name
+msgid "Timeshift Spy"
+msgstr "Timeshift Spy"
