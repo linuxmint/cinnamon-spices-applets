@@ -173,14 +173,14 @@ The script `cinnamon-spices-makepot` in this repo was written to help authors to
 ```bash
 ./cinnamon-spices-makepot UUID --install
 ```
-#### More help
+#### More help:
 ```bash
 ./cinnamon-spices-makepot --help
 ```
 
-## Translations Status Tables
+# Translations Status Tables
 
-Stay updated with the latest translation progress:
+The spices receive updates which sometimes contain new or updated strings that need to be translated. The translation status tables were created to give translators a better overview of the current state of translations and also to make it easier to track where new untranslated strings appear.
 
 * [Applet Translation Status Tables](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/README.md)
 
@@ -188,7 +188,7 @@ To ensure that these tables are always up-to-date, they are automatically regene
 
 ---
 
-## 🔄 JavaScript Feature Compatibility
+# 🔄 JavaScript Feature Backward Compatibility Table
 
 ### (incomplete)
 
