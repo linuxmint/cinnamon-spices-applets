@@ -35,6 +35,7 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.settings.bind("showDisturbIcon", "showDisturbIcon", this._show_disturb_icon);
         this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
         this.settings.bind("keyClear", "keyClear", this._setKeybinding);
+        this.settings.bind("keyMute", "keyMute", this._setKeybinding);        
         this.settings.bind("showNotificationCount", "showNotificationCount", this.update_list);
         this.settings.bind("showNotificationSettings", "showNotificationSettings", this._show_settings_action);
         this._setKeybinding();
@@ -63,11 +64,13 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     _setKeybinding() {
         Main.keybindingManager.addHotKey("notification-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
         Main.keybindingManager.addHotKey("notification-clear-" + this.instance_id, this.keyClear, Lang.bind(this, this._clear_all));
+        Main.keybindingManager.addHotKey("notification-mute-" + this.instance_id, this.keyMute, Lang.bind(this, this.mute_notifications));        
     }
 
     on_applet_removed_from_panel () {
         Main.keybindingManager.removeHotKey("notification-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-clear-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);        
     }
 
     _openMenu() {
@@ -355,6 +358,10 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     on_applet_clicked(event) {
         this._openMenu();
     }
+    
+    mute_notifications() {
+        this.notificationsSwitch.toggle();
+    }    
 
     set_icon_status() {
         if (this.inhibited) {
