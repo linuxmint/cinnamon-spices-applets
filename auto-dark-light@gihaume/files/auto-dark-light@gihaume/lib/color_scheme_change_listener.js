@@ -1,17 +1,18 @@
 const Gio = imports.gi.Gio;
 
-/** Listens for changes in the color scheme and calls the provided callback */
-class Color_scheme_change_listener {
+/** A listenener for changes in the color scheme which calls a provided callback */
+module.exports = class Color_scheme_change_listener {
     #interface = Gio.Settings.new('org.x.apps.portal');
     #callback;
     #signal_id;
 
-    constructor(on_color_scheme_change_callback) {
-        this.#callback = on_color_scheme_change_callback;
+    /** @param {() => void} callback_when_color_scheme_changes - The function to be executed when the color scheme changes. */
+    constructor(callback_when_color_scheme_changes) {
+        this.#callback = callback_when_color_scheme_changes;
     }
 
     enable() {
-        this.disable(); // Ensure only one signal is connected
+        this.disable(); // Ensures only one signal is connected
         this.#signal_id =
             this.#interface.connect('changed::color-scheme', this.#callback);
     }
@@ -23,8 +24,8 @@ class Color_scheme_change_listener {
         }
     }
 
-    /** Declare the object as finished to release any ressource acquired. */
-    finalize() { this.disable(); }
+    /** Declares the object as finished to release any ressource acquired. */
+    finalize() {
+        this.disable();
+    }
 }
-
-module.exports = Color_scheme_change_listener;

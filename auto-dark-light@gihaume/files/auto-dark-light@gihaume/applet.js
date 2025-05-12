@@ -1,16 +1,16 @@
-const Themes_handler               = require('./lib/themes_handler.js');
-const Background_handler           = require('./lib/background_handler.js');
-const Twilights_calculator         = require('./lib/twilights_calculator/twilights_calculator.js');
-const Event_scheduler              = require('./lib/event_scheduler.js');
-const Timer_absolute               = require('./lib/timer_absolute.js');
-const Time_of_day                  = require('./lib/time_of_day.js');
-const Time_change_listener         = require('./lib/time_change_listener/time_change_listener.js');
-const Timezone_change_listener     = require('./lib/timezone_change_listener.js');
-const Timezone_coordinates_finder  = require('./lib/timezones_coordinates/timezone_coordinates_finder.js');
-const Sleep_wakeup_listener        = require('./lib/sleep_wakeup_listener/sleep_wakeup_listener.js');
-const Color_scheme_change_listener = require('./lib/color_scheme_change_listener.js');
-const Commands_launcher            = require('./lib/commands_launcher/commands_launcher.js');
-const { _ }                        = require('./lib/translator.js');
+const Themes_handler               = require('lib/themes_handler.js');
+const Background_handler           = require('lib/background_handler.js');
+const Twilights_calculator         = require('lib/twilights_calculator/twilights_calculator.js');
+const Event_scheduler              = require('lib/event_scheduler.js');
+const Timer_absolute               = require('lib/timer_absolute.js');
+const Time_of_day                  = require('lib/time_of_day.js');
+const Time_change_listener         = require('lib/time_change_listener/time_change_listener.js');
+const Timezone_change_listener     = require('lib/timezone_change_listener.js');
+const Timezone_coordinates_finder  = require('lib/timezones_coordinates/timezone_coordinates_finder.js');
+const Sleep_wakeup_listener        = require('lib/sleep_wakeup_listener/sleep_wakeup_listener.js');
+const Color_scheme_change_listener = require('lib/color_scheme_change_listener.js');
+const Commands_launcher            = require('lib/commands_launcher/commands_launcher.js');
+const _                            = require('lib/translator.js');
 
 const Applet   = imports.ui.applet;
 const GLib     = imports.gi.GLib;
@@ -40,12 +40,12 @@ class ThisApplet extends Applet.IconApplet {
         switch (Themes_handler.get_system_color_scheme()) {
             case 'prefer-dark':
                 this.ui_switch_dark_mode = true;
-                if (!this.themes_dark.get_if_has_detected())
+                if (!this.themes_dark.has_detected)
                     this.themes_dark.detect();
                 break;
             case 'prefer-light': default:
                 this.ui_switch_dark_mode = false;
-                if (!this.themes_light.get_if_has_detected())
+                if (!this.themes_light.has_detected)
                     this.themes_light.detect();
         }
 
@@ -257,7 +257,7 @@ class ThisApplet extends Applet.IconApplet {
 
     _update() {
         if (this.ui_switch_auto_mode && this._update_twilights()) {
-            if (!this.is_auto_mode_inverted || this.timer_abs.has_expired())
+            if (!this.is_auto_mode_inverted || this.timer_abs.get_if_has_expired())
                 this._update_mode();
             this._update_is_auto_mode_inverted();
             this._schedule_auto_switch();
@@ -320,7 +320,7 @@ class ThisApplet extends Applet.IconApplet {
               (this.is_auto_mode_inverted ? this.sunset  : this.sunrise)
             : (this.is_auto_mode_inverted ? this.sunrise : this.sunset);
 
-        this.timer_abs.set(time);
+        this.timer_abs.expiration_time = time;
 
         this.scheduler.set_the_event(time, () => {
             this.is_auto_mode_inverted = false;
@@ -424,7 +424,6 @@ class ThisApplet extends Applet.IconApplet {
         this.time_change_listener        .finalize();
         this.sleep_wakeup_listener       .finalize();
         this.timezone_change_listener    .finalize();
-        this.timezone_coordinates_finder .finalize();
         this.color_scheme_change_listener.finalize();
         this.settings                    .finalize();
     }

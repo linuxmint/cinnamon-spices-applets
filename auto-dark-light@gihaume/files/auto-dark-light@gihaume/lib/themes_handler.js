@@ -1,3 +1,4 @@
+const {XletSettingsBase} = imports.ui.settings;
 const Gio = imports.gi.Gio;
 
 const IO = {
@@ -14,11 +15,11 @@ const IO = {
 };
 
 /** A `Cinnamon desktop` themes handler that detects and applies the themes. */
-class Themes_handler {
+module.exports = class Themes_handler {
     #color_scheme;
 
     /**
-     * @param {Settings.XletSettingsBase} settings - The settings of the desk/applet.
+     * @param {XletSettingsBase} settings - The settings of the desk/applet.
      * @param {boolean} is_dark - Wether the color scheme is light (false) or dark (true).
      * @param {object} keys - The keys of the settings' memorized variables.
      * @param {string} keys.mouse_pointer - The key for the mouse pointer theme.
@@ -32,7 +33,7 @@ class Themes_handler {
         settings.bindWithObject(this, keys.applications,  "applications");
         settings.bindWithObject(this, keys.icons,         "icons");
         settings.bindWithObject(this, keys.desktop,       "desktop");
-        settings.bindWithObject(this, keys.has_detected,  "has_detected");
+        settings.bindWithObject(this, keys.has_detected,  "_has_detected");
         this.#color_scheme = is_dark ? 'prefer-dark' : 'prefer-light';
     }
 
@@ -42,7 +43,7 @@ class Themes_handler {
         this.applications  = IO.DESKTOP .get_string(IO.KEYS.APPLICATIONS);
         this.icons         = IO.DESKTOP .get_string(IO.KEYS.ICONS);
         this.desktop       = IO.CINNAMON.get_string(IO.KEYS.DESKTOP);
-        this.has_detected  = true;
+        this._has_detected = true;
     }
 
     /** Applies the saved themes to Cinnamon desktop. */
@@ -56,11 +57,11 @@ class Themes_handler {
         IO.X_APPS  .set_string(IO.KEYS.COLOR_SCHEME,  this.#color_scheme);
     }
 
-    get_if_has_detected() { return this.has_detected; }
+    get has_detected() {
+        return this._has_detected;
+    }
 
     static get_system_color_scheme() {
         return IO.X_APPS.get_string(IO.KEYS.COLOR_SCHEME);
     }
 }
-
-module.exports = Themes_handler;

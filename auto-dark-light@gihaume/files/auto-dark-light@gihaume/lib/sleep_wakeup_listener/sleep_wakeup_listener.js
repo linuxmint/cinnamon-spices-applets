@@ -1,43 +1,41 @@
-const Dbus                = require('./lib/dbus.js');
-const Screen_lock_checker = require('./lib/sleep_wakeup_listener/screen_lock_checker.js');
+const Dbus                = require('lib/dbus.js');
+const Screen_lock_checker = require('lib/sleep_wakeup_listener/screen_lock_checker.js');
 
 /** A gatekeeper for the sleep combined with the screen locked on wakeup. */
-class Sleep_wakeup_listener {
-    #sleep_dbus   = new Dbus.Sleep();
-    #lock_checker = new Screen_lock_checker();
-    #on_sleep_entry_callback;
-    #on_wakeup_unlocked_callback;
+module.exports = class Sleep_wakeup_listener {
+    #dbus_sleep   = new Dbus.Sleep();
+    #screen_lock_checker = new Screen_lock_checker();
+    #callback_when_sleep_entries;
+    #callback_when_wakeup_unlocked;
 
     /**
-     * @param {function(): void} on_sleep_entry_callback - The function to be executed when the system goes to sleep. Will be called again even without unlock.
-     * @param {function(): void} on_wakeup_unlocked_callback - The function to be executed when the system wakes up and the screen is unlocked.
+     * @param {() => void} callback_when_sleep_entries - The function to be executed when the system goes to sleep. Will be called again even without unlock.
+     * @param {() => void} callback_when_wakeup_unlocked - The function to be executed when the system wakes up and the screen is unlocked.
      */
-    constructor(on_sleep_entry_callback, on_wakeup_unlocked_callback) {
-        this.#on_sleep_entry_callback     = on_sleep_entry_callback;
-        this.#on_wakeup_unlocked_callback = on_wakeup_unlocked_callback;
+    constructor(callback_when_sleep_entries, callback_when_wakeup_unlocked) {
+        this.#callback_when_sleep_entries   = callback_when_sleep_entries;
+        this.#callback_when_wakeup_unlocked = callback_when_wakeup_unlocked;
     }
 
     enable() {
-        this.#sleep_dbus.subscribe_to_changes((is_sleeping) => {
+        this.#dbus_sleep.subscribe_to_changes((is_sleeping) => {
             if (is_sleeping)
-                this.#on_sleep_entry_callback();
+                this.#callback_when_sleep_entries();
             else
-                this.#lock_checker.try_now_or_postpone_until_unlocked(
-                    this.#on_wakeup_unlocked_callback.bind(this)
+                this.#screen_lock_checker.try_now_or_postpone_until_unlocked(
+                    this.#callback_when_wakeup_unlocked.bind(this)
                 );
         });
     }
 
     disable() {
-        this.#sleep_dbus.unsubscribe_to_changes();
-        this.#lock_checker.cancel();
+        this.#dbus_sleep.unsubscribe_to_changes();
+        this.#screen_lock_checker.cancel();
     }
 
-    /** Declare the object as finished to release any ressource acquired. */
+    /** Declares the object as finished to release any ressource acquired. */
     finalize() {
-        this.#sleep_dbus.unsubscribe_to_changes();
-        this.#lock_checker.finalize();
+        this.#dbus_sleep.unsubscribe_to_changes();
+        this.#screen_lock_checker.finalize();
     }
 }
-
-module.exports = Sleep_wakeup_listener;

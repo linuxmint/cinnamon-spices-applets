@@ -1,32 +1,34 @@
-const Dbus = require('./lib/dbus.js');
+const Dbus = require('lib/dbus.js');
 
 /** A gatekeeper for the screen locked state. */
-class Screen_lock_checker {
-    #lock = new Dbus.Screen_lock();
+module.exports = class Screen_lock_checker {
+    #dbus_screen_lock = new Dbus.Screen_lock();
 
     /**
-     * Try now or postpone until the screen is unlocked to execute a procedure.
-     * @param {function(): void} on_unlock_callback - The function to be executed when the screen is unlocked.
+     * Tries now or postpones until the screen is unlocked to execute a procedure.
+     * @param {() => void} callback_when_unlocked - The function to be executed when the screen is unlocked.
      */
-    try_now_or_postpone_until_unlocked(on_unlock_callback) {
+    try_now_or_postpone_until_unlocked(callback_when_unlocked) {
         Dbus.Screen_lock.get_state_async((is_locked) => {
             if (!is_locked)
-                on_unlock_callback();
+                callback_when_unlocked();
             else
-                this.#lock.subscribe_to_changes((is_locked) => {
+                this.#dbus_screen_lock.subscribe_to_changes((is_locked) => {
                     if (!is_locked) {
-                        this.#lock.unsubscribe_to_changes();
-                        on_unlock_callback();
+                        this.#dbus_screen_lock.unsubscribe_to_changes();
+                        callback_when_unlocked();
                     }
                 });
         });
     }
 
-    /** Cancel the `try_now_or_postpone` procedure. */
-    cancel() { this.#lock.unsubscribe_to_changes(); }
+    /** Cancels the `try_now_or_postpone_until_unlocked` procedure. */
+    cancel() {
+        this.#dbus_screen_lock.unsubscribe_to_changes();
+    }
 
-    /** Declare the object as finished to release any ressource acquired. */
-    finalize() { this.cancel(); }
+    /** Declares the object as finished to release any ressource acquired. */
+    finalize() {
+        this.cancel();
+    }
 }
-
-module.exports = Screen_lock_checker;

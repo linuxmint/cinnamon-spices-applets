@@ -1,20 +1,19 @@
-const SunCalc     = require('./lib/twilights_calculator/suncalc.js');
-const Time_of_day = require('./lib/time_of_day.js');
-const { _ }       = require('./lib/translator.js');
+const SunCalc     = require('lib/twilights_calculator/suncalc.js');
+const Time_of_day = require('lib/time_of_day.js');
+const _           = require('lib/translator.js');
 
-const GLib = imports.gi.GLib;
-const DateTime = GLib.DateTime;
+const {DateTime} = imports.gi.GLib;
 
 /** A twilight times calculator of the ~current day. */
-const Twilights_calculator = {
+module.exports = class Twilights_calculator {
     /**
-     * Get the twilight times of the current day.
+     * Gets the twilight times of the current day.
      * @param {number} latitude  The latitude of the location.
      * @param {number} longitude The longitude of the location.
      * @returns {{sunrise: Time_of_day, sunset: Time_of_day}} The twilight times of the current day.
      * @throws {Error} If the calculation fails.
      */
-    get_today(latitude, longitude) {
+    static get_today(latitude, longitude) {
         const now   = DateTime.new_now_local().to_unix() * 1000, // [ms]
               dates = SunCalc.getTimes(now, latitude, longitude);
 
@@ -30,5 +29,3 @@ const Twilights_calculator = {
         return {sunrise, sunset};
     }
 }
-
-module.exports = Twilights_calculator;

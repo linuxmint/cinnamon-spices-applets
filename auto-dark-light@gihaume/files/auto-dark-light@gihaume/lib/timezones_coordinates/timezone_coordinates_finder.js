@@ -1,10 +1,7 @@
-const {Gio, GLib} = imports.gi;
+const {Gio} = imports.gi;
 
-/**
- * A finder of timezone's city coordinates using a local database.
- */
-class Timezone_coordinates_finder {
-    #file_contents
+/** A finder of timezone's city coordinates using a local database. */
+module.exports = class Timezone_coordinates_finder {
     #database
 
     /**
@@ -19,21 +16,15 @@ class Timezone_coordinates_finder {
         if (!ok)
             throw new Error(`failed to load file/contents of '${file_path}'`);
 
-        this.#file_contents = contents;
         this.#database = JSON.parse(new TextDecoder().decode(contents)); // can throw
     }
 
     /**
-     * Get the latitude and longitude of the timezone's city.
+     * Gets the latitude and longitude of the timezone's city.
      * @param {string} timezone - The timezone to get the coordinates from.
      * @returns {[number, number]} The system timezone's city latitude and longitude.
      */
-    find_coordinates(timezone) { return this.#database[timezone]; }
-
-    /**
-     * Declare the object as finished to release any ressource acquired.
-     */
-    finalize() { GLib.free(this.#file_contents); }
+    find_coordinates(timezone) {
+        return this.#database[timezone];
+    }
 }
-
-module.exports = Timezone_coordinates_finder;
