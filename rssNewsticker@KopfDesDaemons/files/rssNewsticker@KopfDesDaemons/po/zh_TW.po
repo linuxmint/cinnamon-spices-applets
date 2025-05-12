@@ -1,0 +1,66 @@
+# RSS NEWSTICKER
+# This file is put in the public domain.
+# KopfDesDaemons, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rssNewsticker@KopfDesDaemons 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-11-17 20:28+0100\n"
+"PO-Revision-Date: 2025-05-11 23:53+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:20
+msgid "Loading Newsticker..."
+msgstr "正在載入 Newsticker..."
+
+#. applet.js:89
+msgid "Could not load RSS-Feed"
+msgstr "無法載入 RSS Feed"
+
+#. applet.js:94
+msgid "Error while loading RSS"
+msgstr "載入 RSS 時發生錯誤"
+
+#. metadata.json->name
+msgid "RSS Newsticker"
+msgstr "RSS Newsticker"
+
+#. metadata.json->description
+msgid "Displays the headlines of an RSS feed"
+msgstr "顯示 RSS Feed 的標題"
+
+#. settings-schema.json->head0->description
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->rssURL->description
+msgid "URL of RSS feed"
+msgstr "RSS Feed 網址"
+
+#. settings-schema.json->head1->description
+msgid "Ticker"
+msgstr "跑馬燈"
+
+#. settings-schema.json->width->description
+msgid "Width of ticker in px"
+msgstr "跑馬燈寬度（像素）"
+
+#. settings-schema.json->tickerSeperator->description
+msgid "Separator between headlines"
+msgstr "標題間的分隔符號"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Refresh interval in seconds"
+msgstr "重新整理間隔（秒）"
+
+#. settings-schema.json->tickerSpeed->description
+msgid "Speed of ticker in ms"
+msgstr "跑馬燈速度（毫秒）"
