@@ -51,6 +51,12 @@
         "default": "<Shift><Super>c",
         "tooltip" : "Set keybinding(s) to clear all notifications."
    },
+    "keyMute": {
+        "type": "keybinding",
+        "description": "Disable notifications",
+        "default": "<Shift><Super>m",
+        "tooltip": "Set keybinding(s) to disable notifications."
+    },    
    "section4": {
         "type": "section",
         "description": ""
