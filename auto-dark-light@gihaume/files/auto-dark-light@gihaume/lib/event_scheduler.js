@@ -1,16 +1,16 @@
 const Mainloop = imports.mainloop;
 
-const Time_of_day = require('./lib/time_of_day.js');
+const Time_of_day = require('lib/time_of_day.js');
 
 /** A single-event scheduler which call a function at a specified due time of day. */
-class Event_scheduler {
+module.exports = class Event_scheduler {
     #event_id;
 
     /**
-     * Schedule the event to execute a callback function at the specified due time of day.
+     * Schedules the event to execute a callback function at the specified due time of day.
      * If the event is already scheduled, it will be replaced.
      * @param {Time_of_day} due_time - The time at which the callback function should be executed.
-     * @param {function(): void} on_event_callback - The callback function to be executed when the event occurs.
+     * @param {() => void} on_event_callback - The callback function to be executed when the event occurs.
      */
     set_the_event(due_time, on_event_callback) {
         this.unset_the_event();
@@ -27,7 +27,7 @@ class Event_scheduler {
         // );
     }
 
-    /** Unset the scheduled event if it exists. */
+    /** Unsets the scheduled event if it exists. */
     unset_the_event() {
         if (this.#event_id !== undefined) {
             Mainloop.source_remove(this.#event_id);
@@ -35,9 +35,8 @@ class Event_scheduler {
         }
     }
 
-    /** Declare the object as finished to release any ressource acquired. */
-    finalize() { this.unset_the_event(); }
-
+    /** Declares the object as finished to release any ressource acquired. */
+    finalize() {
+        this.unset_the_event();
+    }
 }
-
-module.exports = Event_scheduler;

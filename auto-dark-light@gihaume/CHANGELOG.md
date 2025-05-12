@@ -1,3 +1,8 @@
+## 1.2.4 - 13.05.2025
+
+- Added TypeScript checks via `jsconfig.json`
+- Renamed a lot of things
+
 ## 1.2.3 - 28.04.2025
 
 - Background handling feature:

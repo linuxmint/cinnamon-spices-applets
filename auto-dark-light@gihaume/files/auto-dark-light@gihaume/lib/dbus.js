@@ -1,14 +1,13 @@
 const {Gio, GLib} = imports.gi;
 
-class Dbus { // namespace-like
-    /** An interface to read the system screensaver lock state. */
+module.exports = class Dbus { // namespace-like
+    /** An interface to read and subscribe to changes in the system screensaver lock state. */
     static Screen_lock = class {
         #signal_id;
 
         /**
-         * Listen to the screensaver lock state changes.
-         * @param {function(boolean): void} callback - The callback function to be executed when the screen saver lock state changes.
-         * @param {boolean} callback.is_locked - The new lock state.
+         * Listens to the screensaver lock state changes.
+         * @param {(is_locked: boolean) => void} callback - The callback function to be executed when the screen saver lock state changes.
          */
         subscribe_to_changes(callback) {
             if (this.#signal_id)
@@ -35,9 +34,9 @@ class Dbus { // namespace-like
         }
 
         /**
-         * Get the current screensaver lock state asynchronously.
-         * @param {function(boolean): void} callback - The callback function to handle the result.
-         * @param {boolean} callback.is_locked - The lock state.
+         * Gets the current screensaver lock state asynchronously.
+         * @param {object} callback - The callback object to handle the result.
+         * @property {boolean} callback.is_locked - The lock state.
          */
         static get_state_async(callback) {
             Gio.DBus.session.call(
@@ -59,14 +58,13 @@ class Dbus { // namespace-like
         }
     }
 
-    /** An interface to read the system sleep/wakeup state. */
+    /** An interface subscribe to changes in the system sleep/wakeup state. */
     static Sleep = class {
         #signal_id;
 
         /**
-         * Listen to the system sleep/wakeup state changes.
-         * @param {function(boolean): void} callback - The callback function to be executed when the system sleep state changes.
-         * @param {boolean} callback.is_sleeping - The new sleep state (the opposite means wakeup).
+         * Listens to the system sleep/wakeup state changes.
+         * @param {(is_sleeping: boolean) => void} callback - The callback function to be executed when the system sleep state changes.
          */
         subscribe_to_changes(callback) {
             if (this.#signal_id)
@@ -93,14 +91,13 @@ class Dbus { // namespace-like
         }
     }
 
-    /** An interface to read the system timezone. */
+    /** An interface to read and subscribe to changes in the system timezone. */
     static Timezone = class {
         #signal_id;
 
         /**
-         * Listen to the system timezone changes.
-         * @param {function(string): void} callback - The callback function to be executed when the timezone changes.
-         * @param {string} callback.new_timezone - The new timezone.
+         * Listens to the system timezone changes.
+         * @param {(new_timezone: string) => void} callback - The callback function to be executed when the timezone changes.
          */
         subscribe_to_changes(callback) {
             if (this.#signal_id)
@@ -129,21 +126,21 @@ class Dbus { // namespace-like
             this.#signal_id = undefined;
         }
 
-        /**
-         * Get the current system timezone.
-         * @returns {string} The current system timezone.
-         */
+        /** @returns {string} The current system timezone. */
         static get_current() {
             const reply = Gio.DBus.system.call_sync(
-                'org.freedesktop.timedate1', // bus_name
-                '/org/freedesktop/timedate1', // object_path
+                'org.freedesktop.timedate1',       // bus_name
+                '/org/freedesktop/timedate1',      // object_path
                 'org.freedesktop.DBus.Properties', // interface_name
-                'Get', // method_name
-                new GLib.Variant('(ss)', ['org.freedesktop.timedate1', 'Timezone']), // parameters
-                GLib.VariantType.new('(v)'), // reply_type
-                Gio.DBusCallFlags.NONE, // flags
-                -1, // timeout_msec
-                null // cancellable
+                'Get',                             // method_name
+                new GLib.Variant(                  // parameters
+                    '(ss)',
+                    ['org.freedesktop.timedate1', 'Timezone']
+                ),
+                GLib.VariantType.new('(v)'),       // reply_type
+                Gio.DBusCallFlags.NONE,            // flags
+                -1,                                // timeout_msec
+                null                               // cancellable
             );
             const variant = reply.deep_unpack()[0];
             const timezone = variant.deep_unpack();
@@ -151,5 +148,3 @@ class Dbus { // namespace-like
         }
     }
 }
-
-module.exports = Dbus;

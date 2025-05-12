@@ -1,21 +1,25 @@
-const launch_command = require('./lib/commands_launcher/launch_command.js');
-const { _ }          = require('./lib/translator.js');
+const launch_command = require('lib/commands_launcher/launch_command.js');
+const _              = require('lib/translator.js');
 
+const {XletSettingsBase} = imports.ui.settings;
 const {Gio, GLib} = imports.gi;
 
 /** A launcher for the commands of the settings list. */
-class Commands_launcher {
+module.exports = class Commands_launcher {
     #callback_for_errors;
 
     /**
-     * @param {Settings.XletSettingsBase} settings - The settings of the desk/applet.
+     * @param {XletSettingsBase} settings - The settings of the desk/applet.
      * @param {object} key_of_list - The keys of the settings' commands list.
-     * @param {function(string): void} callback_for_errors - The function to call with a message for when an error occurs.
+     * @param {(message: string) => void} callback_for_errors - The function to call with a message for when an error occurs.
      */
     constructor(settings, key_of_list, callback_for_errors) {
         settings.bindWithObject(this, key_of_list, "list");
         this.#callback_for_errors = callback_for_errors;
     }
+
+    /** @type {Array<{name: string, active: boolean, expiry: number, command: string}>} */
+    list;
 
     async launch_commands() {
         for (const item of this.list) {
@@ -44,5 +48,3 @@ class Commands_launcher {
         }
     }
 }
-
-module.exports = Commands_launcher;

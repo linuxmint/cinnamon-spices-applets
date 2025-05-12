@@ -1,15 +1,12 @@
-const { _ } = require('./lib/translator.js');
+const _ = require('lib/translator.js');
 
 const {Gio, GLib} = imports.gi;
 
 const EXECUTABLE_NAME = "auto-dark-light-time-change-listener";
 
-/**
- * A passive listener for system time changes. It interfaces the C++ program
- * which API is in `time_change_listener.hpp`.
- */
-class Time_change_listener {
-    #callback_when_change;
+/** A passive listener for system time changes. It interfaces the C++ program whose API is in `time_change_listener.hpp`. */
+module.exports = class Time_change_listener {
+    #callback_when_changes;
     #callback_for_errors;
     #subprocess;
     #input;
@@ -19,12 +16,12 @@ class Time_change_listener {
 
     /**
      * @param {string} path - The absolute path where the C++ files are located.
-     * @param {function(): void} callback_when_change - The function to be called when the system time changes.
-     * @param {function(string): void} callback_for_errors - The function to call with a message for when an error occurs.
+     * @param {() => void} callback_when_changes - The function to be called when the system time changes.
+     * @param {(message: string) => void} callback_for_errors - The function to call with a message for when an error occurs.
      * @throws {Error} If the `make` and `gcc` commands are not found in the system or if the compilation of the C++ program fails.
      */
-    constructor(path, callback_when_change, callback_for_errors) {
-        this.#callback_when_change = callback_when_change;
+    constructor(path, callback_when_changes, callback_for_errors) {
+        this.#callback_when_changes = callback_when_changes;
         this.#callback_for_errors = callback_for_errors;
 
         if (!(GLib.find_program_in_path('make') && GLib.find_program_in_path('gcc')))
@@ -36,12 +33,13 @@ class Time_change_listener {
         });
         compilation.init(null);
         try {
-            const [, , stderr] = compilation.communicate_utf8(null, null);
+            const [_ok, _stdout, stderr] = compilation.communicate_utf8(null, null);
             if (!compilation.get_successful())
                 throw new Error(stderr);
         } catch (error) {
             throw new Error(
-                `${_("Compilation of")} \`${EXECUTABLE_NAME}\` ${_("failed")}.\n\n`
+                `${_("Compilation of")} \`${EXECUTABLE_NAME}\` ${_("failed")}.\n`
+                + "\n"
                 + error.message
             );
         }
@@ -73,7 +71,7 @@ class Time_change_listener {
             await new Promise(resolve =>
                 this.#input.read_line_async(GLib.PRIORITY_DEFAULT, null, resolve)
             );
-            this.#callback_when_change();
+            this.#callback_when_changes();
         } while (!this.#end_listen);
     }
 
@@ -99,19 +97,21 @@ class Time_change_listener {
         } while (!this.#end_listen);
     }
 
-    /** Enable listening for the system time changes. */
-    enable() { this.#output.write('enable\n', null); }
+    /** Enables listening for the system time changes. */
+    enable() {
+        this.#output.write('enable\n', null);
+    }
 
-    /** Disable listening for the system time changes. */
-    disable() { this.#output.write('disable\n', null); }
+    /** Disables listening for the system time changes. */
+    disable() {
+        this.#output.write('disable\n', null);
+    }
 
-    /** Declare the object as finished to release any ressource acquired. */
+    /** Declares the object as finished to release any ressource acquired. */
     finalize() {
-        this.#callback_when_change = () => {};
+        this.#callback_when_changes = () => {};  // Be sure to not call it again
         this.#end_listen = true;
         this.#output.write('exit\n', null);
         this.#subprocess.wait(null);
     }
 }
-
-module.exports = Time_change_listener;

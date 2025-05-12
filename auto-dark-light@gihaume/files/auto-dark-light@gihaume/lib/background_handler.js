@@ -1,3 +1,4 @@
+const {XletSettingsBase} = imports.ui.settings;  // Only for JSDoc
 const Gio = imports.gi.Gio;
 
 const IO = {
@@ -11,9 +12,9 @@ const IO = {
 };
 
 /** A `Cinnamon desktop` background handler that detects and applies the background settings. */
-class Background_handler {
+module.exports = class Background_handler {
     /**
-    * @param {Settings.XletSettingsBase} settings - The settings of the desk/applet.
+    * @param {XletSettingsBase} settings - The settings of the desk/applet.
     * @param {object} keys - The keys of the settings' memorized variables.
     * @param {string} keys.is_slideshow - The key for the slideshow state.
     * @param {string} keys.background_file - The key for the background file.
@@ -53,5 +54,3 @@ class Background_handler {
             // IO.SLIDESHOW. set_string(IO.KEYS.SLIDESHOW_FOLDER, decodeURIComponent(this.slideshow_folder));
     }
 }
-
-module.exports = Background_handler;
