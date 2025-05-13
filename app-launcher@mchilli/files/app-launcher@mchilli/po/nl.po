@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-25 17:53+0100\n"
-"PO-Revision-Date: 2024-11-28 17:01+0100\n"
+"PO-Revision-Date: 2025-05-13 14:33+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. applet.js:117
 msgid "All workspaces"
-msgstr ""
+msgstr "Alle werkruimtes"
 
 #. applet.js:145
 msgid "Edit Applications"
@@ -219,11 +219,11 @@ msgstr "Toon het menu naast de cursor indien geactiveerd door sneltoets"
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
-msgstr ""
+msgstr "Koppelen aan werkruimte"
 
 #. settings-schema.json->bind-to-workspace->tooltip
 msgid "Show the applet only on the selected workspace"
-msgstr ""
+msgstr "Toon de applet alleen op de geselecteerde werkruimte"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
