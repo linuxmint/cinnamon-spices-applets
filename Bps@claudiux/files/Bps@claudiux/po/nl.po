@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-28 17:40+0100\n"
-"PO-Revision-Date: 2024-11-28 17:28+0100\n"
+"PO-Revision-Date: 2025-05-13 13:46+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #. applet.js:77
 msgid "Does not work on vertical panel!"
-msgstr ""
+msgstr "Werkt niet op een verticale werkbalk!"
 
 #. applet.js:244 applet.js:304 applet.js:318
 msgid "   B"
@@ -158,48 +158,45 @@ msgid "Upload first"
 msgstr "Eerst upload"
 
 #. settings-schema.json->gui_value_order->tooltip
-#, fuzzy
 msgid "An order of values shown in the panel"
-msgstr "Waarden weergegeven in het paneel"
+msgstr "Een volgorde van waarden weergegeven in het paneel"
 
 #. settings-schema.json->minimum_start->description
-#, fuzzy
 msgid "Minimum displayed value"
-msgstr "Minimale weergegeven uploadwaarde"
+msgstr "Minimaal weergegeven waarde"
 
 #. settings-schema.json->display_minimum_quantity->description
-#, fuzzy
 msgid "Value"
-msgstr "Waardevolgorde"
+msgstr "Waarde"
 
 #. settings-schema.json->display_minimum_quantity->tooltip
 msgid "Value between 0 and 999 (decimal) or 1023 (binary)."
-msgstr ""
+msgstr "Waarde tussen 0 en 999 (decimaal) of 1023 (binair)."
 
 #. settings-schema.json->display_minimum_unit_multiple->description
 msgid "Multiple"
-msgstr ""
+msgstr "Veelvoud"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "k"
-msgstr ""
+msgstr "k"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #. settings-schema.json->display_minimum_button->description
 msgid "Apply"
-msgstr ""
+msgstr "Toepassen"
