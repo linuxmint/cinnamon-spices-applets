@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-24 14:35+0200\n"
-"PO-Revision-Date: 2025-02-21 19:36+0100\n"
+"PO-Revision-Date: 2025-05-13 14:48+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -248,26 +248,27 @@ msgstr "Commando's"
 
 #. 6.4/applet.js:593
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Instellingen voor Album Art-desklet"
 
 #. 6.4/applet.js:601
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Toon albumhoes als pictogram"
+msgstr "Toon albumhoes op bureaublad"
 
 #. 6.4/applet.js:719
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Je hebt de 'Album Art 3.0'-desklet nodig"
 
 #. 6.4/applet.js:720
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
+"Je kunt deze installeren door op de eerste knop te klikken en vervolgens te "
+"zoeken naar Album."
 
 #. 6.4/applet.js:721 6.4/applet.js:739
 msgid "Desklets"
-msgstr ""
+msgstr "Desklets"
 
 #. 6.4/applet.js:722 6.4/applet.js:740 6.4/applet.js:770
 msgid "Cancel"
@@ -275,13 +276,15 @@ msgstr "Annuleren"
 
 #. 6.4/applet.js:737
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Je moet de 'Album Art 3.0'-desklet activeren"
 
 #. 6.4/applet.js:738
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Je kunt deze activeren door op de eerste knop te klikken, te zoeken naar "
+"Album en het toe te voegen met de knop [+]."
 
 #. metadata.json->name
 #. 6.4/applet.js:771
@@ -311,14 +314,12 @@ msgstr ""
 "Klik op de Download-knop, zoek naar OSD150 en selecteer de ⬇-knop."
 
 #. 6.4/applet.js:1820
-#, fuzzy
 msgid "The 'imagemagick' package is required!"
-msgstr "Het 'playerctl'-pakket is vereist!"
+msgstr "Het 'imagemagick'-pakket is vereist!"
 
 #. 6.4/applet.js:1821
-#, fuzzy
 msgid "Please select 'Install imagemagick' in this menu"
-msgstr "Selecteer 'Installeer playerctl' in dit menu alstublieft"
+msgstr "Selecteer 'Imagemagick installeren' in dit menu"
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:2026
@@ -326,9 +327,8 @@ msgid "Remove the OsdWithNumber extension"
 msgstr "OsdWithNumber-extensie verwijderen"
 
 #. 6.4/applet.js:2046
-#, fuzzy
 msgid "Install imagemagick"
-msgstr "Installeer playerctl"
+msgstr "Imagemagick installeren"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -1099,15 +1099,15 @@ msgstr "Media-Optical-pictogram weergeven"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
-msgstr ""
+msgstr "Als de titel te lang is, eindig deze dan met:"
 
 #. 6.4->settings-schema.json->toolongchars->tooltip
 msgid "Emoji accepted"
-msgstr ""
+msgstr "Emoji toegestaan"
 
 #. 6.4->settings-schema.json->showalbumDelay->description
 msgid "Delay between icon and album art display (seconds)"
-msgstr ""
+msgstr "Vertraging tussen pictogram- en albumhoesweergave (seconden)"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
