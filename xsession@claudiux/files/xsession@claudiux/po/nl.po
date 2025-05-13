@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-17 13:58+0200\n"
-"PO-Revision-Date: 2025-02-21 19:37+0100\n"
+"PO-Revision-Date: 2025-05-13 14:53+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -43,7 +43,7 @@ msgstr "Extensies"
 
 #. applet.js:112
 msgid "RELOAD ALL"
-msgstr ""
+msgstr "ALLES HERLADEN"
 
 #. applet.js:241
 msgid "Middle-click: \n"
@@ -54,22 +54,21 @@ msgid "Show .xsession-errors"
 msgstr "Toon .xsession-errors"
 
 #. applet.js:242
-#, fuzzy
 msgid "Ctrl + Middle-click: \n"
-msgstr "Middelklik: \n"
+msgstr "Ctrl + Middelklik: \n"
 
 #. applet.js:242 applet.js:331
 msgid "Show latest messages"
-msgstr ""
+msgstr "Toon laatste berichten"
 
 #. applet.js:295 applet.js:537
 #, javascript-format
 msgid "%s latest messages"
-msgstr ""
+msgstr "%s laatste berichten"
 
 #. applet.js:295 applet.js:537
 msgid "min: 10. max: 250."
-msgstr ""
+msgstr "min: 10, max: 250."
 
 #. applet.js:348
 msgid "Restart Cinnamon"
@@ -93,7 +92,7 @@ msgstr "Herlaad Extensie:"
 
 #. applet.js:450
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Herlaad huidig thema"
 
 #. applet.js:464
 msgid "--- Settings for ---"
@@ -183,28 +182,30 @@ msgstr "128"
 
 #. settings-schema.json->section2->description
 msgid "RELOAD ALL option"
-msgstr ""
+msgstr "Optie ALLES HERLADEN"
 
 #. settings-schema.json->show_reload_all->description
 msgid "Show the RELOAD ALL option in submenus"
-msgstr ""
+msgstr "Toon de optie ALLES HERLADEN in submenu's"
 
 #. settings-schema.json->show_reload_all->tooltip
 msgid "Caution! Reloading all spices of a given type may lead to errors."
 msgstr ""
+"Let op! Het herladen van alle spices van een bepaald type kan tot fouten "
+"leiden."
 
 #. settings-schema.json->section3->description
 msgid "Latest messages"
-msgstr ""
+msgstr "Laatste berichten"
 
 #. settings-schema.json->number_latest->description
 msgid "Number of latest messages to show"
-msgstr ""
+msgstr "Aantal te tonen laatste berichten"
 
 #. settings-schema.json->number_latest->tooltip
 msgid "(Including empty lines.)"
-msgstr ""
+msgstr "(Inclusief lege regels.)"
 
 #. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
 msgid "-d"
-msgstr ""
+msgstr "-d"
