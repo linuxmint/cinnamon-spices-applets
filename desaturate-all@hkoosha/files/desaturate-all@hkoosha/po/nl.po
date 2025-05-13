@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-27 15:03-0400\n"
-"PO-Revision-Date: 2025-02-21 19:20+0100\n"
+"PO-Revision-Date: 2025-05-13 14:38+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -22,41 +22,43 @@ msgid "Desaturate All"
 msgstr "Desatureer Alles"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Convert your screen to gray-scale."
-msgstr "Zet uw scherm om naar grijstinten."
+msgstr "Zet je scherm om naar grijswaarden."
 
 #. settings-schema.json->saturation->description
 msgid "Color saturation"
-msgstr ""
+msgstr "Kleurverzadiging"
 
 #. settings-schema.json->keybinding->description
-#, fuzzy
 msgid "Shortcut to toggle desaturation effect"
-msgstr "Sneltoets om grijstinten in- of uit te schakelen"
+msgstr "Sneltoets om het desaturatie-effect in- en uit te schakelen"
 
 #. settings-schema.json->automatic->description
 msgid "Automatic"
-msgstr ""
+msgstr "Automatisch"
 
 #. settings-schema.json->automatic->tooltip
 msgid ""
 "Automatically enable and disable the desaturation effect based on the time "
 "of day"
 msgstr ""
+"Schakel het desaturatie-effect automatisch in en uit op basis van het "
+"tijdstip van de dag"
 
 #. settings-schema.json->start-timechooser->description
 msgid "Time of day to automatically enable"
-msgstr ""
+msgstr "Tijdstip van de dag om automatisch in te schakelen"
 
 #. settings-schema.json->end-timechooser->description
 msgid "Time of day to automatically disable"
-msgstr ""
+msgstr "Tijdstip van de dag om automatisch uit te schakelen"
 
 #. settings-schema.json->resume-on-startup->description
 msgid "Restore desaturation effect state on startup"
-msgstr ""
+msgstr "Herstel de staat van het desaturatie-effect bij opstarten"
 
 #. settings-schema.json->resume-on-startup->tooltip
 msgid "Restore the previously set desaturation state when cinnamon starts"
 msgstr ""
+"Herstel de eerder ingestelde desaturatie-status wanneer Cinnamon wordt "
+"opgestart"
