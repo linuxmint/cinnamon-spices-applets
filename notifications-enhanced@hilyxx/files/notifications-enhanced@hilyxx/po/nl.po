@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-12 08:54-0400\n"
-"PO-Revision-Date: 2024-07-24 00:12+0200\n"
+"PO-Revision-Date: 2025-05-13 14:42+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -142,14 +142,12 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Stel toetscombinatie(s) in om alle meldingen te wissen."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Disable notifications"
-msgstr "Schakel meldingen in"
+msgstr "Schakel meldingen uit"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to disable notifications."
-msgstr "Stel toetscombinatie(s) in om alle meldingen te wissen."
+msgstr "Stel sneltoets(en) in om meldingen uit te schakelen."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"
