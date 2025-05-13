@@ -216,7 +216,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.menu.addMenuItem(this.timerMenuItem);
 
         this._timerSlider = new PopupMenu.PopupSliderMenuItem(0);
-        this._timerSlider.connect('value-changed', () => this.sliderChanged());
+        this._timerSlider.connect('value-changed', (slider, value) => this.sliderChanged(slider, value));
         this._timerSlider.connect('drag-end', () => this.sliderReleased());
 
         this._contentSection = new PopupMenu.PopupMenuSection();
