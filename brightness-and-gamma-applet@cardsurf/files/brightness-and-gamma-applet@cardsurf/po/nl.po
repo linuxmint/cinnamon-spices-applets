@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-05 06:30+0200\n"
-"PO-Revision-Date: 2024-04-20 16:31+0200\n"
+"PO-Revision-Date: 2025-05-13 14:36+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -56,7 +56,7 @@ msgstr "Blauw"
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:628
 msgid "Presets"
-msgstr ""
+msgstr "Voorinstellingen"
 
 #. metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
@@ -69,7 +69,7 @@ msgstr "Helderheid en gamma van applet"
 #. settings-schema.json->configuration_start->description
 #. 6.4->settings-schema.json->section_config->title
 msgid "Configuration"
-msgstr ""
+msgstr "Configuratie"
 
 #. settings-schema.json->apply_startup->description
 #. 6.4->settings-schema.json->apply_startup->description
@@ -240,16 +240,16 @@ msgstr "Een pictogram weergegeven in een paneel"
 
 #. 6.4->settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #. 6.4->settings-schema.json->section_presets->title
 #. 6.4->settings-schema.json->preset_list->description
 msgid "Your presets"
-msgstr ""
+msgstr "Jouw voorinstellingen"
 
 #. 6.4->settings-schema.json->disable_nightmode->description
 msgid "Disable Night Mode"
-msgstr ""
+msgstr "Nachtmodus uitschakelen"
 
 #. 6.4->settings-schema.json->disable_nightmode->tooltip
 msgid ""
@@ -257,48 +257,59 @@ msgid ""
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
 msgstr ""
+"Schakel de Cinnamon-nachtmodus uit terwijl deze applet actief is.\n"
+"Dit voorkomt dat het scherm flikkert.\n"
+"De aanpassingstijd kan oplopen tot tweemaal het hieronder aangegeven aantal "
+"seconden."
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
-msgstr ""
+msgstr "Sneltoets om helderheid te verhogen"
 
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
-msgstr ""
+msgstr "Sneltoets om helderheid te verlagen"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
 "You can define or modify presets below, which can then be accessed via the "
 "applet's context menu."
 msgstr ""
+"Je kunt hieronder voorinstellingen definiëren of aanpassen, die vervolgens "
+"toegankelijk zijn via het contextmenu van de applet."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Show\n"
 "in menu"
 msgstr ""
+"Toon\n"
+"in menu"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Red"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Rood"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Green"
-msgstr "Groen"
+msgstr ""
+"Gamma\n"
+"Groen"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Blue"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Blauw"
