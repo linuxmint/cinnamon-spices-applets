@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-22 07:52-0400\n"
-"PO-Revision-Date: 2024-04-21 20:45+0200\n"
+"PO-Revision-Date: 2025-05-13 14:50+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -302,11 +302,11 @@ msgstr "Kleuren"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->description
 msgid "Minimum graph scale"
-msgstr ""
+msgstr "Minimale grafiekschaal"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->units
 msgid "Mb/s"
-msgstr ""
+msgstr "Mb/s"
 
 #. 3.2->settings-schema.json->net_minimum_graph_scale->tooltip
 msgid ""
@@ -316,3 +316,8 @@ msgid ""
 "\n"
 "To always automatically scale, set the value to 0."
 msgstr ""
+"De minimale schaal voor de grafiek in Megabits per seconde.\n"
+"De grafiek zal niet onder deze minimumwaarde schalen, maar zal automatisch "
+"schalen als de netwerksnelheid deze waarde overschrijdt.\n"
+"\n"
+"Om altijd automatisch te schalen, stel de waarde in op 0."
