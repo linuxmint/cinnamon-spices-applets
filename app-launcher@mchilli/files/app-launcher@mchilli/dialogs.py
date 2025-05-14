@@ -163,7 +163,7 @@ class AppDialog(BaseDialog):
             file = dialog.get_filename()
             dialog.destroy()
             if file.endswith('.desktop'):
-                config = configparser.ConfigParser(interpolation=None)
+                config = configparser.ConfigParser(interpolation=None, strict=False)
                 try:
                     config.read(file)
                 except Exception as e:
