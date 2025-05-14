@@ -9,14 +9,7 @@ A simple system monitor which displays CPU and RAM usage.
 
 ### installation
 
-copy files from the cloned repo into applet directory.
-```
-# inside the root directory of the repo
-$ cd files
-
-# dest is the applet directory
-$ cp sysmon@rohan ~/.local/share/cinnamon/applets
-```
+download the System Monitor (sysmon@rohan) applet from 'Applets' download section and add it.
 
 ### screenshots
 ![Screenshot](./screenshot.png)
