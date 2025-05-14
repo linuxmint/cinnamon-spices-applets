@@ -260,6 +260,8 @@ class CustomAppList(SettingsWidget):
             }
             self.tree_store.insert(None, index, self._prepare_store_entry(child[0]["type"], data))
             index += 1
+
+        self.groups.pop(self.tree_store[item_iter][2], None)
         self.tree_store.remove(item_iter)
 
     def _remove_item_and_cleanup_parent(self, item_iter):
@@ -269,6 +271,7 @@ class CustomAppList(SettingsWidget):
         self.tree_store.remove(item_iter)
         
         if parent and not self.tree_store.iter_has_child(parent.iter):
+            self.groups.pop(self.tree_store[parent.iter][2], None)
             self.tree_store.remove(parent.iter)
 
     def on_edit_item(self, *args):
