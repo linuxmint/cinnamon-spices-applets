@@ -6,6 +6,7 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
@@ -53,16 +54,26 @@ MyApplet.prototype = {
 		this.cpuLabel = new St.Label();
 		this.memLabel = new St.Label();	
 
+		
+		let homeDir = GLib.get_home_dir(); 
+		let iconBasePath = homeDir + "/.local/share/cinnamon/applets/sysmon@rohan/icons";
+
+		let cpuIconPath = iconBasePath + "/cpu-symbolic.svg";
+		let memIconPath = iconBasePath + "/ram-symbolic.svg";
+
+		let cpuIconFile = Gio.File.new_for_path(cpuIconPath);
+		let memIconFile = Gio.File.new_for_path(memIconPath);
+
 		this.cpuIcon = new St.Icon({
-	        	icon_name: "cpu-symbolic", 
-    			style_class: "system-status-icon",
-         		icon_size: panel_height * 0.4
+   			gicon: new Gio.FileIcon({ file: cpuIconFile }),
+    			icon_size: panel_height * 0.4,
+   			style_class: "system-status-icon"
 		});
 
 		this.memIcon = new St.Icon({
-			icon_name: "drive-harddisk-symbolic",
-    			style_class: "system-status-icon",
-			icon_size: panel_height * 0.4
+    			gicon: new Gio.FileIcon({ file: memIconFile }),
+    			icon_size: panel_height * 0.4,
+   			style_class: "system-status-icon"
 		});
 
 		
