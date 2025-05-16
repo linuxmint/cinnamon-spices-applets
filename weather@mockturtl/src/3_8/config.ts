@@ -147,6 +147,7 @@ export class Config {
 	public readonly _showAlerts!: boolean;
 	public readonly _userAgentStringOverride!: string;
 	public readonly _runScript!: string;
+	public readonly _uvIndex!: boolean;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -187,6 +188,7 @@ export class Config {
 	public readonly UserAgentStringOverrideChanged = new Event<Config, string>();
 	public readonly RunScriptChanged = new Event<Config, boolean>();
 	public readonly TempTextOverrideChanged = new Event<Config, string>();
+	public readonly UV_IndexChanged = new Event<Config, boolean>();
 
 	public readonly FontChanged = new Event<Config, void>();
 	public readonly HotkeyChanged = new Event<Config, void>();
@@ -780,6 +782,10 @@ export class Config {
 	TEMP_TEXT_OVERRIDE: {
 		key: "tempTextOverride",
 		prop: "TempTextOverride"
+	},
+	UV_INDEX: {
+		key: "uvIndex",
+		prop: "UV_Index"
 	},
 } as const;
 

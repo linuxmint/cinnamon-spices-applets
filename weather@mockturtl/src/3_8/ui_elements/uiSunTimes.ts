@@ -80,7 +80,6 @@ export class SunTimesUI {
         sunBox.add_actor(spacer);
         sunBox.add_actor(sunsetBox);
 
-
         this._actor = sunBox;
         return sunBox;
     }
