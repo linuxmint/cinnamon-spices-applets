@@ -2,15 +2,16 @@ const Lang = imports.lang;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
-function BarIndicatorStyle(applet, cols, rows, height) {
-    this._init(applet, cols, rows, height);
+function BarIndicatorStyle(applet, cols, rows, height, uiColor) {
+    this._init(applet, cols, rows, height, uiColor);
 }
 
 BarIndicatorStyle.prototype = {
 
-    _init: function (applet, cols, rows, height) {
+    _init: function (applet, cols, rows, height, uiColor) {
         this.applet = applet;
         this.button = [];
+        this.uiColor = uiColor;
         this.update_grid(cols, rows, height);
         this.switch_id = global.window_manager.connect('switch-workspace', Lang.bind(this, this.update));
         this.scroll_id = this.applet.actor.connect('scroll-event', Lang.bind(this, this.onMouseScroll));
@@ -153,10 +154,12 @@ BarIndicatorStyle.prototype = {
             if (i == active_ws) {
                 this.button[i].get_child().set_text((i + 1).toString());
                 this.button[i].add_style_pseudo_class('outlined');
+                this.button[i].style = `background-color: ${this.uiColor};`;
             }
             else {
                 this.button[i].get_child().set_text((i + 1).toString());
                 this.button[i].remove_style_pseudo_class('outlined');
+                this.button[i].style = `border: 1px solid ${this.uiColor}; opacity: 1;`;
             }
         }
 
