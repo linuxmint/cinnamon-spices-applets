@@ -1,0 +1,14 @@
+# NOTIFICATIONS ENHANCED
+# This file is put in the public domain.
+# hilyxx, 2024
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->keyMute->description
+msgid "Disable notifications"
+msgstr ""
+
+#. settings-schema.json->keyMute->tooltip
+msgid "Set keybinding(s) to disable notifications."
+msgstr ""
