@@ -3,5 +3,6 @@
     "name": "Automatic dark/light themes",
     "description": "Automatically switch between dark and light themes at twilight times.",
     "version": "1.2.5",
-    "max-instances": "1"
+    "max-instances": "1",
+    "multiversion": true
 }
