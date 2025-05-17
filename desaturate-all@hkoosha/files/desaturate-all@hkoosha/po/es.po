@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-17 10:44-0400\n"
-"PO-Revision-Date: 2025-04-28 16:09-0400\n"
+"PO-Revision-Date: 2025-05-17 11:40-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -20,33 +20,31 @@ msgstr ""
 
 #. applet.js:62
 msgid "Click to disable effect"
-msgstr ""
+msgstr "Haga clic para desactivar el efecto"
 
 #. applet.js:64
 msgid "Click to desaturate the desktop"
-msgstr ""
+msgstr "Haz clic para desaturar el escritorio"
 
 #. applet.js:72
 msgid "Will automatically desaturate in"
-msgstr ""
+msgstr "Se desaturará automáticamente en"
 
 #. applet.js:74
-#, fuzzy
 msgid "Will automatically disable in"
-msgstr "Hora del día para desactivar automáticamente"
+msgstr "Se desactivará automáticamente en"
 
 #. applet.js:76
 msgid "minutes"
-msgstr ""
+msgstr "minutos"
 
 #. applet.js:79
 msgid "Will automatically desaturate at"
-msgstr ""
+msgstr "Se desaturará automáticamente en"
 
 #. applet.js:81
-#, fuzzy
 msgid "Will automatically disable at"
-msgstr "Hora del día para desactivar automáticamente"
+msgstr "Se desactivará automáticamente en"
 
 #. metadata.json->name
 msgid "Desaturate All"
