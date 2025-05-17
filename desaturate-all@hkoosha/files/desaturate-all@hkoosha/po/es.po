@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-27 15:03-0400\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
 "PO-Revision-Date: 2025-04-28 16:09-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,36 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr ""
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr ""
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr ""
+
+#. applet.js:74
+#, fuzzy
+msgid "Will automatically disable in"
+msgstr "Hora del día para desactivar automáticamente"
+
+#. applet.js:76
+msgid "minutes"
+msgstr ""
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr ""
+
+#. applet.js:81
+#, fuzzy
+msgid "Will automatically disable at"
+msgstr "Hora del día para desactivar automáticamente"
 
 #. metadata.json->name
 msgid "Desaturate All"
@@ -43,8 +73,8 @@ msgid ""
 "Automatically enable and disable the desaturation effect based on the time "
 "of day"
 msgstr ""
-"Activar y desactivar automáticamente el efecto de desaturación en función "
-"de la hora del día"
+"Activar y desactivar automáticamente el efecto de desaturación en función de "
+"la hora del día"
 
 #. settings-schema.json->start-timechooser->description
 msgid "Time of day to automatically enable"
@@ -61,5 +91,5 @@ msgstr "Restaurar el estado del efecto de desaturación al arrancar"
 #. settings-schema.json->resume-on-startup->tooltip
 msgid "Restore the previously set desaturation state when cinnamon starts"
 msgstr ""
-"Restaurar el estado de desaturación previamente establecido cuando se "
-"inicia Cinnamon"
+"Restaurar el estado de desaturación previamente establecido cuando se inicia "
+"Cinnamon"
