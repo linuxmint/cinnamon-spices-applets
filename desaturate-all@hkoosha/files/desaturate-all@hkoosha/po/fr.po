@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-27 15:03-0400\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
 "PO-Revision-Date: 2025-05-03 19:52+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -18,6 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr ""
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr ""
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr ""
+
+#. applet.js:74
+#, fuzzy
+msgid "Will automatically disable in"
+msgstr "Heure de la journée pour la désactivation automatique"
+
+#. applet.js:76
+msgid "minutes"
+msgstr ""
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr ""
+
+#. applet.js:81
+#, fuzzy
+msgid "Will automatically disable at"
+msgstr "Heure de la journée pour la désactivation automatique"
 
 #. metadata.json->name
 msgid "Desaturate All"
@@ -62,5 +92,4 @@ msgstr "Rétablir au démarrage l'état de l'effet de dé-saturation"
 #. settings-schema.json->resume-on-startup->tooltip
 msgid "Restore the previously set desaturation state when cinnamon starts"
 msgstr ""
-"Rétablir l'état de dé-saturation précédemment défini lorsque Cinnamon "
-"démarre"
+"Rétablir l'état de dé-saturation précédemment défini lorsque Cinnamon démarre"
