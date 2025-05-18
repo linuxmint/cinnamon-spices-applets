@@ -24,8 +24,8 @@ module.exports = class Time_change_listener {
         this.#callback_when_changes = callback_when_changes;
         this.#callback_for_errors = callback_for_errors;
 
-        if (!(GLib.find_program_in_path('make') && GLib.find_program_in_path('gcc')))
-            throw new Error(_("Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based system with `sudo apt install build-essential`, then reload the applet (in e.g. in restarting Cinnamon)."));
+        if (!(GLib.find_program_in_path('make') && GLib.find_program_in_path('g++')))
+            throw new Error(_("Missing dependencies `make` and `g++`. Install them, in e.g. on Debian-based system with `sudo apt install build-essential`, then reload the applet (in e.g. in restarting Cinnamon)."));
 
         const compilation = new Gio.Subprocess({
             argv: ['make', '-C', path],

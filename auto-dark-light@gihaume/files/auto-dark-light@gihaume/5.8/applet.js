@@ -273,7 +273,7 @@ class ThisApplet extends Applet.IconApplet {
 
     _update_is_auto_mode_inverted() {
         this.is_auto_mode_inverted =
-                this.ui_switch_dark_mode === this._is_now_day();
+            this.ui_switch_dark_mode === this._is_now_day();
     }
 
     _is_now_day() {
