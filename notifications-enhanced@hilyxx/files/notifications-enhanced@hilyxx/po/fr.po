@@ -112,7 +112,7 @@ msgstr ""
 
 #. settings-schema.json->showDisturbIcon->description
 #, fuzzy
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
+msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
 "Afficher l'icône 'Ne pas déranger' même si l'option 'Afficher l'espace de "
 "notification vide' est désactivé."
@@ -149,12 +149,12 @@ msgstr "Définir un raccourci clavier pour effacer toutes les notifications."
 
 #. settings-schema.json->keyMute->description
 #, fuzzy
-msgid "Disable notifications"
-msgstr "Activer les notifications"
+msgid "Enable or disable notifications"
+msgstr "Activer ou désactiver les notifications"
 
 #. settings-schema.json->keyMute->tooltip
 #, fuzzy
-msgid "Set keybinding(s) to disable notifications."
+msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
 "Définir un raccourci clavier pour activer ou désactiver les notifications."
 
