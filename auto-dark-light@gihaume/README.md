@@ -16,31 +16,31 @@ This Cinnamon applet brings the ability to automatically switch between dark and
 ## Applet icons legend
 
 <div style="display: flex; align-items: center; margin-top: 20px; margin-bottom: 20px;">
-    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/auto-symbolic.svg" alt="Auto" width="75" height="75" style="margin-right: 20px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/5.8/icons/auto-symbolic.svg" alt="Auto" width="75" height="75" style="margin-right: 20px;">
     Automatic mode switch enabled.
 </div>
 <div style="display: flex; align-items: center; margin-top: 20px; margin-bottom: 20px;">
-    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/auto-inverted-symbolic.svg" alt="Auto inverted" width="75" height="75" style="margin-right: 20px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/5.8/icons/auto-inverted-symbolic.svg" alt="Auto inverted" width="75" height="75" style="margin-right: 20px;">
     Automatic mode switch enabled but the current mode has been set while not in sync with the actual daytime, so any external changes won't update it until the next scheduled mode change or if entering auto mode switch again.
 </div>
 <div style="display: flex; align-items: center; margin-top: 20px; margin-bottom: 20px;">
-    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/light-symbolic.svg" alt="Light" width="75" height="75" style="margin-right: 20px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/5.8/icons/light-symbolic.svg" alt="Light" width="75" height="75" style="margin-right: 20px;">
     Automatic mode switch disabled and the current mode is light.
 </div>
 <div style="display: flex; align-items: center; margin-top: 20px; margin-bottom: 20px;">
-    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/icons/dark-symbolic.svg" alt="Dark" width="75" height="75" style="margin-right: 20px;">
+    <img src="https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/auto-dark-light@gihaume/files/auto-dark-light@gihaume/5.8/icons/dark-symbolic.svg" alt="Dark" width="75" height="75" style="margin-right: 20px;">
     Automatic mode switch disabled and the current mode is dark.
 </div>
 
 ## Dependencies
 
-`make` and `gcc`, which can be installed on Debian-based system with `sudo apt install build-essential`.
+`make` and `g++`, which can be installed on Debian-based system with `sudo apt install make g++`.
 
 ## Feedback
 
-Add a `⭐ Score` on the [CINNAMON spices](https://cinnamon-spices.linuxmint.com/applets/view/397) page if you like this applet.
+Add a `⭐ Score` on the [Cinnamon spices](https://cinnamon-spices.linuxmint.com/applets/view/397) page if you like this applet.
 
-Report issues on the [GitHub repository](https://github.com/linuxmint/cinnamon-spices-applets/issues) in mentionning `@guillaume-mueller` to notify me.
+Report issues on the [GitHub repository](https://github.com/linuxmint/cinnamon-spices-applets/issues) in mentioning `@guillaume-mueller`.
 
 ## Donate
 
