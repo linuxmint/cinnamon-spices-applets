@@ -109,7 +109,7 @@ msgid "Check this to show the tray even when there are no new notifications."
 msgstr ""
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
+msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
 
 #. settings-schema.json->showDisturbIcon->tooltip
@@ -139,11 +139,11 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr ""
 
 #. settings-schema.json->keyMute->description
-msgid "Disable notifications"
+msgid "Enable or disable notifications"
 msgstr ""
 
 #. settings-schema.json->keyMute->tooltip
-msgid "Set keybinding(s) to disable notifications."
+msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
 
 #. settings-schema.json->btnSystemSettings->description
