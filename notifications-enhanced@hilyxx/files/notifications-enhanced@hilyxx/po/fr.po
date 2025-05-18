@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 09:30-0400\n"
+"POT-Creation-Date: 2025-05-18 21:41+0200\n"
 "PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: Hilyxx <w.lebb@outlook.com>\n"
 "Language-Team: \n"
@@ -111,7 +111,6 @@ msgstr ""
 "aucune nouvelle notification."
 
 #. settings-schema.json->showDisturbIcon->description
-#, fuzzy
 msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
 "Afficher l'icône 'Ne pas déranger' même si l'option 'Afficher l'espace de "
@@ -148,12 +147,10 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Définir un raccourci clavier pour effacer toutes les notifications."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Enable or disable notifications"
 msgstr "Activer ou désactiver les notifications"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
 "Définir un raccourci clavier pour activer ou désactiver les notifications."
