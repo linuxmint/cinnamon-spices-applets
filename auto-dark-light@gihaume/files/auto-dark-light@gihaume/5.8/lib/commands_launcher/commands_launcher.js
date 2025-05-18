@@ -32,16 +32,25 @@ module.exports = class Commands_launcher {
                 const name_for_error = name !== '' ? name : command;
                 let msg = `${_("the command")} '${name_for_error}' ${_("failed")}`;
                 if (error instanceof GLib.ShellError)
-                    msg += ` ${_("due to a wrong format")}${_(":")} ${error.message}`;
+                    msg += ` ${_("due to a wrong format")}.\n`
+                        + "\n"
+                        + `${_("Detail")}${_(":")}\n`
+                        + error.message;
                 else
                 if (error instanceof Gio.IOErrorEnum) {
                     if (error.code === Gio.IOErrorEnum.TIMED_OUT)
-                        msg += ` ${_("due to time expiration")}`;
+                        msg += ` ${_("due to time expiration")}.\n`
+                            + "\n"
+                            + `${_("Detail")}${_(":")}\n`
+                            + error.message;
                     else
                     if (error.code === Gio.IOErrorEnum.FAILED)
-                        msg += ` ${_("with the following errors")}${_(":")} ${error.message}`
+                        msg += ` ${_("due to an error")}.\n`
+                            + "\n"
+                            + `${_("Detail")}${_(":")}\n`
+                            + error.message;
                 } else
-                    msg += `${_(":")} ${error}` // full `error` object so we may see the stack trace
+                    msg += `${_(":")} ${error}` // last resort: full `error` object so we may see the stack trace
 
                 this.#callback_for_errors(msg);
             }
