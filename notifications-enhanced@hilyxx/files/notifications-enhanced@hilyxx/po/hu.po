@@ -1,13 +1,13 @@
 # NOTIFICATIONS ENHANCED
 # This file is put in the public domain.
-# hilyxx, 2025
+# hilyxx, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 13:52+0200\n"
+"POT-Creation-Date: 2025-05-18 09:30-0400\n"
 "PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -110,7 +110,8 @@ msgstr ""
 "Jelölje be, hogy a tálca akkor is megjelenjen, ha nincsenek új értesítések."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
+#, fuzzy
+msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
 msgstr ""
 "A „Ne zavarjanak” ikon megjelenítése akkor is, ha az üres tálca "
 "megjelenítése opció le van tiltva"
@@ -146,11 +147,13 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Állítsa be a billentyűkombináció(ka)t az összes értesítés törléséhez."
 
 #. settings-schema.json->keyMute->description
-msgid "Enable or disable notifications"
-msgstr "Értesítések engedélyezése vagy letiltása"
+#, fuzzy
+msgid "Disable notifications"
+msgstr "Értesítések engedélyezése"
 
 #. settings-schema.json->keyMute->tooltip
-msgid "Set keybinding(s) to enable or disable notifications."
+#, fuzzy
+msgid "Set keybinding(s) to disable notifications."
 msgstr ""
 "Állítsa be a billentyűkombináció(ka)t az értesítések engedélyezéséhez vagy "
 "letiltásához."

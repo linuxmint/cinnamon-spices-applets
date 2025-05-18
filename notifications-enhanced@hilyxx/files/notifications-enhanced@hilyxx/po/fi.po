@@ -1,13 +1,13 @@
 # NOTIFICATIONS ENHANCED
 # This file is put in the public domain.
-# hilyxx, 2025
+# hilyxx, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 13:52+0200\n"
+"POT-Creation-Date: 2025-05-18 09:30-0400\n"
 "PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -110,7 +110,8 @@ msgstr ""
 "Pidä ilmoitusten kuvake näkyvissä myös silloin, kun uusia ilmoituksia ei ole."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
+#, fuzzy
+msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
 msgstr "Näytä \"Älä häiritse\", vaikka tyhjä alusta ei ole käytössä"
 
 #. settings-schema.json->showDisturbIcon->tooltip
@@ -142,11 +143,13 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Aseta näppäinyhdistelmä tyhjentämään kaikki ilmoitukset."
 
 #. settings-schema.json->keyMute->description
-msgid "Enable or disable notifications"
-msgstr "Ota ilmoitukset käyttöön tai poista ne käytöstä"
+#, fuzzy
+msgid "Disable notifications"
+msgstr "Näytä ilmoitukset"
 
 #. settings-schema.json->keyMute->tooltip
-msgid "Set keybinding(s) to enable or disable notifications."
+#, fuzzy
+msgid "Set keybinding(s) to disable notifications."
 msgstr ""
 "Ota ilmoitukset käyttöön tai poista ne käytöstä määrittämällä "
 "näppäinyhdistelmä(t)."
