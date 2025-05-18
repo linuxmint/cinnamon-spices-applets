@@ -188,7 +188,7 @@
     "settings_location_button_show-twilight-times": {
         "type": "button",
         "callback": "on_button_show_start_times",
-        "description": "Check today's switch times in a notification",
+        "description": "Show switch times in a notification",
         "tooltip": "Show today's switch times for light and dark modes based on the current location via a system notification message"
     },
     "light-mode_themes_button_open-os-settings": {
@@ -230,7 +230,7 @@
     "light-mode_themes_button_apply": {
         "type": "button",
         "callback": "on_button_apply_themes_light",
-        "description": "Apply to the system",
+        "description": "Test applying to the system",
         "tooltip": "Apply the light mode themes to the system manually"
     },
     "both-modes_background_switch_enable": {
@@ -281,7 +281,7 @@
     "light-mode_background_button_apply": {
         "type": "button",
         "callback": "on_button_apply_background_light",
-        "description": "Apply to the system",
+        "description": "Test applying to the system",
         "tooltip": "Apply the light mode background settings to the system manually"
     },
     "light-mode_commands_list": {
@@ -293,13 +293,13 @@
             {"id": "command", "title": "Command", "type": "string"}
         ],
         "default" : [],
-        "tooltip" : "List of commands to be executed when switching to this mode\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time kills the command's process\n- an expiry of 0 seconds means never\n- any child process won't be able to expire\n- the path is in the ~ directory\n- the error messages reports stderr when the return status is not 0 and will appear in a notification"
+        "tooltip" : "List of commands to be executed when switching to this mode\n\nNotes:\n- the name's purpose is for error messages\n- the expiry time terminates the command's process early\n- an expiry of 0 second means never\n- a process refusing to terminate 10 seconds after the expiry is killed\n- the path is in the user's home directory (~/)\n- the error messages are displayed in a notification and reports stderr"
     },
     "light-mode_commands_button_launch": {
         "type": "button",
         "callback": "on_button_launch_commands_light",
-        "description": "Launch commands",
-        "tooltip": "Launch the commands set for the light mode"
+        "description": "Test commands launch",
+        "tooltip": "Test launching the commands set for the light mode"
     },
     "dark-mode_themes_button_open-os-settings": {
         "type": "button",
@@ -340,7 +340,7 @@
     "dark-mode_themes_button_apply": {
         "type": "button",
         "callback": "on_button_apply_themes_dark",
-        "description": "Apply to the system",
+        "description": "Test applying to the system",
         "tooltip": "Apply the dark mode themes to the system manually"
     },
     "dark-mode_commands_switch_enable": {
@@ -385,7 +385,7 @@
     "dark-mode_background_button_apply": {
         "type": "button",
         "callback": "on_button_apply_background_dark",
-        "description": "Apply to the system",
+        "description": "Test applying to the system",
         "tooltip": "Apply the dark mode background settings to the system manually"
     },
     "dark-mode_commands_list": {
@@ -402,8 +402,8 @@
     "dark-mode_commands_button_launch": {
         "type": "button",
         "callback": "on_button_launch_commands_dark",
-        "description": "Launch commands",
-        "tooltip": "Launch the commands set for the dark mode"
+        "description": "Test commands launch",
+        "tooltip": "Test launching the commands set for the dark mode"
     },
 
     "has-detected-themes-light": {

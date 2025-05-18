@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-27 15:03-0400\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
 "PO-Revision-Date: 2024-11-13 14:22+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -18,6 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr ""
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr ""
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr ""
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr ""
+
+#. applet.js:76
+msgid "minutes"
+msgstr ""
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr ""
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr ""
 
 #. metadata.json->name
 msgid "Desaturate All"

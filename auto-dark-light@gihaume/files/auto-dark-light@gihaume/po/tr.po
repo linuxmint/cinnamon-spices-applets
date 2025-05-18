@@ -1,14 +1,14 @@
 # AUTOMATIC DARK/LIGHT THEMES
 # This file is put in the public domain.
 # guillaume-mueller, 2024
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: auto-dark-light@gihaume 1.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-20 19:00+0200\n"
+"POT-Creation-Date: 2025-05-18 11:37+0200\n"
 "PO-Revision-Date: 2025-04-20 19:00+0300\n"
 "Last-Translator: @cevheri\n"
 "Language-Team: \n"
@@ -17,92 +17,105 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:33
+#. 5.8/applet.js:33
 msgid "Click: toggle dark/light mode"
 msgstr "Tıkla: karanlık/aydınlık modu değiştir"
 
-#. applet.js:34
+#. 5.8/applet.js:34
 msgid "Middle-click: toggle automatic switch mode"
 msgstr "Orta-tıkla: otomatik değiştirme modunu aç/kapat"
 
-#. applet.js:367
+#. 5.8/applet.js:367
 msgid "Today's automatic mode switch times"
 msgstr "Bugünün otomatik mod geçiş zamanları"
 
-#. applet.js:367 applet.js:368 applet.js:369 applet.js:412 applet.js:418
-#. lib/time_change_listener/time_change_listener.js:97
-#. lib/commands_launcher/commands_launcher.js:31
-#. lib/commands_launcher/commands_launcher.js:38
-#. lib/commands_launcher/commands_launcher.js:40
+#. 5.8/applet.js:367 5.8/applet.js:368 5.8/applet.js:369 5.8/applet.js:412
+#. 5.8/applet.js:418 5.8/lib/time_change_listener/time_change_listener.js:95
+#. 5.8/lib/commands_launcher/commands_launcher.js:37
+#. 5.8/lib/commands_launcher/commands_launcher.js:44
+#. 5.8/lib/commands_launcher/commands_launcher.js:50
+#. 5.8/lib/commands_launcher/commands_launcher.js:53 2.2/applet.js:19
 msgid ":"
 msgstr ":"
 
-#. settings-schema.json->light-mode->title
-#. applet.js:368
+#. 5.8->settings-schema.json->light-mode->title
+#. 5.8/applet.js:368
 msgid "Light mode"
 msgstr "Aydınlık modu"
 
-#. settings-schema.json->dark-mode->title
-#. applet.js:369
+#. 5.8->settings-schema.json->dark-mode->title
+#. 5.8/applet.js:369
 msgid "Dark mode"
 msgstr "Karanlık modu"
 
-#. applet.js:412
+#. 5.8/applet.js:412
 msgid "Error"
 msgstr "Hata"
 
-#. applet.js:418
+#. 5.8/applet.js:418 2.2/applet.js:19
 msgid "Critical error"
 msgstr "Kritik hata"
 
-#. lib/time_change_listener/time_change_listener.js:31
+#. 5.8/lib/time_change_listener/time_change_listener.js:28
+#, fuzzy
 msgid ""
-"Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
-"system with `sudo apt install build-essential`, then reload the applet (in e."
-"g. in restarting Cinnamon)."
+"Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
+"based system with `sudo apt install make g++`, then reload the applet in "
+"restarting Cinnamon."
 msgstr ""
-"`make` ve `gcc` bağımlılıkları eksik. Örnek olarak: Debian tabanlı "
-"bir sistemde `sudo apt install build-essential` komutuyla yükleyin, ardından "
+"`make` ve `gcc` bağımlılıkları eksik. Örnek olarak: Debian tabanlı bir "
+"sistemde `sudo apt install build-essential` komutuyla yükleyin, ardından "
 "appleti yeniden yükleyin (Cinnamon'ı yeniden başlatmak gibi)."
 
-#. lib/time_change_listener/time_change_listener.js:44
+#. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
 msgstr "Derlenmesi"
 
-#. lib/time_change_listener/time_change_listener.js:44
-#. lib/commands_launcher/commands_launcher.js:29
+#. 5.8/lib/time_change_listener/time_change_listener.js:41
+#. 5.8/lib/commands_launcher/commands_launcher.js:33
 msgid "failed"
 msgstr "başarısız oldu"
 
-#. lib/time_change_listener/time_change_listener.js:97
+#. 5.8/lib/time_change_listener/time_change_listener.js:95
 msgid "the subprocess"
 msgstr "alt süreç"
 
-#. lib/time_change_listener/time_change_listener.js:97
+#. 5.8/lib/time_change_listener/time_change_listener.js:95
 msgid "wrote on its error output"
 msgstr "hata çıktısına yazdı"
 
-#. lib/twilights_calculator/twilights_calculator.js:22
+#. 5.8/lib/twilights_calculator/twilights_calculator.js:21
 msgid "unable to calculate twilight times, check coordinates format or range"
 msgstr ""
 "Alacakaranlık(gün doğumu/batımı) zamanlarını hesaplanamadı, koordinat "
 "formatını veya aralığı kontrol edin"
 
-#. lib/commands_launcher/commands_launcher.js:29
+#. 5.8/lib/commands_launcher/commands_launcher.js:33
 msgid "the command"
 msgstr "komut"
 
-#. lib/commands_launcher/commands_launcher.js:31
+#. 5.8/lib/commands_launcher/commands_launcher.js:35
 msgid "due to a wrong format"
 msgstr "yanlış format nedeniyle"
 
-#. lib/commands_launcher/commands_launcher.js:35
+#. 5.8/lib/commands_launcher/commands_launcher.js:37
+#. 5.8/lib/commands_launcher/commands_launcher.js:44
+#. 5.8/lib/commands_launcher/commands_launcher.js:50
+msgid "Detail"
+msgstr ""
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "zaman aşımı nedeniyle"
 
-#. lib/commands_launcher/commands_launcher.js:38
-msgid "with the following errors"
-msgstr "şu hatalarla beraber"
+#. 5.8/lib/commands_launcher/commands_launcher.js:48
+#, fuzzy
+msgid "due to an error"
+msgstr "yanlış format nedeniyle"
+
+#. 2.2/applet.js:20
+msgid "this applet is only supported by"
+msgstr ""
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -114,89 +127,91 @@ msgstr ""
 "Alacakaranlık(gün doğumu/batımı) zamanlarında karanlık ve aydınlık temalar "
 "arasında otomatik geçiş yapın."
 
-#. settings-schema.json->settings->title
+#. 5.8->settings-schema.json->settings->title
 msgid "Settings"
 msgstr "Ayarlar"
 
-#. settings-schema.json->settings_state->title
+#. 5.8->settings-schema.json->settings_state->title
 msgid "State"
 msgstr "Durum"
 
-#. settings-schema.json->settings_control->title
+#. 5.8->settings-schema.json->settings_control->title
 msgid "Control"
 msgstr "Kontrol"
 
-#. settings-schema.json->settings_location->title
+#. 5.8->settings-schema.json->settings_location->title
 msgid "Location"
 msgstr "Konum"
 
-#. settings-schema.json->light-mode_themes->title
-#. settings-schema.json->dark-mode_themes->title
+#. 5.8->settings-schema.json->light-mode_themes->title
+#. 5.8->settings-schema.json->dark-mode_themes->title
 msgid "Themes"
 msgstr "Temalar"
 
-#. settings-schema.json->light-mode_others->title
-#. settings-schema.json->dark-mode_others->title
+#. 5.8->settings-schema.json->light-mode_others->title
+#. 5.8->settings-schema.json->dark-mode_others->title
 msgid "Others"
 msgstr "Diğerleri"
 
-#. settings-schema.json->light-mode_background->title
-#. settings-schema.json->dark-mode_background->title
+#. 5.8->settings-schema.json->light-mode_background->title
+#. 5.8->settings-schema.json->dark-mode_background->title
 msgid "Desktop background"
 msgstr "Masaüstü arka planı"
 
-#. settings-schema.json->light-mode_commands->title
-#. settings-schema.json->dark-mode_commands->title
+#. 5.8->settings-schema.json->light-mode_commands->title
+#. 5.8->settings-schema.json->dark-mode_commands->title
 msgid "Custom commands"
 msgstr "Özel komutlar"
 
-#. settings-schema.json->settings_control_switch_auto-mode->description
+#. 5.8->settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
 msgstr "Modları otomatik olarak değiştirin"
 
-#. settings-schema.json->settings_control_switch_auto-mode->tooltip
+#. 5.8->settings-schema.json->settings_control_switch_auto-mode->tooltip
 msgid ""
 "Automatically switch between light and dark modes based on the location and "
 "time of day"
 msgstr ""
-"Konum ve günün saatine göre aydınlık ve karanlık modlar arasında "
-"otomatik geçiş yapın"
+"Konum ve günün saatine göre aydınlık ve karanlık modlar arasında otomatik "
+"geçiş yapın"
 
-#. settings-schema.json->settings_state_switch_dark-mode->description
+#. 5.8->settings-schema.json->settings_state_switch_dark-mode->description
 msgid "Light/dark mode"
 msgstr "Aydınlık/karanlık mod"
 
-#. settings-schema.json->settings_state_switch_dark-mode->tooltip
+#. 5.8->settings-schema.json->settings_state_switch_dark-mode->tooltip
 msgid "Toggle light or dark mode manually"
 msgstr "Aydınlık veya karanlık modu manuel olarak değiştirin"
 
-#. settings-schema.json->settings_location_switch_sync-from-
+#. 5.8->settings-schema.json->settings_location_switch_sync-from-
 #. timezone->description
 msgid "Sync from the system"
 msgstr "Sistemden senkronize edin"
 
-#. settings-schema.json->settings_location_switch_sync-from-timezone->tooltip
+#. 5.8->settings-schema.json->settings_location_switch_sync-from-
+#. timezone->tooltip
 msgid ""
 "Dynamically sync the location coordinates from the region and city defined "
 "in the system using a local database"
 msgstr ""
-"Yerel bir veritabanı kullanarak sistemde tanımlanan bölge ve şehirden "
-"konum koordinatlarını dinamik olarak senkronize eder"
+"Yerel bir veritabanı kullanarak sistemde tanımlanan bölge ve şehirden konum "
+"koordinatlarını dinamik olarak senkronize eder"
 
-
-#. settings-schema.json->settings_location_button_open-os-
+#. 5.8->settings-schema.json->settings_location_button_open-os-
 #. settings->description
-#. settings-schema.json->light-mode_themes_button_open-os-
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
 #. settings->description
-#. settings-schema.json->light-mode_background_button_open-os-
+#. 5.8->settings-schema.json->light-mode_background_button_open-os-
 #. settings->description
-#. settings-schema.json->dark-mode_themes_button_open-os-settings->description
-#. settings-schema.json->dark-mode_background_button_open-os-
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->description
+#. 5.8->settings-schema.json->dark-mode_background_button_open-os-
 #. settings->description
 msgid "Open the system settings"
 msgstr "Sistem ayarlarını açın"
 
-#. settings-schema.json->settings_location_button_open-os-settings->tooltip
+#. 5.8->settings-schema.json->settings_location_button_open-os-
+#. settings->tooltip
 msgid ""
 "Open the system's settings window to select the region and city for the time "
 "zone"
@@ -204,187 +219,265 @@ msgstr ""
 "Saat dilimi için bölge ve şehir seçmek üzere sistemin ayarlar penceresini "
 "açın"
 
-#. settings-schema.json->settings_location_entry_latitude->description
+#. 5.8->settings-schema.json->settings_location_entry_latitude->description
 msgid "Latitude"
 msgstr "Enlem"
 
-#. settings-schema.json->settings_location_entry_latitude->tooltip
+#. 5.8->settings-schema.json->settings_location_entry_latitude->tooltip
 msgid "Geographical latitude in decimal degrees"
 msgstr "Ondalık derece cinsinden coğrafi enlem"
 
-#. settings-schema.json->settings_location_entry_longitude->description
+#. 5.8->settings-schema.json->settings_location_entry_longitude->description
 msgid "Longitude"
 msgstr "Boylam"
 
-#. settings-schema.json->settings_location_entry_longitude->tooltip
+#. 5.8->settings-schema.json->settings_location_entry_longitude->tooltip
 msgid "Geographical longitude in decimal degrees"
 msgstr "Ondalık derece cinsinden coğrafi boylam"
 
-#. settings-schema.json->settings_location_button_show-twilight-
+#. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-msgid "Check today's switch times in a notification"
+#, fuzzy
+msgid "Show switch times in a notification"
 msgstr "Bugünün geçiş zamanlarını bir bildirimde kontrol edin"
 
-#. settings-schema.json->settings_location_button_show-twilight-times->tooltip
+#. 5.8->settings-schema.json->settings_location_button_show-twilight-
+#. times->tooltip
 msgid ""
 "Show today's switch times for light and dark modes based on the current "
 "location via a system notification message"
-msgstr "Bugünün geçiş zamanlarını şu anki konum bilgileriyle birlikte bir "
-"sistem bildirim mesajı aracılığıyla görüntüleyin"
+msgstr ""
+"Bugünün geçiş zamanlarını şu anki konum bilgileriyle birlikte bir sistem "
+"bildirim mesajı aracılığıyla görüntüleyin"
 
-#. settings-schema.json->light-mode_themes_button_open-os-settings->tooltip
-#. settings-schema.json->dark-mode_themes_button_open-os-settings->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
+#. settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->tooltip
 msgid "Open the system's settings window to select the themes"
 msgstr "Temaları seçmek için sistemin ayarlar penceresini açın"
 
-#. settings-schema.json->light-mode_themes_button_detect->description
-#. settings-schema.json->light-mode_background_button_detect->description
-#. settings-schema.json->dark-mode_themes_button_detect->description
-#. settings-schema.json->dark-mode_background_button_detect->description
+#. 5.8->settings-schema.json->light-mode_themes_button_detect->description
+#. 5.8->settings-schema.json->light-mode_background_button_detect->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_detect->description
+#. 5.8->settings-schema.json->dark-mode_background_button_detect->description
 msgid "Detect from the system"
 msgstr "Sistemden algıla"
 
-#. settings-schema.json->light-mode_themes_button_detect->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_button_detect->tooltip
 msgid ""
 "Detect the system's themes currently set and assign them to the light mode"
 msgstr "Sistemde şu anda ayarlı olan temaları algılar ve aydınlık moda atar"
 
-#. settings-schema.json->light-mode_themes_entry_mouse-pointer->description
-#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->description
+#. 5.8->settings-schema.json->light-mode_themes_entry_mouse-
+#. pointer->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_mouse-
+#. pointer->description
 msgid "Mouse pointer"
 msgstr "Fare imleci"
 
-#. settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
-#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
 msgid "Name of the mouse pointer theme"
 msgstr "Fare imleci temasının adı"
 
-#. settings-schema.json->light-mode_themes_entry_applications->description
-#. settings-schema.json->dark-mode_themes_entry_applications->description
+#. 5.8->settings-schema.json->light-
+#. mode_themes_entry_applications->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_applications->description
 msgid "Applications"
 msgstr "Uygulamalar"
 
-#. settings-schema.json->light-mode_themes_entry_applications->tooltip
-#. settings-schema.json->dark-mode_themes_entry_applications->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_applications->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_applications->tooltip
 msgid "Name of the applications theme (GTK theme)"
 msgstr "Uygulamaların temasının adı (GTK teması)"
 
-#. settings-schema.json->light-mode_themes_entry_icons->description
-#. settings-schema.json->dark-mode_themes_entry_icons->description
+#. 5.8->settings-schema.json->light-mode_themes_entry_icons->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_icons->description
 msgid "Icons"
 msgstr "İkonlar"
 
-#. settings-schema.json->light-mode_themes_entry_icons->tooltip
-#. settings-schema.json->dark-mode_themes_entry_icons->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_icons->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_icons->tooltip
 msgid "Name of the icons theme"
 msgstr "İkonların temasının adı"
 
-#. settings-schema.json->light-mode_themes_entry_desktop->description
-#. settings-schema.json->dark-mode_themes_entry_desktop->description
+#. 5.8->settings-schema.json->light-mode_themes_entry_desktop->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_desktop->description
 msgid "Desktop"
 msgstr "Masaüstü"
 
-#. settings-schema.json->light-mode_themes_entry_desktop->tooltip
-#. settings-schema.json->dark-mode_themes_entry_desktop->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_desktop->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_desktop->tooltip
 msgid "Name of the desktop theme (Cinnamon theme)"
 msgstr "Masaüstü temasının adı (Cinnamon teması)"
 
-#. settings-schema.json->light-mode_themes_button_apply->description
-#. settings-schema.json->light-mode_background_button_apply->description
-#. settings-schema.json->dark-mode_themes_button_apply->description
-#. settings-schema.json->dark-mode_background_button_apply->description
-msgid "Apply to the system"
+#. 5.8->settings-schema.json->light-mode_themes_button_apply->description
+#. 5.8->settings-schema.json->light-mode_background_button_apply->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
+#. 5.8->settings-schema.json->dark-mode_background_button_apply->description
+#, fuzzy
+msgid "Test applying to the system"
 msgstr "Sisteme uygula"
 
-#. settings-schema.json->light-mode_themes_button_apply->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
 msgstr "Aydınlık mod temalarını sisteme manuel olarak uygulayın"
 
-#. settings-schema.json->both-modes_background_switch_enable->description
+#. 5.8->settings-schema.json->both-modes_background_switch_enable->description
 msgid "Set desktop background"
 msgstr "Masaüstü arka planını ayarlayın"
 
-#. settings-schema.json->both-modes_background_switch_enable->tooltip
+#. 5.8->settings-schema.json->both-modes_background_switch_enable->tooltip
 msgid "Enable setting the desktop backgrounds for light and dark modes"
-msgstr "Aydınlık ve karanlık modlar için masaüstü arka planlarını etkinleştirin"
+msgstr ""
+"Aydınlık ve karanlık modlar için masaüstü arka planlarını etkinleştirin"
 
-#. settings-schema.json->light-mode_commands_switch_enable->description
-#. settings-schema.json->dark-mode_commands_switch_enable->description
+#. 5.8->settings-schema.json->light-mode_commands_switch_enable->description
+#. 5.8->settings-schema.json->dark-mode_commands_switch_enable->description
 msgid "Launch custom commands"
 msgstr "Özel komutları başlatın"
 
-#. settings-schema.json->light-mode_commands_switch_enable->tooltip
+#. 5.8->settings-schema.json->light-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to light mode"
 msgstr "Aydınlık mod geçişinde çalıştırılacak komutları etkinleştirin"
 
-#. settings-schema.json->light-mode_background_button_open-os-
+#. 5.8->settings-schema.json->light-mode_background_button_open-os-
 #. settings->tooltip
-#. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_button_open-os-
+#. settings->tooltip
 msgid "Open the system's settings window to set the background settings"
 msgstr "Arka plan ayarlarını yapmak için sistemin ayarlar penceresini açın"
 
-#. settings-schema.json->light-mode_background_button_detect->tooltip
+#. 5.8->settings-schema.json->light-mode_background_button_detect->tooltip
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "light mode"
 msgstr "Sistemde etkin olan arka plan ayarlarını algılar ve aydınlık moda atar"
 
-#. settings-schema.json->light-mode_background_switch_slideshow->description
-#. settings-schema.json->dark-mode_background_switch_slideshow->description
+#. 5.8->settings-schema.json->light-
+#. mode_background_switch_slideshow->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_switch_slideshow->description
 msgid "Slideshow"
 msgstr "Slayt gösterimi"
 
-#. settings-schema.json->light-mode_background_switch_slideshow->tooltip
-#. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+#. 5.8->settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_switch_slideshow->tooltip
 msgid "Set the desktop background to be a slideshow"
 msgstr "Masaüstü arka planını slayt gösterimi yapmak için ayarlayın"
 
-#. settings-schema.json->light-mode_background_filechooser_file->description
-#. settings-schema.json->dark-mode_background_filechooser_file->description
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_file->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_filechooser_file->description
 msgid "Image file"
 msgstr "Resim dosyası"
 
-#. settings-schema.json->light-mode_background_filechooser_file->tooltip
-#. settings-schema.json->dark-mode_background_filechooser_file->tooltip
+#. 5.8->settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_filechooser_file->tooltip
 msgid "Image file to be set as the desktop background"
 msgstr "Masaüstü arka planı için ayarlanacak görüntü dosyası"
 
-#. settings-schema.json->light-mode_background_filechooser_folder->description
-#. settings-schema.json->dark-mode_background_filechooser_folder->description
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_folder->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_filechooser_folder->description
 msgid "Images folder"
 msgstr "Resimler klasörü"
 
-#. settings-schema.json->light-mode_background_filechooser_folder->tooltip
-#. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_folder->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_filechooser_folder->tooltip
 msgid "Folder containing images to be set for the desktop background slideshow"
 msgstr "Masaüstü arka planı slayt gösterimi resimlerinin bulunduğu klasör"
 
-#. settings-schema.json->light-mode_background_button_apply->tooltip
+#. 5.8->settings-schema.json->light-mode_background_button_apply->tooltip
 msgid "Apply the light mode background settings to the system manually"
 msgstr "Aydınlık mod arka plan ayarlarını sisteme manuel olarak uygulayın"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Name"
 msgstr "Adı"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Active"
 msgstr "Aktif"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Expiry (s)"
 msgstr "Zaman aşımı (s)"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Command"
 msgstr "Komut"
 
-#. settings-schema.json->light-mode_commands_list->tooltip
-#. settings-schema.json->dark-mode_commands_list->tooltip
+#. 5.8->settings-schema.json->light-mode_commands_list->tooltip
+#, fuzzy
+msgid ""
+"List of commands to be executed when switching to this mode\n"
+"\n"
+"Notes:\n"
+"- the name's purpose is for error messages\n"
+"- the expiry time terminates the command's process early\n"
+"- an expiry of 0 second means never\n"
+"- a process refusing to terminate 10 seconds after the expiry is killed\n"
+"- the path is in the user's home directory (~/)\n"
+"- the error messages are displayed in a notification and reports stderr"
+msgstr ""
+"Bu modda çalıştırılacak komutların listesi\n"
+"\n"
+"Notlar:\n"
+"- ismin amacı hata mesajları içindir\n"
+"- zaman aşımı komutun işlemini sonlandırır\n"
+"- 0 saniye anlamı asla sonlanmaz demektir\n"
+"- her alt süreç zaman aşımına uğramaz\n"
+"- yol ~ dizininde bulunur\n"
+"- hata mesajları, dönüş durumu 0 olmadığında stderr'i raporlar ve bir "
+"bildirimde görüntülenir"
+
+#. 5.8->settings-schema.json->light-mode_commands_button_launch->description
+#. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
+#, fuzzy
+msgid "Test commands launch"
+msgstr "Özel komutlar"
+
+#. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
+#, fuzzy
+msgid "Test launching the commands set for the light mode"
+msgstr "Aydınlık mod için ayarlanan komutları başlatın"
+
+#. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the dark mode"
+msgstr ""
+"Sistemde şu anda yapılandırılmış olan temaları algılar ve karanlık moda atar"
+
+#. 5.8->settings-schema.json->dark-mode_themes_button_apply->tooltip
+msgid "Apply the dark mode themes to the system manually"
+msgstr "Karanlık mod temalarını sisteme manuel olarak uygulayın"
+
+#. 5.8->settings-schema.json->dark-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to dark mode"
+msgstr "Karanlık mod geçişinde çalıştırılacak komutları etkinleştirin"
+
+#. 5.8->settings-schema.json->dark-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"dark mode"
+msgstr ""
+"Sistemde şu anda yapılandırılmış olan arka plan ayarlarını algılar ve "
+"karanlık moda atar"
+
+#. 5.8->settings-schema.json->dark-mode_background_button_apply->tooltip
+msgid "Apply the dark mode background settings to the system manually"
+msgstr "Karanlık mod arka plan ayarlarını sisteme manuel olarak uygulayın"
+
+#. 5.8->settings-schema.json->dark-mode_commands_list->tooltip
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -405,41 +498,10 @@ msgstr ""
 "- 0 saniye anlamı asla sonlanmaz demektir\n"
 "- her alt süreç zaman aşımına uğramaz\n"
 "- yol ~ dizininde bulunur\n"
-"- hata mesajları, dönüş durumu 0 olmadığında stderr'i raporlar ve "
-"bir bildirimde görüntülenir"
+"- hata mesajları, dönüş durumu 0 olmadığında stderr'i raporlar ve bir "
+"bildirimde görüntülenir"
 
-#. settings-schema.json->light-mode_commands_button_launch->description
-#. settings-schema.json->dark-mode_commands_button_launch->description
-msgid "Launch commands"
-msgstr "Komutları başlat"
-
-#. settings-schema.json->light-mode_commands_button_launch->tooltip
-msgid "Launch the commands set for the light mode"
-msgstr "Aydınlık mod için ayarlanan komutları başlatın"
-
-#. settings-schema.json->dark-mode_themes_button_detect->tooltip
-msgid ""
-"Detect the system's themes currently set and assign them to the dark mode"
-msgstr "Sistemde şu anda yapılandırılmış olan temaları algılar ve karanlık moda atar"
-
-#. settings-schema.json->dark-mode_themes_button_apply->tooltip
-msgid "Apply the dark mode themes to the system manually"
-msgstr "Karanlık mod temalarını sisteme manuel olarak uygulayın"
-
-#. settings-schema.json->dark-mode_commands_switch_enable->tooltip
-msgid "Enable setting commands to be launched when switching to dark mode"
-msgstr "Karanlık mod geçişinde çalıştırılacak komutları etkinleştirin"
-
-#. settings-schema.json->dark-mode_background_button_detect->tooltip
-msgid ""
-"Detect the system's background settings currently set and assign them to the "
-"dark mode"
-msgstr "Sistemde şu anda yapılandırılmış olan arka plan ayarlarını algılar ve karanlık moda atar"
-
-#. settings-schema.json->dark-mode_background_button_apply->tooltip
-msgid "Apply the dark mode background settings to the system manually"
-msgstr "Karanlık mod arka plan ayarlarını sisteme manuel olarak uygulayın"
-
-#. settings-schema.json->dark-mode_commands_button_launch->tooltip
-msgid "Launch the commands set for the dark mode"
+#. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
+#, fuzzy
+msgid "Test launching the commands set for the dark mode"
 msgstr "Karanlık mod için ayarlanan komutları başlatın"

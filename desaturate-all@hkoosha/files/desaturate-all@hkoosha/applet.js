@@ -1,10 +1,17 @@
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Settings = imports.ui.settings;
-const UUID = "desaturate-all@hkoosha";
 const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
+const Gettext = imports.gettext;
+const Gio = imports.gi.Gio;
+
+const UUID = "desaturate-all@hkoosha";
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet() {
     this._init.apply(this, arguments);
@@ -34,6 +41,10 @@ MyApplet.prototype = {
         this.settings.connect( "changed::start-timechooser", Lang.bind(this, this.on_time_changed));
         this.settings.connect( "changed::end-timechooser",   Lang.bind(this, this.on_time_changed));
 
+        this.desktop_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
+        this.set_applet_tooltip("time"); // initial value so that the show/hide events will occur
+        this._applet_tooltip._tooltip.connect( "show", Lang.bind(this, this.on_tooltip_shown));
+
         this.on_keybinding_changed();
         this.on_saturation_changed();
         if (!this.settings.getValue("automatic")) {
@@ -42,6 +53,40 @@ MyApplet.prototype = {
         } else {
            this._toggleEffect_based_on_time("init");
         }
+    },
+
+    on_tooltip_shown() {
+       let ttText;
+       let effectEnabled = Main.uiGroup.has_effects() && Main.uiGroup.get_effects().indexOf(this.effect) > -1;
+       if (effectEnabled) {
+          ttText = _("Click to disable effect");
+       } else {
+          ttText = _("Click to desaturate the desktop")
+       }
+       if (this.settings.getValue("automatic")) {
+          let toggleTime = this._get_toggle_time();
+          let hours = Math.floor(toggleTime.seconds / 60 / 60);
+          if (hours === 0 ) {
+             let min = Math.floor((toggleTime.seconds / 60) + 1);
+             if (toggleTime.enable) {
+                ttText += "\n" + _("Will automatically desaturate in" );
+             } else {
+                ttText += "\n" + _("Will automatically disable in");
+             }
+             ttText += ` ${min} ` + _("minutes");
+          } else {
+             if (toggleTime.enable) {
+                ttText += "\n" + _("Will automatically desaturate at") + " ";
+             } else {
+                ttText += "\n" + _("Will automatically disable at") + " ";
+             }
+             let use_24h = this.desktop_settings.get_boolean("clock-use-24h");
+             let ttTimeFormat = new Intl.DateTimeFormat(undefined, {hour: "numeric", minute: "2-digit", hour12: !use_24h});
+
+             ttText += ttTimeFormat.format(toggleTime.time);
+          }
+       }
+       this.set_applet_tooltip( ttText );
     },
 
     _toggleEffect(enable = null) {
@@ -55,15 +100,7 @@ MyApplet.prototype = {
         }
     },
 
-    _toggleEffect_based_on_time() {
-        if (this.toggleDelay) {
-            Mainloop.source_remove(this.toggleDelay);
-            this.toggleDelay = null;
-        }
-
-        if (!this.settings.getValue("automatic"))
-           return;
-
+    _get_toggle_time() {
         const date = new Date();
         const enableAt = new Date();
         const disableAt = new Date();
@@ -82,16 +119,32 @@ MyApplet.prototype = {
            disableAt.setDate( disableAt.getDate() + 1 );
 
         let enable = (date < disableAt && date >= enableAt);
-        this._toggleEffect( enable );
-
         let diffTime;
+        let time;
         if (enable) {
            diffTime = Math.abs(disableAt - date) / 1000;
+           time = disableAt;
            //log( `Disabling in ${diffTime} seconds` );
         } else {
            diffTime = Math.abs(enableAt - date) / 1000;
+           time = enableAt;
            //log( `Enabling in ${diffTime} seconds` );
         }
+        return {enable: !enable, seconds: diffTime, time: time};
+    },
+
+    _toggleEffect_based_on_time() {
+        if (this.toggleDelay) {
+            Mainloop.source_remove(this.toggleDelay);
+            this.toggleDelay = null;
+        }
+
+        if (!this.settings.getValue("automatic"))
+           return;
+
+        let toggleTime = this._get_toggle_time();
+        this._toggleEffect( !toggleTime.enable );
+        let diffTime = toggleTime.seconds;
         this.toggleDelay = Mainloop.timeout_add_seconds(diffTime, () => {this.toggleDelay = null; this._toggleEffect_based_on_time();} );
     },
 

@@ -1,3 +1,12 @@
+## 1.2.6 - 18.05.2025
+
+- Corrected commands launching not supporting `;` in the command
+
+## 1.2.5 - 18.05.2025
+
+- Corrected `g++` dependancy wrongly verified as `gcc`
+- Added explicit notification for not supported versions of Cinnamon
+
 ## 1.2.4 - 13.05.2025
 
 - Added TypeScript checks via `jsconfig.json`
