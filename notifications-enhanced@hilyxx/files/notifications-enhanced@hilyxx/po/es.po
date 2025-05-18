@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-18 09:30-0400\n"
-"PO-Revision-Date: 2025-05-18 13:52+0200\n"
+"PO-Revision-Date: 2025-05-18 11:05-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -111,11 +111,10 @@ msgstr ""
 "notificaciones."
 
 #. settings-schema.json->showDisturbIcon->description
-#, fuzzy
 msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
 msgstr ""
-"Mostrar el icono \"No molestar\" incluso cuando la opción de mostrar bandeja "
-"vacía está desactivada"
+"Mostrar el icono 'No molestar' incluso cuando la opción de mostrar bandeja "
+"vacía esté deshabilitada"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 msgid ""
@@ -149,15 +148,13 @@ msgstr ""
 "Establezca combinaciones de teclas para borrar todas las notificaciones."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Disable notifications"
-msgstr "Habilitar notificaciones"
+msgstr "Deshabilitar notificaciones"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to disable notifications."
 msgstr ""
-"Establezca la(s) combinación(es) de teclas para habilitar o deshabilitar las "
+"Establezca la(s) combinación(es) de teclas para desactivar las "
 "notificaciones."
 
 #. settings-schema.json->btnSystemSettings->description
