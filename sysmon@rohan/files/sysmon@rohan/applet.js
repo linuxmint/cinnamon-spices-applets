@@ -1,4 +1,5 @@
 const UUID = "sysmon@rohan";
+
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
@@ -6,12 +7,16 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+const Util = imports.misc.util;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const HOME_DIR = GLib.get_home_dir();
+
+Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
 }
+
 
 let GTop, failed = false;
 try {
@@ -44,11 +49,10 @@ MyApplet.prototype = {
 
       this._applet_tooltip._tooltip.set_style("text-align: left; font-family: monospace; font-size: 9pt");
 
-      this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Cache"), "user-trash", () => {
-        let [, argv] = GLib.shell_parse_argv("pkexec sh -c 'echo 1 >/proc/sys/vm/drop_caches'");
-        let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
-        GLib.spawn_async(null, argv, null, flags, null);
-      }));
+this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Page Cache"), "user-trash", () => {
+    Util.spawnCommandLineAsync("pkexec sh -c 'sync && echo 1 > /proc/sys/vm/drop_caches'");
+}));
+      
 
 
 
@@ -59,8 +63,7 @@ MyApplet.prototype = {
       this.memLabel = new St.Label();
 
 
-      let homeDir = GLib.get_home_dir();
-      let iconBasePath = homeDir + "/.local/share/cinnamon/applets/sysmon@rohan/icons";
+      let iconBasePath = HOME_DIR + "/.local/share/cinnamon/applets/sysmon@rohan/icons";
 
       let cpuIconPath = iconBasePath + "/cpu-symbolic.svg";
       let memIconPath = iconBasePath + "/ram-symbolic.svg";
@@ -172,15 +175,26 @@ MyApplet.prototype = {
     this.timeout = Mainloop.timeout_add_seconds(this.updateInterval, () => this._update());
   },
 
+	
+   _runSysMon: function() {
 
-  on_applet_clicked: function() {
-    if (!failed) {
-      let [, argv] = GLib.shell_parse_argv("gnome-system-monitor");
-      let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
-      GLib.spawn_async(null, argv, null, flags, null);
+const _appSys = imports.gi.Cinnamon.AppSystem.get_default();   
+    let gnomeSystemMonitor = _appSys.lookup_app('gnome-system-monitor.desktop');
+    
+	   if (gnomeSystemMonitor) {
+
+      gnomeSystemMonitor.activate();
+      return;
     }
-
+    gnomeSystemMonitor = _appSys.lookup_app('org.gnome.SystemMonitor.desktop');
+    if (gnomeSystemMonitor) {
+	    gnomeSystemMonitor.activate();
+    }
   },
+
+  on_applet_clicked: function(event) {
+    this._runSysMon();
+  }, 
 
   on_applet_removed_from_panel: function() {
     if (!failed) {
