@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-13 23:47+0100\n"
+"PO-Revision-Date: 2025-05-18 23:30+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+
+#: applet.js:159
+msgid "Session"
+msgstr "工作階段"
+
+#: applet.js:226
+msgid "Lock Screen"
+msgstr "鎖定螢幕"
+
+#: applet.js:230
+msgid "Switch User"
+msgstr "切換使用者"
+
+#: applet.js:235
+msgid "Guest Session"
+msgstr "訪客工作階段"
+
+#: applet.js:240
+msgid "Log Off"
+msgstr "登出"
+
+#: applet.js:246
+msgid "Suspend"
+msgstr "待命"
+
+#: applet.js:251
+msgid "Sleep"
+msgstr "睡眠"
+
+#: applet.js:256
+msgid "Hibernate"
+msgstr "休眠"
+
+#: applet.js:262
+msgid "Restart"
+msgstr "重新啟動"
+
+#: applet.js:266
+msgid "Shut Down"
+msgstr "關機"
+
+#. sessionManager@scollins->settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr "面板圖示"
+
+#. sessionManager@scollins->settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr "圖示大小"
+
+#. sessionManager@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "像素"
+
+#. sessionManager@scollins->settings-
+#. schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr "在選單中使用象徵性圖示"
+
+#. sessionManager@scollins->settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr "面板文字"
+
+#. sessionManager@scollins->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "一般設定"
+
+#. sessionManager@scollins->metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr "快速存取關機、重新啟動等功能"
+
+#. sessionManager@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - 作者"
+
+#. sessionManager@scollins->metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in"
+" Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+"Session Manager 是一款可輕鬆管理工作階段的面板小程式，"
+"提供關機、重新啟動、登出、切換使用者等功能。"
+"已於 Arch、Fedora 與 Linux Mint 上測試，並支援多種軟體設定。"
+"若系統尚未支援您目前的特定設定，請至 GitHub 提出功能需求，我們將會盡快新增支援。"
+
+#. sessionManager@scollins->metadata.json->name
+msgid "Session Manager"
+msgstr "Session Manager"
