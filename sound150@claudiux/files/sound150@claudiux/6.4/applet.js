@@ -2142,8 +2142,19 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _notifyVolumeChange(stream) {
-        if (this.volumeSoundEnabled)
-            Main.soundManager.play("volume");
+        if (this.volumeSoundEnabled) {
+            let volume;
+            if (typeof(this.volume) == "string") {
+                if (this.volume.endsWith("%"))
+                    volume = parseInt(this.volume.slice(0, -1));
+                else
+                    volume = parseInt(this.volume);
+            } else {
+                volume = this.volume;
+            }
+            if (volume > 0 && volume < this.maxVolume)
+                Main.soundManager.play("volume");
+        }
     }
 
     _mutedChanged(object, param_spec, property) {
