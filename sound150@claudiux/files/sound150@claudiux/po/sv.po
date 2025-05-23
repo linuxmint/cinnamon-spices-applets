@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sound150@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-24 14:35+0200\n"
+"POT-Creation-Date: 2025-05-23 09:54+0200\n"
 "PO-Revision-Date: 2024-03-04 05:52+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -20,22 +20,22 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
-#. 2.8/applet.js:65 6.4/applet.js:199 3.4/applet.js:65
+#. 2.8/applet.js:65 6.4/applet.js:204 3.4/applet.js:65
 msgid "Playing"
 msgstr "Spelar"
 
 #. 6.2/applet.js:139 4.4/applet.js:73 5.4/applet.js:133 4.6/applet.js:74
-#. 2.8/applet.js:66 6.4/applet.js:200 3.4/applet.js:66
+#. 2.8/applet.js:66 6.4/applet.js:205 3.4/applet.js:66
 msgid "Paused"
 msgstr "Pausad"
 
 #. 6.2/applet.js:140 4.4/applet.js:74 5.4/applet.js:134 4.6/applet.js:75
-#. 2.8/applet.js:67 6.4/applet.js:201 3.4/applet.js:67
+#. 2.8/applet.js:67 6.4/applet.js:206 3.4/applet.js:67
 msgid "Stopped"
 msgstr "Stoppad"
 
 #. 6.2/applet.js:238 6.2/applet.js:2042 4.4/applet.js:1034 5.4/applet.js:224
-#. 5.4/applet.js:1964 4.6/applet.js:1050 2.8/applet.js:1277 6.4/applet.js:550
+#. 5.4/applet.js:1964 4.6/applet.js:1050 2.8/applet.js:1277 6.4/applet.js:561
 #. 6.4/lib/volumeSlider.js:37 6.4/lib/volumeSlider.js:43 3.4/applet.js:1199
 msgid "Microphone"
 msgstr "Mikrofon"
@@ -43,7 +43,7 @@ msgstr "Mikrofon"
 #. 6.2/applet.js:254 6.2/applet.js:2954 6.2/applet.js:3122 4.4/applet.js:1403
 #. 4.4/applet.js:1497 5.4/applet.js:241 5.4/applet.js:2742 5.4/applet.js:2902
 #. 4.6/applet.js:137 4.6/applet.js:1428 4.6/applet.js:1523 2.8/applet.js:1650
-#. 2.8/applet.js:1735 6.4/applet.js:1795 6.4/applet.js:1999
+#. 2.8/applet.js:1735 6.4/applet.js:1819 6.4/applet.js:2023
 #. 6.4/lib/volumeSlider.js:55 3.4/applet.js:1577 3.4/applet.js:1662
 msgid "Volume"
 msgstr "Volym"
@@ -62,7 +62,7 @@ msgstr ""
 #. 5.4/applet.js:1401 5.4/applet.js:1404 5.4/applet.js:1407 5.4/applet.js:1441
 #. 5.4/applet.js:1450 5.4/applet.js:2715 5.4/applet.js:2749 4.6/applet.js:600
 #. 4.6/applet.js:727 4.6/applet.js:731 2.8/applet.js:529 2.8/applet.js:761
-#. 2.8/applet.js:765 6.4/applet.js:1759 6.4/applet.js:1804
+#. 2.8/applet.js:765 6.4/applet.js:1783 6.4/applet.js:1828
 #. 6.4/lib/s150PopupMenu.js:272 6.4/lib/s150PopupMenu.js:586
 #. 6.4/lib/s150PopupMenu.js:589 6.4/lib/s150PopupMenu.js:591
 #. 6.4/lib/s150PopupMenu.js:625 6.4/lib/s150PopupMenu.js:633 3.4/applet.js:534
@@ -81,7 +81,7 @@ msgstr "Okänt album"
 #. 6.2/applet.js:1497 6.2/applet.js:2964 4.4/applet.js:593 4.4/applet.js:739
 #. 5.4/applet.js:1120 5.4/applet.js:1435 5.4/applet.js:1444 5.4/applet.js:1447
 #. 5.4/applet.js:1455 5.4/applet.js:2752 4.6/applet.js:602 4.6/applet.js:743
-#. 2.8/applet.js:531 2.8/applet.js:777 6.4/applet.js:1807
+#. 2.8/applet.js:531 2.8/applet.js:777 6.4/applet.js:1831
 #. 6.4/lib/s150PopupMenu.js:274 6.4/lib/s150PopupMenu.js:619
 #. 6.4/lib/s150PopupMenu.js:628 6.4/lib/s150PopupMenu.js:631
 #. 6.4/lib/s150PopupMenu.js:638 3.4/applet.js:536 3.4/applet.js:782
@@ -161,59 +161,59 @@ msgid "Shuffle"
 msgstr "Blanda"
 
 #. 6.2/applet.js:2023 4.4/applet.js:1019 5.4/applet.js:1945 4.6/applet.js:1035
-#. 2.8/applet.js:1262 6.4/applet.js:445 3.4/applet.js:1184
+#. 2.8/applet.js:1262 6.4/applet.js:456 3.4/applet.js:1184
 msgid "Mute output"
 msgstr "Stäng av ljudet"
 
 #. 6.2/applet.js:2024 4.4/applet.js:1020 5.4/applet.js:1946 4.6/applet.js:1036
-#. 2.8/applet.js:1263 6.4/applet.js:446 3.4/applet.js:1185
+#. 2.8/applet.js:1263 6.4/applet.js:457 3.4/applet.js:1185
 msgid "Mute input"
 msgstr "Stäng av ingångsljudet"
 
 #. 6.2/applet.js:2034 4.4/applet.js:1026 5.4/applet.js:1956 4.6/applet.js:1042
-#. 2.8/applet.js:1269 6.4/applet.js:542 3.4/applet.js:1191
+#. 2.8/applet.js:1269 6.4/applet.js:553 3.4/applet.js:1191
 msgid "Applications"
 msgstr "Program"
 
 #. 6.2/applet.js:2035 4.4/applet.js:1027 5.4/applet.js:1957 4.6/applet.js:1043
-#. 2.8/applet.js:1270 6.4/applet.js:543 3.4/applet.js:1192
+#. 2.8/applet.js:1270 6.4/applet.js:554 3.4/applet.js:1192
 msgid "Output device"
 msgstr "Utdataenhet"
 
 #. 6.2/applet.js:2044 4.4/applet.js:1036 5.4/applet.js:1966 4.6/applet.js:1052
-#. 2.8/applet.js:1280 6.4/applet.js:552 3.4/applet.js:1202
+#. 2.8/applet.js:1280 6.4/applet.js:563 3.4/applet.js:1202
 msgid "Input device"
 msgstr "Indataenhet"
 
-#. 6.2/applet.js:2057 5.4/applet.js:1979 6.4/applet.js:565
+#. 6.2/applet.js:2057 5.4/applet.js:1979 6.4/applet.js:576
 msgid "Easy Effects"
 msgstr "Lätta effekter"
 
-#. 6.2/applet.js:2064 5.4/applet.js:1986 6.4/applet.js:574
+#. 6.2/applet.js:2064 5.4/applet.js:1986 6.4/applet.js:585
 #, fuzzy
 msgid "Pulse Effects"
 msgstr "Lätta effekter"
 
-#. 6.2/applet.js:2116 5.4/applet.js:2030 6.4/applet.js:828 6.4/applet.js:852
+#. 6.2/applet.js:2116 5.4/applet.js:2030 6.4/applet.js:847 6.4/applet.js:871
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#. 6.2/applet.js:2970 5.4/applet.js:2758 6.4/applet.js:1815
+#. 6.2/applet.js:2970 5.4/applet.js:2758 6.4/applet.js:1839
 msgid "The 'playerctl' package is required!"
 msgstr "Paketet \"playerctl\" krävs!"
 
-#. 6.2/applet.js:2971 5.4/applet.js:2759 6.4/applet.js:1816
+#. 6.2/applet.js:2971 5.4/applet.js:2759 6.4/applet.js:1840
 msgid "Please select 'Install playerctl' in this menu"
 msgstr "Välj \"Installera playerctl\" i den här menyn"
 
 #. 6.2/applet.js:3110 4.4/applet.js:1397 5.4/applet.js:2890 4.6/applet.js:1417
-#. 2.8/applet.js:1644 6.4/applet.js:245 3.4/applet.js:1571
+#. 2.8/applet.js:1644 6.4/applet.js:251 3.4/applet.js:1571
 msgid "Launch player"
 msgstr "Starta spelare"
 
 #. 6.2/applet.js:3115 4.4/applet.js:1392 5.4/applet.js:2895 4.6/applet.js:1422
-#. 2.8/applet.js:1639 6.4/applet.js:247 3.4/applet.js:1566
+#. 2.8/applet.js:1639 6.4/applet.js:253 3.4/applet.js:1566
 msgid "Choose player controls"
 msgstr "Välj spelarkontroller"
 
@@ -224,111 +224,111 @@ msgstr "Välj spelarkontroller"
 #. 6.4->settings-schema.json->sectionSound1->title
 #. 3.4->settings-schema.json->section3->description
 #. 6.2/applet.js:3130 4.4/applet.js:1409 5.4/applet.js:2910 4.6/applet.js:1434
-#. 2.8/applet.js:1657 6.4/applet.js:2012 3.4/applet.js:1584
+#. 2.8/applet.js:1657 6.4/applet.js:2036 3.4/applet.js:1584
 msgid "Sound Settings"
 msgstr "Ljudinställningar"
 
 #. 6.4->settings-schema.json->button-reload-applet->description
-#. 6.2/applet.js:3135 5.4/applet.js:2915 6.4/applet.js:164
+#. 6.2/applet.js:3135 5.4/applet.js:2915 6.4/applet.js:169
 msgid "Reload this applet"
 msgstr "Ladda om det här panelprogrammet"
 
-#. 6.2/applet.js:3141 5.4/applet.js:2921 6.4/applet.js:2018
+#. 6.2/applet.js:3141 5.4/applet.js:2921 6.4/applet.js:2042
 #, fuzzy
 msgid "Remove sound applet"
 msgstr "Ladda om det här panelprogrammet"
 
-#. 6.2/applet.js:3150 5.4/applet.js:2930 6.4/applet.js:2039
+#. 6.2/applet.js:3150 5.4/applet.js:2930 6.4/applet.js:2063
 msgid "Install playerctl"
 msgstr "Installera playerctl"
 
-#. 6.4/applet.js:230 6.4/applet.js:260 6.4/applet.js:262
+#. 6.4/applet.js:236 6.4/applet.js:271 6.4/applet.js:273
 #, fuzzy
 msgid "%"
 msgstr "9%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
-#. 6.4/applet.js:583
+#. 6.4/applet.js:594
 msgid "Commands"
 msgstr ""
 
-#. 6.4/applet.js:593
+#. 6.4/applet.js:604
 msgid "Album Art desklet settings"
 msgstr ""
 
-#. 6.4/applet.js:601
+#. 6.4/applet.js:612
 #, fuzzy
 msgid "Show Album Art on desktop"
 msgstr "Visa skivomslag som ikon"
 
-#. 6.4/applet.js:719
+#. 6.4/applet.js:738
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr ""
 
-#. 6.4/applet.js:720
+#. 6.4/applet.js:739
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
 
-#. 6.4/applet.js:721 6.4/applet.js:739
+#. 6.4/applet.js:740 6.4/applet.js:758
 msgid "Desklets"
 msgstr ""
 
-#. 6.4/applet.js:722 6.4/applet.js:740 6.4/applet.js:770
+#. 6.4/applet.js:741 6.4/applet.js:759 6.4/applet.js:789
 msgid "Cancel"
 msgstr ""
 
-#. 6.4/applet.js:737
+#. 6.4/applet.js:756
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr ""
 
-#. 6.4/applet.js:738
+#. 6.4/applet.js:757
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
 
 #. metadata.json->name
-#. 6.4/applet.js:771
+#. 6.4/applet.js:790
 #, fuzzy
 msgid "Enhanced Sound applet"
 msgstr "Ladda om det här panelprogrammet"
 
-#. 6.4/applet.js:774
+#. 6.4/applet.js:793
 msgid "Enable the OSD150 extension"
 msgstr ""
 
-#. 6.4/applet.js:775
+#. 6.4/applet.js:794
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
 
-#. 6.4/applet.js:792
+#. 6.4/applet.js:811
 msgid "Download the OSD150 extension"
 msgstr ""
 
-#. 6.4/applet.js:793
+#. 6.4/applet.js:812
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
 
-#. 6.4/applet.js:1820
+#. 6.4/applet.js:1844
 #, fuzzy
 msgid "The 'imagemagick' package is required!"
 msgstr "Paketet \"playerctl\" krävs!"
 
-#. 6.4/applet.js:1821
+#. 6.4/applet.js:1845
 #, fuzzy
 msgid "Please select 'Install imagemagick' in this menu"
 msgstr "Välj \"Installera playerctl\" i den här menyn"
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
-#. 6.4/applet.js:2026
+#. 6.4/applet.js:2050
 msgid "Remove the OsdWithNumber extension"
 msgstr ""
 
-#. 6.4/applet.js:2046
+#. 6.4/applet.js:2070
 #, fuzzy
 msgid "Install imagemagick"
 msgstr "Installera playerctl"
@@ -371,7 +371,7 @@ msgstr "Genvägar"
 #. 4.4->settings-schema.json->section1->description
 #. 5.4->settings-schema.json->sectionBehavior1->title
 #. 4.6->settings-schema.json->section1->description
-#. 6.4->settings-schema.json->sectionBehavior1->title
+#. 6.4->settings-schema.json->sectionMenu1->title
 #. 3.4->settings-schema.json->section1->description
 msgid "Menu"
 msgstr "Meny"
@@ -1071,6 +1071,15 @@ msgstr ""
 "nominella värde. Använd det försiktigt. Du kan också sätta ett värde mindre "
 "än 100%, på t.ex ett barns dator."
 
+#. 6.4->settings-schema.json->page_menus->title
+#, fuzzy
+msgid "Menus"
+msgstr "Meny"
+
+#. 6.4->settings-schema.json->sectionMenu2->title
+msgid "Context Menu"
+msgstr ""
+
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
 msgstr ""
@@ -1094,6 +1103,22 @@ msgstr ""
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepAppListOpen->description
+msgid "Keep the App selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepOutputListOpen->description
+msgid "Keep the Output Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepInputListOpen->description
+msgid "Keep the Input Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepCommandListOpen->description
+msgid "Keep the Command selector open"
 msgstr ""
 
 #. 6.4->settings-schema.json->toolongchars->description

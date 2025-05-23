@@ -2,16 +2,24 @@
   "layoutsound150": {
     "type": "layout",
     "pages": [
+      "page_menus",
       "page_behavior",
       "page_sound",
       "page_icon",
       "page_shortcuts"
     ],
+    "page_menus": {
+      "type": "page",
+      "title": "Menus",
+      "sections": [
+        "sectionMenu1",
+        "sectionMenu2"
+      ]
+    },
     "page_behavior": {
       "type": "page",
       "title": "Behavior",
       "sections": [
-        "sectionBehavior1",
         "sectionBehavior2",
         "sectionBehavior3"
       ]
@@ -44,7 +52,7 @@
         "sectionCommands"
       ]
     },
-    "sectionBehavior1": {
+    "sectionMenu1": {
       "type": "section",
       "title": "Menu",
       "keys": [
@@ -54,6 +62,16 @@
         "keepChoosePlayerOpen",
         "avoidTwice",
         "showMediaOptical"
+      ]
+    },
+    "sectionMenu2": {
+      "type": "section",
+      "title": "Context Menu",
+      "keys": [
+        "keepAppListOpen",
+        "keepOutputListOpen",
+        "keepInputListOpen",
+        "keepCommandListOpen"
       ]
     },
     "sectionBehavior2": {
@@ -217,6 +235,26 @@
     "type": "switch",
     "default": true,
     "description": "Show Media-Optical icon"
+  },
+  "keepAppListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the App selector open"
+  },
+  "keepOutputListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Output Device selector open"
+  },
+  "keepInputListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Input Device selector open"
+  },
+  "keepCommandListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Command selector open"
   },
   "keyOpen": {
     "type": "keybinding",
