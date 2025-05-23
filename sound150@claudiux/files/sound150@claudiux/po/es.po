@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-23 09:54+0200\n"
-"PO-Revision-Date: 2025-04-24 09:43-0400\n"
+"PO-Revision-Date: 2025-05-23 16:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1078,13 +1078,12 @@ msgstr ""
 "inferior al 100%, por ejemplo, en la computadora de un niño."
 
 #. 6.4->settings-schema.json->page_menus->title
-#, fuzzy
 msgid "Menus"
-msgstr "Menú"
+msgstr "Menús"
 
 #. 6.4->settings-schema.json->sectionMenu2->title
 msgid "Context Menu"
-msgstr ""
+msgstr "Menú contextual"
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
@@ -1111,24 +1110,20 @@ msgid "Show Media-Optical icon"
 msgstr "Mostrar icono de medios ópticos"
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
-#, fuzzy
 msgid "Keep the App selector open"
-msgstr "Mantener abierto el selector de reproductores"
+msgstr "Mantener abierto el selector de aplicaciones"
 
 #. 6.4->settings-schema.json->keepOutputListOpen->description
-#, fuzzy
 msgid "Keep the Output Device selector open"
-msgstr "Mantener abierto el selector de reproductores"
+msgstr "Mantener abierto el selector Dispositivo de salida"
 
 #. 6.4->settings-schema.json->keepInputListOpen->description
-#, fuzzy
 msgid "Keep the Input Device selector open"
-msgstr "Mantener abierto el selector de reproductores"
+msgstr "Mantener abierto el selector Dispositivo de entrada"
 
 #. 6.4->settings-schema.json->keepCommandListOpen->description
-#, fuzzy
 msgid "Keep the Command selector open"
-msgstr "Mantener abierto el selector de reproductores"
+msgstr "Mantener abierto el selector de Comandos"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
