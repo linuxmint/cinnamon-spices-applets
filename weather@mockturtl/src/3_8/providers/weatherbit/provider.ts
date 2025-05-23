@@ -191,6 +191,7 @@ export class Weatherbit extends BaseProvider {
 					value: json.app_temp,
 					type: "temperature"
 				},
+				uvIndex: json.uv,
 				forecasts: []
 			};
 
