@@ -1,3 +1,6 @@
+### v13.0.1~20250523
+  * Minor bug fix.
+
 ### v13.0.0~20250523
   * Added the Menus tab in settings.
   * Keeps certain context menu submenus open.

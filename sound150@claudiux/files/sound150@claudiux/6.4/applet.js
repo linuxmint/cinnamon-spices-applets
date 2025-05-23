@@ -705,14 +705,30 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         if (this.context_menu_item_showDesklet)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
-        if (this._outputApplicationsMenu && this.keepAppListOpen)
-            this._outputApplicationsMenu.menu.open();
-        if (this.commands_menu_item && this.keepCommandListOpen)
-            this.commands_menu_item.menu.open();
-        if (this._selectOutputDeviceItem && this.keepOutputListOpen)
-            this._selectOutputDeviceItem.menu.open();
-        if (this._selectInputDeviceItem && this.keepInputListOpen)
-            this._selectInputDeviceItem.menu.open();
+        if (this._outputApplicationsMenu) {
+            if (this.keepAppListOpen)
+                this._outputApplicationsMenu.menu.open();
+            else
+                this._outputApplicationsMenu.menu.close();
+        }
+        if (this.commands_menu_item) {
+            if (this.keepCommandListOpen)
+                this.commands_menu_item.menu.open();
+            else
+                this.commands_menu_item.menu.close();
+        }
+        if (this._selectOutputDeviceItem) {
+            if (this.keepOutputListOpen)
+                this._selectOutputDeviceItem.menu.open();
+            else
+                this._selectOutputDeviceItem.menu.close();
+        }
+        if (this._selectInputDeviceItem) {
+            if (this.keepInputListOpen)
+                this._selectInputDeviceItem.menu.open();
+            else
+                this._selectInputDeviceItem.menu.close();
+        }
     }
 
     on_leave_event(actor, event) {
