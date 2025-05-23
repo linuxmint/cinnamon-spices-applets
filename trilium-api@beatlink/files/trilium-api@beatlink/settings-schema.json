@@ -71,7 +71,7 @@
             "This Computer" : "local",
             "Remote Server" : "remote"
         },
-        "tooltip" : "Please indicate whether this applet should point to the trilium app installed locally or a remote URL"
+        "tooltip" : "Please indicate whether this applet should point to the Trilium app installed locally or a remote URL"
     },
     "api_url": {
         "type": "entry",
@@ -159,11 +159,11 @@
     "open_on_click_toggle": {
         "type": "switch",
         "default": "true",
-        "description": "Open trilium when the applet is clicked"
+        "description": "Open Trilium when the applet is clicked"
     },
     "open_command": {
         "type": "entry",
         "default": "trilium",
-        "description": "The command to open trilium"
+        "description": "The command to open Trilium"
     }
 }
