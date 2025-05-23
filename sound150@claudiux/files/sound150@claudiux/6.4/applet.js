@@ -259,6 +259,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
         SHOW_MEDIA_OPTICAL = this.showMediaOptical;
 
+        this.settings.bind("keepAppListOpen", "keepAppListOpen");
+        this.settings.bind("keepOutputListOpen", "keepOutputListOpen");
+        this.settings.bind("keepInputListOpen", "keepInputListOpen");
+        this.settings.bind("keepCommandListOpen", "keepCommandListOpen");
+
         this.settings.bind("muteSoundOnClosing", "muteSoundOnClosing");
         this.settings.bind("startupVolume", "startupVolume");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
@@ -700,6 +705,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         if (this.context_menu_item_showDesklet)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+        if (this._outputApplicationsMenu && this.keepAppListOpen)
+            this._outputApplicationsMenu.menu.open();
+        if (this.commands_menu_item && this.keepCommandListOpen)
+            this.commands_menu_item.menu.open();
+        if (this._selectOutputDeviceItem && this.keepOutputListOpen)
+            this._selectOutputDeviceItem.menu.open();
+        if (this._selectInputDeviceItem && this.keepInputListOpen)
+            this._selectInputDeviceItem.menu.open();
     }
 
     on_leave_event(actor, event) {
