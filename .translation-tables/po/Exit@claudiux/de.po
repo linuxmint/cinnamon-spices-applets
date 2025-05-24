@@ -1,0 +1,189 @@
+# EXIT
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-04 14:43+0100\n"
+"PO-Revision-Date: 2024-11-20 18:23+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 5.4/applet.js:140
+msgid "Restart Cinnamon"
+msgstr "Starte Cinnamon neu"
+
+#. 5.4/applet.js:152
+msgid "Screen Off"
+msgstr "Bildschirm ausschalten"
+
+#. 5.4/applet.js:177
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+#. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
+msgid "Switch User"
+msgstr "Benutzer wechseln"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Performing automatic updates"
+msgstr ""
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Please wait"
+msgstr ""
+
+#. 5.4/applet.js:249 5.4/applet.js:256
+msgid "Log Out"
+msgstr "Abmelden"
+
+#. 5.4/applet.js:270 5.4/applet.js:277
+msgid "Suspend"
+msgstr "Bereitschaft"
+
+#. 5.4/applet.js:288 5.4/applet.js:298
+msgid "Hibernate"
+msgstr "Ruhezustand"
+
+#. 5.4/applet.js:312 5.4/applet.js:319
+msgid "Restart"
+msgstr "Neustart"
+
+#. 5.4/applet.js:330 5.4/applet.js:337
+msgid "Power Off"
+msgstr "Ausschalten"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
+msgstr ""
+"Cinnamon neu starten, den Bildschirm ausschalten, Bildschirm sperren, "
+"Benutzer wechseln, Abmelden, Bereitschaft, Ruhezustand, den Computer neu "
+"starten oder herunterfahren"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Beenden"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+msgid "Cinnamon restart"
+msgstr "Cinnamon neustarten"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "OSD beim Neustart von Cinnamon anzeigen"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD: Bildschirmanzeige (On Screen Display)"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+msgid "Menu options"
+msgstr "Menüpunkte"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Die Option \"Cinnamon neu starten\" anzeigen"
+
+#. 5.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Die Option \"Bereitschaft\" anzeigen"
+
+#. 5.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Die Option \"Ruhezustand\" anzeigen"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "Ruhezustand benötigt Root-User Rechte (sudo)"
+
+#. 5.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Die Option \"Neustart\" anzeigen"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Die Option \"Ausschalten\" anzeigen"
+
+#. 5.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Alle nachstehenden Menüoptionen werden möglicherweise vom System verwaltet.\n"
+"Wenn dies der Fall ist, können Sie sie nicht sehen."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+msgid "Show the Screen Off option"
+msgstr "Die Option \"Bildschirm ausschalten\" anzeigen"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr "Sekunden"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Dauer der Deaktivierung der Maus"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Um zu verhindern, dass der Monitor zu früh an geht, nachdem er ausgeschaltet "
+"wurde, wird die Maus für die hier angegebenen Sekunden deaktiviert."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Die Option \"Bildschirm sperren\" anzeigen"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Vom System verwaltet"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Die Option \"Benutzer wechseln\" anzeigen"
+
+#. 5.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Die Option \"Abmelden\" anzeigen"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Abmeldemodus"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Mit Bestätigung"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Ohne Bestätigung"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Erzwingen"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"Mit der Option \"Erzwingen\" können Sie sich ohne Einschränkungen abmelden. "
+"Nützlich, wenn mehrere Sitzungen geöffnet sind."

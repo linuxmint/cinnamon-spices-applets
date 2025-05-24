@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-22 19:52+0200\n"
+"PO-Revision-Date: 2023-10-22 19:54+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:37 applet.js:98
+msgid "Show calculator"
+msgstr "Afficher la calculatrice"
+
+#: applet.js:101
+msgid "Hide calculator"
+msgstr "Cacher la calculatrice"
+
+#. metadata.json->name
+msgid "SmallCalc"
+msgstr "Calculette (SmallCalc)"
+
+#. metadata.json->description
+msgid "A nice compact popup calculator"
+msgstr "Une belle calculatrice compacte qui apparaît d'un clic"
+
+#. settings-schema.json->definitionsheader->description
+msgid "Initial definitions"
+msgstr "Définitions initiales"
+
+#. settings-schema.json->definitions->description
+msgid "Define constants and functions to use in calculator"
+msgstr "Définir les constantes et les fonctions à utiliser dans la calculatrice"
+
+#. settings-schema.json->precisionheader->description
+msgid "Precision"
+msgstr "Précision"
+
+#. settings-schema.json->precision->description
+msgid "Number of significant digits:"
+msgstr "Nombre de chiffres significatifs :"

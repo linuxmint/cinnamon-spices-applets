@@ -1,0 +1,18 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: applet.js:18
+msgid "Click to change image"
+msgstr ""
+
+#: applet.js:21
+msgid "The slideshow is disabled"
+msgstr ""
+
+#. metadata.json->name
+msgid "Next slide"
+msgstr ""
