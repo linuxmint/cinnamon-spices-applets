@@ -125,7 +125,7 @@ MyApplet.prototype = {
       this.timeout = Mainloop.timeout_add_seconds(1, () => this._update());
     }
   },
-  remove_timeout: function() {
+  _remove_timeout: function() {
     if (this.timeout) {
       Mainloop.source_remove(this.timeout);
       this.timeout = 0;
