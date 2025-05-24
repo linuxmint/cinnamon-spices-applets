@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-18 11:37+0200\n"
-"PO-Revision-Date: 2024-10-24 12:41-0300\n"
+"PO-Revision-Date: 2025-05-18 11:23-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -58,15 +58,14 @@ msgid "Critical error"
 msgstr "Error crítico"
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:28
-#, fuzzy
 msgid ""
 "Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
 "based system with `sudo apt install make g++`, then reload the applet in "
 "restarting Cinnamon."
 msgstr ""
-"Faltan las dependencias `make` y `gcc`. Instálelas, por ejemplo, en un "
-"sistema basado en Debian con `sudo apt install build-essential` y, a "
-"continuación, vuelva a cargar el applet (por ejemplo, reiniciando Cinnamon)."
+"Faltan las dependencias `make` y/o `g++`. Instálelas, por ejemplo, en un "
+"sistema basado en Debian con `sudo apt install make g++`, y vuelva a cargar "
+"el applet al reiniciar Cinnamon."
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
@@ -103,20 +102,19 @@ msgstr "debido a un formato incorrecto"
 #. 5.8/lib/commands_launcher/commands_launcher.js:44
 #. 5.8/lib/commands_launcher/commands_launcher.js:50
 msgid "Detail"
-msgstr ""
+msgstr "Detalle"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "por expiración del plazo"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:48
-#, fuzzy
 msgid "due to an error"
-msgstr "debido a un formato incorrecto"
+msgstr "debido a un error"
 
 #. 2.2/applet.js:20
 msgid "this applet is only supported by"
-msgstr ""
+msgstr "este applet sólo es compatible con"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -238,9 +236,8 @@ msgstr "Longitud geográfica en grados decimales"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-#, fuzzy
 msgid "Show switch times in a notification"
-msgstr "Consulta los horarios de los cambios de hoy en una notificación"
+msgstr "Mostrar la hora de cambio en una notificación"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->tooltip
@@ -321,9 +318,8 @@ msgstr "Nombre del tema de escritorio (tema Cinnamon)"
 #. 5.8->settings-schema.json->light-mode_background_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_background_button_apply->description
-#, fuzzy
 msgid "Test applying to the system"
-msgstr "Aplicar al sistema"
+msgstr "Prueba de aplicación al sistema"
 
 #. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
@@ -342,7 +338,7 @@ msgstr ""
 #. 5.8->settings-schema.json->light-mode_commands_switch_enable->description
 #. 5.8->settings-schema.json->dark-mode_commands_switch_enable->description
 msgid "Launch custom commands"
-msgstr "Iniciar comandos personalizados"
+msgstr "Lanzar comandos personalizados"
 
 #. 5.8->settings-schema.json->light-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to light mode"
@@ -430,7 +426,6 @@ msgid "Command"
 msgstr "Comando"
 
 #. 5.8->settings-schema.json->light-mode_commands_list->tooltip
-#, fuzzy
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -442,27 +437,25 @@ msgid ""
 "- the path is in the user's home directory (~/)\n"
 "- the error messages are displayed in a notification and reports stderr"
 msgstr ""
-"Lista de comandos que se ejecutarán al cambiar a este modo\n"
+"Lista de comandos que se ejecutan al cambiar a este modo\n"
 "\n"
 "Notas:\n"
-"- el propósito del nombre es para mensajes de error\n"
-"- el tiempo de expiración mata el proceso del comando\n"
-"- una expiración de 0 segundos significa nunca\n"
-"- ningún proceso secundario podrá expirar\n"
-"- la ruta está en el directorio ~\n"
-"- los mensajes de error informan stderr cuando el estado de retorno no es 0 "
-"y aparecerán en una notificación"
+"- El propósito del nombre es para mensajes de error\n"
+"- El tiempo de expiración finaliza el proceso del comando antes de tiempo\n"
+"- Una expiración de 0 segundos significa que nunca\n"
+"- Un proceso que se niega a terminar 10 segundos después de la expiración es "
+"eliminado\n"
+"- La ruta está en el directorio personal del usuario (~/)\n"
+"- Los mensajes de error se muestran en una notificación e informes de stderr"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->description
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
-#, fuzzy
 msgid "Test commands launch"
-msgstr "Comandos personalizados"
+msgstr "Lanzar comandos de prueba"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the light mode"
-msgstr "Iniciar los comandos establecidos para el modo claro"
+msgstr "Lanzamiento de prueba de los comandos establecidos para el modo claro"
 
 #. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -519,6 +512,5 @@ msgstr ""
 "y aparecerán en una notificación"
 
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the dark mode"
-msgstr "Iniciar los comandos establecidos para el modo oscuro"
+msgstr "Lanzamiento de prueba de los comandos establecidos para el modo oscuro"
