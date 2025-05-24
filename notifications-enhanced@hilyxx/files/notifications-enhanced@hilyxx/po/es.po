@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-12 08:54-0400\n"
-"PO-Revision-Date: 2025-05-16 12:29-0400\n"
+"POT-Creation-Date: 2025-05-18 21:41+0200\n"
+"PO-Revision-Date: 2025-05-18 16:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,54 +18,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. applet.js:97
+#. applet.js:98
 msgid "Do not disturb"
 msgstr "No molestar"
 
-#. applet.js:102
+#. applet.js:105
 msgid "No notifications"
 msgstr "Sin notificaciones"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:109
+#. applet.js:114
 msgid "Clear notifications"
 msgstr "Borrar notificaciones"
 
-#. applet.js:133
+#. applet.js:138
 msgid "Enable notifications"
 msgstr "Habilitar notificaciones"
 
-#. applet.js:145
+#. applet.js:150
 msgid "Notification Settings"
 msgstr "Configuración de notificaciones"
 
-#. applet.js:228 applet.js:410
+#. applet.js:233 applet.js:411
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificación"
 msgstr[1] "%d notificaciones"
 
-#. applet.js:258
+#. applet.js:263
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#. applet.js:273
+#. applet.js:277
 msgid "Notifications disabled"
 msgstr "Notificaciones desactivadas"
 
-#. applet.js:426
+#. applet.js:427
 msgid "just now"
 msgstr "ahora mismo"
 
-#. applet.js:429
+#. applet.js:430
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "hace %d segundo"
 msgstr[1] "hace %d segundos"
 
-#. applet.js:433
+#. applet.js:434
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -111,10 +111,10 @@ msgstr ""
 "notificaciones."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
+msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
-"Mostrar el icono \"No molestar\" incluso cuando la opción de mostrar bandeja "
-"vacía está desactivada"
+"Mostrar el icono 'No molestar' incluso cuando la opción de mostrar bandeja "
+"vacía esté deshabilitada"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 msgid ""
@@ -148,13 +148,13 @@ msgstr ""
 "Establezca combinaciones de teclas para borrar todas las notificaciones."
 
 #. settings-schema.json->keyMute->description
-msgid "Disable notifications"
-msgstr "Deshabilitar notificaciones"
+msgid "Enable or disable notifications"
+msgstr "Habilitar o deshabilitar notificaciones"
 
 #. settings-schema.json->keyMute->tooltip
-msgid "Set keybinding(s) to disable notifications."
+msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
-"Establezca la(s) combinación(es) de teclas para desactivar las "
+"Establezca la(s) combinación(es) de teclas para activar o desactivar las "
 "notificaciones."
 
 #. settings-schema.json->btnSystemSettings->description

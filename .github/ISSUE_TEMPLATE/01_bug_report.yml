@@ -43,6 +43,7 @@ body:
     label: Applet name and maintainer
     options:
     - ''
+    - AlwaysOn@krivetochka @Krivetochka
     - anime-wallpaper@flyflyan @fly206
     - app-launcher@mchilli @mchilli
     - asl@santiago @SamBurgos
@@ -62,6 +63,7 @@ body:
     - bing-wallpaper@starcross.dev @Starcross
     - bluetooth-battery@zamszowy @zamszowy
     - bose@tuuxx @tuuxx
+    - Bps@claudiux @claudiux
     - brightness-and-gamma-applet@cardsurf @cardsurf
     - bumblebee@pdcurtis @pdcurtis
     - c-eyes@anaximeno @anaximeno
@@ -94,7 +96,7 @@ body:
     - darkMode@linuxedo.com @slgobinath
     - ddcci-monitor-control@andr35 @andr35
     - ddcci-multi-monitor@tim-we @GingerGigiCat
-    - desaturate-all@hkoosha @hkoosha
+    - desaturate-all@hkoosha @klangman
     - devbar@ludvigbostrom @ludvigbostrom
     - devutils@fogl
     - dgs-bpivaty@gmail.com @bpivaty
@@ -153,10 +155,12 @@ body:
     - networkmonitor@axel358 @axel358
     - nextslide@yaya-cout @yaya-cout
     - nightlight@Severga @Severga
+    - NightLightSwitch@claudiux @claudiux
     - nightscout@ranneft @ImmRanneft
     - nordvpn-indicator@nickdurante @nickdurante
     - notification-mute@jgillula @jgillula
     - notifications-enhanced@hilyxx @hilyxx
+    - nvidia-temp@sophie-la-li @sophie-la-li
     - nvidiaprime@pdcurtis @pdcurtis
     - octopussy@centurix @centurix
     - officeCenter@scollins @collinss
@@ -173,6 +177,7 @@ body:
     - pomodoro@gregfreeman.org @gfreeau
     - power-profiles@rcalixte @rcalixte
     - printers@linux-man @linux-man
+    - ProcessMemoryMonitor@claudiux @claudiux
     - profile-switcher@pixunil @pixunil
     - ptt@thbemme @thbemme
     - qredshift@quintao @raphaelquintao
@@ -223,6 +228,7 @@ body:
     - suspend@janax @klangman
     - SW++@mohammad-sn @mohammad-sn
     - sync@szlldm @szlldm
+    - sysmon@rohan @222rohan
     - sysmonitor@orcus @orcuscz
     - system-controls@rcalixte @rcalixte
     - system-monitor@spacy01 @spacy01
@@ -236,6 +242,7 @@ body:
     - timeshift-spy@nicog60 @nicog60
     - todo@threefi
     - tor-button@shatur @Shatur95
+    - trilium-api@beatlink @BeatLink
     - turn-off-monitor@zablotski @zablotski
     - tzclock@lhriley @lhriley
     - uiscaler@joka42 @joka42

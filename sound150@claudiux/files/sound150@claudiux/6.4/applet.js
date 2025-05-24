@@ -259,6 +259,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
         SHOW_MEDIA_OPTICAL = this.showMediaOptical;
 
+        this.settings.bind("keepAppListOpen", "keepAppListOpen");
+        this.settings.bind("keepOutputListOpen", "keepOutputListOpen");
+        this.settings.bind("keepInputListOpen", "keepInputListOpen");
+        this.settings.bind("keepCommandListOpen", "keepCommandListOpen");
+
         this.settings.bind("muteSoundOnClosing", "muteSoundOnClosing");
         this.settings.bind("startupVolume", "startupVolume");
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
@@ -700,6 +705,30 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.context_menu_item_configDesklet.actor.visible = this.show_desklet;
         if (this.context_menu_item_showDesklet)
             this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
+        if (this._outputApplicationsMenu) {
+            if (this.keepAppListOpen)
+                this._outputApplicationsMenu.menu.open();
+            else
+                this._outputApplicationsMenu.menu.close();
+        }
+        if (this.commands_menu_item) {
+            if (this.keepCommandListOpen)
+                this.commands_menu_item.menu.open();
+            else
+                this.commands_menu_item.menu.close();
+        }
+        if (this._selectOutputDeviceItem) {
+            if (this.keepOutputListOpen)
+                this._selectOutputDeviceItem.menu.open();
+            else
+                this._selectOutputDeviceItem.menu.close();
+        }
+        if (this._selectInputDeviceItem) {
+            if (this.keepInputListOpen)
+                this._selectInputDeviceItem.menu.open();
+            else
+                this._selectInputDeviceItem.menu.close();
+        }
     }
 
     on_leave_event(actor, event) {
@@ -2142,8 +2171,19 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _notifyVolumeChange(stream) {
-        if (this.volumeSoundEnabled)
-            Main.soundManager.play("volume");
+        if (this.volumeSoundEnabled) {
+            let volume;
+            if (typeof(this.volume) == "string") {
+                if (this.volume.endsWith("%"))
+                    volume = parseInt(this.volume.slice(0, -1));
+                else
+                    volume = parseInt(this.volume);
+            } else {
+                volume = this.volume;
+            }
+            if (volume > 0 && volume < this.maxVolume)
+                Main.soundManager.play("volume");
+        }
     }
 
     _mutedChanged(object, param_spec, property) {

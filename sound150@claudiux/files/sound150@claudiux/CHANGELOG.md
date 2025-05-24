@@ -1,3 +1,13 @@
+### v13.0.1~20250523
+  * Minor bug fix.
+
+### v13.0.0~20250523
+  * Added the Menus tab in settings.
+  * Keeps certain context menu submenus open.
+
+### v12.0.4~20250519
+  * Do not play sound notification when the volume has reached its maximum limit.
+
 ### v12.0.3~20250504
   * Improved album art display.
 
