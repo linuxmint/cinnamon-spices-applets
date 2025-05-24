@@ -77,7 +77,7 @@ class BaseDialog:
         if hasattr(icon_string, 'to_string'):
             icon_string = icon_string.to_string()
         self.icon_string = icon_string
-        if icon_string.startswith("/"):
+        if icon_string.startswith("/") and os.path.isfile(icon_string):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(icon_string, 48, 48)
             surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.dialog.get_scale_factor(), None)
             self.icon_entry.set_from_surface(surface)
