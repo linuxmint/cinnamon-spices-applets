@@ -49,7 +49,7 @@ MyApplet.prototype = {
 
       this._applet_tooltip._tooltip.set_style("text-align: left; font-family: monospace; font-size: 9pt");
 
-      this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Page Cache"), "user-trash", () = > {
+      this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Page Cache"), "user-trash", () => {
         Util.spawnCommandLineAsync("pkexec sh -c 'sync && echo 1 > /proc/sys/vm/drop_caches'");
       }));
 
@@ -165,7 +165,7 @@ MyApplet.prototype = {
     tooltip += "<b>" + _("Memory") + "</b> (<i>" + (this.memDataProvider.memSize / 1000000000).toFixed(1) + _("GB") + (this.memDataProvider.swapSize ? "; " + (this.memDataProvider.swapSize / 1000000000).toFixed(1) + _("GB swap") : "") + "</i>)\n" + longInfo + "\n\n";
     this._applet_tooltip.set_markup(tooltip);
     this._remove_timeout();
-    this.timeout = Mainloop.timeout_add_seconds(this.updateInterval, () = > this._update());
+    this.timeout = Mainloop.timeout_add_seconds(this.updateInterval, () => this._update());
   },
 
   _runSysMon: function() {
@@ -315,3 +315,4 @@ function align(str, size) {
 function main(metadata, orientation, panelHeight, instanceId) {
   return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }
+
