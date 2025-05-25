@@ -10,7 +10,7 @@
     "page-options": {
       "type": "page",
       "title": "Options",
-      "sections": ["section-options", "section-colors"]
+      "sections": ["section-options", "section-keybinding", "section-colors"]
     },
     "section-providers": {
       "type": "section",
@@ -22,15 +22,16 @@
       "title": "Options",
       "keys": ["show-provider", "reset-after-search"]
     },
+    "section-keybinding": {
+      "type": "section",
+      "title": "Keyboard shortcuts",
+      "keys": ["custom-keybinding"]
+    },
     "section-colors": {
       "type": "section",
       "title": "Search-box colors",
       "keys": ["background-color", "text-color"]
     }
-  },
-  "header-provider": {
-    "type": "header",
-    "description": "Search Provider Settings"
   },
   "show-provider": {
     "type": "switch",
@@ -43,10 +44,6 @@
     "default": true,
     "description": "Reset query after search",
     "tooltip": "Reset query after search? This may not be useful if you want to be able to perform the same query on other search engines afterwards."
-  },
-  "header-providers": {
-    "type": "header",
-    "description": "Search Engines"
   },
   "providers": {
     "type": "list",
@@ -181,18 +178,10 @@
     "type": "generic",
     "default": ""
   },
-  "header-keybinding": {
-    "type": "header",
-    "description": "Keybinding"
-  },
   "custom-keybinding": {
     "type": "keybinding",
     "description": "Keybinding, which opens the search box",
     "default": "<Primary><Alt>f"
-  },
-  "header-colors": {
-    "type": "header",
-    "description": "Search-box colors"
   },
   "background-color": {
     "type": "colorchooser",
