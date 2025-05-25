@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-25 21:36+0200\n"
-"PO-Revision-Date: 2024-07-05 16:13-0400\n"
+"PO-Revision-Date: 2025-05-25 15:59-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -62,7 +62,7 @@ msgstr "Opciones"
 
 #. settings-schema.json->section-keybinding->title
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Atajos de teclado"
 
 #. settings-schema.json->section-colors->title
 #. old->5.4->settings-schema.json->header-colors->description
@@ -168,7 +168,7 @@ msgstr "Configuración del motor de búsqueda"
 
 #. old->5.4->settings-schema.json->header-providers->description
 msgid "Search Engines"
-msgstr "Motores de búsqueda:"
+msgstr "Motores de búsqueda"
 
 #. old->5.4->settings-schema.json->header-keybinding->description
 #. old->3.2->settings-schema.json->header-keybinding->description
