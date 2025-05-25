@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# INTERNET SEARCH BOX
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 20:02+0200\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
 "PO-Revision-Date: 2024-07-25 10:08+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,25 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:68 old/5.4/applet.js:63
+#. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr ""
 "Fai clic con il pulsante destro del mouse per selezionare o aggiungere il "
 "tuo motore di ricerca"
 
-#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
 msgid "Type to search..."
 msgstr "Digita per cercare..."
 
-#: applet.js:117 old/5.4/applet.js:112
+#. applet.js:115 old/5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Seleziona il tuo motore di ricerca:"
 
-#: old/applet.js:90
+#. old/applet.js:90
 msgid "Change default programs..."
 msgstr "Cambia programmi predefiniti..."
 
-#: old/applet.js:92
+#. old/applet.js:92
 msgid "Edit providers"
 msgstr "Modifica provider"
 
@@ -61,27 +61,24 @@ msgstr "Provider"
 msgid "Options"
 msgstr "Opzioni"
 
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
 #. settings-schema.json->section-colors->title
-#. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
 msgstr "Colori della casella di ricerca"
 
-#. settings-schema.json->header-provider->description
-#. old->3.2->settings-schema.json->header-provider->description
-#. old->5.4->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Impostazioni Provider di Ricerca"
-
 #. settings-schema.json->show-provider->description
-#. old->3.2->settings-schema.json->show-provider->description
 #. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Mostra provider"
 
 #. settings-schema.json->show-provider->tooltip
-#. old->3.2->settings-schema.json->show-provider->tooltip
 #. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Mostra il provider selezionato nel pannello"
 
@@ -99,11 +96,6 @@ msgstr ""
 "Reimpostare la query dopo la ricerca? Ciò potrebbe non essere utile se "
 "desideri essere in grado di eseguire successivamente la stessa query su "
 "altri motori di ricerca."
-
-#. settings-schema.json->header-providers->description
-#. old->5.4->settings-schema.json->header-providers->description
-msgid "Search Engines"
-msgstr "Motori di Ricerca"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -154,15 +146,9 @@ msgstr ""
 "quello predefinito.\n"
 "Se non viene selezionato alcun fornitore, quello predefinito è Google."
 
-#. settings-schema.json->header-keybinding->description
-#. old->3.2->settings-schema.json->header-keybinding->description
-#. old->5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Associazione di tasti"
-
 #. settings-schema.json->custom-keybinding->description
-#. old->3.2->settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
 msgstr "Associazione dei tasti, che apre la casella di ricerca"
 
@@ -175,6 +161,20 @@ msgstr "Colore di sfondo"
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr "Colore del testo"
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Impostazioni Provider di Ricerca"
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr "Motori di Ricerca"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Associazione di tasti"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"
