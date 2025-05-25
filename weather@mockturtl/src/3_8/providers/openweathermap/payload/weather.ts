@@ -116,6 +116,7 @@ export function OWMWeatherToWeatherData(weather: OWMWeatherResponse, conditionsT
 		pressure: weather.main.pressure,
 		humidity: weather.main.humidity,
 		dewPoint: null,
+		uvIndex: null,
 		extra_field: {
 			type: "temperature",
 			name: _("Feels like"),
