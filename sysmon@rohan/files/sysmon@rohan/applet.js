@@ -1,4 +1,5 @@
 const UUID = "sysmon@rohan";
+
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
@@ -6,14 +7,18 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+const Util = imports.misc.util;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const HOME_DIR = GLib.get_home_dir();
+
+Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-let GTop, failed = false;
+let GTop;
+let failed = false;
 try {
   GTop = imports.gi.GTop;
 } catch (e) {
@@ -44,13 +49,9 @@ MyApplet.prototype = {
 
       this._applet_tooltip._tooltip.set_style("text-align: left; font-family: monospace; font-size: 9pt");
 
-      this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Cache"), "user-trash", () => {
-        let [, argv] = GLib.shell_parse_argv("pkexec sh -c 'echo 1 >/proc/sys/vm/drop_caches'");
-        let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
-        GLib.spawn_async(null, argv, null, flags, null);
+      this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Page Cache"), "user-trash", () => {
+        Util.spawnCommandLineAsync("pkexec sh -c 'sync && echo 1 > /proc/sys/vm/drop_caches'");
       }));
-
-
 
       this.settings = new Settings.AppletSettings(this, UUID, instanceId);
       this._bind_settings();
@@ -58,9 +59,7 @@ MyApplet.prototype = {
       this.cpuLabel = new St.Label();
       this.memLabel = new St.Label();
 
-
-      let homeDir = GLib.get_home_dir();
-      let iconBasePath = homeDir + "/.local/share/cinnamon/applets/sysmon@rohan/icons";
+      let iconBasePath = HOME_DIR + "/.local/share/cinnamon/applets/sysmon@rohan/icons";
 
       let cpuIconPath = iconBasePath + "/cpu-symbolic.svg";
       let memIconPath = iconBasePath + "/ram-symbolic.svg";
@@ -84,7 +83,6 @@ MyApplet.prototype = {
         style_class: "system-status-icon"
       });
 
-
       this.cpuLabel.set_style("text-align: left");
       this.memLabel.set_style("text-align: left");
 
@@ -104,7 +102,7 @@ MyApplet.prototype = {
 
       this.actor.add(new St.Label({
         text: " "
-      })); 
+      }));
 
       this.actor.add(this.memIcon, {
         x_align: St.Align.MIDDLE,
@@ -122,12 +120,11 @@ MyApplet.prototype = {
       }));
 
       this.cpuDataProvider = new MultiCPUDataProvider();
-      this.memDataProvider = new MemDataProvider(); 
+      this.memDataProvider = new MemDataProvider();
 
       this.timeout = Mainloop.timeout_add_seconds(1, () => this._update());
     }
   },
-
   _remove_timeout: function() {
     if (this.timeout) {
       Mainloop.source_remove(this.timeout);
@@ -135,12 +132,10 @@ MyApplet.prototype = {
     }
   },
 
-
   _update_display: function() {
     this.cpuLabel.visible = this.displayCpu;
     this.memLabel.visible = this.displayRam;
   },
-
 
   _bind_settings: function() {
     this.settings.bindProperty(Settings.BindingDirection.IN, "displayCpu", "displayCpu", this._update_display.bind(this), null);
@@ -150,7 +145,9 @@ MyApplet.prototype = {
   },
 
   _update: function() {
-    let shortInfo, longInfo, tooltip;
+    let shortInfo,
+      longInfo,
+      tooltip;
     [shortInfo, longInfo] = this.cpuDataProvider.data();
 
     this.cpuLabel.set_text(shortInfo);
@@ -158,13 +155,12 @@ MyApplet.prototype = {
 
     [shortInfo, longInfo] = this.memDataProvider.data();
     if (this.toggleRam) {
-      let percentUsed = parseFloat(shortInfo); 
+      let percentUsed = parseFloat(shortInfo);
       let usedInGB = (percentUsed / 100) * (this.memDataProvider.memSize / 1000000000);
       shortInfo = usedInGB.toFixed(1) + "GB";
 
     }
     this.memLabel.set_text(shortInfo);
-
 
     tooltip += "<b>" + _("Memory") + "</b> (<i>" + (this.memDataProvider.memSize / 1000000000).toFixed(1) + _("GB") + (this.memDataProvider.swapSize ? "; " + (this.memDataProvider.swapSize / 1000000000).toFixed(1) + _("GB swap") : "") + "</i>)\n" + longInfo + "\n\n";
     this._applet_tooltip.set_markup(tooltip);
@@ -172,14 +168,24 @@ MyApplet.prototype = {
     this.timeout = Mainloop.timeout_add_seconds(this.updateInterval, () => this._update());
   },
 
+  _runSysMon: function() {
 
-  on_applet_clicked: function() {
-    if (!failed) {
-      let [, argv] = GLib.shell_parse_argv("gnome-system-monitor");
-      let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
-      GLib.spawn_async(null, argv, null, flags, null);
+    const _appSys = imports.gi.Cinnamon.AppSystem.get_default();
+    let gnomeSystemMonitor = _appSys.lookup_app('gnome-system-monitor.desktop');
+
+    if (gnomeSystemMonitor) {
+
+      gnomeSystemMonitor.activate();
+      return;
     }
+    gnomeSystemMonitor = _appSys.lookup_app('org.gnome.SystemMonitor.desktop');
+    if (gnomeSystemMonitor) {
+      gnomeSystemMonitor.activate();
+    }
+  },
 
+  on_applet_clicked: function(event) {
+    this._runSysMon();
   },
 
   on_applet_removed_from_panel: function() {
@@ -238,9 +244,7 @@ MultiCPUDataProvider.prototype = {
       let dnice = xcpu_nice[i] - this.CPUListNice[i];
       let dsys = xcpu_sys[i] - this.CPUListSys[i];
       let duser = xcpu_user[i] - this.CPUListUser[i];
-      this.currentReadings[i] = dtotal > 0 
-	? (duser + dnice + dsys) / dtotal
-	: 0;
+      this.currentReadings[i] = dtotal > 0 ? (duser + dnice + dsys) / dtotal : 0;
     }
     this.CPUListTotal = xcpu_total;
     this.CPUListNice = xcpu_nice;
@@ -279,7 +283,6 @@ MemDataProvider.prototype = {
     this.memSize = this.gtopMem.total;
   },
 
-
   _fetch_data: function() {
     GTop.glibtop_get_mem(this.gtopMem);
     GTop.glibtop_get_swap(this.gtopSwap);
@@ -296,13 +299,9 @@ MemDataProvider.prototype = {
   data: function(longInfoTab = 2, longInfoSize = 5) {
     this._fetch_data();
     let overall = this.currentReadings[0];
-    let longInfo = " ".repeat(longInfoTab) + _("Used:   ") + (this.currentReadings[0] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[0] * 100).toFixed(1), longInfoSize) + "%)\n" +
-            " ".repeat(longInfoTab) + _("Cache:  ") + (this.currentReadings[1] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[1] * 100).toFixed(1), longInfoSize) + "%)\n" +
-            " ".repeat(longInfoTab) + _("Buffer: ") + (this.currentReadings[2] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[2] * 100).toFixed(1), longInfoSize) + "%)\n" +
-            " ".repeat(longInfoTab) + _("Free:   ") + (this.currentReadings[3] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[3] * 100).toFixed(1), longInfoSize) + "%)";
+    let longInfo = " ".repeat(longInfoTab) + _("Used:   ") + (this.currentReadings[0] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[0] * 100).toFixed(1), longInfoSize) + "%)\n" + " ".repeat(longInfoTab) + _("Cache:  ") + (this.currentReadings[1] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[1] * 100).toFixed(1), longInfoSize) + "%)\n" + " ".repeat(longInfoTab) + _("Buffer: ") + (this.currentReadings[2] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[2] * 100).toFixed(1), longInfoSize) + "%)\n" + " ".repeat(longInfoTab) + _("Free:   ") + (this.currentReadings[3] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[3] * 100).toFixed(1), longInfoSize) + "%)";
     if (this.swapSize) {
-      longInfo += "\n" +
-                " ".repeat(longInfoTab) + _("Swap:   ") + (this.currentReadings[4] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[4] * 100).toFixed(1), longInfoSize) + "%)";
+      longInfo += "\n" + " ".repeat(longInfoTab) + _("Swap:   ") + (this.currentReadings[4] * this.memSize / 1000000000).toFixed(1) + _(" GB") + " (" + align((this.currentReadings[4] * 100).toFixed(1), longInfoSize) + "%)";
     }
     return [(overall * 100).toFixed(0) + "%", longInfo];
   }
@@ -316,3 +315,4 @@ function align(str, size) {
 function main(metadata, orientation, panelHeight, instanceId) {
   return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }
+

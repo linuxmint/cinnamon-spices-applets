@@ -11,8 +11,5 @@ A simple system monitor which displays CPU and RAM usage.
 
 download the System Monitor (sysmon@rohan) applet from 'Applets' download section and add it.
 
-### screenshots
-![Screenshot](./screenshot.png)
-
 ### acknowledgement
 applet adapted from [ssm@Sevarga](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/ssm%40Severga).
