@@ -1,0 +1,168 @@
+# MAILNAG
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hyOzd, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-26 12:36-0500\n"
+"PO-Revision-Date: 2025-04-04 11:45+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:169
+msgid "just now"
+msgstr "juuri nyt"
+
+#. applet.js:177
+msgid " minutes ago"
+msgstr " minuuttia sitten"
+
+#. applet.js:185
+msgid " hours ago"
+msgstr " tuntia sitten"
+
+#. applet.js:192
+msgid "yesterday"
+msgstr "eilen"
+
+#. applet.js:196
+msgid " days ago"
+msgstr " päivää sitten"
+
+#. applet.js:200
+msgid " weeks ago"
+msgstr " viikkoa sitten"
+
+#. applet.js:285
+msgid "Configure Mailnag"
+msgstr "Määritä Mailnag"
+
+#. applet.js:370
+msgid "Mailnag daemon stopped working!"
+msgstr "Mailnag palvelu ei toiminnassa!"
+
+#. applet.js:374
+msgid "Mailnag daemon isn't running! Do you have it installed?"
+msgstr "Mailnag palvelu ei ole käynnissä! Asensitko Mailnag ohjelman?"
+
+#. applet.js:607
+#, javascript-format
+msgid "You have %d new mails!"
+msgstr "Sinulle on %d sähköpostia!"
+
+#. applet.js:608 applet.js:653
+msgid "Mark All Read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#. applet.js:616
+msgid "You have new mail!"
+msgstr "Sinulle on sähköposti!"
+
+#. applet.js:618
+msgid "Mark Read"
+msgstr "Merkitse luetuksi"
+
+#. applet.js:701 applet.js:763
+msgid "No unread mails."
+msgstr "Ei lukemattomia."
+
+#. applet.js:739
+msgid "Mailnag daemon is not running!"
+msgstr "Mailnag palvelu ei ole käynnissä!"
+
+#. applet.js:752
+#, javascript-format
+msgid "You have a mail from %s!"
+msgstr "Sinulle on sähköpostia %s!"
+
+#. applet.js:758
+#, javascript-format
+msgid "You have %d unread mails!"
+msgstr "Sinulla on %d lukematonta!"
+
+#. applet.js:774
+msgid "Click to see error!"
+msgstr "Painamalla näet virheilmoituksen!"
+
+#. applet.js:775
+msgid "Error: "
+msgstr "Virhe: "
+
+#. metadata.json->name
+msgid "Mailnag"
+msgstr "Mailnag"
+
+#. metadata.json->description
+msgid "Mailnag mail notifier applet"
+msgstr ""
+"Mailnag ilmoittaa saapuneista sähköposteista. Asenna Mailnag ohjelma lisäksi"
+
+#. settings-schema.json->notifications->description
+msgid "Show notifications"
+msgstr "Näytä ilmoitukset"
+
+#. settings-schema.json->notifications->tooltip
+msgid ""
+"Enables display of mail arrived notifications by applet. Make sure you "
+"disable mailnag notification plugin, otherwise you will have duplicates."
+msgstr ""
+"Näyttää ilmoituksen saapuneesta postista. Varmista, että poistat "
+"laajennuksen mailnag-ilmoitukset käytöstä, muuten viestit ovat kahdesti."
+
+#. settings-schema.json->launch_client_on_click->description
+msgid "Launch mail client on click"
+msgstr "Avaa sähköposti"
+
+#. settings-schema.json->launch_client_on_click->tooltip
+msgid "Mail client is launched when clicked on a menu item."
+msgstr "Sähköpostiohjelma käynnistyy kun paneelin kuvaketta painetaan."
+
+#. settings-schema.json->middle_click->description
+msgid "On middle click:"
+msgstr "Hiiren keskipainike:"
+
+#. settings-schema.json->middle_click->tooltip
+msgid "What to do when middle clicked on applet icon"
+msgstr "Mitä tapahtuu kun sovelman kuvaketta painetaan keskipainikkeella"
+
+#. settings-schema.json->middle_click->options
+msgid "Mark all read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#. settings-schema.json->middle_click->options
+msgid "Launch mail client"
+msgstr "Avaa sähköposti"
+
+#. settings-schema.json->middle_click->options
+msgid "Do nothing"
+msgstr "Älä tee mitään"
+
+#. settings-schema.json->max_length->description
+msgid "Max sender / subject display length"
+msgstr "Lähettäjä/aiheen enimmäispituus"
+
+#. settings-schema.json->max_length->tooltip
+msgid "Sender or subject lines longer than this will be cropped"
+msgstr "Tätä pidemmät lähettäjän tai aiheen rivit lyhennetään"
+
+#. settings-schema.json->client->description
+msgid "Mail client to launch (or webpage)"
+msgstr "Sähköpostiohjelma (tai verkkosivu)"
+
+#. settings-schema.json->client->tooltip
+msgid ""
+"Enter the command to launch your mail client here. You can also enter a web "
+"address that starts with 'http'."
+msgstr ""
+"Kirjoita komento tähän joka käynnistää sähköpostiohjelman. Voit myös "
+"kirjoittaa \"http\" osoitteen."

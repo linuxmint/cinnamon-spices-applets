@@ -1,0 +1,30 @@
+# NOTIFICATIONS ENHANCED
+# This file is put in the public domain.
+# hilyxx, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-18 21:41+0200\n"
+"PO-Revision-Date: 2025-05-18 13:52+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->showDisturbIcon->description
+msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
+msgstr ""
+
+#. settings-schema.json->keyMute->description
+msgid "Enable or disable notifications"
+msgstr ""
+
+#. settings-schema.json->keyMute->tooltip
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr ""

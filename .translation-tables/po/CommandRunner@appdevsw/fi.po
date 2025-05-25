@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:57+0800\n"
+"PO-Revision-Date: 2024-06-27 17:43+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. CommandRunner@appdevsw->metadata.json->name
+#: applet.js:47
+msgid "CommandRunner"
+msgstr "CommandRunner"
+
+#: applet.js:102
+msgid "<no text>"
+msgstr "<no text>"
+
+#: applet.js:136
+msgid "starting..."
+msgstr "käynnistyy..."
+
+#: appletgui.js:142
+msgid "Compare error "
+msgstr "Vertaile virhettä "
+
+#: appletgui.js:255 appletgui.js:283
+msgid "XML/JSON error: missing tag "
+msgstr "XML/JSON virhe: puuttuva tagi "
+
+#: appletgui.js:291
+msgid "xml error:"
+msgstr "xml virhe:"
+
+#: appletgui.js:316 appletgui.js:325
+msgid "property not found "
+msgstr "ominaisuus ei löydy "
+
+#: cmdrunner.js:51
+msgid "undefined command!"
+msgstr "määrittelemätön komento!"
+
+#: cmdrunner.js:143
+msgid "cannot execute command!"
+msgstr "komentoa ei voi suorittaa!"
+
+#: simplexml.js:259
+msgid "xml parse error at pos "
+msgstr "xml jäsennysvirhe osoitteessa pos "
+
+#: simplexml.js:259
+msgid ", level "
+msgstr ", taso "
+
+#: simplexml.js:259
+msgid ", inside tag "
+msgstr ", tagin sisällä "
+
+#. CommandRunner@appdevsw->metadata.json->description
+msgid ""
+"Applet runs script or application periodically and displays its output on "
+"the taskbar"
+msgstr ""
+"Suorittaa komentosarjan tai sovelluksen ajastetusti ja näyttää sen tulosteen "
+"paneelissa"
+
+#. CommandRunner@appdevsw->settings-
+#. schema.json->form_interval_unit->description
+msgid "Unit"
+msgstr "Yksikkö"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->tooltip
+msgid "Unit of the interval: seconds or milliseconds"
+msgstr "Aikaväli: sekuntia tai millisekuntia"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " milliseconds"
+msgstr " millisekuntia"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval_unit->options
+msgid " seconds"
+msgstr " sekuntia"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->description
+msgid "Run interval"
+msgstr "Suoritusaikaväli"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_interval->tooltip
+msgid "Specifies how often the command is run"
+msgstr "Määrittää, kuinka usein komento suoritetaan"
+
+#. CommandRunner@appdevsw->settings-schema.json->head_title->description
+msgid "CommandRunner settings"
+msgstr "CommandRunner asetukset"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->description
+msgid "Suffix"
+msgstr "Tiedostopääte"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_suffix->tooltip
+msgid ""
+"Text or character displayed at the end of the command result (in text mode "
+"only)."
+msgstr ""
+"Teksti tai merkki näytetään komennon tuloksen lopussa (vain tekstitilassa)."
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->description
+msgid "Command"
+msgstr "Komento"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_command->tooltip
+msgid ""
+"Command or script or applitaction to run.\n"
+"e.g.\n"
+" /home/user/myscript.sh\n"
+" echo Hello\n"
+"\n"
+"The command should print the result to the standard output, which will be "
+"displayed on the taskbar.\n"
+"\n"
+"You can use predefined parameters:\n"
+" $counter$ - number of command executions\n"
+" $appletdir$ - applet directory\n"
+"\n"
+"  e.g. echo \"I was executed $counter$ times\""
+msgstr ""
+"Suoritettava komento tai komentojono tai sovellus.\n"
+"esim.\n"
+" /home/user/myscript.sh\n"
+" echo Hei\n"
+"\n"
+"Komennon pitäisi tulostaa vakiotulostukseen, joka näytetään paneelissa.\n"
+"\n"
+"Voit käyttää ennalta määritettyjä parametreja:\n"
+" $counter$ - komentojen suoritusten määrä\n"
+" $appletdir$ - sovelmahakemisto\n"
+"\n"
+" esim. echo \"Minua ammuttiin $counter$ kertaa\""
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->description
+msgid "Prefix"
+msgstr "Etuliite"
+
+#. CommandRunner@appdevsw->settings-schema.json->form_prefix->tooltip
+msgid ""
+"Text or character displayed at the beginning of the command result (in text "
+"mode only)."
+msgstr ""
+"Teksti tai merkki näytetään komennon tuloksen alussa (vain tekstitilassa)."
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->description
+msgid "Apply"
+msgstr "Käytä"
+
+#. CommandRunner@appdevsw->settings-schema.json->apply->tooltip
+msgid "Apply changes"
+msgstr "Hyväksy muutokset"

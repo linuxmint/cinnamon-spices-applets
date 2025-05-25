@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-07-31 04:22-0400\n"
+"PO-Revision-Date: 2017-03-12 23:28+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:105
+msgid "Scr Lock"
+msgstr "Scr 锁"
+
+#: applet.js:109
+msgid "Num Lock"
+msgstr "数字锁定键"
+
+#: applet.js:113
+msgid "Caps Lock"
+msgstr "大写锁定键"
+
+#: applet.js:148
+msgid "Lock Keys"
+msgstr "锁定键"
+
+#: applet.js:208
+msgid "Scr lock on"
+msgstr "Scr 锁定开启"
+
+#: applet.js:211
+msgid "Scr lock off"
+msgstr "Scr 锁定关闭"
+
+#: applet.js:220
+msgid "Num lock on"
+msgstr "数字锁定键开"
+
+#: applet.js:223
+msgid "Num lock off"
+msgstr "数字锁定键关"
+
+#: applet.js:232
+msgid "Caps lock on"
+msgstr "大写锁定键开"
+
+#: applet.js:235
+msgid "Caps lock off"
+msgstr "大写锁定键关"
+
+#. metadata.json->description
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr "显示 caps lock/num lock/scr lock 是否打开，并在这些更改时显示通知。"
+
+#. metadata.json->name
+msgid "Lock keys indicator with notifications"
+msgstr "带通知的锁定键指示器"
+
+#. settings-schema.json->show-notifications->description
+msgid "Show notifications"
+msgstr "显示通知"
+
+#. settings-schema.json->show-silent-notifications->description
+msgid "Silence system notification sound"
+msgstr ""
+
+#. settings-schema.json->show-caps-lock-indicator->description
+msgid "Show caps lock indicator"
+msgstr "显示大写锁定指示器"
+
+#. settings-schema.json->show-num-lock-indicator->description
+msgid "Show num lock indicator"
+msgstr "显示 num lock 指示器"
+
+#. settings-schema.json->show-scr-lock-indicator->description
+msgid "Show scr lock indicator"
+msgstr "显示 scr 锁定指示器"
