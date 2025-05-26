@@ -2,16 +2,24 @@
   "layoutsound150": {
     "type": "layout",
     "pages": [
+      "page_menus",
       "page_behavior",
       "page_sound",
       "page_icon",
       "page_shortcuts"
     ],
+    "page_menus": {
+      "type": "page",
+      "title": "Menus",
+      "sections": [
+        "sectionMenu1",
+        "sectionMenu2"
+      ]
+    },
     "page_behavior": {
       "type": "page",
       "title": "Behavior",
       "sections": [
-        "sectionBehavior1",
         "sectionBehavior2",
         "sectionBehavior3"
       ]
@@ -44,7 +52,7 @@
         "sectionCommands"
       ]
     },
-    "sectionBehavior1": {
+    "sectionMenu1": {
       "type": "section",
       "title": "Menu",
       "keys": [
@@ -56,17 +64,27 @@
         "showMediaOptical"
       ]
     },
+    "sectionMenu2": {
+      "type": "section",
+      "title": "Context Menu",
+      "keys": [
+        "keepAppListOpen",
+        "keepOutputListOpen",
+        "keepInputListOpen",
+        "keepCommandListOpen"
+      ]
+    },
     "sectionBehavior2": {
       "type": "section",
       "title": "Panel",
       "keys": [
         "showtrack",
         "truncatetext",
+        "toolongchars",
         "middleClickAction",
         "middleShiftClickAction",
         "horizontalScroll",
         "showalbum",
-        "keepAlbumAspectRatio",
         "hideSystray"
       ]
     },
@@ -84,7 +102,7 @@
       "title": "Icon appearance",
       "keys": [
         "showalbum",
-        "keepAlbumAspectRatio",
+        "showalbumDelay",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
         "showMicUnmutedOnIcon"
@@ -218,6 +236,26 @@
     "default": true,
     "description": "Show Media-Optical icon"
   },
+  "keepAppListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the App selector open"
+  },
+  "keepOutputListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Output Device selector open"
+  },
+  "keepInputListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Input Device selector open"
+  },
+  "keepCommandListOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the Command selector open"
+  },
   "keyOpen": {
     "type": "keybinding",
     "description": "Show menu",
@@ -263,6 +301,13 @@
     "description": "Limit song information to",
     "dependency": "showtrack"
   },
+  "toolongchars": {
+    "type": "entry",
+    "default": "...",
+    "description": "If the title is too long, end it with:",
+    "dependency": "showtrack",
+    "tooltip": "Emoji accepted"
+  },
   "middleClickAction": {
     "type": "combobox",
     "default": "out_mute",
@@ -295,6 +340,15 @@
     "type": "switch",
     "default": true,
     "description": "Show album art as icon",
+    "dependency": "playerControl"
+  },
+  "showalbumDelay": {
+    "type": "scale",
+    "default": 5,
+    "min": 0,
+    "max":10,
+    "step": 1,
+    "description": "Delay between icon and album art display (seconds)",
     "dependency": "playerControl"
   },
   "keepAlbumAspectRatio": {
@@ -396,10 +450,8 @@
     "default": true
   },
   "color0_100": {
-    "type": "colorchooser",
-    "dependency": "adaptColor",
-    "default": "#e4e4e4",
-    "description": "Icon color: 0%-100%"
+    "type": "generic",
+    "default": "rgba(225,225,225,255)"
   },
   "color101_115": {
     "type": "colorchooser",
@@ -596,6 +648,9 @@
     "type": "button",
     "description": "Remove the OsdWithNumber extension",
     "callback": "_on_remove_OsdWithNumber_from_extensions"
+  },
+  "VOLUME_ADJUSTMENT_STEP": {
+    "type": "generic",
+    "default": 0.05
   }
-
 }

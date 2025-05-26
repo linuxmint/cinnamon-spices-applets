@@ -1,3 +1,14 @@
+### v5.4.2~20250401
+  * Minor changes about font size.
+  * Code cleanup in applet.js.
+
+### v5.4.1~20250330
+  * Minor changes about applet width.
+
+### v5.4.0~20250329
+  * Now applet width can be fixed by user (for horizontal panels).
+  * Fixes #7005.
+
 ### v5.3.2~20250228
   * Fixes scenario where special characters would appear next to temperatures on the panel.
 

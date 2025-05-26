@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: app-launcher@mchilli 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-25 17:53+0100\n"
+"POT-Creation-Date: 2025-05-14 16:58+0200\n"
 "PO-Revision-Date: 2025-03-02 00:27+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -34,63 +34,64 @@ msgstr "Eliminar"
 msgid "Edit"
 msgstr "Editar"
 
-#. applet.js:866 applet.js:1160 dialogs.py:46 dialogs.py:296 widgets.py:73
+#. applet.js:866 applet.js:1160 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "Cancel·lar"
 
-#. dialogs.py:44 dialogs.py:295
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
 msgid "OK"
 msgstr "D'acord"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#. dialogs.py:47 widgets.py:47 ui/widget.glade:40
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nom"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:53
+#. dialogs.py:113 dialogs.py:328
 msgid "Group"
 msgstr "Grup"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:54 widgets.py:48 ui/widget.glade:51
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Ordre"
 
-#. dialogs.py:239
-msgid "The name cannot be empty"
-msgstr "El nom no pot estar buit"
-
-#. dialogs.py:244
-msgid "The name is already used"
-msgstr "El nom ja està en ús"
-
-#. dialogs.py:251
+#. dialogs.py:214 dialogs.py:305
 msgid "Valid name"
 msgstr "Nom vàlid"
 
-#. dialogs.py:257
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "El nom no pot estar buit"
+
+#. dialogs.py:222
 msgid "Valid command"
 msgstr "Ordre vàlida"
 
-#. dialogs.py:260
+#. dialogs.py:225
 msgid "The command is not valid"
 msgstr "L'ordre no és vàlida"
 
-#. dialogs.py:294
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "El nom ja està en ús"
+
+#. dialogs.py:414
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "Quina informació s'hauria de substituir al fitxer *.desktop?"
 
-#. dialogs.py:338
+#. dialogs.py:458
 msgid "really delete?"
 msgstr "segur que ho voleu eliminar?"
 
-#. dialogs.py:339
+#. dialogs.py:459
 msgid "No"
 msgstr "No"
 
-#. dialogs.py:340
+#. dialogs.py:460
 msgid "Yes"
 msgstr "Sí"
 
@@ -141,7 +142,7 @@ msgstr "Desar?"
 msgid "Save the current configuration"
 msgstr "Desa la configuració actual"
 
-#. widgets.py:264
+#. widgets.py:230
 msgid "Separator"
 msgstr "Separador"
 

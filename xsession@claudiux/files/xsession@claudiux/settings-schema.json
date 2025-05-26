@@ -18,5 +18,34 @@
       "96": 96,
       "128": 128
     }
+  },
+
+  "section2": {
+    "type": "section",
+    "description": "RELOAD ALL option"
+  },
+
+  "show_reload_all": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the RELOAD ALL option in submenus",
+    "tooltip": "Caution! Reloading all spices of a given type may lead to errors."
+  },
+
+  "section3": {
+    "type": "section",
+    "description": "Latest messages"
+  },
+
+  "number_latest": {
+    "type": "scale",
+    "default": 50,
+    "min": 10,
+    "max": 250,
+    "step": 5,
+    "description": "Number of latest messages to show",
+    "tooltip": "(Including empty lines.)"
   }
+
+
 }

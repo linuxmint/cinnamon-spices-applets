@@ -1,3 +1,49 @@
+### v13.0.1~20250523
+  * Minor bug fix.
+
+### v13.0.0~20250523
+  * Added the Menus tab in settings.
+  * Keeps certain context menu submenus open.
+
+### v12.0.4~20250519
+  * Do not play sound notification when the volume has reached its maximum limit.
+
+### v12.0.3~20250504
+  * Improved album art display.
+
+### v12.0.2~20250427
+  * Minor bugfix.
+
+### v12.0.1~20250424
+  * Removes DEBUG mode.
+
+### v12.0.0~20250424
+  * Produces square rendered images from album covers to display a more pleasing icon.
+  * Requires installation of imagemagick to obtain this result.
+
+### v11.5.2~20250416
+  * Bugfix related to [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074)
+
+### v11.5.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+
+### v11.5.0~20250415
+  * Best album cover change.
+  * Code: subdivision into libraries.
+
+### v11.4.0~20250408
+  * Improved album art display.
+
+### v11.3.0~20250405
+  * New option: Delay between icon and album art display.
+
+### v11.2.0~20250404
+  * Horizontal panel: keep title when paused.
+  * New option: "If the title is too long, end it with" (chosen characters).
+
+### v11.1.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
 ### v11.0.0~20250313
   * Works with the version 2.0.0 of the 'Album Art 3.0' desklet.
 

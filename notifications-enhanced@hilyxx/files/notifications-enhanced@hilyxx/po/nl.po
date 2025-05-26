@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# NOTIFICATIONS ENHANCED
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# hilyxx, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.0\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-21 15:31-0400\n"
-"PO-Revision-Date: 2024-07-24 00:12+0200\n"
+"POT-Creation-Date: 2025-05-18 21:41+0200\n"
+"PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:94
+#. applet.js:98
 msgid "Do not disturb"
 msgstr "Niet storen"
 
-#: applet.js:99
+#. applet.js:105
 msgid "No notifications"
 msgstr "Geen meldingen"
 
 #. settings-schema.json->keyClear->description
-#: applet.js:106
+#. applet.js:114
 msgid "Clear notifications"
 msgstr "Wis meldingen"
 
-#: applet.js:130
+#. applet.js:138
 msgid "Enable notifications"
 msgstr "Schakel meldingen in"
 
-#: applet.js:142
+#. applet.js:150
 msgid "Notification Settings"
 msgstr "Melding Instellingen"
 
-#: applet.js:224 applet.js:406
+#. applet.js:233 applet.js:411
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d melding"
 msgstr[1] "%d meldingen"
 
-#: applet.js:254
+#. applet.js:263
 msgid "Notifications"
 msgstr "Meldingen"
 
-#: applet.js:269
+#. applet.js:277
 msgid "Notifications disabled"
 msgstr "Meldingen uitgeschakeld"
 
-#: applet.js:422
+#. applet.js:427
 msgid "just now"
 msgstr "zojuist"
 
-#: applet.js:425
+#. applet.js:430
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d seconde geleden"
 msgstr[1] "%d seconden geleden"
 
-#: applet.js:429
+#. applet.js:434
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -109,7 +109,8 @@ msgstr ""
 "Vink dit aan om de tray te tonen, zelfs als er geen nieuwe meldingen zijn."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
+#, fuzzy
+msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
 "Toon 'Niet storen' icoon zelfs als de optie lege tray tonen is uitgeschakeld"
 
@@ -140,6 +141,16 @@ msgstr "Stel toetscombinatie(s) in om het meldingspopup-menu te tonen."
 #. settings-schema.json->keyClear->tooltip
 msgid "Set keybinding(s) to clear all notifications."
 msgstr "Stel toetscombinatie(s) in om alle meldingen te wissen."
+
+#. settings-schema.json->keyMute->description
+#, fuzzy
+msgid "Enable or disable notifications"
+msgstr "Schakel meldingen in"
+
+#. settings-schema.json->keyMute->tooltip
+#, fuzzy
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr "Stel sneltoets(en) in om meldingen in of uit te schakelen."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

@@ -1,3 +1,45 @@
+###  v3.4.4~20250422
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
+### v3.4.3~20250419
+  * Improves responsiveness.
+
+### v3.4.2~20250416
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
+### v3.4.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+  * Context menu: Submenu 'Configure...' allowing direct access to each settings tab.
+
+### v3.4.0~20250415
+  * The default icon color is now determined by the theme used.
+  * Code cleanup.
+
+### v3.3.1~20250413
+  * The “Try to download it from YT” menu option works again.
+  * Fixes #7055.
+  
+
+### v3.3.0~20250408
+  * Improved album art download.
+
+### v3.2.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
+### v3.1.2~20250330
+  * Improved Alarm-Clock settings.
+  * Changes in server list.
+
+### v3.1.1~20250325
+  * Added 'Wake me up!' switch in context menu.
+
+### v3.1.0~20250321
+  * Wake up with Radio 3.0.
+  * New tab Alarm Clock in settings.
+  * New option "Configure the Alarm Clock..." in context menu.
+  * README.md file updated.
+  * New sentences to translate.
+
 ### v3.0.0~20250313
   * Now works with the version 2.0.0 of the AlbumArt3.0 applet.
 

@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# INTERNET SEARCH BOX
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# mtwebster, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: search-box@mtwebster 2.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-05 20:02+0200\n"
+"POT-Creation-Date: 2025-05-25 21:36+0200\n"
 "PO-Revision-Date: 2024-07-09 23:54+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:68 old/5.4/applet.js:63
+#. applet.js:66 old/5.4/applet.js:63
 msgid "Right-click to select or add your search engine"
 msgstr "Clic dret per a seleccionar o afegir el vostre motor de cerca"
 
-#: applet.js:87 old/applet.js:79 old/3.2/applet.js:73 old/5.4/applet.js:82
+#. applet.js:85 old/applet.js:79 old/5.4/applet.js:82 old/3.2/applet.js:73
 msgid "Type to search..."
 msgstr "Escriviu per buscar..."
 
-#: applet.js:117 old/5.4/applet.js:112
+#. applet.js:115 old/5.4/applet.js:112
 msgid "Select your Search Engine:"
 msgstr "Seleccioneu el vostre motor de cerca:"
 
-#: old/applet.js:90
+#. old/applet.js:90
 msgid "Change default programs..."
 msgstr "Canviar els programes per defecte..."
 
-#: old/applet.js:92
+#. old/applet.js:92
 msgid "Edit providers"
 msgstr "Editar proveïdors"
 
@@ -58,27 +58,24 @@ msgstr "Proveïdors"
 msgid "Options"
 msgstr "Opcions"
 
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
 #. settings-schema.json->section-colors->title
-#. settings-schema.json->header-colors->description
 #. old->5.4->settings-schema.json->header-colors->description
 msgid "Search-box colors"
 msgstr "Colors de la caixa de cerca"
 
-#. settings-schema.json->header-provider->description
-#. old->3.2->settings-schema.json->header-provider->description
-#. old->5.4->settings-schema.json->header-provider->description
-msgid "Search Provider Settings"
-msgstr "Configuració del proveïdor de la cerca"
-
 #. settings-schema.json->show-provider->description
-#. old->3.2->settings-schema.json->show-provider->description
 #. old->5.4->settings-schema.json->show-provider->description
+#. old->3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
 msgstr "Mostrar proveïdor"
 
 #. settings-schema.json->show-provider->tooltip
-#. old->3.2->settings-schema.json->show-provider->tooltip
 #. old->5.4->settings-schema.json->show-provider->tooltip
+#. old->3.2->settings-schema.json->show-provider->tooltip
 msgid "Show selected provider in the panel"
 msgstr "Mostrar el proveïdor seleccionat al tauler"
 
@@ -95,11 +92,6 @@ msgid ""
 msgstr ""
 "Voleu reiniciar la consulta després de buscar? Aquesta opció pot no ser útil "
 "si voleu buscar la mateixa consulta a altres motors de cerca després."
-
-#. settings-schema.json->header-providers->description
-#. old->5.4->settings-schema.json->header-providers->description
-msgid "Search Engines"
-msgstr "Motors de cerca"
 
 #. settings-schema.json->providers->columns->title
 #. old->5.4->settings-schema.json->providers->columns->title
@@ -150,15 +142,9 @@ msgstr ""
 "seleccionat.\n"
 "Si no hi ha proveïdor seleccionat, s'utilitzarà Google."
 
-#. settings-schema.json->header-keybinding->description
-#. old->3.2->settings-schema.json->header-keybinding->description
-#. old->5.4->settings-schema.json->header-keybinding->description
-msgid "Keybinding"
-msgstr "Dreceres"
-
 #. settings-schema.json->custom-keybinding->description
-#. old->3.2->settings-schema.json->custom-keybinding->description
 #. old->5.4->settings-schema.json->custom-keybinding->description
+#. old->3.2->settings-schema.json->custom-keybinding->description
 msgid "Keybinding, which opens the search box"
 msgstr "Drecera del teclat que obre la finestra de cerca"
 
@@ -171,6 +157,20 @@ msgstr "Color de fons"
 #. old->5.4->settings-schema.json->text-color->description
 msgid "Text color"
 msgstr "Color del text"
+
+#. old->5.4->settings-schema.json->header-provider->description
+#. old->3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Configuració del proveïdor de la cerca"
+
+#. old->5.4->settings-schema.json->header-providers->description
+msgid "Search Engines"
+msgstr "Motors de cerca"
+
+#. old->5.4->settings-schema.json->header-keybinding->description
+#. old->3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Dreceres"
 
 #. old->3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"

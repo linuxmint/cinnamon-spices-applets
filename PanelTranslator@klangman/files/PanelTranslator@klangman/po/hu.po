@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-02 12:30-0500\n"
-"PO-Revision-Date: 2024-07-10 01:54-0400\n"
+"PO-Revision-Date: 2025-04-10 11:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #. applet.js:108 applet.js:345 applet.js:347
@@ -97,7 +97,7 @@ msgstr ""
 
 #. settings-schema.json->general-page->title
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #. settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
@@ -112,9 +112,8 @@ msgid "Panel Button Actions"
 msgstr "Panel gombok műveletek"
 
 #. settings-schema.json->hotkey-settings->title
-#, fuzzy
 msgid "Translation action hotkeys"
-msgstr "Fordítómotor"
+msgstr "Fordítási művelet gyorsbillentyűk"
 
 #. settings-schema.json->translate-engine->options
 msgid "Apertium"
@@ -176,20 +175,17 @@ msgid "Clipboard"
 msgstr "Vágólap"
 
 #. settings-schema.json->left-auto-paste->description
-#, fuzzy
 msgid "Automatically translate on left click"
-msgstr "Automatikus beillesztés és fordítás balra kattintva"
+msgstr "Automatikus fordítás bal kattintással"
 
 #. settings-schema.json->left-auto-paste->tooltip
-#, fuzzy
 msgid ""
 "Automatically translate the selection/clipboard contents when opening the "
 "Panel Translator popup window using a left click on the Panel Translator "
 "button"
 msgstr ""
-"Automatikusan beilleszti az aktuális kijelölés/vágólap tartalmát és "
-"lefordítja azt a felugró ablak megnyitásakor bal egérgombbal a fordítópanel "
-"gombjára kattintva"
+"A Panel Fordító felugró ablak megnyitásakor a Panel Fordító gombra való bal "
+"kattintással automatikusan lefordítja a kijelölés/vágólap tartalmát"
 
 #. settings-schema.json->left-auto-play->description
 msgid "Automatically play the translation on left click"

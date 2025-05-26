@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-22 12:52-0500\n"
-"PO-Revision-Date: 2024-01-06 16:04+0100\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"PO-Revision-Date: 2025-04-10 14:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,16 +17,76 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr ""
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr ""
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr ""
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr ""
+
+#. applet.js:76
+msgid "minutes"
+msgstr ""
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr ""
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr ""
 
 #. metadata.json->name
 msgid "Desaturate All"
 msgstr "Minden színtelenítése"
 
 #. metadata.json->description
-msgid "Convert your screen to grayscale."
+#, fuzzy
+msgid "Convert your screen to gray-scale."
 msgstr "Alakítsa át a képernyőjét szürkeárnyalatossá."
 
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr ""
+
 #. settings-schema.json->keybinding->description
-msgid "Shortcut to toggle grayscale"
+#, fuzzy
+msgid "Shortcut to toggle desaturation effect"
+msgstr "A szürkeárnyalatra kapcsolás parancsikonja"
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr ""
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr ""
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr ""
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr ""
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr ""
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
 msgstr ""

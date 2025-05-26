@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-16 20:55+0100\n"
-"PO-Revision-Date: 2025-02-21 19:37+0100\n"
+"POT-Creation-Date: 2025-04-17 13:58+0200\n"
+"PO-Revision-Date: 2025-05-13 14:53+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,87 +17,112 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:47
+#. applet.js:54
 msgid "Applet"
 msgstr "Applet"
 
-#. applet.js:48
+#. applet.js:55
 msgid "Desklet"
 msgstr "Desklet"
 
-#. applet.js:49
+#. applet.js:56
 msgid "Extension"
 msgstr "Extensie"
 
-#. applet.js:52
+#. applet.js:57
 msgid "Applets"
 msgstr "Applets"
 
-#. applet.js:53
+#. applet.js:58
 msgid "Desklets"
 msgstr "Desklets"
 
-#. applet.js:54
+#. applet.js:59
 msgid "Extensions"
 msgstr "Extensies"
 
-#. applet.js:150
+#. applet.js:112
+msgid "RELOAD ALL"
+msgstr "ALLES HERLADEN"
+
+#. applet.js:241
 msgid "Middle-click: \n"
 msgstr "Middelklik: \n"
 
-#. applet.js:150 applet.js:211
+#. applet.js:241 applet.js:317
 msgid "Show .xsession-errors"
 msgstr "Toon .xsession-errors"
 
-#. applet.js:227
+#. applet.js:242
+msgid "Ctrl + Middle-click: \n"
+msgstr "Ctrl + Middelklik: \n"
+
+#. applet.js:242 applet.js:331
+msgid "Show latest messages"
+msgstr "Toon laatste berichten"
+
+#. applet.js:295 applet.js:537
+#, javascript-format
+msgid "%s latest messages"
+msgstr "%s laatste berichten"
+
+#. applet.js:295 applet.js:537
+msgid "min: 10. max: 250."
+msgstr "min: 10, max: 250."
+
+#. applet.js:348
 msgid "Restart Cinnamon"
 msgstr "Herstart Cinnamon"
 
-#. applet.js:244
+#. applet.js:364
 msgid "--- Reload Spices ---"
 msgstr "--- Herlaad Spices ---"
 
-#. applet.js:251
+#. applet.js:370
 msgid "Reload Applet:"
 msgstr "Herlaad Applet:"
 
-#. applet.js:262
+#. applet.js:397
 msgid "Reload Desklet:"
 msgstr "Herlaad Desklet:"
 
-#. applet.js:271
+#. applet.js:424
 msgid "Reload Extension:"
 msgstr "Herlaad Extensie:"
 
-#. applet.js:280
+#. applet.js:450
+msgid "Reload Current Theme"
+msgstr "Herlaad huidig thema"
+
+#. applet.js:464
 msgid "--- Settings for ---"
 msgstr "--- Instellingen voor ---"
 
-#. applet.js:286
+#. applet.js:470
 msgid "Applet:"
 msgstr "Applet:"
 
-#. applet.js:295
+#. applet.js:479
 msgid "Desklet:"
 msgstr "Desklet:"
 
-#. applet.js:304
+#. applet.js:488
 msgid "Extension:"
 msgstr "Extensie:"
 
-#. applet.js:313
+#. applet.js:497
 msgid "--- View Code ---"
 msgstr "--- Bekijk Code ---"
 
-#. applet.js:319
+#. applet.js:503
 msgid "View Applet Code for:"
 msgstr "Bekijk Applet-code voor:"
 
-#. applet.js:328
+#. applet.js:512
 msgid "View Desklet Code for:"
 msgstr "Bekijk Desklet-code voor:"
 
-#. applet.js:337
+#. applet.js:521
 msgid "View Extension Code for:"
 msgstr "Bekijk Extensie-code voor:"
 
@@ -154,3 +179,33 @@ msgstr "96"
 #. settings-schema.json->icon_size->options
 msgid "128"
 msgstr "128"
+
+#. settings-schema.json->section2->description
+msgid "RELOAD ALL option"
+msgstr "Optie ALLES HERLADEN"
+
+#. settings-schema.json->show_reload_all->description
+msgid "Show the RELOAD ALL option in submenus"
+msgstr "Toon de optie ALLES HERLADEN in submenu's"
+
+#. settings-schema.json->show_reload_all->tooltip
+msgid "Caution! Reloading all spices of a given type may lead to errors."
+msgstr ""
+"Let op! Het herladen van alle spices van een bepaald type kan tot fouten "
+"leiden."
+
+#. settings-schema.json->section3->description
+msgid "Latest messages"
+msgstr "Laatste berichten"
+
+#. settings-schema.json->number_latest->description
+msgid "Number of latest messages to show"
+msgstr "Aantal te tonen laatste berichten"
+
+#. settings-schema.json->number_latest->tooltip
+msgid "(Including empty lines.)"
+msgstr "(Inclusief lege regels.)"
+
+#. scripts/watch-xse-latest.sh:10 scripts/watch-xse.sh:8
+msgid "-d"
+msgstr "-d"

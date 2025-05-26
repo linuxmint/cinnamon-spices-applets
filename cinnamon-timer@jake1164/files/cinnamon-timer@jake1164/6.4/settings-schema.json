@@ -1,0 +1,209 @@
+{
+    "layout1": {
+        "type": "layout",
+        "pages": ["page1", "page2", "page3", "page4"],
+        "page1": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section1"]
+        },
+        "page2": {
+            "type": "page",
+            "title": "Sounds",
+            "sections": ["section2"]
+        },
+        "page3": {
+            "type": "page",
+            "title": "Preset Times",
+            "sections": ["section3"]
+        },
+        "page4": {
+            "type": "page",
+            "title": "Slider Intervals",
+            "sections": ["section4"]
+        },
+        "section1": {
+            "type": "section",
+            "title": "General Settings",
+            "keys": [
+                "confirm-prompt-enable",
+                "message-prompt-enable",
+                "display-message",
+                "display-menu-enable",
+                "duration-display-enable",
+                "alarmtime-display-enable",
+                "alarmtime-format-small",
+                "alarmtime-format-large",
+                "alarmtime-format-switchover",
+                "auto-loop-enable"
+            ]
+        },
+        "section2": {
+            "type": "section",
+            "title": "Sound Settings",
+            "keys": ["sound-prompt-enable", "sound-file", "sound-volume"]
+        },
+        "section3": {
+            "type": "section",
+            "title": "Preset Times",
+            "keys": [ "preset_time"]
+        },
+        "section4": {
+            "type": "section",
+            "title": "Slider Intervals",
+            "keys": [ "slider_intervals"]
+        }
+    },
+    "confirm-prompt-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Check this to place a prompt on the window when time has elapsed.",
+        "tooltip" : "Check this to place a prompt on the window when time has elapsed"
+    },
+    "message-prompt-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Display a notification when time has elapsed",
+        "tooltip" : "Display a notification when time has elapsed"
+    },
+    "display-message" : {
+        "type": "entry",
+        "default": "Time up!",
+        "description": "Global message displayed in notification windows unless defined in preset time.",
+        "tooltip": "Global message displayed in notification windows unless defined in preset time."
+    },
+    "sound-prompt-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Play a sound when time is elapsed",
+        "tooltip" : "Play a sound when time is elapsed"
+    },
+    "sound-file": {
+        "type": "soundfilechooser",
+        "default": "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
+        "dependency": "sound-prompt-enable",
+        "description": "Full path and filename of alert sound file",
+        "tooltip": "Must have Sox installed. Most sound file types supported"
+    },
+    "sound-volume" : {
+        "type" : "scale",
+        "default" : 50,
+        "min" : 10,
+        "max" : 100,
+        "step" : 5,
+        "description" : "Specify the playback volume",
+        "tooltip" : "Specify the playback volume"
+    },
+
+    "display-menu-enable" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Show the timer menu when time is elapsed",
+        "tooltip" : "Show the timer menu when time is elapsed"
+    },
+    "duration-display-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Display remaining time in panel",
+        "tooltip" : "Display remaining time in panel"
+    },
+    "alarmtime-display-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Display alarm time in panel",
+        "tooltip" : "Display alarm time in panel"
+    },
+    "alarmtime-format-small" : {
+        "type" : "entry",
+        "default" : "%_I:%M:%S%P",
+        "indent" : true,
+        "description" : "Format used to display alarm time in the near future",
+        "tooltip" : "If the alarm time is less than the minutes specified below away,\nthe alarm time can be displayed with more details\n(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+    },
+    "alarmtime-format-large" : {
+        "type" : "entry",
+        "default" : "%_I:%M%P",
+        "indent" : true,
+        "description" : "Format used to display alarm time in the not so near future",
+        "tooltip" : "If the alarm time is more than the minutes specified below away,\nthe alarm time can be displayed with less details\n(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+    },
+    "alarmtime-format-switchover" : {
+        "type" : "spinbutton",
+        "default" : 10,
+        "min" : 0,
+        "max" : 1440,
+        "step" : 1,
+        "units" : "minutes",
+        "indent" : true,
+        "description" : "Time when switching from small to large time format",
+        "tooltip" : "Switch over time between the two formats specified above"
+    },
+    "auto-loop-enable" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Restart the timer automatically when time is elapsed",
+        "tooltip" : "Restart the timer automatically when time is elapsed"
+    },
+    "alarm_end" : {
+        "type" : "generic",
+        "default" : "",
+        "description" : "Do not change, the time the alarm is set to expire",
+        "tooltip" : "Do not change, the time the alarm is set to expire"
+    },
+    "alarm_start" : {
+        "type" : "generic",
+        "default" : "",
+        "description" : "Do not change, the time the alarm is set to expire",
+        "tooltip" : "Do not change, the time the alarm is set to expire"
+    },
+    "message" : {
+        "type" : "generic",
+        "default" : "",
+        "description" : "Do not change, message being displayed when the current timer expires",
+        "tooltip" : "Do not change, message being displayed when the current timer expires"
+    },
+    "slider_intervals" : {
+        "type" : "list",
+        "description" : "Slider Intervals",
+        "columns" : [
+            {"id": "min", "title": "Minimum", "type": "integer", "min": 0, "max":86400},
+            {"id": "max", "title": "Maximum", "type": "integer", "min": 0, "max":86400},
+            {"id": "step", "title": "Step", "type": "integer", "min": 1, "max": 3600}
+        ],
+        "default": [
+            {"min": 0, "max": 300, "step": 15},
+            {"min": 300, "max": 1800, "step": 60},
+            {"min": 1800, "max": 10800, "step": 600},
+            {"min": 10800, "max": 86400, "step": 3600}
+        ]
+    },
+    "preset_time": {
+        "type" : "list",
+        "description" : "Preset Times",
+        "columns" : [
+            {"id": "hours", "title": "Hours", "type": "integer", "min": 0, "max":500, "default": 0},
+            {"id": "minutes", "title": "Minutes", "type": "integer", "min": 0, "max":59, "default": 0},
+            {"id": "seconds", "title": "Seconds", "type": "integer", "min": 0, "max":59, "default": 0},
+            {"id": "label", "title": "Label", "type": "string"},
+            {"id": "message", "title": "Custom Message (overrides global message)", "type": "string"}
+        ],
+        "default": [
+            {"seconds": 0, "minutes": 0, "hours": 5},
+            {"seconds": 0, "minutes": 0, "hours": 4},
+            {"seconds": 0, "minutes": 0, "hours": 3},
+            {"seconds": 0, "minutes": 0, "hours": 2},
+            {"seconds": 0, "hours":1, "minutes": 30},
+            {"seconds": 0, "minutes": 0, "hours": 1},
+            {"seconds": 0, "minutes": 45, "hours": 0},
+            {"seconds": 0, "minutes": 30, "hours": 0},
+            {"seconds": 0, "minutes": 20, "hours": 0},
+            {"seconds": 0, "minutes": 15, "hours": 0},
+            {"seconds": 0, "minutes": 10, "hours": 0},
+            {"seconds": 0, "minutes": 5, "hours": 0},
+            {"seconds": 0, "minutes": 3, "hours": 0},
+            {"seconds": 0, "minutes": 2, "hours": 0},
+            {"seconds": 0, "minutes": 1, "hours": 0},
+            {"seconds": 30, "minutes": 0, "hours": 0}
+        ]
+    }
+}

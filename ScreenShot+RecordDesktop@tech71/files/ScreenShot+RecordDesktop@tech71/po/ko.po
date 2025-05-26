@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# SCREENSHOT+RECORD DESKTOP
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# tech71, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-04 18:50+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
 "PO-Revision-Date: 2023-10-28 12:08+0900\n"
 "Last-Translator: Kevin Kim <chaeya@gmail.com>\n"
 "Language-Team: \n"
@@ -17,87 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:28
+#. applet.js:27
 msgid "ScreenShot"
 msgstr "스크린샷 실행"
 
-#: applet.js:33
+#. applet.js:32
 msgid "Current Window"
 msgstr "현재 창 캡처"
 
-#: applet.js:38
+#. applet.js:37
 msgid "Selected Area"
 msgstr "선택 영역 캡처"
 
-#: applet.js:44
+#. applet.js:43
 msgid "Whole Screen"
 msgstr "전체 화면 캡처"
 
-#: applet.js:46
+#. applet.js:45
 msgid "1 Second Delay"
 msgstr "1초 지연"
 
-#: applet.js:50
+#. applet.js:49
 msgid "3 Second Delay"
 msgstr "3초 지연"
 
-#: applet.js:54
+#. applet.js:53
 msgid "5 Second Delay"
 msgstr "5초 지연"
 
-#: applet.js:61
+#. applet.js:60
 msgid "Record Screencast"
 msgstr "화면 녹화"
 
-#: applet.js:65
+#. applet.js:64
 msgid "Record Desktop With Audio"
 msgstr "화면 녹화 (오디오 포함)"
 
-#: applet.js:68 applet.js:74 applet.js:81 applet.js:87
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
 msgid "Recording"
 msgstr "녹화 중"
 
-#: applet.js:68 applet.js:81
+#. applet.js:67 applet.js:80
 msgid "With-Audio"
 msgstr "오디오 포함"
 
-#: applet.js:71
+#. applet.js:70
 msgid "Record Desktop Without Audio"
 msgstr "화면 녹화 (오디오 제외)"
 
-#: applet.js:74 applet.js:87
+#. applet.js:73 applet.js:86
 msgid "No-Audio"
 msgstr "오디오 제외"
 
-#: applet.js:78
+#. applet.js:77
 msgid "Record Current Window With Audio"
 msgstr "현재 창 녹화 (오디오 포함)"
 
-#: applet.js:84
+#. applet.js:83
 msgid "Record Current Window Without Audio"
 msgstr "현재 창 녹화 (오디오 제외)"
 
-#: applet.js:91
+#. applet.js:90
 msgid "Stop Recording"
 msgstr "녹화 중지"
 
-#: applet.js:96
+#. applet.js:95
 msgid "Recording-Stopped"
 msgstr "녹화 중지"
 
-#: applet.js:97
+#. applet.js:96
 msgid "Recording-Finished"
 msgstr "녹화 종료"
 
-#: applet.js:107
+#. applet.js:106
 msgid "Take A Snapshot or Record Your Desktop"
 msgstr "캡처 및 녹화"
 
-#: applet.js:124
+#. applet.js:123
 msgid "Pictures Folder"
 msgstr "사진 폴더 바로가기"
 
-#: applet.js:130
+#. applet.js:129
 msgid "Videos Folder"
 msgstr "비디오 폴더 바로가기"
 
@@ -106,8 +107,8 @@ msgid ""
 "Take A Snapshot Or Record Your Desktop (recording requires the packages "
 "ffmpeg, xdotool & x11-utils to be installed)"
 msgstr ""
-"이 프로그램은 바탕화면 스크린 샷 또는 녹화를 할 수 있습니다 (ffmpeg, "
-"xdotool & x11-utils 패키지 설치 필요)"
+"이 프로그램은 바탕화면 스크린 샷 또는 녹화를 할 수 있습니다 (ffmpeg, xdotool "
+"& x11-utils 패키지 설치 필요)"
 
 #. metadata.json->name
 msgid "ScreenShot+Record Desktop"

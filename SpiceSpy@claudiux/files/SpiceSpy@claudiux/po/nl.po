@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-27 10:32+0100\n"
-"PO-Revision-Date: 2025-02-21 19:17+0100\n"
+"POT-Creation-Date: 2025-04-07 12:12+0200\n"
+"PO-Revision-Date: 2025-05-13 14:32+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,35 +16,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:127
+#. applet.js:206
 msgid "score"
 msgstr "score"
 
-#. applet.js:139
+#. applet.js:218
 msgid "comments"
 msgstr "opmerkingen"
 
-#. applet.js:152
+#. applet.js:231
 msgid "recent issues"
 msgstr "recente problemen"
 
-#. applet.js:164
+#. applet.js:243
 msgid "translations"
 msgstr "vertalingen"
 
-#. applet.js:737
-msgid "Mark all as read"
-msgstr "Markeer alles als gelezen"
-
-#. applet.js:746
-msgid "Refresh"
-msgstr "Vernieuw"
-
-#. applet.js:759
+#. applet.js:851
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:832
+#. applet.js:936
+msgid "Mark all as read"
+msgstr "Markeer alles als gelezen"
+
+#. applet.js:947
+msgid "Refresh"
+msgstr "Vernieuw"
+
+#. applet.js:959
+msgid "Refreshing in progress"
+msgstr "Bezig met vernieuwen"
+
+#. applet.js:970
 msgid "Configure..."
 msgstr "Configureren..."
 
@@ -100,9 +104,37 @@ msgstr "Toon elk Spice-icoon in het menu"
 msgid "Icon size"
 msgstr "Icoon grootte"
 
-#. settings-schema.json->icon-size->units
-msgid "pixels"
-msgstr "pixels"
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"

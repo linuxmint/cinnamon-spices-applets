@@ -1,3 +1,10 @@
+### v5.3.2~20250415
+  * Minor bugfix.
+
+### v5.3.1~20250407
+  * Minor bugfix.
+  * Updates translations files.
+
 ### v5.3.0~20250315
   * Avoids flooding the Cinnamon Spices server with unnecessary requests.
   * Better manage loops.

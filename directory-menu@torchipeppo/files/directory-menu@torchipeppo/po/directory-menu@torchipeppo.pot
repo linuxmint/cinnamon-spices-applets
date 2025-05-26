@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: directory-menu@torchipeppo 0.8.0\n"
+"Project-Id-Version: directory-menu@torchipeppo 0.9.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-31 18:13+0100\n"
+"POT-Creation-Date: 2025-04-22 12:08-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popup_menu.py:71
+#. popup_menu.py:95
 msgid "Open Folder"
 msgstr ""
 
-#: popup_menu.py:76
+#. popup_menu.py:100
 msgid "Open in Terminal"
 msgstr ""
 
@@ -58,12 +58,34 @@ msgstr ""
 msgid "Panel Text"
 msgstr ""
 
-#. settings-schema.json->behavior-section->description
-msgid "Behavior"
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr ""
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
 msgstr ""
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
+msgstr ""
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr ""
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr ""
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
 msgstr ""
 
 #. settings-schema.json->order-by->options
@@ -84,20 +106,6 @@ msgstr ""
 
 #. settings-schema.json->pinned-first->description
 msgid "Show pinned items first"
-msgstr ""
-
-#. settings-schema.json->limit-characters->description
-msgid "Limit the Maximum Number of Characters on the Submenus"
-msgstr ""
-
-#. settings-schema.json->character-limit->description
-msgid "Character Limit"
-msgstr ""
-
-#. settings-schema.json->character-limit->tooltip
-msgid ""
-"(Approximately) Limit the number of characters of each entry.\n"
-"Useful if you think the menu is too wide."
 msgstr ""
 
 #. settings-schema.json->keybindings-section->description
