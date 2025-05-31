@@ -5,17 +5,15 @@ const Main = imports.ui.main;
 const St = imports.gi.St;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
-
-// Localisation
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 
-// Configuration de l'applet
+// Applet params
 const UUID = "clipboard-history@axaul";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 const _ = Gettext.domain(UUID).gettext;
 const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
-const MAX_TAILLE_CONTENU = 100;
+const CONTENT_MAX_SIZE_TO_DISPLAY = 100;
 
 function HistoriquePressePapiers(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
@@ -27,43 +25,43 @@ HistoriquePressePapiers.prototype = {
     _init: function(metadata, orientation, panelHeight, instanceId) {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
-        // ***********************************
-        // ** Initialisation des paramètres **
-        // ***********************************
+        // *****************
+        // ** Init params **
+        // *****************
 
         this._preferences = this._getDefaultSettings();
         this.settings = new Settings.AppletSettings(this._preferences, UUID, instanceId);
         this._bindSettings();
 
-        // ****************************************
-        // ** Initialisation de l'UI de l'applet **
-        // ****************************************
+        // ********************
+        // ** Init applet UI **
+        // ********************
 
         this.set_applet_icon_path(AppletDir + '/icon.png');
         this.set_applet_tooltip(_("Open clipboard history"));
 
-        // Menu principal
+        // Main menu
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        // Création & ajout des éléments statiques du menu
+        // Init & add static elements to the menu
         this._addStaticMenuItems();
 
-        // Section dynamique (contenant l'historique du presse-papiers)
+        // Init dynamic section (clipboard history content)
         this.sectionHistorique = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this.sectionHistorique);
 
-        // *****************************************
-        // ** Initialisation des données internes **
-        // *****************************************
+        // ************************
+        // ** Init default datas **
+        // ************************
         this.historiquePressePapiers = [];
         this.menuItems = [];
         this.timeoutId = null;
 
-        // ***************************
-        // ** Démarrage de l'applet **
-        // ***************************
+        // *********************
+        // ** Applet starting **
+        // *********************
         this._reloadHistorique();
         this._startClipboardWatcher();
     },
@@ -72,9 +70,9 @@ HistoriquePressePapiers.prototype = {
         this.menu.toggle();
     },
 
-    // ****************************
-    // ** GESTION DES PARAMETRES **
-    // ****************************
+    // ***********************
+    // ** MANAGE PARAMETERS **
+    // ***********************
     _getDefaultSettings: function() {
         return {
             debug_mode: false,
@@ -87,10 +85,10 @@ HistoriquePressePapiers.prototype = {
     _bindSettings: function() {
         this.settings.bindProperty(
             Settings.BindingDirection.IN,
-            "debug_mode", // Clé du settings-schema.json
-            "debug_mode", // Propriété de _preferences
+            "debug_mode", // settings-schema.json key
+            "debug_mode", // _preferences properties
             this._onSettingsChanged.bind(this), // callback
-            null
+            null    
         );
         this.settings.bindProperty(Settings.BindingDirection.IN, "clipboard_history_limit", "clipboard_history_limit", this._onSettingsChanged.bind(this), null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "poll_interval", "poll_interval", this._onSettingsChanged.bind(this), null);
@@ -119,7 +117,7 @@ HistoriquePressePapiers.prototype = {
         });
         this.menu.addMenuItem(this.boutonEffacerTout);
 
-        // Séparation des boutons du menu avec autres commandes due mnu
+        // Separate buttons from menu
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     },
 
@@ -129,13 +127,13 @@ HistoriquePressePapiers.prototype = {
         this.historiquePressePapiers.forEach(contenu => {
             let item = this._createClipboardMenuItem(contenu);
             this.sectionHistorique.addMenuItem(item);
-            this.menuItems.unshift(item); // unshift au lieu de push pour être raccord avec historiquePressePapiers (qui garde le tableau "à l'envers")
+            this.menuItems.unshift(item);
         });
     },
 
     _createClipboardMenuItem: function(contenu) {
-        let contenuAffiche = contenu.length > MAX_TAILLE_CONTENU
-            ? contenu.substring(0, MAX_TAILLE_CONTENU - 3) + "..."
+        let contenuAffiche = contenu.length > CONTENT_MAX_SIZE_TO_DISPLAY
+            ? contenu.substring(0, CONTENT_MAX_SIZE_TO_DISPLAY - 3) + "..."
             : contenu;
         let item = new PopupMenu.PopupMenuItem(contenuAffiche);
         item.connect('activate', () => {
@@ -145,15 +143,15 @@ HistoriquePressePapiers.prototype = {
         return item;
     },
 
-    // *****************************
-    // ** GESTION DE L'HISTORIQUE **
-    // *****************************
+    // ********************
+    // ** MANAGE HISTORY **
+    // ********************
     _clearHistorique: function() {
         this._logDebug(_("Clipboard has been emptied."));
         this.historiquePressePapiers = [];
         this._reloadHistorique();
         
-        // on vide le presse-papiers au passage
+        // When we clear history, we erase the current content of the clipboard
         let pressePapiers = St.Clipboard.get_default();
         pressePapiers.get_text(St.ClipboardType.CLIPBOARD, (clip, contenu) => {
             if (contenu !== null && contenu !== undefined) {
@@ -178,8 +176,8 @@ HistoriquePressePapiers.prototype = {
     },
 
     _moveToTopHistorique: function(contenu) {
-        // Cette fonction a pour but de faire passer l'élément sélectionner pour être copié en tête de la liste.
-        // D'abord on supprime l'occurrence existante, on la réinsère en haut de la liste, puis on recharge l'historique.
+        // The purpose of this function is to move the selected element to be copied to the top of the history list.
+        // First, we delete the existing occurrence, then we re-insert it at the top of the list, and finally we reload history.
         this.historiquePressePapiers = this.historiquePressePapiers.filter(c => c !== contenu);
         this.historiquePressePapiers.unshift(contenu);
         this._reloadHistorique();
@@ -194,9 +192,9 @@ HistoriquePressePapiers.prototype = {
         }
     },
 
-    // ******************
-    // ** SURVEILLANCE **
-    // ******************
+    // ****************
+    // ** MONITORING **
+    // ****************
     _startClipboardWatcher: function() {
         let dernierContenu = "";
         const verifierPressePapiers = () => {
@@ -210,7 +208,7 @@ HistoriquePressePapiers.prototype = {
                     this._logDebug(_("The contents of the clipboard have not changed since last %s seconds.").format(this._preferences.poll_interval));
                 }
             });
-            return true; // sans ça la boucle ne boucle pas
+            return true; // without it, the loop doesn't work
         }
         this._logDebug(_("Starting clipboard checking."));
         this._timeoutId = Mainloop.timeout_add_seconds(this._preferences.poll_interval, verifierPressePapiers);
