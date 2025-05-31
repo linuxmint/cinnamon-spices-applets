@@ -132,9 +132,13 @@ HistoriquePressePapiers.prototype = {
     },
 
     _createClipboardMenuItem: function(contenu) {
-        let contenuAffiche = contenu.length > CONTENT_MAX_SIZE_TO_DISPLAY
-            ? contenu.substring(0, CONTENT_MAX_SIZE_TO_DISPLAY - 3) + "..."
-            : contenu;
+
+        let ligneContenu = contenu.split("\n").map(line => line.trim()).join(" ");
+        ligneContenu = ligneContenu.trim();
+
+        let contenuAffiche = ligneContenu.length > CONTENT_MAX_SIZE_TO_DISPLAY
+            ? ligneContenu.substring(0, CONTENT_MAX_SIZE_TO_DISPLAY - 3) + "..."
+            : ligneContenu;
         let item = new PopupMenu.PopupMenuItem(contenuAffiche);
         item.connect('activate', () => {
             this._copyToClipboard(contenu);
