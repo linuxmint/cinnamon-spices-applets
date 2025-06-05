@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-05 16:59+0200\n"
-"PO-Revision-Date: 2025-05-23 16:34-0400\n"
+"PO-Revision-Date: 2025-06-05 18:58-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:204 3.4/applet.js:65
@@ -1111,13 +1111,15 @@ msgstr "Mostrar icono de medios ópticos"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->description
 msgid "View Full Album Art"
-msgstr ""
+msgstr "Ver la carátula completa del álbum"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
 msgid ""
 "When unchecked, Album Art in the menu may be partially covered by Artist and "
 "Title."
 msgstr ""
+"Cuando no está marcada, la carátula del álbum en el menú puede estar "
+"parcialmente cubierta por el artista y el título."
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
 msgid "Keep the App selector open"
