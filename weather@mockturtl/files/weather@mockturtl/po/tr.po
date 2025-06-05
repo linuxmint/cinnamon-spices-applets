@@ -1105,14 +1105,14 @@ msgstr "Volkanik kül"
 #. 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10527
 #. 3.8/weather-applet.js:13655
 msgid "Squalls"
-msgstr "Bağrışma"
+msgstr "Sağanak Hattı"
 
 #. 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
 #. 3.0/yahoo.js:436 3.8/weather-applet.js:10422 3.8/weather-applet.js:10529
 #. 3.8/weather-applet.js:13301 3.8/weather-applet.js:13302
 #. 3.8/weather-applet.js:15082 3.8/weather-applet.js:15083
 msgid "Tornado"
-msgstr "Bora"
+msgstr "Hortum"
 
 #. 3.0/openWeatherMap.js:413
 msgid "Sky is clear"
@@ -1143,7 +1143,7 @@ msgstr "Parçalı bulutlu"
 
 #. 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10540
 msgid "Overcast clouds"
-msgstr "Kapalı bulanık"
+msgstr "Kapalı bulutlu"
 
 #. 3.0/us_weather.js:120
 msgid "Could not get forecast for your area"
@@ -1163,7 +1163,7 @@ msgstr "Açık ve rüzgarlı"
 
 #. 3.0/us_weather.js:450 3.8/weather-applet.js:13194
 msgid "Few clouds and windy"
-msgstr "Az bulutluAz bulutlu ve rüzgarlı"
+msgstr "Az bulutlu ve rüzgarlı"
 
 #. 3.0/us_weather.js:457 3.8/weather-applet.js:13201
 msgid "Partly cloudy and windy"
@@ -1425,7 +1425,7 @@ msgstr "Sağanak"
 
 #. 3.0/yahoo.js:449
 msgid "Snow Flurries"
-msgstr "Kar Fırtınası"
+msgstr "Hafif kar serpintisi"
 
 #. 3.0/yahoo.js:450 3.8/weather-applet.js:16586 3.8/weather-applet.js:16587
 msgid "Light Snow Showers"
@@ -1515,11 +1515,11 @@ msgstr "Şiddetli Kar"
 
 #. 3.0/yahoo.js:478
 msgid "Not Available"
-msgstr "Müsait değil"
+msgstr "Mevcut değil"
 
 #. 3.0/yahoo.js:479
 msgid "Scattered Thundershowers"
-msgstr "Fırtına Bulutlu"
+msgstr "Aralıklı Gökgürültülü Sağanak"
 
 #. 3.8/weather-applet.js:766
 msgid ""
@@ -1610,7 +1610,7 @@ msgstr "Fırtına"
 
 #. 3.8/weather-applet.js:10497
 msgid "Light shower sleet"
-msgstr "Hafif sağanak yağış"
+msgstr "Hafif sulu sepken sağanağı"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1703,7 +1703,7 @@ msgstr "Hafif donan çiseleme/dondurucu yağmur"
 
 #. 3.8/weather-applet.js:13613
 msgid "Funnel cloud/tornado"
-msgstr "Huni bulutu/kasırga"
+msgstr "Huni bulutu/hortum"
 
 #. 3.8/weather-applet.js:13615
 msgid "Hail showers"
@@ -1865,7 +1865,7 @@ msgid ""
 "entered the API key that you have from Pirate Weather"
 msgstr ""
 "Lütfen emin olun\n"
-"Pirate Weather'dan aldığınız API anahtarını girdinizden"
+"Pirate Weather'dan aldığınız API anahtarını girdiğinizden"
 
 #. 3.8/weather-applet.js:15886
 msgid ""

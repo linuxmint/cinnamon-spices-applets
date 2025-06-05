@@ -10,6 +10,34 @@ const Util = imports.misc.util;
 var prov_label = "";
 var prov_url = "";
 
+// Calculates the Levenshtein distance between two strings a and b.
+// The Levenshtein distance is a measure of the similarity between two strings.
+// It is defined as the minimum number of single-character edits
+// (insertions, deletions or substitutions) required to change one word into the other.
+function levenshtein(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    let matrix = [];
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
+    for (let j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1,
+                                   Math.min(matrix[i][j - 1] + 1,
+                                            matrix[i - 1][j] + 1));
+            }
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
 const UUID = "search-box@mtwebster";
 const HOME_DIR = GLib.get_home_dir();
 
@@ -191,26 +219,94 @@ SearchBoxApplet.prototype = {
     },
 
     _search: function() {
-        let old_provider = ""+this.selected_provider;
         var _entry = this.searchEntry.get_text().replace(/'/g,"%27");
-        let brief = _entry.split(" ", 1)[0];
-        if (brief.length === 3) {
+        let potential_shortcode = _entry.split(" ", 1)[0];
+        let shortcode_length_plus_space = 0;
+        let exact_match_found = false;
+
+        // Try exact shortcode match first (case-insensitive)
+        for (let p of this.providers) {
+            if (p.short && p.short.toLowerCase() === potential_shortcode.toLowerCase()) {
+                prov_label = p.name;
+                this.selected_provider = prov_label; // Update the selected provider
+                prov_url = p.url;
+                shortcode_length_plus_space = p.short.length + 1;
+                _entry = _entry.slice(shortcode_length_plus_space);
+                exact_match_found = true;
+                break;
+            }
+        }
+
+        // If no exact match, try fuzzy matching for shortcodes
+        if (!exact_match_found && potential_shortcode.length > 0) { // Only attempt fuzzy if no exact match and there's a potential shortcode
+            let best_match_provider = null;
+            let min_distance = Infinity; // Or a sensible threshold like 2
+
             for (let p of this.providers) {
-                if (p.short == brief) {
-                    prov_label = p.name;
-                    this.selected_provider = prov_label;
+                if (p.short && p.short.length > 0) { // Ensure provider has a shortcode
+                    let distance = levenshtein(potential_shortcode.toLowerCase(), p.short.toLowerCase());
+                    if (distance < min_distance) {
+                        min_distance = distance;
+                        best_match_provider = p;
+                    }
+                }
+            }
+
+            // Use the best match if the distance is small (e.g., 1, or <=2 for longer shortcodes)
+            // Threshold of 1 is safer for short shortcodes to avoid incorrect matches.
+            // For this basic implementation, let's use a threshold of 1.
+            if (best_match_provider && min_distance <= 1) {
+                prov_label = best_match_provider.name;
+                this.selected_provider = prov_label; // Update the selected provider
+                prov_url = best_match_provider.url;
+                // shortcode_length_plus_space = best_match_provider.short.length + 1; // Not needed here as we use potential_shortcode.length for slicing
+                 // Check if the potential_shortcode was indeed what we corrected from
+                if (_entry.toLowerCase().startsWith(potential_shortcode.toLowerCase() + " ")) {
+                    _entry = _entry.slice(potential_shortcode.length + 1);
+                } else if (_entry.toLowerCase() === potential_shortcode.toLowerCase()) {
+                    // If the entry was *only* the misspelled shortcode
+                    _entry = "";
+                }
+                // If not, _entry remains as is, meaning no search term was provided after the (misspelled) shortcode
+            }
+        }
+
+        // Fallback: Ensure prov_url is set from current selection or default if not matched by shortcode
+        if (!prov_url) {
+             for (let p of this.providers) {
+                if (p.name === this.selected_provider) {
                     prov_url = p.url;
-                    _entry = _entry.slice(4);
-                    break
+                    break;
                 }
             }
         }
+        // Fallback if still no prov_url (shouldn't happen if selected_provider is always valid)
+        if (!prov_url && this.providers.length > 0) {
+            // Attempt to find the first available provider as a last resort
+            for (let p of this.providers) {
+                if (p.show !== false && p.url) { // Check if provider is shown and has a URL
+                    prov_url = p.url;
+                    prov_label = p.name;
+                    this.selected_provider = prov_label; // Also update selected_provider
+                    break;
+                }
+            }
+            // If still no provider, use a hardcoded default (original fallback)
+            if (!prov_url) {
+                prov_url = "https://google.com/search?q=";
+                prov_label = "Google";
+                this.selected_provider = prov_label;
+            }
+        }
+
         Util.spawnCommandLineAsync("xdg-open " + prov_url + "'" + _entry + "'");
         if (this.reset_after_search) {
             this.searchEntry.set_text("");
             this.searchActive = false;
         }
-        this.selected_provider = old_provider;
+        // Do not reset selected_provider here, it's now updated by the fuzzy logic if a match was made
+        // this.selected_provider = old_provider; // Remove this line or adapt
+        this._reload(); // Call reload to update applet label if provider changed
         this.menu.close();
     },
 
