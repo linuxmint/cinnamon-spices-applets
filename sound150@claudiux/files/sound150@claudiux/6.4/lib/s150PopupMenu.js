@@ -915,7 +915,11 @@ class Player extends PopupMenu.PopupMenuSection {
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
         //~ log("actor size (wxh): "+actor.width+"x"+actor.height, true);
-        actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
+        let _height = (this._applet.viewFullAlbumArt) ? 420 : 300;
+        //~ actor.margin_bottom = ""+Math.max(0, Math.trunc(_height - actor.height))+"px";
+        actor.set_margin_bottom(Math.max(0, Math.trunc(_height * global.ui_scale - actor.height)));
+        //~ actor.set_margin_bottom(Math.max(0, Math.trunc(300 * global.ui_scale - actor.height)));
+
         actor.set_margin_left(Math.max(0, Math.trunc(300 * global.ui_scale - actor.width)));
 
         this.cover = actor;
