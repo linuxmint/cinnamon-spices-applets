@@ -259,6 +259,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
         SHOW_MEDIA_OPTICAL = this.showMediaOptical;
 
+        this.settings.bind("viewFullAlbumArt", "viewFullAlbumArt", () => {
+            this._on_reload_this_applet_pressed();
+        });
+
         this.settings.bind("keepAppListOpen", "keepAppListOpen");
         this.settings.bind("keepOutputListOpen", "keepOutputListOpen");
         this.settings.bind("keepInputListOpen", "keepInputListOpen");

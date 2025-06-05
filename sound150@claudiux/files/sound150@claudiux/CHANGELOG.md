@@ -1,3 +1,6 @@
+### v13.1.0~20250605
+  * New option "View Full Album Art".
+
 ### v13.0.1~20250523
   * Minor bug fix.
 

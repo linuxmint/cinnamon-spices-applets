@@ -61,7 +61,8 @@
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
         "avoidTwice",
-        "showMediaOptical"
+        "showMediaOptical",
+        "viewFullAlbumArt"
       ]
     },
     "sectionMenu2": {
@@ -235,6 +236,12 @@
     "type": "switch",
     "default": true,
     "description": "Show Media-Optical icon"
+  },
+  "viewFullAlbumArt": {
+    "type": "switch",
+    "default": false,
+    "description": "View Full Album Art",
+    "tooltip": "When unchecked, Album Art in the menu may be partially covered by Artist and Title."
   },
   "keepAppListOpen": {
     "type": "switch",
