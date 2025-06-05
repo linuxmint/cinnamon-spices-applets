@@ -1,0 +1,126 @@
+# DIRECTORY MENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# torchipeppo, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-22 12:08-0400\n"
+"PO-Revision-Date: 2025-04-22 12:48-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. popup_menu.py:95
+msgid "Open Folder"
+msgstr "Abrir carpeta"
+
+#. popup_menu.py:100
+msgid "Open in Terminal"
+msgstr "Abrir en el terminal"
+
+#. metadata.json->name
+msgid "Directory Menu"
+msgstr "Menú del Directorio"
+
+#. metadata.json->description
+msgid ""
+"Quickly navigate through directories on your system using a dropdown menu."
+msgstr ""
+"Navege rápidamente por los directorios de su sistema mediante un menú "
+"desplegable."
+
+#. settings-schema.json->starting-uri->description
+msgid "Base Directory"
+msgstr "Directorio base"
+
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. settings-schema.json->icon-name->description
+msgid "Icon (hover here for info!)"
+msgstr "Icono (pase el ratón para obtener información)"
+
+#. settings-schema.json->icon-name->tooltip
+msgid "Must be an icon name (no path), and should be symbolic."
+msgstr "Debe ser un nombre de icono (sin ruta), y debe ser simbólico."
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip Text"
+msgstr "Texto de información sobre herramientas"
+
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr "Texto del panel"
+
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr "Visibilidad"
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr "Incluye \"Abrir carpeta\" y \"Abrir en terminal\""
+
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Incluir archivos ocultos"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr "Limitar el número máximo de caracteres en los submenús"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "Límite de caracteres"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"Limita (aproximadamente) el número de caracteres de cada entrada.\n"
+"Útil si crees que el menú es demasiado amplio."
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr "Ordenar"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr "Nombre"
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr "Fecha de modificación"
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr "Ordenar por..."
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr "Mostrar primero los artículos favoritos"
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr "Mostrar primero los elementos fijados"
+
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr "Atajos de teclado"
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "Mostrar menú"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "Establezca la combinación de teclas para mostrar el menú."
