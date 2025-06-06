@@ -31,6 +31,7 @@ export function OWMOneCallToWeatherData(json: OWMOneCallPayload, conditionsTrans
 			icons: OWMIconToBuiltInIcons(json?.current?.weather?.[0]?.icon),
 			customIcon: OWMIconToCustomIcon(json?.current?.weather?.[0]?.icon)
 		},
+		uvIndex: json.current.uvi,
 		extra_field: {
 			name: _("Feels Like"),
 			value: json.current.feels_like,
