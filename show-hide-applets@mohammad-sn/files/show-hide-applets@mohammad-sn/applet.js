@@ -75,6 +75,7 @@ MyApplet.prototype = {
                     }
                 }), null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "autohiderstime", "autohide_rs_time", function(){}, null);
+            this.settings.bindProperty(Settings.BindingDirection.IN, "hideuntilseparator", "hide_until_separator", function(){}, null);
 
 
 
@@ -188,6 +189,9 @@ MyApplet.prototype = {
                     }));
                     continue;
                     //this.traysize =
+                }
+                else if (this.hide_until_separator && _children[i]._applet._uuid=="separator@cinnamon.org") {
+                    break;
                 }
                 _children[i].hide();
 //                if(_children[i]._applet._uuid=="systray@cinnamon.org" || _children[i]._applet._uuid=="systray-collapsible@koutch"){
