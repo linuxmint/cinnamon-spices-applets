@@ -69,15 +69,15 @@ AnyAlarmApplet.prototype = {
             return 60 - sec;
             break;
           case "qh": // next quarter hour
-            if (min > 45) return 60 - min;
-            if (min > 30) return 45 - min;
-            if (min > 15) return 30 - min;
-            return 15 - min;
+            if (min >= 45) return (60 - min) * 60;
+            if (min >= 30) return (45 - min) * 60;
+            if (min >= 15) return (30 - min) * 60;
+            return (15 - min) * 60;
           case "hh": // next half hour
-            if (min > 30) return 60 - min;
-            return 30 - min;
+            if (min >= 30) return (60 - min) * 60;
+            return (30 - min) * 60;
           case "fh": // next full hour
-            return 60 - min;
+            return (60 - min) * 60;
             break;
           default:
             break;
