@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: app-launcher@mchilli 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-14 16:58+0200\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
 "PO-Revision-Date: 2025-03-02 00:27+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:117
+#. applet.js:122
 msgid "All workspaces"
 msgstr "Tots els espais de treball"
 
-#. applet.js:145
+#. applet.js:150
 msgid "Edit Applications"
 msgstr "Editar aplicacions"
 
-#. applet.js:864 applet.js:1158
+#. applet.js:886 applet.js:1199
 msgid "Delete"
 msgstr "Eliminar"
 
-#. applet.js:865 applet.js:1159
+#. applet.js:887 applet.js:1200
 msgid "Edit"
 msgstr "Editar"
 
-#. applet.js:866 applet.js:1160 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
 #. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "Cancel·lar"
@@ -159,14 +159,12 @@ msgstr "Un llançador d'aplicacions simple"
 msgid "Applications"
 msgstr "Aplicacions"
 
-#. settings-schema.json->page-settings->title
-msgid "Settings"
-msgstr "Opcions"
-
+#. settings-schema.json->page-settings-global->title
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "Opcions globals"
 
+#. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "Opcions de l'aplicació"
@@ -218,6 +216,22 @@ msgstr "Menú a la posició del ratolí"
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr "Mostra el menú al costat del cursor en ser iniciat per una drecera"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr ""
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
