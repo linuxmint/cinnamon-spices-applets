@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-11 16:17+0200\n"
-"PO-Revision-Date: 2025-02-26 11:08-0300\n"
+"PO-Revision-Date: 2025-06-11 11:48-0400\n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:122
 msgid "All workspaces"
@@ -222,19 +222,19 @@ msgstr ""
 
 #. settings-schema.json->open-by-hover->description
 msgid "Open menus by hovering over them"
-msgstr ""
+msgstr "Abrir los menús pasando el ratón por encima"
 
 #. settings-schema.json->open-by-hover->tooltip
 msgid "Open all menus when you move the mouse pointer over them"
-msgstr ""
+msgstr "Abrir todos los menús al situar el puntero del ratón sobre ellos"
 
 #. settings-schema.json->open-by-hover-delay->description
 msgid "Hover delay"
-msgstr ""
+msgstr "Retraso al pasar por encima"
 
 #. settings-schema.json->open-by-hover-delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "milisegundos"
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
