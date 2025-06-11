@@ -31,6 +31,8 @@
                 "hotkeys-enabled",
                 "hotkey-bindings",
                 "menu-at-pointer",
+                "open-by-hover",
+                "open-by-hover-delay",
                 "bind-to-workspace"
             ]
         },
@@ -123,6 +125,22 @@
         "default": false,
         "dependency": "hotkeys-enabled",
         "tooltip": "Show the menu next to the cursor when triggered by hotkey"
+    },
+    "open-by-hover": {
+        "type": "switch",
+        "description": "Open menus by hovering over them",
+        "default": false,
+        "tooltip": "Open all menus when you move the mouse pointer over them"
+    },
+    "open-by-hover-delay": {
+        "type": "spinbutton",
+        "description": "Hover delay",
+        "default": 300,
+        "min":0,
+        "max":1000,
+        "step":50,
+        "units":"milliseconds",
+        "dependency": "open-by-hover"
     },
     "bind-to-workspace": {
         "type": "combobox",
