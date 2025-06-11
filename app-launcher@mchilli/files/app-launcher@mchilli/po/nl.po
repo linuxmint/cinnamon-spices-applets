@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: app-launcher@mchilli 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-14 16:58+0200\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
 "PO-Revision-Date: 2025-05-13 14:33+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:117
+#. applet.js:122
 msgid "All workspaces"
 msgstr "Alle werkruimtes"
 
-#. applet.js:145
+#. applet.js:150
 msgid "Edit Applications"
 msgstr "Bewerk applicaties"
 
-#. applet.js:864 applet.js:1158
+#. applet.js:886 applet.js:1199
 msgid "Delete"
 msgstr "Verwijderen"
 
-#. applet.js:865 applet.js:1159
+#. applet.js:887 applet.js:1200
 msgid "Edit"
 msgstr "Bewerken"
 
-#. applet.js:866 applet.js:1160 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
 #. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "Annuleren"
@@ -158,14 +158,12 @@ msgstr "Een eenvoudige applicatie launcher"
 msgid "Applications"
 msgstr "Applicaties"
 
-#. settings-schema.json->page-settings->title
-msgid "Settings"
-msgstr "Instellingen"
-
+#. settings-schema.json->page-settings-global->title
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "Globale instellingen"
 
+#. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "Applicatie-instellingen"
@@ -217,6 +215,22 @@ msgstr "Menu op muispositie"
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr "Toon het menu naast de cursor indien geactiveerd door sneltoets"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr ""
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
