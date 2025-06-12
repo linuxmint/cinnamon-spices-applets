@@ -1,0 +1,20 @@
+{
+    "uuid": "AICompanionApplet@cinnamonai",
+    "name": "AI Companion",
+    "description": "Integrates ChatGPT, Google Gemini, and DeepSeek AI into Cinnamon",
+    "version": "0.1",
+    "cinnamon-version": [
+        "4.0",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.0",
+        "5.2",
+        "5.4",
+        "5.6",
+        "5.8",
+        "6.0"
+    ],
+    "max-instances": 1
+}
