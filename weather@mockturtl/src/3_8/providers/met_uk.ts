@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import type { Config} from "../config";
+import type { Config } from "../config";
 import type { DistanceUnits } from "../config";
 import { Logger } from "../lib/services/logger";
 import { getTimes } from "suncalc";
@@ -97,13 +97,22 @@ export class MetUk extends BaseProvider {
 		// Get and Parse Observation data
 		const observations = await this.GetObservationData(this.observationSites, cancellable);
 		const currentResult = this.ParseCurrent(observations, newLoc, config);
-		if (!currentResult) return null;
+		if (!currentResult)
+			return null;
+
 
 		// await for forecasts if not finished
 		const forecastResult = await forecastPromise;
 		currentResult.forecasts = forecastResult ?? [];
-		const threeHourlyForecast = await hourlyPayload;
-		currentResult.hourlyForecasts = threeHourlyForecast ?? [];
+		const threeHourlyResolved = await hourlyPayload;
+		if (threeHourlyResolved == null) {
+			currentResult.hourlyForecasts = [];
+			return null;
+		}
+
+		const [threeHourlyForecast, additionalData] = threeHourlyResolved;
+		currentResult.hourlyForecasts = threeHourlyForecast;
+		currentResult.uvIndex = additionalData?.uvIndex ?? null;
 		return currentResult;
 	};
 
@@ -169,7 +178,7 @@ export class MetUk extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData<T, R extends WeatherData | ForecastData[] | HourlyForecastData[]>(query: string, ParseFunction: (json: T, loc: LocationData) => R | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
+	private async GetData<T, R>(query: string, ParseFunction: (json: T, loc: LocationData) => R | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
 		if (query == null)
 			return null;
 
@@ -224,7 +233,7 @@ export class MetUk extends BaseProvider {
 				},
 				stationInfo: {
 					distanceFrom: this.observationSites[dataIndex].dist,
-					name:  this.observationSites[dataIndex].name,
+					name: this.observationSites[dataIndex].name,
 					area: this.observationSites[dataIndex].unitaryAuthArea,
 					lat: Number.parseFloat(this.observationSites[dataIndex].latitude),
 					lon: Number.parseFloat(this.observationSites[dataIndex].longitude),
@@ -240,6 +249,7 @@ export class MetUk extends BaseProvider {
 				pressure: null,
 				humidity: null,
 				dewPoint: null,
+				uvIndex: null,
 				condition: this.ResolveCondition(observation?.W),
 				forecasts: []
 			};
@@ -310,13 +320,18 @@ export class MetUk extends BaseProvider {
 		}
 	};
 
-	private ParseHourlyForecast = (json: METPayload, loc: LocationData): HourlyForecastData[] | null => {
+	private ParseHourlyForecast = (json: METPayload, loc: LocationData): [HourlyForecastData[], { uvIndex: number | null }] | null => {
 		const forecasts: HourlyForecastData[] = [];
+		let uvIndex: number | null = null;
 		try {
 			for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
 				const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
 				if (!Array.isArray(day.Rep))
 					continue;
+
+				uvIndex = ("U" in day.Rep[0]) ? Number.parseInt(day.Rep[0].U) : null;
+				if (Number.isNaN(uvIndex))
+					uvIndex = null;
 
 				for (const element of day.Rep) {
 					const hour = element as ThreeHourPayload;
@@ -340,7 +355,7 @@ export class MetUk extends BaseProvider {
 					forecasts.push(forecast);
 				}
 			}
-			return forecasts;
+			return [forecasts, { uvIndex }];
 		}
 		catch (e) {
 			if (e instanceof Error)
