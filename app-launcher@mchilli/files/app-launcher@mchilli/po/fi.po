@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-14 16:58+0200\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
 "PO-Revision-Date: 2025-04-03 18:58+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -19,23 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:117
+#. applet.js:122
 msgid "All workspaces"
 msgstr "Kaikki työtilat"
 
-#. applet.js:145
+#. applet.js:150
 msgid "Edit Applications"
 msgstr "Muokkaa sovelluksia"
 
-#. applet.js:864 applet.js:1158
+#. applet.js:886 applet.js:1199
 msgid "Delete"
 msgstr "Poista"
 
-#. applet.js:865 applet.js:1159
+#. applet.js:887 applet.js:1200
 msgid "Edit"
 msgstr "Muokkaa"
 
-#. applet.js:866 applet.js:1160 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
 #. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "Peru"
@@ -160,14 +160,12 @@ msgstr "Helppo sovellusten käynnistysohjelma"
 msgid "Applications"
 msgstr "Sovellukset"
 
-#. settings-schema.json->page-settings->title
-msgid "Settings"
-msgstr "Asetukset"
-
+#. settings-schema.json->page-settings-global->title
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "Yleiset asetukset"
 
+#. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "Sovelluksen asetukset"
@@ -219,6 +217,22 @@ msgstr "Valikko hiiren kohdalla"
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr "Näytä valikko kohdistimen vieressä kun se aukeaa ​​pikanäppäimellä"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr ""
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
