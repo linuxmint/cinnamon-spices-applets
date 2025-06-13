@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-18 21:41+0200\n"
-"PO-Revision-Date: 2025-05-18 13:52+0200\n"
+"PO-Revision-Date: 2025-06-13 18:24+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -109,10 +109,10 @@ msgstr ""
 "Vink dit aan om de tray te tonen, zelfs als er geen nieuwe meldingen zijn."
 
 #. settings-schema.json->showDisturbIcon->description
-#, fuzzy
 msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
-"Toon 'Niet storen' icoon zelfs als de optie lege tray tonen is uitgeschakeld"
+"Toon 'Niet storen'-pictogram zelfs wanneer de optie 'leeg systeemvak "
+"weergeven' is uitgeschakeld"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 msgid ""
@@ -143,12 +143,10 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Stel toetscombinatie(s) in om alle meldingen te wissen."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Enable or disable notifications"
-msgstr "Schakel meldingen in"
+msgstr "Schakel meldingen in of uit"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to enable or disable notifications."
 msgstr "Stel sneltoets(en) in om meldingen in of uit te schakelen."
 
