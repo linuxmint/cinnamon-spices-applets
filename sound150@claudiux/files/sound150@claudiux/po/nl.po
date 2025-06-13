@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-05 16:59+0200\n"
-"PO-Revision-Date: 2025-05-13 14:48+0200\n"
+"PO-Revision-Date: 2025-06-13 18:29+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -1074,13 +1074,12 @@ msgstr ""
 "instellen die lager is dan 100%, bijvoorbeeld op een computer voor kinderen."
 
 #. 6.4->settings-schema.json->page_menus->title
-#, fuzzy
 msgid "Menus"
-msgstr "Menu"
+msgstr "Menu's"
 
 #. 6.4->settings-schema.json->sectionMenu2->title
 msgid "Context Menu"
-msgstr ""
+msgstr "Contextmenu"
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
@@ -1108,33 +1107,31 @@ msgstr "Media-Optical-pictogram weergeven"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->description
 msgid "View Full Album Art"
-msgstr ""
+msgstr "Toon volledige albumhoes"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
 msgid ""
 "When unchecked, Album Art in the menu may be partially covered by Artist and "
 "Title."
 msgstr ""
+"Wanneer uitgevinkt, kan de albumhoes in het menu deels bedekt zijn door "
+"artiest en titel."
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
-#, fuzzy
 msgid "Keep the App selector open"
-msgstr "Hou de kiezer van de bedieningsknoppen open"
+msgstr "Hou de appkiezer open"
 
 #. 6.4->settings-schema.json->keepOutputListOpen->description
-#, fuzzy
 msgid "Keep the Output Device selector open"
-msgstr "Hou de kiezer van de bedieningsknoppen open"
+msgstr "Hou de uitvoerapparaatkiezer open"
 
 #. 6.4->settings-schema.json->keepInputListOpen->description
-#, fuzzy
 msgid "Keep the Input Device selector open"
-msgstr "Hou de kiezer van de bedieningsknoppen open"
+msgstr "Hou de invoerapparaatkiezer open"
 
 #. 6.4->settings-schema.json->keepCommandListOpen->description
-#, fuzzy
 msgid "Keep the Command selector open"
-msgstr "Hou de kiezer van de bedieningsknoppen open"
+msgstr "Hou de opdrachtkiezer open"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
