@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-05-18 11:37+0200\n"
-"PO-Revision-Date: 2024-11-28 17:13+0100\n"
+"PO-Revision-Date: 2025-06-13 18:21+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -57,15 +57,14 @@ msgid "Critical error"
 msgstr "Kritieke fout"
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:28
-#, fuzzy
 msgid ""
 "Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
 "based system with `sudo apt install make g++`, then reload the applet in "
 "restarting Cinnamon."
 msgstr ""
-"Ontbrekende afhankelijkheden `make` en `gcc`. Installeer ze, bv. op een "
-"Debian-gebaseerd systeem met `sudo apt install build-essential`, en herlaad "
-"vervolgens de applet (bv. door Cinnamon opnieuw op te starten)."
+"Ontbrekende afhankelijkheden `make` en/of `gcc`. Installeer ze, bv. op een "
+"Debian-gebaseerd systeem met `sudo apt install make g++`, en herlaad "
+"vervolgens de applet door Cinnamon opnieuw op te starten."
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
@@ -102,20 +101,19 @@ msgstr "vanwege een verkeerd formaat"
 #. 5.8/lib/commands_launcher/commands_launcher.js:44
 #. 5.8/lib/commands_launcher/commands_launcher.js:50
 msgid "Detail"
-msgstr ""
+msgstr "Detail"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "vanwege tijdsoverschrijding"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:48
-#, fuzzy
 msgid "due to an error"
-msgstr "vanwege een verkeerd formaat"
+msgstr "vanwege een fout"
 
 #. 2.2/applet.js:20
 msgid "this applet is only supported by"
-msgstr ""
+msgstr "deze applet wordt alleen ondersteund door"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -236,9 +234,8 @@ msgstr "Geografische lengte in decimale graden"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-#, fuzzy
 msgid "Show switch times in a notification"
-msgstr "Controleer de omschakeltijden van vandaag in een melding"
+msgstr "Toont schakeltijden in een melding"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->tooltip
@@ -318,9 +315,8 @@ msgstr "Naam van het bureaublad-thema (Cinnamon-thema)"
 #. 5.8->settings-schema.json->light-mode_background_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_background_button_apply->description
-#, fuzzy
 msgid "Test applying to the system"
-msgstr "Toepassen op het systeem"
+msgstr "Test toepassen op het systeem"
 
 #. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
@@ -429,7 +425,6 @@ msgid "Command"
 msgstr "Commando"
 
 #. 5.8->settings-schema.json->light-mode_commands_list->tooltip
-#, fuzzy
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -444,25 +439,23 @@ msgstr ""
 "Lijst met commando's die moeten worden uitgevoerd bij het overschakelen naar "
 "deze modus\n"
 " \n"
-" Opmerkingen:\n"
-" - de naam wordt gebruikt voor foutmeldingen\n"
-" - de verlooptijd beëindigt het proces van het commando\n"
+" Notities:\n"
+" - de naam is bedoeld voor foutmeldingen\n"
+" - de verlooptijd beëindigt het proces van het commando voortijdig\n"
 " - een verlooptijd van 0 seconden betekent nooit\n"
-" - elk subprocess kan niet verlopen\n"
-" - het pad bevindt zich in de ~ map\n"
-" - de foutmeldingen rapporteren stderr wanneer de terugkeerstatus niet 0 is "
-"en verschijnen in een melding"
+" - een proces dat weigert te stoppen 10 seconden na de verlooptijd wordt "
+"beëindigd\n"
+" - het pad bevindt zich in de home-directory van de gebruiker (~/)\n"
+" - de foutmeldingen worden weergegeven in een melding en rapporteren stderr"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->description
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
-#, fuzzy
 msgid "Test commands launch"
-msgstr "Aangepaste commando's"
+msgstr "Testcommando’s starten"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the light mode"
-msgstr "Start de ingestelde commando's voor de lichte modus"
+msgstr "Test het starten van de commando’s voor de lichte modus"
 
 #. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -521,6 +514,5 @@ msgstr ""
 "en verschijnen in een melding"
 
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the dark mode"
-msgstr "Start de ingestelde commando's voor de donkere modus"
+msgstr "Test het starten van de commando’s voor de donkere modus"
