@@ -86,8 +86,8 @@ export class DeutscherWetterdienst extends BaseProvider {
             },
             forecasts: this.ParseForecast(current, hourly, loc),
             hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
-			alerts: alerts,
-			uvIndex: null
+            alerts: alerts,
+            uvIndex: null
         };
     }
 
