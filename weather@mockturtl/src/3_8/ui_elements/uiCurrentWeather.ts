@@ -157,7 +157,6 @@ export class CurrentWeather {
 		});
 		sunBox.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
 
-		// TODO: Refactor
 		const uvIndexBox = new BoxLayout();
 		this.uvIndexIcon = new Icon({
 			icon_name: "uv-index-symbolic",
