@@ -80,7 +80,8 @@ type CurrentWeather = Omit<WeatherData,
 	"sunrise" |
 	"location" |
 	"coord" |
-	"date"
+	"date" |
+	"uvIndex"
 >;
 
 export function OpenMeteoCurrentWeatherToData(data: OpenMeteoCurrentWeather): CurrentWeather {

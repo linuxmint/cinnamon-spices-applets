@@ -1,3 +1,4 @@
+import { SpawnProcess } from "./lib/commandRunner";
 import { Logger } from "./lib/services/logger";
 import type { WeatherApplet } from "./main";
 import type { LocationData} from "./types";
@@ -56,7 +57,13 @@ export class WeatherLoop {
 		return this.refreshing;
 	}
 
+	private NetworkMonitorUsed: boolean | null = null;
+
 	private get Online(): boolean {
+		if (!this.NetworkMonitorUsed) {
+			return true;
+		}
+
 		return NetworkMonitor.get_default().connectivity != NetworkConnectivity.LOCAL;
 	}
 
@@ -65,7 +72,22 @@ export class WeatherLoop {
 		this.instanceID = instanceID;
 		this.GUID = Guid();
 		weatherAppletGUIDs[instanceID] = this.GUID;
+		// This can stay here, if NetworkMonitor is not used, it will never be called
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+		void this.Init();
+	}
+
+	private async Init(): Promise<void> {
+		// This is very opinionated (meaning NetworkMonitor is only sed if you have systemd and NetworkManager, but I don't want to take any chances)
+		const nmCheck = await SpawnProcess(["systemctl", "is-active", "--quiet", "NetworkManager"]);
+		if (!nmCheck.Success) {
+			Logger.Info("NetworkManager is not running/used, skipping network connectivity check.");
+			this.NetworkMonitorUsed = false;
+			return;
+		}
+
+		Logger.Info("NetworkManager is running, using network connectivity check.");
+		this.NetworkMonitorUsed = true;
 	}
 
 	public IsDataTooOld(): boolean {
