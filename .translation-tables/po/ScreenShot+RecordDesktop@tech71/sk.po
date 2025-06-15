@@ -1,0 +1,116 @@
+# Slovak translation of ScreenShot+RecordDesktop applet.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Dušan Kazik <prescott66@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-04 13:04-0400\n"
+"PO-Revision-Date: 2022-02-25 11:35+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"Language-Team: \n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:27
+msgid "ScreenShot"
+msgstr "Snímka obrazovky"
+
+#. applet.js:32
+msgid "Current Window"
+msgstr "Aktuálne okno"
+
+#. applet.js:37
+msgid "Selected Area"
+msgstr "Vybraná oblasť"
+
+#. applet.js:43
+msgid "Whole Screen"
+msgstr "Celá obrazovka"
+
+#. applet.js:45
+msgid "1 Second Delay"
+msgstr "Oneskorenie 1 sekundu"
+
+#. applet.js:49
+msgid "3 Second Delay"
+msgstr "Oneskorenie 3 sekundy"
+
+#. applet.js:53
+msgid "5 Second Delay"
+msgstr "Oneskorenie 5 sekúnd"
+
+#. applet.js:60
+msgid "Record Screencast"
+msgstr "Záznam obrazovky"
+
+#. applet.js:64
+msgid "Record Desktop With Audio"
+msgstr "Zaznamenať pracovnú plochu so zvukom"
+
+#. applet.js:67 applet.js:73 applet.js:80 applet.js:86
+msgid "Recording"
+msgstr "Zaznamenávanie"
+
+#. applet.js:67 applet.js:80
+msgid "With-Audio"
+msgstr "So zvukom"
+
+#. applet.js:70
+msgid "Record Desktop Without Audio"
+msgstr "Zaznamenať pracovnú plochu bez zvuku"
+
+#. applet.js:73 applet.js:86
+msgid "No-Audio"
+msgstr "Bez zvukom"
+
+#. applet.js:77
+msgid "Record Current Window With Audio"
+msgstr "Zaznamenať aktuálne okno so zvukom"
+
+#. applet.js:83
+msgid "Record Current Window Without Audio"
+msgstr "Zaznamenať aktuálne okno bez zvuku"
+
+#. applet.js:90
+msgid "Stop Recording"
+msgstr "Zastaviť zaznamenávanie"
+
+#. applet.js:95
+msgid "Recording-Stopped"
+msgstr "Zaznamenávanie zastavené"
+
+#. applet.js:96
+msgid "Recording-Finished"
+msgstr "Zaznamenávanie dokončené"
+
+#. applet.js:106
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Zachytiť alebo zaznamenať obrazovku vašej pracovnej plochy"
+
+#. applet.js:123
+msgid "Pictures Folder"
+msgstr "Priečinok s obrázkami"
+
+#. applet.js:129
+msgid "Videos Folder"
+msgstr "Priečinok s videami"
+
+#. metadata.json->description
+msgid ""
+"Take A Snapshot Or Record Your Desktop (recording requires the packages "
+"ffmpeg, xdotool & x11-utils to be installed)"
+msgstr ""
+"Zachytáva alebo zaznamenáva obrazovku vašej pracovnej plochy (záznam "
+"vyžaduje nainštalované balíky ffmpeg, xdotool a x11-utils)"
+
+#. metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "Snímka a záznam obrazovky pracovnej plochy"

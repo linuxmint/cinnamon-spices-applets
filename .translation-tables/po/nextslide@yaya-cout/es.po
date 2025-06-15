@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nextslide@yaya-cout 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: 2024-04-12 21:37-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:18
+msgid "Click to change image"
+msgstr "Haga clic para cambiar la imagen"
+
+#: applet.js:21
+msgid "The slideshow is disabled"
+msgstr "La presentación de diapositivas está desactivada"
+
+#. metadata.json->name
+msgid "Next slide"
+msgstr "Siguiente"
+
+#. metadata.json->description
+msgid "Simple button to change background for the Cinnamon slideshow"
+msgstr ""
+"Botón simple para cambiar el fondo de la presentación de diapositivas "
+"Cinnamon"
