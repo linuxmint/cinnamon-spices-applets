@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-23 09:28+0100\n"
-"PO-Revision-Date: 2025-04-13 15:50+0200\n"
+"PO-Revision-Date: 2025-06-17 00:24+0200\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -2083,22 +2083,30 @@ msgstr "Neerslag zal beginnen over {precipStart} minuten"
 #. 3.8/weather-applet.js:19517
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Laag risico inzake schade door blootstelling aan zon, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19521
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Middelmatig risico inzake schade door blootstelling aan zon, UV-index: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19525
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Hoog risico inzake schade door blootstelling aan zon, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19529
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
 msgstr ""
+"Zeer hoog risico inzake schade door blootstelling aan zon, UV-index: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19533
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"Extreem hoog risico inzake schade door blootstelling aan zon, UV-index: "
+"{uvIndex}"
 
 #. 3.8/weather-applet.js:19650
 msgid "Forecast parsing failed, see logs for more details."
@@ -2717,8 +2725,8 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "U kunt de coördinaten 'Breedtegraad,Lengtegraad' (bijv. 51,5085,-0,1257) "
 "invoeren of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer {Huisnummer} "
@@ -2968,11 +2976,11 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze ook "
 "handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
@@ -3079,9 +3087,8 @@ msgid "Test your command"
 msgstr "Uw opdracht uitproberen"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Tonen van weerwaarschuwingen inschakelen"
+msgstr "Tonen van UV-index inschakelen"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3089,3 +3096,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Als uw weerdienst het ondersteunt, zal de UV-index worden getoond in het "
+"opduikmenu naast de tijdstippen voor zonsopgang en zonsondergang. De UV-"
+"index zal niet worden getoond indien die laag-risico is (0-2)."
