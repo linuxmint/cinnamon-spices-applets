@@ -1,0 +1,29 @@
+{
+    "uuid": "mediacontrols@rbfraphael",
+    "name": "Media Controls",
+    "description": "Control your media players from your panel. Works with players that uses MPRIS2 protocol.",
+    "version": "1.0.0",
+    "max-instances": 1,
+    "icon": "media-playback-play-pause-symbolic",
+    "panel-positions": [
+        "top",
+        "bottom"
+    ],
+    "location": "panel",
+    "multiversion": true,
+    "author": "rbfraphael",
+    "license": "MIT",
+    "website": "https://github.com/linuxmint/cinnamon-spices-applets",
+    "last-edited": 1750048707,
+    "cinnamon-version": [
+        "5.0",
+        "5.2",
+        "5.4",
+        "5.6",
+        "5.8",
+        "6.0",
+        "6.2",
+        "6.4",
+        "6.6"
+    ]
+}
