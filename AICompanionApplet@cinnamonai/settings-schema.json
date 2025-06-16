@@ -1,0 +1,17 @@
+{
+    "chatgptApiKey": {
+        "type": "secret",
+        "default": "",
+        "description": "Your ChatGPT API Key"
+    },
+    "geminiApiKey": {
+        "type": "secret",
+        "default": "",
+        "description": "Your Google Gemini API Key"
+    },
+    "deepseekApiKey": {
+        "type": "secret",
+        "default": "",
+        "description": "Your DeepSeek AI API Key"
+    }
+}
