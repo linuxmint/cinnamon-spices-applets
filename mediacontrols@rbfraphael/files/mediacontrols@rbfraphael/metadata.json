@@ -4,7 +4,6 @@
     "description": "Control your media players from your panel. Works with players that uses MPRIS2 protocol.",
     "version": "1.0.0",
     "max-instances": 1,
-    "icon": "media-playback-play-pause-symbolic",
     "panel-positions": [
         "top",
         "bottom"
