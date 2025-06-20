@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-12 00:22+0300\n"
+"PO-Revision-Date: 2025-05-14 02:30+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:26
+msgid "Shadowsocks Switch"
+msgstr "Shadowsocks Switch"
+
+#: applet.js:38
+msgid "Enable Shadowsocks"
+msgstr "啟用 Shadowsocks"
+
+#: applet.js:66
+msgid "Toggle Shadowsocks proxy"
+msgstr "切換 Shadowsocks 代理伺服器"
+
+#: applet.js:102
+msgid "Cannot read Shadowsocks config."
+msgstr "無法讀取 Shadowsocks 設定檔。"
+
+#: applet.js:110
+msgid "Shadowsocks config is missing local port."
+msgstr "Shadowsocks 設定檔中缺少本機連接埠設定。"
+
+#: applet.js:138
+msgid "Connection established."
+msgstr "已成功建立連線。"
+
+#: applet.js:189
+msgid "Disconnected."
+msgstr "連線已中斷。"
+
+#. metadata.json->description
+msgid "Quickly toggle Shadowsocks proxy from the system tray"
+msgstr "可從系統列快速切換 Shadowsocks 代理伺服器"
+
+#. settings-schema.json->section1->description
+msgid "General"
+msgstr "一般"
+
+#. settings-schema.json->config->description
+msgid "Shadowsocks configuration"
+msgstr "Shadowsocks 設定檔"
