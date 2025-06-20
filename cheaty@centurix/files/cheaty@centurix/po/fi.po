@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-06 12:05+0200\n"
-"PO-Revision-Date: 2024-11-24 10:07-0500\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2023-04-27 13:15+0200\n"
+"PO-Revision-Date: 2025-04-02 23:26+0300\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -18,55 +18,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:103 3.2/applet.js:92
-msgid "Date and Time Settings"
-msgstr "Päivä ja ajan asetukset"
+#: applet.js:87
+msgid "version"
+msgstr "versio"
 
-#. Track changes to clock settings
-#: 3.2/applet.js:105
-msgid "%A %B %-e, %Y"
-msgstr "%A %B %-e, %Y"
+#: applet.js:87
+msgid "Author:"
+msgstr "Tekijä:"
 
-#. 3.2->settings-schema.json->use-custom-format->description
-msgid "Use a custom date format"
-msgstr "Käytä muotoiltua päivän muotoa"
+#: applet.js:87
+msgid "Email:"
+msgstr "Sähköposti:"
 
-#. 3.2->settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Valitse tämä, jos haluat määrittää mukautetun muodon päivämäärälle kalenterisovelmassa."
+#: applet.js:87
+msgid "Repository:"
+msgstr "Pakettivarasto:"
 
-#. 3.2->settings-schema.json->format-button->description
-msgid "Show information on date format syntax"
-msgstr "Näytä tiedot päivämäärämuodon syntaksista"
+#: applet.js:157
+msgid "Cheaty: Easy access cheatsheets"
+msgstr "Cheaty: Easy access cheatsheets"
 
-#. 3.2->settings-schema.json->format-button->tooltip
-msgid "Click this button to know more about the syntax for date formats."
-msgstr "Napsauta tätä painiketta saadaksesi lisätietoja päivämäärämuotojen syntaksista."
+#: applet.js:307
+msgid "Configure..."
+msgstr "Asetukset..."
 
-#. 3.2->settings-schema.json->show-week-numbers->description
-msgid "Show week numbers in calendar"
-msgstr "Näytä viikkonumerot kalenterissa"
+#: applet.js:321
+msgid "Code copied to the clipboard"
+msgstr "Koodi kopioitu leikepöydälle"
 
-#. 3.2->settings-schema.json->show-week-numbers->tooltip
-msgid "Check this to show week numbers in the calendar."
-msgstr "Valitse tämä näyttääksesi viikkonumerot kalenterissa."
+#. metadata.json->description
+msgid "An applet to provide quick access to a variety of cheat sheets."
+msgstr "Sovelma, joka tarjoaa  cheat sheets sivut nopeasti."
 
-#. 3.2->settings-schema.json->custom-format->description
-msgid "Date format"
-msgstr "Päivän muoto"
+#. metadata.json->name
+msgid "Cheaty - Cheatsheet keeper"
+msgstr "Cheaty - Cheatsheet keeper"
 
-#. 3.2->settings-schema.json->custom-format->tooltip
-msgid "Set your custom format here."
-msgstr "Aseta mukautettu muoto tässä."
+#. settings-schema.json->cheatsheetFolder->description
+msgid "cheatsheetFolder"
+msgstr "cheatsheet kansio"
 
-#. 3.2->settings-schema.json->section1->description
-msgid "Display"
-msgstr "Näytä"
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr "Näytä Cheaty valikko"
 
-#. binaryclock@entelechy->metadata.json->name
-msgid "Cinnamon Binary Clock"
-msgstr "Cinnamon Binary Clock"
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr "Aseta pikanäppäin Cheaty-valikolle."
 
-#. binaryclock@entelechy->metadata.json->description
-msgid "The Cinnamon calendar applet, with the time displayed in binary"
-msgstr "Cinnamon-kalenterisovelma, jonka aika näytetään binäärimuodossa"
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr "Cheat sheet valitsin"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr "Käytössä"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr "Nimi"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr "Kuvaus"
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
+msgstr "Tekijä"

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-27 10:32+0100\n"
-"PO-Revision-Date: 2024-11-20 02:07+0100\n"
+"POT-Creation-Date: 2025-04-07 12:12+0200\n"
+"PO-Revision-Date: 2025-02-13 20:49+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -18,35 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:127
+#. applet.js:206
 msgid "score"
-msgstr ""
+msgstr "puntuació"
 
-#. applet.js:139
+#. applet.js:218
 msgid "comments"
-msgstr ""
+msgstr "comentaris"
 
-#. applet.js:152
+#. applet.js:231
 msgid "recent issues"
-msgstr ""
+msgstr "incidències recents"
 
-#. applet.js:164
+#. applet.js:243
 msgid "translations"
-msgstr ""
+msgstr "traduccions"
 
-#. applet.js:737
-msgid "Mark all as read"
-msgstr "Marcar tots com llegits"
-
-#. applet.js:746
-msgid "Refresh"
-msgstr "Actualitzar"
-
-#. applet.js:759
+#. applet.js:851
 msgid "Spices"
 msgstr "Espècies"
 
-#. applet.js:832
+#. applet.js:936
+msgid "Mark all as read"
+msgstr "Marcar tots com llegits"
+
+#. applet.js:947
+msgid "Refresh"
+msgstr "Actualitzar"
+
+#. applet.js:959
+msgid "Refreshing in progress"
+msgstr ""
+
+#. applet.js:970
 msgid "Configure..."
 msgstr "Configurar..."
 
@@ -84,7 +88,7 @@ msgstr "Interval d'actualització"
 
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
-msgstr ""
+msgstr "hores"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
@@ -102,9 +106,37 @@ msgstr "Mostrar la icona de cada Espècia al menú"
 msgid "Icon size"
 msgstr "Mida de la icona"
 
-#. settings-schema.json->icon-size->units
-msgid "pixels"
-msgstr "píxels"
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr ""
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"

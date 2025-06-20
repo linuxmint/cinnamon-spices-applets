@@ -102,6 +102,7 @@ export class WeatherUnderground extends BaseProvider {
             stationInfo: observation.stationInfo,
             extra_field: observation.extra_field,
             forecasts: this.ParseForecasts(loc, forecast, config),
+			uvIndex: observation.uvIndex ?? null,
         };
     }
 

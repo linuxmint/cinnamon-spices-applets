@@ -9327,59 +9327,119 @@ function GenerateLocationText(weather, config) {
     return location;
 }
 function InjectValues(text, weather, config, inCommand = false) {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
-    const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
-    const temp = (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "";
-    const tempUnit = UnitToUnicode(config.TemperatureUnit);
-    const condition = weather.condition.main;
-    const conditionLong = weather.condition.description;
-    const dewPoint = (_b = TempToUserConfig(weather.dewPoint, config, false)) !== null && _b !== void 0 ? _b : "";
-    const humidity = (_d = (_c = weather.humidity) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "";
-    const pressure = weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "";
-    const pressureUnit = config._pressureUnit;
-    const extraValue = weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "";
-    const extraName = weather.extra_field ? weather.extra_field.name : "";
-    const windSpeed = weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "";
-    const windDir = weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "";
-    const city = (_e = weather.location.city) !== null && _e !== void 0 ? _e : "";
-    const country = (_f = weather.location.country) !== null && _f !== void 0 ? _f : "";
-    const searchEntry = (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "";
-    if (inCommand) {
-        text = text.replace(/{{t}}/g, Literal(temp))
-            .replace(/{{u}}/g, Literal(tempUnit))
-            .replace(/{{c}}/g, Literal(condition))
-            .replace(/{{c_long}}/g, Literal(conditionLong))
-            .replace(/{{dew_point}}/g, Literal(dewPoint))
-            .replace(/{{humidity}}/g, Literal(humidity))
-            .replace(/{{pressure}}/g, Literal(pressure))
-            .replace(/{{pressure_unit}}/g, Literal(pressureUnit))
-            .replace(/{{extra_value}}/g, Literal(extraValue))
-            .replace(/{{extra_name}}/g, Literal(extraName))
-            .replace(/{{wind_speed}}/g, Literal(windSpeed))
-            .replace(/{{wind_dir}}/g, Literal(windDir))
-            .replace(/{{city}}/g, Literal(city))
-            .replace(/{{country}}/g, Literal(country))
-            .replace(/{{search_entry}}/g, Literal(searchEntry))
-            .replace(/{{last_updated}}/g, Literal(lastUpdatedTime))
-            .replace(/{{br}}/g, Literal("\n"));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
+    const { date, temperature, condition, dewPoint, humidity, pressure, wind, location, forecasts, hourlyForecasts, sunrise, sunset, extra_field } = weather;
+    const { _show24Hours, TemperatureUnit, _pressureUnit, WindSpeedUnit, CurrentLocation } = config;
+    const currentZone = DateTime.local().zoneName;
+    const timeNow = DateTime.utc().setZone(currentZone);
+    const lastUpdatedTime = AwareDateString(date, _show24Hours, currentZone);
+    const temp = (_a = TempToUserConfig(temperature, config, false)) !== null && _a !== void 0 ? _a : "";
+    const tempUnit = UnitToUnicode(TemperatureUnit);
+    const conditionMain = condition.main;
+    const conditionDescription = condition.description;
+    const dewPointVal = (_b = TempToUserConfig(dewPoint, config, false)) !== null && _b !== void 0 ? _b : "";
+    const humidityVal = (_c = humidity === null || humidity === void 0 ? void 0 : humidity.toString()) !== null && _c !== void 0 ? _c : "";
+    const pressureVal = pressure ? PressToUserUnits(pressure, _pressureUnit).toString() : "";
+    const extraValue = extra_field ? ExtraFieldToUserUnits(extra_field, config) : "";
+    const extraName = (_d = extra_field === null || extra_field === void 0 ? void 0 : extra_field.name) !== null && _d !== void 0 ? _d : "";
+    const windSpeed = wind.speed ? MPStoUserUnits(wind.speed, WindSpeedUnit) : "";
+    const windDir = wind.degree ? CompassDirectionText(wind.degree) : "";
+    const windArrow = wind.degree ? CompassDirectionArrow(wind.degree) : "";
+    const windDegree = (_f = (_e = wind.degree) === null || _e === void 0 ? void 0 : _e.toString()) !== null && _f !== void 0 ? _f : "";
+    const city = (_g = location.city) !== null && _g !== void 0 ? _g : "";
+    const country = (_h = location.country) !== null && _h !== void 0 ? _h : "";
+    const searchEntry = (_j = CurrentLocation === null || CurrentLocation === void 0 ? void 0 : CurrentLocation.entryText) !== null && _j !== void 0 ? _j : "";
+    const tmr = (_k = forecasts === null || forecasts === void 0 ? void 0 : forecasts[1]) !== null && _k !== void 0 ? _k : null;
+    const forecastHours = (hourlyForecasts === null || hourlyForecasts === void 0 ? void 0 : hourlyForecasts[2]) ? hourlyForecasts : null;
+    const forecastHour = (_l = forecastHours === null || forecastHours === void 0 ? void 0 : forecastHours[2]) !== null && _l !== void 0 ? _l : null;
+    const tempHour = ((forecastHour === null || forecastHour === void 0 ? void 0 : forecastHour.temp) != null) ? (_m = TempToUserConfig(forecastHour.temp, config, false)) !== null && _m !== void 0 ? _m : "" : "";
+    const tempHourDiff = (temperature != null && tempHour != null) ? ValueChange(Number(temp), Number(tempHour)) : "";
+    const conditionTomorrow = (_o = tmr === null || tmr === void 0 ? void 0 : tmr.condition.main) !== null && _o !== void 0 ? _o : "";
+    const tempMin = tmr ? (_p = TempToUserConfig(forecasts[0].temp_min, config, false)) !== null && _p !== void 0 ? _p : "" : "";
+    const tempMax = tmr ? (_q = TempToUserConfig(forecasts[0].temp_max, config, false)) !== null && _q !== void 0 ? _q : "" : "";
+    const tempMinTomorrow = tmr ? (_r = TempToUserConfig(tmr.temp_min, config, false)) !== null && _r !== void 0 ? _r : "" : "";
+    const tempMaxTomorrow = tmr ? (_s = TempToUserConfig(tmr.temp_max, config, false)) !== null && _s !== void 0 ? _s : "" : "";
+    const tempsTomorrow = tmr ? TempRangeToUserConfig(tmr.temp_min, tmr.temp_max, config) : "";
+    const tmrMinTempChange = tempMinTomorrow && tempMin ? (_t = SignedNumber(Number(tempMinTomorrow) - Number(tempMin))) !== null && _t !== void 0 ? _t : "" : "";
+    const tmrMaxTempChange = tempMaxTomorrow && tempMax ? (_u = SignedNumber(Number(tempMaxTomorrow) - Number(tempMax))) !== null && _u !== void 0 ? _u : "" : "";
+    const tempsTomorrowWithDifferences = tmr ? `${tempsTomorrow} (${tmrMinTempChange} / ${tmrMaxTempChange})` : "";
+    const sunriseTime = sunrise ? (_v = GetHoursMinutes(sunrise, _show24Hours)) !== null && _v !== void 0 ? _v : "" : "";
+    const sunsetTime = sunset ? (_w = GetHoursMinutes(sunset, _show24Hours)) !== null && _w !== void 0 ? _w : "" : "";
+    const dayLengthVal = sunset && sunrise ? sunset.diff(sunrise) : "";
+    const dayLength = dayLengthVal ? dayLengthVal.toFormat("h:mm") : "";
+    const daylightRemainVal = sunrise && sunset ? sunset.diff(timeNow) : null;
+    const isDaylight = sunrise && sunset ? !IsNight({ sunrise: sunrise, sunset: sunset }) : false;
+    const daylightRemain = isDaylight && daylightRemainVal ? daylightRemainVal.toFormat("h:mm") : "";
+    const daylightRemainPct = sunrise && sunset && isDaylight
+        ? Math.round((sunset.toMillis() - timeNow.toMillis()) * 100 / (sunset.toMillis() - sunrise.toMillis())).toString()
+        : "0";
+    const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
+    const valuesPaddingDefaults = {
+        t: { value: temp.toString(), padLength: 3, padRight: true, padChar: ' ' },
+        u: { value: tempUnit.toString() },
+        c: { value: conditionMain.toString() },
+        c_long: { value: conditionDescription.toString() },
+        dew_point: { value: dewPointVal.toString() },
+        humidity: { value: humidityVal.toString(), padLength: 2, padRight: true },
+        pressure: { value: pressureVal.toString(), padLength: 6, padRight: true },
+        pressure_unit: { value: _pressureUnit.toString() },
+        extra_value: { value: extraValue.toString(), padLength: 3, padRight: true },
+        extra_name: { value: extraName.toString() },
+        city: { value: city.toString() },
+        country: { value: country.toString() },
+        search_entry: { value: searchEntry.toString() },
+        last_updated: { value: lastUpdatedTime.toString() },
+        wind_speed: { value: windSpeed.toString() },
+        wind_dir: { value: windDir.toString() },
+        wind_arrow: { value: windArrow.toString() },
+        wind_deg: { value: windDegree.toString() },
+        wind_unit: { value: WindSpeedUnit.toString() },
+        min: { value: tempMin.toString() },
+        max: { value: tempMax.toString() },
+        tmr_min: { value: tempMinTomorrow.toString() },
+        tmr_max: { value: tempMaxTomorrow.toString() },
+        tmr_min_diff: { value: tmrMinTempChange.toString() },
+        tmr_max_diff: { value: tmrMaxTempChange.toString() },
+        tmr_c: { value: conditionTomorrow.toString() },
+        tmr_t: { value: tempsTomorrow.toString(), padLength: 3, padRight: true },
+        tmr_td: { value: tempsTomorrowWithDifferences.toString() },
+        sunset: { value: sunsetTime.toString() },
+        sunrise: { value: sunriseTime.toString() },
+        day_length: { value: dayLength.toString() },
+        day_remain: { value: daylightRemain.toString() },
+        day_len_rem: { value: dayLengthLightRemain.toString() },
+        day_rem_pct: { value: daylightRemainPct.toString() },
+        t_h: { value: tempHour.toString() },
+        t_h_diff: { value: tempHourDiff.toString() },
+        br: { value: "\n" },
+    };
+    for (const tagName in valuesPaddingDefaults) {
+        const options = valuesPaddingDefaults[tagName];
+        const { value: tagValue, padLength = 0, padRight = true, padChar = ' ' } = options;
+        if (tagName == null || tagValue == null)
+            continue;
+        const regexp = new RegExp(`(\\{{1,3})(\\b${EscapeRegex(tagName)}\\b)([,\\.]{0,1})(\\d{0,2})\\.{0,1}([^\\}]{0,1})(\\}{1,3})`, 'g');
+        let match;
+        while ((match = regexp.exec(text)) !== null) {
+            const literalStart = match[1] || '';
+            const literalEnd = match[6] || '';
+            const paddingSpecifier = match[3] || undefined;
+            const paddingSize = match[4] || undefined;
+            const padCharMatch = match[5] || undefined;
+            const padLiteral = literalStart === "{{{" && literalEnd === "}}}";
+            const isLiteral = literalStart === "{{" && literalEnd === "}}";
+            const noPad = inCommand && !padLiteral;
+            const applyPadRight = (paddingSpecifier === '.' || (paddingSpecifier === undefined && padRight));
+            const applyPad = paddingSize ? Number(paddingSize) : padLength;
+            const charPad = padCharMatch || padChar;
+            let formattedValue = tagValue;
+            if (!noPad) {
+                formattedValue = applyPadRight ? formattedValue.padEnd(applyPad, charPad) : formattedValue.padStart(applyPad, charPad);
+            }
+            text = text.replace(regexp, isLiteral || padLiteral ? Literal(formattedValue) : formattedValue);
+        }
     }
-    return text.replace(/{t}/g, temp)
-        .replace(/{u}/g, tempUnit)
-        .replace(/{c}/g, condition)
-        .replace(/{c_long}/g, conditionLong)
-        .replace(/{dew_point}/g, dewPoint)
-        .replace(/{humidity}/g, humidity)
-        .replace(/{pressure}/g, pressure)
-        .replace(/{pressure_unit}/g, pressureUnit)
-        .replace(/{extra_value}/g, extraValue)
-        .replace(/{extra_name}/g, extraName)
-        .replace(/{wind_speed}/g, windSpeed)
-        .replace(/{wind_dir}/g, windDir)
-        .replace(/{city}/g, city)
-        .replace(/{country}/g, country)
-        .replace(/{search_entry}/g, searchEntry)
-        .replace(/{last_updated}/g, lastUpdatedTime)
-        .replace(/{br}/g, "\n");
+    return text;
 }
 function CapitalizeFirstLetter(description) {
     if ((description == undefined || description == null)) {
@@ -9702,6 +9762,42 @@ function CompassDirectionText(deg) {
     const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
     return directions[Math.round(deg / 45) % directions.length];
 }
+function CompassDirectionArrow(deg) {
+    const directions = ['↓', '↙', '←', '↖', '↑', '↗', '→', '↘'];
+    return directions[Math.round(deg / 45) % directions.length];
+}
+function SignedNumber(number) {
+    return number < 0 ? number.toString() : '+' + number;
+}
+function EscapeRegex(string) {
+    return string.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&');
+}
+function ValueChange(temp1, temp2, large_percent = 15) {
+    const arrows = ['↡', '↓', '↔', '↑', '↟'];
+    const diff = Math.round((temp2 - temp1) * 10) / 10;
+    const absDiff = Math.abs(diff);
+    const drop = diff < 0;
+    const rise = diff > 0;
+    const percentageChange = (absDiff * 100 / Math.max(temp1, temp2));
+    const large = percentageChange >= large_percent;
+    let index;
+    if (drop && large) {
+        index = 0;
+    }
+    else if (drop) {
+        index = 1;
+    }
+    else if (diff == 0) {
+        index = 2;
+    }
+    else if (rise && !large) {
+        index = 3;
+    }
+    else {
+        index = 4;
+    }
+    return `${arrows[index]}${absDiff}`;
+}
 function IsNight(sunTimes, date) {
     if (!sunTimes)
         return false;
@@ -9972,8 +10068,21 @@ class LocationStore {
         this.config = config;
         this.locations = config._locationList;
     }
+    AreLocationsDifferent(old, newLocs) {
+        if (old.length != newLocs.length)
+            return true;
+        for (let i = 0; i < old.length; i++) {
+            if (!this.IsEqual(old[i], newLocs[i]))
+                return true;
+        }
+        return false;
+    }
     OnLocationChanged(locs) {
         var _a;
+        if (!this.AreLocationsDifferent(this.locations, locs)) {
+            logger_Logger.Debug("Location store not changed, skipping update");
+            return;
+        }
         for (let index = 0; index < locs.length; index++) {
             const element = locs[index];
             if (!element.entryText) {
@@ -10683,11 +10792,15 @@ class MetUk extends BaseProvider {
         };
         this.ParseHourlyForecast = (json, loc) => {
             const forecasts = [];
+            let uvIndex = null;
             try {
                 for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
                     const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
                     if (!Array.isArray(day.Rep))
                         continue;
+                    uvIndex = ("U" in day.Rep[0]) ? Number.parseInt(day.Rep[0].U) : null;
+                    if (Number.isNaN(uvIndex))
+                        uvIndex = null;
                     for (const element of day.Rep) {
                         const hour = element;
                         const timestamp = date.plus({ hours: Number.parseInt(hour.$) / 60 });
@@ -10706,7 +10819,7 @@ class MetUk extends BaseProvider {
                         forecasts.push(forecast);
                     }
                 }
-                return forecasts;
+                return [forecasts, { uvIndex }];
             }
             catch (e) {
                 if (e instanceof Error)
@@ -10717,6 +10830,7 @@ class MetUk extends BaseProvider {
         };
     }
     async GetWeather(newLoc, cancellable, config) {
+        var _a;
         const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
@@ -10753,8 +10867,14 @@ class MetUk extends BaseProvider {
             return null;
         const forecastResult = await forecastPromise;
         currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
-        const threeHourlyForecast = await hourlyPayload;
-        currentResult.hourlyForecasts = threeHourlyForecast !== null && threeHourlyForecast !== void 0 ? threeHourlyForecast : [];
+        const threeHourlyResolved = await hourlyPayload;
+        if (threeHourlyResolved == null) {
+            currentResult.hourlyForecasts = [];
+            return null;
+        }
+        const [threeHourlyForecast, additionalData] = threeHourlyResolved;
+        currentResult.hourlyForecasts = threeHourlyForecast;
+        currentResult.uvIndex = (_a = additionalData === null || additionalData === void 0 ? void 0 : additionalData.uvIndex) !== null && _a !== void 0 ? _a : null;
         return currentResult;
     }
     ;
@@ -10863,6 +10983,7 @@ class MetUk extends BaseProvider {
                 pressure: null,
                 humidity: null,
                 dewPoint: null,
+                uvIndex: null,
                 condition: this.ResolveCondition(observation === null || observation === void 0 ? void 0 : observation.W),
                 forecasts: []
             };
@@ -11590,6 +11711,7 @@ function OWMOneCallToWeatherData(json, conditionsTranslated) {
             icons: OWMIconToBuiltInIcons((_q = (_p = (_o = json === null || json === void 0 ? void 0 : json.current) === null || _o === void 0 ? void 0 : _o.weather) === null || _p === void 0 ? void 0 : _p[0]) === null || _q === void 0 ? void 0 : _q.icon),
             customIcon: OWMIconToCustomIcon((_t = (_s = (_r = json === null || json === void 0 ? void 0 : json.current) === null || _r === void 0 ? void 0 : _r.weather) === null || _s === void 0 ? void 0 : _s[0]) === null || _t === void 0 ? void 0 : _t.icon)
         },
+        uvIndex: json.current.uvi,
         extra_field: {
             name: _("Feels Like"),
             value: json.current.feels_like,
@@ -11892,7 +12014,7 @@ function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
 
 async function GetMETNorwayAlerts(cancellable, lat, lon) {
     const response = await HttpLib.Instance.LoadJsonSimple({
-        url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
+        url: "https://api.met.no/weatherapi/metalerts/2.0/current.json",
         cancellable: cancellable,
     });
     if (response === null) {
@@ -12070,7 +12192,7 @@ class MetNorway extends BaseProvider {
         return json;
     }
     ParseWeather(json, loc) {
-        var _a, _b;
+        var _a, _b, _c;
         json = this.RemoveEarlierElements(json, loc);
         const times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
         const suntimes = {
@@ -12100,6 +12222,7 @@ class MetNorway extends BaseProvider {
                 degree: current.data.instant.details.wind_from_direction,
                 speed: current.data.instant.details.wind_speed
             },
+            uvIndex: (_c = current.data.instant.details.ultraviolet_index_clear_sky) !== null && _c !== void 0 ? _c : null,
             location: {
                 timeZone: loc.timeZone
             },
@@ -12631,6 +12754,7 @@ class Weatherbit extends BaseProvider {
                         value: json.app_temp,
                         type: "temperature"
                     },
+                    uvIndex: json.uv,
                     forecasts: []
                 };
                 return weather;
@@ -13281,6 +13405,7 @@ class ClimacellV4 extends BaseProvider {
                 type: "temperature",
                 value: CelsiusToKelvin(current.values.temperatureApparent)
             },
+            uvIndex: null,
             forecasts: []
         };
         const hours = [];
@@ -14008,6 +14133,7 @@ class USWeather extends BaseProvider {
                 pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
                 humidity: observation.properties.relativeHumidity.value,
                 dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
+                uvIndex: null,
                 condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
                 forecasts: []
             };
@@ -14386,6 +14512,7 @@ class VisualCrossing extends BaseProvider {
                 type: "temperature",
                 value: CelsiusToKelvin((_h = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _h !== void 0 ? _h : weather.currentConditions.feelslike)
             },
+            uvIndex: null,
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
         };
@@ -15112,7 +15239,7 @@ class AccuWeather extends BaseProvider {
             this.tier = "free";
     }
     ParseWeather(current, daily, hourly, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
         return {
             date: DateTime.fromISO(current.LocalObservationDateTime),
             coord: {
@@ -15136,6 +15263,7 @@ class AccuWeather extends BaseProvider {
                 speed: KPHtoMPS((_l = (_k = (_j = current.Wind) === null || _j === void 0 ? void 0 : _j.Speed) === null || _k === void 0 ? void 0 : _k.Metric) === null || _l === void 0 ? void 0 : _l.Value),
             },
             condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
+            uvIndex: (_p = (_m = current.UVIndex) !== null && _m !== void 0 ? _m : (_o = hourly[0]) === null || _o === void 0 ? void 0 : _o.UVIndex) !== null && _p !== void 0 ? _p : null,
             hourlyForecasts: this.ParseHourly(hourly),
             forecasts: this.ParseDaily(daily)
         };
@@ -15531,7 +15659,8 @@ class DeutscherWetterdienst extends BaseProvider {
             },
             forecasts: this.ParseForecast(current, hourly, loc),
             hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
-            alerts: alerts
+            alerts: alerts,
+            uvIndex: null
         };
     }
     ParseForecast(current, forecast, loc) {
@@ -15792,7 +15921,7 @@ class WeatherUnderground extends BaseProvider {
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
         this.GetWeather = async (loc, cancellable, config) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
             const locString = `${loc.lat},${loc.lon}`;
             const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc, cancellable, config));
             if (location == null) {
@@ -15844,6 +15973,7 @@ class WeatherUnderground extends BaseProvider {
                 stationInfo: observation.stationInfo,
                 extra_field: observation.extra_field,
                 forecasts: this.ParseForecasts(loc, forecast, config),
+                uvIndex: (_m = observation.uvIndex) !== null && _m !== void 0 ? _m : null,
             };
         };
         this.GetNearbyStations = async (loc, cancellable, config) => {
@@ -16377,35 +16507,7 @@ class WeatherUnderground extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/types/common.ts
-
-
-function PirateWeatherSummaryToTranslated(summary) {
-    switch (summary) {
-        case "Clear":
-            return _("Clear");
-        case "Partly Cloudy":
-            return _("Partly Cloudy");
-        case "Rain":
-            return _("Rain");
-        case "Cloudy":
-            return _("Cloudy");
-        case "Snow":
-            return _("Snow");
-        case "Wind":
-            return _("Wind");
-        case "Fog":
-            return _("Fog");
-        case "Sleet":
-            return _("Sleet");
-        default:
-            logger_Logger.Error(`Unknown PirateWeatherSummary: ${summary}`);
-            return summary;
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
-
 
 
 
@@ -16449,6 +16551,65 @@ class PirateWeather extends BaseProvider {
             }
             return true;
         };
+        this.supportedLanguages = [
+            "ar",
+            "az",
+            "be",
+            "bg",
+            "bn",
+            "bs",
+            "ca",
+            "cs",
+            "cy",
+            "da",
+            "de",
+            "el",
+            "en",
+            "eo",
+            "es",
+            "et",
+            "fa",
+            "fi",
+            "fr",
+            "ga",
+            "gd",
+            "he",
+            "hi",
+            "hr",
+            "hu",
+            "id",
+            "is",
+            "it",
+            "ja",
+            "ka",
+            "kn",
+            "ko",
+            "kw",
+            "lv",
+            "ml",
+            "mr",
+            "nl",
+            "no",
+            "pa",
+            "pl",
+            "pt",
+            "ro",
+            "ru",
+            "sk",
+            "sl",
+            "sr",
+            "sv",
+            "ta",
+            "te",
+            "`tet",
+            "tr",
+            "uk",
+            "ur",
+            "vi",
+            "x-pig-latin",
+            "zh",
+            "zh-tw",
+        ];
     }
     get remainingCalls() {
         return null;
@@ -16459,7 +16620,10 @@ class PirateWeather extends BaseProvider {
         const response = await HttpLib.Instance.LoadJsonAsync({
             url: `${this.query}${config.ApiKey}/${loc.lat},${loc.lon}`,
             cancellable,
-            params: { units: this.GetQueryUnit(config) },
+            params: {
+                units: this.GetQueryUnit(config),
+                lang: (config._translateCondition && config.Language && this.supportedLanguages.includes(config.Language)) ? config.Language : "en",
+            },
             HandleError: this.HandleError
         });
         if (!response.Success)
@@ -16468,6 +16632,7 @@ class PirateWeather extends BaseProvider {
     }
     ;
     ParseWeather(json, unit) {
+        var _a, _b, _c, _d, _e;
         try {
             const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
             const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
@@ -16492,8 +16657,8 @@ class PirateWeather extends BaseProvider {
                 humidity: json.currently.humidity * 100,
                 dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
                 condition: {
-                    main: PirateWeatherSummaryToTranslated(json.currently.summary),
-                    description: PirateWeatherSummaryToTranslated(json.currently.summary),
+                    main: json.currently.summary,
+                    description: json.currently.summary,
                     icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
@@ -16502,6 +16667,7 @@ class PirateWeather extends BaseProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature, unit),
                     type: "temperature"
                 },
+                uvIndex: (_e = (_c = (_a = json.currently.uvIndex) !== null && _a !== void 0 ? _a : (_b = json.hourly.data[0]) === null || _b === void 0 ? void 0 : _b.uvIndex) !== null && _c !== void 0 ? _c : (_d = json.daily.data[0]) === null || _d === void 0 ? void 0 : _d.uvIndex) !== null && _e !== void 0 ? _e : null,
                 forecasts: [],
                 hourlyForecasts: [],
             };
@@ -16511,8 +16677,8 @@ class PirateWeather extends BaseProvider {
                     temp_min: this.ToKelvin(day.temperatureLow, unit),
                     temp_max: this.ToKelvin(day.temperatureHigh, unit),
                     condition: {
-                        main: PirateWeatherSummaryToTranslated(day.summary),
-                        description: PirateWeatherSummaryToTranslated(day.summary),
+                        main: day.summary,
+                        description: day.summary,
                         icons: this.ResolveIcon(day.icon),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
@@ -16525,8 +16691,8 @@ class PirateWeather extends BaseProvider {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature, unit),
                     condition: {
-                        main: PirateWeatherSummaryToTranslated(hour.summary),
-                        description: PirateWeatherSummaryToTranslated(hour.summary),
+                        main: hour.summary,
+                        description: hour.summary,
                         icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
@@ -17110,13 +17276,14 @@ function OpenMeteoHourWeatherToData(data, timezone) {
 
 
 function OpenMeteoResponseToData(payload) {
+    var _a;
     return Object.assign(Object.assign({ date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }), sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }), sunset: DateTime.fromISO(payload.daily.sunset[0], { zone: payload.timezone }), coord: {
             lat: payload.latitude,
             lon: payload.longitude,
         }, location: {
             timeZone: payload.timezone,
             tzOffset: payload.utc_offset_seconds,
-        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone) });
+        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone), uvIndex: (_a = payload.daily.uv_index_max[0]) !== null && _a !== void 0 ? _a : null });
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/provider.ts
@@ -17127,7 +17294,7 @@ function OpenMeteoResponseToData(payload) {
 class OpenMeteo extends BaseProvider {
     constructor() {
         super(...arguments);
-        this.prettyName = _("Open Meteo");
+        this.prettyName = _("Open-Meteo");
         this.name = "OpenMeteo";
         this.maxForecastSupport = 16;
         this.website = "https://open-meteo.com/";
@@ -17151,7 +17318,7 @@ class OpenMeteo extends BaseProvider {
                 longitude: loc.lon,
                 current: "temperature_2m,dewpoint_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
                 hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_10m,wind_direction_10m,is_day",
-                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset",
+                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max",
                 timezone: "auto",
                 forecast_days: "16",
                 forecast_hours: "24"
@@ -17217,6 +17384,7 @@ function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone) {
         pressure: weather.main.pressure,
         humidity: weather.main.humidity,
         dewPoint: null,
+        uvIndex: null,
         extra_field: {
             type: "temperature",
             name: _("Feels like"),
@@ -17984,10 +18152,18 @@ class SwissMeteo extends BaseProvider {
                 degree: result.graph.windDirection3h[0],
             },
             forecasts: result.forecast.map(day => SwissMeteoDayToForecastData(day)),
-            alerts: result.warnings.filter(x => {
-                return DateTime.fromMillis(x.validFrom) < DateTime.now() && (x.validTo ? DateTime.fromMillis(x.validTo) > DateTime.now() : true);
-            }).map(warning => SwissMeteoWarningToAlertData(warning)),
+            uvIndex: null
         };
+        const alerts = result.warnings.filter(x => {
+            if (x.validTo && DateTime.fromMillis(x.validTo) < DateTime.now()) {
+                return false;
+            }
+            if (x.validFrom && DateTime.fromMillis(x.validFrom) > DateTime.now()) {
+                return false;
+            }
+            return true;
+        });
+        weather.alerts = alerts.map(warning => SwissMeteoWarningToAlertData(warning));
         const hourlyForecasts = [];
         const startTime = DateTime.fromMillis(result.graph.start);
         const now = DateTime.now();
@@ -18120,6 +18296,7 @@ class Config {
         this.UserAgentStringOverrideChanged = new Event();
         this.RunScriptChanged = new Event();
         this.TempTextOverrideChanged = new Event();
+        this.UV_IndexChanged = new Event();
         this.FontChanged = new Event();
         this.HotkeyChanged = new Event();
         this.SelectedLogPathChanged = new Event();
@@ -18573,6 +18750,10 @@ const Keys = {
         key: "tempTextOverride",
         prop: "TempTextOverride"
     },
+    UV_INDEX: {
+        key: "uvIndex",
+        prop: "UV_Index"
+    },
 };
 
 ;// CONCATENATED MODULE: ./src/3_8/types.ts
@@ -18590,6 +18771,7 @@ var RefreshState;
 
 
 
+
 const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 const weatherAppletGUIDs = {};
 class WeatherLoop {
@@ -18599,6 +18781,9 @@ class WeatherLoop {
         return this.refreshing;
     }
     get Online() {
+        if (!this.NetworkMonitorUsed) {
+            return true;
+        }
         return NetworkMonitor.get_default().connectivity != NetworkConnectivity.LOCAL;
     }
     constructor(app, instanceID) {
@@ -18610,6 +18795,7 @@ class WeatherLoop {
         this.runningRefresh = null;
         this.refreshingResolver = null;
         this.refreshing = null;
+        this.NetworkMonitorUsed = null;
         this.OnNetworkConnectivityChanged = () => {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
@@ -18723,6 +18909,17 @@ class WeatherLoop {
         this.GUID = Guid();
         weatherAppletGUIDs[instanceID] = this.GUID;
         NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+        void this.Init();
+    }
+    async Init() {
+        const nmCheck = await SpawnProcess(["systemctl", "is-active", "--quiet", "NetworkManager"]);
+        if (!nmCheck.Success) {
+            logger_Logger.Info("NetworkManager is not running/used, skipping network connectivity check.");
+            this.NetworkMonitorUsed = false;
+            return;
+        }
+        logger_Logger.Info("NetworkManager is running, using network connectivity check.");
+        this.NetworkMonitorUsed = true;
     }
     IsDataTooOld() {
         if (!this.lastUpdated)
@@ -18994,6 +19191,7 @@ class WindBox {
 
 const { BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
 const { ActorAlign: uiCurrentWeather_ActorAlign } = imports.gi.Clutter;
+const { Tooltip } = imports.ui.tooltips;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
 const STYLE_SUMMARY = 'weather-current-summary';
 const STYLE_DATABOX = 'weather-current-databox';
@@ -19028,6 +19226,7 @@ class CurrentWeather {
         this.app.config.ImmediatePrecipChanged.Subscribe(this.app.AfterRefresh((config, precip, data) => this.SetImmediatePrecipitation(data.immediatePrecipitation, config)));
         this.app.config.LocationLabelOverrideChanged.Subscribe(this.app.AfterRefresh(this.OnLocationOverrideChanged));
         this.app.config.PressureUnitChanged.Subscribe(this.app.AfterRefresh((config, pressure, data) => this.SetPressure(data.pressure)));
+        this.app.config.UV_IndexChanged.Subscribe(this.app.AfterRefresh((config, uvIndex, data) => this.SetUVIndex(data.uvIndex, config._uvIndex)));
     }
     Display(weather, config) {
         try {
@@ -19046,6 +19245,7 @@ class CurrentWeather {
             this.SetDewPointField(weather.dewPoint);
             this.SetAPIUniqueField(weather.extra_field);
             this.sunTimesUI.Display(weather.sunrise, weather.sunset, weather.location.timeZone);
+            this.SetUVIndex(weather.uvIndex, config._uvIndex);
             this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
             return true;
         }
@@ -19085,7 +19285,25 @@ class CurrentWeather {
         this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
         this.immediatePrecipitationBox.hide();
         middleColumn.add_actor(this.immediatePrecipitationBox);
-        middleColumn.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
+        const sunBox = new uiCurrentWeather_BoxLayout({
+            x_align: uiCurrentWeather_ActorAlign.CENTER,
+            vertical: false,
+            x_expand: true,
+        });
+        sunBox.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
+        const uvIndexBox = new uiCurrentWeather_BoxLayout();
+        this.uvIndexIcon = new uiCurrentWeather_Icon({
+            icon_name: "uv-index-symbolic",
+            icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+            icon_size: 20,
+            style_class: "weather-current-uvindex",
+            reactive: true,
+        });
+        this.uvIndexIcon.hide();
+        this.uvIndexTooltip = new Tooltip(this.uvIndexIcon, "");
+        uvIndexBox.add(this.uvIndexIcon);
+        sunBox.add_actor(uvIndexBox);
+        middleColumn.add_actor(sunBox);
         return middleColumn;
     }
     BuildRightColumn(textColorStyle, config) {
@@ -19286,6 +19504,34 @@ class CurrentWeather {
             this.locationButton.disable();
         else
             this.locationButton.url = url;
+    }
+    SetUVIndex(uvIndex, show) {
+        if (uvIndex == null || !show) {
+            this.uvIndexIcon.hide();
+            return;
+        }
+        this.uvIndexIcon.show();
+        if (uvIndex < 3) {
+            this.uvIndexIcon.hide();
+            this.uvIndexIcon.style = "color: #00FF00";
+            this.uvIndexTooltip.set_text(_("Low Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
+        }
+        else if (uvIndex < 6) {
+            this.uvIndexIcon.style = "color: #FFFF00";
+            this.uvIndexTooltip.set_text(_("Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
+        }
+        else if (uvIndex < 8) {
+            this.uvIndexIcon.style = "color: #FF8000";
+            this.uvIndexTooltip.set_text(_("High Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
+        }
+        else if (uvIndex < 11) {
+            this.uvIndexIcon.style = "color: #FF0000";
+            this.uvIndexTooltip.set_text(_("Very High of Harm from sun exposure, Risk UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
+        }
+        else {
+            this.uvIndexIcon.style = "color: #FF00FF";
+            this.uvIndexTooltip.set_text(_("Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}", { uvIndex: uvIndex.toString() }));
+        }
     }
     onLocationStorageChanged(sender, itemCount) {
         logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
@@ -19929,7 +20175,7 @@ class UIHourlyForecasts {
 
 
 const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
-const { Tooltip } = imports.ui.tooltips;
+const { Tooltip: uiBar_Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
     get Actor() {
@@ -20032,14 +20278,14 @@ class UIBar {
             can_focus: true,
             child: this.warningButtonIcon
         });
-        this.warningButtonTooltip = new Tooltip(this.warningButton.actor, "");
+        this.warningButtonTooltip = new uiBar_Tooltip(this.warningButton.actor, "");
         this.warningButton.actor.hide();
         this.warningButton.actor.connect(SIGNAL_CLICKED, this.WarningClicked);
         leftBox.add_actor(this.warningButton.actor);
         leftBox.add_actor(new uiBar_Bin({ width: 5 }));
         this._timestamp = new uiBar_Button({ label: "Placeholder" });
         leftBox.add_actor(this._timestamp);
-        this.timestampTooltip = new Tooltip(this._timestamp, "");
+        this.timestampTooltip = new uiBar_Tooltip(this._timestamp, "");
         this.actor.add(leftBox, {
             x_fill: false,
             x_align: uiBar_Align.START,

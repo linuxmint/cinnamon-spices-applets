@@ -1,56 +1,77 @@
 # Changelog
 
+## 3.6.7
+
+* Add Slovenian translation made by Tit Elmund
+* Fix [weather@mockturl - network connection issue #6936](https://github.com/linuxmint/cinnamon-spices-applets/issues/6936)
+* Resolve [[weather@mockturtl] UV index display #6980](https://github.com/linuxmint/cinnamon-spices-applets/issues/6980)
+* Fix [weather@mockturtl Missing translation of weather terms #7057](https://github.com/linuxmint/cinnamon-spices-applets/issues/7057)
+* Fix [[weather@mockturtl] Broken weather translation with Pirate Weather #7024](https://github.com/linuxmint/cinnamon-spices-applets/issues/7024)
+
+## 3.6.6
+
+* Add Breeze icon theme problems to known issues.
+* Fix Swiss Meteo crashing when alerts don't have a `valid_from` field
+* Fix MET Norway breaking when Alerts are enabled
+* Include README changes from @jorgenqv
+
+## 3.6.5
+
+* Add more tags for overrides, including forecasts when available, details in README
+* Add left/right padding options and a pad fill option for tags in overrides
+* Add ability to programatically set overridable default padding options for tags in overrides, added some defaults
+
 ## 3.6.4
 
-- Add attribution to nominatim
-- Remove app dependency from providers to make them more isolated
-- Add Swiss Meteo provider
-- Fix [weather@mockturtl: Sun icon not showing anymore with tommorrow.io api #6281](https://github.com/linuxmint/cinnamon-spices-applets/issues/6281)
-- Filter out alerts for tomorrow.io that are not for the user's location
-- Fix hourly box open/close animation not respecting global effect setting
-- Fix [weather@mockturtl: Service Error 403 on all data sources #6087](https://github.com/linuxmint/cinnamon-spices-applets/issues/6087)
+* Add attribution to nominatim
+* Remove app dependency from providers to make them more isolated
+* Add Swiss Meteo provider
+* Fix [weather@mockturtl: Sun icon not showing anymore with tommorrow.io api #6281](https://github.com/linuxmint/cinnamon-spices-applets/issues/6281)
+* Filter out alerts for tomorrow.io that are not for the user's location
+* Fix hourly box open/close animation not respecting global effect setting
+* Fix [weather@mockturtl: Service Error 403 on all data sources #6087](https://github.com/linuxmint/cinnamon-spices-applets/issues/6087)
 
 ## 3.6.3
 
-- Fix [[weather@mockturtl] Visual Crossing wind speed #6086](https://github.com/linuxmint/cinnamon-spices-applets/issues/6086)
-- Fix [Weather applet not working #6137](https://github.com/linuxmint/cinnamon-spices-applets/issues/6137)
+* Fix [[weather@mockturtl] Visual Crossing wind speed #6086](https://github.com/linuxmint/cinnamon-spices-applets/issues/6086)
+* Fix [Weather applet not working #6137](https://github.com/linuxmint/cinnamon-spices-applets/issues/6137)
 
 ## 3.6.2
 
-- Fix applet output breaking with various weather providers if Automatic location is used.
-- Fix
+* Fix applet output breaking with various weather providers if Automatic location is used.
+* Fix
   [weather@mockturtl - Sunrise Invalid Date Time when using weather provider DMI Denmark #6058](https://github.com/linuxmint/cinnamon-spices-applets/issues/6058)
 
 ## 3.6.1
 
-- Make translating conditions more consistent across all providers and clarify purpose of "Translate conditions" settings toggle
-- Stop applet loop when applet is removed
-- Add missing dewpoint from Open-Meteo
-- Fix
+* Make translating conditions more consistent across all providers and clarify purpose of "Translate conditions" settings toggle
+* Stop applet loop when applet is removed
+* Add missing dewpoint from Open-Meteo
+* Fix
   [[weather@mockturtl] Applet Bug #6048](https://github.com/linuxmint/cinnamon-spices-applets/issues/6048), Fix [weather@mockturtl: Hourly weather forecast is not displayed #6046](https://github.com/linuxmint/cinnamon-spices-applets/issues/6046) - Rename OpenWeatherMap name internally so people fall back to the default Open-Meteo so no user-action is needed.
 
 ## 3.6.0
 
-- Add eslint and fix all eslint errors
-- Fix Weatherbit not processing hourly weather properly
-- Fix Soup2 lib not passing in it's `finalCancellable` only what was passed in from outside
-- Fix OpenWeatherMap error handling, was completely broken
-- Better error logging on exception handling in most places
-- Fix Accuweather having wrong weather condition info on "clear sky"
-- Add missing type information for weather/location providers
-- Fix incorrect wind speed reported with Open Meteo
-- Resolve [[weather@mockturtl] Feature Request: Save Weather Service JSON #5420](https://github.com/linuxmint/cinnamon-spices-applets/issues/5420)
-- Resolve [[weather@mockturtl] Feature Request: Configurable UserAgent String #5999](https://github.com/linuxmint/cinnamon-spices-applets/issues/5999)
-- Fix [weather@mockturtl: Incorrectly formatted text #6011](https://github.com/linuxmint/cinnamon-spices-applets/issues/6011) - mostly
-- Indicate on the popup menu when a refresh is in progress.
+* Add eslint and fix all eslint errors
+* Fix Weatherbit not processing hourly weather properly
+* Fix Soup2 lib not passing in it's `finalCancellable` only what was passed in from outside
+* Fix OpenWeatherMap error handling, was completely broken
+* Better error logging on exception handling in most places
+* Fix Accuweather having wrong weather condition info on "clear sky"
+* Add missing type information for weather/location providers
+* Fix incorrect wind speed reported with Open-Meteo
+* Resolve [[weather@mockturtl] Feature Request: Save Weather Service JSON #5420](https://github.com/linuxmint/cinnamon-spices-applets/issues/5420)
+* Resolve [[weather@mockturtl] Feature Request: Configurable UserAgent String #5999](https://github.com/linuxmint/cinnamon-spices-applets/issues/5999)
+* Fix [weather@mockturtl: Incorrectly formatted text #6011](https://github.com/linuxmint/cinnamon-spices-applets/issues/6011) - mostly
+* Indicate on the popup menu when a refresh is in progress.
 
 ## 3.5.0
 
 * Resolve- [Feature Request: Weather applet should show weather alerts/warnings #5546](https://github.com/linuxmint/cinnamon-spices-applets/issues/5546)
-- OpenWeatherMap sunsets it's OneCall API 2.5 in **June 2024** and they don't seem to want to enable 3.0 for the opensource plan for 
+* OpenWeatherMap sunsets it's OneCall API 2.5 in **June 2024** and they don't seem to want to enable 3.0 for the opensource plan for 
   me. So I switch to Open-Meteo as the default and break OWM provider 
   into 2, one without key and one with key.
-- Fixed refreshing problem on Cinnamon 3.8 forever timing out.
+* Fixed refreshing problem on Cinnamon 3.8 forever timing out.
 
 ## 3.4.3
 

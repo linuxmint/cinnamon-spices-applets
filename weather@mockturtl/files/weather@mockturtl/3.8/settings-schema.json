@@ -88,7 +88,9 @@
 				"forecastDays",
 				"forecastHours",
 				"immediatePrecip",
-				"showAlerts"
+				"showAlerts",
+				"showSunrise",
+				"uvIndex"
 			]
 		},
 		"weather-conditions": {
@@ -117,7 +119,6 @@
 				"forecastColumns",
 				"forecastRows",
 				"alwaysShowHourlyWeather",
-				"showSunrise",
 				"show24Hours",
 				"showForecastDates",
 				"shortHourlyTime",
@@ -582,5 +583,11 @@
 		"type": "button",
 		"description": "Test your command",
 		"callback": "testRunScript"
+	},
+	"uvIndex": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable displaying UV Index",
+		"tooltip": "If your provider supports it, the UV index will be shown in the popup menu next to sunrise/sunset times. It will not show if the UV index is low risk (0-2)."
 	}
 }

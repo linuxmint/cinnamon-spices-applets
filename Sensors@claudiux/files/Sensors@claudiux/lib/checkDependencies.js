@@ -80,7 +80,8 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "arch": [
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
@@ -92,13 +93,15 @@ var DEPENDENCIES = {
     ["sensors", "/usr/bin/sensors",  "lm-sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/doc/fonts-noto-core/copyright", "fonts-noto-core"]
   ],
   "fedora": [
     ["sensors", "/usr/bin/sensors",  "lm_sensors"],
     ["xsensors", "/usr/bin/xsensors", "xsensors"],
     //~ ["hddtemp", "/usr/sbin/hddtemp", "hddtemp"],
-    ["smartctl", "/usr/sbin/smartctl", "smartmontools"]
+    ["smartctl", "/usr/sbin/smartctl", "smartmontools"],
+    ["", "/usr/share/fontconfig/conf.avail/66-google-noto-sans-bamum.conf", "google-noto-sans-bamum-fonts"]
   ],
   "openSUSE": [
     ["sensors", "/usr/bin/sensors",  "sensors"],

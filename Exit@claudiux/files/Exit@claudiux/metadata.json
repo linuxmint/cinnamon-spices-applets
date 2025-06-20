@@ -2,7 +2,7 @@
     "description": "Restart Cinnamon, turn off the screen, lock the screen, switch users, log out, suspend, hibernate, reboot or shut down the computer",
     "uuid": "Exit@claudiux",
     "name": "Exit",
-    "version": "1.4.0",
+    "version": "1.6.0",
     "max-instances": -1,
     "author": "claudiux"
 }

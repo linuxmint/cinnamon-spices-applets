@@ -1,16 +1,21 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["page-applications", "page-settings"],
+        "pages": ["page-applications", "page-settings-application", "page-settings-global"],
         "page-applications": {
             "type": "page",
             "title": "Applications",
             "sections": ["section-applications"]
         },
-        "page-settings": {
+        "page-settings-global": {
             "type": "page",
-            "title": "Settings",
-            "sections": ["section-settings-global", "section-settings-applications"]
+            "title": "Global Settings",
+            "sections": ["section-settings-global"]
+        },
+        "page-settings-application": {
+            "type": "page",
+            "title": "Application Settings",
+            "sections": ["section-settings-applications"]
         },
 
         "section-applications": {
@@ -30,13 +35,21 @@
                 "notification-text",
                 "hotkeys-enabled",
                 "hotkey-bindings",
-                "menu-at-pointer"
+                "menu-at-pointer",
+                "open-by-hover",
+                "open-by-hover-delay",
+                "bind-to-workspace"
             ]
         },
         "section-settings-applications": {
             "type": "section",
             "title": "Application Settings",
-            "keys": ["fixed-menu-width", "visible-app-icons", "use-symbolic-icons", "app-icon-size"]
+            "keys": [
+                "fixed-menu-width",
+                "visible-app-icons",
+                "use-symbolic-icons",
+                "app-icon-size"
+            ]
         }
     },
     "custom-app-list": {
@@ -122,6 +135,31 @@
         "default": false,
         "dependency": "hotkeys-enabled",
         "tooltip": "Show the menu next to the cursor when triggered by hotkey"
+    },
+    "open-by-hover": {
+        "type": "switch",
+        "description": "Open menus by hovering over them",
+        "default": false,
+        "tooltip": "Open all menus when you move the mouse pointer over them"
+    },
+    "open-by-hover-delay": {
+        "type": "spinbutton",
+        "description": "Hover delay",
+        "default": 300,
+        "min":0,
+        "max":1000,
+        "step":50,
+        "units":"milliseconds",
+        "dependency": "open-by-hover"
+    },
+    "bind-to-workspace": {
+        "type": "combobox",
+        "description": "Bind to workspace",
+        "default": "-1",
+        "options": {
+            "": "-1"
+        },
+        "tooltip": "Show the applet only on the selected workspace"
     },
     "fixed-menu-width": {
         "type": "switch",

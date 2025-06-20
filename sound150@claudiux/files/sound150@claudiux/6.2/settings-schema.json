@@ -412,7 +412,7 @@
       "medium": "medium",
       "large": "large"
     },
-    "description": "Whether the media keys osd is disabled or its relative display size"
+    "description": "Whether the media keys OSD is disabled or its relative display size"
   },
   "showOSDonStartup": {
     "type": "switch",

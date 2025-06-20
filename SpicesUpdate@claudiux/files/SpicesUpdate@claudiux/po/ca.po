@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-01-19 13:27+0100\n"
-"PO-Revision-Date: 2024-07-04 04:29+0200\n"
+"PO-Revision-Date: 2025-02-13 20:50+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -554,6 +554,7 @@ msgstr ""
 #. 6.0/constants.js:184
 msgid "For private Spices, both boxes will be considered unchecked."
 msgstr ""
+"Per a espècies privades, ambdues caselles seran considerades no marcades."
 
 #. 3.8/applet.js:80
 msgid ""

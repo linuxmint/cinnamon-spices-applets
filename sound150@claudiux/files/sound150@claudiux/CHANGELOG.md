@@ -1,3 +1,94 @@
+### v13.1.1~20250605
+  * Improved option "View Full Album Art".
+
+### v13.1.0~20250605
+  * New option "View Full Album Art".
+
+### v13.0.1~20250523
+  * Minor bug fix.
+
+### v13.0.0~20250523
+  * Added the Menus tab in settings.
+  * Keeps certain context menu submenus open.
+
+### v12.0.4~20250519
+  * Do not play sound notification when the volume has reached its maximum limit.
+
+### v12.0.3~20250504
+  * Improved album art display.
+
+### v12.0.2~20250427
+  * Minor bugfix.
+
+### v12.0.1~20250424
+  * Removes DEBUG mode.
+
+### v12.0.0~20250424
+  * Produces square rendered images from album covers to display a more pleasing icon.
+  * Requires installation of imagemagick to obtain this result.
+
+### v11.5.2~20250416
+  * Bugfix related to [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074)
+
+### v11.5.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+
+### v11.5.0~20250415
+  * Best album cover change.
+  * Code: subdivision into libraries.
+
+### v11.4.0~20250408
+  * Improved album art display.
+
+### v11.3.0~20250405
+  * New option: Delay between icon and album art display.
+
+### v11.2.0~20250404
+  * Horizontal panel: keep title when paused.
+  * New option: "If the title is too long, end it with" (chosen characters).
+
+### v11.1.0~20250403
+  * Can transfer Artist and Title to AlbumArt3.0 desklet.
+
+### v11.0.0~20250313
+  * Works with the version 2.0.0 of the 'Album Art 3.0' desklet.
+
+### v10.2.1~20250302
+  * Improved tooltip management.
+
+### v10.2.0~20250227
+  * Do not display the tooltip when using the multimedia keys to change volume.
+  * Avoid unnecessary spaces in the tooltip.
+  * Code cleanup.
+
+### v10.1.1~20250218
+  * Improved tooltip layout.
+
+### v10.1.0~20250209
+  * Changes required by the Linux Mint - Cinnamon team.
+  * From now on, having a horizontal OSD requires the OSD150@claudiux extension.
+  * Notifications are available to help you install and enable the OSD150@claudiux extension.
+
+### v10.0.0~20250207
+  * OSD is now managed by an extension. (Cinnamon 6.4)
+  * This extension is named OSD150@claudiux and it is automatically installed by this applet.
+  * Added the ability to remove incompatible extensions. (See menu if they are installed. Nothing in menu? All is OK.)
+
+### v9.2.2~20250206
+  * Eliminates Cinnamon reload errors when a sound stream is playing.
+
+### v9.2.1~20250205
+  * Fixes #6854: Typo in settings.
+
+### v9.2.0~20250203
+  * Add custom commands (see Shortcuts tab in settings).
+  * Fixes #6847.
+
+### v9.1.0~20250203
+  * Functional improvement.
+  * When the volume step differs from 5, multimedia key shortcuts are automatically redefined.
+  * Code: Avoid using 'bind' calls.
+
 ### v9.0.0~20250201
   * Major changes for OSD and menu.
   * OSD: Volume value can be displayed beside the volume bar.

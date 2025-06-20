@@ -1,3 +1,46 @@
+### v5.4.2~20250401
+  * Minor changes about font size.
+  * Code cleanup in applet.js.
+
+### v5.4.1~20250330
+  * Minor changes about applet width.
+
+### v5.4.0~20250329
+  * Now applet width can be fixed by user (for horizontal panels).
+  * Fixes #7005.
+
+### v5.3.2~20250228
+  * Fixes scenario where special characters would appear next to temperatures on the panel.
+
+### v5.3.1~20250223
+  * Removed option "Only show positive values" for fans. (Value fixed to false.)
+  * Fixes #6845.
+
+### v5.3.0~20250222
+  * Users can now choose the type of separator.
+
+### v5.2.0~20250221
+  * Separator is coming back!
+
+### v5.1.0~20250221
+  * Font size can now be set from 60% to 120% of standard size (instead of 80% to 120%).
+  * Fixes #6896.
+
+### v5.0.0~20250220
+  * Individual High/Critical Value Indications.
+  * High/Critical Value Color can be selected.
+  * Custom emoji can be added/selected.
+  * Fixes #6846.
+
+### v4.2.1~20250215
+  * Fixes #6868.
+
+### v4.2.0~20250205
+  * Fixes several issues.
+  * Fixes #6845.
+  * Fixes #6766.
+  * Fixes #6842.
+
 ### v4.1.0~20250130
   * Improves dependency installation.
   * Fixes #6809 and #6818.

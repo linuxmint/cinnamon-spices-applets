@@ -2,13 +2,12 @@
 # This file is put in the public domain.
 # claudiux, 2024
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-27 10:32+0100\n"
+"POT-Creation-Date: 2025-04-07 12:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,39 +15,45 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:127
+#. applet.js:206
 msgid "score"
-msgstr ""
+msgstr "Punktestand"
 
-#. applet.js:139
+#. applet.js:218
 msgid "comments"
-msgstr ""
+msgstr "Kommentare"
 
-#. applet.js:152
+# Better not translate "issue"?
+#. applet.js:231
 msgid "recent issues"
-msgstr ""
+msgstr "aktuelle Probleme"
 
-#. applet.js:164
+#. applet.js:243
 msgid "translations"
-msgstr ""
+msgstr "Übersetzungen"
 
-#. applet.js:737
-msgid "Mark all as read"
-msgstr "Alle als gelesen markieren"
-
-#. applet.js:746
-msgid "Refresh"
-msgstr "Aktualisieren"
-
-#. applet.js:759
+#. applet.js:851
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:832
+#. applet.js:936
+msgid "Mark all as read"
+msgstr "Alle als gelesen markieren"
+
+#. applet.js:947
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+#. applet.js:959
+msgid "Refreshing in progress"
+msgstr "Aktualisierung läuft"
+
+# Same wording as in context menu on applet right click.
+#. applet.js:970
 msgid "Configure..."
-msgstr "Einstellen..."
+msgstr "Einrichten..."
 
 #. metadata.json->name
 msgid "SpiceSpy"
@@ -58,7 +63,7 @@ msgstr "SpiceSpy"
 msgid ""
 "Notifies you when there's a change to your favorite Spices on the website."
 msgstr ""
-"Benachrichtigt Sie, wenn es eine Änderung bei Ihren Lieblings-spices auf der "
+"Benachrichtigt Sie, wenn es eine Änderung bei Ihren Lieblings-Spices auf der "
 "Website gibt."
 
 #. settings-schema.json->pageGeneral->title
@@ -72,47 +77,76 @@ msgstr "Optionen"
 
 #. settings-schema.json->section2->title
 msgid "List of authors of the Spices you are interested in"
-msgstr "Liste der Autoren der Spices an denen du interessiert bist"
+msgstr "Liste der Autoren der Spices, die Sie interessieren"
 
 #. settings-schema.json->section3->title
 msgid "List of specific Spices you are interested in"
-msgstr "Liste der Spices an denen du interessiert bist"
+msgstr "Liste der einzelnen Spices, die Sie interessieren"
 
 #. settings-schema.json->update-interval-hours->description
 msgid "Update interval"
-msgstr "Aktualisierungs Intervall"
+msgstr "Aktualisierungsintervall"
 
 #. settings-schema.json->update-interval-hours->units
 msgid "hours"
-msgstr ""
+msgstr "Stunden"
 
 #. settings-schema.json->standard-opacity->description
 msgid "Opacity in absence of change"
-msgstr "Deckkraft bei ausbleibender Veränderung"
+msgstr "Deckkraft bei ausbleibender Änderung"
 
 #. settings-schema.json->color-on-change->description
 msgid "Color on change"
-msgstr "Farbe bei Veränderung"
+msgstr "Farbe bei Änderung"
 
 #. settings-schema.json->show-icon-in-menu->description
 msgid "Show each Spice icon in the menu"
-msgstr "Zeige jedes Spice icon im Menü an"
+msgstr "Zeige jedes Spice-Icon im Menü an"
 
 #. settings-schema.json->icon-size->description
 msgid "Icon size"
-msgstr "Icon Größe"
+msgstr "Icon-Größe"
 
-#. settings-schema.json->icon-size->units
-msgid "pixels"
-msgstr "pixel"
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr "16"
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr "22"
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr "24"
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr "128"
 
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
-msgstr "Zeig Nummer der Übersetzungen im Menü an"
+msgstr "Zeige die Anzahl der Übersetzungen im Menü an"
 
+# Better not translate issue since it refers to Github issues?
 #. settings-schema.json->show-issues->description
 msgid "Show number of issues in the menu"
-msgstr "Zeige Nummer der Issues im Menü an"
+msgstr "Zeige die Anzahl der Probleme im Menü an"
 
 #. settings-schema.json->sort-by->description
 msgid "Sort by"
@@ -141,11 +175,11 @@ msgstr "Ergebnis (von oben nach unten)"
 
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (bottom-up)"
-msgstr "Nummer der Kommentare (von unten nach oben)"
+msgstr "Anzahl der Kommentare (von unten nach oben)"
 
 #. settings-schema.json->sort-by->options
 msgid "Number of comments (top-down)"
-msgstr "Nummer der Kommentare (von unten nach oben)"
+msgstr "Anzahl der Kommentare (von unten nach oben)"
 
 #. settings-schema.json->show-uuid->description
 msgid "Show UUID instead of name"
@@ -153,11 +187,11 @@ msgstr "UUID anstatt Name anzeigen"
 
 #. settings-schema.json->translate-name->description
 msgid "Show translated name if available"
-msgstr "Wenn verfügbar übersetzten Namen anzeigen "
+msgstr "Übersetzten Namen anzeigen, falls verfügbar"
 
 #. settings-schema.json->display-on-panel->description
 msgid "If there is nothing new"
-msgstr "Wenn es nichts neues gibt"
+msgstr "Falls es nichts Neues gibt"
 
 #. settings-schema.json->display-on-panel->options
 msgid "Show icon and label"
@@ -177,7 +211,7 @@ msgstr "Zeige nur Werte über Null im Panel an"
 
 #. settings-schema.json->author-list->columns->title
 msgid "GitHub user name"
-msgstr "Github Benutzername"
+msgstr "GitHub Benutzername"
 
 #. settings-schema.json->button-my-spices->description
 msgid "Add all the Spices I use"

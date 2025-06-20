@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# KDE CONNECT APPLET
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# JoeJoeTV, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-08 00:05+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:49-0400\n"
 "PO-Revision-Date: 2024-04-22 17:42+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,29 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:574
+#. applet.js:574
 msgid "No Modules available"
 msgstr "Geen modules beschikbaar"
 
-#: applet.js:1065
-msgid "KDE Connect not available"
-msgstr "KDE Connect niet beschikbaar"
-
-#: applet.js:1068
+#. applet.js:1065 applet.js:1068
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
 "KDE Connect is niet beschikbaar, zorg ervoor dat het is geïnstalleerd en "
 "actief is."
 
-#: applet.js:1072 applet.js:1085 applet.js:1270
+#. applet.js:1072 applet.js:1085 applet.js:1270
 msgid "Reload Applet"
 msgstr "Applet herladen"
 
-#: applet.js:1077
+#. applet.js:1077
 msgid "Invalid KDE Connect version returned!"
 msgstr "Ongeldige versie van KDE Connect geretourneerd!"
 
-#: applet.js:1078 applet.js:1081
+#. applet.js:1078 applet.js:1081
 msgid ""
 "The KDE Connect DBus service returned an invalid version, please try "
 "reloading the Applet!"
@@ -46,277 +43,277 @@ msgstr ""
 "De KDE Connect DBus-service heeft een ongeldige versie geretourneerd, "
 "probeer de applet opnieuw te laden!"
 
-#: applet.js:1120
+#. applet.js:1120
 msgid "No connected Devices!"
 msgstr "Geen verbonden apparaten!"
 
-#: applet.js:1120
+#. applet.js:1120
 msgid "Add them in the KDE Connect settings"
 msgstr "Voeg ze toe in de instellingen van KDE Connect"
 
-#: applet.js:1165
+#. applet.js:1165
 msgid "Debug Stuff, don't touch!"
 msgstr "Debug-dingen, niet aanraken!"
 
-#: applet.js:1254
+#. applet.js:1254
 msgid "KDE Connect Version: {version}"
 msgstr "KDE Connect-versie: {version}"
 
-#: applet.js:1261
+#. applet.js:1261
 msgid "Own ID: {own_id}"
 msgstr "Eigen ID: {own_id}"
 
-#: applet.js:1263
+#. applet.js:1263
 msgid "own ID"
 msgstr "Eigen ID"
 
-#: applet.js:1265
+#. applet.js:1265
 msgid "Click to copy own ID"
 msgstr "Klik om eigen ID te kopiëren"
 
-#: applet.js:1275
+#. applet.js:1275
 msgid "Configure KDE Connect"
 msgstr "KDE Connect configureren"
 
-#: applet.js:1277
+#. applet.js:1277
 msgid "Click to open KDE Connect Configuration"
 msgstr "Klik om de configuratie van KDE Connect te openen"
 
-#: applet.js:1321
+#. applet.js:1321
 msgid "No available devices"
 msgstr "Geen beschikbare apparaten"
 
-#: applet.js:1323
+#. applet.js:1323
 msgid "{deviceCount} available device"
 msgstr "{deviceCount} beschikbaar apparaat"
 
-#: applet.js:1325
+#. applet.js:1325
 msgid "{deviceCount} available devices"
 msgstr "{deviceCount} beschikbare apparaten"
 
-#: js/commonUtils.js:223
+#. js/commonUtils.js:223
 msgid "Copied {typestring} to the clipboard"
 msgstr "{typestring} gekopieerd naar het klembord"
 
-#: js/modules.js:656
+#. js/modules.js:656
 msgid "Charging"
 msgstr "Opladen"
 
-#: js/modules.js:739
+#. js/modules.js:739
 msgid "ID: {id}"
 msgstr "ID: {id}"
 
-#: js/modules.js:743
+#. js/modules.js:743
 msgid "Device ID"
 msgstr "Apparaat-ID"
 
-#: js/modules.js:747
+#. js/modules.js:747
 msgid "Click to copy ID"
 msgstr "Klik om ID te kopiëren"
 
-#: js/modules.js:820
+#. js/modules.js:820
 msgid "No Signal"
 msgstr "Geen signaal"
 
-#: js/modules.js:823
+#. js/modules.js:823
 msgid "Low"
 msgstr "Laag"
 
-#: js/modules.js:826
+#. js/modules.js:826
 msgid "Ok"
 msgstr "Oké"
 
-#: js/modules.js:829
+#. js/modules.js:829
 msgid "Good"
 msgstr "Goed"
 
-#: js/modules.js:832
+#. js/modules.js:832
 msgid "Excellent"
 msgstr "Uitstekend"
 
-#: js/modules.js:844
+#. js/modules.js:844
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: js/modules.js:898
+#. js/modules.js:898
 msgid "Ring device"
 msgstr "Apparaat laten rinkelen"
 
-#: js/modules.js:899
+#. js/modules.js:899
 msgid "Click to ring the device"
 msgstr "Klik om het apparaat te laten rinkelen"
 
-#: js/modules.js:978
+#. js/modules.js:978
 msgid "Photo received from '{deviceName}'"
 msgstr "Foto ontvangen van '{deviceName}'"
 
-#: js/modules.js:978 js/modules.js:1154
+#. js/modules.js:978 js/modules.js:1154
 msgid "Click to open in default application"
 msgstr "Klik om te openen in de standaardapplicatie"
 
-#: js/modules.js:987
+#. js/modules.js:987
 msgid "Request Photo"
 msgstr "Foto verzoeken"
 
-#: js/modules.js:988
+#. js/modules.js:988
 msgid "Click to request a photo from the device"
 msgstr "Klik om een foto van het apparaat te verzoeken"
 
-#: js/modules.js:1038
+#. js/modules.js:1038
 msgid "Ping!"
 msgstr "Ping!"
 
-#: js/modules.js:1045
+#. js/modules.js:1045
 msgid "Sent ping to device '{deviceName}'"
 msgstr "Ping verzonden naar apparaat '{deviceName}'"
 
-#: js/modules.js:1051
+#. js/modules.js:1051
 msgid "Ping Device"
 msgstr "Apparaat pingen"
 
-#: js/modules.js:1052
+#. js/modules.js:1052
 msgid "Click to send a ping to the device"
 msgstr "Klik om een ping naar het apparaat te sturen"
 
-#: js/modules.js:1154
+#. js/modules.js:1154
 msgid "Share received from '{deviceName}'"
 msgstr "Delen ontvangen van '{deviceName}'"
 
-#: js/modules.js:1189
+#. js/modules.js:1189
 msgid "Share"
 msgstr "Delen"
 
-#: js/modules.js:1202
+#. js/modules.js:1202
 msgid "Send URL"
 msgstr "URL verzenden"
 
-#: js/modules.js:1203
+#. js/modules.js:1203
 msgid "Click to send a URL to the device"
 msgstr "Klik om een URL naar het apparaat te sturen"
 
-#: js/modules.js:1212
+#. js/modules.js:1212
 msgid "Send Text"
 msgstr "Tekst verzenden"
 
-#: js/modules.js:1213 js/modules.js:1488
+#. js/modules.js:1213 js/modules.js:1488
 msgid "Click to send text to the device"
 msgstr "Klik om tekst naar het apparaat te sturen"
 
-#: js/modules.js:1222
+#. js/modules.js:1222
 msgid "Send File(s)"
 msgstr "Bestand(en) verzenden"
 
-#: js/modules.js:1223
+#. js/modules.js:1223
 msgid "Click to send file(s) to the device"
 msgstr "Klik om bestand(en) naar het apparaat te sturen"
 
-#: js/modules.js:1279
+#. js/modules.js:1279
 msgid "Unmount"
 msgstr "Uitwerpen"
 
-#: js/modules.js:1281
+#. js/modules.js:1281
 msgid "Mount"
 msgstr "Aankoppelen"
 
-#: js/modules.js:1287
+#. js/modules.js:1287
 msgid "Click to unmount"
 msgstr "Klik om uit te werpen"
 
-#: js/modules.js:1289
+#. js/modules.js:1289
 msgid "Click to mount"
 msgstr "Klik om aan te koppelen"
 
-#: js/modules.js:1362
+#. js/modules.js:1362
 msgid "Click to browse files"
 msgstr "Klik om bestanden te bekijken"
 
-#: js/modules.js:1466
+#. js/modules.js:1466
 msgid "SMS"
 msgstr "SMS"
 
-#: js/modules.js:1479
+#. js/modules.js:1479
 msgid "Launch SMS App"
 msgstr "SMS-app starten"
 
-#: js/modules.js:1480
+#. js/modules.js:1480
 msgid "Click to open the KDE Connect SMS App"
 msgstr "Klik om de KDE Connect SMS-app te openen"
 
-#: js/modules.js:1487
+#. js/modules.js:1487
 msgid "Send SMS"
 msgstr "SMS verzenden"
 
-#: settingsWidgets.py:153
+#. settingsWidgets.py:153
 msgid "Move selected entry up"
 msgstr "Geselecteerde invoer omhoog verplaatsen"
 
-#: settingsWidgets.py:160
+#. settingsWidgets.py:160
 msgid "Move selected entry down"
 msgstr "Geselecteerde invoer omlaag verplaatsen"
 
-#: py/dialogs.py:40
+#. py/dialogs.py:40
 #, python-brace-format
 msgid "Send URL to '{device_name}'"
 msgstr "URL verzenden naar '{device_name}'"
 
-#: py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+#. py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+#. py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
 msgid "Send"
 msgstr "Verzenden"
 
-#: py/dialogs.py:57
+#. py/dialogs.py:57
 #, python-brace-format
 msgid "Enter a URL to send to '{device_name}'"
 msgstr "Voer een URL in om naar '{device_name}' te sturen"
 
-#: py/dialogs.py:61
+#. py/dialogs.py:61
 msgid "URL"
 msgstr "URL"
 
-#: py/dialogs.py:96
+#. py/dialogs.py:96
 #, python-brace-format
 msgid "Send SMS using '{device_name}'"
 msgstr "SMS verzenden via '{device_name}'"
 
-#: py/dialogs.py:113
+#. py/dialogs.py:113
 msgid "Phone Number:"
 msgstr "Telefoonnummer:"
 
-#: py/dialogs.py:117
+#. py/dialogs.py:117
 msgid "Phone Number"
 msgstr "Telefoonnummer"
 
-#: py/dialogs.py:119
+#. py/dialogs.py:119
 msgid "Message:"
 msgstr "Bericht:"
 
-#: py/dialogs.py:159
+#. py/dialogs.py:159
 #, python-brace-format
 msgid "Send text to '{device_name}'"
 msgstr "Tekst verzenden naar '{device_name}'"
 
-#: py/dialogs.py:176
+#. py/dialogs.py:176
 msgid "Text to send:"
 msgstr "Tekst om te verzenden:"
 
-#: py/dialogs.py:222
+#. py/dialogs.py:222
 #, python-brace-format
 msgid "Select files to send to '{deviceName}'"
 msgstr "Bestanden selecteren om naar '{deviceName}' te verzenden"
 
-#: py/dialogs.py:283
+#. py/dialogs.py:283
 #, python-brace-format
 msgid "Select where to save photo received from '{deviceName}'"
 msgstr "Selecteer waar u de foto ontvangen van '{deviceName}' wilt opslaan"
 
-#: py/dialogs.py:287
+#. py/dialogs.py:287
 msgid "photo.jpg"
 msgstr "foto.jpg"
 
-#: py/dialogs.py:290
+#. py/dialogs.py:290
 msgid "JPEG Photo"
 msgstr "JPEG-foto"
 
@@ -572,39 +569,3 @@ msgstr "Menu-item inschakelen om een SMS-bericht te verzenden"
 #. settings-schema.json->module_sms_enableLaunchSMSApp->description
 msgid "Enable the menu item to launch the KDE Connect SMS app"
 msgstr "Menu-item inschakelen om de KDE Connect SMS-app te starten"
-
-#: display name of module battery
-msgid "Battery Module"
-msgstr "Batterijmodule"
-
-#: display name of module deviceinfo
-msgid "Device-Info Module"
-msgstr "Apparaatinfo-module"
-
-#: display name of module connectivity
-msgid "Connectivity Module"
-msgstr "Verbindingsmodule"
-
-#: display name of module findmyphone
-msgid "FindMyPhone Module"
-msgstr "Vind mijn telefoon-module"
-
-#: display name of module requestphoto
-msgid "Request Photo Module"
-msgstr "Verzoek foto-module"
-
-#: display name of module ping
-msgid "Ping Module"
-msgstr "Ping-module"
-
-#: display name of module share
-msgid "Share Module"
-msgstr "Delen-module"
-
-#: display name of module sftp
-msgid "SFTP Module"
-msgstr "SFTP-module"
-
-#: display name of module sms
-msgid "SMS Module"
-msgstr "SMS-module"

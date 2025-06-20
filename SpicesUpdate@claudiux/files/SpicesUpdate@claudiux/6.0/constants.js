@@ -1,3 +1,4 @@
+//!/usr/bin/cjs
 const Gettext = imports.gettext; // ++ Needed for translations
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
@@ -84,7 +85,7 @@ const CACHE_MAP = {
 
 const DIR_MAP = {
   'applets': HOME_DIR + "/.local/share/cinnamon/applets",
-  'themes': HOME_DIR + "/.themes",
+  'themes': (GLib.file_test(HOME_DIR + "/.local/share/cinnamon/themes", GLib.FileTest.EXISTS)) ? HOME_DIR + "/.local/share/cinnamon/themes" : HOME_DIR + "/.themes",
   'desklets': HOME_DIR + "/.local/share/cinnamon/desklets",
   'extensions': HOME_DIR + "/.local/share/cinnamon/extensions",
   'actions': HOME_DIR + "/.local/share/nemo/actions"
@@ -104,6 +105,7 @@ Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 
 // ++ Always needed if you want localisation/translation support
 function _(str, uuid=UUID) {
+  if (str == null) return "";
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);

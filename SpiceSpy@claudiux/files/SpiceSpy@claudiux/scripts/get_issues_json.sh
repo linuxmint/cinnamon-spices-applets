@@ -6,14 +6,14 @@
 #   https://docs.github.com/fr/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28#example-creating-a-pagination-method
 
 DEST_DIR="$HOME/.config/cinnamon/spices/SpiceSpy@claudiux/issues"
-[ -d ${DEST_DIR} ] || mkdir -p ${DEST_DIR}
+[[ -d ${DEST_DIR} ]] || mkdir -p ${DEST_DIR}
 
 for TYPE in applets desklets extensions themes actions; do {
         DEST_FILE="${DEST_DIR}/issues-${TYPE}.json"
         TMP_FILE="${DEST_DIR}/issues-${TYPE}_TMP.json"
         PAGE="https://api.github.com/repos/linuxmint/cinnamon-spices-${TYPE}/issues?state=open&per_page=1000"
 
-        rm -f "${TMP_FILE}"
+        [[ -f  ${TMP_FILE} ]] && rm -f ${TMP_FILE}
 
         wget --no-cache -q -O "${TMP_FILE}" "${PAGE}"
         sleep 10
@@ -28,9 +28,9 @@ for TYPE in applets desklets extensions themes actions; do {
         #~ cat issues-${TYPE}_TMP_1.json issues-${TYPE}_TMP_2.json issues-${TYPE}_TMP_3.json > ${TMP_FILE}
         #~ sleep 2
 
-        rm -f "${DEST_FILE}"
+        [[ -f  ${DEST_FILE} ]] && rm -f ${DEST_FILE}
 
-        [ -f "${TMP_FILE}" ] && mv -f "${TMP_FILE}" "${DEST_FILE}"
+        [[ -f ${TMP_FILE} ]] && mv -f ${TMP_FILE} ${DEST_FILE}
         sleep 2
 }; done
 

@@ -119,12 +119,13 @@ class PanelTranslatorApp extends Applet.IconApplet {
       this.getEngine();
       this.languages = [];
       this.getLanguages();
-      this._resizer = new Applet.PopupResizeHandler(this.menu.actor,
+      if (typeof Applet.PopupResizeHandler === "function") {
+         this._resizer = new Applet.PopupResizeHandler(this.menu.actor,
             () => this._orientation,
             (w,h) => this.translatorPopup.onBoxResized(w,h),
             () => this.popup_width,
             () => this.popup_height);
-
+      }
       this.settings.bind("popup-width", "popup_width");
       this.settings.bind("popup-height", "popup_height");
 

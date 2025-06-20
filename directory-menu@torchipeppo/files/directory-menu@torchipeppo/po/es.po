@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-31 18:13+0100\n"
-"PO-Revision-Date: 2024-11-01 11:42-0300\n"
+"POT-Creation-Date: 2025-04-22 12:08-0400\n"
+"PO-Revision-Date: 2025-04-22 12:48-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: popup_menu.py:71
+#. popup_menu.py:95
 msgid "Open Folder"
 msgstr "Abrir carpeta"
 
-#: popup_menu.py:76
+#. popup_menu.py:100
 msgid "Open in Terminal"
 msgstr "Abrir en el terminal"
 
@@ -61,13 +61,37 @@ msgstr "Texto de información sobre herramientas"
 msgid "Panel Text"
 msgstr "Texto del panel"
 
-#. settings-schema.json->behavior-section->description
-msgid "Behavior"
-msgstr "Comportamiento"
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr "Visibilidad"
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr "Incluye \"Abrir carpeta\" y \"Abrir en terminal\""
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Incluir archivos ocultos"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr "Limitar el número máximo de caracteres en los submenús"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "Límite de caracteres"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"Limita (aproximadamente) el número de caracteres de cada entrada.\n"
+"Útil si crees que el menú es demasiado amplio."
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr "Ordenar"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
@@ -88,22 +112,6 @@ msgstr "Mostrar primero los artículos favoritos"
 #. settings-schema.json->pinned-first->description
 msgid "Show pinned items first"
 msgstr "Mostrar primero los elementos fijados"
-
-#. settings-schema.json->limit-characters->description
-msgid "Limit the Maximum Number of Characters on the Submenus"
-msgstr "Limitar el número máximo de caracteres en los submenús"
-
-#. settings-schema.json->character-limit->description
-msgid "Character Limit"
-msgstr "Límite de caracteres"
-
-#. settings-schema.json->character-limit->tooltip
-msgid ""
-"(Approximately) Limit the number of characters of each entry.\n"
-"Useful if you think the menu is too wide."
-msgstr ""
-"Limita (aproximadamente) el número de caracteres de cada entrada.\n"
-"Útil si crees que el menú es demasiado amplio."
 
 #. settings-schema.json->keybindings-section->description
 msgid "Keybindings"

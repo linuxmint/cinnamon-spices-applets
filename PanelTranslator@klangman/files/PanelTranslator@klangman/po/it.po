@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-02-01 15:50-0500\n"
+"POT-Creation-Date: 2025-02-02 12:30-0500\n"
 "PO-Revision-Date: 2024-06-18 14:49+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,63 +18,63 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:108 applet.js:344 applet.js:346
+#. applet.js:108 applet.js:345 applet.js:347
 msgid "Translator"
 msgstr "Traduttore"
 
-#. applet.js:272
+#. applet.js:273
 msgid "Unable to query available languages from translate-shell"
 msgstr "Impossibile interrogare le lingue disponibili da Translate-Shell"
 
-#. applet.js:283
+#. applet.js:284
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr "Comando \"trans\" richiesto non trovato, installare Translate-Shell"
 
-#. applet.js:287
+#. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Errore, il comando \"trans\" ha restituito un codice di uscita di"
 
-#. applet.js:367
+#. applet.js:368
 msgid "Swap Languages"
 msgstr "Cambia lingue"
 
-#. applet.js:410
+#. applet.js:411
 msgid "{Text to translate}"
 msgstr "{Testo da tradurre}"
 
-#. applet.js:421
+#. applet.js:422
 msgid "{Translated text}"
 msgstr "{Testo tradotto}"
 
-#. applet.js:435
+#. applet.js:436
 msgid "Configure"
 msgstr "Configurazione"
 
-#. applet.js:436
+#. applet.js:437
 msgid "Help"
 msgstr "Aiuto"
 
-#. applet.js:440
+#. applet.js:441
 msgid "Play"
 msgstr "Play"
 
-#. applet.js:444
+#. applet.js:445
 msgid "Paste"
 msgstr "Incola"
 
-#. applet.js:448
+#. applet.js:449
 msgid "Clear"
 msgstr "Limpido"
 
-#. applet.js:452
+#. applet.js:453
 msgid "Translate"
 msgstr "Traduzione"
 
-#. applet.js:457
+#. applet.js:458
 msgid "Copy"
 msgstr "Copia"
 
-#. applet.js:463
+#. applet.js:464
 msgid "Play Translation"
 msgstr "Riproduci traduzione"
 

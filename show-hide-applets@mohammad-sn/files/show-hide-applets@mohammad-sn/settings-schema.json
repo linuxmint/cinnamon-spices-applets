@@ -71,6 +71,11 @@
     "dependency" : "autohiders",
     "description" : "Reshowers' autohide delay: ",
     "tooltip" : ""
+ },
+  "hideuntilseparator" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Only hide until next separator",
+    "tooltip": "Only hide everything until the next separator element occurs."
  }
 }
-

@@ -59,6 +59,7 @@ class MyApplet extends Applet.TextIconApplet {
             }
 
             this.bindSettings();
+            this.initWorkspaces();
             this.initMenu();
             this.connectSignals();
             this.updateHotKey();
@@ -84,6 +85,9 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('hotkeys-enabled', 'hotkeysEnabled', this.updateHotKey);
         this.settings.bind('hotkey-bindings', 'hotkeyBindings', this.addHotKey);
         this.settings.bind('menu-at-pointer', 'menuAtPointer');
+        this.settings.bind('open-by-hover', 'openByHover');
+        this.settings.bind('open-by-hover-delay', 'openByHoverDelay');
+        this.settings.bind('bind-to-workspace', 'bindToWorkspace', this.updateWorkspace);
 
         this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
         this.settings.bind('visible-app-icons', 'visibleAppIcons', this.updateMenu);
@@ -94,12 +98,40 @@ class MyApplet extends Applet.TextIconApplet {
     connectSignals() {
         this.signalManager = new SignalManager.SignalManager(null);
 
-        this.signalManager.connect(
-            this.menu,
-            'open-state-changed',
-            this.on_menu_state_changed,
-            this
-        );
+        this.signalManager.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+        this.signalManager.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+
+        this.signalManager.connect(this.menu, 'open-state-changed', this.on_menu_state_changed, this);
+        this.signalManager.connect(global.window_manager, 'switch-workspace', this.updateWorkspace,this);
+        this.signalManager.connect(global.screen, 'workspace-added', this.initWorkspaces, this);
+        this.signalManager.connect(global.screen, 'workspace-removed', this.initWorkspaces, this);
+    }
+
+    updateWorkspace() {
+        let index = parseInt(this.bindToWorkspace);
+        let workspace = global.screen.get_active_workspace_index();
+        if (index === -1 || index > this.workspaces.length - 1) {
+            this.set_applet_enabled(true);
+        } else {
+            this.set_applet_enabled(workspace === index);
+        }
+    }
+
+    initWorkspaces() {
+        let options = {};
+        options[_('All workspaces')] = '-1';
+        this.workspaces = new Array(global.screen.get_n_workspaces());
+        for (let i = 0; i < this.workspaces.length; i++) {
+            let workspaceName = Main.getWorkspaceName(i)
+            this.workspaces[i] = workspaceName;
+            options[workspaceName] = '' + i;
+        }
+        this.settings.setOptions('bind-to-workspace', options);
+        if (this.bindToWorkspace !== '-1' && this.workspaces[parseInt(this.bindToWorkspace)] === undefined) {
+            this.settings.setValue('bind-to-workspace', '-1');
+        }
+
+        this.updateWorkspace();
     }
 
     initMenu() {
@@ -416,6 +448,23 @@ class MyApplet extends Applet.TextIconApplet {
         this.toggleIcon();
         if (!isOpen && this.menu.isContextOpen()) {
             this.menu.closeContext();
+        }
+    }
+
+    onMouseEnter(event) {
+        if (this.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+            this.hoverTimeoutID = setTimeout(() => {
+                if (!this._applet_context_menu.isOpen) {
+                    this.menu.open();
+                }
+            }, this.openByHoverDelay);
+        }
+    }
+
+    onMouseLeave(event) {
+        if (this.hoverTimeoutID) {
+            clearTimeout(this.hoverTimeoutID);
+            this.hoverTimeoutID = undefined;
         }
     }
 
@@ -875,6 +924,10 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
         this._children.unshift(params);
         this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
+
+        this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+        this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+        
         this.actor.add_actor(this._icon);
     }
 
@@ -1069,6 +1122,21 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
     _closeContext() {
         this.applet.menu.closeContext();
+    }
+
+    onMouseEnter(event) {
+        if (this.applet.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+            this.hoverTimeoutID = setTimeout(() => {
+                this.menu.open();
+            }, this.applet.openByHoverDelay);
+        }
+    }
+
+    onMouseLeave(event) {
+        if (this.hoverTimeoutID) {
+            clearTimeout(this.hoverTimeoutID);
+            this.hoverTimeoutID = undefined;
+        }
     }
 
     handleMenuDragOver(source, actor, x, y, time) {

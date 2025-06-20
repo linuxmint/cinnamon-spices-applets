@@ -159,6 +159,7 @@ export class AccuWeather extends BaseProvider {
                 main: current.WeatherText,
                 description: current.WeatherText
             },
+            uvIndex: current.UVIndex ?? hourly[0]?.UVIndex ?? null,
             hourlyForecasts: this.ParseHourly(hourly),
             forecasts: this.ParseDaily(daily)
         }

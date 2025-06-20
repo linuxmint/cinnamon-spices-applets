@@ -3,16 +3,20 @@
 # Moves themes to their new location,
 # creating symbolic links to avoid any crash.
 
-SOURCEDIR="$HOME/.local/share/themes/"
-TARGETDIR="$HOME/.themes/"
+NEWDIR=$HOME/.local/share/themes
+OLDDIR=$HOME/.themes
 
-[[ -d $SOURCEDIR ]] || exit 0
+[[ -d $OLDDIR ]] || mkdir -p $OLDDIR
 
-cd $SOURCEDIR
-for f in $(ls -A); do {
+[[ -d $NEWDIR ]] || mkdir -p $NEWDIR
+
+cd $OLDDIR
+for f in $(ls -1A); do {
         [[ -d $f && ! -L $f ]] && {
-          [[ -L $TARGETDIR$f ]] && rm -f $TARGETDIR$f
-          mv $f $TARGETDIR || rm -rf $f
-          ln -s $TARGETDIR$f
+				[[ -L $NEWDIR/$f ]] && rm -f $NEWDIR/$f
+				mv $f $NEWDIR/
+				ln -s $NEWDIR/$f
         }
 }; done
+
+exit 0

@@ -1,9 +1,0 @@
-{
- "uuid": "AlbumArt3.0@claudiux",
- "max-instances": 1,
- "name": "Album Art for Radio3.0",
- "description": "A digital photo frame desklet to display the Radio3.0 album art",
- "icon": "folder-pictures",
- "prevent-decorations": true
-}
-

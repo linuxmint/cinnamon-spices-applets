@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-21 11:01+0100\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
 "PO-Revision-Date: 2024-09-05 17:38+0200\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -19,75 +19,80 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:118
+#. applet.js:122
+msgid "All workspaces"
+msgstr ""
+
+#. applet.js:150
 msgid "Edit Applications"
 msgstr "编辑应用程序"
 
-#. applet.js:837 applet.js:1131
+#. applet.js:886 applet.js:1199
 msgid "Delete"
 msgstr "删除"
 
-#. applet.js:838 applet.js:1132
+#. applet.js:887 applet.js:1200
 msgid "Edit"
 msgstr "编辑"
 
-#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "取消"
 
-#. dialogs.py:41 dialogs.py:292
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
 msgid "OK"
 msgstr ""
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "名称"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:50
+#. dialogs.py:113 dialogs.py:328
 msgid "Group"
 msgstr "组"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "命令"
 
-#. dialogs.py:236
-msgid "The name cannot be empty"
-msgstr "名称不能为空"
-
-#. dialogs.py:241
-msgid "The name is already used"
-msgstr "名称已被使用"
-
-#. dialogs.py:248
+#. dialogs.py:214 dialogs.py:305
 msgid "Valid name"
 msgstr "有效名称"
 
-#. dialogs.py:254
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "名称不能为空"
+
+#. dialogs.py:222
 msgid "Valid command"
 msgstr "有效命令"
 
-#. dialogs.py:257
+#. dialogs.py:225
 msgid "The command is not valid"
 msgstr "命令无效"
 
-#. dialogs.py:291
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "名称已被使用"
+
+#. dialogs.py:414
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "您想要替换 *.desktop 文件中的哪些信息？"
 
-#. dialogs.py:335
+#. dialogs.py:458
 msgid "really delete?"
 msgstr "确认删除？"
 
-#. dialogs.py:336
+#. dialogs.py:459
 msgid "No"
 msgstr ""
 
-#. dialogs.py:337
+#. dialogs.py:460
 msgid "Yes"
 msgstr ""
 
@@ -138,7 +143,7 @@ msgstr ""
 msgid "Save the current configuration"
 msgstr ""
 
-#. widgets.py:264
+#. widgets.py:230
 msgid "Separator"
 msgstr "分隔符"
 
@@ -155,14 +160,12 @@ msgstr "一个简单的应用程序启动器"
 msgid "Applications"
 msgstr "应用程序"
 
-#. settings-schema.json->page-settings->title
-msgid "Settings"
-msgstr "设置"
-
+#. settings-schema.json->page-settings-global->title
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "全局设置"
 
+#. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "应用程序设置"
@@ -213,6 +216,30 @@ msgstr ""
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
 msgstr ""
 
 #. settings-schema.json->fixed-menu-width->description

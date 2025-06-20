@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-11-21 11:09-0300\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
+"PO-Revision-Date: 2025-06-11 11:48-0400\n"
 "Last-Translator: haggen88\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,77 +17,82 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
-#. applet.js:118
+#. applet.js:122
+msgid "All workspaces"
+msgstr "Todos los espacios de trabajo"
+
+#. applet.js:150
 msgid "Edit Applications"
 msgstr "Editar aplicaciones"
 
-#. applet.js:837 applet.js:1131
+#. applet.js:886 applet.js:1199
 msgid "Delete"
 msgstr "Borrar"
 
-#. applet.js:838 applet.js:1132
+#. applet.js:887 applet.js:1200
 msgid "Edit"
 msgstr "Editar"
 
-#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "Cancelar"
 
-#. dialogs.py:41 dialogs.py:292
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
 msgid "OK"
 msgstr "OK"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nombre"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:50
+#. dialogs.py:113 dialogs.py:328
 msgid "Group"
 msgstr "Grupo"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Comando"
 
-#. dialogs.py:236
-msgid "The name cannot be empty"
-msgstr "El nombre no puede estar vacío"
-
-#. dialogs.py:241
-msgid "The name is already used"
-msgstr "El nombre ya está siendo utilizado"
-
-#. dialogs.py:248
+#. dialogs.py:214 dialogs.py:305
 msgid "Valid name"
 msgstr "Nombre válido"
 
-#. dialogs.py:254
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "El nombre no puede estar vacío"
+
+#. dialogs.py:222
 msgid "Valid command"
 msgstr "Comando válido"
 
-#. dialogs.py:257
+#. dialogs.py:225
 msgid "The command is not valid"
 msgstr "El comando no es válido"
 
-#. dialogs.py:291
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "El nombre ya está siendo utilizado"
+
+#. dialogs.py:414
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "¿Qué datos deben reemplazarse del archivo * .desktop?"
 
-#. dialogs.py:335
+#. dialogs.py:458
 msgid "really delete?"
 msgstr "¿realmente lo desea borrar?"
 
-#. dialogs.py:336
+#. dialogs.py:459
 msgid "No"
 msgstr "No"
 
-#. dialogs.py:337
+#. dialogs.py:460
 msgid "Yes"
 msgstr "Sí"
 
@@ -138,7 +143,7 @@ msgstr "¿Guardar?"
 msgid "Save the current configuration"
 msgstr "Guardar la configuración actual"
 
-#. widgets.py:264
+#. widgets.py:230
 msgid "Separator"
 msgstr "Separador"
 
@@ -155,14 +160,12 @@ msgstr "Un sencillo lanzador de aplicaciones"
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#. settings-schema.json->page-settings->title
-msgid "Settings"
-msgstr "Configuración"
-
+#. settings-schema.json->page-settings-global->title
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "Configuración global"
 
+#. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "Configuraciones de la aplicación"
@@ -216,6 +219,30 @@ msgid "Show the menu next to the cursor when triggered by hotkey"
 msgstr ""
 "Mostrar el menú junto al cursor cuando se activa mediante una tecla de "
 "acceso directo"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
+msgstr "Abrir los menús pasando el ratón por encima"
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr "Abrir todos los menús al situar el puntero del ratón sobre ellos"
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr "Retraso al pasar por encima"
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr "milisegundos"
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr "Vincular al espacio de trabajo"
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr "Mostrar el applet sólo en el espacio de trabajo seleccionado"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

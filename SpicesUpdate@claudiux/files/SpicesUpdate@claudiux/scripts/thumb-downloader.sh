@@ -15,8 +15,8 @@ cd $DEST
 [[ -f $FILENAME ]] && rm -f $FILENAME
 
 #~ wget --wait=10 --random-wait -O $FILENAME $THUMB
-wget -O $FILENAME "$THUMB?time=${_SECONDS}"
+wget --wait=60 --random-wait -O $FILENAME "$THUMB?time=${_SECONDS}"
 
-cd $OLDDEST
+#~ cd $OLDDEST
 
 exit 0

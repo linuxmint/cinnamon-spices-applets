@@ -1,7 +1,11 @@
-### 2.3.1~20250111
+### v2.4.1~20250413
+  * Uses mainloopTools.
+  * Updates checkDependencies.js.
+
+### v2.3.1~20250111
   * Minor change in FileInfo.js.
 
-### 2.3.0~20241215
+### v2.3.0~20241215
   * Proper shutdown of flatpak internet applications when VPN is closed.
 
 ### v2.2.3~20240726

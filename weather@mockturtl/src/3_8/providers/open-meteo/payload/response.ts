@@ -47,5 +47,6 @@ export function OpenMeteoResponseToData(payload: OpenMeteoWeatherResponse): Weat
 		...OpenMeteoCurrentWeatherToData(payload.current),
 		forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone),
 		hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone),
+		uvIndex: payload.daily.uv_index_max[0] ?? null,
 	}
 }

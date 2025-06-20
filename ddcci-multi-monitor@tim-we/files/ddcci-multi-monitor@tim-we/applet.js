@@ -34,7 +34,7 @@ function log(message, type = "debug") {
 
 class Monitor {
     #promises;
-    constructor(index, name, bus) {
+    constructor(index, name, bus, brightnessFeatureFlag) {
         this.index = index;
         this.name = name;
         this.brightness = 50;
@@ -43,13 +43,14 @@ class Monitor {
         this.bus = bus;
         this.menuLabel = null;
         this.menuSlider = null;
+        this.brightnessFeatureFlag = brightnessFeatureFlag;
         this.#promises = Promise.resolve();
     }
 
     updateBrightness() {
         return new Promise((resolve) => {
             // get current brightness value
-            const cmd = `ddcutil --bus=${this.bus} getvcp 10`;
+            const cmd = `ddcutil --bus=${this.bus} getvcp ${this.brightnessFeatureFlag}`;
             Util.spawnCommandLineAsyncIO(cmd, (stdout, stderr, exitCode) => {
                 // guarantee resolve, even if the following code fails
                 setTimeout(resolve, 500);
@@ -102,7 +103,7 @@ class Monitor {
         const target_brightness = this.send_brightness;
         if (target_brightness !== this.sent_brightness) {
             Util.spawnCommandLineAsync(
-                `ddcutil --bus=${this.bus} setvcp 10 ${target_brightness}`,
+                `ddcutil --bus=${this.bus} setvcp ${this.brightnessFeatureFlag} ${target_brightness}`,
                 () => {
                     this.sent_brightness = target_brightness;
                     resolve();
@@ -209,7 +210,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.detecting = true;
         log("Detecting displays...");
         this.monitors = (await getDisplays()).map(
-            (d) => new Monitor(d.index, d.name, d.bus)
+            (d) => new Monitor(d.index, d.name, d.bus, d.brightnessFeatureFlag)
         );
 
         if (this.monitors.length === 0) {
@@ -293,10 +294,42 @@ async function getDisplays() {
             }
         );
     });
+    log("done detect");
+
+    let capabilitiesByDisplay = [];
+    // Get the capabilities of each monitor and the feature value needed, because occasionally it's different.
+    for (let i = 1; i < ddcutilOutput.split("Display").length; i++) {
+        let capabilitiesOutput = await new Promise((resolve, reject) => {
+            Util.spawnCommandLineAsyncIO(
+                `ddcutil capabilities --display=${i}`,
+                (stdout, stderr, exitCode) => {
+                    if (exitCode == 0) {
+                        resolve(stdout);
+                    } else {
+                        log("Failed to detect display capabilities: " + stderr, "error");
+                        const dialog = new ModalDialog.NotifyDialog([
+                            _("Failed to detect display capabilities"),
+                            _("Make sure you have ddcutil installed and the correct permissions."),
+                            _("Error:") + ` ${stderr}`
+                        ].join("\n"));
+                        dialog.open();
+                        reject(stderr);
+                    }
+                }
+            );
+        });
+        capabilitiesOutput = capabilitiesOutput.split("Model: ");
+        capabilitiesByDisplay.push(capabilitiesOutput[1]);
+        //log(capabilitiesByDisplay);
+    }
+    //log(capabilitiesOutput);
+
 
     let displays = [];
 
     // parse output
+    //capabilitiesByDisplay = capabilitiesOutput.split("Model: "); // Split by models
+    //capabilitiesByDisplay.splice(0, 1); // Then delete the first item which will always be nothing, or fluff
     const lines = ddcutilOutput.split("\n");
     let currentDisplay = null;
     for (const line of lines) {
@@ -322,14 +355,16 @@ async function getDisplays() {
 
                 if (busMR && busMR.length === 2 && currentDisplay.bus === undefined) {
                     currentDisplay.bus = parseInt(busMR[1], 10);
-                } else {
+                }
+                else {
                     const modelMR = line.match(/^\s+Model:\s+(.+)$/);
 
                     if (modelMR && modelMR.length === 2 && currentDisplay.name === undefined) {
                         currentDisplay.name = modelMR[1];
                     }
                 }
-            } else {
+            }
+            else {
                 continue;
             }
         }
@@ -342,6 +377,48 @@ async function getDisplays() {
         displays.push(currentDisplay);
     }
 
+    let displays_temp = displays;
+    displays = [];
+    for (let display of displays_temp) {
+        for (let capableDisplay of capabilitiesByDisplay) {
+            let capabilities = capableDisplay.split("\n")
+            //log(capabilities[0]);
+            //log(display.name);
+            //log(String(capabilities[0].indexOf(display.name) !== -1));
+            //log(String(display.name.indexOf(capableDisplay[0]) !== -1));
+            if (capabilities[0].indexOf(display.name) !== -1 || display.name.indexOf(capabilities[0]) !== -1) {
+                //log("yes");
+                for (let capability of capableDisplay.split("\n")) {
+                    //log(capability);
+                    if (capability.includes("(Backlight Level: White)")) {
+                        display.brightnessFeatureFlag = capability.split("Feature: ")[1].split(" (")[0];
+                        log(`Brightness feature ${display.brightnessFeatureFlag} found for display ${display.name}`);
+                        //log(capability.split("Feature: ")[1].split(" (")[0]);
+                    }
+                }
+
+                if (!display.brightnessFeatureFlag) {
+                    for (let capability of capableDisplay.split("\n")) {
+                        //log(capability);
+                        if (capability.includes("(Brightness)")) {
+                            display.brightnessFeatureFlag = capability.split("Feature: ")[1].split(" (")[0];
+                            log(`Brightness feature ${display.brightnessFeatureFlag} found for display ${display.name}`);
+                            //log(capability.split("Feature: ")[1].split(" (")[0]);
+                        }
+                    }
+                }
+            }
+        }
+        if (display.brightnessFeatureFlag) {
+
+            displays.push(display);
+        }
+        else {
+            display.brightnessFeatureFlag = 10;
+            displays.push(display);
+        }
+
+    }
     log(`Detected ${displays.length} displays.`);
 
     return displays;

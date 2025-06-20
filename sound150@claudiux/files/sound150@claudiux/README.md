@@ -17,10 +17,13 @@ This *sound150@claudiux* applet is an enhancement of the Cinnamon system sound a
 
   * **The volume step can be redefined** (from 1% to 10%).
   * **All multiples of 25% (or only 100%) can be magnetized.**
-  * The **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
-  * The **OSD** is compatible with Cinnamon 6.4 (use of horizontal OSD is not recommended).
+  * Before Cinnamon 6.4, the **OSD** is compatible with the [Horizontal OSD](https://cinnamon-spices.linuxmint.com/extensions/view/93) Cinnamon extension.
+  * The **OSD** is compatible with Cinnamon 6.4 (use of the 'Horizontal OSD' extension, or 'OSD with numbers' extension, is not recommended).
+  * From Cinnamon 6.4, having a horizontal OSD requires the [OSD150@claudiux](https://cinnamon-spices.linuxmint.com/extensions/view/106) extension. Notifications are available to help you install and enable the OSD150@claudiux extension.
 
-**The song's cover art** can be displayed when it is embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
+**The song's cover art** can be displayed when it is correctly embedded in the file (.mp3, .flac ...) or available from the **[Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**.
+
+The delay between icon and album art display can be set (from 0 up to 10 seconds). 0 means that the icon is not displayed when the album art is available.
 
 **You can use the mouse wheel on this applet to control the sound volume. Use Ctrl+wheel or Shift+wheel to control the microphone volume.**
 
@@ -46,11 +49,24 @@ Successfully tested on Cinnamon versions 2.8 to 6.4 (Linux Mint 17.3 to 22.1). D
 
 This applet requires *playerctl*. If this package is not installed, the user can install it using the 'Install playerctl' option in the menu. If this option is absent from the menu, this means that *playerctrl* is already installed.
 
+This applet also requires *imagemagick*. If this package is not installed, the user can install it using the 'Install imagemagick' option in the menu. If this option is absent from the menu, this means that *imagemagick* is already installed.
+
+
 ## Settings
 
  * Settings can be accessed by right-clicking on this applet icon (Configure... option of the context menu).
 
  * Since version 5.0.0, settings have been presented in a new way, with 4 tabs: *Behavior*, *Sound*, *Icon*, *Shortcuts*, making this applet highly configurable.
+
+## FAQ
+
+### Keyboard shortcuts are not respecting volume step
+
+  1. Open the *Shortcuts* tab of this applet settings.
+  2. Check the *Redefine Multimedia Keyboard Shortcuts* option.
+  3. Click on the *Use the same shortcuts as those defined by Cinnamon* button.
+  4. Close this settings window.
+  5. If necessary, restart Cinnamon.
 
 ## Translations
 

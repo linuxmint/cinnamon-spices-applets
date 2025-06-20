@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: SpiceSpy@claudiux 4.3.0\n"
+"Project-Id-Version: SpiceSpy@claudiux 5.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-27 10:32+0100\n"
+"POT-Creation-Date: 2025-04-07 12:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,35 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:127
+#. applet.js:206
 msgid "score"
 msgstr ""
 
-#. applet.js:139
+#. applet.js:218
 msgid "comments"
 msgstr ""
 
-#. applet.js:152
+#. applet.js:231
 msgid "recent issues"
 msgstr ""
 
-#. applet.js:164
+#. applet.js:243
 msgid "translations"
 msgstr ""
 
-#. applet.js:737
-msgid "Mark all as read"
-msgstr ""
-
-#. applet.js:746
-msgid "Refresh"
-msgstr ""
-
-#. applet.js:759
+#. applet.js:851
 msgid "Spices"
 msgstr ""
 
-#. applet.js:832
+#. applet.js:936
+msgid "Mark all as read"
+msgstr ""
+
+#. applet.js:947
+msgid "Refresh"
+msgstr ""
+
+#. applet.js:959
+msgid "Refreshing in progress"
+msgstr ""
+
+#. applet.js:970
 msgid "Configure..."
 msgstr ""
 
@@ -99,8 +103,36 @@ msgstr ""
 msgid "Icon size"
 msgstr ""
 
-#. settings-schema.json->icon-size->units
-msgid "pixels"
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "128"
 msgstr ""
 
 #. settings-schema.json->show-translations->description

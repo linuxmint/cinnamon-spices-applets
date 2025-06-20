@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-11-21 11:01+0100\n"
-"PO-Revision-Date: 2024-09-05 17:16+0200\n"
+"POT-Creation-Date: 2025-06-11 16:17+0200\n"
+"PO-Revision-Date: 2025-04-03 18:58+0300\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -19,75 +19,80 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:118
+#. applet.js:122
+msgid "All workspaces"
+msgstr "Kaikki työtilat"
+
+#. applet.js:150
 msgid "Edit Applications"
 msgstr "Muokkaa sovelluksia"
 
-#. applet.js:837 applet.js:1131
+#. applet.js:886 applet.js:1199
 msgid "Delete"
 msgstr "Poista"
 
-#. applet.js:838 applet.js:1132
+#. applet.js:887 applet.js:1200
 msgid "Edit"
 msgstr "Muokkaa"
 
-#. applet.js:839 applet.js:1133 dialogs.py:43 dialogs.py:293 widgets.py:73
+#. applet.js:888 applet.js:1201 dialogs.py:111 dialogs.py:262 dialogs.py:327
+#. dialogs.py:416 widgets.py:73
 msgid "Cancel"
 msgstr "Peru"
 
-#. dialogs.py:41 dialogs.py:292
+#. dialogs.py:109 dialogs.py:261 dialogs.py:325 dialogs.py:415
 msgid "OK"
 msgstr "OK"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#. dialogs.py:44 widgets.py:47 ui/widget.glade:40
+#. dialogs.py:112 dialogs.py:263 widgets.py:47 ui/widget.glade:40
 msgid "Name"
 msgstr "Nimi"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:50
+#. dialogs.py:113 dialogs.py:328
 msgid "Group"
 msgstr "Ryhmä"
 
 #. settings-schema.json->list-applications->columns->title
-#. dialogs.py:51 widgets.py:48 ui/widget.glade:51
+#. dialogs.py:114 widgets.py:48 ui/widget.glade:51
 msgid "Command"
 msgstr "Komento"
 
-#. dialogs.py:236
-msgid "The name cannot be empty"
-msgstr "Nimi ei voi olla tyhjä"
-
-#. dialogs.py:241
-msgid "The name is already used"
-msgstr "Nimi on jo käytössä"
-
-#. dialogs.py:248
+#. dialogs.py:214 dialogs.py:305
 msgid "Valid name"
 msgstr "Kelvollinen nimi"
 
-#. dialogs.py:254
+#. dialogs.py:217 dialogs.py:295
+msgid "The name cannot be empty"
+msgstr "Nimi ei voi olla tyhjä"
+
+#. dialogs.py:222
 msgid "Valid command"
 msgstr "Kelvollinen komento"
 
-#. dialogs.py:257
+#. dialogs.py:225
 msgid "The command is not valid"
 msgstr "Komento ei kelpaa"
 
-#. dialogs.py:291
+#. dialogs.py:299
+msgid "The name is already used"
+msgstr "Nimi on jo käytössä"
+
+#. dialogs.py:414
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "Mitä tietoja tiedostosta *.desktop tulisi korvata?"
 
-#. dialogs.py:335
+#. dialogs.py:458
 msgid "really delete?"
-msgstr "Poistatko oikeasti?"
+msgstr "Haluatko poistaa?"
 
-#. dialogs.py:336
+#. dialogs.py:459
 msgid "No"
 msgstr "Ei"
 
-#. dialogs.py:337
+#. dialogs.py:460
 msgid "Yes"
 msgstr "Kyllä"
 
@@ -138,7 +143,7 @@ msgstr "Tallentaa?"
 msgid "Save the current configuration"
 msgstr "Tallenna nykyinen kokoonpano"
 
-#. widgets.py:264
+#. widgets.py:230
 msgid "Separator"
 msgstr "Erotin"
 
@@ -155,14 +160,12 @@ msgstr "Helppo sovellusten käynnistysohjelma"
 msgid "Applications"
 msgstr "Sovellukset"
 
-#. settings-schema.json->page-settings->title
-msgid "Settings"
-msgstr "Asetukset"
-
+#. settings-schema.json->page-settings-global->title
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr "Yleiset asetukset"
 
+#. settings-schema.json->page-settings-application->title
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
 msgstr "Sovelluksen asetukset"
@@ -197,7 +200,7 @@ msgstr "%s on sovelluksesi nimi"
 
 #. settings-schema.json->hotkeys-enabled->description
 msgid "Enable Hotkeys"
-msgstr ""
+msgstr "Pikanäppäimet"
 
 #. settings-schema.json->hotkey-bindings->description
 msgid "Show menu"
@@ -209,11 +212,35 @@ msgstr "Aseta pikanäppäin näyttämään valikko"
 
 #. settings-schema.json->menu-at-pointer->description
 msgid "Menu at mouse position"
-msgstr ""
+msgstr "Valikko hiiren kohdalla"
 
 #. settings-schema.json->menu-at-pointer->tooltip
 msgid "Show the menu next to the cursor when triggered by hotkey"
+msgstr "Näytä valikko kohdistimen vieressä kun se aukeaa ​​pikanäppäimellä"
+
+#. settings-schema.json->open-by-hover->description
+msgid "Open menus by hovering over them"
 msgstr ""
+
+#. settings-schema.json->open-by-hover->tooltip
+msgid "Open all menus when you move the mouse pointer over them"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->description
+msgid "Hover delay"
+msgstr ""
+
+#. settings-schema.json->open-by-hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. settings-schema.json->bind-to-workspace->description
+msgid "Bind to workspace"
+msgstr "Sido työtilaan"
+
+#. settings-schema.json->bind-to-workspace->tooltip
+msgid "Show the applet only on the selected workspace"
+msgstr "Näytä sovelma vain valitussa työtilassa"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"
@@ -225,7 +252,7 @@ msgstr "Perustuu suurimpaan alivalikon leveyteen välkkymisen estämiseksi"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"
-msgstr "Näytä sovellusten kuvakkeet"
+msgstr "Näytä kuvakkeet"
 
 #. settings-schema.json->visible-app-icons->tooltip
 msgid "Show Application Icons in Popup-Menu"
@@ -233,7 +260,7 @@ msgstr "Näytä sovellusten kuvakkeet ponnahdusvalikossa"
 
 #. settings-schema.json->use-symbolic-icons->description
 msgid "Use Symbolic Application Icons"
-msgstr "Käytä symbolisia sovellusten kuvakkeita"
+msgstr "Symboliset kuvakkeet"
 
 #. settings-schema.json->use-symbolic-icons->tooltip
 msgid "Use Symbolic Application Icons, where it's possible"
@@ -241,7 +268,7 @@ msgstr "Käytä symbolisia kuvakkeita, jos mahdollista"
 
 #. settings-schema.json->app-icon-size->description
 msgid "Application Icon Size"
-msgstr "Sovelluksen kuvakkeen koko"
+msgstr "Kuvakekoko"
 
 #. settings-schema.json->app-icon-size->tooltip
 msgid "Set Icon size"

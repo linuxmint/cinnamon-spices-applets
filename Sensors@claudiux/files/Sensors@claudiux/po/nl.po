@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-30 13:21+0100\n"
-"PO-Revision-Date: 2024-09-11 12:03+0200\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"PO-Revision-Date: 2025-05-13 14:30+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -20,107 +20,109 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#. applet.js:235
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Sensoren Monitor"
 
-#. applet.js:418
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr "Opgeschort"
 
-#. applet.js:636 applet.js:678
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "hoog:"
 
-#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "n.v.t"
 
-#. applet.js:638 applet.js:680
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "kritiek:"
 
-#. applet.js:722 applet.js:766
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:768
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:797
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Geen verstoring gedetecteerd"
 
-#. applet.js:797
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "VERSTORING GEDETECTEERD!"
 
-#. applet.js:817
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Moet worden ingesteld!"
 
-#. applet.js:1205
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Instellingen"
 
-#. applet.js:1205
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1212
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
-#. applet.js:1228
+#. applet.js:1298 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Temperatuursensoren"
 
-#. applet.js:1244
+#. applet.js:1314 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilatorsensoren"
 
-#. applet.js:1260
+#. applet.js:1330 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Spanningssensoren"
 
-#. applet.js:1276
+#. applet.js:1346 applet_OLD.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Inbraaksensoren"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1303
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
-#. applet.js:1312
+#. applet.js:1374 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr "Opschorten van sensors"
 
-#. applet.js:1323
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Herlaad deze hulptoepassing"
 
-#. applet.js:1653
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#. lib/checkDependencies.js:350
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "De hulptoepassing %s is volledig functioneel."
 
-#. lib/checkDependencies.js:351
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Alle afhankelijkheden zijn geïnstalleerd"
 
-#. lib/checkDependencies.js:380
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -128,17 +130,17 @@ msgstr ""
 "U lijkt een aantal van de programma's te missen die nodig zijn voor deze "
 "hulptoepassing om alle functies te hebben."
 
-#. lib/checkDependencies.js:382
+#. lib/checkDependencies.js:385
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Installeer deze pakketten:"
 
-#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
 
-#. lib/checkDependencies.js:398
+#. lib/checkDependencies.js:401
 msgid "Install these packages now"
-msgstr ""
+msgstr "Installeer deze pakketten nu"
 
 #. lib/util.js:244
 #, javascript-format
@@ -204,16 +206,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Auteur. JEleniel: ondersteuning voor NVidia-videokaarten."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatuur"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventilator"
+msgstr "𖣘 Ventilator"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -406,49 +407,29 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Tekengrootte (% van de standaardgrootte)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr "basislijn"
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Weergavebreedte (pixels) voor horizontale panelen"
 
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr "onder"
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr "0 betekent automatisch. Deze waarde is exclusief rand."
 
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr "boven"
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(geen)"
 
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr "tekst-boven"
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "leeg"
 
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr "tekst-onder"
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "balk"
 
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr "midden"
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr "boven"
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr "onder"
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr "onbepaald"
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr "overneme"
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr "Verticale uitlijning"
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Scheiding"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -458,16 +439,13 @@ msgstr "Tekstkleur aanpassen"
 msgid "Text Color"
 msgstr "Kleur van de tekst"
 
-#. settings-schema.json->separator->description
-msgid "Separator"
-msgstr "Scheidingsteken"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Kleur voor kritieke waarde"
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
-msgstr ""
-"De tekenreeks gebruikt om waardes in horizontale oriëntatie te scheiden. "
-"Standaard is dit '|'."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Kleur voor hoge waarde"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -562,8 +540,18 @@ msgstr ""
 "onderstaande lijst geselecteerde sensoren moet worden getoond. Zonder effect "
 "in verticale panelen."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor temperatuur"
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Emoji"
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Toon alleen strikt positieve waarden"
@@ -741,6 +729,14 @@ msgstr ""
 "commando. Zie help.\n"
 "Hoge en kritieke waarden: Cf. technische handleiding van uw schijf."
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor de ventilator"
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Toon alleen positieve of nulwaarden"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Afkorting van \"Rotaties per minuut\"."
@@ -780,6 +776,10 @@ msgstr ""
 "  Gebruik $ als de waarde die de sensor teruggeeft.\n"
 "  Je kunt de 4 bewerkingen (+-*/) en haakjes gebruiken.\n"
 "  Voorbeeld: $*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor voltage"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -853,6 +853,10 @@ msgstr ""
 " Of in dit applet label al dan niet de \"Getoonde naam\" van de in de "
 "onderstaande lijst geselecteerde sensoren moet worden getoond. Zonder effect "
 "in verticale panelen."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "De eerste emoji in deze lijst wordt gebruikt voor verstoringen"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"

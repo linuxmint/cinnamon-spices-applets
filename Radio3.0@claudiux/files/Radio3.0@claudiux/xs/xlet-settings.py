@@ -193,7 +193,7 @@ class MainWindow(object):
 
     def build_window(self):
         self.window = XApp.GtkWindow()
-        self.window.set_default_size(1000, 600)
+        self.window.set_default_size(1100, 600)
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.window.add(main_box)
 
@@ -281,7 +281,7 @@ class MainWindow(object):
 
             height = monitor.get_workarea().height
             if natreq.height > height - 100:
-                self.window.resize(1000, 600)
+                self.window.resize(1100, 600)
                 scw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
         self.window.connect("destroy", self.quit)

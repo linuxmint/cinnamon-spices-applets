@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux 3.7.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-30 13:21+0100\n"
-"PO-Revision-Date: 2024-11-24 19:41+0100\n"
+"POT-Creation-Date: 2025-03-30 14:17+0200\n"
+"PO-Revision-Date: 2025-04-10 14:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,110 +16,112 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. metadata.json->name
-#. applet.js:235
+#. applet.js:225 applet_OLD.js:235
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#. applet.js:418
+#. applet.js:465 applet_OLD.js:418
 msgid "Suspended"
 msgstr "Felfüggesztve"
 
-#. applet.js:636 applet.js:678
+#. applet.js:732 applet.js:773 applet_OLD.js:638 applet_OLD.js:682
 msgid "high:"
 msgstr "magas:"
 
-#. applet.js:636 applet.js:638 applet.js:678 applet.js:680 applet.js:722
+#. applet.js:732 applet.js:735 applet.js:773 applet.js:775 applet.js:816
+#. applet_OLD.js:638 applet_OLD.js:642 applet_OLD.js:682 applet_OLD.js:684
+#. applet_OLD.js:726
 msgid "n/a"
 msgstr "n/a"
 
-#. applet.js:638 applet.js:680
+#. applet.js:735 applet.js:775 applet_OLD.js:642 applet_OLD.js:684
 msgid "crit:"
 msgstr "krit:"
 
-#. applet.js:722 applet.js:766
+#. applet.js:816 applet.js:860 applet_OLD.js:726 applet_OLD.js:770
 msgid "min:"
 msgstr "min:"
 
-#. applet.js:768
+#. applet.js:862 applet_OLD.js:772
 msgid "max:"
 msgstr "max:"
 
-#. applet.js:797
+#. applet.js:891 applet_OLD.js:801
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#. applet.js:797
+#. applet.js:891 applet_OLD.js:801
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#. applet.js:817
+#. applet.js:911 applet_OLD.js:821
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#. applet.js:1205
+#. applet.js:1275 applet_OLD.js:1208
 msgid "Settings"
 msgstr "Beállítások"
 
-#. applet.js:1205
+#. applet.js:1275 applet_OLD.js:1208
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#. applet.js:1212
+#. applet.js:1282 applet_OLD.js:1215
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#. applet.js:1228
+#. applet.js:1298 applet_OLD.js:1231
 #, javascript-format
 msgid "%s Temperature sensors"
 msgstr "%s Hőmérséklet szenzorok"
 
-#. applet.js:1244
+#. applet.js:1314 applet_OLD.js:1247
 #, javascript-format
 msgid "%s Fan sensors"
 msgstr "%s Ventilátor szenzorok"
 
-#. applet.js:1260
+#. applet.js:1330 applet_OLD.js:1263
 #, javascript-format
 msgid "%s Voltage sensors"
 msgstr "%s Feszültség szenzorok"
 
-#. applet.js:1276
+#. applet.js:1346 applet_OLD.js:1279
 #, javascript-format
 msgid "%s Intrusion sensors"
 msgstr "%s Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#. applet.js:1303
+#. applet.js:1365 applet_OLD.js:1306
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#. applet.js:1312
+#. applet.js:1374 applet_OLD.js:1315
 msgid "Suspend Sensors"
 msgstr "Felfüggesztett Szenzorok"
 
-#. applet.js:1323
+#. applet.js:1385 applet_OLD.js:1326
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#. applet.js:1653
+#. applet.js:1707 applet_OLD.js:1656
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
 
-#. lib/checkDependencies.js:350
+#. lib/checkDependencies.js:353
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#. lib/checkDependencies.js:351
+#. lib/checkDependencies.js:354
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#. lib/checkDependencies.js:380
+#. lib/checkDependencies.js:383
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -127,17 +129,17 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#. lib/checkDependencies.js:382
+#. lib/checkDependencies.js:385
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Kérjük, telepítse ezeket a csomagokat:"
 
-#. lib/checkDependencies.js:386 lib/checkDependencies.js:396
+#. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
-#. lib/checkDependencies.js:398
+#. lib/checkDependencies.js:401
 msgid "Install these packages now"
-msgstr ""
+msgstr "Telepítse ezeket a csomagokat most"
 
 #. lib/util.js:244
 #, javascript-format
@@ -203,16 +205,15 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Szerző. JEleniel: támogatás NVidia videókártyákhoz."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Hőmérséklet"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
-msgstr "🤂 Ventilátor"
+msgstr "𖣘 Ventilátor"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -403,49 +404,30 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Karakter méret (az alapértelmezett %-a)"
 
-#. settings-schema.json->vertical-align->options
-msgid "baseline"
-msgstr "alaphelyzet"
+#. settings-schema.json->horizontal_width->description
+msgid "Display width (pixels) for horizontal panels"
+msgstr "Kijelzőszélesség (pixel) vízszintes panelek esetén"
 
-#. settings-schema.json->vertical-align->options
-msgid "sub"
-msgstr "sub"
+#. settings-schema.json->horizontal_width->tooltip
+msgid "0 means automatic. This value does not include border."
+msgstr ""
+"A 0 azt jelenti, hogy automatikus. Ez az érték nem tartalmazza a keretet."
 
-#. settings-schema.json->vertical-align->options
-msgid "super"
-msgstr "super"
+#. settings-schema.json->separator_type->options
+msgid "(none)"
+msgstr "(semmi)"
 
-#. settings-schema.json->vertical-align->options
-msgid "text-top"
-msgstr "szöveg-felül"
+#. settings-schema.json->separator_type->options
+msgid "blank"
+msgstr "üres"
 
-#. settings-schema.json->vertical-align->options
-msgid "text-bottom"
-msgstr "szöveg-alul"
+#. settings-schema.json->separator_type->options
+msgid "bar"
+msgstr "sáv"
 
-#. settings-schema.json->vertical-align->options
-msgid "middle"
-msgstr "középen"
-
-#. settings-schema.json->vertical-align->options
-msgid "top"
-msgstr "felül"
-
-#. settings-schema.json->vertical-align->options
-msgid "bottom"
-msgstr "alul"
-
-#. settings-schema.json->vertical-align->options
-msgid "unset"
-msgstr "nincs beállítva"
-
-#. settings-schema.json->vertical-align->options
-msgid "inherit"
-msgstr "örökölt"
-
-#. settings-schema.json->vertical-align->description
-msgid "Vertical alignment"
-msgstr "Függőleges igazítás"
+#. settings-schema.json->separator_type->description
+msgid "Separator"
+msgstr "Elválasztó"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -455,16 +437,13 @@ msgstr "Szövegszín testreszabása"
 msgid "Text Color"
 msgstr "Szövegszín"
 
-#. settings-schema.json->separator->description
-msgid "Separator"
-msgstr "Elválasztó"
+#. settings-schema.json->crit_color->description
+msgid "Critical Value Color"
+msgstr "Kritikus érték szín"
 
-#. settings-schema.json->separator->tooltip
-msgid ""
-"The string used to separate values in horizontal orientation. Default is '│'."
-msgstr ""
-"A vízszintes elrendezésben használt értékek elválasztására szolgáló "
-"karakterlánc. Az alapértelmezett érték: „│”."
+#. settings-schema.json->high_color->description
+msgid "High Value Color"
+msgstr "Magas érték szín"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -558,8 +537,18 @@ msgstr ""
 "Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
 "név” elemet vagy sem. Nincs hatással a függőleges panelekre."
 
+#. settings-schema.json->chars_temp->tooltip
+msgid "The first emoji in this list is used for temperature"
+msgstr "Az első emoji ebben a listában a hőmérsékletet jelöli."
+
+#. settings-schema.json->chars_temp->columns->title
+#. settings-schema.json->chars_fan->columns->title
+#. settings-schema.json->chars_volt->columns->title
+#. settings-schema.json->chars_intrusion->columns->title
+msgid "Emoji"
+msgstr "Emoji"
+
 #. settings-schema.json->strictly_positive_temp->description
-#. settings-schema.json->strictly_positive_fan->description
 #. settings-schema.json->strictly_positive_volt->description
 msgid "Show only strictly positive values"
 msgstr "Csak szigorúan pozitív értékeket mutasson"
@@ -744,6 +733,14 @@ msgstr ""
 "Magas vagy Kritikus értékek: További információért tekintse meg a lemezhez "
 "tartozó felhasználói dokumentációt."
 
+#. settings-schema.json->chars_fan->tooltip
+msgid "The first emoji in this list is used for fan"
+msgstr "Az első emoji ebben a listában a rajongókra utal."
+
+#. settings-schema.json->strictly_positive_fan->description
+msgid "Show only positive or zero values"
+msgstr "Csak pozitív vagy nulla értékek megjelenítése"
+
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "\"Fordulat per perc\" rövidítése"
@@ -788,6 +785,10 @@ msgstr ""
 " Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
 " Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
 " Példa: $*1.1+0.5"
+
+#. settings-schema.json->chars_volt->tooltip
+msgid "The first emoji in this list is used for voltage"
+msgstr "Az első emoji ebben a listában a feszültséget jelöli."
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -863,6 +864,10 @@ msgid ""
 msgstr ""
 " Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
 "név” elemet vagy sem. Nincs hatással a függőleges panelekre."
+
+#. settings-schema.json->chars_intrusion->tooltip
+msgid "The first emoji in this list is used for intrusion"
+msgstr "Az első emoji ebben a listában a behatolásra szolgál"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
