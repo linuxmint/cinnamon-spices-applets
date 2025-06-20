@@ -7,6 +7,8 @@ rm -f /tmp/*.mediaplayer-cover
 ARTDIR="$XDG_RUNTIME_DIR/sound150/arts"
 [[ -d $ARTDIR ]] && rm -f $ARTDIR/*
 [[ -f "$XDG_RUNTIME_DIR/sound150/Title" ]] && rm -f "$XDG_RUNTIME_DIR/sound150/Title"
+ICONDIR="$XDG_RUNTIME_DIR/sound150/icons"
+[[ -d $ICONDIR ]] && rm -f $ICONDIR/*
 
 
 SCRIPTSPWD=$(pwd)

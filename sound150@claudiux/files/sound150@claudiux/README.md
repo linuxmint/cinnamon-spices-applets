@@ -49,6 +49,9 @@ Successfully tested on Cinnamon versions 2.8 to 6.4 (Linux Mint 17.3 to 22.1). D
 
 This applet requires *playerctl*. If this package is not installed, the user can install it using the 'Install playerctl' option in the menu. If this option is absent from the menu, this means that *playerctrl* is already installed.
 
+This applet also requires *imagemagick*. If this package is not installed, the user can install it using the 'Install imagemagick' option in the menu. If this option is absent from the menu, this means that *imagemagick* is already installed.
+
+
 ## Settings
 
  * Settings can be accessed by right-clicking on this applet icon (Configure... option of the context menu).

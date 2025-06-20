@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-30 14:17+0200\n"
-"PO-Revision-Date: 2025-02-21 19:16+0100\n"
+"PO-Revision-Date: 2025-05-13 14:30+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -409,27 +409,27 @@ msgstr "Tekengrootte (% van de standaardgrootte)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Weergavebreedte (pixels) voor horizontale panelen"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
-msgstr ""
+msgstr "0 betekent automatisch. Deze waarde is exclusief rand."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(geen)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "leeg"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "balk"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Scheiding"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"

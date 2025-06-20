@@ -34,6 +34,7 @@ export interface OpenMeteoDailyWeather {
 	 */
 	sunset: Tuple<string, 16>;
 	weather_code: Tuple<number, 16>;
+	uv_index_max: Tuple<number, 16>;
 }
 
 export function OpenMeteoDailyWeatherToData(data: OpenMeteoDailyWeather, timezone: string): ForecastData[]  {

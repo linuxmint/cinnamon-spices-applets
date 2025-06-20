@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: auto-dark-light@gihaume 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-22 19:07+0200\n"
-"PO-Revision-Date: 2024-11-28 17:13+0100\n"
+"POT-Creation-Date: 2025-05-18 11:37+0200\n"
+"PO-Revision-Date: 2025-06-13 18:21+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,92 +17,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:33
+#. 5.8/applet.js:33
 msgid "Click: toggle dark/light mode"
 msgstr "Klik: schakelen tussen donkere/lichte modus"
 
-#. applet.js:34
+#. 5.8/applet.js:34
 msgid "Middle-click: toggle automatic switch mode"
 msgstr "Middelklik: in- en uitschakelen van automatische omschakelingsmodus"
 
-#. applet.js:367
+#. 5.8/applet.js:367
 msgid "Today's automatic mode switch times"
 msgstr "Automatische omschakeltijden van vandaag"
 
-#. applet.js:367 applet.js:368 applet.js:369 applet.js:412 applet.js:418
-#. lib/time_change_listener/time_change_listener.js:97
-#. lib/commands_launcher/commands_launcher.js:31
-#. lib/commands_launcher/commands_launcher.js:38
-#. lib/commands_launcher/commands_launcher.js:40
+#. 5.8/applet.js:367 5.8/applet.js:368 5.8/applet.js:369 5.8/applet.js:412
+#. 5.8/applet.js:418 5.8/lib/time_change_listener/time_change_listener.js:95
+#. 5.8/lib/commands_launcher/commands_launcher.js:37
+#. 5.8/lib/commands_launcher/commands_launcher.js:44
+#. 5.8/lib/commands_launcher/commands_launcher.js:50
+#. 5.8/lib/commands_launcher/commands_launcher.js:53 2.2/applet.js:19
 msgid ":"
 msgstr ":"
 
-#. settings-schema.json->light-mode->title
-#. applet.js:368
+#. 5.8->settings-schema.json->light-mode->title
+#. 5.8/applet.js:368
 msgid "Light mode"
 msgstr "Lichte modus"
 
-#. settings-schema.json->dark-mode->title
-#. applet.js:369
+#. 5.8->settings-schema.json->dark-mode->title
+#. 5.8/applet.js:369
 msgid "Dark mode"
 msgstr "Donkere modus"
 
-#. applet.js:412
+#. 5.8/applet.js:412
 msgid "Error"
 msgstr "Fout"
 
-#. applet.js:418
+#. 5.8/applet.js:418 2.2/applet.js:19
 msgid "Critical error"
 msgstr "Kritieke fout"
 
-#. lib/time_change_listener/time_change_listener.js:31
+#. 5.8/lib/time_change_listener/time_change_listener.js:28
 msgid ""
-"Missing dependencies `make` and `gcc`. Install them, in e.g. on Debian-based "
-"system with `sudo apt install build-essential`, then reload the applet (in e."
-"g. in restarting Cinnamon)."
+"Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
+"based system with `sudo apt install make g++`, then reload the applet in "
+"restarting Cinnamon."
 msgstr ""
-"Ontbrekende afhankelijkheden `make` en `gcc`. Installeer ze, bv. op een "
-"Debian-gebaseerd systeem met `sudo apt install build-essential`, en herlaad "
-"vervolgens de applet (bv. door Cinnamon opnieuw op te starten)."
+"Ontbrekende afhankelijkheden `make` en/of `gcc`. Installeer ze, bv. op een "
+"Debian-gebaseerd systeem met `sudo apt install make g++`, en herlaad "
+"vervolgens de applet door Cinnamon opnieuw op te starten."
 
-#. lib/time_change_listener/time_change_listener.js:44
+#. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
 msgstr "Compilatie van"
 
-#. lib/time_change_listener/time_change_listener.js:44
-#. lib/commands_launcher/commands_launcher.js:29
+#. 5.8/lib/time_change_listener/time_change_listener.js:41
+#. 5.8/lib/commands_launcher/commands_launcher.js:33
 msgid "failed"
 msgstr "mislukt"
 
-#. lib/time_change_listener/time_change_listener.js:97
+#. 5.8/lib/time_change_listener/time_change_listener.js:95
 msgid "the subprocess"
 msgstr "het subprocess"
 
-#. lib/time_change_listener/time_change_listener.js:97
+#. 5.8/lib/time_change_listener/time_change_listener.js:95
 msgid "wrote on its error output"
 msgstr "schreef naar zijn foutuitvoer"
 
-#. lib/twilights_calculator/twilights_calculator.js:22
+#. 5.8/lib/twilights_calculator/twilights_calculator.js:21
 msgid "unable to calculate twilight times, check coordinates format or range"
 msgstr ""
 "kan de schemeringstijden niet berekenen, controleer het coördinatenformaat "
 "of het bereik"
 
-#. lib/commands_launcher/commands_launcher.js:29
+#. 5.8/lib/commands_launcher/commands_launcher.js:33
 msgid "the command"
 msgstr "het commando"
 
-#. lib/commands_launcher/commands_launcher.js:31
+#. 5.8/lib/commands_launcher/commands_launcher.js:35
 msgid "due to a wrong format"
 msgstr "vanwege een verkeerd formaat"
 
-#. lib/commands_launcher/commands_launcher.js:35
+#. 5.8/lib/commands_launcher/commands_launcher.js:37
+#. 5.8/lib/commands_launcher/commands_launcher.js:44
+#. 5.8/lib/commands_launcher/commands_launcher.js:50
+msgid "Detail"
+msgstr "Detail"
+
+#. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "vanwege tijdsoverschrijding"
 
-#. lib/commands_launcher/commands_launcher.js:38
-msgid "with the following errors"
-msgstr "met de volgende fouten"
+#. 5.8/lib/commands_launcher/commands_launcher.js:48
+msgid "due to an error"
+msgstr "vanwege een fout"
+
+#. 2.2/applet.js:20
+msgid "this applet is only supported by"
+msgstr "deze applet wordt alleen ondersteund door"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -113,47 +124,47 @@ msgid "Automatically switch between dark and light themes at twilight times."
 msgstr ""
 "Schakel automatisch tussen donkere en lichte thema's op schemeringstijden."
 
-#. settings-schema.json->settings->title
+#. 5.8->settings-schema.json->settings->title
 msgid "Settings"
 msgstr "Instellingen"
 
-#. settings-schema.json->settings_state->title
+#. 5.8->settings-schema.json->settings_state->title
 msgid "State"
 msgstr "Staat"
 
-#. settings-schema.json->settings_control->title
+#. 5.8->settings-schema.json->settings_control->title
 msgid "Control"
 msgstr "Besturing"
 
-#. settings-schema.json->settings_location->title
+#. 5.8->settings-schema.json->settings_location->title
 msgid "Location"
 msgstr "Locatie"
 
-#. settings-schema.json->light-mode_themes->title
-#. settings-schema.json->dark-mode_themes->title
+#. 5.8->settings-schema.json->light-mode_themes->title
+#. 5.8->settings-schema.json->dark-mode_themes->title
 msgid "Themes"
 msgstr "Thema's"
 
-#. settings-schema.json->light-mode_others->title
-#. settings-schema.json->dark-mode_others->title
+#. 5.8->settings-schema.json->light-mode_others->title
+#. 5.8->settings-schema.json->dark-mode_others->title
 msgid "Others"
 msgstr "Overige"
 
-#. settings-schema.json->light-mode_background->title
-#. settings-schema.json->dark-mode_background->title
+#. 5.8->settings-schema.json->light-mode_background->title
+#. 5.8->settings-schema.json->dark-mode_background->title
 msgid "Desktop background"
 msgstr "Bureaubladachtergrond"
 
-#. settings-schema.json->light-mode_commands->title
-#. settings-schema.json->dark-mode_commands->title
+#. 5.8->settings-schema.json->light-mode_commands->title
+#. 5.8->settings-schema.json->dark-mode_commands->title
 msgid "Custom commands"
 msgstr "Aangepaste commando's"
 
-#. settings-schema.json->settings_control_switch_auto-mode->description
+#. 5.8->settings-schema.json->settings_control_switch_auto-mode->description
 msgid "Automatically switch modes"
 msgstr "Automatisch schakelen tussen modi"
 
-#. settings-schema.json->settings_control_switch_auto-mode->tooltip
+#. 5.8->settings-schema.json->settings_control_switch_auto-mode->tooltip
 msgid ""
 "Automatically switch between light and dark modes based on the location and "
 "time of day"
@@ -161,20 +172,21 @@ msgstr ""
 "Automatisch schakelen tussen lichte en donkere modi op basis van de locatie "
 "en het tijdstip van de dag"
 
-#. settings-schema.json->settings_state_switch_dark-mode->description
+#. 5.8->settings-schema.json->settings_state_switch_dark-mode->description
 msgid "Light/dark mode"
 msgstr "Lichte/donkere modus"
 
-#. settings-schema.json->settings_state_switch_dark-mode->tooltip
+#. 5.8->settings-schema.json->settings_state_switch_dark-mode->tooltip
 msgid "Toggle light or dark mode manually"
 msgstr "Handmatig schakelen tussen lichte of donkere modus"
 
-#. settings-schema.json->settings_location_switch_sync-from-
+#. 5.8->settings-schema.json->settings_location_switch_sync-from-
 #. timezone->description
 msgid "Sync from the system"
 msgstr "Synchroniseer met het systeem"
 
-#. settings-schema.json->settings_location_switch_sync-from-timezone->tooltip
+#. 5.8->settings-schema.json->settings_location_switch_sync-from-
+#. timezone->tooltip
 msgid ""
 "Dynamically sync the location coordinates from the region and city defined "
 "in the system using a local database"
@@ -182,19 +194,21 @@ msgstr ""
 "Dynamisch synchroniseren van de locatiecoördinaten op basis van de regio en "
 "stad gedefinieerd in het systeem met een lokale database"
 
-#. settings-schema.json->settings_location_button_open-os-
+#. 5.8->settings-schema.json->settings_location_button_open-os-
 #. settings->description
-#. settings-schema.json->light-mode_themes_button_open-os-
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
 #. settings->description
-#. settings-schema.json->light-mode_background_button_open-os-
+#. 5.8->settings-schema.json->light-mode_background_button_open-os-
 #. settings->description
-#. settings-schema.json->dark-mode_themes_button_open-os-settings->description
-#. settings-schema.json->dark-mode_background_button_open-os-
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->description
+#. 5.8->settings-schema.json->dark-mode_background_button_open-os-
 #. settings->description
 msgid "Open the system settings"
 msgstr "Open de systeeminstellingen"
 
-#. settings-schema.json->settings_location_button_open-os-settings->tooltip
+#. 5.8->settings-schema.json->settings_location_button_open-os-
+#. settings->tooltip
 msgid ""
 "Open the system's settings window to select the region and city for the time "
 "zone"
@@ -202,28 +216,29 @@ msgstr ""
 "Open het instellingenvenster van het systeem om de regio en stad voor de "
 "tijdzone te selecteren"
 
-#. settings-schema.json->settings_location_entry_latitude->description
+#. 5.8->settings-schema.json->settings_location_entry_latitude->description
 msgid "Latitude"
 msgstr "Breedtegraad"
 
-#. settings-schema.json->settings_location_entry_latitude->tooltip
+#. 5.8->settings-schema.json->settings_location_entry_latitude->tooltip
 msgid "Geographical latitude in decimal degrees"
 msgstr "Geografische breedte in decimale graden"
 
-#. settings-schema.json->settings_location_entry_longitude->description
+#. 5.8->settings-schema.json->settings_location_entry_longitude->description
 msgid "Longitude"
 msgstr "Lengtegraad"
 
-#. settings-schema.json->settings_location_entry_longitude->tooltip
+#. 5.8->settings-schema.json->settings_location_entry_longitude->tooltip
 msgid "Geographical longitude in decimal degrees"
 msgstr "Geografische lengte in decimale graden"
 
-#. settings-schema.json->settings_location_button_show-twilight-
+#. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-msgid "Check today's switch times in a notification"
-msgstr "Controleer de omschakeltijden van vandaag in een melding"
+msgid "Show switch times in a notification"
+msgstr "Toont schakeltijden in een melding"
 
-#. settings-schema.json->settings_location_button_show-twilight-times->tooltip
+#. 5.8->settings-schema.json->settings_location_button_show-twilight-
+#. times->tooltip
 msgid ""
 "Show today's switch times for light and dark modes based on the current "
 "location via a system notification message"
@@ -231,106 +246,112 @@ msgstr ""
 "Toon de omschakeltijden voor lichte en donkere modi op basis van de huidige "
 "locatie via een systeemwaarschuwingsbericht"
 
-#. settings-schema.json->light-mode_themes_button_open-os-settings->tooltip
-#. settings-schema.json->dark-mode_themes_button_open-os-settings->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_button_open-os-
+#. settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_button_open-os-
+#. settings->tooltip
 msgid "Open the system's settings window to select the themes"
 msgstr ""
 "Open het instellingenvenster van het systeem om de thema's in te stellen"
 
-#. settings-schema.json->light-mode_themes_button_detect->description
-#. settings-schema.json->light-mode_background_button_detect->description
-#. settings-schema.json->dark-mode_themes_button_detect->description
-#. settings-schema.json->dark-mode_background_button_detect->description
+#. 5.8->settings-schema.json->light-mode_themes_button_detect->description
+#. 5.8->settings-schema.json->light-mode_background_button_detect->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_detect->description
+#. 5.8->settings-schema.json->dark-mode_background_button_detect->description
 msgid "Detect from the system"
 msgstr "Detecteer vanuit het systeem"
 
-#. settings-schema.json->light-mode_themes_button_detect->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_button_detect->tooltip
 msgid ""
 "Detect the system's themes currently set and assign them to the light mode"
 msgstr ""
 "Detecteer de momenteel ingestelde thema's van het systeem en wijs ze toe aan "
 "de lichte modus"
 
-#. settings-schema.json->light-mode_themes_entry_mouse-pointer->description
-#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->description
+#. 5.8->settings-schema.json->light-mode_themes_entry_mouse-
+#. pointer->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_mouse-
+#. pointer->description
 msgid "Mouse pointer"
 msgstr "Muisaanwijzer"
 
-#. settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
-#. settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_mouse-pointer->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_mouse-pointer->tooltip
 msgid "Name of the mouse pointer theme"
 msgstr "Naam van het muisaanwijzer-thema"
 
-#. settings-schema.json->light-mode_themes_entry_applications->description
-#. settings-schema.json->dark-mode_themes_entry_applications->description
+#. 5.8->settings-schema.json->light-
+#. mode_themes_entry_applications->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_applications->description
 msgid "Applications"
 msgstr "Toepassingen"
 
-#. settings-schema.json->light-mode_themes_entry_applications->tooltip
-#. settings-schema.json->dark-mode_themes_entry_applications->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_applications->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_applications->tooltip
 msgid "Name of the applications theme (GTK theme)"
 msgstr "Naam van het toepassings-thema (GTK-thema)"
 
-#. settings-schema.json->light-mode_themes_entry_icons->description
-#. settings-schema.json->dark-mode_themes_entry_icons->description
+#. 5.8->settings-schema.json->light-mode_themes_entry_icons->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_icons->description
 msgid "Icons"
 msgstr "Pictogrammen"
 
-#. settings-schema.json->light-mode_themes_entry_icons->tooltip
-#. settings-schema.json->dark-mode_themes_entry_icons->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_icons->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_icons->tooltip
 msgid "Name of the icons theme"
 msgstr "Naam van het pictogrammen-thema"
 
-#. settings-schema.json->light-mode_themes_entry_desktop->description
-#. settings-schema.json->dark-mode_themes_entry_desktop->description
+#. 5.8->settings-schema.json->light-mode_themes_entry_desktop->description
+#. 5.8->settings-schema.json->dark-mode_themes_entry_desktop->description
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#. settings-schema.json->light-mode_themes_entry_desktop->tooltip
-#. settings-schema.json->dark-mode_themes_entry_desktop->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_entry_desktop->tooltip
+#. 5.8->settings-schema.json->dark-mode_themes_entry_desktop->tooltip
 msgid "Name of the desktop theme (Cinnamon theme)"
 msgstr "Naam van het bureaublad-thema (Cinnamon-thema)"
 
-#. settings-schema.json->light-mode_themes_button_apply->description
-#. settings-schema.json->light-mode_background_button_apply->description
-#. settings-schema.json->dark-mode_themes_button_apply->description
-#. settings-schema.json->dark-mode_background_button_apply->description
-msgid "Apply to the system"
-msgstr "Toepassen op het systeem"
+#. 5.8->settings-schema.json->light-mode_themes_button_apply->description
+#. 5.8->settings-schema.json->light-mode_background_button_apply->description
+#. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
+#. 5.8->settings-schema.json->dark-mode_background_button_apply->description
+msgid "Test applying to the system"
+msgstr "Test toepassen op het systeem"
 
-#. settings-schema.json->light-mode_themes_button_apply->tooltip
+#. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
 msgstr "Pas de lichte modus thema's handmatig toe op het systeem"
 
-#. settings-schema.json->both-modes_background_switch_enable->description
+#. 5.8->settings-schema.json->both-modes_background_switch_enable->description
 msgid "Set desktop background"
 msgstr "Stel bureaubladachtergrond in"
 
-#. settings-schema.json->both-modes_background_switch_enable->tooltip
+#. 5.8->settings-schema.json->both-modes_background_switch_enable->tooltip
 msgid "Enable setting the desktop backgrounds for light and dark modes"
 msgstr ""
 "Schakel instellen in van bureaubladachtergrond voor lichte en donkere modi"
 
-#. settings-schema.json->light-mode_commands_switch_enable->description
-#. settings-schema.json->dark-mode_commands_switch_enable->description
+#. 5.8->settings-schema.json->light-mode_commands_switch_enable->description
+#. 5.8->settings-schema.json->dark-mode_commands_switch_enable->description
 msgid "Launch custom commands"
 msgstr "Start aangepaste commando's"
 
-#. settings-schema.json->light-mode_commands_switch_enable->tooltip
+#. 5.8->settings-schema.json->light-mode_commands_switch_enable->tooltip
 msgid "Enable setting commands to be launched when switching to light mode"
 msgstr ""
 "Inschakelen van commando's om uit te voeren bij het overschakelen naar de "
 "lichte modus"
 
-#. settings-schema.json->light-mode_background_button_open-os-
+#. 5.8->settings-schema.json->light-mode_background_button_open-os-
 #. settings->tooltip
-#. settings-schema.json->dark-mode_background_button_open-os-settings->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_button_open-os-
+#. settings->tooltip
 msgid "Open the system's settings window to set the background settings"
 msgstr ""
 "Open het instellingenvenster van het systeem om de achtergrondinstellingen "
 "in te stellen"
 
-#. settings-schema.json->light-mode_background_button_detect->tooltip
+#. 5.8->settings-schema.json->light-mode_background_button_detect->tooltip
 msgid ""
 "Detect the system's background settings currently set and assign them to the "
 "light mode"
@@ -338,66 +359,136 @@ msgstr ""
 "Detecteer de momenteel ingestelde achtergrondinstellingen van het systeem en "
 "wijs ze toe aan de lichte modus"
 
-#. settings-schema.json->light-mode_background_switch_slideshow->description
-#. settings-schema.json->dark-mode_background_switch_slideshow->description
+#. 5.8->settings-schema.json->light-
+#. mode_background_switch_slideshow->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_switch_slideshow->description
 msgid "Slideshow"
 msgstr "Diavoorstelling"
 
-#. settings-schema.json->light-mode_background_switch_slideshow->tooltip
-#. settings-schema.json->dark-mode_background_switch_slideshow->tooltip
+#. 5.8->settings-schema.json->light-mode_background_switch_slideshow->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_switch_slideshow->tooltip
 msgid "Set the desktop background to be a slideshow"
 msgstr "Stel de bureaubladachtergrond in als een diavoorstelling"
 
-#. settings-schema.json->light-mode_background_filechooser_file->description
-#. settings-schema.json->dark-mode_background_filechooser_file->description
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_file->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_filechooser_file->description
 msgid "Image file"
 msgstr "Afbeeldingsbestand"
 
-#. settings-schema.json->light-mode_background_filechooser_file->tooltip
-#. settings-schema.json->dark-mode_background_filechooser_file->tooltip
+#. 5.8->settings-schema.json->light-mode_background_filechooser_file->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_filechooser_file->tooltip
 msgid "Image file to be set as the desktop background"
 msgstr "Afbeeldingsbestand om in te stellen als bureaubladachtergrond"
 
-#. settings-schema.json->light-mode_background_filechooser_folder->description
-#. settings-schema.json->dark-mode_background_filechooser_folder->description
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_folder->description
+#. 5.8->settings-schema.json->dark-
+#. mode_background_filechooser_folder->description
 msgid "Images folder"
 msgstr "Afbeeldingenmap"
 
-#. settings-schema.json->light-mode_background_filechooser_folder->tooltip
-#. settings-schema.json->dark-mode_background_filechooser_folder->tooltip
+#. 5.8->settings-schema.json->light-
+#. mode_background_filechooser_folder->tooltip
+#. 5.8->settings-schema.json->dark-mode_background_filechooser_folder->tooltip
 msgid "Folder containing images to be set for the desktop background slideshow"
 msgstr ""
 "Map met afbeeldingen om in te stellen voor de bureaubladachtergrond "
 "diavoorstelling"
 
-#. settings-schema.json->light-mode_background_button_apply->tooltip
+#. 5.8->settings-schema.json->light-mode_background_button_apply->tooltip
 msgid "Apply the light mode background settings to the system manually"
 msgstr ""
 "Pas de achtergrondinstellingen van de lichte modus handmatig toe op het "
 "systeem"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Name"
 msgstr "Naam"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Active"
 msgstr "Actief"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Expiry (s)"
 msgstr "Verlooptijd (s)"
 
-#. settings-schema.json->light-mode_commands_list->columns->title
-#. settings-schema.json->dark-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->light-mode_commands_list->columns->title
+#. 5.8->settings-schema.json->dark-mode_commands_list->columns->title
 msgid "Command"
 msgstr "Commando"
 
-#. settings-schema.json->light-mode_commands_list->tooltip
-#. settings-schema.json->dark-mode_commands_list->tooltip
+#. 5.8->settings-schema.json->light-mode_commands_list->tooltip
+msgid ""
+"List of commands to be executed when switching to this mode\n"
+"\n"
+"Notes:\n"
+"- the name's purpose is for error messages\n"
+"- the expiry time terminates the command's process early\n"
+"- an expiry of 0 second means never\n"
+"- a process refusing to terminate 10 seconds after the expiry is killed\n"
+"- the path is in the user's home directory (~/)\n"
+"- the error messages are displayed in a notification and reports stderr"
+msgstr ""
+"Lijst met commando's die moeten worden uitgevoerd bij het overschakelen naar "
+"deze modus\n"
+" \n"
+" Notities:\n"
+" - de naam is bedoeld voor foutmeldingen\n"
+" - de verlooptijd beëindigt het proces van het commando voortijdig\n"
+" - een verlooptijd van 0 seconden betekent nooit\n"
+" - een proces dat weigert te stoppen 10 seconden na de verlooptijd wordt "
+"beëindigd\n"
+" - het pad bevindt zich in de home-directory van de gebruiker (~/)\n"
+" - de foutmeldingen worden weergegeven in een melding en rapporteren stderr"
+
+#. 5.8->settings-schema.json->light-mode_commands_button_launch->description
+#. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
+msgid "Test commands launch"
+msgstr "Testcommando’s starten"
+
+#. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
+msgid "Test launching the commands set for the light mode"
+msgstr "Test het starten van de commando’s voor de lichte modus"
+
+#. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
+msgid ""
+"Detect the system's themes currently set and assign them to the dark mode"
+msgstr ""
+"Detecteer de momenteel ingestelde thema's van het systeem en wijs ze toe aan "
+"de donkere modus"
+
+#. 5.8->settings-schema.json->dark-mode_themes_button_apply->tooltip
+msgid "Apply the dark mode themes to the system manually"
+msgstr "Pas de donkere modus thema's handmatig toe op het systeem"
+
+#. 5.8->settings-schema.json->dark-mode_commands_switch_enable->tooltip
+msgid "Enable setting commands to be launched when switching to dark mode"
+msgstr ""
+"Inschakelen van commando's om uit te voeren bij het overschakelen naar de "
+"donkere modus"
+
+#. 5.8->settings-schema.json->dark-mode_background_button_detect->tooltip
+msgid ""
+"Detect the system's background settings currently set and assign them to the "
+"dark mode"
+msgstr ""
+"Detecteer de momenteel ingestelde achtergrondinstellingen van het systeem en "
+"wijs ze toe aan de donkere modus"
+
+#. 5.8->settings-schema.json->dark-mode_background_button_apply->tooltip
+msgid "Apply the dark mode background settings to the system manually"
+msgstr ""
+"Pas de achtergrondinstellingen van de donkere modus handmatig toe op het "
+"systeem"
+
+#. 5.8->settings-schema.json->dark-mode_commands_list->tooltip
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -422,46 +513,6 @@ msgstr ""
 " - de foutmeldingen rapporteren stderr wanneer de terugkeerstatus niet 0 is "
 "en verschijnen in een melding"
 
-#. settings-schema.json->light-mode_commands_button_launch->description
-#. settings-schema.json->dark-mode_commands_button_launch->description
-msgid "Launch commands"
-msgstr "Start commando's"
-
-#. settings-schema.json->light-mode_commands_button_launch->tooltip
-msgid "Launch the commands set for the light mode"
-msgstr "Start de ingestelde commando's voor de lichte modus"
-
-#. settings-schema.json->dark-mode_themes_button_detect->tooltip
-msgid ""
-"Detect the system's themes currently set and assign them to the dark mode"
-msgstr ""
-"Detecteer de momenteel ingestelde thema's van het systeem en wijs ze toe aan "
-"de donkere modus"
-
-#. settings-schema.json->dark-mode_themes_button_apply->tooltip
-msgid "Apply the dark mode themes to the system manually"
-msgstr "Pas de donkere modus thema's handmatig toe op het systeem"
-
-#. settings-schema.json->dark-mode_commands_switch_enable->tooltip
-msgid "Enable setting commands to be launched when switching to dark mode"
-msgstr ""
-"Inschakelen van commando's om uit te voeren bij het overschakelen naar de "
-"donkere modus"
-
-#. settings-schema.json->dark-mode_background_button_detect->tooltip
-msgid ""
-"Detect the system's background settings currently set and assign them to the "
-"dark mode"
-msgstr ""
-"Detecteer de momenteel ingestelde achtergrondinstellingen van het systeem en "
-"wijs ze toe aan de donkere modus"
-
-#. settings-schema.json->dark-mode_background_button_apply->tooltip
-msgid "Apply the dark mode background settings to the system manually"
-msgstr ""
-"Pas de achtergrondinstellingen van de donkere modus handmatig toe op het "
-"systeem"
-
-#. settings-schema.json->dark-mode_commands_button_launch->tooltip
-msgid "Launch the commands set for the dark mode"
-msgstr "Start de ingestelde commando's voor de donkere modus"
+#. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
+msgid "Test launching the commands set for the dark mode"
+msgstr "Test het starten van de commando’s voor de donkere modus"

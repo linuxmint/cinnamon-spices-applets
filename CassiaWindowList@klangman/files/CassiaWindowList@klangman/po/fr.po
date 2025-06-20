@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-09 22:44-0400\n"
-"PO-Revision-Date: 2025-03-07 16:35+0100\n"
+"PO-Revision-Date: 2025-05-03 19:40+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -930,23 +930,23 @@ msgstr ""
 #. 4.0->settings-schema.json->hide-panel-apps->description
 #. 6.0->settings-schema.json->hide-panel-apps->description
 #. 6.4->settings-schema.json->hide-panel-apps->description
-#, fuzzy
 msgid ""
 "Hide buttons for applications on 'Launcher' instances of CassiaWindowList"
-msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
+msgstr ""
+"Cacher les boutons des applications des instances ''Lanceur'' de "
+"CassiaWindowList"
 
 #. 4.0->settings-schema.json->hide-panel-apps->tooltip
 #. 6.0->settings-schema.json->hide-panel-apps->tooltip
 #. 6.4->settings-schema.json->hide-panel-apps->tooltip
-#, fuzzy
 msgid ""
 "When enabled, windows for applications with pinned buttons on other "
 "'Launcher' mode instances of the CassiaWindowList applet will not show up in "
 "this window list"
 msgstr ""
 "Lorsque cette option est activée, les fenêtres des applications dont les "
-"boutons sont épinglés sur d'autres instances de l'applet CassiaWindowList "
-"n'apparaîtront pas dans cette liste de fenêtres"
+"boutons sont épinglés sur d'autres instances de l'applet CassiaWindowList en "
+"mode « Lanceur » n'apparaîtront pas dans cette liste de fenêtres."
 
 #. 4.0->settings-schema.json->button-spacing->description
 #. 6.0->settings-schema.json->button-spacing->description
@@ -2445,15 +2445,12 @@ msgstr "Saturation de la couleur de l'icône"
 #. 4.0->settings-schema.json->icon-saturation->tooltip
 #. 6.0->settings-schema.json->icon-saturation->tooltip
 #. 6.4->settings-schema.json->icon-saturation->tooltip
-#, fuzzy
 msgid ""
 "Sets the color saturation for icons from 0% (grayscale) to 100%, default is "
 "100%"
 msgstr ""
 "Définit la saturation des couleurs pour les icônes de 0 % (niveaux de gris) "
-"à 200 %, la valeur par défaut étant 100 %.\n"
-"Cette option est expérimentale, certaines icônes ne sont pas encore "
-"affectées par ce paramètre"
+"à 100 %, la valeur par défaut étant 100 %."
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options

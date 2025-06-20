@@ -1,3 +1,25 @@
+###  v3.4.4~20250422
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
+### v3.4.3~20250419
+  * Improves responsiveness.
+
+### v3.4.2~20250416
+  * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
+
+### v3.4.1~20250415
+  * Make certain tasks asynchronous to avoid blockages.
+  * Context menu: Submenu 'Configure...' allowing direct access to each settings tab.
+
+### v3.4.0~20250415
+  * The default icon color is now determined by the theme used.
+  * Code cleanup.
+
+### v3.3.1~20250413
+  * The “Try to download it from YT” menu option works again.
+  * Fixes #7055.
+  
+
 ### v3.3.0~20250408
   * Improved album art download.
 

@@ -48,11 +48,11 @@ msgstr "Установите lm_sensors. Если это не поможет, о
 
 #: applet.js:229
 msgid "Thresholds Info"
-msgstr ""
+msgstr "Информация о пороговых значениях"
 
 #: applet.js:230
 msgid "High Temp"
-msgstr ""
+msgstr "Высокая температура"
 
 #: applet.js:231
 #, fuzzy
@@ -61,11 +61,11 @@ msgstr "Критическая температура"
 
 #: applet.js:242
 msgid "Critical"
-msgstr ""
+msgstr "Критическая"
 
 #: applet.js:245
 msgid "High"
-msgstr ""
+msgstr "Высокая"
 
 #: applet.js:258
 msgid "Current Temperature"
@@ -85,55 +85,55 @@ msgstr "Показывает температуру процессора"
 
 #. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
-msgstr ""
+msgstr "Показывать температуру в градусах Фаренгейта"
 
 #. settings-schema.json->only-integer-part->description
 msgid "Use integer values for temperature"
-msgstr ""
+msgstr "Используйте целые значения для температуры"
 
 #. settings-schema.json->show-unit->description
 msgid "Show unit"
-msgstr ""
+msgstr "Показывать единицу измерения"
 
 #. settings-schema.json->show-unit->tooltip
 msgid "Whether or not show the unit after the temperature value."
-msgstr ""
+msgstr "Показывать или нет единицу измерения после значения температуры."
 
 #. settings-schema.json->show-unit-letter->description
 msgid "Show unit letter"
-msgstr ""
+msgstr "Показать букву единицы"
 
 #. settings-schema.json->show-unit-letter->tooltip
 msgid "Whether or not show the unit letter (C or F)."
-msgstr ""
+msgstr "Показывать или нет букву единицы измерения (C или F)."
 
 #. settings-schema.json->show-label-prefix->description
 msgid "Show label prefix"
-msgstr ""
+msgstr "Показывать метку перед значением температуры"
 
 #. settings-schema.json->show-label-prefix->tooltip
 msgid "Whether or not to add a label before the temperature value."
-msgstr ""
+msgstr "Добавлять или нет метку перед значением температуры."
 
 #. settings-schema.json->label-prefix->description
 msgid "Label prefix"
-msgstr ""
+msgstr "Метка перед значением температуры"
 
 #. settings-schema.json->label-prefix->tooltip
 msgid "The label to be shown before the temperature value."
-msgstr ""
+msgstr "Метка, которая будет отображаться перед значением температуры"
 
 #. settings-schema.json->interval->units
 msgid "ms"
-msgstr ""
+msgstr "мс"
 
 #. settings-schema.json->interval->description
 msgid "Update interval"
-msgstr ""
+msgstr "Интервал обновления"
 
 #. settings-schema.json->change-color->description
 msgid "Change color when the temperature becomes High or Critical"
-msgstr ""
+msgstr "Изменить цвет, когда температура становится высокой или критической"
 
 #. settings-schema.json->change-color->tooltip
 msgid ""
@@ -141,20 +141,25 @@ msgid ""
 " orange when the High Temperature Threshold is reached,\n"
 " red when the Critical Temperature Threshold is reached."
 msgstr ""
+"При выборе этой опции этот апплет становится\n"
+" оранжевый при достижении порога высокой температуры,\n"
+" красный при достижении критического порога температуры."
 
 #. settings-schema.json->only-colors->description
 msgid "Only use colors to alert me"
-msgstr ""
+msgstr "Используйте цвета только для оповещения меня"
 
 #. settings-schema.json->only-colors->tooltip
 msgid ""
 "Select this option to not display text alerts in horizontal panels.\n"
 "(No text alert is ever displayed on vertical panels.)"
 msgstr ""
+"Выберите этот параметр, чтобы не отображать текстовые оповещения на горизонтальных панелях.\n"
+"(На вертикальных панелях текстовое оповещение никогда не отображается.)"
 
 #. settings-schema.json->keep_size->description
 msgid "Avoid size changes"
-msgstr ""
+msgstr "Избегать изменения размера"
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
@@ -162,3 +167,6 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
+"Включено: Размер этого апплета остается постоянным, после того как все ваши настройки "
+"будут изменены.\n"
+"Отключено: Размер этого апплета оптимизирован, но может измениться."

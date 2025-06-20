@@ -1134,9 +1134,8 @@
     "description": "Color of the symbolic icon while the radio is on"
   },
   "color-off": {
-    "type": "colorchooser",
-    "default": "rgb(240,240,240)",
-    "description": "Color of the symbolic icon while the radio is off"
+    "type": "generic",
+    "default": "rgba(225,225,225,255)"
   },
   "color-recording": {
     "type": "colorchooser",

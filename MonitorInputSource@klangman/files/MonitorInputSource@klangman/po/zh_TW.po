@@ -1,0 +1,99 @@
+# Chinese (Traditional, Taiwan) translation for MonitorInputSource@klangman
+# Copyright (C) 2025
+# This file is distributed under the same license as the MonitorInputSource@klangman package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MonitorInputSource@klangman 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
+"PO-Revision-Date: 2025-05-06 01:13+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Shift+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "點選左鍵"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "點選中鍵"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "點選右鍵"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "點選返回鍵"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "點選前進鍵"
+
+#: applet.js:158 applet.js:390 applet.js:392
+msgid "Monitor input sources"
+msgstr "螢幕輸入來源"
+
+#: applet.js:170 applet.js:217 applet.js:480
+msgid "Detecting monitors..."
+msgstr "正在偵測螢幕…"
+
+#: applet.js:176
+msgid "Options"
+msgstr "選項"
+
+#: applet.js:178
+msgid "Clear monitor cache"
+msgstr "清除螢幕快取"
+
+#: applet.js:184
+msgid "Clear quick actions"
+msgstr "清除快速動作"
+
+#: applet.js:197
+msgid "Help"
+msgstr "說明"
+
+#: applet.js:339
+msgid "Required \"ddcutil\" not found"
+msgstr "找不到必要的 \"ddcutil\""
+
+#: applet.js:343
+msgid "Error, \"ddcutil\" exit code "
+msgstr "錯誤，\"ddcutil\" 結束代碼 "
+
+#: applet.js:347
+msgid "No capable monitors detected"
+msgstr "未偵測到相容的螢幕"
+
+#: applet.js:386
+msgid "for"
+msgstr "的"
+
+#: applet.js:473
+msgid "Refresh"
+msgstr "重新整理"
+
+#. metadata.json->name
+msgid "Monitor Input Source"
+msgstr "螢幕輸入來源"
+
+#. metadata.json->description
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr "直接從 Cinnamon 面板切換您的螢幕影像輸入來源"

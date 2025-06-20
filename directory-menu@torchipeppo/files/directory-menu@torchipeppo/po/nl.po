@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.6.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-10-31 18:13+0100\n"
-"PO-Revision-Date: 2024-11-28 17:21+0100\n"
+"POT-Creation-Date: 2025-04-22 12:08-0400\n"
+"PO-Revision-Date: 2025-05-13 14:40+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: popup_menu.py:71
+#. popup_menu.py:95
 msgid "Open Folder"
 msgstr "Map openen"
 
-#: popup_menu.py:76
+#. popup_menu.py:100
 msgid "Open in Terminal"
 msgstr "Openen in terminal"
 
@@ -59,13 +59,37 @@ msgstr "Tooltip-tekst"
 msgid "Panel Text"
 msgstr "Paneeltekst"
 
-#. settings-schema.json->behavior-section->description
-msgid "Behavior"
-msgstr "Gedrag"
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr "Zichtbaarheid"
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr "Inclusief \"Open Map\" en \"Open in Terminal\""
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Verborgen bestanden opnemen"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr "Beperk het maximum aantal tekens in de submenu's"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "Tekenlimiet"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"(Bij benadering) Beperk het aantal tekens van elk item.\n"
+"Handig als u vindt dat het menu te breed is."
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr "Sorteren"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
@@ -86,22 +110,6 @@ msgstr "Toon favoriete items eerst"
 #. settings-schema.json->pinned-first->description
 msgid "Show pinned items first"
 msgstr "Toon vastgemaakte items eerst"
-
-#. settings-schema.json->limit-characters->description
-msgid "Limit the Maximum Number of Characters on the Submenus"
-msgstr "Beperk het maximale aantal tekens op de submenu's"
-
-#. settings-schema.json->character-limit->description
-msgid "Character Limit"
-msgstr "Tekenlimiet"
-
-#. settings-schema.json->character-limit->tooltip
-msgid ""
-"(Approximately) Limit the number of characters of each entry.\n"
-"Useful if you think the menu is too wide."
-msgstr ""
-"(Bij benadering) Beperk het aantal tekens van elk item.\n"
-"Handig als u vindt dat het menu te breed is."
 
 #. settings-schema.json->keybindings-section->description
 msgid "Keybindings"

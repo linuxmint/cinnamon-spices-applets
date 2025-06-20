@@ -1,6 +1,8 @@
 /* Looking Glass Shortcuts (xsession@claudiux)
 */
 const Applet = imports.ui.applet;
+const Cinnamon = imports.gi.Cinnamon;
+const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
@@ -8,6 +10,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext;
 const Util = imports.misc.util;
+const Tooltips = imports.ui.tooltips;
 const {
   reloadExtension,
   Type
@@ -72,6 +75,29 @@ function logError(error) {
 }
 
 Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
+
+class LGSsliderItem extends PopupMenu.PopupSliderMenuItem {
+    constructor(value) {
+        super(value)
+    }
+    _onScrollEvent (actor, event) {
+        const SLIDER_SCROLL_STEP = 5/240;
+        let direction = event.get_scroll_direction();
+        if (direction == Clutter.ScrollDirection.SMOOTH) {
+            return;
+        }
+
+        if (direction == Clutter.ScrollDirection.DOWN) {
+            this._value = Math.max(0, this._value - SLIDER_SCROLL_STEP);
+        }
+        else if (direction == Clutter.ScrollDirection.UP) {
+            this._value = Math.min(1, this._value + SLIDER_SCROLL_STEP);
+        }
+
+        this._slider.queue_repaint();
+        this.emit('value-changed', this._value);
+    }
+}
 
 class ReloadAllMenuItem extends PopupMenu.PopupBaseMenuItem {
   constructor(parent, type, params) {
@@ -206,11 +232,14 @@ class LGS extends Applet.IconApplet {
         this.settings.bind("number_latest", "number_latest");
 
         // Left click menu:
+        this.itemNumberLatest = null;
+
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
         let _tooltip = _("Middle-click: \n") + _("Show .xsession-errors");
+        _tooltip += "\n" + _("Ctrl + Middle-click: \n") + _("Show latest messages");
         this.set_applet_tooltip(_tooltip);
     }
 
@@ -253,7 +282,21 @@ class LGS extends Applet.IconApplet {
     }
 
     makeMenu() {
+        if (this.itemNumberLatest != null) {
+            this.itemNumberLatest.disconnect(this.itemNumberLatestValueChangedId);
+            this.itemNumberLatest.disconnect(this.itemNumberLatestDragEndId);
+            this.itemNumberLatest = null;
+        }
         this.menu.removeAll();
+        this.itemNumberLatest = new LGSsliderItem((this.number_latest - 10) /240);
+        this.itemNumberLatest.set_mark(9/24);
+        this.itemNumberLatest.tooltip = new Tooltips.Tooltip(
+            this.itemNumberLatest.actor,
+            _("%s latest messages").format(this.number_latest) + "\n" + _("min: 10. max: 250.")
+        );
+
+        this.itemNumberLatestValueChangedId = this.itemNumberLatest.connect('value-changed', () => { this.numberSliderChanged() });
+        this.itemNumberLatestDragEndId = this.itemNumberLatest.connect('drag-end', () => { this.numberSliderReleased() });
 
         /**
          *  Sections
@@ -298,6 +341,8 @@ class LGS extends Applet.IconApplet {
         );
 
         sectionHead.addMenuItem(itemWatchXSELatest);
+
+        sectionHead.addMenuItem(this.itemNumberLatest);
 
         // Restart Cinnamon:
         let itemReloadCinnamon = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "restart", St.IconType.SYMBOLIC);
@@ -487,12 +532,28 @@ class LGS extends Applet.IconApplet {
         this.menu.addMenuItem(sectionSource);
     }
 
+    numberSliderChanged() {
+        this.number_latest = Math.round((10 + this.itemNumberLatest.value * (250 - 10)) / 5) * 5;
+        this.itemNumberLatest.tooltip.set_text(_("%s latest messages").format(this.number_latest) + "\n" + _("min: 10. max: 250."));
+    }
+
+    numberSliderReleased() {
+        this.numberSliderChanged();
+    }
+
     on_applet_middle_clicked(event) {
+        let modifiers = Cinnamon.get_event_state(event);
+        let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
+        let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
         let id = setTimeout( () => {
             clearTimeout(id);
-            Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+            if (shiftPressed || ctrlPressed) {
+                Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
+            } else {
+                Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+            }
         },
-        0);
+        300);
     }
 
     on_applet_removed_from_panel(deleteConfig) {

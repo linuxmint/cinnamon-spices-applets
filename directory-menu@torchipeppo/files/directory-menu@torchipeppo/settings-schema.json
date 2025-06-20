@@ -27,14 +27,39 @@
         "description": "Panel Text"
     },
 
-    "behavior-section": {
+    "visibility-section": {
         "type": "section",
-        "description": "Behavior"
+        "description": "Visibility"
+    },
+    "show-header": {
+        "type": "switch",
+        "default": true,
+        "description": "Include \"Open Folder\" and \"Open in Terminal\""
     },
     "show-hidden": {
         "type": "switch",
         "default": false,
         "description": "Include hidden files"
+    },
+    "limit-characters": {
+        "type": "switch",
+        "default": false,
+        "description": "Limit the Maximum Number of Characters in the Submenus"
+    },
+    "character-limit": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 1000,
+        "step": 5,
+        "description": "Character Limit",
+        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
+        "dependency": "limit-characters"
+    },
+
+    "ordering-section": {
+        "type": "section",
+        "description": "Ordering"
     },
     "order-by": {
         "type": "combobox",
@@ -54,21 +79,6 @@
         "type": "switch",
         "default": false,
         "description": "Show pinned items first"
-    },
-    "limit-characters": {
-        "type": "switch",
-        "default": false,
-        "description": "Limit the Maximum Number of Characters on the Submenus"
-    },
-    "character-limit": {
-        "type": "spinbutton",
-        "default": 50,
-        "min": 5,
-        "max": 1000,
-        "step": 5,
-        "description": "Character Limit",
-        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
-        "dependency": "limit-characters"
     },
 
     "keybindings-section": {

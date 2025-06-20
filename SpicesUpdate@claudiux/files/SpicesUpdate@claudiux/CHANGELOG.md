@@ -1,3 +1,6 @@
+### v7.8.8~20250425
+  * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
+
 ### v7.8.7~20250324
   * Adapts constants.js for themes.
   * Code cleanup.

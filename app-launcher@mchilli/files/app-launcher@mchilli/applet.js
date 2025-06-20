@@ -85,6 +85,8 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('hotkeys-enabled', 'hotkeysEnabled', this.updateHotKey);
         this.settings.bind('hotkey-bindings', 'hotkeyBindings', this.addHotKey);
         this.settings.bind('menu-at-pointer', 'menuAtPointer');
+        this.settings.bind('open-by-hover', 'openByHover');
+        this.settings.bind('open-by-hover-delay', 'openByHoverDelay');
         this.settings.bind('bind-to-workspace', 'bindToWorkspace', this.updateWorkspace);
 
         this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
@@ -95,6 +97,9 @@ class MyApplet extends Applet.TextIconApplet {
 
     connectSignals() {
         this.signalManager = new SignalManager.SignalManager(null);
+
+        this.signalManager.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+        this.signalManager.connect(this.actor, 'leave-event', this.onMouseLeave, this);
 
         this.signalManager.connect(this.menu, 'open-state-changed', this.on_menu_state_changed, this);
         this.signalManager.connect(global.window_manager, 'switch-workspace', this.updateWorkspace,this);
@@ -443,6 +448,23 @@ class MyApplet extends Applet.TextIconApplet {
         this.toggleIcon();
         if (!isOpen && this.menu.isContextOpen()) {
             this.menu.closeContext();
+        }
+    }
+
+    onMouseEnter(event) {
+        if (this.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+            this.hoverTimeoutID = setTimeout(() => {
+                if (!this._applet_context_menu.isOpen) {
+                    this.menu.open();
+                }
+            }, this.openByHoverDelay);
+        }
+    }
+
+    onMouseLeave(event) {
+        if (this.hoverTimeoutID) {
+            clearTimeout(this.hoverTimeoutID);
+            this.hoverTimeoutID = undefined;
         }
     }
 
@@ -902,6 +924,10 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
         this._children.unshift(params);
         this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
+
+        this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+        this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+        
         this.actor.add_actor(this._icon);
     }
 
@@ -1096,6 +1122,21 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
     _closeContext() {
         this.applet.menu.closeContext();
+    }
+
+    onMouseEnter(event) {
+        if (this.applet.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+            this.hoverTimeoutID = setTimeout(() => {
+                this.menu.open();
+            }, this.applet.openByHoverDelay);
+        }
+    }
+
+    onMouseLeave(event) {
+        if (this.hoverTimeoutID) {
+            clearTimeout(this.hoverTimeoutID);
+            this.hoverTimeoutID = undefined;
+        }
     }
 
     handleMenuDragOver(source, actor, x, y, time) {

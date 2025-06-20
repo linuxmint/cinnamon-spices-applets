@@ -2,6 +2,7 @@
     "uuid": "auto-dark-light@gihaume",
     "name": "Automatic dark/light themes",
     "description": "Automatically switch between dark and light themes at twilight times.",
-    "version": "1.2.1",
-    "max-instances": "1"
+    "version": "1.2.6",
+    "max-instances": "1",
+    "multiversion": true
 }

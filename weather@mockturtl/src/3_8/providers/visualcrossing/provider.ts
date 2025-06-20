@@ -84,6 +84,7 @@ export class VisualCrossing extends BaseProvider {
 				// use current hour instead, observations feels like doesn't seem to differ at all
 				value: CelsiusToKelvin(currentHour?.feelslike ?? weather.currentConditions.feelslike)
 			},
+			uvIndex: null,
 			forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
 			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
 		}
