@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-17 13:58+0200\n"
-"PO-Revision-Date: 2025-04-10 14:49+0200\n"
+"PO-Revision-Date: 2025-06-20 21:35+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:54
 msgid "Applet"
@@ -55,22 +55,21 @@ msgid "Show .xsession-errors"
 msgstr "Az „.xsession-errors” fájl megjelenítése"
 
 #. applet.js:242
-#, fuzzy
 msgid "Ctrl + Middle-click: \n"
-msgstr "Kattintás a középső egérgombbal: \n"
+msgstr "Ctrl + középső kattintás: \n"
 
 #. applet.js:242 applet.js:331
 msgid "Show latest messages"
 msgstr "Show latest messages"
 
 #. applet.js:295 applet.js:537
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%s latest messages"
-msgstr "Legújabb üzenetek"
+msgstr "%s legújabb üzenetek"
 
 #. applet.js:295 applet.js:537
 msgid "min: 10. max: 250."
-msgstr ""
+msgstr "min: 10. max: 250."
 
 #. applet.js:348
 msgid "Restart Cinnamon"
@@ -148,7 +147,7 @@ msgstr "Ikon mérete"
 
 #. settings-schema.json->icon_size->description
 msgid "Size (in pixels) of menu icons"
-msgstr "A menüikonok mérete (pixelben)."
+msgstr "A menüikonok mérete (pixelben)"
 
 #. settings-schema.json->icon_size->options
 msgid "16"

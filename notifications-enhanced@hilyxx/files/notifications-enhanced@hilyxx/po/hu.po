@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 21:41+0200\n"
-"PO-Revision-Date: 2025-05-18 13:52+0200\n"
+"POT-Creation-Date: 2025-05-18 09:30-0400\n"
+"PO-Revision-Date: 2025-06-20 18:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:98
 msgid "Do not disturb"
@@ -110,7 +110,6 @@ msgstr ""
 "Jelölje be, hogy a tálca akkor is megjelenjen, ha nincsenek új értesítések."
 
 #. settings-schema.json->showDisturbIcon->description
-#, fuzzy
 msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
 msgstr ""
 "A „Ne zavarjanak” ikon megjelenítése akkor is, ha az üres tálca "
@@ -147,15 +146,13 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Állítsa be a billentyűkombináció(ka)t az összes értesítés törléséhez."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Enable or disable notifications"
-msgstr "Értesítések engedélyezése"
+msgstr "Értesítések engedélyezése vagy letiltása"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
-"Állítsa be a billentyűkombináció(ka)t az értesítések engedélyezéséhez vagy "
+"Billentyűparancs(ok) beállítása az értesítések engedélyezéséhez vagy "
 "letiltásához."
 
 #. settings-schema.json->btnSystemSettings->description

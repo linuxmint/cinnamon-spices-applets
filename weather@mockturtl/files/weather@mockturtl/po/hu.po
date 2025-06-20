@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-23 09:28+0100\n"
-"PO-Revision-Date: 2024-10-03 09:27+0200\n"
+"PO-Revision-Date: 2025-06-20 21:32+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20687
@@ -2094,23 +2094,25 @@ msgstr "A csapadék {precipStart} percen belül esni kezd"
 
 #. 3.8/weather-applet.js:19517
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Alacsony napsugárzás okozta károsodás kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19521
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Mérsékelt napsugárzás okozta károsodás kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19525
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Magas a napsugárzás okozta károsodás kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19529
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
 msgstr ""
+"Nagyon magas a napsugárzás okozta ártalmak kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19533
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"A napsugárzás okozta károsodás rendkívüli kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19650
 msgid "Forecast parsing failed, see logs for more details."
@@ -3110,9 +3112,8 @@ msgid "Test your command"
 msgstr "Tesztelje a parancsát"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Engedélyezze az időjárási riasztások megjelenítését"
+msgstr "UV-index megjelenítésének engedélyezése"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3120,3 +3121,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Ha a szolgáltatója támogatja, az UV-index a napkelte/napnyugta időpontjai "
+"melletti felugró menüben jelenik meg. Nem jelenik meg, ha az UV-index "
+"alacsony kockázatú (0-2)."

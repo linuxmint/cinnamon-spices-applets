@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 5.8/applet.js:33
 msgid "Click: toggle dark/light mode"
@@ -103,20 +103,19 @@ msgstr "rossz formátum miatt"
 #. 5.8/lib/commands_launcher/commands_launcher.js:44
 #. 5.8/lib/commands_launcher/commands_launcher.js:50
 msgid "Detail"
-msgstr ""
+msgstr "Részlet"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:42
 msgid "due to time expiration"
 msgstr "idő lejárta miatt"
 
 #. 5.8/lib/commands_launcher/commands_launcher.js:48
-#, fuzzy
 msgid "due to an error"
-msgstr "rossz formátum miatt"
+msgstr "egy hiba miatt"
 
 #. 2.2/applet.js:20
 msgid "this applet is only supported by"
-msgstr ""
+msgstr "ezt a kisalkalmazást csak a következő támogatja:"
 
 #. metadata.json->name
 msgid "Automatic dark/light themes"
@@ -236,9 +235,8 @@ msgstr "Földrajzi hosszúság tizedes fokban"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->description
-#, fuzzy
 msgid "Show switch times in a notification"
-msgstr "Ellenőrizze a mai kapcsolási időket egy értesítésben"
+msgstr "Kapcsolási idők megjelenítése értesítésben"
 
 #. 5.8->settings-schema.json->settings_location_button_show-twilight-
 #. times->tooltip
@@ -317,9 +315,8 @@ msgstr "Az asztali téma neve (Cinnamon téma)"
 #. 5.8->settings-schema.json->light-mode_background_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_themes_button_apply->description
 #. 5.8->settings-schema.json->dark-mode_background_button_apply->description
-#, fuzzy
 msgid "Test applying to the system"
-msgstr "Alkalmazás a rendszerre"
+msgstr "A rendszerre vonatkozó teszt"
 
 #. 5.8->settings-schema.json->light-mode_themes_button_apply->tooltip
 msgid "Apply the light mode themes to the system manually"
@@ -423,7 +420,6 @@ msgid "Command"
 msgstr "Parancs"
 
 #. 5.8->settings-schema.json->light-mode_commands_list->tooltip
-#, fuzzy
 msgid ""
 "List of commands to be executed when switching to this mode\n"
 "\n"
@@ -435,27 +431,26 @@ msgid ""
 "- the path is in the user's home directory (~/)\n"
 "- the error messages are displayed in a notification and reports stderr"
 msgstr ""
-"Az ebbe a módba váltáskor végrehajtandó parancsok listája\n"
+"Az ebben a módban végrehajtandó parancsok listája\n"
 "\n"
 "Megjegyzések:\n"
-"- a név célja a hibaüzenetek\n"
-"- a lejárati idő leállítja a parancs folyamatát\n"
-"- 0 másodperc lejárta azt jelenti, hogy soha\n"
-"- az alárendelt folyamatok nem járhatnak le\n"
-"- az elérési út a ~ könyvtárban van\n"
-"- a hibaüzenetek az stderr-t jelentik, ha a visszatérési állapot nem 0, és "
-"értesítésben jelenik meg"
+"- a név a hibaüzenetekre szolgál\n"
+"- a lejárati idő idő előtt leállítja a parancs folyamatát\n"
+"- a 0 másodperces lejárat azt jelenti, hogy soha\n"
+"- a folyamat, amely 10 másodperccel a lejárat után nem hajlandó leállni, le "
+"lesz állítva\n"
+"- az elérési út a felhasználó saját könyvtárában található (~/)\n"
+"- a hibaüzenetek egy értesítésben jelennek meg, és a standard könyvtárból "
+"(stderr) jelentést küldenek"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->description
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->description
-#, fuzzy
 msgid "Test commands launch"
-msgstr "Egyéni parancsok"
+msgstr "Tesztparancsok indítása"
 
 #. 5.8->settings-schema.json->light-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the light mode"
-msgstr "Indítsa el a világos módhoz beállított parancsokat"
+msgstr "A világos módhoz beállított parancsok elindításának tesztelése"
 
 #. 5.8->settings-schema.json->dark-mode_themes_button_detect->tooltip
 msgid ""
@@ -510,6 +505,5 @@ msgstr ""
 "értesítésben jelenik meg"
 
 #. 5.8->settings-schema.json->dark-mode_commands_button_launch->tooltip
-#, fuzzy
 msgid "Test launching the commands set for the dark mode"
-msgstr "Indítsa el a sötét módhoz beállított parancsokat"
+msgstr "A sötét módhoz beállított parancsok elindításának tesztelése"

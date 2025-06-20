@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-22 12:08-0400\n"
-"PO-Revision-Date: 2024-11-25 07:14+0100\n"
+"PO-Revision-Date: 2025-06-20 18:52+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. popup_menu.py:95
 msgid "Open Folder"
@@ -64,18 +64,18 @@ msgstr "Panel szöveg"
 
 #. settings-schema.json->visibility-section->description
 msgid "Visibility"
-msgstr ""
+msgstr "Láthatóság"
 
 #. settings-schema.json->show-header->description
 msgid "Include \"Open Folder\" and \"Open in Terminal\""
 msgstr ""
+"Tartalmazza a „Mappa megnyitása” és a „Megnyitás terminálban” funkciókat."
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Tartalmazza a rejtett fájlokat is"
 
 #. settings-schema.json->limit-characters->description
-#, fuzzy
 msgid "Limit the Maximum Number of Characters in the Submenus"
 msgstr "Korlátozza a karakterek maximális számát az almenükben"
 
@@ -93,7 +93,7 @@ msgstr ""
 
 #. settings-schema.json->ordering-section->description
 msgid "Ordering"
-msgstr ""
+msgstr "Rendezés"
 
 #. settings-schema.json->order-by->options
 msgid "Name"
