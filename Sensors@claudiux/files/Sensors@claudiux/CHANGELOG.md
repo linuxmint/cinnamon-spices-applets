@@ -1,3 +1,6 @@
+### v5.5.0~20250620
+  * Add Devuan support.
+
 ### v5.4.2~20250401
   * Minor changes about font size.
   * Code cleanup in applet.js.
