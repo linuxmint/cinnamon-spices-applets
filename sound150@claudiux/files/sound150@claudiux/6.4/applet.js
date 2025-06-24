@@ -2082,14 +2082,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             //~ let _install_playerctl_button = new PopupMenu.PopupIconMenuItem(_("Install playerctl"), "system-software-install", St.IconType.SYMBOLIC);
             let _install_playerctl_button = this.menu.addAction(_("Install playerctl"), () => {
                 Util.spawnCommandLineAsync("bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
-                //~ this._on_reload_this_applet_pressed();
             });
-            this.menu.addMenuItem(_install_playerctl_button);
         }
         if (!this._imagemagick) {
             let _install_imagemagick_button = this.menu.addAction(_("Install imagemagick"), () => {
                 Util.spawnCommandLineAsync("bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
-                //~ this._on_reload_this_applet_pressed();
             });
         }
     }
