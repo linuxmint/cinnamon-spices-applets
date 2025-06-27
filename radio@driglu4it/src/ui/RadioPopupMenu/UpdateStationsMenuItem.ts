@@ -35,6 +35,8 @@ const saveStations = (stationsUnfiltered: RadioStation[]) => {
     // We need to sort our self - even though they should already be sorted - because some stations are wrongly shown first due to leading spaces
     .sort((a, b) => a[0].localeCompare(b[0]));
 
+  global.log("file", `${__meta.path}/allStations.json`);
+
   const file = File.new_for_path(`${__meta.path}/allStations.json`);
 
   if (!file.query_exists(null)) {
