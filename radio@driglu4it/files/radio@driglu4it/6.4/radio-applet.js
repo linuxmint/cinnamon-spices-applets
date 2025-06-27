@@ -4352,6 +4352,12 @@ const moveFileFromTmpDir = (props) => {
         if ((_b = tmpFile.get_path()) === null || _b === void 0 ? void 0 : _b.endsWith(".webp")) {
             throw new Error("Only the cover image has been downloaded. This seems to be a problem with the used Youtube Download Cli tool.");
         }
+        global.log("before moving file", targetDirPath);
+        if (!YoutubeDownloadManager_File.new_for_path(targetDirPath).query_exists(null)) {
+            global.log("inside if");
+            throw new Error("The Download Directory specified in the settings doesn't exist. Please create it manually or change the settings.");
+        }
+        global.log("after checking if target dir exists", targetDirPath);
         const targetFilePath = `${targetDirPath}/${fileName}`;
         const targetFile = YoutubeDownloadManager_File.parse_name(targetFilePath);
         if (targetFile.query_exists(null)) {
