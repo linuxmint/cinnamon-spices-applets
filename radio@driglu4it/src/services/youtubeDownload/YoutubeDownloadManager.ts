@@ -195,7 +195,7 @@ const moveFileFromTmpDir = (props: {
       throw new Error("Only the cover image has been downloaded. This seems to be a problem with the used Youtube Download Cli tool.")
     }
 
-    if (!File.new_for_path(targetDirPath).query_exists(null)) {
+    if (!File.new_for_uri(targetDirPath).query_exists(null) && !File.new_for_path(targetDirPath).query_exists(null)) {
       throw new Error("The Download Directory specified in the settings doesn't exist. Please create it manually or change the settings.");
     }
 
