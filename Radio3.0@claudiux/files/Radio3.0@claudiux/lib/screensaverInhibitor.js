@@ -1,4 +1,4 @@
-// This code come from the applet screen-inhibit@mtwebster.
+// This code comes from the applet screen-inhibit@mtwebster.
 // Author: Michael Webster.
 const Lang = imports.lang;
 const {DBusProxy, DBus} = imports.gi.Gio; // Gio

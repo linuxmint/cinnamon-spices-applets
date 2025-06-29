@@ -1262,6 +1262,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_user_settings() {
+    this.settings.bind("ignoreYT", "ignoreYT");
     this.settings.bind("maximize-vertically", "maximize_vertically");
     this.settings.bind("image-resolution", "res", () => { this.reload_songArt() });
     this.settings.bind("radiopp-is-here", "radiopp_is_here");
@@ -3381,6 +3382,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   download_songArt(title, res="") {
+    if (this.ignoreYT) return;
     if (!YTDL_PROGRAM().includes("yt-dlp")) return;
     if (!file_test(XDG_RUNTIME_DIR+"/mpv_radio_PID", FileTest.EXISTS)) return;
 
@@ -5182,7 +5184,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_onAtStartup._switch.setToggleState(this.switch_on_last_station_at_start_up);
     this.context_menu_item_showLogo._switch.setToggleState(this.show_favicon);
     if (this.context_menu_item_showDesklet) {
-      this.context_menu_item_showDesklet.actor.visible = true;
+      //~ this.context_menu_item_showDesklet.actor.visible = true;
+      this.context_menu_item_showDesklet.actor.visible = !this.ignoreYT;
       this.context_menu_item_showDesklet._switch.setToggleState(this.show_desklet);
     }
     if (this.context_menu_item_configDesklet) {

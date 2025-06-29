@@ -1,3 +1,6 @@
+### v3.5.0~20250629
+  * Add option: Ignore Youtube features.
+
 ###  v3.4.4~20250422
   * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
 
