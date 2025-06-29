@@ -1,0 +1,204 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-06-05 16:59+0200\n"
+"PO-Revision-Date: 2025-01-04 01:29+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.4/applet.js:236 6.4/applet.js:275 6.4/applet.js:277
+msgid "%"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->description
+#. 6.4/applet.js:598
+msgid "Commands"
+msgstr ""
+
+#. 6.4/applet.js:608
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. 6.4/applet.js:616
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. 6.4/applet.js:758
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:759
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. 6.4/applet.js:760 6.4/applet.js:778
+msgid "Desklets"
+msgstr ""
+
+#. 6.4/applet.js:761 6.4/applet.js:779 6.4/applet.js:809
+msgid "Cancel"
+msgstr ""
+
+#. 6.4/applet.js:776
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:777
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. 6.4/applet.js:813
+msgid "Enable the OSD150 extension"
+msgstr ""
+
+#. 6.4/applet.js:814
+msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
+msgstr ""
+
+#. 6.4/applet.js:831
+msgid "Download the OSD150 extension"
+msgstr ""
+
+#. 6.4/applet.js:832
+msgid ""
+"To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
+"Click on the Download button then search for OSD150 and select the ⬇ button."
+msgstr ""
+
+#. 6.4/applet.js:1864
+msgid "The 'imagemagick' package is required!"
+msgstr ""
+
+#. 6.4/applet.js:1865
+msgid "Please select 'Install imagemagick' in this menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
+#. 6.4/applet.js:2070
+msgid "Remove the OsdWithNumber extension"
+msgstr ""
+
+#. 6.4/applet.js:2090
+msgid "Install imagemagick"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_menus->title
+msgid "Menus"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenu2->title
+msgid "Context Menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon1->title
+msgid "Icon appearance"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon2->title
+msgid "Icon colors"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionIcon3->title
+msgid "Scrolling"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionSound5->title
+msgid "Remove incompatible extensions"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionCommands->title
+msgid "Custom commands"
+msgstr ""
+
+#. 6.4->settings-schema.json->showMediaOptical->description
+msgid "Show Media-Optical icon"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->description
+msgid "View Full Album Art"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
+msgid ""
+"When unchecked, Album Art in the menu may be partially covered by Artist and "
+"Title."
+msgstr ""
+
+#. 6.4->settings-schema.json->keepAppListOpen->description
+msgid "Keep the App selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepOutputListOpen->description
+msgid "Keep the Output Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepInputListOpen->description
+msgid "Keep the Input Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepCommandListOpen->description
+msgid "Keep the Command selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->description
+msgid "If the title is too long, end it with:"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->tooltip
+msgid "Emoji accepted"
+msgstr ""
+
+#. 6.4->settings-schema.json->showalbumDelay->description
+msgid "Delay between icon and album art display (seconds)"
+msgstr ""
+
+#. 6.4->settings-schema.json->reverseScrolling->description
+msgid "Reverse scrolling effect"
+msgstr ""
+
+#. 6.4->settings-schema.json->showVolumeValue->description
+msgid "Show volume level in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showPercent->description
+msgid "Show '%' in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->OSDhorizontal->description
+msgid "Show horizontal OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->showBarLevel->description
+msgid "Show bar level in OSD"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-label->description
+msgid ""
+"These commands will appear in the context menu once you've reloaded this "
+"applet."
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->columns->title
+msgid "Title"
+msgstr ""
+
+#. 6.4->settings-schema.json->custom-commands-list->columns->title
+msgid "Command"
+msgstr ""

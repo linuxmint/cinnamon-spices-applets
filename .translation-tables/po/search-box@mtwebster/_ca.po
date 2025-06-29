@@ -1,0 +1,10 @@
+# INTERNET SEARCH BOX
+# This file is put in the public domain.
+# mtwebster, 2016
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->section-keybinding->title
+msgid "Keyboard shortcuts"
+msgstr ""

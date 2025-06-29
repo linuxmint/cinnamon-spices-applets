@@ -1,0 +1,116 @@
+# ALWAYSON
+# This file is put in the public domain.
+# Krivetochka, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AlwaysOn@krivetochka 1.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-03 19:31-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:28
+msgid "Click here to activate AlwaysOn"
+msgstr "Hier drücken um AlwaysOn zu aktivieren"
+
+#. applet.js:66
+msgid "AlwaysOn activated"
+msgstr "AlwaysOn aktiviert"
+
+#. applet.js:66
+msgid "Your computer will now stay active."
+msgstr "Dein Computer wird nun aktiv bleiben."
+
+#. applet.js:74
+msgid "Deactivate AlwaysOn"
+msgstr "AlwaysOn deaktivieren"
+
+#. applet.js:85
+msgid "AlwaysOn deactivated"
+msgstr "AlwaysOn deaktiviert"
+
+#. applet.js:85
+msgid "Now your computer can go to sleep."
+msgstr "Jetzt kann dein Computer in den Ruhezustand gehen."
+
+#. applet.js:93
+msgid "Activate AlwaysOn"
+msgstr "AlwaysOn aktivieren"
+
+#. metadata.json->name
+msgid "AlwaysOn"
+msgstr "AlwaysOn"
+
+#. metadata.json->description
+msgid ""
+"When AlwaysOn is activated, the screen will remain on, and the computer will "
+"not go to sleep. The behavior can be changed in the applet settings."
+msgstr ""
+"Wenn AlwaysOn aktiviert ist, bleibt der Bildschirm eingeschaltet, und der "
+"Computer wechselt nicht in den Ruhezustand. Das Verhalten kann in den Applet-"
+"Einstellungen geändert werden."
+
+#. settings-schema.json->section-general->description
+msgid "General"
+msgstr "Allgemein"
+
+#. settings-schema.json->change-affected-settings->description
+msgid "Click to select which settings will be affected by this applet"
+msgstr ""
+"Klicke hier, um auszuwählen, welche Einstellungen von diesem Applet "
+"betroffen sein sollen."
+
+#. settings-schema.json->idle-dim-battery->description
+msgid "Dim the screen when idle"
+msgstr "Dimme den Bildschirm im Leerlauf"
+
+#. settings-schema.json->sleep-inactive->description
+msgid "Sleep mode when idle"
+msgstr "Ruhezustand im Leerlauf"
+
+#. settings-schema.json->sleep-display->description
+msgid "Turning off the screen when idle"
+msgstr "Bildschirm ausschalten im Leerlauf"
+
+#. settings-schema.json->key-bind->description
+msgid "Select a combination to activate the applet"
+msgstr "Wähle eine Tastenkombination aus um das applet zu aktivieren"
+
+#. settings-schema.json->section-not->description
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#. settings-schema.json->notificate->description
+msgid "Send notifications from this applet"
+msgstr "Senden von Benachrichtigungen von diesem Applet"
+
+#. settings-schema.json->section-icon->description
+msgid "Appearance"
+msgstr "Aussehen"
+
+#. settings-schema.json->choose-icon->description
+msgid "Choose icon type"
+msgstr "Icontyp auswählen"
+
+#. settings-schema.json->choose-icon->options
+msgid "Symbolic"
+msgstr "Symbolisch"
+
+#. settings-schema.json->choose-icon->options
+msgid "Colored"
+msgstr "Gefärbt"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet from the panel (works best with notifications enabled)"
+msgstr ""
+"Applet aus dem Panel ausblenden (funktioniert am besten, wenn "
+"Benachrichtigungen aktiviert sind)"
