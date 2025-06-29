@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-29 15:49+0200\n"
-"PO-Revision-Date: 2025-03-30 14:49-0300\n"
+"PO-Revision-Date: 2025-06-29 10:05-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:286
 msgid "unassigned"
@@ -954,7 +954,7 @@ msgstr "Conservación del espacio en el disco duro"
 
 #. settings-schema.json->sectionYTIgnore->title
 msgid "Ignore YT"
-msgstr ""
+msgstr "Ignorar YT"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -1910,13 +1910,15 @@ msgstr "Resalte el icono del applet durante la grabación en segundo plano"
 
 #. settings-schema.json->ignoreYT->description
 msgid "Ignore Youtube features"
-msgstr ""
+msgstr "Ignorar las funciones de YouTube"
 
 #. settings-schema.json->ignoreYT->tooltip
 msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
+"Ignorar las funciones de YouTube reduce la carga de la CPU. Pero cargar la "
+"carátula del álbum se vuelve imposible."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
