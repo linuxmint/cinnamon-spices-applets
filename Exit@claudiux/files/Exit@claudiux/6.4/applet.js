@@ -10,6 +10,7 @@ const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
 const { restartCinnamon } = imports.ui.main;
+const ScreensaverInhibitor = require("./screensaverInhibitor");
 //~ const Mainloop = imports.mainloop;
 //mainloopTools:
 const {
@@ -74,6 +75,7 @@ class ExitApplet extends Applet.IconApplet {
         this.can_shutdown = false;
 
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
+        this.screensaver_inhibitor = new ScreensaverInhibitor.ScreensaverInhibitor(this);
 
         this.set_applet_icon_symbolic_name("system-shutdown");
         this.set_applet_tooltip(_(metadata.name));
@@ -260,6 +262,7 @@ class ExitApplet extends Applet.IconApplet {
                 item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
+                    this.screensaver_inhibitor.uninhibit_screensaver();
                     launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
                     this.menu.close(true);
                     restartCinnamon(false);
@@ -343,6 +346,7 @@ class ExitApplet extends Applet.IconApplet {
                 item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
+                    this.screensaver_inhibitor.uninhibit_screensaver();
                     launcher.spawnv(["systemctl", "poweroff"]);
                 });
                 this.menu.addMenuItem(item);
