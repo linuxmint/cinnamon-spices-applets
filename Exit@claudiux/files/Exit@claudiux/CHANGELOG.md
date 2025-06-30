@@ -1,3 +1,6 @@
+### v1.6.1~20250630
+* Takes screensaver into account.
+
 ### v1.6.0~20250221
 * It is now possible to log out even when the screensaver is locked in deactivated mode.
 
