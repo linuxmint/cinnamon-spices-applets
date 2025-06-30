@@ -1,3 +1,6 @@
+### v5.6.0~20250630
+  * Ignores invalid sensors.
+
 ### v5.5.0~20250620
   * Add Devuan support.
 
