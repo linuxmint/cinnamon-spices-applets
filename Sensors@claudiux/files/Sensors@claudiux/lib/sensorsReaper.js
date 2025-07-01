@@ -208,7 +208,7 @@ class SensorsReaper {
 
   async _sensors_reaped(output) {
     if (typeof(output) === "string")
-      output = output.replace(/,\n.*}/g, "\n\t}");
+      output = output.replace(/,\n.*}/g, "\n\t}").replace(/NaN/g, "null");
     this.raw_data = JSON.parse(output);
     //~ log("this.raw_data: "+JSON.stringify(this.raw_data, null, "\t"), true);
     // LOCAL_DATA = {

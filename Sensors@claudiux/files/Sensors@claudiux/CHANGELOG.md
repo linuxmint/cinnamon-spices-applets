@@ -1,3 +1,6 @@
+### v5.6.1~20250701
+  * Fixes bad data in json file.
+
 ### v5.6.0~20250630
   * Ignores invalid sensors.
 
