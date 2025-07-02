@@ -48,6 +48,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.groupBuffer = [];
 
             this.initialized = false; // some callbacks are triggered multiple times at startup without values been changed
+            this.mouseEntered = false;
             this.dragging = false;
             this.dragPlaceholder = null;
             this.dragPlaceholderParent = null;
@@ -459,7 +460,15 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     onMouseEnter(event) {
-        if (this.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+        if (!this.openByHover) return
+        this.mouseEntered = true;
+
+        if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+
+        if (!this.menu.isOpen && !this.hoverTimeoutID) {
             this.hoverTimeoutID = setTimeout(() => {
                 if (!this._applet_context_menu.isOpen) {
                     this.menu.open();
@@ -469,9 +478,25 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     onMouseLeave(event) {
+        if (!this.openByHover) return
+        this.mouseEntered = false;
+
+        this.leaveTimeoutID = setTimeout(() => {
+            this.checkMouseEntered();
+        }, this.openByHoverDelay);
+
         if (this.hoverTimeoutID) {
             clearTimeout(this.hoverTimeoutID);
             this.hoverTimeoutID = undefined;
+        }
+    }
+
+    checkMouseEntered() {
+        if (this.openByHover && 
+            this.menu.isOpen &&
+            !this.menu.isContextOpen &&
+            !this.mouseEntered) {
+                this.menu.close();
         }
     }
 
@@ -605,6 +630,9 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this.pointerX = 0;
             this.pointerY = 0;
             this.actorPlaced = false;
+
+            this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         } catch (error) {
             global.log(error);
         }
@@ -823,6 +851,24 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         this.actor.grab_key_focus(); // necessary to recalc the width
     }
 
+    onMouseEnter(event) {
+        if (!this.applet.openByHover) return
+        this.applet.mouseEntered = true;
+
+        if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+    }
+
+    onMouseLeave(event) {
+        if (!this.applet.openByHover) return
+        this.applet.mouseEntered = false;
+
+        this.leaveTimeoutID = setTimeout(() => {
+            this.applet.checkMouseEntered();
+        }, this.applet.openByHoverDelay);
+    }
 
     handleDragOver(source, actor, x, y, time) {
         if (this.applet.dragOverSubMenu) {
@@ -878,6 +924,11 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
             this.iconSize = iconSize;
             this.iconType = useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
 
+            this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+            this._signals.connect(this.menu.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.menu.actor, 'leave-event', this.onMouseLeave, this);
+
             this._menuItems = [];
 
             this.buttonDelete = this._createButton('delete');
@@ -924,9 +975,6 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
         this._children.unshift(params);
         this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
-
-        this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
-        this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         
         this.actor.add_actor(this._icon);
     }
@@ -1125,17 +1173,34 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     }
 
     onMouseEnter(event) {
-        if (this.applet.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+        if (!this.applet.openByHover) return
+        
+        if (!this.menu.isOpen && !this.hoverTimeoutID) {
             this.hoverTimeoutID = setTimeout(() => {
-                this.menu.open();
+                if (!this.applet.menu.isContextOpen) {
+                    this.applet.menu.closeMenuGroupItems();
+                    this.menu.open();
+                }
             }, this.applet.openByHoverDelay);
+        } else if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
         }
     }
 
     onMouseLeave(event) {
+        if (!this.applet.openByHover) return
+
         if (this.hoverTimeoutID) {
             clearTimeout(this.hoverTimeoutID);
             this.hoverTimeoutID = undefined;
+        } else if (!this.applet.menu.isContextOpen) {
+            this.leaveTimeoutID = setTimeout(() => {
+                if (this.menu.isOpen && !this.applet.menu.isContextOpen) {
+                    this.applet.checkMouseEntered();
+                    this.menu.close();
+                }
+            }, this.applet.openByHoverDelay);
         }
     }
 
