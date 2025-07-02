@@ -624,6 +624,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     _init(applet, orientation) {
         try {
             super._init(applet, orientation);
+            
             this.applet = applet;
             this._menuAppItems = [];
             this._menuGroupItems = [];
@@ -637,7 +638,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
             this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -958,7 +959,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 return this.acceptMenuDrop(source, actor, x, y, time);
             };
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -1279,7 +1280,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 this._removeIcon();
             }
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -1514,7 +1515,7 @@ class MyPopupSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
             this.blue = blue;
             this.alpha = alpha;
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
