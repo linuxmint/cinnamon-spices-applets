@@ -49,6 +49,7 @@ class MyApplet extends Applet.TextIconApplet {
 
             this.initialized = false; // some callbacks are triggered multiple times at startup without values been changed
             this.mouseEntered = false;
+            this.subMenuClosedRecently = false;  // to prevent the menu from being closed after the submenus have collapsed
             this.dragging = false;
             this.dragPlaceholder = null;
             this.dragPlaceholderParent = null;
@@ -462,6 +463,7 @@ class MyApplet extends Applet.TextIconApplet {
     onMouseEnter(event) {
         if (!this.openByHover) return
         this.mouseEntered = true;
+        this.subMenuClosedRecently = false;
 
         if (this.leaveTimeoutID) {
             clearTimeout(this.leaveTimeoutID);
@@ -495,7 +497,8 @@ class MyApplet extends Applet.TextIconApplet {
         if (this.openByHover && 
             this.menu.isOpen &&
             !this.menu.isContextOpen &&
-            !this.mouseEntered) {
+            !this.mouseEntered && 
+            !this.subMenuClosedRecently) {
                 this.menu.close();
         }
     }
@@ -854,6 +857,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     onMouseEnter(event) {
         if (!this.applet.openByHover) return
         this.applet.mouseEntered = true;
+        this.applet.subMenuClosedRecently = false;
 
         if (this.leaveTimeoutID) {
             clearTimeout(this.leaveTimeoutID);
@@ -1178,6 +1182,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         if (!this.menu.isOpen && !this.hoverTimeoutID) {
             this.hoverTimeoutID = setTimeout(() => {
                 if (!this.applet.menu.isContextOpen) {
+                    this.applet.subMenuClosedRecently = true;
                     this.applet.menu.closeMenuGroupItems();
                     this.menu.open();
                 }
@@ -1197,6 +1202,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         } else if (!this.applet.menu.isContextOpen) {
             this.leaveTimeoutID = setTimeout(() => {
                 if (this.menu.isOpen && !this.applet.menu.isContextOpen) {
+                    this.applet.subMenuClosedRecently = true;
                     this.applet.checkMouseEntered();
                     this.menu.close();
                 }
