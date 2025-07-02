@@ -435,7 +435,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     on_applet_clicked(event) {
-        if (this.activeDrag()) {
+        if (this.dragging) {
             this.endDrag();
         }
         this.menu.toggle();
@@ -453,7 +453,7 @@ class MyApplet extends Applet.TextIconApplet {
 
     on_menu_state_changed(menu, isOpen, sourceActor) {
         this.toggleIcon();
-        if (!isOpen && this.menu.isContextOpen()) {
+        if (!isOpen && this.menu.isContextOpen) {
             this.menu.closeContext();
         }
     }
@@ -504,10 +504,6 @@ class MyApplet extends Applet.TextIconApplet {
         }
 
         this.dragging = false;
-    }
-
-    activeDrag() {
-        return this.dragging;
     }
 
     handleDrag(source, x, y, box, indent) {
@@ -604,7 +600,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this._menuAppItems = [];
             this._menuGroupItems = [];
 
-            this.contextOpen = false;
+            this.isContextOpen = false;
             this.hotkeyTriggered = false;
             this.pointerX = 0;
             this.pointerY = 0;
@@ -816,20 +812,17 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     }
 
     openContext() {
-        this.contextOpen = true;
+        this.isContextOpen = true;
         this.expandMenu();
     }
 
     closeContext() {
-        this.contextOpen = false;
+        this.isContextOpen = false;
         this.unselectMenuItems();
         this.collapseMenu();
         this.actor.grab_key_focus(); // necessary to recalc the width
     }
 
-    isContextOpen() {
-        return this.contextOpen;
-    }
 
     handleDragOver(source, actor, x, y, time) {
         if (this.applet.dragOverSubMenu) {
@@ -973,7 +966,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     _onItemClicked(button) {
         switch (button) {
             case 1:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -983,7 +976,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 }
                 break;
             case 3:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1267,7 +1260,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
     _onItemClicked(button) {
         switch (button) {
             case 1:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1278,12 +1271,12 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 }
                 break;
             case 2:
-                if (!this.applet.menu.isContextOpen()) {
+                if (!this.applet.menu.isContextOpen) {
                     this.applet.run(this.name, this.icon, this.command);
                 }
                 break;
             case 3:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
