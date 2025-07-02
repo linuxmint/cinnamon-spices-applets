@@ -47,6 +47,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.instanceId = instanceId;
             this.groupBuffer = [];
 
+            this.initialized = false; // some callbacks are triggered multiple times at startup without values been changed
             this.dragging = false;
             this.dragPlaceholder = null;
             this.dragPlaceholderParent = null;
@@ -65,6 +66,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.updateHotKey();
             this.initIcons();
             this.initLabel();
+
+            setTimeout(() => {this.initialized = true}, 500);
         } catch (e) {
             global.logError(e);
         }
@@ -73,8 +76,12 @@ class MyApplet extends Applet.TextIconApplet {
     bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.uuid, this.instanceId);
 
-        this.settings.bind('list-applications', 'listApplications', this.updateGroups);
-        this.settings.bind('list-groups', 'listGroups', this.updateMenu);
+        this.settings.bind('list-applications', 'listApplications', (event) => {
+            if (this.initialized) this.updateGroups();
+        });
+        this.settings.bind('list-groups', 'listGroups', (event) => {
+            if (this.initialized) this.updateMenu();
+        });
 
         this.settings.bind('visible-launcher-label', 'visibleLauncherLabel', this.initLabel);
         this.settings.bind('launcher-label', 'launcherLabel', this.initLabel);
