@@ -1,0 +1,18 @@
+# NOTIFICATIONS ENHANCED
+# This file is put in the public domain.
+# hilyxx, 2024
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->showDisturbIcon->description
+msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
+msgstr ""
+
+#. settings-schema.json->keyMute->description
+msgid "Enable or disable notifications"
+msgstr ""
+
+#. settings-schema.json->keyMute->tooltip
+msgid "Set keybinding(s) to enable or disable notifications."
+msgstr ""

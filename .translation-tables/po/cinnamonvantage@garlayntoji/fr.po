@@ -1,0 +1,122 @@
+# CINNAMON VANTAGE
+# This file is put in the public domain.
+# Garlayntoji, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cinnamonvantage@garlayntoji 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-08-08 23:22+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:66
+msgid "Cinnamon Vantage"
+msgstr "Cinnamon Vantage"
+
+#. settings-schema.json->fnLock-section->title
+#: applet.js:77
+msgid "Fn Lock"
+msgstr "Verrouillage Fn"
+
+#: applet.js:81
+msgid "Super/Windows key"
+msgstr "Touche Super/Windows"
+
+#. settings-schema.json->touchpad-section->title
+#: applet.js:85
+msgid "Touchpad"
+msgstr "Pavé tactile"
+
+#. settings-schema.json->conservationMode-section->title
+#: applet.js:89
+msgid "Battery conservation mode"
+msgstr "Mode de conservation de la batterie"
+
+#. settings-schema.json->rapidCharge-section->title
+#: applet.js:93
+msgid "Battery fast charge mode"
+msgstr "Mode de charge rapide de la batterie"
+
+#: applet.js:97
+msgid "Always On USB"
+msgstr "USB toujours activé"
+
+#. settings-schema.json->overdrive-section->title
+#: applet.js:101
+msgid "Display Overdrive"
+msgstr "Overdrive de l'écran"
+
+#. settings-schema.json->gsync-section->title
+#: applet.js:105
+msgid "Hybrid graphics mode"
+msgstr "Mode graphique hybride"
+
+#: applet.js:248
+msgid "CinnamonVantage"
+msgstr "CinnamonVantage"
+
+#: applet.js:249
+msgid "System reboot required"
+msgstr "Redémarrage du système requis"
+
+#: applet.js:250
+msgid "A system reboot is required for this change to take effect."
+msgstr "Un redémarrage du système est nécessaire pour que ce changement prenne effet."
+
+#. metadata.json->description
+msgid "Displays information and togglables about Lenovo Legion hardware"
+msgstr "Affiche des informations et des éléments activables concernant le matériel Lenovo Legion"
+
+#. settings-schema.json->panel->title
+msgid "Cinnamon Vantage settings"
+msgstr "Paramètres de Cinnamon Vantage"
+
+#. settings-schema.json->winkey-section->title
+msgid "Super key"
+msgstr "Touche Super"
+
+#. settings-schema.json->usbCharging-section->title
+msgid "Alway On USB"
+msgstr "USB toujours activé"
+
+#. settings-schema.json->fnLock->description
+msgid "Access multimedia keys without holding Fn"
+msgstr "Accéder aux touches multimédia sans maintenir Fn"
+
+#. settings-schema.json->winkey->description
+msgid "Enables the Super/Windows key"
+msgstr "Active la touche Super/Windows"
+
+#. settings-schema.json->touchpad->description
+msgid "Enables the laptop's touchpad"
+msgstr "Active le pavé tactile du portable"
+
+#. settings-schema.json->conservationMode->description
+msgid "Limits the charge of the battery to extend its lifespan"
+msgstr "Limite la charge de la batterie pour prolonger sa durée de vie"
+
+#. settings-schema.json->rapidCharge->description
+msgid "Allow the battery to charge faster"
+msgstr "Permet à la batterie de se recharger plus rapidement"
+
+#. settings-schema.json->usbCharging->description
+msgid "Keeps the USB ports always powered on"
+msgstr "Garde les ports USB toujours alimentés"
+
+#. settings-schema.json->overdrive->description
+msgid "Reduces the laptop's display latency"
+msgstr "Réduit la latence de l'écran du portable"
+
+#. settings-schema.json->gsync->description
+msgid "Enables the laptop's integrated graphics.\n This setting requires a reboot to take effect."
+msgstr "Active la carte graphique intégrée du portable.\n Ce paramètre nécessite un redémarrage pour prendre effet."
+
