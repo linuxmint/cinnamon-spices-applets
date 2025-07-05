@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: CassiaWindowList@klangman 2.3.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-09 22:44-0400\n"
+"POT-Creation-Date: 2025-07-05 00:09-0400\n"
 "PO-Revision-Date: 2025-04-10 11:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,32 +18,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. 4.0/applet.js:584 6.0/applet.js:584 6.4/applet.js:562
+#. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
 msgid "all buttons"
 msgstr "minden gomb"
 
-#. 4.0/applet.js:3266 6.0/applet.js:3266 6.4/applet.js:3238
+#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
+msgid "windows in this group"
+msgstr ""
+
+#. 4.0/applet.js:3341 6.0/applet.js:3341 6.4/applet.js:3313
 msgid "Applet Preferences"
 msgstr "Kisalkalmazás beállítások"
 
-#. 4.0/applet.js:3270 6.0/applet.js:3270 6.4/applet.js:3242
+#. 4.0/applet.js:3345 6.0/applet.js:3345 6.4/applet.js:3317
 msgid "About..."
 msgstr "Névjegy…"
 
-#. 4.0/applet.js:3274 6.0/applet.js:3274 6.4/applet.js:3246
+#. 4.0/applet.js:3349 6.0/applet.js:3349 6.4/applet.js:3321
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#. 4.0/applet.js:3278 6.0/applet.js:3278 6.4/applet.js:3250
+#. 4.0/applet.js:3353 6.0/applet.js:3353 6.4/applet.js:3325
 msgid "Website"
 msgstr "Weboldal"
 
-#. 4.0/applet.js:3282 6.0/applet.js:3282 6.4/applet.js:3254
+#. 4.0/applet.js:3357 6.0/applet.js:3357 6.4/applet.js:3329
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#. 4.0/applet.js:3284 6.0/applet.js:3284 6.4/applet.js:3256
+#. 4.0/applet.js:3359 6.0/applet.js:3359 6.4/applet.js:3331
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
 
@@ -65,76 +69,76 @@ msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példány
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3293 6.0/applet.js:3293 6.4/applet.js:3265
+#. 4.0/applet.js:3368 6.0/applet.js:3368 6.4/applet.js:3340
 msgid "Open new window"
 msgstr "Új ablak megnyitása"
 
-#. 4.0/applet.js:3301 6.0/applet.js:3301 6.4/applet.js:3273
+#. 4.0/applet.js:3376 6.0/applet.js:3376 6.4/applet.js:3348
 msgid "Remove from panel"
 msgstr "Eltávolítás a panelról"
 
-#. 4.0/applet.js:3303 6.0/applet.js:3303 6.4/applet.js:3275
+#. 4.0/applet.js:3378 6.0/applet.js:3378 6.4/applet.js:3350
 msgid "Remove from this workspace"
 msgstr "Eltávolítás erről a munkaterületről"
 
-#. 4.0/applet.js:3309 6.0/applet.js:3309 6.4/applet.js:3281
+#. 4.0/applet.js:3384 6.0/applet.js:3384 6.4/applet.js:3356
 msgid "Pin to panel"
 msgstr "Panelhez rögzítés"
 
-#. 4.0/applet.js:3311 6.0/applet.js:3311 6.4/applet.js:3283
+#. 4.0/applet.js:3386 6.0/applet.js:3386 6.4/applet.js:3358
 msgid "Pin to this workspace"
 msgstr "Erre a munkaterületre rögzítés"
 
-#. 4.0/applet.js:3352 6.0/applet.js:3352 6.4/applet.js:3324
+#. 4.0/applet.js:3427 6.0/applet.js:3427 6.4/applet.js:3399
 msgid "Pin to other workspaces"
 msgstr "Más munkaterületre rögzítés"
 
-#. 4.0/applet.js:3373 6.0/applet.js:3373 6.4/applet.js:3345
+#. 4.0/applet.js:3448 6.0/applet.js:3448 6.4/applet.js:3420
 msgid "Pin to all workspaces"
 msgstr "Az összes munkaterületre rögzítés"
 
-#. 4.0/applet.js:3391 6.0/applet.js:3391 6.4/applet.js:3363
+#. 4.0/applet.js:3466 6.0/applet.js:3466 6.4/applet.js:3438
 msgid "Pin to launcher"
 msgstr "Alkalmazásindítóhoz rögzítés"
 
-#. 4.0/applet.js:3409 4.0/applet.js:3614 6.0/applet.js:3409 6.0/applet.js:3614
-#. 6.4/applet.js:3381 6.4/applet.js:3583
+#. 4.0/applet.js:3484 4.0/applet.js:3689 6.0/applet.js:3484 6.0/applet.js:3689
+#. 6.4/applet.js:3456 6.4/applet.js:3658
 msgid "Add new Hotkey for"
 msgstr "Új gyorsbillentyű hozzáadása ehhez"
 
-#. 4.0/applet.js:3423 6.0/applet.js:3423 6.4/applet.js:3395
+#. 4.0/applet.js:3498 6.0/applet.js:3498 6.4/applet.js:3470
 msgid "Recent files"
 msgstr "Nemrég használt fájlok"
 
-#. 4.0/applet.js:3447 6.0/applet.js:3447 6.4/applet.js:3419
+#. 4.0/applet.js:3522 6.0/applet.js:3522 6.4/applet.js:3494
 msgid "Places"
 msgstr "Helyek"
 
-#. 4.0/applet.js:3490 6.0/applet.js:3490 6.4/applet.js:3462
+#. 4.0/applet.js:3565 6.0/applet.js:3565 6.4/applet.js:3537
 msgid "Always on top"
 msgstr "Mindig felül"
 
-#. 4.0/applet.js:3502 6.0/applet.js:3502 6.4/applet.js:3474
+#. 4.0/applet.js:3577 6.0/applet.js:3577 6.4/applet.js:3549
 msgid "Only on this workspace"
 msgstr "Csak ezen a munkaterületen"
 
-#. 4.0/applet.js:3504 6.0/applet.js:3504 6.4/applet.js:3476
+#. 4.0/applet.js:3579 6.0/applet.js:3579 6.4/applet.js:3551
 msgid "Visible on all workspaces"
 msgstr "Minden munkaterületen látható"
 
-#. 4.0/applet.js:3505 6.0/applet.js:3505 6.4/applet.js:3477
+#. 4.0/applet.js:3580 6.0/applet.js:3580 6.4/applet.js:3552
 msgid "Move to another workspace"
 msgstr "Áthelyezés másik munkaterületre"
 
-#. 4.0/applet.js:3514 6.0/applet.js:3514 6.4/applet.js:3486
+#. 4.0/applet.js:3589 6.0/applet.js:3589 6.4/applet.js:3561
 msgid " (this workspace)"
 msgstr " (ez a munkaterület)"
 
-#. 4.0/applet.js:3527 6.0/applet.js:3527 6.4/applet.js:3499
+#. 4.0/applet.js:3602 6.0/applet.js:3602 6.4/applet.js:3574
 msgid "Move to another monitor"
 msgstr "Áthelyezés a másik kijelzőre"
 
-#. 4.0/applet.js:3535 6.0/applet.js:3535 6.4/applet.js:3507
+#. 4.0/applet.js:3610 6.0/applet.js:3610 6.4/applet.js:3582
 msgid "Monitor"
 msgstr "Kijelző"
 
@@ -156,48 +160,48 @@ msgstr "Kijelző"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3552 6.0/applet.js:3552 6.4/applet.js:3521
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3596
 msgid "Move window here"
 msgstr "Ablak mozdítása ide"
 
-#. 4.0/applet.js:3569 6.0/applet.js:3569 6.4/applet.js:3538
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
 msgid "unassigned"
 msgstr "nincs társítva"
 
-#. 4.0/applet.js:3580 4.0/applet.js:3611 6.0/applet.js:3580 6.0/applet.js:3611
-#. 6.4/applet.js:3549 6.4/applet.js:3580
+#. 4.0/applet.js:3655 4.0/applet.js:3686 6.0/applet.js:3655 6.0/applet.js:3686
+#. 6.4/applet.js:3624 6.4/applet.js:3655
 msgid "Assign window to a hotkey"
 msgstr "Az ablak hozzárendelése egy gyorsbillentyűhöz"
 
-#. 4.0/applet.js:3634 6.0/applet.js:3634 6.4/applet.js:3603
+#. 4.0/applet.js:3709 6.0/applet.js:3709 6.4/applet.js:3678
 msgid "Change application label contents"
 msgstr "Az alkalmazáscímke tartalmának módosítása"
 
-#. 4.0/applet.js:3637 6.0/applet.js:3637 6.4/applet.js:3606
+#. 4.0/applet.js:3712 6.0/applet.js:3712 6.4/applet.js:3681
 msgid "Remove custom setting"
 msgstr "Egyéni beállítás eltávolítása"
 
-#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+#. 4.0/applet.js:3719 6.0/applet.js:3719 6.4/applet.js:3688
 msgid "Use window title"
 msgstr "Ablakcím használata"
 
-#. 4.0/applet.js:3651 6.0/applet.js:3651 6.4/applet.js:3620
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
 msgid "Use application name"
 msgstr "Alkalmazásnév használata"
 
-#. 4.0/applet.js:3658 6.0/applet.js:3658 6.4/applet.js:3627
+#. 4.0/applet.js:3733 6.0/applet.js:3733 6.4/applet.js:3702
 msgid "No label"
 msgstr "Nincs címke"
 
-#. 4.0/applet.js:3669 6.0/applet.js:3669 6.4/applet.js:3638
+#. 4.0/applet.js:3744 6.0/applet.js:3744 6.4/applet.js:3713
 msgid "Ungroup application windows"
 msgstr "Ablakokat ne csoportosítsa alkalmazás szerint"
 
-#. 4.0/applet.js:3677 6.0/applet.js:3677 6.4/applet.js:3646
+#. 4.0/applet.js:3752 6.0/applet.js:3752 6.4/applet.js:3721
 msgid "Group application windows"
 msgstr "Alkalmazás ablakok csoportosítása"
 
-#. 4.0/applet.js:3690 6.0/applet.js:3690 6.4/applet.js:3659
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 
@@ -219,39 +223,39 @@ msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3718 6.0/applet.js:3718 6.4/applet.js:3687
+#. 4.0/applet.js:3793 6.0/applet.js:3793 6.4/applet.js:3762
 msgid "Move titlebar on to screen"
 msgstr "Címsor mozgatása a kijelzőre"
 
-#. 4.0/applet.js:3723 6.0/applet.js:3723 6.4/applet.js:3692
+#. 4.0/applet.js:3798 6.0/applet.js:3798 6.4/applet.js:3767
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#. 4.0/applet.js:3727 6.0/applet.js:3727 6.4/applet.js:3696
+#. 4.0/applet.js:3802 6.0/applet.js:3802 6.4/applet.js:3771
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#. 4.0/applet.js:3733 6.0/applet.js:3733 6.4/applet.js:3702
+#. 4.0/applet.js:3808 6.0/applet.js:3808 6.4/applet.js:3777
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#. 4.0/applet.js:3741 6.0/applet.js:3741 6.4/applet.js:3710
+#. 4.0/applet.js:3816 6.0/applet.js:3816 6.4/applet.js:3785
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
+#. 4.0/applet.js:3818 6.0/applet.js:3818 6.4/applet.js:3787
 msgid "Close other windows for application"
 msgstr "Zárja be a többi ablakot az alkalmazáshoz"
 
-#. 4.0/applet.js:3764 6.0/applet.js:3764 6.4/applet.js:3733
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#. 4.0/applet.js:3766 6.0/applet.js:3766 6.4/applet.js:3735
+#. 4.0/applet.js:3841 6.0/applet.js:3841 6.4/applet.js:3810
 msgid "Close all windows for application"
 msgstr "Zárja be az összes ablakot az alkalmazáshoz"
 
-#. 4.0/applet.js:3782 6.0/applet.js:3782 6.4/applet.js:3751
+#. 4.0/applet.js:3857 6.0/applet.js:3857 6.4/applet.js:3826
 msgid "Close"
 msgstr "Bezárás"
 
@@ -317,8 +321,16 @@ msgstr "Ablaklista gomb címke beállításai"
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
 #. 6.4->settings-schema.json->caption-number-settings->title
-msgid "Number label settings"
+#, fuzzy
+msgid "Icon overlay label settings"
 msgstr "Számcímke beállítások"
+
+#. 4.0->settings-schema.json->caption-progress-settings->title
+#. 6.0->settings-schema.json->caption-progress-settings->title
+#. 6.4->settings-schema.json->caption-progress-settings->title
+#, fuzzy
+msgid "Progress settings"
+msgstr "Gyorsbillentyűk beállításai"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -394,13 +406,10 @@ msgstr "Soha"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
-#. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
-#. 6.0->settings-schema.json->display-number->options
 #. 6.4->settings-schema.json->display-caption-for->options
 #. 6.4->settings-schema.json->display-caption-for-pined->options
-#. 6.4->settings-schema.json->display-number->options
 msgid "Always"
 msgstr "Mindig"
 
@@ -455,10 +464,11 @@ msgstr "Címkék megjelenítése a rögzített gombokhoz"
 #. 4.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.4->settings-schema.json->display-caption-for-pined->tooltip
+#, fuzzy
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
-"Running: Only pinned window that are running will have a label\n"
+"Running: Only pinned windows that are running will have a label\n"
 "Focused: Only the pinned window with focus will have a label"
 msgstr ""
 "Soha: Egy rögzített ablaknak sem lesz címkéje\n"
@@ -528,13 +538,34 @@ msgid "Minimized and pinned"
 msgstr "Minimalizált és rögzített"
 
 #. 4.0->settings-schema.json->display-indicators->options
-#. 4.0->settings-schema.json->group-windows->options
+#. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->display-indicators->options
-#. 6.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->number-type->options
 #. 6.4->settings-schema.json->display-indicators->options
-#. 6.4->settings-schema.json->group-windows->options
-msgid "Automatic"
-msgstr "Automatikus"
+#. 6.4->settings-schema.json->number-type->options
+msgid "Application group window count"
+msgstr "Alkalmazáscsoport ablakok száma"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+#, fuzzy
+msgid "Application group indicator (⋮)"
+msgstr "Alkalmazáscsoport ablakok száma"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+#, fuzzy
+msgid "Workspace number (smart)"
+msgstr "Munkaterület száma"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+#, fuzzy
+msgid "Monitor number (smart)"
+msgstr "Kijelzők száma"
 
 #. 4.0->settings-schema.json->display-indicators->description
 #. 6.0->settings-schema.json->display-indicators->description
@@ -546,35 +577,25 @@ msgstr "Állapotjelzők megjelenítése"
 #. 6.0->settings-schema.json->display-indicators->tooltip
 #. 6.4->settings-schema.json->display-indicators->tooltip
 msgid ""
-"Choose if the minimized and the pinned indicator characters will be "
-"prepended to button label text. Buttons without a text label will not "
-"reserve as much space.\n"
-"Automatic: The minimized and pinned indicators will only show when space is "
-"not constrained."
+"Controls what information is prepended to the button label text. On "
+"horizontal panels this data is shown even when the primary label contents "
+"are removed. Setting this to None will allow for the smallest button size. "
+"When on vertical panels this setting is ignored."
 msgstr ""
-"Válassza ki, hogy a kicsinyített és a rögzített jelzőkarakterek hozzá "
-"legyenek-e fűzve a gombcímke szövegéhez. A szöveges címke nélküli gombok nem "
-"foglalnak le annyi helyet.\n"
-"Automatikus: A kicsinyített és rögzített jelzők csak akkor jelennek meg, ha "
-"nincs szűk hely."
 
-#. 4.0->settings-schema.json->show-ellipsis-for-groups->description
-#. 6.0->settings-schema.json->show-ellipsis-for-groups->description
-#. 6.4->settings-schema.json->show-ellipsis-for-groups->description
-msgid "Show a vertical ellipsis (...) for grouped buttons"
-msgstr "Függőleges ellipszis megjelenítése (...) csoportosított gombok esetén"
+#. 4.0->settings-schema.json->auto-hide-indicators->description
+#. 6.0->settings-schema.json->auto-hide-indicators->description
+#. 6.4->settings-schema.json->auto-hide-indicators->description
+msgid "Hide status indicators when space is limited"
+msgstr ""
 
-#. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
-#. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
-#. 6.4->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 4.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.4->settings-schema.json->auto-hide-indicators->tooltip
 msgid ""
-"Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
-"list buttons with more then one window. When on a vertical panel this option "
-"is not possible and the setting will be ignored."
+"Hide status indicators when window list space is limited causing button "
+"labels to shrink"
 msgstr ""
-"A több ablakot tartalmazó, csoportosított ablaklistás gombok címkéi elé egy "
-"függőleges ellipszis unicode chartert illeszt. Függőleges panelen ez az "
-"opció nem lehetséges, és a beállítás figyelmen kívül marad."
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -637,9 +658,10 @@ msgstr "Lebegtetési idő a teljes méretű ablak előnézetének megjelenítés
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.4->settings-schema.json->hover-peek-delay->tooltip
+#, fuzzy
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
-"appear. It applies when hovering over either window-list buttons or "
+"appear. It applies when hovering over either window list buttons or "
 "thumbnail menu items (of course one of the full size window preview options "
 "must be enabled for this option to have any effect)"
 msgstr ""
@@ -691,7 +713,8 @@ msgstr "Semmi"
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
 #. 6.4->settings-schema.json->number-type->options
-msgid "Application group window count"
+#, fuzzy
+msgid "Application group indicator (…)"
 msgstr "Alkalmazáscsoport ablakok száma"
 
 #. 4.0->settings-schema.json->number-type->options
@@ -706,32 +729,55 @@ msgstr "Munkaterület száma"
 msgid "Monitor number"
 msgstr "Kijelzők száma"
 
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Two characters from the window title"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Minimized indicator"
+msgstr "Minimalizált ablakok"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Pinned indicator"
+msgstr "Rögzített alkalmazások"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Minimized and pinned indicators"
+msgstr "Minimalizált és rögzített"
+
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
 #. 6.4->settings-schema.json->number-type->description
-msgid "Number label contents"
+#, fuzzy
+msgid "Icon overlay label contents"
 msgstr "Számcímke tartalma"
-
-#. 4.0->settings-schema.json->display-number->options
-#. 6.0->settings-schema.json->display-number->options
-#. 6.4->settings-schema.json->display-number->options
-msgid "Smart"
-msgstr "Inteligens"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
 #. 6.4->settings-schema.json->display-number->description
-msgid "Display number"
-msgstr "Kijelző sorszáma"
+msgid "Only display label when needed"
+msgstr ""
 
 #. 4.0->settings-schema.json->display-number->tooltip
 #. 6.0->settings-schema.json->display-number->tooltip
 #. 6.4->settings-schema.json->display-number->tooltip
+#, fuzzy
 msgid ""
-"Controls when the number label is used. Smart means the the label will only "
-"appear when it is appropriate depending on the number label contents setting "
-"above. i.e. When there is two or more windows in a group, or when the "
-"windows workspace or monitor does not match the current one."
+"With this option enabled, the icon overlay label will only appear when it is "
+"appropriate depending on the label content (i.e. When there are two or more "
+"windows in a group, or when the windows workspace or monitor does not match "
+"the current one). When this option is disabled the label is always shown"
 msgstr ""
 "Szabályozza a számcímke használatának időpontját. Az intelligens azt "
 "jelenti, hogy a címke csak akkor jelenik meg, ha a fenti számcímke tartalma "
@@ -739,35 +785,43 @@ msgstr ""
 "csoportban, vagy ha az ablakok munkaterülete vagy monitora nem egyezik meg "
 "az aktuális ablakéval."
 
-#. 4.0->settings-schema.json->number-style->options
-#. 6.0->settings-schema.json->number-style->options
-#. 6.4->settings-schema.json->number-style->options
-msgid "Icon overlay"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr "Letiltva"
+
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+#, fuzzy
+msgid "Using icon overlay label"
 msgstr "Ikon átfedés"
 
-#. 4.0->settings-schema.json->number-style->options
-#. 6.0->settings-schema.json->number-style->options
-#. 6.4->settings-schema.json->number-style->options
-msgid "Label prepend"
-msgstr "Címke elé"
-
-#. 4.0->settings-schema.json->number-style->description
-#. 6.0->settings-schema.json->number-style->description
-#. 6.4->settings-schema.json->number-style->description
-msgid "Number style"
-msgstr "Számstílus"
-
-#. 4.0->settings-schema.json->number-style->tooltip
-#. 6.0->settings-schema.json->number-style->tooltip
-#. 6.4->settings-schema.json->number-style->tooltip
-msgid ""
-"Controls how the number label is presented. When on a vertical panel or when "
-"in launcher mode, the \"label prepend\" option is not possible so \"icon "
-"overlay\" will be used instead"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+msgid "Prepended to button label"
 msgstr ""
-"A számcímke megjelenítésének módját szabályozza. Függőleges panelen vagy "
-"indító módban a \"Címke elé\" opció nem lehetséges, így helyette az \"Ikon "
-"átfedés\" opciót használja"
+
+#. 4.0->settings-schema.json->progress-display-type->description
+#. 6.0->settings-schema.json->progress-display-type->description
+#. 6.4->settings-schema.json->progress-display-type->description
+msgid "Display window progress information (%)"
+msgstr ""
+
+#. 4.0->settings-schema.json->progress-display-type->tooltip
+#. 6.0->settings-schema.json->progress-display-type->tooltip
+#. 6.4->settings-schema.json->progress-display-type->tooltip
+msgid ""
+"Controls how a windows progress information is presented on the window list "
+"(i.e copying in File Manager, downloading in Firefox, updating in Update "
+"Manager, etc.). When on vertical panels the \"Prepended to button label\" "
+"option will be ignored and icon overlay will be used in its place."
+msgstr ""
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -780,6 +834,12 @@ msgstr "Csoportosított"
 #. 6.4->settings-schema.json->group-windows->options
 msgid "Pooled"
 msgstr "Összevonva"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Automatic"
+msgstr "Automatikus"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -802,12 +862,13 @@ msgstr "Az ablaklista viselkedési stílusa"
 #. 4.0->settings-schema.json->group-windows->tooltip
 #. 6.0->settings-schema.json->group-windows->tooltip
 #. 6.4->settings-schema.json->group-windows->tooltip
+#, fuzzy
 msgid ""
 "Grouped: All windows for an application are managed by one button,\n"
 "Pooled: All window list buttons for an application are pooled side by side,\n"
 "Automatic: Windows are pooled, and then grouped when space is limited,\n"
 "One to one: Each window gets their own button with no forced ordering,\n"
-"Launcher: Only pinned button are shown, behaves like a panel launcher."
+"Launcher: Only pinned buttons are shown, behaves like a panel launcher."
 msgstr ""
 "Csoportosítva: Egy alkalmazás összes ablaka egyetlen gombbal kezelhető,\n"
 "Összevonva: Egy alkalmazás összes ablaklista gombja egymás mellé van "
@@ -816,12 +877,6 @@ msgstr ""
 "korlátozott,\n"
 "Egy az egyhez: Minden ablak saját gombot kap, kényszerrendelés nélkül,\n"
 "Indító: Csak a rögzített gombok jelennek meg, panelindítóként viselkedik."
-
-#. 4.0->settings-schema.json->display-pinned->options
-#. 6.0->settings-schema.json->display-pinned->options
-#. 6.4->settings-schema.json->display-pinned->options
-msgid "Disabled"
-msgstr "Letiltva"
 
 #. 4.0->settings-schema.json->display-pinned->options
 #. 6.0->settings-schema.json->display-pinned->options
@@ -865,9 +920,10 @@ msgstr "Szinkronizálja az indítógombokat az összes munkaterületen"
 #. 4.0->settings-schema.json->synchronize-pinned->tooltip
 #. 6.0->settings-schema.json->synchronize-pinned->tooltip
 #. 6.4->settings-schema.json->synchronize-pinned->tooltip
+#, fuzzy
 msgid ""
 "If enabled, the number and order of launcher buttons on the panel will be "
-"synchronize across all workspaces."
+"synchronized across all workspaces."
 msgstr ""
 "Ha engedélyezve van, a panelen lévő indítógombok száma és sorrendje "
 "szinkronizálva lesz az összes munkaterületen."
@@ -959,9 +1015,10 @@ msgstr ""
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.4->settings-schema.json->hover-peek-windowlist->tooltip
+#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
-"hovering over a window-list button. The delay before the preview appears is "
+"hovering over a window list button. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
 "Ha engedélyezve van, egy teljes méretű előnézeti ablak jelenik meg, amikor "
@@ -977,9 +1034,10 @@ msgstr "Automatikus fókuszváltás a panel elhagyásakor"
 #. 4.0->settings-schema.json->no-click-activate->tooltip
 #. 6.0->settings-schema.json->no-click-activate->tooltip
 #. 6.4->settings-schema.json->no-click-activate->tooltip
+#, fuzzy
 msgid ""
-"If enabled, the current window for a window-list button will get the focus "
-"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"If enabled, the current window for a window list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window list with Ctrl "
 "or Shift held or while remaining on the panel will leave the focus "
 "unchanged. This option is typically used in conjunction with the preview "
 "hovering option above."
@@ -1068,10 +1126,11 @@ msgstr "Csoportosított gombok miniatűr menüelemek rendezése"
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.4->settings-schema.json->menu-sort-groups->tooltip
+#, fuzzy
 msgid ""
-"If enabled, the thumbnail menu will be sorted first by workspace and the by "
+"If enabled, the thumbnail menu will be sorted first by workspace and then by "
 "monitor number for grouped buttons. Pooled windows can not be sorted since "
-"the order is the same as the order on the window-list panel. With this "
+"the order is the same as the order on the window list panel. With this "
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
@@ -1097,9 +1156,10 @@ msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához
 #. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
 #. 6.4->settings-schema.json->menu-all-windows-of-pool->tooltip
 #. 6.4->settings-schema.json->menu-all-windows-of-auto->tooltip
+#, fuzzy
 msgid ""
 "If enabled, a popup menu will contain all the application windows in the "
-"application pool rather then just the selected window within the application "
+"application pool rather than just the selected window within the application "
 "pool"
 msgstr ""
 "Ha engedélyezve van, egy felugró menü az alkalmazáskészlet összes "
@@ -2100,7 +2160,8 @@ msgstr "Ablak csempézés módosítása"
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-msgid "Cycle all window-list button windows"
+#, fuzzy
+msgid "Cycle all window list button windows"
 msgstr "Az összes ablaklista gomb ablakának forgatása"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
@@ -2258,10 +2319,11 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.4->settings-schema.json->hotkey-sequence->tooltip
+#, fuzzy
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
-"first 9 windows of the assigned application, as ordered on the window-list, "
+"first 9 windows of the assigned application, as ordered on the window list, "
 "will be activated by the 9 hotkeys."
 msgstr ""
 "Ha engedélyezve van, az „1” billentyűvel végződő gyorsbillentyűk (azaz "
@@ -2280,10 +2342,11 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-grave-help->tooltip
 #. 6.0->settings-schema.json->hotkey-grave-help->tooltip
 #. 6.4->settings-schema.json->hotkey-grave-help->tooltip
+#, fuzzy
 msgid ""
 "If enabled, The hotkey modifier(s) + ` will be registered for each unique "
-"modifier set defined in the hotkey list. Using these hotkeys will temporally "
-"show a hotkey hint bubble over the button icons."
+"modifier set defined in the hotkey list. Using these hotkeys will "
+"temporarily show a hotkey hint bubble over the button icons."
 msgstr ""
 "Ha engedélyezve van, a gyorsbillentyű-módosító(k) + ` minden egyes, a "
 "gyorsbillentyű-listában meghatározott egyedi módosítókészlethez regisztrálva "
@@ -2444,7 +2507,8 @@ msgstr "Gombok más monitorokon lévő ablakokhoz"
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
 #. 6.4->settings-schema.json->saturation-application->options
-msgid "All buttons excepted focused window"
+#, fuzzy
+msgid "All buttons except the focused window"
 msgstr "Minden gomb, kivéve a fókuszált ablakot"
 
 #. 4.0->settings-schema.json->saturation-application->description
@@ -2484,9 +2548,10 @@ msgstr ""
 "Panelgombok minden futó ablakhoz."
 
 #. SetupWizard.ui:125
+#, fuzzy
 msgid ""
 "Panel Launcher (Quick launcher)\n"
-"Panel button only appear when you add items\n"
+"Panel buttons only appear when you pin items\n"
 "to the panel, no labels are shown, only icons."
 msgstr ""
 "Panelindító (gyorsindító)\n"
@@ -2506,9 +2571,10 @@ msgid "How do you want your Window List to operate?"
 msgstr "Hogyan szeretné, hogy az ablaklistája működjön?"
 
 #. SetupWizard.ui:192
+#, fuzzy
 msgid ""
 "Basic  -  Quick window access\n"
-"Every window gets it's own window list button.\n"
+"Every window gets its own window list button.\n"
 "Button labels are window titles."
 msgstr ""
 "Alap – Gyors hozzáférés az ablakokhoz\n"
@@ -2528,10 +2594,11 @@ msgstr ""
 "A gombcímkék ablakcímek."
 
 #. SetupWizard.ui:236
+#, fuzzy
 msgid ""
 "Pooling  -  Quick access & compact\n"
-"Every window gets it's own window list button.\n"
-"Application buttons are pooled togeather.\n"
+"Every window gets its own window list button.\n"
+"Application buttons are pooled together.\n"
 "One button label per application pool.\n"
 "Button labels are application names."
 msgstr ""
@@ -2562,8 +2629,9 @@ msgid "Panel Launcher Setup"
 msgstr "Panelindító beállítása"
 
 #. SetupWizard.ui:370
+#, fuzzy
 msgid ""
-"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"Unlike most Panel Launcher applets, this launcher keeps track of \n"
 "running windows and uses window Thumbnail menus.\n"
 "\n"
 "You can launch additional windows by clicking the 'Back' mouse \n"
@@ -2603,8 +2671,9 @@ msgid "All done!"
 msgstr "Minden készen van!"
 
 #. SetupWizard.ui:508
+#, fuzzy
 msgid ""
-"There are many more options and features to explorer in the\n"
+"There are many more options and features to explore in the\n"
 "applet configurator and the window list button context menu,\n"
 "for example:\n"
 "\n"
