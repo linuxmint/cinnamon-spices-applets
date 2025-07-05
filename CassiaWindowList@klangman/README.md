@@ -1,7 +1,9 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features designed to give you more control over how your window-list operates.
 
-Recent new features (Aug 2023 - Dec 2024):
+**Recent new features (Aug 2023 - Jul 2025):**
 
+* Added several new option to the Status Indicator and Icon Overlay Label drop-down lists
+* Added progress indicator support (Firefox downloading, Update manager, Nemo file copying)
 * Focus a buttons window when dragging an object to the window-list so the user can drop on the window
 * Added scroll-wheel options, cycle all window-list windows and cycle group/pool windows
 * Added context menu options to close all/other windows for the buttons application
@@ -36,7 +38,11 @@ Recent new features (Aug 2023 - Dec 2024):
 * Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
 * A bunch of fixes
 
-The design goals are to:
+**Upgrading notes:**
+
+* After upgrading to 2.4.2 you might need to change some options under the "Labels" tab to restore some elements of your setup. This is due to a small "Label" options redesign in order to allow for some new features and to improve ease of use.
+
+**The design goals are to:**
 
 1. Allow you to declutter your window list when running many windows without having to do without button labels
 2. Keyboard hot-keys to switch to specific windows so you don't have to reach for the mouse so often
