@@ -35,14 +35,14 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.settings.bind("showDisturbIcon", "showDisturbIcon", this._show_disturb_icon);
         this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
         this.settings.bind("keyClear", "keyClear", this._setKeybinding);
-        this.settings.bind("keyMute", "keyMute", this._setKeybinding);        
+        this.settings.bind("keyMute", "keyMute", this._setKeybinding);
         this.settings.bind("showNotificationCount", "showNotificationCount", this.update_list);
         this.settings.bind("showNotificationSettings", "showNotificationSettings", this._show_settings_action);
         this._setKeybinding();
 
         this.notif_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.notifications" });
         this.notif_settings.connect('changed::display-notifications', Lang.bind(this, function() {
-        this.set_icon_status(!this.notif_settings.get_boolean("display-notifications"));
+        this.set_icon_status(this.notif_settings.get_boolean("display-notifications"));
         }));        
 
         // Layout
@@ -59,19 +59,18 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // States
         this._blinking = false;
         this._blink_toggle = false;
-        this.inhibited = true;
     }
 
     _setKeybinding() {
         Main.keybindingManager.addHotKey("notification-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
         Main.keybindingManager.addHotKey("notification-clear-" + this.instance_id, this.keyClear, Lang.bind(this, this._clear_all));
-        Main.keybindingManager.addHotKey("notification-mute-" + this.instance_id, this.keyMute, Lang.bind(this, this.mute_notifications));        
+        Main.keybindingManager.addHotKey("notification-mute-" + this.instance_id, this.keyMute, Lang.bind(this, this.mute_notifications));
     }
 
     on_applet_removed_from_panel () {
         Main.keybindingManager.removeHotKey("notification-open-" + this.instance_id);
         Main.keybindingManager.removeHotKey("notification-clear-" + this.instance_id);
-        Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);        
+        Main.keybindingManager.removeHotKey("notification-mute-" + this.instance_id);
     }
 
     _openMenu() {
@@ -86,35 +85,30 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // Setup the notification container.
         this._maincontainer = new St.BoxLayout({name: 'traycontainer', vertical: true});
         this._notificationbin = new St.BoxLayout({vertical:true});
-        this.button_label_box = new St.BoxLayout();
 
         // Setup the tray icon.
         this.menu_label = new PopupMenu.PopupMenuItem(stringify(this.notifications.length));
-        this.menu_label.label.add_style_class_name('popup-label-notif');
+        this.menu_label.label.add_style_class_name('popup-notif-label');
         this.menu_label.actor.reactive = false;
         this.menu_label.actor.can_focus = false;
-        this.menu_label.label.style="width: 165px;";
 
         this.notDisturb_label = new PopupMenu.PopupIconMenuItem(_("Do not disturb"), "notification-off", St.IconType.SYMBOLIC);
-        this.notDisturb_label.label.add_style_class_name('popup-label');
-        this.notDisturb_label.actor.add_style_class_name('popup-icon');
+        this.notDisturb_label.label.add_style_class_name('popup-tray-label');
+        this.notDisturb_label.actor.add_style_class_name('popup-tray-icon');
         this.notDisturb_label.actor.reactive = false;
         this.notDisturb_label.actor.can_focus = false;
-        this.notDisturb_label.label.style="min-width: 165px;";
 
         this.noNotif_label = new PopupMenu.PopupIconMenuItem(_("No notifications"), "empty-notification", St.IconType.SYMBOLIC);
-        this.noNotif_label.label.add_style_class_name('popup-label');
-        this.noNotif_label.actor.add_style_class_name('popup-icon');
+        this.noNotif_label.label.add_style_class_name('popup-tray-label');
+        this.noNotif_label.actor.add_style_class_name('popup-tray-icon');
         this.noNotif_label.actor.reactive = false;
         this.noNotif_label.actor.can_focus = false;
-        this.noNotif_label.label.style="min-width: 165px;";
 
         this.clear_separator = new PopupMenu.PopupSeparatorMenuItem();
 
         this.clear_action = new PopupMenu.PopupMenuItem(_("Clear notifications"));
         this.clear_action.connect('activate', Lang.bind(this, this._clear_all));
         this.clear_action.actor.hide();
-
 
         if (this._orientation == St.Side.BOTTOM) {
             this.menu.addMenuItem(this.menu_label);
@@ -145,15 +139,13 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.notificationsSwitch.setToggleState(this.notif_settings.get_boolean("display-notifications"));
         this.menu.addMenuItem(this.notificationsSwitch);
 
-        
         // Notification Settings menu item
         this.item_action = new PopupMenu.PopupMenuItem(_("Notification Settings"));
         this.item_action.connect('activate', Lang.bind(this, function() {
             Util.spawnCommandLine("cinnamon-settings notifications");
         }));
         this.menu.addMenuItem(this.item_action);
-        this.item_action.actor.hide();
-
+        this._show_settings_action();
 
         // Notification scroll
         this.scrollview = new St.ScrollView({ x_fill: true, y_fill: true, y_align: St.Align.START, style_class: "vfade"});
@@ -203,10 +195,18 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         // Add notification to list.
         notification._inNotificationBin = true;
         this.notifications.push(notification);
+
         // Steal the notification panel.
         this._notificationbin.add(notification.actor);
         notification.actor._parent_container = this._notificationbin;
         notification.actor.add_style_class_name('notification-applet-padding');
+
+        // Enable middle-click to close notifications.
+        notification.actor.connect('button-press-event', (actor, event) => {
+            if (event.get_button && event.get_button() === 2) {
+                notification.destroy(NotificationDestroyedReason.DISMISSED);
+            }
+        });
         // Register for destruction.
         notification.connect('scrolling-changed', (notif, scrolling) => { this.menu.passEvents = scrolling });
         notification.connect('destroy', () => {
@@ -220,17 +220,16 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.update_list();
     }
 
-    update_list () {
+    update_list () { // Update interface
         try {
             let count = this.notifications.length;
             if (count > 0) {    // There are notifications.
                 this.actor.show();
                 this.clear_action.actor.show();
                 this.menu_label.actor.show();
-                this.item_action.actor.show();
                 this.notDisturb_label.actor.hide();
-                this.noNotif_label.actor.hide();              
-                this.set_applet_tooltip(ngettext("%d notification", "%d notifications", count).format(count));           
+                this.noNotif_label.actor.hide();
+                this.set_applet_tooltip(ngettext("%d notification", "%d notifications", count).format(count));
                 this.set_applet_label(count.toString());
                 // Find max urgency and derive list icon.
                 let max_urgency = -1;
@@ -257,46 +256,51 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
                         break;
                 }
             } else {    // There are no notifications.
-                this._blinking = false;
-                this.set_applet_label('');
-                this.set_applet_icon_symbolic_name("empty-notification");
-                this.set_applet_tooltip(_("Notifications"));
-                this.noNotif_label.actor.show();
-                this.item_action.actor.show(); 
-                this.notDisturb_label.actor.hide();
-                this.menu_label.actor.hide();                 
-                this.clear_action.actor.hide();
-                if (!this.showEmptyTray) {
+               this._blinking = false;
+               this.set_applet_label('');
+               this.set_applet_icon_symbolic_name("empty-notification");
+               this.set_applet_tooltip(_("Notifications"));
+               this.noNotif_label.actor.show();
+               this.notDisturb_label.actor.hide();
+               this.menu_label.actor.hide();
+               this.clear_action.actor.hide();
+               if (!this.showEmptyTray) {
+                   this.actor.hide();
+               }
+            }
+
+            // Show "Do not disturb" icon and label
+            if (!this.notif_settings.get_boolean("display-notifications")) {
+               this.set_applet_icon_symbolic_name("notification-off");
+               this.set_applet_tooltip(_("Notifications disabled"));
+               this.notDisturb_label.actor.show();
+               this.noNotif_label.actor.hide();
+               this.menu_label.actor.hide();
+               if (this.showEmptyTray || this.showDisturbIcon) {
+                   this.actor.show();
+               } else {
+                   this.actor.hide();
+               }
+            } else {
+                if (count > 0) {
+                    this.actor.show();
+                } else if (this.showEmptyTray) {
+                    this.actor.show();
+                } else {
                     this.actor.hide();
                 }
             }
-
-             // Show "Do not disturb" icon and label
-             if (!this.notif_settings.get_boolean("display-notifications")) {
-                this.set_applet_icon_symbolic_name("notification-off");
-                this.set_applet_tooltip(_("Notifications disabled"));
-                this.notDisturb_label.actor.show();
-                this.noNotif_label.actor.hide();
-                this.menu_label.actor.hide(); 
-                if (this.showDisturbIcon) {
-                    this.actor.show();
-                }
-            }
-             
-            if (!this.showNotificationSettings) {
-                this.item_action.actor.hide();
-            }
-                    
+                                                                  
             if (!this.showNotificationCount) {  // Don't show notification count
                 this.set_applet_label('');
             }
             this.menu_label.label.set_text(stringify(count));
             this._notificationbin.queue_relayout();
-        }
-        catch (e) {
+
+        } catch (e) {
             global.logError(e);
         }
-    }
+     }
 
      _clear_all() {
         let count = this.notifications.length;
@@ -313,25 +317,16 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     _show_settings_action() {  // Show or hide notification settings menu item
         if (this.showNotificationSettings) {
             this.item_action.actor.show();
+        } else {
+            this.item_action.actor.hide();
         }
+    }
+
+    _show_hide_tray() {
         this.update_list();
     }
 
-    _show_hide_tray() { // Show or hide the notification tray.
-        if(!global.settings.get_boolean(PANEL_EDIT_MODE_KEY)) {
-            if (this.notifications.length || this.showEmptyTray) {
-                this.actor.show();
-            }
-        }
-        this.update_list();
-    }
-
-    _show_disturb_icon() { // Show disturb icon when show empty tray option is disabled.
-        if(global.settings.get_boolean(PANEL_EDIT_MODE_KEY)) {
-           if (!this.showEmptyTray) {                
-               this.actor.show();
-            }
-        }
+    _show_disturb_icon() {
         this.update_list();
     }
 
@@ -361,17 +356,17 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     on_applet_clicked(event) {
         this._openMenu();
     }
-    
+
+    _toggleNotifications() {
+        let current_state = this.notif_settings.get_boolean("display-notifications");
+        this.notif_settings.set_boolean("display-notifications", !current_state);
+    }
+
     mute_notifications() {
         this.notificationsSwitch.toggle();
-    }    
+    }
 
-    set_icon_status() {
-        if (!this.inhibited) {
-            this.notif_settings.get_boolean("display-notifications", true);
-        } else {
-            this.notif_settings.get_boolean("display-notifications", false);
-        }
+    set_icon_status() {  // Updates the icon state based on notification settings
         this.update_list();
     }
 
