@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-10 05:28+0200\n"
-"PO-Revision-Date: 2025-05-18 16:34-0400\n"
+"PO-Revision-Date: 2025-07-10 17:39-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:95
 msgid "Do not disturb"
@@ -73,9 +73,8 @@ msgstr[0] "hace %d minuto"
 msgstr[1] "hace %d minutos"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Notifications-Enhanced"
-msgstr "Notificaciones mejoradas"
+msgstr "Notificaciones-Mejoradas"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -102,27 +101,24 @@ msgid "Show the number of notifications"
 msgstr "Mostrar el número de notificaciones"
 
 #. settings-schema.json->showEmptyTray->description
-#, fuzzy
 msgid "Show notification tray"
-msgstr "Mostrar notificaciones"
+msgstr "Mostrar bandeja de notificaciones"
 
 #. settings-schema.json->showEmptyTray->tooltip
-#, fuzzy
 msgid "Check this to always show the notification tray."
-msgstr "Marque esta opción para ignorar las notificaciones transitorias."
+msgstr "Marque esta opción para mostrar siempre la bandeja de notificaciones."
 
 #. settings-schema.json->showDisturbIcon->description
 msgid "Always show 'Do Not Disturb' icon"
-msgstr ""
+msgstr "Mostrar siempre el icono 'No molestar'"
 
 #. settings-schema.json->showDisturbIcon->tooltip
-#, fuzzy
 msgid ""
 "Check this to show the 'Do Not Disturb icon' on the panel even when the "
 "'Show notification tray' option is disabled."
 msgstr ""
-"Marque esta opción para mostrar el icono \"No molestar\" en el panel incluso "
-"cuando la opción de mostrar la bandeja vacía esté desactivada."
+"Marque esta opción para mostrar el icono 'No molestar' en el panel aunque la "
+"opción 'Mostrar bandeja de notificaciones' esté desactivada."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"
