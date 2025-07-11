@@ -277,7 +277,7 @@ async function getDisplays() {
     // detect displays with ddcutil
     const ddcutilOutput = await new Promise((resolve, reject) => {
         Util.spawnCommandLineAsyncIO(
-            `ddcutil detect`,
+            `ddcutil detect | iconv -f utf-8 -t utf-8 -c`,
             (stdout, stderr, exitCode) => {
                 if (exitCode == 0) {
                     resolve(stdout);
@@ -301,25 +301,19 @@ async function getDisplays() {
     for (let i = 1; i < ddcutilOutput.split("Display").length; i++) {
         let capabilitiesOutput = await new Promise((resolve, reject) => {
             Util.spawnCommandLineAsyncIO(
-                `ddcutil capabilities --display=${i}`,
+                `ddcutil capabilities --display=${i} | iconv -f utf-8 -t utf-8 -c`,
                 (stdout, stderr, exitCode) => {
                     if (exitCode == 0) {
                         resolve(stdout);
                     } else {
-                        log("Failed to detect display capabilities: " + stderr, "error");
-                        const dialog = new ModalDialog.NotifyDialog([
-                            _("Failed to detect display capabilities"),
-                            _("Make sure you have ddcutil installed and the correct permissions."),
-                            _("Error:") + ` ${stderr}`
-                        ].join("\n"));
-                        dialog.open();
-                        reject(stderr);
+                        log("Failed to detect display capabilities for display " + i + " error: " + stderr, "error");
+                        resolve(stdout.concat(stderr));
                     }
                 }
             );
         });
         capabilitiesOutput = capabilitiesOutput.split("Model: ");
-        capabilitiesByDisplay.push(capabilitiesOutput[1]);
+        capabilitiesByDisplay.push(String(capabilitiesOutput[1]));
         //log(capabilitiesByDisplay);
     }
     //log(capabilitiesOutput);
