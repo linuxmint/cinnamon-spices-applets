@@ -14,14 +14,7 @@ const Extension = imports.ui.extension;
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
 
-var GWeather = null;
-try {
-    GWeather = imports.gi.GWeather;
-} catch(e) {
-    GWeather = null;
-    global.logError(uuid + ": " + e);
-}
-
+const SunCalc = require('./lib/suncalc');
 const AppletGui = require('./lib/appletGui');
 const AppletConstants = require('./lib/appletConstants');
 const ShellUtils = require('./lib/shellUtils');
@@ -137,17 +130,22 @@ class BrightnessAndGamma extends Applet.IconApplet {
         let [lat, lon] = this.gsettings.get_value("night-light-last-coordinates").unpack(); // type (dd)
         lat = lat.unpack(); // type (d)
         lon = lon.unpack(); // type (d)
-        //~ global.log("lat: "+lat+" - lon: "+lon);
 
-        if (  GWeather == null || Math.round(lat) == 91 || Math.round(lon) == 181 ) {
+        if (  Math.round(lat) == 91 || Math.round(lon) == 181 ) {
           this.sunrise = 6;
           this.sunset = 20;
         } else {
-          this.weather = GWeather.Info.new(GWeather.Location.new_detached("local", null, lat, lon));
-          let sunrise = this.weather.get_sunrise().trim().split(":");
-          let sunset = this.weather.get_sunset().trim().split(":");
-          this.sunrise = parseInt(sunrise[0][0])*10+parseInt(sunrise[0][1])+(parseInt(sunrise[0][3])*10+parseInt(sunrise[0][4]))/60;
-          this.sunset = parseInt(sunset[0][0])*10+parseInt(sunset[0][1])+(parseInt(sunset[0][3])*10+parseInt(sunset[0][4]))/60;
+          try {
+            var times = SunCalc.getTimes(new Date(), lat, lon);
+            this.sunrise = parseInt(times.sunrise.getHours()) + parseInt(times.sunrise.getMinutes()) / 60;
+            this.sunset = parseInt(times.sunset.getHours()) + parseInt(times.sunset.getMinutes()) / 60;
+          } catch(e) {
+            let _sunset = this.gsettings.get_value("night-light-schedule-from").unpack(); // type (d)
+            let _sunrise = this.gsettings.get_value("night-light-schedule-to").unpack(); // type (d)
+            this.sunrise = Math.round(_sunrise * 4)/4;
+            this.sunset = Math.round(_sunset * 4)/4;
+            return [this.sunrise, this.sunset];
+          }
         }
         this.sunrise = Math.round(this.sunrise * 4)/4;
         this.sunset = Math.round(this.sunset * 4)/4;
@@ -182,16 +180,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _check_dependencies() {
-        return this._check_xrandr() && this._check_randr() && this._check_GWeather();
-    }
-
-    _check_GWeather() {
-        if (GWeather == null) {
-            let dependencies = "libgweather-4-dev";
-            this._show_dialog_dependencies(dependencies);
-            return false;
-        }
-        return true;
+        return this._check_xrandr() && this._check_randr();
     }
 
     _check_xrandr() {
@@ -346,10 +335,6 @@ class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     on_preset_list_changed() {
-        //~ for (let preset of this.preset_list) {
-            //~ let name = preset.name;
-            //~ //FIXME!
-        //~ }
         this._init_menu_item_presets();
     }
 

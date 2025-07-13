@@ -13,13 +13,9 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
  * From Cinnamon 6.4: set hotkeys to Increase/Decrease brightness
  * From Cinnamon 6.4: take into account sunrise and sunset times.
 
-## Dependencies
-From Cinnamon 6.4: the `libgweather-4-dev` package is required; this package installs all other necessary dependencies.
-
 ## Installation
 1. Download the applet from *Cinnamon Settings -> Applets* or extract .zip archive to `~/.local/share/cinnamon/applets`
-2. Install dependencies
-3. Enable the applet in *Cinnamon Settings -> Applets*
+2. Enable the applet in *Cinnamon Settings -> Applets*
 
 ## Usage
 ### To specify a screen and outputs:
