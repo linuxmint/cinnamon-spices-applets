@@ -12,6 +12,8 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const Extension = imports.ui.extension;
 
+const uuid = "brightness-and-gamma-applet@cardsurf";
+
 var GWeather = null;
 try {
     GWeather = imports.gi.GWeather;
@@ -19,8 +21,6 @@ try {
     GWeather = null;
     global.logError(uuid + ": " + e);
 }
-
-const uuid = "brightness-and-gamma-applet@cardsurf";
 
 const AppletGui = require('./lib/appletGui');
 const AppletConstants = require('./lib/appletConstants');
