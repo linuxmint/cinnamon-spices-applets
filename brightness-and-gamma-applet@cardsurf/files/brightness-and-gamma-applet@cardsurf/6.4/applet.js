@@ -436,12 +436,12 @@ class BrightnessAndGamma extends Applet.IconApplet {
     set_MAX_TR_LENGTH() {
         if (this.options_type == 2) {
             MAX_TR_LENGTH = TR_RED.length;
-            for (let tr of [TR_GREEN, TR_BLUE]) {
+            for (let tr of [TR_GREEN, TR_BLUE, TR_SUNRISE, TR_SUNSET]) {
                 if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
             }
         } else {
             MAX_TR_LENGTH = TR_BRIGHTNESS.length;
-            for (let tr of [TR_RED, TR_GREEN, TR_BLUE]) {
+            for (let tr of [TR_RED, TR_GREEN, TR_BLUE, TR_SUNRISE, TR_SUNSET]) {
                 if (tr.length > MAX_TR_LENGTH) MAX_TR_LENGTH = tr.length;
             }
         }

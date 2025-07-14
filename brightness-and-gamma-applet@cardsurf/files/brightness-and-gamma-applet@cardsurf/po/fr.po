@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-13 16:32+0200\n"
-"PO-Revision-Date: 2025-07-13 16:40+0200\n"
+"PO-Revision-Date: 2025-07-14 12:04+0200\n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -57,11 +57,11 @@ msgstr "Bleu"
 
 #. 6.4/applet.js:50 6.4/applet.js:916
 msgid "Sunrise"
-msgstr "Lever du Soleil"
+msgstr "Aube"
 
 #. 6.4/applet.js:51 6.4/applet.js:918
 msgid "Sunset"
-msgstr "Coucher du Soleil"
+msgstr "Crépuscule"
 
 #. 6.4/applet.js:711
 msgid "Reload"
@@ -69,7 +69,7 @@ msgstr "Relancer"
 
 #. 6.4/applet.js:721
 msgid "Configure Presets"
-msgstr "Vos pré-réglages"
+msgstr "Configurer les pré-réglages"
 
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:731
@@ -302,8 +302,8 @@ msgid ""
 msgstr ""
 "Vous pouvez définir ou modifier les préréglages ci-dessous, qui sont ensuite "
 "accessibles via le menu contextuel de l'applet..\n"
-"Seules les premières options Démarrer au Lever du Soleil et Démarrer au "
-"Coucher du Soleil cochées seront prises en compte."
+"Seules les premières options Démarrer à l'Aube et Démarrer au Crépuscule "
+"cochées seront prises en compte."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
@@ -346,8 +346,8 @@ msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
-"Démarrer au\n"
-"Lever du Soleil"
+"Démarrer\n"
+"à l'Aube"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
@@ -355,11 +355,11 @@ msgid ""
 "Sunset"
 msgstr ""
 "Démarrer au\n"
-"Coucher du Soleil"
+"Crépuscule"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr "Configurer les heures de lever et coucher du Soleil"
+msgstr "Définir les heures d'Aube et de Crépuscule"
 
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"

@@ -1,3 +1,6 @@
+### v2.0.1~20250714
+* Tooltip bugfix.
+
 
 ### v2.0.0~20250713
 * Fully functional.
