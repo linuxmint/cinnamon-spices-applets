@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-13 16:32+0200\n"
-"PO-Revision-Date: 2025-04-05 21:00-0300\n"
+"PO-Revision-Date: 2025-07-14 14:59-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:178 6.4/applet.js:249
 msgid "The following packages were not found:"
@@ -56,20 +56,19 @@ msgstr "Azul"
 
 #. 6.4/applet.js:50 6.4/applet.js:916
 msgid "Sunrise"
-msgstr ""
+msgstr "Amanecer"
 
 #. 6.4/applet.js:51 6.4/applet.js:918
 msgid "Sunset"
-msgstr ""
+msgstr "Atardecer"
 
 #. 6.4/applet.js:711
 msgid "Reload"
-msgstr ""
+msgstr "Recargar"
 
 #. 6.4/applet.js:721
-#, fuzzy
 msgid "Configure Presets"
-msgstr "Tus preajustes"
+msgstr "Configurar preajustes"
 
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:731
@@ -286,7 +285,6 @@ msgid "Hotkey to Decrease brightness"
 msgstr "Tecla rápida para reducir el brillo"
 
 #. 6.4->settings-schema.json->preset_label->description
-#, fuzzy
 msgid ""
 "You can define or modify presets below, which can then be accessed via the "
 "applet's context menu.\n"
@@ -294,7 +292,9 @@ msgid ""
 "into account."
 msgstr ""
 "A continuación puede definir o modificar los preajustes, a los que podrá "
-"acceder a través del menú contextual del applet."
+"acceder a través del menú contextual del applet.\n"
+"Sólo se tienen en cuenta las primeras casillas marcadas de Inicio al "
+"amanecer e Inicio al atardecer."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
@@ -337,17 +337,21 @@ msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
+"Empezar al \n"
+"Amanecer"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunset"
 msgstr ""
+"Empezar al\n"
+"Atardecer"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr ""
+msgstr "Fijar las horas de salida y puesta del sol"
 
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
-msgstr ""
+msgstr "Aplicar todos los cambios"
