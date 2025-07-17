@@ -1,3 +1,8 @@
+### v7.9.0
+  * Bugfix about themes.
+  * Added a “Check all the first boxes then refresh” button in each tab of this applet’s settings, except in the General tab.
+  * Please note: when certain boxes remain unchecked, it means that these spices are not included in the Cinnamon database.
+
 ### v7.8.8~20250425
   * Fixes [#7090](https://github.com/linuxmint/cinnamon-spices-applets/issues/7090).
 

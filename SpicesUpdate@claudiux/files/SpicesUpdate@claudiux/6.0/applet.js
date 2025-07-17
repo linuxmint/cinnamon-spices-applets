@@ -264,7 +264,7 @@ class SpicesUpdate extends IconApplet {
     );
 
     // Move themes to their new location (from ~/.themes to ~/.local/share/themes):
-    spawnCommandLineAsync(SCRIPTS_DIR + "/move_themes.sh");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/move_themes.sh");
 
     //http session:
     //~ this.define_http_session();
@@ -2436,24 +2436,92 @@ class SpicesUpdate extends IconApplet {
     }
   } // End of _on_refresh_pressed
 
+  _on_tickallthenrefresh_pressed(type = null) {
+    if (this.menu.isOpen) this.menu.toggle();
+
+    if (type != null) {
+      this.populateSettingsUnprotectedSpices(type);
+
+      switch (type) {
+        case "applets":
+          for (let a of this.unprotected_applets) {
+            a["isunprotected"] = true;
+          }
+          break;
+        case "desklets":
+          for (let d of this.unprotected_desklets) {
+            d["isunprotected"] = true;
+          }
+          break;
+        case "extensions":
+          for (let e of this.unprotected_extensions) {
+            e["isunprotected"] = true;
+          }
+          break;
+        case "themes":
+          for (let t of this.unprotected_themes) {
+            t["isunprotected"] = true;
+          }
+          break;
+        case "actions":
+          for (let ac of this.unprotected_actions) {
+            ac["isunprotected"] = true;
+          }
+          break;
+      }
+    }
+    this.populateSettingsUnprotectedSpices(type);
+    this.first_loop = false;
+    this.refresh_requested = true;
+    this.applet_running = true;
+
+    if (!this.isLooping) {
+      source_remove(this.loopId);
+      this.loopId = null;
+      this.refreshInterval = 3600 * this.general_frequency;
+      this.do_rotation = true;
+      this.updateLoop();
+    }
+  } // End of _on_tickallthenrefresh_pressed
+
   _on_refresh_pressed_applets() {
     this._on_refresh_pressed("applets");
+  }
+
+  _on_tickallthenrefresh_pressed_applets() {
+    this._on_tickallthenrefresh_pressed("applets");
   }
 
   _on_refresh_pressed_desklets() {
     this._on_refresh_pressed("desklets");
   }
 
+  _on_tickallthenrefresh_pressed_desklets() {
+    this._on_tickallthenrefresh_pressed("desklets");
+  }
+
   _on_refresh_pressed_extensions() {
     this._on_refresh_pressed("extensions");
+  }
+
+  _on_tickallthenrefresh_pressed_extensions() {
+    this._on_tickallthenrefresh_pressed("extensions");
   }
 
   _on_refresh_pressed_themes() {
     this._on_refresh_pressed("themes");
   }
 
+  _on_tickallthenrefresh_pressed_themes() {
+    this._on_tickallthenrefresh_pressed("themes");
+  }
+
   _on_refresh_pressed_actions() {
     this._on_refresh_pressed("actions");
+  }
+
+  _on_tickallthenrefresh_pressed_actions() {
+    this._on_tickallthenrefresh_pressed("actions");
   }
 
   _on_reload_this_applet_pressed() {
