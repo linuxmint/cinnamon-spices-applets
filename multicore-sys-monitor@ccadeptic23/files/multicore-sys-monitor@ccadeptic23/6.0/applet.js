@@ -463,7 +463,7 @@ mcsm.prototype = {
             areaContext,
             // no label for the backdrop
             false,
-            Math.round(width/5),
+            width - 2 * global.ui_scale,
             this.panelHeight - 2 * global.ui_scale,
             [0, 0, 0, 0],
             // clear background so that it doesn't mess up the other one
