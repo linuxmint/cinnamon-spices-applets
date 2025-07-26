@@ -65,6 +65,7 @@
       "keys": [
         "labelsOn",
         "thickness",
+        "useIconSize",
         "refreshRate"
       ]
     },
@@ -217,6 +218,11 @@
     "max": 5,
     "step": 1,
     "show-value": true
+  },
+  "useIconSize": {
+    "type": "switch",
+    "default": false,
+    "description": "Limit height to the size of a colored icon"
   },
   "refreshRate": {
     "type": "scale",
