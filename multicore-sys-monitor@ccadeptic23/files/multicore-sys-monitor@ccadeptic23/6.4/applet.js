@@ -6,6 +6,7 @@ const {AppletSettings} = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
@@ -98,6 +99,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Disk_devicesList", "Disk_devicesList");
         this.settings.bind("labelsOn", "labelsOn");
         this.settings.bind("thickness", "thickness");
+        this.settings.bind("useIconSize", "useIconSize");
         this.settings.bind("refreshRate", "refreshRate");
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("backgroundColor", "backgroundColor");
@@ -133,7 +135,12 @@ class MCSM extends Applet.TextIconApplet {
         this.on_color_changed();
         this.useSymbolicIcon = true;
         //~ this.setIcon();
-        this.panelHeight = this._panelHeight;
+        global.log("ICON SIZE: " + this.getPanelIconSize(St.IconType.FULLCOLOR));
+        this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
+        if (this.useIconSize)
+            this.panelHeight = this.iconSize;
+        else
+            this.panelHeight = this._panelHeight;
 
         // Is the user a sudoer?
         var user = GLib.get_user_name();
@@ -321,7 +328,7 @@ class MCSM extends Applet.TextIconApplet {
     }
 
     on_Net_getdevlist_btn_clicked() {
-        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-devices.sh", (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-devices.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 var knownDevices = [];
                 var new_Net_devicesList = this.Net_devicesList;
@@ -347,6 +354,7 @@ class MCSM extends Applet.TextIconApplet {
                 }
                 this.Net_devicesList = new_Net_devicesList;
             }
+            subProcess.send_signal(9);
         });
     }
 
@@ -355,7 +363,7 @@ class MCSM extends Applet.TextIconApplet {
     }
 
     on_Disk_getdevlist_btn_clicked() {
-        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-disk-info.sh", (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-disk-info.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 var knownDevices = [];
                 var new_Disk_devicesList = this.Disk_devicesList;
@@ -393,11 +401,34 @@ class MCSM extends Applet.TextIconApplet {
                 }
                 this.Disk_devicesList = new_Disk_devicesList;
             }
+            subProcess.send_signal(9);
         })
     }
 
     on_Disk_cleardevlist_btn_clicked() {
         this.Disk_devicesList = [];
+    }
+
+    _runSysMon() {
+        let systemMonitoringCenter = appSystem.lookup_flatpak_app_id('io.github.hakandundar34coding.system-monitoring-center');
+        if (systemMonitoringCenter) {
+            systemMonitoringCenter.activate();
+            return
+        }
+        systemMonitoringCenter = appSystem.lookup_app('io.github.hakandundar34coding.system-monitoring-center.desktop');
+        if (systemMonitoringCenter) {
+            systemMonitoringCenter.activate();
+            return
+        }
+        let gnomeSystemMonitor = appSystem.lookup_app('gnome-system-monitor.desktop');
+        if (gnomeSystemMonitor) {
+            gnomeSystemMonitor.activate();
+            return
+        }
+        gnomeSystemMonitor = appSystem.lookup_app('org.gnome.SystemMonitor.desktop');
+        if (gnomeSystemMonitor) {
+            gnomeSystemMonitor.activate();
+        }
     }
 
     on_color_changed() {
@@ -419,7 +450,7 @@ class MCSM extends Applet.TextIconApplet {
 
     get_mem_info() {
         if (!this.isRunning) return;
-        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 //~ global.log(UUID + " - stdout is a " + typeof stdout);
                 let [, dataMem, dataSwap] = stdout.split(":");
@@ -444,12 +475,13 @@ class MCSM extends Applet.TextIconApplet {
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 //~ global.log(this.memoryProvider.getTooltipString());
             }
+            subProcess.send_signal(9);
         });
     }
 
     get_cpu_info() {
         if (!this.isRunning) return;
-        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data.sh", (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let cpuString = stdout.replace(/\ :\ /g, ":").replace(/cpu\ /g, "");
                 let cpuArray = cpuString.split(" ");
@@ -465,12 +497,13 @@ class MCSM extends Applet.TextIconApplet {
                 //~ global.log(UUID + " - CPU data: " + data);
                 this.multiCpuProvider.setData(data);
             }
+            subProcess.send_signal(9);
         });
     }
 
     get_net_info() {
         if (!this.isRunning) return;
-        Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 //~ global.log(UUID + " - stdout is a " + typeof stdout);
                 //~ global.log(UUID + " - stdout: " + stdout);
@@ -500,6 +533,7 @@ class MCSM extends Applet.TextIconApplet {
                 }
                 this.networkProvider.setData(data, disabledDevices);
             }
+            subProcess.send_signal(9);
         });
     }
 
@@ -558,6 +592,10 @@ class MCSM extends Applet.TextIconApplet {
 
     refreshAll() {
         reloadExtension(UUID, Type.APPLET);
+    }
+
+    on_applet_clicked(event) {
+        this._runSysMon();
     }
 
     on_applet_added_to_panel() {
