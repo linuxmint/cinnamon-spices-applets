@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.4.2
+
+* Renamed the "Number label" to "Icon overlay label" since it no longer only shows numbers
+* Added 5 new icon overlay label content options
+* Changed the icon overlay "smart" option into a toggle switch rather than a drop-down list
+* Hide the "smart" icon overlay options when it does not make sense for the type of icon overlay setting
+* Move the Ellipsis group indicator option to the status indicator drop-down list
+* Added 3 new status indicator types (app group count, monitor number, workspace number)
+* Added window progress support, shown using the icon overlay label or button label prepend
+* Added an "Hide status indicators when space is limited" option to replace the "Auto" drop-down list option
+* Fixed the minimized indicator character to use the down arrow for all cases except when on a top panel
+* Moved some options that were under the "Number label" options into the "Display status indicator" drop-down list
+* Show a group count in the tooltip text if a button has more than one window associated with it
+* Use the "Negative circled" number unicode characters for the "Application group count" status indicators
+  since the bracketed numbers (which were used previously) are oddly sized and hard to read for many font sets
+* Fix a number of typos and grammar mistakes (thanks to RupinderM)
+
+Note: Due to reworking a several options under the "Label" tab in the configuration dialog, some options may need to be changed to restore the window list behave to what it was before upgrading to version 2.4.2. Sorry for the inconvenience. 
+
 ## 2.4.1
 
 * Use the DesaturateEffect class rather than the saturate_and_pixelate() API to adjust the icon color saturation. This has as advantage in that it is able to desaturate the color for all icons where before it was limited in what type of icons it would work on. On the other hand, it has a disadvantage in that it can't oversaturate the icons. Hopefully no one was using the >100% saturation feature because it's not gone now.

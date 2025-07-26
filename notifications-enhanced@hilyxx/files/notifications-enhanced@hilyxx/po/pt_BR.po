@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 21:41+0200\n"
+"POT-Creation-Date: 2025-07-10 05:28+0200\n"
 "PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: Renan Lazarotto <renanlazarotto@gmail.com>\n"
 "Language-Team: Renan Lazarotto <renanlazarotto@gmail.com>\n"
@@ -18,54 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:98
+#. applet.js:95
 msgid "Do not disturb"
 msgstr "Não perturbe"
 
-#. applet.js:105
+#. applet.js:101
 msgid "No notifications"
 msgstr "Sem notificações"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:114
+#. applet.js:109
 msgid "Clear notifications"
 msgstr "Limpar notificações"
 
-#. applet.js:138
+#. applet.js:132
 msgid "Enable notifications"
 msgstr "Habilitar notificações"
 
-#. applet.js:150
+#. applet.js:143
 msgid "Notification Settings"
 msgstr "Configurações de notificação"
 
-#. applet.js:233 applet.js:411
+#. applet.js:232 applet.js:406
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificação"
 msgstr[1] "%d notificações"
 
-#. applet.js:263
+#. applet.js:262
 msgid "Notifications"
 msgstr "Notificações"
 
-#. applet.js:277
+#. applet.js:275
 msgid "Notifications disabled"
 msgstr "Notificações desabilitadas"
 
-#. applet.js:427
+#. applet.js:422
 msgid "just now"
 msgstr "agora"
 
-#. applet.js:430
+#. applet.js:425
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "há %d segundo"
 msgstr[1] "há %d segundos"
 
-#. applet.js:434
+#. applet.js:429
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -73,8 +73,9 @@ msgstr[0] "há %d minuto"
 msgstr[1] "há %d minutos"
 
 #. metadata.json->name
-msgid "Notifications Enhanced"
-msgstr ""
+#, fuzzy
+msgid "Notifications-Enhanced"
+msgstr "Notificações"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -101,26 +102,24 @@ msgid "Show the number of notifications"
 msgstr "Mostrar o número de notificações"
 
 #. settings-schema.json->showEmptyTray->description
-msgid "Show empty tray"
-msgstr "Mostrar a bandeja vazia"
+#, fuzzy
+msgid "Show notification tray"
+msgstr "Mostrar notificações"
 
 #. settings-schema.json->showEmptyTray->tooltip
-msgid "Check this to show the tray even when there are no new notifications."
-msgstr ""
-"Marque essa opção para mostrar a bandeja mesmo quando não houverem novas "
-"notificações."
+#, fuzzy
+msgid "Check this to always show the notification tray."
+msgstr "Marque essa opção para ignorar as notificações transitórias."
 
 #. settings-schema.json->showDisturbIcon->description
-#, fuzzy
-msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
+msgid "Always show 'Do Not Disturb' icon"
 msgstr ""
-"Mostrar o ícone 'Não perturbe' mesmo quando a opção 'Mostrar a bandeja "
-"vazia' estiver desabilitada"
 
 #. settings-schema.json->showDisturbIcon->tooltip
+#, fuzzy
 msgid ""
-"Check this to show 'Do not disturb' icon on panel even when show empty tray "
-"option is disabled."
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
 msgstr ""
 "Marque essa opção para mostrar o ícone 'Não perturbe' no painel mesmo quando "
 "a opção 'Mostrar a bandeja vazia' estiver desabilitada."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-05 06:30+0200\n"
+"POT-Creation-Date: 2025-07-13 16:32+0200\n"
 "PO-Revision-Date: 2023-02-10 21:09+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
@@ -19,43 +19,59 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#. applet.js:178 6.4/applet.js:178
+#. applet.js:178 6.4/applet.js:249
 msgid "The following packages were not found:"
 msgstr "未找到以下软件包："
 
-#. applet.js:179 6.4/applet.js:179
+#. applet.js:179 6.4/applet.js:250
 msgid "Please install the above packages to use the applet"
 msgstr "请安装以上软件包才能使用小程序。"
 
-#. applet.js:564 6.4/applet.js:650
+#. applet.js:564 6.4/applet.js:762
 msgid "Screen"
 msgstr "屏幕"
 
-#. applet.js:647 6.4/applet.js:733
+#. applet.js:647 6.4/applet.js:845
 msgid "Outputs"
 msgstr "输出"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:35 6.4/lib/appletGui.js:211
+#. appletGui.js:235 6.4/applet.js:46 6.4/lib/appletGui.js:211
 msgid "Brightness"
 msgstr "亮度"
 
-#. appletGui.js:236 6.4/applet.js:36 6.4/lib/appletGui.js:212
+#. appletGui.js:236 6.4/applet.js:47 6.4/lib/appletGui.js:212
 msgid "Red"
 msgstr "红色"
 
-#. appletGui.js:237 6.4/applet.js:37 6.4/lib/appletGui.js:213
+#. appletGui.js:237 6.4/applet.js:48 6.4/lib/appletGui.js:213
 msgid "Green"
 msgstr "绿色"
 
-#. appletGui.js:238 6.4/applet.js:38 6.4/lib/appletGui.js:214
+#. appletGui.js:238 6.4/applet.js:49 6.4/lib/appletGui.js:214
 msgid "Blue"
 msgstr "蓝色"
 
+#. 6.4/applet.js:50 6.4/applet.js:916
+msgid "Sunrise"
+msgstr ""
+
+#. 6.4/applet.js:51 6.4/applet.js:918
+msgid "Sunset"
+msgstr ""
+
+#. 6.4/applet.js:711
+msgid "Reload"
+msgstr ""
+
+#. 6.4/applet.js:721
+msgid "Configure Presets"
+msgstr ""
+
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:628
+#. 6.4/applet.js:731
 msgid "Presets"
 msgstr ""
 
@@ -264,7 +280,9 @@ msgstr ""
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
 "You can define or modify presets below, which can then be accessed via the "
-"applet's context menu."
+"applet's context menu.\n"
+"Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
+"into account."
 msgstr ""
 
 #. 6.4->settings-schema.json->preset_list->columns->title
@@ -297,3 +315,23 @@ msgid ""
 "Gamma\n"
 "Blue"
 msgstr "伽马"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunrise"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunset"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
+msgid "Set Sunrise and Sunset times"
+msgstr ""
+
+#. 6.4->settings-schema.json->preset_reload->description
+msgid "Apply all changes"
+msgstr ""

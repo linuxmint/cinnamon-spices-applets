@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux 7.4.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-19 13:27+0100\n"
+"POT-Creation-Date: 2025-07-17 03:36+0200\n"
 "PO-Revision-Date: 2025-04-10 14:12+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,8 +56,8 @@ msgstr "Cinnamon környezet újraindítása"
 #. metadata.json->name
 #. 4.2/applet.js:162 4.2/applet.js:580 4.2/applet.js:599 4.2/applet.js:725
 #. 4.2/applet.js:1080 4.8/applet.js:213 4.8/applet.js:717 4.8/applet.js:736
-#. 4.8/applet.js:1233 6.0/applet.js:145 6.0/applet.js:764 6.0/applet.js:784
-#. 6.0/applet.js:1309 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677
+#. 4.8/applet.js:1233 6.0/applet.js:232 6.0/applet.js:824 6.0/applet.js:852
+#. 6.0/applet.js:1489 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677
 #. 6.0/applet_OLD.js:696 6.0/applet_OLD.js:1200 3.8/applet.js:212
 #. 3.8/applet.js:242 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1174
 #. 3.8/applet.js:1739 4.6/applet.js:214 4.6/applet.js:716 4.6/applet.js:735
@@ -68,8 +68,8 @@ msgid "Spices Update"
 msgstr "Spices frissítések"
 
 #. 4.2/applet.js:163 4.2/applet.js:1900 4.2/applet.js:1906 4.8/applet.js:214
-#. 4.8/applet.js:2099 4.8/applet.js:2107 6.0/applet.js:146 6.0/applet.js:2256
-#. 6.0/applet.js:2267 6.0/applet_OLD.js:150 6.0/applet_OLD.js:2140
+#. 4.8/applet.js:2099 4.8/applet.js:2107 6.0/applet.js:237 6.0/applet.js:2678
+#. 6.0/applet.js:2697 6.0/applet_OLD.js:150 6.0/applet_OLD.js:2140
 #. 6.0/applet_OLD.js:2148 3.8/applet.js:243 3.8/applet.js:1913
 #. 3.8/applet.js:1919 4.6/applet.js:215 4.6/applet.js:2093 4.6/applet.js:2101
 #. 2.8/applet.js:1709 2.8/applet.js:1715 5.6/applet.js:212 5.6/applet.js:2113
@@ -77,12 +77,12 @@ msgstr "Spices frissítések"
 msgid "Middle-Click to Refresh"
 msgstr "Középső kattintással frissít"
 
-#. 4.2/applet.js:297 4.8/applet.js:362 6.0/applet.js:367 6.0/applet_OLD.js:320
+#. 4.2/applet.js:297 4.8/applet.js:362 6.0/applet.js:460 6.0/applet_OLD.js:320
 #. 4.6/applet.js:363 5.6/applet.js:360
 msgid "Spices Update has just been installed or upgraded"
 msgstr "A Spices Frissítések éppen most lett telepítve vagy frissítve"
 
-#. 4.2/applet.js:298 4.8/applet.js:363 6.0/applet.js:368 6.0/applet_OLD.js:321
+#. 4.2/applet.js:298 4.8/applet.js:363 6.0/applet.js:462 6.0/applet_OLD.js:321
 #. 4.6/applet.js:364 5.6/applet.js:361
 msgid ""
 "Certain parameters require your vigilance: some may have been modified; "
@@ -91,7 +91,7 @@ msgstr ""
 "Bizonyos paraméterek odafigyelést igényelnek: egyeseket módosulhattak; mások "
 "pedig újak."
 
-#. 4.2/applet.js:299 4.8/applet.js:364 6.0/applet.js:369 6.0/applet_OLD.js:322
+#. 4.2/applet.js:299 4.8/applet.js:364 6.0/applet.js:466 6.0/applet_OLD.js:322
 #. 4.6/applet.js:365 5.6/applet.js:362
 msgid ""
 "Please check your settings using the menu of the SpicesUpdate applet or the "
@@ -100,27 +100,27 @@ msgstr ""
 "Kérjük, ellenőrizze beállításait a Spices Frissítések kisalkalmazás "
 "menüjében vagy az alábbi gombra kattintva."
 
-#. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:371 6.0/applet_OLD.js:324
+#. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:470 6.0/applet_OLD.js:324
 #. 4.6/applet.js:367 5.6/applet.js:364
 msgid "Spices Update Settings"
 msgstr "Spices Frissítések beállításai"
 
-#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:809 6.0/applet_OLD.js:722
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:892 6.0/applet_OLD.js:722
 #. 4.6/applet.js:761 5.6/applet.js:770
 msgid "Update It Now!"
 msgstr "Azonnali frissítés!"
 
-#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:809 6.0/applet_OLD.js:722
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:893 6.0/applet_OLD.js:722
 #. 4.6/applet.js:761 5.6/applet.js:770
 msgid "Update Them All Now!"
 msgstr "Az összes azonnali frissítése!"
 
-#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:815 6.0/applet_OLD.js:728
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:903 6.0/applet_OLD.js:728
 #. 4.6/applet.js:767 5.6/applet.js:776
 msgid "Forget It"
 msgstr "Elfelejtés"
 
-#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:815 6.0/applet_OLD.js:728
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:904 6.0/applet_OLD.js:728
 #. 4.6/applet.js:767 5.6/applet.js:776
 msgid "Forget Them All"
 msgstr "Összes elfelejtése"
@@ -151,44 +151,44 @@ msgstr "Összes elfelejtése"
 #. 5.6->settings-schema.json->btn_refresh_extensions->description
 #. 5.6->settings-schema.json->btn_refresh_themes->description
 #. 4.2/applet.js:635 4.2/applet.js:1682 4.8/applet.js:772 4.8/applet.js:1838
-#. 6.0/applet.js:819 6.0/applet.js:1947 6.0/applet_OLD.js:732
+#. 6.0/applet.js:908 6.0/applet.js:2212 6.0/applet_OLD.js:732
 #. 6.0/applet_OLD.js:1879 3.8/applet.js:682 3.8/applet.js:1747
 #. 4.6/applet.js:771 4.6/applet.js:1832 2.8/applet.js:574 2.8/applet.js:1590
 #. 5.6/applet.js:780 5.6/applet.js:1852 cs/4.2/bin/SUExtensionCore.py:795
 msgid "Refresh"
 msgstr "Frissítés"
 
-#. 4.2/applet.js:807 4.8/applet.js:945 6.0/applet.js:954 6.0/applet_OLD.js:906
+#. 4.2/applet.js:807 4.8/applet.js:945 6.0/applet.js:1073 6.0/applet_OLD.js:906
 #. 3.8/applet.js:847 4.6/applet.js:944 2.8/applet.js:729 5.6/applet.js:953
 msgid "With details here, when available."
 msgstr "Részletek itt, ha rendelkezésre állnak."
 
 #. 4.2/applet.js:808 4.2/constants.js:133 4.8/applet.js:946
-#. 4.8/constants.js:140 6.0/applet.js:955 6.0/applet_OLD.js:907
-#. 6.0/constants.js:147 3.8/applet.js:146 3.8/applet.js:848 4.6/applet.js:945
+#. 4.8/constants.js:140 6.0/applet.js:1075 6.0/applet_OLD.js:907
+#. 6.0/constants.js:150 3.8/applet.js:146 3.8/applet.js:848 4.6/applet.js:945
 #. 4.6/constants.js:140 2.8/applet.js:105 2.8/applet.js:730 5.6/applet.js:954
 #. 5.6/constants.js:134
 msgid "One applet needs update:"
 msgstr "Egy kisalkalmazást frissíteni kell:"
 
-#. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:956 6.0/applet_OLD.js:908
+#. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:1078 6.0/applet_OLD.js:908
 #. 3.8/applet.js:848 4.6/applet.js:946 2.8/applet.js:730 5.6/applet.js:955
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr "Nem számít. Ez egy HAMIS értesítés, csak teszt."
 
-#. 4.2/applet.js:1080 4.8/applet.js:1233 6.0/applet.js:1309
+#. 4.2/applet.js:1080 4.8/applet.js:1233 6.0/applet.js:1489
 #. 6.0/applet_OLD.js:1200 3.8/applet.js:1174 4.6/applet.js:1229
 #. 2.8/applet.js:1004 5.6/applet.js:1245
 msgid "is fully functional."
 msgstr "teljesen működőképes."
 
-#. 4.2/applet.js:1081 4.8/applet.js:1234 6.0/applet.js:1310
+#. 4.2/applet.js:1081 4.8/applet.js:1234 6.0/applet.js:1490
 #. 6.0/applet_OLD.js:1201 3.8/applet.js:1175 4.6/applet.js:1230
 #. 2.8/applet.js:1005 5.6/applet.js:1246
 msgid "All dependencies are installed"
 msgstr "Minden szükséges függőség telepítve"
 
-#. 4.2/applet.js:1104 4.8/applet.js:1259 6.0/applet.js:1337
+#. 4.2/applet.js:1104 4.8/applet.js:1259 6.0/applet.js:1537
 #. 6.0/applet_OLD.js:1226 3.8/applet.js:1199 4.6/applet.js:1253
 #. 2.8/applet.js:1029 5.6/applet.js:1271
 msgid ""
@@ -198,38 +198,38 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1338
+#. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1543
 #. 6.0/applet_OLD.js:1227 3.8/applet.js:1200 4.6/applet.js:1254
 #. 2.8/applet.js:1030 5.6/applet.js:1272
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#. 4.2/applet.js:1106 4.8/applet.js:1261 6.0/applet.js:1339
+#. 4.2/applet.js:1106 4.8/applet.js:1261 6.0/applet.js:1550
 #. 6.0/applet_OLD.js:1228 3.8/applet.js:1201 4.6/applet.js:1255
 #. 2.8/applet.js:1031 5.6/applet.js:1273
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
-#. 4.2/applet.js:1504 4.8/applet.js:1659 6.0/applet.js:1701
+#. 4.2/applet.js:1504 4.8/applet.js:1659 6.0/applet.js:1952
 #. 6.0/applet_OLD.js:1700 3.8/applet.js:1582 4.6/applet.js:1653
 #. 2.8/applet.js:1423 5.6/applet.js:1673
 msgid "(Description unavailable)"
 msgstr "(Leírás nem elérhető)"
 
-#. 4.2/applet.js:1706 4.8/applet.js:1862 6.0/applet.js:1971
+#. 4.2/applet.js:1706 4.8/applet.js:1862 6.0/applet.js:2243
 #. 6.0/applet_OLD.js:1903 3.8/applet.js:1770 4.6/applet.js:1856
 #. 2.8/applet.js:1614 5.6/applet.js:1876
 msgid "Forget new Spices"
 msgstr "Felejtse el az új Spices-t"
 
-#. 4.2/applet.js:1712 4.8/applet.js:1868 6.0/applet.js:1977
+#. 4.2/applet.js:1712 4.8/applet.js:1868 6.0/applet.js:2255
 #. 6.0/applet_OLD.js:1909 3.8/applet.js:1776 4.6/applet.js:1862
 #. 2.8/applet.js:1620 5.6/applet.js:1882
 msgid "Open useful Cinnamon Settings"
 msgstr "Hasznos Cinnamon beállítások megnyitása"
 
-#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:1984
+#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:2269
 #. 6.0/applet_OLD.js:1916 3.8/applet.js:1783 4.6/applet.js:1869
 #. 2.8/applet.js:1627 5.6/applet.js:1889 cs/4.2/bin/SUExtensionCore.py:240
 msgid "Configure"
@@ -242,7 +242,7 @@ msgstr "Beállítás"
 #. 4.6->settings-schema.json->General->title
 #. 2.8->settings-schema.json->head5->description
 #. 5.6->settings-schema.json->General->title
-#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:1987
+#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:2277
 #. 6.0/applet_OLD.js:1919 4.6/applet.js:1872 5.6/applet.js:1892
 msgid "General"
 msgstr "Általános"
@@ -255,8 +255,8 @@ msgstr "Általános"
 #. 2.8->settings-schema.json->head1->description
 #. 5.6->settings-schema.json->Applets->title
 #. 4.2/applet.js:1722 4.2/constants.js:128 4.8/applet.js:1878
-#. 4.8/constants.js:135 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:141 3.8/applet.js:141 4.6/applet.js:1872
+#. 4.8/constants.js:135 6.0/applet.js:2278 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:144 3.8/applet.js:141 4.6/applet.js:1872
 #. 4.6/constants.js:135 2.8/applet.js:100 5.6/applet.js:1892
 #. 5.6/constants.js:129 cs/4.4/modules/cs_applets.py:35
 #. cs/6.0_FUTURE/modules/cs_applets.py:35 cs/4.2/modules/cs_applets.py:34
@@ -273,8 +273,8 @@ msgstr "Kisalkalmazások"
 #. 2.8->settings-schema.json->head2->description
 #. 5.6->settings-schema.json->Desklets->title
 #. 4.2/applet.js:1722 4.2/constants.js:129 4.8/applet.js:1878
-#. 4.8/constants.js:136 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:142 3.8/applet.js:142 4.6/applet.js:1872
+#. 4.8/constants.js:136 6.0/applet.js:2279 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:145 3.8/applet.js:142 4.6/applet.js:1872
 #. 4.6/constants.js:136 2.8/applet.js:101 5.6/applet.js:1892
 #. 5.6/constants.js:130 cs/4.4/modules/cs_desklets.py:33
 #. cs/6.0_FUTURE/modules/cs_desklets.py:33 cs/4.2/modules/cs_desklets.py:32
@@ -291,8 +291,8 @@ msgstr "Asztalkalmazások"
 #. 2.8->settings-schema.json->head3->description
 #. 5.6->settings-schema.json->Extensions->title
 #. 4.2/applet.js:1722 4.2/constants.js:130 4.8/applet.js:1878
-#. 4.8/constants.js:137 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:143 3.8/applet.js:143 4.6/applet.js:1872
+#. 4.8/constants.js:137 6.0/applet.js:2280 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:146 3.8/applet.js:143 4.6/applet.js:1872
 #. 4.6/constants.js:137 2.8/applet.js:102 5.6/applet.js:1892
 #. 5.6/constants.js:131 cs/4.4/modules/cs_extensions.py:33
 #. cs/6.0_FUTURE/modules/cs_extensions.py:33 cs/4.2/modules/cs_extensions.py:32
@@ -309,8 +309,8 @@ msgstr "Bővítmények"
 #. 2.8->settings-schema.json->head4->description
 #. 5.6->settings-schema.json->Themes->title
 #. 4.2/applet.js:1722 4.2/constants.js:131 4.8/applet.js:1878
-#. 4.8/constants.js:138 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:144 3.8/applet.js:144 4.6/applet.js:1872
+#. 4.8/constants.js:138 6.0/applet.js:2281 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:147 3.8/applet.js:144 4.6/applet.js:1872
 #. 4.6/constants.js:138 2.8/applet.js:103 5.6/applet.js:1892
 #. 5.6/constants.js:132 cs/4.4/modules/cs_themes.py:42
 #. cs/4.4/modules/cs_themes.py:72 cs/4.4/modules/cs_themes.py:74
@@ -325,157 +325,157 @@ msgstr "Bővítmények"
 msgid "Themes"
 msgstr "Témák"
 
-#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2014
+#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2333
 #. 6.0/applet_OLD.js:1945 3.8/applet.js:1798 4.6/applet.js:1898
 #. 2.8/applet.js:1642 5.6/applet.js:1918
 msgid "Help"
 msgstr "Súgó"
 
-#. 4.2/applet.js:1891 4.8/applet.js:2090 6.0/applet.js:2247
+#. 4.2/applet.js:1891 4.8/applet.js:2090 6.0/applet.js:2658
 #. 6.0/applet_OLD.js:2131 3.8/applet.js:1904 4.6/applet.js:2084
 #. 2.8/applet.js:1700 5.6/applet.js:2104
 msgid "Middle-Click to open useful Cinnamon Settings"
 msgstr "Hasznos Cinnamon beállítások megnyitása középső gombbal"
 
-#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:137
+#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:140
 #. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 5.6/constants.js:125
 msgid "Applet"
 msgstr "Kisalkalmazás"
 
-#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:138
+#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:141
 #. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 5.6/constants.js:126
 msgid "Desklet"
 msgstr "Asztalkalmazás"
 
-#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:139
+#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:142
 #. 3.8/applet.js:139 4.6/constants.js:133 2.8/applet.js:98 5.6/constants.js:127
 msgid "Extension"
 msgstr "Kiterjesztés"
 
-#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:140
+#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:143
 #. 3.8/applet.js:140 4.6/constants.js:134 2.8/applet.js:99 5.6/constants.js:128
 msgid "Theme"
 msgstr "Téma"
 
-#. 4.2/constants.js:132 4.8/constants.js:139 6.0/constants.js:146
+#. 4.2/constants.js:132 4.8/constants.js:139 6.0/constants.js:149
 #. 3.8/applet.js:145 4.6/constants.js:139 2.8/applet.js:104
 #. 5.6/constants.js:133
 msgid "One desklet needs update:"
 msgstr "Egy asztalkalmazás frissítése szükséges:"
 
-#. 4.2/constants.js:134 4.8/constants.js:141 6.0/constants.js:148
+#. 4.2/constants.js:134 4.8/constants.js:141 6.0/constants.js:151
 #. 3.8/applet.js:147 4.6/constants.js:141 2.8/applet.js:106
 #. 5.6/constants.js:135
 msgid "One extension needs update:"
 msgstr "Egy kisalkalmazás frissítése szükséges:"
 
-#. 4.2/constants.js:135 4.8/constants.js:142 6.0/constants.js:149
+#. 4.2/constants.js:135 4.8/constants.js:142 6.0/constants.js:152
 #. 3.8/applet.js:148 4.6/constants.js:142 2.8/applet.js:107
 #. 5.6/constants.js:136
 msgid "One theme needs update:"
 msgstr "Egy téma frissítése szükséges:"
 
-#. 4.2/constants.js:136 4.8/constants.js:143 6.0/constants.js:151
+#. 4.2/constants.js:136 4.8/constants.js:143 6.0/constants.js:154
 #. 3.8/applet.js:149 4.6/constants.js:143 2.8/applet.js:108
 #. 5.6/constants.js:137
 msgid "Some desklets need update:"
 msgstr "Néhány asztalkalmazás frissítése szükséges:"
 
-#. 4.2/constants.js:137 4.8/constants.js:144 6.0/constants.js:152
+#. 4.2/constants.js:137 4.8/constants.js:144 6.0/constants.js:155
 #. 3.8/applet.js:150 4.6/constants.js:144 2.8/applet.js:109
 #. 5.6/constants.js:138
 msgid "Some applets need update:"
 msgstr "Néhány kisalkalmazás frissítése szükséges:"
 
-#. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:153
+#. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:156
 #. 3.8/applet.js:151 4.6/constants.js:145 2.8/applet.js:110
 #. 5.6/constants.js:139
 msgid "Some extensions need update:"
 msgstr "Néhány bővítmény frissítése szükséges:"
 
-#. 4.2/constants.js:139 4.8/constants.js:146 6.0/constants.js:154
+#. 4.2/constants.js:139 4.8/constants.js:146 6.0/constants.js:157
 #. 3.8/applet.js:152 4.6/constants.js:146 2.8/applet.js:111
 #. 5.6/constants.js:140
 msgid "Some themes need update:"
 msgstr "Néhány téma frissítése szükséges:"
 
-#. 4.2/constants.js:140 4.8/constants.js:147 6.0/constants.js:156
+#. 4.2/constants.js:140 4.8/constants.js:147 6.0/constants.js:159
 #. 3.8/applet.js:153 4.6/constants.js:147 2.8/applet.js:112
 #. 5.6/constants.js:141
 msgid "New desklet available:"
 msgstr "Új asztalkalmazás érhető el:"
 
-#. 4.2/constants.js:141 4.8/constants.js:148 6.0/constants.js:157
+#. 4.2/constants.js:141 4.8/constants.js:148 6.0/constants.js:160
 #. 3.8/applet.js:154 4.6/constants.js:148 2.8/applet.js:113
 #. 5.6/constants.js:142
 msgid "New applet available:"
 msgstr "Új kisalkalmazás érhető el:"
 
-#. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:158
+#. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:161
 #. 3.8/applet.js:155 4.6/constants.js:149 2.8/applet.js:114
 #. 5.6/constants.js:143
 msgid "New extension available:"
 msgstr "Új bővítmény érhető el:"
 
-#. 4.2/constants.js:143 4.8/constants.js:150 6.0/constants.js:159
+#. 4.2/constants.js:143 4.8/constants.js:150 6.0/constants.js:162
 #. 3.8/applet.js:156 4.6/constants.js:150 2.8/applet.js:115
 #. 5.6/constants.js:144
 msgid "New theme available:"
 msgstr "Új téma érhető el:"
 
-#. 4.2/constants.js:144 4.8/constants.js:151 6.0/constants.js:161
+#. 4.2/constants.js:144 4.8/constants.js:151 6.0/constants.js:164
 #. 3.8/applet.js:157 4.6/constants.js:151 2.8/applet.js:116
 #. 5.6/constants.js:145
 msgid "New desklets available:"
 msgstr "Új asztalkalmazások érhetőek el:"
 
-#. 4.2/constants.js:145 4.8/constants.js:152 6.0/constants.js:162
+#. 4.2/constants.js:145 4.8/constants.js:152 6.0/constants.js:165
 #. 3.8/applet.js:158 4.6/constants.js:152 2.8/applet.js:117
 #. 5.6/constants.js:146
 msgid "New applets available:"
 msgstr "Új kisalkalmazások érhetőek el:"
 
-#. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:163
+#. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:166
 #. 3.8/applet.js:159 4.6/constants.js:153 2.8/applet.js:118
 #. 5.6/constants.js:147
 msgid "New extensions available:"
 msgstr "Új bővítmények érhetőek el:"
 
-#. 4.2/constants.js:147 4.8/constants.js:154 6.0/constants.js:164
+#. 4.2/constants.js:147 4.8/constants.js:154 6.0/constants.js:167
 #. 3.8/applet.js:160 4.6/constants.js:154 2.8/applet.js:119
 #. 5.6/constants.js:148
 msgid "New themes available:"
 msgstr "Új témák érhetőek el:"
 
-#. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:169
+#. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:172
 #. 4.6/constants.js:158 5.6/constants.js:152
 msgid "If you do not want an applet to be checked, uncheck its first box."
 msgstr ""
 "Ha nem szeretné, hogy egy kisalkalmazás ellenőrizve legyen, törölje az első "
 "négyzetének jelölését."
 
-#. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:170
+#. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:173
 #. 4.6/constants.js:159 5.6/constants.js:153
 msgid "If you do not want a desklet to be checked, uncheck its first box."
 msgstr ""
 "Ha nem szeretné, hogy egy asztalalkalmazás ellenőrizve legyen, akkor ne "
 "jelölje be az első négyzetet."
 
-#. 4.2/constants.js:153 4.8/constants.js:160 6.0/constants.js:171
+#. 4.2/constants.js:153 4.8/constants.js:160 6.0/constants.js:174
 #. 4.6/constants.js:160 5.6/constants.js:154
 msgid "If you do not want an extension to be checked, uncheck its first box."
 msgstr ""
 "Ha nem szeretné, hogy egy bővítmény ellenőrizve legyen, akkor ne jelölje be "
 "az első négyzetet."
 
-#. 4.2/constants.js:154 4.8/constants.js:161 6.0/constants.js:172
+#. 4.2/constants.js:154 4.8/constants.js:161 6.0/constants.js:175
 #. 4.6/constants.js:161 5.6/constants.js:155
 msgid "If you do not want a theme to be checked, uncheck its first box."
 msgstr ""
 "Ha nem szeretné, hogy egy téma ellenőrizve legyen, akkor ne jelölje be az "
 "első négyzetet."
 
-#. 4.2/constants.js:158 4.8/constants.js:165 6.0/constants.js:177
+#. 4.2/constants.js:158 4.8/constants.js:165 6.0/constants.js:180
 #. 4.6/constants.js:165 5.6/constants.js:159
 msgid ""
 "If you want to get the latest version of an applet now, check both boxes."
@@ -483,7 +483,7 @@ msgstr ""
 "Ha most szeretné letölteni a kisalkalmazás legújabb verzióját, jelölje be "
 "mindkét négyzetet."
 
-#. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:178
+#. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:181
 #. 4.6/constants.js:166 5.6/constants.js:160
 msgid ""
 "If you want to get the latest version of a desklet now, check both boxes."
@@ -491,7 +491,7 @@ msgstr ""
 "Ha most szeretné letölteni a asztalalkalmazás legújabb verzióját, jelölje be "
 "mindkét négyzetet."
 
-#. 4.2/constants.js:160 4.8/constants.js:167 6.0/constants.js:179
+#. 4.2/constants.js:160 4.8/constants.js:167 6.0/constants.js:182
 #. 4.6/constants.js:167 5.6/constants.js:161
 msgid ""
 "If you want to get the latest version of an extension now, check both boxes."
@@ -499,64 +499,64 @@ msgstr ""
 "Ha most szeretné letölteni egy bővítmény legújabb verzióját, jelölje be "
 "mindkét négyzetet."
 
-#. 4.2/constants.js:161 4.8/constants.js:168 6.0/constants.js:180
+#. 4.2/constants.js:161 4.8/constants.js:168 6.0/constants.js:183
 #. 4.6/constants.js:168 5.6/constants.js:162
 msgid "If you want to get the latest version of a theme now, check both boxes."
 msgstr ""
 "Ha most szeretné letölteni egy téma legújabb verzióját, jelölje be mindkét "
 "négyzetet."
 
-#. 4.2/constants.js:164 4.8/constants.js:171 6.0/constants.js:184
+#. 4.2/constants.js:164 4.8/constants.js:171 6.0/constants.js:187
 #. 3.8/applet.js:93 4.6/constants.js:171 5.6/constants.js:165
 msgid "When all your choices are made, click the Refresh button."
 msgstr "Ha minden változtatást végrehajtott, kattintson a Frissítés gombra."
 
-#. 4.8/applet.js:2104 6.0/applet.js:2262 6.0/applet_OLD.js:2145
+#. 4.8/applet.js:2104 6.0/applet.js:2688 6.0/applet_OLD.js:2145
 #. 4.6/applet.js:2098 5.6/applet.js:2118
 msgid "The Cinnamon Server seems to be DOWN!"
 msgstr "Úgy tűnik, hogy a Cinnamon szerver NEM MŰKÖDIK!"
 
-#. 4.8/applet.js:2104 6.0/applet.js:2262 6.0/applet_OLD.js:2145
+#. 4.8/applet.js:2104 6.0/applet.js:2689 6.0/applet_OLD.js:2145
 #. 4.6/applet.js:2098 5.6/applet.js:2118
 msgid "Middle-Click to Retry"
 msgstr "Középső kattintással újrapróbálkozik"
 
 #. 6.0->settings-schema.json->Actions->title
-#. 6.0/applet.js:1987 6.0/constants.js:145
+#. 6.0/applet.js:2282 6.0/constants.js:148
 #. cs/6.0_FUTURE/modules/cs_actions.py:35
 msgid "Actions"
 msgstr "Műveletek"
 
-#. 6.0/constants.js:150
+#. 6.0/constants.js:153
 msgid "One action needs update:"
 msgstr "Egy művelet frissítése szükséges:"
 
-#. 6.0/constants.js:155
+#. 6.0/constants.js:158
 msgid "Some actions need update:"
 msgstr "Néhány művelet frissítése szükséges:"
 
-#. 6.0/constants.js:160
+#. 6.0/constants.js:163
 msgid "New action available:"
 msgstr "Új művelet érhető el:"
 
-#. 6.0/constants.js:165
+#. 6.0/constants.js:168
 msgid "New actions available:"
 msgstr "Új műveletek érhetőek el:"
 
-#. 6.0/constants.js:173
+#. 6.0/constants.js:176
 msgid "If you do not want a nemo action to be checked, uncheck its first box."
 msgstr ""
 "Ha nem szeretné, hogy egy nemo művelet be legyen jelölve, vegye ki a "
 "jelölést az első négyzetből."
 
-#. 6.0/constants.js:181
+#. 6.0/constants.js:184
 msgid ""
 "If you want to get the latest version of a nemo action now, check both boxes."
 msgstr ""
 "Ha egy nemo művelet legfrissebb verzióját szeretné most megkapni, jelölje be "
 "mindkét négyzetet."
 
-#. 6.0/constants.js:184
+#. 6.0/constants.js:187
 msgid "For private Spices, both boxes will be considered unchecked."
 msgstr ""
 "A privát Spice esetében mindkét négyzetet kipipálhatatlannak kell tekinteni."
@@ -2315,6 +2315,14 @@ msgid ""
 "occupy?"
 msgstr ""
 "A képernyő szélességének mekkora százalékát foglalhatja el az eszköztippek?"
+
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr ""
 
 #. 6.0->settings-schema.json->check_actions->description
 msgid "Check regularly whether your nemo actions are up to date"

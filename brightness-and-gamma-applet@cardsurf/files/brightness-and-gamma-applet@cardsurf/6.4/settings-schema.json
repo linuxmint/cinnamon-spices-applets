@@ -50,7 +50,9 @@
             "title": "Your presets",
             "keys": [
                 "preset_label",
-                "preset_list"
+                "preset_list",
+                "preset_sunrise_sunset_button",
+                "preset_reload"
             ]
         }
     },
@@ -180,7 +182,7 @@
 
     "preset_label": {
         "type": "label",
-        "description": "You can define or modify presets below, which can then be accessed via the applet's context menu."
+        "description": "You can define or modify presets below, which can then be accessed via the applet's context menu.\nOnly the first Start at Sunrise and Start at Sunset checked boxes are taken into account."
     },
     "preset_list": {
         "type": "list",
@@ -191,7 +193,9 @@
             {"id": "brightness", "title": "Brightness", "type": "integer", "align": 0.5, "min": 0, "max": 100},
             {"id": "gamma_red", "title": "Gamma\nRed", "type": "integer", "align": 0.5, "min": 0, "max": 100},
             {"id": "gamma_green", "title": "Gamma\nGreen", "type": "integer", "align": 0.5, "min": 0, "max": 100},
-            {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 100}
+            {"id": "gamma_blue", "title": "Gamma\nBlue", "type": "integer", "align": 0.5, "min": 0, "max": 100},
+            {"id": "start_at_sunrise", "title": "Start at\nSunrise", "type": "boolean", "align": 0.5},
+            {"id": "start_at_sunset", "title": "Start at\nSunset", "type": "boolean", "align": 0.5}
         ],
         "default": [
             {
@@ -200,7 +204,9 @@
                 "brightness": 100,
                 "gamma_red": 100,
                 "gamma_green": 100,
-                "gamma_blue": 100
+                "gamma_blue": 100,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
             },
             {
                 "name": "Day-time comfort",
@@ -208,7 +214,9 @@
                 "brightness": 80,
                 "gamma_red": 100,
                 "gamma_green": 95,
-                "gamma_blue": 90
+                "gamma_blue": 90,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
             },
             {
                 "name": "Night-time comfort",
@@ -216,9 +224,23 @@
                 "brightness": 70,
                 "gamma_red": 100,
                 "gamma_green": 90,
-                "gamma_blue": 80
+                "gamma_blue": 80,
+                "start_at_sunrise": false,
+                "start_at_sunset": false
             }
         ]
+    },
+
+    "preset_sunrise_sunset_button": {
+        "type": "button",
+        "description": "Set Sunrise and Sunset times",
+        "callback": "on_preset_sunrise_sunset_button_clicked"
+    },
+
+    "preset_reload": {
+        "type": "button",
+        "description": "Apply all changes",
+        "callback": "on_preset_reload_button_clicked"
     },
 
     "last_values_string" : {

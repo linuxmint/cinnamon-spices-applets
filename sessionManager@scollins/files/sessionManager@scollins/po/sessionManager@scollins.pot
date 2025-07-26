@@ -1,0 +1,104 @@
+# SESSION MANAGER
+# This file is put in the public domain.
+# collinss, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sessionManager@scollins 1.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:154
+msgid "Session"
+msgstr ""
+
+#. applet.js:228
+msgid "Lock Screen"
+msgstr ""
+
+#. applet.js:232
+msgid "Switch User"
+msgstr ""
+
+#. applet.js:237
+msgid "Guest Session"
+msgstr ""
+
+#. applet.js:242
+msgid "Log Off"
+msgstr ""
+
+#. applet.js:248
+msgid "Suspend"
+msgstr ""
+
+#. applet.js:253
+msgid "Sleep"
+msgstr ""
+
+#. applet.js:258
+msgid "Hibernate"
+msgstr ""
+
+#. applet.js:264
+msgid "Restart"
+msgstr ""
+
+#. applet.js:268
+msgid "Shut Down"
+msgstr ""
+
+#. metadata.json->name
+msgid "Session Manager"
+msgstr ""
+
+#. metadata.json->description
+msgid "Provides easy access to shut down, restart, etc"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"Session Manager is an applet that provides easy access to session controls "
+"such as shut down, restart, log off, switch user, etc. It has been tested in "
+"Arch, Fedora and Linux Mint, and supports a wide variety of software "
+"configurations. If your particular configuration is not supported, please "
+"submit a feature request on github, and I will add it at my earliest "
+"convenience."
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr ""
+
+#. settings-schema.json->general->description
+msgid "General Settings"
+msgstr ""
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel Icon"
+msgstr ""
+
+#. settings-schema.json->panelText->description
+msgid "Panel Text"
+msgstr ""
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->iconSize->description
+msgid "Icon Size"
+msgstr ""
+
+#. settings-schema.json->symbolicMenuIcons->description
+msgid "Symbolic icons in menu"
+msgstr ""

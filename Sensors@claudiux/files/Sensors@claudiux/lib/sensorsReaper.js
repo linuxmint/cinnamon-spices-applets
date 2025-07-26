@@ -28,7 +28,8 @@ var LOCAL_DATA = {
       "fans": {},
       "voltages": {},
       "intrusions": {},
-      "currents": {}
+      "currents": {},
+      "ignored": {}
     };
 /**
  * Class SensorsReaper
@@ -58,7 +59,8 @@ class SensorsReaper {
       "fans": {},
       "voltages": {},
       "intrusions": {},
-      "currents": {}
+      "currents": {},
+      "ignored": {}
     };
     this.isRunning = false;
   }
@@ -206,7 +208,7 @@ class SensorsReaper {
 
   async _sensors_reaped(output) {
     if (typeof(output) === "string")
-      output = output.replace(/,\n.*}/g, "\n\t}");
+      output = output.replace(/,\n.*}/g, "\n\t}").replace(/NaN/g, "null");
     this.raw_data = JSON.parse(output);
     //~ log("this.raw_data: "+JSON.stringify(this.raw_data, null, "\t"), true);
     // LOCAL_DATA = {
@@ -335,9 +337,11 @@ class SensorsReaper {
               type_of_feature = "currents";
             }
           } else {
+            type_of_feature = "ignored";
             continue
           }
-          feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
+          if (type_of_feature != "ignored")
+            feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
         }
 
         //Util.unref(subfeatures);

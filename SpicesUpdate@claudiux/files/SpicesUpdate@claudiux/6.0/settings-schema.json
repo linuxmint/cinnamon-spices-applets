@@ -74,6 +74,7 @@
         "exp_applets",
         "unprotected_applets",
         "btn_refresh_applets",
+        "btn_tickallthenrefresh_applets",
         "btn_cs_applets"
       ]
     },
@@ -92,6 +93,7 @@
         "exp_desklets",
         "unprotected_desklets",
         "btn_refresh_desklets",
+        "btn_tickallthenrefresh_desklets",
         "btn_cs_desklets"
       ]
     },
@@ -110,6 +112,7 @@
         "exp_extensions",
         "unprotected_extensions",
         "btn_refresh_extensions",
+        "btn_tickallthenrefresh_extensions",
         "btn_cs_extensions"
       ]
     },
@@ -128,6 +131,7 @@
         "exp_themes",
         "unprotected_themes",
         "btn_refresh_themes",
+        "btn_tickallthenrefresh_themes",
         "btn_cs_themes"
       ]
     },
@@ -146,6 +150,7 @@
         "exp_actions",
         "unprotected_actions",
         "btn_refresh_actions",
+        "btn_tickallthenrefresh_actions",
         "btn_cs_actions"
       ]
     },
@@ -212,6 +217,11 @@
     "description": "Refresh",
     "callback": "_on_refresh_pressed_applets"
   },
+  "btn_tickallthenrefresh_applets": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_applets"
+  },
   "unprotected_applets": {
     "type": "list",
     "description": "Update these applets:",
@@ -271,6 +281,11 @@
     "type": "button",
     "description": "Refresh",
     "callback": "_on_refresh_pressed_desklets"
+  },
+  "btn_tickallthenrefresh_desklets": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_desklets"
   },
   "unprotected_desklets": {
     "type": "list",
@@ -332,6 +347,11 @@
     "description": "Refresh",
     "callback": "_on_refresh_pressed_extensions"
   },
+  "btn_tickallthenrefresh_extensions": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_extensions"
+  },
   "unprotected_extensions": {
     "type": "list",
     "description": "Update these extensions:",
@@ -392,6 +412,11 @@
     "description": "Refresh",
     "callback": "_on_refresh_pressed_themes"
   },
+  "btn_tickallthenrefresh_themes": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_themes"
+  },
   "unprotected_themes": {
     "type": "list",
     "description": "Update these themes:",
@@ -451,6 +476,11 @@
     "type": "button",
     "description": "Refresh",
     "callback": "_on_refresh_pressed_actions"
+  },
+  "btn_tickallthenrefresh_actions": {
+    "type": "button",
+    "description": "Tick all the first boxes then refresh",
+    "callback": "_on_tickallthenrefresh_pressed_actions"
   },
   "unprotected_actions": {
     "type": "list",

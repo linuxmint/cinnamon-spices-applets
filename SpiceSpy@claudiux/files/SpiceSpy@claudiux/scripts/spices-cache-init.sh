@@ -11,6 +11,7 @@ for type in action applet desklet extension theme; do {
 
 sleep 1
 
-${HOME}/.local/share/cinnamon/applets/${UUID}/scripts/spices-cache-updater.py --update-all
+#~ ${HOME}/.local/share/cinnamon/applets/${UUID}/scripts/spices-cache-updater.py --update-all
+${HOME}/.local/share/cinnamon/applets/${UUID}/scripts/spices-cache-updater.py
 
 exit 0

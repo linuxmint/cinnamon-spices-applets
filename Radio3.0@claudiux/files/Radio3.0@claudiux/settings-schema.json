@@ -79,6 +79,7 @@
       "type": "page",
       "title": "YT",
       "sections": [
+        "sectionYTIgnore",
         "sectionYTFormat",
         "sectionYTIcon",
         "sectionYTExtract"
@@ -405,6 +406,13 @@
       "title": "Icon",
       "keys": [
         "highlight-icon-while-background-recording"
+      ]
+    },
+    "sectionYTIgnore": {
+      "type": "section",
+      "title": "Ignore YT",
+      "keys": [
+        "ignoreYT"
       ]
     },
     "sectionYTFormat": {
@@ -1330,6 +1338,12 @@
     "type": "switch",
     "default": true,
     "description": "Highlight this applet icon during background recording"
+  },
+  "ignoreYT": {
+    "type": "switch",
+    "default": false,
+    "description": "Ignore Youtube features",
+    "tooltip": "Ignoring Youtube features reduces CPU load. But loading album art becomes impossible."
   },
   "yt-cookies-from": {
     "type": "combobox",

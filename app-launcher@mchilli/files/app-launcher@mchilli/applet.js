@@ -47,6 +47,9 @@ class MyApplet extends Applet.TextIconApplet {
             this.instanceId = instanceId;
             this.groupBuffer = [];
 
+            this.initialized = false; // some callbacks are triggered multiple times at startup without values been changed
+            this.mouseEntered = false;
+            this.subMenuClosedRecently = false;  // to prevent the menu from being closed after the submenus have collapsed
             this.dragging = false;
             this.dragPlaceholder = null;
             this.dragPlaceholderParent = null;
@@ -65,6 +68,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.updateHotKey();
             this.initIcons();
             this.initLabel();
+
+            setTimeout(() => {this.initialized = true}, 500);
         } catch (e) {
             global.logError(e);
         }
@@ -73,8 +78,12 @@ class MyApplet extends Applet.TextIconApplet {
     bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.uuid, this.instanceId);
 
-        this.settings.bind('list-applications', 'listApplications', this.updateGroups);
-        this.settings.bind('list-groups', 'listGroups', this.updateMenu);
+        this.settings.bind('list-applications', 'listApplications', (event) => {
+            if (this.initialized) this.updateGroups();
+        });
+        this.settings.bind('list-groups', 'listGroups', (event) => {
+            if (this.initialized) this.updateMenu();
+        });
 
         this.settings.bind('visible-launcher-label', 'visibleLauncherLabel', this.initLabel);
         this.settings.bind('launcher-label', 'launcherLabel', this.initLabel);
@@ -428,7 +437,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     on_applet_clicked(event) {
-        if (this.activeDrag()) {
+        if (this.dragging) {
             this.endDrag();
         }
         this.menu.toggle();
@@ -446,13 +455,22 @@ class MyApplet extends Applet.TextIconApplet {
 
     on_menu_state_changed(menu, isOpen, sourceActor) {
         this.toggleIcon();
-        if (!isOpen && this.menu.isContextOpen()) {
+        if (!isOpen && this.menu.isContextOpen) {
             this.menu.closeContext();
         }
     }
 
     onMouseEnter(event) {
-        if (this.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+        if (!this.openByHover) return
+        this.mouseEntered = true;
+        this.subMenuClosedRecently = false;
+
+        if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+
+        if (!this.menu.isOpen && !this.hoverTimeoutID) {
             this.hoverTimeoutID = setTimeout(() => {
                 if (!this._applet_context_menu.isOpen) {
                     this.menu.open();
@@ -462,9 +480,26 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     onMouseLeave(event) {
+        if (!this.openByHover) return
+        this.mouseEntered = false;
+
+        this.leaveTimeoutID = setTimeout(() => {
+            this.checkMouseEntered();
+        }, this.openByHoverDelay);
+
         if (this.hoverTimeoutID) {
             clearTimeout(this.hoverTimeoutID);
             this.hoverTimeoutID = undefined;
+        }
+    }
+
+    checkMouseEntered() {
+        if (this.openByHover && 
+            this.menu.isOpen &&
+            !this.menu.isContextOpen &&
+            !this.mouseEntered && 
+            !this.subMenuClosedRecently) {
+                this.menu.close();
         }
     }
 
@@ -497,10 +532,6 @@ class MyApplet extends Applet.TextIconApplet {
         }
 
         this.dragging = false;
-    }
-
-    activeDrag() {
-        return this.dragging;
     }
 
     handleDrag(source, x, y, box, indent) {
@@ -593,17 +624,21 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     _init(applet, orientation) {
         try {
             super._init(applet, orientation);
+            
             this.applet = applet;
             this._menuAppItems = [];
             this._menuGroupItems = [];
 
-            this.contextOpen = false;
+            this.isContextOpen = false;
             this.hotkeyTriggered = false;
             this.pointerX = 0;
             this.pointerY = 0;
             this.actorPlaced = false;
+
+            this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -809,19 +844,35 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
     }
 
     openContext() {
-        this.contextOpen = true;
+        this.isContextOpen = true;
         this.expandMenu();
     }
 
     closeContext() {
-        this.contextOpen = false;
+        this.isContextOpen = false;
         this.unselectMenuItems();
         this.collapseMenu();
         this.actor.grab_key_focus(); // necessary to recalc the width
     }
 
-    isContextOpen() {
-        return this.contextOpen;
+    onMouseEnter(event) {
+        if (!this.applet.openByHover) return
+        this.applet.mouseEntered = true;
+        this.applet.subMenuClosedRecently = false;
+
+        if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
+        }
+    }
+
+    onMouseLeave(event) {
+        if (!this.applet.openByHover) return
+        this.applet.mouseEntered = false;
+
+        this.leaveTimeoutID = setTimeout(() => {
+            this.applet.checkMouseEntered();
+        }, this.applet.openByHoverDelay);
     }
 
     handleDragOver(source, actor, x, y, time) {
@@ -878,6 +929,11 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
             this.iconSize = iconSize;
             this.iconType = useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
 
+            this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
+            this._signals.connect(this.menu.actor, 'enter-event', this.onMouseEnter, this);
+            this._signals.connect(this.menu.actor, 'leave-event', this.onMouseLeave, this);
+
             this._menuItems = [];
 
             this.buttonDelete = this._createButton('delete');
@@ -903,7 +959,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 return this.acceptMenuDrop(source, actor, x, y, time);
             };
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -924,9 +980,6 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
         this._children.unshift(params);
         this._signals.connect(this.actor, 'destroy', this._removeChild.bind(this, this._icon));
-
-        this._signals.connect(this.actor, 'enter-event', this.onMouseEnter, this);
-        this._signals.connect(this.actor, 'leave-event', this.onMouseLeave, this);
         
         this.actor.add_actor(this._icon);
     }
@@ -966,7 +1019,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     _onItemClicked(button) {
         switch (button) {
             case 1:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -976,7 +1029,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 }
                 break;
             case 3:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1125,17 +1178,36 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     }
 
     onMouseEnter(event) {
-        if (this.applet.openByHover && !this.menu.isOpen && !this.hoverTimeoutID) {
+        if (!this.applet.openByHover) return
+        
+        if (!this.menu.isOpen && !this.hoverTimeoutID) {
             this.hoverTimeoutID = setTimeout(() => {
-                this.menu.open();
+                if (!this.applet.menu.isContextOpen) {
+                    this.applet.subMenuClosedRecently = true;
+                    this.applet.menu.closeMenuGroupItems();
+                    this.menu.open();
+                }
             }, this.applet.openByHoverDelay);
+        } else if (this.leaveTimeoutID) {
+            clearTimeout(this.leaveTimeoutID);
+            this.leaveTimeoutID = undefined;
         }
     }
 
     onMouseLeave(event) {
+        if (!this.applet.openByHover) return
+
         if (this.hoverTimeoutID) {
             clearTimeout(this.hoverTimeoutID);
             this.hoverTimeoutID = undefined;
+        } else if (!this.applet.menu.isContextOpen) {
+            this.leaveTimeoutID = setTimeout(() => {
+                if (this.menu.isOpen && !this.applet.menu.isContextOpen) {
+                    this.applet.subMenuClosedRecently = true;
+                    this.applet.checkMouseEntered();
+                    this.menu.close();
+                }
+            }, this.applet.openByHoverDelay);
         }
     }
 
@@ -1208,7 +1280,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 this._removeIcon();
             }
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
@@ -1260,7 +1332,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
     _onItemClicked(button) {
         switch (button) {
             case 1:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1271,12 +1343,12 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 }
                 break;
             case 2:
-                if (!this.applet.menu.isContextOpen()) {
+                if (!this.applet.menu.isContextOpen) {
                     this.applet.run(this.name, this.icon, this.command);
                 }
                 break;
             case 3:
-                if (this.applet.menu.isContextOpen()) {
+                if (this.applet.menu.isContextOpen) {
                     if (!this._selected) {
                         this.applet.menu.unselectMenuItems();
                         this.select();
@@ -1443,7 +1515,7 @@ class MyPopupSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
             this.blue = blue;
             this.alpha = alpha;
         } catch (error) {
-            global.log(error);
+            global.logError(error);
         }
     }
 
