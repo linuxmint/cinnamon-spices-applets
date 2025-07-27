@@ -1,3 +1,7 @@
+### v2.2.0~20250727
+  * Fixes [#7445](https://github.com/linuxmint/cinnamon-spices-applets/issues/7445)
+  * The calculation of CPU usage is now correct.
+
 ### v2.1.0~20250726
   * Fixes many bugs, at least from Cinnamon 6.4):
     * [#3016](https://github.com/linuxmint/cinnamon-spices-applets/issues/3016)
