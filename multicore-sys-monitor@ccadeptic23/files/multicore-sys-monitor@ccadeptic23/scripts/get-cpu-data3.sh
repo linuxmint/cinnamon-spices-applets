@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #~ sleepDurationSeconds=$1
-sleepDurationSeconds=0.1
+sleepDurationSeconds=1
 
 previousDate=$(date +%s%N | cut -b1-13)
 previousStats=$(cat /proc/stat)

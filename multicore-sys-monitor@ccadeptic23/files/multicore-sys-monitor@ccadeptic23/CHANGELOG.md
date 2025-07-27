@@ -1,3 +1,6 @@
+### v2.2.1~20250727
+  * CPU: the measured values are more accurate.
+
 ### v2.2.0~20250727
   * Fixes [#7445](https://github.com/linuxmint/cinnamon-spices-applets/issues/7445)
   * The calculation of CPU usage is now correct.
