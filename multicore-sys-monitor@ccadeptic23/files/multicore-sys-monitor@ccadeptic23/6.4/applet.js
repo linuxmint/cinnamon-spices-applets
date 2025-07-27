@@ -472,7 +472,6 @@ class MCSM extends Applet.TextIconApplet {
                 //~ 16485462016  3414532096   500703232   278343680  4845682688  8356085760 13070929920
                 let [total, used, shared, buffers, cache, available] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                //~ this.memoryProvider.setData((used - buffers - cache) / total, cache / total, buffers / total, available / total);
                 this.memoryProvider.setData(used / total, cache / total, buffers / total, (total - used - cache - buffers) / total);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 //~ global.log(this.memoryProvider.getTooltipString());
@@ -491,21 +490,19 @@ class MCSM extends Applet.TextIconApplet {
                 if (this.oldCPUvalues.length === 0) { // first execution
                     for (let i=0, len=values.length; i<len; i++)
                         data.push(0);
-                } else {
+                } else { // next executions
                     let i = 0;
                     for (let v of values) {
                         if (i === 0) {
                             i++;
                             continue;
                         }
-                        //~ data.push((values[i] - this.oldCPUvalues[i]) / this.refreshRate * 100); //FIXME!
-                        data.push(parseFloat(v) / 100); //FIXME!
+                        data.push(parseFloat(v) / 100);
                         i++;
                     }
                 }
                 this.oldCPUvalues = values;
 
-                //~ global.log(UUID + " - CPU data: " + data);
                 this.multiCpuProvider.setData(data);
             }
             subProcess.send_signal(9);
