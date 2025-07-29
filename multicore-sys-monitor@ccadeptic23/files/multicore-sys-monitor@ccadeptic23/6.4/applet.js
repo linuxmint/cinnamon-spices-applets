@@ -162,6 +162,8 @@ class MCSM extends Applet.TextIconApplet {
             sudoersProcess.send_signal(9);
         });
 
+        this.oldCPUvalues = [];
+
         this.hovered = false;
         this.actor.connect('enter-event', (actor, event) => {
             this.hovered = true;
@@ -470,7 +472,6 @@ class MCSM extends Applet.TextIconApplet {
                 //~ 16485462016  3414532096   500703232   278343680  4845682688  8356085760 13070929920
                 let [total, used, shared, buffers, cache, available] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                //~ this.memoryProvider.setData((used - buffers - cache) / total, cache / total, buffers / total, available / total);
                 this.memoryProvider.setData(used / total, cache / total, buffers / total, (total - used - cache - buffers) / total);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 //~ global.log(this.memoryProvider.getTooltipString());
@@ -481,20 +482,27 @@ class MCSM extends Applet.TextIconApplet {
 
     get_cpu_info() {
         if (!this.isRunning) return;
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data.sh", (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data3.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
-                let cpuString = stdout.replace(/\ :\ /g, ":").replace(/cpu\ /g, "");
-                let cpuArray = cpuString.split(" ");
-
-                //~ global.log(UUID + " - cpuString: " + cpuString);
-                //~ global.log(UUID + " - cpuArray.length: " + cpuArray.length);
+                let cpuString = stdout.trim();
                 var data = [];
-                for (let i=0; i<cpuArray.length/2; i++) {
-                    let mhz = parseFloat(cpuArray[2*i].split(":")[1]);
-                    let bogomips = parseFloat(cpuArray[2*i+1].split(":")[1]);
-                    data.push(mhz/bogomips);
+                let values = cpuString.split(" ");
+                if (this.oldCPUvalues.length === 0) { // first execution
+                    for (let i=0, len=values.length; i<len; i++)
+                        data.push(0);
+                } else { // next executions
+                    let i = 0;
+                    for (let v of values) {
+                        if (i === 0) {
+                            i++;
+                            continue;
+                        }
+                        data.push(parseFloat(v) / 100);
+                        i++;
+                    }
                 }
-                //~ global.log(UUID + " - CPU data: " + data);
+                this.oldCPUvalues = values;
+
                 this.multiCpuProvider.setData(data);
             }
             subProcess.send_signal(9);
