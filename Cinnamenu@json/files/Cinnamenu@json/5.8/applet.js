@@ -1124,7 +1124,7 @@ class CinnamenuApplet extends TextIconApplet {
                 this.display.appsView.populate_add(applicationResults, _('Applications'));
             }
             if (fileResults.length > 0) {
-                this.display.appsView.populate_add(fileResults, _('files'));
+                this.display.appsView.populate_add(fileResults, _('Files'));
             }
             if (otherResults.length > 0) {
                 this.display.appsView.populate_add(otherResults, _('Other search results'));
