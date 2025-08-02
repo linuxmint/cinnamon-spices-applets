@@ -1,0 +1,101 @@
+# KDE CONNECT APPLET
+# This file is put in the public domain.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+
+#. js/modules.js:656
+msgid "Charging"
+msgstr ""
+
+#. js/modules.js:823
+msgid "Low"
+msgstr ""
+
+#. js/modules.js:829
+msgid "Good"
+msgstr ""
+
+#. js/modules.js:832
+msgid "Excellent"
+msgstr ""
+
+#. js/modules.js:844
+msgid "Unknown"
+msgstr ""
+
+#. js/modules.js:1189
+msgid "Share"
+msgstr ""
+
+#. js/modules.js:1279
+msgid "Unmount"
+msgstr ""
+
+#. js/modules.js:1281
+msgid "Mount"
+msgstr ""
+
+#. py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+msgid "Cancel"
+msgstr ""
+
+#. py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+msgid "Send"
+msgstr ""
+
+#. py/dialogs.py:287
+msgid "photo.jpg"
+msgstr ""
+
+#. py/dialogs.py:290
+msgid "JPEG Photo"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr ""
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr ""
+
+#. settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr ""
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr ""
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr ""
+
+#. settings-schema.json->orderlist_device-order->columns->title
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr ""
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr ""

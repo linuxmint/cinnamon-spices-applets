@@ -1,0 +1,96 @@
+# ENHANCED SOUND APPLET
+# This file is put in the public domain.
+# claudiux, 2018
+#
+msgid ""
+msgstr ""
+
+#. 6.4/applet.js:608
+msgid "Album Art desklet settings"
+msgstr ""
+
+#. 6.4/applet.js:616
+msgid "Show Album Art on desktop"
+msgstr ""
+
+#. 6.4/applet.js:758
+msgid "You need the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:759
+msgid ""
+"You can install it by clicking on the first button and then searching for "
+"Album."
+msgstr ""
+
+#. 6.4/applet.js:760 6.4/applet.js:778
+msgid "Desklets"
+msgstr ""
+
+#. 6.4/applet.js:776
+msgid "You need to activate the 'Album Art 3.0' desklet"
+msgstr ""
+
+#. 6.4/applet.js:777
+msgid ""
+"You can activate it by clicking on the first button, then searching for "
+"Album and adding it with button [+]."
+msgstr ""
+
+#. 6.4/applet.js:1864
+msgid "The 'imagemagick' package is required!"
+msgstr ""
+
+#. 6.4/applet.js:1865
+msgid "Please select 'Install imagemagick' in this menu"
+msgstr ""
+
+#. 6.4/applet.js:2090
+msgid "Install imagemagick"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_menus->title
+msgid "Menus"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenu2->title
+msgid "Context Menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->description
+msgid "View Full Album Art"
+msgstr ""
+
+#. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
+msgid ""
+"When unchecked, Album Art in the menu may be partially covered by Artist and "
+"Title."
+msgstr ""
+
+#. 6.4->settings-schema.json->keepAppListOpen->description
+msgid "Keep the App selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepOutputListOpen->description
+msgid "Keep the Output Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepInputListOpen->description
+msgid "Keep the Input Device selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->keepCommandListOpen->description
+msgid "Keep the Command selector open"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->description
+msgid "If the title is too long, end it with:"
+msgstr ""
+
+#. 6.4->settings-schema.json->toolongchars->tooltip
+msgid "Emoji accepted"
+msgstr ""
+
+#. 6.4->settings-schema.json->showalbumDelay->description
+msgid "Delay between icon and album art display (seconds)"
+msgstr ""
