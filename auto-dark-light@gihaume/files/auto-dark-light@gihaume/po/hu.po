@@ -58,15 +58,14 @@ msgid "Critical error"
 msgstr "Kritikus hiba"
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:28
-#, fuzzy
 msgid ""
 "Missing dependencies `make` and/or `g++`. Install them, in e.g. on Debian-"
 "based system with `sudo apt install make g++`, then reload the applet in "
 "restarting Cinnamon."
 msgstr ""
-"Hiányzó függőségek `make` és `gcc`. Telepítse őket, pl. Debian-alapú "
-"rendszeren a `sudo apt install build-essential` segítségével, majd töltse "
-"újra az appletet (pl. a Cinnamon újraindításával)."
+"Hiányzó `make` és/vagy `g++` függőségek. Telepítsd őket például Debian-alapú "
+"rendszerre a `sudo apt install make g++` paranccsal, majd indítsd újra az "
+"appletet a Cinnamon újraindításakor."
 
 #. 5.8/lib/time_change_listener/time_change_listener.js:41
 msgid "Compilation of"
