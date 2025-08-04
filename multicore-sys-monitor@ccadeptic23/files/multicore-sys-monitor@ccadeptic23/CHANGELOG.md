@@ -1,3 +1,9 @@
+### v2.2.2~20250804
+  * New script `get-cpu-data3.sh` created by @LeosBitto. This script improves performance. Many thanks to him!
+  * This script fixes:
+    * [#7453](https://github.com/linuxmint/cinnamon-spices-applets/issues/7453)
+    * [#7458](https://github.com/linuxmint/cinnamon-spices-applets/issues/7458)
+
 ### v2.2.1~20250727
   * CPU: the measured values are more accurate.
 
