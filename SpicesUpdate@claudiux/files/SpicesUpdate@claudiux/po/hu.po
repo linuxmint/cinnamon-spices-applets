@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-17 03:36+0200\n"
-"PO-Revision-Date: 2025-04-10 14:12+0200\n"
+"PO-Revision-Date: 2025-08-03 18:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 4.2/SU_messageTray.js:1282 4.8/SU_messageTray.js:1282
 #. 4.6/SU_messageTray.js:1282 5.6/SU_messageTray.js:1282
@@ -2322,7 +2322,7 @@ msgstr ""
 #. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
 #. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
 msgid "Tick all the first boxes then refresh"
-msgstr ""
+msgstr "Jelöld be az összes első négyzetet, majd frissítsd az oldalt"
 
 #. 6.0->settings-schema.json->check_actions->description
 msgid "Check regularly whether your nemo actions are up to date"

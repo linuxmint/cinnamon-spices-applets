@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-13 16:32+0200\n"
-"PO-Revision-Date: 2025-04-11 09:21+0200\n"
+"PO-Revision-Date: 2025-08-03 18:18+0200\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #. applet.js:178 6.4/applet.js:249
 msgid "The following packages were not found:"
@@ -55,20 +55,19 @@ msgstr "Kék"
 
 #. 6.4/applet.js:50 6.4/applet.js:916
 msgid "Sunrise"
-msgstr ""
+msgstr "Napkelte"
 
 #. 6.4/applet.js:51 6.4/applet.js:918
 msgid "Sunset"
-msgstr ""
+msgstr "Napnyugta"
 
 #. 6.4/applet.js:711
 msgid "Reload"
-msgstr ""
+msgstr "Újratöltés"
 
 #. 6.4/applet.js:721
-#, fuzzy
 msgid "Configure Presets"
-msgstr "Az Ön előbeállításai"
+msgstr "Előbeállítások konfigurálása"
 
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:731
@@ -283,15 +282,16 @@ msgid "Hotkey to Decrease brightness"
 msgstr "Gyorsbillentyű a fényerő csökkentéséhez"
 
 #. 6.4->settings-schema.json->preset_label->description
-#, fuzzy
 msgid ""
 "You can define or modify presets below, which can then be accessed via the "
 "applet's context menu.\n"
 "Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
 "into account."
 msgstr ""
-"Az alábbiakban meghatározhatja vagy módosíthatja az előbeállításokat, "
-"amelyeket azután az kisalkalmazás kontextusmenüjéből érhet el."
+"Az alábbiakban definiálhat vagy módosíthat előbeállításokat, amelyekhez a "
+"kisalkalmazás helyi menüjén keresztül férhet hozzá.\n"
+"A program csak az elsőként bejelölt „Kezdés napkeltekor” és „Kezdés "
+"naplementekor” jelölőnégyzeteket veszi figyelembe."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
@@ -334,17 +334,21 @@ msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
+"Kezdés\n"
+"napfelkeltekor"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunset"
 msgstr ""
+"Kezdés\n"
+"napnyugtakor"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr ""
+msgstr "Napkelte és napnyugta időpontjainak beállítása"
 
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
-msgstr ""
+msgstr "Az összes módosítás alkalmazása"

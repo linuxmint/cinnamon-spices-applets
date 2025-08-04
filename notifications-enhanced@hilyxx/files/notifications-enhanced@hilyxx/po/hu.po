@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-10 05:28+0200\n"
-"PO-Revision-Date: 2025-06-20 18:53+0200\n"
+"PO-Revision-Date: 2025-08-03 20:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -73,9 +73,8 @@ msgstr[0] "%d perce"
 msgstr[1] "%d perce"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Notifications-Enhanced"
-msgstr "Értesítések továbbfejlesztve"
+msgstr "Értesítések Továbbfejlesztve"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -102,27 +101,27 @@ msgid "Show the number of notifications"
 msgstr "Az értesítések számának megjelenítése"
 
 #. settings-schema.json->showEmptyTray->description
-#, fuzzy
 msgid "Show notification tray"
-msgstr "Értesítések megjelenítése"
+msgstr "Értesítési tálca megjelenítése"
 
 #. settings-schema.json->showEmptyTray->tooltip
-#, fuzzy
 msgid "Check this to always show the notification tray."
-msgstr "Jelölje be az átmeneti értesítések figyelmen kívül hagyásához."
+msgstr ""
+"Jelölje be ezt a lehetőséget, ha azt szeretné, hogy az értesítési tálca "
+"mindig látszódjon."
 
 #. settings-schema.json->showDisturbIcon->description
 msgid "Always show 'Do Not Disturb' icon"
-msgstr ""
+msgstr "A „Ne zavarjanak” ikon mindig látható legyen"
 
 #. settings-schema.json->showDisturbIcon->tooltip
-#, fuzzy
 msgid ""
 "Check this to show the 'Do Not Disturb icon' on the panel even when the "
 "'Show notification tray' option is disabled."
 msgstr ""
-"Jelölje be a „Ne zavarjanak” ikon megjelenítéséhez a panelen akkor is, ha az "
-"üres tálca megjelenítése opció le van tiltva."
+"Jelölje be ezt a négyzetet, ha azt szeretné, hogy a „Ne zavarjanak” ikon "
+"akkor is megjelenjen a panelen, ha az „Értesítési tálca megjelenítése” opció "
+"le van tiltva."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"

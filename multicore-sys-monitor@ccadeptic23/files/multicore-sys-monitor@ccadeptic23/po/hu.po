@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-28 08:31-0400\n"
-"PO-Revision-Date: 2024-11-25 07:17+0100\n"
+"PO-Revision-Date: 2025-08-03 20:47+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. 3.4/DataProviders.js:49 4.0/DataProviders.js:47 5.6/DataProviders.js:47
 #. 6.4/applet.js:35 6.0/DataProviders.js:52
@@ -291,9 +291,8 @@ msgid "Error while saving file:"
 msgstr "Hiba a fájl mentése közben:"
 
 #. 6.4/applet.js:278
-#, fuzzy
 msgid "Refresh All"
-msgstr "Grafikonok frissítése"
+msgstr "Összes frissítése"
 
 #. 6.4/applet.js:288 6.0/applet.js:325
 msgid "Without any graphics"
@@ -309,7 +308,7 @@ msgstr "Memória gyorsítótár elvetése (rendszergazdai jogosultság szükség
 
 #. 6.4/applet.js:384
 msgid "root"
-msgstr ""
+msgstr "root"
 
 #. metadata.json->name
 msgid "Multi-Core System Monitor"
@@ -364,7 +363,7 @@ msgstr "Színek"
 #. 6.4->settings-schema.json->sectionNetworkOptions->title
 #. 6.4->settings-schema.json->sectionDiskOptions->title
 msgid "Options"
-msgstr ""
+msgstr "Opciók"
 
 #. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
 #. 4.0/prefsui.glade:538 5.6/prefsui.glade:538 6.0/prefsui.glade:538
@@ -391,7 +390,7 @@ msgstr "Eszközök"
 
 #. 6.4->settings-schema.json->sectionColors->title
 msgid "Your colors"
-msgstr ""
+msgstr "A színeid"
 
 #. 6.4->settings-schema.json->labelsOn->description
 #. 3.4/prefsui.glade:83 4.0/prefsui.glade:90 5.6/prefsui.glade:90
@@ -406,7 +405,7 @@ msgstr "Görbevastagság"
 
 #. 6.4->settings-schema.json->useIconSize->description
 msgid "Limit height to the size of a colored icon"
-msgstr ""
+msgstr "A magasság korlátozása egy színes ikon méretére"
 
 #. 6.4->settings-schema.json->refreshRate->description
 #. 3.4/prefsui.glade:133 4.0/prefsui.glade:140 5.6/prefsui.glade:140
@@ -457,31 +456,29 @@ msgid ""
 "The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, "
 "will have the same color as CPU1, and so on."
 msgstr ""
+"A CPU-k négyes csoportokban vannak színezve: CPU0, CPU1, CPU2 és CPU3.\n"
+"Az ötödik, CPU4, ugyanolyan színű lesz, mint a CPU0; a hatodik, CPU5, "
+"ugyanolyan színű lesz, mint a CPU1, és így tovább."
 
 #. 6.4->settings-schema.json->CPU_color0->description
-#, fuzzy
 msgid "CPU0 Color"
-msgstr "Színek"
+msgstr "CPU0 Color szín"
 
 #. 6.4->settings-schema.json->CPU_color1->description
-#, fuzzy
 msgid "CPU1 Color"
-msgstr "Színek"
+msgstr "CPU1 Color szín"
 
 #. 6.4->settings-schema.json->CPU_color2->description
-#, fuzzy
 msgid "CPU2 Color"
-msgstr "Színek"
+msgstr "CPU2 Color szín"
 
 #. 6.4->settings-schema.json->CPU_color3->description
-#, fuzzy
 msgid "CPU3 Color"
-msgstr "Színek"
+msgstr "CPU3 Color szín"
 
 #. 6.4->settings-schema.json->CPU_activity_0_20->description
-#, fuzzy
 msgid "0-20"
-msgstr "00-20"
+msgstr "0-20"
 
 #. 6.4->settings-schema.json->Mem_colorUsedup->description
 #. 3.4/prefsui.glade:587 4.0/prefsui.glade:733 5.6/prefsui.glade:733
@@ -528,139 +525,118 @@ msgstr "Logaritmikus"
 #. 6.4->settings-schema.json->Net_getdevlist_btn->description
 #. 6.4->settings-schema.json->Disk_getdevlist_btn->description
 msgid "Update this device list"
-msgstr ""
+msgstr "Eszközlista frissítése"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
-#, fuzzy
 msgid "Enabled"
-msgstr "Engedélyezés"
+msgstr "Engedélyezve"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 msgid "⚠️ Id️"
-msgstr ""
+msgstr "⚠️ azonosító"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
-#, fuzzy
 msgid "Color Down"
-msgstr "Színek"
+msgstr "Szín le"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
-#, fuzzy
 msgid "Color Up"
-msgstr "Színek"
+msgstr "Szín fel"
 
 #. 6.4->settings-schema.json->Net_cleardevlist_btn->description
 #. 6.4->settings-schema.json->Disk_cleardevlist_btn->description
 msgid "Clear this device list"
-msgstr ""
+msgstr "Eszközlista törlése"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Id"
-msgstr ""
+msgstr "⚠️ azonosító"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Sector Size"
-msgstr ""
+msgstr "⚠️ Szektorméret"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
-#, fuzzy
 msgid "Color Read"
-msgstr "Színek"
+msgstr "Szín Olvasás"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
-#, fuzzy
 msgid "Color Write"
-msgstr "Írás"
+msgstr "Szín Írás"
 
 #. 6.4->settings-schema.json->color0->description
-#, fuzzy
 msgid "Color #0"
-msgstr "Színek"
+msgstr "Szín #0"
 
 #. 6.4->settings-schema.json->color1->description
-#, fuzzy
 msgid "Color #1"
-msgstr "Színek"
+msgstr "Szín #1"
 
 #. 6.4->settings-schema.json->color2->description
-#, fuzzy
 msgid "Color #2"
-msgstr "Színek"
+msgstr "Szín #2"
 
 #. 6.4->settings-schema.json->color3->description
-#, fuzzy
 msgid "Color #3"
-msgstr "Színek"
+msgstr "Szín #3"
 
 #. 6.4->settings-schema.json->color4->description
-#, fuzzy
 msgid "Color #4"
-msgstr "Színek"
+msgstr "Szín #4"
 
 #. 6.4->settings-schema.json->color5->description
-#, fuzzy
 msgid "Color #5"
-msgstr "Színek"
+msgstr "Szín #5"
 
 #. 6.4->settings-schema.json->color6->description
-#, fuzzy
 msgid "Color #6"
-msgstr "Színek"
+msgstr "Szín #6"
 
 #. 6.4->settings-schema.json->color7->description
-#, fuzzy
 msgid "Color #7"
-msgstr "Színek"
+msgstr "Szín #7"
 
 #. 6.4->settings-schema.json->color8->description
-#, fuzzy
 msgid "Color #8"
-msgstr "Színek"
+msgstr "Szín #8"
 
 #. 6.4->settings-schema.json->color9->description
-#, fuzzy
 msgid "Color #9"
-msgstr "Színek"
+msgstr "Szín #9"
 
 #. 6.4->settings-schema.json->color10->description
-#, fuzzy
 msgid "Color #10"
-msgstr "Színek"
+msgstr "Szín #10"
 
 #. 6.4->settings-schema.json->color11->description
-#, fuzzy
 msgid "Color #11"
-msgstr "Színek"
+msgstr "Szín #11"
 
 #. 6.4->settings-schema.json->color12->description
-#, fuzzy
 msgid "Color #12"
-msgstr "Színek"
+msgstr "Szín #12"
 
 #. 6.4->settings-schema.json->color13->description
-#, fuzzy
 msgid "Color #13"
-msgstr "Színek"
+msgstr "Szín #13"
 
 #. 6.4->settings-schema.json->color14->description
-#, fuzzy
 msgid "Color #14"
-msgstr "Színek"
+msgstr "Szín #14"
 
 #. 6.4->settings-schema.json->color15->description
-#, fuzzy
 msgid "Color #15"
-msgstr "Színek"
+msgstr "Szín #15"
 
 #. 6.4->settings-schema.json->labelWarning->description
 msgid "Data marked with ⚠️ must not be changed!"
-msgstr ""
+msgstr "A ⚠️-gal jelölt adatokat tilos megváltoztatni!"
 
 #. 3.4/prefsui.glade:49 4.0/prefsui.glade:56 5.6/prefsui.glade:56
 #. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 6.0/prefsui.glade:56
