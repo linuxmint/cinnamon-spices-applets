@@ -1,6 +1,6 @@
 ### v2.3.0~20250805
   * New options "Label" in settings: one for each type (CPU, Mem, Net, Disks). This option is only visible when the Labels option is checked in the General tab.
-  * New option "Merge all" in CPU, Net, Disks tabs. Once this option is checked, a single device grouping all devices is displayed. The colors used are #0 and #1.
+  * New option "Merge all" in CPU, Net, Disks tabs. Once this option is checked, a single device grouping all devices is displayed. The colors used are #0 and #1 (for Net and Disks).
 
 ### v2.2.2~20250804
   * New script `get-cpu-data3.sh` created by @LeosBitto. This script improves performance. Many thanks to him!
