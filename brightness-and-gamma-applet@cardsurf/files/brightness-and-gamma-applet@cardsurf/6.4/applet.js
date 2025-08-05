@@ -20,6 +20,7 @@ const AppletConstants = require('./lib/appletConstants');
 const ShellUtils = require('./lib/shellUtils');
 const Values = require('./lib/values');
 const {
+  timeout_add,
   timeout_add_seconds,
   setTimeout,
   clearTimeout,
@@ -28,6 +29,8 @@ const {
 
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
+
+const SCRIPT_NUMBER_OF_MONITORS = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/6.4/scripts/number-of-monitors.sh";
 
 // Translation support
 Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
@@ -114,8 +117,29 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.apply_asynchronously = true;
         this.gsettings = Gio.Settings.new("org.cinnamon.settings-daemon.plugins.color");
         this.sunrise_sunset();
+        this.numberOfMonitors = 0;
 
         this._init_dependencies_satisfied();
+    }
+
+    check_number_of_monitors() {
+        if (!this.apply_changing_monitors) return;
+        let process = Util.spawnCommandLineAsyncIO(SCRIPT_NUMBER_OF_MONITORS, (stdout, stderr, exitCode) => {
+            if (exitCode === 0) {
+                let numberOfMonitors = parseInt(stdout.trim());
+                if (numberOfMonitors !== this.numberOfMonitors) {
+                    this.numberOfMonitors = numberOfMonitors;
+                    this.on_number_of_monitors_changed();
+                    global.log(uuid + " - this.numberOfMonitors: " + this.numberOfMonitors);
+                }
+            }
+            process.send_signal(9);
+        });
+    }
+
+    on_number_of_monitors_changed() {
+        if (!this.apply_changing_monitors) return;
+        this.on_options_type_changed();
     }
 
     sunrise_sunset() {
@@ -316,6 +340,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["apply_asynchronously", null],
                         ["apply_startup", null],
                         ["apply_every", null],
+                        ["apply_changing_monitors", null],
                         ["save_every", null],
                         ["update_scroll", null],
                         ["scroll_step", null],
@@ -544,6 +569,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._check_sunrise_sunset(true);
         this.update_tooltip();
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
+        timeout_add(300, () => { this.check_number_of_monitors(); return this.is_running; });
     }
 
     // Override
