@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-13 16:32+0200\n"
+"POT-Creation-Date: 2025-08-06 01:31+0200\n"
 "PO-Revision-Date: 2025-07-14 14:59-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,59 +19,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:178 6.4/applet.js:249
+#. applet.js:178 6.4/applet.js:262
 msgid "The following packages were not found:"
 msgstr "No se encontraron los siguientes paquetes:"
 
-#. applet.js:179 6.4/applet.js:250
+#. applet.js:179 6.4/applet.js:263
 msgid "Please install the above packages to use the applet"
 msgstr "Por favor, instale los paquetes anteriores para utilizar el applet"
 
-#. applet.js:564 6.4/applet.js:762
+#. applet.js:564 6.4/applet.js:773
 msgid "Screen"
 msgstr "Pantalla"
 
-#. applet.js:647 6.4/applet.js:845
+#. applet.js:647 6.4/applet.js:856
 msgid "Outputs"
 msgstr "Monitores"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:46 6.4/lib/appletGui.js:211
+#. appletGui.js:235 6.4/applet.js:42 6.4/lib/appletGui.js:211
 msgid "Brightness"
 msgstr "Brillo"
 
-#. appletGui.js:236 6.4/applet.js:47 6.4/lib/appletGui.js:212
+#. appletGui.js:236 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Red"
 msgstr "Rojo"
 
-#. appletGui.js:237 6.4/applet.js:48 6.4/lib/appletGui.js:213
+#. appletGui.js:237 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Green"
 msgstr "Verde"
 
-#. appletGui.js:238 6.4/applet.js:49 6.4/lib/appletGui.js:214
+#. appletGui.js:238 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Blue"
 msgstr "Azul"
 
-#. 6.4/applet.js:50 6.4/applet.js:916
+#. 6.4/applet.js:46 6.4/applet.js:927
 msgid "Sunrise"
 msgstr "Amanecer"
 
-#. 6.4/applet.js:51 6.4/applet.js:918
+#. 6.4/applet.js:47 6.4/applet.js:929
 msgid "Sunset"
 msgstr "Atardecer"
 
-#. 6.4/applet.js:711
+#. 6.4/applet.js:722
 msgid "Reload"
 msgstr "Recargar"
 
-#. 6.4/applet.js:721
+#. 6.4/applet.js:732
 msgid "Configure Presets"
 msgstr "Configurar preajustes"
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:731
+#. 6.4/applet.js:742
 msgid "Presets"
 msgstr "Preajustes"
 
@@ -275,6 +275,10 @@ msgstr ""
 "Esto evita que la pantalla parpadee.\n"
 "El tiempo de ajuste puede ser hasta el doble del número de segundos indicado "
 "a continuación."
+
+#. 6.4->settings-schema.json->apply_changing_monitors->description
+msgid "Apply when the number of monitors changes"
+msgstr ""
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"

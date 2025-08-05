@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: brightness-and-gamma-applet@cardsurf 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-13 16:32+0200\n"
+"POT-Creation-Date: 2025-08-06 01:31+0200\n"
 "PO-Revision-Date: 2017-11-19 16:06+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
@@ -20,59 +20,59 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. applet.js:178 6.4/applet.js:249
+#. applet.js:178 6.4/applet.js:262
 msgid "The following packages were not found:"
 msgstr "Sljedeći paketi nisu pronađeni:"
 
-#. applet.js:179 6.4/applet.js:250
+#. applet.js:179 6.4/applet.js:263
 msgid "Please install the above packages to use the applet"
 msgstr "Instalirajte pakete iznad navedene kako bi mogli koristiti aplet"
 
-#. applet.js:564 6.4/applet.js:762
+#. applet.js:564 6.4/applet.js:773
 msgid "Screen"
 msgstr "Zaslon"
 
-#. applet.js:647 6.4/applet.js:845
+#. applet.js:647 6.4/applet.js:856
 msgid "Outputs"
 msgstr "Izlaz"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:46 6.4/lib/appletGui.js:211
+#. appletGui.js:235 6.4/applet.js:42 6.4/lib/appletGui.js:211
 msgid "Brightness"
 msgstr "Svjetlina"
 
-#. appletGui.js:236 6.4/applet.js:47 6.4/lib/appletGui.js:212
+#. appletGui.js:236 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Red"
 msgstr "Crvena"
 
-#. appletGui.js:237 6.4/applet.js:48 6.4/lib/appletGui.js:213
+#. appletGui.js:237 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Green"
 msgstr "Zelena"
 
-#. appletGui.js:238 6.4/applet.js:49 6.4/lib/appletGui.js:214
+#. appletGui.js:238 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Blue"
 msgstr "Plava"
 
-#. 6.4/applet.js:50 6.4/applet.js:916
+#. 6.4/applet.js:46 6.4/applet.js:927
 msgid "Sunrise"
 msgstr ""
 
-#. 6.4/applet.js:51 6.4/applet.js:918
+#. 6.4/applet.js:47 6.4/applet.js:929
 msgid "Sunset"
 msgstr ""
 
-#. 6.4/applet.js:711
+#. 6.4/applet.js:722
 msgid "Reload"
 msgstr ""
 
-#. 6.4/applet.js:721
+#. 6.4/applet.js:732
 msgid "Configure Presets"
 msgstr ""
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:731
+#. 6.4/applet.js:742
 msgid "Presets"
 msgstr ""
 
@@ -271,6 +271,10 @@ msgid ""
 "Disable Cinnamon Night Mode while this applet is running.\n"
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
+msgstr ""
+
+#. 6.4->settings-schema.json->apply_changing_monitors->description
+msgid "Apply when the number of monitors changes"
 msgstr ""
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description

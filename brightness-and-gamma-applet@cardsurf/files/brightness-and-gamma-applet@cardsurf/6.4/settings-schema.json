@@ -20,6 +20,7 @@
                 "apply_startup",
                 "apply_every",
                 "apply_asynchronously",
+                "apply_changing_monitors",
                 "update_scroll",
                 "scroll_step",
                 "brightness_up_shortcut",
@@ -57,13 +58,13 @@
         }
     },
     "disable_nightmode" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : false,
         "description": "Disable Night Mode",
         "tooltip": "Disable Cinnamon Night Mode while this applet is running.\nThis prevents the screen from flickering.\nThe adjustment time can be up to twice the number of seconds indicated below."
     },
     "apply_startup" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Apply at startup",
         "tooltip": "Apply values at applet startup"
@@ -79,13 +80,18 @@
         "tooltip" : "How often to apply values. 0 means that values are not applied periodically."
     },
     "apply_asynchronously" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Apply asynchronously",
         "tooltip": "Apply values in a background process"
     },
+    "apply_changing_monitors" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Apply when the number of monitors changes"
+    },
     "update_scroll" : {
-        "type" : "checkbox",
+        "type" : "switch",
         "default" : true,
         "description": "Adjust brightness scroll",
         "tooltip": "Allows to adjust a brightness value on a mouse scroll"
