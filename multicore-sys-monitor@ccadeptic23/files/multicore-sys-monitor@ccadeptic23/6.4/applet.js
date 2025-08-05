@@ -98,6 +98,10 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Net_devicesList", "Net_devicesList");
         this.settings.bind("Disk_devicesList", "Disk_devicesList");
         this.settings.bind("labelsOn", "labelsOn");
+        this.settings.bind("CPU_labelOn", "CPU_labelOn");
+        this.settings.bind("Mem_labelOn", "Mem_labelOn");
+        this.settings.bind("Net_labelOn", "Net_labelOn");
+        this.settings.bind("Disk_labelOn", "Disk_labelOn");
         this.settings.bind("thickness", "thickness");
         this.settings.bind("useIconSize", "useIconSize");
         this.settings.bind("refreshRate", "refreshRate");
@@ -105,6 +109,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_width", "CPU_width");
+        this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
         this.settings.bind("CPU_color1", "CPU_color1");
         this.settings.bind("CPU_color2", "CPU_color2");
@@ -123,10 +128,12 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
         this.settings.bind("Net_enabled", "Net_enabled");
         this.settings.bind("Net_width", "Net_width");
+        this.settings.bind("Net_mergeAll", "Net_mergeAll");
         this.settings.bind("Net_autoscale", "Net_autoscale");
         this.settings.bind("Net_logscale", "Net_logscale");
         this.settings.bind("Disk_enabled", "Disk_enabled");
         this.settings.bind("Disk_width", "Disk_width");
+        this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
         for (let i=0; i<16; i++)
@@ -247,12 +254,13 @@ class MCSM extends Applet.TextIconApplet {
                         //~ this.configSettings._prefs.mem.swapcolors
                     );
                 }
+                let labelOn = this[`${properties[i].abbrev}_labelOn`];
                 this[properties[i].graph].paint(
                     this[properties[i].provider].name,
                     this[properties[i].provider].currentReadings,
                     area,
                     areaContext,
-                    this.labelsOn,
+                    this.labelsOn && labelOn,
                     width,
                     this.panelHeight - 2 * global.ui_scale,
                     this.labelColor,
@@ -488,17 +496,25 @@ class MCSM extends Applet.TextIconApplet {
                 var data = [];
                 let values = cpuString.split(" ");
                 if (this.oldCPUvalues.length === 0) { // first execution
-                    for (let i=0, len=values.length; i<len; i++)
+                    if (this.CPU_mergeAll) {
                         data.push(0);
+                    } else {
+                        for (let i=0, len=values.length; i<len; i++)
+                            data.push(0);
+                    }
                 } else { // next executions
-                    let i = 0;
-                    for (let v of values) {
-                        if (i === 0) {
+                    if (this.CPU_mergeAll) {
+                        data.push(parseFloat(values[0]) / 100);
+                    } else {
+                        let i = 0;
+                        for (let v of values) {
+                            if (i === 0) {
+                                i++;
+                                continue;
+                            }
+                            data.push(parseFloat(v) / 100);
                             i++;
-                            continue;
                         }
-                        data.push(parseFloat(v) / 100);
-                        i++;
                     }
                 }
                 this.oldCPUvalues = values;
@@ -526,18 +542,34 @@ class MCSM extends Applet.TextIconApplet {
                 var data = [];
                 var disabledDevices = [];
                 let netInfo = stdout.trim().split(" ");
+                var sum_rx = 0;
+                var sum_tx = 0;
                 for (let info of netInfo) {
                     let [iface, rx, tx] = info.split(":");
                     if (allowedInterfaces.indexOf(iface) < 0) {
                         disabledDevices.push(iface);
                         continue;
                     }
+                    if (this.Net_mergeAll) {
+                        sum_rx = sum_rx + Math.trunc(rx);
+                        sum_tx = sum_tx + Math.trunc(tx);
+                    } else {
+                        data.push({
+                            "id": iface,
+                            "name": names[iface],
+                            "up": Math.trunc(tx),
+                            "down": Math.trunc(rx)
+                        });
+                    }
+                }
+                if (this.Net_mergeAll) {
                     data.push({
-                        "id": iface,
-                        "name": names[iface],
-                        "up": Math.trunc(tx),
-                        "down": Math.trunc(rx)
+                        "id": "Net",
+                        "name": _("Network"),
+                        "up": sum_tx,
+                        "down": sum_rx
                     });
+                    disabledDevices = [];
                 }
                 this.networkProvider.setData(data, disabledDevices);
             }
@@ -562,6 +594,8 @@ class MCSM extends Applet.TextIconApplet {
         var data = [];
         let diskstats = (to_string(GLib.file_get_contents("/proc/diskstats")[1])).trim().split("\n");
         //~ global.log(UUID + " - diskstats:\n" + diskstats);
+        var sum_read = 0;
+        var sum_write = 0;
         for (let line of diskstats) {
             if (line.includes("loop")) continue;
             line = line.trim();
@@ -571,14 +605,27 @@ class MCSM extends Applet.TextIconApplet {
             if (usedDevices.indexOf(_dev) < 0) continue;
             let discGran = 1 * deviceGrans[_dev];
             let [_read, _write] = [1 * infos[5] * discGran, 1 * infos[9] * discGran];
-            data.push({
-                "id": _dev,
-                "name": deviceNames[_dev],
-                "read": _read,
-                "write": _write
-            });
+            if (this.Disk_mergeAll) {
+                sum_read = sum_read + _read;
+                sum_write = sum_write + _write;
+            } else {
+                data.push({
+                    "id": _dev,
+                    "name": deviceNames[_dev],
+                    "read": _read,
+                    "write": _write
+                });
+            }
             //~ global.log(UUID + " - line:\n" + line);
 
+        }
+        if (this.Disk_mergeAll) {
+            data.push({
+                "id": "Disks",
+                "name": _("Disks"),
+                "read": sum_read,
+                "write": sum_write
+            });
         }
         this.diskProvider.setData(data);
         //~ global.log(UUID + " - data:\n" + JSON.stringify(data, null, "\t"));
@@ -752,7 +799,11 @@ class MultiCpuDataProvider {
         let toolTipString = _('------------- CPU ------------') + '\n';
         for (let i = 0; i < this.CPUCount; i++) {
             let percentage = Math.round(100 * this.currentReadings[i], 2);
-            toolTipString += (_('Core') + ' ' + i).padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';;
+            if (this.applet.CPU_mergeAll) {
+                toolTipString += (_('CPU') + ' ').padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+            } else {
+                toolTipString += (_('Core') + ' ' + i).padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+            }
         }
         return toolTipString;
     }
@@ -777,6 +828,19 @@ class NetDataProvider {
         this.disabledDevices = [];
         this.currentReadings = [];
         this.lastUpdatedTime = Date.now();
+        if (this.applet.Net_mergeAll) {
+            this.currentReadings.push({
+                "id": "Net",
+                "name": _("Network"),
+                "up": 0,
+                "down": 0,
+                "tooltipUp": 0,
+                "tooltipDown": 0,
+                "lastReading": [0, 0],
+                "readingRatesList": [0, 0]
+            });
+            return;
+        }
         for (let dev of this.applet.Net_devicesList) {
             if (! dev["enabled"]) {
                 this.disabledDevices.push(dev["id"]);
@@ -889,6 +953,19 @@ class DiskDataProvider {
         this.currentReadings = [];
         this.lastUpdatedTime = Date.now();
 
+        if (this.applet.Disk_mergeAll) {
+            this.currentReadings.push({
+                "id": "Disks",
+                "name": _("Disks"),
+                "read": 0,
+                "write": 0,
+                "tooltipRead": 0,
+                "tooltipWrite": 0,
+                "lastReading": [0, 0],
+                "readingRatesList": [0, 0]
+            });
+            return;
+        }
         for (let dev of this.applet.Disk_devicesList) {
             if (! dev["enabled"]) {
                 this.disabledDevices.push(dev["id"]);
