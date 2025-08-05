@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-10 05:28+0200\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
 "PO-Revision-Date: 2025-07-10 17:39-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,54 +18,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#. applet.js:95
+#. applet.js:44
+msgid "Notifications applet conflict"
+msgstr "Conflicto del applet de notificaciones"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+"Se ha detectado un conflicto: notifications@cinnamon.org está activo.\n"
+"Elimínalo y reinicia Cinnamon antes de usar el applet Notificaciones-"
+"Mejoradas."
+
+#. applet.js:120
 msgid "Do not disturb"
 msgstr "No molestar"
 
-#. applet.js:101
+#. applet.js:126
 msgid "No notifications"
 msgstr "Sin notificaciones"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:109
+#. applet.js:134
 msgid "Clear notifications"
 msgstr "Borrar notificaciones"
 
-#. applet.js:132
+#. applet.js:157
 msgid "Enable notifications"
 msgstr "Habilitar notificaciones"
 
-#. applet.js:143
+#. applet.js:168
 msgid "Notification Settings"
 msgstr "Configuración de notificaciones"
 
-#. applet.js:232 applet.js:406
+#. applet.js:257 applet.js:431
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d notificación"
 msgstr[1] "%d notificaciones"
 
-#. applet.js:262
+#. applet.js:287
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#. applet.js:275
+#. applet.js:300
 msgid "Notifications disabled"
 msgstr "Notificaciones desactivadas"
 
-#. applet.js:422
+#. applet.js:447
 msgid "just now"
 msgstr "ahora mismo"
 
-#. applet.js:425
+#. applet.js:450
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "hace %d segundo"
 msgstr[1] "hace %d segundos"
 
-#. applet.js:429
+#. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
