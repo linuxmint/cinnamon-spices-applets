@@ -1,3 +1,7 @@
+### v2.3.3~20250806
+  * Fixes [#7444](https://github.com/linuxmint/cinnamon-spices-applets/issues/7444)
+  * From now on, you can choose the Square view for each widget.
+
 ### v2.3.2~20250806
   * Fixes [#7443](https://github.com/linuxmint/cinnamon-spices-applets/issues/7443)
   * Fixes [#7445](https://github.com/linuxmint/cinnamon-spices-applets/issues/7445)

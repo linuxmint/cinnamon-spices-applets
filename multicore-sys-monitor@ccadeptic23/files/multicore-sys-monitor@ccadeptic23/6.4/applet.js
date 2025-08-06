@@ -108,6 +108,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
+        this.settings.bind("CPU_squared", "CPU_squared");
         this.settings.bind("CPU_width", "CPU_width");
         this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
@@ -120,6 +121,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_activity_60_80", "CPU_activity_60_80");
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
+        this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
         this.settings.bind("Mem_colorCached", "Mem_colorCached");
@@ -127,11 +129,13 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Mem_colorFree", "Mem_colorFree");
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
         this.settings.bind("Net_enabled", "Net_enabled");
+        this.settings.bind("Net_squared", "Net_squared");
         this.settings.bind("Net_width", "Net_width");
         this.settings.bind("Net_mergeAll", "Net_mergeAll");
         this.settings.bind("Net_autoscale", "Net_autoscale");
         this.settings.bind("Net_logscale", "Net_logscale");
         this.settings.bind("Disk_enabled", "Disk_enabled");
+        this.settings.bind("Disk_squared", "Disk_squared");
         this.settings.bind("Disk_width", "Disk_width");
         this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
@@ -236,7 +240,7 @@ class MCSM extends Applet.TextIconApplet {
                 // translate origin to the new location for the graph
                 let areaContext = area.get_context();
                 areaContext.translate(xOffset, 0);
-                let width = this[`${properties[i].abbrev}_width`] * global.ui_scale;
+                let width = (this[`${properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${properties[i].abbrev}_width`] * global.ui_scale;
                 if (properties[i].abbrev === 'Mem') {
                     // paint the "swap" backdrop
                     this.swapGraph.paint(
