@@ -21,7 +21,7 @@ msgstr ""
 #. applet.js:58
 msgid "Click to reset or reconnect to the process"
 msgstr ""
-"Kattintson a visszaállításhoz vagy a folyamathoz való újbóli csatlakozáshoz."
+"Kattintson a visszaállításhoz vagy a folyamathoz való újbóli csatlakozáshoz"
 
 #. applet.js:62
 msgid "Variation:"
@@ -45,7 +45,7 @@ msgstr "Start:"
 
 #. applet.js:67
 msgid "Diff:"
-msgstr "Különb.:"
+msgstr "Különbség:"
 
 #. applet.js:68
 msgid "Max:"
@@ -78,11 +78,11 @@ msgstr "'%s' eltávolítása"
 
 #. applet.js:439
 msgid "About..."
-msgstr "Névjegy..."
+msgstr "Névjegy…"
 
 #. applet.js:458
 msgid "Configure..."
-msgstr "Beállítás..."
+msgstr "Beállítás…"
 
 #. applet.js:475 applet.js:503
 #, javascript-format
@@ -289,4 +289,4 @@ msgstr "Egyéni szélesség"
 
 #. settings-schema.json->style-label-width->description
 msgid "Label's width (pixels)"
-msgstr "Címke szélessége (pixel)"
+msgstr "Címke szélessége (képpont)"
