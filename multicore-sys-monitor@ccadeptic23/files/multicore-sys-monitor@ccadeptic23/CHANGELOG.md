@@ -1,3 +1,7 @@
+### v2.3.2~20250806
+  * Fixes [#7443](https://github.com/linuxmint/cinnamon-spices-applets/issues/7443)
+  * Fixes [#7445](https://github.com/linuxmint/cinnamon-spices-applets/issues/7445)
+
 ### v2.3.1~20250806
   * New script `get-cpu-data3.sh` created by @LeosBitto. Again, this script improves performance. Many thanks to him!
   * Show icon when the 'Without any graphics' option is selected in context menu.
