@@ -141,7 +141,8 @@ class MCSM extends Applet.TextIconApplet {
 
         this.on_color_changed();
         this.useSymbolicIcon = true;
-        //~ this.setIcon();
+        if (this.without_any_graph)
+            this.setIcon();
         //~ global.log("ICON SIZE: " + this.getPanelIconSize(St.IconType.FULLCOLOR));
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
         if (this.useIconSize)
