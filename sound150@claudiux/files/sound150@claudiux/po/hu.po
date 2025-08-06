@@ -8,15 +8,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-05 16:59+0200\n"
-"PO-Revision-Date: 2025-06-20 19:06+0200\n"
-"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"PO-Revision-Date: 2025-08-06 22:41+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:204 3.4/applet.js:65
