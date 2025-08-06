@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-05 17:11+0200\n"
-"PO-Revision-Date: 2025-07-28 12:52+0200\n"
+"PO-Revision-Date: 2025-08-06 07:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -306,9 +306,8 @@ msgid "Network"
 msgstr "Netzwerk"
 
 #. 6.4/applet.js:625 6.4/applet.js:959
-#, fuzzy
 msgid "Disks"
-msgstr "Festplatte IO"
+msgstr "Festplatten"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -437,9 +436,8 @@ msgstr "Hintergrundfarbe"
 #. 6.4->settings-schema.json->Mem_labelOn->description
 #. 6.4->settings-schema.json->Net_labelOn->description
 #. 6.4->settings-schema.json->Disk_labelOn->description
-#, fuzzy
 msgid "Label"
-msgstr "Beschriftungen"
+msgstr "Beschriftung"
 
 #. 6.4->settings-schema.json->CPU_width->description
 #. 6.4->settings-schema.json->Mem_width->description
@@ -460,7 +458,7 @@ msgstr "Breite"
 #. 6.4->settings-schema.json->Net_mergeAll->description
 #. 6.4->settings-schema.json->Disk_mergeAll->description
 msgid "Merge all"
-msgstr ""
+msgstr "Alles zusammenführen"
 
 #. 6.4->settings-schema.json->CPU_byActivity->description
 #. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
@@ -583,7 +581,7 @@ msgstr "⚠️ Id"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Sector Size"
-msgstr "⚠️ Sector Size"
+msgstr "⚠️ Sektorengröße"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "Color Read"
@@ -655,87 +653,71 @@ msgstr "Farbe #14"
 
 #. 6.4->settings-schema.json->color15->description
 msgid "Color #15"
-msgstr "Farbe 15"
+msgstr "Farbe #15"
 
 #. 6.4->settings-schema.json->color16->description
-#, fuzzy
 msgid "Color #16"
-msgstr "Farbe #1"
+msgstr "Farbe #16"
 
 #. 6.4->settings-schema.json->color17->description
-#, fuzzy
 msgid "Color #17"
-msgstr "Farbe #1"
+msgstr "Farbe #17"
 
 #. 6.4->settings-schema.json->color18->description
-#, fuzzy
 msgid "Color #18"
-msgstr "Farbe #1"
+msgstr "Farbe #18"
 
 #. 6.4->settings-schema.json->color19->description
-#, fuzzy
 msgid "Color #19"
-msgstr "Farbe #1"
+msgstr "Farbe #19"
 
 #. 6.4->settings-schema.json->color20->description
-#, fuzzy
 msgid "Color #20"
-msgstr "Farbe #2"
+msgstr "Farbe #20"
 
 #. 6.4->settings-schema.json->color21->description
-#, fuzzy
 msgid "Color #21"
-msgstr "Farbe #2"
+msgstr "Farbe #21"
 
 #. 6.4->settings-schema.json->color22->description
-#, fuzzy
 msgid "Color #22"
-msgstr "Farbe #2"
+msgstr "Farbe #22"
 
 #. 6.4->settings-schema.json->color23->description
-#, fuzzy
 msgid "Color #23"
-msgstr "Farbe #2"
+msgstr "Farbe #23"
 
 #. 6.4->settings-schema.json->color24->description
-#, fuzzy
 msgid "Color #24"
-msgstr "Farbe #2"
+msgstr "Farbe #24"
 
 #. 6.4->settings-schema.json->color25->description
-#, fuzzy
 msgid "Color #25"
-msgstr "Farbe #2"
+msgstr "Farbe #25"
 
 #. 6.4->settings-schema.json->color26->description
-#, fuzzy
 msgid "Color #26"
-msgstr "Farbe #2"
+msgstr "Farbe #26"
 
 #. 6.4->settings-schema.json->color27->description
-#, fuzzy
 msgid "Color #27"
-msgstr "Farbe #2"
+msgstr "Farbe #27"
 
 #. 6.4->settings-schema.json->color28->description
-#, fuzzy
 msgid "Color #28"
-msgstr "Farbe #2"
+msgstr "Farbe #28"
 
 #. 6.4->settings-schema.json->color29->description
-#, fuzzy
 msgid "Color #29"
-msgstr "Farbe #2"
+msgstr "Farbe #29"
 
 #. 6.4->settings-schema.json->color30->description
-#, fuzzy
 msgid "Color #30"
-msgstr "Farbe #3"
+msgstr "Farbe #30"
 
 #. 6.4->settings-schema.json->color31->description
-#, fuzzy
 msgid "Color #31"
-msgstr "Farbe #3"
+msgstr "Farbe #31"
 
 #. 6.4->settings-schema.json->labelWarning->description
 msgid "Data marked with ⚠️ must not be changed!"
