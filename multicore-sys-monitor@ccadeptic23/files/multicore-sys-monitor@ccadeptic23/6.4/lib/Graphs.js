@@ -118,16 +118,14 @@ class GraphVBars {
     // Usage Data Bars
     let vbarWidth = (width - 6) / currentReadings.length;
     for (let i = 0; i < currentReadings.length; i++) {
-      let currentR = currentReadings[i];
+      let currentR = parseFloat(currentReadings[i]);
       let vbarHeight = (height - 1) * currentR;
       let vbarOffset = i * vbarWidth + 3;
 
       let r=1, g=1, b=1, a=1;
 
-      //~ let use_natural_colors = this.configSettings.getUseProgressiveColors();
       let use_natural_colors = this.applet.CPU_useProgressiveColors;
 
-      //~ if (!this.configSettings.getByActivity() || providerName == 'SWAP') {
       if (!this.applet.CPU_byActivity || providerName == 'SWAP') {
         //use this to select cpu from our colorlist, its incase we have more cpus than colors
         //This shouldnt happen but just incase
@@ -135,41 +133,48 @@ class GraphVBars {
         r = colorsList[cpunum][0];
         g = colorsList[cpunum][1];
         b = colorsList[cpunum][2];
-        a = colorsList[cpunum][3];
+        a = (colorsList[cpunum][3] != null) ? colorsList[cpunum][3] : 1;
       } else {
         if (use_natural_colors) {
           [r, g, b, a] = pc2RGB(currentR)
         } else {
+          colorsList = [
+            RGBa2rgba(this.applet.CPU_activity_0_20),
+            RGBa2rgba(this.applet.CPU_activity_20_40),
+            RGBa2rgba(this.applet.CPU_activity_40_60),
+            RGBa2rgba(this.applet.CPU_activity_60_80),
+            RGBa2rgba(this.applet.CPU_activity_80_100)
+          ];
           if (currentR >= 0.8) {
             //~ g = 0; b = 0
             r = colorsList[4][0];
             g = colorsList[4][1];
             b = colorsList[4][2];
-            a = colorsList[4][3];
+            a = (colorsList[4][3] != null) ? colorsList[4][3] : 1;
           } else if (currentR >= 0.6) {
             //~ g = 127; b = 0
             r = colorsList[3][0];
             g = colorsList[3][1];
             b = colorsList[3][2];
-            a = colorsList[3][3];
+            a = (colorsList[3][3] != null) ? colorsList[3][3] : 1;
           } else if (currentR >= 0.4) {
             //~ b = 0
             r = colorsList[2][0];
             g = colorsList[2][1];
             b = colorsList[2][2];
-            a = colorsList[2][3];
+            a = (colorsList[2][3] != null) ? colorsList[2][3] : 1;
           } else if (currentR >= 0.2) {
             //~ r = 0 ; b = 0
             r = colorsList[1][0];
             g = colorsList[1][1];
             b = colorsList[1][2];
-            a = colorsList[1][3];
+            a = (colorsList[1][3] != null) ? colorsList[1][3] : 1;
           } else {
             //~ r = 0 ; g = 0
             r = colorsList[0][0];
             g = colorsList[0][1];
             b = colorsList[0][2];
-            a = colorsList[0][3];
+            a = (colorsList[0][3] != null) ? colorsList[0][3] : 1;
           }
         }
       }
