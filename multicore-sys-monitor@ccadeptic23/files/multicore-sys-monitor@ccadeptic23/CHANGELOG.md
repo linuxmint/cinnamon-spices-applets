@@ -1,3 +1,7 @@
+### v2.3.1~20250806
+  * New script `get-cpu-data3.sh` created by @LeosBitto. Again, this script improves performance. Many thanks to him!
+  * Show icon when the 'Without any graphics' option is selected in context menu.
+
 ### v2.3.0~20250805
   * New options "Label" in settings: one for each type (CPU, Mem, Net, Disks). This option is only visible when the Labels option is checked in the General tab.
   * New option "Merge all" in CPU, Net, Disks tabs. Once this option is checked, a single device grouping all devices is displayed. The colors used are #0 and #1 (for Net and Disks).
