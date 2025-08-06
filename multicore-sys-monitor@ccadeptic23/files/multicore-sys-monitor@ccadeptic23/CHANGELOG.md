@@ -1,3 +1,7 @@
+### v2.3.4~20250806
+  * Fixes [#7461](https://github.com/linuxmint/cinnamon-spices-applets/issues/7461)
+  * From now on, you can choose to set the origin of the pie chart (Mem) at 12 o'clock.
+
 ### v2.3.3~20250806
   * Fixes [#7444](https://github.com/linuxmint/cinnamon-spices-applets/issues/7444)
   * From now on, you can choose the Square view for each widget.

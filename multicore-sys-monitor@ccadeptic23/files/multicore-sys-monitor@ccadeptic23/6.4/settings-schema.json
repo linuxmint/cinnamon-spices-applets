@@ -121,7 +121,8 @@
         "Mem_enabled",
         "Mem_labelOn",
         "Mem_squared",
-        "Mem_width"
+        "Mem_width",
+        "Mem_startAt12Oclock"
       ]
     },
     "sectionMemoryColors": {
@@ -386,6 +387,11 @@
     "step": 16,
     "show-value": true,
     "dependency": "!Mem_squared"
+  },
+  "Mem_startAt12Oclock": {
+    "type": "switch",
+    "default": false,
+    "description": "Origin at 12 o'clock"
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",

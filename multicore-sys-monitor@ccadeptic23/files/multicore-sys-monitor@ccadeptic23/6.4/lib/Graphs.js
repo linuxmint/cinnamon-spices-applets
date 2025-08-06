@@ -12,6 +12,8 @@ const UUID = "multicore-sys-monitor@ccadeptic23";
 //~ else
     //~ configFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
 
+const TAU = Math.PI * 2;
+
 function RGBa2rgba(color) {
     //~ global.log("RGBa2rgba - Type of color: " + typeof color);
     if (typeof color == "string" && (color.includes(","))) {
@@ -275,8 +277,10 @@ class GraphPieChart {
       let b = colorsList[datapointnum][2];
       let a = colorsList[datapointnum][3];
 
-      let startangle = 2 * 3.14159 * runningpercent;
-      let endangle = 2 * 3.14159 * (runningpercent + currentReadings[i]);
+      let origin = (this.applet.Mem_startAt12Oclock) ? -Math.PI / 2 : 0;
+
+      let startangle = TAU * runningpercent + origin;
+      let endangle = TAU * (runningpercent + currentReadings[i]) + origin;
       runningpercent += currentReadings[i]; //update running percent
 
       areaContext.setSourceRGBA(r, g, b, a);

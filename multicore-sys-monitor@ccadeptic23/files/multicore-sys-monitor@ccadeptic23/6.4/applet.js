@@ -123,6 +123,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Mem_enabled", "Mem_enabled");
         this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width");
+        this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
         this.settings.bind("Mem_colorCached", "Mem_colorCached");
         this.settings.bind("Mem_colorBuffer", "Mem_colorBuffer");
