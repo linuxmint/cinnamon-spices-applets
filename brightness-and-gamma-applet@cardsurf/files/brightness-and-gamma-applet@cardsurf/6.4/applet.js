@@ -20,7 +20,6 @@ const AppletConstants = require('./lib/appletConstants');
 const ShellUtils = require('./lib/shellUtils');
 const Values = require('./lib/values');
 const {
-  timeout_add,
   timeout_add_seconds,
   setTimeout,
   clearTimeout,
@@ -117,7 +116,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.apply_asynchronously = true;
         this.gsettings = Gio.Settings.new("org.cinnamon.settings-daemon.plugins.color");
         this.sunrise_sunset();
-        this.numberOfMonitors = 0;
+        //~ this.numberOfMonitors = 0;
 
         this._init_dependencies_satisfied();
     }
@@ -139,7 +138,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     on_number_of_monitors_changed() {
         if (!this.apply_changing_monitors) return;
-        this.on_options_type_changed();
+        this.on_preset_reload_button_clicked();
     }
 
     sunrise_sunset() {
@@ -337,6 +336,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
     _bind_settings() {
         for(let [property_name, callback] of [
                         ["disable_nightmode", this._run_apply_values_running],
+                        ["numberOfMonitors", null],
                         ["apply_asynchronously", null],
                         ["apply_startup", null],
                         ["apply_every", null],
@@ -569,7 +569,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this._check_sunrise_sunset(true);
         this.update_tooltip();
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
-        timeout_add(300, () => { this.check_number_of_monitors(); return this.is_running; });
+        timeout_add_seconds(1, () => { this.check_number_of_monitors(); return this.is_running; });
     }
 
     // Override

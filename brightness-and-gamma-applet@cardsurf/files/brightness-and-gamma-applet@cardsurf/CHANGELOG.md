@@ -1,3 +1,6 @@
+### v2.1.1~20250806
+* Fixes [#7452](https://github.com/linuxmint/cinnamon-spices-applets/issues/7452)
+
 ### v2.1.0~20250805
 * Fixes [#7452](https://github.com/linuxmint/cinnamon-spices-applets/issues/7452)
 * New option in General tab: "Apply when the number of monitors changes".

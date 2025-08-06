@@ -252,5 +252,10 @@
     "last_values_string" : {
         "type": "generic",
         "default" : ""
+    },
+
+    "numberOfMonitors" : {
+        "type": "generic",
+        "default" : 1
     }
 }
