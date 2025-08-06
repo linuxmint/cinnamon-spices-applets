@@ -83,6 +83,7 @@
       "keys": [
         "CPU_enabled",
         "CPU_labelOn",
+        "CPU_squared",
         "CPU_width",
         "CPU_mergeAll",
         "CPU_byActivity",
@@ -119,7 +120,9 @@
       "keys": [
         "Mem_enabled",
         "Mem_labelOn",
-        "Mem_width"
+        "Mem_squared",
+        "Mem_width",
+        "Mem_startAt12Oclock"
       ]
     },
     "sectionMemoryColors": {
@@ -139,6 +142,7 @@
       "keys": [
         "Net_enabled",
         "Net_labelOn",
+        "Net_squared",
         "Net_width",
         "Net_mergeAll"
       ]
@@ -167,6 +171,7 @@
       "keys": [
         "Disk_enabled",
         "Disk_labelOn",
+        "Disk_squared",
         "Disk_width",
         "Disk_mergeAll"
       ]
@@ -277,6 +282,11 @@
     "description": "Label",
     "dependency": "labelsOn"
   },
+  "CPU_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "CPU_width": {
     "type": "scale",
     "default": 64,
@@ -284,7 +294,8 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!CPU_squared"
   },
   "CPU_mergeAll": {
     "type": "switch",
@@ -362,6 +373,11 @@
     "description": "Label",
     "dependency": "labelsOn"
   },
+  "Mem_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "Mem_width": {
     "type": "scale",
     "default": 64,
@@ -369,7 +385,13 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!Mem_squared"
+  },
+  "Mem_startAt12Oclock": {
+    "type": "switch",
+    "default": false,
+    "description": "Origin at 12 o'clock"
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",
@@ -407,6 +429,11 @@
     "description": "Label",
     "dependency": "labelsOn"
   },
+  "Net_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "Net_width": {
     "type": "scale",
     "default": 64,
@@ -414,7 +441,8 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!Net_squared"
   },
   "Net_mergeAll": {
     "type": "switch",
@@ -564,6 +592,11 @@
     "description": "Label",
     "dependency": "labelsOn"
   },
+  "Disk_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "Disk_width": {
     "type": "scale",
     "default": 64,
@@ -571,7 +604,8 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!Disk_squared"
   },
   "Disk_mergeAll": {
     "type": "switch",
