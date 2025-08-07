@@ -1,8 +1,0 @@
-{
-    "uuid": "mouse-keys-shortcut@GabrielCamara3526",
-    "name": "Mouse Keys Shortcut",
-    "description": "Enable this applet to control the pointer using the keypad",
-    "icon": "input-mouse",
-    "max-instances": "1"
-}
-
