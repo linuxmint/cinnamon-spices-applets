@@ -20,6 +20,7 @@
                 "apply_startup",
                 "apply_every",
                 "apply_asynchronously",
+                "apply_changing_monitors",
                 "update_scroll",
                 "scroll_step",
                 "brightness_up_shortcut",
@@ -83,6 +84,11 @@
         "default" : true,
         "description": "Apply asynchronously",
         "tooltip": "Apply values in a background process"
+    },
+    "apply_changing_monitors" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Apply when the number of monitors changes"
     },
     "update_scroll" : {
         "type" : "switch",
@@ -246,5 +252,10 @@
     "last_values_string" : {
         "type": "generic",
         "default" : ""
+    },
+
+    "numberOfMonitors" : {
+        "type": "generic",
+        "default" : 1
     }
 }

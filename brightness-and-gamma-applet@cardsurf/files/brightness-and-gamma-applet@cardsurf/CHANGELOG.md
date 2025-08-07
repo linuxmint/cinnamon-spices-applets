@@ -1,3 +1,6 @@
+### v2.1.~20250807
+* Fixes [#7452](https://github.com/linuxmint/cinnamon-spices-applets/issues/7452)
+
 ### v2.1.1~20250806
 * Fixes [#7452](https://github.com/linuxmint/cinnamon-spices-applets/issues/7452)
 
