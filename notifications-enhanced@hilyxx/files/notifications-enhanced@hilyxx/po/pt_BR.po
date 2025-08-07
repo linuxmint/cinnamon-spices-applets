@@ -8,26 +8,29 @@ msgstr ""
 "Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-05 12:43+0200\n"
-"PO-Revision-Date: 2025-05-18 13:52+0200\n"
-"Last-Translator: Renan Lazarotto <renanlazarotto@gmail.com>\n"
+"POT-Creation-Date: 2025-08-07 01:02-0300\n"
+"PO-Revision-Date: 2025-08-07 01:11-0300\n"
+"Last-Translator: Igor Santos <igorsantos07@gmail.com>\n"
 "Language-Team: Renan Lazarotto <renanlazarotto@gmail.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:44
-#, fuzzy
 msgid "Notifications applet conflict"
-msgstr "Notificações desabilitadas"
+msgstr "Conflito entre applets de notificação"
 
 #. applet.js:45
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
+"Conflito detectado: notifications@cinnamon.org está ativo.\n"
+"Remova a outra extensão e reinicie o Cinnamon antes de usar o applet "
+"Notifications-Enhanced / Notificações-Melhoradas."
 
 #. applet.js:120
 msgid "Do not disturb"
@@ -84,9 +87,8 @@ msgstr[0] "há %d minuto"
 msgstr[1] "há %d minutos"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Notifications-Enhanced"
-msgstr "Notificações"
+msgstr "Notificações-Melhoradas"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -113,21 +115,18 @@ msgid "Show the number of notifications"
 msgstr "Mostrar o número de notificações"
 
 #. settings-schema.json->showEmptyTray->description
-#, fuzzy
 msgid "Show notification tray"
-msgstr "Mostrar notificações"
+msgstr "Mostrar a bandeja de notificações vazia"
 
 #. settings-schema.json->showEmptyTray->tooltip
-#, fuzzy
 msgid "Check this to always show the notification tray."
-msgstr "Marque essa opção para ignorar as notificações transitórias."
+msgstr "Marque essa opção para sempre exibir a bandeja de notificações."
 
 #. settings-schema.json->showDisturbIcon->description
 msgid "Always show 'Do Not Disturb' icon"
-msgstr ""
+msgstr "Sempre exibir o ícone 'Não Perturbe'"
 
 #. settings-schema.json->showDisturbIcon->tooltip
-#, fuzzy
 msgid ""
 "Check this to show the 'Do Not Disturb icon' on the panel even when the "
 "'Show notification tray' option is disabled."
@@ -140,6 +139,25 @@ msgid "Show notification settings in the menu"
 msgstr "Mostrar configurações de notificação no menu"
 
 #. settings-schema.json->section3->description
+msgid "Filters"
+msgstr "Filtros"
+
+#. settings-schema.json->blockList->description
+msgid "Hide notifications from the list for the following apps:"
+msgstr "Ocultar notificações da lista para os seguintes apps:"
+
+#. settings-schema.json->blockList->tooltip
+#. settings-schema.json->urgentList->tooltip
+msgid "Comma-separated list of case-insensitive app titles"
+msgstr ""
+"Lista separada por vírgulas,  insensível a maiúsculas/minúsculas, de títulos "
+"de apps"
+
+#. settings-schema.json->urgentList->description
+msgid "Always consider URGENT the notifications from these apps:"
+msgstr "Sempre considerar URGENTE as notificações dos seguintes apps:"
+
+#. settings-schema.json->section4->description
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de teclado"
 
@@ -157,15 +175,12 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Definir combinações de tecla(s) para limpar todas as notificações."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Enable or disable notifications"
-msgstr "Habilitar notificações"
+msgstr "Habilitar ou desabilitar notificações"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to enable or disable notifications."
-msgstr ""
-"Definir combinações de tecla(s) para ativar ou desativar as notificações."
+msgstr "Definir atalho(s) de teclado para ativar ou desativar notificações."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

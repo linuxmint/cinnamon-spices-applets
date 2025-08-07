@@ -10,5 +10,6 @@ This applet is a fork of the original Notification applet developed for the Cinn
 * Tooltip now displays the number of notifications.
 * New keyboard shortcut to enable or disable notifications.
 * Middle-click on a notification to dismiss it.
+* Filters to hide irrelevant notifications from the list, or force a special app to show as urgent.
 
 ⚠️ To avoid code conflicts (as both applets share parts of the same code), please remove the vanilla Notification applet before installing Notifications Enhanced, then restart Cinnamon.
