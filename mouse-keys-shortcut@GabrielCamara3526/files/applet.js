@@ -5,6 +5,7 @@ const Main = imports.ui.main;
 const Clutter = imports.gi.Clutter;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 class MyApplet extends Applet.IconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -65,16 +66,16 @@ class MyApplet extends Applet.IconApplet {
   }
 
   on_applet_clicked() {
-    Util.spawnCommandLine(
-      "sh -c 'if gsettings get org.cinnamon.desktop.a11y.keyboard mousekeys-enable | grep -q false; then " +
-      "gsettings set org.cinnamon.desktop.a11y.keyboard mousekeys-enable true; " +
-      "notify-send -u normal -i preferences-desktop-accessibility-symbolic \"Mouse Keys: ON\" \"Control the pointer using the keypad\"; " +
-      "else " +
-      "gsettings set org.cinnamon.desktop.a11y.keyboard mousekeys-enable false; " +
-      "notify-send -u normal -i preferences-desktop-accessibility-symbolic \"Mouse Keys: OFF\" \"Control the pointer using the keypad\"; " +
-      "fi'"
-    );
-  }
+    let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
+    let mouseKeysEnable = settings.get_boolean('mousekeys-enable');
+    if (!mouseKeysEnable) {
+      settings.set_boolean('mousekeys-enable', true);
+      Main.notify("Mouse Keys: ON", "Control the pointer using the keypad");
+    } else {
+        settings.set_boolean('mousekeys-enable', false);
+        Main.notify("Mouse Keys: OFF", "Control the pointer using the keypad");
+      }
+    }
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
