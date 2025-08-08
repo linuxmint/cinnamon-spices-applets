@@ -8,15 +8,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-25 20:30+1000\n"
-"PO-Revision-Date: 2024-07-28 07:58-0400\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"PO-Revision-Date: 2025-08-07 20:11+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:278
 msgid "Short break running"
@@ -72,7 +72,7 @@ msgstr "Befejezve"
 
 #: applet.js:770
 msgid "Reset Timer"
-msgstr "Időzítő ujraindítása"
+msgstr "Időzítő újraindítása"
 
 #: applet.js:778
 msgid "Reset Counts and Timer"
@@ -136,7 +136,7 @@ msgstr "%s és %s"
 
 #: applet.js:920
 msgid "Continue Current Pomodoro"
-msgstr "Jelenlegi pomodor folytatása"
+msgstr "Jelenlegi pomodoro folytatása"
 
 #: applet.js:926 applet.js:959
 msgid "Pause Pomodoro"
@@ -184,7 +184,7 @@ msgstr "Beállítások"
 
 #. settings-schema.json->start_automatically_on_load->description
 msgid "Start the pomodoro timer as soon as the applet loads"
-msgstr "Indítsa el a pomodoro időzítőt, amint az applet betöltődik"
+msgstr "Indítsa el a pomodoro időzítőt, amint az kisalkalmazás betöltődik"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
@@ -200,7 +200,7 @@ msgstr "Az automatikus indítás egy rövid szünet után"
 
 #. settings-schema.json->auto_start_after_break_ends->description
 msgid "Auto start a new pomodoro after a break ends"
-msgstr "Egy új pomodoro automatikus idítása egy rövid szünet után"
+msgstr "Egy új pomodoro automatikus indítása egy rövid szünet után"
 
 #. settings-schema.json->display_icon->description
 msgid "Display the pomodoro icon in the applet panel"
@@ -225,8 +225,8 @@ msgstr "Hangok"
 #. settings-schema.json->sox-info->description
 msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
 msgstr ""
-"Kérjük, telepítse a 'sox' alkalmazást, és indítsa újra a Cinnamont a "
-"hangfunkció használatához!"
+"Kérjük, telepítse a „sox” alkalmazást, és indítsa újra a Cinnamon asztali "
+"környezetet a hangfunkció használatához."
 
 #. settings-schema.json->timer_sound->description
 msgid "Play Timer Sound"
@@ -265,7 +265,7 @@ msgstr "Figyelmeztető hangfájl"
 
 #. settings-schema.json->start_sound->description
 msgid "Play Start Sound"
-msgstr "Sart hang lejátszása"
+msgstr "Start hang lejátszása"
 
 #. settings-schema.json->start_sound_file->description
 msgid "Start Sound File"
@@ -273,7 +273,7 @@ msgstr "Start hangfájl"
 
 #. settings-schema.json->head_scripts->description
 msgid "Scripts"
-msgstr "Szkriptek"
+msgstr "Parancsfájlok"
 
 #. settings-schema.json->enable_scripts->description
 msgid "Enable scripts"
