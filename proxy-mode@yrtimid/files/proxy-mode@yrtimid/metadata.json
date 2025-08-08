@@ -1,0 +1,8 @@
+{
+	"uuid": "proxy-mode@yrtimid",
+	"name": "Proxy Mode Switcher",
+	"description": "Switch between system proxy modes (None, Manual, Automatic) from the panel.",
+	"version": "1.0.0",
+	"author": "Dmitry Gurovich",
+	"max-instances": "-1"
+}
