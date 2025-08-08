@@ -1,3 +1,7 @@
+### v2.4.0~20250808
+  * Improved memory calculation.
+  * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460
+
 ### v2.3.5~20250808
   * Speed improvement.
 

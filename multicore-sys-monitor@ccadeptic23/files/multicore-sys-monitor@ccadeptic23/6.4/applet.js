@@ -484,7 +484,7 @@ class MCSM extends Applet.TextIconApplet {
                 //~ let [total, used, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                this.memoryProvider.setData(used / total, cache / total, buffers / total, (total - used - cache - buffers) / total);
+                this.memoryProvider.setData(used / total, cache / total, buffers / total, available / total);
                 //~ this.memoryProvider.setData(used / total, cache / total, buffers / total, free / total);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 //~ global.log(this.memoryProvider.getTooltipString());
@@ -706,12 +706,14 @@ class MemDataProvider {
         return this.currentReadings;
     }
 
-    setData(used, shared, buffers, cache) {
+    setData(used, cached, buffers, free) {
+        const precision = 100000;
+        let unavailable = used - buffers - cached;
         this.currentReadings = [
-            Math.round(used*10000) / 10000,
-            Math.round(shared*10000) / 10000,
-            Math.round(buffers*10000) / 10000,
-            Math.round(cache*10000) / 10000
+            Math.round(unavailable*precision) / precision,
+            Math.round(cached*precision) / precision,
+            Math.round(buffers*precision) / precision,
+            Math.max(Math.round((1 - used)*precision) / precision, Math.round((free - buffers)*precision) / precision)
         ];
     }
 
