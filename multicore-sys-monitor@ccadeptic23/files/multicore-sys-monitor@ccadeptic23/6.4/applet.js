@@ -144,6 +144,9 @@ class MCSM extends Applet.TextIconApplet {
         for (let i=0; i<16; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
+        if (this.refreshRate < 1000)
+            this.refreshRate = 1000;
+
         this.on_color_changed();
         this.useSymbolicIcon = true;
         if (this.without_any_graph)
@@ -466,27 +469,23 @@ class MCSM extends Applet.TextIconApplet {
 
     get_mem_info() {
         if (!this.isRunning) return;
+        if (!this.Mem_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 //~ global.log(UUID + " - stdout is a " + typeof stdout);
                 let [, dataMem, dataSwap] = stdout.split(":");
                 dataMem = dataMem.trim();
-                //~ var i = 0;
-                while (dataMem.includes("  ") && i < 10) {
-                    //~ i++;
-                    dataMem = dataMem.replace(/\ \ /g, " ");
-                }
+                dataMem = dataMem.replace(/\ +/g, " ");
                 //~ global.log(UUID + " - dataMem: " + dataMem);
                 dataSwap = dataSwap.trim();
-                while (dataSwap.includes("  ") && i < 10) {
-                    //~ i++;
-                    dataSwap = dataSwap.replace(/\ \ /g, " ");
-                }
+                dataSwap = dataSwap.replace(/\ +/g, " ");
                 //~ global.log(UUID + " - dataSwap: " + dataSwap);
                 //~ 16485462016  3414532096   500703232   278343680  4845682688  8356085760 13070929920
-                let [total, used, shared, buffers, cache, available] = dataMem.split(" ");
+                //~ let [total, used, shared, buffers, cache, available, rest] = dataMem.split(" ");
+                let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
                 this.memoryProvider.setData(used / total, cache / total, buffers / total, (total - used - cache - buffers) / total);
+                //~ this.memoryProvider.setData(used / total, cache / total, buffers / total, free / total);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 //~ global.log(this.memoryProvider.getTooltipString());
             }
@@ -496,6 +495,7 @@ class MCSM extends Applet.TextIconApplet {
 
     get_cpu_info() {
         if (!this.isRunning) return;
+        if (!this.CPU_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data3.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let cpuString = stdout.trim();
@@ -533,6 +533,7 @@ class MCSM extends Applet.TextIconApplet {
 
     get_net_info() {
         if (!this.isRunning) return;
+        if (!this.Net_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 //~ global.log(UUID + " - stdout is a " + typeof stdout);
@@ -585,6 +586,7 @@ class MCSM extends Applet.TextIconApplet {
 
     get_disk_info() {
         if (!this.isRunning) return;
+        if (!this.Disk_enabled) return;
         var usedDevices = [];
         var deviceNames = {};
         var deviceGrans = {};
