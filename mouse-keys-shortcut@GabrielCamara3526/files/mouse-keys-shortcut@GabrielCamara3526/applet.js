@@ -37,7 +37,6 @@ class MyApplet extends Applet.IconApplet {
 
   _onSourceKeyPress(actor, event) {
     let symbol = event.get_key_symbol();
-
     if (symbol === Clutter.KEY_space || symbol === Clutter.KEY_Return) {
       this.menu.toggle();
       return true;
@@ -49,7 +48,6 @@ class MyApplet extends Applet.IconApplet {
       this.menu.actor.navigate_focus(this.actor, Gtk.DirectionType.DOWN, false);
       return true;
     }
-
     return false;
   }
 
