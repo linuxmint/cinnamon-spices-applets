@@ -6,7 +6,7 @@ const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
-const DEL_SONG_ARTS_SCRIPT = PATH2SCRIPTS + "/del_song_arts.sh";
+//~ const DEL_SONG_ARTS_SCRIPT = PATH2SCRIPTS + "/del_song_arts.sh";
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
@@ -643,8 +643,9 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         if (old_title != this._title) {
-            Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
-            Util.spawnCommandLine("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            //~ Util.spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+            this.del_song_arts();
+            Util.spawnCommandLineAsync("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         this.titleLabel.set_text(this._title);
@@ -742,6 +743,26 @@ class Player extends PopupMenu.PopupMenuSection {
             }
         }
         this._applet.setAppletTextIcon(this, true);
+    }
+
+    del_song_arts() {
+        let paths = [XDG_RUNTIME_DIR+"/AlbumArt/song-art", XDG_RUNTIME_DIR+"/sound150/arts", XDG_RUNTIME_DIR+"/sound150/icons"];
+        for (let dir_path of paths) {
+            if (GLib.file_test(dir_path, GLib.FileTest.EXISTS)) {
+                let dir = Gio.file_new_for_path(dir_path);
+                let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", Gio.FileQueryInfoFlags.NONE, null);
+                var file = dir_children.next_file(null);
+                while (file != null) {
+                    let name = file.get_name();
+                    if (name.startsWith("R3SongArt")) {
+                        let f = Gio.file_new_for_path(dir_path+"/"+name);
+                        f.delete(null);
+                    }
+                    file = dir_children.next_file(null);
+                }
+                dir_children.close(null);
+            }
+        }
     }
 
     _setStatus(status) {
