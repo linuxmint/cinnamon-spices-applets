@@ -239,7 +239,6 @@ const USER_DOWNLOAD_DIR = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD)
 const YTDLP_UPDATE_BASH_SCRIPT = SCRIPTS_DIR + "/update-yt-dlp.sh";
 const MPV_BITRATE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchBitrate.sh";
 const MPV_TITLE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.sh";
-const DEL_SONG_ARTS_SCRIPT = SCRIPTS_DIR + "/del_song_arts.sh";
 const MPV_LUA_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.lua";
 const MPV_PID_FILE = RUNTIME_DIR + "/mpv_radio_PID";
 const MPV_SOCKET = RUNTIME_DIR + "/mpvradiosocket";
@@ -1368,6 +1367,27 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Help TextViews:
     this.populate_help_textviews()
   }
+
+  del_song_arts() {
+      let paths = [XDG_RUNTIME_DIR+"/AlbumArt/song-art"];
+      for (let dir_path of paths) {
+        if (file_test(dir_path, FileTest.EXISTS)) {
+          let dir = file_new_for_path(dir_path);
+          let dir_children = dir.enumerate_children("standard::name,standard::type,standard::icon,time::modified", FileQueryInfoFlags.NONE, null);
+          var file = dir_children.next_file(null);
+          while (file != null) {
+            let name = file.get_name();
+            if (name.startsWith("R3SongArt")) {
+                let f = file_new_for_path(dir_path+"/"+name);
+                if (f.query_exists(null))
+                  f.delete(null);
+            }
+            file = dir_children.next_file(null);
+          }
+          dir_children.close(null);
+        }
+      }
+    }
 
   onAlarmClockChanged() {
     if (this.wake_me_up) {
@@ -3532,7 +3552,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     spawnCommandLine("kill -15 " + pid);
     spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
-    spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+    this.del_song_arts();
     file_set_contents(MPV_TITLE_FILE, "");
 
     this.change_symbolic_icon();
@@ -3799,7 +3819,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     spawnCommandLineAsync("rm -f %s".format(R30STOP));
     spawnCommandLineAsync("rm -f %s".format(R30NEXT));
     spawnCommandLineAsync("rm -f %s".format(R30PREVIOUS));
-    spawnCommandLineAsync("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+    this.del_song_arts();
   }
 
   on_applet_clicked(event) {
@@ -4017,7 +4037,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Install or update translations, if any:
     if (!are_translations_installed()) install_translations();
 
-    spawnCommandLineAsync("bash -c '"+DEL_SONG_ARTS_SCRIPT+"'");
+    this.del_song_arts();
     spawnCommandLineAsync("bash -c '%s/fix-desklet-translations.sh'".format(SCRIPTS_DIR));
 
     let color;
