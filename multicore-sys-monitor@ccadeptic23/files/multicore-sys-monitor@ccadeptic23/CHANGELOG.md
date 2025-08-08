@@ -1,3 +1,6 @@
+### v2.3.5~20250808
+  * Speed improvement.
+
 ### v2.3.4~20250806
   * Fixes [#7461](https://github.com/linuxmint/cinnamon-spices-applets/issues/7461)
   * From now on, you can choose to set the origin of the pie chart (Mem) at 12 o'clock.

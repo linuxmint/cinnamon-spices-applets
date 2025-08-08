@@ -11,6 +11,7 @@ sleep $sleepDurationSeconds
 currentDate=$(date +%s%N | cut -b1-13)
 
 ret=""
+retCPU=""
 
 while IFS=' ' read -r cpu user nice system idle iowait irq softirq steal guest guest_nice rest
 do {
@@ -33,14 +34,9 @@ do {
 
     CPU_Percentage=$((100 * ($totald - $idled) / $totald))
 
-    #~ [[ "$cpu" = "cpu" ]] && {
-        #~ echo "total "$CPU_Percentage
-    #~ } || {
-        #~ echo $cpu" "$CPU_Percentage
-    #~ }
-    test "$ret" && ret="$ret $CPU_Percentage" || ret="$CPU_Percentage"
-    #~ echo $cpu" "$CPU_Percentage
+    test "$retCPU" && retCPU="$retCPU $CPU_Percentage" || retCPU="$CPU_Percentage"
 }; done < /proc/stat
+ret=$ret" CPU:"$retCPU
 
 echo -n "$ret"
 exit 0

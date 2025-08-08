@@ -256,7 +256,7 @@
     "type": "scale",
     "default": 1000,
     "description": "Refresh Rate (ms)",
-    "min": 500,
+    "min": 1000,
     "max": 3000,
     "step": 50,
     "show-value": true
