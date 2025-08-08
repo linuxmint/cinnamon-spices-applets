@@ -6,11 +6,12 @@ const Clutter = imports.gi.Clutter;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+const UUID = "mouse-keys-shortcut@GabrielCamara3526";
+const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
 
 class MyApplet extends Applet.IconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
     super(orientation, panel_height, instance_id);
-    this.set_applet_icon_symbolic_name("input-mouse-symbolic");
     this.set_applet_tooltip(_("Control the pointer using the keypad"));
 
     this.settings = new Settings.AppletSettings(
@@ -33,6 +34,13 @@ class MyApplet extends Applet.IconApplet {
     );
 
     this.on_keybinding_changed();
+    this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
+    this.keyboardSettings.connect('changed::mousekeys-enable', () => {
+      this.updateIcon()})
+    this.themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
+    this.themeSettings.connect('changed::name', () => {
+      this.updateIcon()})
+    this.updateIcon();
   }
 
   _onSourceKeyPress(actor, event) {
@@ -67,13 +75,32 @@ class MyApplet extends Applet.IconApplet {
     let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
     let mouseKeysEnable = settings.get_boolean('mousekeys-enable');
     if (!mouseKeysEnable) {
-      settings.set_boolean('mousekeys-enable', true);
+      settings.set_boolean('mousekeys-enable', true)
       Main.notify("Mouse Keys: ON", "Control the pointer using the keypad");
-    } else {
-        settings.set_boolean('mousekeys-enable', false);
-        Main.notify("Mouse Keys: OFF", "Control the pointer using the keypad");
-      }
+    } 
+    else {
+      settings.set_boolean('mousekeys-enable', false)
+      Main.notify("Mouse Keys: OFF", "Control the pointer using the keypad")
     }
+      this.updateIcon()
+    }
+
+  updateIcon() {
+    let iconFile
+    let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
+    let enabled = settings.get_boolean('mousekeys-enable');
+    let themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
+    let activeTheme = themeSettings.get_string('name');
+    let isDark = activeTheme.toLowerCase().includes('dark');
+
+    if (enabled) {
+      iconFile = isDark ? 'light-icon.svg' : 'dark-icon.svg';
+    } else {
+      iconFile = isDark ? 'dark-icon.svg' : 'light-icon.svg'
+    }
+    let iconPath = `${APPLET_PATH}/icons/${iconFile}`;
+    this.set_applet_icon_symbolic_path(iconPath);
+  }
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
