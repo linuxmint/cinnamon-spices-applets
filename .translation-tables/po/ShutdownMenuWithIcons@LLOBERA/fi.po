@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ShutdownMenuWithIcons@LLOBERA 2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-08 15:58-0500\n"
+"PO-Revision-Date: 2024-11-21 15:21+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+#: applet.js:42
+msgid "Shutdown Menu With Icons"
+msgstr "Shutdown Menu With Icons"
+
+#: applet.js:143
+msgid "Quit"
+msgstr "Lopeta"
+
+#: applet.js:146
+msgid "Suspend"
+msgstr "Valmiustila"
+
+#: applet.js:149
+msgid "Hibernate"
+msgstr "Lepotila"
+
+#: applet.js:152
+msgid "Hybrid sleep"
+msgstr "Horrostila"
+
+#: applet.js:155
+msgid "Restart"
+msgstr "Käynnistä"
+
+#. settings-schema.json->switch_users_label->description
+#: applet.js:160
+msgid "Switch users"
+msgstr "Vaihda käyttäjää"
+
+#. settings-schema.json->log_out_label->description
+#: applet.js:163
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: applet.js:166
+msgid "Screen Lock"
+msgstr "Lukitse näyttö"
+
+#: applet.js:185
+msgid "Settings"
+msgstr "Asetukset"
+
+#: applet.js:190
+msgid "Help"
+msgstr "Ohje"
+
+#: applet.js:195
+msgid "About"
+msgstr "Tietoja"
+
+#. metadata.json->description
+msgid ""
+"An applet to help you shutdown, restart and suspend your system with single "
+"click"
+msgstr ""
+"Sovelman avulla voit sammuttaa, käynnistää uudelleen jne. Voit valita eri "
+"asetuksia ja kuvakkeita"
+
+#. settings-schema.json->quit_label->description
+msgid "Quit: shut down and power-off the system"
+msgstr "Lopeta: sammuta tietokone"
+
+#. settings-schema.json->quit->description
+msgid "Add quit to the menu"
+msgstr "Lopeta - lisää valikkoon"
+
+#. settings-schema.json->quit_icon->description
+msgid "The quit icon "
+msgstr "Lopeta - kuvake "
+
+#. settings-schema.json->quit_cmd->description
+msgid "The quit command "
+msgstr "Lopeta - komento "
+
+#. settings-schema.json->suspend_label->description
+msgid "Suspend: suspend the system"
+msgstr "Valmiustila: asettaa valmistilaan"
+
+#. settings-schema.json->suspend->description
+msgid "Add suspend to the menu"
+msgstr "Valmiustila - lisää valikkoon"
+
+#. settings-schema.json->suspend_icon->description
+msgid "The suspend icon "
+msgstr "Valmiustila - kuvake "
+
+#. settings-schema.json->suspend_cmd->description
+msgid "The suspend command "
+msgstr "Valmiustila - komento "
+
+#. settings-schema.json->hibernate_label->description
+msgid "Hibernate: hibernate the system"
+msgstr "Lepotila: asettaa lepotilaan"
+
+#. settings-schema.json->hibernate->description
+msgid "Add hibernate to the menu"
+msgstr "Lepotila - lisää valikkoon"
+
+#. settings-schema.json->hibernate_icon->description
+msgid "The hibernate icon "
+msgstr "Lepotila - kuvake "
+
+#. settings-schema.json->hibernate_cmd->description
+msgid "The hibernate command "
+msgstr "Lepotila - komento "
+
+#. settings-schema.json->hybrid_sleep_label->description
+msgid "Hybrid sleep: hibernate and suspend the system"
+msgstr "Horrostila: lepotilaan ja sitten horrostilaan"
+
+#. settings-schema.json->hybrid_sleep->description
+msgid "Add hybrid sleep to the menu"
+msgstr "Horrostila - lisää valikkoon"
+
+#. settings-schema.json->hybrid_sleep_icon->description
+msgid "The hybrid sleep icon "
+msgstr "Horrostila - kuvake "
+
+#. settings-schema.json->hybrid_sleep_cmd->description
+msgid "The hybrid sleep command "
+msgstr "Horrostila - komento "
+
+#. settings-schema.json->restart_label->description
+msgid "Restart: shut down and reboot the system"
+msgstr "Käynnistä: käynnistää tietokoneen uudelleen"
+
+#. settings-schema.json->restart->description
+msgid "Add restart to the menu"
+msgstr "Käynnistä - lisää valikkoon"
+
+#. settings-schema.json->restart_icon->description
+msgid "The restart icon "
+msgstr "Käynnistä - kuvake "
+
+#. settings-schema.json->restart_cmd->description
+msgid "The restart command "
+msgstr "Käynnistä - komento "
+
+#. settings-schema.json->switch_users->description
+msgid "Add switch users to the menu"
+msgstr "Vaihda käyttäjää - lisää valikkoon"
+
+#. settings-schema.json->switch_users_icon->description
+msgid "The switch users icon"
+msgstr "Vaihda käyttäjää - kuvake"
+
+#. settings-schema.json->switch_users_cmd->description
+msgid "The switch users command"
+msgstr "Vaihda käyttäjää - komento"
+
+#. settings-schema.json->log_out->description
+msgid "Add log out to the menu"
+msgstr "Kirjaudu ulos - lisää valikkoon"
+
+#. settings-schema.json->log_out_icon->description
+msgid "The log out icon "
+msgstr "Kirjaudu ulos - kuvake "
+
+#. settings-schema.json->log_out_cmd->description
+msgid "The log out command "
+msgstr "Kirjaudu ulos - komento "
+
+#. settings-schema.json->screen_lock_label->description
+msgid "Screen lock: lock the screen"
+msgstr "Lukitse näyttö: lukitsee näytön"
+
+#. settings-schema.json->screen_lock->description
+msgid "Add screen lock to the menu"
+msgstr "Lukitse näyttö - lisää valikkoon"
+
+#. settings-schema.json->screen_lock_icon->description
+msgid "The screen lock icon "
+msgstr "Lukitse näyttö -kuvake "
+
+#. settings-schema.json->screen_lock_cmd->description
+msgid "The screen lock command "
+msgstr "Lukitse näyttö - komento "

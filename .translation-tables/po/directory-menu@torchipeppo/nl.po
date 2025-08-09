@@ -1,0 +1,124 @@
+# DIRECTORY MENU
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# torchipeppo, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: directory-menu@torchipeppo 0.6.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-22 12:08-0400\n"
+"PO-Revision-Date: 2025-05-13 14:40+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. popup_menu.py:95
+msgid "Open Folder"
+msgstr "Map openen"
+
+#. popup_menu.py:100
+msgid "Open in Terminal"
+msgstr "Openen in terminal"
+
+#. metadata.json->name
+msgid "Directory Menu"
+msgstr "Mapmenu"
+
+#. metadata.json->description
+msgid ""
+"Quickly navigate through directories on your system using a dropdown menu."
+msgstr ""
+"Navigeer snel door mappen op uw systeem met behulp van een vervolgkeuzemenu."
+
+#. settings-schema.json->starting-uri->description
+msgid "Base Directory"
+msgstr "Basismap"
+
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#. settings-schema.json->icon-name->description
+msgid "Icon (hover here for info!)"
+msgstr "Pictogram (beweeg hier voor informatie!)"
+
+#. settings-schema.json->icon-name->tooltip
+msgid "Must be an icon name (no path), and should be symbolic."
+msgstr "Moet een pictogramnaam zijn (geen pad) en moet symbolisch zijn."
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip Text"
+msgstr "Tooltip-tekst"
+
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr "Paneeltekst"
+
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr "Zichtbaarheid"
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr "Inclusief \"Open Map\" en \"Open in Terminal\""
+
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Verborgen bestanden opnemen"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr "Beperk het maximum aantal tekens in de submenu's"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "Tekenlimiet"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"(Bij benadering) Beperk het aantal tekens van elk item.\n"
+"Handig als u vindt dat het menu te breed is."
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr "Sorteren"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr "Naam"
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr "Datum gewijzigd"
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr "Sorteer op..."
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr "Toon favoriete items eerst"
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr "Toon vastgemaakte items eerst"
+
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr "Sneltoetsen"
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "Menu tonen"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "Stel sneltoets(en) in om het menu te tonen."

@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2023-07-24 14:20-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "GitHub Explorer"
+
+#. applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "Intentar cargar sus repositorios de GitHub"
+
+#. applet.js:46
+#, javascript-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "Repositorios de GitHub cargados con éxito para el usuario %s"
+
+#. applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "ERROR:: GitHub Explorer ::ERROR"
+
+#. applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr ""
+"Error al cargar los repositorios de GitHub. Compruebe la configuración del "
+"applet"
+
+#. applet.js:166
+msgid "Settings"
+msgstr "Configuración"
+
+#. applet.js:177 applet.js:270
+msgid "Check Applet Configuration"
+msgstr "Comprobar la configuración del applet"
+
+#. applet.js:266
+msgid "API Rate Exceeded will try again once we are allowed"
+msgstr "API Rate Exceeded intentará nuevamente una vez que se nos permita"
+
+#. applet.js:281
+msgid "Click here to open GitHub"
+msgstr "Haga clic aquí para abrir GitHub"
+
+#. applet.js:331
+msgid "Open Repo In Browser"
+msgstr "Abrir repositorio en el navegador"
+
+#. applet.js:339
+msgid "Project Home"
+msgstr "Página del proyecto"
+
+#. applet.js:346
+msgid "Details"
+msgstr "Detalles"
+
+#. applet.js:349
+msgid "Watchers"
+msgstr "Observadores"
+
+#. applet.js:356
+msgid "Open Issues"
+msgstr "Problemas abiertos"
+
+#. applet.js:363
+msgid "Forks"
+msgstr "Bifurcaciones"
+
+#. settings-schema.json->open-github-homepage-button->description
+#. applet.js:393
+msgid "Open GitHub Home"
+msgstr "Abrir el sitio web de GitHub"
+
+#. applet.js:401
+msgid "Create A Gist"
+msgstr "Crear una Gist"
+
+#. metadata.json->name
+msgid "Github Explorer"
+msgstr "Github Explorer"
+
+#. metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr ""
+"Haga clic en el applet para explorar sus repositorios públicos de Github"
+
+#. settings-schema.json->head->description
+msgid "User Settings"
+msgstr "Configuración del usuario"
+
+#. settings-schema.json->username->description
+msgid "GitHub username:"
+msgstr "Nombre de usuario de GitHub:"
+
+#. settings-schema.json->username->tooltip
+msgid "Set a username which you want to display public repositories for"
+msgstr ""
+"Establezca un nombre de usuario para el que desea mostrar los repositorios "
+"públicos"
+
+#. settings-schema.json->head1->description
+msgid "Usage Settings"
+msgstr "Configuración de uso"
+
+#. settings-schema.json->enable-auto-refresh->description
+msgid "Check this to enable automatic refreshing"
+msgstr "Marque esta casilla para activar la actualización automática"
+
+#. settings-schema.json->enable-auto-refresh->tooltip
+msgid ""
+"Checking this will mean the applet will update itself according to your "
+"refresh interval"
+msgstr ""
+"Si marca esta casilla, el applet se actualizará según el intervalo de "
+"actualización"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable lots of logging in Looking Glass"
+msgstr "Marque esta casilla para habilitar el registro en Looking Glass"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable lots of logging"
+msgstr "Al marcar esta opción, se habilitará un gran número de registros"
+
+#. settings-schema.json->enable-github-change-notifications->description
+msgid ""
+"Check this to enable notifications about changes to Watchers, Forks and "
+"Issues"
+msgstr ""
+"Marque esto para habilitar las notificaciones sobre cambios en Observadores, "
+"Bifurcaciones y Problemas"
+
+#. settings-schema.json->enable-github-change-notifications->tooltip
+msgid "Checking this will enable more notification messages"
+msgstr "Al marcar esta casilla se activarán más mensajes de notificación"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->description
+msgid "Check this show the number of open issues next to the repository"
+msgstr ""
+"Marque esta opción para mostrar el número de problemas abiertos al lado del "
+"repositorio"
+
+#. settings-schema.json->show-issues-icon-on-repo-name->tooltip
+msgid "Checking this show the number of issues next to each repository"
+msgstr ""
+"Al marcar esta casilla se muestra el número de problemas junto a cada "
+"repositorio"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh Interval:"
+msgstr "Intervalo de actualización:"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"Change the amount of time between checking GitHub for changes to your "
+"Repositories"
+msgstr ""
+"Cambiar la cantidad de tiempo entre la comprobación de GitHub para los "
+"cambios en sus repositorios"
+
+#. settings-schema.json->head2->description
+msgid "Version Details"
+msgstr "Detalles de la versión"
+
+#. settings-schema.json->applet-version->description
+msgid "Applet Version:"
+msgstr "Versión del applet:"
+
+#. settings-schema.json->applet-version->tooltip
+msgid "Current version installed"
+msgstr "Versión actualmente instalada"
+
+#. settings-schema.json->open-cinnamon-homepage-button->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Visite la página de Cinnamon Applet"
+
+#. settings-schema.json->open-cinnamon-homepage-button->tooltip
+msgid "Open cinnamon.com - rate the application"
+msgstr "Abrir cinnamon.com - valorar la aplicación"
+
+#. settings-schema.json->open-github-homepage-button->tooltip
+msgid "Open github.com - fork the code or add features"
+msgstr "Abra github.com - bifurque el código o añada funciones"
+
+#. settings-schema.json->open-developer-homepage-button->description
+msgid "Open Developer Home"
+msgstr "Abrir la página de inicio del desarrollador"
+
+#. settings-schema.json->open-developer-homepage-button->tooltip
+msgid "Open morgan-design.com - my personal blog"
+msgstr "Abrir morgan-design.com - mi blog personal"
