@@ -31,9 +31,27 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 
-const indent = '    ';
+//~ const indent = '    ';
 const rate = _('/s');
-const spaces = 12;
+var spaces = 14;
+const translated_strings = [
+    _("Core 128:"),
+    _("Unrecoverable:"),
+    _("Recoverable:"),
+    _("Used:"),
+    _("Usedup:"),
+    _("Free:"),
+    _("Swap"),
+    _("Down:"),
+    _("Up:"),
+    _("Read:"),
+    _("Write:")
+];
+for (let s of translated_strings) {
+    let l = s.length + 1;
+    if (l > spaces)
+        spaces = l;
+}
 
 const properties = [
     {graph: 'multiCpuGraph', provider: 'multiCpuProvider', abbrev: 'CPU'},
@@ -125,8 +143,6 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Mem_width", "Mem_width");
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
-        this.settings.bind("Mem_colorCached", "Mem_colorCached");
-        this.settings.bind("Mem_colorBuffer", "Mem_colorBuffer");
         this.settings.bind("Mem_colorFree", "Mem_colorFree");
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
         this.settings.bind("Net_enabled", "Net_enabled");
@@ -484,7 +500,15 @@ class MCSM extends Applet.TextIconApplet {
                 //~ let [total, used, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                this.memoryProvider.setData(used / total, cache / total, buffers / total, available / total);
+                //~ global.log(UUID + " - total: " + total);
+                //~ global.log(UUID + " - used: " + used);
+                //~ global.log(UUID + " - free: " + free);
+                //~ global.log(UUID + " - available: " + available);
+                //~ global.log(UUID + " - available - free: " + (available - free));
+                //~ this.memoryProvider.setData(used / total, (available - used) / total);
+                this.memoryProvider.setData(1 * total, 1 * used, 1 * free, 1 * available);
+                //~ this.memoryProvider.setData(used / total, cache / total, buffers / total, available / total);
+                //~ this.memoryProvider.setData(used / available, cache / available, buffers / available, total / available);
                 //~ this.memoryProvider.setData(used / total, cache / total, buffers / total, free / total);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 //~ global.log(this.memoryProvider.getTooltipString());
@@ -694,7 +718,9 @@ class MemDataProvider {
     }
 
     getColorList() {
-        let types = ["Usedup", "Cached", "Buffer", "Free", "Swap"]
+        //~ let types = ["Usedup", "Cached", "Buffer", "Free", "Swap"];
+        //~ let types = ["Usedup", "Recoverable", "Free", "Swap"];
+        let types = ["Usedup", "Free", "Swap"];
         var colorList = [];
         for (let t of types)
             colorList.push(this.applet[`Mem_color${t}`]);
@@ -706,24 +732,57 @@ class MemDataProvider {
         return this.currentReadings;
     }
 
-    setData(used, cached, buffers, free) {
+    //~ setData(used, cached, buffers, free) {
+    //~ setData(used, recoverable) {
+    setData(total, used, free, available) {
         const precision = 100000;
-        let unavailable = used - buffers - cached;
+        //~ let unavailable = used - buffers - cached;
+        //~ let unavailable = used - cached;
+        //~ let unavailable = used;
+        //~ this.currentReadings = [
+            //~ Math.round(used * precision) / precision,
+            //~ Math.round(cached * precision) / precision,
+            //~ Math.round(buffers * precision) / precision,
+            //~ Math.max(Math.round((1 - used)*precision) / precision, Math.round((free - buffers)*precision) / precision)
+        //~ ];
+        const recoverable = available - free;
+        const unrecoverable = used - recoverable;
+        const realUsed = recoverable + unrecoverable;
+        //~ this.currentReadings = [
+            //~ Math.round((unrecoverable) / total * precision) / precision,
+            //~ Math.round(recoverable / total * precision) / precision,
+            //~ Math.round((1 - used / total)*precision) / precision
+        //~ ];
+        const usedProp = realUsed / total;
         this.currentReadings = [
-            Math.round(unavailable*precision) / precision,
-            Math.round(cached*precision) / precision,
-            Math.round(buffers*precision) / precision,
-            Math.max(Math.round((1 - used)*precision) / precision, Math.round((free - buffers)*precision) / precision)
+            Math.round(usedProp * precision) / precision,
+            Math.round((1 - usedProp)*precision) / precision
         ];
     }
 
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        let toolTipString = _('----------- Memory -----------') + '\n';
-        let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+        var sum_used = 0;
+        //~ let toolTipString = _('----------- Memory -----------') + '\n';
+        let trans = _("Memory");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        //~ let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+        let attributes = [_('Used:'), _('Free:')];
+        //~ let attributes = [_('Unrecoverable:'), _("Recoverable:"), _('Used:'), _('Free:')];
         for (let i = 0; i < attributes.length; i++) {
-            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + Math.round(100 * this.currentReadings[i]).toString().padStart(2, ' ') + ' %\n';
+            if (i < 2) {
+                sum_used = sum_used + this.currentReadings[i];
+            }
+            if (i < 2) {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i])/10).toString().padStart(2, ' ') + ' %\n';
+            } else if (i === 2) {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * sum_used)/10).toString().padStart(2, ' ') + ' %\n';
+            } else {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i-1])/10).toString().padStart(2, ' ') + ' %\n';
+            }
         }
         return toolTipString;
     }
@@ -764,8 +823,12 @@ class SwapDataProvider {
         if (!this.isEnabled || !this.swapusage) {
             return '';
         }
-        let toolTipString = _('------------ Swap ------------') + '\n';
-        toolTipString += _('Swap').padStart(spaces, ' ') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100).toString().padStart(2, ' ') + ' %\n';
+        //~ let toolTipString = _('------------ Swap ------------') + '\n';
+        let trans = _("Swap");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        toolTipString += trans.padStart(spaces, ' ') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100).toString().padStart(2, ' ') + ' %\n';
         return toolTipString;
     }
 
@@ -806,13 +869,20 @@ class MultiCpuDataProvider {
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        let toolTipString = _('------------- CPU ------------') + '\n';
+        //~ let toolTipString = _('------------- CPU ------------') + '\n';
+        let trans = _("CPUs");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+
         for (let i = 0; i < this.CPUCount; i++) {
             let percentage = Math.round(100 * this.currentReadings[i], 2);
             if (this.applet.CPU_mergeAll) {
-                toolTipString += (_('CPU') + ' ').padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+                toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t' + percentage.toString().padStart(2, ' ') + ' %\n';
             } else {
-                toolTipString += (_('Core') + ' ' + i).padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+                toolTipString += (_('Core') + ' ' + i).padStart(spaces - lenColon, ' ') + colon + '\t' + + percentage.toString().padStart(2, ' ') + ' %\n';
             }
         }
         return toolTipString;
@@ -927,7 +997,11 @@ class NetDataProvider {
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        let toolTipString = _('---------- Networks ----------') + '\n';
+        //~ let toolTipString = _('---------- Networks ----------') + '\n';
+        let trans = _("Networks");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             if (!this.currentReadings[i].tooltipDown) {
                 this.currentReadings[i].tooltipDown = 0;
@@ -1050,7 +1124,12 @@ class DiskDataProvider {
         if (!this.isEnabled) {
             return "";
         }
-        let toolTipString = _('------------ Disks -----------') + '\n';
+        //~ let toolTipString = _('------------ Disks -----------') + '\n';
+        let trans = _("Disks");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+        let title = "" + toolTipString;
+
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             if (!this.currentReadings[i]) {
                 continue;
@@ -1059,7 +1138,7 @@ class DiskDataProvider {
             let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
             //~ toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
             if (this.currentReadings[i].name != this.currentReadings[i].id)
-                toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd('------------ Disks -----------'.length - this.currentReadings[i].id.length, " ") + this.currentReadings[i].id + '\n';
+                toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
             else
                 toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
             toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + String(read).padStart(spaces + 2) + '\n';
