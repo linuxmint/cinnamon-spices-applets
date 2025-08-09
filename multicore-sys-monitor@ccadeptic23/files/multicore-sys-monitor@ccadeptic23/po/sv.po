@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-06 17:41+0200\n"
+"POT-Creation-Date: 2025-08-09 20:46+0200\n"
 "PO-Revision-Date: 2019-02-09 16:12+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -24,8 +24,8 @@ msgstr ""
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:780
-#. 6.4/applet.js:809 3.4/DataProviders.js:58 3.4/prefs.js:195
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:847
+#. 6.4/applet.js:883 3.4/DataProviders.js:58 3.4/prefs.js:195
 #. 5.6/DataProviders.js:55 5.6/prefs.js:303 4.0/DataProviders.js:55
 #. 4.0/prefs.js:303 3.0/prefsui.glade:452 3.2/prefsui.glade:504
 #. 6.0/prefsui.glade:580 3.4/prefsui.glade:434 5.6/prefsui.glade:580
@@ -34,87 +34,81 @@ msgid "CPU"
 msgstr "CPU"
 
 #. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 6.0/DataProviders.js:128
-#. 6.4/applet.js:805 3.4/DataProviders.js:126 5.6/DataProviders.js:123
-#. 4.0/DataProviders.js:123
+#. 3.4/DataProviders.js:126 5.6/DataProviders.js:123 4.0/DataProviders.js:123
 msgid "------------- CPU ------------"
 msgstr "--------------CPU-------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
-#. 6.4/applet.js:811 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 6.4/applet.js:885 3.4/DataProviders.js:129 5.6/DataProviders.js:126
 #. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Kärna"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
-#. 6.4/applet.js:688 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 6.4/applet.js:714 3.4/DataProviders.js:141 5.6/DataProviders.js:138
 #. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MINNE"
 
 #. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 6.0/DataProviders.js:163
-#. 6.4/applet.js:719 3.4/DataProviders.js:161 5.6/DataProviders.js:158
-#. 4.0/DataProviders.js:158
+#. 3.4/DataProviders.js:161 5.6/DataProviders.js:158 4.0/DataProviders.js:158
 msgid "----------- Memory -----------"
 msgstr "----------- Minne ------------"
 
-#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 6.4/applet.js:42
 msgid "Usedup:"
 msgstr "Förbrukat:"
 
 #. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 6.0/DataProviders.js:164
-#. 6.4/applet.js:720 3.4/DataProviders.js:162 5.6/DataProviders.js:159
-#. 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Cache-lagrat:"
 
 #. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 6.0/DataProviders.js:164
-#. 6.4/applet.js:720 3.4/DataProviders.js:162 5.6/DataProviders.js:159
-#. 4.0/DataProviders.js:159
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffert:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
-#. 6.4/applet.js:720 3.4/DataProviders.js:162 5.6/DataProviders.js:159
-#. 4.0/DataProviders.js:159
+#. 6.4/applet.js:43 6.4/applet.js:773 3.4/DataProviders.js:162
+#. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Ledigt:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
-#. 6.4/applet.js:739 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 6.4/applet.js:802 3.4/DataProviders.js:176 5.6/DataProviders.js:173
 #. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "VÄXLING"
 
 #. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 6.0/DataProviders.js:221
-#. 6.4/applet.js:763 3.4/DataProviders.js:194 5.6/DataProviders.js:193
-#. 4.0/DataProviders.js:193
+#. 3.4/DataProviders.js:194 5.6/DataProviders.js:193 4.0/DataProviders.js:193
 msgid "------------ Swap ------------"
 msgstr "-------Växlingsutrymme--------"
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
-#. 6.4/applet.js:764 3.4/DataProviders.js:195 5.6/DataProviders.js:194
-#. 4.0/DataProviders.js:194 3.0/prefsui.glade:785 3.2/prefsui.glade:837
-#. 6.0/prefsui.glade:907 3.4/prefsui.glade:761 5.6/prefsui.glade:907
-#. 4.0/prefsui.glade:907
+#. 6.4/applet.js:44 6.4/applet.js:827 3.4/DataProviders.js:195
+#. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
+#. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
+#. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Växlingsutrymme"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
-#. 6.4/applet.js:833 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 6.4/applet.js:907 3.4/DataProviders.js:205 5.6/DataProviders.js:204
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NÄT"
 
 #. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 6.0/DataProviders.js:323
-#. 6.4/applet.js:926 3.4/DataProviders.js:289 5.6/DataProviders.js:287
-#. 4.0/DataProviders.js:287
+#. 3.4/DataProviders.js:289 5.6/DataProviders.js:287 4.0/DataProviders.js:287
 msgid "---------- Networks ----------"
 msgstr "-----------Nätverk------------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
-#. 6.4/applet.js:938 3.4/DataProviders.js:300 5.6/DataProviders.js:298
-#. 4.0/DataProviders.js:298
+#. 6.4/applet.js:45 6.4/applet.js:1016 3.4/DataProviders.js:300
+#. 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Ner:"
 
@@ -124,26 +118,25 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
-#. 6.4/applet.js:939 3.4/DataProviders.js:301 5.6/DataProviders.js:299
-#. 4.0/DataProviders.js:299
+#. 6.4/applet.js:46 6.4/applet.js:1017 3.4/DataProviders.js:301
+#. 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Upp:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
-#. 6.4/applet.js:956 3.4/DataProviders.js:317 5.6/DataProviders.js:315
+#. 6.4/applet.js:1034 3.4/DataProviders.js:317 5.6/DataProviders.js:315
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
 
 #. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 6.0/DataProviders.js:412
-#. 6.4/applet.js:1049 3.4/DataProviders.js:378 5.6/DataProviders.js:376
-#. 4.0/DataProviders.js:376
+#. 3.4/DataProviders.js:378 5.6/DataProviders.js:376 4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
 msgstr "------------Diskar------------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
-#. 6.4/applet.js:1061 3.4/DataProviders.js:386 5.6/DataProviders.js:384
-#. 4.0/DataProviders.js:384
+#. 6.4/applet.js:47 6.4/applet.js:1144 3.4/DataProviders.js:386
+#. 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Läs:"
 
@@ -153,8 +146,8 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
-#. 6.4/applet.js:1062 3.4/DataProviders.js:387 5.6/DataProviders.js:385
-#. 4.0/DataProviders.js:385
+#. 6.4/applet.js:48 6.4/applet.js:1145 3.4/DataProviders.js:387
+#. 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Skriv:"
 
@@ -223,8 +216,8 @@ msgstr "Kunde inte spara filen:"
 msgid "/s"
 msgstr "/s"
 
-#. 6.0/DataProviders.js:164 6.4/applet.js:720 3.4/DataProviders.js:162
-#. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
+#. 6.0/DataProviders.js:164 6.4/applet.js:41 6.4/applet.js:773
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Använt:"
 
@@ -253,15 +246,15 @@ msgstr ""
 msgid "Refresh graphs"
 msgstr "Uppdateringsfrekvens (ms)"
 
-#. 6.0/applet.js:325 6.4/applet.js:302
+#. 6.0/applet.js:325 6.4/applet.js:321
 msgid "Without any graphics"
 msgstr ""
 
-#. 6.0/applet.js:331 6.4/applet.js:308
+#. 6.0/applet.js:331 6.4/applet.js:327
 msgid "With graphics"
 msgstr ""
 
-#. 6.0/applet.js:341 6.4/applet.js:319
+#. 6.0/applet.js:341 6.4/applet.js:338
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
@@ -294,26 +287,59 @@ msgstr ""
 msgid "Execution of '%s' failed:"
 msgstr ""
 
-#. 6.4/applet.js:292
+#. 6.4/applet.js:38
+#, fuzzy
+msgid "Core 128:"
+msgstr "Kärna"
+
+#. 6.4/applet.js:39
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 6.4/applet.js:40
+msgid "Recoverable:"
+msgstr ""
+
+#. 6.4/applet.js:311
 #, fuzzy
 msgid "Refresh All"
 msgstr "Uppdateringsfrekvens (ms)"
 
-#. 6.4/applet.js:398
+#. 6.4/applet.js:417
 msgid "root"
 msgstr ""
 
 #. 6.4->settings-schema.json->pageNetwork->title
-#. 6.4/applet.js:574 6.4/applet.js:840 3.0/prefsui.glade:1154
+#. 6.4/applet.js:599 6.4/applet.js:914 3.0/prefsui.glade:1154
 #. 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289 3.4/prefsui.glade:1143
 #. 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Nätverk"
 
-#. 6.4/applet.js:631 6.4/applet.js:965
+#. 6.4/applet.js:657 6.4/applet.js:1043 6.4/applet.js:1128
 #, fuzzy
 msgid "Disks"
 msgstr "Disk I/O"
+
+#. 6.4->settings-schema.json->pageMem->title
+#. 6.4/applet.js:768 3.0/prefsui.glade:832 3.2/prefsui.glade:884
+#. 6.0/prefsui.glade:954 3.4/prefsui.glade:808 5.6/prefsui.glade:954
+#. 4.0/prefsui.glade:954
+msgid "Memory"
+msgstr "Minne"
+
+#. 6.4/applet.js:873
+msgid "CPUs"
+msgstr ""
+
+#. 6.4/applet.js:877
+msgid ":"
+msgstr ""
+
+#. 6.4/applet.js:1001
+#, fuzzy
+msgid "Networks"
+msgstr "Nätverk"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -346,12 +372,6 @@ msgstr ""
 #. 3.4/prefsui.glade:264 5.6/prefsui.glade:299 4.0/prefsui.glade:299
 msgid "General"
 msgstr "Allmänt"
-
-#. 6.4->settings-schema.json->pageMem->title
-#. 3.0/prefsui.glade:832 3.2/prefsui.glade:884 6.0/prefsui.glade:954
-#. 3.4/prefsui.glade:808 5.6/prefsui.glade:954 4.0/prefsui.glade:954
-msgid "Memory"
-msgstr "Minne"
 
 #. 6.4->settings-schema.json->pageDisk->title
 #. 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540 6.0/prefsui.glade:1635
@@ -524,18 +544,6 @@ msgstr ""
 #. 3.4/prefsui.glade:587 5.6/prefsui.glade:733 4.0/prefsui.glade:733
 msgid "Usedup"
 msgstr "Använt"
-
-#. 6.4->settings-schema.json->Mem_colorCached->description
-#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 6.0/prefsui.glade:771
-#. 3.4/prefsui.glade:625 5.6/prefsui.glade:771 4.0/prefsui.glade:771
-msgid "Cached"
-msgstr "Cache-lagrat"
-
-#. 6.4->settings-schema.json->Mem_colorBuffer->description
-#. 3.0/prefsui.glade:684 3.2/prefsui.glade:736 6.0/prefsui.glade:809
-#. 3.4/prefsui.glade:663 5.6/prefsui.glade:809 4.0/prefsui.glade:809
-msgid "Buffer"
-msgstr "Buffert"
 
 #. 6.4->settings-schema.json->Mem_colorFree->description
 #. 3.0/prefsui.glade:723 3.2/prefsui.glade:775 6.0/prefsui.glade:847
@@ -786,6 +794,16 @@ msgstr "Inställningar för övervakare av flerkärniga system"
 #. 3.0/prefsui.glade:189 3.2/prefsui.glade:189
 msgid "Height"
 msgstr "Höjd"
+
+#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 6.0/prefsui.glade:771
+#. 3.4/prefsui.glade:625 5.6/prefsui.glade:771 4.0/prefsui.glade:771
+msgid "Cached"
+msgstr "Cache-lagrat"
+
+#. 3.0/prefsui.glade:684 3.2/prefsui.glade:736 6.0/prefsui.glade:809
+#. 3.4/prefsui.glade:663 5.6/prefsui.glade:809 4.0/prefsui.glade:809
+msgid "Buffer"
+msgstr "Buffert"
 
 #. 3.0/prefsui.glade:1550 3.2/prefsui.glade:1602 6.0/prefsui.glade:1695
 #. 3.4/prefsui.glade:1549 5.6/prefsui.glade:1695 4.0/prefsui.glade:1695

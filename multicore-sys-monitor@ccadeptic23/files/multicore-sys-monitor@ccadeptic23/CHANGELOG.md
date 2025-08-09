@@ -1,6 +1,13 @@
+### v2.5.0~20250809
+  * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460)
+  * Fixes [#7505](https://github.com/linuxmint/cinnamon-spices-applets/issues/7505)
+  * Calculates the percentage of memory used, as does `gnome-system-monitor`.
+  * No longer includes cache memory or buffer memory in the statistics.
+  * Improved calculation of tooltip width based on translations of displayed messages.
+
 ### v2.4.0~20250808
   * Improved memory calculation.
-  * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460
+  * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460)
 
 ### v2.3.5~20250808
   * Speed improvement.
