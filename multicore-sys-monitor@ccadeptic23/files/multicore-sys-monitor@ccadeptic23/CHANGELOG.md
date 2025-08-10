@@ -1,3 +1,7 @@
+### v2.5.1~20250810
+  * Adds the amounts of Buffer memory, Cache, and Shared memory to the tooltip.
+  * Improved tooltip display.
+
 ### v2.5.0~20250809
   * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460)
   * Fixes [#7505](https://github.com/linuxmint/cinnamon-spices-applets/issues/7505)

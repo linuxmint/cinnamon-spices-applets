@@ -31,7 +31,6 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 
-//~ const indent = '    ';
 const rate = _('/s');
 var spaces = 14;
 const translated_strings = [
@@ -61,15 +60,30 @@ const properties = [
     {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'}
 ];
 
+function get_nemo_size_prefixes() {
+    let _SETTINGS_SCHEMA='org.nemo.preferences';
+    let _SETTINGS_KEY = 'size-prefixes';
+    let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+    return _interface_settings.get_string(_SETTINGS_KEY)
+}
 
-const formatBytes = (bytes, decimals=2)=>{
+const formatBytes = (bytes, decimals=2, withRate=true)=>{
+    let _rate = (withRate === true) ? rate : "";
     if (bytes < 1) {
-        return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + rate;
+        return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + _rate;
     }
-    let k = 1000;
-    let dm = decimals + 1 || 3;
-    let sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    let i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8);
+    let dm = (decimals + 1) || 3;
+    let isBinary = get_nemo_size_prefixes().startsWith('base-2');
+    let k, sizes, i;
+    if (!isBinary) {
+        k = 1000;
+        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8);
+    } else {
+        k = 1024;
+        sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+        i = Math.min(Math.max(0, Math.floor(Math.log2(bytes) / Math.log2(k))), 8);
+    }
     let value;
     if (isNaN(i)) {
         i = 0;
@@ -79,7 +93,7 @@ const formatBytes = (bytes, decimals=2)=>{
     }
     let parts = value.split('.');
     let dec_part = (parts.length === 2) ? '.' + parts[1].toString().padEnd(2, '0') : '.00';
-    return parts[0].padStart(spaces/2 - 1) + dec_part.padEnd(spaces/2 - 1) + sizes[i].padStart(3, ' ') + rate;
+    return parts[0].padStart(spaces/2 - 1) + dec_part.padEnd(spaces/2 - 1) + sizes[i].padStart((_rate.length == 0) ? 4 : 3, ' ') + _rate;
 };
 
 
@@ -219,6 +233,7 @@ class MCSM extends Applet.TextIconApplet {
         this.memoryProvider = new MemDataProvider(this);
         this.multiCpuProvider = new MultiCpuDataProvider(this);
         this.swapProvider = new SwapDataProvider(this);
+        this.buffcachesharedProvider = new BufferCacheSharedDataProvider(this);
         this.networkProvider = new NetDataProvider(this);
         this.diskProvider = new DiskDataProvider(this);
 
@@ -488,30 +503,16 @@ class MCSM extends Applet.TextIconApplet {
         if (!this.Mem_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
-                //~ global.log(UUID + " - stdout is a " + typeof stdout);
                 let [, dataMem, dataSwap] = stdout.split(":");
                 dataMem = dataMem.trim();
                 dataMem = dataMem.replace(/\ +/g, " ");
-                //~ global.log(UUID + " - dataMem: " + dataMem);
                 dataSwap = dataSwap.trim();
                 dataSwap = dataSwap.replace(/\ +/g, " ");
-                //~ global.log(UUID + " - dataSwap: " + dataSwap);
-                //~ 16485462016  3414532096   500703232   278343680  4845682688  8356085760 13070929920
-                //~ let [total, used, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                //~ global.log(UUID + " - total: " + total);
-                //~ global.log(UUID + " - used: " + used);
-                //~ global.log(UUID + " - free: " + free);
-                //~ global.log(UUID + " - available: " + available);
-                //~ global.log(UUID + " - available - free: " + (available - free));
-                //~ this.memoryProvider.setData(used / total, (available - used) / total);
                 this.memoryProvider.setData(1 * total, 1 * used, 1 * free, 1 * available);
-                //~ this.memoryProvider.setData(used / total, cache / total, buffers / total, available / total);
-                //~ this.memoryProvider.setData(used / available, cache / available, buffers / available, total / available);
-                //~ this.memoryProvider.setData(used / total, cache / total, buffers / total, free / total);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
-                //~ global.log(this.memoryProvider.getTooltipString());
+                this.buffcachesharedProvider.setData(buffers, cache, shared);
             }
             subProcess.send_signal(9);
         });
@@ -670,6 +671,7 @@ class MCSM extends Applet.TextIconApplet {
         appletTooltipString += this.multiCpuProvider.getTooltipString();
         appletTooltipString += this.memoryProvider.getTooltipString();
         appletTooltipString += this.swapProvider.getTooltipString();
+        appletTooltipString += this.buffcachesharedProvider.getTooltipString();
         appletTooltipString += this.networkProvider.getTooltipString();
         appletTooltipString += this.diskProvider.getTooltipString();
 
@@ -783,6 +785,57 @@ class MemDataProvider {
             } else {
                 toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i-1])/10).toString().padStart(2, ' ') + ' %\n';
             }
+        }
+        return toolTipString;
+    }
+
+    get isEnabled() {
+        return this.applet.Mem_enabled;
+    }
+
+    get isRunning() {
+        return this.applet.isRunning;
+    }
+}
+
+class BufferCacheSharedDataProvider {
+    constructor(applet) {
+        this.applet = applet;
+        this.name = _('Buffers/Cache/Shared');
+        this.currentReadings = [0, 0];
+    }
+
+    getColorList() {
+        return [];
+    }
+
+    getData() {
+        if (!this.isEnabled) return [];
+        return this.currentReadings;
+    }
+
+    setData(buffers, cache, shared) {
+        this.currentReadings = [
+            buffers,
+            cache,
+            shared
+        ];
+    }
+
+    getTooltipString() {
+        if (! this.isEnabled) return "";
+        if (! this.isRunning) return "";
+        let trans = this.name;
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+        let attributes = [_('Buffer'), _('Cache'), _("Shared")];
+
+        for (let i = 0; i < attributes.length; i++) {
+            let valueWithUnit = formatBytes(this.currentReadings[i], 2, false);
+            toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + " " + valueWithUnit.padStart(2, ' ') + '\n';
         }
         return toolTipString;
     }
