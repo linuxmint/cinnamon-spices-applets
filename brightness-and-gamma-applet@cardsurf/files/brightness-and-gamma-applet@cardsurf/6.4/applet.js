@@ -340,7 +340,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
                         ["apply_asynchronously", null],
                         ["apply_startup", null],
                         ["apply_every", null],
-                        //~ ["apply_changing_monitors", null],
+                        ["apply_changing_monitors", null],
                         ["save_every", null],
                         ["update_scroll", null],
                         ["scroll_step", null],
@@ -570,7 +570,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
         this.update_tooltip();
         timeout_add_seconds(900, () => { this._check_sunrise_sunset(); return this.is_running; });
         //~ timeout_add_seconds(1, () => { this.check_number_of_monitors(); return this.is_running; });
-        Main.layoutManager.connect('monitors-changed', () => { this.on_preset_reload_button_clicked() });
+        Main.layoutManager.connect('monitors-changed', () => { if (this.apply_changing_monitors) this.on_preset_reload_button_clicked(); });
     }
 
     // Override
