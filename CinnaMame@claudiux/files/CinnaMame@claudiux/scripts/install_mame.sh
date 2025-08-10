@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ### Installs mame with password dialog:
 pkexec pkcon -y install mame
 ### Pause 1 second:

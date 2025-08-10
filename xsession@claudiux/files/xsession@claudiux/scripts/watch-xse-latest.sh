@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 NBLINES=$1
 [[ -z $NBLINES ]] && NBLINES=50
 LOGFILE=$HOME/.xsession-errors

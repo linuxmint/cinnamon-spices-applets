@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ###
 # Returns the comma-separated list of sudoers.
 ###

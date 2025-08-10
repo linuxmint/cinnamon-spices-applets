@@ -258,7 +258,7 @@ class SpicesUpdate extends IconApplet {
 
     // To be sure that the scripts will be executable:
     spawnCommandLineAsync(
-      "/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR),
+      "/usr/bin/env bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR),
       null,
       null,
     );
@@ -550,12 +550,18 @@ class SpicesUpdate extends IconApplet {
       this.on_settings_changed();
     });
 
-    this.settings.bind("exp_applets", "exp_applets", null);
-    this.exp_applets = "%s\n%s\n%s".format(
-      EXP1["applets"],
-      EXP2["applets"],
-      EXP3,
-    );
+    //~ this.settings.bind("exp_applets", "exp_applets", null);
+    //~ this.exp_applets = "%s\n%s\n%s".format(
+      //~ EXP1["applets"],
+      //~ EXP2["applets"],
+      //~ EXP3,
+    //~ );
+
+    //~ this.settings.setValue("exp_applets", "%s\n%s\n%s".format(
+      //~ EXP1["applets"],
+      //~ EXP2["applets"],
+      //~ EXP3,
+    //~ ));
 
     this.settings.bind("unprotected_applets", "unprotected_applets", () => {
       this.populateSettingsUnprotectedApplets();
@@ -570,12 +576,17 @@ class SpicesUpdate extends IconApplet {
       this.on_settings_changed();
     });
 
-    this.settings.bind("exp_desklets", "exp_desklets", null);
-    this.exp_desklets = "%s\n%s\n%s".format(
-      EXP1["desklets"],
-      EXP2["desklets"],
-      EXP3,
-    );
+    //~ this.settings.bind("exp_desklets", "exp_desklets", null);
+    //~ this.exp_desklets = "%s\n%s\n%s".format(
+      //~ EXP1["desklets"],
+      //~ EXP2["desklets"],
+      //~ EXP3,
+    //~ );
+    //~ this.settings.setValue("exp_desklets", "%s\n%s\n%s".format(
+      //~ EXP1["desklets"],
+      //~ EXP2["desklets"],
+      //~ EXP3,
+    //~ ));
 
     this.settings.bind("unprotected_desklets", "unprotected_desklets", () => {
       this.populateSettingsUnprotectedDesklets();
@@ -590,12 +601,17 @@ class SpicesUpdate extends IconApplet {
       this.on_settings_changed();
     });
 
-    this.settings.bind("exp_extensions", "exp_extensions");
-    this.exp_extensions = "%s\n%s\n%s".format(
-      EXP1["extensions"],
-      EXP2["extensions"],
-      EXP3,
-    );
+    //~ this.settings.bind("exp_extensions", "exp_extensions");
+    //~ this.exp_extensions = "%s\n%s\n%s".format(
+      //~ EXP1["extensions"],
+      //~ EXP2["extensions"],
+      //~ EXP3,
+    //~ );
+    //~ this.settings.setValue("exp_extensions", "%s\n%s\n%s".format(
+      //~ EXP1["extensions"],
+      //~ EXP2["extensions"],
+      //~ EXP3,
+    //~ ));
 
     this.settings.bind(
       "unprotected_extensions",
@@ -614,12 +630,14 @@ class SpicesUpdate extends IconApplet {
       this.on_settings_changed();
     });
 
-    this.settings.bind("exp_themes", "exp_themes");
-    this.exp_themes = "%s\n%s\n%s".format(EXP1["themes"], EXP2["themes"], EXP3);
+    //~ this.settings.bind("exp_themes", "exp_themes");
+    //~ this.exp_themes = "%s\n%s\n%s".format(EXP1["themes"], EXP2["themes"], EXP3);
+    //~ this.settings.setValue("exp_themes", "%s\n%s\n%s".format(EXP1["themes"], EXP2["themes"], EXP3));
 
     this.settings.bind("unprotected_themes", "unprotected_themes", () => {
       this.populateSettingsUnprotectedThemes();
     });
+
 
     // Nemo actions
     this.settings.bind("check_actions", "check_actions", () => {
@@ -630,16 +648,29 @@ class SpicesUpdate extends IconApplet {
       this.on_settings_changed();
     });
 
-    this.settings.bind("exp_actions", "exp_actions");
-    this.exp_actions = "%s\n%s\n%s".format(
-      EXP1["actions"],
-      EXP2["actions"],
-      EXP3,
-    );
+    //~ this.settings.bind("exp_actions", "exp_actions");
+    //~ this.exp_actions = "%s\n%s\n%s".format(
+      //~ EXP1["actions"],
+      //~ EXP2["actions"],
+      //~ EXP3,
+    //~ );
+    //~ this.settings.setValue("exp_actions", "%s\n%s\n%s".format(
+      //~ EXP1["actions"],
+      //~ EXP2["actions"],
+      //~ EXP3,
+    //~ ));
 
     this.settings.bind("unprotected_actions", "unprotected_actions", () => {
       this.populateSettingsUnprotectedActions();
     });
+
+    for (let t of TYPES) {
+      this.settings.setValue(`exp_${t}`, "%s\n%s\n%s".format(
+      EXP1[t],
+      EXP2[t],
+      EXP3,
+    ));
+    }
   } // End of get_SU_settings
 
   /**
@@ -1557,9 +1588,9 @@ class SpicesUpdate extends IconApplet {
           spawnCommandLineAsync(terminal);
           // TRANSLATORS: The next messages should not be translated.
           //~ if (_isDebian === true) {
-          //~ spawnCommandLineAsync(terminal + " " + term_sep + " " + " '/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
+          //~ spawnCommandLineAsync(terminal + " " + term_sep + " " + " '/usr/bin/env bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'", null, null);
           //~ } else {
-          //~ spawnCommandLineAsync(terminal + " " + term_sep + " " + `'/bin/bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo ${_apt_update} ${_and} ${_apt_install}; sleep 1; exec bash\"'`, null, null);
+          //~ spawnCommandLineAsync(terminal + " " + term_sep + " " + `'/usr/bin/env bash -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo ${_apt_update} ${_and} ${_apt_install}; sleep 1; exec bash\"'`, null, null);
           //~ }
         }
       } else {

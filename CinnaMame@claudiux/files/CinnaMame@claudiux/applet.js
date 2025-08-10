@@ -55,8 +55,8 @@ class CinnaMame extends Applet.IconApplet {
 
         this.setIcon();
 
-        Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
-        Util.spawnCommandLineAsync("bash -C '%s/ensure_mame.sh'".format(PATH2SCRIPTS));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/ensure_mame.sh'".format(PATH2SCRIPTS));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -76,7 +76,7 @@ class CinnaMame extends Applet.IconApplet {
 
         if (this._mame === null) {
             let mameItem = this.menu.addAction(_("Install mame"), () => {
-                Util.spawnCommandLineAsync("bash -C '%s/install_mame.sh'".format(PATH2SCRIPTS));
+                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_mame.sh'".format(PATH2SCRIPTS));
             });
         } else {
             var games = {};

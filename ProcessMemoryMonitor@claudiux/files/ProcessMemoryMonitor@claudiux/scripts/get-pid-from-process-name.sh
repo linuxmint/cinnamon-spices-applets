@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 processname=$1
 echo -n $(ps -C ${processname} -o pid=)
 

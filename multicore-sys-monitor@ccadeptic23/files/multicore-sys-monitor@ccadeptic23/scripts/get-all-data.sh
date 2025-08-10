@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #~ sleepDurationSeconds=$1
 sleepDurationSeconds=1

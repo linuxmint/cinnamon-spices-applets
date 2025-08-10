@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ### Installs playerctl with password dialog:
 pkexec pkcon -y install playerctl
 ### Pause 1 second:

@@ -205,7 +205,7 @@ class SensorsApplet extends Applet.Applet {
     spawnCommandLineAsync(`/bin/bash -c 'cd ${SCRIPTS_DIR} && chmod 755 *.py *.sh'`, null, null);
 
     this.sudo_or_wheel = "none";
-    let subProcess = spawnCommandLineAsyncIO("/bin/bash -c 'groups'", (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO("/usr/bin/env bash -c 'groups'", (out, err, exitCode) => {
       if (exitCode == 0) {
         let groups = out.trim().split(' ');
         if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
@@ -624,7 +624,7 @@ class SensorsApplet extends Applet.Applet {
         if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
 
         let _disk_name = disk["disk"].trim();
-        let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
+        let command = "/usr/bin/env bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
 
         if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
         let _temp;
@@ -1726,7 +1726,7 @@ class SensorsApplet extends Applet.Applet {
 
   _on_disktemp_button_pressed() {
     let subProcess = spawnCommandLineAsyncIO(
-      "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
+      "/usr/bin/env bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
       (out, err, exitCode) => {
         this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
         subProcess.send_signal(9);

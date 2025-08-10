@@ -8,18 +8,18 @@ const NAME = "VPN-Sentinel";
 const UUID = NAME + "@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const LOG_DIR = HOME_DIR + "/.config/" + NAME;
-GLib.spawn_command_line_async("bash -c 'mkdir -p "+ LOG_DIR +"'");
+GLib.spawn_command_line_async("/usr/bin/env bash -c 'mkdir -p "+ LOG_DIR +"'");
 const OLD_LOG_FILE_PATH = HOME_DIR + "/.cinnamon/configs/" + UUID + "/vpn_activity.log";
 const LOG_FILE_PATH = LOG_DIR + "/vpn_activity.log";
 if (GLib.file_test(OLD_LOG_FILE_PATH, GLib.FileTest.EXISTS))
-  GLib.spawn_command_line_async("bash -c 'mv -u " + OLD_LOG_FILE_PATH + " " + LOG_FILE_PATH +"'");
+  GLib.spawn_command_line_async("/usr/bin/env bash -c 'mv -u " + OLD_LOG_FILE_PATH + " " + LOG_FILE_PATH +"'");
 
 class ActivityLogging {
   constructor(metadata, nbdays=30, active=true) {
     this.metadata = metadata;
     this.user_language = this._get_user_language;
     //this.uuid = metadata.uuid;
-    GLib.spawn_command_line_async("bash -c 'touch "+ LOG_FILE_PATH +"'");
+    GLib.spawn_command_line_async("/usr/bin/env bash -c 'touch "+ LOG_FILE_PATH +"'");
     this.time_options = {
       year: "numeric", month: "numeric", day: "numeric",
       hour: "numeric", minute: "numeric", second: "numeric",
@@ -109,7 +109,7 @@ class ActivityLogging {
   } // End of truncate_log_file
 
   display_logs() {
-    let command = `bash -c '%s/scripts/watch-log2.sh'`.format(this.metadata.path);
+    let command = `/usr/bin/env bash -c '%s/scripts/watch-log2.sh'`.format(this.metadata.path);
     GLib.spawn_command_line_async(command);
   } // End of display_logs
 
@@ -151,7 +151,7 @@ class ActivityLogging {
       LOG_FILE_PATH
     );
 
-    GLib.spawn_command_line_async(`bash -c '%s'`.format(command));
+    GLib.spawn_command_line_async(`/usr/bin/env bash -c '%s'`.format(command));
 
     return this.is_active
   } // End of treat_waiting_messages

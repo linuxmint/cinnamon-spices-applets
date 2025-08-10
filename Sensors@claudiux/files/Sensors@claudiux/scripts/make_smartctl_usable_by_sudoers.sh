@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 [[ $UID -eq 0 ]] || exit 1
 
 GROUP=$1

@@ -332,7 +332,7 @@ Dependencies.prototype = {
       this.alertNotif = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
       if (_is_pkcon_present && _is_pkexec_present) {
-        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
+        GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo List of needed packages: %s; pkexec pkcon -y install %s\"'".format(_pkg_to_install.join(", "), _pkg_to_install.join(" ")));
         this.depAreMet = false;
         return
       }
@@ -341,9 +341,9 @@ Dependencies.prototype = {
         if (terminal != "") {
           // TRANSLATORS: The next messages should not be translated.
           if (_isDebian === true) {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           } else {
-            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+            GLib.spawn_command_line_async(terminal + " -e '/usr/bin/env sh -c \"echo VPN-Sentinel message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
           }
         }
       } else {

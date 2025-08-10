@@ -116,7 +116,7 @@ class MCSM extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.instance_id = instance_id;
 
-        Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
 
         if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
             this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 THUMB=$1
 TYPE=$2
 DEST=$HOME/.cache/cinnamon/spices/$TYPE/

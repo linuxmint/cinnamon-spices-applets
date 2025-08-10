@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 LOGFILE=$HOME/.xsession-errors
 APPLET="xsession@claudiux"
 ICON=$HOME/.local/share/cinnamon/applets/$APPLET/icons/face-glasses-symbolic.svg

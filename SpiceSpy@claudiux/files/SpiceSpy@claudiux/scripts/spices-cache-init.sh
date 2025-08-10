@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 UUID="SpiceSpy@claudiux"
 for type in action applet desklet extension theme; do {
         [[ -d ${HOME}/.cache/cinnamon/spices/${type} ]] || {
