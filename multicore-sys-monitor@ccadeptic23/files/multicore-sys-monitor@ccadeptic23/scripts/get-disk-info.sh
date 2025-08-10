@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #~ echo -n $(lsblk -A -b -f -t -J)
 echo -n $(lsblk -A -b -O -J)

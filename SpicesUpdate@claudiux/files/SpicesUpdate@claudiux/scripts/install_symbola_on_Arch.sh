@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 USRFONTSDIR="$HOME/.local/share/fonts"
 APPLETFONTSDIR="$HOME/.local/share/cinnamon/applets/SpicesUpdate@claudiux/fonts/Symbola"
 URLDOWNLOAD="https://raw.githubusercontent.com/claudiux/fonts/master/Symbola/Symbola.tar.gz"

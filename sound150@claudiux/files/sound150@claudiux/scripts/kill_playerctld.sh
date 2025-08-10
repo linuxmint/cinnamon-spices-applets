@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 PCDPID=$(pidof playerctld)
 PCDPATH=$(which playerctld)
 

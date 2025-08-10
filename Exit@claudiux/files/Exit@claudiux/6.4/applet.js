@@ -175,7 +175,7 @@ class ExitApplet extends Applet.IconApplet {
                     setTimeoutInSeconds(
                         () => {
                             Util.spawn_async(
-                                ['/bin/bash', '-c',
+                                ['/usr/bin/env bash', '-c',
                                 'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
                                 xinput enable $m; done'],
                                 null);

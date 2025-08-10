@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 TITLE="$1"
 RES="$2"
 

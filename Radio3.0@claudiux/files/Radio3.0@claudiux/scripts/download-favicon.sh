@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 URL=$1
 NAME=$2
 

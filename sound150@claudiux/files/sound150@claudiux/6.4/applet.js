@@ -109,11 +109,11 @@ const IS_OSD150_INSTALLED = () => {
 }
 
 function run_playerctld() {
-    Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
 }
 
 function kill_playerctld() {
-    Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
 }
 
 //~ function getImageAtScale(imageFileName, width, height) {
@@ -220,10 +220,10 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
-        Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
-        Util.spawnCommandLineAsync("bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
-        Util.spawnCommandLineAsync("bash -c '[[ -d %s ]] || mkdir -p %s'".format(ICONDIR, ICONDIR));
-        Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/rm_tmp_files.sh'");
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ALBUMART_PICS_DIR, ALBUMART_PICS_DIR));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c '[[ -d %s ]] || mkdir -p %s'".format(ICONDIR, ICONDIR));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/rm_tmp_files.sh'");
 
         this.orientation = orientation;
         this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
@@ -1276,7 +1276,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
             //~ logDebug("on_applet_removed_from_panel(): Radio3.0 is not running.");
-            Util.spawnCommandLineAsync("bash -c 'rm -f %s/R3SongArt*'".format(ALBUMART_PICS_DIR));
+            Util.spawnCommandLineAsync("/usr/bin/env bash -c 'rm -f %s/R3SongArt*'".format(ALBUMART_PICS_DIR));
         }
     }
 
@@ -1708,7 +1708,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._artLooping) return;
 
         if (this._playerctl && this._imagemagick && this.is_empty(ALBUMART_PICS_DIR))
-            Util.spawnCommandLineAsync("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
 
         if (!this._playerctl || this.title_text_old == this.title_text) {
             this._loopArtId = timeout_add_seconds(10, () => {
@@ -1717,7 +1717,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             return
         }
 
-        let subProcess = Util.spawnCommandLineAsyncIO("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
+        let subProcess = Util.spawnCommandLineAsyncIO("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 this._trackCoverFile = "file://" + stdout;
                 let cover_path = decodeURIComponent(this._trackCoverFile);
@@ -1777,7 +1777,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this.setIcon(path, "player-path");
                 //~ if (!path.startsWith(ALBUMART_PICS_DIR)) {
                     //~ let target = ALBUMART_PICS_DIR + "/R3SongArt" + randomIntegerInInterval(0, superRND).toString()
-                    //~ Util.spawnCommandLineAsync(`bash -c "rm -f ${ALBUMART_PICS_DIR}/R3SongArt* ; sleep 1 ; cp -a ${path} ${target}"`);
+                    //~ Util.spawnCommandLineAsync(`/usr/bin/env bash -c "rm -f ${ALBUMART_PICS_DIR}/R3SongArt* ; sleep 1 ; cp -a ${path} ${target}"`);
                 //~ }
             } else {
                 if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
@@ -2081,12 +2081,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this._playerctl === null) {
             //~ let _install_playerctl_button = new PopupMenu.PopupIconMenuItem(_("Install playerctl"), "system-software-install", St.IconType.SYMBOLIC);
             let _install_playerctl_button = this.menu.addAction(_("Install playerctl"), () => {
-                Util.spawnCommandLineAsync("bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
+                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
             });
         }
         if (!this._imagemagick) {
             let _install_imagemagick_button = this.menu.addAction(_("Install imagemagick"), () => {
-                Util.spawnCommandLineAsync("bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
+                Util.spawnCommandLineAsync("/usr/bin/env bash -C '%s/install_imagemagick.sh'".format(PATH2SCRIPTS));
             });
         }
     }
