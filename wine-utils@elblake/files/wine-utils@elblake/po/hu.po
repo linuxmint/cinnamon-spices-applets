@@ -10,7 +10,7 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2024-09-03 08:25-0400\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #. applet.js:50
 msgid "Config"
-msgstr "Konfig"
+msgstr "Beállítás"
 
 #. applet.js:51
 msgid "Control Panel"
@@ -44,7 +44,7 @@ msgstr "Feladatkezelő"
 
 #. applet.js:58
 msgid "Bottles"
-msgstr "Palackok"
+msgstr "Bottles"
 
 #. applet.js:59
 msgid "Lutris"
@@ -61,7 +61,7 @@ msgstr "Q4Wine"
 #. metadata.json->name
 #. applet.js:149
 msgid "Wine Utils"
-msgstr "Wine Segédprogramok"
+msgstr "Wine segédprogramok"
 
 #. applet.js:326
 msgid "Prefixes"
@@ -69,7 +69,7 @@ msgstr "Prefixes"
 
 #. applet.js:335
 msgid "Run Command..."
-msgstr "Parancs futtatása..."
+msgstr "Futtatási parancs…"
 
 #. applet.js:343
 msgid "Command Prompt"
@@ -77,7 +77,7 @@ msgstr "Parancssor"
 
 #. applet.js:349
 msgid "Configuration"
-msgstr "Konfiguráció"
+msgstr "Beállítások"
 
 #. applet.js:354
 msgid "Programs"
@@ -101,15 +101,15 @@ msgstr "Általános"
 
 #. settings-schema.json->show-launchers->description
 msgid "Show Launchers"
-msgstr "Indítóindítók megjelenítése"
+msgstr "Indítók megjelenítése"
 
 #. settings-schema.json->show-launchers->tooltip
 msgid "Show some of the Wine launchers if they are installed."
-msgstr "Mutasson néhány Wine indítót, ha telepítve vannak."
+msgstr "Jelenítsen meg néhány telepített Wine indítót."
 
 #. settings-schema.json->show-run-command->description
 msgid "Show 'Run Command...'"
-msgstr "Mutasd a \"Futtatási parancsot...\""
+msgstr "Jelenítse meg a „Futtatási parancs…” elemet"
 
 #. settings-schema.json->show-run-command->tooltip
 msgid "For running a Wine command."
@@ -117,7 +117,7 @@ msgstr "Egy Wine parancs futtatásához."
 
 #. settings-schema.json->show-cmd->description
 msgid "Show 'Command Prompt'"
-msgstr "\"Parancssor\" megjelenítése"
+msgstr "Jelenítse meg a „Parancssor” elemet"
 
 #. settings-schema.json->show-cmd->tooltip
 msgid "For easy access to the Wine command prompt."
@@ -125,7 +125,7 @@ msgstr "A Wine parancssor könnyű eléréséhez."
 
 #. settings-schema.json->show-admin-programs-menu->description
 msgid "Show the Configuration menu"
-msgstr "Jelenítse meg a Konfiguráció menüt"
+msgstr "Jelenítse meg a „Beállítások” menüt"
 
 #. settings-schema.json->show-admin-programs-menu->tooltip
 msgid ""
@@ -133,7 +133,7 @@ msgid ""
 "CLI."
 msgstr ""
 "A hasznos Wine segédprogramok menüjének megjelenítése, amelyeket általában "
-"a CLI-nek kell elérnie."
+"a parancssorból kellene használnia."
 
 #. settings-schema.json->show-programs-menu->description
 msgid "Show the Programs menu"
@@ -209,7 +209,7 @@ msgstr "Adja meg a wine végrehajtható fájlját"
 #. settings-schema.json->specify-wine-exec->tooltip
 msgid "Specify the wine executable, by default 'wine' is used."
 msgstr ""
-"Adja meg a wine futtatható fájlját, alapértelmezés szerint a 'wine' kerül "
+"Adja meg a wine futtatható fájlját, alapértelmezés szerint a „wine” kerül "
 "felhasználásra."
 
 #. settings-schema.json->wine-exec->description
@@ -250,11 +250,11 @@ msgstr "Futtatási parancs"
 
 #. scripts/run-command.sh:8
 msgid "Error running command:"
-msgstr "Hiba a parancs futtatásakor:"
+msgstr "Hiba lepet fel a parancs futtatásakor:"
 
 #. scripts/run-command.sh:9
 msgid "Run Command Error"
-msgstr "Futtatás parancs hiba"
+msgstr "Futtatási parancs hiba"
 
 #. scripts/use-cmd.sh:6
 msgid "Command Prompt Error"

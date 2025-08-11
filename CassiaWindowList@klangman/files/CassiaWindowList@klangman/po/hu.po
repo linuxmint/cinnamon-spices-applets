@@ -8,15 +8,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-07-05 00:09-0400\n"
-"PO-Revision-Date: 2025-08-03 18:02+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-08-08 08:01+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
 msgid "all buttons"
@@ -24,7 +24,7 @@ msgstr "minden gomb"
 
 #. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
 msgid "windows in this group"
-msgstr ""
+msgstr "ablakok ebben a csoportban"
 
 #. 4.0/applet.js:3341 6.0/applet.js:3341 6.4/applet.js:3313
 msgid "Applet Preferences"
@@ -49,7 +49,7 @@ msgstr "Eltávolítás: „%s”"
 
 #. 4.0/applet.js:3359 6.0/applet.js:3359 6.4/applet.js:3331
 msgid "Do you really want to remove this instance of CassiaWindowList?"
-msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
+msgstr "Valóban el szeretné távolítani ezt a CassiaAblaklista ezen példányát?"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -203,7 +203,7 @@ msgstr "Alkalmazás ablakok csoportosítása"
 
 #. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
 msgid "Automatic grouping/ungrouping"
-msgstr "Automatikus csoportosítás létrehozása/megszűntetése"
+msgstr "Automatikus csoportosítás létrehozása és megszüntetése"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -280,7 +280,7 @@ msgid ""
 "A window list/panel launchers based on CobiWindowList with some additional "
 "features"
 msgstr ""
-"A CobiWindowList alapú ablaklista/panelindítók néhány további funkcióval"
+"A CobiAblaklista alapú ablaklista és panelindító néhány további funkcióval"
 
 #. 4.0->settings-schema.json->caption-page->title
 #. 6.0->settings-schema.json->caption-page->title
@@ -298,7 +298,7 @@ msgstr "Általános"
 #. 6.0->settings-schema.json->preview-page->title
 #. 6.4->settings-schema.json->preview-page->title
 msgid "Thumbnails"
-msgstr "Előnézetek"
+msgstr "Miniatűrök"
 
 #. 4.0->settings-schema.json->hotkey-page->title
 #. 6.0->settings-schema.json->hotkey-page->title
@@ -321,16 +321,14 @@ msgstr "Ablaklista gomb címke beállításai"
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
 #. 6.4->settings-schema.json->caption-number-settings->title
-#, fuzzy
 msgid "Icon overlay label settings"
-msgstr "Számcímke beállítások"
+msgstr "Ikoncímke beállítások"
 
 #. 4.0->settings-schema.json->caption-progress-settings->title
 #. 6.0->settings-schema.json->caption-progress-settings->title
 #. 6.4->settings-schema.json->caption-progress-settings->title
-#, fuzzy
 msgid "Progress settings"
-msgstr "Gyorsbillentyűk beállításai"
+msgstr "Folyamat beállítások"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -464,7 +462,6 @@ msgstr "Címkék megjelenítése a rögzített gombokhoz"
 #. 4.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.4->settings-schema.json->display-caption-for-pined->tooltip
-#, fuzzy
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
@@ -598,7 +595,7 @@ msgid ""
 "labels to shrink"
 msgstr ""
 "Az állapotjelzők elrejtése, ha az ablaklista mérete korlátozott, és a gombok "
-"feliratai összezsugorodnak."
+"feliratai összezsugorodnak"
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -649,7 +646,7 @@ msgid ""
 "This defines the duration of the fade-in/out animation effect. It applies to "
 "the Thumbnail menus and the full size window previews"
 msgstr ""
-"Ez határozza meg a be/ki-úszás animációs effektus időtartamát. A bélyegkép "
+"Ez határozza meg a be/ki-úszás animációs effektus időtartamát. A Miniatűrök "
 "menükre és a teljes méretű ablak előnézetére vonatkozik"
 
 #. 4.0->settings-schema.json->hover-peek-delay->description
@@ -1062,7 +1059,7 @@ msgstr ""
 #. 6.0->settings-schema.json->show-previews->description
 #. 6.4->settings-schema.json->show-previews->description
 msgid "Show window thumbnails in the popup window list menu"
-msgstr "Az ablak bélyegképeinek megjelenítése a felugró ablak lista menüjében"
+msgstr "Az ablak miniatűrök megjelenítése a felugró ablak lista menüjében"
 
 #. 4.0->settings-schema.json->show-previews->tooltip
 #. 6.0->settings-schema.json->show-previews->tooltip
@@ -1142,7 +1139,7 @@ msgstr ""
 #. 6.4->settings-schema.json->menu-all-windows-of-pool->description
 #. 6.4->settings-schema.json->menu-all-windows-of-auto->description
 msgid "Show thumbnails for all windows of an application pool"
-msgstr "Bélyegképek megjelenítése egy alkalmazáskészlet összes ablakához"
+msgstr "Miniatűrök megjelenítése egy alkalmazáskészlet összes ablakához"
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
@@ -1157,7 +1154,7 @@ msgid ""
 msgstr ""
 "Ha engedélyezve van, egy felugró menü az alkalmazáskészlet összes "
 "alkalmazásablakát tartalmazza, nem csak a kiválasztott ablakot az "
-"alkalmazáskészletben."
+"alkalmazáskészletben"
 
 #. 4.0->settings-schema.json->preview-timeout-show->description
 #. 6.0->settings-schema.json->preview-timeout-show->description
@@ -1287,7 +1284,7 @@ msgstr "Maximalizálás/Visszaállítás"
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
 msgid "Group/Ungroup windows"
-msgstr "Az ablakok csoportosítása/csoportosítás megszűntetése"
+msgstr "Az ablakok csoportosítása/csoportosítás megszüntetése"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1875,15 +1872,15 @@ msgstr "Miniatűr ablak vissza gomb művelete"
 #. 6.0->settings-schema.json->preview-forward-click->description
 #. 6.4->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
-msgstr "Bélyegkép ablak előre gomb művelete"
+msgstr "Miniatűr ablak előre gomb művelete"
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->description
 #. 6.0->settings-schema.json->hover-peek-thumbnail->description
 #. 6.4->settings-schema.json->hover-peek-thumbnail->description
 msgid "Show a full size window preview when hovering over a Thumbnail"
 msgstr ""
-"Teljes méretű ablak előnézetének megjelenítése, ha az egérmutatót egy "
-"indexkép fölé viszi"
+"Teljes méretű ablak miniatűr megjelenítése, ha az egérmutatót egy indexkép "
+"fölé viszi"
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
 #. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
@@ -1894,7 +1891,7 @@ msgid ""
 "controlled by an option under the Advanced tab"
 msgstr ""
 "Ha engedélyezve van, akkor egy teljes méretű előnézeti ablak jelenik meg, "
-"amikor az egérmutatót a Thumbnail menüpont fölé helyezi. Az előnézet "
+"amikor az egérmutatót a Miniatűr menüpont fölé helyezi. Az előnézet "
 "megjelenése előtti késleltetés a Speciális lapon található beállítással "
 "szabályozható"
 
@@ -1902,7 +1899,7 @@ msgstr ""
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->description
 #. 6.4->settings-schema.json->no-click-activate-thumbnail->description
 msgid "Automatic focus change when leaving the Thumbnail menu"
-msgstr "Automatikus fókuszváltás az Indexkép menü elhagyásakor"
+msgstr "Automatikus fókuszváltás az Miniatűr menü elhagyásakor"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->tooltip
@@ -2176,7 +2173,7 @@ msgid ""
 "scroll wheel action will be disabled if the Thumbnail menu is currently open"
 msgstr ""
 "Az egér görgetőkerékének használata esetén végrehajtott művelet egy "
-"ablaklistagombon. Ez a görgetés le lesz tiltva, ha a bélyegkép menü éppen "
+"ablaklistagombon. Ez a görgetés le lesz tiltva, ha a Miniatűr menü éppen "
 "nyitva van"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
@@ -2439,7 +2436,7 @@ msgid ""
 msgstr ""
 "Ha itt egy nevet ad meg, akkor a kisalkalmazáspéldány konfigurációja ezen a "
 "néven kerül mentésre. A biztonsági másolatok megjelennek a Telepítővarázsló "
-"visszaállítási oldalán, amikor új CassiaWindowList példányt ad hozzá egy "
+"visszaállítási oldalán, amikor új CassiaAblaklista példányt ad hozzá egy "
 "panelhez."
 
 #. 4.0->settings-schema.json->icon-saturation->units
@@ -2461,8 +2458,8 @@ msgid ""
 "Sets the color saturation for icons from 0% (grayscale) to 100%, default is "
 "100%"
 msgstr ""
-"Az ikonok színtelítettségének beállítása 0% (szürkeárnyalat) és 100% között, "
-"alapértelmezett érték 100%"
+"Az ikonok színtelítettségének beállítása 0% (szürke árnyalat) és 100% "
+"között, alapértelmezett érték 100%"
 
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
@@ -2518,11 +2515,11 @@ msgstr ""
 
 #. SetupWizard.ui:7
 msgid "CassiaWindowList Basic Setup Wizard"
-msgstr "Cassia Ablaklista alapvető beállítási varázsló"
+msgstr "Cassia Ablaklista alapvető beállítási tündér"
 
 #. SetupWizard.ui:78
 msgid "Welcome to CassiaWindowList"
-msgstr "Üdvözöljük az Cassia Ablaklistában"
+msgstr "Üdvözöljük az CassiaAblaklista kisalkalmazásban"
 
 #. SetupWizard.ui:95
 msgid "How would you like this applet instance to behave?"
@@ -2625,15 +2622,14 @@ msgid ""
 "How would you like the Left mouse button to behave when \n"
 "windows already exist for a launcher button?"
 msgstr ""
-"A legtöbb Panel Launcher kisalkalmazással ellentétben ez az indító lépést "
-"tart\n"
-"ablakokat futtat, és az ablak miniatűr menüit használja.\n"
+"A legtöbb Panel Indító kisalkalmazással ellentétben ez az indító figyeli az\n"
+"ablakokat, és az ablak Miniatűr menüit használja.\n"
 "\n"
 "További ablakokat indíthat el a „Vissza” egérgombbal\n"
 "gombbal vagy a bal egérgombbal, miközben lenyomva tartja a Ctrl billentyűt.\n"
 "\n"
-"Hogyan szeretné, ha a bal egérgomb mikor viselkedne\n"
-"már léteznek ablakok az indítógombhoz?"
+"Hogyan szeretné, ha a bal egérgomb így viselkedne\n"
+"amikor már léteznek ablakok az indítógombhoz?"
 
 #. SetupWizard.ui:388
 msgid "Open new window / Hold for Thumbnail menu"
@@ -2649,7 +2645,7 @@ msgstr "Nyissa meg a Miniatűr menüt"
 
 #. SetupWizard.ui:461
 msgid "Thumbnail window menu on mouse hover"
-msgstr "Bélyegkép ablak menüje az egérmutatóval"
+msgstr "Miniatűrök ablak menüje az egérmutatóval"
 
 #. SetupWizard.ui:492
 msgid "All done!"
@@ -2670,8 +2666,8 @@ msgid ""
 " • Automatic application grouping when space is limited.\n"
 " • And much more."
 msgstr ""
-"Számos további lehetőség és funkció található az\n"
-"applet konfigurátorban és az ablaklista gomb helyi menüjében,\n"
+"Számos további lehetőség és funkció található a\n"
+"kisalkalmazás beállításai között, és az ablaklista gomb helyi menüjében,\n"
 "például:\n"
 "\n"
 "• Gyorsbillentyűk egy adott ablak elindításához/aktiválásához.\n"
@@ -2679,13 +2675,13 @@ msgstr ""
 "• Testreszabható ikon telítettség (szürkeárnyalatos/élénk).\n"
 "• Testreszabható Ctrl/Shift + egérgomb műveletek.\n"
 "• Alkalmazásspecifikus csoportosítási és címkebeállítások.\n"
-"• Indexkép ablak nagyítása a görgetőkerékkel.\n"
+"• Miniatűr ablak nagyítása a görgetőkerékkel.\n"
 "• Automatikus alkalmazáscsoportosítás korlátozott hely esetén.\n"
-"• És még sok más."
+"• És még sok minden más."
 
 #. SetupWizard.ui:530
 msgid "Exit and launch the applet configurator now"
-msgstr "Lépjen ki, és indítsa el most az kisalkalmazáskonfigurátort"
+msgstr "Lépjen ki, és nyissa meg most az kisalkalmazás beállításokat"
 
 #. SetupWizard.ui:559
 msgid "Select a backup configuration to restore?"
@@ -2709,7 +2705,7 @@ msgstr ""
 
 #. SetupWizard.ui:638
 msgid "MainWindowList"
-msgstr "FőablAklista"
+msgstr "FőAblaklista"
 
 #. SetupWizard.ui:639
 msgid "MainPanelLauncher"

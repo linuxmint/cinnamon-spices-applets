@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-29 15:49+0200\n"
-"PO-Revision-Date: 2025-08-03 18:10+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-08-08 08:32+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:286
 msgid "unassigned"
@@ -116,8 +116,8 @@ msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
 msgstr ""
-"Itt kereshet más állomásokat az interneten keresztül elérhető ingyenes "
-"rádióadatbázisban."
+"Itt kereshet más állomásokat az interneten keresztül elérhető ingyenes rádió-"
+"adatbázisban."
 
 #. applet.js:405
 msgid ""
@@ -292,11 +292,11 @@ msgstr "Hangbeállítások"
 
 #. applet.js:2734
 msgid "Watch on YT"
-msgstr "Nézd meg a YT-n"
+msgstr "Tekintse meg a YouTube-on"
 
 #. applet.js:2741
 msgid "Try to download it from YT (unsafe)"
-msgstr "Próbáld meg letölteni a YT-ről (nem biztonságos)"
+msgstr "Próbálja meg letölteni a YouTube-ról (nem biztonságos)"
 
 #. applet.js:2761
 msgid "Recently Played Stations:"
@@ -384,7 +384,7 @@ msgstr "Kérjük, jelentkezzen ki, majd jelentkezzen be"
 
 #. applet.js:4093
 msgid "to finalize yt-dlp update"
-msgstr "az yt-dlp frissítés véglegesítéséhez"
+msgstr "a yt-dlp frissítés véglegesítéséhez"
 
 #. applet.js:4226
 msgid "Nothing to save."
@@ -400,7 +400,7 @@ msgstr "Ez felváltja az összes jelenlegi rádióállomást."
 
 #. applet.js:4258
 msgid "Are you sure you want to continue?"
-msgstr "Biztos vagy benne, hogy folytatni akarod?"
+msgstr "Biztos benne, hogy folytatni kívánja?"
 
 #. applet.js:4318
 msgid "Update in progress"
@@ -416,11 +416,11 @@ msgstr "A frissítés sikeresen befejeződött"
 
 #. applet.js:4539 applet.js:4595
 msgid "ERROR: Invalid YT video URL!"
-msgstr "HIBA: Érvénytelen YT-videó URL-je!"
+msgstr "HIBA: Érvénytelen a YouTube-videó URL-címe"
 
 #. applet.js:4564
 msgid "Unable to extract a single soundtrack"
-msgstr "HIBA: Érvénytelen YT-videó URL-je"
+msgstr "Nem szerezhető meg kizárólag a hangsáv"
 
 #. applet.js:4564
 msgid "Maybe it's a playlist?"
@@ -456,9 +456,9 @@ msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
-"A vízszintes OSD-hez le kell töltenie az OSD150 bővítményt.\n"
-"Kattintson a Letöltés gombra, majd keresse meg az OSD150-et, és válassza a ⬇ "
-"gombot."
+"A vízszintes OSD kijelzéshez le kell töltenie az OSD150 bővítményt.\n"
+"Kattintson a Letöltés gombra, majd keresse meg az OSD150 bővítményt, és "
+"válassza a ⬇ gombot."
 
 #. applet.js:4900
 #, javascript-format
@@ -519,7 +519,7 @@ msgstr "Felvétel"
 #. settings-schema.json->pageYT->title
 #. applet.js:4940
 msgid "YT"
-msgstr "YT"
+msgstr "YouTube"
 
 #. settings-schema.json->pageScheduling->title
 #. applet.js:4941
@@ -541,7 +541,7 @@ msgstr "Az ébresztőóra beállítása..."
 
 #. applet.js:4964
 msgid "Extract soundtrack from YouTube video..."
-msgstr "Hangsáv kinyerése a YouTube videóból..."
+msgstr "Hangsáv kinyerése a YouTube videóból…"
 
 #. applet.js:4986 applet.js:5145
 msgid "(auto)"
@@ -604,7 +604,7 @@ msgstr "Hangerőszint megjelenítése az ikon közelében"
 
 #. applet.js:5213
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr "Szüksége van az 'Albumborító 3.0' asztalkalmazásra"
+msgstr "Szüksége van az „Albumborító 3.0” asztalkalmazásra"
 
 #. applet.js:5214
 msgid ""
@@ -618,7 +618,7 @@ msgstr "Asztalkalmazások"
 
 #. applet.js:5231
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr "Aktiválnia kell az 'Albumborító 3.0' asztalkalmazást."
+msgstr "Be kell kapcsolnia az „Albumborító 3.0” asztalkalmazást"
 
 #. applet.js:5232
 msgid ""
@@ -710,7 +710,9 @@ msgstr "Néhány függőség nincs telepítve!"
 
 #. lib/checkTranslations.js:109
 msgid "To finalize the translation installation, please restart Cinnamon"
-msgstr "A fordítás telepítésének befejezéséhez indítsa újra a Cinnamont"
+msgstr ""
+"A fordítás telepítésének befejezéséhez indítsa újra a Cinnamon asztali "
+"környezetet"
 
 #. lib/util.js:245
 #, javascript-format
@@ -823,7 +825,9 @@ msgstr "Bejegyzés szerkesztése"
 
 #. metadata.json->description
 msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
-msgstr "Az egyik legjobb internetes rádióvevő és -felvevő a Cinnamon számára"
+msgstr ""
+"Az egyik legjobb internetes rádióvevő és -felvevő a Cinnamon asztali "
+"környezet számára"
 
 #. metadata.json->name
 msgid "Radio3.0"
@@ -871,7 +875,7 @@ msgstr "Keresési eredmények"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
 msgid "Settings Window"
-msgstr "Beállítások Ablak"
+msgstr "Beállítások ablak"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -1190,7 +1194,7 @@ msgstr ""
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
-msgstr "Kapcsolja be a rádiót, amikor a Cinnamon elindul"
+msgstr "Kapcsolja be a rádiót, amikor a Cinnamon asztali környezet elindul"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
 msgid ""
@@ -1366,7 +1370,8 @@ msgstr "OSD megjelenítése a hangerő módosításakor"
 #. settings-schema.json->volume-show-osd->tooltip
 msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
 msgstr ""
-"Meg kell jeleníteni az OSD-t (On-Screen Display) a hangerő módosításakor?"
+"Meg kell jeleníteni az OSD kijelzést (On-Screen Display) a hangerő "
+"módosításakor?"
 
 #. settings-schema.json->volume-show-osd-starting-radio->description
 msgid "Show volume OSD when changing radio station"
@@ -1374,7 +1379,7 @@ msgstr "Hangerő OSD megjelenítése rádióállomás váltásakor"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr "'%' megjelenítése az OSD-ben"
+msgstr "„%” megjelenítése az OSD kijelzésben"
 
 #. settings-schema.json->show-horizontal-osd->description
 msgid "Show horizontal OSD"
@@ -1460,7 +1465,7 @@ msgstr "Rendszerelemek megjelenítése a menüben"
 msgid ""
 "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
 msgstr ""
-"Meg akarja jeleníteni a 'Configure...' és a 'Hangbeállítások' elemet a "
+"Meg kívánja jeleníteni a „Beállítások…” és a „Hangbeállítások” elemeket a "
 "menüben?"
 
 #. settings-schema.json->show-reload->description
@@ -1961,14 +1966,14 @@ msgid ""
 "Chromium, you can select the method (in parentheses) you chose to save "
 "cookies."
 msgstr ""
-"A YouTube cookie-kat használ annak meghatározására, hogy mely videókat "
-"nézheti meg. A Chromium esetében kiválaszthatja (zárójelben) a cookie-k "
-"mentésének módját."
+"A YouTube sötiket használ annak meghatározására, hogy mely videókat nézheti "
+"meg. A Chromium esetében kiválaszthatja (zárójelben) a sütik mentésének a "
+"módját."
 
 #. settings-schema.json->show-yt-progress->description
 msgid "Display, under the icon, the progress of downloads from YT."
 msgstr ""
-"Az ikon alatt jelenítse meg a YOUTUBE-ból történő letöltések folyamatát."
+"Az ikon alatt jelenítse meg a YouTube-ról történő letöltések folyamatát."
 
 #. settings-schema.json->yt-progress-interval->description
 msgid "Progression interval (ms)"
@@ -2952,7 +2957,7 @@ msgstr "Dél-afrikai Köztársaság - ZA"
 
 #. settings-schema.json->search-country->options
 msgid "South Georgia And The South Sandwich Islands - GS"
-msgstr "Dél-Georgia és Déli-Sandwich-szigetek - GS"
+msgstr "Déli-Georgia és Déli-Sandwich-szigetek - GS"
 
 #. settings-schema.json->search-country->options
 msgid "South Sudan - SS"
