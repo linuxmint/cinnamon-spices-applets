@@ -89,6 +89,21 @@ GPasteHistoryItem.prototype = {
             this.actor.hide();
         }
     },
+    /*
+     * Set specified uuid and get respective history item's content
+     */
+    setUuid: function(uuid) {
+        this._uuid = uuid;
+        if (uuid != null) {
+            this._applet.client.get_element(uuid, (client, result) => {
+                const value = client.get_element_finish(result);
+                this.label.set_text(value.replace(/[\t\n\r]/g, ''));
+            });
+            this.actor.show();
+        } else {
+            this.actor.hide();
+        }
+    },
 
     /*
      * Refresh history item's content
