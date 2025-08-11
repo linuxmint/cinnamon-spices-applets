@@ -1,3 +1,6 @@
+### v2.5.2~20250811
+  * Speed improvement.
+
 ### v2.5.1~20250810
   * Adds the amounts of Buffer memory, Cache, and Shared memory to the tooltip.
   * Improved tooltip display.
