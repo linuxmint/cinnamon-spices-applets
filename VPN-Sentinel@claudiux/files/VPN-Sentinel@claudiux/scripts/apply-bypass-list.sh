@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NAME="VPN-Sentinel"
 UUID="VPN-Sentinel@claudiux"
@@ -18,7 +18,7 @@ domains=$(cat ${DOMAINS_FILE})
 gatewayIP=$(echo -n $(ip route | grep default | awk '{print $3}'))
 interface=$(echo -n $(nmcli -t -g TYPE,DEVICE,NAME connection show | grep -E "ethernet|wireless" | awk -F":" '{print $3}' | tr "\n" "|" | awk -F"|" '{print $1}'))
 
-echo '#!/bin/bash' > ${RESET_FILE}
+echo '#!/usr/bin/env bash' > ${RESET_FILE}
 
 for d in $domains; do {
     #for anip in $(host -c IN $d | awk '{print $4}' | tr "\n" " "); do {

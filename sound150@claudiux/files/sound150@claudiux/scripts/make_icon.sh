@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 path=$1
 [[ -z $path ]] && exit 1
 bn=$(basename $path)

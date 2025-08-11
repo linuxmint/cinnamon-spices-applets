@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-23 09:28+0100\n"
-"PO-Revision-Date: 2025-06-20 21:32+0200\n"
+"PO-Revision-Date: 2025-08-06 14:53+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #. 3.8/weather-applet.js:20687
@@ -42,7 +42,7 @@ msgstr "Hibás földrajzi helyzetformátum"
 
 #. 3.0/applet.js:172 3.8/weather-applet.js:20693
 msgid "Key Blocked"
-msgstr "Kulcs ideiglenesen letilva"
+msgstr "Kulcs ideiglenesen letiltva"
 
 #. 3.0/applet.js:173 3.8/weather-applet.js:20694
 msgid "Can't find location"
@@ -1183,7 +1183,7 @@ msgstr "Borult és szeles idő"
 
 #. 3.0/us_weather.js:485 3.8/weather-applet.js:14285
 msgid "Snowy rain"
-msgstr "Havaseső"
+msgstr "Havas eső"
 
 #. 3.0/us_weather.js:520 3.8/weather-applet.js:14320
 msgid "Freezing rain and snow"
@@ -2736,16 +2736,16 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "Megadhatja a \"szélesség, hosszúság\" koordinátákat (pl. 51,5085, -0,1257), "
 "vagy használhatja a \"Város,ország-kódot\" (pl. London, Egyesült Királyság), "
 "vagy megpróbálhatja megadni a {Házszám} {Utca} {Város/Város} {Irányítószám} "
 "kódot. {Ország}. A keresési algoritmus nagyon rugalmas a formátumhoz. 3 "
 "másodperc elteltével a megadott cím beírása nélkül automatikusan "
-"lecserélődik a választás érvényesítésére. Üzemeltető: "
-"nominatim.openstreetmap.org."
+"lecserélődik a választás érvényesítésére. Üzemeltető: nominatim."
+"openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -3000,11 +3000,11 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "A legtöbb esetben a helymeghatározás automatikusan működik, de kézzel is "
 "megadhatja a koordinátákat „szélességi,hosszúsági” koordinátákkal (például: "

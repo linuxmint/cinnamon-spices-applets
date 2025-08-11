@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 Gsm=($(lsblk | grep -v -e '├─' -e '└─' -e 'NAME' | awk '{print $1}'))
 
 Titems=${#Gsm[@]}
@@ -11,10 +11,10 @@ while [ $Count -lt $Titems ];do
 IFS="
 "
 CSmrt=($(smartctl --info '/dev/'${Gsm[Count]} |
-grep -e 'SMART support' -e 'Device Model' -e 'User Capacity' | 
+grep -e 'SMART support' -e 'Device Model' -e 'User Capacity' |
 cut -d: -f2 |
 sed  -e 's/^ //m;s/^    //m;s/^   //m' |
-cut -d "[" -f2 | 
+cut -d "[" -f2 |
 sed 's/\]//m'))
 
 Dtmp=${CSmrt[3]}
@@ -27,4 +27,4 @@ fi;fi;
 Count=$((Count+1))
 unset CSmrt
 done;
-printf "\n" 
+printf "\n"

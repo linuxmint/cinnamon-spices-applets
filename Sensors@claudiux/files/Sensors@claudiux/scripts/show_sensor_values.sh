@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 export TEXTDOMAIN="Sensors@claudiux"
 export TEXTDOMAINDIR="${HOME}/.local/share/locale"
 ICON=$HOME/.local/share/cinnamon/applets/Sensors@claudiux/icon.png

@@ -1,3 +1,7 @@
+### v3.6.0~20250808
+  * Improved speed.
+  * Code cleanup.
+
 ### v3.5.0~20250629
   * Add option: Ignore Youtube features.
 

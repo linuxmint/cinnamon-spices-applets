@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-28 08:31-0400\n"
+"POT-Creation-Date: 2025-08-10 18:05+0200\n"
 "PO-Revision-Date: 2024-11-20 02:12+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,140 +18,342 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. 3.4/DataProviders.js:49 4.0/DataProviders.js:47 5.6/DataProviders.js:47
-#. 6.4/applet.js:35 6.0/DataProviders.js:52
-msgid "/s"
-msgstr "/s"
-
 #. 6.4->settings-schema.json->pageCPU->title
-#. 3.4/DataProviders.js:58 3.4/prefs.js:195 4.0/DataProviders.js:55
-#. 4.0/prefs.js:303 5.6/DataProviders.js:55 5.6/prefs.js:303
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.4/applet.js:727 6.0/DataProviders.js:60 6.0/prefs.js:303
-#. 3.4/prefsui.glade:434 4.0/prefsui.glade:580 5.6/prefsui.glade:580
-#. 3.0/prefsui.glade:452 3.2/prefsui.glade:504 6.0/prefsui.glade:580
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:900
+#. 6.4/applet.js:936 3.4/DataProviders.js:58 3.4/prefs.js:195
+#. 5.6/DataProviders.js:55 5.6/prefs.js:303 4.0/DataProviders.js:55
+#. 4.0/prefs.js:303 3.0/prefsui.glade:452 3.2/prefsui.glade:504
+#. 6.0/prefsui.glade:580 3.4/prefsui.glade:434 5.6/prefsui.glade:580
+#. 4.0/prefsui.glade:580
 msgid "CPU"
 msgstr "CPU"
 
-#. 3.4/DataProviders.js:126 4.0/DataProviders.js:123 5.6/DataProviders.js:123
-#. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 6.4/applet.js:752
-#. 6.0/DataProviders.js:128
+#. 3.0/DataProviders.js:113 3.2/DataProviders.js:113 6.0/DataProviders.js:128
+#. 3.4/DataProviders.js:126 5.6/DataProviders.js:123 4.0/DataProviders.js:123
 msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
-#. 3.4/DataProviders.js:129 4.0/DataProviders.js:126 5.6/DataProviders.js:126
-#. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.4/applet.js:755
-#. 6.0/DataProviders.js:131
+#. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
+#. 6.4/applet.js:938 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Nucli"
 
-#. 3.4/DataProviders.js:141 4.0/DataProviders.js:138 5.6/DataProviders.js:138
-#. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.4/applet.js:635
-#. 6.0/DataProviders.js:143
+#. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
+#. 6.4/applet.js:716 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEMÒRIA"
 
-#. 3.4/DataProviders.js:161 4.0/DataProviders.js:158 5.6/DataProviders.js:158
-#. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 6.4/applet.js:666
-#. 6.0/DataProviders.js:163
+#. 3.0/DataProviders.js:163 3.2/DataProviders.js:163 6.0/DataProviders.js:163
+#. 3.4/DataProviders.js:161 5.6/DataProviders.js:158 4.0/DataProviders.js:158
 msgid "----------- Memory -----------"
 msgstr "----------- Memòria -----------"
 
-#. 3.4/DataProviders.js:162 4.0/DataProviders.js:159 5.6/DataProviders.js:159
-#. 6.4/applet.js:667 6.0/DataProviders.js:164
-msgid "Used:"
-msgstr "En ús:"
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 6.4/applet.js:41
+msgid "Usedup:"
+msgstr "Utilitzat:"
 
-#. 3.4/DataProviders.js:162 4.0/DataProviders.js:159 5.6/DataProviders.js:159
-#. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 6.4/applet.js:667
-#. 6.0/DataProviders.js:164
+#. 3.0/DataProviders.js:165 3.2/DataProviders.js:165 6.0/DataProviders.js:164
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "A la cau:"
 
-#. 3.4/DataProviders.js:162 4.0/DataProviders.js:159 5.6/DataProviders.js:159
-#. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 6.4/applet.js:667
-#. 6.0/DataProviders.js:164
+#. 3.0/DataProviders.js:166 3.2/DataProviders.js:166 6.0/DataProviders.js:164
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffer:"
 
-#. 3.4/DataProviders.js:162 4.0/DataProviders.js:159 5.6/DataProviders.js:159
-#. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.4/applet.js:667
-#. 6.0/DataProviders.js:164
+#. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
+#. 6.4/applet.js:42 6.4/applet.js:775 3.4/DataProviders.js:162
+#. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Lliure:"
 
-#. 3.4/DataProviders.js:176 4.0/DataProviders.js:173 5.6/DataProviders.js:173
-#. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.4/applet.js:686
-#. 6.0/DataProviders.js:178
+#. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
+#. 6.4/applet.js:855 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "INTERCANVI"
 
-#. 3.4/DataProviders.js:194 4.0/DataProviders.js:193 5.6/DataProviders.js:193
-#. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 6.4/applet.js:710
-#. 6.0/DataProviders.js:221
+#. 3.0/DataProviders.js:199 3.2/DataProviders.js:199 6.0/DataProviders.js:221
+#. 3.4/DataProviders.js:194 5.6/DataProviders.js:193 4.0/DataProviders.js:193
 msgid "------------ Swap ------------"
 msgstr "------------ Intercanvi ------------"
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
-#. 3.4/DataProviders.js:195 4.0/DataProviders.js:194 5.6/DataProviders.js:194
-#. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.4/applet.js:711
-#. 6.0/DataProviders.js:222 3.4/prefsui.glade:761 4.0/prefsui.glade:907
-#. 5.6/prefsui.glade:907 3.0/prefsui.glade:785 3.2/prefsui.glade:837
-#. 6.0/prefsui.glade:907
+#. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
+#. 6.4/applet.js:43 6.4/applet.js:880 3.4/DataProviders.js:195
+#. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
+#. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
+#. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
 msgid "Swap"
 msgstr "Intercanvi"
 
-#. 3.4/DataProviders.js:205 4.0/DataProviders.js:204 5.6/DataProviders.js:204
-#. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.4/applet.js:776
-#. 6.0/DataProviders.js:232
+#. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
+#. 6.4/applet.js:960 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "XARXA"
 
-#. 3.4/DataProviders.js:289 4.0/DataProviders.js:287 5.6/DataProviders.js:287
-#. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 6.4/applet.js:856
-#. 6.0/DataProviders.js:323
+#. 3.0/DataProviders.js:305 3.2/DataProviders.js:305 6.0/DataProviders.js:323
+#. 3.4/DataProviders.js:289 5.6/DataProviders.js:287 4.0/DataProviders.js:287
 msgid "---------- Networks ----------"
 msgstr "---------- Xarxes ----------"
 
-#. 3.4/DataProviders.js:300 4.0/DataProviders.js:298 5.6/DataProviders.js:298
-#. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.4/applet.js:868
-#. 6.0/DataProviders.js:334
+#. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
+#. 6.4/applet.js:44 6.4/applet.js:1069 3.4/DataProviders.js:300
+#. 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Baixada:"
 
-#. 3.4/DataProviders.js:301 4.0/DataProviders.js:299 5.6/DataProviders.js:299
-#. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.4/applet.js:869
-#. 6.0/DataProviders.js:335
+#. 3.0/DataProviders.js:308 3.0/DataProviders.js:309 3.2/DataProviders.js:308
+#. 3.2/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KB/s)"
+
+#. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
+#. 6.4/applet.js:45 6.4/applet.js:1070 3.4/DataProviders.js:301
+#. 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Pujada:"
 
-#. 3.4/DataProviders.js:317 4.0/DataProviders.js:315 5.6/DataProviders.js:315
-#. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.4/applet.js:886
-#. 6.0/DataProviders.js:351
+#. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
+#. 6.4/applet.js:1087 3.4/DataProviders.js:317 5.6/DataProviders.js:315
+#. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISC"
 
-#. 3.4/DataProviders.js:378 4.0/DataProviders.js:376 5.6/DataProviders.js:376
-#. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 6.4/applet.js:966
-#. 6.0/DataProviders.js:412
+#. 3.0/DataProviders.js:408 3.2/DataProviders.js:408 6.0/DataProviders.js:412
+#. 3.4/DataProviders.js:378 5.6/DataProviders.js:376 4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
 msgstr "------------ Discs -----------"
 
-#. 3.4/DataProviders.js:386 4.0/DataProviders.js:384 5.6/DataProviders.js:384
-#. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.4/applet.js:978
-#. 6.0/DataProviders.js:420
+#. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
+#. 6.4/applet.js:46 6.4/applet.js:1197 3.4/DataProviders.js:386
+#. 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Lectura:"
 
-#. 3.4/DataProviders.js:387 4.0/DataProviders.js:385 5.6/DataProviders.js:385
-#. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.4/applet.js:979
-#. 6.0/DataProviders.js:421
+#. 3.0/DataProviders.js:411 3.0/DataProviders.js:412 3.2/DataProviders.js:411
+#. 3.2/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MB/s)"
+
+#. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
+#. 6.4/applet.js:47 6.4/applet.js:1198 3.4/DataProviders.js:387
+#. 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Escriptura:"
 
-#. 3.4/applet.js:60 4.0/applet.js:64 5.6/applet.js:70 6.0/applet.js:72
+#. 3.0/ErrorApplet.js:28 3.0/ErrorApplet.js:34 3.2/ErrorApplet.js:28
+#. 3.2/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "Error del monitor de sistema multi-nucli."
+
+#. 3.0/applet.js:141 3.2/applet.js:139 6.0/applet.js:318 3.4/applet.js:264
+#. 5.6/applet.js:283 4.0/applet.js:275
+msgid "Preferences"
+msgstr "Preferències"
+
+#. 3.0/applet.js:323 3.2/applet.js:334
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Si us plau instal·leu el paquet \"gir1.2-gtop-2.0\"."
+
+#. 3.0/applet.js:328 3.2/applet.js:339
+msgid "Reload this applet"
+msgstr "Recarregar aquesta miniaplicació"
+
+#. 6.4->settings-schema.json->CPU_enabled->description
+#. 6.4->settings-schema.json->Mem_enabled->description
+#. 6.4->settings-schema.json->Net_enabled->description
+#. 6.4->settings-schema.json->Disk_enabled->description
+#. 3.0/prefs.js:279 3.0/prefs.js:393 3.2/prefs.js:283 3.2/prefs.js:398
+#. 6.0/prefs.js:483 6.0/prefs.js:619 3.4/prefs.js:327 3.4/prefs.js:463
+#. 5.6/prefs.js:483 5.6/prefs.js:619 4.0/prefs.js:483 4.0/prefs.js:619
+#. 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
+#. 3.0/prefsui.glade:1178 3.2/prefsui.glade:356 3.2/prefsui.glade:528
+#. 3.2/prefsui.glade:908 3.2/prefsui.glade:1230 6.0/prefsui.glade:321
+#. 6.0/prefsui.glade:603 6.0/prefsui.glade:977 6.0/prefsui.glade:1312
+#. 3.4/prefsui.glade:286 3.4/prefsui.glade:457 3.4/prefsui.glade:831
+#. 3.4/prefsui.glade:1166 5.6/prefsui.glade:321 5.6/prefsui.glade:603
+#. 5.6/prefsui.glade:977 5.6/prefsui.glade:1312 4.0/prefsui.glade:321
+#. 4.0/prefsui.glade:603 4.0/prefsui.glade:977 4.0/prefsui.glade:1312
+msgid "Enable"
+msgstr "Activar"
+
+#. 3.0/prefs.js:290 3.2/prefs.js:294 6.0/prefs.js:494 3.4/prefs.js:338
+#. 5.6/prefs.js:494 4.0/prefs.js:494
+msgid "Down"
+msgstr "Baixada"
+
+#. 3.0/prefs.js:298 3.2/prefs.js:302 6.0/prefs.js:502 3.4/prefs.js:346
+#. 5.6/prefs.js:502 4.0/prefs.js:502
+msgid "Up"
+msgstr "Pujada"
+
+#. 3.0/prefs.js:406 3.2/prefs.js:414 6.0/prefs.js:635 3.4/prefs.js:479
+#. 5.6/prefs.js:635 4.0/prefs.js:635
+msgid "Read"
+msgstr "Lectura"
+
+#. 3.0/prefs.js:414 3.2/prefs.js:423 6.0/prefs.js:644 3.4/prefs.js:488
+#. 5.6/prefs.js:644 4.0/prefs.js:644
+msgid "Write"
+msgstr "Escriptura"
+
+#. 3.0/prefs.js:530 3.2/prefs.js:540
+msgid "Error while saving file:"
+msgstr "Error en guardar el fitxer:"
+
+#. 6.0/DataProviders.js:52 6.4/applet.js:34 3.4/DataProviders.js:49
+#. 5.6/DataProviders.js:47 4.0/DataProviders.js:47
+msgid "/s"
+msgstr "/s"
+
+#. 6.0/DataProviders.js:164 6.4/applet.js:40 6.4/applet.js:775
+#. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
+msgid "Used:"
+msgstr "En ús:"
+
+#. 6.0/applet.js:72 3.4/applet.js:60 5.6/applet.js:70 4.0/applet.js:64
 msgid "Dependency missing"
 msgstr "Dependència necessària no instal·lada"
+
+#. 6.0/applet.js:74 5.6/applet.js:72 4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Si us plau instal·leu el paquet GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"per utilitzar "
+
+#. 6.0/applet.js:321 5.6/applet.js:285 4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "Refrescar els gràfics"
+
+#. 6.0/applet.js:325 6.4/applet.js:336
+msgid "Without any graphics"
+msgstr "Sense gràfics"
+
+#. 6.0/applet.js:331 6.4/applet.js:342
+msgid "With graphics"
+msgstr "Amb gràfics"
+
+#. 6.0/applet.js:341 6.4/applet.js:353
+msgid "Drop Memory Cache (needs root rights)"
+msgstr "Buidar la memòria cau (necessita privilegis de root)"
+
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "00-20"
+msgstr "00-20"
+
+#. 6.4->settings-schema.json->CPU_activity_20_40->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "20-40"
+msgstr "20-40"
+
+#. 6.4->settings-schema.json->CPU_activity_40_60->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "40-60"
+msgstr "40-60"
+
+#. 6.4->settings-schema.json->CPU_activity_60_80->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "60-80"
+msgstr "60-80"
+
+#. 6.4->settings-schema.json->CPU_activity_80_100->description
+#. 6.0/prefs.js:335 5.6/prefs.js:335 4.0/prefs.js:335
+msgid "80-100"
+msgstr "80-100"
+
+#. 6.0/util.js:244 5.6/util.js:244
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "Ha fallat l'execució de '%s':"
+
+#. 6.4/applet.js:37
+#, fuzzy
+msgid "Core 128:"
+msgstr "Nucli"
+
+#. 6.4/applet.js:38
+msgid "Unrecoverable:"
+msgstr ""
+
+#. 6.4/applet.js:39
+msgid "Recoverable:"
+msgstr ""
+
+#. 6.4/applet.js:326
+#, fuzzy
+msgid "Refresh All"
+msgstr "Refrescar els gràfics"
+
+#. 6.4/applet.js:432
+msgid "root"
+msgstr ""
+
+#. 6.4->settings-schema.json->pageNetwork->title
+#. 6.4/applet.js:600 6.4/applet.js:967 3.0/prefsui.glade:1154
+#. 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289 3.4/prefsui.glade:1143
+#. 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
+msgid "Network"
+msgstr "Xarxa"
+
+#. 6.4/applet.js:658 6.4/applet.js:1096 6.4/applet.js:1181
+#, fuzzy
+msgid "Disks"
+msgstr "Disc IO"
+
+#. 6.4->settings-schema.json->pageMem->title
+#. 6.4/applet.js:770 3.0/prefsui.glade:832 3.2/prefsui.glade:884
+#. 6.0/prefsui.glade:954 3.4/prefsui.glade:808 5.6/prefsui.glade:954
+#. 4.0/prefsui.glade:954
+msgid "Memory"
+msgstr "Memòria"
+
+#. 6.4/applet.js:804
+msgid "Buffers/Cache/Shared"
+msgstr ""
+
+#. 6.4/applet.js:832 6.4/applet.js:930
+msgid ":"
+msgstr ""
+
+#. 6.4/applet.js:834 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
+#. 4.0/prefsui.glade:809
+msgid "Buffer"
+msgstr "Buffer"
+
+#. 6.4/applet.js:834
+#, fuzzy
+msgid "Cache"
+msgstr "Cached"
+
+#. 6.4/applet.js:834
+msgid "Shared"
+msgstr ""
+
+#. 6.4/applet.js:926
+msgid "CPUs"
+msgstr ""
+
+#. 6.4/applet.js:1054
+#, fuzzy
+msgid "Networks"
+msgstr "Xarxa"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -167,150 +369,6 @@ msgstr ""
 "\tArch: libgtop\n"
 "per utilitzar "
 
-#. 3.4/applet.js:264 4.0/applet.js:275 5.6/applet.js:283 3.0/applet.js:141
-#. 3.2/applet.js:139 6.0/applet.js:318
-msgid "Preferences"
-msgstr "Preferències"
-
-#. 6.4->settings-schema.json->CPU_enabled->description
-#. 6.4->settings-schema.json->Mem_enabled->description
-#. 6.4->settings-schema.json->Net_enabled->description
-#. 6.4->settings-schema.json->Disk_enabled->description
-#. 3.4/prefs.js:327 3.4/prefs.js:463 4.0/prefs.js:483 4.0/prefs.js:619
-#. 5.6/prefs.js:483 5.6/prefs.js:619 3.0/prefs.js:279 3.0/prefs.js:393
-#. 3.2/prefs.js:283 3.2/prefs.js:398 6.0/prefs.js:483 6.0/prefs.js:619
-#. 3.4/prefsui.glade:286 3.4/prefsui.glade:457 3.4/prefsui.glade:831
-#. 3.4/prefsui.glade:1166 4.0/prefsui.glade:321 4.0/prefsui.glade:603
-#. 4.0/prefsui.glade:977 4.0/prefsui.glade:1312 5.6/prefsui.glade:321
-#. 5.6/prefsui.glade:603 5.6/prefsui.glade:977 5.6/prefsui.glade:1312
-#. 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
-#. 3.0/prefsui.glade:1178 3.2/prefsui.glade:356 3.2/prefsui.glade:528
-#. 3.2/prefsui.glade:908 3.2/prefsui.glade:1230 6.0/prefsui.glade:321
-#. 6.0/prefsui.glade:603 6.0/prefsui.glade:977 6.0/prefsui.glade:1312
-msgid "Enable"
-msgstr "Activar"
-
-#. 3.4/prefs.js:338 4.0/prefs.js:494 5.6/prefs.js:494 3.0/prefs.js:290
-#. 3.2/prefs.js:294 6.0/prefs.js:494
-msgid "Down"
-msgstr "Baixada"
-
-#. 3.4/prefs.js:346 4.0/prefs.js:502 5.6/prefs.js:502 3.0/prefs.js:298
-#. 3.2/prefs.js:302 6.0/prefs.js:502
-msgid "Up"
-msgstr "Pujada"
-
-#. 3.4/prefs.js:479 4.0/prefs.js:635 5.6/prefs.js:635 3.0/prefs.js:406
-#. 3.2/prefs.js:414 6.0/prefs.js:635
-msgid "Read"
-msgstr "Lectura"
-
-#. 3.4/prefs.js:488 4.0/prefs.js:644 5.6/prefs.js:644 3.0/prefs.js:414
-#. 3.2/prefs.js:423 6.0/prefs.js:644
-msgid "Write"
-msgstr "Escriptura"
-
-#. 4.0/applet.js:66 5.6/applet.js:72 6.0/applet.js:74
-msgid ""
-"Please install the GTop package\n"
-"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
-"\tFedora: libgtop2-devel\n"
-"\tArch: libgtop\n"
-"\topenSUSE: libgtop-devel\n"
-"to use "
-msgstr ""
-"Si us plau instal·leu el paquet GTop\n"
-"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
-"\tFedora: libgtop2-devel\n"
-"\tArch: libgtop\n"
-"\topenSUSE: libgtop-devel\n"
-"per utilitzar "
-
-#. 4.0/applet.js:277 5.6/applet.js:285 6.0/applet.js:321
-msgid "Refresh graphs"
-msgstr "Refrescar els gràfics"
-
-#. 4.0/prefs.js:335 5.6/prefs.js:335 6.0/prefs.js:335
-msgid "00-20"
-msgstr "00-20"
-
-#. 6.4->settings-schema.json->CPU_activity_20_40->description
-#. 4.0/prefs.js:335 5.6/prefs.js:335 6.0/prefs.js:335
-msgid "20-40"
-msgstr "20-40"
-
-#. 6.4->settings-schema.json->CPU_activity_40_60->description
-#. 4.0/prefs.js:335 5.6/prefs.js:335 6.0/prefs.js:335
-msgid "40-60"
-msgstr "40-60"
-
-#. 6.4->settings-schema.json->CPU_activity_60_80->description
-#. 4.0/prefs.js:335 5.6/prefs.js:335 6.0/prefs.js:335
-msgid "60-80"
-msgstr "60-80"
-
-#. 6.4->settings-schema.json->CPU_activity_80_100->description
-#. 4.0/prefs.js:335 5.6/prefs.js:335 6.0/prefs.js:335
-msgid "80-100"
-msgstr "80-100"
-
-#. 5.6/util.js:244 6.0/util.js:244
-#, javascript-format
-msgid "Execution of '%s' failed:"
-msgstr "Ha fallat l'execució de '%s':"
-
-#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164
-msgid "Usedup:"
-msgstr "Utilitzat:"
-
-#. 3.0/DataProviders.js:308 3.0/DataProviders.js:309 3.2/DataProviders.js:308
-#. 3.2/DataProviders.js:309
-msgid "(KiB/s)"
-msgstr "(KB/s)"
-
-#. 3.0/DataProviders.js:411 3.0/DataProviders.js:412 3.2/DataProviders.js:411
-#. 3.2/DataProviders.js:412
-msgid "(MiB/s)"
-msgstr "(MB/s)"
-
-#. 3.0/ErrorApplet.js:28 3.0/ErrorApplet.js:34 3.2/ErrorApplet.js:28
-#. 3.2/ErrorApplet.js:34
-msgid "Multi-Core System Monitor Error."
-msgstr "Error del monitor de sistema multi-nucli."
-
-#. 3.0/applet.js:323 3.2/applet.js:334
-msgid "Please install \"gir1.2-gtop-2.0\" package."
-msgstr "Si us plau instal·leu el paquet \"gir1.2-gtop-2.0\"."
-
-#. 3.0/applet.js:328 3.2/applet.js:339
-msgid "Reload this applet"
-msgstr "Recarregar aquesta miniaplicació"
-
-#. 3.0/prefs.js:530 3.2/prefs.js:540
-msgid "Error while saving file:"
-msgstr "Error en guardar el fitxer:"
-
-#. 6.4/applet.js:278
-#, fuzzy
-msgid "Refresh All"
-msgstr "Refrescar els gràfics"
-
-#. 6.4/applet.js:288 6.0/applet.js:325
-msgid "Without any graphics"
-msgstr "Sense gràfics"
-
-#. 6.4/applet.js:294 6.0/applet.js:331
-msgid "With graphics"
-msgstr "Amb gràfics"
-
-#. 6.4/applet.js:305 6.0/applet.js:341
-msgid "Drop Memory Cache (needs root rights)"
-msgstr "Buidar la memòria cau (necessita privilegis de root)"
-
-#. 6.4/applet.js:384
-msgid "root"
-msgstr ""
-
 #. metadata.json->name
 msgid "Multi-Core System Monitor"
 msgstr "Monitor de Sistema multi-nucli"
@@ -322,26 +380,14 @@ msgid ""
 msgstr "Mostra l'ús de CPU (per a tots els nuclis) i de la memòria."
 
 #. 6.4->settings-schema.json->pageGeneral->title
-#. 3.4/prefsui.glade:264 4.0/prefsui.glade:299 5.6/prefsui.glade:299
 #. 3.0/prefsui.glade:281 3.2/prefsui.glade:333 6.0/prefsui.glade:299
+#. 3.4/prefsui.glade:264 5.6/prefsui.glade:299 4.0/prefsui.glade:299
 msgid "General"
 msgstr "General"
 
-#. 6.4->settings-schema.json->pageMem->title
-#. 3.4/prefsui.glade:808 4.0/prefsui.glade:954 5.6/prefsui.glade:954
-#. 3.0/prefsui.glade:832 3.2/prefsui.glade:884 6.0/prefsui.glade:954
-msgid "Memory"
-msgstr "Memòria"
-
-#. 6.4->settings-schema.json->pageNetwork->title
-#. 3.4/prefsui.glade:1143 4.0/prefsui.glade:1289 5.6/prefsui.glade:1289
-#. 3.0/prefsui.glade:1154 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289
-msgid "Network"
-msgstr "Xarxa"
-
 #. 6.4->settings-schema.json->pageDisk->title
-#. 3.4/prefsui.glade:1489 4.0/prefsui.glade:1635 5.6/prefsui.glade:1635
 #. 3.0/prefsui.glade:1488 3.2/prefsui.glade:1540 6.0/prefsui.glade:1635
+#. 3.4/prefsui.glade:1489 5.6/prefsui.glade:1635 4.0/prefsui.glade:1635
 msgid "Disk IO"
 msgstr "Disc IO"
 
@@ -349,10 +395,10 @@ msgstr "Disc IO"
 #. 6.4->settings-schema.json->sectionGeneralColors->title
 #. 6.4->settings-schema.json->sectionCPUColors->title
 #. 6.4->settings-schema.json->sectionMemoryColors->title
-#. 3.4/prefsui.glade:392 3.4/prefsui.glade:564 4.0/prefsui.glade:494
-#. 4.0/prefsui.glade:710 5.6/prefsui.glade:494 5.6/prefsui.glade:710
 #. 3.0/prefsui.glade:411 3.0/prefsui.glade:584 3.2/prefsui.glade:463
 #. 3.2/prefsui.glade:636 6.0/prefsui.glade:494 6.0/prefsui.glade:710
+#. 3.4/prefsui.glade:392 3.4/prefsui.glade:564 5.6/prefsui.glade:494
+#. 5.6/prefsui.glade:710 4.0/prefsui.glade:494 4.0/prefsui.glade:710
 msgid "Colors"
 msgstr "Colors"
 
@@ -365,25 +411,25 @@ msgid "Options"
 msgstr ""
 
 #. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
-#. 4.0/prefsui.glade:538 5.6/prefsui.glade:538 6.0/prefsui.glade:538
+#. 6.0/prefsui.glade:538 5.6/prefsui.glade:538 4.0/prefsui.glade:538
 msgid "by activity level (in %):"
 msgstr "per nivell d'activitat (en %):"
 
 #. 6.4->settings-schema.json->sectionNetworkScaling->title
 #. 6.4->settings-schema.json->sectionDiskScaling->title
-#. 3.4/prefsui.glade:947 3.4/prefsui.glade:1293 4.0/prefsui.glade:1093
-#. 4.0/prefsui.glade:1439 5.6/prefsui.glade:1093 5.6/prefsui.glade:1439
 #. 3.0/prefsui.glade:972 3.0/prefsui.glade:1305 3.2/prefsui.glade:1024
 #. 3.2/prefsui.glade:1357 6.0/prefsui.glade:1093 6.0/prefsui.glade:1439
+#. 3.4/prefsui.glade:947 3.4/prefsui.glade:1293 5.6/prefsui.glade:1093
+#. 5.6/prefsui.glade:1439 4.0/prefsui.glade:1093 4.0/prefsui.glade:1439
 msgid "Scaling"
 msgstr "Escalat"
 
 #. 6.4->settings-schema.json->sectionNetworkDevices->title
 #. 6.4->settings-schema.json->sectionDiskDevices->title
-#. 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428 4.0/prefsui.glade:1228
-#. 4.0/prefsui.glade:1574 5.6/prefsui.glade:1228 5.6/prefsui.glade:1574
 #. 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443 3.2/prefsui.glade:1162
 #. 3.2/prefsui.glade:1495 6.0/prefsui.glade:1228 6.0/prefsui.glade:1574
+#. 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428 5.6/prefsui.glade:1228
+#. 5.6/prefsui.glade:1574 4.0/prefsui.glade:1228 4.0/prefsui.glade:1574
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -392,13 +438,13 @@ msgid "Your colors"
 msgstr ""
 
 #. 6.4->settings-schema.json->labelsOn->description
-#. 3.4/prefsui.glade:83 4.0/prefsui.glade:90 5.6/prefsui.glade:90
 #. 3.0/prefsui.glade:81 3.2/prefsui.glade:81 6.0/prefsui.glade:90
+#. 3.4/prefsui.glade:83 5.6/prefsui.glade:90 4.0/prefsui.glade:90
 msgid "Labels"
 msgstr "Etiquetes"
 
 #. 6.4->settings-schema.json->thickness->description
-#. 4.0/prefsui.glade:168 5.6/prefsui.glade:168 6.0/prefsui.glade:168
+#. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
 msgid "Curves thickness"
 msgstr "Gruix de les corves"
 
@@ -407,45 +453,66 @@ msgid "Limit height to the size of a colored icon"
 msgstr ""
 
 #. 6.4->settings-schema.json->refreshRate->description
-#. 3.4/prefsui.glade:133 4.0/prefsui.glade:140 5.6/prefsui.glade:140
 #. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 6.0/prefsui.glade:140
+#. 3.4/prefsui.glade:133 5.6/prefsui.glade:140 4.0/prefsui.glade:140
 msgid "Refresh Rate (ms)"
 msgstr "Freqüència de refresc (ms)"
 
 #. 6.4->settings-schema.json->labelColor->description
-#. 3.4/prefsui.glade:177 4.0/prefsui.glade:212 5.6/prefsui.glade:212
-#. 3.2/prefsui.glade:245 6.0/prefsui.glade:212
+#. 3.2/prefsui.glade:245 6.0/prefsui.glade:212 3.4/prefsui.glade:177
+#. 5.6/prefsui.glade:212 4.0/prefsui.glade:212
 msgid "Label Color"
 msgstr "Color de l'etiqueta"
 
 #. 6.4->settings-schema.json->backgroundColor->description
-#. 3.4/prefsui.glade:228 4.0/prefsui.glade:263 5.6/prefsui.glade:263
 #. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 6.0/prefsui.glade:263
+#. 3.4/prefsui.glade:228 5.6/prefsui.glade:263 4.0/prefsui.glade:263
 msgid "Background Color"
 msgstr "Color de fons"
+
+#. 6.4->settings-schema.json->CPU_labelOn->description
+#. 6.4->settings-schema.json->Mem_labelOn->description
+#. 6.4->settings-schema.json->Net_labelOn->description
+#. 6.4->settings-schema.json->Disk_labelOn->description
+#, fuzzy
+msgid "Label"
+msgstr "Etiquetes"
+
+#. 6.4->settings-schema.json->CPU_squared->description
+#. 6.4->settings-schema.json->Mem_squared->description
+#. 6.4->settings-schema.json->Net_squared->description
+#. 6.4->settings-schema.json->Disk_squared->description
+msgid "Square view"
+msgstr ""
 
 #. 6.4->settings-schema.json->CPU_width->description
 #. 6.4->settings-schema.json->Mem_width->description
 #. 6.4->settings-schema.json->Net_width->description
 #. 6.4->settings-schema.json->Disk_width->description
-#. 3.4/prefsui.glade:341 3.4/prefsui.glade:513 3.4/prefsui.glade:886
-#. 3.4/prefsui.glade:1232 4.0/prefsui.glade:376 4.0/prefsui.glade:659
-#. 4.0/prefsui.glade:1032 4.0/prefsui.glade:1378 5.6/prefsui.glade:376
-#. 5.6/prefsui.glade:659 5.6/prefsui.glade:1032 5.6/prefsui.glade:1378
 #. 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
 #. 3.0/prefsui.glade:1245 3.2/prefsui.glade:412 3.2/prefsui.glade:585
 #. 3.2/prefsui.glade:964 3.2/prefsui.glade:1297 6.0/prefsui.glade:376
 #. 6.0/prefsui.glade:659 6.0/prefsui.glade:1032 6.0/prefsui.glade:1378
+#. 3.4/prefsui.glade:341 3.4/prefsui.glade:513 3.4/prefsui.glade:886
+#. 3.4/prefsui.glade:1232 5.6/prefsui.glade:376 5.6/prefsui.glade:659
+#. 5.6/prefsui.glade:1032 5.6/prefsui.glade:1378 4.0/prefsui.glade:376
+#. 4.0/prefsui.glade:659 4.0/prefsui.glade:1032 4.0/prefsui.glade:1378
 msgid "Width"
 msgstr "Amplada"
 
+#. 6.4->settings-schema.json->CPU_mergeAll->description
+#. 6.4->settings-schema.json->Net_mergeAll->description
+#. 6.4->settings-schema.json->Disk_mergeAll->description
+msgid "Merge all"
+msgstr ""
+
 #. 6.4->settings-schema.json->CPU_byActivity->description
-#. 4.0/prefsui.glade:433 5.6/prefsui.glade:433 6.0/prefsui.glade:433
+#. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
 msgid "Color by activity level"
 msgstr "Color per nivell d'activitat"
 
 #. 6.4->settings-schema.json->CPU_useProgressiveColors->description
-#. 4.0/prefsui.glade:460 5.6/prefsui.glade:460 6.0/prefsui.glade:460
+#. 6.0/prefsui.glade:460 5.6/prefsui.glade:460 4.0/prefsui.glade:460
 msgid "Use automatic colors"
 msgstr "Utilitza colors automàtics"
 
@@ -481,45 +548,37 @@ msgstr "Colors"
 msgid "0-20"
 msgstr "00-20"
 
+#. 6.4->settings-schema.json->Mem_startAt12Oclock->description
+msgid "Origin at 12 o'clock"
+msgstr ""
+
 #. 6.4->settings-schema.json->Mem_colorUsedup->description
-#. 3.4/prefsui.glade:587 4.0/prefsui.glade:733 5.6/prefsui.glade:733
 #. 3.0/prefsui.glade:606 3.2/prefsui.glade:658 6.0/prefsui.glade:733
+#. 3.4/prefsui.glade:587 5.6/prefsui.glade:733 4.0/prefsui.glade:733
 msgid "Usedup"
 msgstr "Utilitzat"
 
-#. 6.4->settings-schema.json->Mem_colorCached->description
-#. 3.4/prefsui.glade:625 4.0/prefsui.glade:771 5.6/prefsui.glade:771
-#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 6.0/prefsui.glade:771
-msgid "Cached"
-msgstr "Cached"
-
-#. 6.4->settings-schema.json->Mem_colorBuffer->description
-#. 3.4/prefsui.glade:663 4.0/prefsui.glade:809 5.6/prefsui.glade:809
-#. 3.0/prefsui.glade:684 3.2/prefsui.glade:736 6.0/prefsui.glade:809
-msgid "Buffer"
-msgstr "Buffer"
-
 #. 6.4->settings-schema.json->Mem_colorFree->description
-#. 3.4/prefsui.glade:701 4.0/prefsui.glade:847 5.6/prefsui.glade:847
 #. 3.0/prefsui.glade:723 3.2/prefsui.glade:775 6.0/prefsui.glade:847
+#. 3.4/prefsui.glade:701 5.6/prefsui.glade:847 4.0/prefsui.glade:847
 msgid "Free"
 msgstr "Lliure"
 
 #. 6.4->settings-schema.json->Net_autoscale->description
 #. 6.4->settings-schema.json->Disk_autoscale->description
-#. 3.4/prefsui.glade:993 3.4/prefsui.glade:1339 4.0/prefsui.glade:1139
-#. 4.0/prefsui.glade:1485 5.6/prefsui.glade:1139 5.6/prefsui.glade:1485
 #. 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352 3.2/prefsui.glade:1071
 #. 3.2/prefsui.glade:1404 6.0/prefsui.glade:1139 6.0/prefsui.glade:1485
+#. 3.4/prefsui.glade:993 3.4/prefsui.glade:1339 5.6/prefsui.glade:1139
+#. 5.6/prefsui.glade:1485 4.0/prefsui.glade:1139 4.0/prefsui.glade:1485
 msgid "Auto Scale"
 msgstr "Auto-escalat"
 
 #. 6.4->settings-schema.json->Net_logscale->description
 #. 6.4->settings-schema.json->Disk_logscale->description
-#. 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377 4.0/prefsui.glade:1177
-#. 4.0/prefsui.glade:1523 5.6/prefsui.glade:1177 5.6/prefsui.glade:1523
 #. 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391 3.2/prefsui.glade:1110
 #. 3.2/prefsui.glade:1443 6.0/prefsui.glade:1177 6.0/prefsui.glade:1523
+#. 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377 5.6/prefsui.glade:1177
+#. 5.6/prefsui.glade:1523 4.0/prefsui.glade:1177 4.0/prefsui.glade:1523
 msgid "Logarithmic"
 msgstr "Algorísmic"
 
@@ -656,26 +715,115 @@ msgstr "Colors"
 msgid "Color #15"
 msgstr "Colors"
 
+#. 6.4->settings-schema.json->color16->description
+#, fuzzy
+msgid "Color #16"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color17->description
+#, fuzzy
+msgid "Color #17"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color18->description
+#, fuzzy
+msgid "Color #18"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color19->description
+#, fuzzy
+msgid "Color #19"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color20->description
+#, fuzzy
+msgid "Color #20"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color21->description
+#, fuzzy
+msgid "Color #21"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color22->description
+#, fuzzy
+msgid "Color #22"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color23->description
+#, fuzzy
+msgid "Color #23"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color24->description
+#, fuzzy
+msgid "Color #24"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color25->description
+#, fuzzy
+msgid "Color #25"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color26->description
+#, fuzzy
+msgid "Color #26"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color27->description
+#, fuzzy
+msgid "Color #27"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color28->description
+#, fuzzy
+msgid "Color #28"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color29->description
+#, fuzzy
+msgid "Color #29"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color30->description
+#, fuzzy
+msgid "Color #30"
+msgstr "Colors"
+
+#. 6.4->settings-schema.json->color31->description
+#, fuzzy
+msgid "Color #31"
+msgstr "Colors"
+
 #. 6.4->settings-schema.json->labelWarning->description
 msgid "Data marked with ⚠️ must not be changed!"
 msgstr ""
 
-#. 3.4/prefsui.glade:49 4.0/prefsui.glade:56 5.6/prefsui.glade:56
 #. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 6.0/prefsui.glade:56
+#. 3.4/prefsui.glade:49 5.6/prefsui.glade:56 4.0/prefsui.glade:56
 msgid "Multi-Core System Monitor Preferences"
 msgstr "Preferències del monitor de sistema multi-nucli"
 
-#. 3.4/prefsui.glade:1549 4.0/prefsui.glade:1695 5.6/prefsui.glade:1695
+#. 3.0/prefsui.glade:189 3.2/prefsui.glade:189
+msgid "Height"
+msgstr "Alçada"
+
+#. 3.0/prefsui.glade:645 3.2/prefsui.glade:697 6.0/prefsui.glade:771
+#. 3.4/prefsui.glade:625 5.6/prefsui.glade:771 4.0/prefsui.glade:771
+msgid "Cached"
+msgstr "Cached"
+
 #. 3.0/prefsui.glade:1550 3.2/prefsui.glade:1602 6.0/prefsui.glade:1695
+#. 3.4/prefsui.glade:1549 5.6/prefsui.glade:1695 4.0/prefsui.glade:1695
 msgid "Scaling Description"
 msgstr "Descripció de l'escalat"
 
-#. 3.4/prefsui.glade:1564 4.0/prefsui.glade:1710 5.6/prefsui.glade:1710
 #. 3.0/prefsui.glade:1562 3.2/prefsui.glade:1614 6.0/prefsui.glade:1710
+#. 3.4/prefsui.glade:1564 5.6/prefsui.glade:1710 4.0/prefsui.glade:1710
 msgid "Close"
 msgstr "Tancar"
 
-#. 3.4/prefsui.glade:1594 3.0/prefsui.glade:1592 3.2/prefsui.glade:1644
+#. 3.0/prefsui.glade:1592 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594
 msgid ""
 "Auto Scaling:\n"
 "\tThis will scale the line graph by the largest reading within the\n"
@@ -715,11 +863,11 @@ msgstr ""
 "    escala algorísmica, que redueix els valors grans perquè no\n"
 "    tinguin domini sobre les lectures més petites."
 
-#. 4.0/prefsui.glade:508 5.6/prefsui.glade:508 6.0/prefsui.glade:508
+#. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
 msgid "by CPU:"
 msgstr "per CPU:"
 
-#. 4.0/prefsui.glade:1740 5.6/prefsui.glade:1740 6.0/prefsui.glade:1740
+#. 6.0/prefsui.glade:1740 5.6/prefsui.glade:1740 4.0/prefsui.glade:1740
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
@@ -759,7 +907,3 @@ msgstr ""
 "    Transforma les lectures per que es mostrin utilitzant una\n"
 "    escala algorísmica, que redueix els valors grans perquè no\n"
 "    tinguin domini sobre les lectures més petites."
-
-#. 3.0/prefsui.glade:189 3.2/prefsui.glade:189
-msgid "Height"
-msgstr "Alçada"

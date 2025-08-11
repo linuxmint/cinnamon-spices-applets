@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 TINK=$HOME/.local/share/cinnamon/applets/Radio3.0@claudiux/sounds/tink.ogg
 

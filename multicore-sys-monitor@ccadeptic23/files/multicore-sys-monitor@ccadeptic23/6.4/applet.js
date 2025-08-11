@@ -31,9 +31,26 @@ const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
 
-const indent = '    ';
 const rate = _('/s');
-const spaces = 12;
+var spaces = 14;
+const translated_strings = [
+    _("Core 128:"),
+    _("Unrecoverable:"),
+    _("Recoverable:"),
+    _("Used:"),
+    _("Usedup:"),
+    _("Free:"),
+    _("Swap"),
+    _("Down:"),
+    _("Up:"),
+    _("Read:"),
+    _("Write:")
+];
+for (let s of translated_strings) {
+    let l = s.length + 1;
+    if (l > spaces)
+        spaces = l;
+}
 
 const properties = [
     {graph: 'multiCpuGraph', provider: 'multiCpuProvider', abbrev: 'CPU'},
@@ -43,15 +60,30 @@ const properties = [
     {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'}
 ];
 
+function get_nemo_size_prefixes() {
+    let _SETTINGS_SCHEMA='org.nemo.preferences';
+    let _SETTINGS_KEY = 'size-prefixes';
+    let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+    return _interface_settings.get_string(_SETTINGS_KEY)
+}
 
-const formatBytes = (bytes, decimals=2)=>{
+const formatBytes = (bytes, decimals=2, withRate=true)=>{
+    let _rate = (withRate === true) ? rate : "";
     if (bytes < 1) {
-        return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + rate;
+        return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + _rate;
     }
-    let k = 1000;
-    let dm = decimals + 1 || 3;
-    let sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    let i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8);
+    let dm = (decimals + 1) || 3;
+    let isBinary = get_nemo_size_prefixes().startsWith('base-2');
+    let k, sizes, i;
+    if (!isBinary) {
+        k = 1000;
+        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8);
+    } else {
+        k = 1024;
+        sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+        i = Math.min(Math.max(0, Math.floor(Math.log2(bytes) / Math.log2(k))), 8);
+    }
     let value;
     if (isNaN(i)) {
         i = 0;
@@ -61,7 +93,7 @@ const formatBytes = (bytes, decimals=2)=>{
     }
     let parts = value.split('.');
     let dec_part = (parts.length === 2) ? '.' + parts[1].toString().padEnd(2, '0') : '.00';
-    return parts[0].padStart(spaces/2 - 1) + dec_part.padEnd(spaces/2 - 1) + sizes[i].padStart(3, ' ') + rate;
+    return parts[0].padStart(spaces/2 - 1) + dec_part.padEnd(spaces/2 - 1) + sizes[i].padStart((_rate.length == 0) ? 4 : 3, ' ') + _rate;
 };
 
 
@@ -84,7 +116,7 @@ class MCSM extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.instance_id = instance_id;
 
-        Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
+        Util.spawnCommandLineAsync("/usr/bin/env bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
 
         if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
             this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
@@ -98,13 +130,19 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Net_devicesList", "Net_devicesList");
         this.settings.bind("Disk_devicesList", "Disk_devicesList");
         this.settings.bind("labelsOn", "labelsOn");
+        this.settings.bind("CPU_labelOn", "CPU_labelOn");
+        this.settings.bind("Mem_labelOn", "Mem_labelOn");
+        this.settings.bind("Net_labelOn", "Net_labelOn");
+        this.settings.bind("Disk_labelOn", "Disk_labelOn");
         this.settings.bind("thickness", "thickness");
         this.settings.bind("useIconSize", "useIconSize");
         this.settings.bind("refreshRate", "refreshRate");
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
+        this.settings.bind("CPU_squared", "CPU_squared");
         this.settings.bind("CPU_width", "CPU_width");
+        this.settings.bind("CPU_mergeAll", "CPU_mergeAll");
         this.settings.bind("CPU_color0", "CPU_color0");
         this.settings.bind("CPU_color1", "CPU_color1");
         this.settings.bind("CPU_color2", "CPU_color2");
@@ -115,26 +153,34 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("CPU_activity_60_80", "CPU_activity_60_80");
         this.settings.bind("CPU_activity_80_100", "CPU_activity_80_100");
         this.settings.bind("Mem_enabled", "Mem_enabled");
+        this.settings.bind("Mem_squared", "Mem_squared");
         this.settings.bind("Mem_width", "Mem_width");
+        this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
-        this.settings.bind("Mem_colorCached", "Mem_colorCached");
-        this.settings.bind("Mem_colorBuffer", "Mem_colorBuffer");
         this.settings.bind("Mem_colorFree", "Mem_colorFree");
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
         this.settings.bind("Net_enabled", "Net_enabled");
+        this.settings.bind("Net_squared", "Net_squared");
         this.settings.bind("Net_width", "Net_width");
+        this.settings.bind("Net_mergeAll", "Net_mergeAll");
         this.settings.bind("Net_autoscale", "Net_autoscale");
         this.settings.bind("Net_logscale", "Net_logscale");
         this.settings.bind("Disk_enabled", "Disk_enabled");
+        this.settings.bind("Disk_squared", "Disk_squared");
         this.settings.bind("Disk_width", "Disk_width");
+        this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
         for (let i=0; i<16; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
+        if (this.refreshRate < 1000)
+            this.refreshRate = 1000;
+
         this.on_color_changed();
         this.useSymbolicIcon = true;
-        //~ this.setIcon();
+        if (this.without_any_graph)
+            this.setIcon();
         //~ global.log("ICON SIZE: " + this.getPanelIconSize(St.IconType.FULLCOLOR));
         this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
         if (this.useIconSize)
@@ -187,6 +233,7 @@ class MCSM extends Applet.TextIconApplet {
         this.memoryProvider = new MemDataProvider(this);
         this.multiCpuProvider = new MultiCpuDataProvider(this);
         this.swapProvider = new SwapDataProvider(this);
+        this.buffcachesharedProvider = new BufferCacheSharedDataProvider(this);
         this.networkProvider = new NetDataProvider(this);
         this.diskProvider = new DiskDataProvider(this);
 
@@ -228,7 +275,7 @@ class MCSM extends Applet.TextIconApplet {
                 // translate origin to the new location for the graph
                 let areaContext = area.get_context();
                 areaContext.translate(xOffset, 0);
-                let width = this[`${properties[i].abbrev}_width`] * global.ui_scale;
+                let width = (this[`${properties[i].abbrev}_squared`] === true) ? this.panelHeight : this[`${properties[i].abbrev}_width`] * global.ui_scale;
                 if (properties[i].abbrev === 'Mem') {
                     // paint the "swap" backdrop
                     this.swapGraph.paint(
@@ -247,12 +294,13 @@ class MCSM extends Applet.TextIconApplet {
                         //~ this.configSettings._prefs.mem.swapcolors
                     );
                 }
+                let labelOn = this[`${properties[i].abbrev}_labelOn`];
                 this[properties[i].graph].paint(
                     this[properties[i].provider].name,
                     this[properties[i].provider].currentReadings,
                     area,
                     areaContext,
-                    this.labelsOn,
+                    this.labelsOn && labelOn,
                     width,
                     this.panelHeight - 2 * global.ui_scale,
                     this.labelColor,
@@ -452,29 +500,19 @@ class MCSM extends Applet.TextIconApplet {
 
     get_mem_info() {
         if (!this.isRunning) return;
+        if (!this.Mem_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
-                //~ global.log(UUID + " - stdout is a " + typeof stdout);
                 let [, dataMem, dataSwap] = stdout.split(":");
                 dataMem = dataMem.trim();
-                //~ var i = 0;
-                while (dataMem.includes("  ") && i < 10) {
-                    //~ i++;
-                    dataMem = dataMem.replace(/\ \ /g, " ");
-                }
-                //~ global.log(UUID + " - dataMem: " + dataMem);
+                dataMem = dataMem.replace(/\ +/g, " ");
                 dataSwap = dataSwap.trim();
-                while (dataSwap.includes("  ") && i < 10) {
-                    //~ i++;
-                    dataSwap = dataSwap.replace(/\ \ /g, " ");
-                }
-                //~ global.log(UUID + " - dataSwap: " + dataSwap);
-                //~ 16485462016  3414532096   500703232   278343680  4845682688  8356085760 13070929920
-                let [total, used, shared, buffers, cache, available] = dataMem.split(" ");
+                dataSwap = dataSwap.replace(/\ +/g, " ");
+                let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                this.memoryProvider.setData(used / total, cache / total, buffers / total, (total - used - cache - buffers) / total);
+                this.memoryProvider.setData(1 * total, 1 * used, 1 * free, 1 * available);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
-                //~ global.log(this.memoryProvider.getTooltipString());
+                this.buffcachesharedProvider.setData(buffers, cache, shared);
             }
             subProcess.send_signal(9);
         });
@@ -482,23 +520,32 @@ class MCSM extends Applet.TextIconApplet {
 
     get_cpu_info() {
         if (!this.isRunning) return;
+        if (!this.CPU_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data3.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let cpuString = stdout.trim();
                 var data = [];
                 let values = cpuString.split(" ");
                 if (this.oldCPUvalues.length === 0) { // first execution
-                    for (let i=0, len=values.length; i<len; i++)
+                    if (this.CPU_mergeAll) {
                         data.push(0);
+                    } else {
+                        for (let i=0, len=values.length; i<len; i++)
+                            data.push(0);
+                    }
                 } else { // next executions
-                    let i = 0;
-                    for (let v of values) {
-                        if (i === 0) {
+                    if (this.CPU_mergeAll) {
+                        data.push(parseFloat(values[0]) / 100);
+                    } else {
+                        let i = 0;
+                        for (let v of values) {
+                            if (i === 0) {
+                                i++;
+                                continue;
+                            }
+                            data.push(parseFloat(v) / 100);
                             i++;
-                            continue;
                         }
-                        data.push(parseFloat(v) / 100);
-                        i++;
                     }
                 }
                 this.oldCPUvalues = values;
@@ -511,6 +558,7 @@ class MCSM extends Applet.TextIconApplet {
 
     get_net_info() {
         if (!this.isRunning) return;
+        if (!this.Net_enabled) return;
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 //~ global.log(UUID + " - stdout is a " + typeof stdout);
@@ -526,18 +574,34 @@ class MCSM extends Applet.TextIconApplet {
                 var data = [];
                 var disabledDevices = [];
                 let netInfo = stdout.trim().split(" ");
+                var sum_rx = 0;
+                var sum_tx = 0;
                 for (let info of netInfo) {
                     let [iface, rx, tx] = info.split(":");
                     if (allowedInterfaces.indexOf(iface) < 0) {
                         disabledDevices.push(iface);
                         continue;
                     }
+                    if (this.Net_mergeAll) {
+                        sum_rx = sum_rx + Math.trunc(rx);
+                        sum_tx = sum_tx + Math.trunc(tx);
+                    } else {
+                        data.push({
+                            "id": iface,
+                            "name": names[iface],
+                            "up": Math.trunc(tx),
+                            "down": Math.trunc(rx)
+                        });
+                    }
+                }
+                if (this.Net_mergeAll) {
                     data.push({
-                        "id": iface,
-                        "name": names[iface],
-                        "up": Math.trunc(tx),
-                        "down": Math.trunc(rx)
+                        "id": "Net",
+                        "name": _("Network"),
+                        "up": sum_tx,
+                        "down": sum_rx
                     });
+                    disabledDevices = [];
                 }
                 this.networkProvider.setData(data, disabledDevices);
             }
@@ -547,6 +611,7 @@ class MCSM extends Applet.TextIconApplet {
 
     get_disk_info() {
         if (!this.isRunning) return;
+        if (!this.Disk_enabled) return;
         var usedDevices = [];
         var deviceNames = {};
         var deviceGrans = {};
@@ -562,6 +627,8 @@ class MCSM extends Applet.TextIconApplet {
         var data = [];
         let diskstats = (to_string(GLib.file_get_contents("/proc/diskstats")[1])).trim().split("\n");
         //~ global.log(UUID + " - diskstats:\n" + diskstats);
+        var sum_read = 0;
+        var sum_write = 0;
         for (let line of diskstats) {
             if (line.includes("loop")) continue;
             line = line.trim();
@@ -571,14 +638,27 @@ class MCSM extends Applet.TextIconApplet {
             if (usedDevices.indexOf(_dev) < 0) continue;
             let discGran = 1 * deviceGrans[_dev];
             let [_read, _write] = [1 * infos[5] * discGran, 1 * infos[9] * discGran];
-            data.push({
-                "id": _dev,
-                "name": deviceNames[_dev],
-                "read": _read,
-                "write": _write
-            });
+            if (this.Disk_mergeAll) {
+                sum_read = sum_read + _read;
+                sum_write = sum_write + _write;
+            } else {
+                data.push({
+                    "id": _dev,
+                    "name": deviceNames[_dev],
+                    "read": _read,
+                    "write": _write
+                });
+            }
             //~ global.log(UUID + " - line:\n" + line);
 
+        }
+        if (this.Disk_mergeAll) {
+            data.push({
+                "id": "Disks",
+                "name": _("Disks"),
+                "read": sum_read,
+                "write": sum_write
+            });
         }
         this.diskProvider.setData(data);
         //~ global.log(UUID + " - data:\n" + JSON.stringify(data, null, "\t"));
@@ -591,6 +671,7 @@ class MCSM extends Applet.TextIconApplet {
         appletTooltipString += this.multiCpuProvider.getTooltipString();
         appletTooltipString += this.memoryProvider.getTooltipString();
         appletTooltipString += this.swapProvider.getTooltipString();
+        appletTooltipString += this.buffcachesharedProvider.getTooltipString();
         appletTooltipString += this.networkProvider.getTooltipString();
         appletTooltipString += this.diskProvider.getTooltipString();
 
@@ -639,7 +720,9 @@ class MemDataProvider {
     }
 
     getColorList() {
-        let types = ["Usedup", "Cached", "Buffer", "Free", "Swap"]
+        //~ let types = ["Usedup", "Cached", "Buffer", "Free", "Swap"];
+        //~ let types = ["Usedup", "Recoverable", "Free", "Swap"];
+        let types = ["Usedup", "Free", "Swap"];
         var colorList = [];
         for (let t of types)
             colorList.push(this.applet[`Mem_color${t}`]);
@@ -651,22 +734,108 @@ class MemDataProvider {
         return this.currentReadings;
     }
 
-    setData(used, shared, buffers, cache) {
+    //~ setData(used, cached, buffers, free) {
+    //~ setData(used, recoverable) {
+    setData(total, used, free, available) {
+        const precision = 100000;
+        //~ let unavailable = used - buffers - cached;
+        //~ let unavailable = used - cached;
+        //~ let unavailable = used;
+        //~ this.currentReadings = [
+            //~ Math.round(used * precision) / precision,
+            //~ Math.round(cached * precision) / precision,
+            //~ Math.round(buffers * precision) / precision,
+            //~ Math.max(Math.round((1 - used)*precision) / precision, Math.round((free - buffers)*precision) / precision)
+        //~ ];
+        const recoverable = available - free;
+        const unrecoverable = used - recoverable;
+        const realUsed = recoverable + unrecoverable;
+        //~ this.currentReadings = [
+            //~ Math.round((unrecoverable) / total * precision) / precision,
+            //~ Math.round(recoverable / total * precision) / precision,
+            //~ Math.round((1 - used / total)*precision) / precision
+        //~ ];
+        const usedProp = realUsed / total;
         this.currentReadings = [
-            Math.round(used*10000) / 10000,
-            Math.round(shared*10000) / 10000,
-            Math.round(buffers*10000) / 10000,
-            Math.round(cache*10000) / 10000
+            Math.round(usedProp * precision) / precision,
+            Math.round((1 - usedProp)*precision) / precision
         ];
     }
 
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        let toolTipString = _('----------- Memory -----------') + '\n';
-        let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+        var sum_used = 0;
+        //~ let toolTipString = _('----------- Memory -----------') + '\n';
+        let trans = _("Memory");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        //~ let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+        let attributes = [_('Used:'), _('Free:')];
+        //~ let attributes = [_('Unrecoverable:'), _("Recoverable:"), _('Used:'), _('Free:')];
         for (let i = 0; i < attributes.length; i++) {
-            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + Math.round(100 * this.currentReadings[i]).toString().padStart(2, ' ') + ' %\n';
+            if (i < 2) {
+                sum_used = sum_used + this.currentReadings[i];
+            }
+            if (i < 2) {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i])/10).toString().padStart(2, ' ') + ' %\n';
+            } else if (i === 2) {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * sum_used)/10).toString().padStart(2, ' ') + ' %\n';
+            } else {
+                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i-1])/10).toString().padStart(2, ' ') + ' %\n';
+            }
+        }
+        return toolTipString;
+    }
+
+    get isEnabled() {
+        return this.applet.Mem_enabled;
+    }
+
+    get isRunning() {
+        return this.applet.isRunning;
+    }
+}
+
+class BufferCacheSharedDataProvider {
+    constructor(applet) {
+        this.applet = applet;
+        this.name = _('Buffers/Cache/Shared');
+        this.currentReadings = [0, 0];
+    }
+
+    getColorList() {
+        return [];
+    }
+
+    getData() {
+        if (!this.isEnabled) return [];
+        return this.currentReadings;
+    }
+
+    setData(buffers, cache, shared) {
+        this.currentReadings = [
+            buffers,
+            cache,
+            shared
+        ];
+    }
+
+    getTooltipString() {
+        if (! this.isEnabled) return "";
+        if (! this.isRunning) return "";
+        let trans = this.name;
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+        let attributes = [_('Buffer'), _('Cache'), _("Shared")];
+
+        for (let i = 0; i < attributes.length; i++) {
+            let valueWithUnit = formatBytes(this.currentReadings[i], 2, false);
+            toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + " " + valueWithUnit.padStart(2, ' ') + '\n';
         }
         return toolTipString;
     }
@@ -707,8 +876,12 @@ class SwapDataProvider {
         if (!this.isEnabled || !this.swapusage) {
             return '';
         }
-        let toolTipString = _('------------ Swap ------------') + '\n';
-        toolTipString += _('Swap').padStart(spaces, ' ') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100).toString().padStart(2, ' ') + ' %\n';
+        //~ let toolTipString = _('------------ Swap ------------') + '\n';
+        let trans = _("Swap");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        toolTipString += trans.padStart(spaces, ' ') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100).toString().padStart(2, ' ') + ' %\n';
         return toolTipString;
     }
 
@@ -749,10 +922,21 @@ class MultiCpuDataProvider {
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        let toolTipString = _('------------- CPU ------------') + '\n';
+        //~ let toolTipString = _('------------- CPU ------------') + '\n';
+        let trans = _("CPUs");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+
         for (let i = 0; i < this.CPUCount; i++) {
             let percentage = Math.round(100 * this.currentReadings[i], 2);
-            toolTipString += (_('Core') + ' ' + i).padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';;
+            if (this.applet.CPU_mergeAll) {
+                toolTipString += (_('CPU') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+            } else {
+                toolTipString += (_('Core') + ' ' + i).padStart(spaces - lenColon, ' ') + colon + '\t' + + percentage.toString().padStart(2, ' ') + ' %\n';
+            }
         }
         return toolTipString;
     }
@@ -777,6 +961,19 @@ class NetDataProvider {
         this.disabledDevices = [];
         this.currentReadings = [];
         this.lastUpdatedTime = Date.now();
+        if (this.applet.Net_mergeAll) {
+            this.currentReadings.push({
+                "id": "Net",
+                "name": _("Network"),
+                "up": 0,
+                "down": 0,
+                "tooltipUp": 0,
+                "tooltipDown": 0,
+                "lastReading": [0, 0],
+                "readingRatesList": [0, 0]
+            });
+            return;
+        }
         for (let dev of this.applet.Net_devicesList) {
             if (! dev["enabled"]) {
                 this.disabledDevices.push(dev["id"]);
@@ -853,7 +1050,11 @@ class NetDataProvider {
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        let toolTipString = _('---------- Networks ----------') + '\n';
+        //~ let toolTipString = _('---------- Networks ----------') + '\n';
+        let trans = _("Networks");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             if (!this.currentReadings[i].tooltipDown) {
                 this.currentReadings[i].tooltipDown = 0;
@@ -889,6 +1090,19 @@ class DiskDataProvider {
         this.currentReadings = [];
         this.lastUpdatedTime = Date.now();
 
+        if (this.applet.Disk_mergeAll) {
+            this.currentReadings.push({
+                "id": "Disks",
+                "name": _("Disks"),
+                "read": 0,
+                "write": 0,
+                "tooltipRead": 0,
+                "tooltipWrite": 0,
+                "lastReading": [0, 0],
+                "readingRatesList": [0, 0]
+            });
+            return;
+        }
         for (let dev of this.applet.Disk_devicesList) {
             if (! dev["enabled"]) {
                 this.disabledDevices.push(dev["id"]);
@@ -963,7 +1177,12 @@ class DiskDataProvider {
         if (!this.isEnabled) {
             return "";
         }
-        let toolTipString = _('------------ Disks -----------') + '\n';
+        //~ let toolTipString = _('------------ Disks -----------') + '\n';
+        let trans = _("Disks");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+        let title = "" + toolTipString;
+
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             if (!this.currentReadings[i]) {
                 continue;
@@ -972,7 +1191,7 @@ class DiskDataProvider {
             let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
             //~ toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
             if (this.currentReadings[i].name != this.currentReadings[i].id)
-                toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd('------------ Disks -----------'.length - this.currentReadings[i].id.length, " ") + this.currentReadings[i].id + '\n';
+                toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
             else
                 toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
             toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + String(read).padStart(spaces + 2) + '\n';

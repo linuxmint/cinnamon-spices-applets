@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ### Removes cover art files.
 
 rm -f /tmp/*.mediaplayer-cover

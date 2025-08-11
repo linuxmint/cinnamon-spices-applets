@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 cd "$HOME/.local/share/locale"
 
 for lang in $(ls -1A); do {

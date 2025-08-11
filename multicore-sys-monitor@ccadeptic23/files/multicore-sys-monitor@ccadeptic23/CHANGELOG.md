@@ -1,3 +1,48 @@
+### v2.5.1~20250810
+  * Adds the amounts of Buffer memory, Cache, and Shared memory to the tooltip.
+  * Improved tooltip display.
+
+### v2.5.0~20250809
+  * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460)
+  * Fixes [#7505](https://github.com/linuxmint/cinnamon-spices-applets/issues/7505)
+  * Calculates the percentage of memory used, as does `gnome-system-monitor`.
+  * No longer includes cache memory or buffer memory in the statistics.
+  * Improved calculation of tooltip width based on translations of displayed messages.
+
+### v2.4.0~20250808
+  * Improved memory calculation.
+  * Fixes [#7460](https://github.com/linuxmint/cinnamon-spices-applets/issues/7460)
+
+### v2.3.5~20250808
+  * Speed improvement.
+
+### v2.3.4~20250806
+  * Fixes [#7461](https://github.com/linuxmint/cinnamon-spices-applets/issues/7461)
+  * From now on, you can choose to set the origin of the pie chart (Mem) at 12 o'clock.
+
+### v2.3.3~20250806
+  * Fixes [#7444](https://github.com/linuxmint/cinnamon-spices-applets/issues/7444)
+  * From now on, you can choose the Square view for each widget.
+
+### v2.3.2~20250806
+  * Fixes [#7443](https://github.com/linuxmint/cinnamon-spices-applets/issues/7443)
+  * Fixes [#7445](https://github.com/linuxmint/cinnamon-spices-applets/issues/7445)
+
+### v2.3.1~20250806
+  * New script `get-cpu-data3.sh` created by @LeosBitto. Again, this script improves performance. Many thanks to him!
+  * Show icon when the 'Without any graphics' option is selected in context menu.
+
+### v2.3.0~20250805
+  * New options "Label" in settings: one for each type (CPU, Mem, Net, Disks). This option is only visible when the Labels option is checked in the General tab.
+  * New option "Merge all" in CPU, Net, Disks tabs. Once this option is checked, a single device grouping all devices is displayed. The colors used are #0 and #1 (for Net and Disks).
+  * The user can choose up to 32 different colors.
+
+### v2.2.2~20250804
+  * New script `get-cpu-data3.sh` created by @LeosBitto. This script improves performance. Many thanks to him!
+  * This script fixes:
+    * [#7453](https://github.com/linuxmint/cinnamon-spices-applets/issues/7453)
+    * [#7458](https://github.com/linuxmint/cinnamon-spices-applets/issues/7458)
+
 ### v2.2.1~20250727
   * CPU: the measured values are more accurate.
 
@@ -6,7 +51,7 @@
   * The calculation of CPU usage is now correct.
 
 ### v2.1.0~20250726
-  * Fixes many bugs, at least from Cinnamon 6.4):
+  * Fixes many bugs, at least from Cinnamon 6.4:
     * [#3016](https://github.com/linuxmint/cinnamon-spices-applets/issues/3016)
     * [#7439](https://github.com/linuxmint/cinnamon-spices-applets/issues/7439)
     * [#7440](https://github.com/linuxmint/cinnamon-spices-applets/issues/7440)
@@ -19,7 +64,7 @@
 
 ### v2.0.0~20250725
 
-  * Fixes many bugs, at least from Cinnamon 6.4): 
+  * Fixes many bugs, at least from Cinnamon 6.4: 
     * [#2960](https://github.com/linuxmint/cinnamon-spices-applets/issues/2960)
     * [#3025](https://github.com/linuxmint/cinnamon-spices-applets/issues/3025)
     * [#3096](https://github.com/linuxmint/cinnamon-spices-applets/issues/3096)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 SPTYPE=$1
 SPUUID=$2
 PAGE="https://github.com/linuxmint/cinnamon-spices-${SPTYPE}/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+${SPUUID}";

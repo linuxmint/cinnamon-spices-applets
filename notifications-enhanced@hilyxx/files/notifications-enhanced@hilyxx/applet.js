@@ -9,6 +9,7 @@ const St = imports.gi.St;
 const Mainloop = imports.mainloop;
 const Urgency = imports.ui.messageTray.Urgency;
 const NotificationDestroyedReason = imports.ui.messageTray.NotificationDestroyedReason;
+const MessageTray = imports.ui.messageTray;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const Util = imports.misc.util;
@@ -24,6 +25,30 @@ function _(str) {
 
 class CinnamonNotificationsApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
+        // Detection of the official notifications@cinnamon.org applet already present
+        const OTHER_UUID = "notifications@cinnamon.org";
+        let cinnamonSettings = new Gio.Settings({ schema_id: "org.cinnamon" });
+        let enabledApplets = cinnamonSettings.get_strv("enabled-applets");
+        let found = false;
+        for (let entry of enabledApplets) {
+            if (entry.indexOf(OTHER_UUID) !== -1 && UUID !== OTHER_UUID) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            let source = new MessageTray.SystemNotificationSource();
+            Main.messageTray.add(source);
+            let notification = new MessageTray.Notification(
+                source,
+                _( "Notifications applet conflict" ),
+                _( "Conflict detected: notifications@cinnamon.org is active.\nRemove it and restart Cinnamon before using Notifications-Enhanced applet." )
+            );
+            notification.setTransient(false);
+            notification.setUrgency(MessageTray.Urgency.CRITICAL);
+            source.notify(notification);
+            throw new Error("Conflict: notifications@cinnamon.org already active");
+        }
         super(orientation, panel_height, instanceId);
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);

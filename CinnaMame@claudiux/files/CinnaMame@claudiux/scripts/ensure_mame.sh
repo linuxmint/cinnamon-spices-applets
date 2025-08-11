@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ### Create ~/mame/roms if necessary:
 mkdir -p $HOME/mame/roms
 ### Create ~/.mame/cfg if necessary:

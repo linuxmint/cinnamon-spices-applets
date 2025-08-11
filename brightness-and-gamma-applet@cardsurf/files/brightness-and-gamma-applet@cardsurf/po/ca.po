@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-13 16:32+0200\n"
+"POT-Creation-Date: 2025-08-06 01:31+0200\n"
 "PO-Revision-Date: 2024-07-21 03:09+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -19,59 +19,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:178 6.4/applet.js:249
+#. applet.js:178 6.4/applet.js:262
 msgid "The following packages were not found:"
 msgstr "No s'han trobat els següents paquets:"
 
-#. applet.js:179 6.4/applet.js:250
+#. applet.js:179 6.4/applet.js:263
 msgid "Please install the above packages to use the applet"
 msgstr "Si us plau, instal·leu els paquets per a usar la miniapliació"
 
-#. applet.js:564 6.4/applet.js:762
+#. applet.js:564 6.4/applet.js:773
 msgid "Screen"
 msgstr "Pantalla"
 
-#. applet.js:647 6.4/applet.js:845
+#. applet.js:647 6.4/applet.js:856
 msgid "Outputs"
 msgstr "Monitors"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:46 6.4/lib/appletGui.js:211
+#. appletGui.js:235 6.4/applet.js:42 6.4/lib/appletGui.js:211
 msgid "Brightness"
 msgstr "Brillantor"
 
-#. appletGui.js:236 6.4/applet.js:47 6.4/lib/appletGui.js:212
+#. appletGui.js:236 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Red"
 msgstr "Vermell"
 
-#. appletGui.js:237 6.4/applet.js:48 6.4/lib/appletGui.js:213
+#. appletGui.js:237 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Green"
 msgstr "Verd"
 
-#. appletGui.js:238 6.4/applet.js:49 6.4/lib/appletGui.js:214
+#. appletGui.js:238 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Blue"
 msgstr "Blau"
 
-#. 6.4/applet.js:50 6.4/applet.js:916
+#. 6.4/applet.js:46 6.4/applet.js:927
 msgid "Sunrise"
 msgstr ""
 
-#. 6.4/applet.js:51 6.4/applet.js:918
+#. 6.4/applet.js:47 6.4/applet.js:929
 msgid "Sunset"
 msgstr ""
 
-#. 6.4/applet.js:711
+#. 6.4/applet.js:722
 msgid "Reload"
 msgstr ""
 
-#. 6.4/applet.js:721
+#. 6.4/applet.js:732
 msgid "Configure Presets"
 msgstr ""
 
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:731
+#. 6.4/applet.js:742
 msgid "Presets"
 msgstr ""
 
@@ -270,6 +270,10 @@ msgid ""
 "Disable Cinnamon Night Mode while this applet is running.\n"
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
+msgstr ""
+
+#. 6.4->settings-schema.json->apply_changing_monitors->description
+msgid "Apply when the number of monitors changes"
 msgstr ""
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description

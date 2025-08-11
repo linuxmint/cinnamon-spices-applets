@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Author: @claudiux
 # Contributor (NVMe devices): @kriegcc
 

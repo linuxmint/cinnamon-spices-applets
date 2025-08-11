@@ -82,7 +82,10 @@
       "title": "Options",
       "keys": [
         "CPU_enabled",
+        "CPU_labelOn",
+        "CPU_squared",
         "CPU_width",
+        "CPU_mergeAll",
         "CPU_byActivity",
         "CPU_useProgressiveColors"
       ]
@@ -116,7 +119,10 @@
       "title": "Options",
       "keys": [
         "Mem_enabled",
-        "Mem_width"
+        "Mem_labelOn",
+        "Mem_squared",
+        "Mem_width",
+        "Mem_startAt12Oclock"
       ]
     },
     "sectionMemoryColors": {
@@ -124,8 +130,6 @@
       "title": "Colors",
       "keys": [
         "Mem_colorUsedup",
-        "Mem_colorCached",
-        "Mem_colorBuffer",
         "Mem_colorFree",
         "Mem_colorSwap"
       ]
@@ -135,7 +139,10 @@
       "title": "Options",
       "keys": [
         "Net_enabled",
-        "Net_width"
+        "Net_labelOn",
+        "Net_squared",
+        "Net_width",
+        "Net_mergeAll"
       ]
     },
     "sectionNetworkScaling": {
@@ -161,7 +168,10 @@
       "title": "Options",
       "keys": [
         "Disk_enabled",
-        "Disk_width"
+        "Disk_labelOn",
+        "Disk_squared",
+        "Disk_width",
+        "Disk_mergeAll"
       ]
     },
     "sectionDiskScaling": {
@@ -201,7 +211,23 @@
         "color12",
         "color13",
         "color14",
-        "color15"
+        "color15",
+        "color16",
+        "color17",
+        "color18",
+        "color19",
+        "color20",
+        "color21",
+        "color22",
+        "color23",
+        "color24",
+        "color25",
+        "color26",
+        "color27",
+        "color28",
+        "color29",
+        "color30",
+        "color31"
       ]
     }
   },
@@ -228,7 +254,7 @@
     "type": "scale",
     "default": 1000,
     "description": "Refresh Rate (ms)",
-    "min": 500,
+    "min": 1000,
     "max": 3000,
     "step": 50,
     "show-value": true
@@ -248,6 +274,17 @@
     "default": true,
     "description": "Enable"
   },
+  "CPU_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "CPU_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "CPU_width": {
     "type": "scale",
     "default": 64,
@@ -255,7 +292,13 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!CPU_squared"
+  },
+  "CPU_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
   },
   "CPU_byActivity": {
     "type": "switch",
@@ -322,6 +365,17 @@
     "default": true,
     "description": "Enable"
   },
+  "Mem_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "Mem_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "Mem_width": {
     "type": "scale",
     "default": 64,
@@ -329,22 +383,18 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!Mem_squared"
+  },
+  "Mem_startAt12Oclock": {
+    "type": "switch",
+    "default": false,
+    "description": "Origin at 12 o'clock"
   },
   "Mem_colorUsedup": {
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 1)",
     "description": "Usedup"
-  },
-  "Mem_colorCached": {
-    "type": "colorchooser",
-    "default": "rgba(153, 153, 153, 0.8)",
-    "description": "Cached"
-  },
-  "Mem_colorBuffer": {
-    "type": "colorchooser",
-    "default": "rgba(204, 204, 204, 0.8)",
-    "description": "Buffer"
   },
   "Mem_colorFree": {
     "type": "colorchooser",
@@ -361,6 +411,17 @@
     "default": true,
     "description": "Enable"
   },
+  "Net_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "Net_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "Net_width": {
     "type": "scale",
     "default": 64,
@@ -368,7 +429,13 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!Net_squared"
+  },
+  "Net_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
   },
   "Net_autoscale": {
     "type": "switch",
@@ -433,7 +500,23 @@
           "#12": 12,
           "#13": 13,
           "#14": 14,
-          "#15": 15
+          "#15": 15,
+          "#16": 16,
+          "#17": 17,
+          "#18": 18,
+          "#19": 19,
+          "#20": 20,
+          "#21": 21,
+          "#22": 22,
+          "#23": 23,
+          "#24": 24,
+          "#25": 25,
+          "#26": 26,
+          "#27": 27,
+          "#28": 28,
+          "#29": 29,
+          "#30": 30,
+          "#31": 31
         },
         "align": 0.5
       },
@@ -458,7 +541,23 @@
           "#12": 12,
           "#13": 13,
           "#14": 14,
-          "#15": 15
+          "#15": 15,
+          "#16": 16,
+          "#17": 17,
+          "#18": 18,
+          "#19": 19,
+          "#20": 20,
+          "#21": 21,
+          "#22": 22,
+          "#23": 23,
+          "#24": 24,
+          "#25": 25,
+          "#26": 26,
+          "#27": 27,
+          "#28": 28,
+          "#29": 29,
+          "#30": 30,
+          "#31": 31
         },
         "align": 0.5
       }
@@ -475,6 +574,17 @@
     "default": true,
     "description": "Enable"
   },
+  "Disk_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "Disk_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
   "Disk_width": {
     "type": "scale",
     "default": 64,
@@ -482,7 +592,13 @@
     "min": 16,
     "max": 320,
     "step": 16,
-    "show-value": true
+    "show-value": true,
+    "dependency": "!Disk_squared"
+  },
+  "Disk_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
   },
   "Disk_autoscale": {
     "type": "switch",
@@ -565,7 +681,23 @@
           "#12": 12,
           "#13": 13,
           "#14": 14,
-          "#15": 15
+          "#15": 15,
+          "#16": 16,
+          "#17": 17,
+          "#18": 18,
+          "#19": 19,
+          "#20": 20,
+          "#21": 21,
+          "#22": 22,
+          "#23": 23,
+          "#24": 24,
+          "#25": 25,
+          "#26": 26,
+          "#27": 27,
+          "#28": 28,
+          "#29": 29,
+          "#30": 30,
+          "#31": 31
         },
         "align": 0.5
       },
@@ -590,7 +722,23 @@
           "#12": 12,
           "#13": 13,
           "#14": 14,
-          "#15": 15
+          "#15": 15,
+          "#16": 16,
+          "#17": 17,
+          "#18": 18,
+          "#19": 19,
+          "#20": 20,
+          "#21": 21,
+          "#22": 22,
+          "#23": 23,
+          "#24": 24,
+          "#25": 25,
+          "#26": 26,
+          "#27": 27,
+          "#28": 28,
+          "#29": 29,
+          "#30": 30,
+          "#31": 31
         },
         "align": 0.5
       }
@@ -681,6 +829,86 @@
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 0.1)",
     "description": "Color #15"
+  },
+  "color16": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #16"
+  },
+  "color17": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #17"
+  },
+  "color18": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #18"
+  },
+  "color19": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #19"
+  },
+  "color20": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #20"
+  },
+  "color21": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #21"
+  },
+  "color22": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #22"
+  },
+  "color23": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #23"
+  },
+  "color24": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #24"
+  },
+  "color25": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #25"
+  },
+  "color26": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #26"
+  },
+  "color27": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #27"
+  },
+  "color28": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #28"
+  },
+  "color29": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #29"
+  },
+  "color30": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #30"
+  },
+  "color31": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 0.1)",
+    "description": "Color #31"
   },
   "labelWarning": {
     "type": "label",

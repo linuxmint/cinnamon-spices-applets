@@ -460,7 +460,7 @@ class TerminalProcess {
     }
 
     get_full_bash_command() {
-        let start_bash = "bash -c \"";
+        let start_bash = "/usr/bin/env bash -c \"";
         let write_terminal_pid = "echo $$ > " + this.tmp_filepath + ";"
         let exec_user_command = this._bash_command;
         let keep_terminal_opened = "exec bash\"";

@@ -12,6 +12,7 @@ An applet that sets brightness and gamma levels of a screen for Linux Mint Cinna
  * From Cinnamon 6.4: disable Night Light Mode
  * From Cinnamon 6.4: set hotkeys to Increase/Decrease brightness
  * From Cinnamon 6.4: take into account sunrise and sunset times.
+ * From Cinnamon 6.4: take into account the connection/disconnection of monitors.
 
 ## Installation
 1. Download the applet from *Cinnamon Settings -> Applets* or extract .zip archive to `~/.local/share/cinnamon/applets`

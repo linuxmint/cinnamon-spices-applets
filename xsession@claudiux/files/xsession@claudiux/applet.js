@@ -320,7 +320,7 @@ class LGS extends Applet.IconApplet {
             () => {
                 let id = setTimeout( () => {
                     clearTimeout(id);
-                    Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+                    Util.spawnCommandLineAsync("/usr/bin/env bash -c '"+WATCHXSE_SCRIPT+"'");
                 },
                 300);
             }
@@ -334,7 +334,7 @@ class LGS extends Applet.IconApplet {
             () => {
                 let id = setTimeout( () => {
                     clearTimeout(id);
-                    Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
+                    Util.spawnCommandLineAsync("/usr/bin/env bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
                 },
                 300);
             }
@@ -471,7 +471,7 @@ class LGS extends Applet.IconApplet {
         sectionSettings.addMenuItem(subMenuSettingsApplets);
 
         for (let applet of this.get_active_spices("applets")) {
-            let s = new LGSMenuItem(this, "applets", applet, () => {Util.spawnCommandLineAsync(`bash -c "cinnamon-settings applets ${applet}"`)}, null);
+            let s = new LGSMenuItem(this, "applets", applet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "cinnamon-settings applets ${applet}"`)}, null);
             subMenuSettingsApplets.menu.addMenuItem(s);
         }
 
@@ -480,7 +480,7 @@ class LGS extends Applet.IconApplet {
         sectionSettings.addMenuItem(subMenuSettingsDesklets);
 
         for (let desklet of this.get_active_spices("desklets")) {
-            let s = new LGSMenuItem(this, "desklets", desklet, () => {Util.spawnCommandLineAsync(`bash -c "cinnamon-settings desklets ${desklet}"`)}, null);
+            let s = new LGSMenuItem(this, "desklets", desklet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "cinnamon-settings desklets ${desklet}"`)}, null);
             subMenuSettingsDesklets.menu.addMenuItem(s);
         }
 
@@ -489,7 +489,7 @@ class LGS extends Applet.IconApplet {
         sectionSettings.addMenuItem(subMenuSettingsExtensions);
 
         for (let extension of this.get_active_spices("extensions")) {
-            let s = new LGSMenuItem(this, "extensions", extension, () => {Util.spawnCommandLineAsync(`bash -c "cinnamon-settings extensions ${extension}"`)}, null);
+            let s = new LGSMenuItem(this, "extensions", extension, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "cinnamon-settings extensions ${extension}"`)}, null);
             subMenuSettingsExtensions.menu.addMenuItem(s);
         }
 
@@ -504,7 +504,7 @@ class LGS extends Applet.IconApplet {
         sectionSource.addMenuItem(subMenuCodeApplets);
 
         for (let applet of this.get_active_spices("applets")) {
-            let s = new LGSMenuItem(this, "applets", applet, () => {Util.spawnCommandLineAsync(`bash -c "xdg-open ${SPICES_DIR}/applets/${applet}/ "`)}, null);
+            let s = new LGSMenuItem(this, "applets", applet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "xdg-open ${SPICES_DIR}/applets/${applet}/ "`)}, null);
             subMenuCodeApplets.menu.addMenuItem(s);
         }
 
@@ -513,7 +513,7 @@ class LGS extends Applet.IconApplet {
         sectionSource.addMenuItem(subMenuCodeDesklets);
 
         for (let desklet of this.get_active_spices("desklets")) {
-            let s = new LGSMenuItem(this, "desklets", desklet, () => {Util.spawnCommandLineAsync(`bash -c "xdg-open ${SPICES_DIR}/desklets/${desklet}/ "`)}, null);
+            let s = new LGSMenuItem(this, "desklets", desklet, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "xdg-open ${SPICES_DIR}/desklets/${desklet}/ "`)}, null);
             subMenuCodeDesklets.menu.addMenuItem(s);
         }
 
@@ -522,7 +522,7 @@ class LGS extends Applet.IconApplet {
         sectionSource.addMenuItem(subMenuCodeExtensions);
 
         for (let extension of this.get_active_spices("extensions")) {
-            let s = new LGSMenuItem(this, "extensions", extension, () => {Util.spawnCommandLineAsync(`bash -c "xdg-open ${SPICES_DIR}/extensions/${extension}/ "`)}, null);
+            let s = new LGSMenuItem(this, "extensions", extension, () => {Util.spawnCommandLineAsync(`/usr/bin/env bash -c "xdg-open ${SPICES_DIR}/extensions/${extension}/ "`)}, null);
             subMenuCodeExtensions.menu.addMenuItem(s);
         }
 
@@ -548,9 +548,9 @@ class LGS extends Applet.IconApplet {
         let id = setTimeout( () => {
             clearTimeout(id);
             if (shiftPressed || ctrlPressed) {
-                Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c '"+WATCHXSE_LATEST_SCRIPT+ " " + this.number_latest +"'");
             } else {
-                Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'");
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c '"+WATCHXSE_SCRIPT+"'");
             }
         },
         300);
