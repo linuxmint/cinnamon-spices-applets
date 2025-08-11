@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-10 18:05+0200\n"
-"PO-Revision-Date: 2025-08-08 07:22+0200\n"
+"PO-Revision-Date: 2025-08-11 08:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -284,9 +284,8 @@ msgid "Execution of '%s' failed:"
 msgstr "Ausführen von '%s' fehlgeschlagen:"
 
 #. 6.4/applet.js:37
-#, fuzzy
 msgid "Core 128:"
-msgstr "Kern"
+msgstr "Kern 128:"
 
 #. 6.4/applet.js:38
 msgid "Unrecoverable:"
@@ -324,11 +323,11 @@ msgstr "Speicher"
 
 #. 6.4/applet.js:804
 msgid "Buffers/Cache/Shared"
-msgstr ""
+msgstr "Buffer/Cache/Shared"
 
 #. 6.4/applet.js:832 6.4/applet.js:930
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #. 6.4/applet.js:834 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
@@ -343,16 +342,15 @@ msgstr "Cache"
 
 #. 6.4/applet.js:834
 msgid "Shared"
-msgstr ""
+msgstr "Shared"
 
 #. 6.4/applet.js:926
 msgid "CPUs"
-msgstr ""
+msgstr "CPUs"
 
 #. 6.4/applet.js:1054
-#, fuzzy
 msgid "Networks"
-msgstr "Netzwerk"
+msgstr "Netzwerke"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -793,7 +791,8 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small "
+"readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -808,7 +807,8 @@ msgstr ""
 "\tdes angezeigten Bereichs skaliert. Sobald der größte Messwert nicht\n"
 "\tmehr angezeigt wird, wird der nächstgrößere Wert der neue Wert mit\n"
 "\tdem die Messwerte skaliert werden. Dies lässt den Plot »zoomen«, um\n"
-"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, wenn\n"
+"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, "
+"wenn\n"
 "\tes einen großen Messwert gibt, kleine Messwerte von 0 womöglich nicht\n"
 "\tunterschieden werden können. Und wenn es nur kleine Messwerte gibt,\n"
 "\tdann können leicht größere Messwerte größer erscheinen als sie sollten.\n"
@@ -818,7 +818,8 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
+"verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
 
 #. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
@@ -832,11 +833,13 @@ msgid ""
 "    displayed area. Once the largest reading is no longer displayed\n"
 "    the next largest becomes the new value by which the readings\n"
 "    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
-"    However, it also means that if there is a large reading small readings\n"
+"    However, it also means that if there is a large reading small "
+"readings\n"
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading since\n"
+"    If not enabled the largest value used will be the largest reading "
+"since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -849,7 +852,8 @@ msgstr ""
 "\tdes angezeigten Bereichs skaliert. Sobald der größte Messwert nicht\n"
 "\tmehr angezeigt wird, wird der nächstgrößere Wert der neue Wert mit\n"
 "\tdem die Messwerte skaliert werden. Dies lässt den Plot »zoomen«, um\n"
-"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, wenn\n"
+"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, "
+"wenn\n"
 "\tes einen großen Messwert gibt, kleine Messwerte von 0 womöglich nicht\n"
 "\tunterschieden werden können. Und wenn es nur kleine Messwerte gibt,\n"
 "\tdann können leicht größere Messwerte größer erscheinen als sie sollten.\n"
@@ -859,5 +863,6 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
+"verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
