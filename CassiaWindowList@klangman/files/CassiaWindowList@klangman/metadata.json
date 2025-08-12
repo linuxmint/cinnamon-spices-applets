@@ -5,6 +5,6 @@
     "max-instances": -1,
     "multiversion": true,
     "role": "panellauncher",
-    "version": "2.4.2",
+    "version": "2.4.3",
     "author": "klangman"
 }

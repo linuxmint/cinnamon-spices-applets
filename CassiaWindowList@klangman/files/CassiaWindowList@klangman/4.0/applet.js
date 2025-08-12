@@ -1923,10 +1923,10 @@ class WindowListButton {
                 if (idx == 0 && btns[0]._windows.length > 1) {
                    idx = btns[0]._windows.indexOf(this._currentWindow);
                 }
-                if (idx >= 0 && idx < 9) {
+                if (idx >= 0 && idx <= 9) {
                    seqCombo = seqCombo.replace( /</g, "");
                    seqCombo = seqCombo.replace( />/g, "+");
-                   text = text + "\n" + seqCombo + (idx+1);
+                   text = text + "\n" + seqCombo + ((idx+1)%10);
                 }
                 if (secondCombo) {
                    secondCombo = secondCombo.replace( /</g, "");
@@ -1941,11 +1941,11 @@ class WindowListButton {
           } else if (isAllButtons(hotKeys[i])) {
              let childern = this._workspace.actor.get_children();
              let idx = childern.indexOf(this.actor);
-             if (idx >= 0 && idx < 9) {
+             if (idx >= 0 && idx <= 9) {
                 let keyString = hotKeys[i].keyCombo.toString();
                 keyString = keyString.replace( /</g, "");
                 keyString = keyString.replace( />/g, "+");
-                text = text + "\n" + keyString.slice(0,keyString.indexOf("+")+1) + (idx+1)
+                text = text + "\n" + keyString.slice(0,keyString.indexOf("+")+1) + ((idx+1)%10);
              }
           }
        }
@@ -2628,6 +2628,7 @@ class WindowListButton {
     } else if (mouseBtn == 3) {
       // right mouse button, show context menu
       if (global.settings.get_boolean("panel-edit-mode")===false) {
+         this.closeThumbnailMenu();
          this._populateContextMenu();
          this._contextMenu.open();
          this._updateFocus();
@@ -3554,6 +3555,22 @@ class WindowListButton {
       }
     }
 
+    let orderItem; // Will be added to the appropriate place in the menu below.
+    if( this._app && this._settings.getValue("remember-button-order") && this._settings.getValue("group-windows") < GroupType.Off) {
+       let order = this._settings.getValue("remembered-button-order");
+       let btnOrderIdx = order.findIndex( (element) => element == this._app.get_name() );
+       orderItem = new PopupMenu.PopupSwitchMenuItem(_("Prioritize window list position"), btnOrderIdx!==-1);
+       orderItem.connect("toggled", Lang.bind(this, function(menuItem, state) {
+          if (state) {
+             this._workspace._rememberButtonPosition(this);
+          } else {
+             order.splice(btnOrderIdx, 1);   // Delete the app entry in the priority order list
+             let newOrder = order.slice();
+             this._settings.setValue("remembered-button-order", newOrder);
+          }
+       }));
+    }
+
     if (this._currentWindow || metaWindow != undefined) {
       let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
 
@@ -3738,6 +3755,10 @@ class WindowListButton {
             }
          }
 
+         if (orderItem) {
+            this._contextMenu.addMenuItem(orderItem);
+         }
+
          // Menu options for grouping or ungrouping a button
          this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
          if (this._windows.length > 1) {
@@ -3859,6 +3880,12 @@ class WindowListButton {
         metaWindow.delete(global.get_current_time());
       }));
       this._contextMenu.addMenuItem(item);
+    } else {
+      // Add the orderItem for pinned buttons
+      if (orderItem) {
+        this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this._contextMenu.addMenuItem(orderItem);
+      }
     }
   }
 
@@ -4217,12 +4244,34 @@ class Workspace {
        if (children.length > 1 ){
           let i = children.length-2;  // ignoring the last button which will be this new button
           let pooling = (groupingType == GroupType.Pooled || groupingType == GroupType.Auto);
+          // Skip all pinned buttons or any buttons that are part of a pool with a pinned button
           for ( let prevApp = undefined ; i >= 0 && (children[i]._delegate._pinned === true || (pooling && prevApp === children[i]._delegate._app)) ; i-- ) {
              prevApp = children[i]._delegate._app;
           }
           if (i != children.length-2){
              this.actor.move_child(appButton.actor, i+1);
           }
+       }
+    }
+    // If there is a remembered app location for this app, move the button to the appropriate location on the window list
+    // Unless the new button is part of a pool, in which case the new window list button is already in the right location
+    if ((!btns || btns.length === 0) && this._settings.getValue("remember-button-order") && groupingType < GroupType.Off) {
+       let order = this._settings.getValue("remembered-button-order");
+       let appIdx = order.findIndex( (element) => element == app.get_name() );
+       if (appIdx != -1) {
+          let children = this.actor.get_children();
+          let bestIdx = 0;
+          for (let i=0 ; i < children.length ; i++) {
+             let childApp = children[i]._delegate._app;
+             if (childApp) {
+                let idx = order.findIndex( (element) => element == childApp.get_name() );
+                if (idx != -1 && idx < appIdx) {
+                   bestIdx = i+1;
+                }
+             }
+          }
+          //log( `Moving ${app.get_name()} to windowlist position ${bestIdx}` );
+          this.actor.set_child_at_index(appButton.actor, bestIdx);
        }
     }
     //appButton.actor.show();
@@ -4779,6 +4828,7 @@ class Workspace {
         this._dragPlaceholderPos = pos;
         // If we don't yet have a PlaceHolder, create one, otherwise move it
         if (this._dragPlaceholder == undefined) {
+          this._sourceOrigPos = pos;
           this._dragPlaceholder = new DND.GenericDragPlaceholderItem();
           this._dragPlaceholder.child.set_width(source.actor.width);
           this._dragPlaceholder.child.set_height(source.actor.height);
@@ -4823,22 +4873,29 @@ class Workspace {
               }
            }
            this._clearDragPlaceholder();
+           this._rememberButtonPosition(btns[0]);
         } else {
-           this.actor.set_child_at_index(source.actor, actorPos);
-           this._clearDragPlaceholder();
-           if (btns.length > 1 && (groupingType == GroupType.Pooled || groupingType == GroupType.Auto)) {
-              let btns = source._workspace._lookupAllAppButtonsForApp(source._app);
-              btns[btns.length-1]._updateLabel(); // The trailing button might need it's label restored
-              if (source === btns[btns.length-1]) {
-                 btns[btns.length-2]._updateLabel(); // If the dropped button is now the last one in the pool, then update the label of the previous button
-              }
-              if (btns[btns.length-1]._pinned === false) {
-                 for(let i=0 ; i<btns.length ; i++) {
-                    if (btns[i]._pinned) {
-                       this.pinAppButton(btns[btns.length-1]); // Clear existing pin and set the last button of the pool as pinned
-                       break;
+           // If the new position is not the same as where it was to begin with
+           if (this._sourceOrigPos !== actorPos && this._sourceOrigPos !== actorPos-1) {
+              this.actor.set_child_at_index(source.actor, actorPos);
+              this._clearDragPlaceholder();
+              if (btns.length > 1 && (groupingType == GroupType.Pooled || groupingType == GroupType.Auto)) {
+                 let btns = source._workspace._lookupAllAppButtonsForApp(source._app);
+                 btns[btns.length-1]._updateLabel(); // The trailing button might need it's label restored
+                 if (source === btns[btns.length-1]) {
+                    btns[btns.length-2]._updateLabel(); // If the dropped button is now the last one in the pool, then update the label of the previous button
+                 }
+                 if (btns[btns.length-1]._pinned === false) {
+                    for(let i=0 ; i<btns.length ; i++) {
+                       if (btns[i]._pinned) {
+                          this.pinAppButton(btns[btns.length-1]); // Clear existing pin and set the last button of the pool as pinned
+                          break;
+                       }
                     }
                  }
+              } else {
+                 // The "if" path above will be taken when moving a button within a pool, we only call _rememberButtonPosition() when not moving within a pool.
+                 this._rememberButtonPosition(source);
               }
            }
         }
@@ -4883,6 +4940,73 @@ class Workspace {
       this._dragPlaceholder = undefined;
       this._dragPlaceholderPos = undefined;
     }
+  }
+
+  _rememberButtonPosition(button) {
+     // Remembering is only possible in grouped or pooled configurations and when the window has a associated app
+     if (button._app && this._settings.getValue("remember-button-order") && this._settings.getValue("group-windows") < GroupType.Off) {
+        let app = button._app;
+        let order = this._settings.getValue("remembered-button-order");
+        let children = this.actor.get_children();
+        let btnIdx = children.findIndex( (child) => child._delegate === button );
+        let btnOrderIdx = order.findIndex( (element) => element == app.get_name() );
+        //log( `Button idx = ${btnIdx}, btnOrderIdx = ${btnOrderIdx}` );
+
+        if (btnIdx === 0) {
+           if (btnOrderIdx !== -1) order.splice( btnOrderIdx, 1 );
+           order.splice(0, 0, app.get_name());
+        } else if (btnIdx === children.length-1) {
+           if (btnOrderIdx !== -1) order.splice( btnOrderIdx, 1 );
+           order.push(app.get_name());
+        } else {
+           // Find an order array index for an app below but closest to the dropped button
+           let lowIdx = -1;
+           for(let i=btnIdx-1 ; i >=0 && lowIdx === -1; i--) {
+              let lowApp = children[i]._delegate._app;
+              if (lowApp) {
+                 lowIdx = order.findIndex( (element) => element == lowApp.get_name());
+              }
+           }
+           lowIdx++; // If nothing was found then lowIdx will be (-1+1) 0
+           // Find an order array index for an app above but closest to the dropped button
+           let highIdx = -1;
+           for(let i=btnIdx+1 ; i < children.length && highIdx === -1; i++) {
+              let highApp = children[i]._delegate._app;
+              if (highApp && highApp != app) {
+                 highIdx = order.findIndex( (element) => element === highApp.get_name());
+              }
+           }
+           if (highIdx === -1) {
+              highIdx = order.length;
+           }
+           //log( `lowIdx: ${lowIdx}, highIdx: ${highIdx}` );
+           // Add or move the app in the remembered-button-order
+           if (btnOrderIdx !== -1) {
+              if (btnOrderIdx < lowIdx) {
+                 order.splice(lowIdx, 0, app.get_name());  // Add at the lowest possible idx
+                 order.splice(btnOrderIdx, 1);             // Delete the old entry
+              }else if (btnOrderIdx > highIdx) {
+                 order.splice(btnOrderIdx, 1);             // Delete the old entry
+                 order.splice(highIdx, 0, app.get_name()); // Add at the highest possible idx
+              } else {
+                 // Do nothing, the order is already correct
+              }
+           } else {
+              if (lowIdx > 0) {
+                 order.splice(lowIdx, 0, app.get_name());  // Add at the lowest possible idx
+              } else {
+                 order.splice(highIdx, 0, app.get_name()); // Add at the highest possible idx
+              }
+           }
+        }
+        // Save the new order
+        let newOrder = order.slice();
+        this._settings.setValue("remembered-button-order", newOrder);
+        //log( `New Priority Order:` );
+        //for( let i=0 ; i < newOrder.length ; i++ ) {
+        //   log( `   ${newOrder[i]}` );
+        //}
+     }
   }
 
   destroy() {
@@ -5288,6 +5412,7 @@ class WindowList extends Applet.Applet {
                  for( let num=1 ; num < 10 ; num++ ) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
                  }
+                 Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-0" + this.instanceId);
                  if (secondCombo) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
                  }
@@ -5311,6 +5436,8 @@ class WindowList extends Applet.Applet {
               for( let num=1 ; num < 10 ; num++ ) {
                  Main.keybindingManager.addHotKey("CassiaWL-" + i + "-" + num + this.instanceId, seqCombo+num, Lang.bind(this, function() {this._performHotkey(idx, num)} ));
               }
+              // Now register the 10th hotkey using the "0" key
+              Main.keybindingManager.addHotKey("CassiaWL-" + i + "-0" + this.instanceId, seqCombo+"0", Lang.bind(this, function() {this._performHotkey(idx, 10)} ));
               if (secondCombo) {
                  Main.keybindingManager.addHotKey("CassiaWL-" + i + this.instanceId, secondCombo, Lang.bind(this, function() {this._performHotkey(idx)} ));
               }
@@ -5336,6 +5463,7 @@ class WindowList extends Applet.Applet {
                  for( let num=1 ; num < 10 ; num++ ) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
                  }
+                 Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-0" + this.instanceId);
                  if (secondCombo) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
                  }
@@ -5397,15 +5525,15 @@ class WindowList extends Applet.Applet {
            if (first.startsWith(modifiers) || second.startsWith(modifiers)) {
               if (isAllButtons(keyBindings[i])) {
                  let children = workspace.actor.get_children();
-                 for( let idx=0 ; idx < children.length && idx < 9 ; idx++ ){
-                    children[idx]._delegate._updateNumberForHotkeyHelp((idx+1).toString());
+                 for( let idx=0 ; idx < children.length && idx < 10 ; idx++ ){
+                    children[idx]._delegate._updateNumberForHotkeyHelp(((idx+1)%10).toString());
                  }
               } else if (keySequence && keyBindings[i].keyCombo.indexOf(modifiers+"1")!=-1) {
                  if (workspace._keyBindingsWindows[i]) {
                     let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
                     let btns = workspace._lookupAllAppButtonsForApp(app);
-                    for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
-                       btns[idx]._updateNumberForHotkeyHelp((idx+1).toString());
+                    for( let idx=0 ; idx<btns.length && idx < 10 ; idx++ ) {
+                       btns[idx]._updateNumberForHotkeyHelp(((idx+1)%10).toString());
                     }
                  }
               } else {
@@ -5413,7 +5541,7 @@ class WindowList extends Applet.Applet {
                     let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
                     if (app && keyBindings[i].cycle) {
                        let btns = workspace._lookupAllAppButtonsForApp(app);
-                       for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
+                       for( let idx=0 ; idx<btns.length && idx < 10 ; idx++ ) {
                           if (first.startsWith(modifiers)) {
                              btns[idx]._updateNumberForHotkeyHelp(first.slice(-1));
                           } else {

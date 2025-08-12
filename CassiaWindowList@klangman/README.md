@@ -1,7 +1,9 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features designed to give you more control over how your window-list operates.
 
-**Recent new features (Aug 2023 - Jul 2025):**
+**Recent new features (Aug 2023 - Aug 2025):**
 
+* Added a 10th hotkey ("0") for smart numeric hotkeys, i.e Super+0 will activate the 10th window on the window list
+* Add a "Button position priority list" that allows uses set a persistent button order
 * Added several new option to the Status Indicator and Icon Overlay Label drop-down lists
 * Added progress indicator support (Firefox downloading, Update manager, Nemo file copying)
 * Focus a buttons window when dragging an object to the window-list so the user can drop on the window
