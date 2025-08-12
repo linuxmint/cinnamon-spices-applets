@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-05 00:09-0400\n"
+"POT-Creation-Date: 2025-08-11 23:48-0400\n"
 "PO-Revision-Date: 2024-01-01 10:11+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -22,28 +22,28 @@ msgstr "alle knapper"
 msgid "windows in this group"
 msgstr ""
 
-#. 4.0/applet.js:3341 6.0/applet.js:3341 6.4/applet.js:3313
+#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3314
 msgid "Applet Preferences"
 msgstr "Indstillinger"
 
-#. 4.0/applet.js:3345 6.0/applet.js:3345 6.4/applet.js:3317
+#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3318
 msgid "About..."
 msgstr "Om …"
 
-#. 4.0/applet.js:3349 6.0/applet.js:3349 6.4/applet.js:3321
+#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3322
 msgid "Configure..."
 msgstr "Konfigurér …"
 
-#. 4.0/applet.js:3353 6.0/applet.js:3353 6.4/applet.js:3325
+#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3326
 msgid "Website"
 msgstr ""
 
-#. 4.0/applet.js:3357 6.0/applet.js:3357 6.4/applet.js:3329
+#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3330
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Fjern “%s”"
 
-#. 4.0/applet.js:3359 6.0/applet.js:3359 6.4/applet.js:3331
+#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3332
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Vil du virkelig fjerne denne forekomst af CassiaVinduesliste?"
 
@@ -65,77 +65,82 @@ msgstr "Vil du virkelig fjerne denne forekomst af CassiaVinduesliste?"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3368 6.0/applet.js:3368 6.4/applet.js:3340
+#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3341
 msgid "Open new window"
 msgstr "Åbn nyt vindue"
 
-#. 4.0/applet.js:3376 6.0/applet.js:3376 6.4/applet.js:3348
+#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3349
 msgid "Remove from panel"
 msgstr "Fjern fra panel"
 
-#. 4.0/applet.js:3378 6.0/applet.js:3378 6.4/applet.js:3350
+#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3351
 msgid "Remove from this workspace"
 msgstr "Fjern fra dette arbejdsområde"
 
-#. 4.0/applet.js:3384 6.0/applet.js:3384 6.4/applet.js:3356
+#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3357
 msgid "Pin to panel"
 msgstr "Fastgør til panel"
 
-#. 4.0/applet.js:3386 6.0/applet.js:3386 6.4/applet.js:3358
+#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3359
 msgid "Pin to this workspace"
 msgstr "Fastgør til dette arbejdsområde"
 
-#. 4.0/applet.js:3427 6.0/applet.js:3427 6.4/applet.js:3399
+#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3400
 msgid "Pin to other workspaces"
 msgstr "Fastgør til andre arbejdsområder"
 
-#. 4.0/applet.js:3448 6.0/applet.js:3448 6.4/applet.js:3420
+#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3421
 msgid "Pin to all workspaces"
 msgstr "Fastgør til alle arbejdsområder"
 
-#. 4.0/applet.js:3466 6.0/applet.js:3466 6.4/applet.js:3438
+#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3439
 msgid "Pin to launcher"
 msgstr "Fastgør til programstarter"
 
-#. 4.0/applet.js:3484 4.0/applet.js:3689 6.0/applet.js:3484 6.0/applet.js:3689
-#. 6.4/applet.js:3456 6.4/applet.js:3658
+#. 4.0/applet.js:3485 4.0/applet.js:3706 6.0/applet.js:3485 6.0/applet.js:3706
+#. 6.4/applet.js:3457 6.4/applet.js:3675
 msgid "Add new Hotkey for"
 msgstr "Tilføj ny genvejstast til"
 
-#. 4.0/applet.js:3498 6.0/applet.js:3498 6.4/applet.js:3470
+#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3471
 msgid "Recent files"
 msgstr "Seneste filer"
 
-#. 4.0/applet.js:3522 6.0/applet.js:3522 6.4/applet.js:3494
+#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3495
 msgid "Places"
 msgstr "Steder"
 
-#. 4.0/applet.js:3565 6.0/applet.js:3565 6.4/applet.js:3537
+#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
+#, fuzzy
+msgid "Prioritize window list position"
+msgstr "Fastgørelse af vindueslisteknapper"
+
+#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
 #, fuzzy
 msgid "Always on top"
 msgstr "Altid"
 
-#. 4.0/applet.js:3577 6.0/applet.js:3577 6.4/applet.js:3549
+#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3566
 msgid "Only on this workspace"
 msgstr "Kun på dette arbejdsområde"
 
-#. 4.0/applet.js:3579 6.0/applet.js:3579 6.4/applet.js:3551
+#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3568
 msgid "Visible on all workspaces"
 msgstr "Synlig på alle arbejdsområder"
 
-#. 4.0/applet.js:3580 6.0/applet.js:3580 6.4/applet.js:3552
+#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3569
 msgid "Move to another workspace"
 msgstr "Flyt til et andet arbejdsområde"
 
-#. 4.0/applet.js:3589 6.0/applet.js:3589 6.4/applet.js:3561
+#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3578
 msgid " (this workspace)"
 msgstr " (dette arbejdsområde)"
 
-#. 4.0/applet.js:3602 6.0/applet.js:3602 6.4/applet.js:3574
+#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3591
 msgid "Move to another monitor"
 msgstr "Flyt til en anden skærm"
 
-#. 4.0/applet.js:3610 6.0/applet.js:3610 6.4/applet.js:3582
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3599
 msgid "Monitor"
 msgstr "Skærm"
 
@@ -157,49 +162,49 @@ msgstr "Skærm"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3596
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
 #, fuzzy
 msgid "Move window here"
 msgstr "Luk vindue"
 
-#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3630
 msgid "unassigned"
 msgstr "ikke tildelt"
 
-#. 4.0/applet.js:3655 4.0/applet.js:3686 6.0/applet.js:3655 6.0/applet.js:3686
-#. 6.4/applet.js:3624 6.4/applet.js:3655
+#. 4.0/applet.js:3672 4.0/applet.js:3703 6.0/applet.js:3672 6.0/applet.js:3703
+#. 6.4/applet.js:3641 6.4/applet.js:3672
 msgid "Assign window to a hotkey"
 msgstr "Tildel en genvejstast til vindue"
 
-#. 4.0/applet.js:3709 6.0/applet.js:3709 6.4/applet.js:3678
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
 msgid "Change application label contents"
 msgstr "Ændr indholdet af programetiket"
 
-#. 4.0/applet.js:3712 6.0/applet.js:3712 6.4/applet.js:3681
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
 msgid "Remove custom setting"
 msgstr "Fjern brugerdefineret indstilling"
 
-#. 4.0/applet.js:3719 6.0/applet.js:3719 6.4/applet.js:3688
+#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3705
 msgid "Use window title"
 msgstr "Brug vinduestitel"
 
-#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
+#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
 msgid "Use application name"
 msgstr "Brug programnavn"
 
-#. 4.0/applet.js:3733 6.0/applet.js:3733 6.4/applet.js:3702
+#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3719
 msgid "No label"
 msgstr "Ingen etiket"
 
-#. 4.0/applet.js:3744 6.0/applet.js:3744 6.4/applet.js:3713
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
 msgid "Ungroup application windows"
 msgstr "Opsplit gruppen af programmervinduer"
 
-#. 4.0/applet.js:3752 6.0/applet.js:3752 6.4/applet.js:3721
+#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3742
 msgid "Group application windows"
 msgstr "Gruppér programvinduer"
 
-#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
+#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3755
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatisk gruppering/opsplitning af gruppe"
 
@@ -221,41 +226,41 @@ msgstr "Automatisk gruppering/opsplitning af gruppe"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3793 6.0/applet.js:3793 6.4/applet.js:3762
+#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3783
 msgid "Move titlebar on to screen"
 msgstr "Flyt titellinje til skærm"
 
-#. 4.0/applet.js:3798 6.0/applet.js:3798 6.4/applet.js:3767
+#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3788
 msgid "Restore"
 msgstr "Gendan"
 
-#. 4.0/applet.js:3802 6.0/applet.js:3802 6.4/applet.js:3771
+#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3792
 msgid "Minimize"
 msgstr "Minimér"
 
-#. 4.0/applet.js:3808 6.0/applet.js:3808 6.4/applet.js:3777
+#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3798
 msgid "Unmaximize"
 msgstr "Gendan"
 
-#. 4.0/applet.js:3816 6.0/applet.js:3816 6.4/applet.js:3785
+#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3806
 msgid "Close others"
 msgstr "Luk andre"
 
-#. 4.0/applet.js:3818 6.0/applet.js:3818 6.4/applet.js:3787
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
 #, fuzzy
 msgid "Close other windows for application"
 msgstr "Vis miniaturer for alle vinduer i en programpulje"
 
-#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
+#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3829
 msgid "Close all"
 msgstr "Luk alle"
 
-#. 4.0/applet.js:3841 6.0/applet.js:3841 6.4/applet.js:3810
+#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3831
 #, fuzzy
 msgid "Close all windows for application"
 msgstr "Vis miniaturer for alle vinduer i en programpulje"
 
-#. 4.0/applet.js:3857 6.0/applet.js:3857 6.4/applet.js:3826
+#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3847
 msgid "Close"
 msgstr "Luk"
 
@@ -294,6 +299,12 @@ msgstr "Etiketter"
 #. 6.4->settings-schema.json->general-page->title
 msgid "General"
 msgstr "Generelt"
+
+#. 4.0->settings-schema.json->mouse-page->title
+#. 6.0->settings-schema.json->mouse-page->title
+#. 6.4->settings-schema.json->mouse-page->title
+msgid "Mouse"
+msgstr ""
 
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
@@ -940,6 +951,27 @@ msgstr ""
 #. 6.4->settings-schema.json->show-windows-for-all-workspaces->description
 msgid "Include windows from all workspaces"
 msgstr "Medtag vinduer fra alle arbejdsområder"
+
+#. 4.0->settings-schema.json->remember-button-order->description
+#. 6.0->settings-schema.json->remember-button-order->description
+#. 6.4->settings-schema.json->remember-button-order->description
+#, fuzzy
+msgid "Allow prioritizing window list button order"
+msgstr "Fastgørelse af vindueslisteknapper"
+
+#. 4.0->settings-schema.json->remember-button-order->tooltip
+#. 6.0->settings-schema.json->remember-button-order->tooltip
+#. 6.4->settings-schema.json->remember-button-order->tooltip
+msgid ""
+"Enabling this option makes it easy for you to control where your favorite "
+"applications will appear on the window list. This is achieved by maintaining "
+"a persistent position priority order for applications. New Window list "
+"buttons for applications with priority will appear in priority order and "
+"ahead of applications without priority. Using drag-and-drop will "
+"automatically add to and reorder the priority list. The \"Prioritize window "
+"list position\" context menu option allows you to add and remove an "
+"application from the priority list."
+msgstr ""
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
@@ -2280,7 +2312,8 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
 #. 6.4->settings-schema.json->hotkey-sequence->description
-msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
+#, fuzzy
+msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
 msgstr ""
 "Smarte numeriske genvejstaster (brug af “1” udvides automatisk til 1–9)"
 
@@ -2290,9 +2323,10 @@ msgstr ""
 #, fuzzy
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
-"automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
-"first 9 windows of the assigned application, as ordered on the window list, "
-"will be activated by the 9 hotkeys."
+"automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The "
+"first 10 windows of the assigned application, as ordered on the window list, "
+"will be activated by the 10 hotkeys. The 1st window is activated by hotkey 1 "
+"and 10th window is activated by hotkey 0"
 msgstr ""
 "Hvis aktiveret, vil genvejstaster, der slutter med tasten “1” (f.eks. "
 "Alt+1), automatisk oprette genvejstasterne 1 til 9 (dvs. Alt+1 til Alt+9). "

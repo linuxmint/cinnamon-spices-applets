@@ -1,7 +1,7 @@
 {
   "layout" : {
     "type" : "layout",
-    "pages" : ["general-page", "caption-page", "preview-page", "hotkey-page", "advanced-page"],
+    "pages" : ["general-page", "mouse-page", "caption-page", "preview-page", "hotkey-page", "advanced-page"],
 
     "caption-page" : {
       "type" : "page",
@@ -12,7 +12,13 @@
     "general-page" : {
       "type" : "page",
       "title" : "General",
-      "sections" : ["general-settings", "general-mouse"] 
+      "sections" : ["general-settings"]
+    },
+
+    "mouse-page" : {
+      "type" : "page",
+      "title" : "Mouse",
+      "sections" : ["general-mouse"]
     },
 
     "preview-page" : {
@@ -52,7 +58,7 @@
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "show-tooltips", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "remember-button-order", "show-tooltips", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
     },
     "general-mouse" : {
       "type" : "section",
@@ -284,6 +290,13 @@
     "type": "switch",
     "default": false,
     "description": "Include windows from all workspaces"
+  },
+  "remember-button-order": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows<3",
+    "description": "Allow prioritizing window list button order",
+    "tooltip": "Enabling this option makes it easy for you to control where your favorite applications will appear on the window list. This is achieved by maintaining a persistent position priority order for applications. New Window list buttons for applications with priority will appear in priority order and ahead of applications without priority. Using drag-and-drop will automatically add to and reorder the priority list. The \"Prioritize window list position\" context menu option allows you to add and remove an application from the priority list."
   },
   "show-tooltips": {
     "type": "switch",
@@ -780,8 +793,8 @@
   "hotkey-sequence": {
     "type": "switch",
     "default": true,
-    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)",
-    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The first 9 windows of the assigned application, as ordered on the window list, will be activated by the 9 hotkeys."
+    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)",
+    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The first 10 windows of the assigned application, as ordered on the window list, will be activated by the 10 hotkeys. The 1st window is activated by hotkey 1 and 10th window is activated by hotkey 0"
   },
   "hotkey-grave-help": {
     "type": "switch",
@@ -935,6 +948,11 @@
   "commoned-pinned-apps": {
     "type": "generic",
     "default": ["nemo.desktop", "firefox.desktop"]
+  },
+
+  "remembered-button-order": {
+     "type": "generic",
+     "default": []
   },
 
   "custom-label-app": {
