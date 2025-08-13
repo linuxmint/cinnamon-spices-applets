@@ -1,3 +1,6 @@
+### v2.6.2~20250813
+  * New options for Swap in the Memory graph.
+
 ### v2.6.1~20250813
   * Improved memory measurement speed.
 

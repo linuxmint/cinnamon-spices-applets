@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: multicore-sys-monitor@ccadeptic23 2.5.1\n"
+"Project-Id-Version: multicore-sys-monitor@ccadeptic23 2.6.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-10 18:05+0200\n"
+"POT-Creation-Date: 2025-08-13 19:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,8 +19,8 @@ msgstr ""
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:900
-#. 6.4/applet.js:936 3.4/DataProviders.js:58 3.4/prefs.js:195
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:976
+#. 6.4/applet.js:1013 3.4/DataProviders.js:58 3.4/prefs.js:195
 #. 5.6/DataProviders.js:55 5.6/prefs.js:303 4.0/DataProviders.js:55
 #. 4.0/prefs.js:303 3.0/prefsui.glade:452 3.2/prefsui.glade:504
 #. 6.0/prefsui.glade:580 3.4/prefsui.glade:434 5.6/prefsui.glade:580
@@ -34,13 +34,13 @@ msgid "------------- CPU ------------"
 msgstr ""
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
-#. 6.4/applet.js:938 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 6.4/applet.js:1015 3.4/DataProviders.js:129 5.6/DataProviders.js:126
 #. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr ""
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
-#. 6.4/applet.js:716 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 6.4/applet.js:798 3.4/DataProviders.js:141 5.6/DataProviders.js:138
 #. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr ""
@@ -50,7 +50,7 @@ msgstr ""
 msgid "----------- Memory -----------"
 msgstr ""
 
-#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 6.4/applet.js:41
+#. 3.0/DataProviders.js:164 3.2/DataProviders.js:164 6.4/applet.js:42
 msgid "Usedup:"
 msgstr ""
 
@@ -65,13 +65,13 @@ msgid "Buffer:"
 msgstr ""
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
-#. 6.4/applet.js:42 6.4/applet.js:775 3.4/DataProviders.js:162
+#. 6.4/applet.js:43 6.4/applet.js:848 3.4/DataProviders.js:162
 #. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr ""
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
-#. 6.4/applet.js:855 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 6.4/applet.js:928 3.4/DataProviders.js:176 5.6/DataProviders.js:173
 #. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr ""
@@ -83,7 +83,7 @@ msgstr ""
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
-#. 6.4/applet.js:43 6.4/applet.js:880 3.4/DataProviders.js:195
+#. 6.4/applet.js:44 6.4/applet.js:956 3.4/DataProviders.js:195
 #. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
 #. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
 #. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
@@ -91,7 +91,7 @@ msgid "Swap"
 msgstr ""
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
-#. 6.4/applet.js:960 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 6.4/applet.js:1037 3.4/DataProviders.js:205 5.6/DataProviders.js:204
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr ""
@@ -102,7 +102,7 @@ msgid "---------- Networks ----------"
 msgstr ""
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
-#. 6.4/applet.js:44 6.4/applet.js:1069 3.4/DataProviders.js:300
+#. 6.4/applet.js:45 6.4/applet.js:1146 3.4/DataProviders.js:300
 #. 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr ""
@@ -113,13 +113,13 @@ msgid "(KiB/s)"
 msgstr ""
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
-#. 6.4/applet.js:45 6.4/applet.js:1070 3.4/DataProviders.js:301
+#. 6.4/applet.js:46 6.4/applet.js:1147 3.4/DataProviders.js:301
 #. 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr ""
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
-#. 6.4/applet.js:1087 3.4/DataProviders.js:317 5.6/DataProviders.js:315
+#. 6.4/applet.js:1164 3.4/DataProviders.js:317 5.6/DataProviders.js:315
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr ""
@@ -130,7 +130,7 @@ msgid "------------ Disks -----------"
 msgstr ""
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
-#. 6.4/applet.js:46 6.4/applet.js:1197 3.4/DataProviders.js:386
+#. 6.4/applet.js:47 6.4/applet.js:1274 3.4/DataProviders.js:386
 #. 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr ""
@@ -141,7 +141,7 @@ msgid "(MiB/s)"
 msgstr ""
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
-#. 6.4/applet.js:47 6.4/applet.js:1198 3.4/DataProviders.js:387
+#. 6.4/applet.js:48 6.4/applet.js:1275 3.4/DataProviders.js:387
 #. 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr ""
@@ -206,12 +206,12 @@ msgstr ""
 msgid "Error while saving file:"
 msgstr ""
 
-#. 6.0/DataProviders.js:52 6.4/applet.js:34 3.4/DataProviders.js:49
+#. 6.0/DataProviders.js:52 6.4/applet.js:35 3.4/DataProviders.js:49
 #. 5.6/DataProviders.js:47 4.0/DataProviders.js:47
 msgid "/s"
 msgstr ""
 
-#. 6.0/DataProviders.js:164 6.4/applet.js:40 6.4/applet.js:775
+#. 6.0/DataProviders.js:164 6.4/applet.js:41 6.4/applet.js:848
 #. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr ""
@@ -234,15 +234,15 @@ msgstr ""
 msgid "Refresh graphs"
 msgstr ""
 
-#. 6.0/applet.js:325 6.4/applet.js:336
+#. 6.0/applet.js:325 6.4/applet.js:360
 msgid "Without any graphics"
 msgstr ""
 
-#. 6.0/applet.js:331 6.4/applet.js:342
+#. 6.0/applet.js:331 6.4/applet.js:366
 msgid "With graphics"
 msgstr ""
 
-#. 6.0/applet.js:341 6.4/applet.js:353
+#. 6.0/applet.js:341 6.4/applet.js:377
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
@@ -275,71 +275,71 @@ msgstr ""
 msgid "Execution of '%s' failed:"
 msgstr ""
 
-#. 6.4/applet.js:37
+#. 6.4/applet.js:38
 msgid "Core 128:"
 msgstr ""
 
-#. 6.4/applet.js:38
+#. 6.4/applet.js:39
 msgid "Unrecoverable:"
 msgstr ""
 
-#. 6.4/applet.js:39
+#. 6.4/applet.js:40
 msgid "Recoverable:"
 msgstr ""
 
-#. 6.4/applet.js:326
+#. 6.4/applet.js:350
 msgid "Refresh All"
 msgstr ""
 
-#. 6.4/applet.js:432
+#. 6.4/applet.js:456
 msgid "root"
 msgstr ""
 
 #. 6.4->settings-schema.json->pageNetwork->title
-#. 6.4/applet.js:600 6.4/applet.js:967 3.0/prefsui.glade:1154
+#. 6.4/applet.js:677 6.4/applet.js:1044 3.0/prefsui.glade:1154
 #. 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289 3.4/prefsui.glade:1143
 #. 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr ""
 
-#. 6.4/applet.js:658 6.4/applet.js:1096 6.4/applet.js:1181
+#. 6.4/applet.js:741 6.4/applet.js:1173 6.4/applet.js:1258
 msgid "Disks"
 msgstr ""
 
 #. 6.4->settings-schema.json->pageMem->title
-#. 6.4/applet.js:770 3.0/prefsui.glade:832 3.2/prefsui.glade:884
+#. 6.4/applet.js:843 3.0/prefsui.glade:832 3.2/prefsui.glade:884
 #. 6.0/prefsui.glade:954 3.4/prefsui.glade:808 5.6/prefsui.glade:954
 #. 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr ""
 
-#. 6.4/applet.js:804
+#. 6.4/applet.js:877
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 6.4/applet.js:832 6.4/applet.js:930
+#. 6.4/applet.js:905 6.4/applet.js:1007
 msgid ":"
 msgstr ""
 
-#. 6.4/applet.js:834 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.4/applet.js:907 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
 #. 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr ""
 
-#. 6.4/applet.js:834
+#. 6.4/applet.js:907
 msgid "Cache"
 msgstr ""
 
-#. 6.4/applet.js:834
+#. 6.4/applet.js:907
 msgid "Shared"
 msgstr ""
 
-#. 6.4/applet.js:926
+#. 6.4/applet.js:1003
 msgid "CPUs"
 msgstr ""
 
-#. 6.4/applet.js:1054
+#. 6.4/applet.js:1131
 msgid "Networks"
 msgstr ""
 
@@ -539,6 +539,31 @@ msgstr ""
 #. 3.0/prefsui.glade:723 3.2/prefsui.glade:775 6.0/prefsui.glade:847
 #. 3.4/prefsui.glade:701 5.6/prefsui.glade:847 4.0/prefsui.glade:847
 msgid "Free"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->description
+msgid "Relative width for Swap graph"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "100%"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "25%, left side"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->options
+msgid "None"
+msgstr ""
+
+#. 6.4->settings-schema.json->Mem_swapWidth->tooltip
+msgid ""
+"100%: The Swap graph is a bar that spans the entire width of the graph, "
+"behind the circle.\n"
+"10%: The Swap graph is a bar that occupies 10% of the graph width, to the "
+"left of the circle.\n"
+"None: No Swap bar."
 msgstr ""
 
 #. 6.4->settings-schema.json->Net_autoscale->description

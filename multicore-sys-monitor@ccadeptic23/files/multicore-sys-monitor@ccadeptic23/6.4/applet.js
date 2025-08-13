@@ -1,5 +1,6 @@
 //!/usr/bin/cjs
 const DEBUG = false;
+const TESTING = false;
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
@@ -159,6 +160,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
         this.settings.bind("Mem_colorFree", "Mem_colorFree");
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
+        this.settings.bind("Mem_swapWidth", "Mem_swapWidth");
         this.settings.bind("Net_enabled", "Net_enabled");
         this.settings.bind("Net_squared", "Net_squared");
         this.settings.bind("Net_width", "Net_width");
@@ -307,7 +309,7 @@ class MCSM extends Applet.TextIconApplet {
                         areaContext,
                         // no label for the backdrop
                         false,
-                        width - 2 * global.ui_scale,
+                        Math.round(width * this.Mem_swapWidth / 100) - 2 * global.ui_scale,
                         this.panelHeight - 2 * global.ui_scale,
                         [0, 0, 0, 0],
                         // clear background so that it doesn't mess up the other one
@@ -939,7 +941,10 @@ class SwapDataProvider {
 
     setData(total, value) {
         this.swapusage = parseInt(total) !== 0;
-        this.currentReadings = [value];
+        if (TESTING)
+            this.currentReadings = [0.6];
+        else
+            this.currentReadings = [value];
     }
 
     getTooltipString() {
