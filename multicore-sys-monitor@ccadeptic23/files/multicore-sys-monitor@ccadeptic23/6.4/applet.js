@@ -525,19 +525,32 @@ class MCSM extends Applet.TextIconApplet {
         if (!this.Mem_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
+        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
+            //~ if (exitCode === 0) {
+                //~ let [, dataMem, dataSwap] = stdout.split(":");
+                //~ dataMem = dataMem.trim();
+                //~ dataMem = dataMem.replace(/\ +/g, " ");
+                //~ dataSwap = dataSwap.trim();
+                //~ dataSwap = dataSwap.replace(/\ +/g, " ");
+                //~ let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
+                //~ let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
+                //~ this.memoryProvider.setData(1 * total, 1 * used);
+                //~ this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
+                //~ this.buffcachesharedProvider.setData(buffers, cache, shared);
+            //~ }
+            //~ subProcess.send_signal(9);
+            //~ if (DEBUG) {
+                //~ duration = Date.now() - old;
+                //~ global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
+            //~ }
+        //~ });
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-raw-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
-                let [, dataMem, dataSwap] = stdout.split(":");
-                dataMem = dataMem.trim();
-                dataMem = dataMem.replace(/\ +/g, " ");
-                dataSwap = dataSwap.trim();
-                dataSwap = dataSwap.replace(/\ +/g, " ");
-                let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
-                let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                //~ this.memoryProvider.setData(1 * total, 1 * used, 1 * free, 1 * available);
+                let [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed] = stdout.split(" ");
+
                 this.memoryProvider.setData(1 * total, 1 * used);
-                this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
-                this.buffcachesharedProvider.setData(buffers, cache, shared);
+                this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
+                this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
             }
             subProcess.send_signal(9);
             if (DEBUG) {
