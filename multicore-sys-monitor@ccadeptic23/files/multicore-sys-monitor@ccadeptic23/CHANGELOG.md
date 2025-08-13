@@ -1,3 +1,6 @@
+### v2.6.3~20250813
+  * Updated the `get-disk-info.sh` script.
+
 ### v2.6.2~20250813
   * New options for Swap in the Memory graph.
 
