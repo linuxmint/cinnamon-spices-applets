@@ -90,6 +90,8 @@ class GraphVBars {
   }
 
   paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList) {
+    if (providerName == 'SWAP' && this.applet.Mem_swapWidth === 0)
+      return;
     if (!labelColor) {
         labelColor = [1, 1, 1, 0.1];
     } else {

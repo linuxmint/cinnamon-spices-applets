@@ -131,7 +131,8 @@
       "keys": [
         "Mem_colorUsedup",
         "Mem_colorFree",
-        "Mem_colorSwap"
+        "Mem_colorSwap",
+        "Mem_swapWidth"
       ]
     },
     "sectionNetworkOptions": {
@@ -405,6 +406,17 @@
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 0.15)",
     "description": "Swap"
+  },
+  "Mem_swapWidth": {
+    "type": "combobox",
+    "default": 100,
+    "description": "Relative width for Swap graph",
+    "options": {
+      "100%": 100,
+      "25%, left side": 25,
+      "None": 0
+    },
+    "tooltip": "100%: The Swap graph is a bar that spans the entire width of the graph, behind the circle.\n10%: The Swap graph is a bar that occupies 10% of the graph width, to the left of the circle.\nNone: No Swap bar."
   },
   "Net_enabled": {
     "type": "switch",
