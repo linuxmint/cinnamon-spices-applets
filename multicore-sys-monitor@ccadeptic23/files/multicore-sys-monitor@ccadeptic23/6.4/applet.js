@@ -1,4 +1,5 @@
 //!/usr/bin/cjs
+const DEBUG = false;
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
@@ -18,7 +19,6 @@ const {
 const { to_string } = require("./lib/tostring");
 const Graphs = require('./lib/Graphs');
 const {
-  timeout_add_seconds,
   timeout_add,
   setTimeout,
   clearTimeout,
@@ -136,7 +136,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Disk_labelOn", "Disk_labelOn");
         this.settings.bind("thickness", "thickness");
         this.settings.bind("useIconSize", "useIconSize");
-        this.settings.bind("refreshRate", "refreshRate");
+        this.settings.bind("refreshRate", "refreshRate", () => { this.run_main_loop(); });
         this.settings.bind("labelColor", "labelColor");
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
@@ -177,6 +177,8 @@ class MCSM extends Applet.TextIconApplet {
         if (this.refreshRate < 1000)
             this.refreshRate = 1000;
 
+        this.mainLoopId = null;
+
         this.on_color_changed();
         this.useSymbolicIcon = true;
         if (this.without_any_graph)
@@ -209,6 +211,8 @@ class MCSM extends Applet.TextIconApplet {
         });
 
         this.oldCPUvalues = [];
+        this.oldCPU_Total_Values = [];
+        this.oldCPU_Idle_Values = [];
 
         this.hovered = false;
         this.actor.connect('enter-event', (actor, event) => {
@@ -261,6 +265,24 @@ class MCSM extends Applet.TextIconApplet {
         this.diskGraph.logScale = this.Disk_logscale;
 
         this.actor.add_actor(this.graphArea);
+    }
+
+    run_main_loop() {
+        if (this.mainLoopId != null && source_exists(this.mainLoopId)) {
+            this.isRunning = false;
+            source_remove(this.mainLoopId);
+            this.mainLoopId = null;
+            this.isRunning = true;
+        }
+        this.mainLoopId = timeout_add(this.refreshRate, () => {
+            this.get_mem_info();
+            this.get_cpu_info();
+            this.get_net_info();
+            this.get_disk_info();
+            this._setTooltip();
+            this.graphArea.queue_repaint();
+            return this.isRunning;
+        });
     }
 
     onGraphRepaint(area) {
@@ -501,6 +523,8 @@ class MCSM extends Applet.TextIconApplet {
     get_mem_info() {
         if (!this.isRunning) return;
         if (!this.Mem_enabled) return;
+        let old, duration;
+        if (DEBUG) old = Date.now();
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let [, dataMem, dataSwap] = stdout.split(":");
@@ -510,40 +534,73 @@ class MCSM extends Applet.TextIconApplet {
                 dataSwap = dataSwap.replace(/\ +/g, " ");
                 let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
                 let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                this.memoryProvider.setData(1 * total, 1 * used, 1 * free, 1 * available);
+                //~ this.memoryProvider.setData(1 * total, 1 * used, 1 * free, 1 * available);
+                this.memoryProvider.setData(1 * total, 1 * used);
                 this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
                 this.buffcachesharedProvider.setData(buffers, cache, shared);
             }
             subProcess.send_signal(9);
+            if (DEBUG) {
+                duration = Date.now() - old;
+                global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
+            }
         });
     }
 
     get_cpu_info() {
         if (!this.isRunning) return;
         if (!this.CPU_enabled) return;
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-data3.sh", (stdout, stderr, exitCode) => {
+        let old, duration;
+        if (DEBUG) old = Date.now();
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-raw-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let cpuString = stdout.trim();
                 var data = [];
                 let values = cpuString.split(" ");
-                if (this.oldCPUvalues.length === 0) { // first execution
+                if (this.oldCPU_Total_Values.length === 0) { // first execution
                     if (this.CPU_mergeAll) {
                         data.push(0);
+                        for (let v of values) {
+                            let [total, idle] = v.split(",");
+                            this.oldCPU_Total_Values.push(total);
+                            this.oldCPU_Idle_Values.push(idle);
+                        }
                     } else {
-                        for (let i=0, len=values.length; i<len; i++)
+                        for (let i=0, len=values.length; i<len; i++) {
                             data.push(0);
+                            let [total, idle] = values[i].split(",");
+                            this.oldCPU_Total_Values.push(total);
+                            this.oldCPU_Idle_Values.push(idle);
+                        }
                     }
                 } else { // next executions
                     if (this.CPU_mergeAll) {
-                        data.push(parseFloat(values[0]) / 100);
+                        //~ data.push(parseFloat(values[0]) / 100);
+                        let [totalValue, idleValue] = values[0].split(",");
+                        let total = totalValue - this.oldCPU_Total_Values[0];
+                        let idle = idleValue - this.oldCPU_Idle_Values[0];
+                        data.push((total - idle) / total);
+                        this.oldCPU_Total_Values[0] = totalValue;
+                        this.oldCPU_Idle_Values[0] = idleValue;
+                        for (let i=1, len=values.length; i < len; i++) {
+                            let [totalValue, idleValue] = values[i].split(",");
+                            this.oldCPU_Total_Values[i] = totalValue;
+                            this.oldCPU_Idle_Values[i] = idleValue;
+                        }
                     } else {
                         let i = 0;
                         for (let v of values) {
+                            let [totalValue, idleValue] = v.split(",");
+                            let total = totalValue - this.oldCPU_Total_Values[i];
+                            let idle = idleValue - this.oldCPU_Idle_Values[i];
+                            this.oldCPU_Total_Values[i] = totalValue;
+                            this.oldCPU_Idle_Values[i] = idleValue;
                             if (i === 0) {
                                 i++;
                                 continue;
                             }
-                            data.push(parseFloat(v) / 100);
+                            data.push((total - idle) / total);
+                            //~ data.push(parseFloat(v) / 100);
                             i++;
                         }
                     }
@@ -551,18 +608,23 @@ class MCSM extends Applet.TextIconApplet {
                 this.oldCPUvalues = values;
 
                 this.multiCpuProvider.setData(data);
+
             }
             subProcess.send_signal(9);
+            if (DEBUG) {
+                duration = Date.now() - old;
+                global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
+            }
         });
     }
 
     get_net_info() {
         if (!this.isRunning) return;
         if (!this.Net_enabled) return;
+        let old, duration;
+        if (DEBUG) old = Date.now();
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
-                //~ global.log(UUID + " - stdout is a " + typeof stdout);
-                //~ global.log(UUID + " - stdout: " + stdout);
                 var allowedInterfaces = [];
                 var names = {};
                 for (let dev of this.Net_devicesList) {
@@ -606,12 +668,18 @@ class MCSM extends Applet.TextIconApplet {
                 this.networkProvider.setData(data, disabledDevices);
             }
             subProcess.send_signal(9);
+            if (DEBUG) {
+                duration = Date.now() - old;
+                global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
+            }
         });
     }
 
     get_disk_info() {
         if (!this.isRunning) return;
         if (!this.Disk_enabled) return;
+        let old, duration;
+        if (DEBUG) old = Date.now();
         var usedDevices = [];
         var deviceNames = {};
         var deviceGrans = {};
@@ -661,20 +729,30 @@ class MCSM extends Applet.TextIconApplet {
             });
         }
         this.diskProvider.setData(data);
-        //~ global.log(UUID + " - data:\n" + JSON.stringify(data, null, "\t"));
+        if (DEBUG) {
+            duration = Date.now() - old;
+            global.log(UUID + " - get_disk_info Duration: " + duration + " ms.");
+        }
 
     }
 
     _setTooltip() {
         if (!this.isRunning) return;
+        if (!this.hovered) {
+            this.set_applet_tooltip("");
+            return;
+        }
         var appletTooltipString = "";
-        appletTooltipString += this.multiCpuProvider.getTooltipString();
-        appletTooltipString += this.memoryProvider.getTooltipString();
-        appletTooltipString += this.swapProvider.getTooltipString();
-        appletTooltipString += this.buffcachesharedProvider.getTooltipString();
-        appletTooltipString += this.networkProvider.getTooltipString();
-        appletTooltipString += this.diskProvider.getTooltipString();
-
+        for (let provider of [
+            "multiCpuProvider",
+            "memoryProvider",
+            "swapProvider",
+            "buffcachesharedProvider",
+            "networkProvider",
+            "diskProvider"
+        ]) {
+            appletTooltipString += this[provider].getTooltipString();
+        }
         if (this.hovered)
             this.set_applet_tooltip(appletTooltipString);
     }
@@ -689,18 +767,7 @@ class MCSM extends Applet.TextIconApplet {
 
     on_applet_added_to_panel() {
         this.isRunning = true;
-        timeout_add(this.refreshRate, () => {
-            this.get_mem_info();
-            this.get_cpu_info();
-            this.get_net_info();
-            this.get_disk_info();
-            this._setTooltip();
-            this.graphArea.queue_repaint();
-            //~ this.onGraphRepaint(this.graphArea);
-            //~ this.graphArea.emit('repaint');
-
-            return this.isRunning;
-        });
+        this.run_main_loop();
     }
 
     on_applet_removed_from_panel() {
@@ -736,26 +803,17 @@ class MemDataProvider {
 
     //~ setData(used, cached, buffers, free) {
     //~ setData(used, recoverable) {
-    setData(total, used, free, available) {
+    //~ setData(total, used, free, available) {
+    setData(total, used) {
         const precision = 100000;
-        //~ let unavailable = used - buffers - cached;
-        //~ let unavailable = used - cached;
-        //~ let unavailable = used;
-        //~ this.currentReadings = [
-            //~ Math.round(used * precision) / precision,
-            //~ Math.round(cached * precision) / precision,
-            //~ Math.round(buffers * precision) / precision,
-            //~ Math.max(Math.round((1 - used)*precision) / precision, Math.round((free - buffers)*precision) / precision)
-        //~ ];
-        const recoverable = available - free;
-        const unrecoverable = used - recoverable;
-        const realUsed = recoverable + unrecoverable;
-        //~ this.currentReadings = [
-            //~ Math.round((unrecoverable) / total * precision) / precision,
-            //~ Math.round(recoverable / total * precision) / precision,
-            //~ Math.round((1 - used / total)*precision) / precision
-        //~ ];
-        const usedProp = realUsed / total;
+        //~ const recoverable = available - free;
+        //~ const unrecoverable = used - recoverable;
+        //~ const realUsed = recoverable + unrecoverable;
+
+        //~ const realUsed = available - free + used - (available - free);
+        //~ const realUsed = used;
+        //~ const usedProp = realUsed / total;
+        const usedProp = used / total;
         this.currentReadings = [
             Math.round(usedProp * precision) / precision,
             Math.round((1 - usedProp)*precision) / precision
@@ -898,6 +956,7 @@ class MultiCpuDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _('CPU');
+        this.prevData = [];
         this.currentReadings = [];
     }
 
