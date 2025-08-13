@@ -523,7 +523,7 @@ class MCSM extends Applet.TextIconApplet {
     get_mem_info() {
         if (!this.isRunning) return;
         if (!this.Mem_enabled) return;
-        let old = Date.now();
+        if (DEBUG) let old = Date.now();
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let [, dataMem, dataSwap] = stdout.split(":");
@@ -539,16 +539,17 @@ class MCSM extends Applet.TextIconApplet {
                 this.buffcachesharedProvider.setData(buffers, cache, shared);
             }
             subProcess.send_signal(9);
-            let duration = Date.now() - old;
-            if (DEBUG)
-                global.log(UUID + " - get_mem_info Duration: " + duration);
+            if (DEBUG) {
+                let duration = Date.now() - old;
+                global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
+            }
         });
     }
 
     get_cpu_info() {
         if (!this.isRunning) return;
         if (!this.CPU_enabled) return;
-        let old = Date.now();
+        if (DEBUG) let old = Date.now();
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-raw-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let cpuString = stdout.trim();
@@ -608,20 +609,19 @@ class MCSM extends Applet.TextIconApplet {
 
             }
             subProcess.send_signal(9);
-            let duration = Date.now() - old;
-            if (DEBUG)
-                global.log(UUID + " - get_cpu_info Duration: " + duration);
+            if (DEBUG) {
+                let duration = Date.now() - old;
+                global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
+            }
         });
     }
 
     get_net_info() {
         if (!this.isRunning) return;
         if (!this.Net_enabled) return;
-        let old = Date.now();
+        if (DEBUG) let old = Date.now();
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
-                //~ global.log(UUID + " - stdout is a " + typeof stdout);
-                //~ global.log(UUID + " - stdout: " + stdout);
                 var allowedInterfaces = [];
                 var names = {};
                 for (let dev of this.Net_devicesList) {
@@ -665,16 +665,17 @@ class MCSM extends Applet.TextIconApplet {
                 this.networkProvider.setData(data, disabledDevices);
             }
             subProcess.send_signal(9);
-            let duration = Date.now() - old;
-            if (DEBUG)
-                global.log(UUID + " - get_net_info Duration: " + duration);
+            if (DEBUG) {
+                let duration = Date.now() - old;
+                global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
+            }
         });
     }
 
     get_disk_info() {
         if (!this.isRunning) return;
         if (!this.Disk_enabled) return;
-        let old = Date.now();
+        if (DEBUG) let old = Date.now();
         var usedDevices = [];
         var deviceNames = {};
         var deviceGrans = {};
@@ -724,10 +725,10 @@ class MCSM extends Applet.TextIconApplet {
             });
         }
         this.diskProvider.setData(data);
-        //~ global.log(UUID + " - data:\n" + JSON.stringify(data, null, "\t"));
-        let duration = Date.now() - old;
-        if (DEBUG)
-            global.log(UUID + " - get_disk_info Duration: " + duration);
+        if (DEBUG) {
+            let duration = Date.now() - old;
+            global.log(UUID + " - get_disk_info Duration: " + duration + " ms.");
+        }
 
     }
 
