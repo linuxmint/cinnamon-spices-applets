@@ -1,3 +1,6 @@
+### v2.6.0~20250813
+  * Improved processor measurement speed.
+
 ### v2.5.2~20250811
   * Speed improvement.
 
