@@ -1,0 +1,70 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Nvidia Settings"
+    },
+    "enable-coolbits": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable coolbits",
+        "tooltip": "Allows overclocking (not recommended)\nSee https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Overclocking_and_cooling"
+    },
+    "coolbits": {
+        "type": "entry",
+        "default": "28",
+        "description": "Coolbits",
+        "dependency": "enable-coolbits"
+    },
+    "enable-forcecompositionpipeline": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable ForceCompositionPipeline",
+        "tooltip": "Enable if facing screen tearing"
+    },
+    "override-dm": {
+        "type": "switch",
+        "default": false,
+        "description": "Manually specify your Display Manager"
+    },
+    "dm": {
+        "type": "combobox",
+        "description": "Display manager",
+        "default": "lightdm",
+        "options": {
+            "gdm": "gdm",
+            "gdm3": "gdm3",
+            "sddm": "sddm",
+            "lightdm": "lightdm"
+        },
+        "dependency": "override-dm"
+    },
+    "use-nvidia-current": {
+        "type": "switch",
+        "default": false,
+        "description": "Use nvidia-current instead of nvidia for kernel modules",
+        "tooltip": "If nvidia kernel module is named nvidia-current on Debian, use this flag to make EnvyControl use the correct module name"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Hybrid Settings"
+    },
+    "enable-rtd3": {
+        "type": "switch",
+        "default": false,
+        "description": "Setup PCI-Express Runtime D3 (RTD3) Power Management",
+        "tooltip": "RTD3 allows the dGPU to be dynamically turned off when not in use"
+    },
+    "rtd3": {
+        "type": "combobox",
+        "description": "RTD3",
+        "default": "2",
+        "options": {
+            "0": "0",
+            "1": "1",
+            "2": "2",
+            "3": "3"
+        },
+        "tooltip": "0 - disabled\n1 - coarse-grained\n2 - fine-grained\n3 - fine-grained for Ampere and later",
+        "dependency": "enable-rtd3"
+    }
+}
