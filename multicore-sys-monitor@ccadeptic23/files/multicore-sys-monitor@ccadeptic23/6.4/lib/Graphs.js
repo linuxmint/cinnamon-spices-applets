@@ -127,10 +127,15 @@ class GraphVBars {
         //~ areaContext.rectangle(0, 0, width, height);
         //~ areaContext.fill();
 
-        areaContext.moveTo(0.5, 0);
-        areaContext.lineTo(width - 0.5, 0);
-        areaContext.lineTo(width - 0.5, height);
-        areaContext.lineTo(0.5, height);
+        //~ areaContext.moveTo(0.5, 0);
+        //~ areaContext.lineTo(width - 0.5, 0);
+        //~ areaContext.lineTo(width - 0.5, height);
+        //~ areaContext.lineTo(0.5, height);
+        areaContext.moveTo(0, 0);
+        areaContext.lineTo(width, 0);
+        areaContext.lineTo(width, height);
+        areaContext.lineTo(0, height);
+
         areaContext.closePath();
         areaContext.stroke();
         _width = width - 2;
@@ -301,10 +306,16 @@ class GraphPieChart {
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
       //~ areaContext.rectangle(0, 0, width, height);
       //~ areaContext.fill();
-      areaContext.moveTo(0.5, 0);
-      areaContext.lineTo(width - 0.5, 0);
-      areaContext.lineTo(width - 0.5, height);
-      areaContext.lineTo(0.5, height);
+
+      //~ areaContext.moveTo(0.5, 0);
+      //~ areaContext.lineTo(width - 0.5, 0);
+      //~ areaContext.lineTo(width - 0.5, height);
+      //~ areaContext.lineTo(0.5, height);
+      areaContext.moveTo(0, 0);
+      areaContext.lineTo(width, 0);
+      areaContext.lineTo(width, height);
+      areaContext.lineTo(0, height);
+
       areaContext.closePath();
       areaContext.stroke();
       _width = width - 2;
@@ -525,10 +536,16 @@ class GraphLineChart {
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
       //~ areaContext.rectangle(0, 0, width, height);
       //~ areaContext.fill();
-      areaContext.moveTo(0.5, 0);
-      areaContext.lineTo(width - 0.5, 0);
-      areaContext.lineTo(width - 0.5, height);
-      areaContext.lineTo(0.5, height);
+
+      //~ areaContext.moveTo(0.5, 0);
+      //~ areaContext.lineTo(width - 0.5, 0);
+      //~ areaContext.lineTo(width - 0.5, height);
+      //~ areaContext.lineTo(0.5, height);
+      areaContext.moveTo(0, 0);
+      areaContext.lineTo(width, 0);
+      areaContext.lineTo(width, height);
+      areaContext.lineTo(0, height);
+
       areaContext.closePath();
       areaContext.stroke();
       _width = width - 2;

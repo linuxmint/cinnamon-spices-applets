@@ -63,8 +63,10 @@
       "type": "section",
       "title": "Options",
       "keys": [
+        "removeEnlightenment",
         "labelsOn",
         "borderOn",
+        "graphSpacing",
         "thickness",
         "useIconSize",
         "refreshRate"
@@ -76,8 +78,7 @@
       "keys": [
         "labelColor",
         "borderColor",
-        "backgroundColor",
-        "removeEnlightenment"
+        "backgroundColor"
       ]
     },
     "sectionCPUOptions": {
@@ -245,6 +246,15 @@
     "default": false,
     "description": "Add a border to each graph"
   },
+  "graphSpacing": {
+    "type": "scale",
+    "default": 1,
+    "description": "Graph spacing",
+    "min": -1,
+    "max": 10,
+    "step": 1,
+    "show-value": true
+  },
   "thickness": {
     "type": "scale",
     "default": 1,
@@ -286,6 +296,7 @@
   },
   "removeEnlightenment": {
     "type": "button",
+    "dependency": "isHighlighted",
     "callback": "_removeEnlightenment",
     "description": "Remove Enlightenment of this applet"
   },
@@ -944,5 +955,9 @@
   "labelWarning": {
     "type": "label",
     "description": "Data marked with ⚠️ must not be changed!"
+  },
+  "isHighlighted": {
+    "type": "generic",
+    "default": false
   }
 }

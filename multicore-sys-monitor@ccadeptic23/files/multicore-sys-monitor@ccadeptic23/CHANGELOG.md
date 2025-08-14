@@ -1,4 +1,7 @@
-### v2.7.3~20250814
+### v2.7.1~20250814
+  * Improved Graph Border options.
+
+### v2.7.0~20250814
   * Added Border options.
 
 ### v2.6.3~20250813
