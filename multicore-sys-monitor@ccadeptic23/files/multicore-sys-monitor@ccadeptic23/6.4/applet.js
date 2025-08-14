@@ -109,7 +109,8 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
-class MCSM extends Applet.TextIconApplet {
+//~ class MCSM extends Applet.TextIconApplet {
+class MCSM extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -128,12 +129,14 @@ class MCSM extends Applet.TextIconApplet {
         }
 
         this.settings = new AppletSettings(this, UUID, this.instance_id);
-        this.settings.bind("CPU_useProgressiveColors", "CPU_useProgressiveColors", null);
+        this.settings.bind("isHighlighted", "isHighlighted");
+        this.settings.bind("CPU_useProgressiveColors", "CPU_useProgressiveColors");
         this.settings.bind("CPU_byActivity", "CPU_byActivity", () => { this.on_CPU_byActivity_changed(); });
         this.settings.bind("Net_devicesList", "Net_devicesList");
         this.settings.bind("Disk_devicesList", "Disk_devicesList");
         this.settings.bind("labelsOn", "labelsOn");
         this.settings.bind("borderOn", "borderOn");
+        this.settings.bind("graphSpacing", "graphSpacing");
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
         this.settings.bind("Net_labelOn", "Net_labelOn");
@@ -298,9 +301,10 @@ class MCSM extends Applet.TextIconApplet {
     }
 
     onGraphRepaint(area) {
+        this._isHighlighted;
         if (this.without_any_graph) return;
         let xOffset = 0;
-        for (let i = 0; i < properties.length; i++) {
+        for (let i = 0, len = properties.length; i < len; i++) {
             if (properties[i].abbrev === 'Swap') {
                 continue;
             }
@@ -337,6 +341,7 @@ class MCSM extends Applet.TextIconApplet {
                     this.labelsOn && labelOn,
                     width,
                     this.panelHeight - 2 * global.ui_scale,
+                    //~ (this.borderOn) ? (this.panelHeight - 2) * 0.8 * global.ui_scale : (this.panelHeight - 2) * global.ui_scale,
                     this.labelColor,
                     this.backgroundColor,
                     this[properties[i].provider].getColorList()
@@ -344,10 +349,15 @@ class MCSM extends Applet.TextIconApplet {
                 // return translation to origin
                 areaContext.translate(-xOffset, 0);
                 // update xOffset for next translation
-                xOffset += width + 1;
+                //~ xOffset += width + 1;
+                if (i === len - 1)
+                    xOffset += width;
+                else
+                    xOffset += width + 1 + this.graphSpacing;
             }
         }
-        area.set_width(xOffset > 1 ? xOffset - 1 : 1);
+        //~ area.set_width(xOffset > 1 ? xOffset - 1 : 1);
+        area.set_width(xOffset > 1 ? xOffset : 1);
         area.set_height(this.panelHeight);
     }
 
@@ -802,6 +812,13 @@ class MCSM extends Applet.TextIconApplet {
     on_applet_removed_from_panel() {
         this.isRunning = false;
         remove_all_sources();
+    }
+
+    get _isHighlighted() {
+        let itis = this.actor.has_style_pseudo_class("highlight");
+        if (this.isHighlighted !== itis)
+            this.isHighlighted = itis;
+        return itis;
     }
 
 }

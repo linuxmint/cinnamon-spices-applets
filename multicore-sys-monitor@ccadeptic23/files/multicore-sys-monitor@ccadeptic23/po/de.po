@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-14 05:11+0200\n"
+"POT-Creation-Date: 2025-08-14 15:30+0200\n"
 "PO-Revision-Date: 2025-08-14 07:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:990
-#. 6.4/applet.js:1027 3.4/DataProviders.js:58 3.4/prefs.js:195
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:1007
+#. 6.4/applet.js:1044 3.4/DataProviders.js:58 3.4/prefs.js:195
 #. 5.6/DataProviders.js:55 5.6/prefs.js:303 4.0/DataProviders.js:55
 #. 4.0/prefs.js:303 3.0/prefsui.glade:452 3.2/prefsui.glade:504
 #. 6.0/prefsui.glade:580 3.4/prefsui.glade:434 5.6/prefsui.glade:580
@@ -36,13 +36,13 @@ msgid "------------- CPU ------------"
 msgstr "------- Prozessor (CPU) ------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
-#. 6.4/applet.js:1029 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 6.4/applet.js:1046 3.4/DataProviders.js:129 5.6/DataProviders.js:126
 #. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Kern"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
-#. 6.4/applet.js:812 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 6.4/applet.js:829 3.4/DataProviders.js:141 5.6/DataProviders.js:138
 #. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
@@ -67,13 +67,13 @@ msgid "Buffer:"
 msgstr "Buffer:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
-#. 6.4/applet.js:45 6.4/applet.js:862 3.4/DataProviders.js:162
+#. 6.4/applet.js:45 6.4/applet.js:879 3.4/DataProviders.js:162
 #. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Frei:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
-#. 6.4/applet.js:942 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 6.4/applet.js:959 3.4/DataProviders.js:176 5.6/DataProviders.js:173
 #. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
@@ -85,7 +85,7 @@ msgstr "--------- Swap (SWAP) --------"
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
-#. 6.4/applet.js:46 6.4/applet.js:970 3.4/DataProviders.js:195
+#. 6.4/applet.js:46 6.4/applet.js:987 3.4/DataProviders.js:195
 #. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
 #. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
 #. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
@@ -93,7 +93,7 @@ msgid "Swap"
 msgstr "Swap"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
-#. 6.4/applet.js:1051 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 6.4/applet.js:1068 3.4/DataProviders.js:205 5.6/DataProviders.js:204
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
@@ -104,7 +104,7 @@ msgid "---------- Networks ----------"
 msgstr "------- Networks (NET) -------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
-#. 6.4/applet.js:47 6.4/applet.js:1160 3.4/DataProviders.js:300
+#. 6.4/applet.js:47 6.4/applet.js:1177 3.4/DataProviders.js:300
 #. 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Download:"
@@ -115,13 +115,13 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
-#. 6.4/applet.js:48 6.4/applet.js:1161 3.4/DataProviders.js:301
+#. 6.4/applet.js:48 6.4/applet.js:1178 3.4/DataProviders.js:301
 #. 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Upload:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
-#. 6.4/applet.js:1178 3.4/DataProviders.js:317 5.6/DataProviders.js:315
+#. 6.4/applet.js:1195 3.4/DataProviders.js:317 5.6/DataProviders.js:315
 #. 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
@@ -132,7 +132,7 @@ msgid "------------ Disks -----------"
 msgstr "----- Festplatte (DISK) ------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
-#. 6.4/applet.js:49 6.4/applet.js:1286 3.4/DataProviders.js:386
+#. 6.4/applet.js:49 6.4/applet.js:1303 3.4/DataProviders.js:386
 #. 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Lesen:"
@@ -143,7 +143,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
-#. 6.4/applet.js:50 6.4/applet.js:1287 3.4/DataProviders.js:387
+#. 6.4/applet.js:50 6.4/applet.js:1304 3.4/DataProviders.js:387
 #. 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Schreiben:"
@@ -213,7 +213,7 @@ msgstr "Fehler beim Speichern der Datei:"
 msgid "/s"
 msgstr "/s"
 
-#. 6.0/DataProviders.js:164 6.4/applet.js:43 6.4/applet.js:862
+#. 6.0/DataProviders.js:164 6.4/applet.js:43 6.4/applet.js:879
 #. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Benutzt:"
@@ -242,15 +242,15 @@ msgstr ""
 msgid "Refresh graphs"
 msgstr "Diagramme aktualisieren"
 
-#. 6.0/applet.js:325 6.4/applet.js:370
+#. 6.0/applet.js:325 6.4/applet.js:380
 msgid "Without any graphics"
 msgstr "Keine Diagramme"
 
-#. 6.0/applet.js:331 6.4/applet.js:376
+#. 6.0/applet.js:331 6.4/applet.js:386
 msgid "With graphics"
 msgstr "Mit Diagrammen"
 
-#. 6.0/applet.js:341 6.4/applet.js:387
+#. 6.0/applet.js:341 6.4/applet.js:397
 msgid "Drop Memory Cache (needs root rights)"
 msgstr "Speicher-Cache leeren (benötigt Root-Rechte)"
 
@@ -295,60 +295,60 @@ msgstr ""
 msgid "Recoverable:"
 msgstr ""
 
-#. 6.4/applet.js:360
+#. 6.4/applet.js:370
 msgid "Refresh All"
 msgstr "Alles aktualisieren"
 
-#. 6.4/applet.js:466
+#. 6.4/applet.js:476
 msgid "root"
 msgstr ""
 
 #. 6.4->settings-schema.json->pageNetwork->title
-#. 6.4/applet.js:687 6.4/applet.js:1058 3.0/prefsui.glade:1154
+#. 6.4/applet.js:697 6.4/applet.js:1075 3.0/prefsui.glade:1154
 #. 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289 3.4/prefsui.glade:1143
 #. 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr "Netzwerk"
 
-#. 6.4/applet.js:751 6.4/applet.js:1187 6.4/applet.js:1270
+#. 6.4/applet.js:761 6.4/applet.js:1204 6.4/applet.js:1287
 msgid "Disks"
 msgstr "Festplatten"
 
 #. 6.4->settings-schema.json->pageMem->title
-#. 6.4/applet.js:857 3.0/prefsui.glade:832 3.2/prefsui.glade:884
+#. 6.4/applet.js:874 3.0/prefsui.glade:832 3.2/prefsui.glade:884
 #. 6.0/prefsui.glade:954 3.4/prefsui.glade:808 5.6/prefsui.glade:954
 #. 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr "Speicher"
 
-#. 6.4/applet.js:891
+#. 6.4/applet.js:908
 msgid "Buffers/Cache/Shared"
 msgstr "Buffer/Cache/Shared"
 
-#. 6.4/applet.js:919 6.4/applet.js:1021
+#. 6.4/applet.js:936 6.4/applet.js:1038
 msgid ":"
 msgstr ":"
 
-#. 6.4/applet.js:921 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.4/applet.js:938 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
 #. 4.0/prefsui.glade:809
 msgid "Buffer"
 msgstr "Buffer"
 
-#. 6.4/applet.js:921
+#. 6.4/applet.js:938
 #, fuzzy
 msgid "Cache"
 msgstr "Cache"
 
-#. 6.4/applet.js:921
+#. 6.4/applet.js:938
 msgid "Shared"
 msgstr "Shared"
 
-#. 6.4/applet.js:1017
+#. 6.4/applet.js:1034
 msgid "CPUs"
 msgstr "CPUs"
 
-#. 6.4/applet.js:1145
+#. 6.4/applet.js:1162
 msgid "Networks"
 msgstr "Netzwerke"
 
@@ -445,6 +445,10 @@ msgstr "Beschriftungen"
 #. 6.4->settings-schema.json->borderOn->description
 msgid "Add a border to each graph"
 msgstr "Rahmen um jedes Diagramm"
+
+#. 6.4->settings-schema.json->graphSpacing->description
+msgid "Graph spacing"
+msgstr ""
 
 #. 6.4->settings-schema.json->thickness->description
 #. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
@@ -833,8 +837,7 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small "
-"readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -849,8 +852,7 @@ msgstr ""
 "\tdes angezeigten Bereichs skaliert. Sobald der größte Messwert nicht\n"
 "\tmehr angezeigt wird, wird der nächstgrößere Wert der neue Wert mit\n"
 "\tdem die Messwerte skaliert werden. Dies lässt den Plot »zoomen«, um\n"
-"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, "
-"wenn\n"
+"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, wenn\n"
 "\tes einen großen Messwert gibt, kleine Messwerte von 0 womöglich nicht\n"
 "\tunterschieden werden können. Und wenn es nur kleine Messwerte gibt,\n"
 "\tdann können leicht größere Messwerte größer erscheinen als sie sollten.\n"
@@ -860,8 +862,7 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
-"verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
 
 #. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
@@ -875,13 +876,11 @@ msgid ""
 "    displayed area. Once the largest reading is no longer displayed\n"
 "    the next largest becomes the new value by which the readings\n"
 "    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
-"    However, it also means that if there is a large reading small "
-"readings\n"
+"    However, it also means that if there is a large reading small readings\n"
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading "
-"since\n"
+"    If not enabled the largest value used will be the largest reading since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -894,8 +893,7 @@ msgstr ""
 "\tdes angezeigten Bereichs skaliert. Sobald der größte Messwert nicht\n"
 "\tmehr angezeigt wird, wird der nächstgrößere Wert der neue Wert mit\n"
 "\tdem die Messwerte skaliert werden. Dies lässt den Plot »zoomen«, um\n"
-"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, "
-"wenn\n"
+"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, wenn\n"
 "\tes einen großen Messwert gibt, kleine Messwerte von 0 womöglich nicht\n"
 "\tunterschieden werden können. Und wenn es nur kleine Messwerte gibt,\n"
 "\tdann können leicht größere Messwerte größer erscheinen als sie sollten.\n"
@@ -905,6 +903,5 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
-"verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
