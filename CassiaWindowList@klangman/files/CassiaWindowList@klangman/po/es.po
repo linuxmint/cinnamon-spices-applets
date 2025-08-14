@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-11 23:48-0400\n"
-"PO-Revision-Date: 2025-07-06 19:32-0400\n"
+"PO-Revision-Date: 2025-08-13 21:07-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -115,9 +115,8 @@ msgid "Places"
 msgstr "Lugares"
 
 #. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
-#, fuzzy
 msgid "Prioritize window list position"
-msgstr "Fijación de botones de lista de ventanas"
+msgstr "Priorizar la posición de la lista de ventanas"
 
 #. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
 msgid "Always on top"
@@ -304,7 +303,7 @@ msgstr "General"
 #. 6.0->settings-schema.json->mouse-page->title
 #. 6.4->settings-schema.json->mouse-page->title
 msgid "Mouse"
-msgstr ""
+msgstr "Ratón"
 
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
@@ -971,9 +970,8 @@ msgstr "Incluir ventanas de todos los espacios de trabajo"
 #. 4.0->settings-schema.json->remember-button-order->description
 #. 6.0->settings-schema.json->remember-button-order->description
 #. 6.4->settings-schema.json->remember-button-order->description
-#, fuzzy
 msgid "Allow prioritizing window list button order"
-msgstr "Fijación de botones de lista de ventanas"
+msgstr "Permitir priorizar el orden de los botones de la lista de ventanas"
 
 #. 4.0->settings-schema.json->remember-button-order->tooltip
 #. 6.0->settings-schema.json->remember-button-order->tooltip
@@ -988,6 +986,14 @@ msgid ""
 "list position\" context menu option allows you to add and remove an "
 "application from the priority list."
 msgstr ""
+"Activar esta opción le facilita controlar dónde aparecerán sus aplicaciones "
+"favoritas en la lista de ventanas. Esto se consigue manteniendo un orden de "
+"prioridad de posición persistente para las aplicaciones. Los botones de la "
+"lista de ventanas nuevas para aplicaciones con prioridad aparecerán en orden "
+"de prioridad y por delante de las aplicaciones sin prioridad. Al arrastrar y "
+"soltar se añadirán y reordenarán automáticamente en la lista de prioridades. "
+"La opción del menú contextual \"Priorizar posición de la lista de ventanas\" "
+"permite añadir y eliminar una aplicación de la lista de prioridades."
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
@@ -2359,16 +2365,14 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
 #. 6.4->settings-schema.json->hotkey-sequence->description
-#, fuzzy
 msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
 msgstr ""
-"Teclas de acceso rápido numéricas inteligentes (el uso de \"1\" se amplía "
-"automáticamente a 1-9)"
+"Teclas de acceso rápido numéricas inteligentes (el uso de \"1\" se extiende "
+"automáticamente al 0-9)"
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.4->settings-schema.json->hotkey-sequence->tooltip
-#, fuzzy
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The "
@@ -2378,9 +2382,10 @@ msgid ""
 msgstr ""
 "Si está activada, las teclas de acceso rápido que terminan con la tecla "
 "\"1\" (es decir, Alt+1) crearán automáticamente las teclas de acceso rápido "
-"1 a 9 (es decir, Alt+1 a Alt+9). Las 9 primeras ventanas de la aplicación "
-"asignada, ordenadas en la lista de ventanas, se activarán mediante las 9 "
-"teclas de acceso rápido."
+"0 a 9 (es decir, Alt+0 a Alt+9). Las 10 primeras ventanas de la aplicación "
+"asignada, ordenadas en la lista de ventanas, se activarán mediante las 10 "
+"teclas de acceso rápido. La 1ª ventana se activa con la tecla de acceso "
+"rápido 1 y la 10ª ventana se activa con la tecla de acceso rápido 0"
 
 #. 4.0->settings-schema.json->hotkey-grave-help->description
 #. 6.0->settings-schema.json->hotkey-grave-help->description
