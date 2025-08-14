@@ -1,3 +1,6 @@
+### v2.7.3~20250814
+  * Added Border options.
+
 ### v2.6.3~20250813
   * Updated the `get-disk-info.sh` script.
 

@@ -1,6 +1,8 @@
 //!/usr/bin/cjs
 const DEBUG = false;
 const TESTING = false;
+const nb_colors = 32;
+
 const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
@@ -131,14 +133,16 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Net_devicesList", "Net_devicesList");
         this.settings.bind("Disk_devicesList", "Disk_devicesList");
         this.settings.bind("labelsOn", "labelsOn");
+        this.settings.bind("borderOn", "borderOn");
         this.settings.bind("CPU_labelOn", "CPU_labelOn");
         this.settings.bind("Mem_labelOn", "Mem_labelOn");
         this.settings.bind("Net_labelOn", "Net_labelOn");
         this.settings.bind("Disk_labelOn", "Disk_labelOn");
         this.settings.bind("thickness", "thickness");
-        this.settings.bind("useIconSize", "useIconSize");
+        this.settings.bind("useIconSize", "useIconSize", () => { this.set_panelHeight(); });
         this.settings.bind("refreshRate", "refreshRate", () => { this.run_main_loop(); });
         this.settings.bind("labelColor", "labelColor");
+        this.settings.bind("borderColor", "borderColor");
         this.settings.bind("backgroundColor", "backgroundColor");
         this.settings.bind("CPU_enabled", "CPU_enabled");
         this.settings.bind("CPU_squared", "CPU_squared");
@@ -173,7 +177,7 @@ class MCSM extends Applet.TextIconApplet {
         this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
-        for (let i=0; i<16; i++)
+        for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
         if (this.refreshRate < 1000)
@@ -186,11 +190,9 @@ class MCSM extends Applet.TextIconApplet {
         if (this.without_any_graph)
             this.setIcon();
         //~ global.log("ICON SIZE: " + this.getPanelIconSize(St.IconType.FULLCOLOR));
-        this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
-        if (this.useIconSize)
-            this.panelHeight = this.iconSize;
-        else
-            this.panelHeight = this._panelHeight;
+
+        this.set_panelHeight();
+
 
         // Is the user a sudoer?
         var user = GLib.get_user_name();
@@ -267,6 +269,14 @@ class MCSM extends Applet.TextIconApplet {
         this.diskGraph.logScale = this.Disk_logscale;
 
         this.actor.add_actor(this.graphArea);
+    }
+
+    set_panelHeight() {
+        this.iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
+        if (this.useIconSize)
+            this.panelHeight = this.iconSize;
+        else
+            this.panelHeight = this._panelHeight;
     }
 
     run_main_loop() {
@@ -419,8 +429,8 @@ class MCSM extends Applet.TextIconApplet {
                                 "enabled": status === "up",
                                 "id": dev,
                                 "name": dev,
-                                "colorDown": (knownDevices.length * 2) % 16,
-                                "colorUp": (knownDevices.length * 2 + 1) % 16
+                                "colorDown": (knownDevices.length * 2) % nb_colors,
+                                "colorUp": (knownDevices.length * 2 + 1) % nb_colors
                             });
                             knownDevices.push(dev);
                         }
@@ -466,8 +476,8 @@ class MCSM extends Applet.TextIconApplet {
                                 "id": mntName,
                                 "name": (mntPoint.length > 0) ? mntPoint : mntName,
                                 "discGran": discGran,
-                                "colorRead": (knownDevices.length * 2) % 16,
-                                "colorWrite": (knownDevices.length * 2 + 1) % 16
+                                "colorRead": (knownDevices.length * 2) % 32,
+                                "colorWrite": (knownDevices.length * 2 + 1) % 32
                             });
                             knownDevices.push(mntName);
                         }
@@ -507,7 +517,7 @@ class MCSM extends Applet.TextIconApplet {
 
     on_color_changed() {
         let colors = [];
-        for (let i=0; i<16; i++) {
+        for (let i=0; i<nb_colors; i++) {
             let color = this[`color${i}`];
             let color_array = color.split(",");
             color_array[0] = color_array[0].replace(/rgba\(/g, "").replace(/rgb\(/g, "");
@@ -770,6 +780,10 @@ class MCSM extends Applet.TextIconApplet {
         }
         if (this.hovered)
             this.set_applet_tooltip(appletTooltipString);
+    }
+
+    _removeEnlightenment() {
+        this.highlight(false);
     }
 
     refreshAll() {
@@ -1204,8 +1218,6 @@ class DiskDataProvider {
         for (let dev of this.applet.Disk_devicesList) {
             if (dev.enabled === true) {
                  colorList = colorList.concat([this.applet.colors[dev.colorRead], this.applet.colors[dev.colorWrite]]);
-                 //~ colorList = colorList.concat([this.applet[`colors${dev.colorRead}`], this.applet[`colors${dev.colorWrite}`]]);
-                 //~ colorList.push([this.applet.colors[dev.colorRead], this.applet.colors[dev.colorWrite]]);
             }
         }
         return colorList;

@@ -64,6 +64,7 @@
       "title": "Options",
       "keys": [
         "labelsOn",
+        "borderOn",
         "thickness",
         "useIconSize",
         "refreshRate"
@@ -74,7 +75,9 @@
       "title": "Colors",
       "keys": [
         "labelColor",
-        "backgroundColor"
+        "borderColor",
+        "backgroundColor",
+        "removeEnlightenment"
       ]
     },
     "sectionCPUOptions": {
@@ -237,6 +240,11 @@
     "default": true,
     "description": "Labels"
   },
+  "borderOn": {
+    "type": "switch",
+    "default": false,
+    "description": "Add a border to each graph"
+  },
   "thickness": {
     "type": "scale",
     "default": 1,
@@ -265,10 +273,21 @@
     "default": "rgba(238, 238, 236, 1)",
     "description": "Label Color"
   },
+  "borderColor": {
+    "type": "colorchooser",
+    "default": "rgba(238, 238, 236, 1)",
+    "description": "Border Color",
+    "dependency": "borderOn"
+  },
   "backgroundColor": {
     "type": "colorchooser",
     "default": "rgba(48, 48, 48, 0.1)",
     "description": "Background Color"
+  },
+  "removeEnlightenment": {
+    "type": "button",
+    "callback": "_removeEnlightenment",
+    "description": "Remove Enlightenment of this applet"
   },
   "CPU_enabled": {
     "type": "switch",

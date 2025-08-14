@@ -21,6 +21,7 @@ function RGBa2rgba(color) {
         var rgbaArray = color.split(",");
         rgbaArray[0] = rgbaArray[0].replace(/rgba\(/g, "").replace(/rgb\(/g, "");
         rgbaArray[rgbaArray.length - 1] = rgbaArray[rgbaArray.length - 1].replace(/\)/g, "");
+        if (rgbaArray.length === 3) rgbaArray.push(1.0);
         for (let i=0; i<3; i++) {
             rgbaArray[i] = 1.0 * rgbaArray[i] / 255;
             if (rgbaArray[i] === 1)
@@ -112,18 +113,49 @@ class GraphVBars {
     //~ global.log("GraphVBars bgColor: " + JSON.stringify(bgColor, null, 4));
     //~ global.log("GraphVBars colorsList: " + JSON.stringify(colorsList, null, 4));
 
-    // Background
+    let _width = width;
+    let _height = height;
+    let _x_origin = 0;
+    let _y_origin = 0;
+
+    //Draw Border
+    let borderColor;
+    if (this.applet.borderOn) {
+      if (providerName != 'SWAP') {
+        borderColor = RGBa2rgba(this.applet.borderColor);
+        areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+        //~ areaContext.rectangle(0, 0, width, height);
+        //~ areaContext.fill();
+
+        areaContext.moveTo(0.5, 0);
+        areaContext.lineTo(width - 0.5, 0);
+        areaContext.lineTo(width - 0.5, height);
+        areaContext.lineTo(0.5, height);
+        areaContext.closePath();
+        areaContext.stroke();
+        _width = width - 2;
+      } else {
+        _width = width + 1;
+      }
+      _height = height - 2;
+      _x_origin = 1;
+      _y_origin = 1;
+    }
+
+
+    //Draw Background
+    if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
 
-    //areaContext.rectangle(0, 0, this.width, this.height);
-    this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
+    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
+    areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
     // Usage Data Bars
-    let vbarWidth = (width - 6) / currentReadings.length;
+    let vbarWidth = (_width - 6) / currentReadings.length;
     for (let i = 0; i < currentReadings.length; i++) {
       let currentR = parseFloat(currentReadings[i]);
-      let vbarHeight = (height - 1) * currentR;
+      let vbarHeight = (_height - 1) * currentR;
       let vbarOffset = i * vbarWidth + 3;
 
       let r=1, g=1, b=1, a=1;
@@ -184,7 +216,7 @@ class GraphVBars {
       }
       areaContext.setSourceRGBA(r, g, b, a);
 
-      this.drawRoundedRectangle(areaContext, vbarOffset, height - vbarHeight, vbarWidth, vbarHeight, 1.5);
+      this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.5);
       areaContext.fill();
     }
 
@@ -193,13 +225,13 @@ class GraphVBars {
       let pangolayout = area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
-      pangolayout.set_width(width);
-      let fontsize_px = Math.trunc(1 / 3 * height);
+      pangolayout.set_width(_width);
+      let fontsize_px = Math.trunc(1 / 3 * _height);
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
-      areaContext.moveTo(width / 2, 0); //place text in center of graph area
+      areaContext.moveTo(_width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(areaContext, pangolayout);
       areaContext.fill();
     }
@@ -257,14 +289,40 @@ class GraphPieChart {
     //~ global.log("GraphPieChart colorsList: " + JSON.stringify(colorsList, null, 4));
 
 
+    let _width = width;
+    let _height = height;
+    let _x_origin = 0;
+    let _y_origin = 0;
+
+    //Draw Border
+    let borderColor;
+    if (this.applet.borderOn) {
+      borderColor = RGBa2rgba(this.applet.borderColor);
+      areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+      //~ areaContext.rectangle(0, 0, width, height);
+      //~ areaContext.fill();
+      areaContext.moveTo(0.5, 0);
+      areaContext.lineTo(width - 0.5, 0);
+      areaContext.lineTo(width - 0.5, height);
+      areaContext.lineTo(0.5, height);
+      areaContext.closePath();
+      areaContext.stroke();
+      _width = width - 2;
+      _height = height - 2;
+      _x_origin = 1;
+      _y_origin = 1;
+    }
+
     //Draw Background
+    if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
-    this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
+    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
+    areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
     //Draw Pie Chart
-    let xcenter = width / 2;
-    let ycenter = height / 2;
+    let xcenter = _width / 2;
+    let ycenter = _height / 2;
     let radius = Math.min(xcenter, ycenter) - 1;
 
     let runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
@@ -301,13 +359,13 @@ class GraphPieChart {
       let pangolayout = area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
-      pangolayout.set_width(width);
-      let fontsize_px = Math.trunc(1 / 3 * height);
+      pangolayout.set_width(_width);
+      let fontsize_px = Math.trunc(1 / 3 * _height);
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       areaContext.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
-      areaContext.moveTo(width / 2, 0); //place text in center of graph area
+      areaContext.moveTo(_width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(areaContext, pangolayout);
       areaContext.fill();
     }
@@ -455,9 +513,36 @@ class GraphLineChart {
       this.resizeDataPointsList(this.getDataPointsListSize(width), colorsList.length);
     }
 
+    let _width = width;
+    let _height = height;
+    let _x_origin = 0;
+    let _y_origin = 0;
+
+    //Draw Border
+    let borderColor;
+    if (this.applet.borderOn) {
+      borderColor = RGBa2rgba(this.applet.borderColor);
+      areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
+      //~ areaContext.rectangle(0, 0, width, height);
+      //~ areaContext.fill();
+      areaContext.moveTo(0.5, 0);
+      areaContext.lineTo(width - 0.5, 0);
+      areaContext.lineTo(width - 0.5, height);
+      areaContext.lineTo(0.5, height);
+      areaContext.closePath();
+      areaContext.stroke();
+      _width = width - 2;
+      _height = height - 2;
+      _x_origin = 1;
+      _y_origin = 1;
+    }
+
     //Draw Background
+    if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
-    this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
+    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
+    //~ this.drawRoundedRectangle(areaContext, _x_origin, _y_origin, _width, _height, 5.0);
+    areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
     //data
@@ -508,8 +593,8 @@ class GraphLineChart {
           }
         }
 
-        let y1 = height - Math.floor((height - 1) * (rawy1 * this.scale));
-        let y2 = height - Math.floor((height - 1) * (rawy2 * this.scale));
+        let y1 = _height - Math.floor((_height - 2) * (rawy1 * this.scale));
+        let y2 = _height - Math.floor((_height - 2) * (rawy2 * this.scale));
 
         areaContext.curveTo(x1, y1, x1, y2, x2, y2);
       }
@@ -522,7 +607,7 @@ class GraphLineChart {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      let fontsize_px = Math.trunc(1 / 3 * height);
+      let fontsize_px = Math.trunc(1 / 3 * _height);
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
