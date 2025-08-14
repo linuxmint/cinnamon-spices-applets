@@ -835,8 +835,8 @@ class Player extends PopupMenu.PopupMenuSection {
                     randomIntegerInInterval(0, superRND).toString()
                 ));
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                Util.spawnCommandLineAsync("rm -f %s/R3SongArt* ; sleep 1 ; cp -a %s %s/R3SongArt%s".format(
-                    ALBUMART_PICS_DIR,
+                del_song_arts();
+                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(0, superRND).toString()
