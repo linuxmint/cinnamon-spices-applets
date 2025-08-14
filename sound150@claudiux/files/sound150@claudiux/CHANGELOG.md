@@ -1,3 +1,7 @@
+### v13.2.2~20250814
+  * Improved speed.
+  * Code cleanup.
+
 ### v13.2.1~20250808
   * Code cleanup.
 
