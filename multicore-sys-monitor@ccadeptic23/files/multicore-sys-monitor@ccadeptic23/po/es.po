@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-13 19:16+0200\n"
-"PO-Revision-Date: 2025-08-10 16:35-0400\n"
+"PO-Revision-Date: 2025-08-13 20:58-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -559,19 +559,19 @@ msgstr "Libre"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->description
 msgid "Relative width for Swap graph"
-msgstr ""
+msgstr "Anchura relativa del gráfico Swap"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "25%, left side"
-msgstr ""
+msgstr "25%, lado izquierdo"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "None"
-msgstr ""
+msgstr "Ninguna"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -581,6 +581,11 @@ msgid ""
 "left of the circle.\n"
 "None: No Swap bar."
 msgstr ""
+"100%: El gráfico Swap es una barra que abarca todo el ancho del gráfico, "
+"detrás del círculo.\n"
+"10%: El gráfico Swap es una barra que ocupa el 10% del ancho del gráfico, a "
+"la izquierda del círculo.\n"
+"Ninguna: No hay barra de intercambio."
 
 #. 6.4->settings-schema.json->Net_autoscale->description
 #. 6.4->settings-schema.json->Disk_autoscale->description
