@@ -1,0 +1,35 @@
+# TURN OFF MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zablotski, 2017
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+msgid "Turn Off Monitor"
+msgstr ""
+
+#. settings-schema.json->General->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->section-mouse->title
+msgid "Mouse"
+msgstr ""
+
+#. settings-schema.json->section-icon->title
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->section-lock->title
+msgid "Screen lock"
+msgstr ""
+
+#. settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->screenlock->description
+msgid "Lock also cinnamon session"
+msgstr ""

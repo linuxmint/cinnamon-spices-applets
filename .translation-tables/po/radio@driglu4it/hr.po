@@ -1,0 +1,285 @@
+# RADIO++
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Driglu4it, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-01-20 14:55-0500\n"
+"PO-Revision-Date: 2022-03-04 18:15+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#. metadata.json->name
+#. 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
+msgid "Radio++"
+msgstr "Radio++"
+
+#. 3.0/applet.js:130
+#, javascript-format
+msgid "Playing %s"
+msgstr "Slušate %s"
+
+#. 3.0/applet.js:140
+msgid "Stop"
+msgstr "Zaustavi"
+
+#. 3.0/applet.js:149
+msgid "Stop Radio++"
+msgstr "Zaustavi Radio++"
+
+#. 3.0/applet.js:183
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Instalirajte '%s' paket."
+
+#. 4.6/RadioSearchWidget.py:48 6.4/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr "Potraži radio stanicu"
+
+#. 4.6/RadioSearchWidget.py:53 6.4/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr "Dodaj u Moje stanice"
+
+#. 4.6/download-dialog-mpris.py:41 6.4/download-dialog-mpris.py:41
+msgid "Download Confirmation Dialog"
+msgstr "Preuzmi dijalog potvrde"
+
+#. 4.6/download-dialog-mpris.py:45 6.4/download-dialog-mpris.py:45
+#, python-format
+msgid ""
+"The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
+"mpv, which allows controlling the radio player with the sound applet."
+msgstr ""
+"Radio aplet zavisi o '%s' priključku. To je priključak treće strane za mpv, "
+"koji vam omogućuje upravljanje radio reproduktorom pomoću apleta zvuka."
+
+#. 4.6/download-dialog-mpris.py:46 6.4/download-dialog-mpris.py:46
+msgid "Do you want to proceed the download at your own risk?"
+msgstr "Želite li nastaviti preuzimanje na vlastiti rizik?"
+
+#. 4.6/download-dialog-mpris.py:47 6.4/download-dialog-mpris.py:47
+msgid "Cancel download"
+msgstr "Prekini preuzimanje"
+
+#. 4.6/download-dialog-mpris.py:48 6.4/download-dialog-mpris.py:48
+msgid "More info"
+msgstr "Više informacija"
+
+#. 4.6/download-dialog-mpris.py:49 6.4/download-dialog-mpris.py:49
+msgid "Download plugin at my own risk"
+msgstr "Preuzmi priključak na moj vlastiti rizik"
+
+#. metadata.json->description
+msgid ""
+"A radio applet with 1000's of searchable stations, mpris support, youtube-"
+"download function and more"
+msgstr ""
+
+#. 3.0->settings-schema.json->page1->title
+#. 3.0->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->station-list-section->title
+#. 6.4->settings-schema.json->station-list-section->title
+msgid "List of stations"
+msgstr "Popis stanica"
+
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Ikona"
+
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radio"
+
+#. 3.0->settings-schema.json->section3->title
+msgid "Symbolic Icon Color"
+msgstr "Boja simboličke ikone"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "Show in list"
+msgstr "Prikaži u popisu"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Naslov"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 6.4->settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "URL"
+
+#. 3.0->settings-schema.json->streamurl-button->description
+msgid "Open radio stream URL search engine"
+msgstr "Otvori pogon pretrage URL radio strujanja"
+
+#. 3.0->settings-schema.json->streamurl-button->tooltip
+msgid "Opens a website, which helps you to determine radio stream URLs."
+msgstr "Otvara web stranice koje vam pomažu otkriti URL-ove radio strujanja."
+
+#. 3.0->settings-schema.json->radiolist-button->description
+msgid "Show URL-list of radio stations"
+msgstr "Prikaži URL popis radio stanica"
+
+#. 3.0->settings-schema.json->radiolist-button->tooltip
+msgid "Opens a website, which lists URLs of radio stations."
+msgstr "Otvara web stranice koje vam prikazuju URL-ove radio stanica."
+
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Vrsta"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Simbolička ikona"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Ikona pune boje"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Dvobojna ikona"
+
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Boja simboličke ikone kada se reproducira radio stanica"
+
+#. 4.6->settings-schema.json->search-page->title
+#. 6.4->settings-schema.json->search-page->title
+msgid "Find Station"
+msgstr "Potraži stanicu"
+
+#. 4.6->settings-schema.json->my-stations-page->title
+#. 6.4->settings-schema.json->my-stations-page->title
+msgid "My Stations"
+msgstr "Moje stanice"
+
+#. 4.6->settings-schema.json->preferences-page->title
+#. 6.4->settings-schema.json->preferences-page->title
+msgid "Preferences"
+msgstr "Osobitosti"
+
+#. 4.6->settings-schema.json->find-station-section->title
+#. 6.4->settings-schema.json->find-station-section->title
+msgid "Search Radio station"
+msgstr "Potraži radio stanicu"
+
+#. 4.6->settings-schema.json->appearance-section->title
+#. 6.4->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "Izgled"
+
+#. 4.6->settings-schema.json->volume-section->title
+#. 6.4->settings-schema.json->volume-section->title
+msgid "Volume"
+msgstr "Glasnoća zvuka"
+
+#. 4.6->settings-schema.json->youtube-section->title
+#. 6.4->settings-schema.json->youtube-section->title
+msgid "YouTube Download"
+msgstr "YouTube preuzimanje"
+
+#. 4.6->settings-schema.json->icon-type->description
+#. 6.4->settings-schema.json->icon-type->description
+msgid "Icon type"
+msgstr "Vrsta ikone"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Symbolic"
+msgstr "Simbolička"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Full Color"
+msgstr "Puna boja"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 6.4->settings-schema.json->icon-type->options
+msgid "Bicolor"
+msgstr "Dvobojna"
+
+#. 4.6->settings-schema.json->color-on->description
+#. 6.4->settings-schema.json->color-on->description
+msgid "Color of symbolic icon when playing a radio station"
+msgstr "Boja simboličke ikone kada se reproducira radio stanica"
+
+#. 4.6->settings-schema.json->color-paused->description
+#. 6.4->settings-schema.json->color-paused->description
+msgid "Color of symbolic icon while a radio station is paused"
+msgstr "Boja simboličke ikone kada je reprodukcija radio stanice pauzirana"
+
+#. 4.6->settings-schema.json->channel-on-panel->description
+#. 6.4->settings-schema.json->channel-on-panel->description
+msgid "Show current radio station on the panel"
+msgstr "Prikaži trenutnu radio stanicu u panelu"
+
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+#. 6.4->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
+msgstr "Zapamti glasnoću zvuka nakon zaustavljanja reprodukcije radija"
+
+#. 4.6->settings-schema.json->initial-volume->description
+#. 6.4->settings-schema.json->initial-volume->description
+msgid "Initial volume"
+msgstr "Početna glasnoća zvuka"
+
+#. 4.6->settings-schema.json->initial-volume->tooltip
+#. 6.4->settings-schema.json->initial-volume->tooltip
+msgid ""
+"The initial volume is applied when clicking on a radio stream and no other "
+"radio stream is already running"
+msgstr ""
+"Početna glasnoća zvuka je primijenjena kada se klikne na radio stanicu a već "
+"se ne reproducira nijedna radio stanica"
+
+#. 4.6->settings-schema.json->youtube-download-cli->description
+#. 6.4->settings-schema.json->youtube-download-cli->description
+#, fuzzy
+msgid "YouTube Download CLI tool"
+msgstr "YouTube preuzimanje"
+
+#. 4.6->settings-schema.json->youtube-download-cli->tooltip
+#. 6.4->settings-schema.json->youtube-download-cli->tooltip
+#, fuzzy
+msgid "The CLI tool used to download songs from YouTube"
+msgstr "Nemoguće preuzimanje pjesme s Youtuba zbog greške."
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "yt-dlp"
+msgstr ""
+
+#. 4.6->settings-schema.json->youtube-download-cli->options
+#. 6.4->settings-schema.json->youtube-download-cli->options
+msgid "youtube-dl"
+msgstr ""
+
+#. 4.6->settings-schema.json->music-download-dir-select->description
+#. 6.4->settings-schema.json->music-download-dir-select->description
+msgid "Download directory"
+msgstr "Direktorij preuzimanja"
+
+#. 4.6->settings-schema.json->music-download-dir-select->tooltip
+#. 6.4->settings-schema.json->music-download-dir-select->tooltip
+#, fuzzy
+msgid "Songs downloaded from YouTube will be saved to this directory."
+msgstr ""
+"Pjesme preuzete s Youtuba biti će spremljene u ovu mapu. Ova značajka se "
+"može pokrenuti u izborniku desnog klika na apletu"

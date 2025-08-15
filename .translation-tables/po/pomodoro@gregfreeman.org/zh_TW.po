@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pomodoro@gregfreeman.org 1.0.2\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
+"PO-Revision-Date: 2025-07-27 02:35+08:00\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:278
+msgid "Short break running"
+msgstr "短暫休息進行中"
+
+#: applet.js:281
+msgid "Long break running"
+msgstr "長時間休息進行中"
+
+#: applet.js:284
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "第 %d 個番茄鐘，第 %d 組進行中"
+
+#: applet.js:289
+msgid "Waiting to start"
+msgstr "等候開始"
+
+#: applet.js:342
+msgid "Pomodoro started"
+msgstr "番茄鐘已開始"
+
+#: applet.js:407
+msgid "Let's go to work!"
+msgstr "開始工作吧！"
+
+#: applet.js:425
+msgid "Take a short break"
+msgstr "來個短暫休息"
+
+#: applet.js:448
+msgid "Take a long break"
+msgstr "來個長時間休息"
+
+#: applet.js:484
+msgid "Pomodoro ended"
+msgstr "番茄鐘已結束"
+
+#: applet.js:607
+msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr "https://zh.wikipedia.org/zh-tw/番茄工作法"
+
+#. metadata.json->name
+#: applet.js:753
+msgid "Pomodoro Timer"
+msgstr "Pomodoro 番茄鐘計時器"
+
+#: applet.js:762
+msgid "Completed"
+msgstr "已完成"
+
+#: applet.js:770
+msgid "Reset Timer"
+msgstr "重設計時器"
+
+#: applet.js:778
+msgid "Reset Counts and Timer"
+msgstr "重設計數與計時器"
+
+#: applet.js:787
+msgid "Skip To Next Timer"
+msgstr "跳至下一個計時器"
+
+#: applet.js:794
+msgid "What is this?"
+msgstr "這是什麼？"
+
+#: applet.js:834
+msgid "None"
+msgstr "無"
+
+#: applet.js:851
+msgid "Switch Off Pomodoro"
+msgstr "關閉番茄鐘"
+
+#: applet.js:857
+msgid "Start a new Pomodoro"
+msgstr "開始新的番茄鐘"
+
+#: applet.js:863
+msgid "Hide"
+msgstr "隱藏"
+
+#: applet.js:875
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "這組番茄鐘結束了，休息一下吧！"
+
+#: applet.js:884
+msgid "Your break is over, start another pomodoro!"
+msgstr "休息結束，開始下一個番茄鐘吧！"
+
+#: applet.js:890
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "新的番茄鐘將在 %s 後開始。"
+
+#: applet.js:902
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d 分鐘"
+
+#: applet.js:903
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d 秒"
+
+#: applet.js:905
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s 與 %s"
+
+#: applet.js:920
+msgid "Continue Current Pomodoro"
+msgstr "繼續目前的番茄鐘"
+
+#: applet.js:926 applet.js:959
+msgid "Pause Pomodoro"
+msgstr "暫停番茄鐘"
+
+#: applet.js:937
+msgid "Short break finished, ready to continue?"
+msgstr "短暫休息結束，準備繼續工作嗎？"
+
+#: applet.js:953
+msgid "Start break"
+msgstr "開始休息"
+
+#: applet.js:970
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "番茄鐘已結束，準備好要休息了嗎？"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "提升生產力的絕佳工具！"
+
+#. settings-schema.json->head_durations->description
+msgid "Durations (minutes)"
+msgstr "時間長度（分鐘）"
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "番茄鐘時長："
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "短暫休息時長："
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "長時間休息時長："
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "長休息前需完成的番茄鐘數："
+
+#. settings-schema.json->head_options->description
+msgid "Options"
+msgstr "選項"
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "小程式載入後自動啟動番茄鐘"
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show Dialog Messages"
+msgstr "顯示對話訊息"
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+msgid "Auto start after a pomodoro ends"
+msgstr "番茄鐘結束後自動開始下一輪"
+
+#. settings-schema.json->auto_start_after_short_break_ends->description
+msgid "Auto start after a short break ends"
+msgstr "短暫休息結束後自動開始下一輪"
+
+#. settings-schema.json->auto_start_after_break_ends->description
+msgid "Auto start a new pomodoro after a break ends"
+msgstr "休息結束後自動開始新的番茄鐘"
+
+#. settings-schema.json->display_icon->description
+msgid "Display the pomodoro icon in the applet panel"
+msgstr "在小程式面板顯示番茄鐘圖示"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use a symbolic icon in the applet panel"
+msgstr "在面板中使用符號化圖示"
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "在面板中顯示番茄鐘計時器"
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr "設定開啟小程式選單的快速鍵"
+
+#. settings-schema.json->head_sounds->description
+msgid "Sounds"
+msgstr "音效"
+
+#. settings-schema.json->sox-info->description
+msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
+msgstr "請安裝 'sox' 並重新啟動 Cinnamon 以使用音效功能！"
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "播放計時音效"
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "計時音效檔案"
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "音量："
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "播放休息音效"
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "休息音效檔案"
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "播放警告音效"
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "警告延遲 (秒)："
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "警告音效檔案"
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "播放開始音效"
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "開始音效檔案"
+
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr "指令碼"
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr "啟用指令碼"
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr "短暫休息開始時執行此自訂指令碼"
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr "長時間休息開始時執行此自訂指令碼"

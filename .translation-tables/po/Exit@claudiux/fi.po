@@ -1,0 +1,187 @@
+# EXIT
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Exit@claudiux 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-12-04 14:43+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 5.4/applet.js:140
+msgid "Restart Cinnamon"
+msgstr "Käynnistä Cinnamon"
+
+#. 5.4/applet.js:152
+msgid "Screen Off"
+msgstr "Näytönsäästäjä"
+
+#. 5.4/applet.js:177
+msgid "Lock Screen"
+msgstr "Lukitse näyttö"
+
+#. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
+msgid "Switch User"
+msgstr "Vaihda käyttäjä"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Performing automatic updates"
+msgstr "Suorittaa automaattisia päivityksiä"
+
+#. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
+#. 5.4/applet.js:322 5.4/applet.js:340
+msgid "Please wait"
+msgstr "Ole hyvä ja odota"
+
+#. 5.4/applet.js:249 5.4/applet.js:256
+msgid "Log Out"
+msgstr "Kirjaudu ulos"
+
+#. 5.4/applet.js:270 5.4/applet.js:277
+msgid "Suspend"
+msgstr "Valmiustila"
+
+#. 5.4/applet.js:288 5.4/applet.js:298
+msgid "Hibernate"
+msgstr "Lepotila"
+
+#. 5.4/applet.js:312 5.4/applet.js:319
+msgid "Restart"
+msgstr "Käynnistä uudelleen"
+
+#. 5.4/applet.js:330 5.4/applet.js:337
+msgid "Power Off"
+msgstr "Sammuta"
+
+#. metadata.json->description
+msgid ""
+"Restart Cinnamon, turn off the screen, lock the screen, switch users, log "
+"out, suspend, hibernate, reboot or shut down the computer"
+msgstr ""
+"Valitse näytönsäästäjä, lukitse näyttö, vaihda käyttäjää, kirjaudu ulos, "
+"valmiustila, lepotila, käynnistä tai sammuta tietokone"
+
+#. metadata.json->name
+msgid "Exit"
+msgstr "Exit"
+
+#. 5.4->settings-schema.json->sectionOSD->description
+msgid "Cinnamon restart"
+msgstr "Käynnistä Cinnamon uudelleen"
+
+#. 5.4->settings-schema.json->showOSD->description
+msgid "Show OSD while restarting Cinnamon"
+msgstr "Näytä ilmoitus kun Cinnamon käynnistyy uudelleen"
+
+#. 5.4->settings-schema.json->showOSD->tooltip
+msgid "OSD: On Screen Display"
+msgstr "OSD on lyhenne joka tarkoittaa: On Screen Display"
+
+#. 5.4->settings-schema.json->sectionMenu->description
+msgid "Menu options"
+msgstr "Valikon asetukset"
+
+#. 5.4->settings-schema.json->showRestartCinnamon->description
+msgid "Show the Restart Cinnamon option"
+msgstr "Käynnistä Cinnamon"
+
+#. 5.4->settings-schema.json->showSuspend->description
+msgid "Show the Suspend option"
+msgstr "Valmiustila"
+
+#. 5.4->settings-schema.json->showHibernate->description
+msgid "Show the Hibernate option"
+msgstr "Lepotila"
+
+#. 5.4->settings-schema.json->hibernateNeedsSudo->description
+msgid "Hibernate needs root user rights (sudo)"
+msgstr "Lepotila tarvitsee root oikeudet (sudo)"
+
+#. 5.4->settings-schema.json->showRestart->description
+msgid "Show the Restart option"
+msgstr "Käynnistä uudelleen"
+
+#. 5.4->settings-schema.json->showPowerOff->description
+msgid "Show the Power Off option"
+msgstr "Sammuta"
+
+#. 5.4->settings-schema.json->labelOthers->description
+msgid ""
+"All the menu options below may be managed by the system.\n"
+"If they are, you can't see them."
+msgstr ""
+"Järjestelmä hallinnoi kaikkia alla olevia kohteita.\n"
+"Et ehkä näe niitä kaikkia."
+
+#. 5.4->settings-schema.json->showScreenOff->description
+msgid "Show the Screen Off option"
+msgstr "Näytönsäästäjä"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Aikamäärä jolloin hiiri on poistettu käytöstä"
+
+#. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Jotta näyttö ei palaudu liian aikaisin sammumisen jälkeen, voit määrittää "
+"hiiren poistoviiveen ajan."
+
+#. 5.4->settings-schema.json->showLockscreen->description
+msgid "Show the Lock Screen option"
+msgstr "Lukitse näyttö"
+
+#. 5.4->settings-schema.json->showLockscreen->tooltip
+#. 5.4->settings-schema.json->showSwitchUser->tooltip
+#. 5.4->settings-schema.json->showLogout->tooltip
+msgid "Managed by system"
+msgstr "Hallinnoi järjestelmä"
+
+#. 5.4->settings-schema.json->showSwitchUser->description
+msgid "Show the Switch User option"
+msgstr "Vaihda käyttäjä"
+
+#. 5.4->settings-schema.json->showLogout->description
+msgid "Show the Log Out option"
+msgstr "Kirjaudu ulos"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Käyttäjä kirjautuu ulos"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Vahvistuksen kanssa"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Ilman vahvistusta"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Pakota"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"Vaihtoehdon \"Pakota\" avulla voit kirjautua ulos ja jättää estäjät "
+"huomiotta. Hyödyllinen kun useita istuntoja on auki samaan aikaan."
