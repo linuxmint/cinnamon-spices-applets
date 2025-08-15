@@ -13,6 +13,6 @@ Icons are based on [Papirus icon theme](https://github.com/PapirusDevelopmentTea
 
 ## Screenshots
 
-![switched](switched.png)  
-![right-click](right-click.png)  
-![settings](settings.png)  
+![switched](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/refs/heads/master/envycontrol%40zamszowy/switched.png)  
+![right-click](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/refs/heads/master/envycontrol%40zamszowy/right-click.png)  
+![settings](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/refs/heads/master/envycontrol%40zamszowy/settings.png)  
