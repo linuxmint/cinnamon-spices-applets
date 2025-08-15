@@ -2,10 +2,15 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
+const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const messageTray = imports.ui.main.messageTray;
 const { SystemNotificationSource, Notification, Urgency } = imports.ui.messageTray;
+
+const UUID = "envycontrol@zamszowy";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+function _(str) { return Gettext.dgettext(UUID, str); }
 
 function EnvyControlGui(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -32,7 +37,7 @@ EnvyControlGui.prototype = {
         if (!GLib.find_program_in_path("envycontrol")) {
             this.hide_applet_icon(true);
             this.hide_applet_label(false);
-            this.set_applet_label("missing dependencies");
+            this.set_applet_label(_("missing dependencies"));
             return;
         }
 
@@ -49,7 +54,7 @@ EnvyControlGui.prototype = {
         this.pending_mode = "";
         this.current_mode = "";
 
-        Util.spawn_async(['/bin/bash', this.applet_path + '/control.sh', "info"], (stdout) => {
+        Util.spawn_async(['/usr/bin/bash', this.applet_path + '/control.sh', "info"], (stdout) => {
             [this.cpu_vendor, this.current_mode, this.pending_mode] = stdout.trim().split(":");
             this.add_right_click_menu();
             this.update();
@@ -61,11 +66,11 @@ EnvyControlGui.prototype = {
             return;
         }
 
-        let iModeStr = "Switch to " + name;
+        let iModeStr = _("Switch to %s").format(name);
         if (this.pending_mode == name) {
-            iModeStr = "Switched to " + name + " (pending reboot)";
+            iModeStr = _("Switched to %s (pending reboot)").format(name);
         } else if (this.current_mode == name && this.pending_name != name) {
-            iModeStr = "Switch back to " + name;
+            iModeStr = _("Switch back to %s").format(name);
         }
 
         let extraArgs = [];
@@ -91,13 +96,13 @@ EnvyControlGui.prototype = {
         let iMode = new PopupMenu.PopupIconMenuItem(iModeStr, this.get_icon_name(name), St.IconType.SYMBOLIC, { reactive: this.pending_mode != name });
         iMode.connect('activate', () => {
             this.set_applet_icon_name("envy-configure");
-            this.set_applet_tooltip("Changing mode to " + name);
+            this.set_applet_tooltip(_("Changing mode to %s").format(name));
             this.menu.removeAll();
-            this.notify("EnvyControl", "Switching to " + name + " mode in progress...", this.get_icon_name(name), Urgency.NORMAL);
+            this.notify("EnvyControl", _("Switching to %s mode in progress...").format(name), this.get_icon_name(name), Urgency.NORMAL);
 
-            Util.spawn_async(['/bin/bash', this.applet_path + '/control.sh', "change", name].concat(extraArgs), (stdout) => {
+            Util.spawn_async(['/usr/bin/bash', this.applet_path + '/control.sh', "change", name].concat(extraArgs), (stdout) => {
                 if (stdout.trim() == "ok") {
-                    this.notify("EnvyControl", "Switched to " + name + " mode", this.get_icon_name(name), Urgency.NORMAL);
+                    this.notify("EnvyControl", _("Switched to %s mode").format(name), this.get_icon_name(name), Urgency.NORMAL);
 
                     if (this.pending_mode == this.current_mode || this.current_mode == name) {
                         this.pending_mode = "";
@@ -126,10 +131,10 @@ EnvyControlGui.prototype = {
 
         let runCmd = (priviliged, show_mode, args, notify_msg) => {
             this.set_applet_icon_name("envy-configure");
-            this.set_applet_tooltip("Configuring...");
+            this.set_applet_tooltip(_("Configuring..."));
             this.menu.removeAll();
 
-            Util.spawn_async(['/bin/bash', this.applet_path + '/control.sh', "run", priviliged, show_mode ].concat(args), (out) => {
+            Util.spawn_async(['/usr/bin/bash', this.applet_path + '/control.sh', "run", priviliged, show_mode].concat(args), (out) => {
                 if (show_mode != "show-out-always" && out.trim() == "ok") {
                     this.notify("EnvyControl", notify_msg, "envy-configure", Urgency.NORMAL);
                 }
@@ -137,21 +142,21 @@ EnvyControlGui.prototype = {
             });
         };
 
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem("Hybrid settings:", { reactive: false, }), position++);
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Hybrid settings:"), { reactive: false, }), position++);
 
-        let hybridCreateCache = new PopupMenu.PopupMenuItem("  Create cache", { reactive: this.current_mode == "hybrid", });
+        let hybridCreateCache = new PopupMenu.PopupMenuItem(_("  Create cache"), { reactive: this.current_mode == "hybrid", });
         hybridCreateCache.connect('activate', () => {
-            runCmd('priviliged','show-out-on-fail', ['--cache-create'], "successfully created cache");
+            runCmd('priviliged', 'show-out-on-fail', ['--cache-create'], _("successfully created cache"));
         });
         this._applet_context_menu.addMenuItem(hybridCreateCache, position++);
 
-        let hybridDeleteCache = new PopupMenu.PopupMenuItem("  Delete cache",);
+        let hybridDeleteCache = new PopupMenu.PopupMenuItem(_("  Delete cache"),);
         hybridDeleteCache.connect('activate', () => {
-            runCmd('priviliged', 'show-out-on-fail', ['--cache-delete'], "successfully deleted cache");
+            runCmd('priviliged', 'show-out-on-fail', ['--cache-delete'], _("successfully deleted cache"));
         });
         this._applet_context_menu.addMenuItem(hybridDeleteCache, position++);
 
-        let hybridShowCache = new PopupMenu.PopupMenuItem("  Show cache",);
+        let hybridShowCache = new PopupMenu.PopupMenuItem(_("  Show cache"),);
         hybridShowCache.connect('activate', () => {
             runCmd('non-priviliged', 'show-out-always', ['--cache-query'], "");
         });
@@ -159,9 +164,9 @@ EnvyControlGui.prototype = {
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem(), position++);
 
-        let log = new PopupMenu.PopupMenuItem("Show last switch log",);
+        let log = new PopupMenu.PopupMenuItem(_("Show last switch log"),);
         log.connect('activate', () => {
-            Util.spawn_async(['/bin/bash', this.applet_path + '/control.sh', "show-last-log"]);
+            Util.spawn_async(['/usr/bin/bash', this.applet_path + '/control.sh', "show-last-log"]);
         });
         this._applet_context_menu.addMenuItem(log, position++);
 
@@ -169,7 +174,7 @@ EnvyControlGui.prototype = {
     },
 
     update: function () {
-        this.set_applet_tooltip("Current mode: " + this.current_mode + (this.pending_mode ? " (pending switch to " + this.pending_mode + ")" : ""));
+        this.set_applet_tooltip(_("Current mode: %s").format(this.current_mode) + (this.pending_mode ? " " + _("(pending switch to %s)").format(this.pending_mode) : ""));
         this.set_applet_icon_name(this.get_icon_name(this.current_mode));
 
         this.refresh_left_click_menu();
