@@ -140,7 +140,7 @@ BtBattery.prototype = {
         }
 
         Util.spawn_async(args, Lang.bind(this, function(stdout) {
-            const trimmed_out = stdout.trim();
+            const trimmed_out = stdout.replace(/\n/g, '');
 
             if (trimmed_out != "") {
                 this.override_entry = trimmed_out;
