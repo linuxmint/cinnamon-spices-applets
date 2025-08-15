@@ -58,6 +58,8 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         this.settings.bind("ignoreTransientNotifications", "ignoreTransientNotifications");
         this.settings.bind("showEmptyTray", "showEmptyTray", this._show_hide_tray);
         this.settings.bind("showDisturbIcon", "showDisturbIcon", this._show_disturb_icon);
+        this.settings.bind("blockList", "blockList");
+        this.settings.bind("urgentList", "urgentList");
         this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
         this.settings.bind("keyClear", "keyClear", this._setKeybinding);
         this.settings.bind("keyMute", "keyMute", this._setKeybinding);
@@ -217,6 +219,23 @@ class CinnamonNotificationsApplet extends Applet.TextIconApplet {
         } else if (notification._destroyed) {
             return;
         }
+
+        // Check if this should be ignored.
+        const ignored = this.blockList.toLowerCase().split(',');
+        if (ignored.indexOf(notification.source.title.toLowerCase()) >= 0) {
+            global.logWarning(`Notification from ${notification.source.title} IGNORED. Current blocklist: ${ignored.join(',')}`);
+            return;
+        } else {
+            global.log(`Notification from ${notification.source.title} passed through. Current blocklist: ${ignored.join(',')}`);
+        }
+
+        // Check if it should be considered URGENT.
+        const urgent = this.urgentList.toLowerCase().split(',');
+        if (urgent.indexOf(notification.source.title.toLowerCase()) >= 0) {
+            global.logWarning(`Notification from ${notification.source.title} turned into URGENT. Current urgentList: ${urgent.join(',')}`);
+            notification.urgency = Urgency.CRITICAL;
+        }
+
         // Add notification to list.
         notification._inNotificationBin = true;
         this.notifications.push(notification);
