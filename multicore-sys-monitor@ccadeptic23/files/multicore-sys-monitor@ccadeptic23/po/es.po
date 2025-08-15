@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-14 15:30+0200\n"
-"PO-Revision-Date: 2025-08-13 20:58-0400\n"
+"PO-Revision-Date: 2025-08-14 20:20-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -441,11 +441,11 @@ msgstr "Etiquetas"
 
 #. 6.4->settings-schema.json->borderOn->description
 msgid "Add a border to each graph"
-msgstr ""
+msgstr "Añadir un borde a cada gráfico"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
-msgstr ""
+msgstr "Espaciado de los gráficos"
 
 #. 6.4->settings-schema.json->thickness->description
 #. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
@@ -469,9 +469,8 @@ msgid "Label Color"
 msgstr "Color de etiqueta"
 
 #. 6.4->settings-schema.json->borderColor->description
-#, fuzzy
 msgid "Border Color"
-msgstr "Color de fondo"
+msgstr "Color del borde"
 
 #. 6.4->settings-schema.json->backgroundColor->description
 #. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 6.0/prefsui.glade:263
@@ -480,9 +479,8 @@ msgid "Background Color"
 msgstr "Color de fondo"
 
 #. 6.4->settings-schema.json->removeEnlightenment->description
-#, fuzzy
 msgid "Remove Enlightenment of this applet"
-msgstr "Recargar este applet"
+msgstr "Quitar la iluminación de este applet"
 
 #. 6.4->settings-schema.json->CPU_labelOn->description
 #. 6.4->settings-schema.json->Mem_labelOn->description
