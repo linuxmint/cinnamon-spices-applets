@@ -1,0 +1,47 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Settings"
+    },
+    "update-refresh": {
+        "type": "entry",
+        "default": "60",
+        "description": "Minutes to wait before refreshing applet"
+    },
+    "hide-applet": {
+        "type": "switch",
+        "default": false,
+        "description": "Hide applet if there are no updates"
+    },
+    "different-levels": {
+        "type": "switch",
+        "default": true,
+        "description": "Show different applet icon for different updgradeable packages count"
+    },
+    "level-1": {
+        "type": "entry",
+        "default": "100",
+        "description": "Show low level icon when updates count is between 0 and this value ",
+        "dependency": "different-levels"
+    },
+    "level-2": {
+        "type": "entry",
+        "default": "200",
+        "description": "Show medium level icon when updates count is between low level value and this value. Show high level icon if it's higher than this value.",
+        "dependency": "different-levels"
+    },
+    "section2": {
+        "type": "section",
+        "description": "Commands to execute in popup menu"
+    },
+    "commandUpdate": {
+        "type": "entry",
+        "default": "sudo apt update",
+        "description": "Check for updates:"
+    },
+    "commandUpgrade": {
+        "type": "entry",
+        "default": "sudo apt -V upgrade",
+        "description": "Upgrade packages:"
+    }
+}
