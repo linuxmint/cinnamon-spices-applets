@@ -47,6 +47,7 @@ body:
     - anime-wallpaper@flyflyan @fly206
     - any-alarm@sophie-la-li @sophie-la-li
     - app-launcher@mchilli @mchilli
+    - apt-updates@zamszowy @zamszowy
     - asl@santiago @SamBurgos
     - auto-dark-light@gihaume @guillaume-mueller
     - AutostartPrograms@spacy01 @spacy01
@@ -65,7 +66,7 @@ body:
     - bluetooth-battery@zamszowy @zamszowy
     - bose@tuuxx @tuuxx
     - Bps@claudiux @claudiux
-    - brightness-and-gamma-applet@cardsurf @cardsurf
+    - brightness-and-gamma-applet@cardsurf @claudiux
     - bumblebee@pdcurtis @pdcurtis
     - c-eyes@anaximeno @anaximeno
     - calc-js@ptandler @ptandler
@@ -107,6 +108,7 @@ body:
     - disk-read-and-write-speed@cardsurf @cardsurf
     - download-and-upload-speed@cardsurf @cardsurf
     - duolingo-helper@nodeengineer.com @nodeengineer
+    - envycontrol@zamszowy @zamszowy
     - Exit@claudiux @claudiux
     - expressvpn@Hukuta @Hukuta
     - feeds@jonbrettdev.wordpress.com @jake1164
@@ -182,6 +184,7 @@ body:
     - printers@linux-man @linux-man
     - ProcessMemoryMonitor@claudiux @claudiux
     - profile-switcher@pixunil @pixunil
+    - proxy-mode@yrtimid @yrtimiD
     - ptt@thbemme @thbemme
     - qredshift@quintao @raphaelquintao
     - Radio3.0@claudiux @claudiux
