@@ -14,7 +14,7 @@ You can choose:
 
   * Whether or not to use a symbolic icon.
   * The color of the icon while *glxgears* is running.
-* If the window containing the rotating gears is still in the foreground (Always on top).
+  * If the window containing the rotating gears is still in the foreground (Always on top).
   * Whether *glxgears* should run in full-screen mode or not.
   * The time in seconds between two checks of the status of *glxgears* (running or stopped).
   * The type of logging: None, On hard disk, or On RAM disk.
@@ -42,4 +42,5 @@ The `glxgears.log` files are deleted each time the applet is started, and are re
 Please [log in via Github](https://cinnamon-spices.linuxmint.com/auth/github) and increase the rating of this applet by clicking on the star at the top of this page.
 
 Thank you!
-@claudiux
+
+[@claudiux](https://github.com/claudiux)
