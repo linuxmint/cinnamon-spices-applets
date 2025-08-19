@@ -5,19 +5,10 @@ const Gio = imports.gi.Gio;
 
 const UUID = "multicore-sys-monitor@ccadeptic23";
 
-//~ let dotCinnamonFilePath = GLib.get_home_dir() + '/.cinnamon/configs';
-//~ let configFilePath;
-//~ if (Gio.file_new_for_path(dotCinnamonFilePath).query_exists(null))
-    //~ configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + UUID;
-//~ else
-    //~ configFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
-
 const TAU = Math.PI * 2;
 
 function RGBa2rgba(color) {
-    //~ global.log("RGBa2rgba - Type of color: " + typeof color);
-    if (typeof color == "string" && (color.includes(","))) {
-        //~ global.log("RGBa2rgba - color: " + color);
+    if (typeof color == "string" && color.includes(",")) {
         var rgbaArray = color.split(",");
         rgbaArray[0] = rgbaArray[0].replace(/rgba\(/g, "").replace(/rgb\(/g, "");
         rgbaArray[rgbaArray.length - 1] = rgbaArray[rgbaArray.length - 1].replace(/\)/g, "");
@@ -34,7 +25,6 @@ function RGBa2rgba(color) {
         } else {
             rgbaArray.push(1.0);
         }
-        //~ global.log("RGBa2rgba - rgbaArray: " + rgbaArray);
         return rgbaArray
     } else {
         return color
@@ -77,17 +67,13 @@ function pc2RGB(percentage) {
         g = l;
         b = m;
     }
-    //~ global.log(""+percentage+": "+r+", "+g+", "+b);
     return [r, g, b, a]
 }
-
-//~ let ConfigSettings = require('./ConfigSettings').ConfigSettings;
 
 class GraphVBars {
   constructor(area, applet) {
     this.applet = applet;
     this.area = area;
-    //~ this.configSettings = new ConfigSettings(configFilePath);
   }
 
   paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList) {
@@ -108,10 +94,6 @@ class GraphVBars {
     } else {
         colorsList = RGBa2rgba(colorsList);
     }
-
-    //~ global.log("GraphVBars labelColor: " + JSON.stringify(labelColor, null, 4));
-    //~ global.log("GraphVBars bgColor: " + JSON.stringify(bgColor, null, 4));
-    //~ global.log("GraphVBars colorsList: " + JSON.stringify(colorsList, null, 4));
 
     let _width = width;
     let _height = height;
@@ -158,7 +140,7 @@ class GraphVBars {
 
     // Usage Data Bars
     let vbarWidth = (_width - 6) / currentReadings.length;
-    for (let i = 0; i < currentReadings.length; i++) {
+    for (let i=0, len=currentReadings.length; i<len; i++) {
       let currentR = parseFloat(currentReadings[i]);
       let vbarHeight = (_height - 1) * currentR;
       let vbarOffset = i * vbarWidth + 3;
@@ -187,31 +169,26 @@ class GraphVBars {
             RGBa2rgba(this.applet.CPU_activity_80_100)
           ];
           if (currentR >= 0.8) {
-            //~ g = 0; b = 0
             r = colorsList[4][0];
             g = colorsList[4][1];
             b = colorsList[4][2];
             a = (colorsList[4][3] != null) ? colorsList[4][3] : 1;
           } else if (currentR >= 0.6) {
-            //~ g = 127; b = 0
             r = colorsList[3][0];
             g = colorsList[3][1];
             b = colorsList[3][2];
             a = (colorsList[3][3] != null) ? colorsList[3][3] : 1;
           } else if (currentR >= 0.4) {
-            //~ b = 0
             r = colorsList[2][0];
             g = colorsList[2][1];
             b = colorsList[2][2];
             a = (colorsList[2][3] != null) ? colorsList[2][3] : 1;
           } else if (currentR >= 0.2) {
-            //~ r = 0 ; b = 0
             r = colorsList[1][0];
             g = colorsList[1][1];
             b = colorsList[1][2];
             a = (colorsList[1][3] != null) ? colorsList[1][3] : 1;
           } else {
-            //~ r = 0 ; g = 0
             r = colorsList[0][0];
             g = colorsList[0][1];
             b = colorsList[0][2];
@@ -261,8 +238,11 @@ class GraphVBars {
   }
   destroy() {
     let props = Object.keys(this);
-    for (let i = 0; i < props.length; i++) {
-      this[props[i]] = undefined;
+    //~ for (let i = 0; i < props.length; i++) {
+      //~ this[props[i]] = undefined;
+    //~ }
+    for (let prop of props) {
+      this[prop] = undefined;
     }
   }
 }
@@ -288,11 +268,6 @@ class GraphPieChart {
         for (let i=0, len=colorsList.length; i<len; i++)
             colorsList[i] = RGBa2rgba(colorsList[i]);
     }
-
-    //~ global.log("GraphPieChart labelColor: " + JSON.stringify(labelColor, null, 4));
-    //~ global.log("GraphPieChart bgColor: " + JSON.stringify(bgColor, null, 4));
-    //~ global.log("GraphPieChart colorsList: " + JSON.stringify(colorsList, null, 4));
-
 
     let _width = width;
     let _height = height;
@@ -339,7 +314,7 @@ class GraphPieChart {
     let runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
 
     areaContext.moveTo(xcenter, ycenter);
-    for (let i = 0; i < currentReadings.length; i++) {
+    for (let i=0, len=currentReadings.length; i<len; i++) {
       //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
       //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
       let datapointnum = i % colorsList.length;
@@ -402,8 +377,11 @@ class GraphPieChart {
 
   destroy() {
     let props = Object.keys(this);
-    for (let i = 0; i < props.length; i++) {
-      this[props[i]] = undefined;
+    //~ for (let i = 0; i < props.length; i++) {
+      //~ this[props[i]] = undefined;
+    //~ }
+    for (let prop of props) {
+      this[prop] = undefined;
     }
   }
 };
@@ -423,12 +401,11 @@ class GraphLineChart {
     this.maxValue = 1.0;
     this.maxValueLoc = null;
     this.minMaxValue = 1.0;
-    //~ this.configSettings = new ConfigSettings(configFilePath);
   }
 
   refreshData(currentReadings, providerName) {
     let dataPoints = [];
-    for (let i = 0; i < currentReadings.length; i++) {
+    for (let i=0, len=currentReadings.length; i<len; i++) {
       if (!currentReadings[i].readingRatesList) {
         continue;
       }
@@ -449,7 +426,7 @@ class GraphLineChart {
     this.maxValueLoc--;
 
     //double check what we just added isnt greater than our max (for all lines)
-    for (let i = 0; i < dataPoints.length; i++) {
+    for (let i=0, len=dataPoints.length; i<len; i++) {
       if (dataPoints[i] > this.maxValue && dataPoints[i] > this.minMaxValue) {
         this.maxValue = dataPoints[i];
         this.maxValueLoc = this.dataPointsListSize - 1;
@@ -460,8 +437,8 @@ class GraphLineChart {
     if (this.autoScale && this.maxValueLoc < 0) {
       //find a new max we lost the old one
       this.maxValue = 1.0;
-      for (let i = 0; i < this.dataPointsList.length; i++) {
-        for (let j = 0; j < dataPoints.length; j++) {
+      for (let i=0, len_i=this.dataPointsList.length; i<len_i; i++) {
+        for (let j=0, len_j=dataPoints.length; j<len_j; j++) {
           if (this.dataPointsList[i][j] == null) {
             continue;
           }
@@ -502,8 +479,6 @@ class GraphLineChart {
   }
 
   paint(providerName, currentReadings, area, areaContext, labelsEnabled, width, height, labelColor, bgColor, colorsList=[]) {
-    //~ if (colorsList.length === 0) return;
-
     this.refreshData(currentReadings, providerName);
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
@@ -567,7 +542,6 @@ class GraphLineChart {
     if (this.dataPointsList.length > 0) {
       numLinesOnChart = this.dataPointsList[0].length; //cheesy but it works
     }
-    //~ global.log("GraphLineChart - numLinesOnChart: " + numLinesOnChart);
 
     for (let i = 0; i < numLinesOnChart; i++) {
       //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
@@ -575,20 +549,17 @@ class GraphLineChart {
       let datapointnum = i % colorsList.length;
       let r, g, b, a;
       if (colorsList[datapointnum] == undefined) {
-        //~ global.log("GraphLineChart - colorsList["+datapointnum+"] is undefined.");
         r = 1;
         g = 1;
         b = 1;
         a = 1;
       } else {
-        //~ global.log("GraphLineChart - colorsList["+datapointnum+"]: " + JSON.stringify(colorsList[datapointnum], null, 4));
         r = colorsList[datapointnum][0];
         g = colorsList[datapointnum][1];
         b = colorsList[datapointnum][2];
         a = colorsList[datapointnum][3];
       }
       areaContext.setSourceRGBA(r, g, b, a);
-      //~ areaContext.setLineWidth(this.configSettings.getThickness());
       areaContext.setLineWidth(this.applet.thickness);
 
       areaContext.setLineJoin(1); //rounded
@@ -654,8 +625,11 @@ class GraphLineChart {
   }
   destroy() {
     let props = Object.keys(this);
-    for (let i = 0; i < props.length; i++) {
-      this[props[i]] = undefined;
+    //~ for (let i = 0; i < props.length; i++) {
+      //~ this[props[i]] = undefined;
+    //~ }
+    for (let prop of props) {
+      this[prop] = undefined;
     }
   }
 }
