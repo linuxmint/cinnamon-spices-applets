@@ -1,3 +1,8 @@
+### v2.7.2~20250819
+  * Improved loops.
+  * Changed to_string method.
+  * Code cleanup.
+
 ### v2.7.1~20250814
   * Improved Graph Border options.
 
