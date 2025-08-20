@@ -2224,5 +2224,9 @@
   "radiopp-is-here": {
     "type": "generic",
     "default": false
+  },
+  "restart-after-reloading": {
+    "type": "generic",
+    "default": false
   }
 }
