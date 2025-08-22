@@ -267,36 +267,38 @@ class DDCMultiMonitor extends Applet.IconApplet {
         }
 
         if (direction == Clutter.ScrollDirection.DOWN) {
-            clearTimeout(this.lastTooltipTimeoutID);
-            let tooltipMessage = this.monitors.map(monitor => {
-                monitor.brightness = Math.max(0, monitor.brightness - this.brightnessAdjustmentStep);
-                monitor.setBrightness(monitor.brightness);
-                return `${monitor.name}: ${monitor.brightness}%`;
-            }).join("\n");
-
-            this.set_applet_tooltip(tooltipMessage);
-            this._applet_tooltip.show();
-            this.lastTooltipTimeoutID = setTimeout(() => {
-                this._applet_tooltip.hide();
-                this.set_applet_tooltip(DEFAULT_TOOLTIP);
-            }, 2500);
-            
+            this._incrementBrightnessForMonitors(this.brightnessAdjustmentStep, false);
         }
         else if (direction == Clutter.ScrollDirection.UP) {
-            clearTimeout(this.lastTooltipTimeoutID);
-            let tooltipMessage = this.monitors.map(monitor => {
-                monitor.brightness = Math.min(100, monitor.brightness + this.brightnessAdjustmentStep);
-                monitor.setBrightness(monitor.brightness);
-                return `${monitor.name}: ${monitor.brightness}%`;
-            }).join("\n");
+            this._incrementBrightnessForMonitors(this.brightnessAdjustmentStep, true);
+        }
+    }
 
-            this.set_applet_tooltip(tooltipMessage);
-            this._applet_tooltip.show();
-            this.lastTooltipTimeoutID = setTimeout(() => {
-                this._applet_tooltip.hide();
-                this.set_applet_tooltip(DEFAULT_TOOLTIP);
-            }, 2500);
-        } 
+    _incrementBrightnessForMonitors(amount, isAdd) {
+
+        let monitorsToUpdate = this._getMonitorsToUpdate();
+
+        clearTimeout(this.lastTooltipTimeoutID);
+        let tooltipMessage = monitorsToUpdate.map(monitor => {
+            let newBrightness = isAdd
+                ? Math.min(100, monitor.brightness + amount)
+                : Math.max(0, monitor.brightness - amount);
+            monitor.setBrightness(newBrightness);
+            return `${monitor.name}: ${newBrightness}%`;
+        }).join("\n");
+
+        this.set_applet_tooltip(tooltipMessage);
+        this._applet_tooltip.show();
+        this.lastTooltipTimeoutID = setTimeout(() => {
+            this._applet_tooltip.hide();
+            this.set_applet_tooltip(DEFAULT_TOOLTIP);
+        }, 2500);
+    }
+
+    _getMonitorsToUpdate() {
+        return this.useManualSingleMonitor
+            ? this.monitors.filter(monitor => monitor.bus === this.singleMonitorBus)
+            : this.monitors;
     }
 }
 
