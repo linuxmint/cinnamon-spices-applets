@@ -7,7 +7,7 @@ readonly DIR
 
 case "$1" in
 check)
-    apt list --upgradable 2>/dev/null | tail -n +2 &> "$DIR"/updates
+    pkcon get-updates | awk '/^Results:/{flag=1; next} flag && NF' &> "$DIR"/updates
     wc -l <"$DIR"/updates
     ;;
 view)
@@ -15,7 +15,7 @@ view)
     ;;
 command)
     readonly cmd=$2
-    gnome-terminal --wait --  /bin/bash -c "echo \"Executing $cmd\"; $cmd; echo -en \"\nDone - press enter to exit\"; read"
+    gnome-terminal --wait --  /usr/bin/bash -c "echo \"Executing $cmd\"; $cmd; echo -en \"\nDone - press enter to exit\"; read"
     ;;
 *)
     exit 1
