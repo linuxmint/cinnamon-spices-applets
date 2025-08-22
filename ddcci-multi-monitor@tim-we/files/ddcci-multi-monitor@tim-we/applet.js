@@ -209,10 +209,10 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
         this.settings.bind("entry_applet-label", "appletLabel", this._updateAppletLabel.bind(this));
         this.settings.bind("switch_show-bus-number", "showBusNumber", this._updateMonitorSettings.bind(this));
         // scrolling
-        this.settings.bind("combobox_scrollInterval", "brightnessAdjustmentStep", null);
+        this.settings.bind("combobox_scroll-step", "brightnessAdjustmentStep", null);
         // toggle points
         this.settings.bind("switch_use-toggle-points", "useTogglePoints", this._initTogglePoints.bind(this));
-        this.settings.bind("spinbutton_numoftogglepoints", "numOfTogglePoints", this._initTogglePoints.bind(this));
+        this.settings.bind("spinbutton_num-of-toggle-points", "numOfTogglePoints", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_1", "togglePoint1", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_2", "togglePoint2", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_3", "togglePoint3", this._initTogglePoints.bind(this));

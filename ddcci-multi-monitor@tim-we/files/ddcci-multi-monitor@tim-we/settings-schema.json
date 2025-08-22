@@ -35,7 +35,7 @@
             "type": "section",
             "title": "Scrolling Settings",
             "keys": [
-                "combobox_scrollInterval"
+                "combobox_scroll-step"
             ]
         },
 
@@ -44,7 +44,7 @@
           "title": "Toggle Points",
           "keys": [
               "switch_use-toggle-points",
-              "spinbutton_numoftogglepoints",
+              "spinbutton_num-of-toggle-points",
               "scale_toggle_point_1",
               "scale_toggle_point_2",
               "scale_toggle_point_3"
@@ -69,7 +69,7 @@
         "description": "By default, scrolling & toggling adjusts brightness for all monitors.\nSwitch to enable custom monitor selection.\nThis will add checkbox options for each detected monitor."
       },
 
-      "combobox_scrollInterval": {
+      "combobox_scroll-step": {
         "type": "combobox",
         "default": 5,
         "options": {
@@ -89,7 +89,7 @@
         "default": false,
         "description": "Enable toggle points for brightness adjustment.\n(via mouse middle click)"
       },
-      "spinbutton_numoftogglepoints": {
+      "spinbutton_num-of-toggle-points": {
         "type": "spinbutton",
         "default": 3,
         "min": 1,
