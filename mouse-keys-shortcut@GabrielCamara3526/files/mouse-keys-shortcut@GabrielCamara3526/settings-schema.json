@@ -3,10 +3,16 @@
     "type": "section",
     "description": "Shortcuts"
   },
+  "enableShortcut": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable custom shortcut"
+  },
   "keyOpen": {
     "type": "keybinding",
     "description": "Mouse Keys accessibility shortcut",
     "default": "<Super><Shift>a",
-    "tooltip": "Shortcut to enable/disable mouse keys setting"
+    "tooltip": "Shortcut to enable/disable mouse keys setting",
+    "dependency": "enableShortcut"
   }
 }

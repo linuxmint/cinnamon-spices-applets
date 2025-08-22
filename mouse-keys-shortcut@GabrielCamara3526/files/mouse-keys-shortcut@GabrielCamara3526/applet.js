@@ -68,7 +68,9 @@ class MyApplet extends Applet.IconApplet {
   }
 
   on_hotkey_triggered() {
-    this.on_applet_clicked(); 
+    if (this.settings.getValue("enableShortcut")) {
+      this.on_applet_clicked();
+    } 
   }
 
   on_applet_clicked() {
