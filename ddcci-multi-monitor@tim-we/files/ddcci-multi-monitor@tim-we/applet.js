@@ -34,7 +34,7 @@ function log(message, type = "debug") {
 
 class Monitor {
     #promises;
-    constructor(index, name, bus, brightnessFeatureFlag, showBusNumber=false) {
+    constructor(index, name, bus, brightnessFeatureFlag, showBusNumber=false, isActive=false, showCheckbox=false) {
         this.index = index;
         this.name = name;
         this.brightness = 50;
@@ -43,13 +43,27 @@ class Monitor {
         this.bus = bus;
         this.menuLabel = null;
         this.menuSlider = null;
+        this.menuCheckbox = null;
         this.brightnessFeatureFlag = brightnessFeatureFlag;
         this.showBusNumber = showBusNumber;
+        this.isActive = isActive;
+        this.showCheckbox = showCheckbox;
         this.#promises = Promise.resolve();
     }
 
     setShowBusNumber(showBusNumber) {
         this.showBusNumber = showBusNumber;
+    }
+
+    setShowCheckbox(showCheckbox) {
+        this.showCheckbox = showCheckbox;
+    }
+
+    setActive(value) {
+        this.isActive = value;
+        if (this.menuCheckbox) {
+            this.menuCheckbox.setToggleState(value);
+        }
     }
 
     updateBrightness() {
@@ -92,7 +106,7 @@ class Monitor {
         this.menuSlider.setValue(this.brightness / 100);
     }
 
-    setBrightness(value) {
+        setBrightness(value) {
         this.brightness = Math.round(value);
         this.send_brightness = this.brightness;
         this.updateMenu();
@@ -126,7 +140,7 @@ class Monitor {
         }
     }
 
-    addToMenu(menu) {
+    addToMenu(menu, saveActiveStateCallback) {
         // create & add label
         const menuLabel = new PopupMenu.PopupMenuItem(this.name, {
             reactive: false,
@@ -149,6 +163,18 @@ class Monitor {
         });
 
         menu.addMenuItem(menuSlider);
+
+        // checkbox to mark active monitor
+        if (this.showCheckbox) {
+            const menuCheckbox = new PopupMenu.PopupSwitchMenuItem(_("Use for scroll/click"), this.isActive);
+            this.menuCheckbox = menuCheckbox;
+            menu.addMenuItem(menuCheckbox);
+
+            menuCheckbox.connect("toggled", (item, state) => {
+                this.isActive = state;
+                saveActiveStateCallback(this.bus, state); // use bus number as key
+            });
+        }
     }
 }
 
@@ -159,6 +185,9 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
 
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
         this._bind_settings();
+
+        // load persistent settings for custom monitor selection
+        this.activeMonitors = this._loadActiveMonitors();
 
         this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
@@ -188,8 +217,28 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
         this.settings.bind("scale_toggle_point_2", "togglePoint2", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_3", "togglePoint3", this._initTogglePoints.bind(this));
         // single monitor
-        this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
-        this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
+        this.settings.bind("switch_manual-select-monitors", "manualSelectMonitors", () => {
+            this._updateMonitorSettings();
+            this.updateMenu();
+        });
+    }
+
+    _loadActiveMonitors() {
+        try {
+            const s = this.settings.getValue("string_active-monitors") || "{}";
+            return JSON.parse(s);
+        } catch (e) {
+            log("active-monitors parse failed, resetting to {}", "warning");
+            return {};
+        }
+    }
+
+    _saveActiveMonitors() {
+        try {
+            this.settings.setValue("string_active-monitors", JSON.stringify(this.activeMonitors));
+        } catch (e) {
+            log("active-monitors save failed: " + e, "error");
+        }
     }
 
     on_applet_clicked() {
@@ -218,6 +267,7 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
     _updateMonitorSettings() {
         this.monitors.forEach((monitor) => {
             monitor.setShowBusNumber(this.showBusNumber);
+            monitor.setShowCheckbox(this.manualSelectMonitors);
         });
     }
 
@@ -225,7 +275,18 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
         this.menu.removeAll();
 
         this.monitors.forEach((monitor) => {
-            monitor.addToMenu(this.menu);
+            // Pass a callback to save checkbox state
+            monitor.addToMenu(this.menu, (bus, state) => {
+                const key = String(bus);
+                this.activeMonitors[key] = state;
+                this._saveActiveMonitors();
+            });
+
+            const saved = this.activeMonitors[String(monitor.bus)];
+            if (saved !== undefined) {
+                monitor.setActive(!!saved);
+            }
+
         });
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -257,9 +318,10 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
     async updateMonitors(init = true) {
         this.detecting = true;
         log("Detecting displays...");
-        this.monitors = (await getDisplays()).map(
-            (d) => new Monitor(d.index, d.name, d.bus, d.brightnessFeatureFlag)
-        );
+        this.monitors = (await getDisplays()).map((d) => {
+            const isActive = !!this.activeMonitors[String(d.bus)];
+            return new Monitor(d.index, d.name, d.bus, d.brightnessFeatureFlag, this.showBusNumber, isActive, this.manualSelectMonitors);
+        });
 
         if (this.monitors.length === 0) {
             log("Could not find any ddc/ci displays.", "warning");
@@ -278,7 +340,6 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
         if (!init) {
             this.updateMenu();
         }
-        this._updateMonitorSettings();
     }
 
     _initTogglePoints() {
@@ -352,9 +413,7 @@ class DDCMultiMonitor extends Applet.TextIconApplet {
     }
 
     _getMonitorsToUpdate() {
-        return this.useManualSingleMonitor
-            ? this.monitors.filter(monitor => monitor.bus === this.singleMonitorBus)
-            : this.monitors;
+        return this.manualSelectMonitors ? this.monitors.filter(monitor => monitor.isActive) : this.monitors;
     }
 }
 

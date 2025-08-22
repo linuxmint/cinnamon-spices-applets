@@ -27,9 +27,7 @@
             "type": "section",
             "title": "Monitor Setup",
             "keys": [
-                "label_single-monitor",
-                "switch_manual-single-monitor",
-                "spinbutton_single-monitor"
+                "switch_manual-select-monitors"
             ]
         },        
 
@@ -57,7 +55,7 @@
       "entry_applet-label": {
         "type": "entry",
         "default": "",
-        "description": "Text label for the applet, shown next to the icon in the panel.\nLeave empty for no label."
+        "description": "Text shown next to the icon in the panel.\nLeave empty for no label."
       },
       "switch_show-bus-number": {
         "type": "switch",
@@ -65,24 +63,10 @@
         "description": "Show bus number next to the detected monitors."
       },
 
-      "label_single-monitor": {
-        "type": "label",
-        "description": "By default, scrolling & toggling adjusts brightness for all monitors.\nFor single monitor control, enable manual setup and specify the bus number."
-      },
-      "switch_manual-single-monitor": {
+      "switch_manual-select-monitors": {
         "type": "switch",
         "default": false,
-        "description": "Switch to manual single monitor setup"
-      },
-      "spinbutton_single-monitor": {
-        "type": "spinbutton",
-        "default": 1,
-        "min": 1,
-        "max": 100,
-        "step": 1,
-        "units": "bus",
-        "description": "Bus number for single monitor setup",
-        "dependency": "switch_manual-single-monitor"
+        "description": "By default, scrolling & toggling adjusts brightness for all monitors.\nSwitch to enable custom monitor selection.\nThis will add checkbox options for each detected monitor."
       },
 
       "combobox_scrollInterval": {
@@ -103,7 +87,7 @@
       "switch_use-toggle-points": {
         "type": "switch",
         "default": false,
-        "description": "Enable toggle points for brightness adjustment (via mouse middle click)"
+        "description": "Enable toggle points for brightness adjustment.\n(via mouse middle click)"
       },
       "spinbutton_numoftogglepoints": {
         "type": "spinbutton",
@@ -111,7 +95,7 @@
         "min": 1,
         "max": 3,
         "step": 1,
-        "description": "Number of toggle points for brightness adjustment (only the first N toggle points will be used)",
+        "description": "Number of toggle points for brightness adjustment\n(only the first N toggle points will be used)",
         "dependency": "switch_use-toggle-points"
       },
       "scale_toggle_point_1": {
@@ -140,5 +124,11 @@
         "step": 1,
         "description": "Brightness level for toggle point 3",
         "dependency": "switch_use-toggle-points"
+      },
+
+      "string_active-monitors": {
+          "type": "string",
+          "default": "{}",
+          "description": "Stores which monitors are active for scroll/click functions.\nThis is a JSON object where keys are bus numbers and values are true/false.\nExample: {\"1\":true,\"2\":false}"
       }
 }
