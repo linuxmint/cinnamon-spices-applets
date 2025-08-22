@@ -34,3 +34,29 @@ supports the DDC/CI protocol running:
 ```bash
 ddcutil capabilities
 ```
+
+## Configuration
+
+The applet provides several configuration options, accessible through the **Applet Settings**:
+
+* **Applet Label**
+
+  * Customize the label text shown in the panel.
+
+* **Brightness Step Size**
+
+  * Adjust the increment/decrement step (in %) when scrolling on the applet icon.
+
+* **Toggle Points (Middle-Click Support)**
+
+  * Enable up to three user-defined brightness levels.
+  * Cycle through these levels by middle-clicking the applet icon.
+
+* **Single Monitor Mode**
+
+  * Restrict brightness adjustments (scrolling and middle-click toggles) to a single, user-specified monitor bus.
+  * Useful for setups where only one monitor should be controlled by this instance of the applet.
+
+All of these options are **optional**. By default, the applet behaves as in earlier versions: scrolling adjusts brightness in fixed steps across all detected monitors.
+
+---
