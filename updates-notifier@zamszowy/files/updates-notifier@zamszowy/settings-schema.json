@@ -36,12 +36,26 @@
     },
     "commandUpdate": {
         "type": "entry",
-        "default": "sudo apt update",
+        "default": "pkcon refresh",
         "description": "Check for updates:"
     },
     "commandUpgrade": {
         "type": "entry",
-        "default": "sudo apt -V upgrade",
+        "default": "pkcon update",
         "description": "Upgrade packages:"
+    },
+    "section3": {
+        "type": "section",
+        "description": "Theme"
+    },
+    "icon-style": {
+        "type": "combobox",
+        "description": "Icon style",
+        "default": "light",
+        "options": {
+            "dark": "dark",
+            "light": "light",
+            "symbolic": "symbolic"
+        }
     }
 }

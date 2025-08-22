@@ -1,5 +1,0 @@
-{
-    "uuid": "apt-updates@zamszowy",
-    "name": "APT updates notifier",
-    "description": "Shows icons for pending updates in APT-based systems"
-}

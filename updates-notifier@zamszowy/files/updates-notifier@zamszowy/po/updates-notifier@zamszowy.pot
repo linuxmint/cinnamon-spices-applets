@@ -1,14 +1,14 @@
-# APT UPDATES NOTIFIER
+# UPDATES NOTIFIER
 # This file is put in the public domain.
 # zamszowy, 2025
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: apt-updates@zamszowy 1.0\n"
+"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-15 13:53+0200\n"
+"POT-Creation-Date: 2025-08-22 18:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,47 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:35
+#. applet.js:37
 msgid "missing dependencies"
 msgstr ""
 
-#. applet.js:63
+#. applet.js:104
 #, javascript-format
 msgid "%s updates available"
 msgstr ""
 
-#. applet.js:64
+#. applet.js:105
 msgid "No updates available"
 msgstr ""
 
-#. applet.js:89
+#. applet.js:130
 #, javascript-format
 msgid "View %s updates"
 msgstr ""
 
-#. applet.js:89
+#. applet.js:130
 msgid "No updates to view"
 msgstr ""
 
-#. applet.js:95
+#. applet.js:136
 msgid "Check for new updates"
 msgstr ""
 
-#. applet.js:103
+#. applet.js:144
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr ""
 
-#. applet.js:103
+#. applet.js:144
 msgid "No packages to upgrade"
 msgstr ""
 
 #. metadata.json->name
-msgid "APT updates notifier"
+msgid "Updates notifier"
 msgstr ""
 
 #. metadata.json->description
-msgid "Shows icons for pending updates in APT-based systems"
+msgid "Shows icons for pending update packages"
 msgstr ""
 
 #. settings-schema.json->section1->description
@@ -96,4 +96,24 @@ msgstr ""
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages:"
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
 msgstr ""

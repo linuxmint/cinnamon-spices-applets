@@ -5,24 +5,26 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const { themeManager } = imports.ui.main;
 
-const UUID = "apt-updates@zamszowy";
+const UUID = "updates-notifier@zamszowy";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 function _(str) { return Gettext.dgettext(UUID, str); }
 
-function AptUpdates(metadata, orientation, panel_height, instance_id) {
+function UpdatesNotifier(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
 }
 
-AptUpdates.prototype = {
+UpdatesNotifier.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
     _init: function (metadata, orientation, panel_height, instance_id) {
+
         this.applet_path = metadata.path;
 
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.set_applet_icon_name("update-none");
+        this.set_applet_icon_name("update-notifier-none-dark");
         this.hide_applet_label(true);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -39,7 +41,7 @@ AptUpdates.prototype = {
         this.uuid = metadata.uuid;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
 
-        this.settings.bind("update-refresh", "refreshTimeout", null, null);
+        this.settings.bind("update-refresh", "refreshTimeout", this._set_check_interval, null);
         this.settings.bind("hide-applet", "hideApplet", this._update, null);
 
         this.settings.bind("different-levels", "differentLevels", this._update, null);
@@ -49,10 +51,49 @@ AptUpdates.prototype = {
         this.settings.bind("commandUpdate", "commandUpdate", null, null);
         this.settings.bind("commandUpgrade", "commandUpgrade", null, null);
 
+        this.settings.bind("icon-style", "icon_style", this._update, null);
+
         this.packages_count = 0;
 
-        this.enabled = true;
-        this.run();
+        this.interval = null;
+
+        this._refreshUpdatesInfo();
+        this._set_check_interval();
+    },
+
+    _apply_applet_icon: function (icon_name) {
+        let full_icon_name = icon_name + "-";
+        if (this.icon_style == "dark") {
+            full_icon_name += "dark";
+        } else if (this.icon_style == "light") {
+            full_icon_name += "light";
+        } else if (this.icon_style == "symbolic") {
+            full_icon_name += "symbolic";
+        } else {
+            full_icon_name += "dark";
+        }
+        this.set_applet_icon_name(full_icon_name);
+    },
+
+    _set_check_interval: function () {
+        let parsedMinutes = parseInt(this.refreshTimeout);
+        if (isNaN(parsedMinutes) || parsedMinutes < 1) {
+            this.refreshTimeout = "60";
+            parsedMinutes = 60;
+        }
+        const milis = parsedMinutes * 60 * 1000;
+
+        this._update();
+
+        if (this.interval) {
+            Util.clearInterval(this.interval);
+        }
+        this.interval = Util.setInterval(() => {
+            Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check"], (stdout) => {
+                this.packages_count = parseInt(stdout.trim());
+                this._update();
+            });
+        }, milis);
     },
 
     _update: function () {
@@ -66,19 +107,19 @@ AptUpdates.prototype = {
 
         if (this.differentLevels) {
             if (count <= 0) {
-                this.set_applet_icon_name("update-none");
+                this._apply_applet_icon("update-notifier-none");
             } else if (count < this.level1) {
-                this.set_applet_icon_name("update-low");
+                this._apply_applet_icon("update-notifier-low");
             } else if (count < this.level2) {
-                this.set_applet_icon_name("update-medium");
+                this._apply_applet_icon("update-notifier-medium");
             } else {
-                this.set_applet_icon_name("update-high");
+                this._apply_applet_icon("update-notifier-high");
             }
         } else {
             if (count <= 0) {
-                this.set_applet_icon_name("update-none");
+                this._apply_applet_icon("update-notifier-none");
             } else {
-                this.set_applet_icon_name("update-low");
+                this._apply_applet_icon("update-notifier-low");
             }
         }
 
@@ -119,7 +160,9 @@ AptUpdates.prototype = {
     },
 
     on_applet_removed: function () {
-        this.enabled = false;
+        if (this.interval) {
+            Util.clearInterval(this.interval);
+        }
     },
 
     _refreshUpdatesInfo: function () {
@@ -128,23 +171,8 @@ AptUpdates.prototype = {
             this._update();
         });
     },
-
-    run: function () {
-        if (!this.enabled) {
-            return;
-        }
-
-        Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check"], (stdout) => {
-            this.packages_count = parseInt(stdout.trim());
-            this._update();
-
-            Util.spawn_async(['/usr/bin/sleep', (parseInt(this.refreshTimeout) * 60).toString()], (_) => {
-                this.run();
-            });
-        });
-    },
 };
 
 function main(metadata, orientation, panel_height, instance_id) {
-    return new AptUpdates(metadata, orientation, panel_height, instance_id);
+    return new UpdatesNotifier(metadata, orientation, panel_height, instance_id);
 }
