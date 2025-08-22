@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-22 21:20+0200\n"
+"POT-Creation-Date: 2025-08-22 21:49+0200\n"
 "PO-Revision-Date: 2024-07-21 03:21+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -88,35 +88,35 @@ msgid ""
 "This will add checkbox options for each detected monitor."
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "1"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "2"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "4"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "5"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "10"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "20"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->options
+#. settings-schema.json->combobox_scroll-step->options
 msgid "50"
 msgstr ""
 
-#. settings-schema.json->combobox_scrollInterval->description
+#. settings-schema.json->combobox_scroll-step->description
 #, fuzzy
 msgid "Adjustment step for brightness"
 msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
@@ -127,7 +127,7 @@ msgid ""
 "(via mouse middle click)"
 msgstr ""
 
-#. settings-schema.json->spinbutton_numoftogglepoints->description
+#. settings-schema.json->spinbutton_num-of-toggle-points->description
 msgid ""
 "Number of toggle points for brightness adjustment\n"
 "(only the first N toggle points will be used)"
