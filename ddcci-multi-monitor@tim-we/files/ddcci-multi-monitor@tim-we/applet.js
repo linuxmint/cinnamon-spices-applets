@@ -19,7 +19,6 @@ function _(str) {
 }
 
 const DEFAULT_TOOLTIP = _("Adjust monitor brightness via DDC/CI");
-const BRIGHTNESS_ADJUSTMENT_STEP = 5; /* Brightness adjustment step in % */
 
 function log(message, type = "debug") {
     const finalLogMessage = `[${UUID}] ${message}`;
@@ -166,7 +165,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
     }
 
     _bind_settings() {
-        this.settings.bind("combobox_scrollInterval", "scrollInterval", null);
+        this.settings.bind("combobox_scrollInterval", "brightnessAdjustmentStep", null);
         this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
         this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
         this.settings.bind("switch_show-bus-number", "showBusNumber", null);
@@ -254,7 +253,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         if (direction == Clutter.ScrollDirection.DOWN) {
             clearTimeout(this.lastTooltipTimeoutID);
             let tooltipMessage = this.monitors.map(monitor => {
-                monitor.brightness = Math.max(0, monitor.brightness - BRIGHTNESS_ADJUSTMENT_STEP);
+                monitor.brightness = Math.max(0, monitor.brightness - this.brightnessAdjustmentStep);
                 monitor.setBrightness(monitor.brightness);
                 return `${monitor.name}: ${monitor.brightness}%`;
             }).join("\n");
@@ -270,7 +269,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         else if (direction == Clutter.ScrollDirection.UP) {
             clearTimeout(this.lastTooltipTimeoutID);
             let tooltipMessage = this.monitors.map(monitor => {
-                monitor.brightness = Math.min(100, monitor.brightness + BRIGHTNESS_ADJUSTMENT_STEP);
+                monitor.brightness = Math.min(100, monitor.brightness + this.brightnessAdjustmentStep);
                 monitor.setBrightness(monitor.brightness);
                 return `${monitor.name}: ${monitor.brightness}%`;
             }).join("\n");
