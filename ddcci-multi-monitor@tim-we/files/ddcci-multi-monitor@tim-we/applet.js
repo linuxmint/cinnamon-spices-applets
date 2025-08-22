@@ -34,7 +34,7 @@ function log(message, type = "debug") {
 
 class Monitor {
     #promises;
-    constructor(index, name, bus, brightnessFeatureFlag) {
+    constructor(index, name, bus, brightnessFeatureFlag, showBusNumber=false) {
         this.index = index;
         this.name = name;
         this.brightness = 50;
@@ -44,7 +44,12 @@ class Monitor {
         this.menuLabel = null;
         this.menuSlider = null;
         this.brightnessFeatureFlag = brightnessFeatureFlag;
+        this.showBusNumber = showBusNumber;
         this.#promises = Promise.resolve();
+    }
+
+    setShowBusNumber(showBusNumber) {
+        this.showBusNumber = showBusNumber;
     }
 
     updateBrightness() {
@@ -75,7 +80,11 @@ class Monitor {
     }
 
     updateLabel() {
-        this.menuLabel.setLabel(`${this.name}  (${this.brightness}%)`);
+        if (this.showBusNumber) {
+            this.menuLabel.setLabel(`${this.name} (bus ${this.bus})  (${this.brightness}%)`);
+        } else {
+            this.menuLabel.setLabel(`${this.name}  (${this.brightness}%)`);
+        }
     }
 
     updateMenu() {
@@ -168,7 +177,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.settings.bind("combobox_scrollInterval", "brightnessAdjustmentStep", null);
         this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
         this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
-        this.settings.bind("switch_show-bus-number", "showBusNumber", null);
+        this.settings.bind("switch_show-bus-number", "showBusNumber", this._updateMonitorSettings.bind(this));
     }
 
     on_applet_clicked() {
@@ -182,6 +191,12 @@ class DDCMultiMonitor extends Applet.IconApplet {
         if(!this.detecting) {
             this.updateMonitors();
         }
+    }
+
+    _updateMonitorSettings() {
+        this.monitors.forEach((monitor) => {
+            monitor.setShowBusNumber(this.showBusNumber);
+        });
     }
 
     updateMenu() {
@@ -241,6 +256,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         if (!init) {
             this.updateMenu();
         }
+        this._updateMonitorSettings();
     }
 
     // Change the brightness when scrolling on the icon
