@@ -171,6 +171,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.menuManager.addMenu(this.menu);
 
         this.updateMonitors();
+        this._initTogglePoints();
     }
 
     _bind_settings() {
