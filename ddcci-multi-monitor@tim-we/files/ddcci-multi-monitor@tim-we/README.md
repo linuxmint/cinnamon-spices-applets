@@ -52,10 +52,10 @@ The applet provides several configuration options, accessible through the **Appl
   * Enable up to three user-defined brightness levels.
   * Cycle through these levels by middle-clicking the applet icon.
 
-* **Single Monitor Mode**
+* **Selected Monitor Mode**
 
-  * Restrict brightness adjustments (scrolling and middle-click toggles) to a single, user-specified monitor bus.
-  * Useful for setups where only one monitor should be controlled by this instance of the applet.
+  * Restrict brightness adjustments (scrolling and middle-click toggles) to selected monitors.
+  * Useful for setups where only specific monitors should be controlled by this instance of the applet.
 
 All of these options are **optional**. By default, the applet behaves as in earlier versions: scrolling adjusts brightness in fixed steps across all detected monitors.
 
