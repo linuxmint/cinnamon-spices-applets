@@ -152,7 +152,7 @@ class Monitor {
     }
 }
 
-class DDCMultiMonitor extends Applet.IconApplet {
+class DDCMultiMonitor extends Applet.TextIconApplet {
 
     constructor(metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
@@ -162,6 +162,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
 
         this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
+        this._updateAppletLabel();
         this.set_applet_tooltip(DEFAULT_TOOLTIP);
         this.actor.connect('scroll-event', (...args) => this._onScrollEvent(...args));
         this.lastTooltipTimeoutID = null;
@@ -175,15 +176,20 @@ class DDCMultiMonitor extends Applet.IconApplet {
     }
 
     _bind_settings() {
-        this.settings.bind("combobox_scrollInterval", "brightnessAdjustmentStep", null);
-        this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
-        this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
+        // appearance
+        this.settings.bind("entry_applet-label", "appletLabel", this._updateAppletLabel.bind(this));
         this.settings.bind("switch_show-bus-number", "showBusNumber", this._updateMonitorSettings.bind(this));
+        // scrolling
+        this.settings.bind("combobox_scrollInterval", "brightnessAdjustmentStep", null);
+        // toggle points
         this.settings.bind("switch_use-toggle-points", "useTogglePoints", this._initTogglePoints.bind(this));
         this.settings.bind("spinbutton_numoftogglepoints", "numOfTogglePoints", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_1", "togglePoint1", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_2", "togglePoint2", this._initTogglePoints.bind(this));
         this.settings.bind("scale_toggle_point_3", "togglePoint3", this._initTogglePoints.bind(this));
+        // single monitor
+        this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
+        this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
     }
 
     on_applet_clicked() {
@@ -203,6 +209,10 @@ class DDCMultiMonitor extends Applet.IconApplet {
         if(!this.detecting) {
             this.updateMonitors();
         }
+    }
+
+    _updateAppletLabel() {
+        this.set_applet_label(this.appletLabel.length > 0 ? this.appletLabel : "");
     }
 
     _updateMonitorSettings() {

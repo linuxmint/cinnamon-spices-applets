@@ -18,6 +18,7 @@
             "type": "section",
             "title": "Appearance",
             "keys": [
+                "entry_applet-label",
                 "switch_show-bus-number"  
             ]
         },
@@ -53,6 +54,11 @@
       }
       },
 
+      "entry_applet-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Text label for the applet, shown next to the icon in the panel.\nLeave empty for no label."
+      },
       "switch_show-bus-number": {
         "type": "switch",
         "default": false,
