@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-22 13:38+0200\n"
+"POT-Creation-Date: 2025-08-22 14:44+0200\n"
 "PO-Revision-Date: 2024-11-13 14:19+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -23,24 +23,24 @@ msgstr ""
 msgid "Adjust monitor brightness via DDC/CI"
 msgstr "Kirkkauden säätö DDC/CI menetelmällä. Asenna myös ohjalma ddcutil"
 
-#. applet.js:223
+#. applet.js:234
 msgid "Detect displays"
 msgstr "Tunnista näytöt"
 
-#. applet.js:235
+#. applet.js:246
 msgid "Detecting displays..."
 msgstr "Tunnistetaan näyttöjä..."
 
-#. applet.js:361
+#. applet.js:372
 msgid "Failed to detect displays."
 msgstr "Näyttöjen tunnistaminen epäonnistui."
 
-#. applet.js:362
+#. applet.js:373
 msgid "Make sure you have ddcutil installed and the correct permissions."
 msgstr ""
 "Varmista, että sinulla on asennettuna ddcutil ja oikeat käyttöoikeudet."
 
-#. applet.js:363
+#. applet.js:374
 msgid "Error:"
 msgstr "Virhe:"
 
@@ -66,6 +66,12 @@ msgstr ""
 
 #. settings-schema.json->section_togglepoints->title
 msgid "Toggle Points"
+msgstr ""
+
+#. settings-schema.json->entry_applet-label->description
+msgid ""
+"Text label for the applet, shown next to the icon in the panel.\n"
+"Leave empty for no label."
 msgstr ""
 
 #. settings-schema.json->switch_show-bus-number->description
