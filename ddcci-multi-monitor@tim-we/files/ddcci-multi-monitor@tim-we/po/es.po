@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# DDC/CI MULTI-MONITOR
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# tim-we, 2021
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-20 15:38-0400\n"
+"POT-Creation-Date: 2025-08-22 12:52+0200\n"
 "PO-Revision-Date: 2024-07-20 17:54-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,30 +18,101 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 
 #. metadata.json->description
-#: applet.js:19
+#. applet.js:21
 msgid "Adjust monitor brightness via DDC/CI"
 msgstr "Ajuste del brillo del monitor mediante DDC/CI"
 
-#: applet.js:162
+#. applet.js:212
 msgid "Detect displays"
 msgstr "Detectar pantallas"
 
-#: applet.js:174
+#. applet.js:224
 msgid "Detecting displays..."
 msgstr "Detectando pantallas..."
 
-#: applet.js:263
+#. applet.js:316
 msgid "Failed to detect displays."
 msgstr "No se han detectado pantallas."
 
-#: applet.js:264
+#. applet.js:317
 msgid "Make sure you have ddcutil installed and the correct permissions."
 msgstr "Asegúrese de que tiene ddcutil instalado y los permisos correctos."
 
-#: applet.js:265
+#. applet.js:318
 msgid "Error:"
 msgstr "Error:"
 
 #. metadata.json->name
 msgid "DDC/CI Multi-Monitor"
 msgstr "DDC/CI Multi-Monitor"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->section_appearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->section_monitor->title
+msgid "Monitor Setup"
+msgstr ""
+
+#. settings-schema.json->section_scrolling->title
+msgid "Scrolling Settings"
+msgstr ""
+
+#. settings-schema.json->switch_show-bus-number->description
+msgid "Show bus number next to the detected monitors."
+msgstr ""
+
+#. settings-schema.json->label_single-monitor->description
+msgid ""
+"By default, scrolling adjusts brightness for all monitors. For single "
+"monitor control, enable manual setup and specify the bus number."
+msgstr ""
+
+#. settings-schema.json->switch_manual-single-monitor->description
+msgid "Switch to manual single monitor setup"
+msgstr ""
+
+#. settings-schema.json->spinbutton_single-monitor->units
+msgid "bus"
+msgstr ""
+
+#. settings-schema.json->spinbutton_single-monitor->description
+msgid "Bus number for single monitor setup"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "1"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "2"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "4"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->options
+msgid "50"
+msgstr ""
+
+#. settings-schema.json->combobox_scrollInterval->description
+#, fuzzy
+msgid "Adjustment step for brightness"
+msgstr "Ajuste del brillo del monitor mediante DDC/CI"
