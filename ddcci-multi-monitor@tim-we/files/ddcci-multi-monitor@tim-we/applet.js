@@ -178,6 +178,11 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
         this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
         this.settings.bind("switch_show-bus-number", "showBusNumber", this._updateMonitorSettings.bind(this));
+        this.settings.bind("switch_use-toggle-points", "useTogglePoints", this._initTogglePoints.bind(this));
+        this.settings.bind("spinbutton_numoftogglepoints", "numOfTogglePoints", this._initTogglePoints.bind(this));
+        this.settings.bind("scale_toggle_point_1", "togglePoint1", this._initTogglePoints.bind(this));
+        this.settings.bind("scale_toggle_point_2", "togglePoint2", this._initTogglePoints.bind(this));
+        this.settings.bind("scale_toggle_point_3", "togglePoint3", this._initTogglePoints.bind(this));
     }
 
     on_applet_clicked() {
@@ -185,6 +190,12 @@ class DDCMultiMonitor extends Applet.IconApplet {
             monitor.updateBrightness(); // Makes sure the brightness shown is the real brightness
         });
         this.menu.toggle();
+    }
+
+    on_applet_middle_clicked() {
+        if (this.useTogglePoints) {
+            this._toggleBrightnessForMonitors();
+        }
     }
 
     on_applet_added_to_panel() {
@@ -259,6 +270,22 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this._updateMonitorSettings();
     }
 
+    _initTogglePoints() {
+        this._togglePoints = [];
+        if (this.numOfTogglePoints >= 1) this._togglePoints.push(this.togglePoint1);
+        if (this.numOfTogglePoints >= 2) this._togglePoints.push(this.togglePoint2);
+        if (this.numOfTogglePoints >= 3) this._togglePoints.push(this.togglePoint3);
+        this._currentToggleIndex = -1;
+    }
+
+    _toggleBrightnessForMonitors() {
+        if (!this._togglePoints || this._togglePoints.length === 0) return;
+        // Cycle through toggle points
+        this._currentToggleIndex = (this._currentToggleIndex + 1) % this._togglePoints.length;
+        let brightness = this._togglePoints[this._currentToggleIndex];
+        this._setBrightnessForMonitors(brightness);
+    }
+
     // Change the brightness when scrolling on the icon
     _onScrollEvent(actor, event) {
         let direction = event.get_scroll_direction();
@@ -285,6 +312,24 @@ class DDCMultiMonitor extends Applet.IconApplet {
                 : Math.max(0, monitor.brightness - amount);
             monitor.setBrightness(newBrightness);
             return `${monitor.name}: ${newBrightness}%`;
+        }).join("\n");
+
+        this.set_applet_tooltip(tooltipMessage);
+        this._applet_tooltip.show();
+        this.lastTooltipTimeoutID = setTimeout(() => {
+            this._applet_tooltip.hide();
+            this.set_applet_tooltip(DEFAULT_TOOLTIP);
+        }, 2500);
+    }
+
+    _setBrightnessForMonitors(brightness) {
+
+        let monitorsToUpdate = this._getMonitorsToUpdate();
+
+        clearTimeout(this.lastTooltipTimeoutID);
+        let tooltipMessage = monitorsToUpdate.map(monitor => {
+            monitor.setBrightness(brightness);
+            return `${monitor.name}: ${brightness}%`;
         }).join("\n");
 
         this.set_applet_tooltip(tooltipMessage);

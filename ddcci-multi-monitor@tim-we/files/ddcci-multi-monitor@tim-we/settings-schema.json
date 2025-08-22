@@ -8,8 +8,9 @@
             "title": "General",
             "sections": [
                 "section_appearance",
-                "section_monitor",
-                "section_scrolling"
+                "section_scrolling",
+                "section_togglepoints",
+                "section_monitor"
             ]
         },
 
@@ -37,7 +38,19 @@
             "keys": [
                 "combobox_scrollInterval"
             ]
-        }
+        },
+
+        "section_togglepoints": {
+          "type": "section",
+          "title": "Toggle Points",
+          "keys": [
+              "switch_use-toggle-points",
+              "spinbutton_numoftogglepoints",
+              "scale_toggle_point_1",
+              "scale_toggle_point_2",
+              "scale_toggle_point_3"
+          ]
+      }
       },
 
       "switch_show-bus-number": {
@@ -48,7 +61,7 @@
 
       "label_single-monitor": {
         "type": "label",
-        "description": "By default, scrolling adjusts brightness for all monitors. For single monitor control, enable manual setup and specify the bus number."
+        "description": "By default, scrolling & toggling adjusts brightness for all monitors.\nFor single monitor control, enable manual setup and specify the bus number."
       },
       "switch_manual-single-monitor": {
         "type": "switch",
@@ -79,6 +92,47 @@
           "50": 50
         },
         "description": "Adjustment step for brightness"
-      }
+      },
 
+      "switch_use-toggle-points": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable toggle points for brightness adjustment (via mouse middle click)"
+      },
+      "spinbutton_numoftogglepoints": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "description": "Number of toggle points for brightness adjustment (only the first N toggle points will be used)",
+        "dependency": "switch_use-toggle-points"
+      },
+      "scale_toggle_point_1": {
+        "type": "scale",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Brightness level for toggle point 1",
+        "dependency": "switch_use-toggle-points"
+      },
+      "scale_toggle_point_2": {
+        "type": "scale",
+        "default": 50,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Brightness level for toggle point 2",
+        "dependency": "switch_use-toggle-points"
+      },
+      "scale_toggle_point_3": {
+        "type": "scale",
+        "default": 100,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Brightness level for toggle point 3",
+        "dependency": "switch_use-toggle-points"
+      }
 }
