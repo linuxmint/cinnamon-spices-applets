@@ -106,7 +106,7 @@ class Monitor {
         this.menuSlider.setValue(this.brightness / 100);
     }
 
-        setBrightness(value) {
+    setBrightness(value) {
         this.brightness = Math.round(value);
         this.send_brightness = this.brightness;
         this.updateMenu();
