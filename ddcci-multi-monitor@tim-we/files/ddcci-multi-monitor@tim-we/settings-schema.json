@@ -1,0 +1,84 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page_general"],
+
+        "page_general": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "section_appearance",
+                "section_monitor",
+                "section_scrolling"
+            ]
+        },
+
+        "section_appearance": {
+            "type": "section",
+            "title": "Appearance",
+            "keys": [
+                "switch_show-bus-number"  
+            ]
+        },
+
+        "section_monitor": {
+            "type": "section",
+            "title": "Monitor Setup",
+            "keys": [
+                "label_single-monitor",
+                "switch_manual-single-monitor",
+                "spinbutton_single-monitor"
+            ]
+        },        
+
+        "section_scrolling": {
+            "type": "section",
+            "title": "Scrolling Settings",
+            "keys": [
+                "combobox_scrollInterval"
+            ]
+        }
+      },
+
+      "switch_show-bus-number": {
+        "type": "switch",
+        "default": false,
+        "description": "Show bus number next to the detected monitors."
+      },
+
+      "label_single-monitor": {
+        "type": "label",
+        "description": "By default, scrolling adjusts brightness for all monitors. For single monitor control, enable manual setup and specify the bus number."
+      },
+      "switch_manual-single-monitor": {
+        "type": "switch",
+        "default": false,
+        "description": "Switch to manual single monitor setup"
+      },
+      "spinbutton_single-monitor": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "units": "bus",
+        "description": "Bus number for single monitor setup",
+        "dependency": "switch_manual-single-monitor"
+      },
+
+      "combobox_scrollInterval": {
+        "type": "combobox",
+        "default": 5,
+        "options": {
+          "1": 1,
+          "2": 2,
+          "4": 4,
+          "5": 5,
+          "10": 10,
+          "20": 20,
+          "50": 50
+        },
+        "description": "Adjustment step for brightness"
+      }
+
+}

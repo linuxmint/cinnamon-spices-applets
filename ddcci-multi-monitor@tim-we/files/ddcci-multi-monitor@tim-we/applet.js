@@ -8,6 +8,7 @@ const ModalDialog = imports.ui.modalDialog;
 const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+const Settings = imports.ui.settings;
 
 // l10n/translation support
 const UUID = "ddcci-multi-monitor@tim-we";
@@ -147,6 +148,10 @@ class DDCMultiMonitor extends Applet.IconApplet {
 
     constructor(metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
+
+        this.settings = new Settings.AppletSettings(this, UUID, instance_id);
+        this._bind_settings();
+
         this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
         this.set_applet_tooltip(DEFAULT_TOOLTIP);
@@ -158,6 +163,13 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.menuManager.addMenu(this.menu);
 
         this.updateMonitors();
+    }
+
+    _bind_settings() {
+        this.settings.bind("combobox_scrollInterval", "scrollInterval", null);
+        this.settings.bind("switch_manual-single-monitor", "useManualSingleMonitor", null);
+        this.settings.bind("spinbutton_single-monitor", "singleMonitorBus", null);
+        this.settings.bind("switch_show-bus-number", "showBusNumber", null);
     }
 
     on_applet_clicked() {
