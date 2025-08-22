@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-22 12:52+0200\n"
+"POT-Creation-Date: 2025-08-22 13:38+0200\n"
 "PO-Revision-Date: 2024-07-23 23:51+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -21,24 +21,24 @@ msgstr ""
 msgid "Adjust monitor brightness via DDC/CI"
 msgstr "Pas de helderheid van de monitor aan via DDC/CI"
 
-#. applet.js:212
+#. applet.js:223
 msgid "Detect displays"
 msgstr "Detecteer schermen"
 
-#. applet.js:224
+#. applet.js:235
 msgid "Detecting displays..."
 msgstr "Schermen aan het detecteren..."
 
-#. applet.js:316
+#. applet.js:361
 msgid "Failed to detect displays."
 msgstr "Kon geen schermen detecteren."
 
-#. applet.js:317
+#. applet.js:362
 msgid "Make sure you have ddcutil installed and the correct permissions."
 msgstr ""
 "Zorg ervoor dat je ddcutil hebt geïnstalleerd en de juiste machtigingen hebt."
 
-#. applet.js:318
+#. applet.js:363
 msgid "Error:"
 msgstr "Fout:"
 
@@ -62,14 +62,18 @@ msgstr ""
 msgid "Scrolling Settings"
 msgstr ""
 
+#. settings-schema.json->section_togglepoints->title
+msgid "Toggle Points"
+msgstr ""
+
 #. settings-schema.json->switch_show-bus-number->description
 msgid "Show bus number next to the detected monitors."
 msgstr ""
 
 #. settings-schema.json->label_single-monitor->description
 msgid ""
-"By default, scrolling adjusts brightness for all monitors. For single "
-"monitor control, enable manual setup and specify the bus number."
+"By default, scrolling & toggling adjusts brightness for all monitors.\n"
+"For single monitor control, enable manual setup and specify the bus number."
 msgstr ""
 
 #. settings-schema.json->switch_manual-single-monitor->description
@@ -116,3 +120,25 @@ msgstr ""
 #, fuzzy
 msgid "Adjustment step for brightness"
 msgstr "Pas de helderheid van de monitor aan via DDC/CI"
+
+#. settings-schema.json->switch_use-toggle-points->description
+msgid "Enable toggle points for brightness adjustment (via mouse middle click)"
+msgstr ""
+
+#. settings-schema.json->spinbutton_numoftogglepoints->description
+msgid ""
+"Number of toggle points for brightness adjustment (only the first N toggle "
+"points will be used)"
+msgstr ""
+
+#. settings-schema.json->scale_toggle_point_1->description
+msgid "Brightness level for toggle point 1"
+msgstr ""
+
+#. settings-schema.json->scale_toggle_point_2->description
+msgid "Brightness level for toggle point 2"
+msgstr ""
+
+#. settings-schema.json->scale_toggle_point_3->description
+msgid "Brightness level for toggle point 3"
+msgstr ""
