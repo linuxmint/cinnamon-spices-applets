@@ -527,8 +527,11 @@ class MCSM extends Applet.IconApplet {
                     if (p["path"].length === 0) continue;
                     knownPaths.push(p["path"]);
                 }
-                var mounts = stdout.trim().split(" ");
+                //~ var mounts = stdout.trim().split(" ");
+                var mounts = stdout.trim().replace(/\ +/g, " ").split(" ");
                 for (let m of mounts) {
+                    if (m.trim().length === 0 && knownPaths.indexOf("/") < 0)
+                        m = "/";
                     if (!m.startsWith("/")) continue;
                     if (knownPaths.indexOf(m) < 0) {
                         let name = GLib.basename(m);

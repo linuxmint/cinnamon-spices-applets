@@ -1,3 +1,7 @@
+### v2.8.2~20250825
+  * Fixes [#7559](https://github.com/linuxmint/cinnamon-spices-applets/issues/7559)
+  * Improves the Disk Usage chart.
+
 ### v2.8.1~20250825
   * Disk usage: the user can set a maximum value (in %) for each defined path.
   * When the value reaches this maximum, the alert color is used in the bar chart and this value is highlighted in bold in the tooltip.
