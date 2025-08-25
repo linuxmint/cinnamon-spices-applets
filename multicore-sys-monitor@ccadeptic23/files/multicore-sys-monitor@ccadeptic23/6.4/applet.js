@@ -190,6 +190,7 @@ class MCSM extends Applet.IconApplet {
         this.DiskUsage_chartType = "bar";
         this.settings.bind("DiskUsage_colorUsed", "DiskUsage_colorUsed");
         this.settings.bind("DiskUsage_colorFree", "DiskUsage_colorFree");
+        this.settings.bind("DiskUsage_colorAlert", "DiskUsage_colorAlert");
         this.settings.bind("DiskUsage_pathList", "DiskUsage_pathList");
         for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
@@ -809,6 +810,9 @@ class MCSM extends Applet.IconApplet {
         for (let p of this.DiskUsage_pathList) {
             if (!p["enabled"]) continue;
             let path = "" + p["path"];
+            let maxValue = 0.8;
+            if (p["maxvalue"] != null)
+                maxValue = 1 * p["maxvalue"] / 100;
             if (! GLib.file_test(path, GLib.FileTest.EXISTS)) continue;
             usedPaths.push(path);
             let [size, used] = this.disk_usage(path);
@@ -818,14 +822,20 @@ class MCSM extends Applet.IconApplet {
                 sumUsed = sumUsed + used;
             } else {
                 if (this.DiskUsage_chartType === "bar")
-                    data.push(1.0 * used / size);
+                    data.push({
+                        "value": 1.0 * used / size,
+                        "maxvalue": maxValue
+                    });
                 else
                     data.push([size, used]);
             }
         }
         if (this.DiskUsage_mergeAll) {
             if (this.DiskUsage_chartType === "bar")
-                data.push(1.0 * sumUsed / sumSize);
+                data.push({
+                    "value": 1.0 * sumUsed / sumSize,
+                    "maxvalue": 0.8
+                });
             else
                 data.push([1 * sumSize, 1 * sumUsed]);
         }
@@ -867,7 +877,7 @@ class MCSM extends Applet.IconApplet {
             appletTooltipString += this[provider].getTooltipString();
         }
         if (this.hovered)
-            this.set_applet_tooltip(appletTooltipString);
+            this.set_applet_tooltip(appletTooltipString, true);
     }
 
     _removeEnlightenment() {
@@ -1417,7 +1427,6 @@ class DiskUsageDataProvider {
         if (!this.isEnabled) {
             return "";
         }
-        //~ let toolTipString = _('------------ Disks -----------') + '\n';
         let trans = _("Usage");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
@@ -1437,12 +1446,19 @@ class DiskUsageDataProvider {
         }
 
         for (let i=0, len=this.currentReadings.length; i<len; i++) {
-            let percentage = Math.round(100 * this.currentReadings[i], 2);
+            let percentage = Math.round(100 * this.currentReadings[i].value, 2);
+            let maxPercentage = Math.round(100 * this.currentReadings[i].maxvalue, 2);
             if (this.applet.DiskUsage_mergeAll) {
-                toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+                if (percentage < maxPercentage)
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+                else
+                    toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t<b>' + percentage.toString().padStart(2, ' ') + ' %</b>\n';
             } else {
                 let name = names[i];
-                toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t' + + percentage.toString().padStart(2, ' ') + ' %\n';
+                if (percentage < maxPercentage)
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t' + + percentage.toString().padStart(2, ' ') + ' %\n';
+                else
+                    toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t<b>' + + percentage.toString().padStart(2, ' ') + ' %</b>\n';
             }
         }
 

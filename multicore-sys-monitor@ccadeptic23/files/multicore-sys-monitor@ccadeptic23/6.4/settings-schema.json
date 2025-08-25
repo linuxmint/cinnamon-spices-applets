@@ -223,7 +223,8 @@
       "title": "Colors",
       "keys": [
         "DiskUsage_colorUsed",
-        "DiskUsage_colorFree"
+        "DiskUsage_colorFree",
+        "DiskUsage_colorAlert"
       ]
     },
     "sectionDiskUsagePaths": {
@@ -879,6 +880,11 @@
     "default": "rgba(230, 230, 230, 0.1)",
     "description": "Free"
   },
+  "DiskUsage_colorAlert": {
+    "type": "colorchooser",
+    "default": "rgba(255, 0, 0, 1)",
+    "description": "Alert"
+  },
   "DiskUsage_getpathlist_btn": {
     "type": "button",
     "description": "Update this path list",
@@ -895,6 +901,15 @@
         "title": "Enabled",
         "type": "boolean",
         "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "maxvalue",
+        "title": "Alert when\nvalue (in %)\nreaches",
+        "type": "integer",
+        "default": 80,
+        "min": 0,
+        "max": 100,
         "align": 0.5
       },
       {

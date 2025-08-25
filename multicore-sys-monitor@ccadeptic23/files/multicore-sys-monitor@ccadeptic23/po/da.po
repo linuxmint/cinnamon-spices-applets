@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-25 03:18+0200\n"
+"POT-Creation-Date: 2025-08-25 15:21+0200\n"
 "PO-Revision-Date: 2023-12-25 10:39+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -24,8 +24,8 @@ msgstr ""
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
-#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:1085
-#. 6.4/applet.js:1122 3.4/DataProviders.js:58 3.4/prefs.js:195
+#. 3.2/prefs.js:187 6.0/DataProviders.js:60 6.0/prefs.js:303 6.4/applet.js:1095
+#. 6.4/applet.js:1132 3.4/DataProviders.js:58 3.4/prefs.js:195
 #. 5.6/DataProviders.js:55 5.6/prefs.js:303 4.0/DataProviders.js:55
 #. 4.0/prefs.js:303 3.0/prefsui.glade:452 3.2/prefsui.glade:504
 #. 6.0/prefsui.glade:580 3.4/prefsui.glade:434 5.6/prefsui.glade:580
@@ -39,13 +39,13 @@ msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #. 3.0/DataProviders.js:117 3.2/DataProviders.js:117 6.0/DataProviders.js:131
-#. 6.4/applet.js:1124 3.4/DataProviders.js:129 5.6/DataProviders.js:126
+#. 6.4/applet.js:1134 3.4/DataProviders.js:129 5.6/DataProviders.js:126
 #. 4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Kerne"
 
 #. 3.0/DataProviders.js:157 3.2/DataProviders.js:157 6.0/DataProviders.js:143
-#. 6.4/applet.js:907 3.4/DataProviders.js:141 5.6/DataProviders.js:138
+#. 6.4/applet.js:917 3.4/DataProviders.js:141 5.6/DataProviders.js:138
 #. 4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "HUK"
@@ -70,13 +70,13 @@ msgid "Buffer:"
 msgstr "Buffer:"
 
 #. 3.0/DataProviders.js:167 3.2/DataProviders.js:167 6.0/DataProviders.js:164
-#. 6.4/applet.js:45 6.4/applet.js:957 3.4/DataProviders.js:162
+#. 6.4/applet.js:45 6.4/applet.js:967 3.4/DataProviders.js:162
 #. 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Ledig:"
 
 #. 3.0/DataProviders.js:194 3.2/DataProviders.js:194 6.0/DataProviders.js:178
-#. 6.4/applet.js:1037 3.4/DataProviders.js:176 5.6/DataProviders.js:173
+#. 6.4/applet.js:1047 3.4/DataProviders.js:176 5.6/DataProviders.js:173
 #. 4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
@@ -88,7 +88,7 @@ msgstr "------------ Swap ------------"
 
 #. 6.4->settings-schema.json->Mem_colorSwap->description
 #. 3.0/DataProviders.js:200 3.2/DataProviders.js:200 6.0/DataProviders.js:222
-#. 6.4/applet.js:46 6.4/applet.js:1065 3.4/DataProviders.js:195
+#. 6.4/applet.js:46 6.4/applet.js:1075 3.4/DataProviders.js:195
 #. 5.6/DataProviders.js:194 4.0/DataProviders.js:194 3.0/prefsui.glade:785
 #. 3.2/prefsui.glade:837 6.0/prefsui.glade:907 3.4/prefsui.glade:761
 #. 5.6/prefsui.glade:907 4.0/prefsui.glade:907
@@ -96,7 +96,7 @@ msgid "Swap"
 msgstr "Swap"
 
 #. 3.0/DataProviders.js:264 3.2/DataProviders.js:264 6.0/DataProviders.js:232
-#. 6.4/applet.js:1146 3.4/DataProviders.js:205 5.6/DataProviders.js:204
+#. 6.4/applet.js:1156 3.4/DataProviders.js:205 5.6/DataProviders.js:204
 #. 4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
@@ -107,7 +107,7 @@ msgid "---------- Networks ----------"
 msgstr "---------- Netværk ----------"
 
 #. 3.0/DataProviders.js:308 3.2/DataProviders.js:308 6.0/DataProviders.js:334
-#. 6.4/applet.js:47 6.4/applet.js:1255 3.4/DataProviders.js:300
+#. 6.4/applet.js:47 6.4/applet.js:1265 3.4/DataProviders.js:300
 #. 5.6/DataProviders.js:298 4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Ned:"
@@ -118,13 +118,13 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #. 3.0/DataProviders.js:309 3.2/DataProviders.js:309 6.0/DataProviders.js:335
-#. 6.4/applet.js:48 6.4/applet.js:1256 3.4/DataProviders.js:301
+#. 6.4/applet.js:48 6.4/applet.js:1266 3.4/DataProviders.js:301
 #. 5.6/DataProviders.js:299 4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Op:"
 
 #. 3.0/DataProviders.js:382 3.2/DataProviders.js:382 6.0/DataProviders.js:351
-#. 6.4/applet.js:1273 6.4/applet.js:1399 3.4/DataProviders.js:317
+#. 6.4/applet.js:1283 6.4/applet.js:1409 3.4/DataProviders.js:317
 #. 5.6/DataProviders.js:315 4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISK"
@@ -135,7 +135,7 @@ msgid "------------ Disks -----------"
 msgstr "------------ Diske -----------"
 
 #. 3.0/DataProviders.js:411 3.2/DataProviders.js:411 6.0/DataProviders.js:420
-#. 6.4/applet.js:49 6.4/applet.js:1381 3.4/DataProviders.js:386
+#. 6.4/applet.js:49 6.4/applet.js:1391 3.4/DataProviders.js:386
 #. 5.6/DataProviders.js:384 4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Læs:"
@@ -146,7 +146,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #. 3.0/DataProviders.js:412 3.2/DataProviders.js:412 6.0/DataProviders.js:421
-#. 6.4/applet.js:50 6.4/applet.js:1382 3.4/DataProviders.js:387
+#. 6.4/applet.js:50 6.4/applet.js:1392 3.4/DataProviders.js:387
 #. 5.6/DataProviders.js:385 4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Skriv:"
@@ -217,7 +217,7 @@ msgstr "Der opstod en fejl, da filen skulle gemmes:"
 msgid "/s"
 msgstr "/s"
 
-#. 6.0/DataProviders.js:164 6.4/applet.js:43 6.4/applet.js:957
+#. 6.0/DataProviders.js:164 6.4/applet.js:43 6.4/applet.js:967
 #. 3.4/DataProviders.js:162 5.6/DataProviders.js:159 4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Brugt:"
@@ -246,15 +246,15 @@ msgstr ""
 msgid "Refresh graphs"
 msgstr "Opdatér grafer"
 
-#. 6.0/applet.js:325 6.4/applet.js:398
+#. 6.0/applet.js:325 6.4/applet.js:399
 msgid "Without any graphics"
 msgstr ""
 
-#. 6.0/applet.js:331 6.4/applet.js:404
+#. 6.0/applet.js:331 6.4/applet.js:405
 msgid "With graphics"
 msgstr ""
 
-#. 6.0/applet.js:341 6.4/applet.js:415
+#. 6.0/applet.js:341 6.4/applet.js:416
 msgid "Drop Memory Cache (needs root rights)"
 msgstr ""
 
@@ -300,66 +300,67 @@ msgstr ""
 msgid "Recoverable:"
 msgstr ""
 
-#. 6.4/applet.js:388
+#. 6.4/applet.js:389
 #, fuzzy
 msgid "Refresh All"
 msgstr "Opdatér grafer"
 
-#. 6.4/applet.js:494 6.4/applet.js:535
+#. 6.4/applet.js:495 6.4/applet.js:536
 msgid "root"
 msgstr ""
 
 #. 6.4->settings-schema.json->pageNetwork->title
-#. 6.4/applet.js:726 6.4/applet.js:1153 3.0/prefsui.glade:1154
+#. 6.4/applet.js:727 6.4/applet.js:1163 3.0/prefsui.glade:1154
 #. 3.2/prefsui.glade:1206 6.0/prefsui.glade:1289 3.4/prefsui.glade:1143
 #. 5.6/prefsui.glade:1289 4.0/prefsui.glade:1289
 msgid "Network"
 msgstr ""
 
-#. 6.4/applet.js:790 6.4/applet.js:1282 6.4/applet.js:1365 6.4/applet.js:1442
+#. 6.4/applet.js:791 6.4/applet.js:1292 6.4/applet.js:1375 6.4/applet.js:1453
+#. 6.4/applet.js:1455
 msgid "Disks"
 msgstr ""
 
 #. 6.4->settings-schema.json->pageMem->title
-#. 6.4/applet.js:952 3.0/prefsui.glade:832 3.2/prefsui.glade:884
+#. 6.4/applet.js:962 3.0/prefsui.glade:832 3.2/prefsui.glade:884
 #. 6.0/prefsui.glade:954 3.4/prefsui.glade:808 5.6/prefsui.glade:954
 #. 4.0/prefsui.glade:954
 msgid "Memory"
 msgstr ""
 
-#. 6.4/applet.js:986
+#. 6.4/applet.js:996
 msgid "Buffers/Cache/Shared"
 msgstr ""
 
-#. 6.4/applet.js:1014 6.4/applet.js:1116 6.4/applet.js:1426
+#. 6.4/applet.js:1024 6.4/applet.js:1126 6.4/applet.js:1435
 msgid ":"
 msgstr ""
 
-#. 6.4/applet.js:1016 3.0/prefsui.glade:684 3.2/prefsui.glade:736
+#. 6.4/applet.js:1026 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
 #. 4.0/prefsui.glade:809
 #, fuzzy
 msgid "Buffer"
 msgstr "Buffer:"
 
-#. 6.4/applet.js:1016
+#. 6.4/applet.js:1026
 #, fuzzy
 msgid "Cache"
 msgstr "Cached:"
 
-#. 6.4/applet.js:1016
+#. 6.4/applet.js:1026
 msgid "Shared"
 msgstr ""
 
-#. 6.4/applet.js:1112
+#. 6.4/applet.js:1122
 msgid "CPUs"
 msgstr ""
 
-#. 6.4/applet.js:1240
+#. 6.4/applet.js:1250
 msgid "Networks"
 msgstr ""
 
-#. 6.4/applet.js:1421
+#. 6.4/applet.js:1430
 msgid "Usage"
 msgstr ""
 
@@ -712,8 +713,19 @@ msgstr ""
 msgid "Pie"
 msgstr ""
 
+#. 6.4->settings-schema.json->DiskUsage_colorAlert->description
+msgid "Alert"
+msgstr ""
+
 #. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
 msgid "Update this path list"
+msgstr ""
+
+#. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
+msgid ""
+"Alert when\n"
+"value (in %)\n"
+"reaches"
 msgstr ""
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
