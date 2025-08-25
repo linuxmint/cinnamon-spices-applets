@@ -1,0 +1,46 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Shortcuts"
+  },
+  "enableShortcut": {
+    "type": "switch",
+    "default": false,
+    "description": "Use custom shortcut"
+  },
+  "keyOpen": {
+    "type": "keybinding",
+    "description": "Mouse Keys accessibility shortcut",
+    "default": "<Super><Shift>a",
+    "tooltip": "Shortcut to enable/disable mouse keys setting",
+    "dependency": "enableShortcut"
+  },
+  "section2": {
+    "type": "section",
+    "description": "Mouse Keys"
+  },
+  "initial-delay" : {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 10,
+    "max": 2000,
+    "step": 10,
+    "description": "Initial delay"
+ },
+   "acceleration-time" : {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 10,
+    "max": 2000,
+    "step": 10,
+    "description": "Acceleration time"
+ },
+ "maximum-speed" : {
+    "type": "spinbutton",
+    "default": 250,
+    "min": 1,
+    "max": 500,
+    "step": 10,
+    "description": "Maximum speed"
+  }
+}
