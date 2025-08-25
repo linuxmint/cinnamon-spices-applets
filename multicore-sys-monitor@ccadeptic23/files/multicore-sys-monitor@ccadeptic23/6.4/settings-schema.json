@@ -7,6 +7,7 @@
       "pageMem",
       "pageNetwork",
       "pageDisk",
+      "pageDiskUsage",
       "pageColors"
     ],
     "pageGeneral": {
@@ -50,6 +51,15 @@
         "sectionDiskOptions",
         "sectionDiskScaling",
         "sectionDiskDevices"
+      ]
+    },
+    "pageDiskUsage": {
+      "type": "page",
+      "title": "Disk Usage",
+      "sections": [
+        "sectionDiskUsageOptions",
+        "sectionDiskUsageColors",
+        "sectionDiskUsagePaths"
       ]
     },
     "pageColors": {
@@ -195,6 +205,33 @@
         "Disk_getdevlist_btn",
         "Disk_devicesList",
         "Disk_cleardevlist_btn"
+      ]
+    },
+    "sectionDiskUsageOptions": {
+      "type": "section",
+      "title": "Options",
+      "keys": [
+        "DiskUsage_enabled",
+        "DiskUsage_labelOn",
+        "DiskUsage_squared",
+        "DiskUsage_width",
+        "DiskUsage_mergeAll"
+      ]
+    },
+    "sectionDiskUsageColors": {
+      "type": "section",
+      "title": "Colors",
+      "keys": [
+        "DiskUsage_colorUsed",
+        "DiskUsage_colorFree"
+      ]
+    },
+    "sectionDiskUsagePaths": {
+      "type": "section",
+      "title": "Paths",
+      "keys": [
+        "DiskUsage_getpathlist_btn",
+        "DiskUsage_pathList"
       ]
     },
     "sectionColors": {
@@ -791,6 +828,91 @@
     "type": "button",
     "description": "Clear this device list",
     "callback": "on_Disk_cleardevlist_btn_clicked"
+  },
+  "DiskUsage_enabled": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable"
+  },
+  "DiskUsage_labelOn": {
+    "type": "switch",
+    "default": true,
+    "description": "Label",
+    "dependency": "labelsOn"
+  },
+  "DiskUsage_squared": {
+    "type": "switch",
+    "default": false,
+    "description": "Square view"
+  },
+  "DiskUsage_width": {
+    "type": "scale",
+    "default": 64,
+    "description": "Width",
+    "min": 16,
+    "max": 320,
+    "step": 16,
+    "show-value": true,
+    "dependency": "!DiskUsage_squared"
+  },
+  "DiskUsage_mergeAll": {
+    "type": "switch",
+    "default": false,
+    "description": "Merge all"
+  },
+  "DiskUsage_chartType": {
+    "type": "combobox",
+    "default": "bar",
+    "description": "Type of chart",
+    "options": {
+      "Bar": "bar",
+      "Pie": "pie"
+    }
+  },
+  "DiskUsage_colorUsed": {
+    "type": "colorchooser",
+    "default": "rgba(255, 255, 255, 1)",
+    "description": "Usedup"
+  },
+  "DiskUsage_colorFree": {
+    "type": "colorchooser",
+    "default": "rgba(230, 230, 230, 0.1)",
+    "description": "Free"
+  },
+  "DiskUsage_getpathlist_btn": {
+    "type": "button",
+    "description": "Update this path list",
+    "callback": "on_DiskUsage_getpathlist_btn_clicked"
+  },
+  "DiskUsage_pathList": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "enabled",
+        "title": "Enabled",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      },
+      {
+        "id": "path",
+        "title": "Path",
+        "type": "string",
+        "default": "",
+        "expand-width": true
+      }
+    ],
+    "show-buttons": true
   },
   "color0": {
     "type": "colorchooser",
