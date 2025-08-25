@@ -8,6 +8,7 @@ const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const UUID = "mouse-keys-shortcut@GabrielCamara3526";
 const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
+const PopupMenu = imports.ui.popupMenu;
 
 class MyApplet extends Applet.IconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -27,22 +28,61 @@ class MyApplet extends Applet.IconApplet {
       this.on_keybinding_changed.bind(this),
       null
     );
-
+    this.settings.bindProperty(
+      Settings.BindingDirection.BIDIRECTIONAL,
+      "initial-delay",
+      "initialDelay",
+      this.on_delay_changed.bind(this),
+      null
+    );
+    this.settings.bindProperty(
+      Settings.BindingDirection.BIDIRECTIONAL,
+      "acceleration-time",
+      "accelerationTime",
+      this.on_acceleration_changed.bind(this),
+      null
+    );
+    this.settings.bindProperty(
+      Settings.BindingDirection.BIDIRECTIONAL,
+      "maximum-speed",
+      "maxSpeed",
+      this.on_speed_changed.bind(this),
+      null
+    );
     this.actor.connect(
       "key-press-event",
       this._onSourceKeyPress.bind(this)
-    );
+    )
+    this.on_keybinding_changed()
+    this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' })
+    let userInitDelay = this.keyboardSettings.get_int('mousekeys-init-delay')
+    let userAccelTime = this.keyboardSettings.get_int('mousekeys-accel-time');
+    let userMaxSpeed = this.keyboardSettings.get_int('mousekeys-max-speed');
 
-    this.on_keybinding_changed();
-    this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
-    this.keyboardSettings.connect('changed::mousekeys-enable', () => {
-      this.updateIcon()})
+    this.settings.setValue("initial-delay", userInitDelay)
+    this.settings.setValue("acceleration-time", userAccelTime)
+    this.settings.setValue("maximum-speed", userMaxSpeed)
+
+    this.keyboardSettings.connect('changed::mousekeys-init-delay', () => {
+      let newInitDelay = this.keyboardSettings.get_int('mousekeys-init-delay')
+      this.settings.setValue("initial-delay", newInitDelay)
+    })
+    this.keyboardSettings.connect('changed::mousekeys-accel-time', () => {
+      let newAccelTime = this.keyboardSettings.get_int('mousekeys-accel-time')
+      this.settings.setValue("acceleration-time", newAccelTime)
+    })
+    this.keyboardSettings.connect('changed::mousekeys-max-speed', () => {
+      let newMaxSpeed = this.keyboardSettings.get_int('mousekeys-max-speed')
+      this.settings.setValue("maximum-speed", newMaxSpeed)
+    })
+
     this.themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
     this.themeSettings.connect('changed::name', () => {
       this.updateIcon()})
+    this.keyboardSettings.connect('changed::mousekeys-enable', () => {
+      this.updateIcon()})
     this.updateIcon();
   }
-
   _onSourceKeyPress(actor, event) {
     let symbol = event.get_key_symbol();
     if (symbol === Clutter.KEY_space || symbol === Clutter.KEY_Return) {
@@ -66,11 +106,10 @@ class MyApplet extends Applet.IconApplet {
       this.on_hotkey_triggered.bind(this)
     );
   }
-
   on_hotkey_triggered() {
     if (this.settings.getValue("enableShortcut")) {
       this.on_applet_clicked();
-    } 
+    }
   }
 
   on_applet_clicked() {
@@ -87,6 +126,16 @@ class MyApplet extends Applet.IconApplet {
       this.updateIcon()
     }
 
+  on_delay_changed(){
+    this.keyboardSettings.set_int('mousekeys-init-delay', this.initialDelay)
+  }
+  on_acceleration_changed() {
+    this.keyboardSettings.set_int('mousekeys-accel-time', this.accelerationTime)
+  }
+  on_speed_changed(){
+    this.keyboardSettings.set_int('mousekeys-max-speed', this.maxSpeed)
+  }
+
   updateIcon() {
     let iconFile
     let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
@@ -94,7 +143,6 @@ class MyApplet extends Applet.IconApplet {
     let themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
     let activeTheme = themeSettings.get_string('name');
     let isDark = activeTheme.toLowerCase().includes('dark');
-
     if (enabled) {
       iconFile = isDark ? 'light-icon.svg' : 'dark-icon.svg';
     } else {
@@ -104,7 +152,6 @@ class MyApplet extends Applet.IconApplet {
     this.set_applet_icon_symbolic_path(iconPath);
   }
 }
-
 function main(metadata, orientation, panel_height, instance_id) {
   return new MyApplet(metadata, orientation, panel_height, instance_id);
 }
