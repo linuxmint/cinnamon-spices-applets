@@ -310,7 +310,8 @@ class GraphVBars100 extends GraphVBars {
     // Usage Data Bars
     let vbarWidth = (_width - 8) / currentReadings.length;
     for (let i=0, len=currentReadings.length; i<len; i++) {
-      let currentR = parseFloat(currentReadings[i]);
+      let currentR = Math.round(100 * currentReadings[i].value, 2) / 100;
+      let maxValue = Math.round(100 * currentReadings[i].maxvalue, 2) / 100;
       let vbarHeight = (_height - 1) * currentR;
       let vbarOffset = i * vbarWidth + 4;
 
@@ -322,19 +323,23 @@ class GraphVBars100 extends GraphVBars {
       g = colorsList[barnum][1];
       b = colorsList[barnum][2];
       a = (colorsList[barnum][3] != null) ? colorsList[barnum][3] : 1;
-
       areaContext.setSourceRGBA(r, g, b, a);
       //~ this.drawRoundedRectangle(areaContext, vbarOffset, 0, vbarWidth, vbarHeight, 1.0);
       this.drawRoundedRectangle(areaContext, vbarOffset, 1, vbarWidth, _height - 1, 1.0);
       areaContext.fill();
 
-      barnum = 1;
-      r = colorsList[barnum][0];
-      g = colorsList[barnum][1];
-      b = colorsList[barnum][2];
-      a = (colorsList[barnum][3] != null) ? colorsList[barnum][3] : 1;
+      if(currentR < maxValue) {
+        barnum = 1;
+        r = colorsList[barnum][0];
+        g = colorsList[barnum][1];
+        b = colorsList[barnum][2];
+        a = (colorsList[barnum][3] != null) ? colorsList[barnum][3] : 1;
+        areaContext.setSourceRGBA(r, g, b, a);
+      } else {
+        let alertColor = RGBa2rgba(this.applet.DiskUsage_colorAlert);
+        areaContext.setSourceRGBA(alertColor[0], alertColor[1], alertColor[2], alertColor[3]);
+      }
 
-      areaContext.setSourceRGBA(r, g, b, a);
       this.drawRoundedRectangle(areaContext, vbarOffset, _height - vbarHeight, vbarWidth, vbarHeight, 1.0);
       areaContext.fill();
 
