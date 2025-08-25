@@ -60,7 +60,8 @@ const properties = [
     {graph: 'memoryGraph', provider: 'memoryProvider', abbrev: 'Mem'},
     {graph: 'swapGraph', provider: 'swapProvider', abbrev: 'Swap'},
     {graph: 'networkGraph', provider: 'networkProvider', abbrev: 'Net'},
-    {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'}
+    {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'},
+    {graph: 'diskUsageGraph', provider: 'diskUsageProvider', abbrev: 'DiskUsage'}
 ];
 
 function get_nemo_size_prefixes() {
@@ -180,6 +181,16 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Disk_mergeAll", "Disk_mergeAll");
         this.settings.bind("Disk_autoscale", "Disk_autoscale");
         this.settings.bind("Disk_logscale", "Disk_logscale");
+        this.settings.bind("DiskUsage_enabled", "DiskUsage_enabled");
+        this.settings.bind("DiskUsage_labelOn", "DiskUsage_labelOn");
+        this.settings.bind("DiskUsage_squared", "DiskUsage_squared");
+        this.settings.bind("DiskUsage_width", "DiskUsage_width");
+        this.settings.bind("DiskUsage_mergeAll", "DiskUsage_mergeAll");
+        //~ this.settings.bind("DiskUsage_chartType", "DiskUsage_chartType");
+        this.DiskUsage_chartType = "bar";
+        this.settings.bind("DiskUsage_colorUsed", "DiskUsage_colorUsed");
+        this.settings.bind("DiskUsage_colorFree", "DiskUsage_colorFree");
+        this.settings.bind("DiskUsage_pathList", "DiskUsage_pathList");
         for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
@@ -247,6 +258,7 @@ class MCSM extends Applet.IconApplet {
         this.buffcachesharedProvider = new BufferCacheSharedDataProvider(this);
         this.networkProvider = new NetDataProvider(this);
         this.diskProvider = new DiskDataProvider(this);
+        this.diskUsageProvider = new DiskUsageDataProvider(this);
 
         this._initContextMenu();
 
@@ -271,6 +283,11 @@ class MCSM extends Applet.IconApplet {
         this.diskGraph.autoScale = this.Disk_autoscale;
         this.diskGraph.logScale = this.Disk_logscale;
 
+        if (this.DiskUsage_chartType === "bar")
+            this.diskUsageGraph = new Graphs.GraphVBars100(this.graphArea, this);
+        else
+            this.diskUsageGraph = new Graphs.GraphPieChart(this.graphArea, this);
+
         this.actor.add_actor(this.graphArea);
     }
 
@@ -294,6 +311,7 @@ class MCSM extends Applet.IconApplet {
             this.get_cpu_info();
             this.get_net_info();
             this.get_disk_info();
+            this.get_disk_usage();
             this._setTooltip();
             this.graphArea.queue_repaint();
             return this.isRunning;
@@ -499,6 +517,36 @@ class MCSM extends Applet.IconApplet {
         })
     }
 
+    on_DiskUsage_getpathlist_btn_clicked() {
+        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-disk-mounts.sh", (stdout, stderr, exitCode) => {
+            if (exitCode === 0) {
+                var knownPaths = [];
+                var new_pathList = this.DiskUsage_pathList;
+                for (let p of this.DiskUsage_pathList) {
+                    if (p["path"].length === 0) continue;
+                    knownPaths.push(p["path"]);
+                }
+                var mounts = stdout.trim().split(" ");
+                for (let m of mounts) {
+                    if (!m.startsWith("/")) continue;
+                    if (knownPaths.indexOf(m) < 0) {
+                        let name = GLib.basename(m);
+                        if (name.length === 0)
+                            name = _("root");
+                        new_pathList.push({
+                            "enabled": true,
+                            "name": name,
+                            "path": m
+                        });
+                        knownPaths.push(m);
+                    }
+                }
+                this.DiskUsage_pathList = new_pathList;
+            }
+            subProcess.send_signal(9);
+        })
+    }
+
     on_Disk_cleardevlist_btn_clicked() {
         this.Disk_devicesList = [];
     }
@@ -547,25 +595,6 @@ class MCSM extends Applet.IconApplet {
         if (!this.Mem_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-data.sh", (stdout, stderr, exitCode) => {
-            //~ if (exitCode === 0) {
-                //~ let [, dataMem, dataSwap] = stdout.split(":");
-                //~ dataMem = dataMem.trim();
-                //~ dataMem = dataMem.replace(/\ +/g, " ");
-                //~ dataSwap = dataSwap.trim();
-                //~ dataSwap = dataSwap.replace(/\ +/g, " ");
-                //~ let [total, used, free, shared, buffers, cache, available, rest] = dataMem.split(" ");
-                //~ let [swapTotal, swapUsed, swapAvailable] = dataSwap.split(" ");
-                //~ this.memoryProvider.setData(1 * total, 1 * used);
-                //~ this.swapProvider.setData(swapTotal, swapUsed / swapTotal);
-                //~ this.buffcachesharedProvider.setData(buffers, cache, shared);
-            //~ }
-            //~ subProcess.send_signal(9);
-            //~ if (DEBUG) {
-                //~ duration = Date.now() - old;
-                //~ global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
-            //~ }
-        //~ });
         let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-raw-data.sh", (stdout, stderr, exitCode) => {
             if (exitCode === 0) {
                 let [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed] = stdout.split(" ");
@@ -768,7 +797,55 @@ class MCSM extends Applet.IconApplet {
             duration = Date.now() - old;
             global.log(UUID + " - get_disk_info Duration: " + duration + " ms.");
         }
+    }
 
+    get_disk_usage() {
+        if (!this.isRunning) return;
+        if (!this.DiskUsage_enabled) return;
+        var usedPaths = [];
+        var sumSize = 0;
+        var sumUsed = 0;
+        var data = [];
+        for (let p of this.DiskUsage_pathList) {
+            if (!p["enabled"]) continue;
+            let path = "" + p["path"];
+            if (! GLib.file_test(path, GLib.FileTest.EXISTS)) continue;
+            usedPaths.push(path);
+            let [size, used] = this.disk_usage(path);
+            //~ global.log(path + " - size: " + size + ", used: " + used);
+            if (this.DiskUsage_mergeAll) {
+                sumSize = sumSize + size;
+                sumUsed = sumUsed + used;
+            } else {
+                if (this.DiskUsage_chartType === "bar")
+                    data.push(1.0 * used / size);
+                else
+                    data.push([size, used]);
+            }
+        }
+        if (this.DiskUsage_mergeAll) {
+            if (this.DiskUsage_chartType === "bar")
+                data.push(1.0 * sumUsed / sumSize);
+            else
+                data.push([1 * sumSize, 1 * sumUsed]);
+        }
+        this.diskUsageProvider.setData(data);
+    }
+
+    disk_usage(path) {
+        if (!this.isRunning) return [0, 0];
+        if (!this.DiskUsage_enabled) return [0, 0];
+        try {
+            let dir = Gio.file_new_for_path(""+path);
+            let info = dir.query_filesystem_info('filesystem::used,filesystem::size', null);
+            if (info == null) return [0, 0];
+            let used = info.get_attribute_as_string('filesystem::used');
+            let size = info.get_attribute_as_string('filesystem::size');
+            return [parseInt(size), parseInt(used)];
+        } catch(e) {
+            global.log(UUID + " - disk_usage("+path+"): "+e);
+            return [0, 0];
+        }
     }
 
     _setTooltip() {
@@ -784,7 +861,8 @@ class MCSM extends Applet.IconApplet {
             "swapProvider",
             "buffcachesharedProvider",
             "networkProvider",
-            "diskProvider"
+            "diskProvider",
+            "diskUsageProvider"
         ]) {
             appletTooltipString += this[provider].getTooltipString();
         }
@@ -1308,6 +1386,75 @@ class DiskDataProvider {
 
     get isEnabled() {
         return this.applet.Disk_enabled;
+    }
+
+    get isRunning() {
+        return this.applet.isRunning;
+    }
+}
+
+class DiskUsageDataProvider {
+    constructor(applet) {
+        this.applet = applet;
+        this.name = _('DISK');
+        this.currentReadings = [];
+    }
+
+    setData(data) {
+        this.currentReadings = data;
+    }
+
+    getColorList() {
+        return [this.applet.DiskUsage_colorFree, this.applet.DiskUsage_colorUsed];
+    }
+
+    getData() {
+        if (!this.isEnabled) return [];
+        return this.currentReadings;
+    }
+
+    getTooltipString() {
+        if (!this.isEnabled) {
+            return "";
+        }
+        //~ let toolTipString = _('------------ Disks -----------') + '\n';
+        let trans = _("Usage");
+        let len = trans.length - 2;
+        let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
+        let title = "" + toolTipString;
+
+        let colon = _(":");
+        let lenColon = Math.max(colon.length - 1, 0);
+
+        var names = [];
+        for (let p of this.applet.DiskUsage_pathList) {
+            if (! p["enabled"]) continue;
+            if (p["name"].length != 0) {
+                names.push(p["name"])
+            } else if (p["path"].length != 0) {
+                names.push(p["path"])
+            }
+        }
+
+        for (let i=0, len=this.currentReadings.length; i<len; i++) {
+            let percentage = Math.round(100 * this.currentReadings[i], 2);
+            if (this.applet.DiskUsage_mergeAll) {
+                toolTipString += (_('Disks') + ' ').padStart(spaces - lenColon, ' ') + colon + '\t' + percentage.toString().padStart(2, ' ') + ' %\n';
+            } else {
+                let name = names[i];
+                toolTipString += name.padStart(spaces - lenColon, ' ') + colon + '\t' + + percentage.toString().padStart(2, ' ') + ' %\n';
+            }
+        }
+
+        return toolTipString;
+    }
+
+    get PathCount() {
+        return this.currentReadings.length;
+    }
+
+    get isEnabled() {
+        return this.applet.DiskUsage_enabled;
     }
 
     get isRunning() {

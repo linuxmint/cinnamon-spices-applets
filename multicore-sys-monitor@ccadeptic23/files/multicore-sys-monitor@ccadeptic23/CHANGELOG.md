@@ -1,3 +1,7 @@
+### v2.8.0~20250825
+  * From now, can display disk usage.
+  * Fixes [#7546](https://github.com/linuxmint/cinnamon-spices-applets/issues/7546)
+
 ### v2.7.2~20250819
   * Improved loops.
   * Changed to_string method.
