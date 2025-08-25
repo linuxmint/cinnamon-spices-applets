@@ -1,0 +1,571 @@
+# KDE CONNECT APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# JoeJoeTV, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-28 05:49-0400\n"
+"PO-Revision-Date: 2024-04-22 17:42+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:574
+msgid "No Modules available"
+msgstr "Geen modules beschikbaar"
+
+#. applet.js:1065 applet.js:1068
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr ""
+"KDE Connect is niet beschikbaar, zorg ervoor dat het is geïnstalleerd en "
+"actief is."
+
+#. applet.js:1072 applet.js:1085 applet.js:1270
+msgid "Reload Applet"
+msgstr "Applet herladen"
+
+#. applet.js:1077
+msgid "Invalid KDE Connect version returned!"
+msgstr "Ongeldige versie van KDE Connect geretourneerd!"
+
+#. applet.js:1078 applet.js:1081
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr ""
+"De KDE Connect DBus-service heeft een ongeldige versie geretourneerd, "
+"probeer de applet opnieuw te laden!"
+
+#. applet.js:1120
+msgid "No connected Devices!"
+msgstr "Geen verbonden apparaten!"
+
+#. applet.js:1120
+msgid "Add them in the KDE Connect settings"
+msgstr "Voeg ze toe in de instellingen van KDE Connect"
+
+#. applet.js:1165
+msgid "Debug Stuff, don't touch!"
+msgstr "Debug-dingen, niet aanraken!"
+
+#. applet.js:1254
+msgid "KDE Connect Version: {version}"
+msgstr "KDE Connect-versie: {version}"
+
+#. applet.js:1261
+msgid "Own ID: {own_id}"
+msgstr "Eigen ID: {own_id}"
+
+#. applet.js:1263
+msgid "own ID"
+msgstr "Eigen ID"
+
+#. applet.js:1265
+msgid "Click to copy own ID"
+msgstr "Klik om eigen ID te kopiëren"
+
+#. applet.js:1275
+msgid "Configure KDE Connect"
+msgstr "KDE Connect configureren"
+
+#. applet.js:1277
+msgid "Click to open KDE Connect Configuration"
+msgstr "Klik om de configuratie van KDE Connect te openen"
+
+#. applet.js:1321
+msgid "No available devices"
+msgstr "Geen beschikbare apparaten"
+
+#. applet.js:1323
+msgid "{deviceCount} available device"
+msgstr "{deviceCount} beschikbaar apparaat"
+
+#. applet.js:1325
+msgid "{deviceCount} available devices"
+msgstr "{deviceCount} beschikbare apparaten"
+
+#. js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr "{typestring} gekopieerd naar het klembord"
+
+#. js/modules.js:656
+msgid "Charging"
+msgstr "Opladen"
+
+#. js/modules.js:739
+msgid "ID: {id}"
+msgstr "ID: {id}"
+
+#. js/modules.js:743
+msgid "Device ID"
+msgstr "Apparaat-ID"
+
+#. js/modules.js:747
+msgid "Click to copy ID"
+msgstr "Klik om ID te kopiëren"
+
+#. js/modules.js:820
+msgid "No Signal"
+msgstr "Geen signaal"
+
+#. js/modules.js:823
+msgid "Low"
+msgstr "Laag"
+
+#. js/modules.js:826
+msgid "Ok"
+msgstr "Oké"
+
+#. js/modules.js:829
+msgid "Good"
+msgstr "Goed"
+
+#. js/modules.js:832
+msgid "Excellent"
+msgstr "Uitstekend"
+
+#. js/modules.js:844
+msgid "Unknown"
+msgstr "Onbekend"
+
+#. js/modules.js:898
+msgid "Ring device"
+msgstr "Apparaat laten rinkelen"
+
+#. js/modules.js:899
+msgid "Click to ring the device"
+msgstr "Klik om het apparaat te laten rinkelen"
+
+#. js/modules.js:978
+msgid "Photo received from '{deviceName}'"
+msgstr "Foto ontvangen van '{deviceName}'"
+
+#. js/modules.js:978 js/modules.js:1154
+msgid "Click to open in default application"
+msgstr "Klik om te openen in de standaardapplicatie"
+
+#. js/modules.js:987
+msgid "Request Photo"
+msgstr "Foto verzoeken"
+
+#. js/modules.js:988
+msgid "Click to request a photo from the device"
+msgstr "Klik om een foto van het apparaat te verzoeken"
+
+#. js/modules.js:1038
+msgid "Ping!"
+msgstr "Ping!"
+
+#. js/modules.js:1045
+msgid "Sent ping to device '{deviceName}'"
+msgstr "Ping verzonden naar apparaat '{deviceName}'"
+
+#. js/modules.js:1051
+msgid "Ping Device"
+msgstr "Apparaat pingen"
+
+#. js/modules.js:1052
+msgid "Click to send a ping to the device"
+msgstr "Klik om een ping naar het apparaat te sturen"
+
+#. js/modules.js:1154
+msgid "Share received from '{deviceName}'"
+msgstr "Delen ontvangen van '{deviceName}'"
+
+#. js/modules.js:1189
+msgid "Share"
+msgstr "Delen"
+
+#. js/modules.js:1202
+msgid "Send URL"
+msgstr "URL verzenden"
+
+#. js/modules.js:1203
+msgid "Click to send a URL to the device"
+msgstr "Klik om een URL naar het apparaat te sturen"
+
+#. js/modules.js:1212
+msgid "Send Text"
+msgstr "Tekst verzenden"
+
+#. js/modules.js:1213 js/modules.js:1488
+msgid "Click to send text to the device"
+msgstr "Klik om tekst naar het apparaat te sturen"
+
+#. js/modules.js:1222
+msgid "Send File(s)"
+msgstr "Bestand(en) verzenden"
+
+#. js/modules.js:1223
+msgid "Click to send file(s) to the device"
+msgstr "Klik om bestand(en) naar het apparaat te sturen"
+
+#. js/modules.js:1279
+msgid "Unmount"
+msgstr "Uitwerpen"
+
+#. js/modules.js:1281
+msgid "Mount"
+msgstr "Aankoppelen"
+
+#. js/modules.js:1287
+msgid "Click to unmount"
+msgstr "Klik om uit te werpen"
+
+#. js/modules.js:1289
+msgid "Click to mount"
+msgstr "Klik om aan te koppelen"
+
+#. js/modules.js:1362
+msgid "Click to browse files"
+msgstr "Klik om bestanden te bekijken"
+
+#. js/modules.js:1466
+msgid "SMS"
+msgstr "SMS"
+
+#. js/modules.js:1479
+msgid "Launch SMS App"
+msgstr "SMS-app starten"
+
+#. js/modules.js:1480
+msgid "Click to open the KDE Connect SMS App"
+msgstr "Klik om de KDE Connect SMS-app te openen"
+
+#. js/modules.js:1487
+msgid "Send SMS"
+msgstr "SMS verzenden"
+
+#. settingsWidgets.py:153
+msgid "Move selected entry up"
+msgstr "Geselecteerde invoer omhoog verplaatsen"
+
+#. settingsWidgets.py:160
+msgid "Move selected entry down"
+msgstr "Geselecteerde invoer omlaag verplaatsen"
+
+#. py/dialogs.py:40
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr "URL verzenden naar '{device_name}'"
+
+#. py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+msgid "Send"
+msgstr "Verzenden"
+
+#. py/dialogs.py:57
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr "Voer een URL in om naar '{device_name}' te sturen"
+
+#. py/dialogs.py:61
+msgid "URL"
+msgstr "URL"
+
+#. py/dialogs.py:96
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr "SMS verzenden via '{device_name}'"
+
+#. py/dialogs.py:113
+msgid "Phone Number:"
+msgstr "Telefoonnummer:"
+
+#. py/dialogs.py:117
+msgid "Phone Number"
+msgstr "Telefoonnummer"
+
+#. py/dialogs.py:119
+msgid "Message:"
+msgstr "Bericht:"
+
+#. py/dialogs.py:159
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr "Tekst verzenden naar '{device_name}'"
+
+#. py/dialogs.py:176
+msgid "Text to send:"
+msgstr "Tekst om te verzenden:"
+
+#. py/dialogs.py:222
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr "Bestanden selecteren om naar '{deviceName}' te verzenden"
+
+#. py/dialogs.py:283
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr "Selecteer waar u de foto ontvangen van '{deviceName}' wilt opslaan"
+
+#. py/dialogs.py:287
+msgid "photo.jpg"
+msgstr "foto.jpg"
+
+#. py/dialogs.py:290
+msgid "JPEG Photo"
+msgstr "JPEG-foto"
+
+#. metadata.json->name
+msgid "KDE Connect Applet"
+msgstr "KDE Connect Applet"
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr ""
+"Maakt interactie mogelijk met apparaten die zijn verbonden via KDE Connect"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"De KDE Connect Applet maakt het gemakkelijk om de verschillende functies van "
+"KDE Connect te gebruiken om te communiceren met verbonden apparaten, zoals "
+"het verzenden van bestanden, het verzenden van sms-berichten, het bladeren "
+"door de opslag van het apparaat en meer"
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr "Johannes Schoeneberger - Auteur"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - Inspiratie voor de applet"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "Algemeen"
+
+#. settings-schema.json->page_modules->title
+msgid "Modules"
+msgstr "Modules"
+
+#. settings-schema.json->section_contextmenu->title
+msgid "Context Menu"
+msgstr "Contextmenu"
+
+#. settings-schema.json->section_panel->title
+msgid "Panel"
+msgstr "Paneel"
+
+#. settings-schema.json->section_devices->title
+msgid "Devices"
+msgstr "Apparaten"
+
+#. settings-schema.json->section_info-modules->title
+msgid "Info Modules"
+msgstr "Informatiemodules"
+
+#. settings-schema.json->section_action-modules->title
+msgid "Action Modules"
+msgstr "Actiemodules"
+
+#. settings-schema.json->section_module_battery->title
+msgid "Battery Info Module"
+msgstr "Batterij-informatiemodule"
+
+#. settings-schema.json->section_module_deviceinfo->title
+msgid "Device-Info Info Module"
+msgstr "Apparaatinfo-informatiemodule"
+
+#. settings-schema.json->section_module_connectivity->title
+msgid "Connectivity Info Module"
+msgstr "Verbindingsinformatiemodule"
+
+#. settings-schema.json->section_module_findmyphone->title
+msgid "FindMyPhone Action Module"
+msgstr "Vind mijn telefoon Actiemodule"
+
+#. settings-schema.json->section_module_requestphoto->title
+msgid "Request-Photo Action Module"
+msgstr "Verzoek-foto Actiemodule"
+
+#. settings-schema.json->section_module_ping->title
+msgid "Ping Action Module"
+msgstr "Ping Actiemodule"
+
+#. settings-schema.json->section_module_share->title
+msgid "Share Action Module"
+msgstr "Delen Actiemodule"
+
+#. settings-schema.json->section_module_sftp->title
+msgid "SFTP Action Module"
+msgstr "SFTP Actiemodule"
+
+#. settings-schema.json->section_module_sms->title
+msgid "SMS Action Module"
+msgstr "SMS Actiemodule"
+
+#. settings-schema.json->switch_show-own-id->description
+msgid "Show own ID in the context menu of the applet"
+msgstr "Toon eigen ID in het contextmenu van de applet"
+
+#. settings-schema.json->switch_show-kdec-version->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr "Toon KDE Connect-versie in het contextmenu van de applet"
+
+#. settings-schema.json->switch_show-device-count->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr "Toon het aantal verbonden apparaten naast het pictogram in het paneel"
+
+#. settings-schema.json->switch_show-device-count-tooltip->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr "Toon het aantal apparaten in de tooltip van de applet"
+
+#. settings-schema.json->combobox_icon-type->description
+msgid "Icon type"
+msgstr "Pictogramtype"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Symbolic"
+msgstr "Symbolisch"
+
+#. settings-schema.json->combobox_icon-type->options
+msgid "Color"
+msgstr "Kleur"
+
+#. settings-schema.json->switch_use-custom-icon->description
+msgid "Use custom icon"
+msgstr "Gebruik aangepast pictogram"
+
+#. settings-schema.json->icon_custom-icon->description
+msgid "Custom icon to use"
+msgstr "Aangepast pictogram om te gebruiken"
+
+#. settings-schema.json->button_open-kdec-settings->description
+msgid "Open KDE Connect Configuration"
+msgstr "KDE Connect-configuratie openen"
+
+#. settings-schema.json->switch_expand-only-device->description
+msgid ""
+"Expand the device sub menu automatically, if only one device is available"
+msgstr ""
+"Automatisch het submenu van het apparaat uitvouwen, als slechts één apparaat "
+"beschikbaar is"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Name"
+msgstr "Naam"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "Expand"
+msgstr "Uitvouwen"
+
+#. settings-schema.json->orderlist_device-order->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#. settings-schema.json->oderlist_info-modules->columns->title
+#. settings-schema.json->oderlist_action-modules->columns->title
+msgid "ID"
+msgstr "ID"
+
+#. settings-schema.json->module_battery_description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr "Toont de huidige batterijlading en laadstatus van het apparaat"
+
+#. settings-schema.json->module_deviceinfo_description->description
+msgid "Shows the device icon along with its ID"
+msgstr "Toont het apparaatpictogram samen met zijn ID"
+
+#. settings-schema.json->module_connectivity_description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr "Toont de huidige verbindingsstatus en netwerktype van het apparaat"
+
+#. settings-schema.json->module_connectivity_showNetworkType->description
+msgid "Show the mobile network type"
+msgstr "Toon het mobiele netwerktype"
+
+#. settings-schema.json->module_findmyphone_description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr ""
+"Hiermee kunt u het apparaat laten rinkelen, zodat u het kunt vinden als u "
+"het kwijt bent"
+
+#. settings-schema.json->module_requestphoto_description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr ""
+"Hiermee kunt u een foto verzoeken van het externe apparaat en deze op dit "
+"apparaat opslaan"
+
+#. settings-schema.json->module_requestphoto_saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr "Ontvangen foto's direct opslaan naar map"
+
+#. settings-schema.json->module_requestphoto_saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr "De map om ontvangen foto's naar op te slaan"
+
+#. settings-schema.json->module_ping_description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr ""
+"Hiermee kunt u het apparaat pingen om ervoor te zorgen dat het is verbonden"
+
+#. settings-schema.json->module_ping_useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr "Aangepast bericht voor ping gebruiken"
+
+#. settings-schema.json->module_ping_customMessage->description
+msgid "Custom message"
+msgstr "Aangepast bericht"
+
+#. settings-schema.json->module_share_description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr "Hiermee kunt u URL's, bestanden of tekst delen met het apparaat"
+
+#. settings-schema.json->module_share_useSubMenu->description
+#. settings-schema.json->module_sms_useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr "Menu-items weergeven in submenu"
+
+#. settings-schema.json->module_share_enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr "Menu-item inschakelen om een URL te verzenden"
+
+#. settings-schema.json->module_share_enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr "Menu-item inschakelen om wat tekst te verzenden"
+
+#. settings-schema.json->module_share_enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr "Menu-item inschakelen om bestand(en) te verzenden"
+
+#. settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage selected on the device"
+msgstr ""
+"Hiermee kunt u op afstand bladeren door de geselecteerde opslag op het "
+"apparaat"
+
+#. settings-schema.json->module_sms_description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr "Hiermee kunt u op afstand sms-berichten verzenden vanaf het apparaat"
+
+#. settings-schema.json->module_sms_enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr "Menu-item inschakelen om een SMS-bericht te verzenden"
+
+#. settings-schema.json->module_sms_enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr "Menu-item inschakelen om de KDE Connect SMS-app te starten"
