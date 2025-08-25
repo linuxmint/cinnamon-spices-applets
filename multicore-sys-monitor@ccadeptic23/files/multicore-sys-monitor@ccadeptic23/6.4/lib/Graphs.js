@@ -266,8 +266,8 @@ class GraphVBars100 extends GraphVBars {
 
     let _width = width;
     let _height = height;
-    let _x_origin = 0;
-    let _y_origin = 0;
+    let _x_origin = 2;
+    let _y_origin = 1;
 
     //Draw Border
     let borderColor;
@@ -275,13 +275,6 @@ class GraphVBars100 extends GraphVBars {
       if (providerName != 'SWAP') {
         borderColor = RGBa2rgba(this.applet.borderColor);
         areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
-        //~ areaContext.rectangle(0, 0, width, height);
-        //~ areaContext.fill();
-
-        //~ areaContext.moveTo(0.5, 0);
-        //~ areaContext.lineTo(width - 0.5, 0);
-        //~ areaContext.lineTo(width - 0.5, height);
-        //~ areaContext.lineTo(0.5, height);
         areaContext.moveTo(0, 0);
         areaContext.lineTo(width, 0);
         areaContext.lineTo(width, height);
@@ -289,12 +282,12 @@ class GraphVBars100 extends GraphVBars {
 
         areaContext.closePath();
         areaContext.stroke();
-        _width = width - 2;
+        _width = width - 1;
       } else {
-        _width = width + 1;
+        _width = width;
       }
       _height = height - 2;
-      _x_origin = 1;
+      _x_origin = 2;
       _y_origin = 1;
     }
 
@@ -308,12 +301,15 @@ class GraphVBars100 extends GraphVBars {
     areaContext.fill();
 
     // Usage Data Bars
-    let vbarWidth = (_width - 8) / currentReadings.length;
-    for (let i=0, len=currentReadings.length; i<len; i++) {
+    let interBar = 2; // 2 pixels
+    let len = currentReadings.length;
+    let nbInterBars = len + 1;
+    let vbarWidth = (_width - interBar * nbInterBars) / len;
+    for (let i=0; i<len; i++) {
       let currentR = Math.round(100 * currentReadings[i].value, 2) / 100;
       let maxValue = Math.round(100 * currentReadings[i].maxvalue, 2) / 100;
       let vbarHeight = (_height - 1) * currentR;
-      let vbarOffset = i * vbarWidth + 4;
+      let vbarOffset = i * (vbarWidth) + (i + 1) * interBar;
 
       let r=1, g=1, b=1, a=1;
 
@@ -324,8 +320,7 @@ class GraphVBars100 extends GraphVBars {
       b = colorsList[barnum][2];
       a = (colorsList[barnum][3] != null) ? colorsList[barnum][3] : 1;
       areaContext.setSourceRGBA(r, g, b, a);
-      //~ this.drawRoundedRectangle(areaContext, vbarOffset, 0, vbarWidth, vbarHeight, 1.0);
-      this.drawRoundedRectangle(areaContext, vbarOffset, 1, vbarWidth, _height - 1, 1.0);
+      this.drawRoundedRectangle(areaContext, vbarOffset, 1, vbarWidth, _height - 2, 1.0);
       areaContext.fill();
 
       if(currentR < maxValue) {
