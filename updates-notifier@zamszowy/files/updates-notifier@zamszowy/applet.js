@@ -48,8 +48,8 @@ UpdatesNotifier.prototype = {
         this.settings.bind("level-1", "level1", this._update, null);
         this.settings.bind("level-2", "level2", this._update, null);
 
-        this.settings.bind("commandUpdate", "commandUpdate", null, null);
-        this.settings.bind("commandUpgrade", "commandUpgrade", null, null);
+        this.settings.bind("commandUpdate", "commandUpdate", this._update, null);
+        this.settings.bind("commandUpgrade", "commandUpgrade", this._update, null);
 
         this.settings.bind("icon-style", "icon_style", this._update, null);
 
@@ -133,26 +133,32 @@ UpdatesNotifier.prototype = {
             Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "view"]);
         });
 
-        let iCheck = new PopupMenu.PopupIconMenuItem(_("Check for new updates"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
-        iCheck.connect('activate', () => {
-            const args = ['/usr/bin/bash', this.applet_path + '/updates.sh', "command", this.commandUpdate];
-            Util.spawn_async(args, () => {
-                this._refreshUpdatesInfo();
+        let iCheck = null;
+        if (this.commandUpdate.trim()) {
+            iCheck = new PopupMenu.PopupIconMenuItem(_("Check for new updates"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
+            iCheck.connect('activate', () => {
+                const args = ['/usr/bin/bash', this.applet_path + '/updates.sh', "command", this.commandUpdate];
+                Util.spawn_async(args, () => {
+                    this._refreshUpdatesInfo();
+                });
             });
-        });
+        }
 
-        const iUpgradeStr = count > 0 ? _("Upgrade %s packages").format(count.toString()) : _("No packages to upgrade");
-        let iUpgrade = new PopupMenu.PopupIconMenuItem(iUpgradeStr, "system-run-symbolic", St.IconType.SYMBOLIC, { reactive: count > 0 });
-        iUpgrade.connect('activate', () => {
-            const args = ['/usr/bin/bash', this.applet_path + '/updates.sh', "command", this.commandUpgrade];
-            Util.spawn_async(args, () => {
-                this._refreshUpdatesInfo();
+        let iUpgrade = null;
+        if (this.commandUpgrade.trim()) {
+            const iUpgradeStr = count > 0 ? _("Upgrade %s packages").format(count.toString()) : _("No packages to upgrade");
+            iUpgrade = new PopupMenu.PopupIconMenuItem(iUpgradeStr, "system-run-symbolic", St.IconType.SYMBOLIC, { reactive: count > 0 });
+            iUpgrade.connect('activate', () => {
+                const args = ['/usr/bin/bash', this.applet_path + '/updates.sh', "command", this.commandUpgrade];
+                Util.spawn_async(args, () => {
+                    this._refreshUpdatesInfo();
+                });
             });
-        });
+        }
 
-        this.menu.addMenuItem(iCheck);
+        if (iCheck) this.menu.addMenuItem(iCheck);
         this.menu.addMenuItem(iView);
-        this.menu.addMenuItem(iUpgrade);
+        if (iUpgrade) this.menu.addMenuItem(iUpgrade);
     },
 
     on_applet_clicked: function () {
