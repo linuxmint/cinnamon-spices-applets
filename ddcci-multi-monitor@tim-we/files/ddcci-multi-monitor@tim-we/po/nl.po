@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-22 21:49+0200\n"
-"PO-Revision-Date: 2024-07-23 23:51+0200\n"
+"PO-Revision-Date: 2025-08-26 08:59+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -23,7 +23,7 @@ msgstr "Pas de helderheid van de monitor aan via DDC/CI"
 
 #. applet.js:169
 msgid "Use for scroll/click"
-msgstr ""
+msgstr "Gebruiken voor scroll/klik"
 
 #. applet.js:295
 msgid "Detect displays"
@@ -52,33 +52,35 @@ msgstr "DDC/CI Multi-Monitor"
 
 #. settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #. settings-schema.json->section_appearance->title
 msgid "Appearance"
-msgstr ""
+msgstr "Weergave"
 
 #. settings-schema.json->section_monitor->title
 msgid "Monitor Setup"
-msgstr ""
+msgstr "Monitoropstelling"
 
 #. settings-schema.json->section_scrolling->title
 msgid "Scrolling Settings"
-msgstr ""
+msgstr "Scrollinstellingen"
 
 #. settings-schema.json->section_togglepoints->title
 msgid "Toggle Points"
-msgstr ""
+msgstr "Schakelpunten"
 
 #. settings-schema.json->entry_applet-label->description
 msgid ""
 "Text shown next to the icon in the panel.\n"
 "Leave empty for no label."
 msgstr ""
+"Tekst weergegeven naast het pictogram in het paneel.\n"
+"Laat leeg voor geen label."
 
 #. settings-schema.json->switch_show-bus-number->description
 msgid "Show bus number next to the detected monitors."
-msgstr ""
+msgstr "Toon busnummer naast de gedetecteerde monitoren."
 
 #. settings-schema.json->switch_manual-select-monitors->description
 msgid ""
@@ -86,63 +88,70 @@ msgid ""
 "Switch to enable custom monitor selection.\n"
 "This will add checkbox options for each detected monitor."
 msgstr ""
+"Standaard passen scrollen en schakelen de helderheid aan voor alle "
+"monitoren.\n"
+"Schakelaar om aangepaste monitorselectie in te schakelen.\n"
+"Dit voegt selectievakjes toe voor elke gedetecteerde monitor."
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "20"
-msgstr ""
+msgstr "20"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. settings-schema.json->combobox_scroll-step->description
-#, fuzzy
 msgid "Adjustment step for brightness"
-msgstr "Pas de helderheid van de monitor aan via DDC/CI"
+msgstr "Aanpassingsstap voor helderheid"
 
 #. settings-schema.json->switch_use-toggle-points->description
 msgid ""
 "Enable toggle points for brightness adjustment.\n"
 "(via mouse middle click)"
 msgstr ""
+"Schakelpunten inschakelen voor helderheidsaanpassing.\n"
+"(via middelste muisknop)"
 
 #. settings-schema.json->spinbutton_num-of-toggle-points->description
 msgid ""
 "Number of toggle points for brightness adjustment\n"
 "(only the first N toggle points will be used)"
 msgstr ""
+"Aantal schakelpunten voor helderheidsaanpassing\n"
+"(alleen de eerste N schakelpunten worden gebruikt)"
 
 #. settings-schema.json->scale_toggle_point_1->description
 msgid "Brightness level for toggle point 1"
-msgstr ""
+msgstr "Helderheidsniveau voor schakelpunt 1"
 
 #. settings-schema.json->scale_toggle_point_2->description
 msgid "Brightness level for toggle point 2"
-msgstr ""
+msgstr "Helderheidsniveau voor schakelpunt 2"
 
 #. settings-schema.json->scale_toggle_point_3->description
 msgid "Brightness level for toggle point 3"
-msgstr ""
+msgstr "Helderheidsniveau voor schakelpunt 3"
 
 #. settings-schema.json->string_active-monitors->description
 msgid ""
@@ -150,3 +159,7 @@ msgid ""
 "This is a JSON object where keys are bus numbers and values are true/false.\n"
 "Example: {\"1\":true,\"2\":false}"
 msgstr ""
+"Slaat op welke monitoren actief zijn voor scroll/klik-functies.\n"
+"Dit is een JSON-object waarbij de sleutels busnummers zijn en de waarden "
+"true/false.\n"
+"Bijvoorbeeld: {\"1\":true,\"2\":false}"
