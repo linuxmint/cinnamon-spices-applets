@@ -12,6 +12,7 @@ Cinnamenu@json/**                                  @fredcw
 CustomApplicationsMenu@LLOBERA/**                  @Nicolas01
 CustomPlaces@Nicolas01/**                          @Nicolas01
 Exit@claudiux/**                                   @claudiux
+Gears@claudiux/**                                  @claudiux
 IntelTurboBoost@wsmenezes/**                       @wsmenezes
 InternetTimeApplet@stefan/**                       @stefan12O
 Mint-Unsplash-Background@omidmaldar/**             @omidmaldar
@@ -34,7 +35,6 @@ VPN-Sentinel@claudiux/**                           @claudiux
 anime-wallpaper@flyflyan/**                        @fly206
 any-alarm@sophie-la-li/**                          @sophie-la-li
 app-launcher@mchilli/**                            @mchilli
-apt-updates@zamszowy/**                            @zamszowy
 asl@santiago/**                                    @SamBurgos
 auto-dark-light@gihaume/**                         @guillaume-mueller
 backgroundroll@Sokawaii25/**                       @Sokawaii25
@@ -105,6 +105,7 @@ mediacontrols@rbfraphael/**                        @rbfraphael
 mem-monitor-text@datanom.net/**                    @icarter09
 mic-level@zamszowy/**                              @zamszowy
 moonphase@techi-freki/**                           @Techi-Freki
+mouse-keys-shortcut@GabrielCamara3526/**           @GabrielCamara3526
 multicore-sys-monitor@ccadeptic23/**               @claudiux
 mybookmarks@markbokil.com/**                       @Centurix
 mylauncher@markbokil.com/**                        @Centurix
@@ -176,6 +177,7 @@ trilium-api@beatlink/**                            @BeatLink
 turn-off-monitor@zablotski/**                      @zablotski
 tzclock@lhriley/**                                 @lhriley
 uiscaler@joka42/**                                 @joka42
+updates-notifier@zamszowy/**                       @zamszowy
 vboxlauncher@mockturtl/**                          @mockturtl
 vnstat@linuxmint.com/**                            @pdcurtis
 vpnLookOut@claudiux/**                             @claudiux
