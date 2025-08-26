@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-06 01:31+0200\n"
-"PO-Revision-Date: 2025-05-13 14:36+0200\n"
+"PO-Revision-Date: 2025-08-26 08:39+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -55,20 +55,19 @@ msgstr "Blauw"
 
 #. 6.4/applet.js:46 6.4/applet.js:927
 msgid "Sunrise"
-msgstr ""
+msgstr "Zonsopgang"
 
 #. 6.4/applet.js:47 6.4/applet.js:929
 msgid "Sunset"
-msgstr ""
+msgstr "Zonsondergang"
 
 #. 6.4/applet.js:722
 msgid "Reload"
-msgstr ""
+msgstr "Herladen"
 
 #. 6.4/applet.js:732
-#, fuzzy
 msgid "Configure Presets"
-msgstr "Jouw voorinstellingen"
+msgstr "Voorinstellingen configureren"
 
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:742
@@ -281,7 +280,7 @@ msgstr ""
 
 #. 6.4->settings-schema.json->apply_changing_monitors->description
 msgid "Apply when the number of monitors changes"
-msgstr ""
+msgstr "Toepassen wanneer het aantal monitoren verandert"
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
@@ -292,15 +291,16 @@ msgid "Hotkey to Decrease brightness"
 msgstr "Sneltoets om helderheid te verlagen"
 
 #. 6.4->settings-schema.json->preset_label->description
-#, fuzzy
 msgid ""
 "You can define or modify presets below, which can then be accessed via the "
 "applet's context menu.\n"
 "Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
 "into account."
 msgstr ""
-"Je kunt hieronder voorinstellingen definiëren of aanpassen, die vervolgens "
-"toegankelijk zijn via het contextmenu van de applet."
+"Je kunt hieronder voorinstellingen definiëren of wijzigen, die vervolgens "
+"toegankelijk zijn via het contextmenu van het applet.\n"
+"Alleen de eerste aangevinkte vakjes Start bij Zonsopgang en Start bij "
+"Zonsondergang worden in aanmerking genomen."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
@@ -343,17 +343,21 @@ msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
+"Start bij\n"
+"Zonsopgang"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunset"
 msgstr ""
+"Start bij\n"
+"Zonsondergang"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr ""
+msgstr "Stel tijden in voor zonsopgang en zonsondergang"
 
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
-msgstr ""
+msgstr "Alle wijzigingen toepassen"
