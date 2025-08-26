@@ -11,6 +11,7 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
+const windowTracker = imports.gi.Cinnamon.WindowTracker.get_default();
 const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
@@ -211,10 +212,7 @@ class MCSM extends Applet.IconApplet {
 
         // Is the user a sudoer?
         var user = GLib.get_user_name();
-        const HOME_DIR = GLib.get_home_dir();
-        const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-        const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-        let command = SCRIPTS_DIR + "/get-sudoers.sh";
+        let command = PATH2SCRIPTS + "/get-sudoers.sh";
         this.is_sudoer = false;
         let sudoersProcess = Util.spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
             if (exitCode == 0) {
@@ -381,7 +379,7 @@ class MCSM extends Applet.IconApplet {
     }
 
     _initContextMenu() {
-        let menuChildren = null;
+        //~ let menuChildren = null;
         if (this.restart_menu_item) {
             let children = this._applet_context_menu._getMenuItems();
             children[0].destroy();
@@ -419,8 +417,67 @@ class MCSM extends Applet.IconApplet {
             );
             this._applet_context_menu.addMenuItem(drop_cache_item, 2);
         }
-        //~ this.out_reader = null;
+
+        let menuChildren = this._applet_context_menu._getMenuItems();
+        var posConfigure = -1;
+        for (let i=0; i<menuChildren.length; i++) {
+            //~ global.log("menuChildren["+i+"]: "+menuChildren[i]);
+            if ((""+menuChildren[i]).includes(_("Configure...")))
+                posConfigure = i;
+        }
+        if (posConfigure != -1) {
+            menuChildren[posConfigure].destroy();
+            let context_menu_item_configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure..."));
+            context_menu_item_configure.menu.addAction(_("General"), () => { this.configureApplet(0) });
+            context_menu_item_configure.menu.addAction(_("CPU"), () => { this.configureApplet(1) });
+            context_menu_item_configure.menu.addAction(_("Memory"), () => { this.configureApplet(2) });
+            context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(3) });
+            context_menu_item_configure.menu.addAction(_("Disk IO"), () => { this.configureApplet(4) });
+            context_menu_item_configure.menu.addAction(_("Disk Usage"), () => { this.configureApplet(5) });
+            context_menu_item_configure.menu.addAction(_("Colors"), () => { this.configureApplet(6) });
+            this._applet_context_menu.addMenuItem(context_menu_item_configure, posConfigure);
+        }
     }
+
+    closeSettingsWindow() {
+        if (this.settingsWindow) {
+            try {
+                this.settingsWindow.delete(300);
+            } catch(e) {}
+        }
+        this.settingsWindow = undefined;
+    }
+
+    configureApplet(tab=0) {
+        const maximize_vertically = true;
+        const VERTICAL = 2;
+        this._applet_context_menu.close(false);
+
+        this.closeSettingsWindow();
+
+        let pid = Util.spawnCommandLine(`cinnamon-settings applets ${UUID} -i ${this.instance_id} -t ${tab}`);
+
+        if (maximize_vertically) {
+          var app = null;
+          var intervalId = null;
+          intervalId = setTimeout(() => {
+                clearTimeout(intervalId);
+                app = windowTracker.get_app_from_pid(pid);
+                if (app != null) {
+                    let window = app.get_windows()[0];
+                    this.settingsTab = tab;
+
+                    window.maximize(VERTICAL);
+                    window.activate(300);
+                    this.settingsWindow = window;
+                    app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+                    this._removeEnlightenment();
+                }
+            }, 600);
+        }
+        // Returns the pid:
+        return pid;
+  }
 
     get without_any_graph() {
         return GLib.file_test(this.metadata.path + "/WOGRAPH", GLib.FileTest.EXISTS)
@@ -910,12 +967,7 @@ class MCSM extends Applet.IconApplet {
     }
 
     on_applet_middle_clicked(event) {
-        Util.spawnCommandLineAsync(`cinnamon-settings applets ${UUID}`);
-        let _to = setTimeout(() => {
-            clearTimeout(_to);
-            this._removeEnlightenment();
-        },
-        1000);
+        this.configureApplet(0);
     }
 
     on_applet_added_to_panel() {
@@ -926,6 +978,7 @@ class MCSM extends Applet.IconApplet {
     on_applet_removed_from_panel() {
         this.isRunning = false;
         remove_all_sources();
+        this.closeSettingsWindow();
     }
 
     get _isHighlighted() {
