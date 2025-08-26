@@ -1,5 +1,9 @@
-### v2.8.2~20250825
+### v2.8.3~20250826
   * Fixes [#7559](https://github.com/linuxmint/cinnamon-spices-applets/issues/7559)
+
+
+### v2.8.2~20250825
+  * Try to fix [#7559](https://github.com/linuxmint/cinnamon-spices-applets/issues/7559)
   * Improves the Disk Usage chart.
 
 ### v2.8.1~20250825

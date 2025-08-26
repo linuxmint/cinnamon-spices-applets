@@ -309,7 +309,7 @@
   },
   "refreshRate": {
     "type": "scale",
-    "default": 1200,
+    "default": 1250,
     "description": "Refresh Rate (ms)",
     "min": 1000,
     "max": 3000,
