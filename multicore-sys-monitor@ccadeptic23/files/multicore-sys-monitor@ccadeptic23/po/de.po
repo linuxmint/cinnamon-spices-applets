@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-25 15:21+0200\n"
-"PO-Revision-Date: 2025-08-14 07:42+0200\n"
+"PO-Revision-Date: 2025-08-26 13:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -397,9 +397,8 @@ msgid "Disk IO"
 msgstr "Festplatte IO"
 
 #. 6.4->settings-schema.json->pageDiskUsage->title
-#, fuzzy
 msgid "Disk Usage"
-msgstr "Festplatten"
+msgstr "Festplattenbelegung"
 
 #. 6.4->settings-schema.json->pageColors->title
 #. 6.4->settings-schema.json->sectionGeneralColors->title
@@ -447,7 +446,7 @@ msgstr "Geräte"
 
 #. 6.4->settings-schema.json->sectionDiskUsagePaths->title
 msgid "Paths"
-msgstr ""
+msgstr "Pfade"
 
 #. 6.4->settings-schema.json->sectionColors->title
 msgid "Your colors"
@@ -465,7 +464,7 @@ msgstr "Rahmen um jedes Diagramm"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
-msgstr ""
+msgstr "Diagramm-Abstand"
 
 #. 6.4->settings-schema.json->thickness->description
 #. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
@@ -700,24 +699,23 @@ msgstr "Farbe Schreiben"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->description
 msgid "Type of chart"
-msgstr ""
+msgstr "Diagrammtyp"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Bar"
-msgstr ""
+msgstr "Balken"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Pie"
-msgstr ""
+msgstr "Kuchen"
 
 #. 6.4->settings-schema.json->DiskUsage_colorAlert->description
 msgid "Alert"
-msgstr ""
+msgstr "Warnung"
 
 #. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
-#, fuzzy
 msgid "Update this path list"
-msgstr "Diese Geräteliste aktualisieren"
+msgstr "Diese Pfadliste aktualisieren"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid ""
@@ -725,10 +723,13 @@ msgid ""
 "value (in %)\n"
 "reaches"
 msgstr ""
+"Warnung wenn\n"
+"Wert (in %)\n"
+"bei"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid "Path"
-msgstr ""
+msgstr "Pfad"
 
 #. 6.4->settings-schema.json->color0->description
 msgid "Color #0"
@@ -894,7 +895,8 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small "
+"readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -909,7 +911,8 @@ msgstr ""
 "\tdes angezeigten Bereichs skaliert. Sobald der größte Messwert nicht\n"
 "\tmehr angezeigt wird, wird der nächstgrößere Wert der neue Wert mit\n"
 "\tdem die Messwerte skaliert werden. Dies lässt den Plot »zoomen«, um\n"
-"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, wenn\n"
+"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, "
+"wenn\n"
 "\tes einen großen Messwert gibt, kleine Messwerte von 0 womöglich nicht\n"
 "\tunterschieden werden können. Und wenn es nur kleine Messwerte gibt,\n"
 "\tdann können leicht größere Messwerte größer erscheinen als sie sollten.\n"
@@ -919,7 +922,8 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
+"verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
 
 #. 6.0/prefsui.glade:508 5.6/prefsui.glade:508 4.0/prefsui.glade:508
@@ -933,11 +937,13 @@ msgid ""
 "    displayed area. Once the largest reading is no longer displayed\n"
 "    the next largest becomes the new value by which the readings\n"
 "    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
-"    However, it also means that if there is a large reading small readings\n"
+"    However, it also means that if there is a large reading small "
+"readings\n"
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading since\n"
+"    If not enabled the largest value used will be the largest reading "
+"since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -950,7 +956,8 @@ msgstr ""
 "\tdes angezeigten Bereichs skaliert. Sobald der größte Messwert nicht\n"
 "\tmehr angezeigt wird, wird der nächstgrößere Wert der neue Wert mit\n"
 "\tdem die Messwerte skaliert werden. Dies lässt den Plot »zoomen«, um\n"
-"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, wenn\n"
+"\tDetails des Diagramms zu zeigen. Allerdings bedeutet es auch, dass, "
+"wenn\n"
 "\tes einen großen Messwert gibt, kleine Messwerte von 0 womöglich nicht\n"
 "\tunterschieden werden können. Und wenn es nur kleine Messwerte gibt,\n"
 "\tdann können leicht größere Messwerte größer erscheinen als sie sollten.\n"
@@ -960,5 +967,6 @@ msgstr ""
 "Logarithmische Skalierung:\n"
 "\tDies transformiert die Messwerte so, dass sie mit einer logarithmischen "
 "Skala\n"
-"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte verkleinert\n"
+"\tangezeigt werden. Dies heißt im Grunde, dass die großen Werte "
+"verkleinert\n"
 "\twerden, damit sie die kleineren Messwerte nicht unterdrücken."
