@@ -539,11 +539,21 @@ class MCSM extends Applet.IconApplet {
                             name = _("root");
                         new_pathList.push({
                             "enabled": true,
+                            "maxvalue": 80,
                             "name": name,
                             "path": m
                         });
                         knownPaths.push(m);
                     }
+                }
+                if (knownPaths.indexOf("/") < 0) {
+                    new_pathList.push({
+                        "enabled": true,
+                        "maxvalue": 80,
+                        "name": _("root"),
+                        "path": "/"
+                    });
+                    knownPaths.push("/");
                 }
                 this.DiskUsage_pathList = new_pathList;
             }
@@ -891,8 +901,21 @@ class MCSM extends Applet.IconApplet {
         reloadExtension(UUID, Type.APPLET);
     }
 
+    on_panel_height_changed() {
+        this.set_panelHeight();
+    }
+
     on_applet_clicked(event) {
         this._runSysMon();
+    }
+
+    on_applet_middle_clicked(event) {
+        Util.spawnCommandLineAsync(`cinnamon-settings applets ${UUID}`);
+        let _to = setTimeout(() => {
+            clearTimeout(_to);
+            this._removeEnlightenment();
+        },
+        1000);
     }
 
     on_applet_added_to_panel() {
@@ -906,10 +929,10 @@ class MCSM extends Applet.IconApplet {
     }
 
     get _isHighlighted() {
-        let itis = this.actor.has_style_pseudo_class("highlight");
-        if (this.isHighlighted !== itis)
-            this.isHighlighted = itis;
-        return itis;
+        let isHL = this.actor.has_style_pseudo_class("highlight");
+        if (this.isHighlighted !== isHL)
+            this.isHighlighted = isHL;
+        return isHL;
     }
 
 }
