@@ -1,3 +1,7 @@
+### v2.8.4~20250826
+  * Improves context menu to access to settings.
+  * Middle-click opens settings.
+
 ### v2.8.3~20250826
   * Fixes [#7559](https://github.com/linuxmint/cinnamon-spices-applets/issues/7559)
 
