@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-29 15:49+0200\n"
-"PO-Revision-Date: 2025-05-13 14:21+0200\n"
+"PO-Revision-Date: 2025-08-26 08:30+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -953,7 +953,7 @@ msgstr "Behoud van vrije ruimte op harde schijf"
 
 #. settings-schema.json->sectionYTIgnore->title
 msgid "Ignore YT"
-msgstr ""
+msgstr "Negeer YT"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -1906,13 +1906,15 @@ msgstr "Markeer dit applet-pictogram tijdens achtergrondopname"
 
 #. settings-schema.json->ignoreYT->description
 msgid "Ignore Youtube features"
-msgstr ""
+msgstr "Negeer Youtube-functies"
 
 #. settings-schema.json->ignoreYT->tooltip
 msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
+"Het negeren van Youtube-functies vermindert de CPU-belasting. Maar het laden "
+"van albumhoezen wordt onmogelijk."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
