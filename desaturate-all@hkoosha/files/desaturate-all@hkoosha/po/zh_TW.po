@@ -1,0 +1,88 @@
+# DESATURATE ALL
+# This file is put in the public domain.
+# hkoosha, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: desaturate-all@hkoosha 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-05-17 10:44-0400\n"
+"PO-Revision-Date: 2025-08-28 00:56+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:62
+msgid "Click to disable effect"
+msgstr "點選以停用灰階效果"
+
+#. applet.js:64
+msgid "Click to desaturate the desktop"
+msgstr "點選以啟用桌面灰階效果"
+
+#. applet.js:72
+msgid "Will automatically desaturate in"
+msgstr "距離自動啟用灰階效果還有"
+
+#. applet.js:74
+msgid "Will automatically disable in"
+msgstr "距離自動停用灰階效果還有"
+
+#. applet.js:76
+msgid "minutes"
+msgstr "分鐘"
+
+#. applet.js:79
+msgid "Will automatically desaturate at"
+msgstr "將於指定時間自動啟用灰階效果："
+
+#. applet.js:81
+msgid "Will automatically disable at"
+msgstr "將於指定時間自動停用灰階效果："
+
+#. metadata.json->name
+msgid "Desaturate All"
+msgstr "Desaturate All"
+
+#. metadata.json->description
+msgid "Convert your screen to gray-scale."
+msgstr "將您的螢幕轉換為灰階。"
+
+#. settings-schema.json->saturation->description
+msgid "Color saturation"
+msgstr "色彩飽和度"
+
+#. settings-schema.json->keybinding->description
+msgid "Shortcut to toggle desaturation effect"
+msgstr "切換灰階效果的快速鍵"
+
+#. settings-schema.json->automatic->description
+msgid "Automatic"
+msgstr "自動"
+
+#. settings-schema.json->automatic->tooltip
+msgid ""
+"Automatically enable and disable the desaturation effect based on the time "
+"of day"
+msgstr ""
+"依據一天中的時間自動啟用或停用灰階效果"
+
+#. settings-schema.json->start-timechooser->description
+msgid "Time of day to automatically enable"
+msgstr "自動啟用的時間"
+
+#. settings-schema.json->end-timechooser->description
+msgid "Time of day to automatically disable"
+msgstr "自動停用的時間"
+
+#. settings-schema.json->resume-on-startup->description
+msgid "Restore desaturation effect state on startup"
+msgstr "於啟動時還原先前的灰階效果狀態"
+
+#. settings-schema.json->resume-on-startup->tooltip
+msgid "Restore the previously set desaturation state when cinnamon starts"
+msgstr "於 Cinnamon 啟動時還原先前設定的灰階狀態"
