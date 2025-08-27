@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-11 16:17+0200\n"
-"PO-Revision-Date: 2025-01-03 15:05+0100\n"
+"PO-Revision-Date: 2025-08-27 18:10+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:122
 msgid "All workspaces"
-msgstr ""
+msgstr "Tutte le Aree di Lavoro"
 
 #. applet.js:150
 msgid "Edit Applications"
@@ -222,27 +222,27 @@ msgstr ""
 
 #. settings-schema.json->open-by-hover->description
 msgid "Open menus by hovering over them"
-msgstr ""
+msgstr "Apri i menù passandoci sopra il mouse"
 
 #. settings-schema.json->open-by-hover->tooltip
 msgid "Open all menus when you move the mouse pointer over them"
-msgstr ""
+msgstr "Apre tutti i menù quando si sposta il puntatore del mouse su di essi"
 
 #. settings-schema.json->open-by-hover-delay->description
 msgid "Hover delay"
-msgstr ""
+msgstr "Ritardo al passaggio del mouse"
 
 #. settings-schema.json->open-by-hover-delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "millisecondi"
 
 #. settings-schema.json->bind-to-workspace->description
 msgid "Bind to workspace"
-msgstr ""
+msgstr "Associa all'area di lavoro"
 
 #. settings-schema.json->bind-to-workspace->tooltip
 msgid "Show the applet only on the selected workspace"
-msgstr ""
+msgstr "Mostra l'applet solo nell'area di lavoro selezionata"
 
 #. settings-schema.json->fixed-menu-width->description
 msgid "Fixed Menu Width"

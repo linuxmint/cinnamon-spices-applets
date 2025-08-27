@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-11-20 06:07+0100\n"
-"PO-Revision-Date: 2025-01-03 15:21+0100\n"
+"PO-Revision-Date: 2025-08-27 19:01+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -64,8 +64,8 @@ msgid ""
 msgstr ""
 "Selezionalo se vuoi nascondere automaticamente le applet, a meno che tu non "
 "voglia cliccare sull'applet per farlo.\n"
-"Il suo stato può essere modificato cliccando con il tasto centrale su "
-"questa applet."
+"Il suo stato può essere modificato cliccando con il tasto centrale su questa "
+"applet."
 
 #. settings-schema.json->statusintooltip->description
 msgid "Show Autohide status in tooltip"
@@ -119,3 +119,11 @@ msgstr "Nascondi automaticamente e rivisualizza le applet"
 #. settings-schema.json->autohiderstime->description
 msgid "Reshowers' autohide delay: "
 msgstr "Ritardo di riattivazione auto-nascondimento: "
+
+#. settings-schema.json->hideuntilseparator->description
+msgid "Only hide until next separator"
+msgstr "Nascondi solo fino al prossimo separatore"
+
+#. settings-schema.json->hideuntilseparator->tooltip
+msgid "Only hide everything until the next separator element occurs."
+msgstr "Nasconde tutto fino all'occorrenza del successivo elemento separatore."

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-28 17:40+0100\n"
-"PO-Revision-Date: 2025-01-03 15:10+0100\n"
+"PO-Revision-Date: 2025-08-27 17:15+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. applet.js:77
 msgid "Does not work on vertical panel!"
-msgstr ""
+msgstr "Non funziona sui pannelli verticali!"
 
 #. applet.js:244 applet.js:304 applet.js:318
 msgid "   B"
@@ -160,48 +160,45 @@ msgid "Upload first"
 msgstr "Prima upload"
 
 #. settings-schema.json->gui_value_order->tooltip
-#, fuzzy
 msgid "An order of values shown in the panel"
-msgstr "Valori mostrati nel pannello"
+msgstr "Un ordine di valori mostrati nel pannello"
 
 #. settings-schema.json->minimum_start->description
-#, fuzzy
 msgid "Minimum displayed value"
-msgstr "Valore di caricamento minimo visualizzato"
+msgstr "Valore minimo visualizzato"
 
 #. settings-schema.json->display_minimum_quantity->description
-#, fuzzy
 msgid "Value"
-msgstr "Ordine valore"
+msgstr "Valore"
 
 #. settings-schema.json->display_minimum_quantity->tooltip
 msgid "Value between 0 and 999 (decimal) or 1023 (binary)."
-msgstr ""
+msgstr "Valore compreso tra 0 e 999 (decimale) o 1023 (binario)."
 
 #. settings-schema.json->display_minimum_unit_multiple->description
 msgid "Multiple"
-msgstr ""
+msgstr "Multiplo"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "k"
-msgstr ""
+msgstr "k"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. settings-schema.json->display_minimum_unit_multiple->options
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #. settings-schema.json->display_minimum_button->description
 msgid "Apply"
-msgstr ""
+msgstr "Applica"

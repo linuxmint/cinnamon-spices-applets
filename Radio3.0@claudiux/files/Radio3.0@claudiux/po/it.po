@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-29 15:49+0200\n"
-"PO-Revision-Date: 2025-01-03 14:59+0100\n"
+"PO-Revision-Date: 2025-08-27 18:00+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -25,7 +25,7 @@ msgstr "non assegnato"
 
 #. applet.js:287
 msgid "Display Album Art at full size"
-msgstr ""
+msgstr "Visualizza la copertina dell'album a grandezza naturale"
 
 #. applet.js:389
 msgid "This is your own list of Categories and Radio Stations."
@@ -202,31 +202,31 @@ msgstr "%s bytes = %s GB = %s GiB"
 
 #. applet.js:420
 msgid "Sun."
-msgstr ""
+msgstr "Dom."
 
 #. applet.js:420
 msgid "Mon."
-msgstr ""
+msgstr "Lun."
 
 #. applet.js:420
 msgid "Tue."
-msgstr ""
+msgstr "Mar."
 
 #. applet.js:420
 msgid "Wed."
-msgstr ""
+msgstr "Mer."
 
 #. applet.js:420
 msgid "Thu."
-msgstr ""
+msgstr "Gio."
 
 #. applet.js:420
 msgid "Fri."
-msgstr ""
+msgstr "Ven."
 
 #. applet.js:420
 msgid "Sat."
-msgstr ""
+msgstr "Sab."
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -274,7 +274,7 @@ msgstr "Clicca per selezionare una stazione"
 
 #. applet.js:2532
 msgid "Wake Up"
-msgstr ""
+msgstr "Svegliati"
 
 #. applet.js:2610 applet.js:2985 applet.js:4932
 msgid "Configure..."
@@ -285,9 +285,8 @@ msgid "Search for new stations..."
 msgstr "Cerca nuove stazioni..."
 
 #. applet.js:2620
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Aggiorna questo elenco stazioni"
+msgstr "Carica un elenco di stazioni di esempio"
 
 #. applet.js:2663 applet.js:2989 applet.js:5009
 msgid "Sound Settings"
@@ -435,30 +434,33 @@ msgstr "Chiudi"
 
 #. applet.js:4755 applet.js:5216 applet.js:5234
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. applet.js:4756
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Radio3.0 applet"
 
 #. applet.js:4759
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Abilita l'estensione OSD150"
 
 #. applet.js:4760
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Per ottenere un OSD orizzontale, è necessario abilitare l'estensione OSD150."
 
 #. applet.js:4777
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Scarica l'estensione OSD150"
 
 #. applet.js:4778
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Per ottenere un OSD orizzontale, è necessario scaricare l'estensione "
+"OSD150.\n"
+"Clicca sul pulsante Download, quindi cerca OSD150 e seleziona il pulsante ⬇."
 
 #. applet.js:4900
 #, javascript-format
@@ -529,16 +531,15 @@ msgstr "Pianificando"
 #. settings-schema.json->pageAlarmClock->title
 #. applet.js:4942
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Sveglia"
 
 #. applet.js:4950
 msgid "Schedule a background record..."
 msgstr "Pianifica una registrazione in background..."
 
 #. applet.js:4957
-#, fuzzy
 msgid "Configure the Alarm Clock..."
-msgstr "Configura..."
+msgstr "Configura la Sveglia..."
 
 #. applet.js:4964
 msgid "Extract soundtrack from YouTube video..."
@@ -587,7 +588,7 @@ msgstr "Impostazioni desklet copertina album"
 #. settings-schema.json->alarm-clock-wake-me-up->description
 #. applet.js:5048
 msgid "Wake me up!"
-msgstr ""
+msgstr "Svegliami!"
 
 #. applet.js:5057
 msgid "Show Album Art on desktop"
@@ -605,27 +606,29 @@ msgstr "Visualizza il livello del volume vicino all'icona"
 
 #. applet.js:5213
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Hai bisogno del desklet 'Album Art 3.0'"
 
 #. applet.js:5214
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
-msgstr ""
+msgstr "Puoi installarlo cliccando sul primo pulsante e poi cercando Album."
 
 #. applet.js:5215 applet.js:5233
 msgid "Desklets"
-msgstr ""
+msgstr "Desklet"
 
 #. applet.js:5231
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Devi attivare il desklet 'Album Art 3.0'"
 
 #. applet.js:5232
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Puoi attivarlo cliccando sul primo pulsante, quindi cercando Album e "
+"aggiungendolo con il pulsante [+]."
 
 #. applet.js:5377
 msgid "Close without stopping recording"
@@ -867,9 +870,8 @@ msgid "Search results"
 msgstr "Risultati di ricerca"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "Impostazioni di %s"
+msgstr "Impostazioni Finestra"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -881,7 +883,7 @@ msgstr "Passo volumetrico"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -952,7 +954,7 @@ msgstr "Preservazione dello spazio su disco"
 
 #. settings-schema.json->sectionYTIgnore->title
 msgid "Ignore YT"
-msgstr ""
+msgstr "Ignora YT"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -972,17 +974,16 @@ msgid "Scheduled recordings"
 msgstr "Pianifica registrazioni"
 
 #. settings-schema.json->sectionWakeMeUp->title
-#, fuzzy
 msgid "Options"
-msgstr "Più opzioni"
+msgstr "Opzioni"
 
 #. settings-schema.json->sectionWorkingDays->title
 msgid "Working Days"
-msgstr ""
+msgstr "Giorni lavorativi"
 
 #. settings-schema.json->sectionWorkOffDays->title
 msgid "Work-Off Days"
-msgstr ""
+msgstr "Giorni di riposo"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
@@ -1011,7 +1012,7 @@ msgstr "Elenco stazioni"
 
 #. settings-schema.json->radios->columns->title
 msgid "♥︎"
-msgstr ""
+msgstr "♥︎"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
@@ -1184,13 +1185,15 @@ msgstr "Pagina:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Massimizzazione verticale"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Se questa opzione è selezionata, la finestra Impostazioni verrà ingrandita "
+"verticalmente alla successiva apertura."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1381,11 +1384,11 @@ msgstr "Mostra il volume OSD quando si cambia stazione radio"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Mostra '%' nell'OSD"
 
 #. settings-schema.json->show-horizontal-osd->description
 msgid "Show horizontal OSD"
-msgstr ""
+msgstr "Mostra OSD orizzontale"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -1624,29 +1627,30 @@ msgstr ""
 
 #. settings-schema.json->image-resolution->description
 msgid "Quality of downloaded Album Art"
-msgstr ""
+msgstr "Qualità della copertina dell'album scaricata"
 
 #. settings-schema.json->image-resolution->options
 msgid "Max Resolution"
-msgstr ""
+msgstr "Massima Risoluzione"
 
 #. settings-schema.json->image-resolution->options
-#, fuzzy
 msgid "High Quality"
-msgstr "Qualità"
+msgstr "Alta Qualità"
 
 #. settings-schema.json->image-resolution->options
 msgid "Medium"
-msgstr ""
+msgstr "Medio"
 
 #. settings-schema.json->image-resolution->options
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #. settings-schema.json->image-resolution->tooltip
 msgid ""
 "Default: High Quality. Choose a value corresponding to your Network Quality."
 msgstr ""
+"Predefinito: Alta qualità. Scegli un valore corrispondente alla qualità "
+"della tua rete."
 
 #. settings-schema.json->network-monitoring->description
 msgid "Monitor the network"
@@ -1909,13 +1913,15 @@ msgstr ""
 
 #. settings-schema.json->ignoreYT->description
 msgid "Ignore Youtube features"
-msgstr ""
+msgstr "Ignora funzionalità YouTube"
 
 #. settings-schema.json->ignoreYT->tooltip
 msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
+"Ignorare le funzionalità di YouTube riduce il carico sulla CPU. Ma caricare "
+"le copertine degli album diventa impossibile."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
@@ -3336,74 +3342,73 @@ msgstr "0 significa nessun massimo"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
-msgstr ""
+msgstr "Svegliami dolcemente"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->tooltip
 msgid "By checking this box, the sound volume gradually increases."
-msgstr ""
+msgstr "Selezionando questa casella, il volume del suono aumenta gradualmente."
 
 #. settings-schema.json->alarm-clock-volume-begin->description
 msgid "Initial volume (%)"
-msgstr ""
+msgstr "Volume iniziale (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->description
 msgid "Final volume (%)"
-msgstr ""
+msgstr "Volume finale (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->tooltip
 msgid "The final volume must be greater than or equal to the initial volume."
-msgstr ""
+msgstr "Il volume finale deve essere maggiore o uguale al volume iniziale."
 
 #. settings-schema.json->alarm-clock-volume-transition->description
 msgid "Transition duration (seconds)"
-msgstr ""
+msgstr "Durata della transizione (secondi)"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Sunday"
-msgstr ""
+msgstr "Domenica"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Monday"
-msgstr ""
+msgstr "Lunedì"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Tuesday"
-msgstr ""
+msgstr "Martedì"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Wednesday"
-msgstr ""
+msgstr "Mercoledì"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Thursday"
-msgstr ""
+msgstr "Giovedì"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Friday"
-msgstr ""
+msgstr "Venerdì"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Saturday"
-msgstr ""
+msgstr "Sabato"
 
 #. settings-schema.json->alarm-clock-working-days-time->description
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
-msgstr ""
+msgstr "Ora sveglia"
 
 #. settings-schema.json->alarm-clock-working-days-radio-button->description
 #. settings-schema.json->alarm-clock-workoff-days-radio-button->description
-#, fuzzy
 msgid "Last-listened-to radio station"
-msgstr "Elenco di stazione radio memorizzate"
+msgstr "Ultima stazione radio ascoltata"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
-msgstr ""
+msgstr "Attiva tink per assicurarti che gli altoparlanti siano attivi"

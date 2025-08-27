@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-05 16:59+0200\n"
-"PO-Revision-Date: 2025-01-04 01:29+0100\n"
+"PO-Revision-Date: 2025-08-27 19:07+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -241,51 +241,51 @@ msgid "Install playerctl"
 msgstr "Installa playerctl"
 
 #. 6.4/applet.js:236 6.4/applet.js:275 6.4/applet.js:277
-#, fuzzy
 msgid "%"
-msgstr "9%"
+msgstr "%"
 
 #. 6.4->settings-schema.json->custom-commands-list->description
 #. 6.4/applet.js:598
 msgid "Commands"
-msgstr ""
+msgstr "Comandi"
 
 #. 6.4/applet.js:608
 msgid "Album Art desklet settings"
-msgstr ""
+msgstr "Impostazioni desklet Copertina Album"
 
 #. 6.4/applet.js:616
-#, fuzzy
 msgid "Show Album Art on desktop"
-msgstr "Mostra la copertina dell'album come icona"
+msgstr "Mostra la copertina dell'album sul desktop"
 
 #. 6.4/applet.js:758
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Hai bisogno del desklet 'Album Art 3.0'"
 
 #. 6.4/applet.js:759
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
-msgstr ""
+msgstr "Puoi installarlo cliccando sul primo pulsante e poi cercando Album."
 
 #. 6.4/applet.js:760 6.4/applet.js:778
 msgid "Desklets"
-msgstr ""
+msgstr "Desklet"
 
 #. 6.4/applet.js:761 6.4/applet.js:779 6.4/applet.js:809
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. 6.4/applet.js:776
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "Devi attivare il desklet 'Album Art 3.0'"
 
 #. 6.4/applet.js:777
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"Puoi attivarlo cliccando sul primo pulsante, quindi cercando Album e "
+"aggiungendolo con il pulsante [+]."
 
 #. metadata.json->name
 #. 6.4/applet.js:810
@@ -294,41 +294,42 @@ msgstr "Applet audio avanzato"
 
 #. 6.4/applet.js:813
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "Abilita l'estensione OSD150"
 
 #. 6.4/applet.js:814
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
+"Per ottenere un OSD orizzontale, è necessario abilitare l'estensione OSD150."
 
 #. 6.4/applet.js:831
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "Scarica l'estensione OSD150"
 
 #. 6.4/applet.js:832
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Per ottenere un OSD orizzontale, è necessario scaricare l'estensione "
+"OSD150.\n"
+"Clicca sul pulsante Download, quindi cerca OSD150 e seleziona il pulsante ⬇."
 
 #. 6.4/applet.js:1864
-#, fuzzy
 msgid "The 'imagemagick' package is required!"
-msgstr "È richiesto il pacchetto 'playerctl'!"
+msgstr "È richiesto il pacchetto 'imagemagick'!"
 
 #. 6.4/applet.js:1865
-#, fuzzy
 msgid "Please select 'Install imagemagick' in this menu"
-msgstr "Seleziona \"Installa playerctl\" in questo menù"
+msgstr "Seleziona \"Installa imagemagick\" in questo menù"
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:2070
 msgid "Remove the OsdWithNumber extension"
-msgstr ""
+msgstr "Rimuovere l'estensione OsdWithNumber"
 
 #. 6.4/applet.js:2090
-#, fuzzy
 msgid "Install imagemagick"
-msgstr "Installa playerctl"
+msgstr "Installa imagemagick"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -1073,122 +1074,118 @@ msgstr ""
 "inferiore al 100%, ad esempio sul computer di un bambino."
 
 #. 6.4->settings-schema.json->page_menus->title
-#, fuzzy
 msgid "Menus"
 msgstr "Menù"
 
 #. 6.4->settings-schema.json->sectionMenu2->title
 msgid "Context Menu"
-msgstr ""
+msgstr "Menù Contestuale"
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
-msgstr ""
+msgstr "Aspetto icona"
 
 #. 6.4->settings-schema.json->sectionIcon2->title
-#, fuzzy
 msgid "Icon colors"
-msgstr "Colore icona: 0%-100%"
+msgstr "Colori icona"
 
 #. 6.4->settings-schema.json->sectionIcon3->title
 msgid "Scrolling"
-msgstr ""
+msgstr "Scorrimento"
 
 #. 6.4->settings-schema.json->sectionSound5->title
-#, fuzzy
 msgid "Remove incompatible extensions"
-msgstr "Rimuovi le applet incompatibili"
+msgstr "Rimuovi le estensioni incompatibili"
 
 #. 6.4->settings-schema.json->sectionCommands->title
 msgid "Custom commands"
-msgstr ""
+msgstr "Comandi personalizzati"
 
 #. 6.4->settings-schema.json->showMediaOptical->description
 msgid "Show Media-Optical icon"
-msgstr ""
+msgstr "Mostra icona Media-Ottico"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->description
 msgid "View Full Album Art"
-msgstr ""
+msgstr "Visualizza la Copertina Completa dell'Album"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
 msgid ""
 "When unchecked, Album Art in the menu may be partially covered by Artist and "
 "Title."
 msgstr ""
+"Se non selezionata, la copertina dell'album nel menu potrebbe essere "
+"parzialmente coperta da Artista e Titolo."
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
-#, fuzzy
 msgid "Keep the App selector open"
-msgstr "Tieni aperto il selettore del controller del lettore"
+msgstr "Mantieni aperto il selettore dell'app"
 
 #. 6.4->settings-schema.json->keepOutputListOpen->description
-#, fuzzy
 msgid "Keep the Output Device selector open"
-msgstr "Tieni aperto il selettore del controller del lettore"
+msgstr "Mantieni aperto il selettore del dispositivo di output"
 
 #. 6.4->settings-schema.json->keepInputListOpen->description
-#, fuzzy
 msgid "Keep the Input Device selector open"
-msgstr "Tieni aperto il selettore del controller del lettore"
+msgstr "Mantieni aperto il selettore del dispositivo di input"
 
 #. 6.4->settings-schema.json->keepCommandListOpen->description
-#, fuzzy
 msgid "Keep the Command selector open"
-msgstr "Tieni aperto il selettore del controller del lettore"
+msgstr "Mantieni aperto il selettore dei comandi"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
-msgstr ""
+msgstr "Se il titolo è troppo lungo, terminalo con:"
 
 #. 6.4->settings-schema.json->toolongchars->tooltip
 msgid "Emoji accepted"
-msgstr ""
+msgstr "Emoji accettate"
 
 #. 6.4->settings-schema.json->showalbumDelay->description
 msgid "Delay between icon and album art display (seconds)"
 msgstr ""
+"Ritardo tra la visualizzazione dell'icona e quella della copertina "
+"dell'album (secondi)"
 
 #. 6.4->settings-schema.json->reverseScrolling->description
 msgid "Reverse scrolling effect"
-msgstr ""
+msgstr "Effetto scorrimento inverso"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
 msgstr "Se mostrare o meno i tasti multimediali OSD"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
-#, fuzzy
 msgid "Show volume level in OSD"
-msgstr "Mostra il livello del volume nell'OSD all'avvio"
+msgstr "Mostra il livello del volume nell'OSD"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "Mostra '%' nell'OSD"
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
-#, fuzzy
 msgid "Show horizontal OSD"
-msgstr "Mostra il livello del volume nell'OSD all'avvio"
+msgstr "Mostra OSD orizzontale"
 
 #. 6.4->settings-schema.json->showBarLevel->description
-#, fuzzy
 msgid "Show bar level in OSD"
-msgstr "Mostra il livello del volume nell'OSD all'avvio"
+msgstr "Mostra il livello della barra nell'OSD"
 
 #. 6.4->settings-schema.json->custom-commands-label->description
 msgid ""
 "These commands will appear in the context menu once you've reloaded this "
 "applet."
 msgstr ""
+"Questi comandi appariranno nel menu contestuale una volta ricaricata "
+"l'applet."
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 #. 6.4->settings-schema.json->custom-commands-list->columns->title
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
