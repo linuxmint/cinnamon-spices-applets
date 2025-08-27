@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-03-30 14:17+0200\n"
-"PO-Revision-Date: 2025-01-03 15:03+0100\n"
+"PO-Revision-Date: 2025-08-27 18:03+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -132,7 +132,7 @@ msgstr ""
 
 #. lib/checkDependencies.js:385
 msgid "Please install these packages:"
-msgstr ""
+msgstr "Si prega di installare questi pacchetti:"
 
 #. lib/checkDependencies.js:389 lib/checkDependencies.js:399
 msgid "Some dependencies are not installed!"
@@ -140,7 +140,7 @@ msgstr "Alcune dipendenze non sono installate!"
 
 #. lib/checkDependencies.js:401
 msgid "Install these packages now"
-msgstr ""
+msgstr "Installa questi pacchetti ora"
 
 #. lib/util.js:244
 #, javascript-format
@@ -205,14 +205,13 @@ msgstr ""
 
 #. metadata.json->contributors
 msgid "claudiux: Author. JEleniel: support for NVidia video cards."
-msgstr ""
+msgstr "claudiux: Autore. JEleniel: supporto per schede video NVidia."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "⦿ Temperature"
 msgstr "⦿ Temperatura"
 
 #. settings-schema.json->page_Fans->title
-#, fuzzy
 msgid "𖣘 Fan"
 msgstr "🤂 Ventola"
 
@@ -405,27 +404,27 @@ msgstr "Dimensione carattere (% della dimensione standard)"
 
 #. settings-schema.json->horizontal_width->description
 msgid "Display width (pixels) for horizontal panels"
-msgstr ""
+msgstr "Larghezza di visualizzazione (pixel) per i pannelli orizzontali"
 
 #. settings-schema.json->horizontal_width->tooltip
 msgid "0 means automatic. This value does not include border."
-msgstr ""
+msgstr "0 significa automatico. Questo valore non include il bordo."
 
 #. settings-schema.json->separator_type->options
 msgid "(none)"
-msgstr ""
+msgstr "(nessuno)"
 
 #. settings-schema.json->separator_type->options
 msgid "blank"
-msgstr ""
+msgstr "vuoto"
 
 #. settings-schema.json->separator_type->options
 msgid "bar"
-msgstr ""
+msgstr "barra"
 
 #. settings-schema.json->separator_type->description
 msgid "Separator"
-msgstr ""
+msgstr "Separatore"
 
 #. settings-schema.json->char_color_customized->description
 msgid "Customize Text Color"
@@ -436,18 +435,12 @@ msgid "Text Color"
 msgstr "Colore del testo"
 
 #. settings-schema.json->crit_color->description
-#, fuzzy
 msgid "Critical Value Color"
-msgstr ""
-"Valore\n"
-"critico"
+msgstr "Colore Valore Critico"
 
 #. settings-schema.json->high_color->description
-#, fuzzy
 msgid "High Value Color"
-msgstr ""
-"Valore\n"
-"elevato"
+msgstr "Colore Valore Elevato"
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -543,14 +536,14 @@ msgstr ""
 
 #. settings-schema.json->chars_temp->tooltip
 msgid "The first emoji in this list is used for temperature"
-msgstr ""
+msgstr "La prima emoji in questo elenco è usata per la temperatura"
 
 #. settings-schema.json->chars_temp->columns->title
 #. settings-schema.json->chars_fan->columns->title
 #. settings-schema.json->chars_volt->columns->title
 #. settings-schema.json->chars_intrusion->columns->title
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_volt->description
@@ -739,12 +732,11 @@ msgstr ""
 
 #. settings-schema.json->chars_fan->tooltip
 msgid "The first emoji in this list is used for fan"
-msgstr ""
+msgstr "La prima emoji in questo elenco è usata per la ventola"
 
 #. settings-schema.json->strictly_positive_fan->description
-#, fuzzy
 msgid "Show only positive or zero values"
-msgstr "Mostra solo valori rigorosamente positivi"
+msgstr "Mostra solo valori positivi o zero"
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -792,7 +784,7 @@ msgstr ""
 
 #. settings-schema.json->chars_volt->tooltip
 msgid "The first emoji in this list is used for voltage"
-msgstr ""
+msgstr "La prima emoji in questo elenco è usata per la tensione"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -870,7 +862,7 @@ msgstr ""
 
 #. settings-schema.json->chars_intrusion->tooltip
 msgid "The first emoji in this list is used for intrusion"
-msgstr ""
+msgstr "La prima emoji in questo elenco è usata per l'intrusione"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"

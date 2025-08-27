@@ -9,15 +9,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-06 01:31+0200\n"
-"PO-Revision-Date: 2022-06-03 15:49+0200\n"
+"PO-Revision-Date: 2025-08-27 18:19+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:178 6.4/applet.js:262
 msgid "The following packages were not found:"
@@ -56,24 +56,24 @@ msgstr "Blu"
 
 #. 6.4/applet.js:46 6.4/applet.js:927
 msgid "Sunrise"
-msgstr ""
+msgstr "Alba"
 
 #. 6.4/applet.js:47 6.4/applet.js:929
 msgid "Sunset"
-msgstr ""
+msgstr "Tramonto"
 
 #. 6.4/applet.js:722
 msgid "Reload"
-msgstr ""
+msgstr "Ricarica"
 
 #. 6.4/applet.js:732
 msgid "Configure Presets"
-msgstr ""
+msgstr "Configura Preset"
 
 #. 6.4->settings-schema.json->page_presets->title
 #. 6.4/applet.js:742
 msgid "Presets"
-msgstr ""
+msgstr "Preset"
 
 #. metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
@@ -86,7 +86,7 @@ msgstr "Luminosità e gamma applet"
 #. settings-schema.json->configuration_start->description
 #. 6.4->settings-schema.json->section_config->title
 msgid "Configuration"
-msgstr ""
+msgstr "Configurazione"
 
 #. settings-schema.json->apply_startup->description
 #. 6.4->settings-schema.json->apply_startup->description
@@ -256,16 +256,16 @@ msgstr "Un'icona visualizzata in un pannello"
 
 #. 6.4->settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #. 6.4->settings-schema.json->section_presets->title
 #. 6.4->settings-schema.json->preset_list->description
 msgid "Your presets"
-msgstr ""
+msgstr "I tuoi preset"
 
 #. 6.4->settings-schema.json->disable_nightmode->description
 msgid "Disable Night Mode"
-msgstr ""
+msgstr "Disabilita Luce Notturna"
 
 #. 6.4->settings-schema.json->disable_nightmode->tooltip
 msgid ""
@@ -273,18 +273,23 @@ msgid ""
 "This prevents the screen from flickering.\n"
 "The adjustment time can be up to twice the number of seconds indicated below."
 msgstr ""
+"Disattiva la modalità Luce Notturna di Cinnamon mentre questa applet è in "
+"esecuzione.\n"
+"Questo impedisce lo sfarfallio dello schermo.\n"
+"Il tempo di regolazione può essere fino al doppio del numero di secondi "
+"indicato di seguito."
 
 #. 6.4->settings-schema.json->apply_changing_monitors->description
 msgid "Apply when the number of monitors changes"
-msgstr ""
+msgstr "Applica quando cambia il numero di monitor"
 
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
-msgstr ""
+msgstr "Tasto di scelta rapida per aumentare la luminosità"
 
 #. 6.4->settings-schema.json->brightness_down_shortcut->description
 msgid "Hotkey to Decrease brightness"
-msgstr ""
+msgstr "Tasto di scelta rapida per diminuire la luminosità"
 
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
@@ -293,54 +298,67 @@ msgid ""
 "Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
 "into account."
 msgstr ""
+"È possibile definire o modificare i preset qui sotto, accessibili tramite il "
+"menù contestuale dell'applet.\n"
+"Vengono prese in considerazione solo le prime caselle selezionate \"Inizia "
+"all'alba\" e \"Inizia al tramonto\"."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Show\n"
 "in menu"
 msgstr ""
+"Mostra\n"
+"nel menù"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Red"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Rosso"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Green"
-msgstr "Verde"
+msgstr ""
+"Gamma\n"
+"Verde"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
-#, fuzzy
 msgid ""
 "Gamma\n"
 "Blue"
-msgstr "Gamma"
+msgstr ""
+"Gamma\n"
+"Blu"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunrise"
 msgstr ""
+"Inizia\n"
+"all'Alba"
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid ""
 "Start at\n"
 "Sunset"
 msgstr ""
+"Inizia\n"
+"al Tramonto"
 
 #. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
 msgid "Set Sunrise and Sunset times"
-msgstr ""
+msgstr "Imposta gli orari di alba e tramonto"
 
 #. 6.4->settings-schema.json->preset_reload->description
 msgid "Apply all changes"
-msgstr ""
+msgstr "Applica tutti i cambiamenti"

@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-25 15:21+0200\n"
-"PO-Revision-Date: 2025-01-03 15:12+0100\n"
+"PO-Revision-Date: 2025-08-27 18:50+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -285,26 +285,24 @@ msgid "Execution of '%s' failed:"
 msgstr "Esecuzione di '%s' fallita:"
 
 #. 6.4/applet.js:40
-#, fuzzy
 msgid "Core 128:"
-msgstr "Core"
+msgstr "Core 128:"
 
 #. 6.4/applet.js:41
 msgid "Unrecoverable:"
-msgstr ""
+msgstr "Irrecuperabile:"
 
 #. 6.4/applet.js:42
 msgid "Recoverable:"
-msgstr ""
+msgstr "Recuperabile:"
 
 #. 6.4/applet.js:389
-#, fuzzy
 msgid "Refresh All"
-msgstr "Ricarica grafici"
+msgstr "Ricarica Tutto"
 
 #. 6.4/applet.js:495 6.4/applet.js:536
 msgid "root"
-msgstr ""
+msgstr "root"
 
 #. 6.4->settings-schema.json->pageNetwork->title
 #. 6.4/applet.js:727 6.4/applet.js:1163 3.0/prefsui.glade:1154
@@ -315,9 +313,8 @@ msgstr "Rete"
 
 #. 6.4/applet.js:791 6.4/applet.js:1292 6.4/applet.js:1375 6.4/applet.js:1453
 #. 6.4/applet.js:1455
-#, fuzzy
 msgid "Disks"
-msgstr "IO Disco"
+msgstr "Dischi"
 
 #. 6.4->settings-schema.json->pageMem->title
 #. 6.4/applet.js:962 3.0/prefsui.glade:832 3.2/prefsui.glade:884
@@ -328,11 +325,11 @@ msgstr "Memoria"
 
 #. 6.4/applet.js:996
 msgid "Buffers/Cache/Shared"
-msgstr ""
+msgstr "Buffers/Cache/Condivisa"
 
 #. 6.4/applet.js:1024 6.4/applet.js:1126 6.4/applet.js:1435
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #. 6.4/applet.js:1026 3.0/prefsui.glade:684 3.2/prefsui.glade:736
 #. 6.0/prefsui.glade:809 3.4/prefsui.glade:663 5.6/prefsui.glade:809
@@ -341,26 +338,24 @@ msgid "Buffer"
 msgstr "Buffer"
 
 #. 6.4/applet.js:1026
-#, fuzzy
 msgid "Cache"
 msgstr "Cache"
 
 #. 6.4/applet.js:1026
 msgid "Shared"
-msgstr ""
+msgstr "Condivisa"
 
 #. 6.4/applet.js:1122
 msgid "CPUs"
-msgstr ""
+msgstr "CPU"
 
 #. 6.4/applet.js:1250
-#, fuzzy
 msgid "Networks"
-msgstr "Rete"
+msgstr "Reti"
 
 #. 6.4/applet.js:1430
 msgid "Usage"
-msgstr ""
+msgstr "Utilizzo"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -401,9 +396,8 @@ msgid "Disk IO"
 msgstr "IO Disco"
 
 #. 6.4->settings-schema.json->pageDiskUsage->title
-#, fuzzy
 msgid "Disk Usage"
-msgstr "IO Disco"
+msgstr "Utilizzo Disco"
 
 #. 6.4->settings-schema.json->pageColors->title
 #. 6.4->settings-schema.json->sectionGeneralColors->title
@@ -424,7 +418,7 @@ msgstr "Colori"
 #. 6.4->settings-schema.json->sectionDiskOptions->title
 #. 6.4->settings-schema.json->sectionDiskUsageOptions->title
 msgid "Options"
-msgstr ""
+msgstr "Opzioni"
 
 #. 6.4->settings-schema.json->sectionCPUColorsByActivity->title
 #. 6.0/prefsui.glade:538 5.6/prefsui.glade:538 4.0/prefsui.glade:538
@@ -451,11 +445,11 @@ msgstr "Dispositivi"
 
 #. 6.4->settings-schema.json->sectionDiskUsagePaths->title
 msgid "Paths"
-msgstr ""
+msgstr "Percorsi"
 
 #. 6.4->settings-schema.json->sectionColors->title
 msgid "Your colors"
-msgstr ""
+msgstr "I tuoi colori"
 
 #. 6.4->settings-schema.json->labelsOn->description
 #. 3.0/prefsui.glade:81 3.2/prefsui.glade:81 6.0/prefsui.glade:90
@@ -465,11 +459,11 @@ msgstr "Etichette"
 
 #. 6.4->settings-schema.json->borderOn->description
 msgid "Add a border to each graph"
-msgstr ""
+msgstr "Aggiungi un bordo a ciascun grafico"
 
 #. 6.4->settings-schema.json->graphSpacing->description
 msgid "Graph spacing"
-msgstr ""
+msgstr "Spaziatura del grafico"
 
 #. 6.4->settings-schema.json->thickness->description
 #. 6.0/prefsui.glade:168 5.6/prefsui.glade:168 4.0/prefsui.glade:168
@@ -478,7 +472,7 @@ msgstr "Spessore delle curve"
 
 #. 6.4->settings-schema.json->useIconSize->description
 msgid "Limit height to the size of a colored icon"
-msgstr ""
+msgstr "Limita l'altezza alla dimensione di un'icona colorata"
 
 #. 6.4->settings-schema.json->refreshRate->description
 #. 3.0/prefsui.glade:132 3.2/prefsui.glade:132 6.0/prefsui.glade:140
@@ -493,9 +487,8 @@ msgid "Label Color"
 msgstr "Colore etichetta"
 
 #. 6.4->settings-schema.json->borderColor->description
-#, fuzzy
 msgid "Border Color"
-msgstr "Colore di sfondo"
+msgstr "Colore bordo"
 
 #. 6.4->settings-schema.json->backgroundColor->description
 #. 3.0/prefsui.glade:245 3.2/prefsui.glade:297 6.0/prefsui.glade:263
@@ -504,18 +497,16 @@ msgid "Background Color"
 msgstr "Colore di sfondo"
 
 #. 6.4->settings-schema.json->removeEnlightenment->description
-#, fuzzy
 msgid "Remove Enlightenment of this applet"
-msgstr "Ricarica questa applet"
+msgstr "Rimuovi l'illuminazione di questa applet"
 
 #. 6.4->settings-schema.json->CPU_labelOn->description
 #. 6.4->settings-schema.json->Mem_labelOn->description
 #. 6.4->settings-schema.json->Net_labelOn->description
 #. 6.4->settings-schema.json->Disk_labelOn->description
 #. 6.4->settings-schema.json->DiskUsage_labelOn->description
-#, fuzzy
 msgid "Label"
-msgstr "Etichette"
+msgstr "Etichetta"
 
 #. 6.4->settings-schema.json->CPU_squared->description
 #. 6.4->settings-schema.json->Mem_squared->description
@@ -523,7 +514,7 @@ msgstr "Etichette"
 #. 6.4->settings-schema.json->Disk_squared->description
 #. 6.4->settings-schema.json->DiskUsage_squared->description
 msgid "Square view"
-msgstr ""
+msgstr "Vista quadrata"
 
 #. 6.4->settings-schema.json->CPU_width->description
 #. 6.4->settings-schema.json->Mem_width->description
@@ -546,7 +537,7 @@ msgstr "Larghezza"
 #. 6.4->settings-schema.json->Disk_mergeAll->description
 #. 6.4->settings-schema.json->DiskUsage_mergeAll->description
 msgid "Merge all"
-msgstr ""
+msgstr "Unisci tutto"
 
 #. 6.4->settings-schema.json->CPU_byActivity->description
 #. 6.0/prefsui.glade:433 5.6/prefsui.glade:433 4.0/prefsui.glade:433
@@ -564,35 +555,33 @@ msgid ""
 "The fifth, named CPU4, will have the same color as CPU0; the sixth, CPU5, "
 "will have the same color as CPU1, and so on."
 msgstr ""
+"Le CPU sono colorate in gruppi di quattro: CPU0, CPU1, CPU2 e CPU3.\n"
+"La quinta, denominata CPU4, avrà lo stesso colore della CPU0; la sesta, "
+"CPU5, avrà lo stesso colore della CPU1, e così via."
 
 #. 6.4->settings-schema.json->CPU_color0->description
-#, fuzzy
 msgid "CPU0 Color"
-msgstr "Colori"
+msgstr "Colore CPU0"
 
 #. 6.4->settings-schema.json->CPU_color1->description
-#, fuzzy
 msgid "CPU1 Color"
-msgstr "Colori"
+msgstr "Colore CPU1"
 
 #. 6.4->settings-schema.json->CPU_color2->description
-#, fuzzy
 msgid "CPU2 Color"
-msgstr "Colori"
+msgstr "Colore CPU2"
 
 #. 6.4->settings-schema.json->CPU_color3->description
-#, fuzzy
 msgid "CPU3 Color"
-msgstr "Colori"
+msgstr "Colore CPU3"
 
 #. 6.4->settings-schema.json->CPU_activity_0_20->description
-#, fuzzy
 msgid "0-20"
-msgstr "00-20"
+msgstr "0-20"
 
 #. 6.4->settings-schema.json->Mem_startAt12Oclock->description
 msgid "Origin at 12 o'clock"
-msgstr ""
+msgstr "Origine alle ore 12"
 
 #. 6.4->settings-schema.json->Mem_colorUsedup->description
 #. 6.4->settings-schema.json->DiskUsage_colorUsed->description
@@ -610,19 +599,19 @@ msgstr "Libera"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->description
 msgid "Relative width for Swap graph"
-msgstr ""
+msgstr "Larghezza relativa per il grafico Swap"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "25%, left side"
-msgstr ""
+msgstr "25%, lato sinistro"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->options
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #. 6.4->settings-schema.json->Mem_swapWidth->tooltip
 msgid ""
@@ -632,6 +621,11 @@ msgid ""
 "left of the circle.\n"
 "None: No Swap bar."
 msgstr ""
+"100%: il grafico Swap è una barra che occupa l'intera larghezza del grafico, "
+"dietro il cerchio.\n"
+"10%: il grafico Swap è una barra che occupa il 10% della larghezza del "
+"grafico, a sinistra del cerchio.\n"
+"Nessuno: nessuna barra Swap."
 
 #. 6.4->settings-schema.json->Net_autoscale->description
 #. 6.4->settings-schema.json->Disk_autoscale->description
@@ -654,77 +648,72 @@ msgstr "Logaritmico"
 #. 6.4->settings-schema.json->Net_getdevlist_btn->description
 #. 6.4->settings-schema.json->Disk_getdevlist_btn->description
 msgid "Update this device list"
-msgstr ""
+msgstr "Aggiorna questo elenco di dispositivi"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
-#, fuzzy
 msgid "Enabled"
-msgstr "Abilita"
+msgstr "Abilitato"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 msgid "⚠️ Id️"
-msgstr ""
+msgstr "⚠️ Id️"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
-#, fuzzy
 msgid "Color Down"
-msgstr "Colori"
+msgstr "Colore Giù"
 
 #. 6.4->settings-schema.json->Net_devicesList->columns->title
-#, fuzzy
 msgid "Color Up"
-msgstr "Colori"
+msgstr "Colore Su"
 
 #. 6.4->settings-schema.json->Net_cleardevlist_btn->description
 #. 6.4->settings-schema.json->Disk_cleardevlist_btn->description
 msgid "Clear this device list"
-msgstr ""
+msgstr "Cancella questo elenco di dispositivi"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Id"
-msgstr ""
+msgstr "⚠️ Id"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
 msgid "⚠️ Sector Size"
-msgstr ""
+msgstr "⚠️ Dimensione Settore"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
-#, fuzzy
 msgid "Color Read"
-msgstr "Colori"
+msgstr "Colore Lettura"
 
 #. 6.4->settings-schema.json->Disk_devicesList->columns->title
-#, fuzzy
 msgid "Color Write"
-msgstr "Scrittura"
+msgstr "Colore Scrittura"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->description
 msgid "Type of chart"
-msgstr ""
+msgstr "Tipo di grafico"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Bar"
-msgstr ""
+msgstr "Barra"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Pie"
-msgstr ""
+msgstr "Torta"
 
 #. 6.4->settings-schema.json->DiskUsage_colorAlert->description
 msgid "Alert"
-msgstr ""
+msgstr "Avviso"
 
 #. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
 msgid "Update this path list"
-msgstr ""
+msgstr "Aggiorna questo elenco di percorsi"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid ""
@@ -732,174 +721,145 @@ msgid ""
 "value (in %)\n"
 "reaches"
 msgstr ""
+"Avvisa quando\n"
+"il valore (in %)\n"
+"raggiunge"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid "Path"
-msgstr ""
+msgstr "Percorso"
 
 #. 6.4->settings-schema.json->color0->description
-#, fuzzy
 msgid "Color #0"
-msgstr "Colori"
+msgstr "Colore #0"
 
 #. 6.4->settings-schema.json->color1->description
-#, fuzzy
 msgid "Color #1"
-msgstr "Colori"
+msgstr "Colore #1"
 
 #. 6.4->settings-schema.json->color2->description
-#, fuzzy
 msgid "Color #2"
-msgstr "Colori"
+msgstr "Colore #2"
 
 #. 6.4->settings-schema.json->color3->description
-#, fuzzy
 msgid "Color #3"
-msgstr "Colori"
+msgstr "Colore #3"
 
 #. 6.4->settings-schema.json->color4->description
-#, fuzzy
 msgid "Color #4"
-msgstr "Colori"
+msgstr "Colore #4"
 
 #. 6.4->settings-schema.json->color5->description
-#, fuzzy
 msgid "Color #5"
-msgstr "Colori"
+msgstr "Colore #5"
 
 #. 6.4->settings-schema.json->color6->description
-#, fuzzy
 msgid "Color #6"
-msgstr "Colori"
+msgstr "Colore #6"
 
 #. 6.4->settings-schema.json->color7->description
-#, fuzzy
 msgid "Color #7"
-msgstr "Colori"
+msgstr "Colore #7"
 
 #. 6.4->settings-schema.json->color8->description
-#, fuzzy
 msgid "Color #8"
-msgstr "Colori"
+msgstr "Colore #8"
 
 #. 6.4->settings-schema.json->color9->description
-#, fuzzy
 msgid "Color #9"
-msgstr "Colori"
+msgstr "Colore #9"
 
 #. 6.4->settings-schema.json->color10->description
-#, fuzzy
 msgid "Color #10"
-msgstr "Colori"
+msgstr "Colore #10"
 
 #. 6.4->settings-schema.json->color11->description
-#, fuzzy
 msgid "Color #11"
-msgstr "Colori"
+msgstr "Colore #11"
 
 #. 6.4->settings-schema.json->color12->description
-#, fuzzy
 msgid "Color #12"
-msgstr "Colori"
+msgstr "Colore #12"
 
 #. 6.4->settings-schema.json->color13->description
-#, fuzzy
 msgid "Color #13"
-msgstr "Colori"
+msgstr "Colore #13"
 
 #. 6.4->settings-schema.json->color14->description
-#, fuzzy
 msgid "Color #14"
-msgstr "Colori"
+msgstr "Colore #14"
 
 #. 6.4->settings-schema.json->color15->description
-#, fuzzy
 msgid "Color #15"
-msgstr "Colori"
+msgstr "Colore #15"
 
 #. 6.4->settings-schema.json->color16->description
-#, fuzzy
 msgid "Color #16"
-msgstr "Colori"
+msgstr "Colore #16"
 
 #. 6.4->settings-schema.json->color17->description
-#, fuzzy
 msgid "Color #17"
-msgstr "Colori"
+msgstr "Colore #17"
 
 #. 6.4->settings-schema.json->color18->description
-#, fuzzy
 msgid "Color #18"
-msgstr "Colori"
+msgstr "Colore #18"
 
 #. 6.4->settings-schema.json->color19->description
-#, fuzzy
 msgid "Color #19"
-msgstr "Colori"
+msgstr "Colore #19"
 
 #. 6.4->settings-schema.json->color20->description
-#, fuzzy
 msgid "Color #20"
-msgstr "Colori"
+msgstr "Colore #20"
 
 #. 6.4->settings-schema.json->color21->description
-#, fuzzy
 msgid "Color #21"
-msgstr "Colori"
+msgstr "Colore #21"
 
 #. 6.4->settings-schema.json->color22->description
-#, fuzzy
 msgid "Color #22"
-msgstr "Colori"
+msgstr "Colore #22"
 
 #. 6.4->settings-schema.json->color23->description
-#, fuzzy
 msgid "Color #23"
-msgstr "Colori"
+msgstr "Colore #23"
 
 #. 6.4->settings-schema.json->color24->description
-#, fuzzy
 msgid "Color #24"
-msgstr "Colori"
+msgstr "Colore #24"
 
 #. 6.4->settings-schema.json->color25->description
-#, fuzzy
 msgid "Color #25"
-msgstr "Colori"
+msgstr "Colore #25"
 
 #. 6.4->settings-schema.json->color26->description
-#, fuzzy
 msgid "Color #26"
-msgstr "Colori"
+msgstr "Colore #26"
 
 #. 6.4->settings-schema.json->color27->description
-#, fuzzy
 msgid "Color #27"
-msgstr "Colori"
+msgstr "Colore #27"
 
 #. 6.4->settings-schema.json->color28->description
-#, fuzzy
 msgid "Color #28"
-msgstr "Colori"
+msgstr "Colore #28"
 
 #. 6.4->settings-schema.json->color29->description
-#, fuzzy
 msgid "Color #29"
-msgstr "Colori"
+msgstr "Colore #29"
 
 #. 6.4->settings-schema.json->color30->description
-#, fuzzy
 msgid "Color #30"
-msgstr "Colori"
+msgstr "Colore #30"
 
 #. 6.4->settings-schema.json->color31->description
-#, fuzzy
 msgid "Color #31"
-msgstr "Colori"
+msgstr "Colore #31"
 
 #. 6.4->settings-schema.json->labelWarning->description
 msgid "Data marked with ⚠️ must not be changed!"
-msgstr ""
+msgstr "I dati contrassegnati con ⚠️ non devono essere modificati!"
 
 #. 3.0/prefsui.glade:49 3.2/prefsui.glade:49 6.0/prefsui.glade:56
 #. 3.4/prefsui.glade:49 5.6/prefsui.glade:56 4.0/prefsui.glade:56

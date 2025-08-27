@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-05 12:43+0200\n"
-"PO-Revision-Date: 2025-05-18 13:52+0200\n"
+"PO-Revision-Date: 2025-08-27 18:53+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,18 +16,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. applet.js:44
-#, fuzzy
 msgid "Notifications applet conflict"
-msgstr "Notifiche disattivate"
+msgstr "Conflitto dell'applet di notifica"
 
 #. applet.js:45
 msgid ""
 "Conflict detected: notifications@cinnamon.org is active.\n"
 "Remove it and restart Cinnamon before using Notifications-Enhanced applet."
 msgstr ""
+"Conflitto rilevato: notifications@cinnamon.org è attivo.\n"
+"Rimuoverlo e riavviare Cinnamon prima di utilizzare l'applet Notifiche "
+"Migliorate."
 
 #. applet.js:120
 msgid "Do not disturb"
@@ -84,7 +86,6 @@ msgstr[0] "%d minuto fa"
 msgstr[1] "%d minuti fa"
 
 #. metadata.json->name
-#, fuzzy
 msgid "Notifications-Enhanced"
 msgstr "Notifiche Migliorate"
 
@@ -113,27 +114,26 @@ msgid "Show the number of notifications"
 msgstr "Mostra il numero di notifiche"
 
 #. settings-schema.json->showEmptyTray->description
-#, fuzzy
 msgid "Show notification tray"
-msgstr "Mostra notifiche"
+msgstr "Mostra barra delle notifiche"
 
 #. settings-schema.json->showEmptyTray->tooltip
-#, fuzzy
 msgid "Check this to always show the notification tray."
-msgstr "Seleziona questo per ignorare le notifiche temporanee."
+msgstr ""
+"Seleziona questa opzione per visualizzare sempre la barra delle notifiche."
 
 #. settings-schema.json->showDisturbIcon->description
 msgid "Always show 'Do Not Disturb' icon"
-msgstr ""
+msgstr "Mostra sempre l'icona \"Non disturbare\""
 
 #. settings-schema.json->showDisturbIcon->tooltip
-#, fuzzy
 msgid ""
 "Check this to show the 'Do Not Disturb icon' on the panel even when the "
 "'Show notification tray' option is disabled."
 msgstr ""
-"Seleziona questa opzione per mostrare l'icona \"Non disturbare\" sul "
-"pannello anche quando l'opzione mostra anche se vuoto è disabilitata."
+"Seleziona questa opzione per visualizzare l'icona \"Non disturbare\" sul "
+"pannello anche quando l'opzione \"Mostra barra delle notifiche\" è "
+"disabilitata."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"
@@ -157,15 +157,13 @@ msgid "Set keybinding(s) to clear all notifications."
 msgstr "Imposta le combinazioni di tasti per cancellare tutte le notifiche."
 
 #. settings-schema.json->keyMute->description
-#, fuzzy
 msgid "Enable or disable notifications"
-msgstr "Abilita notifiche"
+msgstr "Abilita o disabilita notifiche"
 
 #. settings-schema.json->keyMute->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to enable or disable notifications."
 msgstr ""
-"Imposta le combinazioni di tasti per attivare o disattivare le notifiche."
+"Imposta i tasti di scelta rapida per abilitare o disabilitare le notifiche."
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

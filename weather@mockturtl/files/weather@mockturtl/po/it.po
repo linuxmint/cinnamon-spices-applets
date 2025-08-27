@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-23 09:28+0100\n"
-"PO-Revision-Date: 2025-01-03 15:33+0100\n"
+"PO-Revision-Date: 2025-08-27 19:23+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -2093,23 +2093,25 @@ msgstr "Le precipitazioni inizieranno entro {precipStart} minuti"
 
 #. 3.8/weather-applet.js:19517
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Basso rischio di danni da esposizione al sole, indice UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19521
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Rischio moderato di danni da esposizione al sole, indice UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19525
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Alto rischio di danni da esposizione al sole, indice UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19529
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
 msgstr ""
+"Danni molto elevati derivanti dall'esposizione al sole, indice di rischio "
+"UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19533
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Rischio estremo di danni da esposizione al sole, indice UV: {uvIndex}"
 
 #. 3.8/weather-applet.js:19650
 msgid "Forecast parsing failed, see logs for more details."
@@ -2731,8 +2733,8 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "Puoi inserire le coordinate 'Latitudine,Longitudine' (ad esempio "
 "51.5085,-0.1257) o usare 'Città,Codice-Paese' (ad esempio Roma,IT) o provare "
@@ -2990,19 +2992,19 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "La tua posizione nella maggior parte dei casi funziona automaticamente, ma "
-"puoi inserirla manualmente tramite le coordinate \"Latitudine, Longitudine\" "
-"(ad es. 51.5085,-0.1257) o utilizzare \"Città, codice paese\" (ad es. "
-"Roma,IT) o provare a inserire {Numero civico} {Via} {Città/Paese} {Codice "
-"postale} {Nazione}. L'algoritmo di ricerca è molto flessibile con il "
-"formato. Dopo 3 secondi senza digitare l'indirizzo che hai inserito viene "
-"sostituito automaticamente per convalidare la tua scelta."
+"puoi inserirla manualmente tramite le coordinate \"Latitudine, "
+"Longitudine\" (ad es. 51.5085,-0.1257) o utilizzare \"Città, codice "
+"paese\" (ad es. Roma,IT) o provare a inserire {Numero civico} {Via} {Città/"
+"Paese} {Codice postale} {Nazione}. L'algoritmo di ricerca è molto flessibile "
+"con il formato. Dopo 3 secondi senza digitare l'indirizzo che hai inserito "
+"viene sostituito automaticamente per convalidare la tua scelta."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
@@ -3099,9 +3101,8 @@ msgid "Test your command"
 msgstr "Prova il tuo comando"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Abilita la visualizzazione degli avvisi meteo"
+msgstr "Abilita la visualizzazione dell'indice UV"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3109,3 +3110,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Se il tuo provider lo supporta, l'indice UV verrà visualizzato nel menù a "
+"comparsa accanto agli orari di alba/tramonto. Non verrà visualizzato se "
+"l'indice UV è a basso rischio (0-2)."
