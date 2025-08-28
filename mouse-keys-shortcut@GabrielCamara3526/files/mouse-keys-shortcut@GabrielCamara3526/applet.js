@@ -9,6 +9,19 @@ const Gio = imports.gi.Gio;
 const UUID = "mouse-keys-shortcut@GabrielCamara3526";
 const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
 const PopupMenu = imports.ui.popupMenu;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+const HOME_DIR = GLib.get_home_dir();
+
+function _(str, uuid=UUID) {
+  if (str == null) return "";
+  Gettext.bindtextdomain(uuid, HOME_DIR + "/.local/share/locale");
+  let _str = Gettext.dgettext(uuid, str);
+  if (_str !== str)
+    return _str;
+  // If the text was not found locally then try with system-wide translations:
+  return Gettext.gettext(str);
+}
 
 class MyApplet extends Applet.IconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -23,8 +36,22 @@ class MyApplet extends Applet.IconApplet {
 
     this.settings.bindProperty(
       Settings.BindingDirection.IN,
-      "keyOpen",         
-      "keybinding",      
+      "enableNotifications",
+      "enableNotifications",
+      null,
+      null
+    );
+    this.settings.bindProperty(
+      Settings.BindingDirection.IN,
+      "enableOSD",
+      "enableOSD",
+      null,
+      null
+    );
+    this.settings.bindProperty(
+      Settings.BindingDirection.IN,
+      "keyOpen",
+      "keybinding",
       this.on_keybinding_changed.bind(this),
       null
     );
@@ -101,8 +128,8 @@ class MyApplet extends Applet.IconApplet {
 
   on_keybinding_changed() {
     Main.keybindingManager.addHotKey(
-      "toggle-keypad-mouse-shortcut",     
-      this.keybinding,                    
+      "toggle-keypad-mouse-shortcut",
+      this.keybinding,
       this.on_hotkey_triggered.bind(this)
     );
   }
@@ -113,15 +140,26 @@ class MyApplet extends Applet.IconApplet {
   }
 
   on_applet_clicked() {
+    let icon;
     let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
     let mouseKeysEnable = settings.get_boolean('mousekeys-enable');
     if (!mouseKeysEnable) {
-      settings.set_boolean('mousekeys-enable', true)
-      Main.notify("Mouse Keys: ON", "Control the pointer using the keypad");
-    } 
+      settings.set_boolean('mousekeys-enable', true);
+      if (this.enableNotifications)
+        Main.notify(_("Mouse Keys: ON", UUID), _("Control the pointer using the keypad", UUID));
+      if (this.enableOSD) {
+        icon = Gio.Icon.new_for_string("light-icon");
+        Main.osdWindowManager.show(-1, icon, _("Mouse Keys: ON", UUID), null);
+      }
+    }
     else {
       settings.set_boolean('mousekeys-enable', false)
-      Main.notify("Mouse Keys: OFF", "Control the pointer using the keypad")
+      if (this.enableNotifications)
+        Main.notify(_("Mouse Keys: OFF", UUID), _("Control the pointer using the mouse", UUID));
+      if (this.enableOSD) {
+        icon = Gio.Icon.new_for_string("dark-icon");
+        Main.osdWindowManager.show(-1, icon, _("Mouse Keys: OFF", UUID), null);
+      }
     }
       this.updateIcon()
     }

@@ -1,0 +1,90 @@
+# MOUSE KEYS SHORTCUT
+# This file is put in the public domain.
+# GabrielCamara3526, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-28 15:41+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: claudiux\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:29 applet.js:149
+msgid "Control the pointer using the keypad"
+msgstr "Contrôler le curseur à l'aide du clavier numérique"
+
+#. applet.js:149 applet.js:152
+msgid "Mouse Keys: ON"
+msgstr "Touches de la souris : ACTIVÉ"
+
+#. applet.js:158 applet.js:161
+msgid "Mouse Keys: OFF"
+msgstr "Touches de la souris : DÉSACTIVÉ"
+
+#. applet.js:158
+msgid "Control the pointer using the mouse"
+msgstr "Contrôler le curseur avec la souris"
+
+#. metadata.json->name
+msgid "Mouse Keys Shortcut"
+msgstr "Raccourci clavier des touches de la souris"
+
+#. metadata.json->description
+msgid "Trigger this applet to control the pointer using the keypad"
+msgstr "Utiliser le clavier pour contrôler le pointeur de la souris"
+
+#. settings-schema.json->section1->description
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+#. settings-schema.json->enableShortcut->description
+msgid "Use custom shortcut"
+msgstr "Utiliser un raccourci personnalisé"
+
+#. settings-schema.json->keyOpen->description
+msgid "Mouse Keys accessibility shortcut"
+msgstr ""
+"Raccourci clavier pour l'accessibilité de la souris à l'aide de touches"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Shortcut to enable/disable mouse keys setting"
+msgstr ""
+"Raccourci pour activer/désactiver le contrôle de la souris à l'aide des "
+"touches"
+
+#. settings-schema.json->section2->description
+msgid "Mouse Keys"
+msgstr "Touches de la souris"
+
+#. settings-schema.json->initial-delay->description
+msgid "Initial delay"
+msgstr "Délai initial"
+
+#. settings-schema.json->acceleration-time->description
+msgid "Acceleration time"
+msgstr "Temps d'accélération"
+
+#. settings-schema.json->maximum-speed->description
+msgid "Maximum speed"
+msgstr "Vitesse maximale"
+
+#. settings-schema.json->section->description
+msgid "Notifications"
+msgstr "Notifications"
+
+#. settings-schema.json->enableNotifications->description
+msgid "Show notifications"
+msgstr "Afficher les notifications"
+
+#. settings-schema.json->enableOSD->description
+msgid "Show OSD"
+msgstr "Afficher un OSD"
