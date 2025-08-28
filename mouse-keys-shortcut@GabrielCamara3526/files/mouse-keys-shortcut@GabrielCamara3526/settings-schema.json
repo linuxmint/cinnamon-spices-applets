@@ -42,5 +42,19 @@
     "max": 500,
     "step": 10,
     "description": "Maximum speed"
+  },
+  "section": {
+    "type": "section",
+    "description": "Notifications"
+  },
+  "enableNotifications": {
+    "type": "switch",
+    "default": true,
+    "description": "Show notifications"
+  },
+  "enableOSD": {
+    "type": "switch",
+    "default": false,
+    "description": "Show OSD"
   }
 }
