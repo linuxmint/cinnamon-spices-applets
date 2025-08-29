@@ -152,8 +152,10 @@ MicLevel.prototype = {
         }
     },
 
-    on_applet_removed: function() {
-        Mainloop.source_remove(this.tooltip_info);
+    on_applet_removed_from_panel: function() {
+        if (this.tooltip_info) {
+            Mainloop.source_remove(this.tooltip_info);
+        }
         this.settings.finalize();
         this.enabled = false;
         this.bt_only = false;

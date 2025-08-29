@@ -166,7 +166,7 @@ BtBattery.prototype = {
         }
     },
 
-    on_applet_removed: function() {
+    on_applet_removed_from_panel: function() {
         this.settings.finalize();
     },
 

@@ -159,7 +159,7 @@ UpdatesNotifier.prototype = {
         this.menu.toggle();
     },
 
-    on_applet_removed: function () {
+    on_applet_removed_from_panel: function () {
         if (this.interval) {
             Util.clearInterval(this.interval);
         }
