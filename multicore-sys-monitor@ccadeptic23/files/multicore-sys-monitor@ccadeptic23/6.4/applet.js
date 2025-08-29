@@ -196,8 +196,8 @@ class MCSM extends Applet.IconApplet {
         for (let i=0; i<nb_colors; i++)
             this.settings.bind(`color${i}`, `color${i}`, () => { this.on_color_changed() });
 
-        if (this.refreshRate < 1000)
-            this.refreshRate = 1000;
+        if (this.refreshRate < 500)
+            this.refreshRate = 500;
 
         this.mainLoopId = null;
 
@@ -662,153 +662,364 @@ class MCSM extends Applet.IconApplet {
     }
 
     get_mem_info() {
+        //~ this.get_mem_info_OLD(); return;
         if (!this.isRunning) return;
         if (!this.Mem_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-raw-data.sh", (stdout, stderr, exitCode) => {
-            if (exitCode === 0) {
-                let [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed] = stdout.split(" ");
-
-                this.memoryProvider.setData(1 * total, 1 * used);
-                this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
-                this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
+        var contents = "";
+        let [success, contents_array] = GLib.file_get_contents("/proc/meminfo");
+        if (success) {
+            contents = to_string(contents_array);
+            var data = [];
+            const lines = contents.split("\n");
+            //~ var ret = [];
+            const p = 1024;
+            var total=0, used=0, free=0, shared=0, buffers=0, cache=0, available=0, swapTotal=0, swapUsed=0;
+            for (let line of lines) {
+                line = line.trim().replace(/\ +/g, " ");
+                let [name, value, unit] = line.split(" ");
+                value = 1 * value;
+                if (name.startsWith("SUnreclaim")) break;
+                if (name.startsWith("MemTotal")) total = p * value;
+                if (name.startsWith("MemFree")) free = p * value;
+                if (name.startsWith("MemAvailable")) available = p * value;
+                if (name.startsWith("Buffers")) buffers = p * value;
+                if (name.startsWith("Cached")) cache = p * value;
+                if (name.startsWith("SwapTotal")) swapTotal = p * value;
+                if (name.startsWith("SwapFree")) swapUsed = swapTotal - p * value;
+                if (name.startsWith("Shmem")) shared = p * value;
+                if (name.startsWith("SReclaimable")) cache = cache + p * value;
             }
-            subProcess.send_signal(9);
+            used = total - available;
+            //~ ret = [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed];
+            //~ global.log("ret:\n" + ret);
+            this.memoryProvider.setData(1 * total, 1 * used);
+            this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
+            this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
             if (DEBUG) {
                 duration = Date.now() - old;
                 global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
             }
-        });
+        }
     }
+
+    //~ get_mem_info_OLD() {
+        //~ if (!this.isRunning) return;
+        //~ if (!this.Mem_enabled) return;
+        //~ let old, duration;
+        //~ if (DEBUG) old = Date.now();
+        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-raw-data.sh", (stdout, stderr, exitCode) => {
+            //~ if (exitCode === 0) {
+                //~ let [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed] = stdout.split(" ");
+
+                //~ this.memoryProvider.setData(1 * total, 1 * used);
+                //~ this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
+                //~ this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
+            //~ }
+            //~ subProcess.send_signal(9);
+            //~ if (DEBUG) {
+                //~ duration = Date.now() - old;
+                //~ global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
+            //~ }
+        //~ });
+    //~ }
 
     get_cpu_info() {
         if (!this.isRunning) return;
         if (!this.CPU_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-raw-data.sh", (stdout, stderr, exitCode) => {
-            if (exitCode === 0) {
-                let cpuString = stdout.trim();
-                var data = [];
-                let values = cpuString.split(" ");
-                if (this.oldCPU_Total_Values.length === 0) { // first execution
-                    if (this.CPU_mergeAll) {
-                        data.push(0);
-                        for (let v of values) {
-                            let [total, idle] = v.split(",");
-                            this.oldCPU_Total_Values.push(total);
-                            this.oldCPU_Idle_Values.push(idle);
-                        }
-                    } else {
-                        for (let i=0, len=values.length; i<len; i++) {
-                            data.push(0);
-                            let [total, idle] = values[i].split(",");
-                            this.oldCPU_Total_Values.push(total);
-                            this.oldCPU_Idle_Values.push(idle);
-                        }
+        var contents = "";
+        let [success, contents_array] = GLib.file_get_contents("/proc/stat");
+        if (success) {
+            contents = to_string(contents_array);
+            var data = [];
+            //~ global.log("contents:\n" + contents);
+            const lines = contents.split("\n");
+            var ret = "";
+            for (let line of lines) {
+                line = line.trim();
+                line = line.replace();
+                //~ global.log("line: " + line);
+                if (line.startsWith("cpu")) {
+                    let [cpu, user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice, rest] = line.split(" ");
+                    let Idle = 1 * idle + 1 * iowait;
+                    let NonIdle = 1 * user + 1 * nice + 1 * system + 1 * irq + 1 * softirq + 1 * steal;
+                    let Total = Idle + NonIdle;
+                    ret = ret + ` ${Total},${Idle}`;
+                } else {
+                    break
+                }
+            }
+            let cpuString = ret.trim();
+            //~ global.log("cpuString: " + cpuString);
+            let values = cpuString.split(" ");
+            if (this.oldCPU_Total_Values.length === 0) { // first execution
+                if (this.CPU_mergeAll) {
+                    data.push(0);
+                    for (let v of values) {
+                        let [total, idle] = v.split(",");
+                        this.oldCPU_Total_Values.push(1 * total);
+                        this.oldCPU_Idle_Values.push(1 * idle);
                     }
-                } else { // next executions
-                    if (this.CPU_mergeAll) {
-                        //~ data.push(parseFloat(values[0]) / 100);
-                        let [totalValue, idleValue] = values[0].split(",");
-                        let total = totalValue - this.oldCPU_Total_Values[0];
-                        let idle = idleValue - this.oldCPU_Idle_Values[0];
-                        data.push((total - idle) / total);
-                        this.oldCPU_Total_Values[0] = totalValue;
-                        this.oldCPU_Idle_Values[0] = idleValue;
-                        for (let i=1, len=values.length; i < len; i++) {
-                            let [totalValue, idleValue] = values[i].split(",");
-                            this.oldCPU_Total_Values[i] = totalValue;
-                            this.oldCPU_Idle_Values[i] = idleValue;
-                        }
-                    } else {
-                        let i = 0;
-                        for (let v of values) {
-                            let [totalValue, idleValue] = v.split(",");
-                            let total = totalValue - this.oldCPU_Total_Values[i];
-                            let idle = idleValue - this.oldCPU_Idle_Values[i];
-                            this.oldCPU_Total_Values[i] = totalValue;
-                            this.oldCPU_Idle_Values[i] = idleValue;
-                            if (i === 0) {
-                                i++;
-                                continue;
-                            }
-                            data.push((total - idle) / total);
-                            //~ data.push(parseFloat(v) / 100);
-                            i++;
-                        }
+                } else {
+                    for (let i=0, len=values.length; i<len; i++) {
+                        data.push(0);
+                        let [total, idle] = values[i].split(",");
+                        total = 1 * total;
+                        idle = 1 * idle;
+                        this.oldCPU_Total_Values.push(total);
+                        this.oldCPU_Idle_Values.push(idle);
                     }
                 }
-                this.oldCPUvalues = values;
-
-                this.multiCpuProvider.setData(data);
-
+            } else { // next executions
+                if (this.CPU_mergeAll) {
+                    //~ data.push(parseFloat(values[0]) / 100);
+                    let [totalValue, idleValue] = values[0].split(",");
+                    totalValue = 1 * totalValue;
+                    idleValue = 1 * idleValue;
+                    let total = totalValue - this.oldCPU_Total_Values[0];
+                    let idle = idleValue - this.oldCPU_Idle_Values[0];
+                    data.push((total - idle) / total);
+                    this.oldCPU_Total_Values[0] = totalValue;
+                    this.oldCPU_Idle_Values[0] = idleValue;
+                    for (let i=1, len=values.length; i < len; i++) {
+                        let [totalValue, idleValue] = values[i].split(",");
+                        this.oldCPU_Total_Values[i] = 1 * totalValue;
+                        this.oldCPU_Idle_Values[i] = 1 * idleValue;
+                    }
+                } else {
+                    let i = 0;
+                    for (let v of values) {
+                        let [totalValue, idleValue] = v.split(",");
+                        totalValue = 1 * totalValue;
+                        idleValue = 1 * idleValue;
+                        let total = totalValue - this.oldCPU_Total_Values[i];
+                        let idle = idleValue - this.oldCPU_Idle_Values[i];
+                        this.oldCPU_Total_Values[i] = totalValue;
+                        this.oldCPU_Idle_Values[i] = idleValue;
+                        if (i === 0) {
+                            i++;
+                            continue;
+                        }
+                        data.push((total - idle) / total);
+                        //~ data.push(parseFloat(v) / 100);
+                        i++;
+                    }
+                }
             }
-            subProcess.send_signal(9);
-            if (DEBUG) {
-                duration = Date.now() - old;
-                global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
-            }
-        });
+            this.oldCPUvalues = values;
+
+            this.multiCpuProvider.setData(data);
+        }
+        if (DEBUG) {
+            duration = Date.now() - old;
+            global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
+        }
     }
 
+    //~ get_cpu_info_OLD() {
+        //~ if (!this.isRunning) return;
+        //~ if (!this.CPU_enabled) return;
+        //~ let old, duration;
+        //~ if (DEBUG) old = Date.now();
+        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-raw-data.sh", (stdout, stderr, exitCode) => {
+            //~ if (exitCode === 0) {
+                //~ let cpuString = stdout.trim();
+                //~ var data = [];
+                //~ let values = cpuString.split(" ");
+                //~ if (this.oldCPU_Total_Values.length === 0) { // first execution
+                    //~ if (this.CPU_mergeAll) {
+                        //~ data.push(0);
+                        //~ for (let v of values) {
+                            //~ let [total, idle] = v.split(",");
+                            //~ this.oldCPU_Total_Values.push(total);
+                            //~ this.oldCPU_Idle_Values.push(idle);
+                        //~ }
+                    //~ } else {
+                        //~ for (let i=0, len=values.length; i<len; i++) {
+                            //~ data.push(0);
+                            //~ let [total, idle] = values[i].split(",");
+                            //~ this.oldCPU_Total_Values.push(total);
+                            //~ this.oldCPU_Idle_Values.push(idle);
+                        //~ }
+                    //~ }
+                //~ } else { // next executions
+                    //~ if (this.CPU_mergeAll) {
+                        //~ let [totalValue, idleValue] = values[0].split(",");
+                        //~ let total = totalValue - this.oldCPU_Total_Values[0];
+                        //~ let idle = idleValue - this.oldCPU_Idle_Values[0];
+                        //~ data.push((total - idle) / total);
+                        //~ this.oldCPU_Total_Values[0] = totalValue;
+                        //~ this.oldCPU_Idle_Values[0] = idleValue;
+                        //~ for (let i=1, len=values.length; i < len; i++) {
+                            //~ let [totalValue, idleValue] = values[i].split(",");
+                            //~ this.oldCPU_Total_Values[i] = totalValue;
+                            //~ this.oldCPU_Idle_Values[i] = idleValue;
+                        //~ }
+                    //~ } else {
+                        //~ let i = 0;
+                        //~ for (let v of values) {
+                            //~ let [totalValue, idleValue] = v.split(",");
+                            //~ let total = totalValue - this.oldCPU_Total_Values[i];
+                            //~ let idle = idleValue - this.oldCPU_Idle_Values[i];
+                            //~ this.oldCPU_Total_Values[i] = totalValue;
+                            //~ this.oldCPU_Idle_Values[i] = idleValue;
+                            //~ if (i === 0) {
+                                //~ i++;
+                                //~ continue;
+                            //~ }
+                            //~ data.push((total - idle) / total);
+                            //~ i++;
+                        //~ }
+                    //~ }
+                //~ }
+                //~ this.oldCPUvalues = values;
+
+                //~ this.multiCpuProvider.setData(data);
+
+            //~ }
+            //~ subProcess.send_signal(9);
+            //~ if (DEBUG) {
+                //~ duration = Date.now() - old;
+                //~ global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
+            //~ }
+        //~ });
+    //~ }
+
     get_net_info() {
+        //~ this.get_net_info_OLD(); return;
         if (!this.isRunning) return;
         if (!this.Net_enabled) return;
         let old, duration;
         if (DEBUG) old = Date.now();
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
-            if (exitCode === 0) {
-                var allowedInterfaces = [];
-                var names = {};
-                for (let dev of this.Net_devicesList) {
-                    if (dev["enabled"] === true) {
-                        allowedInterfaces.push(dev["id"]);
-                        names[dev["id"]] = dev["name"];
-                    }
-                }
-                var data = [];
-                var disabledDevices = [];
-                let netInfo = stdout.trim().split(" ");
-                var sum_rx = 0;
-                var sum_tx = 0;
-                for (let info of netInfo) {
-                    let [iface, rx, tx] = info.split(":");
-                    if (allowedInterfaces.indexOf(iface) < 0) {
-                        disabledDevices.push(iface);
-                        continue;
-                    }
-                    if (this.Net_mergeAll) {
-                        sum_rx = sum_rx + Math.trunc(rx);
-                        sum_tx = sum_tx + Math.trunc(tx);
-                    } else {
-                        data.push({
-                            "id": iface,
-                            "name": names[iface],
-                            "up": Math.trunc(tx),
-                            "down": Math.trunc(rx)
-                        });
-                    }
-                }
-                if (this.Net_mergeAll) {
-                    data.push({
-                        "id": "Net",
-                        "name": _("Network"),
-                        "up": sum_tx,
-                        "down": sum_rx
-                    });
-                    disabledDevices = [];
-                }
-                this.networkProvider.setData(data, disabledDevices);
+        var ret = "";
+        const net_dir_path = "/sys/class/net";
+        const net_dir = Gio.file_new_for_path(net_dir_path);
+        const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+        for (let child of children) {
+            let name = child.get_name();
+            let operstate_file_path = `${net_dir_path}/${name}/operstate`;
+            //~ global.log("operstate_file_path: " + operstate_file_path);
+            let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
+            net_status = to_string(net_status).trim();
+            if (net_status == "up") {
+                let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
+                let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
+                //~ global.log("rx_bytes_path: " + rx_bytes_path);
+                //~ global.log("tx_bytes_path: " + tx_bytes_path);
+                let [rx_success, rx_bytes] = GLib.file_get_contents(rx_bytes_path);
+                let [tx_success, tx_bytes] = GLib.file_get_contents(tx_bytes_path);
+                rx_bytes = to_string(rx_bytes).trim();
+                tx_bytes = to_string(tx_bytes).trim();
+                ret = ret + `${name}:${rx_bytes}:${tx_bytes} `;
             }
-            subProcess.send_signal(9);
-            if (DEBUG) {
-                duration = Date.now() - old;
-                global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
+        }
+        ret = ret.trim();
+        var allowedInterfaces = [];
+        var names = {};
+        for (let dev of this.Net_devicesList) {
+            if (dev["enabled"] === true) {
+                allowedInterfaces.push(dev["id"]);
+                names[dev["id"]] = dev["name"];
             }
-        });
+        }
+        var data = [];
+        var disabledDevices = [];
+        let netInfo = ret.split(" ");
+        var sum_rx = 0;
+        var sum_tx = 0;
+        for (let info of netInfo) {
+            let [iface, rx, tx] = info.split(":");
+            if (allowedInterfaces.indexOf(iface) < 0) {
+                disabledDevices.push(iface);
+                continue;
+            }
+            if (this.Net_mergeAll) {
+                sum_rx = sum_rx + Math.trunc(rx);
+                sum_tx = sum_tx + Math.trunc(tx);
+            } else {
+                data.push({
+                    "id": iface,
+                    "name": names[iface],
+                    "up": Math.trunc(tx),
+                    "down": Math.trunc(rx)
+                });
+            }
+        }
+        if (this.Net_mergeAll) {
+            data.push({
+                "id": "Net",
+                "name": _("Network"),
+                "up": sum_tx,
+                "down": sum_rx
+            });
+            disabledDevices = [];
+        }
+        this.networkProvider.setData(data, disabledDevices);
+        if (DEBUG) {
+            duration = Date.now() - old;
+            global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
+        }
     }
+
+    //~ get_net_info_OLD() {
+        //~ if (!this.isRunning) return;
+        //~ if (!this.Net_enabled) return;
+        //~ let old, duration;
+        //~ if (DEBUG) old = Date.now();
+        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
+            //~ if (exitCode === 0) {
+                //~ var allowedInterfaces = [];
+                //~ var names = {};
+                //~ for (let dev of this.Net_devicesList) {
+                    //~ if (dev["enabled"] === true) {
+                        //~ allowedInterfaces.push(dev["id"]);
+                        //~ names[dev["id"]] = dev["name"];
+                    //~ }
+                //~ }
+                //~ var data = [];
+                //~ var disabledDevices = [];
+                //~ let netInfo = stdout.trim().split(" ");
+                //~ var sum_rx = 0;
+                //~ var sum_tx = 0;
+                //~ for (let info of netInfo) {
+                    //~ let [iface, rx, tx] = info.split(":");
+                    //~ if (allowedInterfaces.indexOf(iface) < 0) {
+                        //~ disabledDevices.push(iface);
+                        //~ continue;
+                    //~ }
+                    //~ if (this.Net_mergeAll) {
+                        //~ sum_rx = sum_rx + Math.trunc(rx);
+                        //~ sum_tx = sum_tx + Math.trunc(tx);
+                    //~ } else {
+                        //~ data.push({
+                            //~ "id": iface,
+                            //~ "name": names[iface],
+                            //~ "up": Math.trunc(tx),
+                            //~ "down": Math.trunc(rx)
+                        //~ });
+                    //~ }
+                //~ }
+                //~ if (this.Net_mergeAll) {
+                    //~ data.push({
+                        //~ "id": "Net",
+                        //~ "name": _("Network"),
+                        //~ "up": sum_tx,
+                        //~ "down": sum_rx
+                    //~ });
+                    //~ disabledDevices = [];
+                //~ }
+                //~ this.networkProvider.setData(data, disabledDevices);
+            //~ }
+            //~ subProcess.send_signal(9);
+            //~ if (DEBUG) {
+                //~ duration = Date.now() - old;
+                //~ global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
+            //~ }
+        //~ });
+    //~ }
 
     get_disk_info() {
         if (!this.isRunning) return;

@@ -1,3 +1,6 @@
+### v2.9.0~20250829
+  * Reduces data recovery time by a factor of 50!
+
 ### v2.8.4~20250826
   * Improves context menu to access to settings.
   * Middle-click opens settings.
