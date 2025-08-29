@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-07 12:12+0200\n"
+"POT-Creation-Date: 2025-08-29 19:08+0200\n"
 "PO-Revision-Date: 2025-04-07 10:31-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -33,23 +33,32 @@ msgstr "problemas recientes"
 msgid "translations"
 msgstr "traducciones"
 
-#. applet.js:851
+#. applet.js:326
+#, fuzzy
+msgid "Reload icons"
+msgstr "Recargar este applet"
+
+#. applet.js:334
+msgid "Visit website"
+msgstr ""
+
+#. applet.js:895
 msgid "Spices"
 msgstr "Especias"
 
-#. applet.js:936
+#. applet.js:986
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
-#. applet.js:947
+#. applet.js:997
 msgid "Refresh"
 msgstr "Actualizar"
 
-#. applet.js:959
+#. applet.js:1009
 msgid "Refreshing in progress"
 msgstr "Actualización en curso"
 
-#. applet.js:970
+#. applet.js:1020
 msgid "Configure..."
 msgstr "Configurar..."
 
