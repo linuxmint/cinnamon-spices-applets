@@ -111,7 +111,6 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
-//~ class MCSM extends Applet.TextIconApplet {
 class MCSM extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -187,7 +186,7 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("DiskUsage_squared", "DiskUsage_squared");
         this.settings.bind("DiskUsage_width", "DiskUsage_width");
         this.settings.bind("DiskUsage_mergeAll", "DiskUsage_mergeAll");
-        //~ this.settings.bind("DiskUsage_chartType", "DiskUsage_chartType");
+        //this.settings.bind("DiskUsage_chartType", "DiskUsage_chartType");
         this.DiskUsage_chartType = "bar";
         this.settings.bind("DiskUsage_colorUsed", "DiskUsage_colorUsed");
         this.settings.bind("DiskUsage_colorFree", "DiskUsage_colorFree");
@@ -205,7 +204,6 @@ class MCSM extends Applet.IconApplet {
         this.useSymbolicIcon = true;
         if (this.without_any_graph)
             this.setIcon();
-        //~ global.log("ICON SIZE: " + this.getPanelIconSize(St.IconType.FULLCOLOR));
 
         this.set_panelHeight();
 
@@ -263,8 +261,6 @@ class MCSM extends Applet.IconApplet {
 
         this.graphArea = new St.DrawingArea();
         this.graphArea.width = 1;
-        //~ global.log(UUID + " - this._panelHeight: " + this._panelHeight);
-        //~ global.log(UUID + " - this.panelHeight: " + this.panelHeight);
         this.graphArea.height = this.panelHeight * global.ui_scale;
 
         this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
@@ -325,7 +321,6 @@ class MCSM extends Applet.IconApplet {
             if (properties[i].abbrev === 'Swap') {
                 continue;
             }
-            //~ global.log(UUID + " - abbrev:" + properties[i].abbrev);
             if (this[properties[i].provider].isEnabled) {
                 // translate origin to the new location for the graph
                 let areaContext = area.get_context();
@@ -346,7 +341,6 @@ class MCSM extends Applet.IconApplet {
                         // clear background so that it doesn't mess up the other one
                         [0, 0, 0, 0],
                         [this.Mem_colorSwap]
-                        //~ this.configSettings._prefs.mem.swapcolors
                     );
                 }
                 let labelOn = this[`${properties[i].abbrev}_labelOn`];
@@ -358,7 +352,6 @@ class MCSM extends Applet.IconApplet {
                     this.labelsOn && labelOn,
                     width,
                     this.panelHeight - 2 * global.ui_scale,
-                    //~ (this.borderOn) ? (this.panelHeight - 2) * 0.8 * global.ui_scale : (this.panelHeight - 2) * global.ui_scale,
                     this.labelColor,
                     this.backgroundColor,
                     this[properties[i].provider].getColorList()
@@ -366,20 +359,17 @@ class MCSM extends Applet.IconApplet {
                 // return translation to origin
                 areaContext.translate(-xOffset, 0);
                 // update xOffset for next translation
-                //~ xOffset += width + 1;
                 if (i === len - 1)
                     xOffset += width;
                 else
                     xOffset += width + 1 + this.graphSpacing;
             }
         }
-        //~ area.set_width(xOffset > 1 ? xOffset - 1 : 1);
         area.set_width(xOffset > 1 ? xOffset : 1);
         area.set_height(this.panelHeight);
     }
 
     _initContextMenu() {
-        //~ let menuChildren = null;
         if (this.restart_menu_item) {
             let children = this._applet_context_menu._getMenuItems();
             children[0].destroy();
@@ -421,7 +411,6 @@ class MCSM extends Applet.IconApplet {
         let menuChildren = this._applet_context_menu._getMenuItems();
         var posConfigure = -1;
         for (let i=0; i<menuChildren.length; i++) {
-            //~ global.log("menuChildren["+i+"]: "+menuChildren[i]);
             if ((""+menuChildren[i]).includes(_("Configure...")))
                 posConfigure = i;
         }
@@ -497,36 +486,42 @@ class MCSM extends Applet.IconApplet {
         }, 2100);
     }
 
-    on_Net_getdevlist_btn_clicked() {
-        let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-devices.sh", (stdout, stderr, exitCode) => {
-            if (exitCode === 0) {
-                var knownDevices = [];
-                var new_Net_devicesList = this.Net_devicesList;
-                for (let d of this.Net_devicesList) {
-                    if (d["id"].length === 0) continue;
-                    knownDevices.push(d["id"]);
+     on_Net_getdevlist_btn_clicked() {
+        var knownDevices = [];
+        var new_Net_devicesList = this.Net_devicesList;
+        for (let d of this.Net_devicesList) {
+            if (d["id"].length === 0) continue;
+            knownDevices.push(d["id"]);
+        }
+        var ret = "";
+        const net_dir_path = "/sys/class/net";
+        const net_dir = Gio.file_new_for_path(net_dir_path);
+        const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+        for (let child of children) {
+            let name = child.get_name();
+            let operstate_file_path = `${net_dir_path}/${name}/operstate`;
+            let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
+            net_status = to_string(net_status).trim();
+            ret += `${name}:${net_status} `;
+        }
+        var returnedDevices = ret.trim().split(" ");
+        for (let d of returnedDevices) {
+            let [dev, status] = d.split(":");
+            if (knownDevices.indexOf(dev) < 0) {
+                if (status === "up" || status === "down") {
+                    new_Net_devicesList.push({
+                        "enabled": status === "up",
+                        "id": dev,
+                        "name": dev,
+                        "colorDown": (knownDevices.length * 2) % nb_colors,
+                        "colorUp": (knownDevices.length * 2 + 1) % nb_colors
+                    });
+                    knownDevices.push(dev);
                 }
-                var returnedDevices = stdout.trim().split(" ");
-                for (let d of returnedDevices) {
-                    let [dev, status] = d.split(":");
-                    if (knownDevices.indexOf(dev) < 0) {
-                        if (status === "up" || status === "down") {
-                            new_Net_devicesList.push({
-                                "enabled": status === "up",
-                                "id": dev,
-                                "name": dev,
-                                "colorDown": (knownDevices.length * 2) % nb_colors,
-                                "colorUp": (knownDevices.length * 2 + 1) % nb_colors
-                            });
-                            knownDevices.push(dev);
-                        }
-                    }
-                }
-                this.Net_devicesList = new_Net_devicesList;
             }
-            subProcess.send_signal(9);
-        });
-    }
+        }
+        this.Net_devicesList = new_Net_devicesList;
+     }
 
     on_Net_cleardevlist_btn_clicked() {
         this.Net_devicesList = [];
@@ -584,7 +579,6 @@ class MCSM extends Applet.IconApplet {
                     if (p["path"].length === 0) continue;
                     knownPaths.push(p["path"]);
                 }
-                //~ var mounts = stdout.trim().split(" ");
                 var mounts = stdout.trim().replace(/\ +/g, " ").split(" ");
                 for (let m of mounts) {
                     if (m.trim().length === 0 && knownPaths.indexOf("/") < 0)
@@ -662,7 +656,6 @@ class MCSM extends Applet.IconApplet {
     }
 
     get_mem_info() {
-        //~ this.get_mem_info_OLD(); return;
         if (!this.isRunning) return;
         if (!this.Mem_enabled) return;
         let old, duration;
@@ -673,7 +666,6 @@ class MCSM extends Applet.IconApplet {
             contents = to_string(contents_array);
             var data = [];
             const lines = contents.split("\n");
-            //~ var ret = [];
             const p = 1024;
             var total=0, used=0, free=0, shared=0, buffers=0, cache=0, available=0, swapTotal=0, swapUsed=0;
             for (let line of lines) {
@@ -692,8 +684,6 @@ class MCSM extends Applet.IconApplet {
                 if (name.startsWith("SReclaimable")) cache = cache + p * value;
             }
             used = total - available;
-            //~ ret = [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed];
-            //~ global.log("ret:\n" + ret);
             this.memoryProvider.setData(1 * total, 1 * used);
             this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
             this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
@@ -703,27 +693,6 @@ class MCSM extends Applet.IconApplet {
             }
         }
     }
-
-    //~ get_mem_info_OLD() {
-        //~ if (!this.isRunning) return;
-        //~ if (!this.Mem_enabled) return;
-        //~ let old, duration;
-        //~ if (DEBUG) old = Date.now();
-        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-mem-raw-data.sh", (stdout, stderr, exitCode) => {
-            //~ if (exitCode === 0) {
-                //~ let [total, used, free, shared, buffers, cache, available, swapTotal, swapUsed] = stdout.split(" ");
-
-                //~ this.memoryProvider.setData(1 * total, 1 * used);
-                //~ this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
-                //~ this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
-            //~ }
-            //~ subProcess.send_signal(9);
-            //~ if (DEBUG) {
-                //~ duration = Date.now() - old;
-                //~ global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
-            //~ }
-        //~ });
-    //~ }
 
     get_cpu_info() {
         if (!this.isRunning) return;
@@ -735,13 +704,11 @@ class MCSM extends Applet.IconApplet {
         if (success) {
             contents = to_string(contents_array);
             var data = [];
-            //~ global.log("contents:\n" + contents);
             const lines = contents.split("\n");
             var ret = "";
             for (let line of lines) {
                 line = line.trim();
                 line = line.replace();
-                //~ global.log("line: " + line);
                 if (line.startsWith("cpu")) {
                     let [cpu, user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice, rest] = line.split(" ");
                     let Idle = 1 * idle + 1 * iowait;
@@ -753,7 +720,6 @@ class MCSM extends Applet.IconApplet {
                 }
             }
             let cpuString = ret.trim();
-            //~ global.log("cpuString: " + cpuString);
             let values = cpuString.split(" ");
             if (this.oldCPU_Total_Values.length === 0) { // first execution
                 if (this.CPU_mergeAll) {
@@ -775,7 +741,6 @@ class MCSM extends Applet.IconApplet {
                 }
             } else { // next executions
                 if (this.CPU_mergeAll) {
-                    //~ data.push(parseFloat(values[0]) / 100);
                     let [totalValue, idleValue] = values[0].split(",");
                     totalValue = 1 * totalValue;
                     idleValue = 1 * idleValue;
@@ -804,7 +769,6 @@ class MCSM extends Applet.IconApplet {
                             continue;
                         }
                         data.push((total - idle) / total);
-                        //~ data.push(parseFloat(v) / 100);
                         i++;
                     }
                 }
@@ -819,77 +783,7 @@ class MCSM extends Applet.IconApplet {
         }
     }
 
-    //~ get_cpu_info_OLD() {
-        //~ if (!this.isRunning) return;
-        //~ if (!this.CPU_enabled) return;
-        //~ let old, duration;
-        //~ if (DEBUG) old = Date.now();
-        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-cpu-raw-data.sh", (stdout, stderr, exitCode) => {
-            //~ if (exitCode === 0) {
-                //~ let cpuString = stdout.trim();
-                //~ var data = [];
-                //~ let values = cpuString.split(" ");
-                //~ if (this.oldCPU_Total_Values.length === 0) { // first execution
-                    //~ if (this.CPU_mergeAll) {
-                        //~ data.push(0);
-                        //~ for (let v of values) {
-                            //~ let [total, idle] = v.split(",");
-                            //~ this.oldCPU_Total_Values.push(total);
-                            //~ this.oldCPU_Idle_Values.push(idle);
-                        //~ }
-                    //~ } else {
-                        //~ for (let i=0, len=values.length; i<len; i++) {
-                            //~ data.push(0);
-                            //~ let [total, idle] = values[i].split(",");
-                            //~ this.oldCPU_Total_Values.push(total);
-                            //~ this.oldCPU_Idle_Values.push(idle);
-                        //~ }
-                    //~ }
-                //~ } else { // next executions
-                    //~ if (this.CPU_mergeAll) {
-                        //~ let [totalValue, idleValue] = values[0].split(",");
-                        //~ let total = totalValue - this.oldCPU_Total_Values[0];
-                        //~ let idle = idleValue - this.oldCPU_Idle_Values[0];
-                        //~ data.push((total - idle) / total);
-                        //~ this.oldCPU_Total_Values[0] = totalValue;
-                        //~ this.oldCPU_Idle_Values[0] = idleValue;
-                        //~ for (let i=1, len=values.length; i < len; i++) {
-                            //~ let [totalValue, idleValue] = values[i].split(",");
-                            //~ this.oldCPU_Total_Values[i] = totalValue;
-                            //~ this.oldCPU_Idle_Values[i] = idleValue;
-                        //~ }
-                    //~ } else {
-                        //~ let i = 0;
-                        //~ for (let v of values) {
-                            //~ let [totalValue, idleValue] = v.split(",");
-                            //~ let total = totalValue - this.oldCPU_Total_Values[i];
-                            //~ let idle = idleValue - this.oldCPU_Idle_Values[i];
-                            //~ this.oldCPU_Total_Values[i] = totalValue;
-                            //~ this.oldCPU_Idle_Values[i] = idleValue;
-                            //~ if (i === 0) {
-                                //~ i++;
-                                //~ continue;
-                            //~ }
-                            //~ data.push((total - idle) / total);
-                            //~ i++;
-                        //~ }
-                    //~ }
-                //~ }
-                //~ this.oldCPUvalues = values;
-
-                //~ this.multiCpuProvider.setData(data);
-
-            //~ }
-            //~ subProcess.send_signal(9);
-            //~ if (DEBUG) {
-                //~ duration = Date.now() - old;
-                //~ global.log(UUID + " - get_cpu_info Duration: " + duration + " ms.");
-            //~ }
-        //~ });
-    //~ }
-
     get_net_info() {
-        //~ this.get_net_info_OLD(); return;
         if (!this.isRunning) return;
         if (!this.Net_enabled) return;
         let old, duration;
@@ -901,14 +795,11 @@ class MCSM extends Applet.IconApplet {
         for (let child of children) {
             let name = child.get_name();
             let operstate_file_path = `${net_dir_path}/${name}/operstate`;
-            //~ global.log("operstate_file_path: " + operstate_file_path);
             let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
             net_status = to_string(net_status).trim();
             if (net_status == "up") {
                 let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
                 let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
-                //~ global.log("rx_bytes_path: " + rx_bytes_path);
-                //~ global.log("tx_bytes_path: " + tx_bytes_path);
                 let [rx_success, rx_bytes] = GLib.file_get_contents(rx_bytes_path);
                 let [tx_success, tx_bytes] = GLib.file_get_contents(tx_bytes_path);
                 rx_bytes = to_string(rx_bytes).trim();
@@ -916,6 +807,7 @@ class MCSM extends Applet.IconApplet {
                 ret = ret + `${name}:${rx_bytes}:${tx_bytes} `;
             }
         }
+        children.close(null);
         ret = ret.trim();
         var allowedInterfaces = [];
         var names = {};
@@ -964,63 +856,6 @@ class MCSM extends Applet.IconApplet {
         }
     }
 
-    //~ get_net_info_OLD() {
-        //~ if (!this.isRunning) return;
-        //~ if (!this.Net_enabled) return;
-        //~ let old, duration;
-        //~ if (DEBUG) old = Date.now();
-        //~ let subProcess = Util.spawnCommandLineAsyncIO(PATH2SCRIPTS + "/get-network-data.sh", (stdout, stderr, exitCode) => {
-            //~ if (exitCode === 0) {
-                //~ var allowedInterfaces = [];
-                //~ var names = {};
-                //~ for (let dev of this.Net_devicesList) {
-                    //~ if (dev["enabled"] === true) {
-                        //~ allowedInterfaces.push(dev["id"]);
-                        //~ names[dev["id"]] = dev["name"];
-                    //~ }
-                //~ }
-                //~ var data = [];
-                //~ var disabledDevices = [];
-                //~ let netInfo = stdout.trim().split(" ");
-                //~ var sum_rx = 0;
-                //~ var sum_tx = 0;
-                //~ for (let info of netInfo) {
-                    //~ let [iface, rx, tx] = info.split(":");
-                    //~ if (allowedInterfaces.indexOf(iface) < 0) {
-                        //~ disabledDevices.push(iface);
-                        //~ continue;
-                    //~ }
-                    //~ if (this.Net_mergeAll) {
-                        //~ sum_rx = sum_rx + Math.trunc(rx);
-                        //~ sum_tx = sum_tx + Math.trunc(tx);
-                    //~ } else {
-                        //~ data.push({
-                            //~ "id": iface,
-                            //~ "name": names[iface],
-                            //~ "up": Math.trunc(tx),
-                            //~ "down": Math.trunc(rx)
-                        //~ });
-                    //~ }
-                //~ }
-                //~ if (this.Net_mergeAll) {
-                    //~ data.push({
-                        //~ "id": "Net",
-                        //~ "name": _("Network"),
-                        //~ "up": sum_tx,
-                        //~ "down": sum_rx
-                    //~ });
-                    //~ disabledDevices = [];
-                //~ }
-                //~ this.networkProvider.setData(data, disabledDevices);
-            //~ }
-            //~ subProcess.send_signal(9);
-            //~ if (DEBUG) {
-                //~ duration = Date.now() - old;
-                //~ global.log(UUID + " - get_net_info Duration: " + duration + " ms.");
-            //~ }
-        //~ });
-    //~ }
-
     get_disk_info() {
         if (!this.isRunning) return;
         if (!this.Disk_enabled) return;
@@ -1040,7 +875,6 @@ class MCSM extends Applet.IconApplet {
         }
         var data = [];
         let diskstats = (to_string(GLib.file_get_contents("/proc/diskstats")[1])).trim().split("\n");
-        //~ global.log(UUID + " - diskstats:\n" + diskstats);
         var sum_read = 0;
         var sum_write = 0;
         for (let line of diskstats) {
@@ -1053,8 +887,8 @@ class MCSM extends Applet.IconApplet {
             let discGran = 1 * deviceGrans[_dev];
             let [_read, _write] = [1 * infos[5] * discGran, 1 * infos[9] * discGran];
             if (this.Disk_mergeAll) {
-                sum_read = sum_read + _read;
-                sum_write = sum_write + _write;
+                sum_read = 1 * sum_read + _read;
+                sum_write = 1 * sum_write + _write;
             } else {
                 data.push({
                     "id": _dev,
@@ -1063,7 +897,6 @@ class MCSM extends Applet.IconApplet {
                     "write": _write
                 });
             }
-            //~ global.log(UUID + " - line:\n" + line);
 
         }
         if (this.Disk_mergeAll) {
@@ -1097,7 +930,6 @@ class MCSM extends Applet.IconApplet {
             if (! GLib.file_test(path, GLib.FileTest.EXISTS)) continue;
             usedPaths.push(path);
             let [size, used] = this.disk_usage(path);
-            //~ global.log(path + " - size: " + size + ", used: " + used);
             if (this.DiskUsage_mergeAll) {
                 sumSize = sumSize + size;
                 sumUsed = sumUsed + used;
@@ -1205,14 +1037,11 @@ class MemDataProvider {
     constructor(applet) {
         this.applet = applet;
         this.name = _('MEM');
-        //~ this.isEnabled = this.applet.Mem_enabled;
         this.memusage = 0;
         this.currentReadings = [0, 0, 0, 0];
     }
 
     getColorList() {
-        //~ let types = ["Usedup", "Cached", "Buffer", "Free", "Swap"];
-        //~ let types = ["Usedup", "Recoverable", "Free", "Swap"];
         let types = ["Usedup", "Free", "Swap"];
         var colorList = [];
         for (let t of types)
@@ -1225,18 +1054,8 @@ class MemDataProvider {
         return this.currentReadings;
     }
 
-    //~ setData(used, cached, buffers, free) {
-    //~ setData(used, recoverable) {
-    //~ setData(total, used, free, available) {
     setData(total, used) {
         const precision = 100000;
-        //~ const recoverable = available - free;
-        //~ const unrecoverable = used - recoverable;
-        //~ const realUsed = recoverable + unrecoverable;
-
-        //~ const realUsed = available - free + used - (available - free);
-        //~ const realUsed = used;
-        //~ const usedProp = realUsed / total;
         const usedProp = used / total;
         this.currentReadings = [
             Math.round(usedProp * precision) / precision,
@@ -1248,14 +1067,13 @@ class MemDataProvider {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
         var sum_used = 0;
-        //~ let toolTipString = _('----------- Memory -----------') + '\n';
         let trans = _("Memory");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
 
-        //~ let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
+        //let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         let attributes = [_('Used:'), _('Free:')];
-        //~ let attributes = [_('Unrecoverable:'), _("Recoverable:"), _('Used:'), _('Free:')];
+        //let attributes = [_('Unrecoverable:'), _("Recoverable:"), _('Used:'), _('Free:')];
         for (let i = 0; i < attributes.length; i++) {
             if (i < 2) {
                 sum_used = sum_used + this.currentReadings[i];
@@ -1357,11 +1175,9 @@ class SwapDataProvider {
     }
 
     getTooltipString() {
-    //if (!this.isEnabled || !this.currentReadings[0]) { //Replaced by:
         if (!this.isEnabled || !this.swapusage) {
             return '';
         }
-        //~ let toolTipString = _('------------ Swap ------------') + '\n';
         let trans = _("Swap");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
@@ -1408,7 +1224,6 @@ class MultiCpuDataProvider {
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        //~ let toolTipString = _('------------- CPU ------------') + '\n';
         let trans = _("CPUs");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
@@ -1484,11 +1299,8 @@ class NetDataProvider {
         for (let dev of this.applet.Net_devicesList) {
             if (dev.enabled === true) {
                  colorList = colorList.concat([this.applet.colors[dev.colorDown], this.applet.colors[dev.colorUp]]);
-                 //~ colorList.push([this.applet.colors[dev.colorDown], this.applet.colors[dev.colorUp]]);
             }
         }
-        //~ global.log(UUID + " - this.applet.colors: " + JSON.stringify(this.applet.colors, null, 4));
-        //~ global.log(UUID + " - Net colorList: " + JSON.stringify(colorList, null, 4));
         return colorList;
     }
 
@@ -1498,20 +1310,17 @@ class NetDataProvider {
     }
 
     setData(data, disabledDevices) {
-        //~ global.log(UUID + " - data: " + JSON.stringify(data, null, "\t"));
         this.disabledDevices = disabledDevices;
         var dataIds = [];
         for (let d of data) {
             if (dataIds.indexOf(d["id"]) < 0)
                 dataIds.push(d["id"])
         }
-        //~ global.log(UUID + " - dataIds: " + dataIds);
         const newUpdateTime = Date.now();
         const secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000;
 
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
-            //~ global.log(UUID + " - data_index: " + data_index);
             if (data_index < 0) continue;
             this.currentReadings[i].down = data[data_index]["down"];
             this.currentReadings[i].up = data[data_index]["up"];
@@ -1536,7 +1345,6 @@ class NetDataProvider {
     getTooltipString() {
         if (! this.isEnabled) return "";
         if (! this.isRunning) return "";
-        //~ let toolTipString = _('---------- Networks ----------') + '\n';
         let trans = _("Networks");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
@@ -1624,13 +1432,11 @@ class DiskDataProvider {
             if (dataIds.indexOf(d["id"]) < 0)
                 dataIds.push(d["id"])
         }
-        //~ global.log(UUID + " - dataIds: " + dataIds);
         const newUpdateTime = Date.now();
         const secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000;
 
         for (let i = 0, len = this.currentReadings.length; i < len; i++) {
             let data_index = dataIds.indexOf(this.currentReadings[i]["id"]);
-            //~ global.log(UUID + " - data_index: " + data_index);
             if (data_index < 0) continue;
             this.currentReadings[i].read = data[data_index]["read"];
             this.currentReadings[i].write = data[data_index]["write"];
@@ -1661,7 +1467,6 @@ class DiskDataProvider {
         if (!this.isEnabled) {
             return "";
         }
-        //~ let toolTipString = _('------------ Disks -----------') + '\n';
         let trans = _("Disks");
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
@@ -1673,7 +1478,6 @@ class DiskDataProvider {
             }
             let read = formatBytes(this.currentReadings[i].tooltipRead, 2);
             let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
-            //~ toolTipString += this.currentReadings[i].name.padEnd(22) + '\n';
             if (this.currentReadings[i].name != this.currentReadings[i].id)
                 toolTipString += this.currentReadings[i].name.padStart(1, " ").padEnd(title.length - this.currentReadings[i].id.length - 1, " ") + this.currentReadings[i].id + '\n';
             else
