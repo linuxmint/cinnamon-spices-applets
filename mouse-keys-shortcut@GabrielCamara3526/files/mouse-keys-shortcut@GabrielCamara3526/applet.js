@@ -9,6 +9,7 @@ const Gio = imports.gi.Gio;
 const UUID = "mouse-keys-shortcut@GabrielCamara3526";
 const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
 const PopupMenu = imports.ui.popupMenu;
+const Tooltips = imports.ui.tooltips;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const HOME_DIR = GLib.get_home_dir();
@@ -33,6 +34,9 @@ class MyApplet extends Applet.IconApplet {
       metadata.uuid,
       instance_id
     );
+    this.initDelaySlider();
+    this.accelTimeSlider();
+    this.maxSpeedSlider();
 
     this.settings.bindProperty(
       Settings.BindingDirection.IN,
@@ -93,14 +97,17 @@ class MyApplet extends Applet.IconApplet {
     this.keyboardSettings.connect('changed::mousekeys-init-delay', () => {
       let newInitDelay = this.keyboardSettings.get_int('mousekeys-init-delay')
       this.settings.setValue("initial-delay", newInitDelay)
+      this.initDelaySlider.setValue(newInitDelay / 2000) // 2000 is the maximum value
     })
     this.keyboardSettings.connect('changed::mousekeys-accel-time', () => {
       let newAccelTime = this.keyboardSettings.get_int('mousekeys-accel-time')
       this.settings.setValue("acceleration-time", newAccelTime)
+      this.accelTimeSlider.setValue(newAccelTime / 2000)
     })
     this.keyboardSettings.connect('changed::mousekeys-max-speed', () => {
       let newMaxSpeed = this.keyboardSettings.get_int('mousekeys-max-speed')
       this.settings.setValue("maximum-speed", newMaxSpeed)
+      this.maxSpeedSlider.setValue(newMaxSpeed / 500)
     })
 
     this.themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
@@ -138,7 +145,6 @@ class MyApplet extends Applet.IconApplet {
       this.on_applet_clicked();
     }
   }
-
   on_applet_clicked() {
     let icon;
     let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
@@ -173,7 +179,54 @@ class MyApplet extends Applet.IconApplet {
   on_speed_changed(){
     this.keyboardSettings.set_int('mousekeys-max-speed', this.maxSpeed)
   }
+  initDelaySlider() {
+    this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
+    let userInitDelay = this.keyboardSettings.get_int('mousekeys-init-delay');
+    let initDelayLabel = new PopupMenu.PopupMenuItem("Initial delay", {reactive: false});
+    let initDelaySlider = new PopupMenu.PopupSliderMenuItem(userInitDelay / 2000); // 2000 is maximum
+    this.initDelaytooltip = new Tooltips.Tooltip(initDelaySlider.actor, "Initial delay");
+    this._applet_context_menu.addMenuItem(initDelayLabel)
+    this._applet_context_menu.addMenuItem(initDelaySlider);
 
+    initDelaySlider.connect('value-changed', (slider) => {
+      let updatedInitDelay = Math.round(slider.value * 2000);
+      this.settings.setValue("initial-delay", updatedInitDelay);
+      this.on_delay_changed();
+    }); 
+    this.initDelaySlider = initDelaySlider;
+  }
+  accelTimeSlider(){
+    this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
+    let userAccelTime = this.keyboardSettings.get_int('mousekeys-accel-time');
+    let accelTimeLabel = new PopupMenu.PopupMenuItem("Acceleration time", {reactive: false});
+    let accelTimeSlider = new PopupMenu.PopupSliderMenuItem(userAccelTime / 2000);
+    this.accelTimeTooltip = new Tooltips.Tooltip(accelTimeSlider.actor, "Acceleration time");
+    this._applet_context_menu.addMenuItem(accelTimeLabel);
+    this._applet_context_menu.addMenuItem(accelTimeSlider);
+
+    accelTimeSlider.connect('value-changed', (slider) => {
+      let updatedAccelTime = Math.round(slider.value * 2000);
+      this.settings.setValue("acceleration-time", updatedAccelTime);
+      this.on_acceleration_changed();
+    });
+    this.accelTimeSlider = accelTimeSlider;
+  }
+  maxSpeedSlider(){
+    this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
+    let userMaxSpeed = this.keyboardSettings.get_int('mousekeys-max-speed');
+    let maxSpeedLabel = new PopupMenu.PopupMenuItem("Maximum speed", {reactive: false});
+    let maxSpeedSlider = new PopupMenu.PopupSliderMenuItem(userMaxSpeed / 500); // 500 is maximum
+    this.maxSpeedTooltip = new Tooltips.Tooltip(maxSpeedSlider.actor, "Maximum speed");
+    this._applet_context_menu.addMenuItem(maxSpeedLabel);
+    this._applet_context_menu.addMenuItem(maxSpeedSlider);
+
+    maxSpeedSlider.connect('value-changed', (slider) => {
+      let updatedMaxSpeed = Math.round(slider.value * 500); 
+      this.settings.setValue("maximum-speed", updatedMaxSpeed);
+      this.on_speed_changed();
+    });
+    this.maxSpeedSlider = maxSpeedSlider;
+  }
   updateIcon() {
     let iconFile
     let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
