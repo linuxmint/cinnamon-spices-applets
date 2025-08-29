@@ -175,7 +175,8 @@
         "labelWarning",
         "Net_getdevlist_btn",
         "Net_devicesList",
-        "Net_cleardevlist_btn"
+        "Net_cleardevlist_btn",
+        "RefreshAll_btn"
       ]
     },
     "sectionDiskOptions": {
@@ -204,7 +205,8 @@
         "labelWarning",
         "Disk_getdevlist_btn",
         "Disk_devicesList",
-        "Disk_cleardevlist_btn"
+        "Disk_cleardevlist_btn",
+        "RefreshAll_btn"
       ]
     },
     "sectionDiskUsageOptions": {
@@ -1092,6 +1094,11 @@
   "labelWarning": {
     "type": "label",
     "description": "Data marked with ⚠️ must not be changed!"
+  },
+  "RefreshAll_btn": {
+    "type": "button",
+    "description": "Refresh All",
+    "callback": "refreshAll"
   },
   "isHighlighted": {
     "type": "generic",
