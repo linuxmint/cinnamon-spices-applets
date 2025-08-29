@@ -28,6 +28,8 @@
         "standard-opacity",
         "color-on-change",
         "icon-size",
+        "show-issues",
+        "show-translations",
         "sort-by",
         "show-uuid",
         "translate-name",
