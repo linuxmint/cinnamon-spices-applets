@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BLUETOOTH BATTERY
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# zamszowy, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 00:30+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
 "PO-Revision-Date: 2024-04-20 16:24+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,9 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:77
+#. applet.js:84
 msgid "Show devices battery levels"
 msgstr "Toon batterijniveaus van apparaten"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Testmelding"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
 
 #. metadata.json->name
 msgid "Bluetooth battery"
@@ -114,6 +125,22 @@ msgstr "Pictogram"
 msgid "Text"
 msgstr "Tekst"
 
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"
 msgstr "tekstballon"
@@ -150,11 +177,6 @@ msgstr "Melding inschakelen voor waarschuwingsbatterijsniveau"
 #. settings-schema.json->notification-crit-level->description
 msgid "Notify when battery below [%]"
 msgstr "Melding wanneer batterij onder [%] is"
-
-#. settings-schema.json->notification-warn-demo->description
-#. settings-schema.json->notification-crit-demo->description
-msgid "Test notification"
-msgstr "Testmelding"
 
 #. settings-schema.json->notification-crit-enable->description
 msgid "Enable notification for battery critical level"
