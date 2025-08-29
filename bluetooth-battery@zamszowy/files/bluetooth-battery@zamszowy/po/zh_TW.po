@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BLUETOOTH BATTERY
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# zamszowy, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 00:30+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
 "PO-Revision-Date: 2025-04-29 00:17+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,9 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:77
+#. applet.js:84
 msgid "Show devices battery levels"
 msgstr "顯示裝置電池電量"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "測試通知"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
 
 #. metadata.json->name
 msgid "Bluetooth battery"
@@ -54,7 +65,8 @@ msgstr "要顯示的裝置"
 
 #. settings-schema.json->section3->title
 msgid ""
-"Disable monitoring for selected devices. You can use model or serial of the device.\n"
+"Disable monitoring for selected devices. You can use model or serial of the "
+"device.\n"
 "Comment starts with '#'"
 msgstr ""
 "停用所選裝置的監控。你可以使用裝置的型號或序號。\n"
@@ -69,11 +81,13 @@ msgid "Critical notifications"
 msgstr "嚴重通知"
 
 #. settings-schema.json->section6->title
+#, fuzzy
 msgid ""
-"Ignore small changes of battery levels - if device reports small battery"
+"Ignore small changes of battery levels - if device reports small battery "
 "changes back and forth, this setting would help"
 msgstr ""
-"忽略電量的小幅度變動——如果裝置反覆回報小幅度的電量變化，這個設定可能會有所幫助"
+"忽略電量的小幅度變動——如果裝置反覆回報小幅度的電量變化，這個設定可能會有所幫"
+"助"
 
 #. settings-schema.json->section7->title
 msgid "Showing of configured applet icon/text"
@@ -111,6 +125,22 @@ msgstr "圖示"
 msgid "Text"
 msgstr "文字"
 
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"
 msgstr "工具提示"
@@ -127,8 +157,7 @@ msgstr "套用變更"
 msgid ""
 "Manually select main device to display (instead of the one with lowest "
 "battery)"
-msgstr ""
-"手動選擇要顯示的主要裝置（取代顯示電量最低的裝置）"
+msgstr "手動選擇要顯示的主要裝置（取代顯示電量最低的裝置）"
 
 #. settings-schema.json->override-entry->description
 msgid "Selected device:"
@@ -146,11 +175,6 @@ msgstr "啟用電池警告通知"
 #. settings-schema.json->notification-crit-level->description
 msgid "Notify when battery below [%]"
 msgstr "當電池低於 [%] 時通知"
-
-#. settings-schema.json->notification-warn-demo->description
-#. settings-schema.json->notification-crit-demo->description
-msgid "Test notification"
-msgstr "測試通知"
 
 #. settings-schema.json->notification-crit-enable->description
 msgid "Enable notification for battery critical level"
@@ -175,8 +199,7 @@ msgstr "電池低於嚴重等級時"
 #. settings-schema.json->notification-filter->description
 msgid ""
 "Notify again only if battery increased above configured level by at least: "
-msgstr ""
-"只有當電量回升超過設定值時才再次通知："
+msgstr "只有當電量回升超過設定值時才再次通知："
 
 #. settings-schema.json->notification-filter->units
 msgid "%"

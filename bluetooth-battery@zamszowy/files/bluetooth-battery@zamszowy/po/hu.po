@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BLUETOOTH BATTERY
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# zamszowy, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 00:30+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
 "PO-Revision-Date: 2023-12-13 16:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,9 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:77
+#. applet.js:84
 msgid "Show devices battery levels"
 msgstr "Az eszközök akkumulátorszintjének megjelenítése"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Teszt értesítés"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
 
 #. metadata.json->name
 msgid "Bluetooth battery"
@@ -77,9 +88,9 @@ msgid ""
 "Ignore small changes of battery levels - if device reports small battery "
 "changes back and forth, this setting would help"
 msgstr ""
-"Hagyja figyelmen kívül az akkumulátor töltöttségi szintjének kis "
-"változásait – ha az eszköz kisebb akkumulátorcseréket jelez oda-vissza, ez "
-"a beállítás segíthet"
+"Hagyja figyelmen kívül az akkumulátor töltöttségi szintjének kis változásait "
+"– ha az eszköz kisebb akkumulátorcseréket jelez oda-vissza, ez a beállítás "
+"segíthet"
 
 #. settings-schema.json->section7->title
 msgid "Showing of configured applet icon/text"
@@ -116,6 +127,22 @@ msgstr "Ikon"
 #. settings-schema.json->applet-icon->options
 msgid "Text"
 msgstr "Szöveg"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
 
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"
@@ -154,11 +181,6 @@ msgstr ""
 #. settings-schema.json->notification-crit-level->description
 msgid "Notify when battery below [%]"
 msgstr "Értesítés, ha az akkumulátor töltöttsége [%] alatt van"
-
-#. settings-schema.json->notification-warn-demo->description
-#. settings-schema.json->notification-crit-demo->description
-msgid "Test notification"
-msgstr "Teszt értesítés"
 
 #. settings-schema.json->notification-crit-enable->description
 msgid "Enable notification for battery critical level"

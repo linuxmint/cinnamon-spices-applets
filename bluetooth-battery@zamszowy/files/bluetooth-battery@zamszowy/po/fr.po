@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# BLUETOOTH BATTERY
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# zamszowy, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 00:30+0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
 "PO-Revision-Date: 2023-12-25 14:21+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -18,9 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:77
+#. applet.js:84
 msgid "Show devices battery levels"
 msgstr "Afficher le niveau de batterie des appareils"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Notification de test"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
 
 #. metadata.json->name
 msgid "Bluetooth battery"
@@ -77,9 +88,9 @@ msgid ""
 "Ignore small changes of battery levels - if device reports small battery "
 "changes back and forth, this setting would help"
 msgstr ""
-"Ignorer les petits changements de niveau de batterie - si l'appareil "
-"signale de petits changements de batterie dans un sens ou dans l'autre, ce "
-"paramètre peut être utile"
+"Ignorer les petits changements de niveau de batterie - si l'appareil signale "
+"de petits changements de batterie dans un sens ou dans l'autre, ce paramètre "
+"peut être utile"
 
 #. settings-schema.json->section7->title
 msgid "Showing of configured applet icon/text"
@@ -117,6 +128,22 @@ msgstr "Icône"
 msgid "Text"
 msgstr "Texte"
 
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
 #. settings-schema.json->blacklist->tooltip
 msgid "tooltip"
 msgstr "info-bulle"
@@ -134,8 +161,8 @@ msgid ""
 "Manually select main device to display (instead of the one with lowest "
 "battery)"
 msgstr ""
-"Sélection manuelle de l'appareil principal à afficher (au lieu de celui "
-"dont la batterie est la plus faible)"
+"Sélection manuelle de l'appareil principal à afficher (au lieu de celui dont "
+"la batterie est la plus faible)"
 
 #. settings-schema.json->override-entry->description
 msgid "Selected device:"
@@ -153,11 +180,6 @@ msgstr "Activer la notification du niveau d'alerte de la batterie"
 #. settings-schema.json->notification-crit-level->description
 msgid "Notify when battery below [%]"
 msgstr "Notifier lorsque le niveau de la batterie est inférieur à [%]"
-
-#. settings-schema.json->notification-warn-demo->description
-#. settings-schema.json->notification-crit-demo->description
-msgid "Test notification"
-msgstr "Notification de test"
 
 #. settings-schema.json->notification-crit-enable->description
 msgid "Enable notification for battery critical level"
