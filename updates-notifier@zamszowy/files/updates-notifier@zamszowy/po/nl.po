@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-22 18:21+0200\n"
+"POT-Creation-Date: 2025-08-30 23:50+0300\n"
 "PO-Revision-Date: 2025-08-26 10:42+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -20,34 +20,34 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "ontbrekende afhankelijkheden"
 
-#. applet.js:104
+#. applet.js:106
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s updates beschikbaar"
 
-#. applet.js:105
+#. applet.js:107
 msgid "No updates available"
 msgstr "Geen updates beschikbaar"
 
-#. applet.js:130
-#, javascript-format
-msgid "View %s updates"
-msgstr "Bekijk %s updates"
-
-#. applet.js:130
-msgid "No updates to view"
-msgstr "Geen updates om te bekijken"
-
-#. applet.js:136
+#. applet.js:133
 msgid "Check for new updates"
 msgstr "Controleer op nieuwe updates"
 
 #. applet.js:144
 #, javascript-format
+msgid "View %s updates"
+msgstr "Bekijk %s updates"
+
+#. applet.js:144
+msgid "No updates to view"
+msgstr "Geen updates om te bekijken"
+
+#. applet.js:152
+#, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Upgrade %s pakketten"
 
-#. applet.js:144
+#. applet.js:152
 msgid "No packages to upgrade"
 msgstr "Geen pakketten om te upgraden"
 
@@ -96,9 +96,20 @@ msgstr ""
 msgid "Commands to execute in popup menu"
 msgstr "Commando’s om uit te voeren in popupmenu"
 
+#. settings-schema.json->commandUpdate-show->description
+#, fuzzy
+msgid "Show \"Check for new updates\" command"
+msgstr "Controleer op nieuwe updates"
+
 #. settings-schema.json->commandUpdate->description
-msgid "Check for updates:"
-msgstr "Controleer op updates:"
+#, fuzzy
+msgid "Check for new updates:"
+msgstr "Controleer op nieuwe updates"
+
+#. settings-schema.json->commandUpgrade-show->description
+#, fuzzy
+msgid "Show \"Upgrade packages\" command"
+msgstr "Upgrade pakketten:"
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages:"
