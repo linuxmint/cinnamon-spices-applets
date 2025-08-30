@@ -7,7 +7,7 @@
         "type": "switch",
         "default": false,
         "description": "Enable coolbits",
-        "tooltip": "Allows overclocking (not recommended)\nSee https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Overclocking_and_cooling"
+        "tooltip": "Allows overclocking (not recommended)"
     },
     "coolbits": {
         "type": "entry",
@@ -66,5 +66,19 @@
         },
         "tooltip": "0 - disabled\n1 - coarse-grained\n2 - fine-grained\n3 - fine-grained for Ampere and later",
         "dependency": "enable-rtd3"
+    },
+    "section3": {
+        "type": "section",
+        "description": "Theme"
+    },
+    "icon-style": {
+          "type": "combobox",
+          "description": "Icon style",
+          "default": "light",
+          "options": {
+              "dark": "dark",
+              "light": "light",
+              "symbolic": "symbolic"
+          }
     }
 }
