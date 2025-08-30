@@ -1,0 +1,214 @@
+# BLUETOOTH BATTERY
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zamszowy, 2022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-29 21:28+0200\n"
+"PO-Revision-Date: 2023-12-13 16:46+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. applet.js:84
+msgid "Show devices battery levels"
+msgstr "Az eszközök akkumulátorszintjének megjelenítése"
+
+#. settings-schema.json->notification-warn-demo->description
+#. settings-schema.json->notification-crit-demo->description
+#. applet.js:161 applet.js:166
+msgid "Test notification"
+msgstr "Teszt értesítés"
+
+#. applet.js:161 applet.js:166 applet.js:257 applet.js:267
+msgid "Battery dropped below %d%"
+msgstr ""
+
+#. metadata.json->name
+msgid "Bluetooth battery"
+msgstr "Bluetooth akkumulátor"
+
+#. metadata.json->description
+msgid "Shows battery levels of different devices"
+msgstr "Megmutatja a különböző eszközök akkumulátorszintjét"
+
+#. settings-schema.json->page1->title
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->page2->title
+msgid "Notifications"
+msgstr "Értesítések"
+
+#. settings-schema.json->page3->title
+msgid "Blacklist"
+msgstr "Feketelista"
+
+#. settings-schema.json->section0->title
+msgid "Enable battery monitoring for:"
+msgstr "Akkumulátorfigyelés engedélyezése:"
+
+#. settings-schema.json->section1->title
+msgid "Icon/Text:"
+msgstr "Ikon/Szöveg:"
+
+#. settings-schema.json->section2->title
+msgid "Device to display"
+msgstr "Megjelenítendő eszköz"
+
+#. settings-schema.json->section3->title
+msgid ""
+"Disable monitoring for selected devices. You can use model or serial of the "
+"device.\n"
+"Comment starts with '#'"
+msgstr ""
+"A kiválasztott eszközök figyelésének letiltása. Használhatja az eszköz "
+"modelljét vagy sorozatát.\n"
+"A megjegyzés „#” karakterrel kezdődik"
+
+#. settings-schema.json->section4->title
+msgid "Warning notifications"
+msgstr "Figyelmeztető értesítések"
+
+#. settings-schema.json->section5->title
+msgid "Critical notifications"
+msgstr "Kritikus értesítések"
+
+#. settings-schema.json->section6->title
+msgid ""
+"Ignore small changes of battery levels - if device reports small battery "
+"changes back and forth, this setting would help"
+msgstr ""
+"Hagyja figyelmen kívül az akkumulátor töltöttségi szintjének kis változásait "
+"– ha az eszköz kisebb akkumulátorcseréket jelez oda-vissza, ez a beállítás "
+"segíthet"
+
+#. settings-schema.json->section7->title
+msgid "Showing of configured applet icon/text"
+msgstr "A beállított kisalkalmazás ikon/szöveg megjelenítése"
+
+#. settings-schema.json->enable-keyboards->description
+msgid "Keyboards"
+msgstr "Billentyűzetek"
+
+#. settings-schema.json->enable-mice->description
+msgid "Mice"
+msgstr "Egerek"
+
+#. settings-schema.json->enable-headphones->description
+msgid "Headphones"
+msgstr "Fejhallgatók"
+
+#. settings-schema.json->enable-others->description
+msgid "Other devices"
+msgstr "Más eszközök"
+
+#. settings-schema.json->applet-icon->description
+msgid "Display"
+msgstr "Megjelenítés"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon and Text"
+msgstr "Ikon és Szöveg"
+
+#. settings-schema.json->applet-icon->options
+msgid "Icon"
+msgstr "Ikon"
+
+#. settings-schema.json->applet-icon->options
+msgid "Text"
+msgstr "Szöveg"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr ""
+
+#. settings-schema.json->blacklist->tooltip
+msgid "tooltip"
+msgstr "eszköztipp"
+
+#. settings-schema.json->blacklist-apply->description
+msgid "Apply"
+msgstr "Alkalmaz"
+
+#. settings-schema.json->blacklist-apply->tooltip
+msgid "Apply changes"
+msgstr "Módosítások alkalmazása"
+
+#. settings-schema.json->override-enable->description
+msgid ""
+"Manually select main device to display (instead of the one with lowest "
+"battery)"
+msgstr ""
+"Manuálisan válassza ki a megjelenítendő fő eszközt (a legalacsonyabb "
+"akkumulátorral rendelkező eszköz helyett)"
+
+#. settings-schema.json->override-entry->description
+msgid "Selected device:"
+msgstr "Kiválasztott eszköz:"
+
+#. settings-schema.json->override-select->description
+msgid "Select device to display"
+msgstr "Válassza ki a megjeleníteni kívánt eszközt"
+
+#. settings-schema.json->notification-warn-enable->description
+msgid "Enable notification for battery warning level"
+msgstr ""
+"Az akkumulátor figyelmeztetési szintjéről szóló értesítés engedélyezése"
+
+#. settings-schema.json->notification-warn-level->description
+#. settings-schema.json->notification-crit-level->description
+msgid "Notify when battery below [%]"
+msgstr "Értesítés, ha az akkumulátor töltöttsége [%] alatt van"
+
+#. settings-schema.json->notification-crit-enable->description
+msgid "Enable notification for battery critical level"
+msgstr "Az akkumulátor kritikus szintjéről szóló értesítés engedélyezése"
+
+#. settings-schema.json->notification-applet-icon->description
+msgid "Show icon/text only if:"
+msgstr "Csak az ikon/szöveg megjelenítése, ha:"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "show always"
+msgstr "mindig jelenjen meg"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below warning level"
+msgstr "az akkumulátor a figyelmeztetési szint alatt van"
+
+#. settings-schema.json->notification-applet-icon->options
+msgid "battery below critical level"
+msgstr "az akkumulátor a kritikus szint alatt van"
+
+#. settings-schema.json->notification-filter->description
+msgid ""
+"Notify again only if battery increased above configured level by at least: "
+msgstr ""
+"Csak akkor értesítsen újra, ha az akkumulátor töltöttsége legalább a "
+"konfigurált szint fölé emelkedett: "
+
+#. settings-schema.json->notification-filter->units
+msgid "%"
+msgstr "%"

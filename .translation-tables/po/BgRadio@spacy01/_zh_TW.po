@@ -1,0 +1,28 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+#: applet.js:29
+msgid "Bulgarian Radio and TV Streams"
+msgstr ""
+
+#: applet.js:45
+msgid "Radio stations"
+msgstr ""
+
+#: applet.js:197
+msgid "TV stations"
+msgstr ""
+
+#: applet.js:300
+msgid "Stop"
+msgstr ""
+
+#: applet.js:303
+msgid "All Stop"
+msgstr ""

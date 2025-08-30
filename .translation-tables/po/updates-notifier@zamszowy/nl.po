@@ -1,0 +1,125 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-22 18:21+0200\n"
+"PO-Revision-Date: 2025-08-26 10:42+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:37
+msgid "missing dependencies"
+msgstr "ontbrekende afhankelijkheden"
+
+#. applet.js:104
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s updates beschikbaar"
+
+#. applet.js:105
+msgid "No updates available"
+msgstr "Geen updates beschikbaar"
+
+#. applet.js:130
+#, javascript-format
+msgid "View %s updates"
+msgstr "Bekijk %s updates"
+
+#. applet.js:130
+msgid "No updates to view"
+msgstr "Geen updates om te bekijken"
+
+#. applet.js:136
+msgid "Check for new updates"
+msgstr "Controleer op nieuwe updates"
+
+#. applet.js:144
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr "Upgrade %s pakketten"
+
+#. applet.js:144
+msgid "No packages to upgrade"
+msgstr "Geen pakketten om te upgraden"
+
+#. metadata.json->name
+msgid "Updates notifier"
+msgstr "Updates-melder"
+
+#. metadata.json->description
+msgid "Shows icons for pending update packages"
+msgstr "Toont pictogrammen voor hangende updatepakketten"
+
+#. settings-schema.json->section1->description
+msgid "Settings"
+msgstr "Instellingen"
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing applet"
+msgstr "Minuten te wachten voordat het applet ververst wordt"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr "Verberg applet als er geen updates zijn"
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr ""
+"Toon een ander appletpictogram afhankelijk van het aantal upgradebare "
+"pakketten"
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr ""
+"Toon laag-niveau pictogram wanneer het aantal updates tussen 0 en deze "
+"waarde ligt"
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+"Toon medium-niveau pictogram wanneer het aantal updates tussen de laag-"
+"niveau waarde en deze waarde ligt. Toon hoog-niveau pictogram als het aantal "
+"hoger is dan deze waarde."
+
+#. settings-schema.json->section2->description
+msgid "Commands to execute in popup menu"
+msgstr "Commando’s om uit te voeren in popupmenu"
+
+#. settings-schema.json->commandUpdate->description
+msgid "Check for updates:"
+msgstr "Controleer op updates:"
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages:"
+msgstr "Upgrade pakketten:"
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr "Thema"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Pictogramstijl"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "donker"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "licht"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "symbolisch"

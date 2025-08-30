@@ -1,0 +1,127 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-22 18:21+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:37
+msgid "missing dependencies"
+msgstr "dipendenze mancanti"
+
+#. applet.js:104
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s aggiornamenti disponibili"
+
+#. applet.js:105
+msgid "No updates available"
+msgstr "Nessun aggiornamento disponibile"
+
+#. applet.js:130
+#, javascript-format
+msgid "View %s updates"
+msgstr "Visualizza %s aggiornamenti"
+
+#. applet.js:130
+msgid "No updates to view"
+msgstr "Nessun aggiornamento da visualizzare"
+
+#. applet.js:136
+msgid "Check for new updates"
+msgstr "Cerca nuovi aggiornamenti"
+
+#. applet.js:144
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr "Aggiorna %s pacchetti"
+
+#. applet.js:144
+msgid "No packages to upgrade"
+msgstr "Nessun pacchetto da aggiornare"
+
+#. metadata.json->name
+msgid "Updates notifier"
+msgstr "Notificatore aggiornamenti"
+
+#. metadata.json->description
+msgid "Shows icons for pending update packages"
+msgstr "Mostra icone per i pacchetti di aggiornamento in sospeso"
+
+#. settings-schema.json->section1->description
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing applet"
+msgstr "Minuti di attesa prima di aggiornare l’applet"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr "Nascondi l’applet se non ci sono aggiornamenti"
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr ""
+"Mostra un’icona diversa dell’applet in base al numero di pacchetti "
+"aggiornabili"
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr ""
+"Mostra l’icona di livello basso quando il numero di aggiornamenti è tra 0 e "
+"questo valore "
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+"Mostra l’icona di livello medio quando il numero di aggiornamenti è tra il "
+"valore di livello basso e questo valore. Mostra l’icona di livello alto se è "
+"superiore a questo valore."
+
+#. settings-schema.json->section2->description
+msgid "Commands to execute in popup menu"
+msgstr "Comandi da eseguire nel menu a comparsa"
+
+#. settings-schema.json->commandUpdate->description
+msgid "Check for updates:"
+msgstr "Verifica aggiornamenti:"
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages:"
+msgstr "Aggiorna pacchetti:"
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr "Tema"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Stile icone"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "scura"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "chiara"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "simbolica"
