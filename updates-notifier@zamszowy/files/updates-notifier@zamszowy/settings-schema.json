@@ -34,15 +34,27 @@
         "type": "section",
         "description": "Commands to execute in popup menu"
     },
+    "commandUpdate-show": {
+        "type": "switch",
+        "default": true,
+        "description": "Show \"Check for new updates\" command"
+    },
     "commandUpdate": {
         "type": "entry",
         "default": "pkcon refresh",
-        "description": "Check for updates:"
+        "description": "Check for new updates:",
+        "dependency": "commandUpdate-show"
+    },
+    "commandUpgrade-show": {
+        "type": "switch",
+        "default": true,
+        "description": "Show \"Upgrade packages\" command"
     },
     "commandUpgrade": {
         "type": "entry",
         "default": "pkcon update",
-        "description": "Upgrade packages:"
+        "description": "Upgrade packages:",
+        "dependency": "commandUpgrade-show"
     },
     "section3": {
         "type": "section",
