@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.1.0\n"
+"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-28 15:41+0200\n"
+"POT-Creation-Date: 2025-08-30 17:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,20 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:29 applet.js:149
+#. applet.js:30 applet.js:155
 msgid "Control the pointer using the keypad"
 msgstr ""
 
-#. applet.js:149 applet.js:152
+#. applet.js:155 applet.js:158
 msgid "Mouse Keys: ON"
 msgstr ""
 
-#. applet.js:158 applet.js:161
+#. applet.js:164 applet.js:167
 msgid "Mouse Keys: OFF"
 msgstr ""
 
-#. applet.js:158
+#. applet.js:164
 msgid "Control the pointer using the mouse"
+msgstr ""
+
+#. settings-schema.json->initial-delay->description
+#. applet.js:185 applet.js:188 applet.js:195
+msgid "Initial delay"
+msgstr ""
+
+#. applet.js:188 applet.js:195 applet.js:206 applet.js:213
+msgid " ms"
+msgstr ""
+
+#. settings-schema.json->acceleration-time->description
+#. applet.js:203 applet.js:206 applet.js:213
+msgid "Acceleration time"
+msgstr ""
+
+#. settings-schema.json->maximum-speed->description
+#. applet.js:221 applet.js:226 applet.js:246
+msgid "Maximum speed"
+msgstr ""
+
+#. applet.js:226 applet.js:246
+msgid " px/s"
 msgstr ""
 
 #. metadata.json->name
@@ -59,18 +82,6 @@ msgstr ""
 
 #. settings-schema.json->section2->description
 msgid "Mouse Keys"
-msgstr ""
-
-#. settings-schema.json->initial-delay->description
-msgid "Initial delay"
-msgstr ""
-
-#. settings-schema.json->acceleration-time->description
-msgid "Acceleration time"
-msgstr ""
-
-#. settings-schema.json->maximum-speed->description
-msgid "Maximum speed"
 msgstr ""
 
 #. settings-schema.json->section->description
