@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: envycontrol@zamszowy 1.0\n"
+"Project-Id-Version: envycontrol@zamszowy 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-15 13:19+0200\n"
+"POT-Creation-Date: 2025-08-30 22:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,74 +21,74 @@ msgstr ""
 msgid "missing dependencies"
 msgstr ""
 
-#. applet.js:69
+#. applet.js:70
 #, javascript-format
 msgid "Switch to %s"
 msgstr ""
 
-#. applet.js:71
+#. applet.js:72
 #, javascript-format
 msgid "Switched to %s (pending reboot)"
 msgstr ""
 
-#. applet.js:73
+#. applet.js:74
 #, javascript-format
 msgid "Switch back to %s"
 msgstr ""
 
-#. applet.js:99
+#. applet.js:100
 #, javascript-format
 msgid "Changing mode to %s"
 msgstr ""
 
-#. applet.js:101
+#. applet.js:102
 #, javascript-format
 msgid "Switching to %s mode in progress..."
 msgstr ""
 
-#. applet.js:105
+#. applet.js:106
 #, javascript-format
 msgid "Switched to %s mode"
 msgstr ""
 
-#. applet.js:134
+#. applet.js:135
 msgid "Configuring..."
 msgstr ""
 
-#. applet.js:145
-msgid "Hybrid settings:"
-msgstr ""
-
-#. applet.js:147
-msgid "  Create cache"
+#. applet.js:146
+msgid "Hybrid settings"
 msgstr ""
 
 #. applet.js:149
+msgid "  Create cache"
+msgstr ""
+
+#. applet.js:151
 msgid "successfully created cache"
 msgstr ""
 
-#. applet.js:153
+#. applet.js:155
 msgid "  Delete cache"
 msgstr ""
 
-#. applet.js:155
+#. applet.js:157
 msgid "successfully deleted cache"
 msgstr ""
 
-#. applet.js:159
+#. applet.js:161
 msgid "  Show cache"
 msgstr ""
 
-#. applet.js:167
+#. applet.js:169
 msgid "Show last switch log"
 msgstr ""
 
-#. applet.js:177
+#. applet.js:179
 #, javascript-format
 msgid "Current mode: %s"
 msgstr ""
 
-#. applet.js:177
+#. applet.js:179
 #, javascript-format
 msgid "(pending switch to %s)"
 msgstr ""
@@ -110,10 +110,7 @@ msgid "Enable coolbits"
 msgstr ""
 
 #. settings-schema.json->enable-coolbits->tooltip
-msgid ""
-"Allows overclocking (not recommended)\n"
-"See https://wiki.archlinux.org/title/NVIDIA/"
-"Tips_and_tricks#Overclocking_and_cooling"
+msgid "Allows overclocking (not recommended)"
 msgstr ""
 
 #. settings-schema.json->coolbits->description
@@ -200,4 +197,24 @@ msgid ""
 "1 - coarse-grained\n"
 "2 - fine-grained\n"
 "3 - fine-grained for Ampere and later"
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr ""
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr ""
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
 msgstr ""

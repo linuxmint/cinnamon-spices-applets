@@ -50,6 +50,7 @@ EnvyControlGui.prototype = {
         this.settings.bind("use-nvidia-current", "useNvidiaCurrent", this.update, null);
         this.settings.bind("enable-rtd3", "enableRtd3", this.update, null);
         this.settings.bind("rtd3", "rtd3", this.update, null);
+        this.settings.bind("icon-style", "icon_style", this.update, null);
 
         this.pending_mode = "";
         this.current_mode = "";
@@ -142,29 +143,30 @@ EnvyControlGui.prototype = {
             });
         };
 
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Hybrid settings:"), { reactive: false, }), position++);
+        this.hybrid_menu = new PopupMenu.PopupSubMenuMenuItem(_("Hybrid settings"));
+        this._applet_context_menu.addMenuItem(this.hybrid_menu, position++);
 
         let hybridCreateCache = new PopupMenu.PopupMenuItem(_("  Create cache"), { reactive: this.current_mode == "hybrid", });
         hybridCreateCache.connect('activate', () => {
             runCmd('priviliged', 'show-out-on-fail', ['--cache-create'], _("successfully created cache"));
         });
-        this._applet_context_menu.addMenuItem(hybridCreateCache, position++);
+        this.hybrid_menu.menu.addMenuItem(hybridCreateCache);
 
         let hybridDeleteCache = new PopupMenu.PopupMenuItem(_("  Delete cache"),);
         hybridDeleteCache.connect('activate', () => {
             runCmd('priviliged', 'show-out-on-fail', ['--cache-delete'], _("successfully deleted cache"));
         });
-        this._applet_context_menu.addMenuItem(hybridDeleteCache, position++);
+        this.hybrid_menu.menu.addMenuItem(hybridDeleteCache);
 
         let hybridShowCache = new PopupMenu.PopupMenuItem(_("  Show cache"),);
         hybridShowCache.connect('activate', () => {
             runCmd('non-priviliged', 'show-out-always', ['--cache-query'], "");
         });
-        this._applet_context_menu.addMenuItem(hybridShowCache, position++);
+        this.hybrid_menu.menu.addMenuItem(hybridShowCache);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem(), position++);
 
-        let log = new PopupMenu.PopupMenuItem(_("Show last switch log"),);
+        let log = new PopupMenu.PopupIconMenuItem(_("Show last switch log"), "text-x-generic", St.IconType.SYMBOLIC);
         log.connect('activate', () => {
             Util.spawn_async(['/usr/bin/bash', this.applet_path + '/control.sh', "show-last-log"]);
         });
@@ -200,7 +202,20 @@ EnvyControlGui.prototype = {
     },
 
     get_icon_name: function (mode) {
-        return "envy-" + (mode == "integrated" ? this.cpu_vendor : mode)
+        const mode_name = (mode == "integrated" ? this.cpu_vendor : mode);
+
+        let style = "";
+        if (this.icon_style == "dark") {
+            style = "dark";
+        } else if (this.icon_style == "light") {
+            style = "light";
+        } else if (this.icon_style == "symbolic") {
+            style = "symbolic";
+        } else {
+            style = "light";
+        }
+
+        return "envy-%s-%s".format(mode_name, style);
     },
 };
 
