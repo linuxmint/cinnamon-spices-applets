@@ -182,31 +182,35 @@ class MyApplet extends Applet.IconApplet {
   initDelaySlider() {
     this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
     let userInitDelay = this.keyboardSettings.get_int('mousekeys-init-delay');
-    let initDelayLabel = new PopupMenu.PopupMenuItem("Initial delay", {reactive: false});
+    let initDelayLabel = new PopupMenu.PopupMenuItem(_("Initial delay"), {reactive: false});
     let initDelaySlider = new PopupMenu.PopupSliderMenuItem(userInitDelay / 2000); // 2000 is maximum
-    this.initDelaytooltip = new Tooltips.Tooltip(initDelaySlider.actor, "Initial delay");
+    initDelaySlider.set_mark(0.15); // default value is 300, and 300/2000=0.15.
+    this.initDelaytooltip = new Tooltips.Tooltip(initDelaySlider.actor, _("Initial delay") + " " + userInitDelay.toString() + _(" ms"));
     this._applet_context_menu.addMenuItem(initDelayLabel)
     this._applet_context_menu.addMenuItem(initDelaySlider);
 
     initDelaySlider.connect('value-changed', (slider) => {
-      let updatedInitDelay = Math.round(slider.value * 2000);
+      let updatedInitDelay = Math.max(Math.round(slider.value * 20) * 100, 10); // 100-multiple; with 10 as minimum value.
       this.settings.setValue("initial-delay", updatedInitDelay);
+      this.initDelaytooltip.set_text(_("Initial delay") + " " + updatedInitDelay.toString() + _(" ms"));
       this.on_delay_changed();
-    }); 
+    });
     this.initDelaySlider = initDelaySlider;
   }
   accelTimeSlider(){
     this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
     let userAccelTime = this.keyboardSettings.get_int('mousekeys-accel-time');
-    let accelTimeLabel = new PopupMenu.PopupMenuItem("Acceleration time", {reactive: false});
+    let accelTimeLabel = new PopupMenu.PopupMenuItem(_("Acceleration time"), {reactive: false});
     let accelTimeSlider = new PopupMenu.PopupSliderMenuItem(userAccelTime / 2000);
-    this.accelTimeTooltip = new Tooltips.Tooltip(accelTimeSlider.actor, "Acceleration time");
+    accelTimeSlider.set_mark(0.15);
+    this.accelTimeTooltip = new Tooltips.Tooltip(accelTimeSlider.actor, _("Acceleration time") + " " + userAccelTime.toString() + _(" ms"));
     this._applet_context_menu.addMenuItem(accelTimeLabel);
     this._applet_context_menu.addMenuItem(accelTimeSlider);
 
     accelTimeSlider.connect('value-changed', (slider) => {
-      let updatedAccelTime = Math.round(slider.value * 2000);
+      let updatedAccelTime = Math.max(Math.round(slider.value * 20) * 100, 10);
       this.settings.setValue("acceleration-time", updatedAccelTime);
+      this.accelTimeTooltip.set_text(_("Acceleration time") + " " + updatedAccelTime.toString() + _(" ms"));
       this.on_acceleration_changed();
     });
     this.accelTimeSlider = accelTimeSlider;
@@ -214,15 +218,33 @@ class MyApplet extends Applet.IconApplet {
   maxSpeedSlider(){
     this.keyboardSettings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
     let userMaxSpeed = this.keyboardSettings.get_int('mousekeys-max-speed');
-    let maxSpeedLabel = new PopupMenu.PopupMenuItem("Maximum speed", {reactive: false});
+    let maxSpeedLabel = new PopupMenu.PopupMenuItem(_("Maximum speed"), {reactive: false});
     let maxSpeedSlider = new PopupMenu.PopupSliderMenuItem(userMaxSpeed / 500); // 500 is maximum
-    this.maxSpeedTooltip = new Tooltips.Tooltip(maxSpeedSlider.actor, "Maximum speed");
+    maxSpeedSlider.set_mark(0.02); // default value is 10, and 10/500=0.02.
+    this.maxSpeedSliderOldValue = 500 * maxSpeedSlider._value;
+    //~ global.log(UUID + " - this.maxSpeedSliderOldValue: " + this.maxSpeedSliderOldValue);
+    this.maxSpeedTooltip = new Tooltips.Tooltip(maxSpeedSlider.actor, _("Maximum speed") + " " + userMaxSpeed.toString() + _(" px/s"));
     this._applet_context_menu.addMenuItem(maxSpeedLabel);
     this._applet_context_menu.addMenuItem(maxSpeedSlider);
 
     maxSpeedSlider.connect('value-changed', (slider) => {
-      let updatedMaxSpeed = Math.round(slider.value * 500); 
+      // 1 is minimum value.
+      // 500 is maximum value.
+      // The default value 10 must be magnetic:
+      let _realValue = 500 * slider.value;
+      let updatedMaxSpeed;
+      if (_realValue >= 2 && _realValue <= 18)
+        updatedMaxSpeed = 10; // 10 is magnetic.
+      else
+        updatedMaxSpeed = Math.max(Math.round(slider.value * 20) * 25, 1); // 25-multiple. 1 is minimum value.
+      if (  (updatedMaxSpeed === 1 && this.maxSpeedSliderOldValue === 25) ||
+            (updatedMaxSpeed === 25 && this.maxSpeedSliderOldValue === 1)
+      ) {
+        updatedMaxSpeed = 10; // 10 is magnetic.
+      }
       this.settings.setValue("maximum-speed", updatedMaxSpeed);
+      this.maxSpeedTooltip.set_text(_("Maximum speed") + " " + updatedMaxSpeed.toString() + _(" px/s"));
+      this.maxSpeedSliderOldValue = updatedMaxSpeed;
       this.on_speed_changed();
     });
     this.maxSpeedSlider = maxSpeedSlider;

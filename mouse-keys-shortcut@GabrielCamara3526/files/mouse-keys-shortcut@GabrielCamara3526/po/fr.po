@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-28 15:41+0200\n"
+"POT-Creation-Date: 2025-08-30 17:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -18,21 +18,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:29 applet.js:149
+#. applet.js:30 applet.js:155
 msgid "Control the pointer using the keypad"
 msgstr "Contrôler le curseur à l'aide du clavier numérique"
 
-#. applet.js:149 applet.js:152
+#. applet.js:155 applet.js:158
 msgid "Mouse Keys: ON"
 msgstr "Touches de la souris : ACTIVÉ"
 
-#. applet.js:158 applet.js:161
+#. applet.js:164 applet.js:167
 msgid "Mouse Keys: OFF"
 msgstr "Touches de la souris : DÉSACTIVÉ"
 
-#. applet.js:158
+#. applet.js:164
 msgid "Control the pointer using the mouse"
 msgstr "Contrôler le curseur avec la souris"
+
+#. settings-schema.json->initial-delay->description
+#. applet.js:185 applet.js:188 applet.js:195
+msgid "Initial delay"
+msgstr "Délai initial"
+
+#. applet.js:188 applet.js:195 applet.js:206 applet.js:213
+msgid " ms"
+msgstr " ms"
+
+#. settings-schema.json->acceleration-time->description
+#. applet.js:203 applet.js:206 applet.js:213
+msgid "Acceleration time"
+msgstr "Temps d'accélération"
+
+#. settings-schema.json->maximum-speed->description
+#. applet.js:221 applet.js:226 applet.js:246
+msgid "Maximum speed"
+msgstr "Vitesse maximale"
+
+#. applet.js:226 applet.js:246
+msgid " px/s"
+msgstr " px/s"
 
 #. metadata.json->name
 msgid "Mouse Keys Shortcut"
@@ -64,18 +87,6 @@ msgstr ""
 #. settings-schema.json->section2->description
 msgid "Mouse Keys"
 msgstr "Touches de la souris"
-
-#. settings-schema.json->initial-delay->description
-msgid "Initial delay"
-msgstr "Délai initial"
-
-#. settings-schema.json->acceleration-time->description
-msgid "Acceleration time"
-msgstr "Temps d'accélération"
-
-#. settings-schema.json->maximum-speed->description
-msgid "Maximum speed"
-msgstr "Vitesse maximale"
 
 #. settings-schema.json->section->description
 msgid "Notifications"
