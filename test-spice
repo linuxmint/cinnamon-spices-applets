@@ -64,16 +64,19 @@ def reload_xlet(uuid):
 
 
 def watch(uuid, action):
-    print('Watching for changes. Press Ctrl+C to stop.')
     cmd = ["inotifywait", "--recursive", "--quiet", "--event", "modify", "--monitor", uuid]
     last_run = 0
     try:
         with subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True) as proc:
+            print('Watching for changes. Press Ctrl+C to stop.')
             for line in proc.stdout:
                 now = time.time()
                 if (now - last_run) > 1:
                     action(uuid)
                     last_run = now
+    except FileNotFoundError:
+        print('Failed to start watcher. Make sure inotify-tools package is installed.')
+        sys.exit(3)
     except KeyboardInterrupt:
         sys.exit(0)
 
@@ -81,6 +84,9 @@ def watch(uuid, action):
 def validate_and_copy(uuid):
     if validate_spice(uuid):
         copy_xlet(uuid)
+        return True
+    else:
+        return False
 
 
 def main():
@@ -111,8 +117,8 @@ def main():
         copy_xlet(uuid)
     elif args.uuid and not args.remove:
         if args.watch:
-            validate_and_copy(uuid)
-            watch(uuid, validate_and_copy)
+            if validate_and_copy(uuid):
+                watch(uuid, validate_and_copy)
         else:
             validate_and_copy(uuid)
     else:
