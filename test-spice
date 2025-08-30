@@ -100,7 +100,7 @@ def main():
     parser.add_argument('-s', '--skip', action='store_true',
                         help='Skip Spice validation with validate-spice')
     parser.add_argument('-w', '--watch', action='store_true',
-                        help='Watch for changes in the spice directory and reload the applet')
+                        help='Watch the Spice directory for changes and update the applet with reload')
     parser.add_argument('uuid', type=str, metavar='UUID', nargs='?',
                         help='the UUID of the Spice')
     args = parser.parse_args()
