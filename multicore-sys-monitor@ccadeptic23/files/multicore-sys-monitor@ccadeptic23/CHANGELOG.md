@@ -1,3 +1,7 @@
+### v3.0.0~20250831
+  * The different colors for cache and buffer memory in the RAM graph are back!
+  * Code cleanup.
+
 ### v2.9.1~20250829
   * Code cleanup.
 

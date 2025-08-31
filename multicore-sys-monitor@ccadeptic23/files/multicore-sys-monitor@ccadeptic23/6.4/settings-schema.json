@@ -144,6 +144,8 @@
       "title": "Colors",
       "keys": [
         "Mem_colorUsedup",
+        "Mem_colorCache",
+        "Mem_colorBuffers",
         "Mem_colorFree",
         "Mem_colorSwap",
         "Mem_swapWidth"
@@ -466,6 +468,16 @@
     "type": "colorchooser",
     "default": "rgba(255, 255, 255, 1)",
     "description": "Usedup"
+  },
+  "Mem_colorCache": {
+    "type": "colorchooser",
+    "default": "rgba(148, 114, 219, 1)",
+    "description": "Cache"
+  },
+  "Mem_colorBuffers": {
+    "type": "colorchooser",
+    "default": "rgba(254, 140, 2, 1)",
+    "description": "Buffers"
   },
   "Mem_colorFree": {
     "type": "colorchooser",

@@ -166,6 +166,8 @@ class MCSM extends Applet.IconApplet {
         this.settings.bind("Mem_width", "Mem_width");
         this.settings.bind("Mem_startAt12Oclock", "Mem_startAt12Oclock");
         this.settings.bind("Mem_colorUsedup", "Mem_colorUsedup");
+        this.settings.bind("Mem_colorCache", "Mem_colorCache");
+        this.settings.bind("Mem_colorBuffers", "Mem_colorBuffers");
         this.settings.bind("Mem_colorFree", "Mem_colorFree");
         this.settings.bind("Mem_colorSwap", "Mem_colorSwap");
         this.settings.bind("Mem_swapWidth", "Mem_swapWidth");
@@ -667,26 +669,37 @@ class MCSM extends Applet.IconApplet {
             var data = [];
             const lines = contents.split("\n");
             const p = 1024;
-            var total=0, used=0, free=0, shared=0, buffers=0, cache=0, available=0, swapTotal=0, swapUsed=0;
+            var memInfo = {};
             for (let line of lines) {
                 line = line.trim().replace(/\ +/g, " ");
                 let [name, value, unit] = line.split(" ");
                 value = 1 * value;
                 if (name.startsWith("SUnreclaim")) break;
-                if (name.startsWith("MemTotal")) total = p * value;
-                if (name.startsWith("MemFree")) free = p * value;
-                if (name.startsWith("MemAvailable")) available = p * value;
-                if (name.startsWith("Buffers")) buffers = p * value;
-                if (name.startsWith("Cached")) cache = p * value;
-                if (name.startsWith("SwapTotal")) swapTotal = p * value;
-                if (name.startsWith("SwapFree")) swapUsed = swapTotal - p * value;
-                if (name.startsWith("Shmem")) shared = p * value;
-                if (name.startsWith("SReclaimable")) cache = cache + p * value;
+                if (name.startsWith("MemTotal")) memInfo["MemTotal"] = p * value;
+                if (name.startsWith("MemFree")) memInfo["MemFree"] = p * value;
+                if (name.startsWith("MemAvailable")) memInfo["MemAvailable"] = p * value;
+                if (name.startsWith("Buffers")) memInfo["Buffers"] = p * value;
+                if (name.startsWith("Cached")) memInfo["Cached"] = p * value;
+                if (name.startsWith("SwapTotal")) memInfo["SwapTotal"] = p * value;
+                if (name.startsWith("SwapFree")) memInfo["SwapFree"] = p * value;
+                if (name.startsWith("Shmem")) memInfo["Shmem"] = p * value;
+                if (name.startsWith("SReclaimable")) memInfo["SReclaimable"] = p * value;
             }
-            used = total - available;
-            this.memoryProvider.setData(1 * total, 1 * used);
-            this.swapProvider.setData(1 * swapTotal, 1 * swapUsed / swapTotal);
-            this.buffcachesharedProvider.setData(1 * buffers, 1 * cache, 1 * shared);
+
+            // From htop author:
+            // Total used memory = MemTotal - MemFree
+            // Non cache/buffer memory (green) = Total used memory - (Buffers + Cached memory)
+            // Buffers (blue) = Buffers
+            // Cached memory (yellow) = Cached + SReclaimable - Shmem
+            // Swap = SwapTotal - SwapFree
+
+            memInfo["MemUsed"] = memInfo["MemTotal"] - memInfo["MemFree"];
+            memInfo["Cached"] =  memInfo["Cached"] + memInfo["SReclaimable"] - memInfo["Shmem"];
+            memInfo["SwapUsed"] = memInfo["SwapTotal"] - memInfo["SwapFree"];
+
+            this.memoryProvider.setData(memInfo["MemTotal"], memInfo["MemTotal"] - memInfo["MemAvailable"], memInfo);
+            this.swapProvider.setData(memInfo["SwapTotal"], memInfo["SwapUsed"] / memInfo["SwapTotal"]);
+            this.buffcachesharedProvider.setData(memInfo["Buffers"], memInfo["Cached"], memInfo["Shmem"]);
             if (DEBUG) {
                 duration = Date.now() - old;
                 global.log(UUID + " - get_mem_info Duration: " + duration + " ms.");
@@ -1042,7 +1055,7 @@ class MemDataProvider {
     }
 
     getColorList() {
-        let types = ["Usedup", "Free", "Swap"];
+        let types = ["Usedup", "Cache", "Buffers", "Free", "Swap"];
         var colorList = [];
         for (let t of types)
             colorList.push(this.applet[`Mem_color${t}`]);
@@ -1054,13 +1067,14 @@ class MemDataProvider {
         return this.currentReadings;
     }
 
-    setData(total, used) {
+    setData(total, used, memInfo) {
         const precision = 100000;
-        const usedProp = used / total;
         this.currentReadings = [
-            Math.round(usedProp * precision) / precision,
-            Math.round((1 - usedProp)*precision) / precision
-        ];
+            (memInfo["MemUsed"] - memInfo["Cached"] - memInfo["Buffers"]) / memInfo["MemTotal"],
+            memInfo["Cached"] / memInfo["MemTotal"],
+            memInfo["Buffers"] / memInfo["MemTotal"],
+            1 - memInfo["MemUsed"] / memInfo["MemTotal"]
+        ]
     }
 
     getTooltipString() {
@@ -1071,20 +1085,9 @@ class MemDataProvider {
         let len = trans.length - 2;
         let toolTipString = "-".repeat(Math.trunc((2*spaces - len)/2)) + " " + trans + " " + "-".repeat(Math.round((2*spaces - len)/2)) + '\n';
 
-        //let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
-        let attributes = [_('Used:'), _('Free:')];
-        //let attributes = [_('Unrecoverable:'), _("Recoverable:"), _('Used:'), _('Free:')];
+        let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
         for (let i = 0; i < attributes.length; i++) {
-            if (i < 2) {
-                sum_used = sum_used + this.currentReadings[i];
-            }
-            if (i < 2) {
-                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i])/10).toString().padStart(2, ' ') + ' %\n';
-            } else if (i === 2) {
-                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * sum_used)/10).toString().padStart(2, ' ') + ' %\n';
-            } else {
-                toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i-1])/10).toString().padStart(2, ' ') + ' %\n';
-            }
+            toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + (Math.round(1000 * this.currentReadings[i])/10).toString().padStart(2, ' ') + ' %\n';
         }
         return toolTipString;
     }
