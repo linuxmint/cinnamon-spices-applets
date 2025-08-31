@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-31 11:02+0300\n"
+"POT-Creation-Date: 2025-08-31 16:14+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -99,19 +99,16 @@ msgid "Commands to execute in popup menu"
 msgstr "Comandi da eseguire nel menu a comparsa"
 
 #. settings-schema.json->commandUpdate-show->description
-#, fuzzy
 msgid "Show \"Check for new updates\" command"
-msgstr "Cerca nuovi aggiornamenti"
+msgstr ""
 
 #. settings-schema.json->commandUpdate->description
-#, fuzzy
 msgid "Check for new updates:"
-msgstr "Cerca nuovi aggiornamenti"
+msgstr "Cerca nuovi aggiornamenti:"
 
 #. settings-schema.json->commandUpgrade-show->description
-#, fuzzy
 msgid "Show \"Upgrade packages\" command"
-msgstr "Aggiorna pacchetti:"
+msgstr ""
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages:"
