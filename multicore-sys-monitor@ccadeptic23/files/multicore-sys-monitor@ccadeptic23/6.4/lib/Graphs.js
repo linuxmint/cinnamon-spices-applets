@@ -87,7 +87,6 @@ class GraphVBars {
 
     bgColor = RGBa2rgba(bgColor);
 
-    //~ global.log("Type of GraphVBars colorsList: " + typeof colorsList);
     if (typeof colorsList == "object") {
         for (let i=0, len=colorsList.length; i<len; i++)
             colorsList[i] = RGBa2rgba(colorsList[i]);
@@ -106,13 +105,7 @@ class GraphVBars {
       if (providerName != 'SWAP') {
         borderColor = RGBa2rgba(this.applet.borderColor);
         areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
-        //~ areaContext.rectangle(0, 0, width, height);
-        //~ areaContext.fill();
 
-        //~ areaContext.moveTo(0.5, 0);
-        //~ areaContext.lineTo(width - 0.5, 0);
-        //~ areaContext.lineTo(width - 0.5, height);
-        //~ areaContext.lineTo(0.5, height);
         areaContext.moveTo(0, 0);
         areaContext.lineTo(width, 0);
         areaContext.lineTo(width, height);
@@ -134,7 +127,6 @@ class GraphVBars {
     if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
 
-    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
@@ -238,9 +230,6 @@ class GraphVBars {
   }
   destroy() {
     let props = Object.keys(this);
-    //~ for (let i = 0; i < props.length; i++) {
-      //~ this[props[i]] = undefined;
-    //~ }
     for (let prop of props) {
       this[prop] = undefined;
     }
@@ -296,7 +285,6 @@ class GraphVBars100 extends GraphVBars {
     if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
 
-    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
@@ -313,7 +301,6 @@ class GraphVBars100 extends GraphVBars {
 
       let r=1, g=1, b=1, a=1;
 
-      //~ let barnum = i % colorsList.length;
       let barnum = 0;
       r = colorsList[barnum][0];
       g = colorsList[barnum][1];
@@ -367,16 +354,17 @@ class GraphPieChart {
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
     } else {
-        labelColor = RGBa2rgba(labelColor);
+      labelColor = RGBa2rgba(labelColor);
     }
 
     bgColor = RGBa2rgba(bgColor);
 
     if (typeof colorsList == "string") {
-        colorsList = RGBa2rgba(colorsList);
+      colorsList = RGBa2rgba(colorsList);
     } else {
-        for (let i=0, len=colorsList.length; i<len; i++)
-            colorsList[i] = RGBa2rgba(colorsList[i]);
+      for (let i=0, len=colorsList.length; i<len; i++) {
+        colorsList[i] = RGBa2rgba(colorsList[i]);
+      }
     }
 
     let _width = width;
@@ -389,13 +377,7 @@ class GraphPieChart {
     if (this.applet.borderOn) {
       borderColor = RGBa2rgba(this.applet.borderColor);
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
-      //~ areaContext.rectangle(0, 0, width, height);
-      //~ areaContext.fill();
 
-      //~ areaContext.moveTo(0.5, 0);
-      //~ areaContext.lineTo(width - 0.5, 0);
-      //~ areaContext.lineTo(width - 0.5, height);
-      //~ areaContext.lineTo(0.5, height);
       areaContext.moveTo(0, 0);
       areaContext.lineTo(width, 0);
       areaContext.lineTo(width, height);
@@ -412,16 +394,15 @@ class GraphPieChart {
     //Draw Background
     if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
-    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
     //Draw Pie Chart
     let xcenter = _width / 2;
     let ycenter = _height / 2;
-    let radius = Math.min(xcenter, ycenter) - 1;
+    let radius = Math.min(xcenter, ycenter) - 2;
 
-    let runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
+    var runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
 
     areaContext.moveTo(xcenter, ycenter);
     for (let i=0, len=currentReadings.length; i<len; i++) {
@@ -487,9 +468,6 @@ class GraphPieChart {
 
   destroy() {
     let props = Object.keys(this);
-    //~ for (let i = 0; i < props.length; i++) {
-      //~ this[props[i]] = undefined;
-    //~ }
     for (let prop of props) {
       this[prop] = undefined;
     }
@@ -619,13 +597,7 @@ class GraphLineChart {
     if (this.applet.borderOn) {
       borderColor = RGBa2rgba(this.applet.borderColor);
       areaContext.setSourceRGBA(borderColor[0], borderColor[1], borderColor[2], borderColor[3]);
-      //~ areaContext.rectangle(0, 0, width, height);
-      //~ areaContext.fill();
 
-      //~ areaContext.moveTo(0.5, 0);
-      //~ areaContext.lineTo(width - 0.5, 0);
-      //~ areaContext.lineTo(width - 0.5, height);
-      //~ areaContext.lineTo(0.5, height);
       areaContext.moveTo(0, 0);
       areaContext.lineTo(width, 0);
       areaContext.lineTo(width, height);
@@ -642,8 +614,6 @@ class GraphLineChart {
     //Draw Background
     if ( bgColor[3] > 0.5) bgColor[3] = 0.5;
     areaContext.setSourceRGBA(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
-    //~ this.drawRoundedRectangle(areaContext, 0, 0, width, height, 5.0);
-    //~ this.drawRoundedRectangle(areaContext, _x_origin, _y_origin, _width, _height, 5.0);
     areaContext.rectangle(_x_origin, _y_origin, _width, _height);
     areaContext.fill();
 
@@ -735,9 +705,6 @@ class GraphLineChart {
   }
   destroy() {
     let props = Object.keys(this);
-    //~ for (let i = 0; i < props.length; i++) {
-      //~ this[props[i]] = undefined;
-    //~ }
     for (let prop of props) {
       this[prop] = undefined;
     }
