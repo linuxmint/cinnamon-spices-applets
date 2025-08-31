@@ -102,7 +102,7 @@ msgstr ""
 
 #. settings-schema.json->commandUpdate->description
 msgid "Check for new updates:"
-msgstr "Controleer op nieuwe updates:"
+msgstr "Controleer op updates:"
 
 #. settings-schema.json->commandUpgrade-show->description
 msgid "Show \"Upgrade packages\" command"
