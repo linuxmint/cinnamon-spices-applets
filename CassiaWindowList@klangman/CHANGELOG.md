@@ -1,9 +1,13 @@
 # Changelog
 
+## 2.4.4
+
+* Fix an exception when the "Automatic focus change when leaving the panel" option is enabled. You could get a exception if you leave the panel while hovering an idle pinned button.  Thanks to [claudiux](https://github.com/claudiux) for reporting the problem!
+
 ## 2.4.3
 
 * Register a hotkey for "0" when using smart numeric hotkeys which is used as the 10th hotkey
-* Add a "Button position priority list" option that allows uses set a persistent window list  button order using drag-and-drop and a context menu option called "Prioritize window list position"
+* Add a "Button position priority list" option that allows users to set a persistent window list button order using drag-and-drop and a context menu option called "Prioritize window list position"
 * Remove the thumbnail menu when opening a context menu for a window list button
 * Added a "Mouse" tab to the config window, this is done to make room for new options in the general tab
 
