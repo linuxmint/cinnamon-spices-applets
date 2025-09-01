@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-25 15:21+0200\n"
-"PO-Revision-Date: 2025-08-14 20:20-0400\n"
+"PO-Revision-Date: 2025-08-31 22:12-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #. 6.4->settings-schema.json->pageCPU->title
 #. 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/DataProviders.js:107
@@ -354,7 +354,7 @@ msgstr "Redes"
 
 #. 6.4/applet.js:1430
 msgid "Usage"
-msgstr ""
+msgstr "Uso"
 
 #. 3.4/applet.js:62
 msgid ""
@@ -394,9 +394,8 @@ msgid "Disk IO"
 msgstr "E/S de disco"
 
 #. 6.4->settings-schema.json->pageDiskUsage->title
-#, fuzzy
 msgid "Disk Usage"
-msgstr "Disco"
+msgstr "Uso de disco"
 
 #. 6.4->settings-schema.json->pageColors->title
 #. 6.4->settings-schema.json->sectionGeneralColors->title
@@ -444,7 +443,7 @@ msgstr "Dispositivos"
 
 #. 6.4->settings-schema.json->sectionDiskUsagePaths->title
 msgid "Paths"
-msgstr ""
+msgstr "Rutas"
 
 #. 6.4->settings-schema.json->sectionColors->title
 msgid "Your colors"
@@ -696,24 +695,23 @@ msgstr "Color de escritura"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->description
 msgid "Type of chart"
-msgstr ""
+msgstr "Tipo de gráfico"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Bar"
-msgstr ""
+msgstr "Barra"
 
 #. 6.4->settings-schema.json->DiskUsage_chartType->options
 msgid "Pie"
-msgstr ""
+msgstr "Pastel"
 
 #. 6.4->settings-schema.json->DiskUsage_colorAlert->description
 msgid "Alert"
-msgstr ""
+msgstr "Alerta"
 
 #. 6.4->settings-schema.json->DiskUsage_getpathlist_btn->description
-#, fuzzy
 msgid "Update this path list"
-msgstr "Actualizar esta lista de dispositivos"
+msgstr "Actualizar esta lista de rutas"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid ""
@@ -721,10 +719,13 @@ msgid ""
 "value (in %)\n"
 "reaches"
 msgstr ""
+"Alerta cuando\n"
+"el valor (en %)\n"
+"alcance"
 
 #. 6.4->settings-schema.json->DiskUsage_pathList->columns->title
 msgid "Path"
-msgstr ""
+msgstr "Ruta"
 
 #. 6.4->settings-schema.json->color0->description
 msgid "Color #0"
