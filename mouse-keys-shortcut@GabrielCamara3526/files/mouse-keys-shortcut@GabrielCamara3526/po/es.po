@@ -1,0 +1,100 @@
+# MOUSE KEYS SHORTCUT
+# This file is put in the public domain.
+# GabrielCamara3526, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-30 17:07+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. applet.js:30 applet.js:155
+msgid "Control the pointer using the keypad"
+msgstr "Controlar el puntero mediante el teclado"
+
+#. applet.js:155 applet.js:158
+msgid "Mouse Keys: ON"
+msgstr "Teclas del ratón: ON"
+
+#. applet.js:164 applet.js:167
+msgid "Mouse Keys: OFF"
+msgstr "Teclas del ratón: OFF"
+
+#. applet.js:164
+msgid "Control the pointer using the mouse"
+msgstr "Controlar el puntero con el ratón"
+
+#. settings-schema.json->initial-delay->description
+#. applet.js:185 applet.js:188 applet.js:195
+msgid "Initial delay"
+msgstr "Retraso inicial"
+
+#. applet.js:188 applet.js:195 applet.js:206 applet.js:213
+msgid " ms"
+msgstr " ms"
+
+#. settings-schema.json->acceleration-time->description
+#. applet.js:203 applet.js:206 applet.js:213
+msgid "Acceleration time"
+msgstr "Tiempo de la aceleración"
+
+#. settings-schema.json->maximum-speed->description
+#. applet.js:221 applet.js:226 applet.js:246
+msgid "Maximum speed"
+msgstr "Velocidad máxima"
+
+#. applet.js:226 applet.js:246
+msgid " px/s"
+msgstr " px/s"
+
+#. metadata.json->name
+msgid "Mouse Keys Shortcut"
+msgstr "Atajo de teclado del ratón"
+
+#. metadata.json->description
+msgid "Trigger this applet to control the pointer using the keypad"
+msgstr "Active este applet para controlar el puntero mediante el teclado"
+
+#. settings-schema.json->section1->description
+msgid "Shortcuts"
+msgstr "Atajos"
+
+#. settings-schema.json->enableShortcut->description
+msgid "Use custom shortcut"
+msgstr "Usar acceso directo personalizado"
+
+#. settings-schema.json->keyOpen->description
+msgid "Mouse Keys accessibility shortcut"
+msgstr "Atajo de accesibilidad de las teclas del ratón"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Shortcut to enable/disable mouse keys setting"
+msgstr ""
+"Acceso directo para activar/desactivar la configuración de las teclas del "
+"ratón"
+
+#. settings-schema.json->section2->description
+msgid "Mouse Keys"
+msgstr "Teclas del ratón"
+
+#. settings-schema.json->section->description
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#. settings-schema.json->enableNotifications->description
+msgid "Show notifications"
+msgstr "Mostrar notificaciones"
+
+#. settings-schema.json->enableOSD->description
+msgid "Show OSD"
+msgstr "Mostrar OSD"
