@@ -8,14 +8,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-08-22 21:49+0200\n"
-"PO-Revision-Date: 2024-07-20 17:54-0400\n"
+"PO-Revision-Date: 2025-08-31 21:59-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 
 #. metadata.json->description
 #. applet.js:21
@@ -24,7 +24,7 @@ msgstr "Ajuste del brillo del monitor mediante DDC/CI"
 
 #. applet.js:169
 msgid "Use for scroll/click"
-msgstr ""
+msgstr "Uso para desplazamiento/clic"
 
 #. applet.js:295
 msgid "Detect displays"
@@ -52,33 +52,35 @@ msgstr "DDC/CI Multi-Monitor"
 
 #. settings-schema.json->page_general->title
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. settings-schema.json->section_appearance->title
 msgid "Appearance"
-msgstr ""
+msgstr "Apariencia"
 
 #. settings-schema.json->section_monitor->title
 msgid "Monitor Setup"
-msgstr ""
+msgstr "Configuración del monitor"
 
 #. settings-schema.json->section_scrolling->title
 msgid "Scrolling Settings"
-msgstr ""
+msgstr "Ajustes de desplazamiento"
 
 #. settings-schema.json->section_togglepoints->title
 msgid "Toggle Points"
-msgstr ""
+msgstr "Conmutar puntos"
 
 #. settings-schema.json->entry_applet-label->description
 msgid ""
 "Text shown next to the icon in the panel.\n"
 "Leave empty for no label."
 msgstr ""
+"Texto que aparece junto al icono en el panel.\n"
+"Dejar vacío para no tener etiqueta."
 
 #. settings-schema.json->switch_show-bus-number->description
 msgid "Show bus number next to the detected monitors."
-msgstr ""
+msgstr "Muestra el número de bus junto a los monitores detectados."
 
 #. settings-schema.json->switch_manual-select-monitors->description
 msgid ""
@@ -86,67 +88,81 @@ msgid ""
 "Switch to enable custom monitor selection.\n"
 "This will add checkbox options for each detected monitor."
 msgstr ""
+"Por defecto, el desplazamiento y la alternancia ajustan el brillo para "
+"todos los monitores.\n"
+"Active la selección personalizada de monitores.\n"
+"Esto añadirá opciones de casilla de verificación para cada monitor "
+"detectado."
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "20"
-msgstr ""
+msgstr "20"
 
 #. settings-schema.json->combobox_scroll-step->options
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. settings-schema.json->combobox_scroll-step->description
-#, fuzzy
 msgid "Adjustment step for brightness"
-msgstr "Ajuste del brillo del monitor mediante DDC/CI"
+msgstr "Paso de ajuste del brillo"
 
 #. settings-schema.json->switch_use-toggle-points->description
 msgid ""
 "Enable toggle points for brightness adjustment.\n"
 "(via mouse middle click)"
 msgstr ""
+"Habilitar puntos de conmutación para ajustar el brillo.\n"
+"(mediante el botón central del ratón)"
 
 #. settings-schema.json->spinbutton_num-of-toggle-points->description
 msgid ""
 "Number of toggle points for brightness adjustment\n"
 "(only the first N toggle points will be used)"
 msgstr ""
+"Número de puntos de conmutación para el ajuste del brillo\n"
+"(sólo se utilizarán los N primeros puntos de conmutación)"
 
 #. settings-schema.json->scale_toggle_point_1->description
 msgid "Brightness level for toggle point 1"
-msgstr ""
+msgstr "Nivel de brillo para el punto de conmutación 1"
 
 #. settings-schema.json->scale_toggle_point_2->description
 msgid "Brightness level for toggle point 2"
-msgstr ""
+msgstr "Nivel de brillo para el punto de conmutación 2"
 
 #. settings-schema.json->scale_toggle_point_3->description
 msgid "Brightness level for toggle point 3"
-msgstr ""
+msgstr "Nivel de brillo para el punto de conmutación 3"
 
 #. settings-schema.json->string_active-monitors->description
 msgid ""
 "Stores which monitors are active for scroll/click functions.\n"
-"This is a JSON object where keys are bus numbers and values are true/false.\n"
+"This is a JSON object where keys are bus numbers and values are true/"
+"false.\n"
 "Example: {\"1\":true,\"2\":false}"
 msgstr ""
+"Almacena qué monitores están activos para las funciones de desplazamiento/"
+"clic.\n"
+"Se trata de un objeto JSON en el que las claves son números de bus y los "
+"valores son verdadero/falso.\n"
+"Ejemplo: {\"1\":true, \"2\":false}"
