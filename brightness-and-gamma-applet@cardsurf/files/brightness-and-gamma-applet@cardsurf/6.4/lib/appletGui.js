@@ -206,6 +206,7 @@ class MenuSliders {
 
         this.menu = new Applet.AppletPopupMenu(applet, this.orientation);
         this.section = new PopupMenu.PopupMenuSection();
+        this.section_choices = new PopupMenu.PopupMenuSection();
         this.labels = {};
         this.sliders = {};
         this.brightness_key = _("Brightness");
@@ -220,11 +221,43 @@ class MenuSliders {
 
     _init_menu() {
         this.menu.addMenuItem(this.section);
+        this.menu.addMenuItem(this.section_choices);
     }
 
     _init_items() {
         this._init_items_brightness_active();
         this._init_items_gamma_active();
+        this._init_items_presets();
+    }
+
+    _init_items_presets() {
+        this.section_choices.removeAll();
+        for (let preset of this.applet.preset_list) {
+            if (preset.show) {
+                let menuItem = this.section_choices.addAction(preset["name"], () => {
+                    this.applet.brightness = Math.max(preset["brightness"], this.applet.minimum_brightness);
+                    this.applet.gamma_red = Math.max(preset["gamma_red"], this.applet.minimum_gamma);
+                    this.applet.gamma_green = Math.max(preset["gamma_green"], this.applet.minimum_gamma);
+                    this.applet.gamma_blue = Math.max(preset["gamma_blue"], this.applet.minimum_gamma);
+                    this.update_items_brightness();
+                    this.update_items_gamma_red();
+                    this.update_items_gamma_green();
+                    this.update_items_gamma_blue();
+                    this.applet.update_xrandr();
+                    this.applet.update_tooltip();
+                    menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
+                });
+                if (this.applet.brightness == preset["brightness"] &&
+                    this.applet.gamma_red == preset["gamma_red"] &&
+                    this.applet.gamma_green == preset["gamma_green"] &&
+                    this.applet.gamma_blue == preset["gamma_blue"]) {
+                        menuItem.setOrnament(PopupMenu.OrnamentType.DOT, true);
+                } else {
+                        menuItem.setOrnament(PopupMenu.OrnamentType.DOT, false);
+                }
+                //~ this.menu_items_presets.addMenuItem(menuItem);
+            }
+        }
     }
 
     _init_items_brightness_active() {

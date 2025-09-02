@@ -557,6 +557,7 @@ class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_clicked(event) {
+        this.menu_sliders._init_items_presets();
         this.menu_sliders.toggle();
     }
 

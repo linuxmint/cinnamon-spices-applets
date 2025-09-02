@@ -1,3 +1,6 @@
+### v2.2.0~20250902
+* Presets are now accessible via the menu.
+
 ### v2.1.3~20250810
 * Fixes [#7510](https://github.com/linuxmint/cinnamon-spices-applets/issues/7510)
 * Return of option in General tab: "Apply when the number of monitors changes".
