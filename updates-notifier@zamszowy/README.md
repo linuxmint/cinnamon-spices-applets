@@ -3,7 +3,9 @@
 This applet monitors if updates are available for systems using pkcon tool
 (part of packagekit package)
 It also allows viewing available updates and installing them through the popup
-menu.
+menu.  
+When viewing updates, all entries are clickable and will open the update
+details (on supported systems) if available.
 
 In order to have updates count refreshed, some external way to do this is
 needed (e.g. enabled automatic updates checking in `gnome-software` if such app

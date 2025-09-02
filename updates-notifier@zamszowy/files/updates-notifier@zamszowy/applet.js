@@ -144,7 +144,12 @@ UpdatesNotifier.prototype = {
         const iViewStr = count > 0 ? _("View %s updates").format(count.toString()) : _("No updates to view");
         let iView = new PopupMenu.PopupIconMenuItem(iViewStr, "view-list-bullet-symbolic", St.IconType.SYMBOLIC, { reactive: count > 0 });
         iView.connect('activate', () => {
-            Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "view"]);
+            Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "view"],
+                (out) => {
+                    for (let line of out.trim().split("\n")) {
+                        global.log("%s: %s".format(UUID, line));
+                    }
+                });
         });
         this.menu.addMenuItem(iView);
 
