@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-30 17:07+0200\n"
+"POT-Creation-Date: 2025-09-03 03:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: claudiux\n"
 "Language-Team: \n"
@@ -18,42 +18,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. applet.js:30 applet.js:155
+#. applet.js:30 applet.js:153 applet.js:262 applet.js:268
 msgid "Control the pointer using the keypad"
 msgstr "Contrôler le curseur à l'aide du clavier numérique"
 
-#. applet.js:155 applet.js:158
+#. applet.js:153 applet.js:156 applet.js:262
 msgid "Mouse Keys: ON"
 msgstr "Touches de la souris : ACTIVÉ"
 
-#. applet.js:164 applet.js:167
+#. applet.js:162 applet.js:165 applet.js:268
 msgid "Mouse Keys: OFF"
 msgstr "Touches de la souris : DÉSACTIVÉ"
 
-#. applet.js:164
+#. applet.js:162
 msgid "Control the pointer using the mouse"
 msgstr "Contrôler le curseur avec la souris"
 
 #. settings-schema.json->initial-delay->description
-#. applet.js:185 applet.js:188 applet.js:195
+#. applet.js:183 applet.js:186 applet.js:193
 msgid "Initial delay"
 msgstr "Délai initial"
 
-#. applet.js:188 applet.js:195 applet.js:206 applet.js:213
+#. applet.js:186 applet.js:193 applet.js:204 applet.js:211
 msgid " ms"
 msgstr " ms"
 
 #. settings-schema.json->acceleration-time->description
-#. applet.js:203 applet.js:206 applet.js:213
+#. applet.js:201 applet.js:204 applet.js:211
 msgid "Acceleration time"
 msgstr "Temps d'accélération"
 
 #. settings-schema.json->maximum-speed->description
-#. applet.js:221 applet.js:226 applet.js:246
+#. applet.js:219 applet.js:223 applet.js:243
 msgid "Maximum speed"
 msgstr "Vitesse maximale"
 
-#. applet.js:226 applet.js:246
+#. applet.js:223 applet.js:243
 msgid " px/s"
 msgstr " px/s"
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Mouse Keys"
 msgstr "Touches de la souris"
 
-#. settings-schema.json->section->description
+#. settings-schema.json->section3->description
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -99,3 +99,15 @@ msgstr "Afficher les notifications"
 #. settings-schema.json->enableOSD->description
 msgid "Show OSD"
 msgstr "Afficher un OSD"
+
+#. settings-schema.json->section4->description
+msgid "Icon"
+msgstr "Icône"
+
+#. settings-schema.json->reverseIconsWithDarkTheme->description
+msgid "Reverse the icons when using a dark theme"
+msgstr "Inverser les icônes lors de l'utilisation d'un thème sombre"
+
+#. settings-schema.json->forceDarkTheme->description
+msgid "Theme incorrectly detected; this is a dark theme"
+msgstr "Thème incorrectement détecté ; il s'agit d'un thème sombre"
