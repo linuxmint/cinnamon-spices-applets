@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.2.0\n"
+"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-30 17:07+0200\n"
+"POT-Creation-Date: 2025-09-03 03:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,42 +17,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:30 applet.js:155
+#. applet.js:30 applet.js:153 applet.js:262 applet.js:268
 msgid "Control the pointer using the keypad"
 msgstr ""
 
-#. applet.js:155 applet.js:158
+#. applet.js:153 applet.js:156 applet.js:262
 msgid "Mouse Keys: ON"
 msgstr ""
 
-#. applet.js:164 applet.js:167
+#. applet.js:162 applet.js:165 applet.js:268
 msgid "Mouse Keys: OFF"
 msgstr ""
 
-#. applet.js:164
+#. applet.js:162
 msgid "Control the pointer using the mouse"
 msgstr ""
 
 #. settings-schema.json->initial-delay->description
-#. applet.js:185 applet.js:188 applet.js:195
+#. applet.js:183 applet.js:186 applet.js:193
 msgid "Initial delay"
 msgstr ""
 
-#. applet.js:188 applet.js:195 applet.js:206 applet.js:213
+#. applet.js:186 applet.js:193 applet.js:204 applet.js:211
 msgid " ms"
 msgstr ""
 
 #. settings-schema.json->acceleration-time->description
-#. applet.js:203 applet.js:206 applet.js:213
+#. applet.js:201 applet.js:204 applet.js:211
 msgid "Acceleration time"
 msgstr ""
 
 #. settings-schema.json->maximum-speed->description
-#. applet.js:221 applet.js:226 applet.js:246
+#. applet.js:219 applet.js:223 applet.js:243
 msgid "Maximum speed"
 msgstr ""
 
-#. applet.js:226 applet.js:246
+#. applet.js:223 applet.js:243
 msgid " px/s"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Mouse Keys"
 msgstr ""
 
-#. settings-schema.json->section->description
+#. settings-schema.json->section3->description
 msgid "Notifications"
 msgstr ""
 
@@ -94,4 +94,16 @@ msgstr ""
 
 #. settings-schema.json->enableOSD->description
 msgid "Show OSD"
+msgstr ""
+
+#. settings-schema.json->section4->description
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->reverseIconsWithDarkTheme->description
+msgid "Reverse the icons when using a dark theme"
+msgstr ""
+
+#. settings-schema.json->forceDarkTheme->description
+msgid "Theme incorrectly detected; this is a dark theme"
 msgstr ""

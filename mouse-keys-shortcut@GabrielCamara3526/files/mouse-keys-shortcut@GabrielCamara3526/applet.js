@@ -38,47 +38,45 @@ class MyApplet extends Applet.IconApplet {
     this.accelTimeSlider();
     this.maxSpeedSlider();
 
-    this.settings.bindProperty(
-      Settings.BindingDirection.IN,
+    this.settings.bind(
       "enableNotifications",
       "enableNotifications",
-      null,
       null
     );
-    this.settings.bindProperty(
-      Settings.BindingDirection.IN,
+    this.settings.bind(
       "enableOSD",
       "enableOSD",
-      null,
       null
     );
-    this.settings.bindProperty(
-      Settings.BindingDirection.IN,
+    this.settings.bind(
       "keyOpen",
       "keybinding",
-      this.on_keybinding_changed.bind(this),
-      null
+      this.on_keybinding_changed.bind(this)
     );
-    this.settings.bindProperty(
-      Settings.BindingDirection.BIDIRECTIONAL,
+    this.settings.bind(
       "initial-delay",
       "initialDelay",
-      this.on_delay_changed.bind(this),
-      null
+      this.on_delay_changed.bind(this)
     );
-    this.settings.bindProperty(
-      Settings.BindingDirection.BIDIRECTIONAL,
+    this.settings.bind(
       "acceleration-time",
       "accelerationTime",
-      this.on_acceleration_changed.bind(this),
-      null
+      this.on_acceleration_changed.bind(this)
     );
-    this.settings.bindProperty(
-      Settings.BindingDirection.BIDIRECTIONAL,
+    this.settings.bind(
       "maximum-speed",
       "maxSpeed",
-      this.on_speed_changed.bind(this),
-      null
+      this.on_speed_changed.bind(this)
+    );
+    this.settings.bind(
+      "reverseIconsWithDarkTheme",
+      "reverseIconsWithDarkTheme",
+      this.updateIconAndTooltip.bind(this)
+    );
+    this.settings.bind(
+      "forceDarkTheme",
+      "forceDarkTheme",
+      this.updateIconAndTooltip.bind(this)
     );
     this.actor.connect(
       "key-press-event",
@@ -112,10 +110,10 @@ class MyApplet extends Applet.IconApplet {
 
     this.themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
     this.themeSettings.connect('changed::name', () => {
-      this.updateIcon()})
+      this.updateIconAndTooltip()})
     this.keyboardSettings.connect('changed::mousekeys-enable', () => {
-      this.updateIcon()})
-    this.updateIcon();
+      this.updateIconAndTooltip()})
+    this.updateIconAndTooltip();
   }
   _onSourceKeyPress(actor, event) {
     let symbol = event.get_key_symbol();
@@ -152,23 +150,23 @@ class MyApplet extends Applet.IconApplet {
     if (!mouseKeysEnable) {
       settings.set_boolean('mousekeys-enable', true);
       if (this.enableNotifications)
-        Main.notify(_("Mouse Keys: ON", UUID), _("Control the pointer using the keypad", UUID));
+        Main.notify(_("Mouse Keys: ON"), _("Control the pointer using the keypad"));
       if (this.enableOSD) {
         icon = Gio.Icon.new_for_string("light-icon");
-        Main.osdWindowManager.show(-1, icon, _("Mouse Keys: ON", UUID), null);
+        Main.osdWindowManager.show(-1, icon, _("Mouse Keys: ON"), null);
       }
     }
     else {
       settings.set_boolean('mousekeys-enable', false)
       if (this.enableNotifications)
-        Main.notify(_("Mouse Keys: OFF", UUID), _("Control the pointer using the mouse", UUID));
+        Main.notify(_("Mouse Keys: OFF"), _("Control the pointer using the mouse"));
       if (this.enableOSD) {
         icon = Gio.Icon.new_for_string("dark-icon");
-        Main.osdWindowManager.show(-1, icon, _("Mouse Keys: OFF", UUID), null);
+        Main.osdWindowManager.show(-1, icon, _("Mouse Keys: OFF"), null);
       }
     }
-      this.updateIcon()
-    }
+    this.updateIconAndTooltip()
+  }
 
   on_delay_changed(){
     this.keyboardSettings.set_int('mousekeys-init-delay', this.initialDelay)
@@ -222,7 +220,6 @@ class MyApplet extends Applet.IconApplet {
     let maxSpeedSlider = new PopupMenu.PopupSliderMenuItem(userMaxSpeed / 500); // 500 is maximum
     maxSpeedSlider.set_mark(0.02); // default value is 10, and 10/500=0.02.
     this.maxSpeedSliderOldValue = 500 * maxSpeedSlider._value;
-    //~ global.log(UUID + " - this.maxSpeedSliderOldValue: " + this.maxSpeedSliderOldValue);
     this.maxSpeedTooltip = new Tooltips.Tooltip(maxSpeedSlider.actor, _("Maximum speed") + " " + userMaxSpeed.toString() + _(" px/s"));
     this._applet_context_menu.addMenuItem(maxSpeedLabel);
     this._applet_context_menu.addMenuItem(maxSpeedSlider);
@@ -249,20 +246,34 @@ class MyApplet extends Applet.IconApplet {
     });
     this.maxSpeedSlider = maxSpeedSlider;
   }
-  updateIcon() {
-    let iconFile
+  updateIconAndTooltip() {
+    let iconFile;
     let settings = new Gio.Settings({ schema: 'org.cinnamon.desktop.a11y.keyboard' });
     let enabled = settings.get_boolean('mousekeys-enable');
-    let themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
-    let activeTheme = themeSettings.get_string('name');
-    let isDark = activeTheme.toLowerCase().includes('dark');
-    if (enabled) {
-      iconFile = isDark ? 'light-icon.svg' : 'dark-icon.svg';
+    let isDark;
+    if (this.forceDarkTheme) {
+      isDark = true;
     } else {
-      iconFile = isDark ? 'dark-icon.svg' : 'light-icon.svg'
+      let themeSettings = new Gio.Settings({ schema: 'org.cinnamon.theme'});
+      let activeTheme = themeSettings.get_string('name');
+      isDark = activeTheme.toLowerCase().includes('dark');
+    }
+    if (enabled) {
+      this.set_applet_tooltip(_("Control the pointer using the keypad") + "\n<b>" + _("Mouse Keys: ON") + "</b>", true);
+      if (this.reverseIconsWithDarkTheme)
+        iconFile = isDark ? 'light-icon.svg' : 'dark-icon.svg';
+      else
+        iconFile = 'dark-icon.svg';
+    } else {
+      this.set_applet_tooltip(_("Control the pointer using the keypad") + "\n<b>" + _("Mouse Keys: OFF") + "</b>", true);
+      if (this.reverseIconsWithDarkTheme)
+        iconFile = (isDark && this.reverseIconsWithDarkTheme) ? 'dark-icon.svg' : 'light-icon.svg';
+      else
+        iconFile = 'light-icon.svg';
     }
     let iconPath = `${APPLET_PATH}/icons/${iconFile}`;
     this.set_applet_icon_symbolic_path(iconPath);
+
   }
 }
 function main(metadata, orientation, panel_height, instance_id) {

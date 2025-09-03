@@ -43,7 +43,7 @@
     "step": 10,
     "description": "Maximum speed"
   },
-  "section": {
+  "section3": {
     "type": "section",
     "description": "Notifications"
   },
@@ -56,5 +56,19 @@
     "type": "switch",
     "default": false,
     "description": "Show OSD"
+  },
+  "section4": {
+    "type": "section",
+    "description": "Icon"
+  },
+  "reverseIconsWithDarkTheme": {
+    "type": "switch",
+    "default": true,
+    "description": "Reverse the icons when using a dark theme"
+  },
+  "forceDarkTheme": {
+    "type": "switch",
+    "default": false,
+    "description": "Theme incorrectly detected; this is a dark theme"
   }
 }
