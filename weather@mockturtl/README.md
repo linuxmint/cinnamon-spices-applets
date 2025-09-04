@@ -213,6 +213,8 @@ The setting allows you to make the applet display basically anything in the form
 | `{t_h}`           | Temperature in next 1-2 hours                             |         |           |          |
 | `{t_h_diff}`      | Temperature change in next 1-2 hours with arrow indicator |         |           |          |
 | `{br}`            | Line Break                                                |         |           |          |
+| `{uv}`            | UV index                                                  |         |           |          |
+| `{uv_text}`       | UV index as text (Low, Moderate etc)                      |         |           |          |
 
 1-Line Examples:
 

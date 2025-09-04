@@ -8350,6 +8350,7 @@ function InjectValues(text, weather, config, inCommand = false) {
         ? Math.round((sunset.toMillis() - timeNow.toMillis()) * 100 / (sunset.toMillis() - sunrise.toMillis())).toString()
         : "0";
     const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
+    const uvIndex = weather.uvIndex != null ? (Math.round(weather.uvIndex * 10) / 10).toString() : "";
     const valuesPaddingDefaults = {
         t: { value: temp.toString(), padLength: 3, padRight: true, padChar: ' ' },
         u: { value: tempUnit.toString() },
@@ -8388,6 +8389,8 @@ function InjectValues(text, weather, config, inCommand = false) {
         t_h: { value: tempHour.toString() },
         t_h_diff: { value: tempHourDiff.toString() },
         br: { value: "\n" },
+        uv: { value: uvIndex },
+        uv_text: { value: weather.uvIndex != null ? UVIndexToText(weather.uvIndex) : _("Unknown") },
     };
     for (const tagName in valuesPaddingDefaults) {
         const options = valuesPaddingDefaults[tagName];
@@ -8416,6 +8419,23 @@ function InjectValues(text, weather, config, inCommand = false) {
         }
     }
     return text;
+}
+function UVIndexToText(uvIndex) {
+    if (uvIndex < 3) {
+        return _("Low");
+    }
+    else if (uvIndex < 6) {
+        return _("Moderate");
+    }
+    else if (uvIndex < 8) {
+        return _("High");
+    }
+    else if (uvIndex < 11) {
+        return _("Very High");
+    }
+    else {
+        return _("Extreme");
+    }
 }
 function CapitalizeFirstLetter(description) {
     if ((description == undefined || description == null)) {

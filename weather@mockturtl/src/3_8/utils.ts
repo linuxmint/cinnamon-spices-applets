@@ -123,6 +123,7 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		? Math.round((sunset.toMillis() - timeNow.toMillis()) * 100 / (sunset.toMillis() - sunrise.toMillis())).toString()
 		: "0";
 	const dayLengthLightRemain = `${dayLength}${daylightRemain !== "" ? ` (${daylightRemain})` : ""}`;
+	const uvIndex = weather.uvIndex != null ? (Math.round(weather.uvIndex * 10) / 10).toString() : "";
 
 	// Define values and their defaults for padding and formatting
 	const valuesPaddingDefaults: Record<string, TagOptions> = {
@@ -163,6 +164,8 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		t_h: { value: tempHour.toString() },
 		t_h_diff: { value: tempHourDiff.toString() },
 		br: { value: "\n" },
+		uv: { value: uvIndex },
+		uv_text: { value: weather.uvIndex != null ? UVIndexToText(weather.uvIndex) : _("Unknown") },
 	};
 
 	// Process text replacement for each tag
@@ -201,6 +204,24 @@ export function InjectValues(text: string, weather: WeatherData, config: Config,
 		}
 	}
 	return text;
+}
+
+export function UVIndexToText(uvIndex: number): string {
+	if (uvIndex < 3) {
+		return _("Low");
+	}
+	else if (uvIndex < 6) {
+		return _("Moderate");
+	}
+	else if (uvIndex < 8) {
+		return _("High");
+	}
+	else if (uvIndex < 11) {
+		return _("Very High");
+	}
+	else {
+		return _("Extreme");
+	}
 }
 
 export function CapitalizeFirstLetter(description: string): string {
