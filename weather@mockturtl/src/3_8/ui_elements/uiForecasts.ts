@@ -206,6 +206,12 @@ export class UIForecasts {
 				reactive: true
 			});
 
+			forecastWeather.Summary.clutter_text.line_wrap = true;
+			// FIXME: use maximum width for all providers instead
+			if (config._dataService === "PirateWeather") {
+				forecastWeather.Summary.natural_width = 200;
+			}
+
 			forecastWeather.Temperature = Label({
 				/*text: Placeholders.LOADING,*/
 				style_class: STYLE_FORECAST_TEMPERATURE
