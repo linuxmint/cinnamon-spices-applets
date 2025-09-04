@@ -9717,11 +9717,12 @@ class BaseProvider {
 
 
 
+
 class MetUk extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("Met Office UK");
-        this.name = "Met Office UK";
+        this.name = Services.MetOfficeUK;
         this.maxForecastSupport = 5;
         this.website = "https://www.metoffice.gov.uk/";
         this.maxHourlyForecastSupport = 36;
@@ -10789,12 +10790,13 @@ function SanitizeAlertDescription(text) {
 
 
 
+
 const IDCache = {};
 class OpenWeatherMapOneCall extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap_OneCall";
+        this.name = Services.OpenWeatherMap_OneCall;
         this.maxForecastSupport = 8;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
@@ -11076,11 +11078,12 @@ function EventToIcon(event) {
 
 
 
+
 class MetNorway extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("MET Norway");
-        this.name = "MetNorway";
+        this.name = Services.MetNorway;
         this.maxForecastSupport = 10;
         this.website = "https://www.met.no/en";
         this.maxHourlyForecastSupport = 48;
@@ -11642,11 +11645,12 @@ class MetNorway extends BaseProvider {
 
 
 
+
 class Weatherbit extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("WeatherBit");
-        this.name = "Weatherbit";
+        this.name = Services.Weatherbit;
         this.maxForecastSupport = 16;
         this.website = "https://www.weatherbit.io/";
         this.maxHourlyForecastSupport = 48;
@@ -12260,13 +12264,14 @@ class Weatherbit extends BaseProvider {
 
 
 
+
 class ClimacellV4 extends BaseProvider {
     constructor() {
         super(...arguments);
         this.remainingCalls = null;
         this.needsApiKey = true;
         this.prettyName = _("Tomorrow.io");
-        this.name = "Tomorrow.io";
+        this.name = Services.Tomorrow_IO;
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 108;
         this.website = "https://www.tomorrow.io/";
@@ -12840,11 +12845,12 @@ function EventNameToIcon(event) {
 
 
 
+
 class USWeather extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("US Weather");
-        this.name = "US Weather";
+        this.name = Services.USWeather;
         this.maxForecastSupport = 7;
         this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
@@ -13417,11 +13423,12 @@ class USWeather extends BaseProvider {
 
 
 
+
 class VisualCrossing extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("Visual Crossing");
-        this.name = "Visual Crossing";
+        this.name = Services.VisualCrossing;
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 336;
         this.website = "https://weather.visualcrossing.com/";
@@ -13732,12 +13739,13 @@ class VisualCrossing extends BaseProvider {
 
 
 
+
 class DanishMI extends BaseProvider {
     constructor() {
         super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("DMI Denmark");
-        this.name = "DanishMI";
+        this.name = Services.DanishMI;
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;
         this.website = "https://www.dmi.dk/";
@@ -14094,12 +14102,13 @@ class DanishMI extends BaseProvider {
 
 
 
+
 class AccuWeather extends BaseProvider {
     constructor() {
         super(...arguments);
         this.needsApiKey = true;
         this.prettyName = _("AccuWeather");
-        this.name = "AccuWeather";
+        this.name = Services.AccuWeather;
         this.maxForecastSupport = 12;
         this.maxHourlyForecastSupport = 120;
         this.website = "https://www.accuweather.com/";
@@ -14551,12 +14560,13 @@ function EventCodeToIcon(code) {
 
 
 
+
 class DeutscherWetterdienst extends BaseProvider {
     constructor() {
         super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("Deutscher Wetterdienst");
-        this.name = "DeutscherWetterdienst";
+        this.name = Services.DeutscherWetterdienst;
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 240;
         this.website = "https://brightsky.dev/";
@@ -14876,6 +14886,7 @@ class DeutscherWetterdienst extends BaseProvider {
 
 
 
+
 const unitTypeMap = {
     "us": "e",
     "lr": "e",
@@ -14887,7 +14898,7 @@ class WeatherUnderground extends BaseProvider {
         super(...arguments);
         this.needsApiKey = true;
         this.prettyName = _("Weather Underground");
-        this.name = "WeatherUnderground";
+        this.name = Services.WeatherUnderground;
         this.maxForecastSupport = 6;
         this.maxHourlyForecastSupport = 0;
         this.website = "https://www.wunderground.com/";
@@ -15491,11 +15502,12 @@ class WeatherUnderground extends BaseProvider {
 
 
 
+
 class PirateWeather extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("Pirate Weather");
-        this.name = "PirateWeather";
+        this.name = Services.PirateWeather;
         this.maxForecastSupport = 7;
         this.website = "http://pirateweather.net/en/latest/";
         this.maxHourlyForecastSupport = 168;
@@ -16267,11 +16279,12 @@ function OpenMeteoResponseToData(payload) {
 
 
 
+
 class OpenMeteo extends BaseProvider {
     constructor() {
         super(...arguments);
         this.prettyName = _("Open-Meteo");
-        this.name = "OpenMeteo";
+        this.name = Services.OpenMeteo;
         this.maxForecastSupport = 16;
         this.website = "https://open-meteo.com/";
         this.maxHourlyForecastSupport = 24;
@@ -16376,12 +16389,13 @@ function OWMWeatherToWeatherData(weather, conditionsTranslated, timezone) {
 
 
 
+
 class OpenWeatherMapOpen extends BaseProvider {
     constructor() {
         super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap_Open";
+        this.name = Services.OpenWeatherMap_Open;
         this.maxForecastSupport = 7;
         this.maxHourlyForecastSupport = 0;
         this.website = "https://openweathermap.org/";
@@ -17057,12 +17071,13 @@ function SwissMeteoWarningTypeToTitle(type) {
 
 
 
+
 class SwissMeteo extends BaseProvider {
     constructor() {
         super(...arguments);
         this.needsApiKey = false;
         this.prettyName = _("Swiss Météo");
-        this.name = "Swiss Meteo";
+        this.name = Services.SwissMeteo;
         this.maxForecastSupport = 8;
         this.maxHourlyForecastSupport = 192;
         this.website = "https://www.meteoswiss.admin.ch/#tab=forecast-map";
@@ -17208,22 +17223,40 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
+var Services;
+(function (Services) {
+    Services["OpenWeatherMap_Open"] = "OpenWeatherMap_Open";
+    Services["MetNorway"] = "MetNorway";
+    Services["Weatherbit"] = "Weatherbit";
+    Services["Tomorrow_IO"] = "Tomorrow.io";
+    Services["MetOfficeUK"] = "Met Office UK";
+    Services["USWeather"] = "US Weather";
+    Services["VisualCrossing"] = "Visual Crossing";
+    Services["DanishMI"] = "DanishMI";
+    Services["AccuWeather"] = "AccuWeather";
+    Services["DeutscherWetterdienst"] = "DeutscherWetterdienst";
+    Services["WeatherUnderground"] = "WeatherUnderground";
+    Services["PirateWeather"] = "PirateWeather";
+    Services["OpenMeteo"] = "OpenMeteo";
+    Services["OpenWeatherMap_OneCall"] = "OpenWeatherMap_OneCall";
+    Services["SwissMeteo"] = "Swiss Meteo";
+})(Services || (Services = {}));
 const ServiceClassMapping = {
-    "OpenWeatherMap_Open": () => new OpenWeatherMapOpen(),
-    "OpenWeatherMap_OneCall": () => new OpenWeatherMapOneCall(),
-    "MetNorway": () => new MetNorway(),
-    "Weatherbit": () => new Weatherbit(),
-    "Tomorrow.io": () => new ClimacellV4(),
-    "Met Office UK": () => new MetUk(),
-    "US Weather": () => new USWeather(),
-    "Visual Crossing": () => new VisualCrossing(),
-    "DanishMI": () => new DanishMI(),
-    "AccuWeather": () => new AccuWeather(),
-    "DeutscherWetterdienst": () => new DeutscherWetterdienst(),
-    "WeatherUnderground": () => new WeatherUnderground(),
-    "PirateWeather": () => new PirateWeather(),
-    "OpenMeteo": () => new OpenMeteo(),
-    "Swiss Meteo": () => new SwissMeteo(),
+    [Services.OpenWeatherMap_Open]: () => new OpenWeatherMapOpen(),
+    [Services.OpenWeatherMap_OneCall]: () => new OpenWeatherMapOneCall(),
+    [Services.MetNorway]: () => new MetNorway(),
+    [Services.Weatherbit]: () => new Weatherbit(),
+    [Services.Tomorrow_IO]: () => new ClimacellV4(),
+    [Services.MetOfficeUK]: () => new MetUk(),
+    [Services.USWeather]: () => new USWeather(),
+    [Services.VisualCrossing]: () => new VisualCrossing(),
+    [Services.DanishMI]: () => new DanishMI(),
+    [Services.AccuWeather]: () => new AccuWeather(),
+    [Services.DeutscherWetterdienst]: () => new DeutscherWetterdienst(),
+    [Services.WeatherUnderground]: () => new WeatherUnderground(),
+    [Services.PirateWeather]: () => new PirateWeather(),
+    [Services.OpenMeteo]: () => new OpenMeteo(),
+    [Services.SwissMeteo]: () => new SwissMeteo(),
 };
 class Config {
     get UserTimezone() {
@@ -18534,6 +18567,7 @@ class CurrentWeather {
 
 
 
+
 const { Bin, BoxLayout: uiForecasts_BoxLayout, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
 const { GridLayout, Orientation } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
@@ -18678,7 +18712,7 @@ class UIForecasts {
                 reactive: true
             });
             forecastWeather.Summary.clutter_text.line_wrap = true;
-            if (config._dataService === "PirateWeather") {
+            if (config._dataService === Services.PirateWeather) {
                 forecastWeather.Summary.natural_width = 200;
             }
             forecastWeather.Temperature = Label({
