@@ -1,3 +1,6 @@
+### v5.7.0~20250905
+  * Increases speed.
+
 ### v5.6.1~20250701
   * Fixes bad data in json file.
 

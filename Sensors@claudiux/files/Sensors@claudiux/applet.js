@@ -221,6 +221,8 @@ class SensorsApplet extends Applet.Applet {
     this.dependencies = new Dependencies();
     //this.depCount = 0;
 
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh &");
+
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
     if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
@@ -619,6 +621,30 @@ class SensorsApplet extends Applet.Applet {
   }
 
   read_disk_temps() {
+    this.read_disk_temps_OLD(); //return;
+    //~ if (this.show_temp && this.temp_disks.length > 0) {
+      //~ for (let disk of this.temp_disks) {
+        //~ if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
+
+        //~ let _disk_name = disk["disk"].trim();
+        //~ let command = `sudo smartctl -i \"${_disk_name}\"`;
+
+        //~ if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
+        //~ var _temp;
+        //~ let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
+          //~ if (exitCode === 0) {
+            //~ global.log(UUID + " - typeof stdout: " + typeof stdout);
+          //~ } else {
+            //~ global.log(UUID + " - Unable to execute: " + command);
+          //~ }
+
+          //~ subProcess.send_signal(9);
+        //~ });
+      //~ }
+    //~ }
+  }
+
+  read_disk_temps_OLD() {
     if (this.show_temp && this.temp_disks.length > 0) {
       for (let disk of this.temp_disks) {
         if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
@@ -1615,6 +1641,13 @@ class SensorsApplet extends Applet.Applet {
   }
 
   on_applet_removed_from_panel() {
+    //~ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_WITNESS=`${SENSORS_DIR}/witness`;
+    let witness = Gio.file_new_for_path(SENSORS_WITNESS);
+    if (witness.query_exists(null))
+      witness.delete(null);
+
     this.on_applet_reloaded();
     remove_all_sources();
   }
@@ -1624,6 +1657,7 @@ class SensorsApplet extends Applet.Applet {
     this.checkDepInterval = null;
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
+      spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh &");
       this.isLooping = true;
       this.reap_sensors();
     } else {
