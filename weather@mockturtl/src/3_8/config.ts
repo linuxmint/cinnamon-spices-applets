@@ -384,18 +384,18 @@ export class Config {
 	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		// Automatic location
 		if (!this._manualLocation) {
+			Logger.Info("Obtaining auto location via GeoClue2.");
 			const geoClue = await this.geoClue.GetLocation(cancellable);
 			if (geoClue != null) {
-				Logger.Debug("Auto location obtained via GeoClue2.");
 				return geoClue;
 			}
 
+			Logger.Info("Obtaining auto location via IP lookup instead.");
 			const location = await this.autoLocProvider.GetLocation(cancellable, this);
 			// User facing errors handled by provider
 			if (!location)
 				return null;
 
-			Logger.Debug("Auto location obtained via IP lookup.");
 			return location;
 		}
 

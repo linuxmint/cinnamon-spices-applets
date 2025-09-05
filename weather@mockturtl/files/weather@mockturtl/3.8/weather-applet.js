@@ -15855,8 +15855,10 @@ class PirateWeather extends BaseProvider {
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
 
+
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
+const { Cancellable: geoclue_Cancellable } = imports.gi.Gio;
 class GeoClue {
     constructor() {
         try {
@@ -15876,55 +15878,65 @@ class GeoClue {
         if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
+        if (cancellable.is_cancelled()) {
+            return null;
+        }
+        const finalCancellable = geoclue_Cancellable.new();
+        const timeout = setTimeout(() => finalCancellable.cancel(), Math.round((REQUEST_TIMEOUT_SECONDS / 3) * 1000));
         const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
-        const res = await new Promise((resolve) => {
-            logger_Logger.Debug("Requesting coordinates from GeoClue");
-            const start = DateTime.now();
-            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable, (client, res) => {
-                logger_Logger.Debug(`Getting GeoClue coordinates finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
-                let simple = null;
-                try {
-                    simple = GeoClue.new_finish(res);
-                    const clientObj = simple.get_client();
-                    if (clientObj == null || !clientObj.active) {
-                        logger_Logger.Debug("GeoGlue Geolocation disabled, skipping");
+        try {
+            const res = await new Promise((resolve) => {
+                logger_Logger.Debug("Requesting coordinates from GeoClue");
+                const start = DateTime.now();
+                GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, finalCancellable, (client, res) => {
+                    logger_Logger.Debug(`Getting GeoClue coordinates finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+                    let simple = null;
+                    try {
+                        simple = GeoClue.new_finish(res);
+                        const clientObj = simple.get_client();
+                        if (clientObj == null || !clientObj.active) {
+                            logger_Logger.Debug("GeoGlue Geolocation disabled, skipping");
+                            resolve(null);
+                            return;
+                        }
+                    }
+                    catch (e) {
+                        logger_Logger.Error("Error while fetching GeoClue coordinates: ", e);
                         resolve(null);
                         return;
                     }
-                }
-                catch (e) {
-                    logger_Logger.Error("Error while fetching GeoClue coordinates: ", e);
-                    resolve(null);
+                    const loc = simple.get_location();
+                    if (loc == null) {
+                        logger_Logger.Debug("GeoGlue coordinates is not known.");
+                        resolve(null);
+                        return;
+                    }
+                    const result = {
+                        lat: loc.latitude,
+                        lon: loc.longitude,
+                        city: undefined,
+                        country: undefined,
+                        entryText: loc.latitude + "," + loc.longitude,
+                        altitude: loc.altitude,
+                        accuracy: loc.accuracy,
+                    };
+                    logger_Logger.Debug(`GeoClue coordinates received ${JSON.stringify(result)}`);
+                    resolve(result);
                     return;
-                }
-                const loc = simple.get_location();
-                if (loc == null) {
-                    logger_Logger.Debug("GeoGlue coordinates is not known.");
-                    resolve(null);
-                    return;
-                }
-                const result = {
-                    lat: loc.latitude,
-                    lon: loc.longitude,
-                    city: undefined,
-                    country: undefined,
-                    entryText: loc.latitude + "," + loc.longitude,
-                    altitude: loc.altitude,
-                    accuracy: loc.accuracy,
-                };
-                logger_Logger.Debug(`GeoClue coordinates received ${JSON.stringify(result)}`);
-                resolve(result);
-                return;
+                });
             });
-        });
-        if (res == null) {
-            return null;
+            if (res == null) {
+                return null;
+            }
+            const geoCodeRes = await this.GetGeoCodeData(finalCancellable, res.lat, res.lon, res.accuracy);
+            if (geoCodeRes == null) {
+                return res;
+            }
+            return Object.assign(Object.assign({}, res), geoCodeRes);
         }
-        const geoCodeRes = await this.GetGeoCodeData(cancellable, res.lat, res.lon, res.accuracy);
-        if (geoCodeRes == null) {
-            return res;
+        finally {
+            clearTimeout(timeout);
         }
-        return Object.assign(Object.assign({}, res), geoCodeRes);
     }
     ;
     async GetGeoCodeData(cancellable, lat, lon, accuracy) {
@@ -17468,15 +17480,15 @@ class Config {
     }
     async EnsureLocation(cancellable) {
         if (!this._manualLocation) {
+            logger_Logger.Info("Obtaining auto location via GeoClue2.");
             const geoClue = await this.geoClue.GetLocation(cancellable);
             if (geoClue != null) {
-                logger_Logger.Debug("Auto location obtained via GeoClue2.");
                 return geoClue;
             }
+            logger_Logger.Info("Obtaining auto location via IP lookup instead.");
             const location = await this.autoLocProvider.GetLocation(cancellable, this);
             if (!location)
                 return null;
-            logger_Logger.Debug("Auto location obtained via IP lookup.");
             return location;
         }
         let loc = this._location;
