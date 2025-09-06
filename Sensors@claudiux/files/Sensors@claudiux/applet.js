@@ -221,7 +221,7 @@ class SensorsApplet extends Applet.Applet {
     this.dependencies = new Dependencies();
     //this.depCount = 0;
 
-    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh &");
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -1602,6 +1602,7 @@ class SensorsApplet extends Applet.Applet {
         this.loopId = null;
     }
     this.detect_markup();
+    spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
@@ -1661,7 +1662,7 @@ class SensorsApplet extends Applet.Applet {
     this.checkDepInterval = null;
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
-      spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh &");
+      spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
       this.isLooping = true;
       this.reap_sensors();
     } else {
