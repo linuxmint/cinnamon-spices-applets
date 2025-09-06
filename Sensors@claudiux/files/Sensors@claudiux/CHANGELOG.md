@@ -1,3 +1,6 @@
+### v5.7.3~20250906
+  * Takes into account the "Refresh interval" value in the `SensorsDaemon.sh` script.
+
 ### v5.7.2~20250906
   * Improves stability.
   * Fixes [#7670](https://github.com/linuxmint/cinnamon-spices-applets/issues/7670)
