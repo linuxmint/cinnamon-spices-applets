@@ -25,7 +25,8 @@ is_running=true
 
 while $is_running
 do
-    sensors -j | grep -v '^ERROR' > $SENSORS_DATA_TEMP
+    #~ sensors -j | grep -v '^ERROR' > $SENSORS_DATA_TEMP
+    sensors -j > $SENSORS_DATA_TEMP
     sleep 1
     mv $SENSORS_DATA_TEMP $SENSORS_DATA
     [ -f $WITNESS ] || is_running=false

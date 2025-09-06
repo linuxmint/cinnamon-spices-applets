@@ -1,3 +1,7 @@
+### v5.7.2~20250906
+  * Improves stability.
+  * Fixes [#7670](https://github.com/linuxmint/cinnamon-spices-applets/issues/7670)
+
 ### v5.7.0~20250905
   * Increases speed.
 
