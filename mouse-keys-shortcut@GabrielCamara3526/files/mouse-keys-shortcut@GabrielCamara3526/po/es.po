@@ -101,12 +101,12 @@ msgstr "Mostrar OSD"
 
 #. settings-schema.json->section4->description
 msgid "Icon"
-msgstr ""
+msgstr "Icono"
 
 #. settings-schema.json->reverseIconsWithDarkTheme->description
 msgid "Reverse the icons when using a dark theme"
-msgstr ""
+msgstr "Invertir los iconos al usar un tema oscuro"
 
 #. settings-schema.json->forceDarkTheme->description
 msgid "Theme incorrectly detected; this is a dark theme"
-msgstr ""
+msgstr "Tema detectado incorrectamente; este es un tema oscuro"
