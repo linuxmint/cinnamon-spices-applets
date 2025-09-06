@@ -8989,6 +8989,15 @@ function utils_setInterval(func, ms) {
     return id;
 }
 ;
+function isConstructor(f) {
+    try {
+        new f();
+    }
+    catch (_a) {
+        return false;
+    }
+    return true;
+}
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/events.ts
 class Event {
@@ -9493,7 +9502,9 @@ class Soup2 {
         return res;
     }
 }
-const soupLib = imports.gi.Soup.SessionAsync != undefined ? new Soup2() : new Soup3();
+const soupLib = ((imports.gi.Soup.SessionAsync != undefined && isConstructor(imports.gi.Soup.SessionAsync))
+    ? new Soup2()
+    : new Soup3());
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 var __rest = (undefined && undefined.__rest) || function (s, e) {

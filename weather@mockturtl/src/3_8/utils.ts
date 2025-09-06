@@ -974,3 +974,21 @@ export function setInterval(func: Function, ms: number): number {
 
 	return id;
 };
+
+/**
+ * Can have false negatives if the function cannot be initialised
+ * @param f 
+ * @returns 
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+export function isConstructor(f: any): boolean {
+	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+		new f();
+	}
+	catch {
+		// verify err is the expected error and then
+		return false;
+	}
+	return true;
+}

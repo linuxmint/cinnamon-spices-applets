@@ -1,5 +1,5 @@
 import { REQUEST_TIMEOUT_SECONDS } from "../consts";
-import { setTimeout } from "../utils";
+import { isConstructor, setTimeout } from "../utils";
 import type { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { LoadContents } from "./io_lib";
 import { Logger } from "./services/logger";
@@ -360,4 +360,7 @@ class Soup2 implements SoupLib {
 
 // SessionAsync is a Soup2 class
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-export const soupLib: SoupLib = (imports.gi.Soup as any).SessionAsync != undefined ? new Soup2() : new Soup3();
+export const soupLib: SoupLib = (((imports.gi.Soup as any).SessionAsync != undefined && isConstructor((imports.gi.Soup as any).SessionAsync)) 
+	? new Soup2()
+	: new Soup3()
+);
