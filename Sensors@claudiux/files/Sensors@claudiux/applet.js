@@ -984,35 +984,35 @@ class SensorsApplet extends Applet.Applet {
     this.data = this.reaper.get_sensors_data();
 
     // Customs:
-    if (this.custom_sensors.length !== 0) {
-      for (let cs of this.custom_sensors) {
-        let cs_sensor = "CUSTOM: "+cs.shown_name;
-        switch (cs.sensor_type) {
-          case "temperature":
-            if (!this.data["temps"][cs_sensor]) continue;
-            let dict = {};
-            dict["sensor"] = cs_sensor;
-            dict["shown_name"] = cs.shown_name;
-            dict["show_in_panel"] = cs.show_in_panel;
-            dict["show_in_tooltip"] = cs.show_in_tooltip;
-            dict["high_by_user"] = cs.high_by_user;
-            dict["crit_by_user"] = cs.crit_by_user;
-            dict["user_formula"] = cs.user_formula;
-            dict["input"] = this.data["temps"][cs_sensor]["input"];
-            this.temp_sensors[cs_sensor] = dict;
-            break;
-          case "fan":
+    //~ if (this.custom_sensors.length !== 0) {
+      //~ for (let cs of this.custom_sensors) {
+        //~ let cs_sensor = "CUSTOM: "+cs.shown_name;
+        //~ switch (cs.sensor_type) {
+          //~ case "temperature":
+            //~ if (!this.data["temps"][cs_sensor]) continue;
+            //~ let dict = {};
+            //~ dict["sensor"] = cs_sensor;
+            //~ dict["shown_name"] = cs.shown_name;
+            //~ dict["show_in_panel"] = cs.show_in_panel;
+            //~ dict["show_in_tooltip"] = cs.show_in_tooltip;
+            //~ dict["high_by_user"] = cs.high_by_user;
+            //~ dict["crit_by_user"] = cs.crit_by_user;
+            //~ dict["user_formula"] = cs.user_formula;
+            //~ dict["input"] = this.data["temps"][cs_sensor]["input"];
+            //~ this.temp_sensors[cs_sensor] = dict;
+            //~ break;
+          //~ case "fan":
 
-            break;
-          case "voltage":
+            //~ break;
+          //~ case "voltage":
 
-            break;
-          case "intrusion":
+            //~ break;
+          //~ case "intrusion":
 
-            break;
-        }
-      }
-    }
+            //~ break;
+        //~ }
+      //~ }
+    //~ }
 
     // Temperatures:
     var nbr_already_shown = 0;
@@ -1241,25 +1241,29 @@ class SensorsApplet extends Applet.Applet {
     } else {
       _appletLabel = this.label_parts.join(sep);
       if (!this.keep_size) {
-        while (_appletLabel.includes("  ")) {
-          _appletLabel = _appletLabel.replace(/  /g, " ");
-        }
+        //~ while (_appletLabel.includes("  ")) {
+          //~ _appletLabel = _appletLabel.replace(/  /g, " ");
+        _appletLabel = _appletLabel.replace(/\ +/g, " ");
+        //~ }
       }
 
-      while (_appletLabel.includes("\n\n")) {
-        _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
-      }
+      //~ while (_appletLabel.includes("\n\n")) {
+        //~ _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
+      _appletLabel = _appletLabel.replace(/\n+/g, "\n");
+      //~ }
       var sep_twice = "" + this.separator.trim() + " " + this.separator.trim();
       if (sep_twice.length > 1) {
-        while (_appletLabel.indexOf(sep_twice) > -1) {
-          _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
-        }
+        //~ while (_appletLabel.indexOf(sep_twice) > -1) {
+          //~ _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
+        _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator.trim());
+        //~ }
       }
       sep_twice = "" + this.separator + this.separator;
       if (sep_twice.length > 1) {
-        while (_appletLabel.includes(sep_twice)) {
-          _appletLabel = _appletLabel.replace(sep_twice, this.separator);
-        }
+        //~ while (_appletLabel.includes(sep_twice)) {
+          //~ _appletLabel = _appletLabel.replace(sep_twice, this.separator);
+        _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator);
+        //~ }
       }
       while (_appletLabel.slice(-1) === this.separator) {
         _appletLabel = _appletLabel.slice(0, -1)

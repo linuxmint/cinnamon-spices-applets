@@ -161,19 +161,7 @@ class SensorsReaper {
     this.hide_zero_fan = hide_zero_fan;
     this.hide_zero_voltage = hide_zero_voltage;
     //if (this.in_fahrenheit)
-      //command += "f"; // The -f option of sensors is full of bugs !!!
-
-    //~ if (this.sensors_command != undefined) {
-      //~ let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {
-        //~ if (exitCode === 0) {
-          //~ if (this.sensors_is_json_compatible)
-            //~ this._sensors_reaped(stdout);
-          //~ else
-            //~ this._sensors_reaped(convert_to_json(stdout));
-        //~ }
-        //~ subProcess.send_signal(9);
-      //~ });
-    //~ }
+      //command += " -f"; // The -f option of sensors is full of bugs !!!
 
     const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
     const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
@@ -182,6 +170,18 @@ class SensorsReaper {
       let [success, contents] = GLib.file_get_contents(SENSORS_DATA);
       if (success) {
         this._sensors_reaped(to_string(contents));
+      }
+    } else {
+        if (this.sensors_command != undefined) {
+        let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {
+          if (exitCode === 0) {
+            if (this.sensors_is_json_compatible)
+              this._sensors_reaped(stdout);
+            else
+              this._sensors_reaped(convert_to_json(stdout));
+          }
+          subProcess.send_signal(9);
+        });
       }
     }
 
