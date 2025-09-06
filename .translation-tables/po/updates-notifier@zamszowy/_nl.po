@@ -1,0 +1,25 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-08-31 16:14+0300\n"
+"PO-Revision-Date: 2025-08-26 10:42+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr ""

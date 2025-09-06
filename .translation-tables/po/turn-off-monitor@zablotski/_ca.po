@@ -1,0 +1,15 @@
+# TURN OFF MONITOR
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# zablotski, 2017
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->section-lock->title
+msgid "Screen lock"
+msgstr ""
+
+#. settings-schema.json->screenlock->description
+msgid "Lock also cinnamon session"
+msgstr ""
