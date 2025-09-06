@@ -8,7 +8,7 @@ import { BaseProvider } from "../BaseProvider";
 import type { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
 import { ALERT_LEVEL_ORDER } from "../../consts";
 import type { LocationData, SunTime } from "../../types";
-import type { Config } from "../../config";
+import { Services, type Config } from "../../config";
 import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class PirateWeather extends BaseProvider {
@@ -17,7 +17,7 @@ export class PirateWeather extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("Pirate Weather");
-	public readonly name = "PirateWeather";
+	public readonly name = Services.PirateWeather;
 	public readonly maxForecastSupport = 7;
 	public readonly website = "http://pirateweather.net/en/latest/";
 	public readonly maxHourlyForecastSupport = 168;
