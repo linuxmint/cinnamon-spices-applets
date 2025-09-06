@@ -15,7 +15,7 @@ check)
     fi
     ;;
 view)
-    /usr/bin/cjs "$DIR"/info-window.js "$(wc -l <"$DIR"/updates) updates" "$DIR"/updates
+    /usr/bin/cjs "$DIR"/info-window.js "$DIR"/updates
     ;;
 command)
     readonly cmd=$2

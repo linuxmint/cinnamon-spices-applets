@@ -176,22 +176,25 @@ function showDetails(item) {
 Gtk.init(null);
 
 // main window
-let win = new Gtk.Window({ title: ARGV[0] });
+let win = new Gtk.Window({ title: "Updates" });
 win.set_default_size(640, 640);
 
 let scroll = new Gtk.ScrolledWindow();
 let listbox = new Gtk.ListBox();
 
-// parse updates from ARGV[1]
-let text = new TextDecoder().decode(GLib.file_get_contents(ARGV[1])[1]);
-let updates = parseUpdates(text);
-
-for (let u of updates) {
-    let row = new Gtk.ListBoxRow();
-    let label = new Gtk.Label({ label: u.line, xalign: 0 });
-    row.add(label);
-    row._item = u;
-    listbox.add(row);
+// parse updates from ARGV[0]
+let [success, buffer] = GLib.file_get_contents(ARGV[0]);
+if (success) {
+    let text = typeof TextDecoder !== "undefined" ? new TextDecoder().decode(buffer) : String(buffer); // workaround for older cjs versions
+    let updates = parseUpdates(text);
+    win.title = `${updates.length} updates`;
+    for (let u of updates) {
+        let row = new Gtk.ListBoxRow();
+        let label = new Gtk.Label({ label: u.line, xalign: 0 });
+        row.add(label);
+        row._item = u;
+        listbox.add(row);
+    }
 }
 
 listbox.connect("row-activated", (box, row) => {
