@@ -14,11 +14,12 @@ const Lang      = imports.lang;
 const Util      = imports.misc.util;
 const Applet    = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const Settings  = imports.ui.settings;
+
 
 const appletUUID = 'CustomApplicationsMenu@LLOBERA';
 const AppletDirectory = imports.ui.appletManager.appletMeta[appletUUID].path;
 
-const SettingsFile = AppletDirectory + "/applications.json";
 const AppSys = Cinnamon.AppSystem.get_default();
 
 // l10n/translation support
@@ -102,23 +103,22 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {
+    _init: function(orientation, panelHeight, instanceId) {
         Applet.IconApplet.prototype._init.call(this, orientation);
 
         try {
             this.set_applet_icon_symbolic_name("help-about-symbolic");
             this.set_applet_tooltip(_("Custom Applications Menu"));
 
-            // watch settings file for changes
-            var file = Gio.file_new_for_path(SettingsFile);
-            this._monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
-            this._monitor.connect('changed', Lang.bind(this, this._on_settingsfile_changed));
-
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
 
+            this.settings = new Settings.AppletSettings(this, appletUUID, instanceId);
+            this.settings.monitor.connect("changed", Lang.bind(this, this._on_settings_changed));
+
             this._readSettings();
+
             this._createMenuRecursive(this.menu, this.applications);
             this._createContextMenu();
         }
@@ -131,8 +131,7 @@ MyApplet.prototype = {
         this.menu.toggle();
     },
 
-    // if applications.json is modified
-    _on_settingsfile_changed: function() {
+    _on_settings_changed: function() {
         this._readSettings();
         this.menu.removeAll();
         this._createMenuRecursive(this.menu, this.applications);
@@ -223,8 +222,12 @@ MyApplet.prototype = {
 
     // parse the applications.json file into the applications variable
     _readSettings: function() {
-        var jsonFileContent = Cinnamon.get_file_contents_utf8_sync(SettingsFile);
-        this.applications = JSON.parse(jsonFileContent);
+        try {
+            this.applications = JSON.parse(this.settings.getValue("applications"));
+        } catch(e) {
+            global.logError("Error parsing settings: " + e);
+            this.applications = [];
+        }
     },
 
     _createMenuItem: function(parentMenuItem, application) {
@@ -243,11 +246,6 @@ MyApplet.prototype = {
     },
 
     _createContextMenu: function() {
-        this.edit_menu_item = new Applet.MenuItem(_("Edit"), "document-edit-symbolic", function() {
-            Util.spawnCommandLine("xdg-open " + SettingsFile);
-        });
-        this._applet_context_menu.addMenuItem(this.edit_menu_item);
-
         this.help_menu_item = new Applet.MenuItem(_("Help"), "help-faq-symbolic", function() {
             Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.md");
         });
