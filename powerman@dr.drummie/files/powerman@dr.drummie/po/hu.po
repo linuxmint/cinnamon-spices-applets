@@ -1,0 +1,583 @@
+# Hungarian translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/dr-drummie/powerman\n"
+"POT-Creation-Date: 2025-09-06 22:34+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/applet.js:61
+msgid "Power Saver"
+msgstr "Energiatakarékos"
+
+#: src/applet.js:62
+msgid "Balanced"
+msgstr "Kiegyensúlyozott"
+
+#: src/applet.js:63
+msgid "Performance"
+msgstr "Teljesítmény"
+
+#: src/applet.js:74
+msgid "Battery full"
+msgstr "Akkumulátor tele"
+
+#: src/applet.js:76
+msgid "Battery almost full"
+msgstr "Akkumulátor majdnem tele"
+
+#: src/applet.js:78
+msgid "Battery good"
+msgstr "Akkumulátor jó"
+
+#: src/applet.js:80
+msgid "Low battery"
+msgstr "Alacsony akkumulátor"
+
+#: src/applet.js:82
+msgid "Critically low battery"
+msgstr "Kritikusan alacsony akkumulátor"
+
+#: src/applet.js:84 src/applet.js:153
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: src/applet.js:96
+msgid "AC adapter"
+msgstr "AC adapter"
+
+#: src/applet.js:98
+msgid "Laptop battery"
+msgstr "Laptop akkumulátor"
+
+#: src/applet.js:100 src/applet.js:1624
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:102
+msgid "Monitor"
+msgstr "Monitor"
+
+#: src/applet.js:104
+msgid "Mouse"
+msgstr "Egér"
+
+#: src/applet.js:106
+msgid "Keyboard"
+msgstr "Billentyűzet"
+
+#: src/applet.js:108
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:110
+msgid "Cell phone"
+msgstr "Mobiltelefon"
+
+#: src/applet.js:112
+msgid "Media player"
+msgstr "Médialejátszó"
+
+#: src/applet.js:114
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/applet.js:116
+msgid "Computer"
+msgstr "Számítógép"
+
+#: src/applet.js:118
+msgid "Gaming input"
+msgstr "Játék bemenet"
+
+#: src/applet.js:120
+msgid "Pen"
+msgstr "Toll"
+
+#: src/applet.js:122
+msgid "Touchpad"
+msgstr "Érintőtábla"
+
+#: src/applet.js:124
+msgid "Modem"
+msgstr "Modem"
+
+#: src/applet.js:126
+msgid "Network"
+msgstr "Hálózat"
+
+#: src/applet.js:128
+msgid "Headset"
+msgstr "Fejhallgató"
+
+#: src/applet.js:130
+msgid "Speakers"
+msgstr "Hangszórók"
+
+#: src/applet.js:132
+msgid "Headphones"
+msgstr "Fülhallgató"
+
+#: src/applet.js:134
+msgid "Video"
+msgstr "Videó"
+
+#: src/applet.js:136
+msgid "Audio device"
+msgstr "Hang eszköz"
+
+#: src/applet.js:138
+msgid "Remote control"
+msgstr "Távirányító"
+
+#: src/applet.js:140
+msgid "Printer"
+msgstr "Nyomtató"
+
+#: src/applet.js:142
+msgid "Scanner"
+msgstr "Szkenner"
+
+#: src/applet.js:144
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/applet.js:146
+msgid "Wearable"
+msgstr "Viselhető"
+
+#: src/applet.js:148
+msgid "Toy"
+msgstr "Játék"
+
+#: src/applet.js:555 src/applet.js:1373
+msgid "Brightness"
+msgstr "Fényerő"
+
+#: src/applet.js:556 src/applet.js:1378
+msgid "Keyboard backlight"
+msgstr "Billentyűzet háttérvilágítása"
+
+#: src/applet.js:624
+msgid "Automation Settings"
+msgstr "Automatizálási beállítások"
+
+#: src/applet.js:633
+msgid "Power Settings"
+msgstr "Energia beállítások"
+
+#: src/applet.js:782
+msgid "Power Automation"
+msgstr "Energia automatizálás"
+
+#: src/applet.js:832
+msgid "Charging"
+msgstr "Töltés"
+
+#: src/applet.js:836
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Töltés - %d óra a teljes töltésig"
+msgstr[1] "Töltés - %d óra a teljes töltésig"
+
+#: src/applet.js:842
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Töltés - %d %s %d %s a teljes töltésig"
+
+#: src/applet.js:845 src/applet.js:874
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "óra"
+msgstr[1] "óra"
+
+#: src/applet.js:847 src/applet.js:876
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "perc"
+msgstr[1] "perc"
+
+#: src/applet.js:852
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Töltés - %d perc a teljes töltésig"
+msgstr[1] "Töltés - %d perc a teljes töltésig"
+
+#: src/applet.js:858
+msgid "Fully charged"
+msgstr "Teljesen feltöltve"
+
+#: src/applet.js:861
+msgid "Using battery power"
+msgstr "Akkumulátor használata"
+
+#: src/applet.js:865
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Akkumulátor használata - %d óra hátra"
+msgstr[1] "Akkumulátor használata - %d óra hátra"
+
+#: src/applet.js:871
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Akkumulátor használata - %d %s %d %s hátra"
+
+#: src/applet.js:881
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Akkumulátor használata - %d perc hátra"
+msgstr[1] "Akkumulátor használata - %d perc hátra"
+
+#: src/applet.js:887
+msgid "Fully discharged"
+msgstr "Teljesen lemerült"
+
+#: src/applet.js:889
+msgid "Not charging"
+msgstr "Nem tölt"
+
+#: src/applet.js:916 src/applet.js:926 src/applet.js:1321 src/applet.js:1341
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:918 src/applet.js:924 src/applet.js:1329 src/applet.js:1337
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/applet.js:1486
+msgid "Switched to AC power"
+msgstr "Váltás AC áramra"
+
+#: src/applet.js:1490
+msgid "Switched to battery power"
+msgstr "Váltás akkumulátorra"
+
+#: src/applet.js:1558
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low (%d%%)"
+msgstr "KRITIKUS: Akkumulátor %s kritikusan alacsony (%d%%)"
+
+#: src/applet.js:1560 src/applet.js:1591
+msgid "Critical Battery"
+msgstr "Kritikus akkumulátor"
+
+#: src/applet.js:1561
+#, javascript-format
+msgid "Battery %s critically low (%d%%)"
+msgstr "Akkumulátor %s kritikusan alacsony (%d%%)"
+
+#: src/applet.js:1567
+#, javascript-format
+msgid "LOW: Battery %s low (%d%%)"
+msgstr "ALACSONY: Akkumulátor %s alacsony (%d%%)"
+
+#: src/applet.js:1568 src/applet.js:1594
+msgid "Low Battery"
+msgstr "Alacsony akkumulátor"
+
+#: src/applet.js:1568
+#, javascript-format
+msgid "Battery %s low (%d%%)"
+msgstr "Akkumulátor %s alacsony (%d%%)"
+
+#: src/applet.js:1581
+#, javascript-format
+msgid "Auto-enabled power saver (battery low: %d%%)"
+msgstr "Automatikusan engedélyezett energiatakarékos (akkumulátor alacsony: %d%%)"
+
+#: src/applet.js:1590
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low"
+msgstr "KRITIKUS: Akkumulátor %s kritikusan alacsony"
+
+#: src/applet.js:1591
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Akkumulátor %s kritikusan alacsony"
+
+#: src/applet.js:1593
+#, javascript-format
+msgid "LOW: Battery %s low"
+msgstr "ALACSONY: Akkumulátor %s alacsony"
+
+#: src/applet.js:1594
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Akkumulátor %s alacsony"
+
+#: src/applet.js:1613
+msgid "Battery"
+msgstr "Akkumulátor"
+
+#: src/applet.js:1626
+msgid "AC Adapter"
+msgstr "AC adapter"
+
+#: src/applet.js:1628
+msgid "Power Device"
+msgstr "Energia eszköz"
+
+#: src/applet.js:1743 src/applet.js:1771
+msgid "Power Applet"
+msgstr "Energia applet"
+
+#: src/applet.js:1743
+msgid "System power applet disabled. Using PowerMan instead."
+msgstr "Rendszer energia applet letiltva. PowerMan használata helyette."
+
+#: src/applet.js:1749 src/applet.js:1777
+msgid "Error"
+msgstr "Hiba"
+
+#: src/applet.js:1749
+msgid "Could not disable system power applet"
+msgstr "Nem sikerült letiltani a rendszer energia appletet"
+
+#: src/applet.js:1771
+msgid "System power applet re-enabled. Both applets are now active."
+msgstr "Rendszer energia applet újra engedélyezve. Mindkét applet aktív."
+
+#: src/applet.js:1777
+msgid "Could not restore system power applet"
+msgstr "Nem sikerült visszaállítani a rendszer energia appletet"
+
+#: src/applet.js:1866 src/applet.js:1908
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "fényerő %d%%"
+
+#: src/applet.js:1874 src/applet.js:1926
+#, javascript-format
+msgid "power profile %s"
+msgstr "energia profil %s"
+
+#: src/applet.js:1883
+msgid "AC power: "
+msgstr "AC áram: "
+
+#: src/applet.js:1887
+msgid "Switched to AC power (no automation applied)"
+msgstr "Váltás AC áramra (nincs automatizálás alkalmazva)"
+
+#: src/applet.js:1901
+msgid "Switched to battery power (no battery devices detected)"
+msgstr "Váltás akkumulátorra (nincs akkumulátor eszköz észlelve)"
+
+#: src/applet.js:1916
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "energiatakarékos mód (akkumulátor alacsony: %d%%)"
+
+#: src/applet.js:1936
+msgid "Battery power: "
+msgstr "Akkumulátor: "
+
+#: src/applet.js:1940
+msgid "Switched to battery power (no automation applied)"
+msgstr "Váltás akkumulátorra (nincs automatizálás alkalmazva)"
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 perc"
+
+msgid "10 seconds"
+msgstr "10 másodperc"
+
+msgid "15 seconds"
+msgstr "15 másodperc"
+
+msgid "1 minute"
+msgstr "1 perc"
+
+msgid "2 minutes"
+msgstr "2 perc"
+
+msgid "30 seconds"
+msgstr "30 másodperc"
+
+msgid "5 minutes"
+msgstr "5 perc"
+
+msgid "5 seconds"
+msgstr "5 másodperc"
+
+msgid "AC brightness level (%)"
+msgstr "AC fényerő szint (%)"
+
+msgid "AC power profile"
+msgstr "AC energia profil"
+
+msgid "Always show all batteries"
+msgstr "Mindig mutasson minden akkumulátort"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Mindig mutasson több akkumulátort a panelen"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Automatikusan tompítsa a képernyőt tétlenségkor akkumulátoron"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Automatikusan állítsa a fényerőt AC/Akkumulátorhoz"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Automatikusan tompítsa a képernyőt tétlenségkor AC áramon"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Automatikusan váltson energia profilokat AC/Akkumulátorhoz"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr "Automatikusan váltson energiatakarékos módra, ha az akkumulátor alacsony"
+
+msgid "Auto power-saver on low battery"
+msgstr "Automatikus energiatakarékos alacsony akkumulátoron"
+
+msgid "Battery brightness level (%)"
+msgstr "Akkumulátor fényerő szint (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr "Akkumulátor százalék, amely alatt automatikusan engedélyezze az energiatakarékos módot"
+
+msgid "Battery power profile"
+msgstr "Akkumulátor energia profil"
+
+msgid "Battery Power Saving"
+msgstr "Akkumulátor energia megtakarítás"
+
+msgid "Brightness Automation"
+msgstr "Fényerő automatizálás"
+
+msgid "Brightness Control"
+msgstr "Fényerő vezérlés"
+
+msgid "Brightness Control Status"
+msgstr "Fényerő vezérlés állapot"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Fényerő szint AC áramon használva"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Fényerő szint akkumulátoron használva"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Fényerő szint tompításkor (%)"
+
+msgid "Debug and Logging"
+msgstr "Hibakeresés és naplózás"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Tompítsa a képernyőt tétlenségkor AC áramon"
+
+msgid "Dim screen when idle on battery"
+msgstr "Tompítsa a képernyőt tétlenségkor akkumulátoron"
+
+msgid "Disable default Cinnamon power applet and use PowerMan instead"
+msgstr "Tiltsa le az alapértelmezett Cinnamon energia appletet és használja a PowerMan-t helyette"
+
+msgid "Display"
+msgstr "Kijelző"
+
+msgid "Display and Advanced"
+msgstr "Kijelző és haladó"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr "Jelenítse meg az értesítéseket, amikor energia automatizálási műveletek végrehajtódnak"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr "Engedélyezze az automatikus váltást különböző energia profilok között AC és akkumulátorhoz"
+
+msgid "Enable debug logging"
+msgstr "Engedélyezze a hibakeresési naplózást"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr "Engedélyezze a részletes naplózást az energia automatizálás hibaelhárításához"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr "Engedélyezze a külön fényerő szinteket AC áramhoz és akkumulátorhoz"
+
+msgid "Hide applet icon from panel"
+msgstr "Rejtse el az applet ikont a panelről"
+
+msgid "Hide label"
+msgstr "Rejtse el a címkét"
+
+msgid "Low battery threshold (%)"
+msgstr "Alacsony akkumulátor küszöb (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Értesítések és rendszer integráció"
+
+msgid "Panel Display Options"
+msgstr "Panel kijelző opciók"
+
+msgid "Power Control"
+msgstr "Energia vezérlés"
+
+msgid "Power Control Status"
+msgstr "Energia vezérlés állapot"
+
+msgid "Power Profile Automation"
+msgstr "Energia profil automatizálás"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr "Energia profil automatizálás nem elérhető. Nincs energia profil daemon vagy akkumulátor eszköz észlelve."
+
+msgid "Power profile to use when on AC power"
+msgstr "Energia profil AC áramon használva"
+
+msgid "Power profile to use when on battery power"
+msgstr "Energia profil akkumulátoron használva"
+
+msgid "Replace system power applet"
+msgstr "Cserélje le a rendszer energia appletet"
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr "Képernyő fényerő vezérlés nem elérhető ezen a rendszeren. Fényerő automatizálás letiltva."
+
+msgid "Screen Dimming Settings"
+msgstr "Képernyő tompítás beállítások"
+
+msgid "Screen dim timeout"
+msgstr "Képernyő tompítás időkorlát"
+
+msgid "Show automation notifications"
+msgstr "Mutassa az automatizálási értesítéseket"
+
+msgid "Show percentage"
+msgstr "Mutassa a százalékot"
+
+msgid "Show percentage and time remaining"
+msgstr "Mutassa a százalékot és a hátralévő időt"
+
+msgid "Show time remaining"
+msgstr "Mutassa a hátralévő időt"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Fényerő szint képernyő tompításkor használva"
+
+msgid "Time before screen dims when idle"
+msgstr "Idő képernyő tompítása előtt tétlenségkor"

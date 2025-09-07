@@ -1,0 +1,596 @@
+# Croatian translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.6\n"
+"Report-Msgid-Bugs-To: https://github.com/dr-drummie/powerman\n"
+"POT-Creation-Date: 2025-08-28 08:41+0200\n"
+"PO-Revision-Date: 2025-08-28 08:41+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/applet.js:61
+msgid "Power Saver"
+msgstr "Štednja energije"
+
+#: src/applet.js:62
+msgid "Balanced"
+msgstr "Uravnotežen"
+
+#: src/applet.js:63
+msgid "Performance"
+msgstr "Performanse"
+
+#: src/applet.js:74
+msgid "Battery full"
+msgstr "Baterija puna"
+
+#: src/applet.js:76
+msgid "Battery almost full"
+msgstr "Baterija skoro puna"
+
+#: src/applet.js:78
+msgid "Battery good"
+msgstr "Baterija dobra"
+
+#: src/applet.js:80
+msgid "Low battery"
+msgstr "Slaba baterija"
+
+#: src/applet.js:82
+msgid "Critically low battery"
+msgstr "Kritično slaba baterija"
+
+#: src/applet.js:84 src/applet.js:153
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: src/applet.js:96
+msgid "AC adapter"
+msgstr "AC adapter"
+
+#: src/applet.js:98
+msgid "Laptop battery"
+msgstr "Laptop baterija"
+
+#: src/applet.js:100 src/applet.js:1592
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:102
+msgid "Monitor"
+msgstr "Monitor"
+
+#: src/applet.js:104
+msgid "Mouse"
+msgstr "Miš"
+
+#: src/applet.js:106
+msgid "Keyboard"
+msgstr "Tipkovnica"
+
+#: src/applet.js:108
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:110
+msgid "Cell phone"
+msgstr "Mobitel"
+
+#: src/applet.js:112
+msgid "Media player"
+msgstr "Medijski player"
+
+#: src/applet.js:114
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/applet.js:116
+msgid "Computer"
+msgstr "Računalo"
+
+#: src/applet.js:118
+msgid "Gaming input"
+msgstr "Gaming kontroler"
+
+#: src/applet.js:120
+msgid "Pen"
+msgstr "Olovka"
+
+#: src/applet.js:122
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: src/applet.js:124
+msgid "Modem"
+msgstr "Modem"
+
+#: src/applet.js:126
+msgid "Network"
+msgstr "Mreža"
+
+#: src/applet.js:128
+msgid "Headset"
+msgstr "Slušalice s mikrofonom"
+
+#: src/applet.js:130
+msgid "Speakers"
+msgstr "Zvučnici"
+
+#: src/applet.js:132
+msgid "Headphones"
+msgstr "Slušalice"
+
+#: src/applet.js:134
+msgid "Video"
+msgstr "Video"
+
+#: src/applet.js:136
+msgid "Audio device"
+msgstr "Audio uređaj"
+
+#: src/applet.js:138
+msgid "Remote control"
+msgstr "Daljinski upravljač"
+
+#: src/applet.js:140
+msgid "Printer"
+msgstr "Pisač"
+
+#: src/applet.js:142
+msgid "Scanner"
+msgstr "Skener"
+
+#: src/applet.js:144
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/applet.js:146
+msgid "Wearable"
+msgstr "Nosivi uređaj"
+
+#: src/applet.js:148
+msgid "Toy"
+msgstr "Igračka"
+
+#: src/applet.js:546 src/applet.js:1348
+msgid "Brightness"
+msgstr "Svjetlina"
+
+#: src/applet.js:547 src/applet.js:1353
+msgid "Keyboard backlight"
+msgstr "Pozadinsko osvjetljenje tipkovnice"
+
+#: src/applet.js:615
+msgid "Automation Settings"
+msgstr "Postavke automatizacije"
+
+#: src/applet.js:624
+msgid "Power Settings"
+msgstr "Postavke napajanja"
+
+#: src/applet.js:757
+msgid "Power Automation"
+msgstr "Automatizacija napajanja"
+
+#: src/applet.js:807
+msgid "Charging"
+msgstr "Puni se"
+
+#: src/applet.js:811
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Puni se - %d sat do potpunog punjenja"
+msgstr[1] "Puni se - %d sata do potpunog punjenja"
+msgstr[2] "Puni se - %d sati do potpunog punjenja"
+
+#: src/applet.js:817
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Puni se - %d %s %d %s do potpunog punjenja"
+
+#: src/applet.js:820 src/applet.js:849
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "sat"
+msgstr[1] "sata"
+msgstr[2] "sati"
+
+#: src/applet.js:822 src/applet.js:851
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuta"
+msgstr[1] "minute"
+msgstr[2] "minuta"
+
+#: src/applet.js:827
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Puni se - %d minuta do potpunog punjenja"
+msgstr[1] "Puni se - %d minute do potpunog punjenja"
+msgstr[2] "Puni se - %d minuta do potpunog punjenja"
+
+#: src/applet.js:833
+msgid "Fully charged"
+msgstr "Potpuno napunjena"
+
+#: src/applet.js:836
+msgid "Using battery power"
+msgstr "Koristi se baterija"
+
+#: src/applet.js:840
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Koristi se baterija - %d sat preostao"
+msgstr[1] "Koristi se baterija - %d sata preostala"
+msgstr[2] "Koristi se baterija - %d sati preostalo"
+
+#: src/applet.js:846
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Koristi se baterija - preostalo %d %s %d %s"
+
+#: src/applet.js:856
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Koristi se baterija - %d minuta preostala"
+msgstr[1] "Koristi se baterija - %d minute preostale"
+msgstr[2] "Koristi se baterija - %d minuta preostalo"
+
+#: src/applet.js:862
+msgid "Fully discharged"
+msgstr "Potpuno ispražnjena"
+
+#: src/applet.js:864
+msgid "Not charging"
+msgstr "Ne puni se"
+
+#: src/applet.js:891 src/applet.js:901 src/applet.js:1296 src/applet.js:1316
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:893 src/applet.js:899 src/applet.js:1304 src/applet.js:1312
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/applet.js:1454
+msgid "Switched to AC power"
+msgstr "Prebačeno na AC napajanje"
+
+#: src/applet.js:1458
+msgid "Switched to battery power"
+msgstr "Prebačeno na bateriju"
+
+#: src/applet.js:1526
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low (%d%%)"
+msgstr "KRITIČNO: Baterija %s kritično slaba (%d%%)"
+
+#: src/applet.js:1528 src/applet.js:1559
+msgid "Critical Battery"
+msgstr "Kritična baterija"
+
+#: src/applet.js:1529
+#, javascript-format
+msgid "Battery %s critically low (%d%%)"
+msgstr "Baterija %s kritično slaba (%d%%)"
+
+#: src/applet.js:1535
+#, javascript-format
+msgid "LOW: Battery %s low (%d%%)"
+msgstr "SLABO: Baterija %s slaba (%d%%)"
+
+#: src/applet.js:1536 src/applet.js:1562
+msgid "Low Battery"
+msgstr "Slaba baterija"
+
+#: src/applet.js:1536
+#, javascript-format
+msgid "Battery %s low (%d%%)"
+msgstr "Baterija %s slaba (%d%%)"
+
+#: src/applet.js:1549
+#, javascript-format
+msgid "Auto-enabled power saver (battery low: %d%%)"
+msgstr "Automatski omogućena štednja energije (slaba baterija: %d%%)"
+
+#: src/applet.js:1558
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low"
+msgstr "KRITIČNO: Baterija %s kritično slaba"
+
+#: src/applet.js:1559
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Baterija %s kritično slaba"
+
+#: src/applet.js:1561
+#, javascript-format
+msgid "LOW: Battery %s low"
+msgstr "SLABO: Baterija %s slaba"
+
+#: src/applet.js:1562
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Baterija %s slaba"
+
+#: src/applet.js:1581
+msgid "Battery"
+msgstr "Baterija"
+
+#: src/applet.js:1594
+msgid "AC Adapter"
+msgstr "AC adapter"
+
+#: src/applet.js:1596
+msgid "Power Device"
+msgstr "Uređaj napajanja"
+
+#: src/applet.js:1711 src/applet.js:1739
+msgid "Power Applet"
+msgstr "Applet napajanja"
+
+#: src/applet.js:1711
+msgid "System power applet disabled. Using PowerMan instead."
+msgstr "Sistemski applet napajanja onemogućen. Koristi se PowerMan."
+
+#: src/applet.js:1717 src/applet.js:1745
+msgid "Error"
+msgstr "Greška"
+
+#: src/applet.js:1717
+msgid "Could not disable system power applet"
+msgstr "Nije moguće onemogućiti sistemski applet napajanja"
+
+#: src/applet.js:1739
+msgid "System power applet re-enabled. Both applets are now active."
+msgstr "Sistemski applet napajanja ponovno omogućen. Oba appleta su sada aktivna."
+
+#: src/applet.js:1745
+msgid "Could not restore system power applet"
+msgstr "Nije moguće obnoviti sistemski applet napajanja"
+
+#: src/applet.js:1820 src/applet.js:1862
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "svjetlina %d%%"
+
+#: src/applet.js:1828 src/applet.js:1880
+#, javascript-format
+msgid "power profile %s"
+msgstr "profil napajanja %s"
+
+#: src/applet.js:1837
+msgid "AC power: "
+msgstr "AC napajanje: "
+
+#: src/applet.js:1841
+msgid "Switched to AC power (no automation applied)"
+msgstr "Prebačeno na AC napajanje (automatizacija nije primijenjena)"
+
+#: src/applet.js:1855
+msgid "Switched to battery power (no battery devices detected)"
+msgstr "Prebačeno na bateriju (nema otkrivenih uređaja baterije)"
+
+#: src/applet.js:1870
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "način štednje energije (slaba baterija: %d%%)"
+
+#: src/applet.js:1890
+msgid "Battery power: "
+msgstr "Napajanje baterije: "
+
+#: src/applet.js:1894
+msgid "Switched to battery power (no automation applied)"
+msgstr "Prebačeno na bateriju (automatizacija nije primijenjena)"
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 minuta"
+
+msgid "10 seconds"
+msgstr "10 sekundi"
+
+msgid "15 seconds"
+msgstr "15 sekundi"
+
+msgid "1 minute"
+msgstr "1 minuta"
+
+msgid "2 minutes"
+msgstr "2 minute"
+
+msgid "30 seconds"
+msgstr "30 sekundi"
+
+msgid "5 minutes"
+msgstr "5 minuta"
+
+msgid "5 seconds"
+msgstr "5 sekundi"
+
+msgid "AC brightness level (%)"
+msgstr "Razina svjetline na AC (%)"
+
+msgid "AC power profile"
+msgstr "AC profil napajanja"
+
+msgid "Always show all batteries"
+msgstr "Uvijek prikaži sve baterije"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Uvijek prikaži više baterija na panelu"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Automatski zatamni ekran pri neaktivnosti na bateriji"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Automatski prilagodi svjetlinu za AC/bateriju"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Automatski zatamni ekran pri neaktivnosti na AC napajanju"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Automatski prebaci profile napajanja za AC/bateriju"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr "Automatski prebaci na štednju energije kada je baterija slaba"
+
+msgid "Auto power-saver on low battery"
+msgstr "Automatska štednja energije na slaboj bateriji"
+
+msgid "Battery brightness level (%)"
+msgstr "Razina svjetline baterije (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr "Postotak baterije ispod kojeg se automatski omogućuje štednja energije"
+
+msgid "Battery power profile"
+msgstr "Profil napajanja baterije"
+
+msgid "Battery Power Saving"
+msgstr "Štednja baterije"
+
+msgid "Brightness Automation"
+msgstr "Automatska svjetlina"
+
+msgid "Brightness Control"
+msgstr "Kontrola svjetline"
+
+msgid "Brightness Control Status"
+msgstr "Status kontrole svjetline"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Razina svjetline na AC napajanju"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Razina svjetline na bateriji"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Razina svjetline pri zatamnjivanju (%)"
+
+msgid "Debug and Logging"
+msgstr "Debug i zapisivanje"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Zatamni ekran pri neaktivnosti na AC napajanju"
+
+msgid "Dim screen when idle on battery"
+msgstr "Zatamni ekran pri neaktivnosti na bateriji"
+
+msgid "Disable default Cinnamon power applet and use PowerMan instead"
+msgstr "Onemogući zadani Cinnamon applet napajanja i koristi PowerMan"
+
+msgid "Display"
+msgstr "Prikaz"
+
+msgid "Display and Advanced"
+msgstr "Prikaz i napredno"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr "Prikaži notifikacije kada se izvršavaju radnje automatizacije napajanja"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr "Omogući automatsko prebacivanje između različitih profila napajanja za AC i bateriju"
+
+msgid "Enable debug logging"
+msgstr "Omogući zapisivanje grešaka"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr "Omogući detaljno zapisivanje za rješavanje problema automatizacije napajanja"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr "Omogući odvojene razine svjetline za AC napajanje i bateriju"
+
+msgid "Hide applet icon from panel"
+msgstr "Sakrij ikonu appleta s panela"
+
+msgid "Hide label"
+msgstr "Sakrij oznaku"
+
+msgid "Low battery threshold (%)"
+msgstr "Prag slabe baterije (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Notifikacije i integracija sustava"
+
+msgid "Panel Display Options"
+msgstr "Opcije prikaza na panelu"
+
+msgid "Power Control"
+msgstr "Kontrola napajanja"
+
+msgid "Power Control Status"
+msgstr "Status kontrole napajanja"
+
+msgid "Power Profile Automation"
+msgstr "Automatski profili napajanja"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr "Automatizacija profila napajanja nije dostupna. Nisu otkriveni daemon profila napajanja ili uređaji baterije."
+
+msgid "Power profile to use when on AC power"
+msgstr "Profil napajanja za korištenje na AC napajanju"
+
+msgid "Power profile to use when on battery power"
+msgstr "Profil napajanja za korištenje na bateriji"
+
+msgid "Replace system power applet"
+msgstr "Zamijeni sistemski applet napajanja"
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr "Kontrola svjetline ekrana nije dostupna na ovom sustavu. Automatizacija svjetline je onemogućena."
+
+msgid "Screen Dimming Settings"
+msgstr "Postavke zatamnjivanja ekrana"
+
+msgid "Screen dim timeout"
+msgstr "Vrijeme do zatamnjivanja"
+
+msgid "Show automation notifications"
+msgstr "Prikaži notifikacije automatizacije"
+
+msgid "Show percentage"
+msgstr "Prikaži postotak"
+
+msgid "Show percentage and time remaining"
+msgstr "Prikaži postotak i preostalo vrijeme"
+
+msgid "Show time remaining"
+msgstr "Prikaži preostalo vrijeme"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Razina svjetline za korištenje pri zatamnjivanju ekrana"
+
+msgid "Time before screen dims when idle"
+msgstr "Vrijeme prije zatamnjivanja ekrana pri neaktivnosti"
+
+msgid "PowerMan - Enhanced Power Manager"
+msgstr "PowerMan - Napredno upravljanje energijom"
+
+msgid "Enhanced power management with separate AC/Battery settings for brightness, power profiles, and automation - based on original power applet for Cinnamon"
+msgstr "Poboljšano upravljanje potrošnjom energije s odvojenim postavkama za svjetlinu, energetske profile i automatizaciju za napajanje putem adaptera i baterije – temeljeno na izvornom apletu za upravljanje energijom u Cinnamonu"

@@ -1,0 +1,268 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page-display-advanced", "page-brightness", "page-power"],
+
+    "page-brightness": {
+      "type": "page",
+      "title": "Brightness Control",
+      "sections": ["section-brightness-automation", "section-brightness-dimming", "section-brightness-info"]
+    },
+    "section-brightness-automation": {
+      "type": "section",
+      "title": "Brightness Automation",
+      "keys": ["enable-brightness-auto", "ac-brightness", "battery-brightness"],
+      "dependency": "brightness-available"
+    },
+    "section-brightness-dimming": {
+      "type": "section",
+      "title": "Screen Dimming Settings",
+      "keys": ["idle-dim-ac", "idle-dim-battery", "idle-dim-time", "idle-brightness"],
+      "dependency": "brightness-available"
+    },
+    "section-brightness-info": {
+      "type": "section",
+      "title": "Brightness Control Status",
+      "keys": ["brightness-not-available-info"],
+      "dependency": "brightness-not-available"
+    },
+
+    "page-power": {
+      "type": "page",
+      "title": "Power Control",
+      "sections": ["section-power-profiles", "section-battery-saver", "section-power-info"]
+    },
+    "section-power-profiles": {
+      "type": "section",
+      "title": "Power Profile Automation",
+      "keys": ["enable-profile-auto", "ac-power-profile", "battery-power-profile"],
+      "dependency": "power-control-available"
+    },
+    "section-battery-saver": {
+      "type": "section",
+      "title": "Battery Power Saving",
+      "keys": ["enable-battery-saver", "battery-low-threshold"],
+      "dependency": "battery-available"
+    },
+    "section-power-info": {
+      "type": "section",
+      "title": "Power Control Status",
+      "keys": ["power-not-available-info"],
+      "dependency": "power-control-not-available"
+    },
+
+    "page-display-advanced": {
+      "type": "page",
+      "title": "Display and Advanced",
+      "sections": ["section-panel-display", "section-notifications", "section-debug"]
+    },
+    "section-panel-display": {
+      "type": "section",
+      "title": "Panel Display Options",
+      "keys": ["labelinfo", "showmulti", "hide-applet-icon"]
+    },
+    "section-notifications": {
+      "type": "section",
+      "title": "Notifications and System Integration",
+      "keys": ["show-notifications", "replace-system-tray-icon"]
+    },
+    "section-debug": {
+      "type": "section",
+      "title": "Debug and Logging",
+      "keys": ["debug-logging"]
+    }
+  },
+
+  "enable-brightness-auto": {
+    "type": "switch",
+    "default": false,
+    "description": "Automatically adjust brightness for AC/Battery",
+    "tooltip": "Enable separate brightness levels for AC power and battery power"
+  },
+  "ac-brightness": {
+    "type": "scale",
+    "default": 80,
+    "min": 5,
+    "max": 100,
+    "step": 5,
+    "description": "AC brightness level (%)",
+    "tooltip": "Brightness level to use when on AC power"
+  },
+  "battery-brightness": {
+    "type": "scale",
+    "default": 35,
+    "min": 5,
+    "max": 100,
+    "step": 5,
+    "description": "Battery brightness level (%)",
+    "tooltip": "Brightness level to use when on battery power",
+    "dependency": "battery-available"
+  },
+
+  "idle-dim-ac": {
+    "type": "switch",
+    "default": false,
+    "description": "Dim screen when idle on AC power",
+    "tooltip": "Automatically dim the screen when idle while on AC power"
+  },
+  "idle-dim-battery": {
+    "type": "switch",
+    "default": true,
+    "description": "Dim screen when idle on battery",
+    "tooltip": "Auto dim screen when idle on battery power",
+    "dependency": "battery-available"
+  },
+  "idle-dim-time": {
+    "type": "combobox",
+    "default": 30,
+    "description": "Screen dim timeout",
+    "tooltip": "Time before screen dims when idle",
+    "options": {
+      "5 seconds": 5,
+      "10 seconds": 10,
+      "15 seconds": 15,
+      "30 seconds": 30,
+      "1 minute": 60,
+      "2 minutes": 120,
+      "5 minutes": 300,
+      "10 minutes": 600
+    }
+  },
+  "idle-brightness": {
+    "type": "scale",
+    "default": 15,
+    "min": 5,
+    "max": 90,
+    "step": 5,
+    "description": "Brightness level when dimmed (%)",
+    "tooltip": "The brightness level to use when dimming the screen"
+  },
+
+  "enable-profile-auto": {
+    "type": "switch",
+    "default": false,
+    "description": "Automatically switch power profiles for AC/Battery",
+    "tooltip": "Enable automatic switching between different power profiles for AC and Battery"
+  },
+  "ac-power-profile": {
+    "type": "combobox",
+    "default": "performance",
+    "description": "AC power profile",
+    "tooltip": "Power profile to use when on AC power",
+    "options": {
+      "Performance": "performance",
+      "Balanced": "balanced",
+      "Power Saver": "power-saver"
+    }
+  },
+  "battery-power-profile": {
+    "type": "combobox",
+    "default": "balanced",
+    "description": "Battery power profile",
+    "tooltip": "Power profile to use when on battery power",
+    "dependency": "battery-available",
+    "options": {
+      "Performance": "performance",
+      "Balanced": "balanced",
+      "Power Saver": "power-saver"
+    }
+  },
+
+  "enable-battery-saver": {
+    "type": "switch",
+    "default": true,
+    "description": "Auto power-saver on low battery",
+    "tooltip": "Automatically switch to power-saver mode when battery is low"
+  },
+  "battery-low-threshold": {
+    "type": "scale",
+    "default": 20,
+    "min": 5,
+    "max": 50,
+    "step": 5,
+    "description": "Low battery threshold (%)",
+    "tooltip": "Battery percentage below which to automatically enable power-saver mode"
+  },
+
+  "show-notifications": {
+    "type": "switch",
+    "default": true,
+    "description": "Show automation notifications",
+    "tooltip": "Display notifications when power automation actions are performed"
+  },
+
+  "replace-system-tray-icon": {
+    "type": "switch",
+    "default": false,
+    "description": "Replace system power applet",
+    "tooltip": "Disable default Cinnamon power applet and use PowerMan instead"
+  },
+
+  "labelinfo": {
+    "type": "combobox",
+    "description": "Display",
+    "default": "nothing",
+    "options": {
+      "Show percentage": "percentage",
+      "Show time remaining": "time",
+      "Show percentage and time remaining": "percentage_time",
+      "Hide label": "nothing"
+    }
+  },
+  "showmulti": {
+    "type": "switch",
+    "default": false,
+    "description": "Always show all batteries",
+    "tooltip": "Always show multiple batteries in panel"
+  },
+
+  "hide-applet-icon": {
+    "type": "switch",
+    "default": false,
+    "description": "Hide applet icon from panel",
+    "tooltip": "Hide applet icon from panel"
+  },
+
+  "debug-logging": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable debug logging",
+    "tooltip": "Enable detailed logging for troubleshooting power automation"
+  },
+
+  "brightness-not-available-info": {
+    "type": "label",
+    "description": "Screen brightness control is not available on this system. Brightness automation is disabled."
+  },
+  "power-not-available-info": {
+    "type": "label",
+    "description": "Power profile automation is not available. No power profiles daemon or battery devices detected."
+  },
+
+  "brightness-available": {
+    "type": "generic",
+    "default": false
+  },
+  "brightness-not-available": {
+    "type": "generic",
+    "default": true
+  },
+  "power-control-available": {
+    "type": "generic",
+    "default": false
+  },
+  "power-control-not-available": {
+    "type": "generic",
+    "default": true
+  },
+  "battery-available": {
+    "type": "generic",
+    "default": false
+  },
+
+  "original-power-applets": {
+    "type": "generic",
+    "default": [],
+    "description": "List of original power applets that were disabled"
+  }
+}

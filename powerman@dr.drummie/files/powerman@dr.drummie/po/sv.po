@@ -1,0 +1,583 @@
+# Swedish translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/dr-drummie/powerman\n"
+"POT-Creation-Date: 2025-09-06 22:34+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/applet.js:61
+msgid "Power Saver"
+msgstr "Strömsparläge"
+
+#: src/applet.js:62
+msgid "Balanced"
+msgstr "Balanserad"
+
+#: src/applet.js:63
+msgid "Performance"
+msgstr "Prestanda"
+
+#: src/applet.js:74
+msgid "Battery full"
+msgstr "Batteri fullt"
+
+#: src/applet.js:76
+msgid "Battery almost full"
+msgstr "Batteri nästan fullt"
+
+#: src/applet.js:78
+msgid "Battery good"
+msgstr "Batteri bra"
+
+#: src/applet.js:80
+msgid "Low battery"
+msgstr "Låg batterinivå"
+
+#: src/applet.js:82
+msgid "Critically low battery"
+msgstr "Kritiskt låg batterinivå"
+
+#: src/applet.js:84 src/applet.js:153
+msgid "Unknown"
+msgstr "Okänd"
+
+#: src/applet.js:96
+msgid "AC adapter"
+msgstr "AC-adapter"
+
+#: src/applet.js:98
+msgid "Laptop battery"
+msgstr "Laptopbatteri"
+
+#: src/applet.js:100 src/applet.js:1624
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:102
+msgid "Monitor"
+msgstr "Skärm"
+
+#: src/applet.js:104
+msgid "Mouse"
+msgstr "Mus"
+
+#: src/applet.js:106
+msgid "Keyboard"
+msgstr "Tangentbord"
+
+#: src/applet.js:108
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:110
+msgid "Cell phone"
+msgstr "Mobiltelefon"
+
+#: src/applet.js:112
+msgid "Media player"
+msgstr "Mediaspelare"
+
+#: src/applet.js:114
+msgid "Tablet"
+msgstr "Surfplatta"
+
+#: src/applet.js:116
+msgid "Computer"
+msgstr "Dator"
+
+#: src/applet.js:118
+msgid "Gaming input"
+msgstr "Spelinmatning"
+
+#: src/applet.js:120
+msgid "Pen"
+msgstr "Penna"
+
+#: src/applet.js:122
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: src/applet.js:124
+msgid "Modem"
+msgstr "Modem"
+
+#: src/applet.js:126
+msgid "Network"
+msgstr "Nätverk"
+
+#: src/applet.js:128
+msgid "Headset"
+msgstr "Headset"
+
+#: src/applet.js:130
+msgid "Speakers"
+msgstr "Högtalare"
+
+#: src/applet.js:132
+msgid "Headphones"
+msgstr "Hörlurar"
+
+#: src/applet.js:134
+msgid "Video"
+msgstr "Video"
+
+#: src/applet.js:136
+msgid "Audio device"
+msgstr "Ljudenhet"
+
+#: src/applet.js:138
+msgid "Remote control"
+msgstr "Fjärrkontroll"
+
+#: src/applet.js:140
+msgid "Printer"
+msgstr "Skrivare"
+
+#: src/applet.js:142
+msgid "Scanner"
+msgstr "Skanner"
+
+#: src/applet.js:144
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/applet.js:146
+msgid "Wearable"
+msgstr "Bärbar enhet"
+
+#: src/applet.js:148
+msgid "Toy"
+msgstr "Leksak"
+
+#: src/applet.js:555 src/applet.js:1373
+msgid "Brightness"
+msgstr "Ljusstyrka"
+
+#: src/applet.js:556 src/applet.js:1378
+msgid "Keyboard backlight"
+msgstr "Tangentbordets bakgrundsbelysning"
+
+#: src/applet.js:624
+msgid "Automation Settings"
+msgstr "Automatiseringsinställningar"
+
+#: src/applet.js:633
+msgid "Power Settings"
+msgstr "Ströminställningar"
+
+#: src/applet.js:782
+msgid "Power Automation"
+msgstr "Strömautomatisering"
+
+#: src/applet.js:832
+msgid "Charging"
+msgstr "Laddar"
+
+#: src/applet.js:836
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Laddar - %d timme tills fulladdad"
+msgstr[1] "Laddar - %d timmar tills fulladdad"
+
+#: src/applet.js:842
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Laddar - %d %s %d %s tills fulladdad"
+
+#: src/applet.js:845 src/applet.js:874
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "timme"
+msgstr[1] "timmar"
+
+#: src/applet.js:847 src/applet.js:876
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minut"
+msgstr[1] "minuter"
+
+#: src/applet.js:852
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Laddar - %d minut tills fulladdad"
+msgstr[1] "Laddar - %d minuter tills fulladdad"
+
+#: src/applet.js:858
+msgid "Fully charged"
+msgstr "Fulladdad"
+
+#: src/applet.js:861
+msgid "Using battery power"
+msgstr "Använder batteriström"
+
+#: src/applet.js:865
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Använder batteriström - %d timme kvar"
+msgstr[1] "Använder batteriström - %d timmar kvar"
+
+#: src/applet.js:871
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Använder batteriström - %d %s %d %s kvar"
+
+#: src/applet.js:881
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Använder batteriström - %d minut kvar"
+msgstr[1] "Använder batteriström - %d minuter kvar"
+
+#: src/applet.js:887
+msgid "Fully discharged"
+msgstr "Helt urladdad"
+
+#: src/applet.js:889
+msgid "Not charging"
+msgstr "Laddar inte"
+
+#: src/applet.js:916 src/applet.js:926 src/applet.js:1321 src/applet.js:1341
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:918 src/applet.js:924 src/applet.js:1329 src/applet.js:1337
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/applet.js:1486
+msgid "Switched to AC power"
+msgstr "Växlade till AC-ström"
+
+#: src/applet.js:1490
+msgid "Switched to battery power"
+msgstr "Växlade till batteriström"
+
+#: src/applet.js:1558
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low (%d%%)"
+msgstr "KRITISKT: Batteri %s kritiskt lågt (%d%%)"
+
+#: src/applet.js:1560 src/applet.js:1591
+msgid "Critical Battery"
+msgstr "Kritiskt batteri"
+
+#: src/applet.js:1561
+#, javascript-format
+msgid "Battery %s critically low (%d%%)"
+msgstr "Batteri %s kritiskt lågt (%d%%)"
+
+#: src/applet.js:1567
+#, javascript-format
+msgid "LOW: Battery %s low (%d%%)"
+msgstr "LÅGT: Batteri %s lågt (%d%%)"
+
+#: src/applet.js:1568 src/applet.js:1594
+msgid "Low Battery"
+msgstr "Lågt batteri"
+
+#: src/applet.js:1568
+#, javascript-format
+msgid "Battery %s low (%d%%)"
+msgstr "Batteri %s lågt (%d%%)"
+
+#: src/applet.js:1581
+#, javascript-format
+msgid "Auto-enabled power saver (battery low: %d%%)"
+msgstr "Automatiskt aktiverat strömsparläge (batteri lågt: %d%%)"
+
+#: src/applet.js:1590
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low"
+msgstr "KRITISKT: Batteri %s kritiskt lågt"
+
+#: src/applet.js:1591
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Batteri %s kritiskt lågt"
+
+#: src/applet.js:1593
+#, javascript-format
+msgid "LOW: Battery %s low"
+msgstr "LÅGT: Batteri %s lågt"
+
+#: src/applet.js:1594
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Batteri %s lågt"
+
+#: src/applet.js:1613
+msgid "Battery"
+msgstr "Batteri"
+
+#: src/applet.js:1626
+msgid "AC Adapter"
+msgstr "AC-adapter"
+
+#: src/applet.js:1628
+msgid "Power Device"
+msgstr "Strömenhet"
+
+#: src/applet.js:1743 src/applet.js:1771
+msgid "Power Applet"
+msgstr "Ström-applet"
+
+#: src/applet.js:1743
+msgid "System power applet disabled. Using PowerMan instead."
+msgstr "Systemets ström-applet inaktiverad. Använder PowerMan istället."
+
+#: src/applet.js:1749 src/applet.js:1777
+msgid "Error"
+msgstr "Fel"
+
+#: src/applet.js:1749
+msgid "Could not disable system power applet"
+msgstr "Kunde inte inaktivera systemets ström-applet"
+
+#: src/applet.js:1771
+msgid "System power applet re-enabled. Both applets are now active."
+msgstr "Systemets ström-applet återaktiverad. Båda applets är nu aktiva."
+
+#: src/applet.js:1777
+msgid "Could not restore system power applet"
+msgstr "Kunde inte återställa systemets ström-applet"
+
+#: src/applet.js:1866 src/applet.js:1908
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "ljusstyrka %d%%"
+
+#: src/applet.js:1874 src/applet.js:1926
+#, javascript-format
+msgid "power profile %s"
+msgstr "strömprofil %s"
+
+#: src/applet.js:1883
+msgid "AC power: "
+msgstr "AC-ström: "
+
+#: src/applet.js:1887
+msgid "Switched to AC power (no automation applied)"
+msgstr "Växlade till AC-ström (ingen automatisering tillämpad)"
+
+#: src/applet.js:1901
+msgid "Switched to battery power (no battery devices detected)"
+msgstr "Växlade till batteriström (inga batterienheter upptäckta)"
+
+#: src/applet.js:1916
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "strömsparläge (batteri lågt: %d%%)"
+
+#: src/applet.js:1936
+msgid "Battery power: "
+msgstr "Batteriström: "
+
+#: src/applet.js:1940
+msgid "Switched to battery power (no automation applied)"
+msgstr "Växlade till batteriström (ingen automatisering tillämpad)"
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 minuter"
+
+msgid "10 seconds"
+msgstr "10 sekunder"
+
+msgid "15 seconds"
+msgstr "15 sekunder"
+
+msgid "1 minute"
+msgstr "1 minut"
+
+msgid "2 minutes"
+msgstr "2 minuter"
+
+msgid "30 seconds"
+msgstr "30 sekunder"
+
+msgid "5 minutes"
+msgstr "5 minuter"
+
+msgid "5 seconds"
+msgstr "5 sekunder"
+
+msgid "AC brightness level (%)"
+msgstr "AC-ljusstyrkenivå (%)"
+
+msgid "AC power profile"
+msgstr "AC-strömprofil"
+
+msgid "Always show all batteries"
+msgstr "Visa alltid alla batterier"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Visa alltid flera batterier i panelen"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Dimma automatiskt skärmen vid inaktivitet på batteriström"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Justera automatiskt ljusstyrka för AC/Batteri"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Dimma automatiskt skärmen vid inaktivitet på AC-ström"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Växla automatiskt strömprofiler för AC/Batteri"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr "Växla automatiskt till strömsparläge när batteriet är lågt"
+
+msgid "Auto power-saver on low battery"
+msgstr "Automatiskt strömsparläge vid lågt batteri"
+
+msgid "Battery brightness level (%)"
+msgstr "Batteri-ljusstyrkenivå (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr "Batteriprocent under vilket strömsparläge automatiskt aktiveras"
+
+msgid "Battery power profile"
+msgstr "Batteri-strömprofil"
+
+msgid "Battery Power Saving"
+msgstr "Batteri-strömsparande"
+
+msgid "Brightness Automation"
+msgstr "Ljusstyrkeautomatisering"
+
+msgid "Brightness Control"
+msgstr "Ljusstyrkekontroll"
+
+msgid "Brightness Control Status"
+msgstr "Status för ljusstyrkekontroll"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Ljusstyrkenivå att använda på AC-ström"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Ljusstyrkenivå att använda på batteriström"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Ljusstyrkenivå när dimmad (%)"
+
+msgid "Debug and Logging"
+msgstr "Felsökning och loggning"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Dimma skärmen vid inaktivitet på AC-ström"
+
+msgid "Dim screen when idle on battery"
+msgstr "Dimma skärmen vid inaktivitet på batteri"
+
+msgid "Disable default Cinnamon power applet and use PowerMan instead"
+msgstr "Inaktivera standard Cinnamon ström-applet och använd PowerMan istället"
+
+msgid "Display"
+msgstr "Visa"
+
+msgid "Display and Advanced"
+msgstr "Visa och avancerat"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr "Visa aviseringar när strömautomatiseringsåtgärder utförs"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr "Aktivera automatisk växling mellan olika strömprofiler för AC och batteri"
+
+msgid "Enable debug logging"
+msgstr "Aktivera felsökningsloggning"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr "Aktivera detaljerad loggning för felsökning av strömautomatisering"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr "Aktivera separata ljusstyrkenivåer för AC-ström och batteriström"
+
+msgid "Hide applet icon from panel"
+msgstr "Dölj applet-ikon från panelen"
+
+msgid "Hide label"
+msgstr "Dölj etikett"
+
+msgid "Low battery threshold (%)"
+msgstr "Tröskel för lågt batteri (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Aviseringar och systemintegration"
+
+msgid "Panel Display Options"
+msgstr "Panelvisningsalternativ"
+
+msgid "Power Control"
+msgstr "Strömkontroll"
+
+msgid "Power Control Status"
+msgstr "Status för strömkontroll"
+
+msgid "Power Profile Automation"
+msgstr "Strömprofilautomatisering"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr "Strömprofilautomatisering är inte tillgänglig. Ingen strömprofilsdaemon eller batterienheter upptäckta."
+
+msgid "Power profile to use when on AC power"
+msgstr "Strömprofil att använda på AC-ström"
+
+msgid "Power profile to use when on battery power"
+msgstr "Strömprofil att använda på batteriström"
+
+msgid "Replace system power applet"
+msgstr "Ersätt systemets ström-applet"
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr "Skärmljusstyrkekontroll är inte tillgänglig på detta system. Ljusstyrkeautomatisering är inaktiverad."
+
+msgid "Screen Dimming Settings"
+msgstr "Inställningar för skärmdimning"
+
+msgid "Screen dim timeout"
+msgstr "Tidsgräns för skärmdimning"
+
+msgid "Show automation notifications"
+msgstr "Visa automatiseringsaviseringar"
+
+msgid "Show percentage"
+msgstr "Visa procent"
+
+msgid "Show percentage and time remaining"
+msgstr "Visa procent och återstående tid"
+
+msgid "Show time remaining"
+msgstr "Visa återstående tid"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Ljusstyrkenivån att använda vid dimning av skärmen"
+
+msgid "Time before screen dims when idle"
+msgstr "Tid innan skärmen dimmas vid inaktivitet"
