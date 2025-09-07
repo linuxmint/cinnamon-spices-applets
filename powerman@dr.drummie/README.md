@@ -14,7 +14,7 @@ An enhanced power management applet for Linux Mint Cinnamon that extends the def
 
 - **Separate brightness levels** for AC power and battery operation
 - **Automatic brightness switching** when power source changes
-- **Idle dimming** with configurable timeout and dim levels (dconf support)
+- **Idle dimming** with configurable timeout and dim levels (dconf exposed settings)
 - **Screen and keyboard backlight** support via Cinnamon Settings Daemon
 
 ### ⚡ **Power Profile Automation**
@@ -22,7 +22,6 @@ An enhanced power management applet for Linux Mint Cinnamon that extends the def
 - **Automatic power profile switching** between AC and battery modes
 - **Performance mode** on AC power, **balanced/power-saver** on battery (or by user's choice)
 - **Low battery protection** - automatic power-saver mode when battery is critical
-- **Manual override** support through standard system controls
 
 ### 🎛️ **Advanced Configuration**
 
@@ -50,7 +49,7 @@ An enhanced power management applet for Linux Mint Cinnamon that extends the def
 
 Access settings by right-clicking the applet and selecting "Configure..." or directly from applet's popup:
 
-### **Display & Advanced**
+### **Display and Advanced**
 
 - **Panel Display**: Choose what information to show (battery percentage, time remaining, etc.)
 - **Notifications**: Enable/disable automation notifications
@@ -60,8 +59,7 @@ Access settings by right-clicking the applet and selecting "Configure..." or dir
 ### **Brightness Control** *(available only if brightness control detected)*
 
 - **Automatic Brightness**: Set different levels for AC and battery power
-- **Idle Dimming**: Automatically dim screen when idle
-- **Manual Control**: Brightness sliders in the applet menu
+- **Idle Dimming**: Automatically dim screen when idle (dconf exposed settings)
 
 ### **Power Management** *(available only if power profiles and battery detected)*
 
@@ -78,18 +76,15 @@ PowerMan can replace the default Cinnamon power applet on laptop systems:
 
 ## Hardware Requirements
 
-PowerMan automatically detects available hardware and shows only relevant settings, I guess most usable for laptops:
+PowerMan is mostly usable for laptops:
 
 - **✅ Any system**: Basic power monitoring and device status
-- **🔋 + Battery**: Power profile automation, battery saver
+- **🔋 + Battery**: Power profile automation depending on power source, battery saver
 - **💡 + Brightness control**: Automatic brightness switching depending on power source, idle dimming
 
 ## Compatibility
 
 - **Cinnamon Desktop**: 6.0, 6.2, 6.4+
-- **Linux Mint**: 21.x, 22.x  
-- **Other Cinnamon distros**: Should work on any modern Cinnamon installation
-- **Hardware**: Automatic detection ensures compatibility across different laptop/desktop configurations
 
 ## Troubleshooting
 
@@ -128,10 +123,7 @@ Based on the original Cinnamon Power applet with enhancements like power source 
 
 ### **Contributing**
 
-- Follow existing code style and structure
 - Test on multiple hardware configurations  
-- Update capability detection for new features
-- Maintain backward compatibility
 - Add translations for additional languages using the `po/` system
 
 ### **Translation**
