@@ -6,12 +6,9 @@ An enhanced power management applet for Linux Mint Cinnamon that extends the def
 
 ## Features
 
-### 🔋 **Enhanced Power Management**
+### 🔋 **Battery Information**
 
-- **Battery monitoring** with detailed device information (laptop battery, PPD) based on original Cinnamon power applet.
-- **Multiple battery support** with individual status display
-- **Power source detection** (AC/Battery) with automatic profile switching
-- **Battery level notifications** with customizable thresholds
+- **Battery monitoring and Brightness control** with detailed device information (laptop battery, PPD), interface is same as the original Cinnamon Power applet with added button to configure Automation Settings.
 
 ### 💡 **Automated Brightness Control**
 
@@ -30,9 +27,7 @@ An enhanced power management applet for Linux Mint Cinnamon that extends the def
 ### 🎛️ **Advanced Configuration**
 
 - **Conditional settings visibility** - options appear only when hardware supports them
-- **Informative status messages** - clear explanations when features are unavailable
-- **Hardware capability detection** - automatic detection of brightness control and power profiles
-- **Real-time capability detection** for brightness, power profiles, and battery devices
+- **Hardware capability detection** - detection of brightness control, battery and power profiles
 - **System integration** option to replace default Cinnamon power applet or to hide this one when you're satisfied with your settings
 - **Debug logging** for troubleshooting automation issues
 
@@ -88,24 +83,6 @@ PowerMan automatically detects available hardware and shows only relevant settin
 - **✅ Any system**: Basic power monitoring and device status
 - **🔋 + Battery**: Power profile automation, battery saver
 - **💡 + Brightness control**: Automatic brightness switching depending on power source, idle dimming
-- **⚡ + Power Profiles Daemon**: Advanced power profile management
-
-## Technical Details
-
-### **Power Source Detection**
-
-Uses UPower DBus interface to monitor AC adapter and battery state changes in real-time.
-
-### **Brightness Control**
-
-Integrates with Cinnamon Settings Daemon Power components:
-
-- `org.cinnamon.SettingsDaemon.Power.Screen` for display brightness
-- `org.cinnamon.SettingsDaemon.Power.Keyboard` for keyboard backlight
-
-### **Power Profile Management**
-
-Communicates with `net.hadess.PowerProfiles` DBus service for system-wide power profile control.
 
 ## Compatibility
 
