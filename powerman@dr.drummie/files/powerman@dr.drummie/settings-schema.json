@@ -81,7 +81,7 @@
   },
   "ac-brightness": {
     "type": "scale",
-    "default": 80,
+    "default": 85,
     "min": 5,
     "max": 100,
     "step": 5,
@@ -130,7 +130,7 @@
   },
   "idle-brightness": {
     "type": "scale",
-    "default": 15,
+    "default": 10,
     "min": 5,
     "max": 90,
     "step": 5,
