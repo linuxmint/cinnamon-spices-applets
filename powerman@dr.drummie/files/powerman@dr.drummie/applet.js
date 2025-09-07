@@ -524,7 +524,7 @@ class CinnamonPowerApplet extends Applet.TextIconApplet {
         this._devices = [];
         this._primaryDeviceId = null;
         this.panel_icon_name = ""; // remember the panel icon name (so we only set it when it actually changes)
-        this._originalPowerApplets = []; // track system power applets for restoration
+        this._originalPowerApplets = this.settings.getValue("original-power-applets") || []; // track system power applets for restoration
 
         // Initialize tracking states for change detection
         this._lastPowerState = null; // AC/battery state
@@ -1714,7 +1714,7 @@ class CinnamonPowerApplet extends Applet.TextIconApplet {
             let enabledApplets = panelSettings.get_strv("enabled-applets");
 
             // Store original applets for restoration (only if not already stored)
-            if (this._originalPowerApplets.length === 0) {
+            if (this._originalPowerApplets && this._originalPowerApplets.length === 0) {
                 this._originalPowerApplets = [];
                 let cleanedApplets = [];
 
@@ -1774,6 +1774,10 @@ class CinnamonPowerApplet extends Applet.TextIconApplet {
                     restoredApplets.push(originalApplet);
                 }
             }
+
+            //in debugLog
+            this._debugLog(`Restoring system power applets: ${restoredApplets.join(", ")}`);
+
             panelSettings.set_strv("enabled-applets", restoredApplets);
 
             this._debugLog(`Successfully restored ${this._originalPowerApplets.length} system power applets`);

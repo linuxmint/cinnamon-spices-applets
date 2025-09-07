@@ -2,9 +2,9 @@
   "uuid": "powerman@dr.drummie",
   "name": "PowerMan - Enhanced Power Manager",
   "description": "Enhanced power management with separate AC/Battery settings for brightness, power profiles, and automation - based on original power applet for Cinnamon",
-  "author": "Kivi",
-  "website": "https://github.com/drdrummie/powerman-dr.drummie",
-  "version": "1.6.2",
+  "author": "drdrummie",
+  "website": "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/powerman@dr.drummie",
+  "version": "1.6.6",
   "cinnamon-version": ["6.0", "6.2", "6.4"],
   "multiversion": true,
   "max-instances": 1
