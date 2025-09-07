@@ -149,5 +149,5 @@ GPL-3.0 - Based on original Cinnamon power applet code.
 ## Credits
 
 - **Original Cinnamon Power Applet**: Linux Mint Team
-- **Applet icon**: <a href="https://www.flaticon.com/free-icons/power-settings" title="power settings icons">Power settings icons created by orvipixel - Flaticon</a>
+- **Applet icon**: <a href="https://www.flaticon.com/free-icons/batteries" title="batteries icons">Batteries icons created by phatplus - Flaticon</a>
 - **Inspiration**: My aged laptops with old batteries
