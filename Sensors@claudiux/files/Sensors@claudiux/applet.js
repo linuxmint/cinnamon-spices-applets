@@ -222,6 +222,7 @@ class SensorsApplet extends Applet.Applet {
     //this.depCount = 0;
 
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
+    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -621,30 +622,50 @@ class SensorsApplet extends Applet.Applet {
   }
 
   read_disk_temps() {
-    this.read_disk_temps_OLD(); //return;
-    //~ if (this.show_temp && this.temp_disks.length > 0) {
-      //~ for (let disk of this.temp_disks) {
-        //~ if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
+    if (!this.show_temp || this.temp_disks.length === 0) return;
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const _disks_temp_file_path = `${SENSORS_DIR}/disks.txt`;
+    const _disks_temp_file = Gio.file_new_for_path(_disks_temp_file_path);
+    var lines = [];
+    var temps = {};
+    if (_disks_temp_file.query_exists(null)) {
+      let [success, contents] = GLib.file_get_contents(_disks_temp_file_path);
+      if (success) {
+        if (typeof contents === "object")
+          lines = to_string(contents).split("\n");
+        else
+          lines = ""+contents.split("\n");
 
-        //~ let _disk_name = disk["disk"].trim();
-        //~ let command = `sudo smartctl -i \"${_disk_name}\"`;
+        for (let line of lines) {
+          if (line.length === 0) continue;
+          let [name, temp] = line.split(" ");
+          if (name.length > 0)
+            temps[name] = 1.0 * parseInt(temp);
+        }
+      }
 
-        //~ if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
-        //~ var _temp;
-        //~ let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
-          //~ if (exitCode === 0) {
-            //~ global.log(UUID + " - typeof stdout: " + typeof stdout);
-          //~ } else {
-            //~ global.log(UUID + " - Unable to execute: " + command);
-          //~ }
+      for (let disk of this.temp_disks) {
+        if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
 
-          //~ subProcess.send_signal(9);
-        //~ });
-      //~ }
-    //~ }
+        let _disk_name = disk["disk"].trim();
+        var _temp = temps[_disk_name];
+        if (!isNaN(_temp)) {
+          if (disk["user_formula"] && disk["user_formula"].length > 0) {
+            let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+            _temp = 1.0 * eval(_user_formula)
+          }
+        }
+        if (typeof _temp === "number") {
+          disk["value"] = _temp;
+          this._temp[_disk_name] = _temp;
+        }
+      }
+    } else {
+      this.read_disk_temps_slow();
+    }
   }
 
-  read_disk_temps_OLD() {
+  read_disk_temps_slow() {
     if (this.show_temp && this.temp_disks.length > 0) {
       for (let disk of this.temp_disks) {
         if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
@@ -941,7 +962,7 @@ class SensorsApplet extends Applet.Applet {
     if (this._applet_tooltip.set_markup === undefined)
       this.set_applet_tooltip(_tooltip);
     else
-      this._applet_tooltip.set_markup(_tooltip);
+      this.set_applet_tooltip(_tooltip, true);
 
     _tooltip = null;
     _tooltips = null
@@ -1603,6 +1624,7 @@ class SensorsApplet extends Applet.Applet {
     }
     this.detect_markup();
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
+    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
@@ -1649,9 +1671,15 @@ class SensorsApplet extends Applet.Applet {
     //~ const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
     const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
     const SENSORS_WITNESS=`${SENSORS_DIR}/witness`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
     let witness = Gio.file_new_for_path(SENSORS_WITNESS);
     if (witness.query_exists(null))
       witness.delete(null);
+    witness = null;
+    let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+    if (diskwitness.query_exists(null))
+      diskwitness.delete(null);
+    diskwitness = null;
 
     this.on_applet_reloaded();
     remove_all_sources();
@@ -1663,6 +1691,7 @@ class SensorsApplet extends Applet.Applet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
       this.isLooping = true;
       this.reap_sensors();
     } else {

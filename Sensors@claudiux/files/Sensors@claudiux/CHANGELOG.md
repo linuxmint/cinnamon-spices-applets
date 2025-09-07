@@ -1,3 +1,6 @@
+### v5.8.0~20250907
+  * Increases the speed at which disk temperatures are read.
+
 ### v5.7.3~20250906
   * Takes into account the "Refresh interval" value in the `SensorsDaemon.sh` script.
 

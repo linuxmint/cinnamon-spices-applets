@@ -311,7 +311,7 @@ class SensorsReaper {
           subfeature_name = subfeat.substring(subfeature.indexOf("_")+1);
 
           if (subfeat.startsWith("fan")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_fan ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] >= 0)
                 )
@@ -319,7 +319,7 @@ class SensorsReaper {
               type_of_feature = "fans";
             }
           } else if (subfeat.startsWith("temp")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_temp ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
                 )
@@ -327,11 +327,11 @@ class SensorsReaper {
               type_of_feature = "temps";
             }
           } else if (subfeat.startsWith("intrusion")) {
-            if  (type_of_feature === "") {
+            if  (type_of_feature.length === 0) {
               type_of_feature = "intrusions";
             }
           } else if (subfeat.startsWith("in")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_voltage ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
                 )
@@ -339,7 +339,7 @@ class SensorsReaper {
               type_of_feature = "voltages";
             }
           } else if (subfeat.startsWith("curr")) {
-            if  (type_of_feature === "" &&
+            if  (type_of_feature.length === 0 &&
                 (!this.hide_zero_voltage ||
                   (subfeat.endsWith("input") && this.raw_data[chip][feature][subfeat] > 0)
                 )
@@ -357,7 +357,7 @@ class SensorsReaper {
         //Util.unref(subfeatures);
         subfeatures = null;
 
-        if (type_of_feature !== "") {
+        if (type_of_feature.length > 0) {
           LOCAL_DATA[type_of_feature][complete_name + ": " + feature] = feature_dico;
           type_of_feature = null;
           feature_dico = null;
@@ -416,7 +416,7 @@ function convert_to_json(raw) {
   var feature = "";
   //~ var subfeature_numbers = {};
   for (let line of lines) {
-    if (line.trim() == "") {
+    if (line.trim().length === 0) {
       new_chip = true;
       continue;
     }
