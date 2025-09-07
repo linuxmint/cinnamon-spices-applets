@@ -36,3 +36,5 @@ do
     mv $SENSORS_DATA_TEMP $SENSORS_DATA
     [ -f $WITNESS ] || is_running=false
 done
+
+rm -f $SENSORS_DATA_TEMP $SENSORS_DATA
