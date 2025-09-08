@@ -1,3 +1,6 @@
+### v3.6.2~20250908
+  * Better memory management.
+
 ### v3.6.1~20250820
   * Restarts listening to the current station when the applet is restarted (except when it is Cinnamon that is reloaded).
 

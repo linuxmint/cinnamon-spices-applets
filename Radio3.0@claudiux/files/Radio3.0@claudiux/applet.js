@@ -19,7 +19,7 @@ const { ScrollDirection, Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
 //Gettext:
 const { bindtextdomain, dgettext, gettext } = imports.gettext;
 //GLib:
-const { get_home_dir, get_language_names, get_user_name, get_user_runtime_dir, get_user_special_dir, UserDirectory, find_program_in_path, markup_escape_text, DateTime, file_test, FileTest, file_get_contents, file_set_contents, mkdir_with_parents, uuid_string_random, random_int_range, getenv, PRIORITY_LOW, SOURCE_REMOVE, SOURCE_CONTINUE } = imports.gi.GLib;
+const { free, get_home_dir, get_language_names, get_user_name, get_user_runtime_dir, get_user_special_dir, UserDirectory, find_program_in_path, markup_escape_text, DateTime, file_test, FileTest, file_get_contents, file_set_contents, mkdir_with_parents, uuid_string_random, random_int_range, getenv, PRIORITY_LOW, SOURCE_REMOVE, SOURCE_CONTINUE } = imports.gi.GLib;
 //Gtk:
 const { FileChooserDialog, FileFilter, FileChooserAction, STOCK_CANCEL, STOCK_OPEN, ResponseType, PolicyType, DirectionType } = imports.gi.Gtk;
 //Gdk:
@@ -37,6 +37,7 @@ const { Tooltip } = imports.ui.tooltips;
 //MessageTray:
 const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports.ui.messageTray;
 
+const TABS = ["Radios", "Search", "Import", "Menu", "Behavior", "Network", "Recording", "YT", "Scheduling", "Alarm Clock"];
 var RADIO_NOTIFICATION_TIMEOUT = 2;
 const RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET = 10;
 //Pango
@@ -277,7 +278,6 @@ const ENABLED_APPLETS_KEY = 'enabled-applets';
 
 const REFRESH_INTERVAL = 5; // (seconds)
 
-const VERTICAL = 2;
 const QUEUE = 1;
 
 var VERSION, METADATA;
@@ -1024,11 +1024,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.server_name = null;
     this.DB_SERVERS = [];
     if (file_test(DB_SERVERS_FILE, FileTest.IS_REGULAR)) {
-      let [db_is_accessible, ] = file_get_contents(DB_SERVERS_FILE);
+      let [db_is_accessible, db_contents] = file_get_contents(DB_SERVERS_FILE);
 
       if (db_is_accessible) {
         try {
-          let json_servers = JSON.parse((to_string(file_get_contents(DB_SERVERS_FILE)[1])).trim());
+          let json_servers = JSON.parse(to_string(db_contents).trim());
           for (let s of json_servers) {
             this.DB_SERVERS.push(s["server"]);
           }
@@ -1036,6 +1036,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           logError("Can't parse JSON file: "+DB_SERVERS_FILE+". Default values will be used.");
           this.DB_SERVERS = DEFAULT_DB_SERVERS;
         }
+        free(db_contents);
       }
     } else {
       logError(DB_SERVERS_FILE + ": this file does not exist yet. Default values will be used.");
@@ -1151,7 +1152,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
-    let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
+    //~ let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
     this.context_menu_item_showDesklet = null;
     this.get_user_settings();
     this.set_MPV_ALIAS();
@@ -1165,19 +1166,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
 
     this.on_rec_path_changed();
-
-    this.tabNumberOfRadios = 1*userSettings["layoutradio"]["pages"].indexOf("pageStations");
-    this.tabNumberOfSearch = 1*userSettings["layoutradio"]["pages"].indexOf("pageSearch");
-    this.tabNumberOfImport = 1*userSettings["layoutradio"]["pages"].indexOf("pageImport");
-    this.tabNumberOfMenu = 1*userSettings["layoutradio"]["pages"].indexOf("pageMenu");
-    this.tabNumberOfBehavior = 1*userSettings["layoutradio"]["pages"].indexOf("pageBehavior");
-    this.tabNumberOfNetwork = 1*userSettings["layoutradio"]["pages"].indexOf("pageNetwork");
-    this.tabNumberOfRecording = 1*userSettings["layoutradio"]["pages"].indexOf("pageRecording");
-    this.tabNumberOfYT = 1*userSettings["layoutradio"]["pages"].indexOf("pageYT");
-    this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
-    this.tabNumberOfAlarmClock = 1*userSettings["layoutradio"]["pages"].indexOf("pageAlarmClock");
-    //~ userSettings = {};
-    userSettings = null;
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
     if (nemo_size_prefixes !== this.settings.getValue("limits-hd-size-prefixes")) {
@@ -1855,7 +1843,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   get_mpv_title() {
     //log("get_mpv_title");
     if (file_test(MPV_TITLE_FILE, FileTest.EXISTS)) {
-      return (to_string(file_get_contents(MPV_TITLE_FILE)[1])).trim();
+      return to_string(file_get_contents(MPV_TITLE_FILE)[1]).trim();
     }
 
     return "";
@@ -2105,7 +2093,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (this.actor.get_stage() == null) return;
     //log("_on_mpv_title_changed: " + MPV_TITLE_FILE);
 
-    let title = to_string(file_get_contents(MPV_TITLE_FILE)[1]).trim();
+    let [, _title] = file_get_contents(MPV_TITLE_FILE);
+    let title = to_string(_title).trim();
+    free(_title);
     //let title = title_obj.prop;
 
     if (title.length === 0 || (title.length > 0 && this.songTitle == title)) return;
@@ -2258,7 +2248,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       if (highlight_while_background_recording)
         this.highlight(inProgress);
 
-      let contents = JSON.parse(to_string(file_get_contents(path)[1]));
+      let [, _contents] = file_get_contents(path);
+      let contents = JSON.parse(to_string(_contents));
+      free(_contents);
 
       scheduled_recordings.push({
         "inprogress": inProgress,
@@ -2644,7 +2636,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     let searchItem = new PopupIconMenuItem(_("Search for new stations..."), "system-search", IconType.SYMBOLIC);
     searchItem.connect('activate', () => {
-      let pidOfSearch = this.configureApplet(this.tabNumberOfSearch);
+      let pidOfSearch = this.configureApplet(TABS.indexOf("Search"));
     });
     this.menu.addMenuItem(searchItem);
 
@@ -2655,9 +2647,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       if ( !file.query_exists(null) ) return;
 
-      let json_contents = JSON.parse((to_string(file_get_contents(fileName)[1])).trim());
+      let [, _json_contents] = file_get_contents(fileName);
+      let json_contents = JSON.parse(to_string(_json_contents).trim());
+      free(_json_contents);
 
-      let columns = JSON.parse((to_string(file_get_contents(RADIO30_CONFIG_FILE)[1])).trim()).radios.columns;
+      let [, _config_contents] = file_get_contents(RADIO30_CONFIG_FILE);
+      let columns = JSON.parse(to_string(_config_contents).trim()).radios.columns;
+      free(_config_contents);
         //log("on_button_radios_restore_clicked: columns:"+JSON.stringify(columns, null, 4));
 
       var ids = [];
@@ -3007,7 +3003,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
       let searchItem = new PopupIconMenuItem(formatTextWrap(_("Search for new stations..."), WRAP_LENGTH), "system-search", IconType.SYMBOLIC);
       searchItem.connect('activate', () => {
-        let pidOfSearch = this.configureApplet(this.tabNumberOfSearch);
+        let pidOfSearch = this.configureApplet(TABS.indexOf("Search"));
       });
       this.menu.addMenuItem(searchItem);
 
@@ -3170,7 +3166,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       intervalId = setInterval(() => {
         if (file_test(yt_dl_proc_dir, FileTest.IS_DIR) && file_test(progress_filepath, FileTest.EXISTS)) {
 
-          let p_r = to_string(file_get_contents(progress_filepath)[1]).split(" ");    // progress and remaining time
+          let [, _progress] = file_get_contents(progress_filepath);
+          let p_r = to_string(_progress).split(" ");    // progress and remaining time
+          free(_progress);
           if (p_r.length !== 2) return true;
 
           let [p, r] = p_r; // p: progress ; r: remaining time.
@@ -4286,9 +4284,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
         if ( !file.query_exists(null) ) return;
 
-        let json_contents = JSON.parse((to_string(file_get_contents(fileName)[1])).trim());
+        let [, _json_contents] = file_get_contents(fileName);
+        let json_contents = JSON.parse(to_string(_json_contents).trim());
+        free(_json_contents);
 
-        let columns = JSON.parse((to_string(file_get_contents(RADIO30_CONFIG_FILE)[1])).trim()).radios.columns;
+        let [, _config_contents] = file_get_contents(RADIO30_CONFIG_FILE);
+        let columns = JSON.parse(to_string(_config_contents).trim()).radios.columns;
+        free(_config_contents);
         //log("on_button_radios_restore_clicked: columns:"+JSON.stringify(columns, null, 4));
 
         var ids = [];
@@ -4883,6 +4885,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return new_indexes.join(',')
   }
 
+  closeSettingsWindow() {
+    if (this.settingsWindow) {
+      try {
+        this.settingsWindow.delete(300);
+      } catch(e) {}
+    }
+    this.settingsWindow = undefined;
+  }
+
   create_contextmenu_items() {
     /// Create sections:
     if (!this.context_menu_section_system)
@@ -4945,21 +4956,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_reloadThisApplet.actor.visible = (RELOAD() === true || this.show_reload);
 
     if (!this.context_menu_item_configure) { // Configure...
-      //~ this.context_menu_item_configure = new PopupIconMenuItem(_("Configure..."),
-        //~ "system-run",
-        //~ IconType.SYMBOLIC);
-      //~ this.context_menu_item_configure.connect('activate',() => { this.configureApplet() });
       this.context_menu_item_configure = new PopupSubMenuMenuItem(_("Configure..."));
-      this.context_menu_item_configure.menu.addAction(_("Radios"), () => { this.configureApplet(this.tabNumberOfRadios) });
-      this.context_menu_item_configure.menu.addAction(_("Search"), () => { this.configureApplet(this.tabNumberOfSearch) });
-      this.context_menu_item_configure.menu.addAction(_("Import"), () => { this.configureApplet(this.tabNumberOfImport) });
-      this.context_menu_item_configure.menu.addAction(_("Menu"), () => { this.configureApplet(this.tabNumberOfMenu) });
-      this.context_menu_item_configure.menu.addAction(_("Behavior"), () => { this.configureApplet(this.tabNumberOfBehavior) });
-      this.context_menu_item_configure.menu.addAction(_("Network"), () => { this.configureApplet(this.tabNumberOfNetwork) });
-      this.context_menu_item_configure.menu.addAction(_("Recording"), () => { this.configureApplet(this.tabNumberOfRecording) });
-      this.context_menu_item_configure.menu.addAction(_("YT"), () => { this.configureApplet(this.tabNumberOfYT) });
-      this.context_menu_item_configure.menu.addAction(_("Scheduling"), () => { this.configureApplet(this.tabNumberOfScheduling) });
-      this.context_menu_item_configure.menu.addAction(_("Alarm Clock"), () => { this.configureApplet(this.tabNumberOfAlarmClock) });
+      for (let i=0, len=TABS.length; i<len; i++) {
+        this.context_menu_item_configure.menu.addAction(_(TABS[i]), () => { this.configureApplet(i) });
+      }
     }
     this.context_menu_item_configure.actor.visible = (
       !METADATA["hide-configuration"] &&
@@ -4970,21 +4970,21 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.context_menu_item_scheduleARecording = new PopupIconMenuItem(_("Schedule a background record..."),
         "system-run",
         IconType.SYMBOLIC);
-      this.context_menu_item_scheduleARecording.connect('activate', () => { this.configureApplet(this.tabNumberOfScheduling) });
+      this.context_menu_item_scheduleARecording.connect('activate', () => { this.configureApplet(TABS.indexOf("Scheduling")) });
     }
 
     if (!this.context_menu_item_AlarmClock) {
       this.context_menu_item_AlarmClock = new PopupIconMenuItem(_("Configure the Alarm Clock..."),
         "system-run",
         IconType.SYMBOLIC);
-      this.context_menu_item_AlarmClock.connect('activate', () => { this.configureApplet(this.tabNumberOfAlarmClock) });
+      this.context_menu_item_AlarmClock.connect('activate', () => { this.configureApplet(TABS.indexOf("Alarm Clock")) });
     }
 
     if (!this.context_menu_item_recording) {
       this.context_menu_item_recording = new PopupIconMenuItem(_("Extract soundtrack from YouTube video..."),
         "yt",
         IconType.SYMBOLIC);
-      this.context_menu_item_recording.connect('activate', () => { this.configureApplet(this.tabNumberOfYT) });
+      this.context_menu_item_recording.connect('activate', () => { this.configureApplet(TABS.indexOf("YT")) });
     }
 
     if (!this.context_menu_item_openRecordingsFolder) { // Open Recordings Folder
@@ -5016,7 +5016,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         } else if (sufficient_space_left) {
           this.start_recording()
         } else {
-          this.configureApplet(this.tabNumberOfRecording)
+          this.configureApplet(TABS.indexOf("Recording"))
         }
       });
     }
@@ -5172,7 +5172,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       } else if (sufficient_space_left) {
         this.start_recording()
       } else {
-        this.configureApplet(this.tabNumberOfRecording)
+        this.configureApplet(TABS.indexOf("Recording"))
       }
     });
     this.context_menu_item_manageRecording.actor.visible = (this.mpvStatus === "PLAY");
@@ -5513,7 +5513,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   _set_settings_options_from_sched() {
-    this.settingsTab = this.tabNumberOfScheduling;
+    this.settingsTab = TABS.indexOf("Scheduling");
     this._set_settings_options()
   }
 
@@ -5522,15 +5522,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   configureApplet(tab=0) {
+    const VERTICAL = 2;
     let maximize_vertically = this.maximize_vertically;
-    this.menu.close(false);
+    this._applet_context_menu.close(false);
+    this.closeSettingsWindow();
 
     let nemo_size_prefixes = get_nemo_size_prefixes();
     if (nemo_size_prefixes !== this.size_prefixes) {
       this.size_prefixes = nemo_size_prefixes
     }
-
-    this.settingsWindow = undefined;
 
     this._set_settings_options();
 
@@ -5540,18 +5540,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       var app = null;
       var intervalId = null;
       intervalId = setTimeout(() => {
+        clearTimeout(intervalId);
         app = this.tracker.get_app_from_pid(pid);
         if (app != null) {
           let window = app.get_windows()[0];
           this.settingsTab = tab;
-
           window.maximize(VERTICAL);
           window.activate(300);
           this.settingsWindow = window;
-
-          clearTimeout(intervalId);
+          app.connect("windows-changed", () => { this.settingsWindow = undefined; });
         }
-      }, 600);
+      }, 1000);
     }
     // Returns the pid:
     return pid;
@@ -5662,20 +5661,26 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       let pidFileName = JOBS_DIR + "/pid_" + uuid;
       if (file_test(pidFileName, FileTest.EXISTS)) {
-        let json = JSON.parse(to_string(file_get_contents(pidFileName)[1]));
+        let [, _json] = file_get_contents(pidFileName);
+        let json = JSON.parse(to_string(_json));
+        free(_json);
         if (json[uuid].pid != undefined)
           spawnCommandLine("kill -15 "+json[uuid].pid);
       }
 
       let idBeginFileName = JOBS_DIR + "/idBegin_" + uuid;
       if (file_test(idBeginFileName, FileTest.EXISTS)) {
-        let atBeginJobId = (to_string(file_get_contents(idBeginFileName)[1])).trim();
+        let [, _atBeginJobId] = file_get_contents(idBeginFileName);
+        let atBeginJobId = to_string(_atBeginJobId).trim();
+        free(_atBeginJobId);
         spawnCommandLine("bash -c 'atrm " + atBeginJobId + "'");
       }
 
       let idEndFileName = JOBS_DIR + "/idEnd_" + uuid;
       if (file_test(idEndFileName, FileTest.EXISTS)) {
-        let atEndJobId = (to_string(file_get_contents(idEndFileName)[1])).trim();
+        let [, _atEndJobId] = file_get_contents(idEndFileName);
+        let atEndJobId = to_string(_atEndJobId).trim();
+        free(_atEndJobId);
         spawnCommandLine("bash -c 'atrm " + atEndJobId + "'");
       }
     }
@@ -5702,7 +5707,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_button_import_radiopp_clicked() {
     if (!radioppConfigFilePath) return;
 
-    let radioppSettings = JSON.parse((to_string(file_get_contents(radioppConfigFilePath)[1])).trim());
+    let [, _radioppSettings] = file_get_contents(radioppConfigFilePath);
+    let radioppSettings = JSON.parse(to_string(_radioppSettings).trim());
+    free(_radioppSettings);
     let contents = radioppSettings["tree"]["value"];
 
     this.set_radio_hashtable();
@@ -6278,7 +6285,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   get codec() {
     if (file_test(MPV_CODEC_FILE, FileTest.EXISTS)) {
-      let codec = (to_string(file_get_contents(MPV_CODEC_FILE)[1])).trim().toUpperCase();
+      let [, _codec] = file_get_contents(MPV_CODEC_FILE);
+      let codec = to_string(_codec).trim().toUpperCase();
+      free(_codec);
       codec = codec.replace("VORBIS", "OGG");
       return codec
     } else if (this.radiosHash
@@ -6292,7 +6301,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   get bitrate() {
     if (file_test(MPV_BITRATE_FILE, FileTest.EXISTS)) {
-      let bitrate = (to_string(file_get_contents(MPV_BITRATE_FILE)[1])).trim();
+      let [, _bitrate] = file_get_contents(MPV_BITRATE_FILE);
+      let bitrate = to_string(_bitrate).trim();
+      free(_bitrate);
       bitrate = Math.round(parseInt(bitrate)/1000);
       return bitrate
     } else if (this.radiosHash
