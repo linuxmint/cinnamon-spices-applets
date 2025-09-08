@@ -171,6 +171,7 @@ class SensorsReaper {
       if (success) {
         this._sensors_reaped(to_string(contents));
       }
+      GLib.free(contents);
     } else {
         if (this.sensors_command != undefined) {
         let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, (stdout, stderr, exitCode) => {
