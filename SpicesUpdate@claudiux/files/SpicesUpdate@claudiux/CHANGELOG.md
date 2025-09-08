@@ -1,3 +1,6 @@
+### v7.9.1~20250908
+  * Better memory management.
+
 ### v7.9.0
   * Bugfix about themes.
   * Added a “Check all the first boxes then refresh” button in each tab of this applet’s settings, except in the General tab.
