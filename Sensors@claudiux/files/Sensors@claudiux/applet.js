@@ -426,12 +426,13 @@ class SensorsApplet extends Applet.Applet {
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
     try {
-        let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
-          ret = true;
+      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
+        ret = true;
+        GLib.free(contents);
       } catch (e) {
-      ret = false
-    }
+        ret = false
+      }
     }
     log("is_disktemp_user_readable: "+ret);
     return ret
@@ -660,6 +661,7 @@ class SensorsApplet extends Applet.Applet {
           this._temp[_disk_name] = _temp;
         }
       }
+      GLib.free(contents);
     } else {
       this.read_disk_temps_slow();
     }

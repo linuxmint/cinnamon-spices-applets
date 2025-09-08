@@ -1,3 +1,6 @@
+### v5.8.1~20250908
+  * Avoids memory leaks.
+
 ### v5.8.0~20250907
   * Increases the speed at which disk temperatures are read.
 
