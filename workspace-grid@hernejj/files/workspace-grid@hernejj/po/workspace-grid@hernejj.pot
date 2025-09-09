@@ -1,10 +1,14 @@
+# WORKSPACE GRID (2D) AND SWITCHER
+# This file is put in the public domain.
+# hernejj, 2016
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: workspace-grid@hernejj\n"
+"Project-Id-Version: workspace-grid@hernejj 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2017-04-20 16:17+0800\n"
+"POT-Creation-Date: 2025-09-09 13:27-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,59 +17,80 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. workspace-grid@hernejj->metadata.json->description
-msgid "2D workspace grid and switcher for Cinnamon"
-msgstr ""
-
-#. workspace-grid@hernejj->metadata.json->name
+#. metadata.json->name
 msgid "Workspace grid (2D) and switcher"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->numRows->description
-msgid "Number of rows:"
+#. metadata.json->description
+msgid "2D workspace grid and switcher for Cinnamon"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->numRows->units
-#. workspace-grid@hernejj->settings-schema.json->numCols->units
+#. 4.2->settings-schema.json->numCols->units
+#. 4.2->settings-schema.json->numRows->units
+#. 5.4->settings-schema.json->numCols->units
+#. 5.4->settings-schema.json->numRows->units
+#. 5.6->settings-schema.json->numCols->units
+#. 5.6->settings-schema.json->numRows->units
 msgid "desktops"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->style->description
+#. 4.2->settings-schema.json->numCols->description
+#. 5.4->settings-schema.json->numCols->description
+#. 5.6->settings-schema.json->numCols->description
+msgid "Number of columns:"
+msgstr ""
+
+#. 4.2->settings-schema.json->numRows->description
+#. 5.4->settings-schema.json->numRows->description
+#. 5.6->settings-schema.json->numRows->description
+msgid "Number of rows:"
+msgstr ""
+
+#. 4.2->settings-schema.json->style->description
+#. 5.4->settings-schema.json->style->description
+#. 5.6->settings-schema.json->style->description
 msgid "Style:"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->style->options
+#. 4.2->settings-schema.json->style->options
+#. 5.4->settings-schema.json->style->options
+#. 5.6->settings-schema.json->style->options
 msgid "Single Row"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->style->options
+#. 4.2->settings-schema.json->style->options
+#. 5.4->settings-schema.json->style->options
+#. 5.6->settings-schema.json->style->options
 msgid "Grid"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-
-#. schema.json->registerUpDownKeyBindings->description
+#. 4.2->settings-schema.json->registerUpDownKeyBindings->description
+#. 5.4->settings-schema.json->registerUpDownKeyBindings->description
+#. 5.6->settings-schema.json->registerUpDownKeyBindings->description
 msgid "Use Keyboard shortcuts (Ctrl+Alt+Up/Down) to switch desktop rows"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-
-#. schema.json->registerUpDownKeyBindings->tooltip
+#. 4.2->settings-schema.json->registerUpDownKeyBindings->tooltip
+#. 5.4->settings-schema.json->registerUpDownKeyBindings->tooltip
+#. 5.6->settings-schema.json->registerUpDownKeyBindings->tooltip
 msgid ""
 "This prevents the use of the Expo and Scale keyboard shortcuts in Cinnamon"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->numCols->description
-msgid "Number of columns:"
-msgstr ""
-
-#. workspace-grid@hernejj->settings-
-#. schema.json->scrollWheelBehavior->description
+#. 4.2->settings-schema.json->scrollWheelBehavior->description
+#. 5.4->settings-schema.json->scrollWheelBehavior->description
+#. 5.6->settings-schema.json->scrollWheelBehavior->description
 msgid "Scroll Wheel Behavior:"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+#. 4.2->settings-schema.json->scrollWheelBehavior->options
+#. 5.4->settings-schema.json->scrollWheelBehavior->options
+#. 5.6->settings-schema.json->scrollWheelBehavior->options
 msgid "Scroll By Column"
 msgstr ""
 
-#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+#. 4.2->settings-schema.json->scrollWheelBehavior->options
+#. 5.4->settings-schema.json->scrollWheelBehavior->options
+#. 5.6->settings-schema.json->scrollWheelBehavior->options
 msgid "Scroll By Row"
 msgstr ""
