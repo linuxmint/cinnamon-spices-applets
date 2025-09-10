@@ -20,7 +20,8 @@
         "sectionStationsList",
         "sectionStationsMove",
         "sectionStationsSaveRestore",
-        "sectionStationsUpdate"
+        "sectionStationsUpdate",
+        "sectionBlacklist"
       ]
     },
     "pageImport": {
@@ -149,6 +150,13 @@
         "scale-update"
       ]
     },
+    "sectionBlacklist": {
+      "type": "section",
+      "title": "Unwanted (blacklist)",
+      "keys": [
+        "blacklist"
+      ]
+    },
     "sectionImportRadiopp": {
       "type": "section",
       "dependency": "radiopp-is-here",
@@ -181,6 +189,7 @@
         "import-list-play-button",
         "import-list-button",
         "import-remove-from-list-button",
+        "import-blacklist-button",
         "import-select-all",
         "import-unselect-all"
       ]
@@ -624,7 +633,8 @@
     "description": "Category to which to move the selected stations:",
     "default": "",
     "options": {
-      "(Undefined)": ""
+      "(Undefined)": "",
+      "(Blacklist)": "R30BLACKLIST"
     }
   },
   "button-moving": {
@@ -684,6 +694,19 @@
     "default": 0,
     "description": "%",
     "dependency": "show-scale-update"
+  },
+  "blacklist": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "url",
+        "title": "Blacklisted URL",
+        "type": "string",
+        "expand-width": true,
+        "default": ""
+      }
+    ],
+    "default": []
   },
   "show-scale-update": {
     "type": "generic",
@@ -782,6 +805,11 @@
     "type": "button",
     "description": "Remove selected items from this list",
     "callback": "on_button_import_remove_clicked"
+  },
+  "import-blacklist-button": {
+    "type": "button",
+    "description": "Blacklist selected items from this list",
+    "callback": "on_button_import_blacklist_clicked"
   },
   "import-select-all": {
     "type": "button",
@@ -1937,12 +1965,6 @@
   "last-category": {
     "type": "generic",
     "default": ""
-  },
-  "storedRadios": {
-    "type": "generic",
-    "default": [
-
-    ]
   },
   "recentRadios": {
     "type": "generic",

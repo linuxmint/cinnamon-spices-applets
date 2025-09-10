@@ -583,12 +583,14 @@ R3AppletSettings.prototype = {
               let old_category = this.getValue("category-to-move");
               let categories = {};
               categories["%s".format(_("(Undefined)"))] = "";
+              categories["%s".format(_("(Blacklist)"))] = "R30BLACKLIST";
               for (let cat of this.applet.station_categories) {
                 categories[""+cat] = ""+cat;
               }
               this.settingsData["category-to-move"].options = categories;
               let value_to_set;
-              if (old_category.length !== 0 || categories.length === 1)
+              //~ if (old_category.length !== 0 || categories.length === 1)
+              if (old_category.length !== 0 || categories.length === 2)
                 value_to_set = "";
               else
                 value_to_set = ""+this.applet.station_categories[0];
@@ -2398,6 +2400,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   async search_name_by_url_on_RDB(station_url) {
+    if (!station_url || station_url.length === 0) return "";
     var name = await this.searchFetch("url=" + station_url, "byurl").then( (resultJson) => { // Do not use encodeURIComponent()!
       if (resultJson.length > 0) {
         let r = resultJson[0];
@@ -2420,6 +2423,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   async search_uuid_by_url_on_RDB(station_url) {
+    if (!station_url || station_url.length === 0) return "";
     var uuid = await this.searchFetch("url=" + station_url, "byurl").then( (resultJson) => { // Do not use encodeURIComponent()!
       if (resultJson.length > 0) {
         let r = resultJson[0];
@@ -2442,6 +2446,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   async search_url_by_uuid_on_RDB(station_uuid, old_url=null) {
+    if (!station_uuid || station_uuid.length === 0) return "";
     var url = await this.searchFetch("uuids=" + station_uuid, "byuuid").then((resultJson) => { // Do not use encodeURIComponent()!
       if (resultJson.length > 0) {
         let r = resultJson[0];
@@ -2789,9 +2794,19 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.menu.addMenuItem(menuitemHead2);
 
         var titles = [];
+        let blacklist = this.settings.getValue("blacklist");
+        var blacklist_array = [];
+        for (let b of blacklist) {
+          if (blacklist_array.indexOf(b.url) < 0 )
+            blacklist_array.push(b.url);
+        }
 
         var indexRecentRadios = 0;
         for (let id of this.recentRadios) {
+          if (blacklist_array.indexOf(id) > -1) {
+            to_remove_from_recentRadios.push(""+id);
+            continue;
+          }
           let title = ""+this.get_radio_name(id);
           if (titles.indexOf(title) > -1) continue;
 
@@ -2841,6 +2856,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         let to_remove = to_remove_from_recentRadios.shift();
         this.recentRadios.splice(this.recentRadios.indexOf(to_remove), 1);
       }
+      this.set_radio_tooltip_to_default_one();
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
       // FAV SWITCH
@@ -4491,18 +4507,60 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
     if (removed.length == 0) return;
 
-    // Determines the index of the category:
-    for (let r in radios) {
-      if (radios[r].name.trim().localeCompare(to_category.trim()) == 0 && radios[r].url.length === 0) {
-        category_index = r;
-        break
-      }
-    }
+    if (to_category === "R30BLACKLIST") {
+      let blacklist = this.settings.getValue("blacklist");
 
-    // Put the selected stations at the right place, just below the category's title:
-    while (removed.length > 0) {
-      let station = removed.pop();
-      radios.splice(Math.ceil(category_index) + 1, 0, station);
+      var blacklist_array = [];
+      let index_to_remove;
+      for (let b of blacklist) {
+        if (blacklist_array.indexOf(b.url) < 0 )
+          blacklist_array.push(b.url);
+        if (this.last_radio_listened_to == b.url) {
+          this.stop_mpv_radio(true);
+          this.last_radio_listened_to = "";
+        }
+        index_to_remove = this.recentRadios.indexOf(b.url);
+        if (index_to_remove > -1)
+          this.recentRadios.splice(index_to_remove, 1);
+      }
+
+      while (removed.length > 0) {
+        let station = removed.pop();
+        if (blacklist_array.indexOf(station.url) < 0 ) {
+          blacklist_array.push(station.url);
+          blacklist.push({"url": "" + station.url});
+        }
+        if (this.last_radio_listened_to == station.url) {
+          this.stop_mpv_radio(true);
+          this.last_radio_listened_to = "";
+        }
+        index_to_remove = this.recentRadios.indexOf(station.url);
+        if (index_to_remove > -1)
+          this.recentRadios.splice(index_to_remove, 1);
+      }
+
+      let sto = setTimeout(() => {
+        clearTimeout(sto);
+        this.settings.setValue("blacklist", blacklist);
+        if (this.recentRadios.length > 0 && this.last_radio_listened_to.length === 0)
+          this.last_radio_listened_to = ""+this.recentRadios[0];
+        this.set_radio_tooltip_to_default_one();
+        blacklist_array = null;
+      }, 2100); // 2100 ms
+
+    } else {
+      // Determines the index of the category:
+      for (let r in radios) {
+        if (radios[r].name.trim().localeCompare(to_category.trim()) == 0 && radios[r].url.length === 0) {
+          category_index = r;
+          break
+        }
+      }
+      // Put the selected stations at the right place, just below the category's title:
+      while (removed.length > 0) {
+        let station = removed.pop();
+        radios.splice(Math.ceil(category_index) + 1, 0, station);
+      }
     }
 
     // Rewrite radios:
@@ -4510,14 +4568,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       clearTimeout(id);
       this.settings.setValue("radios", radios);
       radios = null;
-    }, 800); // 800 ms
+    }, 2100); // 2100 ms
   }
 
   on_button_radios_go_to_category_clicked() {
     let to_category = ""+this.settings.getValue("category-to-move");
-    if (to_category.length == 0) return;
+    if (to_category.length === 0 || to_category === "R30BLACKLIST") return;
 
     let radios = this.settings.getValue("radios");
+
     var category_index = -1;
 
     for (let r in radios) {
@@ -4527,7 +4586,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
-    file_set_contents(CATEGORY_ROW_FILE, ""+category_index)
+    file_set_contents(CATEGORY_ROW_FILE, ""+category_index);
   }
 
   set_show_all_radios_to(show=true) {
@@ -5461,6 +5520,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let old_categories = this.settings.getOptions("category-to-move");
     let categories = {};
     categories["%s".format(_("(Undefined)"))] = "";
+    categories["%s".format(_("(Blacklist)"))] = "R30BLACKLIST";
     for (let cat of this.station_categories) {
       categories[""+cat] = ""+cat;
     }
@@ -5749,6 +5809,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       _("Do you want to continue?")
     ];
 
+    let blacklist = this.settings.getValue("blacklist");
+    var blacklist_array = [];
+    for (let b of blacklist)
+      blacklist_array.push(b.url);
+
     new ModalDialog.ConfirmDialog(messages.join("\n"), () => {
       FileDialog.open(Lang.bind(this, function(path) {
         let fileName = path.slice(0,-1);
@@ -5785,9 +5850,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.set_radio_hashtable();
 
         let i=0;
-        while (i<contents.length) {
+        while (i < contents.length) {
           // log("i: "+i+" - url: "+contents[i].url, true);
-          if (this.radiosHash[""+contents[i].url])
+          if (this.radiosHash[""+contents[i].url] || blacklist_array.indexOf(contents[i].url) > -1)
             contents.splice(i,1);
           else
             i++;
@@ -5796,7 +5861,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         let id = setTimeout(() => {
           clearTimeout(id);
           this.settings.setValue("import-list", contents);
-        }, 800); // 800 ms
+        }, 2100); // 2100 ms
       }), params);
     }).open();
   }
@@ -5847,6 +5912,50 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       imports = null;
       new_imports = null;
     }, 800); // 800 ms
+  }
+
+  on_button_import_blacklist_clicked() {
+    var imports = this.settings.getValue("import-list");
+    let blacklist = this.settings.getValue("blacklist");
+    var blacklist_array = [];
+    for (let b of blacklist) {
+      if (blacklist_array.indexOf(b["url"]) < 0 && b["url"].trim().length > 0)
+        blacklist_array.push(b["url"].trim());
+    }
+
+    var indexes_to_remove = [];
+    var i = 0;
+    for (let _import of imports) {
+      if (_import.inc && blacklist_array.indexOf(_import.url) < 0) {
+        blacklist_array.push(_import.url);
+        indexes_to_remove.push(i);
+      }
+      i++;
+    }
+
+    while (indexes_to_remove.length > 0)
+      imports.splice(indexes_to_remove.pop(0), 1);
+
+    var new_blacklist = [];
+    for (let n of blacklist_array) {
+      new_blacklist.push({"url": n});
+      if (this.last_radio_listened_to == n) {
+        this.stop_mpv_radio(true);
+        this.last_radio_listened_to = "";
+      }
+      let index_to_remove = this.recentRadios.indexOf(n);
+      if (index_to_remove > -1)
+        this.recentRadios.splice(index_to_remove, 1);
+    }
+    if (this.last_radio_listened_to.length === 0 && this.recentRadios.length > 0)
+      this.last_radio_listened_to = this.recentRadios[0];
+    this.set_radio_tooltip_to_default_one();
+
+    this.settings.setValue("blacklist", new_blacklist);
+    this.settings.setValue("import-list", imports);
+
+    new_blacklist = null;
+    imports = null;
   }
 
   _select_all(whichList, select=true) {
@@ -5951,6 +6060,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //log("searchOptions: "+searchOptions);
 
+    let blacklist = this.settings.getValue("blacklist");
+    var blacklist_array = [];
+    for (let b of blacklist) {
+      if (blacklist_array.indexOf(b.url) < 0 )
+        blacklist_array.push(b.url);
+    }
+
     this.searchFetch(searchOptions).then((resultJson) => {
       //global.log(resultJson);
       var rows = [];
@@ -5959,7 +6075,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         if (url.length === 0) {
           url = ""+station.url_resolved;
         }
-        if (radio_urls.indexOf(url) > -1 || url.length === 0) {
+        if (radio_urls.indexOf(url) > -1 || url.length === 0 || blacklist_array.indexOf(url) > -1) {
           limit -= 1;
           continue;
         }
@@ -5991,6 +6107,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           this.settings.setValue("search-page", page + 1);
       }, 800); // 800 ms
     }).catch(e => logError(e));
+    //~ blacklist_array = null;
   }
 
   on_button_search_list_clicked() {
