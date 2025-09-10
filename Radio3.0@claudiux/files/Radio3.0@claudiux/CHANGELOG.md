@@ -1,3 +1,6 @@
+### v3.7.0~20250910
+  * Added Blacklist management.
+
 ### v3.6.2~20250908
   * Better memory management.
 
