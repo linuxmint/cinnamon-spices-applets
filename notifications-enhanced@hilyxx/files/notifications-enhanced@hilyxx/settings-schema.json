@@ -38,6 +38,22 @@
     },
     "section3": {
         "type": "section",
+        "description": "Filters"
+    },
+    "blockList" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Hide notifications from the list for the following apps:",
+        "tooltip": "Comma-separated list of case-insensitive app titles"
+    },
+    "urgentList" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Always consider URGENT the notifications from these apps:",
+        "tooltip": "Comma-separated list of case-insensitive app titles"
+    },
+    "section4": {
+        "type": "section",
         "description": "Keyboard shortcuts"
     },
     "keyOpen": {
@@ -57,8 +73,8 @@
         "description": "Enable or disable notifications",
         "default": "<Shift><Super>m",
         "tooltip": "Set keybinding(s) to enable or disable notifications."
-    },    
-   "section4": {
+    },
+   "section5": {
         "type": "section",
         "description": ""
    },
