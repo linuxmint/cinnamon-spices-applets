@@ -1,3 +1,8 @@
+### v5.8.2~20250911
+  * Avoids any unnecessary work.
+  * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)
+
+
 ### v5.8.1~20250908
   * Avoids memory leaks.
 
