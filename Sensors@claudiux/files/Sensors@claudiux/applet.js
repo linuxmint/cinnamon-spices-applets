@@ -331,7 +331,7 @@ class SensorsApplet extends Applet.Applet {
     this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", () => { this.updateUI() });
     this.s.bind("temp_sensors", "temp_sensors");
     this.s.bind("numberOfTempSensors", "numberOfTempSensors");
-    this.s.bind("temp_disks", "temp_disks");
+    this.s.bind("temp_disks", "temp_disks", this._on_temp_disks_modified.bind(this));
     this.s.bind("journalize_temp", "journalize_temp");
 
     // Fan tab
@@ -418,6 +418,30 @@ class SensorsApplet extends Applet.Applet {
     C_INTRU = "" + selected;
     DEFAULT_APPLET_LABEL[3] = "" + selected;
     this.set_default_UI();
+  }
+
+  _on_temp_disks_modified() {
+    const SENSORS_DIR = `${XDG_RUNTIME_DIR}/Sensors`;
+    const SENSORS_DISKSWITNESS=`${SENSORS_DIR}/DisksWitness`;
+    var checkDisks = false;
+    let disks = this.s.getValue('temp_disks');
+    if (!disks) return;
+
+    for (let disk of disks) {
+      if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
+        checkDisks = true;
+        break
+      }
+    }
+    if (checkDisks) {
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+    } else {
+      let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
+      if (diskwitness.query_exists(null))
+        diskwitness.delete(null);
+      diskwitness = null;
+    }
+    checkDisks = null;
   }
 
   is_disktemp_user_readable() {
@@ -1276,17 +1300,17 @@ class SensorsApplet extends Applet.Applet {
       //~ }
       var sep_twice = "" + this.separator.trim() + " " + this.separator.trim();
       if (sep_twice.length > 1) {
-        //~ while (_appletLabel.indexOf(sep_twice) > -1) {
-          //~ _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
-        _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator.trim());
-        //~ }
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator.trim());
+        while (_appletLabel.indexOf(sep_twice) > -1) {
+          _appletLabel = _appletLabel.replace(sep_twice, this.separator.trim());
+        }
       }
       sep_twice = "" + this.separator + this.separator;
       if (sep_twice.length > 1) {
-        //~ while (_appletLabel.includes(sep_twice)) {
-          //~ _appletLabel = _appletLabel.replace(sep_twice, this.separator);
-        _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator);
-        //~ }
+        //~ _appletLabel = _appletLabel.replace(/${sep_twice}/g, this.separator);
+        while (_appletLabel.includes(sep_twice)) {
+          _appletLabel = _appletLabel.replace(sep_twice, this.separator);
+        }
       }
       while (_appletLabel.slice(-1) === this.separator) {
         _appletLabel = _appletLabel.slice(0, -1)
@@ -1626,7 +1650,8 @@ class SensorsApplet extends Applet.Applet {
     }
     this.detect_markup();
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
-    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+    this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
   }
@@ -1693,7 +1718,8 @@ class SensorsApplet extends Applet.Applet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
-      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+      //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+      this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
     } else {
