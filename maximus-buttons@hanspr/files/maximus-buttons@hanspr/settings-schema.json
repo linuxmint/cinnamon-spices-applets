@@ -1,0 +1,42 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Window Buttons Settings"
+    },
+    "buttons-style": {
+        "type": "entry",
+        "description": "Window Buttons Style  (Example: title:minimize:maximize:close:icon)",
+        "default": "minimize:maximize:close"
+    },
+    
+    "buttons-theme": {
+        "type": "combobox",
+        "default": "default",
+        "description": "Buttons Theme  (Needs Restart Cinnamon)",
+        "options": {
+            "Default": "default",
+            "Mac-OS-X": "Mac-OS-X",
+            "Mint-X": "Mint-X",
+            "Radiance": "Radiance",
+            "UniMetro": "UniMetro",
+            "UniMetro-Black": "UniMetro-Black",
+            "Vimix": "Vimix"
+        },
+        "tooltip": "Please select a theme for window buttons"
+    },
+    "on-desktop-shutdown": {
+        "type": "switch",
+        "default": false,
+        "description": "On desktop show shutdown menu when click close button"
+    },
+    "hide-buttons": {
+        "type": "switch",
+        "default": true,
+        "description": "Hide buttons instead of removing (no applets jump left right)"
+    },
+    "only-maximized": {
+        "type": "switch",
+        "default": true,
+        "description": "Show applet only active window maximized"
+    }
+}
