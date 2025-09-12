@@ -14,7 +14,7 @@ import { _, IsLangSupported } from "../../utils";
 import { BaseProvider } from "../BaseProvider";
 import type { OpenWeatherMapError} from "./payload/common";
 import { ConvertLocaleToOWMLang, OWM_SUPPORTED_LANGS } from "./payload/common";
-import type { Config, Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { OWMOneCallPayload} from "./payload/onecall";
 import { OWMOneCallToWeatherData } from "./payload/onecall";
 import type { OWMWeatherResponse } from "./payload/weather";
@@ -29,7 +29,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 	//  Properties
 	//--------------------------------------------------------
 	public readonly prettyName = _("OpenWeatherMap");
-	public readonly name: Services = "OpenWeatherMap_OneCall";
+	public readonly name: Services = Services.OpenWeatherMap_OneCall;
 	public readonly maxForecastSupport = 8;
 	public readonly website = "https://openweathermap.org/";
 	public readonly maxHourlyForecastSupport = 48;
