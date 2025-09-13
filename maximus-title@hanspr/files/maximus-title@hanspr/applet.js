@@ -22,11 +22,26 @@ class MyApplet extends Applet.TextIconApplet {
 
     connectSignals() {
         this.signalManager = new SignalManager.SignalManager(null);
-        this.signalManager.connect(global.display, 'notify::focus-window', this._onTitleChange, this);
+        this.signalManager.connect(global.display, 'notify::focus-window', () => {
+            let w = global.display.focus_window
+            if (w) {
+                this.signalManager.connect(w, 'notify::title', () => {
+                    this._onTitleChange(w.lastTitle)
+                })
+                this._onTitleChange(w.lastTitle)
+            } else {
+                this._onTitleChange()
+            }
+        }, this);
     }
 
-    _onTitleChange() {
-        this.set_applet_label(global.display.focus_window.get_title().substring(0, 60));
+    _onTitleChange(title) {
+        if (title != undefined) {
+            title = title.substring(0, 60)
+        } else {
+            title = global.display.focus_window.get_title().substring(0, 60)
+        }
+        this.set_applet_label(title);
     }
 }
 
