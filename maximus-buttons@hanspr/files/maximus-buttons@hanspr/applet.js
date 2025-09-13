@@ -85,7 +85,9 @@ class MyApplet extends Applet.TextIconApplet {
         buttonsStyle = buttonsStyle.split(":");
         for (let i = 0; i < buttonsStyle.length; ++i) {
             let buttonName = buttonsStyle[i] + "Button";
-            this[buttonName]();
+            if (this[buttonName]) {
+                this[buttonName]();
+            }
         }
     }
 
@@ -211,28 +213,22 @@ class MyApplet extends Applet.TextIconApplet {
         if (activeWindow) {
             let app = tracker.get_window_app(activeWindow);
             if (app) {
-                let icon = tracker.get_window_app(activeWindow).create_icon_texture(this.titleIconWidth);
+                let icon = tracker.get_window_app(activeWindow).create_icon_texture(20);
                 this.button["icon"].set_child(icon);
                 this.actor.add(this.button['icon']);
             } else {
-                let size = parseInt(this.titleIconWidth);
-                size = size;
-                size = size.toString();
                 let icon = new St.Icon({
                     icon_name: "video-display",
                     icon_type: St.IconType.SYMBOLIC,
-                    style: "icon-size:24px;"
+                    style: "icon-size:20px;"
                 });
                 this.button["icon"].set_child(icon);
             }
         } else {
-            let size = parseInt(this.titleIconWidth);
-            size = size;
-            size = size.toString();
             let icon = new St.Icon({
                 icon_name: "video-display",
                 icon_type: St.IconType.SYMBOLIC,
-                style: "icon-size:24px;"
+                style: "icon-size:20px;"
             });
             this.button["icon"].set_child(icon);
         }
@@ -251,8 +247,10 @@ class MyApplet extends Applet.TextIconApplet {
             this.onlyMaximize();
         } else {
             for (let i = 0; i < buttons.length; ++i) {
-                this.button[buttons[i]].show();
-                this.button[buttons[i]].opacity = 255;
+                if (this.button[buttons[i]] != undefined) {
+                    this.button[buttons[i]].show();
+                    this.button[buttons[i]].opacity = 255;
+                }
             }
         }
     }
@@ -288,10 +286,13 @@ class MyApplet extends Applet.TextIconApplet {
             }
         } else {
             for (let i = 0; i < buttons.length; ++i) {
+                if (buttons[i] == undefined) {
+                    continue
+                }
                 if (!this.hideButtons) {
                     this.button[buttons[i]].hide();
                 }
-                if (buttons[i] != "icon") {
+                if (buttons[i] != "icon" && this.button[buttons[i]] != undefined) {
                     this.button[buttons[i]].opacity = 0;
                 }
             }
