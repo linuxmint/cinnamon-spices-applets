@@ -2,82 +2,88 @@
 # This file is put in the public domain.
 # zamszowy, 2025
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
+"Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-13 12:55+0200\n"
-"PO-Revision-Date: 2025-08-26 10:42+0200\n"
-"Last-Translator: qadzek\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: nl\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
 
 #. applet.js:37
 msgid "missing dependencies"
-msgstr "ontbrekende afhankelijkheden"
+msgstr "brakujące zależności"
 
 #. applet.js:106
 #, javascript-format
 msgid "%s updates available"
-msgstr "%s updates beschikbaar"
+msgstr "%s dostępnych aktualizacji"
 
 #. applet.js:107
 msgid "No updates available"
-msgstr "Geen updates beschikbaar"
+msgstr "Brak dostępnych aktualizacji"
 
 #. applet.js:133
 msgid "Check for new updates"
-msgstr "Controleer op nieuwe updates"
+msgstr "Sprawdź nowe aktualizacje"
 
 #. applet.js:144
 #, javascript-format
 msgid "View %s updates"
-msgstr "Bekijk %s updates"
+msgstr "Zobacz %s aktualizacji"
 
 #. applet.js:144
 msgid "No updates to view"
-msgstr "Geen updates om te bekijken"
+msgstr "Brak aktualizacji do wyświetlenia"
 
 #. applet.js:157
 #, javascript-format
 msgid "Upgrade %s packages"
-msgstr "Upgrade %s pakketten"
+msgstr "Zaktualizuj %s pakietów"
 
 #. applet.js:157
 msgid "No packages to upgrade"
-msgstr "Geen pakketten om te upgraden"
+msgstr "Brak pakietów do zaktualizowania"
 
 #. info-window.js:118
 msgid "Loading update details…"
-msgstr ""
+msgstr "Ładowanie szczegółów aktualizacji…"
 
 #. info-window.js:170
 msgid "No details available."
-msgstr ""
+msgstr "Brak dostępnych szczegółów."
 
 #. info-window.js:172
 msgid ""
 "Error:\n"
 "{0}"
 msgstr ""
+"Błąd:\n"
+"{0}"
 
 #. info-window.js:181
 msgid ""
 "Failed to run command:\n"
 "{0}"
 msgstr ""
+"Nie udało się uruchomić polecenia:\n"
+"{0}"
 
 #. info-window.js:191
 msgid "Updates"
-msgstr ""
+msgstr "Aktualizacje"
 
 #. info-window.js:206
 msgid "Search updates…"
-msgstr ""
+msgstr "Szukaj w aktualizacjach…"
 
 #. info-window.js:238
 msgid "{0} updates"
@@ -85,81 +91,80 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Updates notifier"
-msgstr "Updates-melder"
+msgstr "Powiadomienia o aktualizacjach"
 
 #. metadata.json->description
 msgid "Shows icons for pending update packages"
-msgstr "Toont pictogrammen voor hangende updatepakketten"
+msgstr "Pokazuje ikony dla oczekujących pakietów aktualizacji"
 
 #. settings-schema.json->section1->description
 msgid "Settings"
-msgstr "Instellingen"
+msgstr "Ustawienia"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing applet"
-msgstr "Minuten te wachten voordat het applet ververst wordt"
+msgstr "Ile minut czekać przed odświeżeniem apletu"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
-msgstr "Verberg applet als er geen updates zijn"
+msgstr "Nie wyświetlaj apletu, jeśli nie ma aktualizacji"
 
 #. settings-schema.json->different-levels->description
 msgid "Show different applet icon for different updgradeable packages count"
 msgstr ""
-"Toon een ander appletpictogram afhankelijk van het aantal upgradebare "
-"pakketten"
+"Pokazuj różne ikony apletu w zależności od liczby pakietów do aktualizacji"
 
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
 msgstr ""
-"Toon laag-niveau pictogram wanneer het aantal updates tussen 0 en deze "
-"waarde ligt"
+"Pokazuj ikonę niskiego poziomu, gdy liczba aktualizacji jest między 0 a tą "
+"wartością "
 
 #. settings-schema.json->level-2->description
 msgid ""
 "Show medium level icon when updates count is between low level value and "
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
-"Toon medium-niveau pictogram wanneer het aantal updates tussen de laag-"
-"niveau waarde en deze waarde ligt. Toon hoog-niveau pictogram als het aantal "
-"hoger is dan deze waarde."
+"Pokazuj ikonę średniego poziomu, gdy liczba aktualizacji jestmiędzy "
+"wartością niskiego poziomu a tą wartością. Pokazuj ikonę wysokiego poziomu, "
+"jeśli jest wyższa niż ta wartość."
 
 #. settings-schema.json->section2->description
 msgid "Commands to execute in popup menu"
-msgstr "Commando’s om uit te voeren in popupmenu"
+msgstr "Polecenia do wykonania w menu podręcznym"
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
-msgstr ""
+msgstr "Pokaż polecenie „Sprawdź nowe aktualizacje”"
 
 #. settings-schema.json->commandUpdate->description
 msgid "Check for new updates:"
-msgstr "Controleer op nieuwe updates:"
+msgstr "Sprawdź nowe aktualizacje:"
 
 #. settings-schema.json->commandUpgrade-show->description
 msgid "Show \"Upgrade packages\" command"
-msgstr ""
+msgstr "Pokaż polecenie „Zaktualizuj pakiety”"
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages:"
-msgstr "Upgrade pakketten:"
+msgstr "Zaktualizuj pakiety:"
 
 #. settings-schema.json->section3->description
 msgid "Theme"
-msgstr "Thema"
+msgstr "Motyw"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"
-msgstr "Pictogramstijl"
+msgstr "Styl ikon"
 
 #. settings-schema.json->icon-style->options
 msgid "dark"
-msgstr "donker"
+msgstr "ciemny"
 
 #. settings-schema.json->icon-style->options
 msgid "light"
-msgstr "licht"
+msgstr "jasny"
 
 #. settings-schema.json->icon-style->options
 msgid "symbolic"
-msgstr "symbolisch"
+msgstr "symboliczny"
