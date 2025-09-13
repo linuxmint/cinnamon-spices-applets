@@ -126,12 +126,11 @@ function showDetails(item) {
     let pkgid = buildPkgIdWithRepoFallback(item);
     print("fetching details for:", pkgid);
 
-    let subprocess = new Gio.Subprocess({
-        argv: ["pkcon", "get-update-detail", pkgid],
+    let launcher = new Gio.SubprocessLauncher({
         flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
     });
-    subprocess.init(null);
-
+    launcher.setenv("LANG", "en_US.UTF-8", true);
+    let subprocess = launcher.spawnv(["pkcon", "get-update-detail", pkgid]);
     subprocess.communicate_utf8_async(null, null, (proc, res) => {
         try {
             let [ok, stdout, stderr] = proc.communicate_utf8_finish(res);
