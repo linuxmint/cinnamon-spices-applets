@@ -5,6 +5,18 @@ const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gdk = imports.gi.Gdk;
+const Gettext = imports.gettext;
+
+if (!String.prototype.format) {
+    String.prototype.format = function (...args) {
+        return this.replace(/\{(\d+)\}/g, (m, i) =>
+            (i in args ? args[i] : m));
+    };
+}
+
+const UUID = "updates-notifier@zamszowy";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+function _(str) { return Gettext.dgettext(UUID, str); }
 
 function checkKeysForExit(event, win, callback) {
     const [, key] = event.get_keyval();
@@ -103,7 +115,7 @@ function showDetails(item) {
     // Spinner + label
     let spinner = new Gtk.Spinner();
     spinner.start();
-    let loadingLabel = new Gtk.Label({ label: "Loading update details…" });
+    let loadingLabel = new Gtk.Label({ label: _("Loading update details…") });
     let hbox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8 });
     hbox.pack_start(spinner, false, false, 0);
     hbox.pack_start(loadingLabel, false, false, 0);
@@ -154,9 +166,9 @@ function showDetails(item) {
                 let idx = lines.findIndex(l => l.trim() === "Results:");
                 let details = idx >= 0 ? lines.slice(idx + 1) : lines;
                 const details_str = details.join("\n");
-                textview.buffer.text = details_str.length > 0 ? details_str : "No details available.";
+                textview.buffer.text = details_str.length > 0 ? details_str : _("No details available.");
             } else {
-                textview.buffer.text = "Error:\n" + stderr;
+                textview.buffer.text = _("Error:\n{0}").format(stderr);
             }
 
             scroll.show_all();
@@ -165,7 +177,7 @@ function showDetails(item) {
 
             spinner.stop();
             hbox.hide();
-            let errorLabel = new Gtk.Label({ label: "Failed to run command:\n" + e.message });
+            let errorLabel = new Gtk.Label({ label: _("Failed to run command:\n{0}").format(e.message) });
             vbox.pack_start(errorLabel, true, true, 0);
             errorLabel.show();
         }
@@ -175,7 +187,7 @@ function showDetails(item) {
 Gtk.init(null);
 
 // main window
-let win = new Gtk.Window({ title: "Updates" });
+let win = new Gtk.Window({ title: _("Updates") });
 win.set_default_size(640, 640);
 
 // VBox for search + list
@@ -190,7 +202,7 @@ searchEntry.set_no_show_all(true);
 overlay.add(searchEntry);
 
 // Fake placeholder label
-let placeholder = new Gtk.Label({ label: "Search updates…", xalign: 0, yalign: 0.5 });
+let placeholder = new Gtk.Label({ label: _("Search updates…"), xalign: 0, yalign: 0.5 });
 // Margin so the cursor would be at the start of label
 placeholder.set_margin_start(10);
 overlay.add_overlay(placeholder);
@@ -222,7 +234,7 @@ let [success, buffer] = GLib.file_get_contents(ARGV[0]);
 if (success) {
     let text = typeof TextDecoder !== "undefined" ? new TextDecoder().decode(buffer) : String(buffer); // workaround for older cjs versions
     let updates = parseUpdates(text);
-    win.title = `${updates.length} updates`;
+    win.title = _("{0} updates").format(updates.length);
     for (let u of updates) {
         let row = new Gtk.ListBoxRow();
         let label = new Gtk.Label({ label: u.line, xalign: 0 });
