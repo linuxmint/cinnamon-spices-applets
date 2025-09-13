@@ -222,7 +222,7 @@ class SensorsApplet extends Applet.Applet {
     //this.depCount = 0;
 
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
-    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 &");
+    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -427,14 +427,15 @@ class SensorsApplet extends Applet.Applet {
     let disks = this.s.getValue('temp_disks');
     if (!disks) return;
 
+    var disksToCheck = [];
     for (let disk of disks) {
       if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
         checkDisks = true;
-        break
+        disksToCheck.push(disk["disk"])
       }
     }
     if (checkDisks) {
-      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " " + disksToCheck.join(",") + " &");
     } else {
       let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
       if (diskwitness.query_exists(null))
@@ -1650,7 +1651,6 @@ class SensorsApplet extends Applet.Applet {
     }
     this.detect_markup();
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
-    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
     this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
@@ -1718,7 +1718,6 @@ class SensorsApplet extends Applet.Applet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
-      //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
       this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
