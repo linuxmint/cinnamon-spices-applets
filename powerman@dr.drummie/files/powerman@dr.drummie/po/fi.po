@@ -1,0 +1,583 @@
+# Finnish translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/dr-drummie/powerman\n"
+"POT-Creation-Date: 2025-09-06 22:34+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/applet.js:61
+msgid "Power Saver"
+msgstr "Virransäästö"
+
+#: src/applet.js:62
+msgid "Balanced"
+msgstr "Tasapainoinen"
+
+#: src/applet.js:63
+msgid "Performance"
+msgstr "Suorituskyky"
+
+#: src/applet.js:74
+msgid "Battery full"
+msgstr "Akku täynnä"
+
+#: src/applet.js:76
+msgid "Battery almost full"
+msgstr "Akku lähes täynnä"
+
+#: src/applet.js:78
+msgid "Battery good"
+msgstr "Akku hyvä"
+
+#: src/applet.js:80
+msgid "Low battery"
+msgstr "Akku vähissä"
+
+#: src/applet.js:82
+msgid "Critically low battery"
+msgstr "Akku kriittisesti vähissä"
+
+#: src/applet.js:84 src/applet.js:153
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: src/applet.js:96
+msgid "AC adapter"
+msgstr "Verkkovirta-adapteri"
+
+#: src/applet.js:98
+msgid "Laptop battery"
+msgstr "Kannettavan akku"
+
+#: src/applet.js:100 src/applet.js:1624
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:102
+msgid "Monitor"
+msgstr "Näyttö"
+
+#: src/applet.js:104
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: src/applet.js:106
+msgid "Keyboard"
+msgstr "Näppäimistö"
+
+#: src/applet.js:108
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:110
+msgid "Cell phone"
+msgstr "Matkapuhelin"
+
+#: src/applet.js:112
+msgid "Media player"
+msgstr "Mediasoitin"
+
+#: src/applet.js:114
+msgid "Tablet"
+msgstr "Tabletti"
+
+#: src/applet.js:116
+msgid "Computer"
+msgstr "Tietokone"
+
+#: src/applet.js:118
+msgid "Gaming input"
+msgstr "Pelisyöte"
+
+#: src/applet.js:120
+msgid "Pen"
+msgstr "Kynä"
+
+#: src/applet.js:122
+msgid "Touchpad"
+msgstr "Kosketuslevy"
+
+#: src/applet.js:124
+msgid "Modem"
+msgstr "Modeemi"
+
+#: src/applet.js:126
+msgid "Network"
+msgstr "Verkko"
+
+#: src/applet.js:128
+msgid "Headset"
+msgstr "Kuulokkeet"
+
+#: src/applet.js:130
+msgid "Speakers"
+msgstr "Kaiuttimet"
+
+#: src/applet.js:132
+msgid "Headphones"
+msgstr "Kuulokkeet"
+
+#: src/applet.js:134
+msgid "Video"
+msgstr "Video"
+
+#: src/applet.js:136
+msgid "Audio device"
+msgstr "Äänilaite"
+
+#: src/applet.js:138
+msgid "Remote control"
+msgstr "Kaukosäädin"
+
+#: src/applet.js:140
+msgid "Printer"
+msgstr "Tulostin"
+
+#: src/applet.js:142
+msgid "Scanner"
+msgstr "Skanneri"
+
+#: src/applet.js:144
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/applet.js:146
+msgid "Wearable"
+msgstr "Kannettava"
+
+#: src/applet.js:148
+msgid "Toy"
+msgstr "Lelu"
+
+#: src/applet.js:555 src/applet.js:1373
+msgid "Brightness"
+msgstr "Kirkkaus"
+
+#: src/applet.js:556 src/applet.js:1378
+msgid "Keyboard backlight"
+msgstr "Näppäimistön taustavalo"
+
+#: src/applet.js:624
+msgid "Automation Settings"
+msgstr "Automaatioasetukset"
+
+#: src/applet.js:633
+msgid "Power Settings"
+msgstr "Virta-asetukset"
+
+#: src/applet.js:782
+msgid "Power Automation"
+msgstr "Virta-automaatio"
+
+#: src/applet.js:832
+msgid "Charging"
+msgstr "Latautuu"
+
+#: src/applet.js:836
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Latautuu - %d tunti täyteen lataukseen"
+msgstr[1] "Latautuu - %d tuntia täyteen lataukseen"
+
+#: src/applet.js:842
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Latautuu - %d %s %d %s täyteen lataukseen"
+
+#: src/applet.js:845 src/applet.js:874
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "tunti"
+msgstr[1] "tuntia"
+
+#: src/applet.js:847 src/applet.js:876
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuutti"
+msgstr[1] "minuuttia"
+
+#: src/applet.js:852
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Latautuu - %d minuutti täyteen lataukseen"
+msgstr[1] "Latautuu - %d minuuttia täyteen lataukseen"
+
+#: src/applet.js:858
+msgid "Fully charged"
+msgstr "Täysin ladattu"
+
+#: src/applet.js:861
+msgid "Using battery power"
+msgstr "Käyttää akkuvirtaa"
+
+#: src/applet.js:865
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Käyttää akkuvirtaa - %d tunti jäljellä"
+msgstr[1] "Käyttää akkuvirtaa - %d tuntia jäljellä"
+
+#: src/applet.js:871
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Käyttää akkuvirtaa - %d %s %d %s jäljellä"
+
+#: src/applet.js:881
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Käyttää akkuvirtaa - %d minuutti jäljellä"
+msgstr[1] "Käyttää akkuvirtaa - %d minuuttia jäljellä"
+
+#: src/applet.js:887
+msgid "Fully discharged"
+msgstr "Täysin tyhjä"
+
+#: src/applet.js:889
+msgid "Not charging"
+msgstr "Ei lataudu"
+
+#: src/applet.js:916 src/applet.js:926 src/applet.js:1321 src/applet.js:1341
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:918 src/applet.js:924 src/applet.js:1329 src/applet.js:1337
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/applet.js:1486
+msgid "Switched to AC power"
+msgstr "Vaihdettu verkkovirtaan"
+
+#: src/applet.js:1490
+msgid "Switched to battery power"
+msgstr "Vaihdettu akkuvirtaan"
+
+#: src/applet.js:1558
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low (%d%%)"
+msgstr "KRITTISET: Akku %s kriittisesti vähissä (%d%%)"
+
+#: src/applet.js:1560 src/applet.js:1591
+msgid "Critical Battery"
+msgstr "Kriittinen akku"
+
+#: src/applet.js:1561
+#, javascript-format
+msgid "Battery %s critically low (%d%%)"
+msgstr "Akku %s kriittisesti vähissä (%d%%)"
+
+#: src/applet.js:1567
+#, javascript-format
+msgid "LOW: Battery %s low (%d%%)"
+msgstr "ALHAINEN: Akku %s vähissä (%d%%)"
+
+#: src/applet.js:1568 src/applet.js:1594
+msgid "Low Battery"
+msgstr "Vähäinen akku"
+
+#: src/applet.js:1568
+#, javascript-format
+msgid "Battery %s low (%d%%)"
+msgstr "Akku %s vähissä (%d%%)"
+
+#: src/applet.js:1581
+#, javascript-format
+msgid "Auto-enabled power saver (battery low: %d%%)"
+msgstr "Virransäästö automaattisesti käytössä (akku vähissä: %d%%)"
+
+#: src/applet.js:1590
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low"
+msgstr "KRITTISET: Akku %s kriittisesti vähissä"
+
+#: src/applet.js:1591
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Akku %s kriittisesti vähissä"
+
+#: src/applet.js:1593
+#, javascript-format
+msgid "LOW: Battery %s low"
+msgstr "ALHAINEN: Akku %s vähissä"
+
+#: src/applet.js:1594
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Akku %s vähissä"
+
+#: src/applet.js:1613
+msgid "Battery"
+msgstr "Akku"
+
+#: src/applet.js:1626
+msgid "AC Adapter"
+msgstr "Verkkovirta-adapteri"
+
+#: src/applet.js:1628
+msgid "Power Device"
+msgstr "Virta-laite"
+
+#: src/applet.js:1743 src/applet.js:1771
+msgid "Power Applet"
+msgstr "Virta-sovelma"
+
+#: src/applet.js:1743
+msgid "System power applet disabled. Using PowerMan instead."
+msgstr "Järjestelmän virta-sovelma poistettu käytöstä. Käytetään PowerMania sen sijaan."
+
+#: src/applet.js:1749 src/applet.js:1777
+msgid "Error"
+msgstr "Virhe"
+
+#: src/applet.js:1749
+msgid "Could not disable system power applet"
+msgstr "Ei voitu poistaa järjestelmän virta-sovelmaa käytöstä"
+
+#: src/applet.js:1771
+msgid "System power applet re-enabled. Both applets are now active."
+msgstr "Järjestelmän virta-sovelma otettu uudelleen käyttöön. Molemmat sovelmat ovat nyt aktiivisia."
+
+#: src/applet.js:1777
+msgid "Could not restore system power applet"
+msgstr "Ei voitu palauttaa järjestelmän virta-sovelmaa"
+
+#: src/applet.js:1866 src/applet.js:1908
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "kirkkaus %d%%"
+
+#: src/applet.js:1874 src/applet.js:1926
+#, javascript-format
+msgid "power profile %s"
+msgstr "virta-profiili %s"
+
+#: src/applet.js:1883
+msgid "AC power: "
+msgstr "Verkkovirta: "
+
+#: src/applet.js:1887
+msgid "Switched to AC power (no automation applied)"
+msgstr "Vaihdettu verkkovirtaan (ei automaatiota sovellettu)"
+
+#: src/applet.js:1901
+msgid "Switched to battery power (no battery devices detected)"
+msgstr "Vaihdettu akkuvirtaan (ei akkulaiteita havaittu)"
+
+#: src/applet.js:1916
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "virransäästötila (akku vähissä: %d%%)"
+
+#: src/applet.js:1936
+msgid "Battery power: "
+msgstr "Akkuvirta: "
+
+#: src/applet.js:1940
+msgid "Switched to battery power (no automation applied)"
+msgstr "Vaihdettu akkuvirtaan (ei automaatiota sovellettu)"
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 minuuttia"
+
+msgid "10 seconds"
+msgstr "10 sekuntia"
+
+msgid "15 seconds"
+msgstr "15 sekuntia"
+
+msgid "1 minute"
+msgstr "1 minuutti"
+
+msgid "2 minutes"
+msgstr "2 minuuttia"
+
+msgid "30 seconds"
+msgstr "30 sekuntia"
+
+msgid "5 minutes"
+msgstr "5 minuuttia"
+
+msgid "5 seconds"
+msgstr "5 sekuntia"
+
+msgid "AC brightness level (%)"
+msgstr "Verkkovirran kirkkaustaso (%)"
+
+msgid "AC power profile"
+msgstr "Verkkovirran virta-profiili"
+
+msgid "Always show all batteries"
+msgstr "Näytä aina kaikki akut"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Näytä aina useat akut paneelissa"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Himmenä näyttö automaattisesti lepotilassa akkuvirralla"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Säädä kirkkaus automaattisesti verkkovirta/akku"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Himmenä näyttö automaattisesti lepotilassa verkkovirralla"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Vaihda virta-profiilit automaattisesti verkkovirta/akku"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr "Vaihda automaattisesti virransäästötilaan kun akku on vähissä"
+
+msgid "Auto power-saver on low battery"
+msgstr "Automaattinen virransäästö vähäisellä akulla"
+
+msgid "Battery brightness level (%)"
+msgstr "Akun kirkkaustaso (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr "Akun prosenttiosuus, jonka alapuolella virransäästötila otetaan automaattisesti käyttöön"
+
+msgid "Battery power profile"
+msgstr "Akun virta-profiili"
+
+msgid "Battery Power Saving"
+msgstr "Akun virransäästö"
+
+msgid "Brightness Automation"
+msgstr "Kirkkausautomaatio"
+
+msgid "Brightness Control"
+msgstr "Kirkkausohjaus"
+
+msgid "Brightness Control Status"
+msgstr "Kirkkausohjauksen tila"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Kirkkaustaso käytettäväksi verkkovirralla"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Kirkkaustaso käytettäväksi akkuvirralla"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Kirkkaustaso himmennettynä (%)"
+
+msgid "Debug and Logging"
+msgstr "Virheenkorjaus ja lokitus"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Himmenä näyttö lepotilassa verkkovirralla"
+
+msgid "Dim screen when idle on battery"
+msgstr "Himmenä näyttö lepotilassa akulla"
+
+msgid "Disable default Cinnamon power applet and use PowerMan instead"
+msgstr "Poista oletus Cinnamon virta-sovelma käytöstä ja käytä PowerMania sen sijaan"
+
+msgid "Display"
+msgstr "Näyttö"
+
+msgid "Display and Advanced"
+msgstr "Näyttö ja lisäasetukset"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr "Näytä ilmoitukset kun virta-automaatiotoimenpiteitä suoritetaan"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr "Ota käyttöön automaattinen vaihtaminen eri virta-profiilien välillä verkkovirta ja akku"
+
+msgid "Enable debug logging"
+msgstr "Ota käyttöön virheenkorjauslokitus"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr "Ota käyttöön yksityiskohtainen lokitus virta-automaation vianmääritystä varten"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr "Ota käyttöön erilliset kirkkaustasot verkkovirta ja akkuvirta"
+
+msgid "Hide applet icon from panel"
+msgstr "Piilota sovelman kuvake paneelista"
+
+msgid "Hide label"
+msgstr "Piilota etiketti"
+
+msgid "Low battery threshold (%)"
+msgstr "Vähäisen akun kynnys (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Ilmoitukset ja järjestelmäintegraatio"
+
+msgid "Panel Display Options"
+msgstr "Paneelin näyttöasetukset"
+
+msgid "Power Control"
+msgstr "Virtaohjaus"
+
+msgid "Power Control Status"
+msgstr "Virtaohjauksen tila"
+
+msgid "Power Profile Automation"
+msgstr "Virta-profiili-automaatio"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr "Virta-profiili-automaatio ei ole käytettävissä. Ei virta-profiilien daemonia tai akkulaitteita havaittu."
+
+msgid "Power profile to use when on AC power"
+msgstr "Virta-profiili käytettäväksi verkkovirralla"
+
+msgid "Power profile to use when on battery power"
+msgstr "Virta-profiili käytettäväksi akkuvirralla"
+
+msgid "Replace system power applet"
+msgstr "Korvaa järjestelmän virta-sovelma"
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr "Näytön kirkkausohjaus ei ole käytettävissä tässä järjestelmässä. Kirkkausautomaatio on poistettu käytöstä."
+
+msgid "Screen Dimming Settings"
+msgstr "Näytön himmennysasetukset"
+
+msgid "Screen dim timeout"
+msgstr "Näytön himmennysaika"
+
+msgid "Show automation notifications"
+msgstr "Näytä automaatioilmoitukset"
+
+msgid "Show percentage"
+msgstr "Näytä prosenttiosuus"
+
+msgid "Show percentage and time remaining"
+msgstr "Näytä prosenttiosuus ja jäljellä oleva aika"
+
+msgid "Show time remaining"
+msgstr "Näytä jäljellä oleva aika"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Kirkkaustaso käytettäväksi näytön himmentämisessä"
+
+msgid "Time before screen dims when idle"
+msgstr "Aika ennen näytön himmentämistä lepotilassa"

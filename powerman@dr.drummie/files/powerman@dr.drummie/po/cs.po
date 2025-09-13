@@ -1,0 +1,589 @@
+# Czech translations for powerman@dr.drummie package.
+# Copyright (C) 2025 THE powerman@dr.drummie'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the powerman@dr.drummie package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: powerman@dr.drummie 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/dr-drummie/powerman\n"
+"POT-Creation-Date: 2025-09-06 22:34+0200\n"
+"PO-Revision-Date: 2025-09-06 22:34+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: src/applet.js:61
+msgid "Power Saver"
+msgstr "Úspora energie"
+
+#: src/applet.js:62
+msgid "Balanced"
+msgstr "Vyvážený"
+
+#: src/applet.js:63
+msgid "Performance"
+msgstr "Výkon"
+
+#: src/applet.js:74
+msgid "Battery full"
+msgstr "Baterie plná"
+
+#: src/applet.js:76
+msgid "Battery almost full"
+msgstr "Baterie téměř plná"
+
+#: src/applet.js:78
+msgid "Battery good"
+msgstr "Baterie dobrá"
+
+#: src/applet.js:80
+msgid "Low battery"
+msgstr "Nízká úroveň baterie"
+
+#: src/applet.js:82
+msgid "Critically low battery"
+msgstr "Kriticky nízká úroveň baterie"
+
+#: src/applet.js:84 src/applet.js:153
+msgid "Unknown"
+msgstr "Neznámý"
+
+#: src/applet.js:96
+msgid "AC adapter"
+msgstr "AC adaptér"
+
+#: src/applet.js:98
+msgid "Laptop battery"
+msgstr "Baterie notebooku"
+
+#: src/applet.js:100 src/applet.js:1624
+msgid "UPS"
+msgstr "UPS"
+
+#: src/applet.js:102
+msgid "Monitor"
+msgstr "Monitor"
+
+#: src/applet.js:104
+msgid "Mouse"
+msgstr "Myš"
+
+#: src/applet.js:106
+msgid "Keyboard"
+msgstr "Klávesnice"
+
+#: src/applet.js:108
+msgid "PDA"
+msgstr "PDA"
+
+#: src/applet.js:110
+msgid "Cell phone"
+msgstr "Mobilní telefon"
+
+#: src/applet.js:112
+msgid "Media player"
+msgstr "Mediální přehrávač"
+
+#: src/applet.js:114
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/applet.js:116
+msgid "Computer"
+msgstr "Počítač"
+
+#: src/applet.js:118
+msgid "Gaming input"
+msgstr "Herní vstup"
+
+#: src/applet.js:120
+msgid "Pen"
+msgstr "Pero"
+
+#: src/applet.js:122
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: src/applet.js:124
+msgid "Modem"
+msgstr "Modem"
+
+#: src/applet.js:126
+msgid "Network"
+msgstr "Síť"
+
+#: src/applet.js:128
+msgid "Headset"
+msgstr "Sluchátka s mikrofonem"
+
+#: src/applet.js:130
+msgid "Speakers"
+msgstr "Reproduktory"
+
+#: src/applet.js:132
+msgid "Headphones"
+msgstr "Sluchátka"
+
+#: src/applet.js:134
+msgid "Video"
+msgstr "Video"
+
+#: src/applet.js:136
+msgid "Audio device"
+msgstr "Audio zařízení"
+
+#: src/applet.js:138
+msgid "Remote control"
+msgstr "Dálkové ovládání"
+
+#: src/applet.js:140
+msgid "Printer"
+msgstr "Tiskárna"
+
+#: src/applet.js:142
+msgid "Scanner"
+msgstr "Skener"
+
+#: src/applet.js:144
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/applet.js:146
+msgid "Wearable"
+msgstr "Nositelné"
+
+#: src/applet.js:148
+msgid "Toy"
+msgstr "Hračka"
+
+#: src/applet.js:555 src/applet.js:1373
+msgid "Brightness"
+msgstr "Jas"
+
+#: src/applet.js:556 src/applet.js:1378
+msgid "Keyboard backlight"
+msgstr "Podsvícení klávesnice"
+
+#: src/applet.js:624
+msgid "Automation Settings"
+msgstr "Nastavení automatizace"
+
+#: src/applet.js:633
+msgid "Power Settings"
+msgstr "Nastavení napájení"
+
+#: src/applet.js:782
+msgid "Power Automation"
+msgstr "Automatizace napájení"
+
+#: src/applet.js:832
+msgid "Charging"
+msgstr "Nabíjení"
+
+#: src/applet.js:836
+#, javascript-format
+msgid "Charging - %d hour until fully charged"
+msgid_plural "Charging - %d hours until fully charged"
+msgstr[0] "Nabíjení - %d hodina do plného nabití"
+msgstr[1] "Nabíjení - %d hodiny do plného nabití"
+msgstr[2] "Nabíjení - %d hodin do plného nabití"
+
+#: src/applet.js:842
+#, javascript-format
+msgid "Charging - %d %s %d %s until fully charged"
+msgstr "Nabíjení - %d %s %d %s do plného nabití"
+
+#: src/applet.js:845 src/applet.js:874
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hodina"
+msgstr[1] "hodiny"
+msgstr[2] "hodin"
+
+#: src/applet.js:847 src/applet.js:876
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuta"
+msgstr[1] "minuty"
+msgstr[2] "minut"
+
+#: src/applet.js:852
+#, javascript-format
+msgid "Charging - %d minute until fully charged"
+msgid_plural "Charging - %d minutes until fully charged"
+msgstr[0] "Nabíjení - %d minuta do plného nabití"
+msgstr[1] "Nabíjení - %d minuty do plného nabití"
+msgstr[2] "Nabíjení - %d minut do plného nabití"
+
+#: src/applet.js:858
+msgid "Fully charged"
+msgstr "Plně nabito"
+
+#: src/applet.js:861
+msgid "Using battery power"
+msgstr "Používá se baterie"
+
+#: src/applet.js:865
+#, javascript-format
+msgid "Using battery power - %d hour remaining"
+msgid_plural "Using battery power - %d hours remaining"
+msgstr[0] "Používá se baterie - %d hodina zbývá"
+msgstr[1] "Používá se baterie - %d hodiny zbývají"
+msgstr[2] "Používá se baterie - %d hodin zbývá"
+
+#: src/applet.js:871
+#, javascript-format
+msgid "Using battery power - %d %s %d %s remaining"
+msgstr "Používá se baterie - %d %s %d %s zbývá"
+
+#: src/applet.js:881
+#, javascript-format
+msgid "Using battery power - %d minute remaining"
+msgid_plural "Using battery power - %d minutes remaining"
+msgstr[0] "Používá se baterie - %d minuta zbývá"
+msgstr[1] "Používá se baterie - %d minuty zbývají"
+msgstr[2] "Používá se baterie - %d minut zbývá"
+
+#: src/applet.js:887
+msgid "Fully discharged"
+msgstr "Plně vybitá"
+
+#: src/applet.js:889
+msgid "Not charging"
+msgstr "Nenabíjí se"
+
+#: src/applet.js:916 src/applet.js:926 src/applet.js:1321 src/applet.js:1341
+#, javascript-format
+msgctxt "time of battery remaining"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+#: src/applet.js:918 src/applet.js:924 src/applet.js:1329 src/applet.js:1337
+#, javascript-format
+msgctxt "percent of battery remaining"
+msgid "%d%%"
+msgstr "%d%%"
+
+#: src/applet.js:1486
+msgid "Switched to AC power"
+msgstr "Přepnuto na AC napájení"
+
+#: src/applet.js:1490
+msgid "Switched to battery power"
+msgstr "Přepnuto na baterii"
+
+#: src/applet.js:1558
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low (%d%%)"
+msgstr "KRITICKÉ: Baterie %s kriticky nízká (%d%%)"
+
+#: src/applet.js:1560 src/applet.js:1591
+msgid "Critical Battery"
+msgstr "Kritická baterie"
+
+#: src/applet.js:1561
+#, javascript-format
+msgid "Battery %s critically low (%d%%)"
+msgstr "Baterie %s kriticky nízká (%d%%)"
+
+#: src/applet.js:1567
+#, javascript-format
+msgid "LOW: Battery %s low (%d%%)"
+msgstr "NÍZKÁ: Baterie %s nízká (%d%%)"
+
+#: src/applet.js:1568 src/applet.js:1594
+msgid "Low Battery"
+msgstr "Nízká baterie"
+
+#: src/applet.js:1568
+#, javascript-format
+msgid "Battery %s low (%d%%)"
+msgstr "Baterie %s nízká (%d%%)"
+
+#: src/applet.js:1581
+#, javascript-format
+msgid "Auto-enabled power saver (battery low: %d%%)"
+msgstr "Automaticky povolena úspora energie (baterie nízká: %d%%)"
+
+#: src/applet.js:1590
+#, javascript-format
+msgid "CRITICAL: Battery %s critically low"
+msgstr "KRITICKÉ: Baterie %s kriticky nízká"
+
+#: src/applet.js:1591
+#, javascript-format
+msgid "Battery %s critically low"
+msgstr "Baterie %s kriticky nízká"
+
+#: src/applet.js:1593
+#, javascript-format
+msgid "LOW: Battery %s low"
+msgstr "NÍZKÁ: Baterie %s nízká"
+
+#: src/applet.js:1594
+#, javascript-format
+msgid "Battery %s low"
+msgstr "Baterie %s nízká"
+
+#: src/applet.js:1613
+msgid "Battery"
+msgstr "Baterie"
+
+#: src/applet.js:1626
+msgid "AC Adapter"
+msgstr "AC adaptér"
+
+#: src/applet.js:1628
+msgid "Power Device"
+msgstr "Napájecí zařízení"
+
+#: src/applet.js:1743 src/applet.js:1771
+msgid "Power Applet"
+msgstr "Applet napájení"
+
+#: src/applet.js:1743
+msgid "System power applet disabled. Using PowerMan instead."
+msgstr "Systémový applet napájení zakázán. Používá se PowerMan místo toho."
+
+#: src/applet.js:1749 src/applet.js:1777
+msgid "Error"
+msgstr "Chyba"
+
+#: src/applet.js:1749
+msgid "Could not disable system power applet"
+msgstr "Nelze zakázat systémový applet napájení"
+
+#: src/applet.js:1771
+msgid "System power applet re-enabled. Both applets are now active."
+msgstr "Systémový applet napájení znovu povolen. Oba applety jsou nyní aktivní."
+
+#: src/applet.js:1777
+msgid "Could not restore system power applet"
+msgstr "Nelze obnovit systémový applet napájení"
+
+#: src/applet.js:1866 src/applet.js:1908
+#, javascript-format
+msgid "brightness %d%%"
+msgstr "jas %d%%"
+
+#: src/applet.js:1874 src/applet.js:1926
+#, javascript-format
+msgid "power profile %s"
+msgstr "profil napájení %s"
+
+#: src/applet.js:1883
+msgid "AC power: "
+msgstr "AC napájení: "
+
+#: src/applet.js:1887
+msgid "Switched to AC power (no automation applied)"
+msgstr "Přepnuto na AC napájení (žádná automatizace nebyla použita)"
+
+#: src/applet.js:1901
+msgid "Switched to battery power (no battery devices detected)"
+msgstr "Přepnuto na baterii (žádná bateriová zařízení nebyla detekována)"
+
+#: src/applet.js:1916
+#, javascript-format
+msgid "power-saver mode (battery low: %d%%)"
+msgstr "režim úspory energie (baterie nízká: %d%%)"
+
+#: src/applet.js:1936
+msgid "Battery power: "
+msgstr "Baterie: "
+
+#: src/applet.js:1940
+msgid "Switched to battery power (no automation applied)"
+msgstr "Přepnuto na baterii (žádná automatizace nebyla použita)"
+
+# Settings UI strings from settings-schema.json
+msgid "10 minutes"
+msgstr "10 minut"
+
+msgid "10 seconds"
+msgstr "10 sekund"
+
+msgid "15 seconds"
+msgstr "15 sekund"
+
+msgid "1 minute"
+msgstr "1 minuta"
+
+msgid "2 minutes"
+msgstr "2 minuty"
+
+msgid "30 seconds"
+msgstr "30 sekund"
+
+msgid "5 minutes"
+msgstr "5 minut"
+
+msgid "5 seconds"
+msgstr "5 sekund"
+
+msgid "AC brightness level (%)"
+msgstr "Úroveň jasu AC (%)"
+
+msgid "AC power profile"
+msgstr "Profil napájení AC"
+
+msgid "Always show all batteries"
+msgstr "Vždy zobrazit všechny baterie"
+
+msgid "Always show multiple batteries in panel"
+msgstr "Vždy zobrazit více baterií v panelu"
+
+msgid "Auto dim screen when idle on battery power"
+msgstr "Automaticky ztlumit obrazovku při nečinnosti na baterii"
+
+msgid "Automatically adjust brightness for AC/Battery"
+msgstr "Automaticky upravit jas pro AC/Baterii"
+
+msgid "Automatically dim the screen when idle while on AC power"
+msgstr "Automaticky ztlumit obrazovku při nečinnosti na AC napájení"
+
+msgid "Automatically switch power profiles for AC/Battery"
+msgstr "Automaticky přepínat profily napájení pro AC/Baterii"
+
+msgid "Automatically switch to power-saver mode when battery is low"
+msgstr "Automaticky přepnout do režimu úspory energie, když je baterie nízká"
+
+msgid "Auto power-saver on low battery"
+msgstr "Automatická úspora energie při nízké baterii"
+
+msgid "Battery brightness level (%)"
+msgstr "Úroveň jasu baterie (%)"
+
+msgid "Battery percentage below which to automatically enable power-saver mode"
+msgstr "Procento baterie, pod kterým se automaticky povolí režim úspory energie"
+
+msgid "Battery power profile"
+msgstr "Profil napájení baterie"
+
+msgid "Battery Power Saving"
+msgstr "Úspora energie baterie"
+
+msgid "Brightness Automation"
+msgstr "Automatizace jasu"
+
+msgid "Brightness Control"
+msgstr "Ovládání jasu"
+
+msgid "Brightness Control Status"
+msgstr "Stav ovládání jasu"
+
+msgid "Brightness level to use when on AC power"
+msgstr "Úroveň jasu pro použití na AC napájení"
+
+msgid "Brightness level to use when on battery power"
+msgstr "Úroveň jasu pro použití na baterii"
+
+msgid "Brightness level when dimmed (%)"
+msgstr "Úroveň jasu při ztlumení (%)"
+
+msgid "Debug and Logging"
+msgstr "Ladění a protokolování"
+
+msgid "Dim screen when idle on AC power"
+msgstr "Ztlumit obrazovku při nečinnosti na AC napájení"
+
+msgid "Dim screen when idle on battery"
+msgstr "Ztlumit obrazovku při nečinnosti na baterii"
+
+msgid "Disable default Cinnamon power applet and use PowerMan instead"
+msgstr "Zakázat výchozí Cinnamon applet napájení a použít PowerMan místo toho"
+
+msgid "Display"
+msgstr "Zobrazení"
+
+msgid "Display and Advanced"
+msgstr "Zobrazení a pokročilé"
+
+msgid "Display notifications when power automation actions are performed"
+msgstr "Zobrazit notifikace, když jsou provedeny akce automatizace napájení"
+
+msgid ""
+"Enable automatic switching between different power profiles for AC and "
+"Battery"
+msgstr "Povolit automatické přepínání mezi různými profily napájení pro AC a baterii"
+
+msgid "Enable debug logging"
+msgstr "Povolit ladění protokolování"
+
+msgid "Enable detailed logging for troubleshooting power automation"
+msgstr "Povolit detailní protokolování pro řešení problémů s automatizací napájení"
+
+msgid "Enable separate brightness levels for AC power and battery power"
+msgstr "Povolit samostatné úrovně jasu pro AC napájení a baterii"
+
+msgid "Hide applet icon from panel"
+msgstr "Skrýt ikonu appletu z panelu"
+
+msgid "Hide label"
+msgstr "Skrýt štítek"
+
+msgid "Low battery threshold (%)"
+msgstr "Práh nízké baterie (%)"
+
+msgid "Notifications and System Integration"
+msgstr "Notifikace a systémová integrace"
+
+msgid "Panel Display Options"
+msgstr "Možnosti zobrazení panelu"
+
+msgid "Power Control"
+msgstr "Ovládání napájení"
+
+msgid "Power Control Status"
+msgstr "Stav ovládání napájení"
+
+msgid "Power Profile Automation"
+msgstr "Automatizace profilu napájení"
+
+msgid ""
+"Power profile automation is not available. No power profiles daemon or "
+"battery devices detected."
+msgstr "Automatizace profilu napájení není k dispozici. Nebyl detekován žádný daemon profilů napájení nebo bateriová zařízení."
+
+msgid "Power profile to use when on AC power"
+msgstr "Profil napájení pro použití na AC napájení"
+
+msgid "Power profile to use when on battery power"
+msgstr "Profil napájení pro použití na baterii"
+
+msgid "Replace system power applet"
+msgstr "Nahradit systémový applet napájení"
+
+msgid ""
+"Screen brightness control is not available on this system. Brightness "
+"automation is disabled."
+msgstr "Ovládání jasu obrazovky není na tomto systému k dispozici. Automatizace jasu je zakázána."
+
+msgid "Screen Dimming Settings"
+msgstr "Nastavení ztlumení obrazovky"
+
+msgid "Screen dim timeout"
+msgstr "Časový limit ztlumení obrazovky"
+
+msgid "Show automation notifications"
+msgstr "Zobrazit notifikace automatizace"
+
+msgid "Show percentage"
+msgstr "Zobrazit procento"
+
+msgid "Show percentage and time remaining"
+msgstr "Zobrazit procento a zbývající čas"
+
+msgid "Show time remaining"
+msgstr "Zobrazit zbývající čas"
+
+msgid "The brightness level to use when dimming the screen"
+msgstr "Úroveň jasu pro použití při ztlumení obrazovky"
+
+msgid "Time before screen dims when idle"
+msgstr "Čas před ztlumením obrazovky při nečinnosti"
