@@ -40,9 +40,9 @@ do
     echo -n "" > $SENSORS_DISKS_DATA_TEMPORARY
     for disk in $DISKS; do {
         DEVICE="/dev/${disk}"
-        TEMP=$(sudo smartctl -A "$DEVICE" | grep 'Temperature:' | awk '{print $2}')
+        TEMP=$(sudo smartctl -n standby,0 -A "$DEVICE" | grep 'Temperature:' | awk '{print $2}')
         [ -n "$TEMP" ] || {
-            TEMP=$(sudo smartctl -A "$DEVICE" | grep 'Temperature_Cel' | awk '{print $10}')
+            TEMP=$(sudo smartctl -n standby,0 -A "$DEVICE" | grep 'Temperature_Cel' | awk '{print $10}')
             [ -n "$TEMP" ] || TEMP="n/a"
         }
         echo "${disk} $TEMP" >> ${SENSORS_DISKS_DATA_TEMPORARY}
