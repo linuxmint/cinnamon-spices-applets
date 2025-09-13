@@ -179,8 +179,44 @@ Gtk.init(null);
 let win = new Gtk.Window({ title: "Updates" });
 win.set_default_size(640, 640);
 
+// VBox for search + list
+let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 4 });
+
+// Overlay container for fake placeholder
+let overlay = new Gtk.Overlay();
+vbox.pack_start(overlay, false, false, 0);
+
+let searchEntry = new Gtk.Entry();
+searchEntry.set_no_show_all(true);
+overlay.add(searchEntry);
+
+// Fake placeholder label
+let placeholder = new Gtk.Label({ label: "Search updates…", xalign: 0, yalign: 0.5 });
+// Margin so the cursor would be at the start of label
+placeholder.set_margin_start(10);
+overlay.add_overlay(placeholder);
+
+// Hide label when typing
+function updatePlaceholderVisibility() {
+    placeholder.set_visible(searchEntry.text.length === 0);
+}
+
+searchEntry.connect("changed", updatePlaceholderVisibility);
+
+// Initialize visibility
+updatePlaceholderVisibility();
+// Initially hide overlay
+overlay.hide();
+
 let scroll = new Gtk.ScrolledWindow();
 let listbox = new Gtk.ListBox();
+scroll.add(listbox);
+vbox.pack_start(scroll, true, true, 0);
+
+win.add(vbox);
+
+// Keep all rows so we can filter later
+let allRows = [];
 
 // parse updates from ARGV[0]
 let [success, buffer] = GLib.file_get_contents(ARGV[0]);
@@ -194,6 +230,7 @@ if (success) {
         row.add(label);
         row._item = u;
         listbox.add(row);
+        allRows.push(row);
     }
 }
 
@@ -202,8 +239,50 @@ listbox.connect("row-activated", (box, row) => {
         showDetails(row._item);
 });
 
-scroll.add(listbox);
-win.add(scroll);
+function applyFilter() {
+    const query = searchEntry.text.toLowerCase();
+    for (const row of allRows) {
+        const label = row.get_child();
+        const text = label.get_text().toLowerCase();
+        row.set_visible(text.includes(query));
+    }
+}
+
+searchEntry.connect("changed", applyFilter);
+
+win.connect("key-press-event", (actor, event) => {
+    const [, key] = event.get_keyval();
+    const [, modifier] = event.get_state();
+
+    if (key === Gdk.KEY_f && (modifier & Gdk.ModifierType.CONTROL_MASK)) {
+        if (searchEntry.get_visible()) {
+            searchEntry.hide();
+            searchEntry.text = "";
+            applyFilter();
+        } else {
+            searchEntry.show();
+            searchEntry.grab_focus();
+        }
+        return true;
+    }
+
+    if (key === Gdk.KEY_Escape) {
+        if (searchEntry.get_visible()) {
+            searchEntry.hide();
+            searchEntry.text = "";
+            applyFilter();
+        } else {
+            if (win) {
+                win.destroy();
+                win = null;
+            }
+            Gtk.main_quit();
+        }
+        return true;
+    }
+
+    return false;
+});
 
 win.connect("delete-event", () => {
     if (win) {
