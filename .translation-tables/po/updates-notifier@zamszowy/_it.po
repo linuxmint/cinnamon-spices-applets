@@ -1,0 +1,46 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. info-window.js:118
+msgid "Loading update details"
+msgstr ""
+
+#. info-window.js:170
+msgid "No details available."
+msgstr ""
+
+#. info-window.js:172
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:181
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:191
+msgid "Updates"
+msgstr ""
+
+#. info-window.js:206
+msgid "Search updates"
+msgstr ""
+
+#. info-window.js:238
+msgid "{0} updates"
+msgstr ""
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr ""

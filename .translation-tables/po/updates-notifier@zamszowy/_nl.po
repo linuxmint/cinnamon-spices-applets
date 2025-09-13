@@ -1,0 +1,57 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-13 12:55+0200\n"
+"PO-Revision-Date: 2025-08-26 10:42+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. info-window.js:118
+msgid "Loading update details…"
+msgstr ""
+
+#. info-window.js:170
+msgid "No details available."
+msgstr ""
+
+#. info-window.js:172
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:181
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:191
+msgid "Updates"
+msgstr ""
+
+#. info-window.js:206
+msgid "Search updates…"
+msgstr ""
+
+#. info-window.js:238
+msgid "{0} updates"
+msgstr ""
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr ""
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr ""

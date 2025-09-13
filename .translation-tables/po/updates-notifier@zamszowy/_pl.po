@@ -1,0 +1,10 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+msgid ""
+msgstr ""
+
+#. info-window.js:238
+msgid "{0} updates"
+msgstr ""

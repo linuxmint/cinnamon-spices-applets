@@ -1,0 +1,123 @@
+# DIRECTORY MENU
+# This file is put in the public domain.
+# torchipeppo, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: directory-menu@torchipeppo 0.9.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-22 12:08-0400\n"
+"PO-Revision-Date: 2025-06-11 23:18+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. popup_menu.py:95
+msgid "Open Folder"
+msgstr "開啟資料夾"
+
+#. popup_menu.py:100
+msgid "Open in Terminal"
+msgstr "在終端機開啟"
+
+#. metadata.json->name
+msgid "Directory Menu"
+msgstr "目錄選單"
+
+#. metadata.json->description
+msgid ""
+"Quickly navigate through directories on your system using a dropdown menu."
+msgstr ""
+"透過下拉式選單快速瀏覽系統中的目錄。"
+
+#. settings-schema.json->starting-uri->description
+msgid "Base Directory"
+msgstr "基礎目錄"
+
+#. settings-schema.json->appearance-section->description
+msgid "Appearance"
+msgstr "外觀"
+
+#. settings-schema.json->icon-name->description
+msgid "Icon (hover here for info!)"
+msgstr "圖示（將滑鼠移到這裡查看資訊！）"
+
+#. settings-schema.json->icon-name->tooltip
+msgid "Must be an icon name (no path), and should be symbolic."
+msgstr "必須是圖示名稱（不可包含路徑），且應為象徵性圖示。"
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip Text"
+msgstr "工具提示文字"
+
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr "面板文字"
+
+#. settings-schema.json->visibility-section->description
+msgid "Visibility"
+msgstr "可視性"
+
+#. settings-schema.json->show-header->description
+msgid "Include \"Open Folder\" and \"Open in Terminal\""
+msgstr "包含「開啟資料夾」與「在終端機開啟」"
+
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "包含隱藏檔案"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters in the Submenus"
+msgstr "限制子選單中最大字元數"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "字元數上限"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"（大約）限制每個項目的字元數。\n"
+"若您覺得選單過寬時會很有用。"
+
+#. settings-schema.json->ordering-section->description
+msgid "Ordering"
+msgstr "排序方式"
+
+#. settings-schema.json->order-by->options
+msgid "Name"
+msgstr "名稱"
+
+#. settings-schema.json->order-by->options
+msgid "Date modified"
+msgstr "修改日期"
+
+#. settings-schema.json->order-by->description
+msgid "Order by..."
+msgstr "排序依據…"
+
+#. settings-schema.json->favorites-first->description
+msgid "Show favorite items first"
+msgstr "優先顯示我的最愛項目"
+
+#. settings-schema.json->pinned-first->description
+msgid "Show pinned items first"
+msgstr "優先顯示已釘選項目"
+
+#. settings-schema.json->keybindings-section->description
+msgid "Keybindings"
+msgstr "快速鍵設定"
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr "顯示選單"
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr "設定快速鍵以顯示選單。"

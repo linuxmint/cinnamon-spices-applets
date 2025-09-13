@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-08-03 20:54+0200\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:172
+msgid "Settings"
+msgstr "Beállítások"
+
+#. applet.js:184
+msgid "Editing Homestead configuration..."
+msgstr "Homestead beállítások szerkesztése..."
+
+#. applet.js:190
+msgid "Rancher: Bringing Homestead up, please wait..."
+msgstr "Rancher: Homestead megnyitása, kérem várjon..."
+
+#. applet.js:192
+msgid "Bringing Homestead up..."
+msgstr "Homestead megnyitása..."
+
+#. applet.js:195
+msgid "Rancher: Taking Homestead down, please wait..."
+msgstr "Rancher: Homestead bezárása, kérem várjon..."
+
+#. applet.js:197
+msgid "Taking Homestead down..."
+msgstr "Homestead bezárása..."
+
+#. applet.js:204
+msgid "Rancher: Provisioning Homestead, please wait..."
+msgstr "Rancher: Homestead szolgáltatása, kérem várjon..."
+
+#. applet.js:206
+msgid "Provisioning Homestead..."
+msgstr "Homestead szolgáltatása..."
+
+#. applet.js:210
+msgid "Rancher: Destroying Homestead, please wait..."
+msgstr "Rancher: Homestead lerombolása, kérem várjon..."
+
+#. applet.js:212
+msgid "Destroying Homestead..."
+msgstr "Homestead lerombolása..."
+
+#. applet.js:216
+msgid "Rancher: Suspending Homestead, please wait..."
+msgstr "Rancher: Homestead felfüggesztése, kérem várjon..."
+
+#. applet.js:218
+msgid "Suspending Homestead..."
+msgstr "Homestead felfüggesztése..."
+
+#. applet.js:223
+msgid "Homestead SSH Terminal opened"
+msgstr "Homestead SSH Terminál megnyílt"
+
+#. applet.js:227
+msgid "Rancher: Recompiling Kernel, please wait..."
+msgstr "Rancher: Kernel újrafordítása, kérem várjon..."
+
+#. applet.js:229
+msgid "Recompiling Kernel..."
+msgstr "Kernel újrafordítása..."
+
+#. applet.js:248 applet.js:327 applet.js:330 applet.js:343 applet.js:397
+msgid "Refresh this menu"
+msgstr "Frissítse ezt a menüt"
+
+#. applet.js:276
+msgid "Rancher: Homestead missing or not configured."
+msgstr "Rancher: Homestead hiányzik vagy nincs beállítva."
+
+#. applet.js:277
+msgid "Homestead missing or not configured."
+msgstr "Homestead hiányzik vagy nincs beállítva."
+
+#. applet.js:284 applet.js:285
+msgid "Vagrant is out of date, please update."
+msgstr "A Vagrant elavult, kérjük frissítse."
+
+#. applet.js:290 applet.js:291 applet.js:335
+msgid "Kernel Module not loaded. Needs recompilation."
+msgstr "A Kernel modul nincs betöltve. Szükséges az újrafordítás."
+
+#. applet.js:296
+msgid "Rancher: Homestead up."
+msgstr "Rancher: Homestead megnyílt."
+
+#. applet.js:297
+msgid "Homestead up."
+msgstr "Homestead megnyílt."
+
+#. applet.js:298
+msgid " (Running)"
+msgstr " (Fut)"
+
+#. applet.js:302
+msgid "Rancher: Homestead suspended."
+msgstr "Rancher: Homestead felfüggesztve."
+
+#. applet.js:303
+msgid "Homestead suspended."
+msgstr "Homestead felfüggesztve."
+
+#. applet.js:304
+msgid " (Suspended)"
+msgstr " (Felfüggesztve)"
+
+#. applet.js:307
+msgid "Rancher: Homestead down."
+msgstr "Rancher: Homestead leállítva."
+
+#. applet.js:308
+msgid "Homestead down."
+msgstr "Homestead leállítva."
+
+#. applet.js:309
+msgid " (Down)"
+msgstr " (Leállítva)"
+
+#. applet.js:312
+msgid "Rancher: Homestead not created."
+msgstr "Rancher: Homestead nincs létrehozva."
+
+#. applet.js:313
+msgid "Homestead not created"
+msgstr "Homestead nincs létrehozva"
+
+#. applet.js:314 applet.js:319
+msgid " (Not created/Destroyed)"
+msgstr " (nincs létrehozva/lerombolva)"
+
+#. applet.js:317
+msgid "Rancher: Homestead not installed."
+msgstr "Rancher: Homestead nincs telepítve."
+
+#. applet.js:318 applet.js:325
+msgid "Homestead not installed"
+msgstr "Homestead nincs telepítve"
+
+#. applet.js:326
+msgid "Click here for installation instructions"
+msgstr "Kattintson ide a telepítési utasításokért"
+
+#. applet.js:329
+msgid "Homestead missing or not configured"
+msgstr "Homestead hiányzik vagy nincs beállítva"
+
+#. applet.js:336
+msgid "Recompile Kernel Module."
+msgstr "Kernel modul újrafordítása."
+
+#. applet.js:341
+msgid "Vagrant is out of date for this version of Homestead, please update."
+msgstr "A Vagrant elavult a Homestead ezen verziójához, kérjük, frissítse."
+
+#. applet.js:342
+msgid "Click here for the Vagrant download page."
+msgstr "Kattints ide a Vagrant letöltési oldaláért."
+
+#. applet.js:347
+msgid "Status"
+msgstr "Állapot"
+
+#. applet.js:350
+msgid "Run provisioning"
+msgstr "Szolgáltatás futtatása"
+
+#. applet.js:351
+msgid "Suspend Homestead"
+msgstr "Homestead felfüggesztése"
+
+#. applet.js:352
+msgid "SSH Terminal..."
+msgstr "SSH Terminál..."
+
+#. applet.js:356
+msgid "Destroy Homestead"
+msgstr "Homestead lerombolása"
+
+#. applet.js:363
+msgid "Configuration"
+msgstr "Konfiguráció"
+
+#. applet.js:364
+msgid "IP: "
+msgstr "IP: "
+
+#. applet.js:365
+msgid "Memory: "
+msgstr "Memória: "
+
+#. applet.js:366
+msgid "CPU: "
+msgstr "CPU: "
+
+#. applet.js:367
+msgid "Provider: "
+msgstr "Szolgáltató: "
+
+#. applet.js:369
+msgid "Edit Homestead configuration..."
+msgstr "Homestead beállítások szerkesztése..."
+
+#. applet.js:372
+msgid "Hosted Sites"
+msgstr "Tárolt webhelyek"
+
+#. applet.js:382
+msgid "Edit hosts file..."
+msgstr "Tárolási fájl szerkesztése..."
+
+#. applet.js:385
+msgid "Hosted Databases"
+msgstr "Tárolt adatbázisok"
+
+#. terminal_reader.js:58
+msgid "Command not found."
+msgstr "Parancs nem található."
+
+#. metadata.json->description
+msgid "An applet to manage Homestead."
+msgstr "Egy kisalkalmazás Laravel Homestead kezelésre."
+
+#. metadata.json->name
+msgid "Homestead manager"
+msgstr "Homestead kezelő"
+
+#. settings-schema.json->homesteadProjectFolder->description
+msgid "Homestead project folder"
+msgstr "Homestead projekt mappa"
+
+#. settings-schema.json->homesteadConfigFolder->description
+msgid "Homestead config folder"
+msgstr "Homestead konnfigurációs mappa"
+
+#. settings-schema.json->vagrantCmd->description
+msgid "Vagrant command"
+msgstr "Vagrant parancs"
+
+#. settings-schema.json->editor->description
+msgid "Default text editor"
+msgstr "Alapértelmezett szövegszerkesztő"

@@ -1,0 +1,14 @@
+# MICROPHONE LEVEL MONITOR
+# This file is put in the public domain.
+# zamszowy, 2024
+#
+msgid ""
+msgstr ""
+
+#. applet.js:86
+msgid "Click so switch to HFP profile"
+msgstr ""
+
+#. applet.js:88
+msgid "Click so switch to A2DP profile"
+msgstr ""
