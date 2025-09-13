@@ -277,6 +277,9 @@ class MyApplet extends Applet.TextIconApplet {
 
     onlyMaximize() {
         let w = global.display.focus_window;
+        if (w == null) {
+            return
+        }
         let app = tracker.get_window_app(w);
         let buttons = this.buttons_style.split(":");
         if (app && w.get_maximized()) {
