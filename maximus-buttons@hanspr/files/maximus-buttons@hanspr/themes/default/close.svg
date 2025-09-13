@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 0.72 0.72"
+   fill="none"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="close.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="32.041667"
+     inkscape:cx="11.984395"
+     inkscape:cy="12.031209"
+     inkscape:window-width="1920"
+     inkscape:window-height="1014"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     fill-rule="evenodd"
+     clip-rule="evenodd"
+     d="M 0.615,0.35999999 C 0.615,0.50083139 0.50083139,0.615 0.35999999,0.615 0.21916731,0.615 0.105,0.50083139 0.105,0.35999999 0.105,0.21916731 0.21916731,0.105 0.35999999,0.105 0.50083139,0.105 0.615,0.21916731 0.615,0.35999999 Z M 0.28272552,0.28272611 c 0.007472,-0.007472 0.0195776,-0.007472 0.027047,0 l 0.0502277,0.0502261 0.0502244,-0.0502256 c 0.007472,-0.007472 0.0195792,-0.007472 0.0270478,0 0.007472,0.007472 0.007472,0.0195784 0,0.0270462 l -0.0502269,0.0502269 0.0502277,0.0502244 c 0.007472,0.007472 0.007472,0.0195792 0,0.0270478 -0.007472,0.007472 -0.0195792,0.007472 -0.0270478,0 l -0.0502253,-0.0502241 -0.0502269,0.0502248 c -0.007472,0.007472 -0.0195784,0.007472 -0.027047,0 -0.007472,-0.007472 -0.007472,-0.0195792 0,-0.0270454 l 0.0502269,-0.0502269 -0.0502269,-0.0502269 c -0.007472,-0.007472 -0.007472,-0.0195784 -7e-7,-0.0270473 z"
+     fill="#1c274c"
+     id="path2"
+     style="fill:#d40000;stroke-width:0.0255" />
+</svg>
