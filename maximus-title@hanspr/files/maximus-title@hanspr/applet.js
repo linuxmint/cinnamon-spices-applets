@@ -49,10 +49,11 @@ class MyApplet extends Applet.TextIconApplet {
 
     _onTitleChange(title) {
         if (title == undefined) {
-            if (global.display.focus_window() == null) {
+            try {
+                title = global.display.focus_window.get_title()
+            } catch (e) {
                 return
             }
-            title = global.display.focus_window.get_title()
         }
         if (this.lastTitle == title) {
             return
