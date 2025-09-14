@@ -16,7 +16,7 @@ const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext;
 const Slider = imports.ui.slider;
 
-const UUID = 'user@celiopy';
+const UUID = 'quick-settings@celiopy';
 const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path;
 const DIALOG_ICON_SIZE = 32;
 
