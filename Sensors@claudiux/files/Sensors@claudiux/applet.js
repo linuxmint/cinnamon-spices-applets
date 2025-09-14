@@ -222,7 +222,7 @@ class SensorsApplet extends Applet.Applet {
     //this.depCount = 0;
 
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
-    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -247,6 +247,9 @@ class SensorsApplet extends Applet.Applet {
     // get settings defined in settings-schema.json:
     this.get_user_settings();
     this._variables();
+
+    // Run DisksDaemon:
+    this._on_temp_disks_modified();
 
     // Applet default UI:
     this.set_default_UI();
