@@ -450,19 +450,24 @@ class SensorsApplet extends Applet.Applet {
 
   is_disktemp_user_readable() {
     var ret = false;
-    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    if (GLib.find_program_in_path("/usr/bin/dnf")) {
+      // Distro is Fedora!
+      sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
+    }
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-    try {
-      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
-        ret = true;
+      try {
+        let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:")) {
+          ret = true;
+        }
         GLib.free(contents);
       } catch (e) {
         ret = false
       }
     }
-    log("is_disktemp_user_readable: "+ret);
+    //~ log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
