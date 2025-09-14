@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: user@celiopy 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-09-10 23:22-0300\n"
+"PO-Revision-Date: 2025-09-10 23:50-0300\n"
+"Last-Translator: Você <email@exemplo.com>\n"
+"Language-Team: pt_BR <>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:187
+msgid "Settings"
+msgstr "Configurações"
+
+#: applet.js:192
+msgid "Lock Screen"
+msgstr "Bloquear tela"
+
+#: applet.js:203
+msgid "Log Out"
+msgstr "Encerrar sessão"
+
+#: applet.js:206
+msgid "Shut Down"
+msgstr "Desligar"
+
+#: applet.js:214
+msgid "Dark mode"
+msgstr "Modo escuro"
+
+#: applet.js:224
+msgid "Night Light"
+msgstr "Luz noturna"
+
+#: applet.js:233
+msgid "Prevent Sleep"
+msgstr "Impedir suspensão"
+
+#: applet.js:250
+msgid "Power Mode"
+msgstr "Modo de Energia"
+
+msgid "Power Saver"
+msgstr "Economia de Energia"
+
+msgid "Balanced"
+msgstr "Equilibrado"
+
+msgid "Performance"
+msgstr "Desempenho"
+
+# prefs
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Enable dark mode"
+msgstr "Ativar modo escuro"
+
+msgid "Select a light theme"
+msgstr "Selecione um tema claro"
+
+msgid "Select a dark theme"
+msgstr "Selecione um tema escuro"
+
+msgid "Show menu"
+msgstr "Mostrar o menu"
+
+msgid "Set keybinding(s) to show menu."
+msgstr "Defina atalho(s) para mostrar o menu."
