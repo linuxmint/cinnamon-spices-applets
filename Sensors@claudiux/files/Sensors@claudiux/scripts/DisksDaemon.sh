@@ -3,7 +3,7 @@
 DELAY=1
 [ -n $1 ] && DELAY=$(($1))
 
-PARAM2=$2
+DISKLIST=$2
 
 SENSORS_DIR="$XDG_RUNTIME_DIR/Sensors"
 WITNESS="$SENSORS_DIR/DisksWitness"
@@ -11,8 +11,8 @@ WITNESS="$SENSORS_DIR/DisksWitness"
     mkdir -p $SENSORS_DIR
 }
 
-[ "$PARAM2" != "all" ] && {
-    DISKS=$(echo -n $2 | tr "," " ")
+[ "$DISKLIST" != "all" ] && {
+    DISKS=$(echo -n $DISKLIST | tr "," " ")
 } || {
     DISKS=$(lsblk | grep disk | awk '{print $1}' | tr '\n' ' ' | sed -e "s/\ $//")
 }
