@@ -7,7 +7,7 @@ readonly DIR
 
 case "$1" in
 check)
-    if out=$(pkcon get-updates --plain 2>&1); then
+    if out=$(LANG=en_US.UTF-8 pkcon get-updates --plain 2>&1); then
         awk '/^Results:/{flag=1; next} flag && NF && $1 != "Blocked"' <<< "$out" >"$DIR"/updates
         wc -l <"$DIR"/updates
     else

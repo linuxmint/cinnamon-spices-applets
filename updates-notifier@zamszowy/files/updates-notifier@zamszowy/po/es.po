@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-31 16:14+0300\n"
+"POT-Creation-Date: 2025-09-13 12:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -44,14 +44,46 @@ msgstr "Ver %s actualizaciones"
 msgid "No updates to view"
 msgstr "No hay actualizaciones que ver"
 
-#. applet.js:152
+#. applet.js:157
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Actualizar %s paquetes"
 
-#. applet.js:152
+#. applet.js:157
 msgid "No packages to upgrade"
 msgstr "No hay paquetes que actualizar"
+
+#. info-window.js:118
+msgid "Loading update details…"
+msgstr ""
+
+#. info-window.js:170
+msgid "No details available."
+msgstr ""
+
+#. info-window.js:172
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:181
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:191
+msgid "Updates"
+msgstr ""
+
+#. info-window.js:206
+msgid "Search updates…"
+msgstr ""
+
+#. info-window.js:238
+msgid "{0} updates"
+msgstr ""
 
 #. metadata.json->name
 msgid "Updates notifier"
@@ -80,8 +112,8 @@ msgstr "Mostrar un icono de applet diferente para cada paquete actualizable"
 #. settings-schema.json->level-1->description
 msgid "Show low level icon when updates count is between 0 and this value "
 msgstr ""
-"Mostrar icono de nivel bajo cuando el recuento de actualizaciones esté "
-"entre 0 y este valor "
+"Mostrar icono de nivel bajo cuando el recuento de actualizaciones esté entre "
+"0 y este valor "
 
 #. settings-schema.json->level-2->description
 msgid ""
@@ -89,8 +121,8 @@ msgid ""
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
 "Mostrar icono de nivel medio cuando el recuento de actualizaciones está "
-"entre el valor de nivel bajo y este valor. Mostrar icono de nivel alto si "
-"es superior a este valor."
+"entre el valor de nivel bajo y este valor. Mostrar icono de nivel alto si es "
+"superior a este valor."
 
 #. settings-schema.json->section2->description
 msgid "Commands to execute in popup menu"

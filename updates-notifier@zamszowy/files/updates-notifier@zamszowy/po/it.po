@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-31 16:14+0300\n"
+"POT-Creation-Date: 2025-09-13 12:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -44,14 +44,46 @@ msgstr "Visualizza %s aggiornamenti"
 msgid "No updates to view"
 msgstr "Nessun aggiornamento da visualizzare"
 
-#. applet.js:152
+#. applet.js:157
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Aggiorna %s pacchetti"
 
-#. applet.js:152
+#. applet.js:157
 msgid "No packages to upgrade"
 msgstr "Nessun pacchetto da aggiornare"
+
+#. info-window.js:118
+msgid "Loading update details…"
+msgstr ""
+
+#. info-window.js:170
+msgid "No details available."
+msgstr ""
+
+#. info-window.js:172
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:181
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+
+#. info-window.js:191
+msgid "Updates"
+msgstr ""
+
+#. info-window.js:206
+msgid "Search updates…"
+msgstr ""
+
+#. info-window.js:238
+msgid "{0} updates"
+msgstr ""
 
 #. metadata.json->name
 msgid "Updates notifier"
