@@ -2,7 +2,7 @@
     "max-instances": "1",
     "description": "Maximus buttons and title on panel",
     "uuid": "maximus-buttons@hanspr",
-    "name": "Window Buttons for Maximus",
+    "name": "Maximus Buttons",
     "website": "https://github.com/linuxmint/cinnamon-spices-applets",
     "version": "0.0.1",
     "author": "hanspr",
