@@ -8,7 +8,7 @@ This applet is desinged to work in pair with:
 
 # Features
 
-* It will display the current active window
+* It will display the name of the current active window on panel
 
 # How to configure
 * Install the applet
@@ -24,4 +24,4 @@ This applet is desinged to work in pair with:
 
 # Limitations
 * No support for multiple monitors
-* It will only work on top, bottom panels that have enogh with.
+* It will only work on top, bottom panels that have enough with.
