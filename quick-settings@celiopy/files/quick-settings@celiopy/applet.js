@@ -1,7 +1,6 @@
 const Applet = imports.ui.applet;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
-const Util = imports.misc.util;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
@@ -34,7 +33,8 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-        
+
+        this._signals = [];
         this.sessionCookie = null;
 
         this.set_applet_icon_symbolic_name('user-menu-symbolic');
@@ -49,6 +49,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
         // Inicializa schemas, bindings, UI e toggles
         this._initSchemas();
         this._initUI(orientation);
+        this._initPowerProfiles();
 
         // Métodos iniciais
         this._onUserChanged();
@@ -73,6 +74,29 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
             portal: new Gio.Settings({ schema_id: "org.x.apps.portal" }),
             screensaver: new Gio.Settings({ schema_id: "org.cinnamon.desktop.screensaver" })
         };
+    }
+
+    _initPowerProfiles() {
+        this._powerProxy = new Gio.DBusProxy.new_for_bus_sync(
+            Gio.BusType.SYSTEM,
+            Gio.DBusProxyFlags.NONE,
+            null,
+            "net.hadess.PowerProfiles",
+            "/net/hadess/PowerProfiles",
+            "net.hadess.PowerProfiles",
+            null
+        );
+
+        // Atualiza inicialmente
+        this._updatePowerModeIcon();
+
+        // Escuta mudanças
+        this._signals.push({
+            obj: this._powerProxy,
+            id: this._powerProxy.connect("g-properties-changed", () => {
+                this._updatePowerModeIcon();
+            })
+        });
     }
 
     // === Inicializa UI do menu e painel ===
@@ -131,8 +155,15 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         // User info
         this._user = AccountsService.UserManager.get_default().get_user(GLib.get_user_name());
-        this._user.connect('notify::is-loaded', () => this._onUserChanged());
-        this._user.connect('changed', () => this._onUserChanged());
+        this._signals.push({
+            obj: this._user,
+            id: this._user.connect('notify::is-loaded', this._onUserChanged.bind(this))
+        });
+
+        this._signals.push({
+            obj: this._user,
+            id: this._user.connect('changed', this._onUserChanged.bind(this))
+        });
 
         let userBox = new St.BoxLayout({ style_class: 'user-box', vertical: false, y_expand: false });
         // Avatar dentro de botão
@@ -152,7 +183,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         // Clique no avatar abre "Detalhes da conta"
         this._userButton.connect('clicked', () => {
-            Util.spawnCommandLine("cinnamon-settings user");
+            GLib.spawn_command_line_async("cinnamon-settings user");
         });
 
         this._labelBox = new St.BoxLayout({ style_class: 'label-box', vertical: true, y_align: Clutter.ActorAlign.CENTER });
@@ -191,7 +222,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         // System Settings
         addBtn("applications-system", _("Settings"), () => {
-            Util.spawnCommandLine("cinnamon-settings");
+            GLib.spawn_command_line_async("cinnamon-settings");
         });
 
         // Lock
@@ -199,7 +230,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
             let screensaver_file = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
             if (screensaver_file.query_exists(null)) {
                 let ask = this._schemas.screensaver.get_boolean("ask-for-away-message");
-                Util.spawnCommandLine(ask ? "cinnamon-screensaver-lock-dialog" : "cinnamon-screensaver-command --lock");
+                GLib.spawn_command_line_async(ask ? "cinnamon-screensaver-lock-dialog" : "cinnamon-screensaver-command --lock");
             } else {
                 this._screenSaverProxy.LockRemote();
             }
@@ -278,7 +309,9 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         if (settingsObj && settingsKey) {
             const updateState = () => {
-                let value = (settingsObj instanceof Gio.Settings) ? settingsObj.get_boolean(settingsKey) : settingsObj.getValue(settingsKey);
+                let value = (settingsObj instanceof Gio.Settings) 
+                    ? settingsObj.get_boolean(settingsKey) 
+                    : settingsObj.getValue(settingsKey);
                 button.checked = value;
 
                 if (onChange) onChange(value);
@@ -286,7 +319,10 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
             updateState();
 
-            settingsObj.connect(`changed::${settingsKey}`, updateState);
+            this._signals.push({
+                obj: settingsObj,
+                id: settingsObj.connect(`changed::${settingsKey}`, updateState)
+            });
         }
 
         // MOVE THE CLICKED HANDLER OUTSIDE THE if BLOCK
@@ -311,7 +347,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
         if (settingsUri) {
             button.connect("button-press-event", (actor, event) => {
                 if (event.get_button() === 2) { // Middle-click
-                    Util.spawnCommandLine(`cinnamon-settings ${settingsUri}`);
+                    GLib.spawn_command_line_async(`cinnamon-settings ${settingsUri}`);
                     this.menu.toggle();
                     return Clutter.EVENT_STOP;
                 }
@@ -408,13 +444,16 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
         };
 
         // Escuta mudanças externas do text-scaling-factor
-        this._schemas.interface.connect("changed::text-scaling-factor", () => {
-            let f = this._schemas.interface.get_double("text-scaling-factor");
-            let i = FACTORS.indexOf(f);
-            if (i >= 0) {
-                idx = i;
-                updateFakeSlider(idx);
-            }
+        this._signals.push({
+            obj: this._schemas.interface,
+            id: this._schemas.interface.connect("changed::text-scaling-factor", () => {
+                let f = this._schemas.interface.get_double("text-scaling-factor");
+                let i = FACTORS.indexOf(f);
+                if (i >= 0) {
+                    idx = i;
+                    updateFakeSlider(idx);
+                }
+            })
         });
 
         // Botões de menos/mais
@@ -559,7 +598,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey("user-applet-open-" + this.instance_id, this.keyOpen, () => this._openMenu());
     }
 
-    _openMenu() { this.menu.toggle(); this._updatePowerModeIcon(); }
+    _openMenu() { this.menu.toggle(); }
 
     // === Atualiza labels e avatar ===
     _updateLabels() {
@@ -600,7 +639,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
             let mode = this._powerModes[current] || this._powerModes["balanced"];
 
             // Muda o modo de energia
-            Util.spawnCommandLine(`powerprofilesctl set ${mode.next}`);
+            GLib.spawn_command_line_async(`powerprofilesctl set ${mode.next}`);
             this._updatePowerModeIcon();
         });
     }
@@ -619,15 +658,27 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
     // Obtém modo atual do powerprofilesctl
     _getCurrentPowerMode(callback) {
         try {
-            let [res, out, err, status] = GLib.spawn_command_line_sync("powerprofilesctl get");
-            if (res && out) {
-                let mode = out.toString().trim();
-                callback(mode);
-            } else {
-                callback("balanced"); // fallback
-            }
+            let proc = new Gio.Subprocess({
+                argv: ["powerprofilesctl", "get"],
+                flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+            });
+
+            proc.init(null);
+            proc.communicate_utf8_async(null, null, (proc, res) => {
+                try {
+                    let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                    if (stdout && stdout.trim().length > 0) {
+                        callback(stdout.trim());
+                    } else {
+                        callback("balanced"); // fallback
+                    }
+                } catch (e) {
+                    global.logError("Erro ao processar power mode: " + e);
+                    callback("balanced");
+                }
+            });
         } catch(e) {
-            global.logError("Erro ao obter power mode: " + e);
+            global.logError("Erro ao iniciar subprocesso: " + e);
             callback("balanced");
         }
     }
@@ -635,7 +686,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
     on_applet_clicked() { this._openMenu(); }
 
     on_applet_removed_from_panel() {
-        // Clean up inhibit cookie if active - FIXED variable name
+        // Clean up inhibit cookie
         if (this.sessionCookie !== null && this.sessionProxy) {
             try {
                 this.sessionProxy.UninhibitRemote(this.sessionCookie);
@@ -644,7 +695,23 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
                 global.logError("Erro ao limpar inhibit cookie: " + e);
             }
         }
+
+        // Desconectar todos os sinais registrados
+        this._signals.forEach(sig => {
+            try { sig.obj.disconnect(sig.id); } catch(e) {}
+        });
+        this._signals = null;
+
+        // Remover keybinding
+        Main.keybindingManager.removeHotKey("user-applet-open-" + this.instance_id);
+
+        // Finalizar settings
         this.settings.finalize();
+
+        // Liberar proxies
+        this._powerProxy = null;
+        this.sessionProxy = null;
+        this._screenSaverProxy = null;
     }
 }
 
