@@ -1,3 +1,6 @@
+### v3.7.1~20250915
+  * Menu bugfix.
+
 ### v3.7.0~20250910
   * Added Blacklist management.
 
