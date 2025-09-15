@@ -1,3 +1,6 @@
+### v5.9.0~20250913
+  * Improves the reading of disk temperatures.
+
 ### v5.8.2~20250911
   * Avoids any unnecessary work.
   * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)

@@ -17,7 +17,7 @@ SENSORS_DATA_TEMP="$SENSORS_DIR/_sensors.txt"
 SENSORSDAEMON_PIDS="$SENSORS_DIR/PIDS"
 
 # Removes all running SensorsDaemon:
-[ -f $SENSORSDAEMON_PIDS ] && {
+[ -f ${SENSORSDAEMON_PIDS} ] && {
     for p in $(cat ${SENSORSDAEMON_PIDS}); do {
         kill $p
     }; done
@@ -29,12 +29,12 @@ is_running=true
 
 while $is_running
 do
-    #~ sensors -j | grep -v '^ERROR' > $SENSORS_DATA_TEMP
-    sensors -j > $SENSORS_DATA_TEMP
+    #~ sensors -j | grep -v '^ERROR' > ${SENSORS_DATA_TEMP}
+    sensors -j > ${SENSORS_DATA_TEMP}
     #~ sleep 1
     sleep $DELAY
-    mv $SENSORS_DATA_TEMP $SENSORS_DATA
+    mv ${SENSORS_DATA_TEMP} ${SENSORS_DATA}
     [ -f $WITNESS ] || is_running=false
 done
 
-rm -f $SENSORS_DATA_TEMP $SENSORS_DATA
+rm -f ${SENSORS_DATA_TEMP} ${SENSORS_DATA} ${SENSORSDAEMON_PIDS}

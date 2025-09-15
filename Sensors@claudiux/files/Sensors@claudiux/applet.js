@@ -222,7 +222,7 @@ class SensorsApplet extends Applet.Applet {
     //this.depCount = 0;
 
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh 1 &");
-    spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 &");
+    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh 1 all &");
 
     // Applet tooltip:
     this.set_applet_tooltip(_('Sensors Monitor'));
@@ -247,6 +247,9 @@ class SensorsApplet extends Applet.Applet {
     // get settings defined in settings-schema.json:
     this.get_user_settings();
     this._variables();
+
+    // Run DisksDaemon:
+    this._on_temp_disks_modified();
 
     // Applet default UI:
     this.set_default_UI();
@@ -427,14 +430,15 @@ class SensorsApplet extends Applet.Applet {
     let disks = this.s.getValue('temp_disks');
     if (!disks) return;
 
+    var disksToCheck = [];
     for (let disk of disks) {
       if (disk["show_in_panel"] === true || disk["show_in_tooltip"] === true) {
         checkDisks = true;
-        break
+        disksToCheck.push(disk["disk"])
       }
     }
     if (checkDisks) {
-      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
+      spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " " + disksToCheck.join(",") + " &");
     } else {
       let diskwitness = Gio.file_new_for_path(SENSORS_DISKSWITNESS);
       if (diskwitness.query_exists(null))
@@ -446,19 +450,24 @@ class SensorsApplet extends Applet.Applet {
 
   is_disktemp_user_readable() {
     var ret = false;
-    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    var sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    if (GLib.find_program_in_path("/usr/bin/dnf") || GLib.find_program_in_path("/usr/bin/pacman")) {
+      // Distro is Fedora or Arch based.
+      sudoers_smartctl_path = "/etc/sudoersSensors.d/smartctl";
+    }
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-    try {
-      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
-        ret = true;
+      try {
+        let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:")) {
+          ret = true;
+        }
         GLib.free(contents);
       } catch (e) {
         ret = false
       }
     }
-    log("is_disktemp_user_readable: "+ret);
+    //~ log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
@@ -1650,7 +1659,6 @@ class SensorsApplet extends Applet.Applet {
     }
     this.detect_markup();
     spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval + " &");
-    //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
     this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
     this.isLooping = true;
     this.loopId = timeout_add_seconds(this.interval, () => { this.reap_sensors(); });
@@ -1718,7 +1726,6 @@ class SensorsApplet extends Applet.Applet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       spawnCommandLineAsync(SCRIPTS_DIR + "/SensorsDaemon.sh " + this.interval +" &");
-      //~ spawnCommandLineAsync(SCRIPTS_DIR + "/DisksDaemon.sh " + this.interval + " &");
       this._on_temp_disks_modified(); // Run/Stop DisksDaemon.
       this.isLooping = true;
       this.reap_sensors();
