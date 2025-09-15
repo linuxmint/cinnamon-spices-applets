@@ -55,35 +55,39 @@ msgstr "No hay paquetes que actualizar"
 
 #. info-window.js:118
 msgid "Loading update details…"
-msgstr ""
+msgstr "Cargando detalles de la actualización..."
 
 #. info-window.js:170
 msgid "No details available."
-msgstr ""
+msgstr "No hay detalles disponibles."
 
 #. info-window.js:172
 msgid ""
 "Error:\n"
 "{0}"
 msgstr ""
+"Error:\n"
+"{0}"
 
 #. info-window.js:181
 msgid ""
 "Failed to run command:\n"
 "{0}"
 msgstr ""
+"No se pudo ejecutar el comando:\n"
+"{0}"
 
 #. info-window.js:191
 msgid "Updates"
-msgstr ""
+msgstr "Actualizaciones"
 
 #. info-window.js:206
 msgid "Search updates…"
-msgstr ""
+msgstr "Buscar actualizaciones..."
 
 #. info-window.js:238
 msgid "{0} updates"
-msgstr ""
+msgstr "{0} actualizaciones"
 
 #. metadata.json->name
 msgid "Updates notifier"
