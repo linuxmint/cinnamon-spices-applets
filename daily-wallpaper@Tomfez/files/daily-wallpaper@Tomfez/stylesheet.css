@@ -1,0 +1,23 @@
+.text-popupmenu {
+  color: rgba(128, 128, 128, 0.90);
+}
+
+.copyright-text {
+  font-size: 125%;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.button {
+  /* height: 28px;
+  width: 58px; */
+  border-radius: 5px;
+  border: 1px solid #222222;
+  background-color: #44444432;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #777777;
+  /* font-weight: bold; */
+}
