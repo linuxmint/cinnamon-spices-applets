@@ -808,6 +808,7 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     if(!topMenu.actor.get_layout_manager())
       return false;
     let [topMinHeight, topNaturalHeight] = topMenu.actor.get_preferred_height(-1);
+    if (topNaturalHeight == null) return false;
     let topThemeNode = null;
 
     try {
@@ -815,7 +816,7 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
     } catch(e) {
       topThemeNode = null;
     }
-    if (!topThemeNode) return false;
+    if (topThemeNode == null) return false;
 
     let topMaxHeight = topThemeNode.get_max_height();
     return topMaxHeight >= 0 && topNaturalHeight >= topMaxHeight;
