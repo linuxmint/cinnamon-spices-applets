@@ -1,0 +1,8 @@
+{
+  "uuid": "show-my-ip@triyadi.my.id",
+  "name": "Show My IP",
+  "description": "Display local IP addresses of network interfaces in the panel.",
+  "version": "1.0",
+  "author": "triyadi",
+  "max-instances": 1
+}
