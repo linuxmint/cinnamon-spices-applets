@@ -72,7 +72,6 @@
     padding: 12px;
 }
 
-.settings-toggle-button:checked,
 .settings-toggle-button.active {
     background-color: #1c71d8;
 }
@@ -84,8 +83,6 @@
 .settings-toggle-label {
     font-size: 9pt;
     max-width: 80px;
-    text-align: center;
-    margin: 0 auto;
 }
 
 /* Scaling slider */

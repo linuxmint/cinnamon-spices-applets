@@ -51,22 +51,3 @@ msgstr "Equilibrado"
 
 msgid "Performance"
 msgstr "Desempenho"
-
-# prefs
-msgid "Theme"
-msgstr "Tema"
-
-msgid "Enable dark mode"
-msgstr "Ativar modo escuro"
-
-msgid "Select a light theme"
-msgstr "Selecione um tema claro"
-
-msgid "Select a dark theme"
-msgstr "Selecione um tema escuro"
-
-msgid "Show menu"
-msgstr "Mostrar o menu"
-
-msgid "Set keybinding(s) to show menu."
-msgstr "Defina atalho(s) para mostrar o menu."

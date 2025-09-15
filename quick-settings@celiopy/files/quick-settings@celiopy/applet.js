@@ -1,19 +1,14 @@
 const Applet = imports.ui.applet;
-const St = imports.gi.St;
+const { St, GLib, Gio, AccountsService, Clutter } = imports.gi;
 const PopupMenu = imports.ui.popupMenu;
-const Lang = imports.lang;
-const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
-const AccountsService = imports.gi.AccountsService;
-const GnomeSession = imports.misc.gnomeSession;
-const ScreenSaver = imports.misc.screenSaver;
 const Settings = imports.ui.settings;
 const UserWidget = imports.ui.userWidget;
 const Main = imports.ui.main;
 const Tooltips = imports.ui.tooltips;
-const Clutter = imports.gi.Clutter;
+const GnomeSession = imports.misc.gnomeSession;
+const ScreenSaver = imports.misc.screenSaver;
 const Gettext = imports.gettext;
-const Slider = imports.ui.slider;
+const Signals = imports.signals; // Add this line
 
 const UUID = 'quick-settings@celiopy';
 const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path;
@@ -23,10 +18,301 @@ const INHIBIT_IDLE_FLAG = 8;
 const INHIBIT_SLEEP_FLAG = 4;
 
 // l10n/translation support
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, APPLET_DIR + "/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
+}
+
+class ThemeManager {
+    constructor(schemas, settings) {
+        this._schemas = schemas;
+        this._settings = settings;
+
+        this._themeDirs = [
+            '/usr/share/themes', 
+            GLib.get_home_dir() + '/.themes',
+            GLib.get_home_dir() + '/.local/share/themes',
+        ];
+        this._monitors = [];
+        
+        // Initialize themes
+        this._lightTheme = settings.getValue("light-theme");
+        this._darkTheme = settings.getValue("dark-theme");
+
+        // Use portal color-scheme as the single source of truth
+        this._darkMode = this._getDarkModeFromPortal();
+        
+        // Bind to settings changes
+        this._bindings = [];
+        this._bindSettings();
+
+        // Monitor theme directory changes
+        this._themeDirs.forEach(dir => this._monitorDir(dir));
+
+        this._populateThemeOptions();
+    }
+
+    _getDarkModeFromPortal() {
+        const colorScheme = this._schemas.portal.get_string("color-scheme");
+        return colorScheme === "prefer-dark";
+    }
+
+    _bindSettings() {
+        // Listen to portal color-scheme changes (our single source of truth)
+        this._bindings.push({
+            obj: this._schemas.portal,
+            id: this._schemas.portal.connect("changed::color-scheme", () => {
+                this._darkMode = this._getDarkModeFromPortal();
+                this._applyCurrentTheme();
+                
+                // Emit a signal so the applet can update its UI
+                this.emit('dark-mode-changed', this._darkMode);
+            })
+        });
+
+        // Bind light-theme setting
+        this._bindings.push({
+            obj: this._settings,
+            id: this._settings.connect("changed::light-theme", () => {
+                this._lightTheme = this._settings.getValue("light-theme");
+                this._applyCurrentTheme();
+            })
+        });
+
+        // Bind dark-theme setting
+        this._bindings.push({
+            obj: this._settings,
+            id: this._settings.connect("changed::dark-theme", () => {
+                this._darkTheme = this._settings.getValue("dark-theme");
+                this._applyCurrentTheme();
+            })
+        });
+    }
+
+    _applyCurrentTheme() {
+        let theme = this._darkMode ? this._darkTheme : this._lightTheme;
+
+        // Apply the theme to all schemas
+        this._schemas.gtk.set_string("gtk-theme", theme);
+        this._schemas.cinnamon.set_string("gtk-theme", theme);
+    }
+
+    _monitorDir(dirPath) {
+        try {
+            let file = Gio.file_new_for_path(dirPath);
+            let monitor = file.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+            monitor.connect('changed', () => {
+                this._populateThemeOptions();
+            });
+            this._monitors.push(monitor);
+        } catch(e) {
+            global.logError(`Failed to monitor directory ${dirPath}: ${e}`);
+        }
+    }
+
+    isDarkMode() {
+        return this._darkMode;
+    }
+
+    setDarkMode(dark) {
+        // Update the portal setting (our single source of truth)
+        let colorScheme = dark ? "prefer-dark" : "default";
+        this._schemas.portal.set_string("color-scheme", colorScheme);
+        
+        // Note: The actual _darkMode update will happen in the 
+        // changed::color-scheme signal handler
+    }
+
+    _populateThemeOptions() {
+        let themes = {};
+        
+        const readThemesFromDir = (dir) => {
+            try {
+                let file = Gio.file_new_for_path(dir);
+                let enumerator = file.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+
+                let info;
+                while ((info = enumerator.next_file(null))) {
+                    let themeName = info.get_name();
+                    if (info.get_file_type() === Gio.FileType.DIRECTORY) {
+                        themes[themeName] = themeName;
+                    }
+                }
+            } catch (e) {
+                global.log(`Error reading themes from ${dir}: ${e.message}`);
+            }
+        };
+
+        this._themeDirs.forEach(dir => readThemesFromDir(dir));
+
+        this._settings.setOptions("light-theme", themes);
+        this._settings.setOptions("dark-theme", themes);
+    }
+
+    // Clean up method to disconnect all signals
+    destroy() {
+        // Disconnect all setting bindings
+        this._bindings.forEach(binding => {
+            try {
+                binding.obj.disconnect(binding.id);
+            } catch (e) {
+                global.logError(`Error disconnecting binding: ${e}`);
+            }
+        });
+        this._bindings = [];
+
+        // Stop all directory monitors
+        this._monitors.forEach(monitor => {
+            try {
+                monitor.cancel();
+            } catch (e) {
+                global.logError(`Error canceling monitor: ${e}`);
+            }
+        });
+        this._monitors = [];
+    }
+}
+
+// Add signal support to ThemeManager
+Signals.addSignalMethods(ThemeManager.prototype);
+
+const BASE_BUTTON_DEFAULT_PARAMS = Object.freeze({
+    name: '',
+    description: '',
+    styleClass: 'settings-toggle-box',
+    reactive: true,
+    activatable: true,
+    withMenu: false,
+});
+
+class BaseButton {
+    constructor(applet, params) {
+        this.applet = applet;
+        params = Object.assign({}, BASE_BUTTON_DEFAULT_PARAMS, params);
+
+        this._active = false;
+
+        this.actor = new St.BoxLayout({
+            style_class: params.styleClass,
+            reactive: params.reactive,
+            vertical: true, 
+            x_align: Clutter.ActorAlign.CENTER, 
+            y_align: Clutter.ActorAlign.CENTER, 
+            x_expand: false, 
+            y_expand: false
+        });
+
+        this._container = new St.BoxLayout({
+            style_class: 'settings-toggle-button',
+            x_align: Clutter.ActorAlign.CENTER, 
+            y_align: Clutter.ActorAlign.CENTER, 
+            x_expand: false, 
+            y_expand: false
+        });
+
+        this.actor._delegate = this;
+        this.name = params.name;
+        this.description = params.description;
+
+        this.label = null;
+        this.icon = null;
+
+        if (params.reactive) {
+            if (params.activatable || params.withMenu) {
+                this.actor.connect('button-press-event', (actor, event) => this._onButtonPressEvent(actor, event));
+                this.actor.connect('key-press-event', (actor, event) => this._onKeyPressEvent(actor, event));
+            }
+        }
+    }
+
+    set active(value) {
+        this._active = value;
+        // Adiciona ou remove a classe CSS
+        if (value) this._container.add_style_class_name('active');
+        else this._container.remove_style_class_name('active');
+    }
+
+    get active() {
+        return this._active;
+    }
+
+    _onButtonPressEvent(actor, event) {
+        const button = event.get_button();
+
+        if (button === Clutter.BUTTON_PRIMARY) {
+            if (this.onLeftClick) this.onLeftClick(this._active);
+            return Clutter.EVENT_STOP;
+        } 
+        else if (button === Clutter.BUTTON_MIDDLE) {
+            if (this.onMiddleClick) this.onMiddleClick(this._active);
+            return Clutter.EVENT_STOP;
+        } 
+        else if (button === Clutter.BUTTON_SECONDARY) {
+            if (this.populateMenu && this.applet) this.applet.toggleContextMenu(this);
+            return Clutter.EVENT_STOP;
+        }
+
+        return Clutter.EVENT_PROPAGATE;
+    }
+
+    _onKeyPressEvent(actor, event) {
+        const symbol = event.get_key_symbol();
+        if ((symbol === Clutter.KEY_space || symbol === Clutter.KEY_Return || symbol === Clutter.KEY_KP_Enter) && this.onLeftClick) {
+            this.onLeftClick(this._active);
+            return Clutter.EVENT_STOP;
+        }
+        return Clutter.EVENT_PROPAGATE;
+    }
+
+    addIcon(iconSize, iconName='', gicon=null, symbolic=false) {
+        if (this.icon) return;
+
+        const params = { icon_size: iconSize };
+        if (iconName) params.icon_name = iconName;
+        else if (gicon) params.gicon = gicon;
+        params.icon_type = symbolic ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
+
+        this.icon = new St.Icon(params);
+
+        this._container.add_actor(this.icon);
+        this.actor.add_actor(this._container);
+
+        this.buttonActor = this.icon;
+    }
+
+    addLabel(label='', styleClass=null) {
+        if (this.label) return;
+        this.label = new St.Label({ 
+            text: label, 
+            y_expand: true, 
+            x_align: Clutter.ActorAlign.CENTER,
+        });
+        if (styleClass) this.label.set_style_class_name(styleClass);
+        this.actor.add_actor(this.label);
+    }
+
+    destroy(actorDestroySignal=false) {
+        if (this.label) this.label.destroy();
+        if (this.icon) this.icon.destroy();
+        if (!actorDestroySignal) this.actor.destroy();
+
+        delete this.actor._delegate;
+        delete this.actor;
+        delete this.label;
+        delete this.icon;
+    }
+}
+
+class ToggleButton extends BaseButton {
+    constructor(applet, iconName, labelText) {
+        super(applet, { name: labelText, styleClass: 'settings-toggle-box' });
+        this.addIcon(24, iconName, null, true);
+        this.addLabel(labelText, 'settings-toggle-label');
+        this.onLeftClick = null;
+        this.onMiddleClick = null;
+        this.active = false; // estado inicial
+    }
 }
 
 class CinnamonUserApplet extends Applet.TextIconApplet {
@@ -48,20 +334,20 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         // Inicializa schemas, bindings, UI e toggles
         this._initSchemas();
+        this.themeManager = new ThemeManager(this._schemas, this.settings);
         this._initUI(orientation);
         this._initPowerProfiles();
 
         // Métodos iniciais
         this._onUserChanged();
         this._setKeybinding();
+
     }
 
     // === Inicializa schemas e bindings ===
     _initSchemas() {
         // Schemas do applet
         this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
-        this.settings.bind("light-theme", "_lightTheme");
-        this.settings.bind("dark-theme", "_darkTheme");
         this.settings.bind("keyOpen", "keyOpen", () => this._setKeybinding());
         this.settings.bind("display-name", "display_name", () => this._updateLabels());
 
@@ -103,14 +389,14 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
     _initUI(orientation) {
         // Sessão
         this.sessionProxy = null;
-        this._session = new GnomeSession.SessionManager(Lang.bind(this, function(proxy, error) {
+        this._session = new GnomeSession.SessionManager((proxy, error) => {
             if (error) {
                 global.logError("Error initializing session proxy: " + error.message);
                 return;
             }
             this.sessionProxy = proxy;
             global.log("Session proxy initialized successfully");
-        }));
+        });
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
 
         // Menu
@@ -176,6 +462,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         // Coloca o avatar dentro do botão
         this._userIcon = new UserWidget.Avatar(this._user, { iconSize: DIALOG_ICON_SIZE });
+        this._userIcon.style = `icon-size: ${DIALOG_ICON_SIZE}px;`;
         this._userButton.set_child(this._userIcon);
 
         // Adiciona o botão no userBox
@@ -245,128 +532,72 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
     // === Inicializa toggles do applet ===
     _initToggles() {
-        // Dark Mode (applet setting)
-        this.darkModeToggle = this._createToggle(
-            "weather-clear-night-symbolic",
-            _("Dark mode"),
-            this.settings,
-            "dark-mode",
-            (newValue) => this._setDarkMode(newValue)
-        );
+        // Dark Mode
+        this.darkModeToggle = new ToggleButton(this, "weather-clear-night-symbolic", _("Dark mode"));
+        this.darkModeToggle.active = this.themeManager.isDarkMode();
+        this.darkModeToggle.onLeftClick = () => {
+            // This will now update the portal setting, which will trigger the signal
+            this.themeManager.setDarkMode(!this.themeManager.isDarkMode());
+        };
+        this.darkModeToggle.onMiddleClick = () => {
+            GLib.spawn_command_line_async("cinnamon-settings themes");
+            this._openMenu();
+        }
         this._addToggleToGrid(this.darkModeToggle.actor);
 
-        // Night Light (Gio.Settings)
-        this.nightLightToggle = this._createToggle(
-            "night-light-symbolic",
-            _("Night Light"),
-            this._schemas.color,
-            "night-light-enabled",
-            null,
-            "nightlight"
-        );
-        this._addToggleToGrid(this.nightLightToggle.actor);
-
-        // Prevent Sleep toggle
-        this.preventSleepToggle = this._createToggle(
-            "preferences-desktop-screensaver-symbolic",
-            _("Prevent Sleep"),
-            null,
-            null,
-            (active) => this._togglePreventSleep(active),
-            "power"
-        );
-        this._addToggleToGrid(this.preventSleepToggle.actor);
-
-        // Power Mode toggle (no settings key)
-        this.powerModeToggle = this._createToggle(
-            "power-profile-balanced", // ícone inicial
-            _("Power Mode"),
-            null,
-            null,
-            () => this._togglePowerMode(),
-            "power"
-        );
-        this._addToggleToGrid(this.powerModeToggle.actor);
-
-        // Inicializa estado ao iniciar
-        this._updatePowerModeIcon();
-    }
-
-    // === Cria toggle com container extra para botão ===
-    _createToggle(iconName, labelText, settingsObj = null, settingsKey = null, onChange = null, settingsUri = null) {
-        let toggleBox = new St.BoxLayout({ vertical: true, style_class: "settings-toggle-box", x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER, x_expand: false, y_expand: false });
-        let buttonContainer = new St.BoxLayout({ style_class: "settings-toggle-icon-container", x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER });
-
-        let button = new St.Button({ style_class: "settings-toggle-button", reactive: true, can_focus: true, track_hover: true, toggle_mode: true, x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER, x_expand: false, y_expand: false });
-        let icon = new St.Icon({ icon_name: iconName, icon_type: St.IconType.SYMBOLIC, style_class: "settings-toggle-icon" });
-
-        button.set_child(icon);
-        buttonContainer.add_child(button);
-        toggleBox.add_child(buttonContainer);
-
-        let label = new St.Label({ text: labelText, style_class: "settings-toggle-label", x_align: Clutter.ActorAlign.CENTER });
-        toggleBox.add_child(label);
-
-        if (settingsObj && settingsKey) {
-            const updateState = () => {
-                let value = (settingsObj instanceof Gio.Settings) 
-                    ? settingsObj.get_boolean(settingsKey) 
-                    : settingsObj.getValue(settingsKey);
-                button.checked = value;
-
-                if (onChange) onChange(value);
-            };
-
-            updateState();
-
-            this._signals.push({
-                obj: settingsObj,
-                id: settingsObj.connect(`changed::${settingsKey}`, updateState)
-            });
-        }
-
-        // MOVE THE CLICKED HANDLER OUTSIDE THE if BLOCK
-        // So it works for both settings-based and custom toggles
-        button.connect("clicked", () => {
-            let newValue;
-            if (settingsObj && settingsKey) {
-                // Settings-based toggle
-                let current = (settingsObj instanceof Gio.Settings) ? settingsObj.get_boolean(settingsKey) : settingsObj.getValue(settingsKey);
-                newValue = !current;
-                if (settingsObj instanceof Gio.Settings) settingsObj.set_boolean(settingsKey, newValue);
-                else settingsObj.setValue(settingsKey, newValue);
-            } else {
-                // Custom toggle: manually flip
-                newValue = !button._active;
-                button._active = newValue; // store state manually
-            }
-
-            if (onChange) onChange(newValue);
+        this.themeManager.connect('dark-mode-changed', (manager, darkMode) => {
+            this.darkModeToggle.active = darkMode;
         });
 
-        if (settingsUri) {
-            button.connect("button-press-event", (actor, event) => {
-                if (event.get_button() === 2) { // Middle-click
-                    GLib.spawn_command_line_async(`cinnamon-settings ${settingsUri}`);
-                    this.menu.toggle();
-                    return Clutter.EVENT_STOP;
-                }
-                return Clutter.EVENT_PROPAGATE;
-            });
-        }
+        // Night Light
+        this.nightLightToggle = new ToggleButton(this, "night-light-symbolic", _("Night Light"));
+        this.nightLightToggle.active = this._schemas.color.get_boolean("night-light-enabled");
+        this.nightLightToggle.onLeftClick = () => {
+            this.nightLightToggle.active = !this.nightLightToggle.active;
+            this._schemas.color.set_boolean("night-light-enabled", this.nightLightToggle.active);
+        };
+        this.nightLightToggle.onMiddleClick = () => {
+            GLib.spawn_command_line_async("cinnamon-settings nightlight");
+            this._openMenu();
+        };
+        this._addToggleToGrid(this.nightLightToggle.actor);
 
-        return { actor: toggleBox, button, icon, label };
+        // Conecta para sincronizar mudanças externas
+        this._signals.push({
+            obj: this._schemas.color,
+            id: this._schemas.color.connect("changed::night-light-enabled", (settings, key) => {
+                this.nightLightToggle.active = settings.get_boolean(key);
+            })
+        });
+
+        // Prevent Sleep toggle
+        this.preventSleepToggle = new ToggleButton(this, "preferences-desktop-screensaver-symbolic", _("Prevent Sleep"));
+        this.preventSleepToggle.active = false; // estado inicial
+        this.preventSleepToggle.onLeftClick = () => {
+            this.preventSleepToggle.active = !this.preventSleepToggle.active;
+            this._togglePreventSleep(this.preventSleepToggle.active);
+        }
+        this.preventSleepToggle.onMiddleClick = () => {
+            GLib.spawn_command_line_async("cinnamon-settings power");
+            this._openMenu()
+        }
+        this._addToggleToGrid(this.preventSleepToggle.actor);
+
+        // Power Mode toggle
+        this.powerModeToggle = new ToggleButton(this, "power-profile-balanced", _("Power Mode"));
+        this.powerModeToggle.onLeftClick = () => this._togglePowerMode();
+        this.powerModeToggle.onMiddleClick = () => GLib.spawn_command_line_async("cinnamon-settings power");
+        this._addToggleToGrid(this.powerModeToggle.actor);
+
+        // Inicializa estado ao iniciar (atualiza ícone e label conforme powerprofilesctl)
+        this._updatePowerModeIcon();
     }
 
     // === Adiciona toggle ao grid ===
     _addToggleToGrid(toggleActor) {
-        let gridLayout = this.prefsGrid.layout_manager;
-        gridLayout.attach(toggleActor, this.currentColumn, this.currentRow, 1, 1);
-        this.currentColumn++;
-        if (this.currentColumn >= this.maxTogglesPerRow) {
-            this.currentColumn = 0;
-            this.currentRow++;
-        }
+        let row = Math.floor(this.prefsGrid.get_children().length / this.maxTogglesPerRow);
+        let col = this.prefsGrid.get_children().length % this.maxTogglesPerRow;
+        this.prefsGrid.layout_manager.attach(toggleActor, col, row, 1, 1);
     }
 
     // === Inicializa slider de text scaling ===
@@ -475,87 +706,6 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
 
         updateFakeSlider(idx);
     }
-    
-    _populateThemeOptions() {
-        let themes = {};
-        
-        const readThemesFromDir = (dir) => {
-            try {
-                let file = Gio.file_new_for_path(dir);
-                let enumerator = file.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-
-                let info;
-                while ((info = enumerator.next_file(null))) {
-                    let themeName = info.get_name();
-                    if (info.get_file_type() === Gio.FileType.DIRECTORY) {
-                        themes[themeName] = themeName;  // Use theme name as both key and value
-                    }
-                }
-            } catch (e) {
-                log(`Error reading themes from ${dir}: ${e.message}`);
-            }
-        };
-
-        // Read themes from both system and user directories
-        readThemesFromDir('/usr/share/themes');
-        readThemesFromDir(GLib.get_home_dir() + '/.themes');
-
-        // Clear existing options in the ComboBox (assuming you have a ComboBox defined)
-        this._clearComboBoxOptions();
-
-        // Add new options to the ComboBox
-        for (let theme in themes) {
-            this._addComboBoxOption(theme, theme); // Add each theme to the ComboBox
-        }
-
-        // Log found themes
-        if (Object.keys(themes).length === 0) {
-            log("No themes found.");
-        } else {
-            log(`Found themes: ${JSON.stringify(themes)}`);
-        }
-
-        // Set the options for light and dark themes
-        this.settings.setOptions("light-theme", themes);
-        this.settings.setOptions("dark-theme", themes);
-    }
-
-    _clearComboBoxOptions() {
-        // Clear the ComboBox options
-        // Assuming you have a reference to your ComboBox, for example:
-        if (this.lightThemeComboBox) {
-            this.lightThemeComboBox.remove_all();
-        }
-        if (this.darkThemeComboBox) {
-            this.darkThemeComboBox.remove_all();
-        }
-    }
-
-    _addComboBoxOption(value, label) {
-        // Add an option to the ComboBox
-        if (this.lightThemeComboBox) {
-            this.lightThemeComboBox.add_option(label, value);
-        }
-        if (this.darkThemeComboBox) {
-            this.darkThemeComboBox.add_option(label, value);
-        }
-    }
-
-    // === Dark mode ===
-    _setDarkMode(dark) {
-        let theme = dark ? this._darkTheme : this._lightTheme;
-        let colorScheme = dark ? "prefer-dark" : "default";
-
-        this._schemas.gtk.set_string("gtk-theme", theme);
-        this._schemas.cinnamon.set_string("gtk-theme", theme);
-        this._schemas.portal.set_string("color-scheme", colorScheme);
-
-        this._darkMode = dark;
-        global.log(dark);
-        global.log(theme);
-
-        this._populateThemeOptions();
-    }
 
     // === Toggle Prevent Sleep ===
     _togglePreventSleep(active) {
@@ -566,24 +716,21 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
                 0,
                 "prevent system sleep and suspension",
                 INHIBIT_SLEEP_FLAG,
-                Lang.bind(this, function(cookie) {
+                (cookie) => {
                     this.sessionCookie = cookie;
                     global.log("Prevent sleep activated, cookie: " + cookie);
-                    // Ensure UI reflects the active state
                     this.preventSleepToggle.button.checked = true;
-                })
+                }
             );
         } else if (this.sessionCookie) {
             // Deactivate prevent sleep
-            this.sessionProxy.UninhibitRemote(
-                this.sessionCookie, 
-                Lang.bind(this, function() {
-                    global.log("Prevent sleep deactivated");
-                    this.sessionCookie = null;
-                    // Ensure UI reflects the inactive state
+            this.sessionProxy.UninhibitRemote(this.sessionCookie, () => {
+                global.log("Prevent sleep deactivated");
+                this.sessionCookie = null;
+                if (this.preventSleepToggle) {
                     this.preventSleepToggle.button.checked = false;
-                })
-            );
+                }
+            });
         } else {
             // No cookie to uninhibit, just update UI
             this.preventSleepToggle.button.checked = false;
@@ -648,10 +795,14 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
     _updatePowerModeIcon() {
         this._getCurrentPowerMode((current) => {
             let mode = this._powerModes[current] || this._powerModes["balanced"];
+            
+            this.powerModeToggle.active = (current === "performance");
+
+            // Atualiza ícone e label
             this.powerModeToggle.icon.icon_name = mode?.icon;
             this.powerModeToggle.label.set_text(mode?.label);
-            let isPerformance = (current === "performance");
-            this.powerModeToggle.button.checked = isPerformance;
+
+            // Atualiza estado ativo do toggle conforme performance
         });
     }
 
@@ -686,6 +837,12 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
     on_applet_clicked() { this._openMenu(); }
 
     on_applet_removed_from_panel() {
+        // Clean up theme manager
+        if (this.themeManager) {
+            this.themeManager.destroy();
+            this.themeManager = null;
+        }
+
         // Clean up inhibit cookie
         if (this.sessionCookie !== null && this.sessionProxy) {
             try {

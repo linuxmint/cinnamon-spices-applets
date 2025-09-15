@@ -6,21 +6,11 @@
     "display-name": {
         "type": "switch",
         "default": false,
-        "description": "Display user name on panel"
-    },
-    "display-image": {
-        "type": "switch",
-        "default": false,
-        "description": "Display the user image on the panel"
+        "description": "Display user name and host"
     },
     "section2": {
         "type": "section",
         "description": "Theme"
-    },
-    "dark-mode": {
-        "type": "switch",
-        "default": false,
-        "description": "Enable dark mode"
     },
     "light-theme": {
         "type": "combobox",

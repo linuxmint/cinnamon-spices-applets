@@ -57,22 +57,3 @@ msgstr ""
 
 msgid "Performance"
 msgstr ""
-
-# prefs
-msgid "Theme"
-msgstr ""
-
-msgid "Enable dark mode"
-msgstr ""
-
-msgid "Select a light theme"
-msgstr ""
-
-msgid "Select a dark theme"
-msgstr ""
-
-msgid "Show menu"
-msgstr ""
-
-msgid "Set keybinding(s) to show menu."
-msgstr ""
