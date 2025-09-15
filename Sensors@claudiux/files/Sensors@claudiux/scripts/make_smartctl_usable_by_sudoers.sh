@@ -6,17 +6,31 @@ GROUP=$1
 
 SMARTCTLFILE="/etc/sudoers.d/smartctl"
 [[ -x /usr/bin/dnf ]] && {
-	# Distro is Fedora!
-	[[ -d /etc/sudoersSensors.d ]] || {
-		sudo mkdir -p /etc/sudoersSensors.d
-		sudo chmod 755 /etc/sudoersSensors.d
-		sudo chgrp -f wheel /etc/sudoersSensors.d
-	}
-	SMARTCTLFILE="/etc/sudoersSensors.d/smartctl"
-	line=$(sudo cat /etc/sudoers | grep sudoersSensors )
-	[[ -n "$line" ]] || {
-		echo "#includedir /etc/sudoersSensors.d" | sudo tee -a /etc/sudoers
-	}
+    # Distro is Fedora!
+    [[ -d /etc/sudoersSensors.d ]] || {
+        sudo mkdir -p /etc/sudoersSensors.d
+        sudo chmod 755 /etc/sudoersSensors.d
+        sudo chgrp -f wheel /etc/sudoersSensors.d
+    }
+    SMARTCTLFILE="/etc/sudoersSensors.d/smartctl"
+    line=$(sudo cat /etc/sudoers | grep sudoersSensors )
+    [[ -n "$line" ]] || {
+        echo "#includedir /etc/sudoersSensors.d" | sudo tee -a /etc/sudoers
+    }
+}
+
+[[ -x /usr/bin/pacman ]] && {
+    # Distro is Arch!
+    [[ -d /etc/sudoersSensors.d ]] || {
+        sudo mkdir -p /etc/sudoersSensors.d
+        sudo chmod 755 /etc/sudoersSensors.d
+        sudo chgrp -f wheel /etc/sudoersSensors.d
+    }
+    SMARTCTLFILE="/etc/sudoersSensors.d/smartctl"
+    line=$(sudo cat /etc/sudoers | grep sudoersSensors )
+    [[ -n "$line" ]] || {
+        echo "@includedir /etc/sudoersSensors.d" | sudo tee -a /etc/sudoers
+    }
 }
 
 sudo touch $SMARTCTLFILE
