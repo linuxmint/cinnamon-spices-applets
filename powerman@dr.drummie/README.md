@@ -80,7 +80,7 @@ PowerMan is mostly usable for laptops:
 
 - **✅ Any system**: Basic power monitoring and device status
 - **🔋 + Battery**: Power profile automation depending on power source, battery saver
-- **💡 + Brightness control**: Automatic brightness switching depending on power source, idle dimming
+- **💡 + Brightness control**: Automatic brightness switching depending on power source, idle dimming (dconf)
 
 ## Compatibility
 
@@ -90,8 +90,8 @@ PowerMan is mostly usable for laptops:
 
 ### **Known Issues**
 
-- If dim idle time is too low (less then 30 seconds), there could be issues with reverting brightness when switching power source
-- Sometimes there could be little longer interval to detect battery power source (I guess it depends what hardware you have inside your machine)
+- Idle dimming issues - If your i.e. laptop switches power-source while screen is dimmed, it will mess up brightness and "new" brightness will be assumed as "idle-brightness", seems to be problem of different nature - currently investigating
+- Sometimes there could be little longer interval to detect battery power source (when on battery)
 - Tested on 3 different laptops (older models), VM, real hardware (office PC)
 
 ### **Settings not appearing**
