@@ -371,7 +371,7 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this.actor.show();
 
         //get notified
-        this._proxy.connect("Changed", Lang.bind(this, this._getBrightness));
+        this._proxy.connectSignal("Changed", Lang.bind(this, this._getBrightness));
         this._applet.menu.connect("open-state-changed", Lang.bind(this, this._getBrightnessForcedUpdate));
     }
 
