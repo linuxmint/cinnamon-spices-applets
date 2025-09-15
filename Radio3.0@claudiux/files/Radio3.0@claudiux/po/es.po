@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-10 19:42+0200\n"
-"PO-Revision-Date: 2025-06-29 10:05-0400\n"
+"PO-Revision-Date: 2025-09-14 23:20-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #. applet.js:285
 msgid "unassigned"
@@ -243,7 +243,7 @@ msgstr "(Sin definir)"
 #. settings-schema.json->category-to-move->options
 #. applet.js:586 applet.js:5523
 msgid "(Blacklist)"
-msgstr ""
+msgstr "(lista negra)"
 
 #. applet.js:2259
 msgid "Start"
@@ -842,7 +842,7 @@ msgstr "Actualizar la lista de estaciones"
 
 #. settings-schema.json->sectionBlacklist->title
 msgid "Unwanted (blacklist)"
-msgstr ""
+msgstr "No deseado (lista negra)"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
@@ -1111,7 +1111,7 @@ msgstr ""
 
 #. settings-schema.json->blacklist->columns->title
 msgid "Blacklisted URL"
-msgstr ""
+msgstr "URL en lista negra"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
@@ -1155,9 +1155,8 @@ msgid "Remove selected items from this list"
 msgstr "Eliminar elementos seleccionados de esta lista"
 
 #. settings-schema.json->import-blacklist-button->description
-#, fuzzy
 msgid "Blacklist selected items from this list"
-msgstr "Eliminar elementos seleccionados de esta lista"
+msgstr "Incluir los elementos seleccionados de esta lista en la lista negra"
 
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description
