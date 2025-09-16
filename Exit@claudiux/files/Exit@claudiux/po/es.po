@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-16 18:40+0200\n"
-"PO-Revision-Date: 2024-12-04 18:48-0300\n"
+"PO-Revision-Date: 2025-09-16 14:08-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 
 #. 5.4/applet.js:140 6.4/applet.js:250
 msgid "Restart Cinnamon"
@@ -218,60 +218,61 @@ msgstr ""
 
 #. 6.4->settings-schema.json->page_General->title
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. 6.4->settings-schema.json->page_Shortcuts->title
 msgid "Shortcuts"
-msgstr ""
+msgstr "Atajos"
 
 #. 6.4->settings-schema.json->section_Shortcuts->title
 msgid "Keybindings"
-msgstr ""
+msgstr "Atajos de teclado"
 
 #. 6.4->settings-schema.json->section_MenuKeys->title
 msgid "Keys used to select certain options in the open menu."
 msgstr ""
+"Teclas utilizadas para seleccionar determinadas opciones en el menú abierto."
 
 #. 6.4->settings-schema.json->kbToggleMenu->description
 msgid "Toggle menu"
-msgstr ""
+msgstr "Activar/Desactivar menú"
 
 #. 6.4->settings-schema.json->kbWakeUpMonitor->description
 msgid "Monitor and Mouse Wake-Up"
-msgstr ""
+msgstr "Activación del monitor y el ratón"
 
 #. 6.4->settings-schema.json->mkShutdown->description
 msgid "Key to select Power Off"
-msgstr ""
+msgstr "Tecla para seleccionar Apagar"
 
 #. 6.4->settings-schema.json->mkShutdown->tooltip
 msgid "Single key. Default is U"
-msgstr ""
+msgstr "Una sola tecla. El valor predeterminado es U"
 
 #. 6.4->settings-schema.json->mkRestart->description
 msgid "Key to select Restart"
-msgstr ""
+msgstr "Tecla para seleccionar Reiniciar"
 
 #. 6.4->settings-schema.json->mkRestart->tooltip
 msgid "Single key. Default is R"
-msgstr ""
+msgstr "Una sola tecla. El valor predeterminado es R"
 
 #. 6.4->settings-schema.json->mkHibernate->description
 msgid "Key to select Hibernate"
-msgstr ""
+msgstr "Tecla para seleccionar Hibernar"
 
 #. 6.4->settings-schema.json->mkHibernate->tooltip
 msgid "Single key. Default is H"
-msgstr ""
+msgstr "Una sola tecla. El valor predeterminado es H"
 
 #. 6.4->settings-schema.json->mkSuspend->description
 msgid "Key to select Suspend"
-msgstr ""
+msgstr "Tecla para seleccionar Suspender"
 
 #. 6.4->settings-schema.json->mkSuspend->tooltip
 msgid "Single key. Default is S"
-msgstr ""
+msgstr "Una sola tecla. El valor predeterminado es S"
 
 #. 6.4->settings-schema.json->buttonApplyMenuKeys->description
 msgid "Apply these keys to the menu"
-msgstr ""
+msgstr "Aplica estas teclas al menú"
