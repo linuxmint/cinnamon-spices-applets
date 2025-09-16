@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux 2.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2025-09-10 19:42+0200\n"
-"PO-Revision-Date: 2025-04-01 10:28+0000\n"
+"PO-Revision-Date: 2025-09-16 10:22+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -243,7 +243,7 @@ msgstr "(Óskilgreint)"
 #. settings-schema.json->category-to-move->options
 #. applet.js:586 applet.js:5523
 msgid "(Blacklist)"
-msgstr ""
+msgstr "(bannlisti)"
 
 #. applet.js:2259
 msgid "Start"
@@ -849,7 +849,7 @@ msgstr "Uppfæra þennan stöðvalista"
 
 #. settings-schema.json->sectionBlacklist->title
 msgid "Unwanted (blacklist)"
-msgstr ""
+msgstr "Óvelkomið (bannlisti)"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
@@ -960,7 +960,7 @@ msgstr "Spara laust pláss á hörðum diskum"
 
 #. settings-schema.json->sectionYTIgnore->title
 msgid "Ignore YT"
-msgstr ""
+msgstr "Hunsa YT"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -1115,7 +1115,7 @@ msgstr "Uppfæra útvarpsstöðvalistann minn með gögnum frá Radio Database"
 
 #. settings-schema.json->blacklist->columns->title
 msgid "Blacklisted URL"
-msgstr ""
+msgstr "Útilokaðar vefslóðir"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
@@ -1159,9 +1159,8 @@ msgid "Remove selected items from this list"
 msgstr "Fjarlægja valin atriði af þessum lista"
 
 #. settings-schema.json->import-blacklist-button->description
-#, fuzzy
 msgid "Blacklist selected items from this list"
-msgstr "Fjarlægja valin atriði af þessum lista"
+msgstr "Loka á valin atriði af þessum lista"
 
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description
@@ -1919,13 +1918,15 @@ msgstr "Áherslulita táknmynd smáforritsins á meðan upptöku í bakgrunni st
 
 #. settings-schema.json->ignoreYT->description
 msgid "Ignore Youtube features"
-msgstr ""
+msgstr "Hunsa YT-eiginleika"
 
 #. settings-schema.json->ignoreYT->tooltip
 msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
+"Hunsun á YT-eiginleikum minnkar álag á örgjörva. En þá er ekki hægt að hlaða"
+" inn myndefni myndskeiða."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
