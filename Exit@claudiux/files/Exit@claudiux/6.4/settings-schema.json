@@ -1,18 +1,53 @@
 {
-  "sectionOSD": {
-    "type": "section",
-    "dependency": "displayRestartCinnamonSetting",
-    "description": "Cinnamon restart"
+  "layoutExit": {
+    "type": "layout",
+    "pages": [
+      "page_General",
+      "page_Shortcuts"
+    ],
+    "page_General": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "sectionOSD",
+        "sectionMenu"
+      ]
+    },
+    "page_Shortcuts": {
+      "type": "page",
+      "title": "Shortcuts",
+      "sections": [
+        "section_Shortcuts",
+        "section_MenuKeys"
+      ]
+    },
+    "sectionOSD": {
+      "type": "section",
+      "dependency": "displayRestartCinnamonSetting",
+      "title": "Cinnamon restart",
+      "keys": ["showOSD"]
+    },
+    "sectionMenu": {
+      "type": "section",
+      "title": "Menu options",
+      "keys": ["showRestartCinnamon", "showSuspend", "showHibernate", "hibernateNeedsSudo", "showRestart", "showPowerOff", "labelOthers", "showScreenOff", "mouse-deactivation-duration", "showLockscreen", "showSwitchUser", "showLogout", "logoutMode"]
+    },
+    "section_Shortcuts": {
+      "type": "section",
+      "title": "Keybindings",
+      "keys": ["kbToggleMenu", "kbWakeUpMonitor"]
+    },
+    "section_MenuKeys": {
+      "type": "section",
+      "title": "Keys used to select certain options in the open menu.",
+      "keys": ["mkShutdown", "mkRestart", "mkHibernate", "mkSuspend", "buttonApplyMenuKeys"]
+    }
   },
   "showOSD": {
     "type": "switch",
     "default": true,
     "description": "Show OSD while restarting Cinnamon",
     "tooltip": "OSD: On Screen Display"
-  },
-  "sectionMenu": {
-    "type": "section",
-    "description": "Menu options"
   },
   "showRestartCinnamon": {
     "type": "switch",
@@ -99,6 +134,57 @@
       "Force": "--force"
     },
     "tooltip": "The 'Force' option lets you log out while ignoring inhibitors. Useful when several sessions are open."
+  },
+  "kbToggleMenu": {
+    "type": "keybinding",
+    "default": "<Primary>Menu::",
+    "description": "Toggle menu"
+  },
+  "kbWakeUpMonitor": {
+    "type": "keybinding",
+    "default": "<Primary><Shift>m::",
+    "description": "Monitor and Mouse Wake-Up"
+  },
+  "mkShutdown": {
+    "type": "entry",
+    "default": "U",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Power Off",
+    "tooltip": "Single key. Default is U",
+    "dependency": "showPowerOff"
+  },
+  "mkRestart": {
+    "type": "entry",
+    "default": "R",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Restart",
+    "tooltip": "Single key. Default is R",
+    "dependency": "showRestart"
+  },
+  "mkHibernate": {
+    "type": "entry",
+    "default": "H",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Hibernate",
+    "tooltip": "Single key. Default is H",
+    "dependency": "showHibernate"
+  },
+  "mkSuspend": {
+    "type": "entry",
+    "default": "S",
+    "width": 1,
+    "expand-width": false,
+    "description": "Key to select Suspend",
+    "tooltip": "Single key. Default is S",
+    "dependency": "showSuspend"
+  },
+  "buttonApplyMenuKeys": {
+    "type": "button",
+    "description": "Apply these keys to the menu",
+    "callback": "on_buttonApplyMenuKeys_pressed"
   },
   "displayLockScreenSetting": {
     "type": "generic",

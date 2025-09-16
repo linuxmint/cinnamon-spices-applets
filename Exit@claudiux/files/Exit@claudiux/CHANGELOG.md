@@ -1,3 +1,8 @@
+### v1.7.0~20250916
+* Adds shortcuts to open the menu and to reactivate mouse and screen.
+* Adds keys to select certain options when the menu is open.
+
+
 ### v1.6.1~20250630
 * Takes screensaver into account.
 
