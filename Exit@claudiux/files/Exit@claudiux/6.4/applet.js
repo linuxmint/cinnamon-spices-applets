@@ -1,4 +1,5 @@
 const Applet = imports.ui.applet;
+const Main = imports.ui.main;
 const {AppletSettings} = imports.ui.settings;
 const Util = imports.misc.util;
 const Gettext = imports.gettext;
@@ -6,6 +7,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Meta = imports.gi.Meta;
+const Clutter = imports.gi.Clutter;
 const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
@@ -48,18 +50,82 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
-/**
- * Execute a function only once after a few seconds.
- * @callback: function to execute.
- * @s: number of seconds.
- */
-function setTimeoutInSeconds(callback, s) {
-    return timeout_add_seconds(s, () => {
-        callback();
-        return false;
-    }, null);
-}
+var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
+    _init(launcher, orientation) {
+        super._init(launcher, orientation);
+        this.applet = launcher;
+    }
 
+    _onKeyPressEvent(actor, event) {
+        let ks = event.get_key_symbol();
+        if (ks === Clutter.KEY_Escape) {
+            this.close(true);
+            return true;
+        }
+
+        let mkSuspend = this.applet.s.getValue("mkSuspend");
+        if (mkSuspend.length === 0) {
+            mkSuspend = "S";
+        } else {
+            mkSuspend = mkSuspend[0].toUpperCase();
+        }
+        let mkSuspendLC = mkSuspend.toLowerCase();
+
+        let mkHibernate = this.applet.s.getValue("mkHibernate");
+        if (mkHibernate.length === 0) {
+            mkHibernate = "H";
+        } else {
+            mkHibernate = mkHibernate[0].toUpperCase();
+        }
+        let mkHibernateLC = mkHibernate.toLowerCase();
+
+        let mkRestart = this.applet.s.getValue("mkRestart");
+        if (mkRestart.length === 0) {
+            mkRestart = "R";
+        } else {
+            mkRestart = mkRestart[0].toUpperCase();
+        }
+        let mkRestartLC = mkRestart.toLowerCase();
+
+        let mkShutdown = this.applet.s.getValue("mkShutdown");
+        if (mkShutdown.length === 0) {
+            mkShutdown = "U";
+        } else {
+            mkShutdown = mkShutdown[0].toUpperCase();
+        }
+        let mkShutdownLC = mkShutdown.toLowerCase();
+
+
+        //~ if (this.applet.showHibernate && (ks === Clutter.KEY_H || ks === Clutter.KEY_h)) {
+        if (this.applet.showHibernate && (ks === Clutter[`KEY_${mkHibernate}`] || ks === Clutter[`KEY_${mkHibernateLC}`])) {
+            this.close(true);
+            if (this.applet.hibernateNeedsSudo) {
+                Util.spawnCommandLineAsync("pkexec sudo systemctl hibernate")
+            } else {
+                Util.spawnCommandLineAsync("systemctl hibernate")
+            }
+            return true;
+        }
+        if (this.applet.showPowerOff && (ks === Clutter[`KEY_${mkShutdown}`] || ks === Clutter[`KEY_${mkShutdownLC}`])) {
+            this.close(true);
+            Util.spawnCommandLineAsync("systemctl poweroff");
+            return true;
+        }
+        if (this.applet.showRestart && (ks === Clutter[`KEY_${mkRestart}`] || ks === Clutter[`KEY_${mkRestartLC}`])) {
+            this.close(true);
+            Util.spawnCommandLineAsync("systemctl reboot");
+            return true;
+        }
+        //~ if (this.applet.showSuspend && (ks === Clutter.KEY_S || ks === Clutter.KEY_s)) {
+        if (this.applet.showSuspend && (ks === Clutter[`KEY_${mkSuspend}`] || ks === Clutter[`KEY_${mkSuspendLC}`])) {
+            this.close(true);
+            Util.spawnCommandLineAsync("systemctl suspend");
+            return true;
+        }
+
+        return false;
+    }
+}
 
 class ExitApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -84,8 +150,10 @@ class ExitApplet extends Applet.IconApplet {
 
         this.get_user_settings();
 
+        //~ this.screenOffIntervalId = null;
+
         this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+        this.menu = new ExitPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
 
         this.make_menu();
@@ -110,6 +178,8 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showSwitchUser", "showSwitchUser");
         this.s.bind("showLogout", "showLogout");
         this.s.bind("logoutMode", "logoutMode");
+        this.s.bind("kbToggleMenu", "kbToggleMenu", () => { this.on_keybinds_changed() });
+        this.s.bind("kbWakeUpMonitor", "kbWakeUpMonitor", () => { this.on_keybinds_changed() });
     }
 
     check_system_managed_options() {
@@ -128,6 +198,33 @@ class ExitApplet extends Applet.IconApplet {
 
         this.loop = timeout_add_seconds(1, () => this.check_system_managed_options());
         return false;
+    }
+
+    screenOff() {
+        let duration = Math.trunc(1000 * this.mouseDeactivationDuration);
+        //~ Util.spawn_async(
+            //~ ['/usr/bin/env', 'bash', '-c',
+            //~ 'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
+            //~ xinput disable $m; done'],
+            //~ null
+        //~ );
+        Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh disable");
+        Util.spawnCommandLine('xset dpms force off');
+        //~ this.screenOffIntervalId = timeout_add(
+            //~ 300,
+            //~ () => {
+                //~ global.log("Screen Off");
+                //~ Util.spawnCommandLine('xset dpms force off');
+                //~ return true;
+            //~ }
+        //~ );
+        let _to = setTimeout(
+            () => {
+                clearTimeout(_to);
+                Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
+            },
+            duration
+        );
     }
 
     make_menu() {
@@ -164,24 +261,7 @@ class ExitApplet extends Applet.IconApplet {
             if (this.showScreenOff) {
                 item = new PopupMenu.PopupIconMenuItem(_("Screen Off"), "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    let duration = Math.trunc(this.mouseDeactivationDuration);
-                    Util.spawn_async(
-                        ['/bin/bash', '-c',
-                        'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
-                        xinput disable $m; done'],
-                        null
-                    );
-                    Util.spawnCommandLine('xset dpms force off');
-                    setTimeoutInSeconds(
-                        () => {
-                            Util.spawn_async(
-                                ['/usr/bin/env bash', '-c',
-                                'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
-                                xinput enable $m; done'],
-                                null);
-                            },
-                        duration
-                    );
+                    this.screenOff()
                 });
                 this.menu.addMenuItem(item);
             }
@@ -283,7 +363,13 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showSuspend) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
+                let mkSuspend = this.s.getValue("mkSuspend");
+                if (mkSuspend.length === 0) {
+                    mkSuspend = "S";
+                } else {
+                    mkSuspend = mkSuspend[0].toUpperCase();
+                }
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend") + " [" + mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "suspend"]);
@@ -301,7 +387,13 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showHibernate) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                let mkHibernate = this.s.getValue("mkHibernate");
+                if (mkHibernate.length === 0) {
+                    mkHibernate = "H";
+                } else {
+                    mkHibernate = mkHibernate[0].toUpperCase();
+                }
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + " [" + mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     if (this.hibernateNeedsSudo)
@@ -325,7 +417,13 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showRestart) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
+                let mkRestart = this.s.getValue("mkRestart");
+                if (mkRestart.length === 0) {
+                    mkRestart = "R";
+                } else {
+                    mkRestart = mkRestart[0].toUpperCase();
+                }
+                item = new PopupMenu.PopupIconMenuItem(_("Restart") + " [" + mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "reboot"]);
@@ -343,7 +441,13 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showPowerOff) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                let mkShutdown = this.s.getValue("mkShutdown");
+                if (mkShutdown.length === 0) {
+                    mkShutdown = "U";
+                } else {
+                    mkShutdown = mkShutdown[0].toUpperCase();
+                }
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off") + " [" + mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     this.screensaver_inhibitor.uninhibit_screensaver();
@@ -362,17 +466,84 @@ class ExitApplet extends Applet.IconApplet {
 
     }
 
+    on_buttonApplyMenuKeys_pressed() {
+        let mkShutdown = this.s.getValue("mkShutdown");
+        if (mkShutdown.length === 0) {
+            mkShutdown = "U";
+        } else {
+            mkShutdown = mkShutdown[0].toUpperCase();
+        }
+
+        let mkRestart = this.s.getValue("mkRestart");
+        if (mkRestart.length === 0) {
+            mkRestart = "R";
+        } else {
+            mkRestart = mkRestart[0].toUpperCase();
+        }
+
+        let mkHibernate = this.s.getValue("mkHibernate");
+        if (mkHibernate.length === 0) {
+            mkHibernate = "H";
+        } else {
+            mkHibernate = mkHibernate[0].toUpperCase();
+        }
+
+        let mkSuspend = this.s.getValue("mkSuspend");
+        if (mkSuspend.length === 0) {
+            mkSuspend = "S";
+        } else {
+            mkSuspend = mkSuspend[0].toUpperCase();
+        }
+
+        let _to = setTimeout(() => {
+                clearTimeout(_to);
+                this.s.setValue("mkShutdown", mkShutdown);
+                this.s.setValue("mkRestart", mkRestart);
+                this.s.setValue("mkHibernate", mkHibernate);
+                this.s.setValue("mkSuspend", mkSuspend);
+            },
+            2100
+        );
+    }
+
+    on_keybinds_changed() {
+        Main.keybindingManager.addHotKey(
+            "toggle-exit-menu-" + this.instanceId,
+            this.kbToggleMenu,
+            () => { this.on_applet_clicked(null) }
+        );
+        Main.keybindingManager.addHotKey(
+            "wakeupmonitor-exit-" + this.instanceId,
+            this.kbWakeUpMonitor,
+            () => { this.wake_up_monitor() }
+        );
+    }
+
+    wake_up_monitor() {
+        //~ global.log("Monitor wake-up");
+        //~ if (this.screenOffIntervalId != null) {
+            //~ source_remove(this.screenOffIntervalId);
+            //~ this.screenOffIntervalId = null;
+        //~ }
+        Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
+        Util.spawnCommandLine('xset dpms force on');
+    }
+
     on_applet_clicked(event) {
-        this.make_menu();
+        if (!this.menu.isOpen)
+            this.make_menu();
         this.menu.toggle();
     }
 
     on_applet_added_to_panel() {
+        this.on_keybinds_changed();
         this.check_system_managed_options()
     }
 
     on_applet_removed_from_panel() {
         source_remove(this.loop);
+        Main.keybindingManager.removeHotKey("toggle-exit-menu-" + this.instanceId);
+        Main.keybindingManager.removeHotKey("wakeupmonitor-exit-" + this.instanceId);
         remove_all_sources();
     }
 }
