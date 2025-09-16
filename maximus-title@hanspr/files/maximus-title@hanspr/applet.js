@@ -1,6 +1,6 @@
 const Applet = imports.ui.applet
 const SignalManager = imports.misc.signalManager
-const Settings = imports.ui.settings;
+const Settings = imports.ui.settings
 
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
