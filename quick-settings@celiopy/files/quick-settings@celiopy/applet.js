@@ -11,14 +11,13 @@ const Gettext = imports.gettext;
 const Signals = imports.signals; // Add this line
 
 const UUID = 'quick-settings@celiopy';
-const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path;
-const DIALOG_ICON_SIZE = 32;
 
+const DIALOG_ICON_SIZE = 32;
 const INHIBIT_IDLE_FLAG = 8;
 const INHIBIT_SLEEP_FLAG = 4;
 
 // l10n/translation support
-Gettext.bindtextdomain(UUID, APPLET_DIR + "/locale");
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
