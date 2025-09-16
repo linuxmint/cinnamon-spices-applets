@@ -2169,7 +2169,7 @@ class CobiWindowList extends Applet.Applet {
     this._signalManager.connect(global.screen, "workspace-removed", this._onWorkspaceRemoved, this);
     this._signalManager.connect(global.screen, "window-added", this._windowAdded, this);
     this._signalManager.connect(global.screen, "window-removed", this._windowRemoved, this);
-    this._signalManager.connect(global.screen, "window-monitor-changed", this.windowMonitorChanged, this);
+    this._signalManager.connect(global.screen.get_display(), "window-monitor-changed", this.windowMonitorChanged, this);
     this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor, this);
   }
   
