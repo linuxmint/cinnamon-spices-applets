@@ -14,6 +14,13 @@ if (!String.prototype.format) {
     };
 }
 
+// ARGV[0] - dir which updates.js
+imports.searchPath.push(
+    Gio.File.new_for_path(ARGV[0]).get_path()
+);
+
+const Updates = imports.updates.Updates;
+
 const UUID = "updates-notifier@zamszowy";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 function _(str) { return Gettext.dgettext(UUID, str); }
@@ -33,73 +40,10 @@ function checkKeysForExit(event, win, callback) {
 
 }
 
-function parsePkgSpec(spec) {
-    // e.g. "gir1.2-gtk-3.0-3.24.50-2.amd64"
-    const lastDot = spec.lastIndexOf(".");
-    if (lastDot < 0) return null;
-
-    const arch = spec.slice(lastDot + 1);
-    const nv = spec.slice(0, lastDot);
-
-    const lastDash = nv.lastIndexOf("-");
-    if (lastDash < 0) return null;
-
-    const rev = nv.slice(lastDash + 1); // last dash part
-    const nameAndUpstream = nv.slice(0, lastDash);
-
-    // Split name and upstream_version from the right: first dash followed by digit or epoch
-    const match = nameAndUpstream.match(/^(.*)-(\d[:\d.+~]*.*)$/);
-    if (!match) {
-        // fallback: no dash-digit found, treat all as name, version = rev
-        return { name: nameAndUpstream, version: rev, arch };
-    }
-
-    const name = match[1];
-    const upstreamVersion = match[2];
-    const version = upstreamVersion + "-" + rev;
-
-    return { name, version, arch };
-}
-
-function parseUpdates(text) {
-    const results = [];
-    const lines = text.split("\n");
-
-    for (let line of lines) {
-        if (!(line = line.trim())) continue;
-
-        // Drop the first column (Normal/Security/etc.) + space
-        let rest = line.replace(/^\S+\s+/, "");
-
-        // First token after that is "name-version.arch"
-        let tokens = rest.split(/\s+/);
-        if (tokens.length === 0) continue;
-
-        let spec = tokens[0]; // e.g. qemu-system-data-1:10.1.0+ds-2.all
-        let parsed = parsePkgSpec(spec);
-        if (!parsed) continue;
-
-        // Optional "(repo)" token
-        let repo = null;
-        if (tokens.length >= 2 && tokens[1].startsWith("(") && tokens[1].endsWith(")")) {
-            repo = tokens[1].slice(1, -1); // strip parentheses
-        }
-
-        let { name, version, arch } = parsed;
-        let pkgid = repo ? `${name};${version};${arch};${repo}` : null;
-
-        results.push({ line, name, version, arch, repo, pkgid, spec });
-    }
-
-    return results;
-}
-
-function buildPkgIdWithRepoFallback(item) {
-    // If repo was present in file, use it.
-    if (item.pkgid) return item.pkgid;
-
-    // Last resort (may fail if PackageKit insists on a full ID)
-    return `${item.name};${item.version};${item.arch};installed`;
+function capitalize(str) {
+    if (!str) return str;
+    str = str.trimStart();
+    return str.charAt(0).toLocaleUpperCase() + str.slice(1);
 }
 
 function showDetails(item) {
@@ -123,7 +67,7 @@ function showDetails(item) {
 
     win.add(vbox);
 
-    win.connect("key-press-event", (actor, event) => {
+    win.connect("key-press-event", (_actor, event) => {
         return checkKeysForExit(event, win, () => win = null);
     });
 
@@ -135,16 +79,16 @@ function showDetails(item) {
     });
     win.show_all();
 
-    let pkgid = buildPkgIdWithRepoFallback(item);
+    let pkgid = item.values.pkgid;
     print("fetching details for:", pkgid);
 
     let launcher = new Gio.SubprocessLauncher({
         flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
     });
     launcher.setenv("LANG", "en_US.UTF-8", true);
-    let subprocess = launcher.spawnv(["pkcon", "get-update-detail", pkgid]);
-    subprocess.communicate_utf8_async(null, null, (proc, res) => {
-        try {
+    try {
+        let subprocess = launcher.spawnv(["pkcon", "get-update-detail", pkgid]);
+        subprocess.communicate_utf8_async(null, null, (proc, res) => {
             let [ok, stdout, stderr] = proc.communicate_utf8_finish(res);
             if (!win) return;
 
@@ -172,23 +116,37 @@ function showDetails(item) {
             }
 
             scroll.show_all();
-        } catch (e) {
-            if (!win) return;
+        });
+    } catch (e) {
+        if (!win) return;
 
-            spinner.stop();
-            hbox.hide();
-            let errorLabel = new Gtk.Label({ label: _("Failed to run command:\n{0}").format(e.message) });
-            vbox.pack_start(errorLabel, true, true, 0);
-            errorLabel.show();
-        }
-    });
+        spinner.stop();
+        hbox.hide();
+        let errorLabel = new Gtk.Label({ label: _("Failed to run command:\n{0}").format(e.message) });
+        vbox.pack_start(errorLabel, false, false, 0);
+        errorLabel.show();
+    }
 }
 
 Gtk.init(null);
 
+const css = `
+.update-name { font-weight: bold; }
+.update-spec { opacity: 0.7; }
+.update-info { opacity: 0.7; }
+.update-desc { font-style: italic; opacity: 0.3; }
+`
+let prov = new Gtk.CssProvider();
+prov.load_from_data(css);
+Gtk.StyleContext.add_provider_for_screen(
+    Gdk.Screen.get_default(),
+    prov,
+    Gtk.STYLE_PROVIDER_PRIORITY_USER
+);
+
 // main window
 let win = new Gtk.Window({ title: _("Updates") });
-win.set_default_size(640, 640);
+win.set_default_size(720, 720);
 
 // VBox for search + list
 let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 4 });
@@ -229,23 +187,49 @@ win.add(vbox);
 // Keep all rows so we can filter later
 let allRows = [];
 
-// parse updates from ARGV[0]
-let [success, buffer] = GLib.file_get_contents(ARGV[0]);
+// parse updates from ARGV[1]
+let [success, buffer] = GLib.file_get_contents(ARGV[1]);
 if (success) {
     let text = typeof TextDecoder !== "undefined" ? new TextDecoder().decode(buffer) : String(buffer); // workaround for older cjs versions
-    let updates = parseUpdates(text);
-    win.title = _("{0} updates").format(updates.length);
-    for (let u of updates) {
+    const updates = new Map(
+        [...Updates.fromStr(text).map.entries()]
+            .sort((a, b) => a[0].localeCompare(b[0], undefined, { sensitivity: "base" }))
+    );
+    win.title = _("{0} updates").format(updates.size);
+
+    let makeLabel = (str, cls) => {
+        let label = new Gtk.Label({ label: str, xalign: 0 });
+        label.get_style_context().add_class(cls);
+        return label;
+    }
+
+    for (const [name, u] of updates) {
         let row = new Gtk.ListBoxRow();
-        let label = new Gtk.Label({ label: u.line, xalign: 0 });
-        row.add(label);
-        row._item = u;
+        let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8 });
+
+        box.pack_start(makeLabel(capitalize(u.type), "update-info"), false, false, 0);
+        box.pack_start(makeLabel(name, "update-name"), false, false, 0);
+        if (u.localVersion && u.localVersion !== u.version) {
+            box.pack_start(makeLabel(`${u.localVersion} → ${u.version}`, "update-spec"), false, false, 0);
+        } else {
+            box.pack_start(makeLabel(`${u.version}`, "update-spec"), false, false, 0);
+        }
+        box.pack_start(makeLabel(u.description, "update-desc"), false, false, 0);
+
+        row.add(box);
+        row._item = { name: name, values: u };
+
         listbox.add(row);
         allRows.push(row);
     }
+} else {
+    let label = new Gtk.Label({ label: _("Failed to read updates file:\n{0}").format(buffer), xalign: 0, yalign: 0 });
+    vbox.remove(scroll);
+    vbox.pack_start(label, true, true, 0);
+    label.show();
 }
 
-listbox.connect("row-activated", (box, row) => {
+listbox.connect("row-activated", (_box, row) => {
     if (row._item)
         showDetails(row._item);
 });
@@ -253,15 +237,14 @@ listbox.connect("row-activated", (box, row) => {
 function applyFilter() {
     const query = searchEntry.text.toLowerCase();
     for (const row of allRows) {
-        const label = row.get_child();
-        const text = label.get_text().toLowerCase();
-        row.set_visible(text.includes(query));
+        const text = "{0} {1} {2}".format(row._item.values.type, row._item.name, row._item.values.description);
+        row.set_visible(text.toLowerCase().includes(query));
     }
 }
 
 searchEntry.connect("changed", applyFilter);
 
-win.connect("key-press-event", (actor, event) => {
+win.connect("key-press-event", (_actor, event) => {
     const [, key] = event.get_keyval();
     const [, modifier] = event.get_state();
 
@@ -303,7 +286,7 @@ win.connect("delete-event", () => {
     Gtk.main_quit();
 });
 
-win.connect("key-press-event", (actor, event) => {
+win.connect("key-press-event", (_actor, event) => {
     return checkKeysForExit(event, win,
         () => {
             win = null;

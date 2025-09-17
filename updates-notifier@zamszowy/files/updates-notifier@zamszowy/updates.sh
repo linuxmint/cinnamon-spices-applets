@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 
-set -eu
+set -u
 
 DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 readonly DIR
 
 case "$1" in
 check)
-    if out=$(LANG=en_US.UTF-8 pkcon get-updates --plain 2>&1); then
-        awk '/^Results:/{flag=1; next} flag && NF && $1 != "Blocked"' <<< "$out" >"$DIR"/updates
-        wc -l <"$DIR"/updates
-    else
-        echo 0
-    fi
+    pkcon refresh &>/dev/null
+    pkcon get-updates &>/dev/null
+    pkcon get-packages --filter installed &>/dev/null
+    sleep 1 # give time for transaction to finish
     ;;
 view)
-    /usr/bin/cjs "$DIR"/info-window.js "$DIR"/updates
+    /usr/bin/cjs "$DIR"/info-window.js "$DIR" "$DIR"/updates
     ;;
 command)
     readonly cmd=$2

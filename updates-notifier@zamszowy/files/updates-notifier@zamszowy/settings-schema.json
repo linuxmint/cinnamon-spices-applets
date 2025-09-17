@@ -6,7 +6,7 @@
     "update-refresh": {
         "type": "entry",
         "default": "60",
-        "description": "Minutes to wait before refreshing applet"
+        "description": "Minutes to wait before refreshing updates"
     },
     "hide-applet": {
         "type": "switch",
@@ -32,18 +32,27 @@
     },
     "section2": {
         "type": "section",
-        "description": "Commands to execute in popup menu"
+        "description": "Applet click"
+    },
+    "show-window-on-click": {
+        "type": "switch",
+        "default": false,
+        "description": "Show updates window on left click and menu entries on right click"
+    },
+    "refresh-when-no-updates": {
+        "type": "switch",
+        "default": true,
+        "description": "Refresh updates list on left click if there are no updates",
+        "dependency": "show-window-on-click"
+    },
+    "section3": {
+        "type": "section",
+        "description": "Menu"
     },
     "commandUpdate-show": {
         "type": "switch",
         "default": true,
         "description": "Show \"Check for new updates\" command"
-    },
-    "commandUpdate": {
-        "type": "entry",
-        "default": "pkcon refresh",
-        "description": "Check for new updates:",
-        "dependency": "commandUpdate-show"
     },
     "commandUpgrade-show": {
         "type": "switch",
@@ -53,10 +62,10 @@
     "commandUpgrade": {
         "type": "entry",
         "default": "pkcon update",
-        "description": "Upgrade packages:",
+        "description": "Upgrade packages command:",
         "dependency": "commandUpgrade-show"
     },
-    "section3": {
+    "section4": {
         "type": "section",
         "description": "Theme"
     },
