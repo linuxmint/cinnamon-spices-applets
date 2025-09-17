@@ -42,7 +42,7 @@
     "keyOpen": {
         "type": "keybinding",
         "description": "Show menu",
-        "default": "<Super>s",
+        "default": "<Super>a",
         "tooltip": "Set keybinding(s) to show menu."
     }
 }

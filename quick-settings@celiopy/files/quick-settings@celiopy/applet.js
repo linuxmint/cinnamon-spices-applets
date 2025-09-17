@@ -402,7 +402,7 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
-
+        
         // Seções do menu
         this.prefsSection = new PopupMenu.PopupMenuSection();
         this.interfaceSection = new PopupMenu.PopupMenuSection();
@@ -421,8 +421,8 @@ class CinnamonUserApplet extends Applet.TextIconApplet {
             x_align: Clutter.ActorAlign.FILL
         });
         let gridLayout = this.prefsGrid.layout_manager;
-        gridLayout.set_column_spacing(12);
-        gridLayout.set_row_spacing(16);
+        gridLayout.set_column_spacing(16);
+        gridLayout.set_row_spacing(24);
         gridLayout.set_column_homogeneous(true);
         this.prefsSection.actor.add_child(this.prefsGrid);
 
