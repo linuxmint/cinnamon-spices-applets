@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: powerman@dr.drummie 1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/dr-drummie/powerman\n"
-"POT-Creation-Date: 2025-09-06 22:34+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
+"POT-Creation-Date: 2025-09-15 23:57+0200\n"
 "PO-Revision-Date: 2025-09-06 22:34+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,383 +17,306 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/applet.js:61
+#: src/applet.js:53 src/powerman-framework.js:29
 msgid "Power Saver"
 msgstr "Poupança de energia"
 
-#: src/applet.js:62
+#: src/applet.js:54 src/powerman-framework.js:30
 msgid "Balanced"
 msgstr "Equilibrado"
 
-#: src/applet.js:63
+#: src/applet.js:55 src/powerman-framework.js:31
 msgid "Performance"
 msgstr "Desempenho"
 
-#: src/applet.js:74
+#: src/applet.js:62
 msgid "Battery full"
 msgstr "Bateria cheia"
 
-#: src/applet.js:76
+#: src/applet.js:64
 msgid "Battery almost full"
 msgstr "Bateria quase cheia"
 
-#: src/applet.js:78
+#: src/applet.js:66
 msgid "Battery good"
 msgstr "Bateria boa"
 
-#: src/applet.js:80
+#: src/applet.js:68
 msgid "Low battery"
 msgstr "Bateria baixa"
 
-#: src/applet.js:82
+#: src/applet.js:70
 msgid "Critically low battery"
 msgstr "Bateria criticamente baixa"
 
-#: src/applet.js:84 src/applet.js:153
+#: src/applet.js:72 src/applet.js:138
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: src/applet.js:96
+#: src/applet.js:79
 msgid "AC adapter"
 msgstr "Adaptador AC"
 
-#: src/applet.js:98
+#: src/applet.js:81
 msgid "Laptop battery"
 msgstr "Bateria de laptop"
 
-#: src/applet.js:100 src/applet.js:1624
+#: src/applet.js:83
 msgid "UPS"
 msgstr "UPS"
 
-#: src/applet.js:102
+#: src/applet.js:85
 msgid "Monitor"
 msgstr "Monitor"
 
-#: src/applet.js:104
+#: src/applet.js:87
 msgid "Mouse"
 msgstr "Rato"
 
-#: src/applet.js:106
+#: src/applet.js:89
 msgid "Keyboard"
 msgstr "Teclado"
 
-#: src/applet.js:108
+#: src/applet.js:91
 msgid "PDA"
 msgstr "PDA"
 
-#: src/applet.js:110
+#: src/applet.js:93
 msgid "Cell phone"
 msgstr "Telefone celular"
 
-#: src/applet.js:112
+#: src/applet.js:95
 msgid "Media player"
 msgstr "Reprodutor de mídia"
 
-#: src/applet.js:114
+#: src/applet.js:97
 msgid "Tablet"
 msgstr "Tablet"
 
-#: src/applet.js:116
+#: src/applet.js:99
 msgid "Computer"
 msgstr "Computador"
 
-#: src/applet.js:118
+#: src/applet.js:101
 msgid "Gaming input"
 msgstr "Entrada de jogos"
 
-#: src/applet.js:120
+#: src/applet.js:103
 msgid "Pen"
 msgstr "Caneta"
 
-#: src/applet.js:122
+#: src/applet.js:105
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: src/applet.js:124
+#: src/applet.js:107
 msgid "Modem"
 msgstr "Modem"
 
-#: src/applet.js:126
+#: src/applet.js:109
 msgid "Network"
 msgstr "Rede"
 
-#: src/applet.js:128
+#: src/applet.js:111
 msgid "Headset"
 msgstr "Fone de ouvido com microfone"
 
-#: src/applet.js:130
+#: src/applet.js:113
 msgid "Speakers"
 msgstr "Alto-falantes"
 
-#: src/applet.js:132
+#: src/applet.js:115
 msgid "Headphones"
 msgstr "Fones de ouvido"
 
-#: src/applet.js:134
+#: src/applet.js:117
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/applet.js:136
+#: src/applet.js:119
 msgid "Audio device"
 msgstr "Dispositivo de áudio"
 
-#: src/applet.js:138
+#: src/applet.js:121
 msgid "Remote control"
 msgstr "Controle remoto"
 
-#: src/applet.js:140
+#: src/applet.js:123
 msgid "Printer"
 msgstr "Impressora"
 
-#: src/applet.js:142
+#: src/applet.js:125
 msgid "Scanner"
 msgstr "Scanner"
 
-#: src/applet.js:144
+#: src/applet.js:127
 msgid "Camera"
 msgstr "Câmera"
 
-#: src/applet.js:146
+#: src/applet.js:129
 msgid "Wearable"
 msgstr "Vestível"
 
-#: src/applet.js:148
+#: src/applet.js:131
 msgid "Toy"
 msgstr "Brinquedo"
 
-#: src/applet.js:555 src/applet.js:1373
+#: src/applet.js:133
+#, fuzzy
+msgid "Bluetooth device"
+msgstr "Dispositivo de áudio"
+
+#: src/applet.js:433 src/applet.js:1042
 msgid "Brightness"
 msgstr "Brilho"
 
-#: src/applet.js:556 src/applet.js:1378
+#: src/applet.js:434 src/applet.js:1047
 msgid "Keyboard backlight"
 msgstr "Iluminação do teclado"
 
-#: src/applet.js:624
+#: src/applet.js:445
 msgid "Automation Settings"
 msgstr "Configurações de automação"
 
-#: src/applet.js:633
+#: src/applet.js:454
 msgid "Power Settings"
 msgstr "Configurações de energia"
 
-#: src/applet.js:782
-msgid "Power Automation"
-msgstr "Automação de energia"
-
-#: src/applet.js:832
+#: src/applet.js:684
 msgid "Charging"
 msgstr "Carregando"
 
-#: src/applet.js:836
+#: src/applet.js:688
 #, javascript-format
 msgid "Charging - %d hour until fully charged"
 msgid_plural "Charging - %d hours until fully charged"
 msgstr[0] "Carregando - %d hora até carregar completamente"
 msgstr[1] "Carregando - %d horas até carregar completamente"
 
-#: src/applet.js:842
+#: src/applet.js:693
 #, javascript-format
 msgid "Charging - %d %s %d %s until fully charged"
 msgstr "Carregando - %d %s %d %s até carregar completamente"
 
-#: src/applet.js:845 src/applet.js:874
+#: src/applet.js:696 src/applet.js:724
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-#: src/applet.js:847 src/applet.js:876
+#: src/applet.js:698 src/applet.js:726
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
-#: src/applet.js:852
+#: src/applet.js:703
 #, javascript-format
 msgid "Charging - %d minute until fully charged"
 msgid_plural "Charging - %d minutes until fully charged"
 msgstr[0] "Carregando - %d minuto até carregar completamente"
 msgstr[1] "Carregando - %d minutos até carregar completamente"
 
-#: src/applet.js:858
+#: src/applet.js:709
 msgid "Fully charged"
 msgstr "Completamente carregado"
 
-#: src/applet.js:861
+#: src/applet.js:712
 msgid "Using battery power"
 msgstr "Usando energia da bateria"
 
-#: src/applet.js:865
+#: src/applet.js:716
 #, javascript-format
 msgid "Using battery power - %d hour remaining"
 msgid_plural "Using battery power - %d hours remaining"
 msgstr[0] "Usando energia da bateria - %d hora restante"
 msgstr[1] "Usando energia da bateria - %d horas restantes"
 
-#: src/applet.js:871
+#: src/applet.js:721
 #, javascript-format
 msgid "Using battery power - %d %s %d %s remaining"
 msgstr "Usando energia da bateria - %d %s %d %s restantes"
 
-#: src/applet.js:881
+#: src/applet.js:731
 #, javascript-format
 msgid "Using battery power - %d minute remaining"
 msgid_plural "Using battery power - %d minutes remaining"
 msgstr[0] "Usando energia da bateria - %d minuto restante"
 msgstr[1] "Usando energia da bateria - %d minutos restantes"
 
-#: src/applet.js:887
+#: src/applet.js:737
 msgid "Fully discharged"
 msgstr "Completamente descarregado"
 
-#: src/applet.js:889
+#: src/applet.js:739
 msgid "Not charging"
 msgstr "Não carregando"
 
-#: src/applet.js:916 src/applet.js:926 src/applet.js:1321 src/applet.js:1341
+#: src/applet.js:757 src/applet.js:767 src/applet.js:1000 src/applet.js:1010
 #, javascript-format
 msgctxt "time of battery remaining"
 msgid "%d:%02d"
 msgstr "%d:%02d"
 
-#: src/applet.js:918 src/applet.js:924 src/applet.js:1329 src/applet.js:1337
+#: src/applet.js:759 src/applet.js:765 src/applet.js:1002 src/applet.js:1008
 #, javascript-format
 msgctxt "percent of battery remaining"
 msgid "%d%%"
 msgstr "%d%%"
 
-#: src/applet.js:1486
-msgid "Switched to AC power"
-msgstr "Mudou para energia AC"
-
-#: src/applet.js:1490
-msgid "Switched to battery power"
-msgstr "Mudou para energia da bateria"
-
-#: src/applet.js:1558
-#, javascript-format
-msgid "CRITICAL: Battery %s critically low (%d%%)"
-msgstr "CRÍTICO: Bateria %s criticamente baixa (%d%%)"
-
-#: src/applet.js:1560 src/applet.js:1591
+#: src/powerman-framework.js:631
 msgid "Critical Battery"
 msgstr "Bateria crítica"
 
-#: src/applet.js:1561
-#, javascript-format
-msgid "Battery %s critically low (%d%%)"
-msgstr "Bateria %s criticamente baixa (%d%%)"
-
-#: src/applet.js:1567
-#, javascript-format
-msgid "LOW: Battery %s low (%d%%)"
-msgstr "BAIXO: Bateria %s baixa (%d%%)"
-
-#: src/applet.js:1568 src/applet.js:1594
-msgid "Low Battery"
-msgstr "Bateria baixa"
-
-#: src/applet.js:1568
-#, javascript-format
-msgid "Battery %s low (%d%%)"
-msgstr "Bateria %s baixa (%d%%)"
-
-#: src/applet.js:1581
-#, javascript-format
-msgid "Auto-enabled power saver (battery low: %d%%)"
-msgstr "Poupança de energia ativada automaticamente (bateria baixa: %d%%)"
-
-#: src/applet.js:1590
-#, javascript-format
-msgid "CRITICAL: Battery %s critically low"
-msgstr "CRÍTICO: Bateria %s criticamente baixa"
-
-#: src/applet.js:1591
+#: src/powerman-framework.js:632
 #, javascript-format
 msgid "Battery %s critically low"
 msgstr "Bateria %s criticamente baixa"
 
-#: src/applet.js:1593
-#, javascript-format
-msgid "LOW: Battery %s low"
-msgstr "BAIXO: Bateria %s baixa"
+#: src/powerman-framework.js:637
+msgid "Low Battery"
+msgstr "Bateria baixa"
 
-#: src/applet.js:1594
+#: src/powerman-framework.js:638
 #, javascript-format
 msgid "Battery %s low"
 msgstr "Bateria %s baixa"
 
-#: src/applet.js:1613
-msgid "Battery"
-msgstr "Bateria"
-
-#: src/applet.js:1626
-msgid "AC Adapter"
-msgstr "Adaptador AC"
-
-#: src/applet.js:1628
-msgid "Power Device"
-msgstr "Dispositivo de energia"
-
-#: src/applet.js:1743 src/applet.js:1771
-msgid "Power Applet"
-msgstr "Applet de energia"
-
-#: src/applet.js:1743
-msgid "System power applet disabled. Using PowerMan instead."
-msgstr "Applet de energia do sistema desativado. Usando PowerMan em vez disso."
-
-#: src/applet.js:1749 src/applet.js:1777
-msgid "Error"
-msgstr "Erro"
-
-#: src/applet.js:1749
-msgid "Could not disable system power applet"
-msgstr "Não foi possível desativar o applet de energia do sistema"
-
-#: src/applet.js:1771
-msgid "System power applet re-enabled. Both applets are now active."
-msgstr "Applet de energia do sistema reativado. Ambos os applets estão agora ativos."
-
-#: src/applet.js:1777
-msgid "Could not restore system power applet"
-msgstr "Não foi possível restaurar o applet de energia do sistema"
-
-#: src/applet.js:1866 src/applet.js:1908
+#: src/powerman-framework.js:797 src/powerman-framework.js:819
 #, javascript-format
 msgid "brightness %d%%"
 msgstr "brilho %d%%"
 
-#: src/applet.js:1874 src/applet.js:1926
+#: src/powerman-framework.js:969
 #, javascript-format
 msgid "power profile %s"
 msgstr "perfil de energia %s"
 
-#: src/applet.js:1883
-msgid "AC power: "
-msgstr "Energia AC: "
-
-#: src/applet.js:1887
-msgid "Switched to AC power (no automation applied)"
-msgstr "Mudou para energia AC (nenhuma automação aplicada)"
-
-#: src/applet.js:1901
-msgid "Switched to battery power (no battery devices detected)"
-msgstr "Mudou para energia da bateria (nenhum dispositivo de bateria detectado)"
-
-#: src/applet.js:1916
+#: src/powerman-framework.js:1087
 #, javascript-format
 msgid "power-saver mode (battery low: %d%%)"
 msgstr "modo de poupança de energia (bateria baixa: %d%%)"
 
-#: src/applet.js:1936
+#: src/powerman-framework.js:1207
+msgid "AC power: "
+msgstr "Energia AC: "
+
+#: src/powerman-framework.js:1207
 msgid "Battery power: "
 msgstr "Energia da bateria: "
 
-#: src/applet.js:1940
-msgid "Switched to battery power (no automation applied)"
-msgstr "Mudou para energia da bateria (nenhuma automação aplicada)"
+#: src/powerman-framework.js:1232
+msgid "Power Automation"
+msgstr "Automação de energia"
+
+# Metadata strings from metadata.json
+msgid ""
+"Enhanced power management with separate AC/Battery settings for brightness, "
+"power profiles, and automation - based on original power applet for Cinnamon"
+msgstr ""
+
+msgid "PowerMan - Enhanced Power Manager"
+msgstr ""
 
 # Settings UI strings from settings-schema.json
 msgid "10 minutes"
@@ -420,6 +343,12 @@ msgstr "5 minutos"
 msgid "5 seconds"
 msgstr "5 segundos"
 
+msgid "60 seconds"
+msgstr "60 segundos"
+
+msgid "90 seconds"
+msgstr "90 segundos"
+
 msgid "AC brightness level (%)"
 msgstr "Nível de brilho AC (%)"
 
@@ -445,7 +374,9 @@ msgid "Automatically switch power profiles for AC/Battery"
 msgstr "Alternar automaticamente perfis de energia para AC/Bateria"
 
 msgid "Automatically switch to power-saver mode when battery is low"
-msgstr "Alternar automaticamente para modo de poupança de energia quando a bateria estiver baixa"
+msgstr ""
+"Alternar automaticamente para modo de poupança de energia quando a bateria "
+"estiver baixa"
 
 msgid "Auto power-saver on low battery"
 msgstr "Poupança de energia automática na bateria baixa"
@@ -454,7 +385,9 @@ msgid "Battery brightness level (%)"
 msgstr "Nível de brilho da bateria (%)"
 
 msgid "Battery percentage below which to automatically enable power-saver mode"
-msgstr "Percentagem da bateria abaixo da qual ativar automaticamente o modo de poupança de energia"
+msgstr ""
+"Percentagem da bateria abaixo da qual ativar automaticamente o modo de "
+"poupança de energia"
 
 msgid "Battery power profile"
 msgstr "Perfil de energia da bateria"
@@ -490,7 +423,8 @@ msgid "Dim screen when idle on battery"
 msgstr "Diminuir tela quando inativo na bateria"
 
 msgid "Disable default Cinnamon power applet and use PowerMan instead"
-msgstr "Desativar applet de energia padrão do Cinnamon e usar PowerMan em vez disso"
+msgstr ""
+"Desativar applet de energia padrão do Cinnamon e usar PowerMan em vez disso"
 
 msgid "Display"
 msgstr "Exibir"
@@ -499,18 +433,22 @@ msgid "Display and Advanced"
 msgstr "Exibir e avançado"
 
 msgid "Display notifications when power automation actions are performed"
-msgstr "Exibir notificações quando ações de automação de energia são executadas"
+msgstr ""
+"Exibir notificações quando ações de automação de energia são executadas"
 
 msgid ""
 "Enable automatic switching between different power profiles for AC and "
 "Battery"
-msgstr "Ativar alternância automática entre diferentes perfis de energia para AC e bateria"
+msgstr ""
+"Ativar alternância automática entre diferentes perfis de energia para AC e "
+"bateria"
 
 msgid "Enable debug logging"
 msgstr "Ativar registro de depuração"
 
 msgid "Enable detailed logging for troubleshooting power automation"
-msgstr "Ativar registro detalhado para solução de problemas de automação de energia"
+msgstr ""
+"Ativar registro detalhado para solução de problemas de automação de energia"
 
 msgid "Enable separate brightness levels for AC power and battery power"
 msgstr "Ativar níveis de brilho separados para energia AC e bateria"
@@ -520,6 +458,9 @@ msgstr "Ocultar ícone do applet do painel"
 
 msgid "Hide label"
 msgstr "Ocultar rótulo"
+
+msgid "List of original power applets that were disabled"
+msgstr ""
 
 msgid "Low battery threshold (%)"
 msgstr "Limite de bateria baixa (%)"
@@ -542,7 +483,9 @@ msgstr "Automação de perfil de energia"
 msgid ""
 "Power profile automation is not available. No power profiles daemon or "
 "battery devices detected."
-msgstr "Automação de perfil de energia não está disponível. Nenhum daemon de perfis de energia ou dispositivos de bateria detectados."
+msgstr ""
+"Automação de perfil de energia não está disponível. Nenhum daemon de perfis "
+"de energia ou dispositivos de bateria detectados."
 
 msgid "Power profile to use when on AC power"
 msgstr "Perfil de energia a usar na energia AC"
@@ -550,13 +493,18 @@ msgstr "Perfil de energia a usar na energia AC"
 msgid "Power profile to use when on battery power"
 msgstr "Perfil de energia a usar na energia da bateria"
 
+msgid "Prefer battery-based AC detection"
+msgstr ""
+
 msgid "Replace system power applet"
 msgstr "Substituir applet de energia do sistema"
 
 msgid ""
 "Screen brightness control is not available on this system. Brightness "
 "automation is disabled."
-msgstr "Controle de brilho da tela não está disponível neste sistema. Automação de brilho está desativada."
+msgstr ""
+"Controle de brilho da tela não está disponível neste sistema. Automação de "
+"brilho está desativada."
 
 msgid "Screen Dimming Settings"
 msgstr "Configurações de diminuição da tela"
@@ -581,3 +529,8 @@ msgstr "O nível de brilho a usar ao diminuir a tela"
 
 msgid "Time before screen dims when idle"
 msgstr "Tempo antes de a tela diminuir quando inativo"
+
+msgid ""
+"Use battery state for AC detection instead of LINE_POWER (recommended for "
+"most laptops)"
+msgstr ""

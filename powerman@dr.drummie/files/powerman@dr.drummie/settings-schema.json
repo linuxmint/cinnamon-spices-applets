@@ -17,7 +17,7 @@
     "section-brightness-dimming": {
       "type": "section",
       "title": "Screen Dimming Settings",
-      "keys": ["idle-dim-ac", "idle-dim-battery", "idle-dim-time", "idle-brightness"],
+      "keys": ["idle-dim-ac", "idle-dim-battery", "idle-brightness", "idle-dim-time"],
       "dependency": "brightness-available"
     },
     "section-brightness-info": {
@@ -64,7 +64,7 @@
     "section-notifications": {
       "type": "section",
       "title": "Notifications and System Integration",
-      "keys": ["show-notifications", "replace-system-tray-icon"]
+      "keys": ["show-notifications", "replace-system-tray-icon", "prefer-battery-ac-detection"]
     },
     "section-debug": {
       "type": "section",
@@ -81,7 +81,7 @@
   },
   "ac-brightness": {
     "type": "scale",
-    "default": 85,
+    "default": 80,
     "min": 5,
     "max": 100,
     "step": 5,
@@ -118,24 +118,26 @@
     "description": "Screen dim timeout",
     "tooltip": "Time before screen dims when idle",
     "options": {
-      "5 seconds": 5,
-      "10 seconds": 10,
-      "15 seconds": 15,
       "30 seconds": 30,
-      "1 minute": 60,
+      "60 seconds": 60,
+      "90 seconds": 90,
       "2 minutes": 120,
       "5 minutes": 300,
       "10 minutes": 600
     }
   },
   "idle-brightness": {
-    "type": "scale",
+    "type": "combobox",
     "default": 10,
-    "min": 5,
-    "max": 90,
-    "step": 5,
     "description": "Brightness level when dimmed (%)",
-    "tooltip": "The brightness level to use when dimming the screen"
+    "tooltip": "The brightness level to use when dimming the screen",
+    "options": {
+      "5%            ": 5,
+      "10%           ": 10,
+      "30%           ": 30,
+      "50%           ": 50,
+      "75%           ": 75
+    }
   },
 
   "enable-profile-auto": {
@@ -221,6 +223,12 @@
     "default": false,
     "description": "Hide applet icon from panel",
     "tooltip": "Hide applet icon from panel"
+  },
+  "prefer-battery-ac-detection": {
+    "type": "switch",
+    "default": true,
+    "description": "Prefer battery-based AC detection",
+    "tooltip": "Use battery state for AC detection instead of LINE_POWER (recommended for most laptops)"
   },
 
   "debug-logging": {

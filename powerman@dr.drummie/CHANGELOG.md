@@ -1,0 +1,23 @@
+# Changelog
+
+## [1.9.1]
+
+- Refactored whole automation logic into extension framework with hooks and dedicated managers separated from applet's main logic.
+- Fixed (most of) brightness and dimming switching bugs on power source changes.
+- Improved responsiveness and speed of the applet.
+- Added icons to notifications.
+- Removed some unneeded notifications.
+- Improved debug logging for troubleshooting.
+
+## [1.6.6]
+
+- Initial release with power profile automation.
+- Added separate AC/battery brightness levels.
+- All logic inside original Power applet.
+
+## Known Issues
+
+- If PowerMan is set to replace default Power applet and then uninstalled, you may need to manually re-enable the default power applet in Applet Manager and restart the system or logout/login. If PowerMan is still installed and active, you need to enable default Power applet, then uncheck "Replace system applet", it should appear in System tray.
+- If dimming is enabled and screen is dimmed (user is idle), power profile would be switched immediately, but brightness will be switched after user become active again (to avoid screen brightness dimming bugs).
+- If you have dimming enabled for i.e. only battery mode, after auto switching from AC to battery, dimming would not be active until some user activity (couldn't find a way around that issue).
+  

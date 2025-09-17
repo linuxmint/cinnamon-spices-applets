@@ -1,8 +1,8 @@
 # PowerMan - Enhanced Power Manager for Cinnamon
 
-An enhanced power management applet for Linux Mint Cinnamon that extends the default power applet with automation features for brightness and power profiles. Mostly usable on laptops.
+An enhanced power management applet for Linux Mint Cinnamon that extends the default <power@cinnamon.org> applet with automation features for brightness and power profiles. Mostly usable on laptops.
 
-![PowerMan Icon](https://img.shields.io/badge/version-1.6.2-blue) ![Cinnamon](https://img.shields.io/badge/cinnamon-6.0%2B-green) ![License](https://img.shields.io/badge/license-GPL--3.0-orange)
+![PowerMan Icon](https://img.shields.io/badge/version-1.9.1-blue) ![Cinnamon](https://img.shields.io/badge/cinnamon-6.0%2B-green) ![License](https://img.shields.io/badge/license-GPL--3.0-orange)
 
 ## Features
 
@@ -26,7 +26,6 @@ An enhanced power management applet for Linux Mint Cinnamon that extends the def
 ### 🎛️ **Advanced Configuration**
 
 - **Conditional settings visibility** - options appear only when hardware supports them
-- **Hardware capability detection** - detection of brightness control, battery and power profiles
 - **System integration** option to replace default Cinnamon power applet or to hide this one when you're satisfied with your settings
 - **Debug logging** for troubleshooting automation issues
 
@@ -72,15 +71,11 @@ PowerMan can replace the default Cinnamon power applet on laptop systems:
 
 - **System tray position**: Adjustable in panel edit mode (right-click panel → "Panel edit mode")
 - **Replacing default applet**: PowerMan is designed to serve as a complete replacement for the built-in power applet
-- **Restoration**: If PowerMan is uninstalled, you may need to manually re-enable the default power applet in Applet Manager and restart the system or logout/login
+- **Restoration**: If PowerMan is uninstalled, you may need to manually re-enable the default power applet in Applet Manager and restart the system or logout/login. If PowerMan is still installed and active, you need to enable default Power applet, then uncheck "Replace system applet", it should appear in System tray
 
 ## Hardware Requirements
 
-PowerMan is mostly usable for laptops:
-
-- **✅ Any system**: Basic power monitoring and device status
-- **🔋 + Battery**: Power profile automation depending on power source, battery saver
-- **💡 + Brightness control**: Automatic brightness switching depending on power source, idle dimming (dconf)
+- PowerMan is mostly usable for laptops, my own are little older.
 
 ## Compatibility
 
@@ -90,10 +85,10 @@ PowerMan is mostly usable for laptops:
 
 ### **Known Issues**
 
-- Idle dimming issues - If your i.e. laptop switches power-source while screen is dimmed, it will mess up brightness and "new" brightness will be assumed as "idle-brightness", seems to be problem of different nature - currently investigating
-- Sometimes there could be little longer interval to detect battery power source (when on battery)
-- Tested on 3 different laptops (older models), VM, real hardware (office PC)
-
+- If dimming is enabled and screen is dimmed (user is idle), power profile would be switched immediately, but brightness will be switched after user become active again (to avoid screen brightness dimming bugs)
+- If you have dimming enabled for i.e. only battery mode, after auto switching from AC to battery, dimming would not be active until some user activity
+- Tested on 3 different laptops (older models), VM, real hardware (office PC), seems to work fine
+  
 ### **Settings not appearing**
 
 - Restart Cinnamon: `Alt+F2` → type `r` → Enter
@@ -104,7 +99,7 @@ PowerMan is mostly usable for laptops:
 
 - Info messages explain when hardware/software requirements are not met
 - Examples: "Screen brightness control is not available" or "Power profile automation is not available"  
-- Enable debug logging to see detailed hardware detection results
+- Enable debug logging to see detailed hardware detection results (lg)
 
 ### **Brightness control not working**
 
