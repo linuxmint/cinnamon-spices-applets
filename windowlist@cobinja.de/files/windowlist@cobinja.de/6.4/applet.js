@@ -190,17 +190,6 @@ class CobiWindowListSettings extends Settings.AppletSettings {
     super(dummy, UUID, instanceId);
   }
   
-  _saveToFile() {
-    if (!this.monitorId) {
-      this.monitorId = this.monitor.connect("changed", Lang.bind(this, this._checkSettings));
-    }
-    let rawData = JSON.stringify(this.settingsData, null, 4);
-    let raw = this.file.replace(null, false, Gio.FileCreateFlags.NONE, null);
-    let out_file = Gio.BufferedOutputStream.new_sized(raw, 4096);
-    Cinnamon.write_string_to_stream(out_file, rawData);
-    out_file.close(null);
-  }
-  
   setValue(key, value) {
     if (!(key in this.settingsData)) {
       key_not_found_error(key, this.uuid);
