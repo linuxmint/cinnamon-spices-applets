@@ -355,7 +355,6 @@ class SensorsReaper {
             feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
         }
 
-        //Util.unref(subfeatures);
         subfeatures = null;
 
         if (type_of_feature.length > 0) {
@@ -372,7 +371,6 @@ class SensorsReaper {
     //~ log("LOCAL_DATA[temps]: " + JSON.stringify(LOCAL_DATA["temps"], null, "\t"), true);
     this.data = LOCAL_DATA;
     //~ LOCAL_DATA = null;
-    //Util.unref(chips);
     chips = null;
     adapter = null;
     this.isRunning = false;

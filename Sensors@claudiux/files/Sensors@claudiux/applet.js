@@ -576,14 +576,15 @@ class SensorsApplet extends Applet.Applet {
     var _known_keys = [];
 
     for (let k of this.sensors_list[type].get_value()) {
-      let _sensor = k["sensor"];
+      let _sensor = k["sensor"].trim();
 
       _known_keys.push(_sensor);
 
       if (k["shown_name"].length > 0) {
         //if (this.custom_names[_sensor]) log("custom_names: \"" + this.custom_names[_sensor] + "\"", true);
 
-        if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        //~ if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+        if (this.custom_names[_sensor] && (_sensor === k["shown_name"])) {
           delete this.custom_names[_sensor];
           k["shown_name"] = ""
         } else {
@@ -601,7 +602,8 @@ class SensorsApplet extends Applet.Applet {
     this.number_of_sensors[type].set_value(_sensors.length);
 
     for (let sensor of _sensors) {
-      name = sensor.toString().trim();
+      //~ name = sensor.toString().trim();
+      name = sensor.trim();
       toPush = {};
       index = _known_keys.indexOf(name);
       if (type === "temps") this.minimumIntegerDigitsTemp = 2;
@@ -640,10 +642,8 @@ class SensorsApplet extends Applet.Applet {
         this.sensors_list[type].set_value(ret);
         this.updateUI();
       }
-      //unref(ret);
       ret = null;
       _known_keys = null;
-      //unref(toPush);
       toPush = null;
       name = null;
       modified = null;
@@ -668,11 +668,11 @@ class SensorsApplet extends Applet.Applet {
         if (typeof contents === "object")
           lines = to_string(contents).split("\n");
         else
-          lines = ""+contents.split("\n");
+          lines = (""+contents).split("\n");
 
         for (let line of lines) {
           if (line.length === 0) continue;
-          let [name, temp] = line.split(" ");
+          let [name, temp] = line.trim().split(" ");
           if (name.length > 0)
             temps[name] = 1.0 * parseInt(temp);
         }
@@ -797,7 +797,8 @@ class SensorsApplet extends Applet.Applet {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
-              if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              //~ if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+              if (t["shown_name"] && t["sensor"] === t["shown_name"]) {
                 if (this.custom_names[t["sensor"]]) delete this.custom_names[t["sensor"]];
                 t["shown_name"] = ""
               }
@@ -904,7 +905,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_FAN + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -949,7 +950,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_VOLT + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
@@ -982,7 +983,7 @@ class SensorsApplet extends Applet.Applet {
           }
         }
       }
-      if (_tooltip !== "") {
+      if (_tooltip.length > 0) {
         _tooltip = C_INTRU + "\n" + _tooltip;
         _tooltips.push(_tooltip.trim());
       }
