@@ -1,3 +1,6 @@
+### v1.7.2~20250917
+* Better control of user rights regarding hibernation. Does the user have root rights using sudo?
+
 ### v1.7.1~20250917
 * Optimization and code cleanup.
 * Improves the Shortcuts tab in this applet settings to help users avoid errors.

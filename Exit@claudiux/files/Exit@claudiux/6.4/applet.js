@@ -98,7 +98,17 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
             if (this.applet.hibernateNeedsSudo) {
                 Util.spawnCommandLineAsync("pkexec sudo systemctl hibernate")
             } else {
-                Util.spawnCommandLineAsync("systemctl hibernate")
+                Util.spawnCommandLineAsyncIO("systemctl hibernate", (stdout, stderr, exitCode) => {
+                    //~ global.log("systemctl hibernate - exitCode: " + exitCode);
+                    if (exitCode === 1) {
+                        if (this.applet.sudo_or_wheel != null && this.applet.sudo_or_wheel !== "none") {
+                            this.applet.hibernateNeedsSudo = true;
+                            Util.spawnCommandLineAsync("pkexec sudo systemctl hibernate");
+                        } else {
+                            this.applet.hibernateNeedsSudo = false;
+                        }
+                    }
+                });
             }
             return true;
         }
@@ -140,6 +150,16 @@ class ExitApplet extends Applet.IconApplet {
 
         this.set_applet_icon_symbolic_name("system-shutdown");
         this.set_applet_tooltip(_(metadata.name));
+
+        this.sudo_or_wheel = "none";
+        let subProcess = Util.spawnCommandLineAsyncIO("/usr/bin/env bash -c 'groups'", (out, err, exitCode) => {
+            if (exitCode == 0) {
+                let groups = out.trim().split(' ');
+                if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
+                if (groups.indexOf("sudo") > -1) this.sudo_or_wheel = "sudo";
+            }
+            subProcess.send_signal(9);
+        });
 
         this.lockdown_settings = new Gio.Settings({ schema_id: 'org.cinnamon.desktop.lockdown' });
 
@@ -366,10 +386,20 @@ class ExitApplet extends Applet.IconApplet {
                 item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + " [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
-                    if (this.hibernateNeedsSudo)
+                    if (this.hibernateNeedsSudo) {
                         launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
-                    else
-                        launcher.spawnv(["systemctl", "hibernate"]);
+                    } else {
+                        Util.spawnCommandLineAsyncIO("systemctl hibernate", (stdout, stderr, exitCode) => {
+                            if (exitCode === 1) {
+                                if (this.sudo_or_wheel != null && this.sudo_or_wheel !== "none") {
+                                    this.hibernateNeedsSudo = true;
+                                    launcher.spawnv(["pkexec", "sudo", "systemctl", "hibernate"]);
+                                } else {
+                                    this.hibernateNeedsSudo = false;
+                                }
+                            }
+                        });
+                    }
                 });
                 this.menu.addMenuItem(item);
             } else {
