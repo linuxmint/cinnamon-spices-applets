@@ -30,7 +30,14 @@ Settings are accessed by selecting *Configure...* from this applet's contextual 
 ### Shortcuts tab
 
 * You can choose shortcuts to open the menu and reactivate the mouse and screen.
+
 * You can choose the keys used to select certain options when the menu is open.
+
+* A message reminds you of the keys already used.
+
+* The “Apply these keys to the menu” button must be clicked after each change.
+
+* A "Reset to default keys" button is available.
 
 ## System lock-down
 

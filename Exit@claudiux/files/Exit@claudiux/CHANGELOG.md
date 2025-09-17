@@ -1,3 +1,7 @@
+### v1.7.0~20250917
+* Optimization and code cleanup.
+* Improves the Shortcuts tab in this applet settings to help users avoid errors.
+
 ### v1.7.0~20250916
 * Adds shortcuts to open the menu and to reactivate mouse and screen.
 * Adds keys to select certain options when the menu is open.

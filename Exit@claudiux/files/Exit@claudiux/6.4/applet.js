@@ -13,7 +13,6 @@ const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
 const { restartCinnamon } = imports.ui.main;
 const ScreensaverInhibitor = require("./screensaverInhibitor");
-//~ const Mainloop = imports.mainloop;
 //mainloopTools:
 const {
   _sourceIds,
@@ -50,6 +49,24 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
+try {
+    Object.defineProperties(Array.prototype, {
+        count: {
+            value: function(query) {
+                /*
+                   Counts number of occurrences of query in array, an integer >= 0
+                   Uses the javascript == notion of equality.
+                */
+                var count = 0;
+                for(let i=0; i<this.length; i++)
+                    if (this[i]==query)
+                        count++;
+                return count;
+            }
+        }
+    });
+} catch(e) {}
+
 var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
     _init(launcher, orientation) {
         super._init(launcher, orientation);
@@ -63,40 +80,19 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
             return true;
         }
 
-        let mkSuspend = this.applet.s.getValue("mkSuspend");
-        if (mkSuspend.length === 0) {
-            mkSuspend = "S";
-        } else {
-            mkSuspend = mkSuspend[0].toUpperCase();
-        }
+        let mkSuspend = this.applet.mkSuspend;
         let mkSuspendLC = mkSuspend.toLowerCase();
 
-        let mkHibernate = this.applet.s.getValue("mkHibernate");
-        if (mkHibernate.length === 0) {
-            mkHibernate = "H";
-        } else {
-            mkHibernate = mkHibernate[0].toUpperCase();
-        }
+        let mkHibernate = this.applet.mkHibernate;
         let mkHibernateLC = mkHibernate.toLowerCase();
 
-        let mkRestart = this.applet.s.getValue("mkRestart");
-        if (mkRestart.length === 0) {
-            mkRestart = "R";
-        } else {
-            mkRestart = mkRestart[0].toUpperCase();
-        }
+        let mkRestart = this.applet.mkRestart;
         let mkRestartLC = mkRestart.toLowerCase();
 
-        let mkShutdown = this.applet.s.getValue("mkShutdown");
-        if (mkShutdown.length === 0) {
-            mkShutdown = "U";
-        } else {
-            mkShutdown = mkShutdown[0].toUpperCase();
-        }
+        let mkShutdown = this.applet.mkShutdown;
         let mkShutdownLC = mkShutdown.toLowerCase();
 
 
-        //~ if (this.applet.showHibernate && (ks === Clutter.KEY_H || ks === Clutter.KEY_h)) {
         if (this.applet.showHibernate && (ks === Clutter[`KEY_${mkHibernate}`] || ks === Clutter[`KEY_${mkHibernateLC}`])) {
             this.close(true);
             if (this.applet.hibernateNeedsSudo) {
@@ -116,7 +112,6 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
             Util.spawnCommandLineAsync("systemctl reboot");
             return true;
         }
-        //~ if (this.applet.showSuspend && (ks === Clutter.KEY_S || ks === Clutter.KEY_s)) {
         if (this.applet.showSuspend && (ks === Clutter[`KEY_${mkSuspend}`] || ks === Clutter[`KEY_${mkSuspendLC}`])) {
             this.close(true);
             Util.spawnCommandLineAsync("systemctl suspend");
@@ -180,6 +175,7 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("logoutMode", "logoutMode");
         this.s.bind("kbToggleMenu", "kbToggleMenu", () => { this.on_keybinds_changed() });
         this.s.bind("kbWakeUpMonitor", "kbWakeUpMonitor", () => { this.on_keybinds_changed() });
+        this.s.bind("sameKeyTwice", "sameKeyTwice");
     }
 
     check_system_managed_options() {
@@ -202,22 +198,8 @@ class ExitApplet extends Applet.IconApplet {
 
     screenOff() {
         let duration = Math.trunc(1000 * this.mouseDeactivationDuration);
-        //~ Util.spawn_async(
-            //~ ['/usr/bin/env', 'bash', '-c',
-            //~ 'for m in $(xinput | grep -i Mouse | tr -d " " | tr "\t" " " | cut -d" " -f2 | cut -d"=" -f2); do \
-            //~ xinput disable $m; done'],
-            //~ null
-        //~ );
         Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh disable");
         Util.spawnCommandLine('xset dpms force off');
-        //~ this.screenOffIntervalId = timeout_add(
-            //~ 300,
-            //~ () => {
-                //~ global.log("Screen Off");
-                //~ Util.spawnCommandLine('xset dpms force off');
-                //~ return true;
-            //~ }
-        //~ );
         let _to = setTimeout(
             () => {
                 clearTimeout(_to);
@@ -363,13 +345,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showSuspend) {
             if (this.can_shutdown) {
-                let mkSuspend = this.s.getValue("mkSuspend");
-                if (mkSuspend.length === 0) {
-                    mkSuspend = "S";
-                } else {
-                    mkSuspend = mkSuspend[0].toUpperCase();
-                }
-                item = new PopupMenu.PopupIconMenuItem(_("Suspend") + " [" + mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend") + " [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "suspend"]);
@@ -387,13 +363,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showHibernate) {
             if (this.can_shutdown) {
-                let mkHibernate = this.s.getValue("mkHibernate");
-                if (mkHibernate.length === 0) {
-                    mkHibernate = "H";
-                } else {
-                    mkHibernate = mkHibernate[0].toUpperCase();
-                }
-                item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + " [" + mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + " [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     if (this.hibernateNeedsSudo)
@@ -417,13 +387,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showRestart) {
             if (this.can_shutdown) {
-                let mkRestart = this.s.getValue("mkRestart");
-                if (mkRestart.length === 0) {
-                    mkRestart = "R";
-                } else {
-                    mkRestart = mkRestart[0].toUpperCase();
-                }
-                item = new PopupMenu.PopupIconMenuItem(_("Restart") + " [" + mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Restart") + " [" + this.mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "reboot"]);
@@ -441,13 +405,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showPowerOff) {
             if (this.can_shutdown) {
-                let mkShutdown = this.s.getValue("mkShutdown");
-                if (mkShutdown.length === 0) {
-                    mkShutdown = "U";
-                } else {
-                    mkShutdown = mkShutdown[0].toUpperCase();
-                }
-                item = new PopupMenu.PopupIconMenuItem(_("Power Off") + " [" + mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off") + " [" + this.mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     this.screensaver_inhibitor.uninhibit_screensaver();
@@ -467,33 +425,25 @@ class ExitApplet extends Applet.IconApplet {
     }
 
     on_buttonApplyMenuKeys_pressed() {
-        let mkShutdown = this.s.getValue("mkShutdown");
-        if (mkShutdown.length === 0) {
-            mkShutdown = "U";
-        } else {
-            mkShutdown = mkShutdown[0].toUpperCase();
-        }
+        let mkShutdown = this.mkShutdown;
+        let mkRestart = this.mkRestart;
+        let mkHibernate = this.mkHibernate;
+        let mkSuspend = this.mkSuspend;
 
-        let mkRestart = this.s.getValue("mkRestart");
-        if (mkRestart.length === 0) {
-            mkRestart = "R";
-        } else {
-            mkRestart = mkRestart[0].toUpperCase();
+        let keys = [mkShutdown, mkRestart, mkHibernate, mkSuspend];
+        let names = ["mkShutdown", "mkRestart", "mkHibernate", "mkSuspend"];
+        let defaults = ["U", "R", "H", "S"];
+        this.sameKeyTwice = false;
+        var i = 0;
+        for (let key of keys) {
+            let c = keys.count(key);
+            if (c > 1) {
+                this.s.setValue(names[i], defaults[i]);
+                this.sameKeyTwice = true;
+            }
+            i++;
         }
-
-        let mkHibernate = this.s.getValue("mkHibernate");
-        if (mkHibernate.length === 0) {
-            mkHibernate = "H";
-        } else {
-            mkHibernate = mkHibernate[0].toUpperCase();
-        }
-
-        let mkSuspend = this.s.getValue("mkSuspend");
-        if (mkSuspend.length === 0) {
-            mkSuspend = "S";
-        } else {
-            mkSuspend = mkSuspend[0].toUpperCase();
-        }
+        //~ if (this.sameKeyTwice === true) return;
 
         let _to = setTimeout(() => {
                 clearTimeout(_to);
@@ -501,9 +451,24 @@ class ExitApplet extends Applet.IconApplet {
                 this.s.setValue("mkRestart", mkRestart);
                 this.s.setValue("mkHibernate", mkHibernate);
                 this.s.setValue("mkSuspend", mkSuspend);
+                this.s.setValue("alreadyUsedKeys", ` ${mkSuspend} ${mkHibernate} ${mkRestart} ${mkShutdown}`);
             },
             2100
         );
+    }
+
+    on_buttonDefaultMenuKeys_pressed() {
+        let names = ["mkShutdown", "mkRestart", "mkHibernate", "mkSuspend"];
+        let defaults = ["U", "R", "H", "S"];
+
+        var i = 0;
+        for (let name of names) {
+            this.s.setValue(name, defaults[i]);
+            i++;
+        }
+        this.on_buttonApplyMenuKeys_pressed();
+        names = null;
+        defaults = null;
     }
 
     on_keybinds_changed() {
@@ -545,6 +510,46 @@ class ExitApplet extends Applet.IconApplet {
         Main.keybindingManager.removeHotKey("toggle-exit-menu-" + this.instanceId);
         Main.keybindingManager.removeHotKey("wakeupmonitor-exit-" + this.instanceId);
         remove_all_sources();
+    }
+
+    get mkShutdown() {
+        let ret = this.s.getValue("mkShutdown");
+        if (ret.length === 0) {
+            ret = "U";
+        } else {
+            ret = ret[0].toUpperCase();
+        }
+        return ret;
+    }
+
+    get mkRestart() {
+        let ret = this.s.getValue("mkRestart");
+        if (ret.length === 0) {
+            ret = "R";
+        } else {
+            ret = ret[0].toUpperCase();
+        }
+        return ret;
+    }
+
+    get mkHibernate() {
+        let ret = this.s.getValue("mkHibernate");
+        if (ret.length === 0) {
+            ret = "H";
+        } else {
+            ret = ret[0].toUpperCase();
+        }
+        return ret;
+    }
+
+    get mkSuspend() {
+        let ret = this.s.getValue("mkSuspend");
+        if (ret.length === 0) {
+            ret = "S";
+        } else {
+            ret = ret[0].toUpperCase();
+        }
+        return ret;
     }
 }
 
