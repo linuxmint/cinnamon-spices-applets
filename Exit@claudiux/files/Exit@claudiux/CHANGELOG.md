@@ -1,4 +1,4 @@
-### v1.7.0~20250917
+### v1.7.1~20250917
 * Optimization and code cleanup.
 * Improves the Shortcuts tab in this applet settings to help users avoid errors.
 
