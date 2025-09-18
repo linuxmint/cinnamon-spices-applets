@@ -1,4 +1,4 @@
-import type { Config, Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { HTTPParams} from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { LocationData } from "../../types";
@@ -14,7 +14,7 @@ import { OWMWeatherToWeatherData } from "./payload/weather";
 export class OpenWeatherMapOpen extends BaseProvider {
 	public override needsApiKey = false;
 	public override prettyName = _("OpenWeatherMap");
-	public override name: Services = "OpenWeatherMap_Open";
+	public override name: Services = Services.OpenWeatherMap_Open;
 	public override maxForecastSupport = 7;
 	public override maxHourlyForecastSupport = 0;
 	public override website = "https://openweathermap.org/";

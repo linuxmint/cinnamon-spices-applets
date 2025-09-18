@@ -57,40 +57,40 @@ export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'a
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 
 /** Change settings-schema if you change this */
-export type Services =
-	"OpenWeatherMap_Open" |
-	"MetNorway" |
-	"Weatherbit" |
-	"Tomorrow.io" |
-	"Met Office UK" |
-	"US Weather" |
-	"Visual Crossing" |
-	"DanishMI" |
-	"AccuWeather" |
-	"DeutscherWetterdienst" |
-	"WeatherUnderground" |
-	"PirateWeather" |
-	"OpenMeteo" |
-	"OpenWeatherMap_OneCall" |
-	"Swiss Meteo"
-	;
+export enum Services {
+	OpenWeatherMap_Open = "OpenWeatherMap_Open",
+	MetNorway = "MetNorway",
+	Weatherbit = "Weatherbit",
+	Tomorrow_IO = "Tomorrow.io",
+	MetOfficeUK = "Met Office UK",
+	USWeather = "US Weather",
+	VisualCrossing = "Visual Crossing",
+	DanishMI = "DanishMI",
+	AccuWeather = "AccuWeather",
+	DeutscherWetterdienst = "DeutscherWetterdienst",
+	WeatherUnderground = "WeatherUnderground",
+	PirateWeather = "PirateWeather",
+	OpenMeteo = "OpenMeteo",
+	OpenWeatherMap_OneCall = "OpenWeatherMap_OneCall",
+	SwissMeteo = "Swiss Meteo"
+}
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap_Open": () => new OpenWeatherMapOpen(),
-	"OpenWeatherMap_OneCall": () => new OpenWeatherMapOneCall(),
-	"MetNorway": () => new MetNorway(),
-	"Weatherbit": () => new Weatherbit(),
-	"Tomorrow.io": () => new ClimacellV4(),
-	"Met Office UK": () => new MetUk(),
-	"US Weather": () => new USWeather(),
-	"Visual Crossing": () => new VisualCrossing(),
-	"DanishMI": () => new DanishMI(),
-	"AccuWeather": () => new AccuWeather(),
-	"DeutscherWetterdienst": () => new DeutscherWetterdienst(),
-	"WeatherUnderground": () => new WeatherUnderground(),
-	"PirateWeather": () => new PirateWeather(),
-	"OpenMeteo": () => new OpenMeteo(),
-	"Swiss Meteo": () => new SwissMeteo(),
+	[Services.OpenWeatherMap_Open]: () => new OpenWeatherMapOpen(),
+	[Services.OpenWeatherMap_OneCall]: () => new OpenWeatherMapOneCall(),
+	[Services.MetNorway]: () => new MetNorway(),
+	[Services.Weatherbit]: () => new Weatherbit(),
+	[Services.Tomorrow_IO]: () => new ClimacellV4(),
+	[Services.MetOfficeUK]: () => new MetUk(),
+	[Services.USWeather]: () => new USWeather(),
+	[Services.VisualCrossing]: () => new VisualCrossing(),
+	[Services.DanishMI]: () => new DanishMI(),
+	[Services.AccuWeather]: () => new AccuWeather(),
+	[Services.DeutscherWetterdienst]: () => new DeutscherWetterdienst(),
+	[Services.WeatherUnderground]: () => new WeatherUnderground(),
+	[Services.PirateWeather]: () => new PirateWeather(),
+	[Services.OpenMeteo]: () => new OpenMeteo(),
+	[Services.SwissMeteo]: () => new SwissMeteo(),
 }
 
 export class Config {
@@ -384,18 +384,18 @@ export class Config {
 	private async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationServiceResult | null> {
 		// Automatic location
 		if (!this._manualLocation) {
+			Logger.Info("Obtaining auto location via GeoClue2.");
 			const geoClue = await this.geoClue.GetLocation(cancellable);
 			if (geoClue != null) {
-				Logger.Debug("Auto location obtained via GeoClue2.");
 				return geoClue;
 			}
 
+			Logger.Info("Obtaining auto location via IP lookup instead.");
 			const location = await this.autoLocProvider.GetLocation(cancellable, this);
 			// User facing errors handled by provider
 			if (!location)
 				return null;
 
-			Logger.Debug("Auto location obtained via IP lookup.");
 			return location;
 		}
 
