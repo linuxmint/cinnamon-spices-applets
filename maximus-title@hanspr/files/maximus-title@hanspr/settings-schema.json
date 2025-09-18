@@ -1,0 +1,16 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Window Title Settings"
+    },
+    "title-len": {
+        "type": "entry",
+        "description": "Maximum title lenght",
+        "default": "60"
+    },
+    "title-regex": {
+        "type": "entry",
+        "description": "Apply regex to title to remove string, before showing",
+        "default": ""
+    }
+}
