@@ -165,6 +165,8 @@ class ExitApplet extends Applet.IconApplet {
 
         this.get_user_settings();
 
+        this.screenOn();
+
         //~ this.screenOffIntervalId = null;
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -187,8 +189,9 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("hibernateNeedsSudo", "hibernateNeedsSudo");
         this.s.bind("showRestart", "showRestart");
         this.s.bind("showPowerOff", "showPowerOff");
-        this.s.bind("showScreenOff", "showScreenOff");
+        this.s.bind("screenOffUsesXset", "screenOffUsesXset", () => { this.on_showScreenOff_changed() });
         this.s.bind("mouse-deactivation-duration", "mouseDeactivationDuration");
+        this.s.bind("showScreenOff", "showScreenOff", () => { this.on_showScreenOff_changed() });
         this.s.bind("showLockscreen", "showLockscreen");
         this.s.bind("showSwitchUser", "showSwitchUser");
         this.s.bind("showLogout", "showLogout");
@@ -196,6 +199,9 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("kbToggleMenu", "kbToggleMenu", () => { this.on_keybinds_changed() });
         this.s.bind("kbWakeUpMonitor", "kbWakeUpMonitor", () => { this.on_keybinds_changed() });
         this.s.bind("sameKeyTwice", "sameKeyTwice");
+        this.s.bind("maximizeSettingsWindow", "maximizeSettingsWindow");
+
+        this.on_showScreenOff_changed();
     }
 
     check_system_managed_options() {
@@ -216,17 +222,51 @@ class ExitApplet extends Applet.IconApplet {
         return false;
     }
 
+    screenOn() {
+        //~ global.log("Monitor wake-up");
+        //~ if (this.screenOffIntervalId != null) {
+            //~ source_remove(this.screenOffIntervalId);
+            //~ this.screenOffIntervalId = null;
+        //~ }
+        if (this.screenOffUsesXset) {
+            Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
+            Util.spawnCommandLine('xset dpms force on');
+        } else {
+            if (this.brightness && this.activeMonitor) {
+                Util.spawnCommandLineAsync(`xrandr --output ${this.activeMonitor} --brightness ${this.brightness}`);
+            }
+        }
+        this.screenStatus = "on";
+    }
+
     screenOff() {
-        let duration = Math.trunc(1000 * this.mouseDeactivationDuration);
-        Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh disable");
-        Util.spawnCommandLine('xset dpms force off');
-        let _to = setTimeout(
-            () => {
-                clearTimeout(_to);
-                Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
-            },
-            duration
-        );
+        if (this.screenOffUsesXset) {
+            // Using xset (hardware method)
+            let duration = Math.trunc(1000 * this.mouseDeactivationDuration);
+            Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh disable");
+            Util.spawnCommandLine('xset dpms force off');
+            let _to = setTimeout(
+                () => {
+                    clearTimeout(_to);
+                    Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
+                },
+                duration
+            );
+        } else {
+            // Using xrandr (software method)
+            Util.spawnCommandLineAsyncIO(SCRIPTS_DIR + "/get-brightness.sh", (stdout, stderr, exitCode) => {
+                if (exitCode === 0) {
+                    let [brightness, activeMonitor] = stdout.split(" ");
+                    brightness = parseFloat(brightness);
+                    if (brightness != 0.0) {
+                        this.brightness = brightness;
+                        this.activeMonitor = activeMonitor;
+                        Util.spawnCommandLineAsync(`xrandr --output ${activeMonitor} --brightness 0`);
+                    }
+                }
+            });
+        }
+        this.screenStatus = "off";
     }
 
     make_menu() {
@@ -261,9 +301,12 @@ class ExitApplet extends Applet.IconApplet {
             }
 
             if (this.showScreenOff) {
-                item = new PopupMenu.PopupIconMenuItem(_("Screen Off"), "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off") + "   " + this.kbWakeUpMonitor.split("::")[0], "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
-                    this.screenOff()
+                    if (this.screenStatus == undefined || this.screenStatus == "on")
+                        this.screenOff();
+                    else
+                        this.screenOn();
                 });
                 this.menu.addMenuItem(item);
             }
@@ -365,7 +408,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showSuspend) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Suspend") + " [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "suspend"]);
@@ -383,7 +426,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showHibernate) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + " [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     if (this.hibernateNeedsSudo) {
@@ -417,7 +460,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showRestart) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Restart") + " [" + this.mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Restart") + "   [" + this.mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "reboot"]);
@@ -435,7 +478,7 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showPowerOff) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Power Off") + " [" + this.mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Power Off") + "   [" + this.mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close(true);
                     this.screensaver_inhibitor.uninhibit_screensaver();
@@ -501,6 +544,18 @@ class ExitApplet extends Applet.IconApplet {
         defaults = null;
     }
 
+    on_showScreenOff_changed() {
+        if (this.showScreenOff === false) {
+            this.screenOffUsesXset = false;
+        }
+        this.showMouseDuration = this.screenOffUsesXset;
+        let _to = setTimeout(() => {
+            clearTimeout(_to);
+            this.s.setValue("showMouseDuration", this.s.getValue("screenOffUsesXset"));
+        },
+        2100);
+    }
+
     on_keybinds_changed() {
         Main.keybindingManager.addHotKey(
             "toggle-exit-menu-" + this.instanceId,
@@ -510,18 +565,13 @@ class ExitApplet extends Applet.IconApplet {
         Main.keybindingManager.addHotKey(
             "wakeupmonitor-exit-" + this.instanceId,
             this.kbWakeUpMonitor,
-            () => { this.wake_up_monitor() }
+            () => {
+                if (this.screenStatus == undefined || this.screenStatus == "on")
+                    this.screenOff();
+                else
+                    this.screenOn();
+            }
         );
-    }
-
-    wake_up_monitor() {
-        //~ global.log("Monitor wake-up");
-        //~ if (this.screenOffIntervalId != null) {
-            //~ source_remove(this.screenOffIntervalId);
-            //~ this.screenOffIntervalId = null;
-        //~ }
-        Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
-        Util.spawnCommandLine('xset dpms force on');
     }
 
     on_applet_clicked(event) {
@@ -540,6 +590,28 @@ class ExitApplet extends Applet.IconApplet {
         Main.keybindingManager.removeHotKey("toggle-exit-menu-" + this.instanceId);
         Main.keybindingManager.removeHotKey("wakeupmonitor-exit-" + this.instanceId);
         remove_all_sources();
+    }
+
+    configureApplet(tab=0) {
+        let pid = Util.spawnCommandLine("xlet-settings applet " + this._uuid + " -i " + this.instance_id + " -t " + tab);
+        if (this.maximizeSettingsWindow) {
+            const VERTICAL = 2;
+            const tracker = imports.gi.Cinnamon.WindowTracker.get_default();
+            var app = null;
+            var _to = null;
+            _to = setTimeout(() => {
+                clearTimeout(_to);
+                app = tracker.get_app_from_pid(pid);
+                if (app != null) {
+                    let window = app.get_windows()[0];
+                    this.settingsTab = tab;
+                    window.maximize(VERTICAL);
+                    window.activate(300);
+                    this.settingsWindow = window;
+                    app.connect("windows-changed", () => { this.settingsWindow = undefined; });
+                }
+            }, 1000);
+        }
     }
 
     get mkShutdown() {

@@ -3,14 +3,15 @@
     "type": "layout",
     "pages": [
       "page_General",
-      "page_Shortcuts"
+      "page_Shortcuts",
+      "page_Options"
     ],
     "page_General": {
       "type": "page",
       "title": "General",
       "sections": [
-        "sectionOSD",
-        "sectionMenu"
+        "sectionMenu",
+        "sectionMenuOthers"
       ]
     },
     "page_Shortcuts": {
@@ -21,6 +22,14 @@
         "section_MenuKeys"
       ]
     },
+    "page_Options": {
+      "type": "page",
+      "title": "Options",
+      "sections": [
+        "sectionOSD",
+        "sectionMaximize"
+      ]
+    },
     "sectionOSD": {
       "type": "section",
       "dependency": "displayRestartCinnamonSetting",
@@ -29,20 +38,38 @@
         "showOSD"
       ]
     },
+    "sectionMaximize": {
+      "type": "section",
+      "title": "Vertical maximization",
+      "keys": [
+        "maximizeSettingsWindow"
+      ]
+    },
     "sectionMenu": {
       "type": "section",
       "title": "Menu options",
       "keys": [
         "showRestartCinnamon",
+        "labelSeparator",
         "showSuspend",
         "showHibernate",
         "hibernateNeedsSudo",
+        "labelSeparator",
         "showRestart",
-        "showPowerOff",
+        "showPowerOff"
+      ]
+    },
+    "sectionMenuOthers": {
+      "type": "section",
+      "title": "System-managed menu options",
+      "keys": [
         "labelOthers",
         "showScreenOff",
+        "screenOffUsesXset",
         "mouse-deactivation-duration",
+        "labelSeparator",
         "showLockscreen",
+        "labelSeparator",
         "showSwitchUser",
         "showLogout",
         "logoutMode"
@@ -118,9 +145,16 @@
     "default": true,
     "description": "Show the Screen Off option"
   },
+  "screenOffUsesXset": {
+    "type": "switch",
+    "default": true,
+    "description": "Use the hardware method to turn On/Off the screen",
+    "dependency": "showScreenOff",
+    "tooltip": "The hardware method does not always work correctly.\nIn this case, disable this option to use only a software method."
+  },
   "mouse-deactivation-duration": {
     "type": "scale",
-    "dependency": "showScreenOff",
+    "dependency": "showMouseDuration",
     "default": 5,
     "min": 1,
     "max": 15,
@@ -171,7 +205,7 @@
   "kbWakeUpMonitor": {
     "type": "keybinding",
     "default": "<Primary><Shift>m::",
-    "description": "Monitor and Mouse Wake-Up"
+    "description": "Turn screen On/Off"
   },
   "mkShutdown": {
     "type": "entry",
@@ -231,6 +265,16 @@
     "description": "Already used keys (for your information only)",
     "tooltip": "There is no point in changing this."
   },
+  "maximizeSettingsWindow": {
+    "type": "switch",
+    "default": true,
+    "description": "Vertically maximize this Settings window",
+    "tooltip": "This option will only be taken into account the next times this Settings window is opened. "
+  },
+  "labelSeparator": {
+     "type": "label",
+    "description": "────────────────────────────────────────────────────────────────"
+  },
   "displayLockScreenSetting": {
     "type": "generic",
     "default": true
@@ -250,5 +294,9 @@
   "sameKeyTwice": {
     "type": "generic",
     "default": false
+  },
+  "showMouseDuration": {
+    "type": "generic",
+    "default": true
   }
 }
