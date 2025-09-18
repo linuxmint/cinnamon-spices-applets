@@ -1,3 +1,7 @@
+### v1.8.0~20250918
+* Adds a software method to turn Off the screen.
+* Same shortcut to turn the screen On/Off.
+
 ### v1.7.2~20250917
 * Better control of user rights regarding hibernation. Does the user have root rights using sudo?
 

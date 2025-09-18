@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Exit@claudiux 1.7.1\n"
+"Project-Id-Version: Exit@claudiux 1.8.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-17 04:34+0200\n"
+"POT-Creation-Date: 2025-09-18 21:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,53 +17,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.4/applet.js:140 6.4/applet.js:232
+#. 5.4/applet.js:140 6.4/applet.js:292
 msgid "Restart Cinnamon"
 msgstr ""
 
-#. 5.4/applet.js:152 6.4/applet.js:244
+#. 5.4/applet.js:152
 msgid "Screen Off"
 msgstr ""
 
-#. 5.4/applet.js:177 6.4/applet.js:252
+#. 5.4/applet.js:177 6.4/applet.js:315
 msgid "Lock Screen"
 msgstr ""
 
 #. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
-#. 6.4/applet.js:280 6.4/applet.js:290 6.4/applet.js:299 6.4/applet.js:308
+#. 6.4/applet.js:343 6.4/applet.js:353 6.4/applet.js:362 6.4/applet.js:371
 msgid "Switch User"
 msgstr ""
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:311 6.4/applet.js:337
-#. 6.4/applet.js:358 6.4/applet.js:379 6.4/applet.js:400 6.4/applet.js:419
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:374 6.4/applet.js:400
+#. 6.4/applet.js:421 6.4/applet.js:452 6.4/applet.js:473 6.4/applet.js:492
 msgid "Performing automatic updates"
 msgstr ""
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:311 6.4/applet.js:337
-#. 6.4/applet.js:358 6.4/applet.js:379 6.4/applet.js:400 6.4/applet.js:419
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:374 6.4/applet.js:400
+#. 6.4/applet.js:421 6.4/applet.js:452 6.4/applet.js:473 6.4/applet.js:492
 msgid "Please wait"
 msgstr ""
 
-#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:324 6.4/applet.js:334
+#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:387 6.4/applet.js:397
 msgid "Log Out"
 msgstr ""
 
-#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:348 6.4/applet.js:355
+#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:411 6.4/applet.js:418
 msgid "Suspend"
 msgstr ""
 
-#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:366 6.4/applet.js:376
+#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:429 6.4/applet.js:449
 msgid "Hibernate"
 msgstr ""
 
-#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:390 6.4/applet.js:397
+#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:463 6.4/applet.js:470
 msgid "Restart"
 msgstr ""
 
-#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:408 6.4/applet.js:416
+#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:481 6.4/applet.js:489
 msgid "Power Off"
+msgstr ""
+
+#. 6.4/applet.js:304
+msgid "Screen On/Off"
 msgstr ""
 
 #. metadata.json->description
@@ -214,6 +218,18 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
+#. 6.4->settings-schema.json->page_Options->title
+msgid "Options"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMaximize->title
+msgid "Vertical maximization"
+msgstr ""
+
+#. 6.4->settings-schema.json->sectionMenuOthers->title
+msgid "System-managed menu options"
+msgstr ""
+
 #. 6.4->settings-schema.json->section_Shortcuts->title
 msgid "Keybindings"
 msgstr ""
@@ -222,12 +238,22 @@ msgstr ""
 msgid "Keys used to select certain options in the open menu."
 msgstr ""
 
+#. 6.4->settings-schema.json->screenOffUsesXset->description
+msgid "Use the hardware method to turn On/Off the screen"
+msgstr ""
+
+#. 6.4->settings-schema.json->screenOffUsesXset->tooltip
+msgid ""
+"The hardware method does not always work correctly.\n"
+"In this case, disable this option to use only a software method."
+msgstr ""
+
 #. 6.4->settings-schema.json->kbToggleMenu->description
 msgid "Toggle menu"
 msgstr ""
 
 #. 6.4->settings-schema.json->kbWakeUpMonitor->description
-msgid "Monitor and Mouse Wake-Up"
+msgid "Turn screen On/Off"
 msgstr ""
 
 #. 6.4->settings-schema.json->mkShutdown->description
@@ -282,4 +308,18 @@ msgstr ""
 
 #. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
 msgid "There is no point in changing this."
+msgstr ""
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->description
+msgid "Vertically maximize this Settings window"
+msgstr ""
+
+#. 6.4->settings-schema.json->maximizeSettingsWindow->tooltip
+msgid ""
+"This option will only be taken into account the next times this Settings "
+"window is opened. "
+msgstr ""
+
+#. 6.4->settings-schema.json->labelSeparator->description
+msgid "────────────────────────────────────────────────────────────────"
 msgstr ""
