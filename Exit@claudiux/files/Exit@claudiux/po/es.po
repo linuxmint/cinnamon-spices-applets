@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-17 04:34+0200\n"
-"PO-Revision-Date: 2025-09-16 14:08-0300\n"
+"PO-Revision-Date: 2025-09-18 12:12-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -279,18 +279,20 @@ msgstr "Aplica estas teclas al menú"
 
 #. 6.4->settings-schema.json->buttonDefaultMenuKeys->description
 msgid "Reset to default keys"
-msgstr ""
+msgstr "Restablecer teclas predeterminadas"
 
 #. 6.4->settings-schema.json->alertMenuKeys->description
 msgid ""
 "Several keys are identical.\n"
 "Please correct this and reapply the changes."
 msgstr ""
+"Varias claves son idénticas.\n"
+"Corrija esto y vuelva a aplicar los cambios."
 
 #. 6.4->settings-schema.json->alreadyUsedKeys->description
 msgid "Already used keys (for your information only)"
-msgstr ""
+msgstr "Teclas ya utilizadas (solo para su información)"
 
 #. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
 msgid "There is no point in changing this."
-msgstr ""
+msgstr "No tiene sentido cambiar esto."
