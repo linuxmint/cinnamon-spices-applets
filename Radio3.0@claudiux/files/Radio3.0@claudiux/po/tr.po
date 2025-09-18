@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-10 19:42+0200\n"
-"PO-Revision-Date: 2025-01-13 12:14+0300\n"
+"PO-Revision-Date: 2025-09-18 15:30+0300\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -198,31 +198,31 @@ msgstr "%s bayt = %s GB = %s GiB"
 
 #. applet.js:419
 msgid "Sun."
-msgstr ""
+msgstr "Paz."
 
 #. applet.js:419
 msgid "Mon."
-msgstr ""
+msgstr "Pzt."
 
 #. applet.js:419
 msgid "Tue."
-msgstr ""
+msgstr "Sal."
 
 #. applet.js:419
 msgid "Wed."
-msgstr ""
+msgstr "Çar."
 
 #. applet.js:419
 msgid "Thu."
-msgstr ""
+msgstr "Per."
 
 #. applet.js:419
 msgid "Fri."
-msgstr ""
+msgstr "Cum."
 
 #. applet.js:419
 msgid "Sat."
-msgstr ""
+msgstr "Cmt."
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -239,7 +239,7 @@ msgstr "(Tanımsız)"
 #. settings-schema.json->category-to-move->options
 #. applet.js:586 applet.js:5523
 msgid "(Blacklist)"
-msgstr ""
+msgstr "(Kara liste)"
 
 #. applet.js:2259
 msgid "Start"
@@ -251,7 +251,7 @@ msgstr "Durdur"
 
 #. applet.js:2541
 msgid "Volume: %s%"
-msgstr "Ses düzeyi: %s%"
+msgstr "Ses seviyesi: %s%"
 
 #. applet.js:2546
 msgid "Middle-Click: Stop Recording"
@@ -275,7 +275,7 @@ msgstr "Bir istasyon seçmek için tıklayın"
 
 #. applet.js:2560
 msgid "Wake Up"
-msgstr ""
+msgstr "Uyandır"
 
 #. applet.js:2638 applet.js:3028 applet.js:5018
 msgid "Configure..."
@@ -286,9 +286,8 @@ msgid "Search for new stations..."
 msgstr "Yeni istasyonlar arayın..."
 
 #. applet.js:2648
-#, fuzzy
 msgid "Load a sample station list"
-msgstr "Bu istasyon listesini güncelle"
+msgstr "Örnek bir istasyon listesi yükleyin"
 
 #. applet.js:2695 applet.js:3032 applet.js:5088
 msgid "Sound Settings"
@@ -436,30 +435,31 @@ msgstr "Kapat"
 
 #. applet.js:4836 applet.js:5295 applet.js:5313
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 #. applet.js:4837
-#, fuzzy
 msgid "Radio3.0 applet"
-msgstr "Radio3.0"
+msgstr "Radio3.0 uygulaması"
 
 #. applet.js:4840
 msgid "Enable the OSD150 extension"
-msgstr ""
+msgstr "OSD150 uzantısını etkinleştirin"
 
 #. applet.js:4841
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
-msgstr ""
+msgstr "Yatay OSD elde etmek için OSD150 uzantısını etkinleştirmeniz gerekir."
 
 #. applet.js:4858
 msgid "Download the OSD150 extension"
-msgstr ""
+msgstr "OSD150 uzantısını indirin"
 
 #. applet.js:4859
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
+"Yatay bir OSD elde etmek için OSD150 uzantısını indirmeniz gerekir.\n"
+"İndir düğmesine tıklayın, ardından OSD150'yi arayın ve ⬇ düğmesini seçin."
 
 #. applet.js:4990
 #, javascript-format
@@ -483,9 +483,8 @@ msgid "Schedule a background record..."
 msgstr "Bir arka plan kaydı planlayın..."
 
 #. applet.js:5036
-#, fuzzy
 msgid "Configure the Alarm Clock..."
-msgstr "Yapılandır..."
+msgstr "Çalar Saati Yapılandır..."
 
 #. applet.js:5043
 msgid "Extract soundtrack from YouTube video..."
@@ -534,7 +533,7 @@ msgstr "Albüm Kapağı masaüstü ayarları"
 #. settings-schema.json->alarm-clock-wake-me-up->description
 #. applet.js:5127
 msgid "Wake me up!"
-msgstr ""
+msgstr "Beni uyandır!"
 
 #. applet.js:5136
 msgid "Show Album Art on desktop"
@@ -552,27 +551,29 @@ msgstr "Simgenin yanında ses seviyesini göster"
 
 #. applet.js:5292
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "'Album Art 3.0' masaüstüne ihtiyacınız var"
 
 #. applet.js:5293
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
-msgstr ""
+msgstr "İlk butona tıklayıp Albüm'ü arayarak kurulumunu yapabilirsiniz."
 
 #. applet.js:5294 applet.js:5312
 msgid "Desklets"
-msgstr ""
+msgstr "Masaüstü Uygulamacıkları"
 
 #. applet.js:5310
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr ""
+msgstr "'Album Art 3.0' masaüstünü etkinleştirmeniz gerekiyor"
 
 #. applet.js:5311
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
+"İlk butona tıklayıp Albüm'ü arayıp [+] butonuyla ekleyerek aktif hale "
+"getirebilirsiniz."
 
 #. applet.js:5456
 msgid "Close without stopping recording"
@@ -814,7 +815,7 @@ msgstr "Ağ"
 
 #. settings-schema.json->pageAlarmClock->title
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Çalar saat"
 
 #. settings-schema.json->sectionStationsList->title
 msgid "Stations and Categories on the menu"
@@ -834,7 +835,7 @@ msgstr "Bu istasyon listesini güncelle"
 
 #. settings-schema.json->sectionBlacklist->title
 msgid "Unwanted (blacklist)"
-msgstr ""
+msgstr "İstenmeyen (kara liste)"
 
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
@@ -861,9 +862,8 @@ msgid "Search results"
 msgstr "Arama Sonuçları"
 
 #. settings-schema.json->sectionBehaviorSettingsWindow->title
-#, fuzzy
 msgid "Settings Window"
-msgstr "%s için ayarlar"
+msgstr "Ayarlar Penceresi"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
 msgid "Start-up"
@@ -871,11 +871,11 @@ msgstr "Başlangıç"
 
 #. settings-schema.json->sectionBehaviorVolumeStep->title
 msgid "Volume step"
-msgstr "Ses düzeyi"
+msgstr "Ses seviyesi"
 
 #. settings-schema.json->sectionBehaviorOSD->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -946,7 +946,7 @@ msgstr "Sabit disk alanının korunması"
 
 #. settings-schema.json->sectionYTIgnore->title
 msgid "Ignore YT"
-msgstr ""
+msgstr "YT'yi görmezden gel"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -966,17 +966,16 @@ msgid "Scheduled recordings"
 msgstr "Planlanmış kayıtlar"
 
 #. settings-schema.json->sectionWakeMeUp->title
-#, fuzzy
 msgid "Options"
-msgstr "Daha fazla seçenek"
+msgstr "Seçenekler"
 
 #. settings-schema.json->sectionWorkingDays->title
 msgid "Working Days"
-msgstr ""
+msgstr "Çalışma Günleri"
 
 #. settings-schema.json->sectionWorkOffDays->title
 msgid "Work-Off Days"
-msgstr ""
+msgstr "Çalışma İzni Günleri"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
@@ -1101,7 +1100,7 @@ msgstr "İstasyon listemi Radyo Veritabanı verileriyle güncelle"
 
 #. settings-schema.json->blacklist->columns->title
 msgid "Blacklisted URL"
-msgstr ""
+msgstr "Kara listeye alınmış URL"
 
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
@@ -1145,9 +1144,8 @@ msgid "Remove selected items from this list"
 msgstr "Seçili öğeleri bu listeden kaldır"
 
 #. settings-schema.json->import-blacklist-button->description
-#, fuzzy
 msgid "Blacklist selected items from this list"
-msgstr "Seçili öğeleri bu listeden kaldır"
+msgstr "Bu listeden seçili öğeleri kara listeye al"
 
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description
@@ -1183,13 +1181,15 @@ msgstr "Sayfa:"
 
 #. settings-schema.json->maximize-vertically->description
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Dikey maksimizasyon"
 
 #. settings-schema.json->maximize-vertically->tooltip
 msgid ""
 "When this option is checked, this Settings Window will be maximized "
 "vertically the next time it is opened."
 msgstr ""
+"Bu seçenek işaretlendiğinde, bu Ayarlar Penceresi bir sonraki açılışta dikey "
+"olarak büyütülecektir."
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -1210,7 +1210,7 @@ msgstr ""
 
 #. settings-schema.json->volume-at-startup->description
 msgid "Volume level starting a new radio (%)"
-msgstr "Yeni bir radyo başlatılırken ses düzeyi (%)"
+msgstr "Yeni bir radyoyu başlatırken ses seviyesi (%)"
 
 #. settings-schema.json->volume-at-startup->options
 #. settings-schema.json->recent-number->options
@@ -1323,7 +1323,7 @@ msgstr ""
 
 #. settings-schema.json->volume-step->description
 msgid "Volume step scrolling on icon"
-msgstr "Simge üzerinde kayan ses düzeyi"
+msgstr "Simge üzerinde kayan ses seviyesi"
 
 #. settings-schema.json->volume-step->options
 msgid "±0%"
@@ -1375,11 +1375,11 @@ msgstr "Radyo istasyonunu değiştirirken ses OSD'sini göster"
 
 #. settings-schema.json->show-percent-char-in-osd->description
 msgid "Show '%' in OSD"
-msgstr ""
+msgstr "OSD'de '%' göster"
 
 #. settings-schema.json->show-horizontal-osd->description
 msgid "Show horizontal OSD"
-msgstr ""
+msgstr "Yatay OSD'yi göster"
 
 #. settings-schema.json->show-title-and-version->description
 msgid "Show the name and the version of this applet in the menu"
@@ -1895,13 +1895,15 @@ msgstr "Arka plan kaydı sırasında bu uygulama simgesini vurgulayın"
 
 #. settings-schema.json->ignoreYT->description
 msgid "Ignore Youtube features"
-msgstr ""
+msgstr "YouTube özelliklerini görmezden gelin"
 
 #. settings-schema.json->ignoreYT->tooltip
 msgid ""
 "Ignoring Youtube features reduces CPU load. But loading album art becomes "
 "impossible."
 msgstr ""
+"Youtube özelliklerini göz ardı etmek CPU yükünü azaltır. Ancak albüm "
+"kapaklarını yüklemek imkansız hale gelir."
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
@@ -3318,74 +3320,73 @@ msgstr "0 azami sayı olmadığı anlamına gelir"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->description
 msgid "Wake me up softly"
-msgstr ""
+msgstr "Beni yavaşça uyandır"
 
 #. settings-schema.json->alarm-clock-wake-me-softly->tooltip
 msgid "By checking this box, the sound volume gradually increases."
-msgstr ""
+msgstr "Bu kutucuğu işaretlediğinizde ses seviyesi kademeli olarak artar."
 
 #. settings-schema.json->alarm-clock-volume-begin->description
 msgid "Initial volume (%)"
-msgstr ""
+msgstr "Başlangıç ​​hacmi (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->description
 msgid "Final volume (%)"
-msgstr ""
+msgstr "Son hacim (%)"
 
 #. settings-schema.json->alarm-clock-volume-end->tooltip
 msgid "The final volume must be greater than or equal to the initial volume."
-msgstr ""
+msgstr "Son hacim, başlangıç ​​hacmine eşit veya daha büyük olmalıdır."
 
 #. settings-schema.json->alarm-clock-volume-transition->description
 msgid "Transition duration (seconds)"
-msgstr ""
+msgstr "Geçiş süresi (saniye)"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Sunday"
-msgstr ""
+msgstr "Pazar"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Monday"
-msgstr ""
+msgstr "Pazartesi"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Tuesday"
-msgstr ""
+msgstr "Salı"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Wednesday"
-msgstr ""
+msgstr "Çarşamba"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Thursday"
-msgstr ""
+msgstr "Perşembe"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Friday"
-msgstr ""
+msgstr "Cuma"
 
 #. settings-schema.json->alarm-clock-working-days->columns->title
 #. settings-schema.json->alarm-clock-workoff-days->columns->title
 msgid "Saturday"
-msgstr ""
+msgstr "Cumartesi"
 
 #. settings-schema.json->alarm-clock-working-days-time->description
 #. settings-schema.json->alarm-clock-workoff-days-time->description
 msgid "Wake-Up Time"
-msgstr ""
+msgstr "Uyanma Zamanı"
 
 #. settings-schema.json->alarm-clock-working-days-radio-button->description
 #. settings-schema.json->alarm-clock-workoff-days-radio-button->description
-#, fuzzy
 msgid "Last-listened-to radio station"
-msgstr "Kayıtlı radyo istasyonlarının listesi"
+msgstr "Son dinlenen radyo istasyonu"
 
 #. settings-schema.json->alarm-clock-tink-on->description
 msgid "Activate tink to ensure speakers are awake"
-msgstr ""
+msgstr "Hoparlörlerin uyanık olduğundan emin olmak için tink'i etkinleştirin"
