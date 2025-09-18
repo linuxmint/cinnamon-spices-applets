@@ -1,3 +1,39 @@
+### v5.9.1~20250917
+  * Fixes [#7761](https://github.com/linuxmint/cinnamon-spices-applets/issues/7761)
+
+### v5.9.0~20250913
+  * Improves the reading of disk temperatures.
+
+### v5.8.2~20250911
+  * Avoids any unnecessary work.
+  * Fixes [#7714](https://github.com/linuxmint/cinnamon-spices-applets/issues/7714)
+
+
+### v5.8.1~20250908
+  * Avoids memory leaks.
+
+### v5.8.0~20250907
+  * Increases the speed at which disk temperatures are read.
+
+### v5.7.3~20250906
+  * Takes into account the "Refresh interval" value in the `SensorsDaemon.sh` script.
+
+### v5.7.2~20250906
+  * Improves stability.
+  * Fixes [#7670](https://github.com/linuxmint/cinnamon-spices-applets/issues/7670)
+
+### v5.7.0~20250905
+  * Increases speed.
+
+### v5.6.1~20250701
+  * Fixes bad data in json file.
+
+### v5.6.0~20250630
+  * Ignores invalid sensors.
+
+### v5.5.0~20250620
+  * Add Devuan support.
+
 ### v5.4.2~20250401
   * Minor changes about font size.
   * Code cleanup in applet.js.

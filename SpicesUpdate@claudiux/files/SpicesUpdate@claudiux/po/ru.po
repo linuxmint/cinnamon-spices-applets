@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux 7.6.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-01-19 13:27+0100\n"
+"POT-Creation-Date: 2025-09-08 21:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Krivetochka <krivetochkadev@gmail.com>\n"
 "Language-Team: \n"
@@ -59,34 +59,35 @@ msgstr "Перезапустить Cinnamon"
 #. metadata.json->name
 #. 4.2/applet.js:162 4.2/applet.js:580 4.2/applet.js:599 4.2/applet.js:725
 #. 4.2/applet.js:1080 4.8/applet.js:213 4.8/applet.js:717 4.8/applet.js:736
-#. 4.8/applet.js:1233 6.0/applet.js:145 6.0/applet.js:764 6.0/applet.js:784
-#. 6.0/applet.js:1309 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677
+#. 4.8/applet.js:1233 6.0/applet.js:232 6.0/applet.js:855 6.0/applet.js:883
+#. 6.0/applet.js:1520 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677
 #. 6.0/applet_OLD.js:696 6.0/applet_OLD.js:1200 3.8/applet.js:212
 #. 3.8/applet.js:242 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1174
 #. 3.8/applet.js:1739 4.6/applet.js:214 4.6/applet.js:716 4.6/applet.js:735
 #. 4.6/applet.js:1229 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555
-#. 2.8/applet.js:1004 2.8/applet.js:1582 5.6/applet.js:211 5.6/applet.js:725
+#. 2.8/applet.js:1004 2.8/applet.js:1582 6.4/applet.js:233 6.4/applet.js:861
+#. 6.4/applet.js:890 6.4/applet.js:1541 5.6/applet.js:211 5.6/applet.js:725
 #. 5.6/applet.js:744 5.6/applet.js:1245
 msgid "Spices Update"
 msgstr "Обновления Spices"
 
 #. 4.2/applet.js:163 4.2/applet.js:1900 4.2/applet.js:1906 4.8/applet.js:214
-#. 4.8/applet.js:2099 4.8/applet.js:2107 6.0/applet.js:146 6.0/applet.js:2256
-#. 6.0/applet.js:2267 6.0/applet_OLD.js:150 6.0/applet_OLD.js:2140
+#. 4.8/applet.js:2099 4.8/applet.js:2107 6.0/applet.js:237 6.0/applet.js:2709
+#. 6.0/applet.js:2728 6.0/applet_OLD.js:150 6.0/applet_OLD.js:2140
 #. 6.0/applet_OLD.js:2148 3.8/applet.js:243 3.8/applet.js:1913
 #. 3.8/applet.js:1919 4.6/applet.js:215 4.6/applet.js:2093 4.6/applet.js:2101
-#. 2.8/applet.js:1709 2.8/applet.js:1715 5.6/applet.js:212 5.6/applet.js:2113
-#. 5.6/applet.js:2121
+#. 2.8/applet.js:1709 2.8/applet.js:1715 6.4/applet.js:238 6.4/applet.js:2746
+#. 6.4/applet.js:2765 5.6/applet.js:212 5.6/applet.js:2113 5.6/applet.js:2121
 msgid "Middle-Click to Refresh"
 msgstr "Щелкните средней кнопкой мыши, чтобы обновить"
 
-#. 4.2/applet.js:297 4.8/applet.js:362 6.0/applet.js:367 6.0/applet_OLD.js:320
-#. 4.6/applet.js:363 5.6/applet.js:360
+#. 4.2/applet.js:297 4.8/applet.js:362 6.0/applet.js:460 6.0/applet_OLD.js:320
+#. 4.6/applet.js:363 6.4/applet.js:465 5.6/applet.js:360
 msgid "Spices Update has just been installed or upgraded"
 msgstr "\"Spices Update\" было только что установлено или обновлено"
 
-#. 4.2/applet.js:298 4.8/applet.js:363 6.0/applet.js:368 6.0/applet_OLD.js:321
-#. 4.6/applet.js:364 5.6/applet.js:361
+#. 4.2/applet.js:298 4.8/applet.js:363 6.0/applet.js:462 6.0/applet_OLD.js:321
+#. 4.6/applet.js:364 6.4/applet.js:467 5.6/applet.js:361
 msgid ""
 "Certain parameters require your vigilance: some may have been modified; "
 "others are new."
@@ -94,8 +95,8 @@ msgstr ""
 "Некоторые параметры требуют вашего внимания: некоторые из них могут быть "
 "изменены, другие являются новыми."
 
-#. 4.2/applet.js:299 4.8/applet.js:364 6.0/applet.js:369 6.0/applet_OLD.js:322
-#. 4.6/applet.js:365 5.6/applet.js:362
+#. 4.2/applet.js:299 4.8/applet.js:364 6.0/applet.js:466 6.0/applet_OLD.js:322
+#. 4.6/applet.js:365 6.4/applet.js:471 5.6/applet.js:362
 msgid ""
 "Please check your settings using the menu of the SpicesUpdate applet or the "
 "button below."
@@ -103,28 +104,28 @@ msgstr ""
 "Пожалуйста, проверьте свои настройки, в меню апплета или используя кнопку "
 "ниже."
 
-#. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:371 6.0/applet_OLD.js:324
-#. 4.6/applet.js:367 5.6/applet.js:364
+#. 4.2/applet.js:301 4.8/applet.js:366 6.0/applet.js:470 6.0/applet_OLD.js:324
+#. 4.6/applet.js:367 6.4/applet.js:475 5.6/applet.js:364
 msgid "Spices Update Settings"
 msgstr "Настройки Spices Update"
 
-#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:809 6.0/applet_OLD.js:722
-#. 4.6/applet.js:761 5.6/applet.js:770
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:923 6.0/applet_OLD.js:722
+#. 4.6/applet.js:761 6.4/applet.js:931 5.6/applet.js:770
 msgid "Update It Now!"
 msgstr "Обнови это сейчас!"
 
-#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:809 6.0/applet_OLD.js:722
-#. 4.6/applet.js:761 5.6/applet.js:770
+#. 4.2/applet.js:625 4.8/applet.js:762 6.0/applet.js:924 6.0/applet_OLD.js:722
+#. 4.6/applet.js:761 6.4/applet.js:932 5.6/applet.js:770
 msgid "Update Them All Now!"
 msgstr "Обнови их все сейчас!"
 
-#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:815 6.0/applet_OLD.js:728
-#. 4.6/applet.js:767 5.6/applet.js:776
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:934 6.0/applet_OLD.js:728
+#. 4.6/applet.js:767 6.4/applet.js:942 5.6/applet.js:776
 msgid "Forget It"
 msgstr "Забыть об этом"
 
-#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:815 6.0/applet_OLD.js:728
-#. 4.6/applet.js:767 5.6/applet.js:776
+#. 4.2/applet.js:631 4.8/applet.js:768 6.0/applet.js:935 6.0/applet_OLD.js:728
+#. 4.6/applet.js:767 6.4/applet.js:943 5.6/applet.js:776
 msgid "Forget Them All"
 msgstr "Забыть о них всех"
 
@@ -149,51 +150,59 @@ msgstr "Забыть о них всех"
 #. 4.6->settings-schema.json->btn_refresh_desklets->description
 #. 4.6->settings-schema.json->btn_refresh_extensions->description
 #. 4.6->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_applets->description
+#. 6.4->settings-schema.json->btn_refresh_desklets->description
+#. 6.4->settings-schema.json->btn_refresh_extensions->description
+#. 6.4->settings-schema.json->btn_refresh_themes->description
+#. 6.4->settings-schema.json->btn_refresh_actions->description
 #. 5.6->settings-schema.json->btn_refresh_applets->description
 #. 5.6->settings-schema.json->btn_refresh_desklets->description
 #. 5.6->settings-schema.json->btn_refresh_extensions->description
 #. 5.6->settings-schema.json->btn_refresh_themes->description
 #. 4.2/applet.js:635 4.2/applet.js:1682 4.8/applet.js:772 4.8/applet.js:1838
-#. 6.0/applet.js:819 6.0/applet.js:1947 6.0/applet_OLD.js:732
+#. 6.0/applet.js:939 6.0/applet.js:2243 6.0/applet_OLD.js:732
 #. 6.0/applet_OLD.js:1879 3.8/applet.js:682 3.8/applet.js:1747
 #. 4.6/applet.js:771 4.6/applet.js:1832 2.8/applet.js:574 2.8/applet.js:1590
-#. 5.6/applet.js:780 5.6/applet.js:1852 cs/4.2/bin/SUExtensionCore.py:795
+#. 6.4/applet.js:947 6.4/applet.js:2277 5.6/applet.js:780 5.6/applet.js:1852
+#. cs/4.2/bin/SUExtensionCore.py:795
 msgid "Refresh"
 msgstr "Обновить"
 
-#. 4.2/applet.js:807 4.8/applet.js:945 6.0/applet.js:954 6.0/applet_OLD.js:906
-#. 3.8/applet.js:847 4.6/applet.js:944 2.8/applet.js:729 5.6/applet.js:953
+#. 4.2/applet.js:807 4.8/applet.js:945 6.0/applet.js:1104 6.0/applet_OLD.js:906
+#. 3.8/applet.js:847 4.6/applet.js:944 2.8/applet.js:729 6.4/applet.js:1115
+#. 5.6/applet.js:953
 msgid "With details here, when available."
 msgstr "Подробности будут здесь, когда станут доступны."
 
 #. 4.2/applet.js:808 4.2/constants.js:133 4.8/applet.js:946
-#. 4.8/constants.js:140 6.0/applet.js:955 6.0/applet_OLD.js:907
-#. 6.0/constants.js:147 3.8/applet.js:146 3.8/applet.js:848 4.6/applet.js:945
-#. 4.6/constants.js:140 2.8/applet.js:105 2.8/applet.js:730 5.6/applet.js:954
-#. 5.6/constants.js:134
+#. 4.8/constants.js:140 6.0/applet.js:1106 6.0/applet_OLD.js:907
+#. 6.0/constants.js:150 3.8/applet.js:146 3.8/applet.js:848 4.6/applet.js:945
+#. 4.6/constants.js:140 2.8/applet.js:105 2.8/applet.js:730 6.4/applet.js:1117
+#. 6.4/constants.js:150 5.6/applet.js:954 5.6/constants.js:134
 msgid "One applet needs update:"
 msgstr "Один апплет нуждается в обновлении:"
 
-#. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:956 6.0/applet_OLD.js:908
-#. 3.8/applet.js:848 4.6/applet.js:946 2.8/applet.js:730 5.6/applet.js:955
+#. 4.2/applet.js:809 4.8/applet.js:947 6.0/applet.js:1109 6.0/applet_OLD.js:908
+#. 3.8/applet.js:848 4.6/applet.js:946 2.8/applet.js:730 6.4/applet.js:1120
+#. 5.6/applet.js:955
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr "Не обращайте внимания. Это ФЕЙКОВОЕ уведомление, просто для теста."
 
-#. 4.2/applet.js:1080 4.8/applet.js:1233 6.0/applet.js:1309
+#. 4.2/applet.js:1080 4.8/applet.js:1233 6.0/applet.js:1520
 #. 6.0/applet_OLD.js:1200 3.8/applet.js:1174 4.6/applet.js:1229
-#. 2.8/applet.js:1004 5.6/applet.js:1245
+#. 2.8/applet.js:1004 6.4/applet.js:1541 5.6/applet.js:1245
 msgid "is fully functional."
 msgstr "полностью функционален."
 
-#. 4.2/applet.js:1081 4.8/applet.js:1234 6.0/applet.js:1310
+#. 4.2/applet.js:1081 4.8/applet.js:1234 6.0/applet.js:1521
 #. 6.0/applet_OLD.js:1201 3.8/applet.js:1175 4.6/applet.js:1230
-#. 2.8/applet.js:1005 5.6/applet.js:1246
+#. 2.8/applet.js:1005 6.4/applet.js:1542 5.6/applet.js:1246
 msgid "All dependencies are installed"
 msgstr "Все зависимости установлены"
 
-#. 4.2/applet.js:1104 4.8/applet.js:1259 6.0/applet.js:1337
+#. 4.2/applet.js:1104 4.8/applet.js:1259 6.0/applet.js:1568
 #. 6.0/applet_OLD.js:1226 3.8/applet.js:1199 4.6/applet.js:1253
-#. 2.8/applet.js:1029 5.6/applet.js:1271
+#. 2.8/applet.js:1029 6.4/applet.js:1589 5.6/applet.js:1271
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -201,40 +210,41 @@ msgstr ""
 "Похоже, вам не хватает некоторых программ, необходимых для того, чтобы этот "
 "апплет использовал все его функции."
 
-#. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1338
+#. 4.2/applet.js:1105 4.8/applet.js:1260 6.0/applet.js:1574
 #. 6.0/applet_OLD.js:1227 3.8/applet.js:1200 4.6/applet.js:1254
-#. 2.8/applet.js:1030 5.6/applet.js:1272
+#. 2.8/applet.js:1030 6.4/applet.js:1595 5.6/applet.js:1272
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Пожалуйста, выполните в только что открывшемся терминале следующие команды:"
 
-#. 4.2/applet.js:1106 4.8/applet.js:1261 6.0/applet.js:1339
+#. 4.2/applet.js:1106 4.8/applet.js:1261 6.0/applet.js:1581
 #. 6.0/applet_OLD.js:1228 3.8/applet.js:1201 4.6/applet.js:1255
-#. 2.8/applet.js:1031 5.6/applet.js:1273
+#. 2.8/applet.js:1031 6.4/applet.js:1602 5.6/applet.js:1273
 msgid "Some dependencies are not installed!"
 msgstr "Некоторые зависимости не установлены!"
 
-#. 4.2/applet.js:1504 4.8/applet.js:1659 6.0/applet.js:1701
+#. 4.2/applet.js:1504 4.8/applet.js:1659 6.0/applet.js:1983
 #. 6.0/applet_OLD.js:1700 3.8/applet.js:1582 4.6/applet.js:1653
-#. 2.8/applet.js:1423 5.6/applet.js:1673
+#. 2.8/applet.js:1423 6.4/applet.js:2015 5.6/applet.js:1673
 msgid "(Description unavailable)"
 msgstr "(Описание недоступно)"
 
-#. 4.2/applet.js:1706 4.8/applet.js:1862 6.0/applet.js:1971
+#. 4.2/applet.js:1706 4.8/applet.js:1862 6.0/applet.js:2274
 #. 6.0/applet_OLD.js:1903 3.8/applet.js:1770 4.6/applet.js:1856
-#. 2.8/applet.js:1614 5.6/applet.js:1876
+#. 2.8/applet.js:1614 6.4/applet.js:2308 5.6/applet.js:1876
 msgid "Forget new Spices"
 msgstr "Забыть о новых Spices"
 
-#. 4.2/applet.js:1712 4.8/applet.js:1868 6.0/applet.js:1977
+#. 4.2/applet.js:1712 4.8/applet.js:1868 6.0/applet.js:2286
 #. 6.0/applet_OLD.js:1909 3.8/applet.js:1776 4.6/applet.js:1862
-#. 2.8/applet.js:1620 5.6/applet.js:1882
+#. 2.8/applet.js:1620 6.4/applet.js:2320 5.6/applet.js:1882
 msgid "Open useful Cinnamon Settings"
 msgstr "Открыть полезные настройки CInnamon"
 
-#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:1984
+#. 4.2/applet.js:1719 4.8/applet.js:1875 6.0/applet.js:2300
 #. 6.0/applet_OLD.js:1916 3.8/applet.js:1783 4.6/applet.js:1869
-#. 2.8/applet.js:1627 5.6/applet.js:1889 cs/4.2/bin/SUExtensionCore.py:240
+#. 2.8/applet.js:1627 6.4/applet.js:2334 5.6/applet.js:1889
+#. cs/4.2/bin/SUExtensionCore.py:240
 msgid "Configure"
 msgstr "Настроить"
 
@@ -244,9 +254,11 @@ msgstr "Настроить"
 #. 3.8->settings-schema.json->General->title
 #. 4.6->settings-schema.json->General->title
 #. 2.8->settings-schema.json->head5->description
+#. 6.4->settings-schema.json->General->title
 #. 5.6->settings-schema.json->General->title
-#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:1987
-#. 6.0/applet_OLD.js:1919 4.6/applet.js:1872 5.6/applet.js:1892
+#. 4.2/applet.js:1722 4.8/applet.js:1878 6.0/applet.js:2308
+#. 6.0/applet_OLD.js:1919 4.6/applet.js:1872 6.4/applet.js:2342
+#. 5.6/applet.js:1892
 msgid "General"
 msgstr "Общие"
 
@@ -256,15 +268,16 @@ msgstr "Общие"
 #. 3.8->settings-schema.json->Applets->title
 #. 4.6->settings-schema.json->Applets->title
 #. 2.8->settings-schema.json->head1->description
+#. 6.4->settings-schema.json->Applets->title
 #. 5.6->settings-schema.json->Applets->title
 #. 4.2/applet.js:1722 4.2/constants.js:128 4.8/applet.js:1878
-#. 4.8/constants.js:135 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:141 3.8/applet.js:141 4.6/applet.js:1872
-#. 4.6/constants.js:135 2.8/applet.js:100 5.6/applet.js:1892
-#. 5.6/constants.js:129 cs/4.4/modules/cs_applets.py:35
-#. cs/6.0_FUTURE/modules/cs_applets.py:35 cs/4.2/modules/cs_applets.py:34
-#. cs/3.8/modules/cs_applets.py:34 cs/4.6/modules/cs_applets.py:35
-#. cs/4.0/modules/cs_applets.py:34
+#. 4.8/constants.js:135 6.0/applet.js:2309 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:144 3.8/applet.js:141 4.6/applet.js:1872
+#. 4.6/constants.js:135 2.8/applet.js:100 6.4/applet.js:2343
+#. 6.4/constants.js:144 5.6/applet.js:1892 5.6/constants.js:129
+#. cs/4.4/modules/cs_applets.py:35 cs/6.0_FUTURE/modules/cs_applets.py:35
+#. cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#. cs/4.6/modules/cs_applets.py:35 cs/4.0/modules/cs_applets.py:34
 msgid "Applets"
 msgstr "Апплеты"
 
@@ -274,15 +287,16 @@ msgstr "Апплеты"
 #. 3.8->settings-schema.json->Desklets->title
 #. 4.6->settings-schema.json->Desklets->title
 #. 2.8->settings-schema.json->head2->description
+#. 6.4->settings-schema.json->Desklets->title
 #. 5.6->settings-schema.json->Desklets->title
 #. 4.2/applet.js:1722 4.2/constants.js:129 4.8/applet.js:1878
-#. 4.8/constants.js:136 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:142 3.8/applet.js:142 4.6/applet.js:1872
-#. 4.6/constants.js:136 2.8/applet.js:101 5.6/applet.js:1892
-#. 5.6/constants.js:130 cs/4.4/modules/cs_desklets.py:33
-#. cs/6.0_FUTURE/modules/cs_desklets.py:33 cs/4.2/modules/cs_desklets.py:32
-#. cs/3.8/modules/cs_desklets.py:32 cs/4.6/modules/cs_desklets.py:33
-#. cs/4.0/modules/cs_desklets.py:32
+#. 4.8/constants.js:136 6.0/applet.js:2310 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:145 3.8/applet.js:142 4.6/applet.js:1872
+#. 4.6/constants.js:136 2.8/applet.js:101 6.4/applet.js:2344
+#. 6.4/constants.js:145 5.6/applet.js:1892 5.6/constants.js:130
+#. cs/4.4/modules/cs_desklets.py:33 cs/6.0_FUTURE/modules/cs_desklets.py:33
+#. cs/4.2/modules/cs_desklets.py:32 cs/3.8/modules/cs_desklets.py:32
+#. cs/4.6/modules/cs_desklets.py:33 cs/4.0/modules/cs_desklets.py:32
 msgid "Desklets"
 msgstr "Десклеты"
 
@@ -292,15 +306,16 @@ msgstr "Десклеты"
 #. 3.8->settings-schema.json->Extensions->title
 #. 4.6->settings-schema.json->Extensions->title
 #. 2.8->settings-schema.json->head3->description
+#. 6.4->settings-schema.json->Extensions->title
 #. 5.6->settings-schema.json->Extensions->title
 #. 4.2/applet.js:1722 4.2/constants.js:130 4.8/applet.js:1878
-#. 4.8/constants.js:137 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:143 3.8/applet.js:143 4.6/applet.js:1872
-#. 4.6/constants.js:137 2.8/applet.js:102 5.6/applet.js:1892
-#. 5.6/constants.js:131 cs/4.4/modules/cs_extensions.py:33
-#. cs/6.0_FUTURE/modules/cs_extensions.py:33 cs/4.2/modules/cs_extensions.py:32
-#. cs/3.8/modules/cs_extensions.py:32 cs/4.6/modules/cs_extensions.py:33
-#. cs/4.0/modules/cs_extensions.py:32
+#. 4.8/constants.js:137 6.0/applet.js:2311 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:146 3.8/applet.js:143 4.6/applet.js:1872
+#. 4.6/constants.js:137 2.8/applet.js:102 6.4/applet.js:2345
+#. 6.4/constants.js:146 5.6/applet.js:1892 5.6/constants.js:131
+#. cs/4.4/modules/cs_extensions.py:33 cs/6.0_FUTURE/modules/cs_extensions.py:33
+#. cs/4.2/modules/cs_extensions.py:32 cs/3.8/modules/cs_extensions.py:32
+#. cs/4.6/modules/cs_extensions.py:33 cs/4.0/modules/cs_extensions.py:32
 msgid "Extensions"
 msgstr "Расширения"
 
@@ -310,250 +325,257 @@ msgstr "Расширения"
 #. 3.8->settings-schema.json->Themes->title
 #. 4.6->settings-schema.json->Themes->title
 #. 2.8->settings-schema.json->head4->description
+#. 6.4->settings-schema.json->Themes->title
 #. 5.6->settings-schema.json->Themes->title
 #. 4.2/applet.js:1722 4.2/constants.js:131 4.8/applet.js:1878
-#. 4.8/constants.js:138 6.0/applet.js:1987 6.0/applet_OLD.js:1919
-#. 6.0/constants.js:144 3.8/applet.js:144 4.6/applet.js:1872
-#. 4.6/constants.js:138 2.8/applet.js:103 5.6/applet.js:1892
-#. 5.6/constants.js:132 cs/4.4/modules/cs_themes.py:42
-#. cs/4.4/modules/cs_themes.py:72 cs/4.4/modules/cs_themes.py:74
-#. cs/6.0_FUTURE/modules/cs_themes.py:44 cs/6.0_FUTURE/modules/cs_themes.py:75
-#. cs/6.0_FUTURE/modules/cs_themes.py:77 cs/4.2/modules/cs_themes.py:38
-#. cs/4.2/modules/cs_themes.py:61 cs/4.2/modules/cs_themes.py:63
-#. cs/3.8/modules/cs_themes.py:23 cs/3.8/modules/cs_themes.py:46
-#. cs/3.8/modules/cs_themes.py:48 cs/4.6/modules/cs_themes.py:44
-#. cs/4.6/modules/cs_themes.py:75 cs/4.6/modules/cs_themes.py:77
-#. cs/4.0/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:59
-#. cs/4.0/modules/cs_themes.py:61
+#. 4.8/constants.js:138 6.0/applet.js:2312 6.0/applet_OLD.js:1919
+#. 6.0/constants.js:147 3.8/applet.js:144 4.6/applet.js:1872
+#. 4.6/constants.js:138 2.8/applet.js:103 6.4/applet.js:2346
+#. 6.4/constants.js:147 5.6/applet.js:1892 5.6/constants.js:132
+#. cs/4.4/modules/cs_themes.py:42 cs/4.4/modules/cs_themes.py:72
+#. cs/4.4/modules/cs_themes.py:74 cs/6.0_FUTURE/modules/cs_themes.py:44
+#. cs/6.0_FUTURE/modules/cs_themes.py:75 cs/6.0_FUTURE/modules/cs_themes.py:77
+#. cs/4.2/modules/cs_themes.py:38 cs/4.2/modules/cs_themes.py:61
+#. cs/4.2/modules/cs_themes.py:63 cs/3.8/modules/cs_themes.py:23
+#. cs/3.8/modules/cs_themes.py:46 cs/3.8/modules/cs_themes.py:48
+#. cs/4.6/modules/cs_themes.py:44 cs/4.6/modules/cs_themes.py:75
+#. cs/4.6/modules/cs_themes.py:77 cs/4.0/modules/cs_themes.py:36
+#. cs/4.0/modules/cs_themes.py:59 cs/4.0/modules/cs_themes.py:61
 msgid "Themes"
 msgstr "Темы"
 
-#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2014
+#. 4.2/applet.js:1748 4.8/applet.js:1904 6.0/applet.js:2364
 #. 6.0/applet_OLD.js:1945 3.8/applet.js:1798 4.6/applet.js:1898
-#. 2.8/applet.js:1642 5.6/applet.js:1918
+#. 2.8/applet.js:1642 6.4/applet.js:2401 5.6/applet.js:1918
 msgid "Help"
 msgstr "Помощь"
 
-#. 4.2/applet.js:1891 4.8/applet.js:2090 6.0/applet.js:2247
+#. 4.2/applet.js:1891 4.8/applet.js:2090 6.0/applet.js:2689
 #. 6.0/applet_OLD.js:2131 3.8/applet.js:1904 4.6/applet.js:2084
-#. 2.8/applet.js:1700 5.6/applet.js:2104
+#. 2.8/applet.js:1700 6.4/applet.js:2726 5.6/applet.js:2104
 msgid "Middle-Click to open useful Cinnamon Settings"
 msgstr ""
 "Щелкните средней кнопкой мыши, чтобы открыть полезные настройки Cinnamon"
 
-#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:137
-#. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 5.6/constants.js:125
+#. 4.2/constants.js:124 4.8/constants.js:131 6.0/constants.js:140
+#. 3.8/applet.js:137 4.6/constants.js:131 2.8/applet.js:96 6.4/constants.js:140
+#. 5.6/constants.js:125
 msgid "Applet"
 msgstr "Апплет"
 
-#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:138
-#. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 5.6/constants.js:126
+#. 4.2/constants.js:125 4.8/constants.js:132 6.0/constants.js:141
+#. 3.8/applet.js:138 4.6/constants.js:132 2.8/applet.js:97 6.4/constants.js:141
+#. 5.6/constants.js:126
 msgid "Desklet"
 msgstr "Десклет"
 
-#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:139
-#. 3.8/applet.js:139 4.6/constants.js:133 2.8/applet.js:98 5.6/constants.js:127
+#. 4.2/constants.js:126 4.8/constants.js:133 6.0/constants.js:142
+#. 3.8/applet.js:139 4.6/constants.js:133 2.8/applet.js:98 6.4/constants.js:142
+#. 5.6/constants.js:127
 msgid "Extension"
 msgstr "Расширение"
 
-#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:140
-#. 3.8/applet.js:140 4.6/constants.js:134 2.8/applet.js:99 5.6/constants.js:128
+#. 4.2/constants.js:127 4.8/constants.js:134 6.0/constants.js:143
+#. 3.8/applet.js:140 4.6/constants.js:134 2.8/applet.js:99 6.4/constants.js:143
+#. 5.6/constants.js:128
 msgid "Theme"
 msgstr "Тема"
 
-#. 4.2/constants.js:132 4.8/constants.js:139 6.0/constants.js:146
+#. 4.2/constants.js:132 4.8/constants.js:139 6.0/constants.js:149
 #. 3.8/applet.js:145 4.6/constants.js:139 2.8/applet.js:104
-#. 5.6/constants.js:133
+#. 6.4/constants.js:149 5.6/constants.js:133
 msgid "One desklet needs update:"
 msgstr "Один десклет нуждается в обновлении:"
 
-#. 4.2/constants.js:134 4.8/constants.js:141 6.0/constants.js:148
+#. 4.2/constants.js:134 4.8/constants.js:141 6.0/constants.js:151
 #. 3.8/applet.js:147 4.6/constants.js:141 2.8/applet.js:106
-#. 5.6/constants.js:135
+#. 6.4/constants.js:151 5.6/constants.js:135
 msgid "One extension needs update:"
 msgstr "Одно расширение нуждается в обновлении:"
 
-#. 4.2/constants.js:135 4.8/constants.js:142 6.0/constants.js:149
+#. 4.2/constants.js:135 4.8/constants.js:142 6.0/constants.js:152
 #. 3.8/applet.js:148 4.6/constants.js:142 2.8/applet.js:107
-#. 5.6/constants.js:136
+#. 6.4/constants.js:152 5.6/constants.js:136
 msgid "One theme needs update:"
 msgstr "Одна тема нуждается в обновлении:"
 
-#. 4.2/constants.js:136 4.8/constants.js:143 6.0/constants.js:151
+#. 4.2/constants.js:136 4.8/constants.js:143 6.0/constants.js:154
 #. 3.8/applet.js:149 4.6/constants.js:143 2.8/applet.js:108
-#. 5.6/constants.js:137
+#. 6.4/constants.js:154 5.6/constants.js:137
 msgid "Some desklets need update:"
 msgstr "Некоторым десклетам требуется обновление:"
 
-#. 4.2/constants.js:137 4.8/constants.js:144 6.0/constants.js:152
+#. 4.2/constants.js:137 4.8/constants.js:144 6.0/constants.js:155
 #. 3.8/applet.js:150 4.6/constants.js:144 2.8/applet.js:109
-#. 5.6/constants.js:138
+#. 6.4/constants.js:155 5.6/constants.js:138
 msgid "Some applets need update:"
 msgstr "Некоторым апплетам требуется обновление:"
 
-#. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:153
+#. 4.2/constants.js:138 4.8/constants.js:145 6.0/constants.js:156
 #. 3.8/applet.js:151 4.6/constants.js:145 2.8/applet.js:110
-#. 5.6/constants.js:139
+#. 6.4/constants.js:156 5.6/constants.js:139
 msgid "Some extensions need update:"
 msgstr "Некоторым расширениям требуется обновление:"
 
-#. 4.2/constants.js:139 4.8/constants.js:146 6.0/constants.js:154
+#. 4.2/constants.js:139 4.8/constants.js:146 6.0/constants.js:157
 #. 3.8/applet.js:152 4.6/constants.js:146 2.8/applet.js:111
-#. 5.6/constants.js:140
+#. 6.4/constants.js:157 5.6/constants.js:140
 msgid "Some themes need update:"
 msgstr "Некоторым темам требуется обновление:"
 
-#. 4.2/constants.js:140 4.8/constants.js:147 6.0/constants.js:156
+#. 4.2/constants.js:140 4.8/constants.js:147 6.0/constants.js:159
 #. 3.8/applet.js:153 4.6/constants.js:147 2.8/applet.js:112
-#. 5.6/constants.js:141
+#. 6.4/constants.js:159 5.6/constants.js:141
 msgid "New desklet available:"
 msgstr "Доступен новый десклет:"
 
-#. 4.2/constants.js:141 4.8/constants.js:148 6.0/constants.js:157
+#. 4.2/constants.js:141 4.8/constants.js:148 6.0/constants.js:160
 #. 3.8/applet.js:154 4.6/constants.js:148 2.8/applet.js:113
-#. 5.6/constants.js:142
+#. 6.4/constants.js:160 5.6/constants.js:142
 msgid "New applet available:"
 msgstr "Доступен новый апплет:"
 
-#. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:158
+#. 4.2/constants.js:142 4.8/constants.js:149 6.0/constants.js:161
 #. 3.8/applet.js:155 4.6/constants.js:149 2.8/applet.js:114
-#. 5.6/constants.js:143
+#. 6.4/constants.js:161 5.6/constants.js:143
 msgid "New extension available:"
 msgstr "Доступно новое расширение:"
 
-#. 4.2/constants.js:143 4.8/constants.js:150 6.0/constants.js:159
+#. 4.2/constants.js:143 4.8/constants.js:150 6.0/constants.js:162
 #. 3.8/applet.js:156 4.6/constants.js:150 2.8/applet.js:115
-#. 5.6/constants.js:144
+#. 6.4/constants.js:162 5.6/constants.js:144
 msgid "New theme available:"
 msgstr "Доступна новая тема:"
 
-#. 4.2/constants.js:144 4.8/constants.js:151 6.0/constants.js:161
+#. 4.2/constants.js:144 4.8/constants.js:151 6.0/constants.js:164
 #. 3.8/applet.js:157 4.6/constants.js:151 2.8/applet.js:116
-#. 5.6/constants.js:145
+#. 6.4/constants.js:164 5.6/constants.js:145
 msgid "New desklets available:"
 msgstr "Доступны новые десклеты:"
 
-#. 4.2/constants.js:145 4.8/constants.js:152 6.0/constants.js:162
+#. 4.2/constants.js:145 4.8/constants.js:152 6.0/constants.js:165
 #. 3.8/applet.js:158 4.6/constants.js:152 2.8/applet.js:117
-#. 5.6/constants.js:146
+#. 6.4/constants.js:165 5.6/constants.js:146
 msgid "New applets available:"
 msgstr "Доступны новые апплеты:"
 
-#. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:163
+#. 4.2/constants.js:146 4.8/constants.js:153 6.0/constants.js:166
 #. 3.8/applet.js:159 4.6/constants.js:153 2.8/applet.js:118
-#. 5.6/constants.js:147
+#. 6.4/constants.js:166 5.6/constants.js:147
 msgid "New extensions available:"
 msgstr "Доступны новые расширения:"
 
-#. 4.2/constants.js:147 4.8/constants.js:154 6.0/constants.js:164
+#. 4.2/constants.js:147 4.8/constants.js:154 6.0/constants.js:167
 #. 3.8/applet.js:160 4.6/constants.js:154 2.8/applet.js:119
-#. 5.6/constants.js:148
+#. 6.4/constants.js:167 5.6/constants.js:148
 msgid "New themes available:"
 msgstr "Доступны новые темы:"
 
-#. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:169
-#. 4.6/constants.js:158 5.6/constants.js:152
+#. 4.2/constants.js:151 4.8/constants.js:158 6.0/constants.js:172
+#. 4.6/constants.js:158 6.4/constants.js:172 5.6/constants.js:152
 msgid "If you do not want an applet to be checked, uncheck its first box."
 msgstr "Если вы не хотите, чтобы апплет проверялся, уберите его первый флажок."
 
-#. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:170
-#. 4.6/constants.js:159 5.6/constants.js:153
+#. 4.2/constants.js:152 4.8/constants.js:159 6.0/constants.js:173
+#. 4.6/constants.js:159 6.4/constants.js:173 5.6/constants.js:153
 msgid "If you do not want a desklet to be checked, uncheck its first box."
 msgstr ""
 "Если вы не хотите, чтобы десклет проверялся, уберите его первый флажок."
 
-#. 4.2/constants.js:153 4.8/constants.js:160 6.0/constants.js:171
-#. 4.6/constants.js:160 5.6/constants.js:154
+#. 4.2/constants.js:153 4.8/constants.js:160 6.0/constants.js:174
+#. 4.6/constants.js:160 6.4/constants.js:174 5.6/constants.js:154
 msgid "If you do not want an extension to be checked, uncheck its first box."
 msgstr ""
 "Если вы не хотите, чтобы расширение проверялось, уберите его первый флажок."
 
-#. 4.2/constants.js:154 4.8/constants.js:161 6.0/constants.js:172
-#. 4.6/constants.js:161 5.6/constants.js:155
+#. 4.2/constants.js:154 4.8/constants.js:161 6.0/constants.js:175
+#. 4.6/constants.js:161 6.4/constants.js:175 5.6/constants.js:155
 msgid "If you do not want a theme to be checked, uncheck its first box."
 msgstr "Если вы не хотите, чтобы тема проверялась, уберите её первый флажок."
 
-#. 4.2/constants.js:158 4.8/constants.js:165 6.0/constants.js:177
-#. 4.6/constants.js:165 5.6/constants.js:159
+#. 4.2/constants.js:158 4.8/constants.js:165 6.0/constants.js:180
+#. 4.6/constants.js:165 6.4/constants.js:180 5.6/constants.js:159
 msgid ""
 "If you want to get the latest version of an applet now, check both boxes."
 msgstr ""
 "Если вы хотите получить последнюю версию апплета сейчас, поставьте оба "
 "флажка."
 
-#. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:178
-#. 4.6/constants.js:166 5.6/constants.js:160
+#. 4.2/constants.js:159 4.8/constants.js:166 6.0/constants.js:181
+#. 4.6/constants.js:166 6.4/constants.js:181 5.6/constants.js:160
 msgid ""
 "If you want to get the latest version of a desklet now, check both boxes."
 msgstr ""
 "Если вы хотите получить последнюю версию десклета сейчас, поставьте оба "
 "флажка."
 
-#. 4.2/constants.js:160 4.8/constants.js:167 6.0/constants.js:179
-#. 4.6/constants.js:167 5.6/constants.js:161
+#. 4.2/constants.js:160 4.8/constants.js:167 6.0/constants.js:182
+#. 4.6/constants.js:167 6.4/constants.js:182 5.6/constants.js:161
 msgid ""
 "If you want to get the latest version of an extension now, check both boxes."
 msgstr ""
 "Если вы хотите получить последнюю версию расширения сейчас, поставьте оба "
 "флажка."
 
-#. 4.2/constants.js:161 4.8/constants.js:168 6.0/constants.js:180
-#. 4.6/constants.js:168 5.6/constants.js:162
+#. 4.2/constants.js:161 4.8/constants.js:168 6.0/constants.js:183
+#. 4.6/constants.js:168 6.4/constants.js:183 5.6/constants.js:162
 msgid "If you want to get the latest version of a theme now, check both boxes."
 msgstr ""
 "Если вы хотите получить последнюю версию темы сейчас, поставьте оба флажка."
 
-#. 4.2/constants.js:164 4.8/constants.js:171 6.0/constants.js:184
-#. 3.8/applet.js:93 4.6/constants.js:171 5.6/constants.js:165
+#. 4.2/constants.js:164 4.8/constants.js:171 6.0/constants.js:187
+#. 3.8/applet.js:93 4.6/constants.js:171 6.4/constants.js:187
+#. 5.6/constants.js:165
 msgid "When all your choices are made, click the Refresh button."
 msgstr "Когда все нужные варианты будут выбраны, нажмите кнопку Обновить."
 
-#. 4.8/applet.js:2104 6.0/applet.js:2262 6.0/applet_OLD.js:2145
-#. 4.6/applet.js:2098 5.6/applet.js:2118
+#. 4.8/applet.js:2104 6.0/applet.js:2719 6.0/applet_OLD.js:2145
+#. 4.6/applet.js:2098 6.4/applet.js:2756 5.6/applet.js:2118
 msgid "The Cinnamon Server seems to be DOWN!"
 msgstr "Сервер Cinnamon, похоже, НЕ РАБОТАЕТ!"
 
-#. 4.8/applet.js:2104 6.0/applet.js:2262 6.0/applet_OLD.js:2145
-#. 4.6/applet.js:2098 5.6/applet.js:2118
+#. 4.8/applet.js:2104 6.0/applet.js:2720 6.0/applet_OLD.js:2145
+#. 4.6/applet.js:2098 6.4/applet.js:2757 5.6/applet.js:2118
 msgid "Middle-Click to Retry"
 msgstr "Щелкните средней кнопкой мыши, чтобы повторить"
 
 #. 6.0->settings-schema.json->Actions->title
-#. 6.0/applet.js:1987 6.0/constants.js:145
-#. cs/6.0_FUTURE/modules/cs_actions.py:35
+#. 6.4->settings-schema.json->Actions->title
+#. 6.0/applet.js:2313 6.0/constants.js:148 6.4/applet.js:2347
+#. 6.4/constants.js:148 cs/6.0_FUTURE/modules/cs_actions.py:35
 msgid "Actions"
 msgstr "Действия"
 
-#. 6.0/constants.js:150
+#. 6.0/constants.js:153 6.4/constants.js:153
 msgid "One action needs update:"
 msgstr "Одно действие нуждается в обновлении:"
 
-#. 6.0/constants.js:155
+#. 6.0/constants.js:158 6.4/constants.js:158
 msgid "Some actions need update:"
 msgstr "Некоторым действиям требуется обновление:"
 
-#. 6.0/constants.js:160
+#. 6.0/constants.js:163 6.4/constants.js:163
 msgid "New action available:"
 msgstr "Доступно новое действие:"
 
-#. 6.0/constants.js:165
+#. 6.0/constants.js:168 6.4/constants.js:168
 msgid "New actions available:"
 msgstr "Доступны новые действия:"
 
-#. 6.0/constants.js:173
+#. 6.0/constants.js:176 6.4/constants.js:176
 msgid "If you do not want a nemo action to be checked, uncheck its first box."
 msgstr ""
 "Если вы не хотите, чтобы действие nemo проверялось, уберите его первый "
 "флажок."
 
-#. 6.0/constants.js:181
+#. 6.0/constants.js:184 6.4/constants.js:184
 msgid ""
 "If you want to get the latest version of a nemo action now, check both boxes."
 msgstr ""
 "Если вы хотите получить последнюю версию действия nemo сейчас, поставьте оба "
 "флажка."
 
-#. 6.0/constants.js:184
+#. 6.0/constants.js:187 6.4/constants.js:187
 msgid "For private Spices, both boxes will be considered unchecked."
 msgstr "Для частных Spices оба флажка будут считаться не установленными."
 
@@ -1384,6 +1406,7 @@ msgstr "Установленные действия"
 #. 4.8->settings-schema.json->section_general4->title
 #. 6.0->settings-schema.json->section_general4->title
 #. 4.6->settings-schema.json->section_general4->title
+#. 6.4->settings-schema.json->section_general4->title
 #. 5.6->settings-schema.json->section_general4->title
 #. cs/4.2/cinnamon-settings.py:75 cs/3.8/cinnamon-settings.py:73
 #. cs/4.0/cinnamon-settings.py:73
@@ -1590,6 +1613,11 @@ msgstr ""
 #. 4.6->settings-schema.json->section_desklets1->title
 #. 4.6->settings-schema.json->section_extensions1->title
 #. 4.6->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_applets1->title
+#. 6.4->settings-schema.json->section_desklets1->title
+#. 6.4->settings-schema.json->section_extensions1->title
+#. 6.4->settings-schema.json->section_themes1->title
+#. 6.4->settings-schema.json->section_actions1->title
 #. 5.6->settings-schema.json->section_applets1->title
 #. 5.6->settings-schema.json->section_desklets1->title
 #. 5.6->settings-schema.json->section_extensions1->title
@@ -1618,6 +1646,11 @@ msgstr "Проверка"
 #. 4.6->settings-schema.json->section_desklets2->title
 #. 4.6->settings-schema.json->section_extensions2->title
 #. 4.6->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_applets2->title
+#. 6.4->settings-schema.json->section_desklets2->title
+#. 6.4->settings-schema.json->section_extensions2->title
+#. 6.4->settings-schema.json->section_themes2->title
+#. 6.4->settings-schema.json->section_actions2->title
 #. 5.6->settings-schema.json->section_applets2->title
 #. 5.6->settings-schema.json->section_desklets2->title
 #. 5.6->settings-schema.json->section_extensions2->title
@@ -1630,6 +1663,7 @@ msgstr "Мониторинг"
 #. 6.0->settings-schema.json->section_general1->title
 #. 3.8->settings-schema.json->section_general1->title
 #. 4.6->settings-schema.json->section_general1->title
+#. 6.4->settings-schema.json->section_general1->title
 #. 5.6->settings-schema.json->section_general1->title
 msgid "Frequency"
 msgstr "Частота"
@@ -1639,6 +1673,7 @@ msgstr "Частота"
 #. 6.0->settings-schema.json->section_general2->title
 #. 3.8->settings-schema.json->section_general2->title
 #. 4.6->settings-schema.json->section_general2->title
+#. 6.4->settings-schema.json->section_general2->title
 #. 5.6->settings-schema.json->section_general2->title
 msgid "Notifications"
 msgstr "Уведомления"
@@ -1647,6 +1682,7 @@ msgstr "Уведомления"
 #. 4.8->settings-schema.json->section_general3->title
 #. 6.0->settings-schema.json->section_general3->title
 #. 4.6->settings-schema.json->section_general3->title
+#. 6.4->settings-schema.json->section_general3->title
 #. 5.6->settings-schema.json->section_general3->title
 msgid "Notification contents"
 msgstr "Содержание уведомления"
@@ -1662,6 +1698,7 @@ msgstr "Тип дисплея"
 #. 3.8->settings-schema.json->check_applets->description
 #. 4.6->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
+#. 6.4->settings-schema.json->check_applets->description
 #. 5.6->settings-schema.json->check_applets->description
 msgid "Check regularly whether your applets are up to date"
 msgstr "Регулярно проверять, обновлены ли ваши апплеты"
@@ -1672,6 +1709,7 @@ msgstr "Регулярно проверять, обновлены ли ваши 
 #. 3.8->settings-schema.json->check_applets->tooltip
 #. 4.6->settings-schema.json->check_applets->tooltip
 #. 2.8->settings-schema.json->check_applets->tooltip
+#. 6.4->settings-schema.json->check_applets->tooltip
 #. 5.6->settings-schema.json->check_applets->tooltip
 msgid "If applets updates do not concern you, uncheck this box."
 msgstr "Если обновления апплетов вас не интересуют, снимите этот флажок."
@@ -1682,6 +1720,7 @@ msgstr "Если обновления апплетов вас не интере�
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 4.6->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
+#. 6.4->settings-schema.json->check_new_applets->description
 #. 5.6->settings-schema.json->check_new_applets->description
 msgid "Check regularly whether new applets are available"
 msgstr "Регулярно проверять, доступны ли новые апплеты"
@@ -1692,6 +1731,7 @@ msgstr "Регулярно проверять, доступны ли новые 
 #. 3.8->settings-schema.json->check_new_applets->tooltip
 #. 4.6->settings-schema.json->check_new_applets->tooltip
 #. 2.8->settings-schema.json->check_new_applets->tooltip
+#. 6.4->settings-schema.json->check_new_applets->tooltip
 #. 5.6->settings-schema.json->check_new_applets->tooltip
 msgid "If new applets do not concern you, uncheck this box."
 msgstr "Если новые апплеты вас не интересуют, снимите этот флажок."
@@ -1701,6 +1741,7 @@ msgstr "Если новые апплеты вас не интересуют, с�
 #. 6.0->settings-schema.json->unprotected_applets->description
 #. 3.8->settings-schema.json->unprotected_applets->description
 #. 4.6->settings-schema.json->unprotected_applets->description
+#. 6.4->settings-schema.json->unprotected_applets->description
 #. 5.6->settings-schema.json->unprotected_applets->description
 msgid "Update these applets:"
 msgstr "Обновить эти апплеты:"
@@ -1710,6 +1751,7 @@ msgstr "Обновить эти апплеты:"
 #. 6.0->settings-schema.json->unprotected_applets->columns->title
 #. 3.8->settings-schema.json->unprotected_applets->columns->title
 #. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
 #. 5.6->settings-schema.json->unprotected_applets->columns->title
 msgid "Your Applets"
 msgstr "Ваши апплеты"
@@ -1735,6 +1777,11 @@ msgstr "Ваши апплеты"
 #. 4.6->settings-schema.json->unprotected_desklets->columns->title
 #. 4.6->settings-schema.json->unprotected_extensions->columns->title
 #. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
 #. 5.6->settings-schema.json->unprotected_applets->columns->title
 #. 5.6->settings-schema.json->unprotected_desklets->columns->title
 #. 5.6->settings-schema.json->unprotected_extensions->columns->title
@@ -1763,6 +1810,11 @@ msgstr "Проверять наличие обновлений?"
 #. 4.6->settings-schema.json->unprotected_desklets->columns->title
 #. 4.6->settings-schema.json->unprotected_extensions->columns->title
 #. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_applets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
 #. 5.6->settings-schema.json->unprotected_applets->columns->title
 #. 5.6->settings-schema.json->unprotected_desklets->columns->title
 #. 5.6->settings-schema.json->unprotected_extensions->columns->title
@@ -1776,6 +1828,7 @@ msgstr "Получить последнюю версию сейчас"
 #. 3.8->settings-schema.json->btn_cs_applets->description
 #. 4.6->settings-schema.json->btn_cs_applets->description
 #. 2.8->settings-schema.json->btn_cs_applets->description
+#. 6.4->settings-schema.json->btn_cs_applets->description
 #. 5.6->settings-schema.json->btn_cs_applets->description
 msgid "Open Cinnamon Settings to manage all the Applets"
 msgstr "Откройте настройки Cinnamon, чтобы управлять всеми апплетами"
@@ -1786,6 +1839,7 @@ msgstr "Откройте настройки Cinnamon, чтобы управля�
 #. 3.8->settings-schema.json->check_desklets->description
 #. 4.6->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
+#. 6.4->settings-schema.json->check_desklets->description
 #. 5.6->settings-schema.json->check_desklets->description
 msgid "Check regularly whether your desklets are up to date"
 msgstr "Регулярно проверять, обновлены ли ваши десклеты"
@@ -1796,6 +1850,7 @@ msgstr "Регулярно проверять, обновлены ли ваши 
 #. 3.8->settings-schema.json->check_desklets->tooltip
 #. 4.6->settings-schema.json->check_desklets->tooltip
 #. 2.8->settings-schema.json->check_desklets->tooltip
+#. 6.4->settings-schema.json->check_desklets->tooltip
 #. 5.6->settings-schema.json->check_desklets->tooltip
 msgid "If desklets updates do not concern you, uncheck this box."
 msgstr "Если обновления десклетов вас не интересуют, снимите этот флажок."
@@ -1806,6 +1861,7 @@ msgstr "Если обновления десклетов вас не интер�
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 4.6->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
+#. 6.4->settings-schema.json->check_new_desklets->description
 #. 5.6->settings-schema.json->check_new_desklets->description
 msgid "Check regularly whether new desklets are available"
 msgstr "Регулярно проверять, доступны ли новые десклеты"
@@ -1816,6 +1872,7 @@ msgstr "Регулярно проверять, доступны ли новые 
 #. 3.8->settings-schema.json->check_new_desklets->tooltip
 #. 4.6->settings-schema.json->check_new_desklets->tooltip
 #. 2.8->settings-schema.json->check_new_desklets->tooltip
+#. 6.4->settings-schema.json->check_new_desklets->tooltip
 #. 5.6->settings-schema.json->check_new_desklets->tooltip
 msgid "If new desklets do not concern you, uncheck this box."
 msgstr "Если новые десклеты вас не интересуют, снимите этот флажок."
@@ -1825,6 +1882,7 @@ msgstr "Если новые десклеты вас не интересуют, �
 #. 6.0->settings-schema.json->unprotected_desklets->description
 #. 3.8->settings-schema.json->unprotected_desklets->description
 #. 4.6->settings-schema.json->unprotected_desklets->description
+#. 6.4->settings-schema.json->unprotected_desklets->description
 #. 5.6->settings-schema.json->unprotected_desklets->description
 msgid "Update these desklets:"
 msgstr "Обновить эти деесклеты:"
@@ -1834,6 +1892,7 @@ msgstr "Обновить эти деесклеты:"
 #. 6.0->settings-schema.json->unprotected_desklets->columns->title
 #. 3.8->settings-schema.json->unprotected_desklets->columns->title
 #. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 6.4->settings-schema.json->unprotected_desklets->columns->title
 #. 5.6->settings-schema.json->unprotected_desklets->columns->title
 msgid "Your Desklets"
 msgstr "Ваши десклеты"
@@ -1844,6 +1903,7 @@ msgstr "Ваши десклеты"
 #. 3.8->settings-schema.json->btn_cs_desklets->description
 #. 4.6->settings-schema.json->btn_cs_desklets->description
 #. 2.8->settings-schema.json->btn_cs_desklets->description
+#. 6.4->settings-schema.json->btn_cs_desklets->description
 #. 5.6->settings-schema.json->btn_cs_desklets->description
 msgid "Open Cinnamon Settings to manage all the Desklets"
 msgstr "Откройте настройки Cinnamon, чтобы управлять всеми десклетами"
@@ -1854,6 +1914,7 @@ msgstr "Откройте настройки Cinnamon, чтобы управля�
 #. 3.8->settings-schema.json->check_extensions->description
 #. 4.6->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
+#. 6.4->settings-schema.json->check_extensions->description
 #. 5.6->settings-schema.json->check_extensions->description
 msgid "Check regularly whether your extensions are up to date"
 msgstr "Регулярно проверять, обновлены ли ваши расширения"
@@ -1864,6 +1925,7 @@ msgstr "Регулярно проверять, обновлены ли ваши 
 #. 3.8->settings-schema.json->check_extensions->tooltip
 #. 4.6->settings-schema.json->check_extensions->tooltip
 #. 2.8->settings-schema.json->check_extensions->tooltip
+#. 6.4->settings-schema.json->check_extensions->tooltip
 #. 5.6->settings-schema.json->check_extensions->tooltip
 msgid "If extensions updates do not concern you, uncheck this box."
 msgstr "Если обновления расширений вас не интересуют, снимите этот флажок."
@@ -1874,6 +1936,7 @@ msgstr "Если обновления расширений вас не инте�
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 4.6->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
+#. 6.4->settings-schema.json->check_new_extensions->description
 #. 5.6->settings-schema.json->check_new_extensions->description
 msgid "Check regularly whether new extensions are available"
 msgstr "Регулярно проверять, доступны ли новые расширения"
@@ -1884,6 +1947,7 @@ msgstr "Регулярно проверять, доступны ли новые 
 #. 3.8->settings-schema.json->check_new_extensions->tooltip
 #. 4.6->settings-schema.json->check_new_extensions->tooltip
 #. 2.8->settings-schema.json->check_new_extensions->tooltip
+#. 6.4->settings-schema.json->check_new_extensions->tooltip
 #. 5.6->settings-schema.json->check_new_extensions->tooltip
 msgid "If new extensions do not concern you, uncheck this box."
 msgstr "Если новые расширения вас не интересуют, снимите этот флажок."
@@ -1893,6 +1957,7 @@ msgstr "Если новые расширения вас не интересую�
 #. 6.0->settings-schema.json->unprotected_extensions->description
 #. 3.8->settings-schema.json->unprotected_extensions->description
 #. 4.6->settings-schema.json->unprotected_extensions->description
+#. 6.4->settings-schema.json->unprotected_extensions->description
 #. 5.6->settings-schema.json->unprotected_extensions->description
 msgid "Update these extensions:"
 msgstr "Обновить эти расширения:"
@@ -1902,6 +1967,7 @@ msgstr "Обновить эти расширения:"
 #. 6.0->settings-schema.json->unprotected_extensions->columns->title
 #. 3.8->settings-schema.json->unprotected_extensions->columns->title
 #. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 6.4->settings-schema.json->unprotected_extensions->columns->title
 #. 5.6->settings-schema.json->unprotected_extensions->columns->title
 msgid "Your Extensions"
 msgstr "Ваши расширения"
@@ -1912,6 +1978,7 @@ msgstr "Ваши расширения"
 #. 3.8->settings-schema.json->btn_cs_extensions->description
 #. 4.6->settings-schema.json->btn_cs_extensions->description
 #. 2.8->settings-schema.json->btn_cs_extensions->description
+#. 6.4->settings-schema.json->btn_cs_extensions->description
 #. 5.6->settings-schema.json->btn_cs_extensions->description
 msgid "Open Cinnamon Settings to manage all the Extensions"
 msgstr "Откройте настройки Cinnamon, чтобы управлять всеми расширениями"
@@ -1922,6 +1989,7 @@ msgstr "Откройте настройки Cinnamon, чтобы управля�
 #. 3.8->settings-schema.json->check_themes->description
 #. 4.6->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
+#. 6.4->settings-schema.json->check_themes->description
 #. 5.6->settings-schema.json->check_themes->description
 msgid "Check regularly whether your themes are up to date"
 msgstr "Регулярно проверять, актуальны ли ваши темы"
@@ -1932,6 +2000,7 @@ msgstr "Регулярно проверять, актуальны ли ваши 
 #. 3.8->settings-schema.json->check_themes->tooltip
 #. 4.6->settings-schema.json->check_themes->tooltip
 #. 2.8->settings-schema.json->check_themes->tooltip
+#. 6.4->settings-schema.json->check_themes->tooltip
 #. 5.6->settings-schema.json->check_themes->tooltip
 msgid "If themes updates do not concern you, uncheck this box."
 msgstr "Если обновления тем вас не интересуют, снимите этот флажок."
@@ -1942,6 +2011,7 @@ msgstr "Если обновления тем вас не интересуют, �
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 4.6->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
+#. 6.4->settings-schema.json->check_new_themes->description
 #. 5.6->settings-schema.json->check_new_themes->description
 msgid "Check regularly whether new themes are available"
 msgstr "Регулярно проверять, доступны ли новые темы"
@@ -1952,6 +2022,7 @@ msgstr "Регулярно проверять, доступны ли новые 
 #. 3.8->settings-schema.json->check_new_themes->tooltip
 #. 4.6->settings-schema.json->check_new_themes->tooltip
 #. 2.8->settings-schema.json->check_new_themes->tooltip
+#. 6.4->settings-schema.json->check_new_themes->tooltip
 #. 5.6->settings-schema.json->check_new_themes->tooltip
 msgid "If new themes do not concern you, uncheck this box."
 msgstr "Если новые темы вас не интересуют, снимите этот флажок."
@@ -1961,6 +2032,7 @@ msgstr "Если новые темы вас не интересуют, сним�
 #. 6.0->settings-schema.json->unprotected_themes->description
 #. 3.8->settings-schema.json->unprotected_themes->description
 #. 4.6->settings-schema.json->unprotected_themes->description
+#. 6.4->settings-schema.json->unprotected_themes->description
 #. 5.6->settings-schema.json->unprotected_themes->description
 msgid "Update these themes:"
 msgstr "Обновить эти темы:"
@@ -1970,6 +2042,7 @@ msgstr "Обновить эти темы:"
 #. 6.0->settings-schema.json->unprotected_themes->columns->title
 #. 3.8->settings-schema.json->unprotected_themes->columns->title
 #. 4.6->settings-schema.json->unprotected_themes->columns->title
+#. 6.4->settings-schema.json->unprotected_themes->columns->title
 #. 5.6->settings-schema.json->unprotected_themes->columns->title
 msgid "Your Themes"
 msgstr "Ваши темы"
@@ -1980,6 +2053,7 @@ msgstr "Ваши темы"
 #. 3.8->settings-schema.json->btn_cs_themes->description
 #. 4.6->settings-schema.json->btn_cs_themes->description
 #. 2.8->settings-schema.json->btn_cs_themes->description
+#. 6.4->settings-schema.json->btn_cs_themes->description
 #. 5.6->settings-schema.json->btn_cs_themes->description
 msgid "Open Cinnamon Settings to manage all the Themes"
 msgstr "Открыть настройки Cinnamon, чтобы управлять всеми темами"
@@ -1988,6 +2062,7 @@ msgstr "Открыть настройки Cinnamon, чтобы управлят�
 #. 4.8->settings-schema.json->general_frequency->units
 #. 6.0->settings-schema.json->general_frequency->units
 #. 4.6->settings-schema.json->general_frequency->units
+#. 6.4->settings-schema.json->general_frequency->units
 #. 5.6->settings-schema.json->general_frequency->units
 msgid "hours"
 msgstr " часов"
@@ -1996,6 +2071,7 @@ msgstr " часов"
 #. 4.8->settings-schema.json->general_frequency->description
 #. 6.0->settings-schema.json->general_frequency->description
 #. 4.6->settings-schema.json->general_frequency->description
+#. 6.4->settings-schema.json->general_frequency->description
 #. 5.6->settings-schema.json->general_frequency->description
 msgid "Time interval between two checks"
 msgstr "Временной интервал между двумя проверками"
@@ -2004,6 +2080,7 @@ msgstr "Временной интервал между двумя проверк
 #. 4.8->settings-schema.json->general_frequency->tooltip
 #. 6.0->settings-schema.json->general_frequency->tooltip
 #. 4.6->settings-schema.json->general_frequency->tooltip
+#. 6.4->settings-schema.json->general_frequency->tooltip
 #. 5.6->settings-schema.json->general_frequency->tooltip
 msgid "Min value: 1 hour. Max value: 720 hours (30 days)."
 msgstr ""
@@ -2013,6 +2090,7 @@ msgstr ""
 #. 4.8->settings-schema.json->general_first_check->description
 #. 6.0->settings-schema.json->general_first_check->description
 #. 4.6->settings-schema.json->general_first_check->description
+#. 6.4->settings-schema.json->general_first_check->description
 #. 5.6->settings-schema.json->general_first_check->description
 msgid "Make a first check one minute after starting"
 msgstr "Выполнить первую проверку через минуту после запуска"
@@ -2021,6 +2099,7 @@ msgstr "Выполнить первую проверку через минуту
 #. 4.8->settings-schema.json->general_first_check->tooltip
 #. 6.0->settings-schema.json->general_first_check->tooltip
 #. 4.6->settings-schema.json->general_first_check->tooltip
+#. 6.4->settings-schema.json->general_first_check->tooltip
 #. 5.6->settings-schema.json->general_first_check->tooltip
 msgid ""
 "By checking this box, the first check will take place one minute after "
@@ -2035,6 +2114,7 @@ msgstr ""
 #. 3.8->settings-schema.json->general_warning->description
 #. 4.6->settings-schema.json->general_warning->description
 #. 2.8->settings-schema.json->general_warning->description
+#. 6.4->settings-schema.json->general_warning->description
 #. 5.6->settings-schema.json->general_warning->description
 msgid "Notify me by changing the icon when Spices need an update"
 msgstr "Уведомляйте меня, меняя значок, когда Spices нуждаются в обновлении"
@@ -2045,6 +2125,7 @@ msgstr "Уведомляйте меня, меняя значок, когда Spi
 #. 3.8->settings-schema.json->general_warning->tooltip
 #. 4.6->settings-schema.json->general_warning->tooltip
 #. 2.8->settings-schema.json->general_warning->tooltip
+#. 6.4->settings-schema.json->general_warning->tooltip
 #. 5.6->settings-schema.json->general_warning->tooltip
 msgid ""
 "By checking this box, you allow this applet to modify its icon to warn you "
@@ -2059,6 +2140,7 @@ msgstr ""
 #. 3.8->settings-schema.json->events_color->description
 #. 4.6->settings-schema.json->events_color->description
 #. 2.8->settings-schema.json->events_color->description
+#. 6.4->settings-schema.json->events_color->description
 #. 5.6->settings-schema.json->events_color->description
 msgid "The icon color when Spices need an update"
 msgstr "Цвет значка, когда Spices нуждаются в обновлении"
@@ -2070,6 +2152,8 @@ msgstr "Цвет значка, когда Spices нуждаются в обно�
 #. 3.8->settings-schema.json->events_color->tooltip
 #. 4.6->settings-schema.json->events_color->tooltip
 #. 2.8->settings-schema.json->events_color->tooltip
+#. 6.4->settings-schema.json->events_color->tooltip
+#. 6.4->settings-schema.json->processing_color->tooltip
 #. 5.6->settings-schema.json->events_color->tooltip
 msgid "Click the button to select another color."
 msgstr "Нажмите на кнопку, чтобы выбрать другой цвет."
@@ -2080,6 +2164,7 @@ msgstr "Нажмите на кнопку, чтобы выбрать другой
 #. 3.8->settings-schema.json->general_notifications->description
 #. 4.6->settings-schema.json->general_notifications->description
 #. 2.8->settings-schema.json->general_notifications->description
+#. 6.4->settings-schema.json->general_notifications->description
 #. 5.6->settings-schema.json->general_notifications->description
 msgid "Show notification messages about Spices updates"
 msgstr "Показывать уведомления об обновлениях Spices"
@@ -2090,6 +2175,7 @@ msgstr "Показывать уведомления об обновлениях 
 #. 3.8->settings-schema.json->general_notifications->tooltip
 #. 4.6->settings-schema.json->general_notifications->tooltip
 #. 2.8->settings-schema.json->general_notifications->tooltip
+#. 6.4->settings-schema.json->general_notifications->tooltip
 #. 5.6->settings-schema.json->general_notifications->tooltip
 msgid ""
 "By checking this box, you allow this applet to display messages about Spices "
@@ -2104,6 +2190,7 @@ msgstr ""
 #. 3.8->settings-schema.json->general_details_requested->description
 #. 4.6->settings-schema.json->general_details_requested->description
 #. 2.8->settings-schema.json->general_details_requested->description
+#. 6.4->settings-schema.json->general_details_requested->description
 #. 5.6->settings-schema.json->general_details_requested->description
 msgid "Display the description of each update or new Spice"
 msgstr "Отображать описание каждого обновления или новой Spice"
@@ -2114,6 +2201,7 @@ msgstr "Отображать описание каждого обновлени�
 #. 3.8->settings-schema.json->general_details_requested->tooltip
 #. 4.6->settings-schema.json->general_details_requested->tooltip
 #. 2.8->settings-schema.json->general_details_requested->tooltip
+#. 6.4->settings-schema.json->general_details_requested->tooltip
 #. 5.6->settings-schema.json->general_details_requested->tooltip
 msgid ""
 "By checking this box, you'll know why an update is available, and get a "
@@ -2130,6 +2218,7 @@ msgstr ""
 #. 3.8->settings-schema.json->general_type_notif->options
 #. 4.6->settings-schema.json->general_type_notif->options
 #. 2.8->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
 #. 5.6->settings-schema.json->general_type_notif->options
 msgid "Minimal (text only)"
 msgstr "Минимальный (только текст)"
@@ -2138,6 +2227,7 @@ msgstr "Минимальный (только текст)"
 #. 4.8->settings-schema.json->general_type_notif->options
 #. 6.0->settings-schema.json->general_type_notif->options
 #. 4.6->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
 #. 5.6->settings-schema.json->general_type_notif->options
 msgid "With action buttons"
 msgstr "С кнопками действий"
@@ -2146,6 +2236,7 @@ msgstr "С кнопками действий"
 #. 4.8->settings-schema.json->general_type_notif->options
 #. 6.0->settings-schema.json->general_type_notif->options
 #. 4.6->settings-schema.json->general_type_notif->options
+#. 6.4->settings-schema.json->general_type_notif->options
 #. 5.6->settings-schema.json->general_type_notif->options
 msgid "With action buttons as icons"
 msgstr "С кнопками действий в виде значков"
@@ -2156,6 +2247,7 @@ msgstr "С кнопками действий в виде значков"
 #. 3.8->settings-schema.json->general_type_notif->description
 #. 4.6->settings-schema.json->general_type_notif->description
 #. 2.8->settings-schema.json->general_type_notif->description
+#. 6.4->settings-schema.json->general_type_notif->description
 #. 5.6->settings-schema.json->general_type_notif->description
 msgid "Notification style"
 msgstr "Стиль уведомлений"
@@ -2164,6 +2256,7 @@ msgstr "Стиль уведомлений"
 #. 4.8->settings-schema.json->general_type_notif->tooltip
 #. 6.0->settings-schema.json->general_type_notif->tooltip
 #. 4.6->settings-schema.json->general_type_notif->tooltip
+#. 6.4->settings-schema.json->general_type_notif->tooltip
 #. 5.6->settings-schema.json->general_type_notif->tooltip
 msgid ""
 "Minimal:\n"
@@ -2225,6 +2318,7 @@ msgstr ""
 #. 3.8->settings-schema.json->general_test_notif->description
 #. 4.6->settings-schema.json->general_test_notif->description
 #. 2.8->settings-schema.json->general_test_notif->description
+#. 6.4->settings-schema.json->general_test_notif->description
 #. 5.6->settings-schema.json->general_test_notif->description
 msgid "Send a fake notification to test the style"
 msgstr "Отправить фейковое уведомление, чтобы протестировать стиль"
@@ -2263,6 +2357,7 @@ msgstr ""
 #. 3.8->settings-schema.json->general_hide->description
 #. 4.6->settings-schema.json->general_hide->description
 #. 2.8->settings-schema.json->general_hide->description
+#. 6.4->settings-schema.json->general_hide->description
 #. 5.6->settings-schema.json->general_hide->description
 msgid "Hide the icon as long as nothing is to report"
 msgstr "Скрывать значок до тех пор, пока не будет никаких сообщений"
@@ -2273,6 +2368,7 @@ msgstr "Скрывать значок до тех пор, пока не буде
 #. 3.8->settings-schema.json->general_hide->tooltip
 #. 4.6->settings-schema.json->general_hide->tooltip
 #. 2.8->settings-schema.json->general_hide->tooltip
+#. 6.4->settings-schema.json->general_hide->tooltip
 #. 5.6->settings-schema.json->general_hide->tooltip
 msgid ""
 "By checking this box, as long as nothing is to report the icon of Spices "
@@ -2284,6 +2380,7 @@ msgstr ""
 #. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->units
 #. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->units
 #. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->units
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->units
 #. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->units
 msgid "% of screen width"
 msgstr "% от ширины экрана"
@@ -2291,6 +2388,7 @@ msgstr "% от ширины экрана"
 #. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->description
 #. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->description
 #. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->description
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->description
 #. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->description
 msgid "Tooltip: Maximum width"
 msgstr "Всплывающая подсказка: Максимальная ширина"
@@ -2298,6 +2396,7 @@ msgstr "Всплывающая подсказка: Максимальная ши
 #. 4.8->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
 #. 6.0->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
 #. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+#. 6.4->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
 #. 5.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
 msgid ""
 "What is the maximum percentage of your screen width that the tooltip can "
@@ -2306,35 +2405,56 @@ msgstr ""
 "Какой максимальный процент от ширины экрана может занимать всплывающая "
 "подсказка?"
 
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.0->settings-schema.json->btn_tickallthenrefresh_actions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_applets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_desklets->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_extensions->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_themes->description
+#. 6.4->settings-schema.json->btn_tickallthenrefresh_actions->description
+msgid "Tick all the first boxes then refresh"
+msgstr ""
+
 #. 6.0->settings-schema.json->check_actions->description
+#. 6.4->settings-schema.json->check_actions->description
 msgid "Check regularly whether your nemo actions are up to date"
 msgstr "Регулярно проверять, актуальны ли ваши действия nemo"
 
 #. 6.0->settings-schema.json->check_actions->tooltip
+#. 6.4->settings-schema.json->check_actions->tooltip
 msgid "If nemo actions updates do not concern you, uncheck this box."
 msgstr "Если обновления nemo действий вас не интересуют, снимите этот флажок."
 
 #. 6.0->settings-schema.json->check_new_actions->description
+#. 6.4->settings-schema.json->check_new_actions->description
 msgid "Check regularly whether new nemo actions are available"
 msgstr "Регулярно проверять, доступны ли новые действия nemo"
 
 #. 6.0->settings-schema.json->check_new_actions->tooltip
+#. 6.4->settings-schema.json->check_new_actions->tooltip
 msgid "If new nemo actions do not concern you, uncheck this box."
 msgstr "Если новые действия nemo вас не интересуют, снимите этот флажок."
 
 #. 6.0->settings-schema.json->unprotected_actions->description
+#. 6.4->settings-schema.json->unprotected_actions->description
 msgid "Update these nemo actions:"
 msgstr "Обновить эти действия nemo:"
 
 #. 6.0->settings-schema.json->unprotected_actions->columns->title
+#. 6.4->settings-schema.json->unprotected_actions->columns->title
 msgid "Your nemo actions"
 msgstr "Ваши действия nemo"
 
 #. 6.0->settings-schema.json->btn_cs_actions->description
+#. 6.4->settings-schema.json->btn_cs_actions->description
 msgid "Open Cinnamon Settings to manage all the nemo actions"
 msgstr "Откройте настройки Cinnamon, чтобы управлять всеми действиями nemo"
 
 #. 6.0->settings-schema.json->processing_color->description
+#. 6.4->settings-schema.json->processing_color->description
 msgid "The icon color while SpicesUpdate is processing"
 msgstr "Другой цвет значка во время обработки обновления Spices"
 
@@ -2389,3 +2509,13 @@ msgstr ""
 "кнопка меню:\n"
 "\tОткройте вкладку Загрузки в системных настройках для соответствующего типа "
 "Spices, отсортировав Spices по дате."
+
+#. 6.4->settings-schema.json->section_general5->title
+#, fuzzy
+msgid "Dependencies"
+msgstr "Проверка зависимостей"
+
+#. 6.4->settings-schema.json->dont_check_dependencies->description
+#, fuzzy
+msgid "Do not check dependencies"
+msgstr "Проверка зависимостей"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #####
 # Moves themes to their new location,
 # creating symbolic links to avoid any crash.
@@ -13,9 +13,9 @@ OLDDIR=$HOME/.themes
 cd $OLDDIR
 for f in $(ls -1A); do {
         [[ -d $f && ! -L $f ]] && {
-				[[ -L $NEWDIR/$f ]] && rm -f $NEWDIR/$f
-				mv $f $NEWDIR/
-				ln -s $NEWDIR/$f
+                                [[ -L $NEWDIR/$f ]] && rm -f $NEWDIR/$f
+                                mv $f $NEWDIR/
+                                ln -s $NEWDIR/$f
         }
 }; done
 

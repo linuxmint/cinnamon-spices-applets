@@ -8,15 +8,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-06-05 16:59+0200\n"
-"PO-Revision-Date: 2025-04-11 09:25+0200\n"
-"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"PO-Revision-Date: 2025-08-06 23:11+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. 6.2/applet.js:138 4.4/applet.js:72 5.4/applet.js:132 4.6/applet.js:73
 #. 2.8/applet.js:65 6.4/applet.js:204 3.4/applet.js:65
@@ -195,15 +195,15 @@ msgstr "Pulse Effects"
 #. 6.2/applet.js:2116 5.4/applet.js:2030 6.4/applet.js:867 6.4/applet.js:891
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr "Biztosan eltávolítja a következőt: '%s'?"
+msgstr "Biztosan eltávolítja a következőt: „%s”?"
 
 #. 6.2/applet.js:2970 5.4/applet.js:2758 6.4/applet.js:1859
 msgid "The 'playerctl' package is required!"
-msgstr "A 'playerctl' csomag szükséges!"
+msgstr "A „playerctl” csomag telepítése szükséges."
 
 #. 6.2/applet.js:2971 5.4/applet.js:2759 6.4/applet.js:1860
 msgid "Please select 'Install playerctl' in this menu"
-msgstr "Kérem válassza a 'A playerctl telepítése'-t a menüben"
+msgstr "Kérem válassza „A playerctl telepítése” almenüt a menüben"
 
 #. 6.2/applet.js:3110 4.4/applet.js:1397 5.4/applet.js:2890 4.6/applet.js:1417
 #. 2.8/applet.js:1644 6.4/applet.js:251 3.4/applet.js:1571
@@ -258,7 +258,7 @@ msgstr "Albumborító megjelenítése az asztalon"
 
 #. 6.4/applet.js:758
 msgid "You need the 'Album Art 3.0' desklet"
-msgstr "Szüksége van az 'Albumborító 3.0' asztalkalmazáshoz"
+msgstr "Szükséges az „Albumborító 3.0” asztalkalmazás"
 
 #. 6.4/applet.js:759
 msgid ""
@@ -276,7 +276,7 @@ msgstr "Mégse"
 
 #. 6.4/applet.js:776
 msgid "You need to activate the 'Album Art 3.0' desklet"
-msgstr "Aktiválnia kell az 'Albumborító 3.0' asztalkalmazást"
+msgstr "Be kell kapcsolnia az „Albumborító 3.0” asztalkalmazást"
 
 #. 6.4/applet.js:777
 msgid ""
@@ -293,7 +293,7 @@ msgstr "Továbbfejlesztett hangkisalkalmazás"
 
 #. 6.4/applet.js:813
 msgid "Enable the OSD150 extension"
-msgstr "OSD150 bővítmény engedélyezése"
+msgstr "Az OSD150 bővítmény engedélyezése"
 
 #. 6.4/applet.js:814
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
@@ -302,7 +302,7 @@ msgstr ""
 
 #. 6.4/applet.js:831
 msgid "Download the OSD150 extension"
-msgstr "OSD150 bővítmény letöltése"
+msgstr "Az OSD150 bővítmény letöltése"
 
 #. 6.4/applet.js:832
 msgid ""
@@ -310,18 +310,16 @@ msgid ""
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
 "A vízszintes OSD-hez le kell töltenie az OSD150 bővítményt.\n"
-"Kattintson a Letöltés gombra, majd keresse meg az OSD150-et, és válassza a ⬇ "
-"gombot."
+"Kattintson a „Letöltés” gombra, majd keresse meg az OSD150 bővítményt, és "
+"válassza a „⬇” gombot."
 
 #. 6.4/applet.js:1864
-#, fuzzy
 msgid "The 'imagemagick' package is required!"
-msgstr "A 'playerctl' csomag szükséges!"
+msgstr "Az „imagemagick” csomag telepítése szükséges."
 
 #. 6.4/applet.js:1865
-#, fuzzy
 msgid "Please select 'Install imagemagick' in this menu"
-msgstr "Kérem válassza a 'A playerctl telepítése'-t a menüben"
+msgstr "Kérem válassza „Az imagemagick telepítése” menüelemet a menüben"
 
 #. 6.4->settings-schema.json->remove_OsdWithNumberATJosephMcc->description
 #. 6.4/applet.js:2070
@@ -329,9 +327,8 @@ msgid "Remove the OsdWithNumber extension"
 msgstr "Távolítsa el az OsdWithNumber kiterjesztést"
 
 #. 6.4/applet.js:2090
-#, fuzzy
 msgid "Install imagemagick"
-msgstr "A playerctl telepítése"
+msgstr "Az imagemagick telepítése"
 
 #. metadata.json->description
 msgid "Enhanced sound applet"
@@ -388,7 +385,7 @@ msgstr "Panel"
 #. 5.4->settings-schema.json->sectionBehavior3->title
 #. 6.4->settings-schema.json->sectionBehavior3->title
 msgid "Tooltip"
-msgstr "Buboréksúgó"
+msgstr "Eszköztipp"
 
 #. 6.2->settings-schema.json->sectionSound2->title
 #. 5.4->settings-schema.json->sectionSound2->title
@@ -449,7 +446,7 @@ msgstr "Kerülje a vezérlők kétszeri megjelenítését"
 #. 6.2->settings-schema.json->seekerTooltipDelay->units
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr "mp"
+msgstr "em"
 
 #. 6.2->settings-schema.json->seekerTooltipDelay->description
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
@@ -618,19 +615,19 @@ msgstr "Rendszer panel ikonok elrejtése a kompatibilis lejátszóknál"
 #. 5.4->settings-schema.json->tooltipShowVolume->description
 #. 6.4->settings-schema.json->tooltipShowVolume->description
 msgid "Show volume in tooltip"
-msgstr "Hangerő megjelenítése a buboréksúgóban"
+msgstr "Hangerő megjelenítése eszköztippen"
 
 #. 6.2->settings-schema.json->tooltipShowPlayer->description
 #. 5.4->settings-schema.json->tooltipShowPlayer->description
 #. 6.4->settings-schema.json->tooltipShowPlayer->description
 msgid "Show player in tooltip"
-msgstr "Lejátszó megjelenítése a buboréksúgóban"
+msgstr "Lejátszó megjelenítése eszköztippen"
 
 #. 6.2->settings-schema.json->tooltipShowArtistTitle->description
 #. 5.4->settings-schema.json->tooltipShowArtistTitle->description
 #. 6.4->settings-schema.json->tooltipShowArtistTitle->description
 msgid "Show song artist and title in tooltip"
-msgstr "Előadó és a szám címének megjelenítése a buboréksúgóban"
+msgstr "Előadó és a szám címének megjelenítése eszköztippen"
 
 #. 6.2->settings-schema.json->showVolumeLevelNearIcon->description
 #. 5.4->settings-schema.json->showVolumeLevelNearIcon->description
@@ -678,7 +675,7 @@ msgstr "Hangerő indításkor (%)"
 #. 6.2->settings-schema.json->startupVolume->tooltip
 #. 6.4->settings-schema.json->startupVolume->tooltip
 msgid "Value -1 means \"No change\""
-msgstr "A -1 érték azt jelenti, hogy \"nincs változás\""
+msgstr "A -1 érték azt jelenti, hogy „nincs változás”"
 
 #. 6.2->settings-schema.json->stepVolume->options
 #. 5.4->settings-schema.json->stepVolume->options
@@ -799,7 +796,7 @@ msgstr "+/-"
 #. 6.4->settings-schema.json->magneticOn->description
 #. 3.4->settings-schema.json->magneticOn->description
 msgid "Magnetize the 'Volume 100%' mark"
-msgstr "A 'Volume 100%' jelölés ragadóssá tétele"
+msgstr "A „Hangerő 100%” jelölés ragadóssá tétele"
 
 #. 6.2->settings-schema.json->magneticOn->tooltip
 #. 4.4->settings-schema.json->magneticOn->tooltip
@@ -894,22 +891,22 @@ msgstr ""
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr "Letiltva"
+msgstr "letiltva"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr "Kicsi"
+msgstr "kicsi"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr "Közepes"
+msgstr "közepes"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->options
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr "Nagy"
+msgstr "nagy"
 
 #. 6.2->settings-schema.json->showMediaKeysOSD->description
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
@@ -1074,13 +1071,12 @@ msgstr ""
 "gyermek számítógépén."
 
 #. 6.4->settings-schema.json->page_menus->title
-#, fuzzy
 msgid "Menus"
-msgstr "Menü"
+msgstr "Menük"
 
 #. 6.4->settings-schema.json->sectionMenu2->title
 msgid "Context Menu"
-msgstr ""
+msgstr "Helyi menü"
 
 #. 6.4->settings-schema.json->sectionIcon1->title
 msgid "Icon appearance"
@@ -1108,33 +1104,31 @@ msgstr "Médiaoptikai ikon megjelenítése"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->description
 msgid "View Full Album Art"
-msgstr ""
+msgstr "Teljes albumborító megtekintése"
 
 #. 6.4->settings-schema.json->viewFullAlbumArt->tooltip
 msgid ""
 "When unchecked, Album Art in the menu may be partially covered by Artist and "
 "Title."
 msgstr ""
+"Ha nincs bejelölve, a menüben található albumborító részben eltakarható az "
+"Előadó és a Cím által."
 
 #. 6.4->settings-schema.json->keepAppListOpen->description
-#, fuzzy
 msgid "Keep the App selector open"
-msgstr "Tartsa nyitva a lejátszóvezérlő választógombját"
+msgstr "Tartsa nyitva az alkalmazásválasztót"
 
 #. 6.4->settings-schema.json->keepOutputListOpen->description
-#, fuzzy
 msgid "Keep the Output Device selector open"
-msgstr "Tartsa nyitva a lejátszóvezérlő választógombját"
+msgstr "Tartsa nyitva a Kimeneti eszközválasztót"
 
 #. 6.4->settings-schema.json->keepInputListOpen->description
-#, fuzzy
 msgid "Keep the Input Device selector open"
-msgstr "Tartsa nyitva a lejátszóvezérlő választógombját"
+msgstr "Tartsa nyitva a Bemeneti eszközválasztót"
 
 #. 6.4->settings-schema.json->keepCommandListOpen->description
-#, fuzzy
 msgid "Keep the Command selector open"
-msgstr "Tartsa nyitva a lejátszóvezérlő választógombját"
+msgstr "Tartsa nyitva a parancsválasztót"
 
 #. 6.4->settings-schema.json->toolongchars->description
 msgid "If the title is too long, end it with:"
@@ -1154,15 +1148,15 @@ msgstr "Fordított görgetési hatás"
 
 #. 6.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether or not to show the media keys OSD"
-msgstr "Megjelenik-e a médiagombok OSD-je vagy sem"
+msgstr "Megjelenik-e a médiagombok OSD megjelenítése vagy sem"
 
 #. 6.4->settings-schema.json->showVolumeValue->description
 msgid "Show volume level in OSD"
-msgstr "Hangerőszint megjelenítése az OSD-ben"
+msgstr "Hangerőszint megjelenítése az OSD megjelenítésben"
 
 #. 6.4->settings-schema.json->showPercent->description
 msgid "Show '%' in OSD"
-msgstr "'%' megjelenítése az OSD-ben"
+msgstr "„%” megjelenítése az OSD-ben"
 
 #. 6.4->settings-schema.json->OSDhorizontal->description
 msgid "Show horizontal OSD"
@@ -1170,7 +1164,7 @@ msgstr "Vízszintes OSD megjelenítése"
 
 #. 6.4->settings-schema.json->showBarLevel->description
 msgid "Show bar level in OSD"
-msgstr "A sáv szintjének megjelenítése az OSD-ben"
+msgstr "A sáv szintjének megjelenítése az OSD megjelenítése"
 
 #. 6.4->settings-schema.json->custom-commands-label->description
 msgid ""

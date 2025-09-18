@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-04 20:17+1000\n"
-"PO-Revision-Date: 2024-04-21 14:05+0200\n"
+"PO-Revision-Date: 2025-08-28 11:34+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -67,6 +67,22 @@ msgstr "Schakel OctoPrint uit"
 #: applet.js:364
 msgid "Configure..."
 msgstr "Configureren..."
+
+#. applet.js:400
+msgid "Restart"
+msgstr "Herstarten"
+
+#. applet.js:404 applet.js:430
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. applet.js:426
+msgid "Shutdown"
+msgstr "Uitschakelen"
+
+#. applet.js:474
+msgid "Please confirm your action!"
+msgstr "Bevestig uw actie alstublieft!"
 
 #. settings-schema.json->octoprintUrl->description
 #. settings-schema.json->octoprintUrl->tooltip

@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# DDC/CI MULTI-MONITOR
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# tim-we, 2021
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-07-20 15:38-0400\n"
+"POT-Creation-Date: 2025-08-22 21:49+0200\n"
 "PO-Revision-Date: 2024-11-13 14:19+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -19,31 +19,136 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->description
-#: applet.js:19
+#. applet.js:21
 msgid "Adjust monitor brightness via DDC/CI"
 msgstr "Kirkkauden säätö DDC/CI menetelmällä. Asenna myös ohjalma ddcutil"
 
-#: applet.js:162
+#. applet.js:169
+msgid "Use for scroll/click"
+msgstr ""
+
+#. applet.js:295
 msgid "Detect displays"
 msgstr "Tunnista näytöt"
 
-#: applet.js:174
+#. applet.js:307
 msgid "Detecting displays..."
 msgstr "Tunnistetaan näyttöjä..."
 
-#: applet.js:263
+#. applet.js:431
 msgid "Failed to detect displays."
 msgstr "Näyttöjen tunnistaminen epäonnistui."
 
-#: applet.js:264
+#. applet.js:432
 msgid "Make sure you have ddcutil installed and the correct permissions."
 msgstr ""
 "Varmista, että sinulla on asennettuna ddcutil ja oikeat käyttöoikeudet."
 
-#: applet.js:265
+#. applet.js:433
 msgid "Error:"
 msgstr "Virhe:"
 
 #. metadata.json->name
 msgid "DDC/CI Multi-Monitor"
 msgstr "DDC/CI Multi-Monitor"
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->section_appearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->section_monitor->title
+msgid "Monitor Setup"
+msgstr ""
+
+#. settings-schema.json->section_scrolling->title
+msgid "Scrolling Settings"
+msgstr ""
+
+#. settings-schema.json->section_togglepoints->title
+msgid "Toggle Points"
+msgstr ""
+
+#. settings-schema.json->entry_applet-label->description
+msgid ""
+"Text shown next to the icon in the panel.\n"
+"Leave empty for no label."
+msgstr ""
+
+#. settings-schema.json->switch_show-bus-number->description
+msgid "Show bus number next to the detected monitors."
+msgstr ""
+
+#. settings-schema.json->switch_manual-select-monitors->description
+msgid ""
+"By default, scrolling & toggling adjusts brightness for all monitors.\n"
+"Switch to enable custom monitor selection.\n"
+"This will add checkbox options for each detected monitor."
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "1"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "2"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "4"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->options
+msgid "50"
+msgstr ""
+
+#. settings-schema.json->combobox_scroll-step->description
+#, fuzzy
+msgid "Adjustment step for brightness"
+msgstr "Kirkkauden säätö DDC/CI menetelmällä. Asenna myös ohjalma ddcutil"
+
+#. settings-schema.json->switch_use-toggle-points->description
+msgid ""
+"Enable toggle points for brightness adjustment.\n"
+"(via mouse middle click)"
+msgstr ""
+
+#. settings-schema.json->spinbutton_num-of-toggle-points->description
+msgid ""
+"Number of toggle points for brightness adjustment\n"
+"(only the first N toggle points will be used)"
+msgstr ""
+
+#. settings-schema.json->scale_toggle_point_1->description
+msgid "Brightness level for toggle point 1"
+msgstr ""
+
+#. settings-schema.json->scale_toggle_point_2->description
+msgid "Brightness level for toggle point 2"
+msgstr ""
+
+#. settings-schema.json->scale_toggle_point_3->description
+msgid "Brightness level for toggle point 3"
+msgstr ""
+
+#. settings-schema.json->string_active-monitors->description
+msgid ""
+"Stores which monitors are active for scroll/click functions.\n"
+"This is a JSON object where keys are bus numbers and values are true/false.\n"
+"Example: {\"1\":true,\"2\":false}"
+msgstr ""

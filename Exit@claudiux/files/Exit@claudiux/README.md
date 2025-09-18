@@ -21,9 +21,23 @@ This is a simple, configurable applet for displaying an Exit menu on your panel.
 
 Settings are accessed by selecting *Configure...* from this applet's contextual menu. (Right-click)
 
-You can choose which options appear in this applet menu.
+### General tab
 
-Please note that some options may be managed by the system, which has priority; if this is the case, you won't be able to see them.
+* You can choose which options appear in this applet menu.
+
+* Please note that some options may be managed by the system, which has priority; if this is the case, you won't be able to see them.
+
+### Shortcuts tab
+
+* You can choose shortcuts to open the menu and reactivate the mouse and screen.
+
+* You can choose the keys used to select certain options when the menu is open.
+
+* A message reminds you of the keys already used.
+
+* The “Apply these keys to the menu” button must be clicked after each change.
+
+* A "Reset to default keys" button is available.
 
 ## System lock-down
 

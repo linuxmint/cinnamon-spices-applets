@@ -65,6 +65,18 @@ const FLASH_INTERVAL = 500;
 const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 const PANEL_ZONE_TEXT_SIZES = "panel-zone-text-sizes";
 
+const U_PERCENT    = "\u{066A}";
+const U_MIN_UP     = "\u{2191}";
+const U_MIN_DOWN   = "\u{2193}";
+const U_PINNED     = "\u{1F4CC}";
+const U_ELLIPSIS_V = "\u{22EE}";
+const U_ELLIPSIS_H = "\u{2026}";
+
+const U_DIGIT_ONE = 10122; // Circled One 9312 -- Parenthesized One 9332 -- Negative Circled Digit One 10122
+const U_DIGIT_SPLIT = 9451; // Negative Circled Number Eleven
+const U_DIGIT_SPLIT_NUM = 11;
+const U_DIGIT_LIMIT = 20;
+const U_MANY = "\u{2026}";  // Used when the number is greater than U_DIGIT_LIMIT
 
 const STYLE_CLASS_ATTENTION_STATE = "grouped-window-list-item-demands-attention";
 
@@ -150,16 +162,21 @@ const DisplayCaption = {
 
 // The possible user Settings for how the number label should be displayed
 const DisplayNumber = {
-  No: 0,            // The number label for a  window list button is never displayed
-  All: 1,           // ... always displayed
-  Smart: 2          // ... only displayed when 2 of more windows exist
+  All: false,           // ... always displayed
+  Smart: true          // ... only displayed when 2 of more windows exist
 }
 
 const NumberType = {
-  Nothing:      0,  // Don't show any Number labels
   GroupWindows: 1,  // Application Group Window Count
   WorkspaceNum: 2,  // Workspace Number
-  MonitorNum:   3   // Monitor Number
+  MonitorNum:   3,  // Monitor Number
+  TitleChar:    4,  // First character of the window title
+  // Numbers below 100 can have a "smart" configuration, 100 and above don't have a smart option
+  Nothing:      100,  // Don't show any Number labels (was 0 in the past)
+  Minimized:    101,  // Minimized window indicator
+  Pinned:       102,  // Pinned window-list button indicator
+  MinAndPin:    103,  // Both minimized and pinned indicators
+  Ellipsis:     104   // Use a Ellipsis Unicode character to indicate the button is grouped with more than one window
 }
 
 // Possible values for the WindowListButton._grouped variable which determines how each individual windowlist button is currently grouped
@@ -252,7 +269,11 @@ const IndicatorType = {
    Minimized: 1,
    Pinned: 2,
    Both: 3,
-   Auto: 7
+   Auto: 7,
+   GroupWindows: 11,  // Application Group Window Count
+   Ellipsis:     12,
+   WorkspaceNum: 13,  // Workspace Number
+   MonitorNum:   14   // Monitor Number
 }
 
 // This is the possible values for the scroll wheel when the Thumbnail menu is open
@@ -308,6 +329,12 @@ const HideLabels = {
    OtherMonitors: 3
 }
 
+const ProgressDisplay = {
+   Disabled: 0,
+   IconOverlay: 1,
+   LabelPrepend: 2
+}
+
 var hasSetMarkup = undefined;
 var hasGetFrameRect = undefined;
 var hasGetCurrentMonitor = undefined;
@@ -351,7 +378,7 @@ function resizeActor(actor, time, toWidth, text, button) {
        if (this._shrukenLabel) {
           // Since some fonts don't seem to report the right size when calling get_pixel_size() before animation is complete
           // so we need to see what the actual size is now and set _minLabelSize accordingly.
-          let minText = (this._pinned && (this._applet.indicators&IndicatorType.Pinned)) ? "\u{1F4CC}\u{2193}" : "\u{2193}";
+          let minText = (this._pinned && (this._applet.indicators===IndicatorType.Pinned || this._applet.indicators===IndicatorType.Both)) ? U_PINNED+U_MIN_DOWN : U_MIN_DOWN;
           if (text == minText) {
              let layout = this._label.get_clutter_text().get_layout();
              let [curWidth, curHeight] = layout.get_pixel_size();
@@ -1523,15 +1550,14 @@ class WindowListButton {
     this._signalManager.connect(this.actor, "scroll-event", this._onScrollEvent, this);
     //this._signalManager.connect(this.actor, "notify::allocation", this._allocationChanged, this);
     this._signalManager.connect(this._settings, "changed::caption-type", this._updateLabel, this);
-    this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::display-caption-for-pined", this._updateLabel, this); // typo left for compatibility
     this._signalManager.connect(this._settings, "changed::hide-caption-for-minimized", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::display-caption-for", this._updateLabel, this);
-    this._signalManager.connect(this._settings, "changed::show-ellipsis-for-groups", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::progress-display-type", this._updateProgress, this);
     this._signalManager.connect(this._settings, "changed::display-number", this._updateNumber, this);
     this._signalManager.connect(this._settings, "changed::menu-show-on-hover", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::grouped-mouse-action-btn1", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::show-tooltips", this._updateTooltip, this);
-    this._signalManager.connect(this._settings, "changed::number-style", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
     this._signalManager.connect(this._settings, "changed::number-type", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
     this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel, this);
     this._signalManager.connect(this._settings, "changed::button-spacing", this._updateSpacing, this);
@@ -1541,9 +1567,7 @@ class WindowListButton {
     this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
     this._signalManager.connect(this._contextMenu, "open-state-changed", this._contextState, this);
 
-    this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() {
-      this.updateView();
-    }), this);
+    this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() { this.updateView(); }), this);
     this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon, this);
 
     this._draggable = DND.makeDraggable(this.actor);
@@ -1556,6 +1580,12 @@ class WindowListButton {
     this.isDraggableApp = true;
     this._updateNumber();
     this._updateSpacing();
+  }
+
+  _updateProgress() {
+     // Allow the icon overlay label and the button label to add/remove any progress state
+     this._updateNumber();
+     this._updateLabel();
   }
 
   //_allocationChanged() {
@@ -1764,7 +1794,7 @@ class WindowListButton {
     this._signalManager.connect(metaWindow, "notify::gtk-application-id", this._onGtkApplicationChanged, this);
     this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
     this._signalManager.connect(metaWindow, 'notify::icon', this.updateIcon, this);
-    //this._signalManager.connect(metaWindow, "notify::progress", this._onProgressChange, this);
+    this._signalManager.connect(metaWindow, "notify::progress", this._onProgressChange, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
 
     if (this._applet._displayPinned !== DisplayPinned.Disabled)
@@ -1822,22 +1852,16 @@ class WindowListButton {
     this._updateVisibility();
   }
 
-  /*
   _onProgressChange() {
-     if (this._currentWindow && this._currentWindow.progress !== undefined && this.actor.is_visible()) {
-        if (this._currentWindow.progress !== 0 ) {
-           let width = Math.max((this.actor.width) * (this._currentWindow.progress / 100.0), 1.0);
-           let height = Math.max((this._applet._panelHeight * 0.15), 1.0);
-           let box = Clutter.ActorBox.new(0,0,width,height);
-           log( `Updating progress to ${this._currentWindow.progress}%` );
-           this.progressOverlay.allocate(box, 0);
-           this.progressOverlay.show();
-        } else if (this.progressOverlay.is_visible()){
-           log( "Disabling progress bar" );
-           this.progressOverlay.hide();
-        }
+     let progressDisplayType = this._settings.getValue("progress-display-type");
+     if (progressDisplayType === ProgressDisplay.IconOverlay ||
+        this._applet.orientation == St.Side.LEFT  || this._applet.orientation == St.Side.RIGHT)
+     {
+        this._updateNumber();
+     } else if (progressDisplayType == ProgressDisplay.LabelPrepend ) {
+        this._updateLabel();
      }
-  }*/
+  }
 
   _updateCurrentWindow() {
     // Without slice, this will reorder to windows in the this._windows array
@@ -1899,10 +1923,10 @@ class WindowListButton {
                 if (idx == 0 && btns[0]._windows.length > 1) {
                    idx = btns[0]._windows.indexOf(this._currentWindow);
                 }
-                if (idx >= 0 && idx < 9) {
+                if (idx >= 0 && idx <= 9) {
                    seqCombo = seqCombo.replace( /</g, "");
                    seqCombo = seqCombo.replace( />/g, "+");
-                   text = text + "\n" + seqCombo + (idx+1);
+                   text = text + "\n" + seqCombo + ((idx+1)%10);
                 }
                 if (secondCombo) {
                    secondCombo = secondCombo.replace( /</g, "");
@@ -1917,15 +1941,20 @@ class WindowListButton {
           } else if (isAllButtons(hotKeys[i])) {
              let childern = this._workspace.actor.get_children();
              let idx = childern.indexOf(this.actor);
-             if (idx >= 0 && idx < 9) {
+             if (idx >= 0 && idx <= 9) {
                 let keyString = hotKeys[i].keyCombo.toString();
                 keyString = keyString.replace( /</g, "");
                 keyString = keyString.replace( />/g, "+");
-                text = text + "\n" + keyString.slice(0,keyString.indexOf("+")+1) + (idx+1)
+                text = text + "\n" + keyString.slice(0,keyString.indexOf("+")+1) + ((idx+1)%10);
              }
           }
        }
     }
+    // Add text to show the number of windows in this group
+    if (this._windows.length > 1) {
+       text = text + "\n" + this._windows.length + " " + _("windows in this group")
+    }
+    // Get the most appropriate windows tile for this button
     let title = null;
     let leftClickAction = this.getButton1Action();
     if (this._windows.length > 0 && (this._windows.length === 1 || leftClickAction!==LeftClickGrouped.Thumbnail)) {
@@ -1938,6 +1967,7 @@ class WindowListButton {
     if (title===null) {
        title = this._app.get_name();
     }
+    // Compose the final text and set the tooltip text
     if (text.length == 0 || !hasSetMarkup) {
        this._tooltip.set_text(title + text);
     } else {
@@ -2032,10 +2062,25 @@ class WindowListButton {
      this._labelNumberBin.height = size;
   }
 
+  // This will update the icon overlay label
   _updateNumber() {
+    // If the window has an active progress, display the percentage if needed.
+    let progressType = this._settings.getValue("progress-display-type");
+    if (this._currentWindow && this._currentWindow.progress !== undefined && this._currentWindow.progress !== 0 &&
+        this.actor.is_visible() && (progressType === ProgressDisplay.IconOverlay || (progressType === ProgressDisplay.LabelPrepend &&
+        (this._applet.orientation === St.Side.LEFT || this._applet.orientation === St.Side.RIGHT))))
+    {
+       this._labelNumber.set_text(this._currentWindow.progress + U_PERCENT);  // Arabic Percent Sign (thinner than a normal percent sign)
+       this._labelNumberBox.show();
+       let [width, height] = this._labelNumber.get_size();
+       let size = Math.max(width, height);
+       this._labelNumberBin.width = size;
+       this._labelNumberBin.height = size;
+       return;
+    }
+    // There is no active progress, so show the default icon overlay
     let numberType = this._settings.getValue("number-type");
     let setting = this._settings.getValue("display-number");
-    let style = this._settings.getValue("number-style");
     let groupType = this._settings.getValue("group-windows");
     let text = "";
     let number = this._windows.length;
@@ -2044,10 +2089,7 @@ class WindowListButton {
        this._grouped = GroupingType.NotGrouped;
     }
 
-    if (style == 1 && (groupType == GroupType.Launcher || (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT)))
-       style = 0;  // No space for a label based window group counter, so force the icon overlay option if it's not disabled!
-
-    if (style === 0 && numberType !== NumberType.Nothing) {
+    if (numberType && numberType !== NumberType.Nothing) {
        if (numberType === NumberType.GroupWindows && ( (setting == DisplayNumber.All && number >= 1) ||
           ((setting == DisplayNumber.Smart && number >= 2) &&
           (groupType == GroupType.Grouped || groupType == GroupType.Launcher || this._grouped > GroupingType.NotGrouped))))
@@ -2057,14 +2099,38 @@ class WindowListButton {
           text += this._currentWindow.get_workspace().index()+1;
        } else if (numberType === NumberType.MonitorNum && this._currentWindow && (setting === DisplayNumber.All || this.isOnOtherMonitor())) {
           text += this._currentWindow.get_monitor()+1;
+       } else if (numberType === NumberType.TitleChar && this._currentWindow) {
+          let btns = (setting === DisplayNumber.All) ? null : this._workspace._lookupAllAppButtonsForApp(this._app);
+          if ((setting === DisplayNumber.Smart && btns.length > 1) || setting === DisplayNumber.All) {
+             let title = this._currentWindow.get_title();
+             if (title && title.length > 0) {
+                if (this._app && title.startsWith(this._app.get_name())) {
+                   title = title.substring(this._app.get_name().length).trim();
+                   if (title.startsWith("-")) {
+                      title = title.substring(1).trim();
+                   }
+                }
+                text += title.substring(0,2).trim();
+             }
+          }
+       } else if (numberType === NumberType.Minimized && this._currentWindow && this._currentWindow.minimized) {
+          text = ((this._applet.orientation !== St.Side.TOP)?U_MIN_DOWN:U_MIN_UP);  // The Unicode character up or down arrow
+       } else if (numberType === NumberType.Pinned && this._pinned) {
+          text = U_PINNED; // Unicode for the "push pin" character
+       } else if (numberType === NumberType.MinAndPin) {
+          text = "";
+          if (this._currentWindow && this._currentWindow.minimized == true)
+             text += ((this._applet.orientation !== St.Side.TOP)?U_MIN_DOWN:U_MIN_UP);  // The Unicode character up or down arrow
+          if (this._pinned)
+             text += U_PINNED; // Unicode for the "round push pin" character
+       } else if (numberType === NumberType.Ellipsis && number >= 2) {
+          text += U_ELLIPSIS_H; // Unicode for the "..." character
        }
     }
 
-    if (text == "" || style == 1) {
+    if (text == "") {
       this._labelNumberBox.hide();
-      if (style == 1)
-         this._updateLabel();
-    } else if (style == 0) {
+    } else {
       this._labelNumber.set_text(text);
       this._labelNumberBox.show();
       let [width, height] = this._labelNumber.get_size();
@@ -2097,12 +2163,10 @@ class WindowListButton {
 
     let capSetting = this._settings.getValue("display-caption-for");
     let numSetting = this._settings.getValue("display-number");
-    let pinnedSetting = this._settings.getValue("display-caption-for-pined");
+    let pinnedSetting = this._settings.getValue("display-caption-for-pined"); // typo left for compatibility
     let hideSetting = this._settings.getValue("hide-caption-for-minimized"); // For compatibility, the option name "hide-caption-for-minimized" was maintained, but now it has more then one possible value not only for minimized windows
-    let style = this._settings.getValue("number-style");
     let numberType = this._settings.getValue("number-type");
     let preferredWidth = this._settings.getValue("label-width");
-    let ellipsis = this._settings.getValue("show-ellipsis-for-groups");
     let number = this._windows.length;
     let text = "";
     let width = preferredWidth;
@@ -2194,38 +2258,49 @@ class WindowListButton {
        this._shrukenLabel = true;
     }
 
-    // Do we need a number label char
-    if (numberType !== NumberType.Nothing && style === 1) {
+    if (this._currentWindow && this._currentWindow.progress !== undefined && this._currentWindow.progress !== 0 &&
+        this.actor.is_visible() && this._settings.getValue("progress-display-type") == ProgressDisplay.LabelPrepend)
+    {
+       text = this._currentWindow.progress + U_PERCENT + text;  // Arabic Percent Sign (thinner than a normal percent sign)
+    } else if (this._applet.indicators!==IndicatorType.None) {
+       // We have some sort of label prepend option enabled
        let labelNum = 0;
-       if (numberType === NumberType.GroupWindows && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) &&
-          (groupSetting === 0 || this._grouped > GroupingType.NotGrouped))))
-       {
+       if (this._applet.indicators===IndicatorType.GroupWindows && number >= 2) {
           labelNum = number;
-       } else if (numberType === NumberType.WorkspaceNum && this._currentWindow && (numSetting === DisplayNumber.All || this.isOnOtherWorkspace())) {
+       } else if (this._applet.indicators===IndicatorType.WorkspaceNum && this._currentWindow && this.isOnOtherWorkspace()) {
          labelNum =  this._currentWindow.get_workspace().index()+1;
-       } else if (numberType === NumberType.MonitorNum && this._currentWindow && (numSetting === DisplayNumber.All || this.isOnOtherMonitor())) {
+       } else if (this._applet.indicators===IndicatorType.MonitorNum && this._currentWindow && this.isOnOtherMonitor()) {
          labelNum = this._currentWindow.get_monitor()+1;
        }
        if (labelNum > 0) {
-         if (labelNum > 20) {
-           text = "\u{24A8} " + text; // The Unicode character "(m)"
+         if (labelNum > U_DIGIT_LIMIT) {
+           text = U_MANY + text; // Unicode character to represent "many"
          } else {
-           text = String.fromCharCode(9331+labelNum) + " " + text; // Bracketed number
+           if (labelNum < U_DIGIT_SPLIT_NUM) {
+             text = String.fromCharCode(U_DIGIT_ONE+(labelNum-1)) + " " + text; // Unicode number symbol
+           } else {
+             text = String.fromCharCode(U_DIGIT_SPLIT+(labelNum-U_DIGIT_SPLIT_NUM)) + " " + text; // Unicode number symbol
+           }
          }
        }
+       // Do we need a minimized char
+       if (this._currentWindow && this._currentWindow.minimized && (this._applet.indicators===IndicatorType.Minimized || this._applet.indicators===IndicatorType.Both) && this._workspace.autoIndicatorsOff==false) {
+         text = ((this._applet.orientation !== St.Side.TOP)?U_MIN_DOWN:U_MIN_UP) + text;  // The Unicode character up or down arrow
+       }
+       // Do we need a pinned char
+       if (this._pinned && (this._applet.indicators===IndicatorType.Pinned || this._applet.indicators===IndicatorType.Both) && this._workspace.autoIndicatorsOff==false) {
+           text = U_PINNED + text; // Unicode for the "push pin" character
+       }
+       // Do we need a group ellipsis char
+       if (this._applet.indicators===IndicatorType.Ellipsis === true && number >= 2)
+       {
+          text = U_ELLIPSIS_V + text;  // The Unicode character "Vertical Ellipsis"
+       }
     }
-    // Do we need a minimized char
-    if (this._currentWindow && this._currentWindow.minimized && (this._applet.indicators&IndicatorType.Minimized) && this._workspace.autoIndicatorsOff==false) {
-      text = ((this._applet.orientation === St.Side.BOTTOM)?"\u{2193}":"\u{2191}") + text;  // The Unicode character up or down arrow
-    } 
-    // Do we need a pinned char
-    if (this._pinned && (this._applet.indicators&IndicatorType.Pinned) && this._workspace.autoIndicatorsOff==false) {
-        text = "\u{1F4CC}" + text; // Unicode for the "push pin" character
-    }
-    // Do we need a group ellipsis char
-    if (ellipsis === true && number >= 2)
-    {
-       text = "\u{22EE}" + text;  // The Unicode character "Vertical Ellipsis"
+
+    // The window title might have changed, so we might need to update the icon overlay label
+    if (numberType === NumberType.TitleChar) {
+       this._updateNumber();
     }
 
     // If we don't have a minimum label size, calculate it now!
@@ -2233,7 +2308,7 @@ class WindowListButton {
        if (this._workspace.autoIndicatorsOff==true || this._applet.indicators==IndicatorType.None || (this._pinned && this._windows.length==0)) {
           this._minLabelSize = 0;
        } else {
-          let minText = (this._pinned && (this._applet.indicators&IndicatorType.Pinned)) ? "\u{1F4CC}\u{2193}" : "\u{2193}";
+          let minText = (this._pinned && (this._applet.indicators===IndicatorType.Pinned || this._applet.indicators===IndicatorType.Both)) ? U_PINNED+U_MIN_DOWN : U_MIN_DOWN;
           this._label.set_text(minText);
           let layout = this._label.get_clutter_text().get_layout();
           let [minWidth, minHeight] = layout.get_pixel_size();
@@ -2553,6 +2628,7 @@ class WindowListButton {
     } else if (mouseBtn == 3) {
       // right mouse button, show context menu
       if (global.settings.get_boolean("panel-edit-mode")===false) {
+         this.closeThumbnailMenu();
          this._populateContextMenu();
          this._contextMenu.open();
          this._updateFocus();
@@ -3211,7 +3287,7 @@ class WindowListButton {
        this._workspace._hoverPeekDelay = null;
     }
     // If we have left the panel, we might need to remove the hover peek clone and we might need to activate the window
-    if (this._settings.getValue("no-click-activate") && !isCtrlOrShiftHeld() && pointerIsOffActor) {
+    if (this._currentWindow && this._settings.getValue("no-click-activate") && !isCtrlOrShiftHeld() && pointerIsOffActor) {
        if (!this._contextMenu.isOpen && !this.menu.isOpen) {
           Main.activateWindow(this._currentWindow);
        }
@@ -3479,6 +3555,22 @@ class WindowListButton {
       }
     }
 
+    let orderItem; // Will be added to the appropriate place in the menu below.
+    if( this._app && this._settings.getValue("remember-button-order") && this._settings.getValue("group-windows") < GroupType.Off) {
+       let order = this._settings.getValue("remembered-button-order");
+       let btnOrderIdx = order.findIndex( (element) => element == this._app.get_name() );
+       orderItem = new PopupMenu.PopupSwitchMenuItem(_("Prioritize window list position"), btnOrderIdx!==-1);
+       orderItem.connect("toggled", Lang.bind(this, function(menuItem, state) {
+          if (state) {
+             this._workspace._rememberButtonPosition(this);
+          } else {
+             order.splice(btnOrderIdx, 1);   // Delete the app entry in the priority order list
+             let newOrder = order.slice();
+             this._settings.setValue("remembered-button-order", newOrder);
+          }
+       }));
+    }
+
     if (this._currentWindow || metaWindow != undefined) {
       let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
 
@@ -3663,6 +3755,10 @@ class WindowListButton {
             }
          }
 
+         if (orderItem) {
+            this._contextMenu.addMenuItem(orderItem);
+         }
+
          // Menu options for grouping or ungrouping a button
          this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
          if (this._windows.length > 1) {
@@ -3784,6 +3880,12 @@ class WindowListButton {
         metaWindow.delete(global.get_current_time());
       }));
       this._contextMenu.addMenuItem(item);
+    } else {
+      // Add the orderItem for pinned buttons
+      if (orderItem) {
+        this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this._contextMenu.addMenuItem(orderItem);
+      }
     }
   }
 
@@ -4142,12 +4244,34 @@ class Workspace {
        if (children.length > 1 ){
           let i = children.length-2;  // ignoring the last button which will be this new button
           let pooling = (groupingType == GroupType.Pooled || groupingType == GroupType.Auto);
+          // Skip all pinned buttons or any buttons that are part of a pool with a pinned button
           for ( let prevApp = undefined ; i >= 0 && (children[i]._delegate._pinned === true || (pooling && prevApp === children[i]._delegate._app)) ; i-- ) {
              prevApp = children[i]._delegate._app;
           }
           if (i != children.length-2){
              this.actor.move_child(appButton.actor, i+1);
           }
+       }
+    }
+    // If there is a remembered app location for this app, move the button to the appropriate location on the window list
+    // Unless the new button is part of a pool, in which case the new window list button is already in the right location
+    if ((!btns || btns.length === 0) && this._settings.getValue("remember-button-order") && groupingType < GroupType.Off) {
+       let order = this._settings.getValue("remembered-button-order");
+       let appIdx = order.findIndex( (element) => element == app.get_name() );
+       if (appIdx != -1) {
+          let children = this.actor.get_children();
+          let bestIdx = 0;
+          for (let i=0 ; i < children.length ; i++) {
+             let childApp = children[i]._delegate._app;
+             if (childApp) {
+                let idx = order.findIndex( (element) => element == childApp.get_name() );
+                if (idx != -1 && idx < appIdx) {
+                   bestIdx = i+1;
+                }
+             }
+          }
+          //log( `Moving ${app.get_name()} to windowlist position ${bestIdx}` );
+          this.actor.set_child_at_index(appButton.actor, bestIdx);
        }
     }
     //appButton.actor.show();
@@ -4487,6 +4611,10 @@ class Workspace {
 
     appButton._pinned = true;
     appButton._updateVisibility()
+    let numberType = this._settings.getValue("number-type");
+    if (numberType === NumberType.Pinned || numberType === NumberType.MinAndPin) {
+       appButton._updateNumber();
+    }
     this._updatePinSettings();
   }
 
@@ -4600,7 +4728,7 @@ class Workspace {
              if (this.iconSaturation!=100 && this.saturationType == SaturationType.Focused) {
                 this._currentFocus.updateIconSelection();
              }
-             let pinnedSetting = this._settings.getValue("display-caption-for-pined");
+             let pinnedSetting = this._settings.getValue("display-caption-for-pined"); // typo left for compatibility
              let capSetting = this._settings.getValue("display-caption-for");
              if (pinnedSetting == PinnedLabel.Focused && capSetting === DisplayCaption.One) {
                 // Do we need to clear the label from the pooled window group
@@ -4700,6 +4828,7 @@ class Workspace {
         this._dragPlaceholderPos = pos;
         // If we don't yet have a PlaceHolder, create one, otherwise move it
         if (this._dragPlaceholder == undefined) {
+          this._sourceOrigPos = pos;
           this._dragPlaceholder = new DND.GenericDragPlaceholderItem();
           this._dragPlaceholder.child.set_width(source.actor.width);
           this._dragPlaceholder.child.set_height(source.actor.height);
@@ -4744,22 +4873,29 @@ class Workspace {
               }
            }
            this._clearDragPlaceholder();
+           this._rememberButtonPosition(btns[0]);
         } else {
-           this.actor.set_child_at_index(source.actor, actorPos);
-           this._clearDragPlaceholder();
-           if (btns.length > 1 && (groupingType == GroupType.Pooled || groupingType == GroupType.Auto)) {
-              let btns = source._workspace._lookupAllAppButtonsForApp(source._app);
-              btns[btns.length-1]._updateLabel(); // The trailing button might need it's label restored
-              if (source === btns[btns.length-1]) {
-                 btns[btns.length-2]._updateLabel(); // If the dropped button is now the last one in the pool, then update the label of the previous button
-              }
-              if (btns[btns.length-1]._pinned === false) {
-                 for(let i=0 ; i<btns.length ; i++) {
-                    if (btns[i]._pinned) {
-                       this.pinAppButton(btns[btns.length-1]); // Clear existing pin and set the last button of the pool as pinned
-                       break;
+           // If the new position is not the same as where it was to begin with
+           if (this._sourceOrigPos !== actorPos && this._sourceOrigPos !== actorPos-1) {
+              this.actor.set_child_at_index(source.actor, actorPos);
+              this._clearDragPlaceholder();
+              if (btns.length > 1 && (groupingType == GroupType.Pooled || groupingType == GroupType.Auto)) {
+                 let btns = source._workspace._lookupAllAppButtonsForApp(source._app);
+                 btns[btns.length-1]._updateLabel(); // The trailing button might need it's label restored
+                 if (source === btns[btns.length-1]) {
+                    btns[btns.length-2]._updateLabel(); // If the dropped button is now the last one in the pool, then update the label of the previous button
+                 }
+                 if (btns[btns.length-1]._pinned === false) {
+                    for(let i=0 ; i<btns.length ; i++) {
+                       if (btns[i]._pinned) {
+                          this.pinAppButton(btns[btns.length-1]); // Clear existing pin and set the last button of the pool as pinned
+                          break;
+                       }
                     }
                  }
+              } else {
+                 // The "if" path above will be taken when moving a button within a pool, we only call _rememberButtonPosition() when not moving within a pool.
+                 this._rememberButtonPosition(source);
               }
            }
         }
@@ -4804,6 +4940,73 @@ class Workspace {
       this._dragPlaceholder = undefined;
       this._dragPlaceholderPos = undefined;
     }
+  }
+
+  _rememberButtonPosition(button) {
+     // Remembering is only possible in grouped or pooled configurations and when the window has a associated app
+     if (button._app && this._settings.getValue("remember-button-order") && this._settings.getValue("group-windows") < GroupType.Off) {
+        let app = button._app;
+        let order = this._settings.getValue("remembered-button-order");
+        let children = this.actor.get_children();
+        let btnIdx = children.findIndex( (child) => child._delegate === button );
+        let btnOrderIdx = order.findIndex( (element) => element == app.get_name() );
+        //log( `Button idx = ${btnIdx}, btnOrderIdx = ${btnOrderIdx}` );
+
+        if (btnIdx === 0) {
+           if (btnOrderIdx !== -1) order.splice( btnOrderIdx, 1 );
+           order.splice(0, 0, app.get_name());
+        } else if (btnIdx === children.length-1) {
+           if (btnOrderIdx !== -1) order.splice( btnOrderIdx, 1 );
+           order.push(app.get_name());
+        } else {
+           // Find an order array index for an app below but closest to the dropped button
+           let lowIdx = -1;
+           for(let i=btnIdx-1 ; i >=0 && lowIdx === -1; i--) {
+              let lowApp = children[i]._delegate._app;
+              if (lowApp) {
+                 lowIdx = order.findIndex( (element) => element == lowApp.get_name());
+              }
+           }
+           lowIdx++; // If nothing was found then lowIdx will be (-1+1) 0
+           // Find an order array index for an app above but closest to the dropped button
+           let highIdx = -1;
+           for(let i=btnIdx+1 ; i < children.length && highIdx === -1; i++) {
+              let highApp = children[i]._delegate._app;
+              if (highApp && highApp != app) {
+                 highIdx = order.findIndex( (element) => element === highApp.get_name());
+              }
+           }
+           if (highIdx === -1) {
+              highIdx = order.length;
+           }
+           //log( `lowIdx: ${lowIdx}, highIdx: ${highIdx}` );
+           // Add or move the app in the remembered-button-order
+           if (btnOrderIdx !== -1) {
+              if (btnOrderIdx < lowIdx) {
+                 order.splice(lowIdx, 0, app.get_name());  // Add at the lowest possible idx
+                 order.splice(btnOrderIdx, 1);             // Delete the old entry
+              }else if (btnOrderIdx > highIdx) {
+                 order.splice(btnOrderIdx, 1);             // Delete the old entry
+                 order.splice(highIdx, 0, app.get_name()); // Add at the highest possible idx
+              } else {
+                 // Do nothing, the order is already correct
+              }
+           } else {
+              if (lowIdx > 0) {
+                 order.splice(lowIdx, 0, app.get_name());  // Add at the lowest possible idx
+              } else {
+                 order.splice(highIdx, 0, app.get_name()); // Add at the highest possible idx
+              }
+           }
+        }
+        // Save the new order
+        let newOrder = order.slice();
+        this._settings.setValue("remembered-button-order", newOrder);
+        //log( `New Priority Order:` );
+        //for( let i=0 ; i < newOrder.length ; i++ ) {
+        //   log( `   ${newOrder[i]}` );
+        //}
+     }
   }
 
   destroy() {
@@ -4896,7 +5099,7 @@ class Workspace {
         return;
      }
      if (this._areButtonsShrunk()==true) {
-        if (this._applet.indicators == IndicatorType.Auto) {
+        if (this._settings.getValue("auto-hide-indicators")) {
            this.autoIndicatorsOff = true;   // Remove the indicator characters
            for (let i=0 ; i<this._appButtons.length ; i++) {
               if (this._appButtons[i]._pinned || (this._appButtons[i]._currentWindow && this._appButtons[i]._currentWindow.minimized)) {
@@ -5046,7 +5249,7 @@ class WindowList extends Applet.Applet {
     this._hiddenApps = null;    // List of applications that should not be visible buttons
     this._pinnedApps = null;    // cached version of "pinned_apps"
     this._displayPinned = null; // cached "display-pinned" setting
-    this.indicators = 3;
+    this.indicators = IndicatorType.Both;
     this.instanceId = instanceId;
     this.on_orientation_changed(orientation);
   }
@@ -5209,6 +5412,7 @@ class WindowList extends Applet.Applet {
                  for( let num=1 ; num < 10 ; num++ ) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
                  }
+                 Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-0" + this.instanceId);
                  if (secondCombo) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
                  }
@@ -5232,6 +5436,8 @@ class WindowList extends Applet.Applet {
               for( let num=1 ; num < 10 ; num++ ) {
                  Main.keybindingManager.addHotKey("CassiaWL-" + i + "-" + num + this.instanceId, seqCombo+num, Lang.bind(this, function() {this._performHotkey(idx, num)} ));
               }
+              // Now register the 10th hotkey using the "0" key
+              Main.keybindingManager.addHotKey("CassiaWL-" + i + "-0" + this.instanceId, seqCombo+"0", Lang.bind(this, function() {this._performHotkey(idx, 10)} ));
               if (secondCombo) {
                  Main.keybindingManager.addHotKey("CassiaWL-" + i + this.instanceId, secondCombo, Lang.bind(this, function() {this._performHotkey(idx)} ));
               }
@@ -5257,6 +5463,7 @@ class WindowList extends Applet.Applet {
                  for( let num=1 ; num < 10 ; num++ ) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
                  }
+                 Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-0" + this.instanceId);
                  if (secondCombo) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
                  }
@@ -5318,15 +5525,15 @@ class WindowList extends Applet.Applet {
            if (first.startsWith(modifiers) || second.startsWith(modifiers)) {
               if (isAllButtons(keyBindings[i])) {
                  let children = workspace.actor.get_children();
-                 for( let idx=0 ; idx < children.length && idx < 9 ; idx++ ){
-                    children[idx]._delegate._updateNumberForHotkeyHelp((idx+1).toString());
+                 for( let idx=0 ; idx < children.length && idx < 10 ; idx++ ){
+                    children[idx]._delegate._updateNumberForHotkeyHelp(((idx+1)%10).toString());
                  }
               } else if (keySequence && keyBindings[i].keyCombo.indexOf(modifiers+"1")!=-1) {
                  if (workspace._keyBindingsWindows[i]) {
                     let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
                     let btns = workspace._lookupAllAppButtonsForApp(app);
-                    for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
-                       btns[idx]._updateNumberForHotkeyHelp((idx+1).toString());
+                    for( let idx=0 ; idx<btns.length && idx < 10 ; idx++ ) {
+                       btns[idx]._updateNumberForHotkeyHelp(((idx+1)%10).toString());
                     }
                  }
               } else {
@@ -5334,7 +5541,7 @@ class WindowList extends Applet.Applet {
                     let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
                     if (app && keyBindings[i].cycle) {
                        let btns = workspace._lookupAllAppButtonsForApp(app);
-                       for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
+                       for( let idx=0 ; idx<btns.length && idx < 10 ; idx++ ) {
                           if (first.startsWith(modifiers)) {
                              btns[idx]._updateNumberForHotkeyHelp(first.slice(-1));
                           } else {
@@ -5390,17 +5597,15 @@ class WindowList extends Applet.Applet {
 
   _updateIndicators() {
      if (this._settings.getValue("group-windows")===GroupType.Launcher)
-        this.indicators = 0;
+        this.indicators = IndicatorType.None;
      else
         this.indicators = this._settings.getValue("display-indicators");
      for (let wsIdx=0 ; wsIdx<this._workspaces.length ; wsIdx++) {
         let ws = this._workspaces[wsIdx];
         for (let btnIdx=0 ; btnIdx < ws._appButtons.length ; btnIdx++) {
            let btn = ws._appButtons[btnIdx];
-           if (btn._pinned || btn._shrukenLabel || (btn._windows.length > 0 && btn._windows[0].minimized)) {
-              btn._minLabelSize = -1;
-              btn._updateLabel();
-           }
+           btn._minLabelSize = -1;
+           btn._updateLabel();
         }
      }
   }
@@ -5455,7 +5660,7 @@ class WindowList extends Applet.Applet {
     this._updateMonitor();
     let nWorkspaces = global.screen.get_n_workspaces();
     if (this._settings.getValue("group-windows")===GroupType.Launcher)
-       this.indicators = 0;
+       this.indicators = IndicatorType.None;
     else
       this.indicators = this._settings.getValue("display-indicators");
     // upgrade pinned-apps

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-05 06:30+0200\n"
-"PO-Revision-Date: 2025-05-13 14:36+0200\n"
+"POT-Creation-Date: 2025-08-06 01:31+0200\n"
+"PO-Revision-Date: 2025-08-26 08:39+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,44 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:178 6.4/applet.js:178
+#. applet.js:178 6.4/applet.js:262
 msgid "The following packages were not found:"
 msgstr "De volgende pakketten werden niet gevonden:"
 
-#. applet.js:179 6.4/applet.js:179
+#. applet.js:179 6.4/applet.js:263
 msgid "Please install the above packages to use the applet"
 msgstr ""
 "Installeer alstublieft de bovenstaande pakketten om de applet te gebruiken"
 
-#. applet.js:564 6.4/applet.js:650
+#. applet.js:564 6.4/applet.js:773
 msgid "Screen"
 msgstr "Scherm"
 
-#. applet.js:647 6.4/applet.js:733
+#. applet.js:647 6.4/applet.js:856
 msgid "Outputs"
 msgstr "Uitgangen"
 
 #. settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->options_type->options
 #. 6.4->settings-schema.json->preset_list->columns->title
-#. appletGui.js:235 6.4/applet.js:35 6.4/lib/appletGui.js:211
+#. appletGui.js:235 6.4/applet.js:42 6.4/lib/appletGui.js:211
 msgid "Brightness"
 msgstr "Helderheid"
 
-#. appletGui.js:236 6.4/applet.js:36 6.4/lib/appletGui.js:212
+#. appletGui.js:236 6.4/applet.js:43 6.4/lib/appletGui.js:212
 msgid "Red"
 msgstr "Rood"
 
-#. appletGui.js:237 6.4/applet.js:37 6.4/lib/appletGui.js:213
+#. appletGui.js:237 6.4/applet.js:44 6.4/lib/appletGui.js:213
 msgid "Green"
 msgstr "Groen"
 
-#. appletGui.js:238 6.4/applet.js:38 6.4/lib/appletGui.js:214
+#. appletGui.js:238 6.4/applet.js:45 6.4/lib/appletGui.js:214
 msgid "Blue"
 msgstr "Blauw"
 
+#. 6.4/applet.js:46 6.4/applet.js:927
+msgid "Sunrise"
+msgstr "Zonsopgang"
+
+#. 6.4/applet.js:47 6.4/applet.js:929
+msgid "Sunset"
+msgstr "Zonsondergang"
+
+#. 6.4/applet.js:722
+msgid "Reload"
+msgstr "Herladen"
+
+#. 6.4/applet.js:732
+msgid "Configure Presets"
+msgstr "Voorinstellingen configureren"
+
 #. 6.4->settings-schema.json->page_presets->title
-#. 6.4/applet.js:628
+#. 6.4/applet.js:742
 msgid "Presets"
 msgstr "Voorinstellingen"
 
@@ -262,6 +278,10 @@ msgstr ""
 "De aanpassingstijd kan oplopen tot tweemaal het hieronder aangegeven aantal "
 "seconden."
 
+#. 6.4->settings-schema.json->apply_changing_monitors->description
+msgid "Apply when the number of monitors changes"
+msgstr "Toepassen wanneer het aantal monitoren verandert"
+
 #. 6.4->settings-schema.json->brightness_up_shortcut->description
 msgid "Hotkey to Increase brightness"
 msgstr "Sneltoets om helderheid te verhogen"
@@ -273,10 +293,14 @@ msgstr "Sneltoets om helderheid te verlagen"
 #. 6.4->settings-schema.json->preset_label->description
 msgid ""
 "You can define or modify presets below, which can then be accessed via the "
-"applet's context menu."
+"applet's context menu.\n"
+"Only the first Start at Sunrise and Start at Sunset checked boxes are taken "
+"into account."
 msgstr ""
-"Je kunt hieronder voorinstellingen definiëren of aanpassen, die vervolgens "
-"toegankelijk zijn via het contextmenu van de applet."
+"Je kunt hieronder voorinstellingen definiëren of wijzigen, die vervolgens "
+"toegankelijk zijn via het contextmenu van het applet.\n"
+"Alleen de eerste aangevinkte vakjes Start bij Zonsopgang en Start bij "
+"Zonsondergang worden in aanmerking genomen."
 
 #. 6.4->settings-schema.json->preset_list->columns->title
 msgid "Name"
@@ -313,3 +337,27 @@ msgid ""
 msgstr ""
 "Gamma\n"
 "Blauw"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunrise"
+msgstr ""
+"Start bij\n"
+"Zonsopgang"
+
+#. 6.4->settings-schema.json->preset_list->columns->title
+msgid ""
+"Start at\n"
+"Sunset"
+msgstr ""
+"Start bij\n"
+"Zonsondergang"
+
+#. 6.4->settings-schema.json->preset_sunrise_sunset_button->description
+msgid "Set Sunrise and Sunset times"
+msgstr "Stel tijden in voor zonsopgang en zonsondergang"
+
+#. 6.4->settings-schema.json->preset_reload->description
+msgid "Apply all changes"
+msgstr "Alle wijzigingen toepassen"

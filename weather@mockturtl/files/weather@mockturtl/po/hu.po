@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-04-23 09:28+0100\n"
-"PO-Revision-Date: 2024-10-03 09:27+0200\n"
+"PO-Revision-Date: 2025-08-06 14:53+0200\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -42,7 +42,7 @@ msgstr "Hibás földrajzi helyzetformátum"
 
 #. 3.0/applet.js:172 3.8/weather-applet.js:20693
 msgid "Key Blocked"
-msgstr "Kulcs ideiglenesen letilva"
+msgstr "Kulcs ideiglenesen letiltva"
 
 #. 3.0/applet.js:173 3.8/weather-applet.js:20694
 msgid "Can't find location"
@@ -1183,7 +1183,7 @@ msgstr "Borult és szeles idő"
 
 #. 3.0/us_weather.js:485 3.8/weather-applet.js:14285
 msgid "Snowy rain"
-msgstr "Havaseső"
+msgstr "Havas eső"
 
 #. 3.0/us_weather.js:520 3.8/weather-applet.js:14320
 msgid "Freezing rain and snow"
@@ -2094,23 +2094,25 @@ msgstr "A csapadék {precipStart} percen belül esni kezd"
 
 #. 3.8/weather-applet.js:19517
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Alacsony napsugárzás okozta károsodás kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19521
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Mérsékelt napsugárzás okozta károsodás kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19525
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Magas a napsugárzás okozta károsodás kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19529
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
 msgstr ""
+"Nagyon magas a napsugárzás okozta ártalmak kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19533
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
 msgstr ""
+"A napsugárzás okozta károsodás rendkívüli kockázata, UV-index: {uvIndex}"
 
 #. 3.8/weather-applet.js:19650
 msgid "Forecast parsing failed, see logs for more details."
@@ -2734,16 +2736,16 @@ msgid ""
 "'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
 "{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
 "the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice. Powered by "
-"nominatim.openstreetmap.org."
+"replaced automatically for validating your choice. Powered by nominatim."
+"openstreetmap.org."
 msgstr ""
 "Megadhatja a \"szélesség, hosszúság\" koordinátákat (pl. 51,5085, -0,1257), "
 "vagy használhatja a \"Város,ország-kódot\" (pl. London, Egyesült Királyság), "
 "vagy megpróbálhatja megadni a {Házszám} {Utca} {Város/Város} {Irányítószám} "
 "kódot. {Ország}. A keresési algoritmus nagyon rugalmas a formátumhoz. 3 "
 "másodperc elteltével a megadott cím beírása nélkül automatikusan "
-"lecserélődik a választás érvényesítésére. Üzemeltető: "
-"nominatim.openstreetmap.org."
+"lecserélődik a választás érvényesítésére. Üzemeltető: nominatim."
+"openstreetmap.org."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -2998,11 +3000,11 @@ msgstr ""
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
-"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
-"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
-"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
-"the format. After 3 seconds without typing the address you entered is "
-"replaced automatically for validating your choice."
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
 "A legtöbb esetben a helymeghatározás automatikusan működik, de kézzel is "
 "megadhatja a koordinátákat „szélességi,hosszúsági” koordinátákkal (például: "
@@ -3110,9 +3112,8 @@ msgid "Test your command"
 msgstr "Tesztelje a parancsát"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Engedélyezze az időjárási riasztások megjelenítését"
+msgstr "UV-index megjelenítésének engedélyezése"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3120,3 +3121,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Ha a szolgáltatója támogatja, az UV-index a napkelte/napnyugta időpontjai "
+"melletti felugró menüben jelenik meg. Nem jelenik meg, ha az UV-index "
+"alacsony kockázatú (0-2)."

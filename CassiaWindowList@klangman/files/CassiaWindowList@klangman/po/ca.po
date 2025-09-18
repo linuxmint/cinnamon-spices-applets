@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: CassiaWindowList@klangman 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-09 22:44-0400\n"
+"POT-Creation-Date: 2025-08-31 21:09-0400\n"
 "PO-Revision-Date: 2024-11-20 02:03+0100\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,32 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. 4.0/applet.js:584 6.0/applet.js:584 6.4/applet.js:562
+#. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
 msgid "all buttons"
 msgstr "tots els botons"
 
-#. 4.0/applet.js:3266 6.0/applet.js:3266 6.4/applet.js:3238
+#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
+msgid "windows in this group"
+msgstr ""
+
+#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3314
 msgid "Applet Preferences"
 msgstr "Preferències de la miniaplicació"
 
-#. 4.0/applet.js:3270 6.0/applet.js:3270 6.4/applet.js:3242
+#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3318
 msgid "About..."
 msgstr "Quant a..."
 
-#. 4.0/applet.js:3274 6.0/applet.js:3274 6.4/applet.js:3246
+#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3322
 msgid "Configure..."
 msgstr "Configura..."
 
-#. 4.0/applet.js:3278 6.0/applet.js:3278 6.4/applet.js:3250
+#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3326
 msgid "Website"
 msgstr "Lloc web"
 
-#. 4.0/applet.js:3282 6.0/applet.js:3282 6.4/applet.js:3254
+#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3330
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#. 4.0/applet.js:3284 6.0/applet.js:3284 6.4/applet.js:3256
+#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3332
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 "Segur que voleu eliminar aquesta instància de la Llista de Finestres Cassia?"
@@ -66,76 +70,81 @@ msgstr ""
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3293 6.0/applet.js:3293 6.4/applet.js:3265
+#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3341
 msgid "Open new window"
 msgstr "Obre una nova finestra"
 
-#. 4.0/applet.js:3301 6.0/applet.js:3301 6.4/applet.js:3273
+#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3349
 msgid "Remove from panel"
 msgstr "Elimina del tauler"
 
-#. 4.0/applet.js:3303 6.0/applet.js:3303 6.4/applet.js:3275
+#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3351
 msgid "Remove from this workspace"
 msgstr "Elimina d'aquest espai de treball"
 
-#. 4.0/applet.js:3309 6.0/applet.js:3309 6.4/applet.js:3281
+#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3357
 msgid "Pin to panel"
 msgstr "Fixar al tauler"
 
-#. 4.0/applet.js:3311 6.0/applet.js:3311 6.4/applet.js:3283
+#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3359
 msgid "Pin to this workspace"
 msgstr "Fixar a aquest espai de treball"
 
-#. 4.0/applet.js:3352 6.0/applet.js:3352 6.4/applet.js:3324
+#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3400
 msgid "Pin to other workspaces"
 msgstr "Fixar a altres espais de treball"
 
-#. 4.0/applet.js:3373 6.0/applet.js:3373 6.4/applet.js:3345
+#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3421
 msgid "Pin to all workspaces"
 msgstr "Fixar a tots els espais de treball"
 
-#. 4.0/applet.js:3391 6.0/applet.js:3391 6.4/applet.js:3363
+#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3439
 msgid "Pin to launcher"
 msgstr "Fixar al llançador"
 
-#. 4.0/applet.js:3409 4.0/applet.js:3614 6.0/applet.js:3409 6.0/applet.js:3614
-#. 6.4/applet.js:3381 6.4/applet.js:3583
+#. 4.0/applet.js:3485 4.0/applet.js:3706 6.0/applet.js:3485 6.0/applet.js:3706
+#. 6.4/applet.js:3457 6.4/applet.js:3675
 msgid "Add new Hotkey for"
 msgstr "Afegir nova drecera per a"
 
-#. 4.0/applet.js:3423 6.0/applet.js:3423 6.4/applet.js:3395
+#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3471
 msgid "Recent files"
 msgstr "Fitxers recents"
 
-#. 4.0/applet.js:3447 6.0/applet.js:3447 6.4/applet.js:3419
+#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3495
 msgid "Places"
 msgstr "Llocs"
 
-#. 4.0/applet.js:3490 6.0/applet.js:3490 6.4/applet.js:3462
+#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
+#, fuzzy
+msgid "Prioritize window list position"
+msgstr "Fixació dels botons de la llista de finestres"
+
+#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
 msgid "Always on top"
 msgstr "Sempre en primer pla"
 
-#. 4.0/applet.js:3502 6.0/applet.js:3502 6.4/applet.js:3474
+#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3566
 msgid "Only on this workspace"
 msgstr "Només en aquest espai de treball"
 
-#. 4.0/applet.js:3504 6.0/applet.js:3504 6.4/applet.js:3476
+#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3568
 msgid "Visible on all workspaces"
 msgstr "Visible a tots els espais de treball"
 
-#. 4.0/applet.js:3505 6.0/applet.js:3505 6.4/applet.js:3477
+#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3569
 msgid "Move to another workspace"
 msgstr "Moure a un altre espai de treball"
 
-#. 4.0/applet.js:3514 6.0/applet.js:3514 6.4/applet.js:3486
+#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3578
 msgid " (this workspace)"
 msgstr " (aquest espai de treball)"
 
-#. 4.0/applet.js:3527 6.0/applet.js:3527 6.4/applet.js:3499
+#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3591
 msgid "Move to another monitor"
 msgstr "Moure a un altre monitor"
 
-#. 4.0/applet.js:3535 6.0/applet.js:3535 6.4/applet.js:3507
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3599
 msgid "Monitor"
 msgstr "Monitor"
 
@@ -157,48 +166,48 @@ msgstr "Monitor"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3552 6.0/applet.js:3552 6.4/applet.js:3521
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
 msgid "Move window here"
 msgstr "Moure finestra aquí"
 
-#. 4.0/applet.js:3569 6.0/applet.js:3569 6.4/applet.js:3538
+#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3630
 msgid "unassigned"
 msgstr "sense assignar"
 
-#. 4.0/applet.js:3580 4.0/applet.js:3611 6.0/applet.js:3580 6.0/applet.js:3611
-#. 6.4/applet.js:3549 6.4/applet.js:3580
+#. 4.0/applet.js:3672 4.0/applet.js:3703 6.0/applet.js:3672 6.0/applet.js:3703
+#. 6.4/applet.js:3641 6.4/applet.js:3672
 msgid "Assign window to a hotkey"
 msgstr "Assignar finestra a una drecera"
 
-#. 4.0/applet.js:3634 6.0/applet.js:3634 6.4/applet.js:3603
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
 msgid "Change application label contents"
 msgstr "Canviar el contingut de l'etiqueta de l'aplicació"
 
-#. 4.0/applet.js:3637 6.0/applet.js:3637 6.4/applet.js:3606
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
 msgid "Remove custom setting"
 msgstr "Eliminar preferència personalitzada"
 
-#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3705
 msgid "Use window title"
 msgstr "Utilitzar el títol de la finestra"
 
-#. 4.0/applet.js:3651 6.0/applet.js:3651 6.4/applet.js:3620
+#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
 msgid "Use application name"
 msgstr "Utilitzar el nom de l'aplicació"
 
-#. 4.0/applet.js:3658 6.0/applet.js:3658 6.4/applet.js:3627
+#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3719
 msgid "No label"
 msgstr "Sense etiqueta"
 
-#. 4.0/applet.js:3669 6.0/applet.js:3669 6.4/applet.js:3638
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
 msgid "Ungroup application windows"
 msgstr "Desagrupar les finestres de l'aplicació"
 
-#. 4.0/applet.js:3677 6.0/applet.js:3677 6.4/applet.js:3646
+#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3742
 msgid "Group application windows"
 msgstr "Agrupar les finestres de l'aplicació"
 
-#. 4.0/applet.js:3690 6.0/applet.js:3690 6.4/applet.js:3659
+#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3755
 msgid "Automatic grouping/ungrouping"
 msgstr "Agrupar/Desagrupar automàticament"
 
@@ -220,39 +229,39 @@ msgstr "Agrupar/Desagrupar automàticament"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3718 6.0/applet.js:3718 6.4/applet.js:3687
+#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3783
 msgid "Move titlebar on to screen"
 msgstr "Moure la barra del títol a la pantalla"
 
-#. 4.0/applet.js:3723 6.0/applet.js:3723 6.4/applet.js:3692
+#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3788
 msgid "Restore"
 msgstr "Restaurar"
 
-#. 4.0/applet.js:3727 6.0/applet.js:3727 6.4/applet.js:3696
+#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3792
 msgid "Minimize"
 msgstr "Minimitzar"
 
-#. 4.0/applet.js:3733 6.0/applet.js:3733 6.4/applet.js:3702
+#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3798
 msgid "Unmaximize"
 msgstr "Desmaximitzar"
 
-#. 4.0/applet.js:3741 6.0/applet.js:3741 6.4/applet.js:3710
+#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3806
 msgid "Close others"
 msgstr "Tancar altres"
 
-#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
 msgid "Close other windows for application"
 msgstr "Tancar altres finestres de l'aplicació"
 
-#. 4.0/applet.js:3764 6.0/applet.js:3764 6.4/applet.js:3733
+#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3829
 msgid "Close all"
 msgstr "Tancar totes"
 
-#. 4.0/applet.js:3766 6.0/applet.js:3766 6.4/applet.js:3735
+#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3831
 msgid "Close all windows for application"
 msgstr "Tancar totes les finestres de l'aplicació"
 
-#. 4.0/applet.js:3782 6.0/applet.js:3782 6.4/applet.js:3751
+#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3847
 msgid "Close"
 msgstr "Tancar"
 
@@ -292,6 +301,12 @@ msgstr "Etiquetes"
 msgid "General"
 msgstr "General"
 
+#. 4.0->settings-schema.json->mouse-page->title
+#. 6.0->settings-schema.json->mouse-page->title
+#. 6.4->settings-schema.json->mouse-page->title
+msgid "Mouse"
+msgstr ""
+
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
 #. 6.4->settings-schema.json->preview-page->title
@@ -319,8 +334,16 @@ msgstr "Configuració de l'etiqueta del botó de la llista de finestres"
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
 #. 6.4->settings-schema.json->caption-number-settings->title
-msgid "Number label settings"
+#, fuzzy
+msgid "Icon overlay label settings"
 msgstr "Configuració de l'etiqueta numèrica"
+
+#. 4.0->settings-schema.json->caption-progress-settings->title
+#. 6.0->settings-schema.json->caption-progress-settings->title
+#. 6.4->settings-schema.json->caption-progress-settings->title
+#, fuzzy
+msgid "Progress settings"
+msgstr "Configuració de dreceres del teclat"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -396,13 +419,10 @@ msgstr "Mai"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
-#. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
-#. 6.0->settings-schema.json->display-number->options
 #. 6.4->settings-schema.json->display-caption-for->options
 #. 6.4->settings-schema.json->display-caption-for-pined->options
-#. 6.4->settings-schema.json->display-number->options
 msgid "Always"
 msgstr "Sempre"
 
@@ -458,10 +478,11 @@ msgstr "Mostra etiquetes per a botons fixats"
 #. 4.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.0->settings-schema.json->display-caption-for-pined->tooltip
 #. 6.4->settings-schema.json->display-caption-for-pined->tooltip
+#, fuzzy
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
-"Running: Only pinned window that are running will have a label\n"
+"Running: Only pinned windows that are running will have a label\n"
 "Focused: Only the pinned window with focus will have a label"
 msgstr ""
 "Mai: Les finestres fixades no tindran etiqueta\n"
@@ -531,13 +552,34 @@ msgid "Minimized and pinned"
 msgstr "Minimitzat i fixat"
 
 #. 4.0->settings-schema.json->display-indicators->options
-#. 4.0->settings-schema.json->group-windows->options
+#. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->display-indicators->options
-#. 6.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->number-type->options
 #. 6.4->settings-schema.json->display-indicators->options
-#. 6.4->settings-schema.json->group-windows->options
-msgid "Automatic"
-msgstr "Automàtic"
+#. 6.4->settings-schema.json->number-type->options
+msgid "Application group window count"
+msgstr "Recompte de finestres de grups d'aplicacions"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+#, fuzzy
+msgid "Application group indicator (⋮)"
+msgstr "Recompte de finestres de grups d'aplicacions"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+#, fuzzy
+msgid "Workspace number (smart)"
+msgstr "Número de l'espai de treball"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+#, fuzzy
+msgid "Monitor number (smart)"
+msgstr "Número del monitor"
 
 #. 4.0->settings-schema.json->display-indicators->description
 #. 6.0->settings-schema.json->display-indicators->description
@@ -549,35 +591,25 @@ msgstr "Mostra els indicadors d'estat"
 #. 6.0->settings-schema.json->display-indicators->tooltip
 #. 6.4->settings-schema.json->display-indicators->tooltip
 msgid ""
-"Choose if the minimized and the pinned indicator characters will be "
-"prepended to button label text. Buttons without a text label will not "
-"reserve as much space.\n"
-"Automatic: The minimized and pinned indicators will only show when space is "
-"not constrained."
+"Controls what information is prepended to the button label text. On "
+"horizontal panels this data is shown even when the primary label contents "
+"are removed. Setting this to None will allow for the smallest button size. "
+"When on vertical panels this setting is ignored."
 msgstr ""
-"Tria si els indicadors de minimitzat i fixat es mostraran abans del text de "
-"l'etiqueta del botó. Els botons sense etiqueta de text no reservaran tant "
-"d'espai.\n"
-"Automàtic: els indicadors de minimitzat i fixat es mostraran només si hi ha "
-"prou espai per a ells."
 
-#. 4.0->settings-schema.json->show-ellipsis-for-groups->description
-#. 6.0->settings-schema.json->show-ellipsis-for-groups->description
-#. 6.4->settings-schema.json->show-ellipsis-for-groups->description
-msgid "Show a vertical ellipsis (...) for grouped buttons"
-msgstr "Mostrà una el·lipsi vertical (...) per a botons agrupats"
+#. 4.0->settings-schema.json->auto-hide-indicators->description
+#. 6.0->settings-schema.json->auto-hide-indicators->description
+#. 6.4->settings-schema.json->auto-hide-indicators->description
+msgid "Hide status indicators when space is limited"
+msgstr ""
 
-#. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
-#. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
-#. 6.4->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 4.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.4->settings-schema.json->auto-hide-indicators->tooltip
 msgid ""
-"Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
-"list buttons with more then one window. When on a vertical panel this option "
-"is not possible and the setting will be ignored."
+"Hide status indicators when window list space is limited causing button "
+"labels to shrink"
 msgstr ""
-"Afegeix una el·lipsi vertical a les etiquetes agrupades per botons de llista "
-"de finestra amb més d'una finestra. Aquesta opció no té cap efecte sobre els "
-"taulers verticals (serà ignorada)."
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -642,9 +674,10 @@ msgstr ""
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.4->settings-schema.json->hover-peek-delay->tooltip
+#, fuzzy
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
-"appear. It applies when hovering over either window-list buttons or "
+"appear. It applies when hovering over either window list buttons or "
 "thumbnail menu items (of course one of the full size window preview options "
 "must be enabled for this option to have any effect)"
 msgstr ""
@@ -695,7 +728,8 @@ msgstr "Res"
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
 #. 6.4->settings-schema.json->number-type->options
-msgid "Application group window count"
+#, fuzzy
+msgid "Application group indicator (…)"
 msgstr "Recompte de finestres de grups d'aplicacions"
 
 #. 4.0->settings-schema.json->number-type->options
@@ -710,67 +744,98 @@ msgstr "Número de l'espai de treball"
 msgid "Monitor number"
 msgstr "Número del monitor"
 
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Two characters from the window title"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Minimized indicator"
+msgstr "Finestres minimitzades"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Pinned indicator"
+msgstr "Aplicacions fixades"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+#, fuzzy
+msgid "Minimized and pinned indicators"
+msgstr "Minimitzat i fixat"
+
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
 #. 6.4->settings-schema.json->number-type->description
-msgid "Number label contents"
+#, fuzzy
+msgid "Icon overlay label contents"
 msgstr "Contingut de l'etiqueta numèrica"
-
-#. 4.0->settings-schema.json->display-number->options
-#. 6.0->settings-schema.json->display-number->options
-#. 6.4->settings-schema.json->display-number->options
-msgid "Smart"
-msgstr "Intel·ligent"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
 #. 6.4->settings-schema.json->display-number->description
-msgid "Display number"
-msgstr "Mostrar número"
+msgid "Only display label when needed"
+msgstr ""
 
 #. 4.0->settings-schema.json->display-number->tooltip
 #. 6.0->settings-schema.json->display-number->tooltip
 #. 6.4->settings-schema.json->display-number->tooltip
+#, fuzzy
 msgid ""
-"Controls when the number label is used. Smart means the the label will only "
-"appear when it is appropriate depending on the number label contents setting "
-"above. i.e. When there is two or more windows in a group, or when the "
-"windows workspace or monitor does not match the current one."
+"With this option enabled, the icon overlay label will only appear when it is "
+"appropriate depending on the label content (i.e. When there are two or more "
+"windows in a group, or when the windows workspace or monitor does not match "
+"the current one). When this option is disabled the label is always shown"
 msgstr ""
 "Controla quan s'utilitzarà l'etiqueta numèrica. 'Intel·ligent' significa que "
 "apareixerà només quan sigui necessari, tenint en compte les opcions de dalt. "
 "Per exemple, quan hi hagi dues o més finestres en un grup, o quan l'espai de "
 "treball o el monitor de les finestres no sigui l'actual."
 
-#. 4.0->settings-schema.json->number-style->options
-#. 6.0->settings-schema.json->number-style->options
-#. 6.4->settings-schema.json->number-style->options
-msgid "Icon overlay"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr "Desactivat"
+
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+#, fuzzy
+msgid "Using icon overlay label"
 msgstr "Sobreposar l'icona"
 
-#. 4.0->settings-schema.json->number-style->options
-#. 6.0->settings-schema.json->number-style->options
-#. 6.4->settings-schema.json->number-style->options
-msgid "Label prepend"
-msgstr "Afegir etiqueta"
-
-#. 4.0->settings-schema.json->number-style->description
-#. 6.0->settings-schema.json->number-style->description
-#. 6.4->settings-schema.json->number-style->description
-msgid "Number style"
-msgstr "Estil de numeració"
-
-#. 4.0->settings-schema.json->number-style->tooltip
-#. 6.0->settings-schema.json->number-style->tooltip
-#. 6.4->settings-schema.json->number-style->tooltip
-msgid ""
-"Controls how the number label is presented. When on a vertical panel or when "
-"in launcher mode, the \"label prepend\" option is not possible so \"icon "
-"overlay\" will be used instead"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+msgid "Prepended to button label"
 msgstr ""
-"Controla la presentació de l'etiqueta numèrica. En cas d'usar taulers "
-"verticals, la opció d'etiqueta no es pot utilitzar i, per tant, s'utilitzarà "
-"la sobreposició de la icona en lloc seu"
+
+#. 4.0->settings-schema.json->progress-display-type->description
+#. 6.0->settings-schema.json->progress-display-type->description
+#. 6.4->settings-schema.json->progress-display-type->description
+msgid "Display window progress information (%)"
+msgstr ""
+
+#. 4.0->settings-schema.json->progress-display-type->tooltip
+#. 6.0->settings-schema.json->progress-display-type->tooltip
+#. 6.4->settings-schema.json->progress-display-type->tooltip
+msgid ""
+"Controls how a windows progress information is presented on the window list "
+"(i.e copying in File Manager, downloading in Firefox, updating in Update "
+"Manager, etc.). When on vertical panels the \"Prepended to button label\" "
+"option will be ignored and icon overlay will be used in its place."
+msgstr ""
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -783,6 +848,12 @@ msgstr "Agrupades"
 #. 6.4->settings-schema.json->group-windows->options
 msgid "Pooled"
 msgstr "En conjunt"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Automatic"
+msgstr "Automàtic"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -805,12 +876,13 @@ msgstr "Comportament de l'estil de la llista de finestres"
 #. 4.0->settings-schema.json->group-windows->tooltip
 #. 6.0->settings-schema.json->group-windows->tooltip
 #. 6.4->settings-schema.json->group-windows->tooltip
+#, fuzzy
 msgid ""
 "Grouped: All windows for an application are managed by one button,\n"
 "Pooled: All window list buttons for an application are pooled side by side,\n"
 "Automatic: Windows are pooled, and then grouped when space is limited,\n"
 "One to one: Each window gets their own button with no forced ordering,\n"
-"Launcher: Only pinned button are shown, behaves like a panel launcher."
+"Launcher: Only pinned buttons are shown, behaves like a panel launcher."
 msgstr ""
 "Agrupades: Totes les finestres d'una aplicació son gestionades per un botó,\n"
 "En conjunt: Tots els botons de la llista de finestres per a una aplicació "
@@ -821,12 +893,6 @@ msgstr ""
 "entre elles,\n"
 "Llançador: Només es mostra el botó fixat, que es comporta com un llançador "
 "al tauler."
-
-#. 4.0->settings-schema.json->display-pinned->options
-#. 6.0->settings-schema.json->display-pinned->options
-#. 6.4->settings-schema.json->display-pinned->options
-msgid "Disabled"
-msgstr "Desactivat"
 
 #. 4.0->settings-schema.json->display-pinned->options
 #. 6.0->settings-schema.json->display-pinned->options
@@ -869,9 +935,10 @@ msgstr "Sincronitzar botons llançadors a tots els espais de treball"
 #. 4.0->settings-schema.json->synchronize-pinned->tooltip
 #. 6.0->settings-schema.json->synchronize-pinned->tooltip
 #. 6.4->settings-schema.json->synchronize-pinned->tooltip
+#, fuzzy
 msgid ""
 "If enabled, the number and order of launcher buttons on the panel will be "
-"synchronize across all workspaces."
+"synchronized across all workspaces."
 msgstr ""
 "Si s'activa, el número i l'ordre dels botons llançadors al tauler serà "
 "sincronitzat per tots els espais de treball."
@@ -898,6 +965,27 @@ msgstr ""
 #. 6.4->settings-schema.json->show-windows-for-all-workspaces->description
 msgid "Include windows from all workspaces"
 msgstr "Inclou finestres de tots els espais de treball"
+
+#. 4.0->settings-schema.json->remember-button-order->description
+#. 6.0->settings-schema.json->remember-button-order->description
+#. 6.4->settings-schema.json->remember-button-order->description
+#, fuzzy
+msgid "Allow prioritizing window list button order"
+msgstr "Fixació dels botons de la llista de finestres"
+
+#. 4.0->settings-schema.json->remember-button-order->tooltip
+#. 6.0->settings-schema.json->remember-button-order->tooltip
+#. 6.4->settings-schema.json->remember-button-order->tooltip
+msgid ""
+"Enabling this option makes it easy for you to control where your favorite "
+"applications will appear on the window list. This is achieved by maintaining "
+"a persistent position priority order for applications. New Window list "
+"buttons for applications with priority will appear in priority order and "
+"ahead of applications without priority. Using drag-and-drop will "
+"automatically add to and reorder the priority list. The \"Prioritize window "
+"list position\" context menu option allows you to add and remove an "
+"application from the priority list."
+msgstr ""
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
@@ -965,9 +1053,10 @@ msgstr ""
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.4->settings-schema.json->hover-peek-windowlist->tooltip
+#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
-"hovering over a window-list button. The delay before the preview appears is "
+"hovering over a window list button. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
 "Si s'activa, una previsualització de la pantalla completa apareixerà quan el "
@@ -983,9 +1072,10 @@ msgstr "Canvia el focus automàticament en sortir del tauler"
 #. 4.0->settings-schema.json->no-click-activate->tooltip
 #. 6.0->settings-schema.json->no-click-activate->tooltip
 #. 6.4->settings-schema.json->no-click-activate->tooltip
+#, fuzzy
 msgid ""
-"If enabled, the current window for a window-list button will get the focus "
-"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"If enabled, the current window for a window list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window list with Ctrl "
 "or Shift held or while remaining on the panel will leave the focus "
 "unchanged. This option is typically used in conjunction with the preview "
 "hovering option above."
@@ -1075,10 +1165,11 @@ msgstr "Ordenar els elements del menú de miniatures dels botons agrupats"
 #. 4.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.4->settings-schema.json->menu-sort-groups->tooltip
+#, fuzzy
 msgid ""
-"If enabled, the thumbnail menu will be sorted first by workspace and the by "
+"If enabled, the thumbnail menu will be sorted first by workspace and then by "
 "monitor number for grouped buttons. Pooled windows can not be sorted since "
-"the order is the same as the order on the window-list panel. With this "
+"the order is the same as the order on the window list panel. With this "
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
@@ -1104,9 +1195,10 @@ msgstr "Mostra miniatures per totes les finestres agrupades d'una aplicació"
 #. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
 #. 6.4->settings-schema.json->menu-all-windows-of-pool->tooltip
 #. 6.4->settings-schema.json->menu-all-windows-of-auto->tooltip
+#, fuzzy
 msgid ""
 "If enabled, a popup menu will contain all the application windows in the "
-"application pool rather then just the selected window within the application "
+"application pool rather than just the selected window within the application "
 "pool"
 msgstr ""
 "Si s'activa, el menú emergent contindrà totes les finestres agrupades de "
@@ -2107,7 +2199,8 @@ msgstr "Canviar el mosaic de les finestres"
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-msgid "Cycle all window-list button windows"
+#, fuzzy
+msgid "Cycle all window list button windows"
 msgstr "Desplaçar-se pels botons de les finestres de la llista"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
@@ -2257,7 +2350,8 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
 #. 6.4->settings-schema.json->hotkey-sequence->description
-msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
+#, fuzzy
+msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
 msgstr ""
 "Dreceres numèriques intel·ligents (utilitzar \"1\" afecta immediatament a "
 "1-9)"
@@ -2265,11 +2359,13 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.4->settings-schema.json->hotkey-sequence->tooltip
+#, fuzzy
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
-"automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
-"first 9 windows of the assigned application, as ordered on the window-list, "
-"will be activated by the 9 hotkeys."
+"automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The "
+"first 10 windows of the assigned application, as ordered on the window list, "
+"will be activated by the 10 hotkeys. The 1st window is activated by hotkey 1 "
+"and 10th window is activated by hotkey 0"
 msgstr ""
 "Si s'activa, les dreceres del teclat acabant en número (ex: Alt+1) crearan "
 "dreceres automàtiques pels números 1-9 (ex: alt+1 --> alt+9). Les primeres 9 "
@@ -2287,10 +2383,11 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-grave-help->tooltip
 #. 6.0->settings-schema.json->hotkey-grave-help->tooltip
 #. 6.4->settings-schema.json->hotkey-grave-help->tooltip
+#, fuzzy
 msgid ""
 "If enabled, The hotkey modifier(s) + ` will be registered for each unique "
-"modifier set defined in the hotkey list. Using these hotkeys will temporally "
-"show a hotkey hint bubble over the button icons."
+"modifier set defined in the hotkey list. Using these hotkeys will "
+"temporarily show a hotkey hint bubble over the button icons."
 msgstr ""
 "Si s'activa, els modificadors + ` de dreceres d'accés ràpid es registraran "
 "per cada conjunt de modificadors únic definit a la llista de dreceres "
@@ -2452,7 +2549,8 @@ msgstr "Botons per finestres en altres monitors"
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
 #. 6.4->settings-schema.json->saturation-application->options
-msgid "All buttons excepted focused window"
+#, fuzzy
+msgid "All buttons except the focused window"
 msgstr "Tots els botons menys el de la finestra en primer pla"
 
 #. 4.0->settings-schema.json->saturation-application->description
@@ -2494,9 +2592,10 @@ msgstr ""
 "Tauler de botons per a totes les finestres en execució."
 
 #. SetupWizard.ui:125
+#, fuzzy
 msgid ""
 "Panel Launcher (Quick launcher)\n"
-"Panel button only appear when you add items\n"
+"Panel buttons only appear when you pin items\n"
 "to the panel, no labels are shown, only icons."
 msgstr ""
 "Tauler llançadora (Llançador ràpid)\n"
@@ -2516,9 +2615,10 @@ msgid "How do you want your Window List to operate?"
 msgstr "Quin funcionament voleu que tingui la vostra llista de finestres?"
 
 #. SetupWizard.ui:192
+#, fuzzy
 msgid ""
 "Basic  -  Quick window access\n"
-"Every window gets it's own window list button.\n"
+"Every window gets its own window list button.\n"
 "Button labels are window titles."
 msgstr ""
 "Bàsic  -  Accés ràpid a les finestres\n"
@@ -2538,10 +2638,11 @@ msgstr ""
 "Les etiquetes dels botons són els títols de les finestres."
 
 #. SetupWizard.ui:236
+#, fuzzy
 msgid ""
 "Pooling  -  Quick access & compact\n"
-"Every window gets it's own window list button.\n"
-"Application buttons are pooled togeather.\n"
+"Every window gets its own window list button.\n"
+"Application buttons are pooled together.\n"
 "One button label per application pool.\n"
 "Button labels are application names."
 msgstr ""
@@ -2574,8 +2675,9 @@ msgid "Panel Launcher Setup"
 msgstr "Posada en marxa del tauler llançador"
 
 #. SetupWizard.ui:370
+#, fuzzy
 msgid ""
-"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"Unlike most Panel Launcher applets, this launcher keeps track of \n"
 "running windows and uses window Thumbnail menus.\n"
 "\n"
 "You can launch additional windows by clicking the 'Back' mouse \n"
@@ -2615,8 +2717,9 @@ msgid "All done!"
 msgstr "Tot fet!"
 
 #. SetupWizard.ui:508
+#, fuzzy
 msgid ""
-"There are many more options and features to explorer in the\n"
+"There are many more options and features to explore in the\n"
 "applet configurator and the window list button context menu,\n"
 "for example:\n"
 "\n"

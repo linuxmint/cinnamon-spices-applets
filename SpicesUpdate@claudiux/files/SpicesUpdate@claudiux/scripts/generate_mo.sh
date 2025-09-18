@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Create .mo files (or replace older .mo files) into the right directories, from the .po existing files.
 UUID="SpicesUpdate@claudiux"

@@ -1,0 +1,150 @@
+# SSH CONNECT
+# This file is put in the public domain.
+# foobar-beer, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sshconnect@foobar-beer 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. applet.js:58
+msgid "Reload Config"
+msgstr "Konfiguráció újratöltése"
+
+#. applet.js:96
+msgid "Connection opened for "
+msgstr "Kapcsolat megnyitva ehhez: "
+
+#. metadata.json->name
+msgid "SSH Connect"
+msgstr "SSH-kapcsolódás"
+
+#. metadata.json->description
+msgid ""
+"Open SSH shell based on applet configuration table with optional "
+"configuration of console profile and flags per each connection."
+msgstr ""
+"Nyílt SSH shell a kisalkalmazás konfigurációs táblázata alapján, a "
+"konzolprofil és a jelzők opcionális konfigurációjával kapcsolatonként."
+
+#. settings-schema.json->page-connections-list->title
+msgid "SSH Connections"
+msgstr "SSH Kapcsolatok"
+
+#. settings-schema.json->page-terminal-settings->title
+#. settings-schema.json->section-terminal-app->title
+msgid "Terminal Application"
+msgstr "Terminál alkalmazás"
+
+#. settings-schema.json->section-connections-list->title
+msgid "SSH Connections List"
+msgstr "SSH kapcsolatok listája"
+
+#. settings-schema.json->section-setup-title-flag->title
+msgid "Terminal Title"
+msgstr "Terminál csempe"
+
+#. settings-schema.json->section-setup-profile-flag->title
+#. settings-schema.json->connections->columns->title
+msgid "Terminal Profile"
+msgstr "Terminál profil"
+
+#. settings-schema.json->connections->description
+msgid "Connections List"
+msgstr "Kapcsolatok listája"
+
+#. settings-schema.json->connections->columns->title
+msgid "Connection Name"
+msgstr "Kapcsolat neve"
+
+#. settings-schema.json->connections->columns->title
+msgid "Group Name"
+msgstr "Csoport neve"
+
+#. settings-schema.json->connections->columns->title
+msgid "Host"
+msgstr "Házigazda"
+
+#. settings-schema.json->connections->columns->title
+msgid "SSH Flags"
+msgstr "SSH-jelzők"
+
+#. settings-schema.json->terminal-exec->description
+msgid "Set terminal application executable"
+msgstr "Terminálalkalmazás futtathatóvá tétele"
+
+#. settings-schema.json->terminal-exec->tooltip
+msgid ""
+"Configure the command that will be used for launching the SSH connection."
+msgstr "Konfigurálja az SSH-kapcsolat indításához használt parancsot."
+
+#. settings-schema.json->exec-flag->description
+msgid "Set terminal application execution flag"
+msgstr "Terminálalkalmazás végrehajtási jelzőjének beállítása"
+
+#. settings-schema.json->exec-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for passing through the "
+"command that should be executed."
+msgstr ""
+"Konfigurálja az alkalmazás végrehajtási beállítás jelzőjét, amely a "
+"végrehajtandó parancs átadásához használható."
+
+#. settings-schema.json->customize-title->description
+msgid "Customize teminal window title"
+msgstr "Terminálablak címének testreszabása"
+
+#. settings-schema.json->customize-title->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting window "
+"title."
+msgstr ""
+"Állítsa be ezt a kapcsolót az ablak címének végrehajtási opciójelzőjének "
+"konfigurálásához."
+
+#. settings-schema.json->title-flag->description
+msgid "Set terminal application title flag"
+msgstr "Terminálalkalmazás címjelzőjének beállítása"
+
+#. settings-schema.json->title-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"title."
+msgstr ""
+"Konfigurálja az ablak címének beállításához használt alkalmazásfuttatási "
+"beállításjelzőt."
+
+#. settings-schema.json->customize-profile->description
+msgid "Customize teminal window profile"
+msgstr "Terminálablak profiljának testreszabása"
+
+#. settings-schema.json->customize-profile->tooltip
+msgid ""
+"Set this switch to configure the execution option flag for setting terminal "
+"window profile."
+msgstr ""
+"Állítsa be ezt a kapcsolót a terminálablak profiljának végrehajtási "
+"opciójelzőjének konfigurálásához."
+
+#. settings-schema.json->profile-flag->description
+msgid "Set Terminal application profile flag"
+msgstr "Terminál alkalmazásprofil jelző beállítása"
+
+#. settings-schema.json->profile-flag->tooltip
+msgid ""
+"Configure the application execution option flag used for setting window "
+"profile"
+msgstr ""
+"Az ablakprofil beállításához használt alkalmazásfuttatási beállításjelző "
+"konfigurálása"

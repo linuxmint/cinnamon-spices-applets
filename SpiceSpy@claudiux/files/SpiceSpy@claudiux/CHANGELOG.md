@@ -1,3 +1,9 @@
+### v5.4.0~20250829
+  * Alerts also on issues related to spices.
+
+### v5.3.3~20250701
+  * Improves updates.
+
 ### v5.3.2~20250415
   * Minor bugfix.
 

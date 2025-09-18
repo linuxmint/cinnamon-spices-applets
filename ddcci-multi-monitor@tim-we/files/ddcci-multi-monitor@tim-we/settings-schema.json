@@ -1,0 +1,134 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page_general"],
+
+        "page_general": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "section_appearance",
+                "section_scrolling",
+                "section_togglepoints",
+                "section_monitor"
+            ]
+        },
+
+        "section_appearance": {
+            "type": "section",
+            "title": "Appearance",
+            "keys": [
+                "entry_applet-label",
+                "switch_show-bus-number"  
+            ]
+        },
+
+        "section_monitor": {
+            "type": "section",
+            "title": "Monitor Setup",
+            "keys": [
+                "switch_manual-select-monitors"
+            ]
+        },        
+
+        "section_scrolling": {
+            "type": "section",
+            "title": "Scrolling Settings",
+            "keys": [
+                "combobox_scroll-step"
+            ]
+        },
+
+        "section_togglepoints": {
+          "type": "section",
+          "title": "Toggle Points",
+          "keys": [
+              "switch_use-toggle-points",
+              "spinbutton_num-of-toggle-points",
+              "scale_toggle_point_1",
+              "scale_toggle_point_2",
+              "scale_toggle_point_3"
+          ]
+      }
+      },
+
+      "entry_applet-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Text shown next to the icon in the panel.\nLeave empty for no label."
+      },
+      "switch_show-bus-number": {
+        "type": "switch",
+        "default": false,
+        "description": "Show bus number next to the detected monitors."
+      },
+
+      "switch_manual-select-monitors": {
+        "type": "switch",
+        "default": false,
+        "description": "By default, scrolling & toggling adjusts brightness for all monitors.\nSwitch to enable custom monitor selection.\nThis will add checkbox options for each detected monitor."
+      },
+
+      "combobox_scroll-step": {
+        "type": "combobox",
+        "default": 5,
+        "options": {
+          "1": 1,
+          "2": 2,
+          "4": 4,
+          "5": 5,
+          "10": 10,
+          "20": 20,
+          "50": 50
+        },
+        "description": "Adjustment step for brightness"
+      },
+
+      "switch_use-toggle-points": {
+        "type": "switch",
+        "default": false,
+        "description": "Enable toggle points for brightness adjustment.\n(via mouse middle click)"
+      },
+      "spinbutton_num-of-toggle-points": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "description": "Number of toggle points for brightness adjustment\n(only the first N toggle points will be used)",
+        "dependency": "switch_use-toggle-points"
+      },
+      "scale_toggle_point_1": {
+        "type": "scale",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Brightness level for toggle point 1",
+        "dependency": "switch_use-toggle-points"
+      },
+      "scale_toggle_point_2": {
+        "type": "scale",
+        "default": 50,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Brightness level for toggle point 2",
+        "dependency": "switch_use-toggle-points"
+      },
+      "scale_toggle_point_3": {
+        "type": "scale",
+        "default": 100,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Brightness level for toggle point 3",
+        "dependency": "switch_use-toggle-points"
+      },
+
+      "string_active-monitors": {
+          "type": "string",
+          "default": "{}",
+          "description": "Stores which monitors are active for scroll/click functions.\nThis is a JSON object where keys are bus numbers and values are true/false.\nExample: {\"1\":true,\"2\":false}"
+      }
+}

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 DEBUG=false
 #~ DEBUG=true
 

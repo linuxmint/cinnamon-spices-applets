@@ -65,9 +65,9 @@ function _(str, uuid=UUID) {
 const DEBUG = false;
 /**
  * Usage of log and logError:
- * log("Any message here") to log the message only if DEBUG() returns true.
- * log("Any message here", true) to log the message even if DEBUG() returns false.
- * logError("Any error message") to log the error message regardless of the DEBUG() return.
+ * log("Any message here") to log the message only if DEBUG is set to true.
+ * log("Any message here", true) to log the message even if DEBUG is set to false.
+ * logError("Any error message") to log the error message regardless of the DEBUG value.
  */
 function log(message, alwaysLog=false) {
   if (DEBUG || alwaysLog) Main._logInfo("[" + UUID + "]: " + message);
@@ -315,21 +315,32 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
 };
 
 class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
-  constructor(title, icon_name) {
-    super({ reactive: false });
+  constructor(type, title, icon_name) {
+    //~ super({ reactive: false });
+    super({ reactive: true });
     if (typeof icon_name === "string") {
+      let icon_box = new St.BoxLayout({ style: 'spacing: .25em;', reactive: true, track_hover: true, can_focus: true });
       let icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
+      icon_box.add_actor(icon);
+      this.addActor(icon_box);
+      new Tooltips.Tooltip(icon_box, _("Reload icons"));
       //~ this.addActor(icon, { span: 0 });
-      this.addActor(icon);
+      //~ logDebug(`cinnamon-settings ${type} -t 1 -s 4`);
+      icon_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`/usr/bin/env bash -c 'cinnamon-settings ${type} -t 1 -s 4'`) });
     }
+    let label_box = new St.BoxLayout({ style: 'spacing: .25em;', reactive: true, track_hover: true, can_focus: true });
     this.label = new St.Label({ text: title, style_class: "popup-subtitle-menu-item" });
-    this.addActor(this.label);
+    label_box.add_actor(this.label);
+    new Tooltips.Tooltip(label_box, _("Visit website"));
+    this.addActor(label_box);
+    label_box.connect("button-press-event", () => { Util.spawnCommandLineAsync(`xdg-open "https://cinnamon-spices.linuxmint.com/${type}/"`) });
   }
 }
 
 const STAR_CHAR = "★";
 const MESSAGE_CHAR = "✉";
 const FLAG_CHAR = "⚑";
+const ISSUE_CHAR = " ⚠"; //ⓘ: too strong!
 
 class SpiceSpy extends Applet.TextIconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -375,10 +386,10 @@ class SpiceSpy extends Applet.TextIconApplet {
     //~ this.settings.bind("show-icon-in-menu", "show_icon_in_menu");
     this.show_icon_in_menu = true;
     this.settings.bind("icon-size", "icon_size");
-    //~ this.settings.bind("show-translations", "show_translations");
-    this.show_translations = true;
-    this.settings.bind("show-issues", "show_issues");
-    this.show_issues = true;
+    this.settings.bind("show-translations", "show_translations", () => { this._reload_this_applet() });
+    //~ this.show_translations = true;
+    this.settings.bind("show-issues", "show_issues", () => { this._reload_this_applet() });
+    //~ this.show_issues = true;
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
@@ -485,20 +496,42 @@ class SpiceSpy extends Applet.TextIconApplet {
     return (keys_spices_to_spy.length < 5);
   } // End of is_empty
 
-  updateUI(score=0, comments=0, translations=0) {
-    let _label;
-    //~ if (this.show_translations)
-      //~ _label = "%s %s\n%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString(), FLAG_CHAR, translations.toString());
-    //~ else
-      //~ _label = "%s %s\n%s %s".format(STAR_CHAR, score.toString(), MESSAGE_CHAR, comments.toString());
-    //~ this.set_applet_label(_label);
-    if (score==0 && comments==0 && translations==0) {
+  updateUI(score=0, comments=0, issues=0, translations=0) {
+    var _label = "";
+    var _labels = [];
+    if (score==0 && comments==0 && issues==0 && translations==0) {
       if (this.display_on_panel === "normal") {
         this.actor.show();
-        if (!this.useful_only)
+        if (!this.useful_only) {
+          _labels = [`${STAR_CHAR} 0`, `${MESSAGE_CHAR} 0`];
+          if (this.show_issues)
+            _labels.push(`${ISSUE_CHAR} 0`);
+          if (this.show_translations)
+            _labels.push(`${FLAG_CHAR} 0`);
+
+          if (this.is_vertical) {
+            _label = ""+_labels.join("\n");
+          } else {
+            if (_labels.length * 20 <= this._panelHeight) {
+              _label = ""+_labels.join("\n");
+            } else if (_labels.length * 20 <= 2 * this._panelHeight) {
+              for (let i=0, len=_labels.length; i<len; i++) {
+                _label += ""+_labels[i];
+                if (i == 1)
+                  _label += "\n";
+                else
+                  _label += "  ";
+              }
+            } else {
+              _label = ""+_labels.join("  ");
+            }
+          }
+          this.set_applet_label(_label);
+          this.actor.show();
           this.showLabel();
-        else
+        } else {
           this.hideLabel();
+        }
       } else if (this.display_on_panel === "icon") {
         this.actor.show();
         this.hideLabel();
@@ -509,17 +542,26 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.actor.set_style(null);
       this._applet_label.set_style(null);
     } else {
-      let _labels = [];
       if (!this.useful_only || score!=0) _labels.push("%s %s".format(STAR_CHAR, score.toString()));
       if (!this.useful_only || comments!=0) _labels.push("%s %s".format(MESSAGE_CHAR, comments.toString()));
+      if (!this.useful_only || (this.show_issues && issues!=0)) _labels.push("%s %s".format(ISSUE_CHAR, issues.toString()));
       if (!this.useful_only || (this.show_translations && translations!=0)) _labels.push("%s %s".format(FLAG_CHAR, translations.toString()));
       if (this.is_vertical) {
         _label = ""+_labels.join("\n");
       } else {
-        if (_labels.length * 20 <= this._panelHeight)
+        if (_labels.length * 20 <= this._panelHeight) {
           _label = ""+_labels.join("\n");
-        else
+        }else if (_labels.length * 20 <= 2 * this._panelHeight) {
+          for (let i=0, len=_labels.length; i<len; i++) {
+            _label += ""+_labels[i];
+            if (i == 1)
+              _label += "\n";
+            else
+              _label += "  ";
+          }
+        } else {
           _label = ""+_labels.join("  ");
+        }
       }
       this.set_applet_label(_label);
       this.actor.show();
@@ -527,7 +569,6 @@ class SpiceSpy extends Applet.TextIconApplet {
       this.actor.set_style("color: %s;".format(this.color_on_change));
       this._applet_label.set_style("color: %s;".format(this.color_on_change));
     }
-
   } // End of updateUI
 
   issuesJobs_loop() {
@@ -832,6 +873,7 @@ class SpiceSpy extends Applet.TextIconApplet {
     var total_diff_score = 0;
     var total_diff_comments = 0;
     var total_diff_translations = 0;
+    var total_diff_issues = 0;
 
     //~ if (this.nothing_to_spy())
       //~ this.set_applet_tooltip(_("No Spice to spy.\nPlease configure me!"));
@@ -874,12 +916,13 @@ class SpiceSpy extends Applet.TextIconApplet {
         if (uuids.length > 0) {
           let title = type[0].toUpperCase() + type.substring(1);
           //this.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
-          this.spicesSection.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
+          this.spicesSection.menu.addMenuItem(new TitleSeparatorMenuItem(type, _(title), `spices-${type}-symbolic`));
           for (let uuid of uuids) {
             let spice = this.spices_to_spy[type][uuid];
             let diff_comments = 0;
             let diff_stars = 0;
             let diff_translations = 0;
+            let diff_issues = 0;
             if (this.old_spices_to_spy[type][uuid]) {
               diff_comments = this.spices_to_spy[type][uuid]["comments"] - this.old_spices_to_spy[type][uuid]["comments"];
               if (diff_comments < 0) {
@@ -890,15 +933,20 @@ class SpiceSpy extends Applet.TextIconApplet {
               diff_translations = this.spices_to_spy[type][uuid]["translations"] - this.old_spices_to_spy[type][uuid]["translations"];
               if (isNaN(diff_translations))
                 diff_translations = this.spices_to_spy[type][uuid]["translations"];
+              diff_issues = this.spices_to_spy[type][uuid]["issues"] - this.old_spices_to_spy[type][uuid]["issues"];;
+              if (isNaN(diff_issues))
+                diff_issues = this.spices_to_spy[type][uuid]["issues"];
             }
             else {
               diff_comments = this.spices_to_spy[type][uuid]["comments"];
               diff_stars = this.spices_to_spy[type][uuid]["score"];
               diff_translations = this.spices_to_spy[type][uuid]["translations"];
+              diff_issues = this.spices_to_spy[type][uuid]["issues"];
             }
             total_diff_score += diff_stars;
             total_diff_comments += diff_comments;
             total_diff_translations += diff_translations;
+            total_diff_issues += diff_issues;
             //~ spice.comments = diff_comments;
             let menuItem = new SpiceMenuItem(this, spice, diff_stars != 0, diff_comments != 0, diff_translations != 0);
             menuItems.push(menuItem);
@@ -982,13 +1030,12 @@ class SpiceSpy extends Applet.TextIconApplet {
     this.spicesSection.menu.toggle();
     //~ this.spicesSection.menu.close();
 
-    this.updateUI(total_diff_score, total_diff_comments, total_diff_translations);
+    this.updateUI(total_diff_score, total_diff_comments, total_diff_issues, total_diff_translations);
   } // End of make_menu
 
   mark_all_as_read() {
-    //~ this.settings.setValue("old_spices_to_spy", this.spices_to_spy);
     this.old_spices_to_spy = this.spices_to_spy;
-    //~ this.make_menu();
+    this.updateUI();
   } // End of mark_all_as_read
 
   mark_as_read(spice) {

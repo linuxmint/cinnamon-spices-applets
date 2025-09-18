@@ -10,7 +10,7 @@ msgstr ""
 "issues\n"
 "POT-Creation-Date: 2024-11-17 20:28+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Nem sikerült betölteni az RSS-hírfolyamot"
 
 #. applet.js:94
 msgid "Error while loading RSS"
-msgstr "Hiba az RSS betöltése közben"
+msgstr "Hiba lépett fel az RSS-hírfolyam betöltése közben"
 
 #. metadata.json->name
 msgid "RSS Newsticker"
@@ -44,7 +44,7 @@ msgstr "Általános"
 
 #. settings-schema.json->rssURL->description
 msgid "URL of RSS feed"
-msgstr "Az RSS hírfolyam URL-je"
+msgstr "Az RSS-hírfolyam URL-címe"
 
 #. settings-schema.json->head1->description
 msgid "Ticker"

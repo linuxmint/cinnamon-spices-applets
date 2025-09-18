@@ -1,3 +1,18 @@
+### v1.7.2~20250917
+* Better control of user rights regarding hibernation. Does the user have root rights using sudo?
+
+### v1.7.1~20250917
+* Optimization and code cleanup.
+* Improves the Shortcuts tab in this applet settings to help users avoid errors.
+
+### v1.7.0~20250916
+* Adds shortcuts to open the menu and to reactivate mouse and screen.
+* Adds keys to select certain options when the menu is open.
+
+
+### v1.6.1~20250630
+* Takes screensaver into account.
+
 ### v1.6.0~20250221
 * It is now possible to log out even when the screensaver is locked in deactivated mode.
 

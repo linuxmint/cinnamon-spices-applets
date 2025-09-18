@@ -1,0 +1,41 @@
+# NIGHT LIGHT SWITCH
+# This file is put in the public domain.
+# claudiux, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: NightLightSwitch@claudiux 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-06 19:22-0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.4/applet.js:207
+msgid "Configure..."
+msgstr "Configura..."
+
+#. 6.4/applet.js:235
+msgid "Night Light Enabled - Click to Disable"
+msgstr "Luce notturna abilitata - Clicca per Disabilitarla"
+
+#. 6.4/applet.js:238
+msgid "Night Light Disabled - Click to Enable"
+msgstr "Luce notturna disabilitata - Clicca per Abilitarla"
+
+#. metadata.json->description
+msgid "A simple Cinnamon applet to activate/deactivate Night Light mode."
+msgstr ""
+"Una semplice applet Cinnamon per attivare/disattivare la modalità Luce "
+"notturna."
+
+#. metadata.json->name
+msgid "Night Light Switch"
+msgstr "Interruttore Luce Notturna"

@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 21:41+0200\n"
-"PO-Revision-Date: 2025-06-13 18:24+0200\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"PO-Revision-Date: 2025-08-26 10:20+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,54 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. applet.js:98
+#. applet.js:44
+msgid "Notifications applet conflict"
+msgstr "Conflict meldingen-applet"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+"Conflict gedetecteerd: notifications@cinnamon.org is actief.\n"
+"Verwijder dit en herstart Cinnamon voordat je de Verbeterde Meldingen-applet "
+"gebruikt."
+
+#. applet.js:120
 msgid "Do not disturb"
 msgstr "Niet storen"
 
-#. applet.js:105
+#. applet.js:126
 msgid "No notifications"
 msgstr "Geen meldingen"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:114
+#. applet.js:134
 msgid "Clear notifications"
 msgstr "Wis meldingen"
 
-#. applet.js:138
+#. applet.js:157
 msgid "Enable notifications"
 msgstr "Schakel meldingen in"
 
-#. applet.js:150
+#. applet.js:168
 msgid "Notification Settings"
 msgstr "Melding Instellingen"
 
-#. applet.js:233 applet.js:411
+#. applet.js:257 applet.js:431
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d melding"
 msgstr[1] "%d meldingen"
 
-#. applet.js:263
+#. applet.js:287
 msgid "Notifications"
 msgstr "Meldingen"
 
-#. applet.js:277
+#. applet.js:300
 msgid "Notifications disabled"
 msgstr "Meldingen uitgeschakeld"
 
-#. applet.js:427
+#. applet.js:447
 msgid "just now"
 msgstr "zojuist"
 
-#. applet.js:430
+#. applet.js:450
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d seconde geleden"
 msgstr[1] "%d seconden geleden"
 
-#. applet.js:434
+#. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -72,8 +85,8 @@ msgstr[0] "%d minuut geleden"
 msgstr[1] "%d minuten geleden"
 
 #. metadata.json->name
-msgid "Notifications Enhanced"
-msgstr "Verbeterde meldingen"
+msgid "Notifications-Enhanced"
+msgstr "Verbeterde Meldingen"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
@@ -100,27 +113,24 @@ msgid "Show the number of notifications"
 msgstr "Toon het aantal meldingen"
 
 #. settings-schema.json->showEmptyTray->description
-msgid "Show empty tray"
-msgstr "Toon lege tray"
+msgid "Show notification tray"
+msgstr "Toon meldingenvak"
 
 #. settings-schema.json->showEmptyTray->tooltip
-msgid "Check this to show the tray even when there are no new notifications."
-msgstr ""
-"Vink dit aan om de tray te tonen, zelfs als er geen nieuwe meldingen zijn."
+msgid "Check this to always show the notification tray."
+msgstr "Vink dit aan om het meldingenvak altijd te tonen."
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
-msgstr ""
-"Toon 'Niet storen'-pictogram zelfs wanneer de optie 'leeg systeemvak "
-"weergeven' is uitgeschakeld"
+msgid "Always show 'Do Not Disturb' icon"
+msgstr "'Niet Storen'-pictogram altijd tonen"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 msgid ""
-"Check this to show 'Do not disturb' icon on panel even when show empty tray "
-"option is disabled."
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
 msgstr ""
-"Vink dit aan om het 'Niet storen' icoon op het paneel te tonen, zelfs als de "
-"optie lege tray tonen is uitgeschakeld."
+"Vink dit aan om het 'Niet Storen'-pictogram op het paneel te tonen, zelfs "
+"wanneer de optie 'Toon meldingenvak' is uitgeschakeld."
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"

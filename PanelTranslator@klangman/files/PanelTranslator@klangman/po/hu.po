@@ -8,8 +8,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-02-02 12:30-0500\n"
-"PO-Revision-Date: 2025-04-10 11:52+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-08-06 16:19+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #. applet.js:108 applet.js:345 applet.js:347
@@ -27,17 +27,18 @@ msgstr "Fordító"
 #. applet.js:273
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
-"Nem lehet lekérdezni a rendelkezésre álló nyelveket a translate-shellből"
+"Nem lehet lekérdezni a rendelkezésre álló nyelveket a translate-shell "
+"programból"
 
 #. applet.js:284
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
-"A szükséges \"trans\" parancs nem található, kérjük telepítse a translate-"
-"shellt"
+"A szükséges „trans” parancs nem található, kérjük telepítse a translate-"
+"shell csomagot"
 
 #. applet.js:288
 msgid "Error, the \"trans\" command returned an exit code of "
-msgstr "Hiba, a \"trans\" parancs a következő kilépési kódot adta vissza: "
+msgstr "Hiba, a „trans” parancs a következő kilépési kódot adta vissza: "
 
 #. applet.js:368
 msgid "Swap Languages"
@@ -158,7 +159,7 @@ msgid ""
 "shell decide what translator to use."
 msgstr ""
 "A legtöbb motor nem támogatja a lejátszást és néhány nem is fordít, mások "
-"csak HTTP-hibákat jelentenek. Ezért a legjobb, ha az \"Auto\" opciót "
+"csak HTTP-hibákat jelentenek. Ezért a legjobb, ha az „Auto” opciót "
 "használja, és hagyja, hogy a translate-shell döntse el, melyik fordítót "
 "használja."
 

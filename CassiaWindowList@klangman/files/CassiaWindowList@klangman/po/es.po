@@ -8,42 +8,46 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-09 22:44-0400\n"
-"PO-Revision-Date: 2025-03-10 09:26-0300\n"
+"POT-Creation-Date: 2025-08-31 21:09-0400\n"
+"PO-Revision-Date: 2025-08-13 21:07-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
-#. 4.0/applet.js:584 6.0/applet.js:584 6.4/applet.js:562
+#. 4.0/applet.js:611 6.0/applet.js:611 6.4/applet.js:589
 msgid "all buttons"
 msgstr "todos los botones"
 
-#. 4.0/applet.js:3266 6.0/applet.js:3266 6.4/applet.js:3238
+#. 4.0/applet.js:1955 6.0/applet.js:1955 6.4/applet.js:1933
+msgid "windows in this group"
+msgstr "ventanas en este grupo"
+
+#. 4.0/applet.js:3342 6.0/applet.js:3342 6.4/applet.js:3314
 msgid "Applet Preferences"
 msgstr "Preferencias del applet"
 
-#. 4.0/applet.js:3270 6.0/applet.js:3270 6.4/applet.js:3242
+#. 4.0/applet.js:3346 6.0/applet.js:3346 6.4/applet.js:3318
 msgid "About..."
 msgstr "Acerca de..."
 
-#. 4.0/applet.js:3274 6.0/applet.js:3274 6.4/applet.js:3246
+#. 4.0/applet.js:3350 6.0/applet.js:3350 6.4/applet.js:3322
 msgid "Configure..."
 msgstr "Configurar..."
 
-#. 4.0/applet.js:3278 6.0/applet.js:3278 6.4/applet.js:3250
+#. 4.0/applet.js:3354 6.0/applet.js:3354 6.4/applet.js:3326
 msgid "Website"
 msgstr "Sitio web"
 
-#. 4.0/applet.js:3282 6.0/applet.js:3282 6.4/applet.js:3254
+#. 4.0/applet.js:3358 6.0/applet.js:3358 6.4/applet.js:3330
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#. 4.0/applet.js:3284 6.0/applet.js:3284 6.4/applet.js:3256
+#. 4.0/applet.js:3360 6.0/applet.js:3360 6.4/applet.js:3332
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 
@@ -65,76 +69,80 @@ msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3293 6.0/applet.js:3293 6.4/applet.js:3265
+#. 4.0/applet.js:3369 6.0/applet.js:3369 6.4/applet.js:3341
 msgid "Open new window"
 msgstr "Abrir nueva ventana"
 
-#. 4.0/applet.js:3301 6.0/applet.js:3301 6.4/applet.js:3273
+#. 4.0/applet.js:3377 6.0/applet.js:3377 6.4/applet.js:3349
 msgid "Remove from panel"
 msgstr "Quitar del panel"
 
-#. 4.0/applet.js:3303 6.0/applet.js:3303 6.4/applet.js:3275
+#. 4.0/applet.js:3379 6.0/applet.js:3379 6.4/applet.js:3351
 msgid "Remove from this workspace"
 msgstr "Eliminar de este espacio de trabajo"
 
-#. 4.0/applet.js:3309 6.0/applet.js:3309 6.4/applet.js:3281
+#. 4.0/applet.js:3385 6.0/applet.js:3385 6.4/applet.js:3357
 msgid "Pin to panel"
 msgstr "Anclar al panel"
 
-#. 4.0/applet.js:3311 6.0/applet.js:3311 6.4/applet.js:3283
+#. 4.0/applet.js:3387 6.0/applet.js:3387 6.4/applet.js:3359
 msgid "Pin to this workspace"
 msgstr "Anclar a este espacio de trabajo"
 
-#. 4.0/applet.js:3352 6.0/applet.js:3352 6.4/applet.js:3324
+#. 4.0/applet.js:3428 6.0/applet.js:3428 6.4/applet.js:3400
 msgid "Pin to other workspaces"
 msgstr "Anclar a otros espacios de trabajo"
 
-#. 4.0/applet.js:3373 6.0/applet.js:3373 6.4/applet.js:3345
+#. 4.0/applet.js:3449 6.0/applet.js:3449 6.4/applet.js:3421
 msgid "Pin to all workspaces"
 msgstr "Anclar a todos los espacios de trabajo"
 
-#. 4.0/applet.js:3391 6.0/applet.js:3391 6.4/applet.js:3363
+#. 4.0/applet.js:3467 6.0/applet.js:3467 6.4/applet.js:3439
 msgid "Pin to launcher"
 msgstr "Anclar al lanzador"
 
-#. 4.0/applet.js:3409 4.0/applet.js:3614 6.0/applet.js:3409 6.0/applet.js:3614
-#. 6.4/applet.js:3381 6.4/applet.js:3583
+#. 4.0/applet.js:3485 4.0/applet.js:3706 6.0/applet.js:3485 6.0/applet.js:3706
+#. 6.4/applet.js:3457 6.4/applet.js:3675
 msgid "Add new Hotkey for"
 msgstr "Añadir nueva tecla de acceso rápido para"
 
-#. 4.0/applet.js:3423 6.0/applet.js:3423 6.4/applet.js:3395
+#. 4.0/applet.js:3499 6.0/applet.js:3499 6.4/applet.js:3471
 msgid "Recent files"
 msgstr "Archivos recientes"
 
-#. 4.0/applet.js:3447 6.0/applet.js:3447 6.4/applet.js:3419
+#. 4.0/applet.js:3523 6.0/applet.js:3523 6.4/applet.js:3495
 msgid "Places"
 msgstr "Lugares"
 
-#. 4.0/applet.js:3490 6.0/applet.js:3490 6.4/applet.js:3462
+#. 4.0/applet.js:3562 6.0/applet.js:3562 6.4/applet.js:3534
+msgid "Prioritize window list position"
+msgstr "Priorizar la posición de la lista de ventanas"
+
+#. 4.0/applet.js:3582 6.0/applet.js:3582 6.4/applet.js:3554
 msgid "Always on top"
 msgstr "Siempre arriba"
 
-#. 4.0/applet.js:3502 6.0/applet.js:3502 6.4/applet.js:3474
+#. 4.0/applet.js:3594 6.0/applet.js:3594 6.4/applet.js:3566
 msgid "Only on this workspace"
 msgstr "Sólo en este espacio de trabajo"
 
-#. 4.0/applet.js:3504 6.0/applet.js:3504 6.4/applet.js:3476
+#. 4.0/applet.js:3596 6.0/applet.js:3596 6.4/applet.js:3568
 msgid "Visible on all workspaces"
 msgstr "Visible en todos los espacios de trabajo"
 
-#. 4.0/applet.js:3505 6.0/applet.js:3505 6.4/applet.js:3477
+#. 4.0/applet.js:3597 6.0/applet.js:3597 6.4/applet.js:3569
 msgid "Move to another workspace"
 msgstr "Mover a otro espacio de trabajo"
 
-#. 4.0/applet.js:3514 6.0/applet.js:3514 6.4/applet.js:3486
+#. 4.0/applet.js:3606 6.0/applet.js:3606 6.4/applet.js:3578
 msgid " (this workspace)"
 msgstr " (este espacio de trabajo)"
 
-#. 4.0/applet.js:3527 6.0/applet.js:3527 6.4/applet.js:3499
+#. 4.0/applet.js:3619 6.0/applet.js:3619 6.4/applet.js:3591
 msgid "Move to another monitor"
 msgstr "Mover a otro monitor"
 
-#. 4.0/applet.js:3535 6.0/applet.js:3535 6.4/applet.js:3507
+#. 4.0/applet.js:3627 6.0/applet.js:3627 6.4/applet.js:3599
 msgid "Monitor"
 msgstr "Monitor"
 
@@ -156,48 +164,48 @@ msgstr "Monitor"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3552 6.0/applet.js:3552 6.4/applet.js:3521
+#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
 msgid "Move window here"
 msgstr "Mover la ventana aquí"
 
-#. 4.0/applet.js:3569 6.0/applet.js:3569 6.4/applet.js:3538
+#. 4.0/applet.js:3661 6.0/applet.js:3661 6.4/applet.js:3630
 msgid "unassigned"
 msgstr "no asignado"
 
-#. 4.0/applet.js:3580 4.0/applet.js:3611 6.0/applet.js:3580 6.0/applet.js:3611
-#. 6.4/applet.js:3549 6.4/applet.js:3580
+#. 4.0/applet.js:3672 4.0/applet.js:3703 6.0/applet.js:3672 6.0/applet.js:3703
+#. 6.4/applet.js:3641 6.4/applet.js:3672
 msgid "Assign window to a hotkey"
 msgstr "Asignar ventana a una tecla de acceso rápido"
 
-#. 4.0/applet.js:3634 6.0/applet.js:3634 6.4/applet.js:3603
+#. 4.0/applet.js:3726 6.0/applet.js:3726 6.4/applet.js:3695
 msgid "Change application label contents"
 msgstr "Cambiar el contenido de la etiqueta de la aplicación"
 
-#. 4.0/applet.js:3637 6.0/applet.js:3637 6.4/applet.js:3606
+#. 4.0/applet.js:3729 6.0/applet.js:3729 6.4/applet.js:3698
 msgid "Remove custom setting"
 msgstr "Eliminar configuración personalizada"
 
-#. 4.0/applet.js:3644 6.0/applet.js:3644 6.4/applet.js:3613
+#. 4.0/applet.js:3736 6.0/applet.js:3736 6.4/applet.js:3705
 msgid "Use window title"
 msgstr "Utilizar título de ventana"
 
-#. 4.0/applet.js:3651 6.0/applet.js:3651 6.4/applet.js:3620
+#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
 msgid "Use application name"
 msgstr "Utilizar nombre de aplicación"
 
-#. 4.0/applet.js:3658 6.0/applet.js:3658 6.4/applet.js:3627
+#. 4.0/applet.js:3750 6.0/applet.js:3750 6.4/applet.js:3719
 msgid "No label"
 msgstr "Sin etiqueta"
 
-#. 4.0/applet.js:3669 6.0/applet.js:3669 6.4/applet.js:3638
+#. 4.0/applet.js:3765 6.0/applet.js:3765 6.4/applet.js:3734
 msgid "Ungroup application windows"
 msgstr "Ventanas de aplicaciones separadas"
 
-#. 4.0/applet.js:3677 6.0/applet.js:3677 6.4/applet.js:3646
+#. 4.0/applet.js:3773 6.0/applet.js:3773 6.4/applet.js:3742
 msgid "Group application windows"
 msgstr "Ventanas de aplicaciones agrupadas"
 
-#. 4.0/applet.js:3690 6.0/applet.js:3690 6.4/applet.js:3659
+#. 4.0/applet.js:3786 6.0/applet.js:3786 6.4/applet.js:3755
 msgid "Automatic grouping/ungrouping"
 msgstr "Agrupación/desagrupación automática"
 
@@ -219,39 +227,39 @@ msgstr "Agrupación/desagrupación automática"
 #. 6.4->settings-schema.json->mouse-action-btn2->options
 #. 6.4->settings-schema.json->mouse-action-btn8->options
 #. 6.4->settings-schema.json->mouse-action-btn9->options
-#. 4.0/applet.js:3718 6.0/applet.js:3718 6.4/applet.js:3687
+#. 4.0/applet.js:3814 6.0/applet.js:3814 6.4/applet.js:3783
 msgid "Move titlebar on to screen"
 msgstr "Mover la barra de título a la pantalla"
 
-#. 4.0/applet.js:3723 6.0/applet.js:3723 6.4/applet.js:3692
+#. 4.0/applet.js:3819 6.0/applet.js:3819 6.4/applet.js:3788
 msgid "Restore"
 msgstr "Restaurar"
 
-#. 4.0/applet.js:3727 6.0/applet.js:3727 6.4/applet.js:3696
+#. 4.0/applet.js:3823 6.0/applet.js:3823 6.4/applet.js:3792
 msgid "Minimize"
 msgstr "Minimizar"
 
-#. 4.0/applet.js:3733 6.0/applet.js:3733 6.4/applet.js:3702
+#. 4.0/applet.js:3829 6.0/applet.js:3829 6.4/applet.js:3798
 msgid "Unmaximize"
 msgstr "Desmaximizar"
 
-#. 4.0/applet.js:3741 6.0/applet.js:3741 6.4/applet.js:3710
+#. 4.0/applet.js:3837 6.0/applet.js:3837 6.4/applet.js:3806
 msgid "Close others"
 msgstr "Cerrar otros"
 
-#. 4.0/applet.js:3743 6.0/applet.js:3743 6.4/applet.js:3712
+#. 4.0/applet.js:3839 6.0/applet.js:3839 6.4/applet.js:3808
 msgid "Close other windows for application"
 msgstr "Cerrar otras ventanas para la aplicación"
 
-#. 4.0/applet.js:3764 6.0/applet.js:3764 6.4/applet.js:3733
+#. 4.0/applet.js:3860 6.0/applet.js:3860 6.4/applet.js:3829
 msgid "Close all"
 msgstr "Cerrar todo"
 
-#. 4.0/applet.js:3766 6.0/applet.js:3766 6.4/applet.js:3735
+#. 4.0/applet.js:3862 6.0/applet.js:3862 6.4/applet.js:3831
 msgid "Close all windows for application"
 msgstr "Cerrar todas las ventanas para la aplicación"
 
-#. 4.0/applet.js:3782 6.0/applet.js:3782 6.4/applet.js:3751
+#. 4.0/applet.js:3878 6.0/applet.js:3878 6.4/applet.js:3847
 msgid "Close"
 msgstr "Cerrar"
 
@@ -291,6 +299,12 @@ msgstr "Etiquetas"
 msgid "General"
 msgstr "General"
 
+#. 4.0->settings-schema.json->mouse-page->title
+#. 6.0->settings-schema.json->mouse-page->title
+#. 6.4->settings-schema.json->mouse-page->title
+msgid "Mouse"
+msgstr "Ratón"
+
 #. 4.0->settings-schema.json->preview-page->title
 #. 6.0->settings-schema.json->preview-page->title
 #. 6.4->settings-schema.json->preview-page->title
@@ -318,8 +332,14 @@ msgstr "Configuración de la etiqueta del botón de la lista de ventanas"
 #. 4.0->settings-schema.json->caption-number-settings->title
 #. 6.0->settings-schema.json->caption-number-settings->title
 #. 6.4->settings-schema.json->caption-number-settings->title
-msgid "Number label settings"
-msgstr "Configuración de la etiqueta numérica"
+msgid "Icon overlay label settings"
+msgstr "Configuración de la etiqueta de superposición de iconos"
+
+#. 4.0->settings-schema.json->caption-progress-settings->title
+#. 6.0->settings-schema.json->caption-progress-settings->title
+#. 6.4->settings-schema.json->caption-progress-settings->title
+msgid "Progress settings"
+msgstr "Configuración de progreso"
 
 #. 4.0->settings-schema.json->general-settings->title
 #. 6.0->settings-schema.json->general-settings->title
@@ -395,13 +415,10 @@ msgstr "Nunca"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
-#. 4.0->settings-schema.json->display-number->options
 #. 6.0->settings-schema.json->display-caption-for->options
 #. 6.0->settings-schema.json->display-caption-for-pined->options
-#. 6.0->settings-schema.json->display-number->options
 #. 6.4->settings-schema.json->display-caption-for->options
 #. 6.4->settings-schema.json->display-caption-for-pined->options
-#. 6.4->settings-schema.json->display-number->options
 msgid "Always"
 msgstr "Siempre"
 
@@ -460,7 +477,7 @@ msgstr "Mostrar etiquetas para los botones anclados"
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
-"Running: Only pinned window that are running will have a label\n"
+"Running: Only pinned windows that are running will have a label\n"
 "Focused: Only the pinned window with focus will have a label"
 msgstr ""
 "Nunca: Ninguna ventana anclada tendrá etiqueta\n"
@@ -531,13 +548,31 @@ msgid "Minimized and pinned"
 msgstr "Minimizado y anclado"
 
 #. 4.0->settings-schema.json->display-indicators->options
-#. 4.0->settings-schema.json->group-windows->options
+#. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->display-indicators->options
-#. 6.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->number-type->options
 #. 6.4->settings-schema.json->display-indicators->options
-#. 6.4->settings-schema.json->group-windows->options
-msgid "Automatic"
-msgstr "Automático"
+#. 6.4->settings-schema.json->number-type->options
+msgid "Application group window count"
+msgstr "Recuento de ventanas de grupos de aplicaciones"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Application group indicator (⋮)"
+msgstr "Indicador de grupo de aplicaciones (⋮)"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Workspace number (smart)"
+msgstr "Número de espacio de trabajo (inteligente)"
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.4->settings-schema.json->display-indicators->options
+msgid "Monitor number (smart)"
+msgstr "Número del monitor (inteligente)"
 
 #. 4.0->settings-schema.json->display-indicators->description
 #. 6.0->settings-schema.json->display-indicators->description
@@ -549,35 +584,32 @@ msgstr "Mostrar indicadores de estado"
 #. 6.0->settings-schema.json->display-indicators->tooltip
 #. 6.4->settings-schema.json->display-indicators->tooltip
 msgid ""
-"Choose if the minimized and the pinned indicator characters will be "
-"prepended to button label text. Buttons without a text label will not "
-"reserve as much space.\n"
-"Automatic: The minimized and pinned indicators will only show when space is "
-"not constrained."
+"Controls what information is prepended to the button label text. On "
+"horizontal panels this data is shown even when the primary label contents "
+"are removed. Setting this to None will allow for the smallest button size. "
+"When on vertical panels this setting is ignored."
 msgstr ""
-"Elija si los caracteres indicadores de minimizado y anclado se antepondrán "
-"al texto de la etiqueta del botón. Los botones sin etiqueta de texto no "
-"reservarán tanto espacio.\n"
-"Automático: Los indicadores de minimizado y anclado sólo se mostrarán cuando "
-"no haya restricciones de espacio."
+"Controla la información que se añade al texto de la etiqueta del botón. En "
+"los paneles horizontales, estos datos se muestran incluso cuando se elimina "
+"el contenido de la etiqueta principal. Si se establece en Ninguno, el tamaño "
+"del botón será el más pequeño. En los paneles verticales, esta opción se "
+"ignora."
 
-#. 4.0->settings-schema.json->show-ellipsis-for-groups->description
-#. 6.0->settings-schema.json->show-ellipsis-for-groups->description
-#. 6.4->settings-schema.json->show-ellipsis-for-groups->description
-msgid "Show a vertical ellipsis (...) for grouped buttons"
-msgstr "Mostrar una elipsis vertical (...) para los botones agrupados"
+#. 4.0->settings-schema.json->auto-hide-indicators->description
+#. 6.0->settings-schema.json->auto-hide-indicators->description
+#. 6.4->settings-schema.json->auto-hide-indicators->description
+msgid "Hide status indicators when space is limited"
+msgstr "Ocultar los indicadores de estado cuando el espacio es limitado"
 
-#. 4.0->settings-schema.json->show-ellipsis-for-groups->tooltip
-#. 6.0->settings-schema.json->show-ellipsis-for-groups->tooltip
-#. 6.4->settings-schema.json->show-ellipsis-for-groups->tooltip
+#. 4.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.0->settings-schema.json->auto-hide-indicators->tooltip
+#. 6.4->settings-schema.json->auto-hide-indicators->tooltip
 msgid ""
-"Prepend a vertical ellipsis unicode charter to the labels for grouped window-"
-"list buttons with more then one window. When on a vertical panel this option "
-"is not possible and the setting will be ignored."
+"Hide status indicators when window list space is limited causing button "
+"labels to shrink"
 msgstr ""
-"Anteponer una carta unicode de elipsis vertical a las etiquetas de los "
-"botones de lista de ventanas agrupadas con más de una ventana. En un panel "
-"vertical, esta opción no es posible y la configuración se ignorará."
+"Ocultar los indicadores de estado cuando el espacio de la lista de ventanas "
+"es limitado, lo que hace que las etiquetas de los botones se encojan"
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
 #. 6.0->settings-schema.json->trailing-pinned-behaviour->description
@@ -646,15 +678,16 @@ msgstr ""
 #. 6.4->settings-schema.json->hover-peek-delay->tooltip
 msgid ""
 "This defines the mouse hover time before a full size window preview will "
-"appear. It applies when hovering over either window-list buttons or "
+"appear. It applies when hovering over either window list buttons or "
 "thumbnail menu items (of course one of the full size window preview options "
 "must be enabled for this option to have any effect)"
 msgstr ""
-"Esto define el tiempo que pasa el mouse antes de que aparezca una vista "
-"previa de la ventana en tamaño completo. Se aplica al pasar el cursor sobre "
-"los botones de la lista de ventanas o los elementos del menú en miniatura "
-"(por supuesto, una de las opciones de vista previa de la ventana de tamaño "
-"completo debe estar habilitada para que esta opción tenga algún efecto)"
+"Esto define el tiempo que pasa el ratón por encima antes de que aparezca una "
+"vista previa de la ventana a tamaño completo. Se aplica al pasar el ratón "
+"por encima de los botones de la lista de ventanas o de los elementos del "
+"menú de miniaturas (por supuesto, una de las opciones de vista previa de la "
+"ventana a tamaño completo debe estar activada para que esta opción tenga "
+"algún efecto)."
 
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
@@ -700,8 +733,8 @@ msgstr "Nada"
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
 #. 6.4->settings-schema.json->number-type->options
-msgid "Application group window count"
-msgstr "Recuento de ventanas de grupos de aplicaciones"
+msgid "Application group indicator (…)"
+msgstr "Indicador de grupo de aplicaciones (...)"
 
 #. 4.0->settings-schema.json->number-type->options
 #. 6.0->settings-schema.json->number-type->options
@@ -715,68 +748,98 @@ msgstr "Número de espacio de trabajo"
 msgid "Monitor number"
 msgstr "Número de monitor"
 
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Two characters from the window title"
+msgstr "Dos caracteres del título de la ventana"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Minimized indicator"
+msgstr "Indicador de minimizado"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Pinned indicator"
+msgstr "Indicador fijado"
+
+#. 4.0->settings-schema.json->number-type->options
+#. 6.0->settings-schema.json->number-type->options
+#. 6.4->settings-schema.json->number-type->options
+msgid "Minimized and pinned indicators"
+msgstr "Indicadores minimizados y fijados"
+
 #. 4.0->settings-schema.json->number-type->description
 #. 6.0->settings-schema.json->number-type->description
 #. 6.4->settings-schema.json->number-type->description
-msgid "Number label contents"
-msgstr "Contenido de la etiqueta numérica"
-
-#. 4.0->settings-schema.json->display-number->options
-#. 6.0->settings-schema.json->display-number->options
-#. 6.4->settings-schema.json->display-number->options
-msgid "Smart"
-msgstr "Inteligente"
+msgid "Icon overlay label contents"
+msgstr "Contenido de la etiqueta de superposición de iconos"
 
 #. 4.0->settings-schema.json->display-number->description
 #. 6.0->settings-schema.json->display-number->description
 #. 6.4->settings-schema.json->display-number->description
-msgid "Display number"
-msgstr "Mostrar número"
+msgid "Only display label when needed"
+msgstr "Mostrar la etiqueta sólo cuando sea necesario"
 
 #. 4.0->settings-schema.json->display-number->tooltip
 #. 6.0->settings-schema.json->display-number->tooltip
 #. 6.4->settings-schema.json->display-number->tooltip
 msgid ""
-"Controls when the number label is used. Smart means the the label will only "
-"appear when it is appropriate depending on the number label contents setting "
-"above. i.e. When there is two or more windows in a group, or when the "
-"windows workspace or monitor does not match the current one."
+"With this option enabled, the icon overlay label will only appear when it is "
+"appropriate depending on the label content (i.e. When there are two or more "
+"windows in a group, or when the windows workspace or monitor does not match "
+"the current one). When this option is disabled the label is always shown"
 msgstr ""
-"Controla cuándo se utiliza la etiqueta numérica. Inteligente significa que "
-"la etiqueta sólo aparecerá cuando sea apropiado en función de la "
-"configuración del contenido de la etiqueta numérica anterior, es decir, "
-"cuando haya dos o más ventanas en un grupo, o cuando el espacio de trabajo o "
-"monitor de la ventana no coincida con el actual."
+"Con esta opción activada, la etiqueta de superposición de iconos sólo "
+"aparecerá cuando sea apropiado en función del contenido de la etiqueta (es "
+"decir, cuando haya dos o más ventanas en un grupo, o cuando el espacio de "
+"trabajo o monitor de la ventana no coincida con el actual). Cuando esta "
+"opción está desactivada, la etiqueta se muestra siempre"
 
-#. 4.0->settings-schema.json->number-style->options
-#. 6.0->settings-schema.json->number-style->options
-#. 6.4->settings-schema.json->number-style->options
-msgid "Icon overlay"
-msgstr "Superponer icono"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->display-pinned->options
+#. 6.4->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr "Desactivado"
 
-#. 4.0->settings-schema.json->number-style->options
-#. 6.0->settings-schema.json->number-style->options
-#. 6.4->settings-schema.json->number-style->options
-msgid "Label prepend"
-msgstr "Añadir etiqueta"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+msgid "Using icon overlay label"
+msgstr "Uso de la etiqueta de superposición de iconos"
 
-#. 4.0->settings-schema.json->number-style->description
-#. 6.0->settings-schema.json->number-style->description
-#. 6.4->settings-schema.json->number-style->description
-msgid "Number style"
-msgstr "Estilo de número"
+#. 4.0->settings-schema.json->progress-display-type->options
+#. 6.0->settings-schema.json->progress-display-type->options
+#. 6.4->settings-schema.json->progress-display-type->options
+msgid "Prepended to button label"
+msgstr "Precedido a la etiqueta del botón"
 
-#. 4.0->settings-schema.json->number-style->tooltip
-#. 6.0->settings-schema.json->number-style->tooltip
-#. 6.4->settings-schema.json->number-style->tooltip
+#. 4.0->settings-schema.json->progress-display-type->description
+#. 6.0->settings-schema.json->progress-display-type->description
+#. 6.4->settings-schema.json->progress-display-type->description
+msgid "Display window progress information (%)"
+msgstr "Mostrar información del progreso de la ventana (%)"
+
+#. 4.0->settings-schema.json->progress-display-type->tooltip
+#. 6.0->settings-schema.json->progress-display-type->tooltip
+#. 6.4->settings-schema.json->progress-display-type->tooltip
 msgid ""
-"Controls how the number label is presented. When on a vertical panel or when "
-"in launcher mode, the \"label prepend\" option is not possible so \"icon "
-"overlay\" will be used instead"
+"Controls how a windows progress information is presented on the window list "
+"(i.e copying in File Manager, downloading in Firefox, updating in Update "
+"Manager, etc.). When on vertical panels the \"Prepended to button label\" "
+"option will be ignored and icon overlay will be used in its place."
 msgstr ""
-"Controla cómo se presenta la etiqueta numérica. En un panel vertical o en "
-"modo lanzador, no es posible utilizar la opción \"etiqueta previa\", por lo "
-"que se utilizará \"icono superpuesto\""
+"Controla cómo se presenta la información de progreso de una ventana en la "
+"lista de ventanas (por ejemplo, copiando en el Gestor de Archivos, "
+"descargando en Firefox, actualizando en el Gestor de Actualizaciones, etc.). "
+"En los paneles verticales, se ignorará la opción \"Añadir a la etiqueta del "
+"botón\" y se utilizará un icono superpuesto en su lugar."
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -789,6 +852,12 @@ msgstr "Agrupadas"
 #. 6.4->settings-schema.json->group-windows->options
 msgid "Pooled"
 msgstr "Agrupado"
+
+#. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
+#. 6.4->settings-schema.json->group-windows->options
+msgid "Automatic"
+msgstr "Automático"
 
 #. 4.0->settings-schema.json->group-windows->options
 #. 6.0->settings-schema.json->group-windows->options
@@ -816,22 +885,16 @@ msgid ""
 "Pooled: All window list buttons for an application are pooled side by side,\n"
 "Automatic: Windows are pooled, and then grouped when space is limited,\n"
 "One to one: Each window gets their own button with no forced ordering,\n"
-"Launcher: Only pinned button are shown, behaves like a panel launcher."
+"Launcher: Only pinned buttons are shown, behaves like a panel launcher."
 msgstr ""
-"Agrupadas: Todas las ventanas de una aplicación se gestionan mediante un "
+"Agrupadas: Todas las ventanas de una aplicación se gestionan con un solo "
 "botón,\n"
 "Agrupado: Todos los botones de lista de ventanas de una aplicación se "
 "agrupan uno al lado del otro,\n"
-"Automáticas: Las ventanas se agrupan cuando el espacio es limitado,\n"
+"Automático: Las ventanas se agrupan cuando el espacio es limitado,\n"
 "Uno a uno: Cada ventana tiene su propio botón sin orden forzado,\n"
-"Lanzador: Sólo se muestra el botón anclado, se comporta como un lanzador de "
-"paneles."
-
-#. 4.0->settings-schema.json->display-pinned->options
-#. 6.0->settings-schema.json->display-pinned->options
-#. 6.4->settings-schema.json->display-pinned->options
-msgid "Disabled"
-msgstr "Desactivado"
+"Launcher: Sólo se muestran los botones anclados, se comporta como un "
+"lanzador de paneles."
 
 #. 4.0->settings-schema.json->display-pinned->options
 #. 6.0->settings-schema.json->display-pinned->options
@@ -877,7 +940,7 @@ msgstr "Sincronizar los botones de inicio en todas las áreas de trabajo"
 #. 6.4->settings-schema.json->synchronize-pinned->tooltip
 msgid ""
 "If enabled, the number and order of launcher buttons on the panel will be "
-"synchronize across all workspaces."
+"synchronized across all workspaces."
 msgstr ""
 "Si se activa, el número y el orden de los botones de inicio del panel se "
 "sincronizarán en todos los espacios de trabajo."
@@ -903,6 +966,34 @@ msgstr ""
 #. 6.4->settings-schema.json->show-windows-for-all-workspaces->description
 msgid "Include windows from all workspaces"
 msgstr "Incluir ventanas de todos los espacios de trabajo"
+
+#. 4.0->settings-schema.json->remember-button-order->description
+#. 6.0->settings-schema.json->remember-button-order->description
+#. 6.4->settings-schema.json->remember-button-order->description
+msgid "Allow prioritizing window list button order"
+msgstr "Permitir priorizar el orden de los botones de la lista de ventanas"
+
+#. 4.0->settings-schema.json->remember-button-order->tooltip
+#. 6.0->settings-schema.json->remember-button-order->tooltip
+#. 6.4->settings-schema.json->remember-button-order->tooltip
+msgid ""
+"Enabling this option makes it easy for you to control where your favorite "
+"applications will appear on the window list. This is achieved by maintaining "
+"a persistent position priority order for applications. New Window list "
+"buttons for applications with priority will appear in priority order and "
+"ahead of applications without priority. Using drag-and-drop will "
+"automatically add to and reorder the priority list. The \"Prioritize window "
+"list position\" context menu option allows you to add and remove an "
+"application from the priority list."
+msgstr ""
+"Activar esta opción le facilita controlar dónde aparecerán sus aplicaciones "
+"favoritas en la lista de ventanas. Esto se consigue manteniendo un orden de "
+"prioridad de posición persistente para las aplicaciones. Los botones de la "
+"lista de ventanas nuevas para aplicaciones con prioridad aparecerán en orden "
+"de prioridad y por delante de las aplicaciones sin prioridad. Al arrastrar y "
+"soltar se añadirán y reordenarán automáticamente en la lista de prioridades. "
+"La opción del menú contextual \"Priorizar posición de la lista de ventanas\" "
+"permite añadir y eliminar una aplicación de la lista de prioridades."
 
 #. 4.0->settings-schema.json->show-tooltips->description
 #. 6.0->settings-schema.json->show-tooltips->description
@@ -974,13 +1065,13 @@ msgstr ""
 #. 6.4->settings-schema.json->hover-peek-windowlist->tooltip
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
-"hovering over a window-list button. The delay before the preview appears is "
+"hovering over a window list button. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
-"Si se activa, aparecerá una ventana de previsualización a tamaño completo "
-"cuando el puntero del ratón se sitúe sobre un botón de la lista de ventanas. "
-"El retardo antes de que aparezca la vista previa se controla mediante una "
-"opción de la pestaña Avanzado"
+"Si está activada, aparecerá una ventana de previsualización a tamaño "
+"completo cuando el puntero del ratón se sitúe sobre un botón de lista de "
+"ventanas. El retardo antes de que aparezca la vista previa se controla "
+"mediante una opción de la pestaña Avanzado"
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
@@ -992,8 +1083,8 @@ msgstr "Cambio automático de enfoque al salir del panel"
 #. 6.0->settings-schema.json->no-click-activate->tooltip
 #. 6.4->settings-schema.json->no-click-activate->tooltip
 msgid ""
-"If enabled, the current window for a window-list button will get the focus "
-"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"If enabled, the current window for a window list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window list with Ctrl "
 "or Shift held or while remaining on the panel will leave the focus "
 "unchanged. This option is typically used in conjunction with the preview "
 "hovering option above."
@@ -1086,16 +1177,16 @@ msgstr "Ordenar los elementos del menú de miniaturas de botones agrupados"
 #. 6.0->settings-schema.json->menu-sort-groups->tooltip
 #. 6.4->settings-schema.json->menu-sort-groups->tooltip
 msgid ""
-"If enabled, the thumbnail menu will be sorted first by workspace and the by "
+"If enabled, the thumbnail menu will be sorted first by workspace and then by "
 "monitor number for grouped buttons. Pooled windows can not be sorted since "
-"the order is the same as the order on the window-list panel. With this "
+"the order is the same as the order on the window list panel. With this "
 "option enabled, the thumbnail menu drag-and-drop reordering feature will be "
 "disabled for grouped button thumbnail menus."
 msgstr ""
 "Si se activa, el menú de miniaturas se ordenará primero por espacio de "
 "trabajo y después por número de monitor para los botones agrupados. Las "
 "ventanas agrupadas no se pueden ordenar, ya que el orden es el mismo que el "
-"del panel de la lista de ventanas. Con esta opción activada, la función de "
+"del panel de lista de ventanas. Con esta opción activada, la función de "
 "reordenación mediante arrastrar y soltar del menú de miniaturas estará "
 "desactivada para los menús de miniaturas de botones agrupados."
 
@@ -1116,7 +1207,7 @@ msgstr "Mostrar miniaturas de todas las ventanas de un grupo de aplicaciones"
 #. 6.4->settings-schema.json->menu-all-windows-of-auto->tooltip
 msgid ""
 "If enabled, a popup menu will contain all the application windows in the "
-"application pool rather then just the selected window within the application "
+"application pool rather than just the selected window within the application "
 "pool"
 msgstr ""
 "Si se activa, un menú emergente contendrá todas las ventanas de la "
@@ -2121,7 +2212,7 @@ msgstr "Cambiar mosaico de ventana"
 #. 4.0->settings-schema.json->mouse-action-scroll->options
 #. 6.0->settings-schema.json->mouse-action-scroll->options
 #. 6.4->settings-schema.json->mouse-action-scroll->options
-msgid "Cycle all window-list button windows"
+msgid "Cycle all window list button windows"
 msgstr "Desplazarse por los botones de las ventanas de la lista"
 
 #. 4.0->settings-schema.json->mouse-action-scroll->options
@@ -2274,25 +2365,27 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-sequence->description
 #. 6.0->settings-schema.json->hotkey-sequence->description
 #. 6.4->settings-schema.json->hotkey-sequence->description
-msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
+msgid "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)"
 msgstr ""
-"Teclas de acceso rápido numéricas inteligentes (el uso de \"1\" se amplía "
-"automáticamente a 1-9)"
+"Teclas de acceso rápido numéricas inteligentes (el uso de \"1\" se extiende "
+"automáticamente al 0-9)"
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.0->settings-schema.json->hotkey-sequence->tooltip
 #. 6.4->settings-schema.json->hotkey-sequence->tooltip
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
-"automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
-"first 9 windows of the assigned application, as ordered on the window-list, "
-"will be activated by the 9 hotkeys."
+"automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The "
+"first 10 windows of the assigned application, as ordered on the window list, "
+"will be activated by the 10 hotkeys. The 1st window is activated by hotkey 1 "
+"and 10th window is activated by hotkey 0"
 msgstr ""
 "Si está activada, las teclas de acceso rápido que terminan con la tecla "
 "\"1\" (es decir, Alt+1) crearán automáticamente las teclas de acceso rápido "
-"1 a 9 (es decir, Alt+1 a Alt+9). Las 9 primeras ventanas de la aplicación "
-"asignada, ordenadas en la lista de ventanas, se activarán mediante las 9 "
-"teclas de acceso rápido."
+"0 a 9 (es decir, Alt+0 a Alt+9). Las 10 primeras ventanas de la aplicación "
+"asignada, ordenadas en la lista de ventanas, se activarán mediante las 10 "
+"teclas de acceso rápido. La 1ª ventana se activa con la tecla de acceso "
+"rápido 1 y la 10ª ventana se activa con la tecla de acceso rápido 0"
 
 #. 4.0->settings-schema.json->hotkey-grave-help->description
 #. 6.0->settings-schema.json->hotkey-grave-help->description
@@ -2307,13 +2400,13 @@ msgstr ""
 #. 6.4->settings-schema.json->hotkey-grave-help->tooltip
 msgid ""
 "If enabled, The hotkey modifier(s) + ` will be registered for each unique "
-"modifier set defined in the hotkey list. Using these hotkeys will temporally "
-"show a hotkey hint bubble over the button icons."
+"modifier set defined in the hotkey list. Using these hotkeys will "
+"temporarily show a hotkey hint bubble over the button icons."
 msgstr ""
-"Si se activa, el/los modificador(es) de teclas de acceso rápido + ` se "
+"Si se activa, el modificador(es) de teclas de acceso rápido + ` se "
 "registrará para cada conjunto de modificadores único definido en la lista de "
 "teclas de acceso rápido. El uso de estas teclas de acceso rápido mostrará "
-"temporalmente una burbuja de sugerencia sobre los iconos de los botones."
+"temporalmente una burbuja de sugerencias sobre los iconos de los botones."
 
 #. 4.0->settings-schema.json->hotkey-help->description
 #. 6.0->settings-schema.json->hotkey-help->description
@@ -2470,7 +2563,7 @@ msgstr "Botones para ventanas en otros monitores"
 #. 4.0->settings-schema.json->saturation-application->options
 #. 6.0->settings-schema.json->saturation-application->options
 #. 6.4->settings-schema.json->saturation-application->options
-msgid "All buttons excepted focused window"
+msgid "All buttons except the focused window"
 msgstr "Todos los botones excepto la ventana enfocada"
 
 #. 4.0->settings-schema.json->saturation-application->description
@@ -2514,11 +2607,11 @@ msgstr ""
 #. SetupWizard.ui:125
 msgid ""
 "Panel Launcher (Quick launcher)\n"
-"Panel button only appear when you add items\n"
+"Panel buttons only appear when you pin items\n"
 "to the panel, no labels are shown, only icons."
 msgstr ""
 "Panel Launcher (Lanzador rápido)\n"
-"El botón del panel sólo aparece cuando se añaden elementos\n"
+"Los botones del panel sólo aparecen cuando\n"
 "al panel, no se muestran etiquetas, sólo iconos."
 
 #. SetupWizard.ui:146
@@ -2536,7 +2629,7 @@ msgstr "¿Cómo quiere que funcione su lista de ventanas?"
 #. SetupWizard.ui:192
 msgid ""
 "Basic  -  Quick window access\n"
-"Every window gets it's own window list button.\n"
+"Every window gets its own window list button.\n"
 "Button labels are window titles."
 msgstr ""
 "Básico - Acceso rápido a las ventanas\n"
@@ -2550,7 +2643,7 @@ msgid ""
 "Thumbnail menus to select specific window.\n"
 "Button labels are window titles."
 msgstr ""
-"Agrupación - Muy compacto\n"
+"Muy agrupado - Muy compacto\n"
 "Un botón de lista de ventanas por aplicación.\n"
 "Menús en miniatura para seleccionar una ventana concreta.\n"
 "Las etiquetas de los botones son los títulos de las ventanas."
@@ -2558,12 +2651,12 @@ msgstr ""
 #. SetupWizard.ui:236
 msgid ""
 "Pooling  -  Quick access & compact\n"
-"Every window gets it's own window list button.\n"
-"Application buttons are pooled togeather.\n"
+"Every window gets its own window list button.\n"
+"Application buttons are pooled together.\n"
 "One button label per application pool.\n"
 "Button labels are application names."
 msgstr ""
-"Agrupación - Acceso rápido y compacto\n"
+"Agrupado - Acceso rápido y compacto\n"
 "Cada ventana tiene su propio botón de lista de ventanas.\n"
 "Los botones de las aplicaciones se agrupan.\n"
 "Una etiqueta de botón por grupo de aplicaciones.\n"
@@ -2592,7 +2685,7 @@ msgstr "Configuración del Lanzador rápido"
 
 #. SetupWizard.ui:370
 msgid ""
-"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"Unlike most Panel Launcher applets, this launcher keeps track of \n"
 "running windows and uses window Thumbnail menus.\n"
 "\n"
 "You can launch additional windows by clicking the 'Back' mouse \n"
@@ -2601,16 +2694,17 @@ msgid ""
 "How would you like the Left mouse button to behave when \n"
 "windows already exist for a launcher button?"
 msgstr ""
-"A diferencia de la mayoría de los subprogramas de Lanzador rápido, este "
-"lanzador realiza un seguimiento \n"
-"de las ventanas en ejecución y utiliza menús de miniaturas de ventanas.\n"
+"A diferencia de la mayoría de los applets lanzadores de paneles, este "
+"lanzador mantiene un registro de las ventanas en ejecución en \n"
+"y utiliza menús de ventanas en miniatura.\n"
 "\n"
-"Puedes abrir ventanas adicionales pulsando el botón \"Atrás\" del ratón\n"
+"Puede lanzar ventanas adicionales pulsando el botón 'Atrás' del ratón \n"
 "o utilizando el botón izquierdo del ratón mientras mantiene pulsada la tecla "
 "Ctrl.\n"
 "\n"
-"¿Cómo desea que se comporte el botón izquierdo del ratón cuando \n"
-"ya existen ventanas para un botón lanzador?"
+"¿Cómo le gustaría que se comportara el botón izquierdo del ratón cuando ya "
+"existen ventanas \n"
+"para un botón lanzador?"
 
 #. SetupWizard.ui:388
 msgid "Open new window / Hold for Thumbnail menu"
@@ -2634,7 +2728,7 @@ msgstr "¡Ya está!"
 
 #. SetupWizard.ui:508
 msgid ""
-"There are many more options and features to explorer in the\n"
+"There are many more options and features to explore in the\n"
 "applet configurator and the window list button context menu,\n"
 "for example:\n"
 "\n"
@@ -2647,19 +2741,19 @@ msgid ""
 " • Automatic application grouping when space is limited.\n"
 " • And much more."
 msgstr ""
-"Hay muchas más opciones y funciones para explorar en el\n"
-"configurador de applets y en el menú contextual del botón de lista de "
-"ventanas,\n"
+"Hay muchas más opciones y funciones que explorar en el configurador de "
+"applets\n"
+"y en el menú contextual del botón de la lista de ventanas,\n"
 "por ejemplo:\n"
 "\n"
-" • Teclas de acceso rápido para lanzar / activar una ventana específica.\n"
-" • Acciones personalizables de los botones del ratón.\n"
-" • Saturación de iconos personalizable (escala de grises / vivos).\n"
-" • Acciones personalizables Ctrl/Shift + botón del ratón.\n"
-" • Agrupación específica de aplicaciones y configuración de etiquetas.\n"
-" • Zoom de la ventana en miniatura con la rueda de desplazamiento.\n"
-" • Agrupación automática de aplicaciones cuando el espacio es limitado.\n"
-" • Y mucho más."
+" - Teclas de acceso rápido para lanzar / activar una ventana específica.\n"
+" - Acciones personalizables de los botones del ratón.\n"
+" - Saturación personalizable de los iconos (escala de grises / vivos).\n"
+" - Acciones personalizables Ctrl/Shift + botón del ratón.\n"
+" - Agrupación específica de aplicaciones y configuración de etiquetas.\n"
+" - Zoom de la ventana en miniatura con la rueda de desplazamiento.\n"
+" - Agrupación automática de aplicaciones cuando el espacio es limitado.\n"
+" - Y mucho más."
 
 #. SetupWizard.ui:530
 msgid "Exit and launch the applet configurator now"

@@ -1,17 +1,16 @@
 # translation of weather@mockturtl.po to Icelandic
-# Copyright (C) 2024 Icelandic translations of Cinnamon applets
+# Copyright (C) 2025 Icelandic translations of Cinnamon applets
 # This file is distributed under the same license as the Cinnamon package.
 #
-# SPDX-FileCopyrightText: 2012, 2014, 2021, 2022, 2023, 2024 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2012, 2014, 2021, 2022, 2023, 2024, 2025 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: weather@mockturtl\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/iss"
+"ues\n"
 "POT-Creation-Date: 2025-04-23 09:28+0100\n"
-"PO-Revision-Date: 2024-11-23 18:07+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is> <translation-team-"
-"is@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2025-08-29 12:42+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
@@ -2087,23 +2086,23 @@ msgstr "Úrkoma mun hefjast eftir {precipStart} mínútur"
 
 #. 3.8/weather-applet.js:19517
 msgid "Low Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Lítil áhætta vegna sólargeislunar, UV-stuðull: {uvIndex}"
 
 #. 3.8/weather-applet.js:19521
 msgid "Moderate Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Miðlungs-áhætta vegna sólargeislunar, UV-stuðull: {uvIndex}"
 
 #. 3.8/weather-applet.js:19525
 msgid "High Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Mikil áhætta vegna sólargeislunar, UV-stuðull: {uvIndex}"
 
 #. 3.8/weather-applet.js:19529
 msgid "Very High of Harm from sun exposure, Risk UV Index: {uvIndex}"
-msgstr ""
+msgstr "Mjög mikil áhætta vegna sólargeislunar, UV-stuðull: {uvIndex}"
 
 #. 3.8/weather-applet.js:19533
 msgid "Extreme Risk of Harm from sun exposure, UV Index: {uvIndex}"
-msgstr ""
+msgstr "Einstaklega mikil áhætta vegna sólargeislunar, UV-stuðull: {uvIndex}"
 
 #. 3.8/weather-applet.js:19650
 msgid "Forecast parsing failed, see logs for more details."
@@ -3035,6 +3034,10 @@ msgid ""
 "if you know what you are doing. This is a string that is sent to the server "
 "when the applet tries to get the weather data."
 msgstr ""
+"Ef þú sérð að smáforritið sé ekki að virka eðlilega og þú veist að vandamálið"
+" er kennistrengurinn (user agent), þá geturðu prófað að breyta honum svo"
+" framarlega að þú vitir hvað þú ert að gera. Kennistrengurinn er textaruna"
+" sem send er til netþjónsins þegar forritið reynir að sækja veðurgögn."
 
 #. 3.8->settings-schema.json->runScript->description
 msgid "Run a command when the weather info changes"
@@ -3058,15 +3061,29 @@ msgid ""
 "Example: 'echo {{full_data}} > /tmp/weather_data' will save the full weather "
 "data to a file in /tmp."
 msgstr ""
+"Smáforritið mun keyra skipunina sem þú gafst í hvert sinn sem veðurgögn eru"
+" uppfærð. Inn í skipunina verður skotið sömu gildum á sama sniði og þú færð"
+" úr öllum þeim yfirskrifunum sem þú hefur stillt, að auki færðu {full_data}"
+" sem eru full fyrirliggjandi veðurgögn. Innskot með einföldum slaufusvigum"
+" {xxx} þarf ekki að afmarka, með tvöföldum slaufusvigum {{xxxx}} eru notaðir"
+" einfaldir afmarkarar (') og allir aðrir einfaldir afmarkarar eru innan"
+" gæsalappa. Þú getur notað þetta til að flétta veðurgögn inn í aðra hluta"
+" kerfisins þíns. Þú getur skoðað uppbyggingu fullra veðurgagna ú gegnum"
+" tengilinn í README-skránni.\n"
+"\n"
+"Dæmi: 'notify-send \"Veðrið er {c} og hitinn er {t}{u}\"' "
+"mun birta tilkynningu með fyrirliggjandi veðurskilyrðum og hitastigi.\n"
+"\n"
+"Dæmi: 'echo {{full_data}} > /tmp/weather_data' mun vista full veðurgögn yfir"
+" í skrá í /tmp."
 
 #. 3.8->settings-schema.json->testRunScript->description
 msgid "Test your command"
 msgstr "Prófaðu skipunina þína"
 
 #. 3.8->settings-schema.json->uvIndex->description
-#, fuzzy
 msgid "Enable displaying UV Index"
-msgstr "Virkja birtingu aðvarana vegna veðurs"
+msgstr "Virkja birtingu UV-stuðuls geislunar"
 
 #. 3.8->settings-schema.json->uvIndex->tooltip
 msgid ""
@@ -3074,3 +3091,6 @@ msgid ""
 "next to sunrise/sunset times. It will not show if the UV index is low risk "
 "(0-2)."
 msgstr ""
+"Ef upplýsingaveitan þín styður það, mun UV-stuðullinn birtast í"
+" sprettglugganum við hlið tímasetninga sólris/sólarlags. Hann mun ekki"
+" birtast ef UV-stuðullinn sýnir litla áhættu (0-2)."

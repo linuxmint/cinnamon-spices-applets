@@ -1,3 +1,22 @@
+### v3.7.1~20250915
+  * Menu bugfix.
+
+### v3.7.0~20250910
+  * Added Blacklist management.
+
+### v3.6.2~20250908
+  * Better memory management.
+
+### v3.6.1~20250820
+  * Restarts listening to the current station when the applet is restarted (except when it is Cinnamon that is reloaded).
+
+### v3.6.0~20250808
+  * Improved speed.
+  * Code cleanup.
+
+### v3.5.0~20250629
+  * Add option: Ignore Youtube features.
+
 ###  v3.4.4~20250422
   * Bugfix: Fixes [#7074](https://github.com/linuxmint/cinnamon-spices-applets/issues/7074).
 

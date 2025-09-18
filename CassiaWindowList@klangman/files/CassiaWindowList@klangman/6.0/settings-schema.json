@@ -1,18 +1,24 @@
 {
   "layout" : {
     "type" : "layout",
-    "pages" : ["general-page", "caption-page", "preview-page", "hotkey-page", "advanced-page"],
+    "pages" : ["general-page", "mouse-page", "caption-page", "preview-page", "hotkey-page", "advanced-page"],
 
     "caption-page" : {
       "type" : "page",
       "title" : "Labels",
-      "sections" : ["caption-settings", "caption-number-settings"] 
+      "sections" : ["caption-settings", "caption-number-settings", "caption-progress-settings"]
     },
 
     "general-page" : {
       "type" : "page",
       "title" : "General",
-      "sections" : ["general-settings", "general-mouse"] 
+      "sections" : ["general-settings"]
+    },
+
+    "mouse-page" : {
+      "type" : "page",
+      "title" : "Mouse",
+      "sections" : ["general-mouse"]
     },
 
     "preview-page" : {
@@ -37,17 +43,22 @@
       "type" : "section",
       "title" : "Window list button label settings",
       "dependency" : "group-windows<4",
-      "keys" : ["caption-type", "display-caption-for", "display-caption-for-pined", "hide-caption-for-minimized", "display-indicators", "show-ellipsis-for-groups", "label-width", "label-animation", "label-animation-time"]
+      "keys" : ["caption-type", "display-caption-for", "display-caption-for-pined", "hide-caption-for-minimized", "display-indicators", "auto-hide-indicators", "label-width", "label-animation", "label-animation-time"]
     },
     "caption-number-settings" : {
       "type" : "section",
-      "title" : "Number label settings",
-      "keys" : ["number-type", "display-number", "number-style"]
+      "title" : "Icon overlay label settings",
+      "keys" : ["number-type", "display-number"]
+    },
+    "caption-progress-settings" : {
+      "type" : "section",
+      "title" : "Progress settings",
+      "keys" : ["progress-display-type"]
     },
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "show-tooltips", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "remember-button-order", "show-tooltips", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
     },
     "general-mouse" : {
       "type" : "section",
@@ -112,7 +123,7 @@
       "Focused": 3
     },
     "description": "Display labels for pinned buttons",
-    "tooltip": "Never: No pinned windows will have a label\nAlways: All pinned windows will have labels\nRunning: Only pinned window that are running will have a label\nFocused: Only the pinned window with focus will have a label"
+    "tooltip": "Never: No pinned windows will have a label\nAlways: All pinned windows will have labels\nRunning: Only pinned windows that are running will have a label\nFocused: Only the pinned window with focus will have a label"
   },
   "hide-caption-for-minimized": {
     "type": "combobox",
@@ -134,17 +145,20 @@
       "Minimized windows": 1,
       "Pinned applications": 2,
       "Minimized and pinned": 3,
-      "Automatic": 7
+      "Application group window count": 11,
+      "Application group indicator (⋮)": 12,
+      "Workspace number (smart)": 13,
+      "Monitor number (smart)": 14
     },
     "description": "Display status indicators",
-    "tooltip": "Choose if the minimized and the pinned indicator characters will be prepended to button label text. Buttons without a text label will not reserve as much space.\nAutomatic: The minimized and pinned indicators will only show when space is not constrained."
+    "tooltip": "Controls what information is prepended to the button label text. On horizontal panels this data is shown even when the primary label contents are removed. Setting this to None will allow for the smallest button size. When on vertical panels this setting is ignored."
   },
-  "show-ellipsis-for-groups": {
+  "auto-hide-indicators": {
     "type": "switch",
     "default": 0,
-    "dependency" : "group-windows<4",
-    "description": "Show a vertical ellipsis (...) for grouped buttons",
-    "tooltip": "Prepend a vertical ellipsis unicode charter to the labels for grouped window-list buttons with more then one window. When on a vertical panel this option is not possible and the setting will be ignored."
+    "dependency" : "display-indicators>0",
+    "description": "Hide status indicators when space is limited",
+    "tooltip": "Hide status indicators when window list space is limited causing button labels to shrink"
   },
   "trailing-pinned-behaviour": {
     "type": "switch",
@@ -171,7 +185,7 @@
     "units": "milliseconds",
     "step": 20,
     "description": "Hover time before showing a full size window preview",
-    "tooltip": "This defines the mouse hover time before a full size window preview will appear. It applies when hovering over either window-list buttons or thumbnail menu items (of course one of the full size window preview options must be enabled for this option to have any effect)"
+    "tooltip": "This defines the mouse hover time before a full size window preview will appear. It applies when hovering over either window list buttons or thumbnail menu items (of course one of the full size window preview options must be enabled for this option to have any effect)"
   },
   "label-width": {
     "type": "spinbutton",
@@ -202,36 +216,37 @@
     "type": "combobox",
     "default": 1,
     "options": {
-      "Nothing": 0,
+      "Nothing": 100,
       "Application group window count": 1,
+      "Application group indicator (…)": 104,
       "Workspace number": 2,
-      "Monitor number": 3
+      "Monitor number": 3,
+      "Two characters from the window title": 4,
+      "Minimized indicator": 101,
+      "Pinned indicator": 102,
+      "Minimized and pinned indicators": 103
     },
-    "description": "Number label contents"
+    "description": "Icon overlay label contents"
   },
   "display-number": {
-    "type": "combobox",
-    "default": 2,
-    "options": {
-      "Always": 1,
-      "Smart": 2
-    },
-    "dependency" : "number-type>0",
-    "description": "Display number",
-    "tooltip": "Controls when the number label is used. Smart means the the label will only appear when it is appropriate depending on the number label contents setting above. i.e. When there is two or more windows in a group, or when the windows workspace or monitor does not match the current one."
+    "type": "switch",
+    "default": true,
+    "dependency" : "number-type<100",
+    "description": "Only display label when needed",
+    "tooltip": "With this option enabled, the icon overlay label will only appear when it is appropriate depending on the label content (i.e. When there are two or more windows in a group, or when the windows workspace or monitor does not match the current one). When this option is disabled the label is always shown"
   },
-  "number-style": {
+
+  "progress-display-type": {
     "type": "combobox",
     "default": 1,
     "options": {
-      "Icon overlay": 0,
-      "Label prepend": 1
+      "Disabled": 0,
+      "Using icon overlay label": 1,
+      "Prepended to button label": 2
     },
-    "dependency" : "number-type>0",
-    "description": "Number style",
-    "tooltip": "Controls how the number label is presented. When on a vertical panel or when in launcher mode, the \"label prepend\" option is not possible so \"icon overlay\" will be used instead"
+    "description": "Display window progress information (%)",
+    "tooltip": "Controls how a windows progress information is presented on the window list (i.e copying in File Manager, downloading in Firefox, updating in Update Manager, etc.). When on vertical panels the \"Prepended to button label\" option will be ignored and icon overlay will be used in its place."
   },
-
 
   "group-windows": {
     "type": "combobox",
@@ -244,7 +259,7 @@
       "Launcher": 4
     },
     "description": "Window list behavior style",
-    "tooltip": "Grouped: All windows for an application are managed by one button,\nPooled: All window list buttons for an application are pooled side by side,\nAutomatic: Windows are pooled, and then grouped when space is limited,\nOne to one: Each window gets their own button with no forced ordering,\nLauncher: Only pinned button are shown, behaves like a panel launcher."
+    "tooltip": "Grouped: All windows for an application are managed by one button,\nPooled: All window list buttons for an application are pooled side by side,\nAutomatic: Windows are pooled, and then grouped when space is limited,\nOne to one: Each window gets their own button with no forced ordering,\nLauncher: Only pinned buttons are shown, behaves like a panel launcher."
   },
   "display-pinned": {
     "type": "combobox",
@@ -263,7 +278,7 @@
     "default": false,
     "dependency" : "group-windows=4",
     "description": "Synchronize launcher buttons across all workspaces",
-    "tooltip": "If enabled, the number and order of launcher buttons on the panel will be synchronize across all workspaces."
+    "tooltip": "If enabled, the number and order of launcher buttons on the panel will be synchronized across all workspaces."
   },
   "show-windows-for-current-monitor": {
     "type": "switch",
@@ -275,6 +290,13 @@
     "type": "switch",
     "default": false,
     "description": "Include windows from all workspaces"
+  },
+  "remember-button-order": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows<3",
+    "description": "Allow prioritizing window list button order",
+    "tooltip": "Enabling this option makes it easy for you to control where your favorite applications will appear on the window list. This is achieved by maintaining a persistent position priority order for applications. New Window list buttons for applications with priority will appear in priority order and ahead of applications without priority. Using drag-and-drop will automatically add to and reorder the priority list. The \"Prioritize window list position\" context menu option allows you to add and remove an application from the priority list."
   },
   "show-tooltips": {
     "type": "switch",
@@ -304,14 +326,14 @@
     "default": 0,
     "dependency" : "group-windows<4",
     "description": "Show a full size window preview when hovering over a button",
-    "tooltip": "If enabled, a full size preview window will appear when the mouse pointer is hovering over a window-list button. The delay before the preview appears is controlled by an option under the Advanced tab"
+    "tooltip": "If enabled, a full size preview window will appear when the mouse pointer is hovering over a window list button. The delay before the preview appears is controlled by an option under the Advanced tab"
   },
   "no-click-activate": {
     "type": "switch",
     "default": 0,
     "dependency" : "group-windows<4",
     "description": "Automatic focus change when leaving the panel",
-    "tooltip": "If enabled, the current window for a window-list button will get the focus when the mouse pointer leaves the panel. Leaving the window-list with Ctrl or Shift held or while remaining on the panel will leave the focus unchanged. This option is typically used in conjunction with the preview hovering option above."
+    "tooltip": "If enabled, the current window for a window list button will get the focus when the mouse pointer leaves the panel. Leaving the window list with Ctrl or Shift held or while remaining on the panel will leave the focus unchanged. This option is typically used in conjunction with the preview hovering option above."
   },
 
   "menu-show-on-hover": {
@@ -344,21 +366,21 @@
     "default": false,
     "dependency" : "group-windows!=3",
     "description": "Sort grouped button thumbnail menu items",
-    "tooltip": "If enabled, the thumbnail menu will be sorted first by workspace and the by monitor number for grouped buttons. Pooled windows can not be sorted since the order is the same as the order on the window-list panel. With this option enabled, the thumbnail menu drag-and-drop reordering feature will be disabled for grouped button thumbnail menus."
+    "tooltip": "If enabled, the thumbnail menu will be sorted first by workspace and then by monitor number for grouped buttons. Pooled windows can not be sorted since the order is the same as the order on the window list panel. With this option enabled, the thumbnail menu drag-and-drop reordering feature will be disabled for grouped button thumbnail menus."
   },
   "menu-all-windows-of-pool": {
     "type": "switch",
     "default": true,
     "dependency" : "group-windows=1",
     "description": "Show thumbnails for all windows of an application pool",
-    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather than just the selected window within the application pool"
   },
   "menu-all-windows-of-auto": {
     "type": "switch",
     "default": true,
     "dependency" : "group-windows=2",
     "description": "Show thumbnails for all windows of an application pool",
-    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather than just the selected window within the application pool"
   },
   "preview-timeout-show": {
     "type": "spinbutton",
@@ -709,7 +731,7 @@
       "Change windows workspace": 2,
       "Change windows monitor": 3,
       "Change window tiling": 4,
-      "Cycle all window-list button windows": 5,
+      "Cycle all window list button windows": 5,
       "Cycle grouped/pooled button windows": 6,
       "Do nothing": 0
     },
@@ -771,14 +793,14 @@
   "hotkey-sequence": {
     "type": "switch",
     "default": true,
-    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)",
-    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The first 9 windows of the assigned application, as ordered on the window-list, will be activated by the 9 hotkeys."
+    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 0-9)",
+    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 0 through 9 (i.e. Alt+0 through Alt+9). The first 10 windows of the assigned application, as ordered on the window list, will be activated by the 10 hotkeys. The 1st window is activated by hotkey 1 and 10th window is activated by hotkey 0"
   },
   "hotkey-grave-help": {
     "type": "switch",
     "default": true,
     "description": "Use modifier(s) + ` hotkey to show hotkey hint bubbles",
-    "tooltip": "If enabled, The hotkey modifier(s) + ` will be registered for each unique modifier set defined in the hotkey list. Using these hotkeys will temporally show a hotkey hint bubble over the button icons."
+    "tooltip": "If enabled, The hotkey modifier(s) + ` will be registered for each unique modifier set defined in the hotkey list. Using these hotkeys will temporarily show a hotkey hint bubble over the button icons."
   },
 
   "hotkey-help" : {
@@ -899,7 +921,7 @@
        "Idle pinned buttons": 2,
        "Buttons for windows on other workspaces": 3,
        "Buttons for windows on other monitors": 4,
-       "All buttons excepted focused window": 5
+       "All buttons except the focused window": 5
     },
     "dependency": "icon-saturation!=100",
     "description": "Where to apply the icon color saturation",
@@ -923,6 +945,11 @@
     "default": ["nemo.desktop", "firefox.desktop"]
   },
 
+  "remembered-button-order": {
+     "type": "generic",
+     "default": []
+  },
+
   "custom-label-app": {
     "type": "generic",
     "default": ["Xlet-settings.py", "Cinnamon-desktop-editor.py", "Xlet-about-dialog"]
@@ -943,5 +970,10 @@
   "runWizard": {
      "type": "generic",
      "default": 1
+  },
+
+  "upgradeIndicator": {
+     "type": "generic",
+     "default": 0
   }
 }

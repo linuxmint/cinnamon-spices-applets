@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 09:30-0400\n"
-"PO-Revision-Date: 2025-06-15 23:57+08:00\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
+"PO-Revision-Date: 2025-08-06 23:47+08:00\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -17,64 +17,76 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. applet.js:98
+#. applet.js:44
+msgid "Notifications applet conflict"
+msgstr "通知小程式發生衝突"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+"偵測到衝突：notifications@cinnamon.org 目前為啟用狀態。\n"
+"請移除該小程式並重新啟動 Cinnamon，再使用 Notifications-Enhanced 小程式。"
+
+#. applet.js:120
 msgid "Do not disturb"
 msgstr "請勿打擾"
 
-#. applet.js:105
+#. applet.js:126
 msgid "No notifications"
-msgstr "沒有通知"
+msgstr "沒有任何通知"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:114
+#. applet.js:134
 msgid "Clear notifications"
 msgstr "清除通知"
 
-#. applet.js:138
+#. applet.js:157
 msgid "Enable notifications"
 msgstr "啟用通知"
 
-#. applet.js:150
+#. applet.js:168
 msgid "Notification Settings"
 msgstr "通知設定"
 
-#. applet.js:233 applet.js:411
+#. applet.js:257 applet.js:431
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d 則通知"
 
-#. applet.js:263
+#. applet.js:287
 msgid "Notifications"
 msgstr "通知"
 
-#. applet.js:277
+#. applet.js:300
 msgid "Notifications disabled"
 msgstr "通知已停用"
 
-#. applet.js:427
+#. applet.js:447
 msgid "just now"
 msgstr "剛剛"
 
-#. applet.js:430
+#. applet.js:450
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d 秒前"
 
-#. applet.js:434
+#. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d 分鐘前"
 
 #. metadata.json->name
-msgid "Notifications Enhanced"
-msgstr "Notifications Enhanced"
+msgid "Notifications-Enhanced"
+msgstr "Notifications-Enhanced"
 
 #. metadata.json->description
 msgid "A notification applet but with more options"
-msgstr "提供更多選項的通知小程式"
+msgstr "一個提供更多選項的通知小程式"
 
 #. settings-schema.json->section1->description
 msgid "Behavior"
@@ -86,7 +98,7 @@ msgstr "忽略暫時性通知"
 
 #. settings-schema.json->ignoreTransientNotifications->tooltip
 msgid "Check this to ignore transient notifications."
-msgstr "勾選此項可忽略暫時性通知。"
+msgstr "勾選此選項可忽略暫時性通知。"
 
 #. settings-schema.json->section2->description
 msgid "Display"
@@ -97,23 +109,23 @@ msgid "Show the number of notifications"
 msgstr "顯示通知數量"
 
 #. settings-schema.json->showEmptyTray->description
-msgid "Show empty tray"
-msgstr "顯示空的通知區"
+msgid "Show notification tray"
+msgstr "顯示通知區"
 
 #. settings-schema.json->showEmptyTray->tooltip
-msgid "Check this to show the tray even when there are no new notifications."
-msgstr "勾選此項，即使沒有新通知也會顯示通知區。"
+msgid "Check this to always show the notification tray."
+msgstr "勾選此選項可讓通知區持續顯示。"
 
 #. settings-schema.json->showDisturbIcon->description
-msgid "Show 'Do not disturb' icon even when show empy tray option is disabled"
-msgstr "即使停用 [顯示空的通知區] 選項，仍顯示「請勿打擾」圖示"
+msgid "Always show 'Do Not Disturb' icon"
+msgstr "一律顯示「請勿打擾」圖示"
 
 #. settings-schema.json->showDisturbIcon->tooltip
 msgid ""
-"Check this to show 'Do not disturb' icon on panel even when show empty tray "
-"option is disabled."
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
 msgstr ""
-"勾選此項，即使停用 [顯示空的通知區] 選項，仍於面板顯示「請勿打擾」圖示。"
+"勾選此選項，即使停用「顯示通知區」選項，仍會在面板顯示「請勿打擾」圖示。"
 
 #. settings-schema.json->showNotificationSettings->description
 msgid "Show notification settings in the menu"
@@ -129,11 +141,11 @@ msgstr "顯示通知"
 
 #. settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the notification popup menu."
-msgstr "設定按鍵組合以顯示通知彈出選單。"
+msgstr "設定顯示通知彈出式選單的快捷鍵。"
 
 #. settings-schema.json->keyClear->tooltip
 msgid "Set keybinding(s) to clear all notifications."
-msgstr "設定按鍵組合以清除所有通知。"
+msgstr "設定清除所有通知的快捷鍵。"
 
 #. settings-schema.json->keyMute->description
 msgid "Enable or disable notifications"
@@ -141,7 +153,7 @@ msgstr "啟用或停用通知"
 
 #. settings-schema.json->keyMute->tooltip
 msgid "Set keybinding(s) to enable or disable notifications."
-msgstr "設定按鍵組合以啟用或停用通知。"
+msgstr "設定啟用或停用通知的快捷鍵。"
 
 #. settings-schema.json->btnSystemSettings->description
 msgid "Open notification settings"

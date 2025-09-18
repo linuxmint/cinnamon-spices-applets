@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: notifications-enhanced@hilyxx 1.2\n"
+"Project-Id-Version: notifications-enhanced@hilyxx 1.22\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-05-18 21:41+0200\n"
+"POT-Creation-Date: 2025-08-05 12:43+0200\n"
 "PO-Revision-Date: 2025-05-18 13:52+0200\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
@@ -18,54 +18,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#. applet.js:98
+#. applet.js:44
+#, fuzzy
+msgid "Notifications applet conflict"
+msgstr "Ilmoitukset pois"
+
+#. applet.js:45
+msgid ""
+"Conflict detected: notifications@cinnamon.org is active.\n"
+"Remove it and restart Cinnamon before using Notifications-Enhanced applet."
+msgstr ""
+
+#. applet.js:120
 msgid "Do not disturb"
 msgstr "Älä häiritse"
 
-#. applet.js:105
+#. applet.js:126
 msgid "No notifications"
 msgstr "Ei ilmoituksia"
 
 #. settings-schema.json->keyClear->description
-#. applet.js:114
+#. applet.js:134
 msgid "Clear notifications"
 msgstr "Tyhjennä ilmoitukset"
 
-#. applet.js:138
+#. applet.js:157
 msgid "Enable notifications"
 msgstr "Näytä ilmoitukset"
 
-#. applet.js:150
+#. applet.js:168
 msgid "Notification Settings"
 msgstr "Ilmoitusten asetukset"
 
-#. applet.js:233 applet.js:411
+#. applet.js:257 applet.js:431
 #, javascript-format
 msgid "%d notification"
 msgid_plural "%d notifications"
 msgstr[0] "%d ilmoitus"
 msgstr[1] "%d ilmoitusta"
 
-#. applet.js:263
+#. applet.js:287
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
-#. applet.js:277
+#. applet.js:300
 msgid "Notifications disabled"
 msgstr "Ilmoitukset pois"
 
-#. applet.js:427
+#. applet.js:447
 msgid "just now"
 msgstr "juuri nyt"
 
-#. applet.js:430
+#. applet.js:450
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekunti sitten"
 msgstr[1] "%d sekuntia sitten"
 
-#. applet.js:434
+#. applet.js:454
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -73,7 +84,8 @@ msgstr[0] "%d minuutti sitten"
 msgstr[1] "%d minuuttia sitten"
 
 #. metadata.json->name
-msgid "Notifications Enhanced"
+#, fuzzy
+msgid "Notifications-Enhanced"
 msgstr "Notifications Enhanced"
 
 #. metadata.json->description
@@ -101,23 +113,24 @@ msgid "Show the number of notifications"
 msgstr "Näytä ilmoitusten määrä"
 
 #. settings-schema.json->showEmptyTray->description
-msgid "Show empty tray"
-msgstr "Näytä tyhjä alusta"
+#, fuzzy
+msgid "Show notification tray"
+msgstr "Näytä ilmoitukset"
 
 #. settings-schema.json->showEmptyTray->tooltip
-msgid "Check this to show the tray even when there are no new notifications."
-msgstr ""
-"Pidä ilmoitusten kuvake näkyvissä myös silloin, kun uusia ilmoituksia ei ole."
+#, fuzzy
+msgid "Check this to always show the notification tray."
+msgstr "Jätä ohimenevät ilmoitukset huomiotta valitsemalla tämä."
 
 #. settings-schema.json->showDisturbIcon->description
-#, fuzzy
-msgid "Show 'Do not disturb' icon even when show empty tray option is disabled"
-msgstr "Näytä \"Älä häiritse\", vaikka tyhjä alusta ei ole käytössä"
+msgid "Always show 'Do Not Disturb' icon"
+msgstr ""
 
 #. settings-schema.json->showDisturbIcon->tooltip
+#, fuzzy
 msgid ""
-"Check this to show 'Do not disturb' icon on panel even when show empty tray "
-"option is disabled."
+"Check this to show the 'Do Not Disturb icon' on the panel even when the "
+"'Show notification tray' option is disabled."
 msgstr ""
 "Jos haluat näyttää \"Älä häiritse\" paneelissa, vaikka tyhjä alusta ei ole "
 "käytössä."

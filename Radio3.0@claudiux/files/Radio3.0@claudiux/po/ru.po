@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-04-03 08:57+0200\n"
+"POT-Creation-Date: 2025-09-10 19:42+0200\n"
 "PO-Revision-Date: 2023-03-26 11:24+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,33 +20,33 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
-#. applet.js:286
+#. applet.js:285
 msgid "unassigned"
 msgstr ""
 
-#. applet.js:287
+#. applet.js:286
 msgid "Display Album Art at full size"
 msgstr ""
 
-#. applet.js:391
+#. applet.js:388
 msgid "This is your own list of Categories and Radio Stations."
 msgstr "Это ваш собственный список категорий и радиостанций."
 
-#. applet.js:392
+#. applet.js:389
 msgid "You can add more using the [+] button."
 msgstr "Можете добавить еще с помощью кнопки [+]."
 
-#. applet.js:393
+#. applet.js:390
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 "Для категории заполните только ее наименование, остальные поля оставьте "
 "пустыми."
 
-#. applet.js:394
+#. applet.js:391
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr "Для радиостанции введите только наименование и адрес."
 
-#. applet.js:395
+#. applet.js:392
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
@@ -54,7 +54,7 @@ msgstr ""
 "Вы можете переопределить порядок строк их перетаскиванием или используя "
 "кнопки и инструменты, расположенные под списком."
 
-#. applet.js:396
+#. applet.js:393
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
@@ -62,7 +62,7 @@ msgstr ""
 "Кнопки, расположенные ниже списка с правой стороны, позволяют вам переходить "
 "от страницы к странице и от категории к категории."
 
-#. applet.js:397
+#. applet.js:394
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
@@ -70,7 +70,7 @@ msgstr ""
 "Чтобы найти одну из ваших радиостанций, щелкните указателем мышки по списку "
 "и начните набирать ее наименование."
 
-#. applet.js:398
+#. applet.js:395
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
@@ -78,13 +78,13 @@ msgstr ""
 "Чтобы быстро добавить радиостанции в ваш список, используйте вкладки 'Поиск' "
 "и 'Импорт'."
 
-#. applet.js:399
+#. applet.js:396
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 "Поставьте галочку в строке радиостанции или категории в колонке 'Меню', "
 "чтобы радиостанция отразилась в меню."
 
-#. applet.js:400
+#. applet.js:397
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
@@ -93,12 +93,12 @@ msgstr ""
 "радиостанцию или переместить ее в другую категорию, используя инструменты, "
 "расположенные ниже списка."
 
-#. applet.js:402
+#. applet.js:399
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 "Ваш список радиостанций может быть проверен по базам данных из интернета."
 
-#. applet.js:403
+#. applet.js:400
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
@@ -106,7 +106,7 @@ msgstr ""
 "Радиостанции, распознанной одной из этих баз данных, будет присвоен "
 "уникальный идентификатор (UUID), предоставленный базой данных."
 
-#. applet.js:404
+#. applet.js:401
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
@@ -114,7 +114,7 @@ msgstr ""
 "Если адрес радиостанции изменился, очередная проверка обновит его и вы "
 "сможете снова слушать ее."
 
-#. applet.js:406
+#. applet.js:403
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
@@ -122,7 +122,7 @@ msgstr ""
 "Здесь вы можете осуществить поиск других радиостанций в бесплатной базе "
 "данных, доступной через интернет."
 
-#. applet.js:407
+#. applet.js:404
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
@@ -130,7 +130,7 @@ msgstr ""
 "Заполните хотя бы несколько полей нижерасположенной формы, а затем нажмите "
 "кнопку 'Поиск...'."
 
-#. applet.js:408
+#. applet.js:405
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
@@ -140,7 +140,7 @@ msgstr ""
 "части этой страницы, где вы можете проверить соответствующие радиостанции и "
 "включить их в меню."
 
-#. applet.js:409
+#. applet.js:406
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
@@ -148,7 +148,7 @@ msgstr ""
 "Радиостанция, которая уже в вашем меню, появится в результатах, только если "
 "изменился ее адрес."
 
-#. applet.js:410
+#. applet.js:407
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
@@ -156,14 +156,14 @@ msgstr ""
 "Если новые результаты не отображаются, это значит, что все результаты, "
 "соответствующие вашим условиям, уже выведены."
 
-#. applet.js:412
+#. applet.js:409
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
 msgstr ""
 "Вы можете импортировать файл, содержащий наименования и адреса радиостанций."
 
-#. applet.js:413
+#. applet.js:410
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
@@ -171,13 +171,13 @@ msgstr ""
 "Эти радиостанции отображены в нижерасположенном списке. Можете проверить их "
 "поставив галочку в колонке '♪'."
 
-#. applet.js:414
+#. applet.js:411
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
 "Затем отредактируйте список с помощью кнопок, расположенных внизу данной "
 "вкладки."
 
-#. applet.js:416
+#. applet.js:413
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
@@ -185,7 +185,7 @@ msgstr ""
 "В каталоге Shoutcast щелкните мышкой кнопку загрузки слева от наименования "
 "радиостанции."
 
-#. applet.js:417
+#. applet.js:414
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
@@ -193,40 +193,40 @@ msgstr ""
 "Выберите свободный формат (.XSPF) и сохраните файл, присвоив ему имя самой "
 "радиостанции."
 
-#. applet.js:418
+#. applet.js:415
 msgid "This file can then be imported here."
 msgstr "Этот файл затем может быть импортирован здесь."
 
-#. applet.js:420
+#. applet.js:417
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr "%s Б = %s ГБ = %s ГиБ"
 
-#. applet.js:422
+#. applet.js:419
 msgid "Sun."
 msgstr ""
 
-#. applet.js:422
+#. applet.js:419
 msgid "Mon."
 msgstr ""
 
-#. applet.js:422
+#. applet.js:419
 msgid "Tue."
 msgstr ""
 
-#. applet.js:422
+#. applet.js:419
 msgid "Wed."
 msgstr ""
 
-#. applet.js:422
+#. applet.js:419
 msgid "Thu."
 msgstr ""
 
-#. applet.js:422
+#. applet.js:419
 msgid "Fri."
 msgstr ""
 
-#. applet.js:422
+#. applet.js:419
 msgid "Sat."
 msgstr ""
 
@@ -238,408 +238,413 @@ msgstr ""
 #. settings-schema.json->search-order->options
 #. settings-schema.json->alarm-clock-working-days-radio->options
 #. settings-schema.json->alarm-clock-workoff-days-radio->options
-#. applet.js:588 applet.js:604 applet.js:6010 applet.js:6026
+#. applet.js:585 applet.js:603 applet.js:5506 applet.js:5522
 msgid "(Undefined)"
 msgstr "(Не выбрано)"
 
-#. applet.js:2417
+#. settings-schema.json->category-to-move->options
+#. applet.js:586 applet.js:5523
+msgid "(Blacklist)"
+msgstr ""
+
+#. applet.js:2259
 msgid "Start"
 msgstr "Запустить"
 
-#. applet.js:2425 applet.js:3303
+#. applet.js:2267 applet.js:3010
 msgid "Stop"
 msgstr "Остановить"
 
-#. applet.js:2733
+#. applet.js:2541
 msgid "Volume: %s%"
 msgstr "Громкость: %s%"
 
-#. applet.js:2738
+#. applet.js:2546
 msgid "Middle-Click: Stop Recording"
 msgstr "Щелчок средней кнопкой - остановить запись"
 
-#. applet.js:2740
+#. applet.js:2548
 msgid "Middle-click: ON/OFF"
 msgstr "Щелчок средней кнопкой - ВКЛ/ВЫКЛ"
 
-#. applet.js:2742
+#. applet.js:2550
 msgid "Click: Select another station"
 msgstr "Щелчок левой кнопкой - выбрать другую радиостанцию"
 
-#. applet.js:2744
+#. applet.js:2551
 msgid "Scroll wheel: volume change"
 msgstr "Колесо прокрутки - изменение громкости"
 
-#. applet.js:2747
+#. applet.js:2554
 msgid "Click to select a station"
 msgstr "Щелкните, чтобы выбрать радиостанцию"
 
-#. applet.js:2753
+#. applet.js:2560
 msgid "Wake Up"
 msgstr ""
 
-#. applet.js:2831 applet.js:3321 applet.js:5347
+#. applet.js:2638 applet.js:3028 applet.js:5018
 msgid "Configure..."
 msgstr "Настройка..."
 
-#. applet.js:2835 applet.js:3313
+#. applet.js:2642 applet.js:3020
 msgid "Search for new stations..."
 msgstr "Поиск новых радиостанций..."
 
-#. applet.js:2841
+#. applet.js:2648
 #, fuzzy
 msgid "Load a sample station list"
 msgstr "Обновление списка радиостанций"
 
-#. applet.js:2884 applet.js:3325 applet.js:5417
+#. applet.js:2695 applet.js:3032 applet.js:5088
 msgid "Sound Settings"
 msgstr "Настройки звука"
 
-#. applet.js:2960
+#. applet.js:2766
 msgid "Watch on YT"
 msgstr "Смотреть на YouTube"
 
-#. applet.js:2967
+#. applet.js:2773
 msgid "Try to download it from YT (unsafe)"
 msgstr "Попытаться скачать с YouTube (небезопасно)"
 
-#. applet.js:3030
+#. applet.js:2793
 msgid "Recently Played Stations:"
 msgstr "Недавно воспроизведенные радиостанции:"
 
-#. applet.js:3072
+#. applet.js:2844
 msgid "Visit the home page of this station"
 msgstr "Посетить домашнюю страницу радиостанции"
 
-#. applet.js:3134
+#. applet.js:2893
 #, fuzzy
 msgid "Categories"
 msgstr "Мои категории"
 
-#. applet.js:3137
+#. applet.js:2896
 #, fuzzy
 msgid "Radio Stations"
 msgstr "Мои радиостанции"
 
-#. applet.js:3148
+#. applet.js:2907
 #, fuzzy
 msgid "All Categories"
 msgstr "Мои категории"
 
-#. applet.js:3245
+#. applet.js:2952
 msgid "My Radio Stations"
 msgstr "Мои радиостанции"
 
-#. applet.js:3445
+#. applet.js:3152
 msgid "Downloading..."
 msgstr "Загрузка..."
 
-#. applet.js:3447
+#. applet.js:3154
 msgid "Stop downloading"
 msgstr "Остановить загрузку"
 
-#. applet.js:3551
+#. applet.js:3260
 msgid "Download complete"
 msgstr "Загрузка завершена"
 
 #. settings-schema.json->button-open-rec-folder->description
 #. settings-schema.json->recordings-open-folder->description
-#. applet.js:3553 applet.js:3562 applet.js:5066 applet.js:5075 applet.js:5084
-#. applet.js:5380
+#. applet.js:3262 applet.js:3271 applet.js:4738 applet.js:4747 applet.js:4756
+#. applet.js:5051
 msgid "Open the recordings folder"
 msgstr "Открыть папку записей"
 
-#. applet.js:3560 applet.js:5063 applet.js:5073 applet.js:5082
+#. applet.js:3269 applet.js:4735 applet.js:4745 applet.js:4754
 msgid "An error seems to have occurred during recording!"
 msgstr "При осуществлении записи вероятно возникла ошибка!"
 
-#. applet.js:3561 applet.js:5065 applet.js:5074 applet.js:5083
+#. applet.js:3270 applet.js:4737 applet.js:4746 applet.js:4755
 msgid "Please check this record."
 msgstr "Пожалуйста, проверьте эту запись."
 
-#. applet.js:3668 applet.js:3702
+#. applet.js:3377 applet.js:3411
 msgid "Record from now"
 msgstr "Записать с текущего момента"
 
-#. applet.js:3686 applet.js:5912
+#. applet.js:3395 applet.js:5408
 msgid "Stop Current Recording"
 msgstr "Остановить текущую запись"
 
-#. applet.js:3819
+#. applet.js:3543
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Воспроизведение %s%s"
 
-#. applet.js:3872
+#. applet.js:3597
 msgid "Radio OFF"
 msgstr "Радио ВЫКЛ"
 
-#. applet.js:4000
+#. applet.js:3725
 msgid "Unable to record anything!"
 msgstr "Невозможно что-либо записать!"
 
-#. applet.js:4000 applet.js:5397 applet.js:5557
+#. applet.js:3725 applet.js:5068 applet.js:5227
 msgid "Insufficient space"
 msgstr "Недостаточно места"
 
-#. applet.js:4000
+#. applet.js:3725
 msgid "The limit you set has been reached."
 msgstr "Достигнут установленный вами лимит."
 
-#. applet.js:4406
+#. applet.js:4126
 msgid "Please Log Out then Log In"
 msgstr "Пожалуйста, завершите сеанс пользователя и снова войдите"
 
-#. applet.js:4406
+#. applet.js:4126
 msgid "to finalize yt-dlp update"
 msgstr "для завершения обновления yt-dlp"
 
-#. applet.js:4548
+#. applet.js:4261
 msgid "Nothing to save."
 msgstr "Нечего сохранять."
 
-#. applet.js:4561
+#. applet.js:4274
 msgid "List of saved radio stations"
 msgstr "Список сохраненных радиостанций"
 
-#. applet.js:4579
+#. applet.js:4292
 msgid "This will replace all current radio stations."
 msgstr "Это перезапишет все текущие радиостанции."
 
-#. applet.js:4580
+#. applet.js:4293
 msgid "Are you sure you want to continue?"
 msgstr "Вы уверены, что хотите продолжить?"
 
-#. applet.js:4640
+#. applet.js:4357
 msgid "Update in progress"
 msgstr "Идет обновление"
 
-#. applet.js:4640
+#. applet.js:4357
 msgid "It may take a while ... Please wait."
 msgstr "Это может занять некоторое время... Пожалуйста, подождите."
 
-#. applet.js:4732
+#. applet.js:4449
 msgid "Update completed successfully"
 msgstr "Обновление успешно завершено"
 
-#. applet.js:4947 applet.js:5003
+#. applet.js:4620 applet.js:4676
 msgid "ERROR: Invalid YT video URL!"
 msgstr "ОШИБКА: Неверный адрес YouTube-видео!"
 
-#. applet.js:4972
+#. applet.js:4645
 msgid "Unable to extract a single soundtrack"
 msgstr "Невозможно извлечь звуковую дорожку"
 
-#. applet.js:4972
+#. applet.js:4645
 msgid "Maybe it's a playlist?"
 msgstr "Возможно, это список воспроизведения?"
 
-#. applet.js:5005
+#. applet.js:4678
 msgid "Close"
 msgstr "Закрыть"
 
-#. applet.js:5166 applet.js:5637 applet.js:5655
+#. applet.js:4836 applet.js:5295 applet.js:5313
 msgid "Cancel"
 msgstr ""
 
-#. applet.js:5167
+#. applet.js:4837
 #, fuzzy
 msgid "Radio3.0 applet"
 msgstr "Перезагрузить апплет"
 
-#. applet.js:5170
+#. applet.js:4840
 msgid "Enable the OSD150 extension"
 msgstr ""
 
-#. applet.js:5171
+#. applet.js:4841
 msgid "To obtain an horizontal OSD, you need to enable the OSD150 extension."
 msgstr ""
 
-#. applet.js:5189
+#. applet.js:4858
 msgid "Download the OSD150 extension"
 msgstr ""
 
-#. applet.js:5190
+#. applet.js:4859
 msgid ""
 "To obtain an horizontal OSD, you need to download the OSD150 extension.\n"
 "Click on the Download button then search for OSD150 and select the ⬇ button."
 msgstr ""
 
-#. applet.js:5319
+#. applet.js:4990
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Удалить '%s'"
 
-#. applet.js:5327
+#. applet.js:4998
 msgid "About..."
 msgstr "О..."
 
-#. applet.js:5334
+#. applet.js:5005
 msgid "Manual..."
 msgstr "Описание..."
 
-#. applet.js:5341
+#. applet.js:5012
 msgid "Reload this applet"
 msgstr "Перезагрузить апплет"
 
-#. applet.js:5358
+#. applet.js:5029
 msgid "Schedule a background record..."
 msgstr "Запланировать фоновую запись..."
 
-#. applet.js:5365
+#. applet.js:5036
 #, fuzzy
 msgid "Configure the Alarm Clock..."
 msgstr "Настройка..."
 
-#. applet.js:5372
+#. applet.js:5043
 msgid "Extract soundtrack from YouTube video..."
 msgstr "Извлечь звуковую дорожку из YouTube-видео..."
 
-#. applet.js:5394 applet.js:5554
+#. applet.js:5065 applet.js:5224
 msgid "(auto)"
 msgstr "(авто)"
 
-#. applet.js:5394 applet.js:5554
+#. applet.js:5065 applet.js:5224
 msgid "(manual)"
 msgstr "(вручную)"
 
-#. applet.js:5397 applet.js:5557 applet.js:5959
+#. applet.js:5068 applet.js:5227 applet.js:5455
 msgid "Stop Recording"
 msgstr "Остановить запись"
 
-#. applet.js:5397 applet.js:5557
+#. applet.js:5068 applet.js:5227
 msgid "Start Recording"
 msgstr "Начать запись"
 
-#. applet.js:5413
+#. applet.js:5084
 msgid "Cancel downloads from YT"
 msgstr "Отменить загрузки из YouTube"
 
-#. applet.js:5422
+#. applet.js:5093
 msgid "Pulse Effects"
 msgstr ""
 
-#. applet.js:5427
+#. applet.js:5098
 msgid "Easy Effects"
 msgstr ""
 
-#. applet.js:5432
+#. applet.js:5103
 msgid "Radio ON at startup"
 msgstr "Радио ВКЛ при загрузке"
 
-#. applet.js:5441
+#. applet.js:5112
 msgid "Display Station Logo"
 msgstr ""
 
-#. applet.js:5451
+#. applet.js:5122
 msgid "Album Art desklet settings"
 msgstr ""
 
 #. settings-schema.json->alarm-clock-wake-me-up->description
-#. applet.js:5456
+#. applet.js:5127
 msgid "Wake me up!"
 msgstr ""
 
-#. applet.js:5466
+#. applet.js:5136
 msgid "Show Album Art on desktop"
 msgstr ""
 
 #. settings-schema.json->dont-check-dependencies->description
-#. applet.js:5475
+#. applet.js:5145
 msgid "Do not check about dependencies"
 msgstr "Не проверять зависимости"
 
 #. settings-schema.json->show-volume-level-near-icon->description
-#. applet.js:5485
+#. applet.js:5155
 msgid "Display volume level near icon"
 msgstr ""
 
-#. applet.js:5634
+#. applet.js:5292
 msgid "You need the 'Album Art 3.0' desklet"
 msgstr ""
 
-#. applet.js:5635
+#. applet.js:5293
 msgid ""
 "You can install it by clicking on the first button and then searching for "
 "Album."
 msgstr ""
 
-#. applet.js:5636 applet.js:5654
+#. applet.js:5294 applet.js:5312
 msgid "Desklets"
 msgstr ""
 
-#. applet.js:5652
+#. applet.js:5310
 msgid "You need to activate the 'Album Art 3.0' desklet"
 msgstr ""
 
-#. applet.js:5653
+#. applet.js:5311
 msgid ""
 "You can activate it by clicking on the first button, then searching for "
 "Album and adding it with button [+]."
 msgstr ""
 
-#. applet.js:5960
+#. applet.js:5456
 msgid "Close without stopping recording"
 msgstr "Закрыть, не останавливая запись"
 
-#. applet.js:6184
+#. applet.js:5671
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr "Начинается запись от %s:%s до %s:%s"
 
-#. applet.js:6196
+#. applet.js:5683
 msgid "Recording completed"
 msgstr "Запись завершена"
 
-#. applet.js:6313
+#. applet.js:5808
 msgid "This will import a new file containing radio stations."
 msgstr "Это осуществит импорт нового файла, содержащего радиостанции."
 
-#. applet.js:6314
+#. applet.js:5809
 msgid "Do you want to continue?"
 msgstr "Вы хотите продолжить?"
 
-#. applet.js:6386
+#. applet.js:5886
 msgid "No new radio in your list."
 msgstr "В вашем списке нет новых радиостанций."
 
-#. applet.js:6388
+#. applet.js:5888
 msgid "One more radio in your list."
 msgstr "Еще одна радиостанция в вашем списке."
 
-#. applet.js:6390
+#. applet.js:5890
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr "Еще %s радиостанции(ий) в вашем списке."
 
-#. applet.js:6597
+#. applet.js:6149
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr "Нет новых радиостанций для добавления в меню апплета Radio3.0"
 
-#. applet.js:6599
+#. applet.js:6151
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr "Новая радиостанция была добавлена в меню апплета Radio3.0"
 
-#. applet.js:6601
+#. applet.js:6153
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr "%s новые(ых) радиостанции(ий) были добавлены в меню апплета Radio3.0"
 
-#. applet.js:6828
+#. applet.js:6378
 #, javascript-format
 msgid "%s kbps"
 msgstr "%s кбит/с"
 
-#. lib/checkDependencies.js:397
+#. lib/checkDependencies.js:399
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Апплет %s полностью работоспособен."
 
-#. lib/checkDependencies.js:398
+#. lib/checkDependencies.js:400
 msgid "All dependencies are installed"
 msgstr "Все зависимости установлены"
 
-#. lib/checkDependencies.js:428
+#. lib/checkDependencies.js:430
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -647,15 +652,15 @@ msgstr ""
 "По всей видимости, у вас установлены не все программы, необходимые для "
 "полноценного использования этого апплета."
 
-#. lib/checkDependencies.js:429
+#. lib/checkDependencies.js:431
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "В открывшемся окне терминала, пожалуйста, выполните следующие команды:"
 
-#. lib/checkDependencies.js:430
+#. lib/checkDependencies.js:432
 msgid "Some dependencies are not installed!"
 msgstr "Отдельные зависимости не установлены!"
 
-#. lib/checkTranslations.js:108
+#. lib/checkTranslations.js:109
 msgid "To finalize the translation installation, please restart Cinnamon"
 msgstr "Чтобы завершить установку языков, пожалуйста, перезагрузите Cinnamon"
 
@@ -837,6 +842,10 @@ msgstr "Сохранение и восстановление"
 msgid "Update this station list"
 msgstr "Обновление списка радиостанций"
 
+#. settings-schema.json->sectionBlacklist->title
+msgid "Unwanted (blacklist)"
+msgstr ""
+
 #. settings-schema.json->sectionImportRadiopp->title
 msgid "Only for Radio++ users"
 msgstr ""
@@ -944,6 +953,10 @@ msgstr "Записи"
 #. settings-schema.json->sectionRecordingLimits->title
 msgid "Preservation of hard disk space"
 msgstr "Место на диске"
+
+#. settings-schema.json->sectionYTIgnore->title
+msgid "Ignore YT"
+msgstr ""
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
@@ -1097,6 +1110,10 @@ msgstr "Открыть папку, содержащую эти списки"
 msgid "Update my station list with the Radio Database data"
 msgstr "Обновить мой список радиостанций в соответствии с базой данных"
 
+#. settings-schema.json->blacklist->columns->title
+msgid "Blacklisted URL"
+msgstr ""
+
 #. settings-schema.json->import-radiopp-button->description
 msgid "Import your stations from Radio++"
 msgstr ""
@@ -1136,6 +1153,11 @@ msgstr "Импортировать выбранные радиостанции �
 #. settings-schema.json->import-remove-from-list-button->description
 #. settings-schema.json->search-remove-from-list-button->description
 msgid "Remove selected items from this list"
+msgstr "Удалить выбранные позиции из этого списка"
+
+#. settings-schema.json->import-blacklist-button->description
+#, fuzzy
+msgid "Blacklist selected items from this list"
 msgstr "Удалить выбранные позиции из этого списка"
 
 #. settings-schema.json->import-select-all->description
@@ -1556,10 +1578,6 @@ msgstr ""
 msgid "Color of the symbolic icon while the radio is on"
 msgstr "Цвет значка, если радио включено"
 
-#. settings-schema.json->color-off->description
-msgid "Color of the symbolic icon while the radio is off"
-msgstr "Цвет значка, если радио выключено"
-
 #. settings-schema.json->color-recording->description
 msgid "Color of the symbolic icon while recording"
 msgstr "Цвет значка во время записи"
@@ -1876,6 +1894,16 @@ msgstr "Место на диске, которое должно оставать
 #. recording->description
 msgid "Highlight this applet icon during background recording"
 msgstr "Изменить значок апплета во время фоновой записи"
+
+#. settings-schema.json->ignoreYT->description
+msgid "Ignore Youtube features"
+msgstr ""
+
+#. settings-schema.json->ignoreYT->tooltip
+msgid ""
+"Ignoring Youtube features reduces CPU load. But loading album art becomes "
+"impossible."
+msgstr ""
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"

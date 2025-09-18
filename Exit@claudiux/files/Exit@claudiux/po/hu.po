@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-12-04 14:43+0100\n"
+"POT-Creation-Date: 2025-09-17 04:34+0200\n"
 "PO-Revision-Date: 2025-04-10 11:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,49 +19,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#. 5.4/applet.js:140
+#. 5.4/applet.js:140 6.4/applet.js:232
 msgid "Restart Cinnamon"
 msgstr "Cinnamon újraindítása"
 
-#. 5.4/applet.js:152
+#. 5.4/applet.js:152 6.4/applet.js:244
 msgid "Screen Off"
 msgstr "Képernyő ki"
 
-#. 5.4/applet.js:177
+#. 5.4/applet.js:177 6.4/applet.js:252
 msgid "Lock Screen"
 msgstr "Képernyő zárolása"
 
 #. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
+#. 6.4/applet.js:280 6.4/applet.js:290 6.4/applet.js:299 6.4/applet.js:308
 msgid "Switch User"
 msgstr "Felhasználó váltás"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:311 6.4/applet.js:337
+#. 6.4/applet.js:358 6.4/applet.js:379 6.4/applet.js:400 6.4/applet.js:419
 msgid "Performing automatic updates"
 msgstr "Automatikus frissítések végrehajtása"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:311 6.4/applet.js:337
+#. 6.4/applet.js:358 6.4/applet.js:379 6.4/applet.js:400 6.4/applet.js:419
 msgid "Please wait"
 msgstr "Kérem várjon"
 
-#. 5.4/applet.js:249 5.4/applet.js:256
+#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:324 6.4/applet.js:334
 msgid "Log Out"
 msgstr "Kijelentkezés"
 
-#. 5.4/applet.js:270 5.4/applet.js:277
+#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:348 6.4/applet.js:355
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#. 5.4/applet.js:288 5.4/applet.js:298
+#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:366 6.4/applet.js:376
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#. 5.4/applet.js:312 5.4/applet.js:319
+#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:390 6.4/applet.js:397
 msgid "Restart"
 msgstr "Újraindítás"
 
-#. 5.4/applet.js:330 5.4/applet.js:337
+#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:408 6.4/applet.js:416
 msgid "Power Off"
 msgstr "Kikapcsolás"
 
@@ -79,46 +82,57 @@ msgid "Exit"
 msgstr "Kijárat"
 
 #. 5.4->settings-schema.json->sectionOSD->description
+#. 6.4->settings-schema.json->sectionOSD->title
 msgid "Cinnamon restart"
 msgstr "Cinnamon újraindítás"
 
 #. 5.4->settings-schema.json->showOSD->description
+#. 6.4->settings-schema.json->showOSD->description
 msgid "Show OSD while restarting Cinnamon"
 msgstr "OSD megjelenítése Cinnamon újraindításakor"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
+#. 6.4->settings-schema.json->showOSD->tooltip
 msgid "OSD: On Screen Display"
 msgstr "OSD (On Screen Display): képernyőn megjelenő kijelző"
 
 #. 5.4->settings-schema.json->sectionMenu->description
+#. 6.4->settings-schema.json->sectionMenu->title
 msgid "Menu options"
 msgstr "Menü opciók"
 
 #. 5.4->settings-schema.json->showRestartCinnamon->description
+#. 6.4->settings-schema.json->showRestartCinnamon->description
 msgid "Show the Restart Cinnamon option"
 msgstr "A Cinnamon újraindítása opció megjelenítése"
 
 #. 5.4->settings-schema.json->showSuspend->description
+#. 6.4->settings-schema.json->showSuspend->description
 msgid "Show the Suspend option"
 msgstr "A felfüggesztési opció megjelenítése"
 
 #. 5.4->settings-schema.json->showHibernate->description
+#. 6.4->settings-schema.json->showHibernate->description
 msgid "Show the Hibernate option"
 msgstr "Hibernálási opció megjelenítése"
 
 #. 5.4->settings-schema.json->hibernateNeedsSudo->description
+#. 6.4->settings-schema.json->hibernateNeedsSudo->description
 msgid "Hibernate needs root user rights (sudo)"
 msgstr "A hibernáláshoz root felhasználói jogok szükségesek (sudo)"
 
 #. 5.4->settings-schema.json->showRestart->description
+#. 6.4->settings-schema.json->showRestart->description
 msgid "Show the Restart option"
 msgstr "Az Újraindítás opció megjelenítése"
 
 #. 5.4->settings-schema.json->showPowerOff->description
+#. 6.4->settings-schema.json->showPowerOff->description
 msgid "Show the Power Off option"
 msgstr "A Kikapcsolás opció megjelenítése"
 
 #. 5.4->settings-schema.json->labelOthers->description
+#. 6.4->settings-schema.json->labelOthers->description
 msgid ""
 "All the menu options below may be managed by the system.\n"
 "If they are, you can't see them."
@@ -127,18 +141,22 @@ msgstr ""
 "Ha igen, akkor nem láthatja őket."
 
 #. 5.4->settings-schema.json->showScreenOff->description
+#. 6.4->settings-schema.json->showScreenOff->description
 msgid "Show the Screen Off option"
 msgstr "Jelenítse meg a Képernyő kikapcsolása opciót"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->units
+#. 6.4->settings-schema.json->mouse-deactivation-duration->units
 msgid "seconds"
 msgstr "másodperc"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->description
+#. 6.4->settings-schema.json->mouse-deactivation-duration->description
 msgid "Duration of deactivation of the mouse"
 msgstr "Az egér deaktiválásának időtartama"
 
 #. 5.4->settings-schema.json->mouse-deactivation-duration->tooltip
+#. 6.4->settings-schema.json->mouse-deactivation-duration->tooltip
 msgid ""
 "To prevent the monitor from turning on too soon after turning it off, the "
 "mouse will be disabled for the number of seconds set here."
@@ -148,43 +166,132 @@ msgstr ""
 "másodpercekig."
 
 #. 5.4->settings-schema.json->showLockscreen->description
+#. 6.4->settings-schema.json->showLockscreen->description
 msgid "Show the Lock Screen option"
 msgstr "A Zárolási képernyő opció megjelenítése"
 
 #. 5.4->settings-schema.json->showLockscreen->tooltip
 #. 5.4->settings-schema.json->showSwitchUser->tooltip
 #. 5.4->settings-schema.json->showLogout->tooltip
+#. 6.4->settings-schema.json->showLockscreen->tooltip
+#. 6.4->settings-schema.json->showSwitchUser->tooltip
+#. 6.4->settings-schema.json->showLogout->tooltip
 msgid "Managed by system"
 msgstr "A rendszer által kezelt"
 
 #. 5.4->settings-schema.json->showSwitchUser->description
+#. 6.4->settings-schema.json->showSwitchUser->description
 msgid "Show the Switch User option"
 msgstr "A Felhasználó váltás opció megjelenítése"
 
 #. 5.4->settings-schema.json->showLogout->description
+#. 6.4->settings-schema.json->showLogout->description
 msgid "Show the Log Out option"
 msgstr "A Kijelentkezés opció megjelenítése"
 
 #. 5.4->settings-schema.json->logoutMode->description
+#. 6.4->settings-schema.json->logoutMode->description
 msgid "Log Out Mode"
 msgstr "Kijelentkezési mód"
 
 #. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
 msgid "With confirmation"
 msgstr "Megerősítéssel"
 
 #. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
 msgid "Without confirmation"
 msgstr "Megerősítés nélkül"
 
 #. 5.4->settings-schema.json->logoutMode->options
+#. 6.4->settings-schema.json->logoutMode->options
 msgid "Force"
 msgstr "Erőltetett"
 
 #. 5.4->settings-schema.json->logoutMode->tooltip
+#. 6.4->settings-schema.json->logoutMode->tooltip
 msgid ""
 "The 'Force' option lets you log out while ignoring inhibitors. Useful when "
 "several sessions are open."
 msgstr ""
 "Az 'Erőltetett' opcióval a gátló tényezők figyelmen kívül hagyásával "
 "kijelentkezhet. Hasznos, ha több munkamenet van nyitva."
+
+#. 6.4->settings-schema.json->page_General->title
+msgid "General"
+msgstr ""
+
+#. 6.4->settings-schema.json->page_Shortcuts->title
+msgid "Shortcuts"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_Shortcuts->title
+msgid "Keybindings"
+msgstr ""
+
+#. 6.4->settings-schema.json->section_MenuKeys->title
+msgid "Keys used to select certain options in the open menu."
+msgstr ""
+
+#. 6.4->settings-schema.json->kbToggleMenu->description
+msgid "Toggle menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->kbWakeUpMonitor->description
+msgid "Monitor and Mouse Wake-Up"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkShutdown->description
+msgid "Key to select Power Off"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkShutdown->tooltip
+msgid "Single key. Default is U"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkRestart->description
+msgid "Key to select Restart"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkRestart->tooltip
+msgid "Single key. Default is R"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkHibernate->description
+msgid "Key to select Hibernate"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkHibernate->tooltip
+msgid "Single key. Default is H"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkSuspend->description
+msgid "Key to select Suspend"
+msgstr ""
+
+#. 6.4->settings-schema.json->mkSuspend->tooltip
+msgid "Single key. Default is S"
+msgstr ""
+
+#. 6.4->settings-schema.json->buttonApplyMenuKeys->description
+msgid "Apply these keys to the menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->buttonDefaultMenuKeys->description
+msgid "Reset to default keys"
+msgstr ""
+
+#. 6.4->settings-schema.json->alertMenuKeys->description
+msgid ""
+"Several keys are identical.\n"
+"Please correct this and reapply the changes."
+msgstr ""
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->description
+msgid "Already used keys (for your information only)"
+msgstr ""
+
+#. 6.4->settings-schema.json->alreadyUsedKeys->tooltip
+msgid "There is no point in changing this."
+msgstr ""

@@ -6,7 +6,6 @@ const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
-const DEL_SONG_ARTS_SCRIPT = PATH2SCRIPTS + "/del_song_arts.sh";
 
 const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
 const TMP_ALBUMART_DIR = XDG_RUNTIME_DIR + "/AlbumArt";
@@ -17,6 +16,7 @@ const ALBUMART_TITLE_FILE = TMP_ALBUMART_DIR + "/title.txt";
 const MPV_RADIO_PID = XDG_RUNTIME_DIR + "/mpv_radio_PID";
 
 const PopupMenu = imports.ui.popupMenu;
+const { del_song_arts } = require("./lib/del_song_arts");
 const { ControlButton } = require("./lib/controlButton");
 const { VolumeSlider } = require("./lib/volumeSlider");
 const Interfaces = imports.misc.interfaces;
@@ -50,11 +50,11 @@ const COVERBOX_LAYOUT_MANAGER = new Clutter.BinLayout({
 
 // playerctld:
 function run_playerctld() {
-    Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/run_playerctld.sh'");
 }
 
 function kill_playerctld() {
-    Util.spawnCommandLineAsync("bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
+    Util.spawnCommandLineAsync("/usr/bin/env bash -C '" + PATH2SCRIPTS + "/kill_playerctld.sh'");
 }
 
 
@@ -352,7 +352,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._prevButton = new ControlButton("media-skip-backward",
             _("Previous"),
             () => {
-                //~ Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+                //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
 
                 if (this._seeker) {
                     if (this._seeker.status === "Playing" && this._seeker.posLabel) this._seeker.posLabel.set_text(" 00:00 ");
@@ -374,7 +374,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
             () => {
-                //~ Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+                //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
 
                 if (this._name.toLowerCase() === "mpv" &&
                     GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
@@ -387,7 +387,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
             () => {
-                //~ Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
+                //~ Util.spawnCommandLine("/usr/bin/env bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
 
                 if (this._name.toLowerCase() === "mpv" &&
                     GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
@@ -643,8 +643,8 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         if (old_title != this._title) {
-            Util.spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
-            Util.spawnCommandLine("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            del_song_arts();
+            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
         }
 
         this.titleLabel.set_text(this._title);
@@ -658,11 +658,11 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._trackCoverFile = artUrl;
                     change = true;
                 }
-                Util.spawnCommandLineAsync("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+                Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             }
         } else if (metadata["xesam:url"]) {
             if (this._oldTitle != this._title) {
-                Util.spawnCommandLineAsyncIO("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
+                Util.spawnCommandLineAsyncIO("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS), (stdout, stderr, exitCode) => {
                     if (exitCode === 0) {
                         this._trackCoverFile = "file://" + stdout;
                         if (this._oldTrackCoverFile != this._trackCoverFile) {
@@ -692,7 +692,7 @@ class Player extends PopupMenu.PopupMenuSection {
                 });
             }
         } else {
-            Util.spawnCommandLineAsync("bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
+            Util.spawnCommandLineAsync("/usr/bin/env bash -c %s/get_album_art.sh".format(PATH2SCRIPTS));
             if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
@@ -835,8 +835,8 @@ class Player extends PopupMenu.PopupMenuSection {
                     randomIntegerInInterval(0, superRND).toString()
                 ));
             } else if (!GLib.file_test(MPV_RADIO_PID, GLib.FileTest.EXISTS)) { // Radio3.0 is not running.
-                Util.spawnCommandLineAsync("rm -f %s/R3SongArt* ; sleep 1 ; cp -a %s %s/R3SongArt%s".format(
-                    ALBUMART_PICS_DIR,
+                del_song_arts();
+                Util.spawnCommandLineAsync("cp -a %s %s/R3SongArt%s".format(
                     cover_path,
                     ALBUMART_PICS_DIR,
                     randomIntegerInInterval(0, superRND).toString()

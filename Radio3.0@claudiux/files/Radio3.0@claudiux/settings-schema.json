@@ -20,7 +20,8 @@
         "sectionStationsList",
         "sectionStationsMove",
         "sectionStationsSaveRestore",
-        "sectionStationsUpdate"
+        "sectionStationsUpdate",
+        "sectionBlacklist"
       ]
     },
     "pageImport": {
@@ -79,6 +80,7 @@
       "type": "page",
       "title": "YT",
       "sections": [
+        "sectionYTIgnore",
         "sectionYTFormat",
         "sectionYTIcon",
         "sectionYTExtract"
@@ -148,6 +150,13 @@
         "scale-update"
       ]
     },
+    "sectionBlacklist": {
+      "type": "section",
+      "title": "Unwanted (blacklist)",
+      "keys": [
+        "blacklist"
+      ]
+    },
     "sectionImportRadiopp": {
       "type": "section",
       "dependency": "radiopp-is-here",
@@ -180,6 +189,7 @@
         "import-list-play-button",
         "import-list-button",
         "import-remove-from-list-button",
+        "import-blacklist-button",
         "import-select-all",
         "import-unselect-all"
       ]
@@ -407,6 +417,13 @@
         "highlight-icon-while-background-recording"
       ]
     },
+    "sectionYTIgnore": {
+      "type": "section",
+      "title": "Ignore YT",
+      "keys": [
+        "ignoreYT"
+      ]
+    },
     "sectionYTFormat": {
       "type": "section",
       "title": "Recordings",
@@ -616,7 +633,8 @@
     "description": "Category to which to move the selected stations:",
     "default": "",
     "options": {
-      "(Undefined)": ""
+      "(Undefined)": "",
+      "(Blacklist)": "R30BLACKLIST"
     }
   },
   "button-moving": {
@@ -676,6 +694,19 @@
     "default": 0,
     "description": "%",
     "dependency": "show-scale-update"
+  },
+  "blacklist": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "url",
+        "title": "Blacklisted URL",
+        "type": "string",
+        "expand-width": true,
+        "default": ""
+      }
+    ],
+    "default": []
   },
   "show-scale-update": {
     "type": "generic",
@@ -774,6 +805,11 @@
     "type": "button",
     "description": "Remove selected items from this list",
     "callback": "on_button_import_remove_clicked"
+  },
+  "import-blacklist-button": {
+    "type": "button",
+    "description": "Blacklist selected items from this list",
+    "callback": "on_button_import_blacklist_clicked"
   },
   "import-select-all": {
     "type": "button",
@@ -1330,6 +1366,12 @@
     "type": "switch",
     "default": true,
     "description": "Highlight this applet icon during background recording"
+  },
+  "ignoreYT": {
+    "type": "switch",
+    "default": false,
+    "description": "Ignore Youtube features",
+    "tooltip": "Ignoring Youtube features reduces CPU load. But loading album art becomes impossible."
   },
   "yt-cookies-from": {
     "type": "combobox",
@@ -1924,12 +1966,6 @@
     "type": "generic",
     "default": ""
   },
-  "storedRadios": {
-    "type": "generic",
-    "default": [
-
-    ]
-  },
   "recentRadios": {
     "type": "generic",
     "default": [
@@ -2208,6 +2244,10 @@
     "default": false
   },
   "radiopp-is-here": {
+    "type": "generic",
+    "default": false
+  },
+  "restart-after-reloading": {
     "type": "generic",
     "default": false
   }

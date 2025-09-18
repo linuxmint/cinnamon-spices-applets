@@ -1,3 +1,17 @@
+### v13.2.2~20250814
+  * Improved speed.
+  * Code cleanup.
+
+### v13.2.1~20250808
+  * Code cleanup.
+
+### v13.2.0~20250808
+  * Removes and replaces the use of the `del_song_arts.sh` script.
+  * Fixes [#7497](https://github.com/linuxmint/cinnamon-spices-applets/issues/7497)
+
+### v13.1.2~20250624
+  * Minor bugfix.
+
 ### v13.1.1~20250605
   * Improved option "View Full Album Art".
 
