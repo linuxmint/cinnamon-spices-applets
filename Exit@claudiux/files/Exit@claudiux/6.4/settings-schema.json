@@ -154,7 +154,7 @@
   },
   "mouse-deactivation-duration": {
     "type": "scale",
-    "dependency": "showMouseDuration",
+    "dependency": "showScreenOff",
     "default": 5,
     "min": 1,
     "max": 15,
@@ -294,9 +294,5 @@
   "sameKeyTwice": {
     "type": "generic",
     "default": false
-  },
-  "showMouseDuration": {
-    "type": "generic",
-    "default": true
   }
 }

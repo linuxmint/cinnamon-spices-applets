@@ -31,7 +31,7 @@ Settings are accessed by selecting *Configure...* from this applet's contextual 
 
 * You can choose shortcuts to open the menu.
 
-* You can choose shortcuts to turn screen On/Off. Using the hardware method, the mouse is disabled for the number of seconds you have chosen when the screen is turned Off; it is always reactivated when the screen is turned On. Using the software method, the mouse is never disabled.
+* You can choose shortcuts to turn screen On/Off. Using the hardware method, the mouse is disabled for the number of seconds you have chosen when the screen is turned Off; it is always reactivated when the screen is turned On. Using the software method, the mouse is never disabled. Moving the mouse pointer turns On the screen.
 
 * You can choose the keys used to select certain options when the menu is open.
 

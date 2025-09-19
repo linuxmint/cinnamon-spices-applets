@@ -1,3 +1,6 @@
+### v1.8.1~20250919
+* Moving the mouse pointer turns On the screen when it is Off.
+
 ### v1.8.0~20250918
 * Adds a software method to turn Off the screen.
 * Same shortcut to turn the screen On/Off.
