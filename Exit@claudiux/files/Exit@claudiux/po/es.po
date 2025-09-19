@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-18 21:20+0200\n"
-"PO-Revision-Date: 2025-09-18 12:12-0300\n"
+"PO-Revision-Date: 2025-09-19 13:45-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -68,9 +68,8 @@ msgid "Power Off"
 msgstr "Apagar"
 
 #. 6.4/applet.js:304
-#, fuzzy
 msgid "Screen On/Off"
-msgstr "Apagar pantalla"
+msgstr "Pantalla encendida/apagada"
 
 #. metadata.json->description
 msgid ""
@@ -230,17 +229,16 @@ msgid "Shortcuts"
 msgstr "Atajos"
 
 #. 6.4->settings-schema.json->page_Options->title
-#, fuzzy
 msgid "Options"
-msgstr "Opciones del menú"
+msgstr "Opciones"
 
 #. 6.4->settings-schema.json->sectionMaximize->title
 msgid "Vertical maximization"
-msgstr ""
+msgstr "Maximización vertical"
 
 #. 6.4->settings-schema.json->sectionMenuOthers->title
 msgid "System-managed menu options"
-msgstr ""
+msgstr "Opciones del menú gestionadas por el sistema"
 
 #. 6.4->settings-schema.json->section_Shortcuts->title
 msgid "Keybindings"
@@ -253,22 +251,24 @@ msgstr ""
 
 #. 6.4->settings-schema.json->screenOffUsesXset->description
 msgid "Use the hardware method to turn On/Off the screen"
-msgstr ""
+msgstr "Utiliza el método de hardware para encender/apagar la pantalla"
 
 #. 6.4->settings-schema.json->screenOffUsesXset->tooltip
 msgid ""
 "The hardware method does not always work correctly.\n"
 "In this case, disable this option to use only a software method."
 msgstr ""
+"El método de hardware no siempre funciona correctamente.\n"
+"En este caso, desactive esta opción para utilizar únicamente un método de "
+"software."
 
 #. 6.4->settings-schema.json->kbToggleMenu->description
 msgid "Toggle menu"
 msgstr "Activar/Desactivar menú"
 
 #. 6.4->settings-schema.json->kbWakeUpMonitor->description
-#, fuzzy
 msgid "Turn screen On/Off"
-msgstr "Apagar pantalla"
+msgstr "Encender/apagar la pantalla"
 
 #. 6.4->settings-schema.json->mkShutdown->description
 msgid "Key to select Power Off"
@@ -328,14 +328,16 @@ msgstr "No tiene sentido cambiar esto."
 
 #. 6.4->settings-schema.json->maximizeSettingsWindow->description
 msgid "Vertically maximize this Settings window"
-msgstr ""
+msgstr "Maximizar verticalmente esta ventana de configuración"
 
 #. 6.4->settings-schema.json->maximizeSettingsWindow->tooltip
 msgid ""
 "This option will only be taken into account the next times this Settings "
 "window is opened. "
 msgstr ""
+"Esta opción solo se tendrá en cuenta la próxima vez que se abra la ventana "
+"Configuración. "
 
 #. 6.4->settings-schema.json->labelSeparator->description
 msgid "────────────────────────────────────────────────────────────────"
-msgstr ""
+msgstr "────────────────────────────────────────────────────────────────"
