@@ -165,7 +165,11 @@ class ExitApplet extends Applet.IconApplet {
 
         this.get_user_settings();
 
+        //~ [this.mouseX, this.mouseY, this.mouseMods] = global.get_pointer();
+        [this.mouseX, this.mouseY, ] = global.get_pointer();
+        this.mouseMovesId = null;
         this.screenOn();
+        this.actor.connect('leave-event', () => { this.screenOn() });
 
         //~ this.screenOffIntervalId = null;
 
@@ -228,6 +232,10 @@ class ExitApplet extends Applet.IconApplet {
             //~ source_remove(this.screenOffIntervalId);
             //~ this.screenOffIntervalId = null;
         //~ }
+        if (this.mouseMovesId != null) {
+            source_remove(this.mouseMovesId);
+            this.mouseMovesId = null;
+        }
         if (this.screenOffUsesXset) {
             Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
             Util.spawnCommandLine('xset dpms force on');
@@ -240,6 +248,12 @@ class ExitApplet extends Applet.IconApplet {
     }
 
     screenOff() {
+        if (this.mouseMovesId != null) {
+            source_remove(this.mouseMovesId);
+            this.mouseMovesId = null;
+        }
+        [this.mouseX, this.mouseY, ] = global.get_pointer();
+        this.mouseMovesId = timeout_add_seconds(this.mouseDeactivationDuration, () => { this._checkMouseMoves(); return this.mouseMovesId != null; });
         if (this.screenOffUsesXset) {
             // Using xset (hardware method)
             let duration = Math.trunc(1000 * this.mouseDeactivationDuration);
@@ -267,6 +281,13 @@ class ExitApplet extends Applet.IconApplet {
             });
         }
         this.screenStatus = "off";
+    }
+
+    _checkMouseMoves() {
+        let [mouseX, mouseY, ] = global.get_pointer();
+        if (mouseX != this.mouseX || mouseX != this.mouseX) {
+            this.screenOn();
+        }
     }
 
     make_menu() {
@@ -548,12 +569,6 @@ class ExitApplet extends Applet.IconApplet {
         if (this.showScreenOff === false) {
             this.screenOffUsesXset = false;
         }
-        this.showMouseDuration = this.screenOffUsesXset;
-        let _to = setTimeout(() => {
-            clearTimeout(_to);
-            this.s.setValue("showMouseDuration", this.s.getValue("screenOffUsesXset"));
-        },
-        2100);
     }
 
     on_keybinds_changed() {
