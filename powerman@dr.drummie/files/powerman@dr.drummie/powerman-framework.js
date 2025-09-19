@@ -703,6 +703,23 @@ class BatteryManager extends BaseManager {
         // Desktop/VM fallback - no batteries means constant AC (moved to top)
         if (!hasBatteries) {
             this.debug("No batteries detected - assuming desktop/VM with AC");
+            // Optional: Check LINE_POWER even without batteries for edge cases
+            if (!this._vendorWorkarounds.ignoreLinePower && linePowerDevices.length > 0) {
+                for (let linePower of linePowerDevices) {
+                    this.debug(
+                        `LINE_POWER check on desktop: ${linePower.deviceId}, online=${linePower.online}, percentage=${linePower.percentage}, state=${linePower.state}`
+                    );
+                    // Workaround for VMs/desktops: Ignore LINE_POWER if percentage=0 and state=0 (typical for emulated devices)
+                    if (linePower.percentage === 0 && linePower.state === 0) {
+                        this.debug("LINE_POWER appears to be emulated (desktop/VM-like) - ignoring and assuming AC");
+                        return true;
+                    }
+                    if (!linePower.online) {
+                        this.debug("LINE_POWER indicates no AC on desktop - unusual, but respecting it");
+                        return false;
+                    }
+                }
+            }
             return true;
         }
 
@@ -742,8 +759,8 @@ class BatteryManager extends BaseManager {
             }
             // If batteries are full but not charging, could be AC connected but full
             else if (fullCount > 0 && dischargingCount === 0) {
-                this.debug(`Batteries full - checking LINE_POWER for confirmation`);
-                // Fall through to LINE_POWER check
+                this.debug(`Batteries full and not discharging - assuming AC power (fully charged state)`);
+                return true; // Assume AC when batteries are full and not discharging
             }
         }
 
@@ -1468,6 +1485,8 @@ class SystemManager extends BaseManager {
             let hasBrightness = brightnessManager && brightnessManager.isBrightnessSupported();
             let hasPowerProfiles = powerManager && powerManager.isPowerProfilesSupported();
             let hasBattery = this._applet._devices && this._applet._devices.length > 0;
+
+            this.debug(`Brightness supported check: manager=${!!brightnessManager}, isSupported=${hasBrightness}`);
 
             this.setSetting("brightness-available", hasBrightness);
             this.setSetting("brightness-not-available", !hasBrightness);

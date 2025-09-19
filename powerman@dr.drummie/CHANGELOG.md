@@ -4,6 +4,7 @@
 
 - Refactored whole automation logic into extension framework with hooks and dedicated managers separated from applet's main logic.
 - Fixed (most of) brightness and dimming switching bugs on power source changes.
+- Fixed power state when batteries are full and AC connected (since most of power line detection on 3 laptops didn't gave me some meaningful results like "AC connected", on 100% of battery it should switch onto battery mode, then after short timeout switch again onto AC mode).
 - Improved responsiveness and speed of the applet.
 - Added icons to notifications.
 - Removed some unneeded notifications.
