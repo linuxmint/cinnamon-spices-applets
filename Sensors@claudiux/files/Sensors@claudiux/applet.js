@@ -576,7 +576,8 @@ class SensorsApplet extends Applet.Applet {
     var _known_keys = [];
 
     for (let k of this.sensors_list[type].get_value()) {
-      let _sensor = k["sensor"].trim();
+      //~ let _sensor = k["sensor"].trim();
+      let _sensor = k["sensor"];
 
       _known_keys.push(_sensor);
 
@@ -603,7 +604,8 @@ class SensorsApplet extends Applet.Applet {
 
     for (let sensor of _sensors) {
       //~ name = sensor.toString().trim();
-      name = sensor.trim();
+      //~ name = sensor.trim();
+      name = sensor;
       toPush = {};
       index = _known_keys.indexOf(name);
       if (type === "temps") this.minimumIntegerDigitsTemp = 2;
@@ -742,7 +744,8 @@ class SensorsApplet extends Applet.Applet {
     var temp_disks = this.temp_disks;
     let subProcess = spawnCommandLineAsyncIO(command, (stdout, stderr, exitCode) => {
       if (exitCode === 0) {
-        let out = stdout.trim();
+        //~ let out = stdout.trim();
+        let out = stdout;
         let disks = out.split(" ");
         for (let d of disks) {
           var found = false;
@@ -828,7 +831,8 @@ class SensorsApplet extends Applet.Applet {
 
       if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks.length > 0) {
         for (let disk of this.temp_disks) {
-          let _disk_name = disk["disk"].trim();
+          //~ let _disk_name = disk["disk"].trim();
+          let _disk_name = disk["disk"];
           if (disk["show_in_tooltip"]) {
             if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
             let _temp;
@@ -1122,7 +1126,8 @@ class SensorsApplet extends Applet.Applet {
     }
     if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && !this.nothingToShow(this.temp_disks)) {
       for (let disk of this.temp_disks) {
-        let _disk_name = disk["disk"].trim();
+        //~ let _disk_name = disk["disk"].trim();
+        let _disk_name = disk["disk"];
         if (disk["show_in_panel"] && _disk_name.length > 0) {
           if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
           if (disk["value"]) this._temp[_disk_name] = disk["value"];
