@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-18 21:20+0200\n"
+"POT-Creation-Date: 2025-09-20 23:58+0200\n"
 "PO-Revision-Date: 2025-02-21 18:51+0100\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 5.4/applet.js:140 6.4/applet.js:292
+#. 5.4/applet.js:140 6.4/applet.js:336
 msgid "Restart Cinnamon"
 msgstr "Herstart Cinnamon"
 
@@ -25,48 +25,52 @@ msgstr "Herstart Cinnamon"
 msgid "Screen Off"
 msgstr "Scherm uitzetten"
 
-#. 5.4/applet.js:177 6.4/applet.js:315
+#. 5.4/applet.js:177 6.4/applet.js:363
 msgid "Lock Screen"
 msgstr "Vergrendel scherm"
 
 #. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
-#. 6.4/applet.js:343 6.4/applet.js:353 6.4/applet.js:362 6.4/applet.js:371
+#. 6.4/applet.js:391 6.4/applet.js:401 6.4/applet.js:410 6.4/applet.js:419
 msgid "Switch User"
 msgstr "Gebruiker wisselen"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:374 6.4/applet.js:400
-#. 6.4/applet.js:421 6.4/applet.js:452 6.4/applet.js:473 6.4/applet.js:492
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:422 6.4/applet.js:448
+#. 6.4/applet.js:473 6.4/applet.js:508 6.4/applet.js:533 6.4/applet.js:556
 msgid "Performing automatic updates"
 msgstr "Bezig met het uitvoeren van automatische updates"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:374 6.4/applet.js:400
-#. 6.4/applet.js:421 6.4/applet.js:452 6.4/applet.js:473 6.4/applet.js:492
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:422 6.4/applet.js:448
+#. 6.4/applet.js:473 6.4/applet.js:508 6.4/applet.js:533 6.4/applet.js:556
 msgid "Please wait"
 msgstr "Even geduld aub"
 
-#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:387 6.4/applet.js:397
+#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:435 6.4/applet.js:445
 msgid "Log Out"
 msgstr "Afmelden"
 
-#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:411 6.4/applet.js:418
+#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:460 6.4/applet.js:462
+#. 6.4/applet.js:470
 msgid "Suspend"
 msgstr "Slaapstand"
 
-#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:429 6.4/applet.js:449
+#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:482 6.4/applet.js:484
+#. 6.4/applet.js:505
 msgid "Hibernate"
 msgstr "Slaapstand naar schijf"
 
-#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:463 6.4/applet.js:470
+#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:520 6.4/applet.js:522
+#. 6.4/applet.js:530
 msgid "Restart"
 msgstr "Herstart"
 
-#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:481 6.4/applet.js:489
+#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:542 6.4/applet.js:544
+#. 6.4/applet.js:553
 msgid "Power Off"
 msgstr "Uitschakelen"
 
-#. 6.4/applet.js:304
+#. 6.4/applet.js:349 6.4/applet.js:351
 #, fuzzy
 msgid "Screen On/Off"
 msgstr "Scherm uitzetten"
@@ -241,6 +245,10 @@ msgstr ""
 msgid "System-managed menu options"
 msgstr ""
 
+#. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
+msgid "Menu appearance"
+msgstr ""
+
 #. 6.4->settings-schema.json->section_Shortcuts->title
 msgid "Keybindings"
 msgstr ""
@@ -257,6 +265,10 @@ msgstr ""
 msgid ""
 "The hardware method does not always work correctly.\n"
 "In this case, disable this option to use only a software method."
+msgstr ""
+
+#. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
+msgid "Do not show any shortcut in the menu"
 msgstr ""
 
 #. 6.4->settings-schema.json->kbToggleMenu->description

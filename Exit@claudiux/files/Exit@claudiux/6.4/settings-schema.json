@@ -18,6 +18,7 @@
       "type": "page",
       "title": "Shortcuts",
       "sections": [
+      "section_DontShowShortcutsInMenu",
         "section_Shortcuts",
         "section_MenuKeys"
       ]
@@ -73,6 +74,13 @@
         "showSwitchUser",
         "showLogout",
         "logoutMode"
+      ]
+    },
+    "section_DontShowShortcutsInMenu": {
+      "type": "section",
+      "title": "Menu appearance",
+      "keys": [
+        "dontShowShortcutsInMenu"
       ]
     },
     "section_Shortcuts": {
@@ -196,6 +204,11 @@
       "Force": "--force"
     },
     "tooltip": "The 'Force' option lets you log out while ignoring inhibitors. Useful when several sessions are open."
+  },
+  "dontShowShortcutsInMenu": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not show any shortcut in the menu"
   },
   "kbToggleMenu": {
     "type": "keybinding",
