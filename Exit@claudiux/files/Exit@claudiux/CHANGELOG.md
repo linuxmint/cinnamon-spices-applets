@@ -1,3 +1,7 @@
+### v1.8.2~20250920
+* Screen On/Off even with multiple monitors.
+* Make the display of shortcuts in the menu optional.
+
 ### v1.8.1~20250919
 * Moving the mouse pointer turns On the screen when it is Off.
 

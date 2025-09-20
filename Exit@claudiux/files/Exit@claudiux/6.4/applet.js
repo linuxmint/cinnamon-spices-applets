@@ -151,6 +151,9 @@ class ExitApplet extends Applet.IconApplet {
         this.set_applet_icon_symbolic_name("system-shutdown");
         this.set_applet_tooltip(_(metadata.name));
 
+        this.allMonitors = [];
+        this.allBrightness = [];
+
         this.sudo_or_wheel = "none";
         let subProcess = Util.spawnCommandLineAsyncIO("/usr/bin/env bash -c 'groups'", (out, err, exitCode) => {
             if (exitCode == 0) {
@@ -200,6 +203,7 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showSwitchUser", "showSwitchUser");
         this.s.bind("showLogout", "showLogout");
         this.s.bind("logoutMode", "logoutMode");
+        this.s.bind("dontShowShortcutsInMenu", "dontShowShortcutsInMenu");
         this.s.bind("kbToggleMenu", "kbToggleMenu", () => { this.on_keybinds_changed() });
         this.s.bind("kbWakeUpMonitor", "kbWakeUpMonitor", () => { this.on_keybinds_changed() });
         this.s.bind("sameKeyTwice", "sameKeyTwice");
@@ -240,8 +244,14 @@ class ExitApplet extends Applet.IconApplet {
             Util.spawnCommandLine(SCRIPTS_DIR + "/mice.sh enable");
             Util.spawnCommandLine('xset dpms force on');
         } else {
-            if (this.brightness && this.activeMonitor) {
-                Util.spawnCommandLineAsync(`xrandr --output ${this.activeMonitor} --brightness ${this.brightness}`);
+            //~ if (this.brightness && this.activeMonitor) {
+                //~ Util.spawnCommandLineAsync(`xrandr --output ${this.activeMonitor} --brightness ${this.brightness}`);
+            //~ }
+            if (this.allMonitors.length > 0 && this.allBrightness.length > 0) {
+                for (let i in this.allMonitors) {
+                    let [activeMonitor, brightness] = [this.allMonitors[i], this.allBrightness[i]];
+                    Util.spawnCommandLineAsync(`xrandr --output ${activeMonitor} --brightness ${brightness}`);
+                }
             }
         }
         this.screenStatus = "on";
@@ -268,13 +278,26 @@ class ExitApplet extends Applet.IconApplet {
             );
         } else {
             // Using xrandr (software method)
-            Util.spawnCommandLineAsyncIO(SCRIPTS_DIR + "/get-brightness.sh", (stdout, stderr, exitCode) => {
+            //~ Util.spawnCommandLineAsyncIO(SCRIPTS_DIR + "/get-brightness.sh", (stdout, stderr, exitCode) => {
+                //~ if (exitCode === 0) {
+                    //~ let [brightness, activeMonitor] = stdout.split(" ");
+                    //~ brightness = parseFloat(brightness);
+                    //~ if (brightness != 0.0) {
+                        //~ this.brightness = brightness;
+                        //~ this.activeMonitor = activeMonitor;
+                        //~ Util.spawnCommandLineAsync(`xrandr --output ${activeMonitor} --brightness 0`);
+                    //~ }
+                //~ }
+            //~ });
+            Util.spawnCommandLineAsyncIO(SCRIPTS_DIR + "/get-monitors-info.sh", (stdout, stderr, exitCode) => {
                 if (exitCode === 0) {
-                    let [brightness, activeMonitor] = stdout.split(" ");
-                    brightness = parseFloat(brightness);
-                    if (brightness != 0.0) {
-                        this.brightness = brightness;
-                        this.activeMonitor = activeMonitor;
+                    this.allMonitors = [];
+                    this.allBrightness = [];
+                    let couples = stdout.split(" ");
+                    for (let couple of couples) {
+                        let [activeMonitor, brightness] = couple.split(",");
+                        this.allMonitors.push(activeMonitor);
+                        this.allBrightness.push(brightness);
                         Util.spawnCommandLineAsync(`xrandr --output ${activeMonitor} --brightness 0`);
                     }
                 }
@@ -322,7 +345,11 @@ class ExitApplet extends Applet.IconApplet {
             }
 
             if (this.showScreenOff) {
-                item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off") + "   " + this.kbWakeUpMonitor.split("::")[0], "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                if (this.dontShowShortcutsInMenu) {
+                    item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off"), "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off") + "   " + this.kbWakeUpMonitor.split("::")[0], "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                }
                 item.connect('activate', () => {
                     if (this.screenStatus == undefined || this.screenStatus == "on")
                         this.screenOff();
@@ -429,7 +456,11 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showSuspend) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
+                if (this.dontShowShortcutsInMenu) {
+                    item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
+                }
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "suspend"]);
@@ -447,7 +478,11 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showHibernate) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                if (this.dontShowShortcutsInMenu) {
+                    item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                }
                 item.connect('activate', () => {
                     this.menu.close(true);
                     if (this.hibernateNeedsSudo) {
@@ -481,7 +516,11 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showRestart) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Restart") + "   [" + this.mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
+                if (this.dontShowShortcutsInMenu) {
+                    item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Restart") + "   [" + this.mkRestart + "]", "view-refresh", St.IconType.SYMBOLIC);
+                }
                 item.connect('activate', () => {
                     this.menu.close(true);
                     launcher.spawnv(["systemctl", "reboot"]);
@@ -499,7 +538,11 @@ class ExitApplet extends Applet.IconApplet {
 
         if (this.showPowerOff) {
             if (this.can_shutdown) {
-                item = new PopupMenu.PopupIconMenuItem(_("Power Off") + "   [" + this.mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                if (this.dontShowShortcutsInMenu) {
+                    item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Power Off") + "   [" + this.mkShutdown + "]", "system-shutdown-symbolic", St.IconType.SYMBOLIC);
+                }
                 item.connect('activate', () => {
                     this.menu.close(true);
                     this.screensaver_inhibitor.uninhibit_screensaver();
