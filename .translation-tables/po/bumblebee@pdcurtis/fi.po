@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2024-11-12 18:29+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Bumblebee ei ole asennettuna"
+
+#. applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Tietokoneesta puuttuu Nvidia ohjelmistoa. Bumblebee ei voi vaihtaa "
+"näytönohjainta Nvidia Optimuksen avulla."
+
+#. applet.js:152
+msgid "Please read the help file."
+msgstr "Lue ohjeet."
+
+#. applet.js:172
+msgid "Waiting for Bumblebee"
+msgstr "Odotetaan… Bumblebee"
+
+#. applet.js:232
+msgid "Open nVidia Settings Program"
+msgstr "Avaa nvidian asetukset"
+
+#. applet.js:238
+msgid "Open Power Statistics"
+msgstr "Avaa virtatiedot"
+
+#. applet.js:244
+msgid "Open System Monitor"
+msgstr "Avaa järjestelmän valvonta"
+
+#. applet.js:253
+msgid "Housekeeping and System Sub Menu"
+msgstr "Siivous ja alivalikko"
+
+#. applet.js:256
+msgid "View the Changelog"
+msgstr "Avaa muutosloki"
+
+#. applet.js:262
+msgid "Open the Help file"
+msgstr "Avaa ohjeet"
+
+#. applet.js:278
+msgid "Launch programs using the nVidia Graphics Processor"
+msgstr "Käynnistä ohjelmia Nvidia:lla"
+
+#. applet.js:359
+msgid "NVidia based GPU is Off"
+msgstr "NVidia pois päältä"
+
+#. applet.js:384
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "NVidia päällä ja lämpötila on"
+
+#. applet.js:392
+msgid "Err"
+msgstr "Virhe"
+
+#. applet.js:393
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+"Bumblebee ei ole oikein asetettu. Onko bbswitch, bumblebee ja nvidia-ajurit "
+"asennettuna?"
+
+#. metadata.json->description
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"Bumblebee näyttää lämpötiloja Nvidia:lle ja mahdollistaa valitun ohjelman "
+"käynnistämisen joko optirun:lla tai primusrun:lla"
+
+#. metadata.json->name
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Nvidia bumblebee ja lämötilat"
+
+#. settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "Asetukset Nvidia hallintaan"
+
+#. settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Näyttämisen päivitysväli:"
+
+#. settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Suurenna tai pienennä spinner-arvoa ja muuta tietojen päivitysväliä. Pitkä "
+"päivitysväli mikäli sinulla on hidas tietokone"
+
+#. settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Näytä lämpötila sekä kuvake"
+
+#. settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr "Vaaka tai pystypaneeli. Lämpötila celsius °C asteina."
+
+#. settings-schema.json->head2->description
+msgid "Programs settings for Optimus"
+msgstr "Optimus ohjelman asetukset"
+
+#. settings-schema.json->description1->description
+msgid "Display Name of Program 1 to be run using Optimus technology"
+msgstr "Ohjelman 4 nimi, suoritetaan optimus:lla"
+
+#. settings-schema.json->description1->tooltip
+msgid ""
+"Put the name of the program here or null if you do not want it displayed"
+msgstr "Anna ohjelman nimi tai null, jos et halua sitä näyttää"
+
+#. settings-schema.json->commandString1->description
+msgid "Command String for Program 1"
+msgstr "Komento ohjelmalle 1"
+
+#. settings-schema.json->commandString1->tooltip
+#. settings-schema.json->commandString2->tooltip
+#. settings-schema.json->commandString3->tooltip
+#. settings-schema.json->commandString4->tooltip
+#. settings-schema.json->commandString5->tooltip
+msgid ""
+"Put the command string to run the program here starting with optirun or "
+"primusrun"
+msgstr ""
+"Anna komento jolla ohjelma suoritetaan. Alkaa joko optirun tai primusrun"
+
+#. settings-schema.json->description2->description
+msgid "Display Name of Program 2 to be run using Optimus technology"
+msgstr "Ohjelman 2 nimi, suoritetaan optimus:lla"
+
+#. settings-schema.json->description2->tooltip
+#. settings-schema.json->description3->tooltip
+#. settings-schema.json->description4->tooltip
+#. settings-schema.json->description5->tooltip
+msgid ""
+"Put the name of the program here or none if you do not want it displayed"
+msgstr "Anna ohjelman nimi tai ei mitään, jos et halua sitä näyttää"
+
+#. settings-schema.json->commandString2->description
+msgid "Command String for Program 2"
+msgstr "Komento ohjelmalle 2"
+
+#. settings-schema.json->description3->description
+msgid "Display Name of Program 3 to be run using Optimus technology"
+msgstr "Ohjelman 3 nimi, suoritetaan optimus:lla"
+
+#. settings-schema.json->commandString3->description
+msgid "Command String for Program 3"
+msgstr "Komento ohjelmalle 3"
+
+#. settings-schema.json->description4->description
+msgid "Display Name of Program 4 to be run using Optimus technology"
+msgstr "Ohjelman 4 nimi, suoritetaan optimus:lla"
+
+#. settings-schema.json->commandString4->description
+msgid "Command String for Program 4"
+msgstr "Komento ohjelmalle 4"
+
+#. settings-schema.json->description5->description
+msgid "Display Name of Program 5 to be run using Optimus technology"
+msgstr "Ohjelman 5 nimi, suoritetaan optimus:lla"
+
+#. settings-schema.json->commandString5->description
+msgid "Command String for Program 5"
+msgstr "Komento ohjelmalle 5"

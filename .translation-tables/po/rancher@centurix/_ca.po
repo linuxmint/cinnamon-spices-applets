@@ -1,0 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#. applet.js:284 applet.js:285
+msgid "Vagrant is out of date, please update."
+msgstr ""
+
+#. applet.js:329
+msgid "Homestead missing or not configured"
+msgstr ""
+
+#. applet.js:341
+msgid "Vagrant is out of date for this version of Homestead, please update."
+msgstr ""
+
+#. applet.js:342
+msgid "Click here for the Vagrant download page."
+msgstr ""

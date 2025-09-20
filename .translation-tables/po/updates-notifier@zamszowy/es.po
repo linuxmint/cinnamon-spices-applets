@@ -1,0 +1,169 @@
+# UPDATES NOTIFIER
+# This file is put in the public domain.
+# zamszowy, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: updates-notifier@zamszowy 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-13 12:55+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#. applet.js:37
+msgid "missing dependencies"
+msgstr "dependencias que faltan"
+
+#. applet.js:106
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s actualizaciones disponibles"
+
+#. applet.js:107
+msgid "No updates available"
+msgstr "No hay actualizaciones disponibles"
+
+#. applet.js:133
+msgid "Check for new updates"
+msgstr "Buscar nuevas actualizaciones"
+
+#. applet.js:144
+#, javascript-format
+msgid "View %s updates"
+msgstr "Ver %s actualizaciones"
+
+#. applet.js:144
+msgid "No updates to view"
+msgstr "No hay actualizaciones que ver"
+
+#. applet.js:157
+#, javascript-format
+msgid "Upgrade %s packages"
+msgstr "Actualizar %s paquetes"
+
+#. applet.js:157
+msgid "No packages to upgrade"
+msgstr "No hay paquetes que actualizar"
+
+#. info-window.js:118
+msgid "Loading update details…"
+msgstr "Cargando detalles de la actualización..."
+
+#. info-window.js:170
+msgid "No details available."
+msgstr "No hay detalles disponibles."
+
+#. info-window.js:172
+msgid ""
+"Error:\n"
+"{0}"
+msgstr ""
+"Error:\n"
+"{0}"
+
+#. info-window.js:181
+msgid ""
+"Failed to run command:\n"
+"{0}"
+msgstr ""
+"No se pudo ejecutar el comando:\n"
+"{0}"
+
+#. info-window.js:191
+msgid "Updates"
+msgstr "Actualizaciones"
+
+#. info-window.js:206
+msgid "Search updates…"
+msgstr "Buscar actualizaciones..."
+
+#. info-window.js:238
+msgid "{0} updates"
+msgstr "{0} actualizaciones"
+
+#. metadata.json->name
+msgid "Updates notifier"
+msgstr "Notificador de actualizaciones"
+
+#. metadata.json->description
+msgid "Shows icons for pending update packages"
+msgstr "Muestra los iconos de los paquetes de actualización pendientes"
+
+#. settings-schema.json->section1->description
+msgid "Settings"
+msgstr "Configuración"
+
+#. settings-schema.json->update-refresh->description
+msgid "Minutes to wait before refreshing applet"
+msgstr "Minutos de espera antes de actualizar el applet"
+
+#. settings-schema.json->hide-applet->description
+msgid "Hide applet if there are no updates"
+msgstr "Ocultar applet si no hay actualizaciones"
+
+#. settings-schema.json->different-levels->description
+msgid "Show different applet icon for different updgradeable packages count"
+msgstr "Mostrar un icono de applet diferente para cada paquete actualizable"
+
+#. settings-schema.json->level-1->description
+msgid "Show low level icon when updates count is between 0 and this value "
+msgstr ""
+"Mostrar icono de nivel bajo cuando el recuento de actualizaciones esté entre "
+"0 y este valor "
+
+#. settings-schema.json->level-2->description
+msgid ""
+"Show medium level icon when updates count is between low level value and "
+"this value. Show high level icon if it's higher than this value."
+msgstr ""
+"Mostrar icono de nivel medio cuando el recuento de actualizaciones está "
+"entre el valor de nivel bajo y este valor. Mostrar icono de nivel alto si es "
+"superior a este valor."
+
+#. settings-schema.json->section2->description
+msgid "Commands to execute in popup menu"
+msgstr "Comandos a ejecutar en el menú emergente"
+
+#. settings-schema.json->commandUpdate-show->description
+msgid "Show \"Check for new updates\" command"
+msgstr "Mostrar el comando \"Buscar nuevas actualizaciones"
+
+#. settings-schema.json->commandUpdate->description
+msgid "Check for new updates:"
+msgstr "Comprueba si hay nuevas actualizaciones:"
+
+#. settings-schema.json->commandUpgrade-show->description
+msgid "Show \"Upgrade packages\" command"
+msgstr "Mostrar comando \"Actualizar paquetes\""
+
+#. settings-schema.json->commandUpgrade->description
+msgid "Upgrade packages:"
+msgstr "Actualizar paquetes:"
+
+#. settings-schema.json->section3->description
+msgid "Theme"
+msgstr "Tema"
+
+#. settings-schema.json->icon-style->description
+msgid "Icon style"
+msgstr "Estilo de icono"
+
+#. settings-schema.json->icon-style->options
+msgid "dark"
+msgstr "oscuro"
+
+#. settings-schema.json->icon-style->options
+msgid "light"
+msgstr "claro"
+
+#. settings-schema.json->icon-style->options
+msgid "symbolic"
+msgstr "simbólico"
