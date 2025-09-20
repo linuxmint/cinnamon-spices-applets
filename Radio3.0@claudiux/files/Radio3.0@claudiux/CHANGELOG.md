@@ -1,3 +1,7 @@
+### v3.7.2~20250920
+  * Monitors certain files only when necessary, to avoid errors.
+  * Updates the server list.
+
 ### v3.7.1~20250915
   * Menu bugfix.
 

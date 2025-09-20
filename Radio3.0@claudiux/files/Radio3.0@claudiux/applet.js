@@ -255,9 +255,9 @@ const UPDATE_OPTIONS_FILE = RUNTIME_DIR + "/radio_update_options.txt";
 
 const DEFAULT_DB_SERVERS = [
   "https://api.radiodb.fr",
+  "https://fi1.api.radio-browser.info",
   "https://de1.api.radio-browser.info",
-  "https://at1.api.radio-browser.info",
-  "https://nl1.api.radio-browser.info"
+  "https://de2.api.radio-browser.info"
 ];
 const RADIO_LISTS_DIR = DOT_CONFIG_DIR + "/radio-lists";
 const JOBS_DIR = DOT_CONFIG_DIR + "/scheduled-jobs";
@@ -4050,12 +4050,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_applet_added_to_panel() {
     // Run all monitors:
     this.on_network_monitoring_changed();
-    this.monitor_mpv_title();
+    //~ this.monitor_mpv_title();
     this.monitor_jobs_dir();
     this.monitor_rec_folder();
-    this.monitor_r30stop();
-    this.monitor_r30next();
-    this.monitor_r30previous();
+    //~ this.monitor_r30stop();
+    //~ this.monitor_r30next();
+    //~ this.monitor_r30previous();
 
     // Connect signals:
     this._connect_signals();
