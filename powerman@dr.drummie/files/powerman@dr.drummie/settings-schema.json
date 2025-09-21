@@ -11,7 +11,7 @@
     "section-brightness-automation": {
       "type": "section",
       "title": "Brightness Automation",
-      "keys": ["enable-brightness-auto", "ac-brightness", "battery-brightness"],
+      "keys": ["enable-brightness-auto", "remember-user-brightness", "ac-brightness", "battery-brightness"],
       "dependency": "brightness-available"
     },
     "section-brightness-dimming": {
@@ -79,9 +79,15 @@
     "description": "Automatically adjust brightness for AC/Battery",
     "tooltip": "Enable separate brightness levels for AC power and battery power"
   },
+  "remember-user-brightness": {
+    "type": "switch",
+    "default": false,
+    "description": "Remember user brightness changes",
+    "tooltip": "Automatically update AC/Battery brightness settings when user manually changes brightness"
+  },
   "ac-brightness": {
     "type": "scale",
-    "default": 80,
+    "default": 90,
     "min": 5,
     "max": 100,
     "step": 5,
@@ -90,7 +96,7 @@
   },
   "battery-brightness": {
     "type": "scale",
-    "default": 35,
+    "default": 40,
     "min": 5,
     "max": 100,
     "step": 5,

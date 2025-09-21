@@ -1,5 +1,18 @@
 # Changelog
 
+## Known Issues
+
+- If PowerMan is set to replace default Power applet and then uninstalled, you may need to manually re-enable the default power applet in Applet Manager and restart the system or logout/login. If PowerMan is still installed and active, you need to enable default Power applet, then uncheck "Replace system applet", it should appear in System tray.
+- If dimming is enabled and screen is dimmed (user is idle), power profile would be switched immediately, but brightness will be switched after user become active again (to avoid screen brightness dimming bugs).
+- If you have dimming enabled for i.e. only battery mode, after auto switching from AC to battery, dimming would not be active until some user activity (couldn't find a way around that issue).
+
+## [1.9.5]
+
+- Extended default popup with switches for quickly enable / disable automation.
+- Added option to remember user's "external" change of brightness with settings depending on power source.
+- Refactored some internal stuff.
+- Updated po / pot files.
+  
 ## [1.9.1]
 
 - Refactored whole automation logic into extension framework with hooks and dedicated managers separated from applet's main logic.
@@ -15,10 +28,3 @@
 - Initial release with power profile automation.
 - Added separate AC/battery brightness levels.
 - All logic inside original Power applet.
-
-## Known Issues
-
-- If PowerMan is set to replace default Power applet and then uninstalled, you may need to manually re-enable the default power applet in Applet Manager and restart the system or logout/login. If PowerMan is still installed and active, you need to enable default Power applet, then uncheck "Replace system applet", it should appear in System tray.
-- If dimming is enabled and screen is dimmed (user is idle), power profile would be switched immediately, but brightness will be switched after user become active again (to avoid screen brightness dimming bugs).
-- If you have dimming enabled for i.e. only battery mode, after auto switching from AC to battery, dimming would not be active until some user activity (couldn't find a way around that issue).
-  

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: powerman@dr.drummie 1.6\n"
 "Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
-"POT-Creation-Date: 2025-09-15 23:57+0200\n"
+"POT-Creation-Date: 2025-09-21 18:21+0200\n"
 "PO-Revision-Date: 2025-08-28 08:41+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,176 +18,184 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/applet.js:53 src/powerman-framework.js:29
+#: src/applet.js:54 src/powerman-framework.js:29
 msgid "Power Saver"
 msgstr "Štednja energije"
 
-#: src/applet.js:54 src/powerman-framework.js:30
+#: src/applet.js:55 src/powerman-framework.js:30
 msgid "Balanced"
 msgstr "Uravnotežen"
 
-#: src/applet.js:55 src/powerman-framework.js:31
+#: src/applet.js:56 src/powerman-framework.js:31
 msgid "Performance"
 msgstr "Performanse"
 
-#: src/applet.js:62
+#: src/applet.js:63
 msgid "Battery full"
 msgstr "Baterija puna"
 
-#: src/applet.js:64
+#: src/applet.js:65
 msgid "Battery almost full"
 msgstr "Baterija skoro puna"
 
-#: src/applet.js:66
+#: src/applet.js:67
 msgid "Battery good"
 msgstr "Baterija dobra"
 
-#: src/applet.js:68
+#: src/applet.js:69
 msgid "Low battery"
 msgstr "Slaba baterija"
 
-#: src/applet.js:70
+#: src/applet.js:71
 msgid "Critically low battery"
 msgstr "Kritično slaba baterija"
 
-#: src/applet.js:72 src/applet.js:138
+#: src/applet.js:73 src/applet.js:139
 msgid "Unknown"
 msgstr "Nepoznato"
 
-#: src/applet.js:79
+#: src/applet.js:80
 msgid "AC adapter"
 msgstr "AC adapter"
 
-#: src/applet.js:81
+#: src/applet.js:82
 msgid "Laptop battery"
 msgstr "Laptop baterija"
 
-#: src/applet.js:83
+#: src/applet.js:84
 msgid "UPS"
 msgstr "UPS"
 
-#: src/applet.js:85
+#: src/applet.js:86
 msgid "Monitor"
 msgstr "Monitor"
 
-#: src/applet.js:87
+#: src/applet.js:88
 msgid "Mouse"
 msgstr "Miš"
 
-#: src/applet.js:89
+#: src/applet.js:90
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
-#: src/applet.js:91
+#: src/applet.js:92
 msgid "PDA"
 msgstr "PDA"
 
-#: src/applet.js:93
+#: src/applet.js:94
 msgid "Cell phone"
 msgstr "Mobitel"
 
-#: src/applet.js:95
+#: src/applet.js:96
 msgid "Media player"
 msgstr "Medijski player"
 
-#: src/applet.js:97
+#: src/applet.js:98
 msgid "Tablet"
 msgstr "Tablet"
 
-#: src/applet.js:99
+#: src/applet.js:100
 msgid "Computer"
 msgstr "Računalo"
 
-#: src/applet.js:101
+#: src/applet.js:102
 msgid "Gaming input"
 msgstr "Gaming kontroler"
 
-#: src/applet.js:103
+#: src/applet.js:104
 msgid "Pen"
 msgstr "Olovka"
 
-#: src/applet.js:105
+#: src/applet.js:106
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: src/applet.js:107
+#: src/applet.js:108
 msgid "Modem"
 msgstr "Modem"
 
-#: src/applet.js:109
+#: src/applet.js:110
 msgid "Network"
 msgstr "Mreža"
 
-#: src/applet.js:111
+#: src/applet.js:112
 msgid "Headset"
 msgstr "Slušalice s mikrofonom"
 
-#: src/applet.js:113
+#: src/applet.js:114
 msgid "Speakers"
 msgstr "Zvučnici"
 
-#: src/applet.js:115
+#: src/applet.js:116
 msgid "Headphones"
 msgstr "Slušalice"
 
-#: src/applet.js:117
+#: src/applet.js:118
 msgid "Video"
 msgstr "Video"
 
-#: src/applet.js:119
+#: src/applet.js:120
 msgid "Audio device"
 msgstr "Audio uređaj"
 
-#: src/applet.js:121
+#: src/applet.js:122
 msgid "Remote control"
 msgstr "Daljinski upravljač"
 
-#: src/applet.js:123
+#: src/applet.js:124
 msgid "Printer"
 msgstr "Pisač"
 
-#: src/applet.js:125
+#: src/applet.js:126
 msgid "Scanner"
 msgstr "Skener"
 
-#: src/applet.js:127
+#: src/applet.js:128
 msgid "Camera"
 msgstr "Kamera"
 
-#: src/applet.js:129
+#: src/applet.js:130
 msgid "Wearable"
 msgstr "Nosivi uređaj"
 
-#: src/applet.js:131
+#: src/applet.js:132
 msgid "Toy"
 msgstr "Igračka"
 
-#: src/applet.js:133
+#: src/applet.js:134
 #, fuzzy
 msgid "Bluetooth device"
 msgstr "Audio uređaj"
 
-#: src/applet.js:433 src/applet.js:1042
+#: src/applet.js:447 src/applet.js:1133
 msgid "Brightness"
 msgstr "Svjetlina"
 
-#: src/applet.js:434 src/applet.js:1047
+#: src/applet.js:448 src/applet.js:1138
 msgid "Keyboard backlight"
 msgstr "Pozadinsko osvjetljenje tipkovnice"
 
-#: src/applet.js:445
+#: src/applet.js:461
+msgid "Brightness Automation"
+msgstr "Automatska svjetlina"
+
+#: src/applet.js:473
+msgid "Power Profile Automation"
+msgstr "Automatski profili napajanja"
+
+#: src/applet.js:499
 msgid "Automation Settings"
 msgstr "Postavke automatizacije"
 
-#: src/applet.js:454
+#: src/applet.js:508
 msgid "Power Settings"
 msgstr "Postavke napajanja"
 
-#: src/applet.js:684
+#: src/applet.js:775
 msgid "Charging"
 msgstr "Punjenje"
 
-#: src/applet.js:688
+#: src/applet.js:779
 #, javascript-format
 msgid "Charging - %d hour until fully charged"
 msgid_plural "Charging - %d hours until fully charged"
@@ -195,26 +203,26 @@ msgstr[0] "Punjenje - %d sat do potpunog punjenja"
 msgstr[1] "Punjenje - %d sata do potpunog punjenja"
 msgstr[2] "Punjenje - %d sati do potpunog punjenja"
 
-#: src/applet.js:693
+#: src/applet.js:784
 #, javascript-format
 msgid "Charging - %d %s %d %s until fully charged"
 msgstr "Punjenje - %d %s %d %s do potpunog punjenja"
 
-#: src/applet.js:696 src/applet.js:724
+#: src/applet.js:787 src/applet.js:815
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "sat"
 msgstr[1] "sata"
 msgstr[2] "sati"
 
-#: src/applet.js:698 src/applet.js:726
+#: src/applet.js:789 src/applet.js:817
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuta"
 msgstr[1] "minute"
 msgstr[2] "minuta"
 
-#: src/applet.js:703
+#: src/applet.js:794
 #, javascript-format
 msgid "Charging - %d minute until fully charged"
 msgid_plural "Charging - %d minutes until fully charged"
@@ -222,15 +230,15 @@ msgstr[0] "Punjenje - %d minuta do potpunog punjenja"
 msgstr[1] "Punjenje - %d minute do potpunog punjenja"
 msgstr[2] "Punjenje - %d minuta do potpunog punjenja"
 
-#: src/applet.js:709
+#: src/applet.js:800
 msgid "Fully charged"
 msgstr "Potpuno napunjena"
 
-#: src/applet.js:712
+#: src/applet.js:803
 msgid "Using battery power"
 msgstr "Koristi se energija baterije"
 
-#: src/applet.js:716
+#: src/applet.js:807
 #, javascript-format
 msgid "Using battery power - %d hour remaining"
 msgid_plural "Using battery power - %d hours remaining"
@@ -238,12 +246,12 @@ msgstr[0] "Koristi se energija baterije - %d sat preostao"
 msgstr[1] "Koristi se energija baterije - %d sata preostala"
 msgstr[2] "Koristi se energija baterije - %d sati preostalo"
 
-#: src/applet.js:721
+#: src/applet.js:812
 #, javascript-format
 msgid "Using battery power - %d %s %d %s remaining"
 msgstr "Koristi se energija baterije - preostalo %d %s %d %s"
 
-#: src/applet.js:731
+#: src/applet.js:822
 #, javascript-format
 msgid "Using battery power - %d minute remaining"
 msgid_plural "Using battery power - %d minutes remaining"
@@ -251,68 +259,68 @@ msgstr[0] "Koristi se energija baterije - %d minuta preostala"
 msgstr[1] "Koristi se energija baterije - %d minute preostale"
 msgstr[2] "Koristi se energija baterije - %d minuta preostalo"
 
-#: src/applet.js:737
+#: src/applet.js:828
 msgid "Fully discharged"
 msgstr "Potpuno ispražnjena"
 
-#: src/applet.js:739
+#: src/applet.js:830
 msgid "Not charging"
 msgstr "Ne puni se"
 
-#: src/applet.js:757 src/applet.js:767 src/applet.js:1000 src/applet.js:1010
+#: src/applet.js:848 src/applet.js:858 src/applet.js:1091 src/applet.js:1101
 #, javascript-format
 msgctxt "time of battery remaining"
 msgid "%d:%02d"
 msgstr "%d:%02d"
 
-#: src/applet.js:759 src/applet.js:765 src/applet.js:1002 src/applet.js:1008
+#: src/applet.js:850 src/applet.js:856 src/applet.js:1093 src/applet.js:1099
 #, javascript-format
 msgctxt "percent of battery remaining"
 msgid "%d%%"
 msgstr "%d%%"
 
-#: src/powerman-framework.js:631
+#: src/powerman-framework.js:964
 msgid "Critical Battery"
 msgstr "Kritična baterija"
 
-#: src/powerman-framework.js:632
+#: src/powerman-framework.js:965
 #, javascript-format
 msgid "Battery %s critically low"
 msgstr "Baterija %s kritično slaba"
 
-#: src/powerman-framework.js:637
+#: src/powerman-framework.js:970
 msgid "Low Battery"
 msgstr "Slaba baterija"
 
-#: src/powerman-framework.js:638
+#: src/powerman-framework.js:971
 #, javascript-format
 msgid "Battery %s low"
 msgstr "Baterija %s slaba"
 
-#: src/powerman-framework.js:797 src/powerman-framework.js:819
+#: src/powerman-framework.js:1054 src/powerman-framework.js:1065
 #, javascript-format
 msgid "brightness %d%%"
 msgstr "svjetlina %d%%"
 
-#: src/powerman-framework.js:969
+#: src/powerman-framework.js:1250
 #, javascript-format
 msgid "power profile %s"
 msgstr "profil napajanja %s"
 
-#: src/powerman-framework.js:1087
+#: src/powerman-framework.js:1368
 #, javascript-format
 msgid "power-saver mode (battery low: %d%%)"
 msgstr "način štednje energije (slaba baterija: %d%%)"
 
-#: src/powerman-framework.js:1207
+#: src/powerman-framework.js:1488
 msgid "AC power: "
 msgstr "AC napajanje: "
 
-#: src/powerman-framework.js:1207
+#: src/powerman-framework.js:1488
 msgid "Battery power: "
 msgstr "Napajanje baterije: "
 
-#: src/powerman-framework.js:1232
+#: src/powerman-framework.js:1513
 msgid "Power Automation"
 msgstr "Automatizacija napajanja"
 
@@ -385,6 +393,13 @@ msgstr "Automatski prebaci profile napajanja za AC/bateriju"
 msgid "Automatically switch to power-saver mode when battery is low"
 msgstr "Automatski prebaci na štednju energije kada je baterija slaba"
 
+msgid ""
+"Automatically update AC/Battery brightness settings when user manually "
+"changes brightness"
+msgstr ""
+"Automatski ažuriraj postavke AC/Baterija kada korisnik ručno mijenja "
+"postavke svjetline"
+
 msgid "Auto power-saver on low battery"
 msgstr "Automatska štednja energije na slaboj bateriji"
 
@@ -399,9 +414,6 @@ msgstr "Profil napajanja baterije"
 
 msgid "Battery Power Saving"
 msgstr "Štednja baterije"
-
-msgid "Brightness Automation"
-msgstr "Automatska svjetlina"
 
 msgid "Brightness Control"
 msgstr "Kontrola svjetline"
@@ -481,9 +493,6 @@ msgstr "Kontrola napajanja"
 msgid "Power Control Status"
 msgstr "Status kontrole napajanja"
 
-msgid "Power Profile Automation"
-msgstr "Automatski profili napajanja"
-
 msgid ""
 "Power profile automation is not available. No power profiles daemon or "
 "battery devices detected."
@@ -499,6 +508,9 @@ msgstr "Profil napajanja za korištenje na bateriji"
 
 msgid "Prefer battery-based AC detection"
 msgstr "Preferiraj AC detekciju preko baterije"
+
+msgid "Remember user brightness changes"
+msgstr "Zapamti ručne promjene svjetline"
 
 msgid "Replace system power applet"
 msgstr "Zamijeni sistemski applet napajanja"
@@ -537,5 +549,6 @@ msgstr "Vrijeme prije zatamnjivanja ekrana pri neaktivnosti"
 msgid ""
 "Use battery state for AC detection instead of LINE_POWER (recommended for "
 "most laptops)"
-msgstr "Koristi stanje baterije za detekciju AC napajanja (preporučeno za "
-"starije laptope)"
+msgstr ""
+"Koristi stanje baterije za detekciju AC napajanja (preporučeno za starije "
+"laptope)"

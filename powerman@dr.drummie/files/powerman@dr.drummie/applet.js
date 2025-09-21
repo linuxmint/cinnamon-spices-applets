@@ -256,6 +256,7 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         this._seeking = false;
         this._minimum_value = minimum_value;
         this._step = 0.05;
+        this._internalChange = false; // Flag to prevent hook triggering on internal changes
 
         this.connect(
             "drag-begin",
@@ -351,19 +352,30 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         if (!this._seeking) this._getBrightnessForcedUpdate();
     }
 
+    /**
+     * Force update brightness from proxy, applying +1% correction for consistency
+     */
     _getBrightnessForcedUpdate() {
         this._proxy.GetPercentageRemote(
             Lang.bind(this, function (b) {
-                this._updateBrightnessLabel(b);
-                this.setValue(b / 100);
+                let bNum = Number(b); // Parse to number to avoid string concatenation
+                let _b = bNum < 100 ? bNum + 1 : 100;
+                //this._debugLog(`Brightness raw from ${this._busName}: ${bNum}, corrected: ${_b}`);
+                //this._debugLog(`Brightness updated from ${this._busName}: ${_b}%`);
+                this._updateBrightnessLabel(_b);
+                this.setValue(_b / 100);
             })
         );
     }
 
     _setBrightness(value) {
+        this._internalChange = true; // Mark as internal change
         this._proxy.SetPercentageRemote(
             value,
-            Lang.bind(this, function (b) {
+            Lang.bind(this, function (b, error) {
+                this._debugLog(
+                    `SetBrightness: sent ${value}%, received ${b}% (error: ${error ? error.message : "none"})`
+                );
                 this._updateBrightnessLabel(b);
             })
         );
@@ -376,9 +388,10 @@ class BrightnessSlider extends PopupMenu.PopupSliderMenuItem {
         if (this._dragging) this.tooltip.show();
 
         // Trigger hook for brightness change in extension framework
-        if (this._applet._extensionFramework && value) {
+        if (this._applet._extensionFramework && value && !this._internalChange) {
             this._applet._extensionFramework.triggerHook("brightness-changed", value);
         }
+        this._internalChange = false; // Reset flag after processing
     }
 
     _onScrollEvent(actor, event) {
@@ -442,6 +455,46 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
         // Menu actions
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        // Add automation switches (only if corresponding features are available)
+        if (this.brightness) {
+            this._brightnessAutoSwitch = new PopupMenu.PopupSwitchMenuItem(
+                _("Brightness Automation"),
+                this.settings.getValue("enable-brightness-auto")
+            );
+            this._brightnessAutoSwitchId = this._brightnessAutoSwitch.connect(
+                "toggled",
+                Lang.bind(this, this._onBrightnessAutoToggled)
+            );
+            this.menu.addMenuItem(this._brightnessAutoSwitch);
+        }
+
+        if (this._profilesProxy && this._profilesProxy.Profiles) {
+            this._profileAutoSwitch = new PopupMenu.PopupSwitchMenuItem(
+                _("Power Profile Automation"),
+                this.settings.getValue("enable-profile-auto")
+            );
+            this._profileAutoSwitchId = this._profileAutoSwitch.connect(
+                "toggled",
+                Lang.bind(this, this._onProfileAutoToggled)
+            );
+            this.menu.addMenuItem(this._profileAutoSwitch);
+        }
+
+        // Add separator if either automation switch is present
+        if (this._profileAutoSwitch || this._brightnessAutoSwitch) {
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        }
+
+        // Connect to setting changes to keep switches in sync (without binding)
+        this._brightnessAutoChangedId = this.settings.connect(
+            "changed::enable-brightness-auto",
+            Lang.bind(this, this._onBrightnessAutoChanged)
+        );
+        this._profileAutoChangedId = this.settings.connect(
+            "changed::enable-profile-auto",
+            Lang.bind(this, this._onProfileAutoChanged)
+        );
+
         // Add automation settings menu item
         let settingsItem = new PopupMenu.PopupMenuItem(_("Automation Settings"));
         settingsItem.connect(
@@ -492,6 +545,40 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
 
     _onDebugSettingChanged() {
         this._log(`Debug logging ${this.debugLogging ? "enabled" : "disabled"}`);
+    }
+
+    /**
+     * Handle brightness automation switch toggle
+     */
+    _onBrightnessAutoToggled(sender, state) {
+        this._debugLog(`Brightness automation toggled to: ${state}`);
+        this.settings.setValue("enable-brightness-auto", state);
+    }
+
+    /**
+     * Handle profile automation switch toggle
+     */
+    _onProfileAutoToggled(sender, state) {
+        this._debugLog(`Profile automation toggled to: ${state}`);
+        this.settings.setValue("enable-profile-auto", state);
+    }
+
+    /**
+     * Handle brightness automation setting change from external source
+     */
+    _onBrightnessAutoChanged() {
+        if (this._brightnessAutoSwitch) {
+            this._brightnessAutoSwitch.setToggleState(this.settings.getValue("enable-brightness-auto"));
+        }
+    }
+
+    /**
+     * Handle profile automation setting change from external source
+     */
+    _onProfileAutoChanged() {
+        if (this._profileAutoSwitch) {
+            this._profileAutoSwitch.setToggleState(this.settings.getValue("enable-profile-auto"));
+        }
     }
 
     // === NEW METHOD: SETUP D-BUS CONNECTIONS ===
@@ -1058,6 +1145,57 @@ class EnhancedCinnamonPowerApplet extends Applet.TextIconApplet {
     }
 
     // === CLEANUP ===
+    /**
+     * Cleanup method for proper signal disconnection
+     */
+    destroy() {
+        // Disconnect brightness switch signal
+        if (this._brightnessAutoSwitch && this._brightnessAutoSwitchId) {
+            try {
+                this._brightnessAutoSwitch.disconnect(this._brightnessAutoSwitchId);
+                this._debugLog("Disconnected brightness switch signal");
+            } catch (e) {
+                this._debugLog(`Error disconnecting brightness switch: ${e.message}`);
+            }
+        }
+
+        // Disconnect profile switch signal
+        if (this._profileAutoSwitch && this._profileAutoSwitchId) {
+            try {
+                this._profileAutoSwitch.disconnect(this._profileAutoSwitchId);
+                this._debugLog("Disconnected profile switch signal");
+            } catch (e) {
+                this._debugLog(`Error disconnecting profile switch: ${e.message}`);
+            }
+        }
+
+        // Disconnect settings change signals
+        if (this._brightnessAutoChangedId) {
+            try {
+                this.settings.disconnect(this._brightnessAutoChangedId);
+                this._debugLog("Disconnected brightness setting change signal");
+            } catch (e) {
+                this._debugLog(`Error disconnecting brightness setting change: ${e.message}`);
+            }
+        }
+
+        if (this._profileAutoChangedId) {
+            try {
+                this.settings.disconnect(this._profileAutoChangedId);
+                this._debugLog("Disconnected profile setting change signal");
+            } catch (e) {
+                this._debugLog(`Error disconnecting profile setting change: ${e.message}`);
+            }
+        }
+
+        // Call parent destroy if available
+        if (super.destroy) {
+            super.destroy();
+        }
+
+        this._debugLog("Applet destroyed");
+    }
+
     on_applet_removed_from_panel() {
         this._log("Enhanced Power Applet shutting down");
 

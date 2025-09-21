@@ -70,20 +70,20 @@ PowerAppletExtensionFramework.prototype = {
 
     /**
      * Initialize settings with bidirectional binding
+     * enable-auto-* settings are read directly from original applet to ensure sync with popup switches
      */
     _initializeSettings: function () {
         if (!this._originalApplet.settings) return;
 
         // Bind all automation settings with IN direction for code modifications
         const automationSettings = [
-            "enable-brightness-auto",
+            "remember-user-brightness",
             "ac-brightness",
             "battery-brightness",
             "idle-dim-ac",
             "idle-dim-battery",
             "idle-dim-time",
             "idle-brightness",
-            "enable-profile-auto",
             "ac-power-profile",
             "battery-power-profile",
             "enable-battery-saver",
@@ -200,6 +200,10 @@ PowerAppletExtensionFramework.prototype = {
      * Get setting value
      */
     getSetting: function (key) {
+        // For enable-auto-* settings, read directly from original applet to ensure sync with popup switches
+        if (key === "enable-brightness-auto" || key === "enable-profile-auto") {
+            return this._originalApplet.settings.getValue(key);
+        }
         return this._settings.get(key);
     },
 
@@ -209,6 +213,8 @@ PowerAppletExtensionFramework.prototype = {
     setSetting: function (key, value) {
         if (this._originalApplet.settings) {
             this._originalApplet.settings.setValue(key, value);
+            // Sync internal cache after setting the value
+            this._settings.set(key, value);
         }
     },
 
@@ -379,6 +385,9 @@ class IdleManager extends BaseManager {
 
         // Initialize dconf settings for dimming control with default values from settings
         this._initializeDconfSettings();
+        // Sync settings from current dconf values before applying our logic
+        this._syncDimmingSettingsFromDconf();
+        // Apply initial dimming settings based on current configuration
         this._updateDimmingSettings();
 
         // Setup idle monitoring
@@ -391,7 +400,7 @@ class IdleManager extends BaseManager {
 
     /**
      * Setup idle monitoring using Mutter IdleMonitor directly
-     * @private
+     * @return {boolean} True if setup succeeded, false otherwise
      */
     _setupIdleMonitoring() {
         try {
@@ -512,20 +521,88 @@ class IdleManager extends BaseManager {
     }
 
     /**
-     * Update dconf dimming settings
+     * Sync dimming settings from current dconf values to ensure user preferences are respected
      */
-    _updateDimmingSettings() {
-        if (!this._dconfSettings) return;
+    _syncDimmingSettingsFromDconf() {
+        if (!this._dconfSettings) {
+            this.debug("dconf settings not available for sync");
+            return;
+        }
 
         try {
-            this._dconfSettings.set_boolean("idle-dim-ac", this.getSetting("idle-dim-ac") || false);
-            this._dconfSettings.set_boolean("idle-dim-battery", this.getSetting("idle-dim-battery") || false);
-            this._dconfSettings.set_int("idle-dim-time", this.getSetting("idle-dim-time") || 30);
-            this._dconfSettings.set_int("idle-brightness", this.getSetting("idle-brightness") || 15);
+            // Read current dconf values
+            let currentDimAc = this._dconfSettings.get_boolean("idle-dim-ac");
+            let currentDimBattery = this._dconfSettings.get_boolean("idle-dim-battery");
+            let currentDimTime = this._dconfSettings.get_int("idle-dim-time");
+            let currentIdleBrightness = this._dconfSettings.get_int("idle-brightness");
 
-            this.debug("Updated dconf dimming settings");
+            // Update our settings to match dconf (user's current preferences)
+            this.setSetting("idle-dim-ac", currentDimAc);
+            this.setSetting("idle-dim-battery", currentDimBattery);
+            this.setSetting("idle-dim-time", currentDimTime);
+            this.setSetting("idle-brightness", currentIdleBrightness);
+
+            this.debug(`After setSetting idle-dim-battery: ${this.getSetting("idle-dim-battery")}`);
+
+            this.debug(
+                `Synced dimming settings from dconf: dim-ac=${currentDimAc}, dim-battery=${currentDimBattery}, dim-time=${currentDimTime}, idle-brightness=${currentIdleBrightness}`
+            );
         } catch (e) {
-            this.log(`Error updating dimming settings: ${e.message}`);
+            this.debug(`Error syncing dimming settings from dconf: ${e.message}`);
+        }
+    }
+
+    /**
+     * Update dconf dimming settings based on current configuration
+     */
+    _updateDimmingSettings() {
+        if (!this._dconfSettings) {
+            this.debug("dconf settings not available, skipping update");
+            return;
+        }
+
+        // Always apply original dimming settings (no PowerMan control)
+        this._applyOriginalDimmingSettings();
+    }
+
+    /**
+     * Apply original Cinnamon dimming settings
+     * @return {boolean} True if setup succeeded, false otherwise
+     */
+    _applyOriginalDimmingSettings() {
+        try {
+            // Check current values to avoid unnecessary writes
+            let currentDimAc = this._dconfSettings.get_boolean("idle-dim-ac");
+            let currentDimBattery = this._dconfSettings.get_boolean("idle-dim-battery");
+            let currentDimTime = this._dconfSettings.get_int("idle-dim-time");
+            let currentIdleBrightness = this._dconfSettings.get_int("idle-brightness");
+
+            let newDimAc = this.getSetting("idle-dim-ac") || false;
+            let newDimBattery = this.getSetting("idle-dim-battery") || false;
+            let newDimTime = this.getSetting("idle-dim-time") || 30;
+            let newIdleBrightness = this.getSetting("idle-brightness") || 15;
+
+            this.debug(`Reading idle-dim-battery for dconf: ${newDimBattery}`);
+
+            // Only update if values have changed
+            if (
+                currentDimAc !== newDimAc ||
+                currentDimBattery !== newDimBattery ||
+                currentDimTime !== newDimTime ||
+                currentIdleBrightness !== newIdleBrightness
+            ) {
+                this._dconfSettings.set_boolean("idle-dim-ac", newDimAc);
+                this._dconfSettings.set_boolean("idle-dim-battery", newDimBattery);
+                this._dconfSettings.set_int("idle-dim-time", newDimTime);
+                this._dconfSettings.set_int("idle-brightness", newIdleBrightness);
+                this.debug(
+                    `Applied original dimming settings: dim-ac=${newDimAc}, dim-battery=${newDimBattery}, dim-time=${newDimTime}, idle-brightness=${newIdleBrightness}`
+                );
+            } else {
+                this.debug("Original dimming settings unchanged, no updates needed");
+            }
+        } catch (e) {
+            this.log(`Error applying original dimming settings: ${e.message}`);
         }
     }
 
@@ -926,19 +1003,23 @@ class BatteryManager extends BaseManager {
  */
 class BrightnessManager extends BaseManager {
     initialize() {
-        this._lastScreenBrightness = null;
-        this._lastKeyboardBrightness = null;
+        this._lastScreenBrightness = null; // Cache last known screen brightness
+        this._lastKeyboardBrightness = null; // Cache last known keyboard brightness
         this._pendingBrightness = null; // Store brightness to apply after idle ends
         this._isIdle = false; // Track idle state from IdleManager
+
+        // Track current power source
+        this._isAC = false;
 
         // Listen to hooks from other managers
         this.addHook("power-source-changed", this._onPowerSourceChanged);
         this.addHook("setting-changed", this._onSettingChanged);
-        //this.addHook("brightness-changed", this._onBrightnessChanged);
-
+        this.addHook("brightness-changed", this._onBrightnessChanged); // Enable tracking of external brightness changes
         // IMPORTANT: Listen to idle state changes from IdleManager
         this.addHook("idle-state-changed", this._onIdleChanged);
 
+        // Initialize cached brightness
+        this._updateBrightnessFromProxy();
         this.log("Brightness Manager initialized");
     }
 
@@ -958,6 +1039,8 @@ class BrightnessManager extends BaseManager {
             }, dimming on power source: before ${oldDimEnabled} -> now ${newDimEnabled}, idle: ${this._isIdle}`
         );
 
+        // Update dimming state (used when powerman controls dimming)
+        this._isAC = isAC;
         // Determine target brightness based on power source
         let targetBrightness = isAC ? this.getSetting("ac-brightness") : this.getSetting("battery-brightness");
 
@@ -976,7 +1059,6 @@ class BrightnessManager extends BaseManager {
 
     /**
      * Apply pending brightness change and clear automation flags
-     * @private
      */
     _applyPendingBrightness() {
         if (this._pendingBrightness !== null) {
@@ -1006,27 +1088,48 @@ class BrightnessManager extends BaseManager {
     }
 
     /**
-     * Handle dimming-related setting changes
+     * Handle setting changes
+     * @param {string} key - Setting key
+     * @param {*} newValue - New value
+     * @param {*} oldValue - Old value
      */
     _onSettingChanged(key, newValue, oldValue) {
-        if (key.includes("idle-dim") || key.includes("idle-brightness")) {
-            this.debug(`Dimming setting changed: ${key} from ${oldValue} to ${newValue}`);
-            // No direct action needed here since IdleManager handles dimming settings
-        }
+        // Handle other setting changes if needed
+        this.debug(`Setting changed: ${key} from ${oldValue} to ${newValue}`);
     }
 
     /**
-     * Handle brightness changes
+     * Handle brightness changes (external or internal)
+     * @param {string} value - New brightness value
      */
     _onBrightnessChanged(value) {
         this.debug(`Brightness changed (external event): ${value}%`);
-        // No direct action needed here since BrightnessManager handles brightness changes
+        // Update last known brightness
+        this._lastScreenBrightness = value;
+
+        // If user brightness remembering is enabled, update the setting for current power source
+        if (this.getSetting("remember-user-brightness")) {
+            if (this._isAC) {
+                // On AC, update ac-brightness setting
+                this.setSetting("ac-brightness", value);
+                this.debug(`Updated ac-brightness setting to ${value}%`);
+            } else {
+                // On battery, update battery-brightness setting
+                this.setSetting("battery-brightness", value);
+                this.debug(`Updated battery-brightness setting to ${value}%`);
+            }
+        }
     }
 
     /**
      * Set screen brightness if supported
      */
     setBrightness(value) {
+        if (value === null || value === undefined) {
+            this.debug("Cannot set brightness to null/undefined value");
+            return false;
+        }
+
         if (!this._applet.brightness || !this._applet.brightness._proxy) {
             this.debug(`Screen brightness not supported`);
             return false;
@@ -1034,6 +1137,7 @@ class BrightnessManager extends BaseManager {
 
         try {
             this._applet.brightness._setBrightness(value);
+            this._lastScreenBrightness = value; // Update last known brightness
             this.debug(`Set screen brightness to ${value}%`);
             return true;
         } catch (e) {
@@ -1053,6 +1157,7 @@ class BrightnessManager extends BaseManager {
 
         try {
             this._applet.keyboard._setBrightness(value);
+            this._lastKeyboardBrightness = value; // Update last known keyboard brightness
             this.debug(`Set keyboard brightness to ${value}%`);
             return true;
         } catch (e) {
@@ -1067,6 +1172,35 @@ class BrightnessManager extends BaseManager {
 
     isKeyboardBrightnessSupported() {
         return this._applet.keyboard && this._applet.keyboard.actor && this._applet.keyboard.actor.visible;
+    }
+
+    /**
+     * Get current screen brightness if supported
+     * @returns {number|null} Current brightness percentage or null if not supported
+     */
+    getBrightness() {
+        // Return cached brightness value (updated via brightness-changed hook and initial fetch)
+        // Avoids undefined from Brightness property on DBus proxy
+        return this._lastScreenBrightness !== null ? this._lastScreenBrightness : null;
+    }
+
+    /**
+     * Update cached brightness from DBus proxy (async)
+     */
+    _updateBrightnessFromProxy() {
+        if (!this._applet.brightness || !this._applet.brightness._proxy) {
+            this.debug("Screen brightness not supported");
+            return null;
+        }
+
+        this._applet.brightness._proxy.GetPercentageRemote(
+            Lang.bind(this, function (b, error) {
+                if (!error) {
+                    let bNum = Number(b); // Parse to number to avoid string issues
+                    this._lastScreenBrightness = bNum < 100 ? bNum + 1 : 100; // Apply correction for consistency
+                }
+            })
+        );
     }
 }
 

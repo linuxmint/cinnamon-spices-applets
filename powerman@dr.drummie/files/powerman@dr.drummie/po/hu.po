@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: powerman@dr.drummie 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/drdrummie/powerman-dr.drummie\n"
-"POT-Creation-Date: 2025-09-15 23:57+0200\n"
+"POT-Creation-Date: 2025-09-21 18:21+0200\n"
 "PO-Revision-Date: 2025-09-06 22:34+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,295 +17,303 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/applet.js:53 src/powerman-framework.js:29
+#: src/applet.js:54 src/powerman-framework.js:29
 msgid "Power Saver"
 msgstr "Energiatakarékos"
 
-#: src/applet.js:54 src/powerman-framework.js:30
+#: src/applet.js:55 src/powerman-framework.js:30
 msgid "Balanced"
 msgstr "Kiegyensúlyozott"
 
-#: src/applet.js:55 src/powerman-framework.js:31
+#: src/applet.js:56 src/powerman-framework.js:31
 msgid "Performance"
 msgstr "Teljesítmény"
 
-#: src/applet.js:62
+#: src/applet.js:63
 msgid "Battery full"
 msgstr "Akkumulátor tele"
 
-#: src/applet.js:64
+#: src/applet.js:65
 msgid "Battery almost full"
 msgstr "Akkumulátor majdnem tele"
 
-#: src/applet.js:66
+#: src/applet.js:67
 msgid "Battery good"
 msgstr "Akkumulátor jó"
 
-#: src/applet.js:68
+#: src/applet.js:69
 msgid "Low battery"
 msgstr "Alacsony akkumulátor"
 
-#: src/applet.js:70
+#: src/applet.js:71
 msgid "Critically low battery"
 msgstr "Kritikusan alacsony akkumulátor"
 
-#: src/applet.js:72 src/applet.js:138
+#: src/applet.js:73 src/applet.js:139
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/applet.js:79
+#: src/applet.js:80
 msgid "AC adapter"
 msgstr "AC adapter"
 
-#: src/applet.js:81
+#: src/applet.js:82
 msgid "Laptop battery"
 msgstr "Laptop akkumulátor"
 
-#: src/applet.js:83
+#: src/applet.js:84
 msgid "UPS"
 msgstr "UPS"
 
-#: src/applet.js:85
+#: src/applet.js:86
 msgid "Monitor"
 msgstr "Monitor"
 
-#: src/applet.js:87
+#: src/applet.js:88
 msgid "Mouse"
 msgstr "Egér"
 
-#: src/applet.js:89
+#: src/applet.js:90
 msgid "Keyboard"
 msgstr "Billentyűzet"
 
-#: src/applet.js:91
+#: src/applet.js:92
 msgid "PDA"
 msgstr "PDA"
 
-#: src/applet.js:93
+#: src/applet.js:94
 msgid "Cell phone"
 msgstr "Mobiltelefon"
 
-#: src/applet.js:95
+#: src/applet.js:96
 msgid "Media player"
 msgstr "Médialejátszó"
 
-#: src/applet.js:97
+#: src/applet.js:98
 msgid "Tablet"
 msgstr "Tablet"
 
-#: src/applet.js:99
+#: src/applet.js:100
 msgid "Computer"
 msgstr "Számítógép"
 
-#: src/applet.js:101
+#: src/applet.js:102
 msgid "Gaming input"
 msgstr "Játék bemenet"
 
-#: src/applet.js:103
+#: src/applet.js:104
 msgid "Pen"
 msgstr "Toll"
 
-#: src/applet.js:105
+#: src/applet.js:106
 msgid "Touchpad"
 msgstr "Érintőtábla"
 
-#: src/applet.js:107
+#: src/applet.js:108
 msgid "Modem"
 msgstr "Modem"
 
-#: src/applet.js:109
+#: src/applet.js:110
 msgid "Network"
 msgstr "Hálózat"
 
-#: src/applet.js:111
+#: src/applet.js:112
 msgid "Headset"
 msgstr "Fejhallgató"
 
-#: src/applet.js:113
+#: src/applet.js:114
 msgid "Speakers"
 msgstr "Hangszórók"
 
-#: src/applet.js:115
+#: src/applet.js:116
 msgid "Headphones"
 msgstr "Fülhallgató"
 
-#: src/applet.js:117
+#: src/applet.js:118
 msgid "Video"
 msgstr "Videó"
 
-#: src/applet.js:119
+#: src/applet.js:120
 msgid "Audio device"
 msgstr "Hang eszköz"
 
-#: src/applet.js:121
+#: src/applet.js:122
 msgid "Remote control"
 msgstr "Távirányító"
 
-#: src/applet.js:123
+#: src/applet.js:124
 msgid "Printer"
 msgstr "Nyomtató"
 
-#: src/applet.js:125
+#: src/applet.js:126
 msgid "Scanner"
 msgstr "Szkenner"
 
-#: src/applet.js:127
+#: src/applet.js:128
 msgid "Camera"
 msgstr "Kamera"
 
-#: src/applet.js:129
+#: src/applet.js:130
 msgid "Wearable"
 msgstr "Viselhető"
 
-#: src/applet.js:131
+#: src/applet.js:132
 msgid "Toy"
 msgstr "Játék"
 
-#: src/applet.js:133
+#: src/applet.js:134
 #, fuzzy
 msgid "Bluetooth device"
 msgstr "Hang eszköz"
 
-#: src/applet.js:433 src/applet.js:1042
+#: src/applet.js:447 src/applet.js:1133
 msgid "Brightness"
 msgstr "Fényerő"
 
-#: src/applet.js:434 src/applet.js:1047
+#: src/applet.js:448 src/applet.js:1138
 msgid "Keyboard backlight"
 msgstr "Billentyűzet háttérvilágítása"
 
-#: src/applet.js:445
+#: src/applet.js:461
+msgid "Brightness Automation"
+msgstr "Fényerő automatizálás"
+
+#: src/applet.js:473
+msgid "Power Profile Automation"
+msgstr "Energia profil automatizálás"
+
+#: src/applet.js:499
 msgid "Automation Settings"
 msgstr "Automatizálási beállítások"
 
-#: src/applet.js:454
+#: src/applet.js:508
 msgid "Power Settings"
 msgstr "Energia beállítások"
 
-#: src/applet.js:684
+#: src/applet.js:775
 msgid "Charging"
 msgstr "Töltés"
 
-#: src/applet.js:688
+#: src/applet.js:779
 #, javascript-format
 msgid "Charging - %d hour until fully charged"
 msgid_plural "Charging - %d hours until fully charged"
 msgstr[0] "Töltés - %d óra a teljes töltésig"
 msgstr[1] "Töltés - %d óra a teljes töltésig"
 
-#: src/applet.js:693
+#: src/applet.js:784
 #, javascript-format
 msgid "Charging - %d %s %d %s until fully charged"
 msgstr "Töltés - %d %s %d %s a teljes töltésig"
 
-#: src/applet.js:696 src/applet.js:724
+#: src/applet.js:787 src/applet.js:815
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "óra"
 msgstr[1] "óra"
 
-#: src/applet.js:698 src/applet.js:726
+#: src/applet.js:789 src/applet.js:817
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "perc"
 msgstr[1] "perc"
 
-#: src/applet.js:703
+#: src/applet.js:794
 #, javascript-format
 msgid "Charging - %d minute until fully charged"
 msgid_plural "Charging - %d minutes until fully charged"
 msgstr[0] "Töltés - %d perc a teljes töltésig"
 msgstr[1] "Töltés - %d perc a teljes töltésig"
 
-#: src/applet.js:709
+#: src/applet.js:800
 msgid "Fully charged"
 msgstr "Teljesen feltöltve"
 
-#: src/applet.js:712
+#: src/applet.js:803
 msgid "Using battery power"
 msgstr "Akkumulátor használata"
 
-#: src/applet.js:716
+#: src/applet.js:807
 #, javascript-format
 msgid "Using battery power - %d hour remaining"
 msgid_plural "Using battery power - %d hours remaining"
 msgstr[0] "Akkumulátor használata - %d óra hátra"
 msgstr[1] "Akkumulátor használata - %d óra hátra"
 
-#: src/applet.js:721
+#: src/applet.js:812
 #, javascript-format
 msgid "Using battery power - %d %s %d %s remaining"
 msgstr "Akkumulátor használata - %d %s %d %s hátra"
 
-#: src/applet.js:731
+#: src/applet.js:822
 #, javascript-format
 msgid "Using battery power - %d minute remaining"
 msgid_plural "Using battery power - %d minutes remaining"
 msgstr[0] "Akkumulátor használata - %d perc hátra"
 msgstr[1] "Akkumulátor használata - %d perc hátra"
 
-#: src/applet.js:737
+#: src/applet.js:828
 msgid "Fully discharged"
 msgstr "Teljesen lemerült"
 
-#: src/applet.js:739
+#: src/applet.js:830
 msgid "Not charging"
 msgstr "Nem tölt"
 
-#: src/applet.js:757 src/applet.js:767 src/applet.js:1000 src/applet.js:1010
+#: src/applet.js:848 src/applet.js:858 src/applet.js:1091 src/applet.js:1101
 #, javascript-format
 msgctxt "time of battery remaining"
 msgid "%d:%02d"
 msgstr "%d:%02d"
 
-#: src/applet.js:759 src/applet.js:765 src/applet.js:1002 src/applet.js:1008
+#: src/applet.js:850 src/applet.js:856 src/applet.js:1093 src/applet.js:1099
 #, javascript-format
 msgctxt "percent of battery remaining"
 msgid "%d%%"
 msgstr "%d%%"
 
-#: src/powerman-framework.js:631
+#: src/powerman-framework.js:964
 msgid "Critical Battery"
 msgstr "Kritikus akkumulátor"
 
-#: src/powerman-framework.js:632
+#: src/powerman-framework.js:965
 #, javascript-format
 msgid "Battery %s critically low"
 msgstr "Akkumulátor %s kritikusan alacsony"
 
-#: src/powerman-framework.js:637
+#: src/powerman-framework.js:970
 msgid "Low Battery"
 msgstr "Alacsony akkumulátor"
 
-#: src/powerman-framework.js:638
+#: src/powerman-framework.js:971
 #, javascript-format
 msgid "Battery %s low"
 msgstr "Akkumulátor %s alacsony"
 
-#: src/powerman-framework.js:797 src/powerman-framework.js:819
+#: src/powerman-framework.js:1054 src/powerman-framework.js:1065
 #, javascript-format
 msgid "brightness %d%%"
 msgstr "fényerő %d%%"
 
-#: src/powerman-framework.js:969
+#: src/powerman-framework.js:1250
 #, javascript-format
 msgid "power profile %s"
 msgstr "energia profil %s"
 
-#: src/powerman-framework.js:1087
+#: src/powerman-framework.js:1368
 #, javascript-format
 msgid "power-saver mode (battery low: %d%%)"
 msgstr "energiatakarékos mód (akkumulátor alacsony: %d%%)"
 
-#: src/powerman-framework.js:1207
+#: src/powerman-framework.js:1488
 msgid "AC power: "
 msgstr "AC áram: "
 
-#: src/powerman-framework.js:1207
+#: src/powerman-framework.js:1488
 msgid "Battery power: "
 msgstr "Akkumulátor: "
 
-#: src/powerman-framework.js:1232
+#: src/powerman-framework.js:1513
 msgid "Power Automation"
 msgstr "Energia automatizálás"
 
@@ -377,6 +385,11 @@ msgid "Automatically switch to power-saver mode when battery is low"
 msgstr ""
 "Automatikusan váltson energiatakarékos módra, ha az akkumulátor alacsony"
 
+msgid ""
+"Automatically update AC/Battery brightness settings when user manually "
+"changes brightness"
+msgstr ""
+
 msgid "Auto power-saver on low battery"
 msgstr "Automatikus energiatakarékos alacsony akkumulátoron"
 
@@ -393,9 +406,6 @@ msgstr "Akkumulátor energia profil"
 
 msgid "Battery Power Saving"
 msgstr "Akkumulátor energia megtakarítás"
-
-msgid "Brightness Automation"
-msgstr "Fényerő automatizálás"
 
 msgid "Brightness Control"
 msgstr "Fényerő vezérlés"
@@ -478,9 +488,6 @@ msgstr "Energia vezérlés"
 msgid "Power Control Status"
 msgstr "Energia vezérlés állapot"
 
-msgid "Power Profile Automation"
-msgstr "Energia profil automatizálás"
-
 msgid ""
 "Power profile automation is not available. No power profiles daemon or "
 "battery devices detected."
@@ -495,6 +502,9 @@ msgid "Power profile to use when on battery power"
 msgstr "Energia profil akkumulátoron használva"
 
 msgid "Prefer battery-based AC detection"
+msgstr ""
+
+msgid "Remember user brightness changes"
 msgstr ""
 
 msgid "Replace system power applet"
