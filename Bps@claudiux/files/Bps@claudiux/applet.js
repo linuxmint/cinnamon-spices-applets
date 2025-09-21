@@ -29,7 +29,6 @@ const ICON_UPLOAD = `${ICONS_DIR}/upload-symbolic.svg`;
 const ICON_FORBIDDEN = `${ICONS_DIR}/forbidden-symbolic.svg`;
 const SCRIPTS_DIR = `${APPLET_DIR}/scripts`;
 const DATA_SCRIPT = `${SCRIPTS_DIR}/get-network-data.sh`;
-const UNPLUGGED_SCRIPT = `${SCRIPTS_DIR}/unplugged-network-devices.sh`;
 
 const AppletGui = require('./lib/appletGui');
 
@@ -91,8 +90,6 @@ class Bps extends Applet.Applet {
         this.network_interfaces = [];
         this.checked_interfaces = [];
         this.checked_interfaces_string = "";
-        this.unplugged_interfaces = [];
-        this.unplugged_interfaces_string = "";
 
         this.network_data = {};
 
@@ -106,7 +103,6 @@ class Bps extends Applet.Applet {
         this.update_available_interfaces_every = 10; // seconds
         this.gui_speed_type = 0;
         this.s.bind("gui_value_order", "gui_value_order",  () => { this.reload() });
-        //~ this.s.bind("decimal_places", "decimal_places");
         this.decimal_places = 1; // Auto: -1.
         this.gui_text_css = "font-weight: bold; font-size: 15px; text-align: right; font-family: monospace;";
         this.gui_symbolic_icon = true;
@@ -116,7 +112,6 @@ class Bps extends Applet.Applet {
         this.s.bind("display_minimum_unit_multiple", "display_minimum_unit_multiple");
         this.s.bind("minimum_bytes_to_display", "minimum_bytes_to_display");
         this.s.bind("checked_interfaces_string", "checked_interfaces_string");
-        this.s.bind("unplugged_interfaces_string", "unplugged_interfaces_string");
 
         this.populate_display_minimum_fields();
 
@@ -124,15 +119,10 @@ class Bps extends Applet.Applet {
 
         this.list_network_interfaces();
 
-        //~ setInterval( () => {
-            //~ global.log("this.network_interfaces: " + this.network_interfaces);
-            //~ global.log("this.unplugged_interfaces: " + this.unplugged_interfaces);
-        //~ }, 10000);
         this._init_gui();
     } // End of constructor
 
     _connect_signals() {
-        //~ global.connect("shutdown", () => { this.on_shutdown() });
         this.enterEventId = this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event));
         this.leaveEventId = this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event));
         this.scaleChangedId = global.connect("scale-changed", () => { this.on_panel_height_changed() });
@@ -154,14 +144,12 @@ class Bps extends Applet.Applet {
         let subProcess = Util.spawnCommandLineAsyncIO("ls -1A " + this.network_directory,
             (stdout, stderr, exitCode) => {
                 if (exitCode == 0) {
-                    //~ global.log("typeof stdout: " + typeof stdout);
                     this.network_interfaces = stdout.slice(0, -1).split("\n");
                 }
                 subProcess.send_signal(9);
             },
             {}
         );
-        this.list_unplugged_network_interfaces();
         if (this.renewInterfacesId == null) {
             this.renewInterfacesId = timeout_add_seconds(
                 this.update_available_interfaces_every,
@@ -174,34 +162,6 @@ class Bps extends Applet.Applet {
         }
         return this.is_running;
     } // End of list_network_interfaces
-
-    list_unplugged_network_interfaces() {
-        let subProcess = Util.spawnCommandLineAsyncIO(UNPLUGGED_SCRIPT,
-            (stdout, stderr, exitCode) => {
-                if (exitCode == 0) {
-                    this.unplugged_interfaces = stdout.slice(0, -1).split(" ");
-                }
-                subProcess.send_signal(9);
-            },
-            {}
-        )
-    }
-
-    //~ list_unplugged_network_interfaces_OLD() {
-        //~ var unplugged = [];
-        //~ for (let net_interface of this.network_interfaces) {
-            //~ let path = `${this.network_directory}/${net_interface}/operstate`;
-            //~ let [success, contents_array] = GLib.file_get_contents(path);
-            //~ if (success) {
-                //~ let operstate = to_string(contents_array);
-                //~ if (!operstate.startsWith("up"))
-                    //~ unplugged.push(net_interface);
-            //~ } else {
-                //~ unplugged.push(net_interface);
-            //~ }
-        //~ }
-        //~ this.unplugged_interfaces = unplugged;
-    //~ } // End of list_unplugged_network_interfaces
 
     update_data() {
         var data = {};
@@ -358,9 +318,7 @@ class Bps extends Applet.Applet {
             // Returns no decimal
             if (v.includes("."))
                 v = v.slice(0, v.indexOf("."));
-            //~ v = "\n" + v + "\n";
             return v.trim();
-            //~ return v;
         } else {
             // Returns 1 decimal, even if this is 0.
             if (v.includes("."))
