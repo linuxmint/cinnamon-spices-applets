@@ -2824,7 +2824,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
           let item = new PopupMenuItem(formatTextWrap(title, WRAP_LENGTH), { reactive: true });
           item.connect('activate', () => {
-            if (this.currentMenuItem === null || this.currentMenuItem != item) {
+            if (this.currentMenuItem == null || this.currentMenuItem != item) {
               if (change_tooltip) {
                 this.set_radio_tooltip_to_default_one();
               }
@@ -2982,7 +2982,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             this.allRadiosMenu.menu.addMenuItem(this.menuItems[i]);
 
             if (reactive) this.menuItems[i].connect('activate', () => {
-              if (this.currentMenuItem === null || this.currentMenuItem != this.menuItems[i]) {
+              if (this.currentMenuItem == null || this.currentMenuItem != this.menuItems[i]) {
                 if (change_tooltip) {
                   this.set_radio_tooltip_to_default_one();
                 }
@@ -3488,8 +3488,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.currentMenuItem.setShowDot(false);
         this.currentMenuItem = activatedMenuItem;
     }
-
-    this.currentMenuItem.setShowDot(true);
+    if(this.currentMenuItem != null)
+      this.currentMenuItem.setShowDot(true);
   }
 
   test_mpv_radio(name, url, homepage=null) {
