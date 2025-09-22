@@ -1,3 +1,6 @@
+### v3.0.1~20250922
+  * Improved network management regarding status changes and data readings.
+
 ### v3.0.0~20250831
   * The different colors for cache and buffer memory in the RAM graph are back!
   * Code cleanup.

@@ -34,6 +34,8 @@ const UUID = 'multicore-sys-monitor@ccadeptic23';
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const PATH2SCRIPTS = APPLET_DIR + "/scripts";
+const XDG_RUNTIME_DIR = GLib.getenv("XDG_RUNTIME_DIR");
+const NETWORK_DEVICES_STATUS_PATH = XDG_RUNTIME_DIR + "/network_devices";
 
 const rate = _('/s');
 var spaces = 14;
@@ -128,6 +130,10 @@ class MCSM extends Applet.IconApplet {
         } else {
             this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
         }
+
+        this.monitors = [];
+        this.netMonitor = null;
+        this.isCurrentlyCheckingStatus = false;
 
         this.settings = new AppletSettings(this, UUID, this.instance_id);
         this.settings.bind("isHighlighted", "isHighlighted");
@@ -488,23 +494,39 @@ class MCSM extends Applet.IconApplet {
         }, 2100);
     }
 
-     on_Net_getdevlist_btn_clicked() {
+    _renew_network_devices_status() {
+        if (!GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS))
+            this.isCurrentlyCheckingStatus = false;
+        if (this.isCurrentlyCheckingStatus === true) return;
+        this.isCurrentlyCheckingStatus = true;
+        Util.spawnCommandLine(PATH2SCRIPTS + "/get-network-devices.sh");
+        this.isCurrentlyCheckingStatus = false;
+    }
+
+    on_Net_getdevlist_btn_clicked() {
+        this._renew_network_devices_status();
         var knownDevices = [];
         var new_Net_devicesList = this.Net_devicesList;
         for (let d of this.Net_devicesList) {
-            if (d["id"].length === 0) continue;
+            if (d["id"].length === 0) continue; // Prevents user mistakes.
             knownDevices.push(d["id"]);
         }
         var ret = "";
-        const net_dir_path = "/sys/class/net";
-        const net_dir = Gio.file_new_for_path(net_dir_path);
-        const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
-        for (let child of children) {
-            let name = child.get_name();
-            let operstate_file_path = `${net_dir_path}/${name}/operstate`;
-            let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
-            net_status = to_string(net_status).trim();
-            ret += `${name}:${net_status} `;
+        if (GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS)) {
+            let [succes, status] = GLib.file_get_contents(NETWORK_DEVICES_STATUS_PATH);
+            status = to_string(status).trim();
+            ret += status;
+        } else {
+            const net_dir_path = "/sys/class/net";
+            const net_dir = Gio.file_new_for_path(net_dir_path);
+            const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+            for (let child of children) {
+                let name = child.get_name();
+                let operstate_file_path = `${net_dir_path}/${name}/operstate`;
+                let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
+                net_status = to_string(net_status).trim();
+                ret += `${name}:${net_status} `;
+            }
         }
         var returnedDevices = ret.trim().split(" ");
         for (let d of returnedDevices) {
@@ -523,7 +545,7 @@ class MCSM extends Applet.IconApplet {
             }
         }
         this.Net_devicesList = new_Net_devicesList;
-     }
+    }
 
     on_Net_cleardevlist_btn_clicked() {
         this.Net_devicesList = [];
@@ -799,28 +821,46 @@ class MCSM extends Applet.IconApplet {
     get_net_info() {
         if (!this.isRunning) return;
         if (!this.Net_enabled) return;
+        const net_dir_path = "/sys/class/net";
         let old, duration;
         if (DEBUG) old = Date.now();
         var ret = "";
-        const net_dir_path = "/sys/class/net";
-        const net_dir = Gio.file_new_for_path(net_dir_path);
-        const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
-        for (let child of children) {
-            let name = child.get_name();
-            let operstate_file_path = `${net_dir_path}/${name}/operstate`;
-            let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
-            net_status = to_string(net_status).trim();
-            if (net_status == "up") {
-                let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
-                let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
-                let [rx_success, rx_bytes] = GLib.file_get_contents(rx_bytes_path);
-                let [tx_success, tx_bytes] = GLib.file_get_contents(tx_bytes_path);
-                rx_bytes = to_string(rx_bytes).trim();
-                tx_bytes = to_string(tx_bytes).trim();
-                ret = ret + `${name}:${rx_bytes}:${tx_bytes} `;
+        if (GLib.file_test(NETWORK_DEVICES_STATUS_PATH, GLib.FileTest.EXISTS)) {
+            let [success, line] = GLib.file_get_contents(NETWORK_DEVICES_STATUS_PATH);
+            let names_status = to_string(line).trim().split(" ");
+            for (let name_status of names_status) {
+                let [name, status] = name_status.split(":");
+                if (status == "up") {
+                    let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
+                    let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
+                    let [rx_success, rx_bytes] = GLib.file_get_contents(rx_bytes_path);
+                    let [tx_success, tx_bytes] = GLib.file_get_contents(tx_bytes_path);
+                    rx_bytes = to_string(rx_bytes).trim();
+                    tx_bytes = to_string(tx_bytes).trim();
+                    ret = ret + `${name}:${rx_bytes}:${tx_bytes} `;
+                }
             }
+        } else {
+            const net_dir = Gio.file_new_for_path(net_dir_path);
+            const children = net_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+            for (let child of children) {
+                let name = child.get_name();
+                let operstate_file_path = `${net_dir_path}/${name}/operstate`;
+                let [net_success, net_status] = GLib.file_get_contents(operstate_file_path);
+                net_status = to_string(net_status).trim();
+                if (net_status == "up") {
+                    let rx_bytes_path = `${net_dir_path}/${name}/statistics/rx_bytes`;
+                    let tx_bytes_path = `${net_dir_path}/${name}/statistics/tx_bytes`;
+                    let [rx_success, rx_bytes] = GLib.file_get_contents(rx_bytes_path);
+                    let [tx_success, tx_bytes] = GLib.file_get_contents(tx_bytes_path);
+                    rx_bytes = to_string(rx_bytes).trim();
+                    tx_bytes = to_string(tx_bytes).trim();
+                    ret = ret + `${name}:${rx_bytes}:${tx_bytes} `;
+                }
+            }
+            children.close(null);
         }
-        children.close(null);
+
         ret = ret.trim();
         var allowedInterfaces = [];
         var names = {};
@@ -1006,6 +1046,34 @@ class MCSM extends Applet.IconApplet {
             this.set_applet_tooltip(appletTooltipString, true);
     }
 
+    /** Network
+    */
+    monitor_interfaces() {
+        if (this.netMonitor != null || !this.isRunning) return;
+        try {
+            this.netMonitor = Gio.network_monitor_get_default();
+            let netMonitorId = this.netMonitor.connect(
+                'network-changed',
+                (monitor, network_available) => this.on_network_changed()
+            );
+            this.monitors.push([this.netMonitor, netMonitorId]);
+        } catch(e) {
+            global.logError("Unable to monitor the network interfaces!", e)
+        }
+    } // End of monitor_interfaces
+
+    disconnect_monitors() {
+        while (this.monitors.length > 0) {
+            let [mon, Id] = this.monitors.pop();
+            mon.disconnect(Id)
+        }
+    } // End of disconnect_monitors
+
+    on_network_changed() {
+        if (!this.isRunning) return;
+        this._renew_network_devices_status();
+    }
+
     _removeEnlightenment() {
         this.highlight(false);
     }
@@ -1028,11 +1096,14 @@ class MCSM extends Applet.IconApplet {
 
     on_applet_added_to_panel() {
         this.isRunning = true;
+        this._renew_network_devices_status();
+        this.monitor_interfaces();
         this.run_main_loop();
     }
 
     on_applet_removed_from_panel() {
         this.isRunning = false;
+        this.disconnect_monitors();
         remove_all_sources();
         this.closeSettingsWindow();
     }
@@ -1136,8 +1207,8 @@ class BufferCacheSharedDataProvider {
         let lenColon = Math.max(colon.length - 1, 0);
         let attributes = [_('Buffer'), _('Cache'), _("Shared")];
 
-        for (let i = 0; i < attributes.length; i++) {
-            let valueWithUnit = formatBytes(this.currentReadings[i], 2, false);
+        for (let i=0, len=attributes.length; i<len; i++) {
+            let valueWithUnit = formatBytes(Math.round(this.currentReadings[i]), 2, false);
             toolTipString += attributes[i].padStart(spaces - lenColon, ' ') + colon + " " + valueWithUnit.padStart(2, ' ') + '\n';
         }
         return toolTipString;
