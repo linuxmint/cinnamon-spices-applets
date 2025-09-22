@@ -1,3 +1,6 @@
+### v1.3.1~20250922
+  * Minor bugfix.
+
 ### v1.3.0~20250921
   * Take into account Ethernet interfaces via USB.
 

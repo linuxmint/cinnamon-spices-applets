@@ -155,7 +155,6 @@ class Bps extends Applet.Applet {
                 this.update_available_interfaces_every,
                 () => {
                     this.list_network_interfaces();
-                    this.list_unplugged_network_interfaces();
                     return this.is_running;
                 }
             );
