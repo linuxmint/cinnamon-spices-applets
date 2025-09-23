@@ -1,3 +1,6 @@
+### v13.3.0~20250923
+  * Added option "Do not show any cover art in the menu" in the Menus tab of this applet settings.
+
 ### v13.2.2~20250814
   * Improved speed.
   * Code cleanup.

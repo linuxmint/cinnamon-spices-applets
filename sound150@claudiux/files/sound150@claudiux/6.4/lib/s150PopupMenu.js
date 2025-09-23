@@ -908,8 +908,11 @@ class Player extends PopupMenu.PopupMenuSection {
         }
 
         try {
-            if (this.coverBox && this.cover)
-                this.coverBox.remove_actor(this.cover);
+            if (this.coverBox && this.cover) {
+                let coverBoxChildren = this.coverBox.get_children();
+                if (coverBoxChildren.indexOf(this.cover) > -1)
+                    this.coverBox.remove_child(this.cover);
+            }
         } catch (e) {}
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
@@ -923,14 +926,18 @@ class Player extends PopupMenu.PopupMenuSection {
         //~ actor.set_margin_left(""+Math.max(0, Math.trunc(300 * global.ui_scale - actor.width))+"px");
 
         this.cover = actor;
-        if (this.coverBox)
-            this.coverBox.add_actor(this.cover);
-        //~ this.coverBox.set_reactive = true;
-        //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
 
         try {
-            if (this.coverBox && this.cover)
-                this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+            if (this.coverBox) {
+                if (this.cover && !this._applet.dontShowAnyImageInMenu) {
+                    this.coverBox.add_actor(this.cover);
+                    //~ this.coverBox.set_reactive = true;
+                    //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
+                    this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+                } else {
+                    this.coverBox.set_child_below_sibling(this.trackInfo, null);
+                }
+            }
         } catch (e) {}
 
         this._applet.setAppletTextIcon(this, this._cover_path);
