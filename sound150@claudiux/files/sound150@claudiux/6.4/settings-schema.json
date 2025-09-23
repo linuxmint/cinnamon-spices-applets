@@ -61,6 +61,7 @@
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
         "avoidTwice",
+        "dontShowAnyImageInMenu",
         "showMediaOptical",
         "viewFullAlbumArt"
       ]
@@ -232,13 +233,20 @@
     "default": false,
     "description": "Avoid displaying controllers twice"
   },
+  "dontShowAnyImageInMenu": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not show any cover art in the menu"
+  },
   "showMediaOptical": {
     "type": "switch",
+    "dependency": "!dontShowAnyImageInMenu",
     "default": true,
     "description": "Show Media-Optical icon"
   },
   "viewFullAlbumArt": {
     "type": "switch",
+    "dependency": "!dontShowAnyImageInMenu",
     "default": false,
     "description": "View Full Album Art",
     "tooltip": "When unchecked, Album Art in the menu may be partially covered by Artist and Title."
