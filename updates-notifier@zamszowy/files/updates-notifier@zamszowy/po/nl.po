@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-13 12:55+0200\n"
+"POT-Creation-Date: 2025-09-23 17:28+0200\n"
 "PO-Revision-Date: 2025-08-26 10:42+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -16,71 +16,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:37
+#. applet.js:76
 msgid "missing dependencies"
 msgstr "ontbrekende afhankelijkheden"
 
-#. applet.js:106
-#, javascript-format
-msgid "%s updates available"
-msgstr "%s updates beschikbaar"
-
-#. applet.js:107
-msgid "No updates available"
-msgstr "Geen updates beschikbaar"
-
-#. applet.js:133
+#. applet.js:197
 msgid "Check for new updates"
 msgstr "Controleer op nieuwe updates"
 
-#. applet.js:144
+#. applet.js:211
 #, javascript-format
 msgid "View %s updates"
 msgstr "Bekijk %s updates"
 
-#. applet.js:144
+#. applet.js:211
 msgid "No updates to view"
 msgstr "Geen updates om te bekijken"
 
-#. applet.js:157
+#. applet.js:226
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Upgrade %s pakketten"
 
-#. applet.js:157
+#. applet.js:226
 msgid "No packages to upgrade"
 msgstr "Geen pakketten om te upgraden"
 
-#. info-window.js:118
+#. applet.js:254
+#, javascript-format
+msgid "%s updates available"
+msgstr "%s updates beschikbaar"
+
+#. applet.js:255
+msgid "No updates available"
+msgstr "Geen updates beschikbaar"
+
+#. info-window.js:62
 msgid "Loading update details…"
 msgstr ""
 
-#. info-window.js:170
+#. info-window.js:113
 msgid "No details available."
 msgstr ""
 
-#. info-window.js:172
+#. info-window.js:115
 msgid ""
 "Error:\n"
 "{0}"
 msgstr ""
 
-#. info-window.js:181
+#. info-window.js:125
 msgid ""
 "Failed to run command:\n"
 "{0}"
 msgstr ""
 
-#. info-window.js:191
+#. info-window.js:148
 msgid "Updates"
 msgstr ""
 
-#. info-window.js:206
+#. info-window.js:163
 msgid "Search updates…"
 msgstr ""
 
-#. info-window.js:238
+#. info-window.js:198
 msgid "{0} updates"
+msgstr ""
+
+#. info-window.js:226
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
 msgstr ""
 
 #. metadata.json->name
@@ -96,8 +102,8 @@ msgid "Settings"
 msgstr "Instellingen"
 
 #. settings-schema.json->update-refresh->description
-msgid "Minutes to wait before refreshing applet"
-msgstr "Minuten te wachten voordat het applet ververst wordt"
+msgid "Minutes to wait before refreshing updates"
+msgstr ""
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
@@ -125,26 +131,34 @@ msgstr ""
 "hoger is dan deze waarde."
 
 #. settings-schema.json->section2->description
-msgid "Commands to execute in popup menu"
-msgstr "Commando’s om uit te voeren in popupmenu"
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Menu"
+msgstr ""
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
 msgstr ""
-
-#. settings-schema.json->commandUpdate->description
-msgid "Check for new updates:"
-msgstr "Controleer op nieuwe updates:"
 
 #. settings-schema.json->commandUpgrade-show->description
 msgid "Show \"Upgrade packages\" command"
 msgstr ""
 
 #. settings-schema.json->commandUpgrade->description
-msgid "Upgrade packages:"
-msgstr "Upgrade pakketten:"
+msgid "Upgrade packages command:"
+msgstr ""
 
-#. settings-schema.json->section3->description
+#. settings-schema.json->section4->description
 msgid "Theme"
 msgstr "Thema"
 

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-13 12:55+0200\n"
+"POT-Creation-Date: 2025-09-23 17:28+0200\n"
 "PO-Revision-Date: 2025-09-16 02:23+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,50 +16,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:37
+#. applet.js:76
 msgid "missing dependencies"
 msgstr "缺少相依套件"
 
-#. applet.js:106
-#, javascript-format
-msgid "%s updates available"
-msgstr "有 %s 個可用的更新"
-
-#. applet.js:107
-msgid "No updates available"
-msgstr "沒有可用的更新"
-
-#. applet.js:133
+#. applet.js:197
 msgid "Check for new updates"
 msgstr "檢查更新"
 
-#. applet.js:144
+#. applet.js:211
 #, javascript-format
 msgid "View %s updates"
 msgstr "檢視 %s 個更新"
 
-#. applet.js:144
+#. applet.js:211
 msgid "No updates to view"
 msgstr "沒有可檢視的更新"
 
-#. applet.js:157
+#. applet.js:226
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "升級 %s 個套件"
 
-#. applet.js:157
+#. applet.js:226
 msgid "No packages to upgrade"
 msgstr "沒有要升級的套件"
 
-#. info-window.js:118
+#. applet.js:254
+#, javascript-format
+msgid "%s updates available"
+msgstr "有 %s 個可用的更新"
+
+#. applet.js:255
+msgid "No updates available"
+msgstr "沒有可用的更新"
+
+#. info-window.js:62
 msgid "Loading update details…"
 msgstr "正在載入更新的詳細資訊…"
 
-#. info-window.js:170
+#. info-window.js:113
 msgid "No details available."
 msgstr "沒有可用的詳細資訊。"
 
-#. info-window.js:172
+#. info-window.js:115
 msgid ""
 "Error:\n"
 "{0}"
@@ -67,7 +67,7 @@ msgstr ""
 "錯誤：\n"
 "{0}"
 
-#. info-window.js:181
+#. info-window.js:125
 msgid ""
 "Failed to run command:\n"
 "{0}"
@@ -75,17 +75,23 @@ msgstr ""
 "執行指令失敗：\n"
 "{0}"
 
-#. info-window.js:191
+#. info-window.js:148
 msgid "Updates"
 msgstr "更新"
 
-#. info-window.js:206
+#. info-window.js:163
 msgid "Search updates…"
 msgstr "搜尋更新…"
 
-#. info-window.js:238
+#. info-window.js:198
 msgid "{0} updates"
 msgstr "{0} 個更新"
+
+#. info-window.js:226
+msgid ""
+"Failed to read updates file:\n"
+"{0}"
+msgstr ""
 
 #. metadata.json->name
 msgid "Updates notifier"
@@ -100,8 +106,8 @@ msgid "Settings"
 msgstr "設定"
 
 #. settings-schema.json->update-refresh->description
-msgid "Minutes to wait before refreshing applet"
-msgstr "重新整理小程式前等待的分鐘數"
+msgid "Minutes to wait before refreshing updates"
+msgstr ""
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
@@ -120,30 +126,38 @@ msgid ""
 "Show medium level icon when updates count is between low level value and "
 "this value. Show high level icon if it's higher than this value."
 msgstr ""
-"當更新數量介於「低」等級數值與此數值之間時，顯示「中」等級圖示。"
-"若高於此數值，則顯示「高」等級圖示。"
+"當更新數量介於「低」等級數值與此數值之間時，顯示「中」等級圖示。若高於此數"
+"值，則顯示「高」等級圖示。"
 
 #. settings-schema.json->section2->description
-msgid "Commands to execute in popup menu"
-msgstr "在彈出式選單中要執行的指令"
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->show-window-on-click->description
+msgid "Show updates window on left click and menu entries on right click"
+msgstr ""
+
+#. settings-schema.json->refresh-when-no-updates->description
+msgid "Refresh updates list on left click if there are no updates"
+msgstr ""
+
+#. settings-schema.json->section3->description
+msgid "Menu"
+msgstr ""
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
 msgstr "顯示 \"檢查更新\" 指令"
-
-#. settings-schema.json->commandUpdate->description
-msgid "Check for new updates:"
-msgstr "檢查更新："
 
 #. settings-schema.json->commandUpgrade-show->description
 msgid "Show \"Upgrade packages\" command"
 msgstr "顯示 \"升級套件\" 指令"
 
 #. settings-schema.json->commandUpgrade->description
-msgid "Upgrade packages:"
-msgstr "升級套件："
+msgid "Upgrade packages command:"
+msgstr ""
 
-#. settings-schema.json->section3->description
+#. settings-schema.json->section4->description
 msgid "Theme"
 msgstr "佈景主題"
 
