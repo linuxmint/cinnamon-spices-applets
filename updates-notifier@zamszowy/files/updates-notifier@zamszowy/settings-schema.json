@@ -8,6 +8,11 @@
         "default": "60",
         "description": "Minutes to wait before refreshing updates"
     },
+    "show-firmware": {
+        "type": "switch",
+        "default": true,
+        "description": "Show firmware updates"
+    },
     "hide-applet": {
         "type": "switch",
         "default": false,

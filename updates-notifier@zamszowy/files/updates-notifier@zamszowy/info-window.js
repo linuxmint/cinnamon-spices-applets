@@ -46,6 +46,52 @@ function capitalize(str) {
     return str.charAt(0).toLocaleUpperCase() + str.slice(1);
 }
 
+function getPkconDetails(pkgid, callback) {
+    let launcher = new Gio.SubprocessLauncher({
+        flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+    });
+    launcher.setenv("LANG", "en_US.UTF-8", true);
+    try {
+        let subprocess = launcher.spawnv(["pkcon", "get-update-detail", pkgid]);
+        subprocess.communicate_utf8_async(null, null, (proc, res) => {
+            let [ok, stdout, stderr] = proc.communicate_utf8_finish(res);
+            if (ok) {
+                // Split into lines
+                let lines = stdout.split("\n");
+                // Find "Results:" line
+                let idx = lines.findIndex(l => l.trim() === "Results:");
+                let details = idx >= 0 ? lines.slice(idx + 1) : lines;
+                const details_str = details.join("\n");
+
+                callback(details_str.length > 0 ? details_str : _("No details available."));
+            } else {
+                callback(_("Error:\n{0}").format(stderr));
+            }
+        });
+    } catch (e) {
+        callback(_("Failed to run command:\n{0}").format(e.message));
+    }
+}
+
+function getFirmwareDetails(deviceid, callback) {
+    let launcher = new Gio.SubprocessLauncher({
+        flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+    });
+    try {
+        let subprocess = launcher.spawnv(["fwupdmgr", "get-updates", deviceid]);
+        subprocess.communicate_utf8_async(null, null, (proc, res) => {
+            let [ok, stdout, stderr] = proc.communicate_utf8_finish(res);
+            if (ok) {
+                callback(stdout.length > 0 ? stdout : _("No details available."));
+            } else {
+                callback(_("Error:\n{0}").format(stderr));
+            }
+        });
+    } catch (e) {
+        callback(_("Failed to run command:\n{0}").format(e.message));
+    }
+}
+
 function showDetails(item) {
     let win = new Gtk.Window({ title: item.name });
     win.set_default_size(700, 520);
@@ -79,52 +125,31 @@ function showDetails(item) {
     });
     win.show_all();
 
-    let pkgid = item.values.pkgid;
-    print("fetching details for:", pkgid);
+    const isFirmware = item.values.isFirmware === "1";
+    print("fetching details for", isFirmware ? item.values.deviceid : item.values.pkgid);
 
-    let launcher = new Gio.SubprocessLauncher({
-        flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
-    });
-    launcher.setenv("LANG", "en_US.UTF-8", true);
-    try {
-        let subprocess = launcher.spawnv(["pkcon", "get-update-detail", pkgid]);
-        subprocess.communicate_utf8_async(null, null, (proc, res) => {
-            let [ok, stdout, stderr] = proc.communicate_utf8_finish(res);
-            if (!win) return;
-
-            // Stop and hide spinner row
-            spinner.stop();
-            hbox.hide();
-
-            let scroll = new Gtk.ScrolledWindow();
-            let textview = new Gtk.TextView();
-            textview.set_editable(false);
-            textview.set_cursor_visible(false);
-            scroll.add(textview);
-            vbox.pack_start(scroll, true, true, 0);
-
-            if (ok) {
-                // Split into lines
-                let lines = stdout.split("\n");
-                // Find "Results:" line
-                let idx = lines.findIndex(l => l.trim() === "Results:");
-                let details = idx >= 0 ? lines.slice(idx + 1) : lines;
-                const details_str = details.join("\n");
-                textview.buffer.text = details_str.length > 0 ? details_str : _("No details available.");
-            } else {
-                textview.buffer.text = _("Error:\n{0}").format(stderr);
-            }
-
-            scroll.show_all();
-        });
-    } catch (e) {
+    const setText = (str) => {
         if (!win) return;
 
+        // Stop and hide spinner row
         spinner.stop();
         hbox.hide();
-        let errorLabel = new Gtk.Label({ label: _("Failed to run command:\n{0}").format(e.message) });
-        vbox.pack_start(errorLabel, false, false, 0);
-        errorLabel.show();
+
+        let scroll = new Gtk.ScrolledWindow();
+        let textview = new Gtk.TextView();
+        textview.set_editable(false);
+        textview.set_cursor_visible(false);
+        scroll.add(textview);
+        vbox.pack_start(scroll, true, true, 0);
+        textview.buffer.text = str;
+
+        scroll.show_all();
+    };
+
+    if (!isFirmware) {
+        getPkconDetails(item.values.pkgid, setText);
+    } else {
+        getFirmwareDetails(item.values.deviceid, setText)
     }
 }
 

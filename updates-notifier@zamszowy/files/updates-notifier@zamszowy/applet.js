@@ -88,6 +88,7 @@ UpdatesNotifier.prototype = {
         this.settings.bind("level-2", "level2", this._update, null);
 
         this.settings.bind("refresh-when-no-updates", "refreshWhenNoUpdates", this._update, null);
+        this.settings.bind("show-firmware", "showFirmware", this._refreshUpdatesInfo, null);
         this.settings.bind("show-window-on-click", "showWindowOnClick", this._update, null);
         this.settings.bind("commandUpdate-show", "commandUpdateShow", this._update, null);
         this.settings.bind("commandUpgrade", "commandUpgrade", null, null);
@@ -110,6 +111,12 @@ UpdatesNotifier.prototype = {
         this._watch_dbus();
         this._set_check_interval();
         this._refreshUpdatesInfo();
+    },
+
+    _saveUpdatesToFile: function () {
+        if (!GLib.file_set_contents(this.applet_path + '/updates', this.updates.toStr())) {
+            global.logError(`${UUID}: Failed to write updates file`);
+        }
     },
 
     _watch_dbus: function () {
@@ -139,9 +146,7 @@ UpdatesNotifier.prototype = {
                     this.pendingUpdate = false;
                     global.log(`${UUID}: D-Bus Finished signal received, current updates: ${this.updates.map.size}`);
                     this._update();
-                    if (!GLib.file_set_contents(this.applet_path + '/updates', this.updates.toStr())) {
-                        global.logError(`${UUID}: Failed to write updates file`);
-                    }
+                    this._saveUpdatesToFile();
                 }
             }
         );
@@ -307,7 +312,26 @@ UpdatesNotifier.prototype = {
 
         // accept updates changes only when originating from this applet
         this.checkingInProgress = true;
-        Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check"], () => {
+        Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check"], (stdout) => {
+            if (this.showFirmware) {
+                let fwCount = 0;
+                for (let line of stdout.trim().split("\n")) {
+                    global.log(`${UUID}: found firmware update: ${line}`);
+                    const tokens = line.split('#');
+                    if (tokens.length < 5) {
+                        continue;
+                    }
+                    const [name, deviceid, localVersion, version, description] = tokens.map(t => t.trim());
+                    this.updates.addFirmware(name, deviceid, localVersion, version, description);
+                    fwCount++;
+                }
+                global.log(`${UUID}: Firmware updates processing finished, updates found: ${fwCount}`);
+                if (fwCount > 0) {
+                    this._update();
+                    this._saveUpdatesToFile();
+                }
+            }
+
             this.checkingInProgress = false;
             // dbus not fired when no updates - refresh icon manually
             if (this.updates.map.size === 0) {
