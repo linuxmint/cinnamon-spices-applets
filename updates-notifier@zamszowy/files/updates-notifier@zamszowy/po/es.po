@@ -55,7 +55,7 @@ msgstr "No hay actualizaciones disponibles"
 
 #. info-window.js:62
 msgid "Loading update details…"
-msgstr "Cargando detalles de la actualización..."
+msgstr "Cargando detalles de la actualización…"
 
 #. info-window.js:113
 msgid "No details available."
@@ -83,7 +83,7 @@ msgstr "Actualizaciones"
 
 #. info-window.js:163
 msgid "Search updates…"
-msgstr "Buscar actualizaciones..."
+msgstr "Buscar actualizaciones…"
 
 #. info-window.js:198
 msgid "{0} updates"
@@ -94,6 +94,8 @@ msgid ""
 "Failed to read updates file:\n"
 "{0}"
 msgstr ""
+"No se pudo leer el archivo de actualizaciones:\n"
+"{0}"
 
 #. metadata.json->name
 msgid "Updates notifier"
@@ -109,7 +111,7 @@ msgstr "Configuración"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing updates"
-msgstr ""
+msgstr "Minutos de espera antes de actualizar"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
@@ -136,19 +138,23 @@ msgstr ""
 
 #. settings-schema.json->section2->description
 msgid "Applet click"
-msgstr ""
+msgstr "Clic en el applet"
 
 #. settings-schema.json->show-window-on-click->description
 msgid "Show updates window on left click and menu entries on right click"
 msgstr ""
+"Mostrar la ventana de actualizaciones en las entradas a la izquierda y las "
+"entradas del menú en el clic derecho"
 
 #. settings-schema.json->refresh-when-no-updates->description
 msgid "Refresh updates list on left click if there are no updates"
 msgstr ""
+"Actualizar la lista de actualizaciones en el clic izquierdo si no hay "
+"actualizaciones"
 
 #. settings-schema.json->section3->description
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #. settings-schema.json->commandUpdate-show->description
 msgid "Show \"Check for new updates\" command"
@@ -160,7 +166,7 @@ msgstr "Mostrar comando \"Actualizar paquetes\""
 
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages command:"
-msgstr ""
+msgstr "Comando de actualización de paquetes:"
 
 #. settings-schema.json->section4->description
 msgid "Theme"
