@@ -22,7 +22,6 @@ are waiting for the upgrades.
 ## Dependencies
 
 - `pkcon`, `PackageKitGlib`,
-- optional `gnome-terminal` for installing updates through the applet menu
 
 ## Icons
 

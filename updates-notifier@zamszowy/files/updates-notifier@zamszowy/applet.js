@@ -226,10 +226,7 @@ UpdatesNotifier.prototype = {
             const iUpgradeStr = count > 0 ? _("Upgrade %s packages").format(count.toString()) : _("No packages to upgrade");
             let iUpgrade = new PopupMenu.PopupIconMenuItem(iUpgradeStr, "system-run-symbolic", St.IconType.SYMBOLIC, { reactive: count > 0 });
             iUpgrade.connect('activate', () => {
-                const args = ['/usr/bin/bash', this.applet_path + '/updates.sh', "command", this.commandUpgrade];
-                Util.spawn_async(args, () => {
-                    this._refreshUpdatesInfo();
-                });
+                Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "command", this.commandUpgrade]);
             });
 
             if (!this.showWindowOnClick) {
