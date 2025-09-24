@@ -18,7 +18,7 @@ const UpdateState = Object.freeze({
  */
 function decodeUpdateState(code) {
     if (!Pk) {
-        return [UpdateState.OTHER, ""];
+        return [UpdateState.OTHER, UpdateState.OTHER];
     }
 
     const tryDecode = (val) => {
@@ -48,7 +48,7 @@ function decodeUpdateState(code) {
         if (!res && hi) res = tryDecode(hi);
     }
 
-    return res || [UpdateState.OTHER, ""];
+    return res || [UpdateState.OTHER, UpdateState.OTHER];
 }
 
 var Updates = class {
@@ -77,6 +77,7 @@ var Updates = class {
                 }
             } else {
                 const obj = {
+                    isFirmware: "0",
                     pkgid,
                     version,
                     localVersion: "",
@@ -91,10 +92,26 @@ var Updates = class {
         }
     }
 
+    addFirmware(name, deviceid, localVersion, version, description) {
+        const obj = {
+            isFirmware: "1",
+            deviceid,
+            localVersion,
+            version,
+            type: "firmware",
+            description,
+        };
+        this.map.set(name, obj);
+    }
+
     toStr() {
         let out = "";
         for (const [name, obj] of this.map) {
-            out += `${name}#${obj.pkgid}#${obj.version}#${obj.localVersion}#${obj.arch}#${obj.repo}#${obj.type}#${obj.description}\n`;
+            if (obj.isFirmware === "0") {
+                out += `${obj.isFirmware}#${name}#${obj.pkgid}#${obj.version}#${obj.localVersion}#${obj.arch}#${obj.repo}#${obj.type}#${obj.description}\n`;
+            } else {
+                out += `${obj.isFirmware}#${name}#${obj.deviceid}#${obj.version}#${obj.localVersion}#${obj.type}#${obj.description}\n`;
+            }
         }
         return out;
     }
@@ -105,11 +122,21 @@ var Updates = class {
         for (let line of lines) {
             if (!(line = line.trim())) continue;
             const tokens = line.split('#');
-            if (tokens.length < 8) {
+            if (!tokens || tokens.length === 0 || !tokens[0]
+                || (tokens[0] !== "0" && tokens[0] !== "1")
+                || (tokens[0] === "0" && tokens.length < 9)
+                || (tokens[0] === "1" && tokens.length < 7)) {
                 continue;
             }
-            const [name, pkgid, version, localVersion, arch, repo, type, description] = tokens.map(t => t.trim());
-            updates.map.set(name, { pkgid, version, localVersion, arch, repo, type, description });
+
+            const isFirmware = tokens[0] === "1";
+            if (!isFirmware) {
+                const [isFirmware, name, pkgid, version, localVersion, arch, repo, type, description] = tokens.map(t => t.trim());
+                updates.map.set(name, { pkgid, version, localVersion, arch, repo, type, description, isFirmware });
+            } else {
+                const [isFirmware, name, deviceid, version, localVersion, type, description] = tokens.map(t => t.trim());
+                updates.map.set(name, { deviceid, version, localVersion, type, description, isFirmware });
+            }
         }
         return updates;
     }

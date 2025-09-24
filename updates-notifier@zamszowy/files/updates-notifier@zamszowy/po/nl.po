@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-23 17:28+0200\n"
+"POT-Creation-Date: 2025-09-24 18:34+0200\n"
 "PO-Revision-Date: 2025-08-26 10:42+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -20,70 +20,70 @@ msgstr ""
 msgid "missing dependencies"
 msgstr "ontbrekende afhankelijkheden"
 
-#. applet.js:197
+#. applet.js:202
 msgid "Check for new updates"
 msgstr "Controleer op nieuwe updates"
 
-#. applet.js:211
+#. applet.js:216
 #, javascript-format
 msgid "View %s updates"
 msgstr "Bekijk %s updates"
 
-#. applet.js:211
+#. applet.js:216
 msgid "No updates to view"
 msgstr "Geen updates om te bekijken"
 
-#. applet.js:226
+#. applet.js:231
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "Upgrade %s pakketten"
 
-#. applet.js:226
+#. applet.js:231
 msgid "No packages to upgrade"
 msgstr "Geen pakketten om te upgraden"
 
-#. applet.js:254
+#. applet.js:256
 #, javascript-format
 msgid "%s updates available"
 msgstr "%s updates beschikbaar"
 
-#. applet.js:255
+#. applet.js:257
 msgid "No updates available"
 msgstr "Geen updates beschikbaar"
 
-#. info-window.js:62
-msgid "Loading update details…"
-msgstr ""
-
-#. info-window.js:113
+#. info-window.js:66 info-window.js:85
 msgid "No details available."
 msgstr ""
 
-#. info-window.js:115
+#. info-window.js:68 info-window.js:87
 msgid ""
 "Error:\n"
 "{0}"
 msgstr ""
 
-#. info-window.js:125
+#. info-window.js:72 info-window.js:91
 msgid ""
 "Failed to run command:\n"
 "{0}"
 msgstr ""
 
-#. info-window.js:148
+#. info-window.js:108
+msgid "Loading update details…"
+msgstr ""
+
+#. info-window.js:173
 msgid "Updates"
 msgstr ""
 
-#. info-window.js:163
+#. info-window.js:188
 msgid "Search updates…"
 msgstr ""
 
-#. info-window.js:198
+#. info-window.js:223
 msgid "{0} updates"
 msgstr ""
 
-#. info-window.js:226
+#. info-window.js:251
 msgid ""
 "Failed to read updates file:\n"
 "{0}"
@@ -103,6 +103,10 @@ msgstr "Instellingen"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing updates"
+msgstr ""
+
+#. settings-schema.json->show-firmware->description
+msgid "Show firmware updates"
 msgstr ""
 
 #. settings-schema.json->hide-applet->description
