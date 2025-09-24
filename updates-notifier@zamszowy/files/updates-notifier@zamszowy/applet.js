@@ -312,6 +312,10 @@ UpdatesNotifier.prototype = {
         this.checkingInProgress = true;
         Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check"], () => {
             this.checkingInProgress = false;
+            // dbus not fired when no updates - refresh icon manually
+            if (this.updates.map.size === 0) {
+                this._update();
+            }
         });
     },
 };
