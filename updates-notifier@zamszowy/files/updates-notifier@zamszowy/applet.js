@@ -48,6 +48,11 @@ function unpackPackageSignal(params) {
     return tuples;
 }
 
+const RefreshMode = Object.freeze({
+    UPDATES: 'updates',
+    PACKAGES: 'packages'
+});
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 function _(str) { return Gettext.dgettext(UUID, str); }
 
@@ -106,6 +111,7 @@ UpdatesNotifier.prototype = {
         this.updates = new Updates();
         this.checkingInProgress = false;
         this.pendingUpdate = false;
+        this.lastRefreshTime = 0;
 
         this.hasFirmwareUpdates = false;
 
@@ -125,7 +131,7 @@ UpdatesNotifier.prototype = {
     },
 
     _watch_dbus: function () {
-        this.bus_subscription = this.bus.signal_subscribe(
+        this.package_subscription = this.bus.signal_subscribe(
             'org.freedesktop.PackageKit',
             'org.freedesktop.PackageKit.Transaction',
             null,
@@ -153,6 +159,19 @@ UpdatesNotifier.prototype = {
                     this._update();
                     this._saveUpdatesToFile();
                 }
+            }
+        );
+
+        this.update_changed_subscription = this.bus.signal_subscribe(
+            'org.freedesktop.PackageKit',
+            'org.freedesktop.PackageKit',
+            'UpdatesChanged',
+            '/org/freedesktop/PackageKit',
+            null,
+            Gio.DBusSignalFlags.NONE,
+            (_conn, _sender, _path, _iface, signal, params) => {
+                // refresh only list of packages, since this was external trigger
+                this._refreshUpdatesInfo(RefreshMode.PACKAGES);
             }
         );
     },
@@ -312,24 +331,32 @@ UpdatesNotifier.prototype = {
         if (this.interval) {
             Util.clearInterval(this.interval);
         }
-        if (this.bus_subscription) {
-            this.bus.signal_unsubscribe(this.bus_subscription);
+        if (this.package_subscription) {
+            this.bus.signal_unsubscribe(this.package_subscription);
+        }
+        if (this.update_changed_subscription) {
+            this.bus.signal_unsubscribe(this.update_changed_subscription);
         }
     },
 
-    _refreshUpdatesInfo: function () {
+    _refreshUpdatesInfo: function (refreshMode = RefreshMode.UPDATES) {
         if (this.checkingInProgress) {
             return;
         }
+        if (this.lastRefreshTime && ((GLib.get_monotonic_time() - this.lastRefreshTime) < 5 * GLib.USEC_PER_SEC)) {
+            global.log(`${UUID}: Skipping refresh, too frequent`);
+            return;
+        }
 
-        global.log(`${UUID}: Refreshing updates info...`);
+        global.log(`${UUID}: Refreshing ${refreshMode} info...`);
         this.set_applet_icon_name('configure');
         this.hide_applet_label(true);
         this.updates = new Updates();
 
         // accept updates changes only when originating from this applet
         this.checkingInProgress = true;
-        Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check"], (stdout) => {
+        Util.spawn_async(['/usr/bin/bash', this.applet_path + '/updates.sh', "check", refreshMode], (stdout) => {
+            this.lastRefreshTime = GLib.get_monotonic_time();
             if (this.showFirmware) {
                 let fwCount = 0;
                 for (let line of stdout.trim().split("\n")) {
