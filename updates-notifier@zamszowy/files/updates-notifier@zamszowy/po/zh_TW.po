@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: updates-notifier@zamszowy 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-09-24 18:34+0200\n"
+"POT-Creation-Date: 2025-09-29 10:49+0200\n"
 "PO-Revision-Date: 2025-09-16 02:23+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -16,38 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. applet.js:76
+#. applet.js:79
 msgid "missing dependencies"
 msgstr "缺少相依套件"
 
-#. applet.js:202
+#. applet.js:229
 msgid "Check for new updates"
 msgstr "檢查更新"
 
-#. applet.js:216
+#. applet.js:243
 #, javascript-format
 msgid "View %s updates"
 msgstr "檢視 %s 個更新"
 
-#. applet.js:216
+#. applet.js:243
 msgid "No updates to view"
 msgstr "沒有可檢視的更新"
 
-#. applet.js:231
+#. applet.js:258
 #, javascript-format
 msgid "Upgrade %s packages"
 msgstr "升級 %s 個套件"
 
-#. applet.js:231
+#. applet.js:258
 msgid "No packages to upgrade"
 msgstr "沒有要升級的套件"
 
-#. applet.js:256
+#. applet.js:283
 #, javascript-format
 msgid "%s updates available"
 msgstr "有 %s 個可用的更新"
 
-#. applet.js:257
+#. applet.js:284
 msgid "No updates available"
 msgstr "沒有可用的更新"
 
@@ -101,9 +101,33 @@ msgstr "更新通知器"
 msgid "Shows icons for pending update packages"
 msgstr "顯示待處理更新套件的圖示"
 
-#. settings-schema.json->section1->description
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->pageAppearance->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sectionSettings->title
 msgid "Settings"
 msgstr "設定"
+
+#. settings-schema.json->sectionIconLabel->title
+msgid "Icon/Label"
+msgstr ""
+
+#. settings-schema.json->sectionClick->title
+msgid "Applet click"
+msgstr ""
+
+#. settings-schema.json->sectionMenu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sectionTheme->title
+msgid "Theme"
+msgstr "佈景主題"
 
 #. settings-schema.json->update-refresh->description
 msgid "Minutes to wait before refreshing updates"
@@ -133,8 +157,20 @@ msgstr ""
 "當更新數量介於「低」等級數值與此數值之間時，顯示「中」等級圖示。若高於此數"
 "值，則顯示「高」等級圖示。"
 
-#. settings-schema.json->section2->description
-msgid "Applet click"
+#. settings-schema.json->show-label->description
+msgid "Show label with updates count"
+msgstr ""
+
+#. settings-schema.json->label-font-size->description
+msgid "Label font size"
+msgstr ""
+
+#. settings-schema.json->label-font-weight->description
+msgid "Label font weight"
+msgstr ""
+
+#. settings-schema.json->label-vertical-position->description
+msgid "Label vertical position"
 msgstr ""
 
 #. settings-schema.json->show-window-on-click->description
@@ -143,10 +179,6 @@ msgstr ""
 
 #. settings-schema.json->refresh-when-no-updates->description
 msgid "Refresh updates list on left click if there are no updates"
-msgstr ""
-
-#. settings-schema.json->section3->description
-msgid "Menu"
 msgstr ""
 
 #. settings-schema.json->commandUpdate-show->description
@@ -160,10 +192,6 @@ msgstr "顯示 \"升級套件\" 指令"
 #. settings-schema.json->commandUpgrade->description
 msgid "Upgrade packages command:"
 msgstr ""
-
-#. settings-schema.json->section4->description
-msgid "Theme"
-msgstr "佈景主題"
 
 #. settings-schema.json->icon-style->description
 msgid "Icon style"
