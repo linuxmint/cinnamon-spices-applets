@@ -30,6 +30,7 @@
         "icon-size",
         "show-issues",
         "show-translations",
+        "show-commits",
         "sort-by",
         "show-uuid",
         "translate-name",
@@ -97,6 +98,11 @@
   "show-translations": {
     "type": "switch",
     "description": "Show number of translations in the menu",
+    "default": true
+  },
+  "show-commits": {
+    "type": "switch",
+    "description": "Show available updates in the menu",
     "default": true
   },
   "show-issues": {
