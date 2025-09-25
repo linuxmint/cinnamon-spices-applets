@@ -104,6 +104,8 @@ UpdatesNotifier.prototype = {
         this.checkingInProgress = false;
         this.pendingUpdate = false;
 
+        this.hasFirmwareUpdates = false;
+
         this.interval = null;
 
         this.bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, null);
@@ -154,6 +156,9 @@ UpdatesNotifier.prototype = {
 
     _apply_applet_icon: function (icon_name) {
         let full_icon_name = icon_name + "-";
+        if (this.hasFirmwareUpdates) {
+            full_icon_name += "fw-";
+        }
         if (this.icon_style == "dark") {
             full_icon_name += "dark";
         } else if (this.icon_style == "light") {
@@ -316,17 +321,20 @@ UpdatesNotifier.prototype = {
             if (this.showFirmware) {
                 let fwCount = 0;
                 for (let line of stdout.trim().split("\n")) {
-                    global.log(`${UUID}: found firmware update: ${line}`);
                     const tokens = line.split('#');
                     if (tokens.length < 5) {
                         continue;
                     }
+                    global.log(`${UUID}: found firmware update: ${line}`);
                     const [name, deviceid, localVersion, version, description] = tokens.map(t => t.trim());
                     this.updates.addFirmware(name, deviceid, localVersion, version, description);
                     fwCount++;
                 }
+
                 global.log(`${UUID}: Firmware updates processing finished, updates found: ${fwCount}`);
-                if (fwCount > 0) {
+                this.hasFirmwareUpdates = fwCount > 0;
+
+                if (this.hasFirmwareUpdates) {
                     this._update();
                     this._saveUpdatesToFile();
                 }
