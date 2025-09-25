@@ -1445,3 +1445,10 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this._app.activate_full(-1, _time);
     }
 }
+
+module.exports = {
+    StreamMenuSection,
+    Player,
+    MediaPlayerLauncher,
+    Seeker
+}

@@ -343,3 +343,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         return this.isMic ? "microphone-sensitivity-" + icon + "-symbolic" : "audio-volume-" + icon + "-symbolic";
     }
 }
+
+module.exports = {
+    VolumeSlider
+}

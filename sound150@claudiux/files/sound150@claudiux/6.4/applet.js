@@ -1592,7 +1592,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     set_applet_icon_path(icon_path) {
-        this._ensureIcon();
+        //~ this._ensureIcon();
         try {
             let icon_path2 = icon_path.replace("AlbumArt/song-art", "sound150/icons");
             let file;
