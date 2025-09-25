@@ -1,5 +1,5 @@
 {
-    "section1": {
+    "sectionSettings": {
         "type": "section",
         "description": "Settings"
     },
@@ -12,6 +12,10 @@
         "type": "switch",
         "default": true,
         "description": "Show firmware updates"
+    },
+    "sectionIconLabel": {
+        "type": "section",
+        "description": "Icon/Label"
     },
     "hide-applet": {
         "type": "switch",
@@ -35,7 +39,39 @@
         "description": "Show medium level icon when updates count is between low level value and this value. Show high level icon if it's higher than this value.",
         "dependency": "different-levels"
     },
-    "section2": {
+    "show-label": {
+        "type": "switch",
+        "default": false,
+        "description": "Show label with updates count"
+    },
+    "label-font-size": {
+        "type": "scale",
+        "default": 90,
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "description": "Label font size",
+        "dependency": "show-label"
+    },
+    "label-font-weight": {
+        "type": "scale",
+        "default": 300,
+        "min": 1,
+        "max": 1000,
+        "step": 10,
+        "description": "Label font weight",
+        "dependency": "show-label"
+    },
+    "label-vertical-position": {
+        "type": "scale",
+        "default": 10,
+        "min": -20,
+        "max": 20,
+        "step": 1,
+        "description": "Label vertical position",
+        "dependency": "show-label"
+    },
+    "sectionClick": {
         "type": "section",
         "description": "Applet click"
     },
@@ -50,7 +86,7 @@
         "description": "Refresh updates list on left click if there are no updates",
         "dependency": "show-window-on-click"
     },
-    "section3": {
+    "sectionMenu": {
         "type": "section",
         "description": "Menu"
     },
@@ -70,7 +106,7 @@
         "description": "Upgrade packages command:",
         "dependency": "commandUpgrade-show"
     },
-    "section4": {
+    "sectionTheme": {
         "type": "section",
         "description": "Theme"
     },

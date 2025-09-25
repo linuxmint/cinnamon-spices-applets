@@ -64,8 +64,6 @@ UpdatesNotifier.prototype = {
 
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.hide_applet_label(true);
-
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
@@ -95,9 +93,14 @@ UpdatesNotifier.prototype = {
         this.settings.bind("commandUpgrade-show", "commandUpgradeShow", this._update, null);
 
         this.settings.bind("icon-style", "icon_style", this._update, null);
+        this.settings.bind("show-label", "show_label", this._update, null);
+        this.settings.bind("label-font-size", "labelFontSize", this._update, null);
+        this.settings.bind("label-font-weight", "labelFontWeight", this._update, null);
+        this.settings.bind("label-vertical-position", "labelVerticalPosition", this._update, null);
 
         this.rightMenuItemsIndexes = new Array();
 
+        this.hide_applet_label(true);
         this.set_applet_icon_name('configure');
 
         this.updates = new Updates();
@@ -280,6 +283,14 @@ UpdatesNotifier.prototype = {
             }
         }
 
+        this.set_applet_label(`${count}`);
+        this.hide_applet_label(count === 0 || !this.show_label);
+
+        let fontWeight = `font-weight: ${this.labelFontWeight}`;
+        let fontSize = `font-size: ${this.labelFontSize}%`;
+        let margin = `margin-${this.labelVerticalPosition > 0 ? "top" : "bottom"}: ${Math.abs(this.labelVerticalPosition)}px`;
+        this._applet_label.set_style(`${fontWeight}; ${fontSize}; ${margin}`);
+
         this._buildMenu(count);
     },
 
@@ -313,6 +324,7 @@ UpdatesNotifier.prototype = {
 
         global.log(`${UUID}: Refreshing updates info...`);
         this.set_applet_icon_name('configure');
+        this.hide_applet_label(true);
         this.updates = new Updates();
 
         // accept updates changes only when originating from this applet
