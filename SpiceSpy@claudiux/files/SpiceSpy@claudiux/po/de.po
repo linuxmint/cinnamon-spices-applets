@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: SpiceSpy@claudiux 4.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-08-29 19:08+0200\n"
+"POT-Creation-Date: 2025-09-25 23:34+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,50 +17,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#. applet.js:206
+#. applet.js:201
 msgid "score"
 msgstr "Punktestand"
 
-#. applet.js:218
+#. applet.js:213
 msgid "comments"
 msgstr "Kommentare"
 
 # Better not translate "issue"?
-#. applet.js:231
+#. applet.js:225
 msgid "recent issues"
 msgstr "aktuelle Probleme"
 
-#. applet.js:243
+#. applet.js:237
 msgid "translations"
 msgstr "Übersetzungen"
 
-#. applet.js:326
+#. applet.js:312
 #, fuzzy
 msgid "Reload icons"
 msgstr "Applet neu Laden"
 
-#. applet.js:334
+#. applet.js:318
 msgid "Visit website"
 msgstr ""
 
-#. applet.js:895
+#. applet.js:826
 msgid "Spices"
 msgstr "Spices"
 
-#. applet.js:986
+#. applet.js:915
 msgid "Mark all as read"
 msgstr "Alle als gelesen markieren"
 
-#. applet.js:997
+#. applet.js:926
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#. applet.js:1009
+#. applet.js:938
 msgid "Refreshing in progress"
 msgstr "Aktualisierung läuft"
 
 # Same wording as in context menu on applet right click.
-#. applet.js:1020
+#. applet.js:949
 msgid "Configure..."
 msgstr "Einrichten..."
 
@@ -151,6 +151,12 @@ msgstr "128"
 #. settings-schema.json->show-translations->description
 msgid "Show number of translations in the menu"
 msgstr "Zeige die Anzahl der Übersetzungen im Menü an"
+
+# Better not translate issue since it refers to Github issues?
+#. settings-schema.json->show-commits->description
+#, fuzzy
+msgid "Show available updates in the menu"
+msgstr "Zeige die Anzahl der Probleme im Menü an"
 
 # Better not translate issue since it refers to Github issues?
 #. settings-schema.json->show-issues->description

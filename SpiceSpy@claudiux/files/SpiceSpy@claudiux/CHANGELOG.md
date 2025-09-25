@@ -1,3 +1,6 @@
+### v5.5.0~20250925
+  * Also reports new commits.
+
 ### v5.4.0~20250829
   * Alerts also on issues related to spices.
 
