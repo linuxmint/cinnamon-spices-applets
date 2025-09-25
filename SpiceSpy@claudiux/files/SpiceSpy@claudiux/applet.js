@@ -170,6 +170,7 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     this.new_stars = new_stars; // boolean
     this.new_comments = new_comments; // boolean
     this.new_translations = new_translations; // boolean
+    this.new_commits = new_commits; // boolean
     this.url = this.spice.url;
 
     let label_text;
@@ -181,8 +182,8 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
       else
         label_text = spice.name;
     }
-    if (new_commits && this.parent.show_commits)
-      label_text += " " + COMMIT_CHAR;
+    if (this.new_commits && this.parent.show_commits)
+      label_text = COMMIT_CHAR + " " + label_text;
 
     let label = new St.Label({ text: label_text, reactive: true, track_hover: true });
 
@@ -190,7 +191,8 @@ var SpiceMenuItem = class SpiceMenuItem extends PopupMenu.PopupBaseMenuItem {
     label_box.add_actor(label);
     label_box.connect("enter-event", () => { this.url = this.spice.url });
     this.addActor(label_box);
-
+    label_box.opacity = (this.new_commits && this.parent.show_commits) ? 255 : this.parent.standard_opacity;
+    if (this.new_commits && this.parent.show_commits) label_box.set_style("color: %s;".format(this.parent.color_on_change));
 
 
     let stars_box = new St.BoxLayout({ style: "spacing: .25em;" , reactive: true, track_hover: true, can_focus: true });

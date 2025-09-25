@@ -199,3 +199,7 @@ class HttpLib {
         };
     }
 }
+
+module.exports = {
+    HttpLib
+}
