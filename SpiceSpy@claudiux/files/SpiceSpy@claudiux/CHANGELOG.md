@@ -1,3 +1,7 @@
+### v5.5.1~20250925
+  * Updated README.
+  * Minor changes in menu about new commits.
+
 ### v5.5.0~20250925
   * Also reports new commits.
 
