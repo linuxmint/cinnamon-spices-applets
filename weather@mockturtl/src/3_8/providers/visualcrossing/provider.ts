@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Config, Services } from "../../config";
+import { Services, type Config } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { AlertData, Condition, ForecastData, HourlyForecastData, PrecipitationType, WeatherData} from "../../weather-data";
@@ -12,7 +12,7 @@ import { ErrorHandler } from "../../lib/services/error_handler";
 
 export class VisualCrossing extends BaseProvider {
 	readonly prettyName: string = _("Visual Crossing");
-	readonly name: Services = "Visual Crossing";
+	readonly name: Services = Services.VisualCrossing;
 	readonly maxForecastSupport: number = 15;
 	readonly maxHourlyForecastSupport: number = 336;
 	readonly website: string = "https://weather.visualcrossing.com/";
