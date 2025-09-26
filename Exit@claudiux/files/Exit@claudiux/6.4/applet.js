@@ -143,6 +143,8 @@ class ExitApplet extends Applet.IconApplet {
 
         this.isWaylandSession = Meta.is_wayland_compositor();
 
+        this.locking = false;
+
         this.can_shutdown = false;
 
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
@@ -172,7 +174,7 @@ class ExitApplet extends Applet.IconApplet {
         [this.mouseX, this.mouseY, ] = global.get_pointer();
         this.mouseMovesId = null;
         this.screenOn();
-        this.actor.connect('leave-event', () => { this.screenOn() });
+        //~ this.actor.connect('leave-event', () => { this.screenOn() });
 
         //~ this.screenOffIntervalId = null;
 
@@ -206,6 +208,7 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("dontShowShortcutsInMenu", "dontShowShortcutsInMenu");
         this.s.bind("kbToggleMenu", "kbToggleMenu", () => { this.on_keybinds_changed() });
         this.s.bind("kbWakeUpMonitor", "kbWakeUpMonitor", () => { this.on_keybinds_changed() });
+        this.s.bind("kbWakeUpMonitorWithLock", "kbWakeUpMonitorWithLock", () => { this.on_keybinds_changed() });
         this.s.bind("sameKeyTwice", "sameKeyTwice");
         this.s.bind("maximizeSettingsWindow", "maximizeSettingsWindow");
 
@@ -255,9 +258,15 @@ class ExitApplet extends Applet.IconApplet {
             }
         }
         this.screenStatus = "on";
+
+        if (this.locking === true) {
+            Util.spawnCommandLineAsync("cinnamon-screensaver-command -a -l");
+            this.locking = false;
+        }
     }
 
-    screenOff() {
+    screenOff(lock=false) {
+        this.locking = lock;
         if (this.mouseMovesId != null) {
             source_remove(this.mouseMovesId);
             this.mouseMovesId = null;
@@ -348,11 +357,24 @@ class ExitApplet extends Applet.IconApplet {
                 if (this.dontShowShortcutsInMenu) {
                     item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off"), "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
                 } else {
-                    item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off") + "   " + this.kbWakeUpMonitor.split("::")[0], "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
+                    item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off") + "\n" + this.kbWakeUpMonitor.split("::")[0], "preferences-desktop-screensaver-symbolic", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
                     if (this.screenStatus == undefined || this.screenStatus == "on")
-                        this.screenOff();
+                        this.screenOff(false);
+                    else
+                        this.screenOn();
+                });
+                this.menu.addMenuItem(item);
+
+                if (this.dontShowShortcutsInMenu) {
+                    item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off with Lock feature"), "gnome-lockscreen-symbolic", St.IconType.SYMBOLIC);
+                } else {
+                    item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off with Lock feature") + "\n" + this.kbWakeUpMonitorWithLock.split("::")[0], "gnome-lockscreen-symbolic", St.IconType.SYMBOLIC);
+                }
+                item.connect('activate', () => {
+                    if (this.screenStatus == undefined || this.screenStatus == "on")
+                        this.screenOff(true);
                     else
                         this.screenOn();
                 });
@@ -625,7 +647,17 @@ class ExitApplet extends Applet.IconApplet {
             this.kbWakeUpMonitor,
             () => {
                 if (this.screenStatus == undefined || this.screenStatus == "on")
-                    this.screenOff();
+                    this.screenOff(this.locking);
+                else
+                    this.screenOn();
+            }
+        );
+        Main.keybindingManager.addHotKey(
+            "wakeupmonitorwithlock-exit-" + this.instanceId,
+            this.kbWakeUpMonitorWithLock,
+            () => {
+                if (this.screenStatus == undefined || this.screenStatus == "on")
+                    this.screenOff(true);
                 else
                     this.screenOn();
             }
@@ -647,6 +679,7 @@ class ExitApplet extends Applet.IconApplet {
         source_remove(this.loop);
         Main.keybindingManager.removeHotKey("toggle-exit-menu-" + this.instanceId);
         Main.keybindingManager.removeHotKey("wakeupmonitor-exit-" + this.instanceId);
+        Main.keybindingManager.removeHotKey("wakeupmonitorwithlock-exit-" + this.instanceId);
         remove_all_sources();
     }
 
