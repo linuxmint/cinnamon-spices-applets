@@ -1,3 +1,6 @@
+### v2.3.0~20250926
+* The changes can now be applied smoothly.
+
 ### v2.2.0~20250902
 * Presets are now accessible via the menu.
 
