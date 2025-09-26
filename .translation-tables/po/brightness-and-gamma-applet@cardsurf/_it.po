@@ -1,0 +1,33 @@
+# BRIGHTNESS AND GAMMA APPLET
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# cardsurf, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-26 20:09+0200\n"
+"PO-Revision-Date: 2025-08-27 18:19+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.4->settings-schema.json->smooth_duration-label->description
+msgid ""
+"The changes are made step by step.\n"
+"Here you define the duration (in milliseconds) of each step in which the "
+"values are changed by one unit, if necessary.\n"
+"0 means instantaneous changes.\n"
+"Recommended value: between 200 and 300."
+msgstr ""
+
+#. 6.4->settings-schema.json->smooth_duration->description
+msgid "Step duration (ms)"
+msgstr ""

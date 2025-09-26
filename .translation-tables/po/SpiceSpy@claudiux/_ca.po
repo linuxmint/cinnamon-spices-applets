@@ -1,0 +1,54 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. applet.js:312
+msgid "Reload icons"
+msgstr ""
+
+#. applet.js:318
+msgid "Visit website"
+msgstr ""
+
+#. applet.js:938
+msgid "Refreshing in progress"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "16"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "22"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "24"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "32"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "48"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "64"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "96"
+msgstr ""
+
+#. settings-schema.json->icon-size->options
+msgid "128"
+msgstr ""
+
+#. settings-schema.json->show-commits->description
+msgid "Show available updates in the menu"
+msgstr ""

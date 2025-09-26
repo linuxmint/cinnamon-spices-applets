@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gpumonitor@axel358 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-12 06:37-0400\n"
+"PO-Revision-Date: 2025-05-20 22:36+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:62
+msgid "Launch Radeontop"
+msgstr "啟動 Radeontop"
+
+#. metadata.json->name
+msgid "AMD GPU Monitor"
+msgstr "AMD GPU Monitor"
+
+#. metadata.json->description
+msgid "Monitor AMD GPU statistics, requires radeontop"
+msgstr "監控 AMD GPU 統計資訊，需要安裝 radeontop"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "設定"
+
+#. settings-schema.json->display-style->description
+msgid "Display style"
+msgstr "顯示方式"
+
+#. settings-schema.json->display-style->options
+msgid "Column"
+msgstr "垂直排列"
+
+#. settings-schema.json->display-style->options
+msgid "Side by side"
+msgstr "水平排列"
+
+#. settings-schema.json->display-style->options
+msgid "GPU only"
+msgstr "僅顯示 GPU"
+
+#. settings-schema.json->display-style->options
+msgid "VRAM only"
+msgstr "僅顯示 VRAM"
+
+#. settings-schema.json->use-compact-label->description
+msgid "Use compact label style"
+msgstr "使用簡潔標籤樣式"
+
+#. settings-schema.json->use-compact-label->tooltip
+msgid "Show only the first character of each label. Example: G for GPU"
+msgstr "只顯示每個標籤的第一個英文字母，例如：G 代表 GPU"
+
+#. settings-schema.json->refresh-interval->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Refresh interval"
+msgstr "更新間隔"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid "Time between data refeshes"
+msgstr "資料更新的時間間隔"
+
+#. settings-schema.json->decimal-places->description
+msgid "Decimal places"
+msgstr "小數點位數"
+
+#. settings-schema.json->decimal-places->tooltip
+msgid "Number of decimal places to show"
+msgstr "要顯示的小數位數"
+
+#. settings-schema.json->select-gpu->description
+msgid "Select GPU (bus no.)"
+msgstr "選擇 GPU（匯流排編號）"
+
+#. settings-schema.json->select-gpu->options
+msgid "Loading..."
+msgstr "載入中..."
+
+#. settings-schema.json->select-gpu->tooltip
+msgid "Use 'lshw -C display' for more info"
+msgstr "請執行 'lshw -C display' 命令以取得更多資訊"
+
+#. settings-schema.json->font-size->description
+msgid "Font size"
+msgstr "字型大小"
+
+#. settings-schema.json->font-size->tooltip
+msgid "Label font size"
+msgstr "標籤文字大小"
