@@ -1,3 +1,7 @@
+### v1.8.3~20250926
+* Adds the option "Screen On/Off with Lock feature" to the menu and its shortcut to the settings.
+* Fixes [#7816](https://github.com/linuxmint/cinnamon-spices-applets/issues/7816)
+
 ### v1.8.2~20250920
 * Screen On/Off even with multiple monitors.
 * Make the display of shortcuts in the menu optional.
