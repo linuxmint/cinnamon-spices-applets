@@ -1,0 +1,6 @@
+{
+  "uuid": "amdgpu-status@andakawa",
+  "name": "AMD GPU Status",
+  "description": "Monitor AMD GPU usage, VRAM, and temperature\nusing amdgpu_top by Umio-Yasuno",
+  "author": "andakawa"
+}
