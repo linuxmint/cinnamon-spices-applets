@@ -115,7 +115,7 @@ msgstr "Minutos de espera antes de actualizar"
 
 #. settings-schema.json->show-firmware->description
 msgid "Show firmware updates"
-msgstr ""
+msgstr "Mostrar actualizaciones de firmware"
 
 #. settings-schema.json->hide-applet->description
 msgid "Hide applet if there are no updates"
