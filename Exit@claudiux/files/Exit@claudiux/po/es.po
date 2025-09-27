@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-09-26 17:16+0200\n"
-"PO-Revision-Date: 2025-09-21 18:04-0300\n"
+"PO-Revision-Date: 2025-09-27 20:05-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -77,7 +77,7 @@ msgstr "Pantalla encendida/apagada"
 
 #. 6.4/applet.js:371 6.4/applet.js:373
 msgid "Screen On/Off with Lock feature"
-msgstr ""
+msgstr "Pantalla encendida/apagada con función de bloqueo"
 
 #. metadata.json->description
 msgid ""
@@ -287,9 +287,8 @@ msgid "Turn screen On/Off"
 msgstr "Encender/apagar la pantalla"
 
 #. 6.4->settings-schema.json->kbWakeUpMonitorWithLock->description
-#, fuzzy
 msgid "Turn screen On/Off with Lock feature"
-msgstr "Encender/apagar la pantalla"
+msgstr "Encender/apagar la pantalla con función de bloqueo"
 
 #. 6.4->settings-schema.json->mkShutdown->description
 msgid "Key to select Power Off"
