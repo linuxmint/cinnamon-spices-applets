@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: sessionManager@scollins 1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"POT-Creation-Date: 2025-09-27 10:12+0200\n"
 "PO-Revision-Date: 2025-09-23 01:42+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -20,39 +20,39 @@ msgstr ""
 msgid "Session"
 msgstr "工作階段"
 
-#. applet.js:228
+#. applet.js:240
 msgid "Lock Screen"
 msgstr "鎖定螢幕"
 
-#. applet.js:232
+#. applet.js:246
 msgid "Switch User"
 msgstr "切換使用者"
 
-#. applet.js:237
+#. applet.js:252
 msgid "Guest Session"
 msgstr "訪客工作階段"
 
-#. applet.js:242
+#. applet.js:258
 msgid "Log Off"
 msgstr "登出"
 
-#. applet.js:248
+#. applet.js:269
 msgid "Suspend"
 msgstr "暫停"
 
-#. applet.js:253
+#. applet.js:275
 msgid "Sleep"
 msgstr "睡眠"
 
-#. applet.js:258
+#. applet.js:281
 msgid "Hibernate"
 msgstr "休眠"
 
-#. applet.js:264
+#. applet.js:292
 msgid "Restart"
 msgstr "重新啟動"
 
-#. applet.js:268
+#. applet.js:298
 msgid "Shut Down"
 msgstr "關機"
 
@@ -105,3 +105,48 @@ msgstr "圖示大小"
 #. settings-schema.json->symbolicMenuIcons->description
 msgid "Symbolic icons in menu"
 msgstr "選單中使用符號圖示"
+
+#. settings-schema.json->menuOptions->description
+msgid "Menu Options"
+msgstr ""
+
+#. settings-schema.json->showLockScreen->description
+#, fuzzy
+msgid "Show Lock Screen option"
+msgstr "鎖定螢幕"
+
+#. settings-schema.json->showSwitchUser->description
+#, fuzzy
+msgid "Show Switch User option"
+msgstr "切換使用者"
+
+#. settings-schema.json->showGuestSession->description
+#, fuzzy
+msgid "Show Guest Session option"
+msgstr "訪客工作階段"
+
+#. settings-schema.json->showLogOff->description
+msgid "Show Log Off option"
+msgstr ""
+
+#. settings-schema.json->showSuspend->description
+msgid "Show Suspend option"
+msgstr ""
+
+#. settings-schema.json->showSleep->description
+msgid "Show Sleep option"
+msgstr ""
+
+#. settings-schema.json->showHibernate->description
+#, fuzzy
+msgid "Show Hibernate option"
+msgstr "休眠"
+
+#. settings-schema.json->showRestart->description
+msgid "Show Restart option"
+msgstr ""
+
+#. settings-schema.json->showShutDown->description
+#, fuzzy
+msgid "Show Shut Down option"
+msgstr "關機"
